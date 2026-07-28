@@ -4,6 +4,25 @@
 
 高中物理公开课课件，课题《电容器的电容》（人教版必修三 第十章第4节），面向大教室（50+人），基于 Slidev + Vue 构建。
 
+> **Monorepo 结构**：课件位于 `courses/capacitor/`。后续新课在 `courses/` 下新建文件夹。根目录 `pnpm dev` 启动电容课件。
+
+## 项目结构
+
+```
+courses/capacitor/       ← 电容器课件
+  slides.md              ← 主课件
+  global-top.vue         ← 全局顶栏
+  global-bottom.vue      ← 全局底栏（装饰线）
+  style.css              ← 设计系统 + SVG保护
+  components/            ← 交互式 Vue 组件（自动注册）
+  images/                ← 实物照片素材
+  content/
+    思路.md              ← 课程设计思路
+    教案.md              ← 公开课教案
+    逐字稿.md            ← 逐句台词
+init-slidev-courseware/  ← 课件初始化工具（guide.md + skill.md）
+```
+
 ## 核心原则：必须令人惊艳
 
 **每一页都应该是设计作品。** 这是用 Slidev 而非 PowerPoint 的关键原因——领导和学生看到后应该觉得"哇塞"。
@@ -84,22 +103,6 @@ svg [font-size] {
 ### 6. 课件结构：先问后答
 
 每页幻灯片应该**先抛问题，再给答案**，而不是一开始就把结论亮出来。这是授课视角，不是知识罗列。
-
-## 项目结构
-
-```
-slides.md              ─ 主课件
-global-top.vue         ─ 全局顶栏
-global-bottom.vue      ─ 全局底栏（装饰线）
-style.css              ─ 设计系统 + SVG保护
-components/            ─ 交互式 Vue 组件（自动注册）
-images/                ─ 实物照片素材
-content/
-  思路.md              ─ 课程设计思路
-  教案.md              ─ 公开课教案（Markdown 源文件）
-  电容器的电容-公开课教案.docx  ─ 公开课教案（Word 文件，供打印）
-  逐字稿.md            ─ 逐句台词（24 页完整版）
-```
 
 ## 当前进度
 

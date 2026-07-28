@@ -291,6 +291,24 @@ settings:
 importers:
 
   .:
+    devDependencies:
+      '@mr-hope/tsconfig':
+        specifier: 0.0.4
+        version: 0.0.4(typescript@6.0.3)
+      oxc-config-hope:
+        specifier: 0.3.12
+        version: 0.3.12(oxfmt@0.61.0)(oxlint-tsgolint@7.0.2001)(oxlint@1.76.0(oxlint-tsgolint@7.0.2001))
+      oxfmt:
+        specifier: 0.61.0
+        version: 0.61.0
+      oxlint:
+        specifier: 1.76.0
+        version: 1.76.0(oxlint-tsgolint@7.0.2001)
+      oxlint-tsgolint:
+        specifier: 7.0.2001
+        version: 7.0.2001
+
+  courses/capacitor:
     dependencies:
       '@iconify-json/mdi':
         specifier: ^1.2.3
@@ -310,22 +328,6 @@ importers:
       vue:
         specifier: ^3.5.40
         version: 3.5.40(typescript@6.0.3)
-    devDependencies:
-      '@mr-hope/tsconfig':
-        specifier: 0.0.4
-        version: 0.0.4(typescript@6.0.3)
-      oxc-config-hope:
-        specifier: 0.3.12
-        version: 0.3.12(oxfmt@0.61.0)(oxlint-tsgolint@7.0.2001)(oxlint@1.76.0(oxlint-tsgolint@7.0.2001))
-      oxfmt:
-        specifier: 0.61.0
-        version: 0.61.0
-      oxlint:
-        specifier: 1.76.0
-        version: 1.76.0(oxlint-tsgolint@7.0.2001)
-      oxlint-tsgolint:
-        specifier: 7.0.2001
-        version: 7.0.2001
 
 packages:
 
