@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onUnmounted } from "vue";
+import type { ComputedRef } from "vue";
 
 // State definition
+// eslint-disable-next-line id-length
 const qA = ref<number>(0); // Charge on Cap 1 (voltage range 0 to 8 V)
+// eslint-disable-next-line id-length
 const qB = ref<number>(0); // Charge on Cap 2
 const s1Pos = ref<"open" | "1" | "2">("open"); // Switch 1 position
 const s2Closed = ref<boolean>(false); // Switch 2 closed/open status
@@ -12,44 +15,44 @@ const simState = ref<"idle" | "charging_A" | "sharing" | "discharging_B" | "disc
 );
 const electronOffset = ref<number>(0);
 
-let timerId: any = null;
+let timerId: ReturnType<typeof setInterval> | null = null;
 
-// Color helper function
-function interpolateColor(color1: string, color2: string, factor: number) {
-  const parseHex = (hex: string) => {
-    const match = hex.replace("#", "");
-    const r = parseInt(match.substring(0, 2), 16);
-    const g = parseInt(match.substring(2, 4), 16);
-    const b = parseInt(match.substring(4, 6), 16);
-    return { r, g, b };
-  };
-  const c1 = parseHex(color1);
-  const c2 = parseHex(color2);
-  const r = Math.round(c1.r + factor * (c2.r - c1.r));
-  const g = Math.round(c1.g + factor * (c2.g - c1.g));
-  const b = Math.round(c1.b + factor * (c2.b - c1.b));
+const parseHex = (hex: string): { r: number; g: number; b: number } => {
+  const match = hex.replace("#", "");
+  const r = Number.parseInt(match.slice(0, 2), 16);
+  const g = Number.parseInt(match.slice(2, 4), 16);
+  const b = Number.parseInt(match.slice(4, 6), 16);
+  return { r, g, b };
+};
+
+const interpolateColor = (color1: string, color2: string, factor: number): string => {
+  const src = parseHex(color1);
+  const dst = parseHex(color2);
+  const r = Math.round(src.r + factor * (dst.r - src.r));
+  const g = Math.round(src.g + factor * (dst.g - src.g));
+  const b = Math.round(src.b + factor * (dst.b - src.b));
   return `rgb(${r}, ${g}, ${b})`;
-}
+};
 
 // Compute colors based on voltages (charge size, where 8.0 is max)
 const aUpperColor = computed(() =>
-  interpolateColor("#475569", "#ef4444", Math.min(1, qA.value / 8.0)),
+  interpolateColor("#475569", "#ef4444", Math.min(1, qA.value / 8)),
 );
 const aLowerColor = computed(() =>
-  interpolateColor("#475569", "#3b82f6", Math.min(1, qA.value / 8.0)),
+  interpolateColor("#475569", "#3b82f6", Math.min(1, qA.value / 8)),
 );
 const bUpperColor = computed(() =>
-  interpolateColor("#475569", "#ef4444", Math.min(1, qB.value / 8.0)),
+  interpolateColor("#475569", "#ef4444", Math.min(1, qB.value / 8)),
 );
 const bLowerColor = computed(() =>
-  interpolateColor("#475569", "#3b82f6", Math.min(1, qB.value / 8.0)),
+  interpolateColor("#475569", "#3b82f6", Math.min(1, qB.value / 8)),
 );
 
 // 电荷符号：随电压比例递增 1→5 个，始终居中
-function makeChargeXs(q: () => number, center: number) {
-  return computed(() => {
-    const t = Math.min(1, q() / 8.0);
-    const c = t <= 0.02 ? 0 : Math.min(5, Math.max(1, Math.ceil(t * 5)));
+const makeChargeXs = (chargeFn: () => number, center: number): ComputedRef<number[]> =>
+  computed(() => {
+    const ratio = Math.min(1, chargeFn() / 8);
+    const count = ratio <= 0.02 ? 0 : Math.min(5, Math.max(1, Math.ceil(ratio * 5)));
     const sets = [
       [center],
       [center - 8, center + 8],
@@ -57,9 +60,9 @@ function makeChargeXs(q: () => number, center: number) {
       [center - 20, center - 8, center + 8, center + 20],
       [center - 20, center - 10, center, center + 10, center + 20],
     ];
-    return c === 0 ? [] : sets[c - 1];
+    return count === 0 ? [] : sets[count - 1];
   });
-}
+
 const chargeXsC1 = makeChargeXs(() => qA.value, 420);
 const chargeXsC2 = makeChargeXs(() => qB.value, 150);
 
@@ -67,15 +70,16 @@ const chargeXsC2 = makeChargeXs(() => qB.value, 150);
 const s1Target = computed(() => {
   if (s1Pos.value === "1") return { x: 252.3, y: 45.5 }; // Length = 72 at 160.1 degrees
   if (s1Pos.value === "2") return { x: 252.3, y: 94.5 }; // Length = 72 at 199.9 degrees
-  return { x: 248.0, y: 70.0 }; // Length = 72 at 180 degrees
+  return { x: 248, y: 70 }; // Length = 72 at 180 degrees
 });
 
 // S₂ 枢轴在 (205,99)，稍左于S₁触点2；向右下~28°摆到接线柱3（断开），正下摆到接线柱4（接地）
-const s2Target = computed(() => {
-  return s2Closed.value
-    ? { x: 205, y: 178 } // Closed: 正下连接接线柱4（接地，竖直）
-    : { x: 242, y: 169 }; // Open: 右下~28°连接接线柱3（断开）
-});
+const s2Target = computed(
+  () =>
+    s2Closed.value
+      ? { x: 205, y: 178 } // Closed: 正下连接接线柱4（接地，竖直）
+      : { x: 242, y: 169 }, // Open: 右下~28°连接接线柱3（断开）
+);
 
 // Simple and literal status texts requested by user
 const s1StatusText = computed(() => {
@@ -84,30 +88,10 @@ const s1StatusText = computed(() => {
   return "断开";
 });
 
-const s2StatusText = computed(() => {
-  return s2Closed.value ? "接通" : "断开";
-});
+const s2StatusText = computed(() => (s2Closed.value ? "接通" : "断开"));
 
 // Trigger simulation logic when switches are operated
-function toggleS1(pos: "open" | "1" | "2") {
-  if (timerId) {
-    clearInterval(timerId);
-    timerId = null;
-  }
-  s1Pos.value = pos;
-  runPhysicsStep();
-}
-
-function toggleS2(closed: boolean) {
-  if (timerId) {
-    clearInterval(timerId);
-    timerId = null;
-  }
-  s2Closed.value = closed;
-  runPhysicsStep();
-}
-
-function runPhysicsStep() {
+const runPhysicsStep = (): void => {
   // Case 1: S1 to 1 (Charge A up to battery 8.0 V)
   if (s1Pos.value === "1") {
     simState.value = "charging_A";
@@ -116,14 +100,14 @@ function runPhysicsStep() {
     let step = 0;
 
     timerId = setInterval(() => {
-      step++;
+      step += 1;
       electronOffset.value += 5;
-      qA.value = startA + (8.0 - startA) * (step / steps);
+      qA.value = startA + (8 - startA) * (step / steps);
 
       if (step >= steps) {
-        clearInterval(timerId);
+        if (timerId) clearInterval(timerId);
         timerId = null;
-        qA.value = 8.0;
+        qA.value = 8;
         simState.value = "idle";
       }
     }, 25);
@@ -140,13 +124,13 @@ function runPhysicsStep() {
       let step = 0;
 
       timerId = setInterval(() => {
-        step++;
+        step += 1;
         electronOffset.value += 6;
         qA.value = startA * (1 - step / steps);
         qB.value = startB * (1 - step / steps);
 
         if (step >= steps) {
-          clearInterval(timerId);
+          if (timerId) clearInterval(timerId);
           timerId = null;
           qA.value = 0;
           qB.value = 0;
@@ -170,13 +154,13 @@ function runPhysicsStep() {
       let step = 0;
 
       timerId = setInterval(() => {
-        step++;
+        step += 1;
         electronOffset.value += 5;
         qA.value = startA + (avgExchange - startA) * (step / steps);
         qB.value = startB + (avgExchange - startB) * (step / steps);
 
         if (step >= steps) {
-          clearInterval(timerId);
+          if (timerId) clearInterval(timerId);
           timerId = null;
           qA.value = avgExchange;
           qB.value = avgExchange;
@@ -196,12 +180,12 @@ function runPhysicsStep() {
       let step = 0;
 
       timerId = setInterval(() => {
-        step++;
+        step += 1;
         electronOffset.value += 8;
         qB.value = startB * (1 - step / steps);
 
         if (step >= steps) {
-          clearInterval(timerId);
+          if (timerId) clearInterval(timerId);
           timerId = null;
           qB.value = 0;
           simState.value = "idle";
@@ -211,9 +195,27 @@ function runPhysicsStep() {
       simState.value = "idle";
     }
   }
-}
+};
 
-function performReset() {
+const toggleS1 = (pos: "open" | "1" | "2"): void => {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+  s1Pos.value = pos;
+  runPhysicsStep();
+};
+
+const toggleS2 = (closed: boolean): void => {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+  s2Closed.value = closed;
+  runPhysicsStep();
+};
+
+const performReset = (): void => {
   if (timerId) {
     clearInterval(timerId);
     timerId = null;
@@ -223,7 +225,7 @@ function performReset() {
   s1Pos.value = "open";
   s2Closed.value = false;
   simState.value = "idle";
-}
+};
 
 onUnmounted(() => {
   if (timerId) clearInterval(timerId);

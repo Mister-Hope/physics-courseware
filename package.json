@@ -3,25 +3,32 @@
   "version": "1.0.0",
   "private": true,
   "description": "高中物理交互式课件",
+  "type": "module",
   "scripts": {
-    "dev": "slidev",
     "build": "slidev build",
-    "lint": "oxfmt",
-    "export": "slidev export"
+    "dev": "slidev",
+    "export": "slidev export",
+    "lint": "oxlint --fix && oxfmt"
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/vue": "^5.0.1",
-    "@slidev/cli": "^52.16.0",
-    "@slidev/theme-default": "^0.25.0"
+    "@slidev/cli": "^52.18.0",
+    "@slidev/client": "^52.18.0",
+    "@slidev/theme-default": "^0.25.0",
+    "vue": "^3.5.40"
   },
   "devDependencies": {
-    "oxfmt": "^0.56.0"
+    "@mr-hope/tsconfig": "0.0.4",
+    "oxc-config-hope": "0.3.12",
+    "oxfmt": "0.61.0",
+    "oxlint": "1.76.0",
+    "oxlint-tsgolint": "7.0.2001"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.15.1",
+      "version": "11.17.0",
       "onFail": "download"
     }
   }

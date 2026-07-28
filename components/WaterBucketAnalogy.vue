@@ -5,20 +5,22 @@ const level = ref(0);
 const animating = ref(false);
 const dragging = ref(false);
 
+const parseHexPair = (hex: string): { r: number; g: number; b: number } => ({
+  r: Number.parseInt(hex.slice(0, 2), 16),
+  g: Number.parseInt(hex.slice(2, 4), 16),
+  b: Number.parseInt(hex.slice(4, 6), 16),
+});
+
+const interpolateColor = (color1: string, color2: string, factor: number): string => {
+  const a = parseHexPair(color1);
+  const b = parseHexPair(color2);
+  const r = Math.round(a.r + factor * (b.r - a.r));
+  const g = Math.round(a.g + factor * (b.g - a.g));
+  const blueVal = Math.round(a.b + factor * (b.b - a.b));
+  return `rgb(${r},${g},${blueVal})`;
+};
+
 // 极板颜色：灰→红/蓝 渐变（与其他组件一致）
-function interpolateColor(c1: string, c2: string, t: number) {
-  const p = (h: string) => ({
-    r: parseInt(h.slice(0, 2), 16),
-    g: parseInt(h.slice(2, 4), 16),
-    b: parseInt(h.slice(4, 6), 16),
-  });
-  const a = p(c1),
-    b = p(c2);
-  const r = Math.round(a.r + t * (b.r - a.r));
-  const g = Math.round(a.g + t * (b.g - a.g));
-  const bl = Math.round(a.b + t * (b.b - a.b));
-  return `rgb(${r},${g},${bl})`;
-}
 const upperColor = computed(() => interpolateColor("475569", "ef4444", level.value));
 const lowerColor = computed(() => interpolateColor("475569", "3b82f6", level.value));
 
@@ -34,23 +36,21 @@ const chargeXs = computed(() => {
   ];
   return count === 0 ? [] : sets[count - 1];
 });
-let timer: any = null;
+let timer: ReturnType<typeof setInterval> | null = null;
 let dragStartY = 0;
 let dragStartLevel = 0;
 const svgRef = ref<SVGElement | null>(null);
 
-function svgY(clientY: number): number {
+const svgY = (clientY: number): number => {
   if (!svgRef.value) return 223;
   const rect = svgRef.value.getBoundingClientRect();
   const scale = 230 / rect.height;
   return (clientY - rect.top) * scale;
-}
+};
 
-function yToLevel(y: number): number {
-  return Math.max(0, Math.min(1, (223 - y) / 131));
-}
+const yToLevel = (y: number): number => Math.max(0, Math.min(1, (223 - y) / 131));
 
-function toggle() {
+const toggle = (): void => {
   if (animating.value) return;
   if (level.value > 0.9) {
     level.value = 0;
@@ -61,43 +61,43 @@ function toggle() {
   const steps = 60;
   let step = 0;
   timer = setInterval(() => {
-    step++;
-    const t = step / steps;
-    level.value = Math.min(1, 1 - Math.exp(-5 * t));
+    step += 1;
+    const ratio = step / steps;
+    level.value = Math.min(1, 1 - Math.exp(-5 * ratio));
     if (step >= steps) {
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
       timer = null;
       level.value = 1;
       animating.value = false;
     }
   }, 30);
-}
+};
 
-function onPointerDown(e: PointerEvent) {
+const onPointerDown = ({ clientY, pointerId }: PointerEvent): void => {
   if (animating.value) {
-    clearInterval(timer);
+    if (timer) clearInterval(timer);
     timer = null;
     animating.value = false;
   }
   dragging.value = true;
-  dragStartY = e.clientY;
+  dragStartY = clientY;
   dragStartLevel = level.value;
-  level.value = yToLevel(svgY(e.clientY));
-  if (svgRef.value) svgRef.value.setPointerCapture(e.pointerId);
-}
+  level.value = yToLevel(svgY(clientY));
+  if (svgRef.value) svgRef.value.setPointerCapture(pointerId);
+};
 
-function onPointerMove(e: PointerEvent) {
+const onPointerMove = ({ clientY }: PointerEvent): void => {
   if (!dragging.value) return;
-  level.value = yToLevel(svgY(e.clientY));
-}
+  level.value = yToLevel(svgY(clientY));
+};
 
-function onPointerUp(e: PointerEvent) {
+const onPointerUp = ({ clientY }: PointerEvent): void => {
   dragging.value = false;
-  if (Math.abs(e.clientY - dragStartY) < 4) {
+  if (Math.abs(clientY - dragStartY) < 4) {
     level.value = dragStartLevel;
     toggle();
   }
-}
+};
 
 onUnmounted(() => {
   if (timer) clearInterval(timer);

@@ -3,8 +3,9 @@ import { ref, computed } from "vue";
 
 // State definitions with realistic physical units
 const S = ref<number>(300); // Overlapping Area S in cm²: [100, 500], step 50
-const d = ref<number>(5.0); // Plate Separation d in mm: [3.0, 8.0], step 0.5
-const U = ref<number>(30.0); // Voltage U in V: [10.0, 50.0], step 5
+const d = ref<number>(5); // Plate Separation d in mm: [3.0, 8.0], step 0.5
+// eslint-disable-next-line id-length
+const U = ref<number>(30); // Voltage U in V: [10.0, 50.0], step 5
 const epsilonR = ref<number>(1); // Relative permittivity: 1 (no dielectric), 3 (glass), 6 (ceramic)
 
 // Physical constant: Permittivity of free space epsilon_0 = 8.854 pF/m = 8.854 * 10^-12 F/m
@@ -19,9 +20,7 @@ const C = computed(() => {
 });
 
 // Q = C * U  (result in pC)
-const Q = computed(() => {
-  return C.value * U.value;
-});
+const Q = computed(() => C.value * U.value);
 
 // Grid lines generator helper for premium feel
 const verticalGrid = Array.from({ length: 15 }, (_, i) => (i + 1) * 40);
@@ -34,15 +33,14 @@ const midY = 150; // Adjusted vertical center for pristine spacing
 const physicalPlateWidth = 280;
 
 // Shift and overlapping boundaries
-const overlapWidth = computed(() => {
-  // S is in [200, 400] cm²
-  return physicalPlateWidth * (S.value / 500);
-});
+const overlapWidth = computed(
+  () =>
+    // S is in [200, 400] cm²
+    physicalPlateWidth * (S.value / 500),
+);
 
 // Stagger shift distance
-const shift = computed(() => {
-  return physicalPlateWidth - overlapWidth.value;
-});
+const shift = computed(() => physicalPlateWidth - overlapWidth.value);
 
 // Upper plate shifts left, lower plate shifts right
 const upperPlateCenterX = computed(() => 300 - shift.value / 2);
@@ -63,7 +61,7 @@ const lowerWireX = computed(() => lowerPlateCenterX.value);
 
 // Plate Gap: Maps d from [2.0, 8.0] mm to [45, 115] px
 const plateGap = computed(() => {
-  const normD = (d.value - 2.0) / 6.0; // [0, 1]
+  const normD = (d.value - 2) / 6; // [0, 1]
   return 45 + normD * 70;
 });
 
@@ -93,26 +91,27 @@ const dielectricStyle = computed(() => {
 });
 
 // ── 极板颜色：灰→红/蓝渐变 ──
-function interpolateColor(c1: string, c2: string, t: number) {
-  const p = (h: string) => ({
-    r: parseInt(h.slice(0, 2), 16),
-    g: parseInt(h.slice(2, 4), 16),
-    b: parseInt(h.slice(4, 6), 16),
-  });
-  const a = p(c1),
-    b = p(c2);
-  return `rgb(${Math.round(a.r + t * (b.r - a.r))},${Math.round(a.g + t * (b.g - a.g))},${Math.round(a.b + t * (b.b - a.b))})`;
-}
+const parseHexPair = (hexStr: string): { r: number; g: number; b: number } => ({
+  r: Number.parseInt(hexStr.slice(0, 2), 16),
+  g: Number.parseInt(hexStr.slice(2, 4), 16),
+  b: Number.parseInt(hexStr.slice(4, 6), 16),
+});
+
+const interpolateColor = (color1: string, color2: string, factor: number): string => {
+  const a = parseHexPair(color1);
+  const b = parseHexPair(color2);
+  return `rgb(${Math.round(a.r + factor * (b.r - a.r))},${Math.round(a.g + factor * (b.g - a.g))},${Math.round(a.b + factor * (b.b - a.b))})`;
+};
 const plateT = computed(() => Math.max(0, Math.min(1, (U.value - 10) / 40)));
 const upperColor = computed(() => interpolateColor("475569", "ef4444", plateT.value));
 const lowerColor = computed(() => interpolateColor("475569", "3b82f6", plateT.value));
 
 // 电荷符号：随电压递增 1→10 个，直接计算始终居中的位置
 const chargeCount = computed(() => {
-  const t = plateT.value;
-  return t <= 0.02 ? 0 : Math.min(10, Math.max(1, Math.ceil(t * 10)));
+  const ratio = plateT.value;
+  return ratio <= 0.02 ? 0 : Math.min(10, Math.max(1, Math.ceil(ratio * 10)));
 });
-function centeredPositions(centerX: number, count: number): number[] {
+const centeredPositions = (centerX: number, count: number): number[] => {
   if (count === 0) return [];
   if (count === 1) return [centerX];
   const margin = physicalPlateWidth * 0.06;
@@ -120,21 +119,13 @@ function centeredPositions(centerX: number, count: number): number[] {
   const step = span / count;
   const start = centerX - span / 2 + step / 2;
   return Array.from({ length: count }, (_, i) => start + i * step);
-}
+};
 const visibleUpperCharges = computed(() =>
   centeredPositions(upperPlateCenterX.value, chargeCount.value),
 );
 const visibleLowerCharges = computed(() =>
   centeredPositions(lowerPlateCenterX.value, chargeCount.value),
 );
-
-// Reset simulation parameters
-function resetParams() {
-  S.value = 300;
-  d.value = 5.0;
-  U.value = 30.0;
-  epsilonR.value = 1;
-}
 </script>
 
 <template>

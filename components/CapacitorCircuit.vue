@@ -12,28 +12,28 @@ const electronOffset = ref<number>(0);
 // We keep a history of points for the real-time I-t graph
 const currentPoints = ref<{ x: number; y: number }[]>([]);
 
-let intervalId: any = null;
+let intervalId: ReturnType<typeof setInterval> | null = null;
 let stepCounter = 0;
 
-// Color interpolation function
-function interpolateColor(color1: string, color2: string, factor: number) {
-  const parseHex = (hex: string) => {
-    const match = hex.replace("#", "");
-    const r = parseInt(match.substring(0, 2), 16);
-    const g = parseInt(match.substring(2, 4), 16);
-    const b = parseInt(match.substring(4, 6), 16);
-    return { r, g, b };
-  };
-  const c1 = parseHex(color1);
-  const c2 = parseHex(color2);
-  const r = Math.round(c1.r + factor * (c2.r - c1.r));
-  const g = Math.round(c1.g + factor * (c2.g - c1.g));
-  const b = Math.round(c1.b + factor * (c2.b - c1.b));
+const parseHex = (hex: string): { r: number; g: number; b: number } => {
+  const match = hex.replace("#", "");
+  const r = Number.parseInt(match.slice(0, 2), 16);
+  const g = Number.parseInt(match.slice(2, 4), 16);
+  const b = Number.parseInt(match.slice(4, 6), 16);
+  return { r, g, b };
+};
+
+const interpolateColor = (color1: string, color2: string, factor: number): string => {
+  const hex1 = parseHex(color1);
+  const hex2 = parseHex(color2);
+  const r = Math.round(hex1.r + factor * (hex2.r - hex1.r));
+  const g = Math.round(hex1.g + factor * (hex2.g - hex1.g));
+  const b = Math.round(hex1.b + factor * (hex2.b - hex1.b));
   return `rgb(${r}, ${g}, ${b})`;
-}
+};
 
 // ── Electron animation shared constants ──
-const E = {
+const ELECTRON_STYLE = {
   circleR: 2.5,
   circleFill: "#3b82f6",
   font: "Georgia, 'Times New Roman', serif",
@@ -45,7 +45,7 @@ const E = {
   textBelow: 13, // text offset below wire
   textBeside: 3, // text vertical align beside wire (vertical segments)
 };
-const EL = {
+const WIRE_LAYOUT = {
   upperH: 168, // upper horizontal wire length (battery↔switch)
   upperCap: 100, // capacitor upper wire length
   lowerH: 234, // lower horizontal wire length (battery↔ammeter)
@@ -54,14 +54,14 @@ const EL = {
   vert: 66, // vertical wire segments length
   shunt: 70, // shunt vertical wire length
   // electron spacing — 统一密度 ~33px/e⁻（与电容器侧一致）
-  S: 34, // 通用间距
+  spacing: 34, // 通用间距
   S_capUpper: 35, // 电容器上导线间距 (3 e⁻ / 100px)
   S_capLower: 30, // 电容器下导线间距 (2 e⁻ / 66px)
 };
 
 // 电荷符号：随电压递增 1→5 个，始终居中（极板宽 80px，中点 380）
 const chargeXs = computed(() => {
-  const c =
+  const amount =
     plateCharge.value <= 0.02 ? 0 : Math.min(5, Math.max(1, Math.ceil(plateCharge.value * 5)));
   const sets = [
     [380],
@@ -70,17 +70,17 @@ const chargeXs = computed(() => {
     [350, 370, 390, 410],
     [348, 364, 380, 396, 412],
   ];
-  return c === 0 ? [] : sets[c - 1];
+  return amount === 0 ? [] : sets[amount - 1];
 });
 
 // Compute Horizontal Plate Colors
-const upperPlateColor = computed(() => {
-  return interpolateColor("#475569", "#ef4444", plateCharge.value); // Positive (Red)
-});
+const upperPlateColor = computed(
+  () => interpolateColor("#475569", "#ef4444", plateCharge.value), // Positive (Red)
+);
 
-const lowerPlateColor = computed(() => {
-  return interpolateColor("#475569", "#3b82f6", plateCharge.value); // Negative (Blue)
-});
+const lowerPlateColor = computed(
+  () => interpolateColor("#475569", "#3b82f6", plateCharge.value), // Negative (Blue)
+);
 
 // Switch handle target coordinate (using constant length radius ~70px to prevent stretching)
 const switchTarget = computed(() => {
@@ -91,17 +91,16 @@ const switchTarget = computed(() => {
 
 // Computed SVG path for the live I-t graph
 const graphPath = computed(() => {
-  if (currentPoints.value.length === 0) {
-    // Return empty or zero line
-    return "M 440 105 L 700 105";
-  }
+  // Return empty or zero line
+  if (currentPoints.value.length === 0) return "M 440 105 L 700 105";
+
   return currentPoints.value
-    .map((p, idx) => `${idx === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+    .map(({ x, y }, i) => `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`)
     .join(" ");
 });
 
 // Select terminal action
-function handleSelectTerminal(pos: "charge" | "discharge" | "open") {
+const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
   if (switchPos.value === pos) return; // Already in this position
 
   switchPos.value = pos;
@@ -133,7 +132,7 @@ function handleSelectTerminal(pos: "charge" | "discharge" | "open") {
 
     intervalId = setInterval(() => {
       electronOffset.value += 4;
-      stepCounter++;
+      stepCounter += 1;
 
       // Physically increment charge up to 1
       plateCharge.value = Math.min(1, chargeStart + (stepCounter / 40) * (1 - chargeStart));
@@ -148,7 +147,7 @@ function handleSelectTerminal(pos: "charge" | "discharge" | "open") {
       currentPoints.value.push({ x, y });
 
       if (stepCounter >= 40) {
-        clearInterval(intervalId);
+        if (intervalId) clearInterval(intervalId);
         intervalId = null;
         current.value = 0;
         state.value = "idle";
@@ -176,7 +175,7 @@ function handleSelectTerminal(pos: "charge" | "discharge" | "open") {
 
     intervalId = setInterval(() => {
       electronOffset.value += 4;
-      stepCounter++;
+      stepCounter += 1;
 
       // Physically decay capacitor charge down to 0
       plateCharge.value = Math.max(0, dischargeStart - (stepCounter / 40) * dischargeStart);
@@ -191,7 +190,7 @@ function handleSelectTerminal(pos: "charge" | "discharge" | "open") {
       currentPoints.value.push({ x, y });
 
       if (stepCounter >= 40) {
-        clearInterval(intervalId);
+        if (intervalId) clearInterval(intervalId);
         intervalId = null;
         current.value = 0;
         state.value = "idle";
@@ -209,7 +208,7 @@ function handleSelectTerminal(pos: "charge" | "discharge" | "open") {
       });
     }
   }
-}
+};
 
 onMounted(() => {
   // Initialize grid line on mount
@@ -484,20 +483,20 @@ onUnmounted(() => {
             <g
               v-for="i in 2"
               :key="'lu-c-' + i"
-              :transform="`translate(45, ${20 + ((electronOffset + i * EL.S) % EL.vert)})`"
+              :transform="`translate(45, ${20 + ((electronOffset + i * WIRE_LAYOUT.spacing) % WIRE_LAYOUT.vert)})`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="11"
-                :y="E.textBeside"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textBeside"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="start"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -507,20 +506,20 @@ onUnmounted(() => {
             <g
               v-for="i in 5"
               :key="'uh-c-' + i"
-              :transform="`translate(${218 - ((electronOffset + i * EL.S) % EL.upperH)}, 20)`"
+              :transform="`translate(${218 - ((electronOffset + i * WIRE_LAYOUT.spacing) % WIRE_LAYOUT.upperH)}, 20)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -530,20 +529,20 @@ onUnmounted(() => {
             <g
               v-for="i in 2"
               :key="'ll-c-' + i"
-              :transform="`translate(45, ${94 + ((electronOffset + i * EL.S) % EL.vert)})`"
+              :transform="`translate(45, ${94 + ((electronOffset + i * WIRE_LAYOUT.spacing) % WIRE_LAYOUT.vert)})`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="11"
-                :y="E.textBeside"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textBeside"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="start"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -553,20 +552,20 @@ onUnmounted(() => {
             <g
               v-for="i in 7"
               :key="'lh-c-' + i"
-              :transform="`translate(${50 + ((electronOffset + i * EL.S) % EL.lowerH)}, 160)`"
+              :transform="`translate(${50 + ((electronOffset + i * WIRE_LAYOUT.spacing) % WIRE_LAYOUT.lowerH)}, 160)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -576,20 +575,20 @@ onUnmounted(() => {
             <g
               v-for="i in 2"
               :key="'le-c-' + i"
-              :transform="`translate(${314 + ((electronOffset + i * EL.S_capLower) % EL.lowerCap)}, 160)`"
+              :transform="`translate(${314 + ((electronOffset + i * WIRE_LAYOUT.S_capLower) % WIRE_LAYOUT.lowerCap)}, 160)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -599,20 +598,20 @@ onUnmounted(() => {
             <g
               v-for="i in 3"
               :key="'ue-c-' + i"
-              :transform="`translate(${380 - ((electronOffset + i * EL.S_capUpper) % EL.upperCap)}, 55)`"
+              :transform="`translate(${380 - ((electronOffset + i * WIRE_LAYOUT.S_capUpper) % WIRE_LAYOUT.upperCap)}, 55)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -624,20 +623,20 @@ onUnmounted(() => {
             <g
               v-for="i in 2"
               :key="'le-d-' + i"
-              :transform="`translate(${380 - ((electronOffset + i * EL.S_capLower) % EL.lowerCap)}, 160)`"
+              :transform="`translate(${380 - ((electronOffset + i * WIRE_LAYOUT.S_capLower) % WIRE_LAYOUT.lowerCap)}, 160)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -647,20 +646,20 @@ onUnmounted(() => {
             <g
               v-for="i in 2"
               :key="'ls-d-' + i"
-              :transform="`translate(${286 - ((electronOffset + i * EL.S) % EL.lowerShunt)}, 160)`"
+              :transform="`translate(${286 - ((electronOffset + i * WIRE_LAYOUT.spacing) % WIRE_LAYOUT.lowerShunt)}, 160)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -670,20 +669,20 @@ onUnmounted(() => {
             <g
               v-for="i in 2"
               :key="'sh-d-' + i"
-              :transform="`translate(220, ${160 - ((electronOffset + i * EL.S) % EL.shunt)})`"
+              :transform="`translate(220, ${160 - ((electronOffset + i * WIRE_LAYOUT.spacing) % WIRE_LAYOUT.shunt)})`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="-9"
-                :y="E.textBeside"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textBeside"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="end"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>
@@ -693,20 +692,20 @@ onUnmounted(() => {
             <g
               v-for="i in 3"
               :key="'ue-d-' + i"
-              :transform="`translate(${280 + ((electronOffset + i * EL.S_capUpper) % EL.upperCap)}, 55)`"
+              :transform="`translate(${280 + ((electronOffset + i * WIRE_LAYOUT.S_capUpper) % WIRE_LAYOUT.upperCap)}, 55)`"
             >
-              <circle cx="0" cy="0" :r="E.circleR" :fill="E.circleFill" />
+              <circle cx="0" cy="0" :r="ELECTRON_STYLE.circleR" :fill="ELECTRON_STYLE.circleFill" />
               <text
                 x="0"
-                :y="E.textAbove"
-                :font-size="E.fontSize"
-                :font-family="E.font"
-                :font-style="E.fontStyle"
-                :fill="E.textFill"
+                :y="ELECTRON_STYLE.textAbove"
+                :font-size="ELECTRON_STYLE.fontSize"
+                :font-family="ELECTRON_STYLE.font"
+                :font-style="ELECTRON_STYLE.fontStyle"
+                :fill="ELECTRON_STYLE.textFill"
                 text-anchor="middle"
               >
                 e
-                <tspan baseline-shift="super" :font-size="E.superSize">−</tspan>
+                <tspan baseline-shift="super" :font-size="ELECTRON_STYLE.superSize">−</tspan>
               </text>
             </g>
           </g>

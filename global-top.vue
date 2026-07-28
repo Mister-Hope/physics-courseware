@@ -10,10 +10,11 @@
 </template>
 
 <script setup lang="ts">
+import { useNav } from "@slidev/client";
 import { computed } from "vue";
 
-const nav = ($slidev as any).nav;
-const isCover = computed(() => nav.currentPage === 1);
+const nav = useNav();
+const isCover = computed(() => nav.currentPage.value === 1);
 </script>
 
 <style scoped>
