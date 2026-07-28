@@ -4,7 +4,6 @@ import { ref, computed } from "vue";
 // State definitions with realistic physical units
 const S = ref<number>(300); // Overlapping Area S in cm²: [100, 500], step 50
 const d = ref<number>(5); // Plate Separation d in mm: [3.0, 8.0], step 0.5
-// eslint-disable-next-line id-length
 const U = ref<number>(30); // Voltage U in V: [10.0, 50.0], step 5
 const epsilonR = ref<number>(1); // Relative permittivity: 1 (no dielectric), 3 (glass), 6 (ceramic)
 

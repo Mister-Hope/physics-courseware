@@ -38,7 +38,12 @@ export default defineHopeConfig({
           "b", // 蓝色 blue
 
           // 物理量
+          "S", // 面积
+          "U", // 电压 voltage
+          "d", // 距离 distance
           "r", // 半径 radius
+          "C", // 电容 capacity
+          "Q", // 电量
           "v", // 速度 velocity
           "vx", // x 方向速度 velocity x
           "vy", // y 方向速度 velocity y

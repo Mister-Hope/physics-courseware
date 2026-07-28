@@ -100,8 +100,13 @@ const graphPath = computed(() => {
 });
 
 // Select terminal action
+const resetGraphToFlat = (): void => {
+  currentPoints.value = [];
+  for (let i = 0; i <= 40; i++) currentPoints.value.push({ x: 440 + (i / 40) * 260, y: 105 });
+};
+
 const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
-  if (switchPos.value === pos) return; // Already in this position
+  if (switchPos.value === pos) return;
 
   switchPos.value = pos;
 
@@ -111,17 +116,10 @@ const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
   }
 
   if (pos === "charge") {
-    // Start charging transient
     if (plateCharge.value >= 0.99) {
       state.value = "idle";
       current.value = 0;
-      currentPoints.value = [];
-      for (let i = 0; i <= 40; i++) {
-        currentPoints.value.push({
-          x: 440 + (i / 40) * 260,
-          y: 105,
-        });
-      }
+      resetGraphToFlat();
       return;
     }
 
@@ -133,15 +131,9 @@ const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
     intervalId = setInterval(() => {
       electronOffset.value += 4;
       stepCounter += 1;
-
-      // Physically increment charge up to 1
       plateCharge.value = Math.min(1, chargeStart + (stepCounter / 40) * (1 - chargeStart));
-
-      // Physically computed transient current decaying to 0
       const progress = stepCounter / 40;
       current.value = 0.5 * (1 - chargeStart) * Math.exp(-4 * progress);
-
-      // Record graph point
       const x = 440 + progress * 260;
       const y = 105 - (current.value / 0.5) * 70;
       currentPoints.value.push({ x, y });
@@ -154,17 +146,10 @@ const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
       }
     }, 40);
   } else if (pos === "discharge") {
-    // Start discharging transient
     if (plateCharge.value <= 0.01) {
       state.value = "idle";
       current.value = 0;
-      currentPoints.value = [];
-      for (let i = 0; i <= 40; i++) {
-        currentPoints.value.push({
-          x: 440 + (i / 40) * 260,
-          y: 105,
-        });
-      }
+      resetGraphToFlat();
       return;
     }
 
@@ -176,15 +161,9 @@ const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
     intervalId = setInterval(() => {
       electronOffset.value += 4;
       stepCounter += 1;
-
-      // Physically decay capacitor charge down to 0
       plateCharge.value = Math.max(0, dischargeStart - (stepCounter / 40) * dischargeStart);
-
-      // Negatively decaying current (opposite direction)
       const progress = stepCounter / 40;
       current.value = -0.5 * dischargeStart * Math.exp(-4 * progress);
-
-      // Record graph point
       const x = 440 + progress * 260;
       const y = 105 - (current.value / 0.5) * 70;
       currentPoints.value.push({ x, y });
@@ -197,16 +176,9 @@ const handleSelectTerminal = (pos: "charge" | "discharge" | "open"): void => {
       }
     }, 40);
   } else {
-    // Open (disconnected) - preserves plateCharge!
     state.value = "idle";
     current.value = 0;
-    currentPoints.value = [];
-    for (let i = 0; i <= 40; i++) {
-      currentPoints.value.push({
-        x: 440 + (i / 40) * 260,
-        y: 105,
-      });
-    }
+    resetGraphToFlat();
   }
 };
 

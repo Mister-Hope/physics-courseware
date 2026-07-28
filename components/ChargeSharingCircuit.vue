@@ -91,110 +91,105 @@ const s1StatusText = computed(() => {
 const s2StatusText = computed(() => (s2Closed.value ? "接通" : "断开"));
 
 // Trigger simulation logic when switches are operated
-const runPhysicsStep = (): void => {
-  // Case 1: S1 to 1 (Charge A up to battery 8.0 V)
-  if (s1Pos.value === "1") {
-    simState.value = "charging_A";
+const chargeCapA = (): void => {
+  simState.value = "charging_A";
+  const startA = qA.value;
+  const steps = 15;
+  let step = 0;
+
+  timerId = setInterval(() => {
+    step += 1;
+    electronOffset.value += 5;
+    qA.value = startA + (8 - startA) * (step / steps);
+
+    if (step >= steps) {
+      if (timerId) clearInterval(timerId);
+      timerId = null;
+      qA.value = 8;
+      simState.value = "idle";
+    }
+  }, 25);
+};
+
+const shareOrDischargeCaps = (): void => {
+  if (s2Closed.value) {
+    simState.value = qA.value > 0 || qB.value > 0 ? "discharging_A_and_B" : "idle";
     const startA = qA.value;
+    const startB = qB.value;
     const steps = 15;
     let step = 0;
 
     timerId = setInterval(() => {
       step += 1;
-      electronOffset.value += 5;
-      qA.value = startA + (8 - startA) * (step / steps);
+      electronOffset.value += 6;
+      qA.value = startA * (1 - step / steps);
+      qB.value = startB * (1 - step / steps);
 
       if (step >= steps) {
         if (timerId) clearInterval(timerId);
         timerId = null;
-        qA.value = 8;
+        qA.value = 0;
+        qB.value = 0;
         simState.value = "idle";
       }
     }, 25);
+    return;
   }
 
-  // Case 2: S1 to 2 (Parallel / Sharing)
-  else if (s1Pos.value === "2") {
-    // Subcase 2a: S2 is closed -> any connected charge immediately shorts to ground!
-    if (s2Closed.value) {
-      simState.value = qA.value > 0 || qB.value > 0 ? "discharging_A_and_B" : "idle";
-      const startA = qA.value;
-      const startB = qB.value;
-      const steps = 15;
-      let step = 0;
-
-      timerId = setInterval(() => {
-        step += 1;
-        electronOffset.value += 6;
-        qA.value = startA * (1 - step / steps);
-        qB.value = startB * (1 - step / steps);
-
-        if (step >= steps) {
-          if (timerId) clearInterval(timerId);
-          timerId = null;
-          qA.value = 0;
-          qB.value = 0;
-          simState.value = "idle";
-        }
-      }, 25);
-    }
-    // Subcase 2b: S2 is open -> dynamic charge sharing between A and B!
-    else {
-      const avgExchange = (qA.value + qB.value) / 2;
-      const diff = Math.abs(qA.value - qB.value);
-      if (diff < 0.02) {
-        simState.value = "idle";
-        return;
-      }
-
-      simState.value = "sharing";
-      const startA = qA.value;
-      const startB = qB.value;
-      const steps = 15;
-      let step = 0;
-
-      timerId = setInterval(() => {
-        step += 1;
-        electronOffset.value += 5;
-        qA.value = startA + (avgExchange - startA) * (step / steps);
-        qB.value = startB + (avgExchange - startB) * (step / steps);
-
-        if (step >= steps) {
-          if (timerId) clearInterval(timerId);
-          timerId = null;
-          qA.value = avgExchange;
-          qB.value = avgExchange;
-          simState.value = "idle";
-        }
-      }, 25);
-    }
+  const avgExchange = (qA.value + qB.value) / 2;
+  const diff = Math.abs(qA.value - qB.value);
+  if (diff < 0.02) {
+    simState.value = "idle";
+    return;
   }
 
-  // Case 3: S1 is open (separated)
-  else if (s1Pos.value === "open") {
-    // If S2 is closed, B discharges immediately
-    if (s2Closed.value && qB.value > 0) {
-      simState.value = "discharging_B";
-      const startB = qB.value;
-      const steps = 10;
-      let step = 0;
+  simState.value = "sharing";
+  const startA = qA.value;
+  const startB = qB.value;
+  const steps = 15;
+  let step = 0;
 
-      timerId = setInterval(() => {
-        step += 1;
-        electronOffset.value += 8;
-        qB.value = startB * (1 - step / steps);
+  timerId = setInterval(() => {
+    step += 1;
+    electronOffset.value += 5;
+    qA.value = startA + (avgExchange - startA) * (step / steps);
+    qB.value = startB + (avgExchange - startB) * (step / steps);
 
-        if (step >= steps) {
-          if (timerId) clearInterval(timerId);
-          timerId = null;
-          qB.value = 0;
-          simState.value = "idle";
-        }
-      }, 25);
-    } else {
+    if (step >= steps) {
+      if (timerId) clearInterval(timerId);
+      timerId = null;
+      qA.value = avgExchange;
+      qB.value = avgExchange;
       simState.value = "idle";
     }
-  }
+  }, 25);
+};
+
+const dischargeCapB = (): void => {
+  simState.value = "discharging_B";
+  const startB = qB.value;
+  const steps = 10;
+  let step = 0;
+
+  timerId = setInterval(() => {
+    step += 1;
+    electronOffset.value += 8;
+    qB.value = startB * (1 - step / steps);
+
+    if (step >= steps) {
+      if (timerId) clearInterval(timerId);
+      timerId = null;
+      qB.value = 0;
+      simState.value = "idle";
+    }
+  }, 25);
+};
+
+const runPhysicsStep = (): void => {
+  if (s1Pos.value === "1") chargeCapA();
+  else if (s1Pos.value === "2") shareOrDischargeCaps();
+  else if (s1Pos.value === "open" && s2Closed.value && qB.value > 0) dischargeCapB();
+  else simState.value = "idle";
 };
 
 const toggleS1 = (pos: "open" | "1" | "2"): void => {
