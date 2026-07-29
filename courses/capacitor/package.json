@@ -3,16 +3,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "slidev build",
-    "dev": "slidev",
+    "build": "slidev build --base /capacitor/",
+    "dev": "slidev --base /capacitor/",
     "export": "slidev export"
   },
   "dependencies": {
-    "@iconify-json/mdi": "^1.2.3",
-    "@iconify/vue": "^5.0.1",
-    "@slidev/cli": "^52.18.0",
-    "@slidev/client": "^52.18.0",
-    "@slidev/theme-default": "^0.25.0",
-    "vue": "^3.5.40"
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
   }
 }
