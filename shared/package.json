@@ -1,0 +1,14 @@
+{
+  "name": "slidev-addon-courseware",
+  "private": true,
+  "keywords": [
+    "courseware",
+    "slidev",
+    "slidev-addon"
+  ],
+  "type": "module",
+  "dependencies": {
+    "@slidev/client": "catalog:",
+    "vue": "catalog:"
+  }
+}

@@ -80,16 +80,18 @@ pnpm dev
 
 ```
 slides.md              — 主课件（24 页 Markdown + HTML）
-style.css              — 全局设计系统 + SVG 保护
-global-top.vue         — 顶栏（章节↔课题切换 + Transition 动画）
-global-bottom.vue      — 底栏（装饰线，无页码）
+style.css              — 本课特有样式（通用设计系统见 shared/）
+global-top.vue         — 顶栏薄壳：<CourseTopBar chapter="…" section="…" />
+global-bottom.vue      — 底栏薄壳：<CourseBottomBar />
 components/            — 4 个交互式 Vue 组件（自动注册）
-images/                — 学校 logo、电容器实物照片
+images/                — 电容器实物照片
 content/
   思路.md              — 课程设计思路
   教案.md              — 公开课教案
   逐字稿.md            — 24 页完整逐句台词
 ```
+
+> 顶栏、底栏、通用设计系统和学校 logo 均来自项目根的共享 addon（`shared/`），通过 `slides.md` headmatter 中的 `addons: [../shared]` 自动加载，详见 [shared/README.md](../../shared/README.md)。
 
 ## 许可
 

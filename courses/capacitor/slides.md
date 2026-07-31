@@ -8,6 +8,8 @@ mdc: true
 layout: cover
 colorSchema: dark
 clickAnimation: card
+addons:
+  - ../shared
 fonts:
   sans: Nunito Sans
   mono: Fira Code

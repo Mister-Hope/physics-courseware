@@ -1,0 +1,2 @@
+/* 共享 addon 样式入口 — Slidev 自动注入到所有引用该 addon 的课件 */
+@import "./common.css";

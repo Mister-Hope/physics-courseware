@@ -9,11 +9,22 @@
 ## 项目结构
 
 ```
+shared/                ← 共享 addon（跨课件复用）
+  package.json              ← slidev-addon-courseware
+  components/
+    CourseTopBar.vue        ← 顶栏组件（chapter / section props）
+    CourseBottomBar.vue     ← 底栏组件（纯装饰线）
+  styles/
+    index.css               ← addon 样式入口（自动注入）
+    common.css              ← 通用设计系统
+  assets/logo.png           ← 学校 logo
+  README.md
+
 courses/*/       ← 课件
-  slides.md              ← 主课件
-  global-top.vue         ← 全局顶栏
-  global-bottom.vue      ← 全局底栏（装饰线）
-  style.css              ← 设计系统 + SVG保护
+  slides.md              ← 主课件（headmatter 声明 addons: [../shared]）
+  global-top.vue         ← 顶栏薄壳：<CourseTopBar chapter="…" section="…" />
+  global-bottom.vue      ← 底栏薄壳：<CourseBottomBar />
+  style.css              ← 仅本课特有样式（通用样式由 shared addon 提供）
   components/            ← 交互式 Vue 组件（自动注册）
   images/                ← 实物照片素材
   content/      ← 课程相关内容
@@ -22,6 +33,31 @@ courses/*/       ← 课件
     逐字稿.md            ← 逐句台词（自动生成）
 init-slidev-courseware/  ← 写给不懂代码的教师的课件初始化工具
 ```
+
+### 跨课件复用（重点）
+
+顶栏、底栏、通用设计系统和 logo 已提取为**共享 addon**（`shared/`），新课无需复制。
+
+**新课件接入只需两步：**
+
+1. `slides.md` headmatter 添加：
+   ```yaml
+   addons:
+     - ../shared
+   ```
+2. `global-top.vue` 传参：
+   ```vue
+   <template>
+     <CourseTopBar chapter="第十章 静电场" section="电容器的电容" />
+   </template>
+   ```
+   `global-bottom.vue` 同理用 `<CourseBottomBar />`。
+
+> 注意：addon 相对路径从 `courses/` 上级解析，课件目录 `courses/capacitor/` 指向项目根 `shared/` 用 `../shared`（Slidev 会对课件根再取一次 dirname）。
+>
+> ⚠️ 共享组件命名用 `CourseTopBar` / `CourseBottomBar`，**不要**用 `GlobalTop` / `GlobalBottom`——后者是 Slidev 保留的全局层组件名，重名会导致循环引用栈溢出。
+
+通用样式（玻璃态卡片、聊天气泡、动效、封面样式等）由 addon 自动注入，课件自己的 `style.css` 只需放本课特有样式，且会在 addon 样式之后加载（可覆盖）。
 
 ## 核心原则：必须令人惊艳
 

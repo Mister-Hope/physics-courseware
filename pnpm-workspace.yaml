@@ -1,5 +1,6 @@
 packages:
   - courses/*
+  - shared
 
 allowBuilds:
   esbuild: true
