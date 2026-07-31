@@ -24,7 +24,9 @@ pnpm dev:capacitor
 
 ## 项目结构
 
-```
+```text
+├── shared/                 # 共享 addon（顶栏/底栏/设计系统/logo，跨课件复用）
+├── textbooks/              # 📚 教材库（人教版 Markdown 版，生成课件前必读）
 ├── src/                    # 入口网站
 │   ├── index.html
 │   ├── main.ts             # 课程卡片渲染 + tab 切换
@@ -37,21 +39,17 @@ pnpm dev:capacitor
 │       └── content/        # 教案 / 思路 / 逐字稿
 ├── scripts/
 │   └── build-all.ts        # 统一构建脚本
-├── init-slidev-courseware/ # 课件创建工具
+├── init-slidev-courseware/ # 给零代码教师的初始化工具（环境配置 + 全流程指引）
 └── .github/workflows/      # CI（lint + build）
 ```
 
 ## 课件列表
 
+> 📋 **全部课件清单以本表为准。** 每课详细内容（页目/交互组件/特殊环节）见对应 `courses/<slug>/README.md`。
+
 | 分册   | 课件                                       |
 | ------ | ------------------------------------------ |
 | 必修三 | [§10.4 电容器的电容](./courses/capacitor/) |
-
-## 添加新课
-
-1. 在 `courses/` 下创建新目录
-2. 在 `src/courses.config.ts` 对应分册的 `courses` 数组中添加一项
-3. 入口网站自动展示
 
 ## 构建
 
