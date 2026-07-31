@@ -9,18 +9,18 @@
 ## 项目结构
 
 ```
-courses/capacitor/       ← 电容器课件
+courses/*/       ← 课件
   slides.md              ← 主课件
   global-top.vue         ← 全局顶栏
   global-bottom.vue      ← 全局底栏（装饰线）
   style.css              ← 设计系统 + SVG保护
   components/            ← 交互式 Vue 组件（自动注册）
   images/                ← 实物照片素材
-  content/
-    思路.md              ← 课程设计思路
-    教案.md              ← 公开课教案
-    逐字稿.md            ← 逐句台词
-init-slidev-courseware/  ← 课件初始化工具（guide.md + skill.md）
+  content/      ← 课程相关内容
+    思路.md              ← 课程设计思路（用户需要提供的）
+    教案.md              ← 公开课教案（自动生成）
+    逐字稿.md            ← 逐句台词（自动生成）
+init-slidev-courseware/  ← 写给不懂代码的教师的课件初始化工具
 ```
 
 ## 核心原则：必须令人惊艳
