@@ -33,8 +33,12 @@ pnpm dev:capacitor
 │   ├── style.css           # 设计系统
 │   └── courses.config.ts   # 课件配置（按分册组织）
 ├── courses/                # 课件目录
-│   └── capacitor/          # §10.4 电容器的电容
-│       ├── slides.md       # 主课件（24 页）
+│   ├── capacitor/          # §10.4 电容器的电容
+│   │   ├── slides.md       # 主课件（24 页）
+│   │   ├── components/     # 4 个交互式 Vue 组件
+│   │   └── content/        # 教案 / 思路 / 逐字稿
+│   └── motion-description/ # §1.1–1.2 质点与参考系·时间与位移
+│       ├── slides.md       # 主课件（25 页）
 │       ├── components/     # 4 个交互式 Vue 组件
 │       └── content/        # 教案 / 思路 / 逐字稿
 ├── scripts/
@@ -47,9 +51,10 @@ pnpm dev:capacitor
 
 > 📋 **全部课件清单以本表为准。** 每课详细内容（页目/交互组件/特殊环节）见对应 `courses/<slug>/README.md`。
 
-| 分册   | 课件                                       |
-| ------ | ------------------------------------------ |
-| 必修三 | [§10.4 电容器的电容](./courses/capacitor/) |
+| 分册   | 课件                                                              |
+| ------ | ----------------------------------------------------------------- |
+| 必修一 | [§1.1–1.2 质点与参考系·时间与位移](./courses/motion-description/) |
+| 必修三 | [§10.4 电容器的电容](./courses/capacitor/)                        |
 
 ## 构建
 

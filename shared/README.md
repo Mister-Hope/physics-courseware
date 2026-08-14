@@ -4,6 +4,7 @@
 
 - `CourseTopBar` 组件 — 顶栏（封面章节名 ↔ 内页课题名切换动画 + 学校 logo）
 - `CourseBottomBar` 组件 — 底栏装饰线（无页码）
+- `Latex` 组件 — 在 Vue 组件内渲染 KaTeX 公式（`<Latex tex="x_1" />`，`display` prop 切块级）
 - 通用设计系统 `common.css` — 玻璃态卡片、聊天气泡、动效、封面样式等
 - `logo.png` — 学校 logo（组件内自动引入）
 
@@ -53,6 +54,7 @@ shared/
   components/
     CourseTopBar.vue     # 顶栏组件
     CourseBottomBar.vue  # 底栏组件
+    Latex.vue            # 组件内 KaTeX 公式渲染（依赖 katex，已在 addon 声明）
   styles/
     index.css            # addon 样式入口（自动注入）
     common.css           # 通用设计系统

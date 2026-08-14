@@ -9,6 +9,7 @@
     "build:all": "unrun scripts/build-all.ts",
     "dev": "vite",
     "dev:capacitor": "pnpm --filter capacitor-courseware dev",
+    "dev:motion-description": "pnpm --filter motion-description-courseware dev",
     "lint": "oxlint --fix && oxfmt"
   },
   "devDependencies": {

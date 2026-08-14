@@ -9,6 +9,7 @@
   "type": "module",
   "dependencies": {
     "@slidev/client": "catalog:",
+    "katex": "^0.18.1",
     "vue": "catalog:"
   }
 }

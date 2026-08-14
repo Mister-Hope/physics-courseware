@@ -33,7 +33,16 @@ export const textbooks: TextbookGroup[] = [
     name: "必修第一册",
     shortName: "必修1",
     slug: "bx1",
-    courses: [],
+    courses: [
+      {
+        slug: "motion-description",
+        title: "质点与参考系·时间与位移",
+        chapter: "§1.1–1.2",
+        description:
+          "质点与参考系、时间与位移——通过质点判断题、参考系切换、时间轴和一维位移计算器四个交互组件，建立描述运动的科学方法。",
+        tags: ["质点", "参考系", "位移"],
+      },
+    ],
   },
   {
     name: "必修第二册",
