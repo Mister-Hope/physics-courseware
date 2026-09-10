@@ -25,22 +25,24 @@ pnpm dev:capacitor
 ## 项目结构
 
 ```text
-├── shared/                 # 共享 addon（顶栏/底栏/设计系统/logo，跨课件复用）
-├── textbooks/              # 📚 教材库（人教版 Markdown 版，生成课件前必读）
-├── src/                    # 入口网站
-│   ├── index.html
-│   ├── main.ts             # 课程卡片渲染 + tab 切换
-│   ├── style.css           # 设计系统
-│   └── courses.config.ts   # 课件配置（按分册组织）
-├── courses/                # 课件目录
-│   └── capacitor/          # §10.4 电容器的电容
-│       ├── slides.md       # 主课件（24 页）
-│       ├── components/     # 4 个交互式 Vue 组件
-│       └── content/        # 教案 / 思路 / 逐字稿
+├── workspace/                  # 工程代码
+│   ├── homepage/               # 入口网站（课程卡片 + 分册 Tab）
+│   │   ├── index.html
+│   │   ├── main.ts             # 课程卡片渲染 + tab 切换
+│   │   ├── style.css           # 设计系统
+│   │   └── courses.config.ts   # 课件配置（按分册组织）
+│   └── shared/                 # 共享 addon（顶栏/底栏/设计系统/logo，跨课件复用）
+├── courses/                    # 课件目录
+│   └── capacitor/              # §10.4 电容器的电容
+│       ├── slides.md           # 主课件（24 页）
+│       ├── components/         # 4 个交互式 Vue 组件
+│       └── content/            # 教案 / 思路 / 逐字稿
+├── resources/                  # 教学资源
+│   ├── textbooks/              # 📚 教材库（人教版 Markdown 版，生成课件前必读）
+│   └── init-slidev-courseware/ # 给零代码教师的初始化工具（环境配置 + 全流程指引）
 ├── scripts/
-│   └── build-all.ts        # 统一构建脚本
-├── init-slidev-courseware/ # 给零代码教师的初始化工具（环境配置 + 全流程指引）
-└── .github/workflows/      # CI（lint + build）
+│   └── build-all.ts            # 统一构建脚本
+└── .github/workflows/          # CI（lint + build）
 ```
 
 ## 课件列表

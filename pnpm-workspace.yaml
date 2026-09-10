@@ -1,6 +1,6 @@
 packages:
   - courses/*
-  - shared
+  - workspace/shared
 
 allowBuilds:
   esbuild: true

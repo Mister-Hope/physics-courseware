@@ -9,7 +9,7 @@ layout: cover
 colorSchema: dark
 clickAnimation: card
 addons:
-  - ../shared
+  - ../workspace/shared
 fonts:
   sans: Nunito Sans
   mono: Fira Code

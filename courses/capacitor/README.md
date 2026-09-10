@@ -80,7 +80,7 @@ pnpm dev
 
 ```
 slides.md              — 主课件（24 页 Markdown + HTML）
-style.css              — 本课特有样式（通用设计系统见 shared/）
+style.css              — 本课特有样式（通用设计系统见 workspace/shared/）
 global-top.vue         — 顶栏薄壳：<CourseTopBar chapter="…" section="…" />
 global-bottom.vue      — 底栏薄壳：<CourseBottomBar />
 components/            — 4 个交互式 Vue 组件（自动注册）
@@ -91,7 +91,7 @@ content/
   逐字稿.md            — 24 页完整逐句台词
 ```
 
-> 顶栏、底栏、通用设计系统和学校 logo 均来自项目根的共享 addon（`shared/`），通过 `slides.md` headmatter 中的 `addons: [../shared]` 自动加载，详见 [shared/README.md](../../shared/README.md)。
+> 顶栏、底栏、通用设计系统和学校 logo 均来自共享 addon（`workspace/shared/`），通过 `slides.md` headmatter 中的 `addons: [../workspace/shared]` 自动加载（⚠️ 基准是 `courses/` 目录，不是课件目录），详见 [shared/README.md](../../workspace/shared/README.md)。
 
 ## 许可
 
