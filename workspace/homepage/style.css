@@ -1,0 +1,297 @@
+/* ═══════════════════════════════════════════════
+   课程入口网站 — 设计系统
+   玻璃态 · 深蓝背景 · 专业学术质感
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --c-bg: #090d1a;
+  --c-bg-soft: #0f1425;
+  --c-surface: rgb(30 41 59 / 65%);
+  --c-surface-hover: rgb(40 55 75 / 75%);
+  --c-border: rgb(148 163 184 / 10%);
+  --c-border-glow: rgb(226 168 70 / 20%);
+  --c-text: #f1f5f9;
+  --c-text-dim: #94a3b8;
+  --c-accent: #e2a846;
+  --c-accent-glow: #f59e0b;
+  --c-accent-2: #3b82f6;
+  --c-danger: #f87171;
+  --c-physics: #2dd4bf;
+  --radius-xl: 1.75rem;
+  --radius-lg: 1.25rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--c-bg);
+  color: var(--c-text);
+
+  font-size: 18px;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgb(59 130 246 / 8%) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgb(226 168 70 / 6%) 0%, transparent 50%),
+    linear-gradient(160deg, var(--c-bg) 0%, #0c1122 40%, var(--c-bg-soft) 100%);
+  background-attachment: fixed;
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Hiragino Sans GB",
+    "WenQuanYi Micro Hei",
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+}
+
+.hero-title {
+  background: linear-gradient(
+    135deg,
+    var(--c-text) 0%,
+    var(--c-accent) 50%,
+    var(--c-accent-2) 100%
+  );
+  background-clip: text;
+
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+
+  padding: 0 0 2rem;
+}
+
+.tab {
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-weight: 500;
+  font-size: 0.85rem;
+  font-family: inherit;
+
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.tab:hover {
+  border-color: rgb(148 163 184 / 25%);
+  color: var(--c-text);
+}
+
+.tab.active {
+  border-color: var(--c-border-glow);
+  background: rgb(226 168 70 / 12%);
+  color: var(--c-accent);
+}
+
+/* ── Course Grid ── */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+  padding: 1rem 0 3rem;
+}
+
+/* ── Course Card ── */
+.course-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  padding: 1.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-xl);
+
+  background: var(--c-surface);
+  color: inherit;
+
+  text-decoration: none;
+
+  backdrop-filter: blur(16px);
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.course-card:hover {
+  border-color: var(--c-border-glow);
+  background: var(--c-surface-hover);
+  box-shadow:
+    0 8px 32px rgb(0 0 0 / 30%),
+    0 0 0 1px rgb(226 168 70 / 10%);
+  transform: translateY(-4px);
+}
+
+.card-chapter {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.95rem;
+  font-family: Georgia, "Times New Roman", "Noto Serif SC", "Source Han Serif SC", SimSun, serif;
+  letter-spacing: 0.04em;
+}
+
+.card-title {
+  padding-right: 4rem;
+
+  color: var(--c-text);
+
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.card-desc {
+  flex: 1;
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.card-footer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--c-border);
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  display: inline-block;
+
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+
+  background: rgb(59 130 246 / 12%);
+  color: var(--c-accent-2);
+
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── Empty State ── */
+.group-empty {
+  grid-column: 1 / -1;
+
+  padding: 3rem 1rem;
+  border: 1px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-size: 0.9rem;
+  text-align: center;
+
+  opacity: 0.7;
+}
+
+/* ── Footer ── */
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: center;
+
+  padding: 2rem 0 1rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.footer-copy {
+  opacity: 0.6;
+}
+
+.footer-link {
+  display: inline-flex;
+  color: var(--c-text-dim);
+  opacity: 0.6;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--c-accent);
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* ── Responsive ── */
+@media (width <= 768px) {
+  #app {
+    padding: 2rem 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .group-courses {
+    grid-template-columns: 1fr;
+  }
+}

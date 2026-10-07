@@ -1,0 +1,26 @@
+node_modules/
+dist/
+*.local
+.DS_Store
+.slidev/
+
+# AI 技能：正本 .agents/skills/ 与 skills-lock.json **入库**（离线可用，
+# DSH 按「项目根 .agents/skills」扫描；见 AGENTS.md「维护约定」）。
+# 只忽略 CLI 给其它 agent 生成的副本。
+.continue/
+
+# 个人本地配置
+.claude/settings.local.json
+
+# 临时截图
+preview-*.png
+debug-*.png
+
+# E2E 产物（报告、截图、Playwright 中间产物）
+.e2e/
+e2e/reports/
+
+# 各课件自己的临时产物（`pnpm shots` 的截图、单课件版 e2e 报告）：
+# 放在课件目录下，多个 AI 进程同时开发不同课件时互不打架（规则见 e2e/artifacts.ts）
+courses/*/.temp/
+courses/*/test-results/

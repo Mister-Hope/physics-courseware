@@ -1,0 +1,227 @@
+/* ═══════════════════════════════════════════════
+   自由落体运动 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课页数最多、单元格最密：正文与栏内行间距比通用值更紧 */
+:root {
+  --page-gap: 0.7rem;
+  --stack-gap: 0.7rem;
+}
+
+/* 普通行：叙述、并列条目、推导步骤 */
+.line {
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+/* ── 单幅图页：左边一幅大图，右边提问 + 落点 ──
+   图的高度由 .graph-box 定死，SVG 用 height:100% 主导尺寸，
+   这样一页只放一幅图时图能占满，切页/点击也不会让版面跳动。 */
+.graph-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+
+  width: 100%;
+}
+
+.graph-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  height: 330px;
+}
+
+.graph-box > * {
+  min-width: 0;
+  height: 100%;
+}
+
+.graph-box svg {
+  width: auto !important;
+  max-width: 100%;
+  height: 100% !important;
+}
+
+/* 整页宽的交互图（上抛四图这类自带滑杆的组件）：图占满，提问与落点在上下 */
+.fig-full {
+  width: 100%;
+  min-width: 0;
+}
+
+/* ── 聊天气泡（引入页的师生对话） ── */
+.chat-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* ── 定义卡片里的一句话 ── */
+.define-line {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* ── 公式对比迁移：一般匀变速 → 自由落体（中间一个大箭头） ── */
+.map {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.map > * {
+  min-width: 0;
+}
+
+.map-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.map-head {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--c-border);
+
+  color: var(--c-text-dim);
+
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.map-item {
+  text-align: center;
+}
+
+/* 公式放大：教师明确要求"那几个公式有点小" */
+.map-item .katex-display {
+  margin: 0.12rem 0 !important;
+  font-size: 1.34rem !important;
+}
+
+.map-item-hot .katex {
+  color: var(--c-accent);
+}
+
+.map-arrow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.map-arrow svg {
+  display: block;
+  width: 4.6rem;
+  height: auto;
+}
+
+.map-sub {
+  color: var(--c-accent);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ── 数据表（重力加速度随地点变化 / 空中时间估算） ── */
+.gtab {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.gtab th,
+.gtab td {
+  padding: 0.2rem 0.45rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+}
+
+.gtab th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+/* 高亮行（放在 .gtab td:first-child 之前：specificity 必须升序，否则 stylelint 报 no-descending-specificity） */
+.gtab-hot td {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.gtab td:first-child {
+  text-align: left;
+}
+
+.problem-title {
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+}
+
+/* ── 例题页：左侧文字收窄、右侧挤出一栏画示意图（第 24、28 页） ── */
+.split-fig {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+
+  width: 100%;
+}
+
+.split-fig > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 示意图栏：定高，SVG 按 height:100% + width:auto 自适应 */
+.fig-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.fig-side > svg {
+  display: block;
+  max-width: 100%;
+  height: 330px;
+}
+
+/* ── 例题的"几问几答"：左列问题、右列计算与结果 ──
+   五个问题一次点出（v-click="1"），之后每点一次揭一条计算与结果。 */
+.qa-split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.45fr);
+  gap: 0.42rem 1.1rem;
+  align-items: baseline;
+}
+
+.qa-split > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.qa {
+  color: var(--c-text);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.qa-a {
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.qa .katex,
+.qa-a .katex {
+  font-size: 1em !important;
+}

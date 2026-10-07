@@ -1,0 +1,501 @@
+/* ═══════════════════════════════════════════════
+   东北育才 — 公开课通用设计系统（共享 addon）
+   玻璃态 · 微动效 · 专业学术质感
+   所有课件通过 addon 自动加载此设计系统
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* 配色系统 */
+  --c-bg: #090d1a;
+  --c-bg-soft: #0f1425;
+  --c-surface: rgb(30 41 59 / 65%);
+  --c-surface-solid: #1e293b;
+  --c-border: rgb(148 163 184 / 10%);
+  --c-border-glow: rgb(226 168 70 / 20%);
+  --c-text: #f1f5f9;
+  --c-text-dim: #94a3b8;
+  --c-accent: #e2a846;
+  --c-accent-glow: #f59e0b;
+  --c-accent-2: #3b82f6;
+  --c-accent-2-glow: #2563eb;
+  --c-physics: #2dd4bf;
+  --c-danger: #f87171;
+  --radius-xl: 1.75rem;
+  --radius-lg: 1.25rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+}
+
+/* ── 基础 ── */
+html {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-size: 22px;
+}
+
+/* ── SVG 一律按 16px 基准绘制 ──
+   html 基准字号为了后排可读被调大到 22px，但写 SVG 的人（尤其 AI）默认按 16px 思考，
+   所以 SVG 子树必须自成一个 16px 体系：根字号固定 16，font-size 属性值原样生效。
+   ⛔ 必须排除 KaTeX 内部的 svg：3 行以上的 \begin{cases} 靠内联 <svg> 画 ⎧⎨⎩ 之间的延长条，
+   延长条尺寸写的是 em（依赖 KaTeX 当前字号），被压成 16px 就会缩水、括号断成三截。 */
+svg:not(.katex svg) {
+  font-size: 16px;
+}
+
+/* 让 SVG 的 font-size="N" 属性按作者写的 N（viewBox 用户单位）生效。
+   必须显式盖回去：UnoCSS 的 attributify 会把 font-size="11" 误当成工具类，
+   生成 [font-size~="11"] { font-size: 3rem }（3rem × 22px = 66px）。
+   attr() 直接读回属性值，语义与原生 SVG 属性一致。 */
+@supports (font-size: attr(font-size px, 16px)) {
+  svg [font-size] {
+    /* stylelint-disable-next-line declaration-property-value-no-unknown -- 有意为之：attr() 类型化取值是这套 SVG 字号方案的关键，stylelint 尚不认识该写法 */
+    font-size: attr(font-size px, 16px) !important;
+  }
+}
+
+/* 旧浏览器（attr() 不支持带类型）兜底：退化成统一 16 用户单位，至少不会变成 3rem */
+@supports not (font-size: attr(font-size px, 16px)) {
+  svg [font-size] {
+    font-size: unset !important;
+  }
+}
+
+body {
+  background: linear-gradient(160deg, var(--c-bg) 0%, #0c1122 40%, var(--c-bg-soft) 100%);
+  font-family:
+    "PingFang SC",
+    "Microsoft YaHei",
+    "Hiragino Sans GB",
+    "WenQuanYi Micro Hei",
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.slidev-layout {
+  padding: 3rem 2.5rem 1.5rem !important;
+  background: transparent !important;
+}
+
+/* ── 标题层级 ── */
+h1 {
+  margin-bottom: 0.5rem;
+
+  color: var(--c-text);
+
+  font-weight: 700 !important;
+  font-size: 1.8rem !important;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin-bottom: 0.3rem;
+  color: var(--c-text);
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+}
+
+h3 {
+  color: var(--c-text-dim);
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+/* ── 正文 ── */
+p,
+li {
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════════════
+   卡片系统 — 玻璃态
+   ══════════════════════════════════════ */
+.card {
+  padding: 0.85rem 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+
+  backdrop-filter: blur(16px);
+
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgb(148 163 184 / 18%);
+  background: rgb(30 41 59 / 80%);
+  transform: translateY(-1px);
+}
+
+.card-highlight {
+  border-color: var(--c-border-glow);
+  box-shadow:
+    0 0 30px rgb(226 168 70 / 6%),
+    inset 0 1px 0 rgb(255 255 255 / 2%);
+}
+
+/* ── 圆角标签 ── */
+.tag {
+  display: inline-block;
+
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: 2rem;
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-size: 0.7rem;
+}
+
+/* ── LaTeX 公式 ──
+   公式一律跟随所在文字字号（1em）：正文里的公式不放大、标题里的公式跟着标题走。 */
+.katex {
+  font-size: 1em !important;
+}
+
+/* 独立成行的公式：比正文略大一点，上下留一点呼吸 */
+.katex-display {
+  margin: 0.5rem 0 !important;
+  font-size: 1.15rem !important;
+}
+
+/* ── 表格 ── */
+table {
+  overflow: hidden;
+
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: var(--radius-md);
+
+  font-size: 0.9rem;
+}
+
+th {
+  padding: 0.6rem 1.2rem;
+  border-bottom: 1px solid var(--c-border);
+
+  background: var(--c-surface-solid);
+
+  font-weight: 600;
+  text-align: left;
+}
+
+td {
+  padding: 0.5rem 1.2rem;
+  border-top: 1px solid var(--c-border);
+  background: rgb(15 20 37 / 40%);
+}
+
+/* ── 代码块 ── */
+pre,
+code {
+  border-radius: var(--radius-md);
+  font-size: 0.8rem !important;
+}
+
+/* ══════════════════════════════════════
+   封面页
+   ══════════════════════════════════════ */
+.cover-chapter {
+  margin-bottom: 0.3rem;
+
+  color: var(--c-text-dim);
+
+  font-weight: 600;
+  font-size: 1.2rem;
+  font-family:
+    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+.cover-section {
+  vertical-align: 0.05em;
+  margin-right: 0.1em;
+  font-size: 0.95em;
+}
+
+.cover-title {
+  margin-bottom: 0.8rem;
+
+  background: linear-gradient(
+    135deg,
+    #f59e0b 0%,
+    #e2a846 25%,
+    #fbbf24 50%,
+    #60a5fa 75%,
+    #3b82f6 100%
+  );
+  background-clip: text;
+
+  font-weight: 900 !important;
+  font-size: 3.5rem !important;
+  letter-spacing: 0.04em !important;
+
+  animation: title-shimmer 4s ease-in-out infinite alternate;
+
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes title-shimmer {
+  0% {
+    filter: brightness(1);
+  }
+
+  100% {
+    filter: brightness(1.15);
+  }
+}
+
+.cover-subtitle {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  font-size: 1.1rem;
+  font-family:
+    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+  letter-spacing: 0.04em;
+}
+
+.tag-icon {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+
+  padding: 0.45rem 1.2rem;
+  border: 1px solid rgb(59 130 246 / 20%);
+  border-radius: 2rem;
+
+  background: rgb(59 130 246 / 12%);
+  color: var(--c-accent-2);
+
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+
+  backdrop-filter: blur(8px);
+}
+
+.tag-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.cover-decoration {
+  color: var(--c-text-dim);
+  opacity: 0.55;
+  transition: opacity 0.6s ease;
+}
+
+.cover-decoration:hover {
+  opacity: 0.8;
+}
+
+.cover-decoration svg {
+  display: block;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgb(148 163 184 / 8%));
+  animation: cover-float 6s ease-in-out infinite alternate;
+}
+
+/* ── 占位图片 ── */
+.placeholder-img {
+  object-fit: cover;
+
+  width: 100%;
+  height: 160px;
+  border: 1px dashed rgb(148 163 184 / 15%);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface-solid);
+
+  transition: all 0.3s ease;
+}
+
+.placeholder-img:hover {
+  border-color: rgb(148 163 184 / 35%);
+}
+
+/* ══════════════════════════════════════
+   动效系统
+   ══════════════════════════════════════ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── v-click 增强动效 ── */
+.slidev-vclick-target {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* 预设：卡片入场 — 上浮 + 轻微缩放恢复 */
+.slidev-vclick-anim-card.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateY(28px) scale(0.95);
+}
+
+/* 预设：左侧滑入（聊天气泡-左） */
+.slidev-vclick-anim-left.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+/* 预设：右侧滑入（聊天气泡-右） */
+.slidev-vclick-anim-right.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+/* 预设：缩放弹入（居中大字） */
+.slidev-vclick-anim-pop.slidev-vclick-hidden {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+/* 页面过渡 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+}
+
+/* ── 封面 SVG 微动（规则本体在 .cover-decoration svg，这里只放关键帧）── */
+@keyframes cover-float {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ── 卡片 hover 增强 ── */
+.card.card-highlight:hover {
+  border-color: rgb(226 168 70 / 35%);
+  box-shadow:
+    0 0 40px rgb(226 168 70 / 10%),
+    0 0 80px rgb(226 168 70 / 4%),
+    inset 0 1px 0 rgb(255 255 255 / 3%);
+}
+
+/* ── 文字强调色 ── */
+.text-accent {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.text-accent-2 {
+  color: var(--c-accent-2);
+  font-weight: 600;
+}
+
+/* ── 缩放强调 ── */
+.text-lg {
+  font-size: 1.1rem !important;
+}
+
+.text-xl {
+  font-size: 1.25rem !important;
+}
+
+.text-2xl {
+  font-size: 1.4rem !important;
+}
+
+.text-3xl {
+  font-size: 1.7rem !important;
+}
+
+.text-4xl {
+  font-size: 2.1rem !important;
+}
+
+.text-5xl {
+  font-size: 2.6rem !important;
+}
+
+/* ══════════════════════════════════════
+   聊天气泡系统
+   ══════════════════════════════════════ */
+.chat-msg {
+  position: relative;
+
+  max-width: 75%;
+  padding: 0.65rem 1.1rem;
+
+  font-size: 1rem;
+  line-height: 1.55;
+
+  backdrop-filter: blur(12px);
+}
+
+/* 左侧气泡（教师/提问）— 蓝色调，尾巴在左 */
+.chat-left {
+  margin-right: auto;
+  border: 1px solid rgb(59 130 246 / 20%);
+  border-radius: 1.25rem 1.25rem 1.25rem 0.35rem;
+
+  background: rgb(59 130 246 / 10%);
+  color: #e2e8f0;
+}
+
+/* 右侧气泡（学生/回答）— 暖金色调 */
+.chat-right {
+  margin-left: auto;
+  border: 1px solid rgb(226 168 70 / 20%);
+  border-radius: 1.25rem 1.25rem 0.35rem;
+
+  background: rgb(226 168 70 / 10%);
+  color: #f1f5f9;
+}
+
+/* 气泡内强调文字 */
+.chat-left .chat-em {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+.chat-right .chat-em {
+  color: #f59e0b;
+  font-weight: 600;
+}

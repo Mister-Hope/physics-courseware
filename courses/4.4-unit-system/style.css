@@ -1,0 +1,170 @@
+/* ═══════════════════════════════════════════════
+   力学单位制 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 第 3 页：英制长度换算链 ── */
+.imperial-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.imp-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0.7rem 1.15rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.imp-node small {
+  margin-top: 0.15rem;
+  color: var(--c-text-dim);
+  font-weight: 400;
+  font-size: 0.72rem;
+}
+
+.imp-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.imp-link svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+/* ── 第 12 页：计算行多，收紧行距 ── */
+.calc-stack {
+  gap: 0.3rem;
+}
+
+/* ── 第 15 页：三列判定行对齐（某列公式折行也不歪）── */
+.judge-col > :last-child {
+  margin-top: auto;
+}
+
+/* ── 判断对错的着色：对＝绿，错＝红 ── */
+.text-correct {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.text-wrong {
+  color: var(--c-danger);
+  font-weight: 600;
+}
+
+/* ── 第 8、12 页：基本单位表 / 推导表（行多，需要压行高）── */
+.si-table,
+.derive-table {
+  font-size: 0.88rem;
+}
+
+.si-table th,
+.derive-table th {
+  padding: 0.4rem 1rem;
+}
+
+.si-table td,
+.derive-table td {
+  padding: 0.25rem 1rem;
+  line-height: 1.2;
+}
+
+/* ── 第 10、11 页：单位推导行（公式右对齐、紧贴箭头）── */
+.derive-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.derive-row > *:first-child {
+  flex: 0 0 6.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.derive-op {
+  color: var(--c-text-dim);
+}
+
+/* ── 第 7 页：基本单位 + 导出单位 = 单位制 ── */
+.unit-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  align-items: center;
+}
+
+.unit-flow-row {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.unit-chip {
+  padding: 0.6rem 1.3rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-weight: 600;
+  font-size: 1.08rem;
+}
+
+.unit-chip-blue {
+  border-color: rgb(59 130 246 / 30%);
+  color: var(--c-accent-2);
+}
+
+.unit-chip-accent {
+  border-color: var(--c-border-glow);
+  color: var(--c-accent);
+}
+
+.unit-op {
+  color: var(--c-text-dim);
+  font-size: 1.05rem;
+}
+
+/* ── 第 9 页：基本单位标准的演变 ── */
+.history-stage {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+
+  padding-left: 1rem;
+  border-left: 2px solid var(--c-border);
+}
+
+.history-stage-title {
+  flex: 0 0 auto;
+  min-width: 6.2rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.history-stage-body {
+  min-width: 0;
+  line-height: 1.6;
+}

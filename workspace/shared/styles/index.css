@@ -1,0 +1,8 @@
+/* 共享 addon 样式入口 — Slidev 自动注入到所有引用该 addon 的课件 */
+
+/* KaTeX 样式全局加载（物理课件公式多，不用按需加载；字体对 SVG 文本同样可用） */
+@import url("katex/dist/katex.min.css");
+@import url("./common.css");
+
+/* 通用版式原子 + base-flex 页面外壳（在各课 style.css 之前加载，课件可覆盖） */
+@import url("./layout.css");

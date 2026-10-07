@@ -1,0 +1,147 @@
+/* ═══════════════════════════════════════════════
+   牛顿运动定律的应用 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 封面装饰：组件按 width:100% 输出，这里限住它在右下角的尺寸 ── */
+.cover-decoration {
+  width: 15rem;
+}
+
+/* ── 例题 / 模型页：左图右文，图撑满所在栏 ── */
+.figure-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.figure-cell svg {
+  max-height: 19rem;
+}
+
+/* 题干较长的模型页：给文字更宽的栏，减少折行 */
+.half-grid-text {
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+}
+
+/* 例题页右栏：题干 + 逐步分析 + 落点，行数多，整体收紧一档 */
+.solution-stack {
+  --stack-gap: 0.6rem;
+
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.solution-stack .ask {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.solution-stack .key {
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* ── 第 3 页：受力 ⇌ 加速度 ⇌ 运动。
+     两行共用一个栅格，列宽由两行内容取最大，上下严格对齐。 ── */
+.bridge {
+  display: grid;
+  grid-template-columns: auto minmax(6.8rem, auto) minmax(5.6rem, auto) minmax(3.8rem, auto) minmax(
+      5.6rem,
+      auto
+    ) minmax(6.8rem, auto);
+  gap: 1.35rem 0.7rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.bridge-hidden {
+  visibility: hidden;
+}
+
+.bridge-tag {
+  padding: 0.18rem 0.7rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.78rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bridge-node {
+  min-width: 6.8rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bridge-node-a {
+  min-width: 3.8rem;
+  border-color: var(--c-border-glow);
+  color: var(--c-accent);
+  font-size: 1.12rem;
+}
+
+.bridge-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.74rem;
+  white-space: nowrap;
+}
+
+.bridge-link > svg {
+  color: var(--c-accent-2);
+  font-size: 1.5rem;
+}
+
+/* ── 第 5 页：整体法 / 隔离法并排对照 ── */
+.two-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.two-cases > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.case-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+
+  padding: 1rem;
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+
+  text-align: center;
+}
+
+.case-name {
+  color: var(--c-accent-2);
+
+  font-weight: 700;
+  font-size: 1.1rem;
+}

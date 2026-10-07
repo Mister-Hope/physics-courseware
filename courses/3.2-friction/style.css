@@ -1,0 +1,135 @@
+/* ═══════════════════════════════════════════════
+   摩擦力 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 正文密度用共享默认值（--page-gap 1.05rem / --stack-gap 0.95rem）；
+   只有内容确实多的页才在那一页加 `page-grow-tight`，不要全课压行距。 */
+
+/* ── 手绘示意图统一尺寸（px 口径；SVG 高度 ≈ 宽度 × viewBox 高 ÷ viewBox 宽）── */
+.fig-svg {
+  display: block;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.fig-sm {
+  max-width: 330px;
+}
+
+.fig-xs {
+  max-width: 300px;
+}
+
+.fig-md {
+  max-width: 400px;
+}
+
+.fig-lg {
+  max-width: 460px;
+}
+
+/* ── 否定性提示框（第 7 页方案一「读数读不准」）——共享 .tag-icon 的中性蓝改成警示红 ── */
+.tag-icon-danger {
+  border-color: rgb(248 113 113 / 30%);
+  background: rgb(248 113 113 / 12%);
+  color: var(--c-danger);
+}
+
+/* ── 材料动摩擦因数表（教材表 3.2 + 一行工程手册实测值）── */
+.mf-table-host {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── 「候选项 + 问号 → 无关」的两行辨析（先问后答）── */
+.qa-line {
+  display: flex;
+  gap: 1.2rem;
+  align-items: baseline;
+  font-size: 1.3rem;
+}
+
+.qa-q {
+  font-weight: 700;
+}
+
+.qa-a {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.mf-table {
+  width: 100%;
+  max-width: 46rem;
+  border-collapse: collapse;
+  font-size: 1.02rem;
+}
+
+.mf-table th,
+.mf-table td {
+  padding: 0.42rem 0.9rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+}
+
+/* 强调「μ 可以大于 1」的那一行 */
+.mf-table-hi td {
+  background: rgb(226 168 70 / 10%);
+  color: var(--c-accent) !important;
+  font-weight: 700;
+}
+
+.mf-table th {
+  color: var(--c-accent);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.mf-table tbody tr:nth-child(odd) {
+  background: rgb(148 163 184 / 5%);
+}
+
+.mf-table td:nth-child(odd) {
+  color: var(--c-text);
+}
+
+.mf-table td:nth-child(even) {
+  color: var(--c-accent-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 结尾对比表：静摩擦力 / 滑动摩擦力 ── */
+.mf-compare {
+  display: grid;
+  grid-template-columns: 0.62fr minmax(0, 1.19fr) minmax(0, 1.19fr);
+  gap: 0.7rem 1.3rem;
+  align-items: center;
+}
+
+.mf-compare > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.mf-head {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--c-border-glow);
+
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.mf-cell {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.mf-cell:nth-child(3n + 1) {
+  color: var(--c-text-dim);
+  font-size: 0.88rem;
+}

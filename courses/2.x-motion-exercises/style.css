@@ -1,0 +1,74 @@
+/* ═══════════════════════════════════════════════
+   运动学综合应用 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 习题课页面行多（一页 4–5 个点击步），纵向密度比默认略紧 */
+:root {
+  --page-gap: 0.8rem;
+  --stack-gap: 0.6rem;
+}
+
+/* 引课页：四道题的一句话情境 */
+.qitem {
+  display: flex;
+  gap: 0.55rem;
+  align-items: baseline;
+
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.qitem > b {
+  flex: 0 0 auto;
+  min-width: 1.1rem;
+  color: var(--c-accent-2);
+}
+
+/* 推导步骤行：序号 / 图标 + 一段说明（子项必须允许收缩换行，防栅格被撑爆） */
+.step {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.step > b {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+
+  min-width: 1.1rem;
+
+  color: var(--c-accent);
+}
+
+.step > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* 题干配图（示意图手写 SVG；坐标图一律用共享坐标组件） */
+.fig {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fig-rod {
+  max-width: 262px;
+}
+
+.fig-car {
+  max-width: 340px;
+}
