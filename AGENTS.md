@@ -37,7 +37,8 @@ courses/<slug>/                ← 一课一目录、一节课（40 分钟）
   components/ · images/        ← 按需存在（用到才建；不建不报错，也别放 .gitkeep）
   content/思路.md              ← **教师最初的授课思路原文**（只在思路被明确调整时就地改写，不写迭代记录）
   content/教案.md · 逐字稿.md   ← ⛔ 教师确认课件定稿后才生成（同上）
-.agents/skills/ · notes/       ← AI 技能正本 + 按需再读的笔记（都入库）
+.agents/notes/                 ← 按需再读的笔记（入库）
+.agents/skills/（⛔ 不入库）    ← AI 技能正本（本地按需安装、走 .gitignore；只提交 skills-lock.json）
 scripts/                       ← build-all / create-course / check-skills / slide / shots
 e2e/                           ← 端到端检查（见笔记 e2e-checks）
 ```
@@ -231,7 +232,7 @@ pnpm shots 1.x-vectors 4 --clicks=each # 每一步点击各截一张
   以及"基于 Slidev + Vue 3 构建的交互式公开课课件……课题《…》"这种与文件标题重复的句子，一律不写
   （`scripts/course-templates.ts` 里的 `renderReadme` 已按此生成骨架，新课件不会再带这些段落）。
 - **教材补录**：写入 `resources/textbooks/`，并更新其 `README.md` 索引
-- **AI 技能**：正本与 `skills-lock.json` 都入库；更新方式见 [`notes/skills.md`](.agents/notes/skills.md)（唯一入口 `pnpm skills:update`）
+- **AI 技能**：**只提交 `skills-lock.json`，技能正本 `.agents/skills/` 不入库**（上游是 MIT 内容、其许可声明不会被 CLI 一起拉下来，入库会与主协议冲突；CI 没有技能也照常跑）；安装/更新/恢复见 [`notes/skills.md`](.agents/notes/skills.md)（`pnpm skills:restore` / `pnpm skills:update`）
 - **协议**：整个项目（含全部课件）采用 **CC BY-NC-SA 4.0**（署名—非商业性使用—相同方式共享，全文见根 `LICENSE`）：
   必须保留「张伯望（东北育才学校）」署名与本协议、**不得商用**、修改后必须以同一协议公开完整源文件。
   新增文件**不要**再写别的许可声明；第三方内容（`resources/textbooks/` 教材、`.agents/skills/` 上游技能）的版权与许可见根 `LICENSE` 的「第三方内容」一节。

@@ -6,6 +6,7 @@ dist/
 
 # AI 技能：skills-lock.json **入库**（离线可用，
 .agents/skills/
+.claude/skills/
 
 # 个人本地配置
 .claude/settings.local.json

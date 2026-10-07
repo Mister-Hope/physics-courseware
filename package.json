@@ -15,7 +15,7 @@
     "skills:add": "pnpm dlx skills@latest add",
     "skills:check": "unrun scripts/check-skills.ts",
     "skills:list": "pnpm dlx skills@latest ls",
-    "skills:restore": "git checkout -- .agents skills-lock.json",
+    "skills:restore": "pnpm dlx skills@latest experimental_install",
     "skills:update": "pnpm dlx skills@latest update -p -y",
     "slide": "unrun scripts/slide.ts",
     "test:e2e": "playwright test",
