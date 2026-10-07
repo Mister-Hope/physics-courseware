@@ -1,0 +1,16 @@
+diff --git a/dist/client.mjs b/dist/client.mjs
+index 1fc73b6ad0d67827de42aee2084f391cb7ca7352..4237efc7d6247891eee4909d5d4dc01fd97d22ac 100644
+--- a/dist/client.mjs
++++ b/dist/client.mjs
+@@ -24,7 +24,10 @@ const TwoslashFloatingVue = { install: (app, options = {}) => {
+ 			app.component = function(...rest) {
+ 				const comp = _component.apply(this, rest);
+ 				if (rest.length >= 2 && rest[0] === "VMenu") try {
+-					const PopperTs = rest[1].components.Popper.extends;
++					// floating-vue >= 5.4 删掉了 VMenu 的 `components` 选项（PopperWrapper 重构），
++					// 此时 VMenu 本身就是展开 PopperWrapper 得到的对象，methods 直接挂在上面 ——
++					// 两种形状都兜住，避免每次加载都 log "Failed to patch FloatingVue"。
++					const PopperTs = rest[1].components?.Popper?.extends ?? rest[1];
+ 					const _show = PopperTs.methods.show;
+ 					PopperTs.methods.show = function(...args) {
+ 						if (!isDragging) return _show.apply(this, args);

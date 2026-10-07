@@ -190,6 +190,9 @@ overrides:
   markdown-it: ^14.3.2
   magic-string@^1: 1.4.2
 
+patchedDependencies:
+  '@shikijs/vitepress-twoslash@4.5.0': 17154d9a34f2f3cad78e7a16adece035d3bf95aa6688aae676e904a98da0435d
+
 importers:
 
   .:
@@ -5429,7 +5432,7 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.5
 
-  '@shikijs/vitepress-twoslash@4.5.0(@nuxt/kit@3.21.11)(supports-color@10.2.2)(typescript@6.0.3)':
+  '@shikijs/vitepress-twoslash@4.5.0(patch_hash=17154d9a34f2f3cad78e7a16adece035d3bf95aa6688aae676e904a98da0435d)(@nuxt/kit@3.21.11)(supports-color@10.2.2)(typescript@6.0.3)':
     dependencies:
       '@shikijs/twoslash': 4.5.0(supports-color@10.2.2)(typescript@6.0.3)
       floating-vue: 5.4.0(@nuxt/kit@3.21.11)(vue@3.5.43(typescript@6.0.3))
@@ -5467,7 +5470,7 @@ snapshots:
       '@shikijs/magic-move': 4.5.0(shiki@4.5.0)(vue@3.5.43(typescript@6.0.3))
       '@shikijs/markdown-it': 4.5.0
       '@shikijs/twoslash': 4.5.0(supports-color@10.2.2)(typescript@6.0.3)
-      '@shikijs/vitepress-twoslash': 4.5.0(@nuxt/kit@3.21.11)(supports-color@10.2.2)(typescript@6.0.3)
+      '@shikijs/vitepress-twoslash': 4.5.0(patch_hash=17154d9a34f2f3cad78e7a16adece035d3bf95aa6688aae676e904a98da0435d)(@nuxt/kit@3.21.11)(supports-color@10.2.2)(typescript@6.0.3)
       '@slidev/client': 52.20.1(@modelcontextprotocol/server@2.3.1)(@nuxt/kit@3.21.11)(@oxc-project/types@0.152.0)(@vitejs/devtools-kit@0.4.12(@modelcontextprotocol/server@2.3.1)(cac@7.0.0)(srvx@1.0.5)(vite@8.3.3(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.43)(cac@7.0.0)(lightningcss@1.33.0)(markdown-it@14.3.2)(oxc-parser@0.150.0)(rolldown@1.2.12)(srvx@1.0.5)(supports-color@10.2.2)(vite@8.3.3(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       '@slidev/parser': 52.20.1(@modelcontextprotocol/server@2.3.1)(@nuxt/kit@3.21.11)(@vue/compiler-sfc@3.5.43)(cac@7.0.0)(rolldown@1.2.12)(srvx@1.0.5)(supports-color@10.2.2)(typescript@6.0.3)(vite@8.3.3(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       '@slidev/types': 52.20.1(@modelcontextprotocol/server@2.3.1)(@nuxt/kit@3.21.11)(@vue/compiler-sfc@3.5.43)(cac@7.0.0)(rolldown@1.2.12)(srvx@1.0.5)(supports-color@10.2.2)(typescript@6.0.3)(vite@8.3.3(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
@@ -5589,7 +5592,7 @@ snapshots:
       '@shikijs/engine-javascript': 4.5.0
       '@shikijs/magic-move': 4.5.0(shiki@4.5.0)(vue@3.5.43(typescript@6.0.3))
       '@shikijs/monaco': 4.5.0
-      '@shikijs/vitepress-twoslash': 4.5.0(@nuxt/kit@3.21.11)(supports-color@10.2.2)(typescript@6.0.3)
+      '@shikijs/vitepress-twoslash': 4.5.0(patch_hash=17154d9a34f2f3cad78e7a16adece035d3bf95aa6688aae676e904a98da0435d)(@nuxt/kit@3.21.11)(supports-color@10.2.2)(typescript@6.0.3)
       '@slidev/parser': 52.20.1(@modelcontextprotocol/server@2.3.1)(@nuxt/kit@3.21.11)(@vue/compiler-sfc@3.5.43)(cac@7.0.0)(rolldown@1.2.12)(srvx@1.0.5)(supports-color@10.2.2)(typescript@6.0.3)(vite@8.3.3(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       '@slidev/rough-notation': 0.1.0
       '@slidev/types': 52.20.1(@modelcontextprotocol/server@2.3.1)(@nuxt/kit@3.21.11)(@vue/compiler-sfc@3.5.43)(cac@7.0.0)(rolldown@1.2.12)(srvx@1.0.5)(supports-color@10.2.2)(typescript@6.0.3)(vite@8.3.3(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
