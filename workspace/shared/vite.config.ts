@@ -50,6 +50,28 @@ const ATTR_TEX_RE = /\btex="(?<tex>[^"]*)"/u;
 const OBJ_TEX_RE = /\btex:\s*"(?<tex>(?:[^"\\]|\\.)*)"/gu;
 const SKIP_DIRS = new Set(["node_modules", "dist", ".git", ".temp", ".e2e"]);
 
+/**
+ * 还原**对象字面量**里抓到的双引号字符串。
+ *
+ * 源码写 `tex: "\\vec{s}"` 时，正则抓到的是 `\\vec{s}`（两个反斜杠的原样文本），而运行时 `Latex` 拿到的值是 `\vec{s}`。不还原会同时踩两个坑：
+ *
+ * ① 预渲染时把 `\\` 当 LaTeX 换行符、把后面的 `text{合矢量}` 当普通数学 → 控制台刷 "Unicode text character「合」used in math
+ * mode" 这类警告； ② 表的 key 与运行时查表的 key 对不上 → 这些公式每次都回落到运行时 `import("katex")`，预渲染白做。
+ *
+ * 注意：`<Latex tex="…">` 属性走的是模板字符串，**不需要**（也不能）做这层还原——HTML 属性不认 JS 转义。
+ *
+ * @param value 正则抓到的双引号字符串字面量内容（不含两侧引号）
+ * @returns 还原后的实际字符串
+ */
+const decodeStringLiteral = (value: string): string => {
+  try {
+    return JSON.parse(`"${value}"`) as string;
+  } catch {
+    // 非 JSON 兼容的转义（如 `\'`、`\u{…}`）退回原来的宽松处理
+    return value.replaceAll(String.raw`\"`, '"');
+  }
+};
+
 const decodeEntities = (value: string): string =>
   value
     .replaceAll("&quot;", '"')
@@ -145,7 +167,7 @@ const katexPrerenderPlugin = (sharedRoot: string): Plugin => {
         for (const match of source.matchAll(OBJ_TEX_RE)) {
           const tex = match.groups?.tex;
 
-          if (tex != null) inline.add(decodeEntities(tex.replaceAll(String.raw`\"`, '"')));
+          if (tex != null) inline.add(decodeEntities(decodeStringLiteral(tex)));
         }
       }
 
