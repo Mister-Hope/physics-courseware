@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>页面不存在 · 高中物理交互式课件</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <style>
+      /* 站点 404 页：/404.html（nginx 用 error_page 404 指向它，状态码仍是 404） */
+      :root {
+        --c-bg: #090d1a;
+        --c-bg-soft: #0f1425;
+        --c-surface: rgb(30 41 59 / 65%);
+        --c-border: rgb(148 163 184 / 10%);
+        --c-text: #f1f5f9;
+        --c-text-dim: #94a3b8;
+        --c-accent: #e2a846;
+        --c-accent-glow: #f59e0b;
+        --c-accent-2: #3b82f6;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        background: var(--c-bg);
+        color: var(--c-text);
+        font-size: 18px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 100vh;
+        padding: 2rem 1.25rem;
+
+        background:
+          radial-gradient(ellipse 80% 60% at 50% -10%, rgb(59 130 246 / 10%) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 80% 90%, rgb(226 168 70 / 8%) 0%, transparent 55%),
+          linear-gradient(160deg, var(--c-bg) 0%, #0c1122 40%, var(--c-bg-soft) 100%);
+        background-attachment: fixed;
+
+        font-family:
+          "PingFang SC",
+          "Microsoft YaHei",
+          "Hiragino Sans GB",
+          "WenQuanYi Micro Hei",
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+
+      /* 背景点阵（中间清晰、四周淡出），纯装饰 */
+      body::before {
+        position: fixed;
+        inset: 0;
+        content: "";
+
+        background-image: radial-gradient(rgb(148 163 184 / 8%) 1px, transparent 1px);
+        background-size: 28px 28px;
+
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 25%, transparent 75%);
+        pointer-events: none;
+      }
+
+      .card {
+        position: relative;
+
+        width: min(38rem, 100%);
+        padding: 3rem 2.5rem 2.5rem;
+        border: 1px solid var(--c-border);
+        border-radius: 1.75rem;
+
+        background: var(--c-surface);
+        box-shadow:
+          0 24px 80px rgb(0 0 0 / 45%),
+          inset 0 1px 0 rgb(255 255 255 / 4%);
+
+        text-align: center;
+
+        backdrop-filter: blur(16px);
+
+        animation: card-in 0.5s ease both;
+      }
+
+      /* 卡片顶部一条金→蓝的细高光 */
+      .card::before {
+        position: absolute;
+        inset: 0 0 auto;
+        height: 1px;
+        content: "";
+
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgb(226 168 70 / 55%),
+          rgb(59 130 246 / 55%),
+          transparent
+        );
+      }
+
+      .logo {
+        display: block;
+
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto 1.25rem;
+        border-radius: 0.9rem;
+      }
+
+      .code {
+        background: linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          var(--c-accent) 45%,
+          var(--c-accent-2) 100%
+        );
+        background-clip: text;
+
+        font-weight: 800;
+        font-size: clamp(3.75rem, 15vw, 6.5rem);
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+        letter-spacing: 0.06em;
+
+        -webkit-text-fill-color: transparent;
+      }
+
+      .title {
+        margin-top: 1.25rem;
+        font-weight: 700;
+        font-size: 1.35rem;
+        letter-spacing: 0.01em;
+      }
+
+      .desc {
+        margin-top: 0.6rem;
+        color: var(--c-text-dim);
+        font-size: 0.9rem;
+        line-height: 1.75;
+      }
+
+      .path-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 1.25rem;
+      }
+
+      .path-label {
+        color: var(--c-text-dim);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+      }
+
+      .path {
+        max-width: 100%;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid rgb(148 163 184 / 12%);
+        border-radius: 0.5rem;
+
+        background: rgb(9 13 26 / 60%);
+        color: var(--c-text-dim);
+
+        font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        font-size: 0.78rem;
+
+        overflow-wrap: anywhere;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+
+        margin-top: 1.75rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        gap: 0.45rem;
+        align-items: center;
+
+        padding: 0.75rem 1.5rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+
+        color: var(--c-text);
+
+        font-weight: 600;
+        font-size: 0.92rem;
+        font-family: inherit;
+        text-decoration: none;
+
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-glow) 100%);
+        box-shadow: 0 10px 30px rgb(226 168 70 / 22%);
+        color: #1b1305;
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 14px 38px rgb(226 168 70 / 32%);
+        transform: translateY(-2px);
+      }
+
+      .btn-ghost {
+        border-color: var(--c-border);
+
+        background: rgb(30 41 59 / 55%);
+      }
+
+      .btn-ghost:hover {
+        border-color: rgb(148 163 184 / 30%);
+        background: rgb(40 55 75 / 75%);
+        transform: translateY(-2px);
+      }
+
+      /* 需要 JS 才会被去掉的按钮，默认隐藏 */
+      [hidden] {
+        display: none !important;
+      }
+
+      .hint {
+        margin-top: 1rem;
+        color: var(--c-accent);
+        font-size: 0.8rem;
+        line-height: 1.7;
+        opacity: 0.85;
+      }
+
+      .foot {
+        color: var(--c-text-dim);
+        font-size: 0.75rem;
+        letter-spacing: 0.04em;
+        opacity: 0.55;
+      }
+
+      @keyframes card-in {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (width <= 480px) {
+        .card {
+          padding: 2.25rem 1.5rem 2rem;
+        }
+
+        .actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          justify-content: center;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <img class="logo" src="/favicon.png" alt="" width="48" height="48" />
+      <p class="code">404</p>
+      <h1 class="title">这个页面不存在</h1>
+      <p class="desc">
+        链接可能已经失效，或者对应的课件被移动、删除了。<br />回到课件列表重新找一找吧。
+      </p>
+
+      <p class="path-line">
+        <span class="path-label">请求的地址</span>
+        <code class="path" id="path">/</code>
+      </p>
+
+      <div class="actions">
+        <!-- 课件目录存在时才显示：回到该课件第一页 -->
+        <a class="btn btn-ghost" id="btn-course" href="/" hidden>返回课件首页</a>
+        <!-- 始终显示：回到入口网站 -->
+        <a class="btn btn-primary" id="btn-list" href="/">返回课件列表</a>
+      </div>
+
+      <p class="hint" id="hint" aria-live="polite" hidden></p>
+    </main>
+
+    <p class="foot">高中物理交互式课件 · 东北育才 张伯望</p>
+
+    <script type="module" src="./src/not-found.ts"></script>
+  </body>
+</html>

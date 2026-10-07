@@ -142,7 +142,8 @@ pnpm lint         # oxlint --fix + oxfmt + stylelint（slides.md 不参与格式
 ├── resources/                  # 教学资源（教材库 + 零代码生成工具）
 ├── scripts/                    # build-all / check-skills / create-course / slide / shots
 ├── e2e/                        # 端到端测试（逐页检查元素是否超出 16:9 画面）
-└── .github/workflows/          # CI（lint + build + e2e）与 GitHub Pages 部署
+├── deploy/nginx.conf           # 站点 nginx 配置（多 SPA 回退 + 站内 404）
+└── .github/workflows/          # CI（lint + build + e2e）与部署分支推送
 ```
 
 工程约定、设计系统、已知的坑都写在 [AGENTS.md](AGENTS.md)，动手改之前先读。
