@@ -17,8 +17,8 @@ overrides:
   # 会让 @unocss/transformer-directives 展开 `--uno:` / `@apply` 后把插入的声明再写一遍，
   # 产物末尾出现「声明裸奔在顶层」的非法 CSS → Vite 8 默认的 lightningcss CSS 压缩报
   # "Invalid token in pseudo element" 构建失败（上游 open issue：unocss#5373）。
-  # 只把 1.4.3 退回 1.4.2，不影响仍依赖 0.30.x 的 Vue / Rollup 等包；上游修复后放开。
-  "magic-string@1.4.3": 1.4.2
+  # 只把 1.x 的 1.4.3+ 退回 1.4.2，不影响仍依赖 0.30.x 的 Vue / Rollup 等包；上游修复后放开。
+  "magic-string@^1": 1.4.2
 
 # enableGlobalVirtualStore: true
 
