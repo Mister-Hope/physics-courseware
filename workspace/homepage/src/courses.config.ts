@@ -206,22 +206,25 @@ export const textbooks: TextbookGroup[] = [
         slug: "5.1-curvilinear-motion",
         title: "曲线运动",
         chapter: "§5.1",
-        description: "待补充：一句话说明本课讲了什么。",
-        tags: [],
+        description:
+          "由抛出的物体建立曲线运动，借砂轮火星与白纸印迹确认速度沿切线；用钢球实验说明力与速度不共线才做曲线运动，沿切向、法向分解加速度讲加减速，落到匀变速曲线运动。",
+        tags: ["曲线运动", "切线方向", "曲线运动的条件", "匀变速曲线运动"],
       },
       {
         slug: "5.2-composition-decomposition-of-motion",
         title: "运动的合成与分解",
         chapter: "§5.2",
-        description: "待补充：一句话说明本课讲了什么。",
-        tags: [],
+        description:
+          "用双电机小车建立分运动与合运动，例题练位移与速度的合成；再由两个参考系引出速度合成公理，讲渡河的最短时间与最短位移，最后用三步法处理拉船、两环、斜劈的关联速度。",
+        tags: ["运动的合成与分解", "渡河问题", "关联速度", "参考系"],
       },
       {
         slug: "5.4-projectile-motion",
         title: "抛体运动的规律",
         chapter: "§5.4",
-        description: "待补充：一句话说明本课讲了什么。",
-        tags: [],
+        description:
+          "两课时：由实验结论推出平抛的速度、位移与两个偏角，再用斜抛的分解得轨迹方程、射高射程与互补抛射角；第二课时集中处理平抛与斜面、圆弧的相遇以及临界与极值问题。",
+        tags: ["平抛运动", "斜抛运动", "轨迹方程", "临界问题"],
       },
       {
         slug: "5.3-projectile-motion-experiment",
