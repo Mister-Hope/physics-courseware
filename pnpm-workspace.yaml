@@ -12,7 +12,7 @@ catalog:
   vue: ^3.5.43
 
 overrides:
-  markdown-it: ^14.3.2
+  markdown-it: ^15.0.0
   # ⚠️ magic-string 1.4.3 的「Preserve inserts when update spans several chunks」改动，
   # 会让 @unocss/transformer-directives 展开 `--uno:` / `@apply` 后把插入的声明再写一遍，
   # 产物末尾出现「声明裸奔在顶层」的非法 CSS → Vite 8 默认的 lightningcss CSS 压缩报
