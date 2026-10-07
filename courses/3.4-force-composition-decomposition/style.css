@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════
+   力的合成和分解 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 引课页：两力共同作用 ⇄ 一个力单独作用 ── */
+.eq-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.eq-figure {
+  position: relative;
+  min-width: 0;
+}
+
+.eq-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.eq-equal {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+/* ── 例题：图 + 解题步骤 ── */
+.ex-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.ex-figure {
+  position: relative;
+  min-width: 0;
+}
+
+.ex-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── 第 5 页：左图右文（先讲等效替代、再讲实验步骤、最后才出图）── */
+.p5-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.p5-grid > * {
+  min-width: 0;
+}
+
+.p5-figure {
+  min-width: 0;
+}
+
+/* ── 第 13 页：合力/分力的真实与抽象（左图右辨析）── */
+.ic-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.ic-grid > * {
+  min-width: 0;
+}
+
+/* ── 斜面上的方向：左图右说 ── */
+.sd-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.sd-grid > * {
+  min-width: 0;
+}
+
+.sd-tag {
+  display: inline-block;
+
+  margin-right: 0.5rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 2rem;
+
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.sd-tag-blue {
+  background: rgb(59 130 246 / 14%);
+  color: var(--c-accent-2);
+}
+
+.sd-tag-gold {
+  background: rgb(226 168 70 / 14%);
+  color: var(--c-accent);
+}
+
+/* ── 练习页：问题与答案成块，答案就落在各自问题的下方 ── */
+.qa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.qa-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.qa-q {
+  color: var(--c-text);
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.qa-a {
+  color: var(--c-accent);
+  font-size: 1.06rem;
+  line-height: 1.6;
+}
+
+/* ── 手写 SVG 示意图容器（标注走 ChartLabel，按容器百分比定位）── */
+.sv-figure,
+.decomp-figure {
+  position: relative;
+  min-width: 0;
+}
+
+.sv-figure svg,
+.decomp-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── 辨析页：绿勾（对）/ 红叉（错）——与 2.1、1.2 同一套标记 ── */
+.mini-title > svg.ico-good {
+  color: #34d399;
+  font-size: 1.75rem;
+}
+
+.mini-title > svg.ico-bad {
+  color: var(--c-danger);
+  font-size: 1.75rem;
+}
+
+/* ── 判断结论：问题后面挂一个绿勾/红叉＋结论（误差分析页）── */
+.verdict {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+
+  margin-left: 0.2rem;
+
+  font-size: 0.9em;
+}
+
+.verdict > svg {
+  font-size: 1.5rem;
+}
+
+.verdict-good {
+  color: #34d399;
+}
+
+.verdict-bad {
+  color: var(--c-danger);
+}
+
+/* ── 一般夹角求合力：左图右推导 ── */
+.gr-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.gr-grid > * {
+  min-width: 0;
+}

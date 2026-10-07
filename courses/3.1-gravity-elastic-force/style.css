@@ -1,0 +1,121 @@
+/* ═══════════════════════════════════════════════
+   重力与弹力 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/（common.css + layout.css），
+   由共享 addon（../workspace/shared）自动注入，此处只放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课交互组件多、图多：纵向间距比通用值略紧一点 */
+:root {
+  --page-gap: 0.68rem;
+  --stack-gap: 0.6rem;
+}
+
+/* 普通行：叙述、并列条目、推导步骤 */
+.line {
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+/* 定义卡片里的一句话 */
+.define-line {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* 手绘示意图：占满所在栏的宽度，高度按 viewBox 比例（尺寸由各页 style 里的 max-width 收口） */
+.fig {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* 图下的小字图注（只写"这是什么图"，不写对图的赘述） */
+.fig-cap {
+  color: var(--c-text-dim);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+/* ── 第 13 页：弹性形变与塑性形变 ──
+   先只出提问，点击后才出标题与两条定义（v-click 只改透明度，不改变占位、不顶跑已有元素）；
+   两条定义用序号徽标并列、字号略小于提问；刚体卡片单独占一行，不再浮动去挤压正文。 */
+.p13-title {
+  line-height: 1.2;
+}
+
+.p13-defs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p13-def {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.p13-num {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.55rem;
+  height: 1.55rem;
+  border: 1px solid rgb(96 165 250 / 45%);
+  border-radius: 50%;
+
+  background: rgb(59 130 246 / 18%);
+  color: var(--c-accent-2);
+
+  font-weight: 700;
+  font-size: 0.86rem;
+  line-height: 1;
+}
+
+/* 第 20 页「练一练」：左右两栏各自「问题 + 简图」，两栏顶部对齐（.half-grid 默认垂直居中） */
+.p20-grid {
+  gap: 1.6rem;
+  align-items: start;
+}
+
+/* 第 14 页：微小形变实验——左侧装置尽量占满，右边只留"光路放大法" */
+.md-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.md-grid > * {
+  min-width: 0;
+}
+
+.md-figure {
+  min-width: 0;
+}
+
+/* 第 32 页：轻杆模型的浮动提示（右上角空白处，最后一次点击单独出现） */
+.rod-hint {
+  position: absolute;
+  top: 3.2rem;
+  right: 2.2rem;
+
+  max-width: 16rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgb(96 165 250 / 45%);
+  border-radius: var(--radius-md);
+
+  background: rgb(59 130 246 / 14%);
+  color: var(--c-accent-2);
+
+  font-size: 0.82rem;
+  line-height: 1.6;
+
+  backdrop-filter: blur(8px);
+}

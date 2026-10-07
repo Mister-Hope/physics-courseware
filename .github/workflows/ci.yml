@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@24
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Lint
+        run: pnpm run lint
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@24
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Build all
+        run: pnpm run build
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: lint
+    env:
+      # CI 上没有 macOS 的中文字体，行高会差几像素；这里放宽判定阈值，
+      # 本机默认是 2px（见 e2e/slidev-driver.ts）
+      E2E_OVERFLOW_TOLERANCE: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@^24.20.0
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Install Chinese fonts
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E layout check
+        run: pnpm run test:e2e
+
+      - name: Upload layout report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: layout-overflow-report
+          path: e2e/reports/
+          if-no-files-found: ignore

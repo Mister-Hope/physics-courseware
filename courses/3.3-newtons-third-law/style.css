@@ -1,0 +1,185 @@
+/* ═══════════════════════════════════════════════
+   牛顿第三定律 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 示意图容器 ──
+   图要占满所在栏：宽度 100%、高度按比例自适应。 */
+.fig-host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.fig-host svg,
+.fig-col svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 三栏图例：上图下字的图例列 */
+.fig-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.fig-cap {
+  color: var(--c-text);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ── 要点条目（无卡片，左一条细线）── */
+.trait {
+  padding-left: 1rem;
+  border-left: 2px solid var(--c-border-glow);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* ── 第 15 页（受力分析判题）：两道题并排、行数多，
+   把正文行距收一点，别顶到页面上边界 ── */
+.p15-tight .page-grow {
+  gap: 0.55rem;
+}
+
+/* ── 无序列表形式的要点（金色圆点，保留列表语义）── */
+.trait-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+
+  margin: 0;
+  padding-left: 0;
+
+  list-style: none;
+}
+
+.trait-list > li {
+  position: relative;
+
+  padding-left: 1.6rem;
+
+  list-style: none;
+
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* 主题/预置样式会给 li 加 ::marker（方块），必须显式关掉，只留自己画的金色圆点 */
+.trait-list > li::marker {
+  content: none;
+}
+
+.trait-list > li::before {
+  content: "";
+
+  position: absolute;
+  top: 0.58em;
+  left: 0.2rem;
+
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+
+  background: var(--c-accent);
+}
+
+/* ── 作用力与反作用力 vs 一对平衡力：左图 + 右对比表 ──
+   对比表给足宽度（三列窄了会折行、把整页顶高），
+   两列用颜色区分（与图中 F / F' 的配色一致）。 */
+.pair-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.pair-grid > * {
+  min-width: 0;
+}
+
+.pair-head,
+.pair-row {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.pair-head {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--c-border);
+
+  color: var(--c-text-dim);
+
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.pair-head > span:nth-child(2) {
+  color: #60a5fa;
+}
+
+.pair-head > span:nth-child(3) {
+  color: #e2a846;
+}
+
+.pair-row {
+  padding: 0.42rem 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.pair-row:last-child {
+  border-bottom: none;
+}
+
+.pair-k {
+  color: var(--c-text-dim);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.pair-a {
+  color: #93c5fd;
+}
+
+.pair-b {
+  color: #f3c977;
+}
+
+/* ── 受力分析顺序链条 ── */
+.order-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-step {
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: 0.9rem;
+
+  background: rgb(226 168 70 / 8%);
+
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.order-arrow {
+  color: var(--c-accent);
+  font-size: 1.3rem;
+  line-height: 1;
+}

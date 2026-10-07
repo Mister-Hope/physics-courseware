@@ -1,0 +1,22 @@
+/* ═══════════════════════════════════════════════
+   质点与参考系·时间与位移 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 本课特有的提问行：大图标 + 一段话，两段式排布 ──
+   通用 .ask（layout.css）是纯文本行；本课标记固定为「<mdi-xxx /> + <span>」，
+   必须 flex 排布，并清掉通用规则给行内图标留的右外边距（改用 gap 控间距）。 */
+.ask {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.ask > svg {
+  flex-shrink: 0;
+  margin-right: 0;
+}

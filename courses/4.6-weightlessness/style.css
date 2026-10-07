@@ -1,0 +1,66 @@
+/* ═══════════════════════════════════════════════
+   超重和失重 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动加载，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 第 2 页：示数变化的四个阶段 ── */
+.squat-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.squat-flow > svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--c-accent);
+}
+
+.sf-step {
+  padding: 0.55rem 1.35rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-weight: 700;
+  font-size: 1.45rem;
+}
+
+.sf-end {
+  border-color: var(--c-border-glow);
+  color: var(--c-accent);
+}
+
+/* ── 第 3、13 页：坐标图占满正文区 ── */
+.graph-host {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 0;
+}
+
+/* ── 示意图所在栏（第 6–10、17 页）── */
+.figure-host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* ── 第 12 页：交互操作提示 ── */
+.ew-hint {
+  color: var(--c-text-dim);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ── 第 14 页：只有一行公式，放大 ── */
+.lead-formula {
+  font-size: 1.35rem;
+}

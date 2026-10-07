@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════
+   实验：探究平抛运动的特点 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 封面装饰：组件按 width:100% 输出，这里限住它在右下角的尺寸 ── */
+.cover-decoration {
+  width: 15rem;
+}
+
+/* ── 图占满所在栏 ── */
+.figure-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.figure-cell svg {
+  max-height: 20rem;
+}
+
+/* ── 图左文右：推导行多时给文字更宽的栏 ── */
+.half-grid-text {
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  align-items: center;
+}
+
+/* ── 推导栏：行数多，整体收紧一档 ── */
+.solution-stack {
+  --stack-gap: 0.62rem;
+
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.solution-stack .ask {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.solution-stack .key {
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* ── 单独一行的公式 ── */
+.eq {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* ── 实验记录表 ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.3rem 0.4rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.data-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+.data-table td.lead,
+.data-table th.lead {
+  text-align: left;
+}
+
+/* 空白记录表：留出书写高度 */
+.data-table-blank td {
+  height: 2.6rem;
+}
+
+/* 图注 / 表下小字 */
+.fig-note {
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: center;
+}

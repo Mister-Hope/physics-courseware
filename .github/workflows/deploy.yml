@@ -1,0 +1,37 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@24
+
+      - name: Install dependencies
+        run: pnpm ci
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: deploy
+          folder: dist
+          single-commit: true
+
+      - name: Trigger Hook
+        run: curl -s "${{ secrets.BT_WEBHOOK_URL }}"

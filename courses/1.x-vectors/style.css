@@ -1,0 +1,119 @@
+/* ═══════════════════════════════════════════════
+   矢量与向量 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   ═══════════════════════════════════════════════ */
+
+/* 收尾那句话 */
+.takeaway {
+  padding-left: 1rem;
+  border-left: 3px solid var(--c-accent);
+  font-size: 1.12rem;
+  line-height: 1.85;
+}
+
+/* ── 核心对比页：矢量/标量 × 向量/数 ── */
+.cmp {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.7rem 1.4rem;
+
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.cmp > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cmp-head {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--c-border);
+
+  color: var(--c-text);
+
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.cmp-row {
+  color: var(--c-text-dim);
+  font-weight: 700;
+}
+
+.cmp-cell {
+  color: var(--c-text);
+}
+
+.law {
+  text-align: center;
+}
+
+.law-title {
+  margin-top: 0.35rem;
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.law-note {
+  margin-top: 0.3rem;
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.coord-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.coord-table th,
+.coord-table td {
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+}
+
+.coord-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+/* 总结页的大表：行高收一档，保证整页塞得下
+   （放在 .coord-table .sum-row td 之前：specificity 必须升序，否则 stylelint 报 no-descending-specificity） */
+.coord-table-dense {
+  font-size: 0.88rem;
+}
+
+.coord-table-dense th,
+.coord-table-dense td {
+  padding: 0.14rem 0.4rem;
+}
+
+.coord-table .sum-row td {
+  border-bottom: none;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* ── 对比表：逐行点击出现，用多个等宽 grid 叠出来 ── */
+.cmp-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* ── 宝剑栏右下角的危险提示（骷髅图标 + 红字） ── */
+.sword-warn {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: #f87171;
+
+  font-size: 0.82rem;
+}

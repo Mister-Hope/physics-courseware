@@ -1,0 +1,35 @@
+packages:
+  - courses/*
+  - workspace/*
+
+catalog:
+  "@iconify-json/mdi": ^1.2.3
+  "@iconify/vue": ^5.0.3
+  "@slidev/cli": ^52.20.1
+  "@slidev/client": ^52.20.1
+  "@slidev/theme-default": ^0.25.0
+  vite: ^8.3.3
+  vue: ^3.5.43
+
+overrides:
+  markdown-it: ^14.3.2
+  # ⚠️ magic-string 1.4.3 的「Preserve inserts when update spans several chunks」改动，
+  # 会让 @unocss/transformer-directives 展开 `--uno:` / `@apply` 后把插入的声明再写一遍，
+  # 产物末尾出现「声明裸奔在顶层」的非法 CSS → Vite 8 默认的 lightningcss CSS 压缩报
+  # "Invalid token in pseudo element" 构建失败（上游 open issue：unocss#5373）。
+  # 只把 1.x 的 1.4.3+ 退回 1.4.2，不影响仍依赖 0.30.x 的 Vue / Rollup 等包；上游修复后放开。
+  "magic-string@^1": 1.4.2
+
+# enableGlobalVirtualStore: true
+
+minimumReleaseAgeExclude:
+  - "@mr-hope/*"
+  - "@oxfmt/*"
+  - "@oxlint/*"
+  - "oxc-config-hope"
+  - "oxfmt"
+  - "oxlint"
+minimumReleaseAgeExcludePrune: true
+trustPolicy: no-downgrade
+trustPolicyExcludePrune: true
+trustPolicyIgnoreAfter: 720

@@ -1,0 +1,183 @@
+/* ═══════════════════════════════════════════════
+   牛顿第一定律 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.95rem;
+}
+
+/* ── 引课页：整页只有一句问题，放大 ── */
+.ask-hero {
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.6;
+}
+
+/* ── 惯性含义页：标签 + 内容 ── */
+.inertia-row {
+  display: flex;
+  gap: 1.1rem;
+  align-items: baseline;
+
+  font-size: 1.12rem;
+  line-height: 1.6;
+}
+
+.inertia-label {
+  flex: 0 0 6.5rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* ── 教材原话：规范表述引一句，跟上面的要点区分开 ── */
+.textbook-quote {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--c-border);
+
+  color: var(--c-text-dim);
+
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.textbook-quote b {
+  color: var(--c-accent-2);
+}
+
+/* ── 被否定的说法：克服惯性 / ✗ —— 错误表述一律标红，解释照旧用灰字 ── */
+.wrong-claim {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  font-size: 1.05rem;
+}
+
+.wrong-claim s {
+  color: var(--c-danger);
+  text-decoration-thickness: 3px;
+}
+
+.wrong-mark {
+  color: var(--c-danger);
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+/* ── 第 12 页：从运动状态到惯性的分析链 ── */
+.chain {
+  gap: 0.75rem;
+}
+
+/* 上半部分：左右两栏——左边是运动状态的三个量，右边是惯性与"变化的难易"。
+   两栏拉成一样高：右栏（惯性那组）本来更高、撑起整个区；左栏三条用 space-between 铺满 */
+.chain-top {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+.chain-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  justify-content: space-between;
+
+  min-width: 0;
+}
+
+.chain-col-left {
+  --chain-tag-w: 11.5rem;
+}
+
+.chain-col-right {
+  --chain-tag-w: 8.5rem;
+}
+
+/* 下半部分：三组"同…比"横向占满整页 */
+.chain-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.chain-row {
+  display: grid;
+  grid-template-columns: minmax(0, var(--chain-tag-w, 14.5rem)) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: baseline;
+
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.chain-tag {
+  color: var(--c-accent-2);
+  font-weight: 700;
+  font-size: 0.92em;
+  text-align: right;
+}
+
+/* 花括号这一行：标签要和括号的尖儿（整组三条的中线）对齐，不能按第一行 baseline 对 */
+.chain-row-brace {
+  align-items: center;
+}
+
+.chain-note {
+  margin-left: 0.5rem;
+  color: var(--c-text-dim);
+  font-size: 0.88rem;
+}
+
+/* 惯性右侧的花括号：把"性质 / 与质量的关系 / 固有"三条并成一束 */
+.chain-brace-group {
+  display: flex;
+  gap: 0.6rem;
+  align-items: stretch;
+}
+
+.chain-brace {
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 0.85rem;
+  color: var(--c-accent);
+}
+
+.chain-sub {
+  gap: 0.15rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ── 惯性辨析：题干 + 判断 ── */
+.judge-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
+  gap: 1.2rem;
+  align-items: baseline;
+
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--c-border);
+
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.judge-verdict {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.judge-no {
+  color: var(--c-danger);
+}
+
+.judge-yes {
+  color: var(--c-physics);
+}

@@ -1,0 +1,98 @@
+/* ═══════════════════════════════════════════════
+   实验：探究加速度与力、质量的关系 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 封面：课题名 17 字，默认字号会折行，压到 2.4rem 保持一行 */
+.cover-title {
+  font-size: 2.4rem !important;
+}
+
+/* ── 内容少的页：提问整体放大 ── */
+.ask-hero {
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.7;
+}
+
+/* ── 实验步骤：编号圆点 + 文字 ── */
+.step-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.step-num {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.15rem;
+  border: 1px solid rgb(226 168 70 / 60%);
+  border-radius: 50%;
+
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ── 记录卡（学生实验时照着填） ── */
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.92rem;
+}
+
+.record-table th,
+.record-table td {
+  padding: 0.34rem 0.5rem;
+  border: 1px solid var(--c-border);
+  text-align: center;
+}
+
+.record-table th {
+  background: rgb(148 163 184 / 8%);
+  color: var(--c-text-dim);
+  font-weight: 700;
+}
+
+.record-table td.lead {
+  color: var(--c-text-dim);
+  text-align: left;
+}
+
+/* ── 图注 ── */
+.fig-note {
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* ── 纸带图（从 2.2-2.3 搬来的逐差法两页） ── */
+.tape-figure {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.tape-figure svg {
+  width: 100%;
+  max-width: 26rem;
+  height: auto;
+}
+
+/* ── 坐标图：撑满所在栏 ── */
+.graph-box {
+  width: 100%;
+  max-width: 415px;
+  margin: 0 auto;
+}

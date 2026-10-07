@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════════════
+   质点与参考系·时间与位移 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 本课特有的提问行：大图标 + 一段话，两段式排布 ──
+   通用 .ask（layout.css）是纯文本行；本课标记固定为「<mdi-xxx /> + <span>」，
+   必须 flex 排布，并清掉通用规则给行内图标留的右外边距（改用 gap 控间距）。 */
+.ask {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.ask > svg {
+  flex-shrink: 0;
+  margin-right: 0;
+}
+
+/* 反例（红）：用于"错误做法"，与强调色区分开 */
+.warn {
+  color: var(--c-danger);
+}
+
+/* 正例（绿）：用于"正确做法"，与反例红 .warn 成对 */
+.good {
+  color: #34d399;
+}
+
+/* 导航示意图（第 6 页）、图像解读（第 13 页）、纸带与 x-t 图（第 18 页）：与其它坐标图同款外框 */
+.nav-map,
+.plot-svg,
+.xt-read {
+  display: block;
+
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--c-border);
+  border-radius: 1.25rem;
+
+  background: rgb(15 20 37 / 40%);
+}
+
+.nav-map text,
+.plot-svg text,
+.xt-read text {
+  font-family: "Times New Roman", "STIX Two Text", "Source Serif 4", Georgia, serif;
+}
+
+/* 打点计时器对比表（第 12 页）：紧凑一些，别把页面撑满 */
+.cmp-table {
+  width: 100%;
+  font-size: 0.78rem;
+}
+
+.cmp-table th {
+  padding: 0.3rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.cmp-table td {
+  padding: 0.28rem 0.9rem;
+}
+
+.cmp-table th:first-child,
+.cmp-table td:first-child {
+  width: 6.5rem;
+  color: var(--c-text-dim);
+}
+
+.cmp-table .katex {
+  font-size: 1em !important;
+}

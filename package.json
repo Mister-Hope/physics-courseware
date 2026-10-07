@@ -1,0 +1,50 @@
+{
+  "name": "physics-courseware",
+  "version": "1.0.0",
+  "private": true,
+  "description": "高中物理交互式课件 — monorepo",
+  "license": "CC-BY-NC-SA-4.0",
+  "type": "module",
+  "scripts": {
+    "build": "unrun scripts/build-all.ts",
+    "create:course": "unrun scripts/create-course.ts",
+    "dev": "unrun scripts/dev.ts",
+    "lint": "oxlint --fix && oxfmt && stylelint **/*.{css,vue} --fix",
+    "postinstall": "unrun scripts/check-skills.ts",
+    "shots": "unrun scripts/shots.ts",
+    "skills:add": "pnpm dlx skills@latest add",
+    "skills:check": "unrun scripts/check-skills.ts",
+    "skills:list": "pnpm dlx skills@latest ls",
+    "skills:restore": "git checkout -- .agents skills-lock.json",
+    "skills:update": "pnpm dlx skills@latest update -p -y",
+    "slide": "unrun scripts/slide.ts",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@inquirer/prompts": "^8.7.3",
+    "@mr-hope/tsconfig": "0.0.4",
+    "@playwright/test": "1.63.0",
+    "oxc-config-hope": "0.3.15",
+    "oxfmt": "0.72.0",
+    "oxlint": "1.87.0",
+    "oxlint-tsgolint": "7.0.2003",
+    "postcss-html": "2.0.0",
+    "stylelint": "17.16.0",
+    "stylelint-config-hope": "12.1.0",
+    "unrun": "^0.3.1",
+    "vite": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.9.1",
+      "onFail": "download"
+    },
+    "runtime": {
+      "name": "node",
+      "version": "^24.18.0",
+      "onFail": "error"
+    }
+  }
+}

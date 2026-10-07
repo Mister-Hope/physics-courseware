@@ -1,0 +1,406 @@
+/* ═══════════════════════════════════════════════
+   实验：探究小车速度随时间变化的规律 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   ═══════════════════════════════════════════════ */
+
+/* 封面：课题名 17 字，3.5rem 会折行、渐变被截断，压到 2.4rem 保持一行 */
+.cover-title {
+  font-size: 2.4rem !important;
+}
+
+/* ── 内容少的页：提问整体放大 ── */
+.ask-big {
+  font-size: 1.5rem;
+}
+
+/* ── 实验操作提示卡（实验室大屏：学生照着做）── */
+.op-banner {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  align-self: flex-start;
+
+  padding: 0.42rem 1.2rem;
+  border: 1px solid rgb(226 168 70 / 28%);
+  border-radius: 2rem;
+
+  background: rgb(226 168 70 / 12%);
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.op-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.op-step {
+  display: grid;
+  grid-template-columns: 2.3rem minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+}
+
+.op-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+
+  background: var(--c-accent);
+  color: #0b1120;
+
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.op-body {
+  padding-top: 0.22rem;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.op-body b {
+  color: var(--c-accent);
+}
+
+/* 五步的「处理数据」页（第 9 页）：步骤多，字号 / 间距 / 序号一起收一档才装得下 */
+.op-list-tight {
+  gap: 0.5rem;
+}
+
+.op-list-tight .op-step {
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.op-list-tight .op-num {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.op-list-tight .op-body {
+  padding-top: 0.15rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+/* 「课堂小结」页（第 16 页）：只有三条要点，字号比正文略大一号即可——别把整页撑爆 */
+.mini-title-lead {
+  font-size: 1.5rem;
+}
+
+.op-list-big {
+  gap: 1.2rem;
+}
+
+.op-list-big .op-step {
+  grid-template-columns: 2.7rem minmax(0, 1fr);
+  gap: 1.2rem;
+}
+
+.op-list-big .op-num {
+  width: 2.7rem;
+  height: 2.7rem;
+  font-size: 1.25rem;
+}
+
+.op-list-big .op-body {
+  padding-top: 0.5rem;
+  font-size: 1.22rem;
+  line-height: 1.7;
+}
+
+/* 危险 / 易错动作：序号球变红 */
+.op-step-warn .op-num {
+  background: var(--c-danger);
+  color: #2a0b0b;
+}
+
+.op-foot {
+  align-self: flex-start;
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── 数据表（10 列，要一页放得下）── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.22rem 0.28rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.data-table th {
+  background: transparent;
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+.data-table td.lead,
+.data-table th.lead {
+  text-align: left;
+}
+
+.data-table .hl {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.data-table .none {
+  color: var(--c-text-dim);
+  opacity: 0.55;
+}
+
+.data-table .unit {
+  color: var(--c-text-dim);
+  font-weight: 400;
+  font-size: 0.92em;
+}
+
+/* 空白记录表：留出书写高度 */
+.data-table-blank td {
+  height: 2.3rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+/* ── 两栏对比（画图规范 / 测量方法）── */
+.compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.compare > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.compare-title {
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.compare-bad .compare-title {
+  color: var(--c-danger);
+}
+
+.compare-good .compare-title {
+  color: var(--c-accent);
+}
+
+.compare-note {
+  margin-top: 0.35rem;
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* ── 数值读数（误差 / 斜率）── */
+.readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  align-items: baseline;
+
+  font-size: 1.05rem;
+}
+
+.readout b {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.readout-blue b {
+  color: var(--c-accent-2);
+}
+
+.problem-note {
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* 图中标注用的小字 */
+.fig-note {
+  color: var(--c-text-dim);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ── 对错图标（第 6 页 / 第 10 页）：比小节标题再大一档，红绿区分 ── */
+.mini-title > svg.ico-bad {
+  color: var(--c-danger);
+  font-size: 1.75rem;
+}
+
+.mini-title > svg.ico-good {
+  color: #34d399;
+  font-size: 1.75rem;
+}
+
+/* 反例（红）/ 正例（绿）：与 `.warn`、`.good` 成对使用（搬自 1.2） */
+.warn {
+  color: var(--c-danger);
+}
+
+.good {
+  color: #34d399;
+}
+
+/* 纸带示意图（第 10 页，搬自 1.2 第 19 页）：与其它坐标图同款外框 */
+.plot-svg {
+  display: block;
+
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--c-border);
+  border-radius: 1.25rem;
+
+  background: rgb(15 20 37 / 40%);
+}
+
+/* ── 第 10 页：居中大图标提问行 ── */
+.ask-center {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.5rem;
+}
+
+.ask-center > svg {
+  flex-shrink: 0;
+  margin-right: 0;
+}
+
+/* ── 第 13 页：从描点到拟合的思考递进（不是并列的编号步骤）── */
+.half-grid-top {
+  align-items: start;
+}
+
+.reason {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.reason::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--c-accent);
+}
+
+/* ── 第 15 页：误差与复核（内容少的页：两张大图标面板 + 放大字号）── */
+.err-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.err-grid > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.err-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.7rem 1.3rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: rgb(15 20 37 / 45%);
+
+  text-align: center;
+}
+
+.err-ico {
+  color: var(--c-accent);
+  font-size: 4.2rem;
+  line-height: 1;
+}
+
+.err-text {
+  font-size: 1.25rem;
+  line-height: 1.75;
+}
+
+.err-text b {
+  color: var(--c-accent);
+}
+
+.err-card-good .err-ico,
+.err-card-good .err-text b {
+  color: var(--c-accent-2);
+}
+
+/* ── 第 17 页：课堂小结之后的思考页（放大提问 + 角落装饰图标）── */
+.think-lead {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  align-self: center;
+
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.think-lead > svg {
+  flex-shrink: 0;
+  font-size: 2.6rem;
+}
+
+.think-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  align-items: center;
+
+  color: var(--c-text);
+
+  font-size: 2rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.think-deco {
+  color: var(--c-accent);
+
+  font-size: 10rem;
+  line-height: 1;
+
+  opacity: 0.14;
+  pointer-events: none;
+}

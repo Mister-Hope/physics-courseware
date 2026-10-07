@@ -1,0 +1,167 @@
+/* ═══════════════════════════════════════════════
+   东北育才 — 公开课通用版式原子（共享 addon）
+   跨课件复用的版式/排版原子；各课如需微调密度，只需在自己的 style.css 里改下面这两个变量
+   （vertical 间距直接决定一页装多少内容，所以保留成变量；其余一律按设计系统统一值）
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* 页面主体行间距 / 纵向堆叠行间距——个别课件按自己的内容密度覆盖 */
+  --page-gap: 1.05rem;
+  --stack-gap: 0.95rem;
+}
+
+/* ── 页面外壳：base-flex 布局（workspace/shared/layouts/base-flex.vue）──
+   正文用 .page-grow 撑满剩余高度时，父级必须是 flex 列。 */
+.slidev-layout.base-flex {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 2.2rem 1.1rem !important;
+}
+
+.slidev-layout.base-flex h1 {
+  flex: 0 0 auto;
+  margin-bottom: 0.5rem !important;
+  font-size: 1.75rem !important;
+}
+
+/* ── 页面主体：撑满剩余高度（内容少时居中，内容多时向上向下都长满）── */
+.page-grow {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--page-gap);
+  justify-content: center;
+
+  min-height: 0;
+}
+
+/* 密排变体：内容多的页用 */
+.page-grow-tight {
+  gap: 0.5rem;
+}
+
+/* ── 纵向堆叠（栅格列 / 卡片内部的常规容器）── */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap);
+  min-width: 0;
+}
+
+.stack-dense {
+  gap: 0.55rem;
+}
+
+.stack-tight {
+  gap: 0.5rem;
+}
+
+/* ── 两栏 / 三栏栅格 ──
+   minmax(0, 1fr) + 子项 min-width: 0：防止长公式、长链接把列宽撑爆（踩过）。 */
+.half-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.half-grid > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.three-col > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ── 双栏对比：右栏一条细分隔线，代替两张卡片 ── */
+.divider-l {
+  padding-left: 1.6rem;
+  border-left: 1px solid var(--c-border);
+}
+
+/* ── 先问后答：提问（.ask）/ 结论（.key）──
+   .key 的左侧竖线只给"这一页的落点"用，一页最多一处。 */
+.ask {
+  color: var(--c-text);
+  font-weight: 700;
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.ask > svg {
+  vertical-align: -0.15em;
+  margin-right: 0.4rem;
+  color: var(--c-accent);
+}
+
+.key {
+  padding-left: 1rem;
+  border-left: 3px solid var(--c-accent);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.key-blue {
+  border-left-color: var(--c-accent-2);
+}
+
+.key-danger {
+  border-left-color: var(--c-danger);
+}
+
+/* 内容少的页：结论/提问整体放大 */
+.key-lead {
+  font-size: 1.16rem;
+  line-height: 1.6;
+}
+
+.ask-lead {
+  font-size: 1.24rem;
+}
+
+/* 习题题干：与 .key 同款竖线，蓝色（历史命名，沿用各课现有标记） */
+.problem {
+  padding-left: 1rem;
+  border-left: 3px solid var(--c-accent-2);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+/* ── 小节标题 / 小字注释 ── */
+.mini-title {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
+
+  color: var(--c-text);
+
+  font-weight: 700;
+  font-size: 1.28rem;
+}
+
+.mini-title > svg {
+  color: var(--c-accent-2);
+}
+
+.mini-note {
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* ── 小结行 ── */
+.summary-line {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}

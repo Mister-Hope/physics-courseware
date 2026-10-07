@@ -1,0 +1,229 @@
+/* ═══════════════════════════════════════════════
+   匀变速直线运动的速度、位移与时间的关系 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课推导步骤多：栏内行间距比通用值略紧 */
+:root {
+  --stack-gap: 0.85rem;
+}
+
+/* ── 封面：课题名 18 字，压字号分两行，避免折行截断渐变 ── */
+.cover-title {
+  font-size: 2.45rem !important;
+  line-height: 1.22 !important;
+  letter-spacing: 0.03em !important;
+}
+
+/* ── 判据 / 法则栏 ── */
+.law {
+  text-align: center;
+}
+
+.law-icon {
+  color: var(--c-accent);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.law-title {
+  margin-top: 0.4rem;
+  color: var(--c-text);
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.law-note {
+  margin-top: 0.35rem;
+  color: var(--c-text-dim);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+/* ── 识图页：三条 v-t 线的标签（颜色与图中线一致） ── */
+.vt-note {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.vt-chip {
+  flex: 0 0 auto;
+
+  width: 0.85rem;
+  height: 0.2rem;
+  margin-top: 0.62rem;
+  border-radius: 2px;
+}
+
+.vt-chip-gold {
+  background: var(--c-accent);
+}
+
+.vt-chip-blue {
+  background: var(--c-accent-2);
+}
+
+.vt-chip-teal {
+  background: var(--c-physics);
+}
+
+/* 图容器：让 SVG 把所在栏的宽度用满 */
+.vt-figure {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.vt-figure svg {
+  width: 100%;
+  height: auto;
+}
+
+/* 题源小字 */
+.problem-source {
+  display: block;
+
+  margin-top: 0.25rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── "卷面上这样写"示范块 ── */
+.sheet {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-accent);
+  border-radius: var(--radius-sm);
+
+  background: rgb(15 20 37 / 50%);
+
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.sheet-title {
+  margin-bottom: 0.35rem;
+  color: var(--c-accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+/* ── 卷面红线 ── */
+.warn-title {
+  color: var(--c-danger);
+}
+
+.warn-title > svg {
+  color: var(--c-danger);
+}
+
+.warn-text {
+  padding-left: 1rem;
+  border-left: 3px solid var(--c-danger);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* ── 公式总览：三栏，每栏一个公式 + "不含谁" ── */
+.formula-item {
+  padding-top: 0.5rem;
+  border-top: 2px solid var(--c-border);
+  text-align: center;
+}
+
+.formula-item-accent {
+  border-top-color: var(--c-accent);
+}
+
+.formula-name {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+}
+
+.formula-note {
+  margin-top: 0.3rem;
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+/* ── 步骤列表（解题四步）── */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.step {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.step-no {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.1rem;
+  border: 1px solid rgb(226 168 70 / 35%);
+  border-radius: 50%;
+
+  background: rgb(226 168 70 / 14%);
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* ── 标题位：先放问题，推导完成后再换成标题 ──
+   两个元素绝对定位叠在同一个槽里，切换时不产生任何位移。 */
+.title-slot {
+  position: relative;
+  flex: 0 0 auto;
+  height: 2.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.title-slot > * {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+}
+
+.slot-title {
+  color: var(--c-text);
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+}
+
+/* ── 纸带示意图：压扁 + 收窄，给正文腾出竖向空间 ── */
+.tape-figure {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.tape-figure svg {
+  width: 100%;
+  max-width: 26rem;
+  height: auto;
+}

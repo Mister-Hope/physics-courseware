@@ -1,0 +1,57 @@
+/* ═══════════════════════════════════════════════
+   曲线运动 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 引课 / 提问页的居中大问句 */
+.ask-hero {
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1.6;
+}
+
+/* 页面小标签（「定义」「结论」）：空页靠标签 + 图标撑场面，不靠把字放大 */
+.hero-tag {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  align-self: center;
+
+  padding: 0.28rem 1rem;
+  border: 1px solid rgb(226 168 70 / 35%);
+  border-radius: 999px;
+
+  background: rgb(226 168 70 / 8%);
+  color: #e2a846;
+
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* 定义卡：比正文略大一点就够 */
+.card-hero {
+  font-size: 1.35rem;
+  line-height: 1.75;
+  text-align: center;
+}
+
+/* 结论页：一页只留一句落点，比正文大一点点即可 */
+.key-hero {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+/* 交互演示：下面还要放说明文字，图宽收一档才装得进正文区 */
+.demo-wrap {
+  width: min(66%, 38rem);
+  min-width: 0;
+  margin: 0 auto;
+}
+
+/* 文字更多一行的演示页（牛二 → 分解 a）再收一档 */
+.demo-wrap-md {
+  width: min(60%, 34rem);
+  min-width: 0;
+  margin: 0 auto;
+}

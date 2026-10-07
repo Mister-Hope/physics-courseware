@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════════
+   运动的合成与分解 — 课程特有样式
+   通用设计系统已在 workspace/shared（共享 addon）里，这里只放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 本课图多、公式多，纵向密度比默认略紧 ── */
+:root {
+  --page-gap: 0.8rem;
+  --stack-gap: 0.7rem;
+}
+
+/* ── 内容少的页面（提问页、小结页）：把正文放大一档，别让下半页空着 ── */
+.page-loose {
+  font-size: 1.18rem;
+  line-height: 1.8;
+}
+
+.page-loose .ask {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+/* ── 通用栅格（子项 min-width: 0，防止长公式撑爆列宽）── */
+.grid-2,
+.grid-3 {
+  display: grid;
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-2 > *,
+.grid-3 > * {
+  min-width: 0;
+}
+
+.grid-side {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+
+.grid-side > * {
+  min-width: 0;
+}
+
+/* ── 图容器：svg 占满所在栏 ── */
+.figure {
+  min-width: 0;
+}
+
+.figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── 引课页：三个场景 ── */
+.scene {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+
+  text-align: center;
+}
+
+.scene-icon {
+  color: var(--c-accent);
+  font-size: 2.6rem;
+}
+
+.scene-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.scene-desc {
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ── 例题：步骤行 ── */
+.ex-step {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
