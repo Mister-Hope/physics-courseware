@@ -4,20 +4,29 @@
 
 ```bash
 E2E_COURSE=<slug> pnpm exec playwright test e2e/layout-overflow.spec.ts   # 只测一个课件（约 1.5–2 分钟）
-pnpm test:e2e                                                             # 全部课件（4 个约 6–7 分钟）
+pnpm test:e2e                                                             # 全部课件，**限流跑**（默认同时 4 个，见下）
+E2E_CONCURRENCY=2 pnpm test:e2e                                           # 换并发上限（本机内存小就调小）
 E2E_STRICT_STABILITY=1 E2E_STRICT_BLOCK_FIT=1 E2E_STRICT_WHITESPACE=1 …    # 严格模式：把"警告"变成失败
 E2E_PAGES="14,15-17" E2E_COURSE=<slug> …                                   # 只检查指定页（支持 3 或 14,15-17）
 E2E_BASE_PORT=30701 …                                                      # 只有"同一个课件"被两个进程同时跑时才需要（端口按课件固定分配，不同课件不冲突）
 ```
 
+`pnpm test:e2e` 走 `scripts/e2e.ts` 这个**限流调度器**：同时最多 `E2E_CONCURRENCY` 个课件（默认 **4**），
+哪个课件跑完就立刻补下一个（滑动窗口）。**本地和 CI 都走它**——因为 Playwright 的 `webServer` 会在跑任何用例之前
+把**所有**课件的 dev server 一次性启动，而单个 Slidev dev server 实测 **≈550MB**：25 个课件一起起 ≈13.6GB，
+本地 / CI（4 核 16GB）都会被撑爆（CI 上表现为跑到一半 `SIGTERM`、exit 143）。
+调度器自己按窗口起/停 server，再带 `E2E_NO_WEBSERVER=1` 调 Playwright（配置见 `playwright.config.ts`）；
+课件列表自动发现，**新增课件不用登记、也不用改分片名单**。
+
 自动为每个课件起 Slidev 服务，在 **1280×720（16:9）** 视口下逐页检查（画布 = 980×552 逻辑像素）。
 产出（**按课件分家，多个 AI 进程同时跑不同课件不会互相覆盖/删除**，规则见 `e2e/artifacts.ts`）：
 
-| 运行方式                          | 报告落在                                                                                                     |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| 单课件（`E2E_COURSE=<slug>`）     | `courses/<slug>/.temp/layout-overflow/`：`layout-overflow.md` + `.json` + `screenshots/`（红框标出问题元素） |
-| 一次跑多个课件（`pnpm test:e2e`） | `e2e/reports/layout-overflow/`（同一进程在写，不会再分家）                                                   |
-| `pnpm shots <slug> …`             | `courses/<slug>/.temp/shots/p<页号>-c<点击数>.png`（控制台打印绝对路径）                                     |
+| 运行方式                                    | 报告落在                                                                                                     |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 单课件（`E2E_COURSE=<slug>`）               | `courses/<slug>/.temp/layout-overflow/`：`layout-overflow.md` + `.json` + `screenshots/`（红框标出问题元素） |
+| `pnpm test:e2e`（限流调度器，逐课件跑）     | 同上：每个课件一个独立的 Playwright 进程，报告跟着课件落在各自的 `courses/<slug>/.temp/`                     |
+| 旧行为：`pnpm exec playwright test`（全起） | `e2e/reports/layout-overflow/`（只在内存够的机器上用；`pnpm shots` 等单课件命令不受影响）                    |
+| `pnpm shots <slug> …`                       | `courses/<slug>/.temp/shots/p<页号>-c<点击数>.png`（控制台打印绝对路径）                                     |
 
 - 这些目录都已 gitignore，不用清理；**注意版面检查开跑会清空自己的报告目录**（所以它和 `shots/` 分开、单课件时也只清自己课件下的）；
 - 同一个课件被两个进程同时跑时，用 `E2E_ARTIFACT_DIR=<别的路径>` 岔开产物。

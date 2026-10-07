@@ -37,15 +37,20 @@ export default defineConfig({
     screenshot: "off",
     video: "off",
   },
-  webServer: courses.map((course) => ({
-    command: `pnpm --filter ${course.packageName} exec slidev --base /${course.slug}/ --port ${course.port}`,
-    url: course.baseURL,
-    // 刻意不复用已有服务：Slidev 在启动时解析 addon 组件，复用旧进程会拿到过期的组件表，
-    // 结果是"改了文件但测的是旧状态"（曾因此把 12 个已修好的页面报成渲染失败）。
-    // 端口被占用时 Playwright 会直接报错，比静默复用安全。
-    reuseExistingServer: false,
-    timeout: 180_000,
-    stdout: "ignore" as const,
-    stderr: "pipe" as const,
-  })),
+  // `E2E_NO_WEBSERVER=1` 时**不**由 Playwright 起 dev server：`pnpm test:e2e`（scripts/e2e.ts）是限流调度器，
+  // 它自己按并发上限逐个起/停 server（一次只放行 N 个课件），起完再调本配置跑该课件的用例。
+  // 不加这条限制，这里会把**全部**课件的 server 一次性拉起来 —— 单个 ≈550MB，25 个 ≈13.6GB，直接把机器/runner 打爆。
+  webServer: process.env.E2E_NO_WEBSERVER
+    ? []
+    : courses.map((course) => ({
+        command: `pnpm --filter ${course.packageName} exec slidev --base /${course.slug}/ --port ${course.port}`,
+        url: course.baseURL,
+        // 刻意不复用已有服务：Slidev 在启动时解析 addon 组件，复用旧进程会拿到过期的组件表，
+        // 结果是"改了文件但测的是旧状态"（曾因此把 12 个已修好的页面报成渲染失败）。
+        // 端口被占用时 Playwright 会直接报错，比静默复用安全。
+        reuseExistingServer: false,
+        timeout: 180_000,
+        stdout: "ignore" as const,
+        stderr: "pipe" as const,
+      })),
 });

@@ -18,7 +18,7 @@
     "skills:restore": "pnpm dlx skills@latest experimental_install",
     "skills:update": "pnpm dlx skills@latest update -p -y",
     "slide": "unrun scripts/slide.ts",
-    "test:e2e": "playwright test",
+    "test:e2e": "unrun scripts/e2e.ts",
     "test:e2e:install": "playwright install chromium"
   },
   "devDependencies": {
