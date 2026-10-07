@@ -7,9 +7,9 @@ import { computed } from "vue";
  *
  * - `mode="squat"`：下蹲——先加速下降（视重变小）→ 后减速下降（视重变大）→ 静止；
  * - `mode="rise"`：由蹲姿站起——先加速上升（视重变大）→ 后减速上升（视重变小）→ 静止；
- * - 跟随翻页分步：1 出曲线 → 2 出分段与 mg 参考线 → 3 出"失重 / 超重"判读。
+ * - 跟随翻页分步：1 出曲线 → 2 出分段、mg 参考线与着色波瓣 → 3 出极值点与"失重 / 超重"判读。
  *
- * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；分段线、文字判读放在 `#overlay` 插槽里。
+ * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；分段线、面积着色、文字判读放在 `#overlay` 插槽里。
  */
 const { mode = "squat" } = defineProps<{ mode?: "squat" | "rise" }>();
 
@@ -40,6 +40,25 @@ const curveAt = (t: number): number => {
   return MG + second * Math.sin((Math.PI * (t - 1.2)) / 0.8);
 };
 
+/** 生成区间 [tStart, tEnd] 上曲线 F(t) 与水平线 F = MG 围成的闭合填充路径 */
+const buildLobePath = (
+  tStart: number,
+  tEnd: number,
+  mapX: (v: number) => number,
+  mapY: (v: number) => number,
+): string => {
+  const n = 48;
+  const pts: string[] = [`M ${mapX(tStart).toFixed(2)} ${mapY(MG).toFixed(2)}`];
+
+  for (let i = 1; i <= n; i++) {
+    const t = tStart + ((tEnd - tStart) * i) / n;
+    pts.push(`L ${mapX(t).toFixed(2)} ${mapY(curveAt(t)).toFixed(2)}`);
+  }
+
+  pts.push(`L ${mapX(tEnd).toFixed(2)} ${mapY(MG).toFixed(2)} Z`);
+  return pts.join(" ");
+};
+
 const curves = computed(() => {
   const list = [];
 
@@ -63,11 +82,15 @@ const curves = computed(() => {
 
 interface Phase {
   readonly mid: number;
+  readonly tRange: readonly [number, number];
   readonly label: string;
+  /** 极值点对应的力传感器读数（N） */
+  readonly peakY?: number;
   /** 判读标注画在曲线极值的外侧：below 指画在下凹处下方 */
   readonly tag?: string;
   readonly tagSide?: "below" | "above";
   readonly tagColor?: string;
+  readonly fillColor?: string;
 }
 
 const phases = computed<readonly Phase[]>(() => {
@@ -75,14 +98,52 @@ const phases = computed<readonly Phase[]>(() => {
 
   return mode === "squat"
     ? [
-        { mid: 0.8, label: first, tag: "失重", tagSide: "below", tagColor: "#60a5fa" },
-        { mid: 1.6, label: "减速下降", tag: "超重", tagSide: "above", tagColor: "#f87171" },
-        { mid: 2.7, label: "静止" },
+        { mid: 0.2, tRange: [0, 0.4], label: "静止" },
+        {
+          mid: 0.8,
+          tRange: [0.4, 1.2],
+          label: first,
+          peakY: 480,
+          tag: "失重",
+          tagSide: "below",
+          tagColor: "#60a5fa",
+          fillColor: "rgba(96, 165, 250, 0.16)",
+        },
+        {
+          mid: 1.6,
+          tRange: [1.2, 2],
+          label: "减速下降",
+          peakY: 720,
+          tag: "超重",
+          tagSide: "above",
+          tagColor: "#f87171",
+          fillColor: "rgba(248, 113, 113, 0.16)",
+        },
+        { mid: 2.7, tRange: [2, X_MAX], label: "静止" },
       ]
     : [
-        { mid: 0.8, label: first, tag: "超重", tagSide: "above", tagColor: "#f87171" },
-        { mid: 1.6, label: "减速上升", tag: "失重", tagSide: "below", tagColor: "#60a5fa" },
-        { mid: 2.7, label: "静止" },
+        { mid: 0.2, tRange: [0, 0.4], label: "静止" },
+        {
+          mid: 0.8,
+          tRange: [0.4, 1.2],
+          label: first,
+          peakY: 720,
+          tag: "超重",
+          tagSide: "above",
+          tagColor: "#f87171",
+          fillColor: "rgba(248, 113, 113, 0.16)",
+        },
+        {
+          mid: 1.6,
+          tRange: [1.2, 2],
+          label: "减速上升",
+          peakY: 480,
+          tag: "失重",
+          tagSide: "below",
+          tagColor: "#60a5fa",
+          fillColor: "rgba(96, 165, 250, 0.16)",
+        },
+        { mid: 2.7, tRange: [2, X_MAX], label: "静止" },
       ];
 });
 </script>
@@ -99,7 +160,18 @@ const phases = computed<readonly Phase[]>(() => {
       :curves="curves"
     >
       <template #overlay="{ x, y, plot, px2user }">
+        <!-- Step 2：分段虚线、超重/失重半透明面积着色、底部阶段名与 mg 基准线标注 -->
         <g v-if="step >= 2">
+          <!-- F(t) 与 mg 之间围成的失重（蓝）/超重（红）面积波瓣 -->
+          <template v-for="phase in phases" :key="`lobe-${phase.mid}`">
+            <path
+              v-if="phase.fillColor"
+              :d="buildLobePath(phase.tRange[0], phase.tRange[1], x, y)"
+              :fill="phase.fillColor"
+            />
+          </template>
+
+          <!-- 三个时刻分界竖直虚线 -->
           <line
             v-for="t0 in [0.4, 1.2, 2]"
             :key="`sep-${t0}`"
@@ -111,20 +183,25 @@ const phases = computed<readonly Phase[]>(() => {
             :stroke-width="1.4 * px2user"
             stroke-dasharray="7 6"
           />
+
+          <!-- 底部各运动阶段文字标注（含 0~0.4s 初始静止段） -->
           <text
             v-for="phase in phases"
             :key="`name-${phase.mid}`"
             :x="x(phase.mid)"
-            :y="plot.bottom - 11 * px2user"
+            :y="plot.bottom - 12 * px2user"
             text-anchor="middle"
-            :font-size="17 * px2user"
-            fill="#94a3b8"
+            :font-size="16 * px2user"
+            font-weight="500"
+            fill="#cbd5e1"
           >
             {{ phase.label }}
           </text>
+
+          <!-- Y 轴侧 mg 水平基准线标签 -->
           <text
-            :x="x(0.08)"
-            :y="y(MG) - 7 * px2user"
+            :x="x(0.06)"
+            :y="y(MG) - 8 * px2user"
             font-family="KaTeX_Math"
             font-style="italic"
             :font-size="17 * px2user"
@@ -137,24 +214,48 @@ const phases = computed<readonly Phase[]>(() => {
           </text>
         </g>
 
+        <!-- Step 3：波峰/波谷极值点、偏离指示虚线与“a 方向 · 超重/失重”判读标签 -->
         <g v-if="step >= 3">
           <template v-for="phase in phases" :key="`tag-${phase.mid}`">
-            <text
-              v-if="phase.tag"
-              :x="x(phase.mid)"
-              :y="phase.tagSide === 'above' ? y(870) : y(360)"
-              text-anchor="middle"
-              :font-size="17 * px2user"
-              :fill="phase.tagColor"
-              stroke="#0f1425"
-              :stroke-width="3 * px2user"
-              paint-order="stroke"
-            >
-              <tspan font-family="KaTeX_Math" font-style="italic">a</tspan>
-              <tspan dx="5">{{ phase.tagSide === "above" ? "向上" : "向下" }}</tspan>
-              <tspan dx="5">·</tspan>
-              <tspan dx="5">{{ phase.tag }}</tspan>
-            </text>
+            <g v-if="phase.tag && phase.peakY !== undefined">
+              <!-- 从 mg 基准线指向波峰/波谷的合力偏离虚线 -->
+              <line
+                :x1="x(phase.mid)"
+                :y1="y(MG)"
+                :x2="x(phase.mid)"
+                :y2="y(phase.peakY)"
+                :stroke="phase.tagColor"
+                :stroke-width="1.6 * px2user"
+                stroke-dasharray="3 3"
+                opacity="0.8"
+              />
+              <!-- 曲线极值点高亮圆点 -->
+              <circle
+                :cx="x(phase.mid)"
+                :cy="y(phase.peakY)"
+                :r="4.6 * px2user"
+                :fill="phase.tagColor"
+                stroke="#0f1425"
+                :stroke-width="1.8 * px2user"
+              />
+              <!-- 紧贴波峰上方 / 波谷下方的判读标签 -->
+              <text
+                :x="x(phase.mid)"
+                :y="phase.tagSide === 'above' ? y(768) : y(408)"
+                text-anchor="middle"
+                :font-size="16.5 * px2user"
+                font-weight="600"
+                :fill="phase.tagColor"
+                stroke="#0f1425"
+                :stroke-width="3.2 * px2user"
+                paint-order="stroke"
+              >
+                <tspan font-family="KaTeX_Math" font-style="italic">a</tspan>
+                <tspan dx="4">{{ phase.tagSide === "above" ? "向上 ↑" : "向下 ↓" }}</tspan>
+                <tspan dx="4">·</tspan>
+                <tspan dx="4">{{ phase.tag }}</tspan>
+              </text>
+            </g>
           </template>
         </g>
       </template>
