@@ -109,7 +109,7 @@ SVG 里的 `font-size` 是 **viewBox 用户单位**，渲染后要乘缩放比�
 （用 `sqrt(dx²+dy²)` 归一化）。静态 SVG 逐条算坐标，组件里写小工具函数：
 
 ```ts
-/** marker 三角形长度（与 markerWidth 一致）：线段回退半个箭头，尖端才正好落在目标点上 */
+/** Marker 三角形长度（与 markerWidth 一致）：线段回退半个箭头，尖端才正好落在目标点上 */
 const ARROW = 12;
 const shaftEnd = (x1: number, y1: number, x2: number, y2: number, size = ARROW) => {
   const dx = x2 - x1;

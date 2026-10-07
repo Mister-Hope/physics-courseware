@@ -302,13 +302,8 @@ html {
 }
 body {
   font-family:
-    "PingFang SC",
-    "Microsoft YaHei",
-    "Hiragino Sans GB",
-    "WenQuanYi Micro Hei",
-    system-ui,
-    -apple-system,
-    sans-serif;
+    "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", system-ui,
+    -apple-system, sans-serif;
   background: linear-gradient(160deg, var(--c-bg) 0%, #0c1122 40%, var(--c-bg-soft) 100%);
 }
 .slidev-layout {

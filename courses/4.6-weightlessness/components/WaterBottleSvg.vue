@@ -4,13 +4,10 @@
  *
  * `falling` 为 false：瓶子静止，水从小孔喷出； `falling` 为 true：瓶子自由下落，水不再从小孔流出（瓶对水没有支持力，水对瓶壁也没有压力）。
  */
-withDefaults(
-  defineProps<{
-    falling?: boolean;
-    label?: string;
-  }>(),
-  { falling: false, label: "" },
-);
+const { falling = false, label = "" } = defineProps<{
+  falling?: boolean;
+  label?: string;
+}>();
 </script>
 
 <template>

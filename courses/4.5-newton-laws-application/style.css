@@ -14,7 +14,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   min-width: 0;
 }
 
@@ -130,7 +129,6 @@
   align-items: center;
 
   padding: 1rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
 
@@ -141,7 +139,6 @@
 
 .case-name {
   color: var(--c-accent-2);
-
   font-weight: 700;
   font-size: 1.1rem;
 }

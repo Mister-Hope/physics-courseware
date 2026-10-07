@@ -7,7 +7,7 @@ const COURSES_DIR = path.join(ROOT, "courses");
 const DIST = path.join(ROOT, "dist");
 /* ── 1. 构建入口网站 ── */
 console.log("\n📦 构建入口网站 ...");
-execSync("pnpm build", { cwd: ROOT, stdio: "inherit" });
+execSync("pnpm run --filter physics-courseware-homepage build", { cwd: ROOT, stdio: "inherit" });
 
 /* ── 2. 遍历 courses/，逐个构建 ── */
 const entries = readdirSync(COURSES_DIR, { withFileTypes: true });

@@ -5,7 +5,7 @@
 //   pnpm dev --list         只打印列表后退出（给 AI 与脚本用）
 //   pnpm dev <标识>         跳过提问直接启动：目录名 / 英文名 / 章节号 / 唯一子串
 //
-// 课件清单与排序以 workspace/homepage/courses.config.ts 为准，未登记的目录补在最后（按章节号数值排序）。
+// 课件清单与排序以 workspace/homepage/src/courses.config.ts 为准，未登记的目录补在最后（按章节号数值排序）。
 
 import { execFileSync } from "node:child_process";
 import path from "node:path";
@@ -64,7 +64,10 @@ const printList = (): void => {
 const start = (target: Target): void => {
   if (target.kind === "homepage") {
     console.log("▶ 启动入口网站（localhost:3030）");
-    execFileSync("pnpm", ["exec", "vite"], { cwd: ROOT_DIR, stdio: "inherit" });
+    execFileSync("pnpm", ["--filter", "physics-courseware-homepage", "dev"], {
+      cwd: ROOT_DIR,
+      stdio: "inherit",
+    });
     return;
   }
 

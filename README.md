@@ -117,8 +117,7 @@ pnpm test:e2e:install      # 首次运行先装 Chromium
 pnpm test:e2e              # 逐页检查所有课件的元素是否超出 16:9 画面
 E2E_COURSE=1.4-acceleration pnpm test:e2e   # 只测某个课件
 
-pnpm build        # 仅构建入口网站
-pnpm build:all    # 构建入口网站 + 全部课件 → dist/
+pnpm build    # 构建入口网站 + 全部课件 → dist/
 pnpm lint         # oxlint --fix + oxfmt + stylelint（slides.md 不参与格式化）
 ```
 

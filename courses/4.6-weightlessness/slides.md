@@ -57,7 +57,7 @@ clicks: 3
 <div class="ask">力传感器把示数的变化完整地记录了下来。示数为什么会先变小、再变大？</div>
 
 <div class="graph-host">
-<SquatRiseFtGraph mode="squat" :step="$clicks" />
+<SquatRiseFtGraph mode="squat" />
 </div>
 </div>
 
@@ -266,7 +266,7 @@ clicks: 3
 <div class="ask">人由蹲姿站起，示数又会怎样变？</div>
 
 <div class="graph-host">
-<SquatRiseFtGraph mode="rise" :step="$clicks" />
+<SquatRiseFtGraph mode="rise" />
 </div>
 </div>
 

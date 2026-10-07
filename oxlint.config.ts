@@ -112,6 +112,14 @@ export default defineHopeConfig(
     plugins: ["vue"],
     rules: { "vue/max-props": ["warn", { maxProps: 12 }] },
   },
+  // 课件里的交互图组件同样带多个互相独立的"显示开关"（`showForces` / `showMotion` / `speedDir` /
+  // `accelDir` / `fnRatio` …），扁平 props 是本仓库"题目图"约定的写法（见 AGENTS.md），
+  // 因此与共享原语同理放宽 max-props；仍然设上限，避免真出现一个"万能组件"。
+  {
+    files: ["courses/*/components/*.vue"],
+    plugins: ["vue"],
+    rules: { "vue/max-props": ["warn", { maxProps: 12 }] },
+  },
   // Vue 单文件组件由 SFC 编译器统一按 ES module 处理；组件里可以只有模板 + `defineProps`、
   // 一个 import/export 都没有，会被 `import/unambiguous` 误判成脚本（预设已对 `*.d.ts` 关掉同一规则）。
   {

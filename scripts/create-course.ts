@@ -28,7 +28,7 @@ import type { CourseTemplateContext } from "./course-templates";
 const ROOT_DIR = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT_DIR, "courses");
 const SHARED_ADDON_DIR = path.join(ROOT_DIR, "workspace/shared");
-const CONFIG_PATH = path.join(ROOT_DIR, "workspace/homepage/courses.config.ts");
+const CONFIG_PATH = path.join(ROOT_DIR, "workspace/homepage/src/courses.config.ts");
 // 按需目录：先建空目录，用到才往里放文件
 const OPTIONAL_DIRS = ["components", "images"];
 // --name 只给英文名：包名 = `<name>-courseware`，限制成 kebab-case（不允许结尾或连续连字符）

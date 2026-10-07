@@ -6,7 +6,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
-import { textbooks } from "../workspace/homepage/courses.config";
+import { textbooks } from "../workspace/homepage/src/courses.config";
 
 const ROOT_DIR = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT_DIR, "courses");

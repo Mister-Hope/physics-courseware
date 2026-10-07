@@ -7,21 +7,15 @@ import { computed } from "vue";
  *
  * - `mode="squat"`：下蹲——先加速下降（视重变小）→ 后减速下降（视重变大）→ 静止；
  * - `mode="rise"`：由蹲姿站起——先加速上升（视重变大）→ 后减速上升（视重变小）→ 静止；
- * - `step` 跟随翻页：1 出曲线 → 2 出分段与 mg 参考线 → 3 出"失重 / 超重"判读。
+ * - 跟随翻页分步：1 出曲线 → 2 出分段与 mg 参考线 → 3 出"失重 / 超重"判读。
  *
  * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；分段线、文字判读放在 `#overlay` 插槽里。
  */
-const props = withDefaults(defineProps<{ mode?: "squat" | "rise"; step?: number }>(), {
-  mode: "squat",
-});
+const { mode = "squat" } = defineProps<{ mode?: "squat" | "rise" }>();
 
 const { $clicks } = useSlideContext();
 
-const step = computed(() => {
-  const raw = props.step ?? $clicks.value;
-
-  return Math.max(0, Math.min(raw, 3));
-});
+const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
 
 /** M = 60 kg、g = 10 m/s² 时的重力，作为参考线 */
 const MG = 600;
@@ -37,7 +31,7 @@ const VIEW_H = 400;
  * @returns 该时刻力传感器的示数（N）
  */
 const curveAt = (t: number): number => {
-  const first = props.mode === "squat" ? -120 : 120;
+  const first = mode === "squat" ? -120 : 120;
   const second = -first;
 
   if (t < 0.4 || t >= 2) return MG;
@@ -77,9 +71,9 @@ interface Phase {
 }
 
 const phases = computed<readonly Phase[]>(() => {
-  const first = props.mode === "squat" ? "加速下降" : "加速上升";
+  const first = mode === "squat" ? "加速下降" : "加速上升";
 
-  return props.mode === "squat"
+  return mode === "squat"
     ? [
         { mid: 0.8, label: first, tag: "失重", tagSide: "below", tagColor: "#60a5fa" },
         { mid: 1.6, label: "减速下降", tag: "超重", tagSide: "above", tagColor: "#f87171" },
@@ -171,8 +165,8 @@ const phases = computed<readonly Phase[]>(() => {
 <style scoped>
 .sfg-wrap {
   width: 100%;
-  max-width: 620px;
   min-width: 0;
+  max-width: 620px;
   margin: 0 auto;
 }
 </style>

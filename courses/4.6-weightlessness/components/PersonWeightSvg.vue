@@ -9,54 +9,57 @@ import { computed } from "vue";
  * - `enclosure="elevator"` 时加画轿厢与缆绳（例题用）；
  * - `reading` 有值时在秤的显示屏上写出示数（视重）。
  */
-const props = withDefaults(
-  defineProps<{
-    /** 视重 / 重力：决定支持力箭头长度（1 = 等重，<1 失重，>1 超重） */
-    fnRatio?: number;
-    /** 重力箭头长度基准（viewBox 用户单位） */
-    forceLen?: number;
-    /** 加速度方向；none 表示 a = 0 */
-    accelDir?: "down" | "up" | "none";
-    /** 速度方向；none 表示静止 */
-    speedDir?: "down" | "up" | "none";
-    /** 是否显示受力箭头 */
-    showForces?: boolean;
-    /** 是否显示速度 / 加速度箭头 */
-    showMotion?: boolean;
-    /** 画不画电梯轿厢 */
-    enclosure?: "none" | "elevator";
-    /** 秤的示数（N）；不传则不显示 */
-    reading?: number | null;
-  }>(),
-  {
-    fnRatio: 1,
-    forceLen: 85,
-    accelDir: "none",
-    speedDir: "none",
-    showForces: false,
-    showMotion: false,
-    enclosure: "none",
-    reading: null,
-  },
-);
+const {
+  fnRatio = 1,
+  forceLen = 85,
+  accelDir = "none",
+  speedDir = "none",
+  showForces = false,
+  showMotion = false,
+  enclosure = "none",
+  reading = null,
+} = defineProps<{
+  /** 视重 / 重力：决定支持力箭头长度（1 = 等重，<1 失重，>1 超重） */
+  fnRatio?: number;
+  /** 重力箭头长度基准（viewBox 用户单位） */
+  forceLen?: number;
+  /** 加速度方向；none 表示 a = 0 */
+  accelDir?: "down" | "up" | "none";
+  /** 速度方向；none 表示静止 */
+  speedDir?: "down" | "up" | "none";
+  /** 是否显示受力箭头 */
+  showForces?: boolean;
+  /** 是否显示速度 / 加速度箭头 */
+  showMotion?: boolean;
+  /** 画不画电梯轿厢 */
+  enclosure?: "none" | "elevator";
+  /** 秤的示数（N）；不传则不显示 */
+  reading?: number | null;
+}>();
 
 /** 人的几何中心：重力与支持力都从这里起笔 */
 const CO = { x: 160, y: 248 };
 
-const viewBox = computed(() => (props.enclosure === "elevator" ? "0 0 320 400" : "60 118 200 282"));
+const viewBox = computed(() => (enclosure === "elevator" ? "0 0 320 400" : "60 118 200 282"));
 
-const mgEnd = computed(() => ({ x: CO.x, y: CO.y + props.forceLen }));
-const fnEnd = computed(() => ({ x: CO.x, y: CO.y - props.forceLen * props.fnRatio }));
+const mgEnd = computed(() => ({ x: CO.x, y: CO.y + forceLen }));
+const fnEnd = computed(() => ({ x: CO.x, y: CO.y - forceLen * fnRatio }));
 
-/** 箭头半长：长度 62，绕 y = 248 画在人左侧 */
-const motion = (dir: "down" | "up" | "none", x: number) => {
+/**
+ * 速度 / 加速度箭头的起止点：长度 62，绕 y = CO.y 对称画在人左侧
+ *
+ * @param dir 箭头方向；`none` 表示静止、不画
+ * @param x 箭头所在竖线的横坐标
+ * @returns 箭头的起止点；方向为 `none` 时返回 null
+ */
+const motion = (dir: "down" | "up" | "none", x: number): { from: { x: number; y: number }; to: { x: number; y: number } } | null => {
   if (dir === "none") return null;
 
   return dir === "down" ? { from: { x, y: CO.y - 31 }, to: { x, y: CO.y + 31 } } : { from: { x, y: CO.y + 31 }, to: { x, y: CO.y - 31 } };
 };
 
-const speedArrow = computed(() => motion(props.speedDir, 110));
-const accelArrow = computed(() => motion(props.accelDir, 82));
+const speedArrow = computed(() => motion(speedDir, 110));
+const accelArrow = computed(() => motion(accelDir, 82));
 </script>
 
 <template>

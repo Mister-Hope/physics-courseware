@@ -147,7 +147,6 @@ const formulaTex = computed(() => {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-
   font-size: 1.1rem;
 }
 
@@ -195,7 +194,6 @@ const formulaTex = computed(() => {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0.5rem;
-
   width: 100%;
 }
 
@@ -212,6 +210,7 @@ const formulaTex = computed(() => {
   white-space: nowrap;
 
   cursor: pointer;
+
   transition: all 0.16s ease;
 }
 

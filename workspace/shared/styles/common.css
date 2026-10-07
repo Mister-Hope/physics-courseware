@@ -63,13 +63,8 @@ svg:not(.katex svg) {
 body {
   background: linear-gradient(160deg, var(--c-bg) 0%, #0c1122 40%, var(--c-bg-soft) 100%);
   font-family:
-    "PingFang SC",
-    "Microsoft YaHei",
-    "Hiragino Sans GB",
-    "WenQuanYi Micro Hei",
-    system-ui,
-    -apple-system,
-    sans-serif;
+    "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", system-ui,
+    -apple-system, sans-serif;
 }
 
 .slidev-layout {
@@ -281,6 +276,7 @@ code {
   backdrop-filter: blur(8px);
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- 只设宽高，与上方 `svg:not(.katex svg)` 的字号基准不构成覆盖，属误报 */
 .tag-icon svg {
   width: 1rem;
   height: 1rem;
@@ -296,6 +292,7 @@ code {
   opacity: 0.8;
 }
 
+/* stylelint-disable-next-line no-descending-specificity -- 只设 display/filter/animation，与上方 `svg:not(.katex svg)` 的字号基准不构成覆盖，属误报 */
 .cover-decoration svg {
   display: block;
   height: auto;

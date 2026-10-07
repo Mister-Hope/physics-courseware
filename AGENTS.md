@@ -70,7 +70,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
    - 在此之前**一律不写**（连草稿、连"顺手补两页说明"都不行）：课件一定还会改，这些文档同时迭代＝每轮同步好几处，token 成倍浪费，写完就作废。
    - **"明确"＝教师说出口的指令**；不要用"改动越来越小了"自己判断闸门已开。
 9. **登记与元数据**：`courses.config.ts`（分册 / 标题 / 章节 / 描述 / 标签）由第 4 步脚本自动登记；没带 `--textbook` 时手动补。
-10. **工程收尾**：`E2E_COURSE=<slug> pnpm exec playwright test e2e/layout-overflow.spec.ts` → `pnpm build:all` 确认无报错。
+10. **工程收尾**：`E2E_COURSE=<slug> pnpm exec playwright test e2e/layout-overflow.spec.ts` → `pnpm build` 确认无报错。
 
 **迭代**：不追求一版定稿。每版先自审（视觉 / 逻辑 / 物理准确性），再交给教师预览、主动邀请反馈，循环到教师明确说"可以了"。
 踩过的**通用**坑写回本文件"八"或对应笔记；**迭代过程中的取舍不写进任何文档**（`思路.md` 只放教师原文，要留痕靠 git 提交历史）。
@@ -189,7 +189,7 @@ pnpm create:course  # 生成新课件骨架（--help 看参数）
 pnpm slide          # 🔎 查/读某一页源码（省 token）
 pnpm shots          # 📸 批量截页图（自查视觉）
 pnpm test:e2e       # 端到端检查（四张表）
-pnpm build:all      # 构建入口网站 + 全部课件 → dist/
+pnpm build      # 构建入口网站 + 全部课件 → dist/
 pnpm lint           # oxlint --fix + oxfmt（slides.md 不参与格式化）
 ```
 

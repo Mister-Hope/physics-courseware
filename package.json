@@ -6,8 +6,7 @@
   "license": "CC-BY-NC-SA-4.0",
   "type": "module",
   "scripts": {
-    "build": "vite build",
-    "build:all": "unrun scripts/build-all.ts",
+    "build": "unrun scripts/build-all.ts",
     "create:course": "unrun scripts/create-course.ts",
     "dev": "unrun scripts/dev.ts",
     "lint": "oxlint --fix && oxfmt && stylelint **/*.{css,vue} --fix",
