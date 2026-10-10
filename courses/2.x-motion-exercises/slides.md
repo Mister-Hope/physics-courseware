@@ -5,7 +5,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -18,19 +18,11 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter: 第二章 匀变速直线运动的研究
+lesson: 习题课
 ---
 
-<div class="cover-chapter">第二章习题课</div>
-
-<h1 class="cover-title">运动学综合应用</h1>
-
-<div class="cover-subtitle">
-  <span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverDecorationSvg />
-</div>
+<CoverDecorationSvg />
 
 ---
 clicks: 0

@@ -5,7 +5,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -18,19 +18,11 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter-no: "2.2 · 2.3"
+chapter: 第二章 匀变速直线运动的研究
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 2.2 · 2.3 &nbsp;|&nbsp; 第二章 匀变速直线运动的研究</div>
-
-<h1 class="cover-title">匀变速直线运动的<br />速度、位移与时间的关系</h1>
-
-<div class="cover-subtitle">
-  <span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverDecorationSvg />
-</div>
+<CoverDecorationSvg />
 
 ---
 layout: base-flex
@@ -596,20 +588,15 @@ clicks: 3
 </div>
 
 ---
-layout: cover
+layout: course-cover
+chapter-no: "2.2 · 2.3"
+chapter: 第二章 匀变速直线运动的研究
+lesson: 第二课时
+subtitle: 习题课
+title: 匀变速直线运动的时间、速度、位移扩展
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 2.2 · 2.3 &nbsp;|&nbsp; 第二章 匀变速直线运动的研究 · 第二课时</div>
-
-<h1 class="cover-title">匀变速直线运动的<br />时间、速度、位移扩展</h1>
-
-<div class="cover-subtitle">
-  <span>第二课时 · 习题课 · 原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverDecorationSvg />
-</div>
+<CoverDecorationSvg />
 
 ---
 layout: base-flex

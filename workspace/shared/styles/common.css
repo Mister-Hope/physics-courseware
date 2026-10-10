@@ -300,6 +300,35 @@ code {
   animation: cover-float 6s ease-in-out infinite alternate;
 }
 
+/* 封面布局容器（course-cover）：装饰 SVG 与底部署名都绝对定位在它里面 */
+.course-cover {
+  position: relative;
+}
+
+/* 副标题行与授课信息行之间留一点空隙 */
+.cover-subtitle + .cover-subtitle {
+  margin-top: 0.6rem;
+}
+
+/* 封面最底部居中的固定署名行（14px；父级已有内边距，这里再留 0.5rem） */
+.cover-origin {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+
+  color: var(--c-text-dim);
+
+  font-size: 14px;
+  font-family:
+    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+
+  opacity: 0.45;
+
+  transform: translateX(-50%);
+}
+
 /* ── 占位图片 ── */
 .placeholder-img {
   object-fit: cover;

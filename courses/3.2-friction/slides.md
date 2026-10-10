@@ -5,7 +5,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -18,19 +18,11 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter-no: "3.2"
+chapter: 第三章 相互作用——力
 ---
 
-<div class="cover-chapter">第三章 相互作用——力 · <span class="cover-section">§</span> 3.2</div>
-
-<h1 class="cover-title">摩擦力</h1>
-
-<div class="cover-subtitle">
-  <span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverFrictionSvg />
-</div>
+<CoverFrictionSvg />
 
 ---
 clicks: 2
@@ -293,20 +285,14 @@ clicks: 1
 </div>
 
 ---
-layout: cover
+layout: course-cover
+chapter-no: "3.2"
+chapter: 第三章 相互作用——力
+lesson: 第二课时
+title: 静摩擦力
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 3.2 摩擦力 · 第二课时</div>
-
-<h1 class="cover-title">静摩擦力</h1>
-
-<div class="cover-subtitle">
-  <span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverStaticFrictionSvg />
-</div>
+<CoverStaticFrictionSvg />
 
 ---
 clicks: 3

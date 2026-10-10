@@ -5,7 +5,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -18,19 +18,11 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter-no: "4.2"
+chapter: 第四章 运动和力的关系
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 4.2 · 第四章 运动和力的关系</div>
-
-<h1 class="cover-title">实验：探究加速度与力、质量的关系</h1>
-
-<div class="cover-subtitle">
-  <span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverPlot />
-</div>
+<CoverPlot />
 
 ---
 layout: base-flex
@@ -162,20 +154,14 @@ layout: base-flex
 </div>
 
 ---
-layout: cover
+layout: course-cover
+chapter-no: "4.2"
+chapter: 第四章 运动和力的关系
+lesson: 第二课时
+title: 实验：探究加速度与力、质量的关系
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 4.2 · 第四章 运动和力的关系 · 第二课时</div>
-
-<h1 class="cover-title">实验：探究加速度与力、质量的关系</h1>
-
-<div class="cover-subtitle">
-  <span>第二课时 · 原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverPlot />
-</div>
+<CoverPlot />
 
 ---
 layout: base-flex

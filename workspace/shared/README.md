@@ -9,6 +9,7 @@
   - **12 个全局组件的用途与 props 全表**：[`.agents/notes/shared-components.md`](../../.agents/notes/shared-components.md)
   - 三个大组件各有专篇：[坐标轴](../../.agents/notes/coordinate-axes.md)、[弹簧测力计](../../.agents/notes/spring-scale.md)、[手部 `GripHand`](../../.agents/notes/grip-hand.md)
 - `base-flex` 布局（`layouts/base-flex.vue`）— 通用页面外壳：flex 列 + 收紧内边距；撑满整页的正文（`.page-grow`）依赖它
+- `course-cover` 布局（`layouts/course-cover.vue`）— 封面专用：`chapter-no` / `chapter` / `lesson` / `subtitle` / `classroom` / `teacher`（默认张伯望），课题名取本页 `title`，装饰 SVG 走默认插槽；底部固定一行 14px 的「原创：东北育才学校 张伯望」（各课件不要再手写封面 HTML）
 - 通用设计系统 `common.css` — 玻璃态卡片、聊天气泡、动效、封面样式等
 - 通用版式原子 `layout.css` — `.page-grow` / `.stack` / `.half-grid` / `.three-col` / `.divider-l` / `.ask` / `.key` / `.mini-title` / `.mini-note` 等
 - `logo.png` — 学校 logo（组件内自动引入）

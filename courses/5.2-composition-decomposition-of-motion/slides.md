@@ -5,7 +5,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -17,19 +17,11 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter-no: "5.2"
+chapter: 第五章 抛体运动
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 5.2</div>
-
-<h1 class="cover-title">运动的合成与分解</h1>
-
-<div class="cover-subtitle">
-<span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
 <CoverDecorationSvg />
-</div>
 
 ---
 layout: base-flex

@@ -26,7 +26,7 @@
 ```text
 workspace/                 ← 工程代码
   homepage/courses.config.ts   ← 课件注册表（唯一来源：入口网站与 E2E 都读它）
-  shared/                      ← 共享 addon（顶栏/底栏组件、layouts/base-flex、styles/、logo）
+  shared/                      ← 共享 addon（顶栏/底栏组件、layouts/（base-flex、course-cover）、styles/、logo）
 resources/textbooks/           ← 人教版教材 Markdown（必修 1–13 章齐全；选必待录入）
   init-slidev-courseware/      ← 给"不懂代码的老教师"的独立课件生成工具（平行工具，不读本仓库资源）
 courses/<slug>/                ← 一课一目录、一节课（40 分钟）
@@ -83,15 +83,20 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 - **玻璃态**卡片（`backdrop-filter: blur(16px)` + 半透明）、大圆角 `1.25–1.75rem`；配色：深蓝渐变背景 `#090d1a → #0c1122 → #0f1425`，强调暖金 `#e2a846`、深蓝 `#3b82f6`，正电红 `#f87171`、负电蓝 `#60a5fa`
 - **字号**：正文基准 22px，封面标题 ~3.5rem，最小不低于 0.65rem；**小节标题必须明显大于正文**（如 `.mini-title` 1.28rem）
 - **字体**：只用系统字体，**禁止 Google Fonts**（大陆不可用）
-- **封面署名固定**：第一页副标题固定写「原创：东北育才学校 张伯望」（不再单独写「授课教师」行与学校行），logo 用 `shared/assets/logo.png`（新课件不要问）
+- **封面统一用共享布局 `course-cover`**（`workspace/shared/layouts/course-cover.vue`，⛔ **不要再手写封面 HTML**）：headmatter 写
+  `layout: course-cover`，再给 `chapter-no`（章节编号，如 `1.1`）/ `chapter`（章名称，如 `第一章 运动的描述`）/ `lesson`（课时，如 `第二课时`，可省）/
+  `subtitle`（本课时讲什么，可省）/ `classroom`（授课教室，可省）/ `teacher`（授课教师，默认张伯望）；**课题名取本页 `title`**（第一页就是 headmatter 的
+  `title`，第二课时封面在该页 frontmatter 里另写 `title`）；装饰 SVG 作为页面内容传进去（默认插槽，如 `<CoverDecorationSvg />`）。
+  渲染出来是：章节行 → 课题名 →（副标题行）→「**授课教师：<姓名>**」行 → 最底部居中一行 **14px 的「原创：东北育才学校 张伯望」**。
+  校徽 logo 由共享顶栏带上（`shared/assets/logo.png`，新课件不要问）
 - **顶栏**：封面左显示章节名、内页左显示课题名，右侧恒显校徽；**页脚只有两侧渐隐装饰线，不显示页码**
 - **转场** `transition: fade`；内容呈现用 `v-click`（**点击节奏与交互组件的规则见 interactions 笔记**）
 - **页面外壳固定 `layout: base-flex`**：共享 addon 注册的通用布局（flex 列 + 收紧内边距），headmatter 里写
-  `defaults: { layout: base-flex }`（封面/居中页等单独声明 `cover` / `center`）。**只有它能让 `.page-grow` 撑满**。
+  `defaults: { layout: base-flex }`（封面声明 `course-cover`、居中页等单独声明 `center`）。**只有它能让 `.page-grow` 撑满**。
 - **卡片克制**：只有**定义**才用 `.card`，一份课件 ≤15 个；提问用 `.ask`、结论用 `.key`、双栏用 `.divider-l`、习题不用卡片（写法见 layout 笔记）。
   **这些通用原子已在共享 addon 的 `workspace/shared/styles/layout.css`，本课 `style.css` 不要再复制**；只有密度要微调时改 `:root` 的 `--page-gap` / `--stack-gap`。
   **`.key` 那种"左侧一条彩色竖线"也别滥用**：只给**这一页的落点**（结论/规范）用，**一页最多一处**；公式、并列条目、叙述、图注一律不用——给公式套个装饰框线没有任何信息量。
-- **一页一课时**：一个 `courses/<slug>` = 一节课（40 分钟）；题量大就做成"一个课件、两课时"（第二课时另起 `layout: cover` 封面，页码接续）
+- **一页一课时**：一个 `courses/<slug>` = 一节课（40 分钟）；题量大就做成"一个课件、两课时"（第二课时另起 `layout: course-cover` 封面，页码接续，并在该页 frontmatter 里写自己的 `title` / `lesson`）
 - **一个标题可跨多页**：同一环节连续多页用同一个标题，不要写"（续）"
 - **版面要"占满"**：正文包 `.page-grow`，内容少就放大字号/图，内容多就拆页——**但不许溢出、不许顶到大标题上**（详见 layout 笔记）
 - **图必须"占满"、字必须给足**：坐标图/示意图一律把所在栏的宽高用满——**内容少时先放大图，不要留白**；图偏扁＝白白浪费后排的可见面积。

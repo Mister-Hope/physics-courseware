@@ -5,7 +5,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -18,19 +18,11 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter-no: "1.2"
+chapter: 第一章 运动的描述
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> 1.2 · 第一章 运动的描述</div>
-
-<h1 class="cover-title">时间 位移</h1>
-
-<div class="cover-subtitle">
-  <span>原创：东北育才学校 张伯望</span>
-</div>
-
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <CoverDecorationSvg />
-</div>
+<CoverDecorationSvg />
 
 ---
 layout: base-flex

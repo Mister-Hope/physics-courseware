@@ -28,9 +28,6 @@ const SCHOOL = "东北育才学校";
 const escapeAttribute = (value: string): string =>
   value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
 
-const escapeText = (value: string): string =>
-  value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-
 // 骨架里不写死任何物理内容：只给结构、注释和待办，避免 AI 顺着占位内容编造。
 export const renderPackageJson = (context: CourseTemplateContext): string =>
   `${JSON.stringify(
@@ -63,7 +60,7 @@ titleTemplate: '%s'
 highlighter: shiki
 transition: fade
 mdc: true
-layout: cover
+layout: course-cover
 colorSchema: dark
 clickAnimation: card
 addons:
@@ -76,25 +73,17 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
+chapter-no: ${JSON.stringify(context.chapter)}
+chapter: ${JSON.stringify(context.chapterLabel)}
 ---
 
-<div class="cover-chapter"><span class="cover-section">§</span> ${escapeText(context.chapter)}</div>
-
-<h1 class="cover-title">${escapeText(context.chapterName)}</h1>
-
-<div class="cover-subtitle">
-  <span>原创：${SCHOOL} ${TEACHER}</span>
-</div>
-
 <!-- 封面装饰：占位图形，请按本课主题替换（坐标轴 / 标签规范见 AGENTS.md「四、技术约定与已知坑」） -->
-<div class="cover-decoration abs-br m-8" aria-hidden="true">
-  <svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
-    <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
-    <circle cx="118" cy="32" r="5" fill="#e2a846"/>
-    <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
-  </svg>
-</div>
+<svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
+  <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
+  <circle cx="118" cy="32" r="5" fill="#e2a846"/>
+  <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
+</svg>
 
 ---
 layout: base-flex

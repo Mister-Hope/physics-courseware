@@ -92,6 +92,13 @@ export default defineHopeConfig(
     plugins: ["vue"],
     rules: { "vue/max-props": ["warn", { maxProps: 12 }] },
   },
+  // 共享 addon 的布局同样是**设计系统原语**（封面要接章名 / 编号 / 课时 / 副标题 / 授课信息，外加 Slidev 附带的完整
+  // frontmatter），字段天然比业务组件多；与上面两类组件同理放宽 max-props，仍然设上限。
+  {
+    files: ["workspace/shared/layouts/*.vue"],
+    plugins: ["vue"],
+    rules: { "vue/max-props": ["warn", { maxProps: 12 }] },
+  },
   // 课件里的交互图组件同样带多个互相独立的"显示开关"（`showForces` / `showMotion` / `speedDir` /
   // `accelDir` / `fnRatio` …），扁平 props 是本仓库"题目图"约定的写法（见 AGENTS.md），
   // 因此与共享原语同理放宽 max-props；仍然设上限，避免真出现一个"万能组件"。
