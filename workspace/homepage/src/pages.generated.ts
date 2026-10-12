@@ -26,5 +26,5 @@ export const coursePages: Record<string, number> = {
   "5.1-curvilinear-motion": 22,
   "5.2-composition-decomposition-of-motion": 38,
   "5.3-projectile-motion-experiment": 15,
-  "5.4-projectile-motion": 37
+  "5.4-projectile-motion": 37,
 };

@@ -67,10 +67,7 @@ const title = computed(() => frontmatter?.title ?? "");
 /** 章节行 = 章名称 [· 课时]；编号单独渲染，§ 走 `.cover-section` 的字号 */
 const chapterText = computed(() => [chapter, lesson].filter(Boolean).join(" · "));
 
-/**
- * 授课教师：URL 的 ?teacher（主页「我要上课」生成，随链接可携带/可分享）优先，
- * 其次用 frontmatter / props 里的 teacher（默认张伯望）。
- */
+/** 授课教师：URL 的 ?teacher（主页「我要上课」生成，随链接可携带/可分享）优先， 其次用 frontmatter / props 里的 teacher（默认张伯望）。 */
 const displayTeacher = computed(() => lessonParams.teacher || teacher);
 </script>
 

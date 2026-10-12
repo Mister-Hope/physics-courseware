@@ -294,8 +294,7 @@ body {
   border: 1px solid var(--c-border-glow);
   border-radius: 999px;
 
-  background:
-    linear-gradient(135deg, rgb(226 168 70 / 18%) 0%, rgb(59 130 246 / 12%) 100%);
+  background: linear-gradient(135deg, rgb(226 168 70 / 18%) 0%, rgb(59 130 246 / 12%) 100%);
   color: var(--c-accent);
 
   font-weight: 600;
@@ -346,8 +345,7 @@ body {
   border: 1px solid rgb(148 163 184 / 16%);
   border-radius: var(--radius-xl);
 
-  background:
-    linear-gradient(160deg, rgb(15 20 37 / 96%) 0%, rgb(9 13 26 / 96%) 100%);
+  background: linear-gradient(160deg, rgb(15 20 37 / 96%) 0%, rgb(9 13 26 / 96%) 100%);
   box-shadow:
     0 24px 64px rgb(0 0 0 / 45%),
     0 0 0 1px rgb(226 168 70 / 8%);

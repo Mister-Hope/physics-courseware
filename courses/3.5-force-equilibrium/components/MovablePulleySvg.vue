@@ -37,7 +37,7 @@ const tanAlpha = computed<number>(() => sinAlpha.value / cosAlpha.value);
 const alphaRad = computed<number>(() => Math.asin(clamp(sinAlpha.value, 0, 0.98)));
 
 /** 动滑轮圆心 P(x_P, y_P)：满足两侧绳长之和 = L 且与竖直方向夹角严格相等 α = β */
-const P = computed<Point>(() => {
+const pointP = computed<Point>(() => {
   const dx = bx.value - LEFT_ANCHOR.x;
   const verticalSpan = Math.sqrt(Math.max(1, ROPE_LEN ** 2 - dx ** 2));
   const py = (LEFT_ANCHOR.y + by.value + verticalSpan) / 2;
@@ -52,16 +52,16 @@ const tLen = computed<number>(() => T_SCALE / (2 * cosAlpha.value));
 
 /** 三个力矢量的终点坐标 */
 const leftTip = computed<Point>(() => ({
-  x: P.value.x - tLen.value * sinAlpha.value,
-  y: P.value.y - tLen.value * cosAlpha.value,
+  x: pointP.value.x - tLen.value * sinAlpha.value,
+  y: pointP.value.y - tLen.value * cosAlpha.value,
 }));
 const rightTip = computed<Point>(() => ({
-  x: P.value.x + tLen.value * sinAlpha.value,
-  y: P.value.y - tLen.value * cosAlpha.value,
+  x: pointP.value.x + tLen.value * sinAlpha.value,
+  y: pointP.value.y - tLen.value * cosAlpha.value,
 }));
 const mgTip = computed<Point>(() => ({
-  x: P.value.x,
-  y: P.value.y + MG_LEN,
+  x: pointP.value.x,
+  y: pointP.value.y + MG_LEN,
 }));
 
 /** 两侧拉力标注 T 的外侧偏移坐标（置于箭头尖端外侧，绝不侵入 α、β 角扇区） */
@@ -76,23 +76,23 @@ const rightTLabel = computed<Point>(() => ({
 
 /** 夹角圆弧半径与角平分线上的 α、β 标注坐标（始终位于 T 箭头上方且严格居中于角平分线） */
 const arcR = computed<number>(() => Math.max(58, Math.round(tLen.value + 13)));
-const vertTopY = computed<number>(() => P.value.y - arcR.value - 22);
+const vertTopY = computed<number>(() => pointP.value.y - arcR.value - 22);
 
 const alphaArcPath = computed<string>(() => {
   const r = arcR.value;
-  const startX = P.value.x;
-  const startY = P.value.y - r;
-  const endX = P.value.x - r * sinAlpha.value;
-  const endY = P.value.y - r * cosAlpha.value;
+  const startX = pointP.value.x;
+  const startY = pointP.value.y - r;
+  const endX = pointP.value.x - r * sinAlpha.value;
+  const endY = pointP.value.y - r * cosAlpha.value;
   return `M ${startX} ${startY} A ${r} ${r} 0 0 0 ${endX} ${endY}`;
 });
 
 const betaArcPath = computed<string>(() => {
   const r = arcR.value;
-  const startX = P.value.x;
-  const startY = P.value.y - r;
-  const endX = P.value.x + r * sinAlpha.value;
-  const endY = P.value.y - r * cosAlpha.value;
+  const startX = pointP.value.x;
+  const startY = pointP.value.y - r;
+  const endX = pointP.value.x + r * sinAlpha.value;
+  const endY = pointP.value.y - r * cosAlpha.value;
   return `M ${startX} ${startY} A ${r} ${r} 0 0 1 ${endX} ${endY}`;
 });
 
@@ -101,8 +101,8 @@ const alphaLabel = computed<Point>(() => {
   const half = alphaRad.value / 2;
   const r = arcR.value + 13;
   return {
-    x: P.value.x - r * Math.sin(half),
-    y: P.value.y - r * Math.cos(half),
+    x: pointP.value.x - r * Math.sin(half),
+    y: pointP.value.y - r * Math.cos(half),
   };
 });
 
@@ -110,8 +110,8 @@ const betaLabel = computed<Point>(() => {
   const half = alphaRad.value / 2;
   const r = arcR.value + 13;
   return {
-    x: P.value.x + r * Math.sin(half),
-    y: P.value.y - r * Math.cos(half),
+    x: pointP.value.x + r * Math.sin(half),
+    y: pointP.value.y - r * Math.cos(half),
   };
 });
 
@@ -255,11 +255,11 @@ const endDrag = (): void => {
 
     <!-- ==================== 2. 轻绳、竖直参考虚线、夹角 α/β 与动滑轮重物 ==================== -->
     <!-- 两侧轻绳 -->
-    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="P.x" :y2="P.y" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
-    <line :x1="P.x" :y1="P.y" :x2="bx" :y2="by" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
+    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="pointP.x" :y2="pointP.y" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
+    <line :x1="pointP.x" :y1="pointP.y" :x2="bx" :y2="by" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
 
     <!-- 过动滑轮圆心 P 的竖直向上参考虚线 -->
-    <line :x1="P.x" :y1="P.y" :x2="P.x" :y2="vertTopY" stroke="#64748b" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.85" />
+    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="vertTopY" stroke="#64748b" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.85" />
 
     <!-- 左侧夹角 α 圆弧与角平分线标注 -->
     <path :d="alphaArcPath" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" />
@@ -292,18 +292,18 @@ const endDrag = (): void => {
     </text>
 
     <!-- 动滑轮下方吊绳与重物 Mg -->
-    <line :x1="P.x" :y1="P.y" :x2="P.x" :y2="P.y + 52" stroke="#94a3b8" stroke-width="2.2" />
-    <rect :x="P.x - 25" :y="P.y + 52" width="50" height="30" rx="6" fill="rgba(96,165,250,0.16)" stroke="#60a5fa" stroke-width="2" />
+    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="pointP.y + 52" stroke="#94a3b8" stroke-width="2.2" />
+    <rect :x="pointP.x - 25" :y="pointP.y + 52" width="50" height="30" rx="6" fill="rgba(96,165,250,0.16)" stroke="#60a5fa" stroke-width="2" />
 
     <!-- 轻质动滑轮轮体 -->
-    <circle :cx="P.x" :cy="P.y" r="13" fill="rgba(15,20,37,0.88)" stroke="#e2a846" stroke-width="2.6" />
-    <circle :cx="P.x" :cy="P.y" r="3.6" fill="#e2a846" />
+    <circle :cx="pointP.x" :cy="pointP.y" r="13" fill="rgba(15,20,37,0.88)" stroke="#e2a846" stroke-width="2.6" />
+    <circle :cx="pointP.x" :cy="pointP.y" r="3.6" fill="#e2a846" />
 
     <!-- ==================== 3. 动滑轮受力矢量 T、T、Mg ==================== -->
     <g v-click="1">
-      <CourseArrow :from="P" :to="leftTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
-      <CourseArrow :from="P" :to="rightTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
-      <CourseArrow :from="P" :to="mgTip" :head-size="10" stroke="#f87171" stroke-width="3.2" />
+      <CourseArrow :from="pointP" :to="leftTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
+      <CourseArrow :from="pointP" :to="rightTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
+      <CourseArrow :from="pointP" :to="mgTip" :head-size="10" stroke="#f87171" stroke-width="3.2" />
 
       <text
         :x="leftTLabel.x"
@@ -375,8 +375,10 @@ const endDrag = (): void => {
 <style scoped>
 .fig-mp {
   display: block;
+
   width: 100%;
   height: auto;
+
   user-select: none;
   touch-action: none;
 }

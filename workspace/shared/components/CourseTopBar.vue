@@ -5,7 +5,12 @@
         {{ isCover ? chapter : section }}
       </span>
     </Transition>
-    <img v-if="logoState.mode !== 'hidden'" :src="logoState.src" :alt="logoAlt" class="global-top-logo" />
+    <img
+      v-if="logoState.mode !== 'hidden'"
+      :src="logoState.src"
+      :alt="logoAlt"
+      class="global-top-logo"
+    />
   </div>
 </template>
 
@@ -33,16 +38,17 @@ const nav = useNav();
 const isCover = computed(() => nav.currentPage.value === 1);
 
 interface LogoState {
-  /** default = 默认校徽；custom = 本机保存过的自定义图（dataURL）；hidden = 不显示 */
+  /** Default = 默认校徽；custom = 本机保存过的自定义图（dataURL）；hidden = 不显示 */
   mode: "default" | "custom" | "hidden";
   src: string;
 }
 
 /**
  * 校徽三态（由「我要上课」生成的 ?logo 参数驱动，见 utils/lesson-params.ts）：
- * - 无参数      → 默认校徽
- * - logo=hide  → 隐藏
- * - logo=<key> → 本机按 <key> 保存过 → 自定义图；本机没有 → 隐藏
+ *
+ * - 无参数 → 默认校徽
+ * - Logo=hide → 隐藏
+ * - Logo=<key> → 本机按 <key> 保存过 → 自定义图；本机没有 → 隐藏
  */
 const logoState = computed<LogoState>(() => {
   const { logo } = lessonParams;
