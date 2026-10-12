@@ -386,7 +386,9 @@ onUnmounted(() => cancelAnimationFrame(frame));
 .track-wrap {
   display: flex;
   justify-content: center;
+
   min-width: 0;
+
   cursor: pointer;
   user-select: none;
 }

@@ -4,27 +4,28 @@ import { computed, ref } from "vue";
 /**
  * 追及相遇次数（第 ③ 题）：甲车从原点出发、初速度 v₀、加速度 a₁；乙车在正前方 d 处由静止起步、加速度 a₂。
  *
- * ── 物理 ── x甲 = v₀t + ½a₁t²，x乙 = d + ½a₂t²；相遇 ⇔ ½(a₂−a₁)t² − v₀t + d = 0， 判别式 Δ = v₀² −
- * 2(a₂−a₁)d。注意「方程有实根」≠「真的相遇过」：还要检查根 t > 0 （甲车出发时在乙后方，只有正根才是追上的时刻）。两根为正 ⇔ a₁ < a₂（韦达： t₁+t₂ =
- * 2v₀/(a₂−a₁) > 0、t₁t₂ = 2d/(a₂−a₁) > 0）。
+ * ── 物理 ── x甲 = v₀t + ½a₁t²，x乙 = d + ½a₂t²；相遇 ⇔ ½(a₂−a₁)t² − v₀t + d = 0，判别式 Δ = v₀² −
+ * 2(a₂−a₁)d。「方程有实根」≠「真的相遇过」：还要检查根 t > 0（甲车出发时在乙后方，只有正根才是追上的时刻）。
+ * 两根为正 ⇔ a₁ < a₂（韦达）。两条分界：相切线 a₁ = a₂ − v₀²/(2d) 与退化线 a₁ = a₂。
  *
- * ── 交互 ── 滑块只调 a₁（a₂ = 3 m/s²、v₀ = 4 m/s、d = 4 m 都是题目给定的）， a₁ 的两条分界是 a₁ = a₂ − v₀²/(2d) = 1（相切，1
- * 次）与 a₁ = a₂ = 3（方程退化为一次，1 次）。 a₁ ≥ 0 保证甲车不停车，曲线不会出现「倒车」，与实际位移一致。
- *
- * ── 图 ── 时间/位置量程固定（0–5 s、0–45 m），滑块只让两条曲线动；a₂ 取得较大，乙的弯曲更明显。
+ * ── 设置（本页只定性，不给数据）── v₀ = 6、d = 5、a₂ = 5、滑杆 a₁ ∈ [0, 6]、默认 2.5：
+ *   默认时两交点都在画面里（t₁ ≈ 1.1 s、t₂ ≈ 3.7 s，x 分别约占画面 1/6 与 5/6），
+ *   且乙的加速度是甲的两倍，两条抛物线曲率差明显；相切线 a₁* = 1.4 落在滑杆约 1/4 处，
+ *   0 次 / 2 次 / 1 次三个区域都够宽。a₁ 靠近 a₂ 时第二个交点必然越出画面（t₂ → ∞ 是物理事实），
+ *   此时图上只显示 t₁ 并附一行定性说明，不做成"消失得很莫名"。
  */
 
-const SPEED_A = 4;
-const START_GAP = 4;
-const ACCEL_B = 3;
+const SPEED_A = 6;
+const START_GAP = 5;
+const ACCEL_B = 5;
 const T_MAX = 5;
-const X_MAX = 45;
+const X_MAX = 47;
 const A1_MIN = 0;
-const A1_MAX = 4;
+const A1_MAX = 6;
 const A1_STEP = 0.025;
 const SAMPLES = 90;
 
-const accelA = ref(1.5);
+const accelA = ref(2.5);
 
 /** 二次项系数 ½(a₂−a₁) */
 const quad = computed(() => 0.5 * (ACCEL_B - accelA.value));
@@ -47,33 +48,27 @@ const roots = computed<number[]>(() => {
 const hits = computed(() => roots.value.filter((t) => t > 1e-9));
 const hitCount = computed(() => hits.value.length);
 
+/** 第二个交点是否还在画面里（t 与 x 都在窗口内） */
+const secondInFrame = computed(() => {
+  const [, t2] = hits.value;
+  if (t2 === undefined) return false;
+  const x2 = SPEED_A * t2 + 0.5 * accelA.value * t2 * t2;
+  return t2 <= T_MAX && x2 <= X_MAX;
+});
+
 const regime = computed(() => {
   if (hitCount.value === 0) return "相遇 0 次";
   if (hitCount.value >= 2) return "相遇 2 次";
   return Math.abs(disc.value) < 1e-9 ? "相遇 1 次（相切）" : "相遇 1 次";
 });
 
-const discText = computed(() => {
-  if (disc.value > 1e-9) return "Δ > 0 ⇒ 两个不等实根";
-  if (disc.value < -1e-9) return "Δ < 0 ⇒ 无实根";
-  return "Δ = 0 ⇒ 两个相等实根";
-});
-
-const fmt = (value: number): string => value.toFixed(2);
-
-/** 实根的 LaTeX（含负根，照实显示） */
-const rootTex = computed(() => {
-  if (roots.value.length === 0) return "";
-  if (roots.value.length === 1) return `t = ${fmt(roots.value[0])}\\ \\text{s}`;
-  return `t_1 = ${fmt(roots.value[0])}\\ \\text{s},\\quad t_2 = ${fmt(roots.value[1])}\\ \\text{s}`;
-});
-
-/** 正根的个数说明（数学上的根 ≠ 真的追上过） */
-const rootNote = computed(() => {
-  if (roots.value.length === 0) return "方程无实根，永不相遇";
-  if (hits.value.length === 0) return "两根都不为正，出发前就已错过";
-  if (roots.value.length === 1) return "唯一的根为正，相遇 1 次";
-  return hits.value.length === 2 ? "两根都为正，两次相遇" : "只有一根为正，相遇 1 次";
+/** 一行定性说明：交点为什么是这个个数、在哪 */
+const situationKind = computed<"none" | "tangent" | "degenerate" | "beyond" | "two">(() => {
+  if (hitCount.value === 0) return "none";
+  if (Math.abs(disc.value) < 1e-9) return "tangent";
+  if (quad.value <= 0) return "degenerate";
+  if (hitCount.value >= 2 && !secondInFrame.value) return "beyond";
+  return "two";
 });
 
 const sampling = (probe: (t: number) => number): { x: number; y: number }[] =>
@@ -81,6 +76,38 @@ const sampling = (probe: (t: number) => number): { x: number; y: number }[] =>
     const t = (i / SAMPLES) * T_MAX;
     return { x: t, y: probe(t) };
   });
+
+/** 交点向两轴作的虚线垂线（只在交点仍在画面里时画） */
+const guides = computed(() => {
+  const out: Record<string, unknown>[] = [];
+  for (const t of hits.value.slice(0, 2)) {
+    const y = SPEED_A * t + 0.5 * accelA.value * t * t;
+    if (t > T_MAX || y > X_MAX) continue;
+    out.push(
+      {
+        points: [
+          [t, 0],
+          [t, y],
+        ],
+        dashed: "4 4",
+        stroke: "var(--c-text-dim)",
+        width: 1.4,
+        opacity: 0.85,
+      },
+      {
+        points: [
+          [0, y],
+          [t, y],
+        ],
+        dashed: "4 4",
+        stroke: "var(--c-text-dim)",
+        width: 1.4,
+        opacity: 0.85,
+      },
+    );
+  }
+  return out;
+});
 
 const curves = computed(() => [
   {
@@ -93,11 +120,12 @@ const curves = computed(() => [
     stroke: "var(--c-accent-2)",
     width: 3.2,
   },
+  ...guides.value,
 ]);
 
 const labels = computed(() => {
   const out: Record<string, unknown>[] = [];
-  const tJia = 3.6;
+  const tJia = 3;
   const tYi = 0.7;
   out.push(
     {
@@ -118,13 +146,14 @@ const labels = computed(() => {
     },
   );
   hits.value.slice(0, 2).forEach((t, i) => {
-    if (t > T_MAX) return;
+    const x = SPEED_A * t + 0.5 * accelA.value * t * t;
+    if (t > T_MAX || x > X_MAX) return;
     out.push({
       x: t,
-      y: SPEED_A * t + 0.5 * accelA.value * t * t,
+      y: x,
       tex: i === 0 ? "t_1" : "t_2",
       dot: 5,
-      anchor: "top-right",
+      anchor: i === 0 ? "top-right" : "top-left",
       halo: true,
       color: "var(--c-physics)",
     });
@@ -149,7 +178,7 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
         :y-range="[0, X_MAX]"
         :x-axis="{ quantity: 't', unit: 's' }"
         :y-axis="{ quantity: 'x', unit: 'm' }"
-        :ticks="{ x: [1, 2, 3, 4], y: [10, 20, 30, 40] }"
+        :ticks="{ x: [], y: [] }"
         :curves="curves"
         :labels="labels"
         :view="{ width: 520, height: 450 }"
@@ -157,14 +186,24 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
     </div>
     <div class="mc-side stack-tight">
       <div class="mc-line">
-        <Latex tex="\Delta = v_0^2 - 2(a_2 - a_1)d" /> =
-        <b class="text-accent">{{ disc.toFixed(2) }}</b>
+        <Latex tex="\Delta = v_0^2 - 2(a_2 - a_1)d" />
       </div>
-      <div class="mc-line mc-dim">{{ discText }}</div>
-      <div class="mc-line">
-        <template v-if="rootTex"><Latex :tex="rootTex" /></template>
-        <span v-else class="mc-dim">方程无实根</span>
-        <span class="mc-dim"> · {{ rootNote }}</span>
+      <div class="mc-line mc-dim">
+        <template v-if="situationKind === 'none'">
+          <Latex tex="\Delta < 0" />：方程无实根，永不相遇
+        </template>
+        <template v-else-if="situationKind === 'tangent'">
+          <Latex tex="\Delta = 0" />：相切，两交点重合为一点
+        </template>
+        <template v-else-if="situationKind === 'degenerate'">
+          只剩一个正根（另一根为负，在出发前）：恰好相遇一次
+        </template>
+        <template v-else-if="situationKind === 'beyond'">
+          第二个交点 <Latex tex="t_2" /> 在画面外：离 <Latex tex="a_1 = a_2" /> 越近它越远
+        </template>
+        <template v-else>
+          两个根 <Latex tex="t_1,\ t_2" /> 都为正：追上一次，再被反超一次
+        </template>
       </div>
       <div class="mc-badge">{{ regime }}</div>
       <div class="mc-zones">
@@ -175,16 +214,15 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
       </div>
       <div class="mc-scale">
         <span class="mc-tick" :style="{ left: `${pct(tangent)}%` }">
-          <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d} = 1" />
+          <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d}" />
         </span>
         <span class="mc-tick" :style="{ left: `${pct(ACCEL_B)}%` }">
-          <Latex tex="a_1 = a_2 = 3" />
+          <Latex tex="a_1 = a_2" />
         </span>
       </div>
       <label class="mc-slider">
         <span>调甲的加速度 <Latex tex="a_1" /></span>
         <input v-model.number="accelA" type="range" :min="A1_MIN" :max="A1_MAX" :step="A1_STEP" />
-        <b class="text-accent">{{ accelA.toFixed(3) }} <Latex tex="\text{m/s}^2" /></b>
       </label>
     </div>
   </div>
@@ -297,7 +335,7 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
 
 .mc-slider {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 0.6rem;
   align-items: center;
 

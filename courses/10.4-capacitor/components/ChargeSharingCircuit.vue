@@ -3,9 +3,7 @@ import { ref, computed, onUnmounted } from "vue";
 import type { ComputedRef } from "vue";
 
 // State definition
-// eslint-disable-next-line id-length
 const qA = ref<number>(0); // Charge on Cap 1 (voltage range 0 to 8 V)
-// eslint-disable-next-line id-length
 const qB = ref<number>(0); // Charge on Cap 2
 const s1Pos = ref<"open" | "1" | "2">("open"); // Switch 1 position
 const s2Closed = ref<boolean>(false); // Switch 2 closed/open status
