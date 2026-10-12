@@ -12,7 +12,7 @@
       <div v-if="subtitle" class="cover-subtitle">{{ subtitle }}</div>
 
       <div class="cover-subtitle">
-        <span>授课教师：{{ teacher }}</span>
+        <span>授课教师：{{ displayTeacher }}</span>
         <span v-if="classroom">授课教室：{{ classroom }}</span>
       </div>
     </div>
@@ -27,6 +27,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+
+import { lessonParams } from "../utils/lesson-params";
 
 const {
   chapter = "",
@@ -47,7 +49,7 @@ const {
   subtitle?: string;
   /** 授课教室（可选，跟在授课教师后面） */
   classroom?: string;
-  /** 授课教师，默认张伯望 */
+  /** 授课教师，默认张伯望；URL 带 ?teacher=<姓名> 时以 URL 为准（主页「我要上课」生成） */
   teacher?: string;
   /** Slidev 附带的完整 frontmatter（课题名要从这里取，见下） */
   frontmatter?: { title?: string };
@@ -64,6 +66,12 @@ const title = computed(() => frontmatter?.title ?? "");
 
 /** 章节行 = 章名称 [· 课时]；编号单独渲染，§ 走 `.cover-section` 的字号 */
 const chapterText = computed(() => [chapter, lesson].filter(Boolean).join(" · "));
+
+/**
+ * 授课教师：URL 的 ?teacher（主页「我要上课」生成，随链接可携带/可分享）优先，
+ * 其次用 frontmatter / props 里的 teacher（默认张伯望）。
+ */
+const displayTeacher = computed(() => lessonParams.teacher || teacher);
 </script>
 
 <!--

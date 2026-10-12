@@ -5,7 +5,7 @@
         {{ isCover ? chapter : section }}
       </span>
     </Transition>
-    <img :src="logoUrl" :alt="logoAlt" class="global-top-logo" />
+    <img v-if="logoState.mode !== 'hidden'" :src="logoState.src" :alt="logoAlt" class="global-top-logo" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import { useNav } from "@slidev/client";
 import { computed } from "vue";
 
 import logoUrl from "../assets/logo.png";
+import { getSavedLogo, lessonParams } from "../utils/lesson-params";
 
 const {
   chapter,
@@ -30,6 +31,29 @@ const {
 
 const nav = useNav();
 const isCover = computed(() => nav.currentPage.value === 1);
+
+interface LogoState {
+  /** default = 默认校徽；custom = 本机保存过的自定义图（dataURL）；hidden = 不显示 */
+  mode: "default" | "custom" | "hidden";
+  src: string;
+}
+
+/**
+ * 校徽三态（由「我要上课」生成的 ?logo 参数驱动，见 utils/lesson-params.ts）：
+ * - 无参数      → 默认校徽
+ * - logo=hide  → 隐藏
+ * - logo=<key> → 本机按 <key> 保存过 → 自定义图；本机没有 → 隐藏
+ */
+const logoState = computed<LogoState>(() => {
+  const { logo } = lessonParams;
+
+  if (!logo) return { mode: "default", src: logoUrl };
+  if (logo === "hide") return { mode: "hidden", src: "" };
+
+  const saved = getSavedLogo(logo);
+
+  return saved ? { mode: "custom", src: saved } : { mode: "hidden", src: "" };
+});
 </script>
 
 <style scoped>

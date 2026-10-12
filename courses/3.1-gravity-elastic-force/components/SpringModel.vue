@@ -1,7 +1,7 @@
-<!-- 第 25 页「弹簧的模型」：四种挂法（一端固定墙上 / 两端反向拉 / 粗糙面上静止 / 粗糙面上匀速）。
-     四幅图都只在弹簧左端画一个蓝色 F——读题时只看这一端的受力，轻弹簧整根拉力处处相等。
-     四幅图各自包在 <g> 里平移，保证中间留出足够间距、互不重叠。 -->
 <template>
+  <!-- 第 25 页「弹簧的模型」：四种挂法（一端固定墙上 / 两端反向拉 / 粗糙面上静止 / 粗糙面上匀速）。
+       四幅图左端均画蓝色拉力 F，右端均画黄色向右拉力箭头——轻弹簧整根张力处处相等。
+       四幅图各自包在 <g> 里平移，保证中间留出足够间距、互不重叠。 -->
   <svg
     class="fig"
     viewBox="0 0 816 150"
@@ -24,38 +24,52 @@
         stroke="#e2a846"
         stroke-width="2.8"
         stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <CourseArrow
         :from="{ x: 36, y: 56 }"
-        :to="{ x: 12, y: 56 }"
+        :to="{ x: 10, y: 56 }"
         stroke="#60a5fa"
         stroke-width="3"
       />
-      <text x="25" y="44" text-anchor="middle" font-size="17" fill="#60a5fa">
+      <text x="23" y="44" text-anchor="middle" font-size="17" fill="#60a5fa">
         <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       </text>
+      <CourseArrow
+        :from="{ x: 118, y: 56 }"
+        :to="{ x: 152, y: 56 }"
+        stroke="#e2a846"
+        stroke-width="3"
+      />
       <text x="86" y="132" text-anchor="middle" font-size="17" fill="#94a3b8">一端固定在墙上</text>
     </g>
-    <g transform="translate(48, 0)">
+    <g transform="translate(36, 0)">
       <path
         d="M 196 56 L 206 56 L 214 44 L 224 68 L 234 44 L 244 68 L 254 44 L 264 68 L 272 56 L 278 56"
         fill="none"
         stroke="#e2a846"
         stroke-width="2.8"
         stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <CourseArrow
         :from="{ x: 196, y: 56 }"
-        :to="{ x: 156, y: 56 }"
+        :to="{ x: 162, y: 56 }"
         stroke="#60a5fa"
         stroke-width="3"
       />
-      <text x="176" y="44" text-anchor="middle" font-size="17" fill="#60a5fa">
+      <text x="179" y="44" text-anchor="middle" font-size="17" fill="#60a5fa">
         <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       </text>
+      <CourseArrow
+        :from="{ x: 278, y: 56 }"
+        :to="{ x: 312, y: 56 }"
+        stroke="#e2a846"
+        stroke-width="3"
+      />
       <text x="237" y="132" text-anchor="middle" font-size="17" fill="#94a3b8">两端反向拉</text>
     </g>
-    <g transform="translate(96, 0)">
+    <g transform="translate(82, 0)">
       <line x1="326" y1="104" x2="500" y2="104" stroke="#475569" stroke-width="2.4" />
       <SurfaceHatch
         :from="{ x: 332, y: 40 }"
@@ -72,14 +86,15 @@
         stroke="#e2a846"
         stroke-width="2.8"
         stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <CourseArrow
         :from="{ x: 332, y: 78 }"
-        :to="{ x: 310, y: 78 }"
+        :to="{ x: 306, y: 78 }"
         stroke="#60a5fa"
         stroke-width="3"
       />
-      <text x="321" y="66" text-anchor="middle" font-size="17" fill="#60a5fa">
+      <text x="319" y="66" text-anchor="middle" font-size="17" fill="#60a5fa">
         <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       </text>
       <rect
@@ -93,15 +108,15 @@
         stroke-width="2.4"
       />
       <CourseArrow
-        :from="{ x: 458, y: 80 }"
-        :to="{ x: 490, y: 80 }"
+        :from="{ x: 458, y: 78 }"
+        :to="{ x: 492, y: 78 }"
         stroke="#e2a846"
         stroke-width="3"
       />
       <text x="404" y="132" text-anchor="middle" font-size="17" fill="#94a3b8">粗糙面上静止</text>
     </g>
-    <g transform="translate(144, 0)">
-      <line x1="508" y1="104" x2="660" y2="104" stroke="#475569" stroke-width="2.4" />
+    <g transform="translate(128, 0)">
+      <line x1="508" y1="104" x2="682" y2="104" stroke="#475569" stroke-width="2.4" />
       <SurfaceHatch
         :from="{ x: 514, y: 40 }"
         :to="{ x: 514, y: 104 }"
@@ -117,14 +132,15 @@
         stroke="#e2a846"
         stroke-width="2.8"
         stroke-linecap="round"
+        stroke-linejoin="round"
       />
       <CourseArrow
         :from="{ x: 514, y: 78 }"
-        :to="{ x: 492, y: 78 }"
+        :to="{ x: 488, y: 78 }"
         stroke="#60a5fa"
         stroke-width="3"
       />
-      <text x="503" y="66" text-anchor="middle" font-size="17" fill="#60a5fa">
+      <text x="501" y="66" text-anchor="middle" font-size="17" fill="#60a5fa">
         <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       </text>
       <rect
@@ -138,8 +154,8 @@
         stroke-width="2.4"
       />
       <CourseArrow
-        :from="{ x: 640, y: 80 }"
-        :to="{ x: 658, y: 80 }"
+        :from="{ x: 640, y: 78 }"
+        :to="{ x: 674, y: 78 }"
         stroke="#e2a846"
         stroke-width="3"
       />

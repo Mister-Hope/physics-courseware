@@ -21,14 +21,14 @@ const clamp = (value: number, min: number, max: number): number => Math.min(max,
  *    - 当右侧悬挂点 B 沿水平墙面向外（右）移动时：水平跨距 (x_B - x_A) 增大 ⇒ α、β 均增大，绳拉力 T 随之增大。
  */
 const LEFT_ANCHOR: Point = { x: 48, y: 40 }; // 左侧固定悬挂点
-const POINT_A: Point = { x: 244, y: 28 }; // 右侧竖直墙面最高点 A
-const POINT_B: Point = { x: 244, y: 96 }; // 右侧墙角拐点 B（默认位置）
+const POINT_A: Point = { x: 244, y: 40 }; // 右侧竖直墙面点 A（与左侧悬挂点严格等高 y = 40，初始位置）
+const POINT_B: Point = { x: 244, y: 96 }; // 右侧墙角拐点 B
 const POINT_C: Point = { x: 318, y: 96 }; // 右侧水平墙面最右点 C
 const ROPE_LEN = 336; // 整根轻绳总长 L（恒定不变）
 
-/** 右侧可动悬挂点的当前坐标（初始正好位于墙角 B 处） */
-const bx = ref<number>(POINT_B.x);
-const by = ref<number>(POINT_B.y);
+/** 右侧可动悬挂点的当前坐标（初始位于与左侧悬挂点等高的 A 点处） */
+const bx = ref<number>(POINT_A.x);
+const by = ref<number>(POINT_A.y);
 
 /** 由公式 sin α = (x_B - x_left) / L 实时解算夹角与动滑轮位置 P */
 const sinAlpha = computed<number>(() => (bx.value - LEFT_ANCHOR.x) / ROPE_LEN);
@@ -37,7 +37,7 @@ const tanAlpha = computed<number>(() => sinAlpha.value / cosAlpha.value);
 const alphaRad = computed<number>(() => Math.asin(clamp(sinAlpha.value, 0, 0.98)));
 
 /** 动滑轮圆心 P(x_P, y_P)：满足两侧绳长之和 = L 且与竖直方向夹角严格相等 α = β */
-const pointP = computed<Point>(() => {
+const P = computed<Point>(() => {
   const dx = bx.value - LEFT_ANCHOR.x;
   const verticalSpan = Math.sqrt(Math.max(1, ROPE_LEN ** 2 - dx ** 2));
   const py = (LEFT_ANCHOR.y + by.value + verticalSpan) / 2;
@@ -52,16 +52,16 @@ const tLen = computed<number>(() => T_SCALE / (2 * cosAlpha.value));
 
 /** 三个力矢量的终点坐标 */
 const leftTip = computed<Point>(() => ({
-  x: pointP.value.x - tLen.value * sinAlpha.value,
-  y: pointP.value.y - tLen.value * cosAlpha.value,
+  x: P.value.x - tLen.value * sinAlpha.value,
+  y: P.value.y - tLen.value * cosAlpha.value,
 }));
 const rightTip = computed<Point>(() => ({
-  x: pointP.value.x + tLen.value * sinAlpha.value,
-  y: pointP.value.y - tLen.value * cosAlpha.value,
+  x: P.value.x + tLen.value * sinAlpha.value,
+  y: P.value.y - tLen.value * cosAlpha.value,
 }));
 const mgTip = computed<Point>(() => ({
-  x: pointP.value.x,
-  y: pointP.value.y + MG_LEN,
+  x: P.value.x,
+  y: P.value.y + MG_LEN,
 }));
 
 /** 两侧拉力标注 T 的外侧偏移坐标（置于箭头尖端外侧，绝不侵入 α、β 角扇区） */
@@ -76,23 +76,23 @@ const rightTLabel = computed<Point>(() => ({
 
 /** 夹角圆弧半径与角平分线上的 α、β 标注坐标（始终位于 T 箭头上方且严格居中于角平分线） */
 const arcR = computed<number>(() => Math.max(58, Math.round(tLen.value + 13)));
-const vertTopY = computed<number>(() => pointP.value.y - arcR.value - 22);
+const vertTopY = computed<number>(() => P.value.y - arcR.value - 22);
 
 const alphaArcPath = computed<string>(() => {
   const r = arcR.value;
-  const startX = pointP.value.x;
-  const startY = pointP.value.y - r;
-  const endX = pointP.value.x - r * sinAlpha.value;
-  const endY = pointP.value.y - r * cosAlpha.value;
+  const startX = P.value.x;
+  const startY = P.value.y - r;
+  const endX = P.value.x - r * sinAlpha.value;
+  const endY = P.value.y - r * cosAlpha.value;
   return `M ${startX} ${startY} A ${r} ${r} 0 0 0 ${endX} ${endY}`;
 });
 
 const betaArcPath = computed<string>(() => {
   const r = arcR.value;
-  const startX = pointP.value.x;
-  const startY = pointP.value.y - r;
-  const endX = pointP.value.x + r * sinAlpha.value;
-  const endY = pointP.value.y - r * cosAlpha.value;
+  const startX = P.value.x;
+  const startY = P.value.y - r;
+  const endX = P.value.x + r * sinAlpha.value;
+  const endY = P.value.y - r * cosAlpha.value;
   return `M ${startX} ${startY} A ${r} ${r} 0 0 1 ${endX} ${endY}`;
 });
 
@@ -101,8 +101,8 @@ const alphaLabel = computed<Point>(() => {
   const half = alphaRad.value / 2;
   const r = arcR.value + 13;
   return {
-    x: pointP.value.x - r * Math.sin(half),
-    y: pointP.value.y - r * Math.cos(half),
+    x: P.value.x - r * Math.sin(half),
+    y: P.value.y - r * Math.cos(half),
   };
 });
 
@@ -110,8 +110,8 @@ const betaLabel = computed<Point>(() => {
   const half = alphaRad.value / 2;
   const r = arcR.value + 13;
   return {
-    x: pointP.value.x + r * Math.sin(half),
-    y: pointP.value.y - r * Math.cos(half),
+    x: P.value.x + r * Math.sin(half),
+    y: P.value.y - r * Math.cos(half),
   };
 });
 
@@ -132,14 +132,14 @@ const updateAnchorFromEvent = (event: PointerEvent): void => {
   const vy = clamp(uy, POINT_A.y, POINT_B.y);
   const distVertSq = (ux - POINT_B.x) ** 2 + (uy - vy) ** 2;
 
-  const wallX = clamp(ux, POINT_B.x, POINT_C.x);
-  const distHorizSq = (ux - wallX) ** 2 + (uy - POINT_B.y) ** 2;
+  const hx = clamp(ux, POINT_B.x, POINT_C.x);
+  const distHorizSq = (ux - hx) ** 2 + (uy - POINT_B.y) ** 2;
 
   if (distVertSq <= distHorizSq) {
     bx.value = POINT_B.x;
     by.value = Math.round(vy);
   } else {
-    bx.value = Math.round(wallX);
+    bx.value = Math.round(hx);
     by.value = POINT_B.y;
   }
 };
@@ -188,6 +188,9 @@ const endDrag = (): void => {
       :gap="16"
     />
 
+    <!-- 左侧悬挂点与 A 点等高水平参考虚线（y = 40） -->
+    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="POINT_A.x" :y2="POINT_A.y" stroke="#64748b" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.45" />
+
     <!-- L 形墙角滑轨亮色引导虚线（A — B — C） -->
     <polyline
       :points="`${POINT_A.x},${POINT_A.y} ${POINT_B.x},${POINT_B.y} ${POINT_C.x},${POINT_C.y}`"
@@ -205,8 +208,8 @@ const endDrag = (): void => {
     <circle :cx="POINT_C.x" :cy="POINT_C.y" r="3.2" fill="#1e293b" stroke="#e2a846" stroke-width="1.5" />
 
     <text
-      :x="POINT_A.x - 15"
-      :y="POINT_A.y"
+      :x="POINT_A.x - 14"
+      :y="POINT_A.y - 10"
       fill="#e2a846"
       font-family="KaTeX_Math"
       font-style="italic"
@@ -252,11 +255,11 @@ const endDrag = (): void => {
 
     <!-- ==================== 2. 轻绳、竖直参考虚线、夹角 α/β 与动滑轮重物 ==================== -->
     <!-- 两侧轻绳 -->
-    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="pointP.x" :y2="pointP.y" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
-    <line :x1="pointP.x" :y1="pointP.y" :x2="bx" :y2="by" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
+    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="P.x" :y2="P.y" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
+    <line :x1="P.x" :y1="P.y" :x2="bx" :y2="by" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
 
     <!-- 过动滑轮圆心 P 的竖直向上参考虚线 -->
-    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="vertTopY" stroke="#64748b" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.85" />
+    <line :x1="P.x" :y1="P.y" :x2="P.x" :y2="vertTopY" stroke="#64748b" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.85" />
 
     <!-- 左侧夹角 α 圆弧与角平分线标注 -->
     <path :d="alphaArcPath" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" />
@@ -289,18 +292,18 @@ const endDrag = (): void => {
     </text>
 
     <!-- 动滑轮下方吊绳与重物 Mg -->
-    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="pointP.y + 52" stroke="#94a3b8" stroke-width="2.2" />
-    <rect :x="pointP.x - 25" :y="pointP.y + 52" width="50" height="30" rx="6" fill="rgba(96,165,250,0.16)" stroke="#60a5fa" stroke-width="2" />
+    <line :x1="P.x" :y1="P.y" :x2="P.x" :y2="P.y + 52" stroke="#94a3b8" stroke-width="2.2" />
+    <rect :x="P.x - 25" :y="P.y + 52" width="50" height="30" rx="6" fill="rgba(96,165,250,0.16)" stroke="#60a5fa" stroke-width="2" />
 
     <!-- 轻质动滑轮轮体 -->
-    <circle :cx="pointP.x" :cy="pointP.y" r="13" fill="rgba(15,20,37,0.88)" stroke="#e2a846" stroke-width="2.6" />
-    <circle :cx="pointP.x" :cy="pointP.y" r="3.6" fill="#e2a846" />
+    <circle :cx="P.x" :cy="P.y" r="13" fill="rgba(15,20,37,0.88)" stroke="#e2a846" stroke-width="2.6" />
+    <circle :cx="P.x" :cy="P.y" r="3.6" fill="#e2a846" />
 
     <!-- ==================== 3. 动滑轮受力矢量 T、T、Mg ==================== -->
     <g v-click="1">
-      <CourseArrow :from="pointP" :to="leftTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
-      <CourseArrow :from="pointP" :to="rightTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
-      <CourseArrow :from="pointP" :to="mgTip" :head-size="10" stroke="#f87171" stroke-width="3.2" />
+      <CourseArrow :from="P" :to="leftTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
+      <CourseArrow :from="P" :to="rightTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
+      <CourseArrow :from="P" :to="mgTip" :head-size="10" stroke="#f87171" stroke-width="3.2" />
 
       <text
         :x="leftTLabel.x"
@@ -372,10 +375,8 @@ const endDrag = (): void => {
 <style scoped>
 .fig-mp {
   display: block;
-
   width: 100%;
   height: auto;
-
   user-select: none;
   touch-action: none;
 }

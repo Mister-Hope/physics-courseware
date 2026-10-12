@@ -39,7 +39,7 @@ courses/<slug>/                ← 一课一目录、一节课（40 分钟）
   content/教案.md · 逐字稿.md   ← ⛔ 教师确认课件定稿后才生成（同上）
 .agents/notes/                 ← 按需再读的笔记（入库）
 .agents/skills/（⛔ 不入库）    ← AI 技能正本（本地按需安装、走 .gitignore；只提交 skills-lock.json）
-scripts/                       ← build-all / create-course / check-skills / slide / shots
+scripts/                       ← build-all / create-course / check-skills / course-pages / slide / shots
 e2e/                           ← 端到端检查（见笔记 e2e-checks）
 ```
 
@@ -89,6 +89,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
   `title`，第二课时封面在该页 frontmatter 里另写 `title`）；装饰 SVG 作为页面内容传进去（默认插槽，如 `<CoverDecorationSvg />`）。
   渲染出来是：章节行 → 课题名 →（副标题行）→「**授课教师：<姓名>**」行 → 最底部居中一行 **14px 的「原创：东北育才学校 张伯望」**。
   校徽 logo 由共享顶栏带上（`shared/assets/logo.png`，新课件不要问）
+- **授课身份走 URL（主页「我要上课」生成，共享组件已支持，课件页不用动）**：`?teacher=<姓名>` 覆盖封面授课教师行；`?logo=hide` 隐藏校徽、`?logo=<姓名>` 显示本机按该姓名存过的自定义图（无则隐藏，本地存储 key：`courseware.logo:<姓名>`）；Slidev 翻页会原样保留 query。约定详见 [`notes/shared-components.md`](.agents/notes/shared-components.md#2-页面外壳coursetopbar--coursebottombar)
 - **顶栏**：封面左显示章节名、内页左显示课题名，右侧恒显校徽；**页脚只有两侧渐隐装饰线，不显示页码**
 - **转场** `transition: fade`；内容呈现用 `v-click`（**点击节奏与交互组件的规则见 interactions 笔记**）
 - **页面外壳固定 `layout: base-flex`**：共享 addon 注册的通用布局（flex 列 + 收紧内边距），headmatter 里写

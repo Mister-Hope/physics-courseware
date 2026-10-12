@@ -1,8 +1,29 @@
 import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "vite";
+import type { Plugin } from "vite";
+
+import { generateCoursePages } from "../../scripts/course-pages.ts";
+
+/**
+ * Dev / build 启动时自动刷新每课页数（写 src/pages.generated.ts，「我要上课」弹窗要用）。
+ *
+ * @returns Vite 插件实例
+ */
+const coursePagesPlugin = (): Plugin => ({
+  name: "course-pages",
+  buildStart: () => {
+    generateCoursePages();
+  },
+  configureServer(server) {
+    server.httpServer?.once("listening", () => {
+      generateCoursePages();
+    });
+  },
+});
 
 export default defineConfig({
+  plugins: [coursePagesPlugin()],
   build: {
     outDir: "../../dist",
     emptyOutDir: true,

@@ -1,6 +1,7 @@
 <template>
-  <!-- 第 7 页：正方体一面着地时重心最低（a/2） -->
+  <!-- 第 7 页：正方体一面着地时重心最低（$a/2$） -->
   <svg class="fig" viewBox="0 0 264 292" style="max-width: 11rem" xmlns="http://www.w3.org/2000/svg">
+    <!-- 地面平行四边形与斜剖线 -->
     <polygon points="147.5,142.9 248.1,198.3 116.5,240.5 15.9,185.2" fill="rgba(148,163,184,0.13)" stroke="#64748b" stroke-width="1.2" />
     <g stroke="#64748b" stroke-width="0.7" opacity="0.35">
       <line x1="155.9" y1="147.5" x2="24.3" y2="189.8" />
@@ -18,26 +19,61 @@
       <line x1="239.7" y1="193.7" x2="108.1" y2="235.9" />
       <line x1="26.9" y1="181.7" x2="127.4" y2="237.0" />
     </g>
-    <polygon points="123.4,135.4 196.5,111.9 196.5,195.4 123.4,218.9" fill="rgba(96,165,250,0.24)" />
-    <polygon points="67.5,104.6 123.4,135.4 123.4,218.9 67.5,188.1" fill="rgba(125,211,252,0.2)" />
-    <polygon points="67.5,104.6 140.6,81.1 196.5,111.9 123.4,135.4" fill="rgba(96,165,250,0.32)" />
-    <polygon points="67.5,104.6 140.6,81.1 196.5,111.9 196.5,195.4 123.4,218.9 67.5,188.1" fill="none" stroke="#7dd3fc" stroke-width="2.2" />
-    <g stroke="#7dd3fc" stroke-width="2.2">
-      <line x1="123.4" y1="135.4" x2="67.5" y2="104.6" />
-      <line x1="123.4" y1="135.4" x2="123.4" y2="218.9" />
-      <line x1="123.4" y1="135.4" x2="196.5" y2="111.9" />
-    </g>
+
+    <!-- 后方不可见棱（虚线置于底面层） -->
     <g stroke="#64748b" stroke-width="1.3" stroke-dasharray="4 4">
       <line x1="140.6" y1="164.6" x2="67.5" y2="188.1" />
       <line x1="140.6" y1="164.6" x2="140.6" y2="81.1" />
       <line x1="140.6" y1="164.6" x2="196.5" y2="195.4" />
     </g>
-    <line x1="132" y1="150" x2="132" y2="191.7" stroke="#f87171" stroke-width="1.8" stroke-dasharray="5 4" />
-    <path d="M 139.9 196.1 L 139.9 187.1 L 132 182.7" fill="none" stroke="#f87171" stroke-width="1.4" />
-    <circle cx="132" cy="150" r="4.5" fill="#f87171" />
-    <text x="104" y="128" font-size="15" fill="#f87171" text-anchor="middle">
-      <tspan font-family="KaTeX_Math" font-style="italic">a</tspan>
-      <tspan font-family="KaTeX_Main">/2</tspan>
-    </text>
+
+    <!-- 三个可见面（右前、左前、顶面） -->
+    <polygon points="123.4,135.4 196.5,111.9 196.5,195.4 123.4,218.9" fill="rgba(96,165,250,0.24)" />
+    <polygon points="67.5,104.6 123.4,135.4 123.4,218.9 67.5,188.1" fill="rgba(125,211,252,0.2)" />
+    <polygon points="67.5,104.6 140.6,81.1 196.5,111.9 123.4,135.4" fill="rgba(96,165,250,0.32)" />
+
+    <!-- 正方体可见轮廓与前侧三棱 -->
+    <polygon
+      points="67.5,104.6 140.6,81.1 196.5,111.9 196.5,195.4 123.4,218.9 67.5,188.1"
+      fill="none"
+      stroke="#7dd3fc"
+      stroke-width="2.2"
+      stroke-linejoin="round"
+    />
+    <g stroke="#7dd3fc" stroke-width="2.2" stroke-linecap="round">
+      <line x1="123.4" y1="135.4" x2="67.5" y2="104.6" />
+      <line x1="123.4" y1="135.4" x2="123.4" y2="218.9" />
+      <line x1="123.4" y1="135.4" x2="196.5" y2="111.9" />
+    </g>
+
+    <!-- 顶面中心到重心的上半段参考虚线 -->
+    <line x1="132" y1="108.3" x2="132" y2="150" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.45" />
+    <!-- 重心到地面的高度连线（实线） -->
+    <line x1="132" y1="150" x2="132" y2="191.7" stroke="#f87171" stroke-width="2.2" stroke-linecap="round" />
+    <!-- 地面垂足直角标记 -->
+    <path d="M 139.9 196.1 L 139.9 187.1 L 132 182.7" fill="none" stroke="#f87171" stroke-width="1.4" stroke-linejoin="round" />
+    <circle cx="132" cy="191.7" r="2.4" fill="#f87171" />
+    <!-- 重心红点 -->
+    <circle cx="132" cy="150" r="4.6" fill="#f87171" stroke="#0f172a" stroke-width="1.2" />
+
+    <!-- 标准分式标注 a/2（紧靠高度实线左侧） -->
+    <g fill="#f87171">
+      <text
+        x="108"
+        y="165"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="16"
+        text-anchor="middle"
+        stroke="#0f172a"
+        stroke-width="3"
+        paint-order="stroke"
+      >
+        a
+      </text>
+      <line x1="100" y1="170.5" x2="116" y2="170.5" stroke="#0f172a" stroke-width="3.6" stroke-linecap="round" />
+      <line x1="100" y1="170.5" x2="116" y2="170.5" stroke="#f87171" stroke-width="1.5" stroke-linecap="round" />
+      <text x="108" y="185" font-family="KaTeX_Main" font-size="15" text-anchor="middle" stroke="#0f172a" stroke-width="3" paint-order="stroke">2</text>
+    </g>
   </svg>
 </template>

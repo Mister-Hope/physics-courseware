@@ -47,6 +47,13 @@
 |                   | `logoAlt` |      | `东北育才学校` | 顶栏 logo 的 alt 文本                            |
 | `CourseBottomBar` | —         | —    | —              | 无 props；只有装饰线                             |
 
+**URL 授课参数**（主页「我要上课」生成；Slidev 翻页原样保留 query，整节课有效；解析见 `workspace/shared/utils/lesson-params.ts`）：
+
+- `?teacher=<姓名>` → 封面「授课教师」行用它替代默认张伯望（页面 frontmatter 不用动）；
+- `?logo=` 校徽三态：缺省 → 默认校徽；`hide` → 隐藏；`<姓名>` → 本机 `courseware.logo:<姓名>` 存过的自定义图，**本机没有则隐藏**（不回退校徽、不打扰课堂）。
+
+> 为什么图片不进 URL：base64 图片 URL 几十 KB 起步，生产 nginx 请求行默认约 32KB 上限会 414；姓名只有几十字节，走 URL 让换机 / 分享 / 同机多教师都成立。图片按姓名存 localStorage（主页上传时写入），换机时优雅降级为隐藏。
+
 ## 3. HTML 层的公式与标注：`Latex` / `ChartLabel`
 
 **什么时候用哪个**：整段公式、行内公式 → `Latex`；图上一个点旁边的小标注（`v_0`、`\frac{1}{2}at^2`、点名"小明"）→ `ChartLabel`（或直接写坐标组件的 `labels`，内部就是它）。

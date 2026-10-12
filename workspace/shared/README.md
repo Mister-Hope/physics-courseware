@@ -2,17 +2,18 @@
 
 跨课件复用的公共资源，基于 Slidev 官方 **addon** 机制。所有课件只需在 `slides.md` 的 headmatter 中引用即可自动获得：
 
-- `CourseTopBar` 组件 — 顶栏（封面章节名 ↔ 内页课题名切换动画 + 学校 logo）
+- `CourseTopBar` 组件 — 顶栏（封面章节名 ↔ 内页课题名切换动画 + 学校 logo）。**logo 支持 URL 三态**：无参数→默认校徽；`?logo=hide`→隐藏；`?logo=<姓名>`→取本机按该姓名存过的自定义图（主页「我要上课」上传时按姓名写入 localStorage），本机没有则隐藏
 - `CourseBottomBar` 组件 — 底栏装饰线（无页码）
 - `Latex` 组件 — 在 Vue 组件内渲染 KaTeX 公式（`<Latex tex="x_1" />`，`display` prop 切块级）
 - 学科图形组件（同样自动注册、课件里不用 import）：`SpringScale` 弹簧测力计、`CourseArrow` 矢量箭头、`SurfaceHatch` 接触面、`Ruler` 刻度尺、`CoordAxes` / `NumberAxis` / `SimpleAxis` 坐标轴、`ChartLabel` 图注
   - **12 个全局组件的用途与 props 全表**：[`.agents/notes/shared-components.md`](../../.agents/notes/shared-components.md)
   - 三个大组件各有专篇：[坐标轴](../../.agents/notes/coordinate-axes.md)、[弹簧测力计](../../.agents/notes/spring-scale.md)、[手部 `GripHand`](../../.agents/notes/grip-hand.md)
 - `base-flex` 布局（`layouts/base-flex.vue`）— 通用页面外壳：flex 列 + 收紧内边距；撑满整页的正文（`.page-grow`）依赖它
-- `course-cover` 布局（`layouts/course-cover.vue`）— 封面专用：`chapter-no` / `chapter` / `lesson` / `subtitle` / `classroom` / `teacher`（默认张伯望），课题名取本页 `title`，装饰 SVG 走默认插槽；底部固定一行 14px 的「原创：东北育才学校 张伯望」（各课件不要再手写封面 HTML）
+- `course-cover` 布局（`layouts/course-cover.vue`）— 封面专用：`chapter-no` / `chapter` / `lesson` / `subtitle` / `classroom` / `teacher`（默认张伯望），课题名取本页 `title`，装饰 SVG 走默认插槽；底部固定一行 14px 的「原创：东北育才学校 张伯望」（各课件不要再手写封面 HTML）。**「授课教师」行可用 URL 覆盖**：`?teacher=<姓名>`（主页「我要上课」生成；Slidev 翻页原样保留 query，整节课有效）
 - 通用设计系统 `common.css` — 玻璃态卡片、聊天气泡、动效、封面样式等
 - 通用版式原子 `layout.css` — `.page-grow` / `.stack` / `.half-grid` / `.three-col` / `.divider-l` / `.ask` / `.key` / `.mini-title` / `.mini-note` 等
 - `logo.png` — 学校 logo（组件内自动引入）
+- `utils/lesson-params.ts` — 授课参数解析（`?teacher` / `?logo` 三态与本地存储 key 约定，顶栏与封面共用；**key 约定与主页端一致：`courseware.logo:<姓名>`**）
 - 校徽 favicon（`setup/main.ts` 运行时挂载）— 替换 Slidev 默认的 jsdelivr 图标，dev / build 与任意 `--base` 子路径都生效
 
 > ⚠️ **命名注意**：组件刻意命名为 `CourseTopBar` / `CourseBottomBar` 而非 `GlobalTop` / `GlobalBottom`。后者是 Slidev 保留的全局层组件名，重名会导致循环引用栈溢出。
@@ -55,6 +56,15 @@ addons:
 
 可选 prop：`logoAlt`（默认 `东北育才学校`）。
 
+### URL 授课参数（主页「我要上课」生成，见 `utils/lesson-params.ts`）
+
+| 参数          | 作用                                        | 取值                                                             |
+| ------------- | ------------------------------------------- | ---------------------------------------------------------------- |
+| `?teacher=`   | 封面「授课教师」行（优先于 frontmatter）    | 姓名，如 `张三` （自动 URL 编码）                                |
+| `?logo=`      | 顶栏校徽三态                                | 缺省→默认校徽；`hide`→隐藏；`<姓名>`→本机该姓名的自定义图，没有则隐藏 |
+
+`course-cover` 每页可传 `teacher` prop（默认张伯望），URL 参数优先。
+
 ## 目录结构
 
 ```
@@ -74,6 +84,8 @@ workspace/shared/
     label-text.ts        # ChartLabel / CoordAxes 共用的标注文字拼装
   layouts/
     base-flex.vue        # 通用页面外壳（layout: base-flex）
+  utils/
+    lesson-params.ts     # 授课参数解析（?teacher / ?logo 三态 + 本机 logo 存储 key 约定）
   setup/
     main.ts              # 客户端 setup：统一挂载校徽 favicon（Slidev 自动加载，#slidev/setups/main）
     comp-block.ts        # `comp` 代码块解析

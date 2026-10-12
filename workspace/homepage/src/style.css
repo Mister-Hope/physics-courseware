@@ -276,6 +276,388 @@ body {
   transform: scale(1.15);
 }
 
+/* ── 我要上课 ── */
+.teach-entry {
+  padding-top: 1.75rem;
+  text-align: center;
+}
+
+/* display:flex 会覆盖 [hidden] 的 UA 样式，必须显式补回（否则弹窗常驻全屏挡点击） */
+.teach-backdrop[hidden],
+.teach-logo-custom[hidden],
+.teach-saved[hidden] {
+  display: none;
+}
+
+.teach-btn {
+  padding: 0.7rem 2.2rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: 999px;
+
+  background:
+    linear-gradient(135deg, rgb(226 168 70 / 18%) 0%, rgb(59 130 246 / 12%) 100%);
+  color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: inherit;
+  letter-spacing: 0.08em;
+
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.teach-btn:hover {
+  background: rgb(226 168 70 / 22%);
+  box-shadow:
+    0 6px 24px rgb(226 168 70 / 25%),
+    0 0 0 1px rgb(226 168 70 / 35%);
+  transform: translateY(-2px);
+}
+
+/* ── 弹窗 ── */
+.teach-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.5rem;
+
+  background: rgb(2 6 23 / 60%);
+
+  backdrop-filter: blur(10px);
+}
+
+.teach-modal {
+  overflow-y: auto;
+
+  width: min(560px, 100%);
+  max-height: calc(100vh - 3rem);
+  padding: 1.75rem;
+  border: 1px solid rgb(148 163 184 / 16%);
+  border-radius: var(--radius-xl);
+
+  background:
+    linear-gradient(160deg, rgb(15 20 37 / 96%) 0%, rgb(9 13 26 / 96%) 100%);
+  box-shadow:
+    0 24px 64px rgb(0 0 0 / 45%),
+    0 0 0 1px rgb(226 168 70 / 8%);
+}
+
+.teach-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.teach-title {
+  color: var(--c-text);
+  font-weight: 700;
+  font-size: 1.35rem;
+}
+
+.teach-close {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: transparent;
+  color: var(--c-text-dim);
+
+  font-size: 1.1rem;
+  font-family: inherit;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.teach-close:hover {
+  border-color: rgb(148 163 184 / 35%);
+  color: var(--c-text);
+}
+
+.teach-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.teach-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+
+  padding: 0;
+  border: 0;
+}
+
+.teach-label {
+  color: var(--c-text-dim);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.teach-input {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: rgb(2 6 23 / 40%);
+  color: var(--c-text);
+  outline: none;
+
+  font-size: 0.95rem;
+  font-family: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.teach-input:focus {
+  border-color: rgb(226 168 70 / 45%);
+  box-shadow: 0 0 0 3px rgb(226 168 70 / 12%);
+}
+
+.teach-select {
+  cursor: pointer;
+}
+
+.teach-select optgroup {
+  background: #0f1425;
+}
+
+.teach-select option {
+  background: #0f1425;
+}
+
+.teach-radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.teach-radio {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+
+  color: var(--c-text);
+
+  font-size: 0.9rem;
+
+  cursor: pointer;
+}
+
+.teach-radio input {
+  accent-color: var(--c-accent);
+}
+
+.teach-logo-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  padding: 0.8rem;
+  border: 1px dashed rgb(148 163 184 / 20%);
+  border-radius: var(--radius-md);
+
+  background: rgb(2 6 23 / 30%);
+}
+
+.teach-logo-row {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.teach-logo-preview {
+  object-fit: contain;
+
+  width: auto;
+  max-width: 12rem;
+  height: 2.4rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+
+  background: rgb(255 255 255 / 40%);
+}
+
+.teach-ghost {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--c-text);
+
+  font-size: 0.85rem;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.teach-ghost:hover {
+  border-color: rgb(148 163 184 / 35%);
+  background: rgb(148 163 184 / 8%);
+}
+
+.teach-hint {
+  color: var(--c-text-dim);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.teach-hint b {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.teach-saved {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.teach-saved-title {
+  color: var(--c-text-dim);
+  font-size: 0.75rem;
+}
+
+.teach-saved-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.teach-saved-chip {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+
+  padding: 0.25rem 0.7rem 0.25rem 0.35rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: rgb(2 6 23 / 40%);
+  color: var(--c-text-dim);
+
+  font-size: 0.75rem;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.teach-saved-chip:hover {
+  border-color: rgb(226 168 70 / 40%);
+  color: var(--c-text);
+}
+
+.teach-saved-chip img {
+  object-fit: contain;
+  width: auto;
+  max-width: 2.5rem;
+  height: 1.1rem;
+}
+
+.teach-field-row {
+  flex-direction: row;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.teach-page-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.teach-page-prefix,
+.teach-page-suffix {
+  color: var(--c-text);
+  font-size: 0.9rem;
+}
+
+.teach-page {
+  width: 5rem;
+  text-align: center;
+}
+
+.teach-page-hint {
+  color: var(--c-accent-2);
+}
+
+.teach-link-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.teach-link {
+  flex: 1;
+  color: var(--c-text-dim);
+  font-size: 0.8rem;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+.teach-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--c-border);
+}
+
+.teach-btn-primary {
+  padding: 0.7rem 2.4rem;
+  border: none;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-glow) 100%);
+  color: #1a1408;
+
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.teach-btn-primary:hover {
+  box-shadow: 0 8px 28px rgb(226 168 70 / 35%);
+  transform: translateY(-2px);
+}
+
 /* ── Responsive ── */
 @media (width <= 768px) {
   #app {

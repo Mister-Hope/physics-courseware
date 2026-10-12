@@ -682,7 +682,7 @@ clicks: 4
 <div class="key" v-click="3">只有两端都是铰链、且只受两端拉压的<b class="text-accent">二力杆</b>才一定沿杆；一端固定的杆，弹力方向可以是任意的。</div>
 </div>
 
-<div class="rod-hint" v-click="4">用手握住笔的一端，用另一只手多角度掰笔的另一端——体会"二力杆"。</div>
+<div class="rod-hint" v-click="4">用手握住笔的一端，用另一只手多角度掰笔的另一端——体会"多力杆"。</div>
 
 ---
 layout: base-flex
