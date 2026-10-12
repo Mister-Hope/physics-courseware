@@ -364,38 +364,46 @@ clicks: 3
 
 ---
 
-<!-- 收尾：推理链回看（③已被实验证实 ✓）→ 引出 1.3：电子束会走出什么轨迹？ -->
+<!-- 第一课时课堂小结：把推理链的每一步连"角色"一起交代清楚（条件→推理→验证→结论） -->
+# 课堂小结
+
 <div class="page-grow">
 
-<div class="mx-auto w-[720px] rounded-2xl border border-slate-700/60 bg-slate-900/40 p-5">
+<div class="mx-auto w-[720px]">
 
-<div class="flex items-center gap-3 py-1 text-lg">
-<span class="font-bold text-teal-300">① ✓</span>
+<div class="flex items-center gap-4 py-2 text-lg">
+<span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
+<span class="font-bold text-teal-300">①</span>
 <span>电流是电荷的定向移动</span>
 </div>
 
-<div class="flex items-center gap-3 py-1 text-lg">
-<span class="font-bold text-teal-300">② ✓</span>
+<div class="flex items-center gap-4 py-2 text-lg">
+<span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
+<span class="font-bold text-teal-300">②</span>
 <span>磁场对电流有力的作用</span>
 </div>
 
-<div class="flex items-center gap-3 py-1 text-lg">
-<span class="font-bold text-teal-300">③ ✓</span>
-<span>磁场对运动电荷有力的作用（阴极射线管实验证实）</span>
+<div class="flex items-center gap-4 py-2 text-lg">
+<span class="w-16 shrink-0 text-right text-base text-slate-500">理论推导</span>
+<span class="font-bold text-amber-300">③</span>
+<span>磁场对运动电荷有力的作用</span>
 </div>
 
-<div class="mt-2 rounded-xl border border-teal-300/40 bg-teal-400/10 px-3 py-2 text-lg">
-<div class="flex items-center gap-3">
-<span class="font-bold text-teal-300">④</span>
-<span><strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现</span>
-</div>
-</div>
-
+<div class="flex items-center gap-4 py-2 text-lg">
+<span class="w-16 shrink-0 text-right text-base text-slate-500">实验验证</span>
+<span class="font-bold text-teal-300">④ ✓</span>
+<span>阴极射线管实验证实</span>
 </div>
 
-<div class="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xl">
+<div class="key mt-6 text-lg">
+⑤ <strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现
+</div>
+
+<div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-xl">
 <span>方向：<strong>左手定则</strong>（<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" />）</span>
 <span>大小：<Latex tex="F_{\text{洛}} = qvB\sin\theta" /></span>
+</div>
+
 </div>
 
 </div>

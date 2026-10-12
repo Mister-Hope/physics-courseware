@@ -32,8 +32,8 @@ const E = 1.6e-19; // 元电荷 C
 const M_E = 9.11e-31; // 电子质量 kg
 const Q = -E; // 电子带负电
 
-const V_OPTIONS = [0.5e6, 1e6, 2e6];
-const B_OPTIONS = [0.5e-3, 1e-3, 2e-3];
+const V_OPTIONS = [1e6, 1.5e6, 2e6];
+const B_OPTIONS = [1e-3, 1.5e-3, 2e-3];
 
 const v = ref(1e6);
 const B = ref(1e-3);
@@ -45,8 +45,12 @@ const Bz = computed(() => (bDir.value === "out" ? 1 : -1));
 const rReal = computed(() => (M_E * v.value) / (Math.abs(Q) * B.value)); // m
 const TReal = computed(() => (2 * Math.PI * M_E) / (Math.abs(Q) * B.value)); // s
 
-/** 画布半径：按真实 r 缩放，B 变大→圆变小、v 变大→圆变大（与教材演示的观察一致） */
-const R = computed(() => Math.max(16, Math.min(88, 10 + rReal.value * 1000 * 3.4)));
+/**
+ * 画布半径：按真实 r 缩放，B 变大→圆变小、v 变大→圆变大（与教材演示的观察一致）。
+ * ★ 比例必须让**默认档就画得够大**：旧版用 10 + 3.4·r，把默认的 5.69 mm 只画成 29 用户单位，
+ *   在 400×360 的画布里只占 16%，投到教室后排几乎看不见。改成 11.5·r：默认 65、最小 33、最大 100。
+ */
+const R = computed(() => Math.max(32, Math.min(100, rReal.value * 1000 * 11.5)));
 
 /** 屏幕角速度：方向 = −q·B_z（真实符号），快慢 ∝ B（因为 ω = qB/m 与 v 无关） */
 const omega = computed(() => {
