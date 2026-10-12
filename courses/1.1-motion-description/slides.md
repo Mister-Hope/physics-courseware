@@ -74,6 +74,57 @@ layout: base-flex
 layout: base-flex
 ---
 
+<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 机械运动 · 力学</div>
+
+<div class="page-grow">
+
+<div class="ask justify-center">
+  <mdi-head-question-outline class="text-2xl" />
+  <span>汽车行驶、雄鹰翱翔、足球滚动……这些运动有什么共同点？</span>
+</div>
+
+<v-click>
+
+<div class="card card-highlight">
+  <div class="text-xl font-semibold">物体的<span class="text-accent">空间位置随时间变化</span>，是自然界中最简单、最基本的运动形态，叫作<span class="text-accent-2">机械运动</span>（mechanical motion）</div>
+  <div class="mt-4 text-lg">物理学中，研究物体做机械运动规律的分支叫作<span class="text-accent">力学</span>（mechanics）</div>
+</div>
+
+</v-click>
+
+<v-click>
+
+<div class="key mx-auto max-w-4xl">研究机械运动的过程中，物理学还创立了<span class="text-accent">科学研究的基本方法</span>——理想化模型就是其中的一种</div>
+
+</v-click>
+
+</div>
+---
+layout: base-flex
+---
+
+<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 运动的常见形态</div>
+
+<div class="page-grow page-grow-tight">
+
+<div class="ask justify-center">
+  <mdi-head-question-outline class="text-2xl" />
+  <span>同样是“位置随时间变化”，运动的方式一样吗？</span>
+</div>
+
+<MotionFormsDemo />
+
+<v-click>
+
+<div class="key mx-auto max-w-5xl"><span class="text-accent font-semibold">平动</span>各点完全相同；<span class="text-accent-2 font-semibold">转动、振动</span>各点并不相同——准确描述的困难就源于此</div>
+
+</v-click>
+
+</div>
+---
+layout: base-flex
+---
+
 <div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 质点 · 物体和质点</div>
 
 ## 雄鹰与足球的"麻烦"
@@ -109,13 +160,15 @@ layout: base-flex
 
 # 什么时候能把它看成"点"？
 
+<div class="page-grow">
+
 <v-click>
 
-<div class="mb-6">
-  <div class="flex items-center gap-2 mb-1"><mdi-earth class="text-accent-2 text-xl" /><span class="font-semibold text-lg">地球绕太阳公转</span></div>
-  <div class="text-sm opacity-70">地球直径约 <Latex tex="1.3 \times 10^4 \text{ km}" />，不到地日距离（约 <Latex tex="1.5 \times 10^8 \text{ km}" />）的万分之一</div>
+<div class="fill-row">
+  <div class="flex items-center gap-2 mb-2"><mdi-earth class="text-accent-2 text-2xl" /><span class="font-semibold text-xl">地球绕太阳公转</span></div>
+  <div class="text-base opacity-75 leading-relaxed">地球直径约 <Latex tex="1.3 \times 10^4 \text{ km}" />，不到地日距离（约 <Latex tex="1.5 \times 10^8 \text{ km}" />）的万分之一</div>
   <v-click>
-    <div class="mt-2 text-sm">由地球大小引起的运动差异<span class="text-accent">很小，可以忽略</span> → 把它视为点</div>
+    <div class="mt-3 text-lg">由地球大小引起的运动差异<span class="text-accent font-semibold">很小，可以忽略</span> → 把它视为点</div>
   </v-click>
 </div>
 
@@ -123,15 +176,17 @@ layout: base-flex
 
 <v-click>
 
-<div class="mb-6">
-  <div class="flex items-center gap-2 mb-1"><mdi-train class="text-accent-2 text-xl" /><span class="font-semibold text-lg">列车在平直轨道上行驶</span></div>
-  <div class="text-sm opacity-70">传动机构与车轮的运动很复杂</div>
+<div class="fill-row">
+  <div class="flex items-center gap-2 mb-2"><mdi-train class="text-accent-2 text-2xl" /><span class="font-semibold text-xl">列车在平直轨道上行驶</span></div>
+  <div class="text-base opacity-75 leading-relaxed">传动机构与车轮的运动很复杂</div>
   <v-click>
-    <div class="mt-2 text-sm">只关注列车<span class="text-accent">整体的运动</span>，不考虑各部分差异 → 用一个点的运动代替整列列车</div>
+    <div class="mt-3 text-lg">只关注列车<span class="text-accent font-semibold">整体的运动</span>，不考虑各部分差异 → 用一个点的运动代替整列列车</div>
   </v-click>
 </div>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -302,11 +357,54 @@ layout: base-flex
 
 <v-click>
 
-<div class="card card-highlight mt-4 text-center">
-  <div class="text-xl font-semibold">定义：用来作为<span class="text-accent">参考</span>的物体，叫作<span class="text-accent-2">参考系</span>（reference frame）</div>
+<div class="card card-highlight mt-4">
+  <div class="text-lg font-semibold">研究运动时<b>选做不动</b>的物体 → <span class="text-accent">参照物</span></div>
+  <div class="mt-2 text-lg font-semibold">相对于参照物<b>静止</b>的物体系 → <span class="text-accent-2">参考系</span>（reference frame）</div>
 </div>
 
 </v-click>
+---
+layout: base-flex
+---
+
+<div class="tag-icon mb-3"><mdi-lightbulb-on-outline /> 参考系的四个特点</div>
+
+<div class="page-grow">
+
+<div class="ask justify-center">
+  <mdi-head-question-outline class="text-2xl" />
+  <span>选做参考的物体，有什么讲究？</span>
+</div>
+
+<div class="grid grid-cols-2 gap-x-10 gap-y-6">
+
+<v-clicks>
+
+<div>
+  <div class="flex items-center gap-2 mb-1"><mdi-swap-horizontal class="text-accent text-xl" /><span class="font-semibold text-lg">① 任意性</span></div>
+  <div class="text-sm opacity-75">同一运动，参考系不唯一，可以任意选择</div>
+</div>
+
+<div>
+  <div class="flex items-center gap-2 mb-1"><mdi-source-branch class="text-accent-2 text-xl" /><span class="font-semibold text-lg">② 相对性</span></div>
+  <div class="text-sm opacity-75">物体是运动还是静止，取决于所选的参考系</div>
+</div>
+
+<div>
+  <div class="flex items-center gap-2 mb-1"><mdi-link-variant class="text-accent text-xl" /><span class="font-semibold text-lg">③ 同一性</span></div>
+  <div class="text-sm opacity-75">研究同一问题时，始终选用同一个参考系</div>
+</div>
+
+<div>
+  <div class="flex items-center gap-2 mb-1"><mdi-compare class="text-accent-2 text-xl" /><span class="font-semibold text-lg">④ 差异性</span></div>
+  <div class="text-sm opacity-75">同一物体在不同参考系中，运动情况（轨迹、快慢）不同</div>
+</div>
+
+</v-clicks>
+
+</div>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -435,3 +533,41 @@ layout: base-flex
 <div class="key key-blue mt-6">答案：<span class="text-accent font-semibold">C</span>——研究整体的远距离运动时，物体的形状可忽略</div>
 
 </v-click>
+---
+layout: base-flex
+clicks: 3
+---
+
+# 课后练习
+
+<div class="page-grow page-grow-tight">
+
+<div class="ask">
+  <mdi-head-question-outline class="text-xl" />
+  <span>2. 由于风，河岸上的旗帜向右飘；河面上两条船上的旗，一条向右、一条向左飘。两条船的运动状态是（　　）</span>
+</div>
+
+<div class="half-grid">
+
+<div class="stack-tight">
+  <div class="text-sm leading-relaxed">
+    <div>A. A 船肯定是向左运动的</div>
+    <div>B. A 船肯定是静止的</div>
+    <div>C. B 船肯定是向右运动的</div>
+    <div>D. B 船可能是静止的</div>
+  </div>
+
+  <div v-click="1" class="text-sm leading-relaxed">A 船旗与风向<span class="text-accent-2 font-semibold">同向</span>——A 船可能静止、可能向左、也可能向右但比风慢，A、B 都<span class="text-danger">不能“肯定”</span></div>
+
+  <div v-click="2" class="text-sm leading-relaxed">B 船旗与风向<span class="text-danger font-semibold">反向</span>——B 船相对空气向左运动，说明它向右比风还快，<span class="text-accent font-semibold">肯定向右运动</span></div>
+
+  <div v-click="3" class="key key-blue">答案：<span class="text-accent font-semibold">C</span>——旗向反映船相对空气的运动</div>
+</div>
+
+<div class="figure-cell">
+  <FlagBoatsSvg :step="$clicks" />
+</div>
+
+</div>
+
+</div>

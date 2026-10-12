@@ -20,3 +20,36 @@
   flex-shrink: 0;
   margin-right: 0;
 }
+
+/* ── p6「什么时候能把它看成点」：两个例块均分整页高度，不再下半页留白。
+   ⛔ 必须显式 width:100%：flex 列容器里横向 auto 外边距会取消 stretch，
+   两行会各自按内容宽度居中、左边缘错开（实测 64px），显式定宽才能左右对齐。 ── */
+.fill-row {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+/* ── 题目图容器：图占满所在栏（旗帜题）── */
+.figure-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.figure-cell svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(148 163 184 / 12%);
+  border-radius: 1.1rem;
+
+  background: rgb(15 20 37 / 40%);
+}
