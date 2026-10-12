@@ -45,12 +45,19 @@ const Bz = computed(() => (bDir.value === "out" ? 1 : -1));
 const rReal = computed(() => (M_E * v.value) / (Math.abs(Q) * B.value)); // m
 const TReal = computed(() => (2 * Math.PI * M_E) / (Math.abs(Q) * B.value)); // s
 
+/** 两档参数的极值对应的真实半径（m） */
+const R_MIN_REAL = (M_E * Math.min(...V_OPTIONS)) / (Math.abs(Q) * Math.max(...B_OPTIONS));
+const R_MAX_REAL = (M_E * Math.max(...V_OPTIONS)) / (Math.abs(Q) * Math.min(...B_OPTIONS));
+
 /**
- * 画布半径：按真实 r 缩放，B 变大→圆变小、v 变大→圆变大（与教材演示的观察一致）。
- * ★ 比例必须让**默认档就画得够大**：旧版用 10 + 3.4·r，把默认的 5.69 mm 只画成 29 用户单位，
- *   在 400×360 的画布里只占 16%，投到教室后排几乎看不见。改成 11.5·r：默认 65、最小 33、最大 100。
+ * 画布半径（用户单位）：B 变大→圆变小、v 变大→圆变大（教材演示的定性结论）。 ★ 两条坑： ① 旧版用 10 + 3.4·r，把默认的 5.69 mm 只画成 29 用户单位、占画布高
+ * 16%，后排看不见； ② 改成严格正比放大（R ∝ r）时，最小档只剩 20 单位（16%），仍然是个点。 折中：把真实半径区间 [2.85, 11.39] mm 仿射映射到 [44, 80]
+ * 用户单位—— 单调、各档互不相同（比值 1.8 倍，肉眼可辨），最小档也有画布高的 35%； 精确半径由右侧读数给出（定性演示只需要看得出来"变大 / 变小"）。
  */
-const R = computed(() => Math.max(32, Math.min(100, rReal.value * 1000 * 11.5)));
+const R = computed(() => {
+  const t = (rReal.value - R_MIN_REAL) / (R_MAX_REAL - R_MIN_REAL);
+  return 44 + 36 * t;
+});
 
 /** 屏幕角速度：方向 = −q·B_z（真实符号），快慢 ∝ B（因为 ω = qB/m 与 v 无关） */
 const omega = computed(() => {
@@ -73,8 +80,8 @@ onMounted(() => {
 });
 onBeforeUnmount(() => rafId && cancelAnimationFrame(rafId));
 
-const CX = 200;
-const CY = 180;
+const CX = 130;
+const CY = 125;
 
 /** 电子位置（屏幕坐标） */
 const dot = computed(() => ({
@@ -117,27 +124,27 @@ const tNS = computed(() => TReal.value * 1e9);
   <div class="flex min-h-0 w-full flex-1 gap-4">
     <div class="flex min-h-0 min-w-0 flex-1 items-center justify-center">
       <svg
-        viewBox="0 0 400 360"
+        viewBox="0 0 260 250"
         xmlns="http://www.w3.org/2000/svg"
         class="h-full w-auto max-w-full"
       >
         <!-- B 记号（视图沿磁场方向看） -->
         <g v-if="bDir === 'out'">
-          <circle cx="52" cy="52" r="15" fill="none" stroke="#e2a846" stroke-width="2.4" />
-          <circle cx="52" cy="52" r="3.6" fill="#e2a846" />
+          <circle cx="28" cy="28" r="12" fill="none" stroke="#e2a846" stroke-width="2.2" />
+          <circle cx="28" cy="28" r="3" fill="#e2a846" />
         </g>
         <g v-else>
-          <circle cx="52" cy="52" r="15" fill="none" stroke="#e2a846" stroke-width="2.4" />
-          <line x1="41" y1="41" x2="63" y2="63" stroke="#e2a846" stroke-width="2.4" />
-          <line x1="63" y1="41" x2="41" y2="63" stroke="#e2a846" stroke-width="2.4" />
+          <circle cx="28" cy="28" r="12" fill="none" stroke="#e2a846" stroke-width="2.2" />
+          <line x1="20" y1="20" x2="36" y2="36" stroke="#e2a846" stroke-width="2.2" />
+          <line x1="36" y1="20" x2="20" y2="36" stroke="#e2a846" stroke-width="2.2" />
         </g>
         <text
-          x="52"
-          y="90"
+          x="28"
+          y="58"
           text-anchor="middle"
           font-family="KaTeX_Math"
           font-style="italic"
-          font-size="22"
+          font-size="18"
           fill="#e2a846"
         >
           B
@@ -156,7 +163,7 @@ const tNS = computed(() => TReal.value * 1e9);
 
         <!-- 圆心 + 半径 -->
         <template v-if="radius">
-          <circle :cx="CX" :cy="CY" r="3.5" fill="#cbd5e1" />
+          <circle :cx="CX" :cy="CY" r="3" fill="#cbd5e1" />
           <line
             :x1="CX"
             :y1="CY"
@@ -167,11 +174,11 @@ const tNS = computed(() => TReal.value * 1e9);
             stroke-dasharray="6 5"
           />
           <text
-            :x="(CX + dot.x) / 2 + 8"
-            :y="(CY + dot.y) / 2 - 8"
+            :x="(CX + dot.x) / 2 + 7"
+            :y="(CY + dot.y) / 2 - 7"
             font-family="KaTeX_Math"
             font-style="italic"
-            font-size="22"
+            font-size="19"
             fill="#cbd5e1"
           >
             r
@@ -179,14 +186,14 @@ const tNS = computed(() => TReal.value * 1e9);
         </template>
 
         <!-- v：切线方向 -->
-        <CourseArrow :from="dot" :to="arrowEnd(vDir, 48)" stroke="#60a5fa" stroke-width="4" />
+        <CourseArrow :from="dot" :to="arrowEnd(vDir, 24)" stroke="#60a5fa" stroke-width="3.4" />
         <text
-          :x="arrowEnd(vDir, 62).x"
-          :y="arrowEnd(vDir, 62).y + 6"
+          :x="arrowEnd(vDir, 34).x"
+          :y="arrowEnd(vDir, 34).y + 5"
           text-anchor="middle"
           font-family="KaTeX_Math"
           font-style="italic"
-          font-size="23"
+          font-size="18"
           fill="#60a5fa"
         >
           v
@@ -196,31 +203,31 @@ const tNS = computed(() => TReal.value * 1e9);
         <template v-if="force">
           <CourseArrow
             :from="dot"
-            :to="arrowEnd(fDir, 46)"
+            :to="arrowEnd(fDir, 24)"
             :stroke="forcePointsToCenter ? '#2dd4bf' : '#f87171'"
-            stroke-width="4.4"
+            stroke-width="4"
           />
           <text
-            :x="arrowEnd(fDir, 64).x"
-            :y="arrowEnd(fDir, 64).y + 6"
+            :x="arrowEnd(fDir, 34).x"
+            :y="arrowEnd(fDir, 34).y + 4"
             text-anchor="middle"
-            font-size="21"
+            font-size="16"
             fill="#2dd4bf"
           >
             <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
-            <tspan dy="4" font-size="12">洛</tspan>
+            <tspan dy="4" font-size="11">洛</tspan>
           </text>
         </template>
 
         <!-- 电子 -->
-        <circle :cx="dot.x" :cy="dot.y" r="9" fill="#60a5fa" />
+        <circle :cx="dot.x" :cy="dot.y" r="7.5" fill="#60a5fa" />
         <line
-          :x1="dot.x - 4"
+          :x1="dot.x - 3.5"
           :y1="dot.y"
-          :x2="dot.x + 4"
+          :x2="dot.x + 3.5"
           :y2="dot.y"
           stroke="#0f1425"
-          stroke-width="2"
+          stroke-width="1.8"
           stroke-linecap="round"
         />
       </svg>

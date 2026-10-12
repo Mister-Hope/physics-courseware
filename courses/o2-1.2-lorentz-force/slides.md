@@ -371,35 +371,35 @@ clicks: 3
 
 <div class="mx-auto w-[720px]">
 
-<div class="flex items-center gap-4 py-2 text-lg">
+<div class="flex items-center gap-4 py-1.5 text-lg">
 <span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
 <span class="font-bold text-teal-300">①</span>
 <span>电流是电荷的定向移动</span>
 </div>
 
-<div class="flex items-center gap-4 py-2 text-lg">
+<div class="flex items-center gap-4 py-1.5 text-lg">
 <span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
 <span class="font-bold text-teal-300">②</span>
 <span>磁场对电流有力的作用</span>
 </div>
 
-<div class="flex items-center gap-4 py-2 text-lg">
+<div class="flex items-center gap-4 py-1.5 text-lg">
 <span class="w-16 shrink-0 text-right text-base text-slate-500">理论推导</span>
 <span class="font-bold text-amber-300">③</span>
 <span>磁场对运动电荷有力的作用</span>
 </div>
 
-<div class="flex items-center gap-4 py-2 text-lg">
+<div class="flex items-center gap-4 py-1.5 text-lg">
 <span class="w-16 shrink-0 text-right text-base text-slate-500">实验验证</span>
 <span class="font-bold text-teal-300">④ ✓</span>
 <span>阴极射线管实验证实</span>
 </div>
 
-<div class="key mt-6 text-lg">
+<div class="key mt-5 text-lg">
 ⑤ <strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现
 </div>
 
-<div class="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-xl">
+<div class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-xl">
 <span>方向：<strong>左手定则</strong>（<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" />）</span>
 <span>大小：<Latex tex="F_{\text{洛}} = qvB\sin\theta" /></span>
 </div>
