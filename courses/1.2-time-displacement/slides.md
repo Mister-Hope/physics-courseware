@@ -79,21 +79,88 @@ layout: base-flex
 layout: base-flex
 ---
 
-# 用坐标描述位置
+# 第几秒内 · 前几秒
 
-<div class="key mt-4 text-xl">定量描述位置，需要在参考系上建立<span class="text-accent">坐标系</span>（coordinate system）</div>
+<div class="ask mt-3">
+  <mdi-head-question-outline class="text-xl" />
+  <span>"第 1 秒内""前 2 秒"——在时间轴上各是哪一段？</span>
+</div>
+
+<div class="mt-3" v-click="1">
+  <TimeWordsAxis mode="segments" />
+</div>
 
 <v-clicks>
 
-<div class="mt-6 text-base">直线运动 → 建立一维坐标系：在 <Latex tex="x" /> 轴上选<span class="text-accent-2">原点</span>，规定<span class="text-accent-2">正方向</span>和<span class="text-accent-2">单位长度</span></div>
+<div class="mt-2 text-base leading-relaxed"><span class="text-accent font-semibold">第 <Latex tex="1\ \text{s}" /> 内、第 <Latex tex="2\ \text{s}" /> 内</span>：一段挨一段的时间间隔——在时间轴上是<span class="text-accent-2">线段</span></div>
 
-<div class="mt-4 text-base">长安街上的汽车：<Latex tex="x" /> 轴正方向指<span class="text-accent">东</span>，以交通岗亭为原点 <Latex tex="O" /></div>
+<div class="mt-2 text-base leading-relaxed"><span class="text-accent-2 font-semibold">前 <Latex tex="1\ \text{s}" />、前 <Latex tex="2\ \text{s}" /></span>：从计时开始起算的一整段——也是<span class="text-accent-2">线段</span></div>
 
 </v-clicks>
 
-<div class="grid grid-cols-2 gap-6 mt-6">
+<div class="key mt-3" v-click="4">"第几秒内""前几秒"都是<span class="text-accent">时间间隔</span>：其中<span class="text-accent">第 <Latex tex="1\ \text{s}" /> 内 ＝ 前 <Latex tex="1\ \text{s}" /></span>，在时间轴上就是同一段</div>
+---
+layout: base-flex
+---
+
+# 第几秒初 · 第几秒末
+
+<div class="ask mt-3">
+  <mdi-head-question-outline class="text-xl" />
+  <span>"第 2 秒初""第 2 秒末"——它们还是时间间隔吗？</span>
+</div>
+
+<div class="mt-3" v-click="1">
+  <TimeWordsAxis mode="moments" />
+</div>
 
 <v-clicks>
+
+<div class="mt-2 text-base leading-relaxed">第 <Latex tex="1\ \text{s}" /> 初＝<Latex tex="t=0" />；第 <Latex tex="1\ \text{s}" /> 末、第 <Latex tex="2\ \text{s}" /> 末在 <Latex tex="t=1\ \text{s}" />、<Latex tex="t=2\ \text{s}" /> 处——都是<span class="text-accent-2">时刻</span>（点）</div>
+
+<div class="mt-2 text-base leading-relaxed">第 <Latex tex="1\ \text{s}" /> 末 ＝ 第 <Latex tex="2\ \text{s}" /> 初、第 <Latex tex="2\ \text{s}" /> 末 ＝ 第 <Latex tex="3\ \text{s}" /> 初——<span class="text-accent">同一个时刻，两种叫法</span></div>
+
+</v-clicks>
+
+<div class="key mt-3" v-click="4">"第几秒初/末"是<span class="text-accent">时刻</span>（时间轴上的点）；"第几秒内/前几秒"是<span class="text-accent-2">时间间隔</span>（线段）</div>
+---
+layout: base-flex
+---
+
+# 用坐标描述位置
+
+<div class="ask mt-3">
+  <mdi-head-question-outline class="text-xl" />
+  <span>要准确描述汽车在长安街上的位置，应该采用什么方法？</span>
+</div>
+
+<v-click>
+
+<div class="card card-highlight mt-4">
+  <div class="text-base">在参考系上建立<span class="text-accent">坐标系</span>（coordinate system）：规定<span class="text-accent-2">原点</span>、<span class="text-accent-2">正方向</span>和<span class="text-accent-2">单位长度</span></div>
+</div>
+
+</v-click>
+
+<div class="grid grid-cols-2 gap-8 mt-5 items-center">
+
+<div class="flex flex-col gap-2 min-w-0">
+
+<div v-click="2" class="text-base font-semibold">按运动情形选取坐标系：</div>
+
+<div v-click="3" class="text-base leading-relaxed">直线运动 → <span class="text-accent-2 font-semibold">一维坐标系</span></div>
+
+<div v-click="4" class="text-base leading-relaxed">在地面上运动 → <span class="text-accent-2 font-semibold">二维坐标系</span></div>
+
+<div v-click="5" class="text-base leading-relaxed">在空间中运动 → <span class="text-accent-2 font-semibold">三维坐标系</span></div>
+
+</div>
+
+<div class="flex flex-col gap-2 min-w-0">
+
+<div v-click="6" class="text-base leading-relaxed">长安街上的汽车：<Latex tex="x" /> 轴正方向指<span class="text-accent">东</span>，以交通岗亭为原点 <Latex tex="O" /></div>
+
+<div class="grid grid-cols-2 gap-4" v-click="7">
 
 <div class="text-center">
   <div class="text-2xl font-bold text-accent"><Latex tex="+30 \text{ m}" /></div>
@@ -105,7 +172,9 @@ layout: base-flex
   <div class="text-sm opacity-70 mt-1">在岗亭以西 <Latex tex="20 \text{ m}" /> 处</div>
 </div>
 
-</v-clicks>
+</div>
+
+</div>
 
 </div>
 ---
@@ -135,7 +204,9 @@ layout: base-flex
 
 </div>
 
-<div v-click="4" class="key mt-3">不管骑哪条路线、用了多长时间，位置的变化都只有一件事：<span class="text-accent-2">从学校到公园</span>——可以用一条<span class="text-accent">由初位置指向末位置的有向线段</span>表示</div>
+<div v-click="4" class="mt-3 text-base leading-relaxed"><span class="font-semibold text-accent-2">路程</span>：物体运动<span class="text-accent">轨迹的长度</span>，只有大小、没有方向（<span class="text-accent-2">标量</span>），<span class="text-accent-2">不能准确描述位置的变化</span>。</div>
+
+<div v-click="5" class="key mt-3">不管骑哪条路线，位置的变化都可以用一条<span class="text-accent">由初位置指向末位置的有向线段</span>表示</div>
 ---
 layout: base-flex
 ---
@@ -361,6 +432,9 @@ labels:
 ```
 
 </div>
+
+<div v-click="6" class="key mt-3"><Latex tex="x\text{-}t" /> 图像只记录位置随时间的变化，<span class="text-accent">不是物体运动的轨迹</span>——甲、乙都沿 <Latex tex="x" /> 轴运动</div>
+
 ---
 layout: base-flex
 ---
