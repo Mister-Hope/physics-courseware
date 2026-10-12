@@ -18,16 +18,17 @@
    所以 `pnpm skills:restore` 拿到的是上游默认分支的**当前**内容，不等于"当初那一版"。
    CLI 的锁结构其实支持 `ref`——用 `owner/repo#<commit-or-tag>` 这种源安装就会记下来，
    届时 `restore` 会固定到该 ref；真要精确复现时补 `ref` 再恢复即可。
-2. **CI 里没有技能正本**：CI 本来就不跑任何技能相关能力，`scripts/check-skills.ts`（postinstall 会跑）
-   对"整目录不存在"**直接放行**，只对"目录在、但 lock 列出的技能缺 `SKILL.md`"报错，
-   所以 `pnpm ci` / 部署不会被技能影响。
+2. **CI 里没有技能正本也照常跑**：CI 本来就不跑任何技能相关能力，`scripts/check-skills.ts`（postinstall 会跑）
+   在 `CI` 环境变量存在时**静默跳过**（不打印、不联网、不安装）；本地缺技能时则**自动跑
+   `skills experimental_install` 拉回正本**——postinstall 场景修复失败只警告、不会拦住 `pnpm install`，
+   显式 `pnpm skills:check --strict` 才会报错退出，所以 `pnpm ci` / 部署永远不会被技能影响。
 3. **DSH 的技能扫描表**读 `<项目根>/.agents/skills`（rank 200）→ 技能必须装在本仓库根目录才能用；
    `.claude/skills/<name>` 只是软链，正本不在时两边都用不了。
 
 ## 安装 / 更新 / 恢复（唯一入口，不要手改技能正本）
 
 ```bash
-pnpm skills:check                                 # 离线自检：lock 列出的技能正本是否都在（postinstall 也会跑）
+pnpm skills:check                                 # 自检 + 自动修复：本地缺技能时自动按 skills-lock.json 恢复（postinstall 也会跑；CI 静默跳过）
 pnpm skills:restore                               # 从 skills-lock.json 恢复正本到 .agents/skills/（需联网）
 pnpm skills:update                                # 更新到上游最新：skills update -p -y（改写正本 + lock；需联网）
 pnpm skills:list                                  # 看装了哪些技能、装在哪
