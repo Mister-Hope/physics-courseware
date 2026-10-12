@@ -1,13 +1,18 @@
 <!--
   阴极射线管高精度 3D 实体模型 (CathodeRayTube3D.vue)
   —— 严格遵循真实物理实验构造：
-     1. 完美视觉平衡：狭缝挡板严格置于中央 (x = 0.0)，左侧加速区 (阴极-阳极-挡板，长 3.2) 与右侧偏转区 (长 4.0) 比例匀称平衡，管径均匀无失真；
-     2. 磁场矢量阵列 (B)：选择磁场方向后，偏转区均布 6 个匀强磁场矢量；箭尖采用半透明琥珀金三角形 Sprite，正面始终朝向摄像头；
-     3. 狭缝扁平长条电子束 (Ribbon)：自狭缝喷射出的真实薄片带状发光束流，整个薄长条在磁场中平滑向上/向下整体弯曲；
-     4. 支架卡箍修正：下半圆托座 (y <= 0) 从底部稳稳托住玻璃管；
-     5. 真实金属电极与高压电源：银灰拉丝不锈钢电极，正负极 1:1 圆形徽标绝不压扁；
-     6. 严格内壁碰撞截断，绝不穿出玻璃管外壁；
-     7. 纯净教学控件：仅保留无磁场 / B ⊙ 向外 / B ⊗ 向里 / 复位视角。
+     1. 二维扁平磁场箭头 (45° 顶角 Axial Billboard)：
+        - 箭头部为扁平三角形，顶角严格控制在 45°（半顶角 22.5°，高宽比严格匹配）；
+        - 箭身与箭尖同平面、半透明金黄面片 + 高亮锐利轮廓线；
+        - 物理指向守恒：沿磁场轴线 (Z 轴) 穿透，向外为 +Z，向里为 -Z；
+        - 轴向广告牌自动旋转 (Axial Billboard)：始终绕箭柄轴线 (Z 轴) 旋转，正面永远朝向摄像机，彻底避免从水平或垂直角度观察时退化成“一条线”；
+     2. 9 个磁场箭头 3×3 均匀阵列，真实反映偏转区匀强磁场；
+     3. 视界宽度完全连续：去除多余嵌套圆柱，自阴极向阳极加速聚焦，出阳极孔后平滑延伸至狭缝，穿过狭缝至偏转区始终连续，俯视图无任何“多余大圆柱突然消失”的突兀感；
+     4. 左右长度平衡：狭缝挡板置于正中 (x = 0.0)，加速区与偏转区对称协调；
+     5. 支架托座位于下半周 (y <= 0) 稳稳托住玻璃管；
+     6. 真实金属电极与高压电源标志；
+     7. 光束严格终止于玻璃管内壁，绝不穿出外壳；
+     8. 纯净教学控件。
 -->
 <script setup lang="ts">
 import * as THREE from "three";
@@ -103,46 +108,138 @@ function orientVector(
   }
 }
 
-/** 构造半透明三角形箭头 Sprite (正面始终朝向摄像头) 用于磁场 B 的多个箭头尖部 */
-function createTriangleArrowSprite(pointingUp = true) {
-  const canvas = document.createElement("canvas");
-  canvas.width = 128;
-  canvas.height = 128;
-  const ctx = canvas.getContext("2d")!;
+/**
+ * 构造通用二维扁平矢量箭头 (2D Flat Axial Billboard Arrow)
+ *
+ * - 纯二维扁平结构：扁平细长箭柄 + 顶角严格为 45° 的扁平三角形箭头部
+ * - 顶角 45° 几何严谨性： 半顶角 α = 22.5°，tan(22.5°) = √2 - 1 ≈ 0.41421356 三角形高度 H = 0.36，底边半宽 W_half = 0.36 *
+ *   tan(22.5°) ≈ 0.1491 顶角 = 2 * atan(0.1491 / 0.36) = 45.0°
+ * - 支持颜色配置（如金黄色 B、鲜红色 F 等）
+ * - 外层 arrow 组支持在三维空间中定位与定向，并绕自身轴线实时自适应旋转 (Axial Billboard)， 正面始终朝向摄像机，绝不退化为一条线！
+ */
+function createFlatAxialArrow(fillColor = 0xfbbf24, lineColor = 0xfef08a, fillOpacity = 0.85) {
+  const group = new THREE.Group();
 
-  ctx.clearRect(0, 0, 128, 128);
+  // 内部翻转/对齐组：用于沿局部 Z 轴方向朝向
+  const inner = new THREE.Group();
+  inner.name = "arrowInner";
 
-  // 半透明琥珀金填充 + 亮金描边
-  ctx.fillStyle = "rgba(245, 158, 11, 0.68)";
-  ctx.strokeStyle = "#fbbf24";
-  ctx.lineWidth = 4;
-  ctx.lineJoin = "round";
+  const H = 0.36; // 45° 顶角三角形高度
+  const halfW = H * (Math.SQRT2 - 1); // 45° 顶角底边半宽 ≈ 0.1491
+  const tipZ = 0.56;
+  const baseZ = tipZ - H; // 0.20
+  const shaftStartZ = -0.56;
+  const shaftHalfW = 0.022; // 箭柄半宽 0.022 (总宽 0.044)
 
-  ctx.beginPath();
-  if (pointingUp) {
-    ctx.moveTo(64, 18);
-    ctx.lineTo(110, 102);
-    ctx.lineTo(18, 102);
-  } else {
-    ctx.moveTo(64, 110);
-    ctx.lineTo(110, 26);
-    ctx.lineTo(18, 26);
-  }
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
+  // 1. 二维扁平填充面网格 (在 X-Z 平面，y = 0)
+  const positions: number[] = [
+    // 箭柄矩形 (4 个顶点)
+    -shaftHalfW,
+    0,
+    shaftStartZ, // 0: 尾左
+    shaftHalfW,
+    0,
+    shaftStartZ, // 1: 尾右
+    shaftHalfW,
+    0,
+    baseZ, // 2: 颈右
+    -shaftHalfW,
+    0,
+    baseZ, // 3: 颈左
 
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.minFilter = THREE.LinearFilter;
-  const mat = new THREE.SpriteMaterial({
-    map: texture,
+    // 箭头部三角形 (3 个顶点)
+    0,
+    0,
+    tipZ, // 4: 顶点 (尖端)
+    -halfW,
+    0,
+    baseZ, // 5: 底角左
+    halfW,
+    0,
+    baseZ, // 6: 底角右
+  ];
+
+  const indices: number[] = [0, 3, 2, 0, 2, 1, 4, 5, 6];
+
+  const arrowGeo = new THREE.BufferGeometry();
+  arrowGeo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  arrowGeo.setIndex(indices);
+  arrowGeo.computeVertexNormals();
+
+  const arrowMat = new THREE.MeshBasicMaterial({
+    color: fillColor,
     transparent: true,
-    depthTest: false,
-    opacity: 0.9,
+    opacity: fillOpacity,
+    side: THREE.DoubleSide,
+    depthWrite: false,
   });
-  const sprite = new THREE.Sprite(mat);
-  sprite.scale.set(0.34, 0.34, 1);
-  return sprite;
+
+  const arrowMesh = new THREE.Mesh(arrowGeo, arrowMat);
+  inner.add(arrowMesh);
+
+  // 2. 边缘高光轮廓线
+  const linePoints: number[] = [
+    -shaftHalfW,
+    0,
+    shaftStartZ,
+    shaftHalfW,
+    0,
+    shaftStartZ,
+    shaftHalfW,
+    0,
+    shaftStartZ,
+    shaftHalfW,
+    0,
+    baseZ,
+    shaftHalfW,
+    0,
+    baseZ,
+    halfW,
+    0,
+    baseZ,
+    halfW,
+    0,
+    baseZ,
+    0,
+    0,
+    tipZ,
+    0,
+    0,
+    tipZ,
+    -halfW,
+    0,
+    baseZ,
+    -halfW,
+    0,
+    baseZ,
+    -shaftHalfW,
+    0,
+    baseZ,
+    -shaftHalfW,
+    0,
+    baseZ,
+    -shaftHalfW,
+    0,
+    shaftStartZ,
+  ];
+
+  const lineGeo = new THREE.BufferGeometry();
+  lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(linePoints, 3));
+  const lineMat = new THREE.LineBasicMaterial({
+    color: lineColor,
+    transparent: true,
+    opacity: 0.95,
+  });
+  const lineMesh = new THREE.LineSegments(lineGeo, lineMat);
+  inner.add(lineMesh);
+
+  group.add(inner);
+  return group;
+}
+
+/** 磁场专用的轴向扁平箭头 */
+function createAxialFlatArrow() {
+  return createFlatAxialArrow(0xfbbf24, 0xfef08a, 0.82);
 }
 
 /** 纯中文 Sprite 文字标牌（3:1 宽高比） */
@@ -171,7 +268,7 @@ function createTextSprite(text: string, color: string, bgColor = "rgba(15, 23, 4
   texture.minFilter = THREE.LinearFilter;
   const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
   const sprite = new THREE.Sprite(mat);
-  sprite.scale.set(0.96, 0.32, 1); // 严格保持 3:1 比例
+  sprite.scale.set(0.96, 0.32, 1);
   return sprite;
 }
 
@@ -201,7 +298,7 @@ function createBadgeSprite(text: string, color: string, bgColor = "rgba(15, 23, 
   texture.minFilter = THREE.LinearFilter;
   const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
   const sprite = new THREE.Sprite(mat);
-  sprite.scale.set(0.32, 0.32, 1); // 严格 1:1 正圆形比例
+  sprite.scale.set(0.32, 0.32, 1);
   return sprite;
 }
 
@@ -233,19 +330,19 @@ function initScene() {
   dirLight2.position.set(-6, -4, -6);
   scene.add(dirLight2);
 
-  // 1. 玻璃外壳与对称底部支架
+  // 1. 玻璃外壳与底部下托式支架
   buildGlassAndStands();
 
   // 2. 金属真实质感电极（阴极与加速孔阳极）与高压电源
   buildElectrodesAndPower();
 
-  // 3. 细狭缝挡板 (置于正中 x = 0.0)
+  // 3. 细狭缝挡板 (精确置于正中央 x = 0.0)
   buildSlitBaffle();
 
-  // 4. 电子雾状云与准直扁平薄片光带 (Ribbon)
+  // 4. 连续平滑电子流系统（前后等宽连续，杜绝外圆柱突然消失）
   buildElectronBeamSystem();
 
-  // 5. 多个磁场矢量的匀强磁场阵列 (B 阵列)
+  // 5. 轴向对齐扁平磁场阵列 (B 阵列)
   buildMagneticFieldArray();
 
   // 6. 速度 v、洛伦兹力 F 与中文结构标签
@@ -255,7 +352,7 @@ function initScene() {
   animate();
 }
 
-/** 1. 建造半透明玻璃管与正确定位在底部的托架支架（两侧完全对称） */
+/** 1. 建造半透明玻璃管与正确定位在底部的托架支架 */
 function buildGlassAndStands() {
   const tubeGroup = new THREE.Group();
 
@@ -308,10 +405,10 @@ function buildGlassAndStands() {
     // 下半圆托架卡箍 (从 y = 0 弯向 y = -1.06 再回到 y = 0，托住下半部)
     const clamp = new THREE.Mesh(new THREE.TorusGeometry(1.06, 0.04, 16, 32, Math.PI), standMetal);
     clamp.position.set(xPos, 0, 0);
-    clamp.rotation.set(0, Math.PI / 2, Math.PI); // 翻转至下半圆
+    clamp.rotation.set(0, Math.PI / 2, Math.PI);
     tubeGroup.add(clamp);
 
-    // 立柱：上顶面正好在 y = -1.06 (与托架最低点无缝承接)，立柱高度 0.84，底面在 y = -1.9
+    // 立柱
     const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.84, 16), standMetal);
     leg.position.set(xPos, -1.48, 0);
     tubeGroup.add(leg);
@@ -325,7 +422,7 @@ function buildGlassAndStands() {
   scene!.add(tubeGroup);
 }
 
-/** 2. 真实银白不锈钢电极 + 高压电源模块（左侧加速区） */
+/** 2. 真实银白不锈钢电极 + 高压电源模块 */
 function buildElectrodesAndPower() {
   const electrodeGroup = new THREE.Group();
 
@@ -373,31 +470,30 @@ function buildElectrodesAndPower() {
   anode.rotation.y = Math.PI / 2;
   electrodeGroup.add(anode);
 
-  // 阳极引线向下穿出管底
-  const anodeWire = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.6, 16), wireMat);
-  anodeWire.position.set(-1.6, -0.8, 0);
+  // 阳极引线向下穿出管底（连接在阳极环的外圆下边缘 y = -0.72 处，严禁伸入中央通透加速孔！）
+  const anodeWire = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.88, 16), wireMat);
+  anodeWire.position.set(-1.6, -1.16, 0);
   electrodeGroup.add(anodeWire);
 
-  // —— 阴极与阳极下方的高压电源模块 (位于 x = -2.4 正中央) ——
+  // —— 阴极与阳极下方的高压电源模块 ——
   const powerGroup = new THREE.Group();
   powerGroup.position.set(-2.4, -1.6, 0);
 
-  // 连接水平导线 (长 1.6)
+  // 连接水平导线
   const horizWire = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 1.6, 16), wireMat);
   horizWire.rotation.z = Math.PI / 2;
   powerGroup.add(horizWire);
 
-  // 电池负极板 (厚且短，在阴极侧 x = -0.12)
+  // 电池负极板与正极板
   const negPlate = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.28, 0.28), steelMat);
   negPlate.position.x = -0.12;
   powerGroup.add(negPlate);
 
-  // 电池正极板 (薄且长，在阳极侧 x = 0.12)
   const posPlate = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.52, 0.28), steelMat);
   posPlate.position.x = 0.12;
   powerGroup.add(posPlate);
 
-  // 电源正负极标牌（1:1 正圆形徽章，绝不压扁）
+  // 电源正负极标牌
   const lblNeg = createBadgeSprite("－", "#60a5fa");
   lblNeg.position.set(-0.4, 0, 0);
   powerGroup.add(lblNeg);
@@ -415,7 +511,7 @@ function buildElectrodesAndPower() {
   scene!.add(electrodeGroup);
 }
 
-/** 3. 细狭缝挡板 (精确置于正中央 x = 0.0，使左右两侧长度完全平衡) */
+/** 3. 细狭缝挡板 (精确置于正中央 x = 0.0) */
 function buildSlitBaffle() {
   const baffleGroup = new THREE.Group();
   const darkMetal = new THREE.MeshStandardMaterial({
@@ -424,7 +520,7 @@ function buildSlitBaffle() {
     roughness: 0.3,
   });
 
-  // 上下两块挡板，在中心留出只有 0.08 宽度的水平细狭缝
+  // 上下两块挡板，在中心留出宽度 0.08 的水平细狭缝 (Z轴开槽宽度 0.54)
   const topPlate = new THREE.Mesh(
     new THREE.CylinderGeometry(0.88, 0.88, 0.05, 32, 1, false, 0, Math.PI),
     darkMetal,
@@ -445,69 +541,106 @@ function buildSlitBaffle() {
   scene!.add(baffleGroup);
 }
 
-/** 4. 电子系统：前段雾状弥散云 (x: -3.2 ~ 0) + 狭缝后准直扁平长条薄片光带 (x: 0 ~ 4.1) */
+/** 4. 连续平滑电子流系统： 消除生硬嵌套圆柱！从阴极向阳极自然收拢聚焦，自阳极孔到狭缝前宽度在 Z 轴上严格保持为 0.52， 穿过狭缝后以完全相同的 0.52 宽度平滑展布，俯视角度完全等宽连续！ */
 function buildElectronBeamSystem() {
   beamGroup = new THREE.Group();
 
-  // —— 狭缝前全截面弥散柔和雾状电子云 (x: -3.2 ~ 0.0，长度 3.2) ——
-  const fogGeo1 = new THREE.CylinderGeometry(0.48, 0.62, 3.2, 32, 1, true);
-  const fogMat1 = new THREE.MeshBasicMaterial({
-    color: 0x60a5fa,
+  const beamGlowMat = new THREE.MeshBasicMaterial({
+    color: 0x93c5fd,
     transparent: true,
-    opacity: 0.16,
+    opacity: 0.85,
     side: THREE.DoubleSide,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
   });
-  const fog1 = new THREE.Mesh(fogGeo1, fogMat1);
-  fog1.position.set(-1.6, 0, 0);
-  fog1.rotation.z = Math.PI / 2;
-  beamGroup.add(fog1);
 
-  const fogGeo2 = new THREE.CylinderGeometry(0.24, 0.38, 3.2, 32, 1, true);
-  const fogMat2 = new THREE.MeshBasicMaterial({
-    color: 0x93c5fd,
+  const softHaloMat = new THREE.MeshBasicMaterial({
+    color: 0x38bdf8,
     transparent: true,
     opacity: 0.26,
     side: THREE.DoubleSide,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
   });
-  const fog2 = new THREE.Mesh(fogGeo2, fogMat2);
-  fog2.position.set(-1.6, 0, 0);
-  fog2.rotation.z = Math.PI / 2;
-  beamGroup.add(fog2);
 
-  // —— 狭缝后准直扁平长条薄片光带 (x: 0.0 ~ 4.1，长度 4.1，与前段长度完全平衡) ——
-  // 核心发光薄片带 (宽度 0.52，沿 Z 轴分布，厚度极薄)
+  // —— 阶段 A：阴极到阳极聚焦加速段 (x: -3.2 ~ -1.6) ——
+  // 从阴极表面自然收拢至阳极孔
+  const preGeo = createPreAnodeBeamGeometry();
+  const preMesh = new THREE.Mesh(preGeo, beamGlowMat);
+  beamGroup.add(preMesh);
+
+  // —— 阶段 B：阳极到狭缝准直段 (x: -1.6 ~ 0.0) ——
+  // 宽度严格定为 0.52（与狭缝宽度完全一致！），高度在 Y 轴上从 0.22 逐渐收缩至狭缝高度 0.06
+  const midGeo = createPreSlitBeamGeometry();
+  const midMesh = new THREE.Mesh(midGeo, beamGlowMat);
+  beamGroup.add(midMesh);
+
+  // —— 阶段 C：狭缝后准直扁平薄片光带 (x: 0.0 ~ 4.15) ——
+  // 宽度与阶段 B 严密相接为 0.52！俯视图看毫无跳变与缩颈！
   const ribbonGeo = createFlatRibbonGeometry(0, 0.52);
-  const ribbonMat = new THREE.MeshBasicMaterial({
-    color: 0x93c5fd,
-    transparent: true,
-    opacity: 0.88,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-  });
-  const ribbonMesh = new THREE.Mesh(ribbonGeo, ribbonMat);
+  const ribbonMesh = new THREE.Mesh(ribbonGeo, beamGlowMat);
   ribbonMesh.name = "dynamicRibbon";
   beamGroup.add(ribbonMesh);
 
-  // 扁平长条光带的柔和外晕薄片 (稍宽 0.64)
   const glowRibbonGeo = createFlatRibbonGeometry(0, 0.64);
-  const glowRibbonMat = new THREE.MeshBasicMaterial({
-    color: 0x38bdf8,
-    transparent: true,
-    opacity: 0.28,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending,
-  });
-  const glowRibbonMesh = new THREE.Mesh(glowRibbonGeo, glowRibbonMat);
+  const glowRibbonMesh = new THREE.Mesh(glowRibbonGeo, softHaloMat);
   glowRibbonMesh.name = "glowRibbon";
   beamGroup.add(glowRibbonMesh);
 
   scene!.add(beamGroup);
+}
+
+/** 阴极至阳极孔的收敛加速束 (x: -3.2 ~ -1.6) */
+function createPreAnodeBeamGeometry() {
+  // 圆锥形聚焦束
+  const geo = new THREE.CylinderGeometry(0.2, 0.52, 1.6, 24, 1, true);
+  geo.rotateZ(Math.PI / 2);
+  geo.translate(-2.4, 0, 0);
+  return geo;
+}
+
+/** 阳极孔至狭缝入口的等宽过渡束 (x: -1.6 ~ 0.0) */
+function createPreSlitBeamGeometry() {
+  // 宽度在 Z 轴上严格保持为 0.52！高度在 Y 轴上微收缩 (0.24 -> 0.06)
+  const segments = 16;
+  const startX = -1.6;
+  const endX = 0.0;
+  const halfW = 0.26; // 总宽 0.52
+
+  const positions: number[] = [];
+  const indices: number[] = [];
+
+  for (let i = 0; i <= segments; i++) {
+    const t = i / segments;
+    const x = startX + t * (endX - startX);
+    // 高度微缩
+    const halfH = 0.12 * (1 - t * 0.7);
+
+    // 四边形 4 顶点
+    positions.push(x, halfH, -halfW);
+    positions.push(x, halfH, halfW);
+    positions.push(x, -halfH, -halfW);
+    positions.push(x, -halfH, halfW);
+  }
+
+  for (let i = 0; i < segments; i++) {
+    const rA = i * 4;
+    const rB = (i + 1) * 4;
+
+    // 顶面
+    indices.push(rA, rB, rA + 1, rA + 1, rB, rB + 1);
+    // 底面
+    indices.push(rA + 2, rA + 3, rB + 2, rA + 3, rB + 3, rB + 2);
+    // 侧面
+    indices.push(rA, rA + 2, rB, rB, rA + 2, rB + 2);
+    indices.push(rA + 1, rB + 1, rA + 3, rB + 1, rB + 3, rA + 3);
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geo.setIndex(indices);
+  geo.computeVertexNormals();
+  return geo;
 }
 
 /** 动态生成准直扁平长条薄片带几何体 (Flat Ribbon，从 x = 0.0 起始) */
@@ -563,53 +696,38 @@ function createFlatRibbonGeometry(bend: number, width = 0.52) {
   return geometry;
 }
 
-/** 5. 多个磁场矢量的匀强磁场阵列 (B 阵列) 在偏转区均布 6 个磁场矢量 (2 行 × 3 列) 箭头尖部采用半透明三角形 Sprite，正面始终朝向摄像头 */
+/**
+ * 5. 轴向对齐扁平磁场阵列 (Axial Billboard B-Array) 9 个二维扁平半透明箭头均布于偏转区 (3×3 规整阵列)； 顶角精确为 45°，箭尖与箭身随相机绕自身 Z
+ *    轴旋转，正面永远朝向摄像机
+ */
 function buildMagneticFieldArray() {
   bFieldGroup = new THREE.Group();
 
-  // 6 个磁场箭头的空间坐标 (x: 0.8, 2.0, 3.2；y: +0.45, -0.45)
-  const positions = [
-    { x: 0.8, y: 0.45 },
-    { x: 2.0, y: 0.45 },
-    { x: 3.2, y: 0.45 },
-    { x: 0.8, y: -0.45 },
-    { x: 2.0, y: -0.45 },
-    { x: 3.2, y: -0.45 },
-  ];
+  // 3×3 均匀磁场阵列 (9 个)，充分体现匀强磁场
+  // x 坐标分布在偏转区 1.0, 2.2, 3.4
+  // y 坐标分布在 +0.45, 0.0, -0.45
+  const positions: { x: number; y: number }[] = [];
+  const xCols = [1.0, 2.2, 3.4];
+  const yRows = [0.45, 0.0, -0.45];
 
-  const shaftMat = new THREE.MeshStandardMaterial({
-    color: 0xf59e0b,
-    transparent: true,
-    opacity: 0.72,
-    roughness: 0.3,
-    metalness: 0.7,
+  xCols.forEach((x) => {
+    yRows.forEach((y) => {
+      positions.push({ x, y });
+    });
   });
 
   positions.forEach((pos, idx) => {
-    const arrowGroup = new THREE.Group();
-    arrowGroup.name = `bArrow_${idx}`;
-    arrowGroup.position.set(pos.x, pos.y, 0);
-
-    // 细圆柱箭杆 (沿 Z 轴穿透，长度 1.3)
-    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 1.3, 16), shaftMat);
-    shaft.name = "shaft";
-    shaft.rotation.x = Math.PI / 2; // 沿 z 轴
-    arrowGroup.add(shaft);
-
-    // 半透明三角形箭头 Sprite (正面始终朝向摄像头！)
-    const tipSprite = createTriangleArrowSprite(true);
-    tipSprite.name = "tipSprite";
-    tipSprite.position.set(0, 0, 0.72); // 位于朝向观察者的近端
-    arrowGroup.add(tipSprite);
-
-    bFieldGroup!.add(arrowGroup);
+    const arrow = createAxialFlatArrow();
+    arrow.name = `axialArrow_${idx}`;
+    arrow.position.set(pos.x, pos.y, 0);
+    bFieldGroup!.add(arrow);
   });
 
-  // 磁感应强度 B 字母符号标注 (位于阵列上方中央)
+  // 磁感应强度 B 字母符号标注
   const labelB = createTextSprite("B", "#f59e0b");
   labelB.name = "labelB_Array";
   labelB.scale.set(0.65, 0.22, 1);
-  labelB.position.set(2.0, 1.25, 0);
+  labelB.position.set(2.2, 1.25, 0);
   bFieldGroup.add(labelB);
 
   bFieldGroup.visible = false;
@@ -621,7 +739,7 @@ function buildVectorsAndLabels() {
   vectorsGroup = new THREE.Group();
   labelsGroup = new THREE.Group();
 
-  // 速度 v: 亮蓝，位于狭缝出口 (x = 0.15)，水平向右
+  // 速度 v: 亮蓝，位于狭缝出口 (x = 0.08)，水平向右
   const vecV = createVectorMesh(0x38bdf8);
   vecV.name = "vecV";
   vectorsGroup.add(vecV);
@@ -631,17 +749,18 @@ function buildVectorsAndLabels() {
   labelV.scale.set(0.65, 0.22, 1);
   labelsGroup.add(labelV);
 
-  // 洛伦兹力 F: 青碧绿，位于偏转区弧段
-  const vecF = createVectorMesh(0x2dd4bf);
+  // 洛伦兹力 F: 鲜红高对比色 (二维扁平 45° 顶角 Axial Billboard 箭头)
+  const vecF = createFlatAxialArrow(0xef4444, 0xfca5a5, 0.9);
   vecF.name = "vecF";
+  vecF.scale.set(1.15, 1.15, 1.15);
   vectorsGroup.add(vecF);
 
-  const labelF = createTextSprite("F", "#2dd4bf");
+  const labelF = createTextSprite("F", "#ef4444");
   labelF.name = "labelF";
   labelF.scale.set(0.65, 0.22, 1);
   labelsGroup.add(labelF);
 
-  // 部件纯中文标签（位于上方一行，严格对称间距：-3.2, -1.6, 0.0）
+  // 部件纯中文标签
   const lblCathode = createTextSprite("阴极", "#cbd5e1");
   lblCathode.position.set(-3.2, 1.75, 0);
   labelsGroup.add(lblCathode);
@@ -659,6 +778,56 @@ function buildVectorsAndLabels() {
   updateVectors();
 }
 
+/** 更新扁平磁场箭头 (B) 与洛伦兹力箭头 (F) 绕各自轴线的旋转，使其正面始终朝向摄像机 (Axial Billboard) */
+function updateAxialBillboards() {
+  if (!camera) return;
+  const camPos = camera.position;
+
+  // 1. 更新 9 个磁场 B 箭头 (轴线固定沿 Z 轴)
+  if (bFieldGroup && state.value !== "none") {
+    const isOut = state.value === "out";
+    for (let i = 0; i < 9; i++) {
+      const arrow = bFieldGroup.getObjectByName(`axialArrow_${i}`) as THREE.Group;
+      if (arrow) {
+        const inner = arrow.getObjectByName("arrowInner") as THREE.Group;
+        if (inner) {
+          inner.rotation.x = isOut ? 0 : Math.PI;
+        }
+
+        const ax = arrow.position.x;
+        const ay = arrow.position.y;
+        const dx = camPos.x - ax;
+        const dy = camPos.y - ay;
+        const angle = Math.atan2(dy, dx);
+        arrow.rotation.z = angle - Math.PI / 2;
+      }
+    }
+  }
+
+  // 2. 更新洛伦兹力 F 箭头 (轴线固定沿 Y 轴，在 X-Z 平面自适应旋转使其正面永远朝向相机)
+  if (vectorsGroup) {
+    const vecF = vectorsGroup.getObjectByName("vecF") as THREE.Group;
+    if (vecF && vecF.visible) {
+      const isOut = state.value === "out";
+      const inner = vecF.getObjectByName("arrowInner") as THREE.Group;
+      if (inner) {
+        // inner 默认 tip 在 +Z，我们需要其尖端指向 +Y (向上) 或 -Y (向下)
+        // 旋转 inner 绕 X 轴：-Math.PI / 2 使 tip 指向 +Y；+Math.PI / 2 使 tip 指向 -Y
+        inner.rotation.x = isOut ? -Math.PI / 2 : Math.PI / 2;
+      }
+
+      // 箭柄轴线沿 Y 轴：计算相机相对箭头位置在 X-Z 平面的方位角
+      const fx = vecF.position.x;
+      const fz = vecF.position.z;
+      const dx = camPos.x - fx;
+      const dz = camPos.z - fz;
+      const angle = Math.atan2(dx, dz);
+      // 让 vecF 绕 Y 轴旋转，正面 (法线) 精准朝向相机
+      vecF.rotation.y = angle;
+    }
+  }
+}
+
 /** 动态更新矢量与磁场阵列 */
 function updateVectors() {
   if (!vectorsGroup || !labelsGroup || !bFieldGroup) return;
@@ -670,11 +839,11 @@ function updateVectors() {
 
   if (!vecV || !vecF || !labelV || !labelF) return;
 
-  // 速度 v：位于狭缝出口处 (x = 0.1)，水平指向右侧 (+x)
+  // 速度 v：位于狭缝出口处 (x = 0.08)，水平指向右侧 (+x)
   orientVector(vecV, new THREE.Vector3(0.08, 0, 0), new THREE.Vector3(1, 0, 0), 1.25);
   labelV.position.set(0.72, 0.35, 0);
 
-  // 磁场阵列 (B) 控制：无磁场时隐藏，有磁场时点亮 6 个矢量
+  // 磁场阵列 (B) 控制
   if (state.value === "none") {
     bFieldGroup.visible = false;
     vecF.visible = false;
@@ -683,25 +852,15 @@ function updateVectors() {
     bFieldGroup.visible = true;
     const isOut = state.value === "out";
 
-    // 更新 6 个磁场箭头的尖部位置与朝向
-    for (let i = 0; i < 6; i++) {
-      const arrowGroup = bFieldGroup.getObjectByName(`bArrow_${i}`) as THREE.Group;
-      if (arrowGroup) {
-        const tip = arrowGroup.getObjectByName("tipSprite") as THREE.Sprite;
-        if (tip) {
-          // B 向外：三角形在近端 (z = +0.72)；B 向里：三角形在远端 (z = -0.72)
-          tip.position.set(0, 0, isOut ? 0.72 : -0.72);
-        }
-      }
-    }
-
     // 洛伦兹力 F：电子带负电，B 向外时受力向上(+y)，B 向里时受力向下(-y)
-    const fDir = isOut ? new THREE.Vector3(0, 1, 0) : new THREE.Vector3(0, -1, 0);
+    // 采用红色二维扁平 45° Axial Billboard 箭头
     const fCenterY = isOut ? 0.32 : -0.32;
+    vecF.position.set(2.0, fCenterY, 0);
     vecF.visible = Math.abs(currentBend) > 0.05;
     labelF.visible = Math.abs(currentBend) > 0.05;
-    orientVector(vecF, new THREE.Vector3(2.0, fCenterY, 0), fDir, 1.25);
-    labelF.position.set(2.0, isOut ? 1.85 : -1.85, 0);
+    labelF.position.set(2.0, isOut ? 1.45 : -1.45, 0);
+
+    updateAxialBillboards();
   }
 }
 
@@ -727,6 +886,9 @@ function animate() {
     updateVectors();
   }
 
+  // 无论是否偏转，每帧更新轴向对齐广告牌，跟随相机视角平滑转动
+  updateAxialBillboards();
+
   if (renderer && scene && camera) {
     renderer.render(scene, camera);
   }
@@ -739,6 +901,7 @@ function updateCameraTransform() {
   const z = distance * Math.cos(elevation) * Math.cos(azimuth);
   camera.position.set(x, y, z);
   camera.lookAt(0, 0, 0);
+  updateAxialBillboards();
 }
 
 // 自由触摸/鼠标交互事件
@@ -786,6 +949,7 @@ function handleResize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);
+  updateAxialBillboards();
 }
 
 watch(state, () => {
@@ -820,7 +984,7 @@ onBeforeUnmount(() => {
   <div
     class="flex flex-col w-full h-full min-h-[460px] bg-slate-950/80 rounded-2xl border border-slate-800 p-4"
   >
-    <!-- 纯粹控件栏：无任何额外宣传词或冗余提示 -->
+    <!-- 纯粹控件栏 -->
     <div class="flex items-center justify-between pb-3 border-b border-slate-800">
       <div class="flex items-center gap-2">
         <span class="text-xs font-semibold text-slate-300">阴极射线管模型</span>
@@ -881,3 +1045,7 @@ onBeforeUnmount(() => {
     />
   </div>
 </template>
+
+<style scoped>
+/* 触控防抖 */
+</style>

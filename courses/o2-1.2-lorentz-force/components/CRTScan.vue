@@ -23,6 +23,18 @@ const SCREEN_X = 812;
 const A_Y = 100;
 const O_Y = 200;
 const B_Y = 300;
+/**
+ * 偏转区（二次贝塞尔的控制点）横向位置——★ 这个数是"电子束不出管"的硬约束，别乱改。
+ *
+ * 束流用 `M 电子枪 Q (DEFLECT_X, 轴) (屏面, 落点)` 画：控制点在**管轴上**， 于是曲线在枪口与轴相切（管颈里是直线段），过了控制点才往落点方向掰——正好对应
+ * "偏转区很短、出了偏转区就走直线"的真实显像管。
+ *
+ * 为什么不能像旧版那样把控制点放在 x=440、再把它的 y 抬 34px： ① x=440 还在**细管颈**里（管壁只有 ±26），曲线中点会跑到管外 66px——束流"甩到玻璃管外侧"； ②
+ * 旧版按"当前是往上扫还是往下扫"给控制点 ±34 的偏移，光点每到上下端点， 控制点就整体翻到另一侧 → 曲线形状**跳变**，看起来就是"面条一样在那儿颤"。 约束推导：落点在屏上最远
+ * ±100，曲线相对轴的偏移是 100·t²，而 x(t) = 66(1−t)² + 2·DEFLECT_X·t(1−t) + 812t²； 要保证"偏移达到 26（管颈半宽）时 x
+ * 已经越过管颈末端 516"，解得控制点 x ≥ 578， 取 700 留足余量（实测最窄处离管壁还有 ~7px）。
+ */
+const DEFLECT_X = 700;
 
 /** 扫描动画：step >= 3 后启动 rAF 循环 */
 const phase = ref(0);
@@ -44,28 +56,28 @@ watch(
 );
 onBeforeUnmount(() => raf && cancelAnimationFrame(raf));
 
-/** 扫描时的光点位置与运动方向（周期 2.4s） */
+/** 扫描时的光点位置（周期 2.4s；纯正弦 → 位置连续变化，曲线不会跳变） */
 const sweep = computed(() => {
   const ph = (phase.value * 2 * Math.PI) / 2.4;
-  return { tipY: CENTER_Y + 100 * Math.sin(ph), movingUp: Math.cos(ph) > 0 };
+  return { tipY: CENTER_Y + 100 * Math.sin(ph) };
 });
 
-/** 电子束路径 / 命中点 / 偏转磁场方向（向上偏 → B⊙，向下偏 → B⊗，由真实耦合推出） */
+/** 电子束路径：控制点固定在管轴上，落点在屏上移动 */
+const beamPath = (tipY) =>
+  `M ${GUN_X} ${CENTER_Y} Q ${DEFLECT_X} ${CENTER_Y} ${SCREEN_X} ${tipY.toFixed(1)}`;
+
+/**
+ * 电子束路径 / 命中点 / 偏转磁场方向。 磁场方向跟着**光点在轴哪一侧**走（上 → B⊙ 向上偏，下 → B⊗ 向下偏）， 这样画面里的"弯向"与 ⊙/⊗
+ * 记号永远自洽；旧版按"正在向上扫/向下扫"取符号，半个周期里是反的。
+ */
 const beam = computed(() => {
   if (props.step >= 3) {
-    const { tipY, movingUp } = sweep.value;
-    const cy = tipY - (movingUp ? 34 : -34);
-    return {
-      d: `M ${GUN_X} ${CENTER_Y} Q 440 ${cy.toFixed(1)} ${SCREEN_X} ${tipY.toFixed(1)}`,
-      tipY,
-      symbol: movingUp ? "out" : "in",
-    };
+    const { tipY } = sweep.value;
+    return { d: beamPath(tipY), tipY, symbol: tipY < CENTER_Y ? "out" : "in" };
   }
-  if (props.step === 2)
-    return { d: `M ${GUN_X} ${CENTER_Y} Q 440 334 ${SCREEN_X} ${B_Y}`, tipY: B_Y, symbol: "in" };
-  if (props.step === 1)
-    return { d: `M ${GUN_X} ${CENTER_Y} Q 440 66 ${SCREEN_X} ${A_Y}`, tipY: A_Y, symbol: "out" };
-  return { d: `M ${GUN_X} ${CENTER_Y} L ${SCREEN_X} ${CENTER_Y}`, tipY: O_Y, symbol: null };
+  if (props.step === 2) return { d: beamPath(B_Y), tipY: B_Y, symbol: "in" };
+  if (props.step === 1) return { d: beamPath(A_Y), tipY: A_Y, symbol: "out" };
+  return { d: beamPath(O_Y), tipY: O_Y, symbol: null };
 });
 
 /** 命中的目标点（容差比较，避免浮点相等判断） */

@@ -251,7 +251,7 @@ clicks: 4
 <div class="text-xl leading-relaxed mt-3" v-click="3">安培力：<Latex tex="F_{\text{安}} = BIL = B(nqvS)L" /></div>
 
 <div class="mt-5 text-xl leading-relaxed" v-click="4">
-<Latex tex="F_{\text{洛}} = \dfrac{F_{\text{安}}}{N} = \dfrac{B\,nqvS\,L}{nSL} = qvB" />　<span class="text-accent font-semibold">✓</span>
+<Latex tex="F_{\text{洛}} = \dfrac{F_{\text{安}}}{N} = \dfrac{B\,nqvS\,L}{nSL} = qvB" />
 </div>
 
 </div>
@@ -278,7 +278,7 @@ clicks: 3
 </div>
 
 <div class="mt-5 text-xl leading-relaxed" v-click="3">
-<Latex tex="F_{\text{洛}} = \dfrac{BL}{N}\cdot\dfrac{Nq}{L/v} = qvB" />　<span class="text-accent font-semibold">✓ 殊途同归</span>
+<Latex tex="F_{\text{洛}} = \dfrac{BL}{N}\cdot\dfrac{Nq}{L/v} = qvB" />　
 </div>
 
 </div>
@@ -393,6 +393,281 @@ clicks: 3
 
 </div>
 
-<div class="ask text-xl mt-6"><Latex tex="F_{\text{洛}}" /> 只改变方向、不改变大小——电子束会走出什么轨迹？</div>
+<div class="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xl">
+<span>方向：<strong>左手定则</strong>（<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" />）</span>
+<span>大小：<Latex tex="F_{\text{洛}} = qvB\sin\theta" /></span>
+</div>
+
+</div>
+
+---
+clicks: 1
+---
+
+<!-- 思考题（第一课时收尾 / 第二课时引课）：三个候选轨迹常显，点一下才判对错 -->
+<div class="ask text-xl mb-3">洛伦兹力只改变速度的方向、不改变速度的大小——电子束会走出什么轨迹？</div>
+
+<div class="page-grow">
+
+<TrajectoryPredict :step="$clicks" />
+
+</div>
+
+---
+layout: course-cover
+title: "带电粒子在匀强磁场中的运动"
+chapter-no: "1.3"
+chapter: "第一章 安培力与洛伦兹力"
+lesson: "第二课时"
+subtitle: "洛伦兹力理解"
+---
+
+<CoverDecor />
+
+---
+clicks: 1
+---
+
+# v 与 B 平行时
+
+<div class="ask text-xl">电子沿着磁感线方向射入（<Latex tex="v \parallel B" />），它还受洛伦兹力吗？</div>
+
+<div class="page-grow">
+
+<div class="half-grid items-center gap-6">
+
+<div>
+
+<VDivideB :initial-theta="0" :hint="$clicks >= 1" />
+
+</div>
+
+<div v-click="1">
+
+<div class="text-xl leading-relaxed"><Latex tex="F = qvB\sin\theta" />，这里 <Latex tex="\theta = 0" /> ⟹ <Latex tex="F_{\text{洛}} = 0" /></div>
+
+<div class="key mt-4 text-xl">不受洛伦兹力 ⟹ 运动状态不改变 ⟹ <strong>匀速直线运动</strong></div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 1
+---
+
+# v 与 B 垂直时
+
+<div class="ask text-xl">用洛伦兹力演示仪垂直射入电子束，径迹是什么形状？</div>
+
+<div class="page-grow">
+
+<CircularOrbit :force="$clicks >= 1" :radius="$clicks >= 1" />
+
+</div>
+
+---
+clicks: 2
+---
+
+# 为什么是匀速圆周运动？
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-center gap-8">
+
+<div>
+
+<table class="w-full overflow-hidden rounded-xl border border-slate-700/60 text-lg">
+<tr class="bg-slate-800/60">
+<th class="px-4 py-2 text-left font-semibold">物理量</th>
+<th class="px-4 py-2 font-semibold">大小</th>
+<th class="px-4 py-2 font-semibold">方向</th>
+</tr>
+<tr class="border-t border-slate-700/50">
+<td class="px-4 py-2"><Latex tex="v" /></td>
+<td class="px-4 py-2 text-center">不变</td>
+<td class="px-4 py-2 text-center text-accent">改变</td>
+</tr>
+<tr class="border-t border-slate-700/50">
+<td class="px-4 py-2"><Latex tex="F_{\text{洛}}" /></td>
+<td class="px-4 py-2 text-center">不变</td>
+<td class="px-4 py-2 text-center text-accent">改变</td>
+</tr>
+</table>
+
+<div class="mt-4 text-base leading-relaxed text-slate-400">
+依据：<Latex tex="F_{\text{洛}} \perp v" /> ⟹ 只改方向、不改大小；<Latex tex="v" /> 大小不变 ⟹ <Latex tex="F_{\text{洛}} = qvB" /> 大小也不变。
+</div>
+
+</div>
+
+<div class="stack">
+
+<div class="text-xl leading-relaxed" v-click="1">
+① <Latex tex="a = \dfrac{F_{\text{洛}}}{m}" />，<Latex tex="F_{\text{洛}}" /> 大小不变 ⟹ <Latex tex="a" /> 大小不变
+</div>
+
+<div class="text-xl leading-relaxed" v-click="1">
+② <Latex tex="F_{\text{洛}}" /> 始终垂直于 <Latex tex="v" /> ⟹ <Latex tex="v" /> 的方向均匀改变
+</div>
+
+<div class="key text-xl" v-click="2">
+③ 加速度大小不变、速度方向均匀改变 ⟹ <strong>匀速圆周运动</strong>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+# 圆周运动的半径
+
+<div class="page-grow">
+
+<div class="text-xl leading-relaxed" v-click="1">
+<Latex tex="qvB = m\dfrac{v^2}{r}" /> ⟹ <span class="text-accent"><Latex tex="r = \dfrac{mv}{qB}" /></span>
+</div>
+
+<CircularOrbit :radius="$clicks >= 1" emphasis="r" :hint="false" />
+
+</div>
+
+---
+clicks: 2
+---
+
+# 圆周运动的周期
+
+<div class="page-grow">
+
+<div class="text-xl leading-relaxed" v-click="1">
+<Latex tex="T = \dfrac{2\pi r}{v}" />，代入 <Latex tex="r = \dfrac{mv}{qB}" /> ⟹ <span class="text-accent"><Latex tex="T = \dfrac{2\pi m}{qB}" /></span>
+</div>
+
+<CircularOrbit emphasis="T" :hint="false" />
+
+<div class="text-xl text-center" v-click="2">
+★ <Latex tex="T" /> 与轨道半径、运动速度<strong>无关</strong>（下一节回旋加速器就靠这条）
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+# v 与 B 成夹角 θ 时
+
+<div class="ask text-xl">速度方向与磁场成夹角 <Latex tex="\theta" />，运动该怎么拆？</div>
+
+<div class="page-grow">
+
+<VDivideB :hint="false" />
+
+<div class="grid grid-cols-2 gap-8">
+<div class="text-lg leading-relaxed" v-click="1">
+<Latex tex="v_\parallel = v\cos\theta" />：沿 <Latex tex="B" />，<strong>不受洛伦兹力</strong> ⟹ 匀速直线运动
+</div>
+<div class="text-lg leading-relaxed" v-click="2">
+<Latex tex="v_\perp = v\sin\theta" />：垂直 <Latex tex="B" />，受 <Latex tex="F = qBv_\perp" /> ⟹ 匀速圆周运动
+</div>
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+# 合运动：螺旋线
+
+<div class="page-grow">
+
+<div class="grid grid-cols-2 gap-x-10 gap-y-1 text-lg">
+<div><Latex tex="v_\parallel = v\cos\theta" />：沿 <Latex tex="B" />，不受力 ⟹ 匀速直线运动</div>
+<div><Latex tex="v_\perp = v\sin\theta" />：垂直 <Latex tex="B" />，受 <Latex tex="F = qBv_\perp" /> ⟹ 匀速圆周运动</div>
+</div>
+
+<HelixPath />
+
+<div class="text-center text-lg" v-click="1">
+合运动：<strong class="text-accent">螺旋线</strong>，螺距 <Latex tex="d = v_\parallel T = v\cos\theta \cdot \dfrac{2\pi m}{qB}" />
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+# 从 O 到 A 要多久？
+
+<div class="ask text-xl">A 点恰好在沿 <Latex tex="B" /> 方向一个螺距之外——这段路要走多久？</div>
+
+<div class="page-grow">
+
+<div class="stack">
+
+<div class="text-xl leading-relaxed" v-click="1">
+① 沿 <Latex tex="B" /> 方向（匀速直线）：<Latex tex="t_{OA} = \dfrac{x_{OA}}{v_\parallel}" />
+</div>
+
+<div class="text-xl leading-relaxed" v-click="2">
+② 垂直纸面方向（匀速圆周）：<Latex tex="t_{OA} = T = \dfrac{2\pi m}{qB}" />
+</div>
+
+<div class="text-xl leading-relaxed" v-click="3">
+③ 看合运动（<Latex tex="F_{\text{洛}}" /> 不做功、速率 <Latex tex="v" /> 始终不变）：<Latex tex="t_{OA} = \dfrac{l_{OA}}{v}" />，<Latex tex="l_{OA}" /> 是路程
+</div>
+
+<div class="key text-xl" v-click="3">
+三种算法结果相同：<Latex tex="x_{OA} = v\cos\theta \cdot T" />，所以 <Latex tex="t_{OA} = \dfrac{x_{OA}}{v\cos\theta} = T" />
+</div>
+
+</div>
+
+</div>
+
+---
+
+# 小结：三种情形
+
+<div class="page-grow">
+
+<table class="w-full overflow-hidden rounded-xl border border-slate-700/60 text-lg">
+<tr class="bg-slate-800/60">
+<th class="px-4 py-2 text-left font-semibold">情形</th>
+<th class="px-4 py-2 font-semibold">洛伦兹力</th>
+<th class="px-4 py-2 font-semibold">运动</th>
+</tr>
+<tr class="border-t border-slate-700/50">
+<td class="px-4 py-2"><Latex tex="v \parallel B" /></td>
+<td class="px-4 py-2 text-center"><Latex tex="F_{\text{洛}} = 0" /></td>
+<td class="px-4 py-2">匀速直线运动</td>
+</tr>
+<tr class="border-t border-slate-700/50">
+<td class="px-4 py-2"><Latex tex="v \perp B" /></td>
+<td class="px-4 py-2 text-center"><Latex tex="F_{\text{洛}} = qvB" />（提供向心力）</td>
+<td class="px-4 py-2">匀速圆周运动</td>
+</tr>
+<tr class="border-t border-slate-700/50">
+<td class="px-4 py-2"><Latex tex="v" /> 与 <Latex tex="B" /> 成 <Latex tex="\theta" /></td>
+<td class="px-4 py-2 text-center"><Latex tex="F_{\text{洛}} = qvB\sin\theta = qBv_\perp" /></td>
+<td class="px-4 py-2">螺旋线，螺距 <Latex tex="d = v_\parallel T" /></td>
+</tr>
+</table>
+
+<div class="grid grid-cols-2 gap-8">
+<div class="text-center text-2xl"><Latex tex="r = \dfrac{mv}{qB}" /></div>
+<div class="text-center text-2xl"><Latex tex="T = \dfrac{2\pi m}{qB}" /></div>
+</div>
 
 </div>
