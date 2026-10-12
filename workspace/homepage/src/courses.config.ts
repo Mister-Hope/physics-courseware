@@ -261,7 +261,15 @@ export const textbooks: TextbookGroup[] = [
     name: "选择性必修第二册",
     shortName: "选必2",
     slug: "xx2",
-    courses: [],
+    courses: [
+      {
+        slug: "o2-1.2-lorentz-force",
+        title: "磁场对运动电荷的作用力",
+        chapter: "§1.2",
+        description: "待补充：一句话说明本课讲了什么。",
+        tags: [],
+      },
+    ],
   },
   {
     name: "选择性必修第三册",

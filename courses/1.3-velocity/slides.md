@@ -255,6 +255,33 @@ clicks: 2
 
 ---
 layout: base-flex
+clicks: 2
+---
+
+# 例题：匀速圆周运动
+
+<div class="page-grow">
+
+<div class="problem" style="border-left: none; padding-left: 0">质点做匀速圆周运动，从 <Latex tex="A" /> 点沿顺时针方向出发，圆的半径为 <Latex tex="R" />，运动周期为 <Latex tex="4\ \text{s}" />。求：<br />① <Latex tex="4\ \text{s}" /> 内质点的平均速度大小和平均速率；<br />② 第 2 个 <Latex tex="2\ \text{s}" /> 内（即 <Latex tex="t = 2\ \text{s}" /> 至 <Latex tex="t = 4\ \text{s}" />）的平均速度大小和平均速率。</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 2rem; align-items: center;">
+
+<div class="stack">
+
+<div v-click="1">① <Latex tex="4\ \text{s}" /> 正好运动一周、回到 <Latex tex="A" />：位移 <Latex tex="\Delta x = 0" /> → 平均速度 <Latex tex="0" />；路程 <Latex tex="2\pi R" /> → 平均速率 <Latex tex="\frac{2\pi R}{4\ \text{s}} = \frac{\pi R}{2}" />。</div>
+
+<div v-click="2">② 第 2 个 <Latex tex="2\ \text{s}" /> 内：<Latex tex="t = 2\ \text{s}" /> 时质点在 <Latex tex="C" /> 点（<Latex tex="A" /> 的对径点），末位置仍是 <Latex tex="A" />。位移 <Latex tex="2R" /> → 平均速度 <Latex tex="\frac{2R}{2\ \text{s}} = R" />；路程是半个圆周 <Latex tex="\pi R" /> → 平均速率 <Latex tex="\frac{\pi R}{2}" />。</div>
+
+</div>
+
+<CircleMotionSvg :step="$clicks" />
+
+</div>
+
+</div>
+
+---
+layout: base-flex
 clicks: 3
 ---
 
@@ -557,6 +584,33 @@ clicks: 3
 
 ---
 layout: base-flex
+clicks: 3
+---
+
+<div class="page-grow">
+
+<div class="half-grid">
+
+<PhotogateSvg />
+
+<div class="stack stack-tight">
+
+<div class="ask">光电门凭什么能直接测出「瞬时」速度？</div>
+
+<div v-click="1">小车上的<span class="text-accent">遮光板很窄</span>，通过光电门时挡光时间 <Latex tex="\Delta t" /> 只有 <Latex tex="0.01\ \text{s}" /> 量级——这段时间里小车的速度几乎不变。</div>
+
+<div v-click="2">所以 <Latex tex="v = \frac{\Delta x}{\Delta t}" /> 就是小车经过光电门这一瞬间的<span class="text-accent">瞬时速度</span>（<Latex tex="\Delta x" /> 为遮光板宽度）。</div>
+
+<div class="key key-blue" v-click="3">与打点计时器不同：<Latex tex="\Delta x" /> 是遮光板<span class="text-accent-2">已知的宽度</span>、<Latex tex="\Delta t" /> 由电子计时器直接读出，都很准——<Latex tex="\Delta t" /> 取小反而更贴近瞬时速度。</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
 ---
 
 # 假设这有一条纸带，你怎么画出它的 v-t 图像？
@@ -794,6 +848,76 @@ labels:
 
 ---
 layout: base-flex
+clicks: 5
+---
+
+# v-t 图像能读出什么、读不出什么？
+
+<div class="page-grow">
+
+<div class="half-grid">
+
+<div style="width: 100%; max-width: 400px; margin: 0 auto">
+
+```comp CoordAxes
+x-range: [0, 6.4]
+y-range: [-3.2, 4.2]
+x-axis: { quantity: t, unit: s, side: above }
+y-axis: { quantity: v, unit: 'm/s' }
+ticks:
+  x: []
+  y: []
+view: { width: 320, height: 220 }
+areas:
+  - points: [{ x: 0.5, y: 0 }, { x: 3.53, y: 0 }, { x: 0.5, y: 3.2 }]
+    fill: var(--c-accent)
+    fillOpacity: 0.16
+  - points: [{ x: 3.53, y: 0 }, { x: 5.8, y: 0 }, { x: 5.8, y: -2.4 }]
+    fill: var(--c-accent-2)
+    fillOpacity: 0.16
+curves:
+  - points: [{ x: 0.5, y: 3.2 }, { x: 5.8, y: -2.4 }]
+    stroke: var(--c-accent)
+    width: 3.4
+labels:
+  - x: 1.2
+    y: 2.46
+    tex: 'A'
+    dot: 5
+    dotColor: var(--c-accent)
+    anchor: top-right
+    color: var(--c-accent)
+  - x: 4.6
+    y: -1.13
+    tex: 'B'
+    dot: 5
+    dotColor: var(--c-accent-2)
+    anchor: bottom-left
+    color: var(--c-accent-2)
+```
+
+</div>
+
+<div class="stack stack-tight">
+
+<div v-click="1"><span class="text-accent">① 任意时刻的速度</span>：读对应的纵坐标。</div>
+
+<div v-click="2"><span class="text-accent">② 运动方向</span>：<Latex tex="v" /> 为正沿正方向、为负沿反方向。</div>
+
+<div v-click="3"><span class="text-accent">③ 速度的增减与变化</span>：图线上升 <Latex tex="v" /> 增大、下降减小，越陡变化越快。</div>
+
+<div v-click="4"><span class="text-accent">④ 两点间的位置变动（位移）</span>：图线与 <Latex tex="t" /> 轴围成的面积。</div>
+
+<div class="key key-danger" v-click="5"><span class="text-accent">读不出位置</span>：只知道位置<span class="text-accent">变了多少、往哪变</span>，不知道此刻在哪儿。</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
 ---
 
 # 课堂小结（第二课时）
@@ -961,5 +1085,209 @@ labels:
 <div class="ask ask-lead">在 <Latex tex="v\text{-}t" /> 图像里，同样取两点作割线——它的斜率代表什么？</div>
 
 <div class="key key-lead key-blue" v-click="1">它描述的是"<span class="text-accent-2">速度变化的快慢</span>"——下一节 §1.4 我们就从它入手，给它起个名字。</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+<div class="page-grow">
+
+<div class="ask">把时间轴切成很多小段，图线与 <Latex tex="t" /> 轴围成的面积为什么就等于位移？</div>
+
+<VtMicroRects />
+
+<div class="stack stack-tight">
+
+<div v-click="1">① 把整段时间分成很多小段，每小段长 <Latex tex="\Delta t" />。</div>
+
+<div v-click="2">② <Latex tex="\Delta t" /> 足够小时，这一小段内速度几乎不变，可以看作<span class="text-accent">匀速直线运动</span>：这一小段的位移 <Latex tex="= v\Delta t" />，恰好是小矩形的面积。</div>
+
+<div class="key key-blue" v-click="3">③ 把所有小矩形的面积加起来，就是这段时间内的位移；<Latex tex="\Delta t" /> 越小，小矩形越贴合图线——所以<span class="text-accent-2">图线与 <Latex tex="t" /> 轴包围的面积 = 位移</span>。</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 2
+---
+
+<div class="page-grow">
+
+<div class="ask">图线跑到 <Latex tex="t" /> 轴下面去了——这块面积算正的还是负的？</div>
+
+<div class="half-grid">
+
+<div style="width: 100%; max-width: 420px; margin: 0 auto">
+
+```comp CoordAxes
+x-range: [0, 6.4]
+y-range: [-3.2, 4.4]
+x-axis: { quantity: t, unit: s, side: above }
+y-axis: { quantity: v, unit: 'm/s' }
+ticks:
+  x: []
+  y: []
+view: { width: 320, height: 220 }
+areas:
+  - points: [{ x: 0.6, y: 0 }, { x: 3.53, y: 0 }, { x: 0.6, y: 3.4 }]
+    fill: var(--c-accent)
+    fillOpacity: 0.2
+  - points: [{ x: 3.53, y: 0 }, { x: 5.6, y: 0 }, { x: 5.6, y: -2.4 }]
+    fill: var(--c-accent-2)
+    fillOpacity: 0.2
+curves:
+  - points: [{ x: 0.6, y: 3.4 }, { x: 5.6, y: -2.4 }]
+    stroke: var(--c-text)
+    width: 3
+  - points: [{ x: 3.53, y: -2.4 }, { x: 3.53, y: 3.4 }]
+    stroke: var(--c-text-dim)
+    width: 1.4
+    dashed: true
+labels:
+  - x: 1.5
+    y: 1
+    parts: [{ text: '正向位移' }]
+    color: var(--c-accent)
+    halo: true
+  - x: 5
+    y: -0.5
+    parts: [{ text: '负向位移' }]
+    color: var(--c-accent-2)
+    halo: true
+```
+
+</div>
+
+<div class="stack">
+
+<div v-click="1"><Latex tex="t" /> 轴<span class="text-accent">之上</span>（<Latex tex="v > 0" />）的面积 → <span class="text-accent">正向位移</span>，运动方向始终沿我们规定的正方向。</div>
+
+<div v-click="1"><Latex tex="t" /> 轴<span class="text-accent-2">之下</span>（<Latex tex="v < 0" />）的面积 → <span class="text-accent-2">负向位移</span>，运动方向始终与正方向相反。</div>
+
+<div class="key key-blue" v-click="2">总位移 = 两块面积的<span class="text-accent-2">代数和</span>（<Latex tex="t" /> 轴下方的面积<span class="text-accent-2">取负号</span>）；路程 = 各段面积<span class="text-accent-2">大小之和</span>。</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 2
+---
+
+# 例 1：无人机与队伍
+
+<div class="page-grow">
+
+<div class="problem">一支 <Latex tex="150\ \text{m}" /> 长的队伍匀速前进。队长从队尾放出无人机，飞到出发点前方 <Latex tex="1000\ \text{m}" /> 处侦察，拍照后立即返回；无人机回到队长处时，队伍已经前进了 <Latex tex="200\ \text{m}" />。求全过程中无人机的位移和路程。</div>
+
+<div class="half-grid">
+
+<DroneTeamSvg :show-return="$clicks >= 1" />
+
+<div class="stack stack-tight">
+
+<div v-click="1"><span class="text-accent">位移</span>：无人机从队尾出发、又回到队长处，而队长随队伍前进了 <Latex tex="200\ \text{m}" /> → 位移 <Latex tex="200\ \text{m}" />，方向同队伍前进方向。</div>
+
+<div class="key key-blue" v-click="2"><span class="text-accent-2">路程</span>：去程 <Latex tex="1000\ \text{m}" />，回程 <Latex tex="1000\ \text{m} - 200\ \text{m} = 800\ \text{m}" /> → 路程 <Latex tex="1800\ \text{m}" />。队伍长 <Latex tex="150\ \text{m}" /> 是干扰条件，位移和路程都与它无关。</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 例 2：两车与小鸟
+
+<div class="page-grow">
+
+<div class="problem">A、B 两车相距 <Latex tex="1000\ \text{m}" />，相向而行，速度分别为 <Latex tex="10\ \text{m/s}" /> 和 <Latex tex="30\ \text{m/s}" />。一只小鸟从 A 车处开始，以 <Latex tex="50\ \text{m/s}" /> 的速度在两车之间往复飞行。求两车相遇时，小鸟的运动路程与位移。</div>
+
+<div class="half-grid">
+
+<BirdCarsSvg />
+
+<div class="stack stack-tight">
+
+<div v-click="1">两车相向而行 → 相对速度 <Latex tex="10 + 30 = 40\ \text{m/s}" />，相遇用时 <Latex tex="t = \frac{1000\ \text{m}}{40\ \text{m/s}} = 25\ \text{s}" />。</div>
+
+<div v-click="2"><span class="text-accent">路程</span>：小鸟始终以 <Latex tex="50\ \text{m/s}" /> 飞行（方向来回变、快慢不变）→ <Latex tex="s = 50\ \text{m/s} \times 25\ \text{s} = 1250\ \text{m}" />。</div>
+
+<div class="key key-blue" v-click="3"><span class="text-accent-2">位移</span>：终点在两车相遇处，即 A 车前进的距离 → <Latex tex="\Delta x = 10\ \text{m/s} \times 25\ \text{s} = 250\ \text{m}" />（由 A 指向 B）。</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 例 3：队长往返
+
+<div class="page-grow">
+
+<div class="problem">长为 <Latex tex="L" /> 的队伍以速度 <Latex tex="v_1" /> 匀速前进。队长从队尾以速度 <Latex tex="v_2" /> 匀速前进至队首后，立即返回队尾。求队长的路程和位移。</div>
+
+<div class="half-grid">
+
+<TeamLeaderSvg />
+
+<div class="stack stack-tight">
+
+<div v-click="1">相对队伍看：去程相对速度 <Latex tex="v_2 - v_1" />，用时 <Latex tex="t_1 = \frac{L}{v_2 - v_1}" />；返程相对速度 <Latex tex="v_2 + v_1" />，用时 <Latex tex="t_2 = \frac{L}{v_2 + v_1}" />。</div>
+
+<div v-click="2"><span class="text-accent">位移</span>：队长最终回到队尾，而队尾在这段时间里随队伍前进了 <Latex tex="v_1(t_1 + t_2)" /> → <Latex tex="\Delta x = v_1(t_1 + t_2) = \frac{2v_1v_2L}{v_2^2 - v_1^2}" />。</div>
+
+<div class="key key-blue" v-click="3"><span class="text-accent-2">路程</span>：队长全程都以 <Latex tex="v_2" /> 运动 → <Latex tex="s = v_2(t_1 + t_2) = \frac{2v_2^2L}{v_2^2 - v_1^2}" />。</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 1
+---
+
+# 拓展练习 1
+
+<div class="page-grow">
+
+<div class="problem">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进，传令兵往返的速率恰好是队伍行进速率的 <Latex tex="2" /> 倍。求传令兵从排尾出发、再回到排尾时，走过的总路程。</div>
+
+<div class="key key-blue key-lead" v-click="1">参考答案：<Latex tex="s = \frac{8}{3}L" />。</div>
+
+</div>
+
+---
+layout: base-flex
+clicks: 1
+---
+
+# 拓展练习 2
+
+<div class="page-grow">
+
+<div class="problem">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进。传令兵从排尾出发，往返一次回到排尾时，整支队伍恰好向前行进了 <Latex tex="L" />。求传令兵全程走过的总路程。</div>
+
+<div class="key key-blue key-lead" v-click="1">参考答案：<Latex tex="s = (1 + \sqrt{2})L" />。</div>
 
 </div>

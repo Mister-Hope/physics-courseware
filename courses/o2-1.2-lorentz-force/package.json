@@ -1,0 +1,19 @@
+{
+  "name": "lorentz-force-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o2-1.2-lorentz-force/",
+    "dev": "slidev --base /o2-1.2-lorentz-force/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "three": "^0.186.1",
+    "vue": "catalog:"
+  }
+}
