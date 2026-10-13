@@ -293,6 +293,13 @@ export const textbooks: TextbookGroup[] = [
         description: "待补充：一句话说明本课讲了什么。",
         tags: [],
       },
+      {
+        slug: "o2-1.3-charged-particle-motion",
+        title: "带电粒子在匀强磁场中的运动",
+        chapter: "§1.3",
+        description: "待补充：一句话说明本课讲了什么。",
+        tags: [],
+      },
     ],
   },
   {

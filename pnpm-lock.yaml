@@ -861,6 +861,27 @@ importers:
         specifier: 'catalog:'
         version: 3.5.43(typescript@6.0.3)
 
+  courses/o2-1.3-charged-particle-motion:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.3(vue@3.5.43(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 52.20.1(@nuxt/kit@3.21.11)(@oxc-project/types@0.153.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vue/compiler-sfc@3.5.43)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(lightningcss@1.33.0)(markdown-it@14.3.2)(oxc-parser@0.150.0)(postcss@8.5.29)(rolldown@1.2.13)(srvx@1.0.5)(supports-color@10.2.2)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 52.20.1(@nuxt/kit@3.21.11)(@oxc-project/types@0.153.0)(@vue/compiler-sfc@3.5.43)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(lightningcss@1.33.0)(markdown-it@14.3.2)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(supports-color@10.2.2)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.43(typescript@6.0.3)
+
   workspace/homepage:
     devDependencies:
       vite:
