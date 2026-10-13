@@ -402,7 +402,6 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   cursor: pointer;
 
   appearance: none;
-  appearance: none;
 }
 
 /* Firefox：让上面这条渐变成为唯一的轨道，别被原生轨道盖住 */
@@ -422,7 +421,6 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   background: #f8fafc;
   box-shadow: 0 0 8px rgb(0 0 0 / 55%);
 
-  appearance: none;
   appearance: none;
 }
 

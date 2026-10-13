@@ -7,16 +7,10 @@
  * 3. 漂移速度/运动微箭头移至电子正旁边（水平同轴在左侧 ←），与电子动作紧密相随；
  * 4. 保留电压 U 两侧虚线垂直对准导体端面，无杂乱微小文字。
  */
-withDefaults(
-  defineProps<{
-    width?: number;
-    carrierType?: "electron" | "positive";
-  }>(),
-  {
-    width: 560,
-    carrierType: "electron",
-  },
-);
+const { width = 560, carrierType = "electron" } = defineProps<{
+  width?: number;
+  carrierType?: "electron" | "positive";
+}>();
 </script>
 
 <template>

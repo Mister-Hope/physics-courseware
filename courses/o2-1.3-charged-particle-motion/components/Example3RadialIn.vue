@@ -71,7 +71,13 @@ const reflect = (P, Q1, Q2) => {
 /** M：出射点 = A 关于 OC 的镜像（四边形 OACM 关于 OC 对称） */
 const M = reflect(A, O, C);
 
-/** 单位向量（from → to） */
+/**
+ * 单位向量（from → to）
+ *
+ * @param from 起点
+ * @param to 终点
+ * @returns 由 from 指向 to 的单位向量
+ */
 const unit = (from, to) => {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
@@ -81,7 +87,14 @@ const unit = (from, to) => {
 };
 
 const num = (v) => v.toFixed(2);
-/** 从 p 沿 dir 走 len */
+/**
+ * 从 p 沿 dir 走 len
+ *
+ * @param p 起点
+ * @param dir 单位方向
+ * @param len 走的距离
+ * @returns 终点坐标
+ */
 const go = (p, dir, len) => ({ x: p.x + dir.x * len, y: p.y + dir.y * len });
 
 /** 轨迹圆弧 A→M：真圆弧（不是贝塞尔近似），sweep-flag = 0（屏幕上逆时针） */

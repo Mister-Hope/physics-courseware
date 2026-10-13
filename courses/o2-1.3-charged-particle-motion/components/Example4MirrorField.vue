@@ -73,7 +73,13 @@ const reflect = (P, Q1, Q2) => {
 const M = reflect(A, O, C);
 
 const num = (v) => v.toFixed(2);
-/** 单位向量（from → to）与"从 p 沿 dir 走 len" */
+/**
+ * 单位向量（from → to）
+ *
+ * @param from 起点
+ * @param to 终点
+ * @returns 由 from 指向 to 的单位向量
+ */
 const unit = (from, to) => {
   const dx = to.x - from.x;
   const dy = to.y - from.y;

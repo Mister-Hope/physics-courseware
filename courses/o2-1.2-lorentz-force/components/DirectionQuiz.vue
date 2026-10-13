@@ -136,7 +136,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
        尺寸走内联样式——UnoCSS 的任意值类在运行中的 dev server 上不一定重新生成。 -->
   <div
     class="grid w-full grid-cols-2 gap-2 text-slate-200 select-none"
-    style=" grid-template-rows: repeat(2, minmax(0, 1fr));height: 100%"
+    style="grid-template-rows: repeat(2, minmax(0, 1fr)); height: 100%"
   >
     <div v-for="(s, idx) in scenarios" :key="s.key" class="flex items-center justify-center">
       <div class="relative h-full w-full">
