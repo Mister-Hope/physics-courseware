@@ -36,8 +36,8 @@ const iRight = computed(() => charge.value === "proton");
 /** 掌心是否朝向观察者：只有磁感线射入纸面（⊗）时掌心才迎着磁感线 */
 const palmToViewer = computed(() => bDir.value === "in");
 /** 手掌中心（四种变换都绕它做，保证变换后仍在画面正中） */
-const CX = 190;
-const CY = 168;
+const CX = 197;
+const CY = 186;
 
 /** 左手贴图的四种刚体变换（见文件头手性说明） */
 const handTransform = computed(() => {
@@ -221,7 +221,7 @@ const palmText = computed(() =>
       <!-- 右：左手（写实手绘：四指沿 I、拇指沿 F_洛、磁感线穿入掌心） -->
       <div class="flex h-full min-h-0 flex-col items-center justify-center">
         <svg
-          viewBox="0 0 360 330"
+          viewBox="0 0 380 350"
           xmlns="http://www.w3.org/2000/svg"
           class="min-h-0 w-full flex-1"
           :style="{ opacity: step >= 2 ? 1 : 0.2, transition: 'opacity 0.3s' }"
@@ -232,15 +232,15 @@ const palmText = computed(() =>
 
           <!-- 掌心的磁场记号（磁感线穿入掌心处；四种变换都把它映回同一点） -->
           <g v-if="step >= 2">
-            <circle cx="190" cy="168" r="13" fill="rgba(9,13,26,0.55)" />
+            <circle cx="197" cy="186" r="13" fill="rgba(9,13,26,0.55)" />
             <g v-if="bDir === 'out'">
-              <circle cx="190" cy="168" r="11" fill="none" stroke="#e2a846" stroke-width="2" />
-              <circle cx="190" cy="168" r="2.8" fill="#e2a846" />
+              <circle cx="197" cy="186" r="11" fill="none" stroke="#e2a846" stroke-width="2" />
+              <circle cx="197" cy="186" r="2.8" fill="#e2a846" />
             </g>
             <g v-else>
-              <circle cx="190" cy="168" r="11" fill="none" stroke="#e2a846" stroke-width="2" />
-              <line x1="182" y1="160" x2="198" y2="176" stroke="#e2a846" stroke-width="2" />
-              <line x1="198" y1="160" x2="182" y2="176" stroke="#e2a846" stroke-width="2" />
+              <circle cx="197" cy="186" r="11" fill="none" stroke="#e2a846" stroke-width="2" />
+              <line x1="189" y1="178" x2="205" y2="194" stroke="#e2a846" stroke-width="2" />
+              <line x1="205" y1="178" x2="189" y2="194" stroke="#e2a846" stroke-width="2" />
             </g>
           </g>
         </svg>

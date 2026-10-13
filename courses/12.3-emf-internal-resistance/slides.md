@@ -57,7 +57,7 @@ clicks: 3
 </div>
 </div>
 
-<div v-click="3" class="key">那么反过来：测出多组 <Latex tex="U" />、<Latex tex="I" />，作出这条直线，就能从纵截距和斜率读出电池的 <Latex tex="E" /> 和 <Latex tex="r" />——这正是本节课要做的实验。</div>
+<div v-click="3" class="key">反过来，测出多组 <Latex tex="U" />、<Latex tex="I" /> 作出这条直线，从纵截距和斜率就能读出电池的 <Latex tex="E" /> 和 <Latex tex="r" />。</div>
 </div>
 
 ---
@@ -361,9 +361,11 @@ clicks: 3
 # 伏阻法：化成直线
 
 <div class="page-grow">
+<div class="ask">把 <Latex tex="E = U + \dfrac{U}{R} r" /> 化成直线——该以什么为坐标轴？</div>
+
 <div class="half-grid">
 <div class="stack">
-<Latex tex="\dfrac{1}{U} = \dfrac{1}{E} + \dfrac{r}{E} \cdot \dfrac{1}{R}" display />
+<Latex v-click="1" tex="\dfrac{1}{U} = \dfrac{1}{E} + \dfrac{r}{E} \cdot \dfrac{1}{R}" display />
 <div v-click="2">纵轴截距 <Latex tex="a = \dfrac{1}{E} \Rightarrow E = \dfrac{1}{a}" />；斜率 <Latex tex="k = \dfrac{r}{E} \Rightarrow r = \dfrac{k}{a} = kE" />。</div>
 <div v-click="3">外推到 <Latex tex="\dfrac{1}{U} = 0" />：横轴截距为 <Latex tex="-\dfrac{1}{r}" />，所以 <Latex tex="r = \dfrac{1}{b}" />（<Latex tex="b" /> 是横截距的绝对值）。</div>
 </div>
@@ -531,5 +533,5 @@ clicks: 2
 
 <div v-click="1">测干电池（内阻小）用<b>外接法 / 伏阻法</b>；内接法、安阻法要求 <Latex tex="r_0 \gg R_A" />，否则测出的内阻里混进了电流表内阻（<Latex tex="R_A" /> 已知时可以减去）。</div>
 
-<div v-click="2" class="key">一句话：谁分流、谁分压，就把谁并进等效电源——电压表分流 ⇒ <Latex tex="E" />、<Latex tex="r" /> 都偏小；电流表分压 ⇒ <Latex tex="E" /> 不变、<Latex tex="r" /> 偏大。</div>
+<div v-click="2" class="key"><b>将分流、分压的元件并进等效电源</b>：电压表分流，<Latex tex="E" />、<Latex tex="r" /> 都偏小；电流表分压，<Latex tex="E" /> 不变、<Latex tex="r" /> 偏大。</div>
 </div>

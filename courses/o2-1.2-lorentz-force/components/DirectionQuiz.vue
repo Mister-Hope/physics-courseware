@@ -1,197 +1,360 @@
 <!--
-  方向判定练习（对应教材"练习与应用"第 2 题风格）
-  —— 4 个场景：质子 / 电子、v 向右 / 向上、B ⊙ / ⊗，求 F_洛 方向。
-     题干（电荷、v、B、问号）常显；点击逐步出答案（step >= i+1 才画 F 箭头与方向词）。
-     F_洛 方向 = q·(v × B)，由组件 computed 真实计算（v 在纸面内、B 沿 z 轴）。
-  版面：四个场景都从同一个"作用点"出发画 v，力也从这个点起笔，避免旧版
-        "电荷符号飘在一角、F 箭头不知道从哪儿长出来"；√ 号占位不顶跑已有元素。
-  意图：覆盖四种答案方向（下 / 上 / 左 / 右），其中第 2 题即板书演示的"电子 v 右 B⊙ → F 向上"。
-  待细化方向：答案箭头加出现动画、错误点选判分。
+  方向判定练习精修版 (DirectionPracticeBeautified.vue)
+  —— 对应教材"练习与应用"第 2 题：
+     4 个场景对应 Slidev 幻灯片的 4 次点击（step: 0 -> 1 -> 2 -> 3 -> 4）：
+       step >= 1: 第 1 题揭晓 F_洛 向下（质子水平向右，B 垂直纸面向外 ⊙）
+       step >= 2: 第 2 题揭晓 F_洛 向上（电子水平向右，B 垂直纸面向外 ⊙）
+       step >= 3: 第 3 题揭晓 F_洛 向左（电子竖直向上，B 垂直纸面向外 ⊙）
+       step >= 4: 第 4 题揭晓 F_洛 向右（电子竖直向上，B 垂直纸面向里 ⊗）
+     严格遵从 Slidev 纯净课件组件规范：
+       - 不内置任何多余工具栏、进度条、切换按钮等控件；
+       - 纯由 props.step (0~4) 外部驱动；
+       - 4 题网格直观大方，字号适合远屏视认，力矢量与角标清晰规范。
 -->
-<script setup>
-const { step = 0 } = defineProps({
-  step: { type: Number, default: 0 },
-});
+<script setup lang="ts">
+const { step = 0 } = defineProps<{
+  /** 幻灯片点击步数：0=全部未揭晓，1~~4=依次揭晓第1~~4题答案 */
+  step?: number;
+}>();
 
-/** 场景配置：q=±1，v 方向（纸面内），Bz=±1（穿纸面） */
-const scenarios = [
-  { key: 1, q: 1, vx: 1, vy: 0, Bz: 1 }, // 质子 v 向右 B⊙ → F 向下
-  { key: 2, q: -1, vx: 1, vy: 0, Bz: 1 }, // 电子 v 向右 B⊙ → F 向上（板书情景）
-  { key: 3, q: -1, vx: 0, vy: 1, Bz: 1 }, // 电子 v 向上 B⊙ → F 向左
-  { key: 4, q: -1, vx: 0, vy: 1, Bz: -1 }, // 电子 v 向上 B⊗ → F 向右
+interface Scenario {
+  key: number;
+  title: string;
+  particleName: string;
+  particleType: string;
+  q: number; // +1 或 -1
+  vx: number;
+  vy: number;
+  Bz: number; // +1(⊙) 或 -1(⊗)
+  desc: string;
+}
+
+const scenarios: Scenario[] = [
+  {
+    key: 1,
+    title: "质子水平向右",
+    particleName: "质子",
+    particleType: "正电荷",
+    q: 1,
+    vx: 1,
+    vy: 0,
+    Bz: 1,
+    desc: "v 水平向右 · B 垂直纸面向外 ⊙",
+  },
+  {
+    key: 2,
+    title: "电子水平向右",
+    particleName: "电子",
+    particleType: "负电荷",
+    q: -1,
+    vx: 1,
+    vy: 0,
+    Bz: 1,
+    desc: "v 水平向右 · B 垂直纸面向外 ⊙",
+  },
+  {
+    key: 3,
+    title: "电子竖直向上",
+    particleName: "电子",
+    particleType: "负电荷",
+    q: -1,
+    vx: 0,
+    vy: 1,
+    Bz: 1,
+    desc: "v 竖直向上 · B 垂直纸面向外 ⊙",
+  },
+  {
+    key: 4,
+    title: "电子竖直向上",
+    particleName: "电子",
+    particleType: "负电荷",
+    q: -1,
+    vx: 0,
+    vy: 1,
+    Bz: -1,
+    desc: "v 竖直向上 · B 垂直纸面向里 ⊗",
+  },
 ];
 
-/** 真实计算：F = q·(v × B)；v=(vx,vy,0)、B=(0,0,Bz) → v×B=(vy·Bz, −vx·Bz, 0) */
+/** 真实物理计算：F = q·(v × B)；v=(vx,vy,0)、B=(0,0,Bz) → v×B=(vy·Bz, −vx·Bz, 0) */
 const answers = scenarios.map((s) => ({
   fx: s.q * s.vy * s.Bz,
   fy: -s.q * s.vx * s.Bz,
 }));
 
-const dirWord = (a) => {
+const dirWord = (a: { fx: number; fy: number }): string => {
   if (a.fy < 0) return "向下";
   if (a.fy > 0) return "向上";
   if (a.fx < 0) return "向左";
   return "向右";
 };
 
-/** 作用点（v 与 F 共同起笔处） */
-const PX = 120;
-const PY = 82;
+/** 统一的作用点（v 与 F 共同起笔中心） */
+const PX = 140;
+const PY = 100;
+const ARROW_LEN = 68;
 
 /**
- * 答案箭头终点
+ * 答案 F_洛 箭头终点 (与真实物理方向严格一一对应)
  *
- * @param a 答案对象（fx / fy 分量）
- * @returns 箭头终点坐标（viewBox 用户单位）
+ * @param a 洛伦兹力的两个分量
+ * @returns 箭头终点坐标
  */
-const tipOf = (a) =>
-  a.fx === 0 ? { x: PX, y: a.fy > 0 ? 26 : 138 } : { x: a.fx > 0 ? 252 : 24, y: PY };
+const tipOf = (a: { fx: number; fy: number }): { x: number; y: number } => {
+  if (a.fx !== 0) {
+    return {
+      x: a.fx > 0 ? PX + ARROW_LEN : PX - ARROW_LEN,
+      y: PY,
+    };
+  }
+  return {
+    x: PX,
+    y: a.fy > 0 ? PY - ARROW_LEN : PY + ARROW_LEN,
+  };
+};
 
 /**
- * 答案方向词的落点（不同朝向给不同的空位，避开 v 箭头与"F_洛 = ?"）
+ * 答案方向词与 F_洛 标注的排版落点
  *
- * @param a 答案对象（fx / fy 分量）
- * @returns 落点坐标与文字锚点
+ * @param a 洛伦兹力的两个分量
+ * @returns 文字坐标与对齐方式
  */
-const wordAt = (a) => {
-  if (a.fx > 0) return { x: 222, y: 112, anchor: "middle" };
-  if (a.fx < 0) return { x: 54, y: 112, anchor: "middle" };
-  return { x: 104, y: a.fy > 0 ? 32 : 134, anchor: "end" };
+const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: string } => {
+  if (a.fx > 0) return { x: PX + ARROW_LEN - 8, y: PY + 28, anchor: "middle" };
+
+  if (a.fx < 0) return { x: PX - ARROW_LEN + 8, y: PY + 28, anchor: "middle" };
+
+  if (a.fy > 0) return { x: PX - 16, y: PY - ARROW_LEN / 2, anchor: "end" };
+
+  return { x: PX - 16, y: PY + ARROW_LEN / 2 + 6, anchor: "end" };
 };
 </script>
 
 <template>
-  <div class="grid min-h-0 flex-1 grid-cols-2 grid-rows-2 gap-4">
-    <svg
-      v-for="(s, i) in scenarios"
-      :key="s.key"
-      viewBox="0 0 300 150"
-      preserveAspectRatio="xMidYMid meet"
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-full w-full rounded-xl border border-slate-700/60 bg-slate-900/30"
-    >
-      <!-- 题干常显：B 符号（⊙ / ⊗）+ 标签 -->
-      <g v-if="s.Bz > 0">
-        <circle cx="252" cy="34" r="13" fill="none" stroke="#e2a846" stroke-width="2.4" />
-        <circle cx="252" cy="34" r="3.2" fill="#e2a846" />
-      </g>
-      <g v-else>
-        <circle cx="252" cy="34" r="13" fill="none" stroke="#e2a846" stroke-width="2.4" />
-        <line x1="242" y1="24" x2="262" y2="44" stroke="#e2a846" stroke-width="2.2" />
-        <line x1="262" y1="24" x2="242" y2="44" stroke="#e2a846" stroke-width="2.2" />
-      </g>
-      <text
-        x="252"
-        y="64"
-        text-anchor="middle"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="18"
-        fill="#e2a846"
+  <div class="flex flex-col w-full text-slate-200 select-none">
+    <!-- 4 卡片网格（2×2 纯净展示） -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div
+        v-for="(s, idx) in scenarios"
+        :key="s.key"
+        class="flex flex-col rounded-xl border border-slate-800 bg-[#0c1020] p-4 overflow-hidden shadow-lg"
       >
-        B
-      </text>
-
-      <!-- 题干常显：电荷（作用点上的圆盘 + 符号） -->
-      <circle
-        :cx="PX"
-        :cy="PY"
-        r="13"
-        fill="rgba(15,23,42,0.9)"
-        :stroke="s.q > 0 ? '#f87171' : '#60a5fa'"
-        stroke-width="2.4"
-      />
-      <text
-        :x="PX"
-        :y="PY + 8"
-        text-anchor="middle"
-        :fill="s.q > 0 ? '#f87171' : '#60a5fa'"
-        font-size="20"
-      >
-        {{ s.q > 0 ? "+" : "−" }}
-      </text>
-      <text
-        x="100"
-        y="64"
-        text-anchor="end"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="18"
-        :fill="s.q > 0 ? '#f87171' : '#60a5fa'"
-      >
-        {{ s.q > 0 ? "p" : "e" }}
-        <tspan dy="3" font-size="12">{{ s.q > 0 ? "+" : "−" }}</tspan>
-      </text>
-
-      <!-- 题干常显：v 箭头（向右 / 向上） -->
-      <CourseArrow
-        v-if="s.vx > 0"
-        :from="{ x: PX + 14, y: PY }"
-        :to="{ x: 246, y: PY }"
-        stroke="#60a5fa"
-        stroke-width="4"
-      />
-      <CourseArrow
-        v-else
-        :from="{ x: PX, y: PY - 14 }"
-        :to="{ x: PX, y: 20 }"
-        stroke="#60a5fa"
-        stroke-width="4"
-      />
-      <text
-        v-if="s.vx > 0"
-        x="258"
-        y="88"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="21"
-        fill="#60a5fa"
-      >
-        v
-      </text>
-      <text
-        v-else
-        x="136"
-        y="26"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="21"
-        fill="#60a5fa"
-      >
-        v
-      </text>
-
-      <!-- 题干常显：F_洛 = ? -->
-      <text x="240" y="140" text-anchor="middle" font-size="15" fill="#94a3b8">
-        <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
-        <tspan font-size="10">洛</tspan>
-        <tspan>= ?</tspan>
-      </text>
-
-      <!-- 答案（step >= i+1 才出）：F 箭头 + 方向词 -->
-      <g v-if="step >= i + 1">
-        <CourseArrow
-          :from="{ x: PX, y: PY }"
-          :to="tipOf(answers[i])"
-          stroke="#2dd4bf"
-          stroke-width="4.4"
-        />
-        <text
-          :x="wordAt(answers[i]).x"
-          :y="wordAt(answers[i]).y"
-          :text-anchor="wordAt(answers[i]).anchor"
-          font-size="17"
-          fill="#2dd4bf"
-          font-weight="700"
+        <!-- 卡片标题栏 -->
+        <div
+          class="flex items-center justify-between text-sm pb-2.5 border-b border-slate-800/80 mb-2.5"
         >
-          <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
-          <tspan font-size="10">洛</tspan>
-          <tspan>{{ dirWord(answers[i]) }}</tspan>
-        </text>
-      </g>
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-amber-400 text-base">第 {{ idx + 1 }} 题</span>
+            <span
+              class="px-2 py-0.5 rounded text-xs font-semibold"
+              :class="
+                s.q > 0
+                  ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                  : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
+              "
+            >
+              {{ s.particleName }} ({{ s.particleType }})
+            </span>
+          </div>
+          <span class="text-slate-400 text-xs font-mono">{{ s.desc }}</span>
+        </div>
 
-      <!-- 角标：题号 -->
-      <text x="16" y="26" font-size="15" fill="#64748b">{{ "①②③④"[i] }}</text>
-    </svg>
+        <!-- 场景 SVG 画布 -->
+        <div
+          class="relative w-full rounded-lg overflow-hidden bg-slate-950/70 border border-slate-900"
+        >
+          <svg viewBox="0 0 280 200" class="w-full h-auto block">
+            <defs>
+              <filter :id="`glow-p-${idx}`" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- 磁场背景网格符号 (4行×5列，分布均匀) -->
+            <g>
+              <g v-for="row in [32, 76, 124, 168]" :key="'r-' + row">
+                <g v-for="col in [34, 88, 140, 192, 246]" :key="'c-' + col + '-' + row">
+                  <template v-if="s.Bz === 1">
+                    <!-- ⊙ 穿出纸面 -->
+                    <circle
+                      :cx="col"
+                      :cy="row"
+                      r="8"
+                      fill="none"
+                      stroke="rgba(226,168,70,0.3)"
+                      stroke-width="1.2"
+                    />
+                    <circle :cx="col" :cy="row" r="2.2" fill="rgba(226,168,70,0.65)" />
+                  </template>
+                  <template v-else>
+                    <!-- ⊗ 穿入纸面 -->
+                    <circle
+                      :cx="col"
+                      :cy="row"
+                      r="8"
+                      fill="none"
+                      stroke="rgba(226,168,70,0.3)"
+                      stroke-width="1.2"
+                    />
+                    <line
+                      :x1="col - 4.5"
+                      :y1="row - 4.5"
+                      :x2="col + 4.5"
+                      :y2="row + 4.5"
+                      stroke="rgba(226,168,70,0.6)"
+                      stroke-width="1.2"
+                    />
+                    <line
+                      :x1="col + 4.5"
+                      :y1="row - 4.5"
+                      :x2="col - 4.5"
+                      :y2="row + 4.5"
+                      stroke="rgba(226,168,70,0.6)"
+                      stroke-width="1.2"
+                    />
+                  </template>
+                </g>
+              </g>
+            </g>
+
+            <!-- 磁场角标标注 B -->
+            <g transform="translate(244, 28)">
+              <text
+                x="0"
+                y="0"
+                font-size="16"
+                fill="#e2a846"
+                font-family="KaTeX_Math, 'Times New Roman', serif"
+                font-style="italic"
+                font-weight="bold"
+              >
+                B
+              </text>
+              <text x="15" y="-1" font-size="12" fill="rgba(226,168,70,0.85)">
+                {{ s.Bz === 1 ? "⊙" : "⊗" }}
+              </text>
+            </g>
+
+            <!-- 速度矢量 v (从中心 PX, PY 起笔，鲜明青蓝色) -->
+            <CourseArrow
+              :from="{ x: PX, y: PY }"
+              :to="{ x: PX + s.vx * ARROW_LEN, y: PY - s.vy * ARROW_LEN }"
+              stroke="#38bdf8"
+              :stroke-width="3.2"
+            />
+            <!-- 速度标注 v -->
+            <text
+              :x="s.vx > 0 ? PX + ARROW_LEN + 14 : PX + 12"
+              :y="s.vy > 0 ? PY - ARROW_LEN - 8 : PY - 8"
+              text-anchor="middle"
+              font-size="18"
+              font-style="italic"
+              font-family="KaTeX_Math, 'Times New Roman', serif"
+              fill="#38bdf8"
+              font-weight="bold"
+            >
+              v
+            </text>
+
+            <!-- 洛伦兹力 F_洛 (step >= idx + 1 才绘制，红色粗箭头) -->
+            <template v-if="step >= idx + 1">
+              <!-- 红色力矢量箭头 -->
+              <CourseArrow
+                :from="{ x: PX, y: PY }"
+                :to="tipOf(answers[idx])"
+                stroke="#ef4444"
+                :stroke-width="3.6"
+              />
+
+              <!-- 力矢量标签：标准排版 F_洛 + 方向文字 -->
+              <text
+                :x="wordAt(answers[idx]).x"
+                :y="wordAt(answers[idx]).y"
+                :text-anchor="wordAt(answers[idx]).anchor"
+                fill="#ef4444"
+                font-weight="bold"
+              >
+                <tspan
+                  font-family="KaTeX_Math, 'Times New Roman', serif"
+                  font-style="italic"
+                  font-size="18"
+                >
+                  F
+                </tspan>
+                <tspan dy="4" font-size="11" font-weight="normal">洛</tspan>
+                <tspan dy="-4" font-size="15">{{ dirWord(answers[idx]) }}</tspan>
+              </text>
+            </template>
+
+            <!-- 未揭晓提示 -->
+            <template v-else>
+              <text
+                :x="PX - (s.vx > 0 ? 32 : -32)"
+                :y="PY + (s.vy > 0 ? 32 : -18)"
+                text-anchor="middle"
+                font-size="14"
+                fill="#64748b"
+              >
+                <tspan
+                  font-family="KaTeX_Math, 'Times New Roman', serif"
+                  font-style="italic"
+                  font-size="16"
+                >
+                  F
+                </tspan>
+                <tspan dy="4" font-size="11">洛</tspan>
+                <tspan dy="-4">= ?</tspan>
+              </text>
+            </template>
+
+            <!-- 中心带电粒子 (覆盖在线段起笔处，层次分明) -->
+            <g :filter="`url(#glow-p-${idx})`">
+              <circle
+                :cx="PX"
+                :cy="PY"
+                r="12"
+                :fill="s.q > 0 ? '#ef4444' : '#0284c7'"
+                stroke="#ffffff"
+                stroke-width="1.8"
+              />
+              <text
+                :x="PX"
+                :y="PY + 4.5"
+                text-anchor="middle"
+                font-size="14"
+                font-weight="bold"
+                fill="#ffffff"
+                font-family="sans-serif"
+              >
+                {{ s.q > 0 ? "+" : "−" }}
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 卡片底部答案揭晓条 -->
+        <div
+          class="mt-2.5 pt-2 border-t border-slate-800/80 text-xs flex items-center justify-between"
+        >
+          <span class="text-slate-400">
+            电荷：<strong :class="s.q > 0 ? 'text-red-400' : 'text-sky-400'">{{
+              s.particleName
+            }}</strong>
+            ({{ s.particleType }})
+          </span>
+          <span
+            class="px-2.5 py-0.5 rounded text-xs font-bold transition-all"
+            :class="
+              step >= idx + 1
+                ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                : 'bg-slate-800/60 text-slate-500'
+            "
+          >
+            {{ step >= idx + 1 ? "答案：" + dirWord(answers[idx]) : "未揭晓" }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

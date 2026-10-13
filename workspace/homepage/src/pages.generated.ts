@@ -3,11 +3,14 @@
 
 export const coursePages: Record<string, number> = {
   "1.1-motion-description": 20,
-  "1.2-time-displacement": 20,
+  "1.2-time-displacement": 22,
   "1.3-velocity": 40,
   "1.4-acceleration": 19,
   "1.x-vectors": 20,
   "10.4-capacitor": 23,
+  "12.1-energy-conversion-in-circuits": 14,
+  "12.3-emf-internal-resistance": 30,
+  "12.4-energy-sustainability": 17,
   "2.1-speed-time-experiment": 17,
   "2.2-2.3-uniform-acceleration": 29,
   "2.4-free-fall": 29,
@@ -27,5 +30,5 @@ export const coursePages: Record<string, number> = {
   "5.2-composition-decomposition-of-motion": 38,
   "5.3-projectile-motion-experiment": 15,
   "5.4-projectile-motion": 37,
-  "o2-1.2-lorentz-force": 8,
+  "o2-1.2-lorentz-force": 23,
 };

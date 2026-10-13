@@ -1,0 +1,32 @@
+/* ═══════════════════════════════════════════════
+   电路中的能量转化 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课公式多、示意图与交互组件占位大，纵向密度略收紧 */
+:root {
+  --page-gap: 0.7rem;
+  --stack-gap: 0.65rem;
+}
+
+/* 示意图（WorkConductionSvg / MotorSchematicSvg）：占满所在栏宽度 */
+.svg-full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.svg-full > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 例题一页文字较多，纵向密度略收紧 */
+.problem {
+  font-size: 1.05rem;
+}
