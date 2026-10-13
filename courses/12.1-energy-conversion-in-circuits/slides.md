@@ -80,13 +80,13 @@ layout: base-flex
 <div class="half-grid">
 
 <div v-click="1" class="stack">
-  <div class="mini-title"><mdi-flash /> 电功</div>
+  <div class="mini-title"><mdi-flash class="text-3xl" /> 电功</div>
   <div class="text-2xl"><Latex tex="W = UIt" /></div>
   <div class="mini-note">电流在一段电路中所做的功。单位：焦耳（<Latex tex="\text{J}" />）；生活中常用“度”，<Latex tex="1\ \text{kW·h} = 3.6 \times 10^6\ \text{J}" />。</div>
 </div>
 
 <div v-click="2" class="stack divider-l">
-  <div class="mini-title"><mdi-clock-outline /> 电功率</div>
+  <div class="mini-title"><mdi-clock-outline class="text-3xl" /> 电功率</div>
   <div class="text-2xl"><Latex tex="P = \dfrac{W}{t} = UI" /></div>
   <div class="mini-note">电流做功的快慢。单位：瓦特（<Latex tex="\text{W}" />）。</div>
 </div>
@@ -139,16 +139,30 @@ layout: base-flex
 
 # 串联电路的功率分配
 
-<div class="page-grow page-grow-tight">
+<div class="page-grow">
 
-<div class="ask">两个电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 串联，它们消耗的功率与电阻有什么关系？</div>
+<div class="ask">两个电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 串联，它们消耗的功率与电阻是什么关系？</div>
 
-<div v-click="1"><CircuitPower mode="series" /></div>
+<div class="half-grid">
 
-<div v-click="2">串联电路各电阻<strong>电流相同</strong>：<Latex tex="P_1 = I^2R_1,\quad P_2 = I^2R_2" />，所以 <Latex tex="P_1 : P_2 = R_1 : R_2" />。</div>
+<div v-click="1" class="svg-full">
+  <SeriesPowerSvg />
+</div>
 
-<div v-click="3" class="key">
-  串联电路：电阻越大分得的功率越多，功率与电阻<strong>成正比</strong>。
+<div class="stack">
+
+<div v-click="2">串联电路各电阻<strong>电流相同</strong>：<Latex tex="I_1 = I_2 = I" />，因此 <Latex tex="P_1 = I^2R_1" />、<Latex tex="P_2 = I^2R_2" />。</div>
+
+<div v-click="3"><Latex tex="\dfrac{P_1}{P_2} = \dfrac{I^2R_1}{I^2R_2} = \dfrac{R_1}{R_2}" /></div>
+
+<div v-click="3" class="text-xl"><Latex tex="P_1 : P_2 = R_1 : R_2" /></div>
+
+</div>
+
+</div>
+
+<div v-click="4" class="key">
+  串联电路中，电阻越大分得的功率越多：功率与电阻<strong>成正比</strong>。
 </div>
 
 </div>
@@ -159,16 +173,30 @@ layout: base-flex
 
 # 并联电路的功率分配
 
-<div class="page-grow page-grow-tight">
+<div class="page-grow">
 
-<div class="ask">两个电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 并联，它们消耗的功率与电阻又有什么关系？</div>
+<div class="ask">两个电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 并联，它们消耗的功率与电阻又是什么关系？</div>
 
-<div v-click="1"><CircuitPower mode="parallel" /></div>
+<div class="half-grid">
 
-<div v-click="2">并联电路各电阻<strong>电压相同</strong>：<Latex tex="P_1 = \dfrac{U^2}{R_1},\quad P_2 = \dfrac{U^2}{R_2}" />，所以 <Latex tex="P_1 : P_2 = R_2 : R_1" />。</div>
+<div v-click="1" class="svg-full">
+  <ParallelPowerSvg />
+</div>
 
-<div v-click="3" class="key">
-  并联电路：电阻越大分得的功率越少，功率与电阻<strong>成反比</strong>。
+<div class="stack">
+
+<div v-click="2">并联电路各电阻<strong>电压相同</strong>：<Latex tex="U_1 = U_2 = U" />，因此 <Latex tex="P_1 = \dfrac{U^2}{R_1}" />、<Latex tex="P_2 = \dfrac{U^2}{R_2}" />。</div>
+
+<div v-click="3"><Latex tex="\dfrac{P_1}{P_2} = \dfrac{U^2/R_1}{U^2/R_2} = \dfrac{R_2}{R_1}" /></div>
+
+<div v-click="3" class="text-xl"><Latex tex="P_1 : P_2 = R_2 : R_1" /></div>
+
+</div>
+
+</div>
+
+<div v-click="4" class="key">
+  并联电路中，电阻越大分得的功率越少：功率与电阻<strong>成反比</strong>。
 </div>
 
 </div>
@@ -231,28 +259,48 @@ layout: base-flex
 
 <div class="ask">所有用电器都满足 <Latex tex="W = Q" /> 吗？</div>
 
-<div class="half-grid">
+<div class="stack-tight">
 
-<div v-click="1" class="stack-tight">
-  <div class="mini-title">纯电阻电路</div>
-  <div class="mini-note">电热器、白炽灯、电阻丝</div>
-  <div>电能全部转化为内能：<Latex tex="W = Q" /></div>
-  <div><Latex tex="P = UI = I^2R = \dfrac{U^2}{R}" /> 都成立</div>
-  <div>欧姆定律 <Latex tex="U = IR" /> 成立</div>
+<div class="cmp-row cmp-head">
+  <div>比较项目</div>
+  <div>纯电阻电路</div>
+  <div>非纯电阻电路</div>
 </div>
 
-<div v-click="2" class="stack-tight divider-l">
-  <div class="mini-title">非纯电阻电路</div>
-  <div class="mini-note">电动机、正在充电的电池</div>
-  <div>电能还转化为机械能、化学能：<Latex tex="W > Q" /></div>
-  <div><Latex tex="P_{\text{电}} = UI > P_{\text{热}} = I^2R" /></div>
-  <div><Latex tex="U = IR" /> 与 <Latex tex="\dfrac{U^2}{R}" /> 均不成立</div>
+<div v-click="1" class="cmp-row">
+  <div class="cmp-item">典型用电器</div>
+  <div>电炉、白炽灯、电烙铁</div>
+  <div>电动机、电解槽</div>
+</div>
+
+<div v-click="1" class="cmp-row">
+  <div class="cmp-item">能量转化</div>
+  <div>电能全部转化为内能：<Latex tex="W = Q" /></div>
+  <div>电能除转化为内能外，还转化为机械能、化学能等：<Latex tex="W = Q + E_{\text{其他}}" /></div>
+</div>
+
+<div v-click="2" class="cmp-row">
+  <div class="cmp-item">电功与电热</div>
+  <div><Latex tex="W = Q" />，即 <Latex tex="UIt = I^2Rt = \dfrac{U^2}{R}t" /></div>
+  <div><Latex tex="W = Q + E_{\text{其他}}" />，即 <Latex tex="UIt = I^2Rt + E_{\text{其他}}" /></div>
+</div>
+
+<div v-click="2" class="cmp-row">
+  <div class="cmp-item">电功率与热功率</div>
+  <div><Latex tex="P = P_{\text{热}}" />，即 <Latex tex="UI = I^2R = \dfrac{U^2}{R}" /></div>
+  <div><Latex tex="P = P_{\text{热}} + P_{\text{其他}}" />，即 <Latex tex="UI = I^2R + P_{\text{其他}}" /></div>
+</div>
+
+<div v-click="2" class="cmp-row">
+  <div class="cmp-item">欧姆定律</div>
+  <div>成立：<Latex tex="U = IR" />（<Latex tex="I = \dfrac{U}{R}" />）</div>
+  <div>不成立：<Latex tex="U > IR" />（<Latex tex="I < \dfrac{U}{R}" />）</div>
 </div>
 
 </div>
 
 <div v-click="3" class="key">
-  <Latex tex="P = UI" /> 对一切电路都成立，算的是电流做功的功率；<Latex tex="P_{\text{热}} = I^2R" /> 只算发热的那一部分。
+  判断依据：电能是否<strong>全部</strong>转化为内能——只有全部转化为内能时，<Latex tex="U = IR" /> 与 <Latex tex="\dfrac{U^2}{R}" /> 才成立。
 </div>
 
 </div>
@@ -283,7 +331,7 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="half-grid">
+<div class="half-grid half-grid-square">
 
 <div class="problem">
   一台电动机，线圈的电阻是 <Latex tex="6\ \Omega" />，当它两端所加的电压为 <Latex tex="220\ \text{V}" /> 时，通过的电流是 <Latex tex="5\ \text{A}" />。这台电动机发热的功率与对外做功的功率各是多少？
@@ -309,6 +357,44 @@ layout: base-flex
 
 <div v-click="5" class="key">
   这台电动机发热的功率为 <Latex tex="150\ \text{W}" />，对外做功的功率为 <Latex tex="950\ \text{W}" />。
+</div>
+
+</div>
+
+---
+layout: base-flex
+---
+
+# 例题：先测内阻，再算输出功率与效率
+
+<div class="page-grow">
+
+<div class="half-grid half-grid-square">
+
+<div class="problem">
+  一小型电动机，加 <Latex tex="0.2\ \text{V}" /> 电压时不转，电流 <Latex tex="0.4\ \text{A}" />；加 <Latex tex="2.0\ \text{V}" /> 电压时正常转动，电流 <Latex tex="1.0\ \text{A}" />。求线圈电阻及转动时的输入功率、发热功率、输出功率与效率。
+</div>
+
+<div class="svg-full">
+  <MotorSchematicSvg />
+</div>
+
+</div>
+
+<div class="stack-tight">
+
+<div v-click="1">不转时不对外做功，相当于纯电阻：<Latex tex="R = \dfrac{U_1}{I_1} = \dfrac{0.2}{0.4}\ \Omega = 0.5\ \Omega" /></div>
+
+<div v-click="2">转动时输入功率：<Latex tex="P_{\text{入}} = U_2I_2 = 2.0 \times 1.0\ \text{W} = 2.0\ \text{W}" /></div>
+
+<div v-click="3">发热功率：<Latex tex="P_{\text{热}} = I_2^2R = 1.0^2 \times 0.5\ \text{W} = 0.5\ \text{W}" /></div>
+
+<div v-click="4">输出功率：<Latex tex="P_{\text{出}} = P_{\text{入}} - P_{\text{热}} = 1.5\ \text{W}" />，效率 <Latex tex="\eta = \dfrac{P_{\text{出}}}{P_{\text{入}}} = 75\%" /></div>
+
+</div>
+
+<div v-click="5" class="key">
+  线圈电阻 <Latex tex="0.5\ \Omega" />；转动时输入 <Latex tex="2.0\ \text{W}" />、发热 <Latex tex="0.5\ \text{W}" />、输出 <Latex tex="1.5\ \text{W}" />，效率 <Latex tex="75\%" />。
 </div>
 
 </div>
@@ -349,7 +435,7 @@ layout: base-flex
 
 <div class="summary-line" v-click="3"><span class="text-accent font-bold">焦耳定律与热功率</span>：<Latex tex="Q = I^2Rt" />，<Latex tex="P_{\text{热}} = I^2R" /></div>
 
-<div class="summary-line" v-click="4"><span class="text-accent font-bold">纯电阻与非纯电阻</span>：纯电阻 <Latex tex="W = Q" />；电动机 <Latex tex="P_{\text{入}} = UI" />、<Latex tex="P_{\text{热}} = I^2R" />、<Latex tex="P_{\text{出}} = P_{\text{入}} - P_{\text{热}}" /></div>
+<div class="summary-line" v-click="4"><span class="text-accent font-bold">纯电阻与非纯电阻</span>：纯电阻 <Latex tex="W = Q" />；电动机 <Latex tex="P_{\text{入}} = UI" />、<Latex tex="P_{\text{出}} = UI - I^2R" />、效率 <Latex tex="\eta = \dfrac{P_{\text{出}}}{P_{\text{入}}}" /></div>
 
 <div class="summary-line" v-click="5"><span class="text-accent font-bold">电池的能量</span>：<Latex tex="W = EQ" />；充电宝「<Latex tex="\text{mAh}" /> × <Latex tex="\text{V}" />」得到 <Latex tex="\text{Wh}" /></div>
 

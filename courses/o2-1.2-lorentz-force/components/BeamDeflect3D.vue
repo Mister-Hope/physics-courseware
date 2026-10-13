@@ -67,12 +67,50 @@ let animId = 0;
 const defaultAzimuth = 0.58;
 const defaultElevation = 0.28;
 const defaultDistance = 9.4;
+const minDistance = 5.5;
+const maxDistance = 15;
+const maxPixelRatio = 3; // 光栅化像素比上限：再往上只是喂 GPU，肉眼几乎看不出差别
 let azimuth = defaultAzimuth;
 let elevation = defaultElevation;
 let distance = defaultDistance;
 let isDragging = false;
 let previousPointerX = 0;
 let previousPointerY = 0;
+
+// —— 大触屏交互状态：单指（主指针）旋转、双指捏合缩放、双击复位 ——
+const pointers = new Map<number, { x: number; y: number }>();
+let activePointerId: number | null = null;
+let pinchBaseSpan = 0; // 捏合基准：两指间距
+let pinchBaseDistance = defaultDistance; // 捏合基准：对应的相机距离
+let tapStartTime = 0;
+let tapMoveAccum = 0; // 单指累计位移，用于区分"点一下"和"拖动"
+let needPointerResync = false; // 双指松成单指时，下一次移动只对齐基准、不旋转
+let lastTapTime = 0;
+let lastTapX = 0;
+let lastTapY = 0;
+let resizeObserver: ResizeObserver | null = null;
+let appliedPixelRatio = 0;
+let scaleCheckTick = 0;
+
+/**
+ * 相机距离统一钳制（滚轮 / 双指捏合 / ＋－ 按钮共用，范围沿用原有的 5.5–15）
+ *
+ * @param value 目标距离
+ * @returns 钳制到 [5.5, 15] 的距离
+ */
+const clampDistance = (value: number): number =>
+  Math.max(minDistance, Math.min(maxDistance, value));
+
+/**
+ * 当前两指间距
+ *
+ * @returns 两指间距（不足两指时返回 0）
+ */
+const currentPinchSpan = (): number => {
+  const [first, second] = [...pointers.values()];
+  if (!first || !second) return 0;
+  return Math.hypot(first.x - second.x, first.y - second.y);
+};
 
 // 偏转量平滑过渡
 let currentBend = 0;
@@ -915,9 +953,46 @@ const buildVectorsAndLabels = (): void => {
   updateVectors();
 };
 
+/**
+ * 画布容器在幻灯片里的有效缩放：getBoundingClientRect 已含祖先的 CSS transform，clientWidth 是布局尺寸
+ *
+ * @param el 画布容器
+ * @returns 有效缩放系数（无法测量时为 1）
+ */
+const getElementScale = (el: HTMLElement): number => {
+  const layoutWidth = el.clientWidth;
+  if (!layoutWidth) return 1;
+  return el.getBoundingClientRect().width / layoutWidth;
+};
+
+/**
+ * 按「CSS 尺寸 × devicePixelRatio × 幻灯片缩放」设置光栅化像素比。
+ *
+ * Slidev 会把整页 transform: scale(var(--slidev-slide-scale)) 放大，若只按 CSS 像素光栅化，canvas 会被二次放大而发虚；
+ * setSize 仍用 CSS 布局尺寸（clientWidth/clientHeight），显示尺寸交给 CSS（width/height: 100%）。
+ *
+ * @param force 是否强制重设（初始化与 handleResize 时用）
+ */
+const syncRendererScale = (force = false): void => {
+  const el = mountEl.value;
+  if (!el || !renderer) return;
+
+  const ratio = Math.max(1, Math.min(window.devicePixelRatio * getElementScale(el), maxPixelRatio));
+  const ratioChanged = Math.abs(ratio - appliedPixelRatio) >= 0.01;
+  if (ratioChanged) {
+    appliedPixelRatio = ratio;
+    renderer.setPixelRatio(ratio);
+  }
+  if (ratioChanged || force) renderer.setSize(el.clientWidth || 700, el.clientHeight || 420, false);
+};
+
 /** 动画渲染循环 */
 const animate = (): void => {
   animId = requestAnimationFrame(animate);
+
+  // 每 20 帧复查一次像素比：Slidev 全屏切换 / 窗口缩放都会改变整页 CSS transform 的缩放系数
+  scaleCheckTick = (scaleCheckTick + 1) % 20;
+  if (scaleCheckTick === 0) syncRendererScale();
 
   const diff = targetBend.value - currentBend;
   if (Math.abs(diff) > 0.004) {
@@ -953,36 +1028,20 @@ const updateCameraTransform = (): void => {
   updateAxialBillboards();
 };
 
-// 自由触摸/鼠标交互事件
-const onPointerDown = (e: PointerEvent): void => {
-  isDragging = true;
-  previousPointerX = e.clientX;
-  previousPointerY = e.clientY;
-  if (mountEl.value) mountEl.value.style.cursor = "grabbing";
-};
+// —— 自由触摸/鼠标交互：单指（鼠标）拖动旋转、双指捏合缩放、滚轮缩放、双击复位 ——
 
-const onPointerUp = (): void => {
-  isDragging = false;
-  if (mountEl.value) mountEl.value.style.cursor = "grab";
-};
-
-const onPointerMove = (e: PointerEvent): void => {
-  if (!isDragging) return;
-  const deltaX = e.clientX - previousPointerX;
-  const deltaY = e.clientY - previousPointerY;
-  previousPointerX = e.clientX;
-  previousPointerY = e.clientY;
-
-  azimuth -= deltaX * 0.008;
-  elevation = Math.max(-0.4, Math.min(1.2, elevation + deltaY * 0.008));
-  updateCameraTransform();
-};
-
-const onWheel = (e: WheelEvent): void => {
+/**
+ * 只在本组件画布内消化触摸与缩放手势（Slidev 的翻页手势绑在页面 root 上，靠冒泡启动）
+ *
+ * @param e 原生触摸 / 缩放手势事件
+ */
+const blockNativeGesture = (e: Event): void => {
   e.preventDefault();
-  distance = Math.max(5.5, Math.min(15, distance + e.deltaY * 0.008));
-  updateCameraTransform();
+  e.stopPropagation();
 };
+
+// Safari 专有的 gesture 事件（TS 的 lib.dom 未声明，按 EventTarget 绑定）
+const gestureEventNames = ["gesturestart", "gesturechange", "gestureend"];
 
 const resetView = (): void => {
   azimuth = defaultAzimuth;
@@ -991,13 +1050,157 @@ const resetView = (): void => {
   updateCameraTransform();
 };
 
+const rotateByPointer = (e: PointerEvent): void => {
+  const deltaX = e.clientX - previousPointerX;
+  const deltaY = e.clientY - previousPointerY;
+  previousPointerX = e.clientX;
+  previousPointerY = e.clientY;
+  tapMoveAccum += Math.abs(deltaX) + Math.abs(deltaY);
+
+  azimuth -= deltaX * 0.008;
+  elevation = Math.max(-0.4, Math.min(1.2, elevation + deltaY * 0.008));
+  updateCameraTransform();
+};
+
+const onPointerDown = (e: PointerEvent): void => {
+  // ⛔ 关键：Slidev 的翻页手势（useSwipeControls → usePointerSwipe）监听在页面 root 上，
+  // 靠 pointerdown 冒泡到 root 才开始判断滑动。不在画布内拦住冒泡，就会"一边转模型一边翻页"。
+  e.stopPropagation();
+  e.preventDefault();
+
+  const el = mountEl.value;
+  if (!el) return;
+  try {
+    el.setPointerCapture(e.pointerId);
+  } catch {
+    // 极少数浏览器对已失效的 pointerId 会抛错；此时退化为"指针留在画布内才继续拖动"
+  }
+
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+  if (pointers.size === 1) {
+    const now = performance.now();
+    // 触屏上 touchstart 被 preventDefault 后浏览器不再合成 dblclick，双击复位在这里自行识别
+    if (now - lastTapTime < 320 && Math.hypot(e.clientX - lastTapX, e.clientY - lastTapY) < 32) {
+      lastTapTime = 0;
+      resetView();
+    }
+    isDragging = true;
+    activePointerId = e.pointerId;
+    needPointerResync = false;
+    previousPointerX = e.clientX;
+    previousPointerY = e.clientY;
+    tapStartTime = now;
+    tapMoveAccum = 0;
+  } else if (pointers.size === 2) {
+    // 第二根手指落下：停止旋转，改以当前两指间距为基准捏合
+    isDragging = false;
+    pinchBaseSpan = currentPinchSpan();
+    pinchBaseDistance = distance;
+    tapMoveAccum = Number.POSITIVE_INFINITY;
+  }
+
+  el.style.cursor = "grabbing";
+};
+
+const onPointerMove = (e: PointerEvent): void => {
+  // 只拦本画布自己发起的指针：页面别处按下、拖到画布上方的指针要照旧交给页面处理
+  if (!pointers.has(e.pointerId)) return;
+  e.stopPropagation();
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+  // 双指捏合：两指间距的比值连续映射到相机距离（间距变大 = 拉近放大）
+  if (pointers.size >= 2) {
+    const span = currentPinchSpan();
+    if (pinchBaseSpan > 0 && span > 0) {
+      distance = clampDistance(pinchBaseDistance * (pinchBaseSpan / span));
+      updateCameraTransform();
+    }
+    return;
+  }
+
+  // 单指旋转：只认主指针，双指操作时模型不乱转
+  if (needPointerResync) {
+    // 刚从双指松成单指：这一次只对齐基准，避免视角跳变
+    needPointerResync = false;
+    activePointerId = e.pointerId;
+    previousPointerX = e.clientX;
+    previousPointerY = e.clientY;
+    isDragging = true;
+    return;
+  }
+  if (!isDragging || e.pointerId !== activePointerId) return;
+  rotateByPointer(e);
+};
+
+/**
+ * 指针抬起 / 取消：维护指针集合、释放捕获，并在"松到只剩一指"时重置捏合基准，避免跳变
+ *
+ * @param e 指针事件
+ * @param cancelled 是否为 pointercancel（取消时不记单击）
+ */
+const endPointer = (e: PointerEvent, cancelled: boolean): void => {
+  // 同上：只处理本画布发起的指针，页面别处开始的滑动仍然要能让 Slidev 正常翻页
+  if (!pointers.has(e.pointerId)) return;
+  e.stopPropagation();
+  const el = mountEl.value;
+  pointers.delete(e.pointerId);
+
+  if (el?.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+
+  if (pointers.size === 0) {
+    if (!cancelled && tapMoveAccum < 10 && performance.now() - tapStartTime < 320) {
+      lastTapTime = performance.now();
+      lastTapX = e.clientX;
+      lastTapY = e.clientY;
+    }
+    isDragging = false;
+    activePointerId = null;
+    pinchBaseSpan = 0;
+    if (el) el.style.cursor = "grab";
+    return;
+  }
+
+  // 双指 → 单指：剩下的那根下一次移动时接管（先对齐基准，避免跳变）
+  pinchBaseSpan = 0;
+  isDragging = false;
+  needPointerResync = true;
+};
+
+const onPointerUp = (e: PointerEvent): void => {
+  endPointer(e, false);
+};
+
+const onPointerCancel = (e: PointerEvent): void => {
+  endPointer(e, true);
+};
+
+const onWheel = (e: WheelEvent): void => {
+  e.preventDefault();
+  distance = clampDistance(distance + e.deltaY * 0.008);
+  updateCameraTransform();
+};
+
+/** 控制栏「＋」：拉近放大（没有滚轮的大触屏也能用） */
+const zoomIn = (): void => {
+  distance = clampDistance(distance * 0.85);
+  updateCameraTransform();
+};
+
+/** 控制栏「－」：推远缩小 */
+const zoomOut = (): void => {
+  distance = clampDistance(distance / 0.85);
+  updateCameraTransform();
+};
+
 const handleResize = (): void => {
-  if (!mountEl.value || !renderer || !camera) return;
-  const width = mountEl.value.clientWidth;
-  const height = mountEl.value.clientHeight;
+  const el = mountEl.value;
+  if (!el || !renderer || !camera) return;
+  const width = el.clientWidth || 700;
+  const height = el.clientHeight || 420;
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
+  syncRendererScale(true);
   updateAxialBillboards();
 };
 
@@ -1012,8 +1215,8 @@ const initScene = (): void => {
   updateCameraTransform();
 
   renderer = new WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(width, height);
+  // 初始化就算对像素比：rect / clientWidth 得到 Slidev 的幻灯片缩放，再乘 devicePixelRatio（上限 3）
+  syncRendererScale(true);
   mountEl.value.innerHTML = "";
   mountEl.value.append(renderer.domElement);
 
@@ -1057,34 +1260,71 @@ watch(state, () => {
 
 onMounted(() => {
   initScene();
-  globalThis.addEventListener("resize", handleResize);
+
   const el = mountEl.value;
   if (el) {
     el.addEventListener("pointerdown", onPointerDown);
+    el.addEventListener("pointermove", onPointerMove);
+    el.addEventListener("pointerup", onPointerUp);
+    el.addEventListener("pointercancel", onPointerCancel);
     el.addEventListener("wheel", onWheel, { passive: false });
     el.addEventListener("dblclick", resetView);
-    globalThis.addEventListener("pointermove", onPointerMove);
-    globalThis.addEventListener("pointerup", onPointerUp);
+    // 原生触摸 / 缩放手势：必须 passive: false 才能 preventDefault
+    el.addEventListener("touchstart", blockNativeGesture, { passive: false });
+    el.addEventListener("touchmove", blockNativeGesture, { passive: false });
+    gestureEventNames.forEach((name) => {
+      (el as EventTarget).addEventListener(name, blockNativeGesture, { passive: false });
+    });
+  }
+
+  globalThis.addEventListener("resize", handleResize);
+  // 兜底：指针在画布外抬起（捕获失败时可能发生）也要清掉内部指针状态，避免残留导致后续多指误判；
+  // 画布内抬起时事件已在元素上被拦截，不会重复触发
+  globalThis.addEventListener("pointerup", onPointerUp);
+  globalThis.addEventListener("pointercancel", onPointerCancel);
+  if (el && typeof ResizeObserver !== "undefined") {
+    resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(el);
   }
 });
 
 onBeforeUnmount(() => {
   cancelAnimationFrame(animId);
+
+  const el = mountEl.value;
+  if (el) {
+    el.removeEventListener("pointerdown", onPointerDown);
+    el.removeEventListener("pointermove", onPointerMove);
+    el.removeEventListener("pointerup", onPointerUp);
+    el.removeEventListener("pointercancel", onPointerCancel);
+    el.removeEventListener("wheel", onWheel);
+    el.removeEventListener("dblclick", resetView);
+    el.removeEventListener("touchstart", blockNativeGesture);
+    el.removeEventListener("touchmove", blockNativeGesture);
+    gestureEventNames.forEach((name) => {
+      (el as EventTarget).removeEventListener(name, blockNativeGesture);
+    });
+  }
+
   globalThis.removeEventListener("resize", handleResize);
-  globalThis.removeEventListener("pointermove", onPointerMove);
   globalThis.removeEventListener("pointerup", onPointerUp);
-  if (renderer) renderer.dispose();
+  globalThis.removeEventListener("pointercancel", onPointerCancel);
+  resizeObserver?.disconnect();
+  resizeObserver = null;
+  pointers.clear();
+  if (renderer) {
+    renderer.dispose();
+    renderer = null;
+  }
 });
 </script>
 
 <template>
-  <div
-    class="flex flex-col w-full h-full min-h-[400px] bg-slate-950/80 rounded-2xl border border-slate-800 p-4"
-  >
-    <!-- 纯粹控件栏 -->
-    <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+  <div class="flex flex-col w-full h-full min-h-[400px]">
+    <!-- 纯粹控件栏（不铺深色底板，只留一条极淡的分隔线） -->
+    <div class="flex items-center justify-between gap-3 pb-2 border-b border-slate-500/20">
       <div class="flex items-center gap-2">
-        <span class="text-xs font-semibold text-slate-300">阴极射线管模型</span>
+        <span class="text-xs font-semibold text-slate-200">阴极射线管模型</span>
       </div>
 
       <div class="flex items-center gap-2">
@@ -1094,8 +1334,8 @@ onBeforeUnmount(() => {
           :class="[
             'px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border',
             state === 'none'
-              ? 'bg-slate-800 text-amber-400 border-amber-400/70 shadow-sm'
-              : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200',
+              ? 'bg-white/10 text-amber-400 border-amber-400/70 shadow-sm'
+              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white',
           ]"
         >
           无磁场
@@ -1107,7 +1347,7 @@ onBeforeUnmount(() => {
             'px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border',
             state === 'out'
               ? 'bg-amber-400/15 text-amber-300 border-amber-400 shadow-sm'
-              : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200',
+              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white',
           ]"
         >
           B ⊙ 向外
@@ -1119,30 +1359,56 @@ onBeforeUnmount(() => {
             'px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border',
             state === 'in'
               ? 'bg-sky-400/15 text-sky-300 border-sky-400 shadow-sm'
-              : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200',
+              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white',
           ]"
         >
           B ⊗ 向里
         </button>
         <button
           type="button"
+          title="放大"
+          class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:text-white cursor-pointer"
+          @click="zoomIn"
+        >
+          ＋
+        </button>
+        <button
+          type="button"
+          title="缩小"
+          class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:text-white cursor-pointer"
+          @click="zoomOut"
+        >
+          －
+        </button>
+        <button
+          type="button"
           @click="resetView"
           title="复位视角"
-          class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-900 border border-slate-800 text-slate-400 hover:text-white cursor-pointer"
+          class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:text-white cursor-pointer"
         >
           复位视角
         </button>
       </div>
     </div>
 
-    <!-- 3D 画布区域 -->
+    <!-- 3D 画布区域：透明背景，只保留点阵；触摸手势在本区域内自我消化 -->
     <div
       ref="mountEl"
-      class="relative flex-1 w-full min-h-[320px] mt-3 rounded-xl overflow-hidden cursor-grab bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px]"
+      class="beam-canvas relative flex-1 w-full min-h-[320px] mt-2 overflow-hidden cursor-grab touch-none bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:20px_20px]"
     />
   </div>
 </template>
 
 <style scoped>
-/* 触控防抖 */
+/* 画布区域内自己消化触摸手势：浏览器不再滚动 / 缩放，Slidev 的翻页滑动判定也拿不到起点 */
+.beam-canvas {
+  touch-action: none;
+}
+
+/* canvas 的显示尺寸 = 布局尺寸（clientWidth / clientHeight），光栅化尺寸由 JS 按像素比放大，避免二次拉伸 */
+.beam-canvas :deep(canvas) {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 </style>

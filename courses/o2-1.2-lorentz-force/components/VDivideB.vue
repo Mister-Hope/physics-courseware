@@ -1,21 +1,30 @@
 <!--
-  第二课时 · v 与 B 成夹角 θ 时的正交分解（第 18 / 23 页共用）
+  第二课时 · v 与 B 成夹角 θ 时的正交分解
+  （《$v$ 与 $B$ 平行时》与《$v$ 与 $B$ 成夹角 $\theta$ 时》两页共用）
   —— 把 v 分解为沿 B 的 v∥ = v cosθ 与垂直 B 的 v⊥ = v sinθ：
        · v∥ 不受洛伦兹力 → 匀速直线运动；
        · v⊥ 受 F = qBv⊥ → 匀速圆周运动；
        · 合运动 = 螺旋线（θ = 0 时 v⊥ = 0，退化成匀速直线；θ = 90° 时 v∥ = 0，退化成圆）。
   与第一课时的呼应：第一课时"分解 B"（只有 B⊥ 产生力）得到 F = qvB sinθ；
                     第二课时"分解 v"（只有 v⊥ 受力）分析运动。同一个 sinθ 的两条路。
-  θ 用按钮切换（0°/30°/45°/60°/90°），公式标注走 ChartLabel 渲染真 KaTeX。
+  《成夹角 θ 时》用按钮切换 θ（0°/30°/45°/60°/90°）；
+  《平行时》只讲 θ = 0，传 picker=false 藏起整排按钮，只留底部结论行。
+  公式标注走 ChartLabel 渲染真 KaTeX。
 -->
 <script setup>
 import { computed, ref } from "vue";
 
-const { initialTheta = 45, hint = true } = defineProps({
-  /** 初始夹角（第 18 页讲 v ∥ B 时传 0） */
+const {
+  initialTheta = 45,
+  hint = true,
+  picker = true,
+} = defineProps({
+  /** 初始夹角（讲 v ∥ B 时传 0） */
   initialTheta: { type: Number, default: 45 },
   /** 是否显示底部那句结论（先问后答：讲 v ∥ B 时先藏起来） */
   hint: { type: Boolean, default: true },
+  /** 是否显示底部的夹角选择（讲 v ∥ B 时传 false，只留结论行） */
+  picker: { type: Boolean, default: true },
 });
 
 const THETAS = [0, 30, 45, 60, 90];
@@ -58,11 +67,14 @@ const parZero = computed(() => thetaDeg.value === 90);
 
 <template>
   <div class="flex min-h-0 w-full flex-1 flex-col">
-    <div class="relative flex min-h-0 w-full flex-1 items-center justify-center">
+    <div
+      class="relative flex min-h-0 w-full flex-1 items-center justify-center"
+      style="aspect-ratio: 520 / 300"
+    >
       <svg
         viewBox="0 0 520 300"
         xmlns="http://www.w3.org/2000/svg"
-        class="h-full w-auto max-w-full"
+        class="h-full w-full"
       >
         <!-- B：水平方向（磁场方向） -->
         <CourseArrow
@@ -143,9 +155,9 @@ const parZero = computed(() => thetaDeg.value === 90);
         />
       </svg>
 
-      <!-- 公式标注（真 KaTeX） -->
+      <!-- 公式标注（真 KaTeX）：v∥ = v cosθ 只在 θ = 90°（v∥ = 0）时藏起来 -->
       <ChartLabel
-        v-if="!perpZero"
+        v-if="!parZero"
         :x-percent="labelPar.x"
         :y-percent="labelPar.y"
         :parts="[{ tex: 'v_{\\parallel} = v\\cos\\theta' }]"
@@ -155,7 +167,7 @@ const parZero = computed(() => thetaDeg.value === 90);
         :dy="14"
       />
       <ChartLabel
-        v-if="!parZero"
+        v-if="!perpZero"
         :x-percent="labelPerp.x"
         :y-percent="labelPerp.y"
         anchor="right"
@@ -176,21 +188,23 @@ const parZero = computed(() => thetaDeg.value === 90);
     </div>
 
     <div class="mt-1 flex shrink-0 flex-wrap items-center justify-center gap-x-2 gap-y-1">
-      <span class="shrink-0 whitespace-nowrap text-sm text-slate-400"
-        >夹角 <Latex tex="\theta"
-      /></span>
-      <button
-        v-for="opt in THETAS"
-        :key="opt"
-        type="button"
-        class="shrink-0 whitespace-nowrap px-2.5 py-0.5 rounded-full text-sm border transition-colors"
-        :class="
-          thetaDeg === opt ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
-        "
-        @click="thetaDeg = opt"
-      >
-        {{ opt }}°
-      </button>
+      <template v-if="picker">
+        <span class="shrink-0 whitespace-nowrap text-sm text-slate-400"
+          >夹角 <Latex tex="\theta"
+        /></span>
+        <button
+          v-for="opt in THETAS"
+          :key="opt"
+          type="button"
+          class="shrink-0 whitespace-nowrap px-2.5 py-0.5 rounded-full text-sm border transition-colors"
+          :class="
+            thetaDeg === opt ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
+          "
+          @click="thetaDeg = opt"
+        >
+          {{ opt }}°
+        </button>
+      </template>
       <span
         class="shrink-0 whitespace-nowrap text-sm"
         :class="[hint ? '' : 'invisible', perpZero ? 'text-accent' : 'text-slate-300']"

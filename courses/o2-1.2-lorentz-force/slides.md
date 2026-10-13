@@ -237,20 +237,30 @@ clicks: 4
 
 # 推导一：微观电流公式 $I = nqvS$
 
-<!-- 推导法一：I = nqvS 与 N = nSL 代入约去（板书三③，仔细讲） -->
+<!-- 推导法一：I = nqvS 与 N = nSL 代入约去（板书三③，仔细讲）；右栏配导线的微观图像 -->
 <div class="page-grow">
 
-<div class="text-base opacity-90 mb-3">
-设：一段长 <Latex tex="L" /> 的导线，横截面积 <Latex tex="S" />，单位体积内自由电荷数为 <Latex tex="n" />，每个电荷量 <Latex tex="q" />，定向移动速度 <Latex tex="v" />（<Latex tex="v \perp B" />）。
+<div class="half-grid items-center">
+
+<div class="stack">
+
+<div class="text-base opacity-90">
+一段长 <Latex tex="L" />、横截面积 <Latex tex="S" /> 的导线：单位体积内 <Latex tex="n" /> 个自由电荷，每个电荷量 <Latex tex="q" />，定向移动速度 <Latex tex="v" />（<Latex tex="v \perp B" />）
 </div>
 
 <div class="text-xl leading-relaxed" v-click="1">电流（微观）：<Latex tex="I = nqvS" /></div>
 
-<div class="text-xl leading-relaxed mt-3" v-click="2">这段导线中的电荷总数：<Latex tex="N = nSL" /></div>
+<div class="text-xl leading-relaxed" v-click="2">这段导线中的电荷总数：<Latex tex="N = nSL" /></div>
 
-<div class="text-xl leading-relaxed mt-3" v-click="3">安培力：<Latex tex="F_{\text{安}} = BIL = B(nqvS)L" /></div>
+<div class="text-xl leading-relaxed" v-click="3">安培力：<Latex tex="F_{\text{安}} = BIL = B(nqvS)L" /></div>
 
-<div class="mt-5 text-xl leading-relaxed" v-click="4">
+</div>
+
+<CurrentMicroModel mode="micro" :step="$clicks" />
+
+</div>
+
+<div class="text-center text-xl leading-relaxed" v-click="4">
 <Latex tex="F_{\text{洛}} = \dfrac{F_{\text{安}}}{N} = \dfrac{B\,nqvS\,L}{nSL} = qvB" />
 </div>
 
@@ -262,23 +272,64 @@ clicks: 3
 
 # 推导二：电流的定义式 $I = \dfrac{Q}{t}$
 
-<!-- 推导法二：I = Q/t，Q = Nq，t = L/v，殊途同归（板书三④，仔细讲） -->
+<!-- 推导法二：I = Q/t，Q = Nq，t = L/v，殊途同归（板书三④，仔细讲）；右栏配导线的微观图像 -->
 <div class="page-grow">
 
-<div class="text-base opacity-90 mb-3">
-换一条路：时间 <Latex tex="t" /> 内通过横截面的总电荷 <Latex tex="Q = Nq" />（这段电荷全部通过所需时间 <Latex tex="t = \dfrac{L}{v}" />）。
+<div class="half-grid items-center">
+
+<div class="stack">
+
+<div class="text-base opacity-90">
+换个角度：长度 <Latex tex="L = vt" /> 的这段电荷恰好全部通过横截面——用时 <Latex tex="t" />，通过的总电荷 <Latex tex="Q = Nq" />
 </div>
 
 <div class="text-xl leading-relaxed" v-click="1">
 <Latex tex="I = \dfrac{Q}{t} = \dfrac{Nq}{L/v}" />
 </div>
 
-<div class="text-xl leading-relaxed mt-3" v-click="2">
-<Latex tex="F_{\text{洛}} = \dfrac{BL}{N}\,I = \dfrac{BL}{N}\cdot\dfrac{Q}{t}" />
+<div class="text-xl leading-relaxed" v-click="2">
+<Latex tex="F_{\text{洛}} = \dfrac{BL}{N}\,I" />
 </div>
 
-<div class="mt-5 text-xl leading-relaxed" v-click="3">
-<Latex tex="F_{\text{洛}} = \dfrac{BL}{N}\cdot\dfrac{Nq}{L/v} = qvB" />　
+<div class="text-base opacity-90">
+殊途同归：微观 <Latex tex="I = nqvS" />、宏观 <Latex tex="I = \dfrac{Q}{t}" />，代入安培力都得 <Latex tex="F_{\text{洛}} = qvB" />
+</div>
+
+</div>
+
+<CurrentMicroModel mode="definition" :step="$clicks" />
+
+</div>
+
+<div class="text-center text-xl leading-relaxed" v-click="3">
+<Latex tex="F_{\text{洛}} = \dfrac{BL}{N}\cdot\dfrac{Nq}{L/v} = qvB" />
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+# 电子的洛伦兹力有多大？
+
+<!-- 例题：教材 1.2 练习 1，分步代入计算；紧跟推导，现场用 v ⊥ B 带一遍 F = qvB -->
+<div class="ask text-xl">
+电子以 <Latex tex="v = 3.0\times10^6\ \text{m/s}" /> 的速度，沿着与磁场垂直的方向射入 <Latex tex="B = 0.10\ \text{T}" /> 的匀强磁场。它受到的洛伦兹力是多大？
+</div>
+
+<div class="page-grow">
+
+<div class="mt-5 text-lg leading-relaxed" v-click="1">
+<Latex tex="v \perp B" />，用 <Latex tex="F = qvB" />；电子的电荷量 <Latex tex="q = e = 1.6\times10^{-19}\ \text{C}" />
+</div>
+
+<div class="mt-4 text-lg leading-relaxed" v-click="2">
+<Latex tex="F = 1.6\times10^{-19} \times 3.0\times10^6 \times 0.10\ \text{N}" />
+</div>
+
+<div class="key mt-5 text-xl" v-click="3">
+<Latex tex="F = 4.8\times10^{-14}\ \text{N}" />
 </div>
 
 </div>
@@ -321,6 +372,33 @@ clicks: 1
 </div>
 
 ---
+
+# 洛伦兹力的特点
+
+<!-- 性质收口：方向（⊥ v、⊥ B 决定的面）→ 只改方向不改大小 → 不做功；末尾抛出"安培力能做功"的矛盾（教师口头说后续讲） -->
+<div class="page-grow">
+
+<div class="half-grid items-center">
+
+<div class="stack text-lg leading-relaxed">
+
+<div>① 始终垂直于 <Latex tex="v" /> 与 <Latex tex="B" /> 决定的平面：<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" /></div>
+
+<div>② 因为 <Latex tex="F_{\text{洛}} \perp v" />，只改变速度的<strong>方向</strong>，不改变速度的<strong>大小</strong></div>
+
+<div class="key">③ 因为 <Latex tex="F_{\text{洛}} \perp v" />，洛伦兹力<strong>不做功</strong>，不改变电荷的动能</div>
+
+</div>
+
+<LorentzProperties />
+
+</div>
+
+<div class="ask">安培力是洛伦兹力的宏观表现，可安培力能做功（电动机就是靠它做功）——这两个结论矛盾吗？</div>
+
+</div>
+
+---
 clicks: 3
 ---
 
@@ -332,79 +410,6 @@ clicks: 3
 <div class="page-grow">
 
 <CRTScan :step="$clicks" />
-
-</div>
-
----
-clicks: 3
----
-
-# 电子的洛伦兹力有多大？
-
-<!-- 例题：教材 1.2 练习 1，分步代入计算 -->
-<div class="ask text-xl">
-电子以 <Latex tex="v = 3.0\times10^6\ \text{m/s}" /> 的速度，沿着与磁场垂直的方向射入 <Latex tex="B = 0.10\ \text{T}" /> 的匀强磁场。它受到的洛伦兹力是多大？
-</div>
-
-<div class="page-grow">
-
-<div class="mt-5 text-lg leading-relaxed" v-click="1">
-<Latex tex="v \perp B" />，用 <Latex tex="F = qvB" />；电子的电荷量 <Latex tex="q = e = 1.6\times10^{-19}\ \text{C}" />
-</div>
-
-<div class="mt-4 text-lg leading-relaxed" v-click="2">
-<Latex tex="F = 1.6\times10^{-19} \times 3.0\times10^6 \times 0.10\ \text{N}" />
-</div>
-
-<div class="key mt-5 text-xl" v-click="3">
-<Latex tex="F = 4.8\times10^{-14}\ \text{N}" />
-</div>
-
-</div>
-
----
-
-<!-- 第一课时课堂小结：把推理链的每一步连"角色"一起交代清楚（条件→推理→验证→结论） -->
-# 课堂小结
-
-<div class="page-grow">
-
-<div class="mx-auto w-[720px]">
-
-<div class="flex items-center gap-4 py-1.5 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
-<span class="font-bold text-teal-300">①</span>
-<span>电流是电荷的定向移动</span>
-</div>
-
-<div class="flex items-center gap-4 py-1.5 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
-<span class="font-bold text-teal-300">②</span>
-<span>磁场对电流有力的作用</span>
-</div>
-
-<div class="flex items-center gap-4 py-1.5 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">理论推导</span>
-<span class="font-bold text-amber-300">③</span>
-<span>磁场对运动电荷有力的作用</span>
-</div>
-
-<div class="flex items-center gap-4 py-1.5 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">实验验证</span>
-<span class="font-bold text-teal-300">④ ✓</span>
-<span>阴极射线管实验证实</span>
-</div>
-
-<div class="key mt-5 text-lg">
-⑤ <strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现
-</div>
-
-<div class="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-xl">
-<span>方向：<strong>左手定则</strong>（<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" />）</span>
-<span>大小：<Latex tex="F_{\text{洛}} = qvB\sin\theta" /></span>
-</div>
-
-</div>
 
 </div>
 
@@ -425,7 +430,7 @@ clicks: 1
 clicks: 1
 ---
 
-# v 与 B 平行时
+# $v$ 与 $B$ 平行时
 
 <div class="ask text-xl">电子沿着磁感线方向射入（<Latex tex="v \parallel B" />），它还受洛伦兹力吗？</div>
 
@@ -435,7 +440,7 @@ clicks: 1
 
 <div>
 
-<VDivideB :initial-theta="0" :hint="$clicks >= 1" />
+<VDivideB :initial-theta="0" :picker="false" :hint="$clicks >= 1" />
 
 </div>
 
@@ -455,13 +460,17 @@ clicks: 1
 clicks: 1
 ---
 
-# v 与 B 垂直时
+# $v$ 与 $B$ 垂直时
 
 <div class="ask text-xl">用洛伦兹力演示仪垂直射入电子束，径迹是什么形状？</div>
 
 <div class="page-grow">
 
-<CircularOrbit :force="$clicks >= 1" :radius="$clicks >= 1" />
+<CircularOrbit :force="$clicks >= 1" :radius="$clicks >= 1" :hint="false" :readout="false" />
+
+<div class="key text-xl" v-click="1">
+磁感应强度 <Latex tex="B" /> 越大 → 半径越小、转得越快；改变速率 <Latex tex="v" /> → 圆的大小变了，但转的快慢不变
+</div>
 
 </div>
 
@@ -565,7 +574,7 @@ clicks: 2
 clicks: 2
 ---
 
-# v 与 B 成夹角 θ 时
+# $v$ 与 $B$ 成夹角 $\theta$ 时
 
 <div class="ask text-xl">速度方向与磁场成夹角 <Latex tex="\theta" />，运动该怎么拆？</div>
 
@@ -606,40 +615,8 @@ clicks: 2
 </div>
 
 ---
-clicks: 3
----
 
-# 从 O 到 A 要多久？
-
-<div class="ask text-xl">A 点恰好在沿 <Latex tex="B" /> 方向一个螺距之外——这段路要走多久？</div>
-
-<div class="page-grow">
-
-<div class="stack">
-
-<div class="text-xl leading-relaxed" v-click="1">
-① 沿 <Latex tex="B" /> 方向（匀速直线）：<Latex tex="t_{OA} = \dfrac{x_{OA}}{v_\parallel}" />
-</div>
-
-<div class="text-xl leading-relaxed" v-click="2">
-② 垂直纸面方向（匀速圆周）：<Latex tex="t_{OA} = T = \dfrac{2\pi m}{qB}" />
-</div>
-
-<div class="text-xl leading-relaxed" v-click="3">
-③ 看合运动（<Latex tex="F_{\text{洛}}" /> 不做功、速率 <Latex tex="v" /> 始终不变）：<Latex tex="t_{OA} = \dfrac{l_{OA}}{v}" />，<Latex tex="l_{OA}" /> 是路程
-</div>
-
-<div class="key text-xl" v-click="3">
-三种算法结果相同：<Latex tex="x_{OA} = v\cos\theta \cdot T" />，所以 <Latex tex="t_{OA} = \dfrac{x_{OA}}{v\cos\theta} = T" />
-</div>
-
-</div>
-
-</div>
-
----
-
-# 小结：三种情形
+# 课堂小结：
 
 <div class="page-grow">
 

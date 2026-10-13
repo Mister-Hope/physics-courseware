@@ -26,6 +26,48 @@
   height: auto;
 }
 
+/* 例题页：配图只占右侧一小块方形，把宽度让给题干 */
+.half-grid-square {
+  grid-template-columns: minmax(0, 1fr) 200px;
+}
+
+.half-grid-square .svg-full > svg {
+  max-height: 168px;
+}
+
+/* 第 9 页：纯电阻 / 非纯电阻 对比表（每行一个三列栅格，便于整行分步出现） */
+.cmp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 1.1rem;
+  align-items: start;
+
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.cmp-row > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cmp-head {
+  color: var(--c-accent);
+
+  font-weight: 800;
+}
+
+.cmp-head > div {
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid rgb(100 116 139 / 35%);
+}
+
+.cmp-item {
+  color: var(--c-text);
+
+  font-weight: 700;
+}
+
 /* 例题一页文字较多，纵向密度略收紧 */
 .problem {
   font-size: 1.05rem;

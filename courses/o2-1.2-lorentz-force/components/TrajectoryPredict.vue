@@ -5,6 +5,8 @@
   物理：电子束在磁场中只受洛伦兹力，而 F_洛 恒垂直于 v ⇒ 速率不变、方向均匀改变 ⇒ 匀速圆周运动。
         "抛物线"是学生最常有的错误直觉（拿重力场的平抛套过来），所以特意摆出来对比。
   待细化方向：可让学生先举手投票再点开。
+  判定颜色：错误项一律走红（text-red-400 即设计系统的危险色 #f87171），正确项走青（text-teal-300）；
+            解释小字保持暗灰（那是讲解，不整段飘红）。点击前后只换颜色、不增删元素，避免位移。
 -->
 <script setup>
 const { step = 0 } = defineProps({
@@ -32,7 +34,7 @@ const options = [
           ? 'border-slate-700/60'
           : i === 2
             ? 'border-teal-400/80 bg-teal-400/5'
-            : 'border-slate-700/40'
+            : 'border-red-400/60'
       "
     >
       <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" class="w-full">
@@ -80,13 +82,16 @@ const options = [
       </svg>
 
       <div class="flex items-center justify-between px-4 py-2">
-        <span class="text-lg font-semibold" :class="i === 2 && revealed() ? 'text-teal-300' : ''">
+        <span
+          class="text-lg font-semibold"
+          :class="!revealed() ? '' : i === 2 ? 'text-teal-300' : 'text-red-400'"
+        >
           {{ "ABC"[i] }} · {{ opt.label }}
         </span>
         <span
           class="text-lg font-bold"
           :class="[
-            revealed() && i === 2 ? 'text-teal-300' : 'text-slate-500',
+            !revealed() ? 'text-slate-500' : i === 2 ? 'text-teal-300' : 'text-red-400',
             revealed() ? '' : 'invisible',
           ]"
         >

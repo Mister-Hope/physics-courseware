@@ -11,18 +11,12 @@
      - 支持幻灯片逐步揭晓（step: 0=自然平衡基准，1=人类额外产热与温升警示，默认全显）。
 -->
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    /** 幻灯片步进： 0: 展示自然平衡（太阳辐射输入 = 向太空辐射散热） 1: (默认) 揭晓人类活动额外产热与气温上升边界结论 */
-    step?: number;
-    /** 直接控制是否显示额外产热不平衡状态（便于与 step 配合使用） */
-    showImbalance?: boolean;
-  }>(),
-  {
-    step: 1,
-    showImbalance: true,
-  },
-);
+const { step = 1, showImbalance = true } = defineProps<{
+  /** 幻灯片步进： 0: 展示自然平衡（太阳辐射输入 = 向太空辐射散热） 1: (默认) 揭晓人类活动额外产热与气温上升边界结论 */
+  step?: number;
+  /** 直接控制是否显示额外产热不平衡状态（便于与 step 配合使用） */
+  showImbalance?: boolean;
+}>();
 </script>
 
 <template>

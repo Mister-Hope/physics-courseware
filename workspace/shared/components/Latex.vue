@@ -26,7 +26,18 @@ const preset = computed(() => (display ? KATEX_DISPLAY[tex] : KATEX_INLINE[tex])
 const lazyHtml = ref("");
 
 watchEffect(() => {
-  if (preset.value) return;
+  /**
+   * ⚠️ 必须在**同步阶段**先把 tex / display 读出来，它们才会被登记为依赖。
+   * 若只在 `import("katex").then(...)` 里读，props 变化不会重跑这个 effect ——
+   * 动态公式（`:tex="…"`）会永远停在首次渲染的值上（拖动滑块数值不变，踩过）。
+   */
+  const source = tex;
+  const mode = display;
+
+  if (preset.value) {
+    lazyHtml.value = "";
+    return;
+  }
 
   let cancelled = false;
 
@@ -34,8 +45,8 @@ watchEffect(() => {
     if (cancelled) return;
 
     // 只输出 HTML：默认的 htmlAndMathml 会额外塞一份 MathML，课件里用不上还会引入重复字体
-    lazyHtml.value = renderToString(tex, {
-      displayMode: display,
+    lazyHtml.value = renderToString(source, {
+      displayMode: mode,
       throwOnError: false,
       output: "html",
     });

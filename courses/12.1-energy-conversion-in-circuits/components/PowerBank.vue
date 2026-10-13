@@ -59,119 +59,27 @@ const setSlider = (key: string, v: string): void => {
     <!-- 充电宝 + 手机示意 -->
     <div class="pb-fig">
       <svg viewBox="0 0 520 280" class="pb-svg" xmlns="http://www.w3.org/2000/svg">
-        <!-- 充电线 -->
-        <path
-          d="M 130 65 C 120 14 392 14 365 238"
-          fill="none"
-          stroke="#64748b"
-          stroke-width="3"
-          stroke-linecap="round"
-        />
-        <path
-          d="M 130 65 C 120 14 392 14 367 238"
-          fill="none"
-          stroke="#64748b"
-          stroke-width="1"
-          stroke-linecap="round"
-          opacity="0.5"
-        />
         <!-- 充电宝本体 -->
-        <rect
-          x="55"
-          y="65"
-          width="150"
-          height="185"
-          rx="22"
-          fill="rgba(226,168,70,0.1)"
-          stroke="#e2a846"
-          stroke-width="3"
-        />
-        <rect
-          x="75"
-          y="85"
-          width="110"
-          height="64"
-          rx="10"
-          fill="#0f172a"
-          stroke="#64748b"
-          stroke-width="1.6"
-        />
-        <text
-          x="130"
-          y="112"
-          text-anchor="middle"
-          font-family="KaTeX_Main"
-          font-size="23"
-          font-weight="800"
-          fill="#e2a846"
-        >
-          {{ C.toLocaleString("en-US") }} mAh
-        </text>
-        <text
-          x="130"
-          y="138"
-          text-anchor="middle"
-          font-family="KaTeX_Main"
-          font-size="18"
-          font-weight="700"
-          fill="#60a5fa"
-        >
-          {{ E.toFixed(1) }} V
-        </text>
-        <!-- 闪电 -->
-        <polygon points="133,168 122,187 128,187 121,206 140,185 133,185 135,168" fill="#e2a846" />
-        <!-- USB 口 -->
-        <rect
-          x="188"
-          y="222"
-          width="15"
-          height="9"
-          rx="2"
-          fill="#0f172a"
-          stroke="#64748b"
-          stroke-width="1.6"
-        />
+        <rect x="55" y="60" width="150" height="185" rx="22" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="3" />
+        <rect x="75" y="78" width="110" height="64" rx="10" fill="#0f172a" stroke="#64748b" stroke-width="1.6" />
+        <text x="130" y="105" text-anchor="middle" font-family="KaTeX_Main" font-size="23" font-weight="800" fill="#e2a846">{{ C.toLocaleString("en-US") }} mAh</text>
+        <text x="130" y="131" text-anchor="middle" font-family="KaTeX_Main" font-size="18" font-weight="700" fill="#60a5fa">{{ E.toFixed(1) }} V</text>
+        <polygon points="133,160 122,179 128,179 121,198 140,177 133,177 135,160" fill="#e2a846" />
+        <!-- 充电宝底部接口 -->
+        <rect x="99" y="240" width="20" height="9" rx="2" fill="#0f172a" stroke="#64748b" stroke-width="1.6" />
+        <!-- 数据线：从充电宝底部绕到手机底部 -->
+        <path d="M 109 249 C 109 278 260 282 340 274 C 356 272 365 262 365 248" fill="none" stroke="#475569" stroke-width="5.5" stroke-linecap="round" />
+        <path d="M 109 249 C 109 278 260 282 340 274 C 356 272 365 262 365 248" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" />
         <!-- 手机 -->
-        <rect
-          x="310"
-          y="70"
-          width="110"
-          height="190"
-          rx="14"
-          fill="rgba(96,165,250,0.08)"
-          stroke="#64748b"
-          stroke-width="2.6"
-        />
-        <line
-          x1="352"
-          y1="82"
-          x2="378"
-          y2="82"
-          stroke="#64748b"
-          stroke-width="2.4"
-          stroke-linecap="round"
-        />
-        <rect
-          x="320"
-          y="94"
-          width="90"
-          height="150"
-          rx="8"
-          fill="#0f172a"
-          stroke="rgba(100,116,139,0.6)"
-          stroke-width="1.2"
-        />
-        <circle
-          cx="365"
-          cy="166"
-          r="7"
-          fill="none"
-          stroke="#60a5fa"
-          stroke-width="1.6"
-          opacity="0.7"
-        />
-        <text x="130" y="272" text-anchor="middle" font-size="13" fill="#94a3b8">充电宝</text>
-        <text x="365" y="272" text-anchor="middle" font-size="13" fill="#94a3b8">手机</text>
+        <rect x="310" y="58" width="110" height="186" rx="14" fill="rgba(96,165,250,0.08)" stroke="#64748b" stroke-width="2.6" />
+        <rect x="320" y="72" width="90" height="146" rx="8" fill="#0f172a" stroke="rgba(100,116,139,0.6)" stroke-width="1.2" />
+        <circle cx="365" cy="66" r="3" fill="#64748b" />
+        <!-- 手机底部充电口与插头 -->
+        <rect x="355" y="238" width="20" height="8" rx="3" fill="#0f172a" stroke="#64748b" stroke-width="1.5" />
+        <rect x="356" y="245" width="18" height="12" rx="3" fill="#94a3b8" />
+        <rect x="360" y="240" width="10" height="7" rx="2" fill="#cbd5e1" />
+        <text x="130" y="50" text-anchor="middle" font-size="13" fill="#94a3b8">充电宝</text>
+        <text x="365" y="44" text-anchor="middle" font-size="13" fill="#94a3b8">手机</text>
       </svg>
     </div>
 

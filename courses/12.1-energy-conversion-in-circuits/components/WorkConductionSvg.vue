@@ -1,51 +1,181 @@
 <script setup lang="ts">
-/** 电流做功的实质：恒定电场对自由电荷的静电力做功 —— 一段电路，电荷从左向右定向移动 */
+/**
+ * 电流做功的实质：恒定电场对自由电荷的静电力做功（精修美化版） 细节调整：
+ *
+ * 1. 电子尺寸适度缩小（r=7），符合微观粒子与导线截面比例；
+ * 2. 去除奇异荧光与过度模糊光晕，回归严谨朴实的物理教科书质感；
+ * 3. 漂移速度/运动微箭头移至电子正旁边（水平同轴在左侧 ←），与电子动作紧密相随；
+ * 4. 保留电压 U 两侧虚线垂直对准导体端面，无杂乱微小文字。
+ */
+withDefaults(
+  defineProps<{
+    width?: number;
+    carrierType?: "electron" | "positive";
+  }>(),
+  {
+    width: 560,
+    carrierType: "electron",
+  },
+);
 </script>
 
 <template>
-  <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg">
-    <!-- 电势差 U：两端双箭头 -->
-    <line x1="46" y1="48" x2="514" y2="48" stroke="#60a5fa" stroke-width="2" stroke-dasharray="6 4" />
-    <polygon points="46,48 54,43 54,53" fill="#60a5fa" />
-    <polygon points="514,48 506,43 506,53" fill="#60a5fa" />
-    <text x="280" y="40" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#60a5fa">U</text>
+  <svg viewBox="0 0 560 250" :width="width" xmlns="http://www.w3.org/2000/svg" class="select-none overflow-visible" aria-hidden="true">
+    <defs>
+      <!-- 导线管体金属圆柱体纯净渐变 -->
+      <linearGradient id="ew-wire-body" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(51, 65, 85, 0.28)" />
+        <stop offset="25%" stop-color="rgba(30, 41, 59, 0.5)" />
+        <stop offset="75%" stop-color="rgba(15, 23, 42, 0.65)" />
+        <stop offset="100%" stop-color="rgba(30, 41, 59, 0.35)" />
+      </linearGradient>
+    </defs>
 
-    <!-- 静电力 F 箭头 -->
-    <line x1="150" y1="82" x2="385" y2="82" stroke="#f87171" stroke-width="3" stroke-linecap="round" />
-    <polygon points="397,82 383,76 383,88" fill="#f87171" />
-    <text x="266" y="74" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171">F</text>
-    <text x="410" y="80" font-size="13" fill="#f87171" opacity="0.85">静电力</text>
-
-    <!-- 导体 -->
-    <rect x="50" y="112" width="460" height="50" rx="14" fill="rgba(96,165,250,0.07)" stroke="#64748b" stroke-width="2" />
-    <text x="58" y="132" font-size="20" font-weight="700" fill="#f87171">+</text>
-    <text x="493" y="132" font-size="22" font-weight="700" fill="#60a5fa">−</text>
-
-    <!-- 定向移动的正电荷 q -->
+    <!-- ==================== 1. 电压 U 与两端对齐虚线 ==================== -->
     <g>
-      <circle v-for="cx in [96, 162, 228, 294, 360, 426, 490]" :key="cx" :cx="cx" cy="137" r="10" fill="#0f172a" stroke="#e2a846" stroke-width="1.6" />
+      <!-- 左端垂直对齐虚线 (从电压箭头起点垂直落至导体左截面 x=50) -->
+      <line x1="50" y1="40" x2="50" y2="108" stroke="#60a5fa" stroke-width="1.4" stroke-dasharray="4 3.5" opacity="0.6" />
+      <!-- 右端垂直对齐虚线 (从电压箭头终点垂直落至导体右截面 x=510) -->
+      <line x1="510" y1="40" x2="510" y2="108" stroke="#60a5fa" stroke-width="1.4" stroke-dasharray="4 3.5" opacity="0.6" />
+
+      <!-- 电势差 U 测量双向箭头线 -->
+      <line x1="54" y1="40" x2="506" y2="40" stroke="#60a5fa" stroke-width="1.8" stroke-dasharray="6 4" />
+      <!-- 左箭头 (指向左边界) -->
+      <polygon points="50,40 59,36 59,44" fill="#60a5fa" />
+      <!-- 右箭头 (指向右边界) -->
+      <polygon points="510,40 501,36 501,44" fill="#60a5fa" />
+
+      <!-- 电压符号 U (KaTeX 纯数学斜体) -->
       <text
-        v-for="cx in [96, 162, 228, 294, 360, 426, 490]"
-        :key="'t' + cx"
-        :x="cx"
-        y="142"
+        x="280"
+        y="32"
         text-anchor="middle"
-        font-size="14"
-        font-weight="800"
-        fill="#e2a846"
+        font-family="KaTeX_Math, 'Times New Roman', serif"
+        font-style="italic"
+        font-size="21"
+        font-weight="600"
+        fill="#60a5fa"
       >
-        +
+        U
       </text>
-      <!-- 每个电荷上方的小运动箭头 -->
-      <g v-for="cx in [96, 162, 228, 294, 360, 426, 490]" :key="'m' + cx" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round">
-        <line :x1="cx" :y1="104" :x2="cx + 14" y2="104" />
-        <polygon :points="`${cx + 14},104 ${cx + 8},100 ${cx + 8},108`" fill="#94a3b8" stroke="none" />
-      </g>
     </g>
 
-    <!-- 电流方向 I -->
-    <line x1="180" y1="200" x2="340" y2="200" stroke="#e2a846" stroke-width="3" stroke-linecap="round" />
-    <polygon points="352,200 338,194 338,206" fill="#e2a846" />
-    <text x="262" y="192" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">I</text>
+    <!-- ==================== 2. 恒定电场 E 与 静电力 F ==================== -->
+    <g>
+      <!-- 恒定电场 E 矢量箭头 (向右，高电势指向低电势) -->
+      <g stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.95">
+        <line x1="160" y1="68" x2="255" y2="68" />
+        <polygon points="263,68 253,64 253,72" fill="#38bdf8" stroke="none" />
+      </g>
+      <text x="208" y="60" text-anchor="middle" font-family="KaTeX_Math, 'Times New Roman', serif" font-style="italic" font-size="18" fill="#38bdf8">E</text>
+
+      <!-- 静电力 F 矢量箭头：
+           在真实自由电子模型下：受力 F = qE 向左（与电场相反）；
+           在等效正电荷模型下：受力 F 向右。
+      -->
+      <template v-if="carrierType === 'electron'">
+        <!-- 静电力向左 (针对自由电子 e⁻) -->
+        <g stroke="#f87171" stroke-width="2.4" stroke-linecap="round">
+          <line x1="395" y1="68" x2="305" y2="68" />
+          <polygon points="297,68 307,63.5 307,72.5" fill="#f87171" stroke="none" />
+        </g>
+        <text
+          x="351"
+          y="60"
+          text-anchor="middle"
+          font-family="KaTeX_Math, 'Times New Roman', serif"
+          font-style="italic"
+          font-size="19"
+          font-weight="600"
+          fill="#f87171"
+        >
+          F
+        </text>
+      </template>
+      <template v-else>
+        <!-- 正电荷等效受力向右 -->
+        <g stroke="#f87171" stroke-width="2.4" stroke-linecap="round">
+          <line x1="305" y1="68" x2="395" y2="68" />
+          <polygon points="403,68 393,63.5 393,72.5" fill="#f87171" stroke="none" />
+        </g>
+        <text
+          x="350"
+          y="60"
+          text-anchor="middle"
+          font-family="KaTeX_Math, 'Times New Roman', serif"
+          font-style="italic"
+          font-size="19"
+          font-weight="600"
+          fill="#f87171"
+        >
+          F
+        </text>
+      </template>
+    </g>
+
+    <!-- ==================== 3. 导体管身（朴实清晰，端面规整） ==================== -->
+    <g>
+      <!-- 导体外壳 -->
+      <rect x="50" y="108" width="460" height="54" rx="12" fill="url(#ew-wire-body)" stroke="#64748b" stroke-width="1.8" />
+      <!-- 导体上下边缘细腻轮廓线 -->
+      <line x1="62" y1="109" x2="498" y2="109" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+      <line x1="62" y1="161" x2="498" y2="161" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
+    </g>
+
+    <!-- ==================== 4. 定向移动的自由电荷 ==================== -->
+    <!-- 真实物理模型：自由电子 e⁻ (微观朴实尺寸 r=7，箭头紧贴在电子左侧同轴) -->
+    <template v-if="carrierType === 'electron'">
+      <g>
+        <g v-for="cx in [100, 160, 220, 280, 340, 400, 460]" :key="'elec-' + cx" class="transition-transform duration-200">
+          <!-- 电子旁边的小运动微箭头 (位于电子正左侧，水平对齐 y=135) -->
+          <g stroke="#38bdf8" stroke-width="1.6" stroke-linecap="round">
+            <line :x1="cx - 10" y1="135" :x2="cx - 24" y2="135" />
+            <polygon :points="`${cx - 24},135 ${cx - 19},131.5 ${cx - 19},138.5`" fill="#38bdf8" stroke="none" />
+          </g>
+
+          <!-- 电子粒子圆球 (缩小至 r=7，朴实饱满青蓝，去除外发光光晕) -->
+          <circle :cx="cx" cy="135" r="7" fill="#0284c7" stroke="#38bdf8" stroke-width="1.4" />
+          <!-- 负电荷符号 "−" (微小工整) -->
+          <line :x1="cx - 3.2" y1="135" :x2="cx + 3.2" y2="135" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" />
+        </g>
+      </g>
+    </template>
+
+    <!-- 等效宏观模型：正电荷 q (箭头紧贴在正电荷右侧同轴) -->
+    <template v-else>
+      <g>
+        <g v-for="cx in [100, 160, 220, 280, 340, 400, 460]" :key="'pos-' + cx" class="transition-transform duration-200">
+          <!-- 电荷微球 (r=7，质朴金色) -->
+          <circle :cx="cx" cy="135" r="7" fill="#d97706" stroke="#f59e0b" stroke-width="1.4" />
+          <!-- 正电荷 "+" 符号 -->
+          <line :x1="cx - 2.8" y1="135" :x2="cx + 2.8" y2="135" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+          <line :x1="cx" y1="132.2" :x2="cx" y2="137.8" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+
+          <!-- 正电荷右侧的运动箭头 (向右 →) -->
+          <g stroke="#f59e0b" stroke-width="1.6" stroke-linecap="round">
+            <line :x1="cx + 10" y1="135" :x2="cx + 24" y2="135" />
+            <polygon :points="`${cx + 24},135 ${cx + 19},131.5 ${cx + 19},138.5`" fill="#f59e0b" stroke="none" />
+          </g>
+        </g>
+      </g>
+    </template>
+
+    <!-- ==================== 5. 宏观电流方向 I (严格向右 →) ==================== -->
+    <g>
+      <line x1="180" y1="202" x2="350" y2="202" stroke="#e2a846" stroke-width="2.8" stroke-linecap="round" />
+      <polygon points="361,202 348,196.5 348,207.5" fill="#e2a846" />
+      <text
+        x="265"
+        y="194"
+        text-anchor="middle"
+        font-family="KaTeX_Math, 'Times New Roman', serif"
+        font-style="italic"
+        font-size="21"
+        font-weight="600"
+        fill="#e2a846"
+      >
+        I
+      </text>
+    </g>
   </svg>
 </template>

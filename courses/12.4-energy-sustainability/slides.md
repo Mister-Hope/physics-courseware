@@ -155,23 +155,24 @@ layout: base-flex
 
 ---
 layout: base-flex
+clicks: 3
 ---
 
 # 能量的耗散
 
 <div class="page-grow">
 
-<DissipateSvg />
+<DissipateSvg :step="$clicks" />
 
-<v-click>
+<div v-click="3">
 
 <div class="card">
 
-电池中的化学能转化为电能，电能又通过灯泡转化为内能和光能；热和光被其他物质吸收之后变成周围环境的内能，我们很难把这些内能收集起来重新利用。这种现象叫作<span class="text-accent">能量的耗散</span>。
+电池中的化学能转化为电能，电能又通过灯泡转化为内能和光能；热和光被其他物质吸收后变成周围环境的内能，很难再收集起来重新利用。这种现象叫作<span class="text-accent">能量的耗散</span>。
 
 </div>
 
-</v-click>
+</div>
 
 </div>
 
