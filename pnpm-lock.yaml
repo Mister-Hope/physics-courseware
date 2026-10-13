@@ -165,25 +165,31 @@ settings:
 catalogs:
   default:
     '@iconify-json/mdi':
-      specifier: ^1.2.3
+      specifier: 1.2.3
       version: 1.2.3
     '@iconify/vue':
-      specifier: ^5.0.3
+      specifier: 5.0.3
       version: 5.0.3
     '@slidev/cli':
-      specifier: ^52.20.1
+      specifier: 52.20.1
       version: 52.20.1
     '@slidev/client':
-      specifier: ^52.20.1
+      specifier: 52.20.1
       version: 52.20.1
     '@slidev/theme-default':
-      specifier: ^0.25.0
+      specifier: 0.25.0
       version: 0.25.0
+    '@types/three':
+      specifier: 0.186.0
+      version: 0.186.0
+    three:
+      specifier: ^0.186.1
+      version: 0.186.1
     vite:
       specifier: ^8.3.4
       version: 8.3.4
     vue:
-      specifier: ^3.5.43
+      specifier: 3.5.43
       version: 3.5.43
 
 overrides:
@@ -765,6 +771,33 @@ importers:
         specifier: 'catalog:'
         version: 3.5.43(typescript@6.0.3)
 
+  courses/o2-1.2-lorentz-force:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.3(vue@3.5.43(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 52.20.1(@nuxt/kit@3.21.11)(@oxc-project/types@0.153.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vue/compiler-sfc@3.5.43)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(lightningcss@1.33.0)(markdown-it@14.3.2)(oxc-parser@0.150.0)(postcss@8.5.29)(rolldown@1.2.13)(srvx@1.0.5)(supports-color@10.2.2)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 52.20.1(@nuxt/kit@3.21.11)(@oxc-project/types@0.153.0)(@vue/compiler-sfc@3.5.43)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(lightningcss@1.33.0)(markdown-it@14.3.2)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(supports-color@10.2.2)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      '@types/three':
+        specifier: 'catalog:'
+        version: 0.186.0
+      three:
+        specifier: 'catalog:'
+        version: 0.186.1
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.43(typescript@6.0.3)
+
   workspace/homepage:
     devDependencies:
       vite:
@@ -1012,6 +1045,9 @@ packages:
     peerDependenciesMeta:
       '@devframes/hub':
         optional: true
+
+  '@dimforge/rapier3d-compat@0.12.0':
+    resolution: {integrity: sha512-uekIGetywIgopfD97oDL5PfeezkFpNhwlzlaEYNOA0N6ghdsOvh/HYjSMek5Q2O1PYvRSDFcqFVJl4r4ZBwOow==}
 
   '@drauu/core@1.0.0':
     resolution: {integrity: sha512-r1fPyuKaGuNHc8vxRFUT8LxqWjJ3nx+U+zsHcEOurmJoB7uN+zpFw5kTLInfdfvQZ+qF/ebQjw1AwbGcc1XKsQ==}
@@ -1917,6 +1953,9 @@ packages:
     resolution: {integrity: sha512-1ErNS0PDqszzdPAXGHgcgWgL7hbhfJkCULdMmWRWbkhXGZvyo0hZXtPRV9B/qGpfw6GwbqxnuZ6UGfQ6bJ/leA==}
     engines: {node: '>=20.12.0'}
 
+  '@tweenjs/tween.js@23.1.3':
+    resolution: {integrity: sha512-vJmvvwFxYuGnF2axRtPYocag6Clbb5YS7kLL+SO/TeVFzHqDIWrNKYtcsPMibjDx9O+bu+psAy9NKfWklassUA==}
+
   '@types/d3-array@3.2.2':
     resolution: {integrity: sha512-hOLWVbm7uRza0BYXpIIW5pxfrKe0W+D5lrFiAEYR+pb6w3N2SwSMaJbXdUfSEv+dT4MfHBLtn5js0LAWaO6otw==}
 
@@ -2040,6 +2079,12 @@ packages:
   '@types/node@22.20.5':
     resolution: {integrity: sha512-U2+DNr+wSjpsTS/wZGYHq7GcwfuSmKiKvoPvK22zwTlRhU91yOniN4qRR5KhIjvif7ysw/dz/hKmfDH0Ris4aA==}
 
+  '@types/stats.js@0.17.4':
+    resolution: {integrity: sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA==}
+
+  '@types/three@0.186.0':
+    resolution: {integrity: sha512-mxYSBpDC+D0pLfSP6sW4WZTcT+nrtmZcimMqnVmy36Hte3XpeYSrvgg4TRdaM1GemGog1AWzI5qL2VoIfMXbJQ==}
+
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
 
@@ -2048,6 +2093,9 @@ packages:
 
   '@types/web-bluetooth@0.0.21':
     resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
+
+  '@types/webxr@0.5.24':
+    resolution: {integrity: sha512-h8fgEd/DpoS9CBrjEQXR+dIDraopAEfu4wYVNY2tEPwk60stPWhvZMf4Foo5FakuQ7HFZoa8WceaWFervK2Ovg==}
 
   '@typescript/ata@0.9.8':
     resolution: {integrity: sha512-+M815CeDRJS5H5ciWfhFCKp25nNfF+LFWawWAaBhNlquFb2wS5IIMDI+2bKWN3GuU6mpj+FzySsOD29M4nG8Xg==}
@@ -2945,6 +2993,9 @@ packages:
       picomatch:
         optional: true
 
+  fflate@0.8.3:
+    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
+
   file-entry-cache@11.1.5:
     resolution: {integrity: sha512-+PFTHITI08JIGhnNpGNI8T8inUpgZfk3GNEqfT9R2zZV2iFXg3CvqzSl/uEhs7TSGujYRELEANyDvS8Fj7+S7Q==}
 
@@ -3515,6 +3566,9 @@ packages:
 
   mermaid@11.17.2:
     resolution: {integrity: sha512-V6K3C8EBdEsPFZXSKMJe6ppQOENxuHARr9GvHX4hh47lAbhMRD9qf4oEK7LoaRQxULMa80/qt5gHO73aCleBBg==}
+
+  meshoptimizer@1.1.1:
+    resolution: {integrity: sha512-oRFNWJRDA/WTrVj7NWvqa5HqE1t9MYDj2VaWirQCzCCrAd2GHrqR/sQezCxiWATPNlKTcRaPRHPJwIRoPBAp5g==}
 
   micromark-core-commonmark@2.0.4:
     resolution: {integrity: sha512-wxEeE8v8XVvOrxn1TZj74qYhAtTQsSqufHVS3uNVyT1MupXxhyaHk8/9xDNPh9BmL77QNDgWTkZ3RsYHB2ry7w==}
@@ -4151,6 +4205,9 @@ packages:
   table@6.9.0:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
     engines: {node: '>=10.0.0'}
+
+  three@0.186.1:
+    resolution: {integrity: sha512-blFeqb49wRCSGUGj7gtpfnSGHy2lwDk94RhUmS1c/hTby70kvChbWpkJ4Pm1390LqzzvTmzgXKHPEafJwCb8jA==}
 
   time-span@5.1.0:
     resolution: {integrity: sha512-75voc/9G4rDIJleOo4jPvN4/YC4GRZrY8yy1uU4lwrB3XEQbWve8zXoO5No4eFrGcTAMYyoY67p8jRQdtA1HbA==}
@@ -4826,6 +4883,8 @@ snapshots:
       zod: 4.6.5
     optionalDependencies:
       '@devframes/hub': 1.2.3(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3(cac@7.0.1)(srvx@1.0.5))
+
+  '@dimforge/rapier3d-compat@0.12.0': {}
 
   '@drauu/core@1.0.0': {}
 
@@ -5771,6 +5830,8 @@ snapshots:
       - vite
       - webpack
 
+  '@tweenjs/tween.js@23.1.3': {}
+
   '@types/d3-array@3.2.2': {}
 
   '@types/d3-axis@3.0.6':
@@ -5919,12 +5980,25 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/stats.js@0.17.4': {}
+
+  '@types/three@0.186.0':
+    dependencies:
+      '@dimforge/rapier3d-compat': 0.12.0
+      '@tweenjs/tween.js': 23.1.3
+      '@types/stats.js': 0.17.4
+      '@types/webxr': 0.5.24
+      fflate: 0.8.3
+      meshoptimizer: 1.1.1
+
   '@types/trusted-types@2.0.7':
     optional: true
 
   '@types/unist@3.0.3': {}
 
   '@types/web-bluetooth@0.0.21': {}
+
+  '@types/webxr@0.5.24': {}
 
   '@typescript/ata@0.9.8(typescript@6.0.3)':
     dependencies:
@@ -6959,6 +7033,8 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.7
 
+  fflate@0.8.3: {}
+
   file-entry-cache@11.1.5:
     dependencies:
       flat-cache: 6.1.23
@@ -7561,6 +7637,8 @@ snapshots:
       stylis: 4.4.0
       ts-dedent: 2.3.0
       uuid: 14.0.3
+
+  meshoptimizer@1.1.1: {}
 
   micromark-core-commonmark@2.0.4:
     dependencies:
@@ -8337,6 +8415,8 @@ snapshots:
       slice-ansi: 4.0.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
+
+  three@0.186.1: {}
 
   time-span@5.1.0:
     dependencies:

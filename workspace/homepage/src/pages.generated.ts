@@ -2,9 +2,9 @@
 // 每课页数 = courses/<slug>/slides.md 的顶层 `---` 分隔数，主页「我要上课」弹窗用它显示总页数并校验起始页。
 
 export const coursePages: Record<string, number> = {
-  "1.1-motion-description": 16,
+  "1.1-motion-description": 20,
   "1.2-time-displacement": 20,
-  "1.3-velocity": 30,
+  "1.3-velocity": 40,
   "1.4-acceleration": 19,
   "1.x-vectors": 20,
   "10.4-capacitor": 23,
@@ -27,4 +27,5 @@ export const coursePages: Record<string, number> = {
   "5.2-composition-decomposition-of-motion": 38,
   "5.3-projectile-motion-experiment": 15,
   "5.4-projectile-motion": 37,
+  "o2-1.2-lorentz-force": 8,
 };

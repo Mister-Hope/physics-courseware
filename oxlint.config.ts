@@ -42,4 +42,9 @@ export default defineHopeConfig(
     files: ["**/*.vue"],
     rules: { "import/unambiguous": "off" },
   },
+  // 3D three.js components could be huge
+  {
+    files: ["**/*3D.vue"],
+    rules: { "max-lines": "off" },
+  },
 );

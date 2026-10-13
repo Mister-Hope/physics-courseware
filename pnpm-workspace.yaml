@@ -3,13 +3,15 @@ packages:
   - workspace/*
 
 catalog:
-  "@iconify-json/mdi": ^1.2.3
-  "@iconify/vue": ^5.0.3
-  "@slidev/cli": ^52.20.1
-  "@slidev/client": ^52.20.1
-  "@slidev/theme-default": ^0.25.0
+  "@iconify-json/mdi": 1.2.3
+  "@iconify/vue": 5.0.3
+  "@slidev/cli": 52.20.1
+  "@slidev/client": 52.20.1
+  "@slidev/theme-default": 0.25.0
+  "@types/three": 0.186.0
+  three: ^0.186.1
   vite: ^8.3.4
-  vue: ^3.5.43
+  vue: 3.5.43
 
 overrides:
   markdown-it: ^14.3.2
