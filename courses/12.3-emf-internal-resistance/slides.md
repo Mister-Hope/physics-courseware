@@ -80,6 +80,8 @@ clicks: 2
 </div>
 </div>
 </div>
+
+<div class="mini-note">两图都把开关接在电源负极一侧：断开开关，电压表示数归零。</div>
 </div>
 
 ---

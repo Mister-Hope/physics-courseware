@@ -11,8 +11,8 @@ const { step = 0 } = defineProps<{ step?: number }>();
         <line x1="286" y1="70" x2="450" y2="70" />
         <line x1="450" y1="70" x2="450" y2="128" />
         <line x1="450" y1="192" x2="450" y2="250" />
-        <line x1="450" y1="250" x2="265" y2="250" />
-        <line x1="215" y1="250" x2="70" y2="250" />
+        <line x1="450" y1="250" x2="160" y2="250" />
+        <line x1="110" y1="250" x2="70" y2="250" />
         <line x1="70" y1="70" x2="70" y2="146" />
         <line x1="70" y1="162" x2="70" y2="250" />
       </g>
@@ -71,19 +71,19 @@ const { step = 0 } = defineProps<{ step?: number }>();
         R
       </text>
       <text x="450" y="116" text-anchor="middle" font-size="18" fill="#94a3b8">电阻箱</text>
-      <circle cx="215" cy="250" r="3.4" fill="#cbd5e1" />
-      <circle cx="265" cy="250" r="3.4" fill="#cbd5e1" />
+      <circle cx="110" cy="250" r="3.4" fill="#cbd5e1" />
+      <circle cx="160" cy="250" r="3.4" fill="#cbd5e1" />
       <line
-        x1="215"
+        x1="110"
         y1="250"
-        x2="256"
+        x2="152"
         y2="231"
         stroke="#cbd5e1"
         stroke-width="2.4"
         stroke-linecap="round"
       />
       <text
-        x="236"
+        x="135"
         y="222"
         text-anchor="middle"
         font-family="KaTeX_Main"
