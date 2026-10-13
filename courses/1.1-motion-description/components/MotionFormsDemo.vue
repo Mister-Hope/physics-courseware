@@ -274,17 +274,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   padding: 0.75rem 0.85rem 0.9rem;
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  border: 1px solid rgb(148 163 184 / 16%);
   border-radius: 1.15rem;
-  background: rgba(15, 20, 37, 0.55);
+
+  background: rgb(15 20 37 / 55%);
+  box-shadow: 0 4px 20px -4px rgb(0 0 0 / 25%);
+
   backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.25);
+
   transition: border-color 0.2s ease;
 }
 
 .mf-panel:hover {
-  border-color: rgba(148, 163, 184, 0.35);
+  border-color: rgb(148 163 184 / 35%);
 }
 
 .mf-svg {
@@ -295,7 +299,9 @@
 
 .mf-name {
   margin-top: 0.45rem;
+
   color: var(--c-text, #e2e8f0);
+
   font-weight: 700;
   font-size: 0.98rem;
   letter-spacing: -0.01em;
@@ -303,7 +309,9 @@
 
 .mf-note {
   margin-top: 0.15rem;
+
   color: var(--c-text-dim, #94a3b8);
+
   font-size: 0.78rem;
   line-height: 1.4;
   text-align: center;
@@ -333,6 +341,7 @@
   100% {
     transform: translateX(56px);
   }
+
   50% {
     transform: translateX(164px);
   }
@@ -342,6 +351,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -352,12 +362,13 @@
   100% {
     transform: rotate(-25deg);
   }
+
   50% {
     transform: rotate(25deg);
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .mf-panels {
     grid-template-columns: 1fr;
   }

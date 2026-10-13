@@ -15,11 +15,7 @@ defineProps<{ mode: "segments" | "moments" }>();
     <template #overlay="{ x, axisY, px2user }">
       <!-- 区间（segments）：上方两段“第几秒内”，下方一段“前 2 s” -->
       <template v-if="mode === 'segments'">
-        <g
-          :stroke-width="9 * px2user"
-          stroke-linecap="round"
-          opacity="0.85"
-        >
+        <g :stroke-width="9 * px2user" stroke-linecap="round" opacity="0.85">
           <line
             :x1="x(0)"
             :y1="axisY - 26 * px2user"
@@ -175,7 +171,8 @@ defineProps<{ mode: "segments" | "moments" }>();
           font-weight="700"
           fill="var(--c-accent)"
         >
-          <tspan>第 </tspan><tspan font-family="KaTeX_Main">1 s</tspan><tspan> 初（开始计时）</tspan>
+          <tspan>第 </tspan><tspan font-family="KaTeX_Main">1 s</tspan
+          ><tspan> 初（开始计时）</tspan>
         </text>
         <text
           :x="x(1)"
@@ -185,7 +182,8 @@ defineProps<{ mode: "segments" | "moments" }>();
           font-weight="700"
           fill="var(--c-accent-2)"
         >
-          <tspan>第 </tspan><tspan font-family="KaTeX_Main">1 s</tspan><tspan> 末 ＝ 第 </tspan><tspan font-family="KaTeX_Main">2 s</tspan><tspan> 初</tspan>
+          <tspan>第 </tspan><tspan font-family="KaTeX_Main">1 s</tspan><tspan> 末 ＝ 第 </tspan
+          ><tspan font-family="KaTeX_Main">2 s</tspan><tspan> 初</tspan>
         </text>
         <text
           :x="x(2)"
@@ -195,7 +193,8 @@ defineProps<{ mode: "segments" | "moments" }>();
           font-weight="700"
           fill="var(--c-accent-2)"
         >
-          <tspan>第 </tspan><tspan font-family="KaTeX_Main">2 s</tspan><tspan> 末 ＝ 第 </tspan><tspan font-family="KaTeX_Main">3 s</tspan><tspan> 初</tspan>
+          <tspan>第 </tspan><tspan font-family="KaTeX_Main">2 s</tspan><tspan> 末 ＝ 第 </tspan
+          ><tspan font-family="KaTeX_Main">3 s</tspan><tspan> 初</tspan>
         </text>
       </template>
     </template>

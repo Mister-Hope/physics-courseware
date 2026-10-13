@@ -606,9 +606,11 @@ const ironY = computed(() => bottomY(ironHeight.value));
 .nt-seg {
   display: grid;
   gap: 0.25rem;
+
   padding: 0.24rem;
   border: 1px solid var(--c-border);
   border-radius: 0.65rem;
+
   background: var(--c-surface);
 }
 
@@ -629,9 +631,9 @@ const ironY = computed(() => bottomY(ironHeight.value));
   background: transparent;
   color: var(--c-text-dim);
 
+  font-weight: 500;
   font-size: 0.82rem;
   font-family: inherit;
-  font-weight: 500;
   line-height: 1.25;
   white-space: nowrap;
 
@@ -677,9 +679,9 @@ const ironY = computed(() => bottomY(ironHeight.value));
   background: var(--c-surface);
   color: var(--c-text);
 
+  font-weight: 600;
   font-size: 0.88rem;
   font-family: inherit;
-  font-weight: 600;
   line-height: 1.25;
   white-space: nowrap;
 
@@ -779,8 +781,8 @@ const ironY = computed(() => bottomY(ironHeight.value));
 }
 
 .air-molecule {
-  fill: var(--c-text-dim);
   opacity: 0.75;
+  fill: var(--c-text-dim);
 }
 
 .air-group {
@@ -871,7 +873,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
 }
 
 .nt-caption-val {
-  fill: #cbd5e1;
   font-weight: 600;
+  fill: #cbd5e1;
 }
 </style>
