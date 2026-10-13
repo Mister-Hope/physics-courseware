@@ -53,7 +53,6 @@
 
 .cmp-head {
   color: var(--c-accent);
-
   font-weight: 800;
 }
 
@@ -64,7 +63,6 @@
 
 .cmp-item {
   color: var(--c-text);
-
   font-weight: 700;
 }
 

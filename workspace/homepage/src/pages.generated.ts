@@ -31,5 +31,5 @@ export const coursePages: Record<string, number> = {
   "5.3-projectile-motion-experiment": 15,
   "5.4-projectile-motion": 37,
   "o2-1.2-lorentz-force": 14,
-  "o2-1.3-charged-particle-motion": 14
+  "o2-1.3-charged-particle-motion": 14,
 };

@@ -36,6 +36,8 @@ defineProps({
    * 这类公式（那时还没学）；滑杆旁的 v、B 档位值不在此列——那是老师手里调的量，不是算出来的结果。
    */
   readout: { type: Boolean, default: true },
+  /** 读数卡里只保留哪一项：''（默认）两项都给、'r' 只给半径、'T' 只给周期。 半径页 / 周期页各自只讲一条关系式，两项并排会分散注意力。 */
+  readoutOnly: { type: String, default: "" },
 });
 
 const E = 1.6e-19; // 元电荷 C
@@ -348,15 +350,15 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
         />
       </div>
 
-      <!-- r / T 读数：readout=false 的页面整块不渲染（连数字带公式一起没有） -->
+      <!-- r / T 读数：readout=false 的页面整块不渲染（连数字带公式一起没有）；readoutOnly 决定只留哪一项 -->
       <div v-if="readout" class="rounded-xl border border-slate-700/60 bg-slate-900/40 px-3 py-1.5">
-        <div class="text-lg">
+        <div v-if="readoutOnly !== 'T'" class="text-lg">
           <Latex tex="r" /> =
           <span class="font-semibold" :class="emphasis === 'r' ? 'text-accent' : 'text-slate-200'">
             {{ rMM.toFixed(2) }} <Latex tex="\text{mm}" />
           </span>
         </div>
-        <div class="mt-1 text-lg">
+        <div v-if="readoutOnly !== 'r'" class="text-lg" :class="readoutOnly === 'T' ? '' : 'mt-1'">
           <Latex tex="T" /> =
           <span class="font-semibold" :class="emphasis === 'T' ? 'text-accent' : 'text-slate-200'">
             {{ tNS.toFixed(1) }} <Latex tex="\text{ns}" />
@@ -384,9 +386,6 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   --co-accent: #e2a846;
   --co-pct: 0%;
 
-  -webkit-appearance: none;
-  appearance: none;
-
   width: 100%;
   height: 8px;
   border-radius: 9999px;
@@ -395,11 +394,15 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
     to right,
     var(--co-accent) 0%,
     var(--co-accent) var(--co-pct),
-    rgba(148, 163, 184, 0.28) var(--co-pct),
-    rgba(148, 163, 184, 0.28) 100%
+    rgb(148 163 184 / 28%) var(--co-pct),
+    rgb(148 163 184 / 28%) 100%
   );
   outline: none;
+
   cursor: pointer;
+
+  appearance: none;
+  appearance: none;
 }
 
 /* Firefox：让上面这条渐变成为唯一的轨道，别被原生轨道盖住 */
@@ -410,9 +413,6 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
 }
 
 .co-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-
   box-sizing: border-box;
   width: 18px;
   height: 18px;
@@ -420,7 +420,10 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   border-radius: 50%;
 
   background: #f8fafc;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 8px rgb(0 0 0 / 55%);
+
+  appearance: none;
+  appearance: none;
 }
 
 .co-range::-moz-range-thumb {
@@ -431,6 +434,6 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   border-radius: 50%;
 
   background: #f8fafc;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 8px rgb(0 0 0 / 55%);
 }
 </style>

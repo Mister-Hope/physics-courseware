@@ -27,9 +27,8 @@ const lazyHtml = ref("");
 
 watchEffect(() => {
   /**
-   * ⚠️ 必须在**同步阶段**先把 tex / display 读出来，它们才会被登记为依赖。
-   * 若只在 `import("katex").then(...)` 里读，props 变化不会重跑这个 effect ——
-   * 动态公式（`:tex="…"`）会永远停在首次渲染的值上（拖动滑块数值不变，踩过）。
+   * ⚠️ 必须在**同步阶段**先把 tex / display 读出来，它们才会被登记为依赖。 若只在 `import("katex").then(...)` 里读，props
+   * 变化不会重跑这个 effect —— 动态公式（`:tex="…"`）会永远停在首次渲染的值上（拖动滑块数值不变，踩过）。
    */
   const source = tex;
   const mode = display;

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * 第 6 页：并联电路 —— 电源、R₁、R₂ 三条支路接在**同两条**导轨之间，
- * 所以每个电阻两端的电压都等于电源电压（上一版的画法把电源接在两个不同节点上，拓扑是错的）。
- */
+/** 第 6 页：并联电路 —— 电源、R₁、R₂ 三条支路接在**同两条**导轨之间， 所以每个电阻两端的电压都等于电源电压（上一版的画法把电源接在两个不同节点上，拓扑是错的）。 */
 </script>
 
 <template>
@@ -26,8 +23,14 @@
     <path d="M 380 160 V 185" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" fill="none" />
     <rect x="362" y="100" width="36" height="60" rx="5" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="3" />
     <!-- 电阻标注 -->
-    <text x="240" y="216" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#60a5fa"><tspan>R</tspan><tspan dy="5" font-size="13">1</tspan></text>
-    <text x="380" y="216" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171"><tspan>R</tspan><tspan dy="5" font-size="13">2</tspan></text>
+    <text x="240" y="216" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#60a5fa">
+      <tspan>R</tspan>
+      <tspan dy="5" font-size="13">1</tspan>
+    </text>
+    <text x="380" y="216" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171">
+      <tspan>R</tspan>
+      <tspan dy="5" font-size="13">2</tspan>
+    </text>
     <!-- 电流：自正极出来沿上导轨向右，再分别向下流过两个电阻 -->
     <CourseArrow :from="{ x: 112, y: 55 }" :to="{ x: 176, y: 55 }" stroke="#e2a846" stroke-width="3" label="I" :label-dy="-8" :label-dx="8" />
     <CourseArrow :from="{ x: 240, y: 62 }" :to="{ x: 240, y: 92 }" stroke="#e2a846" stroke-width="3" label="I_1" :label-dy="-6" :label-dx="14" />

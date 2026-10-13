@@ -71,11 +71,7 @@ const parZero = computed(() => thetaDeg.value === 90);
       class="relative flex min-h-0 w-full flex-1 items-center justify-center"
       style="aspect-ratio: 520 / 300"
     >
-      <svg
-        viewBox="0 0 520 300"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-full w-full"
-      >
+      <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" class="h-full w-full">
         <!-- B：水平方向（磁场方向） -->
         <CourseArrow
           :from="{ x: 60, y: OY }"

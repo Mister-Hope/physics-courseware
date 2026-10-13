@@ -3,10 +3,12 @@
   ── 题干（由 slides.md 给出，本组件只画图）──
      一个带负电的粒子，比荷 q/m，从坐标原点 O 沿 x 轴正半轴方向以速度 v_0 射入，
      磁场垂直纸面向里。粒子经过第四象限内的点 P，OP 与 y 轴夹角为 θ，OP = L。求磁感应强度 B。
-  ── 第一眼（showSolution = false）只有"干净题目图" ──
-     坐标系（O、x、y）、满屏 ⊗（B 垂直纸面向里）、轨迹圆弧、P 点与标注、OP（细虚线）、
+  ── 第一眼（showPath = showSolution = false）只有"干净题目图" ──
+     坐标系（O、x、y）、⊗ 阵列（B 垂直纸面向里）、P 点与标注、OP（细虚线）、
      L 标注（弦 OP 外侧、中点附近）、O 处的 θ 角弧（下半 y 轴方向与 OP 之间）、入射速度 v_0（蓝，沿 +x）。
-  ── 点击后（showSolution = true）才新增讲解标注 ──
+     注意：轨迹圆弧不给——学生要先自己判出偏转方向、画出轨迹，才有后续几何。
+  ── 第 1 次点击（showPath = true）才画出蓝色轨迹圆弧 ──
+  ── 第 2 次点击（showSolution = true）才新增讲解标注 ──
      圆心 C（点 + 标注）、虚线半径 CO 与 CP（标 r）、OP 中点 M（点 + 标注）、
      CM 虚线 + M 处直角标记（CM ⊥ OP）、C 处圆心角小弧。
      这些标注在 false 时根本不存在（都包在同一个 v-if 里），所以切换不会顶跑任何已有元素。
@@ -32,7 +34,9 @@
 -->
 <script setup>
 defineProps({
-  /** 是否显示讲解标注（圆心 / 半径 / 中点 / 直角）：例题页写 :show-solution="$clicks >= 1" */
+  /** 是否画出蓝色轨迹圆弧：例题页写 :show-path="$clicks >= 1"（学生先自己判方向、画轨迹） */
+  showPath: { type: Boolean, default: false },
+  /** 是否显示讲解标注（圆心 / 半径 / 中点 / 直角）：例题页写 :show-solution="$clicks >= 2" */
   showSolution: { type: Boolean, default: false },
 });
 
@@ -124,12 +128,12 @@ const rightAnglePath = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFi
 const CENTRAL_R = 34;
 const centralArcPath = `M ${C.x} ${C.y - CENTRAL_R} A ${CENTRAL_R} ${CENTRAL_R} 0 0 1 ${(C.x + CENTRAL_R * Math.cos(30 * DEG)).toFixed(2)} ${(C.y + CENTRAL_R * Math.sin(30 * DEG)).toFixed(2)}`;
 
-/** 磁场 ⊗ 阵列：列 30→690、行 30→415，间距 55（画满整个画面，作为背景层） */
+/** 磁场 ⊗ 阵列（背景层）：间距 110（≈ 满格的 1/4），铺满画面又不糊住图形 */
 const B_DOT_R = 8;
 /** × 的两端：r/√2 ≈ 5.66，正好落在圆上 */
 const B_DOT_OFF = 5.66;
-const B_COLS = Array.from({ length: 13 }, (_, i) => 30 + i * 55);
-const B_ROWS = Array.from({ length: 8 }, (_, i) => 30 + i * 55);
+const B_COLS = Array.from({ length: 7 }, (_, i) => 30 + i * 110);
+const B_ROWS = Array.from({ length: 4 }, (_, i) => 45 + i * 110);
 const B_DOTS = B_COLS.flatMap((x) => B_ROWS.map((y) => ({ x, y })));
 
 /** 数学标注的深色描边光晕（压在 ⊗ 阵列或线上也看得清） */
@@ -139,7 +143,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
 <template>
   <div class="flex min-h-0 w-full flex-1 items-center justify-center">
     <svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto max-w-full">
-      <!-- 磁场：满屏 ⊗（垂直纸面向里）阵列，行列间距 55，暖金半透明（背景层） -->
+      <!-- 磁场：⊗（垂直纸面向里）阵列（间距 110），暖金半透明（背景层） -->
       <g stroke="rgba(226,168,70,0.55)" stroke-width="1.4" fill="none">
         <template v-for="(d, i) in B_DOTS" :key="`b${i}`">
           <circle :cx="d.x" :cy="d.y" :r="B_DOT_R" />
@@ -204,8 +208,15 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
       >
         O
       </text>
-      <!-- 轨迹圆弧：真圆弧 A，从 O（切线沿 +x）扫到 P -->
-      <path :d="arcPath" fill="none" stroke="#60a5fa" stroke-width="3.2" stroke-linecap="round" />
+      <!-- 轨迹圆弧：真圆弧 A，从 O（切线沿 +x）扫到 P（第 1 次点击才出现） -->
+      <path
+        v-if="showPath"
+        :d="arcPath"
+        fill="none"
+        stroke="#60a5fa"
+        stroke-width="3.2"
+        stroke-linecap="round"
+      />
       <!-- OP：题目给定的弦（细虚线）+ L 标注 -->
       <line
         :x1="O.x"

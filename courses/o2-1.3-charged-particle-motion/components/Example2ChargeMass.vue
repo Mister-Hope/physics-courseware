@@ -23,14 +23,17 @@
     · 物理自检（弧朝哪边弯）：圆心在 A 的正下方 ⇒ 起点处洛伦兹力必须指向圆心（-y 方向）；而 v0 沿 +x、
       B 垂直纸面向里（⊗）⇒ 粒子带负电（结论由幻灯片给出，图上不写）。
   分步（题目页规矩：干净题干 + 干净题目图常显 → 点击后才出讲解标注）：
-    showSolution = false：坐标系、⊗ 磁场区与虚线边框、A / B 两点与标注、a 与 b 的尺寸线、轨迹圆弧、
-                          A 处沿 +x 的 v0 箭头；
+    showPath = false：坐标系、⊗ 磁场区与虚线边框、A / B 两点与标注、a 与 b 的尺寸线、
+                      A 处沿 +x 的 v0 箭头——轨迹圆弧也不给（学生先自己判电性、画轨迹）；
+    showPath = true ：才画出蓝色轨迹圆弧；
     showSolution = true ：只新增圆心 C、虚线半径 CA 与 CB（各标 r）、C 落到 O 的虚线（标 y0）以及 O 处
                           直角标记（CO ⊥ OB，对应 b² + y0² = r²）——不移动、不改动上面任何常显元素。
 -->
 <script setup>
 defineProps({
-  /** True 才出现圆心 / 半径 / y0 / 直角这些讲解标注（slides.md 传 `:show-solution="$clicks >= 1"`） */
+  /** True 才画出蓝色轨迹圆弧（slides.md 传 `:show-path="$clicks >= 1"`） */
+  showPath: { type: Boolean, default: false },
+  /** True 才出现圆心 / 半径 / y0 / 直角这些讲解标注（slides.md 传 `:show-solution="$clicks >= 2"`） */
   showSolution: { type: Boolean, default: false },
 });
 
@@ -202,8 +205,15 @@ const V_LEN = 72;
       >
         b
       </text>
-      <!-- 轨迹圆弧（题目给定的两个端点之间） -->
-      <path :d="ARC" fill="none" stroke="#60a5fa" stroke-width="3.2" stroke-linecap="round" />
+      <!-- 轨迹圆弧（题目给定的两个端点之间）：第 1 次点击才出现 -->
+      <path
+        v-if="showPath"
+        :d="ARC"
+        fill="none"
+        stroke="#60a5fa"
+        stroke-width="3.2"
+        stroke-linecap="round"
+      />
       <!-- A、B 两点与标注 -->
       <circle :cx="A.x" :cy="A.y" r="5.5" fill="#f8fafc" />
       <circle :cx="B.x" :cy="B.y" r="5.5" fill="#f8fafc" />

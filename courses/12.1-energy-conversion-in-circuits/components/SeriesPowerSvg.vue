@@ -19,8 +19,14 @@
     <!-- 两个电阻：圆角矩形，导线止于两端 -->
     <rect x="172" y="46" width="84" height="28" rx="5" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="3" />
     <rect x="318" y="46" width="84" height="28" rx="5" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="3" />
-    <text x="214" y="34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#60a5fa"><tspan>R</tspan><tspan dy="5" font-size="13">1</tspan></text>
-    <text x="360" y="34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171"><tspan>R</tspan><tspan dy="5" font-size="13">2</tspan></text>
+    <text x="214" y="34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#60a5fa">
+      <tspan>R</tspan>
+      <tspan dy="5" font-size="13">1</tspan>
+    </text>
+    <text x="360" y="34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171">
+      <tspan>R</tspan>
+      <tspan dy="5" font-size="13">2</tspan>
+    </text>
     <!-- 电流方向：与正负极一致（自上导线向右） -->
     <CourseArrow :from="{ x: 262, y: 60 }" :to="{ x: 312, y: 60 }" stroke="#e2a846" stroke-width="3" label="I" :label-dy="-8" :label-dx="6" />
     <!-- 电源两端的电压 U -->

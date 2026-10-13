@@ -10,3 +10,17 @@
 .cover-title {
   font-size: 2.7rem !important;
 }
+
+/* ── 第 11 页「比荷」对照表 ──
+   Slidev 给 markdown 表格的字号 / 行高 / 内边距（.75em / .5em）都比正文大一档，
+   这张表只有几行数，按主题尺寸排会吃掉右栏一半高度、把左栏的推导挤没；
+   这里（用高权重选择器）压到正文下一档，表格只是「粒子本身的固有量」的注脚。 */
+.slidev-layout table.charge-ratio-table {
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+}
+
+.slidev-layout table.charge-ratio-table th,
+.slidev-layout table.charge-ratio-table td {
+  padding: 0.45rem 0.8rem !important;
+}

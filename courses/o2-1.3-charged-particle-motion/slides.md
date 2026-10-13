@@ -18,7 +18,6 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
-lesson: "第二课时"
 chapter-no: "1.3"
 chapter: "第一章 安培力与洛伦兹力"
 ---
@@ -146,6 +145,32 @@ clicks: 2
 
 </div>
 
+
+---
+
+# 为什么一定在垂直于磁感线的平面内运动？
+
+<!-- 结论页：把"平面 ⊥ B"讲成一条推理链 -->
+<div class="page-grow">
+
+<div class="half-grid items-center">
+
+<div class="stack text-lg leading-relaxed">
+
+<div>① <Latex tex="F_{\text{洛}} \perp v" /> 且 <Latex tex="F_{\text{洛}} \perp B" /> ⟹ 洛伦兹力始终落在<strong>垂直于 <Latex tex="B" /></strong> 的那个平面内</div>
+
+<div>② 只要射入时 <Latex tex="v \perp B" />，速度就始终留在这个平面内</div>
+
+<div class="key">所以：带电粒子在<strong>垂直于磁感线</strong>的平面内做匀速圆周运动，这个平面由入射点与 <Latex tex="B" /> 唯一确定</div>
+
+</div>
+
+<PlanePerpB />
+
+</div>
+
+</div>
+
 ---
 clicks: 2
 ---
@@ -155,10 +180,10 @@ clicks: 2
 <div class="page-grow">
 
 <div class="text-xl leading-relaxed" v-click="1">
-<Latex tex="qvB = m\dfrac{v^2}{r}" /> ⟹ <span class="text-accent"><Latex tex="r = \dfrac{mv}{qB}" /></span>
+<Latex tex="F_{\text{洛}} = qvB = F_{\text{向}} = m\dfrac{v^2}{r}" /> ⟹ <span class="text-accent"><Latex tex="r = \dfrac{mv}{qB}" /></span>
 </div>
 
-<CircularOrbit :radius="$clicks >= 1" emphasis="r" :hint="false" />
+<CircularOrbit :radius="$clicks >= 1" emphasis="r" :hint="false" readout-only="r" />
 
 </div>
 
@@ -174,10 +199,10 @@ clicks: 2
 <Latex tex="T = \dfrac{2\pi r}{v}" />，代入 <Latex tex="r = \dfrac{mv}{qB}" /> ⟹ <span class="text-accent"><Latex tex="T = \dfrac{2\pi m}{qB}" /></span>
 </div>
 
-<CircularOrbit emphasis="T" :hint="false" />
+<CircularOrbit emphasis="T" :hint="false" readout-only="T" />
 
 <div class="text-xl text-center" v-click="2">
-★ <Latex tex="T" /> 与轨道半径、运动速度<strong>无关</strong>（下一节回旋加速器就靠这条）
+<Latex tex="T" /> 与轨道半径、运动速度<strong class="text-red-400">无关</strong> (非常有潜力的特性)
 </div>
 
 </div>
@@ -225,33 +250,6 @@ clicks: 2
 </div>
 
 </div>
----
-
-# 回顾：本课要用的三个式子
-
-<!-- 工具页：把第 6、7 页得到的三个式子收在一起，直接带进"比荷 / 解题思路 / 例题" -->
-<div class="page-grow">
-
-<div class="stack">
-
-<div class="flex items-center gap-6 text-xl">
-<span class="w-40 shrink-0 text-right text-base text-slate-400">洛伦兹力</span>
-<span><Latex tex="F_{\text{洛}} = qvB\sin\theta" />（<Latex tex="v \perp B" /> 时 <Latex tex="F_{\text{洛}} = qvB" />，方向由左手定则判定）</span>
-</div>
-
-<div class="flex items-center gap-6 text-xl">
-<span class="w-40 shrink-0 text-right text-base text-slate-400">半径</span>
-<span><Latex tex="qvB = m\dfrac{v^2}{r}" /> ⟹ <span class="text-accent"><Latex tex="r = \dfrac{mv}{qB}" /></span></span>
-</div>
-
-<div class="flex items-center gap-6 text-xl">
-<span class="w-40 shrink-0 text-right text-base text-slate-400">周期</span>
-<span><Latex tex="T = \dfrac{2\pi r}{v} = \dfrac{2\pi m}{qB}" />（与半径、速度无关）</span>
-</div>
-
-</div>
-
-</div>
 
 ---
 
@@ -262,46 +260,49 @@ clicks: 2
 
 <div class="page-grow">
 
-<div class="half-grid items-center">
+<div class="grid grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] items-center gap-8">
 
 <div class="stack text-lg leading-relaxed">
 
-<div><Latex tex="\dfrac{q}{m}" />（电荷量与质量之比）叫<strong>比荷</strong>，也叫荷质比</div>
+<div><Latex tex="q/m" />（电荷量与质量之比）叫<strong>比荷</strong>，也叫荷质比</div>
 
-<div>把 <Latex tex="r = \dfrac{mv}{qB}" />、<Latex tex="T = \dfrac{2\pi m}{qB}" /> 反过来解：</div>
+<div>电荷量 <Latex tex="q" /> 越大 → 洛伦兹力越大；由 <Latex tex="F = ma" /> 得 <Latex tex="a = \dfrac{q}{m}vB" />，加速度正比于电荷量、反比于质量</div>
 
-<div class="key"><Latex tex="\dfrac{q}{m} = \dfrac{v}{Br}" />，<Latex tex="\dfrac{q}{m} = \dfrac{2\pi}{BT}" /></div>
+<div class="key">
+<div class="opacity-80">把 <Latex tex="r = \dfrac{mv}{qB}" />、<Latex tex="T = \dfrac{2\pi m}{qB}" /> 反过来解：</div>
+<div class="mt-1"><Latex tex="\dfrac{q}{m} = \dfrac{v}{Br}" />，<Latex tex="\dfrac{q}{m} = \dfrac{2\pi}{BT}" /></div>
+</div>
 
-<div class="text-base opacity-90">同一个磁场里量出半径或周期，就能算出比荷——这正是质谱仪区分不同粒子的依据。</div>
+<div class="text-base opacity-90">同一个磁场里量出半径或周期，就能算出比荷。</div>
 
 </div>
 
 <div>
 
-<table class="w-full overflow-hidden rounded-xl border border-slate-700/60 text-lg">
+<table class="charge-ratio-table w-full overflow-hidden rounded-xl border border-slate-700/60">
 <thead>
 <tr class="bg-slate-800/60">
-<th class="px-4 py-2 text-left font-semibold">粒子</th>
-<th class="px-4 py-2 font-semibold">比荷</th>
+<th class="text-left font-semibold">粒子</th>
+<th class="text-left font-semibold">比荷</th>
 </tr>
 </thead>
 <tbody>
 <tr class="border-t border-slate-700/50">
-<td class="px-4 py-2">电子</td>
-<td class="px-4 py-2 text-center"><Latex tex="1.76\times10^{11}\ \text{C/kg}" /></td>
+<td>电子</td>
+<td><Latex tex="1.76\times10^{11}\ \text{C/kg}" /></td>
 </tr>
 <tr class="border-t border-slate-700/50">
-<td class="px-4 py-2">质子</td>
-<td class="px-4 py-2 text-center"><Latex tex="9.58\times10^{7}\ \text{C/kg}" /></td>
+<td>质子</td>
+<td><Latex tex="9.58\times10^{7}\ \text{C/kg}" /></td>
 </tr>
 <tr class="border-t border-slate-700/50">
-<td class="px-4 py-2"><Latex tex="\alpha" /> 粒子</td>
-<td class="px-4 py-2 text-center"><Latex tex="4.79\times10^{7}\ \text{C/kg}" /></td>
+<td><Latex tex="\alpha" /> 粒子</td>
+<td><Latex tex="4.79\times10^{7}\ \text{C/kg}" /></td>
 </tr>
 </tbody>
 </table>
 
-<div class="mt-3 text-center text-base opacity-80">比荷由粒子自身决定，与速度、磁场无关</div>
+<div class="mt-2 text-center text-base opacity-80">比荷由粒子自身决定</div>
 
 </div>
 
@@ -309,30 +310,6 @@ clicks: 2
 
 </div>
 
----
-
-# 为什么一定在垂直于磁感线的平面内运动？
-
-<!-- 结论页：把"平面 ⊥ B"讲成一条推理链 -->
-<div class="page-grow">
-
-<div class="half-grid items-center">
-
-<div class="stack text-lg leading-relaxed">
-
-<div>① <Latex tex="F_{\text{洛}} \perp v" /> 且 <Latex tex="F_{\text{洛}} \perp B" /> ⟹ 洛伦兹力始终落在<strong>垂直于 <Latex tex="B" /></strong> 的那个平面内</div>
-
-<div>② 只要射入时 <Latex tex="v \perp B" />，速度就始终留在这个平面内</div>
-
-<div class="key">所以：带电粒子在<strong>垂直于磁感线</strong>的平面内做匀速圆周运动，这个平面由入射点与 <Latex tex="B" /> 唯一确定</div>
-
-</div>
-
-<PlanePerpB />
-
-</div>
-
-</div>
 
 ---
 
@@ -364,7 +341,7 @@ clicks: 2
 </div>
 
 ---
-clicks: 3
+clicks: 4
 ---
 
 # 例 1：求磁感应强度
@@ -377,22 +354,22 @@ clicks: 3
 
 <div class="stack text-lg leading-relaxed">
 
-<div v-click="1">① 圆心在 <Latex tex="y" /> 轴上（<Latex tex="v_0 \perp B" />）；负电 + <Latex tex="B" /> 向里 ⟹ 力向下 ⟹ 圆心在 <Latex tex="O" /> 下方</div>
+<div v-click="2">① 圆心在 <Latex tex="y" /> 轴上（<Latex tex="v_0 \perp B" />）；负电 + <Latex tex="B" /> 向里 ⟹ 力向下 ⟹ 圆心在 <Latex tex="O" /> 下方</div>
 
-<div v-click="2">② 作三角形：<Latex tex="\cos\theta = \dfrac{L/2}{r}" /> ⟹ <Latex tex="r = \dfrac{L}{2\cos\theta}" /></div>
+<div v-click="3">② 作三角形：<Latex tex="\cos\theta = \dfrac{L/2}{r}" /> ⟹ <Latex tex="r = \dfrac{L}{2\cos\theta}" /></div>
 
-<div class="key" v-click="3"><Latex tex="B = \dfrac{mv_0}{qr} = \dfrac{2mv_0\cos\theta}{qL}" /></div>
+<div class="key" v-click="4"><Latex tex="B = \dfrac{mv_0}{qr} = \dfrac{2mv_0\cos\theta}{qL}" /></div>
 
 </div>
 
-<Example1Deflect :show-solution="$clicks >= 1" />
+<Example1Deflect :show-path="$clicks >= 1" :show-solution="$clicks >= 2" />
 
 </div>
 
 </div>
 
 ---
-clicks: 3
+clicks: 4
 ---
 
 # 例 2：求比荷
@@ -405,15 +382,125 @@ clicks: 3
 
 <div class="stack text-lg leading-relaxed">
 
-<div v-click="1">① 判电性：轨迹向下弯 ⟹ 洛伦兹力向下；<Latex tex="v" /> 沿 <Latex tex="+x" />、<Latex tex="B" /> 向里 ⟹ 粒子带<strong>负电</strong></div>
+<div v-click="2">① 判电性：轨迹向下弯 ⟹ 洛伦兹力向下；<Latex tex="v" /> 沿 <Latex tex="+x" />、<Latex tex="B" /> 向里 ⟹ 粒子带<strong>负电</strong></div>
 
-<div v-click="2">② 圆心在 <Latex tex="y" /> 轴上：<Latex tex="b^2 + y_0^2 = r^2" />，且 <Latex tex="r = a - y_0" /> ⟹ <Latex tex="r = \dfrac{a^2 + b^2}{2a}" /></div>
+<div v-click="3">② 圆心在 <Latex tex="y" /> 轴上：<Latex tex="b^2 + y_0^2 = r^2" />，且 <Latex tex="r = a - y_0" /> ⟹ <Latex tex="r = \dfrac{a^2 + b^2}{2a}" /></div>
 
-<div class="key" v-click="3"><Latex tex="\dfrac{q}{m} = \dfrac{v_0}{Br} = \dfrac{2av_0}{B\,(a^2 + b^2)}" />，粒子带负电</div>
+<div class="key" v-click="4"><Latex tex="\dfrac{q}{m} = \dfrac{v_0}{Br} = \dfrac{2av_0}{B\,(a^2 + b^2)}" />，粒子带负电</div>
 
 </div>
 
-<Example2ChargeMass :show-solution="$clicks >= 1" />
+<Example2ChargeMass :show-path="$clicks >= 1" :show-solution="$clicks >= 2" />
+
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+# 例 3：沿半径射入，会沿什么方向射出？
+
+<div class="ask text-lg mb-1">圆形匀强磁场区域，半径 <Latex tex="R" />、磁感应强度 <Latex tex="B" /> 垂直纸面向里。粒子从边界上的 <Latex tex="A" /> 点沿半径方向（指向圆心 <Latex tex="O" />）射入。证明：出射方向的反向延长线一定过圆心 <Latex tex="O" />。</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,3fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack text-lg leading-relaxed">
+
+<div v-click="1">① 在 <Latex tex="A" /> 点：速度沿 <Latex tex="AO" />，而洛伦兹力既垂直于速度、又指向轨迹圆心 <Latex tex="C" /> ⟹ <Latex tex="AC \perp AO" />，即 <Latex tex="\angle OAC = 90^\circ" /></div>
+
+<div v-click="2">② <Latex tex="OA = OM = R" />、<Latex tex="CA = CM = r" /> ⟹ 四边形 <Latex tex="OACM" /> 关于 <Latex tex="OC" /> 对称 ⟹ <Latex tex="\angle OMC = \angle OAC = 90^\circ" />，即 <Latex tex="OM \perp CM" /></div>
+
+<div class="key" v-click="3">③ 出射速度 <Latex tex="v' \perp CM" /> ⟹ <Latex tex="v'" /> 沿 <Latex tex="OM" /> 方向 ⟹ <strong>反向延长线必过圆心 <Latex tex="O" /></strong></div>
+
+</div>
+
+<Example3RadialIn :show-path="$clicks >= 1" :show-aux="$clicks >= 2" :show-out="$clicks >= 3" />
+
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+# 例 4：圆外换成方向相反的磁场
+
+<div class="ask text-lg mb-1">接例 3：磁场区域外也是匀强磁场——方向与圆内相反（<strong>大小可以不同</strong>）。粒子射出后沿着怎样的轨迹走？它还会再次沿半径方向射回圆心吗？</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack text-lg leading-relaxed">
+
+<div v-click="1">① 粒子在 <Latex tex="M" /> 点射出时，速度沿半径向外</div>
+
+<div v-click="2">② 出射速度 <Latex tex="v'" /> 垂直于圆内的半径 <Latex tex="CM" />、又沿 <Latex tex="OM" /> ⟹ 圆外轨迹的圆心 <Latex tex="C'" /> 也落在「过 <Latex tex="M" />、垂直于 <Latex tex="OM" />」的直线上——<strong>与圆外磁场多大无关</strong></div>
+
+<div class="key" v-click="3">③ 把 <Latex tex="M" /> 关于直线 <Latex tex="OC'" /> 镜像得 <Latex tex="N" />：<Latex tex="O" /> 在镜像轴上 ⟹ <Latex tex="ON = OM = R" />（<Latex tex="N" /> 在边界上）、<Latex tex="\angle ONC' = \angle OMC' = 90^\circ" /> ⟹ 速度沿 <Latex tex="ON" />、<strong>指着圆心 <Latex tex="O" /></strong></div>
+
+</div>
+
+<Example4MirrorField :show-inner="$clicks >= 1" :show-outer="$clicks >= 2" :show-back="$clicks >= 3" />
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+# 例 5：粒子能一直"待"在磁场里吗？
+
+<div class="ask text-lg mb-1">圆形匀强磁场区域，半径 <Latex tex="R" />、磁感应强度 <Latex tex="B" />。在边界上的 <Latex tex="P" /> 点以速率 <Latex tex="v_0" /> 向区域内发射粒子（方向可以任选）。问：比荷满足什么条件时，粒子无法保持在磁场中运动？</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack text-lg leading-relaxed">
+
+<div v-click="1">① 要一直留在磁场里，轨迹圆必须整个位于磁场区域内。沿与半径垂直的方向（切线方向）射入时最"省地方"：轨迹圆与边界在 <Latex tex="P" /> 点内切。此时只要 <Latex tex="r \le R" />，粒子就能一圈圈转下去</div>
+
+<div class="key" v-click="2">② 一旦 <Latex tex="r > R" />，轨迹圆就无论如何都装不进去（它必须过边界上的 <Latex tex="P" /> 点），粒子一定会穿出磁场 ⟹ <Latex tex="\dfrac{q}{m} < \dfrac{v_0}{BR}" /></div>
+
+</div>
+
+<Example5Confine :show-small="$clicks >= 1" :show-big="$clicks >= 2" />
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+# 例 5：最多能待多久？
+
+<div class="ask text-lg mb-1">在例 5 的条件下（粒子一定会穿出磁场），粒子的比荷与它能在磁场中运动的最长时间是什么关系？</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,3fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack text-lg leading-relaxed">
+
+<div v-click="1">① 粒子在磁场里走一段圆弧：<Latex tex="t = \dfrac{\theta}{2\pi}T" />；而 <Latex tex="T = \dfrac{2\pi m}{qB}" /> 与速度、半径都无关 ⟹ <strong>运动时间只由圆心角 <Latex tex="\theta" /> 决定，圆心角最大的用时最长</strong></div>
+
+<div v-click="2">② 弦越长圆心角越大（<Latex tex="AB = 2r\sin\dfrac{\theta}{2}" />）；圆里最长的弦是直径 <Latex tex="2R" />，而 <Latex tex="r \ge R" /> ⟹ 圆心角最大不超过 <Latex tex="180^\circ" /></div>
+
+<div class="key" v-click="2">③ ⟹ 最长时间 <Latex tex="t_{\max} = \dfrac{T}{2} = \dfrac{\pi m}{qB}" />：<strong>最长时间与比荷成反比</strong></div>
+
+</div>
+
+<Example5MaxAngle :show-arc="$clicks >= 1" />
 
 </div>
 

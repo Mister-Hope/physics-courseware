@@ -70,42 +70,183 @@ const setSlider = (key: string, v: string): void => {
     <div class="mp-fig">
       <svg viewBox="0 0 520 280" class="mp-svg" xmlns="http://www.w3.org/2000/svg">
         <!-- 电源 -->
-        <rect x="28" y="108" width="36" height="64" rx="8" fill="rgba(226,168,70,0.12)" stroke="#e2a846" stroke-width="2.4" />
-        <text x="46" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#f87171">+</text>
-        <text x="46" y="157" text-anchor="middle" font-size="16" font-weight="700" fill="#60a5fa">−</text>
+        <rect
+          x="28"
+          y="108"
+          width="36"
+          height="64"
+          rx="8"
+          fill="rgba(226,168,70,0.12)"
+          stroke="#e2a846"
+          stroke-width="2.4"
+        />
+        <text x="46" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#f87171">
+          +
+        </text>
+        <text x="46" y="157" text-anchor="middle" font-size="16" font-weight="700" fill="#60a5fa">
+          −
+        </text>
         <text x="46" y="196" text-anchor="middle" font-size="13" fill="#94a3b8">电源</text>
         <path d="M 64 140 H 103" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" />
         <!-- 输入电能 -->
-        <line x1="80" y1="120" x2="124" y2="120" stroke="#e2a846" stroke-width="2.4" stroke-linecap="round" />
+        <line
+          x1="80"
+          y1="120"
+          x2="124"
+          y2="120"
+          stroke="#e2a846"
+          stroke-width="2.4"
+          stroke-linecap="round"
+        />
         <polygon points="132,120 120,115 120,125" fill="#e2a846" />
         <text x="102" y="112" text-anchor="middle" font-size="13" fill="#e2a846">输入（电能）</text>
         <!-- 电动机：立体小圆柱 -->
-        <ellipse cx="250" cy="140" rx="17" ry="35" fill="rgba(96,165,250,0.07)" stroke="#64748b" stroke-width="3" />
+        <ellipse
+          cx="250"
+          cy="140"
+          rx="17"
+          ry="35"
+          fill="rgba(96,165,250,0.07)"
+          stroke="#64748b"
+          stroke-width="3"
+        />
         <rect x="120" y="105" width="130" height="70" fill="rgba(96,165,250,0.10)" />
         <path d="M 120 105 H 250" stroke="#64748b" stroke-width="3" stroke-linecap="round" />
         <path d="M 120 175 H 250" stroke="#64748b" stroke-width="3" stroke-linecap="round" />
-        <line x1="152" y1="107" x2="152" y2="173" stroke="#64748b" stroke-width="1.2" opacity="0.45" />
-        <line x1="172" y1="107" x2="172" y2="173" stroke="#64748b" stroke-width="1.2" opacity="0.45" />
-        <line x1="192" y1="107" x2="192" y2="173" stroke="#64748b" stroke-width="1.2" opacity="0.45" />
-        <line x1="212" y1="107" x2="212" y2="173" stroke="#64748b" stroke-width="1.2" opacity="0.45" />
-        <line x1="232" y1="107" x2="232" y2="173" stroke="#64748b" stroke-width="1.2" opacity="0.45" />
-        <ellipse cx="120" cy="140" rx="17" ry="35" fill="rgba(96,165,250,0.22)" stroke="#64748b" stroke-width="3" />
-        <text x="185" y="153" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="34" fill="#e2a846">M</text>
+        <line
+          x1="152"
+          y1="107"
+          x2="152"
+          y2="173"
+          stroke="#64748b"
+          stroke-width="1.2"
+          opacity="0.45"
+        />
+        <line
+          x1="172"
+          y1="107"
+          x2="172"
+          y2="173"
+          stroke="#64748b"
+          stroke-width="1.2"
+          opacity="0.45"
+        />
+        <line
+          x1="192"
+          y1="107"
+          x2="192"
+          y2="173"
+          stroke="#64748b"
+          stroke-width="1.2"
+          opacity="0.45"
+        />
+        <line
+          x1="212"
+          y1="107"
+          x2="212"
+          y2="173"
+          stroke="#64748b"
+          stroke-width="1.2"
+          opacity="0.45"
+        />
+        <line
+          x1="232"
+          y1="107"
+          x2="232"
+          y2="173"
+          stroke="#64748b"
+          stroke-width="1.2"
+          opacity="0.45"
+        />
+        <ellipse
+          cx="120"
+          cy="140"
+          rx="17"
+          ry="35"
+          fill="rgba(96,165,250,0.22)"
+          stroke="#64748b"
+          stroke-width="3"
+        />
+        <text
+          x="185"
+          y="153"
+          text-anchor="middle"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="34"
+          fill="#e2a846"
+        >
+          M
+        </text>
         <text x="185" y="204" text-anchor="middle" font-size="13" fill="#94a3b8">电动机</text>
         <!-- 背面转轴 -->
-        <line x1="267" y1="140" x2="298" y2="140" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" />
+        <line
+          x1="267"
+          y1="140"
+          x2="298"
+          y2="140"
+          stroke="#94a3b8"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
         <!-- 扇叶 -->
         <g transform="translate(316 140)">
-          <ellipse cx="0" cy="-20" rx="7" ry="20" fill="rgba(96,165,250,0.18)" stroke="#60a5fa" stroke-width="2.4" />
-          <ellipse cx="17" cy="10" rx="7" ry="20" fill="rgba(96,165,250,0.18)" stroke="#60a5fa" stroke-width="2.4" transform="rotate(120 17 10)" />
-          <ellipse cx="-17" cy="10" rx="7" ry="20" fill="rgba(96,165,250,0.18)" stroke="#60a5fa" stroke-width="2.4" transform="rotate(-120 -17 10)" />
+          <ellipse
+            cx="0"
+            cy="-20"
+            rx="7"
+            ry="20"
+            fill="rgba(96,165,250,0.18)"
+            stroke="#60a5fa"
+            stroke-width="2.4"
+          />
+          <ellipse
+            cx="17"
+            cy="10"
+            rx="7"
+            ry="20"
+            fill="rgba(96,165,250,0.18)"
+            stroke="#60a5fa"
+            stroke-width="2.4"
+            transform="rotate(120 17 10)"
+          />
+          <ellipse
+            cx="-17"
+            cy="10"
+            rx="7"
+            ry="20"
+            fill="rgba(96,165,250,0.18)"
+            stroke="#60a5fa"
+            stroke-width="2.4"
+            transform="rotate(-120 -17 10)"
+          />
           <circle r="8" fill="#60a5fa" />
         </g>
-        <text x="322" y="204" text-anchor="middle" font-size="13" fill="#60a5fa">输出（机械能）</text>
+        <text x="322" y="204" text-anchor="middle" font-size="13" fill="#60a5fa">
+          输出（机械能）
+        </text>
         <!-- 线圈发热 -->
-        <path d="M 152 88 q 6 -12 12 0" fill="none" stroke="#f87171" stroke-width="2.6" stroke-linecap="round" />
-        <path d="M 174 78 q 6 -12 12 0" fill="none" stroke="#f87171" stroke-width="2.6" stroke-linecap="round" />
-        <path d="M 196 88 q 6 -12 12 0" fill="none" stroke="#f87171" stroke-width="2.6" stroke-linecap="round" />
+        <path
+          d="M 152 88 q 6 -12 12 0"
+          fill="none"
+          stroke="#f87171"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
+        <path
+          d="M 174 78 q 6 -12 12 0"
+          fill="none"
+          stroke="#f87171"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
+        <path
+          d="M 196 88 q 6 -12 12 0"
+          fill="none"
+          stroke="#f87171"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
         <text x="190" y="66" text-anchor="middle" font-size="13" fill="#f87171">发热（内能）</text>
       </svg>
     </div>
