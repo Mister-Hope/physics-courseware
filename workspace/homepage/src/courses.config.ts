@@ -249,6 +249,28 @@ export const textbooks: TextbookGroup[] = [
           "从如何把电荷存起来引出电容器，分析充放电中的电荷转移与能量转化，由实验得出 Q/U 为定值，建立电容 C=Q/U 与单位法拉，再讨论平行板电容器的决定式。",
         tags: ["电容", "电容器"],
       },
+      {
+        slug: "12.3-emf-internal-resistance",
+        title: "实验：电池电动势和内阻的测量",
+        chapter: "§12.3",
+        description:
+          "由闭合电路欧姆定律出发，用伏安法测多组 U、I，作 U-I 图像读出电动势与内阻；再对比外接、内接的系统误差（计算法、图像法、等效法），并以伏阻法、安阻法两种拓展方案收束。",
+        tags: ["闭合电路欧姆定律", "U-I 图像", "系统误差", "伏安法", "伏阻法", "安阻法"],
+      },
+      {
+        slug: "12.1-energy-conversion-in-circuits",
+        title: "电路中的能量转化",
+        chapter: "§12.1",
+        description: "待补充：一句话说明本课讲了什么。",
+        tags: [],
+      },
+      {
+        slug: "12.4-energy-sustainability",
+        title: "能源与可持续发展",
+        chapter: "§12.4",
+        description: "待补充：一句话说明本课讲了什么。",
+        tags: [],
+      },
     ],
   },
   {
