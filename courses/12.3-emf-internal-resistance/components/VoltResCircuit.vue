@@ -1,5 +1,8 @@
 <script setup lang="ts">
-/** 伏阻法（电压表 + 电阻箱）电路图：只有电压表测路端电压，外电阻由电阻箱给出（读数 R 已知）。 step ≥ 1 标出"电压表测电阻箱两端电压 U"。 */
+/**
+ * 伏阻法（电压表 + 电阻箱）电路图：只有电压表测路端电压，外电阻由电阻箱给出（读数 R 已知）； 开关接在电源负极一侧。电阻箱用可调电阻符号画：矩形电阻 + 从左下到右上的斜箭头。 step ≥
+ * 1 标出"电压表测电阻箱两端电压 U"。
+ */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
@@ -8,8 +11,8 @@ const { step = 0 } = defineProps<{ step?: number }>();
     <svg viewBox="0 0 520 300" class="circuit-svg" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke="#cbd5e1" stroke-width="2.4" stroke-linecap="round">
         <line x1="70" y1="70" x2="450" y2="70" />
-        <line x1="450" y1="70" x2="450" y2="128" />
-        <line x1="450" y1="192" x2="450" y2="250" />
+        <line x1="450" y1="70" x2="450" y2="130" />
+        <line x1="450" y1="190" x2="450" y2="250" />
         <line x1="450" y1="250" x2="160" y2="250" />
         <line x1="110" y1="250" x2="70" y2="250" />
         <line x1="70" y1="70" x2="70" y2="146" />
@@ -61,21 +64,28 @@ const { step = 0 } = defineProps<{ step?: number }>();
       >
         U
       </text>
-      <!-- 电阻箱 -->
+      <!-- 电阻箱：可调电阻符号（矩形 + 左下→右上斜箭头） -->
       <rect
-        x="424"
-        y="128"
-        width="52"
-        height="64"
-        rx="6"
+        x="436"
+        y="130"
+        width="28"
+        height="60"
+        rx="4"
         fill="rgba(15,20,37,0.85)"
         stroke="#cbd5e1"
         stroke-width="2.4"
       />
+      <CourseArrow
+        :from="{ x: 416, y: 202 }"
+        :to="{ x: 484, y: 118 }"
+        stroke="#cbd5e1"
+        stroke-width="2.4"
+        :head-size="12"
+      />
       <text
-        x="450"
+        x="428"
         y="168"
-        text-anchor="middle"
+        text-anchor="end"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
@@ -83,7 +93,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
       >
         R
       </text>
-      <text x="450" y="116" text-anchor="middle" font-size="18" fill="#94a3b8">电阻箱</text>
+      <text x="450" y="216" text-anchor="middle" font-size="18" fill="#94a3b8">电阻箱</text>
       <circle cx="110" cy="250" r="3.4" fill="#cbd5e1" />
       <circle cx="160" cy="250" r="3.4" fill="#cbd5e1" />
       <line
@@ -119,9 +129,9 @@ const { step = 0 } = defineProps<{ step?: number }>();
       </text>
       <g v-if="step >= 1">
         <rect
-          x="322"
+          x="324"
           y="42"
-          width="132"
+          width="176"
           height="228"
           rx="12"
           fill="none"
@@ -129,7 +139,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
           stroke-width="2"
           stroke-dasharray="7 6"
         />
-        <text x="392" y="292" text-anchor="middle" font-size="21" fill="#60a5fa">
+        <text x="405" y="292" text-anchor="middle" font-size="21" fill="#60a5fa">
           电压表测电阻箱两端电压
         </text>
       </g>

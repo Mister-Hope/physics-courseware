@@ -1,7 +1,8 @@
 <script setup lang="ts">
 /**
- * 电流表内接法（相对电源内接）电路图： 电流表串在电源干路上（画在上边导线，测的就是干路电流）；电压表并联在滑动变阻器两端； 开关同样接在电源负极一侧。滑动变阻器按正常接法画：电阻线圈两端都接入，
- * 滑片从侧面接触线圈并引出一条支路接到线圈上端。 step ≥ 1 标出"电流表串在干路上"；step ≥ 2 标出"电压表并联在变阻器两端"。
+ * 电流表内接法（相对电源内接）电路图： 电流表串在电源干路上——画在紧靠电源一侧、开关的上方（测的就是干路电流）；电压表并联在滑动变阻器两端；
+ * 开关接在电源负极一侧。滑动变阻器按正常接法画：电阻线圈两端都接入，滑片从侧面接触线圈并引出一条支路接到线圈上端。 step ≥ 1 标出"电流表串在干路上"；step ≥ 2
+ * 标出"电压表并联在变阻器两端"。
  */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>
@@ -9,20 +10,20 @@ const { step = 0 } = defineProps<{ step?: number }>();
 <template>
   <div class="circuit-wrap">
     <svg viewBox="0 0 520 300" class="circuit-svg" xmlns="http://www.w3.org/2000/svg">
-      <!-- 导线：电源在左侧，电流表在上边干路上，变阻器在右侧 -->
+      <!-- 导线：电源在左侧，电流表紧靠电源画在开关上方，变阻器在右侧 -->
       <g fill="none" stroke="#cbd5e1" stroke-width="2.4" stroke-linecap="round">
-        <line x1="70" y1="70" x2="226" y2="70" />
-        <line x1="274" y1="70" x2="450" y2="70" />
+        <line x1="70" y1="70" x2="116" y2="70" />
+        <line x1="164" y1="70" x2="450" y2="70" />
         <line x1="450" y1="70" x2="450" y2="130" />
         <line x1="450" y1="200" x2="450" y2="250" />
-        <line x1="450" y1="250" x2="330" y2="250" />
-        <line x1="330" y1="250" x2="160" y2="250" />
+        <line x1="450" y1="250" x2="250" y2="250" />
+        <line x1="250" y1="250" x2="160" y2="250" />
         <line x1="110" y1="250" x2="70" y2="250" />
         <line x1="70" y1="70" x2="70" y2="146" />
         <line x1="70" y1="162" x2="70" y2="250" />
         <!-- 电压表支路：并联在变阻器两端 -->
-        <line x1="330" y1="70" x2="330" y2="134" />
-        <line x1="330" y1="186" x2="330" y2="250" />
+        <line x1="250" y1="70" x2="250" y2="134" />
+        <line x1="250" y1="186" x2="250" y2="250" />
       </g>
       <!-- 电源 -->
       <g stroke="#f1f5f9" stroke-linecap="round">
@@ -62,9 +63,9 @@ const { step = 0 } = defineProps<{ step?: number }>();
       >
         S
       </text>
-      <!-- 电流表（串在干路上） -->
+      <!-- 电流表：串在干路上，紧靠电源、画在开关上方 -->
       <circle
-        cx="250"
+        cx="140"
         cy="70"
         r="24"
         fill="rgba(15,20,37,0.85)"
@@ -72,7 +73,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
         stroke-width="2.4"
       />
       <text
-        x="250"
+        x="140"
         y="77"
         text-anchor="middle"
         font-family="KaTeX_Main"
@@ -83,7 +84,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
       </text>
       <!-- 电压表 -->
       <circle
-        cx="330"
+        cx="250"
         cy="160"
         r="26"
         fill="rgba(15,20,37,0.85)"
@@ -91,7 +92,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
         stroke-width="2.4"
       />
       <text
-        x="330"
+        x="250"
         y="167"
         text-anchor="middle"
         font-family="KaTeX_Main"
@@ -101,7 +102,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
         V
       </text>
       <text
-        x="296"
+        x="216"
         y="167"
         text-anchor="end"
         font-family="KaTeX_Math"
@@ -152,9 +153,9 @@ const { step = 0 } = defineProps<{ step?: number }>();
         R
       </text>
       <!-- 干路电流方向 -->
-      <path d="M 288 62 L 300 70 L 288 78 Z" fill="#e2a846" />
+      <path d="M 188 62 L 200 70 L 188 78 Z" fill="#e2a846" />
       <text
-        x="294"
+        x="194"
         y="52"
         text-anchor="middle"
         font-family="KaTeX_Math"
@@ -167,7 +168,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
       <!-- 分步标注 1：电流表串在干路上 -->
       <g v-if="step >= 1">
         <rect
-          x="220"
+          x="110"
           y="40"
           width="60"
           height="60"
@@ -177,16 +178,16 @@ const { step = 0 } = defineProps<{ step?: number }>();
           stroke-width="2"
           stroke-dasharray="7 6"
         />
-        <text x="250" y="30" text-anchor="middle" font-size="21" fill="#e2a846">
+        <text x="140" y="30" text-anchor="middle" font-size="21" fill="#e2a846">
           电流表串在干路上
         </text>
       </g>
       <!-- 分步标注 2：电压表并联在变阻器两端 -->
       <g v-if="step >= 2">
         <rect
-          x="304"
+          x="224"
           y="42"
-          width="201"
+          width="281"
           height="228"
           rx="12"
           fill="none"
@@ -194,7 +195,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
           stroke-width="2"
           stroke-dasharray="7 6"
         />
-        <text x="395" y="292" text-anchor="middle" font-size="21" fill="#60a5fa">
+        <text x="365" y="292" text-anchor="middle" font-size="21" fill="#60a5fa">
           电压表并联在变阻器两端
         </text>
       </g>

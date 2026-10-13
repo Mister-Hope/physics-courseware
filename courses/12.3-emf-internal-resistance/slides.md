@@ -26,37 +26,56 @@ subtitle: 伏安法 · 伏阻法 · 安阻法
 <CoverDecorationSvg />
 
 ---
-clicks: 1
+clicks: 3
 ---
 
+<div class="page-grow">
+<div class="ask">上一节已经画过 <Latex tex="U = E - Ir" /> 的 <Latex tex="U-I" /> 图像——它与两坐标轴的交点各代表什么？</div>
+
+<div class="half-grid">
+<div class="stack">
+<div v-click="1"><b>纵截距</b>：<Latex tex="I = 0" />（断路）时 <Latex tex="U = E" />——直线在纵轴上的截距就是电动势。</div>
+<div v-click="2"><b>斜率</b>：<Latex tex="k = -r" />，取绝对值就是内阻 <Latex tex="r = \dfrac{\Delta U}{\Delta I}" />。</div>
+<div v-click="2"><b>横截距</b>：<Latex tex="U = 0" />（短路）时的电流 <Latex tex="I_{\text{短}} = \dfrac{E}{r}" />，于是也能由 <Latex tex="r = \dfrac{E}{I_{\text{短}}}" /> 求内阻。</div>
+</div>
+<div>
+<CoordAxes
+  :x-range="[0, 1.7]"
+  :y-range="[0, 1.7]"
+  :x-axis="{ quantity: 'I', unit: 'A' }"
+  :y-axis="{ quantity: 'U', unit: 'V' }"
+  :ticks="{ x: [0.5, 1, 1.5], y: [0.5, 1, 1.5] }"
+  :view="{ width: 640, height: 420 }"
+  :curves="[{ points: [{ x: 0, y: 1.5 }, { x: 1.5, y: 0 }], stroke: 'var(--c-accent-2)', width: 3 }]"
+  :labels="[
+    { x: 0, y: 1.5, tex: 'E', anchor: 'top-right', size: 19, halo: true, dot: 5, dy: 20, showAt: 1 },
+    { x: 0.75, y: 0.75, tex: 'k = -r', anchor: 'top-right', size: 18, halo: true, showAt: 2 },
+    { x: 1.5, y: 0, tex: 'I_{\\text{短}}', anchor: 'top-left', size: 19, halo: true, dot: 5, showAt: 2 },
+  ]"
+  :step="$clicks"
+/>
+</div>
+</div>
+
+<div v-click="3" class="key">那么反过来：测出多组 <Latex tex="U" />、<Latex tex="I" />，作出这条直线，就能从纵截距和斜率读出电池的 <Latex tex="E" /> 和 <Latex tex="r" />——这正是本节课要做的实验。</div>
+</div>
+
+---
+clicks: 2
+---
 <div class="page-grow">
 <div class="ask ask-lead">电池用久了灯会变暗——是电动势变小了，还是内阻变大了？</div>
 
 <div v-click="1" class="stack">
-<div>要回答这个问题，得先把电池的 <Latex tex="E" /> 和 <Latex tex="r" /> 测出来。</div>
-<div>闭合电路欧姆定律给出 <Latex tex="U = E - Ir" />，也就是 <Latex tex="E = U + Ir" />。</div>
-<div>测出两组路端电压 <Latex tex="U" /> 和电流 <Latex tex="I" />，就是两个方程、两个未知数。</div>
-</div>
-</div>
-
----
-clicks: 1
----
-
-# 两组数据，解出 E 和 r
-
-<div class="page-grow">
-<div class="stack">
-<div>两组测量值分别代入 <Latex tex="U = E - Ir" />：</div>
+<div>要回答这个问题，得先把电池的 <Latex tex="E" /> 和 <Latex tex="r" /> 测出来。由闭合电路欧姆定律 <Latex tex="U = E - Ir" /> 出发，测出两组路端电压 <Latex tex="U" /> 和电流 <Latex tex="I" />，就是两个方程、两个未知数：</div>
 <Latex tex="\begin{cases} U_1 = E - I_1 r \\ U_2 = E - I_2 r \end{cases}" display />
 </div>
 
-<div v-click="1" class="stack">
+<div v-click="2" class="stack">
 <div>解得：</div>
 <Latex tex="E = \dfrac{U_1 I_2 - U_2 I_1}{I_2 - I_1}, \qquad r = \dfrac{U_1 - U_2}{I_2 - I_1}" display />
 </div>
 </div>
-
 ---
 clicks: 2
 ---
@@ -99,39 +118,6 @@ clicks: 2
 <div class="mini-title">多组数据的两种处理方式</div>
 <div>① 任取两组列方程，求出多组 <Latex tex="E" />、<Latex tex="r" />，再取平均值；</div>
 <div>② 作 <Latex tex="U-I" /> 图像，用一条直线拟合所有数据点——更简便、更直观。</div>
-</div>
-</div>
-
----
-clicks: 2
----
-
-<div class="page-grow">
-<div class="ask">把 <Latex tex="U = E - Ir" /> 画成图像，它与两坐标轴的交点各代表什么？</div>
-
-<div class="half-grid">
-<div class="stack">
-<div v-click="1"><b>纵截距</b>：<Latex tex="I = 0" />（断路）时 <Latex tex="U = E" />——直线在纵轴上的截距就是电动势。</div>
-<div v-click="2"><b>斜率</b>：<Latex tex="k = -r" />，取绝对值就是内阻 <Latex tex="r = \dfrac{\Delta U}{\Delta I}" />。</div>
-<div v-click="2"><b>横截距</b>：<Latex tex="U = 0" />（短路）时的电流 <Latex tex="I_{\text{短}} = \dfrac{E}{r}" />，于是也能由 <Latex tex="r = \dfrac{E}{I_{\text{短}}}" /> 求内阻。</div>
-</div>
-<div>
-<CoordAxes
-  :x-range="[0, 1.7]"
-  :y-range="[0, 1.7]"
-  :x-axis="{ quantity: 'I', unit: 'A' }"
-  :y-axis="{ quantity: 'U', unit: 'V' }"
-  :ticks="{ x: [0.5, 1, 1.5], y: [0.5, 1, 1.5] }"
-  :view="{ width: 640, height: 420 }"
-  :curves="[{ points: [{ x: 0, y: 1.5 }, { x: 1.5, y: 0 }], stroke: 'var(--c-accent-2)', width: 3 }]"
-  :labels="[
-    { x: 0, y: 1.5, tex: 'E', anchor: 'top-right', size: 19, halo: true, dot: 5, dy: 20, showAt: 1 },
-    { x: 0.75, y: 0.75, tex: 'k = -r', anchor: 'top-right', size: 18, halo: true, showAt: 2 },
-    { x: 1.5, y: 0, tex: 'I_{\\text{短}}', anchor: 'top-left', size: 19, halo: true, dot: 5, showAt: 2 },
-  ]"
-  :step="$clicks"
-/>
-</div>
 </div>
 </div>
 
@@ -334,17 +320,6 @@ clicks: 2
 </div>
 
 ---
-layout: course-cover
-chapter-no: "12.3"
-chapter: 第十二章 电能 能量守恒定律
-lesson: 第二课时
-title: 实验：电池电动势和内阻的测量
-subtitle: 伏阻法 · 安阻法
----
-
-<CoverDecorationSvg />
-
----
 clicks: 1
 ---
 
@@ -362,7 +337,7 @@ clicks: 1
 clicks: 1
 ---
 
-# 伏阻法：用 R 算出 I
+# 伏阻法：用 $R$ 算出 $I$
 
 <div class="page-grow">
 <div class="split-narrow">
@@ -472,7 +447,7 @@ clicks: 1
 clicks: 2
 ---
 
-# 安阻法：1/I 与 R 成直线
+# 安阻法：$\dfrac{1}{I}$ 与 $R$ 成直线
 
 <div class="page-grow">
 <div class="half-grid">
