@@ -24,8 +24,8 @@ const SHARED_STYLES_DIR = path.join(ROOT, "workspace", "shared", "styles");
 /**
  * 共享原子全集 —— **从正本 CSS 现读**，不手工维护。
  *
- * 正本：`workspace/shared/styles/{common,layout,atoms}.css`。以前这里是手工抄的一份清单，
- * 结果 `atoms.css` 新增 `.data-table`/`.split-wide`/`.ok`/`.step-list` 等 12 个原子后清单没跟上，
+ * 正本：`workspace/shared/styles/{common,layout,atoms}.css`。以前这里是手工抄的一份清单， 结果 `atoms.css` 新增
+ * `.data-table`/`.split-wide`/`.ok`/`.step-list` 等 12 个原子后清单没跟上，
  * 子代理一用就被误报成"裸类名"、被迫绕开正本写私有值（真踩过）。现在直接扫 CSS 顶层选择器。
  */
 const sharedAtomClasses = (): Set<string> => {
@@ -269,13 +269,10 @@ const checkIconSizes = (sources: string): Finding[] =>
     // 只在"作者确实想把图标放大"（text-2xl 及以上）时报：行内小图标用 text-lg/xl 是有意为之
     return classTokens(line)
       .filter((token) => UNOCSS_BIG_TEXT.test(token) && !ICON_SIZE_OK.test(token))
-      .map(
-        (token) =>
-          ({
-            level: "warn",
-            message: `第 ${index + 1} 行图标用了 \`${token}\`（UnoCSS，压不过 svg 的 16px 基准，图标会被钉死 16px）→ 换共享阶梯 .text-2xl…5xl 或 .icon-md/lg/xl/2xl（§5）`,
-          }) as Finding,
-      );
+      .map((token) => ({
+        level: "warn",
+        message: `第 ${index + 1} 行图标用了 \`${token}\`（UnoCSS，压不过 svg 的 16px 基准，图标会被钉死 16px）→ 换共享阶梯 .text-2xl…5xl 或 .icon-md/lg/xl/2xl（§5）`,
+      }));
   });
 
 /** ③ 单行 CSS 的硬编码色值 / 私调字号 / 非 token 圆角（§3） */
@@ -372,13 +369,10 @@ const checkBareClasses = (
   });
 
   return [
-    ...bare.slice(0, 8).map(
-      (token) =>
-        ({
-          level: "warn",
-          message: `裸类名 \`.${token}\` 在页面里用了、本课 style.css 与组件 <style> 都没定义（§6）`,
-        }) as Finding,
-    ),
+    ...bare.slice(0, 8).map((token) => ({
+      level: "warn",
+      message: `裸类名 \`.${token}\` 在页面里用了、本课 style.css 与组件 <style> 都没定义（§6）`,
+    })),
     ...(bare.length > 8
       ? [{ level: "warn", message: `…另有 ${bare.length - 8} 个裸类名未列出` } as Finding]
       : []),
@@ -393,7 +387,7 @@ const checkProtectedSelectors = (css: string): Finding[] =>
           {
             level: "warn",
             message: `重写共享选择器 ${label} → 只许覆盖 --page-gap/--stack-gap（§8）`,
-          } as Finding,
+          },
         ]
       : [],
   );
@@ -401,9 +395,9 @@ const checkProtectedSelectors = (css: string): Finding[] =>
 /**
  * ⑤b 在 `:root` 里覆盖了非密度变量（§8）。
  *
- * **只查 `:root` 块内部**：§8 禁的是"改全局默认值"。类作用域里的自定义属性是**官方旋钮**——
- * 正本 `.split-wide` 的 `--cols` 就是留给课件写 `.fig-wide { --cols: … }` 变体用的
- * （`atoms.css` 的 `.fig-narrow` 自己就是这么写的），把它报成越权是误报（真踩过：2.4 的 `.fig-wide`）。
+ * **只查 `:root` 块内部**：§8 禁的是"改全局默认值"。类作用域里的自定义属性是**官方旋钮**—— 正本 `.split-wide` 的 `--cols` 就是留给课件写
+ * `.fig-wide { --cols: … }` 变体用的 （`atoms.css` 的 `.fig-narrow` 自己就是这么写的），把它报成越权是误报（真踩过：2.4 的
+ * `.fig-wide`）。
  */
 const checkRootOverrides = (css: string): Finding[] => {
   const findings: Finding[] = [];
@@ -411,8 +405,9 @@ const checkRootOverrides = (css: string): Finding[] => {
 
   css.split("\n").forEach((line, index) => {
     // 进出 :root 块（:root 规则内不会嵌套花括号，数大括号深度即可）
-    if (/:root\s*\{/u.test(line)) rootDepth = 1;
-    else if (rootDepth > 0) {
+    if (/:root\s*\{/u.test(line)) {
+      rootDepth = 1;
+    } else if (rootDepth > 0) {
       rootDepth += (line.match(/\{/gu) ?? []).length - (line.match(/\}/gu) ?? []).length;
 
       if (rootDepth <= 0) rootDepth = 0;
@@ -422,11 +417,12 @@ const checkRootOverrides = (css: string): Finding[] => {
 
     const varName = ROOT_VAR.exec(line)?.groups?.var ?? "";
 
-    if (varName && !ALLOWED_ROOT_OVERRIDES.has(varName))
+    if (varName && !ALLOWED_ROOT_OVERRIDES.has(varName)) {
       findings.push({
         level: "warn",
         message: `style.css:${index + 1} 在 :root 里覆盖了非密度变量 ${varName}（§8 只许覆盖 --page-gap/--stack-gap）`,
-      } as Finding);
+      });
+    }
   });
 
   return findings;

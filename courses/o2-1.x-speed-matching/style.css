@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════
+   复合场中的配速法与摆线运动 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+/* 课题名 15 字，默认 3.5rem 会折成两行、渐变被截断；压到 2.7rem 保持一行
+   （长课题名压字号是共享布局唯一认可的例外，见 .agents/notes/slidev-layout.md §4） */
+.course-cover .cover-title {
+  font-size: 2.7rem;
+}
+
+/* ── 封面磁场底：铺满整页的稀疏裸 × ──
+   ⚠️ 别写成 position: absolute：.slidev-page 上有 transform，绝对定位的静态位置会让 SVG
+   落到装饰盒那一行（表现：叉号只剩一行、贴着图例位置）。用 position: fixed：
+   transform 让本页成了固定定位的包含块，于是 inset: 0 正好铺满这一页。 */
+.cover-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+
+  display: block;
+
+  color: var(--c-field);
+  pointer-events: none;
+}
+
+.course-cover > *:not(.cover-field) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 题目页：题干独占整幅在最上，下面左「选项」、右「题图」（图靠右下角） ── */
+.q-page {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--page-gap);
+
+  min-height: 0;
+}
+
+/* 题目页配图：左「题干 + 选项」、右窄图（图靠右下角） */
+.q-fig-aside {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+/* 题目页配图上限（放宽到 460px：不再把图压到 400×280，右栏的图可以画满、不被压扁）
+   其余页的图组件各自钉了 310–380px 的定宽（scoped 权重更高），本规则只对 TubeInField 生效；
+   而 TubeInField 自己的 scoped 规则又把这个上限收到 330px（第 12 页图下面还有正文，再高会顶出画布） */
+.q-fig-aside svg {
+  width: 100%;
+  max-width: 460px;
+  max-height: 460px;
+  height: auto;
+}
+
+/* 解析页：与标题并排的小图落到右下角（教师要求：别悬在半空） */
+.q-fig-corner {
+  align-self: end;
+}
+
+/* 初速度变式一页（组件单独占一页）：把整块居中、给足高度 */
+.isv-standalone {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 0;
+}
+
+/* ── 封面右下角装饰图 ──
+   共享布局里的 `abs-br` 工具类并不存在（UnoCSS 没生成），所以 .cover-decoration 原先其实是
+   position: relative 在文档流里飘（只是碰巧落在下面）。这里显式绝对定位钉到右下角：
+   right / bottom 按版面预留 —— 上方让开副标题行、下方让开底部"原创：…"署名行。 */
+.course-cover .cover-decoration {
+  position: absolute;
+  right: 2rem;
+  bottom: 7.25rem;
+
+  width: 340px !important;
+  height: 148px !important;
+  max-width: 42vw;
+  margin: 0 !important;
+}
+
+.course-cover .cover-decoration svg {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+}

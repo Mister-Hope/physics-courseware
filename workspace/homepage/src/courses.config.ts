@@ -331,6 +331,13 @@ export const textbooks: TextbookGroup[] = [
         description: "待补充：一句话说明本课讲了什么。",
         tags: [],
       },
+      {
+        slug: "o2-1.x-speed-matching",
+        title: "复合场中的配速法与摆线运动",
+        chapter: "§1.x",
+        description: "待补充：一句话说明本课讲了什么。",
+        tags: [],
+      },
     ],
   },
   {
