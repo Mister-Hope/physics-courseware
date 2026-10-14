@@ -65,7 +65,7 @@ const labels = computed(() => [
 </script>
 
 <template>
-  <div class="graph-wrap">
+  <div class="figure">
     <CoordAxes
       :x-range="[-1.5, 3]"
       :y-range="[0, 2.2]"
@@ -79,12 +79,3 @@ const labels = computed(() => [
     />
   </div>
 </template>
-
-<style scoped>
-.graph-wrap {
-  width: 100%;
-  min-width: 0;
-  max-width: 620px;
-  margin: 0 auto;
-}
-</style>

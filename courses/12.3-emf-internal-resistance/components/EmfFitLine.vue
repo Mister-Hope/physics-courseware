@@ -265,7 +265,7 @@ const resistanceText = computed<string>(() => formatSig2(resistance.value));
 
 <template>
   <div class="efl-wrap">
-    <div class="efl-figure">
+    <div class="figure efl-figure">
       <CoordAxes
         :x-range="[X_MIN, X_MAX]"
         :y-range="[Y_MIN, Y_MAX]"
@@ -381,14 +381,10 @@ const resistanceText = computed<string>(() => formatSig2(resistance.value));
   margin: 0 auto;
 }
 
+/* 图无缝嵌入页面（不要圆角矩形托底）；只限宽以控制高度 */
 .efl-figure {
-  box-sizing: border-box;
-  width: 100%;
   max-width: 600px;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-lg);
-
-  background: rgb(15 20 37 / 40%);
+  margin: 0 auto;
 }
 
 /* 拖拽要吃掉触摸滚动 */
@@ -415,7 +411,7 @@ const resistanceText = computed<string>(() => formatSig2(resistance.value));
   width: 100%;
   max-width: 760px;
 
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.15;
 }

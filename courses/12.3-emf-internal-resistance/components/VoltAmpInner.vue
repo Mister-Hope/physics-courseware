@@ -1,217 +1,94 @@
 <script setup lang="ts">
 /**
- * 电流表内接法（相对电源内接）电路图： 电流表串在电源干路上——画在紧靠电源一侧、开关的上方（测的就是干路电流）；电压表并联在滑动变阻器两端；
- * 开关接在电源负极一侧。滑动变阻器按正常接法画：电阻线圈两端都接入，滑片从侧面接触线圈并引出一条支路接到线圈上端。 step ≥ 1 标出"电流表串在干路上"；step ≥ 2
- * 标出"电压表并联在变阻器两端"。
+ * 电流表内接法（相对电源内接）电路图： 电流表串在电源干路上——紧靠电源、画在开关上方（测的就是干路电流）；电压表并联在滑动变阻器两端； 开关接在电源负极一侧。滑动变阻器＝电阻线圈（两端都接入）＋
+ * 侧面滑片引出的支路。 元件符号一律用共享 <Circuit*> 组件，导线手画（1.6）。 step ≥ 1 标出"电流表串在干路上"；step ≥ 2 标出"电压表并联在变阻器两端"。
  */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>
-  <div class="circuit-wrap">
-    <svg viewBox="0 0 520 300" class="circuit-svg" xmlns="http://www.w3.org/2000/svg">
-      <!-- 导线：电源在左侧，电流表紧靠电源画在开关上方，变阻器在右侧 -->
-      <g fill="none" stroke="#cbd5e1" stroke-width="2.4" stroke-linecap="round">
-        <line x1="70" y1="70" x2="116" y2="70" />
-        <line x1="164" y1="70" x2="450" y2="70" />
-        <line x1="450" y1="70" x2="450" y2="130" />
-        <line x1="450" y1="200" x2="450" y2="250" />
-        <line x1="450" y1="250" x2="250" y2="250" />
-        <line x1="250" y1="250" x2="160" y2="250" />
-        <line x1="110" y1="250" x2="70" y2="250" />
-        <line x1="70" y1="70" x2="70" y2="146" />
-        <line x1="70" y1="162" x2="70" y2="250" />
-        <!-- 电压表支路：并联在变阻器两端 -->
-        <line x1="250" y1="70" x2="250" y2="134" />
-        <line x1="250" y1="186" x2="250" y2="250" />
+  <div class="figure">
+    <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+        <path d="M 80 60 H 114" />
+        <path d="M 146 60 H 400" />
+        <path d="M 400 60 V 116" />
+        <path d="M 400 164 V 220" />
+        <path d="M 400 220 H 140" />
+        <path d="M 100 220 H 80" />
+        <path d="M 80 60 V 132" />
+        <path d="M 80 148 V 220" />
+        <path d="M 250 60 V 124" />
+        <path d="M 250 156 V 220" />
+        <path d="M 450 140 V 108 H 400" />
       </g>
-      <!-- 电源 -->
-      <g stroke="#f1f5f9" stroke-linecap="round">
-        <line x1="48" y1="146" x2="92" y2="146" stroke-width="2.6" />
-        <line x1="58" y1="162" x2="82" y2="162" stroke-width="5" />
-      </g>
+      <circle cx="250" cy="60" r="3" fill="var(--c-text)" />
+      <circle cx="250" cy="220" r="3" fill="var(--c-text)" />
+      <circle cx="400" cy="108" r="3" fill="var(--c-text)" />
+      <CircuitBattery :x="80" :y="140" orientation="vertical" polarity emf="E, r" />
+      <CircuitSwitch :x="120" :y="220" :open="false" label="S" />
+      <CircuitMeter :x="130" :y="60" kind="a" />
+      <CircuitMeter :x="250" :y="140" kind="v" />
+      <CircuitResistor :x="400" :y="140" orientation="vertical" label="R" />
+      <CourseArrow
+        :from="{ x: 450, y: 140 }"
+        :to="{ x: 410, y: 140 }"
+        stroke="var(--c-text)"
+        :stroke-width="1.6"
+        :head-size="9"
+      />
       <text
-        x="34"
-        y="162"
+        x="226"
+        y="146"
         text-anchor="end"
         font-family="KaTeX_Math"
         font-style="italic"
-        font-size="22"
-        fill="#f1f5f9"
-      >
-        E, r
-      </text>
-      <!-- 开关（接在电源负极一侧） -->
-      <circle cx="110" cy="250" r="3.4" fill="#cbd5e1" />
-      <circle cx="160" cy="250" r="3.4" fill="#cbd5e1" />
-      <line
-        x1="110"
-        y1="250"
-        x2="152"
-        y2="231"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-        stroke-linecap="round"
-      />
-      <text
-        x="135"
-        y="222"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="22"
-        fill="#cbd5e1"
-      >
-        S
-      </text>
-      <!-- 电流表：串在干路上，紧靠电源、画在开关上方 -->
-      <circle
-        cx="140"
-        cy="70"
-        r="24"
-        fill="rgba(15,20,37,0.85)"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-      />
-      <text
-        x="140"
-        y="77"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="24"
-        fill="#f1f5f9"
-      >
-        A
-      </text>
-      <!-- 电压表 -->
-      <circle
-        cx="250"
-        cy="160"
-        r="26"
-        fill="rgba(15,20,37,0.85)"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-      />
-      <text
-        x="250"
-        y="167"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="24"
-        fill="#f1f5f9"
-      >
-        V
-      </text>
-      <text
-        x="216"
-        y="167"
-        text-anchor="end"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="22"
-        fill="#60a5fa"
+        font-size="18"
+        fill="var(--c-accent-2)"
       >
         U
       </text>
-      <!-- 滑动变阻器：矩形是电阻线圈（两端都接入），滑片从侧面接触并引出一条支路接到线圈上端 -->
-      <rect
-        x="443"
-        y="130"
-        width="14"
-        height="70"
-        rx="3"
-        fill="rgba(15,20,37,0.85)"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
+      <CourseArrow
+        :from="{ x: 172, y: 60 }"
+        :to="{ x: 214, y: 60 }"
+        stroke="var(--c-accent)"
+        :stroke-width="2.4"
+        label="I"
       />
-      <line
-        x1="492"
-        y1="165"
-        x2="470"
-        y2="165"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-        stroke-linecap="round"
-      />
-      <path d="M 470 159 L 458 165 L 470 171 Z" fill="#cbd5e1" />
-      <path
-        d="M 492 165 V 116 H 450"
-        fill="none"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-        stroke-linecap="round"
-      />
-      <circle cx="450" cy="116" r="3.2" fill="#cbd5e1" />
-      <text
-        x="430"
-        y="172"
-        text-anchor="end"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="22"
-        fill="#f1f5f9"
-      >
-        R
-      </text>
-      <!-- 干路电流方向 -->
-      <path d="M 188 62 L 200 70 L 188 78 Z" fill="#e2a846" />
-      <text
-        x="194"
-        y="52"
-        text-anchor="middle"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="22"
-        fill="#e2a846"
-      >
-        I
-      </text>
       <!-- 分步标注 1：电流表串在干路上 -->
       <g v-if="step >= 1">
         <rect
-          x="110"
-          y="40"
-          width="60"
-          height="60"
-          rx="10"
+          x="106"
+          y="34"
+          width="48"
+          height="52"
+          rx="8"
           fill="none"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2"
           stroke-dasharray="7 6"
         />
-        <text x="140" y="30" text-anchor="middle" font-size="21" fill="#e2a846">
+        <text x="130" y="26" text-anchor="middle" font-size="18" fill="var(--c-accent)">
           电流表串在干路上
         </text>
       </g>
       <!-- 分步标注 2：电压表并联在变阻器两端 -->
       <g v-if="step >= 2">
         <rect
-          x="224"
-          y="42"
-          width="281"
-          height="228"
-          rx="12"
+          x="230"
+          y="38"
+          width="238"
+          height="212"
+          rx="10"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-accent-2)"
           stroke-width="2"
           stroke-dasharray="7 6"
         />
-        <text x="365" y="292" text-anchor="middle" font-size="21" fill="#60a5fa">
+        <text x="349" y="272" text-anchor="middle" font-size="18" fill="var(--c-accent-2)">
           电压表并联在变阻器两端
         </text>
       </g>
     </svg>
   </div>
 </template>
-
-<style scoped>
-.circuit-wrap {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.circuit-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

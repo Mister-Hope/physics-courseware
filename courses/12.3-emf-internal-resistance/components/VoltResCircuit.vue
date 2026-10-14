@@ -1,161 +1,76 @@
 <script setup lang="ts">
 /**
- * 伏阻法（电压表 + 电阻箱）电路图：只有电压表测路端电压，外电阻由电阻箱给出（读数 R 已知）； 开关接在电源负极一侧。电阻箱用可调电阻符号画：矩形电阻 + 从左下到右上的斜箭头。 step ≥
- * 1 标出"电压表测电阻箱两端电压 U"。
+ * 伏阻法（电压表 + 电阻箱）电路图：只有电压表测路端电压，外电阻由电阻箱给出（读数 R 已知）； 开关接在电源负极一侧。电阻箱用可调电阻符号画：<CircuitResistor> 矩形电阻 +
+ * 左下→右上的斜箭头。 元件符号一律用共享 <Circuit*> 组件，导线手画（1.6）。 step ≥ 1 标出"电压表测电阻箱两端电压"。
  */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>
-  <div class="circuit-wrap">
-    <svg viewBox="0 0 520 300" class="circuit-svg" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" stroke="#cbd5e1" stroke-width="2.4" stroke-linecap="round">
-        <line x1="70" y1="70" x2="450" y2="70" />
-        <line x1="450" y1="70" x2="450" y2="130" />
-        <line x1="450" y1="190" x2="450" y2="250" />
-        <line x1="450" y1="250" x2="160" y2="250" />
-        <line x1="110" y1="250" x2="70" y2="250" />
-        <line x1="70" y1="70" x2="70" y2="146" />
-        <line x1="70" y1="162" x2="70" y2="250" />
-        <line x1="350" y1="70" x2="350" y2="134" />
-        <line x1="350" y1="186" x2="350" y2="250" />
+  <div class="figure">
+    <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+        <path d="M 80 60 H 400" />
+        <path d="M 400 60 V 116" />
+        <path d="M 400 164 V 220" />
+        <path d="M 400 220 H 140" />
+        <path d="M 100 220 H 80" />
+        <path d="M 80 60 V 132" />
+        <path d="M 80 148 V 220" />
+        <path d="M 250 60 V 124" />
+        <path d="M 250 156 V 220" />
       </g>
-      <g stroke="#f1f5f9" stroke-linecap="round">
-        <line x1="48" y1="146" x2="92" y2="146" stroke-width="2.6" />
-        <line x1="58" y1="162" x2="82" y2="162" stroke-width="5" />
-      </g>
-      <text
-        x="34"
-        y="162"
-        text-anchor="end"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="22"
-        fill="#f1f5f9"
-      >
-        E, r
-      </text>
-      <circle
-        cx="350"
-        cy="160"
-        r="26"
-        fill="rgba(15,20,37,0.85)"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
+      <circle cx="250" cy="60" r="3" fill="var(--c-text)" />
+      <circle cx="250" cy="220" r="3" fill="var(--c-text)" />
+      <CircuitBattery :x="80" :y="140" orientation="vertical" polarity emf="E, r" />
+      <CircuitSwitch :x="120" :y="220" :open="false" label="S" />
+      <CircuitMeter :x="250" :y="140" kind="v" />
+      <CircuitResistor :x="400" :y="140" orientation="vertical" label="R" />
+      <!-- 可调电阻：从左下到右上的斜箭头插在电阻上 -->
+      <CourseArrow
+        :from="{ x: 356, y: 180 }"
+        :to="{ x: 444, y: 100 }"
+        stroke="var(--c-text)"
+        :stroke-width="1.6"
+        :head-size="10"
       />
-      <text
-        x="350"
-        y="167"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="24"
-        fill="#f1f5f9"
-      >
-        V
+      <text x="400" y="198" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
+        电阻箱
       </text>
       <text
-        x="316"
-        y="167"
+        x="226"
+        y="146"
         text-anchor="end"
         font-family="KaTeX_Math"
         font-style="italic"
-        font-size="22"
-        fill="#60a5fa"
+        font-size="18"
+        fill="var(--c-accent-2)"
       >
         U
       </text>
-      <!-- 电阻箱：可调电阻符号（矩形 + 左下→右上斜箭头） -->
-      <rect
-        x="436"
-        y="130"
-        width="28"
-        height="60"
-        rx="4"
-        fill="rgba(15,20,37,0.85)"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-      />
       <CourseArrow
-        :from="{ x: 416, y: 202 }"
-        :to="{ x: 484, y: 118 }"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-        :head-size="12"
+        :from="{ x: 320, y: 60 }"
+        :to="{ x: 360, y: 60 }"
+        stroke="var(--c-accent)"
+        :stroke-width="2.4"
+        label="I"
       />
-      <text
-        x="428"
-        y="168"
-        text-anchor="end"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="24"
-        fill="#f1f5f9"
-      >
-        R
-      </text>
-      <text x="450" y="216" text-anchor="middle" font-size="18" fill="#94a3b8">电阻箱</text>
-      <circle cx="110" cy="250" r="3.4" fill="#cbd5e1" />
-      <circle cx="160" cy="250" r="3.4" fill="#cbd5e1" />
-      <line
-        x1="110"
-        y1="250"
-        x2="152"
-        y2="231"
-        stroke="#cbd5e1"
-        stroke-width="2.4"
-        stroke-linecap="round"
-      />
-      <text
-        x="135"
-        y="222"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="22"
-        fill="#cbd5e1"
-      >
-        S
-      </text>
-      <path d="M 200 62 L 212 70 L 200 78 Z" fill="#e2a846" />
-      <text
-        x="206"
-        y="52"
-        text-anchor="middle"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="22"
-        fill="#e2a846"
-      >
-        I
-      </text>
       <g v-if="step >= 1">
         <rect
-          x="324"
-          y="42"
-          width="176"
-          height="228"
-          rx="12"
+          x="230"
+          y="38"
+          width="238"
+          height="212"
+          rx="10"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-accent-2)"
           stroke-width="2"
           stroke-dasharray="7 6"
         />
-        <text x="405" y="292" text-anchor="middle" font-size="21" fill="#60a5fa">
+        <text x="349" y="272" text-anchor="middle" font-size="18" fill="var(--c-accent-2)">
           电压表测电阻箱两端电压
         </text>
       </g>
     </svg>
   </div>
 </template>
-
-<style scoped>
-.circuit-wrap {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.circuit-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

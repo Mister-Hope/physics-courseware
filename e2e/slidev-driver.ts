@@ -14,16 +14,17 @@ export const TOLERANCE =
     : Number(configuredTolerance);
 
 /**
- * 「页面底部留白过大」的判定阈值（逻辑像素），默认 150px。
+ * 「页面留白过大」的判定阈值（逻辑像素），默认 200px。
  *
- * 留白 = 552 − 内容底部（内容底部 = 该页最靠下的可见内容元素的 bottom），留白超过它说明内容 挤在页面上方、字号 / 行距 / 间距本可以更大。可用
+ * 只看两条**边缘空白带**：顶部留白（画布顶 → 内容顶部）与底部留白（内容底部 → 画布底），任一超过它就算偏大。
+ * 元素少但**分散排布**（两端空白都不大、中间空一块）合格——中间的空隙一律不看。 判定只作用于「全部展开」状态（初始态只记录明细：先问后答页点击前只有题干是设计使然）。 可用
  * `E2E_WHITESPACE_TOLERANCE` 调整。
  */
 const configuredWhitespaceTolerance = process.env.E2E_WHITESPACE_TOLERANCE;
 
 export const WHITESPACE_TOLERANCE =
   configuredWhitespaceTolerance === undefined || configuredWhitespaceTolerance.trim() === ""
-    ? 150
+    ? 200
     : Number(configuredWhitespaceTolerance);
 
 /**

@@ -416,7 +416,7 @@ preload: false
   :enter="{ opacity: 1, scale: 1, y: 0 }"
 >
 
-<mdi-help-circle-outline class="text-accent text-6xl mb-4" />
+<mdi-help-circle-outline class="text-accent icon-2xl mb-4" />
 
 </div>
 
@@ -599,7 +599,7 @@ preload: false
   :enter="{ opacity: 1, scale: 1, y: 0 }"
 >
 
-<mdi-lightbulb-on-outline class="text-accent text-6xl mb-4" />
+<mdi-lightbulb-on-outline class="text-accent icon-2xl mb-4" />
 
 </div>
 

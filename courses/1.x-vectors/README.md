@@ -24,4 +24,4 @@
 - 版面用 **`.page-grow`**（共享 addon 的 `workspace/shared/styles/layout.css`）：`h1` 固定在上方，正文在剩余空间里垂直居中 + 统一 `gap`，避免"内容挤在上面、下面一大片空白"。
 - 页面外壳用共享 **`layout: base-flex`**（headmatter 的 `defaults`）：flex 列 + 收紧内边距；本课 `style.css` 只放本课特有样式，通用字号/间距已全部收归共享 addon。
 - 正文里 HTML 块中的公式一律用 `<Latex tex="…" />`；`<v-clicks>` / `<v-click>` 与它们的子块必须顶到第 0 列（缩进 4 空格会被 markdown 当成代码块，整页 500）。
-- 校验：`E2E_COURSE=1.x-vectors pnpm exec playwright test e2e/layout-overflow.spec.ts`（四类检查：溢出画布 / 底部留白 / 点击位移 / 正文越界，报告见 `e2e/reports/`）。
+- 校验：`E2E_COURSE=1.x-vectors pnpm exec playwright test e2e/layout-overflow.spec.ts`（四类检查：溢出画布 / 上下留白 / 点击位移 / 正文越界，报告见 `e2e/reports/`）。

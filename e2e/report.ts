@@ -4,6 +4,7 @@ import { layoutReportDir } from "./artifacts";
 import type {
   BlockFitMeasurement,
   BlockFitViolation,
+  ContentEdgeElement,
   LayoutMeasureResult,
   OverflowViolation,
   WhitespaceMeasurement,
@@ -31,7 +32,7 @@ export interface CheckResult {
   /** 这一页渲染失败（Slidev 错误占位页） */
   renderError: boolean;
   violations: OverflowViolation[];
-  /** 页面底部留白（内容底部到画布底部的距离），用于发现"内容挤在上半页" */
+  /** 页面上下留白（顶部 / 底部两条边缘空白带），用于发现"内容挤在上半页 / 下半页 / 中部" */
   whitespace: WhitespaceMeasurement;
   /** 正文是否越出 `.page-grow` 的可用区域（顶出上边界 / 超出下边界） */
   blockFit: BlockFitMeasurement;
@@ -81,7 +82,7 @@ export interface ReportMeta {
   generatedAt: string;
   viewport: { width: number; height: number };
   tolerance: number;
-  /** 留白判定阈值（逻辑像素，`E2E_WHITESPACE_TOLERANCE` 可调，默认 150） */
+  /** 留白判定阈值（逻辑像素，`E2E_WHITESPACE_TOLERANCE` 可调，默认 200；只判「全部展开」） */
   whitespaceTolerance: number;
   /** 点击位移判定阈值（逻辑像素，`E2E_STABILITY_TOLERANCE` 可调，默认 1） */
   stabilityTolerance: number;
@@ -90,7 +91,7 @@ export interface ReportMeta {
 }
 
 /** 留白阈值兜底值（与 `slidev-driver.ts` 的默认值一致，避免报告函数依赖环境变量） */
-export const DEFAULT_WHITESPACE_TOLERANCE = 150;
+export const DEFAULT_WHITESPACE_TOLERANCE = 200;
 /** 点击位移阈值兜底值（与 `slidev-driver.ts` 的默认值一致） */
 export const DEFAULT_STABILITY_TOLERANCE = 1;
 /** 正文越界阈值兜底值（与 `slidev-driver.ts` 的默认值一致） */
@@ -149,9 +150,49 @@ export function countViolations(results: CourseResult[]): number {
   );
 }
 
-/** 「218px（39.5%）」 */
+/** 「上 12px / 下 320px」—— 只看两条边缘空白带，中间有多少空隙不看 */
 export function formatWhitespace(measurement: WhitespaceMeasurement): string {
-  return `${measurement.whitespace}px（${(measurement.ratio * 100).toFixed(1)}%）`;
+  return `上 ${measurement.topWhitespace}px / 下 ${measurement.bottomWhitespace}px`;
+}
+
+/** 「全部展开」状态的标签（`layout-overflow.spec.ts` 的 STATES 用同一个常量） */
+export const EXPANDED_STATE_LABEL = "全部展开";
+
+/** 留白告警的原因：哪一条（或两条）边缘空白带超了阈值 */
+export type WhitespaceHotspotReason = "top" | "bottom" | "both";
+
+const WHITESPACE_REASON_LABELS: Record<WhitespaceHotspotReason, string> = {
+  top: "内容挤在下半页（顶部留白大）",
+  bottom: "内容挤在上半页（底部留白大）",
+  both: "内容挤在中部（上下都留白）",
+};
+
+export function formatWhitespaceReason(reason: WhitespaceHotspotReason): string {
+  return WHITESPACE_REASON_LABELS[reason];
+}
+
+/**
+ * 一条留白判定：两条边缘空白带哪一条超了阈值；都没超返回 `null`。
+ *
+ * **只看边缘、不看中间**——元素少但分散排布（两端空白都不大、中间空一大块）算合格。
+ */
+export function whitespaceHotspotReason(
+  measurement: WhitespaceMeasurement,
+  tolerance: number,
+): WhitespaceHotspotReason | null {
+  const top = measurement.topWhitespace > tolerance;
+  const bottom = measurement.bottomWhitespace > tolerance;
+
+  return top && bottom ? "both" : top ? "top" : bottom ? "bottom" : null;
+}
+
+/** 留白超阈值的一个「页 × 状态」 */
+export interface WhitespaceHotspot {
+  slug: string;
+  check: CheckResult;
+  reason: WhitespaceHotspotReason;
+  /** 严重度 = 两条空白带里较大的那个（排序用） */
+  severity: number;
 }
 
 /** 「下 12px（dx 0 / dy 12）」 */
@@ -199,26 +240,44 @@ export function renderStabilityFailureMessage(results: CourseResult[], tolerance
 }
 
 /**
- * 留白超过阈值的「页面 × 状态」，按留白从大到小排序。
+ * 留白超阈值的「页」，按严重度从大到小排序。
+ *
+ * 判定口径（教师定的规则，三条一起才成立）：
+ *
+ * 1. **只判「全部展开」**：`先问后答` 页初始态只显示题干、留白 300–400px 是设计使然， 把它算进告警会让警告多到没人看（历史数据：约 9 成告警来自初始态）。
+ *    初始态仍然测量、仍然写进报告与控制台明细，只是不产生告警。
+ * 2. **上下对称**：顶部留白大（内容挤在下半页）、底部留白大（内容挤在上半页）、 两条都大（内容挤在中部）都算问题。
+ * 3. **只看边缘空白带**：元素少但**分散排布**（两端空白都不大、中间空一大块）合格， 中间的空隙一律不管。
  *
  * 渲染失败的页面不列入（整页没渲染出来时留白没有意义，而且它已经单独让测试失败了）。
  */
 export function collectWhitespaceHotspots(
   results: CourseResult[],
   tolerance: number,
-): { slug: string; check: CheckResult }[] {
-  return results
-    .flatMap((result) =>
-      result.checks
-        .filter((check) => !check.renderError && check.whitespace.whitespace > tolerance)
-        .map((check) => ({ slug: result.slug, check })),
-    )
-    .sort(
-      (left, right) =>
-        right.check.whitespace.whitespace - left.check.whitespace.whitespace ||
-        left.check.slide - right.check.slide ||
-        left.check.state.localeCompare(right.check.state),
-    );
+): WhitespaceHotspot[] {
+  const hotspots: WhitespaceHotspot[] = [];
+
+  for (const result of results) {
+    for (const check of result.checks) {
+      if (check.renderError) continue;
+      if (check.state !== EXPANDED_STATE_LABEL) continue;
+
+      const reason = whitespaceHotspotReason(check.whitespace, tolerance);
+
+      if (!reason) continue;
+
+      hotspots.push({
+        slug: result.slug,
+        check,
+        reason,
+        severity: Math.max(check.whitespace.topWhitespace, check.whitespace.bottomWhitespace),
+      });
+    }
+  }
+
+  return hotspots.sort(
+    (left, right) => right.severity - left.severity || left.check.slide - right.check.slide,
+  );
 }
 
 /** 每页的「初始态 / 全部展开」留白（控制台与报告的全量明细用） */
@@ -251,23 +310,27 @@ export function groupWhitespaceBySlide(
 export function renderWhitespaceFailureMessage(results: CourseResult[], tolerance: number): string {
   const hotspots = collectWhitespaceHotspots(results, tolerance);
   const lines = [
-    `发现 ${hotspots.length} 个「页面 × 状态」底部留白超过 ${tolerance}px（内容挤在页面上方，可放大字号 / 行距 / 间距，或让布局更充分地铺满页面）：`,
+    `发现 ${hotspots.length} 页「${EXPANDED_STATE_LABEL}」留白超过 ${tolerance}px（只看两条边缘空白带：元素少但分散排布不算问题）：`,
     "",
   ];
 
-  for (const { slug, check } of hotspots) {
+  for (const { slug, check, reason } of hotspots) {
     lines.push(
-      `【${slug}】第 ${check.slide} 页「${check.title || "无标题"}」· ${check.state}：留白 ${formatWhitespace(check.whitespace)}（内容底部 ${check.whitespace.contentBottom}px）`,
+      `【${slug}】第 ${check.slide} 页「${check.title || "无标题"}」：${formatWhitespace(check.whitespace)} —— ${formatWhitespaceReason(reason)}`,
     );
 
-    if (check.whitespace.element?.text)
-      lines.push(`  最后的内容：${check.whitespace.element.text}`);
+    // 指出"是哪一头空着"，直接对应该改哪一块
+    const edge = reason === "top" ? check.whitespace.topElement : check.whitespace.bottomElement;
+
+    if (edge?.text)
+      lines.push(`  ${reason === "top" ? "最靠上的内容" : "最靠下的内容"}：${edge.text}`);
   }
 
   lines.push(
     "",
-    "（`E2E_STRICT_WHITESPACE=1` 打开时才会因此失败；阈值由 `E2E_WHITESPACE_TOLERANCE` 控制，默认 150px）",
-    "调整后留白仍偏大：优先把字号、行距、卡片内边距放大，或让内容在垂直方向居中 / 均分。",
+    "（`E2E_STRICT_WHITESPACE=1` 打开时才会因此失败；阈值由 `E2E_WHITESPACE_TOLERANCE` 控制，默认 200px）",
+    "改法：放大字号 / 行距 / 卡片内边距，或让内容在纵向铺开（`justify-between` / 两栏网格 / 把图放大）。",
+    "只在「初始态」留白大是设计使然（先问后答页点击前只有题干），不会告警。",
     `完整报告：${REPORT_DIR}/layout-overflow.md（机器可读：${REPORT_DIR}/layout-overflow.json）`,
   );
 
@@ -421,25 +484,25 @@ export function renderConsoleSummary(
       lines.push(`   ⚠️ ${layer.title} 溢出：${layer.violations.length} 个元素`);
   }
 
-  // ── 底部留白（与溢出相反方向的体检：哪几页内容挤在上半页，该放大字号 / 间距）──
+  // ── 上下留白（与溢出相反方向的体检：只判「全部展开」，看内容有没有挤在某一端）──
   lines.push(
     hotspots.length
-      ? `   🧭 留白（阈值 ${whitespaceTolerance}px）：⚠️ ${hotspots.length} 个「页面 × 状态」留白偏大`
-      : `   🧭 留白（阈值 ${whitespaceTolerance}px）：✅ 无留白过大页面`,
+      ? `   🧭 留白（阈值 ${whitespaceTolerance}px · 只判「${EXPANDED_STATE_LABEL}」）：⚠️ ${hotspots.length} 页留白偏大`
+      : `   🧭 留白（阈值 ${whitespaceTolerance}px · 只判「${EXPANDED_STATE_LABEL}」）：✅ 无留白过大页面`,
   );
 
-  for (const { check } of hotspots) {
+  for (const { check, reason } of hotspots) {
     lines.push(
-      `     第 ${check.slide} 页「${check.title || "无标题"}」· ${check.state}：留白 ${formatWhitespace(check.whitespace)}，内容底部 ${check.whitespace.contentBottom}px`,
+      `     第 ${check.slide} 页「${check.title || "无标题"}」：${formatWhitespace(check.whitespace)}（${formatWhitespaceReason(reason)}）`,
     );
   }
 
-  // 全量明细（初始态 / 全部展开对照），重排版面时直接看这里
-  lines.push("     留白明细（左 初始态 · 右 全部展开）：");
+  // 全量明细（初始态 / 全部展开对照），重排版面时直接看这里；初始态只记录、不告警
+  lines.push("     留白明细（格式：上 顶部留白 / 下 底部留白）：");
 
   for (const item of groupWhitespaceBySlide(result)) {
     const states = item.states
-      .map((check) => `${check.state} ${check.whitespace.whitespace}px`)
+      .map((check) => `${check.state} ${formatWhitespace(check.whitespace)}`)
       .join(" · ");
 
     lines.push(`     第 ${item.slide} 页「${item.title || "无标题"}」：${states}`);
@@ -633,15 +696,20 @@ export function buildJsonReport(results: CourseResult[], meta: ReportMeta): stri
               blockFit: step.blockFit,
             })),
           },
-          // 留白偏大的页面（按留白从大到小），方便 agent 直接照着重排版面
-          whitespaceHotspots: hotspots.map(({ check }) => ({
+          // 留白偏大的页面（只判「全部展开」，按严重度从大到小），方便 agent 直接照着重排版面
+          whitespaceHotspots: hotspots.map(({ check, reason }) => ({
             slide: check.slide,
             title: check.title,
             state: check.state,
             clicks: check.clicks,
-            whitespace: check.whitespace.whitespace,
-            ratio: check.whitespace.ratio,
+            /** 触发原因：top = 内容挤在下半页，bottom = 挤在上半页，both = 挤在中部 */
+            reason,
+            label: formatWhitespaceReason(reason),
+            topWhitespace: check.whitespace.topWhitespace,
+            bottomWhitespace: check.whitespace.bottomWhitespace,
+            contentTop: check.whitespace.contentTop,
             contentBottom: check.whitespace.contentBottom,
+            contentSpan: check.whitespace.contentSpan,
           })),
           globals: result.globals,
           // 覆盖度：通过的页也写进来，agent 才能确认"每页都真的量到了"
@@ -688,12 +756,12 @@ export function buildMarkdownReport(results: CourseResult[], meta: ReportMeta): 
     `- 检查视口：${meta.viewport.width}×${meta.viewport.height}（16:9）`,
     "- 幻灯片画布：980×552（Slidev 逻辑尺寸，元素坐标已换算成逻辑像素）",
     `- 判定容差：${meta.tolerance}px（小于该值视为亚像素误差）`,
-    `- 留白阈值：${meta.whitespaceTolerance}px（留白 = 552 − 内容底部；\`E2E_WHITESPACE_TOLERANCE\` 可调）`,
+    `- 留白阈值：${meta.whitespaceTolerance}px（只看顶部 / 底部两条边缘空白带，只判「${EXPANDED_STATE_LABEL}」；\`E2E_WHITESPACE_TOLERANCE\` 可调）`,
     `- 位移阈值：${meta.stabilityTolerance}px（点击时已可见元素的位置差；\`E2E_STABILITY_TOLERANCE\` 可调）`,
     `- 正文越界阈值：${meta.blockTolerance}px（正文越出 \`.page-grow\` 可用区域；\`E2E_BLOCK_TOLERANCE\` 可调）`,
     `- 结论：${renderErrors.length > 0 ? `⛔ ${renderErrors.length} 个页面渲染失败` : total === 0 ? "✅ 所有页面均在画面内" : `❌ 共 ${total} 个元素越出画面`}`,
     "",
-    "| 课件 | 页数 | 检查状态数 | 渲染失败页数 | 溢出状态数 | 溢出元素数 | 留白偏大状态数 | 位移步数 | 正文越界步数 |",
+    "| 课件 | 页数 | 检查状态数 | 渲染失败页数 | 溢出状态数 | 溢出元素数 | 留白偏大页数 | 位移步数 | 正文越界步数 |",
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   ];
 
@@ -711,7 +779,9 @@ export function buildMarkdownReport(results: CourseResult[], meta: ReportMeta): 
     "> 判定口径：元素「被祖先 overflow 裁剪后的可见矩形」超出画布才算溢出；",
     "> 全透明（v-click 未展开）与零尺寸元素不计；跨页固定层（顶栏/底栏）单独检查。",
     "> `初始态` = 未点击（clicks=0），`全部展开` = 所有 v-click 都展开。",
-    "> 留白口径：留白 = 552 −「内容底部」，内容底部 = 该页最靠下的可见内容元素的 bottom；",
+    "> 留白口径：顶部留白 = 内容顶部到画布顶的距离，底部留白 = 552 −「内容底部」；",
+    "> **只看这两条边缘空白带**——元素少但分散排布（两端空白都不大）合格，中间的空隙不管；",
+    "> **只判「全部展开」**（初始态只记录明细、不告警：先问后答页点击前只有题干是设计使然）。",
     "> 排除页面容器（`.slidev-layout` 等铺满画布的容器）、跨页固定层、`aria-hidden` 纯装饰与零尺寸/全透明元素。",
     "",
   );
@@ -924,28 +994,37 @@ export function buildMarkdownReport(results: CourseResult[], meta: ReportMeta): 
     "",
   );
 
-  // ── 留白偏大的页面（与溢出相反方向的体检：内容挤在上半页 → 字号 / 间距本可以更大）──
+  // ── 留白偏大的页面（与溢出相反方向的体检：内容挤在某一端 → 字号 / 间距本可以更大）──
+  /** 真正参与留白判定的「页」数（只判「全部展开」，渲染失败的页不计） */
+  const judgedSlides = results.reduce(
+    (sum, result) =>
+      sum +
+      result.checks.filter((check) => check.state === EXPANDED_STATE_LABEL && !check.renderError)
+        .length,
+    0,
+  );
+
   lines.push("## 留白偏大的页面", "");
 
   if (hotspots.length === 0) {
     lines.push(
-      `✅ 无留白过大页面（阈值 ${meta.whitespaceTolerance}px，共 ${results.reduce(
-        (sum, result) => sum + result.checks.length,
-        0,
-      )} 个「页面 × 状态」）。`,
+      `✅ 无留白过大页面（阈值 ${meta.whitespaceTolerance}px，共检查 ${judgedSlides} 页「${EXPANDED_STATE_LABEL}」）。`,
       "",
     );
   } else {
     lines.push(
-      `共 ${hotspots.length} 个「页面 × 状态」留白超过 ${meta.whitespaceTolerance}px（内容挤在页面上方，可放大字号 / 行距 / 间距，或让布局更充分地铺满页面）：`,
+      `共 ${hotspots.length} 页「${EXPANDED_STATE_LABEL}」留白超过 ${meta.whitespaceTolerance}px（只看顶部 / 底部两条边缘空白带；元素少但分散排布合格，中间的空隙不算）：`,
       "",
-      "| 课件 | 页 | 标题 | 状态 | 留白 | 占比 | 内容底部 |",
+      "| 课件 | 页 | 标题 | 判定 | 顶部留白 | 底部留白 | 内容跨度 |",
       "| --- | --- | --- | --- | --- | --- | --- |",
     );
 
-    for (const { slug, check } of hotspots) {
+    for (const { slug, check, reason } of hotspots) {
+      const top = `${check.whitespace.topWhitespace}px`;
+      const bottom = `${check.whitespace.bottomWhitespace}px`;
+
       lines.push(
-        `| ${slug} | 第 ${check.slide} 页 | ${check.title || "无标题"} | ${check.state} | **${check.whitespace.whitespace}px** | ${(check.whitespace.ratio * 100).toFixed(1)}% | ${check.whitespace.contentBottom}px |`,
+        `| ${slug} | 第 ${check.slide} 页 | ${check.title || "无标题"} | ${formatWhitespaceReason(reason)} | ${reason !== "bottom" ? `**${top}**` : top} | ${reason !== "top" ? `**${bottom}**` : bottom} | ${check.whitespace.contentSpan}px |`,
       );
     }
 
@@ -954,22 +1033,22 @@ export function buildMarkdownReport(results: CourseResult[], meta: ReportMeta): 
 
   lines.push(
     "<details>",
-    "<summary>全部页面的留白明细（每页两态，用于判断哪几页该放大字号 / 加大间距）</summary>",
+    "<summary>全部页面的留白明细（每页两态对照；初始态只记录、不告警）</summary>",
     "",
-    "| 课件 | 页 | 标题 | 状态 | 内容底部 | 留白 | 占比 | 最靠下的内容元素 |",
-    "| --- | --- | --- | --- | --- | --- | --- | --- |",
+    "| 课件 | 页 | 标题 | 状态 | 顶部留白 | 底部留白 | 内容跨度 | 最靠上的内容元素 | 最靠下的内容元素 |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   );
 
   for (const result of results) {
     for (const item of groupWhitespaceBySlide(result)) {
       for (const check of item.states) {
-        const element = check.whitespace.element;
-        const location = element
-          ? `\`${element.path}\`${element.text ? ` ｜ ${element.text.replaceAll("|", "\\|")}` : ""}`
-          : "—";
+        const describeEdge = (element?: ContentEdgeElement): string =>
+          element
+            ? `\`${element.path}\`${element.text ? ` ｜ ${element.text.replaceAll("|", "\\|")}` : ""}`
+            : "—";
 
         lines.push(
-          `| ${result.slug} | 第 ${check.slide} 页 | ${item.title || "无标题"} | ${check.state} | ${check.whitespace.contentBottom}px | ${check.whitespace.whitespace}px | ${(check.whitespace.ratio * 100).toFixed(1)}% | ${location} |`,
+          `| ${result.slug} | 第 ${check.slide} 页 | ${item.title || "无标题"} | ${check.state} | ${check.whitespace.topWhitespace}px | ${check.whitespace.bottomWhitespace}px | ${check.whitespace.contentSpan}px | ${describeEdge(check.whitespace.topElement)} | ${describeEdge(check.whitespace.bottomElement)} |`,
         );
       }
     }
@@ -980,13 +1059,13 @@ export function buildMarkdownReport(results: CourseResult[], meta: ReportMeta): 
     "</details>",
     "",
     `> 留白默认只报告、不让测试失败（其它课件本来就可能有大留白）；设 \`E2E_STRICT_WHITESPACE=1\` 后，`,
-    `> 留白超过阈值会让测试失败并在失败信息里列出具体页面。阈值用 \`E2E_WHITESPACE_TOLERANCE\` 调整（默认 150px）。`,
+    `> 留白超过阈值会让测试失败并在失败信息里列出具体页面。阈值用 \`E2E_WHITESPACE_TOLERANCE\` 调整（默认 200px）。`,
     "",
     "## 修复提示",
     "",
     "- **下 / 右溢出**（最常见）：内容比画布高/宽。压缩行距、内边距、字号、SVG 尺寸，或把垂直堆叠改成两栏网格。",
     "- **上 / 左溢出**：负 margin、绝对定位（`-top-*` / `-left-*`）越界，检查装饰元素是否被 `overflow-hidden` 裁剪。",
-    "- **留白偏大**（与溢出相反）：内容没占满画布高度。优先放大字号 / 行距 / 卡片内边距，或把内容在垂直方向居中、均分（`justify-between`），也可改用两栏网格撑满。",
+    "- **留白偏大**（与溢出相反）：内容挤在画布某一端（顶部 / 底部留白超阈值）。优先放大字号 / 行距 / 卡片内边距，或让内容在纵向铺开（`justify-between` / 两栏网格 / 把图放大）；元素少但分散排布不算问题。",
     "- **正文越出 `.page-grow` 可用区域**（上顶标题 / 下被裁）：正文总高超过正文容器的可用高度。压**最外层**越界元素（缩小 SVG / 字号 / 行距，或把垂直堆叠改成两栏），内容确实多就拆成两页。",
     "- 只改「最外层溢出元素」通常就能连带解决内部被牵连的元素。",
     "- 改完重跑 `pnpm test:e2e` 复验。",

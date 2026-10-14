@@ -39,4 +39,4 @@
 - **坐标图用"固定坐标范围 + 真实公式算出来的曲线"**：范围写死，纵轴映射分两种（`mapY` 数值越大越高、`mapDown` 数值越大越低，后者给"向下为正"的 $x-t$ 图）；**坐标轴不自适应参数**（第 20–23 页干脆没有参数、没有滑块）。
 - 组件里的数值一律由真实公式在 `computed` 里算：$h=\frac12gt^2$（牛顿管）、$x=-v_0t+\frac12gt^2$（上抛四图采样）、相遇模型 $v_{B0}=2v$、$H_A=H_{B\max}=\frac{2v^2}{g}$；$g$ 取 $10\ \text{m/s}^2$（教材"粗略计算"）。
 - 正文里 HTML 块中的公式一律用 `<Latex tex="…" />`；`<v-clicks>` / `<v-click>` 与它们的子块必须顶到第 0 列（缩进 4 空格会被 markdown 当成代码块，整页 500）。
-- 校验：`E2E_COURSE=2.4-free-fall pnpm exec playwright test e2e/layout-overflow.spec.ts`（四类检查：溢出画布 / 底部留白 / 点击位移 / 正文越界）。
+- 校验：`E2E_COURSE=2.4-free-fall pnpm exec playwright test e2e/layout-overflow.spec.ts`（四类检查：溢出画布 / 上下留白 / 点击位移 / 正文越界）。

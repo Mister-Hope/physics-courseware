@@ -44,8 +44,8 @@ export interface OverflowViolation {
   position: string;
 }
 
-/** 「内容底部」的定位信息（报告里用来说明"最后一行内容是什么"，便于直接去改那一块） */
-export interface ContentBottomElement {
+/** 「内容边界」元素的定位信息（报告里用来说明"最靠上 / 最靠下的一块内容是什么"，便于直接去改那一块） */
+export interface ContentEdgeElement {
   /** 给人和 agent 看的 DOM 路径（含 class，最多 5 段） */
   path: string;
   /** 可直接 `querySelector` 的稳定选择器（相对幻灯片根） */
@@ -85,21 +85,37 @@ export interface VisibleElementSnapshot {
 }
 
 /**
- * 页面底部留白测量（逻辑像素）。
+ * 页面上下留白测量（逻辑像素）。
  *
- * 「内容底部」= 该页**最靠下的可见内容元素**的 bottom；「留白」= 画布高度（552）− 内容底部。
+ * 「内容」= 该页**最靠上 / 最靠下的可见内容元素**：
  *
- * ⚠️ 不能用 `.slidev-layout` 这类铺满画布的容器当内容底部，否则留白恒为 0。所有排除规则见 `measureLayout` 里的内容元素判定。
+ * - **顶部留白** = 内容顶部到画布顶的距离（内容挤在下半页时它很大）
+ * - **底部留白** = 画布高（552）− 内容底部（内容挤在上半页、或挤在中间时它很大）
+ * - **内容纵向跨度** = 画布高 − 顶部留白 − 底部留白（元素少但**分散排列**时它照样很大 → 不算问题）
+ *
+ * 判定只看这两条"边缘空白带"：**中间有多少空隙一律不管**（教师明确要求：元素少但分散排布是 OK 的）。
+ *
+ * ⚠️ 不能用 `.slidev-layout` 这类铺满画布的容器当内容边界，否则两条留白恒为 0。所有排除规则见 `measureLayout` 里的内容元素判定。
  */
 export interface WhitespaceMeasurement {
-  /** 内容底部到画布顶部的距离（逻辑像素），= 552 − whitespace */
+  /** 顶部留白（逻辑像素）：画布顶 → 最靠上的内容 top；负数表示内容越过画布顶部 */
+  topWhitespace: number;
+  /** 底部留白（逻辑像素）：最靠下的内容 bottom → 画布底；负数表示内容已经越过画布底部 */
+  bottomWhitespace: number;
+  /** 内容纵向跨度（逻辑像素） */
+  contentSpan: number;
+  /** 内容顶部到画布顶的距离（逻辑像素） */
+  contentTop: number;
+  /** 内容底部到画布顶的距离（逻辑像素） */
   contentBottom: number;
-  /** 画布底部到内容底部的留白（逻辑像素）；负数表示内容已经越过画布底部 */
-  whitespace: number;
-  /** 留白占画布高度的比例（1 = 整页空白，0 = 内容刚好到底）；负数表示溢出 */
-  ratio: number;
-  /** 最靠下的内容元素（没量到内容元素时为 undefined，此时留白按 0 处理） */
-  element?: ContentBottomElement;
+  /** 顶部留白占画布高度的比例（1 = 整页空白，0 = 内容贴到画布顶） */
+  topRatio: number;
+  /** 底部留白占画布高度的比例（1 = 整页空白，0 = 内容刚好到底） */
+  bottomRatio: number;
+  /** 最靠上的内容元素（没量到内容元素时为 undefined，此时两条留白都按 0 处理） */
+  topElement?: ContentEdgeElement;
+  /** 最靠下的内容元素 */
+  bottomElement?: ContentEdgeElement;
 }
 
 /**
@@ -169,7 +185,7 @@ export interface LayoutMeasureResult {
   /** 这一页渲染失败（Slidev 的错误占位页）：此时"没有溢出"毫无意义，必须单独报出来 */
   renderError: boolean;
   violations: OverflowViolation[];
-  /** 页面底部留白（"内容挤在上半页"的教学问题，与溢出相反方向的体检） */
+  /** 页面上下留白（"内容挤在上半页 / 下半页 / 中部"的教学问题，与溢出相反方向的体检） */
   whitespace: WhitespaceMeasurement;
   /** 正文是否越出 `.page-grow` 的可用区域（顶出上边界 / 超出下边界） */
   blockFit: BlockFitMeasurement;
@@ -244,7 +260,15 @@ export function measureLayout(payload: LayoutMeasurePayload): LayoutMeasureResul
       scanned: 0,
       renderError: true,
       violations: [],
-      whitespace: { contentBottom: 0, whitespace: 0, ratio: 0 },
+      whitespace: {
+        topWhitespace: 0,
+        bottomWhitespace: 0,
+        contentSpan: 0,
+        contentTop: 0,
+        contentBottom: 0,
+        topRatio: 0,
+        bottomRatio: 0,
+      },
       blockFit: emptyBlockFit(),
       elements: collectElements ? [] : undefined,
     };
@@ -508,20 +532,25 @@ export function measureLayout(payload: LayoutMeasurePayload): LayoutMeasureResul
   const PAGE_CONTAINER_SELECTOR =
     "#slide-content, #slide-container, #slideshow, .slidev-layout, .slidev-page, .global-top, .global-bottom";
 
+  /** 一次"可见范围"（已被祖先 overflow 裁剪后的上下左右边界，画布逻辑像素） */
+  interface VisibleRange {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+  }
+
   /**
-   * 判断一个元素能不能代表"页面内容底部"。
+   * 判断一个元素能不能代表"页面内容边界"（量上下留白时的取样对象）。
    *
-   * 排除的都是**不是内容**或**必然贴到画布底部**的东西，否则留白会被算成 0：
+   * 排除的都是**不是内容**或**必然贴到画布某一端**的东西，否则留白会被算成 0：
    *
-   * - 页面容器自身（`.slidev-layout` 铺满 552px，它的 bottom 就是画布底部）
+   * - 页面容器自身（`.slidev-layout` 铺满 552px，它的 top/bottom 就是画布两端）
    * - 铺满整个画布高度的元素（背景 / 全高布局容器 / `inset-y-0` 装饰条）
    * - 跨页固定层（顶栏 / 底栏）与 `position: fixed` 元素
    * - `aria-hidden="true"` 的纯装饰（例如封面右下角那幅贴底的对角线矢量图）
    */
-  const isContentBottomCandidate = (
-    element: Element,
-    visible: { top: number; bottom: number },
-  ): boolean => {
+  const isContentEdgeCandidate = (element: Element, visible: VisibleRange): boolean => {
     if (element.matches(PAGE_CONTAINER_SELECTOR)) return false;
     if (element.closest(".global-top, .global-bottom")) return false;
     if (element.closest('[aria-hidden="true"]')) return false;
@@ -532,9 +561,9 @@ export function measureLayout(payload: LayoutMeasurePayload): LayoutMeasureResul
     return true;
   };
 
-  let lowestContent:
-    | { element: Element; visible: { left: number; right: number; top: number; bottom: number } }
-    | undefined;
+  /** 内容边界（最靠上 / 最靠下的那个元素及其可见范围） */
+  let lowestContent: { element: Element; visible: VisibleRange } | undefined;
+  let highestContent: { element: Element; visible: VisibleRange } | undefined;
 
   // ── 正文越界（`.page-grow` 的可用区域）──
   // 判定：可见内容元素的可见矩形与 `.page-grow` 的 **padding box** 求交，顶出上边界 / 超出下边界的记为越界。
@@ -626,13 +655,13 @@ export function measureLayout(payload: LayoutMeasurePayload): LayoutMeasureResul
         });
     }
 
-    // 留白测量：记录最靠下的可见内容元素（与溢出判定共用同一轮遍历与同一套可见性过滤）
-    if (
-      logicalHeight > 0 &&
-      isContentBottomCandidate(element, visible) &&
-      (!lowestContent || visible.bottom > lowestContent.visible.bottom)
-    ) {
-      lowestContent = { element, visible };
+    // 留白测量：记录最靠上 / 最靠下的可见内容元素（与溢出判定共用同一轮遍历与同一套可见性过滤）
+    if (logicalHeight > 0 && isContentEdgeCandidate(element, visible)) {
+      if (!lowestContent || visible.bottom > lowestContent.visible.bottom)
+        lowestContent = { element, visible };
+
+      if (!highestContent || visible.top < highestContent.visible.top)
+        highestContent = { element, visible };
     }
 
     // 统一换算成画布的逻辑像素：画布 980×552，屏幕上按 scale 等比缩放
@@ -714,34 +743,54 @@ export function measureLayout(payload: LayoutMeasurePayload): LayoutMeasureResul
     root.textContent ?? "",
   );
 
-  // 「留白」= 画布高度 − 内容底部；量不到任何内容元素时（例如量的是顶栏/底栏）按 0 留白处理，
-  // 不能报成"整页空白"
+  /** 内容边界元素的定位信息（报告里用来说明"最靠上 / 最靠下的是哪一块"） */
+  const describeEdgeElement = (content: {
+    element: Element;
+    visible: VisibleRange;
+  }): ContentEdgeElement => ({
+    path: describePath(content.element),
+    selector: describeSelector(content.element),
+    indexPath: describeIndexPath(content.element),
+    tag: content.element.tagName.toLowerCase(),
+    classes: [...content.element.classList].filter((name) => !name.startsWith("data-v")),
+    text: (content.element instanceof HTMLElement
+      ? content.element.innerText
+      : content.element.textContent || ""
+    )
+      .trim()
+      .replace(/\s+/g, " ")
+      .slice(0, 80),
+    rect: {
+      x: ROUND((content.visible.left - canvasRect.left) / scale),
+      y: ROUND((content.visible.top - canvasRect.top) / scale),
+      width: ROUND((content.visible.right - content.visible.left) / scale),
+      height: ROUND((content.visible.bottom - content.visible.top) / scale),
+    },
+  });
+
+  // 「上下留白」= 两条边缘空白带：
+  //   顶部留白 = 内容顶部到画布顶的距离；底部留白 = 画布高 − 内容底部。
+  // 量不到任何内容元素时（例如量的是顶栏/底栏）两条都按 0 处理，不能报成"整页空白"。
+  const contentTop = highestContent
+    ? ROUND((highestContent.visible.top - canvasRect.top) / scale)
+    : 0;
   const contentBottom = lowestContent
     ? ROUND((lowestContent.visible.bottom - canvasRect.top) / scale)
     : logicalHeight;
-  const whitespace = ROUND(logicalHeight - contentBottom);
-  const whitespaceElement: ContentBottomElement | undefined = lowestContent
-    ? {
-        path: describePath(lowestContent.element),
-        selector: describeSelector(lowestContent.element),
-        indexPath: describeIndexPath(lowestContent.element),
-        tag: lowestContent.element.tagName.toLowerCase(),
-        classes: [...lowestContent.element.classList].filter((name) => !name.startsWith("data-v")),
-        text: (lowestContent.element instanceof HTMLElement
-          ? lowestContent.element.innerText
-          : lowestContent.element.textContent || ""
-        )
-          .trim()
-          .replace(/\s+/g, " ")
-          .slice(0, 80),
-        rect: {
-          x: ROUND((lowestContent.visible.left - canvasRect.left) / scale),
-          y: ROUND((lowestContent.visible.top - canvasRect.top) / scale),
-          width: ROUND((lowestContent.visible.right - lowestContent.visible.left) / scale),
-          height: ROUND((lowestContent.visible.bottom - lowestContent.visible.top) / scale),
-        },
-      }
-    : undefined;
+  const topWhitespace = ROUND(contentTop);
+  const bottomWhitespace = ROUND(logicalHeight - contentBottom);
+
+  const whitespace: WhitespaceMeasurement = {
+    topWhitespace,
+    bottomWhitespace,
+    contentSpan: ROUND(contentBottom - contentTop),
+    contentTop,
+    contentBottom,
+    topRatio: ROUND(topWhitespace / logicalHeight, 4),
+    bottomRatio: ROUND(bottomWhitespace / logicalHeight, 4),
+    topElement: highestContent ? describeEdgeElement(highestContent) : undefined,
+    bottomElement: lowestContent ? describeEdgeElement(lowestContent) : undefined,
+  };
 
   // ── 正文越界结果：outermost = 根因元素（父级都没越界 → 改它一处就能连带解决子元素）──
   const blockSeen = new Set(blockFound.map((item) => item.element));
@@ -864,12 +913,7 @@ export function measureLayout(payload: LayoutMeasurePayload): LayoutMeasureResul
     scanned,
     renderError,
     violations: violations.sort((left, right) => right.severity - left.severity),
-    whitespace: {
-      contentBottom,
-      whitespace,
-      ratio: ROUND(whitespace / logicalHeight, 4),
-      element: whitespaceElement,
-    },
+    whitespace,
     blockFit,
     elements,
   };

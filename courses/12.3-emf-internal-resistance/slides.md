@@ -87,14 +87,14 @@ clicks: 2
 <div class="stack">
 <VoltAmpOuter :step="$clicks" />
 <div v-click="1" class="stack-tight">
-<div class="mini-title">电流表外接法</div>
+<div class="mini-title"><mdi-swap-horizontal class="icon-md" />电流表外接法</div>
 <div>电流表只串在外电路（变阻器）这一支路上。</div>
 </div>
 </div>
 <div class="stack">
 <VoltAmpInner :step="$clicks" />
 <div v-click="2" class="stack-tight">
-<div class="mini-title">电流表内接法</div>
+<div class="mini-title"><mdi-vector-polyline class="icon-md" />电流表内接法</div>
 <div>电流表与电源同在干路上，测的就是干路电流。</div>
 </div>
 </div>
@@ -169,14 +169,11 @@ clicks: 2
 # 外接法：电压表的分流
 
 <div class="page-grow">
-<div class="method-chip"><mdi-calculator />分析方法 1 · 计算法</div>
+<div class="tag-icon"><mdi-calculator />分析方法 1 · 计算法</div>
 
 <div class="ask">电压表也要分走电流——电流表读数偏小，会让 <Latex tex="E" />、<Latex tex="r" /> 偏大还是偏小？</div>
 
-<div v-click="1" class="stack">
-<div>电压表也有电流流过：<Latex tex="I_V = \dfrac{U}{R_V}" />。这部分电流不经过电流表，却来自电源。</div>
-<div>所以流过电源的真实电流是 <Latex tex="I_0 = I + \dfrac{U}{R_V}" />——电流表读数 <Latex tex="I" /> 偏小。用真实电流列方程（修正）：</div>
-</div>
+<div v-click="1">电压表也有电流流过：<Latex tex="I_V = \dfrac{U}{R_V}" />。这部分电流不经过电流表、却来自电源，所以流过电源的真实电流是 <Latex tex="I_0 = I + \dfrac{U}{R_V}" />——电流表读数 <Latex tex="I" /> 偏小。用真实电流列方程（修正）：</div>
 
 <div v-click="2">
 <Latex tex="\begin{cases} E_0 = U_1 + \left(I_1 + \dfrac{U_1}{R_V}\right) r_0 \\ E_0 = U_2 + \left(I_2 + \dfrac{U_2}{R_V}\right) r_0 \end{cases}" display />
@@ -190,8 +187,6 @@ clicks: 2
 # 外接法：真值与测量值
 
 <div class="page-grow">
-<div class="method-chip"><mdi-calculator />分析方法 1 · 计算法</div>
-
 <div>由修正方程解得真值——两个式子的分母都比测量值的小：</div>
 
 <Latex tex="E_0 = \dfrac{U_1 I_2 - U_2 I_1}{I_2 - I_1 - \frac{U_1 - U_2}{R_V}} > E_{\text{测}}" display />
@@ -212,7 +207,7 @@ clicks: 3
 
 <div class="half-grid">
 <div class="stack">
-<div class="method-chip"><mdi-chart-line />分析方法 2 · 图像法</div>
+<div class="tag-icon"><mdi-chart-line />分析方法 2 · 图像法</div>
 <div v-click="1">测量线（蓝）：纵截距 <Latex tex="E_{\text{测}} < E_0" />，斜率绝对值 <Latex tex="r_{\text{测}} < r_0" />。</div>
 <div v-click="2">真实线（红）：电压表分流后的真实关系——截距更大、直线更陡。</div>
 <div v-click="3" class="key">两条线在横轴上交于同一点：<Latex tex="U = 0" /> 时电压表不分流，电流表读数就是真实的短路电流。</div>
@@ -230,7 +225,7 @@ clicks: 3
 # 外接法：把电压表"并进"电源
 
 <div class="page-grow">
-<div class="method-chip"><mdi-swap-horizontal />分析方法 3 · 等效法</div>
+<div class="tag-icon"><mdi-swap-horizontal />分析方法 3 · 等效法</div>
 
 <div class="ask">电压表并联在电源两端——能不能把"电压表 + 电源"看成一个新电源？</div>
 
@@ -248,7 +243,7 @@ clicks: 3
 # 内接法：电流表的分压
 
 <div class="page-grow">
-<div class="method-chip"><mdi-calculator />分析方法 1 · 计算法</div>
+<div class="tag-icon"><mdi-calculator />分析方法 1 · 计算法</div>
 
 <div v-click="1" class="stack">
 <div>电流表有内阻 <Latex tex="R_A" />，它分走电压 <Latex tex="I R_A" />。</div>
@@ -272,7 +267,7 @@ clicks: 3
 
 <div class="half-grid">
 <div class="stack">
-<div class="method-chip"><mdi-chart-line />分析方法 2 · 图像法</div>
+<div class="tag-icon"><mdi-chart-line />分析方法 2 · 图像法</div>
 <div v-click="1">测量线（蓝）：斜率绝对值是 <Latex tex="r_0 + R_A" />，比真实线更陡。</div>
 <div v-click="2">真实线（红）：斜率绝对值只是 <Latex tex="r_0" />。</div>
 <div v-click="3" class="key">两条线在纵轴上交于同一点：<Latex tex="I = 0" /> 时电流表不分压，纵截距就是真实的电动势 <Latex tex="E_{\text{测}} = E_0" />。</div>
@@ -290,7 +285,7 @@ clicks: 2
 # 内接法：把电流表"串进"电源
 
 <div class="page-grow">
-<div class="method-chip"><mdi-swap-horizontal />分析方法 3 · 等效法</div>
+<div class="tag-icon"><mdi-swap-horizontal />分析方法 3 · 等效法</div>
 
 <div class="ask">把"电流表 + 电源"看成一个新电源，它的 <Latex tex="E" /> 和 <Latex tex="r" /> 是多少？</div>
 
@@ -309,12 +304,12 @@ clicks: 2
 <div class="ask">测干电池（内阻很小），该选哪种接法？</div>
 
 <div v-click="1" class="stack">
-<div class="mini-title">测干电池（内阻很小）</div>
+<div class="mini-title"><mdi-battery class="icon-md" />测干电池（内阻很小）</div>
 <div>用<b>外接法</b>：只要 <Latex tex="R_V \gg r_0" />，<Latex tex="E" />、<Latex tex="r" /> 的偏差都很小——教材的参考案例 1 就用它。</div>
 </div>
 
 <div v-click="2" class="stack">
-<div class="mini-title">测内阻大的电源</div>
+<div class="mini-title"><mdi-fruit-citrus class="icon-md" />测内阻大的电源</div>
 <div>内接法把电流表内阻计进内阻，只有 <Latex tex="r_0 \gg R_A" /> 时误差才小（如内阻上千欧的水果电池）。</div>
 </div>
 </div>
@@ -340,7 +335,7 @@ clicks: 1
 # 伏阻法：用 $R$ 算出 $I$
 
 <div class="page-grow">
-<div class="split-narrow">
+<div class="split-wide split-narrow">
 <div class="stack">
 <VoltResCircuit :step="$clicks" />
 <Latex tex="E = U + \dfrac{U}{R} r" display />
@@ -419,8 +414,8 @@ clicks: 1
 <div class="ask ask-lead">反过来：只有电流表和电阻箱，没有电压表呢？</div>
 
 <div v-click="1" class="stack">
-<div>电流表测干路电流 <Latex tex="I" />，电阻箱给出已知的 <Latex tex="R" />。</div>
-<div>由 <Latex tex="E = I(R + r)" /> 直接列方程，两组 <Latex tex="(I,\ R)" /> 就能解出 <Latex tex="E" />、<Latex tex="r" />。</div>
+<div class="key key-lead">没有电压表，就用<b>电流表 + 电阻箱</b>：电流表测干路电流 <Latex tex="I" />，电阻箱给出已知的外电阻 <Latex tex="R" />，由 <Latex tex="E = I(R + r)" /> 直接列方程。</div>
+<div>测两组 <Latex tex="(I,\ R)" />，就能解出 <Latex tex="E" />、<Latex tex="r" />。</div>
 </div>
 </div>
 
@@ -431,7 +426,7 @@ clicks: 1
 # 安阻法：电压不用测
 
 <div class="page-grow">
-<div class="split-narrow">
+<div class="split-wide split-narrow">
 <div class="stack">
 <AmpResCircuit :step="$clicks" />
 <Latex tex="E = I(R + r)" display />

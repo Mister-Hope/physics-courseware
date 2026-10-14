@@ -11,6 +11,7 @@ import {
   collectBlockFitSlides,
   collectBlockFitViolations,
   collectWhitespaceHotspots,
+  EXPANDED_STATE_LABEL,
   formatDirections,
   renderBlockFitFailureMessage,
   renderConsoleSummary,
@@ -88,7 +89,7 @@ const PAGE_FILTER = parsePageFilter(process.env.E2E_PAGES);
 
 const STATES = [
   { label: "初始态", clicks: 0, suffix: "rest" },
-  { label: "全部展开", clicks: ALL_CLICKS, suffix: "all" },
+  { label: EXPANDED_STATE_LABEL, clicks: ALL_CLICKS, suffix: "all" },
 ] as const;
 
 /** 汇总给合并报告用（同文件、单 worker，因此顺序收集是安全的） */
@@ -109,10 +110,18 @@ const META: ReportMeta = {
  * 判定：元素「被祖先 overflow 裁剪后的可见矩形」超出 `#slide-content`（980×552 逻辑画布）即算溢出。 每页检查两个状态（未点击 / 全部展开），因为
  * v-click 展开后布局会变化。
  *
- * 同时测量**页面底部留白**（留白 = 552 − 内容底部）：全绿只说明"没溢出"，但内容全挤在上半页、 下半页一片空白同样是教学问题（字号 /
- * 行距本可以更大）。留白只报告、默认不让测试失败， 相关环境变量：
+ * 同时测量**页面上下留白**（两条边缘空白带：顶部留白 = 画布顶 → 内容顶部；底部留白 = 内容底部 → 画布底）： 全绿只说明"没溢出"，但内容全挤在上半页 / 下半页 /
+ * 中部，版面本可以更大气（字号 / 行距 / 间距本可以更大）同样是教学问题。
  *
- * - `E2E_WHITESPACE_TOLERANCE`：留白阈值（逻辑像素），默认 **150**；超过就在报告里列为"留白偏大"
+ * 判定口径（教师定的规则）：
+ *
+ * - **只看边缘空白带**：元素少但**分散排布**（两端空白都不大、中间空一大块）合格——中间的空隙一律不看
+ * - **上下对称**：顶部留白大（挤在下半页）、底部留白大（挤在上半页）、两条都大（挤在中部）都算问题
+ * - **只判「全部展开」**：初始态只记录明细、不告警（`先问后答` 页点击前只有题干是设计使然， 历史数据里约 9 成告警来自初始态，全报会让警告失去信噪比）
+ *
+ * 留白只报告、默认不让测试失败，相关环境变量：
+ *
+ * - `E2E_WHITESPACE_TOLERANCE`：留白阈值（逻辑像素），默认 **200**；超过就在报告里列为"留白偏大"
  * - `E2E_STRICT_WHITESPACE=1`：打开后留白超阈值会让测试失败（失败信息里列出具体页面）。 默认关闭，因为其它课件本来可能就有大留白，直接 fail 会把 CI 弄红
  *
  * 还检查**点击过程的布局稳定性**：从第 0 步逐步点到 `clicksTotal`，相邻两步之间取"两步都可见"的元素按 稳定标识配对，位置差超过容差即算"已可见元素被顶跑"（元素出现 /
@@ -327,7 +336,8 @@ for (const course of listCourses()) {
       expect(renderErrorCount, renderFailureMessage([result])).toBe(0);
       expect(violationCount, renderFailureMessage([result])).toBe(0);
 
-      // 底部留白默认只报告（其它课件本来可能就有大留白），只有显式打开严格开关才让它失败
+      // 上下留白默认只报告（其它课件本来可能就有大留白），只有显式打开严格开关才让它失败；
+      // hotspots 只含「全部展开」，初始态的留白仅记录在明细里
       if (STRICT_WHITESPACE) {
         const hotspots = collectWhitespaceHotspots([result], WHITESPACE_TOLERANCE);
 
