@@ -21,6 +21,10 @@ const CARD_BUDGET = 15;
 /** 共享样式正本目录（common / layout / atoms 三个文件里的类 = 全部合法共享原子） */
 const SHARED_STYLES_DIR = path.join(ROOT, "workspace", "shared", "styles");
 
+// 读文件（不存在算空串）。声明放在最前：模块顶层的初始化就可能用到它，
+// 若挪到下面、又有人改成 `const` 之前的顶层调用，会掉进暂时性死区（TDZ）。
+const read = (file: string): string => (existsSync(file) ? readFileSync(file, "utf8") : "");
+
 /**
  * 共享原子全集 —— **从正本 CSS 现读**，不手工维护。
  *
@@ -28,7 +32,7 @@ const SHARED_STYLES_DIR = path.join(ROOT, "workspace", "shared", "styles");
  * `.data-table`/`.split-wide`/`.ok`/`.step-list` 等 12 个原子后清单没跟上，
  * 子代理一用就被误报成"裸类名"、被迫绕开正本写私有值（真踩过）。现在直接扫 CSS 顶层选择器。
  *
- * @returns 全部共享原子类名
+ * @returns 三个正本样式文件里定义的共享原子类名
  */
 const sharedAtomClasses = (): Set<string> => {
   const atoms = new Set<string>();
@@ -149,6 +153,9 @@ const PROTECTED_SELECTORS: [label: string, pattern: RegExp][] = [
 
 const CLASS_ATTR = /(?<![:\w-])class="(?<classes>[^"]*)"/gu;
 const CLASS_DEF = /^\s*\.(?<name>[a-zA-Z][\w-]*)/mu;
+/** 与 `CLASS_DEF` 同源，但带 `g`（`matchAll` 要求）——全仓多处复用，避免每次 new RegExp */
+const CLASS_DEF_GLOBAL = new RegExp(CLASS_DEF.source, "gmu");
+const STYLE_BLOCK = /<style[^>]*>(?<block>[\s\S]*?)<\/style>/gu;
 const ICON = /<(?<icon>mdi-[a-z0-9-]+)/gu;
 /** 允许给图标放大的字号类：共享阶梯（带 `!important`）+ 图标专用 `.icon-*`（也带 `!important`） */
 const ICON_SIZE_OK = /^(?:(?<text>text-(?:[2-5]xl))|(?<icon>icon-(?:md|lg|xl|2xl)))$/u;
@@ -171,18 +178,11 @@ interface Finding {
   message: string;
 }
 
-// 用 function 声明（会被提升）：`SHARED_ATOMS` 在模块顶部就要调用它，
-// 若写成 const 箭头函数会掉进暂时性死区（TDZ）——`Cannot access 'read' before initialization`。
-// eslint-disable-next-line func-style
-function read(file: string): string {
-  return existsSync(file) ? readFileSync(file, "utf8") : "";
-}
-
 /**
  * 本课 slides.md + components/*.vue 里的所有源码文本
  *
  * @param dir 课件目录
- * @returns 拼好的源码文本
+ * @returns 该课 slides.md 与全部组件源码拼成的文本
  */
 const courseSources = (dir: string): string => {
   const parts = [read(path.join(dir, "slides.md"))];
@@ -198,18 +198,17 @@ const courseSources = (dir: string): string => {
 };
 
 /**
- * 把一段文本里的 `.类名` 定义收进集合——抽成独立函数，顺带把 `max-depth` 压回 4 以内
+ * 一个组件源码里 `<style>` 段定义的类名（模板里的 `class="…"` 属性值不算）。
  *
- * @param text 待扫描的文本
- * @param into 收进哪个集合
+ * @param vue 组件源码（.vue 全文）
+ * @returns 该组件样式段里定义的类名
  */
-const collectClassNames = (text: string, into: Set<string>): void => {
-  for (const match of text.matchAll(new RegExp(CLASS_DEF.source, "gu"))) {
-    const name = match.groups?.name ?? "";
-
-    if (name) into.add(name);
-  }
-};
+const styleBlockClasses = (vue: string): string[] =>
+  [...vue.matchAll(STYLE_BLOCK)].flatMap((match) =>
+    [...(match.groups?.block ?? "").matchAll(CLASS_DEF_GLOBAL)].map(
+      (item) => item.groups?.name ?? "",
+    ),
+  );
 
 /**
  * 本课**定义过**的类名 = `style.css` 里定义的 ∪ 各组件 `<style>`（含 scoped）里定义的。
@@ -219,22 +218,21 @@ const collectClassNames = (text: string, into: Set<string>): void => {
  *
  * @param dir 课件目录
  * @param css 本课 `style.css` 全文
- * @returns 本课定义过的类名集合
+ * @returns 本课定义过的全部类名
  */
 const courseDefinedClasses = (dir: string, css: string): Set<string> => {
-  const defined = new Set<string>();
+  const defined = new Set(
+    [...css.matchAll(CLASS_DEF_GLOBAL)].map((match) => match.groups?.name ?? ""),
+  );
   const components = path.join(dir, "components");
+  const componentFiles = existsSync(components)
+    ? readdirSync(components).filter((file) => file.endsWith(".vue"))
+    : [];
+  const componentClasses = componentFiles.flatMap((name) =>
+    styleBlockClasses(read(path.join(components, name))),
+  );
 
-  collectClassNames(css, defined);
-
-  if (existsSync(components)) {
-    for (const name of readdirSync(components).filter((file) => file.endsWith(".vue"))) {
-      const vue = read(path.join(components, name));
-      // 只取 <style>…</style> 段，避免把模板里的 class="…" 属性值当成选择器
-      for (const { groups } of vue.matchAll(/<style[^>]*>(?<block>[\s\S]*?)<\/style>/gu))
-        collectClassNames(groups?.block ?? "", defined);
-    }
-  }
+  for (const cls of componentClasses) if (cls) defined.add(cls);
 
   return defined;
 };
@@ -242,8 +240,8 @@ const courseDefinedClasses = (dir: string, css: string): Set<string> => {
 /**
  * 是否像 UnoCSS 工具类（`mt-2` / `grid-cols-3` / `text-center` …）
  *
- * @param token 类名 token
- * @returns 命中工具类前缀时为 `true`
+ * @param token `class="…"` 里的一个类名
+ * @returns 命中工具类前缀表返回 true
  */
 const isUtility = (token: string): boolean => {
   const [head] = token.split("-");
@@ -255,8 +253,8 @@ const isUtility = (token: string): boolean => {
 /**
  * 拆出一条源码行里 `class="…"` 的所有类名 token
  *
- * @param line 一行源码
- * @returns 类名 token 列表
+ * @param line 源码的一行
+ * @returns 该行 `class` 属性里的全部类名
  */
 const classTokens = (line: string): string[] =>
   [...line.matchAll(CLASS_ATTR)].flatMap((match) => (match.groups?.classes ?? "").split(/\s+/u));
@@ -266,8 +264,8 @@ const classTokens = (line: string): string[] =>
 /**
  * ① 卡片数量（§4：一份课件 ≤15，超出该用 .ask/.key/.divider-l）
  *
- * @param sources 本课源码文本
- * @returns 卡片数与发现
+ * @param sources 本课 slides.md + 组件源码
+ * @returns 卡片数与对应发现
  */
 const checkCards = (sources: string): { cards: number; findings: Finding[] } => {
   const cards = classTokens(sources).filter((token) => /^card[a-z0-9-]*$/u.test(token)).length;
@@ -289,8 +287,8 @@ const checkCards = (sources: string): { cards: number; findings: Finding[] } => 
 /**
  * ② 图标数量（§5：并列条目 / 概念三栏 / 步骤条该配扫读图标）
  *
- * @param icons 图标数量
- * @returns 发现列表
+ * @param icons 全课图标数
+ * @returns 图标为 0 时的建议
  */
 const checkIconCount = (icons: number): Finding[] =>
   icons === 0
@@ -305,8 +303,8 @@ const checkIconCount = (icons: number): Finding[] =>
 /**
  * ②b 图标字号（§5：UnoCSS 的 text-* 不带 !important，压不过 common.css 给 svg 钉的 16px 基准）
  *
- * @param sources 本课源码文本
- * @returns 发现列表
+ * @param sources 本课 slides.md + 组件源码
+ * @returns 图标用了压不过 16px 基准的 UnoCSS 字号类的发现
  */
 const checkIconSizes = (sources: string): Finding[] =>
   sources.split("\n").flatMap((line, index) => {
@@ -324,9 +322,9 @@ const checkIconSizes = (sources: string): Finding[] =>
 /**
  * ③ 单行 CSS 的硬编码色值 / 私调字号 / 非 token 圆角（§3）
  *
- * @param line CSS 单行
- * @param index 行号（0 起）
- * @returns 发现列表
+ * @param line `style.css` 的一行
+ * @param index 该行在文件里的下标（从 0 起，报错时 +1 转成行号）
+ * @returns 这一行的发现
  */
 const checkCssLine = (line: string, index: number): Finding[] => {
   if (line.trimStart().startsWith("/*")) return [];
@@ -373,7 +371,7 @@ const checkCssLine = (line: string, index: number): Finding[] => {
  * 用途：判断"裸类名"时，只有**在别的课里被定义过、本课却没定义**的类才是真信号 （同名不同义的跨课碰撞）。UnoCSS 工具类（`.align-middle` / `.max-w-md` /
  * `.abs-br` / `.group`…） 从不会出现在任何 style.css 里，用这个索引一筛就自然排除，不必穷举工具类前缀。
  *
- * @returns 类名 → 定义过它的课件名列表
+ * @returns 类名 → 定义过它的课件目录名
  */
 const buildCourseClassIndex = (): Map<string, string[]> => {
   const index = new Map<string, string[]>();
@@ -385,7 +383,7 @@ const buildCourseClassIndex = (): Map<string, string[]> => {
 
     if (!existsSync(cssFile)) continue;
 
-    for (const match of read(cssFile).matchAll(new RegExp(CLASS_DEF.source, "gu"))) {
+    for (const match of read(cssFile).matchAll(CLASS_DEF_GLOBAL)) {
       const name = match.groups?.name ?? "";
 
       if (!name) continue;
@@ -405,11 +403,11 @@ const buildCourseClassIndex = (): Map<string, string[]> => {
  *
  * 只在**至少有一门别的课定义了它**时才算违例——那意味着同名不同义的跨课碰撞（§6 最危险的一类）。 纯工具类 / 本课一次性类名不在此列，避免把 UnoCSS 之类的噪声报成"裸类名"。
  *
- * @param slug 课件标识
+ * @param slug 课件目录名
  * @param css 本课 `style.css` 全文
- * @param sources 本课源码文本
- * @param classIndex 全仓"类名 → 定义它的课件"索引
- * @returns 发现列表
+ * @param sources 本课 slides.md + 组件源码
+ * @param classIndex 全仓类名索引（见 `buildCourseClassIndex`）
+ * @returns 跨课碰撞的裸类名发现
  */
 const checkBareClasses = (
   slug: string,
@@ -443,7 +441,7 @@ const checkBareClasses = (
  * ⑤a 重写共享选择器（§8：只许覆盖 --page-gap/--stack-gap）
  *
  * @param css 本课 `style.css` 全文
- * @returns 发现列表
+ * @returns 重写了共享选择器的发现
  */
 const checkProtectedSelectors = (css: string): Finding[] =>
   PROTECTED_SELECTORS.flatMap(([label, pattern]) =>
@@ -465,7 +463,7 @@ const checkProtectedSelectors = (css: string): Finding[] =>
  * `.fig-wide`）。
  *
  * @param css 本课 `style.css` 全文
- * @returns 发现列表
+ * @returns `:root` 里覆盖了非密度变量的发现
  */
 const checkRootOverrides = (css: string): Finding[] => {
   const findings: Finding[] = [];
@@ -501,8 +499,8 @@ const checkRootOverrides = (css: string): Finding[] => {
  *
  * 页面里常见的误用是把题干/解析整段套进 `.problem`。这里只报**可疑**信号， 不改语义——因为单看 class 认不出"这段是不是弱提示"，交给人判断。
  *
- * @param sources 本课源码文本
- * @returns 发现列表
+ * @param sources 本课 slides.md + 组件源码
+ * @returns 疑似把主体内容套进 `.problem` 的发现
  */
 const checkBorderMisuse = (sources: string): Finding[] => {
   const lines = sources.split("\n");
@@ -532,9 +530,7 @@ const auditCourse = (
   const sources = courseSources(dir);
   const { cards, findings: cardFindings } = checkCards(sources);
   const icons = [...sources.matchAll(ICON)].length;
-  const defined = new Set(
-    [...css.matchAll(new RegExp(CLASS_DEF.source, "gu"))].map((match) => match.groups?.name ?? ""),
-  );
+  const defined = courseDefinedClasses(dir, css);
 
   const findings: Finding[] = [
     ...cardFindings,

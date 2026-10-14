@@ -28,16 +28,18 @@ const slots = useSlots();
 /**
  * Slot 里是否有真实内容（注释节点/纯空白不算）——用于 #fig 缺省时自动整宽
  *
- * @param nodes Slot 产出的 VNode 列表
- * @returns 有真实内容时为 `true`
+ * @param nodes Slot 函数返回的 VNode 列表（slot 未传时是 undefined）
+ * @returns 有真实内容返回 true（注释节点、纯空白文本不算）
  */
 const hasRealContent = (nodes: VNode[] | undefined): boolean => {
   if (!nodes) return false;
+
   return nodes.some((node) => {
     if (!node) return false;
     if (node.type === Comment) return false;
     if (node.type === Text) return String(node.children ?? "").trim() !== "";
     if (node.type === Fragment) return hasRealContent(node.children as VNode[]);
+
     return true;
   });
 };

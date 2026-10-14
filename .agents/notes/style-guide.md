@@ -63,6 +63,11 @@
 `--c-danger`（红 `#f87171`）`--radius-xl/lg/md/sm`（1.75 / 1.25 / 0.75 / 0.5rem）。
 
 - **色值 100% 走 `var(--…)`**。`style.css` 里出现 `#hex` / `rgb(` 就是待修项（`grep -nE '#[0-9a-f]{3,8}|rgb\(' courses/<slug>/style.css | grep -v 'var(--'`）。
+- ⛔ **但 SVG 属性里的色值保持字面值，不要换成 `var(--…)`**（`stroke="#60a5fa"` / `fill="var(--c-accent)"` 都不行）：
+  UnoCSS attributify 会把属性值当工具类碎片，且 SVG 表现属性对 `var()` 的支持不一致，换完可能"整块图形不显示"。
+  这类插画色（`#60a5fa`/`#94a3b8`/`#2dd4bf` 等）属**插画内部用色**，不是设计 token 的用途，216 个源文件都是字面值，**保持现状即为统一**。
+  只有当颜色出现在 CSS 声明里（`style.css`、组件 `<style>` 块）时才必须换 token。
+  ⚠️ 另注意：**SVG 属性值里不能有空格**（`stroke="rgb(148 163 184 / 16%)"` 会被 attributify 当成 3 个类名 → 编译产物出现 `[stroke~="163"]{stroke-width:163px}` 鬼规则、图形严重变形）。写成 `rgba(148,163,184,0.16)`。
 - **缺 token 就补 token，不许写死**。当前 3 个系统性缺口（谁先用谁在 `common.css` 补，别再各自写死）：
 
   | 缺口                | 现状（各课写死值）                                                      | 建议 token                                          |
