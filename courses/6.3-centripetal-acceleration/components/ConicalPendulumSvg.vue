@@ -5,12 +5,12 @@
   show-radius 出半径 r（由圆心 C 向左画到圆周）。
 -->
 <script setup lang="ts">
-withDefaults(defineProps<{ showForces?: boolean; showRadius?: boolean }>(), {
-  showForces: false,
-  showRadius: false,
-});
+const { showForces = false, showRadius = false } = defineProps<{
+  showForces?: boolean;
+  showRadius?: boolean;
+}>();
 
-const rad = (d: number) => (d * Math.PI) / 180;
+const rad = (d: number): number => (d * Math.PI) / 180;
 
 /** 绳与竖直方向的夹角 */
 const TH = 40;
@@ -70,7 +70,7 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
     viewBox="4 24 314 232"
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
-    style=" display: block;max-width: 21rem; margin: 0 auto"
+    style="display: block; max-width: 21rem; margin: 0 auto"
     role="img"
     aria-label="圆锥摆：小球在水平面内做圆周运动，绳与竖直方向的夹角为 θ"
   >

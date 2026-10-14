@@ -11,13 +11,17 @@ const points = [
   { p: { x: O.x, y: O.y - R }, v: { x: O.x - L, y: O.y - R } },
   { p: { x: O.x - R, y: O.y }, v: { x: O.x - R, y: O.y + L } },
   { p: { x: O.x, y: O.y + R }, v: { x: O.x + L, y: O.y + R } },
-].map((item) => ({
-  ...item,
-  f: {
-    x: item.p.x + ((O.x - item.p.x) / Math.hypot(O.x - item.p.x, O.y - item.p.y)) * L,
-    y: item.p.y + ((O.y - item.p.y) / Math.hypot(O.x - item.p.x, O.y - item.p.y)) * L,
-  },
-}));
+].map((item) => {
+  const dx = O.x - item.p.x;
+  const dy = O.y - item.p.y;
+  const len = Math.hypot(dx, dy);
+
+  return {
+    p: item.p,
+    v: item.v,
+    f: { x: item.p.x + (dx / len) * L, y: item.p.y + (dy / len) * L },
+  };
+});
 </script>
 
 <template>

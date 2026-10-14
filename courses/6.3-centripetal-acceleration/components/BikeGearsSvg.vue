@@ -11,7 +11,7 @@
     viewBox="0 0 412 372"
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
-    style=" display: block;max-width: 30rem; margin: 0 auto"
+    style="display: block; max-width: 30rem; margin: 0 auto"
     role="img"
     aria-label="自行车：后轮最大，大齿轮边缘 A 点、小齿轮边缘 B 点由链条相连（线速度大小相等），小齿轮与后轮同轴，后轮边缘为 C 点"
   >

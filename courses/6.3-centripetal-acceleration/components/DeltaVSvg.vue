@@ -9,7 +9,7 @@
   标注一律带深色描边光晕，避免压住箭头与虚线；小图下方的图注按面板居中，互不接触。
 -->
 <script setup lang="ts">
-withDefaults(defineProps<{ step?: number }>(), { step: 0 });
+const { step = 0 } = defineProps<{ step?: number }>();
 
 interface Vec {
   x: number;
@@ -63,13 +63,32 @@ const CAPTIONS: CapSeg[][] = [
   [{ t: "Δv", math: true }, { t: " 指向圆心" }],
 ];
 
-const rad = (d: number) => (d * Math.PI) / 180;
-/** 圆周上角度 deg 处的点（屏幕坐标，y 轴向下） */
+const rad = (d: number): number => (d * Math.PI) / 180;
+
+/**
+ * 圆周上角度 deg 处的点（屏幕坐标，y 轴向下）
+ *
+ * @param deg 角度（度）
+ * @returns 圆周上该角度处的点
+ */
 const onCircle = (deg: number): Vec => ({ x: CX + R * Math.cos(rad(deg)), y: CY + R * Math.sin(rad(deg)) });
-/** 顺时针经过该处时的速度方向（切线） */
+
+/**
+ * 顺时针经过该处时的速度方向（切线）
+ *
+ * @param deg 角度（度）
+ * @returns 该处切线的单位方向矢量
+ */
 const tangent = (deg: number): Vec => ({ x: -Math.sin(rad(deg)), y: Math.cos(rad(deg)) });
+
 const along = (p: Vec, d: Vec, k: number): Vec => ({ x: p.x + d.x * k, y: p.y + d.y * k });
-/** 由圆心指向 deg 方向的单位矢量：把点的标注甩到圆外 */
+
+/**
+ * 由圆心指向 deg 方向的单位矢量：把点的标注甩到圆外
+ *
+ * @param deg 角度（度）
+ * @returns 由圆心指向该方向的单位矢量
+ */
 const outward = (deg: number): Vec => ({ x: Math.cos(rad(deg)), y: Math.sin(rad(deg)) });
 
 /** 前三个小图 A、B 相隔 40°；丁图只隔 16°（中点取在圆的最右端）， 此时作出的 Δv 恰与 v 垂直、水平指回圆心 —— 这正是"B 无限靠近 A 时 Δv 沿半径"的关键。 */
@@ -99,13 +118,16 @@ const panels = [0, 1, 2, 3].map((i) => {
     labels.push(
       { text: "A", x: 145, y: 106, anchor: "end", size: 23, fill: "#f1f5f9", math: true },
       { text: "B", x: 145, y: 153, anchor: "end", size: 23, fill: "#f1f5f9", math: true },
-     { text: "Δv", x: 150, y: 214, anchor: "end", size: 24, fill: "#e2a846", math: true });
+      { text: "Δv", x: 150, y: 214, anchor: "end", size: 24, fill: "#e2a846", math: true },
+    );
   } else {
     const aAt = along(A, outward(thetaA), 14);
     labels.push(
       { text: "A", x: aAt.x, y: aAt.y, anchor: "middle", size: 23, fill: "#f1f5f9", math: true },
       { text: "B", x: 80, y: 81, anchor: "start", size: 23, fill: "#f1f5f9", math: true },
-     { text: "v", sub: "A", x: vAtip.x - 13, y: vAtip.y + 2, anchor: "end", size: 25, fill: "#60a5fa", math: true }, { text: "v", sub: "B", x: vBtip.x + 10, y: vBtip.y + 6, anchor: "start", size: 25, fill: "#60a5fa", math: true });
+      { text: "v", sub: "A", x: vAtip.x - 13, y: vAtip.y + 2, anchor: "end", size: 25, fill: "#60a5fa", math: true },
+      { text: "v", sub: "B", x: vBtip.x + 10, y: vBtip.y + 6, anchor: "start", size: 25, fill: "#60a5fa", math: true },
+    );
     if (i === 1) labels.push({ text: "v", sub: "A", x: vAtipAtB.x + 8, y: vAtipAtB.y + 10, anchor: "start", size: 22, fill: "#94a3b8", math: true });
 
     if (i === 2) labels.push({ text: "Δv", x: 124, y: 21, anchor: "middle", size: 24, fill: "#e2a846", math: true });
@@ -120,7 +142,7 @@ const panels = [0, 1, 2, 3].map((i) => {
     viewBox="0 0 760 258"
     width="100%"
     xmlns="http://www.w3.org/2000/svg"
-    style=" display: block;max-width: 60rem; margin: 0 auto"
+    style="display: block; max-width: 60rem; margin: 0 auto"
     role="img"
     aria-label="分四步作出速度的变化量 Δv，并看出它指向圆心"
   >

@@ -5,9 +5,9 @@
 // 只取 3 个采样点、半弧长 85：相邻圆弧不重叠，才看得出"这是分开的一小段一小段"。
 const { step = 0 } = defineProps<{ step?: number }>();
 
-const X = (s: number): number => 150 + 660 * s;
-const Y = (s: number): number => 350 - 620 * s + 620 * s * s;
-const DY = (s: number): number => -620 + 1240 * s;
+const xOf = (s: number): number => 150 + 660 * s;
+const yOf = (s: number): number => 350 - 620 * s + 620 * s * s;
+const dyOf = (s: number): number => -620 + 1240 * s;
 /** 局部圆弧的半弧长（用户单位）：远小于相邻采样点间距的一半，保证圆弧之间留出空隙 */
 const L = 62;
 
@@ -17,8 +17,8 @@ interface Arc {
 }
 
 const arcs: Arc[] = [0.22, 0.5, 0.78].map((s) => {
-  const P = { x: X(s), y: Y(s) };
-  const dy = DY(s);
+  const P = { x: xOf(s), y: yOf(s) };
+  const dy = dyOf(s);
   const dx = 660;
   const len = Math.hypot(dx, dy);
   // 密切圆圆心：在曲线的凹侧（屏幕下方）
@@ -43,7 +43,8 @@ const arcs: Arc[] = [0.22, 0.5, 0.78].map((s) => {
   return { P, d: `M ${A.x.toFixed(1)} ${A.y.toFixed(1)} Q ${Q.x.toFixed(1)} ${Q.y.toFixed(1)} ${B.x.toFixed(1)} ${B.y.toFixed(1)}` };
 });
 
-const mid = arcs[1];
+/** 中间那个采样点：step ≥ 2 时高亮它的一段，为下一页引出曲率半径 ρ */
+const [, mid] = arcs;
 </script>
 
 <template>

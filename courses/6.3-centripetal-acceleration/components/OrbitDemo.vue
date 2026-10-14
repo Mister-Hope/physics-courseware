@@ -65,14 +65,14 @@ const satelliteTransform = computed(
 );
 
 /** 点一下：从当前角度平滑转过 42°，缓出收尾（转到位轻轻停住） */
-function spin() {
+const spin = (): void => {
   const from = angle.value;
   const to = from + STEP;
   const start = performance.now();
 
   cancelAnimationFrame(raf);
 
-  const tick = (now: number) => {
+  const tick = (now: number): void => {
     const t = Math.min(1, (now - start) / SPIN_MS);
     const eased = 1 - (1 - t) ** 3;
 
@@ -81,7 +81,7 @@ function spin() {
   };
 
   raf = requestAnimationFrame(tick);
-}
+};
 
 onUnmounted(() => cancelAnimationFrame(raf));
 </script>

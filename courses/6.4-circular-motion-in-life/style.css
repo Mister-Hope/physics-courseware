@@ -57,9 +57,7 @@
 
 .step-line > .step-no {
   flex: 0 0 auto;
-
   min-width: 1.3rem;
-
   color: var(--c-accent);
   font-weight: 700;
 }
@@ -96,9 +94,7 @@
 
 .app-item > svg {
   flex: 0 0 auto;
-
   margin-top: 0.25rem;
-
   color: var(--c-accent);
   font-size: 1.5rem;
 }

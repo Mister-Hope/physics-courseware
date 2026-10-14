@@ -30,6 +30,10 @@ export const coursePages: Record<string, number> = {
   "5.2-composition-decomposition-of-motion": 38,
   "5.3-projectile-motion-experiment": 15,
   "5.4-projectile-motion": 37,
+  "6.1-circular-motion": 13,
+  "6.2-centripetal-force": 24,
+  "6.3-centripetal-acceleration": 11,
+  "6.4-circular-motion-in-life": 18,
   "o2-1.2-lorentz-force": 14,
-  "o2-1.3-charged-particle-motion": 14,
+  "o2-1.3-charged-particle-motion": 17,
 };

@@ -64,10 +64,10 @@
 
 .cmp-table th,
 .cmp-table td {
-  padding: 0.72rem 0.95rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-  text-align: left;
   vertical-align: middle;
+  padding: 0.72rem 0.95rem;
+  border-bottom: 1px solid rgb(148 163 184 / 18%);
+  text-align: left;
 }
 
 .cmp-table thead th {

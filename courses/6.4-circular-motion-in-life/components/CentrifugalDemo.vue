@@ -232,7 +232,6 @@ const state = computed(() => {
 
 .centri-demo svg {
   display: block;
-
   width: 100%;
   height: auto;
 }
@@ -259,10 +258,10 @@ const state = computed(() => {
 
   min-height: 0;
   padding: 0.5rem 0.7rem 0.55rem;
-  border: 1px solid rgba(148, 163, 184, 0.16);
+  border: 1px solid rgb(148 163 184 / 16%);
   border-radius: 0.85rem;
 
-  background: rgba(148, 163, 184, 0.07);
+  background: rgb(148 163 184 / 7%);
 }
 
 .demo-head {
@@ -281,7 +280,6 @@ const state = computed(() => {
   display: inline-flex;
   gap: 0.3rem;
   align-items: baseline;
-
   white-space: nowrap;
 }
 
@@ -291,9 +289,9 @@ const state = computed(() => {
 }
 
 .demo-value {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 1.05rem;
   font-weight: 700;
+  font-size: 1.05rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .demo-slider {
@@ -304,6 +302,7 @@ const state = computed(() => {
   margin: 0;
 
   background: transparent;
+
   cursor: grab;
 
   appearance: none;
@@ -316,32 +315,30 @@ const state = computed(() => {
 .demo-slider::-webkit-slider-runnable-track {
   height: 0.42rem;
   border-radius: 999px;
-
   background: linear-gradient(90deg, #e2a846, #60a5fa, #2dd4bf);
-  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.22);
+  box-shadow: inset 0 0 0 1px rgb(148 163 184 / 22%);
 }
 
 .demo-slider::-webkit-slider-thumb {
   width: 1.05rem;
   height: 1.05rem;
   margin-top: -0.315rem;
-
   border: 2px solid #f1f5f9;
   border-radius: 50%;
 
   background: var(--thumb-color);
-  box-shadow: 0 2px 8px rgba(15, 20, 37, 0.85);
+  box-shadow: 0 2px 8px rgb(15 20 37 / 85%);
 
   cursor: grab;
 
   appearance: none;
+
   transition: background-color 0.25s ease;
 }
 
 .demo-slider::-moz-range-track {
   height: 0.42rem;
   border-radius: 999px;
-
   background: linear-gradient(90deg, #e2a846, #60a5fa, #2dd4bf);
 }
 
@@ -363,8 +360,8 @@ const state = computed(() => {
 
   min-height: 1.25rem;
 
-  font-size: 0.95rem;
   font-weight: 700;
+  font-size: 0.95rem;
   line-height: 1.25;
   white-space: nowrap;
 }
@@ -376,7 +373,7 @@ const state = computed(() => {
   height: 0.5rem;
   border-radius: 50%;
 
-  background: currentColor;
+  background: currentcolor;
 }
 
 .demo-formula {

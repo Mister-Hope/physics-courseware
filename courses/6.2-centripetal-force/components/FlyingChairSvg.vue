@@ -11,7 +11,7 @@ const A = { x: 196, y: 62 };
 /** 重力大小（用户单位） */
 const G_LEN = 80;
 
-const dir = (() => {
+const dir = ((): { x: number; y: number } => {
   const dx = A.x - P.x;
   const dy = A.y - P.y;
   const len = Math.hypot(dx, dy);

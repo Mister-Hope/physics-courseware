@@ -7,7 +7,7 @@ const O = { x: 230, y: 168 };
 /** 物块位置 */
 const P = { x: 301, y: 113 };
 
-const dir = (() => {
+const dir = ((): { x: number; y: number } => {
   const dx = O.x - P.x;
   const dy = O.y - P.y;
   const len = Math.hypot(dx, dy);
