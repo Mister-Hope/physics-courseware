@@ -141,7 +141,7 @@ const endDrag = (): void => {
           :cy="ball.y"
           :r="22"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -168,7 +168,7 @@ const endDrag = (): void => {
     </div>
 
     <!-- 右：力的三角形（与 OPQ 相似） -->
-    <div class="hb-tri" :class="{ 'fe-hidden': step < 1 }">
+    <div class="hb-tri" :class="{ 'fig-hold': step < 1 }">
       <svg viewBox="52 58 176 210" xmlns="http://www.w3.org/2000/svg">
         <CourseArrow :from="triQ" :to="triO" :head-size="11" stroke="#f87171" stroke-width="3.4" />
         <CourseArrow :from="triO" :to="triP" :head-size="11" stroke="#2dd4bf" stroke-width="3.4" />

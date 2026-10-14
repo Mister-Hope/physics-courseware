@@ -257,7 +257,7 @@ const endDrag = (): void => {
           :cy="tips.force.y"
           r="22"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -267,7 +267,7 @@ const endDrag = (): void => {
       </svg>
     </div>
 
-    <div class="mf-tri" :class="{ 'fe-hidden': step < 1 }">
+    <div class="mf-tri" :class="{ 'fig-hold': step < 1 }">
       <svg :viewBox="`0 0 ${TRI.width} ${TRI.height}`" xmlns="http://www.w3.org/2000/svg">
         <CourseArrow
           :from="tri.vertexA"

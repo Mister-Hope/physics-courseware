@@ -252,7 +252,7 @@ const accelText = computed<string>(() => formatSig2(accel.value));
 
 <template>
   <div class="fl-wrap">
-    <div class="fl-figure">
+    <div class="fl-figure figure">
       <CoordAxes
         :x-range="[X_MIN, X_MAX]"
         :y-range="[Y_MIN, Y_MAX]"
@@ -364,15 +364,10 @@ const accelText = computed<string>(() => formatSig2(accel.value));
   margin: 0 auto;
 }
 
-/* 收窄后的坐标图：viewBox 640 × 400，渲染宽 600 时高 ≈ 377（含 1px 边框） */
+/* 收窄后的坐标图：viewBox 640 × 400，渲染宽 600 时高 ≈ 377。
+   占满栏宽走共享 .figure（零背景 / 边框 / 圆角），这里只限最大宽度 */
 .fl-figure {
-  box-sizing: border-box;
-  width: 100%;
   max-width: 600px;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-lg);
-
-  background: rgb(15 20 37 / 40%);
 }
 
 /* 拖拽要吃掉触摸滚动（原来写在手写 <svg> 上，坐标轴交给组件后从外层给） */
@@ -400,7 +395,6 @@ const accelText = computed<string>(() => formatSig2(accel.value));
   width: 100%;
   max-width: 760px;
 
-  font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.15;
 }
@@ -420,7 +414,7 @@ const accelText = computed<string>(() => formatSig2(accel.value));
 }
 
 .fl-chip-wide {
-  border-color: rgb(226 168 70 / 45%);
+  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
 }
 
 .fl-chip-k {
@@ -434,6 +428,5 @@ const accelText = computed<string>(() => formatSig2(accel.value));
 
 .fl-chip-wide .fl-chip-v {
   color: var(--c-accent);
-  font-size: 1rem;
 }
 </style>

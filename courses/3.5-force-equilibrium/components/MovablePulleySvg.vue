@@ -363,7 +363,7 @@ const endDrag = (): void => {
       width="116"
       height="108"
       fill="transparent"
-      class="mp-grab"
+      class="fig-grab"
       @pointerdown="startDrag"
       @pointermove="moveDrag"
       @pointerup="endDrag"
@@ -381,13 +381,5 @@ const endDrag = (): void => {
 
   user-select: none;
   touch-action: none;
-}
-
-.mp-grab {
-  cursor: grab;
-}
-
-.mp-grab:active {
-  cursor: grabbing;
 }
 </style>

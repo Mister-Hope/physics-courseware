@@ -145,8 +145,8 @@ const chartLabels = computed(() => [
 </script>
 
 <template>
-  <div class="vt-riemann">
-    <div class="vt-riemann-figure">
+  <div class="ua-riemann">
+    <div class="ua-riemann-figure">
       <CoordAxes
         :x-range="X_RANGE"
         :y-range="Y_RANGE"
@@ -160,31 +160,33 @@ const chartLabels = computed(() => [
       />
     </div>
 
-    <div class="vt-riemann-panel">
-      <div class="rp-step">{{ nLabel }}</div>
+    <div class="ua-riemann-panel">
+      <div class="ua-riemann-step">{{ nLabel }}</div>
 
-      <div class="rp-row">
-        <span class="rp-label">小矩形面积和</span>
-        <b class="rp-value rp-value-rect"><Latex :tex="meterTex(rectSum)" /></b>
+      <div class="ua-riemann-row">
+        <span class="ua-riemann-label">小矩形面积和</span>
+        <b class="ua-riemann-value ua-riemann-value-rect"><Latex :tex="meterTex(rectSum)" /></b>
       </div>
 
-      <div class="rp-row">
-        <span class="rp-label">真实位移 <Latex tex="x" /></span>
-        <b class="rp-value rp-value-exact"><Latex :tex="meterTex(exactX)" /></b>
+      <div class="ua-riemann-row">
+        <span class="ua-riemann-label">真实位移 <Latex tex="x" /></span>
+        <b class="ua-riemann-value ua-riemann-value-exact"><Latex :tex="meterTex(exactX)" /></b>
       </div>
 
-      <div class="rp-row">
-        <span class="rp-label">相差</span>
-        <b class="rp-value rp-value-gap"><Latex :tex="atLimit ? '\\approx 0' : meterTex(gap)" /></b>
+      <div class="ua-riemann-row">
+        <span class="ua-riemann-label">相差</span>
+        <b class="ua-riemann-value ua-riemann-value-gap"
+          ><Latex :tex="atLimit ? '\\approx 0' : meterTex(gap)"
+        /></b>
       </div>
 
-      <div class="rp-note">每小段都按"该段起始时刻的速度"当作匀速运动</div>
+      <div class="ua-riemann-note">每小段都按"该段起始时刻的速度"当作匀速运动</div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.vt-riemann {
+.ua-riemann {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 1.6rem;
@@ -193,18 +195,18 @@ const chartLabels = computed(() => [
   min-width: 0;
 }
 
-.vt-riemann-figure {
+.ua-riemann-figure {
   min-width: 0;
 }
 
-.vt-riemann-panel {
+.ua-riemann-panel {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
   min-width: 0;
 }
 
-.rp-step {
+.ua-riemann-step {
   color: var(--c-accent);
 
   font-weight: 700;
@@ -213,7 +215,7 @@ const chartLabels = computed(() => [
   white-space: nowrap;
 }
 
-.rp-row {
+.ua-riemann-row {
   display: flex;
   gap: 0.5rem;
   align-items: baseline;
@@ -225,7 +227,7 @@ const chartLabels = computed(() => [
   font-size: 0.9rem;
 }
 
-.rp-label {
+.ua-riemann-label {
   display: inline-flex;
   gap: 0.3rem;
   align-items: baseline;
@@ -235,24 +237,24 @@ const chartLabels = computed(() => [
   white-space: nowrap;
 }
 
-.rp-value {
+.ua-riemann-value {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.rp-value-rect {
+.ua-riemann-value-rect {
   color: var(--c-accent-2);
 }
 
-.rp-value-exact {
+.ua-riemann-value-exact {
   color: var(--c-accent);
 }
 
-.rp-value-gap {
+.ua-riemann-value-gap {
   color: var(--c-text-dim);
 }
 
-.rp-note {
+.ua-riemann-note {
   margin-top: 0.15rem;
   color: var(--c-text-dim);
   font-size: 0.78rem;

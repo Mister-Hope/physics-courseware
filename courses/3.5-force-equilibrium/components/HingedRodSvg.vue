@@ -334,7 +334,7 @@ const endDrag = (): void => {
           :cy="pointB.y"
           r="24"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -344,7 +344,7 @@ const endDrag = (): void => {
     </div>
 
     <!-- 右：力的三角形（与 △OAB 相似，居中展示，三力与三顶点全部自适应置于三角形外侧） -->
-    <div class="hr-tri" :class="{ 'fe-hidden': step < 1 }">
+    <div class="hr-tri" :class="{ 'fig-hold': step < 1 }">
       <svg viewBox="0 0 340 270" xmlns="http://www.w3.org/2000/svg">
         <!-- 三角形内部淡淡底色衬托 -->
         <polygon :points="`${triO.x},${triO.y} ${triA.x},${triA.y} ${triB.x},${triB.y}`" fill="rgba(148,163,184,0.05)" />
@@ -473,13 +473,5 @@ const endDrag = (): void => {
   width: 100%;
   height: auto;
   max-height: 100%;
-}
-
-.fe-grab {
-  cursor: grab;
-}
-
-.fe-grab:active {
-  cursor: grabbing;
 }
 </style>

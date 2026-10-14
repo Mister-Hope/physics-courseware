@@ -34,16 +34,16 @@ clicks: 2
 
 <div class="half-grid">
 <div class="stack">
-<div class="fe-fig" style="max-width: 13rem; margin: 0 auto">
+<div class="figure" style="max-width: 13rem; margin: 0 auto">
 <RodObliqueForcesSvg />
 </div>
-<div class="fe-cap">甲</div>
+<div class="fig-cap">甲</div>
 </div>
 <div class="stack divider-l">
-<div class="fe-fig" style="max-width: 13rem; margin: 0 auto">
+<div class="figure" style="max-width: 13rem; margin: 0 auto">
 <RodParallelForcesSvg />
 </div>
-<div class="fe-cap">乙</div>
+<div class="fig-cap">乙</div>
 </div>
 </div>
 
@@ -82,7 +82,7 @@ clicks: 1
 <div class="ask">物体受三个力平衡，其中 <Latex tex="F_1" />、<Latex tex="F_2" /> 的作用线交于 <Latex tex="O" /> 点 —— 第三个力的作用线在哪里？</div>
 
 <div class="half-grid" v-click="1">
-<div class="fe-fig" style="max-width: 14rem">
+<div class="figure" style="max-width: 14rem">
 <ThreeForceConcurrencySvg />
 </div>
 <div class="stack divider-l">
@@ -103,22 +103,22 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">什么样的物体，可以说它"处于平衡状态"？</div>
 
-<div class="fe-quad" v-click="1">
-<div class="fe-quad-item">
+<div class="intro-quad" v-click="1">
+<div class="intro-quad-item">
 <div class="text-center">桌上的书</div>
-<div class="fe-cap">保持静止</div>
+<div class="fig-cap">保持静止</div>
 </div>
-<div class="fe-quad-item">
+<div class="intro-quad-item">
 <div class="text-center">屋顶的灯</div>
-<div class="fe-cap">保持静止</div>
+<div class="fig-cap">保持静止</div>
 </div>
-<div class="fe-quad-item">
+<div class="intro-quad-item">
 <div class="text-center">传送带上匀速运送的物体</div>
-<div class="fe-cap">匀速直线运动</div>
+<div class="fig-cap">匀速直线运动</div>
 </div>
-<div class="fe-quad-item">
+<div class="intro-quad-item">
 <div class="text-center">沿直线公路匀速前进的汽车</div>
-<div class="fe-cap">匀速直线运动</div>
+<div class="fig-cap">匀速直线运动</div>
 </div>
 </div>
 
@@ -138,7 +138,7 @@ clicks: 3
 <div v-click="1">二力平衡：两个力大小相等、方向相反、作用在同一条直线上 —— 合力为 <Latex tex="0" />。</div>
 <div v-click="2">多个共点力：逐步合成，最终等效为两个力；这两个力的合力为 <Latex tex="0" />，就意味着<b class="text-accent">所有力的合力为 <Latex tex="0" /></b>。</div>
 </div>
-<div class="fe-fig" style="max-width: 16rem" v-click="2">
+<div class="figure" style="max-width: 16rem" v-click="2">
 <ClosedForceTriangleSvg />
 </div>
 </div>
@@ -159,7 +159,7 @@ clicks: 3
 <div v-click="1">沿两个互相垂直的方向建立直角坐标系，把不在轴上的力都分解到两个轴上。</div>
 <div v-click="2">合力为零 ⇒ 每个方向上的分力之和也分别为零：<Latex tex="\begin{cases} F_x = 0 \\ F_y = 0 \end{cases}" /></div>
 </div>
-<div class="fe-fig" v-click="1">
+<div class="figure" v-click="1">
 <OrthoDecompose :angle="53" tex="F" />
 </div>
 </div>
@@ -173,11 +173,11 @@ clicks: 4
 ---
 
 <div class="page-grow">
-<div class="fe-steps">
-<div class="fe-step"><span class="fe-step-no">1</span><div>选择研究对象：<b>整体法</b>（把几个物体看作一个整体）或<b>隔离法</b>（只取其中一个物体）。</div></div>
-<div class="fe-step" v-click="1"><span class="fe-step-no">2</span><div>分析受力：重力 → 弹力 → 摩擦力 → 其他力。</div></div>
-<div class="fe-step" v-click="2"><span class="fe-step-no">3</span><div>处理力：通常 3 个力用<b>合成（或分解）法</b>；4 个及以上用<b>正交分解</b>。</div></div>
-<div class="fe-step" v-click="3"><span class="fe-step-no">4</span><div>列方程、求解。</div></div>
+<div class="step-list">
+<div class="step-item"><span class="step-no">1</span><div>选择研究对象：<b>整体法</b>（把几个物体看作一个整体）或<b>隔离法</b>（只取其中一个物体）。</div></div>
+<div class="step-item" v-click="1"><span class="step-no">2</span><div>分析受力：重力 → 弹力 → 摩擦力 → 其他力。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">3</span><div>处理力：通常 3 个力用<b>合成（或分解）法</b>；4 个及以上用<b>正交分解</b>。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">4</span><div>列方程、求解。</div></div>
 </div>
 
 <div class="key" v-click="4">正交分解的原则：① 少分力；② 避免分解未知力。</div>
@@ -193,14 +193,14 @@ clicks: 3
 <div class="stack">
 <div class="mini-title">几何法</div>
 <div v-click="1">三个力<b class="text-accent">首尾相接</b>，恰好围成一个闭合的矢量三角形 —— 由三角形的边、角关系直接求出未知力。</div>
-<div class="fe-fig" style="max-width: 13rem" v-click="1">
+<div class="figure" style="max-width: 13rem" v-click="1">
 <ComposeForceTriangleSvg />
 </div>
 </div>
 <div class="stack divider-l">
 <div class="mini-title">正交分解法</div>
 <div v-click="2">把不在轴上的力分解到两个轴上，分别列出 <Latex tex="F_x = 0" />、<Latex tex="F_y = 0" />。</div>
-<div class="fe-step-note" v-click="2">4 个及以上通常正交分解。</div>
+<div class="mini-note" v-click="2">4 个及以上通常正交分解。</div>
 </div>
 </div>
 
@@ -213,13 +213,13 @@ clicks: 4
 ---
 
 <div class="page-grow">
-<div class="problem">悬吊重物的细绳，其 <Latex tex="O" /> 点被一水平绳 <Latex tex="BO" /> 牵引，使悬绳 <Latex tex="AO" /> 段与竖直方向成 <Latex tex="\theta" /> 角。若悬吊物所受的重力为 <Latex tex="G" />，悬绳 <Latex tex="AO" /> 和水平绳 <Latex tex="BO" /> 所受的拉力各等于多少？</div>
+<div>悬吊重物的细绳，其 <Latex tex="O" /> 点被一水平绳 <Latex tex="BO" /> 牵引，使悬绳 <Latex tex="AO" /> 段与竖直方向成 <Latex tex="\theta" /> 角。若悬吊物所受的重力为 <Latex tex="G" />，悬绳 <Latex tex="AO" /> 和水平绳 <Latex tex="BO" /> 所受的拉力各等于多少？</div>
 
 <div class="half-grid">
-<div class="fe-fig" style="max-width: 15rem" v-click="1">
+<div class="figure" style="max-width: 15rem" v-click="1">
 <HangingRopeSvg />
 </div>
-<div class="fe-fig" style="max-width: 10.5rem" v-click="3">
+<div class="figure" style="max-width: 10.5rem" v-click="3">
 <ForceTriangleSvg />
 </div>
 </div>
@@ -236,7 +236,7 @@ clicks: 4
 <div class="ask">同一个平衡问题，换成正交分解，怎么做？</div>
 
 <div class="half-grid">
-<div class="fe-fig">
+<div class="figure">
 <OrthoDecompose
   :angle="120"
   tex="F_1"
@@ -262,10 +262,10 @@ clicks: 5
 ---
 
 <div class="page-grow">
-<div class="problem">滑梯的水平跨度确定为 <Latex tex="b = 6\ \text{m}" />，滑板和儿童裤料之间的动摩擦因数取 <Latex tex="\mu = 0.4" />。为使儿童能在滑板上滑下，滑梯至少要多高？</div>
+<div>滑梯的水平跨度确定为 <Latex tex="b = 6\ \text{m}" />，滑板和儿童裤料之间的动摩擦因数取 <Latex tex="\mu = 0.4" />。为使儿童能在滑板上滑下，滑梯至少要多高？</div>
 
 <div class="half-grid">
-<div class="fe-fig" style="max-width: 17rem" v-click="1">
+<div class="figure" style="max-width: 17rem" v-click="1">
 <SlideSlopeSvg />
 </div>
 <div class="stack">
@@ -297,10 +297,10 @@ clicks: 3
 ---
 
 <div class="page-grow">
-<div class="fe-steps">
-<div class="fe-step"><span class="fe-step-no">1</span><div><b>动态矢量三角形</b>：一个力大小方向不变、一个力方向不变，第三个力方向变化 —— 画出闭合三角形，看边长随方向怎么变。<span class="fe-step-note">两个力的夹角不变时，第三个顶点始终落在同一段圆弧上（辅助圆）。</span></div></div>
-<div class="fe-step" v-click="1"><span class="fe-step-no">2</span><div><b>正弦定理（函数法）</b>：边长不好直接看时，把力写成角度的函数：<Latex tex="\dfrac{F_1}{\sin A} = \dfrac{F_2}{\sin B} = \dfrac{F_3}{\sin C}" />。</div></div>
-<div class="fe-step" v-click="2"><span class="fe-step-no">3</span><div><b>相似三角形</b>：力的三角形与几何三角形相似，对应边成比例：<Latex tex="\dfrac{F_1}{L_1} = \dfrac{F_2}{L_2} = \dfrac{F_3}{L_3}" /> —— 纯几何，最简。</div></div>
+<div class="step-list">
+<div class="step-item"><span class="step-no">1</span><div><b>动态矢量三角形</b>：一个力大小方向不变、一个力方向不变，第三个力方向变化 —— 画出闭合三角形，看边长随方向怎么变。<span class="mini-note">两个力的夹角不变时，第三个顶点始终落在同一段圆弧上（辅助圆）。</span></div></div>
+<div class="step-item" v-click="1"><span class="step-no">2</span><div><b>正弦定理（函数法）</b>：边长不好直接看时，把力写成角度的函数：<Latex tex="\dfrac{F_1}{\sin A} = \dfrac{F_2}{\sin B} = \dfrac{F_3}{\sin C}" />。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">3</span><div><b>相似三角形</b>：力的三角形与几何三角形相似，对应边成比例：<Latex tex="\dfrac{F_1}{L_1} = \dfrac{F_2}{L_2} = \dfrac{F_3}{L_3}" /> —— 纯几何，最简。</div></div>
 </div>
 
 <div class="key" v-click="3">先判断"哪个力不变、哪个力方向不变"，再选方法 —— 选错方法会算得很苦。</div>
@@ -351,7 +351,7 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">两只手各拉一根绳提着水桶，两绳的夹角保持不变。把两只手一起移动（这一对绳整体转动），两根绳的拉力怎么变？</div>
 
-<div class="ac-18">
+<div class="p18-split">
 <AuxiliaryCircle />
 
 <div class="key" v-click="2">转动这一对绳：两绳拉力<b>一个增大、另一个减小</b>（不会先增后减）；夹角大于 <Latex tex="90^\circ" /> 时，某根绳转到水平（在三角形里成为<b class="text-accent">直径</b>）那一刻它最大。</div>
@@ -389,7 +389,7 @@ clicks: 2
 
 <HemisphereBallSvg />
 
-<div class="key hb-key" v-click="2">
+<div class="key" v-click="2">
 <div><Latex tex="\triangle_{\text{力}} \sim \triangle_{OPQ}" />：<Latex tex="\dfrac{F_N}{G} = \dfrac{OP}{OQ}" />、<Latex tex="\dfrac{F_T}{G} = \dfrac{PQ}{OQ}" /></div>
 <div><Latex tex="OP" />、<Latex tex="OQ" /> 不变 ⇒ <Latex tex="F_N" /> 不变；球升高时 <Latex tex="PQ" /> 变小 ⇒ <Latex tex="F_T" /> 变小</div>
 </div>
@@ -405,7 +405,7 @@ clicks: 2
 
 <HingedRodSvg />
 
-<div class="key hr-key" v-click="2">
+<div class="key" v-click="2">
 <div><Latex tex="\triangle_{\text{力}} \sim \triangle_{AOB}" />：<Latex tex="\dfrac{F_N}{G} = \dfrac{AB}{AO}" />、<Latex tex="\dfrac{F_T}{G} = \dfrac{BO}{AO}" /></div>
 <div><Latex tex="AB" />、<Latex tex="AO" /> 不变 ⇒ <Latex tex="F_N" /> 不变；杆被拉起时 <Latex tex="BO" /> 变短 ⇒ <Latex tex="F_T" /> 减小</div>
 </div>
@@ -440,11 +440,11 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">轻绳两端固定在两个高处支点上，中间挂一个轻质动滑轮，下面吊着重物。① 两侧绳与竖直方向的夹角有什么关系？② 把右侧悬挂点从 <Latex tex="A" /> 沿竖直墙移到 <Latex tex="B" />、再沿水平墙移到 <Latex tex="C" />，绳上拉力怎么变？</div>
 
-<div class="half-grid">
-<div style="max-width: 15rem">
+<div class="split-wide p23-split">
+<div>
 <MovablePulleySvg />
 </div>
-<div class="stack fe-dense">
+<div class="stack">
 <div v-click="1">同一根绳跨过光滑轻质滑轮 ⇒ 两侧张力相等 <Latex tex="T_1 = T_2 = T" />；水平方向 <Latex tex="T\sin\alpha = T\sin\beta" /> ⇒ <b><Latex tex="\alpha = \beta" /></b>。</div>
 <div v-click="2">竖直方向 <Latex tex="2T\cos\alpha = Mg" /> ⇒ <Latex tex="T = Mg/(2\cos\alpha)" />，且 <Latex tex="\sin\alpha = (x_B - x_A)/L" />（绳长 <Latex tex="L" /> 不变）。</div>
 <div v-click="3"><Latex tex="A \to B" />（沿竖直墙上下移）：水平跨距不变 ⇒ <Latex tex="\alpha" /> 不变 ⇒ <b>拉力不变</b>；<Latex tex="B \to C" />（沿水平墙外移）：跨距变大 ⇒ <Latex tex="\alpha" /> 变大 ⇒ <b>拉力变大</b>。</div>
@@ -520,22 +520,22 @@ clicks: 4
 
 <DomeClimbSvg />
 
-<div class="dc-notes">
-<div class="key key-ok" v-click="4"><mdi-check-circle-outline class="ico-ok" />支持力与摩擦力本来就垂直 ⇒ 只能正交分解：<Latex tex="G_2 = G\cos\theta" /> 垂直穹顶、<Latex tex="G_1 = G\sin\theta" /> 沿穹顶向下（<Latex tex="\theta" /> 是半径与竖直方向的夹角）⇒ <Latex tex="F_N = G\cos\theta" />、<Latex tex="F_f = G\sin\theta" />。往上爬 <Latex tex="\theta" /> 变小 ⇒ <b><Latex tex="F_N" /> 变大、<Latex tex="F_f" /> 变小</b>。</div>
-<div class="key key-danger" v-click="4"><mdi-close-circle-outline class="ico-bad" />套"相似三角形" ⇒ <Latex tex="F_N" /> 不变、<Latex tex="F_f" /> 减小。这里没有定弦定角，三角形形状一直在变，不能用相似。</div>
+<div class="p27-verdict">
+<div class="key key-ok" v-click="4"><mdi-check-circle-outline class="ico-good text-lg" />支持力与摩擦力本来就垂直 ⇒ 只能正交分解：<Latex tex="G_2 = G\cos\theta" /> 垂直穹顶、<Latex tex="G_1 = G\sin\theta" /> 沿穹顶向下（<Latex tex="\theta" /> 是半径与竖直方向的夹角）⇒ <Latex tex="F_N = G\cos\theta" />、<Latex tex="F_f = G\sin\theta" />。往上爬 <Latex tex="\theta" /> 变小 ⇒ <b><Latex tex="F_N" /> 变大、<Latex tex="F_f" /> 变小</b>。</div>
+<div class="key key-danger" v-click="4"><mdi-close-circle-outline class="ico-bad text-lg" />套"相似三角形" ⇒ <Latex tex="F_N" /> 不变、<Latex tex="F_f" /> 减小。这里没有定弦定角，三角形形状一直在变，不能用相似。</div>
 </div>
 </div>
 
 ---
 
 <div class="page-grow">
-<div class="problem">重力 <Latex tex="G = 40\ \text{N}" /> 的物体用细绳 <Latex tex="OC" /> 悬于 <Latex tex="O" /> 点，<Latex tex="OC" /> 能承受的最大拉力为 <Latex tex="50\ \text{N}" />。用细绳 <Latex tex="AB" /> 绑住 <Latex tex="OC" /> 上的 <Latex tex="A" /> 点，用缓慢增大的水平力牵引 <Latex tex="A" /> 点。当 <Latex tex="OA" /> 段刚被拉断时，<Latex tex="AB" /> 的拉力为多少？</div>
+<div>重力 <Latex tex="G = 40\ \text{N}" /> 的物体用细绳 <Latex tex="OC" /> 悬于 <Latex tex="O" /> 点，<Latex tex="OC" /> 能承受的最大拉力为 <Latex tex="50\ \text{N}" />。用细绳 <Latex tex="AB" /> 绑住 <Latex tex="OC" /> 上的 <Latex tex="A" /> 点，用缓慢增大的水平力牵引 <Latex tex="A" /> 点。当 <Latex tex="OA" /> 段刚被拉断时，<Latex tex="AB" /> 的拉力为多少？</div>
 
 <div class="half-grid">
 <div style="max-width: 13rem">
 <RopeBreakingSvg />
 </div>
-<div class="stack fe-dense">
+<div class="stack">
 <div v-click="1">研究对象：<Latex tex="A" /> 点，受三个力 —— <Latex tex="OA" /> 段拉力 <Latex tex="T" />、水平拉力 <Latex tex="F" />、<Latex tex="AC" /> 段拉力（大小等于 <Latex tex="G" />，竖直向下）。</div>
 <div v-click="2"><Latex tex="T\cos\theta = G" /> ⇒ <Latex tex="T = G/\cos\theta" />；<Latex tex="F = T\sin\theta = G\tan\theta" />。</div>
 <div v-click="3"><Latex tex="F" /> 增大 ⇒ <Latex tex="\theta" /> 增大 ⇒ <Latex tex="T" /> 增大，直到 <Latex tex="T = 50\ \text{N}" /> 时被拉断，此时 <Latex tex="\cos\theta = 40/50 = 0.8" />。</div>
@@ -551,10 +551,10 @@ clicks: 3
 ---
 
 <div class="page-grow">
-<div class="problem">用轻质细绳把重力 <Latex tex="10\ \text{N}" /> 的画框对称悬挂在墙上，两挂钉相距 <Latex tex="0.5\ \text{m}" />。绳能承受的最大拉力为 <Latex tex="10\ \text{N}" />，绳最短要多长？</div>
+<div>用轻质细绳把重力 <Latex tex="10\ \text{N}" /> 的画框对称悬挂在墙上，两挂钉相距 <Latex tex="0.5\ \text{m}" />。绳能承受的最大拉力为 <Latex tex="10\ \text{N}" />，绳最短要多长？</div>
 
 <div class="half-grid">
-<div class="fe-fig" style="max-width: 16rem">
+<div class="figure" style="max-width: 16rem">
 <PictureFrameRopeSvg />
 </div>
 <div class="stack">
@@ -575,7 +575,7 @@ clicks: 2
 # 课堂小结
 
 <div class="page-grow">
-<table class="fe-method">
+<table class="data-table method-table">
 <tbody>
 <tr><th>方法</th><th>什么时候用</th><th>关键式子</th></tr>
 <tr><td>几何法（力的三角形）</td><td>3 个力</td><td>三个力首尾相接成闭合三角形，用边、角关系求力</td></tr>

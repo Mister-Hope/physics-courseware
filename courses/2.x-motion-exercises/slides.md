@@ -33,12 +33,12 @@ clicks: 0
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack-tight">
-<div class="problem">平直公路上，乙车在甲车正前方 <Latex tex="d" /> 处。某时刻甲车以初速度 <Latex tex="v_0" />、加速度 <Latex tex="a_1" /> 向右做匀变速直线运动；同时乙车由静止开始以加速度 <Latex tex="a_2" /> 向右做匀加速直线运动。</div>
+<div>平直公路上，乙车在甲车正前方 <Latex tex="d" /> 处。某时刻甲车以初速度 <Latex tex="v_0" />、加速度 <Latex tex="a_1" /> 向右做匀变速直线运动；同时乙车由静止开始以加速度 <Latex tex="a_2" /> 向右做匀加速直线运动。</div>
 
-<div class="qitem"><b>?</b><span>运动过程中两车可能相遇 0 次、1 次、2 次——分别对应 <Latex tex="a_1" /> 的什么条件？</span></div>
+<div class="step-item"><b class="text-accent-2">?</b><span class="min-w-0 break-words">运动过程中两车可能相遇 0 次、1 次、2 次——分别对应 <Latex tex="a_1" /> 的什么条件？</span></div>
 </div>
 
-<div class="fig fig-car">
+<div class="figure mx-auto" style="max-width: 340px">
 <TwoCarsMeetingSvg />
 </div>
 </div>
@@ -53,11 +53,11 @@ clicks: 4
 <div class="page-grow">
 <div class="ask">"相遇"用位移写出来是什么方程？什么时候"解不出来"，什么时候"解出两个"？</div>
 
-<div class="step" v-click="1"><b>①</b><span>位移相等：<Latex tex="v_0t + \tfrac{1}{2}a_1t^2 = d + \tfrac{1}{2}a_2t^2" /></span></div>
+<div class="step-item" v-click="1"><b class="text-accent">①</b><span class="min-w-0 break-words">位移相等：<Latex tex="v_0t + \tfrac{1}{2}a_1t^2 = d + \tfrac{1}{2}a_2t^2" /></span></div>
 
-<div class="step" v-click="2"><b>②</b><span>整理成关于 <Latex tex="t" /> 的一元二次方程：<Latex tex="\tfrac{1}{2}(a_2 - a_1)t^2 - v_0t + d = 0" /></span></div>
+<div class="step-item" v-click="2"><b class="text-accent">②</b><span class="min-w-0 break-words">整理成关于 <Latex tex="t" /> 的一元二次方程：<Latex tex="\tfrac{1}{2}(a_2 - a_1)t^2 - v_0t + d = 0" /></span></div>
 
-<div class="step" v-click="3"><b>③</b><span>判别式 <Latex tex="\Delta = v_0^2 - 2(a_2 - a_1)d" /></span></div>
+<div class="step-item" v-click="3"><b class="text-accent">③</b><span class="min-w-0 break-words">判别式 <Latex tex="\Delta = v_0^2 - 2(a_2 - a_1)d" /></span></div>
 
 <div class="key" v-click="4">判别式只看"有几个根"，还要看"根是不是正的"——只有 <Latex tex="t>0" /> 的根才真的追上过。</div>
 </div>
@@ -71,11 +71,11 @@ clicks: 4
 <div class="page-grow">
 <div class="ask">把 <Latex tex="\Delta" /> 与两根的正负讨论完，得到三条判据——先自己写写看。</div>
 
-<div class="step" v-click="1"><b>2 次</b><span><Latex tex="\Delta > 0" /> 且两根都为正 ⇔ <Latex tex="a_2 - \dfrac{v_0^2}{2d} < a_1 < a_2" />（追上一次、再被反超一次）</span></div>
+<div class="step-item" v-click="1"><b class="text-accent">2 次</b><span class="min-w-0 break-words"><Latex tex="\Delta > 0" /> 且两根都为正 ⇔ <Latex tex="a_2 - \dfrac{v_0^2}{2d} < a_1 < a_2" />（追上一次、再被反超一次）</span></div>
 
-<div class="step" v-click="2"><b>1 次</b><span><Latex tex="a_1 \ge a_2" />（方程退化为一次，只有一个正根）或 <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d}" />（判别式为 0，恰好相切）</span></div>
+<div class="step-item" v-click="2"><b class="text-accent">1 次</b><span class="min-w-0 break-words"><Latex tex="a_1 \ge a_2" />（方程退化为一次，只有一个正根）或 <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d}" />（判别式为 0，恰好相切）</span></div>
 
-<div class="step" v-click="3"><b>0 次</b><span><Latex tex="a_1 < a_2 - \dfrac{v_0^2}{2d}" />（<Latex tex="\Delta < 0" />，还没追上就被重新拉开）</span></div>
+<div class="step-item" v-click="3"><b class="text-accent">0 次</b><span class="min-w-0 break-words"><Latex tex="a_1 < a_2 - \dfrac{v_0^2}{2d}" />（<Latex tex="\Delta < 0" />，还没追上就被重新拉开）</span></div>
 
 <div class="key" v-click="4">分界线只有两条：相切线 <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d}" /> 与退化线 <Latex tex="a_1 = a_2" />。</div>
 </div>
@@ -96,9 +96,9 @@ clicks: 0
 # 三车同时刹车
 
 <div class="page-grow">
-<div class="problem">在同一直线的平直车道上，甲、乙、丙三车依次同向行驶（<b>丙在最前、乙在中间、甲在最后</b>），相邻两车的间距均为 <Latex tex="d = 5\ \text{m}" />。某时刻三车的速度分别为 <Latex tex="v_\text{丙} = 6\ \text{m/s}" />（最前）、<Latex tex="v_\text{乙} = 8\ \text{m/s}" />（中间）、<Latex tex="v_\text{甲} = 9\ \text{m/s}" />（最后）。此时甲车以 <Latex tex="a_\text{甲} = 1\ \text{m/s}^2" /> 制动；为避免追尾，乙、丙两车同时开始制动，且汽车停止后不会倒车。</div>
+<div>在同一直线的平直车道上，甲、乙、丙三车依次同向行驶（<b>丙在最前、乙在中间、甲在最后</b>），相邻两车的间距均为 <Latex tex="d = 5\ \text{m}" />。某时刻三车的速度分别为 <Latex tex="v_\text{丙} = 6\ \text{m/s}" />（最前）、<Latex tex="v_\text{乙} = 8\ \text{m/s}" />（中间）、<Latex tex="v_\text{甲} = 9\ \text{m/s}" />（最后）。此时甲车以 <Latex tex="a_\text{甲} = 1\ \text{m/s}^2" /> 制动；为避免追尾，乙、丙两车同时开始制动，且汽车停止后不会倒车。</div>
 
-<div class="qitem"><b>?</b><span>求乙车、丙车制动加速度大小<b>应该满足的条件</b>——"恰好不追尾"的两条界线各在哪里？</span></div>
+<div class="step-item"><b class="text-accent-2">?</b><span class="min-w-0 break-words">求乙车、丙车制动加速度大小<b>应该满足的条件</b>——"恰好不追尾"的两条界线各在哪里？</span></div>
 </div>
 
 ---
@@ -118,11 +118,13 @@ clicks: 4
 <div class="page-grow">
 <div class="ask">套公式解出"两车相遇"的时刻，这个时刻一定有意义吗？</div>
 
-<div class="step" v-click="1"><b>陷阱</b><span>匀减速公式只在"还没停下"的这段时间成立；车停下后停在原地，不会反向加速。把解出的 <Latex tex="t" /> 代回去得到<b>负速度</b>，说明公式被用过了头。</span></div>
+<div class="stack-tight">
+<div v-click="1"><mdi-alert-circle-outline class="text-xl bad-line inline-block align-middle mr-1" /><b class="bad-line">陷阱</b> 匀减速公式只在"还没停下"的这段时间成立；车停下后停在原地，不会反向加速。把解出的 <Latex tex="t" /> 代回去得到<b>负速度</b>，说明公式被用过了头。</div>
 
-<div class="step" v-click="2"><b>本题</b><span>照"速度相等时恰好接触"算甲–乙的临界：<Latex tex="a_\text{乙} = 1 - \dfrac{1^2}{2 \times 5} = 0.9\ \text{m/s}^2" />，对应的接触时刻是 <Latex tex="t = \dfrac{\Delta v}{\Delta a} = \dfrac{1}{0.1} = 10.0\ \text{s}" />——可甲车 <Latex tex="9.0\ \text{s}" /> 就停了（代回去 <Latex tex="v_\text{甲} = -1.0\ \text{m/s}" />），这是个假解。</span></div>
+<div v-click="2"><mdi-calculator-variant-outline class="text-xl text-accent inline-block align-middle mr-1" /><b class="text-accent">本题</b> 照"速度相等时恰好接触"算甲–乙的临界：<Latex tex="a_\text{乙} = 1 - \dfrac{1^2}{2 \times 5} = 0.9\ \text{m/s}^2" />，对应的接触时刻是 <Latex tex="t = \dfrac{\Delta v}{\Delta a} = \dfrac{1}{0.1} = 10.0\ \text{s}" />——可甲车 <Latex tex="9.0\ \text{s}" /> 就停了（代回去 <Latex tex="v_\text{甲} = -1.0\ \text{m/s}" />），这是个假解。</div>
 
-<div class="step" v-click="3"><b>正确做法</b><span>先算每辆车的刹停时间 <Latex tex="t_\text{停} = v_0/a" />；解出的 <Latex tex="t > t_\text{停}" /> 就改用<b>停下来的位置</b>判断：甲停在 <Latex tex="x = \dfrac{9^2}{2 \times 1} = 40.5\ \text{m}" />，乙必须停在它后面 ⇒ <Latex tex="5 + \dfrac{8^2}{2a_\text{乙}} \ge 40.5" /> ⇒ <Latex tex="a_\text{乙} \le \dfrac{32}{35.5} \approx 0.901\ \text{m/s}^2" />（与 0.9 只差一点，但意义完全不同）。</span></div>
+<div v-click="3"><mdi-check-decagram class="text-xl ok-line inline-block align-middle mr-1" /><b class="ok-line">正确做法</b> 先算每辆车的刹停时间 <Latex tex="t_\text{停} = v_0/a" />；解出的 <Latex tex="t > t_\text{停}" /> 就改用<b>停下来的位置</b>判断：甲停在 <Latex tex="x = \dfrac{9^2}{2 \times 1} = 40.5\ \text{m}" />，乙必须停在它后面 ⇒ <Latex tex="5 + \dfrac{8^2}{2a_\text{乙}} \ge 40.5" /> ⇒ <Latex tex="a_\text{乙} \le \dfrac{32}{35.5} \approx 0.901\ \text{m/s}^2" />（与 0.9 只差一点，但意义完全不同）。</div>
+</div>
 
 <div class="key" v-click="4">刹车问题的第一句话永远是：这段时间里，它停了吗？</div>
 </div>
@@ -134,13 +136,13 @@ clicks: 5
 # 乙、丙的制动：两条界线
 
 <div class="page-grow">
-<div class="step" v-click="1"><b>①</b><span>乙不能追尾丙：乙要比丙多刹 <Latex tex="\dfrac{(8-6)^2}{2 \times 5} = 0.4\ \text{m/s}^2" /> ⇒ <Latex tex="a_\text{乙} \ge a_\text{丙} + 0.4" />（<b>下限</b>）。</span></div>
+<div class="step-item" v-click="1"><b class="text-accent">①</b><span class="min-w-0 break-words">乙不能追尾丙：乙要比丙多刹 <Latex tex="\dfrac{(8-6)^2}{2 \times 5} = 0.4\ \text{m/s}^2" /> ⇒ <Latex tex="a_\text{乙} \ge a_\text{丙} + 0.4" />（<b>下限</b>）。</span></div>
 
-<div class="step" v-click="2"><b>②</b><span>甲也不能追尾乙：甲要比乙多刹 <Latex tex="\dfrac{(9-8)^2}{2 \times 5} = 0.1\ \text{m/s}^2" />，而甲给定 1 ⇒ <Latex tex="a_\text{乙} \le 1 - 0.1 = 0.9\ \text{m/s}^2" />（<b>上限</b>）。</span></div>
+<div class="step-item" v-click="2"><b class="text-accent">②</b><span class="min-w-0 break-words">甲也不能追尾乙：甲要比乙多刹 <Latex tex="\dfrac{(9-8)^2}{2 \times 5} = 0.1\ \text{m/s}^2" />，而甲给定 1 ⇒ <Latex tex="a_\text{乙} \le 1 - 0.1 = 0.9\ \text{m/s}^2" />（<b>上限</b>）。</span></div>
 
-<div class="step" v-click="3"><b>③</b><span>两条合起来：<Latex tex="a_\text{丙} + 0.4 \le a_\text{乙} \le 0.9" />，于是 <Latex tex="a_\text{丙} \le 0.5\ \text{m/s}^2" />。</span></div>
+<div class="step-item" v-click="3"><b class="text-accent">③</b><span class="min-w-0 break-words">两条合起来：<Latex tex="a_\text{丙} + 0.4 \le a_\text{乙} \le 0.9" />，于是 <Latex tex="a_\text{丙} \le 0.5\ \text{m/s}^2" />。</span></div>
 
-<div class="step" v-click="4"><b>④</b><span>最小值：最前的丙可以不制动（<Latex tex="a_\text{丙} = 0" />），此时乙最少 <Latex tex="0.4\ \text{m/s}^2" />；最大值（恰好不撞）：乙 <Latex tex="0.9" />、丙 <Latex tex="0.5\ \text{m/s}^2" />。</span></div>
+<div class="step-item" v-click="4"><b class="text-accent">④</b><span class="min-w-0 break-words">最小值：最前的丙可以不制动（<Latex tex="a_\text{丙} = 0" />），此时乙最少 <Latex tex="0.4\ \text{m/s}^2" />；最大值（恰好不撞）：乙 <Latex tex="0.9" />、丙 <Latex tex="0.5\ \text{m/s}^2" />。</span></div>
 
 <div class="key" v-click="5">后车必须比前车<b>多刹</b> <Latex tex="\dfrac{(\Delta v)^2}{2d}" />——但多刹也有上限：<b>两头都是界线</b>。</div>
 </div>
@@ -153,13 +155,13 @@ clicks: 1
 
 <div class="page-grow">
 <div class="stack-tight">
-<div class="step"><b>①</b><span><b>长杆穿筒</b>：两者加速度相同 ⇒ 换到杆上，筒以 <Latex tex="v_0" /> 匀速上升，<Latex tex="X = v_0t" /> 一步出结果。</span></div>
+<div class="step-item"><mdi-format-vertical-align-center class="text-xl text-accent" /><span class="min-w-0 break-words"><b>长杆穿筒</b>：两者加速度相同 ⇒ 换到杆上，筒以 <Latex tex="v_0" /> 匀速上升，<Latex tex="X = v_0t" /> 一步出结果。</span></div>
 
-<div class="step"><b>②</b><span><b>先后上抛</b>：相遇必须发生在两球都还在空中的时候——两端正是"在地面相逢"和"B 的最高点"。</span></div>
+<div class="step-item"><mdi-arrow-up-bold-outline class="text-xl text-accent" /><span class="min-w-0 break-words"><b>先后上抛</b>：相遇必须发生在两球都还在空中的时候——两端正是"在地面相逢"和"B 的最高点"。</span></div>
 
-<div class="step"><b>③</b><span><b>追及相遇</b>：位移相等写成一元二次方程，判别式数交点，再检查根是不是正的（<Latex tex="t > 0" />）。</span></div>
+<div class="step-item"><mdi-swap-horizontal class="text-xl text-accent" /><span class="min-w-0 break-words"><b>追及相遇</b>：位移相等写成一元二次方程，判别式数交点，再检查根是不是正的（<Latex tex="t > 0" />）。</span></div>
 
-<div class="step"><b>④</b><span><b>三车避碰</b>：速度相等是临界；但匀减速公式只到停下为止——先问一句"它停了吗"。</span></div>
+<div class="step-item"><mdi-car-multiple class="text-xl text-accent" /><span class="min-w-0 break-words"><b>三车避碰</b>：速度相等是临界；但匀减速公式只到停下为止——先问一句"它停了吗"。</span></div>
 </div>
 
 <div class="key" v-click="1">四道题、两把钥匙：<b>把相对运动看清</b>，<b>把临界条件写对</b>。</div>
@@ -174,14 +176,14 @@ clicks: 1
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack-tight">
-<div class="problem">一根长 <Latex tex="L" /> 的竖直长直杆悬挂在空中，其下端到一个两端开口的薄壁圆筒上端的高度为 <Latex tex="H" />，筒身长 <Latex tex="l" />。重力加速度为 <Latex tex="g" />，不计空气阻力。</div>
+<div>一根长 <Latex tex="L" /> 的竖直长直杆悬挂在空中，其下端到一个两端开口的薄壁圆筒上端的高度为 <Latex tex="H" />，筒身长 <Latex tex="l" />。重力加速度为 <Latex tex="g" />，不计空气阻力。</div>
 
-<div class="qitem"><b>①</b><span>圆筒固定不动，长杆由静止释放做自由落体——直杆完全穿过圆筒要经历多少时间？</span></div>
+<div class="step-item"><b class="text-accent-2">①</b><span class="min-w-0 break-words">圆筒固定不动，长杆由静止释放做自由落体——直杆完全穿过圆筒要经历多少时间？</span></div>
 
-<div class="qitem"><b>②</b><span>释放长杆的同时，圆筒以初速度 <Latex tex="v_0" /> 竖直向上抛出——从开始释放到直杆完全穿出圆筒要经历多少时间？</span></div>
+<div class="step-item"><b class="text-accent-2">②</b><span class="min-w-0 break-words">释放长杆的同时，圆筒以初速度 <Latex tex="v_0" /> 竖直向上抛出——从开始释放到直杆完全穿出圆筒要经历多少时间？</span></div>
 </div>
 
-<div class="fig fig-rod">
+<div class="figure mx-auto" style="max-width: 262px">
 <RodThroughCylinderSvg />
 </div>
 </div>
@@ -196,11 +198,11 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">杆"完全穿过"筒——这件事从哪一刻开始、到哪一刻结束？起止各对应杆的哪一端？</div>
 
-<div class="step" v-click="1"><b>①</b><span>开始进入：杆的<b>下端</b>到达筒的上端，这段位移是 <Latex tex="H" /> ⇒ <Latex tex="t_1 = \sqrt{\dfrac{2H}{g}}" /></span></div>
+<div class="step-item" v-click="1"><b class="text-accent">①</b><span class="min-w-0 break-words">开始进入：杆的<b>下端</b>到达筒的上端，这段位移是 <Latex tex="H" /> ⇒ <Latex tex="t_1 = \sqrt{\dfrac{2H}{g}}" /></span></div>
 
-<div class="step" v-click="2"><b>②</b><span>完全穿出：杆的<b>上端</b>离开筒的<b>下端</b>，杆的位移是 <Latex tex="H + L + l" /> ⇒ <Latex tex="t_2 = \sqrt{\dfrac{2(H+L+l)}{g}}" /></span></div>
+<div class="step-item" v-click="2"><b class="text-accent">②</b><span class="min-w-0 break-words">完全穿出：杆的<b>上端</b>离开筒的<b>下端</b>，杆的位移是 <Latex tex="H + L + l" /> ⇒ <Latex tex="t_2 = \sqrt{\dfrac{2(H+L+l)}{g}}" /></span></div>
 
-<div class="step" v-click="3"><b>③</b><span>穿筒时间 <Latex tex="\Delta t = t_2 - t_1 = \sqrt{\dfrac{2(H+L+l)}{g}} - \sqrt{\dfrac{2H}{g}}" /></span></div>
+<div class="step-item" v-click="3"><b class="text-accent">③</b><span class="min-w-0 break-words">穿筒时间 <Latex tex="\Delta t = t_2 - t_1 = \sqrt{\dfrac{2(H+L+l)}{g}} - \sqrt{\dfrac{2H}{g}}" /></span></div>
 
 </div>
 
@@ -233,31 +235,31 @@ clicks: 2
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack-tight">
-<div class="mini-title">地面系：各算各的</div>
+<div class="mini-title"><mdi-earth /> 地面系：各算各的</div>
 
-<div class="step"><b>·</b><span>杆下落 <Latex tex="h_1 = \tfrac{1}{2}gt^2" /></span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words">杆下落 <Latex tex="h_1 = \tfrac{1}{2}gt^2" /></span></div>
 
-<div class="step"><b>·</b><span>筒上升 <Latex tex="h_2 = v_0t - \tfrac{1}{2}gt^2" /></span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words">筒上升 <Latex tex="h_2 = v_0t - \tfrac{1}{2}gt^2" /></span></div>
 
-<div class="step"><b>·</b><span>穿出条件 <Latex tex="h_1 + h_2 = H+L+l" /></span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words">穿出条件 <Latex tex="h_1 + h_2 = H+L+l" /></span></div>
 
-<div class="step"><b>·</b><span>代入后 <Latex tex="t^2" /> 项全部消掉</span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words">代入后 <Latex tex="t^2" /> 项全部消掉</span></div>
 </div>
 
 <div class="stack-tight divider-l">
-<div class="mini-title">杆系：一步</div>
+<div class="mini-title"><mdi-swap-horizontal /> 杆系：一步</div>
 
-<div class="step"><b>·</b><span>两物体加速度相同，相对加速度为 <Latex tex="0" /></span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words">两物体加速度相同，相对加速度为 <Latex tex="0" /></span></div>
 
-<div class="step"><b>·</b><span>筒相对杆以 <Latex tex="v_0" /> 匀速上升</span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words">筒相对杆以 <Latex tex="v_0" /> 匀速上升</span></div>
 
-<div class="step"><b>·</b><span><Latex tex="X = v_0t = H+L+l" /></span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words"><Latex tex="X = v_0t = H+L+l" /></span></div>
 
-<div class="step"><b>·</b><span><Latex tex="t = \dfrac{H+L+l}{v_0}" /></span></div>
+<div class="step-item"><b class="text-accent">·</b><span class="min-w-0 break-words"><Latex tex="t = \dfrac{H+L+l}{v_0}" /></span></div>
 </div>
 </div>
 
-<div class="step" v-click="1"><b>⚠</b><span>成立条件：筒不能落回抛出点以下，<Latex tex="t \le \dfrac{2v_0}{g}" />，即 <Latex tex="v_0 \ge \sqrt{\dfrac{g(H+L+l)}{2}}" />。</span></div>
+<div class="step-item" v-click="1"><mdi-alert-circle-outline class="text-xl text-accent" /><span class="min-w-0 break-words">成立条件：筒不能落回抛出点以下，<Latex tex="t \le \dfrac{2v_0}{g}" />，即 <Latex tex="v_0 \ge \sqrt{\dfrac{g(H+L+l)}{2}}" />。</span></div>
 
 <div class="key" v-click="2">加速度相同的两个物体，相对运动<b>一定是匀速的</b>——这就是换参考系能省力的原因；但要检查筒在这段时间里有没有落回桌面。</div>
 </div>
@@ -268,11 +270,11 @@ clicks: 2
 # 先后上抛：两球能在空中相遇吗
 
 <div class="page-grow">
-<div class="problem">在同一竖直线上，A 球先以 <Latex tex="2v_0" /> 的初速度竖直向上抛出；间隔 <Latex tex="\Delta t" /> 后，B 球以 <Latex tex="v_0" /> 的初速度也从同一点竖直向上抛出。不计空气阻力，重力加速度为 <Latex tex="g" />。</div>
+<div>在同一竖直线上，A 球先以 <Latex tex="2v_0" /> 的初速度竖直向上抛出；间隔 <Latex tex="\Delta t" /> 后，B 球以 <Latex tex="v_0" /> 的初速度也从同一点竖直向上抛出。不计空气阻力，重力加速度为 <Latex tex="g" />。</div>
 
-<div class="qitem"><b>①</b><span>要使两球能在<b>空中相遇</b>，抛出时间间隔 <Latex tex="\Delta t" /> 的取值范围是什么？</span></div>
+<div class="step-item"><b class="text-accent-2">①</b><span class="min-w-0 break-words">要使两球能在<b>空中相遇</b>，抛出时间间隔 <Latex tex="\Delta t" /> 的取值范围是什么？</span></div>
 
-<div class="qitem"><b>②</b><span>若要求两球<b>在 B 下降的过程中相遇</b>，<Latex tex="\Delta t" /> 满足什么条件？最大时间间隔 <Latex tex="t_{\max}" /> 是多少？</span></div>
+<div class="step-item"><b class="text-accent-2">②</b><span class="min-w-0 break-words">若要求两球<b>在 B 下降的过程中相遇</b>，<Latex tex="\Delta t" /> 满足什么条件？最大时间间隔 <Latex tex="t_{\max}" /> 是多少？</span></div>
 </div>
 
 ---
@@ -316,13 +318,13 @@ clicks: 1
 
 <div class="page-grow">
 <div class="stack-tight">
-<div class="step"><b>！</b><span>"完全穿出"的位移是 <Latex tex="H+L+l" />，别忘了 <Latex tex="H" />。</span></div>
+<div class="step-item"><mdi-arrow-expand-vertical class="text-xl text-accent" /><span class="min-w-0 break-words">"完全穿出"的位移是 <Latex tex="H+L+l" />，别忘了 <Latex tex="H" />。</span></div>
 
-<div class="step"><b>！</b><span>方程有根 ≠ 真的相遇：还要 <Latex tex="t > 0" />，还要落在各自的运动时间内。</span></div>
+<div class="step-item"><mdi-equal class="text-xl text-accent" /><span class="min-w-0 break-words">方程有根 ≠ 真的相遇：还要 <Latex tex="t > 0" />，还要落在各自的运动时间内。</span></div>
 
-<div class="step"><b>！</b><span>临界条件（速度相等）只在"相对速度能减到 0"的过程中适用。</span></div>
+<div class="step-item"><mdi-timer-sand class="text-xl text-accent" /><span class="min-w-0 break-words">临界条件（速度相等）只在"相对速度能减到 0"的过程中适用。</span></div>
 
-<div class="step"><b>！</b><span><b>刹车陷阱</b>：匀减速公式只到停下为止；先算刹停时间，解出的 <Latex tex="t" /> 比它大，就改用"停下来的位置"重算。</span></div>
+<div class="step-item"><mdi-car-brake-alert class="text-xl text-accent" /><span class="min-w-0 break-words"><b>刹车陷阱</b>：匀减速公式只到停下为止；先算刹停时间，解出的 <Latex tex="t" /> 比它大，就改用"停下来的位置"重算。</span></div>
 </div>
 
 <div class="key" v-click="1">审题先问三句话：谁相对谁？临界在哪一刻？它停了吗？</div>

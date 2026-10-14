@@ -590,7 +590,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
   border: 1px solid var(--c-border);
   border-radius: 999px;
 
-  background: rgb(148 163 184 / 8%);
+  background: var(--c-border);
   color: var(--c-text-dim);
 
   font-size: 0.88rem;
@@ -601,7 +601,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
 .lrc-tabs button.lrc-on,
 .lrc-slow.lrc-on {
   border-color: var(--c-border-glow);
-  background: rgb(226 168 70 / 14%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 }
 
@@ -634,9 +634,9 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
 
   padding: 0.22rem 0.45rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.55rem;
+  border-radius: var(--radius-sm);
 
-  background: rgb(148 163 184 / 6%);
+  background: var(--c-border);
 
   font-size: 0.72rem;
 }
@@ -664,7 +664,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
   border: 1px solid var(--c-border);
   border-radius: 999px;
 
-  background: rgb(148 163 184 / 10%);
+  background: var(--c-border);
 }
 
 .lrc-bar-fill {

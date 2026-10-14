@@ -248,47 +248,23 @@
       </svg>
     </div>
 
-    <!-- 右侧：固定公式结果面板 + 民航 160 Wh 限额（严格遵照原版 PPT 结构） -->
+    <!-- 右侧：公式换算结果面板 + 民航 160 Wh 限额 -->
     <div class="pb-panel">
-      <!-- 公式换算结果区 -->
+      <!-- 公式换算：量斜体、单位正体，一律走 LaTeX -->
       <div class="pb-reads">
-        <!-- Q = C/1000 A × 3600 s = 36, 000 C -->
         <div class="pb-line">
-          <span class="font-serif italic font-bold">Q</span> =
-          <span
-            class="inline-flex flex-col items-center align-middle mx-1.5 leading-tight text-center font-serif"
-          >
-            <span class="border-b border-slate-300 px-1 pb-0.5 italic">C</span>
-            <span class="pt-0.5 text-xs">1000</span>
-          </span>
-          A × 3600 s =
-          <span class="font-bold text-slate-100 ml-1.5">36, 000 C</span>
+          <Latex tex="Q = \dfrac{C}{1000}\ \text{A} \times 3600\ \text{s} = 36{,}000\ \text{C}" />
         </div>
-
-        <!-- W = E · Q = 133, 200 J -->
         <div class="pb-line">
-          <span class="font-serif italic font-bold">W</span> =
-          <span class="font-serif italic">E</span> · <span class="font-serif italic">Q</span> =
-          <span class="font-bold text-slate-100 ml-1.5">133, 200 J</span>
+          <Latex tex="W = E \cdot Q = 133{,}200\ \text{J}" />
         </div>
-
-        <!-- W = E · C/1000 A·h = 37.0 Wh (醒目金色) -->
         <div class="pb-line pb-line-wh">
-          <span class="font-serif italic font-bold">W</span> =
-          <span class="font-serif italic">E</span> ·
-          <span
-            class="inline-flex flex-col items-center align-middle mx-1.5 leading-tight text-center font-serif text-amber-400"
-          >
-            <span class="border-b border-amber-400 px-1 pb-0.5 italic">C</span>
-            <span class="pt-0.5 text-xs">1000</span>
-          </span>
-          A·h =
-          <span class="font-black text-amber-400 ml-1.5 text-2xl">37.0 Wh</span>
+          <Latex tex="W = E \cdot \dfrac{C}{1000}\ \text{A}\cdot\text{h} = 37.0\ \text{Wh}" />
         </div>
       </div>
 
-      <!-- 民航限额判定胶囊徽标 -->
-      <div class="pb-verdict pb-ok">
+      <!-- 民航限额判定胶囊徽标（对/错语义色走共享 .ok） -->
+      <div class="pb-verdict ok">
         <svg
           class="pb-v-svg"
           viewBox="0 0 24 24"
@@ -311,36 +287,37 @@
 <style scoped>
 .pb-wrap {
   display: flex;
-  gap: 1.6rem;
+  gap: 1.2rem;
   align-items: center;
   width: 100%;
 }
 
+/* 左侧：充电宝 / 手机示意（占 44%，把宽度让给公式面板） */
 .pb-fig {
   display: flex;
-  flex: 1 1 0%;
+  flex: 0 0 44%;
   align-items: center;
   justify-content: center;
 
   min-width: 0;
-  padding: 0.6rem;
-  border: 1px solid rgb(100 116 139 / 25%);
-  border-radius: 1.1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 23 42 / 55%);
+  background: var(--c-surface);
 }
 
 .pb-svg {
   width: 100%;
   height: auto;
-  max-height: 250px;
+  max-height: 210px;
 }
 
 .pb-panel {
   display: flex;
-  flex: 1 1 0%;
+  flex: 1 1 auto;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.4rem;
   justify-content: center;
 
   min-width: 0;
@@ -349,51 +326,42 @@
 .pb-reads {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.25rem;
 
-  padding: 1.1rem 1.4rem;
-  border: 1px solid rgb(100 116 139 / 22%);
-  border-radius: 1.1rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 23 42 / 65%);
+  background: var(--c-surface);
 }
 
 .pb-line {
-  color: #cbd5e1;
-  font-size: 1.25rem;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
+/* 第三行是本页落点（37.0 Wh）：金色、与上面两行分一条线 */
 .pb-line-wh {
-  padding-top: 0.65rem;
-  border-top: 1px solid rgb(100 116 139 / 20%);
-  color: #e2a846;
-  font-weight: 700;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--c-border);
+  color: var(--c-accent);
 }
 
 .pb-verdict {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
   align-items: center;
 
-  padding: 0.75rem 1.1rem;
-  border-radius: 0.95rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--c-ok-soft);
+  border-radius: var(--radius-md);
 
   font-weight: 700;
-  font-size: 1.18rem;
-}
-
-.pb-ok {
-  border: 1px solid rgb(74 222 128 / 35%);
-  background: rgb(74 222 128 / 10%);
-  color: #86efac;
 }
 
 .pb-v-svg {
   flex-shrink: 0;
-  width: 1.6rem;
-  height: 1.6rem;
-  color: #4ade80;
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 @keyframes dash {
