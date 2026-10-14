@@ -32,13 +32,17 @@ layout: base-flex
 
 <div class="ask ask-lead">
 
-<mdi-help-circle-outline /> 能量既不会凭空产生，也不会凭空消失，那我们为什么还要节约能源？
+能量既不会凭空产生，也不会凭空消失，那我们为什么还要节约能源？
 
 </div>
 
 <v-click>
 
+<div class="figure">
+
 <EnergyChainSvg />
+
+</div>
 
 </v-click>
 
@@ -60,7 +64,7 @@ layout: base-flex
 
 <div class="ask">
 
-<mdi-history /> 九年级学过——能量守恒定律讲了什么？
+九年级学过——能量守恒定律讲了什么？
 
 </div>
 
@@ -80,7 +84,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-swap-horizontal /> 转化</div>
+<div class="mini-title"><mdi-swap-horizontal class="text-xl" /> 转化</div>
 
 <div>一种形式的能变成另一种形式：燃料的化学能 → 内能 → 机械能 → 电能。</div>
 
@@ -88,7 +92,7 @@ layout: base-flex
 
 <div class="stack divider-l">
 
-<div class="mini-title"><mdi-transfer-right /> 转移</div>
+<div class="mini-title"><mdi-transfer-right class="text-xl" /> 转移</div>
 
 <div>能量从一个物体到另一个物体：热量从高温物体传给低温物体。</div>
 
@@ -109,11 +113,15 @@ clicks: 1
 
 <div class="ask ask-lead">
 
-<mdi-thermometer /> 刚煮好的热鸡蛋放进冷水里，最后水和鸡蛋温度相同。相反的过程可能发生吗——水自发地降温、鸡蛋重新变热？
+刚煮好的热鸡蛋放进冷水里，最后水和鸡蛋温度相同。相反的过程可能发生吗——水自发地降温、鸡蛋重新变热？
 
 </div>
 
+<div class="figure">
+
 <HeatEggSvg :show-reverse="$clicks >= 1" />
+
+</div>
 
 <div v-click="1" class="key key-lead">
 
@@ -162,7 +170,11 @@ clicks: 3
 
 <div class="page-grow">
 
+<div class="figure">
+
 <DissipateSvg :step="$clicks" />
+
+</div>
 
 <div v-click="3">
 
@@ -184,7 +196,7 @@ layout: base-flex
 
 <div class="ask ask-lead">
 
-<mdi-help-circle-outline /> 能量一个也没少，那我们节约的到底是什么？
+能量一个也没少，那我们节约的到底是什么？
 
 </div>
 
@@ -258,7 +270,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-fire /> 不可再生能源</div>
+<div class="mini-title"><mdi-fire class="text-xl" /> 不可再生能源</div>
 
 <div>煤炭、石油和天然气是目前人类生产、生活中使用的主要能源，也叫作<span class="text-accent">化石能源</span>；它们无法在短时间内再生。</div>
 
@@ -266,7 +278,7 @@ layout: base-flex
 
 <div class="stack divider-l">
 
-<div class="mini-title"><mdi-weather-windy /> 可再生能源</div>
+<div class="mini-title"><mdi-weather-windy class="text-xl" /> 可再生能源</div>
 
 <div>水能和风能等能源，归根结底来源于太阳能，在自然界可以再生。</div>
 
@@ -290,7 +302,7 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="mini-title"><mdi-recycle /> 清洁能源</div>
+<div class="mini-title"><mdi-recycle class="text-xl" /> 清洁能源</div>
 
 <div>在生产及消费过程中对生态环境的污染程度低的能源，叫作清洁能源。</div>
 
@@ -314,7 +326,7 @@ layout: base-flex
 
 <div class="key key-danger">
 
-<mdi-alert-outline /> 核能：铀矿无法在短时间内再生，属于<span class="text-accent">不可再生能源</span>；发电过程对生态环境的污染程度低，又是<span class="text-accent">清洁能源</span>。
+核能：铀矿无法在短时间内再生，属于<span class="text-accent">不可再生能源</span>；发电过程对生态环境的污染程度低，又是<span class="text-accent">清洁能源</span>。
 
 </div>
 
@@ -334,7 +346,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-white-balance-sunny /> 太阳能发电</div>
+<div class="mini-title"><mdi-white-balance-sunny class="text-xl" /> 太阳能发电</div>
 
 <div>我国是最大的光伏产品制造国；2015 年底太阳能光伏发电累计并网容量达 <Latex tex="4.158\times10^{7}\ \text{kW}" />。</div>
 
@@ -342,7 +354,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-water /> 水力发电</div>
+<div class="mini-title"><mdi-water class="text-xl" /> 水力发电</div>
 
 <div>水电装机总量突破 <Latex tex="3\times10^{8}\ \text{kW}" />，约占全球的 <Latex tex="\frac{1}{4}" />，居世界第一。</div>
 
@@ -350,7 +362,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-weather-windy /> 风能发电</div>
+<div class="mini-title"><mdi-weather-windy class="text-xl" /> 风能发电</div>
 
 <div>风车田遍布西北、华北、华东、西南地区，装机容量居全球第一。</div>
 
@@ -358,7 +370,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-atom /> 核能发电</div>
+<div class="mini-title"><mdi-atom class="text-xl" /> 核能发电</div>
 
 <div>“华龙一号”具有完全自主知识产权，安全指标达到国际第三代核电技术水平。</div>
 
@@ -378,13 +390,17 @@ layout: base-flex
 
 <div class="ask">
 
-<mdi-chart-timeline-variant /> 人类对能源的利用，经历了哪几个时期？
+人类对能源的利用，经历了哪几个时期？
 
 </div>
 
 <v-click>
 
+<div class="figure">
+
 <HistoryTimelineSvg />
+
+</div>
 
 </v-click>
 
@@ -416,7 +432,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-thermometer /> 温室效应</div>
+<div class="mini-title"><mdi-thermometer class="text-xl" /> 温室效应</div>
 
 <div>燃烧增加大气中 <Latex tex="\text{CO}_2" /> 的含量，加剧温室效应，使两极冰雪融化、海平面上升。</div>
 
@@ -424,7 +440,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-water /> 酸雨</div>
+<div class="mini-title"><mdi-water class="text-xl" /> 酸雨</div>
 
 <div>石油和煤炭中常含硫，燃烧生成的 <Latex tex="\text{SO}_2" /> 使雨水酸度升高，腐蚀建筑物、酸化土壤。</div>
 
@@ -432,7 +448,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-smog /> 光化学烟雾</div>
+<div class="mini-title"><mdi-smog class="text-xl" /> 光化学烟雾</div>
 
 <div>氮的氧化物和碳氢化合物受紫外线照射产生二次污染物，有毒、会引发多种疾病。</div>
 
@@ -470,7 +486,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title"><mdi-lightbulb-on-outline /> 大力提倡节能</div>
+<div class="mini-title"><mdi-lightbulb-on-outline class="text-xl" /> 大力提倡节能</div>
 
 <div>提高能源的利用率，减少不必要的消耗。</div>
 
@@ -478,7 +494,7 @@ layout: base-flex
 
 <div class="stack divider-l">
 
-<div class="mini-title"><mdi-leaf /> 发展清洁能源</div>
+<div class="mini-title"><mdi-leaf class="text-xl" /> 发展清洁能源</div>
 
 <div>可再生能源，以及天然气、清洁煤和核能等清洁能源。</div>
 
@@ -510,7 +526,11 @@ layout: base-flex
 
 <div class="page-grow">
 
+<div class="figure">
+
 <CarEnergySvg />
+
+</div>
 
 <v-click>
 
@@ -529,13 +549,17 @@ clicks: 3
 
 <div class="ask ask-lead">
 
-<mdi-help-circle-outline /> 多用核能、太阳能，就没有问题了吗？
+多用核能、太阳能，就没有问题了吗？
 
 </div>
 
 <div v-click="1">
 
+<div class="figure">
+
 <HeatBalanceSvg :step="$clicks >= 2 ? 1 : 0" />
+
+</div>
 
 </div>
 

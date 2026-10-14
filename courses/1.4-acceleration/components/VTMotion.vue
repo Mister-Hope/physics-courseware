@@ -106,11 +106,11 @@ const state = computed((): { text: string; color: string } => {
   const v = velocity.value;
   const a = acceleration.value;
 
-  if (a === 0) return { text: "匀速", color: "#94a3b8" };
-  if (v === 0) return { text: "速度为零", color: "#94a3b8" };
-  if (v * a > 0) return { text: "加速", color: "#e2a846" };
+  if (a === 0) return { text: "匀速", color: "var(--c-text-dim)" };
+  if (v === 0) return { text: "速度为零", color: "var(--c-text-dim)" };
+  if (v * a > 0) return { text: "加速", color: "var(--c-accent)" };
 
-  return { text: "减速", color: "#60a5fa" };
+  return { text: "减速", color: "var(--c-accent-2)" };
 });
 
 const readout = computed(() => ({
@@ -425,10 +425,10 @@ onUnmounted(() => cancelAnimationFrame(frame));
   width: 100%;
   max-width: 420px;
   height: auto;
-  border: 1px solid rgb(148 163 184 / 10%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 40%);
+  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
 }
 
 .vt-panel {
@@ -465,10 +465,10 @@ onUnmounted(() => cancelAnimationFrame(frame));
 
   min-width: 0;
   padding: 0.3rem 0.35rem;
-  border: 1px solid rgb(148 163 184 / 18%);
-  border-radius: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--c-text-dim) 18%, transparent);
+  border-radius: var(--radius-md);
 
-  background: rgb(30 41 59 / 65%);
+  background: var(--c-surface);
 }
 
 /* 物理量符号用数学斜体（与课件里的公式一致） */
@@ -479,14 +479,14 @@ onUnmounted(() => cancelAnimationFrame(frame));
 }
 
 .vt-key {
-  color: #94a3b8;
+  color: var(--c-text-dim);
   font-size: 0.78rem;
   line-height: 1.2;
   white-space: nowrap;
 }
 
 .vt-val {
-  color: #f1f5f9;
+  color: var(--c-text);
 
   font-weight: 700;
   font-size: 1.15rem;
@@ -497,7 +497,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
 .vt-unit {
   margin-left: 0.12rem;
 
-  color: #94a3b8;
+  color: var(--c-text-dim);
 
   font-weight: 400;
   font-style: normal;
@@ -506,7 +506,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
 
 .vt-hint {
   margin: 0;
-  color: #94a3b8;
+  color: var(--c-text-dim);
   font-size: 0.78rem;
   line-height: 1.2;
 }

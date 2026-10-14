@@ -27,11 +27,6 @@ const env = computed(() => showDissipation && s.value >= 2);
 <template>
   <svg viewBox="0 0 900 306" width="100%" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="ds-batt" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#2563eb" />
-        <stop offset="60%" stop-color="#3b82f6" />
-        <stop offset="100%" stop-color="#1e3a8a" />
-      </linearGradient>
       <linearGradient id="ds-motor" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#0284c7" />
         <stop offset="100%" stop-color="#075985" />
@@ -47,26 +42,21 @@ const env = computed(() => showDissipation && s.value >= 2);
     <g transform="translate(20, 14)">
       <rect x="0" y="0" width="260" height="238" rx="16" fill="none" stroke="rgba(148,163,184,0.18)" stroke-width="1.4" />
       <text x="130" y="30" text-anchor="middle" font-size="19" font-weight="bold" fill="#f1f5f9">① 电池与电灯</text>
-      <g transform="translate(130, 100)">
-        <rect x="-92" y="-20" width="28" height="40" rx="5" fill="url(#ds-batt)" stroke="#60a5fa" stroke-width="1.4" />
-        <rect x="-83" y="-25" width="10" height="5" rx="2" fill="#fbbf24" />
-        <text x="-78" y="-1" text-anchor="middle" font-size="13" font-weight="bold" fill="#fef08a">+</text>
-        <text x="-78" y="15" text-anchor="middle" font-size="14" font-weight="bold" fill="#93c5fd">−</text>
-        <text x="-78" y="42" text-anchor="middle" font-size="15" fill="#e2a846">化学能</text>
-        <path d="M -64 -12 H -22" fill="none" stroke="#94a3b8" stroke-width="1.6" />
-        <path d="M -64 12 H -22" fill="none" stroke="#94a3b8" stroke-width="1.6" />
-        <CourseArrow :from="{ x: -52, y: 0 }" :to="{ x: -18, y: 0 }" stroke="#e2a846" :stroke-width="2" :head-size="8" />
-        <text x="-35" y="-8" text-anchor="middle" font-size="14" fill="#fbbf24">电能</text>
-        <circle cx="22" cy="-2" r="26" fill="rgba(254,240,138,0.1)" />
-        <circle cx="22" cy="-2" r="17" fill="rgba(254,240,138,0.16)" stroke="#fbbf24" stroke-width="1.8" />
-        <path d="M 14 12 L 14 22 H 30 V 12" fill="none" stroke="#cbd5e1" stroke-width="1.6" />
-        <path d="M 15 6 Q 22 -4 29 6" fill="none" stroke="#fef08a" stroke-width="2" stroke-linecap="round" />
-        <g stroke="#fbbf24" stroke-width="1.6" stroke-linecap="round" opacity="0.85">
-          <line x1="22" y1="-30" x2="22" y2="-38" />
-          <line x1="-2" y1="-22" x2="-9" y2="-29" />
-          <line x1="46" y1="-22" x2="53" y2="-29" />
-        </g>
-        <text x="22" y="-46" text-anchor="middle" font-size="15" fill="#fef08a">光能</text>
+      <g transform="translate(130, 106)">
+        <path
+          d="M -86 28 H -64 M -48 28 H 70 M 70 28 V -40 M 70 -40 H 32 M 8 -40 H -86 M -86 -40 V 28"
+          fill="none"
+          stroke="var(--c-text)"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        />
+        <circle cx="20" cy="-40" r="22" fill="rgba(254,240,138,0.1)" />
+        <CircuitBattery :x="-56" :y="28" orientation="horizontal" polarity />
+        <CircuitBulb :x="20" :y="-40" />
+        <CourseArrow :from="{ x: -20, y: 14 }" :to="{ x: 14, y: 14 }" stroke="#e2a846" :stroke-width="2" :head-size="8" />
+        <text x="-3" y="4" text-anchor="middle" font-size="14" fill="#fbbf24">电能</text>
+        <text x="-56" y="0" text-anchor="middle" font-size="15" fill="#e2a846">化学能</text>
+        <text x="44" y="-44" text-anchor="start" font-size="15" fill="#fef08a">光能</text>
       </g>
       <rect x="14" y="160" width="3" height="22" rx="1.5" fill="#e2a846" />
       <text x="26" y="177" font-size="17" fill="#e2e8f0">化学能 → 电能 → 光能</text>

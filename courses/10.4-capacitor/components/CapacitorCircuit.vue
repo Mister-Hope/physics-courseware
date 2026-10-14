@@ -199,7 +199,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="circuit-wrap">
+  <div class="w-full mx-auto">
     <div
       class="bg-slate-900 border border-slate-800 rounded-xl shadow-xl text-slate-100 flex flex-col items-center select-none"
     >
@@ -208,7 +208,7 @@ onUnmounted(() => {
         id="capacitor-circuit-svg-container"
         class="w-full relative bg-slate-950/40 rounded-xl p-2 overflow-hidden"
       >
-        <svg viewBox="0 0 720 220" class="circuit-svg">
+        <svg viewBox="0 0 720 220" class="block w-full h-auto">
           <!-- LEFT VERTICAL WIRE SECTION WITH EMBEDDED VERTICAL BATTERY -->
           <line x1="45" y1="20" x2="45" y2="86" stroke="#475569" stroke-width="2" />
           <line x1="45" y1="94" x2="45" y2="160" stroke="#475569" stroke-width="2" />
@@ -292,7 +292,7 @@ onUnmounted(() => {
 
           <!-- THREE CLICKABLE CHASSIS TERMINALS (接线柱 CONTROLLERS) -->
           <!-- 1 (Charge Terminal) @ (220, 20) -->
-          <g class="clickable group" @click="handleSelectTerminal('charge')">
+          <g class="cursor-pointer group" @click="handleSelectTerminal('charge')">
             <circle cx="220" cy="20" r="16" fill="transparent" />
             <circle
               cx="220"
@@ -318,7 +318,7 @@ onUnmounted(() => {
           </g>
 
           <!-- 2 (Open/Disconnect Terminal) @ (210, 55) -->
-          <g class="clickable group" @click="handleSelectTerminal('open')">
+          <g class="cursor-pointer group" @click="handleSelectTerminal('open')">
             <circle cx="210" cy="55" r="16" fill="transparent" />
             <!-- We draw a tiny disconnected wire segment to show it is a contact -->
             <circle
@@ -345,7 +345,7 @@ onUnmounted(() => {
           </g>
 
           <!-- 3 (Discharge Terminal) @ (220, 90) -->
-          <g class="clickable group" @click="handleSelectTerminal('discharge')">
+          <g class="cursor-pointer group" @click="handleSelectTerminal('discharge')">
             <circle cx="220" cy="90" r="16" fill="transparent" />
             <circle
               cx="220"
@@ -791,20 +791,3 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.circuit-wrap {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.circuit-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.clickable {
-  cursor: pointer;
-}
-</style>

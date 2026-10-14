@@ -226,10 +226,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="circuit-root">
+  <div class="flex flex-col w-full gap-2.5">
     <!-- 电路 SVG：占满全宽 -->
     <div class="circuit-svg-wrap">
-      <svg viewBox="0 0 580 220" class="circuit-svg">
+      <svg viewBox="0 0 580 220" class="block w-full h-auto">
         <!-- 地线 -->
         <line x1="60" y1="180" x2="500" y2="180" stroke="#475569" stroke-width="2.5" />
 
@@ -339,7 +339,7 @@ onUnmounted(() => {
           stroke="#e2a846"
           stroke-width="5"
           stroke-linecap="round"
-          class="switch-arm transition-all duration-300 ease-in-out cursor-pointer"
+          class="transition-all duration-300 ease-in-out cursor-pointer"
           @click="toggleS1(s1Pos === 'open' ? '1' : s1Pos === '1' ? '2' : 'open')"
         />
 
@@ -582,7 +582,7 @@ onUnmounted(() => {
 
     <!-- 底部状态栏 -->
     <div class="status-bar">
-      <div class="status-item">
+      <div class="flex items-center gap-1.5">
         <span class="status-key">S₁</span>
         <span
           :class="
@@ -592,7 +592,7 @@ onUnmounted(() => {
           >{{ s1StatusText }}</span
         >
       </div>
-      <div class="status-item">
+      <div class="flex items-center gap-1.5">
         <span class="status-key">S₂</span>
         <span :class="s2Closed ? 'text-emerald-400' : 'text-slate-500'" class="status-val">{{
           s2StatusText
@@ -620,28 +620,15 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.circuit-root {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  width: 100%;
-}
-
 /* ── SVG 容器：电路占满空间 ── */
 .circuit-svg-wrap {
   position: relative;
   border: 1px solid rgb(51 65 85 / 30%);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
   background: rgb(15 23 42 / 50%);
 }
 
-.circuit-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.circuit-svg text {
+svg text {
   pointer-events: none !important;
   user-select: none !important;
 }
@@ -658,7 +645,7 @@ onUnmounted(() => {
 
   padding: 0.35rem 0.75rem;
   border: 1px solid rgb(52 211 153 / 35%);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
 
   background: rgb(15 23 42 / 85%);
 
@@ -667,7 +654,7 @@ onUnmounted(() => {
 }
 
 .voltage-label {
-  color: #34d399;
+  color: var(--c-ok);
   font-weight: 950;
   font-size: 0.7rem;
   opacity: 0.7;
@@ -684,7 +671,7 @@ onUnmounted(() => {
 }
 
 .voltage-unit {
-  color: #34d399;
+  color: var(--c-ok);
   font-weight: 700;
   font-size: 0.8rem;
 }
@@ -697,19 +684,13 @@ onUnmounted(() => {
 
   padding: 0.5rem 1rem;
   border: 1px solid rgb(51 65 85 / 30%);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-md);
 
   background: rgb(15 23 42 / 70%);
 }
 
-.status-item {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-}
-
 .status-key {
-  color: #e2a846;
+  color: var(--c-accent);
   font-weight: 900;
   font-size: 0.65rem;
   text-transform: uppercase;
@@ -730,10 +711,10 @@ onUnmounted(() => {
   margin-left: auto;
   padding: 0.35rem 0.85rem;
   border: 1px solid rgb(239 68 68 / 30%);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
 
   background: rgb(185 28 28 / 25%);
-  color: #f87171;
+  color: var(--c-danger);
 
   font-weight: 700;
   font-size: 0.75rem;
@@ -747,10 +728,5 @@ onUnmounted(() => {
   border-color: rgb(239 68 68 / 50%);
   background: rgb(185 28 28 / 45%);
   color: #fca5a5;
-}
-
-/* ── 交互 ── */
-.switch-arm {
-  cursor: pointer;
 }
 </style>

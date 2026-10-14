@@ -480,6 +480,27 @@ code {
   font-size: 2.6rem !important;
 }
 
+/* ── 图标尺寸阶梯 ──
+   Iconify 图标的 width/height 是 `1em`，大小跟随 font-size。但本文件顶部给所有 svg 钉了
+   `font-size: 16px` 的绘制基准（16px 体系），而 UnoCSS 的 `.text-6xl` 之类不带 `!important`、
+   压不过它 → 图标会被钉死在 16px（10.4 第 19 页踩过：`text-6xl` 想要大图标，出来只有 16px）。
+   所以要放大图标，一律用下面这几个带 `!important` 的专用类，别用 UnoCSS 字号。 */
+.icon-md {
+  font-size: 1.5rem !important;
+}
+
+.icon-lg {
+  font-size: 2.2rem !important;
+}
+
+.icon-xl {
+  font-size: 3rem !important;
+}
+
+.icon-2xl {
+  font-size: 4rem !important;
+}
+
 /* ══════════════════════════════════════
    聊天气泡系统
    ══════════════════════════════════════ */

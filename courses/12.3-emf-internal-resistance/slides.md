@@ -495,23 +495,27 @@ clicks: 2
 </div>
 
 ---
+layout: exercise-split
 clicks: 3
 ---
 
-# 练习：橙汁电池
+<template v-slot:stem>
 
-<div class="page-grow">
-<div class="problem">电流表内阻 <Latex tex="100\ \Omega" />、量程 <Latex tex="0 \sim 300\ \mu\text{A}" />；电阻箱 <Latex tex="0 \sim 9\,999\ \Omega" />。调节电阻箱，测得：</div>
+<div class="mini-title"><mdi-table />练习：橙汁电池</div>
+
+电流表内阻 <Latex tex="100\ \Omega" />、量程 <Latex tex="0 \sim 300\ \mu\text{A}" />；电阻箱 <Latex tex="0 \sim 9\,999\ \Omega" />。调节电阻箱，测得：
 
 | $R/\text{k}\Omega$ | 9   | 8   | 7   | 6   | 5   | 4   | 3   |
 | ------------------ | --- | --- | --- | --- | --- | --- | --- |
 | $I/\mu\text{A}$    | 92  | 102 | 115 | 131 | 152 | 180 | 220 |
-| $U = IR/\text{V}$  | <span v-click="1">0.83</span> | <span v-click="1">0.82</span> | <span v-click="1">0.81</span> | <span v-click="1">0.79</span> | <span v-click="1">0.76</span> | <span v-click="1">0.72</span> | <span v-click="1">0.66</span> |
+
+</template>
+
+<div v-click="1">由 <Latex tex="U = IR" /> 算出电阻箱两端电压，依次为 <Latex tex="0.83" />、<Latex tex="0.82" />、<Latex tex="0.81" />、<Latex tex="0.79" />、<Latex tex="0.76" />、<Latex tex="0.72" />、<Latex tex="0.66" /> <Latex tex="\text{V}" />。</div>
 
 <div v-click="2">作 <Latex tex="U-I" /> 图像，直线在 <Latex tex="U" /> 轴上的截距就是电动势：<Latex tex="E \approx 0.95\ \text{V}" />。</div>
 
 <div v-click="3" class="key">斜率的绝对值是 <Latex tex="r + R_A \approx 1.3\ \text{k}\Omega" />；减去电流表内阻 <Latex tex="100\ \Omega" />，得电池内阻 <Latex tex="r \approx 1.2\ \text{k}\Omega" />。</div>
-</div>
 
 ---
 clicks: 2

@@ -44,28 +44,23 @@ const down = { x: DOWN_X, y: LEVEL_DOWN_Y };
         <path d="M 0 1.2 L 7.2 4 L 0 6.8 z" fill="#e2a846" />
       </marker>
     </defs>
-
     <!-- 四条水平参考线：最高点 20 m、上方 15 m、抛出点 O、下方 15 m -->
     <line :x1="LEVEL_LEFT" :y1="TOP_Y" :x2="LEVEL_RIGHT" :y2="TOP_Y" stroke="rgba(148,163,184,0.28)" stroke-width="1.1" stroke-dasharray="3 3" />
     <line :x1="LEVEL_LEFT" :y1="LEVEL_UP_Y" :x2="LEVEL_RIGHT" :y2="LEVEL_UP_Y" stroke="rgba(148,163,184,0.35)" stroke-width="1.2" stroke-dasharray="4 4" />
     <line :x1="LEVEL_LEFT" :y1="ZERO_Y" :x2="LEVEL_RIGHT" :y2="ZERO_Y" stroke="rgba(148,163,184,0.45)" stroke-width="1.4" stroke-dasharray="5 4" />
     <line :x1="LEVEL_LEFT" :y1="LEVEL_DOWN_Y" :x2="LEVEL_RIGHT" :y2="LEVEL_DOWN_Y" stroke="rgba(148,163,184,0.35)" stroke-width="1.2" stroke-dasharray="4 4" />
-
     <!-- 左侧两个 15 m 尺寸标注 -->
     <line :x1="RULE_X" :y1="LEVEL_UP_Y + 4" :x2="RULE_X" :y2="ZERO_Y - 4" stroke="#94a3b8" stroke-width="1.3" />
     <line :x1="RULE_X" :y1="ZERO_Y + 4" :x2="RULE_X" :y2="LEVEL_DOWN_Y - 4" stroke="#94a3b8" stroke-width="1.3" />
     <text :x="RULE_X - 8" :y="UP_MID + 5" text-anchor="end" font-size="13" fill="#94a3b8">15 m</text>
     <text :x="RULE_X - 8" :y="DOWN_MID + 5" text-anchor="end" font-size="13" fill="#94a3b8">15 m</text>
-
     <!-- 上升竖直线（左轨）与下落竖直线（右轨）：像铁轨一样并排，避免画成抛物线误导为斜抛 -->
     <line :x1="UP_X" :y1="ZERO_Y" :x2="UP_X" :y2="TOP_Y" stroke="rgba(226,168,70,0.68)" stroke-width="1.8" stroke-dasharray="5 4" />
     <line :x1="DOWN_X" :y1="TOP_Y" :x2="DOWN_X" :y2="LEVEL_DOWN_Y" stroke="rgba(226,168,70,0.68)" stroke-width="1.8" stroke-dasharray="5 4" />
-
     <!-- 左轨向上箭头、右轨向下箭头 -->
     <line :x1="UP_X" :y1="UP_MID + 8" :x2="UP_X" :y2="UP_MID - 6" stroke="#e2a846" stroke-width="1.8" marker-end="url(#vt15-rail-arrow)" />
     <line :x1="DOWN_X" :y1="UP_MID - 6" :x2="DOWN_X" :y2="UP_MID + 8" stroke="#e2a846" stroke-width="1.8" marker-end="url(#vt15-rail-arrow)" />
     <line :x1="DOWN_X" :y1="DOWN_MID - 6" :x2="DOWN_X" :y2="DOWN_MID + 8" stroke="#e2a846" stroke-width="1.8" marker-end="url(#vt15-rail-arrow)" />
-
     <!-- 关键位置点 -->
     <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="#94a3b8" />
     <circle :cx="topUp.x" :cy="topUp.y" r="3.6" fill="#64748b" />
@@ -73,7 +68,6 @@ const down = { x: DOWN_X, y: LEVEL_DOWN_Y };
     <circle :cx="up1.x" :cy="up1.y" r="5" fill="#e2a846" />
     <circle :cx="up2.x" :cy="up2.y" r="5" fill="#e2a846" />
     <circle :cx="down.x" :cy="down.y" r="5" fill="#60a5fa" />
-
     <!-- 文字标注 -->
     <text :x="origin.x - 10" :y="origin.y + 18" text-anchor="end" font-size="13" fill="#94a3b8">O</text>
     <text :x="MID_X" :y="TOP_Y - 10" text-anchor="middle" font-size="12" fill="#94a3b8">20 m</text>

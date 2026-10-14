@@ -1,28 +1,10 @@
 /* ═══════════════════════════════════════════════
    能源与可持续发展 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式。
+
+   本课版式全部走共享原子，没有本课私有样式：
+   .page-grow / .ask / .key / .mini-title / .figure / .tag-icon，
+   图标放大走共享字号阶梯（.mini-title 里的图标用 .text-xl），
+   电路元件走上共享符号组件（<CircuitBattery> / <CircuitBulb>）。
    ═══════════════════════════════════════════════ */
-
-/* ── 行内图标：把字号交还给所在行 ──
-   共享 common.css 为「SVG 图形」体系把 `svg` 子树的 font-size 统一压成 16px；
-   Iconify 图标是按 `1em` 渲染的，于是 .ask（1.24rem）/.mini-title（1.28rem）
-   这类大字行里的图标只有 16px，比文字小一大截。
-   这里用 .slidev-layout 提高优先级（(0,2,1) > 共享规则的 (0,1,2)），
-   让图标重新按所在行的字号出图；`.ask > svg` 的 vertical-align: -0.15em
-   也就恢复成"相对本行字号"的本意。.mini-title / .tag-icon 是 flex，
-   同样规则下按 em 出图即可，不需要额外对齐。 */
-.slidev-layout .ask svg,
-.slidev-layout .mini-title svg,
-.slidev-layout .key svg {
-  vertical-align: -0.16em;
-  width: 1em;
-  height: 1em;
-  font-size: inherit;
-}
-
-.slidev-layout .tag-icon svg {
-  width: 1.15em;
-  height: 1.15em;
-  font-size: inherit;
-}

@@ -30,23 +30,25 @@ layout: base-flex
 
 ## 我们学过哪些起电方式？
 
+<div class="page-grow">
+
 <div class="grid grid-cols-3 gap-4 mt-4">
 
 <v-clicks>
 
-<div class="card">
-  <div class="font-semibold text-lg">摩擦起电</div>
-  <div class="text-sm opacity-60 mt-1">通过摩擦使电子转移</div>
+<div>
+  <div class="mini-title"><mdi-gesture-swipe />摩擦起电</div>
+  <div class="mini-note mt-1">通过摩擦使电子转移</div>
 </div>
 
-<div class="card">
-  <div class="font-semibold text-lg">接触起电</div>
-  <div class="text-sm opacity-60 mt-1">带电体接触使电荷转移</div>
+<div>
+  <div class="mini-title"><mdi-gesture-tap />接触起电</div>
+  <div class="mini-note mt-1">带电体接触使电荷转移</div>
 </div>
 
-<div class="card">
-  <div class="font-semibold text-lg">感应起电</div>
-  <div class="text-sm opacity-60 mt-1">电场作用下电荷重新分布</div>
+<div>
+  <div class="mini-title"><mdi-magnet />感应起电</div>
+  <div class="mini-note mt-1">电场作用下电荷重新分布</div>
 </div>
 
 </v-clicks>
@@ -63,11 +65,14 @@ layout: base-flex
 
 <v-click>
 
-<div class="card card-highlight mt-5">
-  <div class="text-2xl font-semibold"><mdi-head-question-outline class="text-accent text-3xl inline-block align-middle mr-3" />我们如何把电荷<span class="text-accent">存</span>起来？</div>
+<div class="ask ask-lead mt-5">
+  <mdi-head-question-outline class="text-3xl" />
+  <span>我们如何把电荷<span class="text-accent">存</span>起来？</span>
 </div>
 
 </v-click>
+
+</div>
 
 ---
 layout: base-flex
@@ -87,28 +92,28 @@ layout: base-flex
 
 </v-clicks>
 
-<div class="grid grid-cols-2 gap-3 mt-2">
+<div class="grid grid-cols-2 gap-4 mt-3">
 
 <v-clicks>
 
-<div class="card">
-  <div class="flex items-center gap-2 mb-1"><mdi-account class="text-accent-2 text-xl" /><span class="font-semibold text-lg">人 与 金属板</span></div>
-  <div class="text-sm opacity-50">不接触即构成电容器</div>
+<div>
+  <div class="mini-title"><mdi-account />人 与 金属板</div>
+  <div class="mini-note mt-1">不接触即构成电容器</div>
 </div>
 
-<div class="card">
-  <div class="flex items-center gap-2 mb-1"><mdi-weather-lightning class="text-accent-2 text-xl" /><span class="font-semibold text-lg">云层 与 大地</span></div>
-  <div class="text-sm opacity-50">云层带电，大地感应</div>
+<div>
+  <div class="mini-title"><mdi-weather-lightning />云层 与 大地</div>
+  <div class="mini-note mt-1">云层带电，大地感应</div>
 </div>
 
-<div class="card">
-  <div class="flex items-center gap-2 mb-1"><mdi-earth class="text-accent-2 text-xl" /><span class="font-semibold text-lg">地球 与 火星</span></div>
-  <div class="text-sm opacity-50">真空绝缘，彼此靠近</div>
+<div>
+  <div class="mini-title"><mdi-earth />地球 与 火星</div>
+  <div class="mini-note mt-1">真空绝缘，彼此靠近</div>
 </div>
 
-<div class="card">
-  <div class="flex items-center gap-2 mb-1"><mdi-all-inclusive class="text-accent-2 text-xl" /><span class="font-semibold text-lg">任意两个导体</span></div>
-  <div class="text-sm opacity-50">靠近 + 绝缘 = 电容器</div>
+<div>
+  <div class="mini-title"><mdi-all-inclusive />任意两个导体</div>
+  <div class="mini-note mt-1">靠近 + 绝缘 = 电容器</div>
 </div>
 
 </v-clicks>
@@ -123,22 +128,22 @@ layout: base-flex
 
 <div class="grid grid-cols-3 gap-3 mt-4">
 
-<div class="card text-center">
+<div class="text-center">
   <img src="/images/陶瓷.png" alt="陶瓷电容器" class="placeholder-img" />
   <div class="font-semibold text-lg mt-2">陶瓷电容器</div>
-  <div class="text-sm opacity-50 mt-1">固定电容 · 电路板常用</div>
+  <div class="mini-note mt-1">固定电容 · 电路板常用</div>
 </div>
 
-<div class="card text-center">
+<div class="text-center">
   <img src="/images/电解.png" alt="电解电容器" class="placeholder-img" />
   <div class="font-semibold text-lg mt-2">电解电容器</div>
-  <div class="text-sm opacity-50 mt-1">固定电容 · 大容量 · 有极性</div>
+  <div class="mini-note mt-1">固定电容 · 大容量 · 有极性</div>
 </div>
 
-<div class="card text-center">
+<div class="text-center">
   <img src="/images/可变.png" alt="可变电容器" class="placeholder-img" />
   <div class="font-semibold text-lg mt-2">可变电容器</div>
-  <div class="text-sm opacity-50 mt-1">旋转调节 · 改变正对面积</div>
+  <div class="mini-note mt-1">旋转调节 · 改变正对面积</div>
 </div>
 
 </div>
@@ -157,26 +162,28 @@ layout: base-flex
 
 # 充放电过程
 
-<div class="grid grid-cols-2 gap-4 mt-4">
+<div class="page-grow">
 
-<div class="card">
-  <div class="flex items-center gap-2 mb-3"><mdi-battery-charging class="text-accent-2 text-xl" /><span class="font-semibold text-lg">充电</span></div>
+<div class="half-grid mt-4">
+
+<div class="stack-dense">
+  <div class="mini-title"><mdi-battery-charging />充电</div>
   <v-clicks>
 
-  <div class="mb-2 text-sm">与正极相连的极板<span class="text-red-400">失去电子 → 带正电</span></div>
-  <div class="mb-2 text-sm">与负极相连的极板<span class="text-accent-2">获得电子 → 带负电</span></div>
-  <div class="mb-2 text-sm">两极板间<span class="text-accent">电势差逐渐升高</span>，直至等于电源电压</div>
+  <div class="text-sm">与正极相连的极板<span class="text-red-400">失去电子 → 带正电</span></div>
+  <div class="text-sm">与负极相连的极板<span class="text-accent-2">获得电子 → 带负电</span></div>
+  <div class="text-sm">两极板间<span class="text-accent">电势差逐渐升高</span>，直至等于电源电压</div>
 
   </v-clicks>
 </div>
 
-<div class="card">
-  <div class="flex items-center gap-2 mb-3"><mdi-lightbulb-on-outline class="text-accent text-xl" /><span class="font-semibold text-lg">放电</span></div>
+<div class="divider-l stack-dense">
+  <div class="mini-title"><mdi-lightbulb-on-outline />放电</div>
   <v-clicks>
 
-  <div class="mb-2 text-sm">通过电路连接两极板</div>
-  <div class="mb-2 text-sm">电子从<span class="text-accent-2">负极板</span>经导线与电阻流向<span class="text-red-400">正极板</span></div>
-  <div class="mb-2 text-sm">两极板电荷逐渐中和，<span class="text-accent">电势差降低</span></div>
+  <div class="text-sm">通过电路连接两极板</div>
+  <div class="text-sm">电子从<span class="text-accent-2">负极板</span>经导线与电阻流向<span class="text-red-400">正极板</span></div>
+  <div class="text-sm">两极板电荷逐渐中和，<span class="text-accent">电势差降低</span></div>
 
   </v-clicks>
 </div>
@@ -185,11 +192,13 @@ layout: base-flex
 
 <v-click>
 
-<div class="card card-highlight mt-4 text-center">
+<div class="key mt-4">
   充电不是创造电荷，放电不是消灭电荷——过程中电荷通常在两极板间<span class="text-accent-2">转移</span>
 </div>
 
 </v-click>
+
+</div>
 
 ---
 layout: base-flex
@@ -197,26 +206,26 @@ layout: base-flex
 
 # 电容器能较好地储存电荷么？
 
-<div class="card card-highlight mt-4">
-  <div class="text-xl font-semibold"><mdi-head-question-outline class="text-accent text-2xl inline-block align-middle mr-3" />如果将充好电的电容器的<span class="text-red-400">负极接地</span>，电荷会流失吗？
-  </div>
+<div class="page-grow">
+
+<div class="ask mt-4">
+  <mdi-head-question-outline class="text-2xl" />
+  <span>如果将充好电的电容器的<span class="text-red-400">负极接地</span>，电荷会流失吗？</span>
 </div>
 
 <v-clicks>
 
-<div class="card mt-2 px-3 py-1.5">
-  <div class="text-sm">负极板上的负电荷与正极板上的正电荷<span class="text-accent">相互吸引</span>，正极板上的电荷被"拉住"，几乎不会流入大地。</div>
-</div>
+<div class="text-sm">负极板上的负电荷与正极板上的正电荷<span class="text-accent">相互吸引</span>，正极板上的电荷被"拉住"，几乎不会流入大地。</div>
 
-<div class="card mt-2 px-3 py-1.5">
-  <div class="text-sm">把导线、电阻等其他元件接在正极和负极两端，只要<span class="text-accent-2">不构成闭合回路</span>，相互靠近的两极板间吸引力仍会“留住”电荷。</div>
-</div>
+<div class="text-sm">把导线、电阻等其他元件接在正极和负极两端，只要<span class="text-accent-2">不构成闭合回路</span>，相互靠近的两极板间吸引力仍会“留住”电荷。</div>
 
-<div class="card card-highlight mt-2 px-3 py-1.5 text-center text-base">
+<div class="key">
   <span class="text-accent font-semibold">相互靠近</span> + <span class="text-accent-2 font-semibold">彼此绝缘</span> → 储存电荷的必要条件
 </div>
 
 </v-clicks>
+
+</div>
 
 ---
 layout: base-flex
@@ -224,27 +233,30 @@ layout: base-flex
 
 # 电容器的带电量
 
-<div class="card card-highlight">
-  <div class="text-xl font-semibold">
-    充放电是电荷在两极板之间<span class="text-accent">转移</span>——那么，电容器的带电量如何计算？
-  </div>
+<div class="page-grow">
+
+<div class="ask">
+  <mdi-head-question-outline class="text-2xl" />
+  <span>充放电是电荷在两极板之间<span class="text-accent">转移</span>——那么，电容器的带电量如何计算？</span>
 </div>
 
 <v-click>
 
-<div class="card card-highlight mt-3 text-center">
+<div class="key mt-3">
 
 当一个极板带电量为 $+Q$ 时，另一个极板必然带电 $-Q$
 
 <div class="text-lg">
 
-电容器的带电量 = <span class="text-accent-2 font-bold">一个极板带电的绝对值</span> Q
+电容器的带电量 = <span class="text-accent-2 font-bold">一个极板带电的绝对值</span> $Q$
 
 </div>
 
 </div>
 
 </v-click>
+
+</div>
 
 ---
 layout: base-flex
@@ -252,32 +264,30 @@ layout: base-flex
 
 # 充电与放电中的能量转化
 
-<div class="grid grid-cols-2 gap-3 mt-4">
+<div class="page-grow">
 
-<div class="card">
-  <div class="text-xl font-semibold mb-3 text-center">充电</div>
+<div class="half-grid mt-4">
+
+<div class="stack-dense">
+  <div class="mini-title"><mdi-battery-charging />充电</div>
   <v-clicks>
 
-  <div class="mb-1">两极板间<span class="text-red">电势差逐渐增大</span></div>
-  <div class="mb-1">两极板间<span class="text-red">场强逐渐增大</span></div>
-  <div class="mb-1">电流正向流经电源</div>
-  <div class="card-highlight rounded-lg p-2 mt-2 text-center">
-    电容器<span class="text-red font-semibold">吸收</span>电能
-  </div>
+  <div class="text-sm">两极板间<span class="text-red-400">电势差逐渐增大</span></div>
+  <div class="text-sm">两极板间<span class="text-red-400">场强逐渐增大</span></div>
+  <div class="text-sm">电流正向流经电源</div>
+  <div class="mt-1 text-center font-semibold text-red-400">电容器吸收电能</div>
 
   </v-clicks>
 </div>
 
-<div class="card">
-  <div class="text-xl font-semibold mb-3 text-center">放电</div>
+<div class="divider-l stack-dense">
+  <div class="mini-title"><mdi-lightbulb-on-outline />放电</div>
   <v-clicks>
 
-  <div class="mb-1">两极板间<span class="text-blue">电势差逐渐减小</span></div>
-  <div class="mb-1">两极板间<span class="text-blue">场强逐渐减小</span></div>
-  <div class="mb-1">电流流经用电器</div>
-  <div class="card-highlight rounded-lg p-2 mt-2 text-center">
-    电容器<span class="text-blue font-semibold">释放</span>电能
-  </div>
+  <div class="text-sm">两极板间<span class="text-blue-400">电势差逐渐减小</span></div>
+  <div class="text-sm">两极板间<span class="text-blue-400">场强逐渐减小</span></div>
+  <div class="text-sm">电流流经用电器</div>
+  <div class="mt-1 text-center font-semibold text-blue-400">电容器释放电能</div>
 
   </v-clicks>
 </div>
@@ -286,11 +296,13 @@ layout: base-flex
 
 <v-click>
 
-<div class="card card-highlight mt-4 text-center font-semibold text-lg">
+<div class="key mt-4 font-semibold text-lg">
   电容器，在储存<span class="text-accent">电荷</span>的同时，还存储了<span class="text-accent">能量</span>
 </div>
 
 </v-click>
+
+</div>
 
 
 ---
@@ -358,10 +370,10 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="grid grid-cols-2 gap-4 mt-2">
+<div class="half-grid mt-2">
 
-<div class="card !py-3">
-  <div class="text-lg font-semibold"><mdi-help-circle-outline class="text-accent text-xl inline-block align-middle mr-1" />质量是什么的"本领"？</div>
+<div>
+  <div class="ask"><mdi-help-circle-outline class="text-xl" />质量是什么的"本领"？</div>
   <div v-click class="text-sm opacity-80 mt-2">
 
 改变物体运动状态<span class="text-accent">难易</span>的本领
@@ -373,8 +385,8 @@ $m = \dfrac{F}{a}$
   </div>
 </div>
 
-<div class="card !py-3">
-  <div class="text-lg font-semibold"><mdi-help-circle-outline class="text-accent text-xl inline-block align-middle mr-1" />电阻是什么的"本领"？</div>
+<div class="divider-l">
+  <div class="ask"><mdi-help-circle-outline class="text-xl" />电阻是什么的"本领"？</div>
   <div v-click class="text-sm opacity-80 mt-2">
 
 阻碍电流通过<span class="text-accent">难易</span>的本领
@@ -390,15 +402,13 @@ $R = \dfrac{U}{I}$
 
 <v-click>
 
-<div class="text-2xl font-semibold mt-2 text-center"><mdi-help-circle-outline class="text-accent-2 text-2xl inline-block align-middle mr-2" />那么，电容器的本领是什么？</div>
+<div class="ask ask-lead mt-2 text-center"><mdi-help-circle-outline class="text-2xl" />那么，电容器的本领是什么？</div>
 
 </v-click>
 
 <v-click>
 
-<div class="card card-highlight mt-3 text-center max-w-md mx-auto !py-3">
-  <div class="text-xl font-semibold"><mdi-flash-outline class="text-accent text-2xl inline-block align-middle mr-2" /><span class="text-accent">储存电荷</span>的能力</div>
-</div>
+<div class="key key-lead mt-3"><mdi-flash-outline class="text-accent text-2xl align-middle" /><span class="text-accent">储存电荷</span>的能力</div>
 
 </v-click>
 
@@ -452,11 +462,13 @@ layout: base-flex
 
 # 实验结论
 
-<div class="grid grid-cols-2 gap-4 mt-4">
+<div class="page-grow">
+
+<div class="half-grid mt-4">
 
 <v-clicks>
 
-<div class="card card-highlight text-center !py-4">
+<div class="text-center">
   <div class="text-xl font-semibold opacity-70">同一个电容器</div>
   <div class="mt-2 text-accent font-bold">
 
@@ -465,7 +477,7 @@ $Q / U$ 是定值
   </div>
 </div>
 
-<div class="card card-highlight text-center !py-4">
+<div class="divider-l text-center">
   <div class="text-xl font-semibold opacity-70">不同电容器</div>
   <div class="mt-2 text-accent-2 font-bold">
     这个比值通常不相同
@@ -473,6 +485,8 @@ $Q / U$ 是定值
 </div>
 
 </v-clicks>
+
+</div>
 
 </div>
 
@@ -484,15 +498,15 @@ layout: base-flex
 
 <v-click>
 
-<div class="grid grid-cols-2 gap-4 mt-4">
+<div class="half-grid mt-4">
 
-<div class="card card-highlight rounded-lg p-1.5 text-center">
+<div class="text-center text-xl">
 
 $V = S \cdot h$
 
 </div>
 
-<div class="card card-highlight rounded-lg p-1.5 text-center">
+<div class="divider-l text-center text-xl">
 
 $Q = ? \cdot U$
 
@@ -514,7 +528,7 @@ layout: base-flex
 
 <div class="text-lg mt-1">
 
-电容器所带电荷量 Q 与两极板间电势差 U 的比值，反映电容器储存电荷的本领。
+电容器所带电荷量 $Q$ 与两极板间电势差 $U$ 的比值，反映电容器储存电荷的本领。
 
 </div>
 
@@ -559,21 +573,17 @@ layout: base-flex
 
 # 课堂练习
 
-<div class="card card-highlight mt-4">
-
-<div class="text-xl font-semibold mb-3">
+<div class="text-xl font-semibold mt-4">
 
 一个电容器的某一极板带电量为 $-2\times10^{-4}\,\text{C}$，两极板间电势差为 $10\,\text{V}$，它的电容是多少？
 
 </div>
 
-</div>
-
 <v-click>
 
-<div class="card mt-4">
+<div class="mt-4">
 
-**解：** 由 $C = \dfrac{Q}{U}$，其中 Q 为一个极板带电的绝对值，得
+**解：** 由 $C = \dfrac{Q}{U}$，其中 $Q$ 为一个极板带电的绝对值，得
 
 <div class="text-center text-xl mt-2">
 
@@ -700,29 +710,29 @@ class: text-center
 
 # 课堂小结
 
-<div class="grid grid-cols-2 gap-3 mt-1 text-left leading-snug">
+<div class="grid grid-cols-2 gap-4 mt-1 text-left leading-snug">
 
-<div class="card px-3 py-1">
-  <div class="font-semibold text-lg mb-0.5">一、电容器</div>
+<div>
+  <div class="mini-title"><mdi-book-open-variant />一、电容器</div>
 
   <div class="text-sm opacity-80">
 
   定义：<span class="text-accent font-semibold">相互靠近</span> + <span class="text-accent-2 font-semibold">彼此绝缘</span> 的导体
 
   </div>
-  <div class="text-sm opacity-50 mt-0.5">—— 能够储存电荷的容器</div>
+  <div class="mini-note mt-0.5">—— 能够储存电荷的容器</div>
 
 </div>
 
-<div class="card px-3 py-1">
-  <div class="font-semibold text-lg mb-0.5">二、电容</div>
+<div>
+  <div class="mini-title"><mdi-sigma-lower />二、电容</div>
 
   <div class="text-sm mt-0.5">
 
   $C = \dfrac{Q}{U}$，反映储存电荷的本领
 
   </div>
-  <div class="text-sm opacity-50 mt-0.5">
+  <div class="mini-note mt-0.5">
 
   单位：法拉（$F$），常用 $\mu\text{F}$、$\text{pF}$
 
@@ -731,9 +741,9 @@ class: text-center
 
 </div>
 
-<div class="card mt-1 px-3 py-1">
+<div class="mt-1">
 
-<div class="font-semibold text-lg mb-0.5">三、平行板电容器的电容</div>
+<div class="mini-title"><mdi-star-four-points-outline />三、平行板电容器的电容</div>
 
 $$C = \frac{\varepsilon_r S}{4\pi k d}$$
 
@@ -762,7 +772,7 @@ layout: base-flex
 
 # 课后作业
 
-<div class="grid grid-cols-2 gap-3 mt-2 text-[10px]">
+<div class="grid grid-cols-2 gap-4 mt-2 text-[0.65rem]">
 
 <div>
 

@@ -128,7 +128,7 @@ const visibleLowerCharges = computed(() =>
 </script>
 
 <template>
-  <div class="capacitor-container">
+  <div class="w-full mx-auto">
     <div
       class="bg-slate-950 border border-slate-900 p-3 rounded-2xl shadow-2xl text-slate-100 flex flex-col gap-6 select-none relative overflow-hidden"
     >
@@ -165,7 +165,7 @@ const visibleLowerCharges = computed(() =>
           </div>
 
           <!-- Main Physics SVG -->
-          <svg viewBox="0 0 600 280" class="capacitor-svg w-full max-h-full">
+          <svg viewBox="0 0 600 280" class="block w-full max-h-full">
             <!-- Fine Tech Grid lines (Reticle style) -->
             <g opacity="0.15">
               <line
@@ -508,18 +508,8 @@ const visibleLowerCharges = computed(() =>
 </template>
 
 <style scoped>
-.capacitor-container {
-  width: 100%;
-  margin: 0 auto;
-}
-
-.capacitor-svg {
-  display: block;
-  max-height: 100%;
-}
-
 /* Locking system display typography */
-.capacitor-svg text {
+svg text {
   font-weight: bold;
   font-family:
     Inter,
@@ -535,7 +525,7 @@ const visibleLowerCharges = computed(() =>
 }
 
 .svg-text-bold {
-  fill: #94a3b8 !important;
+  fill: var(--c-text-dim) !important;
 }
 
 .svg-text-sign {

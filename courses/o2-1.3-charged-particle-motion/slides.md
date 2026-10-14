@@ -479,12 +479,12 @@ clicks: 2
 </div>
 
 ---
-clicks: 2
+clicks: 3
 ---
 
-# 例 5：最多能待多久？
+# 例 5：怎样射入，能待得最久？
 
-<div class="ask text-lg mb-1">在例 5 的条件下（粒子一定会穿出磁场），粒子的比荷与它能在磁场中运动的最长时间是什么关系？</div>
+<div class="ask text-lg mb-1">圆形匀强磁场区域，半径 <Latex tex="R" />、磁感应强度 <Latex tex="B" />。比荷 <Latex tex="q/m" />、初速率 <Latex tex="v_0" /> 已知，轨迹半径 <Latex tex="r = \frac{mv_0}{qB} > R" />。从边界上的 <Latex tex="P" /> 点向区域内发射，方向任选。问：沿哪个方向射入，运动时间最长？这个方向满足什么关系？</div>
 
 <div class="page-grow">
 
@@ -492,15 +492,153 @@ clicks: 2
 
 <div class="stack text-lg leading-relaxed">
 
-<div v-click="1">① 粒子在磁场里走一段圆弧：<Latex tex="t = \dfrac{\theta}{2\pi}T" />；而 <Latex tex="T = \dfrac{2\pi m}{qB}" /> 与速度、半径都无关 ⟹ <strong>运动时间只由圆心角 <Latex tex="\theta" /> 决定，圆心角最大的用时最长</strong></div>
+<div v-click="1">① <Latex tex="t = \frac{\theta}{2\pi}T" />，而 <Latex tex="T = \frac{2\pi m}{qB}" /> 与方向无关 ⟹ <strong><Latex tex="\theta" /> 越大，待得越久</strong>；<Latex tex="r > R" /> 时场内那段弧必是劣弧，故 <Latex tex="\theta = 2\arcsin\frac{PQ}{2r}" /> 随弦 <Latex tex="PQ" /> 变长而变大</div>
 
-<div v-click="2">② 弦越长圆心角越大（<Latex tex="AB = 2r\sin\dfrac{\theta}{2}" />）；圆里最长的弦是直径 <Latex tex="2R" />，而 <Latex tex="r \ge R" /> ⟹ 圆心角最大不超过 <Latex tex="180^\circ" /></div>
+<div v-click="2">② 区域里最长的弦就是直径 <Latex tex="2R" /> ⟹ 让<strong>入射点、出射点关于圆心 <Latex tex="O" /> 对称</strong>（弦过 <Latex tex="O" />）时 <Latex tex="\theta" /> 最大，且 <Latex tex="OP \perp OC" /></div>
 
-<div class="key" v-click="2">③ ⟹ 最长时间 <Latex tex="t_{\max} = \dfrac{T}{2} = \dfrac{\pi m}{qB}" />：<strong>最长时间与比荷成反比</strong></div>
+<div v-click="3">③ 入射速度 <Latex tex="v_0" /> 与弦 <Latex tex="PQ" /> 的夹角 <Latex tex="\gamma" />：<Latex tex="\sin\gamma = \frac{R}{r} = \frac{qBR}{mv_0}" /></div>
 
 </div>
 
-<Example5MaxAngle :show-arc="$clicks >= 1" />
+<Example5MaxAngle :show-arc="$clicks >= 1" :show-angle="$clicks >= 3" />
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+# 例 5：最长能待多久？
+
+<div class="ask text-lg mb-1">沿这个方向射入，粒子在磁场中运动的时间是多少？</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,3fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack text-lg leading-relaxed">
+
+<div v-click="1">① 把 <Latex tex="\theta_{\max} = 2\arcsin\dfrac{R}{r}" /> 代回 <Latex tex="t = \dfrac{\theta}{2\pi}T" />，并代入 <Latex tex="T = \dfrac{2\pi m}{qB}" /> 与 <Latex tex="r = \dfrac{mv_0}{qB}" /></div>
+
+<div class="key" v-click="2">② <Latex tex="t_{\max} = \dfrac{m}{qB}\,\theta_{\max} = \dfrac{2m}{qB}\arcsin\dfrac{qBR}{mv_0}" />——<strong>它同时与比荷、入射速率有关</strong>，不再是单纯的 <Latex tex="\dfrac{\pi m}{qB}" /></div>
+
+<div v-click="2">③ 两个极限：<Latex tex="r = R" />（轨迹圆恰好与边界内切）时 <Latex tex="t_{\max} = \dfrac{\pi m}{qB} = \dfrac{T}{2}" />；<Latex tex="r \to \infty" />（轨迹几乎成直线）时 <Latex tex="t_{\max} \to \dfrac{2R}{v_0}" /></div>
+
+</div>
+
+<Example5MaxAngle :show-arc="true" :show-angle="true" />
+
+</div>
+
+</div>
+
+---
+clicks: 4
+---
+
+# 拓展：从边的中点射入正方形磁场
+
+<div class="ask text-lg mb-1">正方形匀强磁场（边长 <Latex tex="a" />，垂直纸面）：比荷 <Latex tex="q/m" />、速率 <Latex tex="v_0" />、<Latex tex="B" /> 已知，轨迹半径 <Latex tex="r = \frac{mv_0}{qB}" /> 固定。从一条边的中点 <Latex tex="P" /> 任选方向射入，怎样射待得最久？</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack">
+
+<table class="data-table w-full">
+<thead>
+<tr>
+<th class="text-left">半径范围</th>
+<th class="text-left">最优构型</th>
+<th>最大的 <Latex tex="\theta" /></th>
+</tr>
+</thead>
+<tbody>
+<tr v-click="1">
+<td><Latex tex="r \le \frac{a}{2}" /></td>
+<td>轨迹圆能装进正方形</td>
+<td>一直留在场内</td>
+</tr>
+<tr v-click="2">
+<td><Latex tex="\frac{a}{2} < r \le \frac{5a}{8}" /></td>
+<td>轨迹圆与对边相切</td>
+<td><Latex tex="\pi + \arcsin\left(\frac{a}{r} - 1\right) - \arccos\frac{a/2 - \sqrt{2ar - a^2}}{r}" /></td>
+</tr>
+<tr v-click="3">
+<td><Latex tex="r \ge \frac{5a}{8}" /></td>
+<td>出射点取到对边角点（弦最长）</td>
+<td><Latex tex="2\arcsin\frac{\sqrt{5}\,a}{4r}" /></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="stack">
+
+<SquareFieldOptimum variant="mid" />
+
+<div class="key" v-click="4">正方形有角：<strong>最长弦常常装不下</strong>，最优构型只能分段</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 4
+---
+
+# 拓展：从顶点射入正方形磁场
+
+<div class="ask text-lg mb-1">换成从正方形的一个顶点 <Latex tex="P" /> 射入，其余条件不变。问：怎么射，待得最久？</div>
+
+<div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] items-center gap-8">
+
+<div class="stack">
+
+<table class="data-table w-full">
+<thead>
+<tr>
+<th class="text-left">半径范围</th>
+<th class="text-left">最优构型</th>
+<th>最大的 <Latex tex="\theta" /></th>
+</tr>
+</thead>
+<tbody>
+<tr v-click="1">
+<td><Latex tex="r \le \frac{a}{2}" /></td>
+<td>半圆，出射回另一条边上</td>
+<td><Latex tex="\pi" /></td>
+</tr>
+<tr v-click="2">
+<td><Latex tex="\frac{a}{2} < r \le a" /></td>
+<td>贴边擦入，出射在对边</td>
+<td><Latex tex="\frac{\pi}{2} + \arcsin\left(\frac{a}{r} - 1\right)" /></td>
+</tr>
+<tr v-click="3">
+<td><Latex tex="r \ge a" /></td>
+<td>出射点取到对角顶点（弦 = 对角线）</td>
+<td><Latex tex="2\arcsin\frac{a}{\sqrt{2}\,r}" /></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="stack">
+
+<SquareFieldOptimum variant="corner" />
+
+<div class="key" v-click="4">从顶点射入<strong>永远不会出现优弧</strong>（<Latex tex="\theta_{\max} \le \pi" />）；大 <Latex tex="r" /> 段 <Latex tex="\sin\gamma = \frac{a}{\sqrt{2}\,r}" />，与圆形的 <Latex tex="\sin\gamma = \frac{R}{r}" /> 同形</div>
+
+</div>
 
 </div>
 

@@ -247,10 +247,10 @@ const ironY = computed(() => bottomY(ironHeight.value));
       >
         <defs>
           <linearGradient :id="glassId" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="rgba(186, 230, 253, 0.26)" />
-            <stop offset="0.22" stop-color="rgba(148, 163, 184, 0.05)" />
-            <stop offset="0.78" stop-color="rgba(148, 163, 184, 0.05)" />
-            <stop offset="1" stop-color="rgba(186, 230, 253, 0.22)" />
+            <stop offset="0" stop-color="rgba(186,230,253,0.26)" />
+            <stop offset="0.22" stop-color="rgba(148,163,184,0.05)" />
+            <stop offset="0.78" stop-color="rgba(148,163,184,0.05)" />
+            <stop offset="1" stop-color="rgba(186,230,253,0.22)" />
           </linearGradient>
           <linearGradient :id="capId" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="#334155" />
@@ -263,7 +263,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
           </linearGradient>
         </defs>
         <!-- ================= 1. 左侧竖直尺寸标注：管长 L = 1.2 m（不再画在管底像直径） ================= -->
-        <g class="dim-group">
+        <g>
           <!-- 上下引出界线（对齐释放线 y = 38 与落地底面 y = 262） -->
           <line x1="50" y1="38" x2="78" y2="38" class="dim-ext" />
           <line x1="50" y1="262" x2="78" y2="262" class="dim-ext" />
@@ -350,7 +350,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <!-- 与玻璃管内腔连通的细长抽气支管（位于 y = 248） -->
         <path
           d="M 124.5 245.5 L 154 245.5 L 154 250.5 L 124.5 250.5"
-          fill="rgb(15, 23, 42, 0.85)"
+          fill="rgb(15,23,42,0.85)"
           stroke="#94a3b8"
           stroke-width="1.4"
           stroke-linejoin="round"

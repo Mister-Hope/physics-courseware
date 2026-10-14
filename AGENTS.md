@@ -13,7 +13,10 @@
 | **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）    | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                      |
 | **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）         | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                    |
 | **要画"手捏住拉环/吊环/细绳往外拉"**（拉弹簧、拉测力计、拉绳） | [`.agents/notes/grip-hand.md`](.agents/notes/grip-hand.md) ⭐ **必读：禁止手画手掌 / 手指**                                 |
+| **画电路图 / 磁场图 / 带电粒子运动图**                          | [`.agents/notes/electronic-symbols.md`](.agents/notes/electronic-symbols.md) ⭐ **必读：禁止手画电源/电阻/开关/电表/灯泡与磁场叉点阵** |
 | 页面排版                                                       | [`.agents/notes/slidev-layout.md`](.agents/notes/slidev-layout.md)                                                          |
+| **写"一道题占一页"的题目页 / 一个大问题的思考页**              | [`.agents/notes/exercise-layouts.md`](.agents/notes/exercise-layouts.md) ⭐ **必读：`layout: exercise-split` / `focus-question`，具名 slot 不能写 `<template #stem>`** |
+| **风格统一 / 新建课件 / review 课件风格**                      | [`.agents/notes/style-guide.md`](.agents/notes/style-guide.md) ⭐ **原子词汇表 + 视觉 token 铁律 + `pnpm style:audit` 验收** |
 | 要设计点击节奏、写交互式组件                                   | [`.agents/notes/slidev-interactions.md`](.agents/notes/slidev-interactions.md)                                              |
 | 公式与图表                                                     | [`.agents/notes/katex-fonts-icons.md`](.agents/notes/katex-fonts-icons.md)                                                  |
 | 端到端检查                                                     | [`.agents/notes/e2e-checks.md`](.agents/notes/e2e-checks.md)                                                                |

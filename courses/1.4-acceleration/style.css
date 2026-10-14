@@ -1,47 +1,32 @@
 /* ═══════════════════════════════════════════════
    速度变化快慢的描述——加速度 — 课程特有样式
-   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css + atoms.css）
    页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   色值一律 var(--c-*)、圆角一律 var(--radius-*)、字号一律 .text-* 阶梯 / .mini-note
+   编号步骤条 / 数据表 / 左图右文栅格 / 提问·结论等原子直接用共享版，不在此自建
    ═══════════════════════════════════════════════ */
 
 /* 本课课题名长达 17 字（含破折号），3.5rem / 2.7rem 都会折行、渐变被截断；
-   压到 2.1rem 保持一行。 */
+   压到 2.1rem 保持一行（长封面标题压字号是 style-guide §8 唯一认可的例外）。 */
 .cover-title {
   font-size: 2.1rem !important;
 }
 
-/* 左宽右窄（引入页：表格 + 问题） */
-.wide-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 2rem;
-  align-items: center;
-}
-
-.wide-grid > * {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-/* 课外话 / 教材旁例：虚线小气泡 */
+/* ── 课外话 / 教材旁例：虚线小气泡 ──
+   字号（0.85rem）与弱化色写在页面的 .mini-note 上，这里只管"气泡"本身。 */
 .fun-note {
   padding: 0.7rem 0.9rem;
   border: 1px dashed var(--c-border-glow);
-  border-radius: 0.9rem;
-
-  background: rgb(226 168 70 / 6%);
-  color: var(--c-text-dim);
-
-  font-size: 0.92rem;
-  line-height: 1.6;
+  border-radius: var(--radius-md);
+  background: var(--c-accent-soft);
 }
 
 /* ── 引入页：百公里加速表（左）──
-   数字用等宽数字，避免位数变化时列宽跳动。 */
+   数字用等宽数字，避免位数变化时列宽跳动；
+   单元格的对齐与强调色写在页面里（text-right / text-accent）。 */
 .car-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.88rem;
   font-variant-numeric: tabular-nums;
 }
 
@@ -52,9 +37,7 @@
   color: var(--c-text-dim);
 
   font-weight: 700;
-  font-size: 0.76rem;
   letter-spacing: 0.04em;
-  text-align: left;
 }
 
 .car-table td {
@@ -64,59 +47,8 @@
   background: transparent;
 }
 
-.car-table .num {
-  color: var(--c-accent);
-  font-weight: 700;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.car-table .tbl-note {
-  color: var(--c-text-dim);
-  font-weight: 400;
-  font-size: 0.76rem;
-}
-
-.car-table .type {
-  color: var(--c-text-dim);
-  font-size: 0.82rem;
-}
-
-/* ── 引入页：右侧四问 ── */
-.q-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.q-item {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
-
-  font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
-
-.q-num {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1px solid var(--c-border-glow);
-  border-radius: 999px;
-
-  color: var(--c-accent);
-
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-/* ── 定义式的类比（v = Δx/Δt  →  a = Δv/Δt）── */
+/* ── 类比定义框的三栏排布（左框 · 箭头 · 右框）──
+   框体走共享 .card，这里只管"框—箭头—框"这一处结构。 */
 .ratio-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 4.5rem minmax(0, 1fr);
@@ -128,36 +60,6 @@
   min-width: 0;
 }
 
-.ratio-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  justify-content: center;
-
-  padding: 1.15rem 1.2rem;
-  border: 1px solid var(--c-border);
-  border-radius: 1.1rem;
-
-  background: rgb(15 23 42 / 50%);
-
-  text-align: center;
-}
-
-.ratio-box-blue {
-  border-color: rgb(59 130 246 / 28%);
-  background: rgb(59 130 246 / 6%);
-}
-
-.ratio-label {
-  color: var(--c-text-dim);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
-.ratio-eq {
-  font-size: 1.55rem;
-}
-
 .ratio-arrow {
   display: flex;
   flex-direction: column;
@@ -166,92 +68,27 @@
   justify-content: center;
 
   color: var(--c-accent);
-
-  font-size: 0.78rem;
 }
 
 .ratio-arrow > span {
-  font-size: 1.6rem;
   line-height: 1;
 }
 
-/* ── Δv 矢量作图（左右两栏）── */
-.vec-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
+/* ── 类比定义框（v = Δx/Δt → a = Δv/Δt；课后总结三栏）──
+   外壳走共享 .card（只有定义类内容用卡片），本课只补"加速度"这一列的蓝色调。 */
+.card-blue {
+  border-color: color-mix(in srgb, var(--c-accent-2) 28%, transparent);
+  background: color-mix(in srgb, var(--c-accent-2) 6%, transparent);
 }
 
-.vec-row > * {
-  min-width: 0;
-}
-
-/* ── 对比条（v↔Δx / a↔Δv）── */
-.cmp-bar {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem 2rem;
-
-  font-size: 0.98rem;
-  line-height: 1.65;
-}
-
+/* ── 对比条（v↔Δx / a↔Δv）：两栏栅格用共享 .half-grid，这里只管两条彩色竖标 ── */
 .cmp-cell {
   padding-left: 0.9rem;
   border-left: 2px solid var(--c-border-glow);
 }
 
 .cmp-cell-blue {
-  border-left-color: rgb(59 130 246 / 55%);
-}
-
-/* ── 读图要点清单 ── */
-.point-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.point {
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-
-  font-size: 1rem;
-  line-height: 1.55;
-}
-
-.point-blue {
-  color: var(--c-text);
-}
-
-.point .katex {
-  font-size: 1em !important;
-}
-
-/* 要点左侧的序号方块 */
-.point-idx {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-
-  width: 1.4rem;
-  height: 1.4rem;
-  margin-top: 0.12rem;
-  border-radius: 0.45rem;
-
-  background: rgb(226 168 70 / 14%);
-  color: var(--c-accent);
-
-  font-weight: 800;
-  font-size: 0.78rem;
-}
-
-.point-idx-blue {
-  background: rgb(59 130 246 / 16%);
-  color: #7dd3fc;
+  border-left-color: var(--c-accent-2);
 }
 
 /* ── 六概念链条（位移大 → … → 速度变化快）── */
@@ -274,11 +111,10 @@
 
   padding: 1.25rem 1.1rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.9rem;
+  border-radius: var(--radius-md);
 
-  background: rgb(15 23 42 / 40%);
+  background: var(--c-surface);
 
-  font-size: 1.05rem;
   line-height: 1.5;
 }
 
@@ -294,58 +130,8 @@
   font-weight: 700;
 }
 
-/* ── 课后总结清单 ── */
-.sum-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.sum-item {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
-
-  font-size: 1.02rem;
-  line-height: 1.6;
-}
-
-.sum-idx {
-  flex: 0 0 auto;
-  color: var(--c-accent);
-  font-weight: 800;
-}
-
-/* ── 交互组件外层（组件内部样式为 scoped）── */
-.vt-host,
-.swing-host {
-  display: flex;
-  justify-content: center;
-  min-width: 0;
-}
-
-/* ── 左图右文：第 4 页的 v-t 对比图要占满左栏（图大、字才看得清）── */
-.graph-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: 2.2rem;
-  align-items: center;
-}
-
-.graph-grid > * {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-/* ── 带行内公式的小标题 ──
-   ⚠️ 不能用 .mini-title：它是 flex 容器，会把行内公式拆成一个个独立 flex 项，整行排版崩掉。 */
-.block-title {
-  font-weight: 700;
-  font-size: 1.1rem;
-  line-height: 1.55;
-}
-
-/* ── 两段对比算式（跑车 / 家用轿车"每 1 s 速度增加多少"）── */
+/* ── 两段对比算式（跑车 / 家用轿车"每 1 s 速度增加多少"）──
+   字重与小字注释写在页面里（font-bold / mini-note），这里只管结构与配色。 */
 .calc-block {
   display: flex;
   flex-direction: column;
@@ -358,18 +144,13 @@
 }
 
 .calc-block-blue {
-  border-left-color: #60a5fa;
+  border-left-color: var(--c-accent-2);
 }
 
 .calc-head {
   display: flex;
   gap: 0.8rem;
   align-items: baseline;
-  font-size: 0.95rem;
-}
-
-.calc-label {
-  font-weight: 700;
 }
 
 .calc-time {
@@ -377,24 +158,12 @@
   color: var(--c-text-dim);
 }
 
-.calc-line {
-  font-weight: 700;
-  font-size: 1.05rem;
-  line-height: 1.5;
-}
-
-.calc-note {
-  color: var(--c-text-dim);
-  font-weight: 400;
-  font-size: 0.85rem;
-}
-
-/* ── 教材数据表（一些运动物体的加速度）── */
+/* ── 教材数据表（一些运动物体的加速度）──
+   字号（0.85rem）与等宽数字走共享 atoms.css 的 .data-table；
+   本课是 4 列表塞进半栏，共享的 0.9rem 横向内距会把标签列挤到全部折行，
+   所以这里只把单元格收紧回 0.3rem，并补"只画行间细线、不铺底色"的玻璃质感。 */
 .data-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.92rem;
-  font-variant-numeric: tabular-nums;
 }
 
 .data-table td {
@@ -409,16 +178,6 @@
 .car-table tr:last-child td,
 .data-table tr:last-child td {
   border-bottom: none;
-}
-
-.data-table .val {
-  font-weight: 700;
-  text-align: right;
-  white-space: nowrap;
-}
-
-.data-table .val-neg {
-  color: #60a5fa;
 }
 
 /* ── 第 14 页高铁：枕木横向快速滚动，看上去就是列车在飞驰 ──
@@ -436,11 +195,4 @@
 
 .hsr-rails {
   animation: hsr-rail-scroll 0.15s linear infinite;
-}
-
-/* ── Δv 作图区（左图右文）── */
-.vec-host {
-  display: flex;
-  justify-content: center;
-  min-width: 0;
 }

@@ -1,28 +1,35 @@
 <!--
-  选必二 1.3（第二课时）· 例 5（2）配图：弦取到直径 ⟹ 圆心角最大 ⟹ 用时最长
+  选必二 1.3（第二课时）· 例 5（2）配图：怎样射入，在圆形磁场里待得最久？
   ── 题干（由 slides.md 给出，本组件只画图）──
-     圆形匀强磁场区域，半径 R、磁感应强度 B。粒子从边界上某点以速率 v₀ 射入。
-     问：粒子在磁场中运动的最长时间是多少？
+     圆形匀强磁场区域，半径 R、磁感应强度 B。比荷 q/m、初速率 v₀ 都已知，
+     轨迹半径 r = mv₀/(qB) > R（粒子一定会穿出磁场），从边界上 P 点任选方向射入。
+     问：沿哪个方向射入待得最久？这个方向满足什么关系？
   ── 分步 ——
-     showArc=false：磁场边界圆 + ⊗ + 圆心 O + 弦的两个端点 P、Q（P 是射入点）+ 直径 PQ（标 2R）；
-     showArc=true ：第 1 次点击 → 轨迹圆弧（P→Q）+ 轨迹圆心 C + 两条虚线半径 CP、CQ（各标 r）
-                       + C 处的圆心角 θ。
+     showArc=false  ：磁场边界圆 + ⊗ + 圆心 O + 入射点 P、出射点 Q + 直径 PQ（标 2R）+ 射入速度 v₀；
+     showArc=true   ：第 1 次点击 → 轨迹圆弧（P→Q）+ 轨迹圆心 C + 两条虚线半径 CP、CQ（各标 r）
+                        + C 处的圆心角 θ；
+     showAngle=true ：第 3 次点击 → 入射方向与弦 PQ 的夹角 γ，以及 OP ⊥ OC 的直角标记。
   ── 几何（全部按 viewBox 用户单位）──
      O = (310, 330)、R = 100；取 r = 1.5R = 150（图上只写符号 r、R）。
      P、Q 取圆的一对对径点：P = (210, 330)、Q = (410, 330) ⟹ 弦 PQ = 2R 是圆里最长的弦。
      轨迹圆心 C 在 PQ 的垂直平分线上：|PC| = |QC| = r ⟹ |OC| = √(r² − R²) = √(150² − 100²)
-       = 111.8 ⟹ C = (310, 218.2)。
-     轨迹弧 P→Q：圆心角 θ = 2·asin(R/r) ≈ 83.6°（< 180° ⟹ large-arc = 0）；
+       = 111.8 ⟹ C = (310, 218.2)，OP ⊥ OC ✓。
+     轨迹弧 P→Q：圆心角 θ = 2·asin(R/r) = 2·asin(2/3) ≈ 83.6°（< 180° ⟹ large-arc = 0）；
        屏幕坐标（y 向下）里 P 相对 C 的方向角为 131.8°、Q 为 48.2°，转角是"角度减小" = 逆时针
        ⟹ sweep-flag = 0。弧的中点 = C + r·(0, 1) = (310, 368.2)，到 O 的距离 r − |OC| = 38.2 < R ✓
        （整段弧都落在磁场区域里）。
-     ※ 这一页只画"弦取直径"这一种（圆心角最大的）情形：弦 AB = 2r·sin(θ/2)，弦越长圆心角越大；
-       圆内最长的弦是直径 2R，所以 r ≥ R 时 θ 最大不超过 π（r = R 时恰好取到 π）。
+     ※ 为什么弦取直径时 θ 最大：r > R ⟹ 场内那段弧必为劣弧（若为优弧，它必含轨迹圆的一条直径 2r，
+       而这段弧整个在磁场圆内，就与"磁场圆里最长的弦只有 2R"矛盾）；于是 θ = 2·asin(PQ/2r)
+       随弦单调递增，区域里最长的弦是直径 ⟹ θ_max = 2·asin(R/r)（r = R 时才取到 180°）。
+     入射速度 v₀ 沿轨迹圆在 P 处的切线（⊥ CP、指向区域内）：与弦 PQ 的夹角 γ = θ/2 = asin(R/r)
+       ≈ 41.8°（切线与弦的夹角 = 圆心角的一半），方向单位向量约 (0.745, 0.667)（屏幕 y 向下）。
 -->
 <script setup>
 defineProps({
   /** 是否画出轨迹弧 + 轨迹圆心 C + 半径 + 圆心角 θ */
   showArc: { type: Boolean, default: false },
+  /** 是否画出入射方向与弦 PQ 的夹角 γ 与 OP ⊥ OC 的直角标记 */
+  showAngle: { type: Boolean, default: false },
 });
 
 /** 画布：viewBox 直接取「图形外接范围 + 一点余量」，不留大片空白 （页 18 右栏只占 1/4 宽，收窄 viewBox 才能把圆画大；容器 aspect-ratio 与它一致） */
@@ -58,11 +65,20 @@ const angPoint = (phiDeg) => ({
 const phiQ = (Math.atan2(Q.y - C.y, Q.x - C.x) * 180) / Math.PI;
 const phiP = (Math.atan2(P.y - C.y, P.x - C.x) * 180) / Math.PI;
 const angArc = `M ${num(angPoint(phiQ).x)} ${num(angPoint(phiQ).y)} A ${ANG_R} ${ANG_R} 0 0 1 ${num(angPoint(phiP).x)} ${num(angPoint(phiP).y)}`;
-/** 射入速度 v₀：从 P 沿轨迹弧的切线方向（指向磁场区域内） */
+/** 射入速度 v₀：轨迹圆在 P 处的切线、指向磁场区域内（⊥ CP，取 x 分量为正的那支） */
+const V_DIR = { x: -(C.y - P.y) / R_TRAJ, y: (C.x - P.x) / R_TRAJ };
 const vIn = {
   from: P,
-  to: { x: P.x + 40 * 0.745, y: P.y + 40 * 0.667 },
+  to: { x: P.x + 40 * V_DIR.x, y: P.y + 40 * V_DIR.y },
 };
+/** γ：入射方向与弦 PQ 的夹角（弦 PQ 沿 +x 方向），γ 的小弧与文字位置 */
+const GAMMA = Math.atan2(V_DIR.y, V_DIR.x);
+const GA_R = 52;
+const gArc = `M ${num(P.x + GA_R)} ${num(P.y)} A ${GA_R} ${GA_R} 0 0 1 ${num(P.x + GA_R * Math.cos(GAMMA))} ${num(P.y + GA_R * Math.sin(GAMMA))}`;
+const gLabel = { x: P.x + 62 * Math.cos(GAMMA / 2), y: P.y + 62 * Math.sin(GAMMA / 2) - 6 };
+/** OP ⊥ OC 的直角标记：从 O 沿 OP（−x）与 OC（−y）各退 17 画小方角 */
+const SQ = 17;
+const rightAngle = `M ${O.x - SQ} ${O.y} L ${O.x - SQ} ${O.y - SQ} L ${O.x} ${O.y - SQ}`;
 
 /** 磁场 ⊗ 阵列：只画在"弦以上、两条半径之间"的空当里（弦以下被轨迹弧占着）， 三个位置都核过，不压半径虚线、圆心角弧与各标注 */
 const MARK_R = 6.4;
@@ -173,6 +189,23 @@ const MARKS = [
       >
         v
       </text>
+      <!-- 第 3 次点击：入射方向与弦 PQ 的夹角 γ + OP ⊥ OC 的直角标记 -->
+      <template v-if="showAngle">
+        <path :d="gArc" fill="none" stroke="#c4b5fd" stroke-width="2" />
+        <text
+          v-bind="HALO"
+          :x="gLabel.x"
+          :y="gLabel.y"
+          text-anchor="middle"
+          :font-family="MATH"
+          font-style="italic"
+          :font-size="FS"
+          fill="#c4b5fd"
+        >
+          γ
+        </text>
+        <path :d="rightAngle" fill="none" stroke="rgba(226,168,70,0.9)" stroke-width="1.8" />
+      </template>
       <!-- 第 1 次点击：轨迹弧 + 轨迹圆心 C + 半径 + 圆心角 θ -->
       <template v-if="showArc">
         <path :d="arcPath" fill="none" stroke="#60a5fa" stroke-width="3.8" stroke-linecap="round" />

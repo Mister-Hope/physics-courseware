@@ -112,7 +112,7 @@ onUnmounted(() => {
     @pointermove="onPointerMove"
     @pointerup="onPointerUp"
   >
-    <svg ref="svgRef" viewBox="0 0 680 230" class="bucket-svg">
+    <svg ref="svgRef" viewBox="0 0 680 230" class="block w-full h-auto">
       <!-- ═══════ 左侧：水桶 ═══════ -->
       <text x="210" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="#94a3b8">
         水桶装水
@@ -385,13 +385,7 @@ onUnmounted(() => {
   cursor: grabbing;
 }
 
-.bucket-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.bucket-svg text {
+svg text {
   font-family:
     system-ui,
     -apple-system,

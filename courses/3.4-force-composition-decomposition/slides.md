@@ -37,7 +37,7 @@ clicks: 2
 <ChartLabel :x-percent="44" :y-percent="57" :parts="[{ tex: 'F_1' }]" anchor="left" :dx="-6" color="var(--c-accent)"/>
 <ChartLabel :x-percent="56" :y-percent="57" :parts="[{ tex: 'F_2' }]" anchor="right" :dx="6" color="var(--c-accent-2)"/>
 </div>
-<div class="eq-equal">=</div>
+<div class="eq-equal text-4xl">=</div>
 <div class="eq-figure">
 <ForceResultantSvg />
 <ChartLabel :x-percent="50" :y-percent="44" :parts="[{ tex: 'F' }]" anchor="left" :dx="12" color="var(--c-physics)"/>
@@ -98,11 +98,8 @@ clicks: 5
 <div class="page-grow page-grow-tight">
 <div class="ask">两次实验，为什么必须把圆环拉到同一个位置 <Latex tex="O" />？</div>
 
-<div class="p5-grid">
-<div class="p5-figure">
+<div class="pe-grid">
 <PullEquivalence :start-at="3" />
-</div>
-
 <div class="stack">
 <div class="key" v-click="1">位置相同 ⟹ 橡皮条伸长相同、对结点的拉力相同；结点都静止 ⟹ 绳的拉力"合起来"与它平衡 ⟹ 两个力共同作用的效果 = 一个力单独作用的效果（<b>等效替代</b>）。</div>
 
@@ -124,10 +121,10 @@ clicks: 2
 <div class="ask ask-lead">三只弹簧测力计也能做这个实验，为什么不用？</div>
 
 <div class="stack" v-click="1">
-<div class="mini-title"><mdi-close-circle-outline class="ico-bad" /> 三只测力计：稳不住</div>
+<div class="mini-title"><mdi-close-circle-outline class="ico-bad text-3xl" /> 三只测力计：稳不住</div>
 <div>三只测力计要同时把结点拉到同一点、还要都保持静止，可人只有两只手，很难同时稳住三只；只要有一只晃一下，"共点、静止"就不成立，读数跟着变。</div>
 
-<div class="mini-title"><mdi-check-circle-outline class="ico-good" /> 橡皮条 + 两只测力计：稳</div>
+<div class="mini-title"><mdi-check-circle-outline class="ico-good text-3xl" /> 橡皮条 + 两只测力计：稳</div>
 <div>橡皮条一端固定在木板上，结点只需两只手各拉一只测力计；两次实验分别达到同一位置，稳定、可重复。</div>
 </div>
 
@@ -191,17 +188,17 @@ clicks: 4
 <div class="ask">以下几种情况会对实验结果产生误差吗？</div>
 
 <div class="stack" v-click="1">
-<div class="mini-title">① 测力计外壳与纸面摩擦<span class="verdict verdict-good" v-click="2"><mdi-check-circle-outline /> 没有影响</span></div>
+<div class="mini-title">① 测力计外壳与纸面摩擦<span class="verdict verdict-good text-lg" v-click="2"><mdi-check-circle-outline class="icon-md" /> 没有影响</span></div>
 <div class="mini-note" v-click="2">它不改变弹簧的伸长量，读数照样是真实的。</div>
 </div>
 
 <div class="stack" v-click="1">
-<div class="mini-title">② 测力计外壳与内部弹簧摩擦<span class="verdict verdict-bad" v-click="3"><mdi-close-circle-outline /> 有影响</span></div>
+<div class="mini-title">② 测力计外壳与内部弹簧摩擦<span class="verdict verdict-bad text-lg" v-click="3"><mdi-close-circle-outline class="icon-md" /> 有影响</span></div>
 <div class="mini-note" v-click="3">摩擦"吃掉"一部分拉力，弹簧伸长偏小、读数偏小，两个力的比值就失真了。</div>
 </div>
 
 <div class="stack" v-click="1">
-<div class="mini-title">③ 不系绳结、细线直接穿过橡皮条<span class="verdict verdict-bad" v-click="4"><mdi-close-circle-outline /> 有影响</span></div>
+<div class="mini-title">③ 不系绳结、细线直接穿过橡皮条<span class="verdict verdict-bad text-lg" v-click="4"><mdi-close-circle-outline class="icon-md" /> 有影响</span></div>
 <div class="mini-note" v-click="4">同一根细线两端的拉力必然相等，每次只能得到 <Latex tex="F_1 = F_2" /> 这一种情形；系上绳结，结处的摩擦才允许 <Latex tex="F_1 \ne F_2" />。</div>
 </div>
 </div>
@@ -242,13 +239,13 @@ clicks: 2
 
 <div class="page-grow">
 <div class="half-grid" v-click="1">
-<div class="sv-figure">
+<div class="tr-figure">
 <TriangleRuleSvg />
 <ChartLabel :x-percent="31" :y-percent="83" :parts="[{ tex: 'F_1' }]" anchor="bottom-right" color="var(--c-accent)"/>
 <ChartLabel :x-percent="57" :y-percent="61" :parts="[{ tex: 'F_2' }]" anchor="left" :dx="8" color="var(--c-accent-2)"/>
 <ChartLabel :x-percent="41" :y-percent="60" :parts="[{ tex: 'F' }]" anchor="bottom-left" :dy="12" color="var(--c-physics)" halo/>
 </div>
-<div class="sv-figure divider-l">
+<div class="tr-figure divider-l">
 <ForcePolygonSvg />
 <ChartLabel :x-percent="25" :y-percent="85" :parts="[{ tex: 'F_1' }]" anchor="bottom-left" color="var(--c-accent)"/>
 <ChartLabel :x-percent="43" :y-percent="67" :parts="[{ tex: 'F_2' }]" anchor="top-left" :dx="-4" color="var(--c-accent-2)"/>
@@ -281,10 +278,10 @@ clicks: 3
 # 例题：用三角形法则求合力
 
 <div class="page-grow">
-<div class="problem">某物体受到一个大小为 <Latex tex="24\ \text{N}" />、方向水平向右的力，还受到另一个大小为 <Latex tex="7\ \text{N}" />、方向竖直向上的力。求这两个力的合力的大小和方向。</div>
+<div>某物体受到一个大小为 <Latex tex="24\ \text{N}" />、方向水平向右的力，还受到另一个大小为 <Latex tex="7\ \text{N}" />、方向竖直向上的力。求这两个力的合力的大小和方向。</div>
 
-<div class="ex-grid">
-<div class="ex-figure" v-click="1">
+<div class="te-grid">
+<div v-click="1">
 <TriangleExampleSvg />
 </div>
 <div class="stack-dense" v-click="2">
@@ -330,7 +327,7 @@ clicks: 2
 <div class="page-grow">
 <div class="ask ask-lead">合力和分力一定都是抽象出来的力吗？</div>
 
-<div class="ic-grid" v-click="1">
+<div class="in-grid" v-click="1">
 <div><InclineContactForce /></div>
 
 <div class="stack">
@@ -354,7 +351,7 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">同一个力 <Latex tex="F" />，只能分解成唯一的一对吗？</div>
 
-<div class="decomp-figure">
+<div class="dc-figure">
 <ManyDecompositionsSvg />
 <ChartLabel :x-percent="30" :y-percent="52" :parts="[{ tex: 'F' }]" anchor="top-left" :dx="-8" :dy="-6" color="var(--c-physics)" halo/>
 <ChartLabel v-click="1" :x-percent="25" :y-percent="82" :parts="[{ tex: 'F_1' }]" anchor="bottom-right" :dy="-6" color="var(--c-accent)"/>
@@ -384,8 +381,8 @@ clicks: 2
 <div class="key" v-click="2">两对互相垂直的方向：<b>水平—竖直</b>、<b>沿斜面—垂直斜面</b>，一共 8 个方向。重力就要沿"沿斜面向下"和"垂直斜面向下"分解。</div>
 
 <div class="stack-dense" v-click="2">
-<div><span class="sd-tag sd-tag-blue">水平—竖直</span>水平向右、水平向左、竖直向上、竖直向下</div>
-<div><span class="sd-tag sd-tag-gold">沿斜面—垂直斜面</span>沿斜面向上、沿斜面向下、垂直斜面向上、垂直斜面向下</div>
+<div><span class="sd-tag sd-tag-blue mini-note">水平—竖直</span>水平向右、水平向左、竖直向上、竖直向下</div>
+<div><span class="sd-tag sd-tag-gold mini-note">沿斜面—垂直斜面</span>沿斜面向上、沿斜面向下、垂直斜面向上、垂直斜面向下</div>
 </div>
 </div>
 </div>
@@ -417,10 +414,10 @@ clicks: 2
 <div class="ask"><Latex tex="G_\perp" /> 的效果是"压紧斜面"，那它是不是"物体压斜面的力"？</div>
 
 <div class="stack" v-click="1">
-<div class="mini-title"><mdi-check-circle-outline class="ico-good" /> 对：<Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 都作用在物块上</div>
+<div class="mini-title"><mdi-check-circle-outline class="ico-good text-3xl" /> 对：<Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 都作用在物块上</div>
 <div><Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 是重力分解出的分力，受力物体还是物块。</div>
 
-<div class="mini-title"><mdi-close-circle-outline class="ico-bad" /> 错：把 <Latex tex="G_\perp" /> 说成"物体压斜面的力"</div>
+<div class="mini-title"><mdi-close-circle-outline class="ico-bad text-3xl" /> 错：把 <Latex tex="G_\perp" /> 说成"物体压斜面的力"</div>
 <div>"物体压斜面的力"作用在<b>斜面</b>上，施力物体才是物块，它是斜面对物块支持力的反作用力——受力、施力对象都换了，和重力的分力不是同一个力。</div>
 </div>
 
@@ -450,7 +447,7 @@ clicks: 2
 # 一般夹角：合力有多大
 
 <div class="page-grow">
-<div class="problem">两个力 <Latex tex="F_1" />、<Latex tex="F_2" /> 的夹角为 <Latex tex="\theta" />，它们的合力 <Latex tex="F" /> 有多大？</div>
+<div>两个力 <Latex tex="F_1" />、<Latex tex="F_2" /> 的夹角为 <Latex tex="\theta" />，它们的合力 <Latex tex="F" /> 有多大？</div>
 
 <div class="gr-grid" v-click="1">
 <div><GeneralResultantSvg /></div>
@@ -502,22 +499,22 @@ clicks: 3
 # 练习与应用
 
 <div class="page-grow">
-<div class="problem">两个力 <Latex tex="F_1" />、<Latex tex="F_2" /> 之间的夹角为 <Latex tex="\theta" />，合力为 <Latex tex="F" />。判断以下说法是否正确，并简述理由。</div>
+<div>两个力 <Latex tex="F_1" />、<Latex tex="F_2" /> 之间的夹角为 <Latex tex="\theta" />，合力为 <Latex tex="F" />。判断以下说法是否正确，并简述理由。</div>
 
 <div class="qa-list">
 <div class="qa-item">
-<div class="qa-q">（1）合力 <Latex tex="F" /> 总比 <Latex tex="F_1" />、<Latex tex="F_2" /> 中的任何一个都大。</div>
-<div class="qa-a" v-click="1">答：错。两个力反向时 <Latex tex="F = |F_1 - F_2|" />，可比任何一个分力都小。</div>
+<div class="qa-q text-lg">（1）合力 <Latex tex="F" /> 总比 <Latex tex="F_1" />、<Latex tex="F_2" /> 中的任何一个都大。</div>
+<div class="qa-a text-lg" v-click="1">答：错。两个力反向时 <Latex tex="F = |F_1 - F_2|" />，可比任何一个分力都小。</div>
 </div>
 
 <div class="qa-item">
-<div class="qa-q">（2）若 <Latex tex="F_1" />、<Latex tex="F_2" /> 的大小不变，<Latex tex="\theta" /> 角越小，合力 <Latex tex="F" /> 就越大。</div>
-<div class="qa-a" v-click="2">答：对。夹角越小合力越大，两个力同向时最大。</div>
+<div class="qa-q text-lg">（2）若 <Latex tex="F_1" />、<Latex tex="F_2" /> 的大小不变，<Latex tex="\theta" /> 角越小，合力 <Latex tex="F" /> 就越大。</div>
+<div class="qa-a text-lg" v-click="2">答：对。夹角越小合力越大，两个力同向时最大。</div>
 </div>
 
 <div class="qa-item">
-<div class="qa-q">（3）若夹角 <Latex tex="\theta" /> 不变、<Latex tex="F_1" /> 不变，<Latex tex="F_2" /> 增大，合力 <Latex tex="F" /> 一定增大。</div>
-<div class="qa-a" v-click="3">答：错。<Latex tex="\theta" /> 为钝角且 <Latex tex="F_2" /> 较小时，<Latex tex="F_2" /> 增大合力反而减小。</div>
+<div class="qa-q text-lg">（3）若夹角 <Latex tex="\theta" /> 不变、<Latex tex="F_1" /> 不变，<Latex tex="F_2" /> 增大，合力 <Latex tex="F" /> 一定增大。</div>
+<div class="qa-a text-lg" v-click="3">答：错。<Latex tex="\theta" /> 为钝角且 <Latex tex="F_2" /> 较小时，<Latex tex="F_2" /> 增大合力反而减小。</div>
 </div>
 </div>
 </div>
