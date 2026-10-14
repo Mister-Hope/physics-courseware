@@ -17,7 +17,8 @@
 | 页面排版                                                       | [`.agents/notes/slidev-layout.md`](.agents/notes/slidev-layout.md)                                                                                                          |
 | **写"一道题占一页"的题目页 / 一个大问题的思考页**              | [`.agents/notes/exercise-layouts.md`](.agents/notes/exercise-layouts.md) ⭐ **必读：`layout: exercise-split` / `focus-question`，具名 slot 不能写 `<template #stem>`**      |
 | **风格统一 / 新建课件 / review 课件风格**                      | [`.agents/notes/style-guide.md`](.agents/notes/style-guide.md) ⭐ **原子词汇表 + 视觉 token 铁律 + `pnpm style:audit` 验收**                                                |
-| **继续推进"全仓 34 门课件风格统一"这项工作**                   | [`.agents/notes/style-unification-progress.md`](.agents/notes/style-unification-progress.md) ⭐ **进度交接：已完成 5 门、剩 29 门批次表 + 派工模板 + 幽灵 dev server 教训** |
+| **接手"全仓 34 门课件风格统一"这项工作**                        | [`.agents/notes/style-unification-handoff.md`](.agents/notes/style-unification-handoff.md) ⭐ **先读这个**：已完成 8 门 / 3 门基线溢出待修 / ⛔ 别碰 o2-1.3 / 子代理路由 |
+| 风格统一的批次明细、派工模板、工具坑                           | [`.agents/notes/style-unification-progress.md`](.agents/notes/style-unification-progress.md) 批次表 + 幽灵 dev server 教训 + 教师待拍板的视觉取舍                         |
 | 要设计点击节奏、写交互式组件                                   | [`.agents/notes/slidev-interactions.md`](.agents/notes/slidev-interactions.md)                                                                                              |
 | 公式与图表                                                     | [`.agents/notes/katex-fonts-icons.md`](.agents/notes/katex-fonts-icons.md)                                                                                                  |
 | 端到端检查                                                     | [`.agents/notes/e2e-checks.md`](.agents/notes/e2e-checks.md)                                                                                                                |

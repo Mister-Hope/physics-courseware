@@ -410,7 +410,7 @@ const endDrag = (): void => {
           :cy="contactPoint.y"
           r="30"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -420,7 +420,7 @@ const endDrag = (): void => {
     </div>
 
     <!-- 右：点 3 才出的错误套相似三角形警示（几何直角 △OQP 的切线交点 Q 在穹顶上方一直随 θ 移动，OQ 并非定值） -->
-    <div class="dc-fig" :class="{ 'fe-hidden': step < 3 }">
+    <div class="dc-fig" :class="{ 'fig-hold': step < 3 }">
       <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
         <!-- 顶部小标题说明 -->
         <text x="72" y="28" font-size="12" font-weight="600" fill="#cbd5e1" text-anchor="middle">力的直角三角形 (G 定长)</text>
@@ -596,13 +596,5 @@ const endDrag = (): void => {
   width: 100%;
   height: auto;
   max-height: 100%;
-}
-
-.fe-grab {
-  cursor: grab;
-}
-
-.fe-grab:active {
-  cursor: grabbing;
 }
 </style>

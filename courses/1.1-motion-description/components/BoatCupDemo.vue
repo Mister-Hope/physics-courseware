@@ -4,9 +4,11 @@ import { computed, onUnmounted, ref } from "vue";
 
 type Frame = "ground" | "water";
 
-const { interactive = true } = defineProps<{
+const { interactive = true, compact = false } = defineProps<{
   /** False = 只当静态题目图用：不显示参考系状态、按钮与时间轴，也不播放 */
   interactive?: boolean;
+  /** True = 演示舞台（场景 + 时间轴）收窄一档：同页还有推导与结论时给它们腾出高度，标题行保持整宽不折行 */
+  compact?: boolean;
 }>();
 
 // 场景几何（viewBox 1000 × 300，画面顶部裁掉 24 单位空天）
@@ -113,7 +115,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 </script>
 
 <template>
-  <div class="bcd-wrap">
+  <div class="bcd-wrap" :class="{ compact }">
     <div v-if="interactive" class="bcd-header">
       <div class="bcd-state">
         <span class="bcd-dot" :class="frame" />
@@ -586,8 +588,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
       </div>
       <div class="bcd-labels">
         <span class="bcd-step-link" @click="seekTo(0)">0 · 水杯落水</span>
-        <span class="bcd-step-link" @click="seekTo(1)">T₀ · 发现并掉头</span>
-        <span class="bcd-step-link" @click="seekTo(2)">2T₀ · 捡起水杯</span>
+        <span class="bcd-step-link" @click="seekTo(1)"><Latex tex="T_0" /> · 发现并掉头</span>
+        <span class="bcd-step-link" @click="seekTo(2)"><Latex tex="2T_0" /> · 捡起水杯</span>
       </div>
     </div>
   </div>
@@ -599,6 +601,15 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   flex-direction: column;
   gap: 0.45rem;
   width: 100%;
+}
+
+/* 收窄变体（compact）：只收场景与时间轴、不收标题行——标题行给的是状态与开关，
+   整宽时不会折行；场景按 1000 : 276 的比例等比缩小，不会有左右留白托底。 */
+.bcd-wrap.compact .bcd-svg,
+.bcd-wrap.compact .bcd-timeline {
+  width: 100%;
+  max-width: 35rem;
+  margin-inline: auto;
 }
 
 .bcd-header {
@@ -627,17 +638,17 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   height: 0.5rem;
   border-radius: 50%;
 
-  background: #e2a846;
-  box-shadow: 0 0 8px rgb(226 168 70 / 60%);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 60%, transparent);
 }
 
 .bcd-dot.water {
-  background: #60a5fa;
-  box-shadow: 0 0 8px rgb(96 165 250 / 60%);
+  background: var(--c-accent-2);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
 }
 
 .bcd-hint {
-  color: #94a3b8;
+  color: var(--c-text-dim);
   font-weight: 500;
 }
 
@@ -649,7 +660,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 .bcd-time {
-  color: #94a3b8;
+  color: var(--c-text-dim);
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
 }
@@ -671,12 +682,16 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   justify-content: center;
 
   padding: 0.22rem 0.75rem;
-  border: 1px solid rgb(226 168 70 / 50%);
-  border-radius: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 50%, transparent);
+  border-radius: 999px;
 
-  background: linear-gradient(135deg, rgb(226 168 70 / 24%), rgb(226 168 70 / 8%));
-  color: #e2a846;
-  box-shadow: 0 2px 8px rgb(226 168 70 / 12%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c-accent) 24%, transparent),
+    color-mix(in srgb, var(--c-accent) 8%, transparent)
+  );
+  color: var(--c-accent);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-accent) 12%, transparent);
 
   font-weight: 700;
   font-size: 0.7rem;
@@ -688,14 +703,18 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 .bcd-btn.ghost {
-  border-color: rgb(148 163 184 / 40%);
-  background: linear-gradient(135deg, rgb(148 163 184 / 18%), rgb(148 163 184 / 6%));
+  border-color: color-mix(in srgb, var(--c-text-dim) 40%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c-text-dim) 18%, transparent),
+    color-mix(in srgb, var(--c-text-dim) 6%, transparent)
+  );
   color: #cbd5e1;
-  box-shadow: 0 2px 8px rgb(15 23 42 / 20%);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-bg) 20%, transparent);
 }
 
 .bcd-btn:hover {
-  box-shadow: 0 4px 12px rgb(226 168 70 / 22%);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--c-accent) 22%, transparent);
   filter: brightness(1.15);
 }
 
@@ -708,10 +727,10 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
   width: 100%;
   height: auto;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 40%);
+  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
 }
 
 .bcd-timeline {
@@ -723,15 +742,15 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 .bcd-track {
   position: relative;
   height: 4px;
-  border-radius: 2px;
-  background: rgb(148 163 184 / 18%);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text-dim) 18%, transparent);
 }
 
 .bcd-track-fill {
   position: absolute;
   inset: 0 auto 0 0;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #e2a846, #60a5fa);
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
 }
 
 .bcd-track-tick {
@@ -741,9 +760,9 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
   width: 2px;
   height: 10px;
-  border-radius: 1px;
+  border-radius: 999px;
 
-  background: rgb(226 232 240 / 55%);
+  background: color-mix(in srgb, var(--c-text) 55%, transparent);
 }
 
 .bcd-labels {
@@ -759,7 +778,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 .bcd-step-link:hover {
-  color: #e2e8f0;
+  color: var(--c-text);
 }
 
 .bcd-labels > span:nth-child(2) {

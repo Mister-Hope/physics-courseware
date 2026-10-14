@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════
    电路中的能量转化 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   通用设计系统（common / layout / atoms）已提取到 workspace/shared/styles/，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式。
+   命名前缀：cmp-（对比表）· fig-（配图栅格）
    ═══════════════════════════════════════════════ */
 
 /* 本课公式多、示意图与交互组件占位大，纵向密度略收紧 */
@@ -10,40 +11,25 @@
   --stack-gap: 0.65rem;
 }
 
-/* 示意图（WorkConductionSvg / MotorSchematicSvg）：占满所在栏宽度 */
-.svg-full {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  min-width: 0;
-}
-
-.svg-full > svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* 例题页：配图只占右侧一小块方形，把宽度让给题干 */
-.half-grid-square {
+/* 例题页：题干宽、配图窄（右栏固定 200px，与 .half-grid 同挂），
+   配图限高，把纵向空间让给题干与解析 */
+.fig-square {
   grid-template-columns: minmax(0, 1fr) 200px;
 }
 
-.half-grid-square .svg-full > svg {
+.fig-square .figure svg {
   max-height: 168px;
 }
 
 /* 第 9 页：纯电阻 / 非纯电阻 对比表（每行一个三列栅格，便于整行分步出现） */
 .cmp-row {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr) minmax(0, 1fr);
-  gap: 0 1.1rem;
+  /* 右栏（非纯电阻）文字最长、还要塞公式，多分一点宽度，避免整页被折行撑高 */
+  grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr) minmax(0, 1.22fr);
+  gap: 0 0.85rem;
   align-items: start;
 
-  font-size: 0.95rem;
-  line-height: 1.55;
+  line-height: 1.4;
 }
 
 .cmp-row > div {
@@ -56,17 +42,17 @@
   font-weight: 800;
 }
 
+/* 列头：图标与文字同一行，别让行内 SVG 把表头行撑高（图标走 .icon-md 放大） */
 .cmp-head > div {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+
   padding-bottom: 0.15rem;
-  border-bottom: 1px solid rgb(100 116 139 / 35%);
+  border-bottom: 1px solid var(--c-border);
 }
 
 .cmp-item {
   color: var(--c-text);
   font-weight: 700;
-}
-
-/* 例题一页文字较多，纵向密度略收紧 */
-.problem {
-  font-size: 1.05rem;
 }

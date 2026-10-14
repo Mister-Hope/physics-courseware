@@ -260,7 +260,7 @@ const endDrag = (): void => {
           :cy="apex.y"
           r="26"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -270,7 +270,7 @@ const endDrag = (): void => {
       </svg>
     </div>
 
-    <div class="wb-tri" :class="{ 'fe-hidden': step < 2 }">
+    <div class="wb-tri" :class="{ 'fig-hold': step < 2 }">
       <svg :viewBox="`0 0 ${TRI.width} ${TRI.height}`" xmlns="http://www.w3.org/2000/svg">
         <CourseArrow
           :from="tri.vertexA"

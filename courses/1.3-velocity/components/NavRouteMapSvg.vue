@@ -1,6 +1,6 @@
 <template>
   <!-- 第 2 页：导航两条路线示意图——红（骑行 3 km）与蓝（网约车 4 km）从同一起点到电影院 -->
-  <svg class="nav-map" viewBox="0 0 420 210">
+  <svg class="route-map" viewBox="0 0 420 210">
     <g stroke="rgba(148,163,184,0.13)" stroke-width="1">
       <path d="M 20 46 H 400" />
       <path d="M 20 96 H 400" />

@@ -104,21 +104,21 @@ onUnmounted(stop);
 </script>
 
 <template>
-  <div class="demo-wrap">
-    <div class="demo-header">
-      <div class="frame-state">
-        <span class="frame-dot" :class="frame" />
+  <div class="rf-wrap">
+    <div class="rf-header">
+      <div class="rf-frame-state">
+        <span class="rf-frame-dot" :class="frame" />
         <span>参考系：{{ frame === "ground" ? "地面" : "车厢" }}</span>
-        <span class="passenger-state" :class="frame">
+        <span class="rf-passenger-state" :class="frame">
           · 乘客{{ frame === "ground" ? "随车运动" : "静止" }}
         </span>
       </div>
-      <button class="switch-btn" type="button" @click="toggle">切换参考系</button>
+      <button class="rf-switch-btn" type="button" @click="toggle">切换参考系</button>
     </div>
 
     <svg
       viewBox="0 0 640 300"
-      class="demo-svg"
+      class="rf-svg"
       role="img"
       aria-label="参考系演示：同一辆列车，两种看法"
     >
@@ -561,20 +561,20 @@ onUnmounted(stop);
 </template>
 
 <style scoped>
-.demo-wrap {
+.rf-wrap {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
 
-.demo-header {
+.rf-header {
   display: flex;
   gap: 0.8rem;
   align-items: center;
   justify-content: space-between;
 }
 
-.frame-state {
+.rf-frame-state {
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
@@ -585,46 +585,50 @@ onUnmounted(stop);
   font-size: 0.82rem;
 }
 
-.frame-dot {
+.rf-frame-dot {
   flex-shrink: 0;
 
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 50%;
 
-  background: #e2a846;
-  box-shadow: 0 0 8px rgb(226 168 70 / 60%);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 60%, transparent);
 }
 
-.frame-dot.train {
-  background: #60a5fa;
-  box-shadow: 0 0 8px rgb(96 165 250 / 60%);
+.rf-frame-dot.train {
+  background: var(--c-accent-2);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
 }
 
-.passenger-state {
-  color: #94a3b8;
+.rf-passenger-state {
+  color: var(--c-text-dim);
 }
 
-.passenger-state.ground {
-  color: #e2a846;
+.rf-passenger-state.ground {
+  color: var(--c-accent);
 }
 
-.passenger-state.train {
-  color: #60a5fa;
+.rf-passenger-state.train {
+  color: var(--c-accent-2);
 }
 
-.switch-btn {
+.rf-switch-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 0.42rem 1.35rem;
-  border: 1px solid rgb(226 168 70 / 50%);
-  border-radius: 2rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 50%, transparent);
+  border-radius: 999px;
 
-  background: linear-gradient(135deg, rgb(226 168 70 / 24%), rgb(226 168 70 / 8%));
-  color: #e2a846;
-  box-shadow: 0 2px 10px rgb(226 168 70 / 12%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c-accent) 24%, transparent),
+    color-mix(in srgb, var(--c-accent) 8%, transparent)
+  );
+  color: var(--c-accent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--c-accent) 12%, transparent);
 
   font-weight: 700;
   font-size: 0.82rem;
@@ -635,27 +639,27 @@ onUnmounted(stop);
   transition: all 0.25s ease;
 }
 
-.switch-btn:hover {
-  box-shadow: 0 4px 14px rgb(226 168 70 / 22%);
+.rf-switch-btn:hover {
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--c-accent) 22%, transparent);
   filter: brightness(1.15);
   transform: translateY(-1px);
 }
 
-.switch-btn:active {
+.rf-switch-btn:active {
   filter: brightness(0.98);
   transform: translateY(0);
 }
 
-.demo-svg {
+.rf-svg {
   width: auto;
   max-width: 100%;
 
   /* 限制高度：本页「标签 + 演示」整体要完整落在 16:9 画面内，别让场景底部被裁掉 */
   height: 16rem;
   margin: 0 auto;
-  border: 1px solid rgb(148 163 184 / 10%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 40%);
+  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
 }
 </style>

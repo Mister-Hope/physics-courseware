@@ -89,10 +89,18 @@ const gapInfo = (
 const gapBA = computed(() => gapInfo(posA, posB));
 const gapCB = computed(() => gapInfo(posB, posC));
 
-const crashText = computed<string>(() => {
-  if (gapBA.value.hit > 0) return `甲追尾乙：t ≈ ${gapBA.value.hit.toFixed(2)} s`;
-  if (gapCB.value.hit > 0) return `乙追尾丙：t ≈ ${gapCB.value.hit.toFixed(2)} s`;
+/** 追尾提示文字（不含数值）：哪两车追尾，或全程安全 */
+const crashLabel = computed<string>(() => {
+  if (gapBA.value.hit > 0) return "甲追尾乙：";
+  if (gapCB.value.hit > 0) return "乙追尾丙：";
   return "全程安全，没有追尾";
+});
+
+/** 追尾时刻（s）；没有追尾时为 null（数值走 <Latex>，单位用 \text{}） */
+const crashTime = computed<number | null>(() => {
+  if (gapBA.value.hit > 0) return gapBA.value.hit;
+  if (gapCB.value.hit > 0) return gapCB.value.hit;
+  return null;
 });
 
 const sampling = (valueAt: (t: number) => number): { x: number; y: number }[] =>
@@ -131,8 +139,9 @@ const labels = computed(() => {
   return out;
 });
 
-const fmtGap = (gap: number, hit: number): string =>
-  hit > 0 ? `已在 t ≈ ${hit.toFixed(2)} s 撞上` : `${gap.toFixed(2)} m`;
+/** 最近车距读数：未追尾给"X m"，已追尾给"t ≈ X s"（数值走 <Latex>，单位用 \text{}） */
+const gapTex = (gap: number, hit: number): string =>
+  hit > 0 ? `t \\approx ${hit.toFixed(2)}\\ \\text{s}` : `${gap.toFixed(2)}\\ \\text{m}`;
 </script>
 
 <template>
@@ -164,17 +173,26 @@ const fmtGap = (gap: number, hit: number): string =>
       <div class="ba-line">
         <b class="ba-c-a">甲</b>–<b class="ba-c-b">乙</b>最近车距：<b
           :class="gapBA.hit > 0 ? 'ba-bad' : 'ba-ok'"
-          >{{ fmtGap(gapBA.min, gapBA.hit) }}</b
+          ><template v-if="gapBA.hit > 0">已在 </template
+          ><Latex :tex="gapTex(gapBA.min, gapBA.hit)" /><template v-if="gapBA.hit > 0">
+            撞上</template
+          ></b
         >
       </div>
       <div class="ba-line">
         <b class="ba-c-b">乙</b>–<b class="ba-c-c">丙</b>最近车距：<b
           :class="gapCB.hit > 0 ? 'ba-bad' : 'ba-ok'"
-          >{{ fmtGap(gapCB.min, gapCB.hit) }}</b
+          ><template v-if="gapCB.hit > 0">已在 </template
+          ><Latex :tex="gapTex(gapCB.min, gapCB.hit)" /><template v-if="gapCB.hit > 0">
+            撞上</template
+          ></b
         >
       </div>
       <div class="ba-badge" :class="{ 'ba-badge-off': gapBA.hit <= 0 && gapCB.hit <= 0 }">
-        {{ crashText }}
+        {{ crashLabel }}<Latex
+          v-if="crashTime !== null"
+          :tex="`t \\approx ${crashTime.toFixed(2)}\\ \\text{s}`"
+        />
       </div>
       <label class="ba-slider">
         <span><b class="ba-c-b">乙</b>的制动 <Latex tex="a_\text{乙}" /></span>
@@ -249,7 +267,7 @@ const fmtGap = (gap: number, hit: number): string =>
   border: 1px solid var(--c-border-glow);
   border-radius: 999px;
 
-  background: rgb(226 168 70 / 12%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 
   font-weight: 700;
@@ -258,7 +276,7 @@ const fmtGap = (gap: number, hit: number): string =>
 
 .ba-badge-off {
   border-color: rgb(248 113 113 / 45%);
-  background: rgb(248 113 113 / 10%);
+  background: var(--c-danger-soft);
   color: var(--c-danger);
 }
 

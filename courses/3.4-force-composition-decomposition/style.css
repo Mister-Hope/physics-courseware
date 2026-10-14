@@ -3,7 +3,7 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
 
-   前缀按"图 / 小节概念"分组，并与各交互组件内部 <style scoped> 的前缀一一对应
+   前缀按"图 / 小节概念"分组，并与各交互组件内部 \3c style scoped> 的前缀一一对应
    （同一概念只有一套名字，页面与组件共用）：
    eq- 引课等效对比 · te- 例题 · pe- 等效替代实验 · dc- 力的分解 · in- 斜面接触力
    sd- 斜面方向 · gr- 一般夹角 · tr- 三角形定则 · qa- 练习 · verdict/ico- 对错判定
@@ -161,7 +161,6 @@
   display: inline-flex;
   gap: 0.35rem;
   align-items: center;
-
   margin-left: 0.2rem;
 }
 

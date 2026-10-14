@@ -367,7 +367,7 @@ const endDrag = (): void => {
           <!-- 左手：捏住左绳末端 endL，沿左绳方向向上拉（支持拖动旋转） -->
           <g
             :transform="`translate(${endL.x}, ${endL.y}) rotate(${-90 - alpha})`"
-            class="fe-grab"
+            class="fig-grab"
             @pointerdown="startDrag($event, 'left')"
             @pointermove="moveDrag"
             @pointerup="endDrag"
@@ -380,7 +380,7 @@ const endDrag = (): void => {
           <!-- 右手：捏住右绳末端 endR，沿右绳方向向上拉（同样支持拖动旋转） -->
           <g
             :transform="`translate(${endR.x}, ${endR.y}) rotate(${beta - 90})`"
-            class="fe-grab"
+            class="fig-grab"
             @pointerdown="startDrag($event, 'right')"
             @pointermove="moveDrag"
             @pointerup="endDrag"
@@ -393,7 +393,7 @@ const endDrag = (): void => {
       </div>
 
       <!-- 右图：立式辅助圆与力矢量三角形（圆放大居中，G、F₁、F₂ 自适应置于三角形外侧） -->
-      <div class="ac-tri" :class="{ 'fe-hidden': step < 1 }">
+      <div class="ac-tri" :class="{ 'fig-hold': step < 1 }">
         <svg :viewBox="`0 0 ${TRI.width} ${TRI.height}`" xmlns="http://www.w3.org/2000/svg">
           <!-- 大号辅助圆 -->
           <circle
@@ -569,14 +569,6 @@ const endDrag = (): void => {
   width: 100%;
   height: 100%;
   max-height: 100%;
-}
-
-.fe-grab {
-  cursor: grab;
-}
-
-.fe-grab:active {
-  cursor: grabbing;
 }
 
 .ac-sliders {

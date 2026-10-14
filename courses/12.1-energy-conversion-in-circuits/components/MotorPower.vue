@@ -32,7 +32,7 @@ const sliders = computed(() => [
     max: 300,
     step: 10,
     unitTex: "\\text{V}",
-    color: "#e2a846",
+    color: "var(--c-accent)",
   },
   {
     key: "I",
@@ -42,7 +42,7 @@ const sliders = computed(() => [
     max: 12,
     step: 0.5,
     unitTex: "\\text{A}",
-    color: "#60a5fa",
+    color: "var(--c-accent-2)",
   },
   {
     key: "R",
@@ -52,7 +52,7 @@ const sliders = computed(() => [
     max: 20,
     step: 1,
     unitTex: "\\Omega",
-    color: "#f87171",
+    color: "var(--c-danger)",
   },
 ]);
 const valTex = (s: { value: number; unitTex: string }): string => `${s.value}\\ ${s.unitTex}`;
@@ -69,37 +69,35 @@ const setSlider = (key: string, v: string): void => {
     <!-- 电动机示意 -->
     <div class="mp-fig">
       <svg viewBox="0 0 520 280" class="mp-svg" xmlns="http://www.w3.org/2000/svg">
-        <!-- 电源 -->
-        <rect
-          x="28"
-          y="108"
-          width="36"
-          height="64"
-          rx="8"
-          fill="rgba(226,168,70,0.12)"
-          stroke="#e2a846"
-          stroke-width="2.4"
+        <!-- 电源：共享电源符号（长板＝正极在上）；两根导线分别接电动机上、下两端 -->
+        <CircuitBattery :x="46" :y="140" orientation="vertical" polarity />
+        <path
+          d="M 46 132 V 105 H 120"
+          fill="none"
+          stroke="#94a3b8"
+          stroke-width="1.6"
+          stroke-linecap="round"
         />
-        <text x="46" y="130" text-anchor="middle" font-size="16" font-weight="700" fill="#f87171">
-          +
-        </text>
-        <text x="46" y="157" text-anchor="middle" font-size="16" font-weight="700" fill="#60a5fa">
-          −
-        </text>
+        <path
+          d="M 46 148 V 175 H 120"
+          fill="none"
+          stroke="#94a3b8"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        />
         <text x="46" y="196" text-anchor="middle" font-size="13" fill="#94a3b8">电源</text>
-        <path d="M 64 140 H 103" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" />
-        <!-- 输入电能 -->
+        <!-- 输入电能（画在接正极的那根导线上，箭头指向电动机） -->
         <line
-          x1="80"
-          y1="120"
-          x2="124"
-          y2="120"
+          x1="62"
+          y1="105"
+          x2="98"
+          y2="105"
           stroke="#e2a846"
           stroke-width="2.4"
           stroke-linecap="round"
         />
-        <polygon points="132,120 120,115 120,125" fill="#e2a846" />
-        <text x="102" y="112" text-anchor="middle" font-size="13" fill="#e2a846">输入（电能）</text>
+        <polygon points="110,105 98,100 98,110" fill="#e2a846" />
+        <text x="86" y="96" text-anchor="middle" font-size="13" fill="#e2a846">输入（电能）</text>
         <!-- 电动机：立体小圆柱 -->
         <ellipse
           cx="250"
@@ -254,7 +252,8 @@ const setSlider = (key: string, v: string): void => {
     <!-- 控制与读数 -->
     <div class="mp-panel">
       <div class="mp-mode">
-        电能 → <span style="color: #60a5fa">机械能</span> + <span style="color: #f87171">内能</span>
+        电能 → <span style="color: var(--c-accent-2)">机械能</span> +
+        <span style="color: var(--c-danger)">内能</span>
       </div>
 
       <div class="mp-sliders">
@@ -282,21 +281,15 @@ const setSlider = (key: string, v: string): void => {
 
       <div class="mp-cards">
         <div class="mp-card">
-          <span class="mp-card-tag" style="background: rgb(226 168 70 / 16%); color: #e2a846"
-            >输入功率</span
-          >
+          <span class="mp-tag mp-tag-in mini-note">输入功率</span>
           <Latex :tex="pInTex" class="mp-tex" />
         </div>
         <div class="mp-card">
-          <span class="mp-card-tag" style="background: rgb(248 113 113 / 16%); color: #f87171"
-            >热损耗功率</span
-          >
+          <span class="mp-tag mp-tag-heat mini-note">热损耗功率</span>
           <Latex :tex="pHeatTex" class="mp-tex" />
         </div>
         <div class="mp-card mp-card-out">
-          <span class="mp-card-tag" style="background: rgb(96 165 250 / 16%); color: #60a5fa"
-            >输出功率</span
-          >
+          <span class="mp-tag mp-tag-out mini-note">输出功率</span>
           <Latex :tex="pOutTex" class="mp-tex" />
         </div>
       </div>
@@ -307,9 +300,9 @@ const setSlider = (key: string, v: string): void => {
           <div class="mp-bar-heat" :style="{ width: heatRatio * 100 + '%' }"></div>
           <div class="mp-bar-out" :style="{ width: outRatio * 100 + '%' }"></div>
         </div>
-        <div class="mp-bar-legend">
-          <span><i style="background: #f87171"></i>内能 {{ (heatRatio * 100).toFixed(0) }}%</span>
-          <span><i style="background: #60a5fa"></i>机械能 {{ (outRatio * 100).toFixed(0) }}%</span>
+        <div class="mp-bar-legend mini-note">
+          <span><i style="background: var(--c-danger)"></i>内能 {{ (heatRatio * 100).toFixed(0) }}%</span>
+          <span><i style="background: var(--c-accent-2)"></i>机械能 {{ (outRatio * 100).toFixed(0) }}%</span>
         </div>
       </div>
 
@@ -337,10 +330,10 @@ const setSlider = (key: string, v: string): void => {
 
   min-width: 0;
   padding: 0.3rem;
-  border: 1px solid rgb(100 116 139 / 25%);
-  border-radius: 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 23 42 / 55%);
+  background: var(--c-surface);
 }
 
 .mp-svg {
@@ -353,15 +346,14 @@ const setSlider = (key: string, v: string): void => {
   display: flex;
   flex: 0 0 432px;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.4rem;
 
   min-width: 0;
 }
 
 .mp-mode {
-  color: #cbd5e1;
+  color: var(--c-text);
   font-weight: 700;
-  font-size: 1rem;
 }
 
 .mp-sliders {
@@ -387,26 +379,24 @@ const setSlider = (key: string, v: string): void => {
 .mp-slider-name {
   font-weight: 700;
   font-style: italic;
-  font-size: 0.98rem;
   font-family: "KaTeX_Math", serif;
 }
 
 .mp-slider-val {
   font-weight: 800;
-  font-size: 0.95rem;
   white-space: nowrap;
 }
 
 .mp-range {
   width: 100%;
-  height: 1.15rem;
+  height: 1rem;
   cursor: pointer;
 }
 
 .mp-cards {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 
 .mp-card {
@@ -414,29 +404,42 @@ const setSlider = (key: string, v: string): void => {
   gap: 0.55rem;
   align-items: center;
 
-  padding: 0.26rem 0.6rem;
-  border: 1px solid rgb(100 116 139 / 22%);
-  border-radius: 0.8rem;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
 
-  background: rgb(15 23 42 / 65%);
+  background: var(--c-surface);
 }
 
 .mp-card-out {
-  border-color: rgb(96 165 250 / 45%);
+  border-color: var(--c-accent-2);
 }
 
-.mp-card-tag {
+.mp-tag {
   flex: 0 0 auto;
 
   padding: 0.16rem 0.45rem;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
 
   font-weight: 800;
-  font-size: 0.78rem;
+}
+
+.mp-tag-in {
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+}
+
+.mp-tag-heat {
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
+}
+
+.mp-tag-out {
+  background: var(--c-accent-2-soft);
+  color: var(--c-accent-2);
 }
 
 .mp-tex {
-  font-size: 0.95rem;
   white-space: nowrap;
 }
 
@@ -451,13 +454,14 @@ const setSlider = (key: string, v: string): void => {
 
   overflow: hidden;
 
-  height: 0.9rem;
-  border: 1px solid rgb(100 116 139 / 35%);
-  border-radius: 0.6rem;
+  height: 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
 
-  background: rgb(15 23 42 / 60%);
+  background: var(--c-surface);
 }
 
+/* 能量分配条：热 / 机械各一段，红色系与蓝色系取自设计系统的正负语义色 */
 .mp-bar-heat {
   background: linear-gradient(90deg, rgb(248 113 113 / 75%), rgb(248 113 113 / 40%));
   transition: width 0.2s ease;
@@ -471,8 +475,6 @@ const setSlider = (key: string, v: string): void => {
 .mp-bar-legend {
   display: flex;
   gap: 1.2rem;
-  color: #cbd5e1;
-  font-size: 0.8rem;
 }
 
 .mp-bar-legend i {
@@ -481,7 +483,7 @@ const setSlider = (key: string, v: string): void => {
   width: 0.7rem;
   height: 0.7rem;
   margin-right: 0.3rem;
-  border-radius: 0.2rem;
+  border-radius: 50%;
 }
 
 .mp-stall {
@@ -490,18 +492,16 @@ const setSlider = (key: string, v: string): void => {
   align-items: center;
 
   padding: 0.3rem 0.6rem;
-  border: 1px solid rgb(248 113 113 / 35%);
-  border-radius: 0.6rem;
+  border: 1px solid var(--c-danger);
+  border-radius: var(--radius-md);
 
-  background: rgb(248 113 113 / 10%);
-  color: #fca5a5;
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 
   font-weight: 700;
-  font-size: 0.92rem;
 }
 
 .mp-stall-icon {
-  color: #f87171;
-  font-size: 1.05rem;
+  color: var(--c-danger);
 }
 </style>

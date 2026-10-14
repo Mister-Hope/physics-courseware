@@ -276,11 +276,11 @@
   align-items: center;
 
   padding: 0.75rem 0.85rem 0.9rem;
-  border: 1px solid rgb(148 163 184 / 16%);
-  border-radius: 1.15rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 55%);
-  box-shadow: 0 4px 20px -4px rgb(0 0 0 / 25%);
+  background: color-mix(in srgb, var(--c-bg-soft) 55%, transparent);
+  box-shadow: 0 4px 20px -4px color-mix(in srgb, var(--c-bg) 25%, transparent);
 
   backdrop-filter: blur(16px);
 
@@ -288,7 +288,7 @@
 }
 
 .mf-panel:hover {
-  border-color: rgb(148 163 184 / 35%);
+  border-color: color-mix(in srgb, var(--c-text-dim) 35%, transparent);
 }
 
 .mf-svg {
@@ -300,7 +300,7 @@
 .mf-name {
   margin-top: 0.45rem;
 
-  color: var(--c-text, #e2e8f0);
+  color: var(--c-text);
 
   font-weight: 700;
   font-size: 0.98rem;
@@ -310,7 +310,7 @@
 .mf-note {
   margin-top: 0.15rem;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-size: 0.78rem;
   line-height: 1.4;

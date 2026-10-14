@@ -197,7 +197,7 @@ const labels = computed(() => {
   border: 1px solid var(--c-border-glow);
   border-radius: 999px;
 
-  background: rgb(226 168 70 / 12%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 
   font-weight: 700;
@@ -206,7 +206,7 @@ const labels = computed(() => {
 
 .am-badge-off {
   border-color: rgb(248 113 113 / 45%);
-  background: rgb(248 113 113 / 10%);
+  background: var(--c-danger-soft);
   color: var(--c-danger);
 }
 

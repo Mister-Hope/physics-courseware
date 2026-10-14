@@ -25,17 +25,24 @@ import { Comment, Fragment, Text, computed, useSlots } from "vue";
 
 const slots = useSlots();
 
-/** Slot 里是否有真实内容（注释节点/纯空白不算）——用于 #fig 缺省时自动整宽 */
-function hasRealContent(nodes: VNode[] | undefined): boolean {
+/**
+ * Slot 里是否有真实内容（注释节点/纯空白不算）——用于 #fig 缺省时自动整宽
+ *
+ * @param nodes Slot 函数返回的 VNode 列表（slot 未传时是 undefined）
+ * @returns 有真实内容返回 true（注释节点、纯空白文本不算）
+ */
+const hasRealContent = (nodes: VNode[] | undefined): boolean => {
   if (!nodes) return false;
+
   return nodes.some((node) => {
     if (!node) return false;
     if (node.type === Comment) return false;
     if (node.type === Text) return String(node.children ?? "").trim() !== "";
     if (node.type === Fragment) return hasRealContent(node.children as VNode[]);
+
     return true;
   });
-}
+};
 
 /** 题目图存在才渲染图栏；否则解析栏自动吃掉整行 */
 const hasFig = computed(() => hasRealContent(slots.fig?.()));
@@ -70,17 +77,18 @@ const hasFig = computed(() => hasRealContent(slots.fig?.()));
 /* 图栏：宽度按图自身尺寸收（max-content）、上限 42%；不加背景/边框，无缝嵌入页面 */
 .ex-fig {
   flex: none;
-  width: max-content;
-  max-width: 42%;
-  min-width: 0;
   align-self: center;
+
+  width: max-content;
+  min-width: 0;
+  max-width: 42%;
 }
 
 /* 图栏里的 svg 只负责占满栏宽、保持比例，不加装饰（作者组件自带的 width/max-width 优先生效） */
 .ex-fig svg {
   display: block;
-  height: auto;
   max-width: 100%;
+  height: auto;
 }
 
 /* 解析栏：复用共享 .page-grow（内容少时垂直居中、多时撑满，e2e 的"正文越界"检查照常生效）；

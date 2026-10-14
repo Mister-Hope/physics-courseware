@@ -38,7 +38,8 @@
 ## 1. `exercise-split`：题目页（题干在上 + 窄图 + 解析）
 
 **给什么页用**：一道题占一页、题干和题目图常显、解析点击分步出的例题/练习页。
-题干视觉沿用共享 `.problem`（左侧蓝竖线），不另造样式。
+题干是这一页的**主体内容**，用普通段落（整宽置顶）即可。⛔ 不套 `.problem` 竖线、不包卡片——
+竖线只留给弱提示文字（style-guide §4）。
 
 ### frontmatter 与 slot
 
@@ -49,7 +50,7 @@ layout: exercise-split
 
 <template v-slot:stem>
 
-题干（常显；可含公式、图、v-click）。复用 `.problem` 的蓝竖线视觉，不用再包卡片。
+题干（常显；可含公式、图、v-click）。普通段落即可，不套 `.problem` 竖线、不包卡片（style-guide §4：题干是主体）。
 
 </template>
 
@@ -70,7 +71,7 @@ layout: exercise-split
 
 ### 版面行为（写在布局组件 `<style>` 里，前缀 `ex-`）
 
-- 顶部题干行整宽置顶（`.ex-stem` 直接挂共享 `.problem`，不重写共享选择器）；
+- 顶部题干行整宽置顶（`.ex-stem` 只管版面、**不挂 `.problem`**——题干是主体内容，竖线只留给弱提示文字）；
 - 下方两栏 flex：图栏 `.ex-fig` 用 `width: max-content; max-width: 42%`（图按自身比例收窄，上限 42%），
   解析栏复用 `.page-grow`（`flex:1` + 内容少时垂直居中、多时撑满；e2e 的"正文越界"检查照常生效）；
 - **`#fig` 为空时自动退化**：布局用 `hasRealContent($slots.fig)` 判断（注释/纯空白不算内容），
@@ -154,7 +155,7 @@ layout: focus-question
 ### 版面行为（前缀 `fq-`）
 
 - 整页垂直+水平居中（`.slidev-layout.focus-question` 是 flex 列 + `justify-content: center`），"顶天立地"；
-- 图标与问题文字**都不加背景容器**；`#hint` 弱化为次级色小字，`#answer` 复用 `.problem` 同款蓝竖线（无卡片）；
+- 图标与问题文字**都不加背景容器**；`#hint` 弱化为次级色小字、`#answer` 用正文色居中（都不加竖线——竖线只留给弱提示文字，style-guide §4）；
 - `#hint` / `#answer` 由布局统一包 `v-click`，页面里**不要**再套一层；
 - 空 slot（写了 `::` 标记但没内容）自动不渲染，不留空容器。
 
