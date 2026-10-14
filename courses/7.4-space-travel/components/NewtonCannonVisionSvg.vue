@@ -115,6 +115,13 @@ const integrate = (speed: number, maxStep: number): Pt[] => {
  */
 const toCanvas = (p: Pt): Pt => ({ x: C.x + p.x * SCALE, y: C.y - p.y * SCALE });
 
+/**
+ * 速度标号的摆放：挂在**各自落地点**的正外侧（沿背离地心的方向再推 LABEL_PUSH 个画布单位）。
+ *
+ * 三条轨迹都从同一点出发、前段几乎重合，按"轨迹 62% 处"放标号会让 5.0 与 6.3 km/s 两个标号贴在一起； 落地点的极角差异（≈25.6° / 45.4° / 98°）是轨迹本身的差异，标号挂在那里天然分开，也不压住轨迹与地球。
+ */
+const LABEL_PUSH = 26;
+
 /** 三次抛射：速度一次比一次大，落地点一次比一次远 */
 const SHOTS: Shot[] = [
   { speed: 5, color: "#f87171", sub: "1" },
@@ -134,16 +141,22 @@ const shots = computed((): ShotView[] =>
         return `${index === 0 ? "M" : "L"} ${c.x.toFixed(1)} ${c.y.toFixed(1)}`;
       })
       .join(" ");
-    // 速度标号挂在轨迹的 62% 处（三条轨迹起点相同，标号错开才认得出谁是谁）
-    const mark = toCanvas(raw[Math.floor(raw.length * 0.62)] ?? { x: 0, y: R0 });
+    // 落地点 = 积分最后一点；标号沿"背离地心"的方向外移，三个标号因此天然分开
+    const landing = raw.at(-1) ?? { x: 0, y: R0 };
+    const landingR = Math.hypot(landing.x, landing.y) || 1;
+    const ground = toCanvas(landing);
+    const mark = {
+      x: ground.x + (landing.x / landingR) * LABEL_PUSH,
+      y: ground.y - (landing.y / landingR) * LABEL_PUSH,
+    };
 
     return {
       speed: shot.speed,
       color: shot.color,
       sub: shot.sub,
       d,
-      markX: mark.x + 8,
-      markY: mark.y - 8,
+      markX: mark.x,
+      markY: mark.y,
     };
   }),
 );
@@ -175,6 +188,8 @@ const ORBIT_R = SCALE * R0;
       :key="`label-${shot.sub}`"
       :x="shot.markX"
       :y="shot.markY"
+      text-anchor="middle"
+      dominant-baseline="middle"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="18"
