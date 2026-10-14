@@ -27,6 +27,8 @@ const SHARED_STYLES_DIR = path.join(ROOT, "workspace", "shared", "styles");
  * 正本：`workspace/shared/styles/{common,layout,atoms}.css`。以前这里是手工抄的一份清单， 结果 `atoms.css` 新增
  * `.data-table`/`.split-wide`/`.ok`/`.step-list` 等 12 个原子后清单没跟上，
  * 子代理一用就被误报成"裸类名"、被迫绕开正本写私有值（真踩过）。现在直接扫 CSS 顶层选择器。
+ *
+ * @returns 全部共享原子类名
  */
 const sharedAtomClasses = (): Set<string> => {
   const atoms = new Set<string>();
@@ -171,11 +173,17 @@ interface Finding {
 
 // 用 function 声明（会被提升）：`SHARED_ATOMS` 在模块顶部就要调用它，
 // 若写成 const 箭头函数会掉进暂时性死区（TDZ）——`Cannot access 'read' before initialization`。
+// eslint-disable-next-line func-style
 function read(file: string): string {
   return existsSync(file) ? readFileSync(file, "utf8") : "";
 }
 
-/** 本课 slides.md + components/*.vue 里的所有源码文本 */
+/**
+ * 本课 slides.md + components/*.vue 里的所有源码文本
+ *
+ * @param dir 课件目录
+ * @returns 拼好的源码文本
+ */
 const courseSources = (dir: string): string => {
   const parts = [read(path.join(dir, "slides.md"))];
   const components = path.join(dir, "components");
@@ -190,35 +198,53 @@ const courseSources = (dir: string): string => {
 };
 
 /**
+ * 把一段文本里的 `.类名` 定义收进集合——抽成独立函数，顺带把 `max-depth` 压回 4 以内
+ *
+ * @param text 待扫描的文本
+ * @param into 收进哪个集合
+ */
+const collectClassNames = (text: string, into: Set<string>): void => {
+  for (const match of text.matchAll(new RegExp(CLASS_DEF.source, "gu"))) {
+    const name = match.groups?.name ?? "";
+
+    if (name) into.add(name);
+  }
+};
+
+/**
  * 本课**定义过**的类名 = `style.css` 里定义的 ∪ 各组件 `<style>`（含 scoped）里定义的。
  *
  * ⚠️ 必须把组件的 `<style>` 算进来：本仓库大量课件把类写成组件局部样式（如 3.4 的 `ae-*`/`dc-*`/`fp-*` 全在 `<style scoped>` 里），只扫
  * `style.css` 会把它们误判成"裸类名"。
+ *
+ * @param dir 课件目录
+ * @param css 本课 `style.css` 全文
+ * @returns 本课定义过的类名集合
  */
 const courseDefinedClasses = (dir: string, css: string): Set<string> => {
-  const defined = new Set(
-    [...css.matchAll(new RegExp(CLASS_DEF.source, "gu"))].map((match) => match.groups?.name ?? ""),
-  );
+  const defined = new Set<string>();
   const components = path.join(dir, "components");
+
+  collectClassNames(css, defined);
 
   if (existsSync(components)) {
     for (const name of readdirSync(components).filter((file) => file.endsWith(".vue"))) {
       const vue = read(path.join(components, name));
       // 只取 <style>…</style> 段，避免把模板里的 class="…" 属性值当成选择器
-      for (const [, block = ""] of vue.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gu)) {
-        for (const match of block.matchAll(new RegExp(CLASS_DEF.source, "gu"))) {
-          const cls = match.groups?.name ?? "";
-
-          if (cls) defined.add(cls);
-        }
-      }
+      for (const { groups } of vue.matchAll(/<style[^>]*>(?<block>[\s\S]*?)<\/style>/gu))
+        collectClassNames(groups?.block ?? "", defined);
     }
   }
 
   return defined;
 };
 
-/** 是否像 UnoCSS 工具类（`mt-2` / `grid-cols-3` / `text-center` …） */
+/**
+ * 是否像 UnoCSS 工具类（`mt-2` / `grid-cols-3` / `text-center` …）
+ *
+ * @param token 类名 token
+ * @returns 命中工具类前缀时为 `true`
+ */
 const isUtility = (token: string): boolean => {
   const [head] = token.split("-");
 
@@ -226,13 +252,23 @@ const isUtility = (token: string): boolean => {
   return UTILITY_PREFIXES.has(head) || UTILITY_PREFIXES.has(token);
 };
 
-/** 拆出一条源码行里 `class="…"` 的所有类名 token */
+/**
+ * 拆出一条源码行里 `class="…"` 的所有类名 token
+ *
+ * @param line 一行源码
+ * @returns 类名 token 列表
+ */
 const classTokens = (line: string): string[] =>
   [...line.matchAll(CLASS_ATTR)].flatMap((match) => (match.groups?.classes ?? "").split(/\s+/u));
 
 // ── 各项检查都拆成独立函数：单一职责、圈复杂度低，也便于单独测试 ──
 
-/** ① 卡片数量（§4：一份课件 ≤15，超出该用 .ask/.key/.divider-l） */
+/**
+ * ① 卡片数量（§4：一份课件 ≤15，超出该用 .ask/.key/.divider-l）
+ *
+ * @param sources 本课源码文本
+ * @returns 卡片数与发现
+ */
 const checkCards = (sources: string): { cards: number; findings: Finding[] } => {
   const cards = classTokens(sources).filter((token) => /^card[a-z0-9-]*$/u.test(token)).length;
 
@@ -250,7 +286,12 @@ const checkCards = (sources: string): { cards: number; findings: Finding[] } => 
   };
 };
 
-/** ② 图标数量（§5：并列条目 / 概念三栏 / 步骤条该配扫读图标） */
+/**
+ * ② 图标数量（§5：并列条目 / 概念三栏 / 步骤条该配扫读图标）
+ *
+ * @param icons 图标数量
+ * @returns 发现列表
+ */
 const checkIconCount = (icons: number): Finding[] =>
   icons === 0
     ? [
@@ -261,7 +302,12 @@ const checkIconCount = (icons: number): Finding[] =>
       ]
     : [];
 
-/** ②b 图标字号（§5：UnoCSS 的 text-* 不带 !important，压不过 common.css 给 svg 钉的 16px 基准） */
+/**
+ * ②b 图标字号（§5：UnoCSS 的 text-* 不带 !important，压不过 common.css 给 svg 钉的 16px 基准）
+ *
+ * @param sources 本课源码文本
+ * @returns 发现列表
+ */
 const checkIconSizes = (sources: string): Finding[] =>
   sources.split("\n").flatMap((line, index) => {
     if (!line.includes("<mdi-")) return [];
@@ -275,7 +321,13 @@ const checkIconSizes = (sources: string): Finding[] =>
       }));
   });
 
-/** ③ 单行 CSS 的硬编码色值 / 私调字号 / 非 token 圆角（§3） */
+/**
+ * ③ 单行 CSS 的硬编码色值 / 私调字号 / 非 token 圆角（§3）
+ *
+ * @param line CSS 单行
+ * @param index 行号（0 起）
+ * @returns 发现列表
+ */
 const checkCssLine = (line: string, index: number): Finding[] => {
   if (line.trimStart().startsWith("/*")) return [];
 
@@ -320,6 +372,8 @@ const checkCssLine = (line: string, index: number): Finding[] => {
  *
  * 用途：判断"裸类名"时，只有**在别的课里被定义过、本课却没定义**的类才是真信号 （同名不同义的跨课碰撞）。UnoCSS 工具类（`.align-middle` / `.max-w-md` /
  * `.abs-br` / `.group`…） 从不会出现在任何 style.css 里，用这个索引一筛就自然排除，不必穷举工具类前缀。
+ *
+ * @returns 类名 → 定义过它的课件名列表
  */
 const buildCourseClassIndex = (): Map<string, string[]> => {
   const index = new Map<string, string[]>();
@@ -350,6 +404,12 @@ const buildCourseClassIndex = (): Map<string, string[]> => {
  * 判断"裸类名"：本课页面用了这个类，却没在本课 `style.css` **或任一组件的 `<style>`** 里定义。
  *
  * 只在**至少有一门别的课定义了它**时才算违例——那意味着同名不同义的跨课碰撞（§6 最危险的一类）。 纯工具类 / 本课一次性类名不在此列，避免把 UnoCSS 之类的噪声报成"裸类名"。
+ *
+ * @param slug 课件标识
+ * @param css 本课 `style.css` 全文
+ * @param sources 本课源码文本
+ * @param classIndex 全仓"类名 → 定义它的课件"索引
+ * @returns 发现列表
  */
 const checkBareClasses = (
   slug: string,
@@ -369,7 +429,7 @@ const checkBareClasses = (
   });
 
   return [
-    ...bare.slice(0, 8).map((token) => ({
+    ...bare.slice(0, 8).map((token): Finding => ({
       level: "warn",
       message: `裸类名 \`.${token}\` 在页面里用了、本课 style.css 与组件 <style> 都没定义（§6）`,
     })),
@@ -379,7 +439,12 @@ const checkBareClasses = (
   ];
 };
 
-/** ⑤a 重写共享选择器（§8：只许覆盖 --page-gap/--stack-gap） */
+/**
+ * ⑤a 重写共享选择器（§8：只许覆盖 --page-gap/--stack-gap）
+ *
+ * @param css 本课 `style.css` 全文
+ * @returns 发现列表
+ */
 const checkProtectedSelectors = (css: string): Finding[] =>
   PROTECTED_SELECTORS.flatMap(([label, pattern]) =>
     pattern.test(css)
@@ -398,6 +463,9 @@ const checkProtectedSelectors = (css: string): Finding[] =>
  * **只查 `:root` 块内部**：§8 禁的是"改全局默认值"。类作用域里的自定义属性是**官方旋钮**—— 正本 `.split-wide` 的 `--cols` 就是留给课件写
  * `.fig-wide { --cols: … }` 变体用的 （`atoms.css` 的 `.fig-narrow` 自己就是这么写的），把它报成越权是误报（真踩过：2.4 的
  * `.fig-wide`）。
+ *
+ * @param css 本课 `style.css` 全文
+ * @returns 发现列表
  */
 const checkRootOverrides = (css: string): Finding[] => {
   const findings: Finding[] = [];
@@ -432,6 +500,9 @@ const checkRootOverrides = (css: string): Finding[] => {
  * ⑤ 边框纪律：左侧竖线（`.problem` / `.key`）只给"弱提示性文字"用，主体内容不套（§4）。
  *
  * 页面里常见的误用是把题干/解析整段套进 `.problem`。这里只报**可疑**信号， 不改语义——因为单看 class 认不出"这段是不是弱提示"，交给人判断。
+ *
+ * @param sources 本课源码文本
+ * @returns 发现列表
  */
 const checkBorderMisuse = (sources: string): Finding[] => {
   const lines = sources.split("\n");
@@ -440,7 +511,7 @@ const checkBorderMisuse = (sources: string): Finding[] => {
   const stemHint = /题干|下列|如图|如图所示|一个物体|质量为|求|已知/u;
 
   lines.forEach((line, index) => {
-    if (!/class="[^"]*\bproblem\b/.test(line)) return;
+    if (!/class="[^"]*\bproblem\b/u.test(line)) return;
     if (!stemHint.test(line)) return;
 
     findings.push({

@@ -81,6 +81,7 @@ const NUMERIC_ATTRS = [
 /** 形如 `[opacity~="0.9"]` / `[font-size="16"]`：属性在表里、值恰好是一个（可带小数的）数字 */
 const SVG_NUMERIC_ATTRIBUTIFY = new RegExp(
   `^\\[(?:${NUMERIC_ATTRS.join("|")})(?:~=|=)"-?\\d+(?:\\.\\d+)?"\\]$`,
+  "u",
 );
 
 export default {

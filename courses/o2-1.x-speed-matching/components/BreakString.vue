@@ -7,7 +7,7 @@
     以及绳断后小球的新圆周轨迹（半径变小）。
 -->
 <script setup lang="ts">
-const props = defineProps<{
+const { showAnalysis = false } = defineProps<{
   /** 点击步到了才画速度、洛伦兹力与绳断后的新轨迹；干净题目图时传 false */
   showAnalysis?: boolean;
 }>();
@@ -57,7 +57,7 @@ const props = defineProps<{
       >
         O
       </text>
-      <g v-if="props.showAnalysis">
+      <g v-if="showAnalysis">
         <circle cx="258" cy="240" r="46" fill="none" stroke="var(--c-accent)" stroke-width="3.8" />
         <CourseArrow
           :from="{ x: 212, y: 240 }"
@@ -103,11 +103,11 @@ const props = defineProps<{
 </template>
 
 <style scoped>
-/* 根 div 与 svg 顶部对齐：不居中、不留外边距（父级 align-items: center 也压得住）*/
+/* 根 div 与 svg 顶部对齐：不居中、不留外边距（父级 align-items: center 也压得住） */
 .break-string {
   display: block;
-  width: 100%;
   align-self: flex-start;
+  width: 100%;
 }
 
 .break-string-svg {

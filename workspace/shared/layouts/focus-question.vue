@@ -31,8 +31,13 @@ import { Comment, Fragment, Text, computed, useSlots } from "vue";
 
 const slots = useSlots();
 
-/** Slot 里是否有真实内容（注释节点/纯空白不算）——空 slot 直接不渲染，避免留空容器 */
-function hasRealContent(nodes: VNode[] | undefined): boolean {
+/**
+ * Slot 里是否有真实内容（注释节点/纯空白不算）——空 slot 直接不渲染，避免留空容器
+ *
+ * @param nodes Slot 产出的 VNode 列表
+ * @returns 有真实内容时为 `true`
+ */
+const hasRealContent = (nodes: VNode[] | undefined): boolean => {
   if (!nodes) return false;
   return nodes.some((node) => {
     if (!node) return false;
@@ -41,7 +46,7 @@ function hasRealContent(nodes: VNode[] | undefined): boolean {
     if (node.type === Fragment) return hasRealContent(node.children as VNode[]);
     return true;
   });
-}
+};
 
 const hasIcon = computed(() => hasRealContent(slots.icon?.()));
 const hasHint = computed(() => hasRealContent(slots.hint?.()));
@@ -67,29 +72,31 @@ const hasAnswer = computed(() => hasRealContent(slots.answer?.()));
   align-items: center;
   justify-content: center;
 
-  margin: 0 auto;
   width: 100%;
+  margin: 0 auto;
 }
 
 /* 大图标：用 icon-* 阶梯放大（common.css 给 svg 钉了 16px 基准，普通字号压不过它）；
    这里兜底 4rem，页面里给图标换 .icon-2xl 等可覆盖 */
 .fq-icon svg {
-  font-size: 4rem !important;
   color: var(--c-accent);
+  font-size: 4rem !important;
 }
 
 /* 问题文字：默认 .text-4xl（2.1rem）；整页更空时在默认 slot 里包一层 <div class="text-5xl"> 即可放大 */
 .fq-question {
   max-width: 46rem;
-  line-height: 1.45;
   font-weight: 700;
+  line-height: 1.45;
   text-align: center;
 }
 
 /* 顶部一段、下面两段点击出的节奏；提示弱化为次级色，解析恢复正常正文色 */
 .fq-hint {
   max-width: 40rem;
+
   color: var(--c-text-dim);
+
   font-size: 1.05rem;
   line-height: 1.6;
   text-align: center;
@@ -99,7 +106,6 @@ const hasAnswer = computed(() => hasRealContent(slots.answer?.()));
    （教师明确要求：左侧竖线只给弱提示性文字用，解析是主体内容，不该套） */
 .fq-answer {
   max-width: 44rem;
-
   font-size: 1.05rem;
   line-height: 1.7;
   text-align: center;

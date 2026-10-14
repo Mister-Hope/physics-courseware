@@ -20,6 +20,7 @@
   --c-accent-2-glow: #2563eb;
   --c-physics: #2dd4bf;
   --c-danger: #f87171;
+
   /* 物理量配色约定（多图课件统一语义色）：速度一律蓝、力一律红、磁场一律黄
      —— 磁场黄 = --c-accent（既有 FieldDots / FieldMark 默认色，不必改） */
   --c-velocity: #60a5fa;

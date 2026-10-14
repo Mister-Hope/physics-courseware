@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 
-const props = defineProps<{
+const { reveal = false } = defineProps<{
   /** 点击步到了才画出真实轨迹；第 2 页只要干净题目图时传 false */
   reveal?: boolean;
 }>();
@@ -27,7 +27,12 @@ const Y0 = 0.5;
 const toX = (x: number): number => (x - X0) * K;
 const toY = (y: number): number => (Y0 - y) * K;
 
-/** 摆线参数方程（R = 1） */
+/**
+ * 摆线参数方程（R = 1）
+ *
+ * @param theta 摆线参数角（弧度）
+ * @returns 该角度对应的世界坐标（y 向下为负）
+ */
 const pointAt = (theta: number): { x: number; y: number } => ({
   x: theta - Math.sin(theta),
   y: -(1 - Math.cos(theta)),
@@ -72,7 +77,7 @@ const pathD = computed(() => {
   return d.trim();
 });
 
-const showPath = computed(() => props.reveal === true);
+const showPath = computed(() => reveal === true);
 /** 小球的不透明度：最后 FADE 秒淡出到 0，静置期间保持 0（"消失不见"），回绕后立刻恢复 1 */
 const ballOpacity = computed(() => {
   const remain = TRAVEL - clock.value;
@@ -100,7 +105,7 @@ const tick = (now: number): void => {
 
 /** 从静止（释放点）重新开始，此后一轮接一轮地循环下去 */
 const start = (): void => {
-  if (!props.reveal) return;
+  if (!reveal) return;
   cancelAnimationFrame(raf);
   clock.value = 0;
   prev = 0;
@@ -115,7 +120,7 @@ const stop = (): void => {
 
 // 点击步到了就自动从静止开始，之后一直循环；点图可以让它重新从静止开始
 watch(
-  () => props.reveal,
+  () => reveal,
   (value) => (value ? start() : stop()),
   { immediate: true },
 );
@@ -211,10 +216,12 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
 
 .rif-svg {
   display: block;
+
   width: 100%;
   max-width: 820px;
   height: auto;
   margin: 0 auto;
+
   cursor: pointer;
 }
 </style>

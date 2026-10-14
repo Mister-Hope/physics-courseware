@@ -1,6 +1,6 @@
 <!-- o2-1.x-speed-matching：电中性微粒在垂直纸面向里的磁场中分裂出 a、b 两个微粒，两者半径相等、轨迹外切，环绕方向均为逆时针（精修切线与清晰分层版） -->
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ showAnalysis?: boolean }>(), { showAnalysis: false });
+const { showAnalysis = false } = defineProps<{ showAnalysis?: boolean }>();
 
 interface Point {
   x: number;
@@ -26,15 +26,28 @@ const circleA = { x: 330, y: 172, r: 86 };
 /** 圆 b：圆心 (330, 344)、半径 86（顶端 (330, 258)，与圆 a 在该点外切） */
 const circleB = { x: 330, y: 344, r: 86 };
 
-const rad = (deg: number) => (deg * Math.PI) / 180;
+const rad = (deg: number): number => (deg * Math.PI) / 180;
 
-/** 圆上一点：θ 用数学角（0° 在右、逆时针为正），屏幕 y 向下故取负 */
+/**
+ * 圆上一点：θ 用数学角（0° 在右、逆时针为正），屏幕 y 向下故取负
+ *
+ * @param c 圆心与半径
+ * @param theta 角度（度）
+ * @returns 圆上该角度的点
+ */
 const onCircle = (c: { x: number; y: number; r: number }, theta: number): Point => ({
   x: c.x + c.r * Math.cos(rad(theta)),
   y: c.y - c.r * Math.sin(rad(theta)),
 });
 
-/** 洛伦兹力：从圆上一点沿半径指向圆心，长度取 122（穿过圆心强化向心指向） */
+/**
+ * 洛伦兹力：从圆上一点沿半径指向圆心，长度取 122（穿过圆心强化向心指向）
+ *
+ * @param from 起笔点（圆上一点）
+ * @param center 圆心
+ * @param len 箭头长度
+ * @returns 箭头终点
+ */
 const inward = (from: Point, center: Point, len: number): Point => {
   const dx = center.x - from.x;
   const dy = center.y - from.y;
@@ -197,7 +210,7 @@ const forceBTo = inward(forceBFrom, circleB, 122);
       </text>
 
       <!-- 分析层：电性符号与洛伦兹力（严格分离排布，加粗清晰 SVG 电性微粒徽章） -->
-      <g v-if="props.showAnalysis">
+      <g v-if="showAnalysis">
         <!-- 微粒 a 电性徽章：独立 SVG 粗线条实心徽章，远屏一眼看清，彻底告别细字 -->
         <g transform="translate(444, 186)">
           <circle
@@ -315,8 +328,8 @@ const forceBTo = inward(forceBFrom, circleB, 122);
 <style scoped>
 .split-particles {
   display: block;
-  width: 100%;
   align-self: flex-start;
+  width: 100%;
 }
 
 .split-particles-svg {

@@ -3,6 +3,7 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
 /* 课题名 15 字，默认 3.5rem 会折成两行、渐变被截断；压到 2.7rem 保持一行
    （长课题名压字号是共享布局唯一认可的例外，见 .agents/notes/slidev-layout.md §4） */
 .course-cover .cover-title {
@@ -21,6 +22,7 @@
   display: block;
 
   color: var(--c-field);
+
   pointer-events: none;
 }
 
@@ -53,8 +55,8 @@
 .q-fig-aside svg {
   width: 100%;
   max-width: 460px;
-  max-height: 460px;
   height: auto;
+  max-height: 460px;
 }
 
 /* 解析页：与标题并排的小图落到右下角（教师要求：别悬在半空） */
@@ -74,22 +76,18 @@
 
 /* ── 封面右下角装饰图 ──
    共享布局里的 `abs-br` 工具类并不存在（UnoCSS 没生成），所以 .cover-decoration 原先其实是
-   position: relative 在文档流里飘（只是碰巧落在下面）。这里显式绝对定位钉到右下角：
-   right / bottom 按版面预留 —— 上方让开副标题行、下方让开底部"原创：…"署名行。 */
+   position: relative 在文档流里飘（只是碰巧落在下面）。这里显式绝对定位钉到右下角。 */
 .course-cover .cover-decoration {
   position: absolute;
-  right: 2rem;
-  bottom: 7.25rem;
+  right: 2.5rem;
+  bottom: 2.5rem;
 
-  width: 340px !important;
-  height: 148px !important;
-  max-width: 42vw;
+  width: min(340px, 30vw) !important;
   margin: 0 !important;
 }
 
 .course-cover .cover-decoration svg {
   display: block;
-
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
 }

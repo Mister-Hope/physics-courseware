@@ -8,7 +8,7 @@
 -->
 
 <script setup lang="ts">
-const props = defineProps<{
+const { showAnalysis = false } = defineProps<{
   /** 点击后才画出速度、洛伦兹力这些分析标注 */
   showAnalysis?: boolean;
 }>();
@@ -40,9 +40,19 @@ const B = { x: 179, y: 294 };
 const ballR = 19;
 /** 摆长：P 到 A / B / O 的距离（三者相等），也是摆动路径弧的半径（兜底 ≥1，避免半径 0 的退化弧） */
 const swingR = Math.hypot(A.x - P.x, A.y - P.y) || 1;
-/** 数值兜底：任何非有限值（NaN / ±Infinity）都退回 0，杜绝拼出 `A NaN` 这类非法 path */
+/**
+ * 数值兜底：任何非有限值（NaN / ±Infinity）都退回 0，杜绝拼出 `A NaN` 这类非法 path
+ *
+ * @param value 待兜底的数值
+ * @returns 有限数值
+ */
 const num = (value: number): number => (Number.isFinite(value) ? value : 0);
-/** 路径坐标统一保留 1 位小数，且保证是有限数 */
+/**
+ * 路径坐标统一保留 1 位小数，且保证是有限数
+ *
+ * @param value 坐标值
+ * @returns 保留 1 位小数的字符串
+ */
 const px = (value: number): string => num(value).toFixed(1);
 /** 摆动路径虚线弧：A→O 沿顺时针小弧、B→O 沿逆时针小弧 */
 const arcFromA = `M ${px(A.x)} ${px(A.y)} A ${px(swingR)} ${px(swingR)} 0 0 1 ${px(O.x)} ${px(O.y)}`;
@@ -190,7 +200,7 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
       >
         O
       </text>
-      <g v-if="props.showAnalysis">
+      <g v-if="showAnalysis">
         <!-- 全仓配色约定：速度一律蓝、力一律红、磁场黄。
              v₁（来自 A 侧、向左）配 F洛1（向下）；v₂（来自 B 侧、向右）配 F洛2（向上）。 -->
         <CourseArrow
@@ -275,11 +285,11 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-/* 根 div 与 svg 顶部对齐：不居中、不留外边距（父级 align-items: center 也压得住）*/
+/* 根 div 与 svg 顶部对齐：不居中、不留外边距（父级 align-items: center 也压得住） */
 .swing-field {
   display: block;
-  width: 100%;
   align-self: flex-start;
+  width: 100%;
 }
 
 .swing-field-svg {

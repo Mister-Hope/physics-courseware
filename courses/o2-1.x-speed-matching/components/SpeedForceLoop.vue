@@ -20,7 +20,7 @@ interface Point {
   y: number;
 }
 
-const props = defineProps<{
+const { showCancel = false } = defineProps<{
   /** 是否把 f_平 与重力 mg 这一对冲的箭头一起变灰（表示重力被 f_平 抵消掉） */
   showCancel?: boolean;
 }>();
@@ -48,12 +48,23 @@ const OV: Point = { x: 196, y: 244 };
 /** 力三角形的公共起点 O_f */
 const OF: Point = { x: 660, y: 244 };
 
-/** 极坐标 → 屏幕矢量：数学角（逆时针为正）换到 SVG 坐标（y 向下） */
+/**
+ * 极坐标 → 屏幕矢量：数学角（逆时针为正）换到 SVG 坐标（y 向下）
+ *
+ * @param len 模长
+ * @param rad 数学角（弧度，逆时针为正）
+ * @returns 屏幕矢量
+ */
 const polar = (len: number, rad: number): Point => ({
   x: len * Math.cos(rad),
   y: -len * Math.sin(rad),
 });
-/** 屏幕矢量绕起点逆时针转 90°：F = qv×B（B 向里、正电荷）正好把 v 逆时针转 90° */
+/**
+ * 屏幕矢量绕起点逆时针转 90°：F = qv×B（B 向里、正电荷）正好把 v 逆时针转 90°
+ *
+ * @param v 原矢量
+ * @returns 逆时针转 90° 后的矢量
+ */
 const rot90 = (v: Point): Point => ({ x: v.y, y: -v.x });
 const add = (a: Point, b: Point): Point => ({ x: a.x + b.x, y: a.y + b.y });
 const tipOf = (o: Point, v: Point): Point => ({ x: o.x + v.x, y: o.y + v.y });
@@ -106,7 +117,14 @@ const fCirTip = computed<Point>(() => tipOf(OF, fCirVec.value));
 const fRealTip = computed<Point>(() => tipOf(OF, fRealVec.value));
 
 /* ── 标签位置 ── */
-/** 标签贴在箭头中点的一侧：沿垂直方向偏 side（负值在箭头左侧） */
+/**
+ * 标签贴在箭头中点的一侧：沿垂直方向偏 side（负值在箭头左侧）
+ *
+ * @param o 箭头起点
+ * @param v 箭头矢量
+ * @param side 侧移量（负值在箭头左侧）
+ * @returns 标签位置
+ */
 const sideLabel = (o: Point, v: Point, side: number): Point => {
   const len = Math.hypot(v.x, v.y) || 1;
   const ux = v.x / len;
@@ -114,7 +132,15 @@ const sideLabel = (o: Point, v: Point, side: number): Point => {
 
   return { x: o.x + v.x / 2 - uy * side, y: o.y + v.y / 2 + ux * side };
 };
-/** 标签甩在尖端斜外侧：沿箭头方向外推 out，再沿垂直方向侧移 side */
+/**
+ * 标签甩在尖端斜外侧：沿箭头方向外推 out，再沿垂直方向侧移 side
+ *
+ * @param tip 箭头尖端
+ * @param v 箭头矢量
+ * @param out 沿箭头方向外推的距离
+ * @param side 侧移量
+ * @returns 标签位置
+ */
 const tipLabel = (tip: Point, v: Point, out: number, side: number): Point => {
   const len = Math.hypot(v.x, v.y) || 1;
   const ux = v.x / len;
@@ -129,7 +155,7 @@ const fCirLabelAt = computed<Point>(() => sideLabel(OF, fCirVec.value, -18));
 const fRealLabelAt = computed<Point>(() => tipLabel(fRealTip.value, fRealVec.value, 14, -12));
 
 /** 「一对冲」状态：重力被 f_平 抵消，两个箭头一起变灰 */
-const cancelled = computed<boolean>(() => props.showCancel === true);
+const cancelled = computed<boolean>(() => showCancel === true);
 
 /** 上屏文字统一加深色光晕；带中文下标的字光晕收细，免得汉字被描边涂成实心块 */
 const halo = { stroke: "var(--c-bg)", "stroke-width": 3.5, "paint-order": "stroke" };
@@ -172,7 +198,13 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
         :stroke-width="3"
         :head-size="10"
       />
-      <CourseArrow :from="OV" :to="vCirTip" stroke="var(--c-velocity)" :stroke-width="3" :head-size="10" />
+      <CourseArrow
+        :from="OV"
+        :to="vCirTip"
+        stroke="var(--c-velocity)"
+        :stroke-width="3"
+        :head-size="10"
+      />
       <CourseArrow
         :from="OV"
         :to="vRealTip"
@@ -330,7 +362,13 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
           <tspan>g</tspan>
         </text>
       </g>
-      <CourseArrow :from="OF" :to="fCirTip" stroke="var(--c-velocity)" :stroke-width="3" :head-size="10" />
+      <CourseArrow
+        :from="OF"
+        :to="fCirTip"
+        stroke="var(--c-velocity)"
+        :stroke-width="3"
+        :head-size="10"
+      />
       <CourseArrow
         :from="OF"
         :to="fRealTip"
@@ -376,6 +414,7 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
 
 .sfl-svg {
   display: block;
+
   width: 100%;
   max-width: 860px;
   height: auto;

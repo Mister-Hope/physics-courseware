@@ -1,232 +1,381 @@
 <!--
-  选必2 1.x《复合场中的配速法与摆线运动》「任意初速度」页的交互图（初速度方向可以是任意的）。
-
-  任何方向的初速度都拆成两笔账：v_平 = mg/(qB)（永远水平向右）＋ v_圆0 = v_初 − v_平。
-  轨迹 = 匀速直线漂移 + 匀速圆周（圆心以 v_平 匀速右移）：
-    x(θ) = kx·θ + ky·[1 − cos θ]
-    y(θ) = ky·θ + kx·(1 − cos θ) − kx²·θ   （向下为正；kx、ky 以 v_平 为单位）
-  其中 |v_圆0| = √((kx−1)² + ky²)，R ∝ |v_圆0|/v_平；θ = ωt 取 2 个周期。
-
-  两个滑杆分别给初速度的向右分量（vx）与向上分量（vy）：
-    vy = 0、vx 变化 ⟹ 原来的水平初速度一族（匀速直线 / 波浪线 / 尖点摆线 / 结环摆线）；
-    vy ≠ 0 ⟹ 斜向初速度，轨迹整体倾斜，同样由"漂移 + 圆周"合成。
-  画布 1 个单位 = 1R；窗口 x∈[−4, 12]、y∈[−5.5, 1]，两向都有余量，箭头与轨迹不出画布。
+  选必2 1.x《复合场中的配速法与摆线运动》「任意初速度」页交互图（精修美化版）
+  
+  物理数学解析：
+    初速度拆分为：v_平 = mg/(qB)（水平向右，1个单位）＋ v_圆0 = v_初 − v_平
+    在无量纲单位下，解析精确解为：
+      x(t) = t + (kx − 1)·sin(t) − ky·(1 − cos(t))
+      y(t) = (kx − 1)·(1 − cos(t)) + ky·sin(t)
+    圆心漂移线高度严格为：y_drift = kx − 1
+    圆半径：R = |v_圆0| / v_平 = √((kx − 1)² + ky²)
+  
+  交互设计：
+    1. 保持原版简洁直观的控件结构；
+    2. 放大控件尺寸与触控面积，便于教师白板拖拽与课堂演示；
+    3. 清晰标识各滑块对应的物理量（向右分量 vx、向上分量 vy）；
+    4. 彻底剔除多余提示文字与描述性噪点，界面极致纯粹明了。
 -->
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
+const { showRollingCircle = true, showDecomposition = true } = defineProps<{
+  /** 是否展示圆心平移圆与半径连线 */
+  showRollingCircle?: boolean;
+  /** 是否展示初速度矢量分解 (v_平 + v_圆0) */
+  showDecomposition?: boolean;
+}>();
+
 const W = 1000;
 const H = 340;
-/** 1 个单位（= R）画多少像素 */
-const K = 35;
-/** 出发点在画布上的位置（四周都留出轨迹向左 / 向上 / 向下的余量） */
+/** 1 个单位（= 1R 对应 mg/qB）所占像素 */
+const K = 36;
+/** 出发点在画布上的位置 */
 const SX = 100;
 const CY = 100;
 
 const px = (x: number): number => SX + x * K;
-/** 世界 y 向上为正 ⟹ 屏幕 y 向下，故取负号 */
+/** 世界 y 向上为正 ⟹ 屏幕 y 向下翻转 */
+/**
+ * 世界 y 向上为正 ⟹ 屏幕 y 向下翻转
+ *
+ * @param y 世界坐标 y
+ * @returns 屏幕坐标 y
+ */
 const py = (y: number): number => CY - y * K;
 
-/** 初速度的两个分量（单位是 v_平）：x 向右为正、y 向上为正 */
+/** 初速度分量（以 v_平 = mg/(qB) 为单位） */
 const kx = ref(0);
 const ky = ref(0);
-/** 圆周分速度 v_圆0 = v_初 − v_平（世界坐标，y 向上为正） */
+
+/** 圆周分速度初值 v_圆0 = v_初 − v_平 */
 const wx = computed(() => kx.value - 1);
 const wy = computed(() => ky.value);
-/** R = |v_圆0| / v_平（1 个单位 = 1R） */
+/** 圆周运动半径 R = |v_圆0| / v_平 */
 const R = computed(() => Math.hypot(wx.value, wy.value));
 
-/** 数值积分：固定时间步长（小步长保证精度与稳定）；**画 3 个周期**，轨迹自然甩出画布被裁掉 */
-const DT = 0.01;
-const PERIOD = 2 * Math.PI;
-const T_TOTAL = 3 * PERIOD;
-const STEPS = Math.round(T_TOTAL / DT);
-
 /**
- * 直接按定义数值积分（不再手推解析解，避免符号搞反）。 世界坐标：x 向右为正、y 向上为正、z 指向纸外；B 垂直纸面向里 ⟹ B = −B ẑ；小球带正电； 取 qB/m = 1、g =
- * 1（1 个单位 = v_平 = mg/(qB)）。 F = qv×B = q( v_x x̂ + v_y ŷ )×(−B ẑ)；而 ŷ×ẑ = x̂、x̂×ẑ = −ŷ， 故 F = qB(
- * −v_y x̂ + v_x ŷ ) ⟹ a = ( −v_y , v_x )，再加重力 (0, −1)： a = ( −v_y , v_x − 1 ) ⚠️ 这里的负号最容易写反：静止释放时 a
- * = (0, −1) 先向下，随后 v_y < 0 ⟹ a_x = −v_y > 0， 小球立刻**向右偏**（与标准结论"正电荷在向里的磁场中下落向右偏"一致）。
- * 返回整条轨迹的采样点（世界坐标，y 向上为正）。
+ * 精确解析解（绝对物理守恒） x(t) = t + wx·sin(t) − wy·(1 − cos(t)) y(t) = wx·(1 − cos(t)) + wy·sin(t)
+ *
+ * @param t 无量纲时间（ωt）
+ * @returns 该时刻的位置
  */
-const trace = computed<{ x: number; y: number }[]>(() => {
-  let x = 0;
-  let y = 0;
-  let vx = kx.value;
-  let vy = ky.value;
-  const out: { x: number; y: number }[] = [{ x: 0, y: 0 }];
+const getTrajectoryPos = (t: number): { x: number; y: number } => {
+  const sinT = Math.sin(t);
+  const cosT = Math.cos(t);
+  const oneMinusCos = 1 - cosT;
 
-  for (let i = 0; i < STEPS; i++) {
-    // a = ( −v_y , v_x ) + (0, −1)
-    const ax = -vy;
-    const ay = vx - 1;
+  return {
+    x: t + wx.value * sinT - wy.value * oneMinusCos,
+    y: wx.value * oneMinusCos + wy.value * sinT,
+  };
+};
 
-    vx += ax * DT;
-    vy += ay * DT;
-    x += vx * DT;
-    y += vy * DT;
-    out.push({ x, y });
+/** 采样生成整条轨迹（3 个周期） */
+const SAMPLES = 260;
+const T_MAX = 3 * 2 * Math.PI;
+
+const pathD = computed(() => {
+  const pts: string[] = [];
+  for (let i = 0; i <= SAMPLES; i++) {
+    const t = (i / SAMPLES) * T_MAX;
+    const p = getTrajectoryPos(t);
+    pts.push(`${i === 0 ? "M" : "L"} ${px(p.x).toFixed(1)} ${py(p.y).toFixed(1)}`);
   }
-
-  return out;
+  return pts.join(" ");
 });
-
-const pathD = computed(() =>
-  trace.value
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${px(p.x).toFixed(1)} ${py(p.y).toFixed(1)}`)
-    .join(" "),
-);
 
 const START = { x: px(0), y: py(0) };
 
-/* ── 小球沿轨迹循环运动：让"两笔账的合成"动起来看 ── */
-const CYCLE_MS = 9000;
-const head = ref(0);
+/** 动画循环（沿解析解平滑巡航） */
+const CYCLE_MS = 8000;
+const animPhase = ref(0);
 let frame = 0;
 let t0 = 0;
+
 const tick = (now: number): void => {
   if (t0 === 0) t0 = now;
-  head.value = ((now - t0) / CYCLE_MS) % 1;
+  animPhase.value = ((now - t0) / CYCLE_MS) % 1;
   frame = requestAnimationFrame(tick);
 };
+
 onMounted(() => {
   frame = requestAnimationFrame(tick);
 });
+
 onBeforeUnmount(() => {
   if (frame !== 0) cancelAnimationFrame(frame);
 });
 
-const ball = computed(() => {
-  const list = trace.value;
-  const p = list[Math.min(list.length - 1, Math.floor(head.value * list.length))] ?? { x: 0, y: 0 };
+/** 当前质点即时屏幕位置 */
+const currentT = computed(() => animPhase.value * T_MAX);
+const currentWorldPos = computed(() => getTrajectoryPos(currentT.value));
+const ball = computed(() => ({
+  x: px(currentWorldPos.value.x),
+  y: py(currentWorldPos.value.y),
+}));
 
-  return { x: px(p.x), y: py(p.y) };
-});
+/** 圆心水平漂移线 y_drift = kx − 1 */
+const driftYWorld = computed(() => kx.value - 1);
+const driftYScreen = computed(() => py(driftYWorld.value));
 
-/** 漂移（轮心）线：圆周运动圆心所在的水平线（世界 y = −wx/R） */
-const driftY = computed(() => -wx.value / Math.max(R.value, 1e-9));
+/** 当前时刻圆心在屏幕上的位置 */
+const activeCenterScreen = computed(() => ({
+  x: px(currentT.value - ky.value),
+  y: driftYScreen.value,
+}));
 
-/** 初速度箭头：显示比例 1.2，长度严格正比于 v_初 */
-const V_SCALE = 1.2;
-const vInit = computed(() => ({
+/** 初速度矢量 */
+const V_SCALE = 1.3;
+const vInitTip = computed(() => ({
   x: START.x + kx.value * K * V_SCALE,
   y: START.y - ky.value * K * V_SCALE,
 }));
 
-/** 轨迹形态：只由 |v_圆0| / v_平 决定 */
+// 分速度 v_平 矢量终点
+const vFlatTip = computed(() => ({
+  x: START.x + Number(K) * V_SCALE,
+  y: START.y,
+}));
+
+/** 轨迹形态判据（仅输出纯粹的形态名称，零多余提示词） */
 const regime = computed(() => {
-  if (R.value < 1e-6) return { name: "匀速直线", note: "洛伦兹力恰好抵消重力" };
-  if (Math.abs(R.value - 1) < 1e-6)
-    return { name: "尖点摆线", note: "最低点速度为零，尖点落在出发水平线上" };
-  if (R.value < 1) return { name: "波浪线", note: "漂移压过转动，全程向前、没有尖点" };
-  return { name: "结环摆线", note: "转动压过漂移，最高处向左折返打圈" };
+  if (R.value < 0.03) return { name: "匀速直线" };
+  if (Math.abs(R.value - 1) < 0.05 && Math.abs(ky.value) < 0.05) return { name: "尖点摆线" };
+
+  if (R.value < 1) return { name: "波浪线" };
+  return { name: "结环摆线" };
 });
 
+const HALO = {
+  stroke: "var(--c-bg, #0f172a)",
+  "stroke-width": 3.6,
+  "paint-order": "stroke",
+} as const;
 const MATH = "KaTeX_Math, 'Times New Roman', serif";
 const MAIN = "KaTeX_Main, 'Times New Roman', serif";
-const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.5, "paint-order": "stroke" } as const;
 </script>
 
 <template>
   <div class="isv">
+    <!-- 主画布展台 -->
     <div class="isv-stage">
-      <svg :viewBox="`0 0 ${W} ${H}`" class="isv-svg">
-        <!-- 匀强磁场：裸 × 铺满（黄） -->
+      <svg
+        :viewBox="`0 0 ${W} ${H}`"
+        class="isv-svg select-none overflow-visible"
+        role="img"
+        aria-label="任意初速度下的带电小球在复合场中的运动轨迹"
+      >
+        <defs>
+          <filter id="isv-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- 1. 背景匀强磁场点阵 -->
         <FieldDots
-          :x="20"
-          :y="16"
-          :cols="17"
+          :x="24"
+          :y="18"
+          :cols="18"
           :rows="6"
-          :spacing="56"
+          :spacing="55"
           :size="6"
           :line-width="2"
-          :opacity="0.3"
+          :opacity="0.22"
+          color="var(--c-accent, #e2a846)"
           dir="in"
         />
-        <!-- 出发水平线（v_平 的那条基准线） -->
-        <path
-          :d="`M 12 ${py(0)} H ${W - 12}`"
-          stroke="var(--c-text-dim)"
+
+        <!-- 2. 出发水平线 (y = 0 基准线) -->
+        <line
+          x1="12"
+          :y1="py(0)"
+          :x2="W - 12"
+          :y2="py(0)"
+          stroke="var(--c-text-dim, #94a3b8)"
           stroke-width="1.4"
-          stroke-dasharray="8 7"
-          opacity="0.5"
+          stroke-dasharray="8 6"
+          opacity="0.45"
         />
-        <!-- 漂移线（圆周运动的圆心所在水平线） -->
-        <path
-          v-if="R > 0.02"
-          :d="`M 12 ${py(driftY)} H ${W - 12}`"
-          stroke="var(--c-velocity)"
+
+        <!-- 3. 圆心水平漂移线 y_drift = kx − 1 -->
+        <line
+          v-if="R > 0.05"
+          x1="12"
+          :y1="driftYScreen"
+          :x2="W - 12"
+          :y2="driftYScreen"
+          stroke="var(--c-velocity, #60a5fa)"
           stroke-width="1.4"
-          stroke-dasharray="3 6"
-          opacity="0.5"
+          stroke-dasharray="4 5"
+          opacity="0.45"
         />
-        <!-- 轨迹 -->
+
+        <!-- 4. 复合运动轨迹曲线 -->
         <path
           :d="pathD"
           fill="none"
-          stroke="var(--c-accent)"
-          stroke-width="3.2"
+          stroke="#0f172a"
+          stroke-width="6"
           stroke-linecap="round"
+          opacity="0.8"
         />
-        <!-- 出发点 -->
+        <path
+          :d="pathD"
+          fill="none"
+          stroke="var(--c-accent, #e2a846)"
+          stroke-width="3.4"
+          stroke-linecap="round"
+          filter="url(#isv-glow)"
+        />
+
+        <!-- 5. 瞬时滚动圆与半径连线 -->
+        <g v-if="showRollingCircle && R > 0.08">
+          <circle
+            :cx="activeCenterScreen.x"
+            :cy="activeCenterScreen.y"
+            :r="R * K"
+            fill="none"
+            stroke="var(--c-velocity, #60a5fa)"
+            stroke-width="1.4"
+            stroke-dasharray="4 4"
+            opacity="0.4"
+          />
+          <circle
+            :cx="activeCenterScreen.x"
+            :cy="activeCenterScreen.y"
+            r="3"
+            fill="var(--c-velocity, #60a5fa)"
+          />
+          <line
+            :x1="activeCenterScreen.x"
+            :y1="activeCenterScreen.y"
+            :x2="ball.x"
+            :y2="ball.y"
+            stroke="var(--c-velocity, #60a5fa)"
+            stroke-width="1.6"
+            opacity="0.7"
+          />
+        </g>
+
+        <!-- 6. 出发基准点 -->
         <circle
           :cx="START.x"
           :cy="START.y"
           r="4.5"
           fill="none"
-          stroke="var(--c-text-dim)"
+          stroke="var(--c-text-dim, #94a3b8)"
           stroke-width="2"
         />
-        <!-- 初速度（方向任意） -->
-        <g v-if="Math.hypot(kx, ky) > 0.03">
+
+        <!-- 初速度矢量分解 (v_平 + v_圆0) -->
+        <g v-if="showDecomposition && Math.hypot(kx, ky) > 0.08">
           <CourseArrow
             :from="START"
-            :to="vInit"
-            stroke="var(--c-velocity)"
-            :stroke-width="4.6"
+            :to="vFlatTip"
+            stroke="var(--c-velocity, #60a5fa)"
+            :stroke-width="2.8"
+            :head-size="12"
+          />
+          <line
+            :x1="vFlatTip.x"
+            :y1="vFlatTip.y"
+            :x2="vInitTip.x"
+            :y2="vInitTip.y"
+            stroke="#f59e0b"
+            stroke-width="1.8"
+            stroke-dasharray="3 3"
+            stroke-linecap="round"
+          />
+        </g>
+
+        <!-- 初速度总矢量 v_初 -->
+        <g v-if="Math.hypot(kx, ky) > 0.05">
+          <CourseArrow
+            :from="START"
+            :to="vInitTip"
+            stroke="var(--c-velocity, #60a5fa)"
+            :stroke-width="4.2"
             :head-size="15"
           />
           <text
-            :x="vInit.x + (vInit.x >= START.x ? 10 : -10)"
-            :y="vInit.y - 10"
-            font-size="17"
-            :text-anchor="vInit.x >= START.x ? 'start' : 'end'"
-            fill="var(--c-velocity)"
-            font-family="KaTeX_Math"
+            :x="vInitTip.x + (vInitTip.x >= START.x ? 12 : -12)"
+            :y="vInitTip.y - 8"
+            font-size="18"
+            :text-anchor="vInitTip.x >= START.x ? 'start' : 'end'"
+            dominant-baseline="central"
+            fill="var(--c-velocity, #60a5fa)"
+            :font-family="MATH"
             font-style="italic"
             :style="HALO"
           >
             v
-            <tspan font-family="KaTeX_Main" font-size="11.5" dy="4">初</tspan>
+            <tspan :font-family="MAIN" font-style="normal" font-size="12" dy="4">初</tspan>
           </text>
         </g>
-        <!-- 小球 -->
+
+        <!-- 7. 沿轨迹运动的小球（红色实心带加粗白十字） -->
         <circle
           :cx="ball.x"
           :cy="ball.y"
-          r="8"
-          fill="var(--c-surface-solid)"
-          stroke="var(--c-force)"
-          stroke-width="2.4"
+          r="9"
+          fill="var(--c-force, #f87171)"
+          stroke="#0f172a"
+          stroke-width="2"
+        />
+        <line
+          :x1="ball.x - 4"
+          :y1="ball.y"
+          :x2="ball.x + 4"
+          :y2="ball.y"
+          stroke="#ffffff"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <line
+          :x1="ball.x"
+          :y1="ball.y - 4"
+          :x2="ball.x"
+          :y2="ball.y + 4"
+          stroke="#ffffff"
+          stroke-width="2"
+          stroke-linecap="round"
         />
       </svg>
     </div>
 
+    <!-- 交互调控面板：保持原有控件布局，按教学需求做大做清晰，去掉多余说明词 -->
     <div class="isv-bar">
+      <!-- 水平分量滑块 -->
       <label class="isv-row">
-        <span class="isv-name">向右分量</span>
+        <span class="isv-name">
+          向右分量
+          <span class="isv-sym"
+            ><i>v</i><sub><i>x</i></sub></span
+          >
+        </span>
         <input
           v-model.number="kx"
           class="isv-slider"
           type="range"
           min="-1.5"
-          max="1.5"
+          max="2.5"
           step="0.05"
         />
-        <span class="isv-val">{{ kx.toFixed(2) }}</span>
+        <span class="isv-val">{{ (kx >= 0 ? "+" : "") + kx.toFixed(2) }}</span>
       </label>
+
+      <!-- 竖直分量滑块 -->
       <label class="isv-row">
-        <span class="isv-name">向上分量</span>
+        <span class="isv-name">
+          向上分量
+          <span class="isv-sym"
+            ><i>v</i><sub><i>y</i></sub></span
+          >
+        </span>
         <input
           v-model.number="ky"
           class="isv-slider"
@@ -235,8 +384,10 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.5, "paint-order": "strok
           max="1.5"
           step="0.05"
         />
-        <span class="isv-val">{{ ky.toFixed(2) }}</span>
+        <span class="isv-val">{{ (ky >= 0 ? "+" : "") + ky.toFixed(2) }}</span>
       </label>
+
+      <!-- 物理读数与形态标签 -->
       <div class="isv-read">
         <span class="isv-item">
           <Latex tex="|v_{\text{圆0}}| / v_{\text{平}} = " />
@@ -253,87 +404,170 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.5, "paint-order": "strok
   width: 100%;
 }
 
-/* 舞台：给图一个固定的高度预算，宽度按 viewBox 比例走
-   ⟹ 图再也不会横着撑满整屏、滑动条一定留在画布内 */
 .isv-stage {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: min(300px, 34vh);
+  width: 100%;
+  min-height: min(320px, 36vh);
 }
 
 .isv-svg {
   display: block;
-
   width: 100%;
-  max-width: 100%;
+  max-width: 1000px;
   height: 100%;
 }
 
+/* ═══════════ 原有控件风格的大号教学优化版 ═══════════ */
 .isv-bar {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.85rem;
 
-  max-width: 100%;
-  margin: 0.35rem auto 0;
+  width: 100%;
+  max-width: 920px;
+  margin: 0.85rem auto 0;
+  padding: 0.25rem 0.5rem;
 }
 
 .isv-row {
   display: flex;
+  gap: 1.25rem;
   align-items: center;
-  gap: 0.75rem;
+  user-select: none;
 }
 
 .isv-name {
+  display: flex;
   flex: 0 0 auto;
+  gap: 0.4rem;
+  align-items: baseline;
 
-  width: 5.5rem;
+  width: 8.8rem;
 
-  color: var(--c-text-dim);
+  color: var(--c-text-dim, #94a3b8);
 
-  font-size: 0.95rem;
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+
+.isv-sym {
+  color: var(--c-velocity, #60a5fa);
+  font-style: italic;
+  font-size: 1.25rem;
+  font-family: "KaTeX_Math", "Times New Roman", serif;
+}
+
+.isv-sym sub {
+  font-style: normal;
+  font-size: 0.85rem;
+  font-family: "KaTeX_Main", "Times New Roman", serif;
 }
 
 .isv-val {
   flex: 0 0 auto;
 
-  width: 3rem;
+  width: 5rem;
 
-  color: var(--c-text);
-  font-size: 0.95rem;
+  color: var(--c-text, #f8fafc);
+
+  font-weight: 600;
+  font-size: 1.25rem;
+  font-family: "JetBrains Mono", monospace;
   text-align: right;
 }
 
+/* 大号拖拽滑块，专为电子白板与教师演示优化 */
 .isv-slider {
   flex: 1 1 auto;
+
   min-width: 0;
-  accent-color: var(--c-accent);
+  height: 32px;
+
+  background: transparent;
+
   cursor: pointer;
+
+  accent-color: var(--c-accent, #e2a846);
+}
+
+.isv-slider::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #334155;
+}
+
+.isv-slider::-webkit-slider-thumb {
+  width: 24px;
+  height: 24px;
+  margin-top: -7px;
+  border: 2px solid #0f172a;
+  border-radius: 50%;
+
+  background: var(--c-accent, #e2a846);
+  box-shadow: 0 0 8px rgb(226 168 70 / 40%);
+
+  cursor: grab;
+
+  appearance: none;
+
+  transition: transform 0.12s ease;
+}
+
+.isv-slider::-webkit-slider-thumb:hover,
+.isv-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+
+.isv-slider::-moz-range-track {
+  height: 10px;
+  border-radius: 999px;
+  background: #334155;
+}
+
+.isv-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #0f172a;
+  border-radius: 50%;
+
+  background: var(--c-accent, #e2a846);
+  box-shadow: 0 0 8px rgb(226 168 70 / 40%);
+
+  cursor: grab;
 }
 
 .isv-read {
   display: flex;
-  align-items: baseline;
-  gap: 1.2rem;
+  gap: 1.5rem;
+  align-items: center;
 
-  color: var(--c-text-dim);
+  padding-top: 0.2rem;
 
-  font-size: 0.95rem;
+  color: var(--c-text-dim, #94a3b8);
+
+  font-size: 1.15rem;
 }
 
 .isv-item strong {
-  color: var(--c-text);
+  color: var(--c-accent, #e2a846);
+  font-size: 1.25rem;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .isv-tag {
   margin-left: auto;
-  padding: 0.1rem 0.7rem;
-  border: 1px solid var(--c-accent);
+  padding: 0.2rem 1rem;
+  border: 1.5px solid var(--c-accent, #e2a846);
   border-radius: 999px;
 
-  color: var(--c-accent);
-  font-size: 0.95rem;
+  background: rgb(226 168 70 / 12%);
+  color: var(--c-accent, #e2a846);
+
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 </style>

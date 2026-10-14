@@ -15,13 +15,10 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    /** 点击步到了才画运动的小球 + 速度分解 + 洛伦兹力，并启动循环动画；干净题目图时传 false */
-    showAnalysis?: boolean;
-  }>(),
-  { showAnalysis: false },
-);
+const { showAnalysis = false } = defineProps<{
+  /** 点击步到了才画运动的小球 + 速度分解 + 洛伦兹力，并启动循环动画；干净题目图时传 false */
+  showAnalysis?: boolean;
+}>();
 
 /* ═══════════ 版面坐标（viewBox 640×440，y 轴向下） ═══════════ */
 const VB_W = 640;
@@ -85,34 +82,34 @@ const clock = ref(0);
 let frame = 0;
 let t0 = 0;
 
-const step = (now: number) => {
+const step = (now: number): void => {
   if (t0 === 0) t0 = now;
   clock.value = ((now - t0) / 1000) % CYCLE;
   frame = requestAnimationFrame(step);
 };
-const startMotion = () => {
+const startMotion = (): void => {
   if (frame !== 0) return;
   t0 = 0;
   frame = requestAnimationFrame(step);
 };
-const stopMotion = () => {
+const stopMotion = (): void => {
   if (frame !== 0) cancelAnimationFrame(frame);
   frame = 0;
 };
 
 onMounted(() => {
-  if (props.showAnalysis) startMotion();
+  if (showAnalysis) startMotion();
 });
 onBeforeUnmount(stopMotion);
 watch(
-  () => props.showAnalysis,
+  () => showAnalysis,
   (on) => (on ? startMotion() : stopMotion()),
 );
 
 /** 循环内归一化时间 p ∈ [0,1]；竖直恒力 ⟹ 位移 ∝ t²、速度 ∝ t */
 const p = computed(() => Math.min(1, clock.value / MOVE));
 /** 管整体随 v 向右匀速平移：水平匀速 ⟹ 位移 ∝ t，即随 p 线性增大；干净题目图停在起点不动 */
-const tubeShift = computed(() => (props.showAnalysis ? TUBE_SHIFT_MAX * p.value : 0));
+const tubeShift = computed(() => (showAnalysis ? TUBE_SHIFT_MAX * p.value : 0));
 /** 管中心 x —— 球心水平坐标、速度分解起点、洛伦兹力起笔点都跟着它走（地面参考系里球随管匀速右移） */
 const tubeCx = computed(() => TUBE_CX + tubeShift.value);
 /** 管两壁的 x（随管一起平移） */
@@ -123,7 +120,7 @@ const dimX = computed(() => DIM_X + tubeShift.value);
 /** 分解箭头起点相对管中心的横向偏移固定，所以也随管一起平移 */
 const decoX = computed(() => tubeCx.value + DECO_DX);
 /** 球心：干净题目图里静止贴在管底；分析层沿管壁匀加速升到管口 */
-const ballY = computed(() => BALL_REST_Y - (props.showAnalysis ? BALL_RISE * p.value ** 2 : 0));
+const ballY = computed(() => BALL_REST_Y - (showAnalysis ? BALL_RISE * p.value ** 2 : 0));
 /** 分速度长度：v 恒定，v_y = a t ∝ t 线性变长 */
 const vyLen = computed(() => VY_MAX * p.value);
 /** 洛伦兹力长度：qvB 恒定，qv_yB = q·v_y·B ∝ v_y 线性变长 */
@@ -266,7 +263,7 @@ const MATH_FONT = "KaTeX_Math, 'Times New Roman', serif";
       />
       <!-- 小球在地面参考系里的轨迹：水平随管匀速、竖直匀加速 ⟹ 抛物线（只画已经走过的一段） -->
       <polyline
-        v-if="props.showAnalysis"
+        v-if="showAnalysis"
         :points="trailPoints"
         fill="none"
         stroke="var(--c-velocity)"
@@ -317,7 +314,7 @@ const MATH_FONT = "KaTeX_Math, 'Times New Roman', serif";
           v
         </text>
       </g>
-      <g v-if="props.showAnalysis">
+      <g v-if="showAnalysis">
         <!-- 水平 v 与竖直 v_y 补成矩形（虚线只是辅助，不参与受力） -->
         <line
           :x1="vTip.x"

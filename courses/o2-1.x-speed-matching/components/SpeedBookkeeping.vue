@@ -11,12 +11,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{
+const { step = 0 } = defineProps<{
   /** 当前点击步 0…3 */
   step?: number;
 }>();
-
-const step = computed(() => props.step ?? 0);
 
 const W = 880;
 const H = 340;
@@ -47,7 +45,7 @@ const fReal = computed(() => vec(OF, L, 120 - 90));
 /** 重力：与 f_平 共线反向 */
 const mg = computed(() => vec(OF, L, -90));
 
-const faded = computed(() => step.value >= 3);
+const faded = computed(() => step >= 3);
 const HALO = {
   stroke: "var(--c-bg)",
   "stroke-width": 3.5,
@@ -95,7 +93,13 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :stroke-width="4.6"
           :head-size="15"
         />
-        <CourseArrow :from="OV" :to="vCir" stroke="var(--c-velocity)" :stroke-width="4.6" :head-size="15" />
+        <CourseArrow
+          :from="OV"
+          :to="vCir"
+          stroke="var(--c-velocity)"
+          :stroke-width="4.6"
+          :head-size="15"
+        />
         <text
           :x="(OV.x + vPar.x) / 2"
           :y="OV.y + 22"
@@ -177,7 +181,13 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :stroke-width="5.4"
           :head-size="17"
         />
-        <CourseArrow :from="OF" :to="fCir" stroke="var(--c-velocity)" :stroke-width="4.6" :head-size="15" />
+        <CourseArrow
+          :from="OF"
+          :to="fCir"
+          stroke="var(--c-velocity)"
+          :stroke-width="4.6"
+          :head-size="15"
+        />
         <text
           :x="fReal.x - 12"
           :y="fReal.y - 12"
@@ -234,6 +244,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 
 .sb-svg {
   display: block;
+
   width: 100%;
   max-width: 700px;
   height: auto;

@@ -36,7 +36,7 @@ interface Point {
   y: number;
 }
 
-const props = defineProps<{
+const { showAnalysis = false } = defineProps<{
   /** 点击出分析之后才画带电后的轨迹、运动小球、速度 / 洛伦兹力箭头与落点对照；干净题目图时传 false */
   showAnalysis?: boolean;
 }>();
@@ -80,13 +80,25 @@ const EAST_TO: Point = { x: 526, y: 50 };
 /** 落地点 a 的字母标注 */
 const LAND_LABEL: Point = { x: REF_LAND.x + 14, y: REF_LAND.y + 32 };
 
-/** 抛物线：水平匀速 + 竖直匀加速 ⟹ 用 p = t / 总时长 参数化时 x 线性、y 二次 */
+/**
+ * 抛物线：水平匀速 + 竖直匀加速 ⟹ 用 p = t / 总时长 参数化时 x 线性、y 二次
+ *
+ * @param p 归一化时间 0…1
+ * @param range 水平射程
+ * @returns 该时刻抛体所在位置
+ */
 const archAt = (p: number, range: number): Point => ({
   x: THROW.x + range * p,
   y: THROW.y + DROP * p * p,
 });
 
-/** 把抛物线采样成折线路径：动画小球走的是同一条曲线，不会"跑偏" */
+/**
+ * 把抛物线采样成折线路径：动画小球走的是同一条曲线，不会"跑偏"
+ *
+ * @param range 水平射程
+ * @param samples 采样段数
+ * @returns SVG 折线的 `d`
+ */
 const sampleArch = (range: number, samples = 48): string =>
   Array.from({ length: samples + 1 }, (_, index) => {
     const point = archAt(index / samples, range);
@@ -125,14 +137,14 @@ const start = (): void => {
 
 /** 动画只在"点击出分析"之后才跑；该 prop 转 false 或组件卸载时停掉 rAF */
 watch(
-  () => props.showAnalysis === true,
+  () => showAnalysis === true,
   (active) => {
     if (active) start();
     else stop();
   },
 );
 onMounted(() => {
-  if (props.showAnalysis === true) start();
+  if (showAnalysis === true) start();
 });
 onBeforeUnmount(stop);
 
@@ -274,7 +286,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
       >
         东
       </text>
-      <g v-if="props.showAnalysis">
+      <g v-if="showAnalysis">
         <path
           :d="CHARGED_TRAJECTORY"
           fill="none"

@@ -11,32 +11,28 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    /** 当前演示步骤 0…3 */
-    step?: number;
-    /** 旋转周期 (ms)，默认 4000ms */
-    period?: number;
-    /** 是否正在播放动画 */
-    playing?: boolean;
-    /** 宽度 */
-    width?: number;
-  }>(),
-  {
-    step: 0,
-    period: 4000,
-    playing: true,
-    width: 900,
-  },
-);
+const {
+  step = 0,
+  period = 4000,
+  playing = true,
+  width = 900,
+} = defineProps<{
+  /** 当前演示步骤 0…3 */
+  step?: number;
+  /** 旋转周期 (ms)，默认 4000ms */
+  period?: number;
+  /** 是否正在播放动画 */
+  playing?: boolean;
+  /** 宽度 */
+  width?: number;
+}>();
 
 interface Point {
   x: number;
   y: number;
 }
 
-const step = computed(() => props.step ?? 0);
-const spinning = computed(() => step.value >= 3 && props.playing);
+const spinning = computed(() => step >= 3 && playing);
 
 /* ═══════════ 画布与几何（viewBox 900×450） ═══════════ */
 const W = 900;
@@ -61,7 +57,7 @@ let t0 = 0;
 
 const tick = (now: number): void => {
   if (t0 === 0) t0 = now;
-  const p = props.period > 0 ? props.period : 4000;
+  const p = period > 0 ? period : 4000;
   theta.value = (((now - t0) / p) % 1) * Math.PI * 2;
   frame = requestAnimationFrame(tick);
 };
@@ -80,21 +76,16 @@ const stopSpin = (): void => {
 watch(
   spinning,
   (on) => {
-    if (on) {
-      startSpin();
-    } else {
-      stopSpin();
-    }
+    if (on) startSpin();
+    else stopSpin();
   },
   { immediate: true },
 );
 
 watch(
-  () => props.step,
+  () => step,
   (newStep) => {
-    if (newStep < 3) {
-      theta.value = 0;
-    }
+    if (newStep < 3) theta.value = 0;
   },
 );
 
@@ -127,7 +118,7 @@ const f2HeadStep1: Point = { x: CENTER.x + 7, y: CENTER.y + PX };
 // v2 = len * (-cos(θ), sin(θ))
 // f2 = len * (sin(θ), cos(θ))，满足 f2 ⊥ v2 且 f2 永远指向即时瞬时轨迹内侧
 const currentV2 = computed<Point>(() => {
-  const currentAngle = step.value >= 3 ? theta.value : 0;
+  const currentAngle = step >= 3 ? theta.value : 0;
   return {
     x: -PX * Math.cos(currentAngle),
     y: PX * Math.sin(currentAngle),
@@ -135,7 +126,7 @@ const currentV2 = computed<Point>(() => {
 });
 
 const currentF2 = computed<Point>(() => {
-  const currentAngle = step.value >= 3 ? theta.value : 0;
+  const currentAngle = step >= 3 ? theta.value : 0;
   return {
     x: PX * Math.sin(currentAngle),
     y: PX * Math.cos(currentAngle),
@@ -152,12 +143,10 @@ const arrowTail = (center: Point, dirVec: Point, r = BALL_R): Point => {
 };
 
 // 计算矢量箭头终点
-const arrowHead = (center: Point, dirVec: Point): Point => {
-  return {
-    x: center.x + dirVec.x,
-    y: center.y + dirVec.y,
-  };
-};
+const arrowHead = (center: Point, dirVec: Point): Point => ({
+  x: center.x + dirVec.x,
+  y: center.y + dirVec.y,
+});
 
 // 标签外扩位置（顺着矢量方向或外法线稍微向外偏移，保证绝不与箭头及小球重叠）
 const labelPos = (center: Point, dirVec: Point, extraDist = 24): Point => {
@@ -676,6 +665,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 .speed-matching-wrap {
   width: 100%;
 }
+
 .speed-matching-svg {
   max-width: 100%;
   height: auto;

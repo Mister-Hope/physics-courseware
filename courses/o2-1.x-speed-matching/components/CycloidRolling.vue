@@ -13,30 +13,27 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    /** 是否显示初态匹配（v_平 向右 + v_圆0 向左，合起来为 0） */
-    showInitial?: boolean;
-    /** 是否显示极值标注（尖点 v=0、最低点 v_max=2v_平、深度 2R） */
-    showExtremes?: boolean;
-    /** 是否显示两个分速度的合速度 v_合（切于摆线） */
-    showResultant?: boolean;
-    /** 是否暂停动画（用于教师单步讲解） */
-    paused?: boolean;
-    /** 手动控制角度（弧度 0 ~ 2π），传入非负数时以此为准 */
-    manualTheta?: number;
-    /** 宽度 */
-    width?: number;
-  }>(),
-  {
-    showInitial: false,
-    showExtremes: false,
-    showResultant: false,
-    paused: false,
-    manualTheta: -1,
-    width: 780,
-  },
-);
+const {
+  showInitial = false,
+  showExtremes = false,
+  showResultant = false,
+  paused = false,
+  manualTheta = -1,
+  width = 780,
+} = defineProps<{
+  /** 是否显示初态匹配（v_平 向右 + v_圆0 向左，合起来为 0） */
+  showInitial?: boolean;
+  /** 是否显示极值标注（尖点 v=0、最低点 v_max=2v_平、深度 2R） */
+  showExtremes?: boolean;
+  /** 是否显示两个分速度的合速度 v_合（切于摆线） */
+  showResultant?: boolean;
+  /** 是否暂停动画（用于教师单步讲解） */
+  paused?: boolean;
+  /** 手动控制角度（弧度 0 ~ 2π），传入非负数时以此为准 */
+  manualTheta?: number;
+  /** 宽度 */
+  width?: number;
+}>();
 
 const W = 780;
 const H = 300;
@@ -54,13 +51,26 @@ const SAMPLES = 240;
 const toX = (wx: number): number => X0 + wx * K;
 const toY = (wy: number): number => CENTER_Y - wy * K;
 
-/** 圆上的小球：θ 处的世界坐标（圆心为原点、向上为正，接触线在 y = 1） */
+/**
+ * 圆上的小球：θ 处的世界坐标（圆心为原点、向上为正，接触线在 y = 1）
+ *
+ * @param theta 圆上的角度（弧度）
+ * @returns θ 处的世界坐标
+ */
 const onCircle = (theta: number): { x: number; y: number } => ({
   x: theta - Math.sin(theta),
   y: Math.cos(theta),
 });
 
-/** 圆弧上的点（屏幕坐标；deg 取数学习惯的逆时针角，y 在函数里翻号） */
+/**
+ * 圆弧上的点（屏幕坐标；deg 取数学习惯的逆时针角，y 在函数里翻号）
+ *
+ * @param ox 圆心 x（屏幕坐标）
+ * @param oy 圆心 y（屏幕坐标）
+ * @param r 半径
+ * @param deg 角度（度，逆时针为正）
+ * @returns 弧上该角度的屏幕坐标
+ */
 const arcPoint = (ox: number, oy: number, r: number, deg: number): { x: number; y: number } => ({
   x: ox + r * Math.cos((deg * Math.PI) / 180),
   y: oy - r * Math.sin((deg * Math.PI) / 180),
@@ -79,9 +89,8 @@ let t0 = 0;
 
 const tick = (now: number): void => {
   if (t0 === 0) t0 = now;
-  if (!props.paused && props.manualTheta < 0) {
-    animTheta.value = (((now - t0) % CYCLE) / CYCLE) * THETA_MAX;
-  }
+  if (!paused && manualTheta < 0) animTheta.value = (((now - t0) % CYCLE) / CYCLE) * THETA_MAX;
+
   raf = requestAnimationFrame(tick);
 };
 
@@ -95,9 +104,8 @@ onBeforeUnmount(() => {
 
 /** 当前生效的 θ 角度 */
 const theta = computed(() => {
-  if (props.manualTheta >= 0) {
-    return Math.max(0, Math.min(THETA_MAX, props.manualTheta));
-  }
+  if (manualTheta >= 0) return Math.max(0, Math.min(THETA_MAX, manualTheta));
+
   return animTheta.value;
 });
 
@@ -403,7 +411,7 @@ const HALO = {
       </text>
 
       <!-- 可选：显示两个分运动的合成速度 v_合 = v_平 + v_圆（严格切于摆线） -->
-      <g v-if="props.showResultant && (vTotalVec.x !== 0 || vTotalVec.y !== 0)">
+      <g v-if="showResultant && (vTotalVec.x !== 0 || vTotalVec.y !== 0)">
         <CourseArrow
           :from="ball"
           :to="vTotalTip"
@@ -458,7 +466,7 @@ const HALO = {
       />
 
       <!-- 初态匹配：借一个向右的 v_平，必须还一个向左的 v_圆0（合速度仍为 0） -->
-      <g v-if="props.showInitial">
+      <g v-if="showInitial">
         <CourseArrow
           :from="START"
           :to="{ x: START.x + 96, y: START.y }"
@@ -506,7 +514,7 @@ const HALO = {
       </g>
 
       <!-- 极值标注：末端尖点 v = 0、最低点 v_max = 2v_平、下落深度 2R -->
-      <g v-if="props.showExtremes">
+      <g v-if="showExtremes">
         <path
           :d="`M ${LOW.x} ${LINE_Y} V ${LOW.y}`"
           stroke="var(--c-text-dim, #94a3b8)"
@@ -608,6 +616,7 @@ const HALO = {
 
 .cy-svg {
   display: block;
+
   width: 100%;
   max-width: 780px;
   height: auto;
