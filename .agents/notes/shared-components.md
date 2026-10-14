@@ -1,4 +1,4 @@
-# 共享组件总览：12 个全局组件（干什么 + props 正本）
+# 共享组件总览：16 个全局组件（干什么 + props 正本）
 
 > 什么时候读：**页面上要用任何共享组件时**——先看这一篇 §1 的总表选组件，再看对应小节拿 props。
 > 这些组件由共享 addon（`workspace/shared/`）**全局注册**：直接写标签，**不用 import、不要重画**；
@@ -17,6 +17,10 @@
 | `CourseArrow`     | 矢量箭头（自带三角形 marker + 自动回退线段，尖端必落在终点上） | **只能在 `<svg>` 里**                           | 本篇 §4                                |
 | `SurfaceHatch`    | 接触面：地面 / 桌面 / 墙面 / 斜面 / 天花板 + 单侧斜线阴影      | **只能在 `<svg>` 里**                           | 本篇 §5                                |
 | `Ruler`           | 刻度尺（精确毫米刻度，或只画个尺子形状的示意图）               | 任意：可嵌在别的 `<svg>` 里，也可单独当 HTML 用 | 本篇 §6                                |
+| `CelestialSun`    | 天体：太阳（光球 + 日冕光晕 + 8 束光芒）                        | **只能在 `<svg>` 里**                           | 本篇 §8                                |
+| `CelestialEarth`  | 天体：地球（海洋 + 大陆 + 云系 + 晨昏线 + 大气层辉光）          | **只能在 `<svg>` 里**                           | 本篇 §8                                |
+| `CelestialMoon`   | 天体：月球（灰色球体 + 环形山 + 暗面）                          | **只能在 `<svg>` 里**                           | 本篇 §8                                |
+| `CelestialPlanet` | 天体：一般星球（5 套配色 + 可选气态条纹 / 行星环）              | **只能在 `<svg>` 里**                           | 本篇 §8                                |
 | `Latex`           | HTML 里的 KaTeX 公式（Markdown 段落里的 `$…$` 仍照用）         | markdown / HTML 层                              | 本篇 §3                                |
 | `ChartLabel`      | 图内标注（画在 SVG 上层的 HTML，**能渲染真 KaTeX 与分式**）    | HTML 层，盖在 SVG 上                            | 本篇 §3                                |
 | `CourseTopBar`    | 顶栏：封面显示章节名、内页显示课题名，右侧校徽                 | 课件的 `global-top.vue` 薄壳                    | 本篇 §2                                |
@@ -166,8 +170,53 @@
 ## 7. 所有组件共同的规则
 
 1. **全局注册**：直接写标签，不 import；共享代码改动（`workspace/shared/`）会影响**全部课件**，改前评估影响面。
-2. **`只能在 <svg> 里`** 的组件：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`——它们画的是 `<g>`，写成 HTML 元素页面上什么都不显示，也不能用 ` ```comp ` 代码块。
+2. **`只能在 <svg> 里`** 的组件：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`——它们画的是 `<g>`，写成 HTML 元素页面上什么都不显示，也不能用 ` ```comp ` 代码块。
 3. **`v-click` 写在组件里照样生效**（Slidev 的 `v-click` 是全局指令，跨组件仍绑当前页）；也可以由页面传 `:step="$clicks"`。
 4. **颜色的属性值不要带空格**：SVG 属性里写 `rgba(226,168,70,0.15)`，**不要写** `rgb(226 168 70 / 15%)`——UnoCSS attributify 会把 `226`/`168` 当成工具类，把描边撑成几百 px（dev 下还看不出来，只有 build 产物中招）。
 5. **props 一多就用 ` ```comp ` 代码块**（围栏前必须留空行），写法见 [`coordinate-axes-comp-block.md`](./coordinate-axes-comp-block.md)。
 6. 分步显示用 `visible` / `v-if` 时记住：**真删真插会把已可见元素顶跑**，优先用组件提供的 `visible` 这类"只隐藏不删除"的开关。
+
+## 8. 天体组件：`CelestialSun` / `CelestialEarth` / `CelestialMoon` / `CelestialPlanet`
+
+四个组件都渲染一个已定位好的 `<g>`（画在**父级 `<svg>` 的坐标系里**，只传 `x` / `y` / `r`，不用自己包 `<g transform>`）；
+半径 `r` 变则细节（大陆、环形山、条纹、行星环、线宽）等比缩放，`label` 字号不随 `r` 变。
+内部渐变 / 滤镜 / 剪裁 id 已按组件实例自动去重，**同一页画多个天体不会互相串色**。
+
+```html
+<svg viewBox="0 0 900 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <CelestialSun :x="110" :y="150" :r="34" label="太阳" />
+  <CelestialEarth :x="380" :y="150" :r="52" label="地球" />
+  <CelestialMoon :x="580" :y="150" :r="20" label="月球" />
+  <CelestialPlanet :x="760" :y="150" :r="30" variant="red" label="火星" />
+  <CelestialPlanet :x="860" :y="96" :r="16" variant="amber" :bands="true" :ring="true" label="土星" />
+</svg>
+```
+
+**四个组件共有的 props**：
+
+| prop        | 类型     | 默认  | 说明                                                             |
+| ----------- | -------- | ----- | ---------------------------------------------------------------- |
+| `x` / `y`   | `number` | `0`   | 球心（`CelestialSun` 即圆心）在父级 SVG 用户坐标里的位置         |
+| `r`         | `number` | 各不同 | 半径（Sun 30 / Earth 48 / Moon 20 / Planet 20）                  |
+| `label`     | `string` | `""`  | 球体下方标注；空字符串则不画                                     |
+| `labelDy`   | `number` | `0`   | 标注纵向偏移；`0` = 自动（约 `r + 20~44`）                       |
+| `labelSize` | `number` | `18`  | 标注字号（屏幕近似 px，**不随 `r` 缩放**，最后一排也要看得清）   |
+| `labelColor`| `string` | 各不同 | 标注色；Planet 的空字符串 = 跟随该配色亮色                       |
+| `opacity`   | `number` | `1`   | 整体不透明度                                                     |
+
+**各自专有 props**：
+
+| 组件               | prop          | 类型      | 默认   | 说明                                   |
+| ------------------ | ------------- | --------- | ------ | -------------------------------------- |
+| `CelestialSun`     | `showGlow`    | `boolean` | `true` | 是否画日冕光晕                         |
+|                    | `showRays`    | `boolean` | `true` | 是否画几何光芒                         |
+|                    | `rayCount`    | `number`  | `8`    | 光芒条数（均匀分布）                   |
+| `CelestialEarth`   | `showHalo`    | `boolean` | `true` | 是否画大气层辉光环                     |
+|                    | `showLabel`   | `boolean` | `true` | 是否画标注（配合 `label`）             |
+| `CelestialMoon`    | `showCraters` | `boolean` | `true` | 是否画环形山                           |
+| `CelestialPlanet`  | `variant`     | `"blue" \| "red" \| "amber" \| "teal" \| "violet"` | `"blue"` | 配色：地球类 / 火星类 / 气态 / 青 / 紫 |
+|                    | `bands`       | `boolean` | `false` | 气态行星条纹（木星、土星用）           |
+|                    | `ring`        | `boolean` | `false` | 行星环（土星用；环有前后遮挡关系）     |
+
+- 天体只是"图元"，**轨道 / 连线 / 力 / 速度箭头照旧用 `CourseArrow`、`<path>` 自己画**；
+- 需要"行星跑到轨道上某处"时，把轨道参数算出来再喂给 `x` / `y` 即可（例如椭圆轨道用 `x = a·cosE - c`、`y = b·sinE`）。

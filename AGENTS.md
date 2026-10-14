@@ -152,7 +152,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 ### 共享组件（`workspace/shared/components/`，全局注册：**直接用、不用 import、不要重画**）
 
-12 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；下面是全表，选组件与查 props 的正门是
+16 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；下面是全表，选组件与查 props 的正门是
 [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)：
 
 | 组件              | 写在哪                   | 干什么                                                                | props / 用法                                                             |
@@ -165,12 +165,16 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 | `CourseArrow`     | **只能在 `<svg>` 里**    | 矢量箭头（自动 marker + 尖端必落在终点），**别手写 `<marker>`**       | [总览 §4](.agents/notes/shared-components.md)                            |
 | `SurfaceHatch`    | **只能在 `<svg>` 里**    | 接触面：地面 / 桌面 / 墙 / 斜面 + 单侧斜线阴影                        | [总览 §5](.agents/notes/shared-components.md)                            |
 | `Ruler`           | 可内嵌可独立用           | 刻度尺（精确毫米刻度 / 示意图模式）                                   | [总览 §6](.agents/notes/shared-components.md)                            |
+| `CelestialSun`    | **只能在 `<svg>` 里**    | 天体：太阳（光球 + 日冕光晕 + 光芒）                                  | [总览 §8](.agents/notes/shared-components.md) ⭐ **禁止手画太阳**        |
+| `CelestialEarth`  | **只能在 `<svg>` 里**    | 天体：地球（海洋 + 大陆 + 云系 + 大气辉光）                           | [总览 §8](.agents/notes/shared-components.md) ⭐ **禁止手画地球**        |
+| `CelestialMoon`   | **只能在 `<svg>` 里**    | 天体：月球（灰球 + 环形山）                                           | [总览 §8](.agents/notes/shared-components.md)                            |
+| `CelestialPlanet` | **只能在 `<svg>` 里**    | 天体：一般星球（5 套配色 + 可选条纹 / 行星环）                        | [总览 §8](.agents/notes/shared-components.md)                            |
 | `Latex`           | HTML 层                  | HTML 里的 KaTeX 公式（SVG 里用不了，改 `KaTeX_Math` 字体）            | [总览 §3](.agents/notes/shared-components.md)                            |
 | `ChartLabel`      | HTML 层（盖在 SVG 上）   | 图内标注，**能渲染真 KaTeX 与分式**                                   | [总览 §3](.agents/notes/shared-components.md)                            |
 | `CourseTopBar`    | `global-top.vue` 薄壳    | 顶栏：封面章节名 ↔ 内页课题名 + 校徽                                  | [总览 §2](.agents/notes/shared-components.md)                            |
 | `CourseBottomBar` | `global-bottom.vue` 薄壳 | 底栏两侧渐隐装饰线（无页码）                                          | 同上（无 props）                                                         |
 
-- **只能在 `<svg>` 里**的组件（`CourseArrow` / `SurfaceHatch` / `SpringScale` / `GripHand`）：写成 HTML 什么都不显示，也不能用 ` ```comp ` 代码块；`v-click` 写在里面照样生效。
+- **只能在 `<svg>` 里**的组件（`CourseArrow` / `SurfaceHatch` / `SpringScale` / `GripHand` / `CelestialSun` / `CelestialEarth` / `CelestialMoon` / `CelestialPlanet`）：写成 HTML 什么都不显示，也不能用 ` ```comp ` 代码块；`v-click` 写在里面照样生效。
 - 坐标图 / 弹簧测力计 / 手部这三篇专篇**读一篇就够**；其余组件的 props 全在总览笔记里。
 
 ---
