@@ -46,7 +46,12 @@ const {
   opacity?: number;
 }>();
 
-type Palette = { light: string; mid: string; dark: string; ring: string };
+interface Palette {
+  light: string;
+  mid: string;
+  dark: string;
+  ring: string;
+}
 
 const PALETTES: Record<PlanetVariant, Palette> = {
   blue: { light: "#7dd3fc", mid: "#3b82f6", dark: "#1e3a8a", ring: "#93c5fd" },
