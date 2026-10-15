@@ -9,7 +9,7 @@
 | 什么时候用                                                     | 读哪篇                                                                                                                                                                     |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **图元莫名其妙「看不见 / 变形 / 字号爆炸」（SVG 属性被吃掉）** | [`.agents/notes/svg-attributify-trap.md`](.agents/notes/svg-attributify-trap.md) ⭐⭐ **先查这个再查别的：`opacity` 被压成 0.9%、`stroke-width` 被撑大都是它；含诊断脚本** |
-| **要用任何共享组件（查它是干嘛的、props 怎么填）**             | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **13 个全局组件总表 + 简单组件的 props 正本**                                                |
+| **要用任何共享组件（查它是干嘛的、props 怎么填）**             | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **17 个全局组件总表 + 简单组件的 props 正本**                                                |
 | 要画 SVG（矢量箭头、SVG 字号体系、非坐标示意图）               | [`.agents/notes/slidev-svg.md`](.agents/notes/slidev-svg.md)                                                                                                               |
 | **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）    | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                                                                     |
 | **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）         | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                                                                   |
@@ -154,7 +154,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 ### 共享组件（`workspace/shared/components/`，全局注册：**直接用、不用 import、不要重画**）
 
-13 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
+17 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
 [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)。
 
 **坐标图（⛔ 禁止手写坐标轴 SVG）· 写在 markdown 顶层**
@@ -170,6 +170,13 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 - `SpringScale` — 弹簧测力计，⛔ 禁止手画表身 / 刻度 / 挂钩 · [笔记](.agents/notes/spring-scale.md)
 - `GripHand` — "手捏住拉环 / 吊环 / 细绳往外拉"，⛔ 禁止手画手掌 / 手指 · [笔记](.agents/notes/grip-hand.md)
 - `Ruler` — 刻度尺（精确毫米刻度 / 示意图模式），可内嵌也可独立用 · [总览 §6](.agents/notes/shared-components.md)
+
+**天体图元（⛔ 禁止手画太阳 / 地球 / 月球 / 星球）· 只能在 `<svg>` 里写**
+
+- `CelestialSun` — 太阳：光球 + 日冕光晕 + 光芒 · [总览 §9](.agents/notes/shared-components.md)
+- `CelestialEarth` — 地球：海洋 + 大陆 + 云系 + 晨昏线 + 大气辉光 · [总览 §9](.agents/notes/shared-components.md)
+- `CelestialMoon` — 月球：灰色球体 + 环形山 + 暗面 · [总览 §9](.agents/notes/shared-components.md)
+- `CelestialPlanet` — 一般星球：5 套配色 + 可选气态条纹 / 行星环 · [总览 §9](.agents/notes/shared-components.md)
 
 **HTML 层**
 

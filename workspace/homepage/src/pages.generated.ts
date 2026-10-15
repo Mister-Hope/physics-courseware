@@ -34,7 +34,13 @@ export const coursePages: Record<string, number> = {
   "6.2-centripetal-force": 24,
   "6.3-centripetal-acceleration": 11,
   "6.4-circular-motion-in-life": 18,
+  "7.1-planetary-motion": 19,
+  "7.2-law-of-universal-gravitation": 13,
+  "7.3-achievements-of-gravitation": 13,
+  "7.4-space-travel": 10,
+  "7.5-relativity-spacetime": 11,
   "o2-1.2-lorentz-force": 14,
   "o2-1.3-charged-particle-motion": 18,
-  "o2-1.x-speed-matching": 22,
+  "o2-1.4-mass-spectrometer-cyclotron": 28,
+  "o2-1.x-speed-matching": 24
 };
