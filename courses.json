@@ -307,16 +307,16 @@
           "tags": []
         },
         {
-          "slug": "o2-1.x-speed-matching",
-          "title": "复合场中的配速法与摆线运动",
-          "chapter": "§1.x",
+          "slug": "o2-1.4-mass-spectrometer-cyclotron",
+          "title": "质谱仪与回旋加速器",
+          "chapter": "§1.4",
           "description": "仍在制作中",
           "tags": []
         },
         {
-          "slug": "o2-1.4-mass-spectrometer-cyclotron",
-          "title": "质谱仪与回旋加速器",
-          "chapter": "§1.4",
+          "slug": "o2-1.x-speed-matching",
+          "title": "复合场中的配速法与摆线运动",
+          "chapter": "§1.x",
           "description": "仍在制作中",
           "tags": []
         }
