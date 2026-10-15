@@ -28,6 +28,9 @@ permissions:
   "@slidev/cli":
     skills: true
 
+  playwright-chromium:
+    build: true
+
 minimumReleaseAgeExclude:
   - "@mr-hope/*"
   - "@oxfmt/*"
