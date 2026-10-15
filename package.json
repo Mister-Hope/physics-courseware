@@ -7,6 +7,8 @@
   "type": "module",
   "scripts": {
     "build": "unrun scripts/build-all.ts",
+    "check": "vue-tsc",
+    "compare:shots": "unrun scripts/compare-shots.ts",
     "create:course": "unrun scripts/create-course.ts",
     "dev": "unrun scripts/dev.ts",
     "lint": "oxlint --fix && oxfmt && stylelint **/*.{css,vue} --fix",
@@ -20,7 +22,8 @@
     "slide": "unrun scripts/slide.ts",
     "style:audit": "unrun scripts/style-audit.ts",
     "test:e2e": "unrun scripts/e2e.ts",
-    "test:e2e:install": "playwright install chromium"
+    "test:e2e:install": "playwright install chromium",
+    "tokenize:svg-colors": "unrun scripts/tokenize-svg-colors.ts"
   },
   "devDependencies": {
     "@inquirer/prompts": "^8.7.3",
@@ -30,11 +33,13 @@
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0",
     "oxlint-tsgolint": "7.0.2004",
+    "playwright-chromium": "1.64.0",
     "postcss-html": "2.0.0",
     "stylelint": "17.16.0",
     "stylelint-config-hope": "12.1.0",
     "unrun": "^0.3.1",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vue-tsc": "3.3.13"
   },
   "devEngines": {
     "packageManager": {

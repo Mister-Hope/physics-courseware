@@ -69,7 +69,9 @@ test(`截图「${course.slug}」`, async ({ page }) => {
         ? Array.from({ length: total + 1 }, (_, index) => index)
         : clicksSpec === "all"
           ? [...new Set([0, total])]
-          : [Number(clicksSpec) || 0];
+          : clicksSpec === "last"
+            ? [total]
+            : [Number(clicksSpec) || 0];
 
     for (const clicks of steps) {
       if (clicks > total) continue;

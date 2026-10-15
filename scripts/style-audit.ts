@@ -13,6 +13,8 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
+import { PALETTE_CLASS, PALETTE_TO_TOKEN, parseColor, tokenOfHex } from "./token-colors";
+
 const ROOT = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT, "courses");
 /** Style-guide §4：一份课件卡片总数上限 */
@@ -165,8 +167,6 @@ const ICON_SIZE_OK = /^(?:(?<text>text-(?:[2-5]xl))|(?<icon>icon-(?:md|lg|xl|2xl
  */
 const UNOCSS_BIG_TEXT = /^text-(?<xl>[2-9]xl|\d{2,}xl)$/u;
 /** 只用来"找有没有"，别带 `g`（`test()` 配 `g` 会记住 lastIndex、隔次返回假） */
-const HEX = /#[0-9a-fA-F]{3,8}\b/u;
-const RGB = /rgb\(/u;
 const FONT_SIZE = /font-size\s*:\s*(?<size>[^;}{]+);/gu;
 const BORDER_RADIUS = /border-radius\s*:\s*(?<radius>[^;}{]+);/gu;
 /** 剥掉 `var(--…)` 再判断"是否写死了值" */
@@ -174,7 +174,7 @@ const CSS_VALUE = /var\((?<var>[^)]*)\)/gu;
 const ROOT_VAR = /^\s*(?<var>--[\w-]+)\s*:/mu;
 
 interface Finding {
-  level: "warn" | "info";
+  level: "error" | "warn" | "info";
   message: string;
 }
 
@@ -277,7 +277,7 @@ const checkCards = (sources: string): { cards: number; findings: Finding[] } => 
         ? [
             {
               level: "warn",
-              message: `卡片 ${cards} 处（上限 ${CARD_BUDGET}）—— 提问用 .ask、结论用 .key、对比用 .half-grid+.divider-l（§4）`,
+              message: `卡片 ${cards} 处（上限 ${CARD_BUDGET}）—— 我们的思路是"只有定义才立卡片"：提问用 .ask、落点用 .key、对比用 .half-grid + .divider-l；你看看这些卡片里哪些其实是提问 / 结论 / 对比？（§4）`,
             },
           ]
         : [],
@@ -295,7 +295,8 @@ const checkIconCount = (icons: number): Finding[] =>
     ? [
         {
           level: "info",
-          message: "全课 0 个图标 —— 并列条目 / 概念三栏 / 步骤条记得配扫读图标（§5）",
+          message:
+            "全课 0 个图标 —— 我们的思路是：并列可扫读的结构（概念三栏 / 要素列举 / 步骤条 / 对错判定）配一个语义图标；本课有这类结构吗？（§5）",
         },
       ]
     : [];
@@ -326,18 +327,48 @@ const checkIconSizes = (sources: string): Finding[] =>
  * @param index 该行在文件里的下标（从 0 起，报错时 +1 转成行号）
  * @returns 这一行的发现
  */
-const checkCssLine = (line: string, index: number): Finding[] => {
+const checkCssLine = (
+  line: string,
+  index: number,
+  unknownColors: Map<string, number>,
+): Finding[] => {
   if (line.trimStart().startsWith("/*")) return [];
 
   const out: Finding[] = [];
   // 先剥掉 `var(--…)`：剩下的 hex / rgb( 才是"写死的值"
   const raw = line.replaceAll(CSS_VALUE, "");
 
-  if (HEX.test(raw) || RGB.test(raw)) {
-    out.push({
-      level: "warn",
-      message: `style.css:${index + 1} 硬编码色值 → 走 var(--c-*)（§3）｜ ${line.trim()}`,
-    });
+  for (const match of raw.matchAll(/#[\da-fA-F]{3,8}\b|rgba?\([^)]*\)/gu)) {
+    const { hex, alpha } = parseColor(match[0]);
+
+    if (!hex) continue;
+
+    const token = tokenOfHex(hex);
+
+    // ① 写死的值**本来就是某个 token** ⇒ 客观错误：没有任何理由不写 var()
+    if (token && alpha === 1) {
+      out.push({
+        level: "error",
+        message:
+          `style.css:${index + 1} 这个色值就是 \`${token}\`（${hex}）里的同一个值 —— 直接写 \`var(${token})\` 就行，写死等于抄了一遍 token（§3）。` +
+          `请复查这行是不是从别处粘贴时把 var() 漏成了字面值：｜ ${line.trim()}`,
+      });
+      continue;
+    }
+
+    // ② 同一个色相只是加了透明度 ⇒ 警告（我们这套体系的做法是 color-mix）
+    if (token) {
+      out.push({
+        level: "warn",
+        message:
+          `style.css:${index + 1} \`${match[0]}\` 的色相就是 \`${token}\`，只是带了透明度。` +
+          `我们的思路是：色相一律取 token、透明度用 \`color-mix(in srgb, var(${token}) N%, transparent)\` 表达（§3）——你看这样写是否更贴合（§3）`,
+      });
+      continue;
+    }
+
+    // ③ 完全不在 token 表里的颜色：先记账，整门课超过 5 个才提醒"配色可能跑偏"
+    unknownColors.set(hex, (unknownColors.get(hex) ?? 0) + 1);
   }
 
   for (const match of line.matchAll(FONT_SIZE)) {
@@ -448,8 +479,11 @@ const checkProtectedSelectors = (css: string): Finding[] =>
     pattern.test(css)
       ? [
           {
-            level: "warn",
-            message: `重写共享选择器 ${label} → 只许覆盖 --page-gap/--stack-gap（§8）`,
+            level: "error",
+            message:
+              `重写了共享选择器 ${label} —— 这类选择器属于"全仓视觉契约"，课内改它只会改这一门课、其余课件不变（§8）。` +
+              `请复查这里：你要调的是密度（改 :root 的 --page-gap / --stack-gap），还是想新增一条共享原子？` +
+              `后者应该加在 workspace/shared，不要在本课覆写。`,
           },
         ]
       : [],
@@ -485,8 +519,11 @@ const checkRootOverrides = (css: string): Finding[] => {
 
     if (varName && !ALLOWED_ROOT_OVERRIDES.has(varName)) {
       findings.push({
-        level: "warn",
-        message: `style.css:${index + 1} 在 :root 里覆盖了非密度变量 ${varName}（§8 只许覆盖 --page-gap/--stack-gap）`,
+        level: "error",
+        message:
+          `style.css:${index + 1} 在 :root 里覆盖了非密度变量 ${varName} —— 这是全仓配色 / 圆角的统一口径，` +
+          `本课改掉、别的课照旧，同一套课件会呈现两种视觉（§8）。请复查：真需要这个值吗？` +
+          `需要就先提升成共享 token（workspace/shared），不要在课内改。`,
       });
     }
   });
@@ -521,6 +558,154 @@ const checkBorderMisuse = (sources: string): Finding[] => {
   return findings.slice(0, 5);
 };
 
+/**
+ * ⑥ 竖线滥用：`.key` 的左侧竖线只给"这一页的落点"用，**一页最多一处**（§4）。
+ *
+ * 实测最常见的滥用：把**每一步解析/推导**都套成 `.key`（1.3 第 18 页曾一页 6 处）， 满屏金/蓝竖线，既没信息量又把落点淹掉。推导步骤应当是普通段落。
+ *
+ * ⚠️ 只传 `slides.md` 本体：`courseSources()` 是把 slides.md 与组件源码拼起来的， 拼起来后 `---`
+ * 分页会失效、把不同页甚至不同文件当成一页（自测时就咬过一次 1.x-vectors）。
+ *
+ * @param slidesMd `courses/<slug>/slides.md` 正文
+ * @returns 同页 `.key` 多于一处 的发现
+ */
+const checkKeyOveruse = (slidesMd: string): Finding[] => {
+  const findings: Finding[] = [];
+  const lineHits: number[] = [];
+
+  slidesMd.split("\n").forEach((line, index) => {
+    if (!/class="[^"]*\bkey(-\w+)?\b[^"]*"/u.test(line)) return;
+
+    lineHits.push(index + 1);
+  });
+
+  // 相邻命中必然同页；`---` 分隔线之间算一页
+  const lines = slidesMd.split("\n");
+  let pageStart = 0;
+
+  for (let index = 0; index <= lines.length; index += 1) {
+    if (index < lines.length && !/^---\s*$/u.test(lines[index])) continue;
+
+    const hits = lineHits.filter((line) => line > pageStart && line <= index);
+
+    // 分级：2 处只是"可能"，交给执行者判断；≥3 处几乎必然是"把每一步解析都套了竖线"
+    if (hits.length === 2)
+      {findings.push({
+        level: "warn",
+        message: `同一页有 2 处 .key（行 ${hits.join("、")}）—— 若第二处确实是旁注 / 易错警示，可以保留；否则只留这一页的落点，其余改普通段落（§4）`,
+      });}
+
+    if (hits.length >= 3)
+      {findings.push({
+        level: "error",
+        message: `同一页有 ${hits.length} 处 .key（行 ${hits.join("、")}）—— 极可能把每一步解析 / 推导都套成了竖线，请逐条复判：只留落点那一条，其余改普通段落（§4）`,
+      });}
+
+    pageStart = index + 1;
+  }
+
+  // 只列前 6 页，但**必须把总数说出来**——否则执行者会以为"只有这几处"
+  // （真踩过：1.3 实际 16 页，执行者只看到 6 条）
+  if (findings.length <= 6) return findings;
+
+  return [
+    ...findings.slice(0, 6),
+    {
+      level: findings.some((item) => item.level === "error") ? "error" : "warn",
+      message:
+        `…另有 ${findings.length - 6} 页存在同类问题（本课合计 ${findings.length} 页）。` +
+        `请用 \`grep -n 'class="[^"]*\\bkey' courses/<slug>/slides.md\` 逐页排查，不要只改上面列出的几页`,
+    },
+  ];
+};
+
+/**
+ * ④ 配色是否跑偏：整门课出现 **≥5 个不在 token 表里的颜色** 就提醒一句。
+ *
+ * 依据（教师意见）：偶尔一个过渡色可以忽略；但一门课冒出十几个自己的颜色，说明"这套 PPT 的配色已经跟全仓不一样了"， 值得停下来问一句"这是有意的吗"。少于 5
+ * 个不报——避免把正常的局部描边变成噪音。
+ *
+ * @param unknownColors 本课 style.css 里出现的"非 token"颜色 → 次数
+ * @returns 配色提醒
+ */
+const checkColorPalette = (unknownColors: Map<string, number>): Finding[] => {
+  if (unknownColors.size < 5) return [];
+
+  const list = [...unknownColors]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([hex, count]) => `${hex}${count > 1 ? `×${count}` : ""}`)
+    .join("、");
+
+  return [
+    {
+      level: "warn",
+      message:
+        `本课 style.css 用了 ${unknownColors.size} 个不在 token 表里的颜色（${list}${unknownColors.size > 8 ? "…" : ""}）。` +
+        `我们这套体系的思路是"配色只有暖金 / 深蓝 / 红 / 蓝 / 青那几支主色 + 一组中性色阶，其余靠透明度与 color-mix 变化"` +
+        `——你检查一下这些新颜色是不是必要的？若只是中间过渡色，建议换回 var(--c-*)（§3）`,
+    },
+  ];
+};
+
+/**
+ * ⑦ 调色板工具类（§3 的另一条腿）：`text-emerald-400` 和 `#34d399` 是**同一件事**—— 都是"绕过 token 写死颜色"。所以按同一条规则处理：
+ *
+ * - 取值**等于已存在的 token** ⇒ `error`（共享 token 一旦调色，这些地方不会跟着变）
+ * - 取值**不在 token 表里** ⇒ 记账；整门课出现 ≥5 种不同调色板色 ⇒ `warn`（配色可能跑偏）
+ *
+ * @param sources 本课 slides.md + 组件源码
+ * @returns 调色板工具类的发现
+ */
+const checkPaletteClasses = (sources: string): Finding[] => {
+  const counts = new Map<string, number>();
+  // 注释行不算：注释里为了说明问题写到类名（如"把 text-amber-300 换掉"）不该被当成真实用法
+  const code = sources
+    .split("\n")
+    .filter((line) => !/^\s*(?:\/\*|\*|\/\/|<!--)/u.test(line))
+    .join("\n");
+
+  for (const match of code.matchAll(PALETTE_CLASS)) {
+    const key = `${match.groups?.family}-${match.groups?.shade}`;
+
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+
+  if (counts.size === 0) return [];
+
+  const same = [...counts].filter(([key]) => PALETTE_TO_TOKEN[key]);
+  const unknown = [...counts].filter(([key]) => !PALETTE_TO_TOKEN[key]);
+  const findings: Finding[] = [];
+
+  for (const [key, count] of same.sort((a, b) => b[1] - a[1]).slice(0, 5))
+    {findings.push({
+      level: "error",
+      message:
+        `\`${key}\` 用了 ${count} 处 —— 它的取值就是 \`${PALETTE_TO_TOKEN[key]}\` 的值，属于"绕过 token 写死颜色"。` +
+        `请复查：这里该用语义类（\`.text-dim\` / \`.ok-line\` / \`.bad-line\`…）还是 \`style="color: var(${PALETTE_TO_TOKEN[key]})"\`？` +
+        `共享 token 以后一调色，这些调色板类不会跟着变（§3）`,
+    });}
+
+  if (same.length > 5)
+    {findings.push({
+      level: "error",
+      message: `…另有 ${same.length - 5} 种"取值等于 token"的调色板类未列出（本课合计 ${same.length} 种），请用 \`grep -rhoE '(text|bg|border|fill|stroke)-[a-z]+-[0-9]+' courses/<slug>\` 逐处排查`,
+    });}
+
+  if (unknown.length >= 5)
+    {findings.push({
+      level: "warn",
+      message:
+        `本课还用了 ${unknown.length} 种**不在 token 表里**的调色板色（${unknown
+          .slice(0, 8)
+          .map(([key, count]) => `${key}×${count}`)
+          .join("、")}${unknown.length > 8 ? "…" : ""}）。` +
+        `我们的思路是"配色只有那几支主色 + 一组中性色阶"——你看看这些是不是必要？必要的话应该在 workspace/shared 补成共享 token，而不是各课自己用调色板（§3）`,
+    });}
+
+  return findings;
+};
+
 const auditCourse = (
   slug: string,
   classIndex: Map<string, string[]>,
@@ -528,6 +713,8 @@ const auditCourse = (
   const dir = path.join(COURSES_DIR, slug);
   const css = read(path.join(dir, "style.css"));
   const sources = courseSources(dir);
+  const slidesMd = read(path.join(dir, "slides.md"));
+  const unknownColors = new Map<string, number>();
   const { cards, findings: cardFindings } = checkCards(sources);
   const icons = [...sources.matchAll(ICON)].length;
   const defined = courseDefinedClasses(dir, css);
@@ -536,9 +723,12 @@ const auditCourse = (
     ...cardFindings,
     ...checkIconCount(icons),
     ...checkIconSizes(sources),
-    ...css.split("\n").flatMap((line, index) => checkCssLine(line, index)),
+    ...css.split("\n").flatMap((line, index) => checkCssLine(line, index, unknownColors)),
+    ...checkColorPalette(unknownColors),
     ...checkBareClasses(slug, css, sources, classIndex),
     ...checkBorderMisuse(sources),
+    ...checkKeyOveruse(slidesMd),
+    ...checkPaletteClasses(sources),
     ...checkProtectedSelectors(css),
     ...checkRootOverrides(css),
   ];
@@ -565,6 +755,7 @@ const classIndex = buildCourseClassIndex();
 
 for (const slug of slugs) {
   const { findings, cards, icons, customClasses } = auditCourse(slug, classIndex);
+  const errors = findings.filter((item) => item.level === "error").length;
   const warns = findings.filter((item) => item.level === "warn").length;
 
   if (findings.length === 0) {
@@ -572,14 +763,23 @@ for (const slug of slugs) {
     continue;
   }
 
-  flagged += 1;
+  if (errors > 0) flagged += 1;
+
+  const mark = errors > 0 ? "❌" : warns > 0 ? "⚠️" : "ℹ️";
+  const tail = [errors > 0 ? `错误 ${errors}` : "", warns > 0 ? `警告 ${warns}` : ""]
+    .filter(Boolean)
+    .join(" · ");
+
   console.log(
-    `\n${warns > 0 ? "⚠️" : "ℹ️"} ${slug}  卡片 ${cards} · 图标 ${icons} · 自造类 ${customClasses}`,
+    `\n${mark} ${slug}  卡片 ${cards} · 图标 ${icons} · 自造类 ${customClasses}${tail ? `  [${tail}]` : ""}`,
   );
-  for (const item of findings)
-    console.log(`   ${item.level === "warn" ? "·" : "·(建议)"} ${item.message}`);
+  for (const item of findings) {
+    const prefix = item.level === "error" ? "✗" : item.level === "warn" ? "!" : "·(建议)";
+    console.log(`   ${prefix} ${item.message}`);
+  }
 }
 
 console.log(
-  `\n── ${slugs.length} 门课，${flagged} 门有发现。口径见 .agents/notes/style-guide.md；存量课件"谁改谁收敛"。`,
+  `\n── ${slugs.length} 门课，${flagged} 门有**错误**级发现（警告级由执行者判断，不阻塞）。` +
+    `口径见 .agents/notes/style-guide.md；存量课件"谁改谁收敛"。`,
 );
