@@ -106,9 +106,7 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.35fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.35fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`">
         <!-- 地面用共享接触面组件：斜线只画在表面下方 -->
@@ -252,23 +250,28 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
     </div>
 
     <div class="demo-panel">
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\theta" /></span>
-        <input
-          v-model.number="theta"
-          type="range"
-          min="15"
-          max="60"
-          step="5"
-          aria-label="斜面倾角"
-        />
-        <span class="demo-val"><Latex :tex="thetaTex" /></span>
-      </div>
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="G" /></span>
-        <input v-model.number="weight" type="range" min="5" max="15" step="1" aria-label="物重" />
-        <span class="demo-val"><Latex :tex="weightTex" /></span>
-      </div>
+      <CourseSlider
+        v-model="theta"
+        :min="15"
+        :max="60"
+        :step="5"
+        label-tex="\theta"
+        label-width="2.5rem"
+        aria-label="斜面倾角"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="weight"
+        :min="5"
+        :max="15"
+        :step="1"
+        label-tex="G"
+        label-width="2.5rem"
+        aria-label="物重"
+      >
+        <template #value><Latex :tex="weightTex" /></template>
+      </CourseSlider>
 
       <div class="demo-readout">
         <div style="color: var(--c-accent)"><Latex :tex="slideTex" /></div>
@@ -283,16 +286,7 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
 </template>
 
 <style scoped>
-/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数走共享 .demo-*；小字注释走共享 .mini-note */
-.demo-row {
-  --demo-read: 5.6rem;
-  font-size: 0.95rem;
-}
-
-.demo-val {
-  font-size: 0.9rem;
-}
-
+/* 左图右文走共享 .split-wide；滑块走共享 CourseSlider；读数块走共享 .demo-readout；小字注释走 .mini-note */
 .demo-readout {
   font-size: 1.02rem;
 }

@@ -237,26 +237,46 @@ const labels = computed(() => [
       <div v-else class="pa-sum pa-sum-dim">点一下，把 a + b 拼出来 →</div>
 
       <div class="pa-controls">
-        <label class="pa-slider">
-          <span class="pa-slider-label" style="color: var(--c-accent)"><Latex tex="x_1" /></span>
-          <input v-model.number="x1" type="range" min="-3" max="3" step="1" />
-          <span class="pa-slider-val">{{ x1 }}</span>
-        </label>
-        <label class="pa-slider">
-          <span class="pa-slider-label" style="color: var(--c-accent)"><Latex tex="y_1" /></span>
-          <input v-model.number="y1" type="range" min="-3" max="3" step="1" />
-          <span class="pa-slider-val">{{ y1 }}</span>
-        </label>
-        <label class="pa-slider">
-          <span class="pa-slider-label" style="color: var(--c-accent-2)"><Latex tex="x_2" /></span>
-          <input v-model.number="x2" type="range" min="-3" max="3" step="1" />
-          <span class="pa-slider-val">{{ x2 }}</span>
-        </label>
-        <label class="pa-slider">
-          <span class="pa-slider-label" style="color: var(--c-accent-2)"><Latex tex="y_2" /></span>
-          <input v-model.number="y2" type="range" min="-3" max="3" step="1" />
-          <span class="pa-slider-val">{{ y2 }}</span>
-        </label>
+        <CourseSlider v-model="x1" :min="-3" :max="3" :step="1" layout="tight" label-width="2.5rem">
+          <template #label
+            ><span style="color: var(--c-accent)"><Latex tex="x_1" /></span
+          ></template>
+          <template #value>{{ x1 }}</template>
+        </CourseSlider>
+        <CourseSlider v-model="y1" :min="-3" :max="3" :step="1" layout="tight" label-width="2.5rem">
+          <template #label
+            ><span style="color: var(--c-accent)"><Latex tex="y_1" /></span
+          ></template>
+          <template #value>{{ y1 }}</template>
+        </CourseSlider>
+        <CourseSlider
+          v-model="x2"
+          :min="-3"
+          :max="3"
+          :step="1"
+          layout="tight"
+          label-width="2.5rem"
+          accent="blue"
+        >
+          <template #label
+            ><span style="color: var(--c-accent-2)"><Latex tex="x_2" /></span
+          ></template>
+          <template #value>{{ x2 }}</template>
+        </CourseSlider>
+        <CourseSlider
+          v-model="y2"
+          :min="-3"
+          :max="3"
+          :step="1"
+          layout="tight"
+          label-width="2.5rem"
+          accent="blue"
+        >
+          <template #label
+            ><span style="color: var(--c-accent-2)"><Latex tex="y_2" /></span
+          ></template>
+          <template #value>{{ y2 }}</template>
+        </CourseSlider>
       </div>
     </div>
   </div>
@@ -286,7 +306,8 @@ const labels = computed(() => [
   display: flex;
   flex: 1 1 42%;
   flex-direction: column;
-  gap: 0.5rem;
+  /* 0.4rem：滑杆换成共享 `CourseSlider` 后行变高（原生输入 1.2rem），这里跟着微收一档，避免整栏顶出 .page-grow */
+  gap: 0.4rem;
 
   min-width: 0;
 
@@ -362,58 +383,5 @@ const labels = computed(() => [
   grid-template-columns: 1fr 1fr;
   gap: 0.15rem 0.8rem;
   margin-top: 0.2rem;
-}
-
-.pa-slider {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-}
-
-.pa-slider-label {
-  flex-shrink: 0;
-  width: 1.2rem;
-  font-weight: 700;
-  font-size: 0.75rem;
-}
-
-/* 滑杆标签是 KaTeX（x₁ 不许写成 Unicode 下标），字号跟滑杆自己走 */
-.pa-slider-label :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.pa-slider-val {
-  width: 1.1rem;
-  color: var(--c-text-dim);
-  font-size: 0.75rem;
-  text-align: right;
-}
-
-.pa-slider input[type="range"] {
-  flex: 1;
-
-  min-width: 0;
-  height: 4px;
-  border-radius: 999px;
-
-  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.pa-slider input[type="range"]::-webkit-slider-thumb {
-  width: 13px;
-  height: 13px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  cursor: pointer;
-
-  appearance: none;
 }
 </style>

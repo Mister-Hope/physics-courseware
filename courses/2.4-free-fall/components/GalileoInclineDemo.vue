@@ -202,11 +202,17 @@ const aria = computed(
     </svg>
 
     <div class="gi-panel">
-      <div class="gi-row">
-        <span class="gi-label">倾角 <Latex tex="\theta" /></span>
-        <input v-model.number="angle" class="gi-range" type="range" min="15" max="90" step="5" />
-        <b class="gi-value">{{ angle }}°</b>
-      </div>
+      <CourseSlider
+        v-model="angle"
+        :min="15"
+        :max="90"
+        :step="5"
+        label="倾角"
+        label-tex="\theta"
+        label-width="4rem"
+      >
+        <template #value>{{ angle }}<Latex tex="^{\circ}" /></template>
+      </CourseSlider>
       <div class="gi-balls">
         <button
           v-for="item in BALLS"
@@ -256,32 +262,6 @@ const aria = computed(
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-}
-
-.gi-row {
-  display: flex;
-  gap: 0.6rem;
-  align-items: center;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.82rem;
-}
-
-.gi-label {
-  white-space: nowrap;
-}
-
-.gi-range {
-  flex: 1;
-  min-width: 0;
-  accent-color: var(--c-accent);
-}
-
-.gi-value {
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
 .gi-balls {

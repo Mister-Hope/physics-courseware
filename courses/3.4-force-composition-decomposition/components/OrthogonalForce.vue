@@ -65,9 +65,7 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.3fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.3fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <line
@@ -213,42 +211,39 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
     </div>
 
     <div class="demo-panel">
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="F" /></span>
-        <input
-          v-model.number="force"
-          type="range"
-          min="2"
-          max="10"
-          step="1"
-          aria-label="力的大小"
-        />
-        <span class="demo-val"><Latex :tex="forceTex" /></span>
-      </div>
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\theta" /></span>
-        <input
-          v-model.number="theta"
-          type="range"
-          min="0"
-          max="90"
-          step="5"
-          aria-label="力与水平方向的夹角"
-        />
-        <span class="demo-val"><Latex :tex="thetaTex" /></span>
-      </div>
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\varphi" /></span>
-        <input
-          v-model.number="phi"
-          type="range"
-          min="-30"
-          max="60"
-          step="5"
-          aria-label="x 轴的倾角"
-        />
-        <span class="demo-val"><Latex :tex="phiTex" /></span>
-      </div>
+      <CourseSlider
+        v-model="force"
+        :min="2"
+        :max="10"
+        :step="1"
+        label-tex="F"
+        label-width="2.5rem"
+        aria-label="力的大小"
+      >
+        <template #value><Latex :tex="forceTex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="theta"
+        :min="0"
+        :max="90"
+        :step="5"
+        label-tex="\theta"
+        label-width="2.5rem"
+        aria-label="力与水平方向的夹角"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="phi"
+        :min="-30"
+        :max="60"
+        :step="5"
+        label-tex="\varphi"
+        label-width="2.5rem"
+        aria-label="x 轴的倾角"
+      >
+        <template #value><Latex :tex="phiTex" /></template>
+      </CourseSlider>
 
       <div class="demo-readout">
         <div class="mini-note"><Latex :tex="alphaTex" /></div>
@@ -260,16 +255,7 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
 </template>
 
 <style scoped>
-/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数走共享 .demo-*；小字注释走共享 .mini-note */
-.demo-row {
-  --demo-read: 5.4rem;
-  font-size: 0.95rem;
-}
-
-.demo-val {
-  font-size: 0.9rem;
-}
-
+/* 左图右文走共享 .split-wide；滑块走共享 CourseSlider；读数块走共享 .demo-readout */
 .demo-readout {
   gap: 0.2rem;
   font-size: 0.95rem;

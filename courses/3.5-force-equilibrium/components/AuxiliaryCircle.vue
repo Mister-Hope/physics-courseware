@@ -527,16 +527,27 @@ const endDrag = (): void => {
 
     <!-- 下方紧凑双滑条（限制最大宽度，不拉得过长） -->
     <div class="ac-sliders">
-      <label class="ac-slider">
-        <span class="ac-lab">两绳夹角 <Latex tex="\theta" /></span>
-        <input v-model.number="thetaDeg" type="range" :min="THETA_MIN" :max="THETA_MAX" step="1" />
-        <span class="ac-val">{{ thetaDeg }}°</span>
-      </label>
-      <label class="ac-slider">
-        <span class="ac-lab">整体转动</span>
-        <input v-model.number="tiltDeg" type="range" :min="-tiltMax" :max="tiltMax" step="1" />
-        <span class="ac-val">{{ tilt }}°</span>
-      </label>
+      <CourseSlider
+        v-model="thetaDeg"
+        :min="THETA_MIN"
+        :max="THETA_MAX"
+        :step="1"
+        label="两绳夹角"
+        label-tex="\theta"
+        label-width="6rem"
+      >
+        <template #value>{{ thetaDeg }}<Latex tex="^{\circ}" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="tiltDeg"
+        :min="-tiltMax"
+        :max="tiltMax"
+        :step="1"
+        label="整体转动"
+        label-width="6rem"
+      >
+        <template #value>{{ tilt }}<Latex tex="^{\circ}" /></template>
+      </CourseSlider>
     </div>
   </div>
 </template>
@@ -580,46 +591,19 @@ const endDrag = (): void => {
   max-height: 100%;
 }
 
+/* 两行滑块（共享 CourseSlider）：行宽比原来的自绘版式大一些，故上限同步放宽 */
 .ac-sliders {
   display: flex;
   flex-direction: column;
   gap: 0.32rem;
 
   width: 100%;
-  max-width: 21rem;
+  max-width: 24rem;
   margin: 0 auto;
-
-  color: var(--c-text-dim, #94a3b8);
-
-  font-size: 0.8rem;
-}
-
-.ac-slider {
-  display: grid;
-  grid-template-columns: 4.8rem 1fr 2.4rem;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.ac-lab {
-  display: inline-flex;
-  gap: 0.25rem;
-  align-items: center;
-  white-space: nowrap;
 }
 
 .ac-math {
   font-style: italic;
   font-family: "KaTeX_Math", serif;
-}
-
-.ac-val {
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-}
-
-.ac-slider input {
-  width: 100%;
-  accent-color: var(--c-accent, #e2a846);
 }
 </style>

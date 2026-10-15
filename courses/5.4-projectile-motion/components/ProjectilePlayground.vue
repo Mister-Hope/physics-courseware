@@ -289,18 +289,17 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
       </template>
     </CoordAxes>
 
-    <div class="playground-bar">
-      <span class="playground-label">时刻 <Latex tex="t" /></span>
-      <input
-        v-model.number="progress"
-        class="playground-range"
-        type="range"
-        min="0"
-        max="100"
-        step="1"
-      />
-      <span class="playground-time">{{ fixed(t) }} s</span>
-    </div>
+    <CourseSlider
+      v-model="progress"
+      :min="0"
+      :max="100"
+      :step="1"
+      label="时刻"
+      label-tex="t"
+      label-width="4.5rem"
+    >
+      <template #value>{{ fixed(t) }}<Latex tex="\text{ s}" /></template>
+    </CourseSlider>
 
     <div class="playground-readout">
       <template v-if="mode === 'velocity'">
@@ -325,34 +324,6 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
   flex-direction: column;
   gap: 0.5rem;
   min-width: 0;
-}
-
-.playground-bar {
-  display: flex;
-  gap: 0.7rem;
-  align-items: center;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.82rem;
-}
-
-.playground-label {
-  white-space: nowrap;
-}
-
-.playground-range {
-  flex: 1;
-  min-width: 0;
-  height: 1.1rem;
-  accent-color: var(--c-accent);
-}
-
-.playground-time {
-  min-width: 4.2rem;
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-  text-align: right;
 }
 
 .playground-readout {

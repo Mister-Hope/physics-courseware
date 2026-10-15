@@ -141,9 +141,7 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.7fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.7fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg
         :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`"
@@ -321,42 +319,44 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
     </div>
 
     <div class="demo-panel">
-      <div class="demo-row">
-        <span class="demo-name" style="color: var(--c-accent)"><Latex tex="F_1" /></span>
-        <input
-          v-model.number="force1"
-          type="range"
-          min="1"
-          max="4"
-          step="0.5"
-          aria-label="F1 大小"
-        />
-        <span class="demo-val"><Latex :tex="f1Tex" /></span>
-      </div>
-      <div class="demo-row">
-        <span class="demo-name" style="color: var(--c-accent-2)"><Latex tex="F_2" /></span>
-        <input
-          v-model.number="force2"
-          type="range"
-          min="1"
-          max="4"
-          step="0.5"
-          aria-label="F2 大小"
-        />
-        <span class="demo-val"><Latex :tex="f2Tex" /></span>
-      </div>
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\theta" /></span>
-        <input
-          v-model.number="theta"
-          type="range"
-          min="0"
-          max="180"
-          step="5"
-          aria-label="两力夹角"
-        />
-        <span class="demo-val"><Latex :tex="thetaTex" /></span>
-      </div>
+      <CourseSlider
+        v-model="force1"
+        :min="1"
+        :max="4"
+        :step="0.5"
+        label-width="2.5rem"
+        aria-label="F1 大小"
+      >
+        <template #label
+          ><span style="color: var(--c-accent)"><Latex tex="F_1" /></span
+        ></template>
+        <template #value><Latex :tex="f1Tex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="force2"
+        :min="1"
+        :max="4"
+        :step="0.5"
+        label-width="2.5rem"
+        accent="blue"
+        aria-label="F2 大小"
+      >
+        <template #label
+          ><span style="color: var(--c-accent-2)"><Latex tex="F_2" /></span
+        ></template>
+        <template #value><Latex :tex="f2Tex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="theta"
+        :min="0"
+        :max="180"
+        :step="5"
+        label-tex="\theta"
+        label-width="2.5rem"
+        aria-label="两力夹角"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
 
       <div class="demo-readout" :class="{ 'demo-hidden': step < 4 }">
         <div class="sum-rule">
@@ -371,16 +371,7 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
 </template>
 
 <style scoped>
-/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数 / 隐形占位走共享 .demo-* */
-.demo-row {
-  --demo-lab: 2.6rem;
-  font-size: 0.95rem;
-}
-
-.demo-val {
-  font-size: 0.9rem;
-}
-
+/* 左图右文走共享 .split-wide；滑块走共享 CourseSlider；读数 / 隐形占位走共享 .demo-* */
 .demo-readout {
   gap: 0.35rem;
   margin-top: 0.2rem;

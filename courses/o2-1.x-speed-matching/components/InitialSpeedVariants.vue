@@ -350,42 +350,26 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
     <!-- 交互调控面板：保持原有控件布局，按教学需求做大做清晰，去掉多余说明词 -->
     <div class="ui-bar">
       <!-- 水平分量滑块 -->
-      <label class="ui-row">
-        <span class="ui-name text-lg">
-          向右分量
-          <span class="ui-sym text-xl"
-            ><i>v</i><sub><i>x</i></sub></span
-          >
-        </span>
-        <input
-          v-model.number="kx"
-          class="ui-slider"
-          type="range"
-          min="-1.5"
-          max="2.5"
-          step="0.05"
-        />
-        <span class="ui-val text-xl">{{ (kx >= 0 ? "+" : "") + kx.toFixed(2) }}</span>
-      </label>
+      <CourseSlider
+        v-model="kx"
+        :min="-1.5"
+        :max="2.5"
+        :step="0.05"
+        label="向右分量"
+        label-tex="v_x"
+        sign
+      />
 
       <!-- 竖直分量滑块 -->
-      <label class="ui-row">
-        <span class="ui-name text-lg">
-          向上分量
-          <span class="ui-sym text-xl"
-            ><i>v</i><sub><i>y</i></sub></span
-          >
-        </span>
-        <input
-          v-model.number="ky"
-          class="ui-slider"
-          type="range"
-          min="-1.5"
-          max="1.5"
-          step="0.05"
-        />
-        <span class="ui-val text-xl">{{ (ky >= 0 ? "+" : "") + ky.toFixed(2) }}</span>
-      </label>
+      <CourseSlider
+        v-model="ky"
+        :min="-1.5"
+        :max="1.5"
+        :step="0.05"
+        label="向上分量"
+        label-tex="v_y"
+        sign
+      />
 
       <!-- 物理读数与形态标签 -->
       <div class="ui-read text-lg">
@@ -418,150 +402,5 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 
   width: 100%;
   min-height: min(320px, 36vh);
-}
-
-/* ═══════════ 原有控件风格的大号教学优化版 ═══════════ */
-.ui-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-
-  width: 100%;
-  max-width: 920px;
-  margin: 0.5rem auto 0;
-  padding: 0.25rem 0.5rem;
-}
-
-.ui-row {
-  display: flex;
-  gap: 1.25rem;
-  align-items: center;
-  user-select: none;
-}
-
-/* 字号一律走共享阶梯（.text-lg / .text-xl，写在模板上），这里只管版式 */
-.ui-name {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 0.4rem;
-  align-items: baseline;
-
-  width: 8.8rem;
-
-  color: var(--c-text-dim);
-
-  font-weight: 500;
-}
-
-.ui-sym {
-  color: var(--c-velocity);
-  font-style: italic;
-  font-family: "KaTeX_Math", "Times New Roman", serif;
-}
-
-.ui-sym sub {
-  font-style: normal;
-  font-size: 0.85rem;
-  font-family: "KaTeX_Main", "Times New Roman", serif;
-}
-
-.ui-val {
-  flex: 0 0 auto;
-
-  width: 5rem;
-
-  color: var(--c-text);
-
-  font-weight: 600;
-  font-family: "JetBrains Mono", monospace;
-  text-align: right;
-}
-
-/* 大号拖拽滑块，专为电子白板与教师演示优化 */
-.ui-slider {
-  flex: 1 1 auto;
-
-  min-width: 0;
-  height: 32px;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  accent-color: var(--c-accent);
-}
-
-.ui-slider::-webkit-slider-runnable-track {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--c-neutral-700);
-}
-
-.ui-slider::-webkit-slider-thumb {
-  width: 24px;
-  height: 24px;
-  margin-top: -7px;
-  border: 2px solid var(--c-neutral-900);
-  border-radius: 50%;
-
-  background: var(--c-accent);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 40%, transparent);
-
-  cursor: grab;
-
-  appearance: none;
-
-  transition: transform 0.12s ease;
-}
-
-.ui-slider::-webkit-slider-thumb:hover,
-.ui-slider::-webkit-slider-thumb:active {
-  cursor: grabbing;
-  transform: scale(1.15);
-}
-
-.ui-slider::-moz-range-track {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--c-neutral-700);
-}
-
-.ui-slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--c-neutral-900);
-  border-radius: 50%;
-
-  background: var(--c-accent);
-  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 40%, transparent);
-
-  cursor: grab;
-}
-
-.ui-read {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-
-  padding-top: 0.2rem;
-
-  color: var(--c-text-dim);
-}
-
-.ui-item strong {
-  color: var(--c-accent);
-  font-family: "JetBrains Mono", monospace;
-}
-
-.ui-tag {
-  margin-left: auto;
-  padding: 0.2rem 1rem;
-  border: 1.5px solid var(--c-accent);
-  border-radius: 999px;
-
-  background: var(--c-accent-soft);
-  color: var(--c-accent);
-
-  font-weight: 600;
 }
 </style>

@@ -386,7 +386,7 @@ const findArrayEnd = (text: string, openIndex: number): number => {
 
 const renderCourseEntry = (options: CourseOptions): string => {
   const chapter = options.chapter.startsWith("§") ? options.chapter : `§${options.chapter}`;
-  const placeholder = "待补充：一句话说明本课讲了什么。";
+  const placeholder = "仍在制作中";
 
   // JSON 风格（2 空格缩进、与 courses.json 其余条目同层级同键序），交给 oxfmt 也是这个形状
   return [

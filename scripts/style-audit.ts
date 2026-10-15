@@ -695,6 +695,32 @@ const checkPaletteClasses = (sources: string): Finding[] => {
   return findings;
 };
 
+/**
+ * 手写滑块样式检查：滑块是全库最常用的交互件，但过去每门课都自己画一遍轨道与滑块 —— 滑块头 13/14/18/24px、 轨道
+ * 4～10px、颜色各写一套，于是同一套课件里出现"滑块头比轨道高出一大截""深色页面上一条亮轨道"这类失调。
+ *
+ * 统一出口是共享组件 `<CourseSlider>`（原生渲染 + `accent-color`，比例由浏览器保证）；本检查按 `warn` 级点名， 存量课件"谁改谁收敛"，不阻塞构建。
+ *
+ * @param text 本课 slides.md + 组件源码 + style.css 拼成的文本
+ * @returns 手写滑块样式的发现
+ */
+const checkHandmadeSlider = (text: string): Finding[] => {
+  const hits = text.match(
+    /::-(?:webkit|moz)-(?:slider-thumb|slider-runnable-track|range-thumb|range-track)/gu,
+  );
+  if (!hits || hits.length === 0) return [];
+
+  return [
+    {
+      level: "warn",
+      message:
+        `本课有 ${hits.length} 处手写的滑块伪元素样式（${[...new Set(hits)].slice(0, 4).join(" / ")}…）。` +
+        `全库统一的滑块是共享组件 \`<CourseSlider>\`（原生渲染 + accent-color，轨道与滑块的比例由浏览器保证）——` +
+        `换成它以后，滑块头/轨道就不会各课一个样，也不用手工算 \`margin-top\` 去对齐（§2；用法见 .agents/notes/shared-components.md §7）`,
+    },
+  ];
+};
+
 const auditCourse = (
   slug: string,
   classIndex: Map<string, string[]>,
@@ -720,6 +746,7 @@ const auditCourse = (
     ...checkPaletteClasses(sources),
     ...checkProtectedSelectors(css),
     ...checkRootOverrides(css),
+    ...checkHandmadeSlider(`${sources}\n${css}`),
   ];
 
   return {

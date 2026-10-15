@@ -525,11 +525,20 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
       <div v-else class="lrc-concl">
         <Latex :tex="`t = \\frac{H + L + l}{v_0} = ${tRelative.toFixed(2)}\\ \\text{s}`" />
       </div>
-      <label v-if="mode !== 'fixed'" class="lrc-slider">
-        <span>筒的初速度 <Latex tex="v_0" /></span>
-        <input v-model.number="v0" type="range" min="2" max="6" step="0.1" />
-        <b class="text-accent"><Latex :tex="`${v0.toFixed(1)}\\ \\text{m/s}`" /></b>
-      </label>
+      <CourseSlider
+        v-if="mode !== 'fixed'"
+        v-model="v0"
+        :min="2"
+        :max="6"
+        :step="0.1"
+        label="筒的初速度"
+        label-tex="v_0"
+        label-width="7.5rem"
+      >
+        <template #value>
+          <b class="text-accent"><Latex :tex="`${v0.toFixed(1)}\\ \\text{m/s}`" /></b>
+        </template>
+      </CourseSlider>
       <div v-if="mode !== 'fixed' && !valid" class="lrc-warn">
         筒在杆穿完前就落回抛出点以下（<Latex tex="t > 2v_0/g" />），一步公式不再成立
       </div>
@@ -681,20 +690,6 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
 .lrc-concl {
   font-size: 0.92rem;
   line-height: 1.45;
-}
-
-.lrc-slider {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 0.6rem;
-  align-items: center;
-
-  font-size: 0.9rem;
-}
-
-.lrc-slider input {
-  min-width: 0;
-  accent-color: var(--c-accent);
 }
 
 .lrc-warn {

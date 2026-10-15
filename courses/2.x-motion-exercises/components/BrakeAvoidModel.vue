@@ -195,28 +195,34 @@ const gapTex = (gap: number, hit: number): string =>
           :tex="`t \\approx ${crashTime.toFixed(2)}\\ \\text{s}`"
         />
       </div>
-      <label class="ba-slider">
-        <span><b class="ba-c-b">乙</b>的制动 <Latex tex="a_\text{乙}" /></span>
-        <input
-          v-model.number="brakeB"
-          type="range"
-          :min="BRAKE_MIN"
-          :max="BRAKE_MAX"
-          :step="BRAKE_STEP"
-        />
-        <b class="text-accent-2"><Latex :tex="`${brakeB.toFixed(2)}\\ \\text{m/s}^2`" /></b>
-      </label>
-      <label class="ba-slider">
-        <span><b class="ba-c-c">丙</b>的制动 <Latex tex="a_\text{丙}" /></span>
-        <input
-          v-model.number="brakeC"
-          type="range"
-          :min="BRAKE_MIN"
-          :max="BRAKE_MAX"
-          :step="BRAKE_STEP"
-        />
-        <b class="text-accent-2"><Latex :tex="`${brakeC.toFixed(2)}\\ \\text{m/s}^2`" /></b>
-      </label>
+      <CourseSlider
+        v-model="brakeB"
+        :min="BRAKE_MIN"
+        :max="BRAKE_MAX"
+        :step="BRAKE_STEP"
+        label-width="7rem"
+      >
+        <template #label>
+          <span><b class="ba-c-b">乙</b>的制动 <Latex tex="a_\text{乙}" /></span>
+        </template>
+        <template #value>
+          <b class="text-accent-2"><Latex :tex="`${brakeB.toFixed(2)}\\ \\text{m/s}^2`" /></b>
+        </template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="brakeC"
+        :min="BRAKE_MIN"
+        :max="BRAKE_MAX"
+        :step="BRAKE_STEP"
+        label-width="7rem"
+      >
+        <template #label>
+          <span><b class="ba-c-c">丙</b>的制动 <Latex tex="a_\text{丙}" /></span>
+        </template>
+        <template #value>
+          <b class="text-accent-2"><Latex :tex="`${brakeC.toFixed(2)}\\ \\text{m/s}^2`" /></b>
+        </template>
+      </CourseSlider>
     </div>
   </div>
 </template>
@@ -279,19 +285,5 @@ const gapTex = (gap: number, hit: number): string =>
   border-color: rgb(248 113 113 / 45%);
   background: var(--c-danger-soft);
   color: var(--c-danger);
-}
-
-.ba-slider {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 0.6rem;
-  align-items: center;
-
-  font-size: 0.9rem;
-}
-
-.ba-slider input {
-  min-width: 0;
-  accent-color: var(--c-accent);
 }
 </style>

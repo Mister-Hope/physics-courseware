@@ -190,12 +190,17 @@ const relationTex = computed<string>(() =>
         </div>
       </div>
 
-      <label class="sfg-slider">
-        <span class="sfg-slider-label">拉力 <Latex tex="F" /></span>
-        <input v-model.number="pull" type="range" min="0" max="6" step="0.1" />
-        <span class="sfg-slider-val">{{ fixed(pull) }}</span>
-      </label>
-      <div class="sfg-hint"><mdi-gesture-tap /> 慢慢拖动滑杆，增大拉力，看摩擦力怎么变</div>
+      <CourseSlider
+        v-model="pull"
+        :min="0"
+        :max="6"
+        :step="0.1"
+        label="拉力"
+        label-tex="F"
+        label-width="3.8rem"
+      >
+        <template #value>{{ fixed(pull) }}</template>
+      </CourseSlider>
     </div>
   </div>
 </template>
@@ -298,67 +303,5 @@ const relationTex = computed<string>(() =>
 
 .sfg-dot-blue {
   background: var(--c-accent-2);
-}
-
-.sfg-slider {
-  display: flex;
-  gap: 0.55rem;
-  align-items: center;
-  margin-top: 0.2rem;
-}
-
-.sfg-slider-label {
-  flex-shrink: 0;
-  font-size: 0.88rem;
-}
-
-.sfg-slider-val {
-  width: 1.8rem;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.82rem;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-}
-
-.sfg-slider input[type="range"] {
-  flex: 1;
-
-  min-width: 0;
-  height: 4px;
-  border-radius: 999px;
-
-  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.sfg-slider input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-accent);
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.sfg-hint {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.78rem;
-
-  opacity: 0.85;
 }
 </style>

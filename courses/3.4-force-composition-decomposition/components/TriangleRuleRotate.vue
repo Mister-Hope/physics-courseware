@@ -88,9 +88,7 @@ const pct = (value: number, total: number): number => (value / total) * 100;
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.3fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.3fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <path
@@ -158,18 +156,17 @@ const pct = (value: number, total: number): number => (value / total) * 100;
     </div>
 
     <div class="demo-panel">
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\theta" /></span>
-        <input
-          v-model.number="theta"
-          type="range"
-          min="0"
-          max="180"
-          step="5"
-          aria-label="两力的夹角"
-        />
-        <span class="demo-val"><Latex :tex="thetaTex" /></span>
-      </div>
+      <CourseSlider
+        v-model="theta"
+        :min="0"
+        :max="180"
+        :step="5"
+        label-tex="\theta"
+        label-width="2.5rem"
+        aria-label="两力的夹角"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
 
       <div class="demo-readout"><Latex :tex="forceTex" /></div>
 
@@ -195,14 +192,6 @@ const pct = (value: number, total: number): number => (value / total) * 100;
 
 <style scoped>
 /* 左图右文走共享 .split-wide；控制行 / 面板 / 读数走共享 .demo-* */
-.demo-row {
-  --demo-read: 6rem;
-  font-size: 1rem;
-}
-
-.demo-val {
-  font-size: 0.95rem;
-}
 
 .demo-readout {
   font-size: 1.15rem;

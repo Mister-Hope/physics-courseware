@@ -74,9 +74,7 @@ const times = computed(() => signal.value / NOISE);
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.05fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.05fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <polygon
@@ -155,18 +153,17 @@ const times = computed(() => signal.value / NOISE);
     </div>
 
     <div class="demo-panel">
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\theta" /></span>
-        <input
-          v-model.number="theta"
-          type="range"
-          min="10"
-          max="170"
-          step="5"
-          aria-label="两力夹角"
-        />
-        <span class="demo-val"><Latex :tex="thetaTex" /></span>
-      </div>
+      <CourseSlider
+        v-model="theta"
+        :min="10"
+        :max="170"
+        :step="5"
+        label-tex="\theta"
+        label-width="2.5rem"
+        aria-label="两力夹角"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
 
       <div class="demo-readout"><Latex :tex="forceTex" /></div>
 
@@ -217,14 +214,6 @@ const times = computed(() => signal.value / NOISE);
 <style scoped>
 /* 控制行 / 面板 / 读数走共享 .demo-*；这里只留本组件的列宽与字号
    （组件 scoped 内的版式微字号，见 style-guide §3） */
-.demo-row {
-  --demo-read: 6rem;
-  font-size: 1rem;
-}
-
-.demo-val {
-  font-size: 0.95rem;
-}
 
 .demo-readout {
   font-size: 1.05rem;

@@ -1,4 +1,4 @@
-# 共享组件总览：12 个全局组件（干什么 + props 正本）
+# 共享组件总览：13 个全局组件（干什么 + props 正本）
 
 > 什么时候读：**页面上要用任何共享组件时**——先看这一篇 §1 的总表选组件，再看对应小节拿 props。
 > 这些组件由共享 addon（`workspace/shared/`）**全局注册**：直接写标签，**不用 import、不要重画**；
@@ -19,6 +19,7 @@
 | `Ruler`           | 刻度尺（精确毫米刻度，或只画个尺子形状的示意图）               | 任意：可嵌在别的 `<svg>` 里，也可单独当 HTML 用 | 本篇 §6                                |
 | `Latex`           | HTML 里的 KaTeX 公式（Markdown 段落里的 `$…$` 仍照用）         | markdown / HTML 层                              | 本篇 §3                                |
 | `ChartLabel`      | 图内标注（画在 SVG 上层的 HTML，**能渲染真 KaTeX 与分式**）    | HTML 层，盖在 SVG 上                            | 本篇 §3                                |
+| `CourseSlider`    | 滑块（原生渲染 + `accent-color`；标签 + 滑块 + 读数一行）      | markdown / HTML 层                              | 本篇 §7                                |
 | `CourseTopBar`    | 顶栏：封面显示章节名、内页显示课题名，右侧校徽                 | 课件的 `global-top.vue` 薄壳                    | 本篇 §2                                |
 | `CourseBottomBar` | 底栏两侧渐隐装饰线（**不显示页码**）                           | 课件的 `global-bottom.vue` 薄壳                 | 本篇 §2                                |
 
@@ -163,7 +164,48 @@
 | `x` / `y`          | `number`                     | `0` / `0`    | 嵌进父级 SVG 时的位置（用户单位）                                  |
 | `width` / `height` | `number`                     | `0` / `0`    | 画出来的宽高；`0` = 用组件自己的 viewBox 尺寸                      |
 
-## 7. 所有组件共同的规则
+## 7. `CourseSlider`（滑块：全库统一，⛔ 别再自己画轨道与滑块）
+
+滑块是全库最常用的交互件（十几门课、每门 1～7 个）。**统一用它**：过去各课自己写
+`::-webkit-slider-thumb` / `::-moz-range-thumb` / `::-*-slider-runnable-track`，滑块头 13 / 14 / 18 / 24px 配 4～10px 的轨道，
+于是"滑块头比轨道高出一大截""深色页面上一条亮轨道"这类失调反复出现，还要维护 Chromium / Firefox 两份伪元素。
+
+组件**不自己画轨道与滑块**：交给浏览器原生渲染，只用 `accent-color` 上主题色 —— 比例天然协调，键盘 / 触摸 / 无障碍也是原生的；
+组件负责的是**行版式**（标签 + 滑块 + 读数）与**主题色档位**。
+
+```html
+<CourseSlider
+  v-model="kx"
+  :min="-1.5"
+  :max="2.5"
+  :step="0.05"
+  label="向右分量"
+  label-tex="v_x"
+  sign
+/>
+```
+
+| prop                     | 类型                                  | 默认             | 说明                                                                                                |
+| ------------------------ | ------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------- |
+| `modelValue`             | `number`                              | ✅               | 配合 `v-model`；组件抛出的就是数字，**不用写 `.number`**                                            |
+| `min` / `max` / `step`   | `number`                              | `0`/`100`/`1`    | 与原生 `input[type=range]` 一致                                                                     |
+| `label`                  | `string`                              | `""`             | 纯文本标签（中文）                                                                                  |
+| `labelTex`               | `string`                              | `""`             | LaTeX 量符号（`v_x`、`\dfrac{r}{R}`）；与 `label` 同给 = 先中文后公式                               |
+| `labelWidth`             | `string`                              | `8.8rem`         | 标签列宽（CSS 长度；窄标签如 `r/R` 可给 `3.4rem`）                                                  |
+| `accent`                 | `"gold" \| "blue" \| "teal" \| "red"` | `gold`           | 主题色档位（`--c-accent` / `--c-accent-2` / `--c-physics` / `--c-danger`）                          |
+| `layout`                 | `"row" \| "tight" \| "bare"`          | `row`            | `tight` = 单元格窄（2×2 网格）时三格列宽与行高各收一档；`bare` = 只画滑块（标签与读数由课程自己摆） |
+| `sign`                   | `boolean`                             | `false`          | 非负值读数补 `+`（速度分量这类有符号量）；读数默认按 `step` 推小数位                                |
+| `disabled` / `ariaLabel` | `boolean` / `string`                  | `false` / 取标签 | 禁用 / 无障碍名称（`layout="bare"` 时尤其建议给）                                                   |
+| `#label` / `#value`      | slot                                  | —                | 标签、读数要完全自定义时用（单位 / 区间 / 分式）                                                    |
+
+> 写 `sign` 这种**不带值的布尔属性**就行（Vue 会按 `true` 处理）；要改颜色用 `accent`、改标签列宽用 `labelWidth`，
+> **不要**回到自己写伪元素样式的老路——`pnpm style:audit` 已加一条 `warn` 级检查点名手写滑块，存量课件"谁改谁收敛"。
+>
+> **课程保留自己的版式时**（读数在滑块上方一行、说明文字在滑块上方、外面还套了带边框的盒子……）：
+> 只把 `<input type="range">` 换成 `<CourseSlider layout="bare" />` —— 轨道与滑块统一了，课程自己的排版一行都不用改；
+> ⛔ 也**不要**用课内 `:deep(.cs-*)` 去改共享组件的列宽/行高：窄面板请用 `layout="tight"` + `labelWidth`。
+
+## 8. 所有组件共同的规则
 
 1. **全局注册**：直接写标签，不 import；共享代码改动（`workspace/shared/`）会影响**全部课件**，改前评估影响面。
 2. **`只能在 <svg> 里`** 的组件：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`——它们画的是 `<g>`，写成 HTML 元素页面上什么都不显示，也不能用 ` ```comp ` 代码块。

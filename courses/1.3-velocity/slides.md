@@ -1190,7 +1190,7 @@ clicks: 2
 
 <div class="half-grid">
 
-<DroneTeamSvg :show-return="$clicks >= 1" />
+<DroneTeamSvg :step="$clicks" />
 
 <div class="stack stack-tight">
 
@@ -1217,7 +1217,7 @@ clicks: 3
 
 <div class="half-grid">
 
-<BirdCarsSvg />
+<BirdCarsSvg :step="$clicks" />
 
 <div class="stack stack-tight">
 
@@ -1264,7 +1264,7 @@ clicks: 3
 
 ---
 layout: base-flex
-clicks: 1
+clicks: 3
 ---
 
 # 拓展练习 1
@@ -1273,13 +1273,24 @@ clicks: 1
 
 <div class="text-base">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进，传令兵往返的速率恰好是队伍行进速率的 <Latex tex="2" /> 倍。求传令兵从排尾出发、再回到排尾时，走过的总路程。</div>
 
-<div class="key key-blue key-lead" v-click="1">参考答案：<Latex tex="s = \frac{8}{3}L" />。</div>
+<div class="step-list">
+<div class="step-item" v-click="1">
+<div class="step-no">1</div>
+<div>去程（追排头）：相对速度 <Latex tex="2v - v = v" />，用时 <Latex tex="t_1 = \frac{L}{v}" />；返程（回排尾）：相对速度 <Latex tex="2v + v = 3v" />，用时 <Latex tex="t_2 = \frac{L}{3v}" />。</div>
+</div>
+<div class="step-item" v-click="2">
+<div class="step-no">2</div>
+<div>往返总时间 <Latex tex="t = t_1 + t_2 = \frac{L}{v} + \frac{L}{3v} = \frac{4L}{3v}" />。</div>
+</div>
+</div>
+
+<div class="key key-blue key-lead" v-click="3">参考答案：传令兵全程以 <Latex tex="2v" /> 运动 → <Latex tex="s = 2v \cdot t = 2v \times \frac{4L}{3v} = \frac{8}{3}L" />。</div>
 
 </div>
 
 ---
 layout: base-flex
-clicks: 1
+clicks: 3
 ---
 
 # 拓展练习 2
@@ -1288,6 +1299,18 @@ clicks: 1
 
 <div class="text-base">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进。传令兵从排尾出发，往返一次回到排尾时，整支队伍恰好向前行进了 <Latex tex="L" />。求传令兵全程走过的总路程。</div>
 
-<div class="key key-blue key-lead" v-click="1">参考答案：<Latex tex="s = (1 + \sqrt{2})L" />。</div>
+<div class="step-list">
+<div class="step-item" v-click="1">
+<div class="step-no">1</div>
+<div>设传令兵速率为 <Latex tex="u" />：去程（追排头）相对速度 <Latex tex="u - v" />，用时 <Latex tex="t_1 = \frac{L}{u - v}" />；返程（回排尾）相对速度 <Latex tex="u + v" />，用时 <Latex tex="t_2 = \frac{L}{u + v}" />。</div>
+</div>
+<div class="step-item" v-click="2">
+<div class="step-no">2</div>
+<div>队伍前进 <Latex tex="L" /> 用时 <Latex tex="T = \frac{L}{v}" />，它正是往返的总时间：<Latex tex="\frac{L}{u - v} + \frac{L}{u + v} = \frac{L}{v}" /> → <Latex tex="2uv = u^2 - v^2" />，取正根 <Latex tex="u = (1 + \sqrt{2})v" />。</div>
+</div>
+</div>
+
+<div class="key key-blue key-lead" v-click="3">参考答案：<Latex tex="s = uT = (1 + \sqrt{2})v \cdot \frac{L}{v} = (1 + \sqrt{2})L" />。</div>
 
 </div>
+

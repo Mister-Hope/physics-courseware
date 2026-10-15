@@ -570,3 +570,48 @@ clicks: 1
 <InitialSpeedVariants />
 
 </div>
+
+---
+layout: base-flex
+---
+
+<div class="qp-page">
+
+<div class="ask text-xl">一束<b>平行</b>带电粒子（同种、同速）水平射入一个<b>圆形匀强磁场区域</b>，出射后会散开，还是可能交于同一点？</div>
+
+<FocusQuestion />
+
+</div>
+
+---
+clicks: 3
+---
+
+# 一条轨迹里的四边形
+
+<div class="qp-page">
+
+<FocusProof :step="$clicks" />
+
+<div class="stack stack-tight">
+
+<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">轨迹圆心 <Latex tex="C" /> 在 <Latex tex="A" /> 正下方：<Latex tex="AC = r" />；<Latex tex="P" /> 同时在两个圆上。</div>
+
+<div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">取 <Latex tex="r = R" />：四边 <Latex tex="OA = AC = CP = PO = R" /> ⟹ <Latex tex="OACP" /> 是<b>菱形</b>。</div>
+
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="key">菱形 ⟹ <Latex tex="\overrightarrow{OP} = \overrightarrow{AC}" />：无论从哪儿入射，<Latex tex="P" /> 都落在 <Latex tex="O" /> 正下方 <Latex tex="R" /> 处的最低点。</div>
+
+</div>
+
+</div>
+
+---
+
+<div class="qp-page">
+
+<div class="ask">回旋半径 <Latex tex="r" /> 与磁场半径 <Latex tex="R" /> 满足什么关系时，所有出射粒子才交于同一点？</div>
+
+<FocusConvergeDemo />
+
+</div>
+

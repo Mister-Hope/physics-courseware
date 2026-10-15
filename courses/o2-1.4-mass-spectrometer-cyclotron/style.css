@@ -1,0 +1,85 @@
+/* ═══════════════════════════════════════════════
+   质谱仪与回旋加速器 — 课程特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css + atoms.css）
+   本文件只放本课特有的微调；共享原子（.figure / .key / .ask / .split-wide …）一律直接用
+   ═══════════════════════════════════════════════ */
+
+/* 本课"图 + 文字"同页的页面多、交互组件大：收紧纵向间距（只允许覆盖这两个变量） */
+:root {
+  --page-gap: 0.6rem;
+  --stack-gap: 0.55rem;
+}
+
+/* 原理页版式（第 3 页为模板）：左文字、右装置图，两栏一律顶对齐 ——
+   共享 .split-wide 默认垂直居中，图会浮在中上方，教师要求"图放右上角" */
+.split-top {
+  align-items: start;
+}
+
+/* 左文右图变体：图栏略宽（示意图内的标注要够大） */
+.split-fig-right {
+  --cols: minmax(0, 1fr) minmax(0, 1.2fr);
+}
+
+/* 竖高型示意图（如 D 形盒 440×380）按高度反推一个宽度上限：
+   图栏宽度由栅格决定，若图是方的，宽度就是它的高度 —— 必须封住。 */
+.fig-w-sm {
+  max-width: 320px;
+  margin-inline: auto;
+}
+
+.fig-w-md {
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+/* 图右浮动：文字环绕，避免"图栏下方留一大片空白"（第 7 页）。
+   ⛔ 浮动在 flex 容器里会被忽略 —— 中间必须有一层普通块级包裹层。 */
+.float-wrap {
+  display: block;
+}
+
+.float-fig {
+  float: right;
+
+  width: 46%;
+  margin: 0 0 0.5rem 1.2rem;
+}
+
+/* 多块内容（提问 + 图组 + 落点）的页面：不让某一块吃掉全部空白，
+   用外层 space-around 均匀散开（第 16 页教师反馈：去掉 .page-grow）。 */
+.spread {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--page-gap);
+  justify-content: space-around;
+
+  min-height: 0;
+}
+
+/* 题目页（exercise-split）：本课第 25 页（例 5）解析只有两行算式，图栏默认 42% 上限偏小
+   （教师反馈"图可以更大"）。只在这一页放宽 —— 例 3 那种四行解析的页放宽会溢出（实测 +55px）。 */
+.p25 .ex-fig {
+  max-width: 60%;
+}
+
+/* 小结表格：比 .data-table 再收紧一档（本页还有一张 7 行表 + 一行结论） */
+.sum-tight th,
+.sum-tight td {
+  padding: 0.3rem 0.7rem;
+}
+
+/* 图区高度预算：宽 SVG 按 width:100% 会照自身比例撑高、把文字顶出画布。
+   SVG 自带 viewBox，靠 preserveAspectRatio 等比缩小居中，不变形、不裁切。 */
+.fig-h-sm svg {
+  max-height: 200px;
+}
+
+.fig-h-md svg {
+  max-height: 250px;
+}
+
+.fig-h-lg svg {
+  max-height: 300px;
+}

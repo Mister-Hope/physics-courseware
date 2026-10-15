@@ -3,10 +3,10 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
 
-   本课自造类收敛成 4 个概念前缀（§6）：
+   本课自造类收敛成 3 个概念前缀（§6）：
      fig-  示意图：组件根类只给尺寸旋钮 --fig-max，svg 一律挂下面的 .fig-svg
      qp-   题目页 / 解析页版式（题干整幅置顶 + 右侧图位；解析页用 .qp-solve 两栏：左结论、右大图）
-     ui-   交互控件（InitialSpeedVariants 的滑块与读数）
+     ui-   交互面板的读数行与状态标签（**滑块本体用共享的 <CourseSlider>**，本课不再自己画）
    ═══════════════════════════════════════════════ */
 
 /* ── 封面课题名 ──
@@ -84,4 +84,77 @@
   display: block;
   width: 100% !important;
   height: auto !important;
+}
+
+/* ═══════════════════════════════════════════════
+   交互面板（.ui-*）：滑块本体一律用共享的 <CourseSlider>（原生渲染 + accent-color），
+   这里只留本课自己的"读数行 + 状态标签"版式，不再自己画轨道与滑块。
+   ═══════════════════════════════════════════════ */
+
+.ui-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  width: 100%;
+  max-width: 920px;
+  margin: 0.5rem auto 0;
+  padding: 0.25rem 0.5rem;
+}
+
+/* 读数行：左侧读数、右侧状态标签（字号走 .text-*，写在模板上） */
+.ui-read {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  padding-top: 0.2rem;
+
+  color: var(--c-text-dim);
+}
+
+.ui-item strong {
+  color: var(--c-accent);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.ui-tag {
+  margin-left: auto;
+  padding: 0.2rem 1rem;
+  border: 1.5px solid var(--c-accent);
+  border-radius: 999px;
+
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+
+  font-weight: 600;
+}
+
+/* 状态标签的两个语义档：汇聚成立 / 出射点分散 */
+.ui-tag-ok {
+  border-color: var(--c-ok);
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
+}
+
+.ui-tag-off {
+  border-color: var(--c-neutral-600);
+  background: transparent;
+  color: var(--c-text-dim);
+}
+
+/* 单行版控制条（FocusConvergeDemo：滑块与读数并排，省下一行高度留给图） */
+.ui-bar-row {
+  flex-direction: row;
+  gap: 1.6rem;
+  align-items: center;
+
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-bar-row .ui-read {
+  flex: 0 0 auto;
+  padding-top: 0;
 }

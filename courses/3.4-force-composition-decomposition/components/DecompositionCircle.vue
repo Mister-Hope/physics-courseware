@@ -119,9 +119,7 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 3fr) minmax(0, 2fr)">
+  <div class="split-wide" style="--cols: minmax(0, 3fr) minmax(0, 2fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <line
@@ -253,30 +251,28 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
     </div>
 
     <div class="demo-panel">
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="\theta" /></span>
-        <input
-          v-model.number="theta"
-          type="range"
-          min="20"
-          max="70"
-          step="5"
-          aria-label="已知方向与合力的夹角"
-        />
-        <span class="demo-val"><Latex :tex="thetaTex" /></span>
-      </div>
-      <div class="demo-row">
-        <span class="demo-name"><Latex tex="F_2" /></span>
-        <input
-          v-model.number="force2"
-          type="range"
-          min="0.5"
-          max="8"
-          step="0.5"
-          aria-label="已知大小的那个分力"
-        />
-        <span class="demo-val"><Latex :tex="f2Tex" /></span>
-      </div>
+      <CourseSlider
+        v-model="theta"
+        :min="20"
+        :max="70"
+        :step="5"
+        label-tex="\theta"
+        label-width="2.5rem"
+        aria-label="已知方向与合力的夹角"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="force2"
+        :min="0.5"
+        :max="8"
+        :step="0.5"
+        label-tex="F_2"
+        label-width="2.5rem"
+        aria-label="已知大小的那个分力"
+      >
+        <template #value><Latex :tex="f2Tex" /></template>
+      </CourseSlider>
 
       <div class="dec-critical">临界值：<Latex :tex="criticalTex" /></div>
       <div class="dec-verdict" :style="{ color: verdict.color }">{{ verdict.text }}</div>
@@ -298,14 +294,6 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
 
 <style scoped>
 /* 左图右文走共享 .split-wide（比例在模板的 --cols 里）；控制行 / 面板走共享 .demo-* */
-.demo-row {
-  --demo-read: 5.4rem;
-  font-size: 0.95rem;
-}
-
-.demo-val {
-  font-size: 0.9rem;
-}
 
 .dec-critical {
   color: var(--c-text-dim);

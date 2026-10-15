@@ -24,49 +24,6 @@
   min-width: 0;
 }
 
-/* 一行：左标签、中滑杆、右读数 */
-.demo-row {
-  display: grid;
-  grid-template-columns: var(--demo-lab, 2.2rem) minmax(0, 1fr) var(--demo-read, 5.6rem);
-  gap: 0.6rem;
-  align-items: center;
-}
-
-.demo-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.demo-val {
-  color: var(--c-text-dim);
-  text-align: right;
-  white-space: nowrap;
-}
-
-.demo-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 999px;
-
-  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.demo-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
 /* 演示里的读数块：左侧一道青色竖线（字号/行距由各组件 scoped 覆盖） */
 .demo-readout {
   display: flex;

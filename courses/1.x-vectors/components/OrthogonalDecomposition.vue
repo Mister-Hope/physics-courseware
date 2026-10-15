@@ -306,16 +306,18 @@ const labels = computed(() => {
       <div class="key">两个分量互相垂直，算完再拼回来</div>
       <div class="od-row od-row-dim">模：<Latex :tex="magnitudeTex" /></div>
       <div class="od-controls">
-        <label class="od-slider">
-          <span class="od-slider-label">x</span>
-          <input v-model.number="x" type="range" min="-4" max="4" step="1" />
-          <span class="od-slider-val">{{ format(x) }}</span>
-        </label>
-        <label class="od-slider">
-          <span class="od-slider-label">y</span>
-          <input v-model.number="y" type="range" min="-4" max="4" step="1" />
-          <span class="od-slider-val">{{ format(y) }}</span>
-        </label>
+        <CourseSlider v-model="x" :min="-4" :max="4" :step="1" label-width="2.5rem">
+          <template #label
+            ><span style="color: var(--c-accent)"><Latex tex="x" /></span
+          ></template>
+          <template #value>{{ format(x) }}</template>
+        </CourseSlider>
+        <CourseSlider v-model="y" :min="-4" :max="4" :step="1" label-width="2.5rem">
+          <template #label
+            ><span style="color: var(--c-accent)"><Latex tex="y" /></span
+          ></template>
+          <template #value>{{ format(y) }}</template>
+        </CourseSlider>
       </div>
     </div>
   </div>
@@ -413,56 +415,5 @@ const labels = computed(() => {
   flex-direction: column;
   gap: 0.25rem;
   margin-top: 0.15rem;
-}
-
-.od-slider {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.od-slider-label {
-  width: 0.9rem;
-
-  color: var(--c-accent);
-
-  font-style: italic;
-  font-size: 0.9rem;
-  font-family: "KaTeX_Math", serif;
-}
-
-.od-slider-val {
-  width: 1.2rem;
-  color: var(--c-text-dim);
-  font-size: 0.78rem;
-  text-align: right;
-}
-
-.od-slider input[type="range"] {
-  flex: 1;
-
-  min-width: 0;
-  height: 4px;
-  border-radius: 999px;
-
-  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.od-slider input[type="range"]::-webkit-slider-thumb {
-  width: 13px;
-  height: 13px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-accent);
-
-  cursor: pointer;
-
-  appearance: none;
 }
 </style>

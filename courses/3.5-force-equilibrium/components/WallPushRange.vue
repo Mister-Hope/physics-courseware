@@ -380,23 +380,34 @@ const fLabelPos = computed<Point>(() => ({
       </svg>
     </div>
 
-    <!-- 右侧紧凑滑块区（缩短滑块长度，删除近似数值计算，留出理论推导空间） -->
+    <!-- 右侧紧凑滑块区（滑条走共享 CourseSlider，删除近似数值计算，留出理论推导空间） -->
     <div class="wp-side">
-      <div class="wp-ctrl">
-        <span class="wp-label"><Latex tex="F/G" /></span>
-        <input v-model.number="fRatio" type="range" min="0.6" max="3" step="0.05" />
-        <span class="wp-val">{{ fRatio.toFixed(2) }}</span>
-      </div>
-      <div class="wp-ctrl">
-        <span class="wp-label"><Latex tex="\theta" /></span>
-        <input v-model.number="thetaDeg" type="range" min="5" max="80" step="1" />
-        <span class="wp-val"><Latex :tex="thetaTex" /></span>
-      </div>
-      <div class="wp-ctrl">
-        <span class="wp-label"><Latex tex="\mu" /></span>
-        <input v-model.number="muCoeff" type="range" min="0.1" max="0.9" step="0.05" />
-        <span class="wp-val">{{ muCoeff.toFixed(2) }}</span>
-      </div>
+      <CourseSlider
+        v-model="fRatio"
+        :min="0.6"
+        :max="3"
+        :step="0.05"
+        label-tex="F/G"
+        label-width="2.5rem"
+      />
+      <CourseSlider
+        v-model="thetaDeg"
+        :min="5"
+        :max="80"
+        :step="1"
+        label-tex="\theta"
+        label-width="2.5rem"
+      >
+        <template #value><Latex :tex="thetaTex" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="muCoeff"
+        :min="0.1"
+        :max="0.9"
+        :step="0.05"
+        label-tex="\mu"
+        label-width="2.5rem"
+      />
 
       <div :class="`wp-state wp-state-${state}`">{{ stateLabel }}</div>
     </div>
@@ -422,47 +433,20 @@ const fLabelPos = computed<Point>(() => ({
   height: auto;
 }
 
+/* 滑条走共享 CourseSlider（标签列 2.5rem + 读数列 5rem + 两处 1.25rem 行内间距），
+   故侧栏比原来的自绘版式宽一些，滑轨长度才与原版相当 */
 .wp-side {
   display: flex;
-  flex: 0 0 11rem;
+  flex: 0 0 15.4rem;
   flex-direction: column;
   gap: 0.45rem;
 
   min-width: 0;
 }
 
-.wp-ctrl {
-  display: flex;
-  gap: 0.45rem;
-  align-items: center;
-  font-size: 0.88rem;
-}
-
-.wp-label {
-  flex: 0 0 2.4rem;
-  color: var(--c-text-dim, #94a3b8);
-}
-
 .wp-math {
   font-style: italic;
   font-family: "KaTeX_Math", serif;
-}
-
-.wp-ctrl input[type="range"] {
-  flex: 0 0 5.4rem;
-  width: 5.4rem;
-  min-width: 0;
-  accent-color: var(--c-accent, #e2a846);
-}
-
-.wp-val {
-  flex: 0 0 2.6rem;
-
-  color: var(--c-accent, #e2a846);
-
-  font-size: 0.88rem;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
 }
 
 .wp-state {

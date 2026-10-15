@@ -199,7 +199,7 @@
           "slug": "6.3-centripetal-acceleration",
           "title": "向心加速度",
           "chapter": "§6.3",
-          "description": "待补充：一句话说明本课讲了什么。",
+          "description": "仍在制作中",
           "tags": []
         },
         {
@@ -261,21 +261,28 @@
           "slug": "o2-1.2-lorentz-force",
           "title": "磁场对运动电荷的作用力",
           "chapter": "§1.2",
-          "description": "待补充：一句话说明本课讲了什么。",
+          "description": "仍在制作中",
           "tags": []
         },
         {
           "slug": "o2-1.3-charged-particle-motion",
           "title": "带电粒子在匀强磁场中的运动",
           "chapter": "§1.3",
-          "description": "待补充：一句话说明本课讲了什么。",
+          "description": "仍在制作中",
           "tags": []
         },
         {
           "slug": "o2-1.x-speed-matching",
           "title": "复合场中的配速法与摆线运动",
           "chapter": "§1.x",
-          "description": "待补充：一句话说明本课讲了什么。",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o2-1.4-mass-spectrometer-cyclotron",
+          "title": "质谱仪与回旋加速器",
+          "chapter": "§1.4",
+          "description": "仍在制作中",
           "tags": []
         }
       ]
