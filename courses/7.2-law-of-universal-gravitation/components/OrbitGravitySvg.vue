@@ -1,4 +1,4 @@
-<!-- 行星绕太阳运动（第 3、5 页）：速度沿轨道切线，引力沿两者连线指向太阳；相互吸引时太阳同样受到行星的引力 -->
+<!-- 行星绕太阳运动（第 3、5 页）：轨道按圆处理，速度沿切线，引力沿两者连线指向太阳；相互吸引时太阳同样受到行星的引力 -->
 <script setup lang="ts">
 import { computed } from "vue";
 
@@ -12,17 +12,17 @@ const { showForce = false, mutual = false } = defineProps<{
 const SUN = { x: 170, y: 155 };
 const SUN_R = 24;
 const PLANET_R = 16;
-const RX = 145;
-const RY = 105;
+/** 圆轨道半径：行星轨道与圆十分接近，中学一律按圆处理 */
+const R = 130;
 
-/** 行星在轨道上的位置（偏角取 -35°，让轨道铺满画面） */
+/** 行星在轨道上的位置（偏角取 -35°，让圆轨道铺满画面） */
 const angle = (-35 * Math.PI) / 180;
 const planet = computed(() => ({
-  x: SUN.x + RX * Math.cos(angle),
-  y: SUN.y + RY * Math.sin(angle),
+  x: SUN.x + R * Math.cos(angle),
+  y: SUN.y + R * Math.sin(angle),
 }));
 
-/** 连线中点附近，放半径标记 r（沿垂直方向让开一点，不压住连线） */
+/** 半径标记 r：放在连线中点附近，沿垂直方向让开一点 */
 const radiusLabel = computed(() => {
   const dx = planet.value.x - SUN.x;
   const dy = planet.value.y - SUN.y;
@@ -52,20 +52,19 @@ const reactionTo = computed(() => {
   };
 });
 
-/** 速度箭头：沿椭圆轨道切线方向（略小一号，画在物体旁侧） */
+/** 线速度：圆轨道上与半径垂直的切线方向（略小一号，画在物体旁侧） */
 const velocityTo = computed(() => {
-  const tx = -RX * Math.sin(angle);
-  const ty = RY * Math.cos(angle);
-  const len = Math.hypot(tx, ty) || 1;
+  const tx = -Math.sin(angle);
+  const ty = Math.cos(angle);
 
-  return { x: planet.value.x + (tx / len) * 58, y: planet.value.y + (ty / len) * 58 };
+  return { x: planet.value.x + tx * 58, y: planet.value.y + ty * 58 };
 });
 </script>
 
 <template>
   <svg viewBox="0 0 460 300" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">
-    <!-- 公转轨道 -->
-    <ellipse :cx="SUN.x" :cy="SUN.y" :rx="RX" :ry="RY" fill="none" stroke="rgba(148,163,184,0.42)" stroke-width="1.6" stroke-dasharray="8 7" />
+    <!-- 公转轨道：圆 -->
+    <circle :cx="SUN.x" :cy="SUN.y" :r="R" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.8" stroke-dasharray="8 7" />
 
     <!-- 半径连线 -->
     <line :x1="SUN.x" :y1="SUN.y" :x2="planet.x" :y2="planet.y" stroke="rgba(148,163,184,0.55)" stroke-width="1.4" stroke-dasharray="6 5" />
@@ -87,10 +86,10 @@ const velocityTo = computed(() => {
     <CelestialSun :x="SUN.x" :y="SUN.y" :r="SUN_R" label="太阳" :label-size="15" />
     <CelestialPlanet :x="planet.x" :y="planet.y" :r="PLANET_R" variant="red" label="行星" :label-size="15" />
 
-    <!-- 线速度：沿轨道切线，略小一号 -->
+    <!-- 线速度：沿圆轨道切线，略小一号 -->
     <CourseArrow :from="planet" :to="velocityTo" stroke="#60a5fa" :stroke-width="2.6" label="v" :label-dx="6" :label-dy="16" />
 
-    <!-- 行星受到的引力：从行星中心指向太阳 -->
+    <!-- 行星受到的引力：从行星中心指向太阳（充当向心力） -->
     <CourseArrow v-if="showForce" :from="planet" :to="forceTo" stroke="#f87171" :stroke-width="3.4" label="F" :label-dx="-14" :label-dy="-6" />
 
     <!-- 太阳受到的引力：与行星受到的引力等大反向 -->
