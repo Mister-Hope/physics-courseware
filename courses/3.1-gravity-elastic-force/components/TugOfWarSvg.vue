@@ -122,7 +122,16 @@ const { step = 1 } = defineProps<{ step?: number }>();
       <text x="584" y="222" text-anchor="middle" font-family="KaTeX_Main" font-size="17" fill="var(--c-text-dim)">0</text>
 
       <!-- 底部结论公式框 F₁ + F₂ = F₃ -->
-      <rect x="268" y="272" width="164" height="32" rx="10" fill="color-mix(in srgb, var(--c-accent) 14%, transparent)" stroke="var(--c-accent)" stroke-width="1.6" />
+      <rect
+        x="268"
+        y="272"
+        width="164"
+        height="32"
+        rx="10"
+        fill="color-mix(in srgb, var(--c-accent) 14%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.6"
+      />
       <text x="350" y="293" text-anchor="middle" font-size="18" fill="var(--c-accent)">
         <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
         <tspan font-family="KaTeX_Main" font-size="12" dy="4">1</tspan>

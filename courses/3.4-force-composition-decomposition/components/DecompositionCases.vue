@@ -76,7 +76,11 @@ const C_P1 = {
 <template>
   <div class="three-col">
     <div class="dec-cond">
-      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }"><mdi-numeric-1-circle-outline class="text-xl inline-block align-middle mr-1" />已知两个分力的方向，解有几个？</div>
+      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }">
+        <mdi-numeric-1-circle-outline
+          class="text-xl inline-block align-middle mr-1"
+        />已知两个分力的方向，解有几个？
+      </div>
       <div class="figure relative min-w-0" :class="{ 'demo-hidden': step < 2 }">
         <svg viewBox="0 0 260 200">
           <line
@@ -174,7 +178,11 @@ const C_P1 = {
     </div>
 
     <div class="dec-cond">
-      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }"><mdi-numeric-2-circle-outline class="text-xl inline-block align-middle mr-1" />已知两个分力的大小，解有几个？</div>
+      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }">
+        <mdi-numeric-2-circle-outline
+          class="text-xl inline-block align-middle mr-1"
+        />已知两个分力的大小，解有几个？
+      </div>
       <div class="figure relative min-w-0" :class="{ 'demo-hidden': step < 2 }">
         <svg viewBox="0 0 260 200">
           <circle
@@ -277,7 +285,9 @@ const C_P1 = {
 
     <div class="dec-cond">
       <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }">
-        <mdi-numeric-3-circle-outline class="text-xl inline-block align-middle mr-1" />已知一个分力的大小和方向，解有几个？
+        <mdi-numeric-3-circle-outline
+          class="text-xl inline-block align-middle mr-1"
+        />已知一个分力的大小和方向，解有几个？
       </div>
       <div class="figure relative min-w-0" :class="{ 'demo-hidden': step < 2 }">
         <svg viewBox="0 0 260 200">

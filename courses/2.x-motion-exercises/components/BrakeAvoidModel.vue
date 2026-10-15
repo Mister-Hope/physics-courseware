@@ -189,7 +189,8 @@ const gapTex = (gap: number, hit: number): string =>
         >
       </div>
       <div class="ba-badge" :class="{ 'ba-badge-off': gapBA.hit <= 0 && gapCB.hit <= 0 }">
-        {{ crashLabel }}<Latex
+        {{ crashLabel
+        }}<Latex
           v-if="crashTime !== null"
           :tex="`t \\approx ${crashTime.toFixed(2)}\\ \\text{s}`"
         />

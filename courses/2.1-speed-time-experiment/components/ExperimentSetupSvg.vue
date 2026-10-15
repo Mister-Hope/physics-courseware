@@ -40,7 +40,16 @@
       <rect x="34" y="116" width="16" height="4" rx="1" fill="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" />
       <rect x="314" y="116" width="16" height="4" rx="1" fill="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" />
       <!-- 放平的长木板主体 -->
-      <rect x="18" y="104" width="334" height="12" rx="2.5" fill="url(#boardGrad)" stroke="color-mix(in srgb, var(--c-text-dim) 48%, transparent)" stroke-width="1.2" />
+      <rect
+        x="18"
+        y="104"
+        width="334"
+        height="12"
+        rx="2.5"
+        fill="url(#boardGrad)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 48%, transparent)"
+        stroke-width="1.2"
+      />
       <!-- 木板上表面高光轨道线 -->
       <line x1="19" y1="104.5" x2="351" y2="104.5" stroke="color-mix(in srgb, var(--c-neutral-200) 45%, transparent)" stroke-width="1" />
       <text x="188" y="136" font-size="12" fill="var(--c-text-dim)" text-anchor="middle">木板（放平）</text>
@@ -48,7 +57,16 @@
     <!-- ==================== 2. 电火花打点计时器底层壳体与承纸台 ==================== -->
     <g>
       <!-- 计时器紧固底座（贴合木板上表面 y=104） -->
-      <rect x="24" y="98" width="68" height="6" rx="1.5" fill="color-mix(in srgb, var(--c-accent) 28%, transparent)" stroke="var(--c-accent)" stroke-width="1.2" />
+      <rect
+        x="24"
+        y="98"
+        width="68"
+        height="6"
+        rx="1.5"
+        fill="color-mix(in srgb, var(--c-accent) 28%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.2"
+      />
       <!-- 计时器透视主壳体（内部剖视展现纸带穿行与墨盘压紧关系） -->
       <rect x="27" y="48" width="62" height="50" rx="5" fill="url(#timerCaseGrad)" stroke="var(--c-accent)" stroke-width="1.5" />
       <!-- 内部放电承纸底板（位于纸带正下方 y=80..83.5，支撑纸带与墨盘） -->
@@ -105,7 +123,13 @@
       <rect x="86" y="70.5" width="6.5" height="5" rx="1.2" fill="var(--c-neutral-200)" stroke="var(--c-neutral-900)" stroke-width="0.8" />
       <rect x="86" y="79.8" width="6.5" height="5" rx="1.2" fill="var(--c-neutral-200)" stroke="var(--c-neutral-900)" stroke-width="0.8" />
       <!-- 限位孔指示引线与文字 -->
-      <polyline points="89.2,70 95,53 101,53" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="1.1" stroke-linecap="round" />
+      <polyline
+        points="89.2,70 95,53 101,53"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)"
+        stroke-width="1.1"
+        stroke-linecap="round"
+      />
       <text x="103" y="56" font-size="11" fill="var(--c-neutral-300)">限位孔</text>
     </g>
     <!-- ==================== 6. 实验小车（带尾部纸带夹与贴轨车轮） ==================== -->
@@ -133,7 +157,12 @@
     <!-- ==================== 7. 细绳、定滑轮支架与悬挂配重 ==================== -->
     <g>
       <!-- 滑轮固定支架（从木板右端夹具斜伸至滑轮轴心 372,89） -->
-      <path d="M 346 104 L 352 104 L 352 116 L 346 116 Z" fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke="var(--c-text-dim)" stroke-width="1" />
+      <path
+        d="M 346 104 L 352 104 L 352 116 L 346 116 Z"
+        fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1"
+      />
       <line x1="351" y1="106" x2="372" y2="89" stroke="var(--c-text-dim)" stroke-width="2.8" stroke-linecap="round" />
       <!-- 牵引细绳：水平段 (y=78) 与滑轮顶部相切 -> 绕过滑轮右上 1/4 圆弧 -> 从滑轮最右侧切点 (x=383) 竖直下垂 -->
       <path d="M 297 78 L 372 78 A 11 11 0 0 1 383 89 L 383 131" fill="none" stroke="var(--c-neutral-300)" stroke-width="1.5" stroke-linecap="round" />

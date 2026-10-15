@@ -122,7 +122,16 @@ const endDrag = (): void => {
         <line x1="40" y1="230" x2="320" y2="230" stroke="var(--c-neutral-500)" stroke-width="2.4" />
         <path d="M 40 230 A 110 110 0 0 1 260 230" fill="none" stroke="var(--c-text-dim)" stroke-width="2.4" />
         <!-- 竖直轴 OQ（G 的方向）与半径 OP -->
-        <line :x1="origin.x" :y1="origin.y" :x2="origin.x" :y2="PULLEY.y" stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.75" />
+        <line
+          :x1="origin.x"
+          :y1="origin.y"
+          :x2="origin.x"
+          :y2="PULLEY.y"
+          stroke="var(--c-neutral-500)"
+          stroke-width="1.2"
+          stroke-dasharray="6 5"
+          opacity="0.75"
+        />
         <line :x1="origin.x" :y1="origin.y" :x2="ball.x" :y2="ball.y" stroke="var(--c-text-dim)" stroke-width="1.6" />
         <!-- 顶部支架与定滑轮 -->
         <line x1="110" y1="30" x2="190" y2="30" stroke="var(--c-text-dim)" stroke-width="2.6" />
@@ -131,10 +140,22 @@ const endDrag = (): void => {
         <circle :cx="PULLEY.x" :cy="PULLEY.y" r="3.2" fill="var(--c-accent)" />
         <!-- 绳：小球 → 滑轮切点 → 绕过轮顶 → 向左水平拉出 -->
         <line :x1="ball.x" :y1="ball.y" :x2="tangent.x" :y2="tangent.y" stroke="var(--c-text-dim)" stroke-width="2.2" />
-        <path :d="`M ${tangent.x} ${tangent.y} A ${PULLEY_R} ${PULLEY_R} 0 0 0 ${exit.x} ${exit.y}`" fill="none" stroke="var(--c-text-dim)" stroke-width="2.2" />
+        <path
+          :d="`M ${tangent.x} ${tangent.y} A ${PULLEY_R} ${PULLEY_R} 0 0 0 ${exit.x} ${exit.y}`"
+          fill="none"
+          stroke="var(--c-text-dim)"
+          stroke-width="2.2"
+        />
         <line :x1="exit.x" :y1="exit.y" x2="26" :y2="exit.y" stroke="var(--c-text-dim)" stroke-width="2.2" />
         <!-- 小球（与半球面相切）与拖拽热区 -->
-        <circle :cx="ball.x" :cy="ball.y" :r="BALL_R" fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)" stroke="var(--c-velocity)" stroke-width="2.2" />
+        <circle
+          :cx="ball.x"
+          :cy="ball.y"
+          :r="BALL_R"
+          fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+          stroke="var(--c-velocity)"
+          stroke-width="2.2"
+        />
         <circle :cx="touch.x" :cy="touch.y" r="2.6" fill="var(--c-text-dim)" />
         <circle
           :cx="ball.x"
@@ -174,10 +195,32 @@ const endDrag = (): void => {
         <CourseArrow :from="triO" :to="triP" :head-size="11" stroke="var(--c-physics)" stroke-width="3.4" />
         <CourseArrow :from="triP" :to="triQ" :head-size="11" stroke="var(--c-accent)" stroke-width="3.4" />
         <text :x="triO.x - 26" :y="(triO.y + triQ.y) / 2" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic" font-size="18">G</text>
-        <text :x="(triO.x + triP.x) / 2 + 12" :y="(triO.y + triP.y) / 2 + 4" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic" font-size="18">F</text>
-        <text :x="(triO.x + triP.x) / 2 + 23" :y="(triO.y + triP.y) / 2 + 8" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic" font-size="12">N</text>
-        <text :x="(triP.x + triQ.x) / 2 - 6" :y="(triP.y + triQ.y) / 2 - 10" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18">F</text>
-        <text :x="(triP.x + triQ.x) / 2 + 5" :y="(triP.y + triQ.y) / 2 - 6" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="12">T</text>
+        <text
+          :x="(triO.x + triP.x) / 2 + 12"
+          :y="(triO.y + triP.y) / 2 + 4"
+          fill="var(--c-physics)"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="18"
+        >
+          F
+        </text>
+        <text
+          :x="(triO.x + triP.x) / 2 + 23"
+          :y="(triO.y + triP.y) / 2 + 8"
+          fill="var(--c-physics)"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="12"
+        >
+          N
+        </text>
+        <text :x="(triP.x + triQ.x) / 2 - 6" :y="(triP.y + triQ.y) / 2 - 10" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18">
+          F
+        </text>
+        <text :x="(triP.x + triQ.x) / 2 + 5" :y="(triP.y + triQ.y) / 2 - 6" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="12">
+          T
+        </text>
         <text :x="triO.x - 20" :y="triO.y + 18" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">O</text>
         <text :x="triQ.x - 18" :y="triQ.y - 10" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">Q</text>
         <text :x="triP.x + 10" :y="triP.y - 10" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">P</text>

@@ -96,9 +96,15 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
 
       <!-- 轮体科技渐变 -->
       <radialGradient id="wheel-radial" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-physics-light) 14%, transparent)" />
+        <stop
+          offset="0%"
+          stop-color="color-mix(in srgb, var(--c-physics-light) 14%, transparent)"
+        />
         <stop offset="70%" stop-color="rgba(30,58,138,0.08)" />
-        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-900) 30%, transparent)" />
+        <stop
+          offset="100%"
+          stop-color="color-mix(in srgb, var(--c-neutral-900) 30%, transparent)"
+        />
       </radialGradient>
     </defs>
 

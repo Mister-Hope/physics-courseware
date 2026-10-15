@@ -137,9 +137,22 @@
     <!-- ==================== 4. 磁场中飞行的单电子（立体微球质感 + 高光 + 负电荷「−」） ==================== -->
     <g transform="translate(161, 124)">
       <!-- 柔和微光外晕 -->
-      <circle cx="0" cy="0" r="8.5" fill="color-mix(in srgb, var(--c-velocity) 30%, transparent)" filter="url(#ed-glow)" />
+      <circle
+        cx="0"
+        cy="0"
+        r="8.5"
+        fill="color-mix(in srgb, var(--c-velocity) 30%, transparent)"
+        filter="url(#ed-glow)"
+      />
       <!-- 球体本体 (带径向立体球状明暗) -->
-      <circle cx="0" cy="0" r="6" fill="url(#ed-electron-3d)" stroke="var(--c-velocity-light)" stroke-width="0.9" />
+      <circle
+        cx="0"
+        cy="0"
+        r="6"
+        fill="url(#ed-electron-3d)"
+        stroke="var(--c-velocity-light)"
+        stroke-width="0.9"
+      />
       <!-- 球面偏心高光点 -->
       <circle cx="-2" cy="-2" r="1.6" fill="#ffffff" opacity="0.9" />
       <!-- 负电荷「−」符号 -->

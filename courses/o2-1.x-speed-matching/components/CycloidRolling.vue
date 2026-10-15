@@ -332,13 +332,7 @@ const HALO = {
       </text>
 
       <!-- 圆内：角速度弧 ω（屏幕逆时针） -->
-      <path
-        :d="rotArcD"
-        fill="none"
-        stroke="var(--c-velocity)"
-        stroke-width="2.2"
-        opacity="0.85"
-      />
+      <path :d="rotArcD" fill="none" stroke="var(--c-velocity)" stroke-width="2.2" opacity="0.85" />
       <CourseArrow
         :from="rotEnd"
         :to="rotHead"
@@ -529,11 +523,7 @@ const HALO = {
           stroke-dasharray="7 6"
           opacity="0.6"
         />
-        <path
-          :d="`M 756 ${LINE_Y} V ${LOW.y}`"
-          stroke="var(--c-text-dim)"
-          stroke-width="1.4"
-        />
+        <path :d="`M 756 ${LINE_Y} V ${LOW.y}`" stroke="var(--c-text-dim)" stroke-width="1.4" />
         <path
           :d="`M 749 ${LINE_Y} h 14 M 749 ${LOW.y} h 14`"
           stroke="var(--c-text-dim)"
@@ -613,8 +603,7 @@ const HALO = {
 /* 摆线图：占满整页宽度，宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
    —— 第 17 页上方有标题、下方两行结论，780px（渲染高 ≈ 300px）是"图尽量大"与"不出画布"的平衡点 */
 .fig-cycloid {
-  width: 100%;
-
   --fig-max: 780px;
+  width: 100%;
 }
 </style>

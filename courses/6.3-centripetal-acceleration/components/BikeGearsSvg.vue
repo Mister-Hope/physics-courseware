@@ -69,16 +69,56 @@
     >
       C
     </text>
-    <text x="46" y="280" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="#5eead4" stroke="var(--c-bg-soft)" stroke-width="4" paint-order="stroke">
+    <text
+      x="46"
+      y="280"
+      text-anchor="middle"
+      font-family="KaTeX_Main"
+      font-size="19"
+      fill="#5eead4"
+      stroke="var(--c-bg-soft)"
+      stroke-width="4"
+      paint-order="stroke"
+    >
       大齿轮
     </text>
-    <text x="254" y="264" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="#5eead4" stroke="var(--c-bg-soft)" stroke-width="4" paint-order="stroke">
+    <text
+      x="254"
+      y="264"
+      text-anchor="middle"
+      font-family="KaTeX_Main"
+      font-size="19"
+      fill="#5eead4"
+      stroke="var(--c-bg-soft)"
+      stroke-width="4"
+      paint-order="stroke"
+    >
       小齿轮
     </text>
-    <text x="384" y="338" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-velocity-light)" stroke="var(--c-bg-soft)" stroke-width="4" paint-order="stroke">
+    <text
+      x="384"
+      y="338"
+      text-anchor="middle"
+      font-family="KaTeX_Main"
+      font-size="19"
+      fill="var(--c-velocity-light)"
+      stroke="var(--c-bg-soft)"
+      stroke-width="4"
+      paint-order="stroke"
+    >
       后轮
     </text>
-    <text x="178" y="156" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-text-dim)" stroke="var(--c-bg-soft)" stroke-width="4" paint-order="stroke">
+    <text
+      x="178"
+      y="156"
+      text-anchor="middle"
+      font-family="KaTeX_Main"
+      font-size="19"
+      fill="var(--c-text-dim)"
+      stroke="var(--c-bg-soft)"
+      stroke-width="4"
+      paint-order="stroke"
+    >
       链条
     </text>
   </svg>

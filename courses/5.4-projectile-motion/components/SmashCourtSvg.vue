@@ -46,7 +46,9 @@ const flightPath = Array.from({ length: SAMPLES + 1 }, (_, i) => {
       <text x="188" y="104" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">v</text>
       <text x="189" y="108" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">0</text>
       <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-neutral-200)" />
-      <text :x="origin.x - 12" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">O</text>
+      <text :x="origin.x - 12" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">
+        O
+      </text>
       <line :x1="origin.x" :y1="L1_Y" :x2="NET_X" :y2="L1_Y" stroke="var(--c-accent)" stroke-width="1.6" />
       <line :x1="origin.x" :y1="L1_Y - TICK" :x2="origin.x" :y2="L1_Y + TICK" stroke="var(--c-accent)" stroke-width="1.6" />
       <line :x1="NET_X" :y1="L1_Y - TICK" :x2="NET_X" :y2="L1_Y + TICK" stroke="var(--c-accent)" stroke-width="1.6" />

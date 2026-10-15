@@ -51,7 +51,15 @@ const { width = 360 } = defineProps<{ width?: number }>();
     <!-- ==================== 1. 太阳能（太阳）[严格居中于 X=52, Y=42] ==================== -->
     <g class="transition-transform duration-300">
       <!-- 柔和外光晕圈 -->
-      <circle cx="52" cy="42" r="17" fill="none" stroke="color-mix(in srgb, var(--c-accent-glow) 22%, transparent)" stroke-width="1.2" stroke-dasharray="4 2.5" />
+      <circle
+        cx="52"
+        cy="42"
+        r="17"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-accent-glow) 22%, transparent)"
+        stroke-width="1.2"
+        stroke-dasharray="4 2.5"
+      />
       <!-- 太阳球体本体 -->
       <circle cx="52" cy="42" r="12.5" fill="url(#solar-disc)" stroke="var(--c-accent-glow)" stroke-width="1.6" filter="url(#solar-glow)" />
       <!-- 精确 8 芒对称辐射光线（内径 18，外径 25） -->
@@ -112,12 +120,28 @@ const { width = 360 } = defineProps<{ width?: number }>();
       />
 
       <!-- 风机塔筒（底部微拓宽的现代流线型塔身） -->
-      <polygon points="150.8,56 153.2,56 155.2,132 148.8,132" fill="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke="currentColor" stroke-width="1.2" opacity="0.8" />
+      <polygon
+        points="150.8,56 153.2,56 155.2,132 148.8,132"
+        fill="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
+        stroke="currentColor"
+        stroke-width="1.2"
+        opacity="0.8"
+      />
       <!-- 塔底基座 -->
       <rect x="146.5" y="130" width="11" height="2.5" rx="1" fill="currentColor" opacity="0.65" />
 
       <!-- 机舱箱体 (Nacelle) -->
-      <rect x="147.5" y="52.5" width="11" height="6.5" rx="2.5" fill="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke="currentColor" stroke-width="1.2" opacity="0.9" />
+      <rect
+        x="147.5"
+        y="52.5"
+        width="11"
+        height="6.5"
+        rx="2.5"
+        fill="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
+        stroke="currentColor"
+        stroke-width="1.2"
+        opacity="0.9"
+      />
 
       <!-- 三叶片转子系统（严谨以 120° 旋转，翼型叶片，带微渐变填充与描边） -->
       <g fill="color-mix(in srgb, var(--c-accent) 22%, transparent)" stroke="var(--c-accent)" stroke-width="1.4" stroke-linejoin="round">

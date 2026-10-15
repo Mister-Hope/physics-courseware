@@ -3,7 +3,16 @@
   <svg viewBox="0 0 340 264" width="100%" style="display: block; max-width: 21rem; margin: 0 auto" xmlns="http://www.w3.org/2000/svg">
     <line x1="30" y1="240" x2="322" y2="240" stroke="var(--c-neutral-600)" stroke-width="2" />
     <line x1="60" y1="14" x2="120" y2="14" stroke="var(--c-text-dim)" stroke-width="2.5" />
-    <rect x="70" y="18" width="40" height="18" rx="7" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+    <rect
+      x="70"
+      y="18"
+      width="40"
+      height="18"
+      rx="7"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.4"
+    />
     <line x1="52" y1="27" x2="70" y2="27" stroke="var(--c-text-dim)" stroke-width="2.5" />
     <text x="12" y="56" font-size="14" fill="var(--c-text-dim)">
       直升机

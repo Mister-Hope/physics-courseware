@@ -39,7 +39,14 @@
       <text x="110" y="112" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-force)">F</text>
 
       <!-- B 处：接触的是碗口的棱，弹力垂直于杆、斜向左上 -->
-      <polyline points="258.3,66.6 254.9,58.3 246.6,61.7" fill="none" stroke="var(--c-force)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      <polyline
+        points="258.3,66.6 254.9,58.3 246.6,61.7"
+        fill="none"
+        stroke="var(--c-force)"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
       <CourseArrow :from="{ x: 250, y: 70 }" :to="{ x: 229, y: 19.2 }" stroke="var(--c-force)" stroke-width="3" />
       <text x="220" y="44" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-force)">F</text>
     </g>

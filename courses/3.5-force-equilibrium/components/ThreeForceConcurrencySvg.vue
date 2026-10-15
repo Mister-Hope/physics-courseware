@@ -4,7 +4,16 @@
     <line x1="40" y1="109" x2="108" y2="33" stroke="var(--c-neutral-500)" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.75" />
     <line x1="160" y1="109" x2="92" y2="33" stroke="var(--c-neutral-500)" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.75" />
     <line x1="125" y1="148" x2="125" y2="34" stroke="var(--c-neutral-500)" stroke-width="1.1" stroke-dasharray="5 4" opacity="0.75" />
-    <rect x="35" y="104" width="130" height="10" rx="5" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+    <rect
+      x="35"
+      y="104"
+      width="130"
+      height="10"
+      rx="5"
+      fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.4"
+    />
     <CourseArrow :from="{ x: 40, y: 109 }" :to="{ x: 65.3, y: 80.7 }" :head-size="9" stroke="var(--c-accent)" stroke-width="2.6" />
     <CourseArrow :from="{ x: 160, y: 109 }" :to="{ x: 134.7, y: 80.7 }" :head-size="9" stroke="var(--c-physics)" stroke-width="2.6" />
     <CourseArrow :from="{ x: 125, y: 114 }" :to="{ x: 125, y: 144 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.6" />

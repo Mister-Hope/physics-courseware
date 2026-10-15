@@ -257,7 +257,10 @@ const endDrag = (): void => {
         <SurfaceHatch :from="{ x: 10, y: origin.y }" :to="{ x: 306, y: origin.y }" side="below" color="#64748b" :line-width="2.2" :thickness="11" :gap="18" />
 
         <!-- 穹顶建筑微透底色与外弧线 -->
-        <path :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y} Z`" fill="color-mix(in srgb, var(--c-surface-solid) 42%, transparent)" />
+        <path
+          :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y} Z`"
+          fill="color-mix(in srgb, var(--c-surface-solid) 42%, transparent)"
+        />
         <path
           :d="`M ${origin.x - (R - 7)} ${origin.y} A ${R - 7} ${R - 7} 0 0 1 ${origin.x + (R - 7)} ${origin.y}`"
           fill="none"
@@ -268,7 +271,16 @@ const endDrag = (): void => {
         <path :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y}`" fill="none" stroke="var(--c-text-dim)" stroke-width="2.6" />
 
         <!-- 过圆心 O 的竖直基准虚线、半径 OP 与夹角 θ -->
-        <line :x1="origin.x" :y1="origin.y" :x2="origin.x" :y2="origin.y - R - 24" stroke="var(--c-neutral-500)" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.8" />
+        <line
+          :x1="origin.x"
+          :y1="origin.y"
+          :x2="origin.x"
+          :y2="origin.y - R - 24"
+          stroke="var(--c-neutral-500)"
+          stroke-width="1.4"
+          stroke-dasharray="5 4"
+          opacity="0.8"
+        />
         <line :x1="origin.x" :y1="origin.y" :x2="contactPoint.x" :y2="contactPoint.y" stroke="var(--c-text-dim)" stroke-width="1.8" />
         <path :d="thetaArc" fill="none" stroke="var(--c-accent)" stroke-width="1.6" />
         <text
@@ -284,7 +296,9 @@ const endDrag = (): void => {
           θ
         </text>
         <circle :cx="origin.x" :cy="origin.y" r="3.5" fill="var(--c-text-dim)" />
-        <text :x="origin.x - 13" :y="origin.y - 8" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14" text-anchor="middle">O</text>
+        <text :x="origin.x - 13" :y="origin.y - 8" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14" text-anchor="middle">
+          O
+        </text>
 
         <!-- ==================== 2. 沿穹顶向上攀爬的人（具象化四肢、躯干与头部） ==================== -->
         <g :transform="climberTransform" stroke-linecap="round" stroke-linejoin="round">
@@ -427,7 +441,10 @@ const endDrag = (): void => {
         <text x="238" y="28" font-size="12" font-weight="600" fill="var(--c-neutral-300)" text-anchor="middle">切线几何直角 △OQP (Q 动点)</text>
 
         <!-- ==================== 1. 左半侧：真实的力矢量直角三角形 ==================== -->
-        <polygon :points="`${triTop.x},${triTop.y} ${triBot.x},${triBot.y} ${triMid.x},${triMid.y}`" fill="color-mix(in srgb, var(--c-force) 6%, transparent)" />
+        <polygon
+          :points="`${triTop.x},${triTop.y} ${triBot.x},${triBot.y} ${triMid.x},${triMid.y}`"
+          fill="color-mix(in srgb, var(--c-force) 6%, transparent)"
+        />
         <!-- 直角符号（F_N ⊥ f） -->
         <path :d="forceRightAnglePath" fill="none" stroke="var(--c-text-dim)" stroke-width="1.5" />
 
@@ -488,7 +505,14 @@ const endDrag = (): void => {
 
         <!-- ==================== 2. 中央：盲目套相似的警示符号 ==================== -->
         <g transform="translate(148, 134)">
-          <circle cx="0" cy="0" r="15" fill="color-mix(in srgb, var(--c-force) 12%, transparent)" stroke="color-mix(in srgb, var(--c-force) 35%, transparent)" stroke-width="1.2" />
+          <circle
+            cx="0"
+            cy="0"
+            r="15"
+            fill="color-mix(in srgb, var(--c-force) 12%, transparent)"
+            stroke="color-mix(in srgb, var(--c-force) 35%, transparent)"
+            stroke-width="1.2"
+          />
           <text x="0" y="6" fill="var(--c-neutral-300)" font-family="KaTeX_Main" font-size="21" text-anchor="middle">∽</text>
           <line x1="-9" y1="10" x2="9" y2="-10" stroke="var(--c-force)" stroke-width="2.6" stroke-linecap="round" />
         </g>
@@ -565,8 +589,19 @@ const endDrag = (): void => {
         </text>
 
         <!-- ==================== 4. 底部警示结论栏 ==================== -->
-        <rect x="6" y="239" width="308" height="38" rx="7" fill="color-mix(in srgb, var(--c-force) 10%, transparent)" stroke="color-mix(in srgb, var(--c-force) 35%, transparent)" stroke-width="1.2" />
-        <text x="160" y="263" fill="var(--c-force)" font-size="11.5" font-weight="600" text-anchor="middle">✗ 切线交点 Q 随爬升下移，斜边 OQ 在变，无定弦定角</text>
+        <rect
+          x="6"
+          y="239"
+          width="308"
+          height="38"
+          rx="7"
+          fill="color-mix(in srgb, var(--c-force) 10%, transparent)"
+          stroke="color-mix(in srgb, var(--c-force) 35%, transparent)"
+          stroke-width="1.2"
+        />
+        <text x="160" y="263" fill="var(--c-force)" font-size="11.5" font-weight="600" text-anchor="middle">
+          ✗ 切线交点 Q 随爬升下移，斜边 OQ 在变，无定弦定角
+        </text>
       </svg>
     </div>
   </div>

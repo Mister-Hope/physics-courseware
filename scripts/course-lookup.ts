@@ -6,10 +6,31 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import path from "node:path";
 
-import { textbooks } from "../workspace/homepage/src/courses.config";
-
 const ROOT_DIR = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT_DIR, "courses");
+/** 课件注册表：仓库根目录的 courses.json（唯一数据源，字段说明见 courses.schema.json） */
+const REGISTRY_PATH = path.join(ROOT_DIR, "courses.json");
+
+/** 注册表里登记的一门课（这里只用得上这几列） */
+interface RegisteredCourse {
+  slug: string;
+  title: string;
+  chapter: string;
+}
+
+/** 注册表里登记的一个分册 */
+interface RegisteredTextbook {
+  name: string;
+  shortName: string;
+  slug: string;
+  courses: RegisteredCourse[];
+}
+
+const readTextbooks = (): RegisteredTextbook[] =>
+  (JSON.parse(readFileSync(REGISTRY_PATH, "utf8")) as { textbooks: RegisteredTextbook[] })
+    .textbooks;
+
+const textbooks = readTextbooks();
 
 export interface CourseInfo {
   /** 目录名：URL 前缀与首页 slug */
@@ -18,9 +39,9 @@ export interface CourseInfo {
   packageName?: string;
   /** 英文名（包名去掉 -courseware 后缀） */
   englishName: string;
-  /** 中文标题（只在 courses.config.ts 登记过才有） */
+  /** 中文标题（只在 courses.json 登记过才有） */
   title?: string;
-  /** 章节号，如「§1.3」（只在 courses.config.ts 登记过才有） */
+  /** 章节号，如「§1.3」（只在 courses.json 登记过才有） */
   chapter?: string;
 }
 
@@ -31,7 +52,7 @@ export interface CourseGroup {
   shortName: string;
   /** 分册 slug，如「bx1」 */
   slug: string;
-  /** 该分册下真实存在的课件（按 courses.config.ts 的登记顺序） */
+  /** 该分册下真实存在的课件（按 courses.json 的登记顺序） */
   courses: CourseInfo[];
 }
 
@@ -108,7 +129,7 @@ const compareByChapter = (left: string, right: string): number => {
   return 0;
 };
 
-// 按 courses.config.ts 的分册与登记顺序列出课件（跳过目录不存在的登记项）
+// 按 courses.json 的分册与登记顺序列出课件（跳过目录不存在的登记项）
 export const readCourseGroups = (): CourseGroup[] => {
   const existing = new Set(listCourseDirs());
 

@@ -38,6 +38,45 @@ interface SlotGeom {
   px2user: number;
 }
 
+/** SVG 用户单位下的一个点 */
+interface PlotPoint {
+  x: number;
+  y: number;
+}
+
+/** 第 5 页一段区间的两条箭头 + 断口里的文字 */
+interface SegmentShape {
+  key: string;
+  color: string;
+  parts: Part[];
+  text: PlotPoint;
+  left: { from: PlotPoint; to: PlotPoint };
+  right: { from: PlotPoint; to: PlotPoint };
+}
+
+/** 第 5 页刻度处的竖直虚线 */
+interface GuideShape {
+  key: string;
+  x: number;
+  y1: number;
+  y2: number;
+}
+
+/** 第 6 页一个时刻的箭头、断开的箭杆与标注 */
+interface MomentShape {
+  key: string;
+  color: string;
+  parts: Part[];
+  arrow: { from: PlotPoint; to: PlotPoint };
+  shaft: { from: PlotPoint; to: PlotPoint } | null;
+  text: {
+    x: number;
+    y: number;
+    anchor: "start" | "middle";
+    baseline: "auto" | "hanging";
+  };
+}
+
 /** 标注字号（屏幕 px） */
 const LABEL_SIZE = 15;
 /** 箭头线宽与箭头三角形长度（屏幕 px） */
@@ -133,9 +172,9 @@ const MOMENTS: MomentItem[] = [
   },
 ];
 
-const props = defineProps<{ mode: "segments" | "moments" }>();
+const { mode } = defineProps<{ mode: "segments" | "moments" }>();
 
-const isWide = (char: string): boolean => /[\u2E80-\u9FFF\uFF00-\uFFEF]/.test(char);
+const isWide = (char: string): boolean => /[\u2E80-\u9FFF\uFF00-\uFFEF]/u.test(char);
 
 /** 估算一段标注占多宽（屏幕 px）：中文按 1 em、其余按 0.55 em */
 const partsWidth = (parts: Part[]): number => {
@@ -147,7 +186,7 @@ const partsWidth = (parts: Part[]): number => {
 };
 
 /** 第 5 页：每段区间一对箭头，两头的尖端落在刻度虚线上，中间断开、留出文字的位置 */
-const buildSegments = ({ x, axisY, px2user }: SlotGeom) =>
+const buildSegments = ({ x, axisY, px2user }: SlotGeom): SegmentShape[] =>
   SEGMENTS.map((item) => {
     const y = axisY + (item.side === "above" ? -item.offset : item.offset) * px2user;
     const from = x(item.from);
@@ -168,7 +207,7 @@ const buildSegments = ({ x, axisY, px2user }: SlotGeom) =>
   });
 
 /** 第 5 页：刻度处的竖直虚线（向上的三条；向下的两条只服务于轴下方的区间） */
-const buildGuides = ({ x, axisY, px2user }: SlotGeom) => {
+const buildGuides = ({ x, axisY, px2user }: SlotGeom): GuideShape[] => {
   const up = { y1: axisY - 5 * px2user, y2: axisY - SEGMENT_UP_GUIDE * px2user };
   const down = {
     y1: axisY + SEGMENT_DOWN_GUIDE_FROM * px2user,
@@ -176,19 +215,27 @@ const buildGuides = ({ x, axisY, px2user }: SlotGeom) => {
   };
 
   return [
-    ...SEGMENTS.filter((item) => item.side === "above").flatMap((item) => [
-      { key: `up-${item.from}`, x: x(item.from), ...up },
-      { key: `up-${item.to}`, x: x(item.to), ...up },
-    ]),
-    ...SEGMENTS.filter((item) => item.side === "below").flatMap((item) => [
-      { key: `down-${item.from}`, x: x(item.from), ...down },
-      { key: `down-${item.to}`, x: x(item.to), ...down },
-    ]),
+    ...SEGMENTS.flatMap((item) =>
+      item.side === "above"
+        ? [
+            { key: `up-${item.from}`, x: x(item.from), ...up },
+            { key: `up-${item.to}`, x: x(item.to), ...up },
+          ]
+        : [],
+    ),
+    ...SEGMENTS.flatMap((item) =>
+      item.side === "below"
+        ? [
+            { key: `down-${item.from}`, x: x(item.from), ...down },
+            { key: `down-${item.to}`, x: x(item.to), ...down },
+          ]
+        : [],
+    ),
   ];
 };
 
 /** 第 6 页：每个时刻一条竖直箭头，尖端落在轴上的时刻点；标注写在箭头尾端 */
-const buildMoments = ({ x, axisY, px2user }: SlotGeom) =>
+const buildMoments = ({ x, axisY, px2user }: SlotGeom): MomentShape[] =>
   MOMENTS.map((item, index) => {
     const above = item.side === "above";
     const atStart = item.value === 0;
@@ -220,7 +267,7 @@ const buildMoments = ({ x, axisY, px2user }: SlotGeom) =>
     };
   });
 
-const view = computed(() => (props.mode === "segments" ? VIEW : MOMENT_VIEW));
+const view = computed(() => (mode === "segments" ? VIEW : MOMENT_VIEW));
 </script>
 
 <template>
@@ -232,7 +279,7 @@ const view = computed(() => (props.mode === "segments" ? VIEW : MOMENT_VIEW));
   >
     <template #overlay="{ x, axisY, px2user }">
       <!-- 第 5 页：竖直虚线 + 中间断裂的双向箭头 -->
-      <template v-if="props.mode === 'segments'">
+      <template v-if="mode === 'segments'">
         <g
           stroke="var(--c-text-dim)"
           :stroke-width="1.6 * px2user"

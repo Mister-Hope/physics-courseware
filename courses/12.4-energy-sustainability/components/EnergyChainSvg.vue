@@ -2,7 +2,15 @@
 <template>
   <svg viewBox="0 0 660 118" width="100%" xmlns="http://www.w3.org/2000/svg">
     <g v-for="node in nodes" :key="node.title">
-      <rect :x="node.x" y="32" width="110" height="52" rx="12" fill="color-mix(in srgb, var(--c-surface-solid) 75%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)" />
+      <rect
+        :x="node.x"
+        y="32"
+        width="110"
+        height="52"
+        rx="12"
+        fill="color-mix(in srgb, var(--c-surface-solid) 75%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)"
+      />
       <text :x="node.x + 55" y="55" text-anchor="middle" font-size="15" fill="var(--c-text)">{{ node.title }}</text>
       <text :x="node.x + 55" y="73" text-anchor="middle" font-size="11" fill="var(--c-text-dim)">{{ node.sub }}</text>
     </g>

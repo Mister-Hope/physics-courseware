@@ -33,7 +33,9 @@ const thetaLabel = toXY(101, 64);
     <line :x1="O.x" :y1="O.y" :x2="B.x" :y2="B.y" stroke="currentColor" stroke-width="2" opacity="0.8" />
     <g v-if="showSolved">
       <path :d="angleArc" fill="none" stroke="var(--c-velocity)" stroke-width="3.2" stroke-linecap="round" />
-      <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">Δθ</text>
+      <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">
+        Δθ
+      </text>
     </g>
     <circle :cx="A.x" :cy="A.y" r="5" fill="var(--c-accent)" />
     <circle :cx="B.x" :cy="B.y" r="5" fill="var(--c-accent)" />

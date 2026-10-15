@@ -51,8 +51,20 @@
     <circle cx="230" cy="230" r="150" fill="url(#gwsWheelGrad)" stroke="var(--c-text-dim)" stroke-width="3" />
     <!-- 砂轮外圈粗磨砂环带与高速旋转流线纹理 -->
     <circle cx="230" cy="230" r="138" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke-width="1.4" stroke-dasharray="10 8" />
-    <path d="M 122 184 A 118 118 0 0 1 196 117" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 22%, transparent)" stroke-width="2" stroke-linecap="round" />
-    <path d="M 140 306 A 118 118 0 0 0 288 332" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 22%, transparent)" stroke-width="2" stroke-linecap="round" />
+    <path
+      d="M 122 184 A 118 118 0 0 1 196 117"
+      fill="none"
+      stroke="color-mix(in srgb, var(--c-neutral-300) 22%, transparent)"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+    <path
+      d="M 140 306 A 118 118 0 0 0 288 332"
+      fill="none"
+      stroke="color-mix(in srgb, var(--c-neutral-300) 22%, transparent)"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
     <path
       d="M 155 155 A 106 106 0 0 0 142 288"
       fill="none"
@@ -73,7 +85,13 @@
     <line x1="230" y1="230" x2="336" y2="124" stroke="var(--c-neutral-300)" stroke-width="2" opacity="0.5" stroke-dasharray="6 6" />
 
     <!-- T 处的直角标记：切线 ⊥ 半径 -->
-    <path d="M 324.7 135.3 L 313.4 124.0 L 324.7 112.7" fill="color-mix(in srgb, var(--c-text-dim) 12%, transparent)" stroke="var(--c-neutral-300)" stroke-width="1.8" opacity="0.85" />
+    <path
+      d="M 324.7 135.3 L 313.4 124.0 L 324.7 112.7"
+      fill="color-mix(in srgb, var(--c-text-dim) 12%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="1.8"
+      opacity="0.85"
+    />
 
     <!-- 过 T(336,124) 的几何切线（沿斜向左上 -1,-1 方向） -->
     <line x1="208" y1="-4" x2="454" y2="242" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.58" stroke-dasharray="8 6" />
@@ -93,7 +111,13 @@
       <circle cx="438.2" cy="177.5" r="2.6" fill="#fde68a" stroke="#78350f" stroke-width="1" />
 
       <!-- 不锈钢刀箍（连接刀身与木柄） -->
-      <polygon points="389.8,143.8 405.3,128.3 413.8,136.8 398.2,152.3" fill="var(--c-neutral-500)" stroke="var(--c-neutral-200)" stroke-width="1.5" stroke-linejoin="round" />
+      <polygon
+        points="389.8,143.8 405.3,128.3 413.8,136.8 398.2,152.3"
+        fill="var(--c-neutral-500)"
+        stroke="var(--c-neutral-200)"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+      />
 
       <!-- 菜刀宽阔刀身（刃口微弧贴合 T=336,124 切线，斜向左上延伸至刀头 306.7,91.1） -->
       <path

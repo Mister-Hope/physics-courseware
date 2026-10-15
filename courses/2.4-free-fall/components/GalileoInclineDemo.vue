@@ -114,7 +114,14 @@ const aria = computed(
       role="img"
       :aria-label="aria"
     >
-      <line x1="16" :y1="BASE.y" x2="372" :y2="BASE.y" stroke="var(--c-neutral-600)" stroke-width="2" />
+      <line
+        x1="16"
+        :y1="BASE.y"
+        x2="372"
+        :y2="BASE.y"
+        stroke="var(--c-neutral-600)"
+        stroke-width="2"
+      />
       <line
         :x1="BASE.x"
         :y1="BASE.y"
@@ -182,7 +189,14 @@ const aria = computed(
         :fill="ball.fill"
         class="gi-ball-dot"
       />
-      <text v-if="angle >= 90" x="120" y="52" fill="var(--c-physics)" font-size="16" class="gi-halo">
+      <text
+        v-if="angle >= 90"
+        x="120"
+        y="52"
+        fill="var(--c-physics)"
+        font-size="16"
+        class="gi-halo"
+      >
         斜面立成竖直 ⇒ 自由落体
       </text>
     </svg>

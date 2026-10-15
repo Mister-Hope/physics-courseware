@@ -133,7 +133,16 @@
       <line x1="95.5" y1="55" x2="95.5" y2="121" stroke="var(--c-neutral-700)" stroke-width="1.1" />
       <!-- ── 右侧：第 1 节头车 (x = 98 ~ 396) ── -->
       <!-- 头车客室上下车门 -->
-      <rect x="104" y="65" width="17" height="45" rx="2.5" fill="color-mix(in srgb, var(--c-neutral-900) 18%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1.2" />
+      <rect
+        x="104"
+        y="65"
+        width="17"
+        height="45"
+        rx="2.5"
+        fill="color-mix(in srgb, var(--c-neutral-900) 18%, transparent)"
+        stroke="var(--c-neutral-500)"
+        stroke-width="1.2"
+      />
       <rect x="108" y="71" width="9" height="18" rx="2" fill="url(#hsr-window-grad)" stroke="var(--c-text-dim)" stroke-width="0.9" />
       <!-- 头车连续黑晶乘客窗带 + 4 扇圆角车窗 -->
       <rect x="128" y="69" width="146" height="22" rx="11" fill="url(#hsr-window-grad)" stroke="var(--c-neutral-600)" stroke-width="1.2" />

@@ -64,7 +64,12 @@ const onClick = (event: MouseEvent): void => {
     <!-- ==================== 2. 现代城市新能源公交车（x: 140..700） ==================== -->
     <g stroke-linecap="round" stroke-linejoin="round">
       <!-- ① 车顶空调导流罩与散热格栅（x: 240..530, y: 51..64） -->
-      <path d="M 240 64 L 256 51 L 514 51 L 532 64 Z" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
+      <path
+        d="M 240 64 L 256 51 L 514 51 L 532 64 Z"
+        fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="2"
+      />
       <line x1="280" y1="57" x2="350" y2="57" stroke="var(--c-neutral-500)" stroke-width="1.6" stroke-dasharray="6 5" />
       <line x1="420" y1="57" x2="490" y2="57" stroke="var(--c-neutral-500)" stroke-width="1.6" stroke-dasharray="6 5" />
 
@@ -81,7 +86,16 @@ const onClick = (event: MouseEvent): void => {
       <line x1="142" y1="206" x2="698" y2="206" stroke="var(--c-physics)" stroke-width="1.6" opacity="0.65" />
 
       <!-- ③ 车厢透视大观察窗（x: 162..580, y: 76..202，让车内乘客全身、座椅与扶手一目了然） -->
-      <rect x="162" y="76" width="418" height="126" rx="10" fill="color-mix(in srgb, var(--c-neutral-900) 78%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="2" />
+      <rect
+        x="162"
+        y="76"
+        width="418"
+        height="126"
+        rx="10"
+        fill="color-mix(in srgb, var(--c-neutral-900) 78%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)"
+        stroke-width="2"
+      />
       <!-- 远景车窗立柱分格暗线 -->
       <line x1="298" y1="76" x2="298" y2="202" stroke="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" stroke-width="2" />
       <line x1="444" y1="76" x2="444" y2="202" stroke="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" stroke-width="2" />
@@ -113,7 +127,12 @@ const onClick = (event: MouseEvent): void => {
       </g>
 
       <!-- ④ 右侧驾驶室前窗、方向盘与兔耳外后视镜 -->
-      <path d="M 594 76 L 676 76 Q 686 76 689 88 L 695 146 L 594 146 Z" fill="color-mix(in srgb, var(--c-physics-light) 18%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="2" />
+      <path
+        d="M 594 76 L 676 76 Q 686 76 689 88 L 695 146 L 594 146 Z"
+        fill="color-mix(in srgb, var(--c-physics-light) 18%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
+        stroke-width="2"
+      />
       <!-- 驾驶室方向盘与仪表台 -->
       <line x1="670" y1="146" x2="656" y2="128" stroke="var(--c-text-dim)" stroke-width="2.4" />
       <line x1="648" y1="133" x2="664" y2="123" stroke="var(--c-neutral-300)" stroke-width="2.8" />
@@ -140,10 +159,24 @@ const onClick = (event: MouseEvent): void => {
       <path d="M 393 160 L 400 198 L 408 199" fill="none" stroke="var(--c-neutral-300)" stroke-width="4.6" />
 
       <!-- 背部小书包 -->
-      <path d="M 377 124 Q 366 125 366 136 L 366 150 Q 366 156 377 156 Z" fill="color-mix(in srgb, var(--c-accent) 28%, transparent)" stroke="var(--c-accent)" stroke-width="1.8" />
+      <path
+        d="M 377 124 Q 366 125 366 136 L 366 150 Q 366 156 377 156 Z"
+        fill="color-mix(in srgb, var(--c-accent) 28%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.8"
+      />
 
       <!-- 乘客圆润夹克上衣躯干 -->
-      <rect x="377" y="118" width="22" height="43" rx="9" fill="color-mix(in srgb, var(--c-velocity) 32%, transparent)" stroke="var(--c-velocity)" stroke-width="2.4" />
+      <rect
+        x="377"
+        y="118"
+        width="22"
+        height="43"
+        rx="9"
+        fill="color-mix(in srgb, var(--c-velocity) 32%, transparent)"
+        stroke="var(--c-velocity)"
+        stroke-width="2.4"
+      />
 
       <!-- 双臂自然张开平衡姿态 -->
       <path d="M 380 128 Q 366 140 360 152" fill="none" stroke="var(--c-neutral-200)" stroke-width="4" />

@@ -113,14 +113,32 @@ const showTrail = computed(() => elapsed.value > IMPACT_TIME);
   <svg class="fig-truck" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" @click="play">
     <!-- ==================== 1. 公路路面与车道标线 ==================== -->
     <line x1="20" y1="262" x2="880" y2="262" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="3" stroke-linecap="round" />
-    <line x1="36" y1="269" x2="864" y2="269" stroke="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" stroke-width="1.5" stroke-dasharray="24 18" stroke-linecap="round" />
+    <line
+      x1="36"
+      y1="269"
+      x2="864"
+      y2="269"
+      stroke="color-mix(in srgb, var(--c-text-dim) 18%, transparent)"
+      stroke-width="1.5"
+      stroke-dasharray="24 18"
+      stroke-linecap="round"
+    />
 
     <!-- ==================== 2. 中国红平头“大运重卡”（平头高顶驾驶室 + 重型挂车厢 + 车底附件） ==================== -->
     <g :transform="`translate(${truckX}, 0)`" stroke-linecap="round" stroke-linejoin="round">
       <!-- ① 重型底盘贯通大梁与车尾防撞梁 -->
       <rect x="34" y="218" width="350" height="12" rx="3" fill="var(--c-surface-solid)" stroke="var(--c-neutral-500)" stroke-width="1.8" />
       <!-- 驾驶室与后挂箱之间的铝合金油箱与储气筒 -->
-      <rect x="278" y="216" width="28" height="18" rx="3" fill="color-mix(in srgb, var(--c-text-dim) 28%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+      <rect
+        x="278"
+        y="216"
+        width="28"
+        height="18"
+        rx="3"
+        fill="color-mix(in srgb, var(--c-text-dim) 28%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.6"
+      />
       <line x1="286" y1="216" x2="286" y2="234" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <line x1="298" y1="216" x2="298" y2="234" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <!-- 驾驶室后方竖直金属排气管与防烫网 -->
@@ -137,7 +155,16 @@ const showTrail = computed(() => elapsed.value > IMPACT_TIME);
         <line v-for="rx in RIB_XS" :key="`rib-${rx}`" :x1="rx" y1="94" :x2="rx" y2="204" />
       </g>
       <!-- 货柜中央醒目“大运重卡”铭牌横幅 -->
-      <rect x="82" y="124" width="160" height="44" rx="6" fill="color-mix(in srgb, var(--c-bg-soft) 78%, transparent)" stroke="var(--c-force)" stroke-width="1.8" />
+      <rect
+        x="82"
+        y="124"
+        width="160"
+        height="44"
+        rx="6"
+        fill="color-mix(in srgb, var(--c-bg-soft) 78%, transparent)"
+        stroke="var(--c-force)"
+        stroke-width="1.8"
+      />
       <text x="162" y="153" text-anchor="middle" font-size="22" font-weight="bold" letter-spacing="3" fill="#fef2f2">大运重卡</text>
       <!-- 货柜下沿红白相间安全反光贴 -->
       <line x1="44" y1="213" x2="280" y2="213" stroke="var(--c-neutral-50)" stroke-width="2.4" stroke-dasharray="12 12" />
@@ -160,7 +187,12 @@ const showTrail = computed(() => elapsed.value > IMPACT_TIME);
       <path d="M 378 96 L 391 102 L 385 106 Z" fill="#ef4444" stroke="#fca5a5" stroke-width="1.4" />
 
       <!-- 驾驶室侧窗与前风挡玻璃（带下沉式观察口特征） -->
-      <path d="M 314 108 L 378 108 L 382 150 L 352 150 L 342 142 L 314 142 Z" fill="color-mix(in srgb, var(--c-physics-light) 22%, transparent)" stroke="var(--c-neutral-300)" stroke-width="1.8" />
+      <path
+        d="M 314 108 L 378 108 L 382 150 L 352 150 L 342 142 L 314 142 Z"
+        fill="color-mix(in srgb, var(--c-physics-light) 22%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="1.8"
+      />
       <!-- 玻璃高光斜线 -->
       <line x1="332" y1="112" x2="322" y2="136" stroke="rgba(255,255,255,0.35)" stroke-width="2" />
       <line x1="364" y1="112" x2="352" y2="144" stroke="rgba(255,255,255,0.28)" stroke-width="1.6" />
@@ -228,7 +260,16 @@ const showTrail = computed(() => elapsed.value > IMPACT_TIME);
           <path d="M 445 216 L 441 258 L 435 259" fill="none" stroke="var(--c-neutral-300)" stroke-width="4.6" />
           <path d="M 455 216 L 459 258 L 466 259" fill="none" stroke="var(--c-neutral-300)" stroke-width="4.6" />
           <!-- 圆润夹克躯干 -->
-          <rect x="439" y="174" width="22" height="43" rx="9" fill="color-mix(in srgb, var(--c-velocity) 28%, transparent)" stroke="var(--c-velocity)" stroke-width="2.4" />
+          <rect
+            x="439"
+            y="174"
+            width="22"
+            height="43"
+            rx="9"
+            fill="color-mix(in srgb, var(--c-velocity) 28%, transparent)"
+            stroke="var(--c-velocity)"
+            stroke-width="2.4"
+          />
           <!-- 自然下垂的双臂 -->
           <path d="M 440 182 Q 431 196 434 210" fill="none" stroke="var(--c-neutral-200)" stroke-width="4.2" />
           <path d="M 460 182 Q 469 196 466 210" fill="none" stroke="var(--c-neutral-200)" stroke-width="4.2" />
@@ -245,7 +286,16 @@ const showTrail = computed(() => elapsed.value > IMPACT_TIME);
           <path d="M 444 214 Q 430 232 420 244" fill="none" stroke="var(--c-neutral-300)" stroke-width="4.6" />
           <path d="M 456 214 Q 470 228 482 222" fill="none" stroke="var(--c-neutral-300)" stroke-width="4.6" />
           <!-- 躯干 -->
-          <rect x="439" y="174" width="22" height="42" rx="9" fill="color-mix(in srgb, var(--c-velocity) 32%, transparent)" stroke="var(--c-velocity)" stroke-width="2.4" />
+          <rect
+            x="439"
+            y="174"
+            width="22"
+            height="42"
+            rx="9"
+            fill="color-mix(in srgb, var(--c-velocity) 32%, transparent)"
+            stroke="var(--c-velocity)"
+            stroke-width="2.4"
+          />
           <!-- 惊慌高举的双臂 -->
           <path d="M 441 182 Q 422 168 416 154" fill="none" stroke="var(--c-neutral-200)" stroke-width="4.2" />
           <path d="M 459 182 Q 478 166 484 152" fill="none" stroke="var(--c-neutral-200)" stroke-width="4.2" />

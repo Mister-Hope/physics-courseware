@@ -242,7 +242,16 @@ const endDrag = (): void => {
 
         <!-- ==================== 3. 轻绳、定滑轮 O、铰链 A、轻杆 AB 与悬挂重物 ==================== -->
         <!-- 竖直基准虚线 OA -->
-        <line :x1="pointO.x" :y1="pointO.y" :x2="pointA.x" :y2="pointA.y" stroke="var(--c-neutral-300)" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.6" />
+        <line
+          :x1="pointO.x"
+          :y1="pointO.y"
+          :x2="pointA.x"
+          :y2="pointA.y"
+          stroke="var(--c-neutral-300)"
+          stroke-width="1.4"
+          stroke-dasharray="5 4"
+          opacity="0.6"
+        />
 
         <!-- 轻绳：B → 滑轮右侧切点 → 绕过轮顶圆弧 → 从滑轮最高点切线接至人手 -->
         <line :x1="pointB.x" :y1="pointB.y" :x2="entry.x" :y2="entry.y" stroke="var(--c-neutral-300)" stroke-width="2.2" />
@@ -251,7 +260,14 @@ const endDrag = (): void => {
 
         <!-- 定滑轮固定底座与滑轮轮体 O -->
         <line :x1="pointO.x - 4" :y1="pointO.y + 4" :x2="pointO.x" :y2="pointO.y" stroke="var(--c-text-dim)" stroke-width="3.2" stroke-linecap="round" />
-        <circle :cx="pointO.x" :cy="pointO.y" :r="PULLEY_R" fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.4" />
+        <circle
+          :cx="pointO.x"
+          :cy="pointO.y"
+          :r="PULLEY_R"
+          fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)"
+          stroke="var(--c-accent)"
+          stroke-width="2.4"
+        />
         <circle :cx="pointO.x" :cy="pointO.y" r="3.2" fill="var(--c-accent)" />
 
         <!-- 轻杆 AB（带铰链支座 A） -->
@@ -261,13 +277,26 @@ const endDrag = (): void => {
 
         <!-- 杆顶 B 下方悬挂的重物 -->
         <line :x1="pointB.x" :y1="pointB.y" :x2="pointB.x" :y2="pointB.y + 38" stroke="var(--c-neutral-300)" stroke-width="2" />
-        <rect :x="pointB.x - 22" :y="pointB.y + 38" width="44" height="28" rx="5" fill="color-mix(in srgb, var(--c-velocity) 18%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
+        <rect
+          :x="pointB.x - 22"
+          :y="pointB.y + 38"
+          width="44"
+          height="28"
+          rx="5"
+          fill="color-mix(in srgb, var(--c-velocity) 18%, transparent)"
+          stroke="var(--c-velocity)"
+          stroke-width="2"
+        />
         <text :x="pointB.x" :y="pointB.y + 56" fill="var(--c-velocity-light)" font-family="KaTeX_Main" font-size="12" text-anchor="middle">重物</text>
         <circle :cx="pointB.x" :cy="pointB.y" r="4.2" fill="var(--c-neutral-50)" stroke="var(--c-bg-soft)" stroke-width="1.5" />
 
         <!-- 几何顶点 A、O、B 标注 -->
-        <text :x="pointA.x - 16" :y="pointA.y + 5" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">A</text>
-        <text :x="pointO.x + 19" :y="pointO.y - 6" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">O</text>
+        <text :x="pointA.x - 16" :y="pointA.y + 5" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">
+          A
+        </text>
+        <text :x="pointO.x + 19" :y="pointO.y - 6" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">
+          O
+        </text>
 
         <!-- ==================== 4. 结点 B 的三个共点力（修正方向：G 向下、F_N 沿杆向外、F_T 沿绳向滑轮） ==================== -->
         <g v-show="step >= 1">

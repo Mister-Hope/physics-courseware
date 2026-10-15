@@ -22,8 +22,24 @@ const thetaArc = `M ${origin.x + thetaR} ${origin.y} A ${thetaR} ${thetaR} 0 0 0
   <div class="oblique-decompose">
     <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="斜抛初速度的分解图">
       <line :x1="origin.x" :y1="origin.y" x2="470" :y2="origin.y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.4" />
-      <line :x1="xTip.x" :y1="xTip.y" :x2="yTip.x" :y2="yTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
-      <line :x1="yTip.x" :y1="yTip.y" :x2="xTip.x" :y2="xTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+      <line
+        :x1="xTip.x"
+        :y1="xTip.y"
+        :x2="yTip.x"
+        :y2="yTip.y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="7 6"
+      />
+      <line
+        :x1="yTip.x"
+        :y1="yTip.y"
+        :x2="xTip.x"
+        :y2="xTip.y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="7 6"
+      />
       <CourseArrow :from="origin" :to="vTip" stroke="var(--c-accent)" :stroke-width="3.2" />
       <CourseArrow :from="origin" :to="xTip" stroke="var(--c-velocity)" :stroke-width="3" />
       <CourseArrow :from="origin" :to="yTip" stroke="var(--c-physics)" :stroke-width="3" />

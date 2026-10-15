@@ -689,7 +689,13 @@ const current = computed<ChartSpec>(() => {
         {{ part.text }}
       </tspan>
     </text>
-    <text :x="ORIGIN_X" y="28" text-anchor="middle" :font-size="AXIS_LETTER" fill="var(--c-text-dim)">
+    <text
+      :x="ORIGIN_X"
+      y="28"
+      text-anchor="middle"
+      :font-size="AXIS_LETTER"
+      fill="var(--c-text-dim)"
+    >
       <tspan
         v-for="(part, index) in current.yLabel"
         :key="index"

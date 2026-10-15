@@ -90,7 +90,16 @@ const { width = 320 } = defineProps<{ width?: number }>();
       <!-- 徽章底盘 -->
       <circle cx="0" cy="0" r="16" fill="color-mix(in srgb, var(--c-physics) 12%, transparent)" stroke="var(--c-physics)" stroke-width="1.8" />
       <!-- 电池外壳 -->
-      <rect x="-6.5" y="-8.5" width="13" height="17" rx="2" fill="color-mix(in srgb, var(--c-physics) 22%, transparent)" stroke="var(--c-physics)" stroke-width="1.6" />
+      <rect
+        x="-6.5"
+        y="-8.5"
+        width="13"
+        height="17"
+        rx="2"
+        fill="color-mix(in srgb, var(--c-physics) 22%, transparent)"
+        stroke="var(--c-physics)"
+        stroke-width="1.6"
+      />
       <!-- 正极凸起接线端子（顶部帽） -->
       <rect x="-3" y="-11" width="6" height="2.5" rx="0.8" fill="var(--c-physics)" />
       <!-- 化学活性储能块（电量/活性物） -->

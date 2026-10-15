@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "课件注册表（courses.json）",
+  "description": "高中物理交互式课件的唯一数据源：按人教版教材分册组织。新增一门课只需在对应分册的 courses 数组里加一项，不必修改任何 TS 文件（pnpm create:course --textbook <分册> 会自动登记）。",
+  "type": "object",
+  "required": ["textbooks"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "本文件所用的 JSON Schema 路径（相对本文件的路径），供编辑器自动补全与校验；请勿删除。",
+      "examples": ["./courses.schema.json"]
+    },
+    "textbooks": {
+      "type": "array",
+      "description": "教材分册列表。顺序即首页 Tab 顺序与「我要上课」下拉的分组顺序；暂无课件的分册也要保留（courses 为空数组）。",
+      "items": { "$ref": "#/$defs/textbookGroup" }
+    }
+  },
+  "$defs": {
+    "textbookGroup": {
+      "type": "object",
+      "description": "一个教材分册（如「必修第一册」）及其课件列表。",
+      "required": ["name", "shortName", "slug", "courses"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "完整书名，如「必修第一册」。用于「我要上课」下拉的分组标签与 pnpm dev 的分册标题。",
+          "examples": ["必修第一册"]
+        },
+        "shortName": {
+          "type": "string",
+          "minLength": 1,
+          "description": "分册简称，如「必修1」。用于首页顶部分册 Tab 的按钮文字。",
+          "examples": ["必修1"]
+        },
+        "slug": {
+          "enum": ["bx1", "bx2", "bx3", "xx1", "xx2", "xx3"],
+          "description": "分册 slug，也是首页 Tab 的 data-slug 与 pnpm create:course --textbook 的取值：必修 bx1/bx2/bx3，选择性必修 xx1/xx2/xx3。",
+          "examples": ["bx1", "xx2"]
+        },
+        "courses": {
+          "type": "array",
+          "description": "该分册下的课件列表。顺序即首页卡片顺序（选修册按各自登记顺序展示）。",
+          "items": { "$ref": "#/$defs/course" }
+        }
+      }
+    },
+    "course": {
+      "type": "object",
+      "description": "一门课件，对应 courses/ 下的一个目录。",
+      "required": ["slug", "title", "chapter", "description", "tags"],
+      "additionalProperties": false,
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+          "description": "课件目录名，必须与 courses/ 下的目录同名（同时是部署后的 URL 前缀与首页 slug）。格式为「章节前缀 + 英文名」，如 3.5-force-equilibrium、跨节 2.2-2.3-uniform-acceleration、非教材小节 1.x-vectors、选必 o2-1.2-lorentz-force。",
+          "examples": ["1.2-time-displacement", "o2-1.2-lorentz-force"]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "课题名（中文），即首页卡片标题，也是课件顶栏内页显示的课题名。",
+          "examples": ["电容器的电容"]
+        },
+        "chapter": {
+          "type": "string",
+          "minLength": 1,
+          "description": "章节号，展示在首页卡片左上角。教材小节写成「§10.4」；跨节写成「§2.2·2.3」；非教材小节可写「数学扩展」「第二章习题课」这类文字。",
+          "examples": ["§10.4", "§2.2·2.3", "数学扩展"]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "首页卡片上的一句话简介：说清本课讲了什么、按什么顺序讲。建议 ≤80 字（现有少量历史条目更长，故未做硬性长度限制）；尚未定稿的课写「待补充：一句话说明本课讲了什么。」。",
+          "examples": [
+            "从如何把电荷存起来引出电容器，分析充放电中的电荷转移与能量转化，建立电容 C=Q/U 与单位法拉。"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "首页卡片底部的标签，通常是 2–5 个知识点或课型关键词（如 质点、参考系、习题课、实验、概念、计算）；尚未定稿的课可留空数组。",
+          "items": { "type": "string", "minLength": 1 },
+          "examples": [
+            ["电容", "电容器"],
+            ["实验", "概念", "计算"]
+          ]
+        }
+      }
+    }
+  }
+}

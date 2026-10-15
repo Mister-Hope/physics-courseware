@@ -41,7 +41,9 @@
         stroke="var(--c-accent)"
         stroke-width="3"
       />
-      <text x="86" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">一端固定在墙上</text>
+      <text x="86" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        一端固定在墙上
+      </text>
     </g>
     <g transform="translate(36, 0)">
       <path
@@ -67,7 +69,9 @@
         stroke="var(--c-accent)"
         stroke-width="3"
       />
-      <text x="237" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">两端反向拉</text>
+      <text x="237" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        两端反向拉
+      </text>
     </g>
     <g transform="translate(82, 0)">
       <line x1="326" y1="104" x2="500" y2="104" stroke="var(--c-neutral-600)" stroke-width="2.4" />
@@ -113,7 +117,9 @@
         stroke="var(--c-accent)"
         stroke-width="3"
       />
-      <text x="404" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">粗糙面上静止</text>
+      <text x="404" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        粗糙面上静止
+      </text>
     </g>
     <g transform="translate(128, 0)">
       <line x1="508" y1="104" x2="682" y2="104" stroke="var(--c-neutral-600)" stroke-width="2.4" />
@@ -159,7 +165,9 @@
         stroke="var(--c-accent)"
         stroke-width="3"
       />
-      <text x="588" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">粗糙面上匀速</text>
+      <text x="588" y="132" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        粗糙面上匀速
+      </text>
     </g>
   </svg>
 </template>

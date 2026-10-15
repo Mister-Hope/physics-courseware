@@ -293,7 +293,12 @@ onUnmounted(() => cancelAnimationFrame(raf));
   <!-- 第 5 页：伽利略理想斜面实验——三条轨道逐条演示；最后小球在水平面上永不停息地匀速滚下去 -->
   <svg class="fig-incline" viewBox="0 100 1120 260" xmlns="http://www.w3.org/2000/svg" @click="advance">
     <!-- 1. 无限长水平地面主线与循环左移的地面斜剖线（实现无尽轨道效果） -->
-    <g :transform="`translate(${-groundTickOffset}, 0)`" stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke-width="1.6" stroke-linecap="round">
+    <g
+      :transform="`translate(${-groundTickOffset}, 0)`"
+      stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+      stroke-width="1.6"
+      stroke-linecap="round"
+    >
       <line v-for="tx in GROUND_TICKS" :key="`tick-${tx}`" :x1="tx" :y1="330" :x2="tx - 10" :y2="342" />
     </g>
     <line x1="-40" y1="330" x2="1160" y2="330" :stroke="groundStroke" :stroke-width="groundWidth" stroke-linecap="round" />
@@ -301,11 +306,30 @@ onUnmounted(() => cancelAnimationFrame(raf));
     <!-- 2. 斜面轨道组（最后一步随 sceneOffset 平滑移出左边界） -->
     <g :transform="`translate(${-sceneOffset}, 0)`">
       <!-- 左侧斜面三角底座暗影衬托 -->
-      <polygon :points="`${LEFT_TOP.x},${LEFT_TOP.y} ${LEFT_TOP.x},${VERTEX.y} ${VERTEX.x},${VERTEX.y}`" fill="color-mix(in srgb, var(--c-text-dim) 8%, transparent)" />
-      <line :x1="LEFT_TOP.x" :y1="LEFT_TOP.y" :x2="LEFT_TOP.x" :y2="VERTEX.y" stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)" stroke-width="1.6" stroke-dasharray="5 4" />
+      <polygon
+        :points="`${LEFT_TOP.x},${LEFT_TOP.y} ${LEFT_TOP.x},${VERTEX.y} ${VERTEX.x},${VERTEX.y}`"
+        fill="color-mix(in srgb, var(--c-text-dim) 8%, transparent)"
+      />
+      <line
+        :x1="LEFT_TOP.x"
+        :y1="LEFT_TOP.y"
+        :x2="LEFT_TOP.x"
+        :y2="VERTEX.y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="5 4"
+      />
 
       <!-- 左侧释放斜面轨道 -->
-      <line :x1="LEFT_TOP.x" :y1="LEFT_TOP.y" :x2="VERTEX.x" :y2="VERTEX.y" stroke="color-mix(in srgb, var(--c-neutral-300) 82%, transparent)" stroke-width="4.4" stroke-linecap="round" />
+      <line
+        :x1="LEFT_TOP.x"
+        :y1="LEFT_TOP.y"
+        :x2="VERTEX.x"
+        :y2="VERTEX.y"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 82%, transparent)"
+        stroke-width="4.4"
+        stroke-linecap="round"
+      />
 
       <!-- 右侧三条不同倾角的对接斜面轨道及序号标注 -->
       <line
@@ -332,7 +356,15 @@ onUnmounted(() => cancelAnimationFrame(raf));
       </text>
 
       <!-- “同一高度”水平虚线与完整文字标注 -->
-      <line :x1="releaseBall.x" :y1="SAME_Y" x2="942" :y2="SAME_Y" stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)" stroke-width="2" stroke-dasharray="8 6" />
+      <line
+        :x1="releaseBall.x"
+        :y1="SAME_Y"
+        x2="942"
+        :y2="SAME_Y"
+        stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)"
+        stroke-width="2"
+        stroke-dasharray="8 6"
+      />
       <text x="956" :y="SAME_Y + 7" font-size="21" fill="var(--c-accent)" font-weight="600">同一高度</text>
 
       <!-- 释放点与三条轨道最高点的球心等高虚线圆环 -->

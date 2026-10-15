@@ -22,7 +22,15 @@ const parabola = (from: { x: number; y: number }, to: { x: number; y: number }):
   <div class="ground-hit">
     <svg viewBox="0 0 540 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="同一高度、初速度分别为 v0 与 2v0 的平抛落到水平面上">
       <SurfaceHatch :from="{ x: 40, y: GROUND_Y }" :to="{ x: 500, y: GROUND_Y }" side="below" />
-      <line :x1="62" :y1="O_SLOW.y" :x2="62" :y2="GROUND_Y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.5" stroke-dasharray="6 6" />
+      <line
+        :x1="62"
+        :y1="O_SLOW.y"
+        :x2="62"
+        :y2="GROUND_Y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
+        stroke-width="1.5"
+        stroke-dasharray="6 6"
+      />
       <line x1="52" y1="104" x2="72" y2="104" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="1.5" />
       <line x1="52" y1="118" x2="72" y2="118" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="1.5" />
       <line x1="52" y1="282" x2="72" y2="282" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="1.5" />

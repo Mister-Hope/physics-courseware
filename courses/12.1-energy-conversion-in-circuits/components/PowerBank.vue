@@ -24,9 +24,18 @@
         <defs>
           <!-- 充电宝质感外壳渐变 -->
           <linearGradient id="pb-body-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-surface-solid) 95%, transparent)" />
-            <stop offset="50%" stop-color="color-mix(in srgb, var(--c-neutral-900) 98%, transparent)" />
-            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)" />
+            <stop
+              offset="0%"
+              stop-color="color-mix(in srgb, var(--c-surface-solid) 95%, transparent)"
+            />
+            <stop
+              offset="50%"
+              stop-color="color-mix(in srgb, var(--c-neutral-900) 98%, transparent)"
+            />
+            <stop
+              offset="100%"
+              stop-color="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)"
+            />
           </linearGradient>
 
           <!-- 手机前面板黑晶渐变 -->
@@ -45,7 +54,14 @@
 
         <!-- ==================== 1. 充电宝 (Power Bank) ==================== -->
         <!-- 标签 -->
-        <text x="126" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="var(--c-text-dim)">
+        <text
+          x="126"
+          y="38"
+          text-anchor="middle"
+          font-size="14"
+          font-weight="600"
+          fill="var(--c-text-dim)"
+        >
           充电宝
         </text>
 
@@ -100,7 +116,14 @@
         </text>
 
         <!-- 屏幕分界线 -->
-        <line x1="68" y1="106" x2="184" y2="106" stroke="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke-width="1" />
+        <line
+          x1="68"
+          y1="106"
+          x2="184"
+          y2="106"
+          stroke="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+          stroke-width="1"
+        />
 
         <!-- 屏幕电压读数：3.7 V -->
         <text
@@ -185,7 +208,14 @@
 
         <!-- ==================== 3. 手机 (Smartphone) ==================== -->
         <!-- 标签 -->
-        <text x="364" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="var(--c-text-dim)">
+        <text
+          x="364"
+          y="38"
+          text-anchor="middle"
+          font-size="14"
+          font-weight="600"
+          fill="var(--c-text-dim)"
+        >
           手机
         </text>
 
@@ -238,7 +268,14 @@
             transform="rotate(-40)"
           />
           <polygon points="2,-12 -6,-1 -1,-1 -4,12 7,-2 1,-2 2,-12" fill="var(--c-ok)" />
-          <text x="0" y="42" text-anchor="middle" font-size="13" font-weight="800" fill="var(--c-ok)">
+          <text
+            x="0"
+            y="42"
+            text-anchor="middle"
+            font-size="13"
+            font-weight="800"
+            fill="var(--c-ok)"
+          >
             78%
           </text>
         </g>

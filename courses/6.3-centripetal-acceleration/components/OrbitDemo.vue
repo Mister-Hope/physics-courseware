@@ -131,7 +131,10 @@ onUnmounted(() => cancelAnimationFrame(raf));
       stroke-width="1.4"
       opacity="0.96"
     />
-    <g clip-path="url(#orbit-earth-clip)" fill="color-mix(in srgb, var(--c-velocity-light) 30%, transparent)">
+    <g
+      clip-path="url(#orbit-earth-clip)"
+      fill="color-mix(in srgb, var(--c-velocity-light) 30%, transparent)"
+    >
       <path
         d="M 214 148 C 224 130 250 124 262 138 C 272 150 258 162 266 176 C 274 190 260 206 244 200 C 228 194 206 168 214 148 z"
       />

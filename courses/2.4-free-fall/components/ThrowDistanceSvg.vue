@@ -45,18 +45,66 @@ const down = { x: DOWN_X, y: LEVEL_DOWN_Y };
       </marker>
     </defs>
     <!-- 四条水平参考线：最高点 20 m、上方 15 m、抛出点 O、下方 15 m -->
-    <line :x1="LEVEL_LEFT" :y1="TOP_Y" :x2="LEVEL_RIGHT" :y2="TOP_Y" stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)" stroke-width="1.1" stroke-dasharray="3 3" />
-    <line :x1="LEVEL_LEFT" :y1="LEVEL_UP_Y" :x2="LEVEL_RIGHT" :y2="LEVEL_UP_Y" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.2" stroke-dasharray="4 4" />
-    <line :x1="LEVEL_LEFT" :y1="ZERO_Y" :x2="LEVEL_RIGHT" :y2="ZERO_Y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.4" stroke-dasharray="5 4" />
-    <line :x1="LEVEL_LEFT" :y1="LEVEL_DOWN_Y" :x2="LEVEL_RIGHT" :y2="LEVEL_DOWN_Y" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.2" stroke-dasharray="4 4" />
+    <line
+      :x1="LEVEL_LEFT"
+      :y1="TOP_Y"
+      :x2="LEVEL_RIGHT"
+      :y2="TOP_Y"
+      stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)"
+      stroke-width="1.1"
+      stroke-dasharray="3 3"
+    />
+    <line
+      :x1="LEVEL_LEFT"
+      :y1="LEVEL_UP_Y"
+      :x2="LEVEL_RIGHT"
+      :y2="LEVEL_UP_Y"
+      stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      stroke-width="1.2"
+      stroke-dasharray="4 4"
+    />
+    <line
+      :x1="LEVEL_LEFT"
+      :y1="ZERO_Y"
+      :x2="LEVEL_RIGHT"
+      :y2="ZERO_Y"
+      stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+      stroke-width="1.4"
+      stroke-dasharray="5 4"
+    />
+    <line
+      :x1="LEVEL_LEFT"
+      :y1="LEVEL_DOWN_Y"
+      :x2="LEVEL_RIGHT"
+      :y2="LEVEL_DOWN_Y"
+      stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      stroke-width="1.2"
+      stroke-dasharray="4 4"
+    />
     <!-- 左侧两个 15 m 尺寸标注 -->
     <line :x1="RULE_X" :y1="LEVEL_UP_Y + 4" :x2="RULE_X" :y2="ZERO_Y - 4" stroke="var(--c-text-dim)" stroke-width="1.3" />
     <line :x1="RULE_X" :y1="ZERO_Y + 4" :x2="RULE_X" :y2="LEVEL_DOWN_Y - 4" stroke="var(--c-text-dim)" stroke-width="1.3" />
     <text :x="RULE_X - 8" :y="UP_MID + 5" text-anchor="end" font-size="13" fill="var(--c-text-dim)">15 m</text>
     <text :x="RULE_X - 8" :y="DOWN_MID + 5" text-anchor="end" font-size="13" fill="var(--c-text-dim)">15 m</text>
     <!-- 上升竖直线（左轨）与下落竖直线（右轨）：像铁轨一样并排，避免画成抛物线误导为斜抛 -->
-    <line :x1="UP_X" :y1="ZERO_Y" :x2="UP_X" :y2="TOP_Y" stroke="color-mix(in srgb, var(--c-accent) 68%, transparent)" stroke-width="1.8" stroke-dasharray="5 4" />
-    <line :x1="DOWN_X" :y1="TOP_Y" :x2="DOWN_X" :y2="LEVEL_DOWN_Y" stroke="color-mix(in srgb, var(--c-accent) 68%, transparent)" stroke-width="1.8" stroke-dasharray="5 4" />
+    <line
+      :x1="UP_X"
+      :y1="ZERO_Y"
+      :x2="UP_X"
+      :y2="TOP_Y"
+      stroke="color-mix(in srgb, var(--c-accent) 68%, transparent)"
+      stroke-width="1.8"
+      stroke-dasharray="5 4"
+    />
+    <line
+      :x1="DOWN_X"
+      :y1="TOP_Y"
+      :x2="DOWN_X"
+      :y2="LEVEL_DOWN_Y"
+      stroke="color-mix(in srgb, var(--c-accent) 68%, transparent)"
+      stroke-width="1.8"
+      stroke-dasharray="5 4"
+    />
     <!-- 左轨向上箭头、右轨向下箭头 -->
     <line :x1="UP_X" :y1="UP_MID + 8" :x2="UP_X" :y2="UP_MID - 6" stroke="var(--c-accent)" stroke-width="1.8" marker-end="url(#vt15-rail-arrow)" />
     <line :x1="DOWN_X" :y1="UP_MID - 6" :x2="DOWN_X" :y2="UP_MID + 8" stroke="var(--c-accent)" stroke-width="1.8" marker-end="url(#vt15-rail-arrow)" />

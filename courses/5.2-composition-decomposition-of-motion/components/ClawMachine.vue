@@ -125,11 +125,24 @@ const yMotorText = computed(() =>
         stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)"
         stroke-width="1.6"
       />
-      <text x="100" y="60" font-family="KaTeX_Main" font-size="15" fill="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)">
+      <text
+        x="100"
+        y="60"
+        font-family="KaTeX_Main"
+        font-size="15"
+        fill="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)"
+      >
         俯视：从上往下看
       </text>
       <!-- 两侧导轨（2 号电机驱动横梁沿它前后移动） -->
-      <rect :x="RAIL_LEFT - 4" y="78" width="8" height="304" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" />
+      <rect
+        :x="RAIL_LEFT - 4"
+        y="78"
+        width="8"
+        height="304"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      />
       <rect
         :x="RAIL_RIGHT - 4"
         y="78"

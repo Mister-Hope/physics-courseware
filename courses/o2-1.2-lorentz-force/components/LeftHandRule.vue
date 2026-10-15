@@ -127,11 +127,25 @@ const palmText = computed(() =>
 
         <!-- B 符号 ⊙ / ⊗ -->
         <g v-if="bDir === 'out'">
-          <circle cx="424" cy="118" r="17" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+          <circle
+            cx="424"
+            cy="118"
+            r="17"
+            fill="none"
+            stroke="var(--c-accent)"
+            stroke-width="2.6"
+          />
           <circle cx="424" cy="118" r="4.2" fill="var(--c-accent)" />
         </g>
         <g v-else>
-          <circle cx="424" cy="118" r="17" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+          <circle
+            cx="424"
+            cy="118"
+            r="17"
+            fill="none"
+            stroke="var(--c-accent)"
+            stroke-width="2.6"
+          />
           <line x1="412" y1="106" x2="436" y2="130" stroke="var(--c-accent)" stroke-width="2.4" />
           <line x1="436" y1="106" x2="412" y2="130" stroke="var(--c-accent)" stroke-width="2.4" />
         </g>
@@ -234,13 +248,32 @@ const palmText = computed(() =>
 
           <!-- 掌心的磁场记号（磁感线穿入掌心处；四种变换都把它映回同一点） -->
           <g v-if="step >= 2">
-            <circle cx="197" cy="186" r="13" fill="color-mix(in srgb, var(--c-bg) 55%, transparent)" />
+            <circle
+              cx="197"
+              cy="186"
+              r="13"
+              fill="color-mix(in srgb, var(--c-bg) 55%, transparent)"
+            />
             <g v-if="bDir === 'out'">
-              <circle cx="197" cy="186" r="11" fill="none" stroke="var(--c-accent)" stroke-width="2" />
+              <circle
+                cx="197"
+                cy="186"
+                r="11"
+                fill="none"
+                stroke="var(--c-accent)"
+                stroke-width="2"
+              />
               <circle cx="197" cy="186" r="2.8" fill="var(--c-accent)" />
             </g>
             <g v-else>
-              <circle cx="197" cy="186" r="11" fill="none" stroke="var(--c-accent)" stroke-width="2" />
+              <circle
+                cx="197"
+                cy="186"
+                r="11"
+                fill="none"
+                stroke="var(--c-accent)"
+                stroke-width="2"
+              />
               <line x1="189" y1="178" x2="205" y2="194" stroke="var(--c-accent)" stroke-width="2" />
               <line x1="205" y1="178" x2="189" y2="194" stroke="var(--c-accent)" stroke-width="2" />
             </g>

@@ -1,7 +1,13 @@
 <template>
   <!-- 第 16 页：把 OB、OD 平移到 E、A 后分别与 OE、OA 配对成 OC -->
   <svg viewBox="0 0 300 245" width="100%" style="max-width: 14.5rem" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="34,130 79,52 169,52 214,130 169,208 79,208" fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.2" opacity="0.8" />
+    <polygon
+      points="34,130 79,52 169,52 214,130 169,208 79,208"
+      fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.2"
+      opacity="0.8"
+    />
     <CourseArrow :from="{ x: 34, y: 130 }" :to="{ x: 79, y: 52 }" stroke="var(--c-physics)" stroke-width="2.8" />
     <CourseArrow :from="{ x: 79, y: 208 }" :to="{ x: 214, y: 130 }" stroke="var(--c-velocity)" stroke-width="2.8" stroke-dasharray="8 4" />
     <CourseArrow :from="{ x: 34, y: 130 }" :to="{ x: 79, y: 208 }" stroke="var(--c-physics)" stroke-width="2.8" />

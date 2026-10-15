@@ -23,7 +23,14 @@ const path = (offset: number): string => {
     <g v-for="offset in [LEFT, RIGHT]" :key="`panel-${offset}`">
       <path :d="`M ${34 + offset} 92 L ${104 + offset} 92`" fill="none" stroke="var(--c-text-dim)" stroke-width="10" stroke-linecap="round" />
       <path :d="path(offset)" fill="none" stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)" stroke-width="2" stroke-dasharray="7 6" />
-      <circle v-for="i in 3" :key="`dot-${offset}-${i}`" :cx="122 + offset + 112 * (i / 3.6)" :cy="GROOVE_Y + 26 * (i / 3.6) ** 2" r="5" fill="var(--c-velocity)" />
+      <circle
+        v-for="i in 3"
+        :key="`dot-${offset}-${i}`"
+        :cx="122 + offset + 112 * (i / 3.6)"
+        :cy="GROOVE_Y + 26 * (i / 3.6) ** 2"
+        r="5"
+        fill="var(--c-velocity)"
+      />
       <circle :cx="86 + offset" :cy="GROOVE_Y - R" :r="R" fill="var(--c-velocity)" stroke="var(--c-velocity-light)" stroke-width="2" />
     </g>
     <line :x1="110" :y1="GROOVE_Y" :x2="238" :y2="GROOVE_Y" stroke="var(--c-force)" stroke-width="2" stroke-dasharray="8 5" />

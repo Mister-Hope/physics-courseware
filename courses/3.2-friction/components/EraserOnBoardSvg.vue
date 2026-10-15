@@ -2,8 +2,26 @@
   <!-- 板擦在黑板上滑动：摩擦力与速度反向 -->
   <svg viewBox="0 0 300 230" class="fig-svg" xmlns="http://www.w3.org/2000/svg">
     <!-- 1. 黑板外框与深绿灰板面 -->
-    <rect x="16" y="20" width="268" height="174" rx="10" fill="color-mix(in srgb, var(--c-surface-solid) 75%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="2" />
-    <rect x="24" y="28" width="252" height="156" rx="6" fill="rgba(15,28,36,0.88)" stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke-width="1.2" />
+    <rect
+      x="16"
+      y="20"
+      width="268"
+      height="174"
+      rx="10"
+      fill="color-mix(in srgb, var(--c-surface-solid) 75%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+      stroke-width="2"
+    />
+    <rect
+      x="24"
+      y="28"
+      width="252"
+      height="156"
+      rx="6"
+      fill="rgba(15,28,36,0.88)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)"
+      stroke-width="1.2"
+    />
 
     <!-- 黑板左上角微弱标题装饰与板面粉笔字残迹 -->
     <text x="36" y="48" font-size="12" fill="var(--c-text-dim)" opacity="0.55">黑板面</text>
@@ -21,9 +39,27 @@
 
     <!-- 3. 双层立体板擦（底层深色毛毡擦面 + 上层蓝色握柄外壳 + 防滑凹槽） -->
     <!-- 底层贴合黑板的毛毡垫 -->
-    <rect x="100" y="87" width="100" height="62" rx="9" fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" />
+    <rect
+      x="100"
+      y="87"
+      width="100"
+      height="62"
+      rx="9"
+      fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
+      stroke-width="1.6"
+    />
     <!-- 上层板擦握柄壳体 -->
-    <rect x="104" y="91" width="92" height="54" rx="7" fill="color-mix(in srgb, var(--c-physics-light) 20%, transparent)" stroke="var(--c-accent-2)" stroke-width="2.2" />
+    <rect
+      x="104"
+      y="91"
+      width="92"
+      height="54"
+      rx="7"
+      fill="color-mix(in srgb, var(--c-physics-light) 20%, transparent)"
+      stroke="var(--c-accent-2)"
+      stroke-width="2.2"
+    />
     <!-- 握柄上下侧内凹防滑棱线 -->
     <line x1="116" y1="97" x2="184" y2="97" stroke="color-mix(in srgb, var(--c-physics-light) 38%, transparent)" stroke-width="1.4" stroke-linecap="round" />
     <line x1="116" y1="139" x2="184" y2="139" stroke="color-mix(in srgb, var(--c-physics-light) 38%, transparent)" stroke-width="1.4" stroke-linecap="round" />
@@ -57,7 +93,16 @@
     </text>
 
     <!-- 6. 黑板底部粉笔槽与粉笔细节 -->
-    <rect x="10" y="192" width="280" height="9" rx="3" fill="color-mix(in srgb, var(--c-neutral-600) 65%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.5" />
+    <rect
+      x="10"
+      y="192"
+      width="280"
+      height="9"
+      rx="3"
+      fill="color-mix(in srgb, var(--c-neutral-600) 65%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
+      stroke-width="1.5"
+    />
     <!-- 粉笔槽上的两截粉笔 -->
     <rect x="64" y="188" width="22" height="4.5" rx="1.8" fill="color-mix(in srgb, var(--c-neutral-50) 85%, transparent)" />
     <rect x="92" y="188" width="16" height="4.5" rx="1.8" fill="color-mix(in srgb, var(--c-accent-glow) 85%, transparent)" />

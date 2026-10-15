@@ -68,7 +68,16 @@ const { tilted = true } = defineProps<{ tilted?: boolean }>();
 
       <!-- ② 固定在木板左端的电火花打点计时器（带锁紧夹座与固定螺栓） -->
       <!-- 夹紧在木板上的金属固定底座（y: 134..143，两侧螺栓锁入木板） -->
-      <rect x="38" y="134" width="62" height="6" rx="1.2" fill="color-mix(in srgb, var(--c-accent) 35%, transparent)" stroke="var(--c-accent)" stroke-width="1.2" />
+      <rect
+        x="38"
+        y="134"
+        width="62"
+        height="6"
+        rx="1.2"
+        fill="color-mix(in srgb, var(--c-accent) 35%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.2"
+      />
       <!-- 底座左端 L 形包角夹具与两个锁紧螺栓（体现计时器牢固固定在木板上） -->
       <path d="M 38 134 L 33 134 L 33 149 L 39 149" fill="none" stroke="var(--c-accent)" stroke-width="1.8" stroke-linejoin="round" />
       <circle cx="44" cy="137" r="1.4" fill="#fef08a" />
@@ -138,7 +147,13 @@ const { tilted = true } = defineProps<{ tilted?: boolean }>();
       <line x1="307" y1="117" x2="373" y2="117" stroke="var(--c-neutral-200)" stroke-width="1.5" stroke-linecap="round" />
 
       <!-- ⑥ 固定在长木板右端的定滑轮金属夹具与双杆支架（彻底解决原版滑轮悬空问题） -->
-      <path d="M 342 139.5 L 351 139.5 L 351 152.5 L 342 152.5" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-neutral-300)" stroke-width="1.4" stroke-linejoin="round" />
+      <path
+        d="M 342 139.5 L 351 139.5 L 351 152.5 L 342 152.5"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+      />
       <circle cx="346.5" cy="146" r="1.4" fill="var(--c-neutral-200)" />
       <line x1="350" y1="142" x2="373" y2="128" stroke="var(--c-text-dim)" stroke-width="3" stroke-linecap="round" />
       <line x1="350" y1="149" x2="373" y2="128" stroke="var(--c-neutral-500)" stroke-width="2" stroke-linecap="round" />

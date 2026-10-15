@@ -13,11 +13,29 @@
       <line x1="150" y1="186" x2="156" y2="224" stroke="var(--c-neutral-500)" stroke-width="2.6" />
 
       <!-- 右侧小孩脚下垫高的木箱（凸显身高差） -->
-      <rect x="336" y="196" width="56" height="28" rx="3" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
+      <rect
+        x="336"
+        y="196"
+        width="56"
+        height="28"
+        rx="3"
+        fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="2"
+      />
       <line x1="336" y1="210" x2="392" y2="210" stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke-width="1.4" />
 
       <!-- 中央掰手腕方桌（桌面 y=156，桌高 68px 符合真实人体坐姿比例） -->
-      <rect x="198" y="154" width="124" height="6" rx="3" fill="color-mix(in srgb, var(--c-neutral-300) 25%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2" />
+      <rect
+        x="198"
+        y="154"
+        width="124"
+        height="6"
+        rx="3"
+        fill="color-mix(in srgb, var(--c-neutral-300) 25%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2"
+      />
       <line x1="212" y1="160" x2="212" y2="224" stroke="var(--c-text-dim)" stroke-width="3" />
       <line x1="308" y1="160" x2="308" y2="224" stroke="var(--c-text-dim)" stroke-width="3" />
     </g>

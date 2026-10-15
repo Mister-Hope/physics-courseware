@@ -173,4 +173,3 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
     />
   </div>
 </template>
-

@@ -6,7 +6,16 @@
     <line x1="170" y1="30" x2="170" y2="60" stroke="var(--c-text-dim)" stroke-width="2.2" />
     <circle cx="170" cy="60" r="5" fill="var(--c-accent)" />
     <line x1="170" y1="60" x2="170" y2="120" stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.8" />
-    <rect x="63" y="110" width="214" height="80" rx="6" fill="color-mix(in srgb, var(--c-velocity) 14%, transparent)" stroke="var(--c-velocity)" stroke-width="2.2" />
+    <rect
+      x="63"
+      y="110"
+      width="214"
+      height="80"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-velocity) 14%, transparent)"
+      stroke="var(--c-velocity)"
+      stroke-width="2.2"
+    />
     <circle cx="83.4" cy="110" r="4" fill="var(--c-velocity)" />
     <circle cx="256.6" cy="110" r="4" fill="var(--c-velocity)" />
     <path d="M 170 115 A 55 55 0 0 0 142.5 107.6" fill="none" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="5 4" />

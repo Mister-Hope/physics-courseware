@@ -7,7 +7,16 @@
       <circle cx="100" cy="22" r="4" fill="var(--c-accent)" opacity="0.8" />
       <circle cx="134" cy="42" r="4" fill="var(--c-velocity)" opacity="0.8" />
     </g>
-    <CourseArrow :from="{ x: 92, y: 92 }" :to="{ x: 206, y: 142 }" stroke="var(--c-accent)" stroke-width="3" opacity="0.9" label="F" :label-dx="-8" :label-dy="18" />
+    <CourseArrow
+      :from="{ x: 92, y: 92 }"
+      :to="{ x: 206, y: 142 }"
+      stroke="var(--c-accent)"
+      stroke-width="3"
+      opacity="0.9"
+      label="F"
+      :label-dx="-8"
+      :label-dy="18"
+    />
     <CourseArrow
       :from="{ x: 92, y: 92 }"
       :to="{ x: 167, y: 125 }"

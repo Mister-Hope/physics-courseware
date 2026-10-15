@@ -31,7 +31,14 @@
       stroke-linecap="round"
     />
     <!-- 滑梯上表面高亮滑道线（水平延伸段 22,210 → 60,210 与主斜面段 60,210 → 300,114） -->
-    <polyline points="22,210 60,210 300,114 314,114" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+    <polyline
+      points="22,210 60,210 300,114 314,114"
+      fill="none"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
     <!-- 最高点与斜面底端转折点标记 -->
     <circle cx="300" cy="114" r="2.6" fill="var(--c-neutral-300)" />
     <circle cx="60" cy="210" r="2.6" fill="var(--c-accent)" />
@@ -54,7 +61,16 @@
     <!-- ==================== 5. 沿滑梯坐姿下滑的小孩（贴合滑道接触点 240,138，质心恰在 235.2,125.9） ==================== -->
     <g transform="translate(240, 138) rotate(-21.8)" stroke-linecap="round" stroke-linejoin="round" fill="none">
       <!-- 臀部下方滑板坐垫（贴合滑梯上表面 y=0） -->
-      <rect x="-12" y="-3" width="19" height="2.4" rx="1.2" fill="color-mix(in srgb, var(--c-accent) 35%, transparent)" stroke="var(--c-accent)" stroke-width="1.2" />
+      <rect
+        x="-12"
+        y="-3"
+        width="19"
+        height="2.4"
+        rx="1.2"
+        fill="color-mix(in srgb, var(--c-accent) 35%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.2"
+      />
       <!-- 远端内侧腿 -->
       <path d="M 1.5 -4.5 L -9 -9 L -19 -3.5 L -21 -6.5" stroke="var(--c-neutral-500)" stroke-width="2.6" />
       <!-- 坐姿微后仰躯干（经过质心 0, -13） -->
@@ -85,9 +101,23 @@
 
     <g v-click="3">
       <!-- 重力沿斜面向下分力 G_x -->
-      <CourseArrow :from="{ x: 235.2, y: 125.9 }" :to="{ x: 211.1, y: 135.5 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.2" stroke-dasharray="6 4" />
+      <CourseArrow
+        :from="{ x: 235.2, y: 125.9 }"
+        :to="{ x: 211.1, y: 135.5 }"
+        :head-size="9"
+        stroke="var(--c-force)"
+        stroke-width="2.2"
+        stroke-dasharray="6 4"
+      />
       <!-- 重力垂直斜面向下分力 G_y -->
-      <CourseArrow :from="{ x: 235.2, y: 125.9 }" :to="{ x: 259.3, y: 186.2 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.2" stroke-dasharray="6 4" />
+      <CourseArrow
+        :from="{ x: 235.2, y: 125.9 }"
+        :to="{ x: 259.3, y: 186.2 }"
+        :head-size="9"
+        stroke="var(--c-force)"
+        stroke-width="2.2"
+        stroke-dasharray="6 4"
+      />
     </g>
 
     <!-- 质心共点圆点与三个力（点击 2 出现） -->

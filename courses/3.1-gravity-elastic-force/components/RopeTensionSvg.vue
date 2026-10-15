@@ -1,8 +1,26 @@
 <template>
   <!-- 第 26 页「绳上的弹力：张力」：左图绳被拉紧、两端物体都被绳往中间拉；右图两端靠得更近、绳松弛、张力为 0 -->
   <svg class="fig" viewBox="0 44 640 146" xmlns="http://www.w3.org/2000/svg">
-    <rect x="40" y="70" width="34" height="60" rx="8" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.4" />
-    <rect x="266" y="70" width="34" height="60" rx="8" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+    <rect
+      x="40"
+      y="70"
+      width="34"
+      height="60"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.4"
+    />
+    <rect
+      x="266"
+      y="70"
+      width="34"
+      height="60"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.4"
+    />
     <line x1="74" y1="100" x2="266" y2="100" stroke="var(--c-accent)" stroke-width="3" />
     <CourseArrow :from="{ x: 74, y: 100 }" :to="{ x: 118, y: 100 }" stroke="var(--c-accent)" stroke-width="3.4" />
     <CourseArrow :from="{ x: 266, y: 100 }" :to="{ x: 222, y: 100 }" stroke="var(--c-accent)" stroke-width="3.4" />
@@ -16,8 +34,26 @@
     </text>
     <text x="170" y="170" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">被拉紧：两端都被往中间拉</text>
 
-    <rect x="380" y="70" width="34" height="60" rx="8" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke="var(--c-neutral-500)" stroke-width="2.4" />
-    <rect x="546" y="70" width="34" height="60" rx="8" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke="var(--c-neutral-500)" stroke-width="2.4" />
+    <rect
+      x="380"
+      y="70"
+      width="34"
+      height="60"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="2.4"
+    />
+    <rect
+      x="546"
+      y="70"
+      width="34"
+      height="60"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="2.4"
+    />
     <path d="M 414 100 Q 480 168 546 100" fill="none" stroke="var(--c-neutral-500)" stroke-width="3" stroke-linecap="round" />
     <circle cx="470" cy="112" r="4" fill="var(--c-neutral-500)" />
     <text x="480" y="170" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">两端靠得更近：绳松弛，张力为 0</text>

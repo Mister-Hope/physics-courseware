@@ -69,14 +69,29 @@ const Olabel: Point = { x: O.x - 18, y: O.y + 26 };
       <circle :cx="O.x" :cy="O.y" r="4.5" fill="var(--c-text-dim)" />
       <text :x="Olabel.x" :y="Olabel.y" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-text-dim)">O</text>
       <g :class="{ 'centri-hidden': !showEscape }">
-        <line :x1="O.x" :y1="O.y" :x2="P.x" :y2="P.y" stroke="color-mix(in srgb, var(--c-text-dim) 85%, transparent)" stroke-width="1.8" stroke-dasharray="7 6" />
+        <line
+          :x1="O.x"
+          :y1="O.y"
+          :x2="P.x"
+          :y2="P.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 85%, transparent)"
+          stroke-width="1.8"
+          stroke-dasharray="7 6"
+        />
         <path :d="markPath" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="1.4" />
         <CourseArrow :from="vFrom" :to="V_TIP" stroke="var(--c-velocity)" :stroke-width="3" />
         <text :x="vLabel.x" :y="vLabel.y" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-velocity)">v</text>
         <CourseArrow :from="V_TIP" :to="ESCAPE_TIP" stroke="var(--c-accent)" :stroke-width="3.4" stroke-dasharray="12 8" />
         <text :x="escapeLabel.x" :y="escapeLabel.y" text-anchor="middle" font-size="17" fill="var(--c-accent)">沿切线飞出</text>
       </g>
-      <circle :cx="P.x" :cy="P.y" :r="BALL_R" fill="url(#tangent-escape-ball)" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="1" />
+      <circle
+        :cx="P.x"
+        :cy="P.y"
+        :r="BALL_R"
+        fill="url(#tangent-escape-ball)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)"
+        stroke-width="1"
+      />
       <text :x="Plabel.x" :y="Plabel.y" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text)">P</text>
     </svg>
   </div>

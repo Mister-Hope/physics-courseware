@@ -15,10 +15,37 @@ const toggle = (): void => {
     <!-- ==================== 1. 离弦后的飞行轨迹线与破空尾迹 ==================== -->
     <g class="trail" :class="{ on: flying }">
       <!-- 主轨迹虚线 -->
-      <line x1="236" y1="122" x2="430" y2="122" stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)" stroke-width="2.6" stroke-dasharray="9 7" stroke-linecap="round" />
+      <line
+        x1="236"
+        y1="122"
+        x2="430"
+        y2="122"
+        stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)"
+        stroke-width="2.6"
+        stroke-dasharray="9 7"
+        stroke-linecap="round"
+      />
       <!-- 上下两侧轻盈气流线 -->
-      <line x1="310" y1="106" x2="418" y2="106" stroke="color-mix(in srgb, var(--c-physics-light) 28%, transparent)" stroke-width="1.6" stroke-dasharray="14 10" stroke-linecap="round" />
-      <line x1="330" y1="138" x2="418" y2="138" stroke="color-mix(in srgb, var(--c-physics-light) 28%, transparent)" stroke-width="1.6" stroke-dasharray="14 10" stroke-linecap="round" />
+      <line
+        x1="310"
+        y1="106"
+        x2="418"
+        y2="106"
+        stroke="color-mix(in srgb, var(--c-physics-light) 28%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="14 10"
+        stroke-linecap="round"
+      />
+      <line
+        x1="330"
+        y1="138"
+        x2="418"
+        y2="138"
+        stroke="color-mix(in srgb, var(--c-physics-light) 28%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="14 10"
+        stroke-linecap="round"
+      />
     </g>
 
     <!-- ==================== 2. 反曲弓与弓弦（分“拉满蓄力”与“离弦回弹”两态） ==================== -->
@@ -98,13 +125,23 @@ const toggle = (): void => {
     <g class="arrow" :class="{ fly: flying }" stroke-linecap="round" stroke-linejoin="round">
       <!-- ① 箭羽（上下对称流线型尾羽 + 内部斜向羽翎纹理，x: 108..148） -->
       <!-- 上片尾羽 -->
-      <path d="M 108 120.2 L 116 109.5 Q 132 108.5 146 120.2 Z" fill="color-mix(in srgb, var(--c-force) 26%, transparent)" stroke="var(--c-force)" stroke-width="1.7" />
+      <path
+        d="M 108 120.2 L 116 109.5 Q 132 108.5 146 120.2 Z"
+        fill="color-mix(in srgb, var(--c-force) 26%, transparent)"
+        stroke="var(--c-force)"
+        stroke-width="1.7"
+      />
       <line x1="116" y1="120" x2="120" y2="110.5" stroke="var(--c-force)" stroke-width="1.1" opacity="0.7" />
       <line x1="124" y1="120" x2="128" y2="111.5" stroke="var(--c-force)" stroke-width="1.1" opacity="0.7" />
       <line x1="132" y1="120" x2="135.5" y2="113.5" stroke="var(--c-force)" stroke-width="1.1" opacity="0.7" />
 
       <!-- 下片尾羽 -->
-      <path d="M 108 123.8 L 116 134.5 Q 132 135.5 146 123.8 Z" fill="color-mix(in srgb, var(--c-force) 26%, transparent)" stroke="var(--c-force)" stroke-width="1.7" />
+      <path
+        d="M 108 123.8 L 116 134.5 Q 132 135.5 146 123.8 Z"
+        fill="color-mix(in srgb, var(--c-force) 26%, transparent)"
+        stroke="var(--c-force)"
+        stroke-width="1.7"
+      />
       <line x1="116" y1="124" x2="120" y2="133.5" stroke="var(--c-force)" stroke-width="1.1" opacity="0.7" />
       <line x1="124" y1="124" x2="128" y2="132.5" stroke="var(--c-force)" stroke-width="1.1" opacity="0.7" />
       <line x1="132" y1="124" x2="135.5" y2="130.5" stroke="var(--c-force)" stroke-width="1.1" opacity="0.7" />
@@ -113,7 +150,16 @@ const toggle = (): void => {
       <path d="M 107 119.6 L 101 119.6 L 103.5 122 L 101 124.4 L 107 124.4 Z" fill="var(--c-neutral-300)" stroke="var(--c-text-dim)" stroke-width="1.2" />
 
       <!-- ③ 箭杆（修长木质/碳素箭杆，x: 106..286, y: 120.2..123.8） -->
-      <rect x="106" y="120.2" width="180" height="3.6" rx="1.2" fill="color-mix(in srgb, var(--c-accent) 32%, transparent)" stroke="var(--c-accent)" stroke-width="1.6" />
+      <rect
+        x="106"
+        y="120.2"
+        width="180"
+        height="3.6"
+        rx="1.2"
+        fill="color-mix(in srgb, var(--c-accent) 32%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.6"
+      />
       <!-- 箭羽前端扎线金箍（x: 147..152） -->
       <line x1="148" y1="119.8" x2="148" y2="124.2" stroke="var(--c-neutral-50)" stroke-width="1.5" />
       <line x1="152" y1="119.8" x2="152" y2="124.2" stroke="var(--c-force)" stroke-width="1.5" />

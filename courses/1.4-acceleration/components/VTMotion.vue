@@ -375,7 +375,14 @@ onUnmounted(() => cancelAnimationFrame(frame));
         stroke-dasharray="5 4"
         opacity="0.8"
       />
-      <circle :cx="ball.x" :cy="ball.y" r="7" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="2" />
+      <circle
+        :cx="ball.x"
+        :cy="ball.y"
+        r="7"
+        fill="var(--c-accent)"
+        stroke="var(--c-bg-soft)"
+        stroke-width="2"
+      />
     </svg>
 
     <div class="vt-panel">

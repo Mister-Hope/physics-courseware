@@ -113,9 +113,7 @@
 .mf-head {
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--c-border-glow);
-
   color: var(--c-accent);
-
   font-weight: 700;
 }
 
@@ -125,7 +123,7 @@
 
 /* 行首标签列挂共享 .mini-note（小字 + 次要色）；列首的扫读图标与共享 .mini-title > svg 同色 */
 .mf-cell > svg {
+  vertical-align: -0.12em;
   margin-right: 0.3rem;
   color: var(--c-accent-2);
-  vertical-align: -0.12em;
 }

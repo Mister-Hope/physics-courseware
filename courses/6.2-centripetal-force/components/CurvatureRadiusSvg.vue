@@ -61,7 +61,17 @@ const C = { x: 215, y: 215 };
     >
       P
     </text>
-    <text x="150" y="94" font-family="KaTeX_Main" font-size="17" fill="var(--c-neutral-300)" text-anchor="middle" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+    <text
+      x="150"
+      y="94"
+      font-family="KaTeX_Main"
+      font-size="17"
+      fill="var(--c-neutral-300)"
+      text-anchor="middle"
+      stroke="var(--c-bg-soft)"
+      stroke-width="3"
+      paint-order="stroke"
+    >
       切线
     </text>
   </svg>

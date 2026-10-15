@@ -665,8 +665,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 /* 速度分解演示图：840px（渲染高 ≈ 420px），第 14 页 `.page-grow` 可用高度 ≈ 439px，留出余量；
    宽度上限走共享 .fig-svg 读的 --fig-max */
 .fig-split {
-  width: 100%;
-
   --fig-max: 840px;
+  width: 100%;
 }
 </style>

@@ -24,7 +24,16 @@
     <!-- ==================== 2. 右侧：极简几何桌子 ==================== -->
     <g stroke-linecap="round" stroke-linejoin="round">
       <!-- 桌面与横档 -->
-      <rect x="96" y="53" width="84" height="7" rx="2.5" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" stroke="var(--c-accent)" stroke-width="2" />
+      <rect
+        x="96"
+        y="53"
+        width="84"
+        height="7"
+        rx="2.5"
+        fill="color-mix(in srgb, var(--c-accent) 20%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="2"
+      />
       <line x1="105" y1="68" x2="171" y2="68" stroke="var(--c-neutral-500)" stroke-width="1.8" />
       <!-- 桌腿 -->
       <line x1="105" y1="60" x2="105" y2="111" stroke="var(--c-neutral-300)" stroke-width="2.8" />

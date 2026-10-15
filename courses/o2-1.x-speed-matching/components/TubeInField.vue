@@ -439,8 +439,7 @@ const MATH_FONT = "KaTeX_Math, 'Times New Roman', serif";
    第 12 页的三句分析已改成与图并排的左栏，不再压在图下面，所以图可以吃满栏宽。
    ⚠️ 这个上限走 --fig-max：共享的 .fig-svg 读它，写在 .fig-tube 上就只影响本图（scoped 权重、只对本组件生效）。 */
 .fig-tube {
-  width: 100%;
-
   --fig-max: 540px;
+  width: 100%;
 }
 </style>

@@ -5,7 +5,7 @@
    前缀（4 个概念前缀 + 1 个页面前缀）：
      intro- 引入页数据表 / 结论气泡 · cmp- 对比类比（定义三栏、方向对比条、对比计算块）
      chain- "变化量大 / 变化快"六格链条 · p14- 第 14 页高铁枕木滚动（页面专属，§6 的 p<页号>-）
-     vt-   v-t 交互组件（在 components/VTMotion.vue 的 <style scoped> 内）
+     vt-   v-t 交互组件（在 components/VTMotion.vue 的 \3c style scoped> 内）
    色值一律 var(--c-*) / color-mix(...)、圆角一律 var(--radius-*)、字号一律 .text-* 阶梯 / .mini-note
    编号步骤条 / 数据表 / 左图右文栅格 / 提问·结论等原子直接用共享版，不在此自建
    ═══════════════════════════════════════════════ */

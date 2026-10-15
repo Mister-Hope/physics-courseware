@@ -7,7 +7,16 @@ const { showForces = false } = defineProps<{ showForces?: boolean }>();
        球与车厢不接触（重力的箭头也落在车厢之外）；受力与加速度箭头受 showForces 控制 -->
   <svg viewBox="0 0 400 300" width="100%" style="max-width: 440px" xmlns="http://www.w3.org/2000/svg">
     <SurfaceHatch :from="{ x: 16, y: 252 }" :to="{ x: 384, y: 252 }" side="below" color="#64748b" :line-width="2" :thickness="10" :gap="18" />
-    <rect x="140" y="180" width="190" height="44" rx="8" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
+    <rect
+      x="140"
+      y="180"
+      width="190"
+      height="44"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="2.2"
+    />
     <circle cx="180" cy="236" r="16" fill="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
     <circle cx="290" cy="236" r="16" fill="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
     <circle cx="180" cy="236" r="4.5" fill="var(--c-text-dim)" />

@@ -270,10 +270,18 @@ const statusText = computed(() => {
         stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
         stroke-width="2"
       />
-      <text x="848" y="34" text-anchor="middle" font-size="19" fill="var(--c-text-dim)">荧光屏</text>
+      <text x="848" y="34" text-anchor="middle" font-size="19" fill="var(--c-text-dim)">
+        荧光屏
+      </text>
       <!-- 偏转磁场区：淡色底 + 虚线边框 + ⊙/⊗ 阵列；整块裁到管腔内（几何保证不出管） -->
       <g clip-path="url(#crt-scan-field-clip)">
-        <rect x="480" y="60" width="240" height="260" fill="color-mix(in srgb, var(--c-accent) 10%, transparent)" />
+        <rect
+          x="480"
+          y="60"
+          width="240"
+          height="260"
+          fill="color-mix(in srgb, var(--c-accent) 10%, transparent)"
+        />
         <rect
           x="480"
           y="60"
@@ -339,7 +347,11 @@ const statusText = computed(() => {
           stroke-linecap="round"
           stroke-linejoin="round"
         />
-        <g stroke="color-mix(in srgb, var(--c-text-dim) 85%, transparent)" stroke-width="2" stroke-linecap="round">
+        <g
+          stroke="color-mix(in srgb, var(--c-text-dim) 85%, transparent)"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
           <line x1="116" y1="174" x2="116" y2="185" />
           <line x1="116" y1="195" x2="116" y2="206" />
           <line x1="132" y1="174" x2="132" y2="185" />
@@ -351,7 +363,9 @@ const statusText = computed(() => {
           stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
           stroke-width="1.8"
         />
-        <text x="112" y="252" text-anchor="middle" font-size="19" fill="var(--c-text-dim)">电子枪</text>
+        <text x="112" y="252" text-anchor="middle" font-size="19" fill="var(--c-text-dim)">
+          电子枪
+        </text>
       </g>
       <!-- 三个目标点 A / O / B -->
       <g font-size="22" fill="var(--c-neutral-300)" font-family="KaTeX_Math" font-style="italic">
@@ -408,7 +422,14 @@ const statusText = computed(() => {
           B
         </text>
         <g :opacity="symOpacity">
-          <circle cx="617" cy="50" :r="headR" fill="none" stroke="var(--c-accent)" stroke-width="2.4" />
+          <circle
+            cx="617"
+            cy="50"
+            :r="headR"
+            fill="none"
+            stroke="var(--c-accent)"
+            stroke-width="2.4"
+          />
           <circle v-if="fieldOut" cx="617" cy="50" :r="headR * 0.3" fill="var(--c-accent)" />
           <template v-else>
             <line
@@ -440,8 +461,18 @@ const statusText = computed(() => {
         />
       </g>
       <!-- 命中光点（辉光） -->
-      <circle :cx="SCREEN_X" :cy="beam.tipY" r="17" fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)" />
-      <circle :cx="SCREEN_X" :cy="beam.tipY" r="7" fill="color-mix(in srgb, var(--c-neutral-50) 92%, transparent)" />
+      <circle
+        :cx="SCREEN_X"
+        :cy="beam.tipY"
+        r="17"
+        fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+      />
+      <circle
+        :cx="SCREEN_X"
+        :cy="beam.tipY"
+        r="7"
+        fill="color-mix(in srgb, var(--c-neutral-50) 92%, transparent)"
+      />
     </svg>
 
     <div class="mt-1 shrink-0 text-center text-base" style="color: #cbd5e1">{{ statusText }}</div>

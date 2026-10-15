@@ -2,7 +2,12 @@
   <!-- 第 7 页：正方体顶点着地时重心最高（$\sqrt{3}a/2$） -->
   <svg class="fig" viewBox="0 0 264 292" style="max-width: 11rem" xmlns="http://www.w3.org/2000/svg">
     <!-- 地面平行四边形与斜剖线 -->
-    <polygon points="147.5,173.5 248.1,228.8 116.5,271.1 15.9,215.8" fill="color-mix(in srgb, var(--c-text-dim) 13%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1.2" />
+    <polygon
+      points="147.5,173.5 248.1,228.8 116.5,271.1 15.9,215.8"
+      fill="color-mix(in srgb, var(--c-text-dim) 13%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="1.2"
+    />
     <g stroke="var(--c-neutral-500)" stroke-width="0.7" opacity="0.35">
       <line x1="155.9" y1="178.1" x2="24.3" y2="220.4" />
       <line x1="136.6" y1="177.0" x2="237.1" y2="232.3" />
@@ -75,12 +80,25 @@
         stroke-linecap="round"
         stroke-linejoin="round"
       />
-      <text x="101.8" y="177.2" font-family="KaTeX_Main" font-size="14" text-anchor="middle" stroke="var(--c-neutral-900)" stroke-width="3" paint-order="stroke">3</text>
+      <text
+        x="101.8"
+        y="177.2"
+        font-family="KaTeX_Main"
+        font-size="14"
+        text-anchor="middle"
+        stroke="var(--c-neutral-900)"
+        stroke-width="3"
+        paint-order="stroke"
+      >
+        3
+      </text>
       <!-- 分数线 -->
       <line x1="85.5" y1="181.5" x2="108.5" y2="181.5" stroke="var(--c-neutral-900)" stroke-width="3.6" stroke-linecap="round" />
       <line x1="85.5" y1="181.5" x2="108.5" y2="181.5" stroke="var(--c-force)" stroke-width="1.5" stroke-linecap="round" />
       <!-- 分母：2 -->
-      <text x="97" y="196" font-family="KaTeX_Main" font-size="14.5" text-anchor="middle" stroke="var(--c-neutral-900)" stroke-width="3" paint-order="stroke">2</text>
+      <text x="97" y="196" font-family="KaTeX_Main" font-size="14.5" text-anchor="middle" stroke="var(--c-neutral-900)" stroke-width="3" paint-order="stroke">
+        2
+      </text>
       <!-- 右侧乘以边长 a（与分数线居中对齐） -->
       <text
         x="115.5"

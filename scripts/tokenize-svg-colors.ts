@@ -4,12 +4,11 @@ import path from "node:path";
 /**
  * `pnpm tokenize:svg-colors` —— 把 `<svg>` 表现属性里的**字面色值**换成设计 token。
  *
- * 依据：SVG 2 §6.6（表现属性的值按 CSS 值解析）+ CSS Variables §3（`var()` 可替换任何 CSS 值中的任意部分）
- * ⇒ `fill="var(--c-velocity)"` 合法；带透明度的 `rgba()` 换成 `color-mix(in srgb, var(--tok) N%, transparent)`，
+ * 依据：SVG 2 §6.6（表现属性的值按 CSS 值解析）+ CSS Variables §3（`var()` 可替换任何 CSS 值中的任意部分） ⇒
+ * `fill="var(--c-velocity)"` 合法；带透明度的 `rgba()` 换成 `color-mix(in srgb, var(--tok) N%, transparent)`，
  * 两者都已在浏览器里实测可解析、且 UnoCSS 不会因此生成任何鬼规则。
  *
- * 只改**属性值**，不碰 `<style>` 块与 `style.css`（那些由各批次的样式统一负责）。
- * 只映射"值与 token 逐字节等值"的写法 ⇒ 纯机械、零视觉变化。
+ * 只改**属性值**，不碰 `<style>` 块与 `style.css`（那些由各批次的样式统一负责）。 只映射"值与 token 逐字节等值"的写法 ⇒ 纯机械、零视觉变化。
  *
  * ```bash
  * pnpm tokenize:svg-colors            # 只统计（dry-run）
@@ -23,10 +22,10 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const ATTRS = ["fill", "stroke", "stop-color", "flood-color"] as const;
 
 /**
- * token → 它的颜色值。`common.css` / `atoms.css` 里的正本 + 为"插画中性色阶"新补的那批。
- * 同一个值有多个 token 时只列**一个**（映射目标）：
- *  - `#f87171` 既是 `--c-danger` 也是 `--c-force`（同值）⇒ 按「力一律红」映射到 `--c-force`；
- *    HTML/CSS 里的危险/错误语义仍走 `--c-danger`（由各课样式统一负责）。
+ * Token → 它的颜色值。`common.css` / `atoms.css` 里的正本 + 为"插画中性色阶"新补的那批。 同一个值有多个 token 时只列**一个**（映射目标）：
+ *
+ * - `#f87171` 既是 `--c-danger` 也是 `--c-force`（同值）⇒ 按「力一律红」映射到 `--c-force`； HTML/CSS 里的危险/错误语义仍走
+ *   `--c-danger`（由各课样式统一负责）。
  */
 const TOKEN_COLORS: Record<string, string> = {
   // 设计 token（common.css / atoms.css 正本）
@@ -85,8 +84,9 @@ for (const [hex, token] of HEX_TO_TOKEN)
   if (!RGB_TO_TOKEN.has(toRgb(hex))) RGB_TO_TOKEN.set(toRgb(hex), token);
 
 /** `var(--x, #hex)` 兜底形式 → 去掉兜底值 */
-const FALLBACK_RE = /^var\((--c-[a-z0-9-]+),\s*[^)]+\)$/;
-const RGB_RE = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)$/;
+const FALLBACK_RE = /^var\((?<name>--c-[a-z0-9-]+),\s*[^)]+\)$/u;
+const RGB_RE =
+  /^rgba?\(\s*(?<r>\d+)\s*,\s*(?<g>\d+)\s*,\s*(?<b>\d+)\s*(?:,\s*(?<alpha>[\d.]+)\s*)?\)$/u;
 
 const formatAlpha = (alpha: number): string => `${Number((alpha * 100).toFixed(2))}%`;
 
@@ -122,27 +122,34 @@ const collectFiles = (): string[] => {
   return files;
 };
 
-/** 把一个属性值翻译成 token 写法；不认识就返回 null（= 不修改） */
+/**
+ * 把一个属性值翻译成 token 写法；不认识就返回 null（= 不修改）
+ *
+ * @param value SVG 表现属性的字面值（如 `#60a5fa`、`rgba(96,165,250,0.5)`、`var(--c-velocity, #60a5fa)`）
+ * @returns 等价的 token 写法；不认识时返回 null
+ */
 const translate = (value: string): string | null => {
-  const fallback = FALLBACK_RE.exec(value);
+  const fallbackName = FALLBACK_RE.exec(value)?.groups?.name;
 
-  if (fallback) return `var(${fallback[1]})`;
+  if (fallbackName) return `var(${fallbackName})`;
 
   const token = HEX_TO_TOKEN.get(value.toLowerCase());
 
   if (token) return `var(${token})`;
 
-  const rgb = RGB_RE.exec(value);
+  const groups = RGB_RE.exec(value)?.groups;
 
-  if (!rgb) return null;
+  if (!groups) return null;
 
-  const mapped = RGB_TO_TOKEN.get(`${rgb[1]},${rgb[2]},${rgb[3]}`);
+  const mapped = RGB_TO_TOKEN.get(`${groups.r},${groups.g},${groups.b}`);
 
   if (!mapped) return null;
 
-  if (rgb[4] === undefined) return `var(${mapped})`;
+  const alphaRaw = groups.alpha;
 
-  const alpha = Number(rgb[4]);
+  if (!alphaRaw) return `var(${mapped})`;
+
+  const alpha = Number(alphaRaw);
 
   if (!Number.isFinite(alpha) || alpha >= 1) return `var(${mapped})`;
   if (alpha <= 0) return null;
@@ -159,7 +166,7 @@ for (const file of collectFiles()) {
   let hits = 0;
 
   const next = source.replaceAll(
-    new RegExp(`(${ATTRS.join("|")})="([^"]*)"`, "g"),
+    new RegExp(`(${ATTRS.join("|")})="([^"]*)"`, "gu"),
     (match, attr: string, value: string) => {
       const translated = translate(value);
 
@@ -181,13 +188,16 @@ for (const file of collectFiles()) {
   console.log(`${write ? "✏️ " : "· "}${path.relative(ROOT, file)}：${hits} 处`);
 }
 
-console.log(`\n${write ? "已写入" : "dry-run"}：${changedFiles} 个文件、${changedAttributes} 处属性`);
+console.log(
+  `\n${write ? "已写入" : "dry-run"}：${changedFiles} 个文件、${changedAttributes} 处属性`,
+);
 console.log("\n按值统计（前 30）：");
 
 for (const [key, count] of [...totals].sort((a, b) => b[1] - a[1]).slice(0, 30))
   console.log(`  ${String(count).padStart(5)}  ${key}`);
 
-if (!write)
-  {console.log(
+if (!write) {
+  console.log(
     "\n提示：`--write` 落盘前确认没有子代理正在写课件；落盘后逐课跑 e2e + `pnpm build` 复验。",
-  );}
+  );
+}

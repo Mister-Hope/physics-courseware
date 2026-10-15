@@ -23,7 +23,17 @@
     <!-- ==================== 1. 拉伸 (Tension, x_center = 95) ==================== -->
     <g>
       <!-- 形变前原长虚线参考框 -->
-      <rect x="52" y="63" width="86" height="26" rx="3" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke-width="1.3" stroke-dasharray="3.5 3" />
+      <rect
+        x="52"
+        y="63"
+        width="86"
+        height="26"
+        rx="3"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+        stroke-width="1.3"
+        stroke-dasharray="3.5 3"
+      />
       <!-- 拉伸后：两端向外伸长、中部略微缩颈的弹性杆 -->
       <path
         d="M 38 65 Q 95 68.5 152 65 A 3 3 0 0 1 155 68 L 155 84 A 3 3 0 0 1 152 87 Q 95 83.5 38 87 A 3 3 0 0 1 35 84 L 35 68 A 3 3 0 0 1 38 65 Z"
@@ -46,7 +56,17 @@
     <!-- ==================== 2. 压缩 (Compression, x_center = 255) ==================== -->
     <g>
       <!-- 形变前原长虚线参考框 -->
-      <rect x="202" y="65" width="106" height="22" rx="3" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke-width="1.3" stroke-dasharray="3.5 3" />
+      <rect
+        x="202"
+        y="65"
+        width="106"
+        height="22"
+        rx="3"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+        stroke-width="1.3"
+        stroke-dasharray="3.5 3"
+      />
       <!-- 压缩后：横向缩短、上下中部微鼓的弹性块 -->
       <path
         d="M 216 64 Q 255 58.5 294 64 A 3.5 3.5 0 0 1 297.5 67.5 L 297.5 84.5 A 3.5 3.5 0 0 1 294 88 Q 255 93.5 216 88 A 3.5 3.5 0 0 1 212.5 84.5 L 212.5 67.5 A 3.5 3.5 0 0 1 216 64 Z"
@@ -71,7 +91,15 @@
       <!-- 3D 圆柱体主体轮廓（中部因受扭产生轻微立体收束） -->
       <path d="M 374 60 Q 420 62.5 466 60 L 466 92 Q 420 89.5 374 92 Z" fill="url(#torsionCylGrad)" />
       <!-- 圆柱体右端面半椭圆（后半隐线 + 前半实线） -->
-      <ellipse cx="466" cy="76" rx="7.5" ry="16" fill="color-mix(in srgb, var(--c-surface-solid) 75%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.1" />
+      <ellipse
+        cx="466"
+        cy="76"
+        rx="7.5"
+        ry="16"
+        fill="color-mix(in srgb, var(--c-surface-solid) 75%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.1"
+      />
       <!-- 圆柱体上下母线边廓 -->
       <path d="M 374 60 Q 420 62.5 466 60 M 374 92 Q 420 89.5 466 92" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.2" stroke-linecap="round" />
       <!-- 圆柱体内部截面椭圆环（辅助体现三维体积感） -->
@@ -84,7 +112,15 @@
         <path d="M 380 89 C 404 89, 434 63, 459 63" stroke="rgba(167,139,250,0.55)" stroke-dasharray="3 2.5" />
       </g>
       <!-- 圆柱体左端面完整三维椭圆 + 端面径向扭转指针线 -->
-      <ellipse cx="374" cy="76" rx="7.5" ry="16" fill="color-mix(in srgb, var(--c-neutral-700) 88%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+      <ellipse
+        cx="374"
+        cy="76"
+        rx="7.5"
+        ry="16"
+        fill="color-mix(in srgb, var(--c-neutral-700) 88%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.2"
+      />
       <line x1="374" y1="76" x2="378" y2="63" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" />
       <line x1="466" y1="76" x2="462" y2="89" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" />
 
@@ -99,13 +135,37 @@
       <!-- 形变前水平未弯曲虚线参考位置 -->
       <line x1="516" y1="62" x2="624" y2="62" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.4" stroke-dasharray="3.5 3" />
       <!-- 两端支座小三角 (支点) -->
-      <polygon points="518,73 512,83 524,83" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
-      <polygon points="622,73 616,83 628,83" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
+      <polygon
+        points="518,73 512,83 524,83"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+      />
+      <polygon
+        points="622,73 616,83 628,83"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+      />
 
       <!-- 受向下压力后向下凹陷弯曲的弹性横梁（厚度 12px） -->
-      <path d="M 516 58 Q 570 92 624 58 L 627 69 Q 570 104 513 69 Z" fill="url(#deformBodyGrad)" stroke="var(--c-neutral-300)" stroke-width="2.2" stroke-linejoin="round" />
+      <path
+        d="M 516 58 Q 570 92 624 58 L 627 69 Q 570 104 513 69 Z"
+        fill="url(#deformBodyGrad)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.2"
+        stroke-linejoin="round"
+      />
       <!-- 横梁内部中性层虚线（展现上压下伸的弯曲物理本质） -->
-      <path d="M 514.5 63.5 Q 570 98 625.5 63.5" fill="none" stroke="color-mix(in srgb, var(--c-physics) 55%, transparent)" stroke-width="1.3" stroke-dasharray="3 2.5" />
+      <path
+        d="M 514.5 63.5 Q 570 98 625.5 63.5"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-physics) 55%, transparent)"
+        stroke-width="1.3"
+        stroke-dasharray="3 2.5"
+      />
 
       <!-- 向下压在横梁中点的外力箭头（箭头尖端精准落在弯曲后的横梁上表面 y=74） -->
       <CourseArrow :from="{ x: 570, y: 26 }" :to="{ x: 570, y: 74 }" stroke="var(--c-physics)" stroke-width="2.8" />

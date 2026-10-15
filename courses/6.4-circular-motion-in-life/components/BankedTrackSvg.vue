@@ -102,8 +102,26 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
         <rect :x="OUTER_RAIL" :y="-RAIL_H" :width="RAIL_W" :height="RAIL_H" fill="var(--c-neutral-300)" />
         <rect :x="OUTER_RAIL" :y="-RAIL_H" :width="RAIL_W" height="2.6" fill="var(--c-text)" />
         <!-- 车厢：车轮 → 转向架 → 车厢体 -->
-        <circle v-for="wheel in WHEELS" :key="wheel.x" :cx="wheel.x" :cy="wheel.y" :r="WHEEL_R" fill="var(--c-surface-solid)" :stroke="wheel.stroke" stroke-width="1.8" />
-        <rect :x="BOGIE.x" :y="BOGIE.y" :width="BOGIE.w" :height="BOGIE.h" rx="4" fill="var(--c-surface-solid)" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.2" />
+        <circle
+          v-for="wheel in WHEELS"
+          :key="wheel.x"
+          :cx="wheel.x"
+          :cy="wheel.y"
+          :r="WHEEL_R"
+          fill="var(--c-surface-solid)"
+          :stroke="wheel.stroke"
+          stroke-width="1.8"
+        />
+        <rect
+          :x="BOGIE.x"
+          :y="BOGIE.y"
+          :width="BOGIE.w"
+          :height="BOGIE.h"
+          rx="4"
+          fill="var(--c-surface-solid)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+          stroke-width="1.2"
+        />
         <rect :x="CAR.x" :y="CAR.y" :width="CAR.w" :height="CAR.h" :rx="CAR.r" fill="url(#banked-car)" stroke="var(--c-velocity)" stroke-width="2.4" />
         <rect :x="CAR.x + 12" :y="CAR.y + 7" :width="CAR.w - 24" height="22" rx="6" fill="rgba(191,219,254,0.13)" />
       </g>
@@ -129,8 +147,24 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
       <text :x="outerLabel.x" :y="outerLabel.y" text-anchor="middle" font-size="16" fill="var(--c-neutral-300)">外轨</text>
       <g :class="{ 'turn-hidden': !showForces }">
         <!-- 平行四边形虚线：G 与 F_N 合成 F_合 -->
-        <line :x1="gTip.x" :y1="gTip.y" :x2="fTip.x" :y2="fTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.4" stroke-dasharray="7 6" />
-        <line :x1="nTip.x" :y1="nTip.y" :x2="fTip.x" :y2="fTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.4" stroke-dasharray="7 6" />
+        <line
+          :x1="gTip.x"
+          :y1="gTip.y"
+          :x2="fTip.x"
+          :y2="fTip.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
+          stroke-width="1.4"
+          stroke-dasharray="7 6"
+        />
+        <line
+          :x1="nTip.x"
+          :y1="nTip.y"
+          :x2="fTip.x"
+          :y2="fTip.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
+          stroke-width="1.4"
+          stroke-dasharray="7 6"
+        />
         <!-- 三个力都从车厢几何中心出发 -->
         <CourseArrow :from="carCenter" :to="gTip" stroke="var(--c-force)" :stroke-width="3.6" />
         <CourseArrow :from="carCenter" :to="nTip" stroke="var(--c-physics)" :stroke-width="3.6" />

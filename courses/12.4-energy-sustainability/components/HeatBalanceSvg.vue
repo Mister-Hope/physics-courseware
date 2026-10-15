@@ -148,10 +148,25 @@ const { step = 1, showImbalance = true } = defineProps<{
       <!-- ==================== 区域 2：地球与人类工业活动 (中央) ==================== -->
       <g id="earth-system" transform="translate(0, 0)">
         <!-- 大气外层高亮光环 -->
-        <circle cx="336" cy="116" r="58" fill="none" stroke="color-mix(in srgb, var(--c-physics-light) 45%, transparent)" stroke-width="2" filter="url(#eb-earth-halo)" />
+        <circle
+          cx="336"
+          cy="116"
+          r="58"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-physics-light) 45%, transparent)"
+          stroke-width="2"
+          filter="url(#eb-earth-halo)"
+        />
 
         <!-- 地球海洋基底 -->
-        <circle cx="336" cy="116" r="55" fill="url(#eb-ocean-sphere)" stroke="color-mix(in srgb, var(--c-velocity-light) 60%, transparent)" stroke-width="1.8" />
+        <circle
+          cx="336"
+          cy="116"
+          r="55"
+          fill="url(#eb-ocean-sphere)"
+          stroke="color-mix(in srgb, var(--c-velocity-light) 60%, transparent)"
+          stroke-width="1.8"
+        />
 
         <!-- 大陆板块轮廓 (绿色自然生态地貌) -->
         <g clip-path="url(#eb-earth-clip)">

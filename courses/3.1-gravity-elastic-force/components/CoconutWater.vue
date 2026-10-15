@@ -152,7 +152,9 @@ const chord = computed(() => {
       </label>
       <div class="cg-coconut-read">
         水位升高：重心先<b class="cg-coconut-num">降低</b>、后<b class="cg-coconut-num">升高</b>
-        <span class="cg-coconut-note">重心最低的时候，恰好是液面与重心相重合的时候（图中虚线）</span>
+        <span class="cg-coconut-note"
+          >重心最低的时候，恰好是液面与重心相重合的时候（图中虚线）</span
+        >
       </div>
     </div>
   </div>

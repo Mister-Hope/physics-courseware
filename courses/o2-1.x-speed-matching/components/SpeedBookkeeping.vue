@@ -240,8 +240,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 <style scoped>
 /* 速度"两笔账"图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max */
 .fig-book {
-  width: 100%;
-
   --fig-max: 700px;
+  width: 100%;
 }
 </style>

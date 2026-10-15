@@ -132,9 +132,20 @@ const formula = { x: 352, y: 396 };
       class="h-full w-auto max-w-full"
     >
       <!-- 轨迹圆弧 AB -->
-      <path :d="arcPath" fill="none" stroke="var(--c-velocity)" stroke-width="3.6" stroke-linecap="round" />
+      <path
+        :d="arcPath"
+        fill="none"
+        stroke="var(--c-velocity)"
+        stroke-width="3.6"
+        stroke-linecap="round"
+      />
       <!-- 弦 AB -->
-      <path :d="chordPath" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)" stroke-width="2.2" />
+      <path
+        :d="chordPath"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
+        stroke-width="2.2"
+      />
       <!-- 两条虚线半径 + 圆心到弦中点的连线（CM ⊥ AB，平分弦） -->
       <path
         :d="auxPath"
@@ -166,7 +177,12 @@ const formula = { x: 352, y: 396 };
       <!-- 入射点 A、出射点 B（在弧上）与圆心 C -->
       <circle :cx="A.x" :cy="A.y" r="5.5" fill="#bfdbfe" />
       <circle :cx="B.x" :cy="B.y" r="5.5" fill="#bfdbfe" />
-      <circle :cx="CX" :cy="CY" r="5.5" fill="color-mix(in srgb, var(--c-neutral-200) 95%, transparent)" />
+      <circle
+        :cx="CX"
+        :cy="CY"
+        r="5.5"
+        fill="color-mix(in srgb, var(--c-neutral-200) 95%, transparent)"
+      />
       <!-- 端点与圆心标注 -->
       <text
         v-bind="HALO"

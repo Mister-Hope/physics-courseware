@@ -4,7 +4,7 @@
 
    自造类只有两个概念前缀（同一概念只有一套名字）：
    · scene- 引课页 / 概念三栏的并列场景
-   · sim-   交互仿真组件的面板与读数（定义在各组件 <style scoped> 里，本文件不抄）
+   · sim-   交互仿真组件的面板与读数（定义在各组件 \3c style scoped> 里，本文件不抄）
    栅格、卡片、竖线、图占满、字号一律走共享原子：
    .half-grid（两栏）· .three-col（三栏）· .split-wide（左图右文）· .figure · .mini-title · .mini-note · .text-xl…5xl
    色值一律 var(--c-*)。

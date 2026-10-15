@@ -1,7 +1,16 @@
 <template>
   <!-- 第 2 页：力的图示——先定标度，再按标度画有向线段 -->
   <svg class="fig" viewBox="0 0 300 218" style="max-width: 14rem" xmlns="http://www.w3.org/2000/svg">
-    <rect x="106" y="140" width="64" height="46" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.6" />
+    <rect
+      x="106"
+      y="140"
+      width="64"
+      height="46"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.6"
+    />
     <CourseArrow :from="{ x: 138, y: 162 }" :to="{ x: 232, y: 108 }" stroke="var(--c-accent)" stroke-width="3.2" />
     <circle cx="138" cy="162" r="4.5" fill="var(--c-accent)" />
     <line x1="138" y1="162" x2="240" y2="162" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="5 4" />

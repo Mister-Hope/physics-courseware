@@ -8,6 +8,7 @@
   "scripts": {
     "build": "unrun scripts/build-all.ts",
     "check": "vue-tsc",
+    "check:courses": "unrun scripts/check-courses.ts",
     "compare:shots": "unrun scripts/compare-shots.ts",
     "create:course": "unrun scripts/create-course.ts",
     "dev": "unrun scripts/dev.ts",

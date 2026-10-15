@@ -218,7 +218,11 @@ onUnmounted(() => cancelAnimationFrame(frame));
       />
 
       <!-- 内场装饰：直弯道交界虚线 (x=120, x=240) 与中圈 -->
-      <g stroke="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke-width="1" fill="none">
+      <g
+        stroke="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+        stroke-width="1"
+        fill="none"
+      >
         <line x1="120" y1="65" x2="120" y2="135" stroke-dasharray="3 3" />
         <line x1="240" y1="65" x2="240" y2="135" stroke-dasharray="3 3" />
         <circle cx="180" cy="100" r="18" opacity="0.5" />
@@ -281,13 +285,27 @@ onUnmounted(() => cancelAnimationFrame(frame));
           stroke-linecap="round"
         />
         <path d="M 120 20 L 130 23.5 L 120 27 Z" fill="var(--c-accent)" />
-        <text x="114" y="26" text-anchor="end" font-size="12" font-weight="600" fill="var(--c-accent)">
+        <text
+          x="114"
+          y="26"
+          text-anchor="end"
+          font-size="12"
+          font-weight="600"
+          fill="var(--c-accent)"
+        >
           起 / 终点
         </text>
       </g>
 
       <!-- 内场中央文字标注 -->
-      <text x="180" y="96" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--c-neutral-300)">
+      <text
+        x="180"
+        y="96"
+        text-anchor="middle"
+        font-size="13.5"
+        font-weight="600"
+        fill="var(--c-neutral-300)"
+      >
         400 m 跑道
       </text>
       <text x="180" y="116" text-anchor="middle" font-size="11.5" fill="var(--c-text-dim)">
@@ -359,7 +377,14 @@ onUnmounted(() => cancelAnimationFrame(frame));
 
         <!-- 跑者头部与朝向帽檐 -->
         <path d="M 1 -2.8 L 5.2 0 L 1 2.8 Z" fill="#fef08a" />
-        <circle cx="0.6" cy="0" r="3.3" fill="#fef08a" stroke="var(--c-neutral-900)" stroke-width="1.2" />
+        <circle
+          cx="0.6"
+          cy="0"
+          r="3.3"
+          fill="#fef08a"
+          stroke="var(--c-neutral-900)"
+          stroke-width="1.2"
+        />
       </g>
 
       <!-- 底部轻提示 / 完成一圈结论提示 -->

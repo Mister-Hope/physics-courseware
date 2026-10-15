@@ -63,7 +63,10 @@ const { step = 2 } = defineProps<{
     <!-- 1. 天空与远山 -->
     <rect x="0" y="0" width="560" height="136" fill="url(#fbs-sky)" />
     <!-- 远山层次 -->
-    <path d="M -20 136 L 40 110 Q 110 88 180 114 L 260 94 Q 340 76 420 106 L 500 88 Q 540 78 580 110 L 580 136 Z" fill="color-mix(in srgb, var(--c-neutral-700) 45%, transparent)" />
+    <path
+      d="M -20 136 L 40 110 Q 110 88 180 114 L 260 94 Q 340 76 420 106 L 500 88 Q 540 78 580 110 L 580 136 Z"
+      fill="color-mix(in srgb, var(--c-neutral-700) 45%, transparent)"
+    />
     <path d="M 60 136 L 140 120 Q 220 106 300 124 L 400 112 Q 490 102 580 126 L 580 136 Z" fill="color-mix(in srgb, var(--c-surface-solid) 60%, transparent)" />
 
     <!-- 2. 水域与波光涟漪 -->
@@ -89,7 +92,16 @@ const { step = 2 } = defineProps<{
 
     <!-- 河岸横排文字标牌（清晰优雅，拒绝竖排-90度旋转） -->
     <g transform="translate(36, 134)">
-      <rect x="-26" y="-11" width="52" height="22" rx="4" fill="color-mix(in srgb, var(--c-neutral-900) 85%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1" />
+      <rect
+        x="-26"
+        y="-11"
+        width="52"
+        height="22"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-neutral-900) 85%, transparent)"
+        stroke="var(--c-neutral-500)"
+        stroke-width="1"
+      />
       <text x="0" y="4" text-anchor="middle" font-size="12" font-weight="700" fill="var(--c-neutral-200)">河岸</text>
     </g>
 
@@ -106,7 +118,16 @@ const { step = 2 } = defineProps<{
     <g v-if="step >= 1" transform="translate(100, 48)">
       <!-- 流线与箭头 -->
       <line x1="0" y1="0" x2="72" y2="0" stroke="var(--c-accent-glow)" stroke-width="2.6" marker-end="url(#fbs-arrow)" />
-      <rect x="12" y="-14" width="48" height="18" rx="4" fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)" stroke="var(--c-accent-glow)" stroke-width="1" />
+      <rect
+        x="12"
+        y="-14"
+        width="48"
+        height="18"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
+        stroke="var(--c-accent-glow)"
+        stroke-width="1"
+      />
       <text x="36" y="-1" text-anchor="middle" font-size="11" font-weight="700" fill="var(--c-accent-glow)">风向向右</text>
     </g>
 
@@ -150,14 +171,32 @@ const { step = 2 } = defineProps<{
         <rect x="-3" y="-50" width="48" height="28" rx="5" fill="none" stroke="var(--c-physics-light)" stroke-width="1.5" stroke-dasharray="4 3" />
         <!-- 提示移至 A 船外侧（左侧），彻底拉开与 B 船的间距 -->
         <g transform="translate(-104, -46)">
-          <rect x="0" y="0" width="94" height="20" rx="4" fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)" stroke="var(--c-physics-light)" stroke-width="1" />
+          <rect
+            x="0"
+            y="0"
+            width="94"
+            height="20"
+            rx="4"
+            fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
+            stroke="var(--c-physics-light)"
+            stroke-width="1"
+          />
           <text x="47" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#7dd3fc">旗向右 (与风同向)</text>
         </g>
       </g>
 
       <!-- A 船状态结论 (step >= 1) -->
       <g v-if="step >= 1" transform="translate(0, 42)">
-        <rect x="-78" y="-10" width="156" height="20" rx="4" fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)" stroke="color-mix(in srgb, var(--c-physics-light) 50%, transparent)" stroke-width="1" />
+        <rect
+          x="-78"
+          y="-10"
+          width="156"
+          height="20"
+          rx="4"
+          fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
+          stroke="color-mix(in srgb, var(--c-physics-light) 50%, transparent)"
+          stroke-width="1"
+        />
         <text x="0" y="4" text-anchor="middle" font-size="10.5" fill="var(--c-neutral-300)">可能静止 / 向左 / 向右但慢于风</text>
       </g>
     </g>
@@ -202,14 +241,32 @@ const { step = 2 } = defineProps<{
         <rect x="-45" y="-50" width="48" height="28" rx="5" fill="none" stroke="var(--c-accent-glow)" stroke-width="1.5" stroke-dasharray="4 3" />
         <!-- 提示移至 B 船外侧（右侧），彻底拉开与 A 船的间距 -->
         <g transform="translate(10, -46)">
-          <rect x="0" y="0" width="94" height="20" rx="4" fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)" stroke="var(--c-accent-glow)" stroke-width="1" />
+          <rect
+            x="0"
+            y="0"
+            width="94"
+            height="20"
+            rx="4"
+            fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
+            stroke="var(--c-accent-glow)"
+            stroke-width="1"
+          />
           <text x="47" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#fcd34d">旗向左 (与风反向)</text>
         </g>
       </g>
 
       <!-- B 船状态结论 (step >= 2，锁定选项 C) -->
       <g v-if="step >= 2" transform="translate(0, 42)">
-        <rect x="-88" y="-10" width="176" height="20" rx="4" fill="color-mix(in srgb, var(--c-neutral-900) 95%, transparent)" stroke="#ef4444" stroke-width="1.2" />
+        <rect
+          x="-88"
+          y="-10"
+          width="176"
+          height="20"
+          rx="4"
+          fill="color-mix(in srgb, var(--c-neutral-900) 95%, transparent)"
+          stroke="#ef4444"
+          stroke-width="1.2"
+        />
         <text x="0" y="4" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fca5a5">
           必向右且 v
           <tspan font-size="8" dy="2">B</tspan>

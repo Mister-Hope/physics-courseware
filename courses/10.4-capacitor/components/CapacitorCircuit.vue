@@ -222,7 +222,14 @@ onUnmounted(() => {
 
           <!-- LOWER WIRE BUS: y=160 -->
           <line x1="45" y1="160" x2="286" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
-          <line x1="314" y1="160" x2="380" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
+          <line
+            x1="314"
+            y1="160"
+            x2="380"
+            y2="160"
+            stroke="var(--c-neutral-600)"
+            stroke-width="2"
+          />
 
           <!-- VERTICAL SHUNT WIRE (DISCHARGE BRANCH) with resistor -->
           <!-- Wire from terminal 3 to top of resistor -->
@@ -255,11 +262,25 @@ onUnmounted(() => {
           </text>
 
           <!-- Wire from bottom of resistor to bottom bus -->
-          <line x1="220" y1="136" x2="220" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
+          <line
+            x1="220"
+            y1="136"
+            x2="220"
+            y2="160"
+            stroke="var(--c-neutral-600)"
+            stroke-width="2"
+          />
 
           <!-- AMMETER (A) - ON THE BOTTOM WIRE -->
           <g id="ammeter">
-            <circle cx="300" cy="160" r="14" fill="var(--c-surface-solid)" stroke="var(--c-neutral-600)" stroke-width="2" />
+            <circle
+              cx="300"
+              cy="160"
+              r="14"
+              fill="var(--c-surface-solid)"
+              stroke="var(--c-neutral-600)"
+              stroke-width="2"
+            />
             <text
               x="300"
               y="164"
@@ -274,7 +295,14 @@ onUnmounted(() => {
           </g>
 
           <!-- Knife Pivot Point -->
-          <circle cx="280" cy="55" r="4.5" fill="var(--c-accent)" stroke="var(--c-surface-solid)" stroke-width="1.5" />
+          <circle
+            cx="280"
+            cy="55"
+            r="4.5"
+            fill="var(--c-accent)"
+            stroke="var(--c-surface-solid)"
+            stroke-width="1.5"
+          />
 
           <!-- Switch Knife blade (Line) -->
           <line
@@ -374,7 +402,14 @@ onUnmounted(() => {
           <line x1="380" y1="55" x2="380" y2="75" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- Wire from lower plate to bottom wire -->
-          <line x1="380" y1="105" x2="380" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
+          <line
+            x1="380"
+            y1="105"
+            x2="380"
+            y2="160"
+            stroke="var(--c-neutral-600)"
+            stroke-width="2"
+          />
 
           <!-- CAPACITOR PARALLEL PLATES (HORIZONTAL AS PER REF PICTURE) -->
           <g id="capacitor">
@@ -696,11 +731,32 @@ onUnmounted(() => {
 
             <!-- Grid lines -->
             <!-- I=0 midline -->
-            <line x1="440" y1="105" x2="700" y2="105" stroke="var(--c-neutral-700)" stroke-dasharray="2,2" />
+            <line
+              x1="440"
+              y1="105"
+              x2="700"
+              y2="105"
+              stroke="var(--c-neutral-700)"
+              stroke-dasharray="2,2"
+            />
             <!-- Upper 0.25A grid line -->
-            <line x1="440" y1="65" x2="700" y2="65" stroke="var(--c-surface-solid)" stroke-dasharray="1,2" />
+            <line
+              x1="440"
+              y1="65"
+              x2="700"
+              y2="65"
+              stroke="var(--c-surface-solid)"
+              stroke-dasharray="1,2"
+            />
             <!-- Lower -0.25A grid line -->
-            <line x1="440" y1="145" x2="700" y2="145" stroke="var(--c-surface-solid)" stroke-dasharray="1,2" />
+            <line
+              x1="440"
+              y1="145"
+              x2="700"
+              y2="145"
+              stroke="var(--c-surface-solid)"
+              stroke-dasharray="1,2"
+            />
 
             <!-- Axis Labels -->
             <text

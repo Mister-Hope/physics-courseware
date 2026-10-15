@@ -115,10 +115,22 @@ const electrons = [
       <defs>
         <!-- 导线透明圆柱体外壳渐变 -->
         <linearGradient id="cm-wire-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-neutral-700) 40%, transparent)" />
-          <stop offset="30%" stop-color="color-mix(in srgb, var(--c-surface-solid) 65%, transparent)" />
-          <stop offset="70%" stop-color="color-mix(in srgb, var(--c-neutral-900) 80%, transparent)" />
-          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-surface-solid) 50%, transparent)" />
+          <stop
+            offset="0%"
+            stop-color="color-mix(in srgb, var(--c-neutral-700) 40%, transparent)"
+          />
+          <stop
+            offset="30%"
+            stop-color="color-mix(in srgb, var(--c-surface-solid) 65%, transparent)"
+          />
+          <stop
+            offset="70%"
+            stop-color="color-mix(in srgb, var(--c-neutral-900) 80%, transparent)"
+          />
+          <stop
+            offset="100%"
+            stop-color="color-mix(in srgb, var(--c-surface-solid) 50%, transparent)"
+          />
         </linearGradient>
 
         <!-- 导线上下内壁高光线 -->
@@ -225,7 +237,11 @@ const electrons = [
       <line x1="60" y1="155" x2="840" y2="155" stroke="url(#cm-wire-edge)" stroke-width="1.2" />
 
       <!-- ==================== 3. 晶格连线（虚线表现金属晶格结构） ==================== -->
-      <g stroke="color-mix(in srgb, var(--c-accent) 18%, transparent)" stroke-width="1.2" stroke-dasharray="4 4">
+      <g
+        stroke="color-mix(in srgb, var(--c-accent) 18%, transparent)"
+        stroke-width="1.2"
+        stroke-dasharray="4 4"
+      >
         <!-- 横向晶格连线 -->
         <line x1="90" y1="80" x2="790" y2="80" />
         <line x1="90" y1="128" x2="790" y2="128" />
@@ -243,7 +259,12 @@ const electrons = [
       <!-- ==================== 4. 密集正离子阵列（16 个，带立体质感与正电荷） ==================== -->
       <g v-for="(ion, idx) in ions" :key="`ion-${idx}`">
         <!-- 晶格节点阴影/底晕 -->
-        <circle :cx="ion.x" :cy="ion.y" r="12" fill="color-mix(in srgb, var(--c-accent-glow) 10%, transparent)" />
+        <circle
+          :cx="ion.x"
+          :cy="ion.y"
+          r="12"
+          fill="color-mix(in srgb, var(--c-accent-glow) 10%, transparent)"
+        />
         <!-- 立体金属离子球体 -->
         <circle
           :cx="ion.x"
@@ -278,7 +299,13 @@ const electrons = [
         </g>
 
         <!-- 电子发光外晕 -->
-        <circle :cx="e.x" :cy="e.y" r="6" fill="color-mix(in srgb, var(--c-physics-light) 30%, transparent)" filter="url(#cm-glow)" />
+        <circle
+          :cx="e.x"
+          :cy="e.y"
+          r="6"
+          fill="color-mix(in srgb, var(--c-physics-light) 30%, transparent)"
+          filter="url(#cm-glow)"
+        />
         <!-- 电子立体微球本体 (r = 4.2，明显更小更小巧) -->
         <circle
           :cx="e.x"

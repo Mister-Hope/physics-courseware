@@ -95,7 +95,16 @@ const groundGradientId = `concave-ground-${useId()}`;
       <path :d="surfacePath" fill="none" stroke="var(--c-text-dim)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
       <!-- 汽车：停在谷底，车轮贴在路面上 -->
       <g>
-        <rect x="182" :y="bodyTop" width="96" :height="bodyBottom - bodyTop" rx="9" fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)" stroke="var(--c-velocity)" stroke-width="2.4" />
+        <rect
+          x="182"
+          :y="bodyTop"
+          width="96"
+          :height="bodyBottom - bodyTop"
+          rx="9"
+          fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+          stroke="var(--c-velocity)"
+          stroke-width="2.4"
+        />
         <path
           :d="`M 199 ${bodyTop} L 209 ${cabinTop} L 249 ${cabinTop} L 259 ${bodyTop}`"
           fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"

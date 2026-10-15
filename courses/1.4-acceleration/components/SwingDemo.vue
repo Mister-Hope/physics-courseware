@@ -19,7 +19,11 @@
       stroke-linecap="round"
     />
     <!-- 左右斜撑立柱 -->
-    <g stroke="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" stroke-width="6.5" stroke-linecap="round">
+    <g
+      stroke="color-mix(in srgb, var(--c-text-dim) 38%, transparent)"
+      stroke-width="6.5"
+      stroke-linecap="round"
+    >
       <line x1="92" y1="24" x2="54" y2="194" />
       <line x1="308" y1="24" x2="346" y2="194" />
     </g>
@@ -41,7 +45,14 @@
       stroke-linecap="round"
     />
     <!-- 悬点轴承环 -->
-    <circle cx="200" cy="24" r="5.5" fill="var(--c-surface-solid)" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+    <circle
+      cx="200"
+      cy="24"
+      r="5.5"
+      fill="var(--c-surface-solid)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.2"
+    />
     <!-- ================= 2. 竖直平衡位置参考线与圆弧轨迹 ================= -->
     <!-- 竖直平衡位置虚线（最低点 x = 200, y = 172） -->
     <line
@@ -140,7 +151,14 @@
       />
     </g>
     <!-- 右侧最高点座板中心红金标记点 (284.9, 145.2) -->
-    <circle cx="284.9" cy="145.2" r="3.8" fill="var(--c-force)" stroke="var(--c-bg-soft)" stroke-width="1.2" />
+    <circle
+      cx="284.9"
+      cy="145.2"
+      r="3.8"
+      fill="var(--c-force)"
+      stroke="var(--c-bg-soft)"
+      stroke-width="1.2"
+    />
     <!-- ================= 4. 最高点物理量标注：v = 0 与切向加速度 a ≠ 0 ================= -->
     <!-- 加速度矢量 a：沿圆弧切线方向（左下 35°：dx = -cos35°, dy = sin35°）指向最低点 -->
     <CourseArrow
@@ -151,7 +169,14 @@
       stroke-width="3.4"
     />
     <!-- a ≠ 0 标注（切向箭头下方） -->
-    <text x="272" y="191" text-anchor="middle" font-size="19" font-weight="600" fill="var(--c-force)">
+    <text
+      x="272"
+      y="191"
+      text-anchor="middle"
+      font-size="19"
+      font-weight="600"
+      fill="var(--c-force)"
+    >
       <tspan font-family="KaTeX_Math" font-style="italic">a</tspan>
       <tspan font-family="KaTeX_Main">≠ 0</tspan>
     </text>

@@ -184,7 +184,14 @@ const caption = { x: 100, y: 104 };
         <line v-for="axle in axles" :key="axle.key" :x1="axle.from.x" :y1="axle.from.y" :x2="axle.to.x" :y2="axle.to.y" />
       </g>
       <g v-for="wheel in wheels" :key="wheel.key">
-        <circle :cx="wheel.center.x" :cy="wheel.center.y" :r="R_TREAD" fill="var(--c-neutral-700)" :stroke="wheel.outer ? '#cbd5e1' : '#94a3b8'" stroke-width="2.2" />
+        <circle
+          :cx="wheel.center.x"
+          :cy="wheel.center.y"
+          :r="R_TREAD"
+          fill="var(--c-neutral-700)"
+          :stroke="wheel.outer ? '#cbd5e1' : '#94a3b8'"
+          stroke-width="2.2"
+        />
         <path :class="{ 'turn-hidden': !showForces }" :d="wheel.flange" fill="none" stroke="var(--c-accent)" stroke-width="4.6" stroke-linecap="round" />
       </g>
       <!-- 车厢：半透明，能透出下面的车轮与轨道 -->
@@ -203,7 +210,9 @@ const caption = { x: 100, y: 104 };
       <g :class="{ 'turn-hidden': !showForces }">
         <circle :cx="contact.x" :cy="contact.y" r="3.6" fill="var(--c-accent)" />
         <CourseArrow :from="CART_CENTER" :to="fnTip" stroke="var(--c-accent)" :stroke-width="3.4" />
-        <text :x="forceLabel.x" :y="forceLabel.y" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-accent)">F</text>
+        <text :x="forceLabel.x" :y="forceLabel.y" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-accent)">
+          F
+        </text>
         <text :x="forceLabel.x + 13" :y="forceLabel.y + 7" text-anchor="middle" font-family="KaTeX_Main" font-size="14" fill="var(--c-accent)">N</text>
         <text :x="caption.x" :y="caption.y" text-anchor="middle" font-size="16" fill="var(--c-accent)">轮缘挤压外轨</text>
       </g>

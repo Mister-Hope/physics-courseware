@@ -192,7 +192,12 @@ const hang = (id: string): void => {
           stroke="var(--c-neutral-300)"
           stroke-width="3"
         />
-        <g clip-path="url(#hb-clip)" stroke="var(--c-accent)" stroke-width="2.2" stroke-dasharray="9 6">
+        <g
+          clip-path="url(#hb-clip)"
+          stroke="var(--c-accent)"
+          stroke-width="2.2"
+          stroke-dasharray="9 6"
+        >
           <line
             v-for="mark in marks"
             :key="mark.id"
@@ -271,11 +276,21 @@ const hang = (id: string): void => {
           <tspan font-family="KaTeX_Math" font-style="italic">O</tspan>
         </text>
       </g>
-      <line x1="0" y1="410" x2="560" y2="410" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.25" />
+      <line
+        x1="0"
+        y1="410"
+        x2="560"
+        y2="410"
+        stroke="var(--c-text-dim)"
+        stroke-width="2"
+        opacity="0.25"
+      />
     </svg>
     <div class="cg-hang-bar">
       <span class="cg-hang-hint">点击板上的小孔，分别悬挂两次</span>
-      <button v-if="picked.length" class="cg-hang-reset" type="button" @click="picked = []">重来</button>
+      <button v-if="picked.length" class="cg-hang-reset" type="button" @click="picked = []">
+        重来
+      </button>
     </div>
   </div>
 </template>

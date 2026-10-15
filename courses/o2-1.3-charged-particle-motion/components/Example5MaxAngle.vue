@@ -109,7 +109,12 @@ const MARKS = [
         stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.3" stroke-linecap="round">
+      <g
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)"
+        stroke-width="1.3"
+        stroke-linecap="round"
+      >
         <template v-for="(m, i) in MARKS" :key="`b${i}`">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -127,7 +132,12 @@ const MARKS = [
         </template>
       </g>
       <!-- 题目给的弦：一对对径点之间的直径 -->
-      <path :d="chordPath" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)" stroke-width="2.2" />
+      <path
+        :d="chordPath"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
+        stroke-width="2.2"
+      />
       <circle :cx="O.x" :cy="O.y" r="4" fill="var(--c-neutral-300)" />
       <circle :cx="P.x" :cy="P.y" r="5.6" fill="var(--c-neutral-50)" />
       <circle :cx="Q.x" :cy="Q.y" r="5.6" fill="var(--c-neutral-50)" />
@@ -204,11 +214,22 @@ const MARKS = [
         >
           γ
         </text>
-        <path :d="rightAngle" fill="none" stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)" stroke-width="1.8" />
+        <path
+          :d="rightAngle"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
+          stroke-width="1.8"
+        />
       </template>
       <!-- 第 1 次点击：轨迹弧 + 轨迹圆心 C + 半径 + 圆心角 θ -->
       <template v-if="showArc">
-        <path :d="arcPath" fill="none" stroke="var(--c-velocity)" stroke-width="3.8" stroke-linecap="round" />
+        <path
+          :d="arcPath"
+          fill="none"
+          stroke="var(--c-velocity)"
+          stroke-width="3.8"
+          stroke-linecap="round"
+        />
         <path
           :d="radiiPath"
           fill="none"

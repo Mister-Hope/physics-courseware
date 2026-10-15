@@ -37,13 +37,31 @@ const direction = computed<string>(() => {
   <div class="disp-wrap">
     <div class="disp-controls">
       <label class="disp-slider">
-        <span class="disp-slider-label" style="color: var(--c-accent-2)">初位置 <Latex tex="x_1" /></span>
-        <input v-model.number="x1" type="range" min="-10" max="10" step="0.5" class="disp-range disp-blue" />
+        <span class="disp-slider-label" style="color: var(--c-accent-2)"
+          >初位置 <Latex tex="x_1"
+        /></span>
+        <input
+          v-model.number="x1"
+          type="range"
+          min="-10"
+          max="10"
+          step="0.5"
+          class="disp-range disp-blue"
+        />
         <span class="disp-slider-val" style="color: var(--c-accent-2)">{{ x1 }} m</span>
       </label>
       <label class="disp-slider">
-        <span class="disp-slider-label" style="color: var(--c-accent)">末位置 <Latex tex="x_2" /></span>
-        <input v-model.number="x2" type="range" min="-10" max="10" step="0.5" class="disp-range disp-gold" />
+        <span class="disp-slider-label" style="color: var(--c-accent)"
+          >末位置 <Latex tex="x_2"
+        /></span>
+        <input
+          v-model.number="x2"
+          type="range"
+          min="-10"
+          max="10"
+          step="0.5"
+          class="disp-range disp-gold"
+        />
         <span class="disp-slider-val" style="color: var(--c-accent)">{{ x2 }} m</span>
       </label>
     </div>

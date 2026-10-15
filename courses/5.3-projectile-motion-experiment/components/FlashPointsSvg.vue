@@ -58,8 +58,19 @@ const dySpans = computed(() => dots.value.slice(1).map((dot, i) => ({ from: dots
     />
     <path :d="pathD" fill="none" stroke="var(--c-accent)" stroke-width="2.4" stroke-dasharray="9 6" opacity="0.7" />
     <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-text)" />
-    <text :x="origin.x - 12" :y="origin.y + 22" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-neutral-200)">O</text>
-    <circle v-for="dot in dots" :key="`dot-${dot.stepIndex}`" :cx="dot.x" :cy="dot.y" r="6.5" fill="var(--c-velocity)" stroke="var(--c-velocity-light)" stroke-width="2" />
+    <text :x="origin.x - 12" :y="origin.y + 22" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-neutral-200)">
+      O
+    </text>
+    <circle
+      v-for="dot in dots"
+      :key="`dot-${dot.stepIndex}`"
+      :cx="dot.x"
+      :cy="dot.y"
+      r="6.5"
+      fill="var(--c-velocity)"
+      stroke="var(--c-velocity-light)"
+      stroke-width="2"
+    />
     <g v-if="step >= 1">
       <line
         v-for="dot in dots"

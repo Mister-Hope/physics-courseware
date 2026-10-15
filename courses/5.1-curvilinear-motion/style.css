@@ -3,8 +3,8 @@
    通用设计系统已在 workspace/shared（共享 addon）里，这里只放本课特有样式
 
    自造类只有两个概念前缀（同一概念只有一套名字）：
-   · sim-  交互演示的页面容器宽度（组件内部的面板与读数定义在各组件 <style scoped> 里，本文件不抄）
-   · fig-  示意图内的文字标注（定义在 PathBendSvg.vue 的 <style scoped> 里）
+   · sim-  交互演示的页面容器宽度（组件内部的面板与读数定义在各组件 \3c style scoped> 里，本文件不抄）
+   · fig-  示意图内的文字标注（定义在 PathBendSvg.vue 的 \3c style scoped> 里）
    提问 / 结论 / 定义 / 双栏一律走共享原子：
    .ask · .key · .card · .half-grid · .divider-l · .mini-title · .mini-note · .tag-icon
    字号走共享阶梯（.text-2xl / .text-3xl），色值一律 var(--c-*)。

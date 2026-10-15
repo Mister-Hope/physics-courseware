@@ -1,7 +1,16 @@
 <template>
   <!-- 第 22 页：求 N 点速度的三种取段方案——① 该点→下一点、② 上一点→该点、③ 上一点→下一点（关于 N 点对称） -->
   <svg viewBox="0 0 620 160" style="display: block; width: 100%; max-width: 720px; margin: 0 auto">
-    <rect x="30" y="24" width="560" height="34" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke-width="1.5" />
+    <rect
+      x="30"
+      y="24"
+      width="560"
+      height="34"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
+      stroke-width="1.5"
+    />
     <circle cx="150" cy="41" r="5" fill="var(--c-text-dim)" />
     <circle cx="310" cy="41" r="6" fill="var(--c-accent)" />
     <circle cx="470" cy="41" r="5" fill="var(--c-text-dim)" />

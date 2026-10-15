@@ -110,13 +110,38 @@ const entryTo = polar(C, -15, -5);
       stroke-dasharray="9 7"
       opacity="0.7"
     />
-    <text :x="paper.x + paper.width - 54" :y="paper.y + paper.height - 20" font-family="KaTeX_Main" font-size="20" fill="var(--c-text-dim)" text-anchor="middle">
+    <text
+      :x="paper.x + paper.width - 54"
+      :y="paper.y + paper.height - 20"
+      font-family="KaTeX_Main"
+      font-size="20"
+      fill="var(--c-text-dim)"
+      text-anchor="middle"
+    >
       白纸
     </text>
     <path :d="solidOuter" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
     <path :d="solidInner" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <path :d="cutOuter" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-dasharray="7 6" opacity="0.45" stroke-linecap="round" stroke-linejoin="round" />
-    <path :d="cutInner" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-dasharray="7 6" opacity="0.45" stroke-linecap="round" stroke-linejoin="round" />
+    <path
+      :d="cutOuter"
+      fill="none"
+      stroke="var(--c-text-dim)"
+      stroke-width="3"
+      stroke-dasharray="7 6"
+      opacity="0.45"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      :d="cutInner"
+      fill="none"
+      stroke="var(--c-text-dim)"
+      stroke-width="3"
+      stroke-dasharray="7 6"
+      opacity="0.45"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
     <line :x1="pointA.x" :y1="pointA.y" :x2="traceA.x" :y2="traceA.y" stroke="var(--c-velocity)" stroke-width="3.2" stroke-linecap="round" />
     <circle :cx="traceA.x" :cy="traceA.y" r="5" fill="var(--c-velocity)" />
     <CourseArrow :from="traceA" :to="arrowA" stroke="var(--c-velocity)" :stroke-width="3.2" />

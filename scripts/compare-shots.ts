@@ -36,7 +36,15 @@ const explicit = args.filter((arg) => !arg.startsWith("-"));
 const git = (gitArgs: string[]): string =>
   execFileSync("git", gitArgs, { cwd: ROOT, encoding: "utf8" });
 
-/** 工作区（含暂存区）相对 HEAD 有改动的课件 */
+// 截图文件 → `data:image/png;base64,…`（拼对比 HTML 用）
+const encode = (file: string): string =>
+  `data:image/png;base64,${readFileSync(file).toString("base64")}`;
+
+/**
+ * 工作区（含暂存区）相对 HEAD 有改动的课件
+ *
+ * @returns 有改动的课件目录名（去重后按字典序）
+ */
 const changedCourses = (): string[] => {
   const output = git(["status", "--porcelain", "--", "courses"]);
   const slugs = output
@@ -55,15 +63,29 @@ interface PagePair {
   newFile: string;
 }
 
+/** 总览图里挑出来的一页：属于哪门课、旧/新截图、差异比例 */
+interface OverviewPick {
+  slug: string;
+  pair: PagePair;
+  ratio: number;
+}
+
 const parsePageNo = (file: string): number => {
   const base = path.basename(file);
 
-  return Number(/^p(\d+)/.exec(base)?.[1] ?? /^(\d+)\.png$/.exec(base)?.[1] ?? 0);
+  return Number(
+    /^p(?<no>\d+)/u.exec(base)?.groups?.no ?? /^(?<no>\d+)\.png$/u.exec(base)?.groups?.no ?? 0,
+  );
 };
 const parseClicks = (file: string): number =>
-  Number(/-c(\d+)\.png$/.exec(path.basename(file))?.[1] ?? 0);
+  Number(/-c(?<clicks>\d+)\.png$/u.exec(path.basename(file))?.groups?.clicks ?? 0);
 
-/** 每页取**点击数最大**的那张（= 全部展开）；同一页拍了多步时不会被 c0 覆盖 */
+/**
+ * 每页取**点击数最大**的那张（= 全部展开）；同一页拍了多步时不会被 c0 覆盖
+ *
+ * @param directory 一页一个 PNG 的目录
+ * @returns 页码 → 该页"点击数最大"的那张图的路径
+ */
 const readPages = (directory: string): Map<number, string> => {
   const result = new Map<number, string>();
   const clickCounts = new Map<number, number>();
@@ -83,11 +105,24 @@ const readPages = (directory: string): Map<number, string> => {
   return result;
 };
 
+// 同一页的旧 / 新截图配对（以旧图为准，新图缺页的跳过），按页号排序
+const pairPages = (oldPages: Map<number, string>, newPages: Map<number, string>): PagePair[] =>
+  [...oldPages.entries()]
+    .flatMap(([no, oldFile]) => {
+      const newFile = newPages.get(no);
+
+      return newFile ? [{ no, oldFile, newFile }] : [];
+    })
+    .sort((a, b) => a.no - b.no);
+
 /**
  * 用 **Slidev 官方导出**跑一次全页 PNG。
  *
  * 官方导出的默认行为正是我们要的：**每页导出"点击到最后一步"的最终状态**（只有加 `--with-clicks` 才是每步一页）， 落地文件名为 `1.png` / `2.png`…，分辨率
  * 1960×1104（2 倍）。不再自己驱动浏览器截图。
+ *
+ * @param slug 课件目录名
+ * @param artifactDir 导出落地的目录（会被清空重建）
  */
 const shoot = (slug: string, artifactDir: string): void => {
   rmSync(artifactDir, { recursive: true, force: true });
@@ -138,18 +173,22 @@ const shoot = (slug: string, artifactDir: string): void => {
   }
 };
 
-const rowHtml = ({ no, oldFile, newFile }: PagePair): string => {
-  const encode = (file: string): string =>
-    `data:image/png;base64,${readFileSync(file).toString("base64")}`;
-
-  return `<section class="row">
+const rowHtml = ({ no, oldFile, newFile }: PagePair): string => `<section class="row">
   <div class="page-no">第 ${no} 页</div>
   <div class="panes">
     <figure><figcaption class="old">旧 · HEAD</figcaption><img src="${encode(oldFile)}" /></figure>
     <figure><figcaption class="new">新 · 工作区</figcaption><img src="${encode(newFile)}" /></figure>
   </div>
 </section>`;
-};
+
+// 总览图里的一行：课名 + 页号 + 差异比例 + 旧 / 新截图
+const overviewRow = ({ slug, pair, ratio }: OverviewPick): string => `<section class="row">
+  <div class="page-no">${slug} · 第 ${pair.no} 页 <span class="ratio">差异 ${(ratio * 100).toFixed(1)}%</span></div>
+  <div class="panes">
+    <figure><figcaption class="old">旧 · HEAD</figcaption><img src="${encode(pair.oldFile)}" /></figure>
+    <figure><figcaption class="new">新 · 工作区</figcaption><img src="${encode(pair.newFile)}" /></figure>
+  </div>
+</section>`;
 
 const pageHtml = (slug: string, pairs: PagePair[], index: number, total: number): string => {
   const title = total > 1 ? `${slug}（第 ${index + 1}/${total} 张）` : slug;
@@ -173,7 +212,7 @@ const pageHtml = (slug: string, pairs: PagePair[], index: number, total: number)
 </style></head>
 <body>
 <h1>${title}</h1>
-${pairs.map(rowHtml).join("\n")}
+${pairs.map((pair) => rowHtml(pair)).join("\n")}
 </body></html>`;
 };
 
@@ -217,7 +256,13 @@ const writeComparison = async (
   return outputs;
 };
 
-/** 逐页算"旧/新差异比例"（缩到 320×180 用 canvas 比，避免整页逐像素太重） */
+/**
+ * 逐页算"旧/新差异比例"（缩到 320×180 用 canvas 比，避免整页逐像素太重）
+ *
+ * @param browser 已启动的 Chromium 实例（全页复用，不逐页开进程）
+ * @param pairs 同一页的旧 / 新截图
+ * @returns 页码 → 变化像素占比
+ */
 const diffRatios = async (
   browser: Awaited<ReturnType<typeof chromium.launch>>,
   pairs: PagePair[],
@@ -227,27 +272,35 @@ const diffRatios = async (
 
   try {
     for (const pair of pairs) {
-      const encode = (file: string): string =>
-        `data:image/png;base64,${readFileSync(file).toString("base64")}`;
-
       const ratio = await page.evaluate(
         async ([oldSrc, newSrc]) => {
-          const load = (src: string): Promise<HTMLImageElement> =>
-            new Promise((resolve) => {
+          // 图片加载必须写在 evaluate 回调内部：整个回调会被序列化到浏览器里执行，引用不到 Node 侧的函数
+          const [oldImage, newImage] = await Promise.all([
+            new Promise<HTMLImageElement>((resolve) => {
               const image = new Image();
-              image.onload = () => {
-                resolve(image);
-              };
-              image.src = src;
-            });
 
-          const [oldImage, newImage] = await Promise.all([load(oldSrc ?? ""), load(newSrc ?? "")]);
+              image.addEventListener("load", () => {
+                resolve(image);
+              });
+              image.src = oldSrc ?? "";
+            }),
+            new Promise<HTMLImageElement>((resolve) => {
+              const image = new Image();
+
+              image.addEventListener("load", () => {
+                resolve(image);
+              });
+              image.src = newSrc ?? "";
+            }),
+          ]);
           const width = 320;
           const height = 180;
           const canvas = document.createElement("canvas");
           canvas.width = width;
           canvas.height = height;
-          const context = canvas.getContext("2d")!;
+          const context = canvas.getContext("2d");
+
+          if (!context) throw new Error("拿不到 canvas 2d 上下文");
           const grab = (image: HTMLImageElement): Uint8ClampedArray => {
             context.clearRect(0, 0, width, height);
             context.drawImage(image, 0, 0, width, height);
@@ -281,22 +334,23 @@ const diffRatios = async (
   return result;
 };
 
-/** 总览图：每门课取"变化最大"的几页，全部课程合成一张大图 */
+/**
+ * 总览图：每门课取"变化最大"的几页，全部课程合成一张大图
+ *
+ * @param slugs 要汇总的课件目录名
+ */
 const buildOverview = async (slugs: string[]): Promise<void> => {
   const perCourse = Number(flag("pages") ?? 3);
   const paneWidth = 480;
   const browser = await chromium.launch();
-  const picks: { slug: string; pair: PagePair; ratio: number }[] = [];
+  const picks: OverviewPick[] = [];
 
   try {
     for (const slug of slugs) {
       const outDir = path.join(ROOT, "courses", slug, ".temp", "compare");
       const oldPages = readPages(path.join(outDir, "old"));
       const newPages = readPages(path.join(outDir, "new"));
-      const pairs: PagePair[] = [...oldPages.keys()]
-        .filter((no) => newPages.has(no))
-        .sort((a, b) => a - b)
-        .map((no) => ({ no, oldFile: oldPages.get(no)!, newFile: newPages.get(no)! }));
+      const pairs = pairPages(oldPages, newPages);
 
       if (pairs.length === 0) {
         console.warn(`⚠️  ${slug}：没有旧/新截图，先跑一次不带 --overview 的对比`);
@@ -340,20 +394,7 @@ const buildOverview = async (slugs: string[]): Promise<void> => {
         deviceScaleFactor: 1,
       });
 
-      const body = chunk
-        .map(({ slug, pair, ratio }) => {
-          const encode = (file: string): string =>
-            `data:image/png;base64,${readFileSync(file).toString("base64")}`;
-
-          return `<section class="row">
-  <div class="page-no">${slug} · 第 ${pair.no} 页 <span class="ratio">差异 ${(ratio * 100).toFixed(1)}%</span></div>
-  <div class="panes">
-    <figure><figcaption class="old">旧 · HEAD</figcaption><img src="${encode(pair.oldFile)}" /></figure>
-    <figure><figcaption class="new">新 · 工作区</figcaption><img src="${encode(pair.newFile)}" /></figure>
-  </div>
-</section>`;
-        })
-        .join("\n");
+      const body = chunk.map((pick) => overviewRow(pick)).join("\n");
 
       const html = `<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8" /><title>风格统一对比总览</title>
@@ -444,10 +485,7 @@ const main = async (): Promise<void> => {
 
       writeFileSync(patchFile, patch);
 
-      /**
-       * 回退到 HEAD —— **旧图必须渲染 HEAD 的内容**。
-       * （曾漏掉这一步：旧图直接用当前工作区导出，结果旧图 = 新图。）
-       */
+      /** 回退到 HEAD —— **旧图必须渲染 HEAD 的内容**。 （曾漏掉这一步：旧图直接用当前工作区导出，结果旧图 = 新图。） */
       const reverted = (): void => {
         execFileSync("git", ["checkout", "HEAD", "--", coursePrefix], { cwd: ROOT });
 
@@ -495,10 +533,7 @@ const main = async (): Promise<void> => {
 
       const oldPages = readPages(path.join(outDir, "old"));
       const newPages = readPages(path.join(outDir, "new"));
-      const pairs: PagePair[] = [...oldPages.keys()]
-        .filter((no) => newPages.has(no))
-        .sort((a, b) => a - b)
-        .map((no) => ({ no, oldFile: oldPages.get(no)!, newFile: newPages.get(no)! }));
+      const pairs = pairPages(oldPages, newPages);
 
       if (pairs.length === 0) {
         console.error(`✗ ${slug}：没配到任何页（旧 ${oldPages.size} 张 / 新 ${newPages.size} 张）`);

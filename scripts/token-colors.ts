@@ -44,12 +44,14 @@ const expandHex = (value: string): string | null => {
   const raw = value.trim().toLowerCase();
 
   if (!/^#[0-9a-f]{3}$|^#[0-9a-f]{6}$/u.test(raw)) return null;
-  if (raw.length === 4)
-    {return `#${raw
+
+  if (raw.length === 4) {
+    return `#${raw
       .slice(1)
       .split("")
       .map((c) => c + c)
-      .join("")}`;}
+      .join("")}`;
+  }
 
   return raw;
 };
@@ -61,10 +63,27 @@ export interface ParsedColor {
   alpha: number;
 }
 
+// 0–255 的通道值 → 两位小写 hex
+const toHex = (part: string): string =>
+  Math.max(0, Math.min(255, Number(part)))
+    .toString(16)
+    .padStart(2, "0");
+
+// `50%` / `0.5` → 0.5；没写透明度、或写成认不出的值时按不透明（1）处理
+const parseAlpha = (raw: string | undefined): number => {
+  if (!raw) return 1;
+
+  const percent = raw.endsWith("%");
+  const value = Number(percent ? raw.slice(0, -1) : raw) / (percent ? 100 : 1);
+
+  return Number.isFinite(value) ? value : 1;
+};
+
 /**
  * 认一个 CSS 颜色字面值：`#abc` / `#aabbcc` / `rgb(r,g,b)` / `rgb(r g b)` / `rgb(r g b / a%)`。
  *
- * 只处理"能直接对应到 token"的形式；渐变、`color-mix()` 等复杂函数返回 `hex: null`。
+ * @param value 一个 CSS 颜色字面值
+ * @returns 归一化的 hex（认不出的复杂函数为 null）与 0–1 的透明度
  */
 export const parseColor = (value: string): ParsedColor => {
   const input = value.trim();
@@ -73,36 +92,19 @@ export const parseColor = (value: string): ParsedColor => {
 
   if (hex) return { hex, alpha: 1 };
 
-  const rgb = /^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)\s*(?:[/,]\s*([\d.]+%?)\s*)?\)$/iu.exec(input);
+  const rgb =
+    /^rgba?\(\s*(?<r>\d+)[\s,]+(?<g>\d+)[\s,]+(?<b>\d+)\s*(?:[/,]\s*(?<alpha>[\d.]+%?)\s*)?\)$/iu.exec(
+      input,
+    );
 
-  if (!rgb) return { hex: null, alpha: 1 };
+  if (!rgb?.groups) return { hex: null, alpha: 1 };
 
-  const toHex = (part: string): string =>
-    Math.max(0, Math.min(255, Number(part)))
-      .toString(16)
-      .padStart(2, "0");
-
-  const alphaRaw = rgb[4];
-  const alpha =
-    alphaRaw === undefined
-      ? 1
-      : alphaRaw.endsWith("%")
-        ? Number.parseFloat(alphaRaw) / 100
-        : Number.parseFloat(alphaRaw);
+  const { r, g, b, alpha: alphaRaw } = rgb.groups;
 
   return {
-    hex: `#${toHex(rgb[1])}${toHex(rgb[2])}${toHex(rgb[3])}`,
-    alpha: Number.isFinite(alpha) ? alpha : 1,
+    hex: `#${toHex(r)}${toHex(g)}${toHex(b)}`,
+    alpha: parseAlpha(alphaRaw),
   };
-};
-
-/** Hex（含 3 位写法）→ token 名；查不到返回 null */
-export const tokenOfHex = (value: string): string | null => {
-  const hex = expandHex(value);
-
-  if (!hex) return null;
-
-  return ALIASES[hex] ?? tokenOfTokenValue.get(hex) ?? null;
 };
 
 const tokenOfTokenValue = new Map<string, string>();
@@ -118,6 +120,20 @@ for (const [value, token] of Object.entries(ALIASES)) {
 
   if (hex && !tokenOfTokenValue.has(hex)) tokenOfTokenValue.set(hex, token);
 }
+
+/**
+ * Hex（含 3 位写法）→ token 名。
+ *
+ * @param value Hex 色值（3 位或 6 位写法）
+ * @returns 对应的 token 名；不在 token 表里则为 null
+ */
+export const tokenOfHex = (value: string): string | null => {
+  const hex = expandHex(value);
+
+  if (!hex) return null;
+
+  return ALIASES[hex] ?? tokenOfTokenValue.get(hex) ?? null;
+};
 
 /**
  * UnoCSS / Tailwind 调色板里**取值与 token 完全相同**的那几档 → token。

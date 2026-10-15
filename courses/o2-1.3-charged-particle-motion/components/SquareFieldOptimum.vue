@@ -192,7 +192,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
             C
           </text>
         </template>
-        <CourseArrow :from="panel.from" :to="panel.to" stroke="var(--c-velocity)" stroke-width="3.2" />
+        <CourseArrow
+          :from="panel.from"
+          :to="panel.to"
+          stroke="var(--c-velocity)"
+          stroke-width="3.2"
+        />
         <text
           v-bind="HALO"
           :x="panel.vLabel[0]"

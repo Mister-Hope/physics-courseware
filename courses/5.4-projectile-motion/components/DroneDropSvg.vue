@@ -9,7 +9,16 @@ const { showAnalysis = false } = defineProps<{ showAnalysis?: boolean }>();
       <SurfaceHatch :from="{ x: 60, y: 320 }" :to="{ x: 600, y: 320 }" side="below" />
       <line x1="278" y1="70" x2="316" y2="70" stroke="var(--c-neutral-300)" stroke-width="3" stroke-linecap="round" />
       <line x1="344" y1="70" x2="382" y2="70" stroke="var(--c-neutral-300)" stroke-width="3" stroke-linecap="round" />
-      <rect x="300" y="80" width="60" height="22" rx="9" fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke="var(--c-neutral-300)" stroke-width="1.6" />
+      <rect
+        x="300"
+        y="80"
+        width="60"
+        height="22"
+        rx="9"
+        fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="1.6"
+      />
       <CourseArrow :from="{ x: 236, y: 91 }" :to="{ x: 294, y: 91 }" stroke="var(--c-accent)" :stroke-width="3" />
       <text x="252" y="76" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-accent)">
         v
@@ -27,7 +36,13 @@ const { showAnalysis = false } = defineProps<{ showAnalysis?: boolean }>();
       <line x1="520" y1="298" x2="520" y2="318" stroke="var(--c-accent)" stroke-width="1.8" />
       <text x="425" y="296" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-accent)">l</text>
       <g v-if="showAnalysis">
-        <path d="M 330 130 Q 425 130 520 320" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="2.4" stroke-dasharray="9 6" />
+        <path
+          d="M 330 130 Q 425 130 520 320"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)"
+          stroke-width="2.4"
+          stroke-dasharray="9 6"
+        />
         <CourseArrow :from="{ x: 500, y: 280 }" :to="{ x: 520, y: 320 }" stroke="var(--c-velocity)" :stroke-width="3" />
         <text x="532" y="302" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-velocity)">v</text>
       </g>

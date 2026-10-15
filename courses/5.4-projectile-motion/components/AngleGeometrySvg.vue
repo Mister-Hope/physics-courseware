@@ -44,20 +44,46 @@ const tick2X = (mPt.x + nPt.x) / 2;
       <line :x1="origin.x" :y1="origin.y" :x2="pointP.x" :y2="pointP.y" stroke="var(--c-physics)" stroke-width="2" stroke-dasharray="8 6" opacity="0.85" />
       <path :d="trail" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
       <path :d="alphaArc" fill="none" stroke="var(--c-physics)" stroke-width="1.8" />
-      <line :x1="360" :y1="pointP.y" :x2="584" :y2="pointP.y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.4" stroke-dasharray="7 6" />
+      <line
+        :x1="360"
+        :y1="pointP.y"
+        :x2="584"
+        :y2="pointP.y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+        stroke-width="1.4"
+        stroke-dasharray="7 6"
+      />
       <CourseArrow :from="pointP" :to="vTip" stroke="var(--c-force)" :stroke-width="3.2" />
       <path :d="thetaArc" fill="none" stroke="var(--c-force)" stroke-width="1.8" />
       <circle :cx="pointP.x" :cy="pointP.y" r="4.5" fill="var(--c-neutral-200)" />
       <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-neutral-200)" />
       <text :x="pointP.x + 14" :y="pointP.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">P</text>
-      <text :x="origin.x - 8" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
+      <text :x="origin.x - 8" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">
+        O
+      </text>
       <text x="248" y="132" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-physics)">α</text>
       <text x="390" y="212" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-physics)">s</text>
       <text :x="vTip.x + 10" :y="vTip.y - 8" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">v</text>
       <text x="510" y="345" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">θ</text>
       <g v-if="showReverse">
-        <line :x1="pointP.x" :y1="pointP.y" :x2="mPt.x" :y2="mPt.y" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
-        <line :x1="pointP.x" :y1="pointP.y" :x2="nPt.x" :y2="nPt.y" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+        <line
+          :x1="pointP.x"
+          :y1="pointP.y"
+          :x2="mPt.x"
+          :y2="mPt.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)"
+          stroke-width="1.6"
+          stroke-dasharray="7 6"
+        />
+        <line
+          :x1="pointP.x"
+          :y1="pointP.y"
+          :x2="nPt.x"
+          :y2="nPt.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)"
+          stroke-width="1.6"
+          stroke-dasharray="7 6"
+        />
         <line :x1="tick1X" y1="58" :x2="tick1X" y2="82" stroke="var(--c-physics)" stroke-width="2.2" />
         <line :x1="tick2X" y1="58" :x2="tick2X" y2="82" stroke="var(--c-physics)" stroke-width="2.2" />
         <circle :cx="mPt.x" :cy="mPt.y" r="3.4" fill="var(--c-neutral-200)" />

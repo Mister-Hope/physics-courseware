@@ -191,7 +191,13 @@ const onUp = (): void => {
       />
       <CourseArrow :from="pointB" :to="pointA" stroke="var(--c-velocity)" stroke-width="3" />
       <circle :cx="pointA.x" :cy="pointA.y" r="6.5" fill="var(--c-accent)" />
-      <circle :cx="pointB.x" :cy="pointB.y" r="20" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="none" />
+      <circle
+        :cx="pointB.x"
+        :cy="pointB.y"
+        r="20"
+        fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)"
+        stroke="none"
+      />
       <circle :cx="pointB.x" :cy="pointB.y" r="6.5" fill="var(--c-velocity)" />
       <text
         :x="pointA.x - 26"

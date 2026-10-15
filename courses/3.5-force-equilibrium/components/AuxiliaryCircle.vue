@@ -374,7 +374,12 @@ const endDrag = (): void => {
             @pointercancel="endDrag"
           >
             <circle cx="14" cy="0" r="24" fill="transparent" />
-            <GripHand :scale="0.68" flip color="#2dd4bf" fill="color-mix(in srgb, var(--c-physics) 20%, transparent)" />
+            <GripHand
+              :scale="0.68"
+              flip
+              color="#2dd4bf"
+              fill="color-mix(in srgb, var(--c-physics) 20%, transparent)"
+            />
           </g>
 
           <!-- 右手：捏住右绳末端 endR，沿右绳方向向上拉（同样支持拖动旋转） -->
@@ -387,7 +392,11 @@ const endDrag = (): void => {
             @pointercancel="endDrag"
           >
             <circle cx="14" cy="0" r="24" fill="transparent" />
-            <GripHand :scale="0.68" color="#e2a846" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" />
+            <GripHand
+              :scale="0.68"
+              color="#e2a846"
+              fill="color-mix(in srgb, var(--c-accent) 20%, transparent)"
+            />
           </g>
         </svg>
       </div>

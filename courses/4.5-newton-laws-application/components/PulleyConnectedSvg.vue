@@ -17,8 +17,26 @@ const { showForces = false } = defineProps<{ showForces?: boolean }>();
     <path d="M 166 72 A 34 34 0 0 1 234 72" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.4" />
     <line x1="166" y1="72" x2="166" y2="200" stroke="var(--c-neutral-300)" stroke-width="2.4" />
     <line x1="234" y1="72" x2="234" y2="180" stroke="var(--c-neutral-300)" stroke-width="2.4" />
-    <rect x="145" y="200" width="42" height="36" rx="4" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
-    <rect x="213" y="180" width="42" height="36" rx="4" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
+    <rect
+      x="145"
+      y="200"
+      width="42"
+      height="36"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="2.2"
+    />
+    <rect
+      x="213"
+      y="180"
+      width="42"
+      height="36"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="2.2"
+    />
     <text x="166" y="224" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-neutral-200)">m</text>
     <text x="234" y="204" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-neutral-200)">
       <tspan font-family="KaTeX_Main">3</tspan>

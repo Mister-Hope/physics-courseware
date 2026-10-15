@@ -4,7 +4,16 @@
   <svg class="fig" viewBox="0 0 660 305" style="max-width: 28rem" xmlns="http://www.w3.org/2000/svg">
     <!-- ── 左上：面接触（物块压在水平地面上）── -->
     <line x1="25" y1="100" x2="295" y2="100" stroke="var(--c-neutral-300)" stroke-width="3" />
-    <rect x="110" y="58" width="100" height="42" rx="5" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+    <rect
+      x="110"
+      y="58"
+      width="100"
+      height="42"
+      rx="5"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.4"
+    />
     <text x="160" y="138" text-anchor="middle" font-size="15" fill="var(--c-text-dim)">面接触</text>
 
     <!-- ── 右上：点接触（球压在斜面上）── -->
@@ -19,7 +28,16 @@
 
     <!-- ── 左下：杆斜搭在箱子的棱上（接触处是杆面，弹力垂直于杆）── -->
     <line x1="20" y1="265" x2="300" y2="265" stroke="var(--c-neutral-300)" stroke-width="3" />
-    <rect x="95" y="215" width="135" height="50" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+    <rect
+      x="95"
+      y="215"
+      width="135"
+      height="50"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.4"
+    />
     <line x1="32" y1="265" x2="149.5" y2="171.7" stroke="var(--c-accent)" stroke-width="4.2" stroke-linecap="round" />
     <text x="160" y="298" text-anchor="middle" font-size="15" fill="var(--c-text-dim)">杆搭在棱上</text>
 

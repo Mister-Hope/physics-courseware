@@ -189,7 +189,16 @@ const endDrag = (): void => {
     />
 
     <!-- 左侧悬挂点与 A 点等高水平参考虚线（y = 40） -->
-    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="POINT_A.x" :y2="POINT_A.y" stroke="var(--c-neutral-500)" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.45" />
+    <line
+      :x1="LEFT_ANCHOR.x"
+      :y1="LEFT_ANCHOR.y"
+      :x2="POINT_A.x"
+      :y2="POINT_A.y"
+      stroke="var(--c-neutral-500)"
+      stroke-width="1.1"
+      stroke-dasharray="4 4"
+      opacity="0.45"
+    />
 
     <!-- L 形墙角滑轨亮色引导虚线（A — B — C） -->
     <polyline
@@ -293,7 +302,16 @@ const endDrag = (): void => {
 
     <!-- 动滑轮下方吊绳与重物 Mg -->
     <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="pointP.y + 52" stroke="var(--c-text-dim)" stroke-width="2.2" />
-    <rect :x="pointP.x - 25" :y="pointP.y + 52" width="50" height="30" rx="6" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
+    <rect
+      :x="pointP.x - 25"
+      :y="pointP.y + 52"
+      width="50"
+      height="30"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)"
+      stroke="var(--c-velocity)"
+      stroke-width="2"
+    />
 
     <!-- 轻质动滑轮轮体 -->
     <circle :cx="pointP.x" :cy="pointP.y" r="13" fill="color-mix(in srgb, var(--c-bg-soft) 88%, transparent)" stroke="var(--c-accent)" stroke-width="2.6" />

@@ -1,7 +1,12 @@
 <template>
   <!-- 第 15 页：正六边形 OABCDE 与从 O 出发的五个位移矢量 -->
   <svg viewBox="0 0 300 250" width="100%" style="max-width: 19rem" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="34,130 79,52 169,52 214,130 169,208 79,208" fill="color-mix(in srgb, var(--c-text-dim) 6%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+    <polygon
+      points="34,130 79,52 169,52 214,130 169,208 79,208"
+      fill="color-mix(in srgb, var(--c-text-dim) 6%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.4"
+    />
     <CourseArrow :from="{ x: 34, y: 130 }" :to="{ x: 79.32, y: 52.11 }" stroke="var(--c-accent)" stroke-width="2.4" />
     <CourseArrow :from="{ x: 34, y: 130 }" :to="{ x: 169, y: 52 }" stroke="var(--c-accent)" stroke-width="2.4" />
     <CourseArrow :from="{ x: 34, y: 130 }" :to="{ x: 214, y: 130 }" stroke="var(--c-accent)" stroke-width="2.4" />

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /**
- * 第 6 页：并联电路 —— 元件一律用共享 `<CircuitBattery>` / `<CircuitResistor>`，导线手画（1.6、止于元件两端）。
- * 电源、R₁、R₂ 三条支路接在**同两条**导轨之间，所以每个电阻两端的电压都等于电源电压
+ * 第 6 页：并联电路 —— 元件一律用共享 `<CircuitBattery>` / `<CircuitResistor>`，导线手画（1.6、止于元件两端）。 电源、R₁、R₂ 三条支路接在**同两条**导轨之间，所以每个电阻两端的电压都等于电源电压
  * （上一版的画法把电源接在两个不同节点上，拓扑是错的）；电源长板（正极）在上。
  */
 </script>
@@ -27,46 +26,17 @@
     <CircuitResistor :x="240" :y="130" orientation="vertical" />
     <CircuitResistor :x="380" :y="130" orientation="vertical" />
     <!-- 电阻标注：R₁ / R₂（下标用 tspan，与全仓 SVG 标注口径一致） -->
-    <text
-      x="240"
-      y="216"
-      text-anchor="middle"
-      font-family="KaTeX_Math"
-      font-style="italic"
-      font-size="19"
-      fill="var(--c-velocity)"
-    >
+    <text x="240" y="216" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-velocity)">
       <tspan>R</tspan>
       <tspan dy="5" font-size="13">1</tspan>
     </text>
-    <text
-      x="380"
-      y="216"
-      text-anchor="middle"
-      font-family="KaTeX_Math"
-      font-style="italic"
-      font-size="19"
-      fill="var(--c-force)"
-    >
+    <text x="380" y="216" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">
       <tspan>R</tspan>
       <tspan dy="5" font-size="13">2</tspan>
     </text>
     <!-- 电流：自正极出来沿上导轨向右，再分别向下流过两个电阻 -->
-    <CourseArrow
-      :from="{ x: 112, y: 55 }"
-      :to="{ x: 176, y: 55 }"
-      stroke="var(--c-accent)"
-      stroke-width="3"
-      label="I"
-      :label-dy="-8"
-      :label-dx="8"
-    />
-    <CourseArrow
-      :from="{ x: 240, y: 62 }"
-      :to="{ x: 240, y: 92 }"
-      stroke="var(--c-accent)"
-      stroke-width="3"
-    />
+    <CourseArrow :from="{ x: 112, y: 55 }" :to="{ x: 176, y: 55 }" stroke="var(--c-accent)" stroke-width="3" label="I" :label-dy="-8" :label-dx="8" />
+    <CourseArrow :from="{ x: 240, y: 62 }" :to="{ x: 240, y: 92 }" stroke="var(--c-accent)" stroke-width="3" />
     <text
       x="250"
       y="78"
@@ -81,12 +51,7 @@
       <tspan>I</tspan>
       <tspan dy="4" font-size="12">1</tspan>
     </text>
-    <CourseArrow
-      :from="{ x: 380, y: 62 }"
-      :to="{ x: 380, y: 92 }"
-      stroke="var(--c-accent)"
-      stroke-width="3"
-    />
+    <CourseArrow :from="{ x: 380, y: 62 }" :to="{ x: 380, y: 92 }" stroke="var(--c-accent)" stroke-width="3" />
     <text
       x="390"
       y="78"
@@ -102,14 +67,6 @@
       <tspan dy="4" font-size="12">2</tspan>
     </text>
     <!-- 电源两端的电压 U（也就是每个电阻两端的电压） -->
-    <CourseArrow
-      :from="{ x: 58, y: 180 }"
-      :to="{ x: 58, y: 60 }"
-      stroke="var(--c-velocity)"
-      stroke-width="2.6"
-      label="U"
-      :label-dx="-16"
-      :label-dy="0"
-    />
+    <CourseArrow :from="{ x: 58, y: 180 }" :to="{ x: 58, y: 60 }" stroke="var(--c-velocity)" stroke-width="2.6" label="U" :label-dx="-16" :label-dy="0" />
   </svg>
 </template>

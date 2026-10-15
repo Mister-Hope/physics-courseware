@@ -98,7 +98,15 @@
         opacity="0.9"
       />
       <!-- 后轮飞轮 (Rear Sprocket) -->
-      <circle cx="104" cy="196" r="8.5" fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" stroke-dasharray="3 1.5" />
+      <circle
+        cx="104"
+        cy="196"
+        r="8.5"
+        fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="2.2"
+        stroke-dasharray="3 1.5"
+      />
       <!-- 中轴大牙盘 (Front Chainring) -->
       <circle cx="192" cy="198" r="13.5" fill="color-mix(in srgb, var(--c-bg-soft) 80%, transparent)" stroke="var(--c-accent)" stroke-width="2.4" />
       <circle cx="192" cy="198" r="9" fill="none" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity="0.7" />

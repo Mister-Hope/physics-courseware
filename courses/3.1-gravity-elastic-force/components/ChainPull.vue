@@ -123,11 +123,26 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
         stroke-dasharray="6 5"
         opacity="0.7"
       />
-      <text x="52" :y="naturalCenterY - 10" font-size="15" fill="var(--c-text-dim)">自然下垂时的重心</text>
-      <path :d="path" fill="none" stroke="var(--c-accent)" stroke-width="6" stroke-linecap="round" />
+      <text x="52" :y="naturalCenterY - 10" font-size="15" fill="var(--c-text-dim)">
+        自然下垂时的重心
+      </text>
+      <path
+        :d="path"
+        fill="none"
+        stroke="var(--c-accent)"
+        stroke-width="6"
+        stroke-linecap="round"
+      />
       <circle :cx="PIN_L.x" :cy="PIN_L.y" r="7.5" fill="var(--c-neutral-500)" />
       <circle :cx="PIN_R.x" :cy="PIN_R.y" r="7.5" fill="var(--c-neutral-500)" />
-      <circle :cx="CENTER_X" :cy="centerY" r="9" fill="var(--c-force)" stroke="var(--c-bg-soft)" stroke-width="2" />
+      <circle
+        :cx="CENTER_X"
+        :cy="centerY"
+        r="9"
+        fill="var(--c-force)"
+        stroke="var(--c-bg-soft)"
+        stroke-width="2"
+      />
       <line
         :x1="CENTER_X"
         :y1="centerY"
@@ -155,15 +170,21 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
         stroke-width="3.4"
       />
       <text :x="CENTER_X + 14" :y="midY - 18" font-size="16" fill="var(--c-velocity)">往下拽</text>
-      <text x="150" y="62" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">固定点</text>
-      <text x="450" y="62" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">固定点</text>
+      <text x="150" y="62" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">
+        固定点
+      </text>
+      <text x="450" y="62" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">
+        固定点
+      </text>
     </svg>
     <div class="cg-chain-ctrl">
       <label class="cg-chain-label">
         <span>往下拽的程度（松 ↔ 紧）</span>
         <input v-model.number="pull" type="range" min="0" max="1" step="0.01" />
       </label>
-      <div class="cg-chain-read">最低点被拽得越低、铁链绷得越直 → 重心反而<b class="cg-chain-num">升高</b></div>
+      <div class="cg-chain-read">
+        最低点被拽得越低、铁链绷得越直 → 重心反而<b class="cg-chain-num">升高</b>
+      </div>
     </div>
   </div>
 </template>

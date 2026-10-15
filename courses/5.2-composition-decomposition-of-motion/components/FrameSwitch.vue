@@ -82,7 +82,13 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
         stroke-width="1.8"
       />
-      <text :x="LEFT_X + 16" y="36" font-family="KaTeX_Main" font-size="16" fill="var(--c-neutral-300)">
+      <text
+        :x="LEFT_X + 16"
+        y="36"
+        font-family="KaTeX_Main"
+        font-size="16"
+        fill="var(--c-neutral-300)"
+      >
         地面参考系（C）看
       </text>
       <line
@@ -219,7 +225,13 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
         stroke-width="1.8"
       />
-      <text :x="RIGHT_X + 16" y="36" font-family="KaTeX_Main" font-size="16" fill="var(--c-neutral-300)">
+      <text
+        :x="RIGHT_X + 16"
+        y="36"
+        font-family="KaTeX_Main"
+        font-size="16"
+        fill="var(--c-neutral-300)"
+      >
         传送带参考系（B）看
       </text>
       <rect

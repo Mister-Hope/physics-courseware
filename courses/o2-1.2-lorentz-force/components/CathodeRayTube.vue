@@ -39,7 +39,10 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
       <!-- 玻璃管高光与微透渐变 -->
       <linearGradient id="crt-glass" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
-        <stop offset="25%" stop-color="color-mix(in srgb, var(--c-surface-solid) 25%, transparent)" />
+        <stop
+          offset="25%"
+          stop-color="color-mix(in srgb, var(--c-surface-solid) 25%, transparent)"
+        />
         <stop offset="75%" stop-color="color-mix(in srgb, var(--c-neutral-900) 40%, transparent)" />
         <stop offset="100%" stop-color="color-mix(in srgb, var(--c-text-dim) 15%, transparent)" />
       </linearGradient>
@@ -122,11 +125,20 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
     <!-- ── 电子束（step ≥ 3 时点亮；平时暗淡但可见） ── -->
     <g :style="{ opacity: s >= 3 ? 1 : 0.22, transition: 'opacity .35s' }">
       <!-- 阴极发射向阳极的锥形聚焦束 -->
-      <polygon points="98,185 200,198 200,212 98,225" fill="color-mix(in srgb, var(--c-velocity) 25%, transparent)" />
+      <polygon
+        points="98,185 200,198 200,212 98,225"
+        fill="color-mix(in srgb, var(--c-velocity) 25%, transparent)"
+      />
       <!-- 穿过阳极孔射向挡板的准直束 -->
-      <polygon points="208,198 424,196 424,214 208,212" fill="color-mix(in srgb, var(--c-velocity) 30%, transparent)" />
+      <polygon
+        points="208,198 424,196 424,214 208,212"
+        fill="color-mix(in srgb, var(--c-velocity) 30%, transparent)"
+      />
       <!-- 穿过狭缝照射在倾斜荧光板上的明亮光带 -->
-      <polygon points="440,200 605,202 605,208 440,210" fill="color-mix(in srgb, var(--c-velocity) 45%, transparent)" />
+      <polygon
+        points="440,200 605,202 605,208 440,210"
+        fill="color-mix(in srgb, var(--c-velocity) 45%, transparent)"
+      />
 
       <!-- 中心高亮度蓝色主束线 -->
       <line

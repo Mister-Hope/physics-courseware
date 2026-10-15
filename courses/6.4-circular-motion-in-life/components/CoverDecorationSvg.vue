@@ -35,8 +35,23 @@
       stroke-width="1.4"
       stroke-linejoin="round"
     />
-    <path d="M 41.6 120.91 A 126 126 0 0 1 278.4 120.91" fill="none" stroke="color-mix(in srgb, var(--c-neutral-200) 20%, transparent)" stroke-width="1.6" stroke-dasharray="9 9" />
-    <line x1="60.49" y1="91.7" x2="154.34" y2="159.89" stroke="color-mix(in srgb, var(--c-accent) 38%, transparent)" stroke-width="1.4" stroke-dasharray="5 6" stroke-linecap="round" />
+    <path
+      d="M 41.6 120.91 A 126 126 0 0 1 278.4 120.91"
+      fill="none"
+      stroke="color-mix(in srgb, var(--c-neutral-200) 20%, transparent)"
+      stroke-width="1.6"
+      stroke-dasharray="9 9"
+    />
+    <line
+      x1="60.49"
+      y1="91.7"
+      x2="154.34"
+      y2="159.89"
+      stroke="color-mix(in srgb, var(--c-accent) 38%, transparent)"
+      stroke-width="1.4"
+      stroke-dasharray="5 6"
+      stroke-linecap="round"
+    />
     <circle cx="160" cy="164" r="5.2" fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.6" />
     <circle cx="160" cy="164" r="1.8" fill="color-mix(in srgb, var(--c-accent) 85%, transparent)" />
     <g transform="translate(60.49 91.7) rotate(-54)">

@@ -38,5 +38,5 @@ trustPolicyIgnoreAfter: 720
 patchedDependencies:
   "@shikijs/vitepress-twoslash@4.5.0": patches/@shikijs__vitepress-twoslash@4.5.0.patch
 permissions:
-  '@slidev/cli':
+  "@slidev/cli":
     skills: true

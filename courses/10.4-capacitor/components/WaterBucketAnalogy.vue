@@ -114,7 +114,14 @@ onUnmounted(() => {
   >
     <svg ref="svgRef" viewBox="0 0 680 230" class="block w-full h-auto">
       <!-- ═══════ 左侧：水桶 ═══════ -->
-      <text x="210" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="var(--c-text-dim)">
+      <text
+        x="210"
+        y="18"
+        text-anchor="middle"
+        font-size="14"
+        font-weight="800"
+        fill="var(--c-text-dim)"
+      >
         水桶装水
       </text>
 
@@ -166,7 +173,14 @@ onUnmounted(() => {
         stroke="#b8860b"
         stroke-width="0.6"
       />
-      <circle cx="81.5" cy="61" r="3" fill="var(--c-accent-glow)" stroke="#b8860b" stroke-width="0.6" />
+      <circle
+        cx="81.5"
+        cy="61"
+        r="3"
+        fill="var(--c-accent-glow)"
+        stroke="#b8860b"
+        stroke-width="0.6"
+      />
 
       <!-- 出水弯管：无外层边框，与管身无缝衔接 -->
       <!-- 弯管从管身内部 x=103 出发，中心线 y=80 -->
@@ -255,7 +269,14 @@ onUnmounted(() => {
         stroke-width="1"
         stroke-dasharray="3,3"
       />
-      <line x1="338" y1="223" x2="338" :y2="223 - level * 131" stroke="var(--c-accent)" stroke-width="2" />
+      <line
+        x1="338"
+        y1="223"
+        x2="338"
+        :y2="223 - level * 131"
+        stroke="var(--c-accent)"
+        stroke-width="2"
+      />
       <!-- h 顶端箭头（指向上） -->
       <polygon
         :points="`334,${223 - level * 131 + 8} 338,${223 - level * 131 - 1} 342,${223 - level * 131 + 8}`"
@@ -263,10 +284,19 @@ onUnmounted(() => {
       />
       <!-- h 底端箭头（指向下） -->
       <polygon :points="`334,${223 - 8} 338,${223 + 1} 342,${223 - 8}`" fill="var(--c-accent)" />
-      <text x="353" :y="223 - level * 65" font-size="14" font-weight="800" fill="var(--c-accent)">h</text>
+      <text x="353" :y="223 - level * 65" font-size="14" font-weight="800" fill="var(--c-accent)">
+        h
+      </text>
 
       <!-- ═══════ 右侧：电容器 ═══════ -->
-      <text x="480" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="var(--c-text-dim)">
+      <text
+        x="480"
+        y="18"
+        text-anchor="middle"
+        font-size="14"
+        font-weight="800"
+        fill="var(--c-text-dim)"
+      >
         电容器充电
       </text>
 

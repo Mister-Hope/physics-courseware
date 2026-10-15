@@ -1,7 +1,16 @@
 <template>
   <!-- 第 20 页：打点计时器纸带——点迹越来越疏，表示相同时间内位移越来越大 -->
   <svg viewBox="0 0 620 100" style="display: block; width: 100%; max-width: 780px; margin: 0 auto">
-    <rect x="10" y="30" width="600" height="34" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke-width="1.5" />
+    <rect
+      x="10"
+      y="30"
+      width="600"
+      height="34"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
+      stroke-width="1.5"
+    />
     <g fill="var(--c-accent)">
       <circle cx="40" cy="47" r="4.5" />
       <circle cx="58" cy="47" r="4.5" />

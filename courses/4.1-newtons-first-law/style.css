@@ -20,7 +20,6 @@
   display: flex;
   gap: 1.1rem;
   align-items: baseline;
-
   line-height: 1.6;
 }
 
@@ -34,9 +33,7 @@
 .inertia-quote {
   padding-left: 1.1rem;
   border-left: 2px solid var(--c-border);
-
   color: var(--c-text-dim);
-
   line-height: 1.6;
 }
 
@@ -49,7 +46,6 @@
   display: flex;
   gap: 1.2rem;
   align-items: center;
-
   color: var(--c-text-dim);
 }
 

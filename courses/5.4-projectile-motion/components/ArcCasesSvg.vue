@@ -87,8 +87,22 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
     <svg viewBox="60 90 480 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平抛与圆弧的三种情形">
       <!-- 情形 1：沿切线进入（圆心在上方的碗形轨道） -->
       <g v-if="variant === 1">
-        <path :d="arcPath(center1.x, center1.y, radius1, 90, 180)" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="6" stroke-linecap="round" />
-        <line :x1="center1.x" :y1="center1.y" :x2="ENTRY1.x" :y2="ENTRY1.y" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="1.8" stroke-dasharray="7 6" />
+        <path
+          :d="arcPath(center1.x, center1.y, radius1, 90, 180)"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
+        <line
+          :x1="center1.x"
+          :y1="center1.y"
+          :x2="ENTRY1.x"
+          :y2="ENTRY1.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)"
+          stroke-width="1.8"
+          stroke-dasharray="7 6"
+        />
         <circle :cx="center1.x" :cy="center1.y" r="5" fill="none" stroke="var(--c-force)" stroke-width="2.2" />
         <text :x="center1.x + 12" :y="center1.y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">O</text>
         <circle :cx="origin1.x" :cy="origin1.y" r="5.5" fill="var(--c-neutral-200)" />
@@ -109,7 +123,13 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
 
       <!-- 情形 2：从圆心水平抛出 -->
       <g v-else-if="variant === 2">
-        <path :d="arcPath(center2.x, center2.y, radius2, 0, 90)" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="6" stroke-linecap="round" />
+        <path
+          :d="arcPath(center2.x, center2.y, radius2, 0, 90)"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
         <line
           :x1="center2.x"
           :y1="center2.y"
@@ -133,7 +153,14 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
         <CourseArrow :from="center2" :to="{ x: center2.x + 104, y: center2.y }" stroke="var(--c-accent)" :stroke-width="3" />
         <text :x="center2.x + 36" :y="center2.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">v</text>
         <text :x="center2.x + 48" :y="center2.y - 10" font-family="KaTeX_Main" font-style="normal" font-size="13" fill="var(--c-accent)">0</text>
-        <line :x1="center2.x" :y1="center2.y" :x2="LANDING2.x" :y2="LANDING2.y" stroke="color-mix(in srgb, var(--c-velocity) 90%, transparent)" stroke-width="2.4" />
+        <line
+          :x1="center2.x"
+          :y1="center2.y"
+          :x2="LANDING2.x"
+          :y2="LANDING2.y"
+          stroke="color-mix(in srgb, var(--c-velocity) 90%, transparent)"
+          stroke-width="2.4"
+        />
         <path :d="arcPath(center2.x, center2.y, 62, 0, 40)" fill="none" stroke="var(--c-velocity)" stroke-width="2" />
         <text :x="center2.x + 74" :y="center2.y + 32" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-velocity-light)">θ</text>
         <circle :cx="LANDING2.x" :cy="LANDING2.y" r="5.5" fill="var(--c-force)" />
@@ -166,9 +193,23 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
 
       <!-- 情形 3：同一端两个速度，反向延长线的交点都在圆心左侧 -->
       <g v-else>
-        <path :d="arcPath(center3.x, center3.y, radius3, 0, 180)" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="6" stroke-linecap="round" />
+        <path
+          :d="arcPath(center3.x, center3.y, radius3, 0, 180)"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)"
+          stroke-width="6"
+          stroke-linecap="round"
+        />
         <line x1="160" y1="140" x2="500" y2="140" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
-        <line :x1="center3.x" y1="112" :x2="center3.x" y2="336" stroke="color-mix(in srgb, var(--c-force) 55%, transparent)" stroke-width="1.6" stroke-dasharray="5 6" />
+        <line
+          :x1="center3.x"
+          y1="112"
+          :x2="center3.x"
+          y2="336"
+          stroke="color-mix(in srgb, var(--c-force) 55%, transparent)"
+          stroke-width="1.6"
+          stroke-dasharray="5 6"
+        />
         <circle :cx="center3.x" :cy="center3.y" r="5" fill="none" stroke="var(--c-force)" stroke-width="2.2" />
         <text :x="center3.x + 12" :y="center3.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">O</text>
         <circle :cx="A_SMALL.x" :cy="A_SMALL.y" r="5.5" fill="var(--c-neutral-200)" />

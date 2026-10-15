@@ -289,10 +289,9 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
    图宽上限交给共享的 .fig-svg（本课 style.css）读 --fig-max。
    第 2 页题目页图栏 ≈ 438px、第 3/4 页解析页图栏 ≈ 500px —— 540px 让两处都被栏宽限住、吃满可用面积 */
 .fig-swing {
+  --fig-max: 540px;
   display: block;
   align-self: flex-start;
   width: 100%;
-
-  --fig-max: 540px;
 }
 </style>

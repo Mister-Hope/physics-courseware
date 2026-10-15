@@ -37,6 +37,19 @@ export default defineHopeConfig(
       "vue/max-props": ["warn", { maxProps: 12 }],
     },
   },
+  // `scripts/**` 是**顺序编排**性质的工具脚本，下面两条规则在这里天然不适用（其余规则照常生效）：
+  // - `no-await-in-loop`：Playwright 逐页截图 / Slidev 逐课导出必须一页一页**顺序**跑完
+  //   （并发会互相抢 GPU 与端口，而且"先回退到 HEAD 再截旧图、再打回补丁截新图"本身就是流程正确性的一部分），
+  //   改成 `Promise.all` 会直接改变行为；
+  // - `max-statements`：这里的"长函数"就是一条线性编排流水线（起浏览器 → 逐页循环 → 收尾落盘），
+  //   拆开只会把流程切碎、凭空多出十几个要往下传的上下文变量，可读性反而更差。
+  {
+    files: ["scripts/**"],
+    rules: {
+      "no-await-in-loop": "off",
+      "max-statements": "off",
+    },
+  },
   // Vue 单文件组件由 SFC 编译器统一按 ES module 处理；组件里可以只有模板 + `defineProps`、
   // 一个 import/export 都没有，会被 `import/unambiguous` 误判成脚本（预设已对 `*.d.ts` 关掉同一规则）。
   {

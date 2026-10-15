@@ -228,7 +228,13 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)"
         stroke-width="2"
       />
-      <text x="40" y="44" font-family="KaTeX_Main, sans-serif" font-size="19" fill="var(--c-text-dim)">
+      <text
+        x="40"
+        y="44"
+        font-family="KaTeX_Main, sans-serif"
+        font-size="19"
+        fill="var(--c-text-dim)"
+      >
         水平桌面（俯视）
       </text>
 
@@ -280,7 +286,13 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         stroke-width="9"
         stroke-linecap="round"
       />
-      <path :d="trackPath" fill="none" stroke="var(--c-physics)" stroke-width="3.8" stroke-linecap="round" />
+      <path
+        :d="trackPath"
+        fill="none"
+        stroke="var(--c-physics)"
+        stroke-width="3.8"
+        stroke-linecap="round"
+      />
 
       <!-- 起点 origin 处的钢球虚影位 -->
       <circle
@@ -343,7 +355,14 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         <rect x="-34" y="-15" width="68" height="4" rx="2" fill="rgba(255,255,255,0.22)" />
 
         <!-- 红蓝极性平直分界线 + 整体金属外框（无任何交界凹槽） -->
-        <line x1="0" y1="-18" x2="0" y2="18" stroke="color-mix(in srgb, var(--c-neutral-900) 55%, transparent)" stroke-width="1.5" />
+        <line
+          x1="0"
+          y1="-18"
+          x2="0"
+          y2="18"
+          stroke="color-mix(in srgb, var(--c-neutral-900) 55%, transparent)"
+          stroke-width="1.5"
+        />
         <rect
           x="-37"
           y="-18"
@@ -399,8 +418,18 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
       </text>
 
       <!-- 速度 v 与磁力 F 矢量箭头（先画箭头，再盖上立体钢球与分侧标签） -->
-      <CourseArrow :from="probe.vFrom" :to="probe.vTip" stroke="var(--c-velocity)" stroke-width="3.5" />
-      <CourseArrow :from="probe.fFrom" :to="probe.fTip" stroke="var(--c-accent)" stroke-width="3.5" />
+      <CourseArrow
+        :from="probe.vFrom"
+        :to="probe.vTip"
+        stroke="var(--c-velocity)"
+        stroke-width="3.5"
+      />
+      <CourseArrow
+        :from="probe.fFrom"
+        :to="probe.fTip"
+        stroke="var(--c-accent)"
+        stroke-width="3.5"
+      />
 
       <!-- 速度 v 与磁力 F 的独立防重叠标签 -->
       <text

@@ -13,11 +13,11 @@
 
 ### 共享正本（`workspace/shared/styles/`，影响全部 34 门课）
 
-| 文件 | 改动 | 原因 |
-| --- | --- | --- |
-| `common.css` | 正文规则补 `.slidev-layout > div { font-size: 1rem }` | Slidev 主题让裸 div 继承 1.1rem，比 p/li 大 10%；1.3 agent 实测抓到第 37 页顶出 17.3px |
-| `common.css` | 新增 `.icon-md/lg/xl/2xl` 图标尺寸阶梯 | 治"图标被 svg 16px 基准钉死"（10.4 两处 `text-6xl` 失效） |
-| `atoms.css` | `.ok`/`.bad`/`.step-list`/`.figure`/`.fig-cap`/`.data-table`/`.split-wide`/`.fig-narrow` | 从 6–9 门课的重复发明提炼 |
+| 文件         | 改动                                                                                     | 原因                                                                                   |
+| ------------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `common.css` | 正文规则补 `.slidev-layout > div { font-size: 1rem }`                                    | Slidev 主题让裸 div 继承 1.1rem，比 p/li 大 10%；1.3 agent 实测抓到第 37 页顶出 17.3px |
+| `common.css` | 新增 `.icon-md/lg/xl/2xl` 图标尺寸阶梯                                                   | 治"图标被 svg 16px 基准钉死"（10.4 两处 `text-6xl` 失效）                              |
+| `atoms.css`  | `.ok`/`.bad`/`.step-list`/`.figure`/`.fig-cap`/`.data-table`/`.split-wide`/`.fig-narrow` | 从 6–9 门课的重复发明提炼                                                              |
 
 ### 文档
 
@@ -35,11 +35,11 @@
 
 **这 3 门课从未被派过 agent、工作区零改动**，但 e2e 溢出 ≠ 0。已用 `git stash pop` + 单独复跑证实**与本轮 `common.css` 改动无关**（基线就失败）。
 
-| 课件 | 溢出量 | 根因 | 判断 |
-| --- | --- | --- | --- |
-| `2.x-motion-exercises` | 上 **3.4px** | 第 5 页 `<MeetCountModel />` 内 `CoordAxes`（共享组件，`view={width:520,height:450}`）顶出画布 | **贴边问题**，微调即可：把 `view.height` 从 450 降到 ~430，或给该页 `max-height` 收一点 |
-| `12.1-energy-conversion-in-circuits` | 上 **12.9px**（内部 latex 9.9px） | 第 13 页 `.ask` + `span.latex`（10000 mAh / 3.7 V）总高超出 `.page-grow` | 内容略多，**可能拆页或让 `.ask` 字号降一档**（非"严重溢出"，不用大改） |
-| `1.1-motion-description` | 上 **16px**（全量跑时报，单独跑通过） | 第 16 页 | ⚠️ **可能是全量并发时的状态污染**（单独跑 `1 passed`）；修前 2 门后**单独复跑确认**再定性 |
+| 课件                                 | 溢出量                                | 根因                                                                                           | 判断                                                                                      |
+| ------------------------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `2.x-motion-exercises`               | 上 **3.4px**                          | 第 5 页 `<MeetCountModel />` 内 `CoordAxes`（共享组件，`view={width:520,height:450}`）顶出画布 | **贴边问题**，微调即可：把 `view.height` 从 450 降到 ~430，或给该页 `max-height` 收一点   |
+| `12.1-energy-conversion-in-circuits` | 上 **12.9px**（内部 latex 9.9px）     | 第 13 页 `.ask` + `span.latex`（10000 mAh / 3.7 V）总高超出 `.page-grow`                       | 内容略多，**可能拆页或让 `.ask` 字号降一档**（非"严重溢出"，不用大改）                    |
+| `1.1-motion-description`             | 上 **16px**（全量跑时报，单独跑通过） | 第 16 页                                                                                       | ⚠️ **可能是全量并发时的状态污染**（单独跑 `1 passed`）；修前 2 门后**单独复跑确认**再定性 |
 
 **按你的要求**：这 3 处都**不属于"内容严重溢出、需要拆页或大幅缩字号"**（最大也就 16px，其余 3.4/12.9px），所以**可以一起修**——2.x 调 `CoordAxes` 的 viewBox 高度、12.1 让 `.ask` 收一档或微调间距、1.1 先复跑确认是否真存在。
 
@@ -71,6 +71,7 @@
 ```text
 provider="opencode-go"  model="deepseek-v4.1-flash"  reasoning_effort="high"
 ```
+
 ⚠️ id 全小写；写成 `DeepSeekV4.1` 会被拒。每批 4 门课并行、写范围各自 `courses/<slug>/`；每门 prompt 里必须钉死：物理正确性绝对优先、别碰 o2-1.3、别把组件 scoped 样本抄进 style.css、e2e 溢出=0 是硬门槛。
 
 ## 7. 下一步建议顺序

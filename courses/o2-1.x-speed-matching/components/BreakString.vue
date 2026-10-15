@@ -112,10 +112,9 @@ const { showAnalysis = false } = defineProps<{
    图宽上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
    —— 第 7 页题目页图栏 ≈ 438px、第 8 页解析页图栏 ≈ 500px，540px 让两处都被栏宽限住 */
 .fig-string {
+  --fig-max: 540px;
   display: block;
   align-self: flex-start;
   width: 100%;
-
-  --fig-max: 540px;
 }
 </style>

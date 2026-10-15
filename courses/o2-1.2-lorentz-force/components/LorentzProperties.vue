@@ -121,7 +121,12 @@ const ds = computed(() => {
         stroke-dasharray="7 9"
       />
       <!-- 圆心：三个 F 都指向它 -->
-      <circle :cx="CX" :cy="CY" r="4" fill="color-mix(in srgb, var(--c-neutral-200) 70%, transparent)" />
+      <circle
+        :cx="CX"
+        :cy="CY"
+        r="4"
+        fill="color-mix(in srgb, var(--c-neutral-200) 70%, transparent)"
+      />
       <!-- 位移 Δs：沿 v 方向的一小段（只画在顶部那一点） -->
       <CourseArrow
         :from="ds.from"

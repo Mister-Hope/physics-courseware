@@ -20,7 +20,16 @@ const F = { x: 284, y: 210 };
     <text x="140" y="294" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)" text-anchor="middle">M</text>
     <text x="482" y="150" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)" text-anchor="start">N</text>
     <g transform="translate(370 270) rotate(-30)">
-      <rect x="-22" y="-11" width="44" height="22" rx="6" fill="color-mix(in srgb, var(--c-accent) 28%, transparent)" stroke="var(--c-accent)" stroke-width="1.8" />
+      <rect
+        x="-22"
+        y="-11"
+        width="44"
+        height="22"
+        rx="6"
+        fill="color-mix(in srgb, var(--c-accent) 28%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1.8"
+      />
     </g>
     <CourseArrow :from="P" :to="V" stroke="var(--c-physics)" :stroke-width="3" />
     <text

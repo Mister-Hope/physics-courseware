@@ -10,8 +10,26 @@ const marks = [0, 1, 2, 3, 4, 5, 6];
 
 <template>
   <svg viewBox="60 55 600 390" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <rect x="250" y="384" width="160" height="20" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1.6" />
-    <rect x="321" y="112" width="18" height="276" rx="5" fill="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+    <rect
+      x="250"
+      y="384"
+      width="160"
+      height="20"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="1.6"
+    />
+    <rect
+      x="321"
+      y="112"
+      width="18"
+      height="276"
+      rx="5"
+      fill="color-mix(in srgb, var(--c-text-dim) 22%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.6"
+    />
     <!-- 手柄 -->
     <circle cx="330" cy="120" r="8" fill="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.5" />
     <line x1="330" y1="120" x2="418" y2="120" stroke="var(--c-accent)" stroke-width="5" stroke-linecap="round" />
@@ -22,15 +40,51 @@ const marks = [0, 1, 2, 3, 4, 5, 6];
     <ellipse cx="330" cy="168" rx="30" ry="9" fill="color-mix(in srgb, var(--c-accent) 12%, transparent)" stroke="var(--c-accent)" stroke-width="1.6" />
     <text x="384" y="184" font-family="KaTeX_Main" font-size="22" fill="var(--c-accent)" text-anchor="start">变速塔轮</text>
     <!-- 长槽（大半径）/ 短槽（小半径） -->
-    <rect x="336" y="250" width="268" height="16" rx="8" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1.4" />
-    <rect x="76" y="250" width="268" height="16" rx="8" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1.4" />
+    <rect
+      x="336"
+      y="250"
+      width="268"
+      height="16"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="1.4"
+    />
+    <rect
+      x="76"
+      y="250"
+      width="268"
+      height="16"
+      rx="8"
+      fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="1.4"
+    />
     <text x="470" y="240" font-family="KaTeX_Main" font-size="22" fill="var(--c-text-dim)" text-anchor="middle">长槽</text>
     <text x="210" y="240" font-family="KaTeX_Main" font-size="22" fill="var(--c-text-dim)" text-anchor="middle">短槽</text>
     <!-- 两球与挡板 -->
     <circle cx="556" cy="258" r="15" fill="color-mix(in srgb, var(--c-velocity) 25%, transparent)" stroke="var(--c-velocity)" stroke-width="1.8" />
-    <rect x="571" y="234" width="10" height="48" rx="3" fill="color-mix(in srgb, var(--c-accent) 25%, transparent)" stroke="var(--c-accent)" stroke-width="1.8" />
+    <rect
+      x="571"
+      y="234"
+      width="10"
+      height="48"
+      rx="3"
+      fill="color-mix(in srgb, var(--c-accent) 25%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="1.8"
+    />
     <circle cx="164" cy="258" r="15" fill="color-mix(in srgb, var(--c-velocity) 25%, transparent)" stroke="var(--c-velocity)" stroke-width="1.8" />
-    <rect x="139" y="234" width="10" height="48" rx="3" fill="color-mix(in srgb, var(--c-accent) 25%, transparent)" stroke="var(--c-accent)" stroke-width="1.8" />
+    <rect
+      x="139"
+      y="234"
+      width="10"
+      height="48"
+      rx="3"
+      fill="color-mix(in srgb, var(--c-accent) 25%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="1.8"
+    />
     <text x="606" y="240" font-family="KaTeX_Main" font-size="22" fill="var(--c-accent)" text-anchor="start">挡板</text>
     <!-- 弹簧测力套筒与标尺 -->
     <line x1="576" y1="282" x2="576" y2="310" stroke="var(--c-text-dim)" stroke-width="1.6" />

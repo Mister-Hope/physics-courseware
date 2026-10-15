@@ -176,7 +176,13 @@ onUnmounted(stop);
       <circle cx="523" cy="52" r="34" fill="url(#rfd-sun)" />
       <circle cx="523" cy="52" r="9" fill="var(--c-neutral-50)" opacity="0.82" />
       <!-- 地平线暖光 -->
-      <rect x="0" y="150" width="640" height="26" fill="color-mix(in srgb, var(--c-accent) 7%, transparent)" />
+      <rect
+        x="0"
+        y="150"
+        width="640"
+        height="26"
+        fill="color-mix(in srgb, var(--c-accent) 7%, transparent)"
+      />
 
       <!-- 远景：城市轮廓（视差更慢） -->
       <g :transform="`translate(${farShift()}, 0)`">
@@ -483,9 +489,31 @@ onUnmounted(stop);
         </text>
 
         <!-- 受电弓 -->
-        <rect x="134" y="129" width="26" height="5" rx="2" fill="var(--c-velocity-light)" opacity="0.8" />
-        <line x1="140" y1="129" x2="156" y2="116" stroke="var(--c-neutral-300)" stroke-width="2.2" />
-        <line x1="156" y1="116" x2="146" y2="112" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+        <rect
+          x="134"
+          y="129"
+          width="26"
+          height="5"
+          rx="2"
+          fill="var(--c-velocity-light)"
+          opacity="0.8"
+        />
+        <line
+          x1="140"
+          y1="129"
+          x2="156"
+          y2="116"
+          stroke="var(--c-neutral-300)"
+          stroke-width="2.2"
+        />
+        <line
+          x1="156"
+          y1="116"
+          x2="146"
+          y2="112"
+          stroke="var(--c-neutral-300)"
+          stroke-width="2.2"
+        />
         <line
           x1="134"
           y1="112"

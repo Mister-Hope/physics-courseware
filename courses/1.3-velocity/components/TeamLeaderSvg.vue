@@ -11,7 +11,16 @@
       :line-width="2.2"
       :hatch-width="1.2"
     />
-    <rect x="70" y="94" width="260" height="18" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 90%, transparent)" stroke-width="1.6" />
+    <rect
+      x="70"
+      y="94"
+      width="260"
+      height="18"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 90%, transparent)"
+      stroke-width="1.6"
+    />
     <text x="70" y="86" text-anchor="middle" font-size="16" fill="var(--c-neutral-300)">队尾</text>
     <text x="330" y="86" text-anchor="middle" font-size="16" fill="var(--c-neutral-300)">队首</text>
     <text x="78" y="52" font-size="15" fill="var(--c-text-dim)">去程</text>

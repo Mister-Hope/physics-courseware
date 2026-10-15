@@ -296,7 +296,14 @@ onUnmounted(() => {
             :stroke="s1Pos === 'open' ? '#94a3b8' : '#475569'"
             stroke-width="2.5"
           />
-          <text x="235" y="76" font-size="15" font-weight="950" fill="var(--c-text-dim)" text-anchor="middle">
+          <text
+            x="235"
+            y="76"
+            font-size="15"
+            font-weight="950"
+            fill="var(--c-text-dim)"
+            text-anchor="middle"
+          >
             0
           </text>
         </g>
@@ -326,7 +333,14 @@ onUnmounted(() => {
 
         <!-- S1 枢轴 -->
         <circle cx="320" cy="70" r="8" fill="var(--c-accent)" stroke="#101827" stroke-width="2" />
-        <text x="320" y="47" font-size="14" font-weight="950" fill="var(--c-accent)" text-anchor="middle">
+        <text
+          x="320"
+          y="47"
+          font-size="14"
+          font-weight="950"
+          fill="var(--c-accent)"
+          text-anchor="middle"
+        >
           S₁
         </text>
 
@@ -398,7 +412,14 @@ onUnmounted(() => {
             stroke-dasharray="2,2"
             stroke-width="1.5"
           />
-          <circle cx="205" cy="99" r="6" fill="var(--c-accent)" stroke="#101827" stroke-width="1.5" />
+          <circle
+            cx="205"
+            cy="99"
+            r="6"
+            fill="var(--c-accent)"
+            stroke="#101827"
+            stroke-width="1.5"
+          />
           <line
             x1="205"
             y1="99"
@@ -409,14 +430,28 @@ onUnmounted(() => {
             stroke-linecap="round"
             class="transition-all duration-200 ease-out"
           />
-          <text x="193" y="92" font-size="14" font-weight="950" fill="var(--c-accent)" text-anchor="start">
+          <text
+            x="193"
+            y="92"
+            font-size="14"
+            font-weight="950"
+            fill="var(--c-accent)"
+            text-anchor="start"
+          >
             S₂
           </text>
         </g>
 
         <!-- C₂ -->
         <g>
-          <line x1="150" y1="130" x2="150" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+          <line
+            x1="150"
+            y1="130"
+            x2="150"
+            y2="180"
+            stroke="var(--c-neutral-600)"
+            stroke-width="2.5"
+          />
           <line
             x1="120"
             y1="110"
@@ -481,7 +516,14 @@ onUnmounted(() => {
 
         <!-- C₁ -->
         <g>
-          <line x1="420" y1="130" x2="420" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+          <line
+            x1="420"
+            y1="130"
+            x2="420"
+            y2="180"
+            stroke="var(--c-neutral-600)"
+            stroke-width="2.5"
+          />
           <line
             x1="390"
             y1="110"
@@ -543,9 +585,23 @@ onUnmounted(() => {
         <!-- 电压表 V（与 C₁ 并联） -->
         <line x1="420" y1="70" x2="500" y2="70" stroke="var(--c-neutral-600)" stroke-width="2.5" />
         <line x1="500" y1="70" x2="500" y2="95" stroke="var(--c-neutral-600)" stroke-width="2.5" />
-        <line x1="500" y1="145" x2="500" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+        <line
+          x1="500"
+          y1="145"
+          x2="500"
+          y2="180"
+          stroke="var(--c-neutral-600)"
+          stroke-width="2.5"
+        />
         <g class="cursor-pointer" @click="performReset">
-          <circle cx="500" cy="120" r="20" fill="var(--c-surface-solid)" stroke="var(--c-ok)" stroke-width="2.5" />
+          <circle
+            cx="500"
+            cy="120"
+            r="20"
+            fill="var(--c-surface-solid)"
+            stroke="var(--c-ok)"
+            stroke-width="2.5"
+          />
           <text
             x="500"
             y="128"

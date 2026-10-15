@@ -106,7 +106,12 @@ const V_LEN = 72;
         stroke-dasharray="8 6"
       />
       <!-- ⊗ 记号阵列：垂直纸面向里（只在磁场区内） -->
-      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)" stroke-width="1.4" stroke-linecap="round">
+      <g
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)"
+        stroke-width="1.4"
+        stroke-linecap="round"
+      >
         <template v-for="m in MARKS" :key="m.key">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -124,8 +129,18 @@ const V_LEN = 72;
         </template>
       </g>
       <!-- 坐标系 -->
-      <CourseArrow :from="O" :to="{ x: AXIS_X_END, y: OY }" stroke="var(--c-text-dim)" stroke-width="2.4" />
-      <CourseArrow :from="O" :to="{ x: OX, y: AXIS_Y_END }" stroke="var(--c-text-dim)" stroke-width="2.4" />
+      <CourseArrow
+        :from="O"
+        :to="{ x: AXIS_X_END, y: OY }"
+        stroke="var(--c-text-dim)"
+        stroke-width="2.4"
+      />
+      <CourseArrow
+        :from="O"
+        :to="{ x: OX, y: AXIS_Y_END }"
+        stroke="var(--c-text-dim)"
+        stroke-width="2.4"
+      />
       <text
         x="670"
         y="414"
@@ -245,7 +260,12 @@ const V_LEN = 72;
         B
       </text>
       <!-- A 处沿 +x 的入射速度 v0 -->
-      <CourseArrow :from="A" :to="{ x: A.x + V_LEN, y: A.y }" stroke="var(--c-velocity)" stroke-width="4.2" />
+      <CourseArrow
+        :from="A"
+        :to="{ x: A.x + V_LEN, y: A.y }"
+        stroke="var(--c-velocity)"
+        stroke-width="4.2"
+      />
       <text
         x="211"
         y="138"

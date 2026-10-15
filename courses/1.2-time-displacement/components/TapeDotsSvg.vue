@@ -92,7 +92,17 @@
     <path d="M 115.8 108 L 125.5 103.2 L 125.5 112.8 Z" fill="var(--c-accent)" />
     <path d="M 789.2 108 L 779.5 103.2 L 779.5 112.8 Z" fill="var(--c-accent)" />
 
-    <text x="452" y="99" text-anchor="middle" font-size="13" font-weight="700" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3.5" paint-order="stroke">
+    <text
+      x="452"
+      y="99"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="700"
+      fill="var(--c-accent)"
+      stroke="var(--c-bg-soft)"
+      stroke-width="3.5"
+      paint-order="stroke"
+    >
       量出第 5 个点到起点的距离 → 这段位移
     </text>
   </svg>

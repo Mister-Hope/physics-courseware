@@ -41,7 +41,9 @@ const rLabel = { x: (O.x + A.x) / 2 - 17, y: (O.y + A.y) / 2 + 13 };
     <text :x="A.x - 19" :y="A.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
     <text :x="B.x + 9" :y="B.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">B</text>
     <text :x="rLabel.x" :y="rLabel.y" text-anchor="middle" font-size="19" font-family="KaTeX_Math" font-style="italic" fill="currentColor">r</text>
-    <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">Δθ</text>
+    <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">
+      Δθ
+    </text>
     <text :x="dsLabel.x" :y="dsLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">Δs</text>
   </svg>
 </template>

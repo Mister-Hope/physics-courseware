@@ -42,7 +42,16 @@ const F = { x: P.x + dir.x * 62, y: P.y + dir.y * 62 };
     >
       r
     </text>
-    <rect :x="P.x - 12" :y="P.y - 12" width="24" height="24" rx="5" fill="color-mix(in srgb, var(--c-accent) 28%, transparent)" stroke="var(--c-accent)" stroke-width="1.8" />
+    <rect
+      :x="P.x - 12"
+      :y="P.y - 12"
+      width="24"
+      height="24"
+      rx="5"
+      fill="color-mix(in srgb, var(--c-accent) 28%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="1.8"
+    />
     <g v-if="showForces">
       <CourseArrow :from="P" :to="F" stroke="var(--c-physics)" :stroke-width="3.4" />
       <text

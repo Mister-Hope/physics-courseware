@@ -161,10 +161,19 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
       class="h-full w-auto max-w-full"
     >
       <!-- 圆外：方向相反的匀强磁场（⊙） -->
-      <g fill="none" stroke="color-mix(in srgb, var(--c-velocity) 42%, transparent)" stroke-width="1.4">
+      <g
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-velocity) 42%, transparent)"
+        stroke-width="1.4"
+      >
         <template v-for="(m, i) in OUT_MARKS" :key="`o${i}`">
           <circle :cx="m.x" :cy="m.y" r="6.6" />
-          <circle :cx="m.x" :cy="m.y" r="1.9" fill="color-mix(in srgb, var(--c-velocity) 42%, transparent)" />
+          <circle
+            :cx="m.x"
+            :cy="m.y"
+            r="1.9"
+            fill="color-mix(in srgb, var(--c-velocity) 42%, transparent)"
+          />
         </template>
       </g>
       <!-- 磁场区域：边界圆 + 圆内 ⊗ -->
@@ -176,7 +185,12 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.3" stroke-linecap="round">
+      <g
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)"
+        stroke-width="1.3"
+        stroke-linecap="round"
+      >
         <template v-for="(m, i) in IN_MARKS" :key="`i${i}`">
           <circle :cx="m.x" :cy="m.y" :r="IN_MARK_R" />
           <line
@@ -246,7 +260,12 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           stroke-width="3.4"
           stroke-linecap="round"
         />
-        <CourseArrow :from="vOut.from" :to="vOut.to" stroke="var(--c-velocity)" stroke-width="3.6" />
+        <CourseArrow
+          :from="vOut.from"
+          :to="vOut.to"
+          stroke="var(--c-velocity)"
+          stroke-width="3.6"
+        />
         <text
           v-bind="HALO"
           :x="labelVOut.x"
@@ -302,7 +321,12 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
       </template>
       <!-- 第 3 次点击：N 处的速度又指向圆心 O -->
       <template v-if="showBack">
-        <CourseArrow :from="vBack.from" :to="vBack.to" stroke="var(--c-physics)" stroke-width="3.6" />
+        <CourseArrow
+          :from="vBack.from"
+          :to="vBack.to"
+          stroke="var(--c-physics)"
+          stroke-width="3.6"
+        />
         <text
           v-bind="HALO"
           :x="labelVBack.x"
@@ -341,7 +365,13 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
           stroke-width="1.8"
         />
-        <text :x="VB.x + 44" :y="VB.y + 36" :font-family="CJK" :font-size="FS - 8" fill="var(--c-accent)">
+        <text
+          :x="VB.x + 44"
+          :y="VB.y + 36"
+          :font-family="CJK"
+          :font-size="FS - 8"
+          fill="var(--c-accent)"
+        >
           圆内：磁场 B
         </text>
         <circle
@@ -352,8 +382,19 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           stroke="color-mix(in srgb, var(--c-velocity) 85%, transparent)"
           stroke-width="1.8"
         />
-        <circle :cx="VB.x + 26" :cy="VB.y + 66" r="2.6" fill="color-mix(in srgb, var(--c-velocity) 85%, transparent)" />
-        <text :x="VB.x + 44" :y="VB.y + 72" :font-family="CJK" :font-size="FS - 8" fill="var(--c-velocity)">
+        <circle
+          :cx="VB.x + 26"
+          :cy="VB.y + 66"
+          r="2.6"
+          fill="color-mix(in srgb, var(--c-velocity) 85%, transparent)"
+        />
+        <text
+          :x="VB.x + 44"
+          :y="VB.y + 72"
+          :font-family="CJK"
+          :font-size="FS - 8"
+          fill="var(--c-velocity)"
+        >
           圆外：方向相反的磁场
         </text>
       </g>

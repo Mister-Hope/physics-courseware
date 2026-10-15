@@ -7,7 +7,16 @@ const { showForces = false } = defineProps<{ showForces?: boolean }>();
        三者都从物块几何中心 (165,176) 出发 —— 通常 mu < 1，所以 G、F_N 明显比 F_f 长（受力分析部分受 showForces 控制） -->
   <svg viewBox="0 0 360 272" width="100%" style="max-width: 420px" xmlns="http://www.w3.org/2000/svg">
     <SurfaceHatch :from="{ x: 12, y: 200 }" :to="{ x: 348, y: 200 }" side="below" color="#64748b" :line-width="2" :thickness="10" :gap="18" />
-    <rect x="120" y="152" width="90" height="48" rx="4" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2" />
+    <rect
+      x="120"
+      y="152"
+      width="90"
+      height="48"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="2"
+    />
     <text x="192" y="170" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-neutral-200)" text-anchor="middle">M</text>
     <CourseArrow :from="{ x: 222, y: 170 }" :to="{ x: 302, y: 170 }" stroke="var(--c-velocity)" :stroke-width="3" label="v" />
     <g v-if="showForces">

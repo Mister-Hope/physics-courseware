@@ -171,26 +171,25 @@ const velocityVector = computed<Point>(() => ({
   y: 2 * DROP * progress.value,
 }));
 
-/**
- * 速度箭头：起点在球心、方向沿轨迹切线（竖直分量 = 2·H·p 随 p 线性增大 ⟹ 越来越陡），长度 ∝ 真实速率
- */
+/** 速度箭头：起点在球心、方向沿轨迹切线（竖直分量 = 2·H·p 随 p 线性增大 ⟹ 越来越陡），长度 ∝ 真实速率 */
 const velocityArrow = computed<{ from: Point; to: Point }>(() => {
   const v = velocityVector.value;
   const speed = Math.hypot(v.x, v.y);
   const length = V0_LEN * (speed / CHARGED_RANGE);
   const origin = archAt(progress.value, CHARGED_RANGE);
 
-  return { from: origin, to: { x: origin.x + (v.x / speed) * length, y: origin.y + (v.y / speed) * length } };
+  return {
+    from: origin,
+    to: { x: origin.x + (v.x / speed) * length, y: origin.y + (v.y / speed) * length },
+  };
 });
 
 /**
  * 洛伦兹力箭头：F = qv×B —— 方向永远垂直于 v。
  *
- * 这里 v 向东（+x）、B 向北（纸面向里）⟹ 对**正电荷** F 就是把 v 在屏幕上逆时针转 90°：
- * 以 (v_x, v_y) 表示 v（y 向下为正），则 F 的方向矢量 ∝ (v_y, −v_x)。
- *   p = 0（v 水平向东）：F = (0, −v_x) 竖直向上 —— 与题目"带正电时被托起"吻合；
- *   p = 1（v 斜向右下）：F 指向右上（东北），越来越平 —— 不再是"始终竖直向上"。
- * 大小 F = qvB ∝ 速率，所以箭头与速度箭头同步变长。
+ * 这里 v 向东（+x）、B 向北（纸面向里）⟹ 对**正电荷** F 就是把 v 在屏幕上逆时针转 90°： 以 (v_x, v_y) 表示 v（y 向下为正），则 F 的方向矢量 ∝
+ * (v_y, −v_x)。 p = 0（v 水平向东）：F = (0, −v_x) 竖直向上 —— 与题目"带正电时被托起"吻合； p = 1（v 斜向右下）：F 指向右上（东北），越来越平 ——
+ * 不再是"始终竖直向上"。 大小 F = qvB ∝ 速率，所以箭头与速度箭头同步变长。
  */
 const forceArrow = computed<{ from: Point; to: Point }>(() => {
   const v = velocityVector.value;
@@ -372,9 +371,8 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 /* 赤道抛球图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
    —— 第 9 页题目页的图栏约 438px，第 10 页解析页图栏约 500px，540px 让两处都被栏宽限住、吃满可用面积 */
 .fig-equator {
-  width: 100%;
-
   --fig-max: 540px;
+  width: 100%;
 }
 
 /* CourseArrow 的标签字号写死在共享组件里（15），这里按同一个 1.7× 台阶调到 31 */

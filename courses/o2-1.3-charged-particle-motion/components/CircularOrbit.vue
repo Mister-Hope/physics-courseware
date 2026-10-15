@@ -237,7 +237,12 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
           </text>
         </template>
         <!-- v：切线方向 -->
-        <CourseArrow :from="dot" :to="arrowEnd(vDir, 24)" stroke="var(--c-velocity)" stroke-width="3.4" />
+        <CourseArrow
+          :from="dot"
+          :to="arrowEnd(vDir, 24)"
+          stroke="var(--c-velocity)"
+          stroke-width="3.4"
+        />
         <text
           :x="arrowEnd(vDir, 34).x"
           :y="arrowEnd(vDir, 34).y + 5"

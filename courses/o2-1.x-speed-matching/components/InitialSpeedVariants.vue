@@ -402,9 +402,8 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 <style scoped>
 /* ── 图与控件两层：fig-variants 只管图的宽度上限（svg 挂共享的 .fig-svg），ui-* 是滑块控件 ── */
 .fig-variants {
-  width: 100%;
-
   --fig-max: 1000px;
+  width: 100%;
 }
 
 /* 画布展台：把 svg 撑满可用高度 */

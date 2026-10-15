@@ -75,7 +75,9 @@ const choose = (item: JudgeItem, choice: boolean): void => {
 
       <div v-if="item.chosen === null" class="judge-actions">
         <button class="judge-opt" type="button" @click="choose(item, true)">能看成质点</button>
-        <button class="judge-opt alt" type="button" @click="choose(item, false)">不能看成质点</button>
+        <button class="judge-opt alt" type="button" @click="choose(item, false)">
+          不能看成质点
+        </button>
       </div>
 
       <div v-else class="judge-result">

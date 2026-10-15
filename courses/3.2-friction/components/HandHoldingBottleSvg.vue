@@ -35,7 +35,15 @@
         d="M 139.5 60 Q 162 63.5 184.5 60 L 184.5 160 C 184.5 165.5, 180 169, 174 169 L 150 169 C 144 169, 139.5 165.5, 139.5 160 Z"
         fill="color-mix(in srgb, var(--c-physics-light) 32%, transparent)"
       />
-      <ellipse cx="162" cy="60" rx="22" ry="2.8" fill="rgba(186,230,253,0.45)" stroke="color-mix(in srgb, var(--c-physics) 75%, transparent)" stroke-width="1" />
+      <ellipse
+        cx="162"
+        cy="60"
+        rx="22"
+        ry="2.8"
+        fill="rgba(186,230,253,0.45)"
+        stroke="color-mix(in srgb, var(--c-physics) 75%, transparent)"
+        stroke-width="1"
+      />
       <!-- 瓶身防滑槽与高光条 -->
       <line x1="140" y1="52" x2="184" y2="52" stroke="rgba(153,246,228,0.35)" stroke-width="1.1" />
       <line x1="140" y1="148" x2="184" y2="148" stroke="rgba(153,246,228,0.35)" stroke-width="1.1" />

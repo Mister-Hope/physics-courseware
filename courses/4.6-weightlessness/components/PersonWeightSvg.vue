@@ -109,20 +109,44 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <line x1="172" y1="0" x2="172" y2="30" stroke="var(--c-neutral-500)" stroke-width="1.6" />
 
       <!-- 轿厢顶部承重吊梁与绳头减振座 -->
-      <path d="M 134 38 L 140 28 L 180 28 L 186 38 Z" fill="color-mix(in srgb, var(--c-neutral-600) 75%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
+      <path
+        d="M 134 38 L 140 28 L 180 28 L 186 38 Z"
+        fill="color-mix(in srgb, var(--c-neutral-600) 75%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+      />
       <circle cx="148" cy="33" r="1.5" fill="var(--c-neutral-200)" />
       <circle cx="160" cy="33" r="1.5" fill="var(--c-accent)" />
       <circle cx="172" cy="33" r="1.5" fill="var(--c-neutral-200)" />
 
       <!-- 轿厢外框与金属内壁 -->
-      <rect x="32" y="38" width="256" height="334" rx="6" fill="url(#pwCabinBg)" stroke="color-mix(in srgb, var(--c-text-dim) 68%, transparent)" stroke-width="2.2" />
+      <rect
+        x="32"
+        y="38"
+        width="256"
+        height="334"
+        rx="6"
+        fill="url(#pwCabinBg)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 68%, transparent)"
+        stroke-width="2.2"
+      />
       <!-- 轿厢内壁装饰护板立线与后壁扶手 -->
       <line x1="42" y1="46" x2="42" y2="366" stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke-width="1.2" />
       <line x1="278" y1="46" x2="278" y2="366" stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke-width="1.2" />
       <line x1="42" y1="262" x2="278" y2="262" stroke="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke-width="3" stroke-linecap="round" />
 
       <!-- 轿厢顶部嵌入式 LED 照明灯带 -->
-      <rect x="102" y="41" width="116" height="4.5" rx="2" fill="color-mix(in srgb, var(--c-neutral-200) 55%, transparent)" stroke="color-mix(in srgb, var(--c-velocity-light) 45%, transparent)" stroke-width="0.8" />
+      <rect
+        x="102"
+        y="41"
+        width="116"
+        height="4.5"
+        rx="2"
+        fill="color-mix(in srgb, var(--c-neutral-200) 55%, transparent)"
+        stroke="color-mix(in srgb, var(--c-velocity-light) 45%, transparent)"
+        stroke-width="0.8"
+      />
 
       <!-- 轿厢左右两侧外导靴 -->
       <rect x="26" y="72" width="6" height="22" rx="1.5" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1" />
@@ -142,7 +166,15 @@ const accelArrow = computed(() => motion(accelDir, 74));
 
       <!-- 防滑称重踏板（随视重微幅上下位移） -->
       <rect x="98" :y="327 + padShift" width="124" height="10" rx="3.5" fill="url(#pwScalePadGrad)" stroke="var(--c-text-dim)" stroke-width="1.4" />
-      <line x1="106" :y1="329.5 + padShift" x2="214" :y2="329.5 + padShift" stroke="color-mix(in srgb, var(--c-neutral-50) 55%, transparent)" stroke-width="1" stroke-linecap="round" />
+      <line
+        x1="106"
+        :y1="329.5 + padShift"
+        x2="214"
+        :y2="329.5 + padShift"
+        stroke="color-mix(in srgb, var(--c-neutral-50) 55%, transparent)"
+        stroke-width="1"
+        stroke-linecap="round"
+      />
 
       <!-- 体重计梯形金属底座与防滑脚垫 -->
       <rect x="114" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
@@ -206,13 +238,22 @@ const accelArrow = computed(() => motion(accelDir, 74));
         stroke-linejoin="round"
       />
       <!-- 领口细节 -->
-      <path d="M 152 194 L 160 205 L 168 194" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 45%, transparent)" stroke-width="1.3" stroke-linejoin="round" />
+      <path
+        d="M 152 194 L 160 205 L 168 194"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 45%, transparent)"
+        stroke-width="1.3"
+        stroke-linejoin="round"
+      />
 
       <!-- 脖颈与头部 -->
       <rect x="155" y="185" width="10" height="10" rx="3" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1.3" />
       <circle cx="160" cy="171" r="15.5" fill="var(--c-neutral-700)" stroke="var(--c-text-dim)" stroke-width="1.6" />
       <!-- 利落短发轮廓 -->
-      <path d="M 145 168 C 145 156 153 153 161 153 C 170 153 176 158 175.5 168 C 171 163 164 162 156 163 C 150 163.5 147 166 145 168 Z" fill="var(--c-surface-solid)" />
+      <path
+        d="M 145 168 C 145 156 153 153 161 153 C 170 153 176 158 175.5 168 C 171 163 164 162 156 163 C 150 163.5 147 166 145 168 Z"
+        fill="var(--c-surface-solid)"
+      />
     </g>
 
     <!-- ==================== 5. 速度 v / 加速度 a 矢量（画在人左侧，互不遮挡） ==================== -->

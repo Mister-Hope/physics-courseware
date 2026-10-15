@@ -178,7 +178,18 @@
         <line x1="156" y1="100.5" x2="161" y2="97" stroke-dasharray="2 2" stroke-width="1" />
       </g>
       <!-- 宽度参数 d 符号 -->
-      <text x="153" y="87" font-size="13" font-weight="700" font-family="KaTeX_Math, serif" font-style="italic" fill="var(--c-accent-glow)" text-anchor="middle">d</text>
+      <text
+        x="153"
+        y="87"
+        font-size="13"
+        font-weight="700"
+        font-family="KaTeX_Math, serif"
+        font-style="italic"
+        fill="var(--c-accent-glow)"
+        text-anchor="middle"
+      >
+        d
+      </text>
 
       <!-- 纯净标注：遮光板 (已彻底去除多余的括号) -->
       <text x="116" y="96" font-size="12" font-weight="600" fill="var(--c-accent-glow)" text-anchor="end">遮光板</text>

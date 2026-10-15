@@ -15,7 +15,14 @@
     aria-label="曲线运动：P 点的速度沿切线方向，合力指向轨迹凹的一侧，轨迹夹在 v 与 F 之间"
   >
     <path d="M 65 352 C 230 344, 480 312, 648 122" fill="none" stroke="var(--c-physics)" stroke-width="3.4" stroke-linecap="round" opacity="0.92" />
-    <CourseArrow :from="{ x: 95.6, y: 350.3 }" :to="{ x: 150.1, y: 345.8 }" stroke="var(--c-physics)" stroke-width="3.4" stroke-linecap="round" opacity="0.92" />
+    <CourseArrow
+      :from="{ x: 95.6, y: 350.3 }"
+      :to="{ x: 150.1, y: 345.8 }"
+      stroke="var(--c-physics)"
+      stroke-width="3.4"
+      stroke-linecap="round"
+      opacity="0.92"
+    />
     <line x1="355.4" y1="305.2" x2="546.2" y2="245.2" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="2" stroke-dasharray="7 5" />
     <path d="M 498.5 260.2 A 150 150 0 0 0 310.4 162.1" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="2" />
     <CourseArrow :from="{ x: 355.4, y: 305.2 }" :to="{ x: 468, y: 269.9 }" stroke="var(--c-velocity)" stroke-width="3.4" stroke-linecap="round" />
@@ -31,7 +38,9 @@
       <tspan font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">F</tspan>
       之间
     </text>
-    <text x="350" y="400" text-anchor="middle" font-family="KaTeX_Main" font-size="20" fill="var(--c-text-dim)" class="fig-label">轨迹向合力所指的一侧弯曲</text>
+    <text x="350" y="400" text-anchor="middle" font-family="KaTeX_Main" font-size="20" fill="var(--c-text-dim)" class="fig-label">
+      轨迹向合力所指的一侧弯曲
+    </text>
   </svg>
 </template>
 

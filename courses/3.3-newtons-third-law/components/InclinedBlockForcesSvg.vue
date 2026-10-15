@@ -9,7 +9,13 @@
     <line x1="310" y1="352" x2="298" y2="340" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.4" />
     <line x1="370" y1="352" x2="358" y2="340" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.4" />
     <line x1="430" y1="352" x2="418" y2="340" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.4" />
-    <path d="M 80 340 L 430 150 L 430 340 z" fill="color-mix(in srgb, var(--c-neutral-500) 12%, transparent)" stroke="var(--c-neutral-500)" stroke-width="3" stroke-linejoin="round" />
+    <path
+      d="M 80 340 L 430 150 L 430 340 z"
+      fill="color-mix(in srgb, var(--c-neutral-500) 12%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
     <g transform="rotate(-28.5 227 226)">
       <rect x="172" y="196" width="110" height="60" rx="10" fill="none" stroke="var(--c-accent)" stroke-width="3" />
     </g>
@@ -50,7 +56,17 @@
     </g>
     <g v-click="3">
       <CourseArrow :from="{ x: 227, y: 226 }" :to="{ x: 334, y: 168 }" stroke="var(--c-force)" stroke-width="3.5" />
-      <text x="352" y="198" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic" font-size="24" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+      <text
+        x="352"
+        y="198"
+        fill="var(--c-force)"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="24"
+        stroke="var(--c-bg-soft)"
+        stroke-width="3"
+        paint-order="stroke"
+      >
         F
         <tspan font-size="17" dy="6">f</tspan>
       </text>

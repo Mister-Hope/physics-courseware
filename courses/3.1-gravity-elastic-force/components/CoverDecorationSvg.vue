@@ -4,7 +4,13 @@
     <g opacity="0.35">
       <SurfaceHatch :from="{ x: 26, y: 16 }" :to="{ x: 150, y: 16 }" side="above" :thickness="10" :gap="30" color="currentColor" :line-width="2" />
     </g>
-    <path d="M 74 16 L 74 26 L 62 32 L 86 44 L 62 56 L 86 68 L 62 80 L 74 86 L 74 96" fill="none" stroke="var(--c-accent)" stroke-width="2.6" stroke-linecap="round" />
+    <path
+      d="M 74 16 L 74 26 L 62 32 L 86 44 L 62 56 L 86 68 L 62 80 L 74 86 L 74 96"
+      fill="none"
+      stroke="var(--c-accent)"
+      stroke-width="2.6"
+      stroke-linecap="round"
+    />
     <rect x="62" y="96" width="24" height="18" rx="4" fill="color-mix(in srgb, var(--c-accent) 35%, transparent)" />
     <CourseArrow :from="{ x: 160, y: 26 }" :to="{ x: 160, y: 122 }" stroke="currentColor" stroke-width="2.4" opacity="0.65" />
     <text x="172" y="80" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-accent)">G</text>

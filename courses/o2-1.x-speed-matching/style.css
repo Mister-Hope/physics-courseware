@@ -21,6 +21,7 @@
    组件根类（.fig-xxx）只负责声明 --fig-max，svg 一律挂 .fig-svg。 */
 .fig-svg {
   display: block;
+
   width: 100%;
   max-width: var(--fig-max, 100%);
   height: auto;
@@ -40,12 +41,11 @@
 /* ── 题目页配图位：图靠右下角；默认上限 540px ——
    组件可在自己的根类上用 --fig-max 收紧（写死的那几个值以各栏实宽为界，见各组件 scoped 注释） */
 .qp-fig {
+  --fig-max: 540px;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   min-width: 0;
-
-  --fig-max: 540px;
 }
 
 /* 图位里的图再高也不超过 460px */
@@ -62,12 +62,10 @@
    复用共享 .split-wide（左文右图；--cols 是它留的旋钮），只调比例与纵向对齐：
    图栏 1.3fr ≈ 500px（旧版图挤在半栏里只有 345~438px），左栏 ≈ 380px 专门装公式与结论。 */
 .qp-solve {
+  --cols: minmax(0, 1fr) minmax(0, 1.3fr);
   flex: 1 1 auto;
   align-items: center;
-
   min-height: 0;
-
-  --cols: minmax(0, 1fr) minmax(0, 1.3fr);
 }
 
 /* ── 封面右下角装饰图 ──

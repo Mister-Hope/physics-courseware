@@ -96,7 +96,13 @@ const radiusEnd = at(-RADIUS_ANGLE, R);
       <SurfaceHatch :from="{ x: 28, y: 320 }" :to="{ x: 432, y: 320 }" side="below" />
 
       <path :d="leftPillar" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" stroke-linejoin="round" />
-      <path :d="rightPillar" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" stroke-linejoin="round" />
+      <path
+        :d="rightPillar"
+        fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
       <path :d="deckPath" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
       <path :d="surfacePath" fill="none" stroke="var(--c-neutral-300)" stroke-width="2" stroke-linecap="round" />
 
@@ -109,8 +115,23 @@ const radiusEnd = at(-RADIUS_ANGLE, R);
       </g>
 
       <g :transform="`translate(${APEX.x} ${APEX.y})`">
-        <rect x="-48" y="-34" width="96" height="26" rx="9" fill="color-mix(in srgb, var(--c-accent-2) 30%, transparent)" stroke="var(--c-velocity)" stroke-width="2.4" />
-        <path d="M -30 -34 L -19 -54 L 19 -54 L 30 -34 Z" fill="color-mix(in srgb, var(--c-accent-2) 22%, transparent)" stroke="var(--c-velocity)" stroke-width="2.2" stroke-linejoin="round" />
+        <rect
+          x="-48"
+          y="-34"
+          width="96"
+          height="26"
+          rx="9"
+          fill="color-mix(in srgb, var(--c-accent-2) 30%, transparent)"
+          stroke="var(--c-velocity)"
+          stroke-width="2.4"
+        />
+        <path
+          d="M -30 -34 L -19 -54 L 19 -54 L 30 -34 Z"
+          fill="color-mix(in srgb, var(--c-accent-2) 22%, transparent)"
+          stroke="var(--c-velocity)"
+          stroke-width="2.2"
+          stroke-linejoin="round"
+        />
         <path d="M -22 -36 L -14 -50 L -1 -50 L -1 -36 Z" fill="rgba(191,219,254,0.55)" />
         <path d="M 1 -36 L 1 -50 L 14 -50 L 22 -36 Z" fill="rgba(191,219,254,0.55)" />
         <circle cx="-26" cy="-9" r="9" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.2" />

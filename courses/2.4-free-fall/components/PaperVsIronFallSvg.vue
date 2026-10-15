@@ -26,7 +26,14 @@
     <line x1="14" y1="26" x2="306" y2="26" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.4" stroke-dasharray="5 4" />
     <line x1="14" y1="204" x2="306" y2="204" stroke="var(--c-neutral-600)" stroke-width="2" />
     <!-- ================= 1. 平铺纸片（左右摇摆飘落 + 受气流微拱弯曲变形） ================= -->
-    <path d="M 70 32 C 46 52 92 66 64 84 C 44 96 90 104 70 116" fill="none" stroke="var(--c-text-dim)" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.7" />
+    <path
+      d="M 70 32 C 46 52 92 66 64 84 C 44 96 90 104 70 116"
+      fill="none"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.3"
+      stroke-dasharray="4 4"
+      opacity="0.7"
+    />
     <g transform="rotate(-14 70 124)">
       <!-- 纸片受空气阻力向上微弯翘曲的透视四边形曲面 -->
       <path

@@ -2,7 +2,12 @@
   <!-- 第 7 页：正方体一面着地时重心最低（$a/2$） -->
   <svg class="fig" viewBox="0 0 264 292" style="max-width: 11rem" xmlns="http://www.w3.org/2000/svg">
     <!-- 地面平行四边形与斜剖线 -->
-    <polygon points="147.5,142.9 248.1,198.3 116.5,240.5 15.9,185.2" fill="color-mix(in srgb, var(--c-text-dim) 13%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1.2" />
+    <polygon
+      points="147.5,142.9 248.1,198.3 116.5,240.5 15.9,185.2"
+      fill="color-mix(in srgb, var(--c-text-dim) 13%, transparent)"
+      stroke="var(--c-neutral-500)"
+      stroke-width="1.2"
+    />
     <g stroke="var(--c-neutral-500)" stroke-width="0.7" opacity="0.35">
       <line x1="155.9" y1="147.5" x2="24.3" y2="189.8" />
       <line x1="136.6" y1="146.4" x2="237.1" y2="201.8" />
@@ -73,7 +78,9 @@
       </text>
       <line x1="100" y1="170.5" x2="116" y2="170.5" stroke="var(--c-neutral-900)" stroke-width="3.6" stroke-linecap="round" />
       <line x1="100" y1="170.5" x2="116" y2="170.5" stroke="var(--c-force)" stroke-width="1.5" stroke-linecap="round" />
-      <text x="108" y="185" font-family="KaTeX_Main" font-size="15" text-anchor="middle" stroke="var(--c-neutral-900)" stroke-width="3" paint-order="stroke">2</text>
+      <text x="108" y="185" font-family="KaTeX_Main" font-size="15" text-anchor="middle" stroke="var(--c-neutral-900)" stroke-width="3" paint-order="stroke">
+        2
+      </text>
     </g>
   </svg>
 </template>

@@ -98,7 +98,15 @@ const { showReverse = false } = defineProps<{
         <!-- 冷水水体 -->
         <path d="M 86 116 C 86 156 112 177 160 177 C 208 177 234 156 234 116 Z" fill="url(#td-water-cold)" />
         <!-- 水面椭圆透视 -->
-        <ellipse cx="160" cy="116" rx="74" ry="11" fill="color-mix(in srgb, var(--c-physics-light) 20%, transparent)" stroke="color-mix(in srgb, var(--c-physics-light) 55%, transparent)" stroke-width="1.6" />
+        <ellipse
+          cx="160"
+          cy="116"
+          rx="74"
+          ry="11"
+          fill="color-mix(in srgb, var(--c-physics-light) 20%, transparent)"
+          stroke="color-mix(in srgb, var(--c-physics-light) 55%, transparent)"
+          stroke-width="1.6"
+        />
 
         <!-- 浸入水中的热鸡蛋（标准浑圆鸡蛋卵形曲线） -->
         <!-- 热力辐射光晕 -->
@@ -240,7 +248,15 @@ const { showReverse = false } = defineProps<{
         <!-- 温水水体（达到热平衡后的温润色调） -->
         <path d="M 86 116 C 86 156 112 177 160 177 C 208 177 234 156 234 116 Z" fill="url(#td-water-warm)" />
         <!-- 水面透视椭圆 -->
-        <ellipse cx="160" cy="116" rx="74" ry="11" fill="color-mix(in srgb, var(--c-physics) 22%, transparent)" stroke="color-mix(in srgb, var(--c-physics) 55%, transparent)" stroke-width="1.6" />
+        <ellipse
+          cx="160"
+          cy="116"
+          rx="74"
+          ry="11"
+          fill="color-mix(in srgb, var(--c-physics) 22%, transparent)"
+          stroke="color-mix(in srgb, var(--c-physics) 55%, transparent)"
+          stroke-width="1.6"
+        />
 
         <!-- 热平衡后的鸡蛋（标准浑圆鸡蛋卵形曲线） -->
         <g transform="translate(160, 144) rotate(-3)">

@@ -30,4 +30,3 @@
     <ChartLabel :x-percent="20.86" :y-percent="81.42" :parts="[{ tex: '\\alpha' }]" anchor="right" :dx="6" :size="16" color="var(--c-text-dim)" />
   </div>
 </template>
-

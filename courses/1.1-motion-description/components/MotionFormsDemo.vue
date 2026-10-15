@@ -86,9 +86,23 @@
           />
 
           <!-- 标记点 1（黄色） -->
-          <circle cx="-12" cy="74" r="4.8" fill="var(--c-accent-glow)" stroke="var(--c-neutral-900)" stroke-width="1.4" />
+          <circle
+            cx="-12"
+            cy="74"
+            r="4.8"
+            fill="var(--c-accent-glow)"
+            stroke="var(--c-neutral-900)"
+            stroke-width="1.4"
+          />
           <!-- 标记点 2（天青色） -->
-          <circle cx="12" cy="94" r="4.8" fill="var(--c-physics-light)" stroke="var(--c-neutral-900)" stroke-width="1.4" />
+          <circle
+            cx="12"
+            cy="94"
+            r="4.8"
+            fill="var(--c-physics-light)"
+            stroke="var(--c-neutral-900)"
+            stroke-width="1.4"
+          />
 
           <!-- 底座接触滑块垫片 -->
           <rect x="-18" y="114" width="10" height="2" rx="1" fill="var(--c-text-dim)" />
@@ -109,8 +123,14 @@
       >
         <defs>
           <linearGradient id="mf-wheel-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-surface-solid) 92%, transparent)" />
-            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-900) 95%, transparent)" />
+            <stop
+              offset="0%"
+              stop-color="color-mix(in srgb, var(--c-surface-solid) 92%, transparent)"
+            />
+            <stop
+              offset="100%"
+              stop-color="color-mix(in srgb, var(--c-neutral-900) 95%, transparent)"
+            />
           </linearGradient>
         </defs>
 
@@ -174,13 +194,34 @@
           />
 
           <!-- 内圈标记点（r = 22，黄色） -->
-          <circle cx="132" cy="80" r="4.8" fill="var(--c-accent-glow)" stroke="var(--c-neutral-900)" stroke-width="1.4" />
+          <circle
+            cx="132"
+            cy="80"
+            r="4.8"
+            fill="var(--c-accent-glow)"
+            stroke="var(--c-neutral-900)"
+            stroke-width="1.4"
+          />
           <!-- 外圈标记点（r = 42，天青色） -->
-          <circle cx="152" cy="80" r="4.8" fill="var(--c-physics-light)" stroke="var(--c-neutral-900)" stroke-width="1.4" />
+          <circle
+            cx="152"
+            cy="80"
+            r="4.8"
+            fill="var(--c-physics-light)"
+            stroke="var(--c-neutral-900)"
+            stroke-width="1.4"
+          />
         </g>
 
         <!-- 中心固定转轴（不随盘旋转） -->
-        <circle cx="110" cy="80" r="7.5" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="1.8" />
+        <circle
+          cx="110"
+          cy="80"
+          r="7.5"
+          fill="var(--c-surface-solid)"
+          stroke="var(--c-text-dim)"
+          stroke-width="1.8"
+        />
         <circle cx="110" cy="80" r="2.8" fill="var(--c-neutral-200)" />
       </svg>
       <div class="mf-name">转动</div>
@@ -240,7 +281,14 @@
         <!-- 单摆往复摆动实体组 (悬挂中心 110, 20) -->
         <g class="mf-swing">
           <!-- 悬线 -->
-          <line x1="110" y1="20" x2="110" y2="92" stroke="var(--c-neutral-200)" stroke-width="1.8" />
+          <line
+            x1="110"
+            y1="20"
+            x2="110"
+            y2="92"
+            stroke="var(--c-neutral-200)"
+            stroke-width="1.8"
+          />
           <!-- 质感金属摆锤小球 -->
           <circle
             cx="110"
@@ -254,7 +302,14 @@
         </g>
 
         <!-- 顶部悬挂销钉 -->
-        <circle cx="110" cy="20" r="3.8" fill="var(--c-neutral-300)" stroke="var(--c-neutral-900)" stroke-width="1.4" />
+        <circle
+          cx="110"
+          cy="20"
+          r="3.8"
+          fill="var(--c-neutral-300)"
+          stroke="var(--c-neutral-900)"
+          stroke-width="1.4"
+        />
       </svg>
       <div class="mf-name">振动</div>
       <div class="mf-note">在平衡位置附近往复运动</div>

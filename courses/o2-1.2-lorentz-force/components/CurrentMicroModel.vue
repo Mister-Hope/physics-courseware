@@ -79,10 +79,22 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
       >
         <defs>
           <linearGradient id="cmm-wire" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-neutral-700) 50%, transparent)" />
-            <stop offset="30%" stop-color="color-mix(in srgb, var(--c-surface-solid) 72%, transparent)" />
-            <stop offset="72%" stop-color="color-mix(in srgb, var(--c-neutral-900) 88%, transparent)" />
-            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-surface-solid) 55%, transparent)" />
+            <stop
+              offset="0%"
+              stop-color="color-mix(in srgb, var(--c-neutral-700) 50%, transparent)"
+            />
+            <stop
+              offset="30%"
+              stop-color="color-mix(in srgb, var(--c-surface-solid) 72%, transparent)"
+            />
+            <stop
+              offset="72%"
+              stop-color="color-mix(in srgb, var(--c-neutral-900) 88%, transparent)"
+            />
+            <stop
+              offset="100%"
+              stop-color="color-mix(in srgb, var(--c-surface-solid) 55%, transparent)"
+            />
           </linearGradient>
           <linearGradient id="cmm-section" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="color-mix(in srgb, var(--c-accent) 45%, transparent)" />

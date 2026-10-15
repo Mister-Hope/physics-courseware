@@ -87,7 +87,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
         stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.3" stroke-linecap="round">
+      <g
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)"
+        stroke-width="1.3"
+        stroke-linecap="round"
+      >
         <template v-for="(m, i) in MARKS" :key="`b${i}`">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line

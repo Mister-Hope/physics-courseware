@@ -111,7 +111,12 @@ const parZero = computed(() => thetaDeg.value === 90);
         </template>
 
         <!-- v：与 B 成 θ -->
-        <CourseArrow :from="{ x: OX, y: OY }" :to="tip" stroke="var(--c-velocity)" stroke-width="4.6" />
+        <CourseArrow
+          :from="{ x: OX, y: OY }"
+          :to="tip"
+          stroke="var(--c-velocity)"
+          stroke-width="4.6"
+        />
         <text
           :x="tip.x + 12"
           :y="tip.y - 6"

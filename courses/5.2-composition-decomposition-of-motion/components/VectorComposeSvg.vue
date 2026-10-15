@@ -41,8 +41,24 @@ const rTip = computed(() => ({
   <div class="sim">
     <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="分矢量与合矢量">
       <g v-if="showResultant">
-        <line :x1="aTip.x" :y1="aTip.y" :x2="rTip.x" :y2="rTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="2" stroke-dasharray="7 6" />
-        <line :x1="bTip.x" :y1="bTip.y" :x2="rTip.x" :y2="rTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="2" stroke-dasharray="7 6" />
+        <line
+          :x1="aTip.x"
+          :y1="aTip.y"
+          :x2="rTip.x"
+          :y2="rTip.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)"
+          stroke-width="2"
+          stroke-dasharray="7 6"
+        />
+        <line
+          :x1="bTip.x"
+          :y1="bTip.y"
+          :x2="rTip.x"
+          :y2="rTip.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)"
+          stroke-width="2"
+          stroke-dasharray="7 6"
+        />
       </g>
       <CourseArrow :from="{ x: OX, y: OY }" :to="aTip" stroke="var(--c-velocity)" :stroke-width="3.2" />
       <CourseArrow :from="{ x: OX, y: OY }" :to="bTip" stroke="var(--c-accent)" :stroke-width="3.2" />

@@ -146,8 +146,18 @@ const arcRadius = 66;
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
-        <CourseArrow :from="bShare.from" :to="bShare.to" stroke="var(--c-accent)" :stroke-width="3.2" />
-        <CourseArrow :from="aShare.from" :to="aShare.to" stroke="var(--c-accent)" :stroke-width="3.2" />
+        <CourseArrow
+          :from="bShare.from"
+          :to="bShare.to"
+          stroke="var(--c-accent)"
+          :stroke-width="3.2"
+        />
+        <CourseArrow
+          :from="aShare.from"
+          :to="aShare.to"
+          stroke="var(--c-accent)"
+          :stroke-width="3.2"
+        />
         <text
           :x="bTip.x + 8"
           :y="bottomEnd.y - 12"

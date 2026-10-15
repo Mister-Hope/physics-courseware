@@ -263,8 +263,14 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         <!-- 桌面木纹/实验台面渐变 -->
         <linearGradient :id="`mdTable-${uid}`" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 34%, transparent)" />
-          <stop offset="50%" stop-color="color-mix(in srgb, var(--c-neutral-500) 26%, transparent)" />
-          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-700) 42%, transparent)" />
+          <stop
+            offset="50%"
+            stop-color="color-mix(in srgb, var(--c-neutral-500) 26%, transparent)"
+          />
+          <stop
+            offset="100%"
+            stop-color="color-mix(in srgb, var(--c-neutral-700) 42%, transparent)"
+          />
         </linearGradient>
 
         <!-- 铁架台金属立柱与底座渐变 -->
@@ -301,14 +307,34 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           patternTransform="rotate(45)"
           patternUnits="userSpaceOnUse"
         >
-          <line x1="0" y1="0" x2="0" y2="10" stroke="color-mix(in srgb, var(--c-text-dim) 24%, transparent)" stroke-width="1.4" />
+          <line
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="10"
+            stroke="color-mix(in srgb, var(--c-text-dim) 24%, transparent)"
+            stroke-width="1.4"
+          />
         </pattern>
       </defs>
 
       <!-- 右侧墙面（带剖面斜线与刻度标尺） -->
-      <rect :x="WALL_X" y="30" width="26" height="390" fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" />
+      <rect
+        :x="WALL_X"
+        y="30"
+        width="26"
+        height="390"
+        fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)"
+      />
       <rect :x="WALL_X" y="30" width="26" height="390" :fill="`url(#mdWallHatch-${uid})`" />
-      <line :x1="WALL_X" y1="30" :x2="WALL_X" :y2="TABLE_Y" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+      <line
+        :x1="WALL_X"
+        y1="30"
+        :x2="WALL_X"
+        :y2="TABLE_Y"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.4"
+      />
       <text
         :x="WALL_X + 13"
         y="22"
@@ -398,7 +424,9 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         stroke-width="2.6"
         stroke-linecap="round"
       />
-      <text x="44" :y="TABLE_Y - 10" font-size="15" font-weight="600" fill="var(--c-text-dim)">桌面</text>
+      <text x="44" :y="TABLE_Y - 10" font-size="15" font-weight="600" fill="var(--c-text-dim)">
+        桌面
+      </text>
 
       <!-- 两座镜架未偏转前的竖直基准虚线（清晰衬托“镜子连同支架一起向内倾斜”） -->
       <line
@@ -453,7 +481,14 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           fill="var(--c-neutral-600)"
         />
         <!-- 通光孔上下横梁 -->
-        <rect x="-6" :y="MIRROR_BOTTOM - TABLE_Y" width="12" height="4" rx="1.5" fill="var(--c-text-dim)" />
+        <rect
+          x="-6"
+          :y="MIRROR_BOTTOM - TABLE_Y"
+          width="12"
+          height="4"
+          rx="1.5"
+          fill="var(--c-text-dim)"
+        />
         <rect x="-5.5" y="-28" width="11" height="3.5" rx="1" fill="var(--c-neutral-500)" />
 
         <!-- 平面镜 M 金属背板与上下卡爪（反射面在 x=0 朝右，背板在左侧 x<0） -->
@@ -551,7 +586,14 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :height="TABLE_Y - MIRROR_BOTTOM - 9"
           :fill="`url(#mdStand-${uid})`"
         />
-        <rect x="-6" :y="MIRROR_BOTTOM - TABLE_Y" width="12" height="4" rx="1.5" fill="var(--c-text-dim)" />
+        <rect
+          x="-6"
+          :y="MIRROR_BOTTOM - TABLE_Y"
+          width="12"
+          height="4"
+          rx="1.5"
+          fill="var(--c-text-dim)"
+        />
 
         <!-- 平面镜 N 金属背板（反射面在 x=0 朝左，背板在右侧 x>0） -->
         <rect

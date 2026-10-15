@@ -100,7 +100,16 @@ const path = SEGS.map(
 
 <template>
   <svg viewBox="0 0 620 420" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <rect x="40" y="96" width="112" height="16" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
+    <rect
+      x="40"
+      y="96"
+      width="112"
+      height="16"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="2"
+    />
     <text x="44" y="86" font-family="KaTeX_Main" font-size="24" fill="var(--c-text-dim)">跳台</text>
     <line x1="60" :y1="waterY" x2="606" :y2="waterY" stroke="var(--c-velocity)" stroke-width="2.4" opacity="0.55" />
     <text x="602" y="374" font-family="KaTeX_Main" font-size="24" fill="var(--c-text-dim)" text-anchor="end">水面</text>

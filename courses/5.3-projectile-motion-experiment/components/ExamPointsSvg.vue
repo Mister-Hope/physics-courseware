@@ -40,10 +40,28 @@ const AXIS_END_Y = OY + 54 * UY;
     <text :x="AXIS_END_X + 22" :y="OY + 7" font-family="KaTeX_Main" font-size="16" fill="var(--c-text-dim)">/cm</text>
     <text :x="OX - 34" :y="AXIS_END_Y + 6" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-300)">y</text>
     <text :x="OX - 6" :y="AXIS_END_Y + 6" text-anchor="end" font-family="KaTeX_Main" font-size="16" fill="var(--c-text-dim)">/cm</text>
-    <text v-for="tick in xGrid" :key="`tx-${tick.v}`" :x="tick.x" :y="OY + 22" text-anchor="middle" font-family="KaTeX_Main" font-size="15" fill="var(--c-text-dim)">
+    <text
+      v-for="tick in xGrid"
+      :key="`tx-${tick.v}`"
+      :x="tick.x"
+      :y="OY + 22"
+      text-anchor="middle"
+      font-family="KaTeX_Main"
+      font-size="15"
+      fill="var(--c-text-dim)"
+    >
       {{ tick.v }}
     </text>
-    <text v-for="tick in yGrid" :key="`ty-${tick.v}`" :x="OX - 14" :y="tick.y + 5" text-anchor="end" font-family="KaTeX_Main" font-size="15" fill="var(--c-text-dim)">
+    <text
+      v-for="tick in yGrid"
+      :key="`ty-${tick.v}`"
+      :x="OX - 14"
+      :y="tick.y + 5"
+      text-anchor="end"
+      font-family="KaTeX_Main"
+      font-size="15"
+      fill="var(--c-text-dim)"
+    >
       {{ tick.v }}
     </text>
     <circle :cx="px.pointA.x" :cy="px.pointA.y" r="6" fill="var(--c-accent)" />

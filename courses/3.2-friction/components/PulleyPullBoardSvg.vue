@@ -34,11 +34,29 @@ const ringEndX = computed(() => scale.value?.ringEnd.x ?? 263.6);
 
     <!-- ==================== 2. 长木板与物块（严格错开描边边界，绝不重叠） ==================== -->
     <!-- 长木板（y: 179..195，stroke-width=2 → 下外沿 196.0，与桌面上外沿 196.8 留出清晰分界） -->
-    <rect x="42" y="179" width="244" height="16" rx="2.5" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
+    <rect
+      x="42"
+      y="179"
+      width="244"
+      height="16"
+      rx="2.5"
+      fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)"
+      stroke="var(--c-velocity)"
+      stroke-width="2"
+    />
     <text x="72" y="191" text-anchor="middle" font-size="11.5" fill="var(--c-velocity-light)">长木板</text>
 
     <!-- 物块（y: 132..176，stroke-width=2.2 → 下外沿 177.1，与木板上外沿 178.0 严格相切不重叠） -->
-    <rect x="136" y="132" width="72" height="44" rx="4" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
+    <rect
+      x="136"
+      y="132"
+      width="72"
+      height="44"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-accent) 20%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="2.2"
+    />
     <text x="172" y="157" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--c-accent-light)">物块</text>
 
     <!-- ==================== 3. 墙面定滑轮与支架（cx=54, cy=130, 绳槽半径 r=15） ==================== -->
@@ -55,7 +73,13 @@ const ringEndX = computed(() => scale.value?.ringEnd.x ?? 263.6);
     <!-- 物块左侧挂绳环 -->
     <circle cx="134" cy="145" r="2.2" fill="none" stroke="var(--c-accent)" stroke-width="1.6" />
     <!-- 连续白色细绳路径：下水平段 (132,145 → 54,145) + 滑轮左半圆弧 (r=15) + 上水平段 (54,115 → 82,115) -->
-    <path :d="`M 132 145 L 54 145 A 15 15 0 0 1 54 ${AXIS_Y} L ${HOOK_X} ${AXIS_Y}`" fill="none" stroke="var(--c-neutral-50)" stroke-width="2.2" stroke-linecap="round" />
+    <path
+      :d="`M 132 145 L 54 145 A 15 15 0 0 1 54 ${AXIS_Y} L ${HOOK_X} ${AXIS_Y}`"
+      fill="none"
+      stroke="var(--c-neutral-50)"
+      stroke-width="2.2"
+      stroke-linecap="round"
+    />
     <!-- 定滑轮中心转轴铆钉 -->
     <circle cx="54" cy="130" r="3" fill="var(--c-neutral-200)" stroke="var(--c-bg-soft)" stroke-width="1" />
     <text x="54" y="162" text-anchor="middle" font-size="11.5" fill="var(--c-text-dim)">定滑轮</text>

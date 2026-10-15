@@ -135,7 +135,7 @@ pnpm lint         # oxlint --fix + oxfmt + stylelint（slides.md 不参与格式
 │   │   ├── index.html
 │   │   ├── main.ts             # 课程卡片渲染 + tab 切换
 │   │   ├── style.css           # 设计系统
-│   │   └── courses.config.ts   # 课件配置（按分册组织，课件清单唯一来源）
+│   │   └── courses.config.ts   # 薄壳：读根 courses.json 并导出类型
 │   └── shared/                 # 共享 addon（顶栏/底栏/设计系统/logo，跨课件复用）
 ├── .agents/                    # AI 技能正本与工程笔记（离线可用）
 ├── courses/                    # 课件目录（一课一课时）

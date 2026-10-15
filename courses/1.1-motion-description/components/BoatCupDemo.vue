@@ -182,7 +182,14 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
       <!-- ==================== 2. 远岸青石驳岸与芦苇丛（随地面一起动） ==================== -->
       <rect x="0" y="140" width="1000" height="28" :fill="`url(#bcd-${uid}-bank)`" />
-      <line x1="0" y1="140" x2="1000" y2="140" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.4" />
+      <line
+        x1="0"
+        y1="140"
+        x2="1000"
+        y2="140"
+        stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke-width="1.4"
+      />
       <line
         x1="0"
         y1="154"
@@ -210,8 +217,19 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
       <!-- ==================== 3. 河水与流向/后退方向指示 ==================== -->
       <rect x="0" y="168" width="1000" height="132" :fill="`url(#bcd-${uid}-water)`" />
-      <line x1="0" y1="168" x2="1000" y2="168" stroke="color-mix(in srgb, var(--c-velocity-light) 55%, transparent)" stroke-width="1.6" />
-      <g stroke="color-mix(in srgb, var(--c-velocity-light) 28%, transparent)" stroke-width="1.6" stroke-linecap="round">
+      <line
+        x1="0"
+        y1="168"
+        x2="1000"
+        y2="168"
+        stroke="color-mix(in srgb, var(--c-velocity-light) 55%, transparent)"
+        stroke-width="1.6"
+      />
+      <g
+        stroke="color-mix(in srgb, var(--c-velocity-light) 28%, transparent)"
+        stroke-width="1.6"
+        stroke-linecap="round"
+      >
         <line
           v-for="(r, i) in ripples"
           :key="i"
@@ -234,7 +252,13 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           stroke="color-mix(in srgb, var(--c-velocity-light) 28%, transparent)"
           stroke-width="1"
         />
-        <text x="90" y="50" text-anchor="middle" style="font-size: 10.5px" fill="var(--c-velocity-light)">
+        <text
+          x="90"
+          y="50"
+          text-anchor="middle"
+          style="font-size: 10.5px"
+          fill="var(--c-velocity-light)"
+        >
           {{ frame === "ground" ? "水流方向 (u)" : "桥与河岸后退方向 (−u)" }}
         </text>
         <g
@@ -301,7 +325,13 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
       <!-- ==================== 5. 轻舟与戴斗笠船夫（先画船，过桥洞时从拱洞中透出） ==================== -->
       <g :transform="`translate(${boatX}, 0) scale(${boatFacing}, 1)`">
         <!-- 船底吃水线波浪与船尾水花 -->
-        <ellipse cx="0" cy="166" rx="50" ry="4.5" fill="color-mix(in srgb, var(--c-velocity-light) 18%, transparent)" />
+        <ellipse
+          cx="0"
+          cy="166"
+          rx="50"
+          ry="4.5"
+          fill="color-mix(in srgb, var(--c-velocity-light) 18%, transparent)"
+        />
         <path
           d="M -52 165 Q -32 169 -12 166 M 24 166 Q 42 169 54 164"
           fill="none"
@@ -401,7 +431,13 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           stroke="rgba(125,211,252,0.35)"
           stroke-width="1.2"
         />
-        <ellipse cx="0" cy="181" rx="11" ry="3.2" fill="color-mix(in srgb, var(--c-physics-light) 22%, transparent)" />
+        <ellipse
+          cx="0"
+          cy="181"
+          rx="11"
+          ry="3.2"
+          fill="color-mix(in srgb, var(--c-physics-light) 22%, transparent)"
+        />
         <!-- 水杯杯身（微倾漂浮感） -->
         <g transform="rotate(8 0 174)">
           <path
@@ -412,7 +448,14 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             stroke-linejoin="round"
           />
           <!-- 杯身亮色装饰腰线 -->
-          <line x1="-5.8" y1="171" x2="5.8" y2="171" stroke="var(--c-physics-light)" stroke-width="2.2" />
+          <line
+            x1="-5.8"
+            y1="171"
+            x2="5.8"
+            y2="171"
+            stroke="var(--c-physics-light)"
+            stroke-width="2.2"
+          />
           <!-- 水杯把手 -->
           <path
             d="M 6.2 168 Q 11.5 172 5.6 177"
@@ -477,8 +520,20 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
       <!-- ==================== 8. 江南青石拱桥（随地面移动；高拱洞让船与水杯从洞中清晰穿过） ==================== -->
       <g :transform="`translate(${bridgeX}, 0)`">
         <!-- 桥墩水中倒影 -->
-        <rect x="-80" y="236" width="30" height="20" fill="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)" />
-        <rect x="50" y="236" width="30" height="20" fill="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)" />
+        <rect
+          x="-80"
+          y="236"
+          width="30"
+          height="20"
+          fill="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)"
+        />
+        <rect
+          x="50"
+          y="236"
+          width="30"
+          height="20"
+          fill="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)"
+        />
 
         <!-- 石拱桥主体（微拱桥面 + 半圆高拱洞 -52..52） -->
         <path
@@ -601,6 +656,23 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   flex-direction: column;
   gap: 0.45rem;
   width: 100%;
+}
+
+.bcd-svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
+}
+
+.bcd-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
 }
 
 /* 收窄变体（compact）：只收场景与时间轴、不收标题行——标题行给的是状态与开关，
@@ -727,23 +799,6 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
 .bcd-btn:active {
   filter: brightness(0.98);
-}
-
-.bcd-svg {
-  display: block;
-
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-lg);
-
-  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
-}
-
-.bcd-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 0.22rem;
 }
 
 .bcd-track {

@@ -329,10 +329,9 @@ const forceBTo = inward(forceBFrom, circleB, 122);
 /* 三微粒分裂图：根 div 与 svg 顶部对齐；图宽上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
    —— 第 5 页题目页图栏 ≈ 438px、第 6 页解析页图栏 ≈ 500px，540px 让两处都被栏宽限住 */
 .fig-particles {
+  --fig-max: 540px;
   display: block;
   align-self: flex-start;
   width: 100%;
-
-  --fig-max: 540px;
 }
 </style>

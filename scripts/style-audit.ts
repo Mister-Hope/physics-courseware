@@ -325,6 +325,7 @@ const checkIconSizes = (sources: string): Finding[] =>
  *
  * @param line `style.css` 的一行
  * @param index 该行在文件里的下标（从 0 起，报错时 +1 转成行号）
+ * @param unknownColors 本课"不在 token 表里"的色值记账表（按出现次数累加）
  * @returns 这一行的发现
  */
 const checkCssLine = (
@@ -570,39 +571,24 @@ const checkBorderMisuse = (sources: string): Finding[] => {
  * @returns 同页 `.key` 多于一处 的发现
  */
 const checkKeyOveruse = (slidesMd: string): Finding[] => {
-  const findings: Finding[] = [];
-  const lineHits: number[] = [];
+  // 相邻命中必然同页；`---` 分隔线之间算一页，末尾那一段也算一页
+  const pages: number[][] = [[]];
 
   slidesMd.split("\n").forEach((line, index) => {
-    if (!/class="[^"]*\bkey(-\w+)?\b[^"]*"/u.test(line)) return;
-
-    lineHits.push(index + 1);
+    if (/^---\s*$/u.test(line)) pages.push([]);
+    else if (/class="[^"]*\bkey(?:-\w+)?\b[^"]*"/u.test(line)) pages.at(-1)?.push(index + 1);
   });
 
-  // 相邻命中必然同页；`---` 分隔线之间算一页
-  const lines = slidesMd.split("\n");
-  let pageStart = 0;
-
-  for (let index = 0; index <= lines.length; index += 1) {
-    if (index < lines.length && !/^---\s*$/u.test(lines[index])) continue;
-
-    const hits = lineHits.filter((line) => line > pageStart && line <= index);
-
-    // 分级：2 处只是"可能"，交给执行者判断；≥3 处几乎必然是"把每一步解析都套了竖线"
-    if (hits.length === 2)
-      {findings.push({
-        level: "warn",
-        message: `同一页有 2 处 .key（行 ${hits.join("、")}）—— 若第二处确实是旁注 / 易错警示，可以保留；否则只留这一页的落点，其余改普通段落（§4）`,
-      });}
-
-    if (hits.length >= 3)
-      {findings.push({
-        level: "error",
-        message: `同一页有 ${hits.length} 处 .key（行 ${hits.join("、")}）—— 极可能把每一步解析 / 推导都套成了竖线，请逐条复判：只留落点那一条，其余改普通段落（§4）`,
-      });}
-
-    pageStart = index + 1;
-  }
+  // 分级：2 处只是"可能"，交给执行者判断；≥3 处几乎必然是"把每一步解析都套了竖线"
+  const findings: Finding[] = pages
+    .filter((hits) => hits.length >= 2)
+    .map((hits) => ({
+      level: hits.length >= 3 ? "error" : "warn",
+      message:
+        hits.length >= 3
+          ? `同一页有 ${hits.length} 处 .key（行 ${hits.join("、")}）—— 极可能把每一步解析 / 推导都套成了竖线，请逐条复判：只留落点那一条，其余改普通段落（§4）`
+          : `同一页有 2 处 .key（行 ${hits.join("、")}）—— 若第二处确实是旁注 / 易错警示，可以保留；否则只留这一页的落点，其余改普通段落（§4）`,
+    }));
 
   // 只列前 6 页，但**必须把总数说出来**——否则执行者会以为"只有这几处"
   // （真踩过：1.3 实际 16 页，执行者只看到 6 条）
@@ -677,23 +663,25 @@ const checkPaletteClasses = (sources: string): Finding[] => {
   const unknown = [...counts].filter(([key]) => !PALETTE_TO_TOKEN[key]);
   const findings: Finding[] = [];
 
-  for (const [key, count] of same.sort((a, b) => b[1] - a[1]).slice(0, 5))
-    {findings.push({
+  for (const [key, count] of same.sort((a, b) => b[1] - a[1]).slice(0, 5)) {
+    findings.push({
       level: "error",
       message:
         `\`${key}\` 用了 ${count} 处 —— 它的取值就是 \`${PALETTE_TO_TOKEN[key]}\` 的值，属于"绕过 token 写死颜色"。` +
         `请复查：这里该用语义类（\`.text-dim\` / \`.ok-line\` / \`.bad-line\`…）还是 \`style="color: var(${PALETTE_TO_TOKEN[key]})"\`？` +
         `共享 token 以后一调色，这些调色板类不会跟着变（§3）`,
-    });}
+    });
+  }
 
-  if (same.length > 5)
-    {findings.push({
+  if (same.length > 5) {
+    findings.push({
       level: "error",
       message: `…另有 ${same.length - 5} 种"取值等于 token"的调色板类未列出（本课合计 ${same.length} 种），请用 \`grep -rhoE '(text|bg|border|fill|stroke)-[a-z]+-[0-9]+' courses/<slug>\` 逐处排查`,
-    });}
+    });
+  }
 
-  if (unknown.length >= 5)
-    {findings.push({
+  if (unknown.length >= 5) {
+    findings.push({
       level: "warn",
       message:
         `本课还用了 ${unknown.length} 种**不在 token 表里**的调色板色（${unknown
@@ -701,7 +689,8 @@ const checkPaletteClasses = (sources: string): Finding[] => {
           .map(([key, count]) => `${key}×${count}`)
           .join("、")}${unknown.length > 8 ? "…" : ""}）。` +
         `我们的思路是"配色只有那几支主色 + 一组中性色阶"——你看看这些是不是必要？必要的话应该在 workspace/shared 补成共享 token，而不是各课自己用调色板（§3）`,
-    });}
+    });
+  }
 
   return findings;
 };

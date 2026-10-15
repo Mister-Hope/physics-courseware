@@ -28,7 +28,7 @@ import type { CourseTemplateContext } from "./course-templates";
 const ROOT_DIR = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT_DIR, "courses");
 const SHARED_ADDON_DIR = path.join(ROOT_DIR, "workspace/shared");
-const CONFIG_PATH = path.join(ROOT_DIR, "workspace/homepage/src/courses.config.ts");
+const REGISTRY_PATH = path.join(ROOT_DIR, "courses.json");
 // 按需目录：先建空目录，用到才往里放文件
 const OPTIONAL_DIRS = ["components", "images"];
 // --name 只给英文名：包名 = `<name>-courseware`，限制成 kebab-case（不允许结尾或连续连字符）
@@ -48,9 +48,9 @@ const USAGE = `用法：
                            同时决定目录名的章节前缀（跨节写 "2.2·2.3"，非教材小节写 "2.x"）
   --chapter-label <章节名> 顶栏封面显示的章节名，如 "第三章 相互作用——力"（默认用 --chapter）
   --textbook <分册>        分册（名称/简称/slug，如 "必修第一册"、"必修1"、"bx1"）；
-                           提供后自动登记 workspace/homepage/courses.config.ts（课件清单）
+                           提供后自动登记 courses.json（课件清单，仓库根目录）
   --folder <路径>          生成位置，默认 courses/<章节前缀>-<英文名>
-  --no-register            不修改 courses.config.ts
+  --no-register            不修改 courses.json
   --force                  覆盖已存在的骨架文件（仅限 courses/ 下的目录，会列出被覆盖的文件）
   --dry-run                只打印将要生成/修改的文件清单，不落盘
   -h, --help               显示本帮助
@@ -183,20 +183,24 @@ const normalizeChapter = (chapter: string): string =>
     .replaceAll(/-+/gu, "-")
     .replaceAll(/^-|-$/gu, "");
 
-// 解析 courses.config.ts 里的分册分组（文件是手写 TS，这里只做只读解析）
+// 解析 courses.json 里的分册分组（课件清单的唯一数据源，仓库根目录）
 const readTextbookGroups = (): TextbookGroup[] => {
-  const text = readFileSync(CONFIG_PATH, "utf8");
-  const pattern =
-    /name:\s*"(?<name>[^"]+)",\s*shortName:\s*"(?<shortName>[^"]+)",\s*slug:\s*"(?<slug>[^"]+)"/gu;
-  const groups: TextbookGroup[] = [];
+  let data: { textbooks?: TextbookGroup[] };
 
-  for (const match of text.matchAll(pattern)) {
-    const { name = "", shortName = "", slug = "" } = match.groups ?? {};
-
-    groups.push({ name, shortName, slug });
+  try {
+    data = JSON.parse(readFileSync(REGISTRY_PATH, "utf8")) as { textbooks?: TextbookGroup[] };
+  } catch (err) {
+    throw new CliError(
+      `读取 ${path.relative(ROOT_DIR, REGISTRY_PATH)} 失败：${err instanceof Error ? err.message : String(err)}`,
+    );
   }
 
-  return groups;
+  const { textbooks } = data;
+
+  if (!Array.isArray(textbooks))
+    throw new CliError("courses.json 里找不到 textbooks 数组，请手动登记");
+
+  return textbooks.map(({ name, shortName, slug }) => ({ name, shortName, slug }));
 };
 
 const resolveTextbook = (query: string): TextbookGroup => {
@@ -266,7 +270,7 @@ const parseCli = (values: Record<string, unknown>): CourseOptions => {
   const register = values["no-register"] !== true;
 
   if (values["no-register"] === true && textbookQuery !== "")
-    console.warn("⚠️  --no-register 生效：不会自动登记 courses.config.ts");
+    console.warn("⚠️  --no-register 生效：不会自动登记 courses.json");
 
   return {
     name,
@@ -384,61 +388,64 @@ const renderCourseEntry = (options: CourseOptions): string => {
   const chapter = options.chapter.startsWith("§") ? options.chapter : `§${options.chapter}`;
   const placeholder = "待补充：一句话说明本课讲了什么。";
 
-  // 手写 TS 风格（键不加引号、末尾带逗号），与 courses.config.ts 其余条目一致
+  // JSON 风格（2 空格缩进、与 courses.json 其余条目同层级同键序），交给 oxfmt 也是这个形状
   return [
-    "      {",
-    `        slug: ${JSON.stringify(options.dirName)},`,
-    `        title: ${JSON.stringify(options.chapterName)},`,
-    `        chapter: ${JSON.stringify(chapter)},`,
-    `        description: ${JSON.stringify(placeholder)},`,
-    "        tags: [],",
-    "      }",
+    "        {",
+    `          "slug": ${JSON.stringify(options.dirName)},`,
+    `          "title": ${JSON.stringify(options.chapterName)},`,
+    `          "chapter": ${JSON.stringify(chapter)},`,
+    `          "description": ${JSON.stringify(placeholder)},`,
+    `          "tags": []`,
+    "        }",
   ].join("\n");
 };
 
-// 把 CourseMeta 插进对应分册的 courses 数组
+// 把新课件插进 courses.json 里对应分册的 courses 数组末尾（只在文本上追加，其余字节原样保留）
 const insertCourseEntry = (text: string, group: TextbookGroup, options: CourseOptions): string => {
   // 已经登记过就不再插（重复跑 --force 不会产生重复条目）
-  if (text.includes(`slug: "${options.dirName}"`)) return text;
+  if (text.includes(`"slug": "${options.dirName}"`)) return text;
 
-  const groupIndex = text.indexOf(`slug: "${group.slug}"`);
+  const groupIndex = text.indexOf(`"slug": "${group.slug}"`);
 
-  if (groupIndex === -1) fail(`courses.config.ts 里找不到分册 ${group.slug}，请手动登记`);
+  if (groupIndex === -1) fail(`courses.json 里找不到分册 ${group.slug}，请手动登记`);
 
-  // 下一个分册的起点：越界说明 config 结构与脚本预期不一致，宁可不写也不能写错位置
-  const nextGroupIndex = text.indexOf('name: "', groupIndex + 1);
+  // 下一个分册的起点：越界说明注册表结构与脚本预期不一致，宁可不写也不能写错位置
+  const nextGroupIndex = text.indexOf('"name": "', groupIndex + 1);
   const boundary = nextGroupIndex === -1 ? text.length : nextGroupIndex;
-  const arrayOpen = text.indexOf("courses: [", groupIndex);
+  const arrayOpen = text.indexOf('"courses": [', groupIndex);
 
-  const arrayHint = `courses.config.ts 里找不到分册 ${group.slug} 的 courses 数组（结构可能已改），请手动登记`;
+  const arrayHint = `courses.json 里找不到分册 ${group.slug} 的 courses 数组（结构可能已改），请手动登记`;
 
   if (arrayOpen === -1 || arrayOpen > boundary) fail(arrayHint);
 
-  const bracketIndex = arrayOpen + "courses: ".length;
-  const arrayEnd = findArrayEnd(text, bracketIndex);
+  const bracketIndex = text.indexOf("[", arrayOpen);
+  const bracketHint = `courses.json 的分册 ${group.slug} 括号不配对（结构可能已改），请手动登记`;
 
-  const bracketHint = `courses.config.ts 的分册 ${group.slug} 括号不配对（结构可能已改），请手动登记`;
+  if (bracketIndex === -1) fail(bracketHint);
+
+  const arrayEnd = findArrayEnd(text, bracketIndex);
 
   if (arrayEnd === -1 || arrayEnd > boundary) fail(bracketHint);
 
   const inner = text.slice(bracketIndex + 1, arrayEnd);
   const entry = renderCourseEntry(options);
+  // 分册的 courses 数组闭合括号缩进 6 格；空数组直接换成"换行 + 条目"，非空则补逗号追加
   const nextInner =
-    inner.trim() === "" ? `\n${entry},` : `${inner.replace(/\s+$/u, "")}\n${entry},`;
+    inner.trim() === "" ? `\n${entry}\n      ` : `${inner.replace(/\s+$/u, "")},\n${entry}\n      `;
 
-  return `${text.slice(0, bracketIndex)}[${nextInner}\n    ${text.slice(arrayEnd)}`;
+  return `${text.slice(0, bracketIndex + 1)}${nextInner}${text.slice(arrayEnd)}`;
 };
 
-const planConfigUpdate = (options: CourseOptions, textbook: TextbookGroup): FileUpdate[] => {
-  const original = readFileSync(CONFIG_PATH, "utf8");
+const planRegistryUpdate = (options: CourseOptions, textbook: TextbookGroup): FileUpdate[] => {
+  const original = readFileSync(REGISTRY_PATH, "utf8");
   const content = insertCourseEntry(original, textbook, options);
 
   return content === original
     ? []
     : [
         {
-          label: `workspace/homepage/courses.config.ts（${textbook.name}）`,
-          path: CONFIG_PATH,
+          label: `courses.json（${textbook.name}）`,
+          path: REGISTRY_PATH,
           content,
         },
       ];
@@ -446,7 +453,7 @@ const planConfigUpdate = (options: CourseOptions, textbook: TextbookGroup): File
 
 // 共享文件改动**先在内存里算完再统一落盘**：任何一步报错都不会留下半截写入
 const registerShared = (options: CourseOptions, textbook?: TextbookGroup): string[] => {
-  const updates: FileUpdate[] = textbook ? planConfigUpdate(options, textbook) : [];
+  const updates: FileUpdate[] = textbook ? planRegistryUpdate(options, textbook) : [];
 
   if (!options.dryRun) for (const update of updates) writeFileSync(update.path, update.content);
 
@@ -480,14 +487,14 @@ const printSummary = (
     console.log(
       textbook
         ? "\n🔧 首页配置里已有该 slug，跳过重复登记"
-        : "\n🔧 未自动登记：没有提供 --textbook（分册），记得手动登记 workspace/homepage/courses.config.ts",
+        : "\n🔧 未自动登记：没有提供 --textbook（分册），记得手动登记 courses.json",
     );
   } else if (options.register) {
     console.log(
       `\n🔧 未自动登记：目标目录不是 courses/<目录名> 这一层，不会被 pnpm workspace 纳入，需手动处理`,
     );
   } else {
-    console.log("\n🔧 未登记：--no-register 生效（courses.config.ts 没动）");
+    console.log("\n🔧 未登记：--no-register 生效（courses.json 没动）");
   }
 
   console.log("\n👉 下一步");

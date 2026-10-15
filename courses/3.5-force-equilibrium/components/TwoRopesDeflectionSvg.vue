@@ -66,7 +66,15 @@ const ghosts = [
           stroke-dasharray="5 4"
           opacity="0.5"
         />
-        <text :x="ghost.x - BLOCK_W / 2 - 22" :y="ghost.y + 6" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="15" opacity="0.65">
+        <text
+          :x="ghost.x - BLOCK_W / 2 - 22"
+          :y="ghost.y + 6"
+          fill="var(--c-velocity)"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="15"
+          opacity="0.65"
+        >
           B
         </text>
       </template>
@@ -75,7 +83,16 @@ const ghosts = [
     <!-- 第 1 步起：第二段绳、真正的 B、β 角（含竖直边界线）、水平力 F -->
     <g v-if="step >= 1">
       <line :x1="pointA.x" :y1="pointA.y" :x2="pointB.x" :y2="pointB.y" stroke="var(--c-text-dim)" stroke-width="2.2" />
-      <line :x1="pointA.x" :y1="pointA.y" :x2="pointA.x" :y2="pointA.y + 64" stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.7" />
+      <line
+        :x1="pointA.x"
+        :y1="pointA.y"
+        :x2="pointA.x"
+        :y2="pointA.y + 64"
+        stroke="var(--c-neutral-500)"
+        stroke-width="1.2"
+        stroke-dasharray="6 5"
+        opacity="0.7"
+      />
       <rect
         :x="pointB.x - BLOCK_W / 2"
         :y="pointB.y - BLOCK_H / 2"

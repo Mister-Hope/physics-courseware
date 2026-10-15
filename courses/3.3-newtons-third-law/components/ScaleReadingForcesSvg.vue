@@ -11,7 +11,16 @@
       <rect x="288" y="317" width="24" height="6.5" rx="2" fill="var(--c-neutral-700)" stroke="var(--c-neutral-500)" stroke-width="1.5" />
 
       <!-- 台秤底座宽边 -->
-      <rect x="132" y="307" width="196" height="10" rx="4" fill="color-mix(in srgb, var(--c-neutral-700) 65%, transparent)" stroke="var(--c-text-dim)" stroke-width="2.2" />
+      <rect
+        x="132"
+        y="307"
+        width="196"
+        height="10"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-neutral-700) 65%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="2.2"
+      />
 
       <!-- 梯形台秤主壳体（上窄下宽：上沿 x=156..304, y=212；下沿 x=140..320, y=307） -->
       <path
@@ -22,7 +31,12 @@
       />
 
       <!-- 秤盘下方传力支座颈部（y: 196..212） -->
-      <path d="M 196 196 L 264 196 L 256 212 L 204 212 Z" fill="color-mix(in srgb, var(--c-neutral-600) 55%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
+      <path
+        d="M 196 196 L 264 196 L 256 212 L 204 212 Z"
+        fill="color-mix(in srgb, var(--c-neutral-600) 55%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="2"
+      />
 
       <!-- 金属弧边托盘（秤面 y=190，两端微翘护边，承托上方物块） -->
       <path
@@ -53,19 +67,48 @@
 
     <!-- ==================== 3. 静止在秤面上的物块（居中于 x=230，重心恰在 230, 145） ==================== -->
     <!-- 物块下外沿 186.5 + 1.5 = 188，与秤面 y=190 留出清晰分界不重叠 -->
-    <rect x="176" y="104" width="108" height="82.5" rx="10" fill="color-mix(in srgb, var(--c-accent) 16%, transparent)" stroke="var(--c-accent)" stroke-width="3" />
+    <rect
+      x="176"
+      y="104"
+      width="108"
+      height="82.5"
+      rx="10"
+      fill="color-mix(in srgb, var(--c-accent) 16%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="3"
+    />
 
     <!-- ==================== 4. 严格共线（x = 230）且等大（长均为 82px）的三个力 ==================== -->
     <!-- ① 秤面对物体的支持力 F_N：从物块重心 (230, 145) 竖直向上至 (230, 63) -->
     <CourseArrow :from="{ x: 230, y: 145 }" :to="{ x: 230, y: 63 }" stroke="var(--c-velocity)" stroke-width="3.6" />
-    <text x="246" y="82" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="20" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+    <text
+      x="246"
+      y="82"
+      fill="var(--c-velocity)"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="20"
+      stroke="var(--c-bg-soft)"
+      stroke-width="3"
+      paint-order="stroke"
+    >
       F
       <tspan font-size="14" dy="5">N</tspan>
     </text>
 
     <!-- ③ 物体对秤面的压力 F_N′：从秤面接触中心 (230, 190) 竖直向下至 (230, 272) -->
     <CourseArrow :from="{ x: 230, y: 190 }" :to="{ x: 230, y: 272 }" stroke="var(--c-force)" stroke-width="3.6" />
-    <text x="246" y="274" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic" font-size="20" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+    <text
+      x="246"
+      y="274"
+      fill="var(--c-force)"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="20"
+      stroke="var(--c-bg-soft)"
+      stroke-width="3"
+      paint-order="stroke"
+    >
       F
       <tspan font-size="14" dy="5">N</tspan>
       <tspan dy="-5">'</tspan>

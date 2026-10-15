@@ -200,8 +200,18 @@ const arcRadius = 70;
           stroke-dasharray="8 6"
         />
         <CourseArrow :from="ballCenter" :to="ballTip" stroke="var(--c-force)" :stroke-width="3.4" />
-        <CourseArrow :from="wedgeFrom" :to="wedgeTip" stroke="var(--c-velocity)" :stroke-width="3.4" />
-        <CourseArrow :from="ballShare.from" :to="ballShare.to" stroke="var(--c-accent)" :stroke-width="3" />
+        <CourseArrow
+          :from="wedgeFrom"
+          :to="wedgeTip"
+          stroke="var(--c-velocity)"
+          :stroke-width="3.4"
+        />
+        <CourseArrow
+          :from="ballShare.from"
+          :to="ballShare.to"
+          stroke="var(--c-accent)"
+          :stroke-width="3"
+        />
         <CourseArrow
           :from="wedgeShare.from"
           :to="wedgeShare.to"

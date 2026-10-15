@@ -61,7 +61,17 @@ const { width = 560, carrierType = "electron" } = defineProps<{
         <line x1="160" y1="68" x2="255" y2="68" />
         <polygon points="263,68 253,64 253,72" fill="var(--c-physics-light)" stroke="none" />
       </g>
-      <text x="208" y="60" text-anchor="middle" font-family="KaTeX_Math, 'Times New Roman', serif" font-style="italic" font-size="18" fill="var(--c-physics-light)">E</text>
+      <text
+        x="208"
+        y="60"
+        text-anchor="middle"
+        font-family="KaTeX_Math, 'Times New Roman', serif"
+        font-style="italic"
+        font-size="18"
+        fill="var(--c-physics-light)"
+      >
+        E
+      </text>
 
       <!-- 静电力 F 矢量箭头：
            在真实自由电子模型下：受力 F = qE 向左（与电场相反）；

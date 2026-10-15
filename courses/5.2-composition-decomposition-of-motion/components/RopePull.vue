@@ -84,9 +84,22 @@ const alongLabel = computed(() => ({
       aria-label="人在岸上收绳拉船"
     >
       <!-- 岸（左）与水面 -->
-      <rect x="0" y="100" width="95" height="180" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
+      <rect
+        x="0"
+        y="100"
+        width="95"
+        height="180"
+        fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      />
       <SurfaceHatch :from="{ x: 95, y: 100 }" :to="{ x: 95, y: 280 }" side="left" :thickness="14" />
-      <line x1="0" y1="100" x2="95" y2="100" stroke="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)" stroke-width="2.2" />
+      <line
+        x1="0"
+        y1="100"
+        x2="95"
+        y2="100"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)"
+        stroke-width="2.2"
+      />
       <line
         x1="95"
         y1="280"

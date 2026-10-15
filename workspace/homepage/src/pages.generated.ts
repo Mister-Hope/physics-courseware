@@ -36,5 +36,5 @@ export const coursePages: Record<string, number> = {
   "6.4-circular-motion-in-life": 18,
   "o2-1.2-lorentz-force": 14,
   "o2-1.3-charged-particle-motion": 18,
-  "o2-1.x-speed-matching": 22
+  "o2-1.x-speed-matching": 22,
 };

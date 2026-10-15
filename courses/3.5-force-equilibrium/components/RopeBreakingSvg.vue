@@ -9,7 +9,16 @@
     <line x1="170" y1="40" x2="248" y2="144" stroke="var(--c-text-dim)" stroke-width="2.2" />
     <line x1="248" y1="144" x2="248" y2="200" stroke="var(--c-text-dim)" stroke-width="2.2" />
     <line x1="248" y1="144" x2="330" y2="144" stroke="var(--c-text-dim)" stroke-width="2.2" />
-    <rect x="223" y="200" width="50" height="32" rx="6" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
+    <rect
+      x="223"
+      y="200"
+      width="50"
+      height="32"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)"
+      stroke="var(--c-velocity)"
+      stroke-width="2"
+    />
     <path d="M 248 189 A 45 45 0 0 0 221 108" fill="none" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="5 4" />
     <text x="212" y="104" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="16">θ</text>
     <circle cx="170" cy="40" r="4" fill="var(--c-text)" />

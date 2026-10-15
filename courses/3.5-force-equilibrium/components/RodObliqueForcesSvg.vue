@@ -8,7 +8,16 @@
       <circle cx="75" cy="36" r="3" fill="var(--c-text-dim)" />
       <text x="56" y="32" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">O</text>
     </g>
-    <rect x="18" y="96" width="114" height="9" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+    <rect
+      x="18"
+      y="96"
+      width="114"
+      height="9"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.4"
+    />
     <CourseArrow :from="{ x: 75, y: 100 }" :to="{ x: 75, y: 132 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.6" />
     <CourseArrow :from="{ x: 22, y: 100 }" :to="{ x: 53.9, y: 61.5 }" :head-size="9" stroke="var(--c-accent)" stroke-width="2.6" />
     <CourseArrow :from="{ x: 128, y: 100 }" :to="{ x: 96.2, y: 61.5 }" :head-size="9" stroke="var(--c-physics)" stroke-width="2.6" />

@@ -68,7 +68,14 @@ const pathD = ((): string => {
       :thickness="12"
       :gap="20"
     />
-    <rect x="96" y="40" width="14" height="222" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 40%, transparent)" />
+    <rect
+      x="96"
+      y="40"
+      width="14"
+      height="222"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 40%, transparent)"
+    />
     <line
       x1="103"
       y1="78"
@@ -120,14 +127,42 @@ const pathD = ((): string => {
       stroke="var(--c-velocity)"
       stroke-width="2.4"
     />
-    <circle :cx="ballA.x" :cy="ballA.y" r="11" fill="var(--c-accent)" stroke="#f5d08a" stroke-width="2" />
-    <circle :cx="ballB.x" :cy="ballB.y" r="11" fill="var(--c-velocity)" stroke="var(--c-velocity-light)" stroke-width="2" />
-    <text :x="ballA.x + 17" :y="ballA.y + 7" font-size="18" font-weight="700" fill="var(--c-accent)">
+    <circle
+      :cx="ballA.x"
+      :cy="ballA.y"
+      r="11"
+      fill="var(--c-accent)"
+      stroke="#f5d08a"
+      stroke-width="2"
+    />
+    <circle
+      :cx="ballB.x"
+      :cy="ballB.y"
+      r="11"
+      fill="var(--c-velocity)"
+      stroke="var(--c-velocity-light)"
+      stroke-width="2"
+    />
+    <text
+      :x="ballA.x + 17"
+      :y="ballA.y + 7"
+      font-size="18"
+      font-weight="700"
+      fill="var(--c-accent)"
+    >
       A
     </text>
-    <text :x="ballB.x - 29" :y="ballB.y + 7" font-size="18" font-weight="700" fill="var(--c-velocity)">
+    <text
+      :x="ballB.x - 29"
+      :y="ballB.y + 7"
+      font-size="18"
+      font-weight="700"
+      fill="var(--c-velocity)"
+    >
       B
     </text>
-    <text x="132" y="292" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">同时落地</text>
+    <text x="132" y="292" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
+      同时落地
+    </text>
   </svg>
 </template>

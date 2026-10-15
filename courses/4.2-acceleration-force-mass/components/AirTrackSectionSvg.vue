@@ -20,8 +20,18 @@
     <SurfaceHatch :from="{ x: 32, y: 192 }" :to="{ x: 268, y: 192 }" side="below" color="#64748b" :line-width="2" :thickness="10" :gap="18" />
 
     <!-- 导轨左右支撑底座 -->
-    <path d="M 80 168 L 76 192 L 90 192 L 94 168 Z" fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.2" />
-    <path d="M 206 168 L 210 192 L 224 192 L 220 168 Z" fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.2" />
+    <path
+      d="M 80 168 L 76 192 L 90 192 L 94 168 Z"
+      fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.2"
+    />
+    <path
+      d="M 206 168 L 210 192 L 224 192 L 220 168 Z"
+      fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.2"
+    />
 
     <!-- ==================== 2. 导轨与滑块之间的高压气垫层（气层） ==================== -->
     <!--
@@ -36,7 +46,13 @@
     <path d="M 150 92 L 72 170 L 228 170 Z" fill="url(#atsRailGrad)" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-linejoin="round" />
 
     <!-- 导轨内部中空输气腔（高压气室），直观解释气流来源 -->
-    <path d="M 150 116 L 104 160 L 196 160 Z" fill="color-mix(in srgb, var(--c-neutral-900) 82%, transparent)" stroke="rgba(125,211,252,0.45)" stroke-width="1.3" stroke-linejoin="round" />
+    <path
+      d="M 150 116 L 104 160 L 196 160 Z"
+      fill="color-mix(in srgb, var(--c-neutral-900) 82%, transparent)"
+      stroke="rgba(125,211,252,0.45)"
+      stroke-width="1.3"
+      stroke-linejoin="round"
+    />
     <text x="150" y="151" font-size="10.5" fill="#7dd3fc" text-anchor="middle" opacity="0.9">通气腔</text>
 
     <!-- 两侧斜面上的贯通式喷气孔通道（垂直于 45° 斜面贯通内腔与外表面） -->

@@ -5,13 +5,36 @@ const { showForces = false } = defineProps<{ showForces?: boolean }>();
 <template>
   <!-- 第 10 页 例④：光滑斜面上两物块用轻绳相连下滑，无外力时整体加速度为 a，绳中拉力 F_T 未知；两物块沿斜面向下的加速度箭头属分析标注，受 showForces 控制（默认不显示） -->
   <svg viewBox="0 0 380 260" width="100%" style="max-width: 420px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 60 220 L 340 220 L 340 70 Z" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" />
+    <path
+      d="M 60 220 L 340 220 L 340 70 Z"
+      fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
+      stroke-width="1.6"
+    />
     <SurfaceHatch :from="{ x: 52, y: 220 }" :to="{ x: 348, y: 220 }" side="below" color="#64748b" :line-width="2" :thickness="10" :gap="18" />
     <path d="M 105 220 A 45 45 0 0 0 99.7 198.7" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
     <text x="100" y="209" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-neutral-200)" text-anchor="middle">θ</text>
     <g transform="translate(60,220) rotate(-28.2)">
-      <rect x="77" y="-30" width="46" height="30" rx="4" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2" />
-      <rect x="177" y="-30" width="46" height="30" rx="4" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2" />
+      <rect
+        x="77"
+        y="-30"
+        width="46"
+        height="30"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="2"
+      />
+      <rect
+        x="177"
+        y="-30"
+        width="46"
+        height="30"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="2"
+      />
       <line x1="123" y1="-15" x2="177" y2="-15" stroke="var(--c-neutral-300)" stroke-width="1.6" />
     </g>
     <text x="126" y="136" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-text)" text-anchor="middle">

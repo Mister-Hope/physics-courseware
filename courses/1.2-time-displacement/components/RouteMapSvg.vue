@@ -20,7 +20,17 @@
     <!-- 起点终点的直线距离：12 km（金色有向线段；箭头尖端落在公园点上、线头被三角盖住） -->
     <line x1="100" y1="240" x2="520.4" y2="67.6" stroke="var(--c-accent)" stroke-width="3.5" stroke-dasharray="9 6" stroke-linecap="round" />
     <path d="M 533.5 62.5 L 523.3 75 L 517.5 60.1 z" fill="var(--c-accent)" />
-    <text x="330" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+    <text
+      x="330"
+      y="100"
+      text-anchor="middle"
+      font-size="14"
+      font-weight="700"
+      fill="var(--c-accent)"
+      stroke="var(--c-bg-soft)"
+      stroke-width="3"
+      paint-order="stroke"
+    >
       12 km（直线距离）
     </text>
     <!-- 学校 / 公园 -->

@@ -45,7 +45,17 @@
     <!-- ==================== 3. 严格共线（x = 230）且等大（长均为 76px）的三个力 ==================== -->
     <!-- ① 猴子对树枝的拉力 F′：作用于树枝接触点 (230, 56)，竖直向下至 (230, 132)（长 76px） -->
     <CourseArrow :from="{ x: 230, y: 56 }" :to="{ x: 230, y: 132 }" stroke="var(--c-force)" stroke-width="3.6" />
-    <text x="248" y="104" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic" font-size="25" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+    <text
+      x="248"
+      y="104"
+      fill="var(--c-force)"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="25"
+      stroke="var(--c-bg-soft)"
+      stroke-width="3"
+      paint-order="stroke"
+    >
       F'
     </text>
 

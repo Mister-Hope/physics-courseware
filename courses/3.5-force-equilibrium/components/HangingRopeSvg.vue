@@ -13,7 +13,16 @@
     <line x1="118" y1="30" x2="170" y2="120" stroke="var(--c-text-dim)" stroke-width="2.2" />
     <line x1="170" y1="120" x2="300" y2="120" stroke="var(--c-text-dim)" stroke-width="2.2" />
     <line x1="170" y1="120" x2="170" y2="200" stroke="var(--c-text-dim)" stroke-width="2.2" />
-    <rect x="145" y="200" width="50" height="32" rx="6" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
+    <rect
+      x="145"
+      y="200"
+      width="50"
+      height="32"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)"
+      stroke="var(--c-velocity)"
+      stroke-width="2"
+    />
     <line x1="170" y1="120" x2="170" y2="44" stroke="var(--c-neutral-500)" stroke-width="1.3" stroke-dasharray="5 4" opacity="0.85" />
     <path d="M 170 70 A 50 50 0 0 0 145 76.7" fill="none" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="5 4" />
     <text x="150" y="67" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="16">θ</text>

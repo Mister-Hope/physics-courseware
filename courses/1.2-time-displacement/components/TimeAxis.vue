@@ -44,7 +44,12 @@ const showInterval = (): void => {
 <template>
   <div class="time-wrap">
     <div class="time-bar">
-      <button class="time-btn" type="button" :class="{ 'time-btn-active': mode === 'time' }" @click="showTime">
+      <button
+        class="time-btn"
+        type="button"
+        :class="{ 'time-btn-active': mode === 'time' }"
+        @click="showTime"
+      >
         显示时刻
       </button>
       <button
@@ -55,7 +60,9 @@ const showInterval = (): void => {
       >
         显示时间间隔
       </button>
-      <span v-if="mode === 'time'" class="time-hint">时刻 → 时间轴上的<span class="time-hl">点</span></span>
+      <span v-if="mode === 'time'" class="time-hint"
+        >时刻 → 时间轴上的<span class="time-hl">点</span></span
+      >
       <span v-else-if="mode === 'interval'" class="time-hint"
         >时间间隔 → 两点之间的<span class="time-hl">线段</span></span
       >

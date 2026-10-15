@@ -183,7 +183,12 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         stroke="color-mix(in srgb, var(--c-accent) 65%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.4" stroke-linecap="round">
+      <g
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)"
+        stroke-width="1.4"
+        stroke-linecap="round"
+      >
         <template v-for="(m, i) in MARKS" :key="`b${i}`">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -254,7 +259,13 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
       </text>
       <!-- 第 1 次点击：轨迹圆弧 -->
       <template v-if="showPath">
-        <path :d="arcPath" fill="none" stroke="var(--c-velocity)" stroke-width="3.6" stroke-linecap="round" />
+        <path
+          :d="arcPath"
+          fill="none"
+          stroke="var(--c-velocity)"
+          stroke-width="3.6"
+          stroke-linecap="round"
+        />
         <circle :cx="M.x" :cy="M.y" r="6" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
@@ -277,8 +288,18 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
           stroke-width="1.9"
           stroke-dasharray="8 7"
         />
-        <path :d="rightA" fill="none" stroke="color-mix(in srgb, var(--c-text) 90%, transparent)" stroke-width="2" />
-        <path :d="rightM" fill="none" stroke="color-mix(in srgb, var(--c-text) 90%, transparent)" stroke-width="2" />
+        <path
+          :d="rightA"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text) 90%, transparent)"
+          stroke-width="2"
+        />
+        <path
+          :d="rightM"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text) 90%, transparent)"
+          stroke-width="2"
+        />
         <circle :cx="C.x" :cy="C.y" r="5.5" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"

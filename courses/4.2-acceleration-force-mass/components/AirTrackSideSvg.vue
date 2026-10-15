@@ -47,7 +47,16 @@
       <rect x="20" y="151" width="10" height="5" rx="1.5" fill="var(--c-neutral-600)" />
       <rect x="62" y="151" width="10" height="5" rx="1.5" fill="var(--c-neutral-600)" />
       <!-- 气泵主壳体 -->
-      <rect x="14" y="108" width="64" height="43" rx="5" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+      <rect
+        x="14"
+        y="108"
+        width="64"
+        height="43"
+        rx="5"
+        fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.6"
+      />
       <!-- 气泵散热百叶窗与运行指示灯 -->
       <line x1="22" y1="118" x2="38" y2="118" stroke="var(--c-neutral-500)" stroke-width="1.4" />
       <line x1="22" y1="123" x2="38" y2="123" stroke="var(--c-neutral-500)" stroke-width="1.4" />
@@ -64,9 +73,19 @@
     <!-- ==================== 3. 气垫导轨本体（分上层三角斜面 y=118..134 与下层刻度基座 y=134..143） ==================== -->
     <g>
       <!-- 导轨左右调平支座与调节螺母 -->
-      <path d="M 134 143 L 138 156 L 150 156 L 154 143 Z" fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.2" />
+      <path
+        d="M 134 143 L 138 156 L 150 156 L 154 143 Z"
+        fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.2"
+      />
       <rect x="135" y="152" width="18" height="4" rx="1" fill="var(--c-neutral-500)" />
-      <path d="M 342 143 L 346 156 L 358 156 L 362 143 Z" fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.2" />
+      <path
+        d="M 342 143 L 346 156 L 358 156 L 362 143 Z"
+        fill="color-mix(in srgb, var(--c-text-dim) 32%, transparent)"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.2"
+      />
       <rect x="343" y="152" width="18" height="4" rx="1" fill="var(--c-neutral-500)" />
 
       <!-- 导轨上层：倒 V 形三角工作斜面（y: 118..134，顶棱 y = 118） -->
@@ -76,7 +95,15 @@
 
       <!-- 导轨下层：底座与毫米标尺刻度带（y: 134..143，始终露在滑块侧翼裙边 y=132 下方） -->
       <rect x="110" y="134" width="274" height="9" rx="1.5" fill="url(#atRailBaseGrad)" stroke="var(--c-text-dim)" stroke-width="1.3" />
-      <line x1="118" y1="138.5" x2="376" y2="138.5" stroke="color-mix(in srgb, var(--c-neutral-300) 50%, transparent)" stroke-width="2.2" stroke-dasharray="1.5 6.5" />
+      <line
+        x1="118"
+        y1="138.5"
+        x2="376"
+        y2="138.5"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 50%, transparent)"
+        stroke-width="2.2"
+        stroke-dasharray="1.5 6.5"
+      />
 
       <!-- 导轨斜面上的均匀喷气小孔（位于斜面中部 y = 126.5） -->
       <g fill="var(--c-neutral-900)" stroke="#7dd3fc" stroke-width="1">
@@ -134,10 +161,28 @@
       <line x1="182" y1="133" x2="264" y2="133" stroke="var(--c-physics-light)" stroke-width="1.5" stroke-dasharray="3 2.5" opacity="0.9" />
 
       <!-- 滑块顶部厚实脊梁（y: 104 .. 114.5，带左右倒角与立体折线，与下方侧翼共同构成骑跨鞍座） -->
-      <path d="M 180 114.5 L 185 104 L 261 104 L 266 114.5 Z" fill="url(#atRiderSpineGrad)" stroke="var(--c-velocity)" stroke-width="1.6" stroke-linejoin="round" />
+      <path
+        d="M 180 114.5 L 185 104 L 261 104 L 266 114.5 Z"
+        fill="url(#atRiderSpineGrad)"
+        stroke="var(--c-velocity)"
+        stroke-width="1.6"
+        stroke-linejoin="round"
+      />
       <!-- 滑块左右两端开口处的内凹骑跨槽口指示线（强化“像鞍子一样跨在导轨上”的立体感） -->
-      <path d="M 180 132 L 184.5 118 L 180 114.5" fill="color-mix(in srgb, var(--c-neutral-900) 45%, transparent)" stroke="var(--c-velocity-light)" stroke-width="1.1" stroke-linejoin="round" />
-      <path d="M 266 132 L 261.5 118 L 266 114.5" fill="color-mix(in srgb, var(--c-neutral-900) 45%, transparent)" stroke="var(--c-velocity-light)" stroke-width="1.1" stroke-linejoin="round" />
+      <path
+        d="M 180 132 L 184.5 118 L 180 114.5"
+        fill="color-mix(in srgb, var(--c-neutral-900) 45%, transparent)"
+        stroke="var(--c-velocity-light)"
+        stroke-width="1.1"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M 266 132 L 261.5 118 L 266 114.5"
+        fill="color-mix(in srgb, var(--c-neutral-900) 45%, transparent)"
+        stroke="var(--c-velocity-light)"
+        stroke-width="1.1"
+        stroke-linejoin="round"
+      />
 
       <!-- 滑块顶部中央挡光片（遮光条）底座与窄遮光片 -->
       <rect x="217" y="100.5" width="12" height="3.5" rx="1" fill="var(--c-accent-2)" stroke="var(--c-velocity-light)" stroke-width="0.9" />

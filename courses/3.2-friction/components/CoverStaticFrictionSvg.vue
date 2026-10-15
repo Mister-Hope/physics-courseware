@@ -9,7 +9,16 @@
       <line x1="152" y1="132" x2="142" y2="144" />
       <line x1="192" y1="132" x2="182" y2="144" />
     </g>
-    <rect x="76" y="74" width="88" height="58" rx="7" fill="color-mix(in srgb, var(--c-velocity) 12%, transparent)" stroke="var(--c-velocity)" stroke-width="2.2" />
+    <rect
+      x="76"
+      y="74"
+      width="88"
+      height="58"
+      rx="7"
+      fill="color-mix(in srgb, var(--c-velocity) 12%, transparent)"
+      stroke="var(--c-velocity)"
+      stroke-width="2.2"
+    />
     <CourseArrow :from="{ x: 120, y: 132 }" :to="{ x: 32, y: 132 }" stroke="var(--c-velocity)" stroke-width="3.2" />
     <CourseArrow :from="{ x: 168, y: 96 }" :to="{ x: 226, y: 96 }" stroke="var(--c-accent)" stroke-width="3.2" />
     <text x="30" y="124" font-size="16" fill="var(--c-velocity)">

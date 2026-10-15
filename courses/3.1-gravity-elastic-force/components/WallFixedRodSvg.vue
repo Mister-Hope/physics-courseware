@@ -1,7 +1,15 @@
 <template>
   <!-- 第 32 页：一端嵌在墙里的杆（多力杆），弹力可以不沿杆 -->
   <svg class="fig" viewBox="0 0 300 190" style="max-width: 13rem" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="26" width="34" height="140" fill="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+    <rect
+      x="10"
+      y="26"
+      width="34"
+      height="140"
+      fill="color-mix(in srgb, var(--c-text-dim) 22%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.2"
+    />
     <g stroke="var(--c-neutral-500)" stroke-width="1.6">
       <line x1="10" y1="44" x2="0" y2="56" />
       <line x1="10" y1="80" x2="0" y2="92" />

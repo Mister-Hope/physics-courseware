@@ -144,7 +144,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
   <div class="flex min-h-0 w-full flex-1 items-center justify-center">
     <svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto max-w-full">
       <!-- 磁场：⊗（垂直纸面向里）阵列（间距 110），暖金半透明（背景层） -->
-      <g stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)" stroke-width="1.4" fill="none">
+      <g
+        stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)"
+        stroke-width="1.4"
+        fill="none"
+      >
         <template v-for="(d, i) in B_DOTS" :key="`b${i}`">
           <circle :cx="d.x" :cy="d.y" :r="B_DOT_R" />
           <line
@@ -267,7 +271,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         θ
       </text>
       <!-- 入射速度 v_0：从 O 沿 +x（与 x 轴重合的那一段用蓝色加粗箭头压出来） -->
-      <CourseArrow :from="O" :to="{ x: 262, y: O.y }" stroke="var(--c-velocity)" stroke-width="3.4" />
+      <CourseArrow
+        :from="O"
+        :to="{ x: 262, y: O.y }"
+        stroke="var(--c-velocity)"
+        stroke-width="3.4"
+      />
       <text
         v-bind="HALO"
         x="216"
@@ -338,7 +347,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           r
         </text>
         <!-- C 处圆心角小弧（∠OCP = 180° − 2θ，只示意、不标数值） -->
-        <path :d="centralArcPath" fill="none" stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)" stroke-width="1.8" />
+        <path
+          :d="centralArcPath"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
+          stroke-width="1.8"
+        />
         <!-- OP 的中点 M + CM 虚线 + M 处直角标记（CM ⊥ OP） -->
         <circle :cx="M.x" :cy="M.y" r="5" fill="var(--c-neutral-50)" />
         <text
@@ -361,7 +375,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
-        <path :d="rightAnglePath" fill="none" stroke="color-mix(in srgb, var(--c-text) 85%, transparent)" stroke-width="1.8" />
+        <path
+          :d="rightAnglePath"
+          fill="none"
+          stroke="color-mix(in srgb, var(--c-text) 85%, transparent)"
+          stroke-width="1.8"
+        />
       </g>
     </svg>
   </div>

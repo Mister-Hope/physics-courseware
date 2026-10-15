@@ -85,7 +85,9 @@ const setSlider = (key: string, v: string): void => {
           stroke-width="1.6"
           stroke-linecap="round"
         />
-        <text x="46" y="196" text-anchor="middle" font-size="13" fill="var(--c-text-dim)">电源</text>
+        <text x="46" y="196" text-anchor="middle" font-size="13" fill="var(--c-text-dim)">
+          电源
+        </text>
         <!-- 输入电能（画在接正极的那根导线上，箭头指向电动机） -->
         <line
           x1="62"
@@ -97,7 +99,9 @@ const setSlider = (key: string, v: string): void => {
           stroke-linecap="round"
         />
         <polygon points="110,105 98,100 98,110" fill="var(--c-accent)" />
-        <text x="86" y="96" text-anchor="middle" font-size="13" fill="var(--c-accent)">输入（电能）</text>
+        <text x="86" y="96" text-anchor="middle" font-size="13" fill="var(--c-accent)">
+          输入（电能）
+        </text>
         <!-- 电动机：立体小圆柱 -->
         <ellipse
           cx="250"
@@ -108,9 +112,25 @@ const setSlider = (key: string, v: string): void => {
           stroke="var(--c-neutral-500)"
           stroke-width="3"
         />
-        <rect x="120" y="105" width="130" height="70" fill="color-mix(in srgb, var(--c-velocity) 10%, transparent)" />
-        <path d="M 120 105 H 250" stroke="var(--c-neutral-500)" stroke-width="3" stroke-linecap="round" />
-        <path d="M 120 175 H 250" stroke="var(--c-neutral-500)" stroke-width="3" stroke-linecap="round" />
+        <rect
+          x="120"
+          y="105"
+          width="130"
+          height="70"
+          fill="color-mix(in srgb, var(--c-velocity) 10%, transparent)"
+        />
+        <path
+          d="M 120 105 H 250"
+          stroke="var(--c-neutral-500)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          d="M 120 175 H 250"
+          stroke="var(--c-neutral-500)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
         <line
           x1="152"
           y1="107"
@@ -176,7 +196,9 @@ const setSlider = (key: string, v: string): void => {
         >
           M
         </text>
-        <text x="185" y="204" text-anchor="middle" font-size="13" fill="var(--c-text-dim)">电动机</text>
+        <text x="185" y="204" text-anchor="middle" font-size="13" fill="var(--c-text-dim)">
+          电动机
+        </text>
         <!-- 背面转轴 -->
         <line
           x1="267"
@@ -245,7 +267,9 @@ const setSlider = (key: string, v: string): void => {
           stroke-width="2.6"
           stroke-linecap="round"
         />
-        <text x="190" y="66" text-anchor="middle" font-size="13" fill="var(--c-force)">发热（内能）</text>
+        <text x="190" y="66" text-anchor="middle" font-size="13" fill="var(--c-force)">
+          发热（内能）
+        </text>
       </svg>
     </div>
 
@@ -301,8 +325,14 @@ const setSlider = (key: string, v: string): void => {
           <div class="mp-bar-out" :style="{ width: outRatio * 100 + '%' }"></div>
         </div>
         <div class="mp-bar-legend mini-note">
-          <span><i style="background: var(--c-danger)"></i>内能 {{ (heatRatio * 100).toFixed(0) }}%</span>
-          <span><i style="background: var(--c-accent-2)"></i>机械能 {{ (outRatio * 100).toFixed(0) }}%</span>
+          <span
+            ><i style="background: var(--c-danger)"></i>内能
+            {{ (heatRatio * 100).toFixed(0) }}%</span
+          >
+          <span
+            ><i style="background: var(--c-accent-2)"></i>机械能
+            {{ (outRatio * 100).toFixed(0) }}%</span
+          >
         </div>
       </div>
 
@@ -417,10 +447,8 @@ const setSlider = (key: string, v: string): void => {
 
 .mp-tag {
   flex: 0 0 auto;
-
   padding: 0.16rem 0.45rem;
   border-radius: var(--radius-sm);
-
   font-weight: 800;
 }
 

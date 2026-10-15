@@ -71,21 +71,48 @@
     <rect x="112" y="72" width="64" height="26" rx="3" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="1.4" />
     <!-- 靠近铁架台一端的打点计时器电火花/电源盒主体（蓝色矩形部分 x = 115 ~ 143） -->
     <g>
-      <rect x="115" y="75" width="28" height="20" rx="2.5" fill="color-mix(in srgb, var(--c-velocity) 20%, transparent)" stroke="var(--c-velocity)" stroke-width="1.3" />
+      <rect
+        x="115"
+        y="75"
+        width="28"
+        height="20"
+        rx="2.5"
+        fill="color-mix(in srgb, var(--c-velocity) 20%, transparent)"
+        stroke="var(--c-velocity)"
+        stroke-width="1.3"
+      />
       <!-- 电源接线柱设在靠近铁架台的左侧端（x = 121），导线向左上方引出接电源 -->
       <circle cx="121" cy="79.5" r="2" fill="var(--c-force)" stroke="#fecaca" stroke-width="0.7" />
       <circle cx="121" cy="90.5" r="2" fill="var(--c-velocity)" stroke="#bfdbfe" stroke-width="0.7" />
       <path d="M 121 77.5 C 118 62, 104 56, 92 56" fill="none" stroke="var(--c-force)" stroke-width="1.3" stroke-linecap="round" />
       <path d="M 119 90.5 C 110 88, 104 64, 92 64" fill="none" stroke="var(--c-velocity)" stroke-width="1.3" stroke-linecap="round" />
       <!-- 靠近铁架台一侧的“接电源”标识框 -->
-      <rect x="20" y="50" width="42" height="19" rx="3.5" fill="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)" stroke="var(--c-neutral-500)" stroke-width="1" />
+      <rect
+        x="20"
+        y="50"
+        width="42"
+        height="19"
+        rx="3.5"
+        fill="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)"
+        stroke="var(--c-neutral-500)"
+        stroke-width="1"
+      />
       <path d="M 80 56 L 92 56 M 80 64 L 92 64" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <line x1="62" y1="59.5" x2="80" y2="59.5" stroke="var(--c-velocity-light)" stroke-width="1.2" stroke-dasharray="2.5 2" />
       <text x="41" y="63" text-anchor="middle" font-size="9.5" fill="var(--c-velocity-light)">接电源</text>
     </g>
     <!-- ================= 4. 竖直穿行的纸带 (Vertical Paper Tape, x = 168) ================= -->
     <!-- 纸带主体（从上方左手 cx=168, y=24 竖直穿过打点计时器前侧限位孔与墨盘右侧，下端 y=126 系住砝码） -->
-    <rect x="162" y="24" width="12" height="102" rx="1" fill="color-mix(in srgb, var(--c-text) 16%, transparent)" stroke="color-mix(in srgb, var(--c-neutral-300) 65%, transparent)" stroke-width="1.2" />
+    <rect
+      x="162"
+      y="24"
+      width="12"
+      height="102"
+      rx="1"
+      fill="color-mix(in srgb, var(--c-text) 16%, transparent)"
+      stroke="color-mix(in srgb, var(--c-neutral-300) 65%, transparent)"
+      stroke-width="1.2"
+    />
     <!-- 纸带上已打出的点迹 -->
     <g fill="var(--c-accent)">
       <circle cx="168" cy="34" r="1.6" />

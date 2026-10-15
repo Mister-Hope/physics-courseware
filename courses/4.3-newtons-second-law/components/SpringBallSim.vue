@@ -407,6 +407,7 @@ onUnmounted(() => cancelAnimationFrame(frameId));
   color: var(--c-accent);
 
   font-weight: 700;
+
   /* 组件内部的固定版式字号（style-guide §3 铁律 3 的 scoped 例外）：
      改用共享阶梯 .text-lg（1.1rem）会让 .sim-bar 排不下一行、整块演示区不再占满页面
      （实测第 16 页底部留白 24.2px → 67.9px），故保留原值。 */
@@ -426,7 +427,6 @@ onUnmounted(() => cancelAnimationFrame(frameId));
   display: flex;
   gap: 1.2rem;
   align-items: baseline;
-
   color: var(--c-text);
 }
 </style>

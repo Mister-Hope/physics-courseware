@@ -76,10 +76,26 @@ const stars = [
       <circle :cx="O.x" :cy="O.y" :r="R_EARTH" fill="none" stroke="var(--c-velocity)" stroke-width="2" opacity="0.85" />
       <text x="114" y="232" font-size="20" fill="#bfdbfe">地球</text>
       <!-- 飞船的圆形轨道（虚线圆，飞船在其最高点） -->
-      <circle :cx="O.x" :cy="O.y" :r="R_ORBIT" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 34%, transparent)" stroke-width="1.8" stroke-dasharray="7 8" />
+      <circle
+        :cx="O.x"
+        :cy="O.y"
+        :r="R_ORBIT"
+        fill="none"
+        stroke="color-mix(in srgb, var(--c-text-dim) 34%, transparent)"
+        stroke-width="1.8"
+        stroke-dasharray="7 8"
+      />
       <!-- 半径 R 与地心 O：点击后出现；画在飞船之下，上半段被舱体自然遮住 -->
       <g :class="{ 'orbit-hidden': !showForces }">
-        <line :x1="O.x" :y1="O.y" :x2="ship.x" :y2="ship.y" stroke="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)" stroke-width="1.8" stroke-dasharray="9 7" />
+        <line
+          :x1="O.x"
+          :y1="O.y"
+          :x2="ship.x"
+          :y2="ship.y"
+          stroke="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)"
+          stroke-width="1.8"
+          stroke-dasharray="9 7"
+        />
         <text x="214" y="238" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-300)">R</text>
         <circle :cx="O.x" :cy="O.y" r="7" fill="none" stroke="color-mix(in srgb, var(--c-neutral-200) 50%, transparent)" stroke-width="1.4" />
         <circle :cx="O.x" :cy="O.y" r="4.2" fill="var(--c-neutral-200)" opacity="0.9" />
@@ -89,8 +105,23 @@ const stars = [
       <g :transform="`translate(${ship.x} ${ship.y})`">
         <line x1="-34" y1="-20" x2="-42" y2="-38" stroke="var(--c-text-dim)" stroke-width="2" stroke-linecap="round" />
         <circle cx="-42" cy="-38" r="2.8" fill="var(--c-accent)" />
-        <path d="M -46 -8 L -56 -13 L -56 13 L -46 8 Z" fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-linejoin="round" />
-        <rect x="-46" y="-23" width="92" height="46" rx="17" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+        <path
+          d="M -46 -8 L -56 -13 L -56 13 L -46 8 Z"
+          fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+          stroke="var(--c-text-dim)"
+          stroke-width="1.8"
+          stroke-linejoin="round"
+        />
+        <rect
+          x="-46"
+          y="-23"
+          width="92"
+          height="46"
+          rx="17"
+          fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)"
+          stroke="var(--c-neutral-300)"
+          stroke-width="2.4"
+        />
         <circle cx="0" cy="0" r="16" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="var(--c-velocity-light)" stroke-width="2" />
         <circle cx="0" cy="-4" r="5" fill="var(--c-text)" />
         <path d="M -6.5 8 A 6.5 6.5 0 0 1 6.5 8 Z" fill="var(--c-text)" />

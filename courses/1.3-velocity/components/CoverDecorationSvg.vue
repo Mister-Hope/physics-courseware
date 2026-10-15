@@ -10,7 +10,9 @@
     <line x1="100" y1="88" x2="188" y2="46" stroke="var(--c-velocity)" stroke-width="1.8" stroke-dasharray="6 4" />
     <circle cx="100" cy="88" r="4.5" fill="var(--c-accent)" />
     <circle cx="188" cy="46" r="4.5" fill="var(--c-velocity)" />
-    <text x="22" y="140" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.8">O</text>
+    <text x="22" y="140" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.8">
+      O
+    </text>
     <text x="22" y="28" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 14px" fill="var(--c-text-dim)">x</text>
     <text x="206" y="140" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 14px" fill="var(--c-text-dim)">t</text>
   </svg>

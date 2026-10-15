@@ -24,6 +24,7 @@
 /* 第 9 页：纯电阻 / 非纯电阻 对比表（每行一个三列栅格，便于整行分步出现） */
 .cmp-row {
   display: grid;
+
   /* 右栏（非纯电阻）文字最长、还要塞公式，多分一点宽度，避免整页被折行撑高 */
   grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr) minmax(0, 1.22fr);
   gap: 0 0.85rem;

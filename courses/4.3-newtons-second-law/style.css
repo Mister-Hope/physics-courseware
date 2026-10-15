@@ -7,7 +7,7 @@
    fig-  图文排布（图栏尺寸 / 图窄文宽栅格变体）
    eq-   公式排版（推导式、两组方程的就地切换）
    case- 并列案例（两类变力 / 两类突变规律）
-   sim-  交互组件内部（components/SpringBallSim.vue 的 <style scoped>）
+   sim-  交互组件内部（components/SpringBallSim.vue 的 \3c style scoped>）
    字号一律走共享阶梯（.text-*），密度走共享的 .stack-dense / .stack-tight；
    个别密排页再用 §8 的官方旋钮在类作用域收紧 --stack-gap，此处不再私调字号。
    ═══════════════════════════════════════════════ */

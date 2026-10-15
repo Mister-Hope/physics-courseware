@@ -18,7 +18,9 @@ defineProps<{ step?: number }>();
     <text x="298" y="125" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
     <g v-if="step >= 1">
       <circle cx="286" cy="118" r="10" fill="none" stroke="var(--c-accent)" stroke-width="2" opacity="0.9" />
-      <text x="210" y="214" text-anchor="middle" font-size="14" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">4 s 回到 A</text>
+      <text x="210" y="214" text-anchor="middle" font-size="14" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+        4 s 回到 A
+      </text>
     </g>
     <g v-if="step >= 2">
       <path d="M 134 118 A 76 76 0 0 1 286 118" fill="none" stroke="var(--c-velocity)" stroke-width="4" stroke-linecap="round" opacity="0.9" />
@@ -39,7 +41,9 @@ defineProps<{ step?: number }>();
       >
         2R
       </text>
-      <text x="210" y="234" text-anchor="middle" font-size="14" fill="var(--c-velocity)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">第 2 个 2 s：C → A</text>
+      <text x="210" y="234" text-anchor="middle" font-size="14" fill="var(--c-velocity)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
+        第 2 个 2 s：C → A
+      </text>
     </g>
   </svg>
 </template>

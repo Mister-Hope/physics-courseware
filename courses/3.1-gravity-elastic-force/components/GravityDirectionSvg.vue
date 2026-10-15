@@ -8,7 +8,17 @@
     <circle cx="110" cy="28" r="4" fill="var(--c-force)" />
     <text x="124" y="68" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-force)">G</text>
     <SurfaceHatch :from="{ x: 230, y: 90 }" :to="{ x: 385, y: 26 }" side="below" :thickness="10" :gap="30" color="#64748b" :line-width="3" :hatch-width="1.2" />
-    <rect x="294" y="21.7" width="52" height="30" rx="4" transform="rotate(-22.4 320 36.7)" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+    <rect
+      x="294"
+      y="21.7"
+      width="52"
+      height="30"
+      rx="4"
+      transform="rotate(-22.4 320 36.7)"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.4"
+    />
     <CourseArrow :from="{ x: 320, y: 36.7 }" :to="{ x: 320, y: 86 }" stroke="var(--c-force)" stroke-width="3" />
     <circle cx="320" cy="36.7" r="4" fill="var(--c-force)" />
     <text x="334" y="68" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-force)">G</text>

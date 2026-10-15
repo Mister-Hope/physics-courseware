@@ -73,7 +73,16 @@
       <!-- 黑板擦上层原木色立体木质背板（向右上方微偏 3px，露出左侧与底部的深灰毛毡层） -->
       <rect x="24" y="34" width="26" height="102" rx="4" fill="url(#drsEraserWoodGrad)" stroke="var(--c-accent-glow)" stroke-width="1.4" />
       <!-- 木质背板中央纵向内凹人体工学握槽 -->
-      <rect x="32" y="38" width="10" height="94" rx="3" fill="url(#drsEraserGrooveGrad)" stroke="color-mix(in srgb, var(--c-accent-light) 40%, transparent)" stroke-width="0.9" />
+      <rect
+        x="32"
+        y="38"
+        width="10"
+        height="94"
+        rx="3"
+        fill="url(#drsEraserGrooveGrad)"
+        stroke="color-mix(in srgb, var(--c-accent-light) 40%, transparent)"
+        stroke-width="0.9"
+      />
       <!-- 木质背板防滑横棱与高光边线 -->
       <line x1="26.5" y1="38" x2="26.5" y2="132" stroke="rgba(254,243,199,0.45)" stroke-width="1" stroke-linecap="round" />
       <g stroke="rgba(254,243,199,0.42)" stroke-width="1.1" stroke-linecap="round">
@@ -109,7 +118,13 @@
       <circle cx="179" cy="59.5" r="2.2" fill="var(--c-velocity-light)" />
 
       <!-- 固定在上轨道右端 (384, 66) 的定滑轮夹具与斜撑支架（彻底解决原版滑轮悬空问题） -->
-      <path d="M 377 65.5 L 385 65.5 L 385 73.5 L 377 73.5" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-neutral-300)" stroke-width="1.3" stroke-linejoin="round" />
+      <path
+        d="M 377 65.5 L 385 65.5 L 385 73.5 L 377 73.5"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="1.3"
+        stroke-linejoin="round"
+      />
       <line x1="384" y1="67" x2="400" y2="57" stroke="var(--c-text-dim)" stroke-width="2.8" stroke-linecap="round" />
       <line x1="384" y1="72" x2="400" y2="57" stroke="var(--c-neutral-500)" stroke-width="1.8" stroke-linecap="round" />
 
@@ -125,7 +140,16 @@
       <line x1="409" y1="77" x2="401" y2="85" stroke="var(--c-neutral-300)" stroke-width="1.2" stroke-linecap="round" />
       <line x1="409" y1="77" x2="417" y2="85" stroke="var(--c-neutral-300)" stroke-width="1.2" stroke-linecap="round" />
       <rect x="398" y="85" width="22" height="10" rx="2" fill="url(#drsPanGrad)" stroke="var(--c-accent)" stroke-width="1.3" />
-      <rect x="403" y="81.5" width="12" height="3.5" rx="1" fill="color-mix(in srgb, var(--c-accent-light) 55%, transparent)" stroke="var(--c-accent)" stroke-width="1" />
+      <rect
+        x="403"
+        y="81.5"
+        width="12"
+        height="3.5"
+        rx="1"
+        fill="color-mix(in srgb, var(--c-accent-light) 55%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1"
+      />
     </g>
 
     <!-- ==================== 5. 下层装置：小车 2 + 端头定滑轮支架 + 定滑轮 + 悬挂小盘 ==================== -->
@@ -150,7 +174,13 @@
       <circle cx="179" cy="139.5" r="2.2" fill="var(--c-velocity-light)" />
 
       <!-- 固定在下轨道右端 (384, 146) 的定滑轮夹具与斜撑支架 -->
-      <path d="M 377 145.5 L 385 145.5 L 385 153.5 L 377 153.5" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-neutral-300)" stroke-width="1.3" stroke-linejoin="round" />
+      <path
+        d="M 377 145.5 L 385 145.5 L 385 153.5 L 377 153.5"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="1.3"
+        stroke-linejoin="round"
+      />
       <line x1="384" y1="147" x2="400" y2="137" stroke="var(--c-text-dim)" stroke-width="2.8" stroke-linecap="round" />
       <line x1="384" y1="152" x2="400" y2="137" stroke="var(--c-neutral-500)" stroke-width="1.8" stroke-linecap="round" />
 
@@ -166,7 +196,16 @@
       <line x1="409" y1="157" x2="401" y2="165" stroke="var(--c-neutral-300)" stroke-width="1.2" stroke-linecap="round" />
       <line x1="409" y1="157" x2="417" y2="165" stroke="var(--c-neutral-300)" stroke-width="1.2" stroke-linecap="round" />
       <rect x="398" y="165" width="22" height="10" rx="2" fill="url(#drsPanGrad)" stroke="var(--c-accent)" stroke-width="1.3" />
-      <rect x="402" y="159.5" width="14" height="5.5" rx="1" fill="color-mix(in srgb, var(--c-accent-light) 65%, transparent)" stroke="var(--c-accent)" stroke-width="1" />
+      <rect
+        x="402"
+        y="159.5"
+        width="14"
+        height="5.5"
+        rx="1"
+        fill="color-mix(in srgb, var(--c-accent-light) 65%, transparent)"
+        stroke="var(--c-accent)"
+        stroke-width="1"
+      />
     </g>
   </svg>
 </template>

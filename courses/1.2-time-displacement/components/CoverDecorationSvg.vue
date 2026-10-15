@@ -19,7 +19,9 @@
     </g>
     <!-- 原点（坐标轴交点，标签在左下方，KaTeX 数学斜体）-->
     <circle cx="34" cy="118" r="3" fill="currentColor" opacity="0.7" />
-    <text x="22" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.85">O</text>
+    <text x="22" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.85">
+      O
+    </text>
     <!-- 物理量标签（KaTeX 数学斜体；x 与 O 竖向对齐、t 与 O 横向对齐，离轴留间距）-->
     <text x="206" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="var(--c-text-dim)">t</text>
     <text x="22" y="20" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="var(--c-text-dim)">x</text>

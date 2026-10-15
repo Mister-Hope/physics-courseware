@@ -8,29 +8,93 @@
     <!-- ==================== 双人软包沙发（x: 96..284, y: 78..180） ==================== -->
     <g stroke-linejoin="round" stroke-linecap="round">
       <!-- 左右实木沙发支撑脚（底边 y=180 贴合地面） -->
-      <path d="M 108 168 L 120 168 L 118 180 L 110 180 Z" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-accent-2)" stroke-width="1.8" />
-      <path d="M 260 168 L 272 168 L 270 180 L 262 180 Z" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-accent-2)" stroke-width="1.8" />
+      <path
+        d="M 108 168 L 120 168 L 118 180 L 110 180 Z"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="1.8"
+      />
+      <path
+        d="M 260 168 L 272 168 L 270 180 L 262 180 Z"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="1.8"
+      />
 
       <!-- 沙发高靠背（双靠包造型） -->
-      <rect x="112" y="78" width="156" height="54" rx="12" fill="color-mix(in srgb, var(--c-velocity) 14%, transparent)" stroke="var(--c-accent-2)" stroke-width="2.2" />
+      <rect
+        x="112"
+        y="78"
+        width="156"
+        height="54"
+        rx="12"
+        fill="color-mix(in srgb, var(--c-velocity) 14%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="2.2"
+      />
       <!-- 靠背中缝与拉扣细节 -->
       <line x1="190" y1="82" x2="190" y2="124" stroke="var(--c-accent-2)" stroke-width="1.5" opacity="0.5" />
       <circle cx="151" cy="102" r="2" fill="var(--c-accent-2)" opacity="0.55" />
       <circle cx="229" cy="102" r="2" fill="var(--c-accent-2)" opacity="0.55" />
 
       <!-- 沙发双人厚座垫 -->
-      <rect x="112" y="122" width="156" height="28" rx="7" fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)" stroke="var(--c-accent-2)" stroke-width="2" />
+      <rect
+        x="112"
+        y="122"
+        width="156"
+        height="28"
+        rx="7"
+        fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="2"
+      />
       <line x1="190" y1="124" x2="190" y2="148" stroke="var(--c-accent-2)" stroke-width="1.5" opacity="0.55" />
 
       <!-- 沙发底部承重底座框 -->
-      <rect x="102" y="150" width="176" height="18" rx="5" fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)" stroke="var(--c-accent-2)" stroke-width="2" />
-      <rect x="102" y="150" width="176" height="18" rx="5" fill="color-mix(in srgb, var(--c-velocity) 18%, transparent)" stroke="var(--c-accent-2)" stroke-width="2" />
+      <rect
+        x="102"
+        y="150"
+        width="176"
+        height="18"
+        rx="5"
+        fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="2"
+      />
+      <rect
+        x="102"
+        y="150"
+        width="176"
+        height="18"
+        rx="5"
+        fill="color-mix(in srgb, var(--c-velocity) 18%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="2"
+      />
 
       <!-- 左右弧形宽扶手（遮挡靠背与座垫两侧交界，形成立体包裹感） -->
       <rect x="96" y="102" width="22" height="66" rx="9" fill="var(--c-bg-soft)" stroke="var(--c-accent-2)" stroke-width="2.2" />
-      <rect x="96" y="102" width="22" height="66" rx="9" fill="color-mix(in srgb, var(--c-velocity) 26%, transparent)" stroke="var(--c-accent-2)" stroke-width="2.2" />
+      <rect
+        x="96"
+        y="102"
+        width="22"
+        height="66"
+        rx="9"
+        fill="color-mix(in srgb, var(--c-velocity) 26%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="2.2"
+      />
       <rect x="262" y="102" width="22" height="66" rx="9" fill="var(--c-bg-soft)" stroke="var(--c-accent-2)" stroke-width="2.2" />
-      <rect x="262" y="102" width="22" height="66" rx="9" fill="color-mix(in srgb, var(--c-velocity) 26%, transparent)" stroke="var(--c-accent-2)" stroke-width="2.2" />
+      <rect
+        x="262"
+        y="102"
+        width="22"
+        height="66"
+        rx="9"
+        fill="color-mix(in srgb, var(--c-velocity) 26%, transparent)"
+        stroke="var(--c-accent-2)"
+        stroke-width="2.2"
+      />
     </g>
 
     <text x="190" y="164" text-anchor="middle" font-size="14" fill="var(--c-text)">沙发</text>

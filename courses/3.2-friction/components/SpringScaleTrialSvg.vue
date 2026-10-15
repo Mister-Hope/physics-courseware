@@ -28,7 +28,16 @@ const ringEndX = computed(() => scale.value?.ringEnd.x ?? 292.7);
     <SurfaceHatch :from="{ x: 8, y: 84 }" :to="{ x: 364, y: 84 }" side="below" :thickness="11" :gap="24" color="#94a3b8" />
 
     <!-- 被拉木块（y: 34..81.5，stroke-width=2.2 → 下外沿 82.6，与桌面严格相切不重叠） -->
-    <rect x="14" y="34" width="70" height="47.5" rx="4" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
+    <rect
+      x="14"
+      y="34"
+      width="70"
+      height="47.5"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-accent) 20%, transparent)"
+      stroke="var(--c-accent)"
+      stroke-width="2.2"
+    />
     <!-- 木块右侧挂钩圆环 -->
     <circle cx="87" cy="56" r="3" fill="none" stroke="var(--c-accent)" stroke-width="1.8" />
 

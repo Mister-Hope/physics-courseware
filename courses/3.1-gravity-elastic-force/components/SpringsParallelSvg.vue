@@ -24,7 +24,16 @@
       <tspan font-family="KaTeX_Math" font-style="italic">k</tspan>
       <tspan font-family="KaTeX_Main" dy="4" font-size="12">2</tspan>
     </text>
-    <rect x="70" y="110" width="160" height="14" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 25%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2" />
+    <rect
+      x="70"
+      y="110"
+      width="160"
+      height="14"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-text-dim) 25%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2"
+    />
     <CourseArrow :from="{ x: 150, y: 124 }" :to="{ x: 150, y: 196 }" stroke="var(--c-accent)" stroke-width="3.2" />
     <text x="162" y="172" font-size="17" fill="var(--c-accent)">
       <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>

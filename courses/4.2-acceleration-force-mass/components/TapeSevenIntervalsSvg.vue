@@ -1,8 +1,27 @@
 <template>
   <!-- 第 11 页：纸带上量出 7 段，舍去最密的第 1 段，剩下 6 段前后分半 -->
   <svg viewBox="0 0 640 130" xmlns="http://www.w3.org/2000/svg">
-    <rect x="34" y="40" width="572" height="34" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke-width="1.2" />
-    <rect x="34" y="40" width="81.7" height="34" rx="6" fill="color-mix(in srgb, var(--c-force) 16%, transparent)" stroke="var(--c-force)" stroke-width="1.4" stroke-dasharray="5 4" />
+    <rect
+      x="34"
+      y="40"
+      width="572"
+      height="34"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
+      stroke-width="1.2"
+    />
+    <rect
+      x="34"
+      y="40"
+      width="81.7"
+      height="34"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-force) 16%, transparent)"
+      stroke="var(--c-force)"
+      stroke-width="1.4"
+      stroke-dasharray="5 4"
+    />
     <line x1="44" y1="57" x2="596" y2="57" stroke="color-mix(in srgb, var(--c-text-dim) 40%, transparent)" stroke-width="1" />
     <circle cx="44" cy="57" r="4" fill="var(--c-force)" />
     <circle cx="124" cy="57" r="4" fill="var(--c-accent)" />

@@ -213,9 +213,8 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
 /* 释放后的摆线图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
    —— 第 13 页上方还有设问、下方还有两行结论，700px（渲染高 ≈ 211px）避免第 3 步被顶出画布 */
 .fig-release {
-  width: 100%;
-
   --fig-max: 700px;
+  width: 100%;
 }
 
 .fig-release .fig-svg {

@@ -74,7 +74,9 @@ const times = computed(() => signal.value / NOISE);
 </script>
 
 <template>
-  <div class="split-wide" style="--cols: minmax(0, 1.05fr) minmax(0, 1fr)">
+  <div class="split-wide" style="
+
+--cols: minmax(0, 1.05fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <polygon
@@ -208,7 +210,6 @@ const times = computed(() => signal.value / NOISE);
           {{ errorSmall ? "同样的读数误差，占合力的比例还不大" : "合力太小，同样的误差被放大" }}
         </div>
       </div>
-
     </div>
   </div>
 </template>

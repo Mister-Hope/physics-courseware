@@ -106,4 +106,3 @@ const pctY = (value: number): number => ((value - VIEW.minY) / VIEW.height) * 10
     <ChartLabel :x-percent="pctX(AXIS_END)" :y-percent="pctY(origin.y)" :parts="[{ tex: 'x' }]" anchor="left" :dx="-10" color="var(--c-text-dim)" />
   </div>
 </template>
-

@@ -20,7 +20,9 @@
 
     <!-- 原点 O 与坐标轴标签 -->
     <circle cx="34" cy="118" r="3" fill="currentColor" opacity="0.7" />
-    <text x="22" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.85">O</text>
+    <text x="22" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.85">
+      O
+    </text>
     <text x="206" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="var(--c-text-dim)">x</text>
     <text x="22" y="20" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="var(--c-text-dim)">y</text>
 

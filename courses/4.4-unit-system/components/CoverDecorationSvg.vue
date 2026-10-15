@@ -45,11 +45,24 @@
 
     <!-- ==================== 3. 力学三大基本量核心三角【长度 l — 质量 m — 时间 t】（顶层金色强调） ==================== -->
     <!-- v = l/t、a = Δl/Δt²、F = ma、E_k = ½mv²：支撑整个物理大厦的力学基石 -->
-    <polygon points="0,-120 93.8,-74.8 117,26.7" fill="color-mix(in srgb, var(--c-accent) 6%, transparent)" stroke="color-mix(in srgb, var(--c-accent) 52%, transparent)" stroke-width="1.8" stroke-linejoin="round" />
+    <polygon
+      points="0,-120 93.8,-74.8 117,26.7"
+      fill="color-mix(in srgb, var(--c-accent) 6%, transparent)"
+      stroke="color-mix(in srgb, var(--c-accent) 52%, transparent)"
+      stroke-width="1.8"
+      stroke-linejoin="round"
+    />
 
     <!-- ==================== 4. 中心 SI 枢纽（带深色遮罩底盘，避免内部公式弦穿过 SI 文字） ==================== -->
     <circle cx="0" cy="0" r="30" fill="var(--c-bg-soft)" />
-    <circle cx="0" cy="0" r="26" fill="color-mix(in srgb, var(--c-accent) 8%, transparent)" stroke="color-mix(in srgb, var(--c-accent) 65%, transparent)" stroke-width="1.7" />
+    <circle
+      cx="0"
+      cy="0"
+      r="26"
+      fill="color-mix(in srgb, var(--c-accent) 8%, transparent)"
+      stroke="color-mix(in srgb, var(--c-accent) 65%, transparent)"
+      stroke-width="1.7"
+    />
     <text x="0" y="9" text-anchor="middle" font-family="KaTeX_Main" font-size="25" fill="var(--c-accent)">SI</text>
 
     <!-- ==================== 5. 七个基本物理量节点与文字标注 ==================== -->

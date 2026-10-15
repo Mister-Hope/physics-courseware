@@ -1,7 +1,16 @@
 <template>
   <!-- 第 2 页：力的示意图——只画作用点与方向 -->
   <svg class="fig" viewBox="0 0 300 200" style="max-width: 14rem" xmlns="http://www.w3.org/2000/svg">
-    <rect x="118" y="132" width="72" height="54" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" stroke="var(--c-neutral-300)" stroke-width="2.6" />
+    <rect
+      x="118"
+      y="132"
+      width="72"
+      height="54"
+      rx="6"
+      fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)"
+      stroke="var(--c-neutral-300)"
+      stroke-width="2.6"
+    />
     <CourseArrow :from="{ x: 154, y: 158 }" :to="{ x: 258, y: 98 }" stroke="var(--c-accent)" stroke-width="3.2" />
     <circle cx="154" cy="158" r="4.5" fill="var(--c-accent)" />
     <text x="212" y="112" text-anchor="middle" font-size="18" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="4" paint-order="stroke">

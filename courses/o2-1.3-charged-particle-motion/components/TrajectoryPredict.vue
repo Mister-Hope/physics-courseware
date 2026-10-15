@@ -76,7 +76,14 @@ const options = [
 
         <!-- 候选三：圆周 -->
         <template v-else>
-          <circle cx="150" cy="87" r="46" fill="none" stroke="var(--c-velocity)" stroke-width="3.4" />
+          <circle
+            cx="150"
+            cy="87"
+            r="46"
+            fill="none"
+            stroke="var(--c-velocity)"
+            stroke-width="3.4"
+          />
           <circle cx="104" cy="87" r="6" fill="var(--c-velocity)" />
         </template>
       </svg>

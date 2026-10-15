@@ -14,7 +14,15 @@ const dots = Array.from({ length: COUNT }, (_, index) => ({
 <template>
   <div class="strobe-drop">
     <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平抛运动的频闪照片：等时间间隔的闪光点">
-      <line :x1="dots[0].x" :y1="dots[0].y" :x2="dots[COUNT - 1].x" :y2="dots[0].y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.6" stroke-dasharray="7 5" />
+      <line
+        :x1="dots[0].x"
+        :y1="dots[0].y"
+        :x2="dots[COUNT - 1].x"
+        :y2="dots[0].y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="7 5"
+      />
       <line
         :x1="dots[1].x"
         :y1="dots[1].y"

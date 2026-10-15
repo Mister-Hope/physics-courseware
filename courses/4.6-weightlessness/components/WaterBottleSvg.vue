@@ -59,7 +59,16 @@ const { falling = false, label = "" } = defineProps<{
       <line x1="123" y1="16.5" x2="123" y2="26.5" />
     </g>
     <!-- 瓶口锁环 -->
-    <rect x="88" y="29" width="44" height="4.5" rx="1.8" fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.1" />
+    <rect
+      x="88"
+      y="29"
+      width="44"
+      height="4.5"
+      rx="1.8"
+      fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.1"
+    />
 
     <!-- 流线型渐扩瓶肩与圆柱瓶身外轮廓 -->
     <path

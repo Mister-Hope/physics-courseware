@@ -1,7 +1,16 @@
 <template>
   <!-- 第 2 页：图乙：水平木棒两端各受竖直向上的力 F1、F2，连同重力 G 保持平衡 -->
   <svg viewBox="0 0 150 140" xmlns="http://www.w3.org/2000/svg">
-    <rect x="18" y="96" width="114" height="9" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+    <rect
+      x="18"
+      y="96"
+      width="114"
+      height="9"
+      rx="4"
+      fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.4"
+    />
     <CourseArrow :from="{ x: 22, y: 100 }" :to="{ x: 22, y: 52 }" :head-size="9" stroke="var(--c-accent)" stroke-width="2.6" />
     <CourseArrow :from="{ x: 128, y: 100 }" :to="{ x: 128, y: 52 }" :head-size="9" stroke="var(--c-physics)" stroke-width="2.6" />
     <CourseArrow :from="{ x: 75, y: 100 }" :to="{ x: 75, y: 132 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.6" />

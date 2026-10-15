@@ -29,7 +29,16 @@ const thetaArc = `M ${pointP.x + thetaR} ${GROUND_Y} A ${thetaR} ${thetaR} 0 0 1
 <template>
   <div class="example1">
     <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平台上水平抛出物体的题目图">
-      <rect x="90" y="90" width="110" :height="GROUND_Y - 90" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="1.8" />
+      <rect
+        x="90"
+        y="90"
+        width="110"
+        :height="GROUND_Y - 90"
+        rx="4"
+        fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)"
+        stroke-width="1.8"
+      />
       <SurfaceHatch :from="{ x: 60, y: GROUND_Y }" :to="{ x: 600, y: GROUND_Y }" side="below" :thickness="13" />
       <line :x1="DIM_X" y1="90" :x2="DIM_X" :y2="GROUND_Y" stroke="var(--c-accent)" stroke-width="1.6" />
       <line :x1="DIM_X - 10" y1="90" :x2="DIM_X + 10" y2="90" stroke="var(--c-accent)" stroke-width="1.6" />
@@ -39,9 +48,13 @@ const thetaArc = `M ${pointP.x + thetaR} ${GROUND_Y} A ${thetaR} ${thetaR} 0 0 1
       <text x="252" y="74" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">v</text>
       <text x="263" y="78" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">0</text>
       <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-neutral-200)" />
-      <text :x="origin.x - 10" :y="origin.y - 14" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">O</text>
+      <text :x="origin.x - 10" :y="origin.y - 14" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">
+        O
+      </text>
       <circle :cx="pointP.x" :cy="pointP.y" r="4.5" fill="var(--c-neutral-200)" />
-      <text :x="pointP.x - 14" :y="pointP.y - 14" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">P</text>
+      <text :x="pointP.x - 14" :y="pointP.y - 14" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">
+        P
+      </text>
       <g v-if="showDecomp">
         <CourseArrow :from="pointP" :to="{ x: pointP.x + VX, y: GROUND_Y }" stroke="var(--c-velocity)" :stroke-width="3" />
         <CourseArrow :from="pointP" :to="{ x: pointP.x, y: GROUND_Y + VY }" stroke="var(--c-physics)" :stroke-width="3" />
@@ -51,7 +64,15 @@ const thetaArc = `M ${pointP.x + thetaR} ${GROUND_Y} A ${thetaR} ${thetaR} 0 0 1
         <text :x="lblVx.x + 1" :y="lblVx.y + 4" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-velocity)">x</text>
         <text :x="lblVy.x" :y="lblVy.y" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-physics)">v</text>
         <text :x="lblVy.x + 1" :y="lblVy.y + 4" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-physics)">y</text>
-        <text :x="pointP.x + VX + 8" :y="GROUND_Y + VY - 10" text-anchor="start" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">
+        <text
+          :x="pointP.x + VX + 8"
+          :y="GROUND_Y + VY - 10"
+          text-anchor="start"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="20"
+          fill="var(--c-force)"
+        >
           v
         </text>
         <text x="510" y="347" text-anchor="start" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">θ</text>

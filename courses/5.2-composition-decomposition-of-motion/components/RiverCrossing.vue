@@ -132,14 +132,52 @@ const resultTip = computed(() => tip(boat.value, result.value));
       aria-label="小船渡河动画"
     >
       <!-- 两岸 -->
-      <rect x="0" y="0" width="760" height="96" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
-      <rect x="0" y="336" width="760" height="74" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
-      <line x1="0" y1="96" x2="760" y2="96" stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)" stroke-width="2.4" />
-      <line x1="0" y1="336" x2="760" y2="336" stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)" stroke-width="2.4" />
-      <text x="24" y="60" font-family="KaTeX_Main" font-size="17" fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)">
+      <rect
+        x="0"
+        y="0"
+        width="760"
+        height="96"
+        fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      />
+      <rect
+        x="0"
+        y="336"
+        width="760"
+        height="74"
+        fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+      />
+      <line
+        x1="0"
+        y1="96"
+        x2="760"
+        y2="96"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)"
+        stroke-width="2.4"
+      />
+      <line
+        x1="0"
+        y1="336"
+        x2="760"
+        y2="336"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)"
+        stroke-width="2.4"
+      />
+      <text
+        x="24"
+        y="60"
+        font-family="KaTeX_Main"
+        font-size="17"
+        fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
+      >
         对岸
       </text>
-      <text x="24" y="386" font-family="KaTeX_Main" font-size="17" fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)">
+      <text
+        x="24"
+        y="386"
+        font-family="KaTeX_Main"
+        font-size="17"
+        fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
+      >
         出发岸
       </text>
       <!-- 水流 -->
@@ -155,9 +193,22 @@ const resultTip = computed(() => tip(boat.value, result.value));
       </g>
       <!-- 河宽 -->
       <g opacity="0.9">
-        <line x1="62" y1="96" x2="62" y2="336" stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)" stroke-width="2" />
-        <polygon points="62,96 56,110 68,110" fill="color-mix(in srgb, var(--c-accent) 90%, transparent)" />
-        <polygon points="62,336 56,322 68,322" fill="color-mix(in srgb, var(--c-accent) 90%, transparent)" />
+        <line
+          x1="62"
+          y1="96"
+          x2="62"
+          y2="336"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
+          stroke-width="2"
+        />
+        <polygon
+          points="62,96 56,110 68,110"
+          fill="color-mix(in srgb, var(--c-accent) 90%, transparent)"
+        />
+        <polygon
+          points="62,336 56,322 68,322"
+          fill="color-mix(in srgb, var(--c-accent) 90%, transparent)"
+        />
         <text
           x="72"
           y="230"
@@ -215,7 +266,14 @@ const resultTip = computed(() => tip(boat.value, result.value));
           stroke="var(--c-velocity-light)"
           stroke-width="2.2"
         />
-        <line x1="-24" y1="0" x2="28" y2="0" stroke="color-mix(in srgb, var(--c-velocity-light) 80%, transparent)" stroke-width="1.4" />
+        <line
+          x1="-24"
+          y1="0"
+          x2="28"
+          y2="0"
+          stroke="color-mix(in srgb, var(--c-velocity-light) 80%, transparent)"
+          stroke-width="1.4"
+        />
       </g>
       <!-- 速度矢量 -->
       <g v-if="showVectors">

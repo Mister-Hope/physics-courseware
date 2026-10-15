@@ -248,8 +248,14 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <defs>
           <linearGradient :id="glassId" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="rgba(186,230,253,0.26)" />
-            <stop offset="0.22" stop-color="color-mix(in srgb, var(--c-text-dim) 5%, transparent)" />
-            <stop offset="0.78" stop-color="color-mix(in srgb, var(--c-text-dim) 5%, transparent)" />
+            <stop
+              offset="0.22"
+              stop-color="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+            />
+            <stop
+              offset="0.78"
+              stop-color="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+            />
             <stop offset="1" stop-color="rgba(186,230,253,0.22)" />
           </linearGradient>
           <linearGradient :id="capId" x1="0" y1="0" x2="1" y2="0">
@@ -300,7 +306,14 @@ const ironY = computed(() => bottomY(ironHeight.value));
         />
         <!-- ================= 3. 细长牛顿管本体（x = 82 ~ 128，外宽仅 46 px，长径比约 5.6:1） ================= -->
         <!-- 顶部密封金属法兰盖与挂环 -->
-        <circle cx="105" cy="7.5" r="3.5" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
+        <circle
+          cx="105"
+          cy="7.5"
+          r="3.5"
+          fill="none"
+          stroke="var(--c-text-dim)"
+          stroke-width="1.6"
+        />
         <rect
           x="80"
           y="11"
@@ -356,8 +369,22 @@ const ironY = computed(() => bottomY(ironHeight.value));
           stroke-linejoin="round"
         />
         <!-- 细口宝塔接头纹理 -->
-        <line x1="150" y1="244.5" x2="150" y2="251.5" stroke="var(--c-neutral-300)" stroke-width="1.2" />
-        <line x1="153" y1="244.5" x2="153" y2="251.5" stroke="var(--c-neutral-300)" stroke-width="1.2" />
+        <line
+          x1="150"
+          y1="244.5"
+          x2="150"
+          y2="251.5"
+          stroke="var(--c-neutral-300)"
+          stroke-width="1.2"
+        />
+        <line
+          x1="153"
+          y1="244.5"
+          x2="153"
+          y2="251.5"
+          stroke="var(--c-neutral-300)"
+          stroke-width="1.2"
+        />
         <!-- 抽气嘴上的玻璃/黄铜活栓阀门（T 型旋塞随真空状态旋转） -->
         <rect
           x="136"
@@ -398,7 +425,9 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <!-- 抽气方向小箭头（抽成真空时高亮显示气流从管内抽向气泵） -->
         <g v-if="vacuum" fill="var(--c-accent)" opacity="0.9">
           <path d="M 169 243 L 162 241 L 165 246 Z" />
-          <text x="166" y="262" text-anchor="middle" font-size="9.5" fill="var(--c-accent)">已抽气</text>
+          <text x="166" y="262" text-anchor="middle" font-size="9.5" fill="var(--c-accent)">
+            已抽气
+          </text>
         </g>
         <!-- 右下角真空泵（气泵）本体 -->
         <g transform="translate(188, 196)">
@@ -471,9 +500,21 @@ const ironY = computed(() => bottomY(ironHeight.value));
             stroke-linecap="round"
           />
           <!-- 真空负压表盘 -->
-          <circle cx="43" cy="24" r="9.5" fill="var(--c-neutral-900)" stroke="var(--c-neutral-300)" stroke-width="1.2" />
+          <circle
+            cx="43"
+            cy="24"
+            r="9.5"
+            fill="var(--c-neutral-900)"
+            stroke="var(--c-neutral-300)"
+            stroke-width="1.2"
+          />
           <!-- 表盘刻度弧 -->
-          <path d="M 36.5 27 A 7 7 0 1 1 49.5 27" fill="none" stroke="var(--c-neutral-500)" stroke-width="1.1" />
+          <path
+            d="M 36.5 27 A 7 7 0 1 1 49.5 27"
+            fill="none"
+            stroke="var(--c-neutral-500)"
+            stroke-width="1.1"
+          />
           <!-- 真空表指针（有空气指右，抽真空指左负压端） -->
           <line
             x1="43"

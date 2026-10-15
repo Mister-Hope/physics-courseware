@@ -184,7 +184,9 @@ const plotLabels = computed(() => [
           stroke-width="1.4"
           stroke-dasharray="6 5"
         />
-        <text x="66" :y="zeroY - 6" font-size="14" fill="var(--c-text-dim)" text-anchor="end">原长</text>
+        <text x="66" :y="zeroY - 6" font-size="14" fill="var(--c-text-dim)" text-anchor="end">
+          原长
+        </text>
         <CourseArrow
           :from="{ x: SPRING_X + 26, y: zeroY }"
           :to="{ x: SPRING_X + 26, y: bottomY }"
