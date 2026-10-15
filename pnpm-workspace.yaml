@@ -24,6 +24,10 @@ overrides:
 
 # enableGlobalVirtualStore: true
 
+permissions:
+  "@slidev/cli":
+    skills: true
+
 minimumReleaseAgeExclude:
   - "@mr-hope/*"
   - "@oxfmt/*"
@@ -37,6 +41,6 @@ trustPolicyExcludePrune: true
 trustPolicyIgnoreAfter: 720
 patchedDependencies:
   "@shikijs/vitepress-twoslash@4.5.0": patches/@shikijs__vitepress-twoslash@4.5.0.patch
-permissions:
-  "@slidev/cli":
-    skills: true
+skills:
+  dirs:
+    - .agents/skills
