@@ -66,6 +66,13 @@ const NUMERIC_ATTRS = [
   "width",
   "height",
   "offset",
+  // 颜色型属性本身：值里带空格（`rgb(148 163 184 / 16%)`）时会被拆成 `163` / `184` 这类纯数字 token，
+  // 撞上 presetWind3 的 `stroke-<数字>` / `fill-<数字>` 工具类 ⇒ `[stroke~="163"]{stroke-width:163px}`。
+  // 与上面同一条正则挡住（只挡"值恰好是纯数字"，`#60a5fa` / `var(--c-*)` / `currentColor` 一律放过）。
+  "fill",
+  "stroke",
+  "stop-color",
+  "flood-color",
   // 共享组件 props（会原样落到 DOM 属性上）
   "size",
   "cols",

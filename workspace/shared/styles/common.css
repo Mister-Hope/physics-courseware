@@ -26,6 +26,21 @@
   --c-velocity: #60a5fa;
   --c-force: #f87171;
   --c-field: #e2a846;
+
+  /* 插画内部的中性色阶（Tailwind slate 系；全仓 SVG 里最高频的一组字面值）
+     —— 只给示意图/交互组件里的次要文字、辅助线与网格、深底用，**不要**当作正文/语义色 */
+  --c-neutral-50: #f8fafc;
+  --c-neutral-200: #e2e8f0;
+  --c-neutral-300: #cbd5e1;
+  --c-neutral-500: #64748b;
+  --c-neutral-600: #475569;
+  --c-neutral-700: #334155;
+  --c-neutral-900: #0f172a;
+
+  /* 亮色变体（插画里的高光/发光/淡色版语义色） */
+  --c-accent-light: #fbbf24;
+  --c-velocity-light: #93c5fd;
+  --c-physics-light: #38bdf8;
   --radius-xl: 1.75rem;
   --radius-lg: 1.25rem;
   --radius-md: 0.75rem;
@@ -67,20 +82,10 @@ svg:not(.katex svg) {
 }
 
 body {
-  background: linear-gradient(
-    160deg,
-    var(--c-bg) 0%,
-    #0c1122 40%,
-    var(--c-bg-soft) 100%
-  );
+  background: linear-gradient(160deg, var(--c-bg) 0%, #0c1122 40%, var(--c-bg-soft) 100%);
   font-family:
-    "PingFang SC",
-    "Microsoft YaHei",
-    "Hiragino Sans GB",
-    "WenQuanYi Micro Hei",
-    system-ui,
-    -apple-system,
-    sans-serif;
+    "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", system-ui,
+    -apple-system, sans-serif;
 }
 
 .slidev-layout {
@@ -222,8 +227,7 @@ code {
   font-weight: 600;
   font-size: 1.2rem;
   font-family:
-    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC",
-    "Source Han Serif SC", Georgia, serif;
+    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
   letter-spacing: 0.04em;
 }
 
@@ -274,8 +278,7 @@ code {
 
   font-size: 1.1rem;
   font-family:
-    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC",
-    "Source Han Serif SC", Georgia, serif;
+    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
   letter-spacing: 0.04em;
 }
 
@@ -342,8 +345,7 @@ code {
 
   font-size: 14px;
   font-family:
-    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC",
-    "Source Han Serif SC", Georgia, serif;
+    "Times New Roman", "STIX Two Text", "Noto Serif CJK SC", "Source Han Serif SC", Georgia, serif;
   letter-spacing: 0.08em;
   white-space: nowrap;
 
@@ -476,6 +478,68 @@ code {
 .text-accent-2 {
   color: var(--c-accent-2);
   font-weight: 600;
+}
+
+/* ── token 版颜色工具类 ──
+   ⚠️ 命名刻意避开 UnoCSS 的调色板族名（不叫 `.text-neutral-300`）：撞名会同时生成两份同名规则
+   （UnoCSS 那份是 tailwind 的值），普通用法靠 `!important` 才赢、带 `hover:` 变体时更会静默取错颜色。
+   替代 UnoCSS 调色板类（`text-slate-400`、`text-blue-400`、`border-slate-700`…）：
+   调色板类是"绕过 token 写死颜色"——取值恰好等于 token 时会随 token 调整而失效（`style:audit` 报 error）。
+   写页面时优先用这里的类；色阶与 `:root` 的 token 一一对应，视觉等值。 */
+.text-dim {
+  color: var(--c-text-dim) !important;
+}
+
+.text-faint {
+  color: var(--c-neutral-500) !important;
+}
+
+.text-tone-300 {
+  color: var(--c-neutral-300) !important;
+}
+
+.text-tone-200 {
+  color: var(--c-neutral-200) !important;
+}
+
+.text-ok {
+  color: var(--c-ok) !important;
+}
+
+.text-danger {
+  color: var(--c-danger) !important;
+}
+
+.text-velocity {
+  color: var(--c-velocity) !important;
+}
+
+.text-physics {
+  color: var(--c-physics) !important;
+}
+
+.border-tone-700 {
+  border-color: var(--c-neutral-700) !important;
+}
+
+.border-surface {
+  border-color: var(--c-surface-solid) !important;
+}
+
+.border-line {
+  border-color: var(--c-border) !important;
+}
+
+.bg-surface {
+  background: var(--c-surface) !important;
+}
+
+.bg-surface-solid {
+  background: var(--c-surface-solid) !important;
+}
+
+.bg-deep {
+  background: var(--c-bg-soft) !important;
 }
 
 /* ── 缩放强调 ── */
