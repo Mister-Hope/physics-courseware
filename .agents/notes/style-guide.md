@@ -3,196 +3,252 @@
 > 什么时候读：**新建课件**、给已有课件加页面、review 一份课件的风格时。
 > 分工：本篇管"**跨课件长得一样**"；单页怎么排版 → [`slidev-layout.md`](slidev-layout.md)；
 > 公式 / 图标怎么写、图标名怎么验证 → [`katex-fonts-icons.md`](katex-fonts-icons.md)；
-> E2E 量版面 → [`e2e-checks.md`](e2e-checks.md)。**视觉正本在 `workspace/shared/styles/`**（`common.css` 设计系统 + `layout.css` 版式原子）。
+> E2E 量版面 → [`e2e-checks.md`](e2e-checks.md)。
+> 视觉正本：`workspace/shared/styles/`（`common.css` 设计系统 + `layout.css` 版式原子 + `atoms.css` 补齐原子）。
 
-## 0. 为什么有这份指南（2026-10 全仓实测）
+## 1. 一个样式该放哪：三步决策
 
-每门课是**不同时刻的 AI 读着 AGENTS.md 现写**的，于是：
+1. **正本里有** → 直接用 §2 的原子，不写新的；纯间距 / 对齐的一次性微调 → UnoCSS 工具类（`gap-4`、`mt-2`）。
+2. **只有"这一课这一处"** → 写进本课 `style.css`，按 §6 命名。
+3. **超过一门课会用到的概念** → 提升到共享 addon（`layout.css` / `atoms.css`）→ 各课删掉私有版本 → `pnpm build` 复验全仓。
 
-| 现象                     | 实测数据                                                                                                                                                                                           |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 各写各的类名             | 34 门课 `style.css` 自造类名 **349** 个，其中 **302 个只在 1 门课出现**                                                                                                                            |
-| 同一概念多套写法         | 编号步骤条 **≥9 课**自建（`q-num` / `op-num` / `step-no` / `fe-step-no` / `p13-num` / `sf-step`…）；图外壳 **8/10 课**；数据表 **≥8 课**（各自整套覆盖共享 `table/th/td`）；"对/错"语义色 **6 课** |
-| **同名不同义**（最危险） | `.step`＝1.3 居中 0.95rem ↔ 2.2 带序号 0.98rem；`.data-table`＝1.4 的 0.92rem ↔ 2.1 的 0.72rem；`.graph-grid`＝1.35fr ↔ 1.9fr；`.qa-a`＝灰字 ↔ 金字                                                |
-| 视觉参数漂移             | `style.css` 里 `font-size` 字面值 **≥110 处**，而共享字号阶梯 `.text-lg…text-5xl` 全 10 课只用了 **9 次**；金色/蓝色 alpha 共 24 处没有 token 可用；"正确绿"双轨 `#34d399` ↔ `#4ade80`             |
-| 图标没人用               | **11/34 门课一次图标都没用**，用的那 23 门从 1 次到 44 次不等                                                                                                                                      |
-| 卡片滥用                 | `10.4-capacitor` 一门 **54 处** `.card`（规范是"一份课件 ≤15"，第二名才 12）                                                                                                                       |
-| 越权覆盖共享选择器       | 3.5 直接改 `.slidev-layout.base-flex` 的 padding 与 `h1` 字号；1.1 / 1.2 重写 `.ask`；12.1 重写 `.problem`                                                                                         |
+## 2. 原子词汇表（正本：用这些，别自造近义词）
 
-> 正本**不是**没人用：`.key` / `.page-grow` / `.ask` / `.stack` / `.half-grid` 在 10 门大课里合计 850+ 次引用。
-> 分裂集中在**原子没覆盖到的那几类细节**（步骤条、图外壳、数据表、对错色、比例栅格），见 §7。
+> 一条一句：**类名 — 用途**。带 ⛔ 的是硬约束。
 
-## 1. 三步决策：一个样式该放哪
+**版面骨架**
 
-1. **先查正本**：`workspace/shared/styles/`（§2 的词汇表）里有 → 直接用，不写新的；
-   只是间距 / 对齐这类一次性微调 → 用 UnoCSS 工具类（`gap-4`、`mt-2`、`grid-cols-2`）。
-2. **只有"这一课这一处"**才写进本课 `style.css`，并按 §6 命名（带前缀）。
-3. **超过一门课会用到的概念** → 按 §7 的规范统一写法，然后提升到共享 addon：
-   在 `workspace/shared/styles/layout.css` 里加原子 → 各课删掉自己的私有版本 → `pnpm build` 复验所有课件。
+- `.page-grow` — 正文撑满剩余高度；内容多时加 `.page-grow-tight`
+- `.stack` / `.stack-dense` / `.stack-tight` — 纵向堆叠
+- `.half-grid` / `.three-col` — 两栏 / 三栏（自带 `minmax(0,1fr)`，防不可断行内容撑爆）
+- `.split-wide` — 左图右文比例栅格，`--cols` 可调；`.fig-narrow` = 图窄文宽变体
+- `.divider-l` — 双栏之间的竖线（代替第二张卡片）
 
-## 2. 原子词汇表（正本；用这些，别自造近义词）
+**提问与结论**
 
-| 想表达                             | 用什么                                                                                                                                                   | 出处                                           |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| 页面骨架（正文撑满剩余高度）       | `.page-grow`（内容多加 `.page-grow-tight`）                                                                                                              | `layout.css`                                   |
-| 纵向堆叠                           | `.stack` / `.stack-dense` / `.stack-tight`                                                                                                               | `layout.css`                                   |
-| 两栏 / 三栏                        | `.half-grid` / `.three-col`（已带 `minmax(0,1fr)` 防撑爆）                                                                                               | `layout.css`                                   |
-| 双栏对比的分隔线                   | `.divider-l`（右栏加一条竖线，代替第二张卡片）                                                                                                           | `layout.css`                                   |
-| 提问（先问）                       | `.ask` / 放大版 `.ask-lead`                                                                                                                              | `layout.css`                                   |
-| 结论 / 落点（后答）                | `.key` / `.key-blue` / `.key-danger` / 放大版 `.key-lead`                                                                                                | `layout.css`                                   |
-| 习题题干                           | `.problem`（蓝色竖线，整题不用卡片）                                                                                                                     | `layout.css`                                   |
-| 小节标题 / 小字注释                | `.mini-title`（**自带 `> svg` 图标位**） / `.mini-note`                                                                                                  | `layout.css`                                   |
-| 小结行                             | `.summary-line`                                                                                                                                          | `layout.css`                                   |
-| 卡片（**只有定义能用**，见 §4）    | `.card` / `.card-highlight`                                                                                                                              | `common.css`                                   |
-| 圆角标签 / 封面图标胶囊            | `.tag` / `.tag-icon`                                                                                                                                     | `common.css`                                   |
-| 文字强调色                         | `.text-accent`（金） / `.text-accent-2`（蓝）                                                                                                            | `common.css`                                   |
-| 字号阶梯                           | `.text-lg` 1.1 → `.text-xl` 1.25 → `.text-2xl` 1.4 → `.text-3xl` 1.7 → `.text-4xl` 2.1 → `.text-5xl` 2.6                                                 | `common.css`                                   |
-| 图标尺寸（**放大图标只能用这个**） | `.icon-md` 1.5 → `.icon-lg` 2.2 → `.icon-xl` 3 → `.icon-2xl` 4（都带 `!important`，压得过 svg 的 16px 基准）                                             | `common.css`                                   |
-| 对 / 错语义色                      | `.ok` / `.bad`（软底标签） · `.ok-line` / `.bad-line`（只上色不上底）；色值 `--c-ok` / `--c-danger`                                                      | `atoms.css`                                    |
-| 编号步骤条                         | `.step-list` > `.step-item`（左圆徽 `.step-no` + 右正文）                                                                                                | `atoms.css`                                    |
-| 图占满栏宽（**不加背景/边框**）    | `.figure`（只 `width:100%`；交互组件与示意图要无缝嵌入，不要圆角矩形托底）+ `.fig-cap` 图注                                                              | `atoms.css`                                    |
-| 紧凑数据表                         | `.data-table`（+ `.hl` 高亮行）                                                                                                                          | `atoms.css`                                    |
-| 左图右文比例栅格                   | `.split-wide`（`--cols` 可调）+ `.fig-narrow`（图窄文宽变体）                                                                                            | `atoms.css`                                    |
-| 电路 / 磁场符号                    | `<CircuitBattery>` `<CircuitResistor>` `<CircuitSwitch>` `<CircuitBulb>` `<CircuitMeter>` `<FieldDots>` `<FieldMark>`（⛔ 禁止手画元件符号与磁场叉点阵） | [electronic-symbols.md](electronic-symbols.md) |
-| 封面                               | `layout: course-cover` + `cover-*`（⛔ 禁止手写封面 HTML）                                                                                               | 共享 addon                                     |
+- `.ask` / `.ask-lead` — 提问（先问）
+- `.key` / `.key-blue` / `.key-danger` / `.key-lead` — 结论 / 落点（**一页最多一处**）
+- `.summary-line` — 小结行
+- `.mini-title` — 小节标题（**自带 `> svg` 图标位**）
+- `.mini-note` — 小字注释（0.85rem）
+
+**框与卡片（纪律见 §4）**
+
+- `.card` / `.card-highlight` — 只有**定义**能用，一份课件 ≤15 个
+- `.tag` / `.tag-icon` — 圆角标签 / 封面图标胶囊
+- `.problem` — 习题题干的**存量写法**；题干是主体，一律普通段落、不套竖线（见 §4）
+
+**文字与语义色**
+
+- `.text-accent`（金）/ `.text-accent-2`（蓝）— 文字强调色
+- `.ok` / `.bad` — 对 / 错语义色（软底标签）；`.ok-line` / `.bad-line` — 只上色不上底
+- `--c-ok` / `--c-danger` — 语义色 token，对错的唯一出口，别再各课定义第二套绿/红
+
+**图表与数据**
+
+- `.figure` — 图占满栏宽，**零背景 / 边框 / 圆角**（交互组件与示意图要无缝嵌入）；图注配 `.fig-cap`
+- `.data-table` — 紧凑数据表（0.85rem + `tabular-nums`）；`.hl` 高亮行
+- `.step-list` > `.step-item` — 编号步骤条（`.step-no` 圆徽 + 右正文）
+
+**尺寸阶梯（放大只能用这两个阶梯）**
+
+| 用途 | 档位                                                                                                       |
+| ---- | ---------------------------------------------------------------------------------------------------------- |
+| 字号 | `.text-lg` 1.1 · `.text-xl` 1.25 · `.text-2xl` 1.4 · `.text-3xl` 1.7 · `.text-4xl` 2.1 · `.text-5xl` 2.6   |
+| 图标 | `.icon-md` 1.5 · `.icon-lg` 2.2 · `.icon-xl` 3 · `.icon-2xl` 4（带 `!important`，压得过 svg 的 16px 基准） |
+
+**专用组件（⛔ 禁止手画）**
+
+- 电路 / 磁场符号 → `<CircuitBattery>` `<CircuitResistor>` `<CircuitSwitch>` `<CircuitBulb>` `<CircuitMeter>` `<FieldDots>` `<FieldMark>`，见 [`electronic-symbols.md`](electronic-symbols.md)
+- 封面 → `layout: course-cover` + `cover-*`，⛔ 不手写封面 HTML
+
+**常见组合（照抄）**
+
+- 先问后答：`<div class="ask">…</div>` → `<div class="key">…</div>`
+- 左图右文：`<div class="split-wide"><div class="figure"><XxxSvg /></div><div class="stack">…</div></div>`
+- 双栏对比：`<div class="half-grid"><div>…</div><div class="divider-l">…</div></div>`
+
+出处：前四组多在 `layout.css` / `common.css`；`.ok` `.bad` `.step-list` `.figure` `.data-table` `.split-wide` 在 `atoms.css`。
 
 ## 3. 视觉参数：一律走 token，禁止硬编码
 
-`:root` 里已有：`--c-bg` `--c-bg-soft` `--c-surface` `--c-surface-solid` `--c-border` `--c-border-glow`
-`--c-text` `--c-text-dim` `--c-accent`（金 `#e2a846`）`--c-accent-2`（蓝 `#3b82f6`）`--c-physics`（青 `#2dd4bf`）
-`--c-danger`（红 `#f87171`）`--radius-xl/lg/md/sm`（1.75 / 1.25 / 0.75 / 0.5rem）。
+**可用 token**（`common.css` / `atoms.css` 的 `:root`）
 
-- **色值 100% 走 `var(--…)`**。`style.css` 里出现 `#hex` / `rgb(` 就是待修项（`grep -nE '#[0-9a-f]{3,8}|rgb\(' courses/<slug>/style.css | grep -v 'var(--'`）。
-- ⛔ **但 SVG 属性里的色值保持字面值，不要换成 `var(--…)`**（`stroke="#60a5fa"` / `fill="var(--c-accent)"` 都不行）：
-  UnoCSS attributify 会把属性值当工具类碎片，且 SVG 表现属性对 `var()` 的支持不一致，换完可能"整块图形不显示"。
-  这类插画色（`#60a5fa`/`#94a3b8`/`#2dd4bf` 等）属**插画内部用色**，不是设计 token 的用途，216 个源文件都是字面值，**保持现状即为统一**。
-  只有当颜色出现在 CSS 声明里（`style.css`、组件 `<style>` 块）时才必须换 token。
-  ⚠️ 另注意：**SVG 属性值里不能有空格**（`stroke="rgb(148 163 184 / 16%)"` 会被 attributify 当成 3 个类名 → 编译产物出现 `[stroke~="163"]{stroke-width:163px}` 鬼规则、图形严重变形）。写成 `rgba(148,163,184,0.16)`。
-- **缺 token 就补 token，不许写死**。当前 3 个系统性缺口（谁先用谁在 `common.css` 补，别再各自写死）：
+- 颜色：`--c-bg` `--c-bg-soft` `--c-surface` `--c-surface-solid` `--c-border`（10%）`--c-border-glow` `--c-text` `--c-text-dim` `--c-accent`（金）`--c-accent-2`（蓝）`--c-physics`（青）`--c-danger` `--c-ok`
+- 半透明语义底 / 描边：`--c-ok-soft` `--c-danger-soft` `--c-accent-soft` `--c-accent-2-soft`
+- 圆角：`--radius-xl` 1.75 · `--radius-lg` 1.25 · `--radius-md` 0.75 · `--radius-sm` 0.5rem
 
-  | 缺口                | 现状（各课写死值）                                                      | 建议 token                                          |
-  | ------------------- | ----------------------------------------------------------------------- | --------------------------------------------------- |
-  | 金色/蓝色半透明     | `rgb(226 168 70 / 8%~35%)` 16 处、`rgb(59 130 246 / 14%~55%)` 8 处      | `--c-accent-soft` / `--c-accent-2-soft`（含 alpha） |
-  | "正确 / 错误"语义色 | `#34d399`（1.2 / 2.1 / 3.4）↔ `#4ade80`（3.5 / 4.4）双轨                | `--c-ok` / `--c-danger`（后者已有）                 |
-  | 面板深底            | `rgb(15 20 37 / …)` 与 `rgb(15 23 42 / …)` 两套，都不等于 `--c-surface` | 用 `--c-surface`，确实要更暗再补 `--c-surface-deep` |
+**五条铁律**
 
-- **字号只走阶梯**：正文 1rem；强调用 `.text-*`；小字注释用 `.mini-note`（0.85rem），下限 **0.65rem**。
-  ⛔ 禁止 `0.92rem` / `0.95rem` / `0.88rem` 这类私调值——它们正是"各课字不一样大"的来源。
-- **圆角走 `var(--radius-*)`**；只有胶囊（`999px`）和正圆（`50%`）允许字面值。
-- **间距只许覆盖 `--page-gap` / `--stack-gap`**（`layout.css` 明确留的唯一出口，12–14 门课在用，合法）。
+1. **色值 100% 走 `var(--…)`**：`style.css` 与组件 `<style>` 里出现 `#hex` / `rgb(` 即待修
+   （`grep -nE '#[0-9a-f]{3,8}|rgb\(' courses/<slug>/style.css | grep -v 'var(--'`）。
+   没有现成 token 就用 `color-mix(in srgb, var(--token) N%, transparent)`，或**补一个 token**，不许写死。
+2. **SVG 表现属性里的色值也走 `var(--c-*)`**：`fill="var(--c-velocity)"` / `stroke="var(--c-accent)"` 是**合法写法**——
+   SVG 2 §6.6 规定表现属性的值**按 CSS 值解析**（不是声明），CSS Variables §3 规定 `var()` 可替换任何 CSS 值中的任意部分，
+   两条规范合起来就是这个结论（Chromium 实测 `getComputedStyle().fill === "rgb(226, 168, 70)"` 同样证实）。
+   ⇒ `<svg>` 里的 `fill=` / `stroke=` / `stop-color=` 一律 token 化，**不再保留字面值**；存量字面值（`#60a5fa` / `#94a3b8` / `#2dd4bf`…）
+   与 token 同值，属历史写法，**谁改谁收敛**（本轮之后的批次按此执行）。
+   （`fill` / `stroke` / `opacity` 会被 attributify 当工具类抓走——坑与正本修复见 [`svg-attributify-trap.md`](svg-attributify-trap.md)，本指南不重复。）
+3. **字号只走阶梯**：正文 1rem；强调用 `.text-*`；小字注释 `.mini-note`（0.85rem）；下限 **0.65rem**。
+   ⛔ `style.css` 里禁止 `0.92rem` / `0.95rem` / `0.88rem` 这类私调值。
+   阶梯在 0.65–1.1rem 之间只有 `.mini-note` 一档，**组件 `<style scoped>` 内部**的固定版式微字号允许保留（不算违规）。
+4. **圆角走 `var(--radius-*)`**；只有胶囊（`999px`）与正圆（`50%`）允许字面值。
+5. **间距只许覆盖 `--page-gap` / `--stack-gap`**（`layout.css` 留的唯一出口）。
 
-## 4. 框的纪律（`10.4-capacitor` 是反面教材：54 处）
+**已知缺口**（谁先用谁在 `common.css` 补，别再各自写死）：金色/蓝色半透明 → `--c-accent-soft` / `--c-accent-2-soft`；
+"正确"语义双轨 `#34d399` ↔ `#4ade80` → 统一走 `--c-ok`；面板深底两套 `rgb(15 20 37/…)`、`rgb(15 23 42/…)` → 用 `--c-surface`。
 
-**左侧竖线（`.problem` / `.key` / `.divider-l` 这类）只给"弱提示性文字"用**——
-讨论提示、易错警示、旁注、双栏之间的分隔。**主体内容一律不套**（教师明确要求）。
+## 4. 框的纪律
 
-| 内容                     | 用什么                      | 不要用                                  |
-| ------------------------ | --------------------------- | --------------------------------------- |
-| 定义（要"立住"的一句话） | `.card`                     | —                                       |
-| 提问                     | `.ask`                      | 卡片、竖线                              |
-| 结论 / 落点              | `.key`（一页最多一处）      | 卡片、多处竖线                          |
-| 双栏对比                 | `.half-grid` + `.divider-l` | 两张卡片并排                            |
-| 习题题干 / 题目页题干    | 普通段落（置顶整宽即可）    | ⛔ 竖线、卡片（题干是主体，不是弱提示） |
-| 解析 / 推导正文          | 普通段落                    | ⛔ 竖线、卡片                           |
-| 讨论提示 / 警示 / 旁注   | `.mini-note`（或竖线提示）  | 卡片                                    |
-| 连续叙述 / 过渡          | 不加任何框                  | 任何框                                  |
+**左侧竖线（`.problem` / `.key` / `.divider-l`）只给"弱提示性文字"用**——讨论提示、易错警示、旁注、双栏分隔；
+**主体内容一律不套**（教师明确要求：给公式、叙述套装饰框线没有任何信息量）。
 
-自查：`for d in courses/*/; do n=$(grep -oh 'class="[^"]*"' "$d"slides.md "$d"components/*.vue 2>/dev/null | grep -oE '\bcard[a-z0-9-]*\b' | wc -l | tr -d ' '); echo "$n $(basename "$d")"; done | sort -rn | head`
+| 内容                     | 怎么写                      | ⛔ 不要                  |
+| ------------------------ | --------------------------- | ------------------------ |
+| 定义（要"立住"的一句话） | `.card`                     | —                        |
+| 提问                     | `.ask`                      | 卡片、竖线               |
+| 结论 / 落点              | `.key`（一页最多一处）      | 卡片、多处竖线           |
+| 双栏对比                 | `.half-grid` + `.divider-l` | 两张卡片并排             |
+| 习题题干 / 题目页题干    | 普通段落，置顶整宽          | 竖线、卡片（题干是主体） |
+| 解析 / 推导正文          | 普通段落                    | 竖线、卡片               |
+| 讨论提示 / 警示 / 旁注   | `.mini-note`（或竖线提示）  | 卡片                     |
+| 连续叙述 / 过渡          | 不加任何框                  | 任何框                   |
 
-## 5. 图标：该用的地方**必须**用（现在 11/34 门课一个都没用）
+数卡片：`grep -oh 'class="[^"]*"' courses/<slug>/slides.md courses/<slug>/components/*.vue | grep -oE '\bcard[a-z0-9-]*\b' | wc -l`（≤15）
 
-已有规则见 [`katex-fonts-icons.md`](katex-fonts-icons.md) §2（一个语义一个、禁 emoji、**先验证名字存在**）。
-本节补的是**正向清单**——不是"少用"，而是"**该用的地方要用**"：
+**一页的"竖线预算"（机器可查：`pnpm style:audit` ⑥）**
 
-- ✅ **必须配图标**：并列可扫读的结构——概念三栏 / 要素列举 / 步骤条 / 图注前的标记 / 对错判定。
-  它们是学生一眼扫过的东西，图标就是那层"扫读锚点"（反例：`3.1-gravity-elastic-force` 第 2 页"大小 / 方向 / 作用点"三栏一个图标都没有）。
-- ❌ **仍然不用**：提问行 `.ask`、结论行 `.key`、连续叙述——图标在那里只会吵（这是老师明确否过的用法）。
-- 放置：`.mini-title` 里直接写（共享原子已给 `> svg` 留了金色/蓝色位）；条目里用 `text-xl` 级图标 + 文字同行。
-- 常用语义映射（**名字已逐个在 `node_modules/@iconify-json/mdi/icons.json` 验证存在**）：
+| 原子         | 每页上限                  | 谁来判断                                                                                                               |
+| ------------ | ------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `.key`       | **1**（只给这一页的落点） | ✅ **机器查**（audit ⑥）：**2 处＝警告**（第二处若确是旁注 / 易错，可保留）；**≥3 处＝错误**（几乎必然把每一步解析都套了竖线） |
+| `.problem`   | 1                         | ⚠️ 半机器：audit 只报"疑似套了题干"的启发式提示，其余人工判断                                                            |
+| `.divider-l` | 1                         | ❌ 人工判断（它本来就是给双栏用的，两栏一边一条也正常）                                                                  |
+| `.ask`       | 1                         | ❌ 人工判断（**同一页两个并列提问是合法的**，如 1.4 第 13 页两问对照；写机器规则会误伤）                                 |
 
-  | 语义          | 写法                                                             | 语义          | 写法                                                               |
-  | ------------- | ---------------------------------------------------------------- | ------------- | ------------------------------------------------------------------ |
-  | 测量 / 尺度   | `<mdi-ruler />`、`<mdi-ruler-square />`                          | 数据 / 表格   | `<mdi-table />`、`<mdi-chart-scatter-plot />`                      |
-  | 方向 / 矢量   | `<mdi-arrow-right-bold />`、`<mdi-vector-point />`               | 图解 / 图线   | `<mdi-vector-polyline />`、`<mdi-chart-timeline-variant />`        |
-  | 位置 / 作用点 | `<mdi-crosshairs />`、`<mdi-map-marker />`                       | 步骤 / 顺序   | `<mdi-format-list-numbered />`、`<mdi-numeric-1-circle />`         |
-  | 实验器材      | `<mdi-flask-outline />`、`<mdi-test-tube />`                     | 结论 / 要点   | `<mdi-lightbulb-on-outline />`、`<mdi-star-four-points-outline />` |
-  | 生活实例      | `<mdi-home-city-outline />`、`<mdi-car-side />`、`<mdi-earth />` | 易错 / 警示   | `<mdi-alert-circle-outline />`、`<mdi-information-outline />`      |
-  | 公式 / 推导   | `<mdi-equal />`、`<mdi-sigma-lower />`                           | 对 / 错       | `<mdi-check-decagram />`、`<mdi-close-circle-outline />`           |
-  | 定义 / 概念   | `<mdi-book-open-variant />`                                      | 对比 / 交换   | `<mdi-swap-horizontal />`、`<mdi-scale-balance />`                 |
-  | 时间 / 时刻   | `<mdi-clock-outline />`、`<mdi-timer-sand />`                    | 力 / 矢量箭头 | `<mdi-arrow-up-bold-outline />`、`<mdi-vector-link />`             |
+**只机器查"客观上能判定错的"那几条**：`.ask` / `.divider-l` 这类"多一处也可能是有意设计"的，**不进机器规则**，留给人工与教师判断。
 
-  表外的名字**写之前先查** `icons.json`（写错＝整页 500）；同一页不要出现两个相同图标。
+**门禁要分级，别把创作捆死。**
 
-## 6. 命名规范（"同名不同义"已经发生过 4 次）
+- `error`：**客观上就是错的**（物理内容被动过、越权改共享样式、同页 ≥3 条竖线）→ 必须清零才能交。
+- `warn`：**通常是坏味道，但可能是有意为之**（同页 2 条竖线、留白偏大、卡片偏多……）→ **执行者自己判断，并在报告里写一句理由**，不阻塞验收。
 
-- ⛔ **禁裸词**：`.step`、`.map`、`.chain`、`.note` 这种没有命名空间的类在 monorepo 里必然跨课碰撞。
-- ✅ **用"话题前缀"做命名空间**：一份课件内部按小节/图型分组是**好事**（3.4 用 `ae-`（力的分解）、
-  `dc-`（临界案例）、`fp-`（分力）就是对的写法）。前缀取**概念**，别取课号——`fe-` / `ac-18` 这种
-  只有写的人看得懂，等于"一课一套原子"。
-- ⚠️ **同一课内部前缀要统一**：3.4 一边用 `ae-`/`dc-`/`fp-`，`style.css` 里又定义 `sd-`/`gr-`/`p5-`/`sv-`，
-  同类概念两套名字——改一处想不到另一处。一门课定 3–5 个前缀，小节内固定用。
-- **"已定义" = 本课 `style.css` ∪ 任一组件的 `<style>`（含 `<style scoped>`）**。本仓库大量课件把类写成
-  组件局部样式（3.4 的 `ae-`/`dc-`/`fp-*` 全在 `<style scoped>` 里），这**是合规写法、不是裸类名**。
-  `pnpm style:audit <slug>` 已按此口径统计；别再把组件里的 scoped 类当成"没定义"去 style.css 里补副本。
-- ⚠️ **别为了"消裸类名"把组件 scoped 样本抄进 `style.css`**：scoped 特异性更高、永远赢，抄出来的副本全是死代码，
-  还造出两套真相（改一处不知道另一处）——这正是本次统一要治的病。
-- 页面专属样式可用 `p<页号>-`（如 `p13-`）：自文档化、不会外溢；但**只给"这一处"用**，别把跨页概念塞进页码前缀。
+新增一条纪律前先问自己："这是客观错误，还是通常不好？"——前者进 `error`，后者进 `warn`。
+看不准的一律先做成 `warn`，攒了几门课的实例再决定要不要升级：**门禁的目的是让 34 门课长得一样，不是让写课件变成走雷区。**
 
-## 7. 已提升的共享原子（`workspace/shared/styles/atoms.css`；直接用，别再各课自建）
+**纪律必须落成审计条款。** §4 这条"一页最多一处"在 CSS 注释里写了很久，仍被各批次各写各的（"颗粒度不齐"就出在这里）。
+所以：**凡是新增一条"只许这样、不许那样"的口头纪律，同一次改动里就要在 `scripts/style-audit.ts` 加一条对应检查**——
+没有机器门禁的纪律，等于每个 agent 各自凭主张。
 
-下面 5 类**已被 6–9 门课重复发明**，是当前风格分裂的主体。**已全部提升到 `atoms.css`**（经 `pnpm build` 全仓复验，
-且 CSS 加载顺序保证课件本地同名定义优先覆盖，存量课件零回归）。新课件**直接用这些原子**，不要再写第 9 套步骤条、第 8 套数据表：
+## 5. 图标：该用的地方必须用
 
-| 原子           | 干什么                             | 关键取值 / 用法                                                                              |
-| -------------- | ---------------------------------- | -------------------------------------------------------------------------------------------- |
-| `.step-list`   | 编号步骤条：左序号徽章 + 右正文    | `.step-list` > `.step-item`（`.step-no` 圆徽 + 正文）；≥9 课自建过                           |
-| `.figure`      | 图占满栏宽（**零背景/边框/圆角**） | 交互组件与示意图**无缝嵌入**页面（教师明确要求，不要圆角矩形托底）；配 `.fig-cap` 图注       |
-| `.data-table`  | 紧凑数据表                         | `font-size:0.85rem` + `tabular-nums`；`.hl` 高亮行                                           |
-| `.ok` / `.bad` | 对 / 错语义色（唯一出口）          | `--c-ok: #34d399`（收敛 6 课的 `#34d399`↔`#4ade80` 双轨）；`.ok-line` / `.bad-line` 行内变体 |
-| `.split-wide`  | 左图右文比例栅格                   | `--cols` 可调；`.fig-narrow` = 图窄文宽（`0.85fr / 1.8fr`）；替代 7 课 29 个一次性 grid      |
+细则见 [`katex-fonts-icons.md`](katex-fonts-icons.md) §2（**一个语义一个、禁 emoji、名字先验证存在**）。本节是正向清单：
 
-## 8. 越权覆盖（禁止；发现就收敛）
+- ✅ **必须配**：并列可扫读的结构——概念三栏 / 要素列举 / 步骤条 / 图注前的标记 / 对错判定。
+- ❌ **不要加**：`.ask` 提问行、`.key` 结论行、连续叙述（只会吵，教师明确否过）。
+- 位置：`.mini-title` 里直接写（共享原子已给 `> svg` 留了金 / 蓝位）；条目里用 `.text-xl` 级图标 + 与文字同行。
+- ⚠️ **紧页要把图标改小**（2.4 实测）：行内图标会撑高行盒——用 `.icon-md`（1.5rem＝**33px**）时，**下留白 <35px 的紧页**（该课第 6/24/28 页）7 个步进全部报"正文越界 13.1px"。
+  安全的做法是 **`.text-lg`（1.1rem＝24.2px）+ `align-middle`**：盒子落在行距 strut 内，不再撑行。**别在紧页用 `.icon-md`/`.icon-lg`**；要用就得先把该栏 gap 收一档腾地方。
+
+**语义映射（名字已逐个在 `node_modules/@iconify-json/mdi/icons.json` 验证）**
+
+| 语义          | 图标                                                               |
+| ------------- | ------------------------------------------------------------------ |
+| 测量 / 尺度   | `<mdi-ruler />`、`<mdi-ruler-square />`                            |
+| 方向 / 矢量   | `<mdi-arrow-right-bold />`、`<mdi-vector-point />`                 |
+| 位置 / 作用点 | `<mdi-crosshairs />`、`<mdi-map-marker />`                         |
+| 实验器材      | `<mdi-flask-outline />`、`<mdi-test-tube />`                       |
+| 生活实例      | `<mdi-home-city-outline />`、`<mdi-car-side />`、`<mdi-earth />`   |
+| 公式 / 推导   | `<mdi-equal />`、`<mdi-sigma-lower />`                             |
+| 定义 / 概念   | `<mdi-book-open-variant />`                                        |
+| 时间 / 时刻   | `<mdi-clock-outline />`、`<mdi-timer-sand />`                      |
+| 数据 / 表格   | `<mdi-table />`、`<mdi-chart-scatter-plot />`                      |
+| 图解 / 图线   | `<mdi-vector-polyline />`、`<mdi-chart-timeline-variant />`        |
+| 步骤 / 顺序   | `<mdi-format-list-numbered />`、`<mdi-numeric-1-circle />`         |
+| 结论 / 要点   | `<mdi-lightbulb-on-outline />`、`<mdi-star-four-points-outline />` |
+| 易错 / 警示   | `<mdi-alert-circle-outline />`、`<mdi-information-outline />`      |
+| 对 / 错       | `<mdi-check-decagram />`、`<mdi-close-circle-outline />`           |
+| 对比 / 交换   | `<mdi-swap-horizontal />`、`<mdi-scale-balance />`                 |
+| 力 / 箭头     | `<mdi-arrow-up-bold-outline />`、`<mdi-vector-link />`             |
+
+表外的名字**写之前先查** `icons.json`（写错＝整页 500）；同一页不要出现两个相同图标。
+
+## 6. 命名规范
+
+- ⛔ **禁裸词**：`.step` / `.map` / `.chain` / `.note` 这类没有命名空间的类在 monorepo 里必然跨课碰撞。
+- ✅ **用概念前缀做命名空间**：课内按小节 / 图型分组是好写法（如 `ae-` 力的分解、`dc-` 临界案例）。
+  前缀取**概念**、别取课号（`fe-` / `ac-18` 等于"一课一套原子"）；一门课 3–5 个前缀。
+- ⚠️ **同一课内部前缀要统一**：同类概念别用两套名字，否则改一处想不到另一处。
+- **"已定义" = 本课 `style.css` ∪ 任一组件的 `<style>`（含 `<style scoped>`）**——组件局部样式是**合规写法**，不是裸类名；
+  `pnpm style:audit <slug>` 已按此口径统计。
+- ⛔ **别为了"消裸类名"把组件 scoped 样本抄进 `style.css`**：scoped 特异性更高、永远赢，抄出来的是死代码 + 两套真相。
+- 页面专属样式用 `p<页号>-`（如 `p13-`），**只给"这一处"用**，别把跨页概念塞进页码前缀。
+
+## 7. 已提升的共享原子（`atoms.css`）
+
+§2 里出自 `atoms.css` 的那几个（`.step-list` / `.figure` / `.data-table` / `.ok`·`.bad` / `.split-wide`）是从 6–9 门课的重复发明里提升出来的：
+**直接用，别再各课自建第 N 套**。课件本地同名定义优先级更高，存量课件不会因此回归。
+
+## 8. 越权覆盖（禁止）
 
 - `:root` 里**只能**覆盖 `--page-gap` / `--stack-gap`。
-  ✅ **例外：类作用域里的自定义属性是官方旋钮，随便写**。`.split-wide` 的 `--cols` 就是这么用的——
-  课件要变体就在自己 `style.css` 里给一个**新类名**（正本 `.fig-narrow` 自己就是 `--cols: 0.85fr / 1.8fr`）：
+- ✅ **类作用域里的自定义属性是官方旋钮**，随便写——判据是"改的是不是全局默认值"：
+  `:root { --c-accent: … }` ❌ 改全局；`.my-variant { --cols: … }` ✅ 只影响挂了这个类的元素。
+  变体只能**新增类名**，不能重写共享选择器本体：
+
   ```css
   .fig-wide {
     --cols: minmax(0, 2.2fr) minmax(0, 1fr);
-  } /* ✅ 图宽文窄变体，合法 */
+  } /* ✅ 图宽文窄变体 */
   ```
-  判据是**改的是不是全局默认值**：`:root { --c-accent: … }` 改全局 ❌；`.my-variant { --cols: … }` 只影响挂了这个类的元素 ✅。
-  ⛔ 但变体类只能**新增**，不能重写 `.split-wide` / `.figure` / `.data-table` 这些共享选择器本体。
-- ⛔ 不得重写共享选择器：`.slidev-layout.base-flex`、`h1`、`table/th/td`、`.mini-title`、`.ask`、`.problem`、`.key`。
-  长课题名封面压字号是唯一被认可的例外（`.cover-title` → 2.7rem，见 [`slidev-layout.md`](slidev-layout.md) §4）。
-- 现存越权，改到相关课件时顺手收敛：3.5 改了 `base-flex` padding 与 `h1`；1.1 / 1.2 重写 `.ask`
-  （1.2 的例外是**合法**的：提问行"大图标 + 一段话"两段式必须 flex，纯文本行反而会碎——写进本课 README 说明即可）；12.1 重写 `.problem`。
 
-## 9. 风格验收（新课件必跑，review 别人课件也跑）
+- ⛔ 不得重写：`.slidev-layout.base-flex`、`h1`、`table/th/td`、`.mini-title`、`.ask`、`.problem`、`.key`。
+  唯一被认可的例外：长课题名封面压字号 `.cover-title` → 2.7rem（见 [`slidev-layout.md`](slidev-layout.md) §4）。
+- 存量越权"谁改谁收敛"：3.5 改过 `base-flex` padding 与 `h1`；12.1 重写过 `.problem`（都按"谁改谁收敛"处理）。
+- **要写"两段式提问行"（大图标 + 一段话，需要 flex）怎么办**：⛔ 不要重写 `.ask` 本体，
+  写成**变体类** `.ask.ask-row { display: flex; gap: … }`（1.1 / 1.2 现在都是这个写法，audit 不报）。
+  判据同上：**变体只能新增类名，不能重写共享选择器本体**。
+- ⚠️ 旧版本本篇写过"1.2 重写 `.ask` 属合法例外"——**已作废**：例外一旦开口子，各批次就会各写各的（这正是 1.3 竖线被滥用的同一类问题）。
+
+## 9. 验收
 
 ```bash
-pnpm style:audit <slug>        # 一键体检：卡片数 / 图标数 / 硬编码色值·字号·圆角 / 裸类名 / 越权覆盖 / 自造类名数
-pnpm shots <slug> <页号>        # 目测：图标是否到位、卡片是否克制
-E2E_COURSE=<slug> pnpm exec playwright test e2e/layout-overflow.spec.ts   # 版面四表
-pnpm build                     # 收尾
+pnpm style:audit <slug>      # 卡片 / 图标 / 硬编码色值·字号·圆角 / 裸类名 / 越权覆盖 / 自造类名 / ⑥ 同页 .key 竖线 ≤1 处
+pnpm shots <slug> <页号>      # 目测：图标是否到位、卡片是否克制
+E2E_COURSE=<slug> pnpm exec playwright test e2e/layout-overflow.spec.ts   # 版面四表，溢出必须 = 0
+pnpm build                   # 收尾（同时检查产物里有没有 attributify 鬼规则）
 ```
 
-存量课件按"**谁改谁收敛**"逐步统一，不要求一次性大改；新建课件必须从第一版就守本篇。
+存量课件"**谁改谁收敛**"，不要求一次性大改；新建课件从第一版就守本篇。
 
-### 批量改造时的协作铁律（真踩过：两个写入方同写一份文件）
+**基线上就溢出的课件：门槛改成"相对基线零回归"**（别为了凑 0 做版面临时手术）
 
-- ⛔ **`subagent` 是"发射后不管"，不能用来"回话"**：每次调用都**新开**一个独立执行者，
-  它不在 `list_agents` 队列里、也收不到 `send_message`。想给一个已在跑的执行者补指令 = 又开了一个**并发写入方**。
-  （本次教训：想给 3.4 的执行者回一句"别做 X"，结果同写 `style.css` + `slides.md`，对方只能靠 mtime 抓到我。）
-- ✅ 要能中途对话/纠偏，就用 **teammate**（`send_message` 可寻址、有 durable mailbox）；
-  只派一次性活儿才用 `subagent`，且**派出去就别再碰同一份文件**——包括 leader 自己。
-- ✅ 一个执行者 = 一份**互不重叠**的写范围（一门课的 `courses/<slug>/` 天然隔离），多门课并行安全。
-- ✅ 验收别只信自报：自己 `git diff` 过一遍**非 class 行**（公式/数值/单位必须逐字节未动），
-  并独立复跑 `E2E_COURSE=<slug> … layout-overflow` 确认溢出=0。**物理内容零改动是硬门槛。**
+- 先 `git checkout HEAD -- courses/<slug>` 单独跑一次基线 e2e，把"**溢出状态 / 溢出元素 / 正文越界步数**"逐页记下来（跑完还原改动，并核对 md5）。
+- 改完之后**逐项比对**：相同页、相同步数＝可接受；**不得更差**；variance 变小（如某页 9.5→6.1px）也算合格。
+- 报告里必须写"仍有溢出"的页与数量，并进"待教师拍板"清单——**不要为了把表刷绿而擅自收密度 / 缩图**（那是教师级的视觉取舍）。
+- 已知基线溢出：`o2-1.x-speed-matching`（4 状态 / 52 元素 + 15 步，最重；handoff §2 的清单漏了它）、`3.4`（6 页 30 步）、`o2-1.2`（2 页 5 步）等。
 
-## 10. 违规实例对号入座（真实数据，用来校准判断）
+### 审计分级：门禁的尺度（Leader 定，别各写各的）
 
-- `10.4-capacitor`：54 处 `.card`——其中绝大多数本该是 `.key` / `.divider-l` / 普通行。
-- `3.1-gravity-elastic-force` 第 2 页：`.three-col` 三栏"大小 / 方向 / 作用点"，`.mini-title` 空着没放图标。
-- `3.5-force-equilibrium`：`fe-step-no` / `fe-cap` / `fe-fig` / `fe-method` 一套私有原子，且改了 `base-flex` 外壳。
-- `#34d399`（1.2 / 2.1 / 3.4）与 `#4ade80`（3.5 / 4.4）表达同一个"正确"语义——两个绿。
+| 级别            | 什么算这一级                                                                                                                                                                | 怎么处置                                         |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| `error`（✗）    | **客观上就是错的**：色值写成了某个 token 的字面值；课内重写共享选择器；在 `:root` 改非密度 token；同页 ≥3 条 `.key` 竖线                                                     | **必须逐条复查、清零**才能交                      |
+| `warn`（!）     | **通常是坏味道，但可能是有意为之**：同页 2 条竖线；卡片超预算；私调字号 / 非 token 圆角；裸类名；某个色相只是加了透明度；整课出现 ≥5 个非 token 颜色（配色可能跑偏）        | **执行者自己判断**，报告里写一句理由；**不阻塞**  |
+| `info`（·建议） | 只是把"我们的思路"说给你听：全课 0 图标；自造类偏多                                                                                                                          | 看过即可，不用回话                               |
+
+**两种文案必须能分辨（这是给下一个 agent 看的，不是给人看的）：**
+
+- `error` = **行号 + 依据 + 复查指令**：说清"这行写的是什么、为什么客观错了、请你去复查哪里"——
+  目的是逼出一次真正的复盘，而不是让人照着改字面。
+- `warn` = **先讲我们的思路，再问"你看是否符合"**：如"我们的思路是色相取 token、透明度用 `color-mix`，你看这样写是否更贴合"。
+  ⛔ 不要用命令式。
+
+**新增一条规则的准入**：先问自己"这是客观错误，还是通常不好？"——客观错误进 `error`，通常不好进 `warn`；
+拿不准一律先做 `warn`，攒够实例再升级。**门禁的目的是让 34 门课长得一样，不是让写课件变成走雷区。**
+
+### 批量改造协作铁律
+
+- ⛔ `subagent` 是"发射后不管"：**派出去就别再碰同一份文件**（包括 Leader 自己——补一句"别做 X"＝又开一个并发写入方）。
+  要能中途对话 / 纠偏就用 **teammate**（`send_message` 可寻址）。
+- ✅ 一个执行者 = 一份**互不重叠**的写范围（`courses/<slug>/` 天然隔离）。
+- ✅ 验收别只信自报：自己 `git diff` 过一遍**非 class 行**（公式 / 数值 / 单位必须逐字节未动）+ 独立复跑 e2e。
+  **物理内容零改动是硬门槛。**

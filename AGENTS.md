@@ -6,24 +6,24 @@
 >
 > 本文件只放置核心内容，细节拆成了下面 10 篇笔记（**共享组件一览在「三」末尾**）——**用到再去读，不要凭直觉写**：
 
-| 什么时候用                                                     | 读哪篇                                                                                                                                                                      |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **图元莫名其妙「看不见 / 变形 / 字号爆炸」（SVG 属性被吃掉）** | [`.agents/notes/svg-attributify-trap.md`](.agents/notes/svg-attributify-trap.md) ⭐⭐ **先查这个再查别的：`opacity` 被压成 0.9%、`stroke-width` 被撑大都是它；含诊断脚本**  |
-| **要用任何共享组件（查它是干嘛的、props 怎么填）**             | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **12 个全局组件总表 + 简单组件的 props 正本**                                                 |
-| 要画 SVG（矢量箭头、SVG 字号体系、非坐标示意图）               | [`.agents/notes/slidev-svg.md`](.agents/notes/slidev-svg.md)                                                                                                                |
-| **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）    | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                                                                      |
-| **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）         | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                                                                    |
-| **要画"手捏住拉环/吊环/细绳往外拉"**（拉弹簧、拉测力计、拉绳） | [`.agents/notes/grip-hand.md`](.agents/notes/grip-hand.md) ⭐ **必读：禁止手画手掌 / 手指**                                                                                 |
-| **画电路图 / 磁场图 / 带电粒子运动图**                         | [`.agents/notes/electronic-symbols.md`](.agents/notes/electronic-symbols.md) ⭐ **必读：禁止手画电源/电阻/开关/电表/灯泡与磁场叉点阵**                                      |
-| 页面排版                                                       | [`.agents/notes/slidev-layout.md`](.agents/notes/slidev-layout.md)                                                                                                          |
-| **写"一道题占一页"的题目页 / 一个大问题的思考页**              | [`.agents/notes/exercise-layouts.md`](.agents/notes/exercise-layouts.md) ⭐ **必读：`layout: exercise-split` / `focus-question`，具名 slot 不能写 `<template #stem>`**      |
-| **风格统一 / 新建课件 / review 课件风格**                      | [`.agents/notes/style-guide.md`](.agents/notes/style-guide.md) ⭐ **原子词汇表 + 视觉 token 铁律 + `pnpm style:audit` 验收**                                                |
-| **接手"全仓 34 门课件风格统一"这项工作**                        | [`.agents/notes/style-unification-handoff.md`](.agents/notes/style-unification-handoff.md) ⭐ **先读这个**：已完成 8 门 / 3 门基线溢出待修 / ⛔ 别碰 o2-1.3 / 子代理路由 |
-| 风格统一的批次明细、派工模板、工具坑                           | [`.agents/notes/style-unification-progress.md`](.agents/notes/style-unification-progress.md) 批次表 + 幽灵 dev server 教训 + 教师待拍板的视觉取舍                         |
-| 要设计点击节奏、写交互式组件                                   | [`.agents/notes/slidev-interactions.md`](.agents/notes/slidev-interactions.md)                                                                                              |
-| 公式与图表                                                     | [`.agents/notes/katex-fonts-icons.md`](.agents/notes/katex-fonts-icons.md)                                                                                                  |
-| 端到端检查                                                     | [`.agents/notes/e2e-checks.md`](.agents/notes/e2e-checks.md)                                                                                                                |
-| 安装/更新/恢复 AI 技能                                         | [`.agents/notes/skills.md`](.agents/notes/skills.md)                                                                                                                        |
+| 什么时候用                                                     | 读哪篇                                                                                                                                                                     |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **图元莫名其妙「看不见 / 变形 / 字号爆炸」（SVG 属性被吃掉）** | [`.agents/notes/svg-attributify-trap.md`](.agents/notes/svg-attributify-trap.md) ⭐⭐ **先查这个再查别的：`opacity` 被压成 0.9%、`stroke-width` 被撑大都是它；含诊断脚本** |
+| **要用任何共享组件（查它是干嘛的、props 怎么填）**             | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **12 个全局组件总表 + 简单组件的 props 正本**                                                |
+| 要画 SVG（矢量箭头、SVG 字号体系、非坐标示意图）               | [`.agents/notes/slidev-svg.md`](.agents/notes/slidev-svg.md)                                                                                                               |
+| **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）    | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                                                                     |
+| **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）         | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                                                                   |
+| **要画"手捏住拉环/吊环/细绳往外拉"**（拉弹簧、拉测力计、拉绳） | [`.agents/notes/grip-hand.md`](.agents/notes/grip-hand.md) ⭐ **必读：禁止手画手掌 / 手指**                                                                                |
+| **画电路图 / 磁场图 / 带电粒子运动图**                         | [`.agents/notes/electronic-symbols.md`](.agents/notes/electronic-symbols.md) ⭐ **必读：禁止手画电源/电阻/开关/电表/灯泡与磁场叉点阵**                                     |
+| 页面排版                                                       | [`.agents/notes/slidev-layout.md`](.agents/notes/slidev-layout.md)                                                                                                         |
+| **写"一道题占一页"的题目页 / 一个大问题的思考页**              | [`.agents/notes/exercise-layouts.md`](.agents/notes/exercise-layouts.md) ⭐ **必读：`layout: exercise-split` / `focus-question`，具名 slot 不能写 `<template #stem>`**     |
+| **风格统一 / 新建课件 / review 课件风格**                      | [`.agents/notes/style-guide.md`](.agents/notes/style-guide.md) ⭐ **原子词汇表 + 视觉 token 铁律 + `pnpm style:audit` 验收**                                               |
+| **接手"全仓 34 门课件风格统一"这项工作**                       | [`.agents/notes/style-unification-handoff.md`](.agents/notes/style-unification-handoff.md) ⭐ **先读这个**：已完成 8 门 / 3 门基线溢出待修 / ⛔ 别碰 o2-1.3 / 子代理路由   |
+| 风格统一的批次明细、派工模板、工具坑                           | [`.agents/notes/style-unification-progress.md`](.agents/notes/style-unification-progress.md) 批次表 + 幽灵 dev server 教训 + 教师待拍板的视觉取舍                          |
+| 要设计点击节奏、写交互式组件                                   | [`.agents/notes/slidev-interactions.md`](.agents/notes/slidev-interactions.md)                                                                                             |
+| 公式与图表                                                     | [`.agents/notes/katex-fonts-icons.md`](.agents/notes/katex-fonts-icons.md)                                                                                                 |
+| 端到端检查                                                     | [`.agents/notes/e2e-checks.md`](.agents/notes/e2e-checks.md)                                                                                                               |
+| 安装/更新/恢复 AI 技能                                         | [`.agents/notes/skills.md`](.agents/notes/skills.md)                                                                                                                       |
 
 ---
 
@@ -152,26 +152,34 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 ### 共享组件（`workspace/shared/components/`，全局注册：**直接用、不用 import、不要重画**）
 
-12 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；下面是全表，选组件与查 props 的正门是
-[`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)：
+12 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
+[`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)。
 
-| 组件              | 写在哪                   | 干什么                                                                | props / 用法                                                             |
-| ----------------- | ------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `SimpleAxis`      | markdown 顶层            | 讲台演示图：只第一象限 + 一两条曲线 + 标一个点                        | [坐标轴笔记](.agents/notes/coordinate-axes.md) ⭐ **禁止手写坐标轴 SVG** |
-| `NumberAxis`      | markdown 顶层            | 一维数轴（时间轴 / 位置轴 / 纸带打点）                                | 同上 + [props 全表](.agents/notes/coordinate-axes-api.md)                |
-| `CoordAxes`       | markdown 顶层            | 完整坐标图：多曲线 / 多标注 / 网格 / 区域填充 / 分步                  | 同上；props 一多就用 ` ```comp ` 代码块                                  |
-| `SpringScale`     | **只能在 `<svg>` 里**    | 弹簧测力计**一律**用它，**禁止手画表身 / 刻度 / 挂钩**                | [笔记](.agents/notes/spring-scale.md)（含 props 表）                     |
-| `GripHand`        | **只能在 `<svg>` 里**    | "手捏住拉环 / 吊环 / 细绳往外拉"**一律**用它，**禁止手画手掌 / 手指** | [笔记](.agents/notes/grip-hand.md)（含 props 表）                        |
-| `CourseArrow`     | **只能在 `<svg>` 里**    | 矢量箭头（自动 marker + 尖端必落在终点），**别手写 `<marker>`**       | [总览 §4](.agents/notes/shared-components.md)                            |
-| `SurfaceHatch`    | **只能在 `<svg>` 里**    | 接触面：地面 / 桌面 / 墙 / 斜面 + 单侧斜线阴影                        | [总览 §5](.agents/notes/shared-components.md)                            |
-| `Ruler`           | 可内嵌可独立用           | 刻度尺（精确毫米刻度 / 示意图模式）                                   | [总览 §6](.agents/notes/shared-components.md)                            |
-| `Latex`           | HTML 层                  | HTML 里的 KaTeX 公式（SVG 里用不了，改 `KaTeX_Math` 字体）            | [总览 §3](.agents/notes/shared-components.md)                            |
-| `ChartLabel`      | HTML 层（盖在 SVG 上）   | 图内标注，**能渲染真 KaTeX 与分式**                                   | [总览 §3](.agents/notes/shared-components.md)                            |
-| `CourseTopBar`    | `global-top.vue` 薄壳    | 顶栏：封面章节名 ↔ 内页课题名 + 校徽                                  | [总览 §2](.agents/notes/shared-components.md)                            |
-| `CourseBottomBar` | `global-bottom.vue` 薄壳 | 底栏两侧渐隐装饰线（无页码）                                          | 同上（无 props）                                                         |
+**坐标图（⛔ 禁止手写坐标轴 SVG）· 写在 markdown 顶层**
 
-- **只能在 `<svg>` 里**的组件（`CourseArrow` / `SurfaceHatch` / `SpringScale` / `GripHand`）：写成 HTML 什么都不显示，也不能用 ` ```comp ` 代码块；`v-click` 写在里面照样生效。
-- 坐标图 / 弹簧测力计 / 手部这三篇专篇**读一篇就够**；其余组件的 props 全在总览笔记里。
+- `SimpleAxis` — 讲台演示图：只第一象限 + 一两条曲线 + 标一个点 · [坐标轴笔记](.agents/notes/coordinate-axes.md)
+- `NumberAxis` — 一维数轴（时间轴 / 位置轴 / 纸带打点） · [props 全表](.agents/notes/coordinate-axes-api.md)
+- `CoordAxes` — 完整坐标图：多曲线 / 多标注 / 网格 / 区域填充 / 分步（props 一多就用 ` ```comp ` 代码块）
+
+**只能在 `<svg>` 里写**（写成 HTML 什么都不显示，也不能用 ` ```comp `；`v-click` 写在里面照样生效）
+
+- `CourseArrow` — 矢量箭头：自动 marker、尖端必落在终点（别手写 `<marker>`）· [总览 §4](.agents/notes/shared-components.md)
+- `SurfaceHatch` — 接触面：地面 / 桌面 / 墙 / 斜面 + 单侧斜线阴影 · [总览 §5](.agents/notes/shared-components.md)
+- `SpringScale` — 弹簧测力计，⛔ 禁止手画表身 / 刻度 / 挂钩 · [笔记](.agents/notes/spring-scale.md)
+- `GripHand` — "手捏住拉环 / 吊环 / 细绳往外拉"，⛔ 禁止手画手掌 / 手指 · [笔记](.agents/notes/grip-hand.md)
+- `Ruler` — 刻度尺（精确毫米刻度 / 示意图模式），可内嵌也可独立用 · [总览 §6](.agents/notes/shared-components.md)
+
+**HTML 层**
+
+- `Latex` — HTML 里的 KaTeX 公式（SVG 里用不了，改 `KaTeX_Math` 字体）· [总览 §3](.agents/notes/shared-components.md)
+- `ChartLabel` — 图内标注，盖在 SVG 上，能渲染真 KaTeX 与分式 · [总览 §3](.agents/notes/shared-components.md)
+
+**页面外壳（只写进 `global-*.vue` 薄壳）**
+
+- `CourseTopBar` — 顶栏：封面章节名 ↔ 内页课题名 + 校徽 · [总览 §2](.agents/notes/shared-components.md)
+- `CourseBottomBar` — 底栏两侧渐隐装饰线（无页码）· 同上（无 props）
+
+坐标图 / 弹簧测力计 / 手部各有一篇专篇，**读一篇就够**。
 
 ---
 
@@ -280,3 +288,5 @@ pnpm shots 1.x-vectors 4 --clicks=each # 每一步点击各截一张
 | **PPT 上塞废话 / 空标题**           | 标题要么带信息要么不写（提问页/引课页**整页不写标题**，别写与封面重复的课题名）；教师口述能带过的过渡句、注释小字**不上屏**；`.key` 彩竖线一页最多一处、公式不加框                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 本文件"三" + `notes/slidev-layout.md`                                    |
 | **符号/单位写成纯文本**             | `v₀`、`θ`、`t`、`m/s²`、"秒""米"这类**一律禁止**：HTML 里用 `<Latex tex="v_0" />` / `<Latex tex="\theta" />` / `<Latex tex="\text{m/s}^2" />`；SVG 里用 `KaTeX_Math`（量）＋ `KaTeX_Main`（单位）字体。教师会逐页挑这个                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 本文件"四" + `notes/katex-fonts-icons.md`                                |
 | **题目页一上来就把受力分析摆出来**  | 学生第一眼只能看到**干净题干 + 干净题目图**（物体、斜面、绳、θ、已知 v 常显）；重力/支持力/摩擦力/分力/加速度这些分析标注**点击后才出**（组件加 `showForces` / `showDecomp` 属性 + `<g v-if>`，页面写 `:show-forces="$clicks >= 1"`）。受力一律从**几何中心**出发，速度/加速度箭头放物体**旁侧**、略小一号不与力重叠；力只用 `F`+角标，禁止裸 `N`/`f`/`T`                                                                                                                                                                                                                                                                                                                                                   | 本文件"三·题目图与受力分析"                                              |
+| **`text-*` 阶梯会把行高也改掉**     | UnoCSS 自带的 `.text-Nxl` 是 `font-size` + `line-height` 两个声明，而 `common.css` 的字号阶梯只 `!important` 覆盖 `font-size`、**不覆盖 `line-height`**；UnoCSS 工具类在产物里排在 addon 样式之后 ⇒ 把它用在**文本块**（不只是图标）上时，行距按 UnoCSS 那份走。**阶梯越大越明显**（`text-5xl` 的 `line-height` 是 `1`，会"行贴行"；`text-lg` 的 1.75rem 与继承值接近，基本无事）。要在文本块上放大字号，就**同时显式给 `leading-normal` / `leading-tight`**（4.1 第 2 页 `ask text-5xl leading-normal` 实测：div 高 171.6→257.4px、页留白才回到 152.8/141.8）                                                                                                                                              | `notes/style-guide.md` §2                                                |
+| **左侧竖线（`.key`/`.problem`）被滥用** | 竖线只给"**这一页的落点**（`.key`）"和"旁注 / 易错警示（`.problem`）"用；**解析、推导的每一步都套 `.key` ＝ 满屏装饰线**（1.3 第 18 页曾一页 6 处、全课 16 页违规）。判据已进 `pnpm style:audit` ⑥：同页 **2 处＝警告**（可判合理）、**≥3 处＝错误**（必须复判）。两条教训：① 注释里的口头纪律不算数，**新增纪律必须同批在 `scripts/style-audit.ts` 落一条检查**；② **门禁要分级**——客观错误进 `error`（必须清零），"通常是坏味道但可能有意为之"进 `warn`（执行者判断），否则写课件会变成走雷区                                                                                                                                                                                            | `notes/style-guide.md` §4                                                |

@@ -155,7 +155,7 @@ if (variantResults.every((i) => !i || generator.isBlocked(i[1]))) return; // var
 
 ---
 
-## 四、实测验证（2026-10-14）
+## 四、实测验证
 
 第 3 页（`SwingInField`，16×9 的磁场阵列）在浏览器里读 computed style：
 
@@ -232,7 +232,7 @@ console.log("可疑鬼规则条数：", out.filter((r) => r.suspicious).length);
 **判读**：`suspicious: true` 的每一条都是坑；`opacity` / `font-size` / `stroke-width` / `size` / `cols` / `rows` / `gap`
 这 7 个属性名出现在结果里（不管数值对不对）本身就说明 blocklist 没生效 ⇒ **`uno.config.ts` 没被加载，重启 dev server**。
 
-### 验收（不能只看 dev）
+### 验收
 
 ```bash
 # 1) 源码层：不该有内联 style 兜底（正本修复后不需要）
@@ -274,22 +274,6 @@ grep -rnoE '\[(opacity|font-size|stroke-width|fill|stroke)~="[0-9]+"\]' dist/ | 
 > 是 `common.css` 给所有 svg 钉了 `font-size:16px` + 非 `!important` 压不过 ⇒ 另一个独立问题。
 > 但注意 `[font-size~="20"]{font-size:5rem}` 这条鬼规则**也会打到 `<mdi-xxx font-size="20">` 上**，
 > 所以这个坑修掉之后，图标放大问题也顺带少了一个诱因。
-
----
-
-## 七、操作注意
-
-1. **改完 `uno.config.ts` 必须重启 dev server**。Slidev 会打印 `uno.config.ts changed, restarting...` 自己重启；
-   但如果配置文件**语法错误**，dev server 会直接崩（`ParseError`），而不是降级运行 ——
-   所以别在 JSDoc 里写 `/* … */`（`*/` 会提前闭合块注释，本次就踩了一次）。
-2. **`lsof` 在本机没装**（`bash: lsof: command not found`）。查端口 / 杀 dev server 改用：
-   ```bash
-   ss -ltnp | grep -E '303[0-9]'      # 谁在听端口
-   pgrep -af slidev                    # 有哪些 slidev 进程
-   ```
-   （注意 AGENTS.md「八」里 `lsof … || echo NO_NODE_LISTENERS` 这种写法，在 `lsof` 不存在时会
-   **永远打印 NO_NODE_LISTENERS**，等于没检查 —— 别被它骗了。）
-3. 批量改课件前后照旧清 dev server（见 `style-unification-progress.md` §5）。
 
 ---
 
