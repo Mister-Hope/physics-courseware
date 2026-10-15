@@ -7,8 +7,8 @@ import { computed, ref } from "vue";
  * - Mode="velocity"：分速度 v_x = v_0、v_y = gt，合速度 v = √(v_x² + v_y²)，偏角 tanθ = v_y / v_x；
  * - Mode="displacement"：分位移 x = v_0 t、y = ½gt²，合位移 s = √(x² + y²)，偏角 tanα = y / x。
  *
- * 坐标轴 / 刻度 / 轴量标签交给共享 `CoordAxes`；轨迹高亮、矢量箭头、角弧与合量虚线画在 `#overlay` 里。 所有矢量按同一比例尺画（velocity 用 VSCALE
- * px 每 m/s，displacement 用 DSCALE px 每 m）， 这样分矢量与合矢量构成的三角形才是真实的几何关系，不会被两个方向不同的缩放率拉歪。
+ * 坐标轴 / 刻度 / 轴量标签交给共享 `CoordAxes`；轨迹高亮、矢量箭头、角弧与合量虚线画在 `#overlay` 里。 velocity 模式下所有矢量按同一比例尺 VSCALE
+ * （px 每 m/s）画，displacement 模式的矢量直接落在数据坐标里（由轴映射缩放），两者都不会被两个方向不同的缩放率拉歪。
  */
 const {
   mode = "velocity",
@@ -30,7 +30,6 @@ const {
 
 /** 矢量比例尺（屏幕 px 每 m/s）与位移比例尺（屏幕 px 每 m） */
 const VSCALE = 6.4;
-const DSCALE = 26;
 const ARC_R = 34;
 
 const progress = ref(start);

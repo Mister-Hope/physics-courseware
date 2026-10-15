@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
+import type { ChartLabelAnchor } from "../../../workspace/shared/components/label-text";
+
 /**
  * 斜抛演示台：**拖动初速度箭头的末端**改变抛射角 θ，实时看到轨迹、射高与射程的变化。
  *
@@ -90,8 +92,21 @@ const curves = computed(() => {
   return list;
 });
 
+/** 图内标注（喂给 `CoordAxes` 的 `labels`）：`anchor` 取共享的方位联合类型，免得按字面量收窄成窄联合 */
+interface TrajectoryLabel {
+  x: number;
+  y: number;
+  tex: string;
+  anchor: ChartLabelAnchor;
+  color: string;
+  size: number;
+  halo?: boolean;
+  /** 标注点上的圆点半径（不写就不画点） */
+  dot?: number;
+}
+
 const labels = computed(() => {
-  const list = [
+  const list: TrajectoryLabel[] = [
     {
       x: range.value,
       y: 0,

@@ -149,7 +149,7 @@ const handleUp = (): void => {
       :y-axis="{ quantity: 'x' }"
       :ticks="{ x: [1, 2, 3, 4], y: [2.5, 5, 7.5, 10], labels: false }"
       :view="{ width: VIEW_WIDTH, height: VIEW_HEIGHT }"
-      :curves="[{ formula: (t) => 0.5 * ACC * t * t, stroke: 'var(--c-physics)', width: 3 }]"
+      :curves="[{ formula: (t: number) => 0.5 * ACC * t * t, stroke: 'var(--c-physics)', width: 3 }]"
       :labels="labels"
     >
       <template #overlay="{ x, y, plot }">

@@ -81,8 +81,7 @@ const snap = (v: number): number => Math.round(v * 2) / 2;
  * @returns 数据坐标；无法换算时返回 null
  */
 const pointerToData = (event: PointerEvent): { x: number; y: number } | null => {
-  const el = event.currentTarget as Element;
-  const svg = el instanceof SVGSVGElement ? el : el.ownerSVGElement;
+  const svg = (event.currentTarget as Element).closest("svg");
 
   if (!svg) return null;
 

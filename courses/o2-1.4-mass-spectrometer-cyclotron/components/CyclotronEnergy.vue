@@ -30,7 +30,7 @@ const totalT = computed(() => (nAcc.value * Math.PI * M_P) / (Q_P * b.value));
 
 /** 拖 B / R → 动的是 E_k,max；拖 U → 动的是 n 与 t（读数框亮一下，把这条线索点出来） */
 const pulse = ref<"ek" | "nt" | "">("");
-let timer = 0;
+let timer: ReturnType<typeof globalThis.setTimeout> | undefined;
 const mark = (which: "ek" | "nt"): void => {
   pulse.value = which;
   if (timer) globalThis.clearTimeout(timer);

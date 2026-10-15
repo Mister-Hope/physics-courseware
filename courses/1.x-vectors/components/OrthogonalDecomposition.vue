@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
+import type { ChartLabelAnchor } from "../../../workspace/shared/components/label-text";
+
 /**
  * 正交分解：滑杆（或拖动箭头尖端）改变矢量 a = (x, y)，实时把 a 拆成"沿 x 轴的 x 个单位向量 i" + "沿 y 轴的 y 个单位向量 j"。默认给 (4,
  * 3)，对应课上"把矢量抽象成 (4, 3)"这一步科学简化。
@@ -12,6 +14,20 @@ import { computed, ref } from "vue";
 interface Point {
   x: number;
   y: number;
+}
+
+/** 图内标注（喂给 `CoordAxes` 的 `labels`）：`anchor` 取共享的方位联合类型，免得按字面量收窄成窄联合 */
+interface DecompLabel {
+  x: number;
+  y: number;
+  tex: string;
+  anchor: ChartLabelAnchor;
+  color: string;
+  size: number;
+  halo?: boolean;
+  /** 方位之外的偏移（屏幕 px 口径） */
+  dx?: number;
+  dy?: number;
 }
 
 /** 绘图区四边（viewBox 用户单位，由 `#overlay` 插槽给出） */
@@ -136,7 +152,7 @@ const yTex = computed<string>(() => `y\\,\\vec{j} = (0,\\;${format(y.value)})`);
 
 /** 图内标注走 `labels`（HTML + 真 KaTeX）：单位向量名、两个分量与合矢量 */
 const labels = computed(() => {
-  const items = [
+  const items: DecompLabel[] = [
     {
       x: 1,
       y: 0,

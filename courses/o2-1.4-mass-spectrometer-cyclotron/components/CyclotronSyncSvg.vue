@@ -70,7 +70,7 @@ const labelSpot = (a: Arc): { x: number; y: number } => ({
           <tspan class="cs-sub" dy="4">{{ i + 1 }}</tspan>
         </text>
       </g>
-      <g v-for="(a, i) in arcs" :key="'bar' + i" :class="'cs-c' + i">
+      <g v-for="(_, i) in arcs" :key="'bar' + i" :class="'cs-c' + i">
         <rect class="cs-bar" :x="X0 + i * BAR_LEN" :y="BAR_TOP" :width="BAR_LEN" :height="AXIS_Y - BAR_TOP" />
         <text class="cs-t2" :x="X0 + i * BAR_LEN + BAR_LEN / 2" :y="AXIS_Y + 24">
           <tspan class="cs-math">T</tspan>

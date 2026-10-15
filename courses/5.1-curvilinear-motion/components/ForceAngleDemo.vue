@@ -66,8 +66,8 @@ const arc = computed(() => {
 
 /** 合力 F 标签：放在箭头尖端外延处，彻底避开内侧 α 弧线 */
 const fLabelPos = computed<Point>(() => ({
-  x: fTip.x + 24 * Math.cos(rad.value),
-  y: fTip.y - 24 * Math.sin(rad.value),
+  x: fTip.value.x + 24 * Math.cos(rad.value),
+  y: fTip.value.y - 24 * Math.sin(rad.value),
 }));
 
 /** "沿 v 的分量" 文字位置： 始终居中对齐在水平分力线段 P -> parTip 正下方（y = pointP.y + 34）， 当水平分力较短时适度向分力方向偏置，避免压在 P 点正下方。 */

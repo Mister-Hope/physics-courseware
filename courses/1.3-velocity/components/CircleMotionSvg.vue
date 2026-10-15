@@ -4,7 +4,7 @@
  *
  * 干净状态只给：圆周、起点 A、顺时针方向； `step >= 1`（第一次点击）标出「4 s 回到 A」； `step >= 2`（第二次点击）再标出 t = 2 s 的位置 C、位移 C→A = 2R 与第 2 个 2 s 走的半圈。
  */
-defineProps<{ step?: number }>();
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>

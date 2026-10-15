@@ -96,14 +96,6 @@ onMounted(() => {
 onBeforeUnmount(stopSpin);
 
 /* ═══════════ 矢量计算 ═══════════ */
-// 步骤 1 的恒定矢量
-// 重力 mg：竖直向下
-const mgVec: Point = { x: 0, y: PX };
-// 洛伦兹力 f1：由于 v1 向右，向里磁场，qv1×B 向上
-const f1Vec: Point = { x: 0, y: -PX };
-// 速度 v1：水平向右
-const v1Vec: Point = { x: PX, y: 0 };
-
 // 步骤 1 & 2 中重力 mg 与洛伦兹力 f2 都在下方，为避免视觉叠线：
 // 重力 mg 微向左偏 5px，洛伦兹力 f2 微向右偏 5px，清晰并置
 const mgTailStep1: Point = { x: CENTER.x - 7, y: CENTER.y + BALL_R };

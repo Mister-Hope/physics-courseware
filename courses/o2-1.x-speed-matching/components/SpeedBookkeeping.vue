@@ -51,9 +51,6 @@ const HALO = {
   "stroke-width": 3.5,
   "paint-order": "stroke",
 } as const;
-/** 分速度标签的字体与物理量口径一致：量走 KaTeX_Math 斜体，数字 / 运算走 KaTeX_Main */
-const MATH = "KaTeX_Math, 'Times New Roman', serif";
-const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>

@@ -139,8 +139,7 @@ const inScene = (first: Vec, second: Vec): boolean => {
 };
 
 const pointerToUser = (event: PointerEvent): Vec | null => {
-  const element = event.currentTarget as Element;
-  const svg = element instanceof SVGSVGElement ? element : element.ownerSVGElement;
+  const svg = (event.currentTarget as Element).closest("svg");
 
   if (!svg) return null;
 
