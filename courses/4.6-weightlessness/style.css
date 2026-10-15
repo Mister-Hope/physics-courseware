@@ -2,10 +2,14 @@
    超重和失重 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动加载，此处仅放本课特有样式
+
+   本课前缀（§6）：sq- 下蹲 / 起立阶段；host 正文区托图容器。
+   电梯体重计交互组件的 ew-* 类写在该组件 <style scoped> 里。
    ═══════════════════════════════════════════════ */
 
-/* ── 第 2 页：示数变化的四个阶段 ── */
-.squat-flow {
+/* ── 第 2 页：下蹲过程中示数变化的四个阶段
+   字号走共享阶梯 .text-2xl（写在页面里），此处只管框 ── */
+.sq-flow {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
@@ -13,13 +17,13 @@
   justify-content: center;
 }
 
-.squat-flow > svg {
+.sq-flow > svg {
   width: 1.7rem;
   height: 1.7rem;
   color: var(--c-accent);
 }
 
-.sf-step {
+.sq-step {
   padding: 0.55rem 1.35rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
@@ -27,40 +31,22 @@
   background: var(--c-surface);
 
   font-weight: 700;
-  font-size: 1.45rem;
 }
 
-.sf-end {
+.sq-end {
   border-color: var(--c-border-glow);
   color: var(--c-accent);
 }
 
-/* ── 第 3、13 页：坐标图占满正文区 ── */
-.graph-host {
+/* ── 示意图 / 坐标图所在栏（第 3、6–10、13、15、17 页）──
+   多用在 .half-grid 的一栏里（flex 声明在 grid 子项上不生效，无害），
+   也用于独占正文区的坐标图：靠 flex 撑满剩余高度。── */
+.host {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
   justify-content: center;
 
-  min-height: 0;
-}
-
-/* ── 示意图所在栏（第 6–10、17 页）── */
-.figure-host {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-width: 0;
-}
-
-/* ── 第 12 页：交互操作提示 ── */
-.ew-hint {
-  color: var(--c-text-dim);
-  font-size: 0.95rem;
-  text-align: center;
-}
-
-/* ── 第 14 页：只有一行公式，放大 ── */
-.lead-formula {
-  font-size: 1.35rem;
+  min-height: 0;
 }

@@ -76,7 +76,7 @@ const alongLabel = computed(() => ({
 </script>
 
 <template>
-  <div class="rope-pull">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -84,15 +84,15 @@ const alongLabel = computed(() => ({
       aria-label="人在岸上收绳拉船"
     >
       <!-- 岸（左）与水面 -->
-      <rect x="0" y="100" width="95" height="180" fill="rgba(148,163,184,0.14)" />
+      <rect x="0" y="100" width="95" height="180" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
       <SurfaceHatch :from="{ x: 95, y: 100 }" :to="{ x: 95, y: 280 }" side="left" :thickness="14" />
-      <line x1="0" y1="100" x2="95" y2="100" stroke="rgba(203,213,225,0.75)" stroke-width="2.2" />
+      <line x1="0" y1="100" x2="95" y2="100" stroke="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)" stroke-width="2.2" />
       <line
         x1="95"
         y1="280"
         :x2="VIEW_W"
         y2="280"
-        stroke="rgba(203,213,225,0.75)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)"
         stroke-width="2.2"
       />
       <SurfaceHatch
@@ -102,7 +102,7 @@ const alongLabel = computed(() => ({
         :thickness="14"
       />
       <!-- 岸上的人（只在题干里示意"有人在收绳"） -->
-      <g stroke="#e2a846" stroke-width="2.6" fill="none" stroke-linecap="round">
+      <g stroke="var(--c-accent)" stroke-width="2.6" fill="none" stroke-linecap="round">
         <circle cx="58" cy="52" r="8" />
         <line x1="58" y1="60" x2="58" y2="84" />
         <line x1="58" y1="84" x2="48" y2="100" />
@@ -115,15 +115,15 @@ const alongLabel = computed(() => ({
         :y1="ATTACH.y"
         :x2="bow.x"
         :y2="bow.y - 8"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2.6"
       />
       <!-- 船 -->
       <g :transform="`translate(${bow.x} ${bow.y})`">
         <path
           d="M -30 -10 L 16 -10 L 32 0 L 16 12 L -30 12 Z"
-          fill="rgba(96,165,250,0.35)"
-          stroke="#93c5fd"
+          fill="color-mix(in srgb, var(--c-velocity) 35%, transparent)"
+          stroke="var(--c-velocity-light)"
           stroke-width="2.2"
         />
       </g>
@@ -133,14 +133,14 @@ const alongLabel = computed(() => ({
         :y1="bow.y"
         :x2="bow.x + 6"
         :y2="bow.y"
-        stroke="rgba(148,163,184,0.7)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="7 6"
       />
       <path
         :d="`M ${arcStart.x} ${arcStart.y} A ${arcRadius} ${arcRadius} 0 0 1 ${arcEnd.x} ${arcEnd.y}`"
         fill="none"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2"
       />
       <text
@@ -150,20 +150,20 @@ const alongLabel = computed(() => ({
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         θ
       </text>
       <!-- 速度分解 -->
       <g v-if="showDecomp">
-        <CourseArrow :from="bow" :to="shipTip" stroke="#f87171" :stroke-width="3.4" />
-        <CourseArrow :from="bow" :to="alongTip" stroke="#e2a846" :stroke-width="3.2" />
+        <CourseArrow :from="bow" :to="shipTip" stroke="var(--c-force)" :stroke-width="3.4" />
+        <CourseArrow :from="bow" :to="alongTip" stroke="var(--c-accent)" :stroke-width="3.2" />
         <line
           :x1="alongTip.x"
           :y1="alongTip.y"
           :x2="shipTip.x"
           :y2="shipTip.y"
-          stroke="rgba(148,163,184,0.8)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
@@ -174,7 +174,7 @@ const alongLabel = computed(() => ({
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="21"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4">船</tspan>
@@ -186,64 +186,64 @@ const alongLabel = computed(() => ({
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="21"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4">0</tspan>
         </text>
       </g>
     </svg>
-    <div v-if="showPanel" class="rope-panel">
+    <div v-if="showPanel" class="sim-panel">
       <label
-        >绳与水平方向的夹角 <span class="rope-val">{{ theta }}°</span
+        >绳与水平方向的夹角 <span class="sim-val">{{ theta }}°</span
         ><input v-model.number="theta" type="range" min="30" max="55" step="1"
       /></label>
     </div>
-    <div v-if="readout" class="rope-readout">
+    <div v-if="readout" class="sim-readout">
       v<sub>船</sub> = v<sub>0</sub>/cos θ = <b>{{ vShip.toFixed(2) }} m/s</b>
     </div>
   </div>
 </template>
 
 <style scoped>
-.rope-pull {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
-.rope-pull svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.rope-panel {
+.sim-panel {
   display: flex;
   justify-content: center;
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
   font-size: 0.8rem;
 }
 
-.rope-panel label {
+.sim-panel label {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.rope-panel input {
+.sim-panel input {
   width: 8rem;
 }
 
-.rope-val {
+.sim-val {
   min-width: 2.6rem;
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
   font-variant-numeric: tabular-nums;
 }
 
-.rope-readout {
-  color: var(--c-text, #e2e8f0);
+.sim-readout {
+  color: var(--c-text);
   font-size: 0.95rem;
   text-align: center;
 }

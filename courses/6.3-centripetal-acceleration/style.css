@@ -3,22 +3,19 @@
    通用设计系统在 workspace/shared/styles/（共享 addon 自动注入），此处只放本课特有样式
    ═══════════════════════════════════════════════ */
 
-/* 公式是本节课的落点，独立成行的公式给足字号（共享样式里是 1.15rem） */
-.slidev-layout .katex-display {
-  font-size: 1.45rem !important;
-}
-
-/* 两个表达式那一页：把公式放进大卡片里居中，撑满版面 */
-.formula-card {
+/* 两个表达式那一页：公式是本节课的落点，独立成行时给足字号
+   （2.1rem = 共享字号阶梯 .text-4xl 档）；两栏之间用 .divider-l 分隔，不再套卡片 */
+.formula-lg {
   display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   align-items: center;
   justify-content: center;
 
   min-height: 12rem;
-  padding: 1.5rem 2rem !important;
 }
 
-.formula-card .katex-display {
+.formula-lg .katex-display {
   margin: 0 !important;
-  font-size: 1.9rem !important;
+  font-size: 2.1rem !important;
 }

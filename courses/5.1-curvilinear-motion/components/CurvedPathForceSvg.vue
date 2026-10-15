@@ -26,30 +26,30 @@ const pathCD = `M ${C.x} ${C.y} C 486 250 542 226 ${pointD.x} ${pointD.y}`;
 
 <template>
   <svg viewBox="0 0 620 400" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <text x="26" y="36" font-family="KaTeX_Main" font-size="22" fill="#94a3b8">俯视图：沿前进方向看</text>
-    <text x="24" y="92" font-family="KaTeX_Main" font-size="22" fill="#94a3b8">左侧</text>
-    <text x="24" y="338" font-family="KaTeX_Main" font-size="22" fill="#94a3b8">右侧</text>
-    <CourseArrow :from="pointA" :to="vTip" stroke="#60a5fa" stroke-width="3.4" label="v" :label-dx="0" :label-dy="30" />
-    <text x="112" y="118" font-family="KaTeX_Main" font-size="22" fill="#60a5fa">前进方向</text>
-    <circle :cx="pointA.x" :cy="pointA.y" r="7" fill="#f1f5f9" />
-    <circle :cx="pointB.x" :cy="pointB.y" r="7" fill="#f1f5f9" />
-    <circle :cx="C.x" :cy="C.y" r="7" fill="#f1f5f9" />
-    <text :x="pointA.x - 6" :y="pointA.y - 16" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="#f1f5f9">A</text>
-    <text :x="pointB.x - 6" :y="pointB.y - 16" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="#f1f5f9">B</text>
-    <text :x="C.x - 6" :y="C.y + 38" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="#f1f5f9">C</text>
+    <text x="26" y="36" font-family="KaTeX_Main" font-size="22" fill="var(--c-text-dim)">俯视图：沿前进方向看</text>
+    <text x="24" y="92" font-family="KaTeX_Main" font-size="22" fill="var(--c-text-dim)">左侧</text>
+    <text x="24" y="338" font-family="KaTeX_Main" font-size="22" fill="var(--c-text-dim)">右侧</text>
+    <CourseArrow :from="pointA" :to="vTip" stroke="var(--c-velocity)" stroke-width="3.4" label="v" :label-dx="0" :label-dy="30" />
+    <text x="112" y="118" font-family="KaTeX_Main" font-size="22" fill="var(--c-velocity)">前进方向</text>
+    <circle :cx="pointA.x" :cy="pointA.y" r="7" fill="var(--c-text)" />
+    <circle :cx="pointB.x" :cy="pointB.y" r="7" fill="var(--c-text)" />
+    <circle :cx="C.x" :cy="C.y" r="7" fill="var(--c-text)" />
+    <text :x="pointA.x - 6" :y="pointA.y - 16" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="var(--c-text)">A</text>
+    <text :x="pointB.x - 6" :y="pointB.y - 16" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="var(--c-text)">B</text>
+    <text :x="C.x - 6" :y="C.y + 38" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="var(--c-text)">C</text>
     <g v-if="step >= 1">
-      <path :d="pathAB" fill="none" stroke="#2dd4bf" stroke-width="4" stroke-linecap="round" />
-      <CourseArrow :from="pointA" :to="f1Tip" stroke="#e2a846" stroke-width="3.6" label="合力" :label-dx="34" :label-dy="-10" />
+      <path :d="pathAB" fill="none" stroke="var(--c-physics)" stroke-width="4" stroke-linecap="round" />
+      <CourseArrow :from="pointA" :to="f1Tip" stroke="var(--c-accent)" stroke-width="3.6" label="合力" :label-dx="34" :label-dy="-10" />
     </g>
     <g v-if="step >= 2">
-      <line :x1="pointB.x" :y1="pointB.y" :x2="C.x" :y2="C.y" stroke="#2dd4bf" stroke-width="4" stroke-linecap="round" />
-      <CourseArrow :from="pointB" :to="f2Tip" stroke="#e2a846" stroke-width="3.6" label="合力" :label-dx="14" :label-dy="-18" />
+      <line :x1="pointB.x" :y1="pointB.y" :x2="C.x" :y2="C.y" stroke="var(--c-physics)" stroke-width="4" stroke-linecap="round" />
+      <CourseArrow :from="pointB" :to="f2Tip" stroke="var(--c-accent)" stroke-width="3.6" label="合力" :label-dx="14" :label-dy="-18" />
     </g>
     <g v-if="step >= 3">
-      <path :d="pathCD" fill="none" stroke="#2dd4bf" stroke-width="4" stroke-linecap="round" />
-      <CourseArrow :from="C" :to="f3Tip" stroke="#e2a846" stroke-width="3.6" label="合力" :label-dx="26" :label-dy="-16" />
-      <circle :cx="pointD.x" :cy="pointD.y" r="7" fill="#f1f5f9" />
-      <text :x="pointD.x - 4" :y="pointD.y - 16" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="#f1f5f9">D</text>
+      <path :d="pathCD" fill="none" stroke="var(--c-physics)" stroke-width="4" stroke-linecap="round" />
+      <CourseArrow :from="C" :to="f3Tip" stroke="var(--c-accent)" stroke-width="3.6" label="合力" :label-dx="26" :label-dy="-16" />
+      <circle :cx="pointD.x" :cy="pointD.y" r="7" fill="var(--c-text)" />
+      <text :x="pointD.x - 4" :y="pointD.y - 16" font-family="KaTeX_Math" font-style="italic" font-size="26" fill="var(--c-text)">D</text>
     </g>
   </svg>
 </template>

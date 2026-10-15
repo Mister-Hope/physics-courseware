@@ -100,26 +100,26 @@ const path = SEGS.map(
 
 <template>
   <svg viewBox="0 0 620 420" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <rect x="40" y="96" width="112" height="16" rx="4" fill="rgba(148,163,184,0.2)" stroke="#94a3b8" stroke-width="2" />
-    <text x="44" y="86" font-family="KaTeX_Main" font-size="24" fill="#94a3b8">跳台</text>
-    <line x1="60" :y1="waterY" x2="606" :y2="waterY" stroke="#60a5fa" stroke-width="2.4" opacity="0.55" />
-    <text x="602" y="374" font-family="KaTeX_Main" font-size="24" fill="#94a3b8" text-anchor="end">水面</text>
-    <path :d="path" fill="none" stroke="#2dd4bf" stroke-width="3.6" stroke-dasharray="11 8" />
-    <CourseArrow :from="entry" :to="vTip" stroke="#60a5fa" stroke-width="3.6" label="v" :label-dx="22" :label-dy="-6" />
+    <rect x="40" y="96" width="112" height="16" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke="var(--c-text-dim)" stroke-width="2" />
+    <text x="44" y="86" font-family="KaTeX_Main" font-size="24" fill="var(--c-text-dim)">跳台</text>
+    <line x1="60" :y1="waterY" x2="606" :y2="waterY" stroke="var(--c-velocity)" stroke-width="2.4" opacity="0.55" />
+    <text x="602" y="374" font-family="KaTeX_Main" font-size="24" fill="var(--c-text-dim)" text-anchor="end">水面</text>
+    <path :d="path" fill="none" stroke="var(--c-physics)" stroke-width="3.6" stroke-dasharray="11 8" />
+    <CourseArrow :from="entry" :to="vTip" stroke="var(--c-velocity)" stroke-width="3.6" label="v" :label-dx="22" :label-dy="-6" />
     <g v-for="m in marks" :key="m.order">
-      <circle :cx="m.point.x" :cy="m.point.y" r="6" fill="#f1f5f9" />
-      <text :x="m.label.x" :y="m.label.y" font-family="KaTeX_Main" font-size="24" fill="#94a3b8" text-anchor="middle">{{ m.order }}</text>
+      <circle :cx="m.point.x" :cy="m.point.y" r="6" fill="var(--c-text)" />
+      <text :x="m.label.x" :y="m.label.y" font-family="KaTeX_Main" font-size="24" fill="var(--c-text-dim)" text-anchor="middle">{{ m.order }}</text>
     </g>
     <g v-if="step >= 1">
       <g v-for="m in sameMarks" :key="`same-${m.order}`">
-        <CourseArrow :from="m.point" :to="m.tip" stroke="#60a5fa" stroke-width="3.2" />
-        <text :x="m.point.x + 26" :y="m.point.y - 34" font-family="KaTeX_Main" font-size="24" fill="#60a5fa">与 v 同向</text>
+        <CourseArrow :from="m.point" :to="m.tip" stroke="var(--c-velocity)" stroke-width="3.2" />
+        <text :x="m.point.x + 26" :y="m.point.y - 34" font-family="KaTeX_Main" font-size="24" fill="var(--c-velocity)">与 v 同向</text>
       </g>
     </g>
     <g v-if="step >= 2">
       <g v-for="m in oppositeMarks" :key="`opp-${m.order}`">
-        <CourseArrow :from="m.point" :to="m.tip" stroke="#e2a846" stroke-width="3.2" />
-        <text :x="m.point.x - 108" :y="m.point.y - 16" font-family="KaTeX_Main" font-size="24" fill="#e2a846">与 v 反向</text>
+        <CourseArrow :from="m.point" :to="m.tip" stroke="var(--c-accent)" stroke-width="3.2" />
+        <text :x="m.point.x - 108" :y="m.point.y - 16" font-family="KaTeX_Main" font-size="24" fill="var(--c-accent)">与 v 反向</text>
       </g>
     </g>
   </svg>

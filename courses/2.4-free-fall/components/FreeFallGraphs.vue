@@ -565,7 +565,7 @@ const current = computed<ChartSpec>(() => {
 
 <template>
   <svg
-    class="ffg"
+    class="fig-canvas"
     :viewBox="`0 0 ${VIEW.w} ${VIEW.h}`"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
@@ -582,10 +582,10 @@ const current = computed<ChartSpec>(() => {
         markerUnits="userSpaceOnUse"
         viewBox="0 0 12 12"
       >
-        <path d="M 0 0 L 12 6 L 0 12 z" fill="#64748b" />
+        <path d="M 0 0 L 12 6 L 0 12 z" fill="var(--c-neutral-500)" />
       </marker>
     </defs>
-    <g stroke="#94a3b8" stroke-width="1" opacity="0.13">
+    <g stroke="var(--c-text-dim)" stroke-width="1" opacity="0.13">
       <line
         v-for="tick in current.xTicks"
         :key="`gx${tick.value}`"
@@ -608,7 +608,7 @@ const current = computed<ChartSpec>(() => {
       :y1="ORIGIN_Y"
       :x2="xShaft.x"
       :y2="xShaft.y"
-      stroke="#64748b"
+      stroke="var(--c-neutral-500)"
       stroke-width="2.4"
       :marker-end="`url(#${arrowId})`"
     />
@@ -617,11 +617,11 @@ const current = computed<ChartSpec>(() => {
       :y1="ORIGIN_Y"
       :x2="yShaft.x"
       :y2="yShaft.y"
-      stroke="#64748b"
+      stroke="var(--c-neutral-500)"
       stroke-width="2.4"
       :marker-end="`url(#${arrowId})`"
     />
-    <g stroke="#64748b" stroke-width="1.7">
+    <g stroke="var(--c-neutral-500)" stroke-width="1.7">
       <line
         v-for="tick in current.xTicks"
         :key="`tx${tick.value}`"
@@ -639,7 +639,7 @@ const current = computed<ChartSpec>(() => {
         :y2="tick.pos"
       />
     </g>
-    <g :font-size="TICK_SIZE" font-family="KaTeX_Main" fill="#94a3b8">
+    <g :font-size="TICK_SIZE" font-family="KaTeX_Main" fill="var(--c-text-dim)">
       <text
         v-for="tick in current.xTicks"
         :key="`nx${tick.value}`"
@@ -666,7 +666,7 @@ const current = computed<ChartSpec>(() => {
       :font-size="ORIGIN_SIZE"
       font-family="KaTeX_Math"
       font-style="italic"
-      fill="#94a3b8"
+      fill="var(--c-text-dim)"
     >
       O
     </text>
@@ -675,7 +675,7 @@ const current = computed<ChartSpec>(() => {
       :y="ORIGIN_Y + 42"
       text-anchor="end"
       :font-size="AXIS_LETTER"
-      fill="#94a3b8"
+      fill="var(--c-text-dim)"
     >
       <tspan
         v-for="(part, index) in current.xLabel"
@@ -689,7 +689,7 @@ const current = computed<ChartSpec>(() => {
         {{ part.text }}
       </tspan>
     </text>
-    <text :x="ORIGIN_X" y="28" text-anchor="middle" :font-size="AXIS_LETTER" fill="#94a3b8">
+    <text :x="ORIGIN_X" y="28" text-anchor="middle" :font-size="AXIS_LETTER" fill="var(--c-text-dim)">
       <tspan
         v-for="(part, index) in current.yLabel"
         :key="index"
@@ -723,7 +723,7 @@ const current = computed<ChartSpec>(() => {
     <text
       v-for="(mark, index) in current.marks"
       :key="`mark${index}`"
-      :class="{ 'ffg-halo': mark.halo !== false }"
+      :class="{ 'fig-halo': mark.halo !== false }"
       :x="mark.x"
       :y="mark.y"
       :text-anchor="mark.anchor"
@@ -747,7 +747,7 @@ const current = computed<ChartSpec>(() => {
 
 <style scoped>
 /* 一大张图：占满所在栏（正文栏约 883px），到 860px 就封顶 ⇒ 缩放 ≈ 1，字号按屏幕 px 给 */
-.ffg {
+.fig-canvas {
   display: block;
 
   width: 100%;
@@ -758,13 +758,13 @@ const current = computed<ChartSpec>(() => {
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 }
 
 /* 标注压在曲线/虚线上时加描边光晕，保证读得清（"若 v 与 h 成正比"不加） */
-.ffg-halo {
+.fig-halo {
   paint-order: stroke;
-  stroke: #0f1425;
+  stroke: var(--c-bg-soft);
   stroke-width: 4;
 }
 </style>

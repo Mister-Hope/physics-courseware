@@ -1,22 +1,21 @@
 /* ═══════════════════════════════════════════════
    质点与参考系·时间与位移 — 课程特有样式
-   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
-   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   通用设计系统与共享原子在 workspace/shared/styles/（common.css + layout.css + atoms.css）
+   页面外壳用共享 layout: base-flex；色值一律 var(--c-*)、圆角一律 var(--radius-*)、
+   字号一律共享阶梯 .text-* / .mini-note / .ask-lead
    ═══════════════════════════════════════════════ */
 
-/* ── 本课特有的提问行：大图标 + 一段话，两段式排布 ──
-   通用 .ask（layout.css）是纯文本行；本课标记固定为「<mdi-xxx /> + <span>」，
-   必须 flex 排布，并清掉通用规则给行内图标留的右外边距（改用 gap 控间距）。 */
-.ask {
+/* ── 共享 .ask 的两段式变体：本课提问行固定为「<mdi-xxx /> + <span>」两段式，
+   必须 flex 排布（纯文本行会碎成两行），并清掉共享规则给行内图标留的右外边距、改用 gap 控间距。
+   ⛔ 不重写共享选择器本体（style-guide §8）：只新增变体类，与 .split-wide 的 --cols 变体同一思路；
+   字号走共享放大版 .ask-lead（提问是内容少的页面上的主体，整体放大一档）。 ── */
+.ask.ask-row {
   display: flex;
   gap: 0.6rem;
   align-items: center;
-
-  font-weight: 600;
-  font-size: 1.2rem;
 }
 
-.ask > svg {
+.ask.ask-row > svg {
   flex-shrink: 0;
   margin-right: 0;
 }
@@ -24,7 +23,7 @@
 /* ── p6「什么时候能把它看成点」：两个例块均分整页高度，不再下半页留白。
    ⛔ 必须显式 width:100%：flex 列容器里横向 auto 外边距会取消 stretch，
    两行会各自按内容宽度居中、左边缘错开（实测 64px），显式定宽才能左右对齐。 ── */
-.fill-row {
+.mp-case {
   display: flex;
   flex: 1 1 0;
   flex-direction: column;
@@ -33,23 +32,4 @@
   width: 100%;
   max-width: 46rem;
   margin-inline: auto;
-}
-
-/* ── 题目图容器：图占满所在栏（旗帜题）── */
-.figure-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-}
-
-.figure-cell svg {
-  display: block;
-
-  width: 100%;
-  height: auto;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.1rem;
-
-  background: rgb(15 20 37 / 40%);
 }

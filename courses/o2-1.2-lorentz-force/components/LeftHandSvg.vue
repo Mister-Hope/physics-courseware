@@ -135,7 +135,7 @@ const { palm = true, highlightThumb = false } = defineProps({
       v-if="highlightThumb"
       d="M 148 142 C 134 140, 116 140, 96 146 C 84 152, 84 180, 96 186 C 108 190, 126 192, 148 190"
       fill="none"
-      stroke="#2dd4bf"
+      stroke="var(--c-physics)"
       stroke-width="4"
       stroke-linecap="round"
       stroke-linejoin="round"

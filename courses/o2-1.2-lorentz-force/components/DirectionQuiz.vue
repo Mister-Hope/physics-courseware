@@ -135,7 +135,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
        图形因此能放大：网格铺满正文区、两行等分（4 个图能拿到的最大尺寸）。
        尺寸走内联样式——UnoCSS 的任意值类在运行中的 dev server 上不一定重新生成。 -->
   <div
-    class="grid w-full grid-cols-2 gap-2 text-slate-200 select-none"
+    class="grid w-full grid-cols-2 gap-2 text-tone-200 select-none"
     style="grid-template-rows: repeat(2, minmax(0, 1fr)); height: 100%"
   >
     <div v-for="(s, idx) in scenarios" :key="s.key" class="flex items-center justify-center">
@@ -159,10 +159,10 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
                     :cy="row"
                     r="8"
                     fill="none"
-                    stroke="rgba(226,168,70,0.75)"
+                    stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
                     stroke-width="1.4"
                   />
-                  <circle :cx="col" :cy="row" r="2.4" fill="#e2a846" />
+                  <circle :cx="col" :cy="row" r="2.4" fill="var(--c-accent)" />
                 </template>
                 <template v-else>
                   <!-- ⊗ 穿入纸面 -->
@@ -171,7 +171,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
                     :cy="row"
                     r="8"
                     fill="none"
-                    stroke="rgba(226,168,70,0.75)"
+                    stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
                     stroke-width="1.4"
                   />
                   <line
@@ -179,7 +179,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
                     :y1="row - 4.5"
                     :x2="col + 4.5"
                     :y2="row + 4.5"
-                    stroke="rgba(226,168,70,0.9)"
+                    stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
                     stroke-width="1.4"
                   />
                   <line
@@ -187,7 +187,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
                     :y1="row - 4.5"
                     :x2="col - 4.5"
                     :y2="row + 4.5"
-                    stroke="rgba(226,168,70,0.9)"
+                    stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
                     stroke-width="1.4"
                   />
                 </template>
@@ -201,14 +201,14 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
               x="0"
               y="0"
               font-size="16"
-              fill="#e2a846"
+              fill="var(--c-accent)"
               font-family="KaTeX_Math, 'Times New Roman', serif"
               font-style="italic"
               font-weight="bold"
             >
               B
             </text>
-            <text x="15" y="-1" font-size="12" fill="#e2a846">
+            <text x="15" y="-1" font-size="12" fill="var(--c-accent)">
               {{ s.Bz === 1 ? "⊙" : "⊗" }}
             </text>
           </g>
@@ -217,7 +217,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
           <CourseArrow
             :from="{ x: PX, y: PY }"
             :to="{ x: PX + s.vx * ARROW_LEN, y: PY - s.vy * ARROW_LEN }"
-            stroke="#38bdf8"
+            stroke="var(--c-physics-light)"
             :stroke-width="3.2"
           />
           <!-- 速度标注 v -->
@@ -228,7 +228,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
             font-size="18"
             font-style="italic"
             font-family="KaTeX_Math, 'Times New Roman', serif"
-            fill="#38bdf8"
+            fill="var(--c-physics-light)"
             font-weight="bold"
           >
             v
@@ -271,7 +271,7 @@ const wordAt = (a: { fx: number; fy: number }): { x: number; y: number; anchor: 
               :y="PY + (s.vy > 0 ? 32 : -18)"
               text-anchor="middle"
               font-size="14"
-              fill="#94a3b8"
+              fill="var(--c-text-dim)"
             >
               <tspan
                 font-family="KaTeX_Math, 'Times New Roman', serif"

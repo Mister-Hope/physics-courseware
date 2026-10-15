@@ -1,16 +1,16 @@
 <!-- 能源与社会发展页：人类利用能源的三个时期 + 正在过渡的多能源结构时期 -->
 <template>
   <svg viewBox="0 0 660 176" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <line x1="24" y1="88" x2="624" y2="88" stroke="rgba(148,163,184,0.4)" stroke-width="2" />
-    <CourseArrow :from="{ x: 600, y: 88 }" :to="{ x: 648, y: 88 }" stroke="rgba(148,163,184,0.6)" :stroke-width="2" />
+    <line x1="24" y1="88" x2="624" y2="88" stroke="color-mix(in srgb, var(--c-text-dim) 40%, transparent)" stroke-width="2" />
+    <CourseArrow :from="{ x: 600, y: 88 }" :to="{ x: 648, y: 88 }" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" :stroke-width="2" />
     <g v-for="(era, i) in eras" :key="era.name">
-      <circle :cx="era.x" cy="88" r="6.5" fill="#e2a846" :opacity="i < 3 ? 1 : 0" />
-      <circle :cx="era.x" cy="88" r="6.5" fill="none" stroke="#e2a846" stroke-width="2.2" />
-      <text :x="era.x" y="66" text-anchor="middle" font-size="14" fill="#f1f5f9">{{ era.name }}</text>
-      <text :x="era.x" y="114" text-anchor="middle" font-size="12" fill="#94a3b8">{{ era.line1 }}</text>
-      <text :x="era.x" y="136" text-anchor="middle" font-size="12" fill="#94a3b8">{{ era.line2 }}</text>
+      <circle :cx="era.x" cy="88" r="6.5" fill="var(--c-accent)" :opacity="i < 3 ? 1 : 0" />
+      <circle :cx="era.x" cy="88" r="6.5" fill="none" stroke="var(--c-accent)" stroke-width="2.2" />
+      <text :x="era.x" y="66" text-anchor="middle" font-size="14" fill="var(--c-text)">{{ era.name }}</text>
+      <text :x="era.x" y="114" text-anchor="middle" font-size="12" fill="var(--c-text-dim)">{{ era.line1 }}</text>
+      <text :x="era.x" y="136" text-anchor="middle" font-size="12" fill="var(--c-text-dim)">{{ era.line2 }}</text>
     </g>
-    <text x="648" y="168" text-anchor="end" font-size="12" fill="#94a3b8">向多能源结构的转换还远没有完成</text>
+    <text x="648" y="168" text-anchor="end" font-size="12" fill="var(--c-text-dim)">向多能源结构的转换还远没有完成</text>
   </svg>
 </template>
 

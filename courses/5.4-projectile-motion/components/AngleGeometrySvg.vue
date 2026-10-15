@@ -37,33 +37,33 @@ const tick2X = (mPt.x + nPt.x) / 2;
 <template>
   <div class="angle-geometry">
     <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="速度偏角与位移偏角的几何关系图">
-      <CourseArrow :from="origin" :to="{ x: 600, y: 70 }" stroke="rgba(148,163,184,0.6)" :stroke-width="1.8" />
-      <CourseArrow :from="origin" :to="{ x: 90, y: 352 }" stroke="rgba(148,163,184,0.6)" :stroke-width="1.8" />
-      <text x="606" y="80" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#94a3b8">x</text>
-      <text x="78" y="350" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#94a3b8">y</text>
-      <line :x1="origin.x" :y1="origin.y" :x2="pointP.x" :y2="pointP.y" stroke="#2dd4bf" stroke-width="2" stroke-dasharray="8 6" opacity="0.85" />
-      <path :d="trail" fill="none" stroke="#e2a846" stroke-width="2.6" />
-      <path :d="alphaArc" fill="none" stroke="#2dd4bf" stroke-width="1.8" />
-      <line :x1="360" :y1="pointP.y" :x2="584" :y2="pointP.y" stroke="rgba(148,163,184,0.45)" stroke-width="1.4" stroke-dasharray="7 6" />
-      <CourseArrow :from="pointP" :to="vTip" stroke="#f87171" :stroke-width="3.2" />
-      <path :d="thetaArc" fill="none" stroke="#f87171" stroke-width="1.8" />
-      <circle :cx="pointP.x" :cy="pointP.y" r="4.5" fill="#e2e8f0" />
-      <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="#e2e8f0" />
-      <text :x="pointP.x + 14" :y="pointP.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">P</text>
-      <text :x="origin.x - 8" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">O</text>
-      <text x="248" y="132" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#2dd4bf">α</text>
-      <text x="390" y="212" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#2dd4bf">s</text>
-      <text :x="vTip.x + 10" :y="vTip.y - 8" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#f87171">v</text>
-      <text x="510" y="345" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171">θ</text>
+      <CourseArrow :from="origin" :to="{ x: 600, y: 70 }" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" :stroke-width="1.8" />
+      <CourseArrow :from="origin" :to="{ x: 90, y: 352 }" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" :stroke-width="1.8" />
+      <text x="606" y="80" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text-dim)">x</text>
+      <text x="78" y="350" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text-dim)">y</text>
+      <line :x1="origin.x" :y1="origin.y" :x2="pointP.x" :y2="pointP.y" stroke="var(--c-physics)" stroke-width="2" stroke-dasharray="8 6" opacity="0.85" />
+      <path :d="trail" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+      <path :d="alphaArc" fill="none" stroke="var(--c-physics)" stroke-width="1.8" />
+      <line :x1="360" :y1="pointP.y" :x2="584" :y2="pointP.y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.4" stroke-dasharray="7 6" />
+      <CourseArrow :from="pointP" :to="vTip" stroke="var(--c-force)" :stroke-width="3.2" />
+      <path :d="thetaArc" fill="none" stroke="var(--c-force)" stroke-width="1.8" />
+      <circle :cx="pointP.x" :cy="pointP.y" r="4.5" fill="var(--c-neutral-200)" />
+      <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-neutral-200)" />
+      <text :x="pointP.x + 14" :y="pointP.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">P</text>
+      <text :x="origin.x - 8" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
+      <text x="248" y="132" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-physics)">α</text>
+      <text x="390" y="212" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-physics)">s</text>
+      <text :x="vTip.x + 10" :y="vTip.y - 8" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">v</text>
+      <text x="510" y="345" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">θ</text>
       <g v-if="showReverse">
-        <line :x1="pointP.x" :y1="pointP.y" :x2="mPt.x" :y2="mPt.y" stroke="rgba(148,163,184,0.55)" stroke-width="1.6" stroke-dasharray="7 6" />
-        <line :x1="pointP.x" :y1="pointP.y" :x2="nPt.x" :y2="nPt.y" stroke="rgba(148,163,184,0.55)" stroke-width="1.6" stroke-dasharray="7 6" />
-        <line :x1="tick1X" y1="58" :x2="tick1X" y2="82" stroke="#2dd4bf" stroke-width="2.2" />
-        <line :x1="tick2X" y1="58" :x2="tick2X" y2="82" stroke="#2dd4bf" stroke-width="2.2" />
-        <circle :cx="mPt.x" :cy="mPt.y" r="3.4" fill="#e2e8f0" />
-        <circle :cx="nPt.x" :cy="nPt.y" r="3.4" fill="#e2e8f0" />
-        <text :x="mPt.x" y="52" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#cbd5e1">M</text>
-        <text :x="nPt.x" y="52" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#cbd5e1">N</text>
+        <line :x1="pointP.x" :y1="pointP.y" :x2="mPt.x" :y2="mPt.y" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+        <line :x1="pointP.x" :y1="pointP.y" :x2="nPt.x" :y2="nPt.y" stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+        <line :x1="tick1X" y1="58" :x2="tick1X" y2="82" stroke="var(--c-physics)" stroke-width="2.2" />
+        <line :x1="tick2X" y1="58" :x2="tick2X" y2="82" stroke="var(--c-physics)" stroke-width="2.2" />
+        <circle :cx="mPt.x" :cy="mPt.y" r="3.4" fill="var(--c-neutral-200)" />
+        <circle :cx="nPt.x" :cy="nPt.y" r="3.4" fill="var(--c-neutral-200)" />
+        <text :x="mPt.x" y="52" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-neutral-300)">M</text>
+        <text :x="nPt.x" y="52" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-neutral-300)">N</text>
       </g>
     </svg>
   </div>

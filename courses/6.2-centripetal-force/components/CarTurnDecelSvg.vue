@@ -16,38 +16,38 @@ const F = { x: 284, y: 210 };
 
 <template>
   <svg viewBox="90 110 450 240" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 150 270 A 220 220 0 0 0 467 155" fill="none" stroke="#64748b" stroke-width="3" stroke-linecap="round" />
-    <text x="140" y="294" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#94a3b8" text-anchor="middle">M</text>
-    <text x="482" y="150" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#94a3b8" text-anchor="start">N</text>
+    <path d="M 150 270 A 220 220 0 0 0 467 155" fill="none" stroke="var(--c-neutral-500)" stroke-width="3" stroke-linecap="round" />
+    <text x="140" y="294" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)" text-anchor="middle">M</text>
+    <text x="482" y="150" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)" text-anchor="start">N</text>
     <g transform="translate(370 270) rotate(-30)">
-      <rect x="-22" y="-11" width="44" height="22" rx="6" fill="rgba(226,168,70,0.28)" stroke="#e2a846" stroke-width="1.8" />
+      <rect x="-22" y="-11" width="44" height="22" rx="6" fill="color-mix(in srgb, var(--c-accent) 28%, transparent)" stroke="var(--c-accent)" stroke-width="1.8" />
     </g>
-    <CourseArrow :from="P" :to="V" stroke="#2dd4bf" :stroke-width="3" />
+    <CourseArrow :from="P" :to="V" stroke="var(--c-physics)" :stroke-width="3" />
     <text
       :x="V.x + 6"
       :y="V.y + 20"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="19"
-      fill="#2dd4bf"
+      fill="var(--c-physics)"
       text-anchor="start"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3.5"
       paint-order="stroke"
     >
       v
     </text>
     <g :style="{ opacity: showCorrect ? 0.55 : 1 }">
-      <CourseArrow :from="P" :to="CAND" stroke="#94a3b8" :stroke-width="3" stroke-dasharray="8 6" />
+      <CourseArrow :from="P" :to="CAND" stroke="var(--c-text-dim)" :stroke-width="3" stroke-dasharray="8 6" />
       <text
         :x="CAND.x - 10"
         :y="CAND.y + 6"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="19"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
         text-anchor="end"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -55,22 +55,22 @@ const F = { x: 284, y: 210 };
       </text>
     </g>
     <g v-if="showCorrect">
-      <CourseArrow :from="P" :to="F" stroke="#e2a846" :stroke-width="3.4" />
+      <CourseArrow :from="P" :to="F" stroke="var(--c-accent)" :stroke-width="3.4" />
       <text
         :x="F.x - 8"
         :y="F.y - 4"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="19"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="end"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
         F
       </text>
-      <g stroke="#f87171" stroke-width="3.4" stroke-linecap="round">
+      <g stroke="var(--c-force)" stroke-width="3.4" stroke-linecap="round">
         <line x1="338" y1="221" x2="354" y2="237" />
         <line x1="338" y1="237" x2="354" y2="221" />
       </g>

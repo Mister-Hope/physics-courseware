@@ -114,13 +114,13 @@ const aria = computed(
       role="img"
       :aria-label="aria"
     >
-      <line x1="16" :y1="BASE.y" x2="372" :y2="BASE.y" stroke="#475569" stroke-width="2" />
+      <line x1="16" :y1="BASE.y" x2="372" :y2="BASE.y" stroke="var(--c-neutral-600)" stroke-width="2" />
       <line
         :x1="BASE.x"
         :y1="BASE.y"
         :x2="topPoint.x"
         :y2="topPoint.y"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2.2"
       />
       <line
@@ -128,7 +128,7 @@ const aria = computed(
         :y1="BASE.y"
         :x2="topPoint.x"
         :y2="topPoint.y"
-        stroke="rgba(226,168,70,0.3)"
+        stroke="color-mix(in srgb, var(--c-accent) 30%, transparent)"
         stroke-width="7"
       />
       <line
@@ -136,14 +136,14 @@ const aria = computed(
         :y1="startTick.from.y"
         :x2="startTick.to.x"
         :y2="startTick.to.y"
-        stroke="rgba(148,163,184,0.6)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
         stroke-width="1.4"
       />
-      <path :d="arcPath" fill="none" stroke="#94a3b8" stroke-width="1.6" />
+      <path :d="arcPath" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
       <text
         :x="thetaLabelAt.x"
         :y="thetaLabelAt.y"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
         font-size="21"
         font-family="KaTeX_Math"
         font-style="italic"
@@ -154,19 +154,19 @@ const aria = computed(
       <CourseArrow
         :from="{ x: dimMid.x, y: dimMid.y }"
         :to="{ x: dimTo.x, y: dimTo.y }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="2.2"
       />
       <CourseArrow
         :from="{ x: dimMid.x, y: dimMid.y }"
         :to="{ x: dimFrom.x, y: dimFrom.y }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="2.2"
       />
       <text
         :x="xLabelAt.x"
         :y="xLabelAt.y"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         font-size="21"
         font-family="KaTeX_Math"
         font-style="italic"
@@ -182,7 +182,7 @@ const aria = computed(
         :fill="ball.fill"
         class="gi-ball-dot"
       />
-      <text v-if="angle >= 90" x="120" y="52" fill="#2dd4bf" font-size="16" class="gi-halo">
+      <text v-if="angle >= 90" x="120" y="52" fill="var(--c-physics)" font-size="16" class="gi-halo">
         斜面立成竖直 ⇒ 自由落体
       </text>
     </svg>
@@ -228,13 +228,13 @@ const aria = computed(
 /* 图内文字压在斜面/地面/尺寸线上时加描边光晕，保证读得清 */
 .gi-halo {
   paint-order: stroke;
-  stroke: #0f1425;
+  stroke: var(--c-bg-soft);
   stroke-width: 3.4px;
 }
 
 /* 球加一点高光，看着是个"球"而不是一个圆点 */
 .gi-ball-dot {
-  stroke: rgb(15 20 37 / 55%);
+  stroke: color-mix(in srgb, var(--c-bg-soft) 55%, transparent);
   stroke-width: 1.2;
 }
 
@@ -281,7 +281,7 @@ const aria = computed(
   min-width: 0;
   padding: 0.22rem 0.2rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.6rem;
+  border-radius: var(--radius-sm);
 
   background: var(--c-surface);
   color: var(--c-text-dim);

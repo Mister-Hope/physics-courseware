@@ -130,37 +130,37 @@ const visibleLowerCharges = computed(() =>
 <template>
   <div class="w-full mx-auto">
     <div
-      class="bg-slate-950 border border-slate-900 p-3 rounded-2xl shadow-2xl text-slate-100 flex flex-col gap-6 select-none relative overflow-hidden"
+      class="cap-frame bg-slate-950 border p-3 rounded-2xl shadow-2xl flex flex-col gap-6 select-none relative overflow-hidden"
     >
       <!-- Premium Tech Ambient Lights -->
       <div
-        class="absolute -top-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"
+        class="absolute -top-40 -left-40 w-80 h-80 cap-glow-blue rounded-full blur-[100px] pointer-events-none"
       ></div>
       <div
-        class="absolute -bottom-40 -right-40 w-80 h-80 bg-amber-500/5 rounded-full blur-[100px] pointer-events-none"
+        class="absolute -bottom-40 -right-40 w-80 h-80 cap-glow-amber rounded-full blur-[100px] pointer-events-none"
       ></div>
 
       <!-- Upper Visual Interactive Section -->
       <div class="relative z-10">
         <!-- SVG Board Graphic (Full width for enhanced projector readability) -->
         <div
-          class="w-full bg-slate-900 shadow-2xl rounded-2xl border border-slate-800 p-2 overflow-hidden flex flex-col justify-center relative"
+          class="cap-board w-full shadow-2xl rounded-2xl border border-surface p-2 overflow-hidden flex flex-col justify-center relative"
           style="max-height: 220px"
         >
           <!-- HUD 读数面板 -->
           <div
-            class="absolute top-3 right-3 bg-slate-950/85 border border-slate-800 rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 shadow-xl backdrop-blur z-20 font-sans"
+            class="absolute top-3 right-3 bg-slate-950/85 border border-surface rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 shadow-xl backdrop-blur z-20 font-sans"
           >
             <div class="flex items-baseline gap-1">
-              <span class="text-sm text-amber-400 font-extrabold">C</span>
+              <span class="text-sm cap-accent-light font-extrabold">C</span>
               <span class="font-mono text-sm font-black text-amber-300">{{ C.toFixed(2) }}</span>
-              <span class="text-sm text-slate-500 font-semibold">pF</span>
+              <span class="text-sm text-faint font-semibold">pF</span>
             </div>
-            <div class="w-px h-4 bg-slate-700"></div>
+            <div class="w-px h-4 cap-hud-divider"></div>
             <div class="flex items-baseline gap-1">
               <span class="text-sm text-rose-400 font-extrabold">Q</span>
               <span class="font-mono text-sm font-black text-rose-300">{{ Q.toFixed(1) }}</span>
-              <span class="text-sm text-slate-500 font-semibold">pC</span>
+              <span class="text-sm text-faint font-semibold">pC</span>
             </div>
           </div>
 
@@ -175,7 +175,7 @@ const visibleLowerCharges = computed(() =>
                 y1="0"
                 :x2="x"
                 y2="280"
-                stroke="#475569"
+                stroke="var(--c-neutral-600)"
                 stroke-width="1"
                 stroke-dasharray="2,4"
               />
@@ -186,7 +186,7 @@ const visibleLowerCharges = computed(() =>
                 :y1="y"
                 x2="600"
                 :y2="y"
-                stroke="#475569"
+                stroke="var(--c-neutral-600)"
                 stroke-width="1"
                 stroke-dasharray="2,4"
               />
@@ -195,7 +195,7 @@ const visibleLowerCharges = computed(() =>
             <!-- CONNECTOR WIRES (Circuits structure) -->
             <!-- Wire 1: Upper plate wire going straight out to the top screen, connects to center of upper plate -->
             <line
-              stroke="#475569"
+              stroke="var(--c-neutral-600)"
               stroke-width="2.5"
               :x1="upperWireX"
               y1="0"
@@ -207,7 +207,7 @@ const visibleLowerCharges = computed(() =>
 
             <!-- Wire 2: Lower plate wire going straight out to the bottom screen, connects to center of lower plate -->
             <line
-              stroke="#475569"
+              stroke="var(--c-neutral-600)"
               stroke-width="2.5"
               :x1="lowerWireX"
               y1="280"
@@ -236,7 +236,7 @@ const visibleLowerCharges = computed(() =>
               <text
                 :x="upperPlateCenterX"
                 :y="midY + 4"
-                class="svg-text-bold tracking-wider font-extrabold"
+                class="plate-text-bold tracking-wider font-extrabold"
                 fill="#ffffff"
                 font-size="12"
                 font-weight="900"
@@ -279,8 +279,8 @@ const visibleLowerCharges = computed(() =>
                 :key="'pos-up-' + index"
                 :x="px"
                 :y="upperPlateY + 12"
-                class="svg-text-sign font-extrabold select-none"
-                fill="#f87171"
+                class="plate-text-sign font-extrabold select-none"
+                fill="var(--c-force)"
                 style="font-size: 13px"
                 text-anchor="middle"
                 dominant-baseline="central"
@@ -294,8 +294,8 @@ const visibleLowerCharges = computed(() =>
                 :key="'pos-low-' + index"
                 :x="px"
                 :y="lowerPlateY - 12"
-                class="svg-text-sign font-extrabold select-none"
-                fill="#60a5fa"
+                class="plate-text-sign font-extrabold select-none"
+                fill="var(--c-velocity)"
                 style="font-size: 13px"
                 text-anchor="middle"
                 dominant-baseline="central"
@@ -337,7 +337,7 @@ const visibleLowerCharges = computed(() =>
                 width="160"
                 height="32"
                 rx="6"
-                fill="#0f172a"
+                fill="var(--c-neutral-900)"
                 stroke="#fda4af"
                 stroke-width="1.5"
               />
@@ -361,7 +361,7 @@ const visibleLowerCharges = computed(() =>
                 :y1="upperPlateY"
                 x2="0"
                 :y2="lowerPlateY"
-                stroke="#93c5fd"
+                stroke="var(--c-velocity-light)"
                 stroke-width="1.5"
                 stroke-dasharray="2,2"
                 class=""
@@ -369,20 +369,20 @@ const visibleLowerCharges = computed(() =>
               <!-- Arrow head top -->
               <polygon
                 :points="`0,${upperPlateY} -3,${upperPlateY + 6} 3,${upperPlateY + 6}`"
-                fill="#93c5fd"
+                fill="var(--c-velocity-light)"
                 class=""
               />
               <!-- Arrow head bottom -->
               <polygon
                 :points="`0,${lowerPlateY} -3,${lowerPlateY - 6} 3,${lowerPlateY - 6}`"
-                fill="#93c5fd"
+                fill="var(--c-velocity-light)"
                 class=""
               />
               <!-- Annotation label -->
               <text
                 x="12"
                 :y="midY + 5"
-                fill="#93c5fd"
+                fill="var(--c-velocity-light)"
                 font-size="22"
                 font-weight="900"
                 text-anchor="start"
@@ -396,23 +396,29 @@ const visibleLowerCharges = computed(() =>
 
       <!-- 极性图例 -->
       <div class="flex items-center justify-center gap-6 mb-3">
-        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80 text-slate-300"
-          ><span class="inline-block w-3.5 h-3.5 rounded-sm" style="background: #f87171"></span>
+        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80 text-tone-300"
+          ><span
+            class="inline-block w-3.5 h-3.5 rounded-sm"
+            style="background: var(--c-danger)"
+          ></span>
           正电（红）</span
         >
-        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80 text-slate-300"
-          ><span class="inline-block w-3.5 h-3.5 rounded-sm" style="background: #60a5fa"></span>
+        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80 text-tone-300"
+          ><span
+            class="inline-block w-3.5 h-3.5 rounded-sm"
+            style="background: var(--c-velocity)"
+          ></span>
           负电（蓝）</span
         >
       </div>
 
       <!-- Controls Slider Panels Frame -->
-      <div class="bg-indigo-950/10 border border-slate-900 rounded-xl p-2 relative">
+      <div class="bg-indigo-950/10 border cap-controls rounded-xl p-2 relative">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
           <!-- Parameter S: Area -->
           <div class="flex flex-col gap-0.5 w-full">
             <div class="flex justify-between items-baseline gap-1">
-              <span class="text-xs text-slate-300 font-extrabold">正对面积 S</span>
+              <span class="text-xs text-tone-300 font-extrabold">正对面积 S</span>
               <span class="text-rose-400 text-sm font-extrabold shrink-0">{{ S }} cm²</span>
             </div>
             <input
@@ -421,15 +427,15 @@ const visibleLowerCharges = computed(() =>
               max="500"
               step="50"
               v-model.number="S"
-              class="w-full accent-amber-500 h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
+              class="w-full cap-range-amber h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
             />
           </div>
 
           <!-- Parameter d: Distance -->
           <div class="flex flex-col gap-0.5 w-full">
             <div class="flex justify-between items-baseline gap-1">
-              <span class="text-xs text-slate-300 font-extrabold">极板间距离 d</span>
-              <span class="text-blue-400 text-sm font-extrabold shrink-0"
+              <span class="text-xs text-tone-300 font-extrabold">极板间距离 d</span>
+              <span class="text-velocity text-sm font-extrabold shrink-0"
                 >{{ d.toFixed(1) }} mm</span
               >
             </div>
@@ -439,15 +445,15 @@ const visibleLowerCharges = computed(() =>
               max="8.0"
               step="0.5"
               v-model.number="d"
-              class="w-full accent-blue-500 h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
+              class="w-full cap-range-blue h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
             />
           </div>
 
           <!-- Parameter U: Battery Voltage -->
           <div class="flex flex-col gap-0.5 w-full">
             <div class="flex justify-between items-baseline gap-1">
-              <span class="text-xs text-slate-300 font-extrabold">外加电压 U</span>
-              <span class="text-amber-400 text-sm font-extrabold shrink-0"
+              <span class="text-xs text-tone-300 font-extrabold">外加电压 U</span>
+              <span class="cap-accent-light text-sm font-extrabold shrink-0"
                 >{{ U.toFixed(1) }} V</span
               >
             </div>
@@ -457,7 +463,7 @@ const visibleLowerCharges = computed(() =>
               max="50.0"
               step="5.0"
               v-model.number="U"
-              class="w-full accent-amber-500 h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
+              class="w-full cap-range-amber h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
             />
           </div>
 
@@ -468,8 +474,8 @@ const visibleLowerCharges = computed(() =>
                 @click="epsilonR = 1"
                 :class="
                   epsilonR === 1
-                    ? 'border border-amber-500 bg-amber-500/15 text-amber-300 font-black'
-                    : 'border border-slate-800 hover:border-slate-700 hover:bg-slate-800/40 text-slate-400 font-semibold'
+                    ? 'border cap-btn-on-amber text-amber-300 font-black'
+                    : 'border cap-btn-off font-semibold'
                 "
                 class="py-1.5 px-0.5 rounded-lg transition-all duration-200 text-center text-[10px] leading-tight"
               >
@@ -480,8 +486,8 @@ const visibleLowerCharges = computed(() =>
                 @click="epsilonR = 3"
                 :class="
                   epsilonR === 3
-                    ? 'border border-blue-500 bg-blue-500/15 text-blue-300 font-black'
-                    : 'border border-slate-800 hover:border-slate-700 hover:bg-slate-800/40 text-slate-400 font-semibold'
+                    ? 'border cap-btn-on-blue font-black'
+                    : 'border cap-btn-off font-semibold'
                 "
                 class="py-1.5 px-0.5 rounded-lg transition-all duration-200 text-center text-[10px] leading-tight"
               >
@@ -493,7 +499,7 @@ const visibleLowerCharges = computed(() =>
                 :class="
                   epsilonR === 6
                     ? 'border border-purple-500 bg-purple-500/15 text-purple-300 font-black'
-                    : 'border border-slate-800 hover:border-slate-700 hover:bg-slate-800/40 text-slate-400 font-semibold'
+                    : 'border cap-btn-off font-semibold'
                 "
                 class="py-1.5 px-0.5 rounded-lg transition-all duration-200 text-center text-[10px] leading-tight"
               >
@@ -524,11 +530,75 @@ svg text {
   user-select: none !important;
 }
 
-.svg-text-bold {
+.plate-text-bold {
   fill: var(--c-text-dim) !important;
 }
 
-.svg-text-sign {
+.plate-text-sign {
   font-weight: 950 !important;
+}
+
+/* ── 原 UnoCSS 调色板类的 token 版（取值相同，视觉零变化）──
+   外框/底板/控件框的 slate 深档、极板文字浅档、HUD 分隔条与 amber 亮档这几档，
+   没有现成工具类或需要保持透明度，故在本组件内提升为语义类，不再写死调色板取值。 */
+.cap-frame {
+  border-color: var(--c-neutral-900);
+  color: var(--c-text);
+}
+
+.cap-board {
+  background: var(--c-neutral-900);
+}
+
+.cap-controls {
+  border-color: var(--c-neutral-900);
+}
+
+.cap-hud-divider {
+  background: var(--c-neutral-700);
+}
+
+.cap-accent-light {
+  color: var(--c-accent-light);
+}
+
+/* 环境光晕：原 blue / amber 调色板色的 5% 透明版 */
+.cap-glow-blue {
+  background: color-mix(in srgb, var(--c-accent-2) 5%, transparent);
+}
+
+.cap-glow-amber {
+  background: color-mix(in srgb, var(--c-accent-glow) 5%, transparent);
+}
+
+/* 滑杆主色：原 amber / blue 调色板色 */
+.cap-range-amber {
+  accent-color: var(--c-accent-glow);
+}
+
+.cap-range-blue {
+  accent-color: var(--c-accent-2);
+}
+
+/* 介质按钮：原 amber / blue / slate 调色板色（选中态与未选中态、hover 态） */
+.cap-btn-on-amber {
+  border-color: var(--c-accent-glow);
+  background: color-mix(in srgb, var(--c-accent-glow) 15%, transparent);
+}
+
+.cap-btn-on-blue {
+  border-color: var(--c-accent-2);
+  background: color-mix(in srgb, var(--c-accent-2) 15%, transparent);
+  color: var(--c-velocity-light);
+}
+
+.cap-btn-off {
+  border-color: var(--c-surface-solid);
+  color: var(--c-text-dim);
+}
+
+.cap-btn-off:hover {
+  border-color: var(--c-neutral-700);
+  background: color-mix(in srgb, var(--c-surface-solid) 40%, transparent);
 }
 </style>

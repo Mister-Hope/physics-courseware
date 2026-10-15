@@ -80,17 +80,25 @@ const electrons = [
 
 <template>
   <div class="relative w-full">
-    <!-- 右上角：切换电流有无（有电流：电子定向移动 + 电流 I 箭头；无电流：箭头全部消失） -->
+    <!-- 右上角：切换电流有无（有电流：电子定向移动 + 电流 I 箭头；无电流：箭头全部消失）
+         两种状态的底色 / 描边按 token 表达（不再用调色板工具类） -->
     <button
       type="button"
       :aria-pressed="hasCurrent"
       aria-label="切换电流有无"
       @click="toggleCurrent"
       class="absolute top-0 right-0 z-10 cursor-pointer rounded-lg border px-2.5 py-1 text-[13px] font-semibold leading-tight transition-all select-none"
-      :class="
+      :class="hasCurrent ? 'text-amber-300' : 'current-toggle-off'"
+      :style="
         hasCurrent
-          ? 'bg-amber-400/15 text-amber-300 border-amber-400/70'
-          : 'bg-slate-900/80 text-slate-400 border-slate-700/70 hover:text-slate-200'
+          ? {
+              backgroundColor: 'color-mix(in srgb, var(--c-accent-light) 15%, transparent)',
+              borderColor: 'color-mix(in srgb, var(--c-accent-light) 70%, transparent)',
+            }
+          : {
+              backgroundColor: 'color-mix(in srgb, var(--c-neutral-900) 80%, transparent)',
+              borderColor: 'color-mix(in srgb, var(--c-neutral-700) 70%, transparent)',
+            }
       "
     >
       <template v-if="hasCurrent">电流：有</template>
@@ -107,23 +115,23 @@ const electrons = [
       <defs>
         <!-- 导线透明圆柱体外壳渐变 -->
         <linearGradient id="cm-wire-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(51, 65, 85, 0.4)" />
-          <stop offset="30%" stop-color="rgba(30, 41, 59, 0.65)" />
-          <stop offset="70%" stop-color="rgba(15, 23, 42, 0.8)" />
-          <stop offset="100%" stop-color="rgba(30, 41, 59, 0.5)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-neutral-700) 40%, transparent)" />
+          <stop offset="30%" stop-color="color-mix(in srgb, var(--c-surface-solid) 65%, transparent)" />
+          <stop offset="70%" stop-color="color-mix(in srgb, var(--c-neutral-900) 80%, transparent)" />
+          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-surface-solid) 50%, transparent)" />
         </linearGradient>
 
         <!-- 导线上下内壁高光线 -->
         <linearGradient id="cm-wire-edge" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="rgba(148, 163, 184, 0.1)" />
-          <stop offset="50%" stop-color="rgba(148, 163, 184, 0.4)" />
-          <stop offset="100%" stop-color="rgba(148, 163, 184, 0.1)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" />
+          <stop offset="50%" stop-color="color-mix(in srgb, var(--c-text-dim) 40%, transparent)" />
+          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" />
         </linearGradient>
 
         <!-- 正离子立体金属球体渐变 (Cu²⁺) -->
         <radialGradient id="cm-ion-3d" cx="35%" cy="35%" r="65%">
           <stop offset="0%" stop-color="#fde68a" />
-          <stop offset="30%" stop-color="#f59e0b" />
+          <stop offset="30%" stop-color="var(--c-accent-glow)" />
           <stop offset="75%" stop-color="#d97706" />
           <stop offset="100%" stop-color="#b45309" />
         </radialGradient>
@@ -131,7 +139,7 @@ const electrons = [
         <!-- 自由电子小微球渐变 (e⁻) -->
         <radialGradient id="cm-electron-3d" cx="35%" cy="35%" r="65%">
           <stop offset="0%" stop-color="#bae6fd" />
-          <stop offset="40%" stop-color="#38bdf8" />
+          <stop offset="40%" stop-color="var(--c-physics-light)" />
           <stop offset="85%" stop-color="#0284c7" />
           <stop offset="100%" stop-color="#0369a1" />
         </radialGradient>
@@ -153,7 +161,7 @@ const electrons = [
         <text x="0" y="3.5" text-anchor="middle" font-size="10" font-weight="800" fill="#78350f">
           +
         </text>
-        <text x="14" y="5" font-size="15" font-weight="600" fill="#e2a846">正离子</text>
+        <text x="14" y="5" font-size="15" font-weight="600" fill="var(--c-accent)">正离子</text>
       </g>
 
       <!-- 图例 2：蓝色自由电子 -->
@@ -175,7 +183,7 @@ const electrons = [
           stroke-width="1.1"
           stroke-linecap="round"
         />
-        <text x="12" y="5" font-size="15" font-weight="600" fill="#60a5fa">自由电子</text>
+        <text x="12" y="5" font-size="15" font-weight="600" fill="var(--c-velocity)">自由电子</text>
       </g>
 
       <!-- 电子定向漂移速度 v 标尺（向左粗箭头）——仅在有电流时显示 -->
@@ -183,7 +191,7 @@ const electrons = [
         <CourseArrow
           :from="{ x: 800, y: 28 }"
           :to="{ x: 670, y: 28 }"
-          stroke="#38bdf8"
+          stroke="var(--c-physics-light)"
           stroke-width="3.4"
         />
         <text
@@ -194,7 +202,7 @@ const electrons = [
           font-style="italic"
           font-size="22"
           font-weight="700"
-          fill="#38bdf8"
+          fill="var(--c-physics-light)"
         >
           v
         </text>
@@ -209,7 +217,7 @@ const electrons = [
         height="104"
         rx="22"
         fill="url(#cm-wire-body)"
-        stroke="rgba(148, 163, 184, 0.35)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
         stroke-width="1.6"
       />
       <!-- 导线上下内边缘高光线 -->
@@ -217,7 +225,7 @@ const electrons = [
       <line x1="60" y1="155" x2="840" y2="155" stroke="url(#cm-wire-edge)" stroke-width="1.2" />
 
       <!-- ==================== 3. 晶格连线（虚线表现金属晶格结构） ==================== -->
-      <g stroke="rgba(226, 168, 70, 0.18)" stroke-width="1.2" stroke-dasharray="4 4">
+      <g stroke="color-mix(in srgb, var(--c-accent) 18%, transparent)" stroke-width="1.2" stroke-dasharray="4 4">
         <!-- 横向晶格连线 -->
         <line x1="90" y1="80" x2="790" y2="80" />
         <line x1="90" y1="128" x2="790" y2="128" />
@@ -235,7 +243,7 @@ const electrons = [
       <!-- ==================== 4. 密集正离子阵列（16 个，带立体质感与正电荷） ==================== -->
       <g v-for="(ion, idx) in ions" :key="`ion-${idx}`">
         <!-- 晶格节点阴影/底晕 -->
-        <circle :cx="ion.x" :cy="ion.y" r="12" fill="rgba(245, 158, 11, 0.1)" />
+        <circle :cx="ion.x" :cy="ion.y" r="12" fill="color-mix(in srgb, var(--c-accent-glow) 10%, transparent)" />
         <!-- 立体金属离子球体 -->
         <circle
           :cx="ion.x"
@@ -261,7 +269,7 @@ const electrons = [
           <path
             :d="`M ${e.x - 4.5} ${e.y} H ${e.x - 17} l 3.5 -2.5 m -3.5 2.5 l 3.5 2.5`"
             fill="none"
-            stroke="#38bdf8"
+            stroke="var(--c-physics-light)"
             stroke-width="1.4"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -270,7 +278,7 @@ const electrons = [
         </g>
 
         <!-- 电子发光外晕 -->
-        <circle :cx="e.x" :cy="e.y" r="6" fill="rgba(56, 189, 248, 0.3)" filter="url(#cm-glow)" />
+        <circle :cx="e.x" :cy="e.y" r="6" fill="color-mix(in srgb, var(--c-physics-light) 30%, transparent)" filter="url(#cm-glow)" />
         <!-- 电子立体微球本体 (r = 4.2，明显更小更小巧) -->
         <circle
           :cx="e.x"
@@ -301,7 +309,7 @@ const electrons = [
         <CourseArrow
           :from="{ x: 50, y: 184 }"
           :to="{ x: 804, y: 184 }"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="5"
         />
         <text
@@ -311,7 +319,7 @@ const electrons = [
           font-style="italic"
           font-size="28"
           font-weight="700"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           I
         </text>
@@ -322,4 +330,14 @@ const electrons = [
 
 <style scoped>
 /* 保持满宽响应式渲染 */
+
+/* 未选中态的文字色 + hover 提亮（原来是调色板工具类）：
+   不用共享的 `.text-dim`，因为它带 `!important`，hover 规则压不过它。 */
+.current-toggle-off {
+  color: var(--c-text-dim);
+}
+
+.current-toggle-off:hover {
+  color: var(--c-neutral-200);
+}
 </style>

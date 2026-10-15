@@ -166,8 +166,8 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="sfl">
-    <svg :viewBox="`0 0 ${W} ${H}`" class="sfl-svg">
+  <div class="fig-loop">
+    <svg :viewBox="`0 0 ${W} ${H}`" class="fig-svg">
       <!-- ── 左栏：速度三角形 ── -->
       <!-- v_圆 的转动轨迹：长度不变，只在圈上转 -->
       <circle
@@ -408,16 +408,10 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-.sfl {
+/* "速度 → 力 → 速度"闭环图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max */
+.fig-loop {
   width: 100%;
-}
 
-.sfl-svg {
-  display: block;
-
-  width: 100%;
-  max-width: 860px;
-  height: auto;
-  margin: 0 auto;
+  --fig-max: 860px;
 }
 </style>

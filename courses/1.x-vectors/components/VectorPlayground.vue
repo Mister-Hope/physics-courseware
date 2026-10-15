@@ -297,9 +297,6 @@ const labels = computed(() => {
     </div>
 
     <div class="vp-info">
-      <div class="vp-hint" :class="{ 'vp-hidden': step < 1 }">
-        <mdi-gesture-tap /> 拖动箭头尖端或起点试试
-      </div>
       <div class="vp-line" :class="{ 'vp-hidden': step < 2 }">
         <span class="vp-dot vp-dot-gold" />
         <span>起点在原点：<Latex :tex="vectorTex" /></span>
@@ -311,9 +308,7 @@ const labels = computed(() => {
       <div class="vp-line vp-line-dim" :class="{ 'vp-hidden': step < 2 }">
         模长：<Latex :tex="magnitudeTex" />
       </div>
-      <div v-if="showCopy" class="vp-key" :class="{ 'vp-hidden': step < 3 }">
-        两条箭头只是起点不同
-      </div>
+      <div v-if="showCopy" class="key" :class="{ 'vp-hidden': step < 3 }">两条箭头只是起点不同</div>
     </div>
   </div>
 </template>
@@ -337,10 +332,10 @@ const labels = computed(() => {
 
   min-width: 0;
   max-width: 21rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 
   touch-action: none;
 }
@@ -390,13 +385,6 @@ const labels = computed(() => {
 
 .vp-dot-blue {
   background: var(--c-accent-2);
-}
-
-.vp-key {
-  padding-left: 0.85rem;
-  border-left: 3px solid var(--c-accent);
-  font-size: 1rem;
-  line-height: 1.7;
 }
 
 .vp-hint {

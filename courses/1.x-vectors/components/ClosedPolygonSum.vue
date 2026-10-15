@@ -293,7 +293,7 @@ const labels = computed(() => {
     </div>
 
     <div class="cp-info">
-      <div class="cp-ask">先问：多长的"链"加起来会是 0？</div>
+      <div class="ask">先问：多长的"链"加起来会是 0？</div>
       <div class="cp-row">
         <span class="cp-dot cp-dot-gold" />首尾相接：<Latex :tex="vectorTexs[0] ?? ''" />
       </div>
@@ -303,8 +303,8 @@ const labels = computed(() => {
       <div class="cp-row">
         <span class="cp-dot cp-dot-teal" /><Latex :tex="vectorTexs[2] ?? ''" />
       </div>
-      <div class="cp-key" :class="{ 'cp-key-open': !isClosed }"><Latex :tex="sumTex" /></div>
-      <div class="cp-note">
+      <div class="key" :class="{ 'key-danger': !isClosed }"><Latex :tex="sumTex" /></div>
+      <div class="mini-note">
         {{ isClosed ? "链的末端回到了起点 —— 合矢量为 0" : "链没闭合：合矢量就是那一段缺口" }}
       </div>
       <button type="button" class="cp-btn" @click="toggleGap">
@@ -328,10 +328,10 @@ const labels = computed(() => {
 
   min-width: 0;
   max-width: 19.5rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 
   touch-action: none;
 }
@@ -355,12 +355,6 @@ const labels = computed(() => {
 
   font-size: 0.95rem;
   line-height: 1.65;
-}
-
-.cp-ask {
-  color: var(--c-text-dim);
-  font-weight: 600;
-  font-size: 1rem;
 }
 
 .cp-row {
@@ -388,21 +382,6 @@ const labels = computed(() => {
   background: var(--c-physics);
 }
 
-.cp-key {
-  padding-left: 0.75rem;
-  border-left: 3px solid var(--c-accent);
-  font-size: 1.02rem;
-}
-
-.cp-key-open {
-  border-left-color: var(--c-danger);
-}
-
-.cp-note {
-  color: var(--c-text-dim);
-  font-size: 0.82rem;
-}
-
 .cp-btn {
   display: inline-flex;
   gap: 0.4rem;
@@ -411,10 +390,10 @@ const labels = computed(() => {
 
   margin-top: 0.2rem;
   padding: 0.35rem 0.9rem;
-  border: 1px solid rgb(59 130 246 / 30%);
-  border-radius: 2rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent-2) 30%, transparent);
+  border-radius: 999px;
 
-  background: rgb(59 130 246 / 14%);
+  background: var(--c-accent-2-soft);
   color: var(--c-text);
 
   font-size: 0.8rem;
@@ -425,6 +404,6 @@ const labels = computed(() => {
 }
 
 .cp-btn:hover {
-  background: rgb(59 130 246 / 24%);
+  background: color-mix(in srgb, var(--c-accent-2) 24%, transparent);
 }
 </style>

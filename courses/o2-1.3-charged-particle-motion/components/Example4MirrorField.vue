@@ -161,10 +161,10 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
       class="h-full w-auto max-w-full"
     >
       <!-- 圆外：方向相反的匀强磁场（⊙） -->
-      <g fill="none" stroke="rgba(96,165,250,0.42)" stroke-width="1.4">
+      <g fill="none" stroke="color-mix(in srgb, var(--c-velocity) 42%, transparent)" stroke-width="1.4">
         <template v-for="(m, i) in OUT_MARKS" :key="`o${i}`">
           <circle :cx="m.x" :cy="m.y" r="6.6" />
-          <circle :cx="m.x" :cy="m.y" r="1.9" fill="rgba(96,165,250,0.42)" />
+          <circle :cx="m.x" :cy="m.y" r="1.9" fill="color-mix(in srgb, var(--c-velocity) 42%, transparent)" />
         </template>
       </g>
       <!-- 磁场区域：边界圆 + 圆内 ⊗ -->
@@ -172,11 +172,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         :cx="O.x"
         :cy="O.y"
         :r="R"
-        fill="rgba(226,168,70,0.07)"
-        stroke="rgba(226,168,70,0.7)"
+        fill="color-mix(in srgb, var(--c-accent) 7%, transparent)"
+        stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="rgba(226,168,70,0.5)" stroke-width="1.3" stroke-linecap="round">
+      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.3" stroke-linecap="round">
         <template v-for="(m, i) in IN_MARKS" :key="`i${i}`">
           <circle :cx="m.x" :cy="m.y" :r="IN_MARK_R" />
           <line
@@ -197,11 +197,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
       <path
         :d="aoPath"
         fill="none"
-        stroke="rgba(203,213,225,0.55)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)"
         stroke-width="1.8"
         stroke-dasharray="8 7"
       />
-      <CourseArrow :from="vIn.from" :to="vIn.to" stroke="#60a5fa" stroke-width="3.2" />
+      <CourseArrow :from="vIn.from" :to="vIn.to" stroke="var(--c-velocity)" stroke-width="3.2" />
       <text
         v-bind="HALO"
         :x="labelV.x"
@@ -209,11 +209,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
       >
         v
       </text>
-      <circle :cx="O.x" :cy="O.y" r="4" fill="#cbd5e1" />
+      <circle :cx="O.x" :cy="O.y" r="4" fill="var(--c-neutral-300)" />
       <text
         v-bind="HALO"
         :x="labelO.x"
@@ -221,11 +221,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         O
       </text>
-      <circle :cx="A.x" :cy="A.y" r="5.4" fill="#f8fafc" />
+      <circle :cx="A.x" :cy="A.y" r="5.4" fill="var(--c-neutral-50)" />
       <text
         v-bind="HALO"
         :x="labelA.x"
@@ -233,7 +233,7 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         A
       </text>
@@ -242,11 +242,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         <path
           :d="innerArc"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="3.4"
           stroke-linecap="round"
         />
-        <CourseArrow :from="vOut.from" :to="vOut.to" stroke="#60a5fa" stroke-width="3.6" />
+        <CourseArrow :from="vOut.from" :to="vOut.to" stroke="var(--c-velocity)" stroke-width="3.6" />
         <text
           v-bind="HALO"
           :x="labelVOut.x"
@@ -254,11 +254,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           v′
         </text>
-        <circle :cx="M.x" :cy="M.y" r="5.4" fill="#f8fafc" />
+        <circle :cx="M.x" :cy="M.y" r="5.4" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="labelM.x"
@@ -266,7 +266,7 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           M
         </text>
@@ -276,18 +276,18 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
         <path
           :d="axisPath"
           fill="none"
-          stroke="rgba(226,168,70,0.45)"
+          stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="10 9"
         />
         <path
           :d="outerArc"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="3.4"
           stroke-linecap="round"
         />
-        <circle :cx="N.x" :cy="N.y" r="5.4" fill="#f8fafc" />
+        <circle :cx="N.x" :cy="N.y" r="5.4" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="labelN.x"
@@ -295,14 +295,14 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           N
         </text>
       </template>
       <!-- 第 3 次点击：N 处的速度又指向圆心 O -->
       <template v-if="showBack">
-        <CourseArrow :from="vBack.from" :to="vBack.to" stroke="#2dd4bf" stroke-width="3.6" />
+        <CourseArrow :from="vBack.from" :to="vBack.to" stroke="var(--c-physics)" stroke-width="3.6" />
         <text
           v-bind="HALO"
           :x="labelVBack.x"
@@ -310,7 +310,7 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
         >
           v″
         </text>
@@ -322,7 +322,7 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :cy="VB.y + 30"
           r="10"
           fill="none"
-          stroke="rgba(226,168,70,0.85)"
+          stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
           stroke-width="1.8"
         />
         <line
@@ -330,7 +330,7 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :y1="VB.y + 22.9"
           :x2="VB.x + 33.1"
           :y2="VB.y + 37.1"
-          stroke="rgba(226,168,70,0.85)"
+          stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
           stroke-width="1.8"
         />
         <line
@@ -338,10 +338,10 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :y1="VB.y + 22.9"
           :x2="VB.x + 18.9"
           :y2="VB.y + 37.1"
-          stroke="rgba(226,168,70,0.85)"
+          stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
           stroke-width="1.8"
         />
-        <text :x="VB.x + 44" :y="VB.y + 36" :font-family="CJK" :font-size="FS - 8" fill="#e2a846">
+        <text :x="VB.x + 44" :y="VB.y + 36" :font-family="CJK" :font-size="FS - 8" fill="var(--c-accent)">
           圆内：磁场 B
         </text>
         <circle
@@ -349,11 +349,11 @@ const labelVBack = { x: vBack.to.x + 6, y: vBack.to.y + 26 };
           :cy="VB.y + 66"
           r="10"
           fill="none"
-          stroke="rgba(96,165,250,0.85)"
+          stroke="color-mix(in srgb, var(--c-velocity) 85%, transparent)"
           stroke-width="1.8"
         />
-        <circle :cx="VB.x + 26" :cy="VB.y + 66" r="2.6" fill="rgba(96,165,250,0.85)" />
-        <text :x="VB.x + 44" :y="VB.y + 72" :font-family="CJK" :font-size="FS - 8" fill="#60a5fa">
+        <circle :cx="VB.x + 26" :cy="VB.y + 66" r="2.6" fill="color-mix(in srgb, var(--c-velocity) 85%, transparent)" />
+        <text :x="VB.x + 44" :y="VB.y + 72" :font-family="CJK" :font-size="FS - 8" fill="var(--c-velocity)">
           圆外：方向相反的磁场
         </text>
       </g>

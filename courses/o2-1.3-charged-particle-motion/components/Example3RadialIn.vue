@@ -179,11 +179,11 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         :cx="O.x"
         :cy="O.y"
         :r="R"
-        fill="rgba(226,168,70,0.06)"
-        stroke="rgba(226,168,70,0.65)"
+        fill="color-mix(in srgb, var(--c-accent) 6%, transparent)"
+        stroke="color-mix(in srgb, var(--c-accent) 65%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="rgba(226,168,70,0.5)" stroke-width="1.4" stroke-linecap="round">
+      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.4" stroke-linecap="round">
         <template v-for="(m, i) in MARKS" :key="`b${i}`">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -204,14 +204,14 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
       <path
         :d="aoPath"
         fill="none"
-        stroke="rgba(203,213,225,0.55)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)"
         stroke-width="1.8"
         stroke-dasharray="8 7"
       />
       <CourseArrow
         :from="vIn.from"
         :to="vIn.to"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="3.6"
         stroke-linecap="round"
       />
@@ -223,12 +223,12 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
       >
         v
       </text>
       <!-- 圆心 O、入射点 A -->
-      <circle :cx="O.x" :cy="O.y" r="4.5" fill="#cbd5e1" />
+      <circle :cx="O.x" :cy="O.y" r="4.5" fill="var(--c-neutral-300)" />
       <text
         v-bind="HALO"
         :x="labelO.x"
@@ -236,11 +236,11 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         O
       </text>
-      <circle :cx="A.x" :cy="A.y" r="6" fill="#f8fafc" />
+      <circle :cx="A.x" :cy="A.y" r="6" fill="var(--c-neutral-50)" />
       <text
         v-bind="HALO"
         :x="labelA.x"
@@ -248,14 +248,14 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         A
       </text>
       <!-- 第 1 次点击：轨迹圆弧 -->
       <template v-if="showPath">
-        <path :d="arcPath" fill="none" stroke="#60a5fa" stroke-width="3.6" stroke-linecap="round" />
-        <circle :cx="M.x" :cy="M.y" r="6" fill="#f8fafc" />
+        <path :d="arcPath" fill="none" stroke="var(--c-velocity)" stroke-width="3.6" stroke-linecap="round" />
+        <circle :cx="M.x" :cy="M.y" r="6" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="labelM.x"
@@ -263,7 +263,7 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           M
         </text>
@@ -273,13 +273,13 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         <path
           :d="radiiPath"
           fill="none"
-          stroke="rgba(226,168,70,0.9)"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
           stroke-width="1.9"
           stroke-dasharray="8 7"
         />
-        <path :d="rightA" fill="none" stroke="rgba(241,245,249,0.9)" stroke-width="2" />
-        <path :d="rightM" fill="none" stroke="rgba(241,245,249,0.9)" stroke-width="2" />
-        <circle :cx="C.x" :cy="C.y" r="5.5" fill="#f8fafc" />
+        <path :d="rightA" fill="none" stroke="color-mix(in srgb, var(--c-text) 90%, transparent)" stroke-width="2" />
+        <path :d="rightM" fill="none" stroke="color-mix(in srgb, var(--c-text) 90%, transparent)" stroke-width="2" />
+        <circle :cx="C.x" :cy="C.y" r="5.5" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="labelC.x"
@@ -287,7 +287,7 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           C
         </text>
@@ -298,7 +298,7 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS - 3"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           r
         </text>
@@ -309,7 +309,7 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS - 3"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           r
         </text>
@@ -319,14 +319,14 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         <path
           :d="extendPath"
           fill="none"
-          stroke="rgba(96,165,250,0.5)"
+          stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
           stroke-width="2"
           stroke-dasharray="9 8"
         />
         <CourseArrow
           :from="vOut.from"
           :to="vOut.to"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="4"
           stroke-linecap="round"
         />
@@ -338,7 +338,7 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           v′
         </text>
@@ -351,7 +351,7 @@ const labelR2 = { x: (C.x + M.x) / 2 + 26, y: (C.y + M.y) / 2 - 6 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS - 3"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         R
       </text>

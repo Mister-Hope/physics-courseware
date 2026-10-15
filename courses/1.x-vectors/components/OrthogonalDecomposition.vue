@@ -303,10 +303,8 @@ const labels = computed(() => {
         <span class="od-dot od-dot-blue" />沿 y 轴：<Latex :tex="yTex" />（{{ Math.abs(y) }} 个
         <Latex tex="\vec{j}" /> 相加）
       </div>
-      <div class="od-key">两个分量互相垂直，算完再拼回来</div>
+      <div class="key">两个分量互相垂直，算完再拼回来</div>
       <div class="od-row od-row-dim">模：<Latex :tex="magnitudeTex" /></div>
-      <div class="od-hint"><mdi-gesture-tap /> 拖动箭头尖端 / 拖滑杆改变 (x, y)</div>
-
       <div class="od-controls">
         <label class="od-slider">
           <span class="od-slider-label">x</span>
@@ -337,10 +335,10 @@ const labels = computed(() => {
 
   min-width: 0;
   max-width: 18.5rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 
   touch-action: none;
 }
@@ -398,13 +396,6 @@ const labels = computed(() => {
   background: var(--c-accent-2);
 }
 
-.od-key {
-  padding-left: 0.75rem;
-  border-left: 3px solid var(--c-accent);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
 .od-hint {
   display: flex;
   gap: 0.4rem;
@@ -452,9 +443,9 @@ const labels = computed(() => {
 
   min-width: 0;
   height: 4px;
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(148 163 184 / 20%);
+  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
   outline: none;
 
   cursor: pointer;

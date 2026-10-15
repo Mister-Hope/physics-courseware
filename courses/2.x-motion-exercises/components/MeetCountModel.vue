@@ -179,7 +179,7 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
         :ticks="{ x: [], y: [] }"
         :curves="curves"
         :labels="labels"
-        :view="{ width: 520, height: 450 }"
+        :view="{ width: 520, height: 420 }"
       />
     </div>
     <div class="mc-side stack-tight">
@@ -258,7 +258,7 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
   border: 1px solid var(--c-border-glow);
   border-radius: 999px;
 
-  background: rgb(226 168 70 / 12%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 
   font-weight: 700;
@@ -275,7 +275,7 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
   height: 1.45rem;
   margin-top: 0.75rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-sm);
 }
 
 .mc-zone {
@@ -308,9 +308,9 @@ const pct = (v: number): number => ((v - A1_MIN) / (A1_MAX - A1_MIN)) * 100;
 
   width: 3px;
   margin-left: -1.5px;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
 
-  background: #f1f5f9;
+  background: var(--c-text);
   box-shadow: 0 0 6px rgb(241 245 249 / 70%);
 }
 

@@ -169,19 +169,19 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="speed-matching-wrap w-full flex justify-center">
+  <div class="fig-split w-full flex justify-center">
     <svg
       :viewBox="`0 0 ${W} ${H}`"
       :width="width"
-      class="speed-matching-svg select-none overflow-visible block"
+      class="fig-svg select-none overflow-visible block"
       role="img"
       aria-label="复合场中的配速法与摆线运动示意图"
     >
       <defs>
         <!-- 粒子球体质感渐变 -->
         <radialGradient id="sm-ball-fill" cx="40%" cy="40%" r="65%">
-          <stop offset="0%" stop-color="#1e293b" />
-          <stop offset="100%" stop-color="#0f172a" />
+          <stop offset="0%" stop-color="var(--c-surface-solid)" />
+          <stop offset="100%" stop-color="var(--c-neutral-900)" />
         </radialGradient>
       </defs>
 
@@ -209,7 +209,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :cy="CENTER.y"
           :r="BALL_R"
           fill="url(#sm-ball-fill)"
-          stroke="var(--c-accent, #e2a846)"
+          stroke="var(--c-accent)"
           stroke-width="3"
         />
         <!-- 粗实清晰的正电荷 "+" 符号，保证后排投影一目了然 -->
@@ -219,7 +219,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           width="15"
           height="5"
           rx="2.5"
-          fill="var(--c-accent, #e2a846)"
+          fill="var(--c-accent)"
         />
         <rect
           :x="CENTER.x - 2.5"
@@ -227,14 +227,14 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           width="5"
           height="15"
           rx="2.5"
-          fill="var(--c-accent, #e2a846)"
+          fill="var(--c-accent)"
         />
 
         <!-- 重力箭头 mg (竖直向下，长 100px) -->
         <CourseArrow
           :from="{ x: CENTER.x, y: CENTER.y + BALL_R }"
           :to="{ x: CENTER.x, y: CENTER.y + PX }"
-          stroke="var(--c-force, #f87171)"
+          stroke="var(--c-force)"
           :stroke-width="4"
           :head-size="15"
         />
@@ -245,7 +245,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :font-size="26"
           :font-family="MATH"
           font-style="italic"
-          fill="var(--c-force, #f87171)"
+          fill="var(--c-force)"
           :style="HALO"
         >
           m
@@ -258,7 +258,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :y="CENTER.y + PX + 50"
           :font-size="21"
           :font-family="MAIN"
-          fill="var(--c-text, #f8fafc)"
+          fill="var(--c-text)"
           text-anchor="middle"
           :style="HALO"
         >
@@ -276,7 +276,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :cy="CENTER.y"
           :r="BALL_R"
           fill="url(#sm-ball-fill)"
-          stroke="var(--c-accent, #e2a846)"
+          stroke="var(--c-accent)"
           stroke-width="3"
         />
         <!-- 正电荷 "+" 符号 -->
@@ -286,7 +286,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           width="15"
           height="5"
           rx="2.5"
-          fill="var(--c-accent, #e2a846)"
+          fill="var(--c-accent)"
         />
         <rect
           :x="CENTER.x - 2.5"
@@ -294,14 +294,14 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           width="5"
           height="15"
           rx="2.5"
-          fill="var(--c-accent, #e2a846)"
+          fill="var(--c-accent)"
         />
 
         <!-- 1. 速度 v1（向右 →，速度蓝） -->
         <CourseArrow
           :from="{ x: CENTER.x + BALL_R, y: CENTER.y }"
           :to="{ x: CENTER.x + PX, y: CENTER.y }"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           :stroke-width="4"
           :head-size="15"
         />
@@ -312,7 +312,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           text-anchor="middle"
           :font-family="MATH"
           font-style="italic"
-          fill="var(--c-velocity, #60a5fa)"
+          fill="var(--c-velocity)"
           :style="HALO"
         >
           v
@@ -323,7 +323,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         <CourseArrow
           :from="{ x: CENTER.x - BALL_R, y: CENTER.y }"
           :to="{ x: CENTER.x - PX, y: CENTER.y }"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           :stroke-width="4"
           :head-size="15"
         />
@@ -334,7 +334,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           text-anchor="middle"
           :font-family="MATH"
           font-style="italic"
-          fill="var(--c-velocity, #60a5fa)"
+          fill="var(--c-velocity)"
           :style="HALO"
         >
           v
@@ -345,7 +345,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         <CourseArrow
           :from="{ x: CENTER.x, y: CENTER.y - BALL_R }"
           :to="{ x: CENTER.x, y: CENTER.y - PX }"
-          stroke="var(--c-force, #f87171)"
+          stroke="var(--c-force)"
           :stroke-width="4"
           :head-size="15"
         />
@@ -355,7 +355,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :font-size="25"
           :font-family="MATH"
           font-style="italic"
-          fill="var(--c-force, #f87171)"
+          fill="var(--c-force)"
           :style="HALO"
         >
           f
@@ -367,7 +367,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         <CourseArrow
           :from="mgTailStep1"
           :to="mgHeadStep1"
-          stroke="var(--c-force, #f87171)"
+          stroke="var(--c-force)"
           :stroke-width="3.8"
           :head-size="14"
         />
@@ -378,7 +378,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           text-anchor="end"
           :font-family="MATH"
           font-style="italic"
-          fill="var(--c-force, #f87171)"
+          fill="var(--c-force)"
           :style="HALO"
         >
           m
@@ -389,7 +389,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         <CourseArrow
           :from="f2TailStep1"
           :to="f2HeadStep1"
-          stroke="var(--c-force, #f87171)"
+          stroke="var(--c-force)"
           :stroke-width="3.8"
           :head-size="14"
         />
@@ -400,7 +400,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           text-anchor="start"
           :font-family="MATH"
           font-style="italic"
-          fill="var(--c-force, #f87171)"
+          fill="var(--c-force)"
           :style="HALO"
         >
           f
@@ -413,7 +413,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :y="CENTER.y + PX + 50"
           :font-size="21"
           :font-family="MAIN"
-          fill="var(--c-text, #f8fafc)"
+          fill="var(--c-text)"
           text-anchor="middle"
           :style="HALO"
         >
@@ -433,7 +433,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :cy="LEFT.y"
             :r="BALL_R"
             fill="url(#sm-ball-fill)"
-            stroke="var(--c-accent, #e2a846)"
+            stroke="var(--c-accent)"
             stroke-width="3"
           />
           <rect
@@ -442,7 +442,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             width="15"
             height="5"
             rx="2.5"
-            fill="var(--c-accent, #e2a846)"
+            fill="var(--c-accent)"
           />
           <rect
             :x="LEFT.x - 2.5"
@@ -450,14 +450,14 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             width="5"
             height="15"
             rx="2.5"
-            fill="var(--c-accent, #e2a846)"
+            fill="var(--c-accent)"
           />
 
           <!-- 重力 mg（向下 ↓） -->
           <CourseArrow
             :from="{ x: LEFT.x, y: LEFT.y + BALL_R }"
             :to="{ x: LEFT.x, y: LEFT.y + PX }"
-            stroke="var(--c-force, #f87171)"
+            stroke="var(--c-force)"
             :stroke-width="4"
             :head-size="15"
           />
@@ -468,7 +468,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             text-anchor="end"
             :font-family="MATH"
             font-style="italic"
-            fill="var(--c-force, #f87171)"
+            fill="var(--c-force)"
             :style="HALO"
           >
             m
@@ -479,7 +479,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           <CourseArrow
             :from="{ x: LEFT.x, y: LEFT.y - BALL_R }"
             :to="{ x: LEFT.x, y: LEFT.y - PX }"
-            stroke="var(--c-force, #f87171)"
+            stroke="var(--c-force)"
             :stroke-width="4"
             :head-size="15"
           />
@@ -490,7 +490,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             text-anchor="end"
             :font-family="MATH"
             font-style="italic"
-            fill="var(--c-force, #f87171)"
+            fill="var(--c-force)"
             :style="HALO"
           >
             f
@@ -501,7 +501,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           <CourseArrow
             :from="{ x: LEFT.x + BALL_R, y: LEFT.y }"
             :to="{ x: LEFT.x + PX, y: LEFT.y }"
-            stroke="var(--c-velocity, #60a5fa)"
+            stroke="var(--c-velocity)"
             :stroke-width="4"
             :head-size="15"
           />
@@ -512,7 +512,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             text-anchor="middle"
             :font-family="MATH"
             font-style="italic"
-            fill="var(--c-velocity, #60a5fa)"
+            fill="var(--c-velocity)"
             :style="HALO"
           >
             v
@@ -526,7 +526,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :font-size="22"
             :font-family="MAIN"
             font-weight="600"
-            fill="var(--c-text, #f8fafc)"
+            fill="var(--c-text)"
             text-anchor="middle"
             :style="HALO"
           >
@@ -537,7 +537,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :y="LEFT.y + PX + 78"
             :font-size="16"
             :font-family="MAIN"
-            fill="var(--c-text-dim, #94a3b8)"
+            fill="var(--c-text-dim)"
             text-anchor="middle"
             :style="HALO"
           >
@@ -553,7 +553,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :cy="RIGHT.y"
             :r="PX"
             fill="none"
-            stroke="var(--c-text-dim, #94a3b8)"
+            stroke="var(--c-text-dim)"
             stroke-width="1.6"
             stroke-dasharray="6 6"
             opacity="0.45"
@@ -565,7 +565,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :cy="RIGHT.y"
             :r="BALL_R"
             fill="url(#sm-ball-fill)"
-            stroke="var(--c-accent, #e2a846)"
+            stroke="var(--c-accent)"
             stroke-width="3"
           />
           <rect
@@ -574,7 +574,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             width="15"
             height="5"
             rx="2.5"
-            fill="var(--c-accent, #e2a846)"
+            fill="var(--c-accent)"
           />
           <rect
             :x="RIGHT.x - 2.5"
@@ -582,14 +582,14 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             width="5"
             height="15"
             rx="2.5"
-            fill="var(--c-accent, #e2a846)"
+            fill="var(--c-accent)"
           />
 
           <!-- 速度矢量 v2（一起转，始终与 f2 垂直） -->
           <CourseArrow
             :from="arrowTail(RIGHT, currentV2)"
             :to="arrowHead(RIGHT, currentV2)"
-            stroke="var(--c-velocity, #60a5fa)"
+            stroke="var(--c-velocity)"
             :stroke-width="4"
             :head-size="15"
           />
@@ -601,7 +601,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             dominant-baseline="central"
             :font-family="MATH"
             font-style="italic"
-            fill="var(--c-velocity, #60a5fa)"
+            fill="var(--c-velocity)"
             :style="HALO"
           >
             v
@@ -612,7 +612,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           <CourseArrow
             :from="arrowTail(RIGHT, currentF2)"
             :to="arrowHead(RIGHT, currentF2)"
-            stroke="var(--c-force, #f87171)"
+            stroke="var(--c-force)"
             :stroke-width="4"
             :head-size="15"
           />
@@ -624,7 +624,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             dominant-baseline="central"
             :font-family="MATH"
             font-style="italic"
-            fill="var(--c-force, #f87171)"
+            fill="var(--c-force)"
             :style="HALO"
           >
             f
@@ -638,7 +638,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :font-size="22"
             :font-family="MAIN"
             font-weight="600"
-            fill="var(--c-text, #f8fafc)"
+            fill="var(--c-text)"
             text-anchor="middle"
             :style="HALO"
           >
@@ -649,7 +649,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :y="RIGHT.y + PX + 78"
             :font-size="16"
             :font-family="MAIN"
-            fill="var(--c-text-dim, #94a3b8)"
+            fill="var(--c-text-dim)"
             text-anchor="middle"
             :style="HALO"
           >
@@ -662,13 +662,11 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-.speed-matching-wrap {
+/* 速度分解演示图：840px（渲染高 ≈ 420px），第 14 页 `.page-grow` 可用高度 ≈ 439px，留出余量；
+   宽度上限走共享 .fig-svg 读的 --fig-max */
+.fig-split {
   width: 100%;
-}
 
-.speed-matching-svg {
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+  --fig-max: 840px;
 }
 </style>

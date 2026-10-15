@@ -29,9 +29,9 @@ const sweepD = sweep.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p
     <circle :cx="C.x" :cy="C.y" :r="R" fill="none" stroke="currentColor" stroke-width="2.2" opacity="0.6" />
     <line v-for="(t, i) in teeth" :key="i" :x1="t.x1" :y1="t.y1" :x2="t.x2" :y2="t.y2" stroke="currentColor" stroke-width="1.5" opacity="0.45" />
     <line :x1="C.x" :y1="C.y" :x2="ball.x" :y2="ball.y" stroke="currentColor" stroke-width="1.6" opacity="0.5" />
-    <path :d="sweepD" fill="none" stroke="#60a5fa" stroke-width="2.1" opacity="0.75" stroke-linecap="round" />
+    <path :d="sweepD" fill="none" stroke="var(--c-velocity)" stroke-width="2.1" opacity="0.75" stroke-linecap="round" />
     <circle :cx="C.x" :cy="C.y" r="3" fill="currentColor" opacity="0.6" />
-    <circle :cx="ball.x" :cy="ball.y" r="5" fill="#e2a846" />
-    <CourseArrow :from="arrowFrom" :to="tangentTip" stroke="#e2a846" :stroke-width="2.4" />
+    <circle :cx="ball.x" :cy="ball.y" r="5" fill="var(--c-accent)" />
+    <CourseArrow :from="arrowFrom" :to="tangentTip" stroke="var(--c-accent)" :stroke-width="2.4" />
   </svg>
 </template>

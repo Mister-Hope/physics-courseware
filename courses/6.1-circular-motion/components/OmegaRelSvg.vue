@@ -30,18 +30,18 @@ const rLabel = { x: (O.x + A.x) / 2 - 17, y: (O.y + A.y) / 2 + 13 };
 <template>
   <svg viewBox="30 18 220 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="6 6" opacity="0.28" />
-    <path :d="arcAB" fill="none" stroke="#e2a846" stroke-width="6" stroke-linecap="round" />
+    <path :d="arcAB" fill="none" stroke="var(--c-accent)" stroke-width="6" stroke-linecap="round" />
     <line :x1="O.x" :y1="O.y" :x2="A.x" :y2="A.y" stroke="currentColor" stroke-width="2" opacity="0.8" />
     <line :x1="O.x" :y1="O.y" :x2="B.x" :y2="B.y" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.45" />
-    <path :d="angleArc" fill="none" stroke="#60a5fa" stroke-width="3.2" stroke-linecap="round" />
-    <circle :cx="A.x" :cy="A.y" r="5" fill="#e2a846" />
-    <circle :cx="B.x" :cy="B.y" r="5" fill="#e2a846" />
+    <path :d="angleArc" fill="none" stroke="var(--c-velocity)" stroke-width="3.2" stroke-linecap="round" />
+    <circle :cx="A.x" :cy="A.y" r="5" fill="var(--c-accent)" />
+    <circle :cx="B.x" :cy="B.y" r="5" fill="var(--c-accent)" />
     <circle :cx="O.x" :cy="O.y" r="3.5" fill="currentColor" opacity="0.8" />
     <text :x="O.x - 8" :y="O.y + 19" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">O</text>
-    <text :x="A.x - 19" :y="A.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">A</text>
-    <text :x="B.x + 9" :y="B.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">B</text>
+    <text :x="A.x - 19" :y="A.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
+    <text :x="B.x + 9" :y="B.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">B</text>
     <text :x="rLabel.x" :y="rLabel.y" text-anchor="middle" font-size="19" font-family="KaTeX_Math" font-style="italic" fill="currentColor">r</text>
-    <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#60a5fa">Δθ</text>
-    <text :x="dsLabel.x" :y="dsLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">Δs</text>
+    <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">Δθ</text>
+    <text :x="dsLabel.x" :y="dsLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">Δs</text>
   </svg>
 </template>

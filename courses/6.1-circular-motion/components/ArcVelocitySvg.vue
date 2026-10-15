@@ -52,19 +52,19 @@ const dsLabel = toXY(121, 70);
     <g v-if="showSolved">
       <line :x1="O.x" :y1="O.y" :x2="A.x" :y2="A.y" stroke="currentColor" stroke-width="1.3" stroke-dasharray="5 5" opacity="0.45" />
       <line :x1="O.x" :y1="O.y" :x2="B.x" :y2="B.y" stroke="currentColor" stroke-width="1.3" stroke-dasharray="5 5" opacity="0.45" />
-      <path :d="arcAB" fill="none" stroke="#e2a846" stroke-width="5" stroke-linecap="round" />
+      <path :d="arcAB" fill="none" stroke="var(--c-accent)" stroke-width="5" stroke-linecap="round" />
       <circle :cx="B.x" :cy="B.y" r="4" fill="currentColor" opacity="0.85" />
-      <CourseArrow :from="vFrom" :to="tangentTip" stroke="#e2a846" :stroke-width="3" stroke-linecap="round" label="v" :label-dx="-13" :label-dy="-7" />
-      <text :x="dsLabel.x" :y="dsLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">Δs</text>
+      <CourseArrow :from="vFrom" :to="tangentTip" stroke="var(--c-accent)" :stroke-width="3" stroke-linecap="round" label="v" :label-dx="-13" :label-dy="-7" />
+      <text :x="dsLabel.x" :y="dsLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">Δs</text>
     </g>
-    <circle :cx="A.x" :cy="A.y" r="5" fill="#e2a846" />
+    <circle :cx="A.x" :cy="A.y" r="5" fill="var(--c-accent)" />
     <circle :cx="O.x" :cy="O.y" r="3.5" fill="currentColor" opacity="0.8" />
     <circle :cx="M.x" :cy="M.y" r="4" fill="currentColor" opacity="0.85" />
     <circle :cx="N.x" :cy="N.y" r="4" fill="currentColor" opacity="0.85" />
     <text :x="O.x - 6" :y="O.y + 19" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">O</text>
     <text :x="M.x - 17" :y="M.y + 7" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">M</text>
     <text :x="N.x + 9" :y="N.y + 8" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">N</text>
-    <text :x="A.x - 11" :y="A.y + 5" text-anchor="end" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">A</text>
+    <text :x="A.x - 11" :y="A.y + 5" text-anchor="end" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
     <text v-if="showSolved" :x="B.x + 11" :y="B.y + 7" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">B</text>
   </svg>
 </template>

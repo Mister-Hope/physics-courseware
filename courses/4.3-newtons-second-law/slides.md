@@ -33,7 +33,7 @@ clicks: 6
 <div class="page-grow">
 <div class="ask ask-lead" v-click="1">上节课的实验得到 <Latex tex="a \propto F" />、<Latex tex="a \propto \frac{1}{m}" />。怎么把它们合成一条定量关系？</div>
 
-<div class="lead-formula" v-click="2"><Latex tex="a \propto \frac{F}{m} \quad \Longrightarrow \quad F \propto ma" /></div>
+<div class="eq-lead text-xl leading-loose" v-click="2"><Latex tex="a \propto \frac{F}{m} \quad \Longrightarrow \quad F \propto ma" /></div>
 
 <div class="card" v-click="4">物体加速度的大小跟它受到的<b>作用力成正比</b>，跟它的<b>质量成反比</b>，加速度的方向跟作用力的方向<b>相同</b>。</div>
 
@@ -71,14 +71,14 @@ clicks: 3
 <div class="ask"><Latex tex="F = ma" /> 是矢量式 —— 要判断哪个方向上有加速度，先看哪个方向上有没有合力？</div>
 
 <div class="half-grid" v-click="1">
-<div class="cases-swap">
+<div class="eq-swap">
 <div class="stack" style="align-items: center" v-click.hide="2">
-<div class="mini-title">平面内：两个方向</div>
-<div class="cases-formula"><Latex tex="\begin{cases} \sum F_x = m a_x \\ \sum F_y = m a_y \end{cases}" display /></div>
+<div class="mini-title"><mdi-vector-square class="text-xl" />平面内：两个方向</div>
+<div><Latex tex="\begin{cases} \sum F_x = m a_x \\ \sum F_y = m a_y \end{cases}" display /></div>
 </div>
 <div class="stack" style="align-items: center" v-click="2">
-<div class="mini-title">空间里：三个方向</div>
-<div class="cases-formula"><Latex tex="\begin{cases} \sum F_x = m a_x \\ \sum F_y = m a_y \\ \sum F_z = m a_z \end{cases}" display /></div>
+<div class="mini-title"><mdi-cube-outline class="text-xl" />空间里：三个方向</div>
+<div><Latex tex="\begin{cases} \sum F_x = m a_x \\ \sum F_y = m a_y \\ \sum F_z = m a_z \end{cases}" display /></div>
 </div>
 </div>
 <div class="stack divider-l">
@@ -98,8 +98,8 @@ clicks: 3
 # 合力的方向就是加速度的方向
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><ForceDecompSvg :show-decomp="$clicks >= 1" /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><ForceDecompSvg :show-decomp="$clicks >= 1" /></div>
 <div class="stack stack-dense divider-l">
 <div class="ask">物块受到一支斜向右下方的合力 <Latex tex="F" />，它的加速度朝哪个方向？两个方向上各自会怎样？</div>
 <div v-click="1">加速度与合力<b>共线同向</b>；把 <Latex tex="F" /> 分解到水平、竖直两个方向，就得到两个方向的分加速度。</div>
@@ -117,7 +117,7 @@ clicks: 3
 
 <div class="page-grow">
 <div class="half-grid">
-<div class="figure-cell"><FreeFallSvg :show-forces="$clicks >= 1" /></div>
+<div class="fig-cell"><FreeFallSvg :show-forces="$clicks >= 1" /></div>
 <div class="stack divider-l">
 <div class="ask">小球只受重力、由静止下落，它的加速度是多大？</div>
 <div v-click="1">受力分析：小球只受重力 <Latex tex="G = mg" />，方向竖直向下，所以合力 <Latex tex="F_{\text{合}} = mg" />。</div>
@@ -134,9 +134,9 @@ clicks: 5
 # 水平面滑动摩擦
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><FrictionSlideSvg :show-forces="$clicks >= 1" /></div>
-<div class="stack stack-condensed divider-l">
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><FrictionSlideSvg :show-forces="$clicks >= 1" /></div>
+<div class="stack fig-text-dense divider-l leading-snug">
 <div class="ask">物块以速度 <Latex tex="v" /> 在水平面上向右滑动，撤去动力后只受滑动摩擦力，加速度多大？</div>
 <div v-click="1">先看<b>运动</b>：物块不会飞离地面，也不会嵌入地面，只能沿水平面运动 —— 竖直方向<b>始终没有速度，也就没有加速度</b>。</div>
 <div v-click="2">由 <Latex tex="F = ma" />：竖直方向加速度为零 <Latex tex="\Rightarrow" /> 合力为零 <Latex tex="\Rightarrow" /> <Latex tex="F_N = G = mg" />。</div>
@@ -154,9 +154,9 @@ clicks: 5
 # 光滑斜面下滑
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><SmoothInclineSvg :show-forces="$clicks >= 1" /></div>
-<div class="stack stack-condensed divider-l">
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><SmoothInclineSvg :show-forces="$clicks >= 1" /></div>
+<div class="stack fig-text-dense divider-l leading-snug">
 <div class="ask">光滑斜面上的物块由静止下滑，沿斜面的加速度是多大？</div>
 <div v-click="1">先看<b>运动</b>：物块不会脱离斜面，也不会嵌入斜面，只能沿斜面下滑 —— 垂直斜面方向<b>没有速度，也没有加速度</b>。</div>
 <div v-click="2">垂直斜面方向合力为零，而重力在该方向的分力是 <Latex tex="mg\cos\theta" />，所以 <Latex tex="F_N = mg\cos\theta" />。</div>
@@ -174,8 +174,8 @@ clicks: 4
 # 斜面连体：绳上有拉力吗
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><ConnectedNoForceSvg :show-forces="$clicks >= 1" /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><ConnectedNoForceSvg :show-forces="$clicks >= 1" /></div>
 <div class="stack stack-dense divider-l">
 <div class="ask">光滑斜面上，<Latex tex="m_1" />、<Latex tex="m_2" /> 用轻绳相连一起下滑。绳的拉力 <Latex tex="F_T" /> 是多大？</div>
 <div v-click="1">两物块由绳相连，沿斜面的加速度相同。</div>
@@ -193,8 +193,8 @@ clicks: 4
 # 斜面连体：加上拉力
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><PulledInclineSvg :show-forces="$clicks >= 1" /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><PulledInclineSvg :show-forces="$clicks >= 1" /></div>
 <div class="stack stack-dense divider-l">
 <div class="ask">若对下方的 <Latex tex="m_1" /> 再加一个沿斜面向下的拉力 <Latex tex="F" />，绳上还有拉力吗？</div>
 <div v-click="1">两物块仍由绳相连，沿斜面的加速度相同。</div>
@@ -212,8 +212,8 @@ clicks: 1
 # 粗糙斜面
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><RoughInclineProblemSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><RoughInclineProblemSvg /></div>
 <div class="stack divider-l">
 <div class="ask">物块在粗糙斜面上，可能上滑，也可能下滑。两种情况下，它的加速度各是多大？</div>
 <div v-click="1">题目给了哪个方向的运动，滑动摩擦力就<b>与这个方向相反</b> —— 先把运动方向定下来，再谈受力。</div>
@@ -228,9 +228,9 @@ clicks: 4
 # 粗糙斜面：向下滑
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><RoughInclineDownSvg :show-forces="$clicks >= 1" /></div>
-<div class="stack stack-condensed divider-l">
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><RoughInclineDownSvg :show-forces="$clicks >= 1" /></div>
+<div class="stack fig-text-dense divider-l leading-snug">
 <div class="ask">物块沿粗糙斜面<b>下滑</b>，加速度多大？</div>
 <div v-click="1">受力分析：重力 <Latex tex="G = mg" /> 竖直向下，支持力 <Latex tex="F_N" /> 垂直斜面向上，滑动摩擦力 <Latex tex="F_f" /> 沿斜面<b>向上</b>（与下滑方向相反）。</div>
 <div v-click="2">正交分解 —— 垂直斜面方向：<Latex tex="F_N = mg\cos\theta" />。</div>
@@ -247,9 +247,9 @@ clicks: 5
 # 粗糙斜面：向上滑
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><RoughInclineUpSvg :show-forces="$clicks >= 1" /></div>
-<div class="stack stack-condensed divider-l">
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><RoughInclineUpSvg :show-forces="$clicks >= 1" /></div>
+<div class="stack fig-text-dense divider-l leading-snug">
 <div class="ask">物块沿粗糙斜面<b>上滑</b>，加速度多大？</div>
 <div v-click="1">受力分析：重力 <Latex tex="G = mg" /> 竖直向下，支持力 <Latex tex="F_N" /> 垂直斜面向上，滑动摩擦力 <Latex tex="F_f" /> 沿斜面<b>向下</b>（与上滑方向相反）。</div>
 <div v-click="2">正交分解 —— 垂直斜面方向：<Latex tex="F_N = mg\cos\theta" />。</div>
@@ -274,14 +274,14 @@ clicks: 3
 <div>某一瞬间的合力，决定的就是那一瞬间的加速度；合力变了，加速度立刻跟着变。</div>
 </div>
 
-<div class="two-cases" v-click="2">
+<div class="case-grid" v-click="2">
 <div class="case-item">
-<div class="case-name">阻滞下落</div>
+<div class="case-name text-lg"><mdi-weather-windy class="text-xl" />阻滞下落</div>
 <div><Latex tex="F_f = kv" /></div>
 <div class="mini-note">阻力随速度变化</div>
 </div>
 <div class="case-item">
-<div class="case-name">弹簧</div>
+<div class="case-name text-lg"><mdi-arrow-oscillating class="text-xl" />弹簧</div>
 <div><Latex tex="F = k\Delta x" /></div>
 <div class="mini-note">弹力随形变量变化</div>
 </div>
@@ -296,7 +296,7 @@ clicks: 1
 
 <div class="page-grow">
 <div class="half-grid">
-<div class="figure-cell"><SpringBallSetupSvg :show-forces="$clicks >= 1" /></div>
+<div class="fig-cell"><SpringBallSetupSvg :show-forces="$clicks >= 1" /></div>
 <div class="stack divider-l">
 <div class="mini-title">轻质托盘弹簧小球下落模型</div>
 <div>地面上竖直固定一根轻弹簧，顶端连着轻质托盘。小球从托盘正上方由静止落下，落入托盘后与弹簧一起运动。</div>
@@ -321,13 +321,13 @@ clicks: 5
 
 <div class="page-grow">
 <div class="half-grid">
-<div class="figure-cell figure-cell-plot"><SpringBallVtGraph :step="$clicks" /></div>
-<div class="stack stack-dense divider-l phase-list">
-<div v-click="1"><b>自由落体段</b>：只受重力，图线是斜率不变的直线。</div>
-<div v-click="2"><b>压缩加速段</b>：<Latex tex="mg > kx" />，合力仍向下但在减小，图线向上鼓起、斜率越来越小；到 <Latex tex="mg = kx" /> 处速度达到最大。</div>
-<div v-click="3"><b>压缩减速段</b>：<Latex tex="kx > mg" />，合力向上，图线弯过 <Latex tex="t" /> 轴，速度减小到零（最低点）。</div>
-<div v-click="4"><b>向上反弹段</b>：速度转为向上，先加速后减速，回到接触点。</div>
-<div v-click="5"><b>脱离上抛段</b>：离开托盘后只受重力，图线恢复成直线，到最高点速度为零。</div>
+<div class="fig-cell fig-cell-plot"><SpringBallVtGraph :step="$clicks" /></div>
+<div class="stack fig-text-dense divider-l leading-snug">
+<div v-click="1"><mdi-numeric-1-circle class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>自由落体段</b>：只受重力，图线是斜率不变的直线。</div>
+<div v-click="2"><mdi-numeric-2-circle class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>压缩加速段</b>：<Latex tex="mg > kx" />，合力仍向下但在减小，图线向上鼓起、斜率越来越小；到 <Latex tex="mg = kx" /> 处速度达到最大。</div>
+<div v-click="3"><mdi-numeric-3-circle class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>压缩减速段</b>：<Latex tex="kx > mg" />，合力向上，图线弯过 <Latex tex="t" /> 轴，速度减小到零（最低点）。</div>
+<div v-click="4"><mdi-numeric-4-circle class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>向上反弹段</b>：速度转为向上，先加速后减速，回到接触点。</div>
+<div v-click="5"><mdi-numeric-5-circle class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>脱离上抛段</b>：离开托盘后只受重力，图线恢复成直线，到最高点速度为零。</div>
 </div>
 </div>
 </div>
@@ -340,7 +340,7 @@ clicks: 2
 
 <div class="page-grow">
 <div class="half-grid">
-<div class="figure-cell figure-cell-plot" v-click="1"><SpringBallAxGraph /></div>
+<div class="fig-cell fig-cell-plot" v-click="1"><SpringBallAxGraph /></div>
 <div class="stack divider-l">
 <div class="ask">以释放点为位移原点，加速度 <Latex tex="a" /> 随下落位移 <Latex tex="x" /> 怎样变化？</div>
 <div v-click="2">接触托盘前：只受重力，<Latex tex="a = g" />，图线是<b>水平直线</b>。</div>
@@ -378,7 +378,7 @@ clicks: 3
 
 <div class="page-grow">
 <div class="half-grid">
-<div class="figure-cell figure-cell-plot" v-click="1"><SpringBallAxGraph :show-areas="true" /></div>
+<div class="fig-cell fig-cell-plot" v-click="1"><SpringBallAxGraph :show-areas="true" /></div>
 <div class="stack divider-l">
 <div class="ask">小球从释放点由静止下落，到最低点速度又减为零。全程 <Latex tex="\int a\,\mathrm{d}x" /> 等于多少？</div>
 <div v-click="2"><Latex tex="v_{\text{初}} = 0" />、<Latex tex="v_{\text{末}} = 0" />，所以 <Latex tex="\int a\,\mathrm{d}x = 0" />。</div>
@@ -398,13 +398,13 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">剪断一根绳的瞬间，物体受到的力会立刻改变吗？</div>
 
-<div class="two-cases" v-click="1">
+<div class="case-grid" v-click="1">
 <div class="case-item">
-<div class="case-name">弹簧</div>
+<div class="case-name text-lg"><mdi-arrow-oscillating class="text-xl" />弹簧</div>
 <div>形变来不及改变，<b>弹力不突变</b>。</div>
 </div>
 <div class="case-item" v-click="2">
-<div class="case-name">绳、杆、接触面弹力</div>
+<div class="case-name text-lg"><mdi-swap-horizontal class="text-xl" />绳、杆、接触面弹力</div>
 <div>可以突变 —— 突然消失，或者突然改变大小和方向。</div>
 </div>
 </div>
@@ -419,8 +419,8 @@ clicks: 3
 # 模型一：两根绳串联
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><CutDoubleRopeSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><CutDoubleRopeSvg /></div>
 <div class="stack divider-l">
 <div class="ask">天花板挂绳系球 A（<Latex tex="m" />），A 下方用绳系球 B（<Latex tex="2m" />）。剪断上端绳的瞬间，A、B 的加速度各是多大？</div>
 <div v-click="1">剪断后 A、B 一起下落，绳无法再绷紧，绳的拉力突变为 <Latex tex="F_T = 0" />。</div>
@@ -437,8 +437,8 @@ clicks: 3
 # 模型二：上绳下弹簧
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><CutRopeSpringSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><CutRopeSpringSvg /></div>
 <div class="stack divider-l">
 <div class="ask">天花板挂绳系球 A（<Latex tex="m" />），A 下方用轻弹簧系球 B（<Latex tex="2m" />）。剪断上端绳的瞬间，A、B 的加速度各是多大？</div>
 <div v-click="1">弹簧形变不突变 —— 剪断瞬间弹力仍是 <Latex tex="2mg" />：向上拉 B，向下拉 A。</div>
@@ -455,8 +455,8 @@ clicks: 3
 # 模型三：斜绳加水平绳
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><CutHorizontalRopeSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><CutHorizontalRopeSvg /></div>
 <div class="stack divider-l">
 <div class="ask">小球被一根与竖直方向成 <Latex tex="\theta" /> 角的轻绳吊住，左侧再用水平轻绳拉住。剪断水平绳的瞬间，球的加速度多大？</div>
 <div v-click="1">剪断瞬间球的速度为零，只能沿圆弧切向运动 —— 因此沿绳方向的加速度为零。</div>
@@ -473,8 +473,8 @@ clicks: 3
 # 模型四：斜弹簧加水平绳
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><CutHorizontalSpringSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><CutHorizontalSpringSvg /></div>
 <div class="stack divider-l">
 <div class="ask">把斜绳换成轻弹簧，同样剪断水平绳的瞬间，球的加速度多大？</div>
 <div v-click="1">弹簧形变不突变，弹力保持原值 <Latex tex="F_T = \frac{mg}{\cos\theta}" />（方向仍沿弹簧）。</div>
@@ -496,11 +496,11 @@ clicks: 2
 <div class="half-grid" v-click="1">
 <div class="stack" style="align-items: center">
 <TwoForceRodSvg />
-<div class="fig-cap">两端都是铰链、只受两端的拉压 —— <b>二力杆</b></div>
+<div class="fig-cap"><mdi-swap-horizontal class="text-lg text-accent-2 inline-block align-middle mr-1" />两端都是铰链、只受两端的拉压 —— <b>二力杆</b></div>
 </div>
 <div class="stack divider-l" style="align-items: center">
 <WallFixedRodSvg />
-<div class="fig-cap">一端被固定死、不能转动 —— <b>多力杆</b></div>
+<div class="fig-cap"><mdi-lock-outline class="text-lg text-accent-2 inline-block align-middle mr-1" />一端被固定死、不能转动 —— <b>多力杆</b></div>
 </div>
 </div>
 
@@ -534,8 +534,8 @@ clicks: 3
 # 撤去挡板
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><BaffleInclineSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><BaffleInclineSvg /></div>
 <div class="stack divider-l">
 <div class="ask">光滑斜面上放着一个圆球，左侧被竖直挡板挡住。撤去挡板的瞬间，球的加速度多大？</div>
 <div v-click="1">撤去前：球静止，合力为零。</div>
@@ -552,8 +552,8 @@ clicks: 3
 # 剪断斜绳
 
 <div class="page-grow">
-<div class="half-grid half-grid-text">
-<div class="figure-cell"><SlantRopeCutSvg /></div>
+<div class="half-grid fig-text-wide">
+<div class="fig-cell"><SlantRopeCutSvg /></div>
 <div class="stack divider-l">
 <div class="ask">小球被一根与竖直方向成 <Latex tex="\theta" /> 角的轻绳吊住，左侧还受水平拉力 <Latex tex="F_T" /> 保持静止。剪断这根斜绳的瞬间，球的加速度多大？</div>
 <div v-click="1">静止时水平方向平衡：<Latex tex="F_T = mg\tan\theta" />。</div>
@@ -564,17 +564,16 @@ clicks: 3
 </div>
 
 ---
----
 
 # 课堂小结
 
 <div class="page-grow">
 <div class="stack">
-<div class="summary-line"><b>内容</b>——加速度跟作用力成正比、跟质量成反比，方向跟作用力方向相同；式中的 <Latex tex="F" /> 是合力。</div>
-<div class="summary-line"><b>单位</b>——国际单位制下规定 <Latex tex="1\ \text{N} = 1\ \text{kg}\cdot\text{m}\cdot\text{s}^{-2}" />，<Latex tex="k = 1" />，定律写成 <Latex tex="F = ma" />。</div>
-<div class="summary-line"><b>应用</b>——正交分解，各方向分别列 <Latex tex="F = ma" />；先做受力分析，再求加速度。</div>
-<div class="summary-line"><b>瞬时性</b>——力变，加速度立刻变；弹簧不突变，绳、杆、接触面弹力可以突变。</div>
-<div class="summary-line"><b>图像</b>——<Latex tex="a\text{-}x" /> 图的面积给出 <Latex tex="\frac{\Delta(v^2)}{2}" />，正负面积相等即速度回到原值。</div>
+<div class="summary-line"><mdi-book-open-variant class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>内容</b>——加速度跟作用力成正比、跟质量成反比，方向跟作用力方向相同；式中的 <Latex tex="F" /> 是合力。</div>
+<div class="summary-line"><mdi-ruler class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>单位</b>——国际单位制下规定 <Latex tex="1\ \text{N} = 1\ \text{kg}\cdot\text{m}\cdot\text{s}^{-2}" />，<Latex tex="k = 1" />，定律写成 <Latex tex="F = ma" />。</div>
+<div class="summary-line"><mdi-equal class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>应用</b>——正交分解，各方向分别列 <Latex tex="F = ma" />；先做受力分析，再求加速度。</div>
+<div class="summary-line"><mdi-lightning-bolt class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>瞬时性</b>——力变，加速度立刻变；弹簧不突变，绳、杆、接触面弹力可以突变。</div>
+<div class="summary-line"><mdi-chart-timeline-variant class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>图像</b>——<Latex tex="a\text{-}x" /> 图的面积给出 <Latex tex="\frac{\Delta(v^2)}{2}" />，正负面积相等即速度回到原值。</div>
 </div>
 
 <div class="key">无论题目怎么变，落脚点只有一句：先找合力，再由 <Latex tex="F = ma" /> 求加速度。</div>

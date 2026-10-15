@@ -27,14 +27,14 @@ const { width = 360 } = defineProps<{ width?: number }>();
       <!-- 太阳球体径向渐变 -->
       <radialGradient id="solar-disc" cx="40%" cy="38%" r="65%">
         <stop offset="0%" stop-color="#fef08a" />
-        <stop offset="50%" stop-color="#f59e0b" />
+        <stop offset="50%" stop-color="var(--c-accent-glow)" />
         <stop offset="100%" stop-color="#d97706" />
       </radialGradient>
 
       <!-- 光伏单晶硅表面反光渐变 -->
       <linearGradient id="pv-glass" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="rgba(96,165,250,0.32)" />
-        <stop offset="45%" stop-color="rgba(37,99,235,0.24)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-velocity) 32%, transparent)" />
+        <stop offset="45%" stop-color="color-mix(in srgb, var(--c-accent-2-glow) 24%, transparent)" />
         <stop offset="100%" stop-color="rgba(30,64,175,0.38)" />
       </linearGradient>
 
@@ -44,18 +44,18 @@ const { width = 360 } = defineProps<{ width?: number }>();
 
     <!-- ==================== 0. 背景能量流耦合线（虚线导轨） ==================== -->
     <!-- 太阳光辐射至光伏电池阵列的光子射线 -->
-    <line x1="74" y1="46" x2="236" y2="74" stroke="#e2a846" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.35" />
+    <line x1="74" y1="46" x2="236" y2="74" stroke="var(--c-accent)" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.35" />
     <!-- 太阳与原子核能纵向能量轴 -->
     <line x1="52" y1="68" x2="52" y2="82" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.25" />
 
     <!-- ==================== 1. 太阳能（太阳）[严格居中于 X=52, Y=42] ==================== -->
     <g class="transition-transform duration-300">
       <!-- 柔和外光晕圈 -->
-      <circle cx="52" cy="42" r="17" fill="none" stroke="rgba(245,158,11,0.22)" stroke-width="1.2" stroke-dasharray="4 2.5" />
+      <circle cx="52" cy="42" r="17" fill="none" stroke="color-mix(in srgb, var(--c-accent-glow) 22%, transparent)" stroke-width="1.2" stroke-dasharray="4 2.5" />
       <!-- 太阳球体本体 -->
-      <circle cx="52" cy="42" r="12.5" fill="url(#solar-disc)" stroke="#f59e0b" stroke-width="1.6" filter="url(#solar-glow)" />
+      <circle cx="52" cy="42" r="12.5" fill="url(#solar-disc)" stroke="var(--c-accent-glow)" stroke-width="1.6" filter="url(#solar-glow)" />
       <!-- 精确 8 芒对称辐射光线（内径 18，外径 25） -->
-      <g stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round" opacity="0.85">
+      <g stroke="var(--c-accent-glow)" stroke-width="1.8" stroke-linecap="round" opacity="0.85">
         <!-- 上下左右正交光芒 -->
         <line x1="52" y1="24" x2="52" y2="17" />
         <line x1="52" y1="60" x2="52" y2="67" />
@@ -82,13 +82,13 @@ const { width = 360 } = defineProps<{ width?: number }>();
       </g>
 
       <!-- 轨道上的电子量子粒子（青蓝与金色高亮，赋予动感） -->
-      <circle cx="74" cy="108" r="2.2" fill="#38bdf8" filter="url(#quantum-glow)" />
-      <circle cx="41" cy="89" r="2.2" fill="#38bdf8" filter="url(#quantum-glow)" />
-      <circle cx="63" cy="127" r="2.2" fill="#38bdf8" filter="url(#quantum-glow)" />
+      <circle cx="74" cy="108" r="2.2" fill="var(--c-physics-light)" filter="url(#quantum-glow)" />
+      <circle cx="41" cy="89" r="2.2" fill="var(--c-physics-light)" filter="url(#quantum-glow)" />
+      <circle cx="63" cy="127" r="2.2" fill="var(--c-physics-light)" filter="url(#quantum-glow)" />
 
       <!-- 原子核核心（金色核心 + 能量微晕） -->
-      <circle cx="52" cy="108" r="5" fill="rgba(226,168,70,0.25)" />
-      <circle cx="52" cy="108" r="3.2" fill="#e2a846" stroke="#fef08a" stroke-width="1" filter="url(#quantum-glow)" />
+      <circle cx="52" cy="108" r="5" fill="color-mix(in srgb, var(--c-accent) 25%, transparent)" />
+      <circle cx="52" cy="108" r="3.2" fill="var(--c-accent)" stroke="#fef08a" stroke-width="1" filter="url(#quantum-glow)" />
     </g>
 
     <!-- ==================== 3. 风能（现代风力发电机）[立轴 X=152] ==================== -->
@@ -97,7 +97,7 @@ const { width = 360 } = defineProps<{ width?: number }>();
       <path
         d="M 116 48 C 128 48 136 44 146 44"
         fill="none"
-        stroke="rgba(56,189,248,0.4)"
+        stroke="color-mix(in srgb, var(--c-physics-light) 40%, transparent)"
         stroke-width="1.4"
         stroke-dasharray="3.5 3.5"
         stroke-linecap="round"
@@ -105,29 +105,29 @@ const { width = 360 } = defineProps<{ width?: number }>();
       <path
         d="M 158 64 C 170 64 180 67 194 67"
         fill="none"
-        stroke="rgba(56,189,248,0.4)"
+        stroke="color-mix(in srgb, var(--c-physics-light) 40%, transparent)"
         stroke-width="1.4"
         stroke-dasharray="3.5 3.5"
         stroke-linecap="round"
       />
 
       <!-- 风机塔筒（底部微拓宽的现代流线型塔身） -->
-      <polygon points="150.8,56 153.2,56 155.2,132 148.8,132" fill="rgba(148,163,184,0.3)" stroke="currentColor" stroke-width="1.2" opacity="0.8" />
+      <polygon points="150.8,56 153.2,56 155.2,132 148.8,132" fill="color-mix(in srgb, var(--c-text-dim) 30%, transparent)" stroke="currentColor" stroke-width="1.2" opacity="0.8" />
       <!-- 塔底基座 -->
       <rect x="146.5" y="130" width="11" height="2.5" rx="1" fill="currentColor" opacity="0.65" />
 
       <!-- 机舱箱体 (Nacelle) -->
-      <rect x="147.5" y="52.5" width="11" height="6.5" rx="2.5" fill="rgba(148,163,184,0.5)" stroke="currentColor" stroke-width="1.2" opacity="0.9" />
+      <rect x="147.5" y="52.5" width="11" height="6.5" rx="2.5" fill="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke="currentColor" stroke-width="1.2" opacity="0.9" />
 
       <!-- 三叶片转子系统（严谨以 120° 旋转，翼型叶片，带微渐变填充与描边） -->
-      <g fill="rgba(226,168,70,0.22)" stroke="#e2a846" stroke-width="1.4" stroke-linejoin="round">
+      <g fill="color-mix(in srgb, var(--c-accent) 22%, transparent)" stroke="var(--c-accent)" stroke-width="1.4" stroke-linejoin="round">
         <use href="#aerodynamic-blade" />
         <use href="#aerodynamic-blade" transform="rotate(120 152 55.5)" />
         <use href="#aerodynamic-blade" transform="rotate(240 152 55.5)" />
       </g>
 
       <!-- 轮毂中心整流罩 (Rotor Hub Cap) -->
-      <circle cx="152" cy="55.5" r="4.2" fill="#e2a846" stroke="#fef08a" stroke-width="1.2" filter="url(#quantum-glow)" />
+      <circle cx="152" cy="55.5" r="4.2" fill="var(--c-accent)" stroke="#fef08a" stroke-width="1.2" filter="url(#quantum-glow)" />
     </g>
 
     <!-- ==================== 4. 光伏（光伏电站阵列与稳固支架） ==================== -->
@@ -144,10 +144,10 @@ const { width = 360 } = defineProps<{ width?: number }>();
       <!-- 底板阴影轮廓 -->
       <path d="M 246 65 L 310 65 L 294 105 L 230 105 Z" fill="none" stroke="rgba(30,58,138,0.5)" stroke-width="3" stroke-linejoin="round" />
       <!-- 晶硅受光面 -->
-      <path d="M 246 64 L 310 64 L 294 104 L 230 104 Z" fill="url(#pv-glass)" stroke="#60a5fa" stroke-width="1.8" stroke-linejoin="round" />
+      <path d="M 246 64 L 310 64 L 294 104 L 230 104 Z" fill="url(#pv-glass)" stroke="var(--c-velocity)" stroke-width="1.8" stroke-linejoin="round" />
 
       <!-- 电池栅线（经纬对称细分网格：3列 × 2行） -->
-      <g stroke="#93c5fd" stroke-width="1.2" opacity="0.65">
+      <g stroke="var(--c-velocity-light)" stroke-width="1.2" opacity="0.65">
         <!-- 纵向栅线（带透视角度） -->
         <line x1="267.3" y1="64" x2="251.3" y2="104" />
         <line x1="288.7" y1="64" x2="272.7" y2="104" />
@@ -164,8 +164,8 @@ const { width = 360 } = defineProps<{ width?: number }>();
       <!-- 柔和主地平线 -->
       <line x1="20" y1="132" x2="320" y2="132" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="6 5" opacity="0.45" />
       <!-- 两个地表基准小刻度，强化空间稳固感 -->
-      <circle cx="152" cy="132" r="1.5" fill="#e2a846" />
-      <circle cx="264" cy="132" r="1.5" fill="#60a5fa" />
+      <circle cx="152" cy="132" r="1.5" fill="var(--c-accent)" />
+      <circle cx="264" cy="132" r="1.5" fill="var(--c-velocity)" />
     </g>
   </svg>
 </template>

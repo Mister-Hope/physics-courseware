@@ -251,9 +251,9 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
 </script>
 
 <template>
-  <div class="md">
+  <div class="def-mirror">
     <svg
-      class="md-svg"
+      class="def-mirror-svg"
       viewBox="0 0 660 470"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
@@ -262,34 +262,34 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
       <defs>
         <!-- 桌面木纹/实验台面渐变 -->
         <linearGradient :id="`mdTable-${uid}`" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="rgba(148,163,184,0.34)" />
-          <stop offset="50%" stop-color="rgba(100,116,139,0.26)" />
-          <stop offset="100%" stop-color="rgba(51,65,85,0.42)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 34%, transparent)" />
+          <stop offset="50%" stop-color="color-mix(in srgb, var(--c-neutral-500) 26%, transparent)" />
+          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-700) 42%, transparent)" />
         </linearGradient>
 
         <!-- 铁架台金属立柱与底座渐变 -->
         <linearGradient :id="`mdStand-${uid}`" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#475569" />
-          <stop offset="45%" stop-color="#94a3b8" />
-          <stop offset="100%" stop-color="#334155" />
+          <stop offset="0%" stop-color="var(--c-neutral-600)" />
+          <stop offset="45%" stop-color="var(--c-text-dim)" />
+          <stop offset="100%" stop-color="var(--c-neutral-700)" />
         </linearGradient>
 
         <!-- 平面镜玻璃反射面高光渐变 -->
         <linearGradient :id="`mdMirrorM-${uid}`" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#bae6fd" />
-          <stop offset="50%" stop-color="#38bdf8" />
+          <stop offset="50%" stop-color="var(--c-physics-light)" />
           <stop offset="100%" stop-color="#0284c7" />
         </linearGradient>
         <linearGradient :id="`mdMirrorN-${uid}`" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#93c5fd" />
-          <stop offset="50%" stop-color="#60a5fa" />
-          <stop offset="100%" stop-color="#2563eb" />
+          <stop offset="0%" stop-color="var(--c-velocity-light)" />
+          <stop offset="50%" stop-color="var(--c-velocity)" />
+          <stop offset="100%" stop-color="var(--c-accent-2-glow)" />
         </linearGradient>
 
         <!-- 墙上激光光点径向发光 -->
         <radialGradient :id="`mdSpotGlow-${uid}`" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="rgba(254,202,202,1)" />
-          <stop offset="38%" stop-color="rgba(248,113,113,0.85)" />
+          <stop offset="38%" stop-color="color-mix(in srgb, var(--c-force) 85%, transparent)" />
           <stop offset="100%" stop-color="rgba(248,113,113,0)" />
         </radialGradient>
 
@@ -301,20 +301,20 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           patternTransform="rotate(45)"
           patternUnits="userSpaceOnUse"
         >
-          <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(148,163,184,0.24)" stroke-width="1.4" />
+          <line x1="0" y1="0" x2="0" y2="10" stroke="color-mix(in srgb, var(--c-text-dim) 24%, transparent)" stroke-width="1.4" />
         </pattern>
       </defs>
 
       <!-- 右侧墙面（带剖面斜线与刻度标尺） -->
-      <rect :x="WALL_X" y="30" width="26" height="390" fill="rgba(148,163,184,0.10)" />
+      <rect :x="WALL_X" y="30" width="26" height="390" fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" />
       <rect :x="WALL_X" y="30" width="26" height="390" :fill="`url(#mdWallHatch-${uid})`" />
-      <line :x1="WALL_X" y1="30" :x2="WALL_X" :y2="TABLE_Y" stroke="#cbd5e1" stroke-width="2.4" />
+      <line :x1="WALL_X" y1="30" :x2="WALL_X" :y2="TABLE_Y" stroke="var(--c-neutral-300)" stroke-width="2.4" />
       <text
         :x="WALL_X + 13"
         y="22"
         font-size="15"
         font-weight="600"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
         text-anchor="middle"
       >
         墙
@@ -326,7 +326,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         :y1="homeSpotY"
         :x2="WALL_X + 28"
         :y2="homeSpotY"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-dasharray="4 4"
       />
@@ -334,8 +334,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         :cx="WALL_X"
         :cy="homeSpotY"
         r="4"
-        fill="#0f1425"
-        stroke="#94a3b8"
+        fill="var(--c-bg-soft)"
+        stroke="var(--c-text-dim)"
         stroke-width="1.8"
       />
       <text
@@ -343,7 +343,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         :x="WALL_X - 12"
         :y="homeSpotY - 6"
         font-size="12"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
         text-anchor="end"
       >
         原光点
@@ -356,8 +356,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         width="18"
         height="30"
         rx="2"
-        fill="#334155"
-        stroke="#64748b"
+        fill="var(--c-neutral-700)"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.4"
       />
       <rect
@@ -366,8 +366,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         width="18"
         height="30"
         rx="2"
-        fill="#334155"
-        stroke="#64748b"
+        fill="var(--c-neutral-700)"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.4"
       />
 
@@ -378,7 +378,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         :y1="TABLE_Y"
         x2="508"
         :y2="TABLE_Y"
-        stroke="rgba(148,163,184,0.4)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 40%, transparent)"
         stroke-width="1.4"
         stroke-dasharray="6 5"
       />
@@ -387,18 +387,18 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
       <path
         :d="tableSurfacePath"
         :fill="`url(#mdTable-${uid})`"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.6"
         stroke-linejoin="round"
       />
       <path
         :d="tableTopEdgePath"
         fill="none"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2.6"
         stroke-linecap="round"
       />
-      <text x="44" :y="TABLE_Y - 10" font-size="15" font-weight="600" fill="#94a3b8">桌面</text>
+      <text x="44" :y="TABLE_Y - 10" font-size="15" font-weight="600" fill="var(--c-text-dim)">桌面</text>
 
       <!-- 两座镜架未偏转前的竖直基准虚线（清晰衬托“镜子连同支架一起向内倾斜”） -->
       <line
@@ -417,7 +417,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         :y1="MIRROR_TOP - 14"
         :x2="MIRROR_R"
         :y2="TABLE_Y"
-        stroke="rgba(96,165,250,0.32)"
+        stroke="color-mix(in srgb, var(--c-velocity) 32%, transparent)"
         stroke-width="1.3"
         stroke-dasharray="4 4"
       />
@@ -430,12 +430,12 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         <path
           d="M -26 0 L -22 -9 L 22 -9 L 26 0 Z"
           :fill="`url(#mdStand-${uid})`"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.3"
           stroke-linejoin="round"
         />
         <!-- 底座锁紧螺母 -->
-        <rect x="-6" y="-13" width="12" height="4" rx="1.5" fill="#94a3b8" />
+        <rect x="-6" y="-13" width="12" height="4" rx="1.5" fill="var(--c-text-dim)" />
 
         <!-- 下方双侧镂空支架立柱（中间留出通光窗口，让激光从下方穿过而不穿模！） -->
         <rect
@@ -443,18 +443,18 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :y="MIRROR_BOTTOM - TABLE_Y"
           width="3"
           :height="TABLE_Y - MIRROR_BOTTOM - 9"
-          fill="#64748b"
+          fill="var(--c-neutral-500)"
         />
         <rect
           x="1.5"
           :y="MIRROR_BOTTOM - TABLE_Y"
           width="3"
           :height="TABLE_Y - MIRROR_BOTTOM - 9"
-          fill="#475569"
+          fill="var(--c-neutral-600)"
         />
         <!-- 通光孔上下横梁 -->
-        <rect x="-6" :y="MIRROR_BOTTOM - TABLE_Y" width="12" height="4" rx="1.5" fill="#94a3b8" />
-        <rect x="-5.5" y="-28" width="11" height="3.5" rx="1" fill="#64748b" />
+        <rect x="-6" :y="MIRROR_BOTTOM - TABLE_Y" width="12" height="4" rx="1.5" fill="var(--c-text-dim)" />
+        <rect x="-5.5" y="-28" width="11" height="3.5" rx="1" fill="var(--c-neutral-500)" />
 
         <!-- 平面镜 M 金属背板与上下卡爪（反射面在 x=0 朝右，背板在左侧 x<0） -->
         <rect
@@ -463,8 +463,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           width="5"
           :height="MIRROR_BOTTOM - MIRROR_TOP + 4"
           rx="1.5"
-          fill="#334155"
-          stroke="#64748b"
+          fill="var(--c-neutral-700)"
+          stroke="var(--c-neutral-500)"
           stroke-width="1"
         />
         <!-- 光学平面镜背剖面斜线（表示左侧为镜背、右侧为反射面） -->
@@ -537,11 +537,11 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         <path
           d="M -26 0 L -22 -9 L 22 -9 L 26 0 Z"
           :fill="`url(#mdStand-${uid})`"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.3"
           stroke-linejoin="round"
         />
-        <rect x="-6" y="-13" width="12" height="4" rx="1.5" fill="#94a3b8" />
+        <rect x="-6" y="-13" width="12" height="4" rx="1.5" fill="var(--c-text-dim)" />
 
         <!-- 支架立柱 -->
         <rect
@@ -551,7 +551,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :height="TABLE_Y - MIRROR_BOTTOM - 9"
           :fill="`url(#mdStand-${uid})`"
         />
-        <rect x="-6" :y="MIRROR_BOTTOM - TABLE_Y" width="12" height="4" rx="1.5" fill="#94a3b8" />
+        <rect x="-6" :y="MIRROR_BOTTOM - TABLE_Y" width="12" height="4" rx="1.5" fill="var(--c-text-dim)" />
 
         <!-- 平面镜 N 金属背板（反射面在 x=0 朝左，背板在右侧 x>0） -->
         <rect
@@ -560,12 +560,12 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           width="5"
           :height="MIRROR_BOTTOM - MIRROR_TOP + 4"
           rx="1.5"
-          fill="#334155"
-          stroke="#64748b"
+          fill="var(--c-neutral-700)"
+          stroke="var(--c-neutral-500)"
           stroke-width="1"
         />
         <!-- 光学平面镜背剖面斜线（表示右侧为镜背、左侧为反射面） -->
-        <g stroke="#60a5fa" stroke-width="1.2" opacity="0.55">
+        <g stroke="var(--c-velocity)" stroke-width="1.2" opacity="0.55">
           <line x1="6.5" :y1="MIRROR_TOP - TABLE_Y + 6" x2="12" :y2="MIRROR_TOP - TABLE_Y + 12" />
           <line x1="6.5" :y1="MIRROR_TOP - TABLE_Y + 20" x2="12" :y2="MIRROR_TOP - TABLE_Y + 26" />
           <line x1="6.5" :y1="MIRROR_TOP - TABLE_Y + 34" x2="12" :y2="MIRROR_TOP - TABLE_Y + 40" />
@@ -599,7 +599,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           font-size="20"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
           text-anchor="middle"
         >
           N
@@ -610,8 +610,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
       <!-- 激光笔桌面固定楔形托架 -->
       <path
         d="M 42 420 L 48 394 L 84 385 L 90 420 Z"
-        fill="#334155"
-        stroke="#64748b"
+        fill="var(--c-neutral-700)"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.4"
         stroke-linejoin="round"
       />
@@ -623,8 +623,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           width="50"
           height="15"
           rx="3.5"
-          fill="rgba(226,168,70,0.28)"
-          stroke="#e2a846"
+          fill="color-mix(in srgb, var(--c-accent) 28%, transparent)"
+          stroke="var(--c-accent)"
           stroke-width="2"
         />
         <!-- 笔身防滑环与开关按钮 -->
@@ -633,7 +633,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           y1="-7.5"
           x2="-42"
           y2="7.5"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.4"
           opacity="0.7"
         />
@@ -642,26 +642,26 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           y1="-7.5"
           x2="-18"
           y2="7.5"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.4"
           opacity="0.7"
         />
-        <rect x="-34" y="-10.5" width="10" height="3" rx="1" fill="#fbbf24" />
+        <rect x="-34" y="-10.5" width="10" height="3" rx="1" fill="var(--c-accent-light)" />
         <!-- 前端出光准直镜头 -->
         <path
           d="M -6 -5.5 L 0 -3.5 L 0 3.5 L -6 5.5 Z"
-          fill="#fbbf24"
+          fill="var(--c-accent-light)"
           stroke="#fde68a"
           stroke-width="1.2"
         />
       </g>
-      <text x="30" y="362" font-size="15" font-weight="600" fill="#e2a846">激光笔</text>
+      <text x="30" y="362" font-size="15" font-weight="600" fill="var(--c-accent)">激光笔</text>
 
       <!-- ==================== 激光束光路（外层柔光 + 核心亮线 + 传播方向箭头） ==================== -->
       <path
         :d="rayPath"
         fill="none"
-        stroke="rgba(251,191,36,0.22)"
+        stroke="color-mix(in srgb, var(--c-accent-light) 22%, transparent)"
         stroke-width="7"
         stroke-linejoin="round"
         stroke-linecap="round"
@@ -669,7 +669,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
       <path
         :d="rayPath"
         fill="none"
-        stroke="#fbbf24"
+        stroke="var(--c-accent-light)"
         stroke-width="2.6"
         stroke-linejoin="round"
         stroke-linecap="round"
@@ -680,7 +680,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         :key="idx"
         :from="seg.from"
         :to="seg.to"
-        stroke="#fbbf24"
+        stroke="var(--c-accent-light)"
         stroke-width="2.4"
         :head-size="8"
       />
@@ -694,15 +694,15 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :cy="pressArrow.to.y + 3"
           :rx="10 + press * 14"
           :ry="2.5 + press * 2.5"
-          fill="rgba(248,113,113,0.22)"
-          stroke="rgba(248,113,113,0.55)"
+          fill="color-mix(in srgb, var(--c-force) 22%, transparent)"
+          stroke="color-mix(in srgb, var(--c-force) 55%, transparent)"
           stroke-width="1.2"
         />
         <!-- 随 press 上下移动并加粗的挤压箭头 -->
         <CourseArrow
           :from="pressArrow.from"
           :to="pressArrow.to"
-          stroke="#f87171"
+          stroke="var(--c-force)"
           :stroke-width="3 + press * 1.4"
         />
         <text
@@ -710,8 +710,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :y="pressArrow.labelY"
           font-size="16"
           font-weight="600"
-          fill="#f87171"
-          stroke="#0f1425"
+          fill="var(--c-force)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -725,7 +725,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         v-if="trace.spot && trace.spot.y - homeSpotY > 14"
         :from="{ x: WALL_X + 14, y: homeSpotY + 3 }"
         :to="{ x: WALL_X + 14, y: trace.spot.y - 3 }"
-        stroke="#f87171"
+        stroke="var(--c-force)"
         stroke-width="2"
         :head-size="7"
       />
@@ -736,7 +736,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :cx="trace.spot.x"
           :cy="trace.spot.y"
           r="6"
-          fill="#f87171"
+          fill="var(--c-force)"
           stroke="#fef2f2"
           stroke-width="1.6"
         />
@@ -745,9 +745,9 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
           :y="trace.spot.y + 6"
           font-size="17"
           font-weight="600"
-          fill="#f87171"
+          fill="var(--c-force)"
           text-anchor="end"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3.5"
           paint-order="stroke"
         >
@@ -755,8 +755,8 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
         </text>
       </g>
     </svg>
-    <div class="md-ctrl">
-      <label class="md-label">
+    <div class="def-mirror-ctrl">
+      <label class="def-mirror-label">
         <span>按压力度（轻 ↔ 重）</span>
         <input v-model.number="press" type="range" min="0" max="1" step="0.02" />
       </label>
@@ -765,7 +765,7 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
 </template>
 
 <style scoped>
-.md {
+.def-mirror {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -774,14 +774,14 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
   width: 100%;
 }
 
-.md-svg {
+.def-mirror-svg {
   display: block;
   width: 100%;
   height: auto;
   margin: 0 auto;
 }
 
-.md-ctrl {
+.def-mirror-ctrl {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
@@ -791,21 +791,21 @@ const laserTransform = `translate(${LASER.x} ${LASER.y}) rotate(${-AIM})`;
   max-width: 27rem;
 }
 
-.md-label {
+.def-mirror-label {
   display: flex;
   gap: 0.7rem;
   align-items: center;
 
   width: 100%;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-size: 0.78rem;
 }
 
-.md-label input {
+.def-mirror-label input {
   flex: 1;
   min-width: 0;
-  accent-color: var(--c-accent, #e2a846);
+  accent-color: var(--c-accent);
 }
 </style>

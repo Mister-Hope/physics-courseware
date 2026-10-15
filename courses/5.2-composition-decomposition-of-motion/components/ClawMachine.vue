@@ -97,7 +97,7 @@ const yMotorText = computed(() =>
 </script>
 
 <template>
-  <div class="claw-machine">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -111,8 +111,8 @@ const yMotorText = computed(() =>
         width="648"
         height="392"
         rx="18"
-        fill="rgba(148,163,184,0.05)"
-        stroke="rgba(148,163,184,0.35)"
+        fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
         stroke-width="2"
       />
       <rect
@@ -121,22 +121,22 @@ const yMotorText = computed(() =>
         width="576"
         height="328"
         rx="10"
-        fill="rgba(148,163,184,0.08)"
-        stroke="rgba(148,163,184,0.25)"
+        fill="color-mix(in srgb, var(--c-text-dim) 8%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)"
         stroke-width="1.6"
       />
-      <text x="100" y="60" font-family="KaTeX_Main" font-size="15" fill="rgba(203,213,225,0.7)">
+      <text x="100" y="60" font-family="KaTeX_Main" font-size="15" fill="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)">
         俯视：从上往下看
       </text>
       <!-- 两侧导轨（2 号电机驱动横梁沿它前后移动） -->
-      <rect :x="RAIL_LEFT - 4" y="78" width="8" height="304" rx="4" fill="rgba(148,163,184,0.35)" />
+      <rect :x="RAIL_LEFT - 4" y="78" width="8" height="304" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" />
       <rect
         :x="RAIL_RIGHT - 4"
         y="78"
         width="8"
         height="304"
         rx="4"
-        fill="rgba(148,163,184,0.35)"
+        fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
       />
       <!-- 横梁 -->
       <rect
@@ -145,7 +145,7 @@ const yMotorText = computed(() =>
         :width="RAIL_RIGHT - RAIL_LEFT"
         height="18"
         rx="7"
-        fill="rgba(148,163,184,0.38)"
+        fill="color-mix(in srgb, var(--c-text-dim) 38%, transparent)"
       />
       <!-- 小车（1 号电机驱动它沿横梁左右移动） -->
       <rect
@@ -154,8 +154,8 @@ const yMotorText = computed(() =>
         width="44"
         height="30"
         rx="8"
-        fill="rgba(148,163,184,0.45)"
-        stroke="rgba(203,213,225,0.7)"
+        fill="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)"
         stroke-width="1.6"
       />
       <!-- 爪（俯视，悬在落点上方） -->
@@ -163,17 +163,17 @@ const yMotorText = computed(() =>
         <circle
           r="22"
           fill="none"
-          stroke="rgba(226,168,70,0.55)"
+          stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="6 5"
         />
-        <circle r="7" fill="#e2a846" />
+        <circle r="7" fill="var(--c-accent)" />
         <line
           x1="8"
           y1="0"
           x2="19"
           y2="0"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -182,7 +182,7 @@ const yMotorText = computed(() =>
           y1="0"
           x2="-19"
           y2="0"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -191,7 +191,7 @@ const yMotorText = computed(() =>
           y1="8"
           x2="0"
           y2="19"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -200,17 +200,17 @@ const yMotorText = computed(() =>
           y1="-8"
           x2="0"
           y2="-19"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
       </g>
       <!-- 娃娃堆 -->
-      <circle cx="206" cy="140" r="20" fill="#f87171" opacity="0.7" />
-      <circle cx="268" cy="118" r="17" fill="#60a5fa" opacity="0.7" />
-      <circle cx="336" cy="150" r="18" fill="#e2a846" opacity="0.7" />
+      <circle cx="206" cy="140" r="20" fill="var(--c-force)" opacity="0.7" />
+      <circle cx="268" cy="118" r="17" fill="var(--c-velocity)" opacity="0.7" />
+      <circle cx="336" cy="150" r="18" fill="var(--c-accent)" opacity="0.7" />
       <circle cx="240" cy="300" r="19" fill="#a78bfa" opacity="0.7" />
-      <circle cx="430" cy="330" r="20" fill="#34d399" opacity="0.7" />
+      <circle cx="430" cy="330" r="20" fill="var(--c-ok)" opacity="0.7" />
       <circle cx="520" cy="212" r="17" fill="#f472b6" opacity="0.7" />
       <!-- 目标：爪要落到的那个娃娃 -->
       <circle
@@ -218,11 +218,11 @@ const yMotorText = computed(() =>
         cy="98"
         r="22"
         fill="none"
-        stroke="rgba(226,168,70,0.85)"
+        stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
         stroke-width="2.4"
         stroke-dasharray="7 5"
       />
-      <circle cx="612" cy="98" r="16" fill="#f87171" opacity="0.85" />
+      <circle cx="612" cy="98" r="16" fill="var(--c-force)" opacity="0.85" />
       <!-- 取物口（抓到之后投放的位置，与这次对位无关） -->
       <rect
         x="540"
@@ -230,8 +230,8 @@ const yMotorText = computed(() =>
         width="100"
         height="58"
         rx="8"
-        fill="rgba(148,163,184,0.12)"
-        stroke="rgba(226,168,70,0.7)"
+        fill="color-mix(in srgb, var(--c-text-dim) 12%, transparent)"
+        stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="1.8"
         stroke-dasharray="7 5"
       />
@@ -241,7 +241,7 @@ const yMotorText = computed(() =>
         text-anchor="middle"
         font-family="KaTeX_Main"
         font-size="15"
-        fill="rgba(226,168,70,0.9)"
+        fill="color-mix(in srgb, var(--c-accent) 90%, transparent)"
       >
         取物口
       </text>
@@ -250,7 +250,7 @@ const yMotorText = computed(() =>
         v-if="trail"
         :points="trailPoints"
         fill="none"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="3"
         stroke-linecap="round"
         opacity="0.9"
@@ -262,7 +262,7 @@ const yMotorText = computed(() =>
           :y1="clawY"
           :x2="clawX"
           :y2="OY"
-          stroke="rgba(96,165,250,0.5)"
+          stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="6 5"
         />
@@ -271,12 +271,12 @@ const yMotorText = computed(() =>
           :y1="clawY"
           :x2="OX"
           :y2="clawY"
-          stroke="rgba(96,165,250,0.5)"
+          stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="6 5"
         />
-        <circle :cx="clawX" :cy="OY" r="4.5" fill="#60a5fa" />
-        <circle :cx="OX" :cy="clawY" r="4.5" fill="#60a5fa" />
+        <circle :cx="clawX" :cy="OY" r="4.5" fill="var(--c-velocity)" />
+        <circle :cx="OX" :cy="clawY" r="4.5" fill="var(--c-velocity)" />
       </g>
       <!-- 坐标轴 -->
       <g v-if="showProjection">
@@ -285,7 +285,7 @@ const yMotorText = computed(() =>
           :y1="OY"
           :x2="OX + 170"
           :y2="OY"
-          stroke="rgba(203,213,225,0.85)"
+          stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
           stroke-width="2"
         />
         <line
@@ -293,16 +293,16 @@ const yMotorText = computed(() =>
           :y1="OY"
           :x2="OX"
           :y2="OY - 128"
-          stroke="rgba(203,213,225,0.85)"
+          stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
           stroke-width="2"
         />
         <polygon
           :points="`${OX + 170},${OY} ${OX + 158},${OY - 5} ${OX + 158},${OY + 5}`"
-          fill="rgba(203,213,225,0.85)"
+          fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
         />
         <polygon
           :points="`${OX},${OY - 128} ${OX - 5},${OY - 116} ${OX + 5},${OY - 116}`"
-          fill="rgba(203,213,225,0.85)"
+          fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
         />
         <text
           :x="OX + 180"
@@ -310,7 +310,7 @@ const yMotorText = computed(() =>
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#cbd5e1"
+          fill="var(--c-neutral-300)"
         >
           x
         </text>
@@ -319,7 +319,7 @@ const yMotorText = computed(() =>
           :y="OY + 30"
           font-family="KaTeX_Main"
           font-size="14"
-          fill="rgba(203,213,225,0.75)"
+          fill="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)"
         >
           左右
         </text>
@@ -329,7 +329,7 @@ const yMotorText = computed(() =>
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#cbd5e1"
+          fill="var(--c-neutral-300)"
         >
           y
         </text>
@@ -338,7 +338,7 @@ const yMotorText = computed(() =>
           :y="OY - 118"
           font-family="KaTeX_Main"
           font-size="14"
-          fill="rgba(203,213,225,0.75)"
+          fill="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)"
         >
           前后
         </text>
@@ -348,7 +348,7 @@ const yMotorText = computed(() =>
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#cbd5e1"
+          fill="var(--c-neutral-300)"
         >
           O
         </text>
@@ -361,8 +361,8 @@ const yMotorText = computed(() =>
           width="92"
           height="24"
           rx="7"
-          fill="rgba(96,165,250,0.2)"
-          stroke="#60a5fa"
+          fill="color-mix(in srgb, var(--c-velocity) 20%, transparent)"
+          stroke="var(--c-velocity)"
           stroke-width="1.6"
         />
         <text
@@ -371,7 +371,7 @@ const yMotorText = computed(() =>
           text-anchor="middle"
           font-family="KaTeX_Main"
           font-size="13"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           1 号电机（x）
         </text>
@@ -381,8 +381,8 @@ const yMotorText = computed(() =>
           width="92"
           height="24"
           rx="7"
-          fill="rgba(226,168,70,0.2)"
-          stroke="#e2a846"
+          fill="color-mix(in srgb, var(--c-accent) 20%, transparent)"
+          stroke="var(--c-accent)"
           stroke-width="1.6"
         />
         <text
@@ -391,13 +391,13 @@ const yMotorText = computed(() =>
           text-anchor="middle"
           font-family="KaTeX_Main"
           font-size="13"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           2 号电机（y）
         </text>
       </g>
     </svg>
-    <div v-if="readout" class="claw-readout">
+    <div v-if="readout" class="sim-readout">
       <span>{{ xMotorText }}</span>
       <span>{{ yMotorText }}</span>
     </div>
@@ -405,25 +405,25 @@ const yMotorText = computed(() =>
 </template>
 
 <style scoped>
-.claw-machine {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
-.claw-machine svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.claw-readout {
+.sim-readout {
   display: flex;
   gap: 1.4rem;
   justify-content: center;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-size: 0.8rem;
   white-space: nowrap;

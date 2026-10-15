@@ -170,7 +170,7 @@ layout: base-flex
   <div class="mini-title"><mdi-battery-charging />充电</div>
   <v-clicks>
 
-  <div class="text-sm">与正极相连的极板<span class="text-red-400">失去电子 → 带正电</span></div>
+  <div class="text-sm">与正极相连的极板<span class="text-danger">失去电子 → 带正电</span></div>
   <div class="text-sm">与负极相连的极板<span class="text-accent-2">获得电子 → 带负电</span></div>
   <div class="text-sm">两极板间<span class="text-accent">电势差逐渐升高</span>，直至等于电源电压</div>
 
@@ -182,7 +182,7 @@ layout: base-flex
   <v-clicks>
 
   <div class="text-sm">通过电路连接两极板</div>
-  <div class="text-sm">电子从<span class="text-accent-2">负极板</span>经导线与电阻流向<span class="text-red-400">正极板</span></div>
+  <div class="text-sm">电子从<span class="text-accent-2">负极板</span>经导线与电阻流向<span class="text-danger">正极板</span></div>
   <div class="text-sm">两极板电荷逐渐中和，<span class="text-accent">电势差降低</span></div>
 
   </v-clicks>
@@ -210,7 +210,7 @@ layout: base-flex
 
 <div class="ask mt-4">
   <mdi-head-question-outline class="text-2xl" />
-  <span>如果将充好电的电容器的<span class="text-red-400">负极接地</span>，电荷会流失吗？</span>
+  <span>如果将充好电的电容器的<span class="text-danger">负极接地</span>，电荷会流失吗？</span>
 </div>
 
 <v-clicks>
@@ -272,10 +272,10 @@ layout: base-flex
   <div class="mini-title"><mdi-battery-charging />充电</div>
   <v-clicks>
 
-  <div class="text-sm">两极板间<span class="text-red-400">电势差逐渐增大</span></div>
-  <div class="text-sm">两极板间<span class="text-red-400">场强逐渐增大</span></div>
+  <div class="text-sm">两极板间<span class="text-danger">电势差逐渐增大</span></div>
+  <div class="text-sm">两极板间<span class="text-danger">场强逐渐增大</span></div>
   <div class="text-sm">电流正向流经电源</div>
-  <div class="mt-1 text-center font-semibold text-red-400">电容器吸收电能</div>
+  <div class="mt-1 text-center font-semibold text-danger">电容器吸收电能</div>
 
   </v-clicks>
 </div>
@@ -284,10 +284,10 @@ layout: base-flex
   <div class="mini-title"><mdi-lightbulb-on-outline />放电</div>
   <v-clicks>
 
-  <div class="text-sm">两极板间<span class="text-blue-400">电势差逐渐减小</span></div>
-  <div class="text-sm">两极板间<span class="text-blue-400">场强逐渐减小</span></div>
+  <div class="text-sm">两极板间<span class="text-velocity">电势差逐渐减小</span></div>
+  <div class="text-sm">两极板间<span class="text-velocity">场强逐渐减小</span></div>
   <div class="text-sm">电流流经用电器</div>
-  <div class="mt-1 text-center font-semibold text-blue-400">电容器释放电能</div>
+  <div class="mt-1 text-center font-semibold text-velocity">电容器释放电能</div>
 
   </v-clicks>
 </div>
@@ -327,7 +327,7 @@ layout: base-flex
 
 <div v-click.right class="chat-msg chat-right">
   云层与大地 → 天然电容器<br/>
-  电势差过大 → 空气<span class="text-red-400 font-semibold">击穿</span> → 闪电放电
+  电势差过大 → 空气<span class="text-danger font-semibold">击穿</span> → 闪电放电
 </div>
 
 </div>
@@ -348,13 +348,13 @@ layout: base-flex
 </div>
 
 <div>
-<div class="my-3 border-t border-slate-700/50"></div>
+<div class="my-3 border-t cap-hairline"></div>
 <div class="font-bold text-xl">2. 击穿电压</div>
 </div>
 
 <div class="text-lg mt-1">
 
-介质所能承受的<span class="text-red-400 font-semibold">极限电压</span>。超过此值，介质被<span class="text-red-400 font-semibold">击穿</span>——形成导电通路，不可逆损伤导致电容器永久损坏。
+介质所能承受的<span class="text-danger font-semibold">极限电压</span>。超过此值，介质被<span class="text-danger font-semibold">击穿</span>——形成导电通路，不可逆损伤导致电容器永久损坏。
 
 </div>
 
@@ -534,7 +534,7 @@ layout: base-flex
 
 <div>
 
-<div class="my-2 border-t border-slate-700/50"></div>
+<div class="my-2 border-t cap-hairline"></div>
 
 <span class="font-bold text-xl">2. 定义式：</span> $C = \dfrac{Q}{U}$
 
@@ -542,7 +542,7 @@ layout: base-flex
 
 <div>
 
-<div class="my-2 border-t border-slate-700/50"></div>
+<div class="my-2 border-t cap-hairline"></div>
 
 <span class="font-bold text-xl">3、单位：</span> 法拉，简称 **法**，符号 $F$，&ensp;$1\,\text{F} = 1\,\text{C/V}$
 
@@ -679,19 +679,19 @@ $\varepsilon_r$ — 介质相对介电常数
 
 <div class="grid grid-cols-3 gap-3 mt-3">
 
-<div class="text-center text-sm px-2 py-1.5 rounded-lg border border-slate-700/50 bg-slate-900/30">
+<div class="text-center text-sm px-2 py-1.5 rounded-lg border cap-tile">
 
 $S$ <mdi-arrow-up-bold class="text-accent inline-block text-base" style="vertical-align: -0.15em" /> <span class="text-accent mx-1">→</span> C <mdi-arrow-up-bold class="text-accent inline-block text-base" style="vertical-align: -0.15em" />
 
 </div>
 
-<div class="text-center text-sm px-2 py-1.5 rounded-lg border border-slate-700/50 bg-slate-900/30">
+<div class="text-center text-sm px-2 py-1.5 rounded-lg border cap-tile">
 
 $d$ <mdi-arrow-up-bold class="text-accent inline-block text-base" style="vertical-align: -0.15em" /> <span class="text-accent mx-1">→</span> C <mdi-arrow-down-bold class="text-accent inline-block text-base" style="vertical-align: -0.15em" />
 
 </div>
 
-<div class="text-center text-sm px-2 py-1.5 rounded-lg border border-slate-700/50 bg-slate-900/30">
+<div class="text-center text-sm px-2 py-1.5 rounded-lg border cap-tile">
 
 $\varepsilon_r$ <mdi-arrow-up-bold class="text-accent inline-block text-base" style="vertical-align: -0.15em" /> <span class="text-accent mx-1">→</span> C <mdi-arrow-up-bold class="text-accent inline-block text-base" style="vertical-align: -0.15em" />
 
@@ -780,9 +780,9 @@ layout: base-flex
 
 | | $C$ | $Q$ | $\varphi$ | $E_p$ | $E$ |
 |---|---|---|---|---|---|
-| $S \uparrow$ | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="opacity-40">—</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="opacity-40">—</span> |
-| $d \uparrow$ | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="opacity-40">—</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> |
-| $\varepsilon_r \uparrow$ | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="opacity-40">—</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="opacity-40">—</span> |
+| $S \uparrow$ | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="opacity-40">—</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="opacity-40">—</span> |
+| $d \uparrow$ | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="opacity-40">—</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> |
+| $\varepsilon_r \uparrow$ | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="opacity-40">—</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="opacity-40">—</span> |
 
 </div>
 
@@ -792,9 +792,9 @@ layout: base-flex
 
 | | $C$ | $U$ | $\varphi$ | $E_p$ | $E$ |
 |---|---|---|---|---|---|
-| $S \uparrow$ | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> |
-| $d \uparrow$ | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="opacity-40">—</span> |
-| $\varepsilon_r \uparrow$ | <span v-click class="text-red-400 font-bold">↑</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> | <span v-click class="text-blue-400 font-bold">↓</span> |
+| $S \uparrow$ | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> |
+| $d \uparrow$ | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="opacity-40">—</span> |
+| $\varepsilon_r \uparrow$ | <span v-click class="text-danger font-bold">↑</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> | <span v-click class="text-velocity font-bold">↓</span> |
 
 </div>
 

@@ -157,7 +157,7 @@ const phases = computed<readonly Phase[]>(() => {
 </script>
 
 <template>
-  <div class="sfg-wrap">
+  <div class="sq-graph-wrap">
     <CoordAxes
       :x-range="[0, X_MAX]"
       :y-range="[0, 900]"
@@ -187,7 +187,7 @@ const phases = computed<readonly Phase[]>(() => {
             :y1="plot.top"
             :x2="x(t0)"
             :y2="plot.bottom"
-            stroke="rgba(148,163,184,0.38)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 38%, transparent)"
             :stroke-width="1.4 * px2user"
             stroke-dasharray="7 6"
           />
@@ -201,7 +201,7 @@ const phases = computed<readonly Phase[]>(() => {
             text-anchor="middle"
             :font-size="16 * px2user"
             font-weight="500"
-            fill="#cbd5e1"
+            fill="var(--c-neutral-300)"
           >
             {{ phase.label }}
           </text>
@@ -213,8 +213,8 @@ const phases = computed<readonly Phase[]>(() => {
             font-family="KaTeX_Math"
             font-style="italic"
             :font-size="17 * px2user"
-            fill="#f87171"
-            stroke="#0f1425"
+            fill="var(--c-force)"
+            stroke="var(--c-bg-soft)"
             :stroke-width="3 * px2user"
             paint-order="stroke"
           >
@@ -243,7 +243,7 @@ const phases = computed<readonly Phase[]>(() => {
                 :cy="y(phase.peakY)"
                 :r="4.6 * px2user"
                 :fill="phase.tagColor"
-                stroke="#0f1425"
+                stroke="var(--c-bg-soft)"
                 :stroke-width="1.8 * px2user"
               />
               <!-- 紧贴波峰上方 / 波谷下方的判读标签 -->
@@ -254,7 +254,7 @@ const phases = computed<readonly Phase[]>(() => {
                 :font-size="16.5 * px2user"
                 font-weight="600"
                 :fill="phase.tagColor"
-                stroke="#0f1425"
+                stroke="var(--c-bg-soft)"
                 :stroke-width="3.2 * px2user"
                 paint-order="stroke"
               >
@@ -272,7 +272,7 @@ const phases = computed<readonly Phase[]>(() => {
 </template>
 
 <style scoped>
-.sfg-wrap {
+.sq-graph-wrap {
   width: 100%;
   min-width: 0;
   max-width: 620px;

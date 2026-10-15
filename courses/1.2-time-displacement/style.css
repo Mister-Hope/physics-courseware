@@ -1,77 +1,37 @@
 /* ═══════════════════════════════════════════════
    质点与参考系·时间与位移 — 课程特有样式
-   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
-   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   通用设计系统与共享原子在 workspace/shared/styles/（common.css + layout.css + atoms.css）
+   页面外壳用共享 layout: base-flex；色值一律 var(--c-*)、圆角一律 var(--radius-*)、
+   字号一律共享阶梯 .text-* / .mini-note / .data-table
    ═══════════════════════════════════════════════ */
 
-/* ── 本课特有的提问行：大图标 + 一段话，两段式排布 ──
-   通用 .ask（layout.css）是纯文本行；本课标记固定为「<mdi-xxx /> + <span>」，
-   必须 flex 排布，并清掉通用规则给行内图标留的右外边距（改用 gap 控间距）。 */
-.ask {
+/* ── 共享 .ask 的两段式变体：本课提问行固定为「<mdi-xxx /> + <span>」两段式，
+   必须 flex 排布（纯文本行会碎成两行），并清掉共享规则给行内图标留的右外边距、改用 gap 控间距。
+   ⛔ 不重写共享选择器本体（style-guide §8）：只新增变体类，与 1.1-motion-description 同一写法；
+   放大档在页面上配共享阶梯 .text-*（并同时给 leading-normal，把行距压回共享的 1.5）。 ── */
+.ask.ask-row {
   display: flex;
   gap: 0.6rem;
   align-items: center;
-
-  font-weight: 600;
-  font-size: 1.2rem;
 }
 
-.ask > svg {
+.ask.ask-row > svg {
   flex-shrink: 0;
   margin-right: 0;
 }
 
-/* 反例（红）：用于"错误做法"，与强调色区分开 */
-.warn {
-  color: var(--c-danger);
-}
-
-/* 正例（绿）：用于"正确做法"，与反例红 .warn 成对 */
-.good {
-  color: #34d399;
-}
-
-/* 导航示意图（第 6 页）、图像解读（第 13 页）、纸带与 x-t 图（第 18 页）：与其它坐标图同款外框 */
-.nav-map,
-.plot-svg,
-.xt-read {
+/* ── 图（导航示意 / 纸带 / 坐标图）统一外框：同一套边框、圆角、深底 ── */
+.fig-frame {
   display: block;
 
   width: 100%;
   height: auto;
   border: 1px solid var(--c-border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 40%);
+  background: var(--c-surface);
 }
 
-.nav-map text,
-.plot-svg text,
-.xt-read text {
+.fig-frame text {
   font-family: "Times New Roman", "STIX Two Text", "Source Serif 4", Georgia, serif;
-}
-
-/* 打点计时器对比表（第 12 页）：紧凑一些，别把页面撑满 */
-.cmp-table {
-  width: 100%;
-  font-size: 0.78rem;
-}
-
-.cmp-table th {
-  padding: 0.3rem 0.9rem;
-  font-size: 0.82rem;
-}
-
-.cmp-table td {
-  padding: 0.28rem 0.9rem;
-}
-
-.cmp-table th:first-child,
-.cmp-table td:first-child {
-  width: 6.5rem;
-  color: var(--c-text-dim);
-}
-
-.cmp-table .katex {
-  font-size: 1em !important;
 }

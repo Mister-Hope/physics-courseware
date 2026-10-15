@@ -148,13 +148,13 @@ const onUp = (): void => {
 </script>
 
 <template>
-  <div class="stt">
+  <div class="sim">
     <svg
       ref="svgRef"
       viewBox="0 0 880 340"
       width="100%"
       xmlns="http://www.w3.org/2000/svg"
-      :class="{ 'stt-grabbing': dragging }"
+      :class="{ 'sim-grabbing': dragging }"
       @pointerdown="onDown"
       @pointermove="onMove"
       @pointerup="onUp"
@@ -163,7 +163,7 @@ const onUp = (): void => {
       <path
         :d="curvePath"
         fill="none"
-        stroke="#2dd4bf"
+        stroke="var(--c-physics)"
         stroke-width="3.6"
         stroke-linecap="round"
         opacity="0.9"
@@ -173,7 +173,7 @@ const onUp = (): void => {
         :y1="secant.y1"
         :x2="secant.x2"
         :y2="secant.y2"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2.4"
         stroke-dasharray="9 7"
         stroke-linecap="round"
@@ -184,22 +184,22 @@ const onUp = (): void => {
         :y1="tangent.y1"
         :x2="tangent.x2"
         :y2="tangent.y2"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
         stroke-linecap="round"
         opacity="0.95"
       />
-      <CourseArrow :from="pointB" :to="pointA" stroke="#60a5fa" stroke-width="3" />
-      <circle :cx="pointA.x" :cy="pointA.y" r="6.5" fill="#e2a846" />
-      <circle :cx="pointB.x" :cy="pointB.y" r="20" fill="rgba(96,165,250,0.16)" stroke="none" />
-      <circle :cx="pointB.x" :cy="pointB.y" r="6.5" fill="#60a5fa" />
+      <CourseArrow :from="pointB" :to="pointA" stroke="var(--c-velocity)" stroke-width="3" />
+      <circle :cx="pointA.x" :cy="pointA.y" r="6.5" fill="var(--c-accent)" />
+      <circle :cx="pointB.x" :cy="pointB.y" r="20" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="none" />
+      <circle :cx="pointB.x" :cy="pointB.y" r="6.5" fill="var(--c-velocity)" />
       <text
         :x="pointA.x - 26"
         :y="pointA.y + 26"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#e2a846"
+        fill="var(--c-accent)"
       >
         A
       </text>
@@ -209,7 +209,7 @@ const onUp = (): void => {
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
       >
         B
       </text>
@@ -218,7 +218,7 @@ const onUp = (): void => {
         :y="secantMid.y - 16"
         font-family="KaTeX_Main"
         font-size="20"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
       >
         割线
       </text>
@@ -227,19 +227,19 @@ const onUp = (): void => {
         :y="tangentLabel.y"
         font-family="KaTeX_Main"
         font-size="20"
-        fill="#e2a846"
+        fill="var(--c-accent)"
       >
         切线
       </text>
-      <text :x="300" :y="46" font-family="KaTeX_Main" font-size="21" fill="#60a5fa">
+      <text :x="300" :y="46" font-family="KaTeX_Main" font-size="21" fill="var(--c-velocity)">
         蓝箭头：物体由 B 运动到 A 的平均速度方向
       </text>
-      <text :x="300" :y="78" font-family="KaTeX_Main" font-size="21" fill="#e2a846">
+      <text :x="300" :y="78" font-family="KaTeX_Main" font-size="21" fill="var(--c-accent)">
         金线：曲线在 A 点的切线方向
       </text>
     </svg>
-    <div class="stt-bar">
-      <span class="stt-state" :class="{ 'stt-state-on': merged }">
+    <div class="sim-bar">
+      <span class="sim-state" :class="{ 'sim-state-on': merged }">
         {{ merged ? "B 与 A 重合：割线的方向就是切线方向" : "割线与切线还不重合" }}
       </span>
     </div>
@@ -247,23 +247,25 @@ const onUp = (): void => {
 </template>
 
 <style scoped>
-.stt {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
+  width: 100%;
   min-width: 0;
 }
 
-.stt svg {
+.sim svg {
   cursor: grab;
   touch-action: none;
 }
 
-.stt-grabbing {
+.sim-grabbing {
   cursor: grabbing;
 }
 
-.stt-bar {
+.sim-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.1rem;
@@ -274,18 +276,12 @@ const onUp = (): void => {
   font-size: 0.9rem;
 }
 
-.stt-tip {
-  display: inline-flex;
-  gap: 0.35rem;
-  align-items: center;
-}
-
-.stt-state {
+.sim-state {
   color: var(--c-text-dim);
 }
 
-.stt-state-on {
-  color: #e2a846;
+.sim-state-on {
+  color: var(--c-accent);
   font-weight: 700;
 }
 </style>

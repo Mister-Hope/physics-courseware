@@ -11,26 +11,26 @@
       :line-width="2.2"
       :hatch-width="1.2"
     />
-    <rect x="70" y="94" width="260" height="18" rx="4" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.9)" stroke-width="1.6" />
-    <text x="70" y="86" text-anchor="middle" font-size="16" fill="#cbd5e1">队尾</text>
-    <text x="330" y="86" text-anchor="middle" font-size="16" fill="#cbd5e1">队首</text>
-    <text x="78" y="52" font-size="15" fill="#94a3b8">去程</text>
-    <text x="240" y="52" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="#e2a846">
+    <rect x="70" y="94" width="260" height="18" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 90%, transparent)" stroke-width="1.6" />
+    <text x="70" y="86" text-anchor="middle" font-size="16" fill="var(--c-neutral-300)">队尾</text>
+    <text x="330" y="86" text-anchor="middle" font-size="16" fill="var(--c-neutral-300)">队首</text>
+    <text x="78" y="52" font-size="15" fill="var(--c-text-dim)">去程</text>
+    <text x="240" y="52" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent)">
       v
       <tspan font-size="11" dy="3">2</tspan>
     </text>
-    <CourseArrow :from="{ x: 70, y: 64 }" :to="{ x: 330, y: 64 }" stroke="#e2a846" stroke-width="3" />
-    <CourseArrow :from="{ x: 330, y: 130 }" :to="{ x: 120, y: 130 }" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 5" />
-    <text x="114" y="130" text-anchor="end" font-size="15" fill="#94a3b8">返程</text>
-    <CourseArrow :from="{ x: 40, y: 103 }" :to="{ x: 66, y: 103 }" stroke="#2dd4bf" stroke-width="3" />
-    <text x="53" y="124" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="#2dd4bf">
+    <CourseArrow :from="{ x: 70, y: 64 }" :to="{ x: 330, y: 64 }" stroke="var(--c-accent)" stroke-width="3" />
+    <CourseArrow :from="{ x: 330, y: 130 }" :to="{ x: 120, y: 130 }" stroke="var(--c-velocity)" stroke-width="3" stroke-dasharray="8 5" />
+    <text x="114" y="130" text-anchor="end" font-size="15" fill="var(--c-text-dim)">返程</text>
+    <CourseArrow :from="{ x: 40, y: 103 }" :to="{ x: 66, y: 103 }" stroke="var(--c-physics)" stroke-width="3" />
+    <text x="53" y="124" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-physics)">
       v
       <tspan font-size="11" dy="3">1</tspan>
     </text>
-    <line x1="70" y1="152" x2="180" y2="152" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <line x1="220" y1="152" x2="330" y2="152" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <line x1="70" y1="147" x2="70" y2="157" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <line x1="330" y1="147" x2="330" y2="157" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <text x="200" y="158" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="#94a3b8">L</text>
+    <line x1="70" y1="152" x2="180" y2="152" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <line x1="220" y1="152" x2="330" y2="152" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <line x1="70" y1="147" x2="70" y2="157" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <line x1="330" y1="147" x2="330" y2="157" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <text x="200" y="158" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-text-dim)">L</text>
   </svg>
 </template>

@@ -65,8 +65,8 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
 </script>
 
 <template>
-  <div class="of-wrap">
-    <div class="of-figure">
+  <div class="split-wide" style="--cols: minmax(0, 1.3fr) minmax(0, 1fr)">
+    <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <line
           :x1="origin.x - 90"
@@ -210,9 +210,9 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
       />
     </div>
 
-    <div class="of-info">
-      <div class="of-row">
-        <span class="of-name"><Latex tex="F" /></span>
+    <div class="demo-panel">
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="F" /></span>
         <input
           v-model.number="force"
           type="range"
@@ -221,10 +221,10 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
           step="1"
           aria-label="力的大小"
         />
-        <span class="of-val"><Latex :tex="forceTex" /></span>
+        <span class="demo-val"><Latex :tex="forceTex" /></span>
       </div>
-      <div class="of-row">
-        <span class="of-name"><Latex tex="\theta" /></span>
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\theta" /></span>
         <input
           v-model.number="theta"
           type="range"
@@ -233,10 +233,10 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
           step="5"
           aria-label="力与水平方向的夹角"
         />
-        <span class="of-val"><Latex :tex="thetaTex" /></span>
+        <span class="demo-val"><Latex :tex="thetaTex" /></span>
       </div>
-      <div class="of-row">
-        <span class="of-name"><Latex tex="\varphi" /></span>
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\varphi" /></span>
         <input
           v-model.number="phi"
           type="range"
@@ -245,11 +245,11 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
           step="5"
           aria-label="x 轴的倾角"
         />
-        <span class="of-val"><Latex :tex="phiTex" /></span>
+        <span class="demo-val"><Latex :tex="phiTex" /></span>
       </div>
 
-      <div class="of-result">
-        <div class="of-alpha"><Latex :tex="alphaTex" /></div>
+      <div class="demo-readout">
+        <div class="mini-note"><Latex :tex="alphaTex" /></div>
         <div style="color: var(--c-accent-2)"><Latex :tex="fxTex" /></div>
         <div style="color: var(--c-accent)"><Latex :tex="fyTex" /></div>
       </div>
@@ -258,93 +258,18 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
 </template>
 
 <style scoped>
-.of-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.of-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.of-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.of-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0;
-}
-
-.of-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.of-row {
-  display: grid;
-  grid-template-columns: 2.2rem minmax(0, 1fr) 5.4rem;
-  gap: 0.6rem;
-  align-items: center;
-
+/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数走共享 .demo-*；小字注释走共享 .mini-note */
+.demo-row {
+  --demo-read: 5.4rem;
   font-size: 0.95rem;
 }
 
-.of-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.of-val {
-  color: var(--c-text-dim);
+.demo-val {
   font-size: 0.9rem;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.of-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 2rem;
-
-  background: rgb(148 163 184 / 20%);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.of-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
-.of-result {
-  display: flex;
-  flex-direction: column;
+.demo-readout {
   gap: 0.2rem;
-
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-physics);
-
   font-size: 0.95rem;
-}
-
-.of-alpha {
-  color: var(--c-text-dim);
-  font-size: 0.85rem;
 }
 </style>

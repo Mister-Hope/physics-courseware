@@ -116,24 +116,24 @@ const ds = computed(() => {
         :cy="CY"
         :r="R"
         fill="none"
-        stroke="rgba(96,165,250,0.35)"
+        stroke="color-mix(in srgb, var(--c-velocity) 35%, transparent)"
         stroke-width="2.4"
         stroke-dasharray="7 9"
       />
       <!-- 圆心：三个 F 都指向它 -->
-      <circle :cx="CX" :cy="CY" r="4" fill="rgba(226,232,240,0.7)" />
+      <circle :cx="CX" :cy="CY" r="4" fill="color-mix(in srgb, var(--c-neutral-200) 70%, transparent)" />
       <!-- 位移 Δs：沿 v 方向的一小段（只画在顶部那一点） -->
       <CourseArrow
         :from="ds.from"
         :to="ds.to"
-        stroke="#93c5fd"
+        stroke="var(--c-velocity-light)"
         stroke-width="2.4"
         stroke-dasharray="7 6"
         opacity="0.9"
       />
       <!-- 3 个位置：v 沿切线、F 指向圆心，外加一个直角小方角强调 F ⊥ v -->
       <g v-for="s in samples" :key="s.deg">
-        <CourseArrow :from="s.p" :to="s.vTip" stroke="#60a5fa" stroke-width="3.6" />
+        <CourseArrow :from="s.p" :to="s.vTip" stroke="var(--c-velocity)" stroke-width="3.6" />
         <CourseArrow
           :from="s.p"
           :to="s.fTip"
@@ -149,13 +149,13 @@ const ds = computed(() => {
           stroke-linejoin="round"
         />
         <!-- 运动电荷（电子：蓝球 + 中间的减号） -->
-        <circle :cx="s.p.x" :cy="s.p.y" r="8.5" fill="#60a5fa" />
+        <circle :cx="s.p.x" :cy="s.p.y" r="8.5" fill="var(--c-velocity)" />
         <line
           :x1="s.p.x - 4"
           :y1="s.p.y"
           :x2="s.p.x + 4"
           :y2="s.p.y"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="2"
           stroke-linecap="round"
         />
@@ -169,8 +169,8 @@ const ds = computed(() => {
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           font-size="21"
-          fill="#60a5fa"
-          stroke="#0f1425"
+          fill="var(--c-velocity)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -182,7 +182,7 @@ const ds = computed(() => {
           text-anchor="middle"
           font-size="20"
           :fill="s.ok ? OK_COLOR : BAD_COLOR"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -197,8 +197,8 @@ const ds = computed(() => {
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="20"
-        fill="#93c5fd"
-        stroke="#0f1425"
+        fill="var(--c-velocity-light)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -211,8 +211,8 @@ const ds = computed(() => {
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="20"
-        fill="#e2e8f0"
-        stroke="#0f1425"
+        fill="var(--c-neutral-200)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -220,22 +220,22 @@ const ds = computed(() => {
       </text>
       <!-- 磁场：⊙ B 垂直纸面向外（视图沿 B 方向看） -->
       <g>
-        <circle cx="40" cy="38" r="14" fill="none" stroke="#e2a846" stroke-width="2.6" />
-        <circle cx="40" cy="38" r="4" fill="#e2a846" />
+        <circle cx="40" cy="38" r="14" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+        <circle cx="40" cy="38" r="4" fill="var(--c-accent)" />
         <text
           x="62"
           y="46"
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           font-size="22"
-          fill="#e2a846"
-          stroke="#0f1425"
+          fill="var(--c-accent)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
           B
         </text>
-        <text x="78" y="44" font-size="14" fill="#94a3b8">垂直纸面向外</text>
+        <text x="78" y="44" font-size="14" fill="var(--c-text-dim)">垂直纸面向外</text>
       </g>
       <!-- 这一页的落点：F 与 v、B 都垂直 -->
       <text
@@ -245,7 +245,7 @@ const ds = computed(() => {
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="19"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         F ⊥ v，F ⊥ B
       </text>

@@ -8,18 +8,21 @@
      showAnalysis=false：干净题目图 = 裸 × 磁场阵列 + 地面 + 抛出点小球 + 初速度 v（向东）
                         + 不带电的参照轨迹（落到 a）+ 落地点 a（空心圈）+ 右上角「西 → 东」方向标注；
      showAnalysis=true ：点击之后才出现分析标注 = 带正电的轨迹（落在 a 的东侧，末梢画实心点）
-                        + 沿轨迹循环运动的小球 + 沿轨迹切线的速度 v + 始终竖直向上的洛伦兹力 F_洛。
-     注意：题里的 a 是"不带电时"的落点。洛伦兹力竖直向上 ⟹ 等效重力变小、空中时间变长 ⟹ 带正电时落在
-       a 的东侧；所以 a 画在偏西的参照轨迹末端（空心圈），带电后的落点用实心点标在它东边，与讲解文字一致。
+                        + 沿轨迹循环运动的小球 + 沿轨迹切线的速度 v + 永远垂直于 v 的洛伦兹力 F_洛。
+     注意：题里的 a 是"不带电时"的落点。抛出瞬间洛伦兹力竖直向上、把球"托"住 ⟹ 等效重力变小、空中时间
+       变长 ⟹ 带正电时落在 a 的东侧；所以 a 画在偏西的参照轨迹末端（空心圈），带电后的落点用实心点标在
+       它东边，与讲解文字一致。
   ── 动画（本次改动的重点）──
      requestAnimationFrame 驱动循环进度 p ∈ [0, 1)：一个周期 3 s，小球到达地面后立刻从抛出点重来。
      小球位置 x = x₀ + R p、y = y₀ + H p²（水平匀速 + 竖直匀加速，切线越来越陡）；
      速度箭头沿轨迹切线、长度 ∝ 真实速率（p = 0 处与抛出点的静止 v 箭头一样长），
-     洛伦兹力箭头恒竖直向上、长度固定。只在 showAnalysis 为 true 时启动 rAF，
+     洛伦兹力箭头按 F = qv×B 算：**永远垂直于速度**（正电荷时 = 速度矢量在屏幕上逆时针转 90°），
+     长度 ∝ 速率（F = qvB）。抛出瞬间 v 向东、B 向北 ⟹ F 竖直向上；球一旦向下有了速度，F 就向东偏，
+     落地前几乎指向东北 —— 不是"始终竖直向上"。只在 showAnalysis 为 true 时启动 rAF，
      该 prop 转 false 或组件卸载时 cancelAnimationFrame。
-  ── 渲染（图栏宽约 393 CSS px）──
-     svg 定宽 380px、渲染高 ≈ 242px（缩放 ≈ 0.58）：viewBox 660×420 与所有坐标都不动，
-     只把"尺寸类"数值按 1.7× 放大（font-size / 圆 r / stroke-width / 箭头三角 head-size /
+  ── 渲染（图栏宽：第 9 页题目页 ≈ 438px、第 10 页解析页 ≈ 500px）──
+     svg 宽度吃满所在栏（上限 --fig-max = 540px）、渲染高 ≈ 320px（缩放 ≈ 0.76）：viewBox 660×420
+     与所有坐标都不动，只把"尺寸类"数值按 1.7× 放大（font-size / 圆 r / stroke-width / 箭头三角 head-size /
      FieldDots 的 size 与 line-width / 阴影带 thickness 与线宽），否则图内字号只剩七八像素。
   ── 几何（viewBox 用户单位；x 向右 = 东，y 向下 = 更低）──
      抛出点 (196, 210)：小球空心圆 r = 15；地面 y = 352、从 x = 110 铺到 610；落差 H = 142。
@@ -152,36 +155,65 @@ onBeforeUnmount(stop);
 /** 初速度箭头长度：抛出点那个静止的 v 箭头与运动小球在 p = 0 处的 v 箭头取同一个长度，两处对得上 */
 const V0_LEN = 58;
 const V0_TIP: Point = { x: THROW.x + V0_LEN, y: THROW.y };
-/** 洛伦兹力箭头长度（恒竖直向上、恒定不变） */
-const FORCE_LEN = 118;
+/** 洛伦兹力箭头在抛出瞬间的长度（p = 0 处 F 与 v 垂直、大小配得上初速度） */
+const FORCE_LEN = 104;
 
 /** 小球当前位置 */
 const ball = computed<Point>(() => archAt(progress.value, CHARGED_RANGE));
 
-/** 速度箭头：起点在球心、方向沿轨迹切线（竖直分量 = 2·H·p 随 p 线性增大 ⟹ 越来越陡），长度 ∝ 真实速率 */
+/**
+ * 小球速度矢量（SVG 用户单位；x 向右 = 东，y 向下 = 更低）
+ *
+ * 轨迹 x = x₀ + R p、y = y₀ + H p² ⟹ dx/dp = R 恒定、dy/dp = 2Hp 随 p 线性增大
+ */
+const velocityVector = computed<Point>(() => ({
+  x: CHARGED_RANGE,
+  y: 2 * DROP * progress.value,
+}));
+
+/**
+ * 速度箭头：起点在球心、方向沿轨迹切线（竖直分量 = 2·H·p 随 p 线性增大 ⟹ 越来越陡），长度 ∝ 真实速率
+ */
 const velocityArrow = computed<{ from: Point; to: Point }>(() => {
-  const p = progress.value;
-  const vy = 2 * DROP * p;
-  const length = V0_LEN * Math.hypot(1, vy / CHARGED_RANGE);
-  const norm = Math.hypot(CHARGED_RANGE, vy) || 1;
-  const origin = archAt(p, CHARGED_RANGE);
+  const v = velocityVector.value;
+  const speed = Math.hypot(v.x, v.y);
+  const length = V0_LEN * (speed / CHARGED_RANGE);
+  const origin = archAt(progress.value, CHARGED_RANGE);
+
+  return { from: origin, to: { x: origin.x + (v.x / speed) * length, y: origin.y + (v.y / speed) * length } };
+});
+
+/**
+ * 洛伦兹力箭头：F = qv×B —— 方向永远垂直于 v。
+ *
+ * 这里 v 向东（+x）、B 向北（纸面向里）⟹ 对**正电荷** F 就是把 v 在屏幕上逆时针转 90°：
+ * 以 (v_x, v_y) 表示 v（y 向下为正），则 F 的方向矢量 ∝ (v_y, −v_x)。
+ *   p = 0（v 水平向东）：F = (0, −v_x) 竖直向上 —— 与题目"带正电时被托起"吻合；
+ *   p = 1（v 斜向右下）：F 指向右上（东北），越来越平 —— 不再是"始终竖直向上"。
+ * 大小 F = qvB ∝ 速率，所以箭头与速度箭头同步变长。
+ */
+const forceArrow = computed<{ from: Point; to: Point }>(() => {
+  const v = velocityVector.value;
+  const speed = Math.hypot(v.x, v.y);
+  const length = FORCE_LEN * (speed / CHARGED_RANGE);
+  const origin = archAt(progress.value, CHARGED_RANGE);
 
   return {
     from: origin,
-    to: { x: origin.x + (CHARGED_RANGE / norm) * length, y: origin.y + (vy / norm) * length },
+    to: { x: origin.x + (v.y / speed) * length, y: origin.y - (v.x / speed) * length },
   };
 });
 
-/** 洛伦兹力箭头：赤道处 v 向东、B 向北 ⟹ 正电荷受力始终竖直向上，大小不变 */
-const forceArrow = computed<{ from: Point; to: Point }>(() => ({
-  from: ball.value,
-  to: { x: ball.value.x, y: ball.value.y - FORCE_LEN },
+/** 洛伦兹力箭头中点：标签贴在中点右侧，箭头转到哪个方向都跟着走 */
+const forceArrowMid = computed<Point>(() => ({
+  x: (forceArrow.value.from.x + forceArrow.value.to.x) / 2,
+  y: (forceArrow.value.from.y + forceArrow.value.to.y) / 2,
 }));
 
-/** F_洛 的标签：贴在箭头右侧、跟着小球走 */
+/** F_洛 的标签：贴在箭头中点右侧（箭头恒指向右上，标签不会压住箭头） */
 const forceLabel = computed<Point>(() => ({
-  x: ball.value.x + 15,
-  y: ball.value.y - FORCE_LEN * 0.62,
+  x: forceArrowMid.value.x + 16,
+  y: forceArrowMid.value.y - 4,
 }));
 
 /** 上屏文字统一加深色光晕；带中文下标的字光晕收细，免得汉字被描边涂成实心块 */
@@ -193,8 +225,8 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="equator-throw">
-    <svg :viewBox="`0 0 ${W} ${H}`" class="equator-throw-svg" xmlns="http://www.w3.org/2000/svg">
+  <div class="fig-equator">
+    <svg :viewBox="`0 0 ${W} ${H}`" class="fig-svg" xmlns="http://www.w3.org/2000/svg">
       <FieldDots
         :x="FIELD.x"
         :y="FIELD.y"
@@ -337,19 +369,16 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-.equator-throw {
+/* 赤道抛球图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
+   —— 第 9 页题目页的图栏约 438px，第 10 页解析页图栏约 500px，540px 让两处都被栏宽限住、吃满可用面积 */
+.fig-equator {
   width: 100%;
-}
 
-.equator-throw-svg {
-  display: block;
-  width: 380px;
-  max-width: 100%;
-  height: auto;
+  --fig-max: 540px;
 }
 
 /* CourseArrow 的标签字号写死在共享组件里（15），这里按同一个 1.7× 台阶调到 31 */
-.equator-throw-svg :deep(.course-arrow text) {
+.fig-equator :deep(.course-arrow text) {
   font-size: 31px;
   stroke-width: 6px;
 }

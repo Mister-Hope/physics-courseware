@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════
    实验：探究平抛运动的特点 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css + atoms.css）
+   页面外壳用共享 layout: base-flex；色值一律 var(--c-*) / 圆角 var(--radius-*) / 字号走 .text-* 阶梯
+   步骤条（.step-list）/ 数据表（.data-table）/ 图注（.fig-cap）直接用共享原子，不在此自建
    ═══════════════════════════════════════════════ */
 
 /* ── 封面装饰：组件按 width:100% 输出，这里限住它在右下角的尺寸 ── */
@@ -10,52 +11,42 @@
 }
 
 /* ── 图占满所在栏 ── */
-.figure-cell {
+.pm-figure {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 0;
 }
 
-.figure-cell svg {
+.pm-figure svg {
   max-height: 20rem;
 }
 
-/* ── 图左文右：推导行多时给文字更宽的栏 ── */
-.half-grid-text {
-  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-  align-items: center;
+/* ── 左图右文：推导行多时给文字更宽的栏（比例走共享 .split-wide 的 --cols 旋钮）── */
+.pm-split {
+  --cols: minmax(0, 0.86fr) minmax(0, 1.14fr);
 }
 
-/* ── 推导栏：行数多，整体收紧一档 ── */
-.solution-stack {
-  --stack-gap: 0.62rem;
-
-  font-size: 0.94rem;
-  line-height: 1.55;
+.pm-split > * {
+  overflow-wrap: anywhere;
 }
 
-.solution-stack .ask {
-  font-size: 0.98rem;
-  line-height: 1.5;
+/* ── 推导栏：行数多，整体收紧一档（字号交给共享阶梯，行高与收紧后的间距配平）── */
+.pm-solution {
+  --stack-gap: 0.45rem;
+
+  line-height: 1.4;
 }
 
-.solution-stack .key {
-  font-size: 0.94rem;
-  line-height: 1.6;
-}
-
-/* ── 单独一行的公式 ── */
-.eq {
-  font-size: 1.4rem;
+/* ── 单独一行的公式（字号由页面上的 .text-2xl 决定）── */
+.pm-eq {
   text-align: center;
 }
 
-/* ── 实验记录表 ── */
+/* ── 实验记录表：结构走共享 .data-table，此处只补居中 / 行首列左对齐 / 书写高度 ── */
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
 }
 
 .data-table th,
@@ -77,14 +68,17 @@
 }
 
 /* 空白记录表：留出书写高度 */
-.data-table-blank td {
+.pm-table-blank td {
   height: 2.6rem;
 }
 
-/* 图注 / 表下小字 */
-.fig-note {
-  color: var(--c-text-dim);
-  font-size: 0.82rem;
+/* ── 步骤条：结构走共享 .step-list/.step-item/.step-no，这里只留密度变体 ── */
+.pm-steps {
+  --stack-gap: 0.45rem;
+
   line-height: 1.5;
-  text-align: center;
+}
+
+.pm-steps .step-no {
+  min-width: 1.5rem;
 }

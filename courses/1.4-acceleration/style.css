@@ -1,8 +1,12 @@
 /* ═══════════════════════════════════════════════
    速度变化快慢的描述——加速度 — 课程特有样式
-   通用设计系统在 workspace/shared/styles/（common.css + layout.css + atoms.css）
-   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
-   色值一律 var(--c-*)、圆角一律 var(--radius-*)、字号一律 .text-* 阶梯 / .mini-note
+   通用设计系统在 workspace/shared/styles/；页面外壳用共享 layout: base-flex，此处只放本课特有样式
+
+   前缀（4 个概念前缀 + 1 个页面前缀）：
+     intro- 引入页数据表 / 结论气泡 · cmp- 对比类比（定义三栏、方向对比条、对比计算块）
+     chain- "变化量大 / 变化快"六格链条 · p14- 第 14 页高铁枕木滚动（页面专属，§6 的 p<页号>-）
+     vt-   v-t 交互组件（在 components/VTMotion.vue 的 <style scoped> 内）
+   色值一律 var(--c-*) / color-mix(...)、圆角一律 var(--radius-*)、字号一律 .text-* 阶梯 / .mini-note
    编号步骤条 / 数据表 / 左图右文栅格 / 提问·结论等原子直接用共享版，不在此自建
    ═══════════════════════════════════════════════ */
 
@@ -12,25 +16,23 @@
   font-size: 2.1rem !important;
 }
 
-/* ── 课外话 / 教材旁例：虚线小气泡 ──
-   字号（0.85rem）与弱化色写在页面的 .mini-note 上，这里只管"气泡"本身。 */
-.fun-note {
+/* ── 引入页：教材旁例的虚线小气泡（字号与弱化色写在页面的 .mini-note 上，这里只管"气泡"）── */
+.intro-note {
   padding: 0.7rem 0.9rem;
   border: 1px dashed var(--c-border-glow);
   border-radius: var(--radius-md);
   background: var(--c-accent-soft);
 }
 
-/* ── 引入页：百公里加速表（左）──
-   数字用等宽数字，避免位数变化时列宽跳动；
-   单元格的对齐与强调色写在页面里（text-right / text-accent）。 */
-.car-table {
+/* ── 引入页：百公里加速表 ──
+   数字用等宽数字，避免位数变化时列宽跳动；单元格的对齐与强调色写在页面里（text-right / text-accent）。 */
+.intro-table {
   width: 100%;
   border-collapse: collapse;
   font-variant-numeric: tabular-nums;
 }
 
-.car-table th {
+.intro-table th {
   padding: 0.28rem 0.4rem;
   border-bottom: 1px solid var(--c-border);
 
@@ -40,27 +42,26 @@
   letter-spacing: 0.04em;
 }
 
-.car-table td {
+.intro-table td {
   padding: 0.34rem 0.4rem;
   border-top: none;
   border-bottom: 1px solid var(--c-border);
   background: transparent;
 }
 
-/* ── 类比定义框的三栏排布（左框 · 箭头 · 右框）──
-   框体走共享 .card，这里只管"框—箭头—框"这一处结构。 */
-.ratio-grid {
+/* ── 定义类比三栏（v = Δx/Δt → 类比 → a = Δv/Δt）：框体走共享 .card，这里只管"框—箭头—框"结构 ── */
+.cmp-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 4.5rem minmax(0, 1fr);
   gap: 0.8rem;
   align-items: stretch;
 }
 
-.ratio-grid > * {
+.cmp-grid > * {
   min-width: 0;
 }
 
-.ratio-arrow {
+.cmp-arrow {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -70,35 +71,61 @@
   color: var(--c-accent);
 }
 
-.ratio-arrow > span {
+.cmp-arrow > span {
   line-height: 1;
 }
 
-/* ── 类比定义框（v = Δx/Δt → a = Δv/Δt；课后总结三栏）──
-   外壳走共享 .card（只有定义类内容用卡片），本课只补"加速度"这一列的蓝色调。 */
-.card-blue {
+/* ── 蓝色调：定义类比里的"加速度"框、课后总结里的"方向"框（外壳走共享 .card）── */
+.cmp-blue {
   border-color: color-mix(in srgb, var(--c-accent-2) 28%, transparent);
   background: color-mix(in srgb, var(--c-accent-2) 6%, transparent);
 }
 
-/* ── 对比条（v↔Δx / a↔Δv）：两栏栅格用共享 .half-grid，这里只管两条彩色竖标 ── */
-.cmp-cell {
+/* ── 对比条（速度的方向 ↔ 加速度的方向）：两栏栅格用共享 .half-grid，这里只管两条彩色竖标 ── */
+.cmp-bar {
   padding-left: 0.9rem;
   border-left: 2px solid var(--c-border-glow);
 }
 
-.cmp-cell-blue {
+.cmp-bar-blue {
   border-left-color: var(--c-accent-2);
 }
 
-/* ── 六概念链条（位移大 → … → 速度变化快）── */
-.chain6 {
+/* ── 对比计算块（跑车 / 家用轿车"每 1 s 速度增加多少"）：字重与小字注释写在页面里 ── */
+.cmp-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--c-accent);
+
+  font-variant-numeric: tabular-nums;
+}
+
+.cmp-calc-blue {
+  border-left-color: var(--c-accent-2);
+}
+
+.cmp-calc-head {
+  display: flex;
+  gap: 0.8rem;
+  align-items: baseline;
+}
+
+.cmp-calc-time {
+  margin-left: auto;
+  color: var(--c-text-dim);
+}
+
+/* ── 六概念链条（位移大 → … → 速度变化快）：六个"说法 → 物理量"格子并列可扫读，末格高亮 ── */
+.chain-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.8rem 1rem;
 }
 
-.chain6 > * {
+.chain-grid > * {
   min-width: 0;
 }
 
@@ -118,50 +145,21 @@
   line-height: 1.5;
 }
 
-.chain-arrow {
-  color: var(--c-accent);
+/* 末格高亮：收敛共享 .card-highlight 的观感，但它是并列条目、不是定义，所以不挂 .card */
+.chain-hot {
+  border-color: var(--c-border-glow);
+  box-shadow:
+    0 0 30px color-mix(in srgb, var(--c-accent) 6%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--c-text) 2%, transparent);
 }
 
 .chain-say {
   color: var(--c-text-dim);
 }
 
-.chain-ans {
-  font-weight: 700;
-}
-
-/* ── 两段对比算式（跑车 / 家用轿车"每 1 s 速度增加多少"）──
-   字重与小字注释写在页面里（font-bold / mini-note），这里只管结构与配色。 */
-.calc-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-accent);
-
-  font-variant-numeric: tabular-nums;
-}
-
-.calc-block-blue {
-  border-left-color: var(--c-accent-2);
-}
-
-.calc-head {
-  display: flex;
-  gap: 0.8rem;
-  align-items: baseline;
-}
-
-.calc-time {
-  margin-left: auto;
-  color: var(--c-text-dim);
-}
-
 /* ── 教材数据表（一些运动物体的加速度）──
-   字号（0.85rem）与等宽数字走共享 atoms.css 的 .data-table；
-   本课是 4 列表塞进半栏，共享的 0.9rem 横向内距会把标签列挤到全部折行，
-   所以这里只把单元格收紧回 0.3rem，并补"只画行间细线、不铺底色"的玻璃质感。 */
+   字号（0.85rem）与等宽数字走共享 atoms.css 的 .data-table；本课是 4 列表塞进半栏，
+   共享的 0.9rem 横向内距会把标签列挤到全部折行，所以这里只把单元格收紧回 0.3rem。 */
 .data-table {
   width: 100%;
 }
@@ -175,15 +173,14 @@
 
 /* 两张表的最后一行都不画底边。
    位置必须在两个表的 td 基础规则之后：specificity 升序，否则 stylelint 报 no-descending-specificity */
-.car-table tr:last-child td,
+.intro-table tr:last-child td,
 .data-table tr:last-child td {
   border-bottom: none;
 }
 
-/* ── 第 14 页高铁：枕木横向快速滚动，看上去就是列车在飞驰 ──
-   枕木间距 36（用户单位），滚动一个间距正好接上 → 无缝循环；
-   0.15 s/格 ≈ 240 单位/秒，够快才像 300 km/h。 */
-@keyframes hsr-rail-scroll {
+/* ── 第 14 页高铁：枕木横向快速滚动 ≈ 列车飞驰 ──
+   枕木间距 36（用户单位），滚动一个间距正好接上（无缝循环）；0.15 s/格 ≈ 240 单位/秒。 */
+@keyframes p14-rail-scroll {
   from {
     transform: translateX(0);
   }
@@ -193,6 +190,6 @@
   }
 }
 
-.hsr-rails {
-  animation: hsr-rail-scroll 0.15s linear infinite;
+.p14-rails {
+  animation: p14-rail-scroll 0.15s linear infinite;
 }

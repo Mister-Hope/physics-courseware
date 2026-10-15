@@ -118,60 +118,60 @@ const plotLabels = computed(() => [
 </script>
 
 <template>
-  <div class="hl">
-    <div class="hl-left">
-      <div class="hl-count">
-        钩码个数 <Latex tex="n" /> = <b class="hl-num">{{ count }}</b
+  <div class="ef-hooke">
+    <div class="ef-hooke-left">
+      <div class="ef-hooke-count">
+        钩码个数 <Latex tex="n" /> = <b class="ef-hooke-num">{{ count }}</b
         >（每个 <Latex tex="50\ \text{g}" />）
       </div>
       <input
         v-model.number="count"
-        class="hl-slider"
+        class="ef-hooke-slider"
         type="range"
         min="0"
         :max="HOOK_MAX"
         step="1"
       />
-      <div class="hl-value">
-        钩码总重 <Latex tex="F = nmg" /> = <b class="hl-num">{{ force.toFixed(1) }}</b>
+      <div class="ef-hooke-value">
+        钩码总重 <Latex tex="F = nmg" /> = <b class="ef-hooke-num">{{ force.toFixed(1) }}</b>
         <Latex tex="\text{N}" />
       </div>
-      <div class="hl-value">
-        尺上读数 <Latex tex="x" /> = <b class="hl-num">{{ (stretch * 100).toFixed(2) }}</b>
+      <div class="ef-hooke-value">
+        尺上读数 <Latex tex="x" /> = <b class="ef-hooke-num">{{ (stretch * 100).toFixed(2) }}</b>
         <Latex tex="\text{cm}" />
       </div>
-      <div v-if="fitted" class="hl-value">
-        图线斜率 <Latex tex="k" /> = <b class="hl-num">{{ fittedK.toFixed(1) }}</b>
+      <div v-if="fitted" class="ef-hooke-value">
+        图线斜率 <Latex tex="k" /> = <b class="ef-hooke-num">{{ fittedK.toFixed(1) }}</b>
         <Latex tex="\text{N/m}" />
       </div>
-      <div class="hl-btns">
-        <button class="hl-btn" type="button" @click="record">记录数据</button>
+      <div class="ef-hooke-btns">
+        <button class="ef-hooke-btn" type="button" @click="record">记录数据</button>
         <button
-          class="hl-btn fit"
+          class="ef-hooke-btn fit"
           type="button"
           :disabled="recorded.length < 2"
           @click="fitted = true"
         >
           拟合直线
         </button>
-        <button class="hl-btn ghost" type="button" @click="clear">清除</button>
+        <button class="ef-hooke-btn ghost" type="button" @click="clear">清除</button>
       </div>
     </div>
-    <div class="hl-fig">
+    <div class="ef-hooke-fig">
       <svg
         viewBox="0 0 260 420"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
         aria-label="铁架台、弹簧、钩码与刻度尺"
       >
-        <rect x="14" y="386" width="156" height="18" rx="4" fill="#64748b" />
-        <rect x="64" y="40" width="13" height="346" rx="3" fill="#94a3b8" />
-        <rect x="77" y="46" width="60" height="9" rx="3" fill="#94a3b8" />
-        <rect x="131" y="40" width="17" height="22" rx="3" fill="#64748b" />
+        <rect x="14" y="386" width="156" height="18" rx="4" fill="var(--c-neutral-500)" />
+        <rect x="64" y="40" width="13" height="346" rx="3" fill="var(--c-text-dim)" />
+        <rect x="77" y="46" width="60" height="9" rx="3" fill="var(--c-text-dim)" />
+        <rect x="131" y="40" width="17" height="22" rx="3" fill="var(--c-neutral-500)" />
         <path
           :d="springPath"
           fill="none"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="3.2"
           stroke-linecap="round"
         />
@@ -180,15 +180,15 @@ const plotLabels = computed(() => [
           :y1="zeroY"
           x2="168"
           :y2="zeroY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
           stroke-dasharray="6 5"
         />
-        <text x="66" :y="zeroY - 6" font-size="14" fill="#94a3b8" text-anchor="end">原长</text>
+        <text x="66" :y="zeroY - 6" font-size="14" fill="var(--c-text-dim)" text-anchor="end">原长</text>
         <CourseArrow
           :from="{ x: SPRING_X + 26, y: zeroY }"
           :to="{ x: SPRING_X + 26, y: bottomY }"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="2.8"
         />
         <text
@@ -197,7 +197,7 @@ const plotLabels = computed(() => [
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           x
         </text>
@@ -206,7 +206,7 @@ const plotLabels = computed(() => [
           :y1="bottomY"
           :x2="SPRING_X"
           :y2="bottomY + 10"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="2.6"
         />
         <g v-if="count > 0">
@@ -218,8 +218,8 @@ const plotLabels = computed(() => [
             width="46"
             :height="HOOK_H"
             rx="2.5"
-            fill="rgba(226,168,70,0.28)"
-            stroke="#e2a846"
+            fill="color-mix(in srgb, var(--c-accent) 28%, transparent)"
+            stroke="var(--c-accent)"
             stroke-width="1.6"
           />
         </g>
@@ -237,7 +237,7 @@ const plotLabels = computed(() => [
         />
       </svg>
     </div>
-    <div class="hl-plot">
+    <div class="ef-hooke-plot">
       <CoordAxes
         :x-range="[0, 0.14]"
         :y-range="[0, 6.5]"
@@ -253,7 +253,7 @@ const plotLabels = computed(() => [
 </template>
 
 <style scoped>
-.hl {
+.ef-hooke {
   display: flex;
   gap: 0.9rem;
   align-items: center;
@@ -262,7 +262,7 @@ const plotLabels = computed(() => [
   width: 100%;
 }
 
-.hl-left {
+.ef-hooke-left {
   display: flex;
   flex: 0 0 21%;
   flex-direction: column;
@@ -271,59 +271,59 @@ const plotLabels = computed(() => [
   min-width: 0;
 }
 
-.hl-count {
+.ef-hooke-count {
   color: var(--c-text);
   font-size: 0.86rem;
 }
 
-.hl-slider {
+.ef-hooke-slider {
   width: 100%;
   accent-color: var(--c-accent);
 }
 
-.hl-value {
+.ef-hooke-value {
   color: var(--c-text);
   font-size: 0.9rem;
 }
 
-.hl-num {
+.ef-hooke-num {
   color: var(--c-accent);
   font-size: 1.05rem;
 }
 
-.hl-fig {
+.ef-hooke-fig {
   display: flex;
   flex: 0 0 26%;
   align-items: center;
   justify-content: center;
 }
 
-.hl-fig svg {
+.ef-hooke-fig svg {
   display: block;
   width: auto;
   max-width: 100%;
   height: 16rem;
 }
 
-.hl-plot {
+.ef-hooke-plot {
   flex: 0 1 16rem;
   min-width: 0;
 }
 
-.hl-btns {
+.ef-hooke-btns {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
   align-items: center;
 }
 
-.hl-btn {
+.ef-hooke-btn {
   padding: 0.18rem 0.6rem;
-  border: 1px solid rgb(226 168 70 / 45%);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 45%, transparent);
   border-radius: 2rem;
 
-  background: rgb(226 168 70 / 12%);
-  color: #e2a846;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
 
   font-size: 0.78rem;
 
@@ -332,24 +332,24 @@ const plotLabels = computed(() => [
   transition: all 0.25s ease;
 }
 
-.hl-btn.fit {
-  border-color: rgb(96 165 250 / 45%);
-  background: rgb(96 165 250 / 12%);
-  color: #60a5fa;
+.ef-hooke-btn.fit {
+  border-color: color-mix(in srgb, var(--c-accent-2) 45%, transparent);
+  background: var(--c-accent-2-soft);
+  color: var(--c-accent-2);
 }
 
-.hl-btn.ghost {
+.ef-hooke-btn.ghost {
   border-color: var(--c-border);
   background: transparent;
   color: var(--c-text-dim);
 }
 
-.hl-btn:disabled {
+.ef-hooke-btn:disabled {
   opacity: 0.45;
   cursor: default;
 }
 
-.hl-btn:hover:not(:disabled) {
+.ef-hooke-btn:hover:not(:disabled) {
   filter: brightness(1.2);
 }
 </style>

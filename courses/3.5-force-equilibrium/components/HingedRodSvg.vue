@@ -220,7 +220,7 @@ const endDrag = (): void => {
       <svg viewBox="0 0 340 270" xmlns="http://www.w3.org/2000/svg">
         <!-- ==================== 1. 悬崖岩壁与崖顶平台 ==================== -->
         <!-- 崖体岩层浅底 -->
-        <rect x="8" y="64" width="80" height="196" rx="2" fill="rgba(148,163,184,0.1)" />
+        <rect x="8" y="64" width="80" height="196" rx="2" fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)" />
         <!-- 崖顶水平平台表面与斜剖线 -->
         <SurfaceHatch :from="{ x: 8, y: 64 }" :to="{ x: 88, y: 64 }" side="below" color="#94a3b8" :line-width="2.4" :thickness="11" :gap="18" />
         <!-- 竖直崖壁表面与斜剖线 -->
@@ -229,60 +229,60 @@ const endDrag = (): void => {
         <!-- ==================== 2. 站在崖顶平台上后仰用力拉绳的人（放大且具象化） ==================== -->
         <g stroke-linecap="round" stroke-linejoin="round">
           <!-- 前后蹬地的双腿（脚踩在崖顶 y = 64） -->
-          <path d="M 30 44 L 21 63 L 16 63" fill="none" stroke="#cbd5e1" stroke-width="3.2" />
-          <path d="M 33 44 L 44 63 L 49 63" fill="none" stroke="#cbd5e1" stroke-width="3.2" />
+          <path d="M 30 44 L 21 63 L 16 63" fill="none" stroke="var(--c-neutral-300)" stroke-width="3.2" />
+          <path d="M 33 44 L 44 63 L 49 63" fill="none" stroke="var(--c-neutral-300)" stroke-width="3.2" />
           <!-- 后仰发力的躯干 -->
-          <path d="M 27 25 L 33 44" fill="none" stroke="#60a5fa" stroke-width="6.5" />
+          <path d="M 27 25 L 33 44" fill="none" stroke="var(--c-velocity)" stroke-width="6.5" />
           <!-- 双手向前伸出握住拉绳（汇聚于 HAND 52, 44） -->
-          <path d="M 29 29 L 42 39 L 52 44" fill="none" stroke="#e2e8f0" stroke-width="3" />
-          <circle :cx="HAND.x" :cy="HAND.y" r="2.8" fill="#e2a846" />
+          <path d="M 29 29 L 42 39 L 52 44" fill="none" stroke="var(--c-neutral-200)" stroke-width="3" />
+          <circle :cx="HAND.x" :cy="HAND.y" r="2.8" fill="var(--c-accent)" />
           <!-- 头部 -->
-          <circle cx="25" cy="15.5" r="7.5" fill="rgba(226,168,70,0.22)" stroke="#e2a846" stroke-width="2.2" />
+          <circle cx="25" cy="15.5" r="7.5" fill="color-mix(in srgb, var(--c-accent) 22%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
         </g>
 
         <!-- ==================== 3. 轻绳、定滑轮 O、铰链 A、轻杆 AB 与悬挂重物 ==================== -->
         <!-- 竖直基准虚线 OA -->
-        <line :x1="pointO.x" :y1="pointO.y" :x2="pointA.x" :y2="pointA.y" stroke="#cbd5e1" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.6" />
+        <line :x1="pointO.x" :y1="pointO.y" :x2="pointA.x" :y2="pointA.y" stroke="var(--c-neutral-300)" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.6" />
 
         <!-- 轻绳：B → 滑轮右侧切点 → 绕过轮顶圆弧 → 从滑轮最高点切线接至人手 -->
-        <line :x1="pointB.x" :y1="pointB.y" :x2="entry.x" :y2="entry.y" stroke="#cbd5e1" stroke-width="2.2" />
-        <path :d="`M ${entry.x} ${entry.y} A ${PULLEY_R} ${PULLEY_R} 0 0 0 ${exit.x} ${exit.y}`" fill="none" stroke="#cbd5e1" stroke-width="2.2" />
-        <line :x1="exit.x" :y1="exit.y" :x2="HAND.x" :y2="HAND.y" stroke="#cbd5e1" stroke-width="2.2" />
+        <line :x1="pointB.x" :y1="pointB.y" :x2="entry.x" :y2="entry.y" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+        <path :d="`M ${entry.x} ${entry.y} A ${PULLEY_R} ${PULLEY_R} 0 0 0 ${exit.x} ${exit.y}`" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+        <line :x1="exit.x" :y1="exit.y" :x2="HAND.x" :y2="HAND.y" stroke="var(--c-neutral-300)" stroke-width="2.2" />
 
         <!-- 定滑轮固定底座与滑轮轮体 O -->
-        <line :x1="pointO.x - 4" :y1="pointO.y + 4" :x2="pointO.x" :y2="pointO.y" stroke="#94a3b8" stroke-width="3.2" stroke-linecap="round" />
-        <circle :cx="pointO.x" :cy="pointO.y" :r="PULLEY_R" fill="rgba(15,20,37,0.85)" stroke="#e2a846" stroke-width="2.4" />
-        <circle :cx="pointO.x" :cy="pointO.y" r="3.2" fill="#e2a846" />
+        <line :x1="pointO.x - 4" :y1="pointO.y + 4" :x2="pointO.x" :y2="pointO.y" stroke="var(--c-text-dim)" stroke-width="3.2" stroke-linecap="round" />
+        <circle :cx="pointO.x" :cy="pointO.y" :r="PULLEY_R" fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.4" />
+        <circle :cx="pointO.x" :cy="pointO.y" r="3.2" fill="var(--c-accent)" />
 
         <!-- 轻杆 AB（带铰链支座 A） -->
-        <line :x1="pointA.x" :y1="pointA.y" :x2="pointB.x" :y2="pointB.y" stroke="#94a3b8" stroke-width="5.5" stroke-linecap="round" />
-        <path d="M 88 201 L 95 208 L 88 215 Z" fill="#1e293b" stroke="#60a5fa" stroke-width="1.8" stroke-linejoin="round" />
-        <circle :cx="pointA.x" :cy="pointA.y" r="4.5" fill="#60a5fa" stroke="#0f1425" stroke-width="1.4" />
+        <line :x1="pointA.x" :y1="pointA.y" :x2="pointB.x" :y2="pointB.y" stroke="var(--c-text-dim)" stroke-width="5.5" stroke-linecap="round" />
+        <path d="M 88 201 L 95 208 L 88 215 Z" fill="var(--c-surface-solid)" stroke="var(--c-velocity)" stroke-width="1.8" stroke-linejoin="round" />
+        <circle :cx="pointA.x" :cy="pointA.y" r="4.5" fill="var(--c-velocity)" stroke="var(--c-bg-soft)" stroke-width="1.4" />
 
         <!-- 杆顶 B 下方悬挂的重物 -->
-        <line :x1="pointB.x" :y1="pointB.y" :x2="pointB.x" :y2="pointB.y + 38" stroke="#cbd5e1" stroke-width="2" />
-        <rect :x="pointB.x - 22" :y="pointB.y + 38" width="44" height="28" rx="5" fill="rgba(96,165,250,0.18)" stroke="#60a5fa" stroke-width="2" />
-        <text :x="pointB.x" :y="pointB.y + 56" fill="#93c5fd" font-family="KaTeX_Main" font-size="12" text-anchor="middle">重物</text>
-        <circle :cx="pointB.x" :cy="pointB.y" r="4.2" fill="#f8fafc" stroke="#0f1425" stroke-width="1.5" />
+        <line :x1="pointB.x" :y1="pointB.y" :x2="pointB.x" :y2="pointB.y + 38" stroke="var(--c-neutral-300)" stroke-width="2" />
+        <rect :x="pointB.x - 22" :y="pointB.y + 38" width="44" height="28" rx="5" fill="color-mix(in srgb, var(--c-velocity) 18%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
+        <text :x="pointB.x" :y="pointB.y + 56" fill="var(--c-velocity-light)" font-family="KaTeX_Main" font-size="12" text-anchor="middle">重物</text>
+        <circle :cx="pointB.x" :cy="pointB.y" r="4.2" fill="var(--c-neutral-50)" stroke="var(--c-bg-soft)" stroke-width="1.5" />
 
         <!-- 几何顶点 A、O、B 标注 -->
-        <text :x="pointA.x - 16" :y="pointA.y + 5" fill="#60a5fa" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">A</text>
-        <text :x="pointO.x + 19" :y="pointO.y - 6" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">O</text>
+        <text :x="pointA.x - 16" :y="pointA.y + 5" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">A</text>
+        <text :x="pointO.x + 19" :y="pointO.y - 6" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="middle">O</text>
 
         <!-- ==================== 4. 结点 B 的三个共点力（修正方向：G 向下、F_N 沿杆向外、F_T 沿绳向滑轮） ==================== -->
         <g v-show="step >= 1">
           <!-- 重物拉力 G（竖直向下） -->
-          <CourseArrow :from="pointB" :to="tips.g" :head-size="12" stroke="#f87171" stroke-width="3.5" />
+          <CourseArrow :from="pointB" :to="tips.g" :head-size="12" stroke="var(--c-force)" stroke-width="3.5" />
           <text
             :x="leftLabels.g.x"
             :y="leftLabels.g.y"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="18"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -290,17 +290,17 @@ const endDrag = (): void => {
           </text>
 
           <!-- 轻杆支持力 F_N（沿 AB 指向右上） -->
-          <CourseArrow :from="pointB" :to="tips.normal" :head-size="12" stroke="#2dd4bf" stroke-width="3.5" />
+          <CourseArrow :from="pointB" :to="tips.normal" :head-size="12" stroke="var(--c-physics)" stroke-width="3.5" />
           <text
             :x="leftLabels.normal.x"
             :y="leftLabels.normal.y"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="18"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -309,17 +309,17 @@ const endDrag = (): void => {
           </text>
 
           <!-- 轻绳拉力 F_T（沿 BO 指向左上滑轮） -->
-          <CourseArrow :from="pointB" :to="tips.t" :head-size="12" stroke="#e2a846" stroke-width="3.5" />
+          <CourseArrow :from="pointB" :to="tips.t" :head-size="12" stroke="var(--c-accent)" stroke-width="3.5" />
           <text
             :x="leftLabels.t.x"
             :y="leftLabels.t.y"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="18"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -334,7 +334,7 @@ const endDrag = (): void => {
           :cy="pointB.y"
           r="24"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -344,29 +344,29 @@ const endDrag = (): void => {
     </div>
 
     <!-- 右：力的三角形（与 △OAB 相似，居中展示，三力与三顶点全部自适应置于三角形外侧） -->
-    <div class="hr-tri" :class="{ 'fe-hidden': step < 1 }">
+    <div class="hr-tri" :class="{ 'fig-hold': step < 1 }">
       <svg viewBox="0 0 340 270" xmlns="http://www.w3.org/2000/svg">
         <!-- 三角形内部淡淡底色衬托 -->
-        <polygon :points="`${triO.x},${triO.y} ${triA.x},${triA.y} ${triB.x},${triB.y}`" fill="rgba(148,163,184,0.05)" />
+        <polygon :points="`${triO.x},${triO.y} ${triA.x},${triA.y} ${triB.x},${triB.y}`" fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)" />
 
         <!-- ① 重力 G（O → A，竖直向下，与定长 OA 对应） -->
-        <CourseArrow :from="triO" :to="triA" :head-size="11" stroke="#f87171" stroke-width="3.4" />
+        <CourseArrow :from="triO" :to="triA" :head-size="11" stroke="var(--c-force)" stroke-width="3.4" />
         <!-- ② 轻杆支持力 F_N（A → B，沿杆向右上，与定长 AB 对应） -->
-        <CourseArrow :from="triA" :to="triB" :head-size="11" stroke="#2dd4bf" stroke-width="3.4" />
+        <CourseArrow :from="triA" :to="triB" :head-size="11" stroke="var(--c-physics)" stroke-width="3.4" />
         <!-- ③ 绳拉力 F_T（B → O，沿绳向左上，与可变长 BO 对应） -->
-        <CourseArrow :from="triB" :to="triO" :head-size="11" stroke="#e2a846" stroke-width="3.4" />
+        <CourseArrow :from="triB" :to="triO" :head-size="11" stroke="var(--c-accent)" stroke-width="3.4" />
 
         <!-- 三个力的外法线自适应标注（严格位于三角形外侧） -->
         <text
           :x="triLabels.g.x"
           :y="triLabels.g.y"
-          fill="#f87171"
+          fill="var(--c-force)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -375,13 +375,13 @@ const endDrag = (): void => {
         <text
           :x="triLabels.normalLabel.x"
           :y="triLabels.normalLabel.y"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -391,13 +391,13 @@ const endDrag = (): void => {
         <text
           :x="triLabels.tensionLabel.x"
           :y="triLabels.tensionLabel.y"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -409,7 +409,7 @@ const endDrag = (): void => {
         <text
           :x="triLabels.vO.x"
           :y="triLabels.vO.y"
-          fill="#94a3b8"
+          fill="var(--c-text-dim)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="15"
@@ -421,7 +421,7 @@ const endDrag = (): void => {
         <text
           :x="triLabels.vA.x"
           :y="triLabels.vA.y"
-          fill="#94a3b8"
+          fill="var(--c-text-dim)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="15"
@@ -433,7 +433,7 @@ const endDrag = (): void => {
         <text
           :x="triLabels.vB.x"
           :y="triLabels.vB.y"
-          fill="#94a3b8"
+          fill="var(--c-text-dim)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="15"
@@ -473,13 +473,5 @@ const endDrag = (): void => {
   width: 100%;
   height: auto;
   max-height: 100%;
-}
-
-.fe-grab {
-  cursor: grab;
-}
-
-.fe-grab:active {
-  cursor: grabbing;
 }
 </style>

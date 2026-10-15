@@ -66,15 +66,15 @@ const choose = (item: JudgeItem, index: number): void => {
 </script>
 
 <template>
-  <div class="ej">
-    <div v-for="(item, index) in items" :key="index" class="ej-card">
+  <div class="ef-judge">
+    <div v-for="(item, index) in items" :key="index" class="ef-judge-card">
       <svg
-        class="ej-fig"
+        class="ef-judge-fig"
         viewBox="0 0 120 110"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <g v-if="item.kind === 'block'" stroke="#cbd5e1" stroke-width="2.4" fill="none">
+        <g v-if="item.kind === 'block'" stroke="var(--c-neutral-300)" stroke-width="2.4" fill="none">
           <SurfaceHatch
             :from="{ x: 6, y: 88 }"
             :to="{ x: 114, y: 88 }"
@@ -84,10 +84,10 @@ const choose = (item: JudgeItem, index: number): void => {
             color="#cbd5e1"
             :line-width="2.4"
           />
-          <circle cx="46" cy="74" r="14" fill="rgba(148,163,184,0.18)" />
-          <rect x="60" y="52" width="36" height="36" fill="rgba(148,163,184,0.18)" />
+          <circle cx="46" cy="74" r="14" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
+          <rect x="60" y="52" width="36" height="36" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
         </g>
-        <g v-else-if="item.kind === 'incline'" stroke="#cbd5e1" stroke-width="2.4" fill="none">
+        <g v-else-if="item.kind === 'incline'" stroke="var(--c-neutral-300)" stroke-width="2.4" fill="none">
           <SurfaceHatch
             :from="{ x: 6, y: 96 }"
             :to="{ x: 114, y: 96 }"
@@ -99,18 +99,18 @@ const choose = (item: JudgeItem, index: number): void => {
           />
           <line x1="22" y1="88" x2="96" y2="34" />
           <line x1="24" y1="4" x2="24" y2="88" />
-          <circle cx="51" cy="50" r="14" fill="rgba(148,163,184,0.18)" />
+          <circle cx="51" cy="50" r="14" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
           <line x1="51" y1="36" x2="51" y2="6" stroke="#7dd3fc" />
         </g>
-        <g v-else-if="item.kind === 'groove'" stroke="#cbd5e1" stroke-width="2.4" fill="none">
+        <g v-else-if="item.kind === 'groove'" stroke="var(--c-neutral-300)" stroke-width="2.4" fill="none">
           <line x1="6" y1="30" x2="60" y2="88" />
           <line x1="114" y1="30" x2="60" y2="88" />
-          <circle cx="60" cy="63" r="17" fill="rgba(148,163,184,0.18)" />
+          <circle cx="60" cy="63" r="17" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
         </g>
-        <g v-else stroke="#cbd5e1" stroke-width="2.4" fill="none">
+        <g v-else stroke="var(--c-neutral-300)" stroke-width="2.4" fill="none">
           <!-- 左右两块（两个直角）拼出的深井：球比井口宽，卡在井口的两条棱上、只陷下去一点点；
                A/B/C 是重心的三个可能位置（球心上方 / 球心 / 球心下方） -->
-          <path d="M 6 62 H 46 V 94 H 74 V 62 H 114 V 102 H 6 Z" fill="rgba(148,163,184,0.16)" />
+          <path d="M 6 62 H 46 V 94 H 74 V 62 H 114 V 102 H 6 Z" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" />
           <SurfaceHatch
             :from="{ x: 6, y: 62 }"
             :to="{ x: 46, y: 62 }"
@@ -129,20 +129,20 @@ const choose = (item: JudgeItem, index: number): void => {
             color="#cbd5e1"
             :line-width="2.4"
           />
-          <circle cx="60" cy="42.5" r="24" fill="rgba(148,163,184,0.18)" />
-          <g stroke="rgba(148,163,184,0.55)" stroke-width="0.9" stroke-dasharray="3 3">
+          <circle cx="60" cy="42.5" r="24" fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
+          <g stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)" stroke-width="0.9" stroke-dasharray="3 3">
             <line x1="63" y1="26.5" x2="84" y2="26.5" />
             <line x1="63" y1="42.5" x2="84" y2="42.5" />
             <line x1="63" y1="58.5" x2="84" y2="58.5" />
           </g>
-          <g fill="#e2a846" stroke="none">
+          <g fill="var(--c-accent)" stroke="none">
             <circle cx="60" cy="26.5" r="2.8" />
             <circle cx="60" cy="42.5" r="2.8" />
             <circle cx="60" cy="58.5" r="2.8" />
           </g>
           <g
             stroke="none"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="12"
@@ -153,14 +153,14 @@ const choose = (item: JudgeItem, index: number): void => {
           </g>
         </g>
       </svg>
-      <div class="ej-body">
-        <div class="ej-scene">{{ item.scene }}</div>
-        <div class="ej-ans">
-          <div v-if="item.chosen === null" class="ej-ops">
+      <div class="ef-judge-body">
+        <div class="ef-judge-scene">{{ item.scene }}</div>
+        <div class="ef-judge-ans">
+          <div v-if="item.chosen === null" class="ef-judge-ops">
             <button
               v-for="(option, optionIndex) in item.options"
               :key="optionIndex"
-              class="ej-btn"
+              class="ef-judge-btn"
               :class="{ alt: optionIndex === 1 }"
               type="button"
               @click="choose(item, optionIndex)"
@@ -168,11 +168,11 @@ const choose = (item: JudgeItem, index: number): void => {
               {{ option }}
             </button>
           </div>
-          <div v-else class="ej-result">
-            <span class="ej-badge" :class="item.chosen === item.answer ? 'right' : 'wrong'">
-              {{ item.chosen === item.answer ? "对" : "再想想" }}
+          <div v-else class="ef-judge-result">
+            <span class="ef-judge-badge" :class="item.chosen === item.answer ? 'right' : 'wrong'">
+              <mdi-check-decagram v-if="item.chosen === item.answer" /><mdi-close-circle-outline v-else />{{ item.chosen === item.answer ? "对" : "再想想" }}
             </span>
-            <span class="ej-reason">{{ item.reason }}</span>
+            <span class="ef-judge-reason">{{ item.reason }}</span>
           </div>
         </div>
       </div>
@@ -181,32 +181,32 @@ const choose = (item: JudgeItem, index: number): void => {
 </template>
 
 <style scoped>
-.ej {
+.ef-judge {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem 0.9rem;
   width: 100%;
 }
 
-.ej-card {
+.ef-judge-card {
   display: flex;
   gap: 0.6rem;
   align-items: flex-start;
 
   padding: 0.42rem 0.7rem;
-  border: 1px solid rgb(148 163 184 / 12%);
+  border: 1px solid var(--c-border);
   border-radius: 1.1rem;
 
-  background: rgb(30 41 59 / 55%);
+  background: var(--c-surface);
 }
 
-.ej-fig {
+.ef-judge-fig {
   flex: 0 0 5.6rem;
   width: 5.6rem;
   height: auto;
 }
 
-.ej-body {
+.ef-judge-body {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -215,28 +215,28 @@ const choose = (item: JudgeItem, index: number): void => {
   min-width: 0;
 }
 
-.ej-scene {
-  color: #f1f5f9;
+.ef-judge-scene {
+  color: var(--c-text);
   font-size: 0.8rem;
   line-height: 1.35;
 }
 
-.ej-ans {
+.ef-judge-ans {
   min-height: 2.1rem;
 }
 
-.ej-ops {
+.ef-judge-ops {
   display: flex;
   gap: 0.45rem;
 }
 
-.ej-btn {
+.ef-judge-btn {
   padding: 0.16rem 0.7rem;
-  border: 1px solid rgb(52 211 153 / 45%);
+  border: 1px solid color-mix(in srgb, var(--c-ok) 45%, transparent);
   border-radius: 2rem;
 
-  background: rgb(52 211 153 / 12%);
-  color: #34d399;
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
 
   font-size: 0.72rem;
 
@@ -245,23 +245,23 @@ const choose = (item: JudgeItem, index: number): void => {
   transition: all 0.25s ease;
 }
 
-.ej-btn.alt {
-  border-color: rgb(96 165 250 / 45%);
-  background: rgb(96 165 250 / 12%);
-  color: #60a5fa;
+.ef-judge-btn.alt {
+  border-color: color-mix(in srgb, var(--c-accent-2) 45%, transparent);
+  background: var(--c-accent-2-soft);
+  color: var(--c-accent-2);
 }
 
-.ej-btn:hover {
+.ef-judge-btn:hover {
   filter: brightness(1.2);
 }
 
-.ej-result {
+.ef-judge-result {
   display: flex;
   gap: 0.4rem;
   align-items: flex-start;
 }
 
-.ej-badge {
+.ef-judge-badge {
   flex-shrink: 0;
 
   margin-top: 0.1rem;
@@ -272,20 +272,26 @@ const choose = (item: JudgeItem, index: number): void => {
   font-size: 0.68rem;
 }
 
-.ej-badge.right {
-  border: 1px solid rgb(52 211 153 / 35%);
-  background: rgb(52 211 153 / 12%);
-  color: #34d399;
+.ef-judge-badge > svg {
+  margin-right: 0.12rem;
+  font-size: 0.9em;
+  vertical-align: -0.12em;
 }
 
-.ej-badge.wrong {
-  border: 1px solid rgb(248 113 113 / 35%);
-  background: rgb(248 113 113 / 12%);
-  color: #f87171;
+.ef-judge-badge.right {
+  border: 1px solid color-mix(in srgb, var(--c-ok) 35%, transparent);
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
 }
 
-.ej-reason {
-  color: #cbd5e1;
+.ef-judge-badge.wrong {
+  border: 1px solid color-mix(in srgb, var(--c-danger) 35%, transparent);
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
+}
+
+.ef-judge-reason {
+  color: var(--c-text-dim);
   font-size: 0.72rem;
   line-height: 1.4;
 }

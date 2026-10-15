@@ -35,7 +35,7 @@ const pctY = (value: number): number => ((value - VIEW.minY) / VIEW.height) * 10
 </script>
 
 <template>
-  <div class="gr-figure">
+  <div class="figure relative min-w-0">
     <svg :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`">
       <!-- x 轴（以 F₁ 的方向为 x 轴） -->
       <line :x1="origin.x" :y1="origin.y" :x2="AXIS_END" :y2="origin.y" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-dasharray="7 6" opacity="0.5" />
@@ -107,15 +107,3 @@ const pctY = (value: number): number => ((value - VIEW.minY) / VIEW.height) * 10
   </div>
 </template>
 
-<style scoped>
-.gr-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.gr-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

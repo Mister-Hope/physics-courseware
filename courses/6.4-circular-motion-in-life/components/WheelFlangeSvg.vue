@@ -157,7 +157,7 @@ const caption = { x: 100, y: 104 };
 </script>
 
 <template>
-  <div class="flange">
+  <div>
     <svg
       viewBox="38 40 276 230"
       xmlns="http://www.w3.org/2000/svg"
@@ -166,26 +166,26 @@ const caption = { x: 100, y: 104 };
     >
       <defs>
         <linearGradient id="wheel-flange-car" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="rgba(96,165,250,0.26)" />
-          <stop offset="1" stop-color="rgba(59,130,246,0.09)" />
+          <stop offset="0" stop-color="color-mix(in srgb, var(--c-velocity) 26%, transparent)" />
+          <stop offset="1" stop-color="color-mix(in srgb, var(--c-accent-2) 9%, transparent)" />
         </linearGradient>
       </defs>
       <!-- 枕木 -->
-      <g stroke="rgba(148,163,184,0.34)" stroke-width="6" stroke-linecap="round">
+      <g stroke="color-mix(in srgb, var(--c-text-dim) 34%, transparent)" stroke-width="6" stroke-linecap="round">
         <line v-for="(sleeper, i) in sleepers" :key="`sleeper-${i}`" :x1="sleeper.from.x" :y1="sleeper.from.y" :x2="sleeper.to.x" :y2="sleeper.to.y" />
       </g>
       <!-- 内轨与外轨：深色轨腰 + 浅色轨面（外轨更亮，是要被挤压的那条） -->
-      <path :d="innerPath" fill="none" stroke="rgba(100,116,139,0.55)" :stroke-width="RAIL_W" stroke-linecap="round" />
-      <path :d="outerPath" fill="none" stroke="rgba(100,116,139,0.55)" :stroke-width="RAIL_W" stroke-linecap="round" />
-      <path :d="innerPath" fill="none" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" />
-      <path :d="outerPath" fill="none" stroke="#cbd5e1" stroke-width="7" stroke-linecap="round" />
+      <path :d="innerPath" fill="none" stroke="color-mix(in srgb, var(--c-neutral-500) 55%, transparent)" :stroke-width="RAIL_W" stroke-linecap="round" />
+      <path :d="outerPath" fill="none" stroke="color-mix(in srgb, var(--c-neutral-500) 55%, transparent)" :stroke-width="RAIL_W" stroke-linecap="round" />
+      <path :d="innerPath" fill="none" stroke="var(--c-text-dim)" stroke-width="7" stroke-linecap="round" />
+      <path :d="outerPath" fill="none" stroke="var(--c-neutral-300)" stroke-width="7" stroke-linecap="round" />
       <!-- 前后两个轮对：轮轴 + 四个车轮；轮缘点击后才画出来 -->
-      <g stroke="#64748b" stroke-width="3" stroke-linecap="round">
+      <g stroke="var(--c-neutral-500)" stroke-width="3" stroke-linecap="round">
         <line v-for="axle in axles" :key="axle.key" :x1="axle.from.x" :y1="axle.from.y" :x2="axle.to.x" :y2="axle.to.y" />
       </g>
       <g v-for="wheel in wheels" :key="wheel.key">
-        <circle :cx="wheel.center.x" :cy="wheel.center.y" :r="R_TREAD" fill="#334155" :stroke="wheel.outer ? '#cbd5e1' : '#94a3b8'" stroke-width="2.2" />
-        <path :class="{ 'vp-hidden': !showForces }" :d="wheel.flange" fill="none" stroke="#e2a846" stroke-width="4.6" stroke-linecap="round" />
+        <circle :cx="wheel.center.x" :cy="wheel.center.y" :r="R_TREAD" fill="var(--c-neutral-700)" :stroke="wheel.outer ? '#cbd5e1' : '#94a3b8'" stroke-width="2.2" />
+        <path :class="{ 'turn-hidden': !showForces }" :d="wheel.flange" fill="none" stroke="var(--c-accent)" stroke-width="4.6" stroke-linecap="round" />
       </g>
       <!-- 车厢：半透明，能透出下面的车轮与轨道 -->
       <rect
@@ -195,37 +195,27 @@ const caption = { x: 100, y: 104 };
         :height="CAR.halfLength * 2"
         rx="18"
         fill="url(#wheel-flange-car)"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="2.4"
       />
-      <text :x="carLabel.x" :y="carLabel.y" text-anchor="middle" font-size="16" fill="#93c5fd">车</text>
+      <text :x="carLabel.x" :y="carLabel.y" text-anchor="middle" font-size="16" fill="var(--c-velocity-light)">车</text>
       <!-- 接触点与弹力：外轨对轮缘的弹力沿半径指向圆心 -->
-      <g :class="{ 'vp-hidden': !showForces }">
-        <circle :cx="contact.x" :cy="contact.y" r="3.6" fill="#e2a846" />
-        <CourseArrow :from="CART_CENTER" :to="fnTip" stroke="#e2a846" :stroke-width="3.4" />
-        <text :x="forceLabel.x" :y="forceLabel.y" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="#e2a846">F</text>
-        <text :x="forceLabel.x + 13" :y="forceLabel.y + 7" text-anchor="middle" font-family="KaTeX_Main" font-size="14" fill="#e2a846">N</text>
-        <text :x="caption.x" :y="caption.y" text-anchor="middle" font-size="16" fill="#e2a846">轮缘挤压外轨</text>
+      <g :class="{ 'turn-hidden': !showForces }">
+        <circle :cx="contact.x" :cy="contact.y" r="3.6" fill="var(--c-accent)" />
+        <CourseArrow :from="CART_CENTER" :to="fnTip" stroke="var(--c-accent)" :stroke-width="3.4" />
+        <text :x="forceLabel.x" :y="forceLabel.y" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-accent)">F</text>
+        <text :x="forceLabel.x + 13" :y="forceLabel.y + 7" text-anchor="middle" font-family="KaTeX_Main" font-size="14" fill="var(--c-accent)">N</text>
+        <text :x="caption.x" :y="caption.y" text-anchor="middle" font-size="16" fill="var(--c-accent)">轮缘挤压外轨</text>
       </g>
       <!-- 两轨标注：颜色与各自的钢轨一致 -->
-      <text :x="outerRailLabel.x" :y="outerRailLabel.y" font-size="16" fill="#cbd5e1">外轨</text>
-      <text :x="innerRailLabel.x" :y="innerRailLabel.y" text-anchor="end" font-size="16" fill="#94a3b8">内轨</text>
+      <text :x="outerRailLabel.x" :y="outerRailLabel.y" font-size="16" fill="var(--c-neutral-300)">外轨</text>
+      <text :x="innerRailLabel.x" :y="innerRailLabel.y" text-anchor="end" font-size="16" fill="var(--c-text-dim)">内轨</text>
     </svg>
   </div>
 </template>
 
 <style scoped>
-.flange {
-  min-width: 0;
-}
-
-.flange svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.vp-hidden {
+.turn-hidden {
   visibility: hidden;
 }
 </style>

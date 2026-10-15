@@ -115,7 +115,7 @@ clicks: 2
 </div>
 
 <div v-click="2" class="stack">
-<div class="mini-title">多组数据的两种处理方式</div>
+<div class="mini-title"><mdi-format-list-numbered class="icon-md" />多组数据的两种处理方式</div>
 <div>① 任取两组列方程，求出多组 <Latex tex="E" />、<Latex tex="r" />，再取平均值；</div>
 <div>② 作 <Latex tex="U-I" /> 图像，用一条直线拟合所有数据点——更简便、更直观。</div>
 </div>
@@ -501,7 +501,7 @@ clicks: 3
 
 <template v-slot:stem>
 
-<div class="mini-title"><mdi-table />练习：橙汁电池</div>
+<div class="mini-title"><mdi-table class="icon-md" />练习：橙汁电池</div>
 
 电流表内阻 <Latex tex="100\ \Omega" />、量程 <Latex tex="0 \sim 300\ \mu\text{A}" />；电阻箱 <Latex tex="0 \sim 9\,999\ \Omega" />。调节电阻箱，测得：
 

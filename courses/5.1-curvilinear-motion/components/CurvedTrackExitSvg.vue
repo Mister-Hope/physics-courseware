@@ -104,32 +104,32 @@ const entryTo = polar(C, -15, -5);
       :y="paper.y"
       :width="paper.width"
       :height="paper.height"
-      fill="rgba(148,163,184,0.08)"
-      stroke="#94a3b8"
+      fill="color-mix(in srgb, var(--c-text-dim) 8%, transparent)"
+      stroke="var(--c-text-dim)"
       stroke-width="2"
       stroke-dasharray="9 7"
       opacity="0.7"
     />
-    <text :x="paper.x + paper.width - 54" :y="paper.y + paper.height - 20" font-family="KaTeX_Main" font-size="20" fill="#94a3b8" text-anchor="middle">
+    <text :x="paper.x + paper.width - 54" :y="paper.y + paper.height - 20" font-family="KaTeX_Main" font-size="20" fill="var(--c-text-dim)" text-anchor="middle">
       白纸
     </text>
-    <path :d="solidOuter" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <path :d="solidInner" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <path :d="cutOuter" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="7 6" opacity="0.45" stroke-linecap="round" stroke-linejoin="round" />
-    <path :d="cutInner" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="7 6" opacity="0.45" stroke-linecap="round" stroke-linejoin="round" />
-    <line :x1="pointA.x" :y1="pointA.y" :x2="traceA.x" :y2="traceA.y" stroke="#60a5fa" stroke-width="3.2" stroke-linecap="round" />
-    <circle :cx="traceA.x" :cy="traceA.y" r="5" fill="#60a5fa" />
-    <CourseArrow :from="traceA" :to="arrowA" stroke="#60a5fa" :stroke-width="3.2" />
-    <line :x1="pointB.x" :y1="pointB.y" :x2="traceB.x" :y2="traceB.y" stroke="#60a5fa" stroke-width="3.2" stroke-linecap="round" />
-    <circle :cx="traceB.x" :cy="traceB.y" r="5" fill="#60a5fa" />
-    <CourseArrow :from="traceB" :to="arrowB" stroke="#60a5fa" :stroke-width="3.2" />
-    <CourseArrow :from="entryFrom" :to="entryTo" stroke="#2dd4bf" :stroke-width="3.4" />
-    <text x="692" y="138" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="#e2a846">A</text>
-    <text x="596" y="234" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="#e2a846">B</text>
-    <text x="66" y="204" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="#e2a846">C</text>
-    <text x="304" y="230" font-family="KaTeX_Main" font-size="20" fill="#94a3b8" text-anchor="middle">弯道轨道</text>
-    <text x="759" y="99" font-family="KaTeX_Main" font-size="20" fill="#60a5fa" text-anchor="middle">印迹</text>
-    <text x="686" y="254" font-family="KaTeX_Main" font-size="20" fill="#60a5fa" text-anchor="middle">印迹</text>
+    <path :d="solidOuter" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path :d="solidInner" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path :d="cutOuter" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-dasharray="7 6" opacity="0.45" stroke-linecap="round" stroke-linejoin="round" />
+    <path :d="cutInner" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-dasharray="7 6" opacity="0.45" stroke-linecap="round" stroke-linejoin="round" />
+    <line :x1="pointA.x" :y1="pointA.y" :x2="traceA.x" :y2="traceA.y" stroke="var(--c-velocity)" stroke-width="3.2" stroke-linecap="round" />
+    <circle :cx="traceA.x" :cy="traceA.y" r="5" fill="var(--c-velocity)" />
+    <CourseArrow :from="traceA" :to="arrowA" stroke="var(--c-velocity)" :stroke-width="3.2" />
+    <line :x1="pointB.x" :y1="pointB.y" :x2="traceB.x" :y2="traceB.y" stroke="var(--c-velocity)" stroke-width="3.2" stroke-linecap="round" />
+    <circle :cx="traceB.x" :cy="traceB.y" r="5" fill="var(--c-velocity)" />
+    <CourseArrow :from="traceB" :to="arrowB" stroke="var(--c-velocity)" :stroke-width="3.2" />
+    <CourseArrow :from="entryFrom" :to="entryTo" stroke="var(--c-physics)" :stroke-width="3.4" />
+    <text x="692" y="138" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-accent)">A</text>
+    <text x="596" y="234" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-accent)">B</text>
+    <text x="66" y="204" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-accent)">C</text>
+    <text x="304" y="230" font-family="KaTeX_Main" font-size="20" fill="var(--c-text-dim)" text-anchor="middle">弯道轨道</text>
+    <text x="759" y="99" font-family="KaTeX_Main" font-size="20" fill="var(--c-velocity)" text-anchor="middle">印迹</text>
+    <text x="686" y="254" font-family="KaTeX_Main" font-size="20" fill="var(--c-velocity)" text-anchor="middle">印迹</text>
   </svg>
 </template>
 

@@ -67,7 +67,7 @@ layout: base-flex
 <div v-click="2" class="divider-l stack">
 <div class="mini-title"><mdi-sword /> 宝剑：只能握剑柄</div>
 <SwordGripSvg />
-<div class="sword-warn"><mdi-skull-outline /> 不能握着剑尖反过来用</div>
+<div class="mini-note bad-line flex items-center justify-end gap-1"><mdi-skull-outline /> 不能握着剑尖反过来用</div>
 </div>
 </div>
 
@@ -97,35 +97,35 @@ clicks: 6
 <div class="page-grow">
 <div class="ask">物理的"矢量、标量"，和数学的"向量、数"，是同一批东西吗？</div>
 
-<div class="cmp-stack">
-<div v-click="1" class="cmp">
-<div class="cmp-head"></div>
-<div class="cmp-head">物理世界</div>
-<div class="cmp-head">数学世界</div>
+<div class="stack stack-tight">
+<div v-click="1" class="tbl-cmp">
+<div class="tbl-cmp-head text-lg leading-normal"></div>
+<div class="tbl-cmp-head text-lg leading-normal">物理世界</div>
+<div class="tbl-cmp-head text-lg leading-normal">数学世界</div>
 </div>
 
-<div v-click="2" class="cmp">
-<div class="cmp-row">有方向</div>
-<div class="cmp-cell"><b class="text-accent">矢量</b>：位移、力、速度</div>
-<div class="cmp-cell"><b class="text-accent-2">向量</b> <Latex tex="\vec{a},\ \vec{b}" />：抽象的有向线段</div>
+<div v-click="2" class="tbl-cmp">
+<div class="tbl-cmp-row">有方向</div>
+<div class="tbl-cmp-cell"><b class="text-accent">矢量</b>：位移、力、速度</div>
+<div class="tbl-cmp-cell"><b class="text-accent-2">向量</b> <Latex tex="\vec{a},\ \vec{b}" />：抽象的有向线段</div>
 </div>
 
-<div v-click="3" class="cmp">
-<div class="cmp-row">没有方向</div>
-<div class="cmp-cell"><b class="text-accent">标量</b>：路程、温度、质量</div>
-<div class="cmp-cell"><b class="text-accent-2">数</b> <Latex tex="3,\ -2" />：抽象的数值</div>
+<div v-click="3" class="tbl-cmp">
+<div class="tbl-cmp-row">没有方向</div>
+<div class="tbl-cmp-cell"><b class="text-accent">标量</b>：路程、温度、质量</div>
+<div class="tbl-cmp-cell"><b class="text-accent-2">数</b> <Latex tex="3,\ -2" />：抽象的数值</div>
 </div>
 
-<div v-click="4" class="cmp">
-<div class="cmp-row">单位</div>
-<div class="cmp-cell">有实际意义，<b>必须带单位</b>（m、N）</div>
-<div class="cmp-cell">纯粹的数学对象，<b>没有单位</b></div>
+<div v-click="4" class="tbl-cmp">
+<div class="tbl-cmp-row">单位</div>
+<div class="tbl-cmp-cell">有实际意义，<b>必须带单位</b>（m、N）</div>
+<div class="tbl-cmp-cell">纯粹的数学对象，<b>没有单位</b></div>
 </div>
 
-<div v-click="5" class="cmp">
-<div class="cmp-row">运算</div>
-<div class="cmp-cell">矢量有自己特殊的运算法则</div>
-<div class="cmp-cell">向量有自己特殊的运算法则</div>
+<div v-click="5" class="tbl-cmp">
+<div class="tbl-cmp-row">运算</div>
+<div class="tbl-cmp-cell">矢量有自己特殊的运算法则</div>
+<div class="tbl-cmp-cell">向量有自己特殊的运算法则</div>
 </div>
 </div>
 
@@ -294,20 +294,20 @@ clicks: 2
 <div class="ask">矢量的加法有哪些"法则"？</div>
 
 <div v-click="1" class="three-col">
-<div class="law">
+<div class="text-center">
 <ParallelogramLawSvg />
-<div class="law-title">平行四边形法则</div>
-<div class="law-note">同起点出发，补出平行四边形，对角线就是和</div>
+<div class="mini-title justify-center"><mdi-vector-square /> 平行四边形法则</div>
+<div class="mini-note">同起点出发，补出平行四边形，对角线就是和</div>
 </div>
-<div class="law">
+<div class="text-center">
 <TriangleLawSvg />
-<div class="law-title">三角形法则</div>
-<div class="law-note">首尾相接，从第一个的起点指向最后一个的终点</div>
+<div class="mini-title justify-center"><mdi-vector-triangle /> 三角形法则</div>
+<div class="mini-note">首尾相接，从第一个的起点指向最后一个的终点</div>
 </div>
-<div class="law">
+<div class="text-center">
 <PolygonLawSvg />
-<div class="law-title">多边形法则</div>
-<div class="law-note">多个矢量依次首尾相接，起点直连最后一个终点</div>
+<div class="mini-title justify-center"><mdi-vector-polyline /> 多边形法则</div>
+<div class="mini-note">多个矢量依次首尾相接，起点直连最后一个终点</div>
 </div>
 </div>
 
@@ -335,7 +335,7 @@ layout: base-flex
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="problem">
+<div>
 正六边形 <Latex tex="OABCDE" />（顶点依次为 <Latex tex="O,\ A,\ B,\ C,\ D,\ E" />，顺时针），边长 <Latex tex="1\ \text{m}" />。求合位移
 <Latex tex="\overrightarrow{OA} + \overrightarrow{OB} + \overrightarrow{OC} + \overrightarrow{OD} + \overrightarrow{OE}" /> 的大小和方向。
 </div>
@@ -383,7 +383,7 @@ layout: base-flex
 <div class="stack">
 <div>以 <Latex tex="O" /> 为原点、<Latex tex="\overrightarrow{OC}" /> 方向为 <Latex tex="x" /> 轴正方向建系（外接圆半径 <Latex tex="1\ \text{m}" />）：</div>
 
-<table class="coord-table">
+<table class="tbl-data">
 <thead>
 <tr><th>矢量</th><th><Latex tex="x" /> 分量 / m</th><th><Latex tex="y" /> 分量 / m</th></tr>
 </thead>
@@ -393,7 +393,7 @@ layout: base-flex
 <tr><td><Latex tex="\overrightarrow{OC}" /></td><td>2</td><td>0</td></tr>
 <tr><td><Latex tex="\overrightarrow{OD}" /></td><td>1.5</td><td><Latex tex="-\frac{\sqrt3}{2}" /></td></tr>
 <tr><td><Latex tex="\overrightarrow{OE}" /></td><td>0.5</td><td><Latex tex="-\frac{\sqrt3}{2}" /></td></tr>
-<tr class="sum-row"><td>合矢量</td><td>6</td><td>0</td></tr>
+<tr class="tbl-sum"><td>合矢量</td><td>6</td><td>0</td></tr>
 </tbody>
 </table>
 </div>
@@ -418,7 +418,7 @@ layout: base-flex
 <div class="page-grow">
 <div class="stack stack-dense">
 <div class="mini-title"><mdi-compare /> 矢量、标量、向量、数，不是一回事</div>
-<table class="coord-table coord-table-dense">
+<table class="tbl-data tbl-data-dense">
 <thead>
 <tr><th>对象</th><th>方向</th><th>单位</th><th>例子</th><th>怎么算</th></tr>
 </thead>
@@ -475,7 +475,7 @@ layout: base-flex
 </div>
 <div class="divider-l stack">
 <div class="mini-title"><mdi-sigma /> 带走一句话</div>
-<div class="takeaway">数学上的向量，是物理上矢量的"通用语言"：把方向交给坐标，把计算交给最熟悉的加减法</div>
+<div class="key">数学上的向量，是物理上矢量的"通用语言"：把方向交给坐标，把计算交给最熟悉的加减法</div>
 </div>
 </div>
 </div>

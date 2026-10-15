@@ -77,58 +77,58 @@ const accelArrow = computed(() => motion(accelDir, 74));
     <defs>
       <!-- 电梯轿厢背景渐变 -->
       <linearGradient id="pwCabinBg" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="rgba(30,41,59,0.52)" />
-        <stop offset="100%" stop-color="rgba(15,23,42,0.72)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-surface-solid) 52%, transparent)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-900) 72%, transparent)" />
       </linearGradient>
       <!-- 人物夹克与裤装深石板蓝渐变（高对比衬托重心处力箭头） -->
       <linearGradient id="pwCoatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#334155" />
-        <stop offset="100%" stop-color="#1e293b" />
+        <stop offset="0%" stop-color="var(--c-neutral-700)" />
+        <stop offset="100%" stop-color="var(--c-surface-solid)" />
       </linearGradient>
       <linearGradient id="pwPantsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#1e293b" />
-        <stop offset="100%" stop-color="#0f172a" />
+        <stop offset="0%" stop-color="var(--c-surface-solid)" />
+        <stop offset="100%" stop-color="var(--c-neutral-900)" />
       </linearGradient>
       <!-- 体重计金属踏板与机身渐变 -->
       <linearGradient id="pwScalePadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="rgba(148,163,184,0.38)" />
-        <stop offset="50%" stop-color="rgba(226,232,240,0.52)" />
-        <stop offset="100%" stop-color="rgba(148,163,184,0.38)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" />
+        <stop offset="50%" stop-color="color-mix(in srgb, var(--c-neutral-200) 52%, transparent)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" />
       </linearGradient>
       <linearGradient id="pwScaleBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#334155" />
-        <stop offset="100%" stop-color="#0f172a" />
+        <stop offset="0%" stop-color="var(--c-neutral-700)" />
+        <stop offset="100%" stop-color="var(--c-neutral-900)" />
       </linearGradient>
     </defs>
 
     <!-- ==================== 1. 电梯轿厢与曳引钢缆（enclosure === 'elevator'） ==================== -->
     <g v-if="enclosure === 'elevator'">
       <!-- 顶部三根钢丝曳引缆绳 -->
-      <line x1="148" y1="0" x2="148" y2="30" stroke="#64748b" stroke-width="1.6" />
-      <line x1="160" y1="0" x2="160" y2="30" stroke="#cbd5e1" stroke-width="2.2" />
-      <line x1="172" y1="0" x2="172" y2="30" stroke="#64748b" stroke-width="1.6" />
+      <line x1="148" y1="0" x2="148" y2="30" stroke="var(--c-neutral-500)" stroke-width="1.6" />
+      <line x1="160" y1="0" x2="160" y2="30" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+      <line x1="172" y1="0" x2="172" y2="30" stroke="var(--c-neutral-500)" stroke-width="1.6" />
 
       <!-- 轿厢顶部承重吊梁与绳头减振座 -->
-      <path d="M 134 38 L 140 28 L 180 28 L 186 38 Z" fill="rgba(71,85,105,0.75)" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round" />
-      <circle cx="148" cy="33" r="1.5" fill="#e2e8f0" />
-      <circle cx="160" cy="33" r="1.5" fill="#e2a846" />
-      <circle cx="172" cy="33" r="1.5" fill="#e2e8f0" />
+      <path d="M 134 38 L 140 28 L 180 28 L 186 38 Z" fill="color-mix(in srgb, var(--c-neutral-600) 75%, transparent)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
+      <circle cx="148" cy="33" r="1.5" fill="var(--c-neutral-200)" />
+      <circle cx="160" cy="33" r="1.5" fill="var(--c-accent)" />
+      <circle cx="172" cy="33" r="1.5" fill="var(--c-neutral-200)" />
 
       <!-- 轿厢外框与金属内壁 -->
-      <rect x="32" y="38" width="256" height="334" rx="6" fill="url(#pwCabinBg)" stroke="rgba(148,163,184,0.68)" stroke-width="2.2" />
+      <rect x="32" y="38" width="256" height="334" rx="6" fill="url(#pwCabinBg)" stroke="color-mix(in srgb, var(--c-text-dim) 68%, transparent)" stroke-width="2.2" />
       <!-- 轿厢内壁装饰护板立线与后壁扶手 -->
-      <line x1="42" y1="46" x2="42" y2="366" stroke="rgba(148,163,184,0.22)" stroke-width="1.2" />
-      <line x1="278" y1="46" x2="278" y2="366" stroke="rgba(148,163,184,0.22)" stroke-width="1.2" />
-      <line x1="42" y1="262" x2="278" y2="262" stroke="rgba(148,163,184,0.2)" stroke-width="3" stroke-linecap="round" />
+      <line x1="42" y1="46" x2="42" y2="366" stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke-width="1.2" />
+      <line x1="278" y1="46" x2="278" y2="366" stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)" stroke-width="1.2" />
+      <line x1="42" y1="262" x2="278" y2="262" stroke="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke-width="3" stroke-linecap="round" />
 
       <!-- 轿厢顶部嵌入式 LED 照明灯带 -->
-      <rect x="102" y="41" width="116" height="4.5" rx="2" fill="rgba(226,232,240,0.55)" stroke="rgba(147,197,253,0.45)" stroke-width="0.8" />
+      <rect x="102" y="41" width="116" height="4.5" rx="2" fill="color-mix(in srgb, var(--c-neutral-200) 55%, transparent)" stroke="color-mix(in srgb, var(--c-velocity-light) 45%, transparent)" stroke-width="0.8" />
 
       <!-- 轿厢左右两侧外导靴 -->
-      <rect x="26" y="72" width="6" height="22" rx="1.5" fill="#475569" stroke="#94a3b8" stroke-width="1" />
-      <rect x="26" y="318" width="6" height="22" rx="1.5" fill="#475569" stroke="#94a3b8" stroke-width="1" />
-      <rect x="288" y="72" width="6" height="22" rx="1.5" fill="#475569" stroke="#94a3b8" stroke-width="1" />
-      <rect x="288" y="318" width="6" height="22" rx="1.5" fill="#475569" stroke="#94a3b8" stroke-width="1" />
+      <rect x="26" y="72" width="6" height="22" rx="1.5" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1" />
+      <rect x="26" y="318" width="6" height="22" rx="1.5" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1" />
+      <rect x="288" y="72" width="6" height="22" rx="1.5" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1" />
+      <rect x="288" y="318" width="6" height="22" rx="1.5" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1" />
     </g>
 
     <!-- ==================== 2. 地板接触面（复用 SurfaceHatch 组件） ==================== -->
@@ -137,17 +137,17 @@ const accelArrow = computed(() => motion(accelDir, 74));
     <!-- ==================== 3. 精密体重秤（踏板随视重动态微压/回弹） ==================== -->
     <g>
       <!-- 踏板下方两侧传力支柱 -->
-      <rect :x="124" :y="334 + padShift" width="8" :height="10 - padShift" fill="#64748b" />
-      <rect :x="188" :y="334 + padShift" width="8" :height="10 - padShift" fill="#64748b" />
+      <rect :x="124" :y="334 + padShift" width="8" :height="10 - padShift" fill="var(--c-neutral-500)" />
+      <rect :x="188" :y="334 + padShift" width="8" :height="10 - padShift" fill="var(--c-neutral-500)" />
 
       <!-- 防滑称重踏板（随视重微幅上下位移） -->
-      <rect x="98" :y="327 + padShift" width="124" height="10" rx="3.5" fill="url(#pwScalePadGrad)" stroke="#94a3b8" stroke-width="1.4" />
-      <line x1="106" :y1="329.5 + padShift" x2="214" :y2="329.5 + padShift" stroke="rgba(248,250,252,0.55)" stroke-width="1" stroke-linecap="round" />
+      <rect x="98" :y="327 + padShift" width="124" height="10" rx="3.5" fill="url(#pwScalePadGrad)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+      <line x1="106" :y1="329.5 + padShift" x2="214" :y2="329.5 + padShift" stroke="color-mix(in srgb, var(--c-neutral-50) 55%, transparent)" stroke-width="1" stroke-linecap="round" />
 
       <!-- 体重计梯形金属底座与防滑脚垫 -->
-      <rect x="114" y="369" width="14" height="3" rx="1" fill="#475569" />
-      <rect x="192" y="369" width="14" height="3" rx="1" fill="#475569" />
-      <path d="M 108 370 L 114 341 L 206 341 L 212 370 Z" fill="url(#pwScaleBodyGrad)" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round" />
+      <rect x="114" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
+      <rect x="192" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
+      <path d="M 108 370 L 114 341 L 206 341 L 212 370 Z" fill="url(#pwScaleBodyGrad)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
 
       <!-- 体重计显示屏窗口 -->
       <rect
@@ -164,35 +164,35 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <text v-if="reading !== null" x="160" y="361" text-anchor="middle" font-family="KaTeX_Main" font-size="14.5" font-weight="600" :fill="screenAccent">
         {{ reading }} N
       </text>
-      <g v-else stroke="#64748b" stroke-width="1.2" stroke-linecap="round">
+      <g v-else stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-linecap="round">
         <path d="M 138 362 A 22 22 0 0 1 182 362" fill="none" />
-        <line x1="160" y1="362" x2="160" y2="349" stroke="#e2a846" stroke-width="1.5" />
-        <circle cx="160" cy="362" r="2" fill="#e2a846" />
+        <line x1="160" y1="362" x2="160" y2="349" stroke="var(--c-accent)" stroke-width="1.5" />
+        <circle cx="160" cy="362" r="2" fill="var(--c-accent)" />
       </g>
     </g>
 
     <!-- ==================== 4. 具象化站立人物（随秤面微动，深色高对比衬底确保受力箭头清晰） ==================== -->
     <g :style="{ transform: `translateY(${padShift}px)` }">
       <!-- 双脚运动鞋（稳踏在秤面 y = 327 上） -->
-      <path d="M 132 327 L 135 319 L 152 319 L 154 327 Z" fill="#1e293b" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round" />
-      <path d="M 166 327 L 168 319 L 185 319 L 188 327 Z" fill="#1e293b" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round" />
+      <path d="M 132 327 L 135 319 L 152 319 L 154 327 Z" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
+      <path d="M 166 327 L 168 319 L 185 319 L 188 327 Z" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
 
       <!-- 双腿长裤 -->
-      <path d="M 138 264 L 155 264 L 152 320 L 137 320 Z" fill="url(#pwPantsGrad)" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" />
-      <path d="M 165 264 L 182 264 L 183 320 L 168 320 Z" fill="url(#pwPantsGrad)" stroke="#94a3b8" stroke-width="1.5" stroke-linejoin="round" />
+      <path d="M 138 264 L 155 264 L 152 320 L 137 320 Z" fill="url(#pwPantsGrad)" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
+      <path d="M 165 264 L 182 264 L 183 320 L 168 320 Z" fill="url(#pwPantsGrad)" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
 
       <!-- 自然下垂的左右手臂与手掌 -->
       <path
         d="M 136 202 C 126 208 124 232 127 256 C 128 261 134 261 135 256 L 138 216 Z"
         fill="url(#pwCoatGrad)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-linejoin="round"
       />
       <path
         d="M 184 202 C 194 208 196 232 193 256 C 192 261 186 261 185 256 L 182 216 Z"
         fill="url(#pwCoatGrad)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-linejoin="round"
       />
@@ -201,24 +201,24 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <path
         d="M 136 200 C 136 195 145 193 160 193 C 175 193 184 195 184 200 L 183 266 L 137 266 Z"
         fill="url(#pwCoatGrad)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.6"
         stroke-linejoin="round"
       />
       <!-- 领口细节 -->
-      <path d="M 152 194 L 160 205 L 168 194" fill="none" stroke="rgba(203,213,225,0.45)" stroke-width="1.3" stroke-linejoin="round" />
+      <path d="M 152 194 L 160 205 L 168 194" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 45%, transparent)" stroke-width="1.3" stroke-linejoin="round" />
 
       <!-- 脖颈与头部 -->
-      <rect x="155" y="185" width="10" height="10" rx="3" fill="#475569" stroke="#94a3b8" stroke-width="1.3" />
-      <circle cx="160" cy="171" r="15.5" fill="#334155" stroke="#94a3b8" stroke-width="1.6" />
+      <rect x="155" y="185" width="10" height="10" rx="3" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1.3" />
+      <circle cx="160" cy="171" r="15.5" fill="var(--c-neutral-700)" stroke="var(--c-text-dim)" stroke-width="1.6" />
       <!-- 利落短发轮廓 -->
-      <path d="M 145 168 C 145 156 153 153 161 153 C 170 153 176 158 175.5 168 C 171 163 164 162 156 163 C 150 163.5 147 166 145 168 Z" fill="#1e293b" />
+      <path d="M 145 168 C 145 156 153 153 161 153 C 170 153 176 158 175.5 168 C 171 163 164 162 156 163 C 150 163.5 147 166 145 168 Z" fill="var(--c-surface-solid)" />
     </g>
 
     <!-- ==================== 5. 速度 v / 加速度 a 矢量（画在人左侧，互不遮挡） ==================== -->
     <g v-if="showMotion">
-      <CourseArrow v-if="speedArrow" :from="speedArrow.from" :to="speedArrow.to" stroke="#60a5fa" :stroke-width="2.8" label="v" :label-dx="-13" />
-      <CourseArrow v-if="accelArrow" :from="accelArrow.from" :to="accelArrow.to" stroke="#2dd4bf" :stroke-width="2.8" label="a" :label-dx="-13" />
+      <CourseArrow v-if="speedArrow" :from="speedArrow.from" :to="speedArrow.to" stroke="var(--c-velocity)" :stroke-width="2.8" label="v" :label-dx="-13" />
+      <CourseArrow v-if="accelArrow" :from="accelArrow.from" :to="accelArrow.to" stroke="var(--c-physics)" :stroke-width="2.8" label="a" :label-dx="-13" />
       <!-- 当匀速运动 (a = 0) 时在加速度列标出 a = 0，强化“a=0 时视重等于重力” -->
       <text
         v-else
@@ -228,8 +228,8 @@ const accelArrow = computed(() => motion(accelDir, 74));
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="14"
-        fill="#94a3b8"
-        stroke="#0f1425"
+        fill="var(--c-text-dim)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -240,7 +240,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
     <!-- ==================== 6. 受力分析（重力 mg 与支持力 F_N 一律从重心 CO 共点出发） ==================== -->
     <g v-if="showForces">
       <!-- 重力 mg（竖直向下） -->
-      <CourseArrow :from="CO" :to="mgEnd" stroke="#f87171" :stroke-width="3.5" />
+      <CourseArrow :from="CO" :to="mgEnd" stroke="var(--c-force)" :stroke-width="3.5" />
       <text
         :x="CO.x + 14"
         :y="mgEnd.y - 6"
@@ -248,8 +248,8 @@ const accelArrow = computed(() => motion(accelDir, 74));
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="16"
-        fill="#f87171"
-        stroke="#0f1425"
+        fill="var(--c-force)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.2"
         paint-order="stroke"
       >
@@ -257,7 +257,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
       </text>
 
       <!-- 支持力 F_N（竖直向上，长度随视重比 fnRatio 动态伸缩） -->
-      <CourseArrow :from="CO" :to="fnEnd" stroke="#e2a846" :stroke-width="3.5" />
+      <CourseArrow :from="CO" :to="fnEnd" stroke="var(--c-accent)" :stroke-width="3.5" />
       <text
         :x="CO.x + 14"
         :y="fnEnd.y + 10"
@@ -265,8 +265,8 @@ const accelArrow = computed(() => motion(accelDir, 74));
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="16"
-        fill="#e2a846"
-        stroke="#0f1425"
+        fill="var(--c-accent)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.2"
         paint-order="stroke"
       >
@@ -275,7 +275,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
       </text>
 
       <!-- 重心共点圆心标记（压在两力箭头根部之上） -->
-      <circle :cx="CO.x" :cy="CO.y" r="3.8" fill="#f8fafc" stroke="#0f172a" stroke-width="1.6" />
+      <circle :cx="CO.x" :cy="CO.y" r="3.8" fill="var(--c-neutral-50)" stroke="var(--c-neutral-900)" stroke-width="1.6" />
     </g>
   </svg>
 </template>

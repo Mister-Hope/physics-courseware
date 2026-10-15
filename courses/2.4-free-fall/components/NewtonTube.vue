@@ -248,30 +248,30 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <defs>
           <linearGradient :id="glassId" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0" stop-color="rgba(186,230,253,0.26)" />
-            <stop offset="0.22" stop-color="rgba(148,163,184,0.05)" />
-            <stop offset="0.78" stop-color="rgba(148,163,184,0.05)" />
+            <stop offset="0.22" stop-color="color-mix(in srgb, var(--c-text-dim) 5%, transparent)" />
+            <stop offset="0.78" stop-color="color-mix(in srgb, var(--c-text-dim) 5%, transparent)" />
             <stop offset="1" stop-color="rgba(186,230,253,0.22)" />
           </linearGradient>
           <linearGradient :id="capId" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="#334155" />
-            <stop offset="0.45" stop-color="#64748b" />
-            <stop offset="1" stop-color="#1e293b" />
+            <stop offset="0" stop-color="var(--c-neutral-700)" />
+            <stop offset="0.45" stop-color="var(--c-neutral-500)" />
+            <stop offset="1" stop-color="var(--c-surface-solid)" />
           </linearGradient>
           <linearGradient :id="pumpId" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#334155" />
-            <stop offset="1" stop-color="#0f172a" />
+            <stop offset="0" stop-color="var(--c-neutral-700)" />
+            <stop offset="1" stop-color="var(--c-neutral-900)" />
           </linearGradient>
         </defs>
         <!-- ================= 1. 左侧竖直尺寸标注：管长 L = 1.2 m（不再画在管底像直径） ================= -->
         <g>
           <!-- 上下引出界线（对齐释放线 y = 38 与落地底面 y = 262） -->
-          <line x1="50" y1="38" x2="78" y2="38" class="dim-ext" />
-          <line x1="50" y1="262" x2="78" y2="262" class="dim-ext" />
+          <line x1="50" y1="38" x2="78" y2="38" class="nt-dim-ext" />
+          <line x1="50" y1="262" x2="78" y2="262" class="nt-dim-ext" />
           <!-- 竖直双向尺寸线（中间断开留给文字） -->
-          <line x1="56" y1="43" x2="56" y2="126" class="dim-line" />
-          <line x1="56" y1="174" x2="56" y2="257" class="dim-line" />
-          <path d="M 56 38.5 L 53 45.5 L 59 45.5 Z" class="dim-arrow" />
-          <path d="M 56 261.5 L 53 254.5 L 59 254.5 Z" class="dim-arrow" />
+          <line x1="56" y1="43" x2="56" y2="126" class="nt-dim-line" />
+          <line x1="56" y1="174" x2="56" y2="257" class="nt-dim-line" />
+          <path d="M 56 38.5 L 53 45.5 L 59 45.5 Z" class="nt-dim-arrow" />
+          <path d="M 56 261.5 L 53 254.5 L 59 254.5 Z" class="nt-dim-arrow" />
           <!-- 管长 L = 1.2 m 标注 -->
           <text x="56" y="145" text-anchor="middle" font-size="11.5" class="nt-caption">管长</text>
           <text x="56" y="162" text-anchor="middle" font-size="12" class="nt-caption-val">
@@ -286,7 +286,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <polyline
           points="52,21 72,21 91,31"
           fill="none"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1"
           stroke-opacity="0.7"
         />
@@ -294,13 +294,13 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <polyline
           points="158,21 138,21 119,33"
           fill="none"
-          stroke="#cbd5e1"
+          stroke="var(--c-neutral-300)"
           stroke-width="1"
           stroke-opacity="0.7"
         />
         <!-- ================= 3. 细长牛顿管本体（x = 82 ~ 128，外宽仅 46 px，长径比约 5.6:1） ================= -->
         <!-- 顶部密封金属法兰盖与挂环 -->
-        <circle cx="105" cy="7.5" r="3.5" fill="none" stroke="#94a3b8" stroke-width="1.6" />
+        <circle cx="105" cy="7.5" r="3.5" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
         <rect
           x="80"
           y="11"
@@ -308,7 +308,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
           height="7"
           rx="2.5"
           :fill="`url(#${capId})`"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.1"
         />
         <!-- 玻璃管外壳与深色内腔 -->
@@ -319,12 +319,12 @@ const ironY = computed(() => bottomY(ironHeight.value));
           height="254"
           rx="6"
           :fill="`url(#${glassId})`"
-          class="tube-shell"
+          class="nt-tube-shell"
         />
-        <rect x="85.5" y="19" width="39" height="248" rx="4" class="tube-cavity" />
+        <rect x="85.5" y="19" width="39" height="248" rx="4" class="nt-tube-cavity" />
         <!-- 细长玻璃管左右双侧高光反射线 -->
-        <line x1="89" y1="24" x2="89" y2="260" class="tube-shine" />
-        <line x1="121" y1="24" x2="121" y2="236" class="tube-shine-sub" />
+        <line x1="89" y1="24" x2="89" y2="260" class="nt-tube-shine" />
+        <line x1="121" y1="24" x2="121" y2="236" class="nt-tube-shine-sub" />
         <!-- 底部金属密封基座与台面底座 -->
         <rect
           x="79"
@@ -333,7 +333,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
           height="10"
           rx="2.5"
           :fill="`url(#${capId})`"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.1"
         />
         <rect
@@ -342,22 +342,22 @@ const ironY = computed(() => bottomY(ironHeight.value));
           width="70"
           height="5"
           rx="2.5"
-          fill="#334155"
-          stroke="#64748b"
+          fill="var(--c-neutral-700)"
+          stroke="var(--c-neutral-500)"
           stroke-width="1"
         />
         <!-- ================= 4. 管侧细抽气嘴 + 旋塞活栓 + 抽气软管 + 真空泵（气泵） ================= -->
         <!-- 与玻璃管内腔连通的细长抽气支管（位于 y = 248） -->
         <path
           d="M 124.5 245.5 L 154 245.5 L 154 250.5 L 124.5 250.5"
-          fill="rgb(15,23,42,0.85)"
-          stroke="#94a3b8"
+          fill="color-mix(in srgb, var(--c-neutral-900) 85%, transparent)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
           stroke-linejoin="round"
         />
         <!-- 细口宝塔接头纹理 -->
-        <line x1="150" y1="244.5" x2="150" y2="251.5" stroke="#cbd5e1" stroke-width="1.2" />
-        <line x1="153" y1="244.5" x2="153" y2="251.5" stroke="#cbd5e1" stroke-width="1.2" />
+        <line x1="150" y1="244.5" x2="150" y2="251.5" stroke="var(--c-neutral-300)" stroke-width="1.2" />
+        <line x1="153" y1="244.5" x2="153" y2="251.5" stroke="var(--c-neutral-300)" stroke-width="1.2" />
         <!-- 抽气嘴上的玻璃/黄铜活栓阀门（T 型旋塞随真空状态旋转） -->
         <rect
           x="136"
@@ -365,8 +365,8 @@ const ironY = computed(() => bottomY(ironHeight.value));
           width="7"
           height="9"
           rx="1.5"
-          fill="#475569"
-          stroke="#cbd5e1"
+          fill="var(--c-neutral-600)"
+          stroke="var(--c-neutral-300)"
           stroke-width="1"
         />
         <g :transform="`translate(139.5 241) rotate(${vacuum ? 0 : 90})`">
@@ -383,7 +383,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
         <path
           d="M 154 248 C 172 248, 174 218, 192 218"
           fill="none"
-          stroke="#334155"
+          stroke="var(--c-neutral-700)"
           stroke-width="4.6"
           stroke-linecap="round"
         />
@@ -396,9 +396,9 @@ const ironY = computed(() => bottomY(ironHeight.value));
           stroke-linecap="round"
         />
         <!-- 抽气方向小箭头（抽成真空时高亮显示气流从管内抽向气泵） -->
-        <g v-if="vacuum" fill="#e2a846" opacity="0.9">
+        <g v-if="vacuum" fill="var(--c-accent)" opacity="0.9">
           <path d="M 169 243 L 162 241 L 165 246 Z" />
-          <text x="166" y="262" text-anchor="middle" font-size="9.5" fill="#e2a846">已抽气</text>
+          <text x="166" y="262" text-anchor="middle" font-size="9.5" fill="var(--c-accent)">已抽气</text>
         </g>
         <!-- 右下角真空泵（气泵）本体 -->
         <g transform="translate(188, 196)">
@@ -406,7 +406,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
           <path
             d="M 20 8 L 20 2 L 42 2 L 42 8"
             fill="none"
-            stroke="#94a3b8"
+            stroke="var(--c-text-dim)"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -418,8 +418,8 @@ const ironY = computed(() => bottomY(ironHeight.value));
             width="6"
             height="8"
             rx="1"
-            fill="#64748b"
-            stroke="#94a3b8"
+            fill="var(--c-neutral-500)"
+            stroke="var(--c-text-dim)"
             stroke-width="1"
           />
           <!-- 气泵主机外壳 -->
@@ -430,7 +430,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
             height="44"
             rx="5"
             :fill="`url(#${pumpId})`"
-            stroke="#94a3b8"
+            stroke="var(--c-text-dim)"
             stroke-width="1.3"
           />
           <!-- 电机散热格栅 -->
@@ -439,7 +439,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
             y1="18"
             x2="28"
             y2="18"
-            stroke="#64748b"
+            stroke="var(--c-neutral-500)"
             stroke-width="1.5"
             stroke-linecap="round"
           />
@@ -448,7 +448,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
             y1="23"
             x2="28"
             y2="23"
-            stroke="#64748b"
+            stroke="var(--c-neutral-500)"
             stroke-width="1.5"
             stroke-linecap="round"
           />
@@ -457,7 +457,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
             y1="28"
             x2="28"
             y2="28"
-            stroke="#64748b"
+            stroke="var(--c-neutral-500)"
             stroke-width="1.5"
             stroke-linecap="round"
           />
@@ -466,14 +466,14 @@ const ironY = computed(() => bottomY(ironHeight.value));
             y1="33"
             x2="28"
             y2="33"
-            stroke="#64748b"
+            stroke="var(--c-neutral-500)"
             stroke-width="1.5"
             stroke-linecap="round"
           />
           <!-- 真空负压表盘 -->
-          <circle cx="43" cy="24" r="9.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.2" />
+          <circle cx="43" cy="24" r="9.5" fill="var(--c-neutral-900)" stroke="var(--c-neutral-300)" stroke-width="1.2" />
           <!-- 表盘刻度弧 -->
-          <path d="M 36.5 27 A 7 7 0 1 1 49.5 27" fill="none" stroke="#64748b" stroke-width="1.1" />
+          <path d="M 36.5 27 A 7 7 0 1 1 49.5 27" fill="none" stroke="var(--c-neutral-500)" stroke-width="1.1" />
           <!-- 真空表指针（有空气指右，抽真空指左负压端） -->
           <line
             x1="43"
@@ -484,7 +484,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
             stroke-width="1.5"
             stroke-linecap="round"
           />
-          <circle cx="43" cy="24" r="1.5" fill="#cbd5e1" />
+          <circle cx="43" cy="24" r="1.5" fill="var(--c-neutral-300)" />
           <!-- 气泵状态指示灯与文字 -->
           <circle cx="15" cy="43" r="2.2" :fill="vacuum ? '#e2a846' : '#475569'" />
           <text
@@ -498,27 +498,27 @@ const ironY = computed(() => bottomY(ironHeight.value));
             气泵
           </text>
           <!-- 气泵减震底座脚垫 -->
-          <rect x="10" y="52" width="10" height="3.5" rx="1" fill="#475569" />
-          <rect x="44" y="52" width="10" height="3.5" rx="1" fill="#475569" />
+          <rect x="10" y="52" width="10" height="3.5" rx="1" fill="var(--c-neutral-600)" />
+          <rect x="44" y="52" width="10" height="3.5" rx="1" fill="var(--c-neutral-600)" />
         </g>
         <!-- ================= 5. 管内空气分子（只在"有空气"时显示） ================= -->
-        <g class="air-group" :style="{ opacity: vacuum ? 0 : 1 }">
-          <circle cx="92" cy="52" r="1.6" class="air-molecule" />
-          <circle cx="116" cy="64" r="1.6" class="air-molecule" />
-          <circle cx="102" cy="82" r="1.6" class="air-molecule" />
-          <circle cx="118" cy="102" r="1.6" class="air-molecule" />
-          <circle cx="91" cy="118" r="1.6" class="air-molecule" />
-          <circle cx="108" cy="136" r="1.6" class="air-molecule" />
-          <circle cx="94" cy="156" r="1.6" class="air-molecule" />
-          <circle cx="117" cy="174" r="1.6" class="air-molecule" />
-          <circle cx="103" cy="194" r="1.6" class="air-molecule" />
-          <circle cx="91" cy="214" r="1.6" class="air-molecule" />
-          <circle cx="115" cy="228" r="1.6" class="air-molecule" />
-          <circle cx="101" cy="246" r="1.6" class="air-molecule" />
+        <g class="nt-air-group" :style="{ opacity: vacuum ? 0 : 1 }">
+          <circle cx="92" cy="52" r="1.6" class="nt-air-molecule" />
+          <circle cx="116" cy="64" r="1.6" class="nt-air-molecule" />
+          <circle cx="102" cy="82" r="1.6" class="nt-air-molecule" />
+          <circle cx="118" cy="102" r="1.6" class="nt-air-molecule" />
+          <circle cx="91" cy="118" r="1.6" class="nt-air-molecule" />
+          <circle cx="108" cy="136" r="1.6" class="nt-air-molecule" />
+          <circle cx="94" cy="156" r="1.6" class="nt-air-molecule" />
+          <circle cx="117" cy="174" r="1.6" class="nt-air-molecule" />
+          <circle cx="103" cy="194" r="1.6" class="nt-air-molecule" />
+          <circle cx="91" cy="214" r="1.6" class="nt-air-molecule" />
+          <circle cx="115" cy="228" r="1.6" class="nt-air-molecule" />
+          <circle cx="101" cy="246" r="1.6" class="nt-air-molecule" />
         </g>
         <!-- ================= 6. 释放基准线、真空等高同步线与管底落地指示垫 ================= -->
         <!-- 释放位置线（y = 38） -->
-        <line x1="86" y1="38" x2="124" y2="38" class="start-line" />
+        <line x1="86" y1="38" x2="124" y2="38" class="nt-start-line" />
         <!-- 真空同步线：横穿细管两列，直观显示"始终等高" -->
         <line
           v-if="vacuum && dropTime > 0"
@@ -526,43 +526,43 @@ const ironY = computed(() => bottomY(ironHeight.value));
           :y1="featherY"
           x2="124"
           :y2="featherY"
-          class="sync-line"
+          class="nt-sync-line"
         />
         <!-- 管底缓冲垫与左右落地高亮指示条（y = 262） -->
-        <line x1="86" y1="262.5" x2="124" y2="262.5" class="pad-base" />
+        <line x1="86" y1="262.5" x2="124" y2="262.5" class="nt-pad-base" />
         <line
           x1="87.5"
           y1="262.5"
           x2="103"
           y2="262.5"
-          class="pad-flag"
-          :class="{ 'pad-flag-feather-on': featherLanded }"
+          class="nt-pad-flag"
+          :class="{ 'nt-pad-flag-feather-on': featherLanded }"
         />
         <line
           x1="107"
           y1="262.5"
           x2="122.5"
           y2="262.5"
-          class="pad-flag"
-          :class="{ 'pad-flag-iron-on': ironLanded }"
+          class="nt-pad-flag"
+          :class="{ 'nt-pad-flag-iron-on': ironLanded }"
         />
         <!-- ================= 7. 羽毛与铁片（适配细长管腔） ================= -->
         <!-- 羽毛：底端为局部原点 (0, 0) -->
         <g :transform="`translate(${FEATHER_X} ${featherY})`">
           <path
             d="M 0 0 C -2.8 -4.2 -6 -8.5 -5.4 -13.5 C -4.6 -18 -2.2 -20.2 0 -21.5 C 2.2 -20.2 4.6 -18 5.4 -13.5 C 6 -8.5 2.8 -4.2 0 0 Z"
-            class="feather-vane"
+            class="nt-feather-vane"
           />
-          <line x1="0" y1="-7" x2="-4.2" y2="-10.5" class="feather-barb" />
-          <line x1="0" y1="-7" x2="4.2" y2="-10.5" class="feather-barb" />
-          <line x1="0" y1="-13.5" x2="-3.5" y2="-16.5" class="feather-barb" />
-          <line x1="0" y1="-13.5" x2="3.5" y2="-16.5" class="feather-barb" />
-          <line x1="0" y1="-1.2" x2="0" y2="-20" class="feather-shaft" />
+          <line x1="0" y1="-7" x2="-4.2" y2="-10.5" class="nt-feather-barb" />
+          <line x1="0" y1="-7" x2="4.2" y2="-10.5" class="nt-feather-barb" />
+          <line x1="0" y1="-13.5" x2="-3.5" y2="-16.5" class="nt-feather-barb" />
+          <line x1="0" y1="-13.5" x2="3.5" y2="-16.5" class="nt-feather-barb" />
+          <line x1="0" y1="-1.2" x2="0" y2="-20" class="nt-feather-shaft" />
         </g>
         <!-- 铁片：底端为局部原点 (0, 0)，与羽毛底边严格平齐 -->
         <g :transform="`translate(${IRON_X} ${ironY})`">
-          <rect x="-7.5" y="-7" width="15" height="7" rx="1.5" class="iron-body" />
-          <rect x="-7.5" y="-7" width="15" height="2.4" rx="1.2" class="iron-top" />
+          <rect x="-7.5" y="-7" width="15" height="7" rx="1.5" class="nt-iron-body" />
+          <rect x="-7.5" y="-7" width="15" height="2.4" rx="1.2" class="nt-iron-top" />
         </g>
       </svg>
     </div>
@@ -571,11 +571,8 @@ const ironY = computed(() => bottomY(ironHeight.value));
 
 <style scoped>
 .nt-wrap {
-  --c-border: rgb(148 163 184 / 22%);
-  --c-surface: rgb(15 23 42 / 72%);
-  --c-text: #f1f5f9;
-  --c-text-dim: #94a3b8;
-  --c-accent: #e2a846;
+  --c-border: color-mix(in srgb, var(--c-text-dim) 22%, transparent);
+  --c-surface: color-mix(in srgb, var(--c-neutral-900) 72%, transparent);
 
   display: flex;
   flex-wrap: wrap;
@@ -609,7 +606,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
 
   padding: 0.24rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.65rem;
+  border-radius: var(--radius-md);
 
   background: var(--c-surface);
 }
@@ -626,7 +623,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
   min-width: 0;
   padding: 0.45rem 0.4rem;
   border: 1px solid transparent;
-  border-radius: 0.46rem;
+  border-radius: var(--radius-sm);
 
   background: transparent;
   color: var(--c-text-dim);
@@ -650,23 +647,23 @@ const ironY = computed(() => bottomY(ironHeight.value));
 }
 
 .nt-seg-btn-air {
-  border-color: rgb(148 163 184 / 38%);
-  background: rgb(51 65 85 / 65%);
+  border-color: color-mix(in srgb, var(--c-text-dim) 38%, transparent);
+  background: color-mix(in srgb, var(--c-neutral-700) 65%, transparent);
   color: var(--c-text);
   font-weight: 600;
 }
 
 .nt-seg-btn-vac {
-  border-color: rgb(226 168 70 / 55%);
-  background: rgb(226 168 70 / 16%);
+  border-color: color-mix(in srgb, var(--c-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--c-accent) 16%, transparent);
   color: var(--c-accent);
   font-weight: 600;
 }
 
 .nt-seg-btn-speed {
-  border-color: rgb(96 165 250 / 45%);
-  background: rgb(59 130 246 / 16%);
-  color: #93c5fd;
+  border-color: color-mix(in srgb, var(--c-velocity) 45%, transparent);
+  background: color-mix(in srgb, var(--c-accent-2) 16%, transparent);
+  color: var(--c-velocity-light);
   font-weight: 600;
 }
 
@@ -674,7 +671,7 @@ const ironY = computed(() => bottomY(ironHeight.value));
   width: 100%;
   padding: 0.62rem 0.75rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.65rem;
+  border-radius: var(--radius-md);
 
   background: var(--c-surface);
   color: var(--c-text);
@@ -694,33 +691,33 @@ const ironY = computed(() => bottomY(ironHeight.value));
 }
 
 .nt-action-release {
-  border-color: rgb(96 165 250 / 50%);
-  background: rgb(59 130 246 / 16%);
-  color: #93c5fd;
+  border-color: color-mix(in srgb, var(--c-velocity) 50%, transparent);
+  background: color-mix(in srgb, var(--c-accent-2) 16%, transparent);
+  color: var(--c-velocity-light);
 }
 
 .nt-action-release:hover {
-  background: rgb(59 130 246 / 24%);
+  background: color-mix(in srgb, var(--c-accent-2) 24%, transparent);
 }
 
 .nt-action-pause {
-  border-color: rgb(226 168 70 / 55%);
-  background: rgb(226 168 70 / 16%);
+  border-color: color-mix(in srgb, var(--c-accent) 55%, transparent);
+  background: color-mix(in srgb, var(--c-accent) 16%, transparent);
   color: var(--c-accent);
 }
 
 .nt-action-pause:hover {
-  background: rgb(226 168 70 / 24%);
+  background: color-mix(in srgb, var(--c-accent) 24%, transparent);
 }
 
 .nt-action-reset {
-  border-color: rgb(148 163 184 / 45%);
-  background: rgb(51 65 85 / 60%);
-  color: #e2e8f0;
+  border-color: color-mix(in srgb, var(--c-text-dim) 45%, transparent);
+  background: color-mix(in srgb, var(--c-neutral-700) 60%, transparent);
+  color: var(--c-neutral-200);
 }
 
 .nt-action-reset:hover {
-  background: rgb(71 85 105 / 70%);
+  background: color-mix(in srgb, var(--c-neutral-600) 70%, transparent);
 }
 
 .nt-tube {
@@ -743,74 +740,74 @@ const ironY = computed(() => bottomY(ironHeight.value));
   cursor: pointer;
 }
 
-.tube-shell {
-  stroke: #94a3b8;
+.nt-tube-shell {
+  stroke: var(--c-text-dim);
   stroke-opacity: 0.6;
   stroke-width: 1.6;
 }
 
-.tube-cavity {
-  fill: rgb(9 13 26 / 68%);
+.nt-tube-cavity {
+  fill: color-mix(in srgb, var(--c-bg) 68%, transparent);
 }
 
-.tube-shine {
-  stroke: rgb(226 232 240 / 24%);
+.nt-tube-shine {
+  stroke: color-mix(in srgb, var(--c-neutral-200) 24%, transparent);
   stroke-linecap: round;
   stroke-width: 2.2;
 }
 
-.tube-shine-sub {
-  stroke: rgb(148 163 184 / 14%);
+.nt-tube-shine-sub {
+  stroke: color-mix(in srgb, var(--c-text-dim) 14%, transparent);
   stroke-linecap: round;
   stroke-width: 1.2;
 }
 
-.dim-ext {
-  stroke: #64748b;
+.nt-dim-ext {
+  stroke: var(--c-neutral-500);
   stroke-dasharray: 2.5 2.5;
   stroke-width: 1;
 }
 
-.dim-line {
-  stroke: #94a3b8;
+.nt-dim-line {
+  stroke: var(--c-text-dim);
   stroke-width: 1.2;
 }
 
-.dim-arrow {
-  fill: #94a3b8;
+.nt-dim-arrow {
+  fill: var(--c-text-dim);
 }
 
-.air-molecule {
+.nt-air-molecule {
   opacity: 0.75;
   fill: var(--c-text-dim);
 }
 
-.air-group {
+.nt-air-group {
   transition: opacity 0.35s ease;
 }
 
-.start-line {
+.nt-start-line {
   stroke: var(--c-text-dim);
   stroke-dasharray: 4 3.5;
   stroke-opacity: 0.45;
   stroke-width: 1.1;
 }
 
-.sync-line {
+.nt-sync-line {
   stroke: var(--c-accent);
   stroke-dasharray: 3.5 3.5;
   stroke-opacity: 0.75;
   stroke-width: 1.3;
 }
 
-.pad-base {
+.nt-pad-base {
   stroke: var(--c-text-dim);
   stroke-linecap: round;
   stroke-opacity: 0.32;
   stroke-width: 2.6;
 }
 
-.pad-flag {
+.nt-pad-flag {
   transition:
     stroke 0.2s ease,
     stroke-opacity 0.2s ease;
@@ -821,41 +818,41 @@ const ironY = computed(() => bottomY(ironHeight.value));
   stroke-width: 3.5;
 }
 
-.pad-flag-feather-on {
+.nt-pad-flag-feather-on {
   stroke: var(--c-accent);
   stroke-opacity: 1;
 }
 
-.pad-flag-iron-on {
-  stroke: #cbd5e1;
+.nt-pad-flag-iron-on {
+  stroke: var(--c-neutral-300);
   stroke-opacity: 1;
 }
 
-.feather-vane {
+.nt-feather-vane {
   fill: var(--c-accent);
 }
 
-.feather-shaft {
-  stroke: rgb(255 255 255 / 60%);
+.nt-feather-shaft {
+  stroke: color-mix(in srgb, var(--c-neutral-50) 60%, transparent);
   stroke-linecap: round;
   stroke-width: 1.3;
 }
 
-.feather-barb {
-  stroke: rgb(255 255 255 / 40%);
+.nt-feather-barb {
+  stroke: color-mix(in srgb, var(--c-neutral-50) 40%, transparent);
   stroke-linecap: round;
   stroke-width: 0.9;
 }
 
-.iron-body {
-  fill: #cbd5e1;
-  stroke: #94a3b8;
+.nt-iron-body {
+  fill: var(--c-neutral-300);
+  stroke: var(--c-text-dim);
   stroke-width: 1;
 }
 
-.iron-top {
-  fill: #f8fafc;
-  stroke: #94a3b8;
+.nt-iron-top {
+  fill: var(--c-neutral-50);
+  stroke: var(--c-text-dim);
   stroke-width: 0.9;
 }
 
@@ -874,6 +871,6 @@ const ironY = computed(() => bottomY(ironHeight.value));
 
 .nt-caption-val {
   font-weight: 600;
-  fill: #cbd5e1;
+  fill: var(--c-neutral-300);
 }
 </style>

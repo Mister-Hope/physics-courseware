@@ -70,15 +70,15 @@ const chainWrap2 = chainPts(G2, TH, -TH, 32)
     <line v-for="(t, i) in teeth1" :key="`t1-${i}`" :x1="t.x1" :y1="t.y1" :x2="t.x2" :y2="t.y2" stroke="currentColor" stroke-width="1.4" opacity="0.4" />
     <circle :cx="G2.x" :cy="G2.y" :r="G2.r" fill="none" stroke="currentColor" stroke-width="2.2" opacity="0.6" />
     <line v-for="(t, i) in teeth2" :key="`t2-${i}`" :x1="t.x1" :y1="t.y1" :x2="t.x2" :y2="t.y2" stroke="currentColor" stroke-width="1.4" opacity="0.4" />
-    <line :x1="P1.x" :y1="P1.y" :x2="P2.x" :y2="P2.y" stroke="#60a5fa" stroke-width="3" opacity="0.85" />
-    <line :x1="P1b.x" :y1="P1b.y" :x2="P2b.x" :y2="P2b.y" stroke="#60a5fa" stroke-width="3" opacity="0.85" />
-    <path :d="chainWrap1" fill="none" stroke="#60a5fa" stroke-width="3" opacity="0.85" stroke-linecap="round" />
-    <path :d="chainWrap2" fill="none" stroke="#60a5fa" stroke-width="3" opacity="0.85" stroke-linecap="round" />
+    <line :x1="P1.x" :y1="P1.y" :x2="P2.x" :y2="P2.y" stroke="var(--c-velocity)" stroke-width="3" opacity="0.85" />
+    <line :x1="P1b.x" :y1="P1b.y" :x2="P2b.x" :y2="P2b.y" stroke="var(--c-velocity)" stroke-width="3" opacity="0.85" />
+    <path :d="chainWrap1" fill="none" stroke="var(--c-velocity)" stroke-width="3" opacity="0.85" stroke-linecap="round" />
+    <path :d="chainWrap2" fill="none" stroke="var(--c-velocity)" stroke-width="3" opacity="0.85" stroke-linecap="round" />
     <circle :cx="G1.x" :cy="G1.y" r="2.8" fill="currentColor" opacity="0.45" />
     <circle :cx="G2.x" :cy="G2.y" r="2.4" fill="currentColor" opacity="0.45" />
     <line :x1="G1.x" :y1="G1.y" :x2="A.x" :y2="A.y" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.5" />
-    <circle :cx="A.x" :cy="A.y" r="5" fill="#e2a846" />
-    <circle :cx="B.x" :cy="B.y" r="4.5" fill="#60a5fa" />
+    <circle :cx="A.x" :cy="A.y" r="5" fill="var(--c-accent)" />
+    <circle :cx="B.x" :cy="B.y" r="4.5" fill="var(--c-velocity)" />
     <circle :cx="C.x" :cy="C.y" r="4.5" fill="currentColor" opacity="0.95" />
     <text
       :x="A.x - 19"
@@ -86,7 +86,7 @@ const chainWrap2 = chainPts(G2, TH, -TH, 32)
       font-size="17"
       font-family="KaTeX_Math"
       font-style="italic"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       stroke="#0d1220"
       stroke-width="3.5"
       stroke-linejoin="round"
@@ -100,7 +100,7 @@ const chainWrap2 = chainPts(G2, TH, -TH, 32)
       font-size="17"
       font-family="KaTeX_Math"
       font-style="italic"
-      fill="#60a5fa"
+      fill="var(--c-velocity)"
       stroke="#0d1220"
       stroke-width="3.5"
       stroke-linejoin="round"

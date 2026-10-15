@@ -200,9 +200,7 @@ onUnmounted(() => {
 
 <template>
   <div class="w-full mx-auto">
-    <div
-      class="bg-slate-900 border border-slate-800 rounded-xl shadow-xl text-slate-100 flex flex-col items-center select-none"
-    >
+    <div class="circ-shell border rounded-xl shadow-xl flex flex-col items-center select-none">
       <!-- SVG Drawing -->
       <div
         id="capacitor-circuit-svg-container"
@@ -210,25 +208,25 @@ onUnmounted(() => {
       >
         <svg viewBox="0 0 720 220" class="block w-full h-auto">
           <!-- LEFT VERTICAL WIRE SECTION WITH EMBEDDED VERTICAL BATTERY -->
-          <line x1="45" y1="20" x2="45" y2="86" stroke="#475569" stroke-width="2" />
-          <line x1="45" y1="94" x2="45" y2="160" stroke="#475569" stroke-width="2" />
+          <line x1="45" y1="20" x2="45" y2="86" stroke="var(--c-neutral-600)" stroke-width="2" />
+          <line x1="45" y1="94" x2="45" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- VERTICAL BATTERY SYMBOL (centered around y=90, circuit midpoint) -->
           <!-- Long positive plate (thin red line) -->
           <line x1="27" y1="86" x2="63" y2="86" stroke="#ef4444" stroke-width="2.5" />
           <!-- Short negative plate (thick blue line) -->
-          <line x1="34" y1="94" x2="56" y2="94" stroke="#3b82f6" stroke-width="4.5" />
+          <line x1="34" y1="94" x2="56" y2="94" stroke="var(--c-accent-2)" stroke-width="4.5" />
 
           <!-- UPPER WIRE BUS: y=20 -->
-          <line x1="45" y1="20" x2="220" y2="20" stroke="#475569" stroke-width="2" />
+          <line x1="45" y1="20" x2="220" y2="20" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- LOWER WIRE BUS: y=160 -->
-          <line x1="45" y1="160" x2="286" y2="160" stroke="#475569" stroke-width="2" />
-          <line x1="314" y1="160" x2="380" y2="160" stroke="#475569" stroke-width="2" />
+          <line x1="45" y1="160" x2="286" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
+          <line x1="314" y1="160" x2="380" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- VERTICAL SHUNT WIRE (DISCHARGE BRANCH) with resistor -->
           <!-- Wire from terminal 3 to top of resistor -->
-          <line x1="220" y1="90" x2="220" y2="108" stroke="#475569" stroke-width="2" />
+          <line x1="220" y1="90" x2="220" y2="108" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- Resistor symbol (rectangular box, China standard) -->
           <rect
@@ -238,7 +236,7 @@ onUnmounted(() => {
             height="28"
             rx="2"
             fill="none"
-            stroke="#475569"
+            stroke="var(--c-neutral-600)"
             stroke-width="2"
           />
 
@@ -250,25 +248,25 @@ onUnmounted(() => {
             font-family="sans-serif"
             font-weight="bold"
             font-style="italic"
-            fill="#94a3b8"
+            fill="var(--c-text-dim)"
             text-anchor="start"
           >
             R
           </text>
 
           <!-- Wire from bottom of resistor to bottom bus -->
-          <line x1="220" y1="136" x2="220" y2="160" stroke="#475569" stroke-width="2" />
+          <line x1="220" y1="136" x2="220" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- AMMETER (A) - ON THE BOTTOM WIRE -->
           <g id="ammeter">
-            <circle cx="300" cy="160" r="14" fill="#1e293b" stroke="#475569" stroke-width="2" />
+            <circle cx="300" cy="160" r="14" fill="var(--c-surface-solid)" stroke="var(--c-neutral-600)" stroke-width="2" />
             <text
               x="300"
               y="164"
               font-size="11"
               font-family="sans-serif"
               font-weight="900"
-              fill="#94a3b8"
+              fill="var(--c-text-dim)"
               text-anchor="middle"
             >
               A
@@ -276,7 +274,7 @@ onUnmounted(() => {
           </g>
 
           <!-- Knife Pivot Point -->
-          <circle cx="280" cy="55" r="4.5" fill="#e2a846" stroke="#1e293b" stroke-width="1.5" />
+          <circle cx="280" cy="55" r="4.5" fill="var(--c-accent)" stroke="var(--c-surface-solid)" stroke-width="1.5" />
 
           <!-- Switch Knife blade (Line) -->
           <line
@@ -284,7 +282,7 @@ onUnmounted(() => {
             y1="55"
             :x2="switchTarget.x"
             :y2="switchTarget.y"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="3"
             stroke-linecap="round"
             class="transition-all duration-300 ease-out"
@@ -301,7 +299,7 @@ onUnmounted(() => {
               :fill="switchPos === 'charge' ? '#ef4444' : '#1e293b'"
               :stroke="switchPos === 'charge' ? '#f87171' : '#475569'"
               stroke-width="1.5"
-              class="group-hover:stroke-red-400 group-hover:fill-red-950 transition-all duration-200"
+              class="group-hover:fill-red-950 circ-dot-charge transition-all duration-200"
             />
             <circle cx="220" cy="20" r="2.5" fill="#fff" />
             <text
@@ -311,7 +309,7 @@ onUnmounted(() => {
               font-size="11"
               font-family="sans-serif"
               :fill="switchPos === 'charge' ? '#f87171' : '#64748b'"
-              class="group-hover:fill-red-400 transition-all font-semibold"
+              class="circ-label-charge transition-all font-semibold"
             >
               1
             </text>
@@ -328,7 +326,7 @@ onUnmounted(() => {
               :fill="switchPos === 'open' ? '#94a3b8' : '#1e293b'"
               :stroke="switchPos === 'open' ? '#cbd5e1' : '#475569'"
               stroke-width="1.5"
-              class="group-hover:stroke-slate-300 group-hover:fill-slate-800 transition-all duration-200"
+              class="circ-dot-open transition-all duration-200"
             />
             <circle cx="210" cy="55" r="2.5" fill="#fff" />
             <text
@@ -338,7 +336,7 @@ onUnmounted(() => {
               font-size="11"
               font-family="sans-serif"
               :fill="switchPos === 'open' ? '#cbd5e1' : '#64748b'"
-              class="group-hover:fill-slate-300 transition-all font-semibold"
+              class="circ-label-open transition-all font-semibold"
             >
               2
             </text>
@@ -354,7 +352,7 @@ onUnmounted(() => {
               :fill="switchPos === 'discharge' ? '#3b82f6' : '#1e293b'"
               :stroke="switchPos === 'discharge' ? '#60a5fa' : '#475569'"
               stroke-width="1.5"
-              class="group-hover:stroke-blue-400 group-hover:fill-blue-950 transition-all duration-200"
+              class="group-hover:fill-blue-950 circ-dot-discharge transition-all duration-200"
             />
             <circle cx="220" cy="90" r="2.5" fill="#fff" />
             <text
@@ -364,7 +362,7 @@ onUnmounted(() => {
               font-size="11"
               font-family="sans-serif"
               :fill="switchPos === 'discharge' ? '#60a5fa' : '#64748b'"
-              class="group-hover:fill-blue-400 transition-all font-semibold"
+              class="circ-label-discharge transition-all font-semibold"
             >
               3
             </text>
@@ -372,11 +370,11 @@ onUnmounted(() => {
 
           <!-- CAPACITOR PARALLEL PLATES WIRES -->
           <!-- Wire from switch pivot to upper plate -->
-          <line x1="280" y1="55" x2="380" y2="55" stroke="#475569" stroke-width="2" />
-          <line x1="380" y1="55" x2="380" y2="75" stroke="#475569" stroke-width="2" />
+          <line x1="280" y1="55" x2="380" y2="55" stroke="var(--c-neutral-600)" stroke-width="2" />
+          <line x1="380" y1="55" x2="380" y2="75" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- Wire from lower plate to bottom wire -->
-          <line x1="380" y1="105" x2="380" y2="160" stroke="#475569" stroke-width="2" />
+          <line x1="380" y1="105" x2="380" y2="160" stroke="var(--c-neutral-600)" stroke-width="2" />
 
           <!-- CAPACITOR PARALLEL PLATES (HORIZONTAL AS PER REF PICTURE) -->
           <g id="capacitor">
@@ -408,7 +406,7 @@ onUnmounted(() => {
               font-size="11"
               font-family="sans-serif"
               font-weight="bold"
-              fill="#94a3b8"
+              fill="var(--c-text-dim)"
               text-anchor="end"
             >
               电容器
@@ -424,7 +422,7 @@ onUnmounted(() => {
                 y="83"
                 style="font-size: 11px"
                 font-weight="950"
-                fill="#f87171"
+                fill="var(--c-force)"
                 text-anchor="middle"
                 dominant-baseline="central"
               >
@@ -437,7 +435,7 @@ onUnmounted(() => {
                 y="97"
                 style="font-size: 11px"
                 font-weight="950"
-                fill="#60a5fa"
+                fill="var(--c-velocity)"
                 text-anchor="middle"
                 dominant-baseline="central"
               >
@@ -692,17 +690,17 @@ onUnmounted(() => {
               height="160"
               rx="4"
               fill="#020617"
-              stroke="#334155"
+              stroke="var(--c-neutral-700)"
               stroke-width="1.2"
             />
 
             <!-- Grid lines -->
             <!-- I=0 midline -->
-            <line x1="440" y1="105" x2="700" y2="105" stroke="#334155" stroke-dasharray="2,2" />
+            <line x1="440" y1="105" x2="700" y2="105" stroke="var(--c-neutral-700)" stroke-dasharray="2,2" />
             <!-- Upper 0.25A grid line -->
-            <line x1="440" y1="65" x2="700" y2="65" stroke="#1e293b" stroke-dasharray="1,2" />
+            <line x1="440" y1="65" x2="700" y2="65" stroke="var(--c-surface-solid)" stroke-dasharray="1,2" />
             <!-- Lower -0.25A grid line -->
-            <line x1="440" y1="145" x2="700" y2="145" stroke="#1e293b" stroke-dasharray="1,2" />
+            <line x1="440" y1="145" x2="700" y2="145" stroke="var(--c-surface-solid)" stroke-dasharray="1,2" />
 
             <!-- Axis Labels -->
             <text
@@ -723,7 +721,7 @@ onUnmounted(() => {
               font-size="11"
               font-family="Georgia, 'Times New Roman', serif"
               font-style="italic"
-              fill="#3b82f6"
+              fill="var(--c-accent-2)"
               font-weight="bold"
               text-anchor="end"
             >
@@ -735,7 +733,7 @@ onUnmounted(() => {
               font-size="11"
               font-family="Georgia, 'Times New Roman', serif"
               font-style="italic"
-              fill="#64748b"
+              fill="var(--c-neutral-500)"
               font-weight="bold"
               text-anchor="end"
             >
@@ -746,7 +744,7 @@ onUnmounted(() => {
               y="17"
               font-size="10"
               font-family="sans-serif"
-              fill="#94a3b8"
+              fill="var(--c-text-dim)"
               text-anchor="middle"
               font-weight="bold"
             >
@@ -770,7 +768,7 @@ onUnmounted(() => {
               :cx="currentPoints[currentPoints.length - 1].x"
               :cy="currentPoints[currentPoints.length - 1].y"
               r="2.5"
-              fill="#34d399"
+              fill="var(--c-ok)"
               style="opacity: 0.8"
             />
           </g>
@@ -779,11 +777,17 @@ onUnmounted(() => {
         <!-- 极性图例（SVG下方，不被图表遮挡） -->
         <div class="flex items-center justify-center gap-6 mt-3 mb-1">
           <span class="inline-flex items-center gap-2 text-sm font-medium opacity-85"
-            ><span class="inline-block w-3.5 h-3.5 rounded-sm" style="background: #f87171"></span>
+            ><span
+              class="inline-block w-3.5 h-3.5 rounded-sm"
+              style="background: var(--c-danger)"
+            ></span>
             正电（红）</span
           >
           <span class="inline-flex items-center gap-2 text-sm font-medium opacity-85"
-            ><span class="inline-block w-3.5 h-3.5 rounded-sm" style="background: #60a5fa"></span>
+            ><span
+              class="inline-block w-3.5 h-3.5 rounded-sm"
+              style="background: var(--c-velocity)"
+            ></span>
             负电（蓝）</span
           >
         </div>
@@ -791,3 +795,40 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* ── 原 UnoCSS 调色板类的 token 版（取值相同，视觉零变化）──
+   背景/文字用的 slate 档位没有现成工具类，接线柱的 `group-hover:` stroke/fill 是 SVG 上的 hover 状态，
+   统一在本组件内写成 token 表达；深红/深蓝两个 hover 底色无对应 token（见迁移报告），故保留原写法。 */
+.circ-shell {
+  border-color: var(--c-surface-solid);
+  background: var(--c-neutral-900);
+  color: var(--c-text);
+}
+
+/* 接线柱 hover 高亮（原 `group-hover:` 版的 stroke/fill 调色板类） */
+.group:hover .circ-dot-charge {
+  stroke: var(--c-danger);
+}
+
+.group:hover .circ-label-charge {
+  fill: var(--c-danger);
+}
+
+.group:hover .circ-dot-open {
+  fill: var(--c-surface-solid);
+  stroke: var(--c-neutral-300);
+}
+
+.group:hover .circ-label-open {
+  fill: var(--c-neutral-300);
+}
+
+.group:hover .circ-dot-discharge {
+  stroke: var(--c-velocity);
+}
+
+.group:hover .circ-label-discharge {
+  fill: var(--c-velocity);
+}
+</style>

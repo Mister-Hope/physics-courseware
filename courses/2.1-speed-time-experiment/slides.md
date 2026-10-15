@@ -65,17 +65,17 @@ layout: base-flex
 
 <div class="half-grid">
 <div class="stack">
-<div v-click="2" class="op-step">
-<div class="op-num">1</div>
-<div class="op-body">打点计时器<b>固定在实验台上</b>，连接好电源和导线。</div>
+<div v-click="2" class="step-item">
+<div class="step-no">1</div>
+<div>打点计时器<b>固定在实验台上</b>，连接好电源和导线。</div>
 </div>
-<div v-click="3" class="op-step">
-<div class="op-num">2</div>
-<div class="op-body">纸带<b>穿过限位孔</b>、压在<b>墨盘下面</b>，保证纸带能顺畅地移动。</div>
+<div v-click="3" class="step-item">
+<div class="step-no">2</div>
+<div>纸带<b>穿过限位孔</b>、压在<b>墨盘下面</b>，保证纸带能顺畅地移动。</div>
 </div>
-<div v-click="4" class="op-step">
-<div class="op-num">3</div>
-<div class="op-body">小车放在<b>纸带的一端</b>，细绳挂在<b>滑轮</b>上，<b>木板放平</b>，尽量减小小车与纸带之间的摩擦力，以减少实验误差。</div>
+<div v-click="4" class="step-item">
+<div class="step-no">3</div>
+<div>小车放在<b>纸带的一端</b>，细绳挂在<b>滑轮</b>上，<b>木板放平</b>，尽量减小小车与纸带之间的摩擦力，以减少实验误差。</div>
 </div>
 </div>
 <div v-click="1" class="divider-l stack">
@@ -93,12 +93,12 @@ layout: base-flex
 <div class="ask">如果先放开小车、再接通电源，会怎样？</div>
 
 <div v-click="1" class="stack">
-<div class="mini-title"><mdi-close-circle-outline class="ico-bad" /> 顺序反了</div>
+<div class="mini-title"><span class="bad-line"><mdi-close-circle-outline class="text-3xl" /></span> 顺序反了</div>
 <div>小车已经先跑了一段，纸带上<b>最开始运动的那段信息没有被打下来</b>——小车从起点开始运动的信息就丢失了。</div>
 </div>
 
 <div v-click="2" class="stack">
-<div class="mini-title"><mdi-check-circle-outline class="ico-good" /> 正确做法</div>
+<div class="mini-title"><span class="ok-line"><mdi-check-circle-outline class="text-3xl" /></span> 正确做法</div>
 <div>先接通电源，<b>等振针振动稳定、打点稳定之后，再释放小车</b>；同时用手挡在滑轮处，防止小车掉落。</div>
 <div class="key">电磁式打点计时器使用振针，刚接通电源时，还没有稳定振动起来——这时候放车，纸带开头的几个点打不准。</div>
 </div>
@@ -111,24 +111,24 @@ layout: base-flex
 # 实验要点（二）：配重与试运行
 
 <div class="page-grow">
-<div class="op-banner"><mdi-play-circle-outline /> 现在请各组动手</div>
+<div class="exp-banner"><mdi-play-circle-outline /> 现在请各组动手</div>
 
-<div class="op-list">
-<div class="op-step">
-<div class="op-num">1</div>
-<div class="op-body">先<b>试运行 1～2 次</b>，确认配重与小车车重在<b>合理的范围内</b>。</div>
+<div class="step-list">
+<div class="step-item">
+<div class="step-no">1</div>
+<div>先<b>试运行 1～2 次</b>，确认配重与小车车重在<b>合理的范围内</b>。</div>
 </div>
-<div class="op-step">
-<div class="op-num">2</div>
-<div class="op-body">实验可以<b>做两次</b>，记录实验数据，并作表格进行处理。</div>
+<div class="step-item">
+<div class="step-no">2</div>
+<div>实验可以<b>做两次</b>，记录实验数据，并作表格进行处理。</div>
 </div>
-<div class="op-step">
-<div class="op-num">3</div>
-<div class="op-body">纸带上取的点数大约 <b>8 个点左右</b>。</div>
+<div class="step-item">
+<div class="step-no">3</div>
+<div>纸带上取的点数大约 <b>8 个点左右</b>。</div>
 </div>
-<div class="op-step">
-<div class="op-num">4</div>
-<div class="op-body">纸带走完<b>立即关闭电源</b>，取下纸带。</div>
+<div class="step-item">
+<div class="step-no">4</div>
+<div>纸带走完<b>立即关闭电源</b>，取下纸带。</div>
 </div>
 </div>
 </div>
@@ -142,17 +142,17 @@ layout: base-flex
 <div class="page-grow">
 <table class="data-table data-table-blank">
 <thead>
-<tr><th class="lead">位置</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
+<tr><th class="row-head">位置</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
 </thead>
 <tbody>
-<tr><td class="lead"><Latex tex="x" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td class="lead"><Latex tex="\Delta x" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td class="lead"><Latex tex="\Delta t" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-<tr><td class="lead"><Latex tex="v" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="row-head"><Latex tex="x" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="row-head"><Latex tex="\Delta x" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="row-head"><Latex tex="\Delta t" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td class="row-head"><Latex tex="v" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </tbody>
 </table>
 
-<div class="fig-note">位置 0 是有效的第 0 个计数点：时间取 <Latex tex="t_0 = 0\ \text{s}" />，之后每隔 <Latex tex="T = 0.1\ \text{s}" /> 取一点</div>
+<div class="fig-cap">位置 0 是有效的第 0 个计数点：时间取 <Latex tex="t_0 = 0\ \text{s}" />，之后每隔 <Latex tex="T = 0.1\ \text{s}" /> 取一点</div>
 </div>
 
 ---
@@ -164,26 +164,26 @@ layout: base-flex
 <div class="page-grow">
 <div class="ask">纸带拿到手，怎么把它变成数据？</div>
 
-<div class="op-list op-list-tight">
-<div class="op-step">
-<div class="op-num">1</div>
-<div class="op-body">先<b>舍掉开头过于密集的点</b>，从<b>清晰的点</b>开始，<b>每隔 4 个点取 1 个计数点</b>（每 5 个点）。</div>
+<div class="step-list step-list-tight">
+<div class="step-item">
+<div class="step-no">1</div>
+<div>先<b>舍掉开头过于密集的点</b>，从<b>清晰的点</b>开始，<b>每隔 4 个点取 1 个计数点</b>（每 5 个点）。</div>
 </div>
-<div class="op-step">
-<div class="op-num">2</div>
-<div class="op-body">用刻度尺从起头<b>一次性读出</b>所有计数点的坐标。</div>
+<div class="step-item">
+<div class="step-no">2</div>
+<div>用刻度尺从起头<b>一次性读出</b>所有计数点的坐标。</div>
 </div>
-<div class="op-step">
-<div class="op-num">3</div>
-<div class="op-body">算各计数点的<b>瞬时速度</b> <Latex tex="v_{\text{瞬时}} \approx \frac{\Delta x}{\Delta t}" />；相邻两个计数点的时间间隔 <Latex tex="T = 0.1\ \text{s}" />，本实验取 2 位有效数字。</div>
+<div class="step-item">
+<div class="step-no">3</div>
+<div>算各计数点的<b>瞬时速度</b> <Latex tex="v_{\text{瞬时}} \approx \frac{\Delta x}{\Delta t}" />；相邻两个计数点的时间间隔 <Latex tex="T = 0.1\ \text{s}" />，本实验取 2 位有效数字。</div>
 </div>
-<div class="op-step">
-<div class="op-num">4</div>
-<div class="op-body"><b>充分利用坐标纸</b>，建立合适的横、纵轴范围，把每个时间点对应的速度画在坐标纸上。</div>
+<div class="step-item">
+<div class="step-no">4</div>
+<div><b>充分利用坐标纸</b>，建立合适的横、纵轴范围，把每个时间点对应的速度画在坐标纸上。</div>
 </div>
-<div class="op-step">
-<div class="op-num">5</div>
-<div class="op-body"><b>拟合直线</b>，得到最终的 <Latex tex="v-t" /> 图像。</div>
+<div class="step-item">
+<div class="step-no">5</div>
+<div><b>拟合直线</b>，得到最终的 <Latex tex="v-t" /> 图像。</div>
 </div>
 </div>
 </div>
@@ -193,18 +193,18 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask ask-center"><mdi-head-question-outline /> 量纸带上各点到起点的距离，你会怎么量？</div>
+<div class="ask ask-lead text-center"><mdi-head-question-outline /> 量纸带上各点到起点的距离，你会怎么量？</div>
 
-<div class="grid grid-cols-2 gap-6">
+<div class="half-grid">
 
 <div v-click="1" class="text-center">
   <TapeSegmentMeasureSvg />
-  <div class="mt-3 text-base leading-snug"><mdi-close-circle-outline class="warn text-lg inline-block align-middle mr-1" /><span class="warn font-semibold">逐段量再相加</span> —— 误差<span class="warn">会累积</span></div>
+  <div class="mt-3 text-base leading-snug"><mdi-close-circle-outline class="bad-line text-lg inline-block align-middle mr-1" /><span class="bad-line font-semibold">逐段量再相加</span> —— 误差<span class="bad-line">会累积</span></div>
 </div>
 
 <div v-click="2" class="text-center">
   <TapeMeasureFromStartSvg />
-  <div class="mt-3 text-base leading-snug"><mdi-check-circle-outline class="good text-lg inline-block align-middle mr-1" /><span class="good font-semibold">一次量到底</span> —— 误差<span class="good">范围一定</span></div>
+  <div class="mt-3 text-base leading-snug"><mdi-check-circle-outline class="ok-line text-lg inline-block align-middle mr-1" /><span class="ok-line font-semibold">一次量到底</span> —— 误差<span class="ok-line">范围一定</span></div>
 </div>
 
 </div>
@@ -242,22 +242,22 @@ layout: base-flex
 
 <div v-click="1" class="key key-lead">一个数有几个<b>有效数字</b>？先把它写成科学计数法的形式 <Latex tex="a \times 10^{n}" /> <Latex tex="(1 \le a < 10)" />，再数<b>左侧数字 <Latex tex="a" /></b> 有几位——指数 <Latex tex="10^{n}" /> <b>不计入</b>。例如 <Latex tex="0.080\ \text{m/s} = 8.0 \times 10^{-2}\ \text{m/s}" />，左侧是 <Latex tex="8.0" />，就是 2 位有效数字。</div>
 
-<div class="op-list op-list-tight">
-<div v-click="2" class="op-step">
-<div class="op-num">1</div>
-<div class="op-body">记录并计算 <b>2 位有效数字</b>，用<b>科学计数法</b>书写。</div>
+<div class="step-list step-list-tight">
+<div v-click="2" class="step-item">
+<div class="step-no">1</div>
+<div>记录并计算 <b>2 位有效数字</b>，用<b>科学计数法</b>书写。</div>
 </div>
-<div v-click="3" class="op-step">
-<div class="op-num">2</div>
-<div class="op-body">计算过程中按 <b>3 位有效数字</b>保留。</div>
+<div v-click="3" class="step-item">
+<div class="step-no">2</div>
+<div>计算过程中按 <b>3 位有效数字</b>保留。</div>
 </div>
-<div v-click="4" class="op-step">
-<div class="op-num">3</div>
-<div class="op-body">结果<b>保留最短的位数</b>。</div>
+<div v-click="4" class="step-item">
+<div class="step-no">3</div>
+<div>结果<b>保留最短的位数</b>。</div>
 </div>
-<div v-click="5" class="op-step op-step-warn">
-<div class="op-num">4</div>
-<div class="op-body">中间<b>不能四舍五入</b>：多保留一位，最后再舍。</div>
+<div v-click="5" class="step-item exp-step-warn">
+<div class="step-no">4</div>
+<div>中间<b>不能四舍五入</b>：多保留一位，最后再舍。</div>
 </div>
 </div>
 </div>
@@ -271,15 +271,15 @@ layout: base-flex
 
 <div class="half-grid half-grid-top">
 <div class="stack">
-<div v-click="2" class="reason">先用<b>十字线</b>画出每一个数据点。</div>
-<div v-click="3" class="reason">看这些点：它们大致排在<b>一条直线</b>上——<Latex tex="v" /> 随 <Latex tex="t" /> 均匀增大。</div>
-<div v-click="4" class="reason">既然近似是一条直线，就应该用<b>直线拟合</b>，而不是把点连成折线。</div>
+<div v-click="2" class="fit-reason">先用<b>十字线</b>画出每一个数据点。</div>
+<div v-click="3" class="fit-reason">看这些点：它们大致排在<b>一条直线</b>上——<Latex tex="v" /> 随 <Latex tex="t" /> 均匀增大。</div>
+<div v-click="4" class="fit-reason">既然近似是一条直线，就应该用<b>直线拟合</b>，而不是把点连成折线。</div>
 <div v-click="5" class="key">直线拟合的要求：让<b>更多的点落在直线上</b>；同时使<b>直线两侧的点数一样</b>。</div>
 </div>
 <div v-click="1" class="divider-l stack">
 <div class="mini-title"><mdi-chart-scatter-plot /> 拟合一条直线</div>
 <VtFitScatter />
-<div class="fig-note">十字线描点：4 个点在直线上方、4 个在下方</div>
+<div class="fig-cap">十字线描点：4 个点在直线上方、4 个在下方</div>
 </div>
 </div>
 </div>
@@ -315,16 +315,16 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask ask-big">只做一次实验，能看出规律吗？</div>
+<div class="ask ask-lead">只做一次实验，能看出规律吗？</div>
 
-<div class="err-grid">
+<div class="half-grid err-grid">
 <div v-click="1" class="err-card">
-<mdi-chart-scatter-plot class="err-ico" />
-<div class="err-text">纸带上的点不会正好都落在一条直线上——这就是<b>实验误差</b>。</div>
+<mdi-chart-scatter-plot class="err-ico icon-2xl" />
+<div class="err-text text-xl">纸带上的点不会正好都落在一条直线上——这就是<b>实验误差</b>。</div>
 </div>
 <div v-click="2" class="err-card err-card-good">
-<mdi-clipboard-check-multiple-outline class="err-ico" />
-<div class="err-text"><b>充分复核实验</b>：多做几组、多取几条纸带，同样的规律就会稳定地显现出来。</div>
+<mdi-clipboard-check-multiple-outline class="err-ico icon-2xl" />
+<div class="err-text text-xl"><b>充分复核实验</b>：多做几组、多取几条纸带，同样的规律就会稳定地显现出来。</div>
 </div>
 </div>
 </div>
@@ -336,20 +336,20 @@ layout: base-flex
 # 课堂小结
 
 <div class="page-grow">
-<div class="mini-title mini-title-lead"><mdi-format-list-numbered /> 三件必须做对的事</div>
+<div class="mini-title text-2xl"><mdi-format-list-numbered /> 三件必须做对的事</div>
 
-<div class="op-list op-list-big">
-<div v-click="1" class="op-step">
-<div class="op-num">1</div>
-<div class="op-body"><b>先接通电源、后放开小车</b>：否则小车最开始运动的信息会丢失。</div>
+<div class="step-list step-list-lead">
+<div v-click="1" class="step-item">
+<div class="step-no text-xl">1</div>
+<div class="text-xl"><b>先接通电源、后放开小车</b>：否则小车最开始运动的信息会丢失。</div>
 </div>
-<div v-click="2" class="op-step">
-<div class="op-num">2</div>
-<div class="op-body">刻度尺<b>从起头一次性读出</b>各计数点的坐标：逐段量、误差会累积。</div>
+<div v-click="2" class="step-item">
+<div class="step-no text-xl">2</div>
+<div class="text-xl">刻度尺<b>从起头一次性读出</b>各计数点的坐标：逐段量、误差会累积。</div>
 </div>
-<div v-click="3" class="op-step">
-<div class="op-num">3</div>
-<div class="op-body">纵轴<b>折断</b>、用<b>十字线</b>描点，使拟合直线两侧的点数一样。</div>
+<div v-click="3" class="step-item">
+<div class="step-no text-xl">3</div>
+<div class="text-xl">纵轴<b>折断</b>、用<b>十字线</b>描点，使拟合直线两侧的点数一样。</div>
 </div>
 </div>
 </div>
@@ -359,14 +359,14 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="think-lead"><mdi-lightbulb-on-outline /> 思考</div>
+<div class="think-lead text-4xl"><mdi-lightbulb-on-outline class="text-5xl" /> 思考</div>
 
-<div class="think-body">
+<div class="think-body text-4xl">
 <div>这种<b>加速度不变</b>的运动，是什么运动？</div>
 <div v-click="1">它在不同时间下的<b>速度</b>和<b>位移</b>，又有什么规律？</div>
 </div>
 
 <div class="think-deco abs-br m-8" aria-hidden="true">
-<mdi-lightbulb-on-outline />
+<mdi-lightbulb-on-outline class="icon-2xl" />
 </div>
 </div>

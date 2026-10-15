@@ -156,7 +156,7 @@ const relationTex = computed<string>(() =>
               :cy="toUserY(marker.y)"
               r="6"
               fill="none"
-              stroke="#0f1425"
+              stroke="var(--c-bg-soft)"
               stroke-width="1.6"
             />
           </g>
@@ -166,8 +166,8 @@ const relationTex = computed<string>(() =>
 
     <div class="sfg-info">
       <div class="sfg-readout">
-        <span class="sfg-readout-item"><Latex :tex="pullTex" /></span>
-        <span class="sfg-readout-item"><Latex :tex="frictionTex" /></span>
+        <span><Latex :tex="pullTex" /></span>
+        <span><Latex :tex="frictionTex" /></span>
       </div>
 
       <div class="sfg-state" :class="`sfg-state-${state}`">
@@ -215,10 +215,10 @@ const relationTex = computed<string>(() =>
 
   min-width: 0;
   max-width: 30rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 }
 
 .sfg-info {
@@ -245,19 +245,19 @@ const relationTex = computed<string>(() =>
   align-self: flex-start;
 
   padding: 0.12rem 0.6rem;
-  border-radius: 2rem;
+  border-radius: 999px;
 
   font-size: 0.85rem;
 }
 
 .sfg-state-static,
 .sfg-state-critical {
-  background: rgb(226 168 70 / 16%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 }
 
 .sfg-state-kinetic {
-  background: rgb(96 165 250 / 16%);
+  background: var(--c-accent-2-soft);
   color: var(--c-accent-2);
 }
 
@@ -327,9 +327,9 @@ const relationTex = computed<string>(() =>
 
   min-width: 0;
   height: 4px;
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(148 163 184 / 20%);
+  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
   outline: none;
 
   cursor: pointer;

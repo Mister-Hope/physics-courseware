@@ -64,11 +64,10 @@ const palmText = computed(() =>
         <button
           type="button"
           class="px-3 py-1 rounded-full text-sm border transition-colors"
-          :class="
-            charge === 'electron'
-              ? 'border-sky-400 text-sky-300'
-              : 'border-slate-600 text-slate-400'
-          "
+          :class="charge === 'electron' ? 'text-sky-300' : 'text-dim'"
+          :style="{
+            borderColor: charge === 'electron' ? 'var(--c-physics-light)' : 'var(--c-neutral-600)',
+          }"
           @click="charge = 'electron'"
         >
           电子 <Latex tex="e^{-}" />
@@ -76,9 +75,10 @@ const palmText = computed(() =>
         <button
           type="button"
           class="px-3 py-1 rounded-full text-sm border transition-colors"
-          :class="
-            charge === 'proton' ? 'border-red-400 text-red-300' : 'border-slate-600 text-slate-400'
-          "
+          :class="charge === 'proton' ? 'text-red-300' : 'text-dim'"
+          :style="{
+            borderColor: charge === 'proton' ? 'var(--c-danger)' : 'var(--c-neutral-600)',
+          }"
           @click="charge = 'proton'"
         >
           质子 <Latex tex="p^{+}" />
@@ -88,9 +88,10 @@ const palmText = computed(() =>
         <button
           type="button"
           class="px-3 py-1 rounded-full text-sm border transition-colors"
-          :class="
-            bDir === 'out' ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
-          "
+          :class="bDir === 'out' ? 'text-amber-300' : 'text-dim'"
+          :style="{
+            borderColor: bDir === 'out' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)',
+          }"
           @click="bDir = 'out'"
         >
           <Latex tex="B \odot" /> 向外
@@ -98,9 +99,10 @@ const palmText = computed(() =>
         <button
           type="button"
           class="px-3 py-1 rounded-full text-sm border transition-colors"
-          :class="
-            bDir === 'in' ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
-          "
+          :class="bDir === 'in' ? 'text-amber-300' : 'text-dim'"
+          :style="{
+            borderColor: bDir === 'in' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)',
+          }"
           @click="bDir = 'in'"
         >
           <Latex tex="B \otimes" /> 向里
@@ -118,20 +120,20 @@ const palmText = computed(() =>
           width="428"
           height="212"
           rx="14"
-          fill="rgba(148,163,184,0.04)"
-          stroke="rgba(148,163,184,0.18)"
+          fill="color-mix(in srgb, var(--c-text-dim) 4%, transparent)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 18%, transparent)"
           stroke-width="1.4"
         />
 
         <!-- B 符号 ⊙ / ⊗ -->
         <g v-if="bDir === 'out'">
-          <circle cx="424" cy="118" r="17" fill="none" stroke="#e2a846" stroke-width="2.6" />
-          <circle cx="424" cy="118" r="4.2" fill="#e2a846" />
+          <circle cx="424" cy="118" r="17" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+          <circle cx="424" cy="118" r="4.2" fill="var(--c-accent)" />
         </g>
         <g v-else>
-          <circle cx="424" cy="118" r="17" fill="none" stroke="#e2a846" stroke-width="2.6" />
-          <line x1="412" y1="106" x2="436" y2="130" stroke="#e2a846" stroke-width="2.4" />
-          <line x1="436" y1="106" x2="412" y2="130" stroke="#e2a846" stroke-width="2.4" />
+          <circle cx="424" cy="118" r="17" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+          <line x1="412" y1="106" x2="436" y2="130" stroke="var(--c-accent)" stroke-width="2.4" />
+          <line x1="436" y1="106" x2="412" y2="130" stroke="var(--c-accent)" stroke-width="2.4" />
         </g>
         <text
           x="424"
@@ -140,7 +142,7 @@ const palmText = computed(() =>
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="25"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           B
         </text>
@@ -150,7 +152,7 @@ const palmText = computed(() =>
           cx="190"
           cy="170"
           r="16"
-          fill="rgba(15,23,42,0.9)"
+          fill="color-mix(in srgb, var(--c-neutral-900) 90%, transparent)"
           :stroke="charge === 'electron' ? '#60a5fa' : '#f87171'"
           stroke-width="2.6"
         />
@@ -168,7 +170,7 @@ const palmText = computed(() =>
         <CourseArrow
           :from="{ x: 214, y: 136 }"
           :to="{ x: 350, y: 136 }"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="4"
         />
         <text
@@ -177,7 +179,7 @@ const palmText = computed(() =>
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="25"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           v
         </text>
@@ -187,7 +189,7 @@ const palmText = computed(() =>
           <CourseArrow
             :from="{ x: iRight ? 212 : 168, y: 206 }"
             :to="{ x: iRight ? 330 : 52, y: 206 }"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="3.4"
             stroke-dasharray="9 6"
           />
@@ -197,7 +199,7 @@ const palmText = computed(() =>
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="24"
-            fill="#e2a846"
+            fill="var(--c-accent)"
           >
             I
           </text>
@@ -208,10 +210,10 @@ const palmText = computed(() =>
           <CourseArrow
             :from="{ x: 190, y: 170 }"
             :to="{ x: 190, y: F.y > 0 ? 62 : 278 }"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="5"
           />
-          <text x="204" :y="F.y > 0 ? 72 : 288" font-size="23" fill="#2dd4bf">
+          <text x="204" :y="F.y > 0 ? 72 : 288" font-size="23" fill="var(--c-physics)">
             <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
             <tspan dy="4" font-size="13">洛</tspan>
           </text>
@@ -232,21 +234,21 @@ const palmText = computed(() =>
 
           <!-- 掌心的磁场记号（磁感线穿入掌心处；四种变换都把它映回同一点） -->
           <g v-if="step >= 2">
-            <circle cx="197" cy="186" r="13" fill="rgba(9,13,26,0.55)" />
+            <circle cx="197" cy="186" r="13" fill="color-mix(in srgb, var(--c-bg) 55%, transparent)" />
             <g v-if="bDir === 'out'">
-              <circle cx="197" cy="186" r="11" fill="none" stroke="#e2a846" stroke-width="2" />
-              <circle cx="197" cy="186" r="2.8" fill="#e2a846" />
+              <circle cx="197" cy="186" r="11" fill="none" stroke="var(--c-accent)" stroke-width="2" />
+              <circle cx="197" cy="186" r="2.8" fill="var(--c-accent)" />
             </g>
             <g v-else>
-              <circle cx="197" cy="186" r="11" fill="none" stroke="#e2a846" stroke-width="2" />
-              <line x1="189" y1="178" x2="205" y2="194" stroke="#e2a846" stroke-width="2" />
-              <line x1="205" y1="178" x2="189" y2="194" stroke="#e2a846" stroke-width="2" />
+              <circle cx="197" cy="186" r="11" fill="none" stroke="var(--c-accent)" stroke-width="2" />
+              <line x1="189" y1="178" x2="205" y2="194" stroke="var(--c-accent)" stroke-width="2" />
+              <line x1="205" y1="178" x2="189" y2="194" stroke="var(--c-accent)" stroke-width="2" />
             </g>
           </g>
         </svg>
         <div
           class="mt-1 shrink-0 text-center text-sm"
-          :class="palmToViewer ? 'text-sky-200' : 'text-slate-400'"
+          :class="palmToViewer ? 'text-sky-200' : 'text-dim'"
         >
           {{ step >= 2 ? palmText : "左手" }}
         </div>
@@ -257,17 +259,32 @@ const palmText = computed(() =>
     <div class="mt-1 flex shrink-0 justify-center gap-3 text-sm">
       <span
         class="px-3 py-1 rounded-full"
-        :class="step >= 1 ? 'bg-amber-400/15 text-amber-300' : 'text-slate-500'"
+        :class="step >= 1 ? 'text-amber-300' : 'text-faint'"
+        :style="
+          step >= 1
+            ? { backgroundColor: 'color-mix(in srgb, var(--c-accent-light) 15%, transparent)' }
+            : undefined
+        "
         >① 找等效电流方向</span
       >
       <span
         class="px-3 py-1 rounded-full"
-        :class="step >= 2 ? 'bg-amber-400/15 text-amber-300' : 'text-slate-500'"
+        :class="step >= 2 ? 'text-amber-300' : 'text-faint'"
+        :style="
+          step >= 2
+            ? { backgroundColor: 'color-mix(in srgb, var(--c-accent-light) 15%, transparent)' }
+            : undefined
+        "
         >② 磁感线穿掌心</span
       >
       <span
         class="px-3 py-1 rounded-full"
-        :class="step >= 3 ? 'bg-teal-400/15 text-teal-300' : 'text-slate-500'"
+        :class="step >= 3 ? 'text-teal-300' : 'text-faint'"
+        :style="
+          step >= 3
+            ? { backgroundColor: 'color-mix(in srgb, var(--c-physics) 15%, transparent)' }
+            : undefined
+        "
         >③ 拇指即 <Latex tex="F_{\text{洛}}"
       /></span>
     </div>

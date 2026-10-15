@@ -64,7 +64,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
 </script>
 
 <template>
-  <div class="frame-switch">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -78,11 +78,11 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         :width="PANEL_W"
         height="208"
         rx="14"
-        fill="rgba(148,163,184,0.05)"
-        stroke="rgba(148,163,184,0.3)"
+        fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
         stroke-width="1.8"
       />
-      <text :x="LEFT_X + 16" y="36" font-family="KaTeX_Main" font-size="16" fill="#cbd5e1">
+      <text :x="LEFT_X + 16" y="36" font-family="KaTeX_Main" font-size="16" fill="var(--c-neutral-300)">
         地面参考系（C）看
       </text>
       <line
@@ -90,7 +90,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         y1="196"
         :x2="LEFT_X + PANEL_W - 12"
         y2="196"
-        stroke="rgba(203,213,225,0.7)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)"
         stroke-width="2"
       />
       <rect
@@ -99,8 +99,8 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         :width="PANEL_W - 24"
         :height="BELT_H"
         rx="6"
-        fill="rgba(96,165,250,0.14)"
-        stroke="rgba(96,165,250,0.5)"
+        fill="color-mix(in srgb, var(--c-velocity) 14%, transparent)"
+        stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
         stroke-width="1.6"
       />
       <path
@@ -109,7 +109,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
             .map((x) => `M ${x} ${BELT_TOP + 7} L ${x - 12} ${BELT_TOP + BELT_H - 7}`)
             .join(' ')
         "
-        stroke="rgba(147,197,253,0.55)"
+        stroke="color-mix(in srgb, var(--c-velocity-light) 55%, transparent)"
         stroke-width="2"
         fill="none"
       />
@@ -118,19 +118,19 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         :y="BELT_TOP + BELT_H + 20"
         font-family="KaTeX_Main"
         font-size="14"
-        fill="rgba(147,197,253,0.9)"
+        fill="color-mix(in srgb, var(--c-velocity-light) 90%, transparent)"
       >
         传送带在走动
       </text>
       <!-- 人（地面系里：人走得比带快） -->
       <g :transform="`translate(${leftWalker} 0)`">
-        <circle cx="0" cy="76" r="8" fill="none" stroke="#e2a846" stroke-width="2.6" />
+        <circle cx="0" cy="76" r="8" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
         <line
           x1="0"
           y1="84"
           x2="0"
           y2="108"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -139,7 +139,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="108"
           x2="-9"
           y2="122"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -148,7 +148,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="108"
           x2="9"
           y2="122"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -157,7 +157,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="92"
           x2="-10"
           y2="102"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.2"
           stroke-linecap="round"
         />
@@ -166,7 +166,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="92"
           x2="10"
           y2="84"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.2"
           stroke-linecap="round"
         />
@@ -176,7 +176,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         <CourseArrow
           :from="{ x: leftWalker + 12, y: 98 }"
           :to="{ x: leftWalker + 12 + (vWalk + vBelt) * ARROW_PX, y: 98 }"
-          stroke="#f87171"
+          stroke="var(--c-force)"
           :stroke-width="3.2"
         />
         <text
@@ -185,7 +185,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="17"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="3">人对地</tspan>
@@ -193,7 +193,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         <CourseArrow
           :from="{ x: LEFT_X + 40, y: BELT_TOP + BELT_H / 2 }"
           :to="{ x: LEFT_X + 40 + vBelt * ARROW_PX, y: BELT_TOP + BELT_H / 2 }"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           :stroke-width="3"
         />
         <text
@@ -202,7 +202,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="17"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="3">带对地</tspan>
@@ -215,11 +215,11 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         :width="PANEL_W"
         height="208"
         rx="14"
-        fill="rgba(148,163,184,0.05)"
-        stroke="rgba(148,163,184,0.3)"
+        fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
         stroke-width="1.8"
       />
-      <text :x="RIGHT_X + 16" y="36" font-family="KaTeX_Main" font-size="16" fill="#cbd5e1">
+      <text :x="RIGHT_X + 16" y="36" font-family="KaTeX_Main" font-size="16" fill="var(--c-neutral-300)">
         传送带参考系（B）看
       </text>
       <rect
@@ -228,8 +228,8 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         :width="PANEL_W - 24"
         :height="BELT_H"
         rx="6"
-        fill="rgba(96,165,250,0.14)"
-        stroke="rgba(96,165,250,0.5)"
+        fill="color-mix(in srgb, var(--c-velocity) 14%, transparent)"
+        stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
         stroke-width="1.6"
       />
       <path
@@ -241,7 +241,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
             )
             .join(' ')
         "
-        stroke="rgba(147,197,253,0.55)"
+        stroke="color-mix(in srgb, var(--c-velocity-light) 55%, transparent)"
         stroke-width="2"
         fill="none"
       />
@@ -250,7 +250,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         :y="BELT_TOP + BELT_H + 20"
         font-family="KaTeX_Main"
         font-size="14"
-        fill="rgba(147,197,253,0.9)"
+        fill="color-mix(in srgb, var(--c-velocity-light) 90%, transparent)"
       >
         传送带不动
       </text>
@@ -261,7 +261,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="196"
           :x2="RIGHT_X + PANEL_W - 12"
           y2="196"
-          stroke="rgba(203,213,225,0.7)"
+          stroke="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)"
           stroke-width="2"
         />
         <path
@@ -277,20 +277,20 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
               })
               .join(' ')
           "
-          stroke="rgba(203,213,225,0.5)"
+          stroke="color-mix(in srgb, var(--c-neutral-300) 50%, transparent)"
           stroke-width="1.6"
           fill="none"
         />
       </g>
       <!-- 人（带系里：只有人对带的速度） -->
       <g :transform="`translate(${rightWalker} 0)`">
-        <circle cx="0" cy="76" r="8" fill="none" stroke="#e2a846" stroke-width="2.6" />
+        <circle cx="0" cy="76" r="8" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
         <line
           x1="0"
           y1="84"
           x2="0"
           y2="108"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -299,7 +299,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="108"
           x2="-9"
           y2="122"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -308,7 +308,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="108"
           x2="9"
           y2="122"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -317,7 +317,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="92"
           x2="-10"
           y2="102"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.2"
           stroke-linecap="round"
         />
@@ -326,7 +326,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           y1="92"
           x2="10"
           y2="84"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.2"
           stroke-linecap="round"
         />
@@ -335,7 +335,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         <CourseArrow
           :from="{ x: rightWalker + 12, y: 98 }"
           :to="{ x: rightWalker + 12 + vWalk * ARROW_PX, y: 98 }"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           :stroke-width="3.2"
         />
         <text
@@ -344,7 +344,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="17"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="3">人对带</tspan>
@@ -352,7 +352,7 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
         <CourseArrow
           :from="{ x: RIGHT_X + PANEL_W - 40, y: 196 }"
           :to="{ x: RIGHT_X + PANEL_W - 40 - vBelt * ARROW_PX, y: 196 }"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           :stroke-width="3"
         />
         <text
@@ -361,24 +361,24 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="17"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="3">地相对带</tspan>
         </text>
       </g>
     </svg>
-    <div v-if="showPanel" class="frame-panel">
+    <div v-if="showPanel" class="sim-panel">
       <label
-        >人对带的速度 <span class="frame-val">{{ vWalk.toFixed(1) }} m/s</span
+        >人对带的速度 <span class="sim-val">{{ vWalk.toFixed(1) }} m/s</span
         ><input v-model.number="vWalk" type="range" min="0.4" max="2" step="0.1"
       /></label>
       <label
-        >带对地的速度 <span class="frame-val">{{ vBelt.toFixed(1) }} m/s</span
+        >带对地的速度 <span class="sim-val">{{ vBelt.toFixed(1) }} m/s</span
         ><input v-model.number="vBelt" type="range" min="0" max="2" step="0.1"
       /></label>
     </div>
-    <div class="frame-readout">
+    <div class="sim-readout">
       人对地的速度 = v<sub>人对带</sub> + v<sub>带对地</sub> = {{ vWalk.toFixed(1) }} +
       {{ vBelt.toFixed(1) }} = <b>{{ (vWalk + vBelt).toFixed(1) }} m/s</b>
     </div>
@@ -386,47 +386,47 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
 </template>
 
 <style scoped>
-.frame-switch {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   min-width: 0;
 }
 
-.frame-switch svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.frame-panel {
+.sim-panel {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 1.6rem;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-size: 0.8rem;
 }
 
-.frame-panel label {
+.sim-panel label {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.frame-panel input {
+.sim-panel input {
   width: 6.5rem;
 }
 
-.frame-val {
+.sim-val {
   min-width: 3.2rem;
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
   font-variant-numeric: tabular-nums;
 }
 
-.frame-readout {
-  color: var(--c-text, #e2e8f0);
+.sim-readout {
+  color: var(--c-text);
   font-size: 0.95rem;
   text-align: center;
 }

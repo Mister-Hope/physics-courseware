@@ -25,6 +25,6 @@ const endDot = dotAt(1);
     <path :d="pathD" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65" />
     <CourseArrow :from="START" :to="{ x: 66, y: 26 }" stroke="currentColor" :stroke-width="2.4" opacity="0.7" />
     <circle :cx="midDot.x" :cy="midDot.y" r="3.6" fill="currentColor" opacity="0.7" />
-    <circle :cx="endDot.x" :cy="endDot.y" r="5" fill="#e2a846" />
+    <circle :cx="endDot.x" :cy="endDot.y" r="5" fill="var(--c-accent)" />
   </svg>
 </template>

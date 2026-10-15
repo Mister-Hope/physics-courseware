@@ -9,13 +9,13 @@
       <line x1="152" y1="132" x2="142" y2="144" />
       <line x1="192" y1="132" x2="182" y2="144" />
     </g>
-    <rect x="76" y="74" width="88" height="58" rx="7" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="2.2" />
-    <CourseArrow :from="{ x: 120, y: 132 }" :to="{ x: 32, y: 132 }" stroke="#e2a846" stroke-width="3.2" />
-    <CourseArrow :from="{ x: 104, y: 54 }" :to="{ x: 182, y: 54 }" stroke="#60a5fa" stroke-width="3.2" />
-    <text x="30" y="124" font-size="16" fill="#e2a846">
+    <rect x="76" y="74" width="88" height="58" rx="7" fill="color-mix(in srgb, var(--c-accent) 10%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
+    <CourseArrow :from="{ x: 120, y: 132 }" :to="{ x: 32, y: 132 }" stroke="var(--c-accent)" stroke-width="3.2" />
+    <CourseArrow :from="{ x: 104, y: 54 }" :to="{ x: 182, y: 54 }" stroke="var(--c-velocity)" stroke-width="3.2" />
+    <text x="30" y="124" font-size="16" fill="var(--c-accent)">
       <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       <tspan dy="4" font-size="10">f</tspan>
     </text>
-    <text x="188" y="60" font-size="16" fill="#60a5fa" font-family="KaTeX_Math" font-style="italic">v</text>
+    <text x="188" y="60" font-size="16" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic">v</text>
   </svg>
 </template>

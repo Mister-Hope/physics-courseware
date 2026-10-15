@@ -216,27 +216,27 @@ onUnmounted(() => cancelAnimationFrame(frame));
         :y1="ORIGIN_Y"
         :x2="AXIS_END_X - 6"
         :y2="ORIGIN_Y"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="2"
       />
       <path
         :d="`M ${AXIS_END_X - ARROW_LEN} ${ORIGIN_Y - 6} L ${AXIS_END_X} ${ORIGIN_Y} L ${AXIS_END_X - ARROW_LEN} ${ORIGIN_Y + 6} Z`"
-        fill="#64748b"
+        fill="var(--c-neutral-500)"
       />
       <line
         :x1="ORIGIN_X"
         :y1="ORIGIN_Y"
         :x2="ORIGIN_X"
         :y2="AXIS_END_Y + 6"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="2"
       />
       <path
         :d="`M ${ORIGIN_X - 6} ${AXIS_END_Y + ARROW_LEN} L ${ORIGIN_X} ${AXIS_END_Y} L ${ORIGIN_X + 6} ${AXIS_END_Y + ARROW_LEN} Z`"
-        fill="#64748b"
+        fill="var(--c-neutral-500)"
       />
       <!-- 刻度：短线紧贴轴、向图内伸出 -->
-      <g stroke="#475569" stroke-width="1.6">
+      <g stroke="var(--c-neutral-600)" stroke-width="1.6">
         <line
           v-for="tick in T_TICKS"
           :key="`tk-t-${tick}`"
@@ -255,13 +255,13 @@ onUnmounted(() => cancelAnimationFrame(frame));
         />
       </g>
       <!-- 刻度值：t 轴标 2/4/6/8，v 轴标 0/10/20，单位写在轴标签里 -->
-      <g style="font-size: 15px" fill="#94a3b8" text-anchor="end">
+      <g style="font-size: 15px" fill="var(--c-text-dim)" text-anchor="end">
         <text :x="ORIGIN_X - 10" :y="ORIGIN_Y + 5">0</text>
         <text v-for="tick in V_TICKS" :key="`lb-v-${tick}`" :x="ORIGIN_X - 10" :y="yOf(tick) + 5">
           {{ tick }}
         </text>
       </g>
-      <g style="font-size: 15px" fill="#94a3b8" text-anchor="middle">
+      <g style="font-size: 15px" fill="var(--c-text-dim)" text-anchor="middle">
         <text v-for="tick in T_TICKS" :key="`lb-t-${tick}`" :x="xOf(tick)" :y="ORIGIN_Y + 22">
           {{ tick }}
         </text>
@@ -274,7 +274,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         font-family="KaTeX_Math"
         font-style="italic"
         style="font-size: 20px"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
       >
         O
       </text>
@@ -283,7 +283,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         :y="AXIS_END_Y - 9"
         text-anchor="middle"
         style="font-size: 15px"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
       >
         <tspan font-family="KaTeX_Math" font-style="italic" style="font-size: 20px">v</tspan>
         <tspan>/(m·s⁻¹)</tspan>
@@ -293,7 +293,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         :y="ORIGIN_Y + 22"
         text-anchor="middle"
         style="font-size: 15px"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
       >
         <tspan font-family="KaTeX_Math" font-style="italic" style="font-size: 20px">t</tspan>
         <tspan>/s</tspan>
@@ -302,7 +302,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
       <path
         :d="curvePath"
         fill="none"
-        stroke="#2dd4bf"
+        stroke="var(--c-physics)"
         stroke-width="2.6"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -314,7 +314,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         :y1="yOf(active.v0)"
         :x2="xOf(active.endT)"
         :y2="yOf(active.v1)"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3.4"
         stroke-linecap="round"
       />
@@ -325,7 +325,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
           :y1="triangle.dtLeg.y1"
           :x2="triangle.dtLeg.x2"
           :y2="triangle.dtLeg.y2"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.8"
           stroke-dasharray="6 4"
           opacity="0.85"
@@ -335,7 +335,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
           :y1="triangle.dvLeg.y1"
           :x2="triangle.dvLeg.x2"
           :y2="triangle.dvLeg.y2"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.8"
           stroke-dasharray="6 4"
           opacity="0.85"
@@ -345,8 +345,8 @@ onUnmounted(() => cancelAnimationFrame(frame));
           :y="triangle.dtLabel.y"
           text-anchor="middle"
           style="font-size: 13px"
-          fill="#e2a846"
-          stroke="#0f1425"
+          fill="var(--c-accent)"
+          stroke="var(--c-bg-soft)"
           stroke-width="4"
           paint-order="stroke"
         >
@@ -356,8 +356,8 @@ onUnmounted(() => cancelAnimationFrame(frame));
           :x="triangle.dvLabel.x"
           :y="triangle.dvLabel.y"
           style="font-size: 13px"
-          fill="#e2a846"
-          stroke="#0f1425"
+          fill="var(--c-accent)"
+          stroke="var(--c-bg-soft)"
           stroke-width="4"
           paint-order="stroke"
         >
@@ -370,12 +370,12 @@ onUnmounted(() => cancelAnimationFrame(frame));
         :y1="ball.y"
         :x2="ball.x"
         :y2="ORIGIN_Y"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="1.6"
         stroke-dasharray="5 4"
         opacity="0.8"
       />
-      <circle :cx="ball.x" :cy="ball.y" r="7" fill="#e2a846" stroke="#0f1425" stroke-width="2" />
+      <circle :cx="ball.x" :cy="ball.y" r="7" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="2" />
     </svg>
 
     <div class="vt-panel">

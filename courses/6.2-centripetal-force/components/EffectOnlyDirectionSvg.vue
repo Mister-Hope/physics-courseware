@@ -26,22 +26,22 @@ const RC = { x: P.x + L * uF.x, y: P.y + L * uF.y };
 
 <template>
   <svg viewBox="100 40 300 250" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="7 6" opacity="0.6" />
-    <circle :cx="O.x" :cy="O.y" r="3.6" fill="#94a3b8" />
-    <text :x="O.x - 14" :y="O.y + 22" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#94a3b8" text-anchor="end">O</text>
-    <line :x1="O.x" :y1="O.y" :x2="P.x" :y2="P.y" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="6 5" opacity="0.6" />
-    <CourseArrow :from="P" :to="V" stroke="#2dd4bf" :stroke-width="3.2" />
-    <CourseArrow :from="P" :to="F" stroke="#e2a846" :stroke-width="3.2" />
-    <path :d="`M ${RA.x} ${RA.y} L ${RB.x} ${RB.y} L ${RC.x} ${RC.y}`" fill="none" stroke="#e2a846" stroke-width="1.8" opacity="0.9" />
+    <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-dasharray="7 6" opacity="0.6" />
+    <circle :cx="O.x" :cy="O.y" r="3.6" fill="var(--c-text-dim)" />
+    <text :x="O.x - 14" :y="O.y + 22" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)" text-anchor="end">O</text>
+    <line :x1="O.x" :y1="O.y" :x2="P.x" :y2="P.y" stroke="var(--c-text-dim)" stroke-width="1.3" stroke-dasharray="6 5" opacity="0.6" />
+    <CourseArrow :from="P" :to="V" stroke="var(--c-physics)" :stroke-width="3.2" />
+    <CourseArrow :from="P" :to="F" stroke="var(--c-accent)" :stroke-width="3.2" />
+    <path :d="`M ${RA.x} ${RA.y} L ${RB.x} ${RB.y} L ${RC.x} ${RC.y}`" fill="none" stroke="var(--c-accent)" stroke-width="1.8" opacity="0.9" />
     <text
       :x="V.x + 10"
       :y="V.y + 10"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="21"
-      fill="#2dd4bf"
+      fill="var(--c-physics)"
       text-anchor="start"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="4"
       paint-order="stroke"
     >
@@ -53,15 +53,15 @@ const RC = { x: P.x + L * uF.x, y: P.y + L * uF.y };
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="21"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       text-anchor="start"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="4"
       paint-order="stroke"
     >
       <tspan>F</tspan>
       <tspan dy="4" font-size="14">n</tspan>
     </text>
-    <circle :cx="P.x" :cy="P.y" r="7.5" fill="#f1f5f9" />
+    <circle :cx="P.x" :cy="P.y" r="7.5" fill="var(--c-text)" />
   </svg>
 </template>

@@ -21,14 +21,14 @@ const { step = 0 } = defineProps<{
       </thead>
       <tbody>
         <tr>
-          <td>物体在空中运动的时间</td>
+          <td><mdi-clock-outline class="text-xl" /> 物体在空中运动的时间</td>
           <td :class="{ 'vp-hidden': step < 1 }">
             只由 <Latex tex="h" /> 决定：<Latex tex="t = \sqrt{\frac{2h}{g}}" />
           </td>
           <td :class="{ 'vp-hidden': step < 1 }">无关</td>
         </tr>
         <tr>
-          <td>水平位移</td>
+          <td><mdi-arrow-right-bold class="text-xl" /> 水平位移</td>
           <td :class="{ 'vp-hidden': step < 2 }">
             由 <Latex tex="v_0" /> 与 <Latex tex="h" /> 决定：<Latex
               tex="x = v_0\sqrt{\frac{2h}{g}}"
@@ -37,14 +37,14 @@ const { step = 0 } = defineProps<{
           <td :class="{ 'vp-hidden': step < 2 }">无关</td>
         </tr>
         <tr>
-          <td>落地时瞬时速度的大小</td>
+          <td><mdi-speedometer class="text-xl" /> 落地时瞬时速度的大小</td>
           <td :class="{ 'vp-hidden': step < 3 }">
             由 <Latex tex="v_0" /> 与 <Latex tex="h" /> 决定：<Latex tex="v = \sqrt{v_0^2 + 2gh}" />
           </td>
           <td :class="{ 'vp-hidden': step < 3 }">无关</td>
         </tr>
         <tr>
-          <td>落地时瞬时速度的方向</td>
+          <td><mdi-compass-outline class="text-xl" /> 落地时瞬时速度的方向</td>
           <td :class="{ 'vp-hidden': step < 4 }">
             由 <Latex tex="v_0" /> 与 <Latex tex="h" /> 决定：<Latex
               tex="\tan\theta = \frac{\sqrt{2gh}}{v_0}"
@@ -63,7 +63,7 @@ const { step = 0 } = defineProps<{
 
   min-width: 0;
   border: 1px solid var(--c-border);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-lg);
 
   background: var(--c-surface);
 
@@ -85,7 +85,7 @@ const { step = 0 } = defineProps<{
 }
 
 .drop-table thead th {
-  background: rgb(148 163 184 / 8%);
+  background: color-mix(in srgb, var(--c-text-dim) 8%, transparent);
   color: var(--c-text-dim);
   font-weight: 600;
   font-size: 0.9rem;

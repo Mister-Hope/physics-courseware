@@ -1,7 +1,10 @@
 /* ═══════════════════════════════════════════════
    生活中的圆周运动 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式：
+   · 版式骨架（图文两栏 / 步骤条 / 图容器 / 引课问句）一律用共享原子
+     （.split-wide · .step-item · .figure · .ask + .text-3xl）
+   · 只有"离心运动的应用 / 危害"这组图标条目是本课特有概念，用 centri- 前缀
    ═══════════════════════════════════════════════ */
 
 /* ── 本课图多、受力示意多，纵向密度比默认略紧 ── */
@@ -10,106 +13,38 @@
   --stack-gap: 0.72rem;
 }
 
-/* ── 图容器：svg 占满所在栏 ── */
-.figure {
-  min-width: 0;
-}
-
-.figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* ── 左文右图：文字栏稍宽，图栏给足高度 ── */
-.grid-side {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.grid-side > * {
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-/* ── 演示页：图下还有控制面板，图栏收窄一档，免得整页超高 ── */
-.grid-side.demo-fig {
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  gap: 1.3rem;
-}
-
-/* ── 内容偏少的页：把纵向间距摊开一点，别让下半页空着 ── */
-.stack.spread {
-  gap: 1.5rem;
-}
-
-/* ── 推导步骤编号 ── */
-.step-line {
-  display: flex;
-  gap: 0.6rem;
-  align-items: baseline;
-
-  font-size: 1.02rem;
-  line-height: 1.7;
-}
-
-.step-line > .step-no {
-  flex: 0 0 auto;
-  min-width: 1.3rem;
-  color: var(--c-accent);
-  font-weight: 700;
-}
-
-/* ── 图占大半栏、文字很短的对比页：把图栏收窄一档，图不会被压得太扁 ── */
-.grid-side.tight-fig {
-  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
-  gap: 1.25rem;
-}
-
-.grid-side.tight-fig .step-line {
-  font-size: 0.98rem;
-}
-
-/* ── 应用 / 危害：图标条目 ── */
-.app-list {
+/* ── 离心运动的应用 / 危害：图标条目（并列可扫读结构）── */
+.centri-apps {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.95rem 1.7rem;
 }
 
-.app-list.one-col {
+/* 单栏变体（危害只有两条，默认并排会显得空） */
+.centri-apps.centri-apps-single {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.app-item {
+.centri-app {
   display: flex;
   gap: 0.7rem;
   align-items: flex-start;
 
-  font-size: 1.02rem;
   line-height: 1.6;
 }
 
-.app-item > svg {
+/* 条目图标：尺寸走共享图标阶梯 .icon-md，此处只管颜色与对齐 */
+.centri-app > svg {
   flex: 0 0 auto;
   margin-top: 0.25rem;
   color: var(--c-accent);
-  font-size: 1.5rem;
 }
 
-.app-item .app-title {
+.centri-app-title {
   color: var(--c-text);
   font-weight: 700;
 }
 
-.app-item .app-desc {
+.centri-app-desc {
   color: var(--c-text-dim);
-}
-
-/* ── 引课页：只有一个大问句，放大一档 ── */
-.lead-ask {
-  font-size: 1.6rem;
-  line-height: 1.55;
 }

@@ -41,11 +41,11 @@ const ringEndAX = computed(() => scaleA.value?.ringEnd.x ?? 749.8);
     <!-- ==================== 1. 左侧固定墙面与固定锚杆 ==================== -->
     <SurfaceHatch :from="{ x: 64, y: 24 }" :to="{ x: 64, y: 184 }" side="left" :thickness="18" :gap="28" color="#94a3b8" :line-width="3.6" :hatch-width="1.8" />
     <!-- 墙面连接左表吊环的固定支杆 -->
-    <line x1="64" y1="104" :x2="LEFT_X + 2" y2="104" stroke="#94a3b8" stroke-width="4.5" stroke-linecap="round" />
+    <line x1="64" y1="104" :x2="LEFT_X + 2" y2="104" stroke="var(--c-text-dim)" stroke-width="4.5" stroke-linecap="round" />
 
     <!-- ==================== 2. 左侧弹簧测力计 B（蓝色主题，正向水平放置） ==================== -->
     <SpringScale ref="scaleB" :x="LEFT_X" :y="CASE_Y" :length="LENGTH" :force="FORCE" color="#60a5fa" accent="#38bdf8" orientation="horizontal" label="2.4" />
-    <text x="224" y="156" fill="#60a5fa" font-size="22" font-weight="600" text-anchor="middle">B</text>
+    <text x="224" y="156" fill="var(--c-velocity)" font-size="22" font-weight="600" text-anchor="middle">B</text>
 
     <!-- ==================== 3. 右侧弹簧测力计 A（琥珀金主题，镜像水平放置，挂钩最远端与 B 咬合） ==================== -->
     <SpringScale
@@ -60,7 +60,7 @@ const ringEndAX = computed(() => scaleA.value?.ringEnd.x ?? 749.8);
       mirror
       label="2.4"
     />
-    <text x="622" y="156" fill="#e2a846" font-size="22" font-weight="600" text-anchor="middle">A</text>
+    <text x="622" y="156" fill="var(--c-accent)" font-size="22" font-weight="600" text-anchor="middle">A</text>
 
     <!-- ==================== 4. 右侧 <GripHand> 捏住 A 的吊环与向右拉力 F ==================== -->
     <GripHand :x="ringEndAX" :y="AXIS_Y" side="right" :scale="1.35" />
@@ -68,7 +68,7 @@ const ringEndAX = computed(() => scaleA.value?.ringEnd.x ?? 749.8);
     <CourseArrow
       :from="{ x: ringEndAX + 58, y: AXIS_Y }"
       :to="{ x: ringEndAX + 142, y: AXIS_Y }"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="3.8"
       label="F"
       :label-dy="-18"

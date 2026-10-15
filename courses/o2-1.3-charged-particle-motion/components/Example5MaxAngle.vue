@@ -105,11 +105,11 @@ const MARKS = [
         :cx="O.x"
         :cy="O.y"
         :r="R"
-        fill="rgba(226,168,70,0.07)"
-        stroke="rgba(226,168,70,0.7)"
+        fill="color-mix(in srgb, var(--c-accent) 7%, transparent)"
+        stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="rgba(226,168,70,0.5)" stroke-width="1.3" stroke-linecap="round">
+      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.3" stroke-linecap="round">
         <template v-for="(m, i) in MARKS" :key="`b${i}`">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -127,10 +127,10 @@ const MARKS = [
         </template>
       </g>
       <!-- 题目给的弦：一对对径点之间的直径 -->
-      <path :d="chordPath" fill="none" stroke="rgba(203,213,225,0.85)" stroke-width="2.2" />
-      <circle :cx="O.x" :cy="O.y" r="4" fill="#cbd5e1" />
-      <circle :cx="P.x" :cy="P.y" r="5.6" fill="#f8fafc" />
-      <circle :cx="Q.x" :cy="Q.y" r="5.6" fill="#f8fafc" />
+      <path :d="chordPath" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)" stroke-width="2.2" />
+      <circle :cx="O.x" :cy="O.y" r="4" fill="var(--c-neutral-300)" />
+      <circle :cx="P.x" :cy="P.y" r="5.6" fill="var(--c-neutral-50)" />
+      <circle :cx="Q.x" :cy="Q.y" r="5.6" fill="var(--c-neutral-50)" />
       <text
         v-bind="HALO"
         :x="P.x - 18"
@@ -138,7 +138,7 @@ const MARKS = [
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         P
       </text>
@@ -149,7 +149,7 @@ const MARKS = [
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         Q
       </text>
@@ -160,7 +160,7 @@ const MARKS = [
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         O
       </text>
@@ -171,12 +171,12 @@ const MARKS = [
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         2R
       </text>
       <!-- 射入速度 -->
-      <CourseArrow :from="vIn.from" :to="vIn.to" stroke="#60a5fa" stroke-width="3.4" />
+      <CourseArrow :from="vIn.from" :to="vIn.to" stroke="var(--c-velocity)" stroke-width="3.4" />
       <text
         v-bind="HALO"
         :x="vIn.to.x - 4"
@@ -185,7 +185,7 @@ const MARKS = [
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
       >
         v
       </text>
@@ -204,20 +204,20 @@ const MARKS = [
         >
           γ
         </text>
-        <path :d="rightAngle" fill="none" stroke="rgba(226,168,70,0.9)" stroke-width="1.8" />
+        <path :d="rightAngle" fill="none" stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)" stroke-width="1.8" />
       </template>
       <!-- 第 1 次点击：轨迹弧 + 轨迹圆心 C + 半径 + 圆心角 θ -->
       <template v-if="showArc">
-        <path :d="arcPath" fill="none" stroke="#60a5fa" stroke-width="3.8" stroke-linecap="round" />
+        <path :d="arcPath" fill="none" stroke="var(--c-velocity)" stroke-width="3.8" stroke-linecap="round" />
         <path
           :d="radiiPath"
           fill="none"
-          stroke="rgba(226,168,70,0.9)"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
           stroke-width="1.9"
           stroke-dasharray="8 7"
         />
         <path :d="angArc" fill="none" stroke="#c4b5fd" stroke-width="2.4" />
-        <circle :cx="C.x" :cy="C.y" r="5" fill="#f8fafc" />
+        <circle :cx="C.x" :cy="C.y" r="5" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="C.x + 12"
@@ -225,7 +225,7 @@ const MARKS = [
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           C
         </text>
@@ -248,7 +248,7 @@ const MARKS = [
           :font-family="MATH"
           font-style="italic"
           :font-size="FS - 2"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           r
         </text>
@@ -259,7 +259,7 @@ const MARKS = [
           :font-family="MATH"
           font-style="italic"
           :font-size="FS - 2"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           r
         </text>

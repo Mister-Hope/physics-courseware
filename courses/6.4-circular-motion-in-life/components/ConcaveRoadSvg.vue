@@ -76,7 +76,7 @@ const groundGradientId = `concave-ground-${useId()}`;
 </script>
 
 <template>
-  <div class="concave">
+  <div>
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -85,32 +85,32 @@ const groundGradientId = `concave-ground-${useId()}`;
     >
       <defs>
         <linearGradient :id="groundGradientId" x1="0" y1="130" x2="0" y2="300" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="rgba(148,163,184,0.18)" />
-          <stop offset="1" stop-color="rgba(148,163,184,0.02)" />
+          <stop offset="0" stop-color="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
+          <stop offset="1" stop-color="color-mix(in srgb, var(--c-text-dim) 2%, transparent)" />
         </linearGradient>
       </defs>
       <!-- 路面：土体渐隐 + 有厚度的路面板 + 路面线 -->
       <path :d="groundPath" :fill="`url(#${groundGradientId})`" />
-      <path :d="roadBandPath" fill="rgba(148,163,184,0.24)" />
+      <path :d="roadBandPath" fill="color-mix(in srgb, var(--c-text-dim) 24%, transparent)" />
       <path :d="surfacePath" fill="none" stroke="var(--c-text-dim)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
       <!-- 汽车：停在谷底，车轮贴在路面上 -->
       <g>
-        <rect x="182" :y="bodyTop" width="96" :height="bodyBottom - bodyTop" rx="9" fill="rgba(96,165,250,0.22)" stroke="#60a5fa" stroke-width="2.4" />
+        <rect x="182" :y="bodyTop" width="96" :height="bodyBottom - bodyTop" rx="9" fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)" stroke="var(--c-velocity)" stroke-width="2.4" />
         <path
           :d="`M 199 ${bodyTop} L 209 ${cabinTop} L 249 ${cabinTop} L 259 ${bodyTop}`"
-          fill="rgba(96,165,250,0.22)"
-          stroke="#60a5fa"
+          fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+          stroke="var(--c-velocity)"
           stroke-width="2.4"
           stroke-linejoin="round"
         />
         <path :d="`M 206 ${bodyTop - 3} L 214 ${cabinTop + 5} L 244 ${cabinTop + 5} L 252 ${bodyTop - 3} Z`" fill="rgba(191,219,254,0.28)" />
-        <circle cx="196" :cy="wheelY" :r="WHEEL_R" fill="#1e293b" stroke="#94a3b8" stroke-width="2.4" />
-        <circle cx="264" :cy="wheelY" :r="WHEEL_R" fill="#1e293b" stroke="#94a3b8" stroke-width="2.4" />
-        <circle cx="196" :cy="wheelY" r="4.4" fill="rgba(148,163,184,0.9)" />
-        <circle cx="264" :cy="wheelY" r="4.4" fill="rgba(148,163,184,0.9)" />
+        <circle cx="196" :cy="wheelY" :r="WHEEL_R" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.4" />
+        <circle cx="264" :cy="wheelY" :r="WHEEL_R" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.4" />
+        <circle cx="196" :cy="wheelY" r="4.4" fill="color-mix(in srgb, var(--c-text-dim) 90%, transparent)" />
+        <circle cx="264" :cy="wheelY" r="4.4" fill="color-mix(in srgb, var(--c-text-dim) 90%, transparent)" />
       </g>
       <!-- 受力分析：点击后才出现（visibility 占位，不顶跑已有元素） -->
-      <g :class="{ 'vp-hidden': !showForces }">
+      <g :class="{ 'bridge-hidden': !showForces }">
         <line :x1="O.x" :y1="radiusDash.y1" :x2="O.x" :y2="radiusDash.y2" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-dasharray="8 7" opacity="0.8" />
         <text :x="O.x + 11" y="48" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)">r</text>
         <line
@@ -123,14 +123,14 @@ const groundGradientId = `concave-ground-${useId()}`;
           stroke-dasharray="6 6"
           opacity="0.65"
         />
-        <CourseArrow :from="carCenter" :to="gTip" stroke="#f87171" :stroke-width="3.4" />
-        <CourseArrow :from="carCenter" :to="nTip" stroke="#2dd4bf" :stroke-width="3.4" />
-        <CourseArrow :from="{ x: F_X, y: carCenter.y }" :to="fTip" stroke="#e2a846" :stroke-width="3.4" />
-        <text x="242" y="90" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#2dd4bf">F</text>
-        <text x="255" y="98" font-family="KaTeX_Main" font-size="13" fill="#2dd4bf">N</text>
-        <text x="242" y="243" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171">G</text>
-        <text x="312" y="146" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">F</text>
-        <text x="325" y="155" font-family="KaTeX_Main" font-size="13" fill="#e2a846">合</text>
+        <CourseArrow :from="carCenter" :to="gTip" stroke="var(--c-force)" :stroke-width="3.4" />
+        <CourseArrow :from="carCenter" :to="nTip" stroke="var(--c-physics)" :stroke-width="3.4" />
+        <CourseArrow :from="{ x: F_X, y: carCenter.y }" :to="fTip" stroke="var(--c-accent)" :stroke-width="3.4" />
+        <text x="242" y="90" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-physics)">F</text>
+        <text x="255" y="98" font-family="KaTeX_Main" font-size="13" fill="var(--c-physics)">N</text>
+        <text x="242" y="243" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">G</text>
+        <text x="312" y="146" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">F</text>
+        <text x="325" y="155" font-family="KaTeX_Main" font-size="13" fill="var(--c-accent)">合</text>
         <!-- 圆弧的圆心 O：半径 r 由它量起，与受力分析同时出现 -->
         <circle :cx="O.x" :cy="O.y" r="4.2" fill="var(--c-text-dim)" opacity="0.85" />
         <text x="212" y="40" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)">O</text>
@@ -140,17 +140,7 @@ const groundGradientId = `concave-ground-${useId()}`;
 </template>
 
 <style scoped>
-.concave {
-  min-width: 0;
-}
-
-.concave svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.vp-hidden {
+.bridge-hidden {
   visibility: hidden;
 }
 </style>

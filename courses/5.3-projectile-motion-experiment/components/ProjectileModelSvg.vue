@@ -31,7 +31,7 @@ const ball = computed(() => {
       :y1="origin.y"
       :x2="origin.x + SPAN_X + 24"
       :y2="origin.y"
-      stroke="rgba(148,163,184,0.45)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
       stroke-width="1.6"
       stroke-dasharray="7 5"
     />
@@ -41,24 +41,24 @@ const ball = computed(() => {
       :y1="origin.y"
       :x2="origin.x"
       :y2="origin.y + SPAN_Y + 26"
-      stroke="rgba(148,163,184,0.45)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
       stroke-width="1.6"
       stroke-dasharray="7 5"
     />
     <path :d="pathD" fill="none" stroke="var(--c-accent)" stroke-width="2.4" stroke-dasharray="9 6" opacity="0.75" />
-    <circle :cx="ball.x" :cy="ball.y" r="11" fill="#60a5fa" stroke="#93c5fd" stroke-width="2" />
+    <circle :cx="ball.x" :cy="ball.y" r="11" fill="var(--c-velocity)" stroke="var(--c-velocity-light)" stroke-width="2" />
     <circle :cx="origin.x" :cy="origin.y" r="4" fill="var(--c-text)" />
-    <text :x="origin.x - 10" :y="origin.y + 20" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2e8f0">O</text>
+    <text :x="origin.x - 10" :y="origin.y + 20" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-neutral-200)">O</text>
     <g v-if="step >= 1">
-      <CourseArrow :from="origin" :to="{ x: origin.x + 96, y: origin.y }" stroke="#e2a846" :stroke-width="3.4" />
-      <text :x="origin.x + 84" :y="origin.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">
+      <CourseArrow :from="origin" :to="{ x: origin.x + 96, y: origin.y }" stroke="var(--c-accent)" :stroke-width="3.4" />
+      <text :x="origin.x + 84" :y="origin.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">
         v
         <tspan dy="4" font-size="13">0</tspan>
       </text>
-      <CourseArrow :from="ball" :to="{ x: ball.x, y: ball.y + 74 }" stroke="#f87171" :stroke-width="3.4" />
-      <text :x="ball.x + 12" :y="ball.y + 70" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="#f87171">mg</text>
+      <CourseArrow :from="ball" :to="{ x: ball.x, y: ball.y + 74 }" stroke="var(--c-force)" :stroke-width="3.4" />
+      <text :x="ball.x + 12" :y="ball.y + 70" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-force)">mg</text>
     </g>
-    <text v-if="step >= 2" :x="origin.x + SPAN_X + 26" :y="origin.y + 8" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#94a3b8">x</text>
+    <text v-if="step >= 2" :x="origin.x + SPAN_X + 26" :y="origin.y + 8" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text-dim)">x</text>
     <text
       v-if="step >= 2"
       :x="origin.x - 12"
@@ -67,7 +67,7 @@ const ball = computed(() => {
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="19"
-      fill="#94a3b8"
+      fill="var(--c-text-dim)"
     >
       y
     </text>

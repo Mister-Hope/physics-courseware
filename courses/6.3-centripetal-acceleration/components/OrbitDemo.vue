@@ -98,14 +98,14 @@ onUnmounted(() => cancelAnimationFrame(raf));
   >
     <defs>
       <radialGradient id="orbit-earth-body" cx="36%" cy="32%" r="80%">
-        <stop offset="0%" stop-color="#93c5fd" />
-        <stop offset="45%" stop-color="#3b82f6" />
+        <stop offset="0%" stop-color="var(--c-velocity-light)" />
+        <stop offset="45%" stop-color="var(--c-accent-2)" />
         <stop offset="100%" stop-color="#1e3a8a" />
       </radialGradient>
       <radialGradient id="orbit-earth-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.34" />
-        <stop offset="72%" stop-color="#60a5fa" stop-opacity="0.28" />
-        <stop offset="100%" stop-color="#60a5fa" stop-opacity="0" />
+        <stop offset="0%" stop-color="var(--c-velocity)" stop-opacity="0.34" />
+        <stop offset="72%" stop-color="var(--c-velocity)" stop-opacity="0.28" />
+        <stop offset="100%" stop-color="var(--c-velocity)" stop-opacity="0" />
       </radialGradient>
       <clipPath id="orbit-earth-clip">
         <circle :cx="CX" :cy="CY" :r="EARTH_R" />
@@ -116,7 +116,7 @@ onUnmounted(() => cancelAnimationFrame(raf));
       :cy="CY"
       :r="R"
       fill="none"
-      stroke="#3b82f6"
+      stroke="var(--c-accent-2)"
       stroke-width="2.6"
       stroke-dasharray="10 9"
       opacity="0.6"
@@ -127,11 +127,11 @@ onUnmounted(() => cancelAnimationFrame(raf));
       :cy="CY"
       :r="EARTH_R"
       fill="url(#orbit-earth-body)"
-      stroke="#93c5fd"
+      stroke="var(--c-velocity-light)"
       stroke-width="1.4"
       opacity="0.96"
     />
-    <g clip-path="url(#orbit-earth-clip)" fill="rgba(147,197,253,0.3)">
+    <g clip-path="url(#orbit-earth-clip)" fill="color-mix(in srgb, var(--c-velocity-light) 30%, transparent)">
       <path
         d="M 214 148 C 224 130 250 124 262 138 C 272 150 258 162 266 176 C 274 190 260 206 244 200 C 228 194 206 168 214 148 z"
       />
@@ -152,21 +152,21 @@ onUnmounted(() => cancelAnimationFrame(raf));
     >
       地球
     </text>
-    <CourseArrow :from="pos" :to="tip" stroke="#e2a846" :stroke-width="3.6" />
+    <CourseArrow :from="pos" :to="tip" stroke="var(--c-accent)" :stroke-width="3.6" />
     <g :transform="satelliteTransform">
       <polygon
         points="-8,-5.4 -24,-6.4 -24,6.4 -8,5.4"
         fill="#1d4ed8"
-        stroke="#93c5fd"
+        stroke="var(--c-velocity-light)"
         stroke-width="1.2"
       />
       <polygon
         points="8,-5.4 24,-6.4 24,6.4 8,5.4"
         fill="#1d4ed8"
-        stroke="#93c5fd"
+        stroke="var(--c-velocity-light)"
         stroke-width="1.2"
       />
-      <rect x="-9" y="-7" width="18" height="14" rx="3" fill="#e2a846" />
+      <rect x="-9" y="-7" width="18" height="14" rx="3" fill="var(--c-accent)" />
     </g>
     <text
       :x="nameLabel.x"
@@ -174,8 +174,8 @@ onUnmounted(() => cancelAnimationFrame(raf));
       text-anchor="middle"
       font-family="KaTeX_Main"
       font-size="19"
-      fill="#e2a846"
-      stroke="#0f1425"
+      fill="var(--c-accent)"
+      stroke="var(--c-bg-soft)"
       stroke-width="4"
       paint-order="stroke"
     >
@@ -188,8 +188,8 @@ onUnmounted(() => cancelAnimationFrame(raf));
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="26"
-      fill="#e2a846"
-      stroke="#0f1425"
+      fill="var(--c-accent)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >

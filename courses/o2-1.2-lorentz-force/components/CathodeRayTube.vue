@@ -38,10 +38,10 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
     <defs>
       <!-- 玻璃管高光与微透渐变 -->
       <linearGradient id="crt-glass" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="rgba(148,163,184,0.18)" />
-        <stop offset="25%" stop-color="rgba(30,41,59,0.25)" />
-        <stop offset="75%" stop-color="rgba(15,23,42,0.4)" />
-        <stop offset="100%" stop-color="rgba(148,163,184,0.15)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 18%, transparent)" />
+        <stop offset="25%" stop-color="color-mix(in srgb, var(--c-surface-solid) 25%, transparent)" />
+        <stop offset="75%" stop-color="color-mix(in srgb, var(--c-neutral-900) 40%, transparent)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-text-dim) 15%, transparent)" />
       </linearGradient>
 
       <!-- 电子束发光滤镜 -->
@@ -112,7 +112,7 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
       height="170"
       rx="85"
       fill="url(#crt-glass)"
-      stroke="rgba(148,163,184,0.45)"
+      stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
       stroke-width="2"
     />
     <!-- 玻璃管壁上下反光细线 -->
@@ -122,11 +122,11 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
     <!-- ── 电子束（step ≥ 3 时点亮；平时暗淡但可见） ── -->
     <g :style="{ opacity: s >= 3 ? 1 : 0.22, transition: 'opacity .35s' }">
       <!-- 阴极发射向阳极的锥形聚焦束 -->
-      <polygon points="98,185 200,198 200,212 98,225" fill="rgba(96,165,250,0.25)" />
+      <polygon points="98,185 200,198 200,212 98,225" fill="color-mix(in srgb, var(--c-velocity) 25%, transparent)" />
       <!-- 穿过阳极孔射向挡板的准直束 -->
-      <polygon points="208,198 424,196 424,214 208,212" fill="rgba(96,165,250,0.3)" />
+      <polygon points="208,198 424,196 424,214 208,212" fill="color-mix(in srgb, var(--c-velocity) 30%, transparent)" />
       <!-- 穿过狭缝照射在倾斜荧光板上的明亮光带 -->
-      <polygon points="440,200 605,202 605,208 440,210" fill="rgba(96,165,250,0.45)" />
+      <polygon points="440,200 605,202 605,208 440,210" fill="color-mix(in srgb, var(--c-velocity) 45%, transparent)" />
 
       <!-- 中心高亮度蓝色主束线 -->
       <line
@@ -134,12 +134,12 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
         y1="205"
         x2="605"
         y2="205"
-        stroke="#93c5fd"
+        stroke="var(--c-velocity-light)"
         stroke-width="2.6"
         filter="url(#crt-glow)"
       />
       <!-- 荧光板激发亮斑 -->
-      <circle cx="605" cy="205" r="5" fill="#2dd4bf" filter="url(#crt-glow)" />
+      <circle cx="605" cy="205" r="5" fill="var(--c-physics)" filter="url(#crt-glow)" />
     </g>
 
     <!-- ── 阴极 (Cathode)：发射电子的负极圆盘 (x = 88~98) ── -->
@@ -183,7 +183,7 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
       y1="197"
       x2="210"
       y2="197"
-      stroke="rgba(245,158,11,0.5)"
+      stroke="color-mix(in srgb, var(--c-accent-glow) 50%, transparent)"
       stroke-width="1.2"
       stroke-dasharray="2 2"
     />
@@ -192,7 +192,7 @@ const textOf = (active: boolean, color: string): { fill: string; transition: str
       y1="213"
       x2="210"
       y2="213"
-      stroke="rgba(245,158,11,0.5)"
+      stroke="color-mix(in srgb, var(--c-accent-glow) 50%, transparent)"
       stroke-width="1.2"
       stroke-dasharray="2 2"
     />

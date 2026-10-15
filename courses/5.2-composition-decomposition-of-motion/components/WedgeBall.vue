@@ -126,7 +126,7 @@ const arcRadius = 70;
 </script>
 
 <template>
-  <div class="wedge-ball">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -149,8 +149,8 @@ const arcRadius = 70;
       <!-- 斜劈 -->
       <polygon
         :points="`${corner.x},${corner.y} ${top.x},${top.y} ${top.x},${GROUND_Y}`"
-        fill="rgba(96,165,250,0.22)"
-        stroke="#93c5fd"
+        fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+        stroke="var(--c-velocity-light)"
         stroke-width="2.4"
       />
       <!-- 球 -->
@@ -158,8 +158,8 @@ const arcRadius = 70;
         :cx="ballCenter.x"
         :cy="ballCenter.y"
         :r="BALL_R"
-        fill="rgba(248,113,113,0.35)"
-        stroke="#f87171"
+        fill="color-mix(in srgb, var(--c-force) 35%, transparent)"
+        stroke="var(--c-force)"
         stroke-width="2.6"
       />
       <!-- θ 角：斜面与水平地面 -->
@@ -168,14 +168,14 @@ const arcRadius = 70;
         :y1="GROUND_Y"
         :x2="corner.x + 260"
         :y2="GROUND_Y"
-        stroke="rgba(148,163,184,0.6)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="7 6"
       />
       <path
         :d="`M ${corner.x + arcRadius} ${GROUND_Y} A ${arcRadius} ${arcRadius} 0 0 0 ${corner.x + arcRadius * cosT} ${GROUND_Y - arcRadius * sinT}`"
         fill="none"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2"
       />
       <text
@@ -184,7 +184,7 @@ const arcRadius = 70;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         θ
       </text>
@@ -195,17 +195,17 @@ const arcRadius = 70;
           :y1="normalLine.a.y"
           :x2="normalLine.b.x"
           :y2="normalLine.b.y"
-          stroke="rgba(148,163,184,0.75)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="8 6"
         />
-        <CourseArrow :from="ballCenter" :to="ballTip" stroke="#f87171" :stroke-width="3.4" />
-        <CourseArrow :from="wedgeFrom" :to="wedgeTip" stroke="#60a5fa" :stroke-width="3.4" />
-        <CourseArrow :from="ballShare.from" :to="ballShare.to" stroke="#e2a846" :stroke-width="3" />
+        <CourseArrow :from="ballCenter" :to="ballTip" stroke="var(--c-force)" :stroke-width="3.4" />
+        <CourseArrow :from="wedgeFrom" :to="wedgeTip" stroke="var(--c-velocity)" :stroke-width="3.4" />
+        <CourseArrow :from="ballShare.from" :to="ballShare.to" stroke="var(--c-accent)" :stroke-width="3" />
         <CourseArrow
           :from="wedgeShare.from"
           :to="wedgeShare.to"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           :stroke-width="3"
         />
         <text
@@ -214,7 +214,7 @@ const arcRadius = 70;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">0</tspan>
@@ -225,7 +225,7 @@ const arcRadius = 70;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">劈</tspan>
@@ -235,63 +235,63 @@ const arcRadius = 70;
           :y="normalLabel.y"
           font-family="KaTeX_Main"
           font-size="14"
-          fill="rgba(226,168,70,0.95)"
+          fill="color-mix(in srgb, var(--c-accent) 95%, transparent)"
         >
           沿法线分量相等
         </text>
       </g>
     </svg>
-    <div v-if="showPanel" class="wedge-panel">
+    <div v-if="showPanel" class="sim-panel">
       <label
-        >斜面与水平方向的夹角 <span class="wedge-val">{{ theta }}°</span
+        >斜面与水平方向的夹角 <span class="sim-val">{{ theta }}°</span
         ><input v-model.number="theta" type="range" min="20" max="70" step="1"
       /></label>
     </div>
-    <div v-if="readout" class="wedge-readout">
+    <div v-if="readout" class="sim-readout">
       v<sub>劈</sub> = v<sub>0</sub>·cot θ = <b>{{ vWedge.toFixed(2) }} v<sub>0</sub></b>
     </div>
   </div>
 </template>
 
 <style scoped>
-.wedge-ball {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
-.wedge-ball svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.wedge-panel {
+.sim-panel {
   display: flex;
   justify-content: center;
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
   font-size: 0.8rem;
 }
 
-.wedge-panel label {
+.sim-panel label {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.wedge-panel input {
+.sim-panel input {
   width: 8rem;
 }
 
-.wedge-val {
+.sim-val {
   min-width: 2.6rem;
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
   font-variant-numeric: tabular-nums;
 }
 
-.wedge-readout {
-  color: var(--c-text, #e2e8f0);
+.sim-readout {
+  color: var(--c-text);
   font-size: 0.95rem;
   text-align: center;
 }

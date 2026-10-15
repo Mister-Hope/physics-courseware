@@ -30,21 +30,21 @@ const { showReverse = false } = defineProps<{
       <defs>
         <!-- 容器玻璃微光渐变 -->
         <linearGradient id="td-bowl-glass" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(71, 85, 105, 0.4)" />
-          <stop offset="50%" stop-color="rgba(30, 41, 59, 0.55)" />
-          <stop offset="100%" stop-color="rgba(15, 23, 42, 0.8)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-neutral-600) 40%, transparent)" />
+          <stop offset="50%" stop-color="color-mix(in srgb, var(--c-surface-solid) 55%, transparent)" />
+          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-900) 80%, transparent)" />
         </linearGradient>
 
         <!-- 冷水渐变（左碗） -->
         <linearGradient id="td-water-cold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(56, 189, 248, 0.3)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-physics-light) 30%, transparent)" />
           <stop offset="60%" stop-color="rgba(14, 116, 144, 0.45)" />
           <stop offset="100%" stop-color="rgba(3, 105, 161, 0.6)" />
         </linearGradient>
 
         <!-- 温水渐变（右碗 - 热平衡状态） -->
         <linearGradient id="td-water-warm" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(45, 212, 191, 0.28)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-physics) 28%, transparent)" />
           <stop offset="60%" stop-color="rgba(13, 148, 136, 0.42)" />
           <stop offset="100%" stop-color="rgba(15, 118, 110, 0.55)" />
         </linearGradient>
@@ -52,7 +52,7 @@ const { showReverse = false } = defineProps<{
         <!-- 热鸡蛋渐变（红暖温润感） -->
         <radialGradient id="td-egg-hot" cx="38%" cy="32%" r="65%">
           <stop offset="0%" stop-color="#fef08a" />
-          <stop offset="35%" stop-color="#f59e0b" />
+          <stop offset="35%" stop-color="var(--c-accent-glow)" />
           <stop offset="75%" stop-color="#ea580c" />
           <stop offset="100%" stop-color="#c2410c" />
         </radialGradient>
@@ -90,7 +90,7 @@ const { showReverse = false } = defineProps<{
         <path
           d="M 80 96 C 80 156 108 182 160 182 C 212 182 240 156 240 96 Z"
           fill="url(#td-bowl-glass)"
-          stroke="rgba(148, 163, 184, 0.45)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
           stroke-width="2.5"
           stroke-linejoin="round"
         />
@@ -98,11 +98,11 @@ const { showReverse = false } = defineProps<{
         <!-- 冷水水体 -->
         <path d="M 86 116 C 86 156 112 177 160 177 C 208 177 234 156 234 116 Z" fill="url(#td-water-cold)" />
         <!-- 水面椭圆透视 -->
-        <ellipse cx="160" cy="116" rx="74" ry="11" fill="rgba(56, 189, 248, 0.2)" stroke="rgba(56, 189, 248, 0.55)" stroke-width="1.6" />
+        <ellipse cx="160" cy="116" rx="74" ry="11" fill="color-mix(in srgb, var(--c-physics-light) 20%, transparent)" stroke="color-mix(in srgb, var(--c-physics-light) 55%, transparent)" stroke-width="1.6" />
 
         <!-- 浸入水中的热鸡蛋（标准浑圆鸡蛋卵形曲线） -->
         <!-- 热力辐射光晕 -->
-        <circle cx="160" cy="144" r="34" fill="rgba(245, 158, 11, 0.2)" filter="url(#td-heat-glow)" />
+        <circle cx="160" cy="144" r="34" fill="color-mix(in srgb, var(--c-accent-glow) 20%, transparent)" filter="url(#td-heat-glow)" />
 
         <!-- 鸡蛋主体：上微敛下饱满浑圆的经典几何蛋形 -->
         <g transform="translate(160, 144) rotate(-8)">
@@ -134,14 +134,14 @@ const { showReverse = false } = defineProps<{
         <path d="M 88 106 C 88 140 102 165 125 174" fill="none" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2.5" stroke-linecap="round" />
 
         <!-- 碗口上沿口环透视线 -->
-        <ellipse cx="160" cy="96" rx="80" ry="12" fill="none" stroke="rgba(148, 163, 184, 0.5)" stroke-width="2" />
+        <ellipse cx="160" cy="96" rx="80" ry="12" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="2" />
 
         <!-- 升腾热气（3束升腾气流） -->
         <g filter="url(#td-steam-glow)">
           <path
             d="M 134 88 C 124 75 142 62 132 46 C 126 38 134 30 130 22"
             fill="none"
-            stroke="#f59e0b"
+            stroke="var(--c-accent-glow)"
             stroke-width="2.6"
             stroke-linecap="round"
             stroke-dasharray="80"
@@ -150,7 +150,7 @@ const { showReverse = false } = defineProps<{
           <path
             d="M 160 84 C 172 70 150 56 162 40 C 168 32 158 24 163 16"
             fill="none"
-            stroke="#fbbf24"
+            stroke="var(--c-accent-light)"
             stroke-width="3.2"
             stroke-linecap="round"
             stroke-dasharray="85"
@@ -159,7 +159,7 @@ const { showReverse = false } = defineProps<{
           <path
             d="M 186 88 C 196 75 178 62 188 46 C 194 38 186 30 190 22"
             fill="none"
-            stroke="#f59e0b"
+            stroke="var(--c-accent-glow)"
             stroke-width="2.6"
             stroke-linecap="round"
             stroke-dasharray="80"
@@ -168,14 +168,14 @@ const { showReverse = false } = defineProps<{
         </g>
 
         <!-- 底部大字说明（极简，无副标题杂字） -->
-        <text x="160" y="214" text-anchor="middle" font-size="20" font-weight="bold" fill="#f8fafc">热鸡蛋放入冷水</text>
+        <text x="160" y="214" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--c-neutral-50)">热鸡蛋放入冷水</text>
       </g>
 
       <!-- ==================== 中间：方向性箭头指示 ==================== -->
       <g id="middle-arrows">
         <!-- ===== ① 正向过程：自发发生（金色粗箭头） ===== -->
         <g id="forward-process">
-          <CourseArrow :from="{ x: 268, y: 92 }" :to="{ x: 472, y: 92 }" stroke="#f59e0b" stroke-width="4.5" :head-size="16" />
+          <CourseArrow :from="{ x: 268, y: 92 }" :to="{ x: 472, y: 92 }" stroke="var(--c-accent-glow)" stroke-width="4.5" :head-size="16" />
 
           <!-- “自发发生” 讲台视认高光大胶囊徽标（纯粹有力，无多余说明字） -->
           <g transform="translate(370, 70)">
@@ -185,12 +185,12 @@ const { showReverse = false } = defineProps<{
               width="136"
               height="36"
               rx="18"
-              fill="#0f172a"
-              stroke="#f59e0b"
+              fill="var(--c-neutral-900)"
+              stroke="var(--c-accent-glow)"
               stroke-width="2.2"
               filter="drop-shadow(0 4px 10px rgba(245, 158, 11, 0.25))"
             />
-            <text x="0" y="6" text-anchor="middle" font-size="19" font-weight="bold" fill="#fbbf24" letter-spacing="1">自发发生</text>
+            <text x="0" y="6" text-anchor="middle" font-size="19" font-weight="bold" fill="var(--c-accent-light)" letter-spacing="1">自发发生</text>
           </g>
         </g>
 
@@ -201,7 +201,7 @@ const { showReverse = false } = defineProps<{
 
           <!-- 国际醒目禁止图标 ⊘ -->
           <g transform="translate(370, 156)">
-            <circle cx="0" cy="0" r="16" fill="#0f172a" stroke="#ef4444" stroke-width="2.8" />
+            <circle cx="0" cy="0" r="16" fill="var(--c-neutral-900)" stroke="#ef4444" stroke-width="2.8" />
             <line x1="-10" y1="-10" x2="10" y2="10" stroke="#ef4444" stroke-width="2.8" stroke-linecap="round" />
           </g>
 
@@ -213,12 +213,12 @@ const { showReverse = false } = defineProps<{
               width="164"
               height="34"
               rx="17"
-              fill="#0f172a"
+              fill="var(--c-neutral-900)"
               stroke="#ef4444"
               stroke-width="2.2"
               filter="drop-shadow(0 4px 10px rgba(239, 68, 68, 0.25))"
             />
-            <text x="0" y="6" text-anchor="middle" font-size="18" font-weight="bold" fill="#f87171" letter-spacing="0.5">不会自发发生</text>
+            <text x="0" y="6" text-anchor="middle" font-size="18" font-weight="bold" fill="var(--c-force)" letter-spacing="0.5">不会自发发生</text>
           </g>
         </g>
       </g>
@@ -232,7 +232,7 @@ const { showReverse = false } = defineProps<{
         <path
           d="M 80 96 C 80 156 108 182 160 182 C 212 182 240 156 240 96 Z"
           fill="url(#td-bowl-glass)"
-          stroke="rgba(148, 163, 184, 0.45)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
           stroke-width="2.5"
           stroke-linejoin="round"
         />
@@ -240,7 +240,7 @@ const { showReverse = false } = defineProps<{
         <!-- 温水水体（达到热平衡后的温润色调） -->
         <path d="M 86 116 C 86 156 112 177 160 177 C 208 177 234 156 234 116 Z" fill="url(#td-water-warm)" />
         <!-- 水面透视椭圆 -->
-        <ellipse cx="160" cy="116" rx="74" ry="11" fill="rgba(45, 212, 191, 0.22)" stroke="rgba(45, 212, 191, 0.55)" stroke-width="1.6" />
+        <ellipse cx="160" cy="116" rx="74" ry="11" fill="color-mix(in srgb, var(--c-physics) 22%, transparent)" stroke="color-mix(in srgb, var(--c-physics) 55%, transparent)" stroke-width="1.6" />
 
         <!-- 热平衡后的鸡蛋（标准浑圆鸡蛋卵形曲线） -->
         <g transform="translate(160, 144) rotate(-3)">
@@ -272,10 +272,10 @@ const { showReverse = false } = defineProps<{
         <path d="M 88 106 C 88 140 102 165 125 174" fill="none" stroke="rgba(255, 255, 255, 0.3)" stroke-width="2.5" stroke-linecap="round" />
 
         <!-- 碗口上沿口环透视线 -->
-        <ellipse cx="160" cy="96" rx="80" ry="12" fill="none" stroke="rgba(148, 163, 184, 0.5)" stroke-width="2" />
+        <ellipse cx="160" cy="96" rx="80" ry="12" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="2" />
 
         <!-- 底部大字说明（极简，无副标题杂字） -->
-        <text x="160" y="214" text-anchor="middle" font-size="20" font-weight="bold" fill="#f8fafc">最后水和鸡蛋温度相同</text>
+        <text x="160" y="214" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--c-neutral-50)">最后水和鸡蛋温度相同</text>
       </g>
     </svg>
   </div>

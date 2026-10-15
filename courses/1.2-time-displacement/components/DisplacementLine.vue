@@ -35,16 +35,16 @@ const direction = computed<string>(() => {
 
 <template>
   <div class="disp-wrap">
-    <div class="controls">
-      <label class="slider">
-        <span class="slider-label" style="color: #60a5fa">初位置 <Latex tex="x_1" /></span>
-        <input v-model.number="x1" type="range" min="-10" max="10" step="0.5" class="range blue" />
-        <span class="slider-val" style="color: #60a5fa">{{ x1 }} m</span>
+    <div class="disp-controls">
+      <label class="disp-slider">
+        <span class="disp-slider-label" style="color: var(--c-accent-2)">初位置 <Latex tex="x_1" /></span>
+        <input v-model.number="x1" type="range" min="-10" max="10" step="0.5" class="disp-range disp-blue" />
+        <span class="disp-slider-val" style="color: var(--c-accent-2)">{{ x1 }} m</span>
       </label>
-      <label class="slider">
-        <span class="slider-label" style="color: #e2a846">末位置 <Latex tex="x_2" /></span>
-        <input v-model.number="x2" type="range" min="-10" max="10" step="0.5" class="range gold" />
-        <span class="slider-val" style="color: #e2a846">{{ x2 }} m</span>
+      <label class="disp-slider">
+        <span class="disp-slider-label" style="color: var(--c-accent)">末位置 <Latex tex="x_2" /></span>
+        <input v-model.number="x2" type="range" min="-10" max="10" step="0.5" class="disp-range disp-gold" />
+        <span class="disp-slider-val" style="color: var(--c-accent)">{{ x2 }} m</span>
       </label>
     </div>
 
@@ -139,18 +139,18 @@ const direction = computed<string>(() => {
       </template>
     </NumberAxis>
 
-    <div class="result-card">
-      <div class="result-row">
-        <span class="k">位移</span>
-        <span class="v"><Latex :tex="dxTexHead" /><br /><Latex :tex="dxTexTail" /></span>
+    <div class="disp-result-card">
+      <div class="disp-result-row">
+        <span class="disp-label">位移</span>
+        <span class="disp-val"><Latex :tex="dxTexHead" /><br /><Latex :tex="dxTexTail" /></span>
       </div>
-      <div class="result-row">
-        <span class="k">大小</span>
-        <span class="v accent">{{ magnitude }} m</span>
+      <div class="disp-result-row">
+        <span class="disp-label">大小</span>
+        <span class="disp-val disp-accent">{{ magnitude }} m</span>
       </div>
-      <div class="result-row">
-        <span class="k">方向</span>
-        <span class="v blue">{{ direction }}</span>
+      <div class="disp-result-row">
+        <span class="disp-label">方向</span>
+        <span class="disp-val disp-blue">{{ direction }}</span>
       </div>
     </div>
   </div>
@@ -163,23 +163,23 @@ const direction = computed<string>(() => {
   gap: 0.5rem;
 }
 
-.controls {
+.disp-controls {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.6rem;
 }
 
-.slider {
+.disp-slider {
   display: flex;
   gap: 0.7rem;
   align-items: center;
 
   /* 全局 label 自带 1px 边框，这里补足内边距，让边框不要贴着文字 */
   padding: 0.5rem 1rem;
-  border-radius: 0.9rem;
+  border-radius: var(--radius-md);
 }
 
-.slider-label {
+.disp-slider-label {
   flex-shrink: 0;
 
   width: 4.6rem;
@@ -189,19 +189,19 @@ const direction = computed<string>(() => {
   text-align: right;
 }
 
-.slider-val {
+.disp-slider-val {
   width: 3.4rem;
   font-weight: 700;
   font-size: 0.85rem;
 }
 
-.range {
+.disp-range {
   flex: 1;
 
   height: 5px;
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(148 163 184 / 20%);
+  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
   outline: none;
 
   cursor: pointer;
@@ -209,10 +209,10 @@ const direction = computed<string>(() => {
   appearance: none;
 }
 
-.range::-webkit-slider-thumb {
+.disp-range::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
-  border: 2px solid #0f1425;
+  border: 2px solid var(--c-bg-soft);
   border-radius: 50%;
 
   cursor: pointer;
@@ -220,15 +220,15 @@ const direction = computed<string>(() => {
   appearance: none;
 }
 
-.range.blue::-webkit-slider-thumb {
-  background: #60a5fa;
+.disp-range.disp-blue::-webkit-slider-thumb {
+  background: var(--c-accent-2);
 }
 
-.range.gold::-webkit-slider-thumb {
-  background: #e2a846;
+.disp-range.disp-gold::-webkit-slider-thumb {
+  background: var(--c-accent);
 }
 
-.result-card {
+.disp-result-card {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.6rem;
@@ -238,35 +238,35 @@ const direction = computed<string>(() => {
   margin: 0 auto;
 }
 
-.result-row {
+.disp-result-row {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
   align-items: center;
 
   padding: 0.5rem 0.7rem;
-  border: 1px solid rgb(148 163 184 / 10%);
-  border-radius: 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
 
-  background: rgb(30 41 59 / 65%);
+  background: var(--c-surface);
 }
 
-.k {
-  color: #94a3b8;
+.disp-label {
+  color: var(--c-text-dim);
   font-size: 0.72rem;
 }
 
-.v {
-  color: #f1f5f9;
+.disp-val {
+  color: var(--c-text);
   font-weight: 700;
   font-size: 0.95rem;
 }
 
-.v.accent {
-  color: #e2a846;
+.disp-val.disp-accent {
+  color: var(--c-accent);
 }
 
-.v.blue {
-  color: #60a5fa;
+.disp-val.disp-blue {
+  color: var(--c-accent-2);
 }
 </style>

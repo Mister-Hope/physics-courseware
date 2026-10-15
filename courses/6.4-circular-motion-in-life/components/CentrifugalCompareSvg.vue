@@ -66,14 +66,14 @@ const legend = { x: CX - 76, swatch: 22, textX: CX - 46, firstY: CY - 86, gap: 2
 </script>
 
 <template>
-  <div class="centri-compare">
+  <div>
     <svg
       viewBox="0 0 346 336"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="同一起点、同一初速度下，实际受力小于、等于、大于所需向心力时，三段轨迹分别向外张开、沿圆周、向内收拢"
     >
-      <circle :cx="CX" :cy="CY" :r="R" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="9 9" opacity="0.45" />
+      <circle :cx="CX" :cy="CY" :r="R" fill="none" stroke="var(--c-text-dim)" stroke-width="2.2" stroke-dasharray="9 9" opacity="0.45" />
 
       <path
         v-for="item in cases"
@@ -86,11 +86,11 @@ const legend = { x: CX - 76, swatch: 22, textX: CX - 46, firstY: CY - 86, gap: 2
         stroke-linejoin="round"
       />
 
-      <circle :cx="CX" :cy="CY" r="8" fill="#94a3b8" />
-      <text :x="CX - 18" :y="CY + 12" font-family="KaTeX_Main" font-size="18" fill="#94a3b8" text-anchor="middle">O</text>
+      <circle :cx="CX" :cy="CY" r="8" fill="var(--c-text-dim)" />
+      <text :x="CX - 18" :y="CY + 12" font-family="KaTeX_Main" font-size="18" fill="var(--c-text-dim)" text-anchor="middle">O</text>
 
-      <circle :cx="start.x" :cy="start.y" r="9.6" fill="#f1f5f9" stroke="#0f1425" stroke-width="3" />
-      <CourseArrow :from="start" :to="vTip" stroke="#60a5fa" :stroke-width="5.1" label="v" :label-dx="55" :label-dy="-6" />
+      <circle :cx="start.x" :cy="start.y" r="9.6" fill="var(--c-text)" stroke="var(--c-bg-soft)" stroke-width="3" />
+      <CourseArrow :from="start" :to="vTip" stroke="var(--c-velocity)" :stroke-width="5.1" label="v" :label-dx="55" :label-dy="-6" />
 
       <g v-for="(item, i) in cases" :key="item.key">
         <line
@@ -107,15 +107,3 @@ const legend = { x: CX - 76, swatch: 22, textX: CX - 46, firstY: CY - 86, gap: 2
     </svg>
   </div>
 </template>
-
-<style scoped>
-.centri-compare {
-  min-width: 0;
-}
-
-.centri-compare svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

@@ -217,26 +217,26 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
           :y1="y(0)"
           :x2="x(0) + 178 * px2user"
           :y2="y(0)"
-          stroke="rgba(148,163,184,0.55)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 55%, transparent)"
           stroke-width="1.5"
           stroke-dasharray="7 6"
         />
         <path
           :d="arcPath(x(0), y(0), 54, -angle, 0, px2user)"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="2"
         />
         <circle
           :cx="arrowTip(x, y, px2user).x"
           :cy="arrowTip(x, y, px2user).y"
           :r="17 * px2user"
-          fill="rgba(148,163,184,0.18)"
+          fill="color-mix(in srgb, var(--c-text-dim) 18%, transparent)"
         />
         <CourseArrow
           :from="{ x: x(0), y: y(0) }"
           :to="arrowTip(x, y, px2user)"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           :stroke-width="3.6"
         />
         <text
@@ -245,7 +245,7 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
           >θ</text
         >
         <text
@@ -254,12 +254,12 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           >v<tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4"
             >0</tspan
           ></text
         >
-        <circle :cx="x(0)" :cy="y(0)" r="5.5" fill="#e2e8f0" />
+        <circle :cx="x(0)" :cy="y(0)" r="5.5" fill="var(--c-neutral-200)" />
         <circle
           class="oblique-handle"
           :cx="arrowTip(x, y, px2user).x"

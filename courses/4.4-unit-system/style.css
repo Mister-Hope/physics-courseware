@@ -2,10 +2,16 @@
    力学单位制 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+
+   原子约定（见 .agents/notes/style-guide.md）：
+   · 步骤/表格/对错语义色一律走共享原子（.data-table / .ok-line / .bad-line）；
+   · 字号只走共享阶梯（.text-* / .mini-note），本文件不再写 font-size；
+   · 概念前缀：imp-（英制换算链）、unit-（单位与单位制）、derive-（单位推导）、
+     history-（基本单位标准演变）、judge-（量纲判定）。
    ═══════════════════════════════════════════════ */
 
-/* ── 第 3 页：英制长度换算链 ── */
-.imperial-chain {
+/* ── 第 2 页：英制长度换算链 ── */
+.imp-chain {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
@@ -25,14 +31,12 @@
   background: var(--c-surface);
 
   font-weight: 700;
-  font-size: 1.15rem;
 }
 
+/* 节点下的中文单位名：字号/颜色走共享 .mini-note（slides.md 里挂类） */
 .imp-node small {
   margin-top: 0.15rem;
-  color: var(--c-text-dim);
   font-weight: 400;
-  font-size: 0.72rem;
 }
 
 .imp-link {
@@ -43,7 +47,6 @@
   color: var(--c-accent);
 
   font-weight: 600;
-  font-size: 0.82rem;
 }
 
 .imp-link svg {
@@ -51,42 +54,24 @@
   height: 1.35rem;
 }
 
-/* ── 第 12 页：计算行多，收紧行距 ── */
-.calc-stack {
-  gap: 0.3rem;
+/* ── 第 6 页：七个基本单位表行多，压一压行高（`p<页号>-` 页面级变体，不改共享 .data-table 本体）── */
+.p6-units th,
+.p6-units td {
+  padding: 0.3rem 0.9rem;
+}
+
+.p6-units td {
+  line-height: 1.25;
+}
+
+/* ── 第 12 页：计算行多，收紧行距（只覆盖共享的 --stack-gap 出口）── */
+.p12-calc {
+  --stack-gap: 0.3rem;
 }
 
 /* ── 第 15 页：三列判定行对齐（某列公式折行也不歪）── */
 .judge-col > :last-child {
   margin-top: auto;
-}
-
-/* ── 判断对错的着色：对＝绿，错＝红 ── */
-.text-correct {
-  color: #4ade80;
-  font-weight: 600;
-}
-
-.text-wrong {
-  color: var(--c-danger);
-  font-weight: 600;
-}
-
-/* ── 第 8、12 页：基本单位表 / 推导表（行多，需要压行高）── */
-.si-table,
-.derive-table {
-  font-size: 0.88rem;
-}
-
-.si-table th,
-.derive-table th {
-  padding: 0.4rem 1rem;
-}
-
-.si-table td,
-.derive-table td {
-  padding: 0.25rem 1rem;
-  line-height: 1.2;
 }
 
 /* ── 第 10、11 页：单位推导行（公式右对齐、紧贴箭头）── */
@@ -107,7 +92,7 @@
   color: var(--c-text-dim);
 }
 
-/* ── 第 7 页：基本单位 + 导出单位 = 单位制 ── */
+/* ── 第 5 页：基本单位 + 导出单位 = 单位制 ── */
 .unit-flow {
   display: flex;
   flex-direction: column;
@@ -129,11 +114,10 @@
   background: var(--c-surface);
 
   font-weight: 600;
-  font-size: 1.08rem;
 }
 
 .unit-chip-blue {
-  border-color: rgb(59 130 246 / 30%);
+  border-color: var(--c-accent-2-soft);
   color: var(--c-accent-2);
 }
 
@@ -144,10 +128,9 @@
 
 .unit-op {
   color: var(--c-text-dim);
-  font-size: 1.05rem;
 }
 
-/* ── 第 9 页：基本单位标准的演变 ── */
+/* ── 第 8 页：基本单位标准的演变 ── */
 .history-stage {
   display: flex;
   gap: 0.9rem;

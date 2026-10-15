@@ -119,8 +119,8 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
 </script>
 
 <template>
-  <div class="dc-wrap">
-    <div class="dc-figure">
+  <div class="split-wide" style="--cols: minmax(0, 3fr) minmax(0, 2fr)">
+    <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <line
           :x1="origin.x"
@@ -250,9 +250,9 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
       />
     </div>
 
-    <div class="dc-info">
-      <div class="dc-row">
-        <span class="dc-name"><Latex tex="\theta" /></span>
+    <div class="demo-panel">
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\theta" /></span>
         <input
           v-model.number="theta"
           type="range"
@@ -261,10 +261,10 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
           step="5"
           aria-label="已知方向与合力的夹角"
         />
-        <span class="dc-val"><Latex :tex="thetaTex" /></span>
+        <span class="demo-val"><Latex :tex="thetaTex" /></span>
       </div>
-      <div class="dc-row">
-        <span class="dc-name"><Latex tex="F_2" /></span>
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="F_2" /></span>
         <input
           v-model.number="force2"
           type="range"
@@ -273,21 +273,21 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
           step="0.5"
           aria-label="已知大小的那个分力"
         />
-        <span class="dc-val"><Latex :tex="f2Tex" /></span>
+        <span class="demo-val"><Latex :tex="f2Tex" /></span>
       </div>
 
-      <div class="dc-critical">临界值：<Latex :tex="criticalTex" /></div>
-      <div class="dc-verdict" :style="{ color: verdict.color }">{{ verdict.text }}</div>
+      <div class="dec-critical">临界值：<Latex :tex="criticalTex" /></div>
+      <div class="dec-verdict" :style="{ color: verdict.color }">{{ verdict.text }}</div>
 
-      <div class="dc-cases">
+      <div class="dec-cases">
         <div
           v-for="row in caseRows"
           :key="row.tex"
-          class="dc-case-row"
-          :class="{ 'dc-active': row.active }"
+          class="dec-case-row"
+          :class="{ 'dec-case-row-active': row.active }"
         >
-          <span class="dc-case-tex"><Latex :tex="row.tex" /></span>
-          <span class="dc-case-text">{{ row.text }}</span>
+          <span><Latex :tex="row.tex" /></span>
+          <span class="dec-case-text">{{ row.text }}</span>
         </div>
       </div>
     </div>
@@ -295,99 +295,35 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
 </template>
 
 <style scoped>
-.dc-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.dc-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.dc-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.dc-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0;
-}
-
-.dc-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.dc-row {
-  display: grid;
-  grid-template-columns: 2.2rem minmax(0, 1fr) 5.4rem;
-  gap: 0.6rem;
-  align-items: center;
-
+/* 左图右文走共享 .split-wide（比例在模板的 --cols 里）；控制行 / 面板走共享 .demo-* */
+.demo-row {
+  --demo-read: 5.4rem;
   font-size: 0.95rem;
 }
 
-.dc-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.dc-val {
-  color: var(--c-text-dim);
+.demo-val {
   font-size: 0.9rem;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.dc-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 2rem;
-
-  background: rgb(148 163 184 / 20%);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.dc-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
-.dc-critical {
+.dec-critical {
   color: var(--c-text-dim);
   font-size: 0.9rem;
 }
 
-.dc-verdict {
+.dec-verdict {
   font-weight: 700;
   font-size: 1.45rem;
   line-height: 1.3;
 }
 
-.dc-cases {
+.dec-cases {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
   margin-top: 0.1rem;
 }
 
-.dc-case-row {
+.dec-case-row {
   display: grid;
   grid-template-columns: 8.6rem minmax(0, 1fr);
   gap: 0.5rem;
@@ -402,12 +338,12 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
   transition: opacity 0.2s ease;
 }
 
-.dc-case-row.dc-active {
+.dec-case-row-active {
   color: var(--c-text);
   opacity: 1;
 }
 
-.dc-case-text {
+.dec-case-text {
   white-space: nowrap;
 }
 </style>

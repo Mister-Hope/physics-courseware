@@ -80,8 +80,8 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="swing-field">
-    <svg :viewBox="`0 0 ${W} ${H}`" class="swing-field-svg">
+  <div class="fig-swing">
+    <svg :viewBox="`0 0 ${W} ${H}`" class="fig-svg">
       <SurfaceHatch
         :from="ceilingFrom"
         :to="ceilingTo"
@@ -285,17 +285,14 @@ const MAIN_FONT = "KaTeX_Main, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-/* 根 div 与 svg 顶部对齐：不居中、不留外边距（父级 align-items: center 也压得住） */
-.swing-field {
+/* 根 div 与 svg 顶部对齐：不居中、不留外边距（父级 align-items: center 也压得住）；
+   图宽上限交给共享的 .fig-svg（本课 style.css）读 --fig-max。
+   第 2 页题目页图栏 ≈ 438px、第 3/4 页解析页图栏 ≈ 500px —— 540px 让两处都被栏宽限住、吃满可用面积 */
+.fig-swing {
   display: block;
   align-self: flex-start;
   width: 100%;
-}
 
-.swing-field-svg {
-  display: block;
-  width: 380px;
-  max-width: 100%;
-  height: auto;
+  --fig-max: 540px;
 }
 </style>

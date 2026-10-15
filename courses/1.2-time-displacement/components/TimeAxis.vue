@@ -43,21 +43,21 @@ const showInterval = (): void => {
 
 <template>
   <div class="time-wrap">
-    <div class="control-bar">
-      <button class="opt-btn" type="button" :class="{ active: mode === 'time' }" @click="showTime">
+    <div class="time-bar">
+      <button class="time-btn" type="button" :class="{ 'time-btn-active': mode === 'time' }" @click="showTime">
         显示时刻
       </button>
       <button
-        class="opt-btn alt"
+        class="time-btn time-btn-alt"
         type="button"
-        :class="{ active: mode === 'interval' }"
+        :class="{ 'time-btn-active': mode === 'interval' }"
         @click="showInterval"
       >
         显示时间间隔
       </button>
-      <span v-if="mode === 'time'" class="hint">时刻 → 时间轴上的<span class="hl">点</span></span>
-      <span v-else-if="mode === 'interval'" class="hint"
-        >时间间隔 → 两点之间的<span class="hl">线段</span></span
+      <span v-if="mode === 'time'" class="time-hint">时刻 → 时间轴上的<span class="time-hl">点</span></span>
+      <span v-else-if="mode === 'interval'" class="time-hint"
+        >时间间隔 → 两点之间的<span class="time-hl">线段</span></span
       >
     </div>
 
@@ -166,19 +166,19 @@ const showInterval = (): void => {
   gap: 0.6rem;
 }
 
-.control-bar {
+.time-bar {
   display: flex;
   gap: 0.8rem;
   align-items: center;
 }
 
-.opt-btn {
+.time-btn {
   padding: 0.35rem 1.1rem;
-  border: 1px solid rgb(226 168 70 / 45%);
-  border-radius: 2rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 45%, transparent);
+  border-radius: 999px;
 
-  background: rgb(226 168 70 / 12%);
-  color: #e2a846;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
 
   font-weight: 600;
   font-size: 0.85rem;
@@ -188,29 +188,29 @@ const showInterval = (): void => {
   transition: all 0.25s ease;
 }
 
-.opt-btn.alt {
-  border-color: rgb(59 130 246 / 45%);
-  background: rgb(59 130 246 / 12%);
-  color: #60a5fa;
+.time-btn.time-btn-alt {
+  border-color: color-mix(in srgb, var(--c-accent-2) 45%, transparent);
+  background: var(--c-accent-2-soft);
+  color: var(--c-accent-2);
 }
 
-.opt-btn:hover {
+.time-btn:hover {
   filter: brightness(1.15);
   transform: translateY(-1px);
 }
 
-.opt-btn.active {
-  box-shadow: 0 0 18px rgb(226 168 70 / 25%);
+.time-btn.time-btn-active {
+  box-shadow: 0 0 18px color-mix(in srgb, var(--c-accent) 25%, transparent);
   filter: brightness(1.2);
 }
 
-.hint {
-  color: #cbd5e1;
+.time-hint {
+  color: var(--c-neutral-300);
   font-size: 0.85rem;
 }
 
-.hl {
-  color: #e2a846;
+.time-hl {
+  color: var(--c-accent);
   font-weight: 700;
 }
 </style>

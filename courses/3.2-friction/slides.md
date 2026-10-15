@@ -166,7 +166,7 @@ clicks: 3
 <div class="ask">换不同物体、不同接触面反复做，摩擦力跟压力到底什么关系？</div>
 
 <div class="stack">
-<div v-click="1" class="problem">用上面这套装置，换不同质量的物体、不同材料的接触面，各测多组：压力越大，摩擦力越大</div>
+<div v-click="1">用上面这套装置，换不同质量的物体、不同材料的接触面，各测多组：压力越大，摩擦力越大</div>
 
 <div v-click="2">每组数据里 <Latex tex="F_f" /> 与 <Latex tex="F_N" /> 的比值都保持不变——<Latex tex="F_f" /> 与 <Latex tex="F_N" /> 成正比</div>
 
@@ -227,9 +227,9 @@ clicks: 4
 <div class="ask ask-lead">滑动摩擦力的大小，还跟什么有关？</div>
 
 <div class="stack">
-<div class="qa-line"><span v-click="1" class="qa-q">接触面积的大小？</span><span v-click="3" class="qa-a">无关</span></div>
+<div class="qa-line text-xl"><span v-click="1" class="qa-q">接触面积的大小？</span><span v-click="3" class="qa-a text-2xl">无关</span></div>
 
-<div class="qa-line"><span v-click="2" class="qa-q">相对运动的速度？</span><span v-click="4" class="qa-a">无关</span></div>
+<div class="qa-line text-xl"><span v-click="2" class="qa-q">相对运动的速度？</span><span v-click="4" class="qa-a text-2xl">无关</span></div>
 </div>
 </div>
 
@@ -240,7 +240,7 @@ clicks: 5
 # 例题：拉着雪橇匀速前进
 
 <div class="page-grow">
-<div class="problem">钢制滑板的雪橇连同木料总质量 <Latex tex="4.9 \times 10^3 \text{ kg}" />，在水平冰道上匀速前进。<Latex tex="g" /> 取 <Latex tex="10 \text{ N/kg}" />，查表得 <Latex tex="\mu = 0.02" />。马在水平方向的拉力要多大？</div>
+<div>钢制滑板的雪橇连同木料总质量 <Latex tex="4.9 \times 10^3 \text{ kg}" />，在水平冰道上匀速前进。<Latex tex="g" /> 取 <Latex tex="10 \text{ N/kg}" />，查表得 <Latex tex="\mu = 0.02" />。马在水平方向的拉力要多大？</div>
 
 <div class="half-grid">
 <div class="stack">
@@ -270,13 +270,13 @@ clicks: 1
 <div class="mf-head">环节</div>
 <div class="mf-head">要点</div>
 <div class="mf-head">一页记住</div>
-<div class="mf-cell">产生条件</div>
+<div class="mf-cell mini-note"><mdi-clipboard-check-outline /> 产生条件</div>
 <div class="mf-cell">接触且相互挤压、接触面粗糙、发生相对滑动</div>
 <div class="mf-cell">三个条件缺一不可</div>
-<div class="mf-cell">方向</div>
+<div class="mf-cell mini-note"><mdi-arrow-right-bold /> 方向</div>
 <div class="mf-cell">以接触的另一个物体为参考系看相对运动</div>
 <div class="mf-cell">与<b class="text-accent">相对运动</b>方向相反</div>
-<div class="mf-cell">大小</div>
+<div class="mf-cell mini-note"><mdi-scale-balance /> 大小</div>
 <div class="mf-cell">与压力成正比，与接触面积、相对速度无关</div>
 <div class="mf-cell"><Latex tex="F_f = \mu F_N" />，<Latex tex="\mu" /> 可以大于 1</div>
 </div>
@@ -399,7 +399,7 @@ clicks: 5
 # 静摩擦力的大小怎么算
 
 <div class="page-grow page-grow-tight">
-<div class="problem">重 <Latex tex="100 \text{ N}" /> 的木箱放在水平地板上：至少用 <Latex tex="35 \text{ N}" /> 的水平推力才能使它开始运动；移动以后，用 <Latex tex="30 \text{ N}" /> 的推力就能使它匀速前进。</div>
+<div>重 <Latex tex="100 \text{ N}" /> 的木箱放在水平地板上：至少用 <Latex tex="35 \text{ N}" /> 的水平推力才能使它开始运动；移动以后，用 <Latex tex="30 \text{ N}" /> 的推力就能使它匀速前进。</div>
 
 <div class="half-grid">
 <div class="stack">
@@ -491,13 +491,13 @@ clicks: 1
 <div class="mf-head">比较项</div>
 <div class="mf-head">静摩擦力</div>
 <div class="mf-head">滑动摩擦力</div>
-<div class="mf-cell">产生条件</div>
+<div class="mf-cell mini-note"><mdi-clipboard-check-outline /> 产生条件</div>
 <div class="mf-cell">粗糙、接触挤压、有<b class="text-accent-2">相对运动趋势</b></div>
 <div class="mf-cell">粗糙、接触挤压、有<b class="text-accent">相对滑动</b></div>
-<div class="mf-cell">方向</div>
+<div class="mf-cell mini-note"><mdi-arrow-right-bold /> 方向</div>
 <div class="mf-cell">跟<b class="text-accent-2">相对运动趋势</b>的方向相反</div>
 <div class="mf-cell">跟<b class="text-accent">相对运动</b>的方向相反</div>
-<div class="mf-cell">大小</div>
+<div class="mf-cell mini-note"><mdi-scale-balance /> 大小</div>
 <div class="mf-cell">0 与 <Latex tex="F_{\max}" /> 之间，由二力平衡求</div>
 <div class="mf-cell"><Latex tex="F_f = \mu F_N" />，由 <Latex tex="\mu" /> 和 <Latex tex="F_N" /> 决定</div>
 </div>

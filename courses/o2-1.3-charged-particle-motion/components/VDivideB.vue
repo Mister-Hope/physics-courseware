@@ -76,7 +76,7 @@ const parZero = computed(() => thetaDeg.value === 90);
         <CourseArrow
           :from="{ x: 60, y: OY }"
           :to="{ x: 480, y: OY }"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="4"
           stroke-dasharray="10 7"
           style="opacity: 0.9"
@@ -87,7 +87,7 @@ const parZero = computed(() => thetaDeg.value === 90);
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="26"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           B
         </text>
@@ -97,7 +97,7 @@ const parZero = computed(() => thetaDeg.value === 90);
           <CourseArrow
             :from="{ x: OX, y: OY }"
             :to="{ x: tip.x, y: OY }"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="3.4"
           />
         </template>
@@ -105,20 +105,20 @@ const parZero = computed(() => thetaDeg.value === 90);
           <CourseArrow
             :from="{ x: tip.x, y: OY }"
             :to="{ x: tip.x, y: tip.y }"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="3.4"
           />
         </template>
 
         <!-- v：与 B 成 θ -->
-        <CourseArrow :from="{ x: OX, y: OY }" :to="tip" stroke="#60a5fa" stroke-width="4.6" />
+        <CourseArrow :from="{ x: OX, y: OY }" :to="tip" stroke="var(--c-velocity)" stroke-width="4.6" />
         <text
           :x="tip.x + 12"
           :y="tip.y - 6"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="26"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           v
         </text>
@@ -128,24 +128,24 @@ const parZero = computed(() => thetaDeg.value === 90);
           <path
             :d="`M ${tip.x - 12} ${OY} L ${tip.x - 12} ${OY - 12} L ${tip.x} ${OY - 12}`"
             fill="none"
-            stroke="rgba(241,245,249,0.4)"
+            stroke="color-mix(in srgb, var(--c-text) 40%, transparent)"
             stroke-width="1.6"
           />
         </template>
 
         <!-- θ 角弧：以 O 为圆心 -->
         <template v-if="thetaDeg > 0">
-          <path :d="arc" fill="none" stroke="#f8fafc" stroke-width="2.2" />
+          <path :d="arc" fill="none" stroke="var(--c-neutral-50)" stroke-width="2.2" />
         </template>
 
         <!-- 电荷（作用点） -->
-        <circle :cx="OX" :cy="OY" r="9" fill="#60a5fa" />
+        <circle :cx="OX" :cy="OY" r="9" fill="var(--c-velocity)" />
         <line
           :x1="OX - 4"
           :y1="OY"
           :x2="OX + 4"
           :y2="OY"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="2"
           stroke-linecap="round"
         />

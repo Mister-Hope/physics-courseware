@@ -105,7 +105,7 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
 </script>
 
 <template>
-  <div class="sd-figure">
+  <div class="figure relative min-w-0">
     <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
       <!-- 地面：斜线只画在表面下方 -->
       <SurfaceHatch :from="{ x: 10, y: GROUND_Y }" :to="{ x: VIEW.width - 10, y: GROUND_Y }" side="below" :thickness="13" :gap="30" />
@@ -130,15 +130,3 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
   </div>
 </template>
 
-<style scoped>
-.sd-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.sd-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

@@ -120,7 +120,7 @@ const state = computed(() => {
         text-anchor="end"
         font-size="16"
         fill="var(--c-text-dim)"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="2.5"
         paint-order="stroke"
       >
@@ -145,14 +145,14 @@ const state = computed(() => {
         font-style="italic"
         font-size="18"
         fill="var(--c-text-dim)"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="2.5"
         paint-order="stroke"
       >
         r
       </text>
       <path
-        class="demo-traj"
+        class="centri-traj"
         :d="trace.d"
         pathLength="1"
         stroke-dasharray="1"
@@ -166,7 +166,7 @@ const state = computed(() => {
         :cy="trace.end.y"
         r="4.6"
         :fill="state.color"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="1.6"
       />
       <circle :cx="CX" :cy="CY" r="4.6" fill="var(--c-text-dim)" />
@@ -179,11 +179,11 @@ const state = computed(() => {
       >
         O
       </text>
-      <circle :cx="start.x" :cy="start.y" r="6.5" fill="#f1f5f9" />
+      <circle :cx="start.x" :cy="start.y" r="6.5" fill="var(--c-text)" />
       <CourseArrow
         :from="start"
         :to="{ x: start.x + 78, y: start.y }"
-        stroke="#e2e8f0"
+        stroke="var(--c-neutral-200)"
         :stroke-width="3"
         label="v"
         :label-dx="6"
@@ -191,12 +191,12 @@ const state = computed(() => {
       />
     </svg>
 
-    <div class="demo-panel">
-      <div class="demo-head">
-        <span class="demo-tag">实际受力 ÷ 所需向心力</span>
-        <span class="demo-ratio"
-          ><Latex :tex="lambdaTex" /><span class="demo-eq">=</span
-          ><span class="demo-value" :style="{ color: state.color }">{{
+    <div class="centri-panel">
+      <div class="centri-head">
+        <span class="centri-tag">实际受力 ÷ 所需向心力</span>
+        <span class="centri-ratio"
+          ><Latex :tex="lambdaTex" /><span class="centri-eq">=</span
+          ><span class="centri-value" :style="{ color: state.color }">{{
             lambda.toFixed(2)
           }}</span></span
         >
@@ -204,7 +204,7 @@ const state = computed(() => {
 
       <input
         v-model.number="lambda"
-        class="demo-slider"
+        class="centri-slider"
         type="range"
         min="0.4"
         max="1.8"
@@ -213,10 +213,10 @@ const state = computed(() => {
         aria-label="改变实际受力与所需向心力的比值"
       />
 
-      <div class="demo-verdict" :style="{ color: state.color }">
-        <span class="demo-dot" />
-        <span class="demo-formula"><Latex :tex="state.formula" /></span>
-        <span class="demo-text">{{ state.text }}</span>
+      <div class="centri-verdict" :style="{ color: state.color }">
+        <span class="centri-dot" />
+        <span class="centri-formula"><Latex :tex="state.formula" /></span>
+        <span>{{ state.text }}</span>
       </div>
     </div>
   </div>
@@ -230,14 +230,8 @@ const state = computed(() => {
   min-width: 0;
 }
 
-.centri-demo svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* 轨迹：入场时沿路径描边渐入（pathLength=1 让动画与轨迹长短无关） */
-.demo-traj {
+.centri-traj {
   animation: traj-draw 1.05s cubic-bezier(0.33, 0, 0.2, 1) both;
 }
 
@@ -251,51 +245,51 @@ const state = computed(() => {
   }
 }
 
-.demo-panel {
+.centri-panel {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 
   min-height: 0;
   padding: 0.5rem 0.7rem 0.55rem;
-  border: 1px solid rgb(148 163 184 / 16%);
-  border-radius: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--c-text-dim) 16%, transparent);
+  border-radius: var(--radius-md);
 
-  background: rgb(148 163 184 / 7%);
+  background: color-mix(in srgb, var(--c-text-dim) 7%, transparent);
 }
 
-.demo-head {
+.centri-head {
   display: flex;
   gap: 0.6rem;
   align-items: baseline;
   justify-content: space-between;
 }
 
-.demo-tag {
+.centri-tag {
   color: var(--c-text-dim);
   font-size: 0.8rem;
 }
 
-.demo-ratio {
+.centri-ratio {
   display: inline-flex;
   gap: 0.3rem;
   align-items: baseline;
   white-space: nowrap;
 }
 
-.demo-eq {
+.centri-eq {
   color: var(--c-text-dim);
   font-size: 0.85rem;
 }
 
-.demo-value {
+.centri-value {
   font-weight: 700;
   font-size: 1.05rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-.demo-slider {
-  --thumb-color: #60a5fa;
+.centri-slider {
+  --thumb-color: var(--c-velocity);
 
   width: 100%;
   height: 1.15rem;
@@ -308,26 +302,26 @@ const state = computed(() => {
   appearance: none;
 }
 
-.demo-slider:active {
+.centri-slider:active {
   cursor: grabbing;
 }
 
-.demo-slider::-webkit-slider-runnable-track {
+.centri-slider::-webkit-slider-runnable-track {
   height: 0.42rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, #e2a846, #60a5fa, #2dd4bf);
-  box-shadow: inset 0 0 0 1px rgb(148 163 184 / 22%);
+  background: linear-gradient(90deg, var(--c-accent), var(--c-velocity), var(--c-physics));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text-dim) 22%, transparent);
 }
 
-.demo-slider::-webkit-slider-thumb {
+.centri-slider::-webkit-slider-thumb {
   width: 1.05rem;
   height: 1.05rem;
   margin-top: -0.315rem;
-  border: 2px solid #f1f5f9;
+  border: 2px solid var(--c-text);
   border-radius: 50%;
 
   background: var(--thumb-color);
-  box-shadow: 0 2px 8px rgb(15 20 37 / 85%);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-bg-soft) 85%, transparent);
 
   cursor: grab;
 
@@ -336,16 +330,16 @@ const state = computed(() => {
   transition: background-color 0.25s ease;
 }
 
-.demo-slider::-moz-range-track {
+.centri-slider::-moz-range-track {
   height: 0.42rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, #e2a846, #60a5fa, #2dd4bf);
+  background: linear-gradient(90deg, var(--c-accent), var(--c-velocity), var(--c-physics));
 }
 
-.demo-slider::-moz-range-thumb {
+.centri-slider::-moz-range-thumb {
   width: 1.05rem;
   height: 1.05rem;
-  border: 2px solid #f1f5f9;
+  border: 2px solid var(--c-text);
   border-radius: 50%;
 
   background: var(--thumb-color);
@@ -353,7 +347,7 @@ const state = computed(() => {
   cursor: grab;
 }
 
-.demo-verdict {
+.centri-verdict {
   display: flex;
   gap: 0.45rem;
   align-items: center;
@@ -366,7 +360,7 @@ const state = computed(() => {
   white-space: nowrap;
 }
 
-.demo-dot {
+.centri-dot {
   flex: 0 0 auto;
 
   width: 0.5rem;
@@ -376,7 +370,7 @@ const state = computed(() => {
   background: currentcolor;
 }
 
-.demo-formula {
+.centri-formula {
   flex: 0 0 auto;
 }
 </style>

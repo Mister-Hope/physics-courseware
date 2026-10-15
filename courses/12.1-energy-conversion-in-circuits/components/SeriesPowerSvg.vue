@@ -1,35 +1,70 @@
 <script setup lang="ts">
-/** 第 5 页：串联电路（电池长板为正极在上，电流自上导线向右、经两个电阻后由下导线回路） */
+/**
+ * 第 5 页：串联电路 —— 元件一律用共享 `<CircuitBattery>` / `<CircuitResistor>`，导线手画（1.6、止于元件两端）。
+ * 电源长板（正极）在上，电流自上导线向右、经两个电阻后由下导线回到负极。
+ */
 </script>
 
 <template>
   <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
-    <!-- 上导线：电源正极 → R₁ → R₂ -->
-    <path d="M 90 60 H 172" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" fill="none" />
-    <path d="M 256 60 H 318" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" fill="none" />
-    <!-- 右侧竖线 + 下导线（电流自右向左回到负极） -->
-    <path d="M 402 60 H 430 V 180 H 90" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" fill="none" />
-    <!-- 电源：长板为正极（上），短板为负极（下） -->
-    <path d="M 90 60 V 100" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" fill="none" />
-    <path d="M 90 140 V 180" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" fill="none" />
-    <line x1="82" y1="100" x2="98" y2="100" stroke="#94a3b8" stroke-width="3.4" stroke-linecap="round" />
-    <line x1="86" y1="140" x2="94" y2="140" stroke="#94a3b8" stroke-width="3.4" stroke-linecap="round" />
-    <text x="104" y="96" font-size="18" font-weight="700" fill="#f87171">+</text>
-    <text x="104" y="150" font-size="18" font-weight="700" fill="#60a5fa">−</text>
-    <!-- 两个电阻：圆角矩形，导线止于两端 -->
-    <rect x="172" y="46" width="84" height="28" rx="5" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="3" />
-    <rect x="318" y="46" width="84" height="28" rx="5" fill="rgba(226,168,70,0.10)" stroke="#e2a846" stroke-width="3" />
-    <text x="214" y="34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#60a5fa">
+    <!-- 导线：止于电源极板与两个电阻的矩形边 -->
+    <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+      <path d="M 90 60 H 156" />
+      <path d="M 204 60 H 276" />
+      <path d="M 324 60 H 430" />
+      <path d="M 430 60 V 180" />
+      <path d="M 430 180 H 90" />
+      <path d="M 90 60 V 112" />
+      <path d="M 90 128 V 180" />
+    </g>
+    <!-- 元件：电源（长板＝正极在上，板间距 16 → 导线止于 y=112 / y=128）、两个电阻（48×16，止于矩形两端） -->
+    <CircuitBattery :x="90" :y="120" orientation="vertical" polarity />
+    <CircuitResistor :x="180" :y="60" />
+    <CircuitResistor :x="300" :y="60" />
+    <!-- 电阻标注：R₁ / R₂（下标用 tspan，与全仓 SVG 标注口径一致） -->
+    <text
+      x="180"
+      y="40"
+      text-anchor="middle"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="19"
+      fill="var(--c-velocity)"
+    >
       <tspan>R</tspan>
       <tspan dy="5" font-size="13">1</tspan>
     </text>
-    <text x="360" y="34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#f87171">
+    <text
+      x="300"
+      y="40"
+      text-anchor="middle"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="19"
+      fill="var(--c-force)"
+    >
       <tspan>R</tspan>
       <tspan dy="5" font-size="13">2</tspan>
     </text>
     <!-- 电流方向：与正负极一致（自上导线向右） -->
-    <CourseArrow :from="{ x: 262, y: 60 }" :to="{ x: 312, y: 60 }" stroke="#e2a846" stroke-width="3" label="I" :label-dy="-8" :label-dx="6" />
+    <CourseArrow
+      :from="{ x: 212, y: 60 }"
+      :to="{ x: 268, y: 60 }"
+      stroke="var(--c-accent)"
+      stroke-width="3"
+      label="I"
+      :label-dy="-8"
+      :label-dx="6"
+    />
     <!-- 电源两端的电压 U -->
-    <CourseArrow :from="{ x: 58, y: 172 }" :to="{ x: 58, y: 68 }" stroke="#60a5fa" stroke-width="2.6" label="U" :label-dx="-16" :label-dy="0" />
+    <CourseArrow
+      :from="{ x: 58, y: 172 }"
+      :to="{ x: 58, y: 68 }"
+      stroke="var(--c-velocity)"
+      stroke-width="2.6"
+      label="U"
+      :label-dx="-16"
+      :label-dy="0"
+    />
   </svg>
 </template>

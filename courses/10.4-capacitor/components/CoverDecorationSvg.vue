@@ -11,6 +11,6 @@ const { width = 300 } = defineProps<{ width?: number }>();
     <line x1="115" y1="60" x2="170" y2="60" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
     <line x1="50" y1="20" x2="50" y2="100" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35" />
     <line x1="150" y1="20" x2="150" y2="100" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35" />
-    <text x="100" y="134" text-anchor="middle" style="font-size: 13px" fill="#94a3b8" opacity="0.7">平行板电容器</text>
+    <text x="100" y="134" text-anchor="middle" style="font-size: 13px" fill="var(--c-text-dim)" opacity="0.7">平行板电容器</text>
   </svg>
 </template>

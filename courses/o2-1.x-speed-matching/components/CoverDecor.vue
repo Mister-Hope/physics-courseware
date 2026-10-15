@@ -88,40 +88,34 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
 
       <!-- 摆线光辉渐变 -->
       <linearGradient id="cycloid-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.5" />
-        <stop offset="35%" stop-color="#60a5fa" stop-opacity="0.8" />
-        <stop offset="55%" stop-color="#e2a846" stop-opacity="1" />
-        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.9" />
+        <stop offset="0%" stop-color="var(--c-physics-light)" stop-opacity="0.5" />
+        <stop offset="35%" stop-color="var(--c-velocity)" stop-opacity="0.8" />
+        <stop offset="55%" stop-color="var(--c-accent)" stop-opacity="1" />
+        <stop offset="100%" stop-color="var(--c-accent-glow)" stop-opacity="0.9" />
       </linearGradient>
 
       <!-- 轮体科技渐变 -->
       <radialGradient id="wheel-radial" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="rgba(56,189,248,0.14)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-physics-light) 14%, transparent)" />
         <stop offset="70%" stop-color="rgba(30,58,138,0.08)" />
-        <stop offset="100%" stop-color="rgba(15,23,42,0.3)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-900) 30%, transparent)" />
       </radialGradient>
     </defs>
 
-    <!-- ==================== 0. 背景层：微弱匀强磁场点阵 ==================== -->
-    <g stroke="#e2a846" stroke-width="1.3" opacity="0.14">
-      <template v-for="row in [0, 1, 2, 3]" :key="'r-' + row">
-        <template v-for="col in [0, 1, 2, 3, 4, 5, 6, 7]" :key="'c-' + col">
-          <line
-            :x1="22 + col * 44 - 3.5"
-            :y1="18 + row * 40 - 3.5"
-            :x2="22 + col * 44 + 3.5"
-            :y2="18 + row * 40 + 3.5"
-          />
-          <line
-            :x1="22 + col * 44 + 3.5"
-            :y1="18 + row * 40 - 3.5"
-            :x2="22 + col * 44 - 3.5"
-            :y2="18 + row * 40 + 3.5"
-          />
-        </template>
-      </template>
-    </g>
-
+    <!-- ==================== 0. 背景层：微弱匀强磁场点阵 ====================
+         磁场记号一律用共享 <FieldDots>（裸 ×，不带圈），不手画叉点阵；
+         原手绘版列距 44、行距 40，组件只有一个 spacing，这里统一取 44。 -->
+    <FieldDots
+      :x="22"
+      :y="18"
+      :cols="8"
+      :rows="4"
+      :spacing="44"
+      :size="3.5"
+      :line-width="1.3"
+      :opacity="0.14"
+      dir="in"
+    />
     <!-- ==================== 1. 导轨参考线 ==================== -->
     <!-- 顶部接触线（摆线尖点相切线） -->
     <line
@@ -129,7 +123,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :y1="LINE_Y"
       x2="342"
       :y2="LINE_Y"
-      stroke="#64748b"
+      stroke="var(--c-neutral-500)"
       stroke-width="1.4"
       opacity="0.6"
     />
@@ -139,7 +133,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :y1="CENTER_Y"
       x2="342"
       :y2="CENTER_Y"
-      stroke="#64748b"
+      stroke="var(--c-neutral-500)"
       stroke-width="1.2"
       stroke-dasharray="5 5"
       opacity="0.35"
@@ -150,7 +144,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :y1="TROUGH_Y"
       x2="342"
       :y2="TROUGH_Y"
-      stroke="#64748b"
+      stroke="var(--c-neutral-500)"
       stroke-width="1"
       stroke-dasharray="3 4"
       opacity="0.22"
@@ -164,12 +158,12 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
         :cy="CENTER_Y"
         :r="R"
         fill="none"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="1.4"
         stroke-dasharray="4 4"
       />
       <!-- 起始尖点微粒 -->
-      <circle :cx="X0" :cy="LINE_Y" r="4.5" fill="#e2a846" />
+      <circle :cx="X0" :cy="LINE_Y" r="4.5" fill="var(--c-accent)" />
     </g>
 
     <!-- ==================== 3. 摆线轨迹（光辉曲线） ==================== -->
@@ -177,7 +171,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
     <path
       :d="cycloidPath"
       fill="none"
-      stroke="#0f172a"
+      stroke="var(--c-neutral-900)"
       stroke-width="6"
       stroke-linecap="round"
       opacity="0.75"
@@ -186,7 +180,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
     <path
       :d="cycloidPath"
       fill="none"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="3.6"
       stroke-linecap="round"
       filter="url(#cycloid-glow)"
@@ -208,7 +202,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :cy="activeCenterY"
       :r="R"
       fill="url(#wheel-radial)"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       stroke-width="2"
       opacity="0.85"
     />
@@ -218,14 +212,14 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :cy="activeCenterY"
       :r="R * 0.58"
       fill="none"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       stroke-width="1"
       stroke-dasharray="3 4"
       opacity="0.4"
     />
 
     <!-- 圆心微粒点 -->
-    <circle :cx="activeCenterX" :cy="activeCenterY" r="3.2" fill="#60a5fa" />
+    <circle :cx="activeCenterX" :cy="activeCenterY" r="3.2" fill="var(--c-velocity)" />
 
     <!-- 圆心到小球的半径线 -->
     <line
@@ -233,16 +227,16 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :y1="activeCenterY"
       :x2="ballX"
       :y2="ballY"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       stroke-width="1.8"
     />
 
     <!-- 圆心平动速度箭头 v_平 -->
-    <g stroke="#38bdf8" stroke-width="2" stroke-linecap="round">
+    <g stroke="var(--c-physics-light)" stroke-width="2" stroke-linecap="round">
       <line :x1="activeCenterX" :y1="activeCenterY" :x2="vFlatTipX" :y2="activeCenterY" />
       <polygon
         :points="`${vFlatTipX + 2},${activeCenterY} ${vFlatTipX - 6},${activeCenterY - 3.5} ${vFlatTipX - 6},${activeCenterY + 3.5}`"
-        fill="#38bdf8"
+        fill="var(--c-physics-light)"
         stroke="none"
       />
     </g>
@@ -251,7 +245,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
     <path :d="rightAngleD" fill="none" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.4" />
 
     <!-- 切线速度箭头 v_圆（严格沿切线方向，垂直于半径） -->
-    <g stroke="#60a5fa" stroke-width="2.2" stroke-linecap="round">
+    <g stroke="var(--c-velocity)" stroke-width="2.2" stroke-linecap="round">
       <line :x1="ballX" :y1="ballY" :x2="vCircTipX" :y2="vCircTipY" />
       <!-- 箭头尖端 -->
       <polygon
@@ -260,7 +254,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
           ${vCircTipX - 6 * tanVX + 3.5 * inRadX},${vCircTipY - 6 * tanVY + 3.5 * inRadY}
           ${vCircTipX - 6 * tanVX - 3.5 * inRadX},${vCircTipY - 6 * tanVY - 3.5 * inRadY}
         `"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
         stroke="none"
       />
     </g>
@@ -269,7 +263,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
     <path
       :d="`M ${activeCenterX - 14} ${activeCenterY + 14} A 18 18 0 0 1 ${activeCenterX + 12} ${activeCenterY + 12}`"
       fill="none"
-      stroke="#38bdf8"
+      stroke="var(--c-physics-light)"
       stroke-width="1.4"
       stroke-dasharray="3 3"
       opacity="0.65"
@@ -281,7 +275,7 @@ const rightAngleD = `M ${ra1.x.toFixed(1)} ${ra1.y.toFixed(1)} L ${ra2.x.toFixed
       :cy="ballY"
       r="8"
       fill="#ef4444"
-      stroke="#0f172a"
+      stroke="var(--c-neutral-900)"
       stroke-width="2"
       filter="url(#particle-glow)"
     />

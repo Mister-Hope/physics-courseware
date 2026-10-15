@@ -58,7 +58,7 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
 </script>
 
 <template>
-  <div class="in-figure">
+  <div class="figure relative min-w-0">
     <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
       <!-- 地面与斜面 -->
       <SurfaceHatch
@@ -174,15 +174,3 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
   </div>
 </template>
 
-<style scoped>
-.in-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.in-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

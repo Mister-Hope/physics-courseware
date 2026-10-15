@@ -37,7 +37,7 @@ const revealed = computed<boolean>(() => picked.value != null);
           cx="59"
           cy="149"
           r="29"
-          fill="rgba(148,163,184,0.1)"
+          fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)"
           stroke="var(--c-text-dim)"
           stroke-width="1.6"
           opacity="0.8"
@@ -46,7 +46,7 @@ const revealed = computed<boolean>(() => picked.value != null);
           cx="501"
           cy="149"
           r="29"
-          fill="rgba(148,163,184,0.1)"
+          fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)"
           stroke="var(--c-text-dim)"
           stroke-width="1.6"
           opacity="0.8"
@@ -57,7 +57,7 @@ const revealed = computed<boolean>(() => picked.value != null);
           width="74"
           height="48"
           rx="7"
-          fill="rgba(226,168,70,0.18)"
+          fill="color-mix(in srgb, var(--c-accent) 18%, transparent)"
           stroke="var(--c-accent)"
           stroke-width="2.2"
         />
@@ -174,10 +174,10 @@ const revealed = computed<boolean>(() => picked.value != null);
 
   min-width: 0;
   max-width: 32rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 }
 
 .fdj-side {
@@ -204,10 +204,10 @@ const revealed = computed<boolean>(() => picked.value != null);
 
   min-width: 0;
   padding: 0.42rem 1.1rem;
-  border: 1px solid rgb(148 163 184 / 35%);
-  border-radius: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--c-text-dim) 35%, transparent);
+  border-radius: var(--radius-md);
 
-  background: rgb(148 163 184 / 8%);
+  background: color-mix(in srgb, var(--c-text-dim) 8%, transparent);
   color: var(--c-text);
 
   font-size: 0.98rem;
@@ -219,22 +219,22 @@ const revealed = computed<boolean>(() => picked.value != null);
 
 .fdj-btn:hover {
   border-color: var(--c-accent);
-  background: rgb(226 168 70 / 12%);
+  background: var(--c-accent-soft);
 }
 
 .fdj-btn-right {
   border-color: var(--c-accent);
-  background: rgb(226 168 70 / 18%);
+  background: var(--c-accent-soft);
 }
 
 .fdj-btn-left {
   border-color: var(--c-accent-2);
-  background: rgb(96 165 250 / 16%);
+  background: var(--c-accent-2-soft);
 }
 
 .fdj-btn-wrong {
   border-color: var(--c-danger);
-  background: rgb(248 113 113 / 16%);
+  background: var(--c-danger-soft);
 }
 
 .fdj-feedback {

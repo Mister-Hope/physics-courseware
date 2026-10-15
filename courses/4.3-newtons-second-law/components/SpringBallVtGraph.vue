@@ -155,7 +155,7 @@ const labels = computed(() =>
             :y1="y(bubble.point.y)"
             :x2="x(bubble.center.x)"
             :y2="y(bubble.center.y)"
-            stroke="rgba(148,163,184,0.6)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
             stroke-width="1.4"
             stroke-dasharray="6 5"
           />
@@ -165,8 +165,8 @@ const labels = computed(() =>
             :width="bubble.w * px2user"
             :height="bubble.h * px2user"
             rx="9"
-            fill="rgba(15,23,42,0.88)"
-            stroke="rgba(148,163,184,0.4)"
+            fill="color-mix(in srgb, var(--c-neutral-900) 88%, transparent)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 40%, transparent)"
             stroke-width="1.2"
           />
         </template>

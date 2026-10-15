@@ -87,20 +87,20 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
     <svg viewBox="60 90 480 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平抛与圆弧的三种情形">
       <!-- 情形 1：沿切线进入（圆心在上方的碗形轨道） -->
       <g v-if="variant === 1">
-        <path :d="arcPath(center1.x, center1.y, radius1, 90, 180)" fill="none" stroke="rgba(148,163,184,0.95)" stroke-width="6" stroke-linecap="round" />
-        <line :x1="center1.x" :y1="center1.y" :x2="ENTRY1.x" :y2="ENTRY1.y" stroke="rgba(148,163,184,0.7)" stroke-width="1.8" stroke-dasharray="7 6" />
-        <circle :cx="center1.x" :cy="center1.y" r="5" fill="none" stroke="#f87171" stroke-width="2.2" />
-        <text :x="center1.x + 12" :y="center1.y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#f87171">O</text>
-        <circle :cx="origin1.x" :cy="origin1.y" r="5.5" fill="#e2e8f0" />
-        <text :x="origin1.x - 28" :y="origin1.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">A</text>
-        <CourseArrow :from="origin1" :to="{ x: origin1.x + 100, y: origin1.y }" stroke="#e2a846" :stroke-width="3" />
-        <text :x="origin1.x + 34" :y="origin1.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">v</text>
-        <text :x="origin1.x + 46" :y="origin1.y - 10" font-family="KaTeX_Main" font-style="normal" font-size="13" fill="#e2a846">0</text>
-        <circle :cx="ENTRY1.x" :cy="ENTRY1.y" r="5.5" fill="#f87171" />
-        <text :x="ENTRY1.x - 26" :y="ENTRY1.y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#f87171">P</text>
+        <path :d="arcPath(center1.x, center1.y, radius1, 90, 180)" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="6" stroke-linecap="round" />
+        <line :x1="center1.x" :y1="center1.y" :x2="ENTRY1.x" :y2="ENTRY1.y" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="1.8" stroke-dasharray="7 6" />
+        <circle :cx="center1.x" :cy="center1.y" r="5" fill="none" stroke="var(--c-force)" stroke-width="2.2" />
+        <text :x="center1.x + 12" :y="center1.y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">O</text>
+        <circle :cx="origin1.x" :cy="origin1.y" r="5.5" fill="var(--c-neutral-200)" />
+        <text :x="origin1.x - 28" :y="origin1.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">A</text>
+        <CourseArrow :from="origin1" :to="{ x: origin1.x + 100, y: origin1.y }" stroke="var(--c-accent)" :stroke-width="3" />
+        <text :x="origin1.x + 34" :y="origin1.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">v</text>
+        <text :x="origin1.x + 46" :y="origin1.y - 10" font-family="KaTeX_Main" font-style="normal" font-size="13" fill="var(--c-accent)">0</text>
+        <circle :cx="ENTRY1.x" :cy="ENTRY1.y" r="5.5" fill="var(--c-force)" />
+        <text :x="ENTRY1.x - 26" :y="ENTRY1.y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">P</text>
         <g v-if="showAnalysis">
-          <path :d="parabola(origin1, ENTRY1, CONTROL1)" fill="none" stroke="#e2a846" stroke-width="3" stroke-linecap="round" />
-          <CourseArrow :from="ENTRY1" :to="tip(ENTRY1, VEL1, 66)" stroke="#f87171" :stroke-width="3.2" />
+          <path :d="parabola(origin1, ENTRY1, CONTROL1)" fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round" />
+          <CourseArrow :from="ENTRY1" :to="tip(ENTRY1, VEL1, 66)" stroke="var(--c-force)" :stroke-width="3.2" />
           <text :x="tip(ENTRY1, VEL1, 66).x + 6" :y="tip(ENTRY1, VEL1, 66).y + 4" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#fca5a5">
             v
           </text>
@@ -109,13 +109,13 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
 
       <!-- 情形 2：从圆心水平抛出 -->
       <g v-else-if="variant === 2">
-        <path :d="arcPath(center2.x, center2.y, radius2, 0, 90)" fill="none" stroke="rgba(148,163,184,0.95)" stroke-width="6" stroke-linecap="round" />
+        <path :d="arcPath(center2.x, center2.y, radius2, 0, 90)" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="6" stroke-linecap="round" />
         <line
           :x1="center2.x"
           :y1="center2.y"
           :x2="center2.x + radius2"
           :y2="center2.y"
-          stroke="rgba(148,163,184,0.65)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 65%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="7 6"
         />
@@ -124,33 +124,33 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
           :y1="center2.y"
           :x2="center2.x"
           :y2="center2.y + radius2"
-          stroke="rgba(148,163,184,0.65)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 65%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="7 6"
         />
-        <circle :cx="center2.x" :cy="center2.y" r="5.5" fill="#e2e8f0" />
-        <text :x="center2.x - 30" :y="center2.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">O</text>
-        <CourseArrow :from="center2" :to="{ x: center2.x + 104, y: center2.y }" stroke="#e2a846" :stroke-width="3" />
-        <text :x="center2.x + 36" :y="center2.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">v</text>
-        <text :x="center2.x + 48" :y="center2.y - 10" font-family="KaTeX_Main" font-style="normal" font-size="13" fill="#e2a846">0</text>
-        <line :x1="center2.x" :y1="center2.y" :x2="LANDING2.x" :y2="LANDING2.y" stroke="rgba(96,165,250,0.9)" stroke-width="2.4" />
-        <path :d="arcPath(center2.x, center2.y, 62, 0, 40)" fill="none" stroke="#60a5fa" stroke-width="2" />
-        <text :x="center2.x + 74" :y="center2.y + 32" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#93c5fd">θ</text>
-        <circle :cx="LANDING2.x" :cy="LANDING2.y" r="5.5" fill="#f87171" />
-        <text :x="LANDING2.x + 12" :y="LANDING2.y + 4" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#f87171">P</text>
+        <circle :cx="center2.x" :cy="center2.y" r="5.5" fill="var(--c-neutral-200)" />
+        <text :x="center2.x - 30" :y="center2.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
+        <CourseArrow :from="center2" :to="{ x: center2.x + 104, y: center2.y }" stroke="var(--c-accent)" :stroke-width="3" />
+        <text :x="center2.x + 36" :y="center2.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">v</text>
+        <text :x="center2.x + 48" :y="center2.y - 10" font-family="KaTeX_Main" font-style="normal" font-size="13" fill="var(--c-accent)">0</text>
+        <line :x1="center2.x" :y1="center2.y" :x2="LANDING2.x" :y2="LANDING2.y" stroke="color-mix(in srgb, var(--c-velocity) 90%, transparent)" stroke-width="2.4" />
+        <path :d="arcPath(center2.x, center2.y, 62, 0, 40)" fill="none" stroke="var(--c-velocity)" stroke-width="2" />
+        <text :x="center2.x + 74" :y="center2.y + 32" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-velocity-light)">θ</text>
+        <circle :cx="LANDING2.x" :cy="LANDING2.y" r="5.5" fill="var(--c-force)" />
+        <text :x="LANDING2.x + 12" :y="LANDING2.y + 4" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">P</text>
         <text
           :x="(center2.x + LANDING2.x) / 2 + 4"
           :y="(center2.y + LANDING2.y) / 2 + 2"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           R
         </text>
         <g v-if="showAnalysis">
-          <path :d="parabola(center2, LANDING2, CONTROL2)" fill="none" stroke="#e2a846" stroke-width="3" stroke-linecap="round" />
-          <CourseArrow :from="LANDING2" :to="tip(LANDING2, VEL2, 62)" stroke="#f87171" :stroke-width="3.2" />
+          <path :d="parabola(center2, LANDING2, CONTROL2)" fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round" />
+          <CourseArrow :from="LANDING2" :to="tip(LANDING2, VEL2, 62)" stroke="var(--c-force)" :stroke-width="3.2" />
           <text
             :x="tip(LANDING2, VEL2, 62).x + 6"
             :y="tip(LANDING2, VEL2, 62).y + 4"
@@ -166,33 +166,33 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
 
       <!-- 情形 3：同一端两个速度，反向延长线的交点都在圆心左侧 -->
       <g v-else>
-        <path :d="arcPath(center3.x, center3.y, radius3, 0, 180)" fill="none" stroke="rgba(148,163,184,0.95)" stroke-width="6" stroke-linecap="round" />
-        <line x1="160" y1="140" x2="500" y2="140" stroke="rgba(148,163,184,0.6)" stroke-width="1.6" stroke-dasharray="7 6" />
-        <line :x1="center3.x" y1="112" :x2="center3.x" y2="336" stroke="rgba(248,113,113,0.55)" stroke-width="1.6" stroke-dasharray="5 6" />
-        <circle :cx="center3.x" :cy="center3.y" r="5" fill="none" stroke="#f87171" stroke-width="2.2" />
-        <text :x="center3.x + 12" :y="center3.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#f87171">O</text>
-        <circle :cx="A_SMALL.x" :cy="A_SMALL.y" r="5.5" fill="#e2e8f0" />
-        <circle :cx="A_LARGE.x" :cy="A_LARGE.y" r="5.5" fill="#e2e8f0" />
-        <text :x="A_SMALL.x - 30" :y="A_SMALL.y - 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">A</text>
-        <CourseArrow :from="A_SMALL" :to="{ x: A_SMALL.x + 52, y: A_SMALL.y }" stroke="#60a5fa" :stroke-width="3" />
-        <CourseArrow :from="A_LARGE" :to="{ x: A_LARGE.x + 120, y: A_LARGE.y }" stroke="#e2a846" :stroke-width="3" />
-        <text :x="A_SMALL.x + 58" :y="A_SMALL.y - 10" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="#93c5fd">v</text>
-        <text :x="A_SMALL.x + 69" :y="A_SMALL.y - 7" font-family="KaTeX_Main" font-style="normal" font-size="15" fill="#93c5fd">小</text>
-        <text :x="A_LARGE.x + 126" :y="A_LARGE.y + 30" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="#e2a846">v</text>
-        <text :x="A_LARGE.x + 137" :y="A_LARGE.y + 33" font-family="KaTeX_Main" font-style="normal" font-size="15" fill="#e2a846">大</text>
-        <circle :cx="LAND_SMALL.x" :cy="LAND_SMALL.y" r="5.5" fill="#60a5fa" />
-        <circle :cx="LAND_LARGE.x" :cy="LAND_LARGE.y" r="5.5" fill="#e2a846" />
+        <path :d="arcPath(center3.x, center3.y, radius3, 0, 180)" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 95%, transparent)" stroke-width="6" stroke-linecap="round" />
+        <line x1="160" y1="140" x2="500" y2="140" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+        <line :x1="center3.x" y1="112" :x2="center3.x" y2="336" stroke="color-mix(in srgb, var(--c-force) 55%, transparent)" stroke-width="1.6" stroke-dasharray="5 6" />
+        <circle :cx="center3.x" :cy="center3.y" r="5" fill="none" stroke="var(--c-force)" stroke-width="2.2" />
+        <text :x="center3.x + 12" :y="center3.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">O</text>
+        <circle :cx="A_SMALL.x" :cy="A_SMALL.y" r="5.5" fill="var(--c-neutral-200)" />
+        <circle :cx="A_LARGE.x" :cy="A_LARGE.y" r="5.5" fill="var(--c-neutral-200)" />
+        <text :x="A_SMALL.x - 30" :y="A_SMALL.y - 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">A</text>
+        <CourseArrow :from="A_SMALL" :to="{ x: A_SMALL.x + 52, y: A_SMALL.y }" stroke="var(--c-velocity)" :stroke-width="3" />
+        <CourseArrow :from="A_LARGE" :to="{ x: A_LARGE.x + 120, y: A_LARGE.y }" stroke="var(--c-accent)" :stroke-width="3" />
+        <text :x="A_SMALL.x + 58" :y="A_SMALL.y - 10" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-velocity-light)">v</text>
+        <text :x="A_SMALL.x + 69" :y="A_SMALL.y - 7" font-family="KaTeX_Main" font-style="normal" font-size="15" fill="var(--c-velocity-light)">小</text>
+        <text :x="A_LARGE.x + 126" :y="A_LARGE.y + 30" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-accent)">v</text>
+        <text :x="A_LARGE.x + 137" :y="A_LARGE.y + 33" font-family="KaTeX_Main" font-style="normal" font-size="15" fill="var(--c-accent)">大</text>
+        <circle :cx="LAND_SMALL.x" :cy="LAND_SMALL.y" r="5.5" fill="var(--c-velocity)" />
+        <circle :cx="LAND_LARGE.x" :cy="LAND_LARGE.y" r="5.5" fill="var(--c-accent)" />
         <g v-if="showAnalysis">
-          <path :d="parabola(A_SMALL, LAND_SMALL, CONTROL_SMALL)" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" />
-          <path :d="parabola(A_LARGE, LAND_LARGE, CONTROL_LARGE)" fill="none" stroke="#e2a846" stroke-width="3" stroke-linecap="round" />
-          <CourseArrow :from="LAND_SMALL" :to="tip(LAND_SMALL, VEL_SMALL, 54)" stroke="#60a5fa" :stroke-width="3.2" />
-          <CourseArrow :from="LAND_LARGE" :to="tip(LAND_LARGE, VEL_LARGE, 54)" stroke="#e2a846" :stroke-width="3.2" />
+          <path :d="parabola(A_SMALL, LAND_SMALL, CONTROL_SMALL)" fill="none" stroke="var(--c-velocity)" stroke-width="3" stroke-linecap="round" />
+          <path :d="parabola(A_LARGE, LAND_LARGE, CONTROL_LARGE)" fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round" />
+          <CourseArrow :from="LAND_SMALL" :to="tip(LAND_SMALL, VEL_SMALL, 54)" stroke="var(--c-velocity)" :stroke-width="3.2" />
+          <CourseArrow :from="LAND_LARGE" :to="tip(LAND_LARGE, VEL_LARGE, 54)" stroke="var(--c-accent)" :stroke-width="3.2" />
           <line
             :x1="LAND_SMALL.x"
             :y1="LAND_SMALL.y"
             :x2="MEET_SMALL.x"
             :y2="MEET_SMALL.y"
-            stroke="rgba(96,165,250,0.75)"
+            stroke="color-mix(in srgb, var(--c-velocity) 75%, transparent)"
             stroke-width="1.8"
             stroke-dasharray="8 6"
           />
@@ -201,12 +201,12 @@ const tip = (point: Vec, v: Velocity, len: number): Vec => ({
             :y1="LAND_LARGE.y"
             :x2="MEET_LARGE.x"
             :y2="MEET_LARGE.y"
-            stroke="rgba(226,168,70,0.75)"
+            stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
             stroke-width="1.8"
             stroke-dasharray="8 6"
           />
-          <circle :cx="MEET_SMALL.x" :cy="MEET_SMALL.y" r="4.5" fill="#60a5fa" />
-          <circle :cx="MEET_LARGE.x" :cy="MEET_LARGE.y" r="4.5" fill="#e2a846" />
+          <circle :cx="MEET_SMALL.x" :cy="MEET_SMALL.y" r="4.5" fill="var(--c-velocity)" />
+          <circle :cx="MEET_LARGE.x" :cy="MEET_LARGE.y" r="4.5" fill="var(--c-accent)" />
         </g>
       </g>
     </svg>

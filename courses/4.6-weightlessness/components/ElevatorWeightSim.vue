@@ -189,10 +189,10 @@ const formulaTex = computed(() => {
   gap: 0.42rem;
 
   padding: 0.65rem 0.85rem;
-  border: 1px solid var(--c-border, rgb(148 163 184 / 22%));
-  border-radius: 0.65rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
 
-  background: rgb(15 23 42 / 55%);
+  background: var(--c-surface);
 }
 
 .ew-line {
@@ -200,13 +200,13 @@ const formulaTex = computed(() => {
   align-items: baseline;
   justify-content: space-between;
 
-  color: var(--c-text, #e2e8f0);
+  color: var(--c-text);
 
   font-size: 1.05rem;
 }
 
 .ew-label {
-  color: #cbd5e1;
+  color: var(--c-neutral-300);
 }
 
 .ew-math {
@@ -227,19 +227,19 @@ const formulaTex = computed(() => {
 }
 
 .ew-val-over {
-  color: #f87171;
+  color: var(--c-danger);
 }
 
 .ew-val-under {
-  color: #60a5fa;
+  color: var(--c-velocity);
 }
 
 .ew-val-even {
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
 }
 
 .ew-line-dim b {
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
   font-size: 1.08rem;
 }
 
@@ -249,10 +249,10 @@ const formulaTex = computed(() => {
   overflow: hidden;
 
   height: 8px;
-  border: 1px solid rgb(148 163 184 / 22%);
+  border: 1px solid var(--c-border);
   border-radius: 999px;
 
-  background: rgb(30 41 59 / 90%);
+  background: color-mix(in srgb, var(--c-surface-solid) 90%, transparent);
 }
 
 .ew-bar-fill {
@@ -264,15 +264,15 @@ const formulaTex = computed(() => {
 }
 
 .ew-bar-over {
-  background: linear-gradient(90deg, #e2a846 0%, #f87171 100%);
+  background: linear-gradient(90deg, var(--c-accent) 0%, var(--c-danger) 100%);
 }
 
 .ew-bar-under {
-  background: linear-gradient(90deg, #38bdf8 0%, #60a5fa 100%);
+  background: linear-gradient(90deg, var(--c-physics-light) 0%, var(--c-velocity) 100%);
 }
 
 .ew-bar-even {
-  background: #e2a846;
+  background: var(--c-accent);
 }
 
 .ew-bar-mg {
@@ -283,8 +283,8 @@ const formulaTex = computed(() => {
 
   width: 2px;
 
-  background: #f8fafc;
-  box-shadow: 0 0 4px rgb(15 23 42 / 90%);
+  background: var(--c-neutral-50);
+  box-shadow: 0 0 4px color-mix(in srgb, var(--c-bg-soft) 90%, transparent);
 }
 
 .ew-tags {
@@ -296,38 +296,38 @@ const formulaTex = computed(() => {
 
 .ew-verdict {
   padding: 0.16rem 0.82rem;
-  border: 1px solid var(--c-border, rgb(148 163 184 / 35%));
-  border-radius: 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
 
   font-weight: 700;
   font-size: 1rem;
 }
 
 .ew-verdict-over {
-  border-color: rgb(248 113 113 / 55%);
-  background: rgb(248 113 113 / 12%);
-  color: #f87171;
+  border-color: color-mix(in srgb, var(--c-danger) 55%, transparent);
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 }
 
 .ew-verdict-under {
-  border-color: rgb(96 165 250 / 55%);
-  background: rgb(96 165 250 / 12%);
-  color: #60a5fa;
+  border-color: color-mix(in srgb, var(--c-velocity) 55%, transparent);
+  background: color-mix(in srgb, var(--c-velocity) 12%, transparent);
+  color: var(--c-velocity);
 }
 
 .ew-verdict-even {
-  border-color: rgb(226 168 70 / 45%);
-  background: rgb(226 168 70 / 10%);
-  color: var(--c-accent, #e2a846);
+  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
 }
 
 .ew-chip {
   padding: 0.16rem 0.55rem;
-  border: 1px solid rgb(148 163 184 / 25%);
-  border-radius: 0.45rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
 
-  background: rgb(15 23 42 / 65%);
-  color: #cbd5e1;
+  background: var(--c-surface);
+  color: var(--c-neutral-300);
 
   font-size: 0.82rem;
 }
@@ -337,27 +337,27 @@ const formulaTex = computed(() => {
 }
 
 .ew-chip-v {
-  border-color: rgb(96 165 250 / 35%);
-  color: #93c5fd;
+  border-color: color-mix(in srgb, var(--c-velocity) 35%, transparent);
+  color: var(--c-velocity-light);
 }
 
 .ew-chip-a-up,
 .ew-chip-a-down {
-  border-color: rgb(45 212 191 / 40%);
-  color: #5eead4;
+  border-color: color-mix(in srgb, var(--c-physics) 40%, transparent);
+  color: var(--c-physics);
 }
 
 .ew-chip-a-none {
-  color: #94a3b8;
+  color: var(--c-text-dim);
 }
 
 .ew-formula {
   padding: 0.45rem 0.75rem;
-  border: 1px solid rgb(148 163 184 / 18%);
-  border-radius: 0.55rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
 
-  background: rgb(15 23 42 / 45%);
-  color: #e2e8f0;
+  background: var(--c-surface);
+  color: var(--c-neutral-200);
 
   font-size: 0.95rem;
 }
@@ -367,7 +367,7 @@ const formulaTex = computed(() => {
 }
 
 .ew-formula-preview b {
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
 }
 
 .ew-buttons {
@@ -384,11 +384,11 @@ const formulaTex = computed(() => {
   justify-content: center;
 
   padding: 0.42rem 0.25rem;
-  border: 1px solid var(--c-border, rgb(148 163 184 / 28%));
-  border-radius: 0.65rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
 
-  background: var(--c-surface, rgb(15 23 42 / 78%));
-  color: var(--c-text, #cbd5e1);
+  background: var(--c-surface);
+  color: var(--c-text);
 
   font-size: 0.9rem;
   font-family: inherit;
@@ -400,14 +400,14 @@ const formulaTex = computed(() => {
 }
 
 .ew-buttons button:hover {
-  border-color: var(--c-border-glow, rgb(226 168 70 / 65%));
-  color: var(--c-accent, #e2a846);
+  border-color: var(--c-border-glow);
+  color: var(--c-accent);
 }
 
 .ew-on {
-  border-color: var(--c-border-glow, rgb(226 168 70 / 85%)) !important;
-  background: rgb(226 168 70 / 16%) !important;
-  color: var(--c-accent, #e2a846) !important;
+  border-color: var(--c-border-glow) !important;
+  background: var(--c-accent-soft) !important;
+  color: var(--c-accent) !important;
   font-weight: 700;
 }
 </style>

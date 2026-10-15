@@ -28,9 +28,9 @@ const ringEndX = computed(() => scale.value?.ringEnd.x ?? 292.7);
     <SurfaceHatch :from="{ x: 8, y: 84 }" :to="{ x: 364, y: 84 }" side="below" :thickness="11" :gap="24" color="#94a3b8" />
 
     <!-- 被拉木块（y: 34..81.5，stroke-width=2.2 → 下外沿 82.6，与桌面严格相切不重叠） -->
-    <rect x="14" y="34" width="70" height="47.5" rx="4" fill="rgba(226,168,70,0.2)" stroke="#e2a846" stroke-width="2.2" />
+    <rect x="14" y="34" width="70" height="47.5" rx="4" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
     <!-- 木块右侧挂钩圆环 -->
-    <circle cx="87" cy="56" r="3" fill="none" stroke="#e2a846" stroke-width="1.8" />
+    <circle cx="87" cy="56" r="3" fill="none" stroke="var(--c-accent)" stroke-width="1.8" />
 
     <!-- 水平弹簧测力计 -->
     <SpringScale ref="scale" :x="scaleX" :y="CASE_Y" :length="124" :force="2.4" color="#cbd5e1" accent="#e2a846" orientation="horizontal" mirror label="2.4" />
@@ -39,6 +39,6 @@ const ringEndX = computed(() => scale.value?.ringEnd.x ?? 292.7);
     <GripHand :x="ringEndX" :y="AXIS_Y" side="right" />
 
     <!-- 向右拉动的方向箭头 -->
-    <CourseArrow :from="{ x: ringEndX + 43, y: AXIS_Y }" :to="{ x: 368, y: AXIS_Y }" stroke="#e2a846" stroke-width="3" />
+    <CourseArrow :from="{ x: ringEndX + 43, y: AXIS_Y }" :to="{ x: 368, y: AXIS_Y }" stroke="var(--c-accent)" stroke-width="3" />
   </svg>
 </template>

@@ -32,14 +32,14 @@ const thetaLabel = toXY(101, 64);
     <line :x1="O.x" :y1="O.y" :x2="A.x" :y2="A.y" stroke="currentColor" stroke-width="2" opacity="0.8" />
     <line :x1="O.x" :y1="O.y" :x2="B.x" :y2="B.y" stroke="currentColor" stroke-width="2" opacity="0.8" />
     <g v-if="showSolved">
-      <path :d="angleArc" fill="none" stroke="#60a5fa" stroke-width="3.2" stroke-linecap="round" />
-      <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#60a5fa">Δθ</text>
+      <path :d="angleArc" fill="none" stroke="var(--c-velocity)" stroke-width="3.2" stroke-linecap="round" />
+      <text :x="thetaLabel.x" :y="thetaLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">Δθ</text>
     </g>
-    <circle :cx="A.x" :cy="A.y" r="5" fill="#e2a846" />
-    <circle :cx="B.x" :cy="B.y" r="5" fill="#e2a846" />
+    <circle :cx="A.x" :cy="A.y" r="5" fill="var(--c-accent)" />
+    <circle :cx="B.x" :cy="B.y" r="5" fill="var(--c-accent)" />
     <circle :cx="O.x" :cy="O.y" r="3.5" fill="currentColor" opacity="0.8" />
     <text :x="O.x - 8" :y="O.y + 19" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">O</text>
-    <text :x="A.x - 18" :y="A.y + 13" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">A</text>
-    <text :x="B.x + 9" :y="B.y + 11" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">B</text>
+    <text :x="A.x - 18" :y="A.y + 13" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
+    <text :x="B.x + 9" :y="B.y + 11" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">B</text>
   </svg>
 </template>

@@ -55,32 +55,32 @@ clicks: 2
 
 <div class="flex items-stretch justify-center gap-2">
 
-<div class="w-44 min-h-[150px] flex flex-col justify-center rounded-xl border border-teal-300/45 bg-teal-400/10 p-2 text-center">
-<div class="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full border border-teal-300/70 text-[17px] font-bold text-teal-200">1<span class="ml-px text-teal-300">✓</span></div>
-<div class="text-[1rem] leading-snug font-semibold">电流是电荷的<br>定向移动</div>
+<div class="flow-card"><mdi-arrow-right-bold class="text-xl" />
+<div class="flow-no text-lg">1<span class="ml-px">✓</span></div>
+<div class="leading-snug font-semibold">电流是电荷的<br>定向移动</div>
 </div>
 
-<div class="self-center text-xl text-slate-500">→</div>
+<div class="flow-arrow self-center text-xl">→</div>
 
-<div class="w-44 min-h-[150px] flex flex-col justify-center rounded-xl border border-teal-300/45 bg-teal-400/10 p-2 text-center">
-<div class="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full border border-teal-300/70 text-[17px] font-bold text-teal-200">2<span class="ml-px text-teal-300">✓</span></div>
-<div class="text-[1rem] leading-snug font-semibold">磁场对电流<br>有力的作用</div>
+<div class="flow-card"><mdi-magnet class="text-xl" />
+<div class="flow-no text-lg">2<span class="ml-px">✓</span></div>
+<div class="leading-snug font-semibold">磁场对电流<br>有力的作用</div>
 </div>
 
-<div class="self-center text-xl text-slate-500">→</div>
+<div class="flow-arrow self-center text-xl">→</div>
 
-<div class="w-44 min-h-[150px] flex flex-col justify-center rounded-xl border border-dashed border-amber-300/70 bg-amber-400/10 p-2 text-center" v-click="1">
-<div class="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/80 text-[17px] font-bold text-amber-300">3<span class="ml-px text-amber-200">?</span></div>
-<div class="text-[1rem] leading-snug font-semibold">磁场对运动电荷<br>有力的作用？</div>
-<div class="mt-1.5 text-xs text-amber-200/80">理论推导的猜想</div>
+<div class="flow-card flow-card-guess" v-click="1"><mdi-lightbulb-on-outline class="text-xl" />
+<div class="flow-no text-lg">3<span class="ml-px">?</span></div>
+<div class="leading-snug font-semibold">磁场对运动电荷<br>有力的作用？</div>
+<div class="mt-1.5 mini-note">理论推导的猜想</div>
 </div>
 
-<div class="self-center text-xl text-slate-500" v-click="1">→</div>
+<div class="flow-arrow self-center text-xl" v-click="1">→</div>
 
-<div class="w-44 min-h-[150px] flex flex-col justify-center rounded-xl border border-sky-300/55 bg-sky-400/10 p-2 text-center" v-click="2">
-<div class="mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-full border border-sky-300/75 text-[17px] font-bold text-sky-200">4</div>
-<div class="text-[1rem] leading-snug font-semibold">设计实验验证</div>
-<div class="mt-1.5 text-xs text-sky-200/80">怎么看见电荷？</div>
+<div class="flow-card flow-card-verify" v-click="2"><mdi-flask-outline class="text-xl" />
+<div class="flow-no text-lg">4</div>
+<div class="leading-snug font-semibold">设计实验验证</div>
+<div class="mt-1.5 mini-note">怎么看见电荷？</div>
 </div>
 
 </div>
@@ -100,15 +100,15 @@ clicks: 3
 
 <div>
 
-<div class="font-semibold text-lg mt-1">阴极发射电子</div>
+<div class="font-semibold text-lg mt-1"><mdi-flash-outline class="text-xl inline-block align-middle mr-1" />阴极发射电子</div>
 
 <div class="text-base opacity-90 mt-1" v-click="1">高压电场使电子加速飞向阳极</div>
 
-<div class="font-semibold text-lg mt-6">挡板上的狭缝</div>
+<div class="font-semibold text-lg mt-6"><mdi-arrow-collapse-horizontal class="text-xl inline-block align-middle mr-1" />挡板上的狭缝</div>
 
 <div class="text-base opacity-90 mt-1" v-click="2">只让一扁平的电子束通过</div>
 
-<div class="font-semibold text-lg mt-6">荧光板</div>
+<div class="font-semibold text-lg mt-6"><mdi-monitor-shimmer class="text-xl inline-block align-middle mr-1" />荧光板</div>
 
 <div class="text-base opacity-90 mt-1" v-click="3">电子束掠射荧光板，显示出径迹</div>
 
@@ -151,7 +151,7 @@ clicks: 1
 
 <div>
 
-<div class="key">
+<div class="card">
 
 <strong>洛伦兹力</strong>：磁场对运动电荷的作用力。
 
@@ -382,9 +382,9 @@ clicks: 1
 
 <div class="stack text-lg leading-relaxed">
 
-<div>① 始终垂直于 <Latex tex="v" /> 与 <Latex tex="B" /> 决定的平面：<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" /></div>
+<div><mdi-axis-arrow class="text-xl inline-block align-middle mr-1" />① 始终垂直于 <Latex tex="v" /> 与 <Latex tex="B" /> 决定的平面：<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" /></div>
 
-<div>② 因为 <Latex tex="F_{\text{洛}} \perp v" />，只改变速度的<strong>方向</strong>，不改变速度的<strong>大小</strong></div>
+<div><mdi-compass-outline class="text-xl inline-block align-middle mr-1" />② 因为 <Latex tex="F_{\text{洛}} \perp v" />，只改变速度的<strong>方向</strong>，不改变速度的<strong>大小</strong></div>
 
 <div class="key">③ 因为 <Latex tex="F_{\text{洛}} \perp v" />，洛伦兹力<strong>不做功</strong>，不改变电荷的动能</div>
 
@@ -422,26 +422,26 @@ clicks: 3
 <div class="mx-auto w-[720px]">
 
 <div class="flex items-center gap-4 py-1 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
-<span class="font-bold text-teal-300">①</span>
+<span class="w-16 shrink-0 text-right mini-note">条件</span>
+<span class="font-bold flow-mark"><mdi-arrow-right-bold class="text-xl inline-block align-middle mr-1" />①</span>
 <span>电流是电荷的定向移动</span>
 </div>
 
 <div class="flex items-center gap-4 py-1 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">条件</span>
-<span class="font-bold text-teal-300">②</span>
+<span class="w-16 shrink-0 text-right mini-note">条件</span>
+<span class="font-bold flow-mark"><mdi-magnet class="text-xl inline-block align-middle mr-1" />②</span>
 <span>磁场对电流有力的作用</span>
 </div>
 
 <div class="flex items-center gap-4 py-1 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">理论推导</span>
-<span class="font-bold text-amber-300">③</span>
+<span class="w-16 shrink-0 text-right mini-note">理论推导</span>
+<span class="font-bold flow-mark flow-mark-guess"><mdi-lightbulb-on-outline class="text-xl inline-block align-middle mr-1" />③</span>
 <span>磁场对运动电荷有力的作用</span>
 </div>
 
 <div class="flex items-center gap-4 py-1 text-lg">
-<span class="w-16 shrink-0 text-right text-base text-slate-500">实验验证</span>
-<span class="font-bold text-teal-300">④ ✓</span>
+<span class="w-16 shrink-0 text-right mini-note">实验验证</span>
+<span class="font-bold flow-mark"><mdi-flask-outline class="text-xl inline-block align-middle mr-1" />④ ✓</span>
 <span>阴极射线管实验证实</span>
 </div>
 

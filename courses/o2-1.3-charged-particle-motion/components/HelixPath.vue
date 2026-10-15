@@ -240,7 +240,7 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           :y1="gen.a.y"
           :x2="gen.b.x"
           :y2="gen.b.y"
-          stroke="rgba(148,163,184,0.35)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
           stroke-width="1.3"
           stroke-dasharray="7 7"
         />
@@ -248,7 +248,7 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
         <CourseArrow
           :from="scene.axisFrom"
           :to="scene.axisTo"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
           stroke-dasharray="9 7"
         />
@@ -258,8 +258,8 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="26"
-          fill="#e2a846"
-          stroke="#0f1425"
+          fill="var(--c-accent)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3.5"
           paint-order="stroke"
         >
@@ -283,7 +283,7 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
             :y1="scene.O.y"
             :x2="scene.dimStart.x"
             :y2="scene.dimStart.y"
-            stroke="rgba(226,168,70,0.45)"
+            stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)"
             stroke-width="1.4"
             stroke-dasharray="5 5"
           />
@@ -292,7 +292,7 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
             :y1="scene.A.y"
             :x2="scene.dimEnd.x"
             :y2="scene.dimEnd.y"
-            stroke="rgba(226,168,70,0.45)"
+            stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)"
             stroke-width="1.4"
             stroke-dasharray="5 5"
           />
@@ -301,7 +301,7 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
             :y1="scene.dimStart.y"
             :x2="scene.dimEnd.x"
             :y2="scene.dimEnd.y"
-            stroke="rgba(226,168,70,0.9)"
+            stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
             stroke-width="1.8"
           />
           <line
@@ -311,7 +311,7 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
             :y1="t.y1"
             :x2="t.x2"
             :y2="t.y2"
-            stroke="rgba(226,168,70,0.9)"
+            stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
             stroke-width="1.8"
           />
           <text
@@ -319,8 +319,8 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
             :y="scene.dimLabel.y"
             text-anchor="middle"
             font-size="20"
-            fill="#e2a846"
-            stroke="#0f1425"
+            fill="var(--c-accent)"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -330,8 +330,8 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           </text>
         </template>
         <!-- O、A 都画在圆柱面上：O 是螺旋线起点，A 是沿 B 走一个螺距后的同相位点 -->
-        <circle :cx="scene.O.x" :cy="scene.O.y" r="5" fill="#f8fafc" />
-        <circle :cx="scene.A.x" :cy="scene.A.y" r="5" fill="#2dd4bf" />
+        <circle :cx="scene.O.x" :cy="scene.O.y" r="5" fill="var(--c-neutral-50)" />
+        <circle :cx="scene.A.x" :cy="scene.A.y" r="5" fill="var(--c-physics)" />
         <text
           :x="scene.O.x - 10"
           :y="scene.O.y + 16"
@@ -339,8 +339,8 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="24"
-          fill="#f8fafc"
-          stroke="#0f1425"
+          fill="var(--c-neutral-50)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3.5"
           paint-order="stroke"
         >
@@ -352,8 +352,8 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="24"
-          fill="#2dd4bf"
-          stroke="#0f1425"
+          fill="var(--c-physics)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3.5"
           paint-order="stroke"
         >

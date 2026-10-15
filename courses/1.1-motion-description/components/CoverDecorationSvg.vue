@@ -20,15 +20,15 @@
 
     <!-- 原点 O 与坐标轴标签 -->
     <circle cx="34" cy="118" r="3" fill="currentColor" opacity="0.7" />
-    <text x="22" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="#94a3b8" opacity="0.85">O</text>
-    <text x="206" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="#94a3b8">x</text>
-    <text x="22" y="20" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="#94a3b8">y</text>
+    <text x="22" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 12px" fill="var(--c-text-dim)" opacity="0.85">O</text>
+    <text x="206" y="136" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="var(--c-text-dim)">x</text>
+    <text x="22" y="20" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" style="font-size: 15px" fill="var(--c-text-dim)">y</text>
 
     <!-- 空间运动轨迹虚线（呼应 1.2 的贝塞尔曲线弧度） -->
     <path
       d="M 46 102 C 62 72 78 48 104 56 C 126 62 142 82 168 38"
       fill="none"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="2.4"
       stroke-dasharray="5 3.5"
       stroke-linecap="round"
@@ -48,7 +48,7 @@
       stroke-dasharray="3 2"
       opacity="0.55"
     />
-    <circle cx="47" cy="100" r="2.8" fill="#e2a846" opacity="0.7" />
+    <circle cx="47" cy="100" r="2.8" fill="var(--c-accent)" opacity="0.7" />
 
     <!-- 终点处：忽略形状大小浓缩为质点 P(x, y)，并向参考系两轴作垂线定位 -->
     <g stroke="currentColor" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.42">
@@ -56,10 +56,10 @@
       <line x1="34" y1="38" x2="168" y2="38" />
     </g>
     <circle cx="168" cy="38" r="11" fill="none" stroke="currentColor" stroke-width="1.1" stroke-dasharray="2.5 2.5" opacity="0.4" />
-    <circle cx="168" cy="38" r="4.2" fill="#e2a846" />
-    <text x="184" y="42" text-anchor="start" font-family="KaTeX_Math" font-style="italic" style="font-size: 14px" fill="#e2a846">P</text>
+    <circle cx="168" cy="38" r="4.2" fill="var(--c-accent)" />
+    <text x="184" y="42" text-anchor="start" font-family="KaTeX_Math" font-style="italic" style="font-size: 14px" fill="var(--c-accent)">P</text>
 
     <!-- 图注（底部居中）-->
-    <text x="110" y="149" text-anchor="middle" style="font-size: 11px" fill="#94a3b8" opacity="0.75">质点的抽象与参考系定位</text>
+    <text x="110" y="149" text-anchor="middle" style="font-size: 11px" fill="var(--c-text-dim)" opacity="0.75">质点的抽象与参考系定位</text>
   </svg>
 </template>

@@ -106,8 +106,8 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
 </script>
 
 <template>
-  <div class="ic-wrap">
-    <div class="ic-figure">
+  <div class="split-wide" style="--cols: minmax(0, 1.35fr) minmax(0, 1fr)">
+    <div class="figure relative min-w-0">
       <svg :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`">
         <!-- 地面用共享接触面组件：斜线只画在表面下方 -->
         <SurfaceHatch
@@ -249,9 +249,9 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
       />
     </div>
 
-    <div class="ic-info">
-      <div class="ic-row">
-        <span class="ic-name"><Latex tex="\theta" /></span>
+    <div class="demo-panel">
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\theta" /></span>
         <input
           v-model.number="theta"
           type="range"
@@ -260,19 +260,19 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
           step="5"
           aria-label="斜面倾角"
         />
-        <span class="ic-val"><Latex :tex="thetaTex" /></span>
+        <span class="demo-val"><Latex :tex="thetaTex" /></span>
       </div>
-      <div class="ic-row">
-        <span class="ic-name"><Latex tex="G" /></span>
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="G" /></span>
         <input v-model.number="weight" type="range" min="5" max="15" step="1" aria-label="物重" />
-        <span class="ic-val"><Latex :tex="weightTex" /></span>
+        <span class="demo-val"><Latex :tex="weightTex" /></span>
       </div>
 
-      <div class="ic-result">
+      <div class="demo-readout">
         <div style="color: var(--c-accent)"><Latex :tex="slideTex" /></div>
         <div style="color: var(--c-accent-2)"><Latex :tex="pressTex" /></div>
       </div>
-      <div class="ic-note">
+      <div class="mini-note">
         分力仍作用在物体上；物体对斜面的压力作用在斜面上，大小等于
         <Latex tex="G_\perp" /> 却不是一个力
       </div>
@@ -281,94 +281,17 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
 </template>
 
 <style scoped>
-.ic-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.ic-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.ic-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.ic-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  min-width: 0;
-}
-
-.ic-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.ic-row {
-  display: grid;
-  grid-template-columns: 2.2rem minmax(0, 1fr) 5.6rem;
-  gap: 0.6rem;
-  align-items: center;
-
+/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数走共享 .demo-*；小字注释走共享 .mini-note */
+.demo-row {
+  --demo-read: 5.6rem;
   font-size: 0.95rem;
 }
 
-.ic-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.ic-val {
-  color: var(--c-text-dim);
+.demo-val {
   font-size: 0.9rem;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.ic-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 2rem;
-
-  background: rgb(148 163 184 / 20%);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.ic-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
-.ic-result {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-physics);
-
+.demo-readout {
   font-size: 1.02rem;
-}
-
-.ic-note {
-  color: var(--c-text-dim);
-  font-size: 0.85rem;
-  line-height: 1.6;
 }
 </style>

@@ -71,16 +71,16 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
 </script>
 
 <template>
-  <div class="banked">
+  <div>
     <svg viewBox="36 4 312 269" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="弯道横截面：外轨高于内轨，标出倾角与火车受到的力">
       <defs>
         <linearGradient id="banked-slab" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="rgba(71,85,105,0.95)" />
+          <stop offset="0" stop-color="color-mix(in srgb, var(--c-neutral-600) 95%, transparent)" />
           <stop offset="1" stop-color="rgba(23,33,55,0.92)" />
         </linearGradient>
         <linearGradient id="banked-car" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="rgba(96,165,250,0.36)" />
-          <stop offset="1" stop-color="rgba(37,99,235,0.20)" />
+          <stop offset="0" stop-color="color-mix(in srgb, var(--c-velocity) 36%, transparent)" />
+          <stop offset="1" stop-color="color-mix(in srgb, var(--c-accent-2-glow) 20%, transparent)" />
         </linearGradient>
       </defs>
       <!-- 路基断面 + 两条钢轨 + 车厢（整体绕原点转 -15°，外轨那一端抬高） -->
@@ -97,19 +97,19 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
           :hatch-width="1.1"
         />
         <!-- 内轨（低）与外轨（高） -->
-        <rect :x="INNER_RAIL" :y="-RAIL_H" :width="RAIL_W" :height="RAIL_H" fill="#94a3b8" />
-        <rect :x="INNER_RAIL" :y="-RAIL_H" :width="RAIL_W" height="2.6" fill="#cbd5e1" />
-        <rect :x="OUTER_RAIL" :y="-RAIL_H" :width="RAIL_W" :height="RAIL_H" fill="#cbd5e1" />
-        <rect :x="OUTER_RAIL" :y="-RAIL_H" :width="RAIL_W" height="2.6" fill="#f1f5f9" />
+        <rect :x="INNER_RAIL" :y="-RAIL_H" :width="RAIL_W" :height="RAIL_H" fill="var(--c-text-dim)" />
+        <rect :x="INNER_RAIL" :y="-RAIL_H" :width="RAIL_W" height="2.6" fill="var(--c-neutral-300)" />
+        <rect :x="OUTER_RAIL" :y="-RAIL_H" :width="RAIL_W" :height="RAIL_H" fill="var(--c-neutral-300)" />
+        <rect :x="OUTER_RAIL" :y="-RAIL_H" :width="RAIL_W" height="2.6" fill="var(--c-text)" />
         <!-- 车厢：车轮 → 转向架 → 车厢体 -->
-        <circle v-for="wheel in WHEELS" :key="wheel.x" :cx="wheel.x" :cy="wheel.y" :r="WHEEL_R" fill="#1e293b" :stroke="wheel.stroke" stroke-width="1.8" />
-        <rect :x="BOGIE.x" :y="BOGIE.y" :width="BOGIE.w" :height="BOGIE.h" rx="4" fill="#1e293b" stroke="rgba(148,163,184,0.45)" stroke-width="1.2" />
-        <rect :x="CAR.x" :y="CAR.y" :width="CAR.w" :height="CAR.h" :rx="CAR.r" fill="url(#banked-car)" stroke="#60a5fa" stroke-width="2.4" />
+        <circle v-for="wheel in WHEELS" :key="wheel.x" :cx="wheel.x" :cy="wheel.y" :r="WHEEL_R" fill="var(--c-surface-solid)" :stroke="wheel.stroke" stroke-width="1.8" />
+        <rect :x="BOGIE.x" :y="BOGIE.y" :width="BOGIE.w" :height="BOGIE.h" rx="4" fill="var(--c-surface-solid)" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.2" />
+        <rect :x="CAR.x" :y="CAR.y" :width="CAR.w" :height="CAR.h" :rx="CAR.r" fill="url(#banked-car)" stroke="var(--c-velocity)" stroke-width="2.4" />
         <rect :x="CAR.x + 12" :y="CAR.y + 7" :width="CAR.w - 24" height="22" rx="6" fill="rgba(191,219,254,0.13)" />
       </g>
       <!-- 倾角 θ：水平参考虚线 + 圆弧 + 标注 -->
       <line :x1="P.x" :y1="P.y" :x2="thetaRef.x" :y2="thetaRef.y" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-dasharray="7 6" opacity="0.7" />
-      <path :d="thetaArc" fill="none" stroke="#e2a846" stroke-width="2.2" />
+      <path :d="thetaArc" fill="none" stroke="var(--c-accent)" stroke-width="2.2" />
       <text
         x="112"
         y="228"
@@ -117,7 +117,7 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         stroke="#0b1020"
         stroke-width="4"
         paint-order="stroke"
@@ -125,23 +125,23 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
         θ
       </text>
       <!-- 钢轨标注 -->
-      <text :x="innerLabel.x" :y="innerLabel.y" text-anchor="middle" font-size="16" fill="#94a3b8">内轨</text>
-      <text :x="outerLabel.x" :y="outerLabel.y" text-anchor="middle" font-size="16" fill="#cbd5e1">外轨</text>
-      <g :class="{ 'vp-hidden': !showForces }">
+      <text :x="innerLabel.x" :y="innerLabel.y" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">内轨</text>
+      <text :x="outerLabel.x" :y="outerLabel.y" text-anchor="middle" font-size="16" fill="var(--c-neutral-300)">外轨</text>
+      <g :class="{ 'turn-hidden': !showForces }">
         <!-- 平行四边形虚线：G 与 F_N 合成 F_合 -->
-        <line :x1="gTip.x" :y1="gTip.y" :x2="fTip.x" :y2="fTip.y" stroke="rgba(148,163,184,0.6)" stroke-width="1.4" stroke-dasharray="7 6" />
-        <line :x1="nTip.x" :y1="nTip.y" :x2="fTip.x" :y2="fTip.y" stroke="rgba(148,163,184,0.6)" stroke-width="1.4" stroke-dasharray="7 6" />
+        <line :x1="gTip.x" :y1="gTip.y" :x2="fTip.x" :y2="fTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.4" stroke-dasharray="7 6" />
+        <line :x1="nTip.x" :y1="nTip.y" :x2="fTip.x" :y2="fTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.4" stroke-dasharray="7 6" />
         <!-- 三个力都从车厢几何中心出发 -->
-        <CourseArrow :from="carCenter" :to="gTip" stroke="#f87171" :stroke-width="3.6" />
-        <CourseArrow :from="carCenter" :to="nTip" stroke="#2dd4bf" :stroke-width="3.6" />
-        <CourseArrow :from="carCenter" :to="fTip" stroke="#e2a846" :stroke-width="4.2" />
+        <CourseArrow :from="carCenter" :to="gTip" stroke="var(--c-force)" :stroke-width="3.6" />
+        <CourseArrow :from="carCenter" :to="nTip" stroke="var(--c-physics)" :stroke-width="3.6" />
+        <CourseArrow :from="carCenter" :to="fTip" stroke="var(--c-accent)" :stroke-width="4.2" />
         <text
           :x="gTip.x + 12"
           :y="gTip.y - 3"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#f87171"
+          fill="var(--c-force)"
           stroke="#0b1020"
           stroke-width="4"
           paint-order="stroke"
@@ -154,7 +154,7 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
           stroke="#0b1020"
           stroke-width="4"
           paint-order="stroke"
@@ -169,7 +169,7 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           stroke="#0b1020"
           stroke-width="4"
           paint-order="stroke"
@@ -183,17 +183,7 @@ const thetaArc = Array.from({ length: 17 }, (_, i) => {
 </template>
 
 <style scoped>
-.banked {
-  min-width: 0;
-}
-
-.banked svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.vp-hidden {
+.turn-hidden {
   visibility: hidden;
 }
 </style>

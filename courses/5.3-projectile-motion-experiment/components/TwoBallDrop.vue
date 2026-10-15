@@ -68,30 +68,30 @@ const pathD = ((): string => {
       :thickness="12"
       :gap="20"
     />
-    <rect x="96" y="40" width="14" height="222" rx="6" fill="rgba(148,163,184,0.4)" />
+    <rect x="96" y="40" width="14" height="222" rx="6" fill="color-mix(in srgb, var(--c-text-dim) 40%, transparent)" />
     <line
       x1="103"
       y1="78"
       x2="240"
       y2="78"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="5"
       stroke-linecap="round"
     />
-    <rect x="158" y="38" width="30" height="17" rx="5" fill="#94a3b8" />
+    <rect x="158" y="38" width="30" height="17" rx="5" fill="var(--c-text-dim)" />
     <line
       x1="188"
       y1="46"
       x2="226"
       y2="14"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="5"
       stroke-linecap="round"
     />
     <path
       :d="pathD"
       fill="none"
-      stroke="rgba(226,168,70,0.55)"
+      stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)"
       stroke-width="2"
       stroke-dasharray="8 6"
     />
@@ -100,7 +100,7 @@ const pathD = ((): string => {
       :y1="B_START.y"
       :x2="B_START.x"
       :y2="CONTACT_Y"
-      stroke="rgba(96,165,250,0.55)"
+      stroke="color-mix(in srgb, var(--c-velocity) 55%, transparent)"
       stroke-width="2"
       stroke-dasharray="8 6"
     />
@@ -109,7 +109,7 @@ const pathD = ((): string => {
       y1="262"
       :x2="A_START.x + RANGE + 12"
       y2="262"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="2.4"
     />
     <line
@@ -117,17 +117,17 @@ const pathD = ((): string => {
       y1="262"
       :x2="B_START.x + 12"
       y2="262"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       stroke-width="2.4"
     />
-    <circle :cx="ballA.x" :cy="ballA.y" r="11" fill="#e2a846" stroke="#f5d08a" stroke-width="2" />
-    <circle :cx="ballB.x" :cy="ballB.y" r="11" fill="#60a5fa" stroke="#93c5fd" stroke-width="2" />
-    <text :x="ballA.x + 17" :y="ballA.y + 7" font-size="18" font-weight="700" fill="#e2a846">
+    <circle :cx="ballA.x" :cy="ballA.y" r="11" fill="var(--c-accent)" stroke="#f5d08a" stroke-width="2" />
+    <circle :cx="ballB.x" :cy="ballB.y" r="11" fill="var(--c-velocity)" stroke="var(--c-velocity-light)" stroke-width="2" />
+    <text :x="ballA.x + 17" :y="ballA.y + 7" font-size="18" font-weight="700" fill="var(--c-accent)">
       A
     </text>
-    <text :x="ballB.x - 29" :y="ballB.y + 7" font-size="18" font-weight="700" fill="#60a5fa">
+    <text :x="ballB.x - 29" :y="ballB.y + 7" font-size="18" font-weight="700" fill="var(--c-velocity)">
       B
     </text>
-    <text x="132" y="292" text-anchor="middle" font-size="16" fill="#94a3b8">同时落地</text>
+    <text x="132" y="292" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">同时落地</text>
   </svg>
 </template>

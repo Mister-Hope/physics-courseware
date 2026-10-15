@@ -1,106 +1,82 @@
 /* ═══════════════════════════════════════════════
    牛顿第二定律 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式。
+
+   本课自造类统一落在 4 个概念前缀下（见 .agents/notes/style-guide.md §6）：
+   fig-  图文排布（图栏尺寸 / 图窄文宽栅格变体）
+   eq-   公式排版（推导式、两组方程的就地切换）
+   case- 并列案例（两类变力 / 两类突变规律）
+   sim-  交互组件内部（components/SpringBallSim.vue 的 <style scoped>）
+   字号一律走共享阶梯（.text-*），密度走共享的 .stack-dense / .stack-tight；
+   个别密排页再用 §8 的官方旋钮在类作用域收紧 --stack-gap，此处不再私调字号。
    ═══════════════════════════════════════════════ */
 
-/* ── 封面装饰：组件按 width:100% 输出，这里限住它在右下角的尺寸 ── */
+/* ── 封面装饰：共享布局把它放在 `.cover-decoration` 容器里，这里限住它在右下角的尺寸 ── */
 .cover-decoration {
   width: 15rem;
 }
 
-/* ── 例题 / 模型页：左图右文，图撑满所在栏 ── */
-.figure-cell {
+/* ── fig-：示意图撑满所在栏，并按高封顶 ──
+   窄栏里的长图会把正文顶出可用区域；坐标图（.fig-cell-plot）取消封顶 ——
+   它的标注是压在上层的 HTML，缩放会错位。 */
+.fig-cell {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 0;
 }
 
-/* 示意图按高封顶：窄栏里的长图会把正文顶出可用区域。
-   坐标图（.figure-cell-plot）不封顶 —— 它的标注是压在上层的 HTML，缩放会错位。 */
-.figure-cell:not(.figure-cell-plot) svg {
-  max-height: 18.5rem;
+.fig-cell svg {
+  max-height: var(--fig-max-height, 18.5rem);
 }
 
-/* 题干较长的模型页：给文字更宽的栏，减少折行 */
-.half-grid-text {
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+.fig-cell-plot {
+  --fig-max-height: none;
 }
 
-/* ── 推导行、结论式：内容少的页放大字号 ── */
-.lead-formula {
-  font-size: 1.32rem;
+/* 题干较长的模型页：给文字更宽的栏，减少折行（.half-grid 的图窄文宽变体） */
+.fig-text-wide {
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+}
+
+/* 推导行多的密排页（第 7、8、12、13、17 页）：文字栏行数多、一页装不下，
+   但字体不得私调（正文 1rem，见 style-guide §3），所以按 §8 的官方旋钮
+   在**类作用域**里收紧 `--stack-gap`，行距用共享工具类 leading-snug。 */
+.fig-text-dense {
+  --stack-gap: 0.4rem;
+}
+
+/* ── eq-：公式排版 ──
+   内容少的页放大字号走共享阶梯（slides.md 里写 .text-xl），这里只管行距与居中。 */
+.eq-lead {
   line-height: 1.9;
   text-align: center;
 }
 
 /* ── 第 4 页：平面（两式）与空间（三式）两组方程就地切换。
       两组放在同一个网格格里，容器高度取两者较高者，切换时页面不会跳。 ── */
-.cases-swap {
+.eq-swap {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
 }
 
-.cases-swap > * {
+.eq-swap > * {
   grid-area: 1 / 1;
   min-width: 0;
 }
 
-.cases-formula {
-  font-size: 1.22rem;
-  line-height: 1.5;
-}
-
-/* KaTeX 的展示式默认上下各留 1em 外边距，这一页左右两栏并排时太占高度 */
-.cases-formula .katex-display {
-  margin: 0.15em 0;
-}
-
-/* ── 第 24 页：二力杆 / 多力杆两个小示意图（取自 3.1 轻杆模型） ── */
-.fig {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-.fig-cap {
-  color: var(--c-text-dim);
-  font-size: 0.86rem;
-  text-align: center;
-}
-
-.big-formula {
-  color: var(--c-accent);
-  font-size: 2.1rem;
-  text-align: center;
-}
-
-/* ── 第 13 页：两类变力（阻滞下落 / 弹簧）并排 ── */
-.two-cases {
+/* ── case-：并列案例（第 14 页两类变力、第 21 页两类突变规律）── */
+.case-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
 }
 
-.two-cases > * {
+.case-grid > * {
   min-width: 0;
   overflow-wrap: anywhere;
-}
-
-/* ── 第 7、8 页：一个例题要分 5 步慢讲，正文按页收紧一档密度 ── */
-.stack-condensed {
-  gap: 0.36rem;
-  font-size: 0.95rem;
-  line-height: 1.58;
-}
-
-.stack-condensed .ask,
-.stack-condensed .key {
-  font-size: 0.98rem;
-  line-height: 1.58;
 }
 
 .case-item {
@@ -119,14 +95,11 @@
 }
 
 .case-name {
-  color: var(--c-accent-2);
-  font-weight: 700;
-  font-size: 1.05rem;
-}
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
 
-/* ── 第 16 页：v-t 分段说明（六条，行多，必须收紧）── */
-.phase-list {
-  gap: 0.34rem;
-  font-size: 0.86rem;
-  line-height: 1.5;
+  color: var(--c-accent-2);
+
+  font-weight: 700;
 }

@@ -124,7 +124,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
 </script>
 
 <template>
-  <div class="river">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -132,14 +132,14 @@ const resultTip = computed(() => tip(boat.value, result.value));
       aria-label="小船渡河动画"
     >
       <!-- 两岸 -->
-      <rect x="0" y="0" width="760" height="96" fill="rgba(148,163,184,0.14)" />
-      <rect x="0" y="336" width="760" height="74" fill="rgba(148,163,184,0.14)" />
-      <line x1="0" y1="96" x2="760" y2="96" stroke="rgba(203,213,225,0.8)" stroke-width="2.4" />
-      <line x1="0" y1="336" x2="760" y2="336" stroke="rgba(203,213,225,0.8)" stroke-width="2.4" />
-      <text x="24" y="60" font-family="KaTeX_Main" font-size="17" fill="rgba(203,213,225,0.85)">
+      <rect x="0" y="0" width="760" height="96" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
+      <rect x="0" y="336" width="760" height="74" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
+      <line x1="0" y1="96" x2="760" y2="96" stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)" stroke-width="2.4" />
+      <line x1="0" y1="336" x2="760" y2="336" stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)" stroke-width="2.4" />
+      <text x="24" y="60" font-family="KaTeX_Main" font-size="17" fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)">
         对岸
       </text>
-      <text x="24" y="386" font-family="KaTeX_Main" font-size="17" fill="rgba(203,213,225,0.85)">
+      <text x="24" y="386" font-family="KaTeX_Main" font-size="17" fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)">
         出发岸
       </text>
       <!-- 水流 -->
@@ -149,22 +149,22 @@ const resultTip = computed(() => tip(boat.value, result.value));
           :key="i"
           :d="flowXs.map((x) => `M ${x} ${y} l 16 0 M ${x + 10} ${y - 5} l 8 5 l -8 5`).join(' ')"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="1.6"
         />
       </g>
       <!-- 河宽 -->
       <g opacity="0.9">
-        <line x1="62" y1="96" x2="62" y2="336" stroke="rgba(226,168,70,0.9)" stroke-width="2" />
-        <polygon points="62,96 56,110 68,110" fill="rgba(226,168,70,0.9)" />
-        <polygon points="62,336 56,322 68,322" fill="rgba(226,168,70,0.9)" />
+        <line x1="62" y1="96" x2="62" y2="336" stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)" stroke-width="2" />
+        <polygon points="62,96 56,110 68,110" fill="color-mix(in srgb, var(--c-accent) 90%, transparent)" />
+        <polygon points="62,336 56,322 68,322" fill="color-mix(in srgb, var(--c-accent) 90%, transparent)" />
         <text
           x="72"
           y="230"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           d
         </text>
@@ -175,7 +175,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
         :y1="BANK_BOTTOM"
         :x2="landing.x"
         :y2="landing.y"
-        stroke="rgba(148,163,184,0.6)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
         stroke-width="2"
         stroke-dasharray="8 6"
       />
@@ -184,7 +184,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
         :y1="BANK_BOTTOM"
         :x2="boat.x"
         :y2="boat.y"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3.2"
         stroke-linecap="round"
       />
@@ -193,7 +193,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
         :cy="landing.y"
         r="6"
         fill="none"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="2.4"
       />
       <!-- 漂移 -->
@@ -203,7 +203,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
         :y1="366"
         :x2="landing.x"
         :y2="366"
-        stroke="rgba(96,165,250,0.8)"
+        stroke="color-mix(in srgb, var(--c-velocity) 80%, transparent)"
         stroke-width="1.8"
         stroke-dasharray="6 5"
       />
@@ -211,11 +211,11 @@ const resultTip = computed(() => tip(boat.value, result.value));
       <g :transform="`translate(${boat.x} ${boat.y}) rotate(${boatAngle})`">
         <path
           d="M -24 -8 L 14 -8 L 28 0 L 14 8 L -24 8 Z"
-          fill="rgba(96,165,250,0.35)"
-          stroke="#93c5fd"
+          fill="color-mix(in srgb, var(--c-velocity) 35%, transparent)"
+          stroke="var(--c-velocity-light)"
           stroke-width="2.2"
         />
-        <line x1="-24" y1="0" x2="28" y2="0" stroke="rgba(147,197,253,0.8)" stroke-width="1.4" />
+        <line x1="-24" y1="0" x2="28" y2="0" stroke="color-mix(in srgb, var(--c-velocity-light) 80%, transparent)" stroke-width="1.4" />
       </g>
       <!-- 速度矢量 -->
       <g v-if="showVectors">
@@ -223,15 +223,15 @@ const resultTip = computed(() => tip(boat.value, result.value));
           v-if="vWater > 0.02"
           :from="boat"
           :to="waterTip"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           :stroke-width="3"
         />
-        <CourseArrow :from="boat" :to="headTip" stroke="#e2a846" :stroke-width="3.2" />
+        <CourseArrow :from="boat" :to="headTip" stroke="var(--c-accent)" :stroke-width="3.2" />
         <CourseArrow
           v-if="!stuck"
           :from="boat"
           :to="resultTip"
-          stroke="#f87171"
+          stroke="var(--c-force)"
           :stroke-width="3"
           stroke-dasharray="10 5"
         />
@@ -241,7 +241,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">水</tspan>
@@ -252,7 +252,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">船</tspan>
@@ -264,28 +264,28 @@ const resultTip = computed(() => tip(boat.value, result.value));
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">合</tspan>
         </text>
       </g>
     </svg>
-    <div v-if="showPanel" class="river-panel">
+    <div v-if="showPanel" class="sim-panel">
       <label
-        >船在静水中的速度 <span class="river-val">{{ vBoat.toFixed(1) }} m/s</span
+        >船在静水中的速度 <span class="sim-val">{{ vBoat.toFixed(1) }} m/s</span
         ><input v-model.number="vBoat" type="range" min="1" max="3" step="0.1"
       /></label>
       <label
-        >水流速度 <span class="river-val">{{ vWater.toFixed(1) }} m/s</span
+        >水流速度 <span class="sim-val">{{ vWater.toFixed(1) }} m/s</span
         ><input v-model.number="vWater" type="range" min="0" max="2" step="0.1"
       /></label>
       <label
-        >河宽 <span class="river-val">{{ width }} m</span
+        >河宽 <span class="sim-val">{{ width }} m</span
         ><input v-model.number="width" type="range" min="30" max="60" step="5"
       /></label>
     </div>
-    <div class="river-readout">
+    <div class="sim-readout">
       <span v-if="mode === 'time'"
         >船头垂直河岸：t = d / v<sub>船</sub> = {{ timeTotal.toFixed(1) }} s，漂移
         {{ drift.toFixed(1) }} m</span
@@ -307,47 +307,47 @@ const resultTip = computed(() => tip(boat.value, result.value));
 </template>
 
 <style scoped>
-.river {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   min-width: 0;
 }
 
-.river svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.river-panel {
+.sim-panel {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 1.4rem;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-size: 0.78rem;
 }
 
-.river-panel label {
+.sim-panel label {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.river-panel input {
+.sim-panel input {
   width: 6.5rem;
 }
 
-.river-val {
+.sim-val {
   min-width: 3.4rem;
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
   font-variant-numeric: tabular-nums;
 }
 
-.river-readout {
-  color: var(--c-text, #e2e8f0);
+.sim-readout {
+  color: var(--c-text);
   font-size: 0.86rem;
   line-height: 1.35;
   text-align: center;

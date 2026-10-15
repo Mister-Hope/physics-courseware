@@ -130,8 +130,8 @@ onUnmounted(() => cancelAnimationFrame(frame));
 
         <!-- 运动员光晕 -->
         <radialGradient id="runner-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.65" />
-          <stop offset="100%" stop-color="#fbbf24" stop-opacity="0" />
+          <stop offset="0%" stop-color="var(--c-accent-light)" stop-opacity="0.65" />
+          <stop offset="100%" stop-color="var(--c-accent-light)" stop-opacity="0" />
         </radialGradient>
 
         <!-- 实时位移箭头标记 -->
@@ -144,7 +144,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
           orient="auto"
           markerUnits="userSpaceOnUse"
         >
-          <path d="M 0 1 L 7 4 L 0 7 z" fill="#2dd4bf" />
+          <path d="M 0 1 L 7 4 L 0 7 z" fill="var(--c-physics)" />
         </marker>
       </defs>
 
@@ -155,8 +155,8 @@ onUnmounted(() => cancelAnimationFrame(frame));
         width="262"
         height="142"
         rx="71"
-        fill="rgba(148, 163, 184, 0.05)"
-        stroke="rgba(148, 163, 184, 0.16)"
+        fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
         stroke-width="1"
       />
 
@@ -168,7 +168,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         height="130"
         rx="65"
         fill="url(#track-surface-grad)"
-        stroke="rgba(248, 113, 113, 0.48)"
+        stroke="color-mix(in srgb, var(--c-force) 48%, transparent)"
         stroke-width="1.6"
       />
 
@@ -180,7 +180,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         height="115"
         rx="57.5"
         fill="none"
-        stroke="rgba(241, 245, 249, 0.16)"
+        stroke="color-mix(in srgb, var(--c-text) 16%, transparent)"
         stroke-width="0.9"
       />
       <rect
@@ -190,7 +190,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         height="100"
         rx="50"
         fill="none"
-        stroke="rgba(241, 245, 249, 0.2)"
+        stroke="color-mix(in srgb, var(--c-text) 20%, transparent)"
         stroke-width="0.9"
         stroke-dasharray="4 4"
       />
@@ -201,7 +201,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         height="85"
         rx="42.5"
         fill="none"
-        stroke="rgba(241, 245, 249, 0.16)"
+        stroke="color-mix(in srgb, var(--c-text) 16%, transparent)"
         stroke-width="0.9"
       />
 
@@ -213,12 +213,12 @@ onUnmounted(() => cancelAnimationFrame(frame));
         height="70"
         rx="35"
         fill="url(#infield-turf-grad)"
-        stroke="rgba(241, 245, 249, 0.42)"
+        stroke="color-mix(in srgb, var(--c-text) 42%, transparent)"
         stroke-width="1.5"
       />
 
       <!-- 内场装饰：直弯道交界虚线 (x=120, x=240) 与中圈 -->
-      <g stroke="rgba(148, 163, 184, 0.16)" stroke-width="1" fill="none">
+      <g stroke="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" stroke-width="1" fill="none">
         <line x1="120" y1="65" x2="120" y2="135" stroke-dasharray="3 3" />
         <line x1="240" y1="65" x2="240" y2="135" stroke-dasharray="3 3" />
         <circle cx="180" cy="100" r="18" opacity="0.5" />
@@ -229,7 +229,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
         v-if="progress > 0"
         :d="LANE_PATH"
         fill="none"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3.6"
         stroke-linecap="round"
         :stroke-dasharray="traveledDash"
@@ -243,14 +243,14 @@ onUnmounted(() => cancelAnimationFrame(frame));
           y1="50"
           x2="134"
           y2="50"
-          stroke="#f8fafc"
+          stroke="var(--c-neutral-50)"
           stroke-width="1.4"
           stroke-linecap="round"
         />
         <path
           d="M 139 47 L 134 50 L 139 53"
           fill="none"
-          stroke="#f8fafc"
+          stroke="var(--c-neutral-50)"
           stroke-width="1.4"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -260,13 +260,13 @@ onUnmounted(() => cancelAnimationFrame(frame));
       <!-- 起 / 终点线：放在左端直道与弯道的交界切点 x = 120 -->
       <g>
         <!-- 黑白格终点线质感 -->
-        <line x1="120" y1="35" x2="120" y2="65" stroke="#f8fafc" stroke-width="3.4" />
+        <line x1="120" y1="35" x2="120" y2="65" stroke="var(--c-neutral-50)" stroke-width="3.4" />
         <line
           x1="120"
           y1="35"
           x2="120"
           y2="65"
-          stroke="#0f172a"
+          stroke="var(--c-neutral-900)"
           stroke-width="2"
           stroke-dasharray="3.75 3.75"
         />
@@ -276,21 +276,21 @@ onUnmounted(() => cancelAnimationFrame(frame));
           y1="35"
           x2="120"
           y2="20"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.5"
           stroke-linecap="round"
         />
-        <path d="M 120 20 L 130 23.5 L 120 27 Z" fill="#e2a846" />
-        <text x="114" y="26" text-anchor="end" font-size="12" font-weight="600" fill="#e2a846">
+        <path d="M 120 20 L 130 23.5 L 120 27 Z" fill="var(--c-accent)" />
+        <text x="114" y="26" text-anchor="end" font-size="12" font-weight="600" fill="var(--c-accent)">
           起 / 终点
         </text>
       </g>
 
       <!-- 内场中央文字标注 -->
-      <text x="180" y="96" text-anchor="middle" font-size="13.5" font-weight="600" fill="#cbd5e1">
+      <text x="180" y="96" text-anchor="middle" font-size="13.5" font-weight="600" fill="var(--c-neutral-300)">
         400 m 跑道
       </text>
-      <text x="180" y="116" text-anchor="middle" font-size="11.5" fill="#94a3b8">
+      <text x="180" y="116" text-anchor="middle" font-size="11.5" fill="var(--c-text-dim)">
         55 s 跑完一圈
       </text>
 
@@ -301,12 +301,12 @@ onUnmounted(() => cancelAnimationFrame(frame));
           :y1="START_POINT.y"
           :x2="runner.x"
           :y2="runner.y"
-          stroke="#2dd4bf"
+          stroke="var(--c-physics)"
           stroke-width="1.8"
           stroke-dasharray="4 3"
           marker-end="url(#disp-arrow-head)"
         />
-        <circle :cx="START_POINT.x" :cy="START_POINT.y" r="3" fill="#2dd4bf" />
+        <circle :cx="START_POINT.x" :cy="START_POINT.y" r="3" fill="var(--c-physics)" />
       </g>
 
       <!-- 运动员（俯视动感跑者：发光呼吸圈 + 尾迹 + 摆臂双肩 + 躯干 + 头部） -->
@@ -321,14 +321,14 @@ onUnmounted(() => cancelAnimationFrame(frame));
           cy="0"
           r="9.5"
           fill="none"
-          stroke="#fbbf24"
+          stroke="var(--c-accent-light)"
           stroke-width="1.2"
           stroke-dasharray="3 2"
           opacity="0.7"
         />
 
         <!-- 奔跑时的速度残影尾迹 -->
-        <g v-if="running" stroke="#fbbf24" stroke-linecap="round" opacity="0.65">
+        <g v-if="running" stroke="var(--c-accent-light)" stroke-linecap="round" opacity="0.65">
           <line x1="-13" y1="-3.5" x2="-6" y2="-3.5" stroke-width="1.4" />
           <line x1="-16" y1="0" x2="-7" y2="0" stroke-width="1.6" />
           <line x1="-13" y1="3.5" x2="-6" y2="3.5" stroke-width="1.4" />
@@ -340,7 +340,7 @@ onUnmounted(() => cancelAnimationFrame(frame));
           y1="-6.2"
           :x2="-strideSwing"
           y2="6.2"
-          stroke="#f8fafc"
+          stroke="var(--c-neutral-50)"
           stroke-width="2.4"
           stroke-linecap="round"
         />
@@ -352,14 +352,14 @@ onUnmounted(() => cancelAnimationFrame(frame));
           width="7.2"
           height="11.6"
           rx="3.6"
-          fill="#e2a846"
-          stroke="#0f172a"
+          fill="var(--c-accent)"
+          stroke="var(--c-neutral-900)"
           stroke-width="1.2"
         />
 
         <!-- 跑者头部与朝向帽檐 -->
         <path d="M 1 -2.8 L 5.2 0 L 1 2.8 Z" fill="#fef08a" />
-        <circle cx="0.6" cy="0" r="3.3" fill="#fef08a" stroke="#0f172a" stroke-width="1.2" />
+        <circle cx="0.6" cy="0" r="3.3" fill="#fef08a" stroke="var(--c-neutral-900)" stroke-width="1.2" />
       </g>
 
       <!-- 底部轻提示 / 完成一圈结论提示 -->

@@ -101,12 +101,12 @@ const V_LEN = 72;
         :width="FIELD.width"
         :height="FIELD.height"
         fill="none"
-        stroke="rgba(226,168,70,0.65)"
+        stroke="color-mix(in srgb, var(--c-accent) 65%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="8 6"
       />
       <!-- ⊗ 记号阵列：垂直纸面向里（只在磁场区内） -->
-      <g fill="none" stroke="rgba(226,168,70,0.55)" stroke-width="1.4" stroke-linecap="round">
+      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)" stroke-width="1.4" stroke-linecap="round">
         <template v-for="m in MARKS" :key="m.key">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -124,15 +124,15 @@ const V_LEN = 72;
         </template>
       </g>
       <!-- 坐标系 -->
-      <CourseArrow :from="O" :to="{ x: AXIS_X_END, y: OY }" stroke="#94a3b8" stroke-width="2.4" />
-      <CourseArrow :from="O" :to="{ x: OX, y: AXIS_Y_END }" stroke="#94a3b8" stroke-width="2.4" />
+      <CourseArrow :from="O" :to="{ x: AXIS_X_END, y: OY }" stroke="var(--c-text-dim)" stroke-width="2.4" />
+      <CourseArrow :from="O" :to="{ x: OX, y: AXIS_Y_END }" stroke="var(--c-text-dim)" stroke-width="2.4" />
       <text
         x="670"
         y="414"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         x
       </text>
@@ -142,7 +142,7 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         y
       </text>
@@ -153,7 +153,7 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         O
       </text>
@@ -161,13 +161,13 @@ const V_LEN = 72;
       <CourseArrow
         :from="{ x: DIM_A_X, y: DIM_MID_Y }"
         :to="{ x: DIM_A_X, y: A.y }"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2"
       />
       <CourseArrow
         :from="{ x: DIM_A_X, y: DIM_MID_Y }"
         :to="{ x: DIM_A_X, y: OY }"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2"
       />
       <text
@@ -177,7 +177,7 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         a
       </text>
@@ -185,13 +185,13 @@ const V_LEN = 72;
       <CourseArrow
         :from="{ x: DIM_MID_X, y: DIM_B_Y }"
         :to="{ x: OX, y: DIM_B_Y }"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2"
       />
       <CourseArrow
         :from="{ x: DIM_MID_X, y: DIM_B_Y }"
         :to="{ x: B.x, y: DIM_B_Y }"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2"
       />
       <text
@@ -201,7 +201,7 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         b
       </text>
@@ -210,13 +210,13 @@ const V_LEN = 72;
         v-if="showPath"
         :d="ARC"
         fill="none"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="3.2"
         stroke-linecap="round"
       />
       <!-- A、B 两点与标注 -->
-      <circle :cx="A.x" :cy="A.y" r="5.5" fill="#f8fafc" />
-      <circle :cx="B.x" :cy="B.y" r="5.5" fill="#f8fafc" />
+      <circle :cx="A.x" :cy="A.y" r="5.5" fill="var(--c-neutral-50)" />
+      <circle :cx="B.x" :cy="B.y" r="5.5" fill="var(--c-neutral-50)" />
       <text
         x="140"
         y="148"
@@ -224,8 +224,8 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#f8fafc"
-        stroke="#0f1425"
+        fill="var(--c-neutral-50)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -237,15 +237,15 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#f8fafc"
-        stroke="#0f1425"
+        fill="var(--c-neutral-50)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
         B
       </text>
       <!-- A 处沿 +x 的入射速度 v0 -->
-      <CourseArrow :from="A" :to="{ x: A.x + V_LEN, y: A.y }" stroke="#60a5fa" stroke-width="4.2" />
+      <CourseArrow :from="A" :to="{ x: A.x + V_LEN, y: A.y }" stroke="var(--c-velocity)" stroke-width="4.2" />
       <text
         x="211"
         y="138"
@@ -253,8 +253,8 @@ const V_LEN = 72;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#60a5fa"
-        stroke="#0f1425"
+        fill="var(--c-velocity)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -268,7 +268,7 @@ const V_LEN = 72;
           :y1="C.y"
           :x2="A.x"
           :y2="A.y"
-          stroke="#e2e8f0"
+          stroke="var(--c-neutral-200)"
           stroke-width="2.6"
           stroke-dasharray="9 7"
         />
@@ -277,7 +277,7 @@ const V_LEN = 72;
           :y1="C.y"
           :x2="B.x"
           :y2="B.y"
-          stroke="#e2e8f0"
+          stroke="var(--c-neutral-200)"
           stroke-width="2.6"
           stroke-dasharray="9 7"
         />
@@ -286,17 +286,17 @@ const V_LEN = 72;
           :y1="C.y"
           :x2="O.x"
           :y2="O.y"
-          stroke="#e2e8f0"
+          stroke="var(--c-neutral-200)"
           stroke-width="2.6"
           stroke-dasharray="9 7"
         />
         <path
           :d="`M ${O.x} ${O.y - 18} L ${O.x + 18} ${O.y - 18} L ${O.x + 18} ${O.y}`"
           fill="none"
-          stroke="rgba(226,232,240,0.5)"
+          stroke="color-mix(in srgb, var(--c-neutral-200) 50%, transparent)"
           stroke-width="1.8"
         />
-        <circle :cx="C.x" :cy="C.y" r="5" fill="#e2e8f0" />
+        <circle :cx="C.x" :cy="C.y" r="5" fill="var(--c-neutral-200)" />
         <text
           x="140"
           y="337"
@@ -304,8 +304,8 @@ const V_LEN = 72;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#e2e8f0"
-          stroke="#0f1425"
+          fill="var(--c-neutral-200)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -318,8 +318,8 @@ const V_LEN = 72;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#e2e8f0"
-          stroke="#0f1425"
+          fill="var(--c-neutral-200)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -332,8 +332,8 @@ const V_LEN = 72;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#e2e8f0"
-          stroke="#0f1425"
+          fill="var(--c-neutral-200)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -346,8 +346,8 @@ const V_LEN = 72;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#e2e8f0"
-          stroke="#0f1425"
+          fill="var(--c-neutral-200)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >

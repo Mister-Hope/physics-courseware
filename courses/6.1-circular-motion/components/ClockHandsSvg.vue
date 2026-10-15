@@ -34,9 +34,9 @@ const hourLabel = toXY(192, 86);
     <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="currentColor" stroke-width="2.6" opacity="0.55" />
     <line v-for="(t, i) in ticks" :key="i" :x1="t.x1" :y1="t.y1" :x2="t.x2" :y2="t.y2" stroke="currentColor" stroke-width="2" opacity="0.45" />
     <line :x1="O.x" :y1="O.y" :x2="hourTip.x" :y2="hourTip.y" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" opacity="0.8" />
-    <line :x1="O.x" :y1="O.y" :x2="minTip.x" :y2="minTip.y" stroke="#e2a846" stroke-width="4" stroke-linecap="round" />
+    <line :x1="O.x" :y1="O.y" :x2="minTip.x" :y2="minTip.y" stroke="var(--c-accent)" stroke-width="4" stroke-linecap="round" />
     <circle :cx="O.x" :cy="O.y" r="5" fill="currentColor" opacity="0.85" />
-    <text :x="minLabel.x" :y="minLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Main" fill="#e2a846">分针</text>
+    <text :x="minLabel.x" :y="minLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Main" fill="var(--c-accent)">分针</text>
     <text :x="hourLabel.x" :y="hourLabel.y" text-anchor="middle" font-size="17" font-family="KaTeX_Main" fill="currentColor" opacity="0.85">时针</text>
   </svg>
 </template>

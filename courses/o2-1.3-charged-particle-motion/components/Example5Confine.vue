@@ -83,11 +83,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
         :cx="O.x"
         :cy="O.y"
         :r="R"
-        fill="rgba(226,168,70,0.07)"
-        stroke="rgba(226,168,70,0.7)"
+        fill="color-mix(in srgb, var(--c-accent) 7%, transparent)"
+        stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
         stroke-width="2.2"
       />
-      <g fill="none" stroke="rgba(226,168,70,0.5)" stroke-width="1.3" stroke-linecap="round">
+      <g fill="none" stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)" stroke-width="1.3" stroke-linecap="round">
         <template v-for="(m, i) in MARKS" :key="`b${i}`">
           <circle :cx="m.x" :cy="m.y" :r="MARK_R" />
           <line
@@ -108,11 +108,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
       <path
         :d="opPath"
         fill="none"
-        stroke="rgba(203,213,225,0.5)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 50%, transparent)"
         stroke-width="1.8"
         stroke-dasharray="8 7"
       />
-      <circle :cx="O.x" :cy="O.y" r="4" fill="#cbd5e1" />
+      <circle :cx="O.x" :cy="O.y" r="4" fill="var(--c-neutral-300)" />
       <text
         v-bind="HALO"
         :x="O.x + 14"
@@ -120,11 +120,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         O
       </text>
-      <circle :cx="P.x" :cy="P.y" r="5.6" fill="#f8fafc" />
+      <circle :cx="P.x" :cy="P.y" r="5.6" fill="var(--c-neutral-50)" />
       <text
         v-bind="HALO"
         :x="P.x - 14"
@@ -132,7 +132,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         P
       </text>
@@ -143,7 +143,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         R
       </text>
@@ -154,7 +154,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :cy="C_SMALL.y"
           :r="R_SMALL"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="3.4"
         />
         <circle
@@ -162,14 +162,14 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :cy="SPIN_CY"
           :r="SPIN_R"
           fill="none"
-          stroke="rgba(96,165,250,0.35)"
+          stroke="color-mix(in srgb, var(--c-velocity) 35%, transparent)"
           stroke-width="1.6"
           stroke-dasharray="5 6"
         />
         <CourseArrow
           :from="{ x: SPIN_CX, y: SPIN_CY - SPIN_R }"
           :to="{ x: SPIN_CX + SPIN_R, y: SPIN_CY }"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="3"
         />
         <text
@@ -179,7 +179,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           r
         </text>
@@ -191,7 +191,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :cy="C_BIG.y"
           :r="R_BIG"
           fill="none"
-          stroke="rgba(248,113,113,0.85)"
+          stroke="color-mix(in srgb, var(--c-force) 85%, transparent)"
           stroke-width="3"
           stroke-dasharray="11 8"
         />
@@ -202,7 +202,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           r′
         </text>

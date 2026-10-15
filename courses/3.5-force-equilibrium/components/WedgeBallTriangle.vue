@@ -158,15 +158,15 @@ const endDrag = (): void => {
         />
         <polygon
           :points="`${WALL_X},${GROUND_Y} ${apex.x},${apex.y} ${apex.x},${GROUND_Y}`"
-          fill="rgba(148,163,184,0.14)"
-          stroke="#94a3b8"
+          fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.8"
         />
-        <path :d="thetaArc" fill="none" stroke="#e2a846" stroke-width="1.8" />
+        <path :d="thetaArc" fill="none" stroke="var(--c-accent)" stroke-width="1.8" />
         <text
           :x="WALL_X + 34"
           :y="GROUND_Y - 8"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
@@ -177,23 +177,23 @@ const endDrag = (): void => {
           :cx="ball.x"
           :cy="ball.y"
           :r="BALL_R"
-          fill="rgba(96,165,250,0.22)"
-          stroke="#60a5fa"
+          fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+          stroke="var(--c-velocity)"
           stroke-width="2.4"
         />
-        <circle :cx="ball.x" :cy="ball.y" r="3.4" fill="#60a5fa" />
+        <circle :cx="ball.x" :cy="ball.y" r="3.4" fill="var(--c-velocity)" />
         <g v-click="1">
           <CourseArrow
             :from="{ x: ball.x, y: ball.y }"
             :to="forceTips.g"
             :head-size="12"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="3.6"
           />
           <text
             :x="forceTips.g.x + 9"
             :y="forceTips.g.y - 5"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="20"
@@ -204,13 +204,13 @@ const endDrag = (): void => {
             :from="{ x: ball.x, y: ball.y }"
             :to="forceTips.normal1"
             :head-size="12"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="3.6"
           />
           <text
             :x="forceTips.normal1.x + 7"
             :y="forceTips.normal1.y - 10"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="20"
@@ -220,7 +220,7 @@ const endDrag = (): void => {
           <text
             :x="forceTips.normal1.x + 20"
             :y="forceTips.normal1.y - 5"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="13"
@@ -231,13 +231,13 @@ const endDrag = (): void => {
             :from="{ x: ball.x, y: ball.y }"
             :to="forceTips.normal2"
             :head-size="12"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="3.6"
           />
           <text
             :x="forceTips.normal2.x - 42"
             :y="forceTips.normal2.y + 20"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="20"
@@ -247,7 +247,7 @@ const endDrag = (): void => {
           <text
             :x="forceTips.normal2.x - 29"
             :y="forceTips.normal2.y + 25"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="13"
@@ -260,44 +260,44 @@ const endDrag = (): void => {
           :cy="apex.y"
           r="26"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
           @pointercancel="endDrag"
         />
-        <circle :cx="apex.x" :cy="apex.y" r="9" fill="#e2a846" opacity="0.85" />
+        <circle :cx="apex.x" :cy="apex.y" r="9" fill="var(--c-accent)" opacity="0.85" />
       </svg>
     </div>
 
-    <div class="wb-tri" :class="{ 'fe-hidden': step < 2 }">
+    <div class="wb-tri" :class="{ 'fig-hold': step < 2 }">
       <svg :viewBox="`0 0 ${TRI.width} ${TRI.height}`" xmlns="http://www.w3.org/2000/svg">
         <CourseArrow
           :from="tri.vertexA"
           :to="tri.vertexB"
           :head-size="12"
-          stroke="#f87171"
+          stroke="var(--c-force)"
           stroke-width="3.6"
         />
         <CourseArrow
           :from="tri.vertexB"
           :to="tri.vertexC"
           :head-size="12"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="3.6"
         />
         <CourseArrow
           :from="tri.vertexC"
           :to="tri.vertexA"
           :head-size="12"
-          stroke="#2dd4bf"
+          stroke="var(--c-physics)"
           stroke-width="3.6"
         />
-        <path :d="triThetaArc" fill="none" stroke="#e2a846" stroke-width="1.6" />
+        <path :d="triThetaArc" fill="none" stroke="var(--c-accent)" stroke-width="1.6" />
         <text
           x="16"
           y="96"
-          fill="#f87171"
+          fill="var(--c-force)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
@@ -307,7 +307,7 @@ const endDrag = (): void => {
         <text
           :x="(tri.vertexB.x + tri.vertexC.x) / 2 - 14"
           :y="tri.vertexB.y + 30"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
@@ -317,7 +317,7 @@ const endDrag = (): void => {
         <text
           :x="(tri.vertexB.x + tri.vertexC.x) / 2 - 1"
           :y="tri.vertexB.y + 34"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="13"
@@ -327,7 +327,7 @@ const endDrag = (): void => {
         <text
           :x="(tri.vertexA.x + tri.vertexC.x) / 2 + 8"
           :y="(tri.vertexA.y + tri.vertexC.y) / 2 - 12"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
@@ -337,7 +337,7 @@ const endDrag = (): void => {
         <text
           :x="(tri.vertexA.x + tri.vertexC.x) / 2 + 21"
           :y="(tri.vertexA.y + tri.vertexC.y) / 2 - 7"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="13"
@@ -347,13 +347,13 @@ const endDrag = (): void => {
         <path
           :d="`M ${tri.vertexB.x + 14} ${tri.vertexB.y} L ${tri.vertexB.x + 14} ${tri.vertexB.y - 14} L ${tri.vertexB.x} ${tri.vertexB.y - 14}`"
           fill="none"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.5"
         />
         <text
           :x="TRI_ORIGIN.x + 40"
           :y="TRI_ORIGIN.y + 22"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"

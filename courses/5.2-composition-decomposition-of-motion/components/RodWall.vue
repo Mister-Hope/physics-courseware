@@ -68,7 +68,7 @@ const arcRadius = 66;
 </script>
 
 <template>
-  <div class="rod-wall">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const arcRadius = 66;
         :y1="topEnd.y"
         :x2="bottomEnd.x"
         :y2="bottomEnd.y"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="6"
         stroke-linecap="round"
       />
@@ -104,14 +104,14 @@ const arcRadius = 66;
         :y1="GROUND_Y"
         :x2="bottomEnd.x - 200"
         :y2="GROUND_Y"
-        stroke="rgba(148,163,184,0.6)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="7 6"
       />
       <path
         :d="`M ${bottomEnd.x - arcRadius} ${GROUND_Y} A ${arcRadius} ${arcRadius} 0 0 1 ${bottomEnd.x - arcRadius * cosT} ${GROUND_Y - arcRadius * sinT}`"
         fill="none"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2"
       />
       <text
@@ -120,20 +120,20 @@ const arcRadius = 66;
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         θ
       </text>
       <!-- 速度与沿杆分量 -->
       <g v-if="showDecomp">
-        <CourseArrow :from="bottomEnd" :to="bTip" stroke="#60a5fa" :stroke-width="3.4" />
-        <CourseArrow :from="topEnd" :to="aTip" stroke="#f87171" :stroke-width="3.4" />
+        <CourseArrow :from="bottomEnd" :to="bTip" stroke="var(--c-velocity)" :stroke-width="3.4" />
+        <CourseArrow :from="topEnd" :to="aTip" stroke="var(--c-force)" :stroke-width="3.4" />
         <line
           :x1="aPerp.from.x"
           :y1="aPerp.from.y"
           :x2="aPerp.to.x"
           :y2="aPerp.to.y"
-          stroke="rgba(148,163,184,0.8)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
@@ -142,19 +142,19 @@ const arcRadius = 66;
           :y1="bPerp.from.y"
           :x2="bPerp.to.x"
           :y2="bPerp.to.y"
-          stroke="rgba(148,163,184,0.8)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
-        <CourseArrow :from="bShare.from" :to="bShare.to" stroke="#e2a846" :stroke-width="3.2" />
-        <CourseArrow :from="aShare.from" :to="aShare.to" stroke="#e2a846" :stroke-width="3.2" />
+        <CourseArrow :from="bShare.from" :to="bShare.to" stroke="var(--c-accent)" :stroke-width="3.2" />
+        <CourseArrow :from="aShare.from" :to="aShare.to" stroke="var(--c-accent)" :stroke-width="3.2" />
         <text
           :x="bTip.x + 8"
           :y="bottomEnd.y - 12"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
         </text>
@@ -164,7 +164,7 @@ const arcRadius = 66;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           u
         </text>
@@ -174,63 +174,63 @@ const arcRadius = 66;
           text-anchor="start"
           font-family="KaTeX_Main"
           font-size="14"
-          fill="rgba(226,168,70,0.95)"
+          fill="color-mix(in srgb, var(--c-accent) 95%, transparent)"
         >
           两端沿杆分量相等
         </text>
       </g>
     </svg>
-    <div v-if="showPanel" class="rod-panel">
+    <div v-if="showPanel" class="sim-panel">
       <label
-        >杆与地面的夹角 <span class="rod-val">{{ theta }}°</span
+        >杆与地面的夹角 <span class="sim-val">{{ theta }}°</span
         ><input v-model.number="theta" type="range" min="35" max="70" step="1"
       /></label>
     </div>
-    <div v-if="readout" class="rod-readout">
+    <div v-if="readout" class="sim-readout">
       u = v·cot θ = <b>{{ upperSpeed.toFixed(2) }} v</b>
     </div>
   </div>
 </template>
 
 <style scoped>
-.rod-wall {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
-.rod-wall svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.rod-panel {
+.sim-panel {
   display: flex;
   justify-content: center;
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
   font-size: 0.8rem;
 }
 
-.rod-panel label {
+.sim-panel label {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.rod-panel input {
+.sim-panel input {
   width: 8rem;
 }
 
-.rod-val {
+.sim-val {
   min-width: 2.6rem;
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
   font-variant-numeric: tabular-nums;
 }
 
-.rod-readout {
-  color: var(--c-text, #e2e8f0);
+.sim-readout {
+  color: var(--c-text);
   font-size: 0.95rem;
   text-align: center;
 }

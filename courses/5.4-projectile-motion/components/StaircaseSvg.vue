@@ -67,13 +67,13 @@ const stairPath = stairPoints.map((point, i) => `${i === 0 ? "M" : "L"} ${point.
           </text>
         </g>
       </g>
-      <CourseArrow :from="origin" :to="{ x: 170, y: 180 }" stroke="#60a5fa" :stroke-width="3.2" />
-      <text x="106" y="164" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#93c5fd">
+      <CourseArrow :from="origin" :to="{ x: 170, y: 180 }" stroke="var(--c-velocity)" :stroke-width="3.2" />
+      <text x="106" y="164" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-velocity-light)">
         v
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4">0</tspan>
       </text>
-      <circle :cx="origin.x" :cy="origin.y" r="6" fill="#e2e8f0" />
-      <text x="54" y="188" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="#e2e8f0">O</text>
+      <circle :cx="origin.x" :cy="origin.y" r="6" fill="var(--c-neutral-200)" />
+      <text x="54" y="188" font-family="KaTeX_Math" font-style="italic" font-size="22" fill="var(--c-neutral-200)">O</text>
     </svg>
   </div>
 </template>

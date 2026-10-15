@@ -15,15 +15,15 @@
     <defs>
       <!-- 匀强磁场区域半透明柔和底色渐变 -->
       <linearGradient id="ed-b-field" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="rgba(226,168,70,0.08)" />
-        <stop offset="100%" stop-color="rgba(226,168,70,0.03)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-accent) 8%, transparent)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-accent) 3%, transparent)" />
       </linearGradient>
 
       <!-- 立体球状电子质感径向渐变 -->
       <radialGradient id="ed-electron-3d" cx="35%" cy="35%" r="65%">
-        <stop offset="0%" stop-color="#93c5fd" />
-        <stop offset="35%" stop-color="#60a5fa" />
-        <stop offset="75%" stop-color="#2563eb" />
+        <stop offset="0%" stop-color="var(--c-velocity-light)" />
+        <stop offset="35%" stop-color="var(--c-velocity)" />
+        <stop offset="75%" stop-color="var(--c-accent-2-glow)" />
         <stop offset="100%" stop-color="#1e40af" />
       </radialGradient>
 
@@ -46,7 +46,7 @@
       height="136"
       rx="14"
       fill="url(#ed-b-field)"
-      stroke="rgba(226,168,70,0.38)"
+      stroke="color-mix(in srgb, var(--c-accent) 38%, transparent)"
       stroke-width="1.6"
       stroke-dasharray="7 6"
     />
@@ -60,7 +60,7 @@
       font-style="italic"
       font-size="14"
       font-weight="700"
-      fill="#e2a846"
+      fill="var(--c-accent)"
     >
       B
     </text>
@@ -70,7 +70,7 @@
       列 X: 136, 176, 216
       行 Y: 50, 92, 134
     -->
-    <g fill="#e2a846">
+    <g fill="var(--c-accent)">
       <!-- 行 1 -->
       <circle cx="136" cy="50" r="3.2" />
       <circle cx="176" cy="50" r="3.2" />
@@ -92,7 +92,7 @@
       y1="142"
       x2="104"
       y2="142"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="2.4"
       stroke-dasharray="6 5"
       stroke-linecap="round"
@@ -103,7 +103,7 @@
     <path
       d="M 104 142 A 103 103 0 0 0 200 76"
       fill="none"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="2.4"
       stroke-dasharray="6 5"
       stroke-linecap="round"
@@ -115,7 +115,7 @@
     <CourseArrow
       :from="{ x: 161, y: 124 }"
       :to="{ x: 132, y: 81 }"
-      stroke="#2dd4bf"
+      stroke="var(--c-physics)"
       :stroke-width="3.4"
     />
     <text
@@ -126,8 +126,8 @@
       font-style="italic"
       font-size="18"
       font-weight="700"
-      fill="#2dd4bf"
-      stroke="#0f1425"
+      fill="var(--c-physics)"
+      stroke="var(--c-bg-soft)"
       stroke-width="3"
       paint-order="stroke"
     >
@@ -137,9 +137,9 @@
     <!-- ==================== 4. 磁场中飞行的单电子（立体微球质感 + 高光 + 负电荷「−」） ==================== -->
     <g transform="translate(161, 124)">
       <!-- 柔和微光外晕 -->
-      <circle cx="0" cy="0" r="8.5" fill="rgba(96,165,250,0.3)" filter="url(#ed-glow)" />
+      <circle cx="0" cy="0" r="8.5" fill="color-mix(in srgb, var(--c-velocity) 30%, transparent)" filter="url(#ed-glow)" />
       <!-- 球体本体 (带径向立体球状明暗) -->
-      <circle cx="0" cy="0" r="6" fill="url(#ed-electron-3d)" stroke="#93c5fd" stroke-width="0.9" />
+      <circle cx="0" cy="0" r="6" fill="url(#ed-electron-3d)" stroke="var(--c-velocity-light)" stroke-width="0.9" />
       <!-- 球面偏心高光点 -->
       <circle cx="-2" cy="-2" r="1.6" fill="#ffffff" opacity="0.9" />
       <!-- 负电荷「−」符号 -->

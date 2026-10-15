@@ -165,7 +165,7 @@ const endDrag = (): void => {
     <!-- ==================== 1. 左侧固定支座与右侧 L 形墙角结构（全部复用 SurfaceHatch 组件） ==================== -->
     <!-- 左侧固定天花板支座 -->
     <SurfaceHatch :from="{ x: 20, y: 40 }" :to="{ x: 76, y: 40 }" side="above" color="#64748b" :line-width="2.4" :thickness="11" :gap="14" />
-    <circle :cx="LEFT_ANCHOR.x" :cy="LEFT_ANCHOR.y" r="4.2" fill="#94a3b8" stroke="#0f1425" stroke-width="1.4" />
+    <circle :cx="LEFT_ANCHOR.x" :cy="LEFT_ANCHOR.y" r="4.2" fill="var(--c-text-dim)" stroke="var(--c-bg-soft)" stroke-width="1.4" />
 
     <!-- 右上角 L 形墙角：竖直墙面（B → A 向上移动段） -->
     <SurfaceHatch
@@ -189,13 +189,13 @@ const endDrag = (): void => {
     />
 
     <!-- 左侧悬挂点与 A 点等高水平参考虚线（y = 40） -->
-    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="POINT_A.x" :y2="POINT_A.y" stroke="#64748b" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.45" />
+    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="POINT_A.x" :y2="POINT_A.y" stroke="var(--c-neutral-500)" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.45" />
 
     <!-- L 形墙角滑轨亮色引导虚线（A — B — C） -->
     <polyline
       :points="`${POINT_A.x},${POINT_A.y} ${POINT_B.x},${POINT_B.y} ${POINT_C.x},${POINT_C.y}`"
       fill="none"
-      stroke="rgba(226,168,70,0.45)"
+      stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)"
       stroke-width="2.2"
       stroke-dasharray="4 4"
       stroke-linecap="round"
@@ -203,20 +203,20 @@ const endDrag = (): void => {
     />
 
     <!-- 三个关键位置点位标记（最高点 A、墙角点 B、最右点 C） -->
-    <circle :cx="POINT_A.x" :cy="POINT_A.y" r="3.2" fill="#1e293b" stroke="#e2a846" stroke-width="1.5" />
-    <circle :cx="POINT_B.x" :cy="POINT_B.y" r="3.2" fill="#1e293b" stroke="#e2a846" stroke-width="1.5" />
-    <circle :cx="POINT_C.x" :cy="POINT_C.y" r="3.2" fill="#1e293b" stroke="#e2a846" stroke-width="1.5" />
+    <circle :cx="POINT_A.x" :cy="POINT_A.y" r="3.2" fill="var(--c-surface-solid)" stroke="var(--c-accent)" stroke-width="1.5" />
+    <circle :cx="POINT_B.x" :cy="POINT_B.y" r="3.2" fill="var(--c-surface-solid)" stroke="var(--c-accent)" stroke-width="1.5" />
+    <circle :cx="POINT_C.x" :cy="POINT_C.y" r="3.2" fill="var(--c-surface-solid)" stroke="var(--c-accent)" stroke-width="1.5" />
 
     <text
       :x="POINT_A.x - 14"
       :y="POINT_A.y - 10"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="15"
       text-anchor="middle"
       dominant-baseline="central"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3"
       paint-order="stroke"
     >
@@ -225,13 +225,13 @@ const endDrag = (): void => {
     <text
       :x="POINT_B.x + 4"
       :y="POINT_B.y + 16"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="15"
       text-anchor="middle"
       dominant-baseline="central"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3"
       paint-order="stroke"
     >
@@ -240,13 +240,13 @@ const endDrag = (): void => {
     <text
       :x="POINT_C.x + 4"
       :y="POINT_C.y + 16"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="15"
       text-anchor="middle"
       dominant-baseline="central"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3"
       paint-order="stroke"
     >
@@ -255,18 +255,18 @@ const endDrag = (): void => {
 
     <!-- ==================== 2. 轻绳、竖直参考虚线、夹角 α/β 与动滑轮重物 ==================== -->
     <!-- 两侧轻绳 -->
-    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="pointP.x" :y2="pointP.y" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
-    <line :x1="pointP.x" :y1="pointP.y" :x2="bx" :y2="by" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" />
+    <line :x1="LEFT_ANCHOR.x" :y1="LEFT_ANCHOR.y" :x2="pointP.x" :y2="pointP.y" stroke="var(--c-neutral-300)" stroke-width="2.2" stroke-linecap="round" />
+    <line :x1="pointP.x" :y1="pointP.y" :x2="bx" :y2="by" stroke="var(--c-neutral-300)" stroke-width="2.2" stroke-linecap="round" />
 
     <!-- 过动滑轮圆心 P 的竖直向上参考虚线 -->
-    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="vertTopY" stroke="#64748b" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.85" />
+    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="vertTopY" stroke="var(--c-neutral-500)" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.85" />
 
     <!-- 左侧夹角 α 圆弧与角平分线标注 -->
-    <path :d="alphaArcPath" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" />
+    <path :d="alphaArcPath" fill="none" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="5 4" />
     <text
       :x="alphaLabel.x"
       :y="alphaLabel.y"
-      fill="#cbd5e1"
+      fill="var(--c-neutral-300)"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="16"
@@ -277,11 +277,11 @@ const endDrag = (): void => {
     </text>
 
     <!-- 右侧夹角 β 圆弧与角平分线标注 -->
-    <path :d="betaArcPath" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 4" />
+    <path :d="betaArcPath" fill="none" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="5 4" />
     <text
       :x="betaLabel.x"
       :y="betaLabel.y"
-      fill="#cbd5e1"
+      fill="var(--c-neutral-300)"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="16"
@@ -292,29 +292,29 @@ const endDrag = (): void => {
     </text>
 
     <!-- 动滑轮下方吊绳与重物 Mg -->
-    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="pointP.y + 52" stroke="#94a3b8" stroke-width="2.2" />
-    <rect :x="pointP.x - 25" :y="pointP.y + 52" width="50" height="30" rx="6" fill="rgba(96,165,250,0.16)" stroke="#60a5fa" stroke-width="2" />
+    <line :x1="pointP.x" :y1="pointP.y" :x2="pointP.x" :y2="pointP.y + 52" stroke="var(--c-text-dim)" stroke-width="2.2" />
+    <rect :x="pointP.x - 25" :y="pointP.y + 52" width="50" height="30" rx="6" fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)" stroke="var(--c-velocity)" stroke-width="2" />
 
     <!-- 轻质动滑轮轮体 -->
-    <circle :cx="pointP.x" :cy="pointP.y" r="13" fill="rgba(15,20,37,0.88)" stroke="#e2a846" stroke-width="2.6" />
-    <circle :cx="pointP.x" :cy="pointP.y" r="3.6" fill="#e2a846" />
+    <circle :cx="pointP.x" :cy="pointP.y" r="13" fill="color-mix(in srgb, var(--c-bg-soft) 88%, transparent)" stroke="var(--c-accent)" stroke-width="2.6" />
+    <circle :cx="pointP.x" :cy="pointP.y" r="3.6" fill="var(--c-accent)" />
 
     <!-- ==================== 3. 动滑轮受力矢量 T、T、Mg ==================== -->
     <g v-click="1">
-      <CourseArrow :from="pointP" :to="leftTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
-      <CourseArrow :from="pointP" :to="rightTip" :head-size="10" stroke="#2dd4bf" stroke-width="3.2" />
-      <CourseArrow :from="pointP" :to="mgTip" :head-size="10" stroke="#f87171" stroke-width="3.2" />
+      <CourseArrow :from="pointP" :to="leftTip" :head-size="10" stroke="var(--c-physics)" stroke-width="3.2" />
+      <CourseArrow :from="pointP" :to="rightTip" :head-size="10" stroke="var(--c-physics)" stroke-width="3.2" />
+      <CourseArrow :from="pointP" :to="mgTip" :head-size="10" stroke="var(--c-force)" stroke-width="3.2" />
 
       <text
         :x="leftTLabel.x"
         :y="leftTLabel.y"
-        fill="#2dd4bf"
+        fill="var(--c-physics)"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="15"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -323,13 +323,13 @@ const endDrag = (): void => {
       <text
         :x="rightTLabel.x"
         :y="rightTLabel.y"
-        fill="#2dd4bf"
+        fill="var(--c-physics)"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="15"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -338,13 +338,13 @@ const endDrag = (): void => {
       <text
         :x="mgTip.x + 18"
         :y="mgTip.y - 5"
-        fill="#f87171"
+        fill="var(--c-force)"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="15"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -353,8 +353,8 @@ const endDrag = (): void => {
     </g>
 
     <!-- ==================== 4. 右侧墙角可动悬挂点 B 与交互热区 ==================== -->
-    <circle :cx="bx" :cy="by" r="9" fill="rgba(226,168,70,0.2)" />
-    <circle :cx="bx" :cy="by" r="5.5" fill="#e2a846" stroke="#0f1425" stroke-width="1.8" />
+    <circle :cx="bx" :cy="by" r="9" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" />
+    <circle :cx="bx" :cy="by" r="5.5" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="1.8" />
 
     <!-- 覆盖整个 L 形墙角滑轨的点击/拖拽热区 -->
     <rect
@@ -363,7 +363,7 @@ const endDrag = (): void => {
       width="116"
       height="108"
       fill="transparent"
-      class="mp-grab"
+      class="fig-grab"
       @pointerdown="startDrag"
       @pointermove="moveDrag"
       @pointerup="endDrag"
@@ -381,13 +381,5 @@ const endDrag = (): void => {
 
   user-select: none;
   touch-action: none;
-}
-
-.mp-grab {
-  cursor: grab;
-}
-
-.mp-grab:active {
-  cursor: grabbing;
 }
 </style>

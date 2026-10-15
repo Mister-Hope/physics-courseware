@@ -74,27 +74,27 @@ const choose = (item: JudgeItem, choice: boolean): void => {
       </div>
 
       <div v-if="item.chosen === null" class="judge-actions">
-        <button class="opt-btn" type="button" @click="choose(item, true)">能看成质点</button>
-        <button class="opt-btn alt" type="button" @click="choose(item, false)">不能看成质点</button>
+        <button class="judge-opt" type="button" @click="choose(item, true)">能看成质点</button>
+        <button class="judge-opt alt" type="button" @click="choose(item, false)">不能看成质点</button>
       </div>
 
       <div v-else class="judge-result">
         <svg
           v-if="item.chosen === item.can"
-          class="tick"
+          class="judge-tick"
           viewBox="0 0 24 24"
           width="20"
           height="20"
         >
-          <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="#34d399" />
+          <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="var(--c-ok)" />
         </svg>
-        <svg v-else class="tick" viewBox="0 0 24 24" width="20" height="20">
+        <svg v-else class="judge-tick" viewBox="0 0 24 24" width="20" height="20">
           <path
             d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"
-            fill="#f87171"
+            fill="var(--c-force)"
           />
         </svg>
-        <span class="reason">{{ item.reason }}</span>
+        <span class="judge-reason">{{ item.reason }}</span>
       </div>
     </div>
   </div>
@@ -109,10 +109,10 @@ const choose = (item: JudgeItem, choice: boolean): void => {
 
 .judge-card {
   padding: 0.42rem 1rem;
-  border: 1px solid rgb(148 163 184 / 10%);
-  border-radius: 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(30 41 59 / 65%);
+  background: var(--c-surface);
 
   backdrop-filter: blur(16px);
 
@@ -120,7 +120,7 @@ const choose = (item: JudgeItem, choice: boolean): void => {
 }
 
 .judge-card.answered {
-  border-color: rgb(148 163 184 / 18%);
+  border-color: color-mix(in srgb, var(--c-text-dim) 18%, transparent);
 }
 
 .judge-head {
@@ -137,18 +137,18 @@ const choose = (item: JudgeItem, choice: boolean): void => {
 
   width: 1.2rem;
   height: 1.2rem;
-  border: 1px solid rgb(226 168 70 / 35%);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 35%, transparent);
   border-radius: 50%;
 
-  background: rgb(226 168 70 / 15%);
-  color: #e2a846;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
 
   font-weight: 700;
   font-size: 0.66rem;
 }
 
 .judge-scene {
-  color: #f1f5f9;
+  color: var(--c-text);
   font-size: 0.86rem;
 }
 
@@ -157,22 +157,22 @@ const choose = (item: JudgeItem, choice: boolean): void => {
 
   margin-left: auto;
   padding: 0.1rem 0.5rem;
-  border-radius: 2rem;
+  border-radius: 999px;
 
   font-weight: 700;
   font-size: 0.68rem;
 }
 
 .judge-badge.right {
-  border: 1px solid rgb(52 211 153 / 30%);
-  background: rgb(52 211 153 / 12%);
-  color: #34d399;
+  border: 1px solid color-mix(in srgb, var(--c-ok) 30%, transparent);
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
 }
 
 .judge-badge.wrong {
-  border: 1px solid rgb(248 113 113 / 30%);
-  background: rgb(248 113 113 / 12%);
-  color: #f87171;
+  border: 1px solid color-mix(in srgb, var(--c-danger) 30%, transparent);
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 }
 
 .judge-actions {
@@ -181,13 +181,13 @@ const choose = (item: JudgeItem, choice: boolean): void => {
   margin-top: 0.38rem;
 }
 
-.opt-btn {
+.judge-opt {
   padding: 0.24rem 0.9rem;
-  border: 1px solid rgb(52 211 153 / 45%);
-  border-radius: 2rem;
+  border: 1px solid color-mix(in srgb, var(--c-ok) 45%, transparent);
+  border-radius: 999px;
 
-  background: rgb(52 211 153 / 12%);
-  color: #34d399;
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
 
   font-size: 0.75rem;
 
@@ -196,13 +196,13 @@ const choose = (item: JudgeItem, choice: boolean): void => {
   transition: all 0.25s ease;
 }
 
-.opt-btn.alt {
-  border-color: rgb(248 113 113 / 45%);
-  background: rgb(248 113 113 / 12%);
-  color: #f87171;
+.judge-opt.alt {
+  border-color: color-mix(in srgb, var(--c-danger) 45%, transparent);
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 }
 
-.opt-btn:hover {
+.judge-opt:hover {
   filter: brightness(1.2);
   transform: translateY(-1px);
 }
@@ -214,12 +214,12 @@ const choose = (item: JudgeItem, choice: boolean): void => {
   margin-top: 0.55rem;
 }
 
-.tick {
+.judge-tick {
   flex-shrink: 0;
   margin-top: 0.1rem;
 }
 
-.reason {
+.judge-reason {
   color: #cbd5e1;
   font-size: 0.8rem;
   line-height: 1.5;

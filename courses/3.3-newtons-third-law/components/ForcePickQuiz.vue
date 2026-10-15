@@ -141,7 +141,7 @@ const allRight = (sceneIndex: number): boolean =>
 .fp-title {
   margin-bottom: 0.05rem;
 
-  color: #f1f5f9;
+  color: var(--c-text);
 
   font-weight: 700;
   font-size: 0.82rem;
@@ -152,9 +152,9 @@ const allRight = (sceneIndex: number): boolean =>
 .fp-opt {
   padding: 0.12rem 0.7rem;
   border: 1px solid rgb(148 163 184 / 22%);
-  border-radius: 0.6rem;
+  border-radius: var(--radius-sm);
 
-  background: rgb(30 41 59 / 55%);
+  background: var(--c-surface);
   color: #cbd5e1;
 
   font-size: 0.75rem;
@@ -171,20 +171,20 @@ const allRight = (sceneIndex: number): boolean =>
 
 .fp-opt.on {
   border-color: rgb(226 168 70 / 65%);
-  background: rgb(226 168 70 / 14%);
-  color: #f1f5f9;
+  background: var(--c-accent-soft);
+  color: var(--c-text);
 }
 
 .fp-opt.ok {
   border-color: rgb(52 211 153 / 55%);
-  background: rgb(52 211 153 / 12%);
-  color: #34d399;
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
 }
 
 .fp-opt.no {
   border-color: rgb(248 113 113 / 55%);
-  background: rgb(248 113 113 / 12%);
-  color: #f87171;
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 }
 
 .fp-opt.miss {
@@ -202,9 +202,9 @@ const allRight = (sceneIndex: number): boolean =>
 .fp-check {
   padding: 0.16rem 0.9rem;
   border: 1px solid rgb(59 130 246 / 50%);
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(59 130 246 / 12%);
+  background: var(--c-accent-2-soft);
   color: #93c5fd;
 
   font-weight: 700;
@@ -236,7 +236,7 @@ const allRight = (sceneIndex: number): boolean =>
 }
 
 .fp-good {
-  color: #34d399;
+  color: var(--c-ok);
   font-weight: 700;
 }
 

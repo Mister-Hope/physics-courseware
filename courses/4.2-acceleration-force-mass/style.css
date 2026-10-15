@@ -2,6 +2,7 @@
    实验：探究加速度与力、质量的关系 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   本课前缀：record-（记录卡表格）· tape-（纸带图）· graph-（坐标图容器）
    ═══════════════════════════════════════════════ */
 
 /* 封面：课题名 17 字，默认字号会折行，压到 2.4rem 保持一行 */
@@ -9,47 +10,12 @@
   font-size: 2.4rem !important;
 }
 
-/* ── 内容少的页：提问整体放大 ── */
-.ask-hero {
-  font-weight: 700;
-  font-size: 1.7rem;
-  line-height: 1.7;
-}
-
-/* ── 实验步骤：编号圆点 + 文字 ── */
-.step-row {
-  display: flex;
-  gap: 0.7rem;
-  align-items: flex-start;
-
-  font-size: 1.02rem;
-  line-height: 1.55;
-}
-
-.step-num {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-top: 0.15rem;
-  border: 1px solid rgb(226 168 70 / 60%);
-  border-radius: 50%;
-
-  color: var(--c-accent);
-
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-/* ── 记录卡（学生实验时照着填） ── */
+/* ── 记录卡（学生实验时照着填）──
+   字号走共享 .data-table（0.85rem + 等宽数字），这里只补表格线与单元格节奏 */
 .record-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  font-size: 0.92rem;
 }
 
 .record-table th,
@@ -60,21 +26,21 @@
 }
 
 .record-table th {
-  background: rgb(148 163 184 / 8%);
+  background: color-mix(in srgb, var(--c-text-dim) 8%, transparent);
   color: var(--c-text-dim);
   font-weight: 700;
 }
 
+/* 首列标签格：靠左、弱色 */
 .record-table td.lead {
   color: var(--c-text-dim);
   text-align: left;
 }
 
-/* ── 图注 ── */
-.fig-note {
-  color: var(--c-text-dim);
-  font-size: 0.85rem;
-  text-align: center;
+/* 本课图注都紧跟在 .stack 里的图后面，栏内 gap 已给足间距；
+   再叠共享 .fig-cap 的 margin-top 会把第 22 页顶出 .page-grow（实测 1.8px） */
+.stack > .fig-cap {
+  margin-top: 0;
 }
 
 /* ── 纸带图（从 2.2-2.3 搬来的逐差法两页） ── */

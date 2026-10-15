@@ -159,10 +159,10 @@ onBeforeUnmount(() => {
 .sensor-btn {
   padding: 0.25rem 1.15rem;
   border: 1px solid rgb(226 168 70 / 45%);
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(226 168 70 / 12%);
-  color: #e2a846;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
 
   font-weight: 700;
   font-size: 0.8rem;
@@ -180,11 +180,11 @@ onBeforeUnmount(() => {
   flex: 1 1 auto;
   max-width: 24rem;
   cursor: pointer;
-  accent-color: #e2a846;
+  accent-color: var(--c-accent);
 }
 
 .sensor-read {
-  color: #f1f5f9;
+  color: var(--c-text);
   font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;

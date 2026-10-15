@@ -141,8 +141,8 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
 </script>
 
 <template>
-  <div class="fp-wrap">
-    <div class="fp-figure">
+  <div class="split-wide" style="--cols: minmax(0, 1.7fr) minmax(0, 1fr)">
+    <div class="figure relative min-w-0">
       <svg
         :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`"
         @pointermove="onPointerMove"
@@ -249,7 +249,7 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
             :cy="toScreenY(tipA.y)"
             r="18"
             fill="transparent"
-            class="fp-grab"
+            class="cursor-grab"
             @pointerdown="startDrag($event, 'force1')"
           />
           <circle
@@ -257,7 +257,7 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
             :cy="toScreenY(tipB.y)"
             r="18"
             fill="transparent"
-            class="fp-grab"
+            class="cursor-grab"
             @pointerdown="startDrag($event, 'force2')"
           />
         </g>
@@ -318,9 +318,9 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
       />
     </div>
 
-    <div class="fp-info">
-      <div class="fp-row">
-        <span class="fp-name" style="color: var(--c-accent)"><Latex tex="F_1" /></span>
+    <div class="demo-panel">
+      <div class="demo-row">
+        <span class="demo-name" style="color: var(--c-accent)"><Latex tex="F_1" /></span>
         <input
           v-model.number="force1"
           type="range"
@@ -329,10 +329,10 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
           step="0.5"
           aria-label="F1 大小"
         />
-        <span class="fp-val"><Latex :tex="f1Tex" /></span>
+        <span class="demo-val"><Latex :tex="f1Tex" /></span>
       </div>
-      <div class="fp-row">
-        <span class="fp-name" style="color: var(--c-accent-2)"><Latex tex="F_2" /></span>
+      <div class="demo-row">
+        <span class="demo-name" style="color: var(--c-accent-2)"><Latex tex="F_2" /></span>
         <input
           v-model.number="force2"
           type="range"
@@ -341,10 +341,10 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
           step="0.5"
           aria-label="F2 大小"
         />
-        <span class="fp-val"><Latex :tex="f2Tex" /></span>
+        <span class="demo-val"><Latex :tex="f2Tex" /></span>
       </div>
-      <div class="fp-row">
-        <span class="fp-name"><Latex tex="\theta" /></span>
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\theta" /></span>
         <input
           v-model.number="theta"
           type="range"
@@ -353,128 +353,51 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
           step="5"
           aria-label="两力夹角"
         />
-        <span class="fp-val"><Latex :tex="thetaTex" /></span>
+        <span class="demo-val"><Latex :tex="thetaTex" /></span>
       </div>
 
-      <div class="fp-result" :class="{ 'fp-hidden': step < 4 }">
-        <div class="fp-rule">
+      <div class="demo-readout" :class="{ 'demo-hidden': step < 4 }">
+        <div class="sum-rule">
           以 <Latex tex="F_1" />、<Latex tex="F_2" /> 为邻边作平行四边形，对角线就是合力
         </div>
-        <div class="fp-formula"><Latex :tex="formulaTex" /></div>
-        <div class="fp-sum"><Latex :tex="sumTex" /></div>
-        <div class="fp-angle">合力方向：与 <Latex tex="F_1" /> 成 <Latex :tex="angleTex" /></div>
+        <div class="sum-formula"><Latex :tex="formulaTex" /></div>
+        <div class="sum-total"><Latex :tex="sumTex" /></div>
+        <div class="sum-angle">合力方向：与 <Latex tex="F_1" /> 成 <Latex :tex="angleTex" /></div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.fp-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.fp-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.fp-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.fp-grab {
-  cursor: grab;
-}
-
-.fp-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  min-width: 0;
-}
-
-.fp-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.fp-row {
-  display: grid;
-  grid-template-columns: 2.6rem minmax(0, 1fr) 5.6rem;
-  gap: 0.6rem;
-  align-items: center;
-
+/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数 / 隐形占位走共享 .demo-* */
+.demo-row {
+  --demo-lab: 2.6rem;
   font-size: 0.95rem;
 }
 
-.fp-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.fp-val {
-  color: var(--c-text-dim);
+.demo-val {
   font-size: 0.9rem;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.fp-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 2rem;
-
-  background: rgb(148 163 184 / 20%);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.fp-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
-.fp-result {
-  display: flex;
-  flex-direction: column;
+.demo-readout {
   gap: 0.35rem;
-
   margin-top: 0.2rem;
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-physics);
 }
 
-.fp-hidden {
-  visibility: hidden;
-}
-
-.fp-rule {
+.sum-rule {
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-.fp-formula {
+.sum-formula {
   font-size: 0.98rem;
 }
 
-.fp-sum {
+.sum-total {
   font-size: 1.05rem;
 }
 
-.fp-angle {
+.sum-angle {
   color: var(--c-text-dim);
   font-size: 0.9rem;
 }

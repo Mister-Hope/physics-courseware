@@ -38,38 +38,38 @@ const rTip = computed(() => ({
 </script>
 
 <template>
-  <div class="vector-compose">
+  <div class="sim">
     <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="分矢量与合矢量">
       <g v-if="showResultant">
-        <line :x1="aTip.x" :y1="aTip.y" :x2="rTip.x" :y2="rTip.y" stroke="rgba(148,163,184,0.75)" stroke-width="2" stroke-dasharray="7 6" />
-        <line :x1="bTip.x" :y1="bTip.y" :x2="rTip.x" :y2="rTip.y" stroke="rgba(148,163,184,0.75)" stroke-width="2" stroke-dasharray="7 6" />
+        <line :x1="aTip.x" :y1="aTip.y" :x2="rTip.x" :y2="rTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="2" stroke-dasharray="7 6" />
+        <line :x1="bTip.x" :y1="bTip.y" :x2="rTip.x" :y2="rTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 75%, transparent)" stroke-width="2" stroke-dasharray="7 6" />
       </g>
-      <CourseArrow :from="{ x: OX, y: OY }" :to="aTip" stroke="#60a5fa" :stroke-width="3.2" />
-      <CourseArrow :from="{ x: OX, y: OY }" :to="bTip" stroke="#e2a846" :stroke-width="3.2" />
-      <CourseArrow v-if="showResultant" :from="{ x: OX, y: OY }" :to="rTip" stroke="#f87171" :stroke-width="3.4" />
-      <text :x="aTip.x - 44" :y="OY + 26" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#93c5fd">
+      <CourseArrow :from="{ x: OX, y: OY }" :to="aTip" stroke="var(--c-velocity)" :stroke-width="3.2" />
+      <CourseArrow :from="{ x: OX, y: OY }" :to="bTip" stroke="var(--c-accent)" :stroke-width="3.2" />
+      <CourseArrow v-if="showResultant" :from="{ x: OX, y: OY }" :to="rTip" stroke="var(--c-force)" :stroke-width="3.4" />
+      <text :x="aTip.x - 44" :y="OY + 26" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-velocity-light)">
         {{ aLetter }}
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4">{{ aSub }}</tspan>
       </text>
-      <text :x="OX - 40" :y="bTip.y + 24" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#e2a846">
+      <text :x="OX - 40" :y="bTip.y + 24" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">
         {{ bLetter }}
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4">{{ bSub }}</tspan>
       </text>
-      <text v-if="showResultant" :x="rTip.x + 10" :y="rTip.y - 8" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#f87171">
+      <text v-if="showResultant" :x="rTip.x + 10" :y="rTip.y - 8" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-force)">
         {{ rLetter }}
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="14" dy="4">{{ rSub }}</tspan>
       </text>
-      <circle :cx="OX" :cy="OY" r="4" fill="#e2e8f0" />
+      <circle :cx="OX" :cy="OY" r="4" fill="var(--c-neutral-200)" />
     </svg>
   </div>
 </template>
 
 <style scoped>
-.vector-compose {
+.sim {
   min-width: 0;
 }
 
-.vector-compose svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;

@@ -34,11 +34,11 @@ layout: base-flex
 
 <div class="half-grid">
 
-<div class="nav-panel">
-<div class="nav-head"><mdi-navigation-variant /> 导航 · 前往电影院</div>
+<div class="route-panel">
+<div class="route-head"><mdi-navigation-variant /> 导航 · 前往电影院</div>
 <NavRouteMapSvg />
-<div class="nav-route nav-route-red"><span class="nav-dot"></span><span class="nav-mode">骑行</span><span class="nav-metric">3 km · 15 min</span></div>
-<div class="nav-route nav-route-blue"><span class="nav-dot"></span><span class="nav-mode">网约车</span><span class="nav-tag">推荐</span><span class="nav-metric">4 km · 15 min</span></div>
+<div class="route-row route-row-red"><span class="route-dot"></span><span class="route-mode">骑行</span><span class="route-metric">3 km · 15 min</span></div>
+<div class="route-row route-row-blue"><span class="route-dot"></span><span class="route-mode">网约车</span><span class="tag text-accent">推荐</span><span class="route-metric">4 km · 15 min</span></div>
 </div>
 
 <div class="stack">
@@ -59,8 +59,8 @@ layout: base-flex
 <div class="page-grow">
 
 <div class="stack">
-<div class="route-calc route-calc-red text-lg"><span class="route-bar"></span><span>路线 1（骑行）</span><span class="route-result"><Latex tex="\frac{3\ \text{km}}{15\ \text{min}} = 12\ \text{km/h}" /></span></div>
-<div class="route-calc route-calc-blue text-lg"><span class="route-bar"></span><span>路线 2（网约车）</span><span class="route-result"><Latex tex="\frac{4\ \text{km}}{15\ \text{min}} = 16\ \text{km/h}" /></span></div>
+<div class="route-row route-row-red text-lg"><span class="route-bar"></span><span>路线 1（骑行）</span><span class="route-result"><Latex tex="\frac{3\ \text{km}}{15\ \text{min}} = 12\ \text{km/h}" /></span></div>
+<div class="route-row route-row-blue text-lg"><span class="route-bar"></span><span>路线 2（网约车）</span><span class="route-result"><Latex tex="\frac{4\ \text{km}}{15\ \text{min}} = 16\ \text{km/h}" /></span></div>
 </div>
 
 <div class="key">用"路程 ÷ 时间"比，<span class="text-accent">路线 2 更快</span>——它走的路程更长。我们比的其实是<span class="text-accent">过程</span>的结果。</div>
@@ -152,9 +152,9 @@ layout: base-flex
 
 <div class="card">
 
-<div class="def-text">速度 = <span class="text-accent">位移</span>与发生这段位移所用<span class="text-accent">时间</span>之比</div>
+<div class="text-lg leading-relaxed">速度 = <span class="text-accent">位移</span>与发生这段位移所用<span class="text-accent">时间</span>之比</div>
 
-<div class="def-formula"><Latex tex="v = \frac{\Delta x}{\Delta t}" display /></div>
+<div class="mt-2"><Latex tex="v = \frac{\Delta x}{\Delta t}" display /></div>
 
 </div>
 
@@ -193,7 +193,7 @@ layout: base-flex
 </v-click>
 
 <v-click>
-<div class="key key-blue">把运动<span class="text-accent-2">分段</span>：需要<span class="text-accent-2">中间的位置和时间</span>，再各算一次。</div>
+<div>把运动<span class="text-accent-2">分段</span>：需要<span class="text-accent-2">中间的位置和时间</span>，再各算一次。</div>
 </v-click>
 
 </div>
@@ -209,14 +209,14 @@ layout: base-flex
 <div class="ask">塔台要掌握飞机的状态：实时位置、飞行方向、实时快慢——只有平均速度够吗？</div>
 
 <div class="three-col" v-click="1">
-<div class="step"><div class="step-em"><Latex tex="\Delta t = 1\ \text{s}" /></div><div>先取 1 s 求平均</div></div>
-<div class="step"><div class="step-em"><Latex tex="\Delta t = 0.1\ \text{s}" /></div><div>间隔越小，差异越小</div></div>
-<div class="step"><div class="step-em"><Latex tex="\Delta t \to 0" /></div><div>越来越贴近这一时刻</div></div>
+<div class="stack stack-tight"><div class="mini-title"><Latex tex="\Delta t = 1\ \text{s}" /></div><div>先取 1 s 求平均</div></div>
+<div class="stack stack-tight"><div class="mini-title"><Latex tex="\Delta t = 0.1\ \text{s}" /></div><div>间隔越小，差异越小</div></div>
+<div class="stack stack-tight"><div class="mini-title"><Latex tex="\Delta t \to 0" /></div><div>越来越贴近这一时刻</div></div>
 </div>
 
 <div class="key" v-click="2">当 <Latex tex="\Delta t" /> 非常非常小时，<Latex tex="\frac{\Delta x}{\Delta t}" /> 就可以代表物体在<span class="text-accent">某一时刻（或某一位置）</span>的速度——这就是<span class="text-accent">瞬时速度</span>。</div>
 
-<div class="key key-blue" v-click="3">这就是<span class="text-accent-2">极限思想</span>：数学和物理中都非常重要。</div>
+<div v-click="3">这就是<span class="text-accent-2">极限思想</span>：数学和物理中都非常重要。</div>
 
 </div>
 
@@ -231,22 +231,22 @@ clicks: 2
 
 <div class="ask">它们的算法和物理意义一样吗？</div>
 
-<div class="cmp4" v-click="1">
-<div class="cmp4-head"></div>
-<div class="cmp4-head">平均速度</div>
-<div class="cmp4-head">瞬时速度</div>
-<div class="cmp4-head">速率</div>
-<div class="cmp4-head">平均速率</div>
-<div class="cmp4-row">计算</div>
-<div class="cmp4-cell">位移 ÷ 时间<br /><Latex tex="\bar v = \frac{\Delta x}{\Delta t}" /></div>
-<div class="cmp4-cell">位移 ÷ 时间，取 <Latex tex="\Delta t \to 0" /><br /><Latex tex="v = \lim_{\Delta t \to 0} \frac{\Delta x}{\Delta t}" /></div>
-<div class="cmp4-cell">瞬时速度的大小<br /><Latex tex="|v|" /></div>
-<div class="cmp4-cell">路程 ÷ 时间<br /><Latex tex="\frac{s}{t}" /></div>
-<div class="cmp4-row">意义</div>
-<div class="cmp4-cell">一段时间内位置变化的平均快慢<span class="text-accent">与方向</span>（矢量）</div>
-<div class="cmp4-cell">某一时刻运动的快慢<span class="text-accent">与方向</span>（矢量）</div>
-<div class="cmp4-cell">某一时刻运动的快慢（标量，无方向）</div>
-<div class="cmp4-cell">一段时间内运动的平均快慢（标量，无方向）</div>
+<div class="tbl-concepts data-table" v-click="1">
+<div class="tbl-concepts-head"></div>
+<div class="tbl-concepts-head">平均速度</div>
+<div class="tbl-concepts-head">瞬时速度</div>
+<div class="tbl-concepts-head">速率</div>
+<div class="tbl-concepts-head">平均速率</div>
+<div class="tbl-concepts-row">计算</div>
+<div class="tbl-concepts-cell">位移 ÷ 时间<br /><Latex tex="\bar v = \frac{\Delta x}{\Delta t}" /></div>
+<div class="tbl-concepts-cell">位移 ÷ 时间，取 <Latex tex="\Delta t \to 0" /><br /><Latex tex="v = \lim_{\Delta t \to 0} \frac{\Delta x}{\Delta t}" /></div>
+<div class="tbl-concepts-cell">瞬时速度的大小<br /><Latex tex="|v|" /></div>
+<div class="tbl-concepts-cell">路程 ÷ 时间<br /><Latex tex="\frac{s}{t}" /></div>
+<div class="tbl-concepts-row">意义</div>
+<div class="tbl-concepts-cell">一段时间内位置变化的平均快慢<span class="text-accent">与方向</span>（矢量）</div>
+<div class="tbl-concepts-cell">某一时刻运动的快慢<span class="text-accent">与方向</span>（矢量）</div>
+<div class="tbl-concepts-cell">某一时刻运动的快慢（标量，无方向）</div>
+<div class="tbl-concepts-cell">一段时间内运动的平均快慢（标量，无方向）</div>
 </div>
 
 <div class="key" v-click="2">初中说的"速度"是<span class="text-accent">路程 ÷ 时间</span>——它其实是<span class="text-accent">平均速率</span>：只回答"平均有多快"，不回答"往哪"。赛车计时、导航的预计时速、跑步配速至今都在用它。</div>
@@ -262,7 +262,7 @@ clicks: 2
 
 <div class="page-grow">
 
-<div class="problem" style="border-left: none; padding-left: 0">质点做匀速圆周运动，从 <Latex tex="A" /> 点沿顺时针方向出发，圆的半径为 <Latex tex="R" />，运动周期为 <Latex tex="4\ \text{s}" />。求：<br />① <Latex tex="4\ \text{s}" /> 内质点的平均速度大小和平均速率；<br />② 第 2 个 <Latex tex="2\ \text{s}" /> 内（即 <Latex tex="t = 2\ \text{s}" /> 至 <Latex tex="t = 4\ \text{s}" />）的平均速度大小和平均速率。</div>
+<div class="text-base">质点做匀速圆周运动，从 <Latex tex="A" /> 点沿顺时针方向出发，圆的半径为 <Latex tex="R" />，运动周期为 <Latex tex="4\ \text{s}" />。求：<br />① <Latex tex="4\ \text{s}" /> 内质点的平均速度大小和平均速率；<br />② 第 2 个 <Latex tex="2\ \text{s}" /> 内（即 <Latex tex="t = 2\ \text{s}" /> 至 <Latex tex="t = 4\ \text{s}" />）的平均速度大小和平均速率。</div>
 
 <div style="display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 2rem; align-items: center;">
 
@@ -291,13 +291,13 @@ clicks: 3
 
 <div class="half-grid">
 
-<div class="xt-host" v-click="1">
+<div class="fig-host" v-click="1">
 <XTSlope />
 </div>
 
 <div class="stack">
 <div class="ask">过 A、B 两点的这条直线（割线），它的斜率代表什么？</div>
-<div class="key" v-click="2">割线斜率 <Latex tex="= \frac{\Delta x}{\Delta t} =" /> <span class="text-accent">平均速度</span>。</div>
+<div v-click="2">割线斜率 <Latex tex="= \frac{\Delta x}{\Delta t} =" /> <span class="text-accent">平均速度</span>。</div>
 <div class="key key-blue" v-click="3">把 B 点拖向 A 点：割线斜率仍算平均速度，但越来越接近 A 点的<span class="text-accent-2">瞬时速度</span>；无限靠近时割线成为<span class="text-accent-2">切线</span>——<span class="text-accent-2">切线斜率 = 该点的瞬时速度</span>。</div>
 </div>
 
@@ -339,17 +339,17 @@ layout: base-flex
 
 <div class="stack">
 <div class="key">回到出发点 → 位移 <Latex tex="\Delta x = 0" />，所以<span class="text-accent">平均速度 <Latex tex="v = 0" /></span>。</div>
-<div class="key key-blue">而 <Latex tex="\frac{400\ \text{m}}{55\ \text{s}} \approx 7.3\ \text{m/s}" /> 是<span class="text-accent-2">平均速率</span>（路程 ÷ 时间），不是速度。</div>
+<div>而 <Latex tex="\frac{400\ \text{m}}{55\ \text{s}} \approx 7.3\ \text{m/s}" /> 是<span class="text-accent-2">平均速率</span>（路程 ÷ 时间），不是速度。</div>
 </div>
 
 <div class="stack divider-l">
-<div class="fun-note">题目可没说跑了几圈。要是他真跑了两圈：<Latex tex="800\ \text{m} \div 55\ \text{s} \approx 14.5\ \text{m/s}" />，比博尔特百米（约 10.4 m/s）还快——所以他必然只跑了一圈。</div>
+<div class="fun-note mini-note">题目可没说跑了几圈。要是他真跑了两圈：<Latex tex="800\ \text{m} \div 55\ \text{s} \approx 14.5\ \text{m/s}" />，比博尔特百米（约 10.4 m/s）还快——所以他必然只跑了一圈。</div>
 <div class="ask">位移为 0，能认为他完全没有运动吗？</div>
 <v-click>
-<div class="key">不能：位移为零 ≠ 没有运动。</div>
+<div>不能：位移为零 ≠ 没有运动。</div>
 </v-click>
 <v-click>
-<div class="key">奔跑中他的瞬时速度怎么变？<span class="text-accent-2">方向</span>不断变化（在弯道上）；<span class="text-accent-2">大小</span>直道快、弯道慢。</div>
+<div>奔跑中他的瞬时速度怎么变？<span class="text-accent-2">方向</span>不断变化（在弯道上）；<span class="text-accent-2">大小</span>直道快、弯道慢。</div>
 </v-click>
 </div>
 
@@ -375,7 +375,7 @@ layout: base-flex
 <div class="key"><Latex tex="\Delta x = 3\ \text{m} - 1\ \text{m} = 2\ \text{m}" />，<Latex tex="v = \frac{\Delta x}{\Delta t} = \frac{2\ \text{m}}{2\ \text{s}} = 1\ \text{m/s}" />。</div>
 </v-click>
 <v-click>
-<div class="key key-blue">我们没有规定正方向 → 写成 <Latex tex="+1\ \text{m/s}" /> 或 <Latex tex="-1\ \text{m/s}" /> 都可以。<span class="text-accent-2">速度的方向由我们规定的正方向决定</span>。</div>
+<div>我们没有规定正方向 → 写成 <Latex tex="+1\ \text{m/s}" /> 或 <Latex tex="-1\ \text{m/s}" /> 都可以。<span class="text-accent-2">速度的方向由我们规定的正方向决定</span>。</div>
 </v-click>
 </div>
 
@@ -391,7 +391,7 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="key">把 <Latex tex="1\ \text{m/s}" /> 化成 km/h：</div>
+<div>把 <Latex tex="1\ \text{m/s}" /> 化成 km/h：</div>
 
 $$1\ \text{m/s} = \frac{1\ \text{m}}{1\ \text{s}} = \frac{0.001\ \text{km}}{\frac{1}{3600}\ \text{h}} = 3.6\ \text{km/h}$$
 
@@ -410,12 +410,12 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="problem">物体从 A 到 B 做单向直线运动，前半程的速度是 <Latex tex="v_1" />，后半程的速度是 <Latex tex="v_2" />。求全程的平均速度。</div>
+<div class="text-base">物体从 A 到 B 做单向直线运动，前半程的速度是 <Latex tex="v_1" />，后半程的速度是 <Latex tex="v_2" />。求全程的平均速度。</div>
 
 <div class="ask">先想一想：平均速度能用 <Latex tex="\frac{v_1 + v_2}{2}" /> 算吗？</div>
 
 <v-click>
-<div class="key">设全程为 <Latex tex="2s" />：前半程用时 <Latex tex="t_1 = \frac{s}{v_1}" />，后半程用时 <Latex tex="t_2 = \frac{s}{v_2}" />。</div>
+<div>设全程为 <Latex tex="2s" />：前半程用时 <Latex tex="t_1 = \frac{s}{v_1}" />，后半程用时 <Latex tex="t_2 = \frac{s}{v_2}" />。</div>
 </v-click>
 
 <v-click>
@@ -423,7 +423,7 @@ layout: base-flex
 </v-click>
 
 <v-click>
-<div class="key">注意：平均速度<span class="text-accent">不是</span>速度的平均值，不能写成 <Latex tex="\frac{v_1 + v_2}{2}" />。</div>
+<div>注意：平均速度<span class="text-accent">不是</span>速度的平均值，不能写成 <Latex tex="\frac{v_1 + v_2}{2}" />。</div>
 </v-click>
 
 </div>
@@ -437,19 +437,19 @@ clicks: 4
 
 <div class="page-grow">
 
-<div class="problem">货船在静水中的速度是水速的 7 倍；上游、下游按相同时间间隔 <Latex tex="T" /> 各发出一批货船。游船顺流而下时，每 40 min 被一艘同向货船超过，每 20 min 迎面遇到一艘。求 <Latex tex="T" />。</div>
+<div class="text-base">货船在静水中的速度是水速的 7 倍；上游、下游按相同时间间隔 <Latex tex="T" /> 各发出一批货船。游船顺流而下时，每 40 min 被一艘同向货船超过，每 20 min 迎面遇到一艘。求 <Latex tex="T" />。</div>
 
 <div class="half-grid">
 
 <div class="stack">
-<div class="key" v-click="1">基本关系：<Latex tex="x = vt" />（位移 = 速度 × 时间）</div>
-<div class="key" v-click="2">设水速 <Latex tex="u" />：货船静水速 <Latex tex="7u" /> → 顺流 <Latex tex="8u" />、逆流 <Latex tex="6u" />；游船顺流 <Latex tex="w+u" />。</div>
-<div class="key" v-click="3">用 <Latex tex="x = vt" /> 写相邻两船的间距：顺流 <Latex tex="x_1 = 8uT" />，逆流 <Latex tex="x_2 = 6uT" />。</div>
+<div v-click="1">基本关系：<Latex tex="x = vt" />（位移 = 速度 × 时间）</div>
+<div v-click="2">设水速 <Latex tex="u" />：货船静水速 <Latex tex="7u" /> → 顺流 <Latex tex="8u" />、逆流 <Latex tex="6u" />；游船顺流 <Latex tex="w+u" />。</div>
+<div v-click="3">用 <Latex tex="x = vt" /> 写相邻两船的间距：顺流 <Latex tex="x_1 = 8uT" />，逆流 <Latex tex="x_2 = 6uT" />。</div>
 </div>
 
 <div class="stack divider-l">
-<div class="key" v-click="3">被超过（相对速度 <Latex tex="7u-w" />）：<br /><Latex tex="x_1 = (7u-w)\cdot 40\ \text{min}" /></div>
-<div class="key" v-click="4">迎面（相对速度 <Latex tex="7u+w" />）：<br /><Latex tex="x_2 = (7u+w)\cdot 20\ \text{min}" /></div>
+<div v-click="3">被超过（相对速度 <Latex tex="7u-w" />）：<br /><Latex tex="x_1 = (7u-w)\cdot 40\ \text{min}" /></div>
+<div v-click="4">迎面（相对速度 <Latex tex="7u+w" />）：<br /><Latex tex="x_2 = (7u+w)\cdot 20\ \text{min}" /></div>
 <div class="key key-blue" v-click="4">两式相除得 <Latex tex="\frac{w}{u} = \frac{7}{5}" />，代回得 <Latex tex="T = 28\ \text{min}" />。</div>
 </div>
 
@@ -465,13 +465,13 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="key">位置的变化用<span class="text-accent-2">位移</span>描述；位置变化的快慢用<span class="text-accent">速度</span>描述：<Latex tex="v = \frac{\Delta x}{\Delta t}" />，方向与 <Latex tex="\Delta x" /> 相同（矢量）。</div>
+<div><mdi-numeric-1-circle class="icon-md inline-block align-middle mr-1 text-accent" />位置的变化用<span class="text-accent-2">位移</span>描述；位置变化的快慢用<span class="text-accent">速度</span>描述：<Latex tex="v = \frac{\Delta x}{\Delta t}" />，方向与 <Latex tex="\Delta x" /> 相同（矢量）。</div>
 
-<div class="key">一段时间的平均快慢是<span class="text-accent">平均速度</span>；某一时刻（某一位置）的是<span class="text-accent">瞬时速度</span>——它是 <Latex tex="\Delta t \to 0" /> 时平均速度的极限。</div>
+<div><mdi-numeric-2-circle class="icon-md inline-block align-middle mr-1 text-accent" />一段时间的平均快慢是<span class="text-accent">平均速度</span>；某一时刻（某一位置）的是<span class="text-accent">瞬时速度</span>——它是 <Latex tex="\Delta t \to 0" /> 时平均速度的极限。</div>
 
-<div class="key">x-t 图像：<span class="text-accent">割线斜率 = 平均速度</span>，<span class="text-accent-2">切线斜率 = 瞬时速度</span>。</div>
+<div><mdi-numeric-3-circle class="icon-md inline-block align-middle mr-1 text-accent" />x-t 图像：<span class="text-accent">割线斜率 = 平均速度</span>，<span class="text-accent-2">切线斜率 = 瞬时速度</span>。</div>
 
-<div class="key key-blue">瞬时速度的大小叫<span class="text-accent-2">速率</span>；路程 ÷ 时间叫<span class="text-accent-2">平均速率</span>（初中说的"速度"就是它）；<Latex tex="1\ \text{m/s} = 3.6\ \text{km/h}" />。</div>
+<div><mdi-numeric-4-circle class="icon-md inline-block align-middle mr-1 text-accent" />瞬时速度的大小叫<span class="text-accent-2">速率</span>；路程 ÷ 时间叫<span class="text-accent-2">平均速率</span>（初中说的"速度"就是它）；<Latex tex="1\ \text{m/s} = 3.6\ \text{km/h}" />。</div>
 
 </div>
 
@@ -502,7 +502,7 @@ clicks: 3
 
 <div class="ask" v-click="2">这个加速是<span class="text-accent">均匀</span>的吗？光看点迹的疏密，能回答吗？</div>
 
-<div class="key key-blue" v-click="3">不能。得把每个时刻的<span class="text-accent-2">速度算出来</span>，看它随时间怎样变化——所以要用这条纸带<span class="text-accent-2">把速度算出来</span>。</div>
+<div v-click="3">不能。得把每个时刻的<span class="text-accent-2">速度算出来</span>，看它随时间怎样变化——所以要用这条纸带<span class="text-accent-2">把速度算出来</span>。</div>
 
 </div>
 
@@ -515,11 +515,11 @@ clicks: 2
 
 <div class="page-grow">
 
-<div class="key">类比 <Latex tex="x\text{-}t" /> 图像（位置随时间的变化），我们也可以画<span class="text-accent">速度—时间图像（v-t 图像）</span>，研究速度随时间怎样变化。</div>
+<div>类比 <Latex tex="x\text{-}t" /> 图像（位置随时间的变化），我们也可以画<span class="text-accent">速度—时间图像（v-t 图像）</span>，研究速度随时间怎样变化。</div>
 
 <div class="ask">纸带上只有位移和时间，速度从哪里来？</div>
 
-<div class="key" v-click="1">速度是<span class="text-accent">比值定义</span>出来的：<Latex tex="v = \frac{\Delta x}{\Delta t}" />（位移 ÷ 时间）。</div>
+<div v-click="1">速度是<span class="text-accent">比值定义</span>出来的：<Latex tex="v = \frac{\Delta x}{\Delta t}" />（位移 ÷ 时间）。</div>
 
 <div class="key" v-click="2">可我们要的是<span class="text-accent">某一点（某一时刻）</span>的速度——它没法直接测出来，只能用<span class="text-accent-2">包含这一点的一小段时间的平均速度</span>去代替它。</div>
 
@@ -539,9 +539,9 @@ clicks: 3
 <div class="ask">要算 N 点的速度，这一小段时间可以怎么取？哪种取法更好？</div>
 
 <div class="three-col">
-<div class="step" v-click="1"><div class="step-em">方案 ①</div><div><Latex tex="v_N \approx \frac{x_{N+1}-x_N}{\Delta t}" display /></div></div>
-<div class="step" v-click="2"><div class="step-em">方案 ②</div><div><Latex tex="v_N \approx \frac{x_N-x_{N-1}}{\Delta t}" display /></div></div>
-<div class="step" v-click="3"><div class="step-em">方案 ③</div><div><Latex tex="v_N \approx \frac{x_{N+1}-x_{N-1}}{2\Delta t}" display /></div></div>
+<div class="stack stack-tight" v-click="1"><div class="mini-title">方案 ①</div><div><Latex tex="v_N \approx \frac{x_{N+1}-x_N}{\Delta t}" display /></div></div>
+<div class="stack stack-tight" v-click="2"><div class="mini-title">方案 ②</div><div><Latex tex="v_N \approx \frac{x_N-x_{N-1}}{\Delta t}" display /></div></div>
+<div class="stack stack-tight" v-click="3"><div class="mini-title">方案 ③</div><div><Latex tex="v_N \approx \frac{x_{N+1}-x_{N-1}}{2\Delta t}" display /></div></div>
 </div>
 
 </div>
@@ -559,7 +559,7 @@ clicks: 2
 
 <div class="key key-lead" v-click="1">方案 ③：用 <Latex tex="N-1" /> 到 <Latex tex="N+1" /> 的总位移除以 <Latex tex="2\Delta t" />：<Latex tex="v_N \approx \frac{x_{N+1}-x_{N-1}}{2\Delta t}" display /></div>
 
-<div class="key key-lead key-blue" v-click="2">因为它以 <Latex tex="N" /> 点为中心<span class="text-accent-2">对称</span>地取时间间隔——更能反映 <Latex tex="N" /> 点<span class="text-accent-2">附近</span>的快慢变化。方案 ①② 只朝一边取，结果会偏向相邻的那一段。</div>
+<div v-click="2">因为它以 <Latex tex="N" /> 点为中心<span class="text-accent-2">对称</span>地取时间间隔——更能反映 <Latex tex="N" /> 点<span class="text-accent-2">附近</span>的快慢变化。方案 ①② 只朝一边取，结果会偏向相邻的那一段。</div>
 
 </div>
 
@@ -574,9 +574,9 @@ clicks: 3
 
 <div class="ask">既然 <Latex tex="\Delta t" />  越小越接近瞬时速度，那把它取得越小越好？</div>
 
-<div class="key" v-click="1">不是。两个绕不开的误差来源：<br />① <span class="text-accent">刻度尺的精度有限</span>——量出的位移本身就有读数误差；<br />② <span class="text-accent">打出的点迹本身有大小</span>——它不是一个"数学点"，位移两端各带半个点的宽度。</div>
+<div v-click="1">不是。两个绕不开的误差来源：<br />① <span class="text-accent">刻度尺的精度有限</span>——量出的位移本身就有读数误差；<br />② <span class="text-accent">打出的点迹本身有大小</span>——它不是一个"数学点"，位移两端各带半个点的宽度。</div>
 
-<div class="key key-blue" v-click="2"><Latex tex="\Delta t" /> 太小 → 位移太小 → <span class="text-accent-2">误差在结果里占比过高</span>，算出的速度反而更不准。</div>
+<div v-click="2"><Latex tex="\Delta t" /> 太小 → 位移太小 → <span class="text-accent-2">误差在结果里占比过高</span>，算出的速度反而更不准。</div>
 
 <div class="key" v-click="3">所以 <Latex tex="\Delta t" />  要<span class="text-accent">选得合理</span>：既尽量贴近该点的瞬时速度，又不让误差占比过高。</div>
 
@@ -619,7 +619,7 @@ layout: base-flex
 
 <div class="mini-note">每 5 个点取一个计数点（相邻计数点之间 <Latex tex="\Delta t = 0.1\ \text{s}" />），量出每个计数点到起点 0 的距离：</div>
 
-<table class="tape-table">
+<table class="tbl-tape">
 <tbody>
 <tr><th>计数点</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
 <tr><th>位置 <Latex tex="x/\text{m}" /></th><td>0</td><td>0.05</td><td>0.12</td><td>0.25</td><td>0.46</td><td>0.79</td><td>1.26</td></tr>
@@ -745,7 +745,7 @@ clicks: 2
 
 <div class="ask">折线连法和平滑直线连法，哪一种更能真实反映小车的运动？</div>
 
-<div class="key" v-click="1">两条理由：<br />① 物理学家告诉我们，物体的速度通常<span class="text-accent">连续变化，不会突变</span>；<br />② 我们的测量一定<span class="text-accent">带着误差</span>，点不会正好落在真实图线上。</div>
+<div v-click="1">两条理由：<br />① 物理学家告诉我们，物体的速度通常<span class="text-accent">连续变化，不会突变</span>；<br />② 我们的测量一定<span class="text-accent">带着误差</span>，点不会正好落在真实图线上。</div>
 
 <div class="key key-blue" v-click="2">所以不要"穿过每一个点"，而应该画一条<span class="text-accent-2">平滑的直线或曲线</span>，让各点尽可能分布在它<span class="text-accent-2">两侧</span>——这在数学上叫<span class="text-accent-2">拟合</span>。这样得到的 v-t 图像才更接近小车真实的运动。</div>
 
@@ -801,7 +801,7 @@ labels:
     halo: true
 ```
 </div>
-<div class="key" v-click="1"><span class="text-accent">图线的交点</span>：两个物体在这时刻<span class="text-accent">速度相同</span>（共速）——注意共速 ≠ 相遇。</div>
+<div v-click="1"><span class="text-accent">图线的交点</span>：两个物体在这时刻<span class="text-accent">速度相同</span>（共速）——注意共速 ≠ 相遇。</div>
 </div>
 
 <div class="stack">
@@ -924,13 +924,13 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="key">用纸带求速度：在待求点<span class="text-accent">两侧对称</span>取一小段时间，用这一小段的平均速度代替该点的瞬时速度——<Latex tex="v_N \approx \frac{x_{N+1}-x_{N-1}}{2\Delta t}" />。</div>
+<div><mdi-numeric-1-circle class="icon-md inline-block align-middle mr-1 text-accent" />用纸带求速度：在待求点<span class="text-accent">两侧对称</span>取一小段时间，用这一小段的平均速度代替该点的瞬时速度——<Latex tex="v_N \approx \frac{x_{N+1}-x_{N-1}}{2\Delta t}" />。</div>
 
-<div class="key"><Latex tex="\Delta t" />  <span class="text-accent">不是越小越好</span>：太小会让测量误差占比过高（尺子精度、点迹本身有大小），要选得合理。</div>
+<div><mdi-numeric-2-circle class="icon-md inline-block align-middle mr-1 text-accent" /><Latex tex="\Delta t" />  <span class="text-accent">不是越小越好</span>：太小会让测量误差占比过高（尺子精度、点迹本身有大小），要选得合理。</div>
 
-<div class="key">把各点速度画到 <Latex tex="v-t" /> 图上，用<span class="text-accent">平滑的直线或曲线拟合</span>（速度连续变化 / 测量误差）。</div>
+<div><mdi-numeric-3-circle class="icon-md inline-block align-middle mr-1 text-accent" />把各点速度画到 <Latex tex="v-t" /> 图上，用<span class="text-accent">平滑的直线或曲线拟合</span>（速度连续变化 / 测量误差）。</div>
 
-<div class="key key-blue"><Latex tex="v-t" /> 图像还能读出：<span class="text-accent-2">交点 → 两物体共速</span>；<span class="text-accent-2">与时间轴包围的面积 → 位移</span>。</div>
+<div><mdi-numeric-4-circle class="icon-md inline-block align-middle mr-1 text-accent" /><Latex tex="v-t" /> 图像还能读出：<span class="text-accent-2">交点 → 两物体共速</span>；<span class="text-accent-2">与时间轴包围的面积 → 位移</span>。</div>
 
 </div>
 
@@ -1186,7 +1186,7 @@ clicks: 2
 
 <div class="page-grow">
 
-<div class="problem">一支 <Latex tex="150\ \text{m}" /> 长的队伍匀速前进。队长从队尾放出无人机，飞到出发点前方 <Latex tex="1000\ \text{m}" /> 处侦察，拍照后立即返回；无人机回到队长处时，队伍已经前进了 <Latex tex="200\ \text{m}" />。求全过程中无人机的位移和路程。</div>
+<div class="text-base">一支 <Latex tex="150\ \text{m}" /> 长的队伍匀速前进。队长从队尾放出无人机，飞到出发点前方 <Latex tex="1000\ \text{m}" /> 处侦察，拍照后立即返回；无人机回到队长处时，队伍已经前进了 <Latex tex="200\ \text{m}" />。求全过程中无人机的位移和路程。</div>
 
 <div class="half-grid">
 
@@ -1213,7 +1213,7 @@ clicks: 3
 
 <div class="page-grow">
 
-<div class="problem">A、B 两车相距 <Latex tex="1000\ \text{m}" />，相向而行，速度分别为 <Latex tex="10\ \text{m/s}" /> 和 <Latex tex="30\ \text{m/s}" />。一只小鸟从 A 车处开始，以 <Latex tex="50\ \text{m/s}" /> 的速度在两车之间往复飞行。求两车相遇时，小鸟的运动路程与位移。</div>
+<div class="text-base">A、B 两车相距 <Latex tex="1000\ \text{m}" />，相向而行，速度分别为 <Latex tex="10\ \text{m/s}" /> 和 <Latex tex="30\ \text{m/s}" />。一只小鸟从 A 车处开始，以 <Latex tex="50\ \text{m/s}" /> 的速度在两车之间往复飞行。求两车相遇时，小鸟的运动路程与位移。</div>
 
 <div class="half-grid">
 
@@ -1242,7 +1242,7 @@ clicks: 3
 
 <div class="page-grow">
 
-<div class="problem">长为 <Latex tex="L" /> 的队伍以速度 <Latex tex="v_1" /> 匀速前进。队长从队尾以速度 <Latex tex="v_2" /> 匀速前进至队首后，立即返回队尾。求队长的路程和位移。</div>
+<div class="text-base">长为 <Latex tex="L" /> 的队伍以速度 <Latex tex="v_1" /> 匀速前进。队长从队尾以速度 <Latex tex="v_2" /> 匀速前进至队首后，立即返回队尾。求队长的路程和位移。</div>
 
 <div class="half-grid">
 
@@ -1271,7 +1271,7 @@ clicks: 1
 
 <div class="page-grow">
 
-<div class="problem">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进，传令兵往返的速率恰好是队伍行进速率的 <Latex tex="2" /> 倍。求传令兵从排尾出发、再回到排尾时，走过的总路程。</div>
+<div class="text-base">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进，传令兵往返的速率恰好是队伍行进速率的 <Latex tex="2" /> 倍。求传令兵从排尾出发、再回到排尾时，走过的总路程。</div>
 
 <div class="key key-blue key-lead" v-click="1">参考答案：<Latex tex="s = \frac{8}{3}L" />。</div>
 
@@ -1286,7 +1286,7 @@ clicks: 1
 
 <div class="page-grow">
 
-<div class="problem">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进。传令兵从排尾出发，往返一次回到排尾时，整支队伍恰好向前行进了 <Latex tex="L" />。求传令兵全程走过的总路程。</div>
+<div class="text-base">一支长为 <Latex tex="L" /> 的队伍以速率 <Latex tex="v" /> 匀速前进。传令兵从排尾出发，往返一次回到排尾时，整支队伍恰好向前行进了 <Latex tex="L" />。求传令兵全程走过的总路程。</div>
 
 <div class="key key-blue key-lead" v-click="1">参考答案：<Latex tex="s = (1 + \sqrt{2})L" />。</div>
 

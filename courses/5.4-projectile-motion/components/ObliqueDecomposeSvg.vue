@@ -21,22 +21,22 @@ const thetaArc = `M ${origin.x + thetaR} ${origin.y} A ${thetaR} ${thetaR} 0 0 0
 <template>
   <div class="oblique-decompose">
     <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="斜抛初速度的分解图">
-      <line :x1="origin.x" :y1="origin.y" x2="470" :y2="origin.y" stroke="rgba(148,163,184,0.45)" stroke-width="1.4" />
-      <line :x1="xTip.x" :y1="xTip.y" :x2="yTip.x" :y2="yTip.y" stroke="rgba(148,163,184,0.5)" stroke-width="1.6" stroke-dasharray="7 6" />
-      <line :x1="yTip.x" :y1="yTip.y" :x2="xTip.x" :y2="xTip.y" stroke="rgba(148,163,184,0.5)" stroke-width="1.6" stroke-dasharray="7 6" />
-      <CourseArrow :from="origin" :to="vTip" stroke="#e2a846" :stroke-width="3.2" />
-      <CourseArrow :from="origin" :to="xTip" stroke="#60a5fa" :stroke-width="3" />
-      <CourseArrow :from="origin" :to="yTip" stroke="#2dd4bf" :stroke-width="3" />
-      <path :d="thetaArc" fill="none" stroke="#e2a846" stroke-width="1.8" />
-      <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="#e2e8f0" />
-      <text x="236" y="150" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#e2a846">v</text>
-      <text x="237" y="154" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#e2a846">0</text>
-      <text x="228" y="274" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#60a5fa">v</text>
-      <text x="229" y="278" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#60a5fa">0x</text>
-      <text x="76" y="170" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#2dd4bf">v</text>
-      <text x="77" y="174" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#2dd4bf">0y</text>
-      <text x="166" y="238" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">θ</text>
-      <text x="74" y="276" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">O</text>
+      <line :x1="origin.x" :y1="origin.y" x2="470" :y2="origin.y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.4" />
+      <line :x1="xTip.x" :y1="xTip.y" :x2="yTip.x" :y2="yTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+      <line :x1="yTip.x" :y1="yTip.y" :x2="xTip.x" :y2="xTip.y" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+      <CourseArrow :from="origin" :to="vTip" stroke="var(--c-accent)" :stroke-width="3.2" />
+      <CourseArrow :from="origin" :to="xTip" stroke="var(--c-velocity)" :stroke-width="3" />
+      <CourseArrow :from="origin" :to="yTip" stroke="var(--c-physics)" :stroke-width="3" />
+      <path :d="thetaArc" fill="none" stroke="var(--c-accent)" stroke-width="1.8" />
+      <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-neutral-200)" />
+      <text x="236" y="150" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">v</text>
+      <text x="237" y="154" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">0</text>
+      <text x="228" y="274" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-velocity)">v</text>
+      <text x="229" y="278" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-velocity)">0x</text>
+      <text x="76" y="170" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-physics)">v</text>
+      <text x="77" y="174" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-physics)">0y</text>
+      <text x="166" y="238" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">θ</text>
+      <text x="74" y="276" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
     </svg>
   </div>
 </template>

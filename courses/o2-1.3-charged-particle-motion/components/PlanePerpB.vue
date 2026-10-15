@@ -237,8 +237,8 @@ const scene = computed(() => {
       <!-- 轨道平面：半透明平行四边形（投影后自然是平行四边形），上面标「轨道平面」 -->
       <polygon
         :points="scene.platePoints"
-        fill="rgba(148,163,184,0.16)"
-        stroke="rgba(148,163,184,0.5)"
+        fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
         stroke-width="2"
         stroke-linejoin="round"
       />
@@ -247,8 +247,8 @@ const scene = computed(() => {
         :y="scene.plateLabel.y"
         text-anchor="middle"
         font-size="17"
-        fill="#cbd5e1"
-        stroke="#0f1425"
+        fill="var(--c-neutral-300)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >
@@ -258,7 +258,7 @@ const scene = computed(() => {
       <CourseArrow
         :from="scene.bFrom"
         :to="scene.bTo"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="2.8"
         stroke-dasharray="9 7"
       />
@@ -268,8 +268,8 @@ const scene = computed(() => {
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#e2a846"
-        stroke="#0f1425"
+        fill="var(--c-accent)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -281,13 +281,13 @@ const scene = computed(() => {
         :y1="scene.tickFrom.y"
         :x2="scene.tickTo.x"
         :y2="scene.tickTo.y"
-        stroke="rgba(226,232,240,0.5)"
+        stroke="color-mix(in srgb, var(--c-neutral-200) 50%, transparent)"
         stroke-width="1.8"
       />
       <path
         :d="scene.square"
         fill="none"
-        stroke="rgba(226,232,240,0.75)"
+        stroke="color-mix(in srgb, var(--c-neutral-200) 75%, transparent)"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -296,27 +296,27 @@ const scene = computed(() => {
       <polyline
         :points="scene.orbitPoints"
         fill="none"
-        stroke="rgba(96,165,250,0.5)"
+        stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
         stroke-width="2.6"
         stroke-dasharray="8 8"
         stroke-linecap="round"
       />
       <!-- 三个取样点：v 沿切线（蓝）、F_洛 指向圆心（青；自检不过变红） -->
       <g v-for="s in scene.samples" :key="`arrow-${s.deg}`">
-        <CourseArrow :from="s.P" :to="s.VT" stroke="#60a5fa" stroke-width="3.4" />
+        <CourseArrow :from="s.P" :to="s.VT" stroke="var(--c-velocity)" stroke-width="3.4" />
         <CourseArrow
           :from="s.P"
           :to="s.FT"
           :stroke="s.ok ? '#2dd4bf' : '#f87171'"
           stroke-width="4"
         />
-        <circle :cx="s.P.x" :cy="s.P.y" r="7.5" fill="#60a5fa" />
+        <circle :cx="s.P.x" :cy="s.P.y" r="7.5" fill="var(--c-velocity)" />
         <line
           :x1="s.P.x - 3.5"
           :y1="s.P.y"
           :x2="s.P.x + 3.5"
           :y2="s.P.y"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="1.8"
           stroke-linecap="round"
         />
@@ -330,8 +330,8 @@ const scene = computed(() => {
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="21"
-          fill="#60a5fa"
-          stroke="#0f1425"
+          fill="var(--c-velocity)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -343,7 +343,7 @@ const scene = computed(() => {
           text-anchor="middle"
           font-size="20"
           :fill="s.ok ? '#2dd4bf' : '#f87171'"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >

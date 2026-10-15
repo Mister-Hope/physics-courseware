@@ -431,7 +431,7 @@ const resistanceText = computed<string>(() => formatSig2(resistance.value));
 }
 
 .efl-chip-wide {
-  border-color: rgb(226 168 70 / 45%);
+  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
 }
 
 .efl-chip-k {

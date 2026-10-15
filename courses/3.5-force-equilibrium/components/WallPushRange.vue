@@ -150,8 +150,8 @@ const fLabelPos = computed<Point>(() => ({
           :width="BLOCK.x2 - BLOCK.x1"
           :height="BLOCK.y2 - BLOCK.y1"
           rx="4"
-          fill="rgba(96,165,250,0.16)"
-          stroke="#60a5fa"
+          fill="color-mix(in srgb, var(--c-velocity) 16%, transparent)"
+          stroke="var(--c-velocity)"
           stroke-width="2.2"
         />
 
@@ -161,7 +161,7 @@ const fLabelPos = computed<Point>(() => ({
           :y1="CENTER.y"
           :x2="CENTER.x"
           y2="24"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.4"
           stroke-dasharray="5 4"
           opacity="0.8"
@@ -175,7 +175,7 @@ const fLabelPos = computed<Point>(() => ({
             :y1="fTip.y"
             :x2="fyTip.x"
             :y2="fyTip.y"
-            stroke="#94a3b8"
+            stroke="var(--c-text-dim)"
             stroke-width="1.4"
             stroke-dasharray="4 4"
             opacity="0.85"
@@ -185,7 +185,7 @@ const fLabelPos = computed<Point>(() => ({
             :y1="fTip.y"
             :x2="fxTip.x"
             :y2="fxTip.y"
-            stroke="#94a3b8"
+            stroke="var(--c-text-dim)"
             stroke-width="1.4"
             stroke-dasharray="4 4"
             opacity="0.85"
@@ -196,20 +196,20 @@ const fLabelPos = computed<Point>(() => ({
             :from="CENTER"
             :to="fxTip"
             :head-size="10"
-            stroke="#38bdf8"
+            stroke="var(--c-physics-light)"
             stroke-width="2.8"
             stroke-dasharray="5 3"
           />
           <text
             :x="(CENTER.x + fxTip.x) / 2 - 6"
             :y="CENTER.y + 18"
-            fill="#38bdf8"
+            fill="var(--c-physics-light)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="14"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -223,20 +223,20 @@ const fLabelPos = computed<Point>(() => ({
             :from="CENTER"
             :to="fyTip"
             :head-size="10"
-            stroke="#38bdf8"
+            stroke="var(--c-physics-light)"
             stroke-width="2.8"
             stroke-dasharray="5 3"
           />
           <text
             :x="CENTER.x + 32"
             :y="fyTip.y + 2"
-            fill="#38bdf8"
+            fill="var(--c-physics-light)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="14"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -253,19 +253,19 @@ const fLabelPos = computed<Point>(() => ({
             :from="CENTER"
             :to="gTip"
             :head-size="11"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="3.4"
           />
           <text
             :x="gTip.x + 15"
             :y="gTip.y - 4"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="17"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -277,19 +277,19 @@ const fLabelPos = computed<Point>(() => ({
             :from="CENTER"
             :to="fnTip"
             :head-size="11"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="3.4"
           />
           <text
             :x="fnTip.x + 17"
             :y="fnTip.y"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="17"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -315,7 +315,7 @@ const fLabelPos = computed<Point>(() => ({
               font-size="17"
               text-anchor="middle"
               dominant-baseline="central"
-              stroke="#0f1425"
+              stroke="var(--c-bg-soft)"
               stroke-width="3"
               paint-order="stroke"
             >
@@ -327,17 +327,17 @@ const fLabelPos = computed<Point>(() => ({
 
         <!-- ==================== 4. Step 0（始终显示）：斜向左上方的推力 F 与夹角 θ ==================== -->
         <!-- 夹角 θ 圆弧与角平分线标注 -->
-        <path :d="angleArc" fill="none" stroke="#e2a846" stroke-width="1.6" />
+        <path :d="angleArc" fill="none" stroke="var(--c-accent)" stroke-width="1.6" />
         <text
           :x="thetaLabelPos.x"
           :y="thetaLabelPos.y"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="16"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -349,19 +349,19 @@ const fLabelPos = computed<Point>(() => ({
           :from="CENTER"
           :to="fTip"
           :head-size="11"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="3.6"
         />
         <text
           :x="fLabelPos.x"
           :y="fLabelPos.y"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="18"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -373,8 +373,8 @@ const fLabelPos = computed<Point>(() => ({
           :cx="CENTER.x"
           :cy="CENTER.y"
           r="4"
-          fill="#f8fafc"
-          stroke="#0f1425"
+          fill="var(--c-neutral-50)"
+          stroke="var(--c-bg-soft)"
           stroke-width="1.6"
         />
       </svg>

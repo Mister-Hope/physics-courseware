@@ -95,9 +95,9 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
 </script>
 
 <template>
-  <div class="cp">
+  <div class="cg-chain">
     <svg
-      class="cp-svg"
+      class="cg-chain-svg"
       viewBox="38 30 564 292"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
@@ -108,7 +108,7 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
         :y1="PIN_L.y"
         x2="556"
         :y2="PIN_L.y"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.2"
         stroke-dasharray="6 5"
         opacity="0.45"
@@ -118,22 +118,22 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
         :y1="naturalCenterY"
         x2="556"
         :y2="naturalCenterY"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-dasharray="6 5"
         opacity="0.7"
       />
-      <text x="52" :y="naturalCenterY - 10" font-size="15" fill="#94a3b8">自然下垂时的重心</text>
-      <path :d="path" fill="none" stroke="#e2a846" stroke-width="6" stroke-linecap="round" />
-      <circle :cx="PIN_L.x" :cy="PIN_L.y" r="7.5" fill="#64748b" />
-      <circle :cx="PIN_R.x" :cy="PIN_R.y" r="7.5" fill="#64748b" />
-      <circle :cx="CENTER_X" :cy="centerY" r="9" fill="#f87171" stroke="#0f1425" stroke-width="2" />
+      <text x="52" :y="naturalCenterY - 10" font-size="15" fill="var(--c-text-dim)">自然下垂时的重心</text>
+      <path :d="path" fill="none" stroke="var(--c-accent)" stroke-width="6" stroke-linecap="round" />
+      <circle :cx="PIN_L.x" :cy="PIN_L.y" r="7.5" fill="var(--c-neutral-500)" />
+      <circle :cx="PIN_R.x" :cy="PIN_R.y" r="7.5" fill="var(--c-neutral-500)" />
+      <circle :cx="CENTER_X" :cy="centerY" r="9" fill="var(--c-force)" stroke="var(--c-bg-soft)" stroke-width="2" />
       <line
         :x1="CENTER_X"
         :y1="centerY"
         :x2="CENTER_X"
         :y2="naturalCenterY"
-        stroke="#f87171"
+        stroke="var(--c-force)"
         stroke-width="2"
         stroke-dasharray="5 4"
       />
@@ -141,8 +141,8 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
         :x="CENTER_X + 18"
         :y="centerY - 12"
         font-size="20"
-        fill="#f87171"
-        stroke="#0f1425"
+        fill="var(--c-force)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -151,25 +151,25 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
       <CourseArrow
         :from="{ x: CENTER_X, y: midY - 38 }"
         :to="{ x: CENTER_X, y: midY + 8 }"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="3.4"
       />
-      <text :x="CENTER_X + 14" :y="midY - 18" font-size="16" fill="#60a5fa">往下拽</text>
-      <text x="150" y="62" font-size="16" fill="#94a3b8" text-anchor="middle">固定点</text>
-      <text x="450" y="62" font-size="16" fill="#94a3b8" text-anchor="middle">固定点</text>
+      <text :x="CENTER_X + 14" :y="midY - 18" font-size="16" fill="var(--c-velocity)">往下拽</text>
+      <text x="150" y="62" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">固定点</text>
+      <text x="450" y="62" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">固定点</text>
     </svg>
-    <div class="cp-ctrl">
-      <label class="cp-label">
+    <div class="cg-chain-ctrl">
+      <label class="cg-chain-label">
         <span>往下拽的程度（松 ↔ 紧）</span>
         <input v-model.number="pull" type="range" min="0" max="1" step="0.01" />
       </label>
-      <div class="cp-read">最低点被拽得越低、铁链绷得越直 → 重心反而<b class="cp-num">升高</b></div>
+      <div class="cg-chain-read">最低点被拽得越低、铁链绷得越直 → 重心反而<b class="cg-chain-num">升高</b></div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.cp {
+.cg-chain {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -178,14 +178,14 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
   width: 100%;
 }
 
-.cp-svg {
+.cg-chain-svg {
   display: block;
   width: 100%;
   height: auto;
   margin: 0 auto;
 }
 
-.cp-ctrl {
+.cg-chain-ctrl {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
@@ -195,7 +195,7 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
   max-width: 27rem;
 }
 
-.cp-label {
+.cg-chain-label {
   display: flex;
   gap: 0.7rem;
   align-items: center;
@@ -207,24 +207,24 @@ const midY = computed(() => shape.value[Math.floor(shape.value.length / 2)].y);
   font-size: 0.78rem;
 }
 
-.cp-label input {
+.cg-chain-label input {
   flex: 1;
   min-width: 0;
   accent-color: var(--c-accent);
 }
 
-.cp-read {
+.cg-chain-read {
   color: var(--c-text);
   font-size: 0.82rem;
   text-align: center;
 }
 
-.cp-num {
+.cg-chain-num {
   color: var(--c-accent);
   font-size: 0.98rem;
 }
 
-.cp-note {
+.cg-chain-note {
   display: block;
   margin-top: 0.1rem;
   color: var(--c-text-dim);

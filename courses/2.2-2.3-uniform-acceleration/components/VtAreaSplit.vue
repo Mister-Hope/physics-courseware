@@ -386,8 +386,8 @@ const chartLabels = computed(() => {
 </script>
 
 <template>
-  <div class="vt-split">
-    <div class="vt-split-figure">
+  <div class="ua-split">
+    <div class="ua-split-figure">
       <CoordAxes
         :x-range="[0, X_MAX]"
         :y-range="[cfg.axisMin, cfg.axisMax]"
@@ -402,23 +402,29 @@ const chartLabels = computed(() => {
       />
     </div>
 
-    <div class="vt-split-panel">
-      <div class="sp-title" :class="{ 'vt-hidden': step < 2 }">{{ panelTitle }}</div>
+    <div class="ua-split-panel">
+      <div class="ua-split-title" :class="{ 'ua-hidden': step < 2 }">{{ panelTitle }}</div>
 
       <div
         v-for="row in rows"
         :key="row.name"
-        class="sp-row"
-        :class="{ 'vt-hidden': step < row.showAt }"
+        class="ua-split-row"
+        :class="{ 'ua-hidden': step < row.showAt }"
       >
-        <span class="sp-label">
+        <span class="ua-split-label">
           <span>{{ row.name }}</span>
           <Latex v-if="row.nameTex" :tex="row.nameTex" />
         </span>
-        <b class="sp-value" :class="`sp-value-${row.tone}`"><Latex :tex="row.valueTex" /></b>
+        <b class="ua-split-value" :class="`ua-split-value-${row.tone}`"
+          ><Latex :tex="row.valueTex"
+        /></b>
       </div>
 
-      <div v-if="cfg.kind !== 'reverse'" class="sp-formula" :class="{ 'vt-hidden': step < 3 }">
+      <div
+        v-if="cfg.kind !== 'reverse'"
+        class="ua-split-formula"
+        :class="{ 'ua-hidden': step < 3 }"
+      >
         <Latex tex="x = v_0t + \frac{1}{2}at^2" />
       </div>
     </div>
@@ -426,7 +432,7 @@ const chartLabels = computed(() => {
 </template>
 
 <style scoped>
-.vt-split {
+.ua-split {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
   gap: 1.6rem;
@@ -435,22 +441,22 @@ const chartLabels = computed(() => {
   min-width: 0;
 }
 
-.vt-split-figure {
+.ua-split-figure {
   min-width: 0;
 }
 
-.vt-hidden {
+.ua-hidden {
   visibility: hidden;
 }
 
-.vt-split-panel {
+.ua-split-panel {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
   min-width: 0;
 }
 
-.sp-title {
+.ua-split-title {
   color: var(--c-accent);
 
   font-weight: 700;
@@ -459,7 +465,7 @@ const chartLabels = computed(() => {
   white-space: nowrap;
 }
 
-.sp-row {
+.ua-split-row {
   display: flex;
   gap: 0.5rem;
   align-items: baseline;
@@ -471,7 +477,7 @@ const chartLabels = computed(() => {
   font-size: 0.9rem;
 }
 
-.sp-label {
+.ua-split-label {
   display: inline-flex;
   gap: 0.3rem;
   align-items: baseline;
@@ -481,30 +487,30 @@ const chartLabels = computed(() => {
   white-space: nowrap;
 }
 
-.sp-value {
+.ua-split-value {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-.sp-value-rect {
+.ua-split-value-rect {
   color: var(--c-accent);
 }
 
-.sp-value-tri,
-.sp-value-pos {
+.ua-split-value-tri,
+.ua-split-value-pos {
   color: var(--c-accent-2);
 }
 
-.sp-value-neg {
+.ua-split-value-neg {
   color: var(--c-danger);
 }
 
-.sp-value-exact {
+.ua-split-value-exact {
   color: var(--c-accent);
   font-size: 1rem;
 }
 
-.sp-formula {
+.ua-split-formula {
   margin-top: 0.15rem;
   color: var(--c-text-dim);
   font-size: 0.9rem;

@@ -92,7 +92,7 @@ const vertexC = {
           :y1="PIVOT.y"
           :x2="ball.x"
           :y2="ball.y"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="2.4"
         />
         <line
@@ -100,41 +100,41 @@ const vertexC = {
           :y1="PIVOT.y"
           :x2="PIVOT.x"
           :y2="PIVOT.y + ARC_R + 8"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.3"
           stroke-dasharray="5 4"
           opacity="0.85"
         />
-        <path :d="thetaArc" fill="none" stroke="#94a3b8" stroke-width="1.6" />
+        <path :d="thetaArc" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
         <text
           :x="PIVOT.x + 10"
           :y="PIVOT.y + 30"
-          fill="#94a3b8"
+          fill="var(--c-text-dim)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="19"
         >
           θ
         </text>
-        <circle :cx="PIVOT.x" :cy="PIVOT.y" r="4" fill="#94a3b8" />
+        <circle :cx="PIVOT.x" :cy="PIVOT.y" r="4" fill="var(--c-text-dim)" />
         <!-- 垂直于悬线的虚线 -->
         <line
           :x1="lineA.x"
           :y1="lineA.y"
           :x2="lineB.x"
           :y2="lineB.y"
-          stroke="#cbd5e1"
+          stroke="var(--c-neutral-300)"
           stroke-width="1.5"
           stroke-dasharray="6 5"
           opacity="0.8"
         />
-        <path :d="rightAngle" fill="none" stroke="#cbd5e1" stroke-width="1.2" />
+        <path :d="rightAngle" fill="none" stroke="var(--c-neutral-300)" stroke-width="1.2" />
         <circle
           :cx="ball.x"
           :cy="ball.y"
           :r="BALL_R"
-          fill="rgba(96,165,250,0.22)"
-          stroke="#60a5fa"
+          fill="color-mix(in srgb, var(--c-velocity) 22%, transparent)"
+          stroke="var(--c-velocity)"
           stroke-width="2.4"
         />
         <!-- 拉力（沿悬线） -->
@@ -143,13 +143,13 @@ const vertexC = {
             :from="{ x: ball.x, y: ball.y }"
             :to="tTip"
             :head-size="12"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="3.4"
           />
           <text
             :x="tTip.x - 30"
             :y="tTip.y - 12"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"
@@ -159,7 +159,7 @@ const vertexC = {
           <text
             :x="tTip.x - 17"
             :y="tTip.y - 7"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="13"
@@ -171,13 +171,13 @@ const vertexC = {
             :from="{ x: ball.x, y: ball.y }"
             :to="gTip"
             :head-size="12"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="3.6"
           />
           <text
             :x="gTip.x + 9"
             :y="gTip.y - 5"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="20"
@@ -189,13 +189,13 @@ const vertexC = {
             :from="{ x: ball.x, y: ball.y }"
             :to="fTip"
             :head-size="12"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="3.6"
           />
           <text
             :x="fTip.x + 8"
             :y="fTip.y + 6"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="20"
@@ -207,14 +207,14 @@ const vertexC = {
             :from="{ x: ball.x, y: ball.y }"
             :to="gPerpTip"
             :head-size="9"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="2.4"
             stroke-dasharray="6 4"
           />
           <text
             :x="gPerpTip.x - 34"
             :y="gPerpTip.y + 18"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="16"
@@ -224,7 +224,7 @@ const vertexC = {
           <text
             :x="gPerpTip.x - 23"
             :y="gPerpTip.y + 22"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="11"
@@ -235,14 +235,14 @@ const vertexC = {
             :from="{ x: ball.x, y: ball.y }"
             :to="fPerpTip"
             :head-size="9"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="2.4"
             stroke-dasharray="6 4"
           />
           <text
             :x="fPerpTip.x + 6"
             :y="fPerpTip.y - 4"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="16"
@@ -252,7 +252,7 @@ const vertexC = {
           <text
             :x="fPerpTip.x + 17"
             :y="fPerpTip.y"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="11"
@@ -262,7 +262,7 @@ const vertexC = {
           <text
             :x="lineB.x - 8"
             :y="lineB.y - 12"
-            fill="#94a3b8"
+            fill="var(--c-text-dim)"
             font-family="KaTeX_Main"
             font-size="13"
           >
@@ -279,27 +279,27 @@ const vertexC = {
             :from="TRI_A"
             :to="vertexB"
             :head-size="12"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="3.6"
           />
           <CourseArrow
             :from="vertexB"
             :to="vertexC"
             :head-size="12"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="3.4"
           />
           <CourseArrow
             :from="vertexC"
             :to="TRI_A"
             :head-size="12"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="3.6"
           />
           <text
             :x="TRI_A.x - 24"
             :y="(TRI_A.y + vertexB.y) / 2 + 6"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"
@@ -309,7 +309,7 @@ const vertexC = {
           <text
             :x="(vertexB.x + vertexC.x) / 2 - 8"
             :y="(vertexB.y + vertexC.y) / 2 + 8"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"
@@ -319,7 +319,7 @@ const vertexC = {
           <text
             :x="(vertexB.x + vertexC.x) / 2 + 5"
             :y="(vertexB.y + vertexC.y) / 2 + 13"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="13"
@@ -329,7 +329,7 @@ const vertexC = {
           <text
             :x="(TRI_A.x + vertexC.x) / 2 + 12"
             :y="(TRI_A.y + vertexC.y) / 2 - 6"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"

@@ -180,13 +180,13 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
 </script>
 
 <template>
-  <div class="ssm">
-    <div class="ssm-bar">
+  <div class="sim">
+    <div class="sim-bar">
       <button
         v-for="item in CASES"
         :key="item.key"
-        class="ssm-btn"
-        :class="{ 'ssm-btn-on': item.key === active }"
+        class="sim-btn"
+        :class="{ 'sim-btn-on': item.key === active }"
         type="button"
         @click="active = item.key"
       >
@@ -198,21 +198,21 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         <!-- 3D 轴承钢球径向金属光泽渐变 -->
         <radialGradient :id="`sbmBall-${uid}`" cx="34%" cy="30%" r="68%" fx="30%" fy="26%">
           <stop offset="0%" stop-color="#ffffff" />
-          <stop offset="22%" stop-color="#e2e8f0" />
-          <stop offset="56%" stop-color="#94a3b8" />
-          <stop offset="84%" stop-color="#475569" />
-          <stop offset="100%" stop-color="#1e293b" />
+          <stop offset="22%" stop-color="var(--c-neutral-200)" />
+          <stop offset="56%" stop-color="var(--c-text-dim)" />
+          <stop offset="84%" stop-color="var(--c-neutral-600)" />
+          <stop offset="100%" stop-color="var(--c-surface-solid)" />
         </radialGradient>
 
         <!-- 条形磁铁 N 极（红）与 S 极（蓝）立体渐变 -->
         <linearGradient :id="`sbmMagN-${uid}`" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#f87171" />
+          <stop offset="0%" stop-color="var(--c-force)" />
           <stop offset="50%" stop-color="#ef4444" />
           <stop offset="100%" stop-color="#b91c1c" />
         </linearGradient>
         <linearGradient :id="`sbmMagS-${uid}`" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#60a5fa" />
-          <stop offset="50%" stop-color="#3b82f6" />
+          <stop offset="0%" stop-color="var(--c-velocity)" />
+          <stop offset="50%" stop-color="var(--c-accent-2)" />
           <stop offset="100%" stop-color="#1d4ed8" />
         </linearGradient>
       </defs>
@@ -224,11 +224,11 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         width="844"
         height="272"
         rx="18"
-        fill="rgba(148,163,184,0.06)"
-        stroke="rgba(148,163,184,0.25)"
+        fill="color-mix(in srgb, var(--c-text-dim) 6%, transparent)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)"
         stroke-width="2"
       />
-      <text x="40" y="44" font-family="KaTeX_Main, sans-serif" font-size="19" fill="#94a3b8">
+      <text x="40" y="44" font-family="KaTeX_Main, sans-serif" font-size="19" fill="var(--c-text-dim)">
         水平桌面（俯视）
       </text>
 
@@ -239,7 +239,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         :y1="origin.y"
         x2="780"
         :y2="origin.y"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.6"
         stroke-dasharray="5 6"
         opacity="0.38"
@@ -251,7 +251,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         :y1="origin.y"
         :x2="origin.x - 12"
         :y2="origin.y"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2.4"
         stroke-dasharray="8 7"
         opacity="0.78"
@@ -261,14 +261,14 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         :y="origin.y - 16"
         font-family="KaTeX_Main, sans-serif"
         font-size="19"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
       >
         原来沿直线前进
       </text>
       <CourseArrow
         :from="{ x: 194, y: origin.y }"
         :to="{ x: origin.x - 14, y: origin.y }"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2.4"
       />
 
@@ -276,19 +276,19 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
       <path
         :d="trackPath"
         fill="none"
-        stroke="rgba(45,212,191,0.22)"
+        stroke="color-mix(in srgb, var(--c-physics) 22%, transparent)"
         stroke-width="9"
         stroke-linecap="round"
       />
-      <path :d="trackPath" fill="none" stroke="#2dd4bf" stroke-width="3.8" stroke-linecap="round" />
+      <path :d="trackPath" fill="none" stroke="var(--c-physics)" stroke-width="3.8" stroke-linecap="round" />
 
       <!-- 起点 origin 处的钢球虚影位 -->
       <circle
         :cx="origin.x"
         :cy="origin.y"
         r="12.5"
-        fill="rgba(45,212,191,0.08)"
-        stroke="#2dd4bf"
+        fill="color-mix(in srgb, var(--c-physics) 8%, transparent)"
+        stroke="var(--c-physics)"
         stroke-width="2"
         stroke-dasharray="4 3"
       />
@@ -298,7 +298,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         text-anchor="middle"
         font-family="KaTeX_Main, sans-serif"
         font-size="19"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         钢球
       </text>
@@ -314,7 +314,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         <path
           d="M 42 -12 A 18 18 0 0 1 42 12"
           fill="none"
-          stroke="rgba(248,113,113,0.45)"
+          stroke="color-mix(in srgb, var(--c-force) 45%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="3 3"
           stroke-linecap="round"
@@ -322,7 +322,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         <path
           d="M 49 -17 A 25 25 0 0 1 49 17"
           fill="none"
-          stroke="rgba(248,113,113,0.25)"
+          stroke="color-mix(in srgb, var(--c-force) 25%, transparent)"
           stroke-width="1.5"
           stroke-dasharray="3 4"
           stroke-linecap="round"
@@ -343,7 +343,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         <rect x="-34" y="-15" width="68" height="4" rx="2" fill="rgba(255,255,255,0.22)" />
 
         <!-- 红蓝极性平直分界线 + 整体金属外框（无任何交界凹槽） -->
-        <line x1="0" y1="-18" x2="0" y2="18" stroke="rgba(15,23,42,0.55)" stroke-width="1.5" />
+        <line x1="0" y1="-18" x2="0" y2="18" stroke="color-mix(in srgb, var(--c-neutral-900) 55%, transparent)" stroke-width="1.5" />
         <rect
           x="-37"
           y="-18"
@@ -351,7 +351,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
           height="36"
           rx="5"
           fill="none"
-          stroke="#cbd5e1"
+          stroke="var(--c-neutral-300)"
           stroke-width="1.8"
         />
       </g>
@@ -363,7 +363,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         font-family="KaTeX_Main, sans-serif"
         font-size="15"
         font-weight="700"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
         text-anchor="middle"
         dominant-baseline="central"
       >
@@ -375,7 +375,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         font-family="KaTeX_Main, sans-serif"
         font-size="15"
         font-weight="700"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
         text-anchor="middle"
         dominant-baseline="central"
       >
@@ -390,8 +390,8 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         font-family="KaTeX_Main, sans-serif"
         font-size="20"
         font-weight="600"
-        fill="#f1f5f9"
-        stroke="#0f1425"
+        fill="var(--c-text)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -399,8 +399,8 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
       </text>
 
       <!-- 速度 v 与磁力 F 矢量箭头（先画箭头，再盖上立体钢球与分侧标签） -->
-      <CourseArrow :from="probe.vFrom" :to="probe.vTip" stroke="#60a5fa" stroke-width="3.5" />
-      <CourseArrow :from="probe.fFrom" :to="probe.fTip" stroke="#e2a846" stroke-width="3.5" />
+      <CourseArrow :from="probe.vFrom" :to="probe.vTip" stroke="var(--c-velocity)" stroke-width="3.5" />
+      <CourseArrow :from="probe.fFrom" :to="probe.fTip" stroke="var(--c-accent)" stroke-width="3.5" />
 
       <!-- 速度 v 与磁力 F 的独立防重叠标签 -->
       <text
@@ -409,10 +409,10 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="22"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -424,10 +424,10 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="22"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -448,7 +448,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
           :cy="probe.point.y"
           r="10.5"
           :fill="`url(#sbmBall-${uid})`"
-          stroke="#475569"
+          stroke="var(--c-neutral-600)"
           stroke-width="1.2"
         />
         <circle
@@ -468,7 +468,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
           :cy="endBall.y"
           r="10.5"
           :fill="`url(#sbmBall-${uid})`"
-          stroke="#475569"
+          stroke="var(--c-neutral-600)"
           stroke-width="1.2"
         />
         <circle :cx="endBall.x - 3.4" :cy="endBall.y - 3.6" r="2.3" fill="#ffffff" opacity="0.9" />
@@ -478,7 +478,7 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
 </template>
 
 <style scoped>
-.ssm {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -487,31 +487,31 @@ const endBall = computed(() => samples.value[samples.value.length - 1] ?? origin
   min-width: 0;
 }
 
-.ssm-bar {
+.sim-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
 }
 
-.ssm-btn {
+.sim-btn {
   padding: 0.35rem 0.95rem;
-  border: 1px solid rgb(148 163 184 / 25%);
+  border: 1px solid color-mix(in srgb, var(--c-text-dim) 25%, transparent);
   border-radius: 999px;
 
-  background: rgb(148 163 184 / 10%);
-  color: var(--c-text-dim, #94a3b8);
+  background: var(--c-border);
+  color: var(--c-text-dim);
 
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 
   cursor: pointer;
 
   transition: all 0.2s ease;
 }
 
-.ssm-btn-on {
-  border-color: #e2a846;
-  background: #e2a846;
-  color: #0f1425;
+.sim-btn-on {
+  border-color: var(--c-accent);
+  background: var(--c-accent);
+  color: var(--c-bg-soft);
   font-weight: 700;
 }
 </style>

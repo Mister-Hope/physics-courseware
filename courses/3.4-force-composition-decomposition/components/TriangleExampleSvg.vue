@@ -6,7 +6,7 @@
     24 : 7 按真实比例画（每牛顿 22 用户单位，viewBox 600×200），图上就是一个直角三角形，
     学生用初中的勾股定理就能读出斜边 25 N。
   -->
-  <div class="te-figure">
+  <div class="figure relative min-w-0">
     <svg viewBox="0 0 600 200">
       <path d="M 116,175 A 76,76 0 0 0 112.96,153.71" fill="none" stroke="var(--c-text-dim)" stroke-width="1.4" opacity="0.8" />
       <polyline points="554,175 554,161 568,161" fill="none" stroke="var(--c-text-dim)" stroke-width="1.4" opacity="0.8" />
@@ -31,15 +31,3 @@
   </div>
 </template>
 
-<style scoped>
-.te-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.te-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-</style>

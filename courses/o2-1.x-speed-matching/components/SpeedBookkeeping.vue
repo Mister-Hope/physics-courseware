@@ -57,8 +57,8 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="sb">
-    <svg :viewBox="`0 0 ${W} ${H}`" class="sb-svg">
+  <div class="fig-book">
+    <svg :viewBox="`0 0 ${W} ${H}`" class="fig-svg">
       <!-- 平行四边形补齐用虚线：两个分速度各自平移到对面 */
       <g v-if="step >= 1" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="6 5" fill="none" opacity="0.5">
         <path :d="`M ${vCir.x} ${vCir.y} L ${vReal.x} ${vReal.y}`" />
@@ -238,16 +238,10 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-.sb {
+/* 速度"两笔账"图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max */
+.fig-book {
   width: 100%;
-}
 
-.sb-svg {
-  display: block;
-
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-  margin: 0 auto;
+  --fig-max: 700px;
 }
 </style>

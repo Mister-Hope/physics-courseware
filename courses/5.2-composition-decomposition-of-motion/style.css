@@ -1,6 +1,13 @@
 /* ═══════════════════════════════════════════════
    运动的合成与分解 — 课程特有样式
    通用设计系统已在 workspace/shared（共享 addon）里，这里只放本课特有样式
+
+   自造类只有两个概念前缀（同一概念只有一套名字）：
+   · scene- 引课页 / 概念三栏的并列场景
+   · sim-   交互仿真组件的面板与读数（定义在各组件 <style scoped> 里，本文件不抄）
+   栅格、卡片、竖线、图占满、字号一律走共享原子：
+   .half-grid（两栏）· .three-col（三栏）· .split-wide（左图右文）· .figure · .mini-title · .mini-note · .text-xl…5xl
+   色值一律 var(--c-*)。
    ═══════════════════════════════════════════════ */
 
 /* ── 本课图多、公式多，纵向密度比默认略紧 ── */
@@ -9,61 +16,8 @@
   --stack-gap: 0.7rem;
 }
 
-/* ── 内容少的页面（提问页、小结页）：把正文放大一档，别让下半页空着 ── */
-.page-loose {
-  font-size: 1.18rem;
-  line-height: 1.8;
-}
-
-.page-loose .ask {
-  font-size: 1.6rem;
-  line-height: 1.5;
-}
-
-/* ── 通用栅格（子项 min-width: 0，防止长公式撑爆列宽）── */
-.grid-2,
-.grid-3 {
-  display: grid;
-  gap: 1.4rem;
-  align-items: center;
-}
-
-.grid-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-2 > *,
-.grid-3 > * {
-  min-width: 0;
-}
-
-.grid-side {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.grid-side > * {
-  min-width: 0;
-}
-
-/* ── 图容器：svg 占满所在栏 ── */
-.figure {
-  min-width: 0;
-}
-
-.figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* ── 引课页：三个场景 ── */
+/* ── 引课页 / 概念三栏：并列的三个场景 ──
+   图标 / 标题 / 说明的字号分别走 markup 上的 .text-5xl text-accent、.text-xl font-bold、.mini-note ── */
 .scene {
   display: flex;
   flex-direction: column;
@@ -71,26 +25,4 @@
   align-items: center;
 
   text-align: center;
-}
-
-.scene-icon {
-  color: var(--c-accent);
-  font-size: 2.6rem;
-}
-
-.scene-title {
-  font-weight: 700;
-  font-size: 1.15rem;
-}
-
-.scene-desc {
-  color: var(--c-text-dim);
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-/* ── 例题：步骤行 ── */
-.ex-step {
-  font-size: 1.05rem;
-  line-height: 1.7;
 }

@@ -182,8 +182,8 @@ const MATH_FONT = "KaTeX_Math, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="tube-field">
-    <svg :viewBox="`0 0 ${VB_W} ${VB_H}`" class="tube-field-svg">
+  <div class="fig-tube">
+    <svg :viewBox="`0 0 ${VB_W} ${VB_H}`" class="fig-svg">
       <!-- 磁场：左边界虚线 + 铺满右侧的向里裸 × 阵列（单个 ⊗ 图例已去掉） -->
       <line
         :x1="FIELD_EDGE_X"
@@ -435,17 +435,12 @@ const MATH_FONT = "KaTeX_Math, 'Times New Roman', serif";
 </template>
 
 <style scoped>
-.tube-field {
+/* 图占满所在栏能给出的最大尺寸：第 11 页题目页图栏 ≈ 438px、第 12 页解析页图栏 ≈ 500px。
+   第 12 页的三句分析已改成与图并排的左栏，不再压在图下面，所以图可以吃满栏宽。
+   ⚠️ 这个上限走 --fig-max：共享的 .fig-svg 读它，写在 .fig-tube 上就只影响本图（scoped 权重、只对本组件生效）。 */
+.fig-tube {
   width: 100%;
-}
 
-/* 图占满所在栏能给出的最大尺寸：第 11/12 页右栏约 383px 宽，但第 12 页图下面还有三句分析，
-   图再高就会把正文顶出 980×552 画布 —— 330px（占整屏宽 33.7%，≥ 教师要求的 1/3）是"图够大"与"页面不出画布"的平衡点。
-   ⚠️ 这个上限必须写在这里：scoped 规则权重高于 style.css 的 .q-fig-aside svg，写在那边压不住。 */
-.tube-field-svg {
-  display: block;
-  width: 100%;
-  max-width: 330px;
-  height: auto;
+  --fig-max: 540px;
 }
 </style>

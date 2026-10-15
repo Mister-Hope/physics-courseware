@@ -111,7 +111,7 @@ layout: base-flex
 
 <div class="half-grid">
 
-<div v-click="1" class="svg-full">
+<div v-click="1" class="figure">
   <WorkConductionSvg />
 </div>
 
@@ -145,7 +145,7 @@ layout: base-flex
 
 <div class="half-grid">
 
-<div v-click="1" class="svg-full">
+<div v-click="1" class="figure">
   <SeriesPowerSvg />
 </div>
 
@@ -179,7 +179,7 @@ layout: base-flex
 
 <div class="half-grid">
 
-<div v-click="1" class="svg-full">
+<div v-click="1" class="figure">
   <ParallelPowerSvg />
 </div>
 
@@ -212,12 +212,12 @@ layout: base-flex
 <div class="ask">电源提供的总功率，与各用电器的功率是什么关系？</div>
 
 <div v-click="1" class="stack-tight">
-  <div class="mini-title">串联</div>
+  <div class="mini-title"><mdi-vector-line class="text-3xl" /> 串联</div>
   <div class="text-xl"><Latex tex="P = P_1 + P_2 = I^2R_1 + I^2R_2 = I^2(R_1 + R_2)" /></div>
 </div>
 
 <div v-click="2" class="stack-tight">
-  <div class="mini-title">并联</div>
+  <div class="mini-title"><mdi-call-split class="text-3xl" /> 并联</div>
   <div class="text-xl"><Latex tex="P = P_1 + P_2 = \dfrac{U^2}{R_1} + \dfrac{U^2}{R_2}" /></div>
 </div>
 
@@ -263,8 +263,8 @@ layout: base-flex
 
 <div class="cmp-row cmp-head">
   <div>比较项目</div>
-  <div>纯电阻电路</div>
-  <div>非纯电阻电路</div>
+  <div><mdi-resistor class="icon-md" /> 纯电阻电路</div>
+  <div><mdi-engine-outline class="icon-md" /> 非纯电阻电路</div>
 </div>
 
 <div v-click="1" class="cmp-row">
@@ -331,13 +331,13 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="half-grid half-grid-square">
+<div class="half-grid fig-square">
 
-<div class="problem">
+<div>
   一台电动机，线圈的电阻是 <Latex tex="6\ \Omega" />，当它两端所加的电压为 <Latex tex="220\ \text{V}" /> 时，通过的电流是 <Latex tex="5\ \text{A}" />。这台电动机发热的功率与对外做功的功率各是多少？
 </div>
 
-<div class="svg-full">
+<div class="figure">
   <MotorSchematicSvg />
 </div>
 
@@ -369,13 +369,13 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="half-grid half-grid-square">
+<div class="half-grid fig-square">
 
-<div class="problem">
+<div>
   一小型电动机，加 <Latex tex="0.2\ \text{V}" /> 电压时不转，电流 <Latex tex="0.4\ \text{A}" />；加 <Latex tex="2.0\ \text{V}" /> 电压时正常转动，电流 <Latex tex="1.0\ \text{A}" />。求线圈电阻及转动时的输入功率、发热功率、输出功率与效率。
 </div>
 
-<div class="svg-full">
+<div class="figure">
   <MotorSchematicSvg />
 </div>
 
@@ -416,7 +416,7 @@ layout: base-flex
 <div v-click="2"><PowerBank /></div>
 
 <div v-click="3" class="key">
-  毫安时（<Latex tex="\text{mAh}" />）是电荷量、不是能量；<strong>电容量 × 电动势 = 储存的能量</strong>（<Latex tex="\text{Wh}" />）。
+  毫安时（<Latex tex="\text{mAh}" />）是电荷量、不是能量；<strong>电容量 <Latex tex="\times" /> 电动势 = 储存的能量</strong>（<Latex tex="\text{Wh}" />）。
 </div>
 
 </div>
@@ -437,7 +437,7 @@ layout: base-flex
 
 <div class="summary-line" v-click="4"><span class="text-accent font-bold">纯电阻与非纯电阻</span>：纯电阻 <Latex tex="W = Q" />；电动机 <Latex tex="P_{\text{入}} = UI" />、<Latex tex="P_{\text{出}} = UI - I^2R" />、效率 <Latex tex="\eta = \dfrac{P_{\text{出}}}{P_{\text{入}}}" /></div>
 
-<div class="summary-line" v-click="5"><span class="text-accent font-bold">电池的能量</span>：<Latex tex="W = EQ" />；充电宝「<Latex tex="\text{mAh}" /> × <Latex tex="\text{V}" />」得到 <Latex tex="\text{Wh}" /></div>
+<div class="summary-line" v-click="5"><span class="text-accent font-bold">电池的能量</span>：<Latex tex="W = EQ" />；充电宝「<Latex tex="\text{mAh}" /> <Latex tex="\times" /> <Latex tex="\text{V}" />」得到 <Latex tex="\text{Wh}" /></div>
 
 <div v-click="6" class="key key-lead">
   一条主线：电能与其他形式的能之间的转化，处处服从<strong>能量守恒</strong>。
@@ -455,7 +455,7 @@ layout: base-flex
 
 <div class="stack">
 
-<div class="mini-title">教材 12.1 练习与应用</div>
+<div class="mini-title"><mdi-book-open-variant class="text-3xl" /> 教材 12.1 练习与应用</div>
 
 <div>
   <strong>第 2 题</strong>（电饭锅）：<Latex tex="R_1" /> 是电阻，<Latex tex="R_2" /> 是加热用的电阻丝。判断自动开关 <Latex tex="\text{S}" /> 接通、断开时电饭锅分别处于哪种状态；若保温功率是加热功率的一半，求 <Latex tex="R_1 : R_2" />。

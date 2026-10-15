@@ -32,8 +32,8 @@ clicks: 1
 # 曲线运动的定义
 
 <div class="page-grow">
-<div class="hero-tag"><mdi-book-open-page-variant-outline /> 定义</div>
-<div class="card card-hero">轨迹是<b>曲线</b>的运动，叫作<b>曲线运动</b>。</div>
+<div class="tag-icon self-center"><mdi-book-open-page-variant-outline /> 定义</div>
+<div class="card text-2xl leading-normal text-center">轨迹是<b>曲线</b>的运动，叫作<b>曲线运动</b>。</div>
 <div class="stack" v-click="1">
 <div>直线运动（匀速、匀变速）的轨迹是直线。</div>
 <div>抛出去的篮球、绕太阳公转的地球，轨迹都是曲线。</div>
@@ -45,7 +45,7 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask ask-hero">都是抛出去的物体、都只受重力 —— 往哪个方向抛，轨迹才会是曲线？</div>
+<div class="ask text-3xl leading-normal">都是抛出去的物体、都只受重力 —— 往哪个方向抛，轨迹才会是曲线？</div>
 <ThrowDirectionSvg />
 </div>
 
@@ -59,13 +59,13 @@ clicks: 1
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title">轨迹是直线</div>
+<div class="mini-title"><mdi-vector-line class="text-xl" /> 轨迹是直线</div>
 <div>自由落体（<Latex tex="v_0 = 0" />）</div>
 <div>竖直下抛</div>
 <div>竖直上抛</div>
 </div>
 <div class="stack divider-l">
-<div class="mini-title">轨迹是曲线</div>
+<div class="mini-title"><mdi-vector-polyline class="text-xl" /> 轨迹是曲线</div>
 <div>平抛</div>
 <div>斜上抛</div>
 <div>斜下抛</div>
@@ -85,8 +85,8 @@ clicks: 3
 <div class="ask">同样只受重力，为什么轨迹不同？</div>
 <div v-click="1">看<b>初速度的方向</b>与<b>重力方向</b>是否在同一条直线上。</div>
 <div class="stack">
-<div v-click="2">在同一直线上（自由落体、竖直下抛、竖直上抛）→ 速度方向不变，轨迹是<b>直线</b></div>
-<div v-click="3">不在同一直线上（平抛、斜上抛、斜下抛）→ 速度方向不断改变，轨迹是<b>曲线</b></div>
+<div v-click="2"><mdi-vector-line class="text-xl" /> 在同一直线上（自由落体、竖直下抛、竖直上抛）→ 速度方向不变，轨迹是<b>直线</b></div>
+<div v-click="3"><mdi-vector-polyline class="text-xl" /> 不在同一直线上（平抛、斜上抛、斜下抛）→ 速度方向不断改变，轨迹是<b>曲线</b></div>
 </div>
 </div>
 
@@ -100,8 +100,8 @@ clicks: 3
 <div class="page-grow">
 <div>牛顿第一定律：力是<b>改变</b>物体运动状态的原因。速度是矢量，改变它有两种方式。</div>
 <div class="stack">
-<div v-click="1">加速度与速度<b>共线</b> → 只改变速度的<b>大小</b>，轨迹是直线</div>
-<div v-click="2">加速度与速度<b>不共线</b> → 速度的<b>方向</b>改变，轨迹是曲线</div>
+<div v-click="1"><mdi-vector-line class="text-xl" /> 加速度与速度<b>共线</b> → 只改变速度的<b>大小</b>，轨迹是直线</div>
+<div v-click="2"><mdi-vector-polyline class="text-xl" /> 加速度与速度<b>不共线</b> → 速度的<b>方向</b>改变，轨迹是曲线</div>
 </div>
 <div class="key" v-click="3">于是可以推测：做曲线运动的条件，与<b>合力方向跟速度方向的关系</b>有关。</div>
 </div>
@@ -115,7 +115,7 @@ clicks: 1
 
 <div class="page-grow">
 <div class="ask">物体在什么条件下做曲线运动？</div>
-<div class="demo-wrap"><SteelBallMagnetDemo /></div>
+<div class="sim-wrap"><SteelBallMagnetDemo /></div>
 <div class="key" v-click="1">磁铁在正前方：力与速度共线，轨迹仍是直线；在侧旁或斜后方：力与速度不共线，轨迹变弯。</div>
 </div>
 
@@ -160,7 +160,7 @@ clicks: 2
 
 <div class="page-grow">
 <div>牛顿第二定律 <Latex tex="a = \dfrac{F}{m}" />：<b>加速度与合力同向</b> —— 分解 <Latex tex="F" /> 就是分解 <Latex tex="a" />。</div>
-<div class="demo-wrap-md"><ForceAngleDemo /></div>
+<div class="sim-wrap-md"><ForceAngleDemo /></div>
 <div v-click="1">垂直速度方向的分量 → 只改变速度的<b>方向</b>，不改变速率。</div>
 <div v-click="2">沿速度方向的分量 → 与速度同向则<b>加速</b>，与速度反向则<b>减速</b>。</div>
 </div>
@@ -174,9 +174,9 @@ clicks: 3
 
 <div class="page-grow">
 <div class="stack">
-<div v-click="1"><Latex tex="0^\circ < \alpha < 90^\circ" />：<Latex tex="a" /> 沿速度方向的分量与 <Latex tex="v" /> 同向 → 速率变大</div>
-<div v-click="2"><Latex tex="\alpha = 90^\circ" />：<Latex tex="a" /> 沿速度方向的分量为零 → 速率不变，但方向时刻改变</div>
-<div v-click="3"><Latex tex="90^\circ < \alpha < 180^\circ" />：<Latex tex="a" /> 沿速度方向的分量与 <Latex tex="v" /> 反向 → 速率变小</div>
+<div v-click="1"><mdi-trending-up class="text-xl" /> <Latex tex="0^\circ < \alpha < 90^\circ" />：<Latex tex="a" /> 沿速度方向的分量与 <Latex tex="v" /> 同向 → 速率变大</div>
+<div v-click="2"><mdi-trending-neutral class="text-xl" /> <Latex tex="\alpha = 90^\circ" />：<Latex tex="a" /> 沿速度方向的分量为零 → 速率不变，但方向时刻改变</div>
+<div v-click="3"><mdi-trending-down class="text-xl" /> <Latex tex="90^\circ < \alpha < 180^\circ" />：<Latex tex="a" /> 沿速度方向的分量与 <Latex tex="v" /> 反向 → 速率变小</div>
 </div>
 <div class="mini-note" v-click="3">三种情形下垂直速度方向的分量都在，所以轨迹都是曲线；<Latex tex="\alpha" /> 是合力方向与速度方向之间的夹角。</div>
 </div>
@@ -187,7 +187,7 @@ clicks: 1
 ---
 
 <div class="page-grow">
-<div class="ask ask-hero">做曲线运动的物体，某一时刻的速度方向朝哪？</div>
+<div class="ask text-3xl leading-normal">做曲线运动的物体，某一时刻的速度方向朝哪？</div>
 <div v-click="1">直线运动中，速度方向与轨迹一致；曲线运动中，速度方向与轨迹并不重合 —— 它到底沿哪个方向？</div>
 </div>
 
@@ -199,7 +199,7 @@ clicks: 2
 # 从割线到切线
 
 <div class="page-grow">
-<div class="demo-wrap"><SecantToTangentDemo /></div>
+<div class="sim-wrap"><SecantToTangentDemo /></div>
 <div v-click="1">物体从 B 运动到 A，平均速度的方向由 B 指向 A —— 也就是割线的方向。</div>
 <div v-click="2">B 越靠近 A，平均速度的方向就越接近曲线在 A 点的切线方向。</div>
 </div>
@@ -212,8 +212,8 @@ clicks: 1
 # 曲线运动的速度方向
 
 <div class="page-grow">
-<div class="hero-tag"><mdi-lightbulb-on-outline /> 结论</div>
-<div class="key key-hero">质点在某一点的速度方向，沿曲线在这一点的<b>切线方向</b>。</div>
+<div class="tag-icon self-center"><mdi-lightbulb-on-outline /> 结论</div>
+<div class="key text-2xl leading-normal">质点在某一点的速度方向，沿曲线在这一点的<b>切线方向</b>。</div>
 <div v-click="1">所以做曲线运动的物体，速度方向<b>时刻在改变</b>。</div>
 </div>
 
@@ -286,8 +286,8 @@ clicks: 3
 
 <div class="page-grow">
 <div class="stack">
-<div v-click="1">加速度与速度<b>共线</b> → 匀变速<b>直线</b>运动：自由落体、竖直下抛、竖直上抛</div>
-<div v-click="2">加速度与速度<b>不共线</b> → 匀变速<b>曲线</b>运动：平抛、斜抛</div>
+<div v-click="1"><mdi-vector-line class="text-xl" /> 加速度与速度<b>共线</b> → 匀变速<b>直线</b>运动：自由落体、竖直下抛、竖直上抛</div>
+<div v-click="2"><mdi-vector-polyline class="text-xl" /> 加速度与速度<b>不共线</b> → 匀变速<b>曲线</b>运动：平抛、斜抛</div>
 </div>
 <div class="mini-note" v-click="3">平抛、斜抛都只受重力，合力恒定 —— 加速度的大小和方向都不变，所以它们是匀变速曲线运动。</div>
 </div>

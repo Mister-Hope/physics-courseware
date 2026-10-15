@@ -1,229 +1,144 @@
 /* ═══════════════════════════════════════════════
    匀变速直线运动的速度、位移与时间的关系 — 课程特有样式
-   通用设计系统在 workspace/shared/styles/（common.css + layout.css）
-   页面外壳用共享 layout: base-flex；此处只放本课特有的样式
+   通用设计系统在 workspace/shared/styles/（common.css + layout.css + atoms.css）
+   页面外壳用共享 layout: base-flex；本课私有类统一用 ua- 前缀（uniform acceleration / 匀变速）
    ═══════════════════════════════════════════════ */
 
-/* 本课推导步骤多：栏内行间距比通用值略紧 */
+/* 本课推导步骤多：栏内行间距比通用值略紧（§8 允许的密度旋钮） */
 :root {
   --stack-gap: 0.85rem;
 }
 
-/* ── 封面：课题名 18 字，压字号分两行，避免折行截断渐变 ── */
+/* ── 封面：课题名 18 字，压字号分两行，避免折行截断渐变 ──
+   共享 course-cover 明确允许本课覆盖 .cover-title（§8 唯一例外） */
 .cover-title {
   font-size: 2.45rem !important;
   line-height: 1.22 !important;
   letter-spacing: 0.03em !important;
 }
 
-/* ── 判据 / 法则栏 ── */
-.law {
+/* ── 三条判据（p5）：居中一栏 = 图标 + 判定 + 说明；
+      图标大小走共享 .icon-md，小字走共享 .mini-note ── */
+.ua-law {
   text-align: center;
 }
 
-.law-icon {
+.ua-law-icon {
   color: var(--c-accent);
-  font-size: 1.6rem;
   line-height: 1;
 }
 
-.law-title {
+.ua-law-title {
   margin-top: 0.4rem;
   color: var(--c-text);
   font-weight: 700;
-  font-size: 1.02rem;
 }
 
-.law-note {
+.ua-law-note {
   margin-top: 0.35rem;
-  color: var(--c-text-dim);
-  font-size: 0.86rem;
-  line-height: 1.55;
 }
 
-/* ── 识图页：三条 v-t 线的标签（颜色与图中线一致） ── */
-.vt-note {
+/* ── 识图页（p6）：三条 v-t 线的图例，色块与图中线一致 ── */
+.ua-vt-note {
   display: flex;
   gap: 0.6rem;
   align-items: flex-start;
-
-  font-size: 0.98rem;
   line-height: 1.5;
 }
 
-.vt-chip {
+.ua-vt-chip {
   flex: 0 0 auto;
 
   width: 0.85rem;
   height: 0.2rem;
   margin-top: 0.62rem;
-  border-radius: 2px;
+  border-radius: 999px;
 }
 
-.vt-chip-gold {
+.ua-vt-chip-gold {
   background: var(--c-accent);
 }
 
-.vt-chip-blue {
+.ua-vt-chip-blue {
   background: var(--c-accent-2);
 }
 
-.vt-chip-teal {
+.ua-vt-chip-teal {
   background: var(--c-physics);
 }
 
-/* 图容器：让 SVG 把所在栏的宽度用满 */
-.vt-figure {
-  display: flex;
-  justify-content: center;
-  min-width: 0;
-}
-
-.vt-figure svg {
-  width: 100%;
-  height: auto;
-}
-
-/* 题源小字 */
-.problem-source {
-  display: block;
-
-  margin-top: 0.25rem;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.72rem;
-  letter-spacing: 0.02em;
-}
-
-/* ── "卷面上这样写"示范块 ── */
-.sheet {
+/* ── "卷面上这样写"示范块（p17）：一块纸面，只保留左侧金色定位线 ── */
+.ua-sheet {
   padding: 0.8rem 1rem;
   border: 1px solid var(--c-border);
   border-left: 3px solid var(--c-accent);
   border-radius: var(--radius-sm);
 
-  background: rgb(15 20 37 / 50%);
+  background: var(--c-surface);
 
-  font-size: 0.95rem;
   line-height: 1.75;
 }
 
-.sheet-title {
+.ua-sheet-title {
   margin-bottom: 0.35rem;
   color: var(--c-accent);
-  font-size: 0.78rem;
   letter-spacing: 0.06em;
 }
 
-/* ── 卷面红线 ── */
-.warn-title {
+/* ── 卷面红线（p16）：警示语义色 + 红色竖线（只给这条弱提示，不套主体内容）── */
+.ua-warn-title {
   color: var(--c-danger);
 }
 
-.warn-title > svg {
+.ua-warn-title > svg {
   color: var(--c-danger);
 }
 
-.warn-text {
+.ua-warn-text {
   padding-left: 1rem;
   border-left: 3px solid var(--c-danger);
-  font-size: 0.95rem;
   line-height: 1.65;
 }
 
-/* ── 公式总览：三栏，每栏一个公式 + "不含谁" ── */
-.formula-item {
+/* ── 公式总览（p15）：三栏，每栏一个公式 + "不含谁" ── */
+.ua-formula {
   padding-top: 0.5rem;
   border-top: 2px solid var(--c-border);
   text-align: center;
 }
 
-.formula-item-accent {
+.ua-formula-accent {
   border-top-color: var(--c-accent);
 }
 
-.formula-name {
+.ua-formula-name {
   color: var(--c-accent);
   font-weight: 700;
-  font-size: 0.86rem;
   letter-spacing: 0.02em;
 }
 
-.formula-note {
+.ua-formula-note {
   margin-top: 0.3rem;
-  color: var(--c-text-dim);
-  font-size: 0.82rem;
-  line-height: 1.55;
 }
 
-/* ── 步骤列表（解题四步）── */
-.step-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.step {
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-
-  font-size: 0.98rem;
-  line-height: 1.5;
-}
-
-.step-no {
-  display: flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-top: 0.1rem;
-  border: 1px solid rgb(226 168 70 / 35%);
-  border-radius: 50%;
-
-  background: rgb(226 168 70 / 14%);
-  color: var(--c-accent);
-
-  font-weight: 700;
-  font-size: 0.8rem;
-}
-
-/* ── 标题位：先放问题，推导完成后再换成标题 ──
+/* ── 标题位（p14）：先放问题，推导完成后再换成标题 ──
    两个元素绝对定位叠在同一个槽里，切换时不产生任何位移。 */
-.title-slot {
+.ua-title-swap {
   position: relative;
   flex: 0 0 auto;
   height: 2.9rem;
   margin-bottom: 0.5rem;
 }
 
-.title-slot > * {
+.ua-title-swap > * {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
 }
 
-.slot-title {
+.ua-title-swap-text {
   color: var(--c-text);
   font-weight: 700;
-  font-size: 1.75rem;
   letter-spacing: -0.02em;
-}
-
-/* ── 纸带示意图：压扁 + 收窄，给正文腾出竖向空间 ── */
-.tape-figure {
-  display: flex;
-  justify-content: center;
-  min-width: 0;
-}
-
-.tape-figure svg {
-  width: 100%;
-  max-width: 26rem;
-  height: auto;
 }

@@ -29,7 +29,7 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask ask-hero">上一节课的最后，我们只得到一个<b>猜想</b>：<Latex tex="a \propto \dfrac{F}{M}" />。<br>怎样用实验<b>验证</b>它是否成立？</div>
+<div class="ask text-5xl leading-normal">上一节课的最后，我们只得到一个<b>猜想</b>：<Latex tex="a \propto \dfrac{F}{M}" />。<br>怎样用实验<b>验证</b>它是否成立？</div>
 </div>
 
 ---
@@ -44,11 +44,11 @@ clicks: 3
 
 <div class="half-grid">
 <div class="stack" v-click="1">
-<div class="mini-title">小车质量 <Latex tex="M" /> 一定</div>
+<div class="mini-title"><mdi-weight-kilogram /> 小车质量 <Latex tex="M" /> 一定</div>
 <div>改变槽码个数来改变拉力 <Latex tex="F" />，看 <Latex tex="a" /> 与 <Latex tex="F" /> 的关系。</div>
 </div>
 <div class="divider-l stack" v-click="2">
-<div class="mini-title">拉力 <Latex tex="F" /> 一定</div>
+<div class="mini-title"><mdi-arrow-right-bold /> 拉力 <Latex tex="F" /> 一定</div>
 <div>在小车上增减钩码来改变 <Latex tex="M" />，看 <Latex tex="a" /> 与 <Latex tex="M" /> 的关系。</div>
 </div>
 </div>
@@ -86,13 +86,13 @@ clicks: 3
 <div class="half-grid">
 <div class="stack">
 <div class="ask"><Latex tex="m \ll M" /> 只是前提之一。木板放平，小车还要受摩擦阻力 —— 这时的 <Latex tex="F" /> 还是合力吗？</div>
-<div v-click="1" class="step-row"><span class="step-num">1</span><span>把<b>打点计时器那一端垫高</b>，用重力沿斜面的分力抵消阻力。</span></div>
-<div v-click="2" class="step-row"><span class="step-num">2</span><span>判断标准：<b>不挂槽码</b>、<b>带上纸带</b>，轻推小车，纸带打点均匀（小车匀速）。</span></div>
+<div v-click="1" class="step-item"><span class="step-no">1</span><span>把<b>打点计时器那一端垫高</b>，用重力沿斜面的分力抵消阻力。</span></div>
+<div v-click="2" class="step-item"><span class="step-no">2</span><span>判断标准：<b>不挂槽码</b>、<b>带上纸带</b>，轻推小车，纸带打点均匀（小车匀速）。</span></div>
 <div v-click="3" class="key">改变小车上钩码的质量后，<b>不需要重新平衡</b>。</div>
 </div>
 <div class="divider-l stack">
 <ExperimentSetupSvg :tilted="$clicks >= 1" />
-<div class="fig-note">点击「垫高」：木板抬起，底下加垫高块</div>
+<div class="fig-cap">点击「垫高」：木板抬起，底下加垫高块</div>
 </div>
 </div>
 </div>
@@ -105,15 +105,15 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack">
-<div class="mini-title">加速度怎么测</div>
+<div class="mini-title"><mdi-ruler /> 加速度怎么测</div>
 <div>用打点计时器和纸带，方法与第二章的实验相同；纸带先带回去，下一课时再算 <Latex tex="a" />。</div>
 </div>
 
 <div class="stack">
-<div class="mini-title">操作顺序</div>
-<div class="step-row"><span class="step-num">1</span><span>纸带穿过限位孔，小车停在<b>靠近打点计时器</b>的一端。</span></div>
-<div class="step-row"><span class="step-num">2</span><span>先接通电源，等打点稳定后，再释放小车。</span></div>
-<div class="step-row"><span class="step-num">3</span><span>小车到达滑轮前及时断开电源，防止撞上滑轮。</span></div>
+<div class="mini-title"><mdi-format-list-numbered /> 操作顺序</div>
+<div class="step-item"><span class="step-no">1</span><span>纸带穿过限位孔，小车停在<b>靠近打点计时器</b>的一端。</span></div>
+<div class="step-item"><span class="step-no">2</span><span>先接通电源，等打点稳定后，再释放小车。</span></div>
+<div class="step-item"><span class="step-no">3</span><span>小车到达滑轮前及时断开电源，防止撞上滑轮。</span></div>
 </div>
 
 <div class="key">顺序记牢：<b>先接通电源，后释放小车</b>。</div>
@@ -128,15 +128,15 @@ layout: base-flex
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title">任务 A：小车质量 <Latex tex="M" /> 一定</div>
+<div class="mini-title"><mdi-alpha-a-circle /> 任务 A：小车质量 <Latex tex="M" /> 一定</div>
 <div>只改变槽码个数（1 → 4 个），每挡做一条纸带。</div>
-<div class="mini-title">任务 B：槽码个数一定</div>
+<div class="mini-title"><mdi-alpha-b-circle /> 任务 B：槽码个数一定</div>
 <div>只在小车上增减钩码改变 <Latex tex="M" />，每挡做一条纸带。</div>
 </div>
 
 <div class="divider-l stack">
-<div class="mini-title">记录卡</div>
-<table class="record-table">
+<div class="mini-title"><mdi-table /> 记录卡</div>
+<table class="record-table data-table">
 <thead>
 <tr><th>编号</th><th>小车总质量 <Latex tex="M" /> /kg</th><th>槽码总质量 <Latex tex="m" /> /kg</th></tr>
 </thead>
@@ -168,7 +168,7 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask ask-hero">纸带已经在手上了：怎么把它变成 <Latex tex="a" />？<br>又怎么从 <Latex tex="a" /> 看出它与 <Latex tex="F" />、<Latex tex="M" /> 的关系？</div>
+<div class="ask text-5xl leading-normal">纸带已经在手上了：怎么把它变成 <Latex tex="a" />？<br>又怎么从 <Latex tex="a" /> 看出它与 <Latex tex="F" />、<Latex tex="M" /> 的关系？</div>
 </div>
 
 ---
@@ -222,8 +222,8 @@ layout: base-flex
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title">表 1：小车质量 <Latex tex="M" /> 一定</div>
-<table class="record-table">
+<div class="mini-title"><mdi-numeric-1-box-outline /> 表 1：小车质量 <Latex tex="M" /> 一定</div>
+<table class="record-table data-table">
 <thead>
 <tr><th class="lead">序号</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
 </thead>
@@ -235,8 +235,8 @@ layout: base-flex
 </div>
 
 <div class="divider-l stack">
-<div class="mini-title">表 2：拉力 <Latex tex="F" /> 一定</div>
-<table class="record-table">
+<div class="mini-title"><mdi-numeric-2-box-outline /> 表 2：拉力 <Latex tex="F" /> 一定</div>
+<table class="record-table data-table">
 <thead>
 <tr><th class="lead">序号</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
 </thead>
@@ -430,15 +430,15 @@ layout: base-flex
 <div class="half-grid">
 <div class="stack">
 <div class="ask">每做一组都要先算一次 <Latex tex="a" />，有没有办法连 <Latex tex="a" /> 都不用算？</div>
-<div class="step-row"><span class="step-num">1</span><span>两辆<b>相同</b>小车，前端系细线跨过滑轮挂小盘，先平衡阻力。</span></div>
-<div class="step-row"><span class="step-num">2</span><span>后端两条细线，用<b>黑板擦</b>同时按压在木板上。</span></div>
-<div class="step-row"><span class="step-num">3</span><span>抬起黑板擦两车<b>同时启动</b>，按下时<b>同时停下</b>。</span></div>
-<div class="step-row"><span class="step-num">4</span><span>量出两车移动的位移 <Latex tex="x_1" />、<Latex tex="x_2" />。</span></div>
+<div class="step-item"><span class="step-no">1</span><span>两辆<b>相同</b>小车，前端系细线跨过滑轮挂小盘，先平衡阻力。</span></div>
+<div class="step-item"><span class="step-no">2</span><span>后端两条细线，用<b>黑板擦</b>同时按压在木板上。</span></div>
+<div class="step-item"><span class="step-no">3</span><span>抬起黑板擦两车<b>同时启动</b>，按下时<b>同时停下</b>。</span></div>
+<div class="step-item"><span class="step-no">4</span><span>量出两车移动的位移 <Latex tex="x_1" />、<Latex tex="x_2" />。</span></div>
 </div>
 
 <div class="divider-l stack">
 <DisplacementRatioSvg />
-<div class="fig-note">两车同时启动、同时停下</div>
+<div class="fig-cap">两车同时启动、同时停下</div>
 </div>
 </div>
 </div>
@@ -471,7 +471,7 @@ layout: base-flex
 
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title"><Latex tex="a" />-<Latex tex="F" /> 图像</div>
+<div class="mini-title"><mdi-vector-polyline /> <Latex tex="a" />-<Latex tex="F" /> 图像</div>
 
 ```comp CoordAxes
 x-range: [-0.5, 6.4]
@@ -492,7 +492,7 @@ curves:
 </div>
 
 <div class="divider-l stack">
-<div class="mini-title"><Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像</div>
+<div class="mini-title"><mdi-chart-timeline-variant /> <Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像</div>
 
 ```comp CoordAxes
 x-range: [-0.05, 1.2]
@@ -527,7 +527,7 @@ layout: base-flex
 
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title"><Latex tex="a" />-<Latex tex="F" /> 图像</div>
+<div class="mini-title"><mdi-vector-polyline /> <Latex tex="a" />-<Latex tex="F" /> 图像</div>
 
 ```comp CoordAxes
 x-range: [-0.5, 6.4]
@@ -548,7 +548,7 @@ curves:
 </div>
 
 <div class="divider-l stack">
-<div class="mini-title"><Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像</div>
+<div class="mini-title"><mdi-chart-timeline-variant /> <Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像</div>
 
 ```comp CoordAxes
 x-range: [-0.05, 1.2]
@@ -583,7 +583,7 @@ layout: base-flex
 
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title"><Latex tex="a" />-<Latex tex="F" /> 图像</div>
+<div class="mini-title"><mdi-vector-polyline /> <Latex tex="a" />-<Latex tex="F" /> 图像</div>
 
 ```comp CoordAxes
 x-range: [-0.4, 6.4]
@@ -614,7 +614,7 @@ labels:
 </div>
 
 <div class="divider-l stack">
-<div class="mini-title"><Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像</div>
+<div class="mini-title"><mdi-chart-timeline-variant /> <Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像</div>
 
 ```comp CoordAxes
 x-range: [-0.05, 1.25]
@@ -679,11 +679,11 @@ layout: base-flex
 <div class="half-grid">
 <div class="stack">
 <AirTrackSideSvg />
-<div class="fig-note">侧视图：气泵把压缩空气送进导轨</div>
+<div class="fig-cap"><mdi-eye-outline class="inline-block align-middle mr-1" /> 侧视图：气泵把压缩空气送进导轨</div>
 </div>
 <div class="divider-l stack">
 <AirTrackSectionSvg />
-<div class="fig-note">截面图：滑块与导轨不接触</div>
+<div class="fig-cap"><mdi-layers-outline class="inline-block align-middle mr-1" /> 截面图：滑块与导轨不接触</div>
 </div>
 </div>
 
@@ -699,15 +699,15 @@ layout: base-flex
 <div class="page-grow">
 <div class="three-col">
 <div class="stack">
-<div class="mini-title">倾角不对</div>
+<div class="mini-title"><mdi-angle-acute /> 倾角不对</div>
 <div>垫高得不够或过头，图线就不过原点；每次都按「轻推小车、打点均匀」重新判断。</div>
 </div>
 <div class="stack">
-<div class="mini-title">读数不准</div>
+<div class="mini-title"><mdi-ruler /> 读数不准</div>
 <div>刻度尺量纸带、天平称质量，都有读数误差；多测几次取平均。</div>
 </div>
 <div class="stack">
-<div class="mini-title">纸带与限位孔</div>
+<div class="mini-title"><mdi-tape-measure /> 纸带与限位孔</div>
 <div>纸带和限位孔之间也有摩擦，所以平衡摩擦力时必须把纸带一起带上。</div>
 </div>
 </div>
@@ -724,15 +724,15 @@ layout: base-flex
 <div class="page-grow">
 <div class="three-col">
 <div class="stack">
-<div class="mini-title">控制变量</div>
+<div class="mini-title"><mdi-scale-balance /> 控制变量</div>
 <div><Latex tex="M" /> 一定：作 <Latex tex="a" />-<Latex tex="F" /> 图像；<Latex tex="F" /> 一定：作 <Latex tex="a" />-<Latex tex="\frac{1}{M}" /> 图像。</div>
 </div>
 <div class="stack">
-<div class="mini-title">两个前提</div>
+<div class="mini-title"><mdi-check-decagram /> 两个前提</div>
 <div>槽码 <Latex tex="m \ll M" />；用重力分力平衡摩擦力。</div>
 </div>
 <div class="stack">
-<div class="mini-title">结论</div>
+<div class="mini-title"><mdi-lightbulb-on-outline /> 结论</div>
 <div>质量一定时 <Latex tex="a \propto F" />，拉力一定时 <Latex tex="a \propto \frac{1}{M}" />。</div>
 </div>
 </div>

@@ -74,10 +74,10 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
     role="img"
     aria-label="圆锥摆：小球在水平面内做圆周运动，绳与竖直方向的夹角为 θ"
   >
-    <line :x1="O.x" :y1="O.y" :x2="O.x" :y2="axisEnd" stroke="#94a3b8" stroke-width="2.2" stroke-dasharray="7 6" opacity="0.65" />
-    <ellipse :cx="C.x" :cy="C.y" :rx="R" :ry="RY" fill="none" stroke="#2dd4bf" stroke-width="3" stroke-dasharray="9 8" opacity="0.6" />
-    <line :x1="O.x" :y1="O.y" :x2="B.x" :y2="B.y" stroke="#e2e8f0" stroke-width="2.8" />
-    <path :d="thetaArc" fill="none" stroke="#fbbf24" stroke-width="2.6" />
+    <line :x1="O.x" :y1="O.y" :x2="O.x" :y2="axisEnd" stroke="var(--c-text-dim)" stroke-width="2.2" stroke-dasharray="7 6" opacity="0.65" />
+    <ellipse :cx="C.x" :cy="C.y" :rx="R" :ry="RY" fill="none" stroke="var(--c-physics)" stroke-width="3" stroke-dasharray="9 8" opacity="0.6" />
+    <line :x1="O.x" :y1="O.y" :x2="B.x" :y2="B.y" stroke="var(--c-neutral-200)" stroke-width="2.8" />
+    <path :d="thetaArc" fill="none" stroke="var(--c-accent-light)" stroke-width="2.6" />
     <text
       :x="thetaLabel.x"
       :y="thetaLabel.y"
@@ -85,8 +85,8 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="26"
-      fill="#fbbf24"
-      stroke="#0f1425"
+      fill="var(--c-accent-light)"
+      stroke="var(--c-bg-soft)"
       stroke-width="4"
       paint-order="stroke"
     >
@@ -99,15 +99,15 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="26"
-      fill="#e2e8f0"
-      stroke="#0f1425"
+      fill="var(--c-neutral-200)"
+      stroke="var(--c-bg-soft)"
       stroke-width="4"
       paint-order="stroke"
     >
       l
     </text>
     <g v-if="showRadius">
-      <line :x1="C.x" :y1="C.y" :x2="C.x - R" :y2="C.y" stroke="#fbbf24" stroke-width="2.6" />
+      <line :x1="C.x" :y1="C.y" :x2="C.x - R" :y2="C.y" stroke="var(--c-accent-light)" stroke-width="2.6" />
       <text
         :x="rLabel.x"
         :y="rLabel.y"
@@ -115,8 +115,8 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#fbbf24"
-        stroke="#0f1425"
+        fill="var(--c-accent-light)"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
@@ -124,19 +124,19 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
       </text>
     </g>
     <g v-if="showForces">
-      <line :x1="ftTip.x" :y1="ftTip.y" :x2="fnTip.x" :y2="fnTip.y" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="6 5" opacity="0.55" />
-      <line :x1="mgTip.x" :y1="mgTip.y" :x2="fnTip.x" :y2="fnTip.y" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="6 5" opacity="0.55" />
-      <CourseArrow :from="B" :to="mgTip" stroke="#f87171" :stroke-width="3.6" />
-      <CourseArrow :from="B" :to="ftTip" stroke="#60a5fa" :stroke-width="3.6" />
-      <CourseArrow :from="B" :to="fnTip" stroke="#2dd4bf" :stroke-width="3.6" />
+      <line :x1="ftTip.x" :y1="ftTip.y" :x2="fnTip.x" :y2="fnTip.y" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-dasharray="6 5" opacity="0.55" />
+      <line :x1="mgTip.x" :y1="mgTip.y" :x2="fnTip.x" :y2="fnTip.y" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-dasharray="6 5" opacity="0.55" />
+      <CourseArrow :from="B" :to="mgTip" stroke="var(--c-force)" :stroke-width="3.6" />
+      <CourseArrow :from="B" :to="ftTip" stroke="var(--c-velocity)" :stroke-width="3.6" />
+      <CourseArrow :from="B" :to="fnTip" stroke="var(--c-physics)" :stroke-width="3.6" />
       <text
         :x="mgLabel.x"
         :y="mgLabel.y"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#f87171"
-        stroke="#0f1425"
+        fill="var(--c-force)"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
@@ -148,8 +148,8 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#60a5fa"
-        stroke="#0f1425"
+        fill="var(--c-velocity)"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
@@ -163,8 +163,8 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#2dd4bf"
-        stroke="#0f1425"
+        fill="var(--c-physics)"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
@@ -172,10 +172,10 @@ const rLabel = { x: (C.x + (C.x - R)) / 2, y: C.y - 10 };
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="16" dy="6">n</tspan>
       </text>
     </g>
-    <circle :cx="O.x" :cy="O.y" r="5" fill="#94a3b8" />
-    <circle :cx="C.x" :cy="C.y" r="3.6" fill="#94a3b8" />
-    <circle :cx="B.x" :cy="B.y" r="14" fill="none" stroke="rgba(226,168,70,0.3)" stroke-width="2.5" />
-    <circle :cx="B.x" :cy="B.y" r="10.5" fill="#e2a846" />
+    <circle :cx="O.x" :cy="O.y" r="5" fill="var(--c-text-dim)" />
+    <circle :cx="C.x" :cy="C.y" r="3.6" fill="var(--c-text-dim)" />
+    <circle :cx="B.x" :cy="B.y" r="14" fill="none" stroke="color-mix(in srgb, var(--c-accent) 30%, transparent)" stroke-width="2.5" />
+    <circle :cx="B.x" :cy="B.y" r="10.5" fill="var(--c-accent)" />
     <circle :cx="B.x - 3.4" :cy="B.y - 3.4" r="4.2" fill="rgba(255,255,255,0.45)" />
   </svg>
 </template>

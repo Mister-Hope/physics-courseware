@@ -17,20 +17,20 @@
     <path
       d="M 169 159 A 200 200 0 0 1 451 159"
       fill="none"
-      stroke="#2dd4bf"
+      stroke="var(--c-physics)"
       stroke-width="3.4"
       stroke-linecap="round"
     />
     <CourseArrow
       :from="{ x: 169, y: 159 }"
       :to="{ x: 240, y: 88.5 }"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       :stroke-width="3.4"
     />
     <CourseArrow
       :from="{ x: 451, y: 159 }"
       :to="{ x: 522, y: 229.5 }"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       :stroke-width="3.4"
     />
     <g v-click="1">
@@ -39,7 +39,7 @@
         y1="159"
         x2="451"
         y2="159"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2.2"
         stroke-dasharray="7 6"
         opacity="0.65"
@@ -49,7 +49,7 @@
         y1="88.5"
         x2="522"
         y2="88.5"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="2.2"
         stroke-dasharray="7 6"
         opacity="0.65"
@@ -57,14 +57,14 @@
       <CourseArrow
         :from="{ x: 451, y: 159 }"
         :to="{ x: 522, y: 88.5 }"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         :stroke-width="2.6"
         stroke-dasharray="7 5"
       />
       <CourseArrow
         :from="{ x: 522, y: 88.5 }"
         :to="{ x: 522, y: 229.5 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         :stroke-width="3.4"
       />
       <text
@@ -73,25 +73,25 @@
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="28"
-        fill="#e2a846"
-        stroke="#0f1425"
+        fill="var(--c-accent)"
+        stroke="var(--c-bg-soft)"
         stroke-width="5"
         paint-order="stroke"
       >
         Δv
       </text>
     </g>
-    <circle cx="169" cy="159" r="4" fill="#f1f5f9" />
-    <circle cx="451" cy="159" r="4" fill="#f1f5f9" />
+    <circle cx="169" cy="159" r="4" fill="var(--c-text)" />
+    <circle cx="451" cy="159" r="4" fill="var(--c-text)" />
     <text
       x="196"
       y="112"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="28"
-      fill="#60a5fa"
+      fill="var(--c-velocity)"
       text-anchor="middle"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -104,9 +104,9 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="28"
-      fill="#60a5fa"
+      fill="var(--c-velocity)"
       text-anchor="middle"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -118,7 +118,7 @@
       y="398"
       font-family="KaTeX_Main"
       font-size="22"
-      fill="#94a3b8"
+      fill="var(--c-text-dim)"
       text-anchor="middle"
     >
       速率没变，速度也变了 —— Δv 不为零

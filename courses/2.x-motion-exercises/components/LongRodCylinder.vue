@@ -211,15 +211,15 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           width="292"
           height="372"
           rx="14"
-          fill="rgba(148,163,184,0.05)"
-          stroke="rgba(148,163,184,0.16)"
+          fill="color-mix(in srgb, var(--c-text-dim) 5%, transparent)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
         />
         <line
           x1="24"
           :y1="draw.dimBottomY"
           x2="276"
           :y2="draw.dimBottomY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1"
           stroke-dasharray="5 6"
           opacity="0.45"
@@ -229,7 +229,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.dimTopY"
           x2="276"
           :y2="draw.dimTopY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1"
           stroke-dasharray="5 6"
           opacity="0.45"
@@ -239,7 +239,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.dimBottomY"
           x2="46"
           :y2="draw.dimTopY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.2"
           opacity="0.7"
         />
@@ -248,7 +248,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.dimBottomY"
           x2="52"
           :y2="draw.dimBottomY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.6"
           opacity="0.85"
         />
@@ -257,7 +257,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.dimTopY"
           x2="52"
           :y2="draw.dimTopY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.6"
           opacity="0.85"
         />
@@ -267,7 +267,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           font-size="16"
           font-family="KaTeX_Math"
           font-style="italic"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           text-anchor="end"
         >
           H
@@ -277,7 +277,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY"
           x2="288"
           :y2="draw.groundY"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="2"
         />
         <line
@@ -285,7 +285,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY + 3"
           x2="40"
           :y2="draw.groundY + 13"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.2"
           opacity="0.6"
         />
@@ -294,7 +294,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY + 3"
           x2="100"
           :y2="draw.groundY + 13"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.2"
           opacity="0.6"
         />
@@ -303,7 +303,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY + 3"
           x2="180"
           :y2="draw.groundY + 13"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.2"
           opacity="0.6"
         />
@@ -312,7 +312,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY + 3"
           x2="260"
           :y2="draw.groundY + 13"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.2"
           opacity="0.6"
         />
@@ -322,7 +322,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :width="draw.cabinetW"
           :height="Math.max(4, draw.groundY - draw.cabinetTopY)"
           rx="2"
-          fill="#475569"
+          fill="var(--c-neutral-600)"
           opacity="0.9"
         />
         <line
@@ -330,7 +330,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.tableTopY"
           :x2="draw.tableRightX"
           :y2="draw.tableTopY"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="3"
           stroke-linecap="round"
         />
@@ -339,7 +339,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.tableTopY"
           :x2="draw.tableLeftX + 10"
           :y2="draw.tableLegY"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="2"
           opacity="0.85"
         />
@@ -348,7 +348,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.tableTopY"
           :x2="draw.tableRightX - 10"
           :y2="draw.tableLegY"
-          stroke="#64748b"
+          stroke="var(--c-neutral-500)"
           stroke-width="2"
           opacity="0.85"
         />
@@ -357,7 +357,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY"
           :x2="draw.postX"
           :y2="draw.postTopY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="3.4"
           stroke-linecap="round"
         />
@@ -366,7 +366,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.groundY"
           :x2="draw.postX + 13"
           :y2="draw.groundY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="3.4"
           stroke-linecap="round"
         />
@@ -375,7 +375,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.clampY"
           :x2="draw.wallLeftX"
           :y2="draw.clampY"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -384,7 +384,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.clampY - 5"
           :x2="draw.wallLeftX"
           :y2="draw.clampY + 5"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -392,7 +392,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           <CourseArrow
             :from="{ x: draw.velX, y: draw.launchY - 3 }"
             :to="{ x: draw.velX, y: draw.launchY - 40 }"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             stroke-width="2.6"
           />
           <text
@@ -401,7 +401,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
             font-size="15"
             font-family="KaTeX_Math"
             font-style="italic"
-            fill="#60a5fa"
+            fill="var(--c-velocity)"
             text-anchor="middle"
           >
             v
@@ -414,7 +414,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :width="draw.rodW"
           :height="draw.rodH"
           rx="2"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           opacity="0.92"
         />
         <text
@@ -423,7 +423,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           font-size="16"
           font-family="KaTeX_Math"
           font-style="italic"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           L
         </text>
@@ -432,7 +432,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.cylTopY"
           :x2="draw.wallLeftX"
           :y2="draw.cylBottomY"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="2.6"
           stroke-linecap="round"
           opacity="0.95"
@@ -442,7 +442,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           :y1="draw.cylTopY"
           :x2="draw.wallRightX"
           :y2="draw.cylBottomY"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="2.6"
           stroke-linecap="round"
           opacity="0.95"
@@ -453,7 +453,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
           font-size="16"
           font-family="KaTeX_Math"
           font-style="italic"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           l
         </text>
@@ -590,7 +590,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
   border: 1px solid var(--c-border);
   border-radius: 999px;
 
-  background: rgb(148 163 184 / 8%);
+  background: var(--c-border);
   color: var(--c-text-dim);
 
   font-size: 0.88rem;
@@ -601,7 +601,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
 .lrc-tabs button.lrc-on,
 .lrc-slow.lrc-on {
   border-color: var(--c-border-glow);
-  background: rgb(226 168 70 / 14%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 }
 
@@ -634,9 +634,9 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
 
   padding: 0.22rem 0.45rem;
   border: 1px solid var(--c-border);
-  border-radius: 0.55rem;
+  border-radius: var(--radius-sm);
 
-  background: rgb(148 163 184 / 6%);
+  background: var(--c-border);
 
   font-size: 0.72rem;
 }
@@ -664,7 +664,7 @@ const done = computed<boolean>(() => elapsed.value >= duration.value - 1e-9);
   border: 1px solid var(--c-border);
   border-radius: 999px;
 
-  background: rgb(148 163 184 / 10%);
+  background: var(--c-border);
 }
 
 .lrc-bar-fill {

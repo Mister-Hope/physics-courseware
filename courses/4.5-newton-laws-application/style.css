@@ -23,24 +23,17 @@
 
 /* 题干较长的模型页：给文字更宽的栏，减少折行 */
 .half-grid-text {
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
 }
 
-/* 例题页右栏：题干 + 逐步分析 + 落点，行数多，整体收紧一档 */
+/* 例题页右栏：题干 + 逐步分析 + 落点，行数多，只收紧行距与间距（字号走共享阶梯） */
 .solution-stack {
-  --stack-gap: 0.6rem;
+  --stack-gap: 0.5rem;
 
-  font-size: 0.94rem;
-  line-height: 1.55;
-}
-
-.solution-stack .ask {
-  font-size: 0.98rem;
   line-height: 1.5;
 }
 
 .solution-stack .key {
-  font-size: 0.94rem;
   line-height: 1.6;
 }
 
@@ -68,7 +61,6 @@
 
   color: var(--c-text-dim);
 
-  font-size: 0.78rem;
   text-align: center;
   white-space: nowrap;
 }
@@ -90,7 +82,6 @@
   min-width: 3.8rem;
   border-color: var(--c-border-glow);
   color: var(--c-accent);
-  font-size: 1.12rem;
 }
 
 .bridge-link {
@@ -101,23 +92,21 @@
 
   color: var(--c-text-dim);
 
-  font-size: 0.74rem;
   white-space: nowrap;
 }
 
 .bridge-link > svg {
   color: var(--c-accent-2);
-  font-size: 1.5rem;
 }
 
 /* ── 第 5 页：整体法 / 隔离法并排对照 ── */
-.two-cases {
+.case-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
 }
 
-.two-cases > * {
+.case-grid > * {
   min-width: 0;
   overflow-wrap: anywhere;
 }
@@ -140,5 +129,4 @@
 .case-name {
   color: var(--c-accent-2);
   font-weight: 700;
-  font-size: 1.1rem;
 }

@@ -104,21 +104,21 @@ onUnmounted(stop);
 </script>
 
 <template>
-  <div class="demo-wrap">
-    <div class="demo-header">
-      <div class="frame-state">
-        <span class="frame-dot" :class="frame" />
+  <div class="rf-wrap">
+    <div class="rf-header">
+      <div class="rf-frame-state">
+        <span class="rf-frame-dot" :class="frame" />
         <span>参考系：{{ frame === "ground" ? "地面" : "车厢" }}</span>
-        <span class="passenger-state" :class="frame">
+        <span class="rf-passenger-state" :class="frame">
           · 乘客{{ frame === "ground" ? "随车运动" : "静止" }}
         </span>
       </div>
-      <button class="switch-btn" type="button" @click="toggle">切换参考系</button>
+      <button class="rf-switch-btn" type="button" @click="toggle">切换参考系</button>
     </div>
 
     <svg
       viewBox="0 0 640 300"
-      class="demo-svg"
+      class="rf-svg"
       role="img"
       aria-label="参考系演示：同一辆列车，两种看法"
     >
@@ -147,22 +147,22 @@ onUnmounted(stop);
           <stop offset="100%" stop-color="#1a2740" />
         </linearGradient>
         <linearGradient id="rfd-rail" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#cbd5e1" />
-          <stop offset="100%" stop-color="#64748b" />
+          <stop offset="0%" stop-color="var(--c-neutral-300)" />
+          <stop offset="100%" stop-color="var(--c-neutral-500)" />
         </linearGradient>
         <radialGradient id="rfd-lamp">
           <stop offset="0%" stop-color="rgba(253,230,138,0.55)" />
           <stop offset="100%" stop-color="rgba(253,230,138,0)" />
         </radialGradient>
         <radialGradient id="rfd-sun">
-          <stop offset="0%" stop-color="rgba(226,168,70,0.34)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-accent) 34%, transparent)" />
           <stop offset="100%" stop-color="rgba(226,168,70,0)" />
         </radialGradient>
       </defs>
 
       <!-- 天空 -->
       <rect x="0" y="0" width="640" height="176" fill="url(#rfd-sky)" />
-      <g fill="#e2e8f0">
+      <g fill="var(--c-neutral-200)">
         <circle
           v-for="(star, i) in stars"
           :key="i"
@@ -174,9 +174,9 @@ onUnmounted(stop);
       </g>
       <!-- 月亮（在无穷远处，两个参考系里都不动） -->
       <circle cx="523" cy="52" r="34" fill="url(#rfd-sun)" />
-      <circle cx="523" cy="52" r="9" fill="#f8fafc" opacity="0.82" />
+      <circle cx="523" cy="52" r="9" fill="var(--c-neutral-50)" opacity="0.82" />
       <!-- 地平线暖光 -->
-      <rect x="0" y="150" width="640" height="26" fill="rgba(226,168,70,0.07)" />
+      <rect x="0" y="150" width="640" height="26" fill="color-mix(in srgb, var(--c-accent) 7%, transparent)" />
 
       <!-- 远景：城市轮廓（视差更慢） -->
       <g :transform="`translate(${farShift()}, 0)`">
@@ -190,7 +190,7 @@ onUnmounted(stop);
           :opacity="house.opacity"
           fill="#1b2745"
         />
-        <g fill="#e2a846" opacity="0.35">
+        <g fill="var(--c-accent)" opacity="0.35">
           <rect
             v-for="(house, i) in buildings"
             :key="`w${i}`"
@@ -211,7 +211,7 @@ onUnmounted(stop);
       <g :transform="`translate(${sceneryShift()}, 0)`">
         <!-- 道砟 -->
         <rect x="-400" y="176" width="1440" height="66" fill="url(#rfd-ballast)" />
-        <g fill="rgba(148,163,184,0.25)">
+        <g fill="color-mix(in srgb, var(--c-text-dim) 25%, transparent)">
           <circle
             v-for="(speck, i) in speckles"
             :key="i"
@@ -297,17 +297,17 @@ onUnmounted(stop);
 
         <!-- 地面观察者（随窗外景物一起后退） -->
         <g v-for="obs in observers" :key="obs.x" :transform="`translate(${obs.x}, 0)`">
-          <circle cx="0" cy="250" r="7.5" fill="#e2e8f0" />
-          <rect x="-7.5" y="259" width="15" height="20" rx="5.5" fill="#3b82f6" />
-          <rect x="-7.5" y="279" width="6" height="14" rx="3" fill="#1e293b" />
-          <rect x="1.5" y="279" width="6" height="14" rx="3" fill="#1e293b" />
+          <circle cx="0" cy="250" r="7.5" fill="var(--c-neutral-200)" />
+          <rect x="-7.5" y="259" width="15" height="20" rx="5.5" fill="var(--c-accent-2)" />
+          <rect x="-7.5" y="279" width="6" height="14" rx="3" fill="var(--c-surface-solid)" />
+          <rect x="1.5" y="279" width="6" height="14" rx="3" fill="var(--c-surface-solid)" />
           <text
             v-if="obs.labeled"
             x="-14"
             y="272"
             text-anchor="end"
             style="font-size: 11px"
-            fill="#94a3b8"
+            fill="var(--c-text-dim)"
           >
             地面观察者
           </text>
@@ -342,13 +342,13 @@ onUnmounted(stop);
           height="108"
           rx="16"
           fill="none"
-          stroke="rgba(96,165,250,0.5)"
+          stroke="color-mix(in srgb, var(--c-velocity) 50%, transparent)"
           stroke-width="1.5"
           stroke-dasharray="8 6"
         />
 
         <!-- 地面系：车尾速度线 -->
-        <g v-if="frame === 'ground'" stroke="#e2a846" stroke-linecap="round">
+        <g v-if="frame === 'ground'" stroke="var(--c-accent)" stroke-linecap="round">
           <line x1="-14" y1="150" x2="-62" y2="150" stroke-width="2" opacity="0.5" />
           <line x1="-16" y1="168" x2="-80" y2="168" stroke-width="2.4" opacity="0.36" />
           <line x1="-12" y1="186" x2="-54" y2="186" stroke-width="2" opacity="0.28" />
@@ -361,7 +361,7 @@ onUnmounted(stop);
             v-if="car.cab"
             d="M200 134 H284 Q296 137 296 154 V210 H200 Z"
             fill="url(#rfd-body)"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             stroke-width="1.6"
           />
           <rect
@@ -372,7 +372,7 @@ onUnmounted(stop);
             height="76"
             rx="9"
             fill="url(#rfd-body)"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             stroke-width="1.6"
           />
 
@@ -383,7 +383,7 @@ onUnmounted(stop);
             width="86"
             height="5"
             rx="2.5"
-            fill="rgba(226,232,240,0.18)"
+            fill="color-mix(in srgb, var(--c-neutral-200) 18%, transparent)"
           />
           <rect :x="car.x + 2" y="200" width="92" height="9" rx="4" fill="rgba(8,13,26,0.62)" />
 
@@ -395,7 +395,7 @@ onUnmounted(stop);
             height="27"
             rx="4"
             fill="url(#rfd-window)"
-            stroke="rgba(148,163,184,0.45)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
           />
           <rect
             v-if="!car.cab"
@@ -405,14 +405,14 @@ onUnmounted(stop);
             height="27"
             rx="4"
             fill="url(#rfd-window)"
-            stroke="rgba(148,163,184,0.45)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
           />
           <line
             :x1="car.x + 14"
             y1="152.5"
             :x2="car.x + 38"
             y2="152.5"
-            stroke="rgba(226,232,240,0.3)"
+            stroke="color-mix(in srgb, var(--c-neutral-200) 30%, transparent)"
             stroke-width="1.6"
             stroke-linecap="round"
           />
@@ -422,7 +422,7 @@ onUnmounted(stop);
             y1="152.5"
             :x2="car.x + 82"
             y2="152.5"
-            stroke="rgba(226,232,240,0.3)"
+            stroke="color-mix(in srgb, var(--c-neutral-200) 30%, transparent)"
             stroke-width="1.6"
             stroke-linecap="round"
           />
@@ -434,7 +434,7 @@ onUnmounted(stop);
             width="80"
             height="4"
             rx="2"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             opacity="0.45"
           />
 
@@ -446,7 +446,7 @@ onUnmounted(stop);
             height="58"
             rx="3"
             fill="rgba(8,13,26,0.55)"
-            stroke="rgba(148,163,184,0.3)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 30%, transparent)"
             stroke-width="0.8"
           />
 
@@ -457,11 +457,11 @@ onUnmounted(stop);
               :cx="car.x + wheelOffset"
               cy="218"
               r="8.5"
-              fill="#0f172a"
-              stroke="#94a3b8"
+              fill="var(--c-neutral-900)"
+              stroke="var(--c-text-dim)"
               stroke-width="1.6"
             />
-            <circle :cx="car.x + wheelOffset" cy="218" r="3" fill="#475569" />
+            <circle :cx="car.x + wheelOffset" cy="218" r="3" fill="var(--c-neutral-600)" />
           </g>
         </g>
 
@@ -469,29 +469,29 @@ onUnmounted(stop);
         <path
           d="M262 148 H286 Q293 150 293 162 V182 H262 Z"
           fill="url(#rfd-window)"
-          stroke="rgba(148,163,184,0.5)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
           stroke-width="1.2"
         />
 
         <!-- 车厢 2 里的乘客 -->
         <g transform="translate(126, 0)">
-          <circle cx="0" cy="160" r="6" fill="#f1f5f9" />
-          <path d="M-9 177 Q-9 167 0 167 Q9 167 9 177 Z" fill="#e2a846" />
+          <circle cx="0" cy="160" r="6" fill="var(--c-text)" />
+          <path d="M-9 177 Q-9 167 0 167 Q9 167 9 177 Z" fill="var(--c-accent)" />
         </g>
-        <text x="126" y="195" text-anchor="middle" style="font-size: 11.5px" fill="#e2a846">
+        <text x="126" y="195" text-anchor="middle" style="font-size: 11.5px" fill="var(--c-accent)">
           乘客
         </text>
 
         <!-- 受电弓 -->
-        <rect x="134" y="129" width="26" height="5" rx="2" fill="#93c5fd" opacity="0.8" />
-        <line x1="140" y1="129" x2="156" y2="116" stroke="#cbd5e1" stroke-width="2.2" />
-        <line x1="156" y1="116" x2="146" y2="112" stroke="#cbd5e1" stroke-width="2.2" />
+        <rect x="134" y="129" width="26" height="5" rx="2" fill="var(--c-velocity-light)" opacity="0.8" />
+        <line x1="140" y1="129" x2="156" y2="116" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+        <line x1="156" y1="116" x2="146" y2="112" stroke="var(--c-neutral-300)" stroke-width="2.2" />
         <line
           x1="134"
           y1="112"
           x2="166"
           y2="112"
-          stroke="#e2e8f0"
+          stroke="var(--c-neutral-200)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -503,14 +503,14 @@ onUnmounted(stop);
           cy="196"
           r="5"
           fill="#fde68a"
-          stroke="rgba(226,168,70,0.9)"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
           stroke-width="1"
         />
-        <circle cx="7" cy="196" r="3.2" fill="#f87171" />
+        <circle cx="7" cy="196" r="3.2" fill="var(--c-force)" />
       </g>
 
       <!-- ── 标注 ── -->
-      <g v-if="frame === 'ground'" stroke="#e2a846" stroke-linecap="round">
+      <g v-if="frame === 'ground'" stroke="var(--c-accent)" stroke-linecap="round">
         <line x1="266" y1="78" x2="358" y2="78" stroke-width="2.2" opacity="0.85" />
         <path
           d="M352 73 L364 78 L352 83"
@@ -520,7 +520,7 @@ onUnmounted(stop);
           stroke-linejoin="round"
         />
       </g>
-      <g v-else stroke="#60a5fa" stroke-linecap="round">
+      <g v-else stroke="var(--c-velocity)" stroke-linecap="round">
         <line x1="374" y1="78" x2="282" y2="78" stroke-width="2.2" opacity="0.85" />
         <path
           d="M288 73 L276 78 L288 83"
@@ -540,7 +540,7 @@ onUnmounted(stop);
       >
         {{ frame === "ground" ? "以地面为参考系" : "以车厢为参考系" }}
       </text>
-      <text x="320" y="46" text-anchor="middle" style="font-size: 12.5px" fill="#94a3b8">
+      <text x="320" y="46" text-anchor="middle" style="font-size: 12.5px" fill="var(--c-text-dim)">
         {{
           frame === "ground"
             ? "列车向右行驶，窗外景物（树、电线杆、枕木）静止"
@@ -561,20 +561,20 @@ onUnmounted(stop);
 </template>
 
 <style scoped>
-.demo-wrap {
+.rf-wrap {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
 
-.demo-header {
+.rf-header {
   display: flex;
   gap: 0.8rem;
   align-items: center;
   justify-content: space-between;
 }
 
-.frame-state {
+.rf-frame-state {
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
@@ -585,46 +585,50 @@ onUnmounted(stop);
   font-size: 0.82rem;
 }
 
-.frame-dot {
+.rf-frame-dot {
   flex-shrink: 0;
 
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 50%;
 
-  background: #e2a846;
-  box-shadow: 0 0 8px rgb(226 168 70 / 60%);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 60%, transparent);
 }
 
-.frame-dot.train {
-  background: #60a5fa;
-  box-shadow: 0 0 8px rgb(96 165 250 / 60%);
+.rf-frame-dot.train {
+  background: var(--c-accent-2);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
 }
 
-.passenger-state {
-  color: #94a3b8;
+.rf-passenger-state {
+  color: var(--c-text-dim);
 }
 
-.passenger-state.ground {
-  color: #e2a846;
+.rf-passenger-state.ground {
+  color: var(--c-accent);
 }
 
-.passenger-state.train {
-  color: #60a5fa;
+.rf-passenger-state.train {
+  color: var(--c-accent-2);
 }
 
-.switch-btn {
+.rf-switch-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 0.42rem 1.35rem;
-  border: 1px solid rgb(226 168 70 / 50%);
-  border-radius: 2rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 50%, transparent);
+  border-radius: 999px;
 
-  background: linear-gradient(135deg, rgb(226 168 70 / 24%), rgb(226 168 70 / 8%));
-  color: #e2a846;
-  box-shadow: 0 2px 10px rgb(226 168 70 / 12%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c-accent) 24%, transparent),
+    color-mix(in srgb, var(--c-accent) 8%, transparent)
+  );
+  color: var(--c-accent);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--c-accent) 12%, transparent);
 
   font-weight: 700;
   font-size: 0.82rem;
@@ -635,27 +639,27 @@ onUnmounted(stop);
   transition: all 0.25s ease;
 }
 
-.switch-btn:hover {
-  box-shadow: 0 4px 14px rgb(226 168 70 / 22%);
+.rf-switch-btn:hover {
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--c-accent) 22%, transparent);
   filter: brightness(1.15);
   transform: translateY(-1px);
 }
 
-.switch-btn:active {
+.rf-switch-btn:active {
   filter: brightness(0.98);
   transform: translateY(0);
 }
 
-.demo-svg {
+.rf-svg {
   width: auto;
   max-width: 100%;
 
   /* 限制高度：本页「标签 + 演示」整体要完整落在 16:9 画面内，别让场景底部被裁掉 */
   height: 16rem;
   margin: 0 auto;
-  border: 1px solid rgb(148 163 184 / 10%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 40%);
+  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
 }
 </style>

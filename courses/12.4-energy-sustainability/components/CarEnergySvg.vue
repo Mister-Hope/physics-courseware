@@ -24,17 +24,17 @@ const legend = [
 
 <template>
   <svg viewBox="0 0 720 220" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <text x="40" y="26" text-anchor="start" font-size="12" fill="#94a3b8">各种汽车消耗的能量，占全部交通工具能耗总量的 73%</text>
-    <text x="40" y="50" text-anchor="start" font-size="13" fill="#94a3b8">燃料提供的功率 70 kW</text>
-    <text x="680" y="50" text-anchor="end" font-size="14" fill="#e2a846">总效率 ≈ 13%</text>
+    <text x="40" y="26" text-anchor="start" font-size="12" fill="var(--c-text-dim)">各种汽车消耗的能量，占全部交通工具能耗总量的 73%</text>
+    <text x="40" y="50" text-anchor="start" font-size="13" fill="var(--c-text-dim)">燃料提供的功率 70 kW</text>
+    <text x="680" y="50" text-anchor="end" font-size="14" fill="var(--c-accent)">总效率 ≈ 13%</text>
     <rect v-for="seg in segments" :key="seg.key" :x="seg.x" y="64" :width="seg.w" height="52" :fill="seg.fill" />
-    <text x="81" y="99" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f1425">9 kW</text>
-    <text x="360" y="99" text-anchor="middle" font-size="14" fill="#e2e8f0">52 kW 废热与散热</text>
-    <path d="M123 120 V132 H680 V120" fill="none" stroke="rgba(148,163,184,0.5)" stroke-width="1.4" />
-    <text x="401" y="150" text-anchor="middle" font-size="12" fill="#cbd5e1">其余 61 kW 都是损耗</text>
+    <text x="81" y="99" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--c-bg-soft)">9 kW</text>
+    <text x="360" y="99" text-anchor="middle" font-size="14" fill="var(--c-neutral-200)">52 kW 废热与散热</text>
+    <path d="M123 120 V132 H680 V120" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.4" />
+    <text x="401" y="150" text-anchor="middle" font-size="12" fill="var(--c-neutral-300)">其余 61 kW 都是损耗</text>
     <g v-for="item in legend" :key="item.text">
       <rect :x="item.x" :y="item.y - 11" width="13" height="13" rx="3" :fill="item.fill" />
-      <text :x="item.x + 21" :y="item.y" font-size="13" fill="#cbd5e1">{{ item.text }}</text>
+      <text :x="item.x + 21" :y="item.y" font-size="13" fill="var(--c-neutral-300)">{{ item.text }}</text>
     </g>
   </svg>
 </template>

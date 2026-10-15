@@ -4,9 +4,11 @@ import { computed, onUnmounted, ref } from "vue";
 
 type Frame = "ground" | "water";
 
-const { interactive = true } = defineProps<{
+const { interactive = true, compact = false } = defineProps<{
   /** False = 只当静态题目图用：不显示参考系状态、按钮与时间轴，也不播放 */
   interactive?: boolean;
+  /** True = 演示舞台（场景 + 时间轴）收窄一档：同页还有推导与结论时给它们腾出高度，标题行保持整宽不折行 */
+  compact?: boolean;
 }>();
 
 // 场景几何（viewBox 1000 × 300，画面顶部裁掉 24 单位空天）
@@ -113,7 +115,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 </script>
 
 <template>
-  <div class="bcd-wrap">
+  <div class="bcd-wrap" :class="{ compact }">
     <div v-if="interactive" class="bcd-header">
       <div class="bcd-state">
         <span class="bcd-dot" :class="frame" />
@@ -175,18 +177,18 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
       <path
         :transform="`translate(${groundShift * 0.35}, 0)`"
         d="M -200 142 Q -60 92 90 126 Q 240 84 410 128 Q 560 88 730 124 Q 890 86 1060 128 Q 1180 98 1320 142 Z"
-        fill="rgba(30, 41, 59, 0.55)"
+        fill="color-mix(in srgb, var(--c-surface-solid) 55%, transparent)"
       />
 
       <!-- ==================== 2. 远岸青石驳岸与芦苇丛（随地面一起动） ==================== -->
       <rect x="0" y="140" width="1000" height="28" :fill="`url(#bcd-${uid}-bank)`" />
-      <line x1="0" y1="140" x2="1000" y2="140" stroke="rgba(148,163,184,0.35)" stroke-width="1.4" />
+      <line x1="0" y1="140" x2="1000" y2="140" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.4" />
       <line
         x1="0"
         y1="154"
         x2="1000"
         y2="154"
-        stroke="rgba(15,23,42,0.4)"
+        stroke="color-mix(in srgb, var(--c-neutral-900) 40%, transparent)"
         stroke-width="1.2"
         stroke-dasharray="18 8"
       />
@@ -208,8 +210,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
       <!-- ==================== 3. 河水与流向/后退方向指示 ==================== -->
       <rect x="0" y="168" width="1000" height="132" :fill="`url(#bcd-${uid}-water)`" />
-      <line x1="0" y1="168" x2="1000" y2="168" stroke="rgba(147,197,253,0.55)" stroke-width="1.6" />
-      <g stroke="rgba(147,197,253,0.28)" stroke-width="1.6" stroke-linecap="round">
+      <line x1="0" y1="168" x2="1000" y2="168" stroke="color-mix(in srgb, var(--c-velocity-light) 55%, transparent)" stroke-width="1.6" />
+      <g stroke="color-mix(in srgb, var(--c-velocity-light) 28%, transparent)" stroke-width="1.6" stroke-linecap="round">
         <line
           v-for="(r, i) in ripples"
           :key="i"
@@ -228,16 +230,16 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           width="136"
           height="36"
           rx="8"
-          fill="rgba(15,23,42,0.62)"
-          stroke="rgba(147,197,253,0.28)"
+          fill="color-mix(in srgb, var(--c-neutral-900) 62%, transparent)"
+          stroke="color-mix(in srgb, var(--c-velocity-light) 28%, transparent)"
           stroke-width="1"
         />
-        <text x="90" y="50" text-anchor="middle" style="font-size: 10.5px" fill="#93c5fd">
+        <text x="90" y="50" text-anchor="middle" style="font-size: 10.5px" fill="var(--c-velocity-light)">
           {{ frame === "ground" ? "水流方向 (u)" : "桥与河岸后退方向 (−u)" }}
         </text>
         <g
           fill="none"
-          stroke="#93c5fd"
+          stroke="var(--c-velocity-light)"
           stroke-width="2.2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -261,18 +263,18 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             y1="264"
             :x2="BRIDGE_X + V_PX"
             y2="264"
-            stroke="rgba(96,165,250,0.45)"
+            stroke="color-mix(in srgb, var(--c-velocity) 45%, transparent)"
             stroke-width="1.6"
             stroke-dasharray="5 4"
           />
-          <circle :cx="BRIDGE_X" cy="264" r="3" fill="#60a5fa" />
-          <circle :cx="BRIDGE_X + V_PX" cy="264" r="3" fill="#e2a846" />
+          <circle :cx="BRIDGE_X" cy="264" r="3" fill="var(--c-velocity)" />
+          <circle :cx="BRIDGE_X + V_PX" cy="264" r="3" fill="var(--c-accent)" />
           <text
             :x="BRIDGE_X + V_PX / 2"
             y="280"
             text-anchor="middle"
             style="font-size: 11px"
-            fill="#93c5fd"
+            fill="var(--c-velocity-light)"
           >
             相对水：水杯不动，去程与返程距离均为
             <tspan font-family="KaTeX_Math" font-style="italic">vT</tspan>
@@ -288,18 +290,18 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             y1="264"
             :x2="cupX"
             y2="264"
-            stroke="rgba(56,189,248,0.55)"
+            stroke="color-mix(in srgb, var(--c-physics-light) 55%, transparent)"
             stroke-width="2"
           />
-          <circle :cx="BRIDGE_X" cy="264" r="2.8" fill="#94a3b8" />
-          <circle :cx="cupX" cy="264" r="3" fill="#38bdf8" />
+          <circle :cx="BRIDGE_X" cy="264" r="2.8" fill="var(--c-text-dim)" />
+          <circle :cx="cupX" cy="264" r="3" fill="var(--c-physics-light)" />
         </template>
       </g>
 
       <!-- ==================== 5. 轻舟与戴斗笠船夫（先画船，过桥洞时从拱洞中透出） ==================== -->
       <g :transform="`translate(${boatX}, 0) scale(${boatFacing}, 1)`">
         <!-- 船底吃水线波浪与船尾水花 -->
-        <ellipse cx="0" cy="166" rx="50" ry="4.5" fill="rgba(147,197,253,0.18)" />
+        <ellipse cx="0" cy="166" rx="50" ry="4.5" fill="color-mix(in srgb, var(--c-velocity-light) 18%, transparent)" />
         <path
           d="M -52 165 Q -32 169 -12 166 M 24 166 Q 42 169 54 164"
           fill="none"
@@ -311,12 +313,12 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
         <!-- 船夫身体与衣衫（位于船舱内） -->
         <path
           d="M -22 149 C -22 128 -2 128 -2 149 Z"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           stroke="#fef08a"
           stroke-width="1"
         />
         <!-- 船夫头部 -->
-        <circle cx="-12" cy="121" r="6.8" fill="#f1f5f9" />
+        <circle cx="-12" cy="121" r="6.8" fill="var(--c-text)" />
         <!-- 江南船夫竹编斗笠 -->
         <path
           d="M -25 119 Q -12 108 1 119 Z"
@@ -349,7 +351,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           y1="158"
           x2="28"
           y2="158"
-          stroke="rgba(15,23,42,0.35)"
+          stroke="color-mix(in srgb, var(--c-neutral-900) 35%, transparent)"
           stroke-width="1.2"
           stroke-linecap="round"
         />
@@ -361,7 +363,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             y1="136"
             x2="10"
             y2="142"
-            stroke="#f8fafc"
+            stroke="var(--c-neutral-50)"
             stroke-width="2.4"
             stroke-linecap="round"
           />
@@ -370,7 +372,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             y1="138"
             x2="42"
             y2="167"
-            stroke="#cbd5e1"
+            stroke="var(--c-neutral-300)"
             stroke-width="2.5"
             stroke-linecap="round"
           />
@@ -380,8 +382,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             rx="4.5"
             ry="9"
             transform="rotate(-36 45 169.5)"
-            fill="#e2e8f0"
-            stroke="#94a3b8"
+            fill="var(--c-neutral-200)"
+            stroke="var(--c-text-dim)"
             stroke-width="1"
           />
         </g>
@@ -399,23 +401,23 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           stroke="rgba(125,211,252,0.35)"
           stroke-width="1.2"
         />
-        <ellipse cx="0" cy="181" rx="11" ry="3.2" fill="rgba(56,189,248,0.22)" />
+        <ellipse cx="0" cy="181" rx="11" ry="3.2" fill="color-mix(in srgb, var(--c-physics-light) 22%, transparent)" />
         <!-- 水杯杯身（微倾漂浮感） -->
         <g transform="rotate(8 0 174)">
           <path
             d="M -6.5 165 H 6.5 L 5 180 Q 0 182.5 -5 180 Z"
-            fill="#f8fafc"
-            stroke="#38bdf8"
+            fill="var(--c-neutral-50)"
+            stroke="var(--c-physics-light)"
             stroke-width="1.3"
             stroke-linejoin="round"
           />
           <!-- 杯身亮色装饰腰线 -->
-          <line x1="-5.8" y1="171" x2="5.8" y2="171" stroke="#38bdf8" stroke-width="2.2" />
+          <line x1="-5.8" y1="171" x2="5.8" y2="171" stroke="var(--c-physics-light)" stroke-width="2.2" />
           <!-- 水杯把手 -->
           <path
             d="M 6.2 168 Q 11.5 172 5.6 177"
             fill="none"
-            stroke="#e2e8f0"
+            stroke="var(--c-neutral-200)"
             stroke-width="1.5"
             stroke-linecap="round"
           />
@@ -431,8 +433,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           width="196"
           height="28"
           rx="14"
-          fill="rgba(15,23,42,0.88)"
-          stroke="rgba(226,168,70,0.75)"
+          fill="color-mix(in srgb, var(--c-neutral-900) 88%, transparent)"
+          stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
           stroke-width="1.3"
         />
         <text
@@ -440,7 +442,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           y="216.5"
           text-anchor="middle"
           style="font-weight: 600; font-size: 12px"
-          fill="#fbbf24"
+          fill="var(--c-accent-light)"
         >
           发现水杯丢了，立即掉头
         </text>
@@ -454,8 +456,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           width="212"
           height="28"
           rx="14"
-          fill="rgba(15,23,42,0.88)"
-          stroke="rgba(96,165,250,0.75)"
+          fill="color-mix(in srgb, var(--c-neutral-900) 88%, transparent)"
+          stroke="color-mix(in srgb, var(--c-velocity) 75%, transparent)"
           stroke-width="1.3"
         />
         <text
@@ -463,7 +465,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           y="216.5"
           text-anchor="middle"
           style="font-weight: 600; font-size: 12px"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           又经过
           <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
@@ -475,14 +477,14 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
       <!-- ==================== 8. 江南青石拱桥（随地面移动；高拱洞让船与水杯从洞中清晰穿过） ==================== -->
       <g :transform="`translate(${bridgeX}, 0)`">
         <!-- 桥墩水中倒影 -->
-        <rect x="-80" y="236" width="30" height="20" fill="rgba(15,23,42,0.32)" />
-        <rect x="50" y="236" width="30" height="20" fill="rgba(15,23,42,0.32)" />
+        <rect x="-80" y="236" width="30" height="20" fill="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)" />
+        <rect x="50" y="236" width="30" height="20" fill="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)" />
 
         <!-- 石拱桥主体（微拱桥面 + 半圆高拱洞 -52..52） -->
         <path
           d="M -82 60 Q 0 48 82 60 V 236 H 52 V 166 A 52 70 0 0 0 -52 166 V 236 H -82 Z"
           :fill="`url(#bcd-${uid}-stone)`"
-          stroke="#334155"
+          stroke="var(--c-neutral-700)"
           stroke-width="1.6"
           stroke-linejoin="round"
         />
@@ -491,20 +493,20 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
         <path
           d="M -52 236 V 166 A 52 70 0 0 1 52 166 V 236"
           fill="none"
-          stroke="#1e293b"
+          stroke="var(--c-surface-solid)"
           stroke-width="5.5"
           stroke-linecap="round"
         />
         <path
           d="M -55 166 A 55 73 0 0 1 55 166"
           fill="none"
-          stroke="rgba(226,232,240,0.35)"
+          stroke="color-mix(in srgb, var(--c-neutral-200) 35%, transparent)"
           stroke-width="1.4"
           stroke-dasharray="8 4"
         />
 
         <!-- 桥身青石砖缝纹理 -->
-        <g stroke="rgba(15,23,42,0.32)" stroke-width="1.1">
+        <g stroke="color-mix(in srgb, var(--c-neutral-900) 32%, transparent)" stroke-width="1.1">
           <line
             v-for="py in [82, 108, 134, 162, 192, 218]"
             :key="`l${py}`"
@@ -534,8 +536,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           width="36"
           height="9"
           rx="2"
-          fill="#475569"
-          stroke="#1e293b"
+          fill="var(--c-neutral-600)"
+          stroke="var(--c-surface-solid)"
           stroke-width="1.2"
         />
         <rect
@@ -544,23 +546,23 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
           width="36"
           height="9"
           rx="2"
-          fill="#475569"
-          stroke="#1e293b"
+          fill="var(--c-neutral-600)"
+          stroke="var(--c-surface-solid)"
           stroke-width="1.2"
         />
 
         <!-- 弧形桥面压顶石与中式石栏杆、望柱 -->
         <path
           d="M -88 50 Q 0 38 88 50 L 86 61 Q 0 49 -86 61 Z"
-          fill="#64748b"
-          stroke="#94a3b8"
+          fill="var(--c-neutral-500)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.2"
         />
         <!-- 栏杆扶手横梁 -->
         <path
           d="M -86 37 Q 0 26 86 37"
           fill="none"
-          stroke="#cbd5e1"
+          stroke="var(--c-neutral-300)"
           stroke-width="2.4"
           stroke-linecap="round"
         />
@@ -571,10 +573,10 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
             :y1="32 + (px * px) / 1200"
             :x2="px"
             :y2="49 + (px * px) / 1200"
-            stroke="#cbd5e1"
+            stroke="var(--c-neutral-300)"
             stroke-width="2.2"
           />
-          <circle :cx="px" :cy="31 + (px * px) / 1200" r="2.2" fill="#e2e8f0" />
+          <circle :cx="px" :cy="31 + (px * px) / 1200" r="2.2" fill="var(--c-neutral-200)" />
         </g>
       </g>
     </svg>
@@ -586,8 +588,8 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
       </div>
       <div class="bcd-labels">
         <span class="bcd-step-link" @click="seekTo(0)">0 · 水杯落水</span>
-        <span class="bcd-step-link" @click="seekTo(1)">T₀ · 发现并掉头</span>
-        <span class="bcd-step-link" @click="seekTo(2)">2T₀ · 捡起水杯</span>
+        <span class="bcd-step-link" @click="seekTo(1)"><Latex tex="T_0" /> · 发现并掉头</span>
+        <span class="bcd-step-link" @click="seekTo(2)"><Latex tex="2T_0" /> · 捡起水杯</span>
       </div>
     </div>
   </div>
@@ -599,6 +601,22 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   flex-direction: column;
   gap: 0.45rem;
   width: 100%;
+}
+
+/* 收窄变体（compact）：只收场景与时间轴、不收标题行——标题行给的是状态与开关，
+   整宽时不会折行；场景按 1000 : 276 的比例等比缩小，不会有左右留白托底。 */
+.bcd-wrap.compact .bcd-svg,
+.bcd-wrap.compact .bcd-timeline {
+  width: 100%;
+  max-width: 35rem;
+  margin-inline: auto;
+}
+
+/* 第 16 页（compact 态）专用：标题行右侧的「切换参考系 / 暂停 / 继续」按钮会顶进
+   顶栏校徽带（校徽 y≈14–54，按钮原本 y=46 起）→ 整体下移 0.75rem 让开校徽。
+   该页「全部展开」态还剩约 30px 底部余量，下移后仍有余量（改完已复跑 e2e）。 */
+.bcd-wrap.compact {
+  padding-top: 0.75rem;
 }
 
 .bcd-header {
@@ -627,17 +645,17 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   height: 0.5rem;
   border-radius: 50%;
 
-  background: #e2a846;
-  box-shadow: 0 0 8px rgb(226 168 70 / 60%);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 60%, transparent);
 }
 
 .bcd-dot.water {
-  background: #60a5fa;
-  box-shadow: 0 0 8px rgb(96 165 250 / 60%);
+  background: var(--c-accent-2);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent-2) 60%, transparent);
 }
 
 .bcd-hint {
-  color: #94a3b8;
+  color: var(--c-text-dim);
   font-weight: 500;
 }
 
@@ -649,7 +667,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 .bcd-time {
-  color: #94a3b8;
+  color: var(--c-text-dim);
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
 }
@@ -671,12 +689,16 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
   justify-content: center;
 
   padding: 0.22rem 0.75rem;
-  border: 1px solid rgb(226 168 70 / 50%);
-  border-radius: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 50%, transparent);
+  border-radius: 999px;
 
-  background: linear-gradient(135deg, rgb(226 168 70 / 24%), rgb(226 168 70 / 8%));
-  color: #e2a846;
-  box-shadow: 0 2px 8px rgb(226 168 70 / 12%);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c-accent) 24%, transparent),
+    color-mix(in srgb, var(--c-accent) 8%, transparent)
+  );
+  color: var(--c-accent);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-accent) 12%, transparent);
 
   font-weight: 700;
   font-size: 0.7rem;
@@ -688,14 +710,18 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 .bcd-btn.ghost {
-  border-color: rgb(148 163 184 / 40%);
-  background: linear-gradient(135deg, rgb(148 163 184 / 18%), rgb(148 163 184 / 6%));
+  border-color: color-mix(in srgb, var(--c-text-dim) 40%, transparent);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--c-text-dim) 18%, transparent),
+    color-mix(in srgb, var(--c-text-dim) 6%, transparent)
+  );
   color: #cbd5e1;
-  box-shadow: 0 2px 8px rgb(15 23 42 / 20%);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--c-bg) 20%, transparent);
 }
 
 .bcd-btn:hover {
-  box-shadow: 0 4px 12px rgb(226 168 70 / 22%);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--c-accent) 22%, transparent);
   filter: brightness(1.15);
 }
 
@@ -708,10 +734,10 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
   width: 100%;
   height: auto;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 40%);
+  background: color-mix(in srgb, var(--c-bg-soft) 40%, transparent);
 }
 
 .bcd-timeline {
@@ -723,15 +749,15 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 .bcd-track {
   position: relative;
   height: 4px;
-  border-radius: 2px;
-  background: rgb(148 163 184 / 18%);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text-dim) 18%, transparent);
 }
 
 .bcd-track-fill {
   position: absolute;
   inset: 0 auto 0 0;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #e2a846, #60a5fa);
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
 }
 
 .bcd-track-tick {
@@ -741,9 +767,9 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 
   width: 2px;
   height: 10px;
-  border-radius: 1px;
+  border-radius: 999px;
 
-  background: rgb(226 232 240 / 55%);
+  background: color-mix(in srgb, var(--c-text) 55%, transparent);
 }
 
 .bcd-labels {
@@ -759,7 +785,7 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 .bcd-step-link:hover {
-  color: #e2e8f0;
+  color: var(--c-text);
 }
 
 .bcd-labels > span:nth-child(2) {

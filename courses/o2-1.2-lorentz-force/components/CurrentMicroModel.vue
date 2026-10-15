@@ -79,23 +79,23 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
       >
         <defs>
           <linearGradient id="cmm-wire" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(51,65,85,0.5)" />
-            <stop offset="30%" stop-color="rgba(30,41,59,0.72)" />
-            <stop offset="72%" stop-color="rgba(15,23,42,0.88)" />
-            <stop offset="100%" stop-color="rgba(30,41,59,0.55)" />
+            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-neutral-700) 50%, transparent)" />
+            <stop offset="30%" stop-color="color-mix(in srgb, var(--c-surface-solid) 72%, transparent)" />
+            <stop offset="72%" stop-color="color-mix(in srgb, var(--c-neutral-900) 88%, transparent)" />
+            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-surface-solid) 55%, transparent)" />
           </linearGradient>
           <linearGradient id="cmm-section" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="rgba(226,168,70,0.45)" />
-            <stop offset="100%" stop-color="rgba(226,168,70,0.16)" />
+            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-accent) 45%, transparent)" />
+            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-accent) 16%, transparent)" />
           </linearGradient>
           <linearGradient id="cmm-column" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="rgba(226,168,70,0.06)" />
-            <stop offset="45%" stop-color="rgba(226,168,70,0.2)" />
-            <stop offset="100%" stop-color="rgba(226,168,70,0.1)" />
+            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-accent) 6%, transparent)" />
+            <stop offset="45%" stop-color="color-mix(in srgb, var(--c-accent) 20%, transparent)" />
+            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-accent) 10%, transparent)" />
           </linearGradient>
           <radialGradient id="cmm-charge" cx="34%" cy="32%" r="72%">
             <stop offset="0%" stop-color="#fecaca" />
-            <stop offset="45%" stop-color="#f87171" />
+            <stop offset="45%" stop-color="var(--c-force)" />
             <stop offset="100%" stop-color="#b91c1c" />
           </radialGradient>
         </defs>
@@ -103,7 +103,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
         <path
           :d="columnPath"
           fill="url(#cmm-wire)"
-          stroke="rgba(148,163,184,0.5)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)"
           stroke-width="1.8"
         />
         <line
@@ -119,7 +119,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           <path
             :d="columnPath"
             fill="url(#cmm-column)"
-            stroke="rgba(226,168,70,0.75)"
+            stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
             stroke-width="2.2"
           />
         </g>
@@ -127,11 +127,11 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
         <g :style="fade(showSlab)">
           <path
             :d="slabPath"
-            fill="rgba(96,165,250,0.2)"
-            stroke="rgba(96,165,250,0.9)"
+            fill="color-mix(in srgb, var(--c-velocity) 20%, transparent)"
+            stroke="color-mix(in srgb, var(--c-velocity) 90%, transparent)"
             stroke-width="2"
           />
-          <g stroke="rgba(96,165,250,0.9)" stroke-width="1.6">
+          <g stroke="color-mix(in srgb, var(--c-velocity) 90%, transparent)" stroke-width="1.6">
             <line :x1="SEC_X" y1="280" :x2="SEC_X" y2="292" />
             <line :x1="SLAB_X" y1="280" :x2="SLAB_X" y2="292" />
             <line :x1="SEC_X" y1="286" :x2="SLAB_X" y2="286" />
@@ -143,7 +143,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="24"
-            fill="#93c5fd"
+            fill="var(--c-velocity-light)"
           >
             v
           </text>
@@ -154,8 +154,8 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           :cy="AXIS_Y"
           :rx="SEC_RX"
           :ry="SEC_RY"
-          fill="rgba(226,168,70,0.18)"
-          stroke="rgba(226,168,70,0.35)"
+          fill="color-mix(in srgb, var(--c-accent) 18%, transparent)"
+          stroke="color-mix(in srgb, var(--c-accent) 35%, transparent)"
           stroke-width="8"
         />
         <ellipse
@@ -164,7 +164,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           :rx="SEC_RX"
           :ry="SEC_RY"
           fill="url(#cmm-section)"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
         />
         <line
@@ -172,7 +172,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           y1="126"
           :x2="SEC_X"
           y2="114"
-          stroke="rgba(226,168,70,0.8)"
+          stroke="color-mix(in srgb, var(--c-accent) 80%, transparent)"
           stroke-width="1.6"
         />
         <text
@@ -182,7 +182,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="30"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           S
         </text>
@@ -193,8 +193,8 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           :width="N_BOX.w"
           :height="N_BOX.h"
           rx="5"
-          fill="rgba(148,163,184,0.07)"
-          stroke="rgba(148,163,184,0.6)"
+          fill="color-mix(in srgb, var(--c-text-dim) 7%, transparent)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
           stroke-width="1.4"
           stroke-dasharray="6 5"
         />
@@ -203,7 +203,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           y1="136"
           :x2="N_BOX.cx"
           y2="124"
-          stroke="rgba(148,163,184,0.65)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 65%, transparent)"
           stroke-width="1.4"
         />
         <text
@@ -213,7 +213,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="26"
-          fill="#cbd5e1"
+          fill="var(--c-neutral-300)"
         >
           n
         </text>
@@ -222,7 +222,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           <path
             :d="`M ${c.x - 7} ${c.y} H ${c.x - 22} l 3.6 -2.6 m -3.6 2.6 l 3.6 2.6`"
             fill="none"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             stroke-width="1.6"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -244,7 +244,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
         <CourseArrow
           :from="{ x: 254, y: 64 }"
           :to="{ x: 142, y: 64 }"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="4.5"
         />
         <text
@@ -254,12 +254,12 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="30"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
         </text>
         <!-- ── 柱体长度 L = vt：截面到柱体末端 ── -->
-        <g stroke="rgba(203,213,225,0.75)" stroke-width="1.6">
+        <g stroke="color-mix(in srgb, var(--c-neutral-300) 75%, transparent)" stroke-width="1.6">
           <line :x1="SEC_X" y1="302" :x2="SEC_X" y2="318" />
           <line :x1="WIRE_END" y1="302" :x2="WIRE_END" y2="318" />
           <line :x1="SEC_X + 8" y1="310" :x2="218" y2="310" />
@@ -272,7 +272,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="26"
-          fill="#e2e8f0"
+          fill="var(--c-neutral-200)"
         >
           L = vt
         </text>
@@ -280,7 +280,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
         <CourseArrow
           :from="{ x: 436, y: 364 }"
           :to="{ x: 104, y: 364 }"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="5"
         />
         <text
@@ -290,7 +290,7 @@ const fade = (on: boolean): { opacity: number; visibility: "visible" | "hidden" 
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="30"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           I
         </text>

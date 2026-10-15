@@ -50,15 +50,15 @@ clicks: 4
 <div class="three-col">
 <div class="fig-col" v-click="1">
 <SpringPullSvg />
-<div class="fig-cap">手拉弹簧，弹簧也拉手</div>
+<div class="fig-cap"><mdi-hand-back-right-outline class="text-lg text-accent-2 inline-block align-middle mr-1" />手拉弹簧，弹簧也拉手</div>
 </div>
 <div class="fig-col" v-click="2">
 <TablePushSvg />
-<div class="fig-cap">推桌子，桌子也推我们</div>
+<div class="fig-cap"><mdi-table-furniture class="text-lg text-accent-2 inline-block align-middle mr-1" />推桌子，桌子也推我们</div>
 </div>
 <div class="fig-col" v-click="3">
 <GravityMutualSvg />
-<div class="fig-cap">地球吸引物体，物体也吸引地球</div>
+<div class="fig-cap"><mdi-earth class="text-lg text-accent-2 inline-block align-middle mr-1" />地球吸引物体，物体也吸引地球</div>
 </div>
 </div>
 <div class="key" v-click="4">两个物体之间的作用总是相互的：一个物体对另一个物体施加了力，后一个物体一定同时对它施加力——施力物体同时也是受力物体。</div>
@@ -75,11 +75,11 @@ clicks: 2
 <div class="half-grid">
 <div class="card" v-click="1">物体间相互作用的这一对力，叫作<span class="text-accent">作用力</span>和<span class="text-accent">反作用力</span>。它们互相依赖、同时存在——可以把其中任何一个叫作作用力，另一个叫作反作用力。</div>
 <div class="stack" v-click="2">
-<div class="mini-title">作用力与反作用力的性质</div>
+<div class="mini-title"><mdi-lightbulb-on-outline class="text-xl" />作用力与反作用力的性质</div>
 <ul class="trait-list">
-<li>同种性质：都是弹力，或都是摩擦力……</li>
-<li>同时产生、同时消失、同时变化</li>
-<li>分别作用在两个物体上</li>
+<li><mdi-shape-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />同种性质：都是弹力，或都是摩擦力……</li>
+<li><mdi-clock-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />同时产生、同时消失、同时变化</li>
+<li><mdi-swap-horizontal class="text-xl text-accent-2 inline-block align-middle mr-1" />分别作用在两个物体上</li>
 </ul>
 </div>
 </div>
@@ -97,9 +97,9 @@ clicks: 1
 <SpringScalePairSvg />
 </div>
 <div class="three-col" v-click="1">
-<div class="trait">两个测力计的指针同时移动</div>
-<div class="trait">两个示数总是相等</div>
-<div class="trait">两个力的方向相反</div>
+<div class="trait"><mdi-clock-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />两个测力计的指针同时移动</div>
+<div class="trait"><mdi-equal class="text-xl text-accent-2 inline-block align-middle mr-1" />两个示数总是相等</div>
+<div class="trait"><mdi-arrow-left-right-bold class="text-xl text-accent-2 inline-block align-middle mr-1" />两个力的方向相反</div>
 </div>
 </div>
 
@@ -134,9 +134,9 @@ clicks: 4
 <div class="page-grow">
 <div class="ask">两个物体不接触时呢？正在加速运动时呢？</div>
 <div class="three-col">
-<div class="trait" v-click="1">不接触的力同样成立：磁铁与铁钉隔着一段距离，吸引仍是相互的。</div>
-<div class="trait" v-click="2">与运动状态无关：静止、匀速、加速运动中，两个力都同时等大反向。</div>
-<div class="trait" v-click="3">与力的性质无关：弹力、摩擦力、引力、磁力都一样。</div>
+<div class="trait" v-click="1"><mdi-magnet class="text-xl text-accent-2 inline-block align-middle mr-1" />不接触的力同样成立：磁铁与铁钉隔着一段距离，吸引仍是相互的。</div>
+<div class="trait" v-click="2"><mdi-run-fast class="text-xl text-accent-2 inline-block align-middle mr-1" />与运动状态无关：静止、匀速、加速运动中，两个力都同时等大反向。</div>
+<div class="trait" v-click="3"><mdi-shape-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />与力的性质无关：弹力、摩擦力、引力、磁力都一样。</div>
 </div>
 <div class="key" v-click="4">定律里的<span class="text-accent">"总是"</span>，对任何两个相互作用的物体都成立。</div>
 </div>
@@ -171,11 +171,11 @@ clicks: 4
 <HangingBallForcesSvg />
 </div>
 <div class="stack">
-<div class="pair-head"><span></span><span>作用力与反作用力</span><span>一对平衡力</span></div>
-<div class="pair-row" v-click="1"><span class="pair-k">作用对象</span><span class="pair-a">两个物体</span><span class="pair-b">同一个物体</span></div>
-<div class="pair-row" v-click="2"><span class="pair-k">力的性质</span><span class="pair-a">一定相同</span><span class="pair-b">不一定相同</span></div>
-<div class="pair-row" v-click="3"><span class="pair-k">变化关系</span><span class="pair-a">同时产生、同时消失</span><span class="pair-b">撤去一个，另一个仍在</span></div>
-<div class="pair-row" v-click="4"><span class="pair-k">作用效果</span><span class="pair-a">不能抵消</span><span class="pair-b">可以抵消，合力为零</span></div>
+<div class="pair-head mini-note"><span></span><span class="pair-a">作用力与反作用力</span><span class="pair-b">一对平衡力</span></div>
+<div class="pair-row mini-note" v-click="1"><span class="pair-k">作用对象</span><span class="pair-a">两个物体</span><span class="pair-b">同一个物体</span></div>
+<div class="pair-row mini-note" v-click="2"><span class="pair-k">力的性质</span><span class="pair-a">一定相同</span><span class="pair-b">不一定相同</span></div>
+<div class="pair-row mini-note" v-click="3"><span class="pair-k">变化关系</span><span class="pair-a">同时产生、同时消失</span><span class="pair-b">撤去一个，另一个仍在</span></div>
+<div class="pair-row mini-note" v-click="4"><span class="pair-k">作用效果</span><span class="pair-a">不能抵消</span><span class="pair-b">可以抵消，合力为零</span></div>
 </div>
 </div>
 </div>
@@ -197,7 +197,7 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">面对一个情景，从哪里下手？先找哪个力？</div>
 <div class="trait" v-click="1">先明确对象：分析的是<span class="text-accent">哪个物体</span>受到的力。</div>
-<div class="order-line" v-click="2"><span class="order-step">重力</span><span class="order-arrow">→</span><span class="order-step">弹力</span><span class="order-arrow">→</span><span class="order-step">摩擦力</span><span class="order-arrow">→</span><span class="order-step">其他力</span></div>
+<div class="order-line" v-click="2"><span class="order-step text-lg"><mdi-numeric-1-circle class="text-lg inline-block align-middle mr-1" />重力</span><span class="order-arrow text-xl">→</span><span class="order-step text-lg"><mdi-numeric-2-circle class="text-lg inline-block align-middle mr-1" />弹力</span><span class="order-arrow text-xl">→</span><span class="order-step text-lg"><mdi-numeric-3-circle class="text-lg inline-block align-middle mr-1" />摩擦力</span><span class="order-arrow text-xl">→</span><span class="order-step text-lg"><mdi-numeric-4-circle class="text-lg inline-block align-middle mr-1" />其他力</span></div>
 <div class="key" v-click="3">按顺序走一遍，不多画一个，也不漏画一个。</div>
 </div>
 
@@ -214,9 +214,9 @@ clicks: 3
 </div>
 <div class="stack">
 <div class="ask">木块受到哪几个力？</div>
-<div class="trait" v-click="1">重力 <Latex tex="G" />：竖直向下。</div>
-<div class="trait" v-click="2">弹力 <Latex tex="F_{\text{N}}" />：垂直于斜面向上的支持力。</div>
-<div class="trait" v-click="3">静摩擦力 <Latex tex="F_f" />：假设没有摩擦，木块会向下滑动，所以木块相对斜面有向下滑动的趋势，摩擦力沿斜面向上。</div>
+<div class="trait" v-click="1"><mdi-arrow-down-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />重力 <Latex tex="G" />：竖直向下。</div>
+<div class="trait" v-click="2"><mdi-arrow-up-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />弹力 <Latex tex="F_{\text{N}}" />：垂直于斜面向上的支持力。</div>
+<div class="trait" v-click="3"><mdi-arrow-top-right-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />静摩擦力 <Latex tex="F_f" />：假设没有摩擦，木块会向下滑动，所以木块相对斜面有向下滑动的趋势，摩擦力沿斜面向上。</div>
 </div>
 </div>
 </div>
@@ -230,9 +230,9 @@ clicks: 2
 <div class="page-grow">
 <div class="ask">木块受到的三个力，分别与哪个力互为作用力与反作用力？</div>
 <div class="stack" v-click="1">
-<div class="trait">重力 <Latex tex="G" /> ↔ 木块对地球的引力</div>
-<div class="trait">支持力 <Latex tex="F_{\text{N}}" /> ↔ 木块对斜面的压力</div>
-<div class="trait">静摩擦力 <Latex tex="F_f" /> ↔ 木块对斜面的静摩擦力</div>
+<div class="trait"><mdi-earth class="text-xl text-accent-2 inline-block align-middle mr-1" />重力 <Latex tex="G" /> ↔ 木块对地球的引力</div>
+<div class="trait"><mdi-arrow-collapse-down class="text-xl text-accent-2 inline-block align-middle mr-1" />支持力 <Latex tex="F_{\text{N}}" /> ↔ 木块对斜面的压力</div>
+<div class="trait"><mdi-arrow-top-right-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />静摩擦力 <Latex tex="F_f" /> ↔ 木块对斜面的静摩擦力</div>
 </div>
 <div class="key" v-click="2">六个力里我们只画木块受到的三个——<span class="text-accent">分析哪个物体，就只画哪个物体受到的力</span>，不要把它的反作用力也画上去。</div>
 </div>
@@ -265,18 +265,18 @@ clicks: 2
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title">相互作用</div>
+<div class="mini-title"><mdi-swap-horizontal class="text-xl" />相互作用</div>
 <div class="trait">力的作用是相互的，施力物体同时也是受力物体</div>
 <div class="trait">作用力与反作用力：同种性质、同时存在、分别作用在两个物体上</div>
-<div class="mini-title">定量关系</div>
+<div class="mini-title"><mdi-equal class="text-xl" />定量关系</div>
 <div class="trait"><Latex tex="F' = -F" />：大小相等、方向相反、作用在同一条直线上</div>
 </div>
 <div class="stack">
-<div class="mini-title">与平衡力的区别</div>
+<div class="mini-title"><mdi-scale-balance class="text-xl" />与平衡力的区别</div>
 <div class="trait">异体 与 同体</div>
 <div class="trait">一定同性质 与 不一定同性质</div>
 <div class="trait">同时变化 与 不一定同时变化</div>
-<div class="mini-title">受力分析</div>
+<div class="mini-title"><mdi-format-list-numbered class="text-xl" />受力分析</div>
 <div class="trait">先明确对象，再按 重力 → 弹力 → 摩擦力 → 其他力 的顺序找</div>
 </div>
 </div>

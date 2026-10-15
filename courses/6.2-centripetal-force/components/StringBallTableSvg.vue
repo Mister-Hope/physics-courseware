@@ -37,12 +37,12 @@ const LABEL = { x: (BALL.x + TIP.x) / 2 - 8, y: (BALL.y + TIP.y) / 2 + 44 };
 
 <template>
   <svg viewBox="40 26 500 320" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <circle :cx="PIN.x" :cy="PIN.y" :r="R" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="8 7" opacity="0.55" />
-    <circle :cx="PIN.x" :cy="PIN.y" r="6" fill="#94a3b8" />
-    <text :x="PIN.x - 16" :y="PIN.y - 12" font-family="KaTeX_Main" font-size="18" fill="#94a3b8" text-anchor="end">图钉</text>
+    <circle :cx="PIN.x" :cy="PIN.y" :r="R" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-dasharray="8 7" opacity="0.55" />
+    <circle :cx="PIN.x" :cy="PIN.y" r="6" fill="var(--c-text-dim)" />
+    <text :x="PIN.x - 16" :y="PIN.y - 12" font-family="KaTeX_Main" font-size="18" fill="var(--c-text-dim)" text-anchor="end">图钉</text>
     <g v-if="step < 1">
-      <line :x1="PIN.x" :y1="PIN.y" :x2="LINE_END.x" :y2="LINE_END.y" stroke="#60a5fa" stroke-width="2.8" stroke-linecap="round" />
-      <g stroke="#f87171" stroke-width="3.2" stroke-linecap="round">
+      <line :x1="PIN.x" :y1="PIN.y" :x2="LINE_END.x" :y2="LINE_END.y" stroke="var(--c-velocity)" stroke-width="2.8" stroke-linecap="round" />
+      <g stroke="var(--c-force)" stroke-width="3.2" stroke-linecap="round">
         <line x1="248" y1="142" x2="270" y2="164" />
         <line x1="248" y1="164" x2="270" y2="142" />
       </g>
@@ -53,21 +53,21 @@ const LABEL = { x: (BALL.x + TIP.x) / 2 - 8, y: (BALL.y + TIP.y) / 2 + 44 };
         :y1="TANGENT_START.y"
         :x2="TANGENT_END.x"
         :y2="TANGENT_END.y"
-        stroke="#2dd4bf"
+        stroke="var(--c-physics)"
         stroke-width="2.4"
         stroke-dasharray="10 8"
         stroke-linecap="round"
       />
-      <path :d="`M ${HEAD.a.x} ${HEAD.a.y} L ${HEAD.tip.x} ${HEAD.tip.y} L ${HEAD.b.x} ${HEAD.b.y} Z`" fill="#2dd4bf" />
-      <circle :cx="FLY.x" :cy="FLY.y" r="13" fill="rgba(45,212,191,0.2)" stroke="#2dd4bf" stroke-width="1.8" />
+      <path :d="`M ${HEAD.a.x} ${HEAD.a.y} L ${HEAD.tip.x} ${HEAD.tip.y} L ${HEAD.b.x} ${HEAD.b.y} Z`" fill="var(--c-physics)" />
+      <circle :cx="FLY.x" :cy="FLY.y" r="13" fill="color-mix(in srgb, var(--c-physics) 20%, transparent)" stroke="var(--c-physics)" stroke-width="1.8" />
       <text
         :x="FLY.x + 22"
         :y="FLY.y + 6"
         font-family="KaTeX_Main"
         font-size="18"
-        fill="#2dd4bf"
+        fill="var(--c-physics)"
         text-anchor="start"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
@@ -75,21 +75,21 @@ const LABEL = { x: (BALL.x + TIP.x) / 2 - 8, y: (BALL.y + TIP.y) / 2 + 44 };
       </text>
     </g>
     <g v-if="step >= 2">
-      <CourseArrow :from="BALL" :to="TIP" stroke="#e2a846" :stroke-width="3.4" />
+      <CourseArrow :from="BALL" :to="TIP" stroke="var(--c-accent)" :stroke-width="3.4" />
       <text
         :x="LABEL.x"
         :y="LABEL.y"
         font-family="KaTeX_Main"
         font-size="18"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="middle"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
         拉力指向圆心
       </text>
     </g>
-    <circle :cx="BALL.x" :cy="BALL.y" :r="BALL_R" fill="#3a2f14" stroke="#e2a846" stroke-width="2" />
+    <circle :cx="BALL.x" :cy="BALL.y" :r="BALL_R" fill="#3a2f14" stroke="var(--c-accent)" stroke-width="2" />
   </svg>
 </template>

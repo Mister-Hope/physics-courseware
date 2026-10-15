@@ -1,90 +1,106 @@
 /* ═══════════════════════════════════════════════
    力的合成和分解 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   通用设计系统已提取到 workspace/shared/styles/，由共享 addon（../workspace/shared）自动注入；
+   此处只放本课特有样式。"图占满栏宽"一律用共享 .figure（配 relative / min-w-0），
+   "左图右文"一律用共享 .split-wide（比例走行内 --cols，见 style-guide §8）。
 
-   前缀按"图 / 小节概念"分组，并与各交互组件内部 \3c style scoped> 的前缀一一对应
-   （同一概念只有一套名字，页面与组件共用）：
-   eq- 引课等效对比 · te- 例题 · pe- 等效替代实验 · dc- 力的分解 · in- 斜面接触力
-   sd- 斜面方向 · gr- 一般夹角 · tr- 三角形定则 · qa- 练习 · verdict/ico- 对错判定
-   色值一律 var(--c-*)，圆角 var(--radius-*)／胶囊 999px，字号走 .text-lg…text-5xl、.mini-note、.icon-md 阶梯
-   （字号在 markup 上给，style.css 不写 font-size 字面值）
+   前缀按概念分组（同类概念只有一套名字；一门课 3–5 个概念前缀 + 一个页面前缀）：
+   demo- 交互演示的通用结构（控制面板 / 控制行 / 读数 / 隐形占位）——6 个演示组件共用
+   sum-  力的合成（引课等效对比、平行四边形定则、三角形定则、一般夹角、例题）
+   dec-  力的分解（分解的多解性、正交分解）
+   inc-  斜面（斜面方向、斜面上的接触力与重力分解）
+   exp-  实验误差与夹角分析
+   p25-  练习页（只给这一页用，§6 的页面前缀）
+
+   色值一律 var(--c-*)／color-mix，圆角 var(--radius-*)／胶囊 999px；
+   字号走共享阶梯（.text-*）或组件 scoped 内的版式微字号 —— style.css 不写 font-size 字面值。
    ═══════════════════════════════════════════════ */
 
-/* ── 引课页：两力共同作用 ⇄ 一个力单独作用 ── */
-.eq-row {
+/* ── demo-：交互演示的控制区（6 个演示组件共用一套结构；列宽与字号由各组件 scoped 覆盖）── */
+.demo-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* 一行：左标签、中滑杆、右读数 */
+.demo-row {
+  display: grid;
+  grid-template-columns: var(--demo-lab, 2.2rem) minmax(0, 1fr) var(--demo-read, 5.6rem);
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.demo-name {
+  font-weight: 700;
+  text-align: center;
+}
+
+.demo-val {
+  color: var(--c-text-dim);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.demo-row input[type="range"] {
+  min-width: 0;
+  height: 4px;
+  border-radius: 999px;
+
+  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
+  outline: none;
+
+  cursor: pointer;
+
+  appearance: none;
+}
+
+.demo-row input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--c-bg-soft);
+  border-radius: 50%;
+
+  background: var(--c-text-dim);
+
+  appearance: none;
+}
+
+/* 演示里的读数块：左侧一道青色竖线（字号/行距由各组件 scoped 覆盖） */
+.demo-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--c-physics);
+}
+
+/* 还没轮到 / 还没点击时整块隐形占位：**不能用 visibility**——ChartLabel 自己会写
+   `visibility: visible`，能把父层的 hidden 顶穿。opacity: 0 既保留占位、也不会漏出来。 */
+.demo-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── sum-：力的合成 ── */
+/* 引课页：两力共同作用 ⇄ 一个力单独作用 */
+.sum-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 0.8rem;
   align-items: center;
 }
 
-.eq-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.eq-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* 连接符字号走 markup 的 .text-4xl（2.1rem） */
-.eq-equal {
+.sum-equal {
   color: var(--c-accent);
   font-weight: 700;
 }
 
-/* ── 例题：图 + 解题步骤（组件 TriangleExampleSvg，te-）── */
-.te-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.te-grid > * {
-  min-width: 0;
-}
-
-/* ── 等效替代实验：左图右步骤（组件 PullEquivalence，pe-）── */
-.pe-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  gap: 1.8rem;
-  align-items: center;
-}
-
-.pe-grid > * {
-  min-width: 0;
-}
-
-/* ── 合力的真实与抽象：左图右辨析（组件 InclineContactForce，in-）── */
-.in-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 1.8rem;
-  align-items: center;
-}
-
-.in-grid > * {
-  min-width: 0;
-}
-
-/* ── 斜面上的方向：左图右说（组件 SlopeDirectionsSvg，sd-）── */
-.sd-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 1.8rem;
-  align-items: center;
-}
-
-.sd-grid > * {
-  min-width: 0;
-}
-
-.sd-tag {
+/* ── inc-：斜面页的方向标签（胶囊）── */
+.inc-tag {
   display: inline-block;
 
   margin-right: 0.5rem;
@@ -94,92 +110,36 @@
   font-weight: 700;
 }
 
-.sd-tag-blue {
+.inc-tag-blue {
   background: var(--c-accent-2-soft);
   color: var(--c-accent-2);
 }
 
-.sd-tag-gold {
+.inc-tag-gold {
   background: var(--c-accent-soft);
   color: var(--c-accent);
 }
 
-/* ── 练习页：问题与答案成块，答案就落在各自问题的下方（字号走 markup 的 .text-lg）── */
-.qa-list {
+/* ── p25-：练习页（问题与答案成块，答案就落在各自问题的下方；字号走 markup 的 .text-lg）── */
+.p25-list {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
 }
 
-.qa-item {
+.p25-item {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
-.qa-q {
+.p25-q {
   color: var(--c-text);
   line-height: 1.6;
 }
 
-.qa-a {
+.p25-a {
   color: var(--c-accent);
   line-height: 1.6;
-}
-
-/* ── 手写 SVG 示意图容器（标注走 ChartLabel，按容器百分比定位）
-      与组件内同名 scoped 规则取值一致：页面侧与组件侧共用一个名字 ── */
-.tr-figure,
-.dc-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.tr-figure svg,
-.dc-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* ── 辨析页：绿勾（对）/ 红叉（错）——与 2.1、1.2 同一套标记
-      图标字号走 markup 的 .text-3xl；这里只管语义色（.mini-title 的 > svg 位默认给蓝）── */
-.ico-good,
-.mini-title > svg.ico-good {
-  color: var(--c-ok);
-}
-
-.ico-bad,
-.mini-title > svg.ico-bad {
-  color: var(--c-danger);
-}
-
-/* ── 判断结论：问题后面挂一个绿勾/红叉＋结论（误差分析页）
-      字号走 markup 的 .text-lg，图标走 .icon-md ── */
-.verdict {
-  display: inline-flex;
-  gap: 0.35rem;
-  align-items: center;
-  margin-left: 0.2rem;
-}
-
-.verdict-good {
-  color: var(--c-ok);
-}
-
-.verdict-bad {
-  color: var(--c-danger);
-}
-
-/* ── 一般夹角求合力：左图右推导（组件 GeneralResultantSvg，gr-）── */
-.gr-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-  gap: 1.8rem;
-  align-items: center;
-}
-
-.gr-grid > * {
-  min-width: 0;
 }

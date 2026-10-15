@@ -24,28 +24,28 @@
         <defs>
           <!-- 充电宝质感外壳渐变 -->
           <linearGradient id="pb-body-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="rgba(30, 41, 59, 0.95)" />
-            <stop offset="50%" stop-color="rgba(15, 23, 42, 0.98)" />
-            <stop offset="100%" stop-color="rgba(30, 41, 59, 0.9)" />
+            <stop offset="0%" stop-color="color-mix(in srgb, var(--c-surface-solid) 95%, transparent)" />
+            <stop offset="50%" stop-color="color-mix(in srgb, var(--c-neutral-900) 98%, transparent)" />
+            <stop offset="100%" stop-color="color-mix(in srgb, var(--c-surface-solid) 90%, transparent)" />
           </linearGradient>
 
           <!-- 手机前面板黑晶渐变 -->
           <linearGradient id="phone-body-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#090d16" />
-            <stop offset="100%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="var(--c-neutral-900)" />
           </linearGradient>
 
           <!-- 动感充电脉冲光效 -->
           <linearGradient id="cable-energy-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#e2a846" />
-            <stop offset="50%" stop-color="#38bdf8" />
-            <stop offset="100%" stop-color="#4ade80" />
+            <stop offset="0%" stop-color="var(--c-accent)" />
+            <stop offset="50%" stop-color="var(--c-physics-light)" />
+            <stop offset="100%" stop-color="var(--c-ok)" />
           </linearGradient>
         </defs>
 
         <!-- ==================== 1. 充电宝 (Power Bank) ==================== -->
         <!-- 标签 -->
-        <text x="126" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="#94a3b8">
+        <text x="126" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="var(--c-text-dim)">
           充电宝
         </text>
 
@@ -57,7 +57,7 @@
           height="198"
           rx="22"
           fill="url(#pb-body-grad)"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.6"
         />
 
@@ -68,8 +68,8 @@
           width="5"
           height="24"
           rx="2"
-          fill="#475569"
-          stroke="#334155"
+          fill="var(--c-neutral-600)"
+          stroke="var(--c-neutral-700)"
           stroke-width="1"
         />
 
@@ -81,7 +81,7 @@
           height="76"
           rx="12"
           fill="#050811"
-          stroke="#3b82f6"
+          stroke="var(--c-accent-2)"
           stroke-opacity="0.65"
           stroke-width="1.8"
         />
@@ -92,15 +92,15 @@
             font-family="KaTeX_Main, 'Times New Roman', serif"
             font-size="22"
             font-weight="800"
-            fill="#e2a846"
+            fill="var(--c-accent)"
           >
             10,000
           </tspan>
-          <tspan font-size="13" font-weight="700" fill="#fbbf24" dx="3">mAh</tspan>
+          <tspan font-size="13" font-weight="700" fill="var(--c-accent-light)" dx="3">mAh</tspan>
         </text>
 
         <!-- 屏幕分界线 -->
-        <line x1="68" y1="106" x2="184" y2="106" stroke="rgba(148,163,184,0.2)" stroke-width="1" />
+        <line x1="68" y1="106" x2="184" y2="106" stroke="color-mix(in srgb, var(--c-text-dim) 20%, transparent)" stroke-width="1" />
 
         <!-- 屏幕电压读数：3.7 V -->
         <text
@@ -110,7 +110,7 @@
           font-family="KaTeX_Main, 'Times New Roman', serif"
           font-size="17"
           font-weight="700"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           3.7 V
         </text>
@@ -118,7 +118,7 @@
         <!-- 充电宝机身经典金色闪电标识 -->
         <polygon
           points="128,156 118,176 124,176 117,196 137,174 130,174 132,156"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           opacity="0.95"
         />
 
@@ -130,23 +130,23 @@
           height="8"
           rx="2.5"
           fill="#090d16"
-          stroke="#475569"
+          stroke="var(--c-neutral-600)"
           stroke-width="1.4"
         />
-        <rect x="118" y="245" width="16" height="3" rx="1" fill="#e2a846" opacity="0.85" />
+        <rect x="118" y="245" width="16" height="3" rx="1" fill="var(--c-accent)" opacity="0.85" />
 
         <!-- ==================== 2. 动感数据线 ==================== -->
         <path
           d="M 126 250 C 126 286 240 292 334 280 C 352 278 364 266 364 248"
           fill="none"
-          stroke="#1e293b"
+          stroke="var(--c-surface-solid)"
           stroke-width="5.5"
           stroke-linecap="round"
         />
         <path
           d="M 126 250 C 126 286 240 292 334 280 C 352 278 364 266 364 248"
           fill="none"
-          stroke="#475569"
+          stroke="var(--c-neutral-600)"
           stroke-width="2.6"
           stroke-linecap="round"
         />
@@ -166,8 +166,8 @@
           width="16"
           height="10"
           rx="2.5"
-          fill="#334155"
-          stroke="#64748b"
+          fill="var(--c-neutral-700)"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.2"
         />
 
@@ -178,14 +178,14 @@
           width="16"
           height="10"
           rx="2.5"
-          fill="#334155"
-          stroke="#64748b"
+          fill="var(--c-neutral-700)"
+          stroke="var(--c-neutral-500)"
           stroke-width="1.2"
         />
 
         <!-- ==================== 3. 手机 (Smartphone) ==================== -->
         <!-- 标签 -->
-        <text x="364" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="#94a3b8">
+        <text x="364" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="var(--c-text-dim)">
           手机
         </text>
 
@@ -197,12 +197,12 @@
           height="200"
           rx="18"
           fill="url(#phone-body-grad)"
-          stroke="#475569"
+          stroke="var(--c-neutral-600)"
           stroke-width="2.2"
         />
 
         <!-- 手机前置微摄/听筒 -->
-        <rect x="348" y="52" width="32" height="5" rx="2.5" fill="#1e293b" />
+        <rect x="348" y="52" width="32" height="5" rx="2.5" fill="var(--c-surface-solid)" />
 
         <!-- 手机显示屏 -->
         <rect
@@ -212,7 +212,7 @@
           height="174"
           rx="12"
           fill="#050811"
-          stroke="rgba(100,116,139,0.35)"
+          stroke="color-mix(in srgb, var(--c-neutral-500) 35%, transparent)"
           stroke-width="1.2"
         />
 
@@ -223,7 +223,7 @@
             cy="0"
             r="26"
             fill="none"
-            stroke="rgba(74,222,128,0.15)"
+            stroke="color-mix(in srgb, var(--c-ok) 15%, transparent)"
             stroke-width="4.5"
           />
           <circle
@@ -231,14 +231,14 @@
             cy="0"
             r="26"
             fill="none"
-            stroke="#4ade80"
+            stroke="var(--c-ok)"
             stroke-width="3"
             stroke-linecap="round"
             stroke-dasharray="115 50"
             transform="rotate(-40)"
           />
-          <polygon points="2,-12 -6,-1 -1,-1 -4,12 7,-2 1,-2 2,-12" fill="#4ade80" />
-          <text x="0" y="42" text-anchor="middle" font-size="13" font-weight="800" fill="#4ade80">
+          <polygon points="2,-12 -6,-1 -1,-1 -4,12 7,-2 1,-2 2,-12" fill="var(--c-ok)" />
+          <text x="0" y="42" text-anchor="middle" font-size="13" font-weight="800" fill="var(--c-ok)">
             78%
           </text>
         </g>
@@ -248,47 +248,23 @@
       </svg>
     </div>
 
-    <!-- 右侧：固定公式结果面板 + 民航 160 Wh 限额（严格遵照原版 PPT 结构） -->
+    <!-- 右侧：公式换算结果面板 + 民航 160 Wh 限额 -->
     <div class="pb-panel">
-      <!-- 公式换算结果区 -->
+      <!-- 公式换算：量斜体、单位正体，一律走 LaTeX -->
       <div class="pb-reads">
-        <!-- Q = C/1000 A × 3600 s = 36, 000 C -->
         <div class="pb-line">
-          <span class="font-serif italic font-bold">Q</span> =
-          <span
-            class="inline-flex flex-col items-center align-middle mx-1.5 leading-tight text-center font-serif"
-          >
-            <span class="border-b border-slate-300 px-1 pb-0.5 italic">C</span>
-            <span class="pt-0.5 text-xs">1000</span>
-          </span>
-          A × 3600 s =
-          <span class="font-bold text-slate-100 ml-1.5">36, 000 C</span>
+          <Latex tex="Q = \dfrac{C}{1000}\ \text{A} \times 3600\ \text{s} = 36{,}000\ \text{C}" />
         </div>
-
-        <!-- W = E · Q = 133, 200 J -->
         <div class="pb-line">
-          <span class="font-serif italic font-bold">W</span> =
-          <span class="font-serif italic">E</span> · <span class="font-serif italic">Q</span> =
-          <span class="font-bold text-slate-100 ml-1.5">133, 200 J</span>
+          <Latex tex="W = E \cdot Q = 133{,}200\ \text{J}" />
         </div>
-
-        <!-- W = E · C/1000 A·h = 37.0 Wh (醒目金色) -->
         <div class="pb-line pb-line-wh">
-          <span class="font-serif italic font-bold">W</span> =
-          <span class="font-serif italic">E</span> ·
-          <span
-            class="inline-flex flex-col items-center align-middle mx-1.5 leading-tight text-center font-serif text-amber-400"
-          >
-            <span class="border-b border-amber-400 px-1 pb-0.5 italic">C</span>
-            <span class="pt-0.5 text-xs">1000</span>
-          </span>
-          A·h =
-          <span class="font-black text-amber-400 ml-1.5 text-2xl">37.0 Wh</span>
+          <Latex tex="W = E \cdot \dfrac{C}{1000}\ \text{A}\cdot\text{h} = 37.0\ \text{Wh}" />
         </div>
       </div>
 
-      <!-- 民航限额判定胶囊徽标 -->
-      <div class="pb-verdict pb-ok">
+      <!-- 民航限额判定胶囊徽标（对/错语义色走共享 .ok） -->
+      <div class="pb-verdict ok">
         <svg
           class="pb-v-svg"
           viewBox="0 0 24 24"
@@ -311,36 +287,37 @@
 <style scoped>
 .pb-wrap {
   display: flex;
-  gap: 1.6rem;
+  gap: 1.2rem;
   align-items: center;
   width: 100%;
 }
 
+/* 左侧：充电宝 / 手机示意（占 44%，把宽度让给公式面板） */
 .pb-fig {
   display: flex;
-  flex: 1 1 0%;
+  flex: 0 0 44%;
   align-items: center;
   justify-content: center;
 
   min-width: 0;
-  padding: 0.6rem;
-  border: 1px solid rgb(100 116 139 / 25%);
-  border-radius: 1.1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 23 42 / 55%);
+  background: var(--c-surface);
 }
 
 .pb-svg {
   width: 100%;
   height: auto;
-  max-height: 250px;
+  max-height: 210px;
 }
 
 .pb-panel {
   display: flex;
-  flex: 1 1 0%;
+  flex: 1 1 auto;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.4rem;
   justify-content: center;
 
   min-width: 0;
@@ -349,51 +326,42 @@
 .pb-reads {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.25rem;
 
-  padding: 1.1rem 1.4rem;
-  border: 1px solid rgb(100 116 139 / 22%);
-  border-radius: 1.1rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 23 42 / 65%);
+  background: var(--c-surface);
 }
 
 .pb-line {
-  color: #cbd5e1;
-  font-size: 1.25rem;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
+/* 第三行是本页落点（37.0 Wh）：金色、与上面两行分一条线 */
 .pb-line-wh {
-  padding-top: 0.65rem;
-  border-top: 1px solid rgb(100 116 139 / 20%);
-  color: #e2a846;
-  font-weight: 700;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--c-border);
+  color: var(--c-accent);
 }
 
 .pb-verdict {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
   align-items: center;
 
-  padding: 0.75rem 1.1rem;
-  border-radius: 0.95rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--c-ok-soft);
+  border-radius: var(--radius-md);
 
   font-weight: 700;
-  font-size: 1.18rem;
-}
-
-.pb-ok {
-  border: 1px solid rgb(74 222 128 / 35%);
-  background: rgb(74 222 128 / 10%);
-  color: #86efac;
 }
 
 .pb-v-svg {
   flex-shrink: 0;
-  width: 1.6rem;
-  height: 1.6rem;
-  color: #4ade80;
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 @keyframes dash {

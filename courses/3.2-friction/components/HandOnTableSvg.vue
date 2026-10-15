@@ -5,9 +5,9 @@
     <g id="desk-structure">
       <path d="M 32 141 L 308 141 L 322 150 L 18 150 Z" fill="#263346" stroke="var(--c-border)" stroke-width="1.2" />
       <rect x="18" y="150" width="304" height="14" rx="3" fill="#3B495E" stroke="var(--c-border)" stroke-width="1.5" />
-      <rect x="38" y="164" width="264" height="5" fill="#0F172A" />
-      <path d="M 48 164 L 64 164 L 60 214 L 45 214 Z" fill="#1E293B" stroke="var(--c-border)" stroke-width="1.2" />
-      <path d="M 276 164 L 292 164 L 295 214 L 280 214 Z" fill="#1E293B" stroke="var(--c-border)" stroke-width="1.2" />
+      <rect x="38" y="164" width="264" height="5" fill="var(--c-neutral-900)" />
+      <path d="M 48 164 L 64 164 L 60 214 L 45 214 Z" fill="var(--c-surface-solid)" stroke="var(--c-border)" stroke-width="1.2" />
+      <path d="M 276 164 L 292 164 L 295 214 L 280 214 Z" fill="var(--c-surface-solid)" stroke="var(--c-border)" stroke-width="1.2" />
       <line x1="42" y1="157" x2="118" y2="157" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-linecap="round" />
       <line x1="185" y1="157" x2="295" y2="157" stroke="rgba(255,255,255,0.14)" stroke-width="1" stroke-linecap="round" />
       <path

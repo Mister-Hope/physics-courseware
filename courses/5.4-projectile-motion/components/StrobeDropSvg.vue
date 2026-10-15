@@ -14,18 +14,18 @@ const dots = Array.from({ length: COUNT }, (_, index) => ({
 <template>
   <div class="strobe-drop">
     <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平抛运动的频闪照片：等时间间隔的闪光点">
-      <line :x1="dots[0].x" :y1="dots[0].y" :x2="dots[COUNT - 1].x" :y2="dots[0].y" stroke="rgba(148,163,184,0.45)" stroke-width="1.6" stroke-dasharray="7 5" />
+      <line :x1="dots[0].x" :y1="dots[0].y" :x2="dots[COUNT - 1].x" :y2="dots[0].y" stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)" stroke-width="1.6" stroke-dasharray="7 5" />
       <line
         :x1="dots[1].x"
         :y1="dots[1].y"
         :x2="dots[1].x"
         :y2="dots[COUNT - 1].y + 14"
-        stroke="rgba(148,163,184,0.45)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="7 5"
       />
-      <circle v-for="dot in dots" :key="dot.index" :cx="dot.x" :cy="dot.y" r="6" fill="#e2a846" />
-      <text x="64" y="82" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">O</text>
+      <circle v-for="dot in dots" :key="dot.index" :cx="dot.x" :cy="dot.y" r="6" fill="var(--c-accent)" />
+      <text x="64" y="82" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
     </svg>
   </div>
 </template>

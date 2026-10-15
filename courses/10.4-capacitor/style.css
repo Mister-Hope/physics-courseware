@@ -3,3 +3,17 @@
    通用设计系统在 workspace/shared/styles/（common.css + layout.css）
    页面外壳用共享 layout: base-flex；此处只放本课特有的样式
    ═══════════════════════════════════════════════ */
+
+/* ── 原 UnoCSS 调色板类的 token 版 ──
+   原来写 `border-slate-700/50`、`bg-slate-900/30`：取值恰好是共享 token，等于绕过 token 写死颜色。
+   `--c-neutral-700` / `--c-neutral-900` 没有现成的工具类，这两档又带透明度，故提升为本课语义类。 */
+.cap-hairline {
+  /* = border-slate-700/50 */
+  border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent);
+}
+
+.cap-tile {
+  /* = border-slate-700/50 + bg-slate-900/30 */
+  border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent);
+  background: color-mix(in srgb, var(--c-neutral-900) 30%, transparent);
+}

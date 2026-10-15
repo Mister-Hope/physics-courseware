@@ -150,19 +150,19 @@ const conclusion = computed(() => {
 });
 
 const tagClass = computed(() => {
-  if (collinear.value || alpha.value === 90) return "fad-tag fad-tag-flat";
-  return alpha.value < 90 ? "fad-tag fad-tag-up" : "fad-tag fad-tag-down";
+  if (collinear.value || alpha.value === 90) return "sim-tag sim-tag-flat";
+  return alpha.value < 90 ? "sim-tag sim-tag-up" : "sim-tag sim-tag-down";
 });
 </script>
 
 <template>
-  <div class="fad">
+  <div class="sim">
     <svg
       ref="svgRef"
       viewBox="0 0 880 250"
       width="100%"
       xmlns="http://www.w3.org/2000/svg"
-      :class="{ 'fad-grabbing': dragging }"
+      :class="{ 'sim-grabbing': dragging }"
       @pointerdown="onDown"
       @pointermove="onMove"
       @pointerup="onUp"
@@ -174,7 +174,7 @@ const tagClass = computed(() => {
         :y1="pointP.y"
         :x2="vTip.x + 12"
         :y2="pointP.y"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.4"
         stroke-dasharray="5 5"
         opacity="0.35"
@@ -185,7 +185,7 @@ const tagClass = computed(() => {
         v-if="bend"
         :d="bend.d"
         fill="none"
-        stroke="#2dd4bf"
+        stroke="var(--c-physics)"
         stroke-width="3.2"
         stroke-dasharray="10 7"
         stroke-linecap="round"
@@ -198,8 +198,8 @@ const tagClass = computed(() => {
         font-family="KaTeX_Main, sans-serif"
         font-size="19"
         font-weight="600"
-        fill="#2dd4bf"
-        stroke="#0f1425"
+        fill="var(--c-physics)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -213,7 +213,7 @@ const tagClass = computed(() => {
           :y1="perpTip.y"
           :x2="fTip.x"
           :y2="fTip.y"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.8"
           stroke-dasharray="6 5"
           opacity="0.58"
@@ -223,7 +223,7 @@ const tagClass = computed(() => {
           :y1="parTip.y"
           :x2="fTip.x"
           :y2="fTip.y"
-          stroke="#94a3b8"
+          stroke="var(--c-text-dim)"
           stroke-width="1.8"
           stroke-dasharray="6 5"
           opacity="0.58"
@@ -232,8 +232,8 @@ const tagClass = computed(() => {
 
       <!-- 紧贴交点 P 的 α 角扇形与弧线（r = 34） -->
       <template v-if="alpha > 2">
-        <path :d="arc.sector" fill="rgba(241, 245, 249, 0.08)" />
-        <path :d="arc.d" fill="none" stroke="#f1f5f9" stroke-width="2.2" opacity="0.88" />
+        <path :d="arc.sector" fill="color-mix(in srgb, var(--c-text) 8%, transparent)" />
+        <path :d="arc.d" fill="none" stroke="var(--c-text)" stroke-width="2.2" opacity="0.88" />
       </template>
       <text
         v-if="alpha > 0"
@@ -242,10 +242,10 @@ const tagClass = computed(() => {
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="22"
-        fill="#f1f5f9"
+        fill="var(--c-text)"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -253,15 +253,15 @@ const tagClass = computed(() => {
       </text>
 
       <!-- 速度矢量 v（标签置于箭头尖端右侧，彻底避开下方水平分力文字） -->
-      <CourseArrow :from="pointP" :to="vTip" stroke="#60a5fa" stroke-width="3.6" />
+      <CourseArrow :from="pointP" :to="vTip" stroke="var(--c-velocity)" stroke-width="3.6" />
       <text
         :x="vTip.x + 14"
         :y="pointP.y + 6"
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="22"
-        fill="#60a5fa"
-        stroke="#0f1425"
+        fill="var(--c-velocity)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -273,7 +273,7 @@ const tagClass = computed(() => {
         v-if="hasPerp"
         :from="pointP"
         :to="perpTip"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
         stroke-dasharray="8 5"
       />
@@ -285,8 +285,8 @@ const tagClass = computed(() => {
         font-family="KaTeX_Main, sans-serif"
         font-size="18"
         font-weight="600"
-        fill="#e2a846"
-        stroke="#0f1425"
+        fill="var(--c-accent)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -298,7 +298,7 @@ const tagClass = computed(() => {
         v-if="hasPar"
         :from="pointP"
         :to="parTip"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
         stroke-dasharray="8 5"
       />
@@ -310,8 +310,8 @@ const tagClass = computed(() => {
         font-family="KaTeX_Main, sans-serif"
         font-size="18"
         font-weight="600"
-        fill="#e2a846"
-        stroke="#0f1425"
+        fill="var(--c-accent)"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -319,17 +319,17 @@ const tagClass = computed(() => {
       </text>
 
       <!-- 合力矢量 F（标签置于箭头尖端外侧，与内侧 α 互不干扰） -->
-      <CourseArrow :from="pointP" :to="fTip" stroke="#e2a846" stroke-width="4" />
+      <CourseArrow :from="pointP" :to="fTip" stroke="var(--c-accent)" stroke-width="4" />
       <text
         :x="fLabelPos.x"
         :y="fLabelPos.y"
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         font-size="22"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="middle"
         dominant-baseline="central"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
@@ -341,28 +341,28 @@ const tagClass = computed(() => {
         :cx="pointP.x"
         :cy="pointP.y"
         r="8.5"
-        fill="#f1f5f9"
-        stroke="#0f1425"
+        fill="var(--c-text)"
+        stroke="var(--c-bg-soft)"
         stroke-width="2"
       />
       <circle
         :cx="fTip.x"
         :cy="fTip.y"
         r="11"
-        fill="rgba(226,168,70,0.20)"
-        stroke="#e2a846"
+        fill="color-mix(in srgb, var(--c-accent) 20%, transparent)"
+        stroke="var(--c-accent)"
         stroke-width="2"
       />
     </svg>
-    <div class="fad-bar">
-      <span class="fad-value">α = {{ alpha }}°</span>
+    <div class="sim-bar">
+      <span class="sim-val">α = {{ alpha }}°</span>
       <span :class="tagClass">{{ conclusion }}</span>
     </div>
   </div>
 </template>
 
 <style scoped>
-.fad {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -371,50 +371,44 @@ const tagClass = computed(() => {
   min-width: 0;
 }
 
-.fad svg {
+.sim svg {
   cursor: grab;
   touch-action: none;
 }
 
-.fad-grabbing {
+.sim-grabbing {
   cursor: grabbing;
 }
 
-.fad-bar {
+.sim-bar {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.1rem;
   align-items: center;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-size: 0.9rem;
 }
 
-.fad-hint {
-  display: inline-flex;
-  gap: 0.35rem;
-  align-items: center;
-}
-
-.fad-value {
-  color: #f1f5f9;
+.sim-val {
+  color: var(--c-text);
   font-variant-numeric: tabular-nums;
 }
 
-.fad-tag {
+.sim-tag {
   font-weight: 700;
 }
 
-.fad-tag-up {
-  color: #2dd4bf;
+.sim-tag-up {
+  color: var(--c-physics);
 }
 
-.fad-tag-flat {
-  color: #60a5fa;
+.sim-tag-flat {
+  color: var(--c-velocity);
 }
 
-.fad-tag-down {
-  color: #f87171;
+.sim-tag-down {
+  color: var(--c-danger);
 }
 </style>

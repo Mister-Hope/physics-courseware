@@ -35,11 +35,11 @@ const [first] = states;
     <circle :cx="O.x" :cy="O.y" r="3.5" fill="currentColor" opacity="0.8" />
     <g v-if="showVelocity">
       <template v-for="s in states" :key="s.deg">
-        <circle :cx="s.p.x" :cy="s.p.y" r="5" fill="#e2a846" />
-        <CourseArrow :from="s.from" :to="s.tip" stroke="#e2a846" :stroke-width="2.8" />
+        <circle :cx="s.p.x" :cy="s.p.y" r="5" fill="var(--c-accent)" />
+        <CourseArrow :from="s.from" :to="s.tip" stroke="var(--c-accent)" :stroke-width="2.8" />
       </template>
     </g>
-    <circle v-else :cx="first.p.x" :cy="first.p.y" r="5" fill="#e2a846" />
+    <circle v-else :cx="first.p.x" :cy="first.p.y" r="5" fill="var(--c-accent)" />
     <text :x="O.x - 6" :y="O.y + 19" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">O</text>
   </svg>
 </template>

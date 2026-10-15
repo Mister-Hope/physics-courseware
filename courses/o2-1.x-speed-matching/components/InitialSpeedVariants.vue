@@ -156,12 +156,12 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 </script>
 
 <template>
-  <div class="isv">
+  <div class="fig-variants">
     <!-- 主画布展台 -->
-    <div class="isv-stage">
+    <div class="ui-stage">
       <svg
         :viewBox="`0 0 ${W} ${H}`"
-        class="isv-svg select-none overflow-visible"
+        class="fig-svg select-none overflow-visible"
         role="img"
         aria-label="任意初速度下的带电小球在复合场中的运动轨迹"
       >
@@ -195,7 +195,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :y1="py(0)"
           :x2="W - 12"
           :y2="py(0)"
-          stroke="var(--c-text-dim, #94a3b8)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
           stroke-dasharray="8 6"
           opacity="0.45"
@@ -208,7 +208,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :y1="driftYScreen"
           :x2="W - 12"
           :y2="driftYScreen"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           stroke-width="1.4"
           stroke-dasharray="4 5"
           opacity="0.45"
@@ -218,7 +218,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         <path
           :d="pathD"
           fill="none"
-          stroke="#0f172a"
+          stroke="var(--c-neutral-900)"
           stroke-width="6"
           stroke-linecap="round"
           opacity="0.8"
@@ -226,7 +226,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         <path
           :d="pathD"
           fill="none"
-          stroke="var(--c-accent, #e2a846)"
+          stroke="var(--c-accent)"
           stroke-width="3.4"
           stroke-linecap="round"
           filter="url(#isv-glow)"
@@ -239,7 +239,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :cy="activeCenterScreen.y"
             :r="R * K"
             fill="none"
-            stroke="var(--c-velocity, #60a5fa)"
+            stroke="var(--c-velocity)"
             stroke-width="1.4"
             stroke-dasharray="4 4"
             opacity="0.4"
@@ -248,14 +248,14 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :cx="activeCenterScreen.x"
             :cy="activeCenterScreen.y"
             r="3"
-            fill="var(--c-velocity, #60a5fa)"
+            fill="var(--c-velocity)"
           />
           <line
             :x1="activeCenterScreen.x"
             :y1="activeCenterScreen.y"
             :x2="ball.x"
             :y2="ball.y"
-            stroke="var(--c-velocity, #60a5fa)"
+            stroke="var(--c-velocity)"
             stroke-width="1.6"
             opacity="0.7"
           />
@@ -267,7 +267,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :cy="START.y"
           r="4.5"
           fill="none"
-          stroke="var(--c-text-dim, #94a3b8)"
+          stroke="var(--c-text-dim)"
           stroke-width="2"
         />
 
@@ -276,7 +276,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           <CourseArrow
             :from="START"
             :to="vFlatTip"
-            stroke="var(--c-velocity, #60a5fa)"
+            stroke="var(--c-velocity)"
             :stroke-width="2.8"
             :head-size="12"
           />
@@ -285,7 +285,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             :y1="vFlatTip.y"
             :x2="vInitTip.x"
             :y2="vInitTip.y"
-            stroke="#f59e0b"
+            stroke="var(--c-accent-glow)"
             stroke-width="1.8"
             stroke-dasharray="3 3"
             stroke-linecap="round"
@@ -297,7 +297,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           <CourseArrow
             :from="START"
             :to="vInitTip"
-            stroke="var(--c-velocity, #60a5fa)"
+            stroke="var(--c-velocity)"
             :stroke-width="4.2"
             :head-size="15"
           />
@@ -307,7 +307,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
             font-size="18"
             :text-anchor="vInitTip.x >= START.x ? 'start' : 'end'"
             dominant-baseline="central"
-            fill="var(--c-velocity, #60a5fa)"
+            fill="var(--c-velocity)"
             :font-family="MATH"
             font-style="italic"
             :style="HALO"
@@ -322,8 +322,8 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :cx="ball.x"
           :cy="ball.y"
           r="9"
-          fill="var(--c-force, #f87171)"
-          stroke="#0f172a"
+          fill="var(--c-force)"
+          stroke="var(--c-neutral-900)"
           stroke-width="2"
         />
         <line
@@ -348,63 +348,71 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
     </div>
 
     <!-- 交互调控面板：保持原有控件布局，按教学需求做大做清晰，去掉多余说明词 -->
-    <div class="isv-bar">
+    <div class="ui-bar">
       <!-- 水平分量滑块 -->
-      <label class="isv-row">
-        <span class="isv-name">
+      <label class="ui-row">
+        <span class="ui-name text-lg">
           向右分量
-          <span class="isv-sym"
+          <span class="ui-sym text-xl"
             ><i>v</i><sub><i>x</i></sub></span
           >
         </span>
         <input
           v-model.number="kx"
-          class="isv-slider"
+          class="ui-slider"
           type="range"
           min="-1.5"
           max="2.5"
           step="0.05"
         />
-        <span class="isv-val">{{ (kx >= 0 ? "+" : "") + kx.toFixed(2) }}</span>
+        <span class="ui-val text-xl">{{ (kx >= 0 ? "+" : "") + kx.toFixed(2) }}</span>
       </label>
 
       <!-- 竖直分量滑块 -->
-      <label class="isv-row">
-        <span class="isv-name">
+      <label class="ui-row">
+        <span class="ui-name text-lg">
           向上分量
-          <span class="isv-sym"
+          <span class="ui-sym text-xl"
             ><i>v</i><sub><i>y</i></sub></span
           >
         </span>
         <input
           v-model.number="ky"
-          class="isv-slider"
+          class="ui-slider"
           type="range"
           min="-1.5"
           max="1.5"
           step="0.05"
         />
-        <span class="isv-val">{{ (ky >= 0 ? "+" : "") + ky.toFixed(2) }}</span>
+        <span class="ui-val text-xl">{{ (ky >= 0 ? "+" : "") + ky.toFixed(2) }}</span>
       </label>
 
       <!-- 物理读数与形态标签 -->
-      <div class="isv-read">
-        <span class="isv-item">
+      <div class="ui-read text-lg">
+        <span class="ui-item">
           <Latex tex="|v_{\text{圆0}}| / v_{\text{平}} = " />
-          <strong>{{ R.toFixed(2) }}</strong>
+          <strong class="text-xl">{{ R.toFixed(2) }}</strong>
         </span>
-        <span class="isv-tag">{{ regime.name }}</span>
+        <span class="ui-tag text-lg">{{ regime.name }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.isv {
+/* ── 图与控件两层：fig-variants 只管图的宽度上限（svg 挂共享的 .fig-svg），ui-* 是滑块控件 ── */
+.fig-variants {
   width: 100%;
+
+  --fig-max: 1000px;
 }
 
-.isv-stage {
+/* 画布展台：把 svg 撑满可用高度 */
+.fig-variants .fig-svg {
+  height: 100%;
+}
+
+.ui-stage {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -413,33 +421,27 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
   min-height: min(320px, 36vh);
 }
 
-.isv-svg {
-  display: block;
-  width: 100%;
-  max-width: 1000px;
-  height: 100%;
-}
-
 /* ═══════════ 原有控件风格的大号教学优化版 ═══════════ */
-.isv-bar {
+.ui-bar {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.6rem;
 
   width: 100%;
   max-width: 920px;
-  margin: 0.85rem auto 0;
+  margin: 0.5rem auto 0;
   padding: 0.25rem 0.5rem;
 }
 
-.isv-row {
+.ui-row {
   display: flex;
   gap: 1.25rem;
   align-items: center;
   user-select: none;
 }
 
-.isv-name {
+/* 字号一律走共享阶梯（.text-lg / .text-xl，写在模板上），这里只管版式 */
+.ui-name {
   display: flex;
   flex: 0 0 auto;
   gap: 0.4rem;
@@ -447,40 +449,37 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 
   width: 8.8rem;
 
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
 
   font-weight: 500;
-  font-size: 1.15rem;
 }
 
-.isv-sym {
-  color: var(--c-velocity, #60a5fa);
+.ui-sym {
+  color: var(--c-velocity);
   font-style: italic;
-  font-size: 1.25rem;
   font-family: "KaTeX_Math", "Times New Roman", serif;
 }
 
-.isv-sym sub {
+.ui-sym sub {
   font-style: normal;
   font-size: 0.85rem;
   font-family: "KaTeX_Main", "Times New Roman", serif;
 }
 
-.isv-val {
+.ui-val {
   flex: 0 0 auto;
 
   width: 5rem;
 
-  color: var(--c-text, #f8fafc);
+  color: var(--c-text);
 
   font-weight: 600;
-  font-size: 1.25rem;
   font-family: "JetBrains Mono", monospace;
   text-align: right;
 }
 
 /* 大号拖拽滑块，专为电子白板与教师演示优化 */
-.isv-slider {
+.ui-slider {
   flex: 1 1 auto;
 
   min-width: 0;
@@ -490,24 +489,24 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
 
   cursor: pointer;
 
-  accent-color: var(--c-accent, #e2a846);
+  accent-color: var(--c-accent);
 }
 
-.isv-slider::-webkit-slider-runnable-track {
+.ui-slider::-webkit-slider-runnable-track {
   height: 10px;
   border-radius: 999px;
-  background: #334155;
+  background: var(--c-neutral-700);
 }
 
-.isv-slider::-webkit-slider-thumb {
+.ui-slider::-webkit-slider-thumb {
   width: 24px;
   height: 24px;
   margin-top: -7px;
-  border: 2px solid #0f172a;
+  border: 2px solid var(--c-neutral-900);
   border-radius: 50%;
 
-  background: var(--c-accent, #e2a846);
-  box-shadow: 0 0 8px rgb(226 168 70 / 40%);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 40%, transparent);
 
   cursor: grab;
 
@@ -516,58 +515,54 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
   transition: transform 0.12s ease;
 }
 
-.isv-slider::-webkit-slider-thumb:hover,
-.isv-slider::-webkit-slider-thumb:active {
+.ui-slider::-webkit-slider-thumb:hover,
+.ui-slider::-webkit-slider-thumb:active {
   cursor: grabbing;
   transform: scale(1.15);
 }
 
-.isv-slider::-moz-range-track {
+.ui-slider::-moz-range-track {
   height: 10px;
   border-radius: 999px;
-  background: #334155;
+  background: var(--c-neutral-700);
 }
 
-.isv-slider::-moz-range-thumb {
+.ui-slider::-moz-range-thumb {
   width: 24px;
   height: 24px;
-  border: 2px solid #0f172a;
+  border: 2px solid var(--c-neutral-900);
   border-radius: 50%;
 
-  background: var(--c-accent, #e2a846);
-  box-shadow: 0 0 8px rgb(226 168 70 / 40%);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--c-accent) 40%, transparent);
 
   cursor: grab;
 }
 
-.isv-read {
+.ui-read {
   display: flex;
   gap: 1.5rem;
   align-items: center;
 
   padding-top: 0.2rem;
 
-  color: var(--c-text-dim, #94a3b8);
-
-  font-size: 1.15rem;
+  color: var(--c-text-dim);
 }
 
-.isv-item strong {
-  color: var(--c-accent, #e2a846);
-  font-size: 1.25rem;
+.ui-item strong {
+  color: var(--c-accent);
   font-family: "JetBrains Mono", monospace;
 }
 
-.isv-tag {
+.ui-tag {
   margin-left: auto;
   padding: 0.2rem 1rem;
-  border: 1.5px solid var(--c-accent, #e2a846);
+  border: 1.5px solid var(--c-accent);
   border-radius: 999px;
 
-  background: rgb(226 168 70 / 12%);
-  color: var(--c-accent, #e2a846);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
 
   font-weight: 600;
-  font-size: 1.1rem;
 }
 </style>

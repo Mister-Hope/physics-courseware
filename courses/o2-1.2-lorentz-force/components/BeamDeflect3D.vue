@@ -1322,11 +1322,15 @@ onBeforeUnmount(() => {
 <template>
   <div class="flex flex-col w-full h-full min-h-[400px]">
     <!-- 纯粹控件栏（不铺深色底板，只留一条极淡的分隔线） -->
-    <div class="flex items-center justify-between gap-3 pb-2 border-b border-slate-500/20">
+    <div
+      class="flex items-center justify-between gap-3 pb-2 border-b"
+      style="border-color: color-mix(in srgb, var(--c-neutral-500) 20%, transparent)"
+    >
       <div class="flex items-center gap-2">
-        <span class="text-xs font-semibold text-slate-200">阴极射线管模型</span>
+        <span class="text-xs font-semibold text-tone-200">阴极射线管模型</span>
       </div>
 
+      <!-- 三个状态按钮的选中色按 token 表达（不再用调色板工具类） -->
       <div class="flex items-center gap-2">
         <button
           type="button"
@@ -1334,9 +1338,17 @@ onBeforeUnmount(() => {
           :class="[
             'px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border',
             state === 'none'
-              ? 'bg-white/10 text-amber-400 border-amber-400/70 shadow-sm'
-              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white',
+              ? 'bg-white/10 shadow-sm'
+              : 'bg-white/5 text-tone-200 border-white/10 hover:bg-white/10 hover:text-white',
           ]"
+          :style="
+            state === 'none'
+              ? {
+                  color: 'var(--c-accent-light)',
+                  borderColor: 'color-mix(in srgb, var(--c-accent-light) 70%, transparent)',
+                }
+              : undefined
+          "
         >
           无磁场
         </button>
@@ -1346,9 +1358,17 @@ onBeforeUnmount(() => {
           :class="[
             'px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border',
             state === 'out'
-              ? 'bg-amber-400/15 text-amber-300 border-amber-400 shadow-sm'
-              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white',
+              ? 'text-amber-300 shadow-sm'
+              : 'bg-white/5 text-tone-200 border-white/10 hover:bg-white/10 hover:text-white',
           ]"
+          :style="
+            state === 'out'
+              ? {
+                  backgroundColor: 'color-mix(in srgb, var(--c-accent-light) 15%, transparent)',
+                  borderColor: 'var(--c-accent-light)',
+                }
+              : undefined
+          "
         >
           B ⊙ 向外
         </button>
@@ -1358,16 +1378,24 @@ onBeforeUnmount(() => {
           :class="[
             'px-3 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer border',
             state === 'in'
-              ? 'bg-sky-400/15 text-sky-300 border-sky-400 shadow-sm'
-              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10 hover:text-white',
+              ? 'text-sky-300 shadow-sm'
+              : 'bg-white/5 text-tone-200 border-white/10 hover:bg-white/10 hover:text-white',
           ]"
+          :style="
+            state === 'in'
+              ? {
+                  backgroundColor: 'color-mix(in srgb, var(--c-physics-light) 15%, transparent)',
+                  borderColor: 'var(--c-physics-light)',
+                }
+              : undefined
+          "
         >
           B ⊗ 向里
         </button>
         <button
           type="button"
           title="放大"
-          class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:text-white cursor-pointer"
+          class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white/5 border border-white/10 text-tone-200 hover:bg-white/10 hover:text-white cursor-pointer"
           @click="zoomIn"
         >
           ＋
@@ -1375,7 +1403,7 @@ onBeforeUnmount(() => {
         <button
           type="button"
           title="缩小"
-          class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:text-white cursor-pointer"
+          class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-white/5 border border-white/10 text-tone-200 hover:bg-white/10 hover:text-white cursor-pointer"
           @click="zoomOut"
         >
           －
@@ -1384,7 +1412,7 @@ onBeforeUnmount(() => {
           type="button"
           @click="resetView"
           title="复位视角"
-          class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-200 hover:bg-white/10 hover:text-white cursor-pointer"
+          class="px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-tone-200 hover:bg-white/10 hover:text-white cursor-pointer"
         >
           复位视角
         </button>

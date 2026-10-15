@@ -228,18 +228,18 @@ onUnmounted(() => {
 <template>
   <div class="flex flex-col w-full gap-2.5">
     <!-- 电路 SVG：占满全宽 -->
-    <div class="circuit-svg-wrap">
+    <div class="circ-svg-wrap">
       <svg viewBox="0 0 580 220" class="block w-full h-auto">
         <!-- 地线 -->
-        <line x1="60" y1="180" x2="500" y2="180" stroke="#475569" stroke-width="2.5" />
+        <line x1="60" y1="180" x2="500" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
 
         <!-- 电池 E -->
-        <line x1="60" y1="40" x2="60" y2="98" stroke="#475569" stroke-width="2.5" />
-        <line x1="60" y1="122" x2="60" y2="180" stroke="#475569" stroke-width="2.5" />
+        <line x1="60" y1="40" x2="60" y2="98" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+        <line x1="60" y1="122" x2="60" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
         <line x1="44" y1="98" x2="76" y2="98" stroke="#ef4444" stroke-width="3" />
-        <line x1="52" y1="106" x2="68" y2="106" stroke="#475569" stroke-width="5" />
+        <line x1="52" y1="106" x2="68" y2="106" stroke="var(--c-neutral-600)" stroke-width="5" />
         <line x1="44" y1="114" x2="76" y2="114" stroke="#ef4444" stroke-width="3" />
-        <line x1="52" y1="122" x2="68" y2="122" stroke="#475569" stroke-width="5" />
+        <line x1="52" y1="122" x2="68" y2="122" stroke="var(--c-neutral-600)" stroke-width="5" />
         <text
           x="24"
           y="22"
@@ -254,17 +254,17 @@ onUnmounted(() => {
         </text>
 
         <!-- 上部导线 -->
-        <line x1="60" y1="40" x2="240" y2="40" stroke="#475569" stroke-width="2.5" />
+        <line x1="60" y1="40" x2="240" y2="40" stroke="var(--c-neutral-600)" stroke-width="2.5" />
 
         <!-- C₂ 上极板连线 -->
-        <line x1="150" y1="110" x2="150" y2="99" stroke="#475569" stroke-width="2.5" />
-        <line x1="150" y1="99" x2="240" y2="99" stroke="#475569" stroke-width="2.5" />
+        <line x1="150" y1="110" x2="150" y2="99" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+        <line x1="150" y1="99" x2="240" y2="99" stroke="var(--c-neutral-600)" stroke-width="2.5" />
 
         <!-- S1 导轨弧线 -->
         <path
           d="M 240 41 A 85 85 0 0 0 240 99"
           fill="none"
-          stroke="#334155"
+          stroke="var(--c-neutral-700)"
           stroke-dasharray="3,3"
           stroke-width="2"
         />
@@ -276,7 +276,7 @@ onUnmounted(() => {
             cx="240"
             cy="41"
             r="11"
-            fill="#1e293b"
+            fill="var(--c-surface-solid)"
             :stroke="s1Pos === '1' ? '#ef4444' : '#475569'"
             stroke-width="2.5"
           />
@@ -292,11 +292,11 @@ onUnmounted(() => {
             cx="235"
             cy="70"
             r="11"
-            fill="#1e293b"
+            fill="var(--c-surface-solid)"
             :stroke="s1Pos === 'open' ? '#94a3b8' : '#475569'"
             stroke-width="2.5"
           />
-          <text x="235" y="76" font-size="15" font-weight="950" fill="#94a3b8" text-anchor="middle">
+          <text x="235" y="76" font-size="15" font-weight="950" fill="var(--c-text-dim)" text-anchor="middle">
             0
           </text>
         </g>
@@ -308,7 +308,7 @@ onUnmounted(() => {
             cx="240"
             cy="99"
             r="11"
-            fill="#1e293b"
+            fill="var(--c-surface-solid)"
             :stroke="s1Pos === '2' ? '#a78bfa' : '#475569'"
             stroke-width="2.5"
           />
@@ -325,8 +325,8 @@ onUnmounted(() => {
         </g>
 
         <!-- S1 枢轴 -->
-        <circle cx="320" cy="70" r="8" fill="#e2a846" stroke="#101827" stroke-width="2" />
-        <text x="320" y="47" font-size="14" font-weight="950" fill="#e2a846" text-anchor="middle">
+        <circle cx="320" cy="70" r="8" fill="var(--c-accent)" stroke="#101827" stroke-width="2" />
+        <text x="320" y="47" font-size="14" font-weight="950" fill="var(--c-accent)" text-anchor="middle">
           S₁
         </text>
 
@@ -336,7 +336,7 @@ onUnmounted(() => {
           y1="70"
           :x2="s1Target.x"
           :y2="s1Target.y"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="5"
           stroke-linecap="round"
           class="transition-all duration-300 ease-in-out cursor-pointer"
@@ -350,7 +350,7 @@ onUnmounted(() => {
             cx="242"
             cy="169"
             r="11"
-            fill="#1e293b"
+            fill="var(--c-surface-solid)"
             :stroke="!s2Closed ? '#94a3b8' : '#475569'"
             stroke-width="2.5"
           />
@@ -359,7 +359,7 @@ onUnmounted(() => {
             y="175"
             font-size="15"
             font-weight="950"
-            fill="#94a3b8"
+            fill="var(--c-text-dim)"
             text-anchor="middle"
           >
             3
@@ -373,7 +373,7 @@ onUnmounted(() => {
             cx="205"
             cy="178"
             r="11"
-            fill="#1e293b"
+            fill="var(--c-surface-solid)"
             :stroke="s2Closed ? '#34d399' : '#475569'"
             stroke-width="2.5"
           />
@@ -382,7 +382,7 @@ onUnmounted(() => {
             y="184"
             font-size="15"
             font-weight="950"
-            fill="#34d399"
+            fill="var(--c-ok)"
             text-anchor="middle"
           >
             4
@@ -394,29 +394,29 @@ onUnmounted(() => {
           <path
             d="M 242 169 A 79 79 0 0 1 205 178"
             fill="none"
-            stroke="#334155"
+            stroke="var(--c-neutral-700)"
             stroke-dasharray="2,2"
             stroke-width="1.5"
           />
-          <circle cx="205" cy="99" r="6" fill="#e2a846" stroke="#101827" stroke-width="1.5" />
+          <circle cx="205" cy="99" r="6" fill="var(--c-accent)" stroke="#101827" stroke-width="1.5" />
           <line
             x1="205"
             y1="99"
             :x2="s2Target.x"
             :y2="s2Target.y"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="4"
             stroke-linecap="round"
             class="transition-all duration-200 ease-out"
           />
-          <text x="193" y="92" font-size="14" font-weight="950" fill="#e2a846" text-anchor="start">
+          <text x="193" y="92" font-size="14" font-weight="950" fill="var(--c-accent)" text-anchor="start">
             S₂
           </text>
         </g>
 
         <!-- C₂ -->
         <g>
-          <line x1="150" y1="130" x2="150" y2="180" stroke="#475569" stroke-width="2.5" />
+          <line x1="150" y1="130" x2="150" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
           <line
             x1="120"
             y1="110"
@@ -442,7 +442,7 @@ onUnmounted(() => {
             y="155"
             font-size="13"
             font-weight="950"
-            fill="#60a5fa"
+            fill="var(--c-velocity)"
             text-anchor="middle"
           >
             C₂
@@ -454,7 +454,7 @@ onUnmounted(() => {
             y="115"
             style="font-size: 10px"
             font-weight="950"
-            fill="#f87171"
+            fill="var(--c-force)"
             text-anchor="middle"
             dominant-baseline="central"
           >
@@ -467,7 +467,7 @@ onUnmounted(() => {
             y="125"
             style="font-size: 10px"
             font-weight="950"
-            fill="#60a5fa"
+            fill="var(--c-velocity)"
             text-anchor="middle"
             dominant-baseline="central"
           >
@@ -476,12 +476,12 @@ onUnmounted(() => {
         </g>
 
         <!-- S1 → C₁ 导线 -->
-        <line x1="320" y1="70" x2="420" y2="70" stroke="#475569" stroke-width="2.5" />
-        <line x1="420" y1="70" x2="420" y2="110" stroke="#475569" stroke-width="2.5" />
+        <line x1="320" y1="70" x2="420" y2="70" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+        <line x1="420" y1="70" x2="420" y2="110" stroke="var(--c-neutral-600)" stroke-width="2.5" />
 
         <!-- C₁ -->
         <g>
-          <line x1="420" y1="130" x2="420" y2="180" stroke="#475569" stroke-width="2.5" />
+          <line x1="420" y1="130" x2="420" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
           <line
             x1="390"
             y1="110"
@@ -507,7 +507,7 @@ onUnmounted(() => {
             y="155"
             font-size="13"
             font-weight="950"
-            fill="#34d399"
+            fill="var(--c-ok)"
             text-anchor="middle"
           >
             C₁
@@ -519,7 +519,7 @@ onUnmounted(() => {
             y="115"
             style="font-size: 10px"
             font-weight="950"
-            fill="#f87171"
+            fill="var(--c-force)"
             text-anchor="middle"
             dominant-baseline="central"
           >
@@ -532,7 +532,7 @@ onUnmounted(() => {
             y="125"
             style="font-size: 10px"
             font-weight="950"
-            fill="#60a5fa"
+            fill="var(--c-velocity)"
             text-anchor="middle"
             dominant-baseline="central"
           >
@@ -541,11 +541,11 @@ onUnmounted(() => {
         </g>
 
         <!-- 电压表 V（与 C₁ 并联） -->
-        <line x1="420" y1="70" x2="500" y2="70" stroke="#475569" stroke-width="2.5" />
-        <line x1="500" y1="70" x2="500" y2="95" stroke="#475569" stroke-width="2.5" />
-        <line x1="500" y1="145" x2="500" y2="180" stroke="#475569" stroke-width="2.5" />
+        <line x1="420" y1="70" x2="500" y2="70" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+        <line x1="500" y1="70" x2="500" y2="95" stroke="var(--c-neutral-600)" stroke-width="2.5" />
+        <line x1="500" y1="145" x2="500" y2="180" stroke="var(--c-neutral-600)" stroke-width="2.5" />
         <g class="cursor-pointer" @click="performReset">
-          <circle cx="500" cy="120" r="20" fill="#1e293b" stroke="#34d399" stroke-width="2.5" />
+          <circle cx="500" cy="120" r="20" fill="var(--c-surface-solid)" stroke="var(--c-ok)" stroke-width="2.5" />
           <text
             x="500"
             y="128"
@@ -553,7 +553,7 @@ onUnmounted(() => {
             font-weight="950"
             font-family="Times New Roman, STIX Two Text, serif"
             font-style="italic"
-            fill="#34d399"
+            fill="var(--c-ok)"
             text-anchor="middle"
           >
             V
@@ -562,43 +562,47 @@ onUnmounted(() => {
       </svg>
 
       <!-- 电压表读数 -->
-      <div class="voltage-badge">
-        <span class="voltage-value">{{ qA.toFixed(2) }}</span>
-        <span class="voltage-unit">V</span>
+      <div class="circ-voltage-badge">
+        <span class="circ-voltage-value">{{ qA.toFixed(2) }}</span>
+        <span class="circ-voltage-unit">V</span>
       </div>
 
       <!-- 极性图例 -->
       <div class="flex items-center justify-center gap-3 mb-2">
         <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80"
-          ><span class="inline-block w-3.5 h-3.5 rounded-sm" style="background: #f87171"></span>
+          ><span
+            class="inline-block w-3.5 h-3.5 rounded-sm"
+            style="background: var(--c-danger)"
+          ></span>
           正电（红）</span
         >
         <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80"
-          ><span class="inline-block w-3.5 h-3.5 rounded-sm" style="background: #60a5fa"></span>
+          ><span
+            class="inline-block w-3.5 h-3.5 rounded-sm"
+            style="background: var(--c-velocity)"
+          ></span>
           负电（蓝）</span
         >
       </div>
     </div>
 
     <!-- 底部状态栏 -->
-    <div class="status-bar">
+    <div class="circ-status-bar">
       <div class="flex items-center gap-1.5">
-        <span class="status-key">S₁</span>
+        <span class="circ-status-key">S₁</span>
         <span
-          :class="
-            s1Pos === '1' ? 'text-rose-400' : s1Pos === '2' ? 'text-purple-400' : 'text-slate-400'
-          "
-          class="status-val"
+          :class="s1Pos === '1' ? 'text-rose-400' : s1Pos === '2' ? 'text-purple-400' : 'text-dim'"
+          class="circ-status-val"
           >{{ s1StatusText }}</span
         >
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="status-key">S₂</span>
-        <span :class="s2Closed ? 'text-emerald-400' : 'text-slate-500'" class="status-val">{{
+        <span class="circ-status-key">S₂</span>
+        <span :class="s2Closed ? 'text-ok' : 'text-faint'" class="circ-status-val">{{
           s2StatusText
         }}</span>
       </div>
-      <button @click="performReset" class="reset-btn">
+      <button @click="performReset" class="circ-reset-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -621,11 +625,11 @@ onUnmounted(() => {
 
 <style scoped>
 /* ── SVG 容器：电路占满空间 ── */
-.circuit-svg-wrap {
+.circ-svg-wrap {
   position: relative;
-  border: 1px solid rgb(51 65 85 / 30%);
+  border: 1px solid color-mix(in srgb, var(--c-neutral-700) 30%, transparent);
   border-radius: var(--radius-md);
-  background: rgb(15 23 42 / 50%);
+  background: color-mix(in srgb, var(--c-neutral-900) 50%, transparent);
 }
 
 svg text {
@@ -634,7 +638,7 @@ svg text {
 }
 
 /* ── 电压表读数覆盖层 ── */
-.voltage-badge {
+.circ-voltage-badge {
   position: absolute;
   top: 0.5rem;
   right: 0.75rem;
@@ -644,76 +648,76 @@ svg text {
   align-items: baseline;
 
   padding: 0.35rem 0.75rem;
-  border: 1px solid rgb(52 211 153 / 35%);
+  border: 1px solid color-mix(in srgb, var(--c-ok) 35%, transparent);
   border-radius: var(--radius-sm);
 
-  background: rgb(15 23 42 / 85%);
+  background: color-mix(in srgb, var(--c-neutral-900) 85%, transparent);
 
   backdrop-filter: blur(8px);
   pointer-events: none;
 }
 
-.voltage-label {
+.circ-voltage-label {
   color: var(--c-ok);
   font-weight: 950;
   font-size: 0.7rem;
   opacity: 0.7;
 }
 
-.voltage-value {
-  color: #6ee7b7;
+.circ-voltage-value {
+  color: var(--c-ok);
 
   font-weight: 900;
   font-size: 1.4rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   line-height: 1;
-  text-shadow: 0 0 14px rgb(16 185 129 / 40%);
+  text-shadow: 0 0 14px color-mix(in srgb, var(--c-ok) 40%, transparent);
 }
 
-.voltage-unit {
+.circ-voltage-unit {
   color: var(--c-ok);
   font-weight: 700;
   font-size: 0.8rem;
 }
 
 /* ── 底部状态栏 ── */
-.status-bar {
+.circ-status-bar {
   display: flex;
   gap: 1.25rem;
   align-items: center;
 
   padding: 0.5rem 1rem;
-  border: 1px solid rgb(51 65 85 / 30%);
+  border: 1px solid color-mix(in srgb, var(--c-neutral-700) 30%, transparent);
   border-radius: var(--radius-md);
 
-  background: rgb(15 23 42 / 70%);
+  background: color-mix(in srgb, var(--c-neutral-900) 70%, transparent);
 }
 
-.status-key {
+.circ-status-key {
   color: var(--c-accent);
   font-weight: 900;
   font-size: 0.65rem;
   text-transform: uppercase;
 }
 
-.status-val {
+.circ-status-val {
   font-weight: 800;
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
-.reset-btn {
+.circ-reset-btn {
   display: flex;
   gap: 0.35rem;
   align-items: center;
 
   margin-left: auto;
   padding: 0.35rem 0.85rem;
-  border: 1px solid rgb(239 68 68 / 30%);
+  border: 1px solid color-mix(in srgb, var(--c-danger) 30%, transparent);
   border-radius: var(--radius-sm);
 
-  background: rgb(185 28 28 / 25%);
+  background: color-mix(in srgb, var(--c-danger) 25%, transparent);
   color: var(--c-danger);
 
   font-weight: 700;
@@ -724,9 +728,8 @@ svg text {
   transition: all 0.2s;
 }
 
-.reset-btn:hover {
-  border-color: rgb(239 68 68 / 50%);
-  background: rgb(185 28 28 / 45%);
-  color: #fca5a5;
+.circ-reset-btn:hover {
+  border-color: color-mix(in srgb, var(--c-danger) 50%, transparent);
+  background: color-mix(in srgb, var(--c-danger) 45%, transparent);
 }
 </style>

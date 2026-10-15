@@ -142,30 +142,30 @@ const displacement = (): { from: Vec; to: Vec } => ({ from: launch(), to: landin
         :y1="thetaVertex().y"
         :x2="thetaVertex().x + (variant === 2 ? -96 : 96)"
         :y2="thetaVertex().y"
-        stroke="rgba(148,163,184,0.7)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="7 6"
       />
       <path :d="thetaArc()" fill="none" stroke="var(--c-accent)" stroke-width="2" />
-      <text :x="thetaLabel().x" :y="thetaLabel().y" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2a846">θ</text>
-      <circle :cx="launch().x" :cy="launch().y" r="5.5" fill="#e2e8f0" />
-      <text :x="launch().x - 26" :y="launch().y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">O</text>
-      <CourseArrow :from="launch()" :to="v0End()" stroke="#e2a846" :stroke-width="3" />
-      <text :x="(launch().x + v0End().x) / 2 - 6" :y="launch().y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">
+      <text :x="thetaLabel().x" :y="thetaLabel().y" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-accent)">θ</text>
+      <circle :cx="launch().x" :cy="launch().y" r="5.5" fill="var(--c-neutral-200)" />
+      <text :x="launch().x - 26" :y="launch().y - 12" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
+      <CourseArrow :from="launch()" :to="v0End()" stroke="var(--c-accent)" :stroke-width="3" />
+      <text :x="(launch().x + v0End().x) / 2 - 6" :y="launch().y - 14" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">
         v
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">0</tspan>
       </text>
-      <circle :cx="landing().x" :cy="landing().y" r="5.5" fill="#f87171" />
-      <text :x="landing().x + 12" :y="landing().y + 20" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#f87171">P</text>
+      <circle :cx="landing().x" :cy="landing().y" r="5.5" fill="var(--c-force)" />
+      <text :x="landing().x + 12" :y="landing().y + 20" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-force)">P</text>
       <g v-if="showAnalysis">
-        <path :d="parabola(launch(), landing(), control())" fill="none" stroke="#e2a846" stroke-width="3" stroke-linecap="round" />
+        <path :d="parabola(launch(), landing(), control())" fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round" />
         <line
           v-if="variant === 3"
           :x1="displacement().from.x"
           :y1="displacement().from.y"
           :x2="displacement().to.x"
           :y2="displacement().to.y"
-          stroke="#f87171"
+          stroke="var(--c-force)"
           stroke-width="2.6"
           stroke-dasharray="8 6"
         />
@@ -175,17 +175,17 @@ const displacement = (): { from: Vec; to: Vec } => ({ from: launch(), to: landin
           :y1="displacement().from.y"
           :x2="displacement().to.x"
           :y2="displacement().to.y"
-          stroke="#f87171"
+          stroke="var(--c-force)"
           stroke-width="2.6"
           stroke-dasharray="8 6"
         />
-        <CourseArrow :from="landing()" :to="velTip()" stroke="#f87171" :stroke-width="3.2" />
+        <CourseArrow :from="landing()" :to="velTip()" stroke="var(--c-force)" :stroke-width="3.2" />
         <text :x="velTip().x + 8" :y="velTip().y + 6" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#fca5a5">v</text>
         <path
           v-if="variant === 1"
           :d="`M ${landing().x + 18} ${landing().y + 4} L ${landing().x + 12} ${landing().y + 22} L ${landing().x - 6} ${landing().y + 14}`"
           fill="none"
-          stroke="rgba(226,168,70,0.85)"
+          stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
           stroke-width="1.8"
         />
       </g>

@@ -257,24 +257,24 @@ const endDrag = (): void => {
         <SurfaceHatch :from="{ x: 10, y: origin.y }" :to="{ x: 306, y: origin.y }" side="below" color="#64748b" :line-width="2.2" :thickness="11" :gap="18" />
 
         <!-- 穹顶建筑微透底色与外弧线 -->
-        <path :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y} Z`" fill="rgba(30,41,59,0.42)" />
+        <path :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y} Z`" fill="color-mix(in srgb, var(--c-surface-solid) 42%, transparent)" />
         <path
           :d="`M ${origin.x - (R - 7)} ${origin.y} A ${R - 7} ${R - 7} 0 0 1 ${origin.x + (R - 7)} ${origin.y}`"
           fill="none"
-          stroke="rgba(148,163,184,0.22)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 22%, transparent)"
           stroke-width="1.4"
           stroke-dasharray="6 5"
         />
-        <path :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y}`" fill="none" stroke="#94a3b8" stroke-width="2.6" />
+        <path :d="`M ${origin.x - R} ${origin.y} A ${R} ${R} 0 0 1 ${origin.x + R} ${origin.y}`" fill="none" stroke="var(--c-text-dim)" stroke-width="2.6" />
 
         <!-- 过圆心 O 的竖直基准虚线、半径 OP 与夹角 θ -->
-        <line :x1="origin.x" :y1="origin.y" :x2="origin.x" :y2="origin.y - R - 24" stroke="#64748b" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.8" />
-        <line :x1="origin.x" :y1="origin.y" :x2="contactPoint.x" :y2="contactPoint.y" stroke="#94a3b8" stroke-width="1.8" />
-        <path :d="thetaArc" fill="none" stroke="#e2a846" stroke-width="1.6" />
+        <line :x1="origin.x" :y1="origin.y" :x2="origin.x" :y2="origin.y - R - 24" stroke="var(--c-neutral-500)" stroke-width="1.4" stroke-dasharray="5 4" opacity="0.8" />
+        <line :x1="origin.x" :y1="origin.y" :x2="contactPoint.x" :y2="contactPoint.y" stroke="var(--c-text-dim)" stroke-width="1.8" />
+        <path :d="thetaArc" fill="none" stroke="var(--c-accent)" stroke-width="1.6" />
         <text
           :x="thetaLabelPos.x"
           :y="thetaLabelPos.y"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="16"
@@ -283,28 +283,28 @@ const endDrag = (): void => {
         >
           θ
         </text>
-        <circle :cx="origin.x" :cy="origin.y" r="3.5" fill="#94a3b8" />
-        <text :x="origin.x - 13" :y="origin.y - 8" fill="#94a3b8" font-family="KaTeX_Math" font-style="italic" font-size="14" text-anchor="middle">O</text>
+        <circle :cx="origin.x" :cy="origin.y" r="3.5" fill="var(--c-text-dim)" />
+        <text :x="origin.x - 13" :y="origin.y - 8" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14" text-anchor="middle">O</text>
 
         <!-- ==================== 2. 沿穹顶向上攀爬的人（具象化四肢、躯干与头部） ==================== -->
         <g :transform="climberTransform" stroke-linecap="round" stroke-linejoin="round">
           <!-- 后腿蹬踏与前腿屈膝迈步 -->
-          <path d="M -2 -18 L 5 -9 L 4 0" fill="none" stroke="#cbd5e1" stroke-width="3.2" />
-          <path d="M -3 -19 L -11 -11 L -7 -1" fill="none" stroke="#cbd5e1" stroke-width="3.2" />
+          <path d="M -2 -18 L 5 -9 L 4 0" fill="none" stroke="var(--c-neutral-300)" stroke-width="3.2" />
+          <path d="M -3 -19 L -11 -11 L -7 -1" fill="none" stroke="var(--c-neutral-300)" stroke-width="3.2" />
           <!-- 俯身攀爬的蓝色夹克躯干 -->
-          <path d="M -8 -34 L -2 -18" fill="none" stroke="#60a5fa" stroke-width="6.5" />
+          <path d="M -8 -34 L -2 -18" fill="none" stroke="var(--c-velocity)" stroke-width="6.5" />
           <!-- 前伸攀扶的手臂与后摆平衡手臂 -->
-          <path d="M -7 -31 L -17 -22 L -20 -13" fill="none" stroke="#e2e8f0" stroke-width="2.8" />
-          <path d="M -6 -30 L 4 -24 L 9 -18" fill="none" stroke="#e2e8f0" stroke-width="2.8" />
+          <path d="M -7 -31 L -17 -22 L -20 -13" fill="none" stroke="var(--c-neutral-200)" stroke-width="2.8" />
+          <path d="M -6 -30 L 4 -24 L 9 -18" fill="none" stroke="var(--c-neutral-200)" stroke-width="2.8" />
           <!-- 头部 -->
-          <circle cx="-11" cy="-43" r="7.2" fill="rgba(226,168,70,0.25)" stroke="#e2a846" stroke-width="2.2" />
+          <circle cx="-11" cy="-43" r="7.2" fill="color-mix(in srgb, var(--c-accent) 25%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" />
         </g>
 
         <!-- ==================== 3. 点 2：重力的正交分解（G₁ 沿切线向下、G₂ 垂直穹顶压向圆心） ==================== -->
         <g v-click="2">
           <!-- 正交分解矩形投影虚线 -->
-          <line :x1="gTip.x" :y1="gTip.y" :x2="g1Tip.x" :y2="g1Tip.y" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.85" />
-          <line :x1="gTip.x" :y1="gTip.y" :x2="g2Tip.x" :y2="g2Tip.y" stroke="#94a3b8" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.85" />
+          <line :x1="gTip.x" :y1="gTip.y" :x2="g1Tip.x" :y2="g1Tip.y" stroke="var(--c-text-dim)" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.85" />
+          <line :x1="gTip.x" :y1="gTip.y" :x2="g2Tip.x" :y2="g2Tip.y" stroke="var(--c-text-dim)" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.85" />
 
           <!-- 垂直穹顶向内的分力 G₂ = G cos θ -->
           <CourseArrow :from="contactPoint" :to="g2Tip" :head-size="9.5" stroke="#fb7185" stroke-width="2.6" stroke-dasharray="5 3" />
@@ -317,7 +317,7 @@ const endDrag = (): void => {
             font-size="16"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -336,7 +336,7 @@ const endDrag = (): void => {
             font-size="16"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -348,17 +348,17 @@ const endDrag = (): void => {
         <!-- ==================== 4. 点 1：三个共点力（G 竖直向下、F_N 沿半径向外、f 沿切线向上） ==================== -->
         <g v-click="1">
           <!-- 重力 G -->
-          <CourseArrow :from="contactPoint" :to="gTip" :head-size="11" stroke="#f87171" stroke-width="3.4" />
+          <CourseArrow :from="contactPoint" :to="gTip" :head-size="11" stroke="var(--c-force)" stroke-width="3.4" />
           <text
             :x="leftLabels.g.x"
             :y="leftLabels.g.y"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="17"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -366,17 +366,17 @@ const endDrag = (): void => {
           </text>
 
           <!-- 支持力 F_N -->
-          <CourseArrow :from="contactPoint" :to="fnTip" :head-size="11" stroke="#2dd4bf" stroke-width="3.4" />
+          <CourseArrow :from="contactPoint" :to="fnTip" :head-size="11" stroke="var(--c-physics)" stroke-width="3.4" />
           <text
             :x="leftLabels.normalLabel.x"
             :y="leftLabels.normalLabel.y"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="17"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -385,17 +385,17 @@ const endDrag = (): void => {
           </text>
 
           <!-- 静摩擦力 f -->
-          <CourseArrow :from="contactPoint" :to="fTip" :head-size="11" stroke="#e2a846" stroke-width="3.4" />
+          <CourseArrow :from="contactPoint" :to="fTip" :head-size="11" stroke="var(--c-accent)" stroke-width="3.4" />
           <text
             :x="leftLabels.friction.x"
             :y="leftLabels.friction.y"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="17"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -404,13 +404,13 @@ const endDrag = (): void => {
         </g>
 
         <!-- 作用点 P 与拖拽热区 -->
-        <circle :cx="contactPoint.x" :cy="contactPoint.y" r="4" fill="#f8fafc" stroke="#0f1425" stroke-width="1.5" />
+        <circle :cx="contactPoint.x" :cy="contactPoint.y" r="4" fill="var(--c-neutral-50)" stroke="var(--c-bg-soft)" stroke-width="1.5" />
         <circle
           :cx="contactPoint.x"
           :cy="contactPoint.y"
           r="30"
           fill="transparent"
-          class="fe-grab"
+          class="fig-grab"
           @pointerdown="startDrag"
           @pointermove="moveDrag"
           @pointerup="endDrag"
@@ -420,34 +420,34 @@ const endDrag = (): void => {
     </div>
 
     <!-- 右：点 3 才出的错误套相似三角形警示（几何直角 △OQP 的切线交点 Q 在穹顶上方一直随 θ 移动，OQ 并非定值） -->
-    <div class="dc-fig" :class="{ 'fe-hidden': step < 3 }">
+    <div class="dc-fig" :class="{ 'fig-hold': step < 3 }">
       <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
         <!-- 顶部小标题说明 -->
-        <text x="72" y="28" font-size="12" font-weight="600" fill="#cbd5e1" text-anchor="middle">力的直角三角形 (G 定长)</text>
-        <text x="238" y="28" font-size="12" font-weight="600" fill="#cbd5e1" text-anchor="middle">切线几何直角 △OQP (Q 动点)</text>
+        <text x="72" y="28" font-size="12" font-weight="600" fill="var(--c-neutral-300)" text-anchor="middle">力的直角三角形 (G 定长)</text>
+        <text x="238" y="28" font-size="12" font-weight="600" fill="var(--c-neutral-300)" text-anchor="middle">切线几何直角 △OQP (Q 动点)</text>
 
         <!-- ==================== 1. 左半侧：真实的力矢量直角三角形 ==================== -->
-        <polygon :points="`${triTop.x},${triTop.y} ${triBot.x},${triBot.y} ${triMid.x},${triMid.y}`" fill="rgba(248,113,113,0.06)" />
+        <polygon :points="`${triTop.x},${triTop.y} ${triBot.x},${triBot.y} ${triMid.x},${triMid.y}`" fill="color-mix(in srgb, var(--c-force) 6%, transparent)" />
         <!-- 直角符号（F_N ⊥ f） -->
-        <path :d="forceRightAnglePath" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+        <path :d="forceRightAnglePath" fill="none" stroke="var(--c-text-dim)" stroke-width="1.5" />
 
         <!-- 斜边：重力 G（竖直向下，定长） -->
-        <CourseArrow :from="triTop" :to="triBot" :head-size="10" stroke="#f87171" stroke-width="3" />
+        <CourseArrow :from="triTop" :to="triBot" :head-size="10" stroke="var(--c-force)" stroke-width="3" />
         <!-- 直角边：支持力 F_N（沿半径向右上） -->
-        <CourseArrow :from="triBot" :to="triMid" :head-size="10" stroke="#2dd4bf" stroke-width="3" />
+        <CourseArrow :from="triBot" :to="triMid" :head-size="10" stroke="var(--c-physics)" stroke-width="3" />
         <!-- 直角边：静摩擦力 f（沿切线向左上） -->
-        <CourseArrow :from="triMid" :to="triTop" :head-size="10" stroke="#e2a846" stroke-width="3" />
+        <CourseArrow :from="triMid" :to="triTop" :head-size="10" stroke="var(--c-accent)" stroke-width="3" />
 
         <text
           :x="rightLabels.g.x"
           :y="rightLabels.g.y"
-          fill="#f87171"
+          fill="var(--c-force)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="16"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -456,13 +456,13 @@ const endDrag = (): void => {
         <text
           :x="rightLabels.normalLabel.x"
           :y="rightLabels.normalLabel.y"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="16"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -472,13 +472,13 @@ const endDrag = (): void => {
         <text
           :x="rightLabels.friction.x"
           :y="rightLabels.friction.y"
-          fill="#e2a846"
+          fill="var(--c-accent)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="16"
           text-anchor="middle"
           dominant-baseline="central"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -488,48 +488,48 @@ const endDrag = (): void => {
 
         <!-- ==================== 2. 中央：盲目套相似的警示符号 ==================== -->
         <g transform="translate(148, 134)">
-          <circle cx="0" cy="0" r="15" fill="rgba(248,113,113,0.12)" stroke="rgba(248,113,113,0.35)" stroke-width="1.2" />
-          <text x="0" y="6" fill="#cbd5e1" font-family="KaTeX_Main" font-size="21" text-anchor="middle">∽</text>
-          <line x1="-9" y1="10" x2="9" y2="-10" stroke="#f87171" stroke-width="2.6" stroke-linecap="round" />
+          <circle cx="0" cy="0" r="15" fill="color-mix(in srgb, var(--c-force) 12%, transparent)" stroke="color-mix(in srgb, var(--c-force) 35%, transparent)" stroke-width="1.2" />
+          <text x="0" y="6" fill="var(--c-neutral-300)" font-family="KaTeX_Main" font-size="21" text-anchor="middle">∽</text>
+          <line x1="-9" y1="10" x2="9" y2="-10" stroke="var(--c-force)" stroke-width="2.6" stroke-linecap="round" />
         </g>
 
         <!-- ==================== 3. 右半侧：过 P 点切线交竖直轴于穹顶上方 Q 点的直角 △OQP ==================== -->
         <!-- 穹顶上方的竖直轴延伸虚线（展示 Q 点在此轴上滑动） -->
-        <line :x1="geoO.x" y1="40" :x2="geoO.x" :y2="geoO.y" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.7" />
+        <line :x1="geoO.x" y1="40" :x2="geoO.x" :y2="geoO.y" stroke="var(--c-neutral-500)" stroke-width="1.3" stroke-dasharray="4 4" opacity="0.7" />
 
         <!-- 穹顶象限圆弧参考（圆心 geoO，最高点 geoDomeTop (206, 128)，清晰展示 Q 在穹顶上方！） -->
         <path
           :d="`M ${geoDomeTop.x} ${geoDomeTop.y} A ${geoR} ${geoR} 0 0 1 ${geoO.x + geoR} ${geoO.y}`"
-          fill="rgba(30,41,59,0.35)"
-          stroke="rgba(148,163,184,0.45)"
+          fill="color-mix(in srgb, var(--c-surface-solid) 35%, transparent)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="5 4"
         />
         <!-- 穹顶最高点小标记 -->
-        <circle :cx="geoDomeTop.x" :cy="geoDomeTop.y" r="2.2" fill="#64748b" />
+        <circle :cx="geoDomeTop.x" :cy="geoDomeTop.y" r="2.2" fill="var(--c-neutral-500)" />
 
         <!-- 几何直角三角形 △OQP 填充与切점 P 处的直角符号（OP ⊥ 切线 PQ） -->
-        <polygon :points="`${geoO.x},${geoO.y} ${geoQ.x},${geoQ.y} ${geoP.x},${geoP.y}`" fill="rgba(148,163,184,0.08)" />
-        <path :d="geoRightAnglePath" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+        <polygon :points="`${geoO.x},${geoO.y} ${geoQ.x},${geoQ.y} ${geoP.x},${geoP.y}`" fill="color-mix(in srgb, var(--c-text-dim) 8%, transparent)" />
+        <path :d="geoRightAnglePath" fill="none" stroke="var(--c-text-dim)" stroke-width="1.5" />
 
         <!-- 竖直斜边 OQ = R / cosθ（随 Q 移动不断变化，用琥珀红虚线高亮警示其非定值） -->
-        <line :x1="geoO.x" :y1="geoO.y" :x2="geoQ.x" :y2="geoQ.y" stroke="#f87171" stroke-width="2.4" stroke-dasharray="5 3" />
+        <line :x1="geoO.x" :y1="geoO.y" :x2="geoQ.x" :y2="geoQ.y" stroke="var(--c-force)" stroke-width="2.4" stroke-dasharray="5 3" />
         <!-- 直角边 OP = R（半径，定长） -->
-        <line :x1="geoO.x" :y1="geoO.y" :x2="geoP.x" :y2="geoP.y" stroke="#2dd4bf" stroke-width="2.4" />
+        <line :x1="geoO.x" :y1="geoO.y" :x2="geoP.x" :y2="geoP.y" stroke="var(--c-physics)" stroke-width="2.4" />
         <!-- 直角边 PQ = R tanθ（过 P 点的穹顶切线） -->
-        <line :x1="geoP.x" :y1="geoP.y" :x2="geoQ.x" :y2="geoQ.y" stroke="#e2a846" stroke-width="2.2" />
+        <line :x1="geoP.x" :y1="geoP.y" :x2="geoQ.x" :y2="geoQ.y" stroke="var(--c-accent)" stroke-width="2.2" />
 
         <!-- 三个顶点 O、P 与穹顶上方的动点 Q -->
-        <circle :cx="geoO.x" :cy="geoO.y" r="3.2" fill="#94a3b8" />
-        <circle :cx="geoP.x" :cy="geoP.y" r="3.6" fill="#2dd4bf" />
+        <circle :cx="geoO.x" :cy="geoO.y" r="3.2" fill="var(--c-text-dim)" />
+        <circle :cx="geoP.x" :cy="geoP.y" r="3.6" fill="var(--c-physics)" />
         <!-- 动点 Q（带发光外圈提示其随爬动上下移动） -->
-        <circle :cx="geoQ.x" :cy="geoQ.y" r="6.5" fill="rgba(248,113,113,0.22)" />
-        <circle :cx="geoQ.x" :cy="geoQ.y" r="3.8" fill="#f87171" stroke="#0f1425" stroke-width="1.2" />
+        <circle :cx="geoQ.x" :cy="geoQ.y" r="6.5" fill="color-mix(in srgb, var(--c-force) 22%, transparent)" />
+        <circle :cx="geoQ.x" :cy="geoQ.y" r="3.8" fill="var(--c-force)" stroke="var(--c-bg-soft)" stroke-width="1.2" />
 
         <text
           :x="rightLabels.vO.x"
           :y="rightLabels.vO.y"
-          fill="#94a3b8"
+          fill="var(--c-text-dim)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="14"
@@ -541,7 +541,7 @@ const endDrag = (): void => {
         <text
           :x="rightLabels.vQ.x"
           :y="rightLabels.vQ.y"
-          fill="#f87171"
+          fill="var(--c-force)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="15"
@@ -554,7 +554,7 @@ const endDrag = (): void => {
         <text
           :x="rightLabels.vP.x"
           :y="rightLabels.vP.y"
-          fill="#2dd4bf"
+          fill="var(--c-physics)"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="14"
@@ -565,8 +565,8 @@ const endDrag = (): void => {
         </text>
 
         <!-- ==================== 4. 底部警示结论栏 ==================== -->
-        <rect x="6" y="239" width="308" height="38" rx="7" fill="rgba(248,113,113,0.1)" stroke="rgba(248,113,113,0.35)" stroke-width="1.2" />
-        <text x="160" y="263" fill="#f87171" font-size="11.5" font-weight="600" text-anchor="middle">✗ 切线交点 Q 随爬升下移，斜边 OQ 在变，无定弦定角</text>
+        <rect x="6" y="239" width="308" height="38" rx="7" fill="color-mix(in srgb, var(--c-force) 10%, transparent)" stroke="color-mix(in srgb, var(--c-force) 35%, transparent)" stroke-width="1.2" />
+        <text x="160" y="263" fill="var(--c-force)" font-size="11.5" font-weight="600" text-anchor="middle">✗ 切线交点 Q 随爬升下移，斜边 OQ 在变，无定弦定角</text>
       </svg>
     </div>
   </div>
@@ -596,13 +596,5 @@ const endDrag = (): void => {
   width: 100%;
   height: auto;
   max-height: 100%;
-}
-
-.fe-grab {
-  cursor: grab;
-}
-
-.fe-grab:active {
-  cursor: grabbing;
 }
 </style>

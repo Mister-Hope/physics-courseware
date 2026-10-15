@@ -39,29 +39,29 @@ const flightPath = Array.from({ length: SAMPLES + 1 }, (_, i) => {
   <div class="smash-court">
     <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="击球恰好过网又不出界的题目图">
       <SurfaceHatch :from="{ x: 60, y: GROUND_Y }" :to="{ x: 600, y: GROUND_Y }" side="below" :thickness="13" />
-      <line :x1="BOUND_X" :y1="GROUND_Y" :x2="BOUND_X" :y2="GROUND_Y - 36" stroke="#cbd5e1" stroke-width="2" />
-      <line :x1="NET_X" :y1="GROUND_Y" :x2="NET_X" :y2="NET_TOP - 4" stroke="rgba(148,163,184,0.8)" stroke-width="2" />
-      <rect :x="NET_X - 9" :y="NET_TOP - 6" width="18" height="10" rx="2" fill="#f1f5f9" />
-      <CourseArrow :from="origin" :to="{ x: 270, y: 120 }" stroke="#e2a846" :stroke-width="3" />
-      <text x="188" y="104" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#e2a846">v</text>
-      <text x="189" y="108" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#e2a846">0</text>
-      <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="#e2e8f0" />
-      <text :x="origin.x - 12" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#e2e8f0">O</text>
-      <line :x1="origin.x" :y1="L1_Y" :x2="NET_X" :y2="L1_Y" stroke="#e2a846" stroke-width="1.6" />
-      <line :x1="origin.x" :y1="L1_Y - TICK" :x2="origin.x" :y2="L1_Y + TICK" stroke="#e2a846" stroke-width="1.6" />
-      <line :x1="NET_X" :y1="L1_Y - TICK" :x2="NET_X" :y2="L1_Y + TICK" stroke="#e2a846" stroke-width="1.6" />
-      <text x="275" y="268" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#e2a846">L</text>
-      <text x="276" y="272" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#e2a846">1</text>
-      <line :x1="NET_X" :y1="L2_Y" :x2="BOUND_X" :y2="L2_Y" stroke="#e2a846" stroke-width="1.6" />
-      <line :x1="NET_X" :y1="L2_Y - TICK" :x2="NET_X" :y2="L2_Y + TICK" stroke="#e2a846" stroke-width="1.6" />
-      <line :x1="BOUND_X" :y1="L2_Y - TICK" :x2="BOUND_X" :y2="L2_Y + TICK" stroke="#e2a846" stroke-width="1.6" />
-      <text x="495" y="288" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#e2a846">L</text>
-      <text x="496" y="292" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#e2a846">2</text>
+      <line :x1="BOUND_X" :y1="GROUND_Y" :x2="BOUND_X" :y2="GROUND_Y - 36" stroke="var(--c-neutral-300)" stroke-width="2" />
+      <line :x1="NET_X" :y1="GROUND_Y" :x2="NET_X" :y2="NET_TOP - 4" stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)" stroke-width="2" />
+      <rect :x="NET_X - 9" :y="NET_TOP - 6" width="18" height="10" rx="2" fill="var(--c-text)" />
+      <CourseArrow :from="origin" :to="{ x: 270, y: 120 }" stroke="var(--c-accent)" :stroke-width="3" />
+      <text x="188" y="104" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">v</text>
+      <text x="189" y="108" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">0</text>
+      <circle :cx="origin.x" :cy="origin.y" r="4.5" fill="var(--c-neutral-200)" />
+      <text :x="origin.x - 12" :y="origin.y - 12" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-200)">O</text>
+      <line :x1="origin.x" :y1="L1_Y" :x2="NET_X" :y2="L1_Y" stroke="var(--c-accent)" stroke-width="1.6" />
+      <line :x1="origin.x" :y1="L1_Y - TICK" :x2="origin.x" :y2="L1_Y + TICK" stroke="var(--c-accent)" stroke-width="1.6" />
+      <line :x1="NET_X" :y1="L1_Y - TICK" :x2="NET_X" :y2="L1_Y + TICK" stroke="var(--c-accent)" stroke-width="1.6" />
+      <text x="275" y="268" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">L</text>
+      <text x="276" y="272" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">1</text>
+      <line :x1="NET_X" :y1="L2_Y" :x2="BOUND_X" :y2="L2_Y" stroke="var(--c-accent)" stroke-width="1.6" />
+      <line :x1="NET_X" :y1="L2_Y - TICK" :x2="NET_X" :y2="L2_Y + TICK" stroke="var(--c-accent)" stroke-width="1.6" />
+      <line :x1="BOUND_X" :y1="L2_Y - TICK" :x2="BOUND_X" :y2="L2_Y + TICK" stroke="var(--c-accent)" stroke-width="1.6" />
+      <text x="495" y="288" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)">L</text>
+      <text x="496" y="292" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">2</text>
       <g v-if="showAnalysis">
-        <path :d="flightPath" fill="none" stroke="#e2a846" stroke-width="2.6" />
-        <circle :cx="netTop.x" :cy="netTop.y" r="8" fill="none" stroke="#f87171" stroke-width="2" />
-        <circle :cx="netTop.x" :cy="netTop.y" r="3.4" fill="#f87171" />
-        <circle :cx="bound.x" :cy="bound.y" r="5" fill="#f87171" />
+        <path :d="flightPath" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+        <circle :cx="netTop.x" :cy="netTop.y" r="8" fill="none" stroke="var(--c-force)" stroke-width="2" />
+        <circle :cx="netTop.x" :cy="netTop.y" r="3.4" fill="var(--c-force)" />
+        <circle :cx="bound.x" :cy="bound.y" r="5" fill="var(--c-force)" />
       </g>
     </svg>
   </div>

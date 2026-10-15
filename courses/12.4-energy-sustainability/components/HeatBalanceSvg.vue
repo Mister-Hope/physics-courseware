@@ -56,20 +56,20 @@ const { step = 1, showImbalance = true } = defineProps<{
         <radialGradient id="eb-sun-core" cx="40%" cy="38%" r="65%">
           <stop offset="0%" stop-color="#ffffff" />
           <stop offset="25%" stop-color="#fef08a" />
-          <stop offset="65%" stop-color="#f59e0b" />
+          <stop offset="65%" stop-color="var(--c-accent-glow)" />
           <stop offset="100%" stop-color="#d97706" />
         </radialGradient>
 
         <!-- 太阳外圈光晕色环 -->
         <radialGradient id="eb-sun-halo" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="rgba(251, 191, 36, 0.45)" />
-          <stop offset="70%" stop-color="rgba(245, 158, 11, 0.15)" />
+          <stop offset="0%" stop-color="color-mix(in srgb, var(--c-accent-light) 45%, transparent)" />
+          <stop offset="70%" stop-color="color-mix(in srgb, var(--c-accent-glow) 15%, transparent)" />
           <stop offset="100%" stop-color="rgba(245, 158, 11, 0)" />
         </radialGradient>
 
         <!-- 地球海洋球体渐变（向日面高光，背日面深邃） -->
         <radialGradient id="eb-ocean-sphere" cx="30%" cy="32%" r="70%">
-          <stop offset="0%" stop-color="#38bdf8" />
+          <stop offset="0%" stop-color="var(--c-physics-light)" />
           <stop offset="45%" stop-color="#0284c7" />
           <stop offset="85%" stop-color="#0f3769" />
           <stop offset="100%" stop-color="#091e3a" />
@@ -78,8 +78,8 @@ const { step = 1, showImbalance = true } = defineProps<{
         <!-- 地球大气散射外晕 -->
         <radialGradient id="eb-atmosphere-rim" cx="50%" cy="50%" r="50%">
           <stop offset="82%" stop-color="rgba(56, 189, 248, 0)" />
-          <stop offset="94%" stop-color="rgba(56, 189, 248, 0.35)" />
-          <stop offset="100%" stop-color="rgba(147, 197, 253, 0.8)" />
+          <stop offset="94%" stop-color="color-mix(in srgb, var(--c-physics-light) 35%, transparent)" />
+          <stop offset="100%" stop-color="color-mix(in srgb, var(--c-velocity-light) 80%, transparent)" />
         </radialGradient>
 
         <!-- 地球球体暗面柔和明暗交界遮罩 (晨昏线投影) -->
@@ -92,7 +92,7 @@ const { step = 1, showImbalance = true } = defineProps<{
         <!-- 人类工业热能上升烟羽渐变 -->
         <linearGradient id="eb-industry-heat" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0%" stop-color="#ef4444" stop-opacity="0.35" />
-          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+          <stop offset="100%" stop-color="var(--c-force)" stop-opacity="0" />
         </linearGradient>
 
         <!-- 警示卡片金属质感渐变底色 -->
@@ -106,10 +106,10 @@ const { step = 1, showImbalance = true } = defineProps<{
       <!-- ==================== 深空背景微亮点缀 ==================== -->
       <g id="space-stars" opacity="0.45">
         <circle cx="210" cy="34" r="1" fill="#ffffff" />
-        <circle cx="490" cy="26" r="1.2" fill="#93c5fd" />
+        <circle cx="490" cy="26" r="1.2" fill="var(--c-velocity-light)" />
         <circle cx="640" cy="46" r="1" fill="#ffffff" />
-        <circle cx="710" cy="95" r="1.3" fill="#cbd5e1" />
-        <circle cx="680" cy="175" r="1.1" fill="#93c5fd" />
+        <circle cx="710" cy="95" r="1.3" fill="var(--c-neutral-300)" />
+        <circle cx="680" cy="175" r="1.1" fill="var(--c-velocity-light)" />
         <circle cx="160" cy="185" r="1" fill="#ffffff" />
       </g>
 
@@ -119,7 +119,7 @@ const { step = 1, showImbalance = true } = defineProps<{
         <circle cx="72" cy="84" r="46" fill="url(#eb-sun-halo)" />
 
         <!-- 太阳光芒耀斑 (8束几何光芒) -->
-        <g stroke="#fbbf24" stroke-width="2.6" stroke-linecap="round" opacity="0.85">
+        <g stroke="var(--c-accent-light)" stroke-width="2.6" stroke-linecap="round" opacity="0.85">
           <line x1="72" y1="48" x2="72" y2="40" />
           <line x1="72" y1="120" x2="72" y2="128" />
           <line x1="36" y1="84" x2="28" y2="84" />
@@ -134,11 +134,11 @@ const { step = 1, showImbalance = true } = defineProps<{
         <circle cx="72" cy="84" r="26" fill="url(#eb-sun-core)" filter="url(#eb-sun-glow)" stroke="#fef08a" stroke-width="1.8" />
 
         <!-- 太阳大字标牌 (19px 讲台粗体) -->
-        <text x="72" y="154" text-anchor="middle" font-size="19" font-weight="bold" fill="#fbbf24" letter-spacing="1">太阳辐射</text>
+        <text x="72" y="154" text-anchor="middle" font-size="19" font-weight="bold" fill="var(--c-accent-light)" letter-spacing="1">太阳辐射</text>
 
         <!-- 太阳辐射入地球的高能光束箭头 -->
-        <CourseArrow :from="{ x: 110, y: 84 }" :to="{ x: 258, y: 106 }" stroke="#f59e0b" :stroke-width="3.6" :head-size="14" />
-        <CourseArrow :from="{ x: 106, y: 106 }" :to="{ x: 252, y: 128 }" stroke="#f59e0b" :stroke-width="3.6" :head-size="14" />
+        <CourseArrow :from="{ x: 110, y: 84 }" :to="{ x: 258, y: 106 }" stroke="var(--c-accent-glow)" :stroke-width="3.6" :head-size="14" />
+        <CourseArrow :from="{ x: 106, y: 106 }" :to="{ x: 252, y: 128 }" stroke="var(--c-accent-glow)" :stroke-width="3.6" :head-size="14" />
 
         <!-- 阳光辐射波纹线条（表现电磁辐射波） -->
         <path d="M 125 76 Q 140 72 155 76 T 185 76" fill="none" stroke="#fde047" stroke-width="1.8" stroke-linecap="round" opacity="0.75" />
@@ -148,10 +148,10 @@ const { step = 1, showImbalance = true } = defineProps<{
       <!-- ==================== 区域 2：地球与人类工业活动 (中央) ==================== -->
       <g id="earth-system" transform="translate(0, 0)">
         <!-- 大气外层高亮光环 -->
-        <circle cx="336" cy="116" r="58" fill="none" stroke="rgba(56, 189, 248, 0.45)" stroke-width="2" filter="url(#eb-earth-halo)" />
+        <circle cx="336" cy="116" r="58" fill="none" stroke="color-mix(in srgb, var(--c-physics-light) 45%, transparent)" stroke-width="2" filter="url(#eb-earth-halo)" />
 
         <!-- 地球海洋基底 -->
-        <circle cx="336" cy="116" r="55" fill="url(#eb-ocean-sphere)" stroke="rgba(147, 197, 253, 0.6)" stroke-width="1.8" />
+        <circle cx="336" cy="116" r="55" fill="url(#eb-ocean-sphere)" stroke="color-mix(in srgb, var(--c-velocity-light) 60%, transparent)" stroke-width="1.8" />
 
         <!-- 大陆板块轮廓 (绿色自然生态地貌) -->
         <g clip-path="url(#eb-earth-clip)">
@@ -169,7 +169,7 @@ const { step = 1, showImbalance = true } = defineProps<{
             opacity="0.88"
           />
           <!-- 陆地内部高原地势修饰 -->
-          <path d="M 326 90 C 334 86 345 88 348 95 C 344 101 334 103 328 100 Z" fill="#34d399" opacity="0.6" />
+          <path d="M 326 90 C 334 86 345 88 348 95 C 344 101 334 103 328 100 Z" fill="var(--c-ok)" opacity="0.6" />
 
           <!-- 澳洲/南亚群岛板块 -->
           <ellipse cx="360" cy="140" rx="14" ry="9" fill="#10b981" opacity="0.88" />
@@ -190,7 +190,7 @@ const { step = 1, showImbalance = true } = defineProps<{
         </g>
 
         <!-- 地球中央大字 (20px 粗体) -->
-        <text x="336" y="192" text-anchor="middle" font-size="20" font-weight="bold" fill="#e2e8f0" letter-spacing="2">地球</text>
+        <text x="336" y="192" text-anchor="middle" font-size="20" font-weight="bold" fill="var(--c-neutral-200)" letter-spacing="2">地球</text>
 
         <!-- ===== 人类工业活动与城市群（伫立于地球表面正上方） ===== -->
         <!-- 当 step >= 1 且 showImbalance 时展示 -->
@@ -201,51 +201,51 @@ const { step = 1, showImbalance = true } = defineProps<{
           <!-- 现代城市与工业建筑群剪影 (贴合地球曲面 336, 116，R=54，正中对称布局) -->
           <g transform="translate(310, 48)">
             <!-- 办公楼 A (略矮，左翼) -->
-            <rect x="2" y="14" width="8" height="7" rx="0.5" fill="#334155" stroke="#64748b" stroke-width="0.8" />
+            <rect x="2" y="14" width="8" height="7" rx="0.5" fill="var(--c-neutral-700)" stroke="var(--c-neutral-500)" stroke-width="0.8" />
             <!-- 工业厂房与散热塔 -->
-            <path d="M 12 18 L 14 10 L 19 10 L 21 18 Z" fill="#475569" stroke="#64748b" stroke-width="0.8" />
+            <path d="M 12 18 L 14 10 L 19 10 L 21 18 Z" fill="var(--c-neutral-600)" stroke="var(--c-neutral-500)" stroke-width="0.8" />
             <!-- 核心办公高楼 B (居中) -->
-            <rect x="22" y="6" width="10" height="15" rx="0.5" fill="#1e293b" stroke="#64748b" stroke-width="0.9" />
+            <rect x="22" y="6" width="10" height="15" rx="0.5" fill="var(--c-surface-solid)" stroke="var(--c-neutral-500)" stroke-width="0.9" />
             <polygon points="27,3 25.5,6 28.5,6" fill="#ef4444" />
-            <line x1="25" y1="9" x2="29" y2="9" stroke="#fbbf24" stroke-width="1" />
-            <line x1="25" y1="13" x2="29" y2="13" stroke="#fbbf24" stroke-width="1" />
+            <line x1="25" y1="9" x2="29" y2="9" stroke="var(--c-accent-light)" stroke-width="1" />
+            <line x1="25" y1="13" x2="29" y2="13" stroke="var(--c-accent-light)" stroke-width="1" />
 
             <!-- 摩天大楼 C (右侧高楼) -->
-            <rect x="34" y="3" width="10" height="18" rx="0.5" fill="#1e293b" stroke="#64748b" stroke-width="0.9" />
+            <rect x="34" y="3" width="10" height="18" rx="0.5" fill="var(--c-surface-solid)" stroke="var(--c-neutral-500)" stroke-width="0.9" />
             <polygon points="39,0 37.5,3 40.5,3" fill="#ef4444" />
-            <line x1="37" y1="7" x2="41" y2="7" stroke="#f87171" stroke-width="1" />
-            <line x1="37" y1="12" x2="41" y2="12" stroke="#f87171" stroke-width="1" />
+            <line x1="37" y1="7" x2="41" y2="7" stroke="var(--c-force)" stroke-width="1" />
+            <line x1="37" y1="12" x2="41" y2="12" stroke="var(--c-force)" stroke-width="1" />
 
             <!-- 仓储/配电设施 D (右翼) -->
-            <rect x="46" y="14" width="8" height="7" rx="0.5" fill="#334155" stroke="#64748b" stroke-width="0.8" />
+            <rect x="46" y="14" width="8" height="7" rx="0.5" fill="var(--c-neutral-700)" stroke="var(--c-neutral-500)" stroke-width="0.8" />
           </g>
 
           <!-- 额外产热向上直冲箭头 (深红高能粗箭头，正对地球中心 336 垂直向上) -->
           <CourseArrow :from="{ x: 336, y: 44 }" :to="{ x: 336, y: 20 }" stroke="#ef4444" :stroke-width="3.8" :head-size="14" />
 
           <!-- 对称热浪波动波纹 -->
-          <path d="M 324 34 Q 328 28 324 22" fill="none" stroke="#f87171" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
-          <path d="M 348 34 Q 352 28 348 22" fill="none" stroke="#f87171" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+          <path d="M 324 34 Q 328 28 324 22" fill="none" stroke="var(--c-force)" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+          <path d="M 348 34 Q 352 28 348 22" fill="none" stroke="var(--c-force)" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
 
           <!-- “人类活动额外产热” 核心警示文字 (18px 醒目红字，正对 336 居中) -->
-          <text x="336" y="14" text-anchor="middle" font-size="18" font-weight="bold" fill="#f87171" letter-spacing="0.5">人类活动额外产热</text>
+          <text x="336" y="14" text-anchor="middle" font-size="18" font-weight="bold" fill="var(--c-force)" letter-spacing="0.5">人类活动额外产热</text>
         </g>
       </g>
 
       <!-- ==================== 区域 3：向太空辐射散热 (右侧) ==================== -->
       <g id="space-radiation" transform="translate(0, 0)">
         <!-- 4 组向冷寂深空散热的辐射热波箭头 (蓝紫/天青色) -->
-        <CourseArrow :from="{ x: 382, y: 80 }" :to="{ x: 502, y: 34 }" stroke="#38bdf8" :stroke-width="3.4" :head-size="13" />
-        <CourseArrow :from="{ x: 396, y: 104 }" :to="{ x: 518, y: 80 }" stroke="#38bdf8" :stroke-width="3.4" :head-size="13" />
-        <CourseArrow :from="{ x: 398, y: 130 }" :to="{ x: 518, y: 152 }" stroke="#38bdf8" :stroke-width="3.4" :head-size="13" />
-        <CourseArrow :from="{ x: 382, y: 152 }" :to="{ x: 502, y: 198 }" stroke="#38bdf8" :stroke-width="3.4" :head-size="13" />
+        <CourseArrow :from="{ x: 382, y: 80 }" :to="{ x: 502, y: 34 }" stroke="var(--c-physics-light)" :stroke-width="3.4" :head-size="13" />
+        <CourseArrow :from="{ x: 396, y: 104 }" :to="{ x: 518, y: 80 }" stroke="var(--c-physics-light)" :stroke-width="3.4" :head-size="13" />
+        <CourseArrow :from="{ x: 398, y: 130 }" :to="{ x: 518, y: 152 }" stroke="var(--c-physics-light)" :stroke-width="3.4" :head-size="13" />
+        <CourseArrow :from="{ x: 382, y: 152 }" :to="{ x: 502, y: 198 }" stroke="var(--c-physics-light)" :stroke-width="3.4" :head-size="13" />
 
         <!-- 红外辐射波折线示意 (体现长波辐射) -->
         <path d="M 432 52 Q 442 48 452 52 T 472 52" fill="none" stroke="#818cf8" stroke-width="1.8" stroke-linecap="round" opacity="0.75" />
         <path d="M 442 164 Q 452 160 462 164 T 482 164" fill="none" stroke="#818cf8" stroke-width="1.8" stroke-linecap="round" opacity="0.75" />
 
         <!-- “向太空辐射散热” 标题大字 (19px 粗体天蓝色) -->
-        <text x="536" y="120" text-anchor="start" font-size="19" font-weight="bold" fill="#38bdf8" letter-spacing="1">向太空辐射散热</text>
+        <text x="536" y="120" text-anchor="start" font-size="19" font-weight="bold" fill="var(--c-physics-light)" letter-spacing="1">向太空辐射散热</text>
       </g>
 
       <!-- ==================== 底部：核心规律与物理边界结论 ==================== -->
@@ -264,14 +264,14 @@ const { step = 1, showImbalance = true } = defineProps<{
         <!-- 核心物理结论文字 (17px 加粗醒目文字，精确居中排版) -->
         <text x="-156" y="5.5" text-anchor="start" font-size="17" font-weight="bold" fill="#fecaca" letter-spacing="0.5">
           额外产热超出地球散热能力
-          <tspan fill="#f87171" font-weight="900">→</tspan>
+          <tspan fill="var(--c-force)" font-weight="900">→</tspan>
           <tspan fill="#ffffff" font-weight="bold">全球气温上升</tspan>
         </text>
       </g>
 
       <!-- step === 0 时：自然平衡基准状态标语 -->
       <g v-else id="bottom-baseline" transform="translate(345, 226)">
-        <rect x="-180" y="-16" width="360" height="32" rx="16" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+        <rect x="-180" y="-16" width="360" height="32" rx="16" fill="var(--c-neutral-900)" stroke="var(--c-physics-light)" stroke-width="1.5" />
         <text x="0" y="5.5" text-anchor="middle" font-size="17" font-weight="bold" fill="#7dd3fc" letter-spacing="0.5">自然状态：吸热与散热保持动态平衡</text>
       </g>
     </svg>

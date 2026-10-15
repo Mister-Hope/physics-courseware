@@ -137,38 +137,38 @@ const vb = VIEW_BOX[mode];
   <svg :viewBox="vb" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <template v-if="mode === 'coaxial'">
       <circle :cx="CO.x" :cy="CO.y" :r="CO_R1" fill="none" stroke="currentColor" stroke-width="2.4" opacity="0.7" />
-      <circle :cx="CO.x" :cy="CO.y" :r="CO_R2" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="2.2" />
+      <circle :cx="CO.x" :cy="CO.y" :r="CO_R2" fill="color-mix(in srgb, var(--c-velocity) 12%, transparent)" stroke="var(--c-velocity)" stroke-width="2.2" />
       <line :x1="CO.x" :y1="CO.y" :x2="coA.x" :y2="coA.y" stroke="currentColor" stroke-width="1.6" stroke-dasharray="6 5" opacity="0.6" />
       <g v-if="showRotation">
-        <path :d="coRot.d" fill="none" stroke="#e2a846" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
-        <polygon :points="coRot.head" fill="#e2a846" />
+        <path :d="coRot.d" fill="none" stroke="var(--c-accent)" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
+        <polygon :points="coRot.head" fill="var(--c-accent)" />
       </g>
       <circle :cx="CO.x" :cy="CO.y" r="4" fill="currentColor" opacity="0.8" />
-      <circle :cx="coA.x" :cy="coA.y" r="5.5" fill="#e2a846" />
-      <circle :cx="coB.x" :cy="coB.y" r="5.5" fill="#60a5fa" />
-      <text :x="coA.x + 11" :y="coA.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">A</text>
-      <text :x="coB.x + 11" :y="coB.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="#60a5fa">B</text>
+      <circle :cx="coA.x" :cy="coA.y" r="5.5" fill="var(--c-accent)" />
+      <circle :cx="coB.x" :cy="coB.y" r="5.5" fill="var(--c-velocity)" />
+      <text :x="coA.x + 11" :y="coA.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
+      <text :x="coB.x + 11" :y="coB.y + 5" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-velocity)">B</text>
     </template>
 
     <template v-else-if="mode === 'belt'">
       <circle :cx="B1.x" :cy="B1.y" :r="B_R1" fill="none" stroke="currentColor" stroke-width="2.4" opacity="0.7" />
       <circle :cx="B2.x" :cy="B2.y" :r="B_R2" fill="none" stroke="currentColor" stroke-width="2.4" opacity="0.7" />
-      <line :x1="P1.x" :y1="P1.y" :x2="P2.x" :y2="P2.y" stroke="#60a5fa" stroke-width="3.4" opacity="0.9" />
-      <line :x1="P1b.x" :y1="P1b.y" :x2="P2b.x" :y2="P2b.y" stroke="#60a5fa" stroke-width="3.4" opacity="0.9" />
-      <path :d="beltWrap1" fill="none" stroke="#60a5fa" stroke-width="3.4" opacity="0.9" stroke-linecap="round" />
-      <path :d="beltWrap2" fill="none" stroke="#60a5fa" stroke-width="3.4" opacity="0.9" stroke-linecap="round" />
+      <line :x1="P1.x" :y1="P1.y" :x2="P2.x" :y2="P2.y" stroke="var(--c-velocity)" stroke-width="3.4" opacity="0.9" />
+      <line :x1="P1b.x" :y1="P1b.y" :x2="P2b.x" :y2="P2b.y" stroke="var(--c-velocity)" stroke-width="3.4" opacity="0.9" />
+      <path :d="beltWrap1" fill="none" stroke="var(--c-velocity)" stroke-width="3.4" opacity="0.9" stroke-linecap="round" />
+      <path :d="beltWrap2" fill="none" stroke="var(--c-velocity)" stroke-width="3.4" opacity="0.9" stroke-linecap="round" />
       <g v-if="showRotation">
-        <path :d="beltRot1.d" fill="none" stroke="#e2a846" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
-        <polygon :points="beltRot1.head" fill="#e2a846" />
-        <path :d="beltRot2.d" fill="none" stroke="#e2a846" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
-        <polygon :points="beltRot2.head" fill="#e2a846" />
+        <path :d="beltRot1.d" fill="none" stroke="var(--c-accent)" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
+        <polygon :points="beltRot1.head" fill="var(--c-accent)" />
+        <path :d="beltRot2.d" fill="none" stroke="var(--c-accent)" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
+        <polygon :points="beltRot2.head" fill="var(--c-accent)" />
       </g>
       <circle :cx="B1.x" :cy="B1.y" r="4" fill="currentColor" opacity="0.8" />
       <circle :cx="B2.x" :cy="B2.y" r="4" fill="currentColor" opacity="0.8" />
-      <circle :cx="P1.x" :cy="P1.y" r="5.5" fill="#e2a846" />
-      <circle :cx="P2.x" :cy="P2.y" r="5.5" fill="#e2a846" />
-      <text :x="P1.x - 9" :y="P1.y - 5" text-anchor="end" font-size="21" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">A</text>
-      <text :x="P2.x + 11" :y="P2.y - 4" font-size="21" font-family="KaTeX_Math" font-style="italic" fill="#e2a846">B</text>
+      <circle :cx="P1.x" :cy="P1.y" r="5.5" fill="var(--c-accent)" />
+      <circle :cx="P2.x" :cy="P2.y" r="5.5" fill="var(--c-accent)" />
+      <text :x="P1.x - 9" :y="P1.y - 5" text-anchor="end" font-size="21" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">A</text>
+      <text :x="P2.x + 11" :y="P2.y - 4" font-size="21" font-family="KaTeX_Math" font-style="italic" fill="var(--c-accent)">B</text>
     </template>
 
     <template v-else>
@@ -177,14 +177,14 @@ const vb = VIEW_BOX[mode];
       <circle :cx="G2.x" :cy="G2.y" :r="G_R2" fill="none" stroke="currentColor" stroke-width="2.4" opacity="0.7" />
       <line v-for="(t, i) in gearTeeth2" :key="`g2-${i}`" :x1="t.x1" :y1="t.y1" :x2="t.x2" :y2="t.y2" stroke="currentColor" stroke-width="1.5" opacity="0.5" />
       <g v-if="showRotation">
-        <path :d="gearRot1.d" fill="none" stroke="#e2a846" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
-        <polygon :points="gearRot1.head" fill="#e2a846" />
-        <path :d="gearRot2.d" fill="none" stroke="#60a5fa" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
-        <polygon :points="gearRot2.head" fill="#60a5fa" />
+        <path :d="gearRot1.d" fill="none" stroke="var(--c-accent)" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
+        <polygon :points="gearRot1.head" fill="var(--c-accent)" />
+        <path :d="gearRot2.d" fill="none" stroke="var(--c-velocity)" stroke-width="2.8" opacity="0.9" stroke-linecap="round" />
+        <polygon :points="gearRot2.head" fill="var(--c-velocity)" />
       </g>
       <circle :cx="G1.x" :cy="G1.y" r="4" fill="currentColor" opacity="0.8" />
       <circle :cx="G2.x" :cy="G2.y" r="4" fill="currentColor" opacity="0.8" />
-      <circle :cx="contact.x" :cy="contact.y" r="5.5" fill="#e2a846" />
+      <circle :cx="contact.x" :cy="contact.y" r="5.5" fill="var(--c-accent)" />
     </template>
   </svg>
 </template>

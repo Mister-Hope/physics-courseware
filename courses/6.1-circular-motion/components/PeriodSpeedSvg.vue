@@ -32,10 +32,10 @@ const rLabel = { x: (O.x + ball.x) / 2 + 13, y: (O.y + ball.y) / 2 };
 <template>
   <svg viewBox="66 24 186 194" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="6 6" opacity="0.28" />
-    <path :d="rotationD" fill="none" stroke="#e2a846" stroke-width="3.2" stroke-linecap="round" />
-    <polygon :points="headPts" fill="#e2a846" />
+    <path :d="rotationD" fill="none" stroke="var(--c-accent)" stroke-width="3.2" stroke-linecap="round" />
+    <polygon :points="headPts" fill="var(--c-accent)" />
     <line :x1="O.x" :y1="O.y" :x2="ball.x" :y2="ball.y" stroke="currentColor" stroke-width="1.8" opacity="0.8" />
-    <circle :cx="ball.x" :cy="ball.y" r="6" fill="#e2a846" />
+    <circle :cx="ball.x" :cy="ball.y" r="6" fill="var(--c-accent)" />
     <circle :cx="O.x" :cy="O.y" r="3.5" fill="currentColor" opacity="0.8" />
     <text :x="O.x - 8" :y="O.y + 19" text-anchor="middle" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="currentColor">O</text>
     <text :x="rLabel.x" :y="rLabel.y" text-anchor="middle" font-size="19" font-family="KaTeX_Math" font-style="italic" fill="currentColor">r</text>

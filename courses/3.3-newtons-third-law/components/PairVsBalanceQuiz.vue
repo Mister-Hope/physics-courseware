@@ -129,7 +129,7 @@ const navigate = (step: number): void => {
 }
 
 .pb-scene {
-  color: #f1f5f9;
+  color: var(--c-text);
   font-weight: 700;
   font-size: 1.22rem;
   line-height: 1.5;
@@ -144,7 +144,7 @@ const navigate = (step: number): void => {
 .pb-btn {
   padding: 0.5rem 1.3rem;
   border: 1px solid rgb(148 163 184 / 30%);
-  border-radius: 2rem;
+  border-radius: 999px;
 
   background: rgb(148 163 184 / 8%);
   color: #cbd5e1;
@@ -164,21 +164,21 @@ const navigate = (step: number): void => {
 
 .pb-btn:hover:not(:disabled) {
   border-color: rgb(226 168 70 / 60%);
-  background: rgb(226 168 70 / 12%);
-  color: #f1f5f9;
+  background: var(--c-accent-soft);
+  color: var(--c-text);
 }
 
 .pb-btn.right {
   border-color: rgb(52 211 153 / 55%);
-  background: rgb(52 211 153 / 14%);
-  color: #34d399;
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
   opacity: 1;
 }
 
 .pb-btn.wrong {
   border-color: rgb(248 113 113 / 55%);
-  background: rgb(248 113 113 / 14%);
-  color: #f87171;
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
   opacity: 1;
 }
 
@@ -189,9 +189,9 @@ const navigate = (step: number): void => {
 
   min-height: 4.4rem;
   padding: 0.7rem 0.9rem;
-  border-radius: 1rem;
+  border-radius: var(--radius-lg);
 
-  background: rgb(30 41 59 / 55%);
+  background: var(--c-surface);
   color: #cbd5e1;
 
   font-size: 0.98rem;
@@ -206,7 +206,7 @@ const navigate = (step: number): void => {
   flex: 0 0 auto;
 
   padding: 0.1rem 0.6rem;
-  border-radius: 2rem;
+  border-radius: 999px;
 
   font-weight: 700;
   font-size: 0.78rem;
@@ -214,14 +214,14 @@ const navigate = (step: number): void => {
 
 .pb-badge.ok {
   border: 1px solid rgb(52 211 153 / 35%);
-  background: rgb(52 211 153 / 12%);
-  color: #34d399;
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
 }
 
 .pb-badge.no {
   border: 1px solid rgb(248 113 113 / 35%);
-  background: rgb(248 113 113 / 12%);
-  color: #f87171;
+  background: var(--c-danger-soft);
+  color: var(--c-danger);
 }
 
 .pb-nav {
@@ -232,7 +232,7 @@ const navigate = (step: number): void => {
 .pb-nav-btn {
   padding: 0.3rem 1.1rem;
   border: 1px solid rgb(148 163 184 / 25%);
-  border-radius: 2rem;
+  border-radius: 999px;
 
   background: transparent;
   color: #cbd5e1;
@@ -249,6 +249,6 @@ const navigate = (step: number): void => {
 
 .pb-nav-btn:hover:not(:disabled) {
   border-color: rgb(148 163 184 / 55%);
-  color: #f1f5f9;
+  color: var(--c-text);
 }
 </style>

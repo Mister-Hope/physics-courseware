@@ -144,7 +144,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
   <div class="flex min-h-0 w-full flex-1 items-center justify-center">
     <svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" class="h-full w-auto max-w-full">
       <!-- 磁场：⊗（垂直纸面向里）阵列（间距 110），暖金半透明（背景层） -->
-      <g stroke="rgba(226,168,70,0.55)" stroke-width="1.4" fill="none">
+      <g stroke="color-mix(in srgb, var(--c-accent) 55%, transparent)" stroke-width="1.4" fill="none">
         <template v-for="(d, i) in B_DOTS" :key="`b${i}`">
           <circle :cx="d.x" :cy="d.y" :r="B_DOT_R" />
           <line
@@ -165,13 +165,13 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
       <CourseArrow
         :from="{ x: O.x, y: 430 }"
         :to="{ x: O.x, y: 45 }"
-        stroke="rgba(203,213,225,0.8)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)"
         stroke-width="2"
       />
       <CourseArrow
         :from="O"
         :to="{ x: 660, y: O.y }"
-        stroke="rgba(203,213,225,0.8)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)"
         stroke-width="2"
       />
       <text
@@ -181,7 +181,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         y
       </text>
@@ -192,7 +192,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         x
       </text>
@@ -204,7 +204,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         O
       </text>
@@ -213,7 +213,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         v-if="showPath"
         :d="arcPath"
         fill="none"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="3.2"
         stroke-linecap="round"
       />
@@ -223,7 +223,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         :y1="O.y"
         :x2="P.x"
         :y2="P.y"
-        stroke="rgba(203,213,225,0.6)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 60%, transparent)"
         stroke-width="1.6"
         stroke-dasharray="7 6"
       />
@@ -235,12 +235,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         L
       </text>
       <!-- P 点与标注 -->
-      <circle :cx="P.x" :cy="P.y" r="6" fill="#f8fafc" />
+      <circle :cx="P.x" :cy="P.y" r="6" fill="var(--c-neutral-50)" />
       <text
         v-bind="HALO"
         :x="P.x + 16"
@@ -248,12 +248,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#f8fafc"
+        fill="var(--c-neutral-50)"
       >
         P
       </text>
       <!-- O 处的 θ 角弧：下半 y 轴方向与 OP 之间（CO 正沿下半 y 轴，故 θ 也就是 △OMC 在 O 处的角） -->
-      <path :d="thetaArcPath" fill="none" stroke="#e2a846" stroke-width="2.2" />
+      <path :d="thetaArcPath" fill="none" stroke="var(--c-accent)" stroke-width="2.2" />
       <text
         v-bind="HALO"
         :x="thetaLabel.x"
@@ -262,12 +262,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#e2a846"
+        fill="var(--c-accent)"
       >
         θ
       </text>
       <!-- 入射速度 v_0：从 O 沿 +x（与 x 轴重合的那一段用蓝色加粗箭头压出来） -->
-      <CourseArrow :from="O" :to="{ x: 262, y: O.y }" stroke="#60a5fa" stroke-width="3.4" />
+      <CourseArrow :from="O" :to="{ x: 262, y: O.y }" stroke="var(--c-velocity)" stroke-width="3.4" />
       <text
         v-bind="HALO"
         x="216"
@@ -276,7 +276,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
       >
         <tspan>v</tspan>
         <tspan dy="5" font-size="15">0</tspan>
@@ -284,7 +284,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
       <!-- ===== 以下都是点击后才新增的讲解标注（false 时完全不存在，不影响任何已有元素的位置）===== -->
       <g v-if="showSolution">
         <!-- 圆心 C 与虚线半径 CO、CP（标 r） -->
-        <circle :cx="C.x" :cy="C.y" r="6" fill="#f8fafc" />
+        <circle :cx="C.x" :cy="C.y" r="6" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="C.x - 18"
@@ -293,7 +293,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="24"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           C
         </text>
@@ -302,7 +302,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           :y1="C.y"
           :x2="O.x"
           :y2="O.y"
-          stroke="rgba(226,168,70,0.9)"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
@@ -311,7 +311,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           :y1="C.y"
           :x2="P.x"
           :y2="P.y"
-          stroke="rgba(226,168,70,0.9)"
+          stroke="color-mix(in srgb, var(--c-accent) 90%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
@@ -322,7 +322,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           r
         </text>
@@ -333,14 +333,14 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="22"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           r
         </text>
         <!-- C 处圆心角小弧（∠OCP = 180° − 2θ，只示意、不标数值） -->
-        <path :d="centralArcPath" fill="none" stroke="rgba(226,168,70,0.75)" stroke-width="1.8" />
+        <path :d="centralArcPath" fill="none" stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)" stroke-width="1.8" />
         <!-- OP 的中点 M + CM 虚线 + M 处直角标记（CM ⊥ OP） -->
-        <circle :cx="M.x" :cy="M.y" r="5" fill="#f8fafc" />
+        <circle :cx="M.x" :cy="M.y" r="5" fill="var(--c-neutral-50)" />
         <text
           v-bind="HALO"
           :x="M.x + 12"
@@ -348,7 +348,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="24"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           M
         </text>
@@ -357,11 +357,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": "4", "paint-order": "stroke" }
           :y1="C.y"
           :x2="M.x"
           :y2="M.y"
-          stroke="rgba(96,165,250,0.9)"
+          stroke="color-mix(in srgb, var(--c-velocity) 90%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
-        <path :d="rightAnglePath" fill="none" stroke="rgba(241,245,249,0.85)" stroke-width="1.8" />
+        <path :d="rightAnglePath" fill="none" stroke="color-mix(in srgb, var(--c-text) 85%, transparent)" stroke-width="1.8" />
       </g>
     </svg>
   </div>

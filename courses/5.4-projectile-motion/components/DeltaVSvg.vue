@@ -42,32 +42,32 @@ const trajectory = computed(() => `M ${ORIGIN.x} ${ORIGIN.y} L ${samples.value.m
 <template>
   <div class="delta-v">
     <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="每隔相同时间的速度矢量与速度变化量">
-      <path :d="trajectory" fill="none" stroke="rgba(148,163,184,0.7)" stroke-width="2.6" stroke-linecap="round" />
-      <line x1="60" y1="300" x2="520" y2="300" stroke="rgba(148,163,184,0.35)" stroke-width="1.6" stroke-dasharray="7 6" />
-      <circle :cx="ORIGIN.x" :cy="ORIGIN.y" r="4.5" fill="#e2e8f0" />
-      <text :x="ORIGIN.x - 26" :y="ORIGIN.y - 10" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2e8f0">O</text>
-      <CourseArrow :from="ORIGIN" :to="{ x: ORIGIN.x + 108, y: ORIGIN.y }" stroke="#e2a846" :stroke-width="3" />
-      <text :x="ORIGIN.x + 36" :y="ORIGIN.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#e2a846">
+      <path :d="trajectory" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="2.6" stroke-linecap="round" />
+      <line x1="60" y1="300" x2="520" y2="300" stroke="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+      <circle :cx="ORIGIN.x" :cy="ORIGIN.y" r="4.5" fill="var(--c-neutral-200)" />
+      <text :x="ORIGIN.x - 26" :y="ORIGIN.y - 10" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-neutral-200)">O</text>
+      <CourseArrow :from="ORIGIN" :to="{ x: ORIGIN.x + 108, y: ORIGIN.y }" stroke="var(--c-accent)" :stroke-width="3" />
+      <text :x="ORIGIN.x + 36" :y="ORIGIN.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-accent)">
         v
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">0</tspan>
       </text>
       <g v-for="(s, i) in samples" :key="i">
-        <circle :cx="s.pos.x" :cy="s.pos.y" r="5" fill="#e2a846" />
-        <CourseArrow :from="s.pos" :to="s.tip" stroke="#f87171" :stroke-width="3.2" />
+        <circle :cx="s.pos.x" :cy="s.pos.y" r="5" fill="var(--c-accent)" />
+        <CourseArrow :from="s.pos" :to="s.tip" stroke="var(--c-force)" :stroke-width="3.2" />
         <text :x="s.tip.x + 8" :y="s.tip.y + 4" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="#fca5a5">
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">{{ i + 1 }}</tspan>
         </text>
       </g>
-      <CourseArrow :from="samples[0].tip" :to="samples[1].tip" stroke="#60a5fa" :stroke-width="3" stroke-dasharray="8 6" />
-      <CourseArrow :from="samples[1].tip" :to="samples[2].tip" stroke="#60a5fa" :stroke-width="3" stroke-dasharray="8 6" />
+      <CourseArrow :from="samples[0].tip" :to="samples[1].tip" stroke="var(--c-velocity)" :stroke-width="3" stroke-dasharray="8 6" />
+      <CourseArrow :from="samples[1].tip" :to="samples[2].tip" stroke="var(--c-velocity)" :stroke-width="3" stroke-dasharray="8 6" />
       <text
         :x="samples[0].tip.x + 14"
         :y="(samples[0].tip.y + samples[1].tip.y) / 2"
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="18"
-        fill="#93c5fd"
+        fill="var(--c-velocity-light)"
       >
         Δv
       </text>
@@ -77,7 +77,7 @@ const trajectory = computed(() => `M ${ORIGIN.x} ${ORIGIN.y} L ${samples.value.m
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="18"
-        fill="#93c5fd"
+        fill="var(--c-velocity-light)"
       >
         Δv
       </text>

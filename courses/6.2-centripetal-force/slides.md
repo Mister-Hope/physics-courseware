@@ -70,8 +70,8 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="hero-tag"><mdi-book-open-page-variant-outline /> 定义</div>
-<div class="card card-hero">大量实例表明：做匀速圆周运动的物体所受的合力<b>总指向圆心</b>。这个指向圆心的力叫作<b>向心力</b>（centripetal force）。</div>
+<div class="def-tag"><mdi-book-open-page-variant-outline /> 定义</div>
+<div class="card def-card text-3xl">大量实例表明：做匀速圆周运动的物体所受的合力<b>总指向圆心</b>。这个指向圆心的力叫作<b>向心力</b>（centripetal force）。</div>
 </div>
 
 ---
@@ -163,9 +163,9 @@ clicks: 3
 <div class="page-grow">
 <div class="ask ask-lead">研究 <Latex tex="F_n" /> 与 <Latex tex="m" />、<Latex tex="\omega" />、<Latex tex="r" /> 的关系时，怎样才能在改变一个量时保持其他量不变？</div>
 <div class="stack">
-<div v-click="1">保持 <Latex tex="m" />、<Latex tex="r" /> 不变，改变转速 → <Latex tex="F_n" /> 与 <Latex tex="\omega^2" /> 成正比</div>
-<div v-click="2">保持 <Latex tex="m" />、<Latex tex="\omega" /> 不变，改变小球所在半径 → <Latex tex="F_n" /> 与 <Latex tex="r" /> 成正比</div>
-<div v-click="3">保持 <Latex tex="r" />、<Latex tex="\omega" /> 不变，换用不同质量的小球 → <Latex tex="F_n" /> 与 <Latex tex="m" /> 成正比</div>
+<div v-click="1"><mdi-numeric-1-circle class="text-lg inline-block align-middle mr-1" />保持 <Latex tex="m" />、<Latex tex="r" /> 不变，改变转速 → <Latex tex="F_n" /> 与 <Latex tex="\omega^2" /> 成正比</div>
+<div v-click="2"><mdi-numeric-2-circle class="text-lg inline-block align-middle mr-1" />保持 <Latex tex="m" />、<Latex tex="\omega" /> 不变，改变小球所在半径 → <Latex tex="F_n" /> 与 <Latex tex="r" /> 成正比</div>
+<div v-click="3"><mdi-numeric-3-circle class="text-lg inline-block align-middle mr-1" />保持 <Latex tex="r" />、<Latex tex="\omega" /> 不变，换用不同质量的小球 → <Latex tex="F_n" /> 与 <Latex tex="m" /> 成正比</div>
 </div>
 </div>
 
@@ -178,13 +178,13 @@ layout: base-flex
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="mini-title">误差来源</div>
+<div class="mini-title"><mdi-alert-circle-outline /> 误差来源</div>
 <div>转轴与槽之间存在<b>摩擦力</b>，实测受力偏大</div>
 <div>弹簧测力套筒的弹簧长期使用后<b>老化</b>，读数不准</div>
 <div>皮带太松会出现<b>打滑</b>，两球的实际转速与预期不符</div>
 </div>
 <div class="stack divider-l">
-<div class="mini-title">操作要点</div>
+<div class="mini-title"><mdi-format-list-numbered /> 操作要点</div>
 <div>摇动手柄时<b>缓慢加速</b>，让小球平稳地进入圆周运动</div>
 <div>观察标尺露出的<b>格数</b>，达到预定格数后保持转速<b>均匀恒定</b></div>
 </div>
@@ -201,7 +201,7 @@ clicks: 2
 <div class="page-grow">
 <div class="ask ask-lead">实验表明，<Latex tex="F_n" /> 与 <Latex tex="m" />、<Latex tex="\omega" />、<Latex tex="r" /> 各是什么关系？</div>
 <div v-click="1">与质量成正比，与角速度的平方成正比，与半径成正比：</div>
-<div class="big-formula" v-click="2"><Latex tex="F_n = m\omega^2 r" /></div>
+<div class="text-4xl text-accent text-center" v-click="2"><Latex tex="F_n = m\omega^2 r" /></div>
 <div v-click="2">由 <Latex tex="v = \omega r" /> 可得另一种写法：<Latex tex="F_n = m\frac{v^2}{r}" /></div>
 </div>
 
@@ -213,7 +213,7 @@ clicks: 2
 # 例题
 
 <div class="page-grow">
-<div class="problem">一个圆盘在水平面内匀速转动，角速度 <Latex tex="\omega = 4\ \text{rad/s}" />。盘面上距圆盘中心 <Latex tex="r = 0.10\ \text{m}" /> 处有一个质量 <Latex tex="m = 0.10\ \text{kg}" /> 的小物体，随圆盘一起做匀速圆周运动。求小物体所受向心力的大小。</div>
+<div>一个圆盘在水平面内匀速转动，角速度 <Latex tex="\omega = 4\ \text{rad/s}" />。盘面上距圆盘中心 <Latex tex="r = 0.10\ \text{m}" /> 处有一个质量 <Latex tex="m = 0.10\ \text{kg}" /> 的小物体，随圆盘一起做匀速圆周运动。求小物体所受向心力的大小。</div>
 <div class="half-grid">
 <div class="figure-cell"><DiscFrictionSvg :show-forces="$clicks >= 1" /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
@@ -245,11 +245,11 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack">
-<div>定义：做匀速圆周运动的物体所受的合力指向圆心，这个力叫向心力</div>
-<div>作用效果：只改变速度的<b>方向</b>，不改变速度的<b>大小</b></div>
-<div>命名：不是性质力，是按<b>作用效果</b>命名的 —— 要由别的力来充当</div>
-<div>方向：指向圆心、与线速度垂直、时刻改变 → 向心力是<b>变力</b></div>
-<div>大小：<Latex tex="F_n = m\omega^2 r = m\frac{v^2}{r}" /></div>
+<div class="summary-line"><mdi-book-open-variant class="text-lg inline-block align-middle mr-1" />定义：做匀速圆周运动的物体所受的合力指向圆心，这个力叫向心力</div>
+<div class="summary-line"><mdi-arrow-right-bold class="text-lg inline-block align-middle mr-1" />作用效果：只改变速度的<b>方向</b>，不改变速度的<b>大小</b></div>
+<div class="summary-line"><mdi-tag-outline class="text-lg inline-block align-middle mr-1" />命名：不是性质力，是按<b>作用效果</b>命名的 —— 要由别的力来充当</div>
+<div class="summary-line"><mdi-crosshairs class="text-lg inline-block align-middle mr-1" />方向：指向圆心、与线速度垂直、时刻改变 → 向心力是<b>变力</b></div>
+<div class="summary-line"><mdi-equal class="text-lg inline-block align-middle mr-1" />大小：<Latex tex="F_n = m\omega^2 r = m\frac{v^2}{r}" /></div>
 </div>
 </div>
 
@@ -322,7 +322,7 @@ clicks: 3
 # 例题
 
 <div class="page-grow">
-<div class="problem">一辆汽车在水平公路上转弯，沿曲线由 M 向 N 行驶，速度逐渐减小。图中已经画出一种可能的合力方向 <Latex tex="F" />（它与 <Latex tex="v" /> 垂直）—— 这个方向对吗？</div>
+<div>一辆汽车在水平公路上转弯，沿曲线由 M 向 N 行驶，速度逐渐减小。图中已经画出一种可能的合力方向 <Latex tex="F" />（它与 <Latex tex="v" /> 垂直）—— 这个方向对吗？</div>
 <div class="half-grid">
 <div class="figure-cell"><CarTurnDecelSvg :show-correct="$clicks >= 3" /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
@@ -372,9 +372,9 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack">
-<div>匀速圆周运动：合力指向圆心，只改变速度方向，<Latex tex="F_n = m\omega^2 r = m\frac{v^2}{r}" /></div>
-<div>变速圆周运动：合力不再指向圆心，分解为切向分力 <Latex tex="F_t" />（改变速率）与法向分力 <Latex tex="F_n" />（改变方向）</div>
-<div><Latex tex="\theta < 90^\circ" /> 加速的圆周运动；<Latex tex="\theta > 90^\circ" /> 减速的圆周运动</div>
-<div>一般曲线运动：看成一段段的圆周运动，用<b>曲率半径</b> <Latex tex="\rho" /> 按圆周运动的规律处理</div>
+<div class="summary-line"><mdi-circle-outline class="text-lg inline-block align-middle mr-1" />匀速圆周运动：合力指向圆心，只改变速度方向，<Latex tex="F_n = m\omega^2 r = m\frac{v^2}{r}" /></div>
+<div class="summary-line"><mdi-call-split class="text-lg inline-block align-middle mr-1" />变速圆周运动：合力不再指向圆心，分解为切向分力 <Latex tex="F_t" />（改变速率）与法向分力 <Latex tex="F_n" />（改变方向）</div>
+<div class="summary-line"><mdi-angle-acute class="text-lg inline-block align-middle mr-1" /><Latex tex="\theta < 90^\circ" /> 加速的圆周运动；<Latex tex="\theta > 90^\circ" /> 减速的圆周运动</div>
+<div class="summary-line"><mdi-vector-polyline class="text-lg inline-block align-middle mr-1" />一般曲线运动：看成一段段的圆周运动，用<b>曲率半径</b> <Latex tex="\rho" /> 按圆周运动的规律处理</div>
 </div>
 </div>

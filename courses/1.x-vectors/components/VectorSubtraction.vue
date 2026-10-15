@@ -64,7 +64,7 @@ const labels = computed(() => [
 </script>
 
 <template>
-  <div class="vs-figure">
+  <div class="figure">
     <CoordAxes
       :x-range="X_RANGE"
       :y-range="Y_RANGE"
@@ -105,12 +105,3 @@ const labels = computed(() => [
     </CoordAxes>
   </div>
 </template>
-
-<style scoped>
-/* 旧图是"裸" SVG（没有卡片边框 / 底色），这里保持一致 */
-.vs-figure {
-  width: 100%;
-  min-width: 0;
-  max-width: 19rem;
-}
-</style>

@@ -147,12 +147,12 @@ const panels = [0, 1, 2, 3].map((i) => {
     aria-label="分四步作出速度的变化量 Δv，并看出它指向圆心"
   >
     <g v-for="(p, i) in panels" v-show="i <= step" :key="i" :transform="`translate(${p.x} 0)`">
-      <circle :cx="CX" :cy="CY" :r="R" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-dasharray="8 7" opacity="0.55" />
-      <line :x1="CX" :y1="CY" :x2="p.A.x" :y2="p.A.y" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.45" />
-      <line :x1="CX" :y1="CY" :x2="p.B.x" :y2="p.B.y" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.45" />
-      <circle :cx="CX" :cy="CY" r="3.4" fill="#94a3b8" />
-      <circle :cx="p.A.x" :cy="p.A.y" r="5" fill="#f1f5f9" />
-      <circle :cx="p.B.x" :cy="p.B.y" r="5" fill="#f1f5f9" />
+      <circle :cx="CX" :cy="CY" :r="R" fill="none" stroke="var(--c-physics)" stroke-width="2.4" stroke-dasharray="8 7" opacity="0.55" />
+      <line :x1="CX" :y1="CY" :x2="p.A.x" :y2="p.A.y" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.45" />
+      <line :x1="CX" :y1="CY" :x2="p.B.x" :y2="p.B.y" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-dasharray="5 5" opacity="0.45" />
+      <circle :cx="CX" :cy="CY" r="3.4" fill="var(--c-text-dim)" />
+      <circle :cx="p.A.x" :cy="p.A.y" r="5" fill="var(--c-text)" />
+      <circle :cx="p.B.x" :cy="p.B.y" r="5" fill="var(--c-text)" />
       <CourseArrow
         v-for="(a, k) in p.arrows"
         :key="k"
@@ -173,14 +173,14 @@ const panels = [0, 1, 2, 3].map((i) => {
         :font-style="l.math ? 'italic' : 'normal'"
         :font-size="l.size"
         :fill="l.fill"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >
         {{ l.text }}
         <tspan v-if="l.sub" font-family="KaTeX_Main" font-style="normal" :font-size="l.size * 0.58" dy="5">{{ l.sub }}</tspan>
       </text>
-      <text :x="CX" :y="CAP_Y" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="#94a3b8">
+      <text :x="CX" :y="CAP_Y" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-text-dim)">
         <tspan
           v-for="(seg, si) in p.caption"
           :key="si"

@@ -3,7 +3,7 @@
        整个图形左右对称 ⇒ 两砖互相给的弹力只能是水平的；答案层给出接触点与水平向左的弹力。 -->
   <svg class="fig" viewBox="30 20 400 160" style="max-width: 30rem" xmlns="http://www.w3.org/2000/svg">
     <!-- 地面 -->
-    <line x1="40" y1="160" x2="420" y2="160" stroke="#cbd5e1" stroke-width="3" />
+    <line x1="40" y1="160" x2="420" y2="160" stroke="var(--c-neutral-300)" stroke-width="3" />
 
     <!-- 左右两块砖：长 180、厚 40，各倾斜 30°，上端内侧的棱接触于 (230,70) -->
     <rect
@@ -13,8 +13,8 @@
       height="40"
       rx="3"
       transform="translate(220,52.7) rotate(-30)"
-      fill="rgba(148,163,184,0.2)"
-      stroke="#cbd5e1"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
       stroke-width="2.4"
     />
     <rect
@@ -24,19 +24,19 @@
       height="40"
       rx="3"
       transform="translate(240,52.7) rotate(30)"
-      fill="rgba(148,163,184,0.2)"
-      stroke="#cbd5e1"
+      fill="color-mix(in srgb, var(--c-text-dim) 20%, transparent)"
+      stroke="var(--c-neutral-300)"
       stroke-width="2.4"
     />
 
     <!-- 接触点（常显） -->
-    <circle cx="230" cy="70" r="4" fill="#e2a846" />
+    <circle cx="230" cy="70" r="4" fill="var(--c-accent)" />
 
     <g v-if="showForces">
       <!-- 左右对称 ⇒ 这对弹力只能是水平方向 -->
-      <line x1="130" y1="70" x2="330" y2="70" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="6 5" />
-      <CourseArrow :from="{ x: 230, y: 70 }" :to="{ x: 140, y: 70 }" stroke="#e2a846" stroke-width="3" />
-      <text x="192" y="60" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="#e2a846">F</text>
+      <line x1="130" y1="70" x2="330" y2="70" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-dasharray="6 5" />
+      <CourseArrow :from="{ x: 230, y: 70 }" :to="{ x: 140, y: 70 }" stroke="var(--c-accent)" stroke-width="3" />
+      <text x="192" y="60" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-accent)">F</text>
     </g>
   </svg>
 </template>

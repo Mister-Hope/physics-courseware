@@ -60,9 +60,9 @@ const chord = computed(() => {
 </script>
 
 <template>
-  <div class="cw">
+  <div class="cg-coconut">
     <svg
-      class="cw-svg"
+      class="cg-coconut-svg"
       viewBox="0 0 600 340"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
@@ -77,8 +77,8 @@ const chord = computed(() => {
         :cx="COCO.x"
         :cy="COCO.y"
         :r="SHELL_R"
-        fill="rgba(148,163,184,0.10)"
-        stroke="#cbd5e1"
+        fill="color-mix(in srgb, var(--c-text-dim) 10%, transparent)"
+        stroke="var(--c-neutral-300)"
         stroke-width="3.4"
       />
       <rect
@@ -87,14 +87,14 @@ const chord = computed(() => {
         :width="SHELL_R * 2"
         :height="COCO.y + SHELL_R - surface"
         clip-path="url(#cw-shell)"
-        fill="rgba(96,165,250,0.34)"
+        fill="color-mix(in srgb, var(--c-velocity) 34%, transparent)"
       />
       <line
         :x1="chord.x1"
         :y1="surface"
         :x2="chord.x2"
         :y2="surface"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="2.6"
       />
       <line
@@ -102,7 +102,7 @@ const chord = computed(() => {
         :y1="COCO.y + SHELL_R - lowest.center * SHELL_R"
         :x2="COCO.x + SHELL_R + 30"
         :y2="COCO.y + SHELL_R - lowest.center * SHELL_R"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.6"
         stroke-dasharray="6 5"
       />
@@ -110,7 +110,7 @@ const chord = computed(() => {
         :x="COCO.x + SHELL_R + 36"
         :y="COCO.y + SHELL_R - lowest.center * SHELL_R + 5"
         font-size="15"
-        fill="#94a3b8"
+        fill="var(--c-text-dim)"
       >
         最低
       </text>
@@ -118,48 +118,48 @@ const chord = computed(() => {
         :x="COCO.x - SHELL_R - 36"
         :y="surface + 5"
         font-size="15"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
         text-anchor="end"
       >
         液面
       </text>
-      <circle :cx="COCO.x" :cy="COCO.y" r="4" fill="#64748b" />
+      <circle :cx="COCO.x" :cy="COCO.y" r="4" fill="var(--c-neutral-500)" />
       <circle
         :cx="COCO.x"
         :cy="COCO.y + SHELL_R - now.whole * SHELL_R"
         r="7"
-        fill="#f87171"
-        stroke="#0f1425"
+        fill="var(--c-force)"
+        stroke="var(--c-bg-soft)"
         stroke-width="2"
       />
       <text
         :x="COCO.x - SHELL_R - 12"
         :y="COCO.y + SHELL_R - now.whole * SHELL_R + 5"
         font-size="18"
-        fill="#f87171"
+        fill="var(--c-force)"
         text-anchor="end"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3.5"
         paint-order="stroke"
       >
         重心
       </text>
     </svg>
-    <div class="cw-ctrl">
-      <label class="cw-label">
+    <div class="cg-coconut-ctrl">
+      <label class="cg-coconut-label">
         <span>水位（空 ↔ 满）</span>
         <input v-model.number="fill" type="range" min="0" max="2" step="0.02" />
       </label>
-      <div class="cw-read">
-        水位升高：重心先<b class="cw-num">降低</b>、后<b class="cw-num">升高</b>
-        <span class="cw-note">重心最低的时候，恰好是液面与重心相重合的时候（图中虚线）</span>
+      <div class="cg-coconut-read">
+        水位升高：重心先<b class="cg-coconut-num">降低</b>、后<b class="cg-coconut-num">升高</b>
+        <span class="cg-coconut-note">重心最低的时候，恰好是液面与重心相重合的时候（图中虚线）</span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.cw {
+.cg-coconut {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -168,7 +168,7 @@ const chord = computed(() => {
   width: 100%;
 }
 
-.cw-svg {
+.cg-coconut-svg {
   display: block;
 
   width: auto;
@@ -177,7 +177,7 @@ const chord = computed(() => {
   margin: 0 auto;
 }
 
-.cw-ctrl {
+.cg-coconut-ctrl {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
@@ -187,7 +187,7 @@ const chord = computed(() => {
   max-width: 25rem;
 }
 
-.cw-label {
+.cg-coconut-label {
   display: flex;
   gap: 0.7rem;
   align-items: center;
@@ -199,24 +199,24 @@ const chord = computed(() => {
   font-size: 0.78rem;
 }
 
-.cw-label input {
+.cg-coconut-label input {
   flex: 1;
   min-width: 0;
   accent-color: var(--c-accent);
 }
 
-.cw-read {
+.cg-coconut-read {
   color: var(--c-text);
   font-size: 0.82rem;
   text-align: center;
 }
 
-.cw-num {
+.cg-coconut-num {
   color: var(--c-accent);
   font-size: 0.98rem;
 }
 
-.cw-note {
+.cg-coconut-note {
   display: block;
   margin-top: 0.1rem;
   color: var(--c-text-dim);

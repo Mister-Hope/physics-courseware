@@ -159,9 +159,9 @@ const hang = (id: string): void => {
 </script>
 
 <template>
-  <div class="hb">
+  <div class="cg-hang">
     <svg
-      class="hb-svg"
+      class="cg-hang-svg"
       viewBox="0 0 560 430"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
@@ -177,7 +177,7 @@ const hang = (id: string): void => {
         y1="215"
         x2="560"
         y2="215"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1"
         stroke-dasharray="4 6"
         opacity="0.22"
@@ -188,11 +188,11 @@ const hang = (id: string): void => {
       >
         <polygon
           :points="BOARD.map((point) => point.join(',')).join(' ')"
-          fill="rgba(148,163,184,0.14)"
-          stroke="#cbd5e1"
+          fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+          stroke="var(--c-neutral-300)"
           stroke-width="3"
         />
-        <g clip-path="url(#hb-clip)" stroke="#e2a846" stroke-width="2.2" stroke-dasharray="9 6">
+        <g clip-path="url(#hb-clip)" stroke="var(--c-accent)" stroke-width="2.2" stroke-dasharray="9 6">
           <line
             v-for="mark in marks"
             :key="mark.id"
@@ -207,8 +207,8 @@ const hang = (id: string): void => {
         <polygon
           :points="BOARD.map((point) => point.join(',')).join(' ')"
           :transform="`translate(${IDLE.x} ${IDLE.y})`"
-          fill="rgba(148,163,184,0.14)"
-          stroke="#cbd5e1"
+          fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
+          stroke="var(--c-neutral-300)"
           stroke-width="3"
         />
       </g>
@@ -219,7 +219,7 @@ const hang = (id: string): void => {
             :cy="hole.y"
             r="16"
             fill="transparent"
-            class="hb-hit"
+            class="cg-hang-hit"
             @click="hang(hole.id)"
           />
           <circle :cx="hole.x" :cy="hole.y" r="5" fill="none" stroke="#7dd3fc" stroke-width="2.4" />
@@ -240,30 +240,30 @@ const hang = (id: string): void => {
         :y1="NAIL.y"
         :x2="NAIL.x"
         y2="428"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="1.8"
         stroke-dasharray="7 6"
         opacity="0.75"
       />
       <g :transform="`translate(${NAIL.x} ${NAIL.y})`">
-        <circle r="7" fill="#64748b" />
-        <circle r="3" fill="#0f1425" />
+        <circle r="7" fill="var(--c-neutral-500)" />
+        <circle r="3" fill="var(--c-bg-soft)" />
       </g>
       <g v-if="centerWorld && picked.length >= 2">
         <circle
           :cx="centerWorld.x"
           :cy="centerWorld.y"
           r="7"
-          fill="#f87171"
-          stroke="#0f1425"
+          fill="var(--c-force)"
+          stroke="var(--c-bg-soft)"
           stroke-width="2"
         />
         <text
           :x="centerWorld.x + 14"
           :y="centerWorld.y + 27"
           font-size="18"
-          fill="#f87171"
-          stroke="#0f1425"
+          fill="var(--c-force)"
+          stroke="var(--c-bg-soft)"
           stroke-width="3"
           paint-order="stroke"
         >
@@ -271,17 +271,17 @@ const hang = (id: string): void => {
           <tspan font-family="KaTeX_Math" font-style="italic">O</tspan>
         </text>
       </g>
-      <line x1="0" y1="410" x2="560" y2="410" stroke="#94a3b8" stroke-width="2" opacity="0.25" />
+      <line x1="0" y1="410" x2="560" y2="410" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.25" />
     </svg>
-    <div class="hb-bar">
-      <span class="hb-hint">点击板上的小孔，分别悬挂两次</span>
-      <button v-if="picked.length" class="hb-reset" type="button" @click="picked = []">重来</button>
+    <div class="cg-hang-bar">
+      <span class="cg-hang-hint">点击板上的小孔，分别悬挂两次</span>
+      <button v-if="picked.length" class="cg-hang-reset" type="button" @click="picked = []">重来</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-.hb {
+.cg-hang {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -290,7 +290,7 @@ const hang = (id: string): void => {
   width: 100%;
 }
 
-.hb-svg {
+.cg-hang-svg {
   display: block;
 
   width: auto;
@@ -299,26 +299,26 @@ const hang = (id: string): void => {
   margin: 0 auto;
 }
 
-.hb-hit {
+.cg-hang-hit {
   cursor: pointer;
 }
 
-.hb-hit:hover + circle {
-  stroke: #e2a846;
+.cg-hang-hit:hover + circle {
+  stroke: var(--c-accent);
 }
 
-.hb-bar {
+.cg-hang-bar {
   display: flex;
   gap: 0.6rem;
   align-items: center;
 }
 
-.hb-hint {
+.cg-hang-hint {
   color: var(--c-text-dim);
   font-size: 0.72rem;
 }
 
-.hb-reset {
+.cg-hang-reset {
   padding: 0.1rem 0.7rem;
   border: 1px solid var(--c-border);
   border-radius: 2rem;
@@ -331,7 +331,7 @@ const hang = (id: string): void => {
   cursor: pointer;
 }
 
-.hb-reset:hover {
+.cg-hang-reset:hover {
   border-color: var(--c-accent);
   color: var(--c-accent);
 }

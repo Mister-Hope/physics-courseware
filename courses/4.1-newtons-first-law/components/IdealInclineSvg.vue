@@ -293,7 +293,7 @@ onUnmounted(() => cancelAnimationFrame(raf));
   <!-- 第 5 页：伽利略理想斜面实验——三条轨道逐条演示；最后小球在水平面上永不停息地匀速滚下去 -->
   <svg class="fig-incline" viewBox="0 100 1120 260" xmlns="http://www.w3.org/2000/svg" @click="advance">
     <!-- 1. 无限长水平地面主线与循环左移的地面斜剖线（实现无尽轨道效果） -->
-    <g :transform="`translate(${-groundTickOffset}, 0)`" stroke="rgba(148,163,184,0.32)" stroke-width="1.6" stroke-linecap="round">
+    <g :transform="`translate(${-groundTickOffset}, 0)`" stroke="color-mix(in srgb, var(--c-text-dim) 32%, transparent)" stroke-width="1.6" stroke-linecap="round">
       <line v-for="tx in GROUND_TICKS" :key="`tick-${tx}`" :x1="tx" :y1="330" :x2="tx - 10" :y2="342" />
     </g>
     <line x1="-40" y1="330" x2="1160" y2="330" :stroke="groundStroke" :stroke-width="groundWidth" stroke-linecap="round" />
@@ -301,11 +301,11 @@ onUnmounted(() => cancelAnimationFrame(raf));
     <!-- 2. 斜面轨道组（最后一步随 sceneOffset 平滑移出左边界） -->
     <g :transform="`translate(${-sceneOffset}, 0)`">
       <!-- 左侧斜面三角底座暗影衬托 -->
-      <polygon :points="`${LEFT_TOP.x},${LEFT_TOP.y} ${LEFT_TOP.x},${VERTEX.y} ${VERTEX.x},${VERTEX.y}`" fill="rgba(148,163,184,0.08)" />
-      <line :x1="LEFT_TOP.x" :y1="LEFT_TOP.y" :x2="LEFT_TOP.x" :y2="VERTEX.y" stroke="rgba(148,163,184,0.25)" stroke-width="1.6" stroke-dasharray="5 4" />
+      <polygon :points="`${LEFT_TOP.x},${LEFT_TOP.y} ${LEFT_TOP.x},${VERTEX.y} ${VERTEX.x},${VERTEX.y}`" fill="color-mix(in srgb, var(--c-text-dim) 8%, transparent)" />
+      <line :x1="LEFT_TOP.x" :y1="LEFT_TOP.y" :x2="LEFT_TOP.x" :y2="VERTEX.y" stroke="color-mix(in srgb, var(--c-text-dim) 25%, transparent)" stroke-width="1.6" stroke-dasharray="5 4" />
 
       <!-- 左侧释放斜面轨道 -->
-      <line :x1="LEFT_TOP.x" :y1="LEFT_TOP.y" :x2="VERTEX.x" :y2="VERTEX.y" stroke="rgba(203,213,225,0.82)" stroke-width="4.4" stroke-linecap="round" />
+      <line :x1="LEFT_TOP.x" :y1="LEFT_TOP.y" :x2="VERTEX.x" :y2="VERTEX.y" stroke="color-mix(in srgb, var(--c-neutral-300) 82%, transparent)" stroke-width="4.4" stroke-linecap="round" />
 
       <!-- 右侧三条不同倾角的对接斜面轨道及序号标注 -->
       <line
@@ -332,16 +332,16 @@ onUnmounted(() => cancelAnimationFrame(raf));
       </text>
 
       <!-- “同一高度”水平虚线与完整文字标注 -->
-      <line :x1="releaseBall.x" :y1="SAME_Y" x2="942" :y2="SAME_Y" stroke="rgba(226,168,70,0.45)" stroke-width="2" stroke-dasharray="8 6" />
-      <text x="956" :y="SAME_Y + 7" font-size="21" fill="#e2a846" font-weight="600">同一高度</text>
+      <line :x1="releaseBall.x" :y1="SAME_Y" x2="942" :y2="SAME_Y" stroke="color-mix(in srgb, var(--c-accent) 45%, transparent)" stroke-width="2" stroke-dasharray="8 6" />
+      <text x="956" :y="SAME_Y + 7" font-size="21" fill="var(--c-accent)" font-weight="600">同一高度</text>
 
       <!-- 释放点与三条轨道最高点的球心等高虚线圆环 -->
       <circle
         :cx="releaseBall.x"
         :cy="releaseBall.y"
         :r="BALL_R"
-        fill="rgba(226,168,70,0.08)"
-        stroke="rgba(226,168,70,0.6)"
+        fill="color-mix(in srgb, var(--c-accent) 8%, transparent)"
+        stroke="color-mix(in srgb, var(--c-accent) 60%, transparent)"
         stroke-width="2"
         stroke-dasharray="5 4"
       />
@@ -361,7 +361,7 @@ onUnmounted(() => cancelAnimationFrame(raf));
       <polyline
         :points="trailPoints"
         fill="none"
-        stroke="rgba(226,168,70,0.5)"
+        stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)"
         stroke-width="3.2"
         stroke-dasharray="6 5"
         stroke-linecap="round"
@@ -376,7 +376,7 @@ onUnmounted(() => cancelAnimationFrame(raf));
       :y1="ball.y"
       :x2="ball.x"
       :y2="ball.y"
-      stroke="rgba(226,168,70,0.5)"
+      stroke="color-mix(in srgb, var(--c-accent) 50%, transparent)"
       stroke-width="3.2"
       stroke-dasharray="6 5"
       stroke-linecap="round"
@@ -384,10 +384,10 @@ onUnmounted(() => cancelAnimationFrame(raf));
 
     <!-- 4. 在轨道上方持续滚动的立体金属小球 -->
     <g :transform="`translate(${ball.x}, ${ball.y})`">
-      <circle :r="BALL_R" fill="#e2a846" stroke="#fef08a" stroke-width="1.5" />
+      <circle :r="BALL_R" fill="var(--c-accent)" stroke="#fef08a" stroke-width="1.5" />
       <g :transform="`rotate(${ballAngle})`">
-        <line x1="-8" y1="0" x2="8" y2="0" stroke="rgba(15,20,37,0.45)" stroke-width="1.8" stroke-linecap="round" />
-        <line x1="0" y1="-8" x2="0" y2="8" stroke="rgba(15,20,37,0.45)" stroke-width="1.8" stroke-linecap="round" />
+        <line x1="-8" y1="0" x2="8" y2="0" stroke="color-mix(in srgb, var(--c-bg-soft) 45%, transparent)" stroke-width="1.8" stroke-linecap="round" />
+        <line x1="0" y1="-8" x2="0" y2="8" stroke="color-mix(in srgb, var(--c-bg-soft) 45%, transparent)" stroke-width="1.8" stroke-linecap="round" />
       </g>
       <circle cx="-3.5" cy="-4" r="3" fill="rgba(255,255,255,0.65)" />
     </g>

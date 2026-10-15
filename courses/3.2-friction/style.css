@@ -1,7 +1,9 @@
 /* ═══════════════════════════════════════════════
    摩擦力 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式。
+   本课概念前缀：fig-（示意图尺寸）· mf-（摩擦相关表格）· qa-（先问后答的辨析行）；
+   三个交互组件各用自己的前缀（bpf- / fdj- / sfg-），互不重叠。
    ═══════════════════════════════════════════════ */
 
 /* 正文密度用共享默认值（--page-gap 1.05rem / --stack-gap 0.95rem）；
@@ -18,10 +20,6 @@
   max-width: 330px;
 }
 
-.fig-xs {
-  max-width: 300px;
-}
-
 .fig-md {
   max-width: 400px;
 }
@@ -32,8 +30,8 @@
 
 /* ── 否定性提示框（第 7 页方案一「读数读不准」）——共享 .tag-icon 的中性蓝改成警示红 ── */
 .tag-icon-danger {
-  border-color: rgb(248 113 113 / 30%);
-  background: rgb(248 113 113 / 12%);
+  border-color: color-mix(in srgb, var(--c-danger) 30%, transparent);
+  background: var(--c-danger-soft);
   color: var(--c-danger);
 }
 
@@ -43,12 +41,12 @@
   justify-content: center;
 }
 
-/* ── 「候选项 + 问号 → 无关」的两行辨析（先问后答）── */
+/* ── 「候选项 + 问号 → 无关」的两行辨析（先问后答）——
+   字号走共享阶梯：slides.md 上给 .qa-line 挂 .text-xl、给 .qa-a 挂 .text-2xl ── */
 .qa-line {
   display: flex;
   gap: 1.2rem;
   align-items: baseline;
-  font-size: 1.3rem;
 }
 
 .qa-q {
@@ -58,14 +56,13 @@
 .qa-a {
   color: var(--c-accent);
   font-weight: 700;
-  font-size: 1.5rem;
 }
 
+/* ── 动摩擦因数表：字号沿用共享 table 正本（common.css 的 0.9rem），不再私调 ── */
 .mf-table {
   width: 100%;
   max-width: 46rem;
   border-collapse: collapse;
-  font-size: 1.02rem;
 }
 
 .mf-table th,
@@ -77,19 +74,18 @@
 
 /* 强调「μ 可以大于 1」的那一行 */
 .mf-table-hi td {
-  background: rgb(226 168 70 / 10%);
+  background: var(--c-accent-soft);
   color: var(--c-accent) !important;
   font-weight: 700;
 }
 
 .mf-table th {
   color: var(--c-accent);
-  font-size: 0.95rem;
   letter-spacing: 0.02em;
 }
 
 .mf-table tbody tr:nth-child(odd) {
-  background: rgb(148 163 184 / 5%);
+  background: color-mix(in srgb, var(--c-text-dim) 5%, transparent);
 }
 
 .mf-table td:nth-child(odd) {
@@ -101,7 +97,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ── 结尾对比表：静摩擦力 / 滑动摩擦力 ── */
+/* ── 结尾对比表：静摩擦力 / 滑动摩擦力（第 13、24 页）── */
 .mf-compare {
   display: grid;
   grid-template-columns: 0.62fr minmax(0, 1.19fr) minmax(0, 1.19fr);
@@ -121,15 +117,15 @@
   color: var(--c-accent);
 
   font-weight: 700;
-  font-size: 1.02rem;
 }
 
 .mf-cell {
-  font-size: 0.95rem;
   line-height: 1.5;
 }
 
-.mf-cell:nth-child(3n + 1) {
-  color: var(--c-text-dim);
-  font-size: 0.88rem;
+/* 行首标签列挂共享 .mini-note（小字 + 次要色）；列首的扫读图标与共享 .mini-title > svg 同色 */
+.mf-cell > svg {
+  margin-right: 0.3rem;
+  color: var(--c-accent-2);
+  vertical-align: -0.12em;
 }

@@ -772,9 +772,9 @@ const yShaft = computed(() => {
 </script>
 
 <template>
-  <div class="vtg">
+  <div>
     <svg
-      class="vtg-chart"
+      class="fig-canvas"
       :viewBox="`0 0 ${VIEW.w} ${VIEW.h}`"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
@@ -864,7 +864,7 @@ const yShaft = computed(() => {
         :y="spec.axisY + TICK_LABEL_GAP"
         text-anchor="middle"
         :fill="TICK_COLOR"
-        class="vtg-halo"
+        class="fig-halo"
         stroke-width="3"
       >
         <tspan
@@ -886,7 +886,7 @@ const yShaft = computed(() => {
         :y="tick.pos + 6"
         :text-anchor="spec.yTickSide === 'left' ? 'end' : 'start'"
         :fill="TICK_COLOR"
-        class="vtg-halo"
+        class="fig-halo"
         stroke-width="3"
       >
         <tspan
@@ -909,7 +909,7 @@ const yShaft = computed(() => {
         :font-family="MATH"
         font-style="italic"
         :fill="TICK_COLOR"
-        class="vtg-halo"
+        class="fig-halo"
         stroke-width="3"
       >
         O
@@ -920,7 +920,7 @@ const yShaft = computed(() => {
         text-anchor="end"
         :font-size="AXIS_LETTER"
         :fill="TICK_COLOR"
-        class="vtg-halo"
+        class="fig-halo"
         stroke-width="3.4"
       >
         <tspan
@@ -941,7 +941,7 @@ const yShaft = computed(() => {
         :text-anchor="spec.yLabelEnd === 'top' ? 'middle' : 'end'"
         :font-size="AXIS_LETTER"
         :fill="TICK_COLOR"
-        class="vtg-halo"
+        class="fig-halo"
         stroke-width="3.4"
       >
         <tspan
@@ -987,7 +987,7 @@ const yShaft = computed(() => {
       <text
         v-for="(mark, index) in spec.marks"
         :key="`mark${index}`"
-        class="vtg-halo"
+        class="fig-halo"
         :x="mark.x"
         :y="mark.y"
         :text-anchor="mark.anchor"
@@ -1013,12 +1013,7 @@ const yShaft = computed(() => {
 
 <style scoped>
 /* 一幅图占满整页宽；viewBox 固定 + width:100% + height:auto ⇒ 高度恒定、不跳动 */
-.vtg {
-  width: 100%;
-  min-width: 0;
-}
-
-.vtg-chart {
+.fig-canvas {
   display: block;
 
   width: 100%;
@@ -1026,12 +1021,12 @@ const yShaft = computed(() => {
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 }
 
 /* 图内文字压在曲线/刻度上时加描边光晕，保证读得清 */
-.vtg-halo {
+.fig-halo {
   paint-order: stroke;
-  stroke: #0f1425;
+  stroke: var(--c-bg-soft);
 }
 </style>

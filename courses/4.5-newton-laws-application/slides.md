@@ -90,14 +90,14 @@ clicks: 2
 <div class="page-grow">
 <div class="ask">什么时候能把几个物体当成一个整体？什么时候必须把它们拆开？</div>
 
-<div class="two-cases" v-click="1">
+<div class="case-grid" v-click="1">
 <div class="case-item">
-<div class="case-name">整体法</div>
+<div class="case-name text-lg"><mdi-select-group class="mr-1 align-middle" />整体法</div>
 <div>系统内各物体的<b>加速度相同</b>（大小、方向都相同）时，把系统当成一个物体列 <Latex tex="F_{\text{合}} = ma" />。</div>
 <div class="mini-note">方程里只有外力，不出现物体间的内力</div>
 </div>
 <div class="case-item">
-<div class="case-name">隔离法</div>
+<div class="case-name text-lg"><mdi-call-split class="mr-1 align-middle" />隔离法</div>
 <div>要求物体之间的作用力，或各物体<b>加速度不同</b>（大小不同，或方向不同）时，逐个拆开列方程。</div>
 <div class="mini-note">内力这时才出现在方程里</div>
 </div>
@@ -211,10 +211,10 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack">
-<div class="summary-line"><b>两条路</b>——受力 ⇌ <Latex tex="a" /> ⇌ 运动：一段用 <Latex tex="F = ma" />，一段用运动学公式，中间站都是加速度。</div>
-<div class="summary-line"><b>整体法与隔离法</b>——加速度相同的系统用整体法；求内力、或加速度方向不同时用隔离法。</div>
-<div class="summary-line"><b>瞬时性</b>——弹簧（弹性形变）的弹力不突变，绳、杆、接触面的弹力可以突变。</div>
-<div class="summary-line"><b>临界态</b>——"恰好"意味着某个力达到了极值，把它翻译成加速度的边界。</div>
+<div class="summary-line"><mdi-swap-horizontal class="text-lg inline-block align-middle mr-1" /><b>两条路</b>——受力 ⇌ <Latex tex="a" /> ⇌ 运动：一段用 <Latex tex="F = ma" />，一段用运动学公式，中间站都是加速度。</div>
+<div class="summary-line"><mdi-select-group class="text-lg inline-block align-middle mr-1" /><b>整体法与隔离法</b>——加速度相同的系统用整体法；求内力、或加速度方向不同时用隔离法。</div>
+<div class="summary-line"><mdi-clock-outline class="text-lg inline-block align-middle mr-1" /><b>瞬时性</b>——弹簧（弹性形变）的弹力不突变，绳、杆、接触面的弹力可以突变。</div>
+<div class="summary-line"><mdi-alert-circle-outline class="text-lg inline-block align-middle mr-1" /><b>临界态</b>——"恰好"意味着某个力达到了极值，把它翻译成加速度的边界。</div>
 </div>
 
 <div class="key">先看清已知的是受力还是运动，再顺着那条路走到 <Latex tex="a" />。</div>

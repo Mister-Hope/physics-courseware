@@ -88,8 +88,8 @@ const pct = (value: number, total: number): number => (value / total) * 100;
 </script>
 
 <template>
-  <div class="tr-wrap">
-    <div class="tr-figure">
+  <div class="split-wide" style="--cols: minmax(0, 1.3fr) minmax(0, 1fr)">
+    <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <path
           :d="`M ${pointA.x - ARC_R},${pointA.y} A ${ARC_R},${ARC_R} 0 0 1 ${pointA.x + ARC_R},${pointA.y}`"
@@ -155,9 +155,9 @@ const pct = (value: number, total: number): number => (value / total) * 100;
       />
     </div>
 
-    <div class="tr-info">
-      <div class="tr-row">
-        <span class="tr-name"><Latex tex="\theta" /></span>
+    <div class="demo-panel">
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\theta" /></span>
         <input
           v-model.number="theta"
           type="range"
@@ -166,25 +166,25 @@ const pct = (value: number, total: number): number => (value / total) * 100;
           step="5"
           aria-label="两力的夹角"
         />
-        <span class="tr-val"><Latex :tex="thetaTex" /></span>
+        <span class="demo-val"><Latex :tex="thetaTex" /></span>
       </div>
 
-      <div class="tr-current"><Latex :tex="forceTex" /></div>
+      <div class="demo-readout"><Latex :tex="forceTex" /></div>
 
-      <div class="tr-cases">
+      <div class="sum-cases">
         <div
           v-for="row in cases"
           :key="row.key"
-          class="tr-case"
-          :class="{ 'tr-active': row.active }"
+          class="sum-case"
+          :class="{ 'sum-case-active': row.active }"
         >
-          <span class="tr-case-label">{{ row.label }}</span>
-          <span class="tr-case-tex"><Latex :tex="row.tex" /></span>
-          <span class="tr-case-note">{{ row.note }}</span>
+          <span class="sum-case-label">{{ row.label }}</span>
+          <span class="sum-case-tex"><Latex :tex="row.tex" /></span>
+          <span class="sum-case-note">{{ row.note }}</span>
         </div>
       </div>
 
-      <button class="tr-play" type="button" :disabled="playing" @click="play">
+      <button class="sum-play" type="button" :disabled="playing" @click="play">
         <mdi-rotate-right /> 转动 <Latex tex="F_2" />
       </button>
     </div>
@@ -192,93 +192,27 @@ const pct = (value: number, total: number): number => (value / total) * 100;
 </template>
 
 <style scoped>
-.tr-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.tr-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.tr-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.tr-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  min-width: 0;
-}
-
-.tr-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.tr-row {
-  display: grid;
-  grid-template-columns: 2.2rem minmax(0, 1fr) 6rem;
-  gap: 0.6rem;
-  align-items: center;
-
+/* 左图右文走共享 .split-wide；控制行 / 面板 / 读数走共享 .demo-* */
+.demo-row {
+  --demo-read: 6rem;
   font-size: 1rem;
 }
 
-.tr-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.tr-val {
-  color: var(--c-text-dim);
+.demo-val {
   font-size: 0.95rem;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.tr-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 2rem;
-
-  background: rgb(148 163 184 / 20%);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.tr-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
-.tr-current {
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-physics);
+.demo-readout {
   font-size: 1.15rem;
 }
 
-.tr-cases {
+.sum-cases {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-.tr-case {
+.sum-case {
   display: grid;
   grid-template-columns: 3.2rem 9.4rem minmax(0, 1fr);
   gap: 0.5rem;
@@ -293,26 +227,23 @@ const pct = (value: number, total: number): number => (value / total) * 100;
   transition: opacity 0.2s ease;
 }
 
-.tr-case.tr-active {
+.sum-case-active {
   color: var(--c-text);
   opacity: 1;
 }
 
-.tr-case-label {
+.sum-case-label,
+.sum-case-tex {
   white-space: nowrap;
 }
 
-.tr-case-tex {
-  white-space: nowrap;
-}
-
-.tr-case-note {
+.sum-case-note {
   color: var(--c-accent);
   font-weight: 700;
   white-space: nowrap;
 }
 
-.tr-play {
+.sum-play {
   display: inline-flex;
   gap: 0.45rem;
   align-items: center;
@@ -320,9 +251,9 @@ const pct = (value: number, total: number): number => (value / total) * 100;
 
   padding: 0.35rem 0.9rem;
   border: 1px solid var(--c-border);
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(148 163 184 / 10%);
+  background: color-mix(in srgb, var(--c-text-dim) 10%, transparent);
   color: var(--c-text);
 
   font-size: 0.9rem;
@@ -332,16 +263,12 @@ const pct = (value: number, total: number): number => (value / total) * 100;
   transition: background 0.2s ease;
 }
 
-.tr-play:disabled {
+.sum-play:disabled {
   opacity: 0.5;
   cursor: default;
 }
 
-.tr-play:hover:not(:disabled) {
-  background: rgb(148 163 184 / 20%);
-}
-
-.tr-play :deep(.katex) {
-  font-size: 1em !important;
+.sum-play:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
 }
 </style>

@@ -4,14 +4,14 @@
     <defs>
       <!-- 车轮内腔径向暗角渐变，增强质感且不抢视线 -->
       <radialGradient id="wheelWellRear" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="rgba(15,20,37,0.25)" />
-        <stop offset="78%" stop-color="rgba(15,20,37,0.55)" />
-        <stop offset="100%" stop-color="rgba(56,189,248,0.16)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-bg-soft) 25%, transparent)" />
+        <stop offset="78%" stop-color="color-mix(in srgb, var(--c-bg-soft) 55%, transparent)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-physics-light) 16%, transparent)" />
       </radialGradient>
       <radialGradient id="wheelWellFront" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="rgba(15,20,37,0.25)" />
-        <stop offset="78%" stop-color="rgba(15,20,37,0.55)" />
-        <stop offset="100%" stop-color="rgba(96,165,250,0.16)" />
+        <stop offset="0%" stop-color="color-mix(in srgb, var(--c-bg-soft) 25%, transparent)" />
+        <stop offset="78%" stop-color="color-mix(in srgb, var(--c-bg-soft) 55%, transparent)" />
+        <stop offset="100%" stop-color="color-mix(in srgb, var(--c-velocity) 16%, transparent)" />
       </radialGradient>
       <!-- 车轮顺时针转动方向小箭头 -->
       <marker id="rotArrowRear" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto" markerUnits="userSpaceOnUse" viewBox="0 0 6 6">
@@ -28,9 +28,9 @@
     <!-- ==================== 后轮 (驱动轮 cx=104, cy=196, r=54) ==================== -->
     <g>
       <!-- 轮胎外圈与车圈双层结构 -->
-      <circle cx="104" cy="196" r="52.5" fill="url(#wheelWellRear)" stroke="rgba(148,163,184,0.28)" stroke-width="3" />
+      <circle cx="104" cy="196" r="52.5" fill="url(#wheelWellRear)" stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)" stroke-width="3" />
       <!-- 均匀 12 根辐条 (6 组直径线，每 30° 旋转) -->
-      <g stroke="rgba(148,163,184,0.38)" stroke-width="1">
+      <g stroke="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" stroke-width="1">
         <line x1="104" y1="147" x2="104" y2="245" />
         <line x1="104" y1="147" x2="104" y2="245" transform="rotate(30 104 196)" />
         <line x1="104" y1="147" x2="104" y2="245" transform="rotate(60 104 196)" />
@@ -55,9 +55,9 @@
     <!-- ==================== 前轮 (从动轮 cx=306, cy=196, r=54) ==================== -->
     <g>
       <!-- 轮胎外圈与车圈双层结构 -->
-      <circle cx="306" cy="196" r="52.5" fill="url(#wheelWellFront)" stroke="rgba(148,163,184,0.28)" stroke-width="3" />
+      <circle cx="306" cy="196" r="52.5" fill="url(#wheelWellFront)" stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)" stroke-width="3" />
       <!-- 均匀 12 根辐条 -->
-      <g stroke="rgba(148,163,184,0.38)" stroke-width="1">
+      <g stroke="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" stroke-width="1">
         <line x1="306" y1="147" x2="306" y2="245" />
         <line x1="306" y1="147" x2="306" y2="245" transform="rotate(30 306 196)" />
         <line x1="306" y1="147" x2="306" y2="245" transform="rotate(60 306 196)" />
@@ -82,7 +82,7 @@
     <!-- ==================== 远端（左侧内层）曲柄与脚蹬 ==================== -->
     <g opacity="0.68">
       <line x1="192" y1="198" x2="178" y2="179" stroke="var(--c-text-dim)" stroke-width="2.8" stroke-linecap="round" />
-      <rect x="170" y="176.6" width="15" height="4.4" rx="2.2" fill="var(--c-text)" stroke="#0f1425" stroke-width="1" />
+      <rect x="170" y="176.6" width="15" height="4.4" rx="2.2" fill="var(--c-text)" stroke="var(--c-bg-soft)" stroke-width="1" />
     </g>
 
     <!-- ==================== 链条与齿轮传动系统 (Drivetrain) ==================== -->
@@ -98,9 +98,9 @@
         opacity="0.9"
       />
       <!-- 后轮飞轮 (Rear Sprocket) -->
-      <circle cx="104" cy="196" r="8.5" fill="rgba(15,20,37,0.85)" stroke="var(--c-accent)" stroke-width="2.2" stroke-dasharray="3 1.5" />
+      <circle cx="104" cy="196" r="8.5" fill="color-mix(in srgb, var(--c-bg-soft) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2.2" stroke-dasharray="3 1.5" />
       <!-- 中轴大牙盘 (Front Chainring) -->
-      <circle cx="192" cy="198" r="13.5" fill="rgba(15,20,37,0.8)" stroke="var(--c-accent)" stroke-width="2.4" />
+      <circle cx="192" cy="198" r="13.5" fill="color-mix(in srgb, var(--c-bg-soft) 80%, transparent)" stroke="var(--c-accent)" stroke-width="2.4" />
       <circle cx="192" cy="198" r="9" fill="none" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="3.5 2.5" opacity="0.7" />
     </g>
 
@@ -139,10 +139,10 @@
 
     <!-- ==================== 近端（右侧外层）曲柄、脚蹬与花鼓轴心 ==================== -->
     <line x1="192" y1="198" x2="206" y2="217" stroke="var(--c-text)" stroke-width="3" stroke-linecap="round" opacity="0.92" />
-    <rect x="198" y="215" width="16" height="4.8" rx="2.4" fill="var(--c-accent)" stroke="#0f1425" stroke-width="1" />
+    <rect x="198" y="215" width="16" height="4.8" rx="2.4" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="1" />
 
     <!-- 前后轮轴心与五通轴承盖 -->
-    <g fill="var(--c-text)" stroke="#0f1425" stroke-width="1.4">
+    <g fill="var(--c-text)" stroke="var(--c-bg-soft)" stroke-width="1.4">
       <circle cx="104" cy="196" r="4.2" />
       <circle cx="306" cy="196" r="4.2" />
       <circle cx="192" cy="198" r="3.8" />

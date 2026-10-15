@@ -17,16 +17,16 @@
     role="img"
     aria-label="几何三角形 OAB 与速度三角形相似，得到 Δv 比 v 等于 AB 比 r"
   >
-    <circle cx="147.3" cy="143.3" r="112" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-dasharray="8 7" opacity="0.5" />
-    <line x1="147.3" y1="143.3" x2="42" y2="104.9" stroke="#60a5fa" stroke-width="3" />
-    <line x1="147.3" y1="143.3" x2="108.9" y2="38" stroke="#60a5fa" stroke-width="3" />
-    <line x1="42" y1="104.9" x2="108.9" y2="38" stroke="#e2a846" stroke-width="3" stroke-dasharray="8 6" />
-    <path d="M 111.5 130.3 A 38 38 0 0 1 134.3 107.6" fill="none" stroke="#fbbf24" stroke-width="2.4" />
-    <circle cx="42" cy="104.9" r="6" fill="#f1f5f9" />
-    <circle cx="108.9" cy="38" r="6" fill="#f1f5f9" />
-    <text x="135.3" y="173.3" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="24" fill="#94a3b8">O</text>
-    <text x="31" y="112.9" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="24" fill="#f1f5f9">A</text>
-    <text x="97.9" y="31" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="24" fill="#f1f5f9">B</text>
+    <circle cx="147.3" cy="143.3" r="112" fill="none" stroke="var(--c-physics)" stroke-width="2.4" stroke-dasharray="8 7" opacity="0.5" />
+    <line x1="147.3" y1="143.3" x2="42" y2="104.9" stroke="var(--c-velocity)" stroke-width="3" />
+    <line x1="147.3" y1="143.3" x2="108.9" y2="38" stroke="var(--c-velocity)" stroke-width="3" />
+    <line x1="42" y1="104.9" x2="108.9" y2="38" stroke="var(--c-accent)" stroke-width="3" stroke-dasharray="8 6" />
+    <path d="M 111.5 130.3 A 38 38 0 0 1 134.3 107.6" fill="none" stroke="var(--c-accent-light)" stroke-width="2.4" />
+    <circle cx="42" cy="104.9" r="6" fill="var(--c-text)" />
+    <circle cx="108.9" cy="38" r="6" fill="var(--c-text)" />
+    <text x="135.3" y="173.3" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="24" fill="var(--c-text-dim)">O</text>
+    <text x="31" y="112.9" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="24" fill="var(--c-text)">A</text>
+    <text x="97.9" y="31" text-anchor="end" font-family="KaTeX_Math" font-style="italic" font-size="24" fill="var(--c-text)">B</text>
     <text
       x="87.8"
       y="142.9"
@@ -34,8 +34,8 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="26"
-      fill="#60a5fa"
-      stroke="#0f1425"
+      fill="var(--c-velocity)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -48,8 +48,8 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="24"
-      fill="#e2a846"
-      stroke="#0f1425"
+      fill="var(--c-accent)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -62,17 +62,17 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="24"
-      fill="#fbbf24"
-      stroke="#0f1425"
+      fill="var(--c-accent-light)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
       θ
     </text>
-    <CourseArrow :from="{ x: 477.3, y: 143.3 }" :to="{ x: 515.6, y: 38 }" stroke="#60a5fa" :stroke-width="3" stroke-dasharray="8 6" />
-    <CourseArrow :from="{ x: 477.3, y: 143.3 }" :to="{ x: 582.5, y: 104.9 }" stroke="#60a5fa" :stroke-width="3" />
-    <CourseArrow :from="{ x: 515.6, y: 38 }" :to="{ x: 582.5, y: 104.9 }" stroke="#e2a846" :stroke-width="3.4" />
-    <path d="M 490.3 107.6 A 38 38 0 0 1 512.9 130.3" fill="none" stroke="#fbbf24" stroke-width="2.4" />
+    <CourseArrow :from="{ x: 477.3, y: 143.3 }" :to="{ x: 515.6, y: 38 }" stroke="var(--c-velocity)" :stroke-width="3" stroke-dasharray="8 6" />
+    <CourseArrow :from="{ x: 477.3, y: 143.3 }" :to="{ x: 582.5, y: 104.9 }" stroke="var(--c-velocity)" :stroke-width="3" />
+    <CourseArrow :from="{ x: 515.6, y: 38 }" :to="{ x: 582.5, y: 104.9 }" stroke="var(--c-accent)" :stroke-width="3.4" />
+    <path d="M 490.3 107.6 A 38 38 0 0 1 512.9 130.3" fill="none" stroke="var(--c-accent-light)" stroke-width="2.4" />
     <text
       x="505.6"
       y="33"
@@ -80,8 +80,8 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="24"
-      fill="#60a5fa"
-      stroke="#0f1425"
+      fill="var(--c-velocity)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -95,8 +95,8 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="24"
-      fill="#60a5fa"
-      stroke="#0f1425"
+      fill="var(--c-velocity)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -110,8 +110,8 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="24"
-      fill="#e2a846"
-      stroke="#0f1425"
+      fill="var(--c-accent)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
@@ -124,13 +124,13 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="24"
-      fill="#fbbf24"
-      stroke="#0f1425"
+      fill="var(--c-accent-light)"
+      stroke="var(--c-bg-soft)"
       stroke-width="5"
       paint-order="stroke"
     >
       θ
     </text>
-    <text x="317.5" y="287.3" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="#94a3b8">左：位置三角形　　右：速度三角形</text>
+    <text x="317.5" y="287.3" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-text-dim)">左：位置三角形　　右：速度三角形</text>
   </svg>
 </template>

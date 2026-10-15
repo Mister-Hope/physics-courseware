@@ -26,14 +26,14 @@ const points = [
 
 <template>
   <svg viewBox="80 30 500 350" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="8 7" opacity="0.55" />
-    <circle :cx="O.x" :cy="O.y" r="3.8" fill="#94a3b8" />
-    <text :x="O.x - 14" :y="O.y + 22" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="#94a3b8" text-anchor="end">O</text>
+    <circle :cx="O.x" :cy="O.y" :r="R" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-dasharray="8 7" opacity="0.55" />
+    <circle :cx="O.x" :cy="O.y" r="3.8" fill="var(--c-text-dim)" />
+    <text :x="O.x - 14" :y="O.y + 22" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-text-dim)" text-anchor="end">O</text>
     <g v-for="(item, index) in points" :key="index">
-      <line :x1="O.x" :y1="O.y" :x2="item.p.x" :y2="item.p.y" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.45" />
-      <CourseArrow :from="item.p" :to="item.v" stroke="#2dd4bf" :stroke-width="2.8" />
-      <CourseArrow :from="item.p" :to="item.f" stroke="#e2a846" :stroke-width="3.2" />
-      <circle :cx="item.p.x" :cy="item.p.y" r="6.5" fill="#f1f5f9" />
+      <line :x1="O.x" :y1="O.y" :x2="item.p.x" :y2="item.p.y" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.45" />
+      <CourseArrow :from="item.p" :to="item.v" stroke="var(--c-physics)" :stroke-width="2.8" />
+      <CourseArrow :from="item.p" :to="item.f" stroke="var(--c-accent)" :stroke-width="3.2" />
+      <circle :cx="item.p.x" :cy="item.p.y" r="6.5" fill="var(--c-text)" />
     </g>
     <text
       :x="O.x + R + 12"
@@ -41,9 +41,9 @@ const points = [
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="19"
-      fill="#2dd4bf"
+      fill="var(--c-physics)"
       text-anchor="start"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3.5"
       paint-order="stroke"
     >
@@ -55,9 +55,9 @@ const points = [
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="19"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       text-anchor="end"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3.5"
       paint-order="stroke"
     >

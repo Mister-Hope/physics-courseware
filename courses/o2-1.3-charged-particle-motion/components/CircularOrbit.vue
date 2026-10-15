@@ -184,13 +184,13 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
       >
         <!-- B 记号（视图沿磁场方向看） -->
         <g v-if="bDir === 'out'">
-          <circle cx="28" cy="28" r="12" fill="none" stroke="#e2a846" stroke-width="2.2" />
-          <circle cx="28" cy="28" r="3" fill="#e2a846" />
+          <circle cx="28" cy="28" r="12" fill="none" stroke="var(--c-accent)" stroke-width="2.2" />
+          <circle cx="28" cy="28" r="3" fill="var(--c-accent)" />
         </g>
         <g v-else>
-          <circle cx="28" cy="28" r="12" fill="none" stroke="#e2a846" stroke-width="2.2" />
-          <line x1="20" y1="20" x2="36" y2="36" stroke="#e2a846" stroke-width="2.2" />
-          <line x1="36" y1="20" x2="20" y2="36" stroke="#e2a846" stroke-width="2.2" />
+          <circle cx="28" cy="28" r="12" fill="none" stroke="var(--c-accent)" stroke-width="2.2" />
+          <line x1="20" y1="20" x2="36" y2="36" stroke="var(--c-accent)" stroke-width="2.2" />
+          <line x1="36" y1="20" x2="20" y2="36" stroke="var(--c-accent)" stroke-width="2.2" />
         </g>
         <text
           x="28"
@@ -199,7 +199,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="18"
-          fill="#e2a846"
+          fill="var(--c-accent)"
         >
           B
         </text>
@@ -209,19 +209,19 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
           :cy="CY"
           :r="R"
           fill="none"
-          stroke="rgba(96,165,250,0.35)"
+          stroke="color-mix(in srgb, var(--c-velocity) 35%, transparent)"
           stroke-width="2"
           stroke-dasharray="5 7"
         />
         <!-- 圆心 + 半径 -->
         <template v-if="radius">
-          <circle :cx="CX" :cy="CY" r="3" fill="#cbd5e1" />
+          <circle :cx="CX" :cy="CY" r="3" fill="var(--c-neutral-300)" />
           <line
             :x1="CX"
             :y1="CY"
             :x2="dot.x"
             :y2="dot.y"
-            stroke="rgba(203,213,225,0.7)"
+            stroke="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)"
             stroke-width="1.8"
             stroke-dasharray="6 5"
           />
@@ -231,13 +231,13 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"
-            fill="#cbd5e1"
+            fill="var(--c-neutral-300)"
           >
             r
           </text>
         </template>
         <!-- v：切线方向 -->
-        <CourseArrow :from="dot" :to="arrowEnd(vDir, 24)" stroke="#60a5fa" stroke-width="3.4" />
+        <CourseArrow :from="dot" :to="arrowEnd(vDir, 24)" stroke="var(--c-velocity)" stroke-width="3.4" />
         <text
           :x="arrowEnd(vDir, 34).x"
           :y="arrowEnd(vDir, 34).y + 5"
@@ -245,7 +245,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="18"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           v
         </text>
@@ -262,20 +262,20 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
             :y="arrowEnd(fDir, 34).y + 4"
             text-anchor="middle"
             font-size="16"
-            fill="#2dd4bf"
+            fill="var(--c-physics)"
           >
             <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
             <tspan dy="4" font-size="11">洛</tspan>
           </text>
         </template>
         <!-- 电子 -->
-        <circle :cx="dot.x" :cy="dot.y" r="7.5" fill="#60a5fa" />
+        <circle :cx="dot.x" :cy="dot.y" r="7.5" fill="var(--c-velocity)" />
         <line
           :x1="dot.x - 3.5"
           :y1="dot.y"
           :x2="dot.x + 3.5"
           :y2="dot.y"
-          stroke="#0f1425"
+          stroke="var(--c-bg-soft)"
           stroke-width="1.8"
           stroke-linecap="round"
         />

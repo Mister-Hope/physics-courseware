@@ -69,9 +69,9 @@ clicks: 4
 <PaperVsIronFallSvg />
 </div>
 <div class="stack">
-<div v-click="2">平铺的纸片飘得最慢，铁球最快。</div>
+<div v-click="2"><mdi-clock-outline class="text-lg align-middle mr-1 text-accent-2" />平铺的纸片飘得最慢，铁球最快。</div>
 
-<div v-click="3">把同一张纸揉成紧实的小纸团，它和铁球的快慢差别<b class="text-accent-2">急剧减小</b>。</div>
+<div v-click="3"><mdi-trending-down class="text-lg align-middle mr-1 text-accent-2" />把同一张纸揉成紧实的小纸团，它和铁球的快慢差别<b class="text-accent-2">急剧减小</b>。</div>
 
 <div class="key" v-click="4">纸片和纸团质量一样，快慢却不同——决定快慢的是<b class="text-accent">空气阻力</b>。</div>
 </div>
@@ -105,13 +105,13 @@ clicks: 6
 <GalileoInclineDemo />
 </div>
 <div class="stack stack-tight">
-<div v-click="2">让铜球沿<b class="text-accent">涂了油的光滑斜面</b>从静止滚下：加速度比竖直下落小得多、时间长得多，<b>测得准</b>。</div>
+<div v-click="2"><mdi-numeric-1-circle class="text-lg align-middle mr-1 text-accent-2" />让铜球沿<b class="text-accent">涂了油的光滑斜面</b>从静止滚下：加速度比竖直下落小得多、时间长得多，<b>测得准</b>。</div>
 
-<div v-click="3">测出位移与时间的关系：<Latex tex="x \propto t^2" />。</div>
+<div v-click="3"><mdi-numeric-2-circle class="text-lg align-middle mr-1 text-accent-2" />测出位移与时间的关系：<Latex tex="x \propto t^2" />。</div>
 
-<div v-click="4">由 <Latex tex="x \propto t^2" /> 且 <Latex tex="v_0 = 0" />，就能推出 <Latex tex="v \propto t" />。</div>
+<div v-click="4"><mdi-numeric-3-circle class="text-lg align-middle mr-1 text-accent-2" />由 <Latex tex="x \propto t^2" /> 且 <Latex tex="v_0 = 0" />，就能推出 <Latex tex="v \propto t" />。</div>
 
-<div v-click="5">倾角增大到 <Latex tex="90^\circ" />，斜面"立"成竖直——物体只受重力，就是自由落体。</div>
+<div v-click="5"><mdi-numeric-4-circle class="text-lg align-middle mr-1 text-accent-2" />倾角增大到 <Latex tex="90^\circ" />，斜面"立"成竖直——物体只受重力，就是自由落体。</div>
 
 <div class="key" v-click="6">所以自由落体是 <Latex tex="v \propto t" /> 的运动：<b class="text-accent">初速度为 0 的匀加速直线运动</b>。</div>
 </div>
@@ -133,9 +133,9 @@ clicks: 4
 </div>
 
 <div class="half-grid">
-<div v-click="2">条件一：<b class="text-accent">只受重力</b>（空气阻力等忽略不计）</div>
+<div v-click="2"><mdi-arrow-down-bold-outline class="text-lg align-middle mr-1 text-accent-2" />条件一：<b class="text-accent">只受重力</b>（空气阻力等忽略不计）</div>
 
-<div class="divider-l" v-click="3">条件二：<b class="text-accent-2">从静止开始</b>（<Latex tex="v_0 = 0" />）</div>
+<div class="divider-l" v-click="3"><mdi-numeric-0-circle-outline class="text-lg align-middle mr-1 text-accent-2" />条件二：<b class="text-accent-2">从静止开始</b>（<Latex tex="v_0 = 0" />）</div>
 </div>
 
 <div class="key" v-click="4">它只在<b>真空</b>中才能发生；阻力小到可以忽略时才<b class="text-accent">近似</b>看成自由落体——这是一个<b class="text-accent">理想化模型</b>。</div>
@@ -156,9 +156,9 @@ clicks: 4
 <TickerTapeFallSvg />
 </div>
 <div class="stack">
-<div v-click="2">仿照"研究小车速度随时间变化的规律"，用打点计时器测出重物下落的加速度。</div>
+<div v-click="2"><mdi-flask-outline class="text-lg align-middle mr-1 text-accent-2" />仿照"研究小车速度随时间变化的规律"，用打点计时器测出重物下落的加速度。</div>
 
-<div v-click="3">换用不同质量的重物重复实验：测出的加速度<b class="text-accent-2">完全相同</b>。</div>
+<div v-click="3"><mdi-swap-horizontal class="text-lg align-middle mr-1 text-accent-2" />换用不同质量的重物重复实验：测出的加速度<b class="text-accent-2">完全相同</b>。</div>
 
 <div class="key" v-click="4">同一地点，一切物体自由下落的加速度都相同——<b class="text-accent">与物体无关，只与地点有关</b>。这个确定的加速度叫<b class="text-accent">自由落体加速度</b>（重力加速度），用 <Latex tex="g" /> 表示，方向竖直向下。</div>
 </div>
@@ -209,7 +209,7 @@ clicks: 2
 
 <div class="fmap" v-click="1">
 <div class="fmap-col">
-<div class="fmap-head">一般匀变速（<Latex tex="v_0 = 0" />）</div>
+<div class="fmap-head"><mdi-sigma-lower class="text-lg align-middle mr-1 text-accent-2" />一般匀变速（<Latex tex="v_0 = 0" />）</div>
 <div class="fmap-item"><Latex tex="v = at" display /></div>
 <div class="fmap-item"><Latex tex="x = \frac{1}{2}at^2" display /></div>
 <div class="fmap-item"><Latex tex="v^2 = 2ax" display /></div>
@@ -219,7 +219,7 @@ clicks: 2
 <div class="fmap-sub"><Latex tex="a \to g" />　<Latex tex="x \to h" /></div>
 </div>
 <div class="fmap-col">
-<div class="fmap-head">自由落体</div>
+<div class="fmap-head"><mdi-arrow-down-bold class="text-lg align-middle mr-1 text-accent-2" />自由落体</div>
 <div class="fmap-item fmap-item-hot"><Latex tex="v = gt" display /></div>
 <div class="fmap-item fmap-item-hot"><Latex tex="h = \frac{1}{2}gt^2" display /></div>
 <div class="fmap-item fmap-item-hot"><Latex tex="v^2 = 2gh" display /></div>
@@ -332,11 +332,11 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack">
-<div>自由落体：<b class="text-accent">只受重力</b>、<b class="text-accent">从静止开始</b>（<Latex tex="v_0 = 0" />）。</div>
+<div><mdi-book-open-variant class="text-lg align-middle mr-1 text-accent-2" />自由落体：<b class="text-accent">只受重力</b>、<b class="text-accent">从静止开始</b>（<Latex tex="v_0 = 0" />）。</div>
 
-<div>同一地点，一切物体的加速度都相同：<Latex tex="g" />，方向竖直向下。</div>
+<div><mdi-arrow-down-bold-outline class="text-lg align-middle mr-1 text-accent-2" />同一地点，一切物体的加速度都相同：<Latex tex="g" />，方向竖直向下。</div>
 
-<div>三公式：<Latex tex="v = gt" />、<Latex tex="h = \frac{1}{2}gt^2" />、<Latex tex="v^2 = 2gh" />。</div>
+<div><mdi-sigma-lower class="text-lg align-middle mr-1 text-accent-2" />三公式：<Latex tex="v = gt" />、<Latex tex="h = \frac{1}{2}gt^2" />、<Latex tex="v^2 = 2gh" />。</div>
 
 <div class="key">图像：<Latex tex="v-t" /> 是过原点的直线，<Latex tex="h-t" /> 是抛物线，<Latex tex="v^2-h" /> 是直线，<Latex tex="v-h" /> 是曲线。</div>
 </div>
@@ -357,9 +357,9 @@ clicks: 4
 <VerticalThrowMotionSvg />
 </div>
 <div class="stack">
-<div v-click="2">除了最高点那一瞬间，小球<b class="text-accent">始终只受重力</b>：加速度一直是 <Latex tex="g" />、方向竖直向下——上升和下落是<b>同一段</b>匀变速直线运动。</div>
+<div v-click="2"><mdi-arrow-down-bold-outline class="text-lg align-middle mr-1 text-accent-2" />除了最高点那一瞬间，小球<b class="text-accent">始终只受重力</b>：加速度一直是 <Latex tex="g" />、方向竖直向下——上升和下落是<b>同一段</b>匀变速直线运动。</div>
 
-<div v-click="3">取<b class="text-accent-2">竖直向下为正方向</b>：抛出的初速度是 <Latex tex="-v_0" />，加速度是 <Latex tex="+g" />。</div>
+<div v-click="3"><mdi-swap-horizontal class="text-lg align-middle mr-1 text-accent-2" />取<b class="text-accent-2">竖直向下为正方向</b>：抛出的初速度是 <Latex tex="-v_0" />，加速度是 <Latex tex="+g" />。</div>
 
 <div class="key" v-click="4"><Latex tex="v = -v_0 + gt" />：<Latex tex="v = 0" /> 的时刻是<b>最高点</b>；<Latex tex="v = +v_0" /> 表示它<b>落回抛出点</b>，速度大小与抛出时相同、方向相反。</div>
 </div>
@@ -572,11 +572,11 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack stack-dense">
-<div><b class="text-accent">自由落体运动</b>：只在重力作用下、从<b>静止</b>开始下落的运动（<Latex tex="v_0 = 0" />）。<Latex tex="v = gt" />、<Latex tex="h = \frac{1}{2}gt^2" />、<Latex tex="v^2 = 2gh" />；同一地点一切物体的 <Latex tex="g" /> 都相同、方向竖直向下。</div>
+<div><mdi-arrow-down-bold class="text-lg align-middle mr-1 text-accent-2" /><b class="text-accent">自由落体运动</b>：只在重力作用下、从<b>静止</b>开始下落的运动（<Latex tex="v_0 = 0" />）。<Latex tex="v = gt" />、<Latex tex="h = \frac{1}{2}gt^2" />、<Latex tex="v^2 = 2gh" />；同一地点一切物体的 <Latex tex="g" /> 都相同、方向竖直向下。</div>
 
-<div><b class="text-accent-2">竖直上抛运动</b>：以一定的初速度竖直向上抛出、只在重力作用下的运动。取向上为正：<Latex tex="v = v_0 - gt" />、<Latex tex="h = v_0t - \frac{1}{2}gt^2" />、<Latex tex="v^2 = v_0^2 - 2gh" />；上升时间 <Latex tex="\frac{v_0}{g}" />、最大高度 <Latex tex="\frac{v_0^2}{2g}" />。</div>
+<div><mdi-arrow-up-bold class="text-lg align-middle mr-1 text-accent-2" /><b class="text-accent-2">竖直上抛运动</b>：以一定的初速度竖直向上抛出、只在重力作用下的运动。取向上为正：<Latex tex="v = v_0 - gt" />、<Latex tex="h = v_0t - \frac{1}{2}gt^2" />、<Latex tex="v^2 = v_0^2 - 2gh" />；上升时间 <Latex tex="\frac{v_0}{g}" />、最大高度 <Latex tex="\frac{v_0^2}{2g}" />。</div>
 
-<div>两类运动都是<b>初速度与重力共线</b>的匀变速直线运动，全程只有<b>一个 <Latex tex="g" /></b>——解题第一步永远是<b class="text-accent-2">先定正方向</b>，把初速度的符号写对。</div>
+<div><mdi-compare class="text-lg align-middle mr-1 text-accent-2" />两类运动都是<b>初速度与重力共线</b>的匀变速直线运动，全程只有<b>一个 <Latex tex="g" /></b>——解题第一步永远是<b class="text-accent-2">先定正方向</b>，把初速度的符号写对。</div>
 
 <div class="key">图像：<Latex tex="v-t" /> 是过原点的直线（斜率 <Latex tex="g" />）、<Latex tex="h-t" /> 是抛物线、<Latex tex="v^2-h" /> 是直线、<Latex tex="v-h" /> 是曲线。</div>
 </div>

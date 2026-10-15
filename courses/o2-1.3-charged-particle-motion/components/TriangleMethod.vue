@@ -132,14 +132,14 @@ const formula = { x: 352, y: 396 };
       class="h-full w-auto max-w-full"
     >
       <!-- 轨迹圆弧 AB -->
-      <path :d="arcPath" fill="none" stroke="#60a5fa" stroke-width="3.6" stroke-linecap="round" />
+      <path :d="arcPath" fill="none" stroke="var(--c-velocity)" stroke-width="3.6" stroke-linecap="round" />
       <!-- 弦 AB -->
-      <path :d="chordPath" fill="none" stroke="rgba(203,213,225,0.85)" stroke-width="2.2" />
+      <path :d="chordPath" fill="none" stroke="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)" stroke-width="2.2" />
       <!-- 两条虚线半径 + 圆心到弦中点的连线（CM ⊥ AB，平分弦） -->
       <path
         :d="auxPath"
         fill="none"
-        stroke="rgba(148,163,184,0.9)"
+        stroke="color-mix(in srgb, var(--c-text-dim) 90%, transparent)"
         stroke-width="2.2"
         stroke-dasharray="9 7"
       />
@@ -147,26 +147,26 @@ const formula = { x: 352, y: 396 };
       <path
         :d="tangentPath"
         fill="none"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="2.6"
         stroke-dasharray="10 7"
       />
       <!-- 圆心角 α 的角标圆弧 -->
       <path :d="alphaArcPath" fill="none" stroke="#c4b5fd" stroke-width="2.6" />
       <!-- 弦切角 α/2 的角标圆弧 -->
-      <path :d="halfArcPath" fill="none" stroke="#e2a846" stroke-width="2.4" />
+      <path :d="halfArcPath" fill="none" stroke="var(--c-accent)" stroke-width="2.4" />
       <!-- M 处的直角标记 -->
       <path
         :d="squarePath"
         fill="none"
-        stroke="rgba(226,232,240,0.8)"
+        stroke="color-mix(in srgb, var(--c-neutral-200) 80%, transparent)"
         stroke-width="2.2"
         stroke-linejoin="round"
       />
       <!-- 入射点 A、出射点 B（在弧上）与圆心 C -->
       <circle :cx="A.x" :cy="A.y" r="5.5" fill="#bfdbfe" />
       <circle :cx="B.x" :cy="B.y" r="5.5" fill="#bfdbfe" />
-      <circle :cx="CX" :cy="CY" r="5.5" fill="rgba(226,232,240,0.95)" />
+      <circle :cx="CX" :cy="CY" r="5.5" fill="color-mix(in srgb, var(--c-neutral-200) 95%, transparent)" />
       <!-- 端点与圆心标注 -->
       <text
         v-bind="HALO"
@@ -176,7 +176,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_POINT"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         A
       </text>
@@ -188,7 +188,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_POINT"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         B
       </text>
@@ -200,7 +200,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_POINT"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         C
       </text>
@@ -212,7 +212,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_POINT"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         M
       </text>
@@ -225,7 +225,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_POINT"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         r
       </text>
@@ -237,7 +237,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_POINT"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         r
       </text>
@@ -263,7 +263,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_ANGLE"
-        fill="#e2a846"
+        fill="var(--c-accent)"
       >
         <tspan>α</tspan>
         <tspan :font-family="MAIN" font-style="normal">/2</tspan>
@@ -277,7 +277,7 @@ const formula = { x: 352, y: 396 };
         :font-family="MATH"
         font-style="italic"
         :font-size="FS_FORMULA"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         <tspan>AB</tspan>
         <tspan dx="9" :font-family="MAIN" font-style="normal">=</tspan>

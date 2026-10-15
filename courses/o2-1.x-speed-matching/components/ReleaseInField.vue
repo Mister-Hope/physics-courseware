@@ -129,8 +129,8 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
 </script>
 
 <template>
-  <div class="rif">
-    <svg :viewBox="`0 0 ${W} ${H}`" class="rif-svg" @click="start">
+  <div class="fig-release">
+    <svg :viewBox="`0 0 ${W} ${H}`" class="fig-svg" @click="start">
       <!-- 匀强磁场：裸 × 平铺（不带圈、不加图例），只当背景点缀 —— 让学生看出"整个空间都有向里的磁场"即可，
            × 要小、要淡，绝不能盖过摆线轨迹；size 6.5 ≈ 原尺寸 9 的 72%，线宽同比收细 -->
       <FieldDots
@@ -210,18 +210,15 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
 </template>
 
 <style scoped>
-.rif {
+/* 释放后的摆线图：宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
+   —— 第 13 页上方还有设问、下方还有两行结论，700px（渲染高 ≈ 211px）避免第 3 步被顶出画布 */
+.fig-release {
   width: 100%;
+
+  --fig-max: 700px;
 }
 
-.rif-svg {
-  display: block;
-
-  width: 100%;
-  max-width: 820px;
-  height: auto;
-  margin: 0 auto;
-
+.fig-release .fig-svg {
   cursor: pointer;
 }
 </style>

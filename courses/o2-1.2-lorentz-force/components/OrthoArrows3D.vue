@@ -9,27 +9,27 @@
 <template>
   <svg viewBox="0 0 460 340" xmlns="http://www.w3.org/2000/svg" class="w-full">
     <!-- 公共作用点 -->
-    <circle cx="150" cy="268" r="5" fill="#e2e8f0" />
+    <circle cx="150" cy="268" r="5" fill="var(--c-neutral-200)" />
 
     <!-- F_洛：竖直向上（teal） -->
     <CourseArrow
       :from="{ x: 150, y: 268 }"
       :to="{ x: 150, y: 78 }"
-      stroke="#2dd4bf"
+      stroke="var(--c-physics)"
       stroke-width="6"
     />
     <!-- v：水平向右（蓝） -->
     <CourseArrow
       :from="{ x: 150, y: 268 }"
       :to="{ x: 412, y: 268 }"
-      stroke="#60a5fa"
+      stroke="var(--c-velocity)"
       stroke-width="6"
     />
     <!-- B：斜向左下 = 垂直纸面穿出（金，透视缩短） -->
     <CourseArrow
       :from="{ x: 150, y: 268 }"
       :to="{ x: 46, y: 150 }"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="6"
     />
 
@@ -37,19 +37,19 @@
     <path
       d="M 164 268 L 164 254 L 150 254"
       fill="none"
-      stroke="rgba(241,245,249,0.4)"
+      stroke="color-mix(in srgb, var(--c-text) 40%, transparent)"
       stroke-width="1.8"
     />
     <!-- 直角标记：B 与纸面的垂直关系（小弧，示意斜向） -->
     <path
       d="M 130 250 A 34 34 0 0 0 118 240"
       fill="none"
-      stroke="rgba(226,168,70,0.6)"
+      stroke="color-mix(in srgb, var(--c-accent) 60%, transparent)"
       stroke-width="1.8"
     />
 
     <!-- 标注 -->
-    <text x="128" y="66" text-anchor="end" font-size="27" fill="#2dd4bf">
+    <text x="128" y="66" text-anchor="end" font-size="27" fill="var(--c-physics)">
       <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       <tspan dy="5" font-size="15">洛</tspan>
     </text>
@@ -59,7 +59,7 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="27"
-      fill="#60a5fa"
+      fill="var(--c-velocity)"
     >
       v
     </text>
@@ -70,13 +70,13 @@
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="27"
-      fill="#e2a846"
+      fill="var(--c-accent)"
     >
       B
     </text>
 
     <!-- 一行说明：点明哪个量在纸面内、哪个穿出纸面 -->
-    <text x="230" y="322" text-anchor="middle" font-size="18" fill="#94a3b8">
+    <text x="230" y="322" text-anchor="middle" font-size="18" fill="var(--c-text-dim)">
       v 与
       <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       <tspan dy="4" font-size="12">洛</tspan>

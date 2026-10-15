@@ -28,17 +28,17 @@ const realPath = buildPath(REAL_SPAN);
 <template>
   <div class="air-drag-compare">
     <svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="不计空气阻力与有空气阻力时抛体轨迹的对比">
-      <line x1="40" y1="300" x2="610" y2="300" stroke="rgba(148,163,184,0.5)" stroke-width="2" stroke-dasharray="10 8" />
-      <CourseArrow :from="START" :to="{ x: 176, y: 84 }" stroke="#60a5fa" :stroke-width="3" />
-      <text x="130" y="54" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#60a5fa">
+      <line x1="40" y1="300" x2="610" y2="300" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="2" stroke-dasharray="10 8" />
+      <CourseArrow :from="START" :to="{ x: 176, y: 84 }" stroke="var(--c-velocity)" :stroke-width="3" />
+      <text x="130" y="54" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-velocity)">
         v
         <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">0</tspan>
       </text>
-      <path :d="idealPath" fill="none" stroke="#e2a846" stroke-width="2.6" />
-      <text x="492" y="198" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#e2a846">不计阻力</text>
+      <path :d="idealPath" fill="none" stroke="var(--c-accent)" stroke-width="2.6" />
+      <text x="492" y="198" text-anchor="middle" font-family="sans-serif" font-size="16" fill="var(--c-accent)">不计阻力</text>
       <g v-if="showReal">
-        <path :d="realPath" fill="none" stroke="#f87171" stroke-width="2.6" />
-        <text x="330" y="258" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#f87171">有阻力</text>
+        <path :d="realPath" fill="none" stroke="var(--c-force)" stroke-width="2.6" />
+        <text x="330" y="258" text-anchor="middle" font-family="sans-serif" font-size="16" fill="var(--c-force)">有阻力</text>
       </g>
     </svg>
   </div>

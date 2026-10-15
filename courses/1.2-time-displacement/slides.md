@@ -30,7 +30,7 @@ layout: base-flex
 
 <div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 时间 位移 · 引入</div>
 
-<div class="ask mt-4 justify-center">
+<div class="ask ask-row text-xl leading-normal mt-4 justify-center">
   <mdi-head-question-outline class="text-2xl" />
   <span>要描述物体位置随时间的变化，我们需要哪些概念？</span>
 </div>
@@ -52,7 +52,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="ask mt-7">
+<div class="ask ask-row mt-7">
   <mdi-head-question-outline class="text-xl" />
   <span>"7 时 40 分""8 时 20 分"和"40 min"有什么不同？</span>
 </div>
@@ -61,9 +61,9 @@ layout: base-flex
 
 <v-clicks>
 
-<div class="mt-5 text-base"><span class="text-accent-2 font-semibold">时刻</span>："7 时 40 分""8 时 20 分"——上课开始和结束的<span class="text-accent-2">瞬间</span></div>
+<div class="mt-5 text-base"><mdi-clock-outline class="text-xl text-accent-2 inline-block align-middle mr-2" /><span class="text-accent-2 font-semibold">时刻</span>："7 时 40 分""8 时 20 分"——上课开始和结束的<span class="text-accent-2">瞬间</span></div>
 
-<div class="mt-4 text-base"><span class="text-accent font-semibold">时间间隔</span>：两个时刻之间的 <Latex tex="40 \text{ min}" />——一段<span class="text-accent">持续</span>的时间</div>
+<div class="mt-4 text-base"><mdi-timer-sand class="text-xl text-accent inline-block align-middle mr-2" /><span class="text-accent font-semibold">时间间隔</span>：两个时刻之间的 <Latex tex="40 \text{ min}" />——一段<span class="text-accent">持续</span>的时间</div>
 
 <div class="mt-4 text-base">平时说的"时间"，有时指<span class="text-accent-2">时刻</span>，有时指<span class="text-accent">时间间隔</span>，要依上下文判断</div>
 
@@ -81,7 +81,7 @@ layout: base-flex
 
 # 第几秒内 · 前几秒
 
-<div class="ask mt-3">
+<div class="ask ask-row mt-3">
   <mdi-head-question-outline class="text-xl" />
   <span>"第 1 秒内""前 2 秒"——在时间轴上各是哪一段？</span>
 </div>
@@ -105,7 +105,7 @@ layout: base-flex
 
 # 第几秒初 · 第几秒末
 
-<div class="ask mt-3">
+<div class="ask ask-row mt-3">
   <mdi-head-question-outline class="text-xl" />
   <span>"第 2 秒初""第 2 秒末"——它们还是时间间隔吗？</span>
 </div>
@@ -129,7 +129,7 @@ layout: base-flex
 
 # 用坐标描述位置
 
-<div class="ask mt-3">
+<div class="ask ask-row mt-3">
   <mdi-head-question-outline class="text-xl" />
   <span>要准确描述汽车在长安街上的位置，应该采用什么方法？</span>
 </div>
@@ -183,7 +183,7 @@ layout: base-flex
 
 # 位置的变化：选哪条路？
 
-<div class="ask mt-3">
+<div class="ask ask-row mt-3">
   <mdi-head-question-outline class="text-xl" />
   <span>要去 12 km 外的公园，导航给出两条骑行路线：15 km 和 18 km——你会选哪条？</span>
 </div>
@@ -263,9 +263,9 @@ layout: base-flex
 
 # 思考与讨论
 
-<div class="key key-blue mt-4 text-lg">某物体从 <Latex tex="A" /> 点运动到 <Latex tex="B" /> 点，坐标 <Latex tex="x_A = 5 \text{ m}" />，<Latex tex="x_B = 2 \text{ m}" /></div>
+<div class="mt-4 text-lg">某物体从 <Latex tex="A" /> 点运动到 <Latex tex="B" /> 点，坐标 <Latex tex="x_A = 5 \text{ m}" />，<Latex tex="x_B = 2 \text{ m}" /></div>
 
-<div class="ask mt-7">
+<div class="ask ask-row mt-7">
   <mdi-head-question-outline class="text-xl" />
   <span>物体的位移大小等于多少？方向如何？</span>
 </div>
@@ -288,7 +288,7 @@ layout: base-flex
 
 # 再看两条位移
 
-<div class="ask mt-4">
+<div class="ask ask-row mt-4">
   <mdi-head-question-outline class="text-xl" />
   <span>从 0 走到 2，和从 −2 走到 0，位移一样吗？</span>
 </div>
@@ -331,7 +331,7 @@ layout: base-flex
 
 <div class="text-lg">已经学会了两件事：用<span class="text-accent-2">坐标</span>记录位置，用<span class="text-accent">位移</span>描述位置的变化。</div>
 
-<div class="ask mt-6 justify-center" style="font-size: 1.7rem">
+<div class="ask ask-row text-3xl leading-normal mt-6 justify-center">
   <mdi-head-question-outline class="text-3xl" />
   <span>那"位置随时间的变化"本身，怎么反映出来？</span>
 </div>
@@ -412,7 +412,7 @@ layout: base-flex
 
 ```comp CoordAxes
 click: 1
-class: xt-read
+class: fig-frame
 x-range: [0, 4.5]
 y-range: [0, 6]
 x-axis: { quantity: 't' }
@@ -443,7 +443,7 @@ layout: base-flex
 
 <div class="text-lg">图像上的每一个点，都来自<span class="text-accent">真实测出来的数据</span>——先有测量，才有图像。</div>
 
-<div class="ask mt-5 justify-center" style="font-size: 1.5rem">
+<div class="ask ask-row text-2xl leading-normal mt-5 justify-center">
   <mdi-head-question-outline class="text-3xl" />
   <span>高中实验室里，怎样记录物体的位置随时间的变化？</span>
 </div>
@@ -473,7 +473,7 @@ layout: base-flex
 
 <div class="mt-4">
 
-<table class="cmp-table">
+<table class="data-table">
   <thead>
     <tr>
       <th>对比项</th>
@@ -521,7 +521,7 @@ layout: base-flex
 
 <div v-click="4">④ <span class="text-accent font-semibold">操作顺序</span>：先接通电源，后拉纸带</div>
 
-<div v-click="5" class="ask ml-8 mt-1 text-base">
+<div v-click="5" class="ask ask-row ml-8 mt-1 text-base">
   <mdi-head-question-outline class="text-lg" />
   <span>为什么要"先通电、后拉纸带"？</span>
 </div>
@@ -537,7 +537,7 @@ layout: base-flex
 
 # 纸带上的点
 
-<div class="ask mt-2">
+<div class="ask ask-row mt-2">
   <mdi-head-question-outline class="text-xl" />
   <span>这条纸带上，第 5 个点打在什么时刻？位移是多大？</span>
 </div>
@@ -558,7 +558,7 @@ layout: base-flex
 
 ```comp CoordAxes
 click: 4
-class: plot-svg
+class: fig-frame
 x-range: [0, 0.088]
 y-range: [0, 7.5]
 x-axis: { quantity: 't', unit: 's', side: 'above' }
@@ -583,7 +583,7 @@ labels:
 layout: base-flex
 ---
 
-<div class="ask mt-6 mb-2 justify-center" style="font-size: 1.6rem">
+<div class="ask ask-row text-3xl leading-normal mt-6 mb-2 justify-center">
   <mdi-head-question-outline class="text-3xl" />
   <span>量纸带上各点到起点的距离，你会怎么量？</span>
 </div>
@@ -592,12 +592,12 @@ layout: base-flex
 
 <div v-click="1" class="text-center">
   <TapeSegmentMeasureSvg />
-  <div class="mt-3 text-base leading-snug"><mdi-close-circle-outline class="warn text-lg inline-block align-middle mr-1" /><span class="warn font-semibold">逐段量再相加</span> —— 误差<span class="warn">会累积</span></div>
+  <div class="mt-3 text-base leading-snug"><mdi-close-circle-outline class="bad-line text-lg inline-block align-middle mr-1" /><span class="bad-line font-semibold">逐段量再相加</span> —— 误差<span class="bad-line">会累积</span></div>
 </div>
 
 <div v-click="2" class="text-center">
   <TapeMeasureFromStartSvg />
-  <div class="mt-3 text-base leading-snug"><mdi-check-circle-outline class="good text-lg inline-block align-middle mr-1" /><span class="good font-semibold">一次量到底</span> —— 误差<span class="good">范围一定</span></div>
+  <div class="mt-3 text-base leading-snug"><mdi-check-circle-outline class="ok-line text-lg inline-block align-middle mr-1" /><span class="ok-line font-semibold">一次量到底</span> —— 误差<span class="ok-line">范围一定</span></div>
 </div>
 
 </div>
@@ -647,7 +647,7 @@ layout: base-flex
 
 # 课后练习
 
-<div class="ask mt-5">
+<div class="ask ask-row mt-5">
   <mdi-head-question-outline class="text-xl" />
   <span>1. 物体沿 <Latex tex="x" /> 轴从 <Latex tex="x_1 = 3 \text{ m}" /> 运动到 <Latex tex="x_2 = -2 \text{ m}" />，它的位移是多少？路程能小于它吗？</span>
 </div>

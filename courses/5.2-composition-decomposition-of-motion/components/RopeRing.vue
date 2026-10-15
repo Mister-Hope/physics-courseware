@@ -83,7 +83,7 @@ const arcEnd = computed(() => ({
 </script>
 
 <template>
-  <div class="rope-ring">
+  <div class="sim">
     <svg
       :viewBox="`0 0 ${VIEW_W} ${VIEW_H}`"
       xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@ const arcEnd = computed(() => ({
         y1="30"
         :x2="ROD_X"
         :y2="ROD_Y"
-        stroke="rgba(203,213,225,0.8)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)"
         stroke-width="7"
         stroke-linecap="round"
       />
@@ -105,7 +105,7 @@ const arcEnd = computed(() => ({
         :y1="ROD_Y"
         x2="460"
         :y2="ROD_Y"
-        stroke="rgba(203,213,225,0.8)"
+        stroke="color-mix(in srgb, var(--c-neutral-300) 80%, transparent)"
         stroke-width="7"
         stroke-linecap="round"
       />
@@ -121,23 +121,23 @@ const arcEnd = computed(() => ({
         :y1="ringA.y"
         :x2="ringB.x"
         :y2="ringB.y"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2.6"
       />
       <circle
         :cx="ringA.x"
         :cy="ringA.y"
         r="10"
-        fill="rgba(9,13,26,0.9)"
-        stroke="#f87171"
+        fill="color-mix(in srgb, var(--c-bg) 90%, transparent)"
+        stroke="var(--c-force)"
         stroke-width="3"
       />
       <circle
         :cx="ringB.x"
         :cy="ringB.y"
         r="10"
-        fill="rgba(9,13,26,0.9)"
-        stroke="#60a5fa"
+        fill="color-mix(in srgb, var(--c-bg) 90%, transparent)"
+        stroke="var(--c-velocity)"
         stroke-width="3"
       />
       <text
@@ -146,7 +146,7 @@ const arcEnd = computed(() => ({
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#f87171"
+        fill="var(--c-force)"
       >
         A
       </text>
@@ -156,7 +156,7 @@ const arcEnd = computed(() => ({
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#93c5fd"
+        fill="var(--c-velocity-light)"
       >
         B
       </text>
@@ -164,7 +164,7 @@ const arcEnd = computed(() => ({
       <path
         :d="`M ${arcStart.x} ${arcStart.y} A ${arcRadius} ${arcRadius} 0 0 1 ${arcEnd.x} ${arcEnd.y}`"
         fill="none"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="2"
       />
       <text
@@ -173,20 +173,20 @@ const arcEnd = computed(() => ({
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#cbd5e1"
+        fill="var(--c-neutral-300)"
       >
         θ
       </text>
       <!-- 速度与分解 -->
       <g v-if="showDecomp">
-        <CourseArrow :from="ringA" :to="aTip" stroke="#f87171" :stroke-width="3.4" />
-        <CourseArrow :from="ringB" :to="bTip" stroke="#60a5fa" :stroke-width="3.4" />
+        <CourseArrow :from="ringA" :to="aTip" stroke="var(--c-force)" :stroke-width="3.4" />
+        <CourseArrow :from="ringB" :to="bTip" stroke="var(--c-velocity)" :stroke-width="3.4" />
         <line
           :x1="aPerp.from.x"
           :y1="aPerp.from.y"
           :x2="aPerp.to.x"
           :y2="aPerp.to.y"
-          stroke="rgba(148,163,184,0.8)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
@@ -195,19 +195,19 @@ const arcEnd = computed(() => ({
           :y1="bPerp.from.y"
           :x2="bPerp.to.x"
           :y2="bPerp.to.y"
-          stroke="rgba(148,163,184,0.8)"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
-        <CourseArrow :from="aShare.from" :to="aShare.to" stroke="#e2a846" :stroke-width="3.2" />
-        <CourseArrow :from="bShare.from" :to="bShare.to" stroke="#e2a846" :stroke-width="3.2" />
+        <CourseArrow :from="aShare.from" :to="aShare.to" stroke="var(--c-accent)" :stroke-width="3.2" />
+        <CourseArrow :from="bShare.from" :to="bShare.to" stroke="var(--c-accent)" :stroke-width="3.2" />
         <text
           :x="ringA.x - 34"
           :y="ringA.y + SCALE + 6"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#f87171"
+          fill="var(--c-force)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">A</tspan>
@@ -218,7 +218,7 @@ const arcEnd = computed(() => ({
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="20"
-          fill="#93c5fd"
+          fill="var(--c-velocity-light)"
         >
           v
           <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4">B</tspan>
@@ -229,63 +229,63 @@ const arcEnd = computed(() => ({
           text-anchor="start"
           font-family="KaTeX_Main"
           font-size="14"
-          fill="rgba(226,168,70,0.95)"
+          fill="color-mix(in srgb, var(--c-accent) 95%, transparent)"
         >
           两端沿绳分量相等
         </text>
       </g>
     </svg>
-    <div v-if="showPanel" class="rope-panel">
+    <div v-if="showPanel" class="sim-panel">
       <label
-        >绳与竖直杆的夹角 <span class="rope-val">{{ theta }}°</span
+        >绳与竖直杆的夹角 <span class="sim-val">{{ theta }}°</span
         ><input v-model.number="theta" type="range" min="20" max="70" step="1"
       /></label>
     </div>
-    <div v-if="readout" class="rope-readout">
+    <div v-if="readout" class="sim-readout">
       v<sub>B</sub> = v<sub>A</sub>·cot θ = <b>{{ vB.toFixed(2) }} v<sub>A</sub></b>
     </div>
   </div>
 </template>
 
 <style scoped>
-.rope-ring {
+.sim {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
 }
 
-.rope-ring svg {
+.sim svg {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.rope-panel {
+.sim-panel {
   display: flex;
   justify-content: center;
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
   font-size: 0.8rem;
 }
 
-.rope-panel label {
+.sim-panel label {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.rope-panel input {
+.sim-panel input {
   width: 8rem;
 }
 
-.rope-val {
+.sim-val {
   min-width: 2.6rem;
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
   font-variant-numeric: tabular-nums;
 }
 
-.rope-readout {
-  color: var(--c-text, #e2e8f0);
+.sim-readout {
+  color: var(--c-text);
   font-size: 0.95rem;
   text-align: center;
 }

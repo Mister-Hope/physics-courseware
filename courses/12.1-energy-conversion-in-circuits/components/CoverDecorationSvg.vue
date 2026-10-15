@@ -27,11 +27,11 @@ const { width = 320 } = defineProps<{ width?: number }>();
 
     <!-- ==================== 1. 电能输入端（左侧母节点） ==================== -->
     <!-- 外层呼吸光环 -->
-    <circle cx="32" cy="75" r="21.5" fill="none" stroke="rgba(226,168,70,0.22)" stroke-width="1.2" stroke-dasharray="4 3" />
+    <circle cx="32" cy="75" r="21.5" fill="none" stroke="color-mix(in srgb, var(--c-accent) 22%, transparent)" stroke-width="1.2" stroke-dasharray="4 3" />
     <!-- 电能底盘徽章 -->
-    <circle cx="32" cy="75" r="18" fill="rgba(226,168,70,0.14)" stroke="#e2a846" stroke-width="2" />
+    <circle cx="32" cy="75" r="18" fill="color-mix(in srgb, var(--c-accent) 14%, transparent)" stroke="var(--c-accent)" stroke-width="2" />
     <!-- 金色闪电（精准居中于 (32, 75)，轮廓凌厉锐利） -->
-    <polygon points="34,63 26.5,74.5 31.5,74.5 28.5,87 37.5,73.5 32.5,73.5 35.5,63" fill="#e2a846" filter="url(#elec-glow)" />
+    <polygon points="34,63 26.5,74.5 31.5,74.5 28.5,87 37.5,73.5 32.5,73.5 35.5,63" fill="var(--c-accent)" filter="url(#elec-glow)" />
 
     <!-- ==================== 2. 三条分流支路（平滑 S 型导轨，切线精准对齐箭头） ==================== -->
     <g stroke="currentColor" fill="currentColor" opacity="0.85">
@@ -53,26 +53,26 @@ const { width = 320 } = defineProps<{ width?: number }>();
     <!-- [支路一：内能 / 火苗] 位于 (172, 28) -->
     <g>
       <!-- 徽章底盘 -->
-      <circle cx="172" cy="28" r="16" fill="rgba(248,113,113,0.12)" stroke="#f87171" stroke-width="1.8" />
+      <circle cx="172" cy="28" r="16" fill="color-mix(in srgb, var(--c-force) 12%, transparent)" stroke="var(--c-force)" stroke-width="1.8" />
       <!-- 外焰（流线型燃烧火苗） -->
       <path
         d="M 172 17 C 166.5 22 164.5 26.5 166 32 C 167.5 36.5 176.5 36.5 178 32 C 179.5 26.5 177.5 22 172 17 Z"
-        fill="rgba(248,113,113,0.32)"
-        stroke="#f87171"
+        fill="color-mix(in srgb, var(--c-force) 32%, transparent)"
+        stroke="var(--c-force)"
         stroke-width="1.8"
         stroke-linejoin="round"
         filter="url(#flame-glow)"
       />
       <!-- 内焰火芯 -->
-      <path d="M 172 23 C 169.5 26 168.5 28.5 170 32 C 171 34.5 173 34.5 174 32 C 175.5 28.5 174.5 26 172 23 Z" fill="#f87171" opacity="0.95" />
+      <path d="M 172 23 C 169.5 26 168.5 28.5 170 32 C 171 34.5 173 34.5 174 32 C 175.5 28.5 174.5 26 172 23 Z" fill="var(--c-force)" opacity="0.95" />
     </g>
 
     <!-- [支路二：机械能 / 旋转扇叶] 位于 (172, 75) -->
     <g transform="translate(172 75)">
       <!-- 徽章底盘 -->
-      <circle cx="0" cy="0" r="16" fill="rgba(96,165,250,0.12)" stroke="#60a5fa" stroke-width="1.8" />
+      <circle cx="0" cy="0" r="16" fill="color-mix(in srgb, var(--c-velocity) 12%, transparent)" stroke="var(--c-velocity)" stroke-width="1.8" />
       <!-- 旋转扇叶群（以 (0,0) 为轴心严谨 120° 等距辐射） -->
-      <g stroke="#60a5fa" stroke-width="1.4" fill="rgba(96,165,250,0.38)">
+      <g stroke="var(--c-velocity)" stroke-width="1.4" fill="color-mix(in srgb, var(--c-velocity) 38%, transparent)">
         <!-- 叶片 1（正上） -->
         <ellipse cx="0" cy="-6.5" rx="3.2" ry="6" />
         <!-- 叶片 2（顺时针 120°，右下） -->
@@ -81,23 +81,23 @@ const { width = 320 } = defineProps<{ width?: number }>();
         <ellipse cx="0" cy="-6.5" rx="3.2" ry="6" transform="rotate(240)" />
       </g>
       <!-- 扇叶中心金属轴心 -->
-      <circle r="2.8" fill="#60a5fa" />
-      <circle r="1.1" fill="#0f172a" />
+      <circle r="2.8" fill="var(--c-velocity)" />
+      <circle r="1.1" fill="var(--c-neutral-900)" />
     </g>
 
     <!-- [支路三：化学能 / 蓄电池充放电] 位于 (172, 122) -->
     <g transform="translate(172 122)">
       <!-- 徽章底盘 -->
-      <circle cx="0" cy="0" r="16" fill="rgba(45,212,191,0.12)" stroke="#2dd4bf" stroke-width="1.8" />
+      <circle cx="0" cy="0" r="16" fill="color-mix(in srgb, var(--c-physics) 12%, transparent)" stroke="var(--c-physics)" stroke-width="1.8" />
       <!-- 电池外壳 -->
-      <rect x="-6.5" y="-8.5" width="13" height="17" rx="2" fill="rgba(45,212,191,0.22)" stroke="#2dd4bf" stroke-width="1.6" />
+      <rect x="-6.5" y="-8.5" width="13" height="17" rx="2" fill="color-mix(in srgb, var(--c-physics) 22%, transparent)" stroke="var(--c-physics)" stroke-width="1.6" />
       <!-- 正极凸起接线端子（顶部帽） -->
-      <rect x="-3" y="-11" width="6" height="2.5" rx="0.8" fill="#2dd4bf" />
+      <rect x="-3" y="-11" width="6" height="2.5" rx="0.8" fill="var(--c-physics)" />
       <!-- 化学活性储能块（电量/活性物） -->
-      <rect x="-4.5" y="-2.5" width="9" height="9" rx="1" fill="#2dd4bf" opacity="0.85" />
+      <rect x="-4.5" y="-2.5" width="9" height="9" rx="1" fill="var(--c-physics)" opacity="0.85" />
       <!-- 正极标志 '+' -->
-      <line x1="0" y1="-6.5" x2="0" y2="-3.5" stroke="#2dd4bf" stroke-width="1.2" stroke-linecap="round" />
-      <line x1="-1.5" y1="-5" x2="1.5" y2="-5" stroke="#2dd4bf" stroke-width="1.2" stroke-linecap="round" />
+      <line x1="0" y1="-6.5" x2="0" y2="-3.5" stroke="var(--c-physics)" stroke-width="1.2" stroke-linecap="round" />
+      <line x1="-1.5" y1="-5" x2="1.5" y2="-5" stroke="var(--c-physics)" stroke-width="1.2" stroke-linecap="round" />
     </g>
   </svg>
 </template>

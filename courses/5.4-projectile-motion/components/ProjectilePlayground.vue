@@ -145,7 +145,7 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
         <polyline
           :points="flown.map((p) => `${x(p.x)},${y(p.y)}`).join(' ')"
           fill="none"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="3.4"
           stroke-linecap="round"
         />
@@ -153,13 +153,13 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
           <CourseArrow
             :from="{ x: x(xPos), y: y(-yPos) }"
             :to="{ x: x(xPos) + vx * VSCALE * px2user, y: y(-yPos) }"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             :stroke-width="3"
           />
           <CourseArrow
             :from="{ x: x(xPos), y: y(-yPos) }"
             :to="{ x: x(xPos), y: y(-yPos) + vy * VSCALE * px2user }"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             :stroke-width="3"
           />
           <CourseArrow
@@ -168,13 +168,13 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
               x: x(xPos) + speed * VSCALE * px2user * dir(theta).dx,
               y: y(-yPos) + speed * VSCALE * px2user * dir(theta).dy,
             }"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             :stroke-width="3.4"
           />
           <path
             :d="arcPath(x(xPos), y(-yPos), ARC_R, 0, theta, px2user)"
             fill="none"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="2"
           />
           <text
@@ -183,7 +183,7 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"
-            fill="#93c5fd"
+            fill="var(--c-velocity-light)"
             >v<tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="4"
               >x</tspan
             ></text
@@ -224,7 +224,7 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
             :y1="y(0)"
             :x2="x(xPos)"
             :y2="y(0)"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             stroke-width="2.4"
             stroke-dasharray="7 6"
           />
@@ -233,20 +233,20 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
             :y1="y(0)"
             :x2="x(xPos)"
             :y2="y(-yPos)"
-            stroke="#2dd4bf"
+            stroke="var(--c-physics)"
             stroke-width="2.4"
             stroke-dasharray="7 6"
           />
           <CourseArrow
             :from="{ x: x(0), y: y(0) }"
             :to="{ x: x(xPos), y: y(-yPos) }"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             :stroke-width="3.4"
           />
           <path
             :d="arcPath(x(0), y(0), ARC_R, 0, alpha, px2user)"
             fill="none"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="2"
           />
           <text
@@ -255,7 +255,7 @@ const fixed = (value: number, digits = 2): string => value.toFixed(digits);
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="19"
-            fill="#93c5fd"
+            fill="var(--c-velocity-light)"
             >x</text
           >
           <text

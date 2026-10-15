@@ -49,7 +49,7 @@ const [, mid] = arcs;
 
 <template>
   <svg viewBox="130 185 700 185" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 150 350 Q 480 40 810 350" fill="none" stroke="#f1f5f9" stroke-width="3.4" stroke-linecap="round" />
+    <path d="M 150 350 Q 480 40 810 350" fill="none" stroke="var(--c-text)" stroke-width="3.4" stroke-linecap="round" />
     <g v-if="step >= 1">
       <path
         v-for="(arc, index) in arcs"
@@ -62,18 +62,18 @@ const [, mid] = arcs;
         stroke-linecap="round"
         :opacity="step >= 2 && index !== 1 ? 0.35 : 0.95"
       />
-      <circle v-for="(arc, index) in arcs" :key="`p${index}`" :cx="arc.P.x" :cy="arc.P.y" r="5" fill="#f1f5f9" />
+      <circle v-for="(arc, index) in arcs" :key="`p${index}`" :cx="arc.P.x" :cy="arc.P.y" r="5" fill="var(--c-text)" />
     </g>
     <g v-if="step >= 2">
-      <circle :cx="mid.P.x" :cy="mid.P.y" r="12" fill="none" stroke="#e2a846" stroke-width="2.4" />
+      <circle :cx="mid.P.x" :cy="mid.P.y" r="12" fill="none" stroke="var(--c-accent)" stroke-width="2.4" />
       <text
         :x="mid.P.x + 36"
         :y="mid.P.y + 52"
         font-family="KaTeX_Main"
         font-size="19"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="start"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="4"
         paint-order="stroke"
       >

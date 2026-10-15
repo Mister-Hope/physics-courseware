@@ -74,12 +74,12 @@ const times = computed(() => signal.value / NOISE);
 </script>
 
 <template>
-  <div class="ae-wrap">
-    <div class="ae-figure">
+  <div class="split-wide" style="--cols: minmax(0, 1.05fr) minmax(0, 1fr)">
+    <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <polygon
           :points="`${origin.x},${origin.y} ${tip1.x},${tip1.y} ${tipF.x},${tipF.y} ${tip2.x},${tip2.y}`"
-          fill="rgba(226,168,70,0.07)"
+          fill="color-mix(in srgb, var(--c-accent) 7%, transparent)"
           stroke="var(--c-text-dim)"
           stroke-width="1.2"
           stroke-dasharray="6 5"
@@ -152,9 +152,9 @@ const times = computed(() => signal.value / NOISE);
       />
     </div>
 
-    <div class="ae-info">
-      <div class="ae-row">
-        <span class="ae-name"><Latex tex="\theta" /></span>
+    <div class="demo-panel">
+      <div class="demo-row">
+        <span class="demo-name"><Latex tex="\theta" /></span>
         <input
           v-model.number="theta"
           type="range"
@@ -163,27 +163,27 @@ const times = computed(() => signal.value / NOISE);
           step="5"
           aria-label="两力夹角"
         />
-        <span class="ae-val"><Latex :tex="thetaTex" /></span>
+        <span class="demo-val"><Latex :tex="thetaTex" /></span>
       </div>
 
-      <div class="ae-force"><Latex :tex="forceTex" /></div>
+      <div class="demo-readout"><Latex :tex="forceTex" /></div>
 
-      <div class="ae-metric">
-        <div class="ae-head">
-          <span class="ae-label">夹角带来的差别 <Latex tex="F_1+F_2-F" /></span>
-          <span class="ae-value"><Latex :tex="signalTex" /></span>
+      <div class="exp-metric">
+        <div class="exp-head">
+          <span class="exp-label">夹角带来的差别 <Latex tex="F_1+F_2-F" /></span>
+          <span class="exp-value"><Latex :tex="signalTex" /></span>
         </div>
-        <div class="ae-bar">
+        <div class="exp-bar">
           <div
-            class="ae-fill"
-            :class="signalEnough ? 'ae-ok' : 'ae-bad'"
+            class="exp-fill"
+            :class="signalEnough ? 'exp-ok' : 'exp-bad'"
             :style="{ width: barSignal }"
           />
         </div>
-        <div class="ae-bar ae-bar-noise">
-          <div class="ae-fill ae-dim" :style="{ width: barNoise }" />
+        <div class="exp-bar exp-bar-noise">
+          <div class="exp-fill exp-dim" :style="{ width: barNoise }" />
         </div>
-        <div class="ae-note" :class="signalEnough ? 'ae-ok-text' : 'ae-bad-text'">
+        <div class="mini-note" :class="signalEnough ? '' : 'bad-line'">
           测力计分度 <Latex tex="0.1\ \text{N}" />：{{
             signalEnough
               ? `差别的 ${times.toFixed(0)} 倍，看得出`
@@ -192,116 +192,50 @@ const times = computed(() => signal.value / NOISE);
         </div>
       </div>
 
-      <div class="ae-metric">
-        <div class="ae-head">
-          <span class="ae-label"><Latex tex="0.1\ \text{N}" /> 占合力的比例</span>
-          <span class="ae-value"><Latex :tex="errorTex" /></span>
+      <div class="exp-metric">
+        <div class="exp-head">
+          <span class="exp-label"><Latex tex="0.1\ \text{N}" /> 占合力的比例</span>
+          <span class="exp-value"><Latex :tex="errorTex" /></span>
         </div>
-        <div class="ae-bar">
+        <div class="exp-bar">
           <div
-            class="ae-fill"
-            :class="errorSmall ? 'ae-ok' : 'ae-bad'"
+            class="exp-fill"
+            :class="errorSmall ? 'exp-ok' : 'exp-bad'"
             :style="{ width: barError }"
           />
         </div>
-        <div class="ae-note" :class="errorSmall ? 'ae-ok-text' : 'ae-bad-text'">
+        <div class="mini-note" :class="errorSmall ? '' : 'bad-line'">
           {{ errorSmall ? "同样的读数误差，占合力的比例还不大" : "合力太小，同样的误差被放大" }}
         </div>
       </div>
 
-      <div class="ae-hint">把 <Latex tex="\theta" /> 拖到 20° 和 160° 各看一次</div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.ae-wrap {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: 1.6rem;
-  align-items: center;
-}
-
-.ae-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.ae-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.ae-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  min-width: 0;
-}
-
-.ae-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-.ae-row {
-  display: grid;
-  grid-template-columns: 2.2rem minmax(0, 1fr) 6rem;
-  gap: 0.6rem;
-  align-items: center;
-
+/* 控制行 / 面板 / 读数走共享 .demo-*；这里只留本组件的列宽与字号
+   （组件 scoped 内的版式微字号，见 style-guide §3） */
+.demo-row {
+  --demo-read: 6rem;
   font-size: 1rem;
 }
 
-.ae-name {
-  font-weight: 700;
-  text-align: center;
-}
-
-.ae-val {
-  color: var(--c-text-dim);
+.demo-val {
   font-size: 0.95rem;
-  text-align: right;
-  white-space: nowrap;
 }
 
-.ae-row input[type="range"] {
-  min-width: 0;
-  height: 4px;
-  border-radius: 2rem;
-
-  background: rgb(148 163 184 / 20%);
-  outline: none;
-
-  cursor: pointer;
-
-  appearance: none;
-}
-
-.ae-row input[type="range"]::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--c-bg-soft);
-  border-radius: 50%;
-
-  background: var(--c-text-dim);
-
-  appearance: none;
-}
-
-.ae-force {
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-physics);
+.demo-readout {
   font-size: 1.05rem;
 }
 
-.ae-metric {
+.exp-metric {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.ae-head {
+.exp-head {
   display: flex;
   gap: 0.6rem;
   align-items: baseline;
@@ -310,64 +244,46 @@ const times = computed(() => signal.value / NOISE);
   font-size: 0.95rem;
 }
 
-.ae-label {
+.exp-label {
   min-width: 0;
 }
 
-.ae-value {
+.exp-value {
   color: var(--c-text);
   font-weight: 700;
   white-space: nowrap;
 }
 
-.ae-bar {
+.exp-bar {
   overflow: hidden;
 
   width: 100%;
   height: 8px;
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(148 163 184 / 16%);
+  background: color-mix(in srgb, var(--c-text-dim) 16%, transparent);
 }
 
 /* 下面那一条是 0.1 N 的分度，两条共用量程，长短可以直接比 */
-.ae-bar-noise {
+.exp-bar-noise {
   height: 5px;
 }
 
-.ae-fill {
+.exp-fill {
   height: 100%;
-  border-radius: 2rem;
+  border-radius: 999px;
   transition: width 0.15s ease;
 }
 
-.ae-ok {
+.exp-ok {
   background: var(--c-accent-2);
 }
 
-.ae-bad {
+.exp-bad {
   background: var(--c-danger);
 }
 
-.ae-dim {
+.exp-dim {
   background: var(--c-text-dim);
-}
-
-.ae-note {
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-
-.ae-ok-text {
-  color: var(--c-text-dim);
-}
-
-.ae-bad-text {
-  color: var(--c-danger);
-}
-
-.ae-hint {
-  color: var(--c-text-dim);
-  font-size: 0.82rem;
 }
 </style>

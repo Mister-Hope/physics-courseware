@@ -235,7 +235,7 @@ onUnmounted(() => cancelAnimationFrame(frameId));
         {{ playing ? "演示中…" : simTime > 0 ? "重新演示" : "开始演示" }}
       </button>
       <div class="sim-readout">
-        <span class="sim-note">
+        <span>
           <template v-for="(part, index) in phaseNote" :key="index">
             <Latex v-if="part.tex" :tex="part.tex" />
             <span v-else>{{ part.text }}</span>
@@ -266,35 +266,35 @@ onUnmounted(() => cancelAnimationFrame(frameId));
             y1="120"
             x2="300"
             y2="120"
-            stroke="rgba(148,163,184,0.45)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 45%, transparent)"
             stroke-width="1.2"
             stroke-dasharray="6 6"
           />
-          <text x="304" y="124" font-size="12" fill="#94a3b8">释放点</text>
+          <text x="304" y="124" font-size="12" fill="var(--c-text-dim)">释放点</text>
           <line
             x1="60"
             y1="160"
             x2="300"
             y2="160"
-            stroke="rgba(148,163,184,0.28)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 28%, transparent)"
             stroke-width="1.2"
             stroke-dasharray="6 6"
           />
-          <text x="304" y="164" font-size="12" fill="#94a3b8">弹簧原长</text>
+          <text x="304" y="164" font-size="12" fill="var(--c-text-dim)">弹簧原长</text>
           <rect
             x="164"
             y="272"
             width="32"
             height="8"
             rx="2"
-            fill="rgba(148,163,184,0.35)"
-            stroke="rgba(148,163,184,0.6)"
+            fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
             stroke-width="1"
           />
           <polyline
             :points="springPoints"
             fill="none"
-            stroke="#e2a846"
+            stroke="var(--c-accent)"
             stroke-width="2.6"
             stroke-linejoin="round"
             stroke-linecap="round"
@@ -305,17 +305,17 @@ onUnmounted(() => cancelAnimationFrame(frameId));
             width="90"
             height="10"
             rx="3"
-            fill="rgba(148,163,184,0.28)"
-            stroke="rgba(203,213,225,0.7)"
+            fill="color-mix(in srgb, var(--c-text-dim) 28%, transparent)"
+            stroke="color-mix(in srgb, var(--c-neutral-300) 70%, transparent)"
             stroke-width="1.3"
           />
-          <text x="252" :y="trayTop + 9" font-size="12" fill="#94a3b8">轻质托盘</text>
-          <text x="222" y="252" font-size="12" fill="#e2a846">轻弹簧</text>
+          <text x="252" :y="trayTop + 9" font-size="12" fill="var(--c-text-dim)">轻质托盘</text>
+          <text x="222" y="252" font-size="12" fill="var(--c-accent)">轻弹簧</text>
           <CourseArrow
             v-if="velocityArrow"
             :from="velocityArrow.from"
             :to="velocityArrow.to"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             :stroke-width="3"
             label="v"
           />
@@ -323,15 +323,15 @@ onUnmounted(() => cancelAnimationFrame(frameId));
             :cx="AXIS_X"
             :cy="ballY"
             :r="BALL_RADIUS"
-            fill="rgba(96,165,250,0.35)"
-            stroke="#60a5fa"
+            fill="color-mix(in srgb, var(--c-velocity) 35%, transparent)"
+            stroke="var(--c-velocity)"
             stroke-width="2"
           />
           <text
             :x="AXIS_X"
             :y="ballY + 6"
             font-size="15"
-            fill="#f1f5f9"
+            fill="var(--c-text)"
             text-anchor="middle"
             font-family="KaTeX_Math"
             font-style="italic"
@@ -341,7 +341,7 @@ onUnmounted(() => cancelAnimationFrame(frameId));
           <CourseArrow
             :from="{ x: AXIS_X, y: ballY }"
             :to="{ x: AXIS_X, y: ballY + 60 }"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             :stroke-width="2.6"
             label="G"
             :label-dx="-14"
@@ -407,6 +407,9 @@ onUnmounted(() => cancelAnimationFrame(frameId));
   color: var(--c-accent);
 
   font-weight: 700;
+  /* 组件内部的固定版式字号（style-guide §3 铁律 3 的 scoped 例外）：
+     改用共享阶梯 .text-lg（1.1rem）会让 .sim-bar 排不下一行、整块演示区不再占满页面
+     （实测第 16 页底部留白 24.2px → 67.9px），故保留原值。 */
   font-size: 1.05rem;
 
   cursor: pointer;
@@ -415,8 +418,8 @@ onUnmounted(() => cancelAnimationFrame(frameId));
 }
 
 .sim-btn:hover {
-  border-color: rgb(226 168 70 / 45%);
-  background: rgb(30 41 59 / 85%);
+  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--c-surface-solid) 85%, transparent);
 }
 
 .sim-readout {
@@ -425,7 +428,5 @@ onUnmounted(() => cancelAnimationFrame(frameId));
   align-items: baseline;
 
   color: var(--c-text);
-
-  font-size: 1rem;
 }
 </style>

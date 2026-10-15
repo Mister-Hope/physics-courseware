@@ -34,27 +34,27 @@ const labelTheta = pct(206, 280);
   <div class="relative w-full">
     <svg viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg" class="w-full">
       <!-- 原点 O -->
-      <circle cx="120" cy="320" r="4.5" fill="#e2e8f0" />
+      <circle cx="120" cy="320" r="4.5" fill="var(--c-neutral-200)" />
 
       <!-- v：水平向右（蓝） -->
       <CourseArrow
         :from="{ x: 120, y: 320 }"
         :to="{ x: 452, y: 320 }"
-        stroke="#60a5fa"
+        stroke="var(--c-velocity)"
         stroke-width="5"
       />
       <!-- B：与 v 成 θ = 50°（金） -->
       <CourseArrow
         :from="{ x: 120, y: 320 }"
         :to="{ x: 249, y: 167 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="5"
       />
       <!-- B∥ = B cosθ：沿 v 方向的分量（金色虚线，不产生力） -->
       <CourseArrow
         :from="{ x: 120, y: 320 }"
         :to="{ x: 249, y: 320 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3.4"
         stroke-dasharray="9 6"
         style="opacity: 0.85"
@@ -63,7 +63,7 @@ const labelTheta = pct(206, 280);
       <CourseArrow
         :from="{ x: 249, y: 320 }"
         :to="{ x: 249, y: 167 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3.4"
         stroke-dasharray="9 6"
         style="opacity: 0.85"
@@ -73,12 +73,12 @@ const labelTheta = pct(206, 280);
       <path
         d="M 239 320 L 239 310 L 249 310"
         fill="none"
-        stroke="rgba(226,168,70,0.75)"
+        stroke="color-mix(in srgb, var(--c-accent) 75%, transparent)"
         stroke-width="1.6"
       />
 
       <!-- θ 角弧：以 O 为圆心，两端落在 v、B 上 -->
-      <path :d="arc" fill="none" stroke="#f8fafc" stroke-width="2.2" />
+      <path :d="arc" fill="none" stroke="var(--c-neutral-50)" stroke-width="2.2" />
 
       <!-- 单字母标注（SVG 里只能用 KaTeX 字体；带角标/运算符的交给 ChartLabel） -->
       <text
@@ -88,7 +88,7 @@ const labelTheta = pct(206, 280);
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#e2a846"
+        fill="var(--c-accent)"
       >
         B
       </text>
@@ -98,7 +98,7 @@ const labelTheta = pct(206, 280);
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="26"
-        fill="#60a5fa"
+        fill="var(--c-velocity)"
       >
         v
       </text>
@@ -108,7 +108,7 @@ const labelTheta = pct(206, 280);
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="24"
-        fill="#e2e8f0"
+        fill="var(--c-neutral-200)"
       >
         O
       </text>

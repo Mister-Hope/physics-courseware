@@ -31,23 +31,23 @@ clicks: 1
 <div class="page-grow">
 <div class="ask">无人机、挖掘机、龙门吊——它们的动作凭什么这么"灵活"？</div>
 
-<div class="grid-3">
+<div class="three-col">
 <div class="scene">
-<mdi-excavator class="scene-icon" />
-<div class="scene-title">挖掘机</div>
-<div class="scene-desc">电机 → 臂 → 挖斗，每个电机只管一个关节</div>
+<mdi-excavator class="text-5xl text-accent" />
+<div class="text-xl font-bold">挖掘机</div>
+<div class="mini-note">电机 → 臂 → 挖斗，每个电机只管一个关节</div>
 </div>
 
 <div class="scene">
-<mdi-crane class="scene-icon" />
-<div class="scene-title">龙门吊</div>
-<div class="scene-desc">3 个互相垂直方向的电机 → 3 个方向的运动</div>
+<mdi-crane class="text-5xl text-accent" />
+<div class="text-xl font-bold">龙门吊</div>
+<div class="mini-note">3 个互相垂直方向的电机 → 3 个方向的运动</div>
 </div>
 
 <div class="scene">
-<mdi-drone class="scene-icon" />
-<div class="scene-title">无人机航拍</div>
-<div class="scene-desc">不单独控制 4 个风扇，算法把它抽象成 3 个方向的平动 + 水平旋转</div>
+<mdi-drone class="text-5xl text-accent" />
+<div class="text-xl font-bold">无人机航拍</div>
+<div class="mini-note">不单独控制 4 个风扇，算法把它抽象成 3 个方向的平动 + 水平旋转</div>
 </div>
 </div>
 
@@ -62,14 +62,14 @@ clicks: 1
 # 把复杂运动拆成简单运动
 
 <div class="page-grow">
-<div class="grid-2">
+<div class="half-grid">
 <div class="stack">
-<div class="mini-title">平面运动</div>
+<div class="mini-title"><mdi-vector-square class="text-xl" /> 平面运动</div>
 <div>拆成 <b>2 个</b>互相垂直的方向</div>
 </div>
 
 <div class="stack divider-l">
-<div class="mini-title">空间运动</div>
+<div class="mini-title"><mdi-cube-outline class="text-xl" /> 空间运动</div>
 <div>拆成 <b>3 个</b>互相垂直的方向</div>
 </div>
 </div>
@@ -85,7 +85,7 @@ clicks: 1
 ---
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div class="ask">抓娃娃机的爪，落下之前怎么找到娃娃的位置？</div>
 <div class="key" v-click="1">机箱里有两个电机：<b>1 号管左右</b>（x 坐标），<b>2 号管前后</b>（y 坐标）——对好位置，爪子才落下去。</div>
@@ -103,7 +103,7 @@ clicks: 1
 # 一个电机，一个方向
 
 <div class="page-grow">
-<div class="grid-2">
+<div class="half-grid">
 <div class="figure"><ClawMachine :vx="1" :vy="0" /></div>
 
 <div class="figure"><ClawMachine :vx="0" :vy="0.6" /></div>
@@ -120,7 +120,7 @@ clicks: 1
 # 两个电机同时开
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div class="ask">两个电机同时工作，爪沿什么轨迹运动？</div>
 <div class="key" v-click="1">斜线不是第三个电机给的——它是两个分运动共同的效果，叫作<b>合运动</b>。</div>
@@ -138,7 +138,7 @@ clicks: 2
 # 建立坐标系，写出轨迹方程
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>俯视图里：以爪的起点为原点 <Latex tex="O" />，<Latex tex="x" /> 轴沿左右方向，<Latex tex="y" /> 轴沿前后方向（图上向上）。</div>
 <div><Latex tex="x = v_x t" display /></div>
@@ -159,7 +159,7 @@ clicks: 1
 # 合速度有多大
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div><Latex tex="v = \sqrt{v_x^2 + v_y^2}" display /></div>
 <div><Latex tex="\tan\theta = \frac{v_y}{v_x}" display /></div>
@@ -196,20 +196,20 @@ clicks: 1
 # 描述运动的三个量，都按矢量合成
 
 <div class="page-grow">
-<div class="grid-3">
+<div class="three-col">
 <div class="stack">
 <div><Latex tex="s = \sqrt{x^2 + y^2}" display /></div>
-<div>合位移</div>
+<div class="mini-title"><mdi-map-marker-path class="text-xl" /> 合位移</div>
 </div>
 
 <div class="stack">
 <div><Latex tex="v = \sqrt{v_x^2 + v_y^2}" display /></div>
-<div>合速度</div>
+<div class="mini-title"><mdi-speedometer class="text-xl" /> 合速度</div>
 </div>
 
 <div class="stack">
 <div><Latex tex="a = \sqrt{a_x^2 + a_y^2}" display /></div>
-<div>合加速度</div>
+<div class="mini-title"><mdi-rocket-launch-outline class="text-xl" /> 合加速度</div>
 </div>
 </div>
 
@@ -224,7 +224,7 @@ clicks: 2
 # 分运动都简单，合运动未必简单
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>1 号电机匀加速：<Latex tex="x = \frac{1}{2}at^2" /></div>
 <div>2 号电机匀速：<Latex tex="y = v_y t" /></div>
@@ -267,7 +267,7 @@ clicks: 2
 <div class="page-grow">
 <div>炮筒与水平方向成 <Latex tex="30^\circ" /> 角，炮弹从炮口射出时的速度大小是 <Latex tex="800\ \text{m/s}" />。求这个速度在水平方向和竖直方向的分速度。</div>
 
-<div class="grid-2" v-click="1">
+<div class="half-grid" v-click="1">
 <div><Latex tex="v_x = v\cos 30^\circ = 800 \times \frac{\sqrt{3}}{2}\ \text{m/s} = 400\sqrt{3}\ \text{m/s} \approx 693\ \text{m/s}" /></div>
 
 <div><Latex tex="v_y = v\sin 30^\circ = 800 \times \frac{1}{2}\ \text{m/s} = 400\ \text{m/s}" /></div>
@@ -310,7 +310,7 @@ clicks: 2
 # 速度合成：一条普遍的公理
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div><Latex tex="v_{A\text{对}C} = v_{A\text{对}B} + v_{B\text{对}C}" display /></div>
 <div>把"对"读出来：<Latex tex="v_{A\text{对}B}" /> 就是<b>在 B 的参考系里看 A 的速度</b>。</div>
@@ -330,7 +330,7 @@ clicks: 1
 # 把公理用到渡河上
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>船对水的速度、水对岸的速度，合成起来就是<b>船对岸的速度</b>：</div>
 <div><Latex tex="v_{\text{船对岸}} = v_{\text{船对水}} + v_{\text{水对岸}}" display /></div>
@@ -346,8 +346,8 @@ layout: base-flex
 clicks: 2
 ---
 
-<div class="page-grow page-loose">
-<div class="ask">人在河中始终保持头朝正前方游向对岸，会在正前方到达，还是偏向上游或下游？</div>
+<div class="page-grow text-xl">
+<div class="ask text-3xl leading-normal">人在河中始终保持头朝正前方游向对岸，会在正前方到达，还是偏向上游或下游？</div>
 
 <div v-click="1">会偏到<b>下游</b>去。</div>
 
@@ -362,7 +362,7 @@ clicks: 2
 # 渡河：船在动，水也在动
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>河宽 <Latex tex="d" />，船在静水中的速度 <Latex tex="v_{\text{船}}" />，水流速度 <Latex tex="v_{\text{水}}" />。</div>
 <div v-click="1"><Latex tex="v_{\text{船对岸}} = v_{\text{船对水}} + v_{\text{水对岸}}" display /></div>
@@ -381,7 +381,7 @@ clicks: 2
 # 怎样过河最快
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="figure"><RiverCrossing mode="time" /></div>
 
 <div class="stack">
@@ -401,7 +401,7 @@ clicks: 2
 # 怎样过河走的路最短
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="figure"><RiverCrossing mode="displacement" /></div>
 
 <div class="stack">
@@ -421,16 +421,16 @@ clicks: 1
 # 同一条船，两种开法
 
 <div class="page-grow">
-<div class="grid-2">
+<div class="half-grid">
 <div class="stack">
-<div class="mini-title">要快</div>
+<div class="mini-title"><mdi-clock-fast class="text-xl" /> 要快</div>
 <div>船头垂直河岸</div>
 <div><Latex tex="t_{\min} = \frac{d}{v_{\text{船}}}" />，与 <Latex tex="v_{\text{水}}" /> 无关</div>
 <div>靠岸点偏到下游 <Latex tex="x = v_{\text{水}}t" /></div>
 </div>
 
 <div class="stack divider-l">
-<div class="mini-title">要正</div>
+<div class="mini-title"><mdi-crosshairs class="text-xl" /> 要正</div>
 <div>船头偏向上游，<Latex tex="\cos\theta = \frac{v_{\text{水}}}{v_{\text{船}}}" /></div>
 <div><Latex tex="t = \frac{d}{\sqrt{v_{\text{船}}^2 - v_{\text{水}}^2}}" />，位移等于河宽</div>
 <div>只有在 <Latex tex="v_{\text{船}} > v_{\text{水}}" /> 时才能做到</div>
@@ -450,16 +450,16 @@ clicks: 1
 <div class="page-grow">
 <div>汽艇以 <Latex tex="18\ \text{km/h}" /> 的速度沿垂直于河岸的方向匀速向对岸行驶，河宽 <Latex tex="500\ \text{m}" />，河水流速 <Latex tex="3.6\ \text{km/h}" />。</div>
 
-<div class="grid-2" v-click="1">
+<div class="half-grid" v-click="1">
 <div class="stack">
-<div class="mini-title">渡河时间</div>
+<div class="mini-title"><mdi-clock-outline class="text-xl" /> 渡河时间</div>
 <div><Latex tex="18\ \text{km/h} = 5\ \text{m/s}" /></div>
 <div><Latex tex="t = \frac{d}{v_{\text{船}}} = \frac{500}{5}\ \text{s} = 100\ \text{s}" /></div>
 <div>水流速度不改变渡河时间</div>
 </div>
 
 <div class="stack divider-l">
-<div class="mini-title">靠岸点</div>
+<div class="mini-title"><mdi-map-marker class="text-xl" /> 靠岸点</div>
 <div><Latex tex="3.6\ \text{km/h} = 1\ \text{m/s}" /></div>
 <div><Latex tex="x = v_{\text{水}}t = 1 \times 100\ \text{m} = 100\ \text{m}" /></div>
 <div>落在出发点下游 <Latex tex="100\ \text{m}" /> 处</div>
@@ -491,7 +491,7 @@ clicks: 1
 
 # 阶段小结：合成、分解与渡河
 
-<div class="page-grow page-loose">
+<div class="page-grow text-xl">
 <div class="stack">
 <div>① 一个平面运动，可以拆成两个互相垂直方向上的分运动（<b>正交分解</b>）。</div>
 <div>② 分运动与合运动由矢量运算法则联系：<Latex tex="s" />、<Latex tex="v" />、<Latex tex="a" /> 都按平行四边形定则合成。</div>
@@ -511,20 +511,23 @@ clicks: 1
 <div class="page-grow">
 <div class="ask">绳、杆、接触面——两个物体的速度是怎么互相"牵制"的？</div>
 
-<div class="grid-3">
+<div class="three-col">
 <div class="scene">
-<div class="scene-title">绳</div>
-<div class="scene-desc">不可伸长：两端沿绳方向的分量相等</div>
+<mdi-link-variant class="text-5xl text-accent" />
+<div class="text-xl font-bold">绳</div>
+<div class="mini-note">不可伸长：两端沿绳方向的分量相等</div>
 </div>
 
 <div class="scene">
-<div class="scene-title">杆</div>
-<div class="scene-desc">不能伸缩：两端沿杆方向的分量相等</div>
+<mdi-vector-line class="text-5xl text-accent" />
+<div class="text-xl font-bold">杆</div>
+<div class="mini-note">不能伸缩：两端沿杆方向的分量相等</div>
 </div>
 
 <div class="scene">
-<div class="scene-title">接触面</div>
-<div class="scene-desc">不嵌入、不分离：沿法线方向的分量相等</div>
+<mdi-vector-square class="text-5xl text-accent" />
+<div class="text-xl font-bold">接触面</div>
+<div class="mini-note">不嵌入、不分离：沿法线方向的分量相等</div>
 </div>
 </div>
 
@@ -537,7 +540,7 @@ clicks: 2
 ---
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div class="ask">人在岸上收绳把船拉向岸边。人收绳的速度是 <Latex tex="v_0" />，船靠岸的速度也是 <Latex tex="v_0" /> 吗？</div>
 <div class="key" v-click="2">不是——<b>船比绳快</b>：船的速度里，只有沿绳的那一部分才等于收绳速度。</div>
@@ -555,7 +558,7 @@ clicks: 2
 # 绳上的速度分量必须相等
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>绳不可伸长：不管两端怎么动，<b>沿绳方向的速度分量必须相等</b>，否则绳就被拉长或压缩了。</div>
 <div v-click="1">垂直于绳的分量不传递——它只让绳绕着端点转过去。</div>
@@ -591,7 +594,7 @@ clicks: 3
 # 例题：收绳拉船
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>人在高于水面的岸边用绳把船拉向岸边，绳与水平方向的夹角为 <Latex tex="\theta" />，人收绳的速度为 <Latex tex="v_0" />。求船靠岸的速度 <Latex tex="v_{\text{船}}" />。</div>
 <div v-click="2">船速沿绳方向的分量等于收绳速度：<Latex tex="v_{\text{船}}\cos\theta = v_0" />。</div>
@@ -610,7 +613,7 @@ clicks: 2
 # θ 变小时，船会怎样？
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>船越靠岸，绳与水平方向的夹角 <Latex tex="\theta" /> 越大，<Latex tex="\cos\theta" /> 越小。</div>
 <div v-click="1">由 <Latex tex="v_{\text{船}} = \frac{v_0}{\cos\theta}" />：<b>同样的收绳速度，越靠岸船冲得越快</b>。</div>
@@ -629,7 +632,7 @@ clicks: 3
 # 例题：两杆上的环
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>两根互相垂直的杆上各套一个环 A、B，用一根不可伸长的绳相连。A 沿竖直杆以速度 <Latex tex="v_A" /> 下滑，当绳与竖直杆的夹角为 <Latex tex="\theta" /> 时，求 B 的速度 <Latex tex="v_B" />。</div>
 <div v-click="2">两端沿绳方向的分量相等：<Latex tex="v_A\cos\theta = v_B\sin\theta" />。</div>
@@ -648,7 +651,7 @@ clicks: 2
 # B 什么时候快，什么时候慢？
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div v-click="1">绳越接近竖直（<Latex tex="\theta \to 0" />）：<Latex tex="\cot\theta" /> 很大，B 被拽得飞快。</div>
 <div v-click="1">绳越接近水平（<Latex tex="\theta \to 90^\circ" />）：<Latex tex="\cot\theta \to 0" />，B 几乎不动。</div>
@@ -667,7 +670,7 @@ clicks: 3
 # 例题：把斜劈挤开
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>光滑墙角处，斜劈放在光滑水平地面上，球夹在竖直墙与斜劈斜面之间。球沿墙以速度 <Latex tex="v_0" /> 下落，斜面与水平方向的夹角为 <Latex tex="\theta" />，求斜劈向右滑动的速度 <Latex tex="v_{\text{劈}}" />。</div>
 <div v-click="2">接触面既不嵌进去也不分开：<b>沿法线方向的分量相等</b>，<Latex tex="v_0\cos\theta = v_{\text{劈}}\sin\theta" />。</div>
@@ -686,7 +689,7 @@ clicks: 2
 # 斜面越平，斜劈跑得越快
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div v-click="1"><Latex tex="\theta" /> 小（斜面接近水平）：<Latex tex="\cot\theta" /> 大——球稍微落一点，斜劈就被推出去很远。</div>
 <div v-click="1"><Latex tex="\theta \to 90^\circ" />（斜面接近竖直）：<Latex tex="\cot\theta \to 0" />，斜劈几乎不动。</div>
@@ -705,21 +708,21 @@ clicks: 1
 # 三类约束，一个方法
 
 <div class="page-grow">
-<div class="grid-3">
+<div class="three-col">
 <div class="stack">
-<div class="mini-title">绳</div>
+<div class="mini-title"><mdi-link-variant class="text-xl" /> 绳</div>
 <div>沿绳方向的分量相等</div>
 <div><Latex tex="v_1\cos\theta_1 = v_2\cos\theta_2" /></div>
 </div>
 
 <div class="stack">
-<div class="mini-title">杆</div>
+<div class="mini-title"><mdi-vector-line class="text-xl" /> 杆</div>
 <div>沿杆方向的分量相等</div>
 <div>和绳的写法完全一样</div>
 </div>
 
 <div class="stack">
-<div class="mini-title">接触面</div>
+<div class="mini-title"><mdi-vector-square class="text-xl" /> 接触面</div>
 <div>沿法线方向的分量相等</div>
 <div>不嵌入、不分离</div>
 </div>
@@ -736,7 +739,7 @@ clicks: 3
 # 练习：靠在墙上的杆
 
 <div class="page-grow">
-<div class="grid-side">
+<div class="split-wide">
 <div class="stack">
 <div>一根长杆斜靠在竖直墙上，下端放在光滑水平地面上。当杆与地面成 <Latex tex="\theta" /> 角时，下端以速度 <Latex tex="v" /> 沿地面远离墙滑动。求上端沿墙下滑的速度 <Latex tex="u" />。</div>
 <div v-click="2">两端沿杆方向的分量相等：<Latex tex="v\cos\theta = u\sin\theta" />。</div>

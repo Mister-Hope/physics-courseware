@@ -58,7 +58,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="ask mt-8 justify-center">
+<div class="ask ask-row ask-lead mt-8 justify-center">
   <mdi-head-question-outline class="text-2xl" />
   <span>要准确描述它们的运动，难在哪里？</span>
 </div>
@@ -78,7 +78,7 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="ask justify-center">
+<div class="ask ask-row ask-lead justify-center">
   <mdi-head-question-outline class="text-2xl" />
   <span>汽车行驶、雄鹰翱翔、足球滚动……这些运动有什么共同点？</span>
 </div>
@@ -107,7 +107,7 @@ layout: base-flex
 
 <div class="page-grow page-grow-tight">
 
-<div class="ask justify-center">
+<div class="ask ask-row ask-lead justify-center">
   <mdi-head-question-outline class="text-2xl" />
   <span>同样是“位置随时间变化”，运动的方式一样吗？</span>
 </div>
@@ -164,7 +164,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="fill-row">
+<div class="mp-case">
   <div class="flex items-center gap-2 mb-2"><mdi-earth class="text-accent-2 text-2xl" /><span class="font-semibold text-xl">地球绕太阳公转</span></div>
   <div class="text-base opacity-75 leading-relaxed">地球直径约 <Latex tex="1.3 \times 10^4 \text{ km}" />，不到地日距离（约 <Latex tex="1.5 \times 10^8 \text{ km}" />）的万分之一</div>
   <v-click>
@@ -176,7 +176,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="fill-row">
+<div class="mp-case">
   <div class="flex items-center gap-2 mb-2"><mdi-train class="text-accent-2 text-2xl" /><span class="font-semibold text-xl">列车在平直轨道上行驶</span></div>
   <div class="text-base opacity-75 leading-relaxed">传动机构与车轮的运动很复杂</div>
   <v-click>
@@ -240,7 +240,7 @@ layout: base-flex
 <v-click>
 
 <div class="mt-7">
-  <div class="ask">
+  <div class="ask ask-row ask-lead">
     <mdi-head-question-outline class="text-xl" />
     <span>研究如何踢出"香蕉球"时，能把足球看作质点吗？</span>
   </div>
@@ -254,7 +254,7 @@ layout: base-flex
 <v-click>
 
 <div class="mt-7">
-  <div class="ask">
+  <div class="ask ask-row ask-lead">
     <mdi-head-question-outline class="text-xl" />
     <span>研究什么样的问题可以把足球看作质点？</span>
   </div>
@@ -317,7 +317,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="ask mt-8 justify-center">
+<div class="ask ask-row ask-lead mt-8 justify-center">
   <mdi-head-question-outline class="text-2xl" />
   <span>为什么人们的看法会不一样？</span>
 </div>
@@ -371,7 +371,7 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="ask justify-center">
+<div class="ask ask-row ask-lead justify-center">
   <mdi-head-question-outline class="text-2xl" />
   <span>选做参考的物体，有什么讲究？</span>
 </div>
@@ -427,19 +427,19 @@ layout: base-flex
 layout: base-flex
 ---
 
-<BoatCupDemo />
+<BoatCupDemo compact />
 
-<div class="grid grid-cols-2 gap-10 mt-3 text-sm leading-tight">
+<div class="grid grid-cols-2 gap-10 mt-1 text-sm leading-tight">
 
 <div>
-  <div class="flex items-center gap-2 mb-1.5"><mdi-earth class="text-accent-2 text-lg" /><span class="font-semibold text-base">以地面为参考系</span><span class="text-xs opacity-55">要设船速 <Latex tex="v" />、水速 <Latex tex="u" /></span></div>
+  <div class="flex items-center gap-2 mb-1"><mdi-earth class="text-accent-2 text-lg" /><span class="font-semibold text-base">以地面为参考系</span><span class="text-xs opacity-55">要设船速 <Latex tex="v" />、水速 <Latex tex="u" /></span></div>
   <div class="opacity-80">掉头时船领先水杯 <Latex tex="(v+u)T_0 - uT_0 = vT_0" /></div>
   <div class="opacity-80">掉头后接近速率 <Latex tex="(v-u) + u = v" /></div>
   <div class="opacity-80">还要 <Latex tex="vT_0 \div v = T_0" /></div>
 </div>
 
 <div>
-  <div class="flex items-center gap-2 mb-1.5"><mdi-water class="text-accent text-lg" /><span class="font-semibold text-base">以水为参考系</span></div>
+  <div class="flex items-center gap-2 mb-1"><mdi-water class="text-accent text-lg" /><span class="font-semibold text-base">以水为参考系</span></div>
   <div class="opacity-80">水不动，水杯停在落水处</div>
   <div class="opacity-80">船去、回相对水都是 <Latex tex="v" />，去回用时相同</div>
   <div class="opacity-80">所以再过 <Latex tex="T_0" /> 回到水杯旁</div>
@@ -447,7 +447,7 @@ layout: base-flex
 
 </div>
 
-<div class="key mt-2" v-click="1">两条路都得到 <Latex tex="T_0" /> —— 但水系不用设任何一个速度</div>
+<div class="key mt-1" v-click="1">两条路都得到 <Latex tex="T_0" /> —— 但水系不用设任何一个速度</div>
 ---
 layout: base-flex
 ---
@@ -491,23 +491,27 @@ layout: base-flex
 
 # 课堂小结
 
-<div class="grid grid-cols-2 gap-x-10 gap-y-7 mt-7">
+<div class="page-grow page-grow-tight">
+
+<div class="grid grid-cols-2 gap-x-10 gap-y-7">
 
 <v-clicks>
 
 <div>
   <div class="flex items-center gap-2 mb-2"><mdi-creation class="text-accent text-xl" /><span class="font-semibold text-lg">质点</span></div>
-  <div class="text-sm opacity-75 mb-1">忽略大小形状、有质量的点——理想化模型</div>
-  <div class="text-sm opacity-75">能否看成质点由<span class="text-accent">研究的问题</span>决定</div>
+  <div class="text-base leading-relaxed opacity-75 mb-1">忽略大小形状、有质量的点——理想化模型</div>
+  <div class="text-base leading-relaxed opacity-75">能否看成质点由<span class="text-accent">研究的问题</span>决定</div>
 </div>
 
 <div>
   <div class="flex items-center gap-2 mb-2"><mdi-source-branch class="text-accent-2 text-xl" /><span class="font-semibold text-lg">参考系</span></div>
-  <div class="text-sm opacity-75 mb-1">选作参考的物体</div>
-  <div class="text-sm opacity-75">运动是<span class="text-accent">绝对</span>的，描述是<span class="text-accent-2">相对</span>的</div>
+  <div class="text-base leading-relaxed opacity-75 mb-1">选作参考的物体</div>
+  <div class="text-base leading-relaxed opacity-75">运动是<span class="text-accent">绝对</span>的，描述是<span class="text-accent-2">相对</span>的</div>
 </div>
 
 </v-clicks>
+
+</div>
 
 </div>
 ---
@@ -516,7 +520,7 @@ layout: base-flex
 
 # 课后练习
 
-<div class="ask mt-5">
+<div class="ask ask-row ask-lead mt-5">
   <mdi-head-question-outline class="text-xl" />
   <span>1. 下列情况中，可以把物体看成质点的是（&nbsp;&nbsp;&nbsp;&nbsp;）</span>
 </div>
@@ -542,7 +546,7 @@ clicks: 3
 
 <div class="page-grow page-grow-tight">
 
-<div class="ask">
+<div class="ask ask-row ask-lead">
   <mdi-head-question-outline class="text-xl" />
   <span>2. 由于风，河岸上的旗帜向右飘；河面上两条船上的旗，一条向右、一条向左飘。两条船的运动状态是（　　）</span>
 </div>
@@ -564,7 +568,7 @@ clicks: 3
   <div v-click="3" class="key key-blue">答案：<span class="text-accent font-semibold">C</span>——旗向反映船相对空气的运动</div>
 </div>
 
-<div class="figure-cell">
+<div class="figure">
   <FlagBoatsSvg :step="$clicks" />
 </div>
 

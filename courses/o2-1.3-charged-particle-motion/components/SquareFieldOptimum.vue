@@ -141,7 +141,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :y="panel.o.y"
           :width="S"
           :height="S"
-          fill="rgba(226,168,70,0.06)"
+          fill="color-mix(in srgb, var(--c-accent) 6%, transparent)"
           stroke="var(--c-accent)"
           stroke-opacity="0.75"
           stroke-width="2.2"
@@ -160,14 +160,14 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
         <path
           :d="panel.chord"
           fill="none"
-          stroke="rgba(203,213,225,0.55)"
+          stroke="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)"
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
         <path
           :d="panel.arc"
           fill="none"
-          stroke="#60a5fa"
+          stroke="var(--c-velocity)"
           stroke-width="3.6"
           stroke-linecap="round"
         />
@@ -175,11 +175,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           <path
             :d="panel.radii"
             fill="none"
-            stroke="rgba(226,168,70,0.85)"
+            stroke="color-mix(in srgb, var(--c-accent) 85%, transparent)"
             stroke-width="1.7"
             stroke-dasharray="8 7"
           />
-          <circle :cx="panel.c.x" :cy="panel.c.y" r="4.6" fill="#f8fafc" />
+          <circle :cx="panel.c.x" :cy="panel.c.y" r="4.6" fill="var(--c-neutral-50)" />
           <text
             v-bind="HALO"
             :x="panel.c.x + 10"
@@ -187,12 +187,12 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
             :font-family="MATH"
             font-style="italic"
             :font-size="FS"
-            fill="#f8fafc"
+            fill="var(--c-neutral-50)"
           >
             C
           </text>
         </template>
-        <CourseArrow :from="panel.from" :to="panel.to" stroke="#60a5fa" stroke-width="3.2" />
+        <CourseArrow :from="panel.from" :to="panel.to" stroke="var(--c-velocity)" stroke-width="3.2" />
         <text
           v-bind="HALO"
           :x="panel.vLabel[0]"
@@ -200,11 +200,11 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#60a5fa"
+          fill="var(--c-velocity)"
         >
           v
         </text>
-        <circle :cx="panel.p.x" :cy="panel.p.y" r="5.4" fill="#f8fafc" />
+        <circle :cx="panel.p.x" :cy="panel.p.y" r="5.4" fill="var(--c-neutral-50)" />
         <circle
           :cx="panel.q.x"
           :cy="panel.q.y"
@@ -218,7 +218,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           P
         </text>
@@ -229,7 +229,7 @@ const HALO = { stroke: "#0f1425", "stroke-width": 4, "paint-order": "stroke" };
           :font-family="MATH"
           font-style="italic"
           :font-size="FS"
-          fill="#f8fafc"
+          fill="var(--c-neutral-50)"
         >
           Q
         </text>

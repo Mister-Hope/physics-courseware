@@ -1,7 +1,10 @@
 /* ═══════════════════════════════════════════════
    向心力 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   通用设计系统与共享原子已提取到 workspace/shared/styles/
+   （common.css + layout.css + atoms.css），由共享 addon（../workspace/shared）自动注入。
+   色值一律 var(--c-*) / color-mix(...)；圆角一律 var(--radius-*) 或胶囊 999px；
+   字号一律共享阶梯 .text-*（私调值已清）。
+   命名前缀：def-（定义页）· figure-（图容器）· divider-（共享 .divider-l 的变体）
    ═══════════════════════════════════════════════ */
 
 /* ── 本课图多，纵向密度比默认略紧 ── */
@@ -26,28 +29,25 @@
 }
 
 /* ── 页面小标签（「定义」）── */
-.hero-tag {
+.def-tag {
   display: inline-flex;
   gap: 0.45rem;
   align-items: center;
   align-self: center;
 
   padding: 0.28rem 1rem;
-  border: 1px solid rgb(226 168 70 / 35%);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 35%, transparent);
   border-radius: 999px;
 
-  background: rgb(226 168 70 / 8%);
-  color: #e2a846;
+  background: color-mix(in srgb, var(--c-accent) 8%, transparent);
+  color: var(--c-accent);
 
   font-weight: 700;
-  font-size: 0.95rem;
 }
 
-/* ── 定义卡：比正文略大一点就够 ── */
-.card-hero {
+/* ── 定义卡：比正文略大一点就够（字号走共享阶梯 .text-3xl，写在页面里） ── */
+.def-card {
   padding: 1.15rem 1.6rem;
-  font-size: 1.55rem;
-  line-height: 1.95;
   text-align: center;
 }
 
@@ -55,11 +55,4 @@
    不能改用「首击后才加 divider-l」：padding 一变文字重新折行，整页会被顶跑。 */
 .divider-off {
   border-left-color: transparent;
-}
-
-/* ── 结论式：单独成行、醒目的公式 ── */
-.big-formula {
-  color: var(--c-accent);
-  font-size: 2.1rem;
-  text-align: center;
 }

@@ -258,7 +258,7 @@ const endDrag = (): void => {
             :y1="knot.y"
             :x2="endL.x"
             :y2="endL.y"
-            stroke="#cbd5e1"
+            stroke="var(--c-neutral-300)"
             stroke-width="2.4"
             stroke-linecap="round"
           />
@@ -267,17 +267,17 @@ const endDrag = (): void => {
             :y1="knot.y"
             :x2="endR.x"
             :y2="endR.y"
-            stroke="#cbd5e1"
+            stroke="var(--c-neutral-300)"
             stroke-width="2.4"
             stroke-linecap="round"
           />
 
           <!-- 两绳夹角 θ 圆弧与标签 -->
-          <path :d="thetaArc" fill="none" stroke="#e2a846" stroke-width="1.8" />
+          <path :d="thetaArc" fill="none" stroke="var(--c-accent)" stroke-width="1.8" />
           <text
             :x="thetaLabel.x"
             :y="thetaLabel.y"
-            fill="#e2a846"
+            fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="18"
@@ -292,15 +292,15 @@ const endDrag = (): void => {
           <path
             :d="`M ${knot.x - 28} ${knot.y + 30} A 28 30 0 0 1 ${knot.x + 28} ${knot.y + 30}`"
             fill="none"
-            stroke="#cbd5e1"
+            stroke="var(--c-neutral-300)"
             stroke-width="2.2"
           />
 
           <!-- 水桶梯形桶身底色 -->
           <path
             :d="`M ${knot.x - 28} ${knot.y + 30} L ${knot.x - 21} ${knot.y + 78} Q ${knot.x} ${knot.y + 83} ${knot.x + 21} ${knot.y + 78} L ${knot.x + 28} ${knot.y + 30} Z`"
-            fill="rgba(148,163,184,0.16)"
-            stroke="#94a3b8"
+            fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+            stroke="var(--c-text-dim)"
             stroke-width="2"
             stroke-linejoin="round"
           />
@@ -308,12 +308,12 @@ const endDrag = (): void => {
           <!-- 桶内盛装的清水（半透明蔚蓝水体 + 微波液面线） -->
           <path
             :d="`M ${knot.x - 24.8} ${knot.y + 49} Q ${knot.x - 12} ${knot.y + 46.5} ${knot.x} ${knot.y + 49} T ${knot.x + 24.8} ${knot.y + 49} L ${knot.x + 21} ${knot.y + 78} Q ${knot.x} ${knot.y + 83} ${knot.x - 21} ${knot.y + 78} Z`"
-            fill="rgba(56,189,248,0.2)"
+            fill="color-mix(in srgb, var(--c-physics-light) 20%, transparent)"
           />
           <path
             :d="`M ${knot.x - 24.8} ${knot.y + 49} Q ${knot.x - 12} ${knot.y + 46.5} ${knot.x} ${knot.y + 49} T ${knot.x + 24.8} ${knot.y + 49}`"
             fill="none"
-            stroke="#38bdf8"
+            stroke="var(--c-physics-light)"
             stroke-width="1.5"
             opacity="0.75"
           />
@@ -322,7 +322,7 @@ const endDrag = (): void => {
           <path
             :d="`M ${knot.x - 23} ${knot.y + 62} Q ${knot.x} ${knot.y + 66} ${knot.x + 23} ${knot.y + 62}`"
             fill="none"
-            stroke="rgba(148,163,184,0.4)"
+            stroke="color-mix(in srgb, var(--c-text-dim) 40%, transparent)"
             stroke-width="1.3"
           />
 
@@ -332,24 +332,24 @@ const endDrag = (): void => {
             :cy="knot.y + 30"
             rx="28"
             ry="5.5"
-            fill="#1e293b"
-            stroke="#cbd5e1"
+            fill="var(--c-surface-solid)"
+            stroke="var(--c-neutral-300)"
             stroke-width="2"
           />
           <circle
             :cx="knot.x - 28"
             :cy="knot.y + 30"
             r="2.8"
-            fill="#cbd5e1"
-            stroke="#0f1425"
+            fill="var(--c-neutral-300)"
+            stroke="var(--c-bg-soft)"
             stroke-width="1.2"
           />
           <circle
             :cx="knot.x + 28"
             :cy="knot.y + 30"
             r="2.8"
-            fill="#cbd5e1"
-            stroke="#0f1425"
+            fill="var(--c-neutral-300)"
+            stroke="var(--c-bg-soft)"
             stroke-width="1.2"
           />
 
@@ -358,8 +358,8 @@ const endDrag = (): void => {
             :cx="knot.x"
             :cy="knot.y"
             r="4.2"
-            fill="#f8fafc"
-            stroke="#0f1425"
+            fill="var(--c-neutral-50)"
+            stroke="var(--c-bg-soft)"
             stroke-width="1.5"
           />
 
@@ -367,33 +367,33 @@ const endDrag = (): void => {
           <!-- 左手：捏住左绳末端 endL，沿左绳方向向上拉（支持拖动旋转） -->
           <g
             :transform="`translate(${endL.x}, ${endL.y}) rotate(${-90 - alpha})`"
-            class="fe-grab"
+            class="fig-grab"
             @pointerdown="startDrag($event, 'left')"
             @pointermove="moveDrag"
             @pointerup="endDrag"
             @pointercancel="endDrag"
           >
             <circle cx="14" cy="0" r="24" fill="transparent" />
-            <GripHand :scale="0.68" flip color="#2dd4bf" fill="rgba(45,212,191,0.2)" />
+            <GripHand :scale="0.68" flip color="#2dd4bf" fill="color-mix(in srgb, var(--c-physics) 20%, transparent)" />
           </g>
 
           <!-- 右手：捏住右绳末端 endR，沿右绳方向向上拉（同样支持拖动旋转） -->
           <g
             :transform="`translate(${endR.x}, ${endR.y}) rotate(${beta - 90})`"
-            class="fe-grab"
+            class="fig-grab"
             @pointerdown="startDrag($event, 'right')"
             @pointermove="moveDrag"
             @pointerup="endDrag"
             @pointercancel="endDrag"
           >
             <circle cx="14" cy="0" r="24" fill="transparent" />
-            <GripHand :scale="0.68" color="#e2a846" fill="rgba(226,168,70,0.2)" />
+            <GripHand :scale="0.68" color="#e2a846" fill="color-mix(in srgb, var(--c-accent) 20%, transparent)" />
           </g>
         </svg>
       </div>
 
       <!-- 右图：立式辅助圆与力矢量三角形（圆放大居中，G、F₁、F₂ 自适应置于三角形外侧） -->
-      <div class="ac-tri" :class="{ 'fe-hidden': step < 1 }">
+      <div class="ac-tri" :class="{ 'fig-hold': step < 1 }">
         <svg :viewBox="`0 0 ${TRI.width} ${TRI.height}`" xmlns="http://www.w3.org/2000/svg">
           <!-- 大号辅助圆 -->
           <circle
@@ -401,19 +401,19 @@ const endDrag = (): void => {
             :cx="circle.x"
             :cy="circle.y"
             :r="circle.r"
-            fill="rgba(148,163,184,0.03)"
-            stroke="#64748b"
+            fill="color-mix(in srgb, var(--c-text-dim) 3%, transparent)"
+            stroke="var(--c-neutral-500)"
             stroke-width="1.5"
             stroke-dasharray="6 5"
             opacity="0.88"
           />
 
           <!-- 圆周角 ψ 弧线与自适应角平分线标签 -->
-          <path :d="psiArc" fill="none" stroke="#94a3b8" stroke-width="1.6" />
+          <path :d="psiArc" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
           <text
             :x="psiLabel.x"
             :y="psiLabel.y"
-            fill="#94a3b8"
+            fill="var(--c-text-dim)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="15"
@@ -428,7 +428,7 @@ const endDrag = (): void => {
             :from="tri.vertexA"
             :to="tri.vertexB"
             :head-size="11"
-            stroke="#f87171"
+            stroke="var(--c-force)"
             stroke-width="3.4"
           />
 
@@ -454,13 +454,13 @@ const endDrag = (): void => {
           <text
             :x="forceLabels.g.x"
             :y="forceLabels.g.y"
-            fill="#f87171"
+            fill="var(--c-force)"
             font-family="KaTeX_Math"
             font-style="italic"
             font-size="18"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -476,7 +476,7 @@ const endDrag = (): void => {
             font-size="18"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -493,7 +493,7 @@ const endDrag = (): void => {
             font-size="18"
             text-anchor="middle"
             dominant-baseline="central"
-            stroke="#0f1425"
+            stroke="var(--c-bg-soft)"
             stroke-width="3"
             paint-order="stroke"
           >
@@ -569,14 +569,6 @@ const endDrag = (): void => {
   width: 100%;
   height: 100%;
   max-height: 100%;
-}
-
-.fe-grab {
-  cursor: grab;
-}
-
-.fe-grab:active {
-  cursor: grabbing;
 }
 
 .ac-sliders {

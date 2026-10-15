@@ -238,11 +238,11 @@ const HALO = {
 </script>
 
 <template>
-  <div class="cy flex justify-center w-full">
+  <div class="fig-cycloid flex justify-center w-full">
     <svg
       :viewBox="`0 0 ${W} ${H}`"
       :width="width"
-      class="cy-svg select-none overflow-visible block"
+      class="fig-svg select-none overflow-visible block"
       role="img"
       aria-label="两个分运动合成：摆线运动"
     >
@@ -262,7 +262,7 @@ const HALO = {
       <!-- 圆滚过的接触线（摆线的尖点都落在它上面） -->
       <path
         :d="`M 12 ${LINE_Y} H 756`"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="1.8"
         opacity="0.8"
       />
@@ -270,7 +270,7 @@ const HALO = {
       <!-- 圆心匀速平移的那条水平虚线 -->
       <path
         :d="`M 12 ${CENTER_Y} H 756`"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-dasharray="8 7"
         opacity="0.55"
@@ -281,7 +281,7 @@ const HALO = {
       <path
         :d="trailD"
         fill="none"
-        stroke="var(--c-bg, #0f172a)"
+        stroke="var(--c-bg)"
         stroke-width="7"
         stroke-linecap="round"
         opacity="0.8"
@@ -289,7 +289,7 @@ const HALO = {
       <path
         :d="trailD"
         fill="none"
-        stroke="var(--c-accent, #e2a846)"
+        stroke="var(--c-accent)"
         stroke-width="3.6"
         stroke-linecap="round"
       />
@@ -299,8 +299,8 @@ const HALO = {
         :cx="center.x"
         :cy="center.y"
         :r="K"
-        fill="rgba(96,165,250,0.10)"
-        stroke="var(--c-velocity, #60a5fa)"
+        fill="color-mix(in srgb, var(--c-velocity) 10%, transparent)"
+        stroke="var(--c-velocity)"
         stroke-width="2"
       />
 
@@ -310,11 +310,11 @@ const HALO = {
         :y1="center.y"
         :x2="ball.x"
         :y2="ball.y"
-        stroke="var(--c-velocity, #60a5fa)"
+        stroke="var(--c-velocity)"
         stroke-width="2"
       />
       <!-- 圆心标记点 -->
-      <circle :cx="center.x" :cy="center.y" r="3.8" fill="var(--c-velocity, #60a5fa)" />
+      <circle :cx="center.x" :cy="center.y" r="3.8" fill="var(--c-velocity)" />
 
       <!-- 半径标号 R -->
       <text
@@ -323,7 +323,7 @@ const HALO = {
         font-size="17"
         text-anchor="middle"
         dominant-baseline="central"
-        fill="var(--c-velocity, #60a5fa)"
+        fill="var(--c-velocity)"
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         :style="HALO"
@@ -335,14 +335,14 @@ const HALO = {
       <path
         :d="rotArcD"
         fill="none"
-        stroke="var(--c-velocity, #60a5fa)"
+        stroke="var(--c-velocity)"
         stroke-width="2.2"
         opacity="0.85"
       />
       <CourseArrow
         :from="rotEnd"
         :to="rotHead"
-        stroke="var(--c-velocity, #60a5fa)"
+        stroke="var(--c-velocity)"
         :stroke-width="2.2"
         :head-size="10"
       />
@@ -352,7 +352,7 @@ const HALO = {
         font-size="17"
         text-anchor="middle"
         dominant-baseline="central"
-        fill="var(--c-velocity, #60a5fa)"
+        fill="var(--c-velocity)"
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         :style="HALO"
@@ -364,7 +364,7 @@ const HALO = {
       <CourseArrow
         :from="center"
         :to="vFlatTip"
-        stroke="var(--c-velocity, #60a5fa)"
+        stroke="var(--c-velocity)"
         :stroke-width="4.2"
         :head-size="15"
       />
@@ -373,7 +373,7 @@ const HALO = {
         :y="CENTER_Y - 14"
         font-size="19"
         text-anchor="middle"
-        fill="var(--c-velocity, #60a5fa)"
+        fill="var(--c-velocity)"
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         :style="HALO"
@@ -391,7 +391,7 @@ const HALO = {
       <CourseArrow
         :from="ball"
         :to="vCircTip"
-        stroke="var(--c-velocity, #60a5fa)"
+        stroke="var(--c-velocity)"
         :stroke-width="4.2"
         :head-size="15"
       />
@@ -401,7 +401,7 @@ const HALO = {
         font-size="19"
         text-anchor="middle"
         dominant-baseline="central"
-        fill="var(--c-velocity, #60a5fa)"
+        fill="var(--c-velocity)"
         font-family="KaTeX_Math, 'Times New Roman', serif"
         font-style="italic"
         :style="HALO"
@@ -415,7 +415,7 @@ const HALO = {
         <CourseArrow
           :from="ball"
           :to="vTotalTip"
-          stroke="#f59e0b"
+          stroke="var(--c-accent-glow)"
           :stroke-width="3.4"
           :head-size="14"
         />
@@ -425,7 +425,7 @@ const HALO = {
           font-size="18"
           text-anchor="start"
           dominant-baseline="central"
-          fill="#f59e0b"
+          fill="var(--c-accent-glow)"
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           :style="HALO"
@@ -442,8 +442,8 @@ const HALO = {
         :cx="ball.x"
         :cy="ball.y"
         r="9.5"
-        fill="var(--c-force, #f87171)"
-        stroke="var(--c-bg, #0f172a)"
+        fill="var(--c-force)"
+        stroke="var(--c-bg)"
         stroke-width="2.2"
       />
       <line
@@ -470,14 +470,14 @@ const HALO = {
         <CourseArrow
           :from="START"
           :to="{ x: START.x + 96, y: START.y }"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           :stroke-width="4.2"
           :head-size="15"
         />
         <CourseArrow
           :from="START"
           :to="{ x: START.x - 96, y: START.y }"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           :stroke-width="4.2"
           :head-size="15"
         />
@@ -486,7 +486,7 @@ const HALO = {
           :y="START.y - 14"
           font-size="19"
           text-anchor="middle"
-          fill="var(--c-velocity, #60a5fa)"
+          fill="var(--c-velocity)"
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           :style="HALO"
@@ -501,7 +501,7 @@ const HALO = {
           :y="START.y - 14"
           font-size="19"
           text-anchor="middle"
-          fill="var(--c-velocity, #60a5fa)"
+          fill="var(--c-velocity)"
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           :style="HALO"
@@ -517,26 +517,26 @@ const HALO = {
       <g v-if="showExtremes">
         <path
           :d="`M ${LOW.x} ${LINE_Y} V ${LOW.y}`"
-          stroke="var(--c-text-dim, #94a3b8)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
           stroke-dasharray="7 6"
           opacity="0.6"
         />
         <path
           :d="`M ${LOW.x} ${LOW.y} H 756`"
-          stroke="var(--c-text-dim, #94a3b8)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
           stroke-dasharray="7 6"
           opacity="0.6"
         />
         <path
           :d="`M 756 ${LINE_Y} V ${LOW.y}`"
-          stroke="var(--c-text-dim, #94a3b8)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
         />
         <path
           :d="`M 749 ${LINE_Y} h 14 M 749 ${LOW.y} h 14`"
-          stroke="var(--c-text-dim, #94a3b8)"
+          stroke="var(--c-text-dim)"
           stroke-width="1.4"
         />
         <text
@@ -545,7 +545,7 @@ const HALO = {
           font-size="18"
           text-anchor="middle"
           font-family="KaTeX_Main, serif"
-          fill="var(--c-text, #f8fafc)"
+          fill="var(--c-text)"
           :style="HALO"
         >
           2
@@ -556,14 +556,14 @@ const HALO = {
         <CourseArrow
           :from="{ x: LOW.x + 8, y: LOW.y + 16 }"
           :to="{ x: LOW.x + 70, y: LOW.y + 16 }"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           :stroke-width="4.2"
           :head-size="15"
         />
         <CourseArrow
           :from="{ x: LOW.x + 70, y: LOW.y + 16 }"
           :to="{ x: LOW.x + 132, y: LOW.y + 16 }"
-          stroke="var(--c-velocity, #60a5fa)"
+          stroke="var(--c-velocity)"
           :stroke-width="4.2"
           :head-size="15"
         />
@@ -572,7 +572,7 @@ const HALO = {
           :y="LOW.y + 42"
           font-size="18"
           text-anchor="middle"
-          fill="var(--c-velocity, #60a5fa)"
+          fill="var(--c-velocity)"
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           :style="HALO"
@@ -596,7 +596,7 @@ const HALO = {
           :y="LINE_Y - 14"
           font-size="18"
           text-anchor="end"
-          fill="var(--c-velocity, #60a5fa)"
+          fill="var(--c-velocity)"
           font-family="KaTeX_Math, 'Times New Roman', serif"
           font-style="italic"
           :style="HALO"
@@ -610,16 +610,11 @@ const HALO = {
 </template>
 
 <style scoped>
-.cy {
+/* 摆线图：占满整页宽度，宽度上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
+   —— 第 17 页上方有标题、下方两行结论，780px（渲染高 ≈ 300px）是"图尽量大"与"不出画布"的平衡点 */
+.fig-cycloid {
   width: 100%;
-}
 
-.cy-svg {
-  display: block;
-
-  width: 100%;
-  max-width: 780px;
-  height: auto;
-  margin: 0 auto;
+  --fig-max: 780px;
 }
 </style>

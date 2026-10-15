@@ -39,7 +39,7 @@ const options = [
     >
       <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" class="w-full">
         <!-- 磁场区（垂直纸面向外）：⊙ 记号 -->
-        <g stroke="#e2a846" fill="none" stroke-width="1.8" style="opacity: 0.55">
+        <g stroke="var(--c-accent)" fill="none" stroke-width="1.8" style="opacity: 0.55">
           <circle cx="70" cy="34" r="8" />
           <circle cx="170" cy="34" r="8" />
           <circle cx="256" cy="34" r="8" />
@@ -47,7 +47,7 @@ const options = [
           <circle cx="170" cy="140" r="8" />
           <circle cx="256" cy="140" r="8" />
         </g>
-        <g fill="#e2a846" style="opacity: 0.55">
+        <g fill="var(--c-accent)" style="opacity: 0.55">
           <circle cx="70" cy="34" r="2.4" />
           <circle cx="170" cy="34" r="2.4" />
           <circle cx="256" cy="34" r="2.4" />
@@ -58,8 +58,8 @@ const options = [
 
         <!-- 候选一：直线 -->
         <template v-if="opt.key === 'line'">
-          <line x1="14" y1="87" x2="286" y2="87" stroke="#60a5fa" stroke-width="3.4" />
-          <circle cx="52" cy="87" r="6" fill="#60a5fa" />
+          <line x1="14" y1="87" x2="286" y2="87" stroke="var(--c-velocity)" stroke-width="3.4" />
+          <circle cx="52" cy="87" r="6" fill="var(--c-velocity)" />
         </template>
 
         <!-- 候选二：抛物线 -->
@@ -67,17 +67,17 @@ const options = [
           <path
             d="M 14 60 Q 150 60 286 148"
             fill="none"
-            stroke="#60a5fa"
+            stroke="var(--c-velocity)"
             stroke-width="3.4"
             stroke-linecap="round"
           />
-          <circle cx="52" cy="62" r="6" fill="#60a5fa" />
+          <circle cx="52" cy="62" r="6" fill="var(--c-velocity)" />
         </template>
 
         <!-- 候选三：圆周 -->
         <template v-else>
-          <circle cx="150" cy="87" r="46" fill="none" stroke="#60a5fa" stroke-width="3.4" />
-          <circle cx="104" cy="87" r="6" fill="#60a5fa" />
+          <circle cx="150" cy="87" r="46" fill="none" stroke="var(--c-velocity)" stroke-width="3.4" />
+          <circle cx="104" cy="87" r="6" fill="var(--c-velocity)" />
         </template>
       </svg>
 

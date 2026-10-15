@@ -251,8 +251,8 @@ const forceTex = computed(() => `F = ${fmt(magR.value)}\\ \\text{N}`);
 </script>
 
 <template>
-  <div class="pe-wrap" :class="{ 'pe-hidden': !shown }">
-    <div class="pe-figure">
+  <div class="stack stack-tight" :class="{ 'demo-hidden': !shown }">
+    <div class="figure relative min-w-0">
       <svg
         :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`"
         @pointermove="onPointerMove"
@@ -322,7 +322,7 @@ const forceTex = computed(() => `F = ${fmt(magR.value)}\\ \\text{N}`);
             :cy="tip1.y"
             r="20"
             fill="transparent"
-            class="pe-grab"
+            class="cursor-grab"
             @pointerdown="startDrag($event, 'f1')"
           />
           <circle
@@ -330,7 +330,7 @@ const forceTex = computed(() => `F = ${fmt(magR.value)}\\ \\text{N}`);
             :cy="tip2.y"
             r="20"
             fill="transparent"
-            class="pe-grab"
+            class="cursor-grab"
             @pointerdown="startDrag($event, 'f2')"
           />
         </g>
@@ -418,75 +418,30 @@ const forceTex = computed(() => `F = ${fmt(magR.value)}\\ \\text{N}`);
       />
     </div>
 
-    <div class="pe-info">
-      <div class="pe-angles">
+    <div class="demo-panel">
+      <div class="exp-angles">
         <span style="color: var(--c-accent)"><Latex :tex="f1Tex" /></span>
         <span style="color: var(--c-accent-2)"><Latex :tex="f2Tex" /></span>
         <span><Latex :tex="thetaTex" /></span>
       </div>
 
-      <div class="pe-result" :class="{ 'pe-hidden': step < 3 }">
-        <div class="pe-sum"><Latex :tex="forceTex" />，方向与橡皮条在同一条直线上</div>
+      <div class="demo-readout" :class="{ 'demo-hidden': step < 3 }">
+        <div><Latex :tex="forceTex" />，方向与橡皮条在同一条直线上</div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.pe-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  min-width: 0;
-}
-
-.pe-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.pe-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.pe-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  min-width: 0;
-}
-
-.pe-info :deep(.katex) {
-  font-size: 1em !important;
-}
-
-/* 两个拉力的大小与夹角只作读数——要改就拖图上的箭头尖端 */
-.pe-angles {
+/* 图 / 控制面板 / 读数 / 隐形占位走共享原子（.figure / .demo-panel / .demo-readout / .demo-hidden） */
+.exp-angles {
   display: flex;
   gap: 1.2rem;
   align-items: baseline;
   font-size: 0.98rem;
 }
 
-.pe-result {
-  padding-left: 0.9rem;
-  border-left: 3px solid var(--c-physics);
-}
-
-/* 还没轮到这一页讲实验时整块隐形占位：**不能用 visibility**——ChartLabel 自己会写
-   `visibility: visible`，能把父层的 hidden 顶穿。opacity: 0 既保留占位、也不会漏出来。 */
-.pe-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.pe-grab {
-  cursor: grab;
-}
-
-.pe-sum {
+.demo-readout {
   font-size: 1rem;
   line-height: 1.6;
 }

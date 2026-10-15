@@ -20,28 +20,28 @@ defineProps<{ showReturn?: boolean }>();
       :line-width="2.2"
       :hatch-width="1.2"
     />
-    <rect x="70" y="116" width="135" height="16" rx="4" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.9)" stroke-width="1.6" />
-    <rect x="270" y="116" width="135" height="16" rx="4" fill="rgba(148,163,184,0.35)" stroke="rgba(148,163,184,0.9)" stroke-width="1.6" />
-    <circle cx="70" cy="124" r="5" fill="#e2a846" />
-    <circle cx="270" cy="124" r="5" fill="#e2a846" />
-    <text x="62" y="108" text-anchor="middle" font-size="15" fill="#cbd5e1" stroke="#0f1425" stroke-width="3" paint-order="stroke">队尾（队长）</text>
-    <text x="210" y="126" font-size="15" fill="#cbd5e1" stroke="#0f1425" stroke-width="3" paint-order="stroke">队首</text>
-    <text x="270" y="108" text-anchor="middle" font-size="15" fill="#cbd5e1" stroke="#0f1425" stroke-width="3" paint-order="stroke">队长</text>
-    <line x1="70" y1="152" x2="205" y2="152" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <line x1="70" y1="147" x2="70" y2="157" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <line x1="205" y1="147" x2="205" y2="157" stroke="rgba(148,163,184,0.6)" stroke-width="1.2" />
-    <text x="137" y="146" text-anchor="middle" font-size="15" fill="#94a3b8" stroke="#0f1425" stroke-width="3" paint-order="stroke">150 m</text>
-    <CourseArrow :from="{ x: 74, y: 172 }" :to="{ x: 266, y: 172 }" stroke="#e2a846" stroke-width="3" />
-    <text x="170" y="189" text-anchor="middle" font-size="15" fill="#e2a846" stroke="#0f1425" stroke-width="3" paint-order="stroke">队伍前进 200 m</text>
-    <CourseArrow :from="{ x: 70, y: 124 }" :to="{ x: 470, y: 50 }" stroke="#e2a846" stroke-width="3" />
-    <text x="266" y="72" text-anchor="middle" font-size="15" fill="#e2a846" stroke="#0f1425" stroke-width="3" paint-order="stroke">1000 m</text>
-    <CourseArrow :from="{ x: 470, y: 50 }" :to="{ x: 270, y: 124 }" stroke="#60a5fa" stroke-width="3" stroke-dasharray="8 5" opacity="0.75" />
-    <text v-if="showReturn" x="425" y="95" text-anchor="middle" font-size="15" fill="#60a5fa" stroke="#0f1425" stroke-width="3" paint-order="stroke">
+    <rect x="70" y="116" width="135" height="16" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 90%, transparent)" stroke-width="1.6" />
+    <rect x="270" y="116" width="135" height="16" rx="4" fill="color-mix(in srgb, var(--c-text-dim) 35%, transparent)" stroke="color-mix(in srgb, var(--c-text-dim) 90%, transparent)" stroke-width="1.6" />
+    <circle cx="70" cy="124" r="5" fill="var(--c-accent)" />
+    <circle cx="270" cy="124" r="5" fill="var(--c-accent)" />
+    <text x="62" y="108" text-anchor="middle" font-size="15" fill="var(--c-neutral-300)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">队尾（队长）</text>
+    <text x="210" y="126" font-size="15" fill="var(--c-neutral-300)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">队首</text>
+    <text x="270" y="108" text-anchor="middle" font-size="15" fill="var(--c-neutral-300)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">队长</text>
+    <line x1="70" y1="152" x2="205" y2="152" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <line x1="70" y1="147" x2="70" y2="157" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <line x1="205" y1="147" x2="205" y2="157" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.2" />
+    <text x="137" y="146" text-anchor="middle" font-size="15" fill="var(--c-text-dim)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">150 m</text>
+    <CourseArrow :from="{ x: 74, y: 172 }" :to="{ x: 266, y: 172 }" stroke="var(--c-accent)" stroke-width="3" />
+    <text x="170" y="189" text-anchor="middle" font-size="15" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">队伍前进 200 m</text>
+    <CourseArrow :from="{ x: 70, y: 124 }" :to="{ x: 470, y: 50 }" stroke="var(--c-accent)" stroke-width="3" />
+    <text x="266" y="72" text-anchor="middle" font-size="15" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">1000 m</text>
+    <CourseArrow :from="{ x: 470, y: 50 }" :to="{ x: 270, y: 124 }" stroke="var(--c-velocity)" stroke-width="3" stroke-dasharray="8 5" opacity="0.75" />
+    <text v-if="showReturn" x="425" y="95" text-anchor="middle" font-size="15" fill="var(--c-velocity)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">
       800 m
     </text>
-    <circle cx="470" cy="50" r="4.5" fill="#e2a846" />
-    <line x1="470" y1="50" x2="470" y2="26" stroke="#e2a846" stroke-width="2" />
-    <path d="M 470 26 L 488 31 L 470 36 Z" fill="#e2a846" />
-    <text x="470" y="18" text-anchor="middle" font-size="15" fill="#e2a846" stroke="#0f1425" stroke-width="3" paint-order="stroke">侦察点</text>
+    <circle cx="470" cy="50" r="4.5" fill="var(--c-accent)" />
+    <line x1="470" y1="50" x2="470" y2="26" stroke="var(--c-accent)" stroke-width="2" />
+    <path d="M 470 26 L 488 31 L 470 36 Z" fill="var(--c-accent)" />
+    <text x="470" y="18" text-anchor="middle" font-size="15" fill="var(--c-accent)" stroke="var(--c-bg-soft)" stroke-width="3" paint-order="stroke">侦察点</text>
   </svg>
 </template>

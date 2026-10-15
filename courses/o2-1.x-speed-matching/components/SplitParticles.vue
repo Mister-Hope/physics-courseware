@@ -95,10 +95,10 @@ const forceBTo = inward(forceBFrom, circleB, 122);
 </script>
 
 <template>
-  <div class="split-particles">
+  <div class="fig-particles">
     <svg
       viewBox="0 0 640 500"
-      class="split-particles-svg"
+      class="fig-svg"
       role="img"
       aria-label="电中性微粒在垂直纸面向里的磁场中分裂为 a、b 两个微粒，两微粒半径相等的圆周轨迹外切，环绕方向均为逆时针"
     >
@@ -121,7 +121,7 @@ const forceBTo = inward(forceBFrom, circleB, 122);
         :cx="circleA.x"
         :cy="circleA.y"
         :r="circleA.r"
-        stroke="var(--c-text, #f8fafc)"
+        stroke="var(--c-text)"
         stroke-width="4"
         fill="none"
       />
@@ -130,7 +130,7 @@ const forceBTo = inward(forceBFrom, circleB, 122);
         :cx="circleB.x"
         :cy="circleB.y"
         :r="circleB.r"
-        stroke="var(--c-text, #f8fafc)"
+        stroke="var(--c-text)"
         stroke-width="4"
         fill="none"
       />
@@ -139,7 +139,7 @@ const forceBTo = inward(forceBFrom, circleB, 122);
       <CourseArrow
         :from="velAFrom"
         :to="velATo"
-        stroke="var(--c-velocity, #60a5fa)"
+        stroke="var(--c-velocity)"
         stroke-width="4"
         :head-size="16"
       />
@@ -247,7 +247,7 @@ const forceBTo = inward(forceBFrom, circleB, 122);
             cx="0"
             cy="0"
             r="14"
-            fill="var(--c-bg, #0f172a)"
+            fill="var(--c-bg)"
             stroke="var(--c-force)"
             stroke-width="2.6"
           />
@@ -326,16 +326,13 @@ const forceBTo = inward(forceBFrom, circleB, 122);
 </template>
 
 <style scoped>
-.split-particles {
+/* 三微粒分裂图：根 div 与 svg 顶部对齐；图宽上限交给共享的 .fig-svg（本课 style.css）读 --fig-max
+   —— 第 5 页题目页图栏 ≈ 438px、第 6 页解析页图栏 ≈ 500px，540px 让两处都被栏宽限住 */
+.fig-particles {
   display: block;
   align-self: flex-start;
   width: 100%;
-}
 
-.split-particles-svg {
-  display: block;
-  width: 420px;
-  max-width: 100%;
-  height: auto;
+  --fig-max: 540px;
 }
 </style>

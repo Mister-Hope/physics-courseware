@@ -16,21 +16,21 @@ const parabola = (from: { x: number; y: number }, to: { x: number; y: number }):
     <svg viewBox="0 0 540 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="初速度分别为 v0 与 2v0 的平抛打到同一堵竖直墙面上">
       <SurfaceHatch :from="{ x: 40, y: GROUND_Y }" :to="{ x: WALL_X, y: GROUND_Y }" side="below" />
       <SurfaceHatch :from="{ x: WALL_X, y: 48 }" :to="{ x: WALL_X, y: GROUND_Y }" side="right" />
-      <path :d="parabola(O_SLOW, HIT_SLOW)" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" />
-      <path :d="parabola(O_FAST, HIT_FAST)" fill="none" stroke="#e2a846" stroke-width="3" stroke-linecap="round" />
-      <CourseArrow :from="O_SLOW" :to="{ x: O_SLOW.x + 68, y: O_SLOW.y }" stroke="#60a5fa" :stroke-width="3" />
-      <CourseArrow :from="O_FAST" :to="{ x: O_FAST.x + 136, y: O_FAST.y }" stroke="#e2a846" :stroke-width="3" />
-      <text :x="O_SLOW.x + 74" :y="O_SLOW.y - 10" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#93c5fd">v</text>
-      <text :x="O_SLOW.x + 85" :y="O_SLOW.y - 6" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#93c5fd">0</text>
-      <text :x="O_FAST.x + 142" :y="O_FAST.y + 20" font-family="KaTeX_Main" font-style="normal" font-size="16" fill="#e2a846">2</text>
-      <text :x="O_FAST.x + 152" :y="O_FAST.y + 20" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="#e2a846">v</text>
-      <text :x="O_FAST.x + 165" :y="O_FAST.y + 24" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="#e2a846">0</text>
-      <circle :cx="HIT_SLOW.x" :cy="HIT_SLOW.y" r="5.5" fill="#60a5fa" />
-      <circle :cx="HIT_FAST.x" :cy="HIT_FAST.y" r="5.5" fill="#e2a846" />
-      <line x1="80" y1="305" x2="440" y2="305" stroke="rgba(148,163,184,0.7)" stroke-width="1.5" />
-      <line x1="80" y1="297" x2="80" y2="313" stroke="rgba(148,163,184,0.7)" stroke-width="1.5" />
-      <line x1="440" y1="297" x2="440" y2="313" stroke="rgba(148,163,184,0.7)" stroke-width="1.5" />
-      <text x="252" y="332" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#cbd5e1">L</text>
+      <path :d="parabola(O_SLOW, HIT_SLOW)" fill="none" stroke="var(--c-velocity)" stroke-width="3" stroke-linecap="round" />
+      <path :d="parabola(O_FAST, HIT_FAST)" fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round" />
+      <CourseArrow :from="O_SLOW" :to="{ x: O_SLOW.x + 68, y: O_SLOW.y }" stroke="var(--c-velocity)" :stroke-width="3" />
+      <CourseArrow :from="O_FAST" :to="{ x: O_FAST.x + 136, y: O_FAST.y }" stroke="var(--c-accent)" :stroke-width="3" />
+      <text :x="O_SLOW.x + 74" :y="O_SLOW.y - 10" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-velocity-light)">v</text>
+      <text :x="O_SLOW.x + 85" :y="O_SLOW.y - 6" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-velocity-light)">0</text>
+      <text :x="O_FAST.x + 142" :y="O_FAST.y + 20" font-family="KaTeX_Main" font-style="normal" font-size="16" fill="var(--c-accent)">2</text>
+      <text :x="O_FAST.x + 152" :y="O_FAST.y + 20" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-accent)">v</text>
+      <text :x="O_FAST.x + 165" :y="O_FAST.y + 24" font-family="KaTeX_Main" font-style="normal" font-size="14" fill="var(--c-accent)">0</text>
+      <circle :cx="HIT_SLOW.x" :cy="HIT_SLOW.y" r="5.5" fill="var(--c-velocity)" />
+      <circle :cx="HIT_FAST.x" :cy="HIT_FAST.y" r="5.5" fill="var(--c-accent)" />
+      <line x1="80" y1="305" x2="440" y2="305" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="1.5" />
+      <line x1="80" y1="297" x2="80" y2="313" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="1.5" />
+      <line x1="440" y1="297" x2="440" y2="313" stroke="color-mix(in srgb, var(--c-text-dim) 70%, transparent)" stroke-width="1.5" />
+      <text x="252" y="332" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-neutral-300)">L</text>
     </svg>
   </div>
 </template>

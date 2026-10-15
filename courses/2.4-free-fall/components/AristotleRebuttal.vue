@@ -28,25 +28,25 @@ const show = (from: number): Record<string, boolean> =>
     <svg class="ar-stones" viewBox="0 0 660 190" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="ar-rock-a" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.32" />
-          <stop offset="100%" stop-color="#475569" stop-opacity="0.32" />
+          <stop offset="0%" stop-color="var(--c-text-dim)" stop-opacity="0.32" />
+          <stop offset="100%" stop-color="var(--c-neutral-600)" stop-opacity="0.32" />
         </linearGradient>
         <linearGradient id="ar-rock-b" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.22" />
-          <stop offset="100%" stop-color="#475569" stop-opacity="0.3" />
+          <stop offset="0%" stop-color="var(--c-text-dim)" stop-opacity="0.22" />
+          <stop offset="100%" stop-color="var(--c-neutral-600)" stop-opacity="0.3" />
         </linearGradient>
         <linearGradient id="ar-rock-c" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#e2a846" stop-opacity="0.26" />
+          <stop offset="0%" stop-color="var(--c-accent)" stop-opacity="0.26" />
           <stop offset="100%" stop-color="#b45309" stop-opacity="0.2" />
         </linearGradient>
       </defs>
       <path
         d="M 42 54 L 66 30 L 104 34 L 126 60 L 110 88 L 66 92 L 40 74 Z"
         fill="url(#ar-rock-a)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.6"
       />
-      <text x="84" y="72" text-anchor="middle" font-size="28" font-weight="700" fill="#e2a846">
+      <text x="84" y="72" text-anchor="middle" font-size="28" font-weight="700" fill="var(--c-accent)">
         8
       </text>
       <line
@@ -54,19 +54,19 @@ const show = (from: number): Record<string, boolean> =>
         y1="102"
         x2="84"
         y2="134"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
         stroke-linecap="round"
       />
-      <polygon points="84,148 75,132 93,132" fill="#e2a846" />
-      <text x="84" y="172" text-anchor="middle" font-size="22" fill="#94a3b8">落得快</text>
+      <polygon points="84,148 75,132 93,132" fill="var(--c-accent)" />
+      <text x="84" y="172" text-anchor="middle" font-size="22" fill="var(--c-text-dim)">落得快</text>
       <path
         d="M 222 68 L 244 50 L 272 54 L 286 74 L 272 92 L 240 94 L 220 82 Z"
         fill="url(#ar-rock-b)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.6"
       />
-      <text x="253" y="80" text-anchor="middle" font-size="24" font-weight="700" fill="#e2a846">
+      <text x="253" y="80" text-anchor="middle" font-size="24" font-weight="700" fill="var(--c-accent)">
         4
       </text>
       <line
@@ -74,44 +74,44 @@ const show = (from: number): Record<string, boolean> =>
         y1="104"
         x2="253"
         y2="126"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="3"
         stroke-linecap="round"
       />
-      <polygon points="253,138 245,124 261,124" fill="#94a3b8" />
-      <text x="253" y="168" text-anchor="middle" font-size="22" fill="#94a3b8">落得慢</text>
-      <text x="358" y="86" text-anchor="middle" font-size="40" font-weight="700" fill="#475569">
+      <polygon points="253,138 245,124 261,124" fill="var(--c-text-dim)" />
+      <text x="253" y="168" text-anchor="middle" font-size="22" fill="var(--c-text-dim)">落得慢</text>
+      <text x="358" y="86" text-anchor="middle" font-size="40" font-weight="700" fill="var(--c-neutral-600)">
         ?
       </text>
       <g :class="show(1)">
         <path
           d="M 484.9 34.4 L 500.8 18.5 L 525.9 21.2 L 540.4 38.3 L 529.8 56.8 L 500.8 59.5 L 483.6 47.6 Z"
           fill="url(#ar-rock-c)"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.8"
         />
-        <text x="512" y="47" text-anchor="middle" font-size="22" font-weight="700" fill="#e2a846">
+        <text x="512" y="47" text-anchor="middle" font-size="22" font-weight="700" fill="var(--c-accent)">
           8
         </text>
         <path
           d="M 488.8 81 L 505.3 67.5 L 526.3 70.5 L 536.8 85.5 L 526.3 99 L 502.3 100.5 L 487.3 91.5 Z"
           fill="url(#ar-rock-c)"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="1.8"
         />
-        <text x="512" y="91" text-anchor="middle" font-size="20" font-weight="700" fill="#e2a846">
+        <text x="512" y="91" text-anchor="middle" font-size="20" font-weight="700" fill="var(--c-accent)">
           4
         </text>
         <path
           d="M 460 63.4 H 538 Q 546 63.4 546 71.4 V 97 Q 546 105 538 105 H 486 Q 478 105 478 97 V 22 Q 478 14 486 14 H 538 Q 546 14 546 22 V 55.4 Q 546 63.4 538 63.4 H 460"
           fill="none"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="2.4"
           stroke-linecap="round"
         />
-        <circle cx="455" cy="63.4" r="5.5" fill="none" stroke="#e2a846" stroke-width="2.4" />
-        <circle cx="455" cy="63.4" r="1.8" fill="#e2a846" />
-        <text x="590" y="70" text-anchor="middle" font-size="28" font-weight="700" fill="#e2a846">
+        <circle cx="455" cy="63.4" r="5.5" fill="none" stroke="var(--c-accent)" stroke-width="2.4" />
+        <circle cx="455" cy="63.4" r="1.8" fill="var(--c-accent)" />
+        <text x="590" y="70" text-anchor="middle" font-size="28" font-weight="700" fill="var(--c-accent)">
           12
         </text>
         <line
@@ -119,12 +119,12 @@ const show = (from: number): Record<string, boolean> =>
           y1="112"
           x2="512"
           y2="134"
-          stroke="#e2a846"
+          stroke="var(--c-accent)"
           stroke-width="3"
           stroke-linecap="round"
         />
-        <polygon points="512,148 503,132 521,132" fill="#e2a846" />
-        <text x="512" y="172" text-anchor="middle" font-size="22" fill="#e2a846">捆在一起</text>
+        <polygon points="512,148 503,132 521,132" fill="var(--c-accent)" />
+        <text x="512" y="172" text-anchor="middle" font-size="22" fill="var(--c-accent)">捆在一起</text>
       </g>
     </svg>
     <div class="ar-infer">
@@ -198,7 +198,7 @@ const show = (from: number): Record<string, boolean> =>
 }
 
 .ar-red {
-  color: #f87171;
+  color: var(--c-danger);
 }
 
 .ar-clash {
@@ -207,7 +207,7 @@ const show = (from: number): Record<string, boolean> =>
   border-top: 1px solid var(--c-border);
   border-bottom: 1px solid var(--c-border);
 
-  background: rgb(226 168 70 / 6%);
+  background: color-mix(in srgb, var(--c-accent) 6%, transparent);
   color: var(--c-text);
 
   font-size: 0.9rem;
@@ -220,8 +220,8 @@ const show = (from: number): Record<string, boolean> =>
 
   margin-right: 0.5rem;
   padding: 0.05rem 0.55rem;
-  border: 1px solid rgb(226 168 70 / 35%);
-  border-radius: 2rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 35%, transparent);
+  border-radius: 999px;
 
   color: var(--c-accent);
 

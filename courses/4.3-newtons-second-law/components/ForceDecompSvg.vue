@@ -9,30 +9,30 @@ const { showDecomp = false } = defineProps<{ showDecomp?: boolean }>();
        合力 F 属题干常显；两个分力、虚线矩形与全部加速度箭头由 showDecomp 控制（点击后才出）。
        带下角标的标签一律写成「字母紧跟 <tspan>」的同一行，并用 prettier-ignore 挡住 oxfmt 的换行（换行会在字母与角标之间渲染出一个空格）。 -->
   <svg viewBox="0 0 420 320" width="100%" style="max-width: 420px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect x="60" y="60" width="90" height="60" rx="6" fill="rgba(30,41,59,0.85)" stroke="#e2a846" stroke-width="2" />
-    <text x="105" y="78" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="#f1f5f9" text-anchor="middle">m</text>
-    <CourseArrow :from="{ x: 105, y: 90 }" :to="{ x: 338, y: 245 }" stroke="#e2a846" :stroke-width="3.4" />
+    <rect x="60" y="60" width="90" height="60" rx="6" fill="color-mix(in srgb, var(--c-surface-solid) 85%, transparent)" stroke="var(--c-accent)" stroke-width="2" />
+    <text x="105" y="78" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-text)" text-anchor="middle">m</text>
+    <CourseArrow :from="{ x: 105, y: 90 }" :to="{ x: 338, y: 245 }" stroke="var(--c-accent)" :stroke-width="3.4" />
     <text
       x="300"
       y="242"
       font-family="KaTeX_Math"
       font-style="italic"
       font-size="22"
-      fill="#e2a846"
+      fill="var(--c-accent)"
       text-anchor="middle"
-      stroke="#0f1425"
+      stroke="var(--c-bg-soft)"
       stroke-width="3"
       paint-order="stroke"
     >
       F
     </text>
     <g v-if="showDecomp">
-      <path d="M 105 90 L 338 90 L 338 245 L 105 245 Z" fill="none" stroke="rgba(148,163,184,0.5)" stroke-width="1.6" stroke-dasharray="7 5" />
-      <CourseArrow :from="{ x: 105, y: 90 }" :to="{ x: 338, y: 90 }" stroke="#e2a846" :stroke-width="2.8" />
-      <CourseArrow :from="{ x: 105, y: 90 }" :to="{ x: 105, y: 245 }" stroke="#e2a846" :stroke-width="2.8" />
-      <CourseArrow :from="{ x: 113, y: 82 }" :to="{ x: 276, y: 82 }" stroke="#f87171" :stroke-width="2.2" opacity="0.9" />
-      <CourseArrow :from="{ x: 113, y: 82 }" :to="{ x: 113, y: 191 }" stroke="#f87171" :stroke-width="2.2" opacity="0.9" />
-      <CourseArrow :from="{ x: 113, y: 82 }" :to="{ x: 276, y: 191 }" stroke="#f87171" :stroke-width="2.4" opacity="0.9" />
+      <path d="M 105 90 L 338 90 L 338 245 L 105 245 Z" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 50%, transparent)" stroke-width="1.6" stroke-dasharray="7 5" />
+      <CourseArrow :from="{ x: 105, y: 90 }" :to="{ x: 338, y: 90 }" stroke="var(--c-accent)" :stroke-width="2.8" />
+      <CourseArrow :from="{ x: 105, y: 90 }" :to="{ x: 105, y: 245 }" stroke="var(--c-accent)" :stroke-width="2.8" />
+      <CourseArrow :from="{ x: 113, y: 82 }" :to="{ x: 276, y: 82 }" stroke="var(--c-force)" :stroke-width="2.2" opacity="0.9" />
+      <CourseArrow :from="{ x: 113, y: 82 }" :to="{ x: 113, y: 191 }" stroke="var(--c-force)" :stroke-width="2.2" opacity="0.9" />
+      <CourseArrow :from="{ x: 113, y: 82 }" :to="{ x: 276, y: 191 }" stroke="var(--c-force)" :stroke-width="2.4" opacity="0.9" />
       <!-- prettier-ignore -->
       <text
         x="300"
@@ -40,9 +40,9 @@ const { showDecomp = false } = defineProps<{ showDecomp?: boolean }>();
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="middle"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >F<tspan font-size="14" dy="4">1</tspan></text>
@@ -53,9 +53,9 @@ const { showDecomp = false } = defineProps<{ showDecomp?: boolean }>();
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="22"
-        fill="#e2a846"
+        fill="var(--c-accent)"
         text-anchor="end"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >F<tspan font-size="14" dy="4">2</tspan></text>
@@ -66,9 +66,9 @@ const { showDecomp = false } = defineProps<{ showDecomp?: boolean }>();
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#f87171"
+        fill="var(--c-force)"
         text-anchor="middle"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >a<tspan font-size="14" dy="4">1</tspan></text>
@@ -79,9 +79,9 @@ const { showDecomp = false } = defineProps<{ showDecomp?: boolean }>();
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#f87171"
+        fill="var(--c-force)"
         text-anchor="start"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >a<tspan font-size="14" dy="4">2</tspan></text>
@@ -91,9 +91,9 @@ const { showDecomp = false } = defineProps<{ showDecomp?: boolean }>();
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="20"
-        fill="#f87171"
+        fill="var(--c-force)"
         text-anchor="middle"
-        stroke="#0f1425"
+        stroke="var(--c-bg-soft)"
         stroke-width="3"
         paint-order="stroke"
       >

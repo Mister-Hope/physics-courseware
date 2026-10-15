@@ -276,10 +276,10 @@ const labels = computed(() => [
 
   min-width: 0;
   max-width: 17rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 }
 
 .pa-info {
@@ -352,7 +352,7 @@ const labels = computed(() => [
 }
 
 .pa-sum-dim {
-  border-left-color: rgb(148 163 184 / 35%);
+  border-left-color: color-mix(in srgb, var(--c-text-dim) 35%, transparent);
   color: var(--c-text-dim);
   font-size: 0.8rem;
 }
@@ -394,9 +394,9 @@ const labels = computed(() => [
 
   min-width: 0;
   height: 4px;
-  border-radius: 2rem;
+  border-radius: 999px;
 
-  background: rgb(148 163 184 / 20%);
+  background: color-mix(in srgb, var(--c-text-dim) 20%, transparent);
   outline: none;
 
   cursor: pointer;

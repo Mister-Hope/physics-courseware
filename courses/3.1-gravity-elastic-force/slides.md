@@ -34,16 +34,16 @@ clicks: 3
 
 <div class="three-col" v-click="1">
 <div class="text-center">
-<div class="mini-title" style="justify-content: center">大小</div>
-<div class="line">用多少牛顿量度</div>
+<div class="mini-title" style="justify-content: center"><mdi-ruler class="text-xl" />大小</div>
+<div>用多少牛顿量度</div>
 </div>
 <div class="text-center">
-<div class="mini-title" style="justify-content: center">方向</div>
-<div class="line">沿哪条直线、朝哪一边</div>
+<div class="mini-title" style="justify-content: center"><mdi-arrow-right-bold class="text-xl" />方向</div>
+<div>沿哪条直线、朝哪一边</div>
 </div>
 <div class="text-center">
-<div class="mini-title" style="justify-content: center">作用点</div>
-<div class="line">作用在物体的哪一点</div>
+<div class="mini-title" style="justify-content: center"><mdi-crosshairs class="text-xl" />作用点</div>
+<div>作用在物体的哪一点</div>
 </div>
 </div>
 
@@ -73,16 +73,16 @@ clicks: 2
 
 <div class="half-grid" v-click="1">
 <div class="stack">
-<div class="mini-title">按效果</div>
-<div class="line">支持力、拉力、浮力……</div>
-<div class="mini-title">按作用范围</div>
-<div class="line">内力、外力</div>
+<div class="mini-title"><mdi-arrow-up-bold-outline class="text-xl" />按效果</div>
+<div>支持力、拉力、浮力……</div>
+<div class="mini-title"><mdi-arrow-expand-horizontal class="text-xl" />按作用范围</div>
+<div>内力、外力</div>
 </div>
 <div class="stack divider-l">
-<div class="mini-title">按作用对象</div>
-<div class="line">作用力、反作用力</div>
-<div class="mini-title">按性质</div>
-<div class="line">重力、弹力、摩擦力、电磁力等</div>
+<div class="mini-title"><mdi-swap-horizontal class="text-xl" />按作用对象</div>
+<div>作用力、反作用力</div>
+<div class="mini-title"><mdi-shape-outline class="text-xl" />按性质</div>
+<div>重力、弹力、摩擦力、电磁力等</div>
 </div>
 </div>
 
@@ -104,7 +104,7 @@ clicks: 3
 </div>
 
 <div class="card" v-click="2">
-<div class="define-line">由于<b class="text-accent">地球的吸引</b>而使物体受到的力叫作<b>重力</b>：方向<b class="text-accent">竖直向下</b>，施力物体是地球。</div>
+<div>由于<b class="text-accent">地球的吸引</b>而使物体受到的力叫作<b>重力</b>：方向<b class="text-accent">竖直向下</b>，施力物体是地球。</div>
 </div>
 
 <div v-click="3">
@@ -124,7 +124,7 @@ clicks: 3
 <div class="ask">物体的每一部分都受重力，画受力图时这个力该画在哪一点？</div>
 
 <div class="card" v-click="1">
-<div class="define-line">从效果上看，各部分受到的重力可以<b class="text-accent">集中于一点</b>，这一点叫作物体的<b>重心</b>：它就是重力的作用点，有且只有一个。</div>
+<div>从效果上看，各部分受到的重力可以<b class="text-accent">集中于一点</b>，这一点叫作物体的<b>重心</b>：它就是重力的作用点，有且只有一个。</div>
 </div>
 
 <div v-click="2">
@@ -268,11 +268,11 @@ clicks: 4
 <div class="page-grow">
 <div class="ask ask-lead">撤去作用力后，物体能恢复原状吗？</div>
 
-<h1 class="p13-title" v-click="1">弹性形变与塑性形变</h1>
+<h1 class="def-title" v-click="1">弹性形变与塑性形变</h1>
 
-<div class="p13-defs">
-<div class="p13-def" v-click="1"><span class="p13-num">1</span><span>撤去作用力后能<b class="text-accent">完全恢复</b>原状的，叫<b class="text-accent whitespace-nowrap">弹性形变</b>。</span></div>
-<div class="p13-def" v-click="1"><span class="p13-num">2</span><span>不能完全恢复的，叫<b class="text-accent-2 whitespace-nowrap">塑性形变</b>。</span></div>
+<div class="step-list">
+<div class="step-item text-lg leading-normal" v-click="1"><span class="step-no">1</span><span>撤去作用力后能<b class="text-accent">完全恢复</b>原状的，叫<b class="text-accent whitespace-nowrap">弹性形变</b>。</span></div>
+<div class="step-item text-lg leading-normal" v-click="1"><span class="step-no">2</span><span>不能完全恢复的，叫<b class="text-accent-2 whitespace-nowrap">塑性形变</b>。</span></div>
 </div>
 
 <div class="summary-line" v-click="2">只恢复了一部分，也属于塑性形变——分界看的是<b class="text-accent">能否完全恢复</b>。</div>
@@ -280,8 +280,8 @@ clicks: 4
 <div class="key key-lead" v-click="3">弹性形变与塑性形变的分界点，叫作<b class="text-accent">弹性限度</b>。</div>
 
 <div class="card" v-click="4">
-<div class="mini-title"><mdi-lightbulb-on-outline />刚体</div>
-<div class="define-line">不发生任何形变，是一个<b class="text-accent-2">理想化模型</b>。</div>
+<div class="mini-title"><mdi-lightbulb-on-outline class="text-xl" />刚体</div>
+<div>不发生任何形变，是一个<b class="text-accent-2">理想化模型</b>。</div>
 </div>
 </div>
 
@@ -293,12 +293,12 @@ clicks: 1
 # 如何验证坚硬物体因弹力产生的微小形变？
 
 <div class="page-grow">
-<div class="md-grid">
-<div class="md-figure">
+<div class="split-wide def-wide">
+<div>
 <MirrorDeformation />
 </div>
 
-<div class="key divider-l" v-click="1"><b class="text-accent">光路放大法</b>：每反射一次光线偏转 <Latex tex="2\theta" />，两次共偏转 <Latex tex="4\theta" />——微小的镜面转角被“偏转角 × 到墙的距离”放大成墙上光点肉眼可见的移动。</div>
+<div class="key" v-click="1"><b class="text-accent">光路放大法</b>：每反射一次光线偏转 <Latex tex="2\theta" />，两次共偏转 <Latex tex="4\theta" />——微小的镜面转角被“偏转角 × 到墙的距离”放大成墙上光点肉眼可见的移动。</div>
 </div>
 </div>
 
@@ -315,7 +315,7 @@ clicks: 3
 <div class="summary-line" v-click="1">被拉长的弹簧要恢复原状，对相连的小车产生拉力；被压弯的跳板要恢复原状，对上面的人产生支持力。</div>
 
 <div class="card" v-click="2">
-<div class="define-line">发生形变的物体，要恢复原状，对与它接触的物体会产生力的作用，这种力叫作<b>弹力</b>。</div>
+<div>发生形变的物体，要恢复原状，对与它接触的物体会产生力的作用，这种力叫作<b>弹力</b>。</div>
 </div>
 
 <div class="key" v-click="3">产生弹力的条件：① 两物体<b class="text-accent">直接接触</b>；② 发生<b class="text-accent">弹性形变</b>（彼此挤压或拉伸）。压力、支持力、绳的拉力，本质上都是弹力。</div>
@@ -397,7 +397,7 @@ clicks: 2
 <div class="ask">同样拉长 <Latex tex="1\ \text{cm}" />，有的弹簧用力小、有的用力大——差在哪里？</div>
 
 <div class="card" v-click="1">
-<div class="define-line">在弹性限度内，弹簧发生弹性形变时，弹力 <Latex tex="F" /> 的大小跟弹簧伸长（或缩短）的长度 <Latex tex="x" /> 成正比，即 <Latex tex="F = kx" />——这个规律叫作<b>胡克定律</b>；<Latex tex="k" /> 叫弹簧的<b>劲度系数</b>，单位是 <Latex tex="\text{N/m}" />。</div>
+<div>在弹性限度内，弹簧发生弹性形变时，弹力 <Latex tex="F" /> 的大小跟弹簧伸长（或缩短）的长度 <Latex tex="x" /> 成正比，即 <Latex tex="F = kx" />——这个规律叫作<b>胡克定律</b>；<Latex tex="k" /> 叫弹簧的<b>劲度系数</b>，单位是 <Latex tex="\text{N/m}" />。</div>
 </div>
 
 <div class="key" v-click="2"><Latex tex="k" /> 越大，同样的形变需要越大的力，弹簧就越"硬"；<Latex tex="F = kx" /> 只在<b class="text-accent">弹性限度内</b>成立。</div>
@@ -428,7 +428,7 @@ clicks: 2
 # 判断弹力方向
 
 <div class="page-grow">
-<div class="half-grid p20-grid" v-click="1">
+<div class="half-grid items-start gap-[1.6rem]" v-click="1">
 <div class="stack">
 <div class="ask">① 右侧球受到左侧球的弹力，方向向哪？</div>
 <SpheresContactSvg :show-forces="$clicks >= 2" />
@@ -485,7 +485,7 @@ clicks: 3
 <div class="ask">题目里的"弹簧"，和真实的弹簧一样吗？</div>
 
 <div class="card" v-click="1">
-<div class="define-line"><b>理想弹簧</b>：自身质量不计（<Latex tex="m = 0" />）、劲度系数 <Latex tex="k" /> 是<b class="text-accent">有限值</b>，而且有<b class="text-accent">弹性限度</b>——伸长量必须保持在限度以内，<Latex tex="F = kx" /> 才成立。</div>
+<div><b>理想弹簧</b>：自身质量不计（<Latex tex="m = 0" />）、劲度系数 <Latex tex="k" /> 是<b class="text-accent">有限值</b>，而且有<b class="text-accent">弹性限度</b>——伸长量必须保持在限度以内，<Latex tex="F = kx" /> 才成立。</div>
 </div>
 
 <div class="summary-line" v-click="2">轻弹簧<b class="text-accent">两端受到的拉力总相等</b>；弹簧既能提供<b class="text-accent">拉力</b>（被拉长时），也能提供<b class="text-accent">压力</b>（被压缩时）。</div>
@@ -506,11 +506,11 @@ clicks: 3
 <div class="half-grid">
 <div class="stack">
 <SpringsParallelSvg />
-<div class="line" v-click="1"><Latex tex="F = F_1 + F_2" />，<Latex tex="x = x_1 = x_2" /> → <Latex tex="k = k_1 + k_2" />：整体更硬。</div>
+<div v-click="1"><Latex tex="F = F_1 + F_2" />，<Latex tex="x = x_1 = x_2" /> → <Latex tex="k = k_1 + k_2" />：整体更硬。</div>
 </div>
 <div class="stack divider-l">
 <SpringsSeriesSvg />
-<div class="line" v-click="2"><Latex tex="F = F_1 = F_2" />，<Latex tex="x = x_1 + x_2" /> → <Latex tex="\dfrac{1}{k} = \dfrac{1}{k_1} + \dfrac{1}{k_2}" />：整体更软。</div>
+<div v-click="2"><Latex tex="F = F_1 = F_2" />，<Latex tex="x = x_1 + x_2" /> → <Latex tex="\dfrac{1}{k} = \dfrac{1}{k_1} + \dfrac{1}{k_2}" />：整体更软。</div>
 </div>
 </div>
 
@@ -531,7 +531,7 @@ clicks: 3
 <SpringModel />
 </div>
 
-<div class="line" v-click="2">轻弹簧 <Latex tex="m = 0" />：整根弹簧的拉力处处相等——一端受到的力总等于另一端受到的力。所以只要知道<b class="text-accent">一端</b>的受力，就能用 <Latex tex="F = kx" /> 算伸长量。</div>
+<div v-click="2">轻弹簧 <Latex tex="m = 0" />：整根弹簧的拉力处处相等——一端受到的力总等于另一端受到的力。所以只要知道<b class="text-accent">一端</b>的受力，就能用 <Latex tex="F = kx" /> 算伸长量。</div>
 
 <div class="key" v-click="3">四幅图里<b class="text-accent">弹簧左端受到的力都是同一个 <Latex tex="F" /></b>，由 <Latex tex="F = kx" /> 得 <Latex tex="\Delta l_1 = \Delta l_2 = \Delta l_3 = \Delta l_4" />——形变量只由弹力决定，与物体怎么运动、面粗糙与否都无关。</div>
 </div>
@@ -569,7 +569,7 @@ clicks: 2
 <div class="stack" v-click="1">
 <RopeDirectionSvg />
 </div>
-<div class="key divider-l" v-click="2">绳只能被<b class="text-accent">拉长</b>、不能被压缩，所以它的弹力一定<b class="text-accent">沿着绳</b>，指向绳<b class="text-accent">收缩</b>的方向——也就是把两端物体往中间拉的方向。</div>
+<div class="key" v-click="2">绳只能被<b class="text-accent">拉长</b>、不能被压缩，所以它的弹力一定<b class="text-accent">沿着绳</b>，指向绳<b class="text-accent">收缩</b>的方向——也就是把两端物体往中间拉的方向。</div>
 </div>
 </div>
 
@@ -584,7 +584,7 @@ clicks: 2
 <div class="ask">为什么题目里的绳"拉不断、也压不弯"？</div>
 
 <div class="card" v-click="1">
-<div class="define-line"><b>理想绳</b>：质量不计（<Latex tex="m \to 0" />）的"刚体"——<b class="text-accent">完全非弹性、不可伸长</b>，相当于劲度系数 <Latex tex="k \to +\infty" />。</div>
+<div><b>理想绳</b>：质量不计（<Latex tex="m \to 0" />）的"刚体"——<b class="text-accent">完全非弹性、不可伸长</b>，相当于劲度系数 <Latex tex="k \to +\infty" />。</div>
 </div>
 
 <div class="key" v-click="2"><Latex tex="m \to 0" />：绳的重力可以忽略；<Latex tex="k \to +\infty" />：不管拉多大力，绳的长度都不变。</div>
@@ -607,8 +607,8 @@ clicks: 3
 <PulleyTensionSvg />
 </div>
 <div class="stack divider-l">
-<div class="line">绳上任意一处两侧的拉力大小都相同，方向都沿绳。</div>
-<div class="line">重绳、皮带则不同：它们本身有质量，上端还要"提起"下面的部分，所以上端拉力大、下端拉力小。</div>
+<div>绳上任意一处两侧的拉力大小都相同，方向都沿绳。</div>
+<div>重绳、皮带则不同：它们本身有质量，上端还要"提起"下面的部分，所以上端拉力大、下端拉力小。</div>
 </div>
 </div>
 
@@ -623,16 +623,16 @@ clicks: 4
 # 例题：粗绳悬挂在天花板上
 
 <div class="page-grow">
-<div class="problem">一条<b class="text-accent">质量不可忽略</b>的粗绳悬挂在天花板上，下端自由。绳上各处的拉力一样大吗？</div>
+<div>一条<b class="text-accent">质量不可忽略</b>的粗绳悬挂在天花板上，下端自由。绳上各处的拉力一样大吗？</div>
 
-<div class="half-grid">
+<div class="split-wide ef-rope-wide">
 <div class="stack" v-click="1">
 <ThickRopeSvg />
 </div>
 <div class="stack divider-l">
-<div class="line" v-click="2">绳的<b class="text-accent">自由端</b>下面再没有东西可提，<Latex tex="T = 0" />。</div>
-<div class="line" v-click="2">绳的<b class="text-accent">上端</b>要把整根绳都提起来，拉力等于绳的重力 <Latex tex="T = G" />。</div>
-<div class="line" v-click="3">从自由端往上数 <Latex tex="x" />，这个截面承担的是下面 <Latex tex="\dfrac{x}{L}" /> 的绳重：<Latex tex="T = \dfrac{x}{L}G" />——与 <Latex tex="x" /> 成正比，拉力从下往上<b class="text-accent">均匀增大</b>。</div>
+<div v-click="2">绳的<b class="text-accent">自由端</b>下面再没有东西可提，<Latex tex="T = 0" />。</div>
+<div v-click="2">绳的<b class="text-accent">上端</b>要把整根绳都提起来，拉力等于绳的重力 <Latex tex="T = G" />。</div>
+<div v-click="3">从自由端往上数 <Latex tex="x" />，这个截面承担的是下面 <Latex tex="\dfrac{x}{L}" /> 的绳重：<Latex tex="T = \dfrac{x}{L}G" />——与 <Latex tex="x" /> 成正比，拉力从下往上<b class="text-accent">均匀增大</b>。</div>
 <div class="key" v-click="4">例：<Latex tex="G = 6\ \text{N}" />、<Latex tex="L = 60\ \text{cm}" /> 时，距自由端 <Latex tex="20\ \text{cm}" /> 处 <Latex tex="T = 2\ \text{N}" />、<Latex tex="40\ \text{cm}" /> 处 <Latex tex="T = 4\ \text{N}" />。</div>
 </div>
 </div>
@@ -646,15 +646,15 @@ clicks: 3
 # 例题：三个小孩拔河
 
 <div class="page-grow">
-<div class="problem">甲、乙在左，丙在右，三人拉同一根轻绳，绳保持静止。<Latex tex="F_1" />、<Latex tex="F_2" />、<Latex tex="F_3" /> 之间有什么关系？绳上各处的拉力又是多少？</div>
+<div>甲、乙在左，丙在右，三人拉同一根轻绳，绳保持静止。<Latex tex="F_1" />、<Latex tex="F_2" />、<Latex tex="F_3" /> 之间有什么关系？绳上各处的拉力又是多少？</div>
 
 <div v-click="1">
 <TugOfWarSvg :step="$clicks" />
 </div>
 
 <div class="stack-dense" v-click="3">
-<div class="line">绳的<b class="text-accent">两个自由端</b>没有受力点，拉力是 <Latex tex="0" />；甲、乙之间那一段只被甲从外面拉着，拉力是 <Latex tex="F_1" />。</div>
-<div class="line">乙、丙之间那一段要同时拉住甲、乙两个人，拉力是 <Latex tex="F_1 + F_2" />——绳上每经过一个受力点拉力就变一次，"一段绳"指的就是中间没有新的沿绳受力点的那一段。</div>
+<div>绳的<b class="text-accent">两个自由端</b>没有受力点，拉力是 <Latex tex="0" />；甲、乙之间那一段只被甲从外面拉着，拉力是 <Latex tex="F_1" />。</div>
+<div>乙、丙之间那一段要同时拉住甲、乙两个人，拉力是 <Latex tex="F_1 + F_2" />——绳上每经过一个受力点拉力就变一次，"一段绳"指的就是中间没有新的沿绳受力点的那一段。</div>
 </div>
 </div>
 
@@ -668,7 +668,7 @@ clicks: 4
 <div class="page-grow">
 <div class="ask">轻杆的弹力，一定沿杆的方向吗？</div>
 
-<div class="line" v-click="1"><b>理想杆</b>和弹簧一样：<b class="text-accent">完全不形变</b>、自身质量不计，既能提供<b class="text-accent">拉力</b>、也能提供<b class="text-accent">压力</b>——但它的弹力方向不一定沿杆。</div>
+<div v-click="1"><b>理想杆</b>和弹簧一样：<b class="text-accent">完全不形变</b>、自身质量不计，既能提供<b class="text-accent">拉力</b>、也能提供<b class="text-accent">压力</b>——但它的弹力方向不一定沿杆。</div>
 
 <div class="half-grid" v-click="2">
 <div class="stack">
@@ -682,7 +682,7 @@ clicks: 4
 <div class="key" v-click="3">只有两端都是铰链、且只受两端拉压的<b class="text-accent">二力杆</b>才一定沿杆；一端固定的杆，弹力方向可以是任意的。</div>
 </div>
 
-<div class="rod-hint" v-click="4">用手握住笔的一端，用另一只手多角度掰笔的另一端——体会"多力杆"。</div>
+<div class="ef-rod-hint mini-note" v-click="4">用手握住笔的一端，用另一只手多角度掰笔的另一端——体会"多力杆"。</div>
 
 ---
 layout: base-flex

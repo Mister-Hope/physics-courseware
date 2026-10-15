@@ -1,12 +1,96 @@
 /* ═══════════════════════════════════════════════
    磁场对运动电荷的作用力 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   通用设计系统已提取到 workspace/shared/styles/，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式。
+
+   命名前缀（概念前缀，见 style-guide §6）：本课只用 1 个——
+     flow-  推理链（第 3 页「条件 → 理论推导 → 实验验证」四张步骤卡，第 16 页小结里同一条链的编号）
+   组件里另有 3 个 scoped 局部类（CoverDecor 的 .fig-svg、BeamDeflect3D 的 .beam-canvas、WireCurrent 的 .current-toggle-off），
+   各自只作用于那一个组件，不参与本课的命名空间。
+   字号一律走共享阶梯（正文 1rem、小字 .mini-note、图标 .text-xl），本文件不写 font-size；
+   色值 / 圆角一律走 var(--c-*) / color-mix(...) / var(--radius-*)。
    ═══════════════════════════════════════════════ */
 
 /* ── 封面课题名 ──
    两个课时的课题名都超过 11 字（《磁场对运动电荷的作用力》12 字、《带电粒子在匀强磁场中的运动》13 字），
-   按设计系统的约定把 .cover-title 压到 2.7rem，保证封面标题一行排完、不折行。 */
+   按设计系统的约定把 .cover-title 压到 2.7rem，保证封面标题一行排完、不折行。
+   （style-guide §8 里唯一被认可的共享选择器例外） */
 .cover-title {
   font-size: 2.7rem !important;
+}
+
+/* ── 第 3 页推理链：四张步骤卡 ──
+   同一张卡由 --flow-c 决定语义色（青 = 已知条件 / 金 = 理论推导的猜想 / 蓝 = 设计实验验证），
+   卡内编号徽章与图标都从它派生——要换状态色只改一处。 */
+.flow-card {
+  --flow-c: var(--c-physics);
+  --flow-a: 45%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 11rem;
+  min-height: 150px;
+  padding: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--flow-c) var(--flow-a), transparent);
+  border-radius: var(--radius-md);
+
+  background: color-mix(in srgb, var(--flow-c) 10%, transparent);
+
+  text-align: center;
+}
+
+/* 猜想：虚线边 + 金色，与两条"已知条件"区分开 */
+.flow-card-guess {
+  --flow-c: var(--c-accent);
+  --flow-a: 70%;
+
+  border-style: dashed;
+}
+
+/* 实验验证：蓝 */
+.flow-card-verify {
+  --flow-c: var(--c-accent-2);
+  --flow-a: 55%;
+}
+
+/* 卡内语义图标：单独占一行压在编号徽章上方。⚠️ 不能与标题同行——
+   四张卡 + 三个箭头在 980px 的页面里已经把 11rem 的卡挤到 ~186px，标题行只剩 ~164px，
+   图标（1.2em ≈ 33px）挤进标题行会把两行标题撑成三行。 */
+.flow-card > svg {
+  display: block;
+  margin: 0 auto 0.15rem;
+  color: var(--flow-c);
+}
+
+/* 卡内编号徽章 */
+.flow-no {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0 auto 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--flow-c) 70%, transparent);
+  border-radius: 50%;
+
+  color: var(--flow-c);
+
+  font-weight: 700;
+}
+
+/* 链上箭头：弱提示，用次要文字色 */
+.flow-arrow {
+  color: var(--c-text-dim);
+}
+
+/* ── 第 16 页小结：同一条推理链的编号（青 = 已知 / 金 = 猜想） ── */
+.flow-mark {
+  color: var(--c-physics);
+}
+
+.flow-mark-guess {
+  color: var(--c-accent);
 }

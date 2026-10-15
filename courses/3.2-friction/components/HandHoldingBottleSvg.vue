@@ -25,7 +25,7 @@
       <!-- 瓶身主体 -->
       <path
         d="M 152 29.5 L 172 29.5 C 173 37, 186 43, 186 54 L 186 160 C 186 167, 181 171, 174 171 L 150 171 C 143 171, 138 167, 138 160 L 138 54 C 138 43, 151 37, 152 29.5 Z"
-        fill="rgba(45,212,191,0.18)"
+        fill="color-mix(in srgb, var(--c-physics) 18%, transparent)"
         stroke="var(--c-physics)"
         stroke-width="1.8"
         stroke-linejoin="round"
@@ -33,9 +33,9 @@
       <!-- 瓶内水柱与液面弯月面 -->
       <path
         d="M 139.5 60 Q 162 63.5 184.5 60 L 184.5 160 C 184.5 165.5, 180 169, 174 169 L 150 169 C 144 169, 139.5 165.5, 139.5 160 Z"
-        fill="rgba(56,189,248,0.32)"
+        fill="color-mix(in srgb, var(--c-physics-light) 32%, transparent)"
       />
-      <ellipse cx="162" cy="60" rx="22" ry="2.8" fill="rgba(186,230,253,0.45)" stroke="rgba(45,212,191,0.75)" stroke-width="1" />
+      <ellipse cx="162" cy="60" rx="22" ry="2.8" fill="rgba(186,230,253,0.45)" stroke="color-mix(in srgb, var(--c-physics) 75%, transparent)" stroke-width="1" />
       <!-- 瓶身防滑槽与高光条 -->
       <line x1="140" y1="52" x2="184" y2="52" stroke="rgba(153,246,228,0.35)" stroke-width="1.1" />
       <line x1="140" y1="148" x2="184" y2="148" stroke="rgba(153,246,228,0.35)" stroke-width="1.1" />
@@ -120,7 +120,7 @@
     <CourseArrow :from="{ x: 132, y: 72 }" :to="{ x: 132, y: 22 }" stroke="var(--c-accent)" stroke-width="3.4" />
     <CourseArrow :from="{ x: 190, y: 152 }" :to="{ x: 190, y: 194 }" stroke="var(--c-text-dim)" stroke-width="2.6" stroke-dasharray="8 5" />
     <line x1="40" y1="204" x2="300" y2="204" stroke="var(--c-text-dim)" stroke-width="2.4" />
-    <rect x="40" y="204" width="260" height="6" fill="rgba(148,163,184,0.14)" />
+    <rect x="40" y="204" width="260" height="6" fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)" />
     <text x="122" y="56" text-anchor="end" font-size="17" fill="var(--c-accent)">
       <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
       <tspan dy="5" font-size="11">静</tspan>

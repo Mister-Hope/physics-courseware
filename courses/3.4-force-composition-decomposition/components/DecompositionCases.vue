@@ -74,10 +74,10 @@ const C_P1 = {
 </script>
 
 <template>
-  <div class="dc-wrap">
-    <div class="dc-case">
-      <div class="dc-title" :class="{ 'dc-hidden': step < 1 }">已知两个分力的方向，解有几个？</div>
-      <div class="dc-figure" :class="{ 'dc-hidden': step < 2 }">
+  <div class="three-col">
+    <div class="dec-cond">
+      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }"><mdi-numeric-1-circle-outline class="text-xl inline-block align-middle mr-1" />已知两个分力的方向，解有几个？</div>
+      <div class="figure relative min-w-0" :class="{ 'demo-hidden': step < 2 }">
         <svg viewBox="0 0 260 200">
           <line
             :x1="A_O.x"
@@ -170,12 +170,12 @@ const C_P1 = {
           color="var(--c-accent-2)"
         />
       </div>
-      <div class="dc-verdict" :class="{ 'dc-hidden': step < 3 }">唯一解</div>
+      <div class="dec-cond-verdict" :class="{ 'demo-hidden': step < 3 }">唯一解</div>
     </div>
 
-    <div class="dc-case">
-      <div class="dc-title" :class="{ 'dc-hidden': step < 1 }">已知两个分力的大小，解有几个？</div>
-      <div class="dc-figure" :class="{ 'dc-hidden': step < 2 }">
+    <div class="dec-cond">
+      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }"><mdi-numeric-2-circle-outline class="text-xl inline-block align-middle mr-1" />已知两个分力的大小，解有几个？</div>
+      <div class="figure relative min-w-0" :class="{ 'demo-hidden': step < 2 }">
         <svg viewBox="0 0 260 200">
           <circle
             :cx="B_O.x"
@@ -269,17 +269,17 @@ const C_P1 = {
           color="var(--c-text-dim)"
         />
       </div>
-      <div class="dc-verdict" :class="{ 'dc-hidden': step < 4 }">
+      <div class="dec-cond-verdict" :class="{ 'demo-hidden': step < 4 }">
         <div>平面内 4 个解</div>
-        <div class="dc-verdict-sub">空间中无数个解</div>
+        <div class="dec-cond-sub">空间中无数个解</div>
       </div>
     </div>
 
-    <div class="dc-case">
-      <div class="dc-title" :class="{ 'dc-hidden': step < 1 }">
-        已知一个分力的大小和方向，解有几个？
+    <div class="dec-cond">
+      <div class="dec-cond-title" :class="{ 'demo-hidden': step < 1 }">
+        <mdi-numeric-3-circle-outline class="text-xl inline-block align-middle mr-1" />已知一个分力的大小和方向，解有几个？
       </div>
-      <div class="dc-figure" :class="{ 'dc-hidden': step < 2 }">
+      <div class="figure relative min-w-0" :class="{ 'demo-hidden': step < 2 }">
         <svg viewBox="0 0 260 200">
           <CourseArrow
             :from="C_O"
@@ -335,47 +335,26 @@ const C_P1 = {
           color="var(--c-accent-2)"
         />
       </div>
-      <div class="dc-verdict" :class="{ 'dc-hidden': step < 5 }">唯一解</div>
+      <div class="dec-cond-verdict" :class="{ 'demo-hidden': step < 5 }">唯一解</div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.dc-wrap {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.4rem;
-  align-items: start;
-}
-
-.dc-case {
+/* 三栏走共享 .three-col、图走共享 .figure、分步隐形走共享 .demo-hidden */
+.dec-cond {
   min-width: 0;
   text-align: center;
 }
 
-.dc-hidden {
-  visibility: hidden;
-}
-
-.dc-title {
+.dec-cond-title {
   margin-bottom: 0.4rem;
   color: var(--c-text);
   font-weight: 700;
   font-size: 1.02rem;
 }
 
-.dc-figure {
-  position: relative;
-  min-width: 0;
-}
-
-.dc-figure svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.dc-verdict {
+.dec-cond-verdict {
   margin-top: 0.35rem;
 
   color: var(--c-accent);
@@ -385,7 +364,7 @@ const C_P1 = {
   line-height: 1.45;
 }
 
-.dc-verdict-sub {
+.dec-cond-sub {
   font-size: 0.98rem;
   opacity: 0.9;
 }

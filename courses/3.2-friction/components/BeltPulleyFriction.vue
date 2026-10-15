@@ -23,7 +23,7 @@ const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
       <svg viewBox="0 0 620 250" width="100%" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M 150 74 L 470 92 A 40 40 0 0 1 470 172 L 150 190 A 58 58 0 0 1 150 74 Z"
-          fill="rgba(148,163,184,0.07)"
+          fill="color-mix(in srgb, var(--c-text-dim) 7%, transparent)"
           stroke="var(--c-text-dim)"
           stroke-width="2.2"
         />
@@ -31,7 +31,7 @@ const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
           cx="150"
           cy="132"
           r="58"
-          fill="rgba(96,165,250,0.1)"
+          fill="color-mix(in srgb, var(--c-velocity) 10%, transparent)"
           stroke="var(--c-accent-2)"
           stroke-width="2.4"
         />
@@ -39,7 +39,7 @@ const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
           cx="470"
           cy="132"
           r="40"
-          fill="rgba(45,212,191,0.1)"
+          fill="color-mix(in srgb, var(--c-physics) 10%, transparent)"
           stroke="var(--c-physics)"
           stroke-width="2.2"
         />
@@ -160,10 +160,10 @@ const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
 
   min-width: 0;
   max-width: 30rem;
-  border: 1px solid rgb(148 163 184 / 12%);
-  border-radius: 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
 
-  background: rgb(15 20 37 / 45%);
+  background: color-mix(in srgb, var(--c-bg-soft) 45%, transparent);
 }
 
 .bpf-side {
@@ -196,7 +196,7 @@ const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
   margin-right: 0.4rem;
   border-radius: 50%;
 
-  background: rgb(226 168 70 / 18%);
+  background: var(--c-accent-soft);
   color: var(--c-accent);
 
   font-size: 0.75rem;
