@@ -136,6 +136,21 @@ layout: base-flex
 clicks: 2
 ---
 
+# 长度收缩的方向
+
+<div class="page-grow">
+<div class="ask">正方形速度大小都是 <Latex tex="0.6c" />，方向分别向右、向上、斜向右上——被压扁的方式一样吗？</div>
+
+<SquareContractionDemo :show-result="$clicks >= 1" />
+
+<div class="key" v-click="2">只有<b>沿运动方向</b>的长度收缩为 <Latex tex="\sqrt{1-(v/c)^2}" /> 倍，垂直于运动方向的长度不变——所以斜向运动时，正方形只沿斜向被压扁、变成菱形，<b class="text-accent">而不是整体缩小</b>。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+---
+
 # $\mu$ 子为什么能到达地面
 
 <div class="page-grow">

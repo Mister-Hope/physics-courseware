@@ -40,13 +40,13 @@ const ratio = computed(() => 1 / gamma.value);
     </div>
 
     <div class="lc-ctrl">
-      <input
-        v-model.number="beta"
-        class="lc-range"
-        type="range"
-        min="0.1"
-        max="0.999"
-        step="0.001"
+      <CourseSlider
+        v-model="beta"
+        class="lc-slider"
+        layout="bare"
+        :min="0.1"
+        :max="0.999"
+        :step="0.001"
         aria-label="速度与光速的比值"
       />
       <div class="lc-read">
@@ -137,10 +137,9 @@ const ratio = computed(() => 1 / gamma.value);
   min-width: 0;
 }
 
-.lc-range {
+.lc-slider {
   flex: 1;
   min-width: 0;
-  accent-color: var(--c-accent);
 }
 
 .lc-read {

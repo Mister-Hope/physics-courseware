@@ -106,13 +106,13 @@ const dots = computed(() => ({
     </div>
 
     <div class="mu-ctrl">
-      <input
-        v-model.number="beta"
-        class="mu-range"
-        type="range"
-        min="0.95"
-        max="0.9999"
-        step="0.0001"
+      <CourseSlider
+        v-model="beta"
+        class="mu-slider"
+        layout="bare"
+        :min="0.95"
+        :max="0.9999"
+        :step="0.0001"
         aria-label="μ 子速度与光速的比值"
       />
       <div class="mu-read">
@@ -215,10 +215,9 @@ const dots = computed(() => ({
   min-width: 0;
 }
 
-.mu-range {
+.mu-slider {
   flex: 1;
   min-width: 0;
-  accent-color: var(--c-accent);
 }
 
 .mu-read {

@@ -168,13 +168,12 @@ const TICKS = Array.from({ length: 12 }, (_, index) => index * 30);
 
       <div class="td-side">
         <div class="td-slider">
-          <input
-            v-model.number="beta"
-            class="td-range"
-            type="range"
-            min="0.1"
-            max="0.999"
-            step="0.001"
+          <CourseSlider
+            v-model="beta"
+            layout="bare"
+            :min="0.1"
+            :max="0.999"
+            :step="0.001"
             aria-label="速度与光速的比值"
           />
           <div class="td-now">
@@ -258,11 +257,6 @@ const TICKS = Array.from({ length: 12 }, (_, index) => index * 30);
   gap: 0.5rem;
 
   min-width: 0;
-}
-
-.td-range {
-  width: 100%;
-  accent-color: var(--c-accent);
 }
 
 .td-now {
