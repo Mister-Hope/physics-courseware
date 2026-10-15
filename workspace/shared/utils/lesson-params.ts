@@ -2,7 +2,7 @@
  * 授课参数（主页「我要上课」把教师身份拼进课件 URL 的 query，课件端在这里统一解析）：
  *
  * ?teacher=<姓名> 封面「授课教师」行：URL 里的姓名优先，缺省用课件 frontmatter 的 teacher（默认张伯望） ?logo=<...> 顶栏校徽三态： - 缺省 →
- * 默认校徽（共享 assets/logo.png） - hide → 隐藏 logo - <姓名 / 任意 key> → 取 localStorage 里
+ * 东北育才（共享 assets/logo.png） - hide → 隐藏 logo - <姓名 / 任意 key> → 取 localStorage 里
  * `courseware.logo:<key>` （主页上传图片时按姓名保存）； 本机没有该 key 的数据 → 隐藏（不回退校徽、不打扰课堂）
  *
  * 为什么姓名进 URL、图片不进 URL：base64 图片放进 URL 会达到几十 KB～几百 KB， 生产 nginx 请求行默认约 32KB 上限会直接 414；姓名只有几十字节，走 URL

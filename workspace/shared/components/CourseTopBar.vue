@@ -38,7 +38,7 @@ const nav = useNav();
 const isCover = computed(() => nav.currentPage.value === 1);
 
 interface LogoState {
-  /** Default = 默认校徽；custom = 本机保存过的自定义图（dataURL）；hidden = 不显示 */
+  /** Default = 东北育才；custom = 本机保存过的自定义图（dataURL）；hidden = 不显示 */
   mode: "default" | "custom" | "hidden";
   src: string;
 }
@@ -46,7 +46,7 @@ interface LogoState {
 /**
  * 校徽三态（由「我要上课」生成的 ?logo 参数驱动，见 utils/lesson-params.ts）：
  *
- * - 无参数 → 默认校徽
+ * - 无参数 → 东北育才
  * - Logo=hide → 隐藏
  * - Logo=<key> → 本机按 <key> 保存过 → 自定义图；本机没有 → 隐藏
  */
