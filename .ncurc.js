@@ -8,6 +8,7 @@ export default {
 
     return 1;
   },
+  workspace: true,
   upgrade: true,
   timeout: 360000,
 };
