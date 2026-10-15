@@ -70,7 +70,7 @@ const detail = computed(() => {
     </table>
     <div class="kt-readout">
       <span class="kt-name">{{ current.name }}</span>
-      <Latex :tex="detail" />
+      <span><Latex :tex="detail" /></span>
     </div>
     <div class="kt-note">a 以天文单位计，T 以年计。</div>
   </div>

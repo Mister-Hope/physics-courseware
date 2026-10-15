@@ -2,18 +2,16 @@
 import { computed, ref } from "vue";
 
 /**
- * 第 4 页“做一做：绘制椭圆”——绳钉画椭圆的实时演示。 细绳两端固定在两枚图钉（两个焦点）上，绳长恒定 = 2a；铅笔贴着绳滑动，画出的轨迹就是椭圆： 到两焦点的距离之和 = 绳长 ⇒ 半长轴
- * a 不变，焦点越远（c 越大）半短轴 b = √(a² − c²) 越小、椭圆越扁； 两焦点重合（c = 0）时 b = a，退化为圆（半长轴变成圆的半径）。
+ * 第 8 页：用“绳钉画椭圆”的装置定量看离心率——细绳两端固定在两个焦点上，绳长恒定 = 2a； 铅笔贴着绳滑动，画出的轨迹就是椭圆（到两焦点的距离之和恒等于 2a）。 手动调节 e =
+ * c/a：e = 0 时两焦点重合、b = a，退化为圆；e 越大椭圆越扁，e → 1 时趋近一条线段。
  */
-/** 半长轴（用户单位）：由绳长决定，滑杆只改两焦点间距 */
+/** 半长轴（用户单位）：由绳长决定，滑杆只改离心率 */
 const A = 105;
-/** 滑杆：两焦点间距与半长轴之比 2c/a（0 时两焦点重合）——初始取 0.9，一上眼就是明显的椭圆 */
-const spread = ref(0.9);
-/** 焦距 c = ae、离心率 e = c/a、半短轴 b = √(a² − c²) */
-const cFocal = computed(() => (A * spread.value) / 2);
-const eccentricity = computed(() => cFocal.value / A);
-const semiMinor = computed(() => A * Math.sqrt(Math.max(0, 1 - eccentricity.value ** 2)));
-const isCircle = computed(() => spread.value === 0);
+/** 离心率 e = c/a（滑杆直接调它，0 时两焦点重合） */
+const ecc = ref(0.45);
+/** 焦距 c = ae、半短轴 b = √(a² − c²) */
+const cFocal = computed(() => A * ecc.value);
+const semiMinor = computed(() => A * Math.sqrt(Math.max(0, 1 - ecc.value ** 2)));
 /** 椭圆中心（画布坐标，y 向下） */
 const C = { x: 250, y: 138 };
 /** 两个焦点 */
@@ -25,7 +23,7 @@ const pencilAt = computed(() => {
   const rad = (PENCIL_ANG * Math.PI) / 180;
   return { x: C.x + A * Math.cos(rad), y: C.y + semiMinor.value * Math.sin(rad) };
 });
-/** 两焦点间距尺寸线的两端（画在长轴下方 24） */
+/** 两焦点间距尺寸线（画在长轴下方 24） */
 const DIM_Y = C.y + 24;
 const DIM_MID = { x: C.x, y: DIM_Y };
 /**
@@ -44,7 +42,7 @@ const unit = (
   const len = Math.hypot(dx, dy) || 1;
   return { x: dx / len, y: dy / len };
 };
-/** 铅笔轴的方向：两段绳的角平分线的反方向（弦的角平分线指向椭圆内部，铅笔朝外） */
+/** 铅笔轴的方向：两段绳的角平分线的反方向（角平分线指向椭圆内部，铅笔朝外） */
 const pencilDirection = computed(() => {
   const p = pencilAt.value;
   const u1 = unit(p, F1.value);
@@ -62,11 +60,16 @@ const pencilBody = computed(() => {
     to: { x: p.x + d.x * 36, y: p.y + d.y * 36 },
   };
 });
-const shapeText = computed(() => (isCircle.value ? "两焦点重合：圆" : "椭圆"));
+/** 状态描述：圆 / 椭圆 / 很扁 */
+const shapeText = computed(() => {
+  if (ecc.value === 0) return "两焦点重合：圆（a = b）";
+  if (ecc.value >= 0.9) return "很扁，趋近一条线段";
+  return "椭圆（b < a）";
+});
 const aria = computed(
   () =>
-    `绳钉画椭圆：绳长为 2a，两焦点间距为 2c，离心率 e = ${eccentricity.value.toFixed(2)}，` +
-    `${isCircle.value ? "两焦点重合，轨迹是圆" : "轨迹是椭圆"}。`,
+    `绳钉画椭圆：绳长 2a 不变，离心率 e = ${ecc.value.toFixed(2)}，半短轴 b = ${(semiMinor.value / A).toFixed(2)}a，` +
+    `${shapeText.value}。`,
 );
 </script>
 
@@ -99,6 +102,24 @@ const aria = computed(
         :y2="F2.y"
         stroke="#cbd5e1"
         stroke-width="1.7"
+        opacity="0.7"
+      />
+      <line
+        :x1="C.x"
+        :y1="C.y"
+        :x2="C.x + A"
+        :y2="C.y"
+        stroke="#e2a846"
+        stroke-width="2"
+        opacity="0.7"
+      />
+      <line
+        :x1="C.x"
+        :y1="C.y"
+        :x2="C.x"
+        :y2="C.y - semiMinor"
+        stroke="#60a5fa"
+        stroke-width="2"
         opacity="0.7"
       />
       <g v-if="cFocal > 2">
@@ -143,6 +164,29 @@ const aria = computed(
           F
         </text>
       </g>
+      <text
+        :x="C.x + A / 2"
+        :y="C.y - 10"
+        text-anchor="middle"
+        font-size="18"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        fill="#e2a846"
+        class="ef-halo"
+      >
+        a
+      </text>
+      <text
+        :x="C.x + 14"
+        :y="C.y - semiMinor / 2"
+        font-size="18"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        fill="#60a5fa"
+        class="ef-halo"
+      >
+        b
+      </text>
       <circle :cx="F1.x" :cy="F1.y" r="4.2" fill="#cbd5e1" />
       <circle :cx="F2.x" :cy="F2.y" r="4.2" fill="#cbd5e1" />
       <line
@@ -159,15 +203,14 @@ const aria = computed(
 
     <div class="ef-panel">
       <div class="ef-row">
-        <span class="ef-label">两焦点间距</span>
-        <input v-model.number="spread" class="ef-range" type="range" min="0" max="1.8" step="0.1" />
+        <span class="ef-label">离心率 <Latex tex="e = \dfrac{c}{a}" /></span>
+        <input v-model.number="ecc" class="ef-range" type="range" min="0" max="0.95" step="0.05" />
         <span class="ef-readout"
-          >离心率 <Latex tex="e = \dfrac{c}{a}" /> =
-          <b class="ef-value">{{ eccentricity.toFixed(2) }}</b></span
+          ><b class="ef-value">{{ ecc.toFixed(2) }}</b></span
         >
       </div>
       <div class="ef-row ef-row-note">
-        <span>绳长不变 ⇒ 半长轴 <Latex tex="a" /> 不变</span>
+        <span>绳长不变 ⇒ <Latex tex="2a" /> 不变；<Latex tex="c^2 + b^2 = a^2" /></span>
         <span class="ef-shape">{{ shapeText }}</span>
       </div>
     </div>

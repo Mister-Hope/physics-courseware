@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════
    行星的运动 — 课程特有样式
    通用设计系统（common.css / layout.css / atoms.css）由共享 addon 自动注入，
-   此处只放本课特有的密度与分栏比例。
+   此处只放本课特有的密度、分栏比例与选择题选项排布。
    ═══════════════════════════════════════════════ */
 
 :root {
@@ -10,7 +10,23 @@
   --stack-gap: 0.8rem;
 }
 
-/* ── 左文右图：图栏比文字栏宽（本课所有“左文右图”页共用；正本 .split-wide 的 --cols 旋钮）── */
+/* ── 左文右图：图栏比文字栏宽（交互组件页用；正本 .split-wide 的 --cols 旋钮）── */
 .pm-split {
   --cols: minmax(0, 1fr) minmax(0, 1.5fr);
+}
+
+/* ── 左文右图：文字栏比图栏宽（定律、推导等文字多的页用）── */
+.pm-split-text {
+  --cols: minmax(0, 1.3fr) minmax(0, 1fr);
+}
+
+/* ── 选择题选项：两列排布，选项字母用强调色（题干与选项常显，解析点击后才出）── */
+.pm-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.3rem 1.6rem;
+}
+
+.pm-options b {
+  color: var(--c-accent);
 }
