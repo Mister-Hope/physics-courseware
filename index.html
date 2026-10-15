@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高中物理交互式课件</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <script type="module" crossorigin src="/assets/index-CGRGul5o.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/courses.config-CEUC1H7t.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-B9GQRfoh.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="hero">
+        <h1 class="hero-title">高中物理人教版课件</h1>
+        <div class="teach-entry">
+          <button class="teach-btn" id="teach-btn" type="button">我要上课</button>
+        </div>
+      </header>
+
+      <nav class="tabs" id="tabs">
+        <!-- 动态渲染 -->
+      </nav>
+
+      <main class="course-grid" id="course-grid">
+        <!-- 动态渲染 -->
+      </main>
+
+      <footer class="footer">
+        <span class="footer-copy"
+          >Copyright © 2025–<span id="footer-year"></span> 东北育才 张伯望</span
+        >
+        <a
+          class="footer-link"
+          href="https://github.com/Mister-Hope/physics-courseware"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="在 GitHub 上查看源码"
+          aria-label="GitHub 仓库"
+        >
+          <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+            />
+          </svg>
+        </a>
+      </footer>
+
+      <!-- 我要上课 → 授课弹窗（逻辑见 src/main.ts） -->
+      <div class="teach-backdrop" id="teach-backdrop" hidden>
+        <div class="teach-modal" role="dialog" aria-modal="true" aria-labelledby="teach-title">
+          <div class="teach-head">
+            <h2 class="teach-title" id="teach-title">我要上课</h2>
+            <button class="teach-close" id="teach-close" type="button" aria-label="关闭">×</button>
+          </div>
+
+          <form class="teach-form" id="teach-form">
+            <label class="teach-field">
+              <span class="teach-label">教师姓名</span>
+              <input
+                class="teach-input"
+                id="teach-name"
+                type="text"
+                maxlength="20"
+                placeholder="如：王老师"
+                autocomplete="name"
+                required
+              />
+            </label>
+
+            <fieldset class="teach-field">
+              <legend class="teach-label">校徽 Logo</legend>
+              <div class="teach-radios">
+                <label class="teach-radio"
+                  ><input type="radio" name="teach-logo" value="default" checked /> 东北育才</label
+                >
+                <label class="teach-radio"
+                  ><input type="radio" name="teach-logo" value="hide" /> 隐藏</label
+                >
+                <label class="teach-radio"
+                  ><input type="radio" name="teach-logo" value="custom" /> 自定义</label
+                >
+              </div>
+
+              <div class="teach-logo-custom" id="teach-logo-custom" hidden>
+                <div class="teach-logo-row">
+                  <button class="teach-ghost" id="teach-logo-pick" type="button">选择图片…</button>
+                  <img class="teach-logo-preview" id="teach-logo-preview" alt="logo 预览" hidden />
+                </div>
+                <input
+                  class="teach-file"
+                  id="teach-logo-file"
+                  type="file"
+                  accept="image/*"
+                  hidden
+                />
+                <p class="teach-hint" id="teach-logo-hint">
+                  图片保存在<b>当前电脑</b>（与姓名绑定），换电脑需重新上传；链接打开时本机没有对应图片就自动隐藏。
+                </p>
+                <div class="teach-saved" id="teach-saved" hidden>
+                  <span class="teach-saved-title">本机已保存：</span>
+                  <div class="teach-saved-list" id="teach-saved-list"></div>
+                </div>
+              </div>
+            </fieldset>
+
+            <label class="teach-field">
+              <span class="teach-label">选择课件</span>
+              <select class="teach-input teach-select" id="teach-course"></select>
+            </label>
+
+            <div class="teach-field teach-field-row">
+              <span class="teach-label">起始页</span>
+              <div class="teach-page-row">
+                <span class="teach-page-prefix">从第</span>
+                <input
+                  class="teach-input teach-page"
+                  id="teach-page"
+                  type="number"
+                  min="1"
+                  value="1"
+                  inputmode="numeric"
+                />
+                <span class="teach-page-suffix">页开始</span>
+                <span class="teach-hint teach-page-hint" id="teach-page-hint"></span>
+              </div>
+            </div>
+
+            <div class="teach-field teach-field-link">
+              <span class="teach-label">授课链接</span>
+              <div class="teach-link-row">
+                <input class="teach-input teach-link" id="teach-link" type="text" readonly />
+                <button class="teach-ghost" id="teach-copy" type="button">复制链接</button>
+              </div>
+              <p class="teach-hint">
+                链接已带上姓名与 logo 标识：发到教室电脑 / 微信即可直接进入指定页上课。
+              </p>
+            </div>
+
+            <div class="teach-actions">
+              <button class="teach-btn-primary" id="teach-go" type="submit">去上课 →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
