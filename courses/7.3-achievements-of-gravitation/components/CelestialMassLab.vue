@@ -11,7 +11,7 @@ import { computed, ref, watch } from "vue";
 /** 万有引力常量，按教材取 6.67×10⁻¹¹ N·m²/kg² */
 const G = 6.67e-11;
 /** 圆周率取到足够位数，保证算出的天体质量对得上公认值 */
-const PI = Math.PI;
+const { PI } = Math;
 
 interface Preset {
   /** 按钮文字 */
@@ -110,7 +110,13 @@ const deviationText = computed(
   () => `${deviation.value >= 0 ? "+" : "−"}${Math.abs(deviation.value).toFixed(2)}`,
 );
 
-/** 把数值写成 a×10ᵇ 的两段（a 保留 digits 位有效数字） */
+/**
+ * 把数值写成 a×10ᵇ 的两段（a 保留 digits 位有效数字）
+ *
+ * @param value 数值
+ * @param digits 有效数字位数
+ * @returns 尾数与量级
+ */
 const sci = (value: number, digits = 3): { mantissa: string; exponent: number } => {
   const exponent = Math.floor(Math.log10(Math.abs(value)));
   const mantissa = value / 10 ** exponent;
@@ -118,7 +124,14 @@ const sci = (value: number, digits = 3): { mantissa: string; exponent: number } 
   return { mantissa: mantissa.toFixed(digits - 1), exponent };
 };
 
-/** 写成整段 KaTeX：数字与量级之间不会夹进 HTML 空格 */
+/**
+ * 写成整段 KaTeX：数字与量级之间不会夹进 HTML 空格
+ *
+ * @param value 数值
+ * @param digits 有效数字位数
+ * @param unit 单位（`\text{}` 里的内容，如 m、kg）
+ * @returns 整段公式的 LaTeX 源码
+ */
 const sciTex = (value: number, digits: number, unit: string): string => {
   const { mantissa, exponent } = sci(value, digits);
 

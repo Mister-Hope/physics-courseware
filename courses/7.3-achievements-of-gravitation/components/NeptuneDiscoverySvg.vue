@@ -4,7 +4,7 @@
  *
  * Step 0：太阳、按万有引力定律算出的天王星理论轨道、实际观测到的位置（两条轨道对不上）； step 1：亚当斯与勒维耶算出的未知行星轨道与预言位置； step 2：1846 年伽勒在预言位置附近找到的海王星。
  */
-withDefaults(defineProps<{ step?: number }>(), { step: 0 });
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>

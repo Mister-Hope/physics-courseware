@@ -4,7 +4,7 @@
  *
  * Step 0：椭圆轨道、焦点上的太阳、正在远去的彗星； step 1：1531、1607、1682 三次记录落在几乎同一条轨道上（远日点、近日点尺度同时给出）； step 2：每次回归都发生在近日点附近——1986 年回归，下次在 2061 年前后。
  */
-withDefaults(defineProps<{ step?: number }>(), { step: 0 });
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>

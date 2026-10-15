@@ -100,6 +100,139 @@ clicks: 2
 
 ---
 layout: base-flex
+clicks: 3
+---
+
+# "称量"天体的密度
+
+<div class="page-grow pg-tight">
+<div class="ask">测出天体的质量以后，它的密度是多少？</div>
+
+<div v-click="1">
+<div class="summary-line">天体半径 <Latex tex="R" />，体积 <Latex tex="V = \frac{4}{3}\pi R^3" />；把测得的质量代入 <Latex tex="\rho = \frac{M}{V}" />：</div>
+</div>
+
+<div class="half-grid" v-click="2">
+<div class="stack">
+<div class="mini-title"><mdi-satellite-variant />远地轨道 <Latex tex="r > R" /></div>
+<Latex tex="\rho = \frac{3\pi r^3}{G T^2 R^3}" display />
+<div class="mini-note">还要知道天体半径 <Latex tex="R" /></div>
+</div>
+<div class="stack divider-l">
+<div class="mini-title"><mdi-earth />近地轨道 <Latex tex="r \approx R" /></div>
+<Latex tex="\rho = \frac{3\pi}{G T^2}" display />
+<div class="mini-note">大 <Latex tex="R" /> 与小 <Latex tex="r" /> 近似相等，只要测周期</div>
+</div>
+</div>
+
+<div class="key" v-click="3">卫星贴着表面飞（<Latex tex="r \approx R" />）时，密度只由环绕周期决定——测一个周期就能"称"出天体密度。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+---
+
+# 近地轨道：一个周期算出密度
+
+<div class="page-grow pg-tight">
+<div class="ask">卫星的轨道越高，用近地公式 <Latex tex="\rho = \frac{3\pi}{G T^2}" /> 算出的密度还准吗？</div>
+
+<div v-click="1">
+<DensityLab />
+</div>
+
+<div class="key" v-click="2">只有 <Latex tex="r \approx R" /> 时才能把完整式简化成 <Latex tex="\frac{3\pi}{G T^2}" />——近地卫星测一个周期就够。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 黄金代换
+
+<div class="page-grow pg-tight">
+<div class="ask">天体表面的 <Latex tex="g" /> 和天体半径 <Latex tex="R" /> 都能直接测出来——它们与 <Latex tex="GM" /> 是什么关系？</div>
+
+<div v-click="1">
+<Latex tex="mg = G\frac{Mm}{R^2}\quad\Longrightarrow\quad GM = gR^2" display />
+</div>
+
+<div class="half-grid" v-click="2">
+<div class="stack">
+<div class="mini-title"><mdi-format-list-numbered />不用代换</div>
+<Latex tex="M = \frac{4\pi^2 r^3}{G T^2}\quad\Longrightarrow\quad v = \sqrt{\frac{GM}{r}}" display />
+<div class="mini-note">要先知道 <Latex tex="G" /> 和中心天体质量</div>
+</div>
+<div class="stack divider-l">
+<div class="mini-title"><mdi-swap-horizontal />用黄金代换</div>
+<Latex tex="v = \sqrt{\frac{gR^2}{r}} = R\sqrt{\frac{g}{r}}" display />
+<div class="mini-note">只要表面的 <Latex tex="g" />、<Latex tex="R" /> 和轨道半径 <Latex tex="r" /></div>
+</div>
+</div>
+
+<div class="key" v-click="3">把 <Latex tex="GM" /> 换成 <Latex tex="gR^2" />，就省掉"先求质量"这一步：<Latex tex="v" />、<Latex tex="\omega" />、<Latex tex="T" />、<Latex tex="a" /> 都能由表面量直接算出。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 环绕天体的运动
+
+<div class="page-grow pg-tight">
+<div class="ask">行星绕恒星做匀速圆周运动，它的 <Latex tex="v" />、<Latex tex="\omega" />、<Latex tex="T" />、<Latex tex="a" /> 与轨道半径 <Latex tex="r" /> 是什么关系？</div>
+
+<div v-click="1">
+<Latex tex="G\frac{Mm}{r^2} = m\frac{v^2}{r} = m\omega^2 r = m\frac{4\pi^2 r}{T^2} = ma" display />
+</div>
+
+<div class="half-grid" v-click="2">
+<div class="stack stack-dense">
+<Latex tex="v = \sqrt{GM/r}" display />
+<Latex tex="T = 2\pi\sqrt{r^3/(GM)}" display />
+</div>
+<div class="stack stack-dense divider-l">
+<Latex tex="\omega = \sqrt{GM/r^3}" display />
+<Latex tex="a = GM/r^2" display />
+</div>
+</div>
+
+<div class="key" v-click="3">轨道半径越大：<Latex tex="v" />、<Latex tex="\omega" />、<Latex tex="a" /> 越小，<Latex tex="T" /> 越大——"高轨低速长周期"（这里的 <Latex tex="a" /> 就是该处的重力加速度）。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 开普勒第三定律的常数
+
+<div class="page-grow pg-tight">
+<div class="ask">把 <Latex tex="T = 2\pi\sqrt{\frac{r^3}{GM}}" /> 两边平方，能得到什么？</div>
+
+<div v-click="1">
+<Latex tex="T^2 = \frac{4\pi^2 r^3}{GM}\quad\Longrightarrow\quad \frac{r^3}{T^2} = \frac{GM}{4\pi^2} = K" display />
+</div>
+
+<div class="half-grid" v-click="2">
+<div class="stack">
+<div class="mini-title"><mdi-weather-sunny />绕太阳运行</div>
+<Latex tex="K_{\text{太}} = \frac{GM_{\text{太}}}{4\pi^2} \approx 3.4\times10^{18}\ \text{m}^3/\text{s}^2" display />
+</div>
+<div class="stack divider-l">
+<div class="mini-title"><mdi-earth />绕地球运行</div>
+<Latex tex="K_{\text{地}} = \frac{GM_{\text{地}}}{4\pi^2} \approx 1.0\times10^{13}\ \text{m}^3/\text{s}^2" display />
+</div>
+</div>
+
+<div class="key" v-click="3">开普勒第三定律里的常数不是经验数字：<Latex tex="K = \frac{GM}{4\pi^2}" /> 只由中心天体的质量决定——绕同一个中心天体运行的行星，<Latex tex="\frac{r^3}{T^2}" /> 都相同。</div>
+</div>
+
+---
+layout: base-flex
 clicks: 4
 ---
 
@@ -159,24 +292,29 @@ clicks: 1
 
 # 课堂小结
 
-<div class="page-grow">
-<div class="three-col">
+<div class="page-grow pg-tight">
+<div class="grid grid-cols-4 gap-4">
 <div class="stack">
-<div class="mini-title"><mdi-earth />"称量"地球的质量</div>
-<Latex tex="m_{\text{地}} = \frac{gR^2}{G}" display />
-<div class="mini-note">不计自转时，重力等于地球的万有引力</div>
-</div>
-<div class="stack">
-<div class="mini-title"><mdi-orbit />计算天体的质量</div>
+<div class="mini-title"><mdi-earth />称量质量</div>
 <Latex tex="M = \frac{4\pi^2 r^3}{G T^2}" display />
-<div class="mini-note">测环绕天体的 <Latex tex="r" />、<Latex tex="T" />，只算得出中心天体</div>
+<div class="mini-note">只算得出中心天体</div>
 </div>
 <div class="stack">
-<div class="mini-title"><mdi-telescope />预言未知天体</div>
-<div class="summary-line">海王星（1846 年）</div>
-<div class="summary-line">哈雷彗星按时回归</div>
+<div class="mini-title"><mdi-cube-outline />称量密度</div>
+<Latex tex="\rho = \frac{3\pi}{G T^2}" display />
+<div class="mini-note">近地卫星测一个周期</div>
+</div>
+<div class="stack">
+<div class="mini-title"><mdi-scale-balance />黄金代换</div>
+<Latex tex="GM = gR^2" display />
+<div class="mini-note">换成表面量 <Latex tex="gR^2" /></div>
+</div>
+<div class="stack">
+<div class="mini-title"><mdi-orbit />环绕规律</div>
+<Latex tex="\frac{r^3}{T^2} = \frac{GM}{4\pi^2}" display />
+<div class="mini-note">高轨低速长周期</div>
 </div>
 </div>
 
-<div class="key key-lead" v-click="1">万有引力定律的成就在于：<b>解释已知</b>——把从未上过秤的地球"称"了出来；<b>预言未知</b>——先算出位置，再找到海王星、等到彗星按时回家。</div>
+<div class="key key-lead" v-click="1">万有引力定律的成就在于：<b>解释已知</b>——把从未上过秤的地球"称"出了质量和密度；<b>预言未知</b>——先算出位置，再找到海王星、等到彗星按时回家。</div>
 </div>
