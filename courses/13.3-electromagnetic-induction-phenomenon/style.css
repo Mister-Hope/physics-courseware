@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════
+   电磁感应现象及应用 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 交互组件（ei- = electromagnetic induction）通用外壳 ── */
+.ei-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 0;
+  flex: 1;
+}
+
+.ei-svg {
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 控制条：按钮 + 状态标签一行 */
+.ei-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.ei-btn {
+  padding: 0.3rem 1.05rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  cursor: pointer;
+  transition:
+    border-color 0.18s,
+    background 0.18s,
+    color 0.18s;
+}
+
+.ei-btn:hover {
+  border-color: var(--c-border-glow);
+}
+
+.ei-btn.on {
+  border-color: var(--c-border-glow);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.ei-pill {
+  font-size: 0.95rem;
+}
+
+/* 读数行：Φ / S / ΔΦ 等实时数值 */
+.ei-read {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  font-size: 1.02rem;
+}
+
+.ei-read .ei-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  color: var(--c-text-dim);
+}
+
+.ei-read .ei-item strong {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+/* 感应电流：导线上流动的虚线（方向 = 电流方向） */
+.ei-flow {
+  stroke-dasharray: 12 9;
+  animation: ei-dash 0.55s linear infinite;
+}
+
+.ei-flow-rev {
+  animation-direction: reverse;
+}
+
+@keyframes ei-dash {
+  to {
+    stroke-dashoffset: -21;
+  }
+}
+
+/* 铁环中环绕的磁场 */
+.ei-ring-flow {
+  stroke-dasharray: 18 14;
+  animation: ei-dash-ring 1.4s linear infinite;
+}
+
+@keyframes ei-dash-ring {
+  to {
+    stroke-dashoffset: -32;
+  }
+}

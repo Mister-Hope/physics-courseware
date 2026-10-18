@@ -1,0 +1,20 @@
+{
+  "name": "electric-field-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /9.3-electric-field/",
+    "dev": "slidev --base /9.3-electric-field/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "@types/three": "catalog:",
+    "three": "catalog:",
+    "vue": "catalog:"
+  }
+}

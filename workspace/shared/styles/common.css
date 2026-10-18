@@ -41,6 +41,19 @@
   --c-accent-light: #fbbf24;
   --c-velocity-light: #93c5fd;
   --c-physics-light: #38bdf8;
+
+  /* 兼容别名 —— 早期草稿发明、但从未定义的 token。
+     ⚠️ SVG 表现属性写 `fill: var(--x)` / `stroke: var(--x)`，而 x 未定义时，该属性会变成
+     “invalid at computed-value time”：`fill` 继承成默认黑、`stroke` 继承成 `none`
+     ⇒ **器件渲染成纯黑块、描边消失**（e2e 的溢出/留白/位移三张表全报不出来，只有截图能看出）。
+     这里按语义映射到既有 token。**新组件请直接用上面的正本 token，不要再新增别名。** */
+  --c-line: rgb(148 163 184 / 30%); /* 示意图辅助线 / 器件轮廓 */
+  --c-text-mute: var(--c-neutral-500); /* 图内次要文字（比 --c-text-dim 更暗） */
+  --c-gold: var(--c-accent);
+  --c-panel: var(--c-surface);
+  --c-sky: #38bdf8;
+  --c-sky-soft: rgb(56 189 248 / 14%);
+
   --radius-xl: 1.75rem;
   --radius-lg: 1.25rem;
   --radius-md: 0.75rem;

@@ -1,0 +1,41 @@
+/* ═══════════════════════════════════════════════
+   电荷 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课内容密度高（21 页塞满 40 分钟），把共享的页间距/堆叠间距各收一档；
+   ⛔ 只改这两个变量与容器，不复制共享原子、不缩字号。 */
+:root {
+  --page-gap: 0.85rem;
+  --stack-gap: 0.6rem;
+}
+
+/* 与文字并排时用的窄图：保持横向比例、不占满栏宽（P12 的微观图、P16 的电子对示意图） */
+.svg-sm {
+  max-width: 300px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 提问行里的内联公式：KaTeX 默认 font-size:1.21em 会把 .ask 的行盒撑高
+   （实测 P12 的 <Latex tex="C" /> 单个元素就上溢 34px、把标题压住），这里压回 1em。 */
+.ask .katex {
+  font-size: 1em;
+}
+
+.ask .latex {
+  display: inline-block;
+  vertical-align: baseline;
+  line-height: 1;
+}
+
+/* 本课练习的选项/小问一律单列：A、B 左右并排会被按"左→右"误读，小问同理 */
+.ex-options {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* 题干避免末行只剩一个字（P18 的"么?"） */
+.ex-stem {
+  text-wrap: pretty;
+}
