@@ -2,8 +2,8 @@ import type { Page } from "@playwright/test";
 
 import { measureLayout, type LayoutMeasureResult, type OverflowViolation } from "./overflow-scan";
 
-/** 与投影仪一致的 16:9 视口 */
-export const VIEWPORT = { width: 1280, height: 720 };
+/** 演示屏幕的 16:9 视口（1920×1080）；Slidev 逻辑画布恒为 980×552，这里只决定缩放倍率 */
+export const VIEWPORT = { width: 1920, height: 1080 };
 
 /** 判定阈值（逻辑像素）：小于它的偏差视为亚像素误差。 不同平台的中文字体回退会让行高有几像素差异，CI 上可用 `E2E_OVERFLOW_TOLERANCE` 放宽。 */
 const configuredTolerance = process.env.E2E_OVERFLOW_TOLERANCE;

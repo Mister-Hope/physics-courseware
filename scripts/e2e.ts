@@ -26,8 +26,13 @@ import path from "node:path";
 
 import { listCourses } from "../e2e/courses";
 import type { CourseTarget } from "../e2e/courses";
+import { describePortOwner, findFreePort } from "../e2e/ports";
 
 const ROOT_DIR = path.resolve(import.meta.dirname, "..");
+
+/** 本调度器跑的是版面检查：产物按「操作」自动分家（见 `e2e/artifacts.ts`），子进程继承这个变量 */
+process.env.E2E_OPERATION ??= "layout";
+
 const PLAYWRIGHT_BIN = path.join(ROOT_DIR, "node_modules", ".bin", "playwright");
 /** 两道门禁 spec（辅助 spec 见文件头） */
 const SPEC_FILES = ["e2e/design-tokens.spec.ts", "e2e/layout-overflow.spec.ts"];
@@ -141,6 +146,8 @@ const runPlaywright = (course: CourseTarget): Promise<number> =>
         // 只测这一个课件；server 由本调度器负责，别再让 Playwright 自己拉起来
         E2E_COURSE: course.slug,
         E2E_NO_WEBSERVER: "1",
+        // 端口已经自动避让过（见 runCourse），告诉 spec 侧用同一个端口算 baseURL
+        E2E_COURSE_PORT: String(course.port),
       },
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -160,30 +167,45 @@ const runPlaywright = (course: CourseTarget): Promise<number> =>
 // 跑一个课件：起 server → 等就绪 → 跑门禁 spec → 停 server（无论成败都收尸）
 const runCourse = async (course: CourseTarget): Promise<CourseResult> => {
   const startedAt = Date.now();
+
+  // 端口自动避让：教师本机开着的 dev server 常常正好占着某个课件的默认端口，
+  // 撞上就 90s 超时（报错还只说"等待页面"，不提端口冲突）——所以先找一个真能绑的端口。
+  const port = await findFreePort(course.port);
+  const target: CourseTarget = {
+    ...course,
+    port,
+    baseURL: `http://localhost:${port}/${course.slug}/`,
+  };
+
+  if (port !== course.port) {
+    console.log(`↪ [${course.slug}] 端口 ${course.port} 被占用（${describePortOwner(course.port)}），改用 ${port}`);
+  }
+
   const serverLog: string[] = [];
-  const server = startServer(course, (line) => {
+  const server = startServer(target, (line) => {
     serverLog.push(line);
     if (serverLog.length > SERVER_LOG_LINES) serverLog.shift();
   });
 
   try {
-    const ready = await waitForServer(course.baseURL, Date.now() + READY_TIMEOUT_MS);
+    const ready = await waitForServer(target.baseURL, Date.now() + READY_TIMEOUT_MS);
 
     if (!ready) {
-      console.log(`✗ [${course.slug}] dev server 在 ${READY_TIMEOUT_MS / 1000}s 内没起来`);
-      for (const line of serverLog) logLine(course.slug, line);
-      return { slug: course.slug, passed: false, seconds: (Date.now() - startedAt) / 1000 };
+      console.log(`✗ [${target.slug}] dev server 在 ${READY_TIMEOUT_MS / 1000}s 内没起来`);
+      console.log(`   ${port} 端口上监听的是：${describePortOwner(port)}`);
+      for (const line of serverLog) logLine(target.slug, line);
+      return { slug: target.slug, passed: false, seconds: (Date.now() - startedAt) / 1000 };
     }
 
-    console.log(`▶ [${course.slug}] ${course.baseURL} 已就绪`);
-    const code = await runPlaywright(course);
+    console.log(`▶ [${target.slug}] ${target.baseURL} 已就绪`);
+    const code = await runPlaywright(target);
     const seconds = (Date.now() - startedAt) / 1000;
 
     console.log(
-      `${code === 0 ? "✓" : "✗"} [${course.slug}] ${code === 0 ? "通过" : `失败（exit ${code}）`}，${seconds.toFixed(1)}s`,
+      `${code === 0 ? "✓" : "✗"} [${target.slug}] ${code === 0 ? "通过" : `失败（exit ${code}）`}，${seconds.toFixed(1)}s`,
     );
 
-    return { slug: course.slug, passed: code === 0, seconds };
+    return { slug: target.slug, passed: code === 0, seconds };
   } finally {
     stopServer(server);
   }

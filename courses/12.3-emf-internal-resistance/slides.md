@@ -57,7 +57,7 @@ clicks: 3
 </div>
 </div>
 
-<div v-click="3" class="key">反过来，测出多组 <Latex tex="U" />、<Latex tex="I" /> 作出这条直线，从纵截距和斜率就能读出电池的 <Latex tex="E" /> 和 <Latex tex="r" />。</div>
+<div v-click="3" class="tip-hint">反过来，测出多组 <Latex tex="U" />、<Latex tex="I" /> 作出这条直线，从纵截距和斜率就能读出电池的 <Latex tex="E" /> 和 <Latex tex="r" />。</div>
 </div>
 
 ---
@@ -67,7 +67,7 @@ clicks: 2
 <div class="ask ask-lead">电池用久了灯会变暗——是电动势变小了，还是内阻变大了？</div>
 
 <div v-click="1" class="stack">
-<div>要回答这个问题，得先把电池的 <Latex tex="E" /> 和 <Latex tex="r" /> 测出来。由闭合电路欧姆定律 <Latex tex="U = E - Ir" /> 出发，测出两组路端电压 <Latex tex="U" /> 和电流 <Latex tex="I" />，就是两个方程、两个未知数：</div>
+<div>由闭合电路欧姆定律 <Latex tex="U = E - Ir" /> 出发，测出两组路端电压 <Latex tex="U" /> 和电流 <Latex tex="I" />，就是两个方程、两个未知数：</div>
 <Latex tex="\begin{cases} U_1 = E - I_1 r \\ U_2 = E - I_2 r \end{cases}" display />
 </div>
 
@@ -133,7 +133,7 @@ clicks: 2
 <div v-click="1">② 每次同时记下 <Latex tex="U" />、<Latex tex="I" />；断开开关后再改接线。</div>
 </div>
 
-<div v-click="2" class="key">选旧的干电池：内阻较大，电流变化时路端电压变化明显，更容易测准。</div>
+<div v-click="2" class="info-hint">选旧的干电池：内阻较大，电流变化时路端电压变化明显，更容易测准。</div>
 </div>
 
 ---
@@ -193,7 +193,7 @@ clicks: 2
 
 <Latex tex="r_0 = \dfrac{U_1 - U_2}{I_2 - I_1 - \frac{U_1 - U_2}{R_V}} > r_{\text{测}}" display />
 
-<div v-click="1" class="key">外接法：<Latex tex="E_{\text{测}} < E_{\text{真}}" />，<Latex tex="r_{\text{测}} < r_{\text{真}}" />（都偏小）。</div>
+<div v-click="1" class="tip-hint">外接法：<Latex tex="E_{\text{测}} < E_{\text{真}}" />，<Latex tex="r_{\text{测}} < r_{\text{真}}" />（都偏小）。</div>
 
 <div v-click="2" class="mini-note">因为 <Latex tex="U_1 > U_2" />，分母 <Latex tex="I_2 - I_1 - \frac{U_1 - U_2}{R_V}" /> 比 <Latex tex="I_2 - I_1" /> 小，所以解出的 <Latex tex="E_0" />、<Latex tex="r_0" /> 都比测量值大。</div>
 </div>
@@ -210,7 +210,7 @@ clicks: 3
 <div class="tag-icon"><mdi-chart-line />分析方法 2 · 图像法</div>
 <div v-click="1">测量线（蓝）：纵截距 <Latex tex="E_{\text{测}} < E_0" />，斜率绝对值 <Latex tex="r_{\text{测}} < r_0" />。</div>
 <div v-click="2">真实线（红）：电压表分流后的真实关系——截距更大、直线更陡。</div>
-<div v-click="3" class="key">两条线在横轴上交于同一点：<Latex tex="U = 0" /> 时电压表不分流，电流表读数就是真实的短路电流。</div>
+<div v-click="3" class="tip-hint">两条线在横轴上交于同一点：<Latex tex="U = 0" /> 时电压表不分流，电流表读数就是真实的短路电流。</div>
 </div>
 <div>
 <UIErrorOuter :step="$clicks" />
@@ -222,18 +222,18 @@ clicks: 3
 clicks: 3
 ---
 
-# 外接法：把电压表"并进"电源
+# 外接法：把电压表并进电源
 
 <div class="page-grow">
 <div class="tag-icon"><mdi-swap-horizontal />分析方法 3 · 等效法</div>
 
-<div class="ask">电压表并联在电源两端——能不能把"电压表 + 电源"看成一个新电源？</div>
+<div class="ask">电压表并联在电源两端——能不能把电压表与电源看成一个新电源？</div>
 
 <div v-click="1">等效电源的电动势＝开路时电压表两端的电压（<Latex tex="r_0" /> 与 <Latex tex="R_V" /> 分压）：<Latex tex="E_{\text{等}} = \dfrac{R_V}{r_0 + R_V} E_0 < E_0" /></div>
 
 <div v-click="2">等效电源的内阻＝<Latex tex="r_0" /> 与 <Latex tex="R_V" /> 并联：<Latex tex="r_{\text{等}} = \dfrac{r_0 R_V}{r_0 + R_V} < r_0" /></div>
 
-<div v-click="3" class="key">实验测到的就是这个等效电源：<Latex tex="E_{\text{测}} < E_{\text{真}}" />、<Latex tex="r_{\text{测}} < r_{\text{真}}" />；只要 <Latex tex="R_V \gg r_0" />（干电池内阻很小，常满足），偏差就很小。</div>
+<div v-click="3" class="tip-hint">实验测到的就是这个等效电源：<Latex tex="E_{\text{测}} < E_{\text{真}}" />、<Latex tex="r_{\text{测}} < r_{\text{真}}" />；只要 <Latex tex="R_V \gg r_0" />（干电池内阻很小，常满足），偏差就很小。</div>
 </div>
 
 ---
@@ -255,7 +255,7 @@ clicks: 3
 <Latex tex="\begin{cases} E_0 = U_1 + I_1 (r_0 + R_A) \\ E_0 = U_2 + I_2 (r_0 + R_A) \end{cases}" display />
 </div>
 
-<div v-click="3" class="key">电动势的测量值不受影响：<Latex tex="E_{\text{测}} = E_0" />；内阻却把电流表内阻算了进去：<Latex tex="r_{\text{测}} = r_0 + R_A > r_0" />。</div>
+<div v-click="3" class="tip-hint">电动势的测量值不受影响：<Latex tex="E_{\text{测}} = E_0" />；内阻却把电流表内阻算了进去：<Latex tex="r_{\text{测}} = r_0 + R_A > r_0" />。</div>
 </div>
 
 ---
@@ -270,7 +270,7 @@ clicks: 3
 <div class="tag-icon"><mdi-chart-line />分析方法 2 · 图像法</div>
 <div v-click="1">测量线（蓝）：斜率绝对值是 <Latex tex="r_0 + R_A" />，比真实线更陡。</div>
 <div v-click="2">真实线（红）：斜率绝对值只是 <Latex tex="r_0" />。</div>
-<div v-click="3" class="key">两条线在纵轴上交于同一点：<Latex tex="I = 0" /> 时电流表不分压，纵截距就是真实的电动势 <Latex tex="E_{\text{测}} = E_0" />。</div>
+<div v-click="3" class="tip-hint">两条线在纵轴上交于同一点：<Latex tex="I = 0" /> 时电流表不分压，纵截距就是真实的电动势 <Latex tex="E_{\text{测}} = E_0" />。</div>
 </div>
 <div>
 <UIErrorInner :step="$clicks" />
@@ -282,23 +282,22 @@ clicks: 3
 clicks: 2
 ---
 
-# 内接法：把电流表"串进"电源
+# 内接法：把电流表串进电源
 
 <div class="page-grow">
 <div class="tag-icon"><mdi-swap-horizontal />分析方法 3 · 等效法</div>
 
-<div class="ask">把"电流表 + 电源"看成一个新电源，它的 <Latex tex="E" /> 和 <Latex tex="r" /> 是多少？</div>
+<div class="ask">把电流表与电源看成一个新电源，它的 <Latex tex="E" /> 和 <Latex tex="r" /> 是多少？</div>
 
 <div v-click="1">串联后电动势不变 <Latex tex="E_{\text{等}} = E_0" />，内阻直接相加 <Latex tex="r_{\text{等}} = r_0 + R_A" />。</div>
 
-<div v-click="2" class="key">要减小误差需 <Latex tex="r_0 \gg R_A" />；实验室电池内阻通常很小，这一条很难满足——所以测小内阻电池一般不用内接法。</div>
+<div v-click="2" class="warn-hint">要减小误差需 <Latex tex="r_0 \gg R_A" />；实验室电池内阻通常很小，这一条很难满足——所以测小内阻电池一般不用内接法。</div>
 </div>
 
 ---
 clicks: 2
+title: 两种接法，怎么选？
 ---
-
-# 两种接法，怎么选？
 
 <div class="page-grow">
 <div class="ask">测干电池（内阻很小），该选哪种接法？</div>
@@ -384,7 +383,7 @@ clicks: 2
 <div>所以用 <Latex tex="\dfrac{U}{R}" /> 算出的电流，比流过电源的真实电流小。</div>
 </div>
 
-<div v-click="2" class="key">这与<b>电流表外接法</b>同源：<Latex tex="E_{\text{测}} < E_{\text{真}}" />，<Latex tex="r_{\text{测}} < r_{\text{真}}" />（都偏小）。</div>
+<div v-click="2" class="tip-hint">这与<b>电流表外接法</b>同源：<Latex tex="E_{\text{测}} < E_{\text{真}}" />，<Latex tex="r_{\text{测}} < r_{\text{真}}" />（都偏小）。</div>
 </div>
 
 ---
@@ -401,7 +400,7 @@ clicks: 2
 <div class="stack">
 <div>用电压表 + 电阻箱，按伏阻法测它的 <Latex tex="E" /> 和 <Latex tex="r" />。</div>
 <div v-click="1">内阻可达上千欧，电流变化时电压变化明显，容易测——正适合伏阻法。</div>
-<div v-click="2" class="key">但它的内阻会明显改变：测量要迅速，在内阻变化不大之前测完。</div>
+<div v-click="2" class="warn-hint">但它的内阻会明显改变：测量要迅速，在内阻变化不大之前测完。</div>
 </div>
 </div>
 </div>
@@ -414,7 +413,7 @@ clicks: 1
 <div class="ask ask-lead">反过来：只有电流表和电阻箱，没有电压表呢？</div>
 
 <div v-click="1" class="stack">
-<div class="key key-lead">没有电压表，就用<b>电流表 + 电阻箱</b>：电流表测干路电流 <Latex tex="I" />，电阻箱给出已知的外电阻 <Latex tex="R" />，由 <Latex tex="E = I(R + r)" /> 直接列方程。</div>
+<div class="tip-hint">没有电压表，就用<b>电流表 + 电阻箱</b>：电流表测干路电流 <Latex tex="I" />，电阻箱给出已知的外电阻 <Latex tex="R" />，由 <Latex tex="E = I(R + r)" /> 直接列方程。</div>
 <div>测两组 <Latex tex="(I,\ R)" />，就能解出 <Latex tex="E" />、<Latex tex="r" />。</div>
 </div>
 </div>
@@ -488,22 +487,23 @@ clicks: 2
 
 <div v-click="1" class="stack">
 <div>电流表串在干路上，它的内阻 <Latex tex="R_A" /> 也分走电压 <Latex tex="I R_A" />。</div>
-<div>所以用 <Latex tex="I R" /> 算出的"电压"，比真实路端电压小。</div>
+<div>所以用 <Latex tex="I R" /> 算出的电压，比真实路端电压小。</div>
 </div>
 
-<div v-click="2" class="key">这与<b>电流表内接法</b>同源：<Latex tex="E_{\text{测}} = E_{\text{真}}" />，<Latex tex="r_{\text{测}} = r_0 + R_A > r_{\text{真}}" />；若 <Latex tex="R_A" /> 已知，可从测量内阻里减去它。</div>
+<div v-click="2" class="tip-hint">这与<b>电流表内接法</b>同源：<Latex tex="E_{\text{测}} = E_{\text{真}}" />，<Latex tex="r_{\text{测}} = r_0 + R_A > r_{\text{真}}" />；若 <Latex tex="R_A" /> 已知，可从测量内阻里减去它。</div>
 </div>
 
 ---
 layout: exercise-split
+class: tight-gap
 clicks: 3
 ---
 
 <template v-slot:stem>
 
-<div class="mini-title"><mdi-table class="icon-md" />练习：橙汁电池</div>
+<div><b class="ex-no">练习</b>橙汁电池</div>
 
-电流表内阻 <Latex tex="100\ \Omega" />、量程 <Latex tex="0 \sim 300\ \mu\text{A}" />；电阻箱 <Latex tex="0 \sim 9\,999\ \Omega" />。调节电阻箱，测得：
+<div>电流表内阻 <Latex tex="100\ \Omega" />、量程 <Latex tex="0 \sim 300\ \mu\text{A}" />；电阻箱 <Latex tex="0 \sim 9\,999\ \Omega" />。调节电阻箱，测得：</div>
 
 | $R/\text{k}\Omega$ | 9   | 8   | 7   | 6   | 5   | 4   | 3   |
 | ------------------ | --- | --- | --- | --- | --- | --- | --- |
@@ -511,11 +511,15 @@ clicks: 3
 
 </template>
 
+<div class="stack" style="gap:.4rem;--hint-pad-y:.5rem">
+
 <div v-click="1">由 <Latex tex="U = IR" /> 算出电阻箱两端电压，依次为 <Latex tex="0.83" />、<Latex tex="0.82" />、<Latex tex="0.81" />、<Latex tex="0.79" />、<Latex tex="0.76" />、<Latex tex="0.72" />、<Latex tex="0.66" /> <Latex tex="\text{V}" />。</div>
 
 <div v-click="2">作 <Latex tex="U-I" /> 图像，直线在 <Latex tex="U" /> 轴上的截距就是电动势：<Latex tex="E \approx 0.95\ \text{V}" />。</div>
 
-<div v-click="3" class="key">斜率的绝对值是 <Latex tex="r + R_A \approx 1.3\ \text{k}\Omega" />；减去电流表内阻 <Latex tex="100\ \Omega" />，得电池内阻 <Latex tex="r \approx 1.2\ \text{k}\Omega" />。</div>
+<div v-click="3" class="tip-hint">斜率的绝对值是 <Latex tex="r + R_A \approx 1.3\ \text{k}\Omega" />；减去电流表内阻 <Latex tex="100\ \Omega" />，得电池内阻 <Latex tex="r \approx 1.2\ \text{k}\Omega" />。</div>
+
+</div>
 
 ---
 clicks: 2
@@ -532,5 +536,5 @@ clicks: 2
 
 <div v-click="1">测干电池（内阻小）用<b>外接法 / 伏阻法</b>；内接法、安阻法要求 <Latex tex="r_0 \gg R_A" />，否则测出的内阻里混进了电流表内阻（<Latex tex="R_A" /> 已知时可以减去）。</div>
 
-<div v-click="2" class="key"><b>将分流、分压的元件并进等效电源</b>：电压表分流，<Latex tex="E" />、<Latex tex="r" /> 都偏小；电流表分压，<Latex tex="E" /> 不变、<Latex tex="r" /> 偏大。</div>
+<div v-click="2" class="tip-hint"><b>将分流、分压的元件并进等效电源</b>：电压表分流，<Latex tex="E" />、<Latex tex="r" /> 都偏小；电流表分压，<Latex tex="E" /> 不变、<Latex tex="r" /> 偏大。</div>
 </div>

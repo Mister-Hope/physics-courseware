@@ -221,6 +221,7 @@ pnpm shots          # 📸 批量截页图（自查视觉）
 pnpm test:e2e       # 端到端检查（四张表；CI 里唯一的版面门禁）
 pnpm build      # 构建入口网站 + 全部课件 → dist/
 pnpm lint           # oxlint --fix + oxfmt（slides.md 不参与格式化）
+pnpm clean          # 清 dist/ 与端到端缓存（--dry-run 先看清单）
 ```
 
 **两个省 token 的小工具**（`slides.md` 动辄上千行，**别为了看一页 read 整个文件**，也别手写临时截图脚本）：

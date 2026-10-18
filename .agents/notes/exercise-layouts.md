@@ -5,9 +5,9 @@
 >
 > **选哪个**：有题干 + 示意图 + 解析 → `exercise-split`；整页只有一个大问题/大操作指引、学生讨论时长时间停留 → `focus-question`。
 
-## 0. 🔴 先看这条：具名 slot 的写法（写错整页直接坏）
+## 0. 🔴 先看这条：具名 slot 的写法
 
-本仓库的 Slidev（53.x）里，**`<template #stem>` 会被 markdown-it 转义成可见文字**（`#stem` 不是合法 HTML 属性名，
+**`<template #stem>` 会被 markdown-it 转义成可见文字**（`#stem` 不是合法 HTML 属性名，
 渲染成 `&lt;template #stem&gt;` 摆在屏幕上）。正确写法只有两种：
 
 1. **`<template v-slot:stem>`**（推荐）——标签独占一行，**前后各留一个空行**，slot 内容就是正常 markdown：

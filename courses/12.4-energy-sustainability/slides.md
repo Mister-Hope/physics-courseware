@@ -64,17 +64,17 @@ layout: base-flex
 
 <div class="ask">
 
-九年级学过——能量守恒定律讲了什么？
+能量守恒定律讲了什么？
 
 </div>
 
 <v-click>
 
-<div class="card card-highlight">
+<DefinitionBox term="能量守恒定律">
 
-能量既不会凭空产生，也不会凭空消失，它只能从一种形式<span class="text-accent">转化</span>为其他形式，或者从一个物体<span class="text-accent">转移</span>到别的物体；在转化或转移的过程中，能量的总量保持不变。
+<div>能量既不会凭空产生，也不会凭空消失，它只能从一种形式<span class="text-accent">转化</span>为其他形式，或者从一个物体<span class="text-accent">转移</span>到别的物体；在转化或转移的过程中，能量的总量保持不变。</div>
 
-</div>
+</DefinitionBox>
 
 </v-click>
 
@@ -109,7 +109,7 @@ layout: base-flex
 clicks: 1
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.6rem;--hint-pad-y:.5rem">
 
 <div class="ask ask-lead">
 
@@ -123,7 +123,7 @@ clicks: 1
 
 </div>
 
-<div v-click="1" class="key key-lead">
+<div v-click="1" class="tip-hint">
 
 这个过程并不违反能量守恒定律——它只是不会自发发生。
 
@@ -141,7 +141,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key key-lead">一切与热现象有关的宏观自然过程都是不可逆的。</div>
+<div class="tip-hint">一切与热现象有关的宏观自然过程都是不可逆的。</div>
 
 </v-click>
 
@@ -178,11 +178,11 @@ clicks: 4
 
 <div v-click="4">
 
-<div class="card">
+<DefinitionBox term="能量的耗散">
 
-热和光变成环境的内能后很难再收集利用，这种现象叫作<span class="text-accent">能量的耗散</span>。
+<div>热和光变成环境的内能后很难再收集利用，这种现象叫作<span class="def-term">能量的耗散</span>。</div>
 
-</div>
+</DefinitionBox>
 
 </div>
 
@@ -212,7 +212,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key key-lead">这就是自然界的能量虽然守恒、我们却仍要节约能源的根本原因。</div>
+<div class="tip-hint">这就是自然界的能量虽然守恒、我们却仍要节约能源的根本原因。</div>
 
 </v-click>
 
@@ -225,8 +225,6 @@ layout: base-flex
 # 熵增：能量耗散的方向
 
 <div class="page-grow" style="--page-gap: 0.75rem">
-
-<div class="flex"><div class="tag-icon"><mdi-flask-outline /> 扩展内容 · 不作考点</div></div>
 
 <div><span class="text-accent">熵</span> <Latex tex="S" />：描述一个系统无序（混乱）程度的物理量。</div>
 
@@ -252,7 +250,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key">房间不打扫会越来越乱，乱了的房间不会自己变整齐——自然过程总是朝着无序程度更大的方向走。</div>
+<div class="tip-hint">房间不打扫会越来越乱，乱了的房间不会自己变整齐——自然过程总是朝着无序程度更大的方向走。</div>
 
 </v-click>
 
@@ -288,7 +286,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key">分类的依据：能不能在短时间内从自然界得到补充。</div>
+<div class="tip-hint">分类的依据：能不能在短时间内从自然界得到补充。</div>
 
 </v-click>
 
@@ -324,7 +322,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key key-danger">
+<div class="warn-hint">
 
 核能：铀矿无法在短时间内再生，属于<span class="text-accent">不可再生能源</span>；发电过程对生态环境的污染程度低，又是<span class="text-accent">清洁能源</span>。
 
@@ -406,7 +404,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key">能源科技的每一次突破，都带来了生产力的巨大飞跃和社会的进步。</div>
+<div class="tip-hint">能源科技的每一次突破，都带来了生产力的巨大飞跃和社会的进步。</div>
 
 </v-click>
 
@@ -460,7 +458,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key">能源短缺和过度使用化石能源带来的环境恶化，已成为关系到人类社会能否持续发展的大问题。</div>
+<div class="tip-hint">能源短缺和过度使用化石能源带来的环境恶化，已成为关系到人类社会能否持续发展的大问题。</div>
 
 </v-click>
 
@@ -476,7 +474,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key key-lead">核心是追求发展与资源、环境的平衡：既满足当代人的需求，又不损害子孙后代的需求。</div>
+<div class="tip-hint">核心是追求发展与资源、环境的平衡：既满足当代人的需求，又不损害子孙后代的需求。</div>
 
 </v-click>
 
@@ -534,7 +532,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key key-lead">提高能源利用率，就是在不增加消耗的前提下，得到更多真正可用的能量。</div>
+<div class="tip-hint">提高能源利用率，就是在不增加消耗的前提下，得到更多真正可用的能量。</div>
 
 </v-click>
 
@@ -545,7 +543,7 @@ layout: base-flex
 clicks: 3
 ---
 
-<div class="page-grow" style="--page-gap: 0.75rem">
+<div class="page-grow" style="--page-gap: 0.5rem;--hint-pad-y:.5rem">
 
 <div class="ask ask-lead">
 
@@ -565,7 +563,7 @@ clicks: 3
 
 <div v-click="3">
 
-<div class="key">
+<div class="tip-hint">
 
 能源消耗产生的热最终都要靠地球向太空散掉；消耗过大、超出地球的散热能力，同样会使全球气温上升。所以任何能源都不能无限使用，<span class="text-accent">节能始终是第一位的</span>。
 
@@ -577,9 +575,8 @@ clicks: 3
 
 ---
 layout: base-flex
+title: 课堂小结
 ---
-
-# 课堂小结
 
 <div class="page-grow">
 

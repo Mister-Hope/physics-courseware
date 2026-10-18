@@ -31,7 +31,8 @@ export default defineConfig({
     ["html", { outputFolder: path.join(RUN_DIR, "html-report"), open: "never" }],
   ],
   use: {
-    viewport: { width: 1280, height: 720 },
+    // 1920×1080：演示屏幕/投影的常见分辨率（Slidev 的逻辑画布恒为 980×552，视口只决定缩放倍率）
+    viewport: { width: 1920, height: 1080 },
     deviceScaleFactor: 1,
     trace: "off",
     screenshot: "off",

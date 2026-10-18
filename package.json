@@ -9,6 +9,7 @@
     "build": "unrun scripts/build-all.ts",
     "check": "vue-tsc",
     "check:courses": "unrun scripts/check-courses.ts",
+    "clean": "unrun scripts/clean.ts",
     "compare:shots": "unrun scripts/compare-shots.ts",
     "create:course": "unrun scripts/create-course.ts",
     "dev": "unrun scripts/dev.ts",
@@ -38,14 +39,14 @@
     "postcss-html": "2.0.0",
     "stylelint": "17.16.0",
     "stylelint-config-hope": "12.1.0",
-    "unrun": "^0.3.1",
+    "unrun": "0.3.1",
     "vite": "catalog:",
     "vue-tsc": "3.3.13"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.11.2",
+      "version": "12.14.0",
       "onFail": "download"
     },
     "runtime": {

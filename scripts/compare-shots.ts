@@ -4,6 +4,9 @@ import path from "node:path";
 
 import { chromium } from "@playwright/test";
 
+// 本脚本的产物目录（`courses/<课件>/.temp/compare/` 等）由操作名自动派生，见 e2e/artifacts.ts
+process.env.E2E_OPERATION ??= "compare";
+
 /**
  * `pnpm compare:shots` —— 把「改动前（HEAD）」与「改动后（工作区）」的每一页拼成左右对比大图。
  *

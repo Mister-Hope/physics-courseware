@@ -98,7 +98,10 @@ export function listCourses(): CourseTarget[] {
 
       if (!packageName) throw new Error(`课件 ${slug} 缺少 package.json，无法启动 E2E 服务`);
 
-      const port = FIRST_PORT + index;
+      // `E2E_COURSE_PORT`：调度器（`scripts/e2e.ts`）起 server 前会先做端口自动避让（见 `e2e/ports.ts`），
+      // 挑好的端口用这个变量告诉 Playwright 这边，保证两边算出的 baseURL 一致。
+      const chosen = Number(process.env.E2E_COURSE_PORT ?? "");
+      const port = Number.isInteger(chosen) && chosen > 0 ? chosen : FIRST_PORT + index;
 
       // 用 localhost（而不是 127.0.0.1）：slidev/vite 默认只绑到 localhost 解析出的地址，
       // 在 macOS 上通常只有 IPv6 的 ::1，写 127.0.0.1 会连不上。

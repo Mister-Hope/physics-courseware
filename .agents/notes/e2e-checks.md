@@ -40,14 +40,27 @@ Playwright 的 `webServer` 会把**所有**课件的 dev server 一次性起起�
 排除项（③④ 共用）：`.page-grow` 自身、跨页固定层（顶栏/底栏）、`aria-hidden` 纯装饰、`position:fixed`、
 SVG 内部与 KaTeX 内部节点（固定画布内部换内容属正当，但 `<svg>` 根被顶跑仍会报）。
 
+### 产物目录（按「操作」自动分家）
+
+写 `dist/` 与 e2e 缓存的命令分三类，**各有各的目录，先后跑不会互相删文件**（`e2e/artifacts.ts` 按 `E2E_OPERATION` 派生）：
+
+| 命令 | 产物目录（单课件） | 产物目录（多课件） |
+| --- | --- | --- |
+| `pnpm test:e2e`（版面检查） | `courses/<课件>/.temp/layout-overflow/` | `.e2e/layout/<范围>/` |
+| `pnpm shots`（截图） | `courses/<课件>/.temp/shots/` | `e2e/reports/shots/` |
+| `pnpm compare:shots` / 单页排查 | `courses/<课件>/.temp/compare/` | — |
+
+- Playwright 自己的 `test-results/` / `html-report/` 落在 **`.e2e/<操作>/<范围>/`**（截图与版面检查各一份，互不覆盖）。
+- **视口是 1920×1080**（演示屏幕常见分辨率）：Slidev 逻辑画布恒为 980×552，视口只决定缩放倍率（1920 宽 ≈ ×1.96），e2e 会按实测 scale 换算回逻辑像素 ⇒ 留白 / 位移 / 顶出的阈值口径不随视口改变。
+- **清产物**：`pnpm clean`（`--dry-run` 先看清单与体积）。删的是 `dist/`、`.e2e/`、`courses/*/.temp/`、`test-results/` 这类可再生目录，不碰源码与 `content/`。
+
 ## 其它坑（都踩过）
 
 - **SVG `clip-path` 造成的"假越界"**：曲线点超出坐标轴范围时，`CoordAxes` 用 SVG `clip-path` 把它裁在坐标区内（屏幕上看不见），但外层 `<svg>` 是 `overflow: visible` ⇒ **路径包围盒**会探出画布，`visibleRect` 只按 CSS `overflow` 求交、**不识别 SVG clip-path**，于是报成 canvas 越界。判据：报告里元素路径是 `svg…> g:nth-of-type(N)` / `path`（不是文本块），且页面 `block-fit` 本来就是 0 ⇒ 是测量盲区，不是版面坏了。
   修法：给该页容器加 `overflow: hidden` 让测量范围=实际绘制范围（视觉零变化）；**别为此改共享组件尺寸**。
-- **卡 90s 后 `waitForFunction` 超时 ≠ 课件坏了**：先 `lsof -iTCP:<该课件的端口> -sTCP:LISTEN`。端口被别的进程占着（最常见：**你或教师自己开着的 dev server 正好占了这个课件的端口**）时 Playwright 的 `webServer` 起不来，而报错是"等待页面"超时、**不会**提端口冲突 ⇒ 用 `E2E_BASE_PORT=<别的基址>` 整体挪开。
+- **端口现在会自动避让**（`e2e/ports.ts`）：调度器起 server 前从基址往上找第一个**真能绑上**的端口，并打印 `↪ 端口 X 被占用（pid 进程名），改用 Y`。所以教师本机开着 dev server 撞上某个课件的默认端口也不会再 90s 超时；`E2E_BASE_PORT` 只在想整段挪开时才需要。真起不来时，调度器会直接打印该端口上监听的是谁。
 - **同一台机器上不要同时跑多个 `e2e` 实例**：调度器自己的并发（默认 4）已经吃满内存，强行叠加可能导致超时，表现为**随机课件遇到 `waitForFunction` 超时假失败**。确实要并行，用不同的 `E2E_BASE_PORT` **且**把 `E2E_CONCURRENCY` 调小。
-- **加载失败时，Slidev 渲染的是"带错误提示的占位页"**（页面上仅 `An error occurred on this slide` / `slide failed to load` 提示）。
-  `layout-overflow` 可检测并给出 `⛔ 第 N 页渲染失败` 错误。
+- **加载失败时 Slidev 渲染的是"带错误提示的占位页"**（`An error occurred on this slide` / `slide failed to load`）；`layout-overflow` 会识别并报 `⛔ 第 N 页渲染失败`（测试失败）。
 - **不要复用已开着的 dev server**（配置里 `reuseExistingServer: false`）：Slidev 启动时解析 addon 组件，复用旧进程会拿到过期组件表，改了文件却测到旧状态
 - **View Transitions**：Slidev v52 换页时整页会先平移再归位（实测可达数百像素），测完要等几何连续多帧稳定（`e2e/slidev-driver.ts` 的 `settle()`），否则把"正在入场"当溢出误报
 - **`oxlint --fix` 会写坏测试文件**（vitest 插件会把 Playwright 的 `test`/`expect` 当 vitest 全局并自动插 import），所以 `e2e/` 已在 `oxlint.config.ts` 的 `ignore` 里（风格仍由 oxfmt 管）

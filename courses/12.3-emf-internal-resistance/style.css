@@ -19,3 +19,10 @@
 .split-narrow {
   --cols: minmax(0, 0.85fr) minmax(0, 1.15fr);
 }
+
+/* 第 27 页（练习：橙汁电池）：exercise-split 的解析栏比栏高多 ~25px。
+   `--page-gap` 会被布局的 .ex-stem / .ex-analysis 继承 ⇒ 只收这一页的块间距。
+   该页 frontmatter 写 `class: tight-gap`（Slidev 把非保留键当 class 挂到 .slidev-layout 上）。 */
+.slidev-layout.exercise-split.tight-gap {
+  --page-gap: 0.25rem;
+}
