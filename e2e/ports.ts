@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { get } from "node:http";
 import { createServer } from "node:net";
 
 /**
@@ -61,3 +62,28 @@ export const describePortOwner = (port: number): string => {
     return "（本机没有 lsof，跳过）";
   }
 };
+
+/**
+ * HTTP 探测：服务是否已经能应答（任何状态码都算，"能应答"就是起来了）。
+ *
+ * ⛔ **刻意不用 `fetch`**：Node 24 的 undici 在并发探测时会抛 `setTypeOfService EINVAL`，
+ * 而且是在 socket 层抛的——真实的把整个调度器进程带崩过一次（跑到一半整轮验收全丢）。
+ * `node:http` 没有这个问题，也不需要第三方依赖。
+ *
+ * @param url 待探测地址
+ * @param timeoutMs 单次探测超时
+ * @returns 有响应（含 3xx/4xx）返回 `true`
+ */
+export const isHttpOk = (url: string, timeoutMs = 3000): Promise<boolean> =>
+  new Promise((resolve) => {
+    const request = get(url, (response) => {
+      response.resume();
+      resolve(true);
+    });
+
+    request.setTimeout(timeoutMs, () => {
+      request.destroy();
+      resolve(false);
+    });
+    request.on("error", () => resolve(false));
+  });

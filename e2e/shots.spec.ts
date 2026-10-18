@@ -78,6 +78,14 @@ test(`截图「${course.slug}」`, async ({ page }) => {
 
       await gotoSlideStep(page, no, clicks);
 
+      // 加载失败时 Slidev 渲染的是"带错误提示的占位页"；不拦就会把空白图当成"这页就是这么空"存下来
+      // （真踩过一次：一边有子代理在改这个课件、一边截图，抢跑渲染出空页，白白困惑半小时）
+      const broken = await page.evaluate(
+        () => /An error occurred on this slide|slide failed to load/iu.test(document.body.innerText),
+      );
+
+      if (broken) throw new Error(`第 ${no} 页渲染失败（Slidev 错误占位页）——先看 dev server 日志，别当空白页`);
+
       const file = path.join(OUT_DIR, `p${String(no).padStart(2, "0")}-c${clicks}.png`);
 
       await captureSlide(page, file);

@@ -24,7 +24,7 @@
 | 什么时候用                                                     | 读哪篇                                                                                                                                                                     |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **图元莫名其妙「看不见 / 变形 / 字号爆炸」（SVG 属性被吃掉）** | [`.agents/notes/svg-attributify-trap.md`](.agents/notes/svg-attributify-trap.md) ⭐⭐ **先查这个再查别的：`opacity` 被压成 0.9%、`stroke-width` 被撑大都是它；含诊断脚本** |
-| **要用任何共享组件（查它是干嘛的、props 怎么填）**             | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **25 个全局组件总表 + 简单组件的 props 正本**                                                |
+| **要用任何共享组件（查它是干嘛的、props 怎么填）**             | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **26 个全局组件总表 + 简单组件的 props 正本**                                                |
 | 要画 SVG（矢量箭头、SVG 字号体系、非坐标示意图）               | [`.agents/notes/slidev-svg.md`](.agents/notes/slidev-svg.md)                                                                                                               |
 | **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）    | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                                                                     |
 | **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）         | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                                                                   |
@@ -151,7 +151,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 ### 共享组件（`workspace/shared/components/`，全局注册：**直接用、不用 import、不要重画**）
 
-25 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
+26 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
 [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)。
 
 **坐标图（⛔ 禁止手写坐标轴 SVG）· 写在 markdown 顶层**

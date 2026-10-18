@@ -1,6 +1,7 @@
 import type { Page } from "@playwright/test";
 
 import { measureLayout, type LayoutMeasureResult, type OverflowViolation } from "./overflow-scan";
+import { describePortOwner } from "./ports";
 
 /** 演示屏幕的 16:9 视口（1920×1080）；Slidev 逻辑画布恒为 980×552，这里只决定缩放倍率 */
 export const VIEWPORT = { width: 1920, height: 1080 };
@@ -103,14 +104,44 @@ export interface SlideRef {
   title: string;
 }
 
-/** 打开课件首页，等 Slidev 应用就绪 */
+/**
+ * 启动等待上限（毫秒）。
+ *
+ * 4 门课并发时，Slidev 冷启动（Vite 首次 transform + addon 解析）偶发超过 90s——
+ * 真踩过两次：`7.5`、`7.2` 的 `design-tokens` 都卡在 `nav.total` 上超时，而**同一门课的版面检查是通过的**，
+ * 即"启动慢"被误报成"课件坏了"。放宽到 150s，并可用 `E2E_BOOT_TIMEOUT` 覆盖。
+ */
+const BOOT_TIMEOUT_MS = Number(process.env.E2E_BOOT_TIMEOUT ?? "150000") || 150_000;
+
+/** 打开课件首页，等 Slidev 应用就绪；启动失败会重试一次（并报出端口占用者，便于区分"启动慢"与"真坏了"） */
 export async function openDeck(page: Page, baseURL: string): Promise<void> {
   await page.setViewportSize(VIEWPORT);
-  await page.goto(`${baseURL}1`, { waitUntil: "domcontentloaded" });
-  await page.waitForFunction(() => Boolean(window.__slidev__?.nav?.total), undefined, {
-    timeout: 90_000,
-  });
-  await page.waitForSelector(".slidev-page", { state: "attached", timeout: 60_000 });
+
+  const boot = async (): Promise<void> => {
+    await page.goto(`${baseURL}1`, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => Boolean(window.__slidev__?.nav?.total), undefined, {
+      timeout: BOOT_TIMEOUT_MS,
+    });
+    await page.waitForSelector(".slidev-page", { state: "attached", timeout: 60_000 });
+  };
+
+  try {
+    await boot();
+  } catch (error) {
+    // 冷启动超时多半是"这一次没起来"：再给一次机会，仍失败才把错误抛出去（附端口线索）
+    console.log(`↻ [${baseURL}] Slidev 应用首次未就绪，重试一次…`);
+    try {
+      await boot();
+    } catch {
+      const port = Number(new URL(baseURL).port);
+      throw new Error(
+        `Slidev 应用在 ${BOOT_TIMEOUT_MS / 1000}s 内未就绪（${baseURL}）；` +
+          `该端口上监听的是：${describePortOwner(port)}。` +
+          `若确属启动慢，可用 E2E_BOOT_TIMEOUT=<毫秒> 放宽；原始错误：${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
+  }
+
   await settle(page);
 }
 

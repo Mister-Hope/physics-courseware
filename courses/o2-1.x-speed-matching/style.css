@@ -76,7 +76,8 @@
   right: 2.5rem;
   bottom: 2.5rem;
 
-  width: min(340px, 30vw) !important;
+  /* 固定 340px：同理不用 vw（视口单位会随窗口变，幻灯片画布是固定的 980×552） */
+  width: 340px !important;
   margin: 0 !important;
 }
 

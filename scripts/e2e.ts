@@ -26,7 +26,7 @@ import path from "node:path";
 
 import { listCourses } from "../e2e/courses";
 import type { CourseTarget } from "../e2e/courses";
-import { describePortOwner, findFreePort } from "../e2e/ports";
+import { describePortOwner, findFreePort, isHttpOk } from "../e2e/ports";
 
 const ROOT_DIR = path.resolve(import.meta.dirname, "..");
 
@@ -72,14 +72,8 @@ const pipeOutput = (child: ChildProcess, slug: string): void => {
 };
 
 // 能应答（任何 HTTP 状态都算）＝ dev server 就绪：Slidev 会先 302 到带 base 的路径
-const respondOk = async (url: string): Promise<boolean> => {
-  try {
-    await fetch(url, { signal: AbortSignal.timeout(3000) });
-    return true;
-  } catch {
-    return false;
-  }
-};
+// ⛔ 用 `node:http` 探测，**不要**用 `fetch`：Node 24 的 undici 并发探测时会抛 setTypeOfService EINVAL 把整轮跑挂掉
+const respondOk = (url: string): Promise<boolean> => isHttpOk(url);
 
 // 轮询等待 dev server 就绪；超时返回 false
 const waitForServer = async (url: string, deadline: number): Promise<boolean> => {
@@ -227,7 +221,16 @@ const runPool = async (courses: CourseTarget[], concurrency: number): Promise<Co
 
     if (course == null) return;
 
-    results.push(await runCourse(course));
+    // 单个课件出任何意外都不许带走整轮（真踩过：一个 undici 崩溃让整轮验收白跑）
+    try {
+      results.push(await runCourse(course));
+    } catch (error) {
+      console.log(
+        `✗ [${course.slug}] 执行中断：${error instanceof Error ? error.message : String(error)}`,
+      );
+      results.push({ slug: course.slug, passed: false, seconds: 0 });
+    }
+
     await worker();
   };
 

@@ -5,6 +5,9 @@ import path from "node:path";
 import { shotsDir } from "../e2e/artifacts";
 import { listCourses, resolveCourseId } from "./course-lookup";
 
+// 本脚本的产物目录（`courses/<课件>/.temp/shots/` 等）由操作名自动派生，见 e2e/artifacts.ts
+process.env.E2E_OPERATION ??= "shots";
+
 /**
  * `pnpm shots` —— 批量给课件截页图（agent 自查页面用）
  *

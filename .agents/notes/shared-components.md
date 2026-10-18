@@ -1,4 +1,4 @@
-# 共享组件总览：25 个全局组件（干什么 + props 正本）
+# 共享组件总览：26 个全局组件（干什么 + props 正本）
 
 > 什么时候读：**页面上要用任何共享组件时**——先看这一篇 §1 的总表选组件，再看对应小节拿 props。
 > 这些组件由共享 addon（`workspace/shared/`）**全局注册**：直接写标签，**不用 import、不要重画**；
@@ -220,6 +220,12 @@
 > 🟡 也**不要**用课内 `:deep(.cs-*)` 去改共享组件的列宽/行高：窄面板请用 `layout="tight"` + `labelWidth`。
 
 ## 8. 所有组件共同的规则
+
+> ⛔ **改完共享组件必须先"真实渲染一次"再交出去**（自身的纪律，真踩过）：`oxlint` / 类型检查**抓不到**运行期的
+> `undefined` 属性访问与 `NaN` 坐标——`CircuitRheostat` 曾因"模板引用了计算属性里不存在的键 + 漏 `.value`"导致
+> **整页渲染失败**，而 lint 全绿、交付方照常改课件、直到 e2e 才炸。
+> 做法：在任意一页真实渲染一次（`pnpm shots <课件> <页号>` 或该课的单门 e2e）确认出图后再交给别人用；
+> **改文件用脚本替换时，每处替换都要断言命中**（静默跳过一次替换＝留下半改状态）。
 
 1. **全局注册**：直接写标签，不 import；共享代码改动（`workspace/shared/`）会影响**全部课件**，改前评估影响面。
 2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、`CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。`Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
