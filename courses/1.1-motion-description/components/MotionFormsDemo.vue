@@ -423,12 +423,6 @@
   }
 }
 
-@media (width <= 768px) {
-  .mf-panels {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .mf-slide,
   .mf-spin,

@@ -128,3 +128,20 @@ const shaftEnd = (x1: number, y1: number, x2: number, y2: number, size = ARROW) 
 
 **验收标准：尖端与目标圆点的视觉中心重合——拿截图看，别只看代码。**
 批量截图：`pnpm shots <课件> <页号> --clicks=each`，然后肉眼（或 `read_image`）核对。
+
+## 固定宽度的标签框：给文字加 `textLength`
+
+SVG 里的"圆角框 + 居中文字"（图注、结论条、风向标…）如果**框宽写死**，系统字体一换就会溢出——
+中文字体里 `（）` 是全角、比英文括号宽得多，机器算出来的宽度和你估的不一样（真踩过：1.1 第 20 页
+`旗向右 (与风同向)` 约 95 用户单位塞进 94 宽的框，教师机上一眼就看出字顶出框）。
+
+**做法**：框适当加宽，并给 `<text>` 加 `textLength` + `lengthAdjust="spacingAndGlyphs"`，让文字**严格**落在框内：
+
+```html
+<rect x="0" y="0" width="104" height="20" rx="4" … />
+<text x="52" y="14" text-anchor="middle" font-size="11"
+      textLength="96" lengthAdjust="spacingAndGlyphs">旗向右 (与风同向)</text>
+```
+
+`textLength` = 框宽 − 8（左右各留 4 的呼吸），跨 `<tspan>` 也管用（下标那类混排一样收得住）。
+

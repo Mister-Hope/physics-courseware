@@ -123,14 +123,14 @@ const { step = 2 } = defineProps<{
       <rect
         x="12"
         y="-14"
-        width="48"
+        width="52"
         height="18"
         rx="4"
         fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
         stroke="var(--c-accent-glow)"
         stroke-width="1"
       />
-      <text x="36" y="-1" text-anchor="middle" font-size="11" font-weight="700" fill="var(--c-accent-glow)">风向向右</text>
+      <text x="36" y="-1" text-anchor="middle" font-size="11" font-weight="700" fill="var(--c-accent-glow)" textLength="46" lengthAdjust="spacingAndGlyphs">风向向右</text>
     </g>
 
     <!-- ==================== 5. 船 A（旗向右飘） ==================== -->
@@ -176,30 +176,30 @@ const { step = 2 } = defineProps<{
           <rect
             x="0"
             y="0"
-            width="94"
+            width="104"
             height="20"
             rx="4"
             fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
             stroke="var(--c-physics-light)"
             stroke-width="1"
           />
-          <text x="47" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#7dd3fc">旗向右 (与风同向)</text>
+          <text x="52" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#7dd3fc" textLength="96" lengthAdjust="spacingAndGlyphs">旗向右 (与风同向)</text>
         </g>
       </g>
 
       <!-- A 船状态结论 (step >= 1) -->
       <g v-if="step >= 1" transform="translate(0, 42)">
         <rect
-          x="-78"
+          x="-82"
           y="-10"
-          width="156"
+          width="164"
           height="20"
           rx="4"
           fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
           stroke="color-mix(in srgb, var(--c-physics-light) 50%, transparent)"
           stroke-width="1"
         />
-        <text x="0" y="4" text-anchor="middle" font-size="10.5" fill="var(--c-neutral-300)">可能静止 / 向左 / 向右但慢于风</text>
+        <text x="0" y="4" text-anchor="middle" font-size="10.5" fill="var(--c-neutral-300)" textLength="156" lengthAdjust="spacingAndGlyphs">可能静止 / 向左 / 向右但慢于风</text>
       </g>
     </g>
 
@@ -246,30 +246,30 @@ const { step = 2 } = defineProps<{
           <rect
             x="0"
             y="0"
-            width="94"
+            width="104"
             height="20"
             rx="4"
             fill="color-mix(in srgb, var(--c-neutral-900) 92%, transparent)"
             stroke="var(--c-accent-glow)"
             stroke-width="1"
           />
-          <text x="47" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#fcd34d">旗向左 (与风反向)</text>
+          <text x="52" y="14" text-anchor="middle" font-size="11" font-weight="700" fill="#fcd34d" textLength="96" lengthAdjust="spacingAndGlyphs">旗向左 (与风反向)</text>
         </g>
       </g>
 
       <!-- B 船状态结论 (step >= 2，锁定选项 C) -->
       <g v-if="step >= 2" transform="translate(0, 42)">
         <rect
-          x="-88"
+          x="-94"
           y="-10"
-          width="176"
+          width="188"
           height="20"
           rx="4"
           fill="color-mix(in srgb, var(--c-neutral-900) 95%, transparent)"
           stroke="#ef4444"
           stroke-width="1.2"
         />
-        <text x="0" y="4" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fca5a5">
+        <text x="0" y="4" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fca5a5" textLength="180" lengthAdjust="spacingAndGlyphs">
           必向右且 v
           <tspan font-size="8" dy="2">B</tspan>
           <tspan font-size="10.5" dy="-2">></tspan>

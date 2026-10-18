@@ -169,6 +169,64 @@ const CLASS_DEF_GLOBAL = new RegExp(CLASS_DEF.source, "gmu");
 const STYLE_BLOCK = /<style[^>]*>(?<block>[\s\S]*?)<\/style>/gu;
 const ICON = /<(?<icon>mdi-[a-z0-9-]+)/gu;
 /** 允许给图标放大的字号类：共享阶梯（带 `!important`）+ 图标专用 `.icon-*`（也带 `!important`） */
+/**
+ * 与**视口尺寸**绑定的写法（幻灯片是固定 980×552 画布 + 整体缩放，版面一律不该依赖窗口大小）。
+ *
+ * - `vw`/`vh`/`vmin`/`dvh`… 这类视口单位；
+ * - `@media (width …)` / `(orientation …)` 这类按窗口尺寸切换的媒体查询；
+ * - JS 里的 `window.innerWidth` / `matchMedia("(width…")`。
+ *
+ * **不拦**用元素自身尺寸的写法（`ResizeObserver` 观察自己的容器、`%`、`1fr`、`cqw` 容器查询单位）——
+ * 那些跟着画布走，与窗口无关；也不拦 `prefers-reduced-motion` / `prefers-color-scheme`（那不是视口）。
+ */
+const VIEWPORT_UNIT = /(?<![\w-])(?:\d+(?:\.\d+)?|\.\d+)(?:vw|vh|vmin|vmax|dvw|dvh|lvh|svh|vi|vb)(?![\w-])/giu;
+const VIEWPORT_MEDIA = /@media[^{]*\((?:[^)]*\b(?:width|height|orientation|aspect-ratio)\b[^)]*)\)/giu;
+const VIEWPORT_JS = /\b(?:window\.)?inner(?:Width|Height)\b|\bmatchMedia\(\s*["'][^"']*(?:width|height|orientation)/giu;
+
+/** 去掉注释再扫（注释里提到 `36vh` 不该被算命中） */
+const stripComments = (source: string): string =>
+  source
+    .replace(/\/\*[\s\S]*?\*\//gu, "")
+    .replace(/<!--[\s\S]*?-->/gu, "")
+    .replace(/(^|[^:'"])\/\/[^\n]*/gu, "$1");
+
+/** 版面依赖视口宽度 ⇒ error 级（真会坏页面：窄窗口/大屏下版面不一样，窄到一定程度直接撑爆画布） */
+const checkViewportBoundStyles = (sources: string): Finding[] => {
+  const code = stripComments(sources);
+  const findings: Finding[] = [];
+
+  const units = [...new Set([...code.matchAll(VIEWPORT_UNIT)].map((match) => match[0]))];
+  const medias = [...new Set([...code.matchAll(VIEWPORT_MEDIA)].map((match) => match[0].replace(/\s+/gu, " ")))];
+  const scripts = [...new Set([...code.matchAll(VIEWPORT_JS)].map((match) => match[0]))];
+
+  if (units.length > 0)
+    findings.push({
+      level: "error",
+      message:
+        `版面用了**视口单位** ${units.join("、")} —— 幻灯片是固定 980×552 画布、整体缩放，` +
+        `视口单位跟的是**浏览器窗口**而不是画布 ⇒ 换个窗口尺寸版面就变（窄窗口会把整页撑爆）。` +
+        `请改成固定逻辑像素 / \`%\` / \`1fr\`（跟着画布走），见 \`slidev-layout.md\` §3.6`,
+    });
+
+  if (medias.length > 0)
+    findings.push({
+      level: "error",
+      message:
+        `版面用了**按窗口尺寸切换的媒体查询** \`${medias.join("`、`")}\` —— 固定画布下这种"响应式"只会让版面依赖窗口，` +
+        `窄窗口时排版一变就溢出画布（1.1 第 4 页真踩过：\`@media (width <= 768px)\` 把三栏堆成一列直接炸）。请直接删掉`,
+    });
+
+  if (scripts.length > 0)
+    findings.push({
+      level: "error",
+      message:
+        `组件里读了**窗口尺寸**（${scripts.join("、")}）—— 要跟着容器自适应就用 \`ResizeObserver\` 观察**自己所在的元素**，` +
+        `不要读 \`window.innerWidth\` / \`matchMedia\`（窗口≠画布）`,
+    });
+
+  return findings;
+};
+
 const ICON_SIZE_OK = /^(?:(?<text>text-(?:[2-5]xl))|(?<icon>icon-(?:md|lg|xl|2xl)))$/u;
 /**
  * UnoCSS 的字号类不带 `!important`，压不过 `common.css` 给 svg 钉的 `font-size:16px` 基准 → 图标钉死 16px。
@@ -756,6 +814,7 @@ const auditCourse = (
     ...checkProtectedSelectors(css),
     ...checkRootOverrides(css),
     ...checkHandmadeSlider(`${sources}\n${css}`),
+    ...checkViewportBoundStyles(`${sources}\n${css}`),
   ];
 
   return {

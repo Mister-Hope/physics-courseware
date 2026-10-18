@@ -3,6 +3,7 @@ import path from "node:path";
 import { defineConfig } from "@playwright/test";
 
 import { playwrightRunDir } from "./e2e/artifacts";
+import { VIEWPORT } from "./e2e/slidev-driver";
 import { listCourses } from "./e2e/courses";
 
 const courses = listCourses();
@@ -32,7 +33,8 @@ export default defineConfig({
   ],
   use: {
     // 1920×1080：演示屏幕/投影的常见分辨率（Slidev 的逻辑画布恒为 980×552，视口只决定缩放倍率）
-    viewport: { width: 1920, height: 1080 },
+    // `E2E_VIEWPORT=800x450` 可临时换窗口尺寸，用来抓"版面依赖视口宽度"的 bug
+    viewport: VIEWPORT,
     deviceScaleFactor: 1,
     trace: "off",
     screenshot: "off",

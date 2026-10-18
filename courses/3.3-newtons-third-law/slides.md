@@ -123,9 +123,9 @@ clicks: 2
 # 牛顿第三定律
 
 <div class="page-grow">
-<div class="ask">弹簧测力计测的是弹力。摩擦力、不接触的力呢？</div>
+<div class="ask">弹簧测力计测的是弹力。摩擦力呢？</div>
 <div class="tip-hint" v-click="1">两个物体之间的作用力和反作用力总是<span class="text-accent">大小相等</span>，<span class="text-accent">方向相反</span>，作用在<span class="text-accent">同一条直线</span>上。</div>
-<div class="info-hint" v-click="2"><Latex tex="F' = -F" />　负号表示方向相反——任何两个相互作用的物体之间都成立。</div>
+<div class="info-hint" v-click="2"><Latex tex="F' = -F" />　负号表示方向相反。</div>
 </div>
 
 ---
@@ -135,7 +135,7 @@ clicks: 4
 # 定律对什么成立
 
 <div class="page-grow">
-<div class="ask">两个物体不接触时呢？正在加速运动时呢？</div>
+<div class="ask">不接触的力、正在加速的物体，也遵守这条定律吗？</div>
 <div class="three-col">
 <div class="trait" v-click="1"><mdi-magnet class="text-xl text-accent-2 inline-block align-middle mr-1" />不接触的力同样成立：磁铁与铁钉隔着一段距离，吸引仍是相互的。</div>
 <div class="trait" v-click="2"><mdi-run-fast class="text-xl text-accent-2 inline-block align-middle mr-1" />与运动状态无关：静止、匀速、加速运动中，两个力都同时等大反向。</div>

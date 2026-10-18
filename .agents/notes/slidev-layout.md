@@ -80,7 +80,8 @@ Slidev 的画布是**固定 980×552**，再由 `transform: scale()` 缩放到�
 1920 窗口下 36vh=389px → 取 320px，舞台高出 61px、整页顶出 17px（把 e2e 视口换成 1920×1080 才暴露）。
 
 **替代**：写成固定逻辑像素（`min-height: 260px`），或用 `%`（父容器高度确定时）/ 共享密度变量。
-全仓自查：`grep -rnE "[0-9]+(vw|vh)" courses/*/components/*.vue courses/*/style.css`（注释里的不算）。
+**机器会查**：`pnpm style:audit` 对 `vw/vh/vmin/dvh…`、`@media (width/height/orientation…)`、`window.innerWidth` / `matchMedia("(width…")` 报 **error** 级（注释里的不算；`ResizeObserver` 观察**元素自己**、`%`、`1fr` 都不拦）。
+**手动验窄窗口**：`E2E_VIEWPORT=700x394 pnpm shots <课件> <页号>` —— 固定画布下版面应该和 1920 下**一模一样**（只是整体变小）。
 
 ## 4. 字号与"占满"（🟡 经验值 + 🔴 教师点名的信息类要求）
 
