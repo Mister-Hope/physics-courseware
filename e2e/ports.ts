@@ -5,10 +5,9 @@ import { createServer } from "node:net";
 /**
  * 端口自动避让。
  *
- * **为什么要自己找**：Playwright 的 `webServer` 只认死端口（`url`/`port`），端口被占就直接报错、
- * **没有**"占用就 +1"这种开关（[官方文档](https://playwright.dev/docs/test-webserver)）；
- * 真正绑端口的 Vite 本来会"占用就 +1"，但 Slidev 开了 `strictPort` 把它关掉了。
- * 我们又是自己分批起 server 的（见 `scripts/e2e.ts`），所以在这一层按"从基址往上找第一个真能绑上的端口"处理。
+ * **为什么要自己找**：Playwright 的 `webServer` 只认死端口（`url`/`port`），端口被占就直接报错、 **没有**"占用就
+ * +1"这种开关（[官方文档](https://playwright.dev/docs/test-webserver)）； 真正绑端口的 Vite 本来会"占用就 +1"，但 Slidev 开了
+ * `strictPort` 把它关掉了。 我们又是自己分批起 server 的（见 `scripts/e2e.ts`），所以在这一层按"从基址往上找第一个真能绑上的端口"处理。
  *
  * 这样才能容忍**教师本机开着的 dev server**占住某个课件的默认端口：不撞、也不用改基址。
  */
@@ -39,7 +38,9 @@ export const findFreePort = async (
     if (await isPortFree(port, host)) return port;
   }
 
-  throw new Error(`从 ${start} 起连续 ${maxTries} 个端口都被占用，请用 E2E_BASE_PORT=<别的基址> 换一段`);
+  throw new Error(
+    `从 ${start} 起连续 ${maxTries} 个端口都被占用，请用 E2E_BASE_PORT=<别的基址> 换一段`,
+  );
 };
 
 /**
@@ -50,7 +51,9 @@ export const findFreePort = async (
  */
 export const describePortOwner = (port: number): string => {
   try {
-    const output = execFileSync("lsof", ["-nP", `-iTCP:${port}`, "-sTCP:LISTEN"], { encoding: "utf8" });
+    const output = execFileSync("lsof", ["-nP", `-iTCP:${port}`, "-sTCP:LISTEN"], {
+      encoding: "utf8",
+    });
     const owners = output
       .trim()
       .split("\n")
@@ -66,9 +69,8 @@ export const describePortOwner = (port: number): string => {
 /**
  * HTTP 探测：服务是否已经能应答（任何状态码都算，"能应答"就是起来了）。
  *
- * ⛔ **刻意不用 `fetch`**：Node 24 的 undici 在并发探测时会抛 `setTypeOfService EINVAL`，
- * 而且是在 socket 层抛的——真实的把整个调度器进程带崩过一次（跑到一半整轮验收全丢）。
- * `node:http` 没有这个问题，也不需要第三方依赖。
+ * ⛔ **刻意不用 `fetch`**：Node 24 的 undici 在并发探测时会抛 `setTypeOfService EINVAL`， 而且是在 socket
+ * 层抛的——真实的把整个调度器进程带崩过一次（跑到一半整轮验收全丢）。 `node:http` 没有这个问题，也不需要第三方依赖。
  *
  * @param url 待探测地址
  * @param timeoutMs 单次探测超时

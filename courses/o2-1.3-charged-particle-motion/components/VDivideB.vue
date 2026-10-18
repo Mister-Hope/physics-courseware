@@ -190,16 +190,16 @@ const parZero = computed(() => thetaDeg.value === 90);
 
     <div class="mt-1 flex shrink-0 flex-wrap items-center justify-center gap-x-2 gap-y-1">
       <template v-if="picker">
-        <span class="shrink-0 whitespace-nowrap text-sm text-dim"
-          >夹角 <Latex tex="\theta"
-        /></span>
+        <span class="shrink-0 whitespace-nowrap text-sm text-dim">夹角 <Latex tex="\theta" /></span>
         <button
           v-for="opt in THETAS"
           :key="opt"
           type="button"
           class="shrink-0 whitespace-nowrap px-2.5 py-0.5 rounded-full text-sm border transition-colors"
           :class="thetaDeg === opt ? 'text-amber-300' : 'text-dim'"
-          :style="{ borderColor: thetaDeg === opt ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
+          :style="{
+            borderColor: thetaDeg === opt ? 'var(--c-accent-light)' : 'var(--c-neutral-600)',
+          }"
           @click="thetaDeg = opt"
         >
           {{ opt }}°

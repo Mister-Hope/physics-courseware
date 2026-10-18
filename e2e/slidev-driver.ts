@@ -6,8 +6,7 @@ import { describePortOwner } from "./ports";
 /**
  * 演示屏幕的 16:9 视口（默认 1920×1080）；Slidev 逻辑画布恒为 980×552，这里只决定缩放倍率。
  *
- * `E2E_VIEWPORT=800x450` 可临时换一个窗口尺寸——用来抓**版面依赖视口宽度**的 bug
- * （固定画布下这属于错误写法，见 `slidev-layout.md` §3.6）。
+ * `E2E_VIEWPORT=800x450` 可临时换一个窗口尺寸——用来抓**版面依赖视口宽度**的 bug （固定画布下这属于错误写法，见 `slidev-layout.md` §3.6）。
  */
 export const VIEWPORT = (() => {
   const raw = (process.env.E2E_VIEWPORT ?? "").trim();
@@ -119,9 +118,8 @@ export interface SlideRef {
 /**
  * 启动等待上限（毫秒）。
  *
- * 4 门课并发时，Slidev 冷启动（Vite 首次 transform + addon 解析）偶发超过 90s——
- * 真踩过两次：`7.5`、`7.2` 的 `design-tokens` 都卡在 `nav.total` 上超时，而**同一门课的版面检查是通过的**，
- * 即"启动慢"被误报成"课件坏了"。放宽到 150s，并可用 `E2E_BOOT_TIMEOUT` 覆盖。
+ * 4 门课并发时，Slidev 冷启动（Vite 首次 transform + addon 解析）偶发超过 90s—— 真踩过两次：`7.5`、`7.2` 的 `design-tokens`
+ * 都卡在 `nav.total` 上超时，而**同一门课的版面检查是通过的**， 即"启动慢"被误报成"课件坏了"。放宽到 150s，并可用 `E2E_BOOT_TIMEOUT` 覆盖。
  */
 const BOOT_TIMEOUT_MS = Number(process.env.E2E_BOOT_TIMEOUT ?? "150000") || 150_000;
 

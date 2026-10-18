@@ -371,7 +371,9 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           type="button"
           class="px-2.5 py-0.5 rounded-full border transition-colors"
           :class="thetaDeg === opt ? 'text-amber-300' : 'text-dim'"
-          :style="{ borderColor: thetaDeg === opt ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
+          :style="{
+            borderColor: thetaDeg === opt ? 'var(--c-accent-light)' : 'var(--c-neutral-600)',
+          }"
           @click="thetaDeg = opt"
         >
           {{ opt }}°

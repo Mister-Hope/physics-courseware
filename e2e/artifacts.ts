@@ -6,8 +6,7 @@ const COURSES_DIR = join(REPO_ROOT, "courses");
 /**
  * 一次「操作」＝一类端到端任务（版面检查 / 截图 / 对比图 / 单页排查）。
  *
- * 产物目录**按操作自动派生**，各操作只清自己的目录 ⇒ 先后跑不会互相删文件
- * （`pnpm shots` 拍完再跑 `pnpm test:e2e`，截图不会被清掉）。
+ * 产物目录**按操作自动派生**，各操作只清自己的目录 ⇒ 先后跑不会互相删文件 （`pnpm shots` 拍完再跑 `pnpm test:e2e`，截图不会被清掉）。
  */
 export type E2EOperation = "layout" | "shots" | "compare" | "pages";
 
@@ -52,7 +51,10 @@ export function selectedSlugs(): string[] {
  * @param operation 操作类型；默认取 `E2E_OPERATION`
  * @returns 产物根目录绝对路径
  */
-export function artifactRoot(scopes: string[] = selectedSlugs(), operation = currentOperation()): string {
+export function artifactRoot(
+  scopes: string[] = selectedSlugs(),
+  operation = currentOperation(),
+): string {
   const override = (process.env.E2E_ARTIFACT_DIR ?? "").trim();
 
   if (override) return resolve(REPO_ROOT, override);

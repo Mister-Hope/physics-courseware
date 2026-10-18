@@ -171,9 +171,10 @@ const runCourse = async (course: CourseTarget): Promise<CourseResult> => {
     baseURL: `http://localhost:${port}/${course.slug}/`,
   };
 
-  if (port !== course.port) {
-    console.log(`↪ [${course.slug}] 端口 ${course.port} 被占用（${describePortOwner(course.port)}），改用 ${port}`);
-  }
+  if (port !== course.port)
+    {console.log(
+      `↪ [${course.slug}] 端口 ${course.port} 被占用（${describePortOwner(course.port)}），改用 ${port}`,
+    );}
 
   const serverLog: string[] = [];
   const server = startServer(target, (line) => {
@@ -224,9 +225,9 @@ const runPool = async (courses: CourseTarget[], concurrency: number): Promise<Co
     // 单个课件出任何意外都不许带走整轮（真踩过：一个 undici 崩溃让整轮验收白跑）
     try {
       results.push(await runCourse(course));
-    } catch (error) {
+    } catch (err) {
       console.log(
-        `✗ [${course.slug}] 执行中断：${error instanceof Error ? error.message : String(error)}`,
+        `✗ [${course.slug}] 执行中断：${err instanceof Error ? err.message : String(err)}`,
       );
       results.push({ slug: course.slug, passed: false, seconds: 0 });
     }

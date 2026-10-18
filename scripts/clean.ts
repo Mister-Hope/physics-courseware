@@ -10,12 +10,14 @@ import path from "node:path";
  * ```
  *
  * **只删这些**（都在 `.gitignore` 里，删掉后重新 `pnpm build` / `pnpm test:e2e` 就会再生成）：
+ *
  * - 根 `dist/`、各课件 `dist/`、`workspace/<包>/dist/`
  * - `.e2e/`（Playwright 的 `test-results` / `html-report`；按操作 + 课件分家，见 `e2e/artifacts.ts`）
  * - `courses/<slug>/.temp/`（版面报告、截图、对比图）
  * - `courses/<slug>/test-results/`、根 `test-results/`、`playwright-report/`、`blob-report/`
  *
- * ⛔ **绝不碰**：`node_modules/`、源码、`content/`、`resources/`；也不删用户级缓存（`~/Library/Caches/ms-playwright` 等）。
+ * ⛔ **绝不碰**：`node_modules/`、源码、`content/`、`resources/`；也不删用户级缓存（`~/Library/Caches/ms-playwright`
+ * 等）。
  */
 const ROOT = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT, "courses");
@@ -23,7 +25,12 @@ const WORKSPACE_DIR = path.join(ROOT, "workspace");
 
 const dryRun = process.argv.includes("--dry-run");
 
-/** 目录体积（递归求和，用于告诉用户省了多少） */
+/**
+ * 目录体积（递归求和，用于告诉用户省了多少）
+ *
+ * @param target 目标目录
+ * @returns 目录总字节数（读不到的条目按 0 计）
+ */
 const directorySize = (target: string): number => {
   let total = 0;
 
@@ -40,7 +47,11 @@ const directorySize = (target: string): number => {
   return total;
 };
 
-/** 待清理目标：根级 + 各课件级 */
+/**
+ * 待清理目标：根级 + 各课件级
+ *
+ * @returns 当前真实存在的待清理目录列表
+ */
 const collectTargets = (): string[] => {
   const targets = [
     path.join(ROOT, "dist"),
@@ -83,7 +94,9 @@ if (targets.length === 0) {
   for (const target of targets) {
     const size = directorySize(target);
     total += size;
-    console.log(`${dryRun ? "（dry-run）会删" : "删除"} ${path.relative(ROOT, target)} —— ${formatSize(size)}`);
+    console.log(
+      `${dryRun ? "（dry-run）会删" : "删除"} ${path.relative(ROOT, target)} —— ${formatSize(size)}`,
+    );
 
     if (!dryRun) rmSync(target, { recursive: true, force: true });
   }

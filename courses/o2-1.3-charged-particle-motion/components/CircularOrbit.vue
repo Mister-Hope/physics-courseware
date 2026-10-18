@@ -296,7 +296,9 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
             type="button"
             class="px-2.5 py-0.5 rounded-full text-sm border transition-colors"
             :class="bDir === 'out' ? 'text-amber-300' : 'text-dim'"
-            :style="{ borderColor: bDir === 'out' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
+            :style="{
+              borderColor: bDir === 'out' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)',
+            }"
             @click="bDir = 'out'"
           >
             <Latex tex="\odot" /> 向外
@@ -305,7 +307,9 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
             type="button"
             class="px-2.5 py-0.5 rounded-full text-sm border transition-colors"
             :class="bDir === 'in' ? 'text-amber-300' : 'text-dim'"
-            :style="{ borderColor: bDir === 'in' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
+            :style="{
+              borderColor: bDir === 'in' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)',
+            }"
             @click="bDir = 'in'"
           >
             <Latex tex="\otimes" /> 向里
@@ -334,9 +338,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
 
       <div>
         <div class="mb-1 flex items-baseline justify-between gap-2">
-          <span class="whitespace-nowrap text-sm text-dim">
-            磁感应强度 <Latex tex="B" />
-          </span>
+          <span class="whitespace-nowrap text-sm text-dim"> 磁感应强度 <Latex tex="B" /> </span>
           <span class="whitespace-nowrap text-sm font-semibold text-amber-300">
             {{ bDisplay }} <Latex tex="\text{mT}" />
           </span>
@@ -354,16 +356,29 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
       </div>
 
       <!-- r / T 读数：readout=false 的页面整块不渲染（连数字带公式一起没有）；readoutOnly 决定只留哪一项 -->
-      <div v-if="readout" class="rounded-xl border px-3 py-1.5" style="border-color: color-mix(in srgb, var(--c-neutral-700) 60%, transparent); background-color: color-mix(in srgb, var(--c-neutral-900) 40%, transparent)">
+      <div
+        v-if="readout"
+        class="rounded-xl border px-3 py-1.5"
+        style="
+          border-color: color-mix(in srgb, var(--c-neutral-700) 60%, transparent);
+          background-color: color-mix(in srgb, var(--c-neutral-900) 40%, transparent);
+        "
+      >
         <div v-if="readoutOnly !== 'T'" class="text-lg">
           <Latex tex="r" /> =
-          <span class="font-semibold" :class="emphasis === 'r' ? 'text-accent' : 'text-[var(--c-neutral-200)]'">
+          <span
+            class="font-semibold"
+            :class="emphasis === 'r' ? 'text-accent' : 'text-[var(--c-neutral-200)]'"
+          >
             {{ rMM.toFixed(2) }} <Latex tex="\text{mm}" />
           </span>
         </div>
         <div v-if="readoutOnly !== 'r'" class="text-lg" :class="readoutOnly === 'T' ? '' : 'mt-1'">
           <Latex tex="T" /> =
-          <span class="font-semibold" :class="emphasis === 'T' ? 'text-accent' : 'text-[var(--c-neutral-200)]'">
+          <span
+            class="font-semibold"
+            :class="emphasis === 'T' ? 'text-accent' : 'text-[var(--c-neutral-200)]'"
+          >
             {{ tNS.toFixed(1) }} <Latex tex="\text{ns}" />
           </span>
         </div>

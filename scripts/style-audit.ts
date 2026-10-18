@@ -7,199 +7,56 @@
  * 并列条目大概率缺扫读锚点 ③ 硬编码视觉参数 §3 色值 / font-size / border-radius 必须走 token ④ 裸类名 §6 用了某个类却没在同一课 style.css
  * 里定义 ⑤ 越权覆盖 §8 重写共享选择器、覆盖了 --page-gap/--stack-gap 以外的变量
  *
- * 结果是**建议性**的（默认 exit 0）：存量课件按"谁改谁收敛"，不拿来卡 CI。
+ * 结果是**建议性**的（默认 exit 0）：存量课件按"谁改谁收敛"，不拿来卡 CI。 词表与正则等共享基础件在 ./style-audit-shared.ts。
  */
 
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 
+import {
+  ALLOWED_ROOT_OVERRIDES,
+  BORDER_RADIUS,
+  CARD_BUDGET,
+  CLASS_ATTR,
+  CLASS_DEF_GLOBAL,
+  COURSES_DIR,
+  CSS_VALUE,
+  FONT_SIZE,
+  ICON,
+  ICON_SIZE_OK,
+  PROTECTED_SELECTORS,
+  read,
+  ROOT_VAR,
+  SHARED_ATOMS,
+  stripComments,
+  STYLE_BLOCK,
+  UNOCSS_BIG_TEXT,
+  UTILITY_PREFIXES,
+  VIEWPORT_JS,
+  VIEWPORT_MEDIA,
+  VIEWPORT_UNIT,
+} from "./style-audit-shared";
 import { PALETTE_CLASS, PALETTE_TO_TOKEN, parseColor, tokenOfHex } from "./token-colors";
 
-const ROOT = path.resolve(import.meta.dirname, "..");
-const COURSES_DIR = path.join(ROOT, "courses");
-/** Style-guide §4：一份课件卡片总数上限 */
-const CARD_BUDGET = 15;
-
-/** 共享样式正本目录（common / layout / atoms 三个文件里的类 = 全部合法共享原子） */
-const SHARED_STYLES_DIR = path.join(ROOT, "workspace", "shared", "styles");
-
-// 读文件（不存在算空串）。声明放在最前：模块顶层的初始化就可能用到它，
-// 若挪到下面、又有人改成 `const` 之前的顶层调用，会掉进暂时性死区（TDZ）。
-const read = (file: string): string => (existsSync(file) ? readFileSync(file, "utf8") : "");
-
 /**
- * 共享原子全集 —— **从正本 CSS 现读**，不手工维护。
+ * 版面依赖视口宽度 ⇒ error 级（真会坏页面：窄窗口/大屏下版面不一样，窄到一定程度直接撑爆画布）
  *
- * 正本：`workspace/shared/styles/{common,layout,atoms}.css`。以前这里是手工抄的一份清单， 结果 `atoms.css` 新增
- * `.data-table`/`.split-wide`/`.ok`/`.step-list` 等 12 个原子后清单没跟上，
- * 子代理一用就被误报成"裸类名"、被迫绕开正本写私有值（真踩过）。现在直接扫 CSS 顶层选择器。
- *
- * @returns 三个正本样式文件里定义的共享原子类名
+ * @param sources 本课源码文本
+ * @returns 发现列表
  */
-const sharedAtomClasses = (): Set<string> => {
-  const atoms = new Set<string>();
-  // 顶层选择器：行首 `.name`（`.a,` / `.a {` / `.a:hover {` 都算），复合选择器里的不算
-  const TOP_LEVEL = /^\.(?<name>[a-z][a-z0-9-]*)\s*(?:[,{]|$)/mu;
-
-  for (const file of ["common.css", "layout.css", "atoms.css"]) {
-    for (const line of readFileSync(path.join(SHARED_STYLES_DIR, file), "utf8").split("\n")) {
-      const name = TOP_LEVEL.exec(line)?.groups?.name;
-
-      if (name) atoms.add(name);
-    }
-  }
-
-  return atoms;
-};
-
-const SHARED_ATOMS = sharedAtomClasses();
-
-/** UnoCSS 工具类前缀（它们不是"自造原子"，排除掉） */
-const UTILITY_PREFIXES = new Set([
-  "m",
-  "p",
-  "mt",
-  "mb",
-  "ml",
-  "mr",
-  "mx",
-  "my",
-  "pt",
-  "pb",
-  "pl",
-  "pr",
-  "px",
-  "py",
-  "gap",
-  "gap-x",
-  "gap-y",
-  "space",
-  "grid",
-  "col",
-  "row",
-  "flex",
-  "basis",
-  "order",
-  "text",
-  "font",
-  "leading",
-  "tracking",
-  "whitespace",
-  "break",
-  "uppercase",
-  "italic",
-  "w",
-  "h",
-  "min-w",
-  "max-w",
-  "min-h",
-  "max-h",
-  "size",
-  "bg",
-  "border",
-  "rounded",
-  "shadow",
-  "opacity",
-  "outline",
-  "ring",
-  "divide",
-  "items",
-  "justify",
-  "place",
-  "self",
-  "content",
-  "z",
-  "top",
-  "left",
-  "right",
-  "bottom",
-  "inset",
-  "absolute",
-  "relative",
-  "fixed",
-  "sticky",
-  "overflow",
-  "pointer",
-  "select",
-  "cursor",
-  "hidden",
-  "block",
-  "inline",
-  "contents",
-  "transition",
-  "duration",
-  "ease",
-  "delay",
-  "transform",
-  "translate",
-  "scale",
-  "rotate",
-  "sr",
-  "not-sr",
-  "visually",
-]);
-
-/** 只有这些变量允许在本课 `:root` 里覆盖（layout.css / atoms.css 声明的唯一出口） */
-const ALLOWED_ROOT_OVERRIDES = new Set([
-  "--page-gap",
-  "--stack-gap",
-  /* 气泡密度：内容多的页调小、内容少的页调大，按页按课自己定 */
-  "--hint-pad-y",
-  "--hint-pad-x",
-  "--hint-icon-size",
-  "--def-pad-y",
-  "--def-pad-x",
-]);
-
-/** 共享选择器：本课 style.css 不得重写（style-guide §8）。标签给人看，正则给机器用 */
-const PROTECTED_SELECTORS: [label: string, pattern: RegExp][] = [
-  [".slidev-layout（页面外壳）", /^\.slidev-layout\b/mu],
-  ["h1（页面大标题）", /^h1\s*\{/mu],
-  ["table / th / td（共享表格）", /^(?<tag>table|th|td)\s*\{/mu],
-  [".mini-title（小节标题）", /^\.mini-title\s*[,{]/mu],
-  [".ask（提问）", /^\.ask\s*[,{]/mu],
-  [".problem（习题题干）", /^\.problem\s*[,{]/mu],
-  [".key（结论竖线）", /^\.key\s*[,{]/mu],
-];
-
-const CLASS_ATTR = /(?<![:\w-])class="(?<classes>[^"]*)"/gu;
-const CLASS_DEF = /^\s*\.(?<name>[a-zA-Z][\w-]*)/mu;
-/** 与 `CLASS_DEF` 同源，但带 `g`（`matchAll` 要求）——全仓多处复用，避免每次 new RegExp */
-const CLASS_DEF_GLOBAL = new RegExp(CLASS_DEF.source, "gmu");
-const STYLE_BLOCK = /<style[^>]*>(?<block>[\s\S]*?)<\/style>/gu;
-const ICON = /<(?<icon>mdi-[a-z0-9-]+)/gu;
-/** 允许给图标放大的字号类：共享阶梯（带 `!important`）+ 图标专用 `.icon-*`（也带 `!important`） */
-/**
- * 与**视口尺寸**绑定的写法（幻灯片是固定 980×552 画布 + 整体缩放，版面一律不该依赖窗口大小）。
- *
- * - `vw`/`vh`/`vmin`/`dvh`… 这类视口单位；
- * - `@media (width …)` / `(orientation …)` 这类按窗口尺寸切换的媒体查询；
- * - JS 里的 `window.innerWidth` / `matchMedia("(width…")`。
- *
- * **不拦**用元素自身尺寸的写法（`ResizeObserver` 观察自己的容器、`%`、`1fr`、`cqw` 容器查询单位）——
- * 那些跟着画布走，与窗口无关；也不拦 `prefers-reduced-motion` / `prefers-color-scheme`（那不是视口）。
- */
-const VIEWPORT_UNIT = /(?<![\w-])(?:\d+(?:\.\d+)?|\.\d+)(?:vw|vh|vmin|vmax|dvw|dvh|lvh|svh|vi|vb)(?![\w-])/giu;
-const VIEWPORT_MEDIA = /@media[^{]*\((?:[^)]*\b(?:width|height|orientation|aspect-ratio)\b[^)]*)\)/giu;
-const VIEWPORT_JS = /\b(?:window\.)?inner(?:Width|Height)\b|\bmatchMedia\(\s*["'][^"']*(?:width|height|orientation)/giu;
-
-/** 去掉注释再扫（注释里提到 `36vh` 不该被算命中） */
-const stripComments = (source: string): string =>
-  source
-    .replace(/\/\*[\s\S]*?\*\//gu, "")
-    .replace(/<!--[\s\S]*?-->/gu, "")
-    .replace(/(^|[^:'"])\/\/[^\n]*/gu, "$1");
-
-/** 版面依赖视口宽度 ⇒ error 级（真会坏页面：窄窗口/大屏下版面不一样，窄到一定程度直接撑爆画布） */
 const checkViewportBoundStyles = (sources: string): Finding[] => {
   const code = stripComments(sources);
   const findings: Finding[] = [];
 
   const units = [...new Set([...code.matchAll(VIEWPORT_UNIT)].map((match) => match[0]))];
-  const medias = [...new Set([...code.matchAll(VIEWPORT_MEDIA)].map((match) => match[0].replace(/\s+/gu, " ")))];
+  const medias = [
+    ...new Set(
+      [...code.matchAll(VIEWPORT_MEDIA)].map((match) => match[0].replaceAll(/\s+/gu, " ")),
+    ),
+  ];
   const scripts = [...new Set([...code.matchAll(VIEWPORT_JS)].map((match) => match[0]))];
 
-  if (units.length > 0)
+  if (units.length > 0) {
     findings.push({
       level: "error",
       message:
@@ -207,38 +64,28 @@ const checkViewportBoundStyles = (sources: string): Finding[] => {
         `视口单位跟的是**浏览器窗口**而不是画布 ⇒ 换个窗口尺寸版面就变（窄窗口会把整页撑爆）。` +
         `请改成固定逻辑像素 / \`%\` / \`1fr\`（跟着画布走），见 \`slidev-layout.md\` §3.6`,
     });
+  }
 
-  if (medias.length > 0)
+  if (medias.length > 0) {
     findings.push({
       level: "error",
       message:
         `版面用了**按窗口尺寸切换的媒体查询** \`${medias.join("`、`")}\` —— 固定画布下这种"响应式"只会让版面依赖窗口，` +
         `窄窗口时排版一变就溢出画布（1.1 第 4 页真踩过：\`@media (width <= 768px)\` 把三栏堆成一列直接炸）。请直接删掉`,
     });
+  }
 
-  if (scripts.length > 0)
+  if (scripts.length > 0) {
     findings.push({
       level: "error",
       message:
         `组件里读了**窗口尺寸**（${scripts.join("、")}）—— 要跟着容器自适应就用 \`ResizeObserver\` 观察**自己所在的元素**，` +
         `不要读 \`window.innerWidth\` / \`matchMedia\`（窗口≠画布）`,
     });
+  }
 
   return findings;
 };
-
-const ICON_SIZE_OK = /^(?:(?<text>text-(?:[2-5]xl))|(?<icon>icon-(?:md|lg|xl|2xl)))$/u;
-/**
- * UnoCSS 的字号类不带 `!important`，压不过 `common.css` 给 svg 钉的 `font-size:16px` 基准 → 图标钉死 16px。
- * 只在"作者确实想把图标放大"（text-2xl 及以上）时报：行内小图标用 text-lg/xl 是有意为之、不算问题。
- */
-const UNOCSS_BIG_TEXT = /^text-(?<xl>[2-9]xl|\d{2,}xl)$/u;
-/** 只用来"找有没有"，别带 `g`（`test()` 配 `g` 会记住 lastIndex、隔次返回假） */
-const FONT_SIZE = /font-size\s*:\s*(?<size>[^;}{]+);/gu;
-const BORDER_RADIUS = /border-radius\s*:\s*(?<radius>[^;}{]+);/gu;
-/** 剥掉 `var(--…)` 再判断"是否写死了值" */
-const CSS_VALUE = /var\((?<var>[^)]*)\)/gu;
-const ROOT_VAR = /^\s*(?<var>--[\w-]+)\s*:/mu;
 
 interface Finding {
   level: "error" | "warn" | "info";
