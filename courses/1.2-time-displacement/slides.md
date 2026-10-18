@@ -46,15 +46,16 @@ layout: base-flex
 </div>
 ---
 layout: base-flex
+title: 时刻与时间间隔
 ---
 
-# 时刻与时间间隔
+<div class="page-grow page-around" style="--def-pad-y:.85rem;--hint-pad-y:.6rem">
 
-<div class="key key-blue mt-4 text-xl">上午 7 时 40 分上课，8 时 20 分下课</div>
+<div class="info-hint">上午第一节课 7 时 40 分上课，8 时 20 分下课。</div>
 
 <v-click>
 
-<div class="ask ask-row mt-7">
+<div class="ask ask-row">
   <mdi-head-question-outline class="text-xl" />
   <span>"7 时 40 分""8 时 20 分"和"40 min"有什么不同？</span>
 </div>
@@ -63,7 +64,7 @@ layout: base-flex
 
 <v-clicks>
 
-<div class="def-row mt-5">
+<div class="def-row">
 
 <DefinitionBox term="时刻" tone="blue">
 
@@ -79,9 +80,11 @@ layout: base-flex
 
 </div>
 
-<div class="mt-4 text-base">平时说的"时间"，有时指<span class="text-accent-2">时刻</span>，有时指<span class="text-accent">时间间隔</span>，要依上下文判断</div>
+<div class="text-base">日常生活中所提及的时间，有时指<span class="text-accent-2">时刻</span>，有时指<span class="text-accent">时间间隔</span>，要依上下文判断。</div>
 
 </v-clicks>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -95,48 +98,48 @@ layout: base-flex
 
 # 第几秒内 · 前几秒
 
-<div class="ask ask-row mt-3">
+<div class="ask ask-row mt-1">
   <mdi-head-question-outline class="text-xl" />
   <span>"第 1 秒内""前 2 秒"——在时间轴上各是哪一段？</span>
 </div>
 
-<div class="mt-3" v-click="1">
+<div class="mt-2" v-click="1">
   <TimeWordsAxis mode="segments" />
 </div>
 
 <v-clicks>
 
-<div class="mt-2 text-base leading-relaxed"><span class="text-accent font-semibold">第 <Latex tex="1\ \text{s}" /> 内、第 <Latex tex="2\ \text{s}" /> 内</span>：一段挨一段的时间间隔——在时间轴上是<span class="text-accent-2">线段</span></div>
+<div class="mt-1 text-base leading-relaxed"><span class="text-accent font-semibold">第 <Latex tex="1\ \text{s}" /> 内、第 <Latex tex="2\ \text{s}" /> 内</span>：一段挨一段的时间间隔——在时间轴上是<span class="text-accent-2">线段</span></div>
 
-<div class="mt-2 text-base leading-relaxed"><span class="text-accent-2 font-semibold">前 <Latex tex="1\ \text{s}" />、前 <Latex tex="2\ \text{s}" /></span>：从计时开始起算的一整段——也是<span class="text-accent-2">线段</span></div>
+<div class="mt-1 text-base leading-relaxed"><span class="text-accent-2 font-semibold">前 <Latex tex="1\ \text{s}" />、前 <Latex tex="2\ \text{s}" /></span>：从计时开始起算的一整段——也是<span class="text-accent-2">线段</span></div>
 
 </v-clicks>
 
-<div class="key mt-3" v-click="4">"第几秒内""前几秒"都是<span class="text-accent">时间间隔</span>：其中<span class="text-accent">第 <Latex tex="1\ \text{s}" /> 内 ＝ 前 <Latex tex="1\ \text{s}" /></span>，在时间轴上就是同一段</div>
+<div class="tip-hint mt-2" style="--hint-pad-y:.55rem" v-click="4">"第几秒内""前几秒"都是<span class="text-accent">时间间隔</span>：其中<span class="text-accent">第 <Latex tex="1\ \text{s}" /> 内 ＝ 前 <Latex tex="1\ \text{s}" /></span>，在时间轴上就是同一段。</div>
 ---
 layout: base-flex
 ---
 
 # 第几秒初 · 第几秒末
 
-<div class="ask ask-row mt-3">
+<div class="ask ask-row mt-2">
   <mdi-head-question-outline class="text-xl" />
   <span>"第 2 秒初""第 2 秒末"——它们还是时间间隔吗？</span>
 </div>
 
-<div class="mt-3" v-click="1">
+<div class="mt-2" v-click="1">
   <TimeWordsAxis mode="moments" />
 </div>
 
 <v-clicks>
 
-<div class="mt-2 text-base leading-relaxed">第 <Latex tex="1\ \text{s}" /> 初＝<Latex tex="t=0" />；第 <Latex tex="1\ \text{s}" /> 末、第 <Latex tex="2\ \text{s}" /> 末在 <Latex tex="t=1\ \text{s}" />、<Latex tex="t=2\ \text{s}" /> 处——都是<span class="text-accent-2">时刻</span>（点）</div>
+<div class="mt-1 text-base leading-relaxed">第 <Latex tex="1\ \text{s}" /> 初＝<Latex tex="t=0" />；第 <Latex tex="1\ \text{s}" /> 末、第 <Latex tex="2\ \text{s}" /> 末在 <Latex tex="t=1\ \text{s}" />、<Latex tex="t=2\ \text{s}" /> 处——都是<span class="text-accent-2">时刻</span>（点）</div>
 
-<div class="mt-2 text-base leading-relaxed">第 <Latex tex="1\ \text{s}" /> 末 ＝ 第 <Latex tex="2\ \text{s}" /> 初、第 <Latex tex="2\ \text{s}" /> 末 ＝ 第 <Latex tex="3\ \text{s}" /> 初——<span class="text-accent">同一个时刻，两种叫法</span></div>
+<div class="mt-1 text-base leading-relaxed">第 <Latex tex="1\ \text{s}" /> 末 ＝ 第 <Latex tex="2\ \text{s}" /> 初、第 <Latex tex="2\ \text{s}" /> 末 ＝ 第 <Latex tex="3\ \text{s}" /> 初——<span class="text-accent">同一个时刻，两种叫法</span></div>
 
 </v-clicks>
 
-<div class="key mt-3" v-click="4">"第几秒初/末"是<span class="text-accent">时刻</span>（时间轴上的点）；"第几秒内/前几秒"是<span class="text-accent-2">时间间隔</span>（线段）</div>
+<div class="tip-hint mt-2" style="--hint-pad-y:.55rem" v-click="4">"第几秒初/末"是<span class="text-accent">时刻</span>（时间轴上的点）；"第几秒内/前几秒"是<span class="text-accent-2">时间间隔</span>（线段）。</div>
 ---
 layout: base-flex
 ---
@@ -221,12 +224,14 @@ title: 位置的变化：选哪条路？
 
 <div v-click="4" class="mt-3 text-base leading-relaxed"><span class="font-semibold text-accent-2">路程</span>：物体运动<span class="text-accent">轨迹的长度</span>，只有大小、没有方向（<span class="text-accent-2">标量</span>），<span class="text-accent-2">不能准确描述位置的变化</span>。</div>
 
-<div v-click="5" class="key mt-3">不管骑哪条路线，位置的变化都可以用一条<span class="text-accent">由初位置指向末位置的有向线段</span>表示</div>
+<div v-click="5" class="tip-hint mt-3">不管骑哪条路线，位置的变化都可以用一条<span class="text-accent">由初位置指向末位置的有向线段</span>表示。</div>
 ---
 layout: base-flex
 ---
 
 # 位移的定义
+
+<div class="page-grow page-around">
 
 <v-click>
 
@@ -258,9 +263,11 @@ layout: base-flex
 
 <v-click>
 
-<div class="key mt-7 mx-auto max-w-4xl">位移只与<span class="text-accent">初、末位置</span>有关，不因路径不同而改变；<span class="text-accent-2">路程</span>却随路径而变</div>
+<div class="tip-hint mt-7 mx-auto max-w-4xl">位移只与<span class="text-accent">初、末位置</span>有关，不因路径不同而改变；<span class="text-accent-2">路程</span>却随路径而变。</div>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -270,10 +277,10 @@ layout: base-flex
 <DisplacementLine />
 ---
 layout: base-flex
-class: title-ask
+title: 思考与讨论
 ---
 
-# 思考与讨论
+<div class="page-grow page-around">
 
 <div class="mt-4 text-lg">某物体从 <Latex tex="A" /> 点运动到 <Latex tex="B" /> 点，坐标 <Latex tex="x_A = 5 \text{ m}" />，<Latex tex="x_B = 2 \text{ m}" /></div>
 
@@ -291,14 +298,18 @@ class: title-ask
 
 <v-click>
 
-<div class="key mt-7">若两坐标之差为<span class="text-accent">正</span>，位移指向 <Latex tex="x" /> 轴正方向；为<span class="text-accent-2">负</span>，则指向 <Latex tex="x" /> 轴负方向</div>
+<div class="tip-hint mt-7">若两坐标之差为<span class="text-accent">正</span>，位移指向 <Latex tex="x" /> 轴正方向；为<span class="text-accent-2">负</span>，则指向 <Latex tex="x" /> 轴负方向。</div>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
 ---
 
 # 再看两条位移
+
+<div class="page-grow page-around">
 
 <div class="ask ask-row mt-4">
   <mdi-head-question-outline class="text-xl" />
@@ -327,7 +338,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key mt-6 mx-auto max-w-4xl">
+<div class="tip-hint mt-6 mx-auto max-w-4xl">
   两次位移都是 <Latex tex="+2\ \text{m}" />：<span class="text-accent font-semibold">方向相同、大小相同</span>——位移相等，与起点、终点在哪无关。
   <v-click>
     <div class="mt-1">位移是<span class="text-accent-2">矢量</span>：只要两条位移<span class="text-accent">平行、等长、同向</span>，它们就<span class="text-accent">相等</span>。</div>
@@ -335,6 +346,8 @@ layout: base-flex
 </div>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -353,7 +366,7 @@ layout: base-flex
   <span class="tag">纵轴：位置 <Latex tex="x" /></span>
 </div>
 
-<div class="key mt-6 mx-auto max-w-3xl text-center" v-click>横轴取 <Latex tex="t" />、纵轴取 <Latex tex="x" />——图线就把"位置随时间的变化"画出来了</div>
+<div class="tip-hint mt-6 mx-auto max-w-3xl text-center" v-click>横轴取 <Latex tex="t" />、纵轴取 <Latex tex="x" />——图线就把"位置随时间的变化"画出来了。</div>
 ---
 layout: base-flex
 ---
@@ -444,7 +457,7 @@ labels:
 
 </div>
 
-<div v-click="6" class="key mt-3"><Latex tex="x\text{-}t" /> 图像只记录位置随时间的变化，<span class="text-accent">不是物体运动的轨迹</span>——甲、乙都沿 <Latex tex="x" /> 轴运动</div>
+<div v-click="6" class="warn-hint" style="--hint-pad-y:.55rem"><Latex tex="x\text{-}t" /> 图像只记录位置随时间的变化，<span class="text-accent">不是物体运动的轨迹</span>——甲、乙都沿 <Latex tex="x" /> 轴运动。</div>
 
 ---
 layout: base-flex
@@ -478,9 +491,9 @@ layout: base-flex
 
 # 两种打点计时器
 
-<div class="mt-5 text-lg">打点计时器有两种：<span class="text-accent font-semibold">电磁打点计时器</span>与<span class="text-accent-2 font-semibold">电火花计时器</span>——它们的区别，是考试常考点</div>
+<div class="mt-3 text-lg">打点计时器有两种：<span class="text-accent font-semibold">电磁打点计时器</span>与<span class="text-accent-2 font-semibold">电火花计时器</span>——它们的区别，是考试常考点</div>
 
-<div class="mt-4">
+<div class="mt-2">
 
 <table class="data-table">
   <thead>
@@ -511,9 +524,9 @@ layout: base-flex
 
 </div>
 
-<div class="mt-3 text-base" v-click="1">计时原理相同：电源频率 <Latex tex="50\ \text{Hz}" /> 时，每隔 <Latex tex="0.02\ \text{s}" /> 打一个点</div>
+<div class="mt-2 text-base" v-click="1">计时原理相同：电源频率 <Latex tex="50\ \text{Hz}" /> 时，每隔 <Latex tex="0.02\ \text{s}" /> 打一个点</div>
 
-<div class="key mt-3" v-click="2">电磁式的<span class="text-accent">振针压在纸带上</span>，阻力较大；电火花式的<span class="text-accent-2">放电针不接触纸带</span>，阻力较小——电火花计时器测出的结果误差更小</div>
+<div class="tip-hint mt-2" style="--hint-pad-y:.6rem" v-click="2">电磁式的<span class="text-accent">振针压在纸带上</span>，阻力较大；电火花式的<span class="text-accent-2">放电针不接触纸带</span>，阻力较小——电火花计时器测出的结果误差更小。</div>
 ---
 layout: base-flex
 ---
@@ -587,7 +600,7 @@ labels:
 
 </div>
 
-<div v-click="5" class="key mt-2">纸带同时记录了<span class="text-accent">时间和位置</span>——描出每个点的 <Latex tex="(t,\ x)" />，就是 <span class="text-accent-2"><Latex tex="x\text{-}t" /> 图像</span>；相邻两点的距离 = 这段时间内的位移大小</div>
+<div v-click="5" class="tip-hint mt-2">纸带同时记录了<span class="text-accent">时间和位置</span>——描出每个点的 <Latex tex="(t,\ x)" />，就是 <span class="text-accent-2"><Latex tex="x\text{-}t" /> 图像</span>；相邻两点的距离 = 这段时间内的位移大小。</div>
 ---
 layout: base-flex
 ---
@@ -611,7 +624,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="3" class="key mt-5">量纸带上的位置，一律<span class="text-accent-2">从起点（第一个点）量起</span>：一次量到要读的那个点，读出的就是它到起点的距离——<span class="text-accent">误差范围一定，不会累积</span></div>
+<div v-click="3" class="important-hint mt-5">量纸带上的位置，一律<span class="text-accent-2">从起点（第一个点）量起</span>：一次量到要读的那个点，读出的就是它到起点的距离——<span class="text-accent">误差范围一定，不会累积</span>。</div>
 ---
 layout: base-flex
 ---

@@ -85,21 +85,6 @@
   letter-spacing: 0.06em;
 }
 
-/* ── 卷面红线（p16）：警示语义色 + 红色竖线（只给这条弱提示，不套主体内容）── */
-.ua-warn-title {
-  color: var(--c-danger);
-}
-
-.ua-warn-title > svg {
-  color: var(--c-danger);
-}
-
-.ua-warn-text {
-  padding-left: 1rem;
-  border-left: 3px solid var(--c-danger);
-  line-height: 1.65;
-}
-
 /* ── 公式总览（p15）：三栏，每栏一个公式 + "不含谁" ── */
 .ua-formula {
   padding-top: 0.5rem;

@@ -139,8 +139,17 @@ const UTILITY_PREFIXES = new Set([
   "visually",
 ]);
 
-/** 只有这些变量允许在本课 `:root` 里覆盖（layout.css 声明的唯一出口） */
-const ALLOWED_ROOT_OVERRIDES = new Set(["--page-gap", "--stack-gap"]);
+/** 只有这些变量允许在本课 `:root` 里覆盖（layout.css / atoms.css 声明的唯一出口） */
+const ALLOWED_ROOT_OVERRIDES = new Set([
+  "--page-gap",
+  "--stack-gap",
+  /* 气泡密度：内容多的页调小、内容少的页调大，按页按课自己定 */
+  "--hint-pad-y",
+  "--hint-pad-x",
+  "--hint-icon-size",
+  "--def-pad-y",
+  "--def-pad-x",
+]);
 
 /** 共享选择器：本课 style.css 不得重写（style-guide §8）。标签给人看，正则给机器用 */
 const PROTECTED_SELECTORS: [label: string, pattern: RegExp][] = [

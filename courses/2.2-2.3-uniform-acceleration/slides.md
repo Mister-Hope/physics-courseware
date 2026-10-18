@@ -27,18 +27,17 @@ chapter: 第二章 匀变速直线运动的研究
 ---
 layout: base-flex
 clicks: 3
+title: '回顾：上节课的 v-t 图线'
 ---
 
 <div class="page-grow">
-<div class="tag-icon"><mdi-flask-outline /> 回顾 · 上节课的实验</div>
-
 <div class="ask">上节课量出的 <Latex tex="v" />-<Latex tex="t" /> 图线是一条倾斜的直线：无论 <Latex tex="\Delta t" /> 取在哪一段，<Latex tex="\frac{\Delta v}{\Delta t}" /> 都一样。这说明小车在做什么运动？</div>
 
 <div class="half-grid">
 <div class="stack">
 <div v-click="2"><b class="text-accent">斜率处处相同 → 加速度保持不变</b>，小车在做匀加速直线运动。</div>
 
-<div v-click="3" class="key">实验只回答了"这一辆小车"。把结论推给<b>一般</b>的匀变速运动：<Latex tex="a" />、<Latex tex="v" />、<Latex tex="x" /> 与 <Latex tex="t" /> 之间的定量关系是什么？<b class="text-accent-2">这就是本课的主线。</b></div>
+<div v-click="3" class="tip-hint">实验只回答了"这一辆小车"。把结论推给<b>一般</b>的匀变速运动：<Latex tex="a" />、<Latex tex="v" />、<Latex tex="x" /> 与 <Latex tex="t" /> 之间的定量关系是什么？</div>
 </div>
 
 <div v-click="1" class="divider-l figure">
@@ -101,9 +100,8 @@ labels:
 ---
 layout: base-flex
 clicks: 5
+title: '什么样的运动才是直线运动？'
 ---
-
-# 什么样的运动才是直线运动？
 
 <div class="page-grow">
 <div class="ask">物体做直线运动，<Latex tex="a" /> 与 <Latex tex="v" /> 之间必须满足什么条件？</div>
@@ -115,7 +113,7 @@ clicks: 5
 
 <div v-click="3">同理，速度的变化量 <Latex tex="\Delta v" /> 也沿这条直线；由 <Latex tex="a = \frac{\Delta v}{\Delta t}" />，加速度 <Latex tex="a" /> 也时刻沿这条直线。</div>
 
-<div v-click="4" class="key"><Latex tex="a" /> 与 <Latex tex="v" /> <b>共线</b>，是物体做直线运动的首要条件。</div>
+<div v-click="4" class="tip-hint"><Latex tex="a" /> 与 <Latex tex="v" /> <b>共线</b>，是物体做直线运动的首要条件。</div>
 
 <div v-click="5">反过来：<Latex tex="a" /> 与 <Latex tex="v" /> 不共线，速度的方向就会不断改变——那是<b>曲线运动</b>。</div>
 </div>
@@ -139,7 +137,7 @@ clicks: 4
 
 # 三条判据
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="ask">不看图像，能不能一眼判断"直线还是曲线""是不是匀变速""在加速还是减速"？</div>
 
 <div class="three-col">
@@ -162,7 +160,7 @@ clicks: 4
 </div>
 </div>
 
-<div v-click="4" class="key">"匀变速"三个字，判的就是 <Latex tex="a" /> <b>恒定</b>：加速度不变，速度才"均匀"地变。</div>
+<div v-click="4" class="tip-hint">"匀变速"三个字，判的就是 <Latex tex="a" /> <b>恒定</b>：加速度不变，速度才"均匀"地变。</div>
 </div>
 
 ---
@@ -215,7 +213,7 @@ layout: base-flex
 clicks: 2
 ---
 
-# 位移藏在面积里
+# 位移与 v-t 图线下的面积
 
 <div class="page-grow">
 <div class="ask">匀速运动的位移，初中就会算 <Latex tex="x = vt" />。可再看这幅 <Latex tex="v" />-<Latex tex="t" /> 图——图线下方那块矩形，面积是多少？</div>
@@ -228,7 +226,7 @@ clicks: 2
 <div class="stack">
 <div v-click="1">矩形的长是时间 <Latex tex="t" />、宽是速度 <Latex tex="v" />，所以面积 <Latex tex="S = v \cdot t" />。</div>
 
-<div v-click="2" class="key">而 <Latex tex="v \cdot t" /> 恰好就是匀速运动的位移：<b class="text-accent">面积 = 位移</b>。位移"藏"在图线与 <Latex tex="t" /> 轴围成的面积里。</div>
+<div v-click="2" class="tip-hint">而 <Latex tex="v \cdot t" /> 恰好就是匀速运动的位移：<b class="text-accent">面积 = 位移</b>。位移"藏"在图线与 <Latex tex="t" /> 轴围成的面积里。</div>
 </div>
 </div>
 </div>
@@ -236,16 +234,15 @@ clicks: 2
 ---
 layout: base-flex
 clicks: 4
+title: '梯形的面积，凭什么也是位移？'
 ---
-
-# 梯形的面积，凭什么也是位移？
 
 <div class="page-grow page-grow-tight">
 <div class="ask">匀速的矩形好办。可匀变速的图线是斜的，图下是一个梯形——凭什么说"面积还是位移"？</div>
 
 <VtAreaRiemann />
 
-<div v-click="4" class="key">把运动分成很多很多小段，每段都当成匀速：<b>小矩形越窄，面积之和越接近位移</b>；分割得非常非常细时，小矩形合起来就是一个梯形，它的面积就是位移。</div>
+<div v-click="4" class="tip-hint">把运动分成很多很多小段，每段都当成匀速：<b>小矩形越窄，面积之和越接近位移</b>；分割得非常非常细时，小矩形合起来就是一个梯形，它的面积就是位移。</div>
 </div>
 
 ---
@@ -260,22 +257,21 @@ clicks: 4
 
 <VtAreaSplit mode="accel" />
 
-<div v-click="4" class="key">两部分相加，就是匀变速直线运动的<b>位移与时间的关系式</b>。</div>
+<div v-click="4" class="tip-hint">两部分相加，就是匀变速直线运动的<b>位移与时间的关系式</b>。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
+title: '减速了，公式还灵吗？'
 ---
-
-# 减速了，公式还灵吗？
 
 <div class="page-grow">
 <div class="ask">刹车时 <Latex tex="a < 0" />，图线向下斜。<Latex tex="x = v_0t + \frac{1}{2}at^2" /> 还能用吗？</div>
 
 <VtAreaSplit mode="decel" />
 
-<div v-click="3" class="key">能用：<b>把 <Latex tex="a" /> 取负值代进去</b>就行。图上就是把外接矩形减去上方缺掉的那个三角形。</div>
+<div v-click="3" class="info-hint">能用：<b>把 <Latex tex="a" /> 取负值代进去</b>就行。图上就是把外接矩形减去上方缺掉的那个三角形。</div>
 </div>
 
 ---
@@ -290,15 +286,14 @@ clicks: 3
 
 <VtAreaSplit mode="reverse" />
 
-<div v-click="3" class="key">用完整矩形 <Latex tex="v_0t" /> <b>减去</b>大三角形 <Latex tex="\frac{1}{2}at^2" />：轴上方那块把上半梯形<b>剪掉</b>，轴下方那块还要<b>倒扣</b>——这就是"上加下减"。</div>
+<div v-click="3" class="tip-hint">用完整矩形 <Latex tex="v_0t" /> <b>减去</b>大三角形 <Latex tex="\frac{1}{2}at^2" />：轴上方那块把上半梯形<b>剪掉</b>，轴下方那块还要<b>倒扣</b>——这就是"上加下减"。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 4
+title: '速度随时间怎么变？'
 ---
-
-# 速度随时间怎么变？
 
 <div class="page-grow">
 <div class="ask">已知初速度 <Latex tex="v_0" /> 和加速度 <Latex tex="a" />，<Latex tex="t" /> 秒后的速度 <Latex tex="v" /> 是多大？</div>
@@ -310,7 +305,7 @@ clicks: 4
 
 <div v-click="3">代入定义式：<Latex tex="a = \frac{v - v_0}{t}" />，整理得 <Latex tex="v = v_0 + at" /></div>
 
-<div v-click="4" class="key">这就是匀变速直线运动的<b>速度与时间的关系式</b>。<Latex tex="at" /> 就是 <Latex tex="t" /> 时间内速度的变化量，再加上初速度，就得到 <Latex tex="t" /> 时刻的速度。</div>
+<div v-click="4" class="tip-hint">这就是匀变速直线运动的<b>速度与时间的关系式</b>。<Latex tex="at" /> 就是 <Latex tex="t" /> 时间内速度的变化量，再加上初速度，就得到 <Latex tex="t" /> 时刻的速度。</div>
 </div>
 </div>
 
@@ -384,7 +379,7 @@ labels:
 
 <div v-click="2">它同时也等于 <Latex tex="v - \frac{1}{2}at" />；两式相加除以 2，正好是首末速度的平均值 <Latex tex="\frac{v_0 + v}{2}" /></div>
 
-<div v-click="3" class="key"><Latex tex="v_{\frac{t}{2}} = \frac{v_0 + v}{2} = \bar{v}" />——在图上，它就是梯形的<b>中位线</b>。</div>
+<div v-click="3" class="tip-hint"><Latex tex="v_{\frac{t}{2}} = \frac{v_0 + v}{2} = \bar{v}" />——在图上，它就是梯形的<b>中位线</b>。</div>
 </div>
 </div>
 </div>
@@ -392,6 +387,7 @@ labels:
 ---
 layout: base-flex
 clicks: 5
+title: '速度、加速度与位移的关系'
 ---
 
 <div class="ua-title-swap">
@@ -409,7 +405,7 @@ clicks: 5
 
 <div v-click="3">整理得 <Latex tex="v^2 - v_0^2 = 2ax" /></div>
 
-<div v-click="4" class="key">这就是<b>速度与位移的关系式</b>。已知量和未知量都不涉及时间时，用它往往最简便。</div>
+<div v-click="4" class="tip-hint">这就是<b>速度与位移的关系式</b>。已知量和未知量都不涉及时间时，用它往往最简便。</div>
 </div>
 </div>
 
@@ -420,7 +416,7 @@ clicks: 3
 
 # 公式总结
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="ask">三个公式长得像，怎么记才不混？——先看每个公式"不含谁"。</div>
 
 <div class="three-col">
@@ -448,9 +444,8 @@ clicks: 3
 ---
 layout: base-flex
 clicks: 6
+title: '卷面上到底写什么？'
 ---
-
-# 卷面上到底写什么？
 
 <div class="page-grow">
 <div class="ask">同一道题，为什么有的卷面能拿满分，有的要扣分？</div>
@@ -469,11 +464,11 @@ clicks: 6
 </div>
 
 <div class="divider-l stack">
-<div class="mini-title ua-warn-title"><mdi-alert-circle-outline /> 卷面红线</div>
+<div class="mini-title"><mdi-alert-circle-outline /> 卷面红线</div>
 
-<div v-click="5" class="ua-warn-text">通分、竖式、试算……这些算术过程<b>一律写在草稿纸上</b>。卷面只留字母公式与代入结果。</div>
+<div v-click="5" class="danger-hint">通分、竖式、试算……这些算术过程<b>一律写在草稿纸上</b>。卷面只留字母公式与代入结果。</div>
 
-<div v-click="6" class="key key-blue">减速问题<b>先建一维坐标系</b>：与正方向一致的量取正号，相反的取负号。</div>
+<div v-click="6" class="warn-hint">减速问题<b>先建一维坐标系</b>：与正方向一致的量取正号，相反的取负号。</div>
 </div>
 </div>
 </div>
@@ -481,12 +476,11 @@ clicks: 6
 ---
 layout: base-flex
 clicks: 4
+title: '例题 1：加速后速度多大？'
 ---
 
-# 例题 1：加速后速度多大？
-
 <div class="page-grow page-grow-tight">
-<div>一辆汽车以 <Latex tex="36 \text{km/h}" /> 的速度在平直公路上匀速行驶。从某时刻起，它以 <Latex tex="0.6 \text{m/s}^2" /> 的加速度加速，<Latex tex="10 \text{s}" /> 末的速度是多少？</div>
+<div><b class="ex-no">例 1</b>　一辆汽车以 <Latex tex="36 \text{km/h}" /> 的速度在平直公路上匀速行驶。从某时刻起，它以 <Latex tex="0.6 \text{m/s}^2" /> 的加速度加速，<Latex tex="10 \text{s}" /> 末的速度是多少？</div>
 
 <div class="half-grid">
 <div class="stack stack-tight">
@@ -494,7 +488,7 @@ clicks: 4
 
 <div v-click="2">要求的是<b>这 10 s 结束时</b>的速度，用 <Latex tex="v = v_0 + at" />。</div>
 
-<div v-click="3" class="key">卷面上不写代入算式：交代物理量 → 写原始公式 → 直接给结果。</div>
+<div v-click="3" class="tip-hint">卷面上不写代入算式：交代物理量 → 写原始公式 → 直接给结果。</div>
 </div>
 
 <div v-click="4" class="divider-l ua-sheet">
@@ -514,12 +508,11 @@ clicks: 4
 ---
 layout: base-flex
 clicks: 5
+title: '例题 2'
 ---
 
-# 例题 2
-
 <div class="page-grow">
-<div>某舰载机起飞时，采用弹射装置使飞机获得 <Latex tex="10 \text{m/s}" /> 的速度后，由机上发动机使飞机获得 <Latex tex="25 \text{m/s}^2" /> 的加速度在航母跑道上匀加速前进，<Latex tex="2.4 \text{s}" /> 后离舰升空。飞机匀加速滑行的距离是多少？</div>
+<div><b class="ex-no">例 2</b>　某舰载机起飞时，采用弹射装置使飞机获得 <Latex tex="10 \text{m/s}" /> 的速度后，由机上发动机使飞机获得 <Latex tex="25 \text{m/s}^2" /> 的加速度在航母跑道上匀加速前进，<Latex tex="2.4 \text{s}" /> 后离舰升空。飞机匀加速滑行的距离是多少？</div>
 
 <div class="stack">
 <div v-click="1">给的是 <Latex tex="v_0" />、<Latex tex="a" />、<Latex tex="t" />，求的是位移 <Latex tex="x" />。已知量与未知量都涉及时间 → 用位移与时间的关系式。</div>
@@ -528,7 +521,7 @@ clicks: 5
 
 <div v-click="3"><Latex tex="x = 10 \text{m/s} \times 2.4 \text{s} + \frac{1}{2} \times 25 \text{m/s}^2 \times (2.4 \text{s})^2 = 96 \text{m}" /></div>
 
-<div v-click="4" class="key">飞机匀加速滑行的距离是 <Latex tex="96 \text{m}" />。注意 <Latex tex="(2.4 \text{s})^2" /> 要先平方，单位不能丢。</div>
+<div v-click="4" class="info-hint">飞机匀加速滑行的距离是 <Latex tex="96 \text{m}" />。注意 <Latex tex="(2.4 \text{s})^2" /> 要先平方，单位不能丢。</div>
 
 <div v-click="5" class="ask">想一想：如果反过来是<b>着舰</b>——以 <Latex tex="80 \text{m/s}" /> 着舰、<Latex tex="2.5 \text{s}" /> 停下，滑行距离是多少？</div>
 </div>
@@ -537,12 +530,11 @@ clicks: 5
 ---
 layout: base-flex
 clicks: 4
+title: '例题 3：不给时间'
 ---
 
-# 例题 3：不给时间
-
 <div class="page-grow">
-<div>动车铁轨旁两相邻里程碑之间的距离是 <Latex tex="1 \text{km}" />。当窗户经过某一里程碑时，屏幕显示的速度是 <Latex tex="126 \text{km/h}" />；动车又前进了 3 个里程碑时，速度变为 <Latex tex="54 \text{km/h}" />。把进站过程视为匀减速直线运动，动车进站的加速度是多少？</div>
+<div><b class="ex-no">例 3</b>　动车铁轨旁两相邻里程碑之间的距离是 <Latex tex="1 \text{km}" />。当窗户经过某一里程碑时，屏幕显示的速度是 <Latex tex="126 \text{km/h}" />；动车又前进了 3 个里程碑时，速度变为 <Latex tex="54 \text{km/h}" />。把进站过程视为匀减速直线运动，动车进站的加速度是多少？</div>
 
 <div class="stack">
 <div v-click="1" class="ask">全程没有给时间——该用哪个公式？</div>
@@ -551,7 +543,7 @@ clicks: 4
 
 <div v-click="3"><Latex tex="a = \frac{v^2 - v_0^2}{2x} = \frac{(15 \text{m/s})^2 - (35 \text{m/s})^2}{2 \times 3000 \text{m}} = -0.167 \text{m/s}^2" /></div>
 
-<div v-click="4" class="key">加速度大小为 <Latex tex="0.167 \text{m/s}^2" />，方向与运动方向<b>相反</b>——负号表示方向，不能丢。</div>
+<div v-click="4" class="info-hint">加速度大小为 <Latex tex="0.167 \text{m/s}^2" />，方向与运动方向<b>相反</b>——负号表示方向，不能丢。</div>
 </div>
 </div>
 
@@ -592,7 +584,6 @@ layout: course-cover
 chapter-no: "2.2 · 2.3"
 chapter: 第二章 匀变速直线运动的研究
 lesson: 第二课时
-subtitle: 习题课
 title: 匀变速直线运动的时间、速度、位移扩展
 ---
 
@@ -685,7 +676,7 @@ labels:
 
 <div v-click="3">作差：<Latex tex="v_{\frac{x}{2}}^2 - \bar{v}^2 = \frac{v_0^2 + v^2}{2} - \left(\frac{v_0 + v}{2}\right)^2 = \frac{(v - v_0)^2}{4} \ge 0" />。</div>
 
-<div v-click="4" class="key"><Latex tex="v_{\frac{x}{2}} > \bar{v} = v_{\frac{t}{2}}" />（匀速时取等号）——平方差 <Latex tex="\frac{(v - v_0)^2}{4}" /> 恒非负，<b>与加速还是减速无关</b>。</div>
+<div v-click="4" class="tip-hint"><Latex tex="v_{\frac{x}{2}} > \bar{v} = v_{\frac{t}{2}}" />（匀速时取等号）——平方差 <Latex tex="\frac{(v - v_0)^2}{4}" /> 恒非负，<b>与加速还是减速无关</b>。</div>
 </div>
 </div>
 </div>
@@ -744,6 +735,7 @@ clicks: 5
 ---
 layout: base-flex
 clicks: 2
+class: title-ask
 ---
 
 # $\Delta x = aT^2$ 对任意等时间间隔都成立吗？
@@ -757,7 +749,7 @@ clicks: 2
 
 <div>相减：<Latex tex="x_2 - x_1 = aT^2" />，与 <Latex tex="v_0" /> 无关。</div>
 
-<div class="key">只要时间间隔相等，<Latex tex="\Delta x = aT^2" /> 就一直成立——与初速度多大、从哪一段开始都无关。</div>
+<div class="tip-hint">只要时间间隔相等，<Latex tex="\Delta x = aT^2" /> 就一直成立——与初速度多大、从哪一段开始都无关。</div>
 </div>
 
 <div v-click="2" class="divider-l stack">
@@ -906,12 +898,11 @@ clicks: 4
 ---
 layout: base-flex
 clicks: 4
+title: '例题：只知道两段的位移和时间'
 ---
 
-# 例题：只知道两段的位移和时间
-
 <div class="page-grow">
-<div>已知物体做匀变速直线运动，在时间 <Latex tex="T_1" /> 内走了 <Latex tex="X_1" />，紧接着在时间 <Latex tex="T_2" /> 内又走了 <Latex tex="X_2" />。求加速度 <Latex tex="a" /> 的大小。</div>
+<div><b class="ex-no">例题</b>　已知物体做匀变速直线运动，在时间 <Latex tex="T_1" /> 内走了 <Latex tex="X_1" />，紧接着在时间 <Latex tex="T_2" /> 内又走了 <Latex tex="X_2" />。求加速度 <Latex tex="a" /> 的大小。</div>
 
 <div class="stack">
 <div v-click="1" class="mini-title"><mdi-lightbulb-on-outline /> 解法一：用平均速度</div>
@@ -920,16 +911,15 @@ clicks: 4
 
 <div v-click="3">两个中间时刻相隔 <Latex tex="\frac{T_1 + T_2}{2}" />：<Latex tex="a = \frac{X_2/T_2 - X_1/T_1}{(T_1 + T_2)/2}" />。</div>
 
-<div v-click="4" class="key">题目没说加速还是减速，<Latex tex="a" /> 的符号不确定——问的是「大小」，要取绝对值：<Latex tex="|a| = \frac{2\left|X_2/T_2 - X_1/T_1\right|}{T_1 + T_2}" />。</div>
+<div v-click="4" class="info-hint">题目没说加速还是减速，<Latex tex="a" /> 的符号不确定——问的是「大小」，要取绝对值：<Latex tex="|a| = \frac{2\left|X_2/T_2 - X_1/T_1\right|}{T_1 + T_2}" />。</div>
 </div>
 </div>
 
 ---
 layout: base-flex
 clicks: 4
+title: '例题：只知道两段的位移和时间'
 ---
-
-# 例题：只知道两段的位移和时间
 
 <div class="page-grow">
 <div class="stack">
@@ -939,7 +929,7 @@ clicks: 4
 
 <div v-click="3">两式消去 <Latex tex="v_0" />，解得 <Latex tex="a = \frac{2(X_2T_1 - X_1T_2)}{T_1T_2(T_1 + T_2)}" />（大小同样取绝对值）。</div>
 
-<div v-click="4" class="key">两种解法算出来完全一样：解法一只用两个平均速度作一次差；解法二要设 <Latex tex="v_0" /> 再消元——<b>解法一明显更省事</b>。</div>
+<div v-click="4" class="tip-hint">两种解法算出来完全一样：解法一只用两个平均速度作一次差；解法二要设 <Latex tex="v_0" /> 再消元——<b>解法一明显更省事</b>。</div>
 </div>
 </div>
 

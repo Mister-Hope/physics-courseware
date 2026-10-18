@@ -19,7 +19,7 @@ const aria = "地球沿椭圆轨道绕太阳公转的示意图：太阳在右侧
 </script>
 
 <template>
-  <svg viewBox="0 0 520 300" width="340" height="196" xmlns="http://www.w3.org/2000/svg" role="img" :aria-label="aria">
+  <svg viewBox="0 0 520 300" width="300" height="173" xmlns="http://www.w3.org/2000/svg" role="img" :aria-label="aria">
     <ellipse :cx="C.x" :cy="C.y" :rx="A" :ry="B" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="7 6" opacity="0.75" />
     <CelestialSun :x="SUN.x" :y="SUN.y" :r="18" label="太阳" :label-size="20" />
     <circle :cx="WINTER.x" :cy="WINTER.y" r="6" fill="#7dd3fc" />

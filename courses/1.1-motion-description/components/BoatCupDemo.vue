@@ -676,11 +676,13 @@ const reeds = computed(() => REED_BASES.map((x) => wrap(x + groundShift.value + 
 }
 
 /* 收窄变体（compact）：只收场景与时间轴、不收标题行——标题行给的是状态与开关，
-   整宽时不会折行；场景按 1000 : 276 的比例等比缩小，不会有左右留白托底。 */
+   整宽时不会折行；场景按 1000 : 276 的比例等比缩小，不会有左右留白托底。
+   宽度 35rem → 30rem：该变体只被第 16 页用，那一页下方还有两栏文字与结论气泡，
+   底部余量只剩 3px（全部展开、980×552 判据），收窄场景后回到 33px。 */
 .bcd-wrap.compact .bcd-svg,
 .bcd-wrap.compact .bcd-timeline {
   width: 100%;
-  max-width: 35rem;
+  max-width: 30rem;
   margin-inline: auto;
 }
 

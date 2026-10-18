@@ -35,5 +35,10 @@
 <style scoped>
 .cover-plot {
   width: 300px;
+  /* CoordAxes 的 svg 是 overflow: visible，横轴量标签会画到 viewBox 下沿之外；
+     封面装饰盒贴右下角（m-8），标签因此压到画布底边只剩 12px。
+     整体上抬 20px，把装饰的最下沿重新拉回余量 ≥20px（浮动动画只向上 -8px，不影响最坏值）。 */
+  position: relative;
+  top: -20px;
 }
 </style>

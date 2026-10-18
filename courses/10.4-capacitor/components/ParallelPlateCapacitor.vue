@@ -132,13 +132,11 @@ const visibleLowerCharges = computed(() =>
     <div
       class="cap-frame bg-slate-950 border p-3 rounded-2xl shadow-2xl flex flex-col gap-6 select-none relative overflow-hidden"
     >
-      <!-- Premium Tech Ambient Lights -->
-      <div
-        class="absolute -top-40 -left-40 w-80 h-80 cap-glow-blue rounded-full blur-[100px] pointer-events-none"
-      ></div>
-      <div
-        class="absolute -bottom-40 -right-40 w-80 h-80 cap-glow-amber rounded-full blur-[100px] pointer-events-none"
-      ></div>
+      <!-- Premium Tech Ambient Lights —— 光晕铺满整框：
+           原来是两块 -bottom-40 / -top-40 的圆形色块、靠框的 overflow-hidden 裁掉溢出部分，
+           被裁掉的部分虽然看不见，元素矩形仍然伸出框外（版面余量按元素矩形算 ⇒ 第 20 页被判溢出）。
+           改成 inset-0 的渐变层：视觉同样是左上蓝、右下暖金的柔光，但没有任何元素伸出框外。 -->
+      <div class="absolute inset-0 cap-glow pointer-events-none"></div>
 
       <!-- Upper Visual Interactive Section -->
       <div class="relative z-10">
@@ -562,13 +560,19 @@ svg text {
   color: var(--c-accent-light);
 }
 
-/* 环境光晕：原 blue / amber 调色板色的 5% 透明版 */
-.cap-glow-blue {
-  background: color-mix(in srgb, var(--c-accent-2) 5%, transparent);
-}
-
-.cap-glow-amber {
-  background: color-mix(in srgb, var(--c-accent-glow) 5%, transparent);
+/* 环境光晕：左上蓝、右下暖金两块柔光（原 blue / amber 5% 透明版；不越出框外） */
+.cap-glow {
+  background:
+    radial-gradient(
+      300px 300px at 0% 0%,
+      color-mix(in srgb, var(--c-accent-2) 7%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      300px 300px at 100% 100%,
+      color-mix(in srgb, var(--c-accent-glow) 7%, transparent),
+      transparent 72%
+    );
 }
 
 /* 滑杆主色：原 amber / blue 调色板色 */

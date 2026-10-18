@@ -28,7 +28,7 @@ lesson: 习题课
 clicks: 0
 ---
 
-# 相遇追击问题
+# 相遇追及问题
 
 <div class="page-grow">
 <div class="half-grid">
@@ -59,7 +59,7 @@ clicks: 4
 
 <div class="step-item" v-click="3"><b class="text-accent">③</b><span class="min-w-0 break-words">判别式 <Latex tex="\Delta = v_0^2 - 2(a_2 - a_1)d" /></span></div>
 
-<div class="key" v-click="4">判别式只看"有几个根"，还要看"根是不是正的"——只有 <Latex tex="t>0" /> 的根才真的追上过。</div>
+<div class="tip-hint" v-click="4">判别式只看"有几个根"，还要看"根是不是正的"——只有 <Latex tex="t>0" /> 的根才真的追上过。</div>
 </div>
 
 ---
@@ -77,14 +77,13 @@ clicks: 4
 
 <div class="step-item" v-click="3"><b class="text-accent">0 次</b><span class="min-w-0 break-words"><Latex tex="a_1 < a_2 - \dfrac{v_0^2}{2d}" />（<Latex tex="\Delta < 0" />，还没追上就被重新拉开）</span></div>
 
-<div class="key" v-click="4">分界线只有两条：相切线 <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d}" /> 与退化线 <Latex tex="a_1 = a_2" />。</div>
+<div class="tip-hint" v-click="4">分界线只有两条：相切线 <Latex tex="a_1 = a_2 - \dfrac{v_0^2}{2d}" /> 与退化线 <Latex tex="a_1 = a_2" />。</div>
 </div>
 
 ---
 clicks: 0
+title: '调甲的加速度，数交点'
 ---
-
-# 调甲的加速度，数交点
 
 <div class="page-grow">
 <MeetCountModel />
@@ -104,7 +103,7 @@ clicks: 0
 ---
 
 <div class="page-grow">
-<div class="ask">拖两个滑块：乙、丙各刹多狠，车距才能始终为正？</div>
+<div class="ask">乙、丙各刹多狠，车距才能始终为正？</div>
 
 <BrakeAvoidModel />
 </div>
@@ -113,20 +112,20 @@ clicks: 0
 clicks: 4
 ---
 
-# 刹车陷阱
+# 刹车的易错点
 
 <div class="page-grow">
 <div class="ask">套公式解出"两车相遇"的时刻，这个时刻一定有意义吗？</div>
 
 <div class="stack-tight">
-<div v-click="1"><mdi-alert-circle-outline class="text-xl bad-line inline-block align-middle mr-1" /><b class="bad-line">陷阱</b> 匀减速公式只在"还没停下"的这段时间成立；车停下后停在原地，不会反向加速。把解出的 <Latex tex="t" /> 代回去得到<b>负速度</b>，说明公式被用过了头。</div>
+<div v-click="1"><mdi-alert-circle-outline class="text-xl bad-line inline-block align-middle mr-1" /><b class="bad-line">易错点</b> 匀减速公式只在"还没停下"的这段时间成立；车停下后停在原地，不会反向加速。把解出的 <Latex tex="t" /> 代回去得到<b>负速度</b>，说明公式被用过了头。</div>
 
 <div v-click="2"><mdi-calculator-variant-outline class="text-xl text-accent inline-block align-middle mr-1" /><b class="text-accent">本题</b> 照"速度相等时恰好接触"算甲–乙的临界：<Latex tex="a_\text{乙} = 1 - \dfrac{1^2}{2 \times 5} = 0.9\ \text{m/s}^2" />，对应的接触时刻是 <Latex tex="t = \dfrac{\Delta v}{\Delta a} = \dfrac{1}{0.1} = 10.0\ \text{s}" />——可甲车 <Latex tex="9.0\ \text{s}" /> 就停了（代回去 <Latex tex="v_\text{甲} = -1.0\ \text{m/s}" />），这是个假解。</div>
 
 <div v-click="3"><mdi-check-decagram class="text-xl ok-line inline-block align-middle mr-1" /><b class="ok-line">正确做法</b> 先算每辆车的刹停时间 <Latex tex="t_\text{停} = v_0/a" />；解出的 <Latex tex="t > t_\text{停}" /> 就改用<b>停下来的位置</b>判断：甲停在 <Latex tex="x = \dfrac{9^2}{2 \times 1} = 40.5\ \text{m}" />，乙必须停在它后面 ⇒ <Latex tex="5 + \dfrac{8^2}{2a_\text{乙}} \ge 40.5" /> ⇒ <Latex tex="a_\text{乙} \le \dfrac{32}{35.5} \approx 0.901\ \text{m/s}^2" />（与 0.9 只差一点，但意义完全不同）。</div>
 </div>
 
-<div class="key" v-click="4">刹车问题的第一句话永远是：这段时间里，它停了吗？</div>
+<div class="important-hint" v-click="4">刹车问题的第一句话永远是：这段时间里，它停了吗？</div>
 </div>
 
 ---
@@ -144,14 +143,14 @@ clicks: 5
 
 <div class="step-item" v-click="4"><b class="text-accent">④</b><span class="min-w-0 break-words">最小值：最前的丙可以不制动（<Latex tex="a_\text{丙} = 0" />），此时乙最少 <Latex tex="0.4\ \text{m/s}^2" />；最大值（恰好不撞）：乙 <Latex tex="0.9" />、丙 <Latex tex="0.5\ \text{m/s}^2" />。</span></div>
 
-<div class="key" v-click="5">后车必须比前车<b>多刹</b> <Latex tex="\dfrac{(\Delta v)^2}{2d}" />——但多刹也有上限：<b>两头都是界线</b>。</div>
+<div class="tip-hint" v-click="5">后车必须比前车<b>多刹</b> <Latex tex="\dfrac{(\Delta v)^2}{2d}" />——但多刹也有上限：<b>两头都是界线</b>。</div>
 </div>
 
 ---
 clicks: 1
 ---
 
-# 四道题的精髓
+# 四道题的要点
 
 <div class="page-grow">
 <div class="stack-tight">
@@ -164,7 +163,7 @@ clicks: 1
 <div class="step-item"><mdi-car-multiple class="text-xl text-accent" /><span class="min-w-0 break-words"><b>三车避碰</b>：速度相等是临界；但匀减速公式只到停下为止——先问一句"它停了吗"。</span></div>
 </div>
 
-<div class="key" v-click="1">四道题、两把钥匙：<b>把相对运动看清</b>，<b>把临界条件写对</b>。</div>
+<div class="tip-hint" v-click="1">解这四道题都要做两件事：<b>看清相对运动</b>，<b>写对临界条件</b>。</div>
 </div>
 
 
@@ -207,18 +206,18 @@ clicks: 3
 </div>
 
 ---
-
-# 筒也上抛
+title: '筒也上抛'
+---
 
 <div class="page-grow">
-<div class="ask">点"释放"看一遍：杆下落、筒上升，相对位移 <Latex tex="X" /> 由什么决定？</div>
+<div class="ask">杆下落、筒上升，相对位移 <Latex tex="X" /> 由什么决定？</div>
 
 <LongRodCylinder />
 </div>
 
 ---
-
-# 换到杆上
+title: '换到杆上'
+---
 
 <div class="page-grow">
 <div class="ask">在杆"看来"，筒在做什么运动？换成这个参考系，"完全穿出"要多久？</div>
@@ -261,7 +260,7 @@ clicks: 2
 
 <div class="step-item" v-click="1"><mdi-alert-circle-outline class="text-xl text-accent" /><span class="min-w-0 break-words">成立条件：筒不能落回抛出点以下，<Latex tex="t \le \dfrac{2v_0}{g}" />，即 <Latex tex="v_0 \ge \sqrt{\dfrac{g(H+L+l)}{2}}" />。</span></div>
 
-<div class="key" v-click="2">加速度相同的两个物体，相对运动<b>一定是匀速的</b>——这就是换参考系能省力的原因；但要检查筒在这段时间里有没有落回桌面。</div>
+<div class="tip-hint" v-click="2">加速度相同的两个物体，相对运动<b>一定是匀速的</b>——这就是换参考系能省力的原因；但要检查筒在这段时间里有没有落回桌面。</div>
 </div>
 
 ---
@@ -282,30 +281,30 @@ clicks: 1
 ---
 
 <div class="page-grow">
-<div class="ask">问①：把滑块拖到两个极端——<Latex tex="\Delta t" /> 小到多少就再也追不上？大到多少就错过？</div>
+<div class="ask">问①：<Latex tex="\Delta t" /> 小到多少就再也追不上？大到多少就错过？</div>
 
 <AirMeetModel :initial-dt="2" />
 
-<div class="key" v-click="1">两个界就是两球各自落地的时刻（A 飞 <Latex tex="4v_0/g" />、B 飞 <Latex tex="2v_0/g" />）：<Latex tex="\dfrac{2v_0}{g} < \Delta t < \dfrac{4v_0}{g}" />。</div>
+<div class="info-hint" v-click="1">两个界就是两球各自落地的时刻（A 飞 <Latex tex="4v_0/g" />、B 飞 <Latex tex="2v_0/g" />）：<Latex tex="\dfrac{2v_0}{g} < \Delta t < \dfrac{4v_0}{g}" />。</div>
 </div>
 
 ---
 clicks: 1
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.5rem;--hint-pad-y:.5rem">
 <div class="ask">问②：相遇点落在 B 的哪一段才算"B 正在下降"？<Latex tex="\Delta t" /> 最大能到多少？</div>
 
 <AirMeetModel :initial-dt="2.73" />
 
-<div class="key" v-click="1">相遇点恰好落在 B 的最高点（<Latex tex="\tau = v_0/g" />）时 <Latex tex="\Delta t" /> 最大：<Latex tex="\Delta t < \dfrac{(1+\sqrt{3})v_0}{g} \approx 2.73\dfrac{v_0}{g}" />。</div>
+<div class="info-hint" v-click="1">相遇点恰好落在 B 的最高点（<Latex tex="\tau = v_0/g" />）时 <Latex tex="\Delta t" /> 最大：<Latex tex="\Delta t < \dfrac{(1+\sqrt{3})v_0}{g} \approx 2.73\dfrac{v_0}{g}" />。</div>
 </div>
 
 ---
 ---
 
 <div class="page-grow">
-<div class="ask">自己拖 <Latex tex="\Delta t" />：相遇点落在 B 的上升段、最高点，还是下降段？</div>
+<div class="ask">相遇点落在 B 的上升段、最高点，还是下降段？</div>
 
 <AirMeetModel />
 </div>
@@ -327,5 +326,5 @@ clicks: 1
 <div class="step-item"><mdi-car-brake-alert class="text-xl text-accent" /><span class="min-w-0 break-words"><b>刹车陷阱</b>：匀减速公式只到停下为止；先算刹停时间，解出的 <Latex tex="t" /> 比它大，就改用"停下来的位置"重算。</span></div>
 </div>
 
-<div class="key" v-click="1">审题先问三句话：谁相对谁？临界在哪一刻？它停了吗？</div>
+<div class="important-hint" v-click="1">审题先问三句话：谁相对谁？临界在哪一刻？它停了吗？</div>
 </div>

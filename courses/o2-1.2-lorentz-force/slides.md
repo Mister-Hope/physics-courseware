@@ -273,11 +273,12 @@ clicks: 3
 # 推导二：电流的定义式 $I = \dfrac{Q}{t}$
 
 <!-- 推导法二：I = Q/t，Q = Nq，t = L/v，殊途同归（板书三④，仔细讲）；右栏配导线的微观图像 -->
-<div class="page-grow">
+<!-- 本页块多（两栏算式 + 末尾总式），页内块间距收到 0.6rem：末行才落得回画布内 -->
+<div class="page-grow" style="--page-gap: 0.6rem">
 
 <div class="half-grid items-center">
 
-<div class="stack">
+<div class="stack" style="--stack-gap: 0.55rem">
 
 <div class="text-base opacity-90">
 换个角度：长度 <Latex tex="L = vt" /> 的这段电荷恰好全部通过横截面——用时 <Latex tex="t" />，通过的总电荷 <Latex tex="Q = Nq" />

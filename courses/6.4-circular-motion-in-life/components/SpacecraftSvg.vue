@@ -14,13 +14,28 @@ const uid = useId();
 const earthFillId = `craft-earth-${uid}`;
 const earthClipId = `craft-earth-clip-${uid}`;
 
-/* ── 地球：一个圆，下半部分超出画布被裁掉，只露出上部一段弧（行星边缘） ── */
+/* ── 画布：与下面 <svg> 的 viewBox 一致 ──
+   地球圆与轨道虚线圆都**故意画到画布外**（只露出中部一段弧）。
+   但"画到画布外、靠 SVG 视口裁掉"的写法有个副作用：被裁掉的那半虽然在屏幕上看不见，
+   元素的**矩形**仍然伸到画布下方 —— 版面余量检查按元素矩形算，会把这一页判成"溢出画布"。
+   所以这里按画布边界把它们裁成"看得见的那一段"路径：填充用闭合弓形，描边/虚线用同一段弧。 */
+const VB = { w: 400, h: 320 };
+
+/* ── 地球：填充 + 大气层光晕（可见部分 = 圆与画布下沿围出的弓形） ── */
 const O = { x: 200, y: 310 };
 const R_EARTH = 166;
+/** 地球圆与画布下沿的两个交点 */
+const earthChordDx = Math.sqrt(R_EARTH ** 2 - (VB.h - O.y) ** 2);
+const EARTH_ARC = `M ${(O.x - earthChordDx).toFixed(2)} ${VB.h} A ${R_EARTH} ${R_EARTH} 0 1 1 ${(O.x + earthChordDx).toFixed(2)} ${VB.h}`;
+/** 地球可见的弓形（沿画布下沿闭合） */
+const EARTH_CAP = `${EARTH_ARC} Z`;
 
-/* ── 轨道虚线圆与飞船：飞船恰在轨道最高点，此处半径方向正好竖直 ── */
+/* ── 轨道虚线圆与飞船：飞船恰在轨道最高点，此处半径方向正好竖直（可见部分 = 画布内那一段上弧） ── */
 const R_ORBIT = 240;
 const ship = { x: 200, y: O.y - R_ORBIT };
+/** 轨道圆与画布左右边（x = 0 / x = VB.w）的上交点 */
+const ORBIT_Y = Number((O.y - Math.sqrt(R_ORBIT ** 2 - O.x ** 2)).toFixed(2));
+const ORBIT_ARC = `M 0 ${ORBIT_Y} A ${R_ORBIT} ${R_ORBIT} 0 0 1 ${VB.w} ${ORBIT_Y}`;
 
 /* ── 两力都从飞船几何中心出发、沿半径共线：mg 指向地心（长），F_N 背离地心（短） ── */
 const G_LEN = 54;
@@ -57,29 +72,28 @@ const stars = [
           <stop offset="1" stop-color="rgba(29,78,216,0.2)" />
         </radialGradient>
         <clipPath :id="earthClipId">
-          <circle :cx="O.x" :cy="O.y" :r="R_EARTH" />
+          <path :d="EARTH_CAP" />
         </clipPath>
       </defs>
       <!-- 背景星点 -->
       <g fill="var(--c-neutral-200)">
         <circle v-for="s in stars" :key="`${s.x}-${s.y}`" :cx="s.x" :cy="s.y" :r="s.r" :opacity="s.o" />
       </g>
-      <!-- 地球：球体 + 云带（裁在球内） + 大气层光晕 + 行星边缘 -->
-      <circle :cx="O.x" :cy="O.y" :r="R_EARTH" :fill="`url(#${earthFillId})`" />
+      <!-- 地球：球体 + 云带（裁在球内） + 大气层光晕 + 行星边缘
+           （全部按画布裁成可见的那一段 —— 见脚本里 EARTH_ARC / EARTH_CAP 的说明） -->
+      <path :d="EARTH_CAP" :fill="`url(#${earthFillId})`" />
       <g :clip-path="`url(#${earthClipId})`" fill="color-mix(in srgb, var(--c-neutral-200) 8.5%, transparent)">
         <ellipse cx="150" cy="212" rx="64" ry="13" />
         <ellipse cx="264" cy="256" rx="72" ry="15" />
         <ellipse cx="196" cy="182" rx="42" ry="9" />
       </g>
-      <circle :cx="O.x" :cy="O.y" :r="R_EARTH" fill="none" stroke="color-mix(in srgb, var(--c-velocity) 14%, transparent)" stroke-width="14" />
-      <circle :cx="O.x" :cy="O.y" :r="R_EARTH" fill="none" stroke="color-mix(in srgb, var(--c-velocity-light) 60%, transparent)" stroke-width="4" />
-      <circle :cx="O.x" :cy="O.y" :r="R_EARTH" fill="none" stroke="var(--c-velocity)" stroke-width="2" opacity="0.85" />
+      <path :d="EARTH_ARC" fill="none" stroke="color-mix(in srgb, var(--c-velocity) 14%, transparent)" stroke-width="14" />
+      <path :d="EARTH_ARC" fill="none" stroke="color-mix(in srgb, var(--c-velocity-light) 60%, transparent)" stroke-width="4" />
+      <path :d="EARTH_ARC" fill="none" stroke="var(--c-velocity)" stroke-width="2" opacity="0.85" />
       <text x="114" y="232" font-size="20" fill="#bfdbfe">地球</text>
-      <!-- 飞船的圆形轨道（虚线圆，飞船在其最高点） -->
-      <circle
-        :cx="O.x"
-        :cy="O.y"
-        :r="R_ORBIT"
+      <!-- 飞船的圆形轨道（虚线弧，飞船在其最高点；只画画布内那一段） -->
+      <path
+        :d="ORBIT_ARC"
         fill="none"
         stroke="color-mix(in srgb, var(--c-text-dim) 34%, transparent)"
         stroke-width="1.8"

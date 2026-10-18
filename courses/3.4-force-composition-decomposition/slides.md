@@ -273,7 +273,7 @@ clicks: 3
 
 # 例题：用三角形法则求合力
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.8rem">
 <div>某物体受到一个大小为 <Latex tex="24\ \text{N}" />、方向水平向右的力，还受到另一个大小为 <Latex tex="7\ \text{N}" />、方向竖直向上的力。求这两个力的合力的大小和方向。</div>
 
 <div class="split-wide" style="--cols: minmax(0, 0.95fr) minmax(0, 1fr)">
@@ -464,7 +464,7 @@ clicks: 6
 
 # 力的分解有几种可能
 
-<div class="page-grow page-grow-tight">
+<div class="page-grow" style="--page-gap:.3rem">
 <div class="ask">已知条件不同，同一个合力 <Latex tex="F" /> 的分解结果还唯一吗？</div>
 
 <DecompositionCases />

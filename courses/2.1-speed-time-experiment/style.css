@@ -154,10 +154,3 @@
   line-height: 1.7;
   text-align: center;
 }
-
-.think-deco {
-  color: var(--c-accent);
-  line-height: 1;
-  opacity: 0.14;
-  pointer-events: none;
-}

@@ -43,7 +43,8 @@ withDefaults(
   position: relative;
 
   margin-top: 0.9rem;
-  padding: 1.15rem 1.35rem 1.1rem;
+  /* 内边距走变量：内容多的页调小（`--def-pad-y`），内容少的页调大；各课 `:root` 或单页元素上都能覆盖 */
+  padding: var(--def-pad-y, 1.1rem) var(--def-pad-x, 1.35rem);
   border: 1px solid var(--def-border);
   border-radius: var(--radius-lg);
 
@@ -103,10 +104,5 @@ withDefaults(
 .def-body {
   font-size: 1rem;
   line-height: 1.7;
-}
-
-/* 并排时两栏等高（.def-row 由页面写，见 atoms.css） */
-.def-row > .def-box {
-  height: 100%;
 }
 </style>

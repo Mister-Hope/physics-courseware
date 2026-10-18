@@ -4,9 +4,13 @@ dist/
 .DS_Store
 .slidev/
 
-# AI 技能：skills-lock.json **入库**（离线可用，
-.agents/skills/
+# AI 技能：上游技能（MIT）不入库，只提交 skills-lock.json；本仓**自研**技能入库（原创内容）
+.agents/skills/*
 .claude/skills/
+!.agents/skills/physics-figure/
+!.agents/skills/courseware-page/
+!.agents/skills/courseware-qa/
+!.agents/skills/exam-image-to-slide/
 
 # 个人本地配置
 .claude/settings.local.json

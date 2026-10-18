@@ -51,9 +51,9 @@ layout: base-flex
 <div class="stack divider-l">
 <div class="ask">看着这张表，先讨论四个问题——</div>
 <div class="stack">
-<div class="step-item"><span class="step-no">1</span><span>屏幕上"百公里加速"这几个字，是什么意思？</span></div>
+<div class="step-item"><span class="step-no">1</span><span>屏幕上写的百公里加速，是什么意思？</span></div>
 <div class="step-item"><span class="step-no">2</span><span>这个数值是越小越好，还是越大越好？</span></div>
-<div class="step-item"><span class="step-no">3</span><span>为什么时间越短，我们就说这辆车越"猛"？</span></div>
+<div class="step-item"><span class="step-no">3</span><span>为什么时间越短，就说明这辆车的加速性能越好？</span></div>
 <div class="step-item"><span class="step-no">4</span><span>这个指标衡量的，是车的什么性能？</span></div>
 </div>
 </div>
@@ -75,13 +75,13 @@ clicks: 2
 
 <div class="stack">
 <div class="mini-note">车速表上的数字只回答一个问题：<strong>它现在运动得多快</strong>。</div>
-<div class="intro-note mini-note">同样是从静止到 100 km/h：2.7 s 和 15.5 s——速度的"结果"一样，"过程"完全不同。</div>
+<div class="intro-note mini-note">同样是从静止到 100 km/h：2.7 s 和 15.5 s——最终速度相同，达到这个速度的过程完全不同。</div>
 </div>
 
 <div class="stack divider-l">
-<div class="ask">那"百公里加速"这个指标，反映的是什么？</div>
-<div v-click="1">反映的是<span class="text-accent">速度变化的快慢</span>——不是速度大，而是速度"变"得快。</div>
-<div class="key key-blue" v-click="2">物理学中用来描述"速度变化快慢"的物理量，叫<span class="text-accent-2">加速度</span>。这就是我们这一节课要学的。</div>
+<div class="ask">那百公里加速这个指标，反映的是什么？</div>
+<div v-click="1">反映的是<span class="text-accent">速度变化的快慢</span>——不是速度大，而是速度变化得快。</div>
+<div class="tip-hint" v-click="2">物理学中用来描述速度变化快慢的物理量，叫<span class="text-accent-2">加速度</span>。</div>
 </div>
 
 </div>
@@ -91,9 +91,8 @@ clicks: 2
 ---
 layout: base-flex
 clicks: 2
+title: 图像分析
 ---
-
-# 图像分析
 
 <div class="page-grow">
 
@@ -174,8 +173,8 @@ labels:
 
 <div class="stack">
 <div class="ask">这两条直线是两辆车的 <Latex tex="v\text{-}t" /> 图像：都从静止出发，都加速到 <Latex tex="100\ \text{km/h}" />。线 <Latex tex="a" />、<Latex tex="b" /> 哪一条是跑车的？</div>
-<div v-click="1">比"谁更猛"，要在<span class="text-accent">单位时间内</span>比较<span class="text-accent">速度的变化量</span>。</div>
-<div class="key key-blue" v-click="2">按这个比法：单位时间内速度的变化量更大，图线就<strong>更陡</strong>——线 <Latex tex="a" /> 比线 <Latex tex="b" /> 陡。</div>
+<div v-click="1">比较加速性能，要在<span class="text-accent">单位时间内</span>比较<span class="text-accent">速度的变化量</span>。</div>
+<div class="tip-hint" style="--hint-pad-y:.6rem" v-click="2">按这个比法：单位时间内速度的变化量更大，图线就<strong>更陡</strong>——线 <Latex tex="a" /> 比线 <Latex tex="b" /> 陡。</div>
 </div>
 
 </div>
@@ -185,6 +184,7 @@ labels:
 ---
 layout: base-flex
 clicks: 2
+class: title-ask
 ---
 
 # 我们在衡量什么？
@@ -203,13 +203,13 @@ clicks: 2
 <div class="cmp-calc-head"><span class="font-bold">家用轿车 <Latex tex="b" /></span><span class="cmp-calc-time">用时 11.3 s</span></div>
 <div class="font-bold"><Latex tex="\frac{27.8\ \text{m/s}}{11.3\ \text{s}} \approx 2.46" /> <span class="mini-note font-normal">每 1 s 速度增加 2.46 m/s</span></div>
 </div>
-<div class="mini-note">两条线都过原点、都升到同一个高度，只是"爬"上去的快慢不同。</div>
+<div class="mini-note">两条线都过原点、都升到同一个高度，只是速度增加的快慢不同。</div>
 </div>
 
 <div class="stack divider-l">
 <div class="ask">线 <Latex tex="a" /> 更陡，说明什么？</div>
-<div v-click="1">相同的时间内（比如 1 s），<span class="text-accent">线 <Latex tex="a" /> 的速度提升得更多</span>——所以 <Latex tex="a" /> 更"猛"，它是跑车。</div>
-<div class="key key-blue" v-click="2">"每 1 s 速度增加多少"，说的就是<span class="text-accent-2">速度变化的快慢</span>。这正是下一个物理量要刻画的事情。</div>
+<div v-click="1">相同的时间内（比如 1 s），<span class="text-accent">线 <Latex tex="a" /> 的速度提升得更多</span>——所以 <Latex tex="a" /> 的加速性能更强，它是跑车。</div>
+<div class="tip-hint" style="--hint-pad-y:.9rem" v-click="2">每 1 s 速度增加多少，说的就是<span class="text-accent-2">速度变化的快慢</span>。</div>
 </div>
 
 </div>
@@ -223,23 +223,35 @@ clicks: 3
 
 # 定义加速度
 
-<div class="page-grow">
+<div class="page-grow" style="--def-pad-y:.8rem;--def-pad-x:1.1rem">
 
 <div class="cmp-grid">
-<div class="card text-center">
+
+<DefinitionBox term="速度" tone="gold">
+
+<div class="text-center">
 <div class="mini-note">速度 —— 描述位置变化的快慢</div>
 <div class="text-3xl"><Latex tex="v = \frac{\Delta x}{\Delta t}" /></div>
 <div class="mini-note">位移 ÷ 时间</div>
 </div>
+
+</DefinitionBox>
+
 <div class="cmp-arrow" v-click="1"><span class="text-3xl">→</span>类比</div>
-<div class="card cmp-blue text-center" v-click="1">
+
+<DefinitionBox v-click="1" term="加速度" tone="blue">
+
+<div class="text-center">
 <div class="mini-note">加速度 —— 描述速度变化的快慢</div>
 <div class="text-3xl"><Latex tex="a = \frac{\Delta v}{\Delta t}" /></div>
 <div class="mini-note">速度的变化量 ÷ 时间</div>
 </div>
+
+</DefinitionBox>
+
 </div>
 
-<div class="key" v-click="2">物理学中把<span class="text-accent">速度的变化量</span>与<span class="text-accent">发生这一变化所用时间</span>之比，叫作<strong>加速度</strong>，通常用 <Latex tex="a" /> 表示。</div>
+<div class="tip-hint" style="--hint-pad-y:.65rem" v-click="2">物理学中把<span class="text-accent">速度的变化量</span>与<span class="text-accent">发生这一变化所用时间</span>之比，叫作<strong>加速度</strong>，通常用 <Latex tex="a" /> 表示。</div>
 
 <div class="mini-note" v-click="3">物理学常用方法：<span class="text-accent-2">比值定义法</span>，即<span class="text-accent-2">用两个物理量之比定义一个新的物理量</span>——速度是这样来的，加速度也是这样来的。</div>
 
@@ -259,7 +271,7 @@ clicks: 2
 <div class="stack">
 <div class="mini-title">单位是怎么来的</div>
 <div>速度的单位是 <Latex tex="\text{m/s}" />、时间的单位是 <Latex tex="\text{s}" />，所以按 <Latex tex="a=\frac{\Delta v}{\Delta t}" /> 算出来的单位是 <Latex tex="\frac{\text{m/s}}{\text{s}} = \text{m/s}^2" />（米每二次方秒）。</div>
-<div class="key key-blue" v-click="1"><Latex tex="2\ \text{m/s}^2" /> 的意思是：<span class="text-accent-2">每经过 1 s，速度增加 2 m/s</span>。</div>
+<div class="tip-hint" v-click="1"><Latex tex="2\ \text{m/s}^2" /> 的意思是：<span class="text-accent-2">每经过 1 s，速度增加 2 m/s</span>。</div>
 </div>
 
 <div class="stack divider-l" v-click="2">
@@ -296,7 +308,7 @@ clicks: 3
 <div class="stack">
 <div class="ask">已知原来的速度 <Latex tex="v_1" /> 和后来的速度 <Latex tex="v_2" />，怎样画出速度的变化量 <Latex tex="\Delta v" />？</div>
 <div v-click="2">以 <Latex tex="v_1" /> 的箭头端为起点、<Latex tex="v_2" /> 的箭头端为终点，画出的有向线段就是 <Latex tex="\Delta v = v_2 - v_1" />。</div>
-<div class="key key-blue" v-click="3">又因为 <Latex tex="a=\frac{\Delta v}{\Delta t}" />，而 <Latex tex="\Delta t" /> 是正数，所以 <strong><Latex tex="a" /> 的方向与 <Latex tex="\Delta v" /> 的方向相同</strong>。</div>
+<div class="tip-hint" style="--hint-pad-y:.6rem" v-click="3">又因为 <Latex tex="a=\frac{\Delta v}{\Delta t}" />，而 <Latex tex="\Delta t" /> 是正数，所以 <strong><Latex tex="a" /> 的方向与 <Latex tex="\Delta v" /> 的方向相同</strong>。</div>
 </div>
 </div>
 
@@ -332,7 +344,7 @@ clicks: 3
 
 </div>
 
-<div class="key" v-click="3">直线运动中：速度<strong>增大</strong>时 <Latex tex="a" /> 与 <Latex tex="v" /> 同向；速度<strong>减小</strong>时 <Latex tex="a" /> 与 <Latex tex="v" /> 反向。<br />教材表里汽车急刹车的 <Latex tex="-5\ \text{m/s}^2" />，负号就是这个意思：<Latex tex="a" /> 与运动方向相反。</div>
+<div class="tip-hint" style="--hint-pad-y:.6rem" v-click="3">直线运动中：速度<strong>增大</strong>时 <Latex tex="a" /> 与 <Latex tex="v" /> 同向；速度<strong>减小</strong>时 <Latex tex="a" /> 与 <Latex tex="v" /> 反向。<br />教材表里汽车急刹车的 <Latex tex="-5\ \text{m/s}^2" />，负号就是这个意思：<Latex tex="a" /> 与运动方向相反。</div>
 
 </div>
 
@@ -466,10 +478,10 @@ labels:
 </div>
 
 <div class="stack">
-<div class="ask">在 v-t 图像里，图线的"倾斜程度"代表什么？</div>
+<div class="ask">在 v-t 图像里，图线的倾斜程度代表什么？</div>
 <div v-click="2">取一小段图线：<Latex tex="\frac{\Delta v}{\Delta t}" /> 正是这条直线的<span class="text-accent">斜率</span>——它就是<strong>加速度</strong>。</div>
 <div v-click="3">同样取 <Latex tex="\Delta t = 2\ \text{s}" />：线 <Latex tex="a" /> 的 <Latex tex="\Delta v" /> 更大、斜率更大，所以它的加速度更大。</div>
-<div class="key key-blue" v-click="3">斜率<strong>为正</strong> → a 沿正方向；斜率<strong>为负</strong> → a 沿负方向。</div>
+<div class="tip-hint" style="--hint-pad-y:.6rem" v-click="3">斜率<strong>为正</strong> → a 沿正方向；斜率<strong>为负</strong> → a 沿负方向。</div>
 </div>
 
 </div>
@@ -479,9 +491,8 @@ labels:
 ---
 layout: base-flex
 clicks: 4
+title: 一段 v-t 图像，能读出多少信息？
 ---
-
-# 一段 v-t 图像，能读出多少信息？
 
 <div class="page-grow">
 
@@ -506,6 +517,7 @@ clicks: 4
 
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 从 v-t 图像还能读出什么？
@@ -564,7 +576,7 @@ labels:
     color: var(--c-accent-2)
     halo: true
 ```
-<div class="key key-blue">斜率 <Latex tex="k" /> 与速度 <Latex tex="v" /> <strong>同号</strong> → 加速（<strong>远离</strong> <Latex tex="t" /> 轴）；<strong>异号</strong> → 减速（<strong>靠近</strong> <Latex tex="t" /> 轴）。</div>
+<div class="tip-hint" style="--hint-pad-y:.6rem">斜率 <Latex tex="k" /> 与速度 <Latex tex="v" /> <strong>同号</strong> → 加速（<strong>远离</strong> <Latex tex="t" /> 轴）；<strong>异号</strong> → 减速（<strong>靠近</strong> <Latex tex="t" /> 轴）。</div>
 <div class="mini-note">这条直线穿过了 <Latex tex="t" /> 轴，但斜率始终不变：<strong><Latex tex="v" /> 从正变负，<Latex tex="a" /> 的方向却没有变</strong>。</div>
 </div>
 
@@ -574,18 +586,17 @@ labels:
 
 ---
 layout: base-flex
+title: 加速度大，速度就大吗？
 ---
 
-# 加速度大，速度就大吗？
-
-<div class="page-grow">
+<div class="page-grow page-around">
 
 <div class="half-grid">
 <div class="ask text-2xl">加速度大，速度一定大吗？</div>
 <div class="ask text-2xl divider-l">加速度小，速度一定小吗？</div>
 </div>
 
-<div class="key key-blue">先各想一个例子再回答：有没有"加速度很大、速度却很小"的时候？有没有"速度很大、加速度却为零"的时候？</div>
+<div class="tip-hint" style="--hint-pad-y:1rem">先各想一个例子再回答：有没有加速度很大、速度却很小的时候？有没有速度很大、加速度却为零的时候？</div>
 
 </div>
 
@@ -607,7 +618,7 @@ clicks: 2
 <div class="stack">
 <div class="ask" v-click="1">高铁在铁轨上高速飞驰，速度约 300 km/h——它的加速度也很大吗？</div>
 <div v-click="1">高铁的速度<strong>很大</strong>（约 <Latex tex="83\ \text{m/s}" />），但速度<strong>不变化</strong>——匀速直线运动，所以 <Latex tex="a = 0" />。</div>
-<div class="key key-blue" v-click="2">"速度大"和"加速度大"是两回事：<strong>速度大，加速度可以为零</strong>。</div>
+<div class="tip-hint" style="--hint-pad-y:.65rem" v-click="2">速度大和加速度大是两个不同的概念：<strong>速度大，加速度可以为零</strong>。</div>
 </div>
 
 </div>
@@ -632,7 +643,7 @@ clicks: 3
 <div class="stack">
 <div class="ask">秋千荡到两侧最高点时，速度是多大？</div>
 <div v-click="2">最高点 <Latex tex="v = 0" />，但 <Latex tex="a \ne 0" />——如果加速度也是零，它就会永远停在最高点不动了。</div>
-<div class="key key-blue" v-click="3">这一刻加速度沿轨迹的切线方向、指向最低点。可见<strong>速度为零，加速度可以不为零</strong>。</div>
+<div class="tip-hint" style="--hint-pad-y:.65rem" v-click="3">这一刻加速度沿轨迹的切线方向、指向最低点。可见<strong>速度为零，加速度可以不为零</strong>。</div>
 </div>
 
 </div>
@@ -646,7 +657,7 @@ clicks: 1
 
 # 六个说法，六个物理量
 
-<div class="page-grow">
+<div class="page-grow page-around">
 
 <div class="chain-grid">
 <div class="chain-cell"><span class="chain-say">位移大</span><span class="text-accent">→</span><span class="font-bold"><Latex tex="x" /> 大</span></div>
@@ -657,7 +668,7 @@ clicks: 1
 <div class="chain-cell chain-hot"><span class="chain-say">速度变化快</span><span class="text-accent">→</span><span class="font-bold text-accent"><Latex tex="a" /></span></div>
 </div>
 
-<div class="key" v-click="1">"变化<strong>大</strong>"说的是<strong>变化量</strong>（<Latex tex="\Delta x" />、<Latex tex="\Delta v" />）；"变化<strong>快</strong>"说的是<strong>变化率</strong>（<Latex tex="v" />、<Latex tex="a" />）。一字之差，是两个不同的物理量。</div>
+<div class="important-hint" style="--hint-pad-y:1rem" v-click="1">变化<strong>大</strong>说的是<strong>变化量</strong>（<Latex tex="\Delta x" />、<Latex tex="\Delta v" />）；变化<strong>快</strong>说的是<strong>变化率</strong>（<Latex tex="v" />、<Latex tex="a" />）。一字之差，是两个不同的物理量。</div>
 
 </div>
 
@@ -670,24 +681,24 @@ layout: base-flex
 <div class="page-grow">
 
 <div class="three-col">
-<div class="card text-center">
+<div class="stack text-center">
 <div class="mini-title justify-center"><mdi-equal class="text-xl" />定义式</div>
 <div class="text-3xl"><Latex tex="a = \frac{\Delta v}{\Delta t}" /></div>
 <div class="mini-note">速度的变化量 ÷ 时间</div>
 </div>
-<div class="card text-center">
+<div class="stack text-center">
 <div class="mini-title justify-center"><mdi-ruler class="text-xl" />单位</div>
 <div class="text-3xl"><Latex tex="\text{m/s}^2" /></div>
 <div class="mini-note">米每二次方秒：每 1 s 速度增加 <Latex tex="2\ \text{m/s}" /></div>
 </div>
-<div class="card cmp-blue text-center">
+<div class="stack text-center">
 <div class="mini-title justify-center"><mdi-arrow-right-bold class="text-xl" />方向</div>
 <div class="text-3xl">与 <Latex tex="\Delta v" /> 同向</div>
 <div class="mini-note">与速度 <Latex tex="v" /> 的方向无关</div>
 </div>
 </div>
 
-<div class="key key-blue">判断加速还是减速，就看 <Latex tex="a" /> 与 <Latex tex="v" /> 的方向关系：<strong>同向加速，反向减速</strong>。</div>
+<div class="important-hint" style="--hint-pad-y:.65rem">判断加速还是减速，就看 <Latex tex="a" /> 与 <Latex tex="v" /> 的方向关系：<strong>同向加速，反向减速</strong>。</div>
 
 </div>
 

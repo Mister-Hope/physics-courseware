@@ -19,3 +19,9 @@
 .pm-split-text {
   --cols: minmax(0, 1.3fr) minmax(0, 1fr);
 }
+
+/* ── 练习页密排（第 16、18 页底部余量吃紧）：只收本页块间距，不动共享布局。
+   页内 frontmatter 写 `class: pm-ex-dense` 生效；题—解分界竖线仍在，只是上下更紧凑。 ── */
+.pm-ex-dense {
+  --page-gap: 0.55rem;
+}

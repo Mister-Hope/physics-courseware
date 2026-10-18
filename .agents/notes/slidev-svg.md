@@ -32,6 +32,7 @@ svg {
 
 - 写 `font-size="11"`（**不带单位**）；带单位的 `font-size="15px"` 会解析失败退化成 16。要绝对控制就用内联 `style="font-size:13px"`（内联 style 一直有效）
 - **SVG 内不要用 `rem`**（`rem` 永远跟 html 的 22px）；要相对大小用 `em` 或直接写 viewBox 用户单位
+- ⛔ **SVG 里用不了 `<Latex>`**（那是 HTML 层组件，写进去 SVG 里不显示）：SVG 内的物理量与单位用 `font-family="KaTeX_Math" font-style="italic"`（量）＋ `font-family="KaTeX_Main"`（单位），**别写成纯文本或 Unicode**；HTML 层公式才用 `<Latex tex="…" />`（细则见 [`coordinate-axes-conventions.md`](./coordinate-axes-conventions.md) §1.5 与 [`katex-fonts-icons.md`](./katex-fonts-icons.md)）
 - **canvas**：绘制坐标与 CSS 字号无关（`ctx.font = "16px …"` 就是 16 设备像素）；CSS 尺寸必须与 `canvas.width/height` 一致（别用 rem 定 CSS 尺寸 + 固定缓冲区，会被拉伸），推荐 `aspect-ratio` + DPR 缩放
 - **回归守卫**：`e2e/design-tokens.spec.ts` 会注入探针 SVG，断言「html 22px / SVG 根 16px / 属性与内联样式都按书写值生效」。改这段 CSS 后必须跑 `pnpm test:e2e` 复验
 
@@ -44,10 +45,13 @@ SVG 里的 `font-size` 是 **viewBox 用户单位**，渲染后要乘缩放比�
 ```
 
 例：半栏约 412px 宽，`viewBox="0 0 640 420"` 的图，缩放 ≈ 0.64——写 `font-size="17"` 实际只有 ~11px，**后排根本看不清**。
-半栏 640 宽的图里，**轴字母给 28–34、图内标注给 17 以上**才算够（`1.2-time-displacement` 第 13 页的实测可用值：轴字母 30、标注 17、线名 20、线宽 4.5）。
-全宽（约 868px）的图缩放 ≈ 1.36，`font-size="12"` 就够了 —— **同一份代码换个栏位就得重算**。
+🟡 经验值：半栏 640 宽的图里，**轴字母给 28–34、图内标注给 17 以上**才够（`1.2-time-displacement` 第 13 页的实测可用值：轴字母 30、标注 17、线名 20、线宽 4.5，按图的内容密度微调即可）。
+全宽（约 868px）的图缩放 ≈ 1.36，`font-size="12"` 就够了 —— **同一份代码换个栏位就得重算**（这是几何后果，不是审美）。
+坐标轴三件套（`SimpleAxis` / `CoordAxes` / `NumberAxis`）由组件用 `ResizeObserver` 自动按容器宽反算，不用手算，见 [`coordinate-axes-conventions.md`](./coordinate-axes-conventions.md) §1.2。
 
-## 2. 坐标轴与标签（物理图统一长相）
+## 2. 坐标轴与标签（物理图惯用长相 · 🟡 风格约定）
+
+以下是本仓物理图的惯用长相（🟡 按页面与教师审美取舍，**不作违规判定**）：
 
 - 原点 `O`：画在轴交点，标签放交点**左下方**、贴近交点，用斜体（`font-family="KaTeX_Math" font-style="italic"`）
 - 物理量标签：横轴 `t` 放轴**下方**、纵轴 `x` 放轴**上方**，都贴着箭头附近（既别压轴、也别飘太远）

@@ -131,7 +131,14 @@ clicks: 3
 
 <template v-slot:fig>
 
+<!-- 限宽容器：#fig 栏按图的固有宽度收（width: max-content），而 MassSpectrometerFigure 的
+     <svg> 只有 viewBox、没有固有尺寸 ⇒ max-content 算成 0、整张图消失（见 exercise-layouts 笔记）。
+     这里给一个明确宽度（640×340 的图 ⇒ 300×159），图栏宽度同时决定解析栏还剩多宽。 -->
+<div style="width: 300px">
+
 <MassSpectrometerFigure diameters />
+
+</div>
 
 </template>
 
@@ -292,7 +299,13 @@ clicks: 3
 
 <template v-slot:fig>
 
+<!-- 限宽 300px：CyclotronFigure 的 svg 固有宽 340 ⇒ 高 294，而这一页题干长、
+     解析栏只剩 ~269px ⇒ 图栏居中后上下各溢出 13px。收到 300×259 正好落在栏内。 -->
+<div style="width: 300px">
+
 <CyclotronFigure />
+
+</div>
 
 </template>
 
@@ -429,6 +442,10 @@ A. 该粒子一定带正电　　B. 该粒子的速度 <Latex tex="v = \frac{E}{
 
 </template>
 
+<!-- 四条「选项正误」是并列的一行一条，解析栏默认 0.6rem 的块间距（4 条 = 53px）
+     加上题干把解析栏挤到只剩 229px ⇒ 最后一条落到画布外。收紧到 0.4rem。 -->
+<div class="stack" style="--stack-gap: 0.4rem">
+
 <div v-click="1">① 沿直线通过 ⟹ 受力平衡 ⟹ <Latex tex="v = \frac{E}{B}" />，B 正确</div>
 
 <div v-click="2">② A 错：正、负电荷只要速度合适都能通过</div>
@@ -436,6 +453,8 @@ A. 该粒子一定带正电　　B. 该粒子的速度 <Latex tex="v = \frac{E}{
 <div v-click="3">③ C 错：偏转量不大时仍能从板间飞出</div>
 
 <div v-click="4">④ D 错：电场力方向不变、洛伦兹力反向 ⟹ 偏转</div>
+
+</div>
 
 ---
 clicks: 3

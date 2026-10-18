@@ -633,9 +633,6 @@ preload: false
 
 </div>
 
-<div class="cover-decoration abs-br m-6" aria-hidden="true">
-  <CoverDecorationSvg :width="200" />
-</div>
 
 ---
 layout: base-flex
@@ -747,22 +744,10 @@ class: text-center
 
 $$C = \frac{\varepsilon_r S}{4\pi k d}$$
 
-<div class="grid grid-cols-3 gap-3 mt-1 text-sm opacity-70">
-  <div>
-
-$S$ — 极板正对面积
-
-  </div>
-  <div>
-
-$d$ — 极板间距
-
-  </div>
-  <div>
-
-$\varepsilon_r$ — 介质相对介电常数
-
-  </div>
+<div class="grid grid-cols-3 gap-3 mt-0.5 text-sm opacity-70">
+  <div><Latex tex="S" /> — 极板正对面积</div>
+  <div><Latex tex="d" /> — 极板间距</div>
+  <div><Latex tex="\varepsilon_r" /> — 介质相对介电常数</div>
 </div>
 
 </div>

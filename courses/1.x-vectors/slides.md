@@ -26,12 +26,10 @@ lesson: 数学扩展
 
 ---
 layout: base-flex
+title: 从位移说起
 ---
 
-# 从位移说起
-
 <div class="page-grow">
-<div class="tag-icon"><mdi-history /> 回顾 · 必修一 §1.2 位移</div>
 
 <div class="ask">从北京到重庆：火车、飞机、轮船，路程一样吗？"位置的变化"一样吗？</div>
 
@@ -41,7 +39,7 @@ layout: base-flex
 
 <div v-click="3"><b class="text-accent">位置的变化相同</b>：都从北京到了重庆，只跟起点、终点有关</div>
 
-<div v-click="4" class="key">位移 = 由初位置指向末位置的<b class="text-accent">有向线段</b>，用 <Latex tex="x" /> 表示</div>
+<div v-click="4" class="info-hint">位移 = 由初位置指向末位置的<b class="text-accent">有向线段</b>，用 <Latex tex="x" /> 表示。</div>
 </div>
 <div v-click="1" class="divider-l">
 <PathVsDisplacementSvg />
@@ -55,10 +53,10 @@ layout: base-flex
 
 # 一个有方向的量
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.5rem">
 <div class="ask">讲台上的直尺：横着放、斜着放，长度一样吗？这是"同一个量"吗？</div>
 
-<div class="half-grid">
+<div class="half-grid" style="--stack-gap:.5rem">
 <div v-click="1" class="stack">
 <div class="mini-title"><mdi-ruler /> 尺子：长度一样，指向不同</div>
 <RulerDirectionSvg />
@@ -71,15 +69,14 @@ layout: base-flex
 </div>
 </div>
 
-<div v-click="3" class="key">位移描述的不是"位置"，而是<b class="text-accent">位置的变化量</b>；起点与终点一旦对调，就是另一个位移</div>
+<div v-click="3" class="warn-hint" style="--hint-pad-y:.5rem">位移描述的不是"位置"，而是<b class="text-accent">位置的变化量</b>；起点与终点一旦对调，就是另一个位移。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
+title: 平行且等长的位移，是同一个位移
 ---
-
-# 平行且等长的位移，是同一个位移
 
 <div class="page-grow">
 <div class="ask">从 A 到 B、从 C 到 D 的两条位移平行且等长 —— 是同一个位移吗？</div>
@@ -129,7 +126,7 @@ clicks: 6
 </div>
 </div>
 
-<div v-click="6" class="key">矢量和标量是<b class="text-accent">有实际意义的物理量</b>；向量和数是<b class="text-accent-2">抽象的数学对象</b> —— 但加减规律完全一致</div>
+<div v-click="6" class="tip-hint">矢量和标量是<b class="text-accent">有实际意义的物理量</b>；向量和数是<b class="text-accent-2">抽象的数学对象</b> —— 但加减规律完全一致。</div>
 </div>
 
 ---
@@ -137,7 +134,7 @@ layout: base-flex
 clicks: 3
 ---
 
-# 让所有矢量"站到同一起跑线"
+# 把矢量平移到共同起点
 
 <div class="page-grow">
 <div class="ask">地面上的位移千千万、起点各不同 —— 怎么统一处理？</div>
@@ -161,9 +158,8 @@ clicks: 3
 ---
 layout: base-flex
 clicks: 4
+title: 位移怎么相加？
 ---
-
-# 位移怎么相加？
 
 <div class="page-grow">
 <div class="ask">先向东走 3 m，再向北走 4 m，合位移是多大？方向呢？</div>
@@ -174,7 +170,7 @@ clicks: 4
 
 <div v-click="3"><b class="text-accent">结果</b>：从第一个位移的起点，指向最后一个位移的终点（<b class="text-accent-2">三角形法则</b>）</div>
 
-<div v-click="4" class="key"><Latex tex="|x| = \sqrt{3^2 + 4^2} = 5\ \text{m}" />，方向与正东方向成 <Latex tex="53.1^\circ" />（偏北）</div>
+<div v-click="4" class="tip-hint"><Latex tex="|x| = \sqrt{3^2 + 4^2} = 5\ \text{m}" />，方向与正东方向成 <Latex tex="53.1^\circ" />（偏北）。</div>
 </div>
 <div v-click="1" class="divider-l">
 <DisplacementTriangleSvg />
@@ -224,9 +220,8 @@ clicks: 5
 ---
 layout: base-flex
 clicks: 5
+title: 运算律：和数一样好用吗？
 ---
-
-# 运算律：和数一样好用吗？
 
 <div class="page-grow">
 <div class="ask">矢量的加减，能像数一样<b>交换</b>、<b>结合</b>吗？</div>
@@ -241,11 +236,11 @@ clicks: 5
 
 <div v-click="5" class="mini-note">三个矢量首尾相接，先拼哪两个都一样</div>
 
-<div v-click="5" class="key">所以矢量加减可以像数一样<b class="text-accent-2">自由地交换、结合</b></div>
+<div v-click="5" class="tip-hint">所以矢量加减可以像数一样<b class="text-accent-2">自由地交换、结合</b>。</div>
 </div>
 <div v-click="1" class="divider-l stack">
 <ParallelogramSumSvg />
-<div class="mini-note" style="text-align: center">a + b 与 b + a 是同一条对角线</div>
+<div class="mini-note fig-cap">a + b 与 b + a 是同一条对角线</div>
 </div>
 </div>
 </div>
@@ -253,9 +248,8 @@ clicks: 5
 ---
 layout: base-flex
 clicks: 5
+title: 把矢量写成 (4, 3)，默认了什么？
 ---
-
-# 把矢量写成 (4, 3)，默认了什么？
 
 <div class="page-grow">
 <div class="ask">写 <Latex tex="\vec{a} = (4,\ 3)" /> 的时候，隐藏了哪些前提？</div>
@@ -266,7 +260,7 @@ clicks: 5
 
 <div v-click="3">两组"单位向量之和"再相加，就拼回原来那条矢量，而且<b class="text-accent">只有一种拼法</b></div>
 
-<div v-click="4" class="key"><Latex tex="\vec{a} = (4,\ 3) = 4\vec{i} + 3\vec{j}" />：用"点对"代替箭头，靠的就是<b class="text-accent">先沿轴分解、再唯一地拼回去</b></div>
+<div v-click="4" class="tip-hint"><Latex tex="\vec{a} = (4,\ 3) = 4\vec{i} + 3\vec{j}" />：用"点对"代替箭头，靠的就是<b class="text-accent">先沿轴分解、再唯一地拼回去</b>。</div>
 
 <div v-click="5" class="mini-note">这就是用坐标表示矢量的<b class="text-accent-2">科学简化</b>：把二维的箭头问题，化成两条一维直线上的问题</div>
 </div>
@@ -290,7 +284,7 @@ clicks: 2
 
 # 矢量的加法：三个法则
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.85rem">
 <div class="ask">矢量的加法有哪些"法则"？</div>
 
 <div v-click="1" class="three-col">
@@ -311,11 +305,12 @@ clicks: 2
 </div>
 </div>
 
-<div v-click="2" class="key">三个法则说的是同一件事：<b class="text-accent">首尾相接，首指向尾</b></div>
+<div v-click="2" class="tip-hint">三个法则说的是同一件事：<b class="text-accent">首尾相接，首指向尾</b>。</div>
 </div>
 
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 什么时候"加起来等于 0"？
@@ -353,7 +348,7 @@ layout: base-flex
 clicks: 5
 ---
 
-# 例题解法一：把矢量"搬"到一起
+# 例题解法一：平移后首尾相接
 
 <div class="page-grow">
 <div class="half-grid">
@@ -364,7 +359,7 @@ clicks: 5
 
 <div v-click="4">剩下一个 <Latex tex="\overrightarrow{OC}" /> 没人配 —— 总和 = 三个 <Latex tex="\overrightarrow{OC}" /></div>
 
-<div v-click="5" class="key"><Latex tex="\vec{s} = 3\,\overrightarrow{OC}" />，<Latex tex="|\overrightarrow{OC}| = 2\ \text{m}" /> → 合位移 <b class="text-accent">6 m</b>，方向沿 <Latex tex="\overrightarrow{OC}" /></div>
+<div v-click="5" class="tip-hint"><Latex tex="\vec{s} = 3\,\overrightarrow{OC}" />，<Latex tex="|\overrightarrow{OC}| = 2\ \text{m}" /> → 合位移 <b class="text-accent">6 m</b>，方向沿 <Latex tex="\overrightarrow{OC}" />。</div>
 </div>
 <div v-click="1" class="divider-l" style="display: flex; justify-content: center">
 <HexagonMoveVectorsSvg />
@@ -402,7 +397,7 @@ layout: base-flex
 
 <div>y 分量<b class="text-accent">两两抵消</b>：<Latex tex="\frac{\sqrt3}{2}" /> 与 <Latex tex="-\frac{\sqrt3}{2}" /> 各出现两次，和为 0</div>
 
-<div class="key">合矢量 <Latex tex="\vec{s} = (6,\ 0)" /> → 大小 <b class="text-accent">6 m</b>，方向沿 <Latex tex="\overrightarrow{OC}" /></div>
+<div class="tip-hint">合矢量 <Latex tex="\vec{s} = (6,\ 0)" /> → 大小 <b class="text-accent">6 m</b>，方向沿 <Latex tex="\overrightarrow{OC}" />。</div>
 
 <div class="mini-note">两种解法结果相同：几何拼合看方向，正交分解算数值</div>
 </div>
@@ -455,15 +450,14 @@ layout: base-flex
 <div class="stack stack-dense">
 <div class="mini-title"><mdi-axis-arrow /> 正交分解：拆开算，再拼回</div>
 <div><Latex tex="\vec{a} = x\vec{i} + y\vec{j}" />，两个分量<b class="text-accent-2">互相垂直</b>；多个矢量相加时 x 归 x 一列、y 归 y 一列</div>
-<div class="key">合矢量 <Latex tex="(\sum x,\ \sum y)" />：模长 <Latex tex="|\vec{a}| = \sqrt{x^2 + y^2}" />，方向由两个分量确定</div>
+<div class="tip-hint">合矢量 <Latex tex="(\sum x,\ \sum y)" />：模长 <Latex tex="|\vec{a}| = \sqrt{x^2 + y^2}" />，方向由两个分量确定。</div>
 </div>
 </div>
 
 ---
 layout: base-flex
+title: 想一想
 ---
-
-# 想一想
 
 <div class="page-grow">
 <div class="half-grid">
@@ -474,8 +468,7 @@ layout: base-flex
 <div class="ask">3. 矢量 <Latex tex="(-3,\ 4)" /> 的模长是多少？方向怎么描述？</div>
 </div>
 <div class="divider-l stack">
-<div class="mini-title"><mdi-sigma /> 带走一句话</div>
-<div class="key">数学上的向量，是物理上矢量的"通用语言"：把方向交给坐标，把计算交给最熟悉的加减法</div>
+<div class="tip-hint">物理的矢量与数学的向量遵循同一套加减规则；把矢量表示成坐标，就能按分量做加减。</div>
 </div>
 </div>
 </div>

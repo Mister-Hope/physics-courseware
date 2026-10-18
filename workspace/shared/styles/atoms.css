@@ -41,6 +41,14 @@
   --c-accent-border: rgb(226 168 70 / 26%);
   --c-accent-2-border: rgb(59 130 246 / 26%);
 
+  /* 气泡密度 —— **可调变量**：各课在自己的 `:root` 里覆盖，或单页在容器上写行内变量
+     （`style="--def-pad-y:.85rem;--hint-pad-y:.6rem"`）。内容多的页调小（别溢出）、内容少的页调大（别空一片）。 */
+  --hint-pad-y: 0.8rem;
+  --hint-pad-x: 1.15rem;
+  --hint-icon-size: 1.05rem;
+  --def-pad-y: 1.1rem;
+  --def-pad-x: 1.35rem;
+
   /* 图标正本（16×16 SVG，只给 CSS mask 用；同一图标只写一次、颜色一律由 background-color 给） */
   --icon-info: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z'/%3E%3C/svg%3E");
   --icon-tip: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z'/%3E%3C/svg%3E");
@@ -222,12 +230,10 @@
 .danger-hint,
 .info-hint,
 .important-hint {
-  /* 图标与内边距提成局部变量：::before 的垂直位置按它们和行高推导，改字号/内边距不会错位 */
-  --hint-icon-size: 1.05rem;
-  --hint-pad-y: 0.8rem;
   position: relative;
 
-  padding: var(--hint-pad-y) 1.15rem var(--hint-pad-y) 2.95rem;
+  padding: var(--hint-pad-y) var(--hint-pad-x) var(--hint-pad-y)
+    calc(var(--hint-pad-x) + 1.8rem);
   border: 1px solid var(--hint-border);
   border-radius: var(--radius-lg);
 
@@ -311,10 +317,11 @@
   white-space: nowrap;
 }
 
-/* 并排的定义气泡：两列等高 */
+/* 并排的定义气泡：两列，**各自按内容高**（⛔ 不要 stretch / height:100%——
+   两个定义文字长短不一时，短的那个会被拉成等高、底部空一大块，教师定为"太挤、被拉长"） */
 .def-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 2rem;
-  align-items: stretch;
+  align-items: start;
 }

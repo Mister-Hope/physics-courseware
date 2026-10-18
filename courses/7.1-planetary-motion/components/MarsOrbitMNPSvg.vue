@@ -111,7 +111,7 @@ const aria = "火星绕太阳运动的椭圆轨道，M、N、P 是火星依次�
 </script>
 
 <template>
-  <svg viewBox="0 0 460 300" width="460" height="300" xmlns="http://www.w3.org/2000/svg" role="img" :aria-label="aria">
+  <svg viewBox="0 0 460 300" width="340" height="222" xmlns="http://www.w3.org/2000/svg" role="img" :aria-label="aria">
     <ellipse :cx="C.x" :cy="C.y" :rx="A" :ry="B" fill="none" stroke="#e2a846" stroke-width="2" opacity="0.7" />
     <g v-if="showAnalysis">
       <polygon :points="areaS1" fill="rgba(226,168,70,0.22)" />

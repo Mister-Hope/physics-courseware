@@ -16,6 +16,13 @@
   align-items: start;
 }
 
+/* 题干段落：主题给 <p> 的上下 margin 是 1em（本课 22px），一道题的题干最多三段
+   ⇒ 光段间距就吃掉 130px 以上，把解析栏挤到画布外（例 3 / 例 6 实测）。
+   题干是"读一遍"的内容，不需要段间大留白：收到 0.55rem。只动本课题干，不碰共享层。 */
+.exercise-split .ex-stem p {
+  margin: 0.55rem 0;
+}
+
 /* 左文右图变体：图栏略宽（示意图内的标注要够大） */
 .split-fig-right {
   --cols: minmax(0, 1fr) minmax(0, 1.2fr);

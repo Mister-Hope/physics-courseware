@@ -270,6 +270,7 @@ clicks: 4
 
 ---
 layout: exercise-split
+class: pm-ex-dense
 clicks: 2
 title: 练习一 火星绕日椭圆轨道
 ---
@@ -299,6 +300,7 @@ title: 练习一 火星绕日椭圆轨道
 
 ---
 layout: exercise-split
+class: pm-ex-dense
 clicks: 2
 title: 练习二 二十四节气与地球公转
 ---
@@ -307,7 +309,7 @@ title: 练习二 二十四节气与地球公转
 
 <div><b class="ex-no">练习二</b>　二十四节气代表着地球在公转轨道上的二十四个不同位置。如图所示，地球沿椭圆轨道绕太阳运动的四个位置分别对应我国的四个节气，以下说法正确的是（　　）</div>
 
-<div class="ex-options">
+<div class="ex-options" style="grid-template-columns:repeat(4,minmax(0,1fr))">
 <div><b>A.</b> 地球绕太阳做匀速率椭圆轨道运动</div>
 <div><b>B.</b> 地球从冬至到春分的时间小于公转周期的四分之一</div>
 <div><b>C.</b> 地球绕太阳运行方向（正对纸面）是顺时针</div>
@@ -351,6 +353,7 @@ title: 练习三 两颗类地行星的距离之比
 
 ---
 layout: exercise-split
+class: pm-ex-dense
 clicks: 3
 title: 练习四 月球探测器的两种轨道
 ---
@@ -359,7 +362,7 @@ title: 练习四 月球探测器的两种轨道
 
 <div><b class="ex-no">练习四</b>　月球的半径为 <Latex tex="R" />，甲、乙两种探测器分别绕月球做匀速圆周运动与椭圆运动，两种轨道相切于椭圆轨道的近月点 <Latex tex="A" />。圆轨道距月球表面的高度为 <Latex tex="\dfrac{R}{2}" />，椭圆轨道的远月点 <Latex tex="B" /> 与近月点 <Latex tex="A" /> 之间的距离为 <Latex tex="6R" />。若甲的运动周期为 <Latex tex="T" />，则乙的运动周期为（　　）</div>
 
-<div class="ex-options">
+<div class="ex-options" style="grid-template-columns:repeat(4,minmax(0,1fr))">
 <div><b>A.</b> <Latex tex="3\sqrt{2}T" /></div>
 <div><b>B.</b> <Latex tex="3T" /></div>
 <div><b>C.</b> <Latex tex="2\sqrt{2}T" /></div>

@@ -4,7 +4,7 @@
 > 当成工具类，按「百分数 / 间距比例 / 栅格」去翻译，生成 `[opacity~="0.9"]{opacity:0.009}` 这种**鬼规则**；
 > 属性选择器的权重高于表现属性，于是**作者写的属性值被一个数值被重算过的 CSS 规则盖掉**。
 >
-> **正本修复**：`workspace/shared/uno.config.ts` 用 `blocklist` 屏蔽数值型属性（已生效，见「四」）。
+> **正本修复**：`workspace/shared/uno.config.ts` 用 `blocklist` 屏蔽数值型属性（已生效，见「三」「四」）。
 >
 > 症状轻则「图元几乎隐形」（`opacity`），重则「线宽被撑到 163px、图形变形」（`stroke-width`）。
 > **这是全网第一坑，`磁场符号看不见` / `平抛轨迹没显示` / `轴箭头没出来` 都可能是它，先查这个再查别的。**
@@ -61,17 +61,25 @@ presets: [
 > 这就是它最坑的地方：DevTools 里元素的 computed 值看起来「很小 / 很怪」，
 > 但你盯着 `opacity="0.9"` 这个属性看一辈子也看不出问题，得去看**样式面板里那条 `[opacity~="0.9"]`**。
 
-### 4. 与「颜色里的空格」那个坑的关系
+### 4. 🔴 同源的另一半：SVG 属性里的颜色**不能带空格**（本节是正本）
 
-AGENTS.md 里记的 `rgb(148 163 184 / 16%)` → `[stroke~="163"]{stroke-width:163px}` 是**同一个坑的另一种触发方式**：
+`rgb(148 163 184 / 16%)` → `[stroke~="163"]{stroke-width:163px}` 是**同一个坑的另一种触发方式**：
 颜色值里的空格让它被拆成 `163`、`184`、`16%` 等 token，撞上了 `stroke-width` 这类工具类名。
+
+**规则（源码里就这么写）**：
+
+- ✅ `stroke="rgba(148,163,184,0.16)"` / `fill="rgba(226,168,70,0.25)"`——**SVG 属性里的颜色一律写成无空格形式**（逗号或直接 hex）；
+- ❌ `stroke="rgb(148 163 184 / 16%)"`——空格会被 attributify 拆成数字工具类；
+- 例外：`<style>` / CSS 声明里的 `rgb(a b c / d)` 是合法现代 CSS，**不要改**（那里不经过 attributify 提取）。
 
 **两者根因同一，但表现与触发条件不同**：
 
 - 数值型（`opacity` / `font-size` / `stroke-width`）**dev 与 build 都会中招**（本次已实测，见「五」）；
-- 颜色型（含空格的 `rgb(...)`）按 AGENTS.md 的记录**只在 `pnpm build` 产物里**中招，
+- 颜色型（含空格的 `rgb(...)`）按既有记录**只在 `pnpm build` 产物里**中招，
   dev server / `pnpm shots` 看不出来。**「dev 看着没问题」不能作为验收通过的依据。**
   （机制尚未逐条复现确认，先按经验事实对待：**改完必须跑一次 `pnpm build` 再 grep 编译产物**。）
+
+> 这条的其它地方（`AGENTS.md` 坑表、SVG 相关笔记等）提到时，**一句指向本节**即可，不必各写一套措辞。
 
 ---
 
@@ -98,12 +106,12 @@ const rawPresets = uniqueBy(/* …展开后的 presets… */, (a, b) => a.name =
 `"@unocss/preset-attributify"`；Slidev 的 client 配置（`clientRoot/uno.config.ts`）在 addon 配置**之前**加载，
 所以**我们这份会被直接丢掉**。
 
-同理也改不到 `@slidev/client` 自身（`createUnocssPlugin` 用 `configFile: false` + 内部 `mergeConfigs`，
-`node_modules` 里的东西不该动）。
+同理也改不到 `@slidev/client` 自身（`createUnocssPlugin` 用 `configFile: false` + 内部 `mergeConfigs`）。
+🔴 **不要改 `node_modules` 里的任何东西**：改动不入库、下次 `pnpm install` 就被覆盖，别人拉下来也没这一行——修复只能落在 `workspace/shared/uno.config.ts`。
 
 ---
 
-## 三、正本修复：`blocklist` 屏蔽数值型属性
+## 三、🔴 正本修复：`blocklist` 屏蔽数值型属性
 
 `workspace/shared/uno.config.ts`（**共享 addon 根目录**——Slidev 会扫描 addon root 的 `uno.config.ts`
 并通过 `mergeConfigs` 合并，这条路径已实测生效：加文件后 Slidev 控制台打印 `uno.config.ts added, restarting...`）。
@@ -151,7 +159,7 @@ if (variantResults.every((i) => !i || generator.isBlocked(i[1]))) return; // var
 - 共享组件 props（会原样落到 DOM 属性）：`size` `cols` `rows` `gap` `thickness` `head-size`
   `label-size` `line-width`
 
-**新增共享组件时**：只要某个 prop 会直接落到 DOM 属性上、且值可能是数字，就把它加进 `NUMERIC_ATTRS`。
+**新增共享组件时**：只要某个 prop 会直接落到 DOM 属性上、且值可能是数字，就把它加进 `NUMERIC_ATTRS`（🔴 漏了就等于给下一个组件埋坑，症状是"`opacity` 又变成 0.9%"）。
 
 ---
 
@@ -180,7 +188,7 @@ if (variantResults.every((i) => !i || generator.isBlocked(i[1]))) return; // var
 
 ---
 
-## 五、诊断脚本（以后怀疑这个坑，先跑它）
+## 五、🟡 诊断脚本（以后怀疑这个坑，先跑它——顺序是经验，省时间用）
 
 粘进浏览器 DevTools Console（在课件任意页）：
 
@@ -232,17 +240,24 @@ console.log("可疑鬼规则条数：", out.filter((r) => r.suspicious).length);
 **判读**：`suspicious: true` 的每一条都是坑；`opacity` / `font-size` / `stroke-width` / `size` / `cols` / `rows` / `gap`
 这 7 个属性名出现在结果里（不管数值对不对）本身就说明 blocklist 没生效 ⇒ **`uno.config.ts` 没被加载，重启 dev server**。
 
-### 验收
+### 🔴 验收（两条 grep 都要过；改完 `pnpm build` 是必须的一步）
 
 ```bash
-# 1) 源码层：不该有内联 style 兜底（正本修复后不需要）
+# 1) 源码层：不该新增内联 style 兜底；也不该出现带空格的颜色属性
 grep -rn 'style="opacity:' courses/*/components/*.vue workspace/shared/components/*.vue
+# 验收标准：**不新增** `style="opacity: …"` 这类兜底写法；
+# 正本修复后不再需要，新写的图别照抄它。检查重点是「没有新增」，不是「必须归零」。
+
+grep -rnE '(stroke|fill)="rgba?\([0-9]+ [0-9]+' courses/*/components/*.vue workspace/shared/components/*.vue
+# 期望：无输出（带空格的颜色一律要改掉）
 
 # 2) 编译产物层：这才是唯一能抓住「颜色含空格」变体的地方
 pnpm build
 grep -rnoE '\[(opacity|font-size|stroke-width|fill|stroke)~="[0-9]+"\]' dist/ | head
 # 期望：无输出（或只剩 [stroke~="#…"] 这类合法项）
 ```
+
+只跑源码 grep 不算验完：**颜色含空格这一半在 dev server 里根本看不出来，必须 `pnpm build` 后 grep `dist/`**。
 
 ---
 
@@ -277,7 +292,7 @@ grep -rnoE '\[(opacity|font-size|stroke-width|fill|stroke)~="[0-9]+"\]' dist/ | 
 
 ---
 
-## 八、速查
+## 七、速查
 
 | 现象                                     | 先怀疑                      | 处理                                                |
 | ---------------------------------------- | --------------------------- | --------------------------------------------------- |

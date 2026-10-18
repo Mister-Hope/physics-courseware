@@ -28,13 +28,13 @@ chapter: 第二章 匀变速直线运动的研究
 layout: base-flex
 ---
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="ask">纸带上某一点的速度，怎么求？</div>
 
 <div v-click="1" class="stack">
 <div>平均速度的定义式是 <Latex tex="\bar{v} = \dfrac{\Delta x}{\Delta t}" />。某一点的<b>瞬时速度</b>，用<b>该点前后一小段距离</b>的平均速度来代替：</div>
 <div><Latex tex="v_{\text{瞬时}} \approx \bar{v}_{\text{该点前后一小段}} = \dfrac{\Delta x}{\Delta t}" display /></div>
-<div>这一小段取得越小，段内"快慢的差异"就越小，算出的平均速度就越接近该点的<b>瞬时速度</b>。</div>
+<div>这一小段取得越小，段内快慢的差异就越小，算出的平均速度就越接近该点的<b>瞬时速度</b>。</div>
 </div>
 </div>
 
@@ -42,7 +42,7 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="ask">既然越小越接近瞬时速度——那就把 <Latex tex="\Delta x" /> 取到最小？</div>
 
 <div v-click="1" class="stack">
@@ -51,7 +51,7 @@ layout: base-flex
 <div>② 用刻度尺测量的<b>有效精度是 <Latex tex="1\ \text{mm}" />，还要估读一位有效数字</b>。</div>
 </div>
 
-<div v-click="2" class="key">所以 <Latex tex="\Delta x" /> <b>不能取得太小</b>：否则这点读数误差在结果里就会占较大的比重。取"该点前后的一小段"，是"逼近瞬时速度"和"控制误差比重"之间的折中。</div>
+<div v-click="2" class="tip-hint" style="--hint-pad-y:1rem">所以 <Latex tex="\Delta x" /> <b>不能取得太小</b>：否则这点读数误差在结果里就会占较大的比重。取该点前后的一小段，是在逼近瞬时速度与控制误差比重之间的折中。</div>
 </div>
 
 ---
@@ -61,7 +61,7 @@ layout: base-flex
 # 器材安装
 
 <div class="page-grow">
-<div class="ask">器材要怎么装，纸带才"能用"？</div>
+<div class="ask">器材要怎么装，纸带才能正常使用？</div>
 
 <div class="half-grid">
 <div class="stack">
@@ -89,7 +89,7 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.75rem">
 <div class="ask">如果先放开小车、再接通电源，会怎样？</div>
 
 <div v-click="1" class="stack">
@@ -100,7 +100,7 @@ layout: base-flex
 <div v-click="2" class="stack">
 <div class="mini-title"><span class="ok-line"><mdi-check-circle-outline class="text-3xl" /></span> 正确做法</div>
 <div>先接通电源，<b>等振针振动稳定、打点稳定之后，再释放小车</b>；同时用手挡在滑轮处，防止小车掉落。</div>
-<div class="key">电磁式打点计时器使用振针，刚接通电源时，还没有稳定振动起来——这时候放车，纸带开头的几个点打不准。</div>
+<div class="info-hint" style="--hint-pad-y:.75rem">电磁式打点计时器使用振针，刚接通电源时，还没有稳定振动起来——这时候放车，纸带开头的几个点打不准。</div>
 </div>
 </div>
 
@@ -193,7 +193,7 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead text-center"><mdi-head-question-outline /> 量纸带上各点到起点的距离，你会怎么量？</div>
+<div class="ask ask-lead"><mdi-head-question-outline /> 量纸带上各点到起点的距离，你会怎么量？</div>
 
 <div class="half-grid">
 
@@ -209,7 +209,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="3" class="key">量纸带上的位置，一律<span class="text-accent-2">从起点（第一个点）量起</span>：一次量到要读的那个点，读出的就是它到起点的距离。逐段量时，每一段都要单独读一次数，读数误差会一段一段累加；<span class="text-accent">从起点一次量到底，每个点只和起点比一次，误差范围一定、不会累积</span>。</div>
+<div v-click="3" class="tip-hint" style="--hint-pad-y:.6rem">量纸带上的位置，一律<span class="text-accent-2">从起点（第一个点）量起</span>：一次量到要读的那个点，读出的就是它到起点的距离。逐段量时，每一段都要单独读一次数，读数误差会一段一段累加；<span class="text-accent">从起点一次量到底，每个点只和起点比一次，误差范围一定、不会累积</span>。</div>
 </div>
 
 ---
@@ -222,13 +222,15 @@ layout: base-flex
 <div class="half-grid">
 <div class="stack">
 <div v-click="2"><b>计时起点不是释放小车的时刻</b>：纸带开头那些过于密集的点已经舍掉了，第 0 个计数点是小车<b>已经有一定速度</b>时的一个点——<Latex tex="v_0 \neq 0" />。</div>
-<div v-click="3" class="key">所以数据的起点在纵轴上方：纵轴若从 0 画，下面一大段坐标纸就白留了，点全挤在上方一条窄带里。要<b>充分利用坐标纸</b>（避免图形退化、拟合变弱）：在纵轴靠近原点处画一道<b>锯齿折断线</b>；时间仍从有效的第 0 个点开始取 <Latex tex="t_0 = 0\ \text{s}" />。</div>
+<div v-click="3">所以数据的起点在<b>纵轴上方</b>：纵轴若从 0 画，下面一大段坐标纸就白留了，点全挤在上方一条窄带里——要<b>充分利用坐标纸</b>（避免图形退化、拟合变弱）。</div>
 </div>
 <div v-click="1" class="divider-l stack">
 <div class="mini-title"><mdi-axis-arrow /> 纵轴的折断</div>
 <BrokenAxisSvg />
 </div>
 </div>
+
+<div v-click="4" class="tip-hint" style="--hint-pad-y:.6rem">在纵轴靠近原点处画一道<b>锯齿折断线</b>；时间仍从有效的第 0 个点开始取 <Latex tex="t_0 = 0\ \text{s}" />。</div>
 </div>
 
 ---
@@ -240,7 +242,7 @@ layout: base-flex
 <div class="page-grow">
 <div class="ask">记录和计算时，数字该写几位？</div>
 
-<div v-click="1" class="key key-lead">一个数有几个<b>有效数字</b>？先把它写成科学计数法的形式 <Latex tex="a \times 10^{n}" /> <Latex tex="(1 \le a < 10)" />，再数<b>左侧数字 <Latex tex="a" /></b> 有几位——指数 <Latex tex="10^{n}" /> <b>不计入</b>。例如 <Latex tex="0.080\ \text{m/s} = 8.0 \times 10^{-2}\ \text{m/s}" />，左侧是 <Latex tex="8.0" />，就是 2 位有效数字。</div>
+<div v-click="1" class="tip-hint" style="--hint-pad-y:.6rem">一个数有几个<b>有效数字</b>？先把它写成科学计数法的形式 <Latex tex="a \times 10^{n}" /> <Latex tex="(1 \le a < 10)" />，再数<b>左侧数字 <Latex tex="a" /></b> 有几位——指数 <Latex tex="10^{n}" /> <b>不计入</b>。例如 <Latex tex="0.080\ \text{m/s} = 8.0 \times 10^{-2}\ \text{m/s}" />，左侧是 <Latex tex="8.0" />，就是 2 位有效数字。</div>
 
 <div class="step-list step-list-tight">
 <div v-click="2" class="step-item">
@@ -274,7 +276,7 @@ layout: base-flex
 <div v-click="2" class="fit-reason">先用<b>十字线</b>画出每一个数据点。</div>
 <div v-click="3" class="fit-reason">看这些点：它们大致排在<b>一条直线</b>上——<Latex tex="v" /> 随 <Latex tex="t" /> 均匀增大。</div>
 <div v-click="4" class="fit-reason">既然近似是一条直线，就应该用<b>直线拟合</b>，而不是把点连成折线。</div>
-<div v-click="5" class="key">直线拟合的要求：让<b>更多的点落在直线上</b>；同时使<b>直线两侧的点数一样</b>。</div>
+<div v-click="5" class="tip-hint" style="--hint-pad-y:.6rem">直线拟合的要求：让<b>更多的点落在直线上</b>；同时使<b>直线两侧的点数一样</b>。</div>
 </div>
 <div v-click="1" class="divider-l stack">
 <div class="mini-title"><mdi-chart-scatter-plot /> 拟合一条直线</div>
@@ -331,6 +333,7 @@ layout: base-flex
 
 ---
 layout: base-flex
+title: 课堂小结
 ---
 
 # 课堂小结
@@ -364,9 +367,5 @@ layout: base-flex
 <div class="think-body text-4xl">
 <div>这种<b>加速度不变</b>的运动，是什么运动？</div>
 <div v-click="1">它在不同时间下的<b>速度</b>和<b>位移</b>，又有什么规律？</div>
-</div>
-
-<div class="think-deco abs-br m-8" aria-hidden="true">
-<mdi-lightbulb-on-outline class="icon-2xl" />
 </div>
 </div>

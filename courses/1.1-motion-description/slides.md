@@ -68,7 +68,7 @@ class: title-ask
 
 <v-click>
 
-<div class="key key-blue mt-6 mx-auto max-w-3xl">任何物体都有<span class="text-accent">大小和形状</span>，物体各部分的运动情况一般说来<span class="text-accent">并不一样</span></div>
+<div class="tip-hint mt-6 mx-auto max-w-3xl">任何物体都有<span class="text-accent">大小和形状</span>，物体各部分的运动情况一般说来<span class="text-accent">并不一样</span>。</div>
 
 </v-click>
 ---
@@ -190,6 +190,8 @@ layout: base-flex
 
 # 质点的定义
 
+<div class="page-grow page-around">
+
 <DefinitionBox v-click="1" term="质点" tone="blue">
 
 <div>忽略物体的大小和形状，把它简化为一个具有质量的点，这样的点叫作<span class="def-term">质点</span>（mass point）。</div>
@@ -216,15 +218,17 @@ layout: base-flex
 
 <v-click>
 
-<div class="key mt-7 mx-auto max-w-4xl">质点是一种<span class="text-accent font-semibold">理想化的物理模型</span>——突出问题的主要因素，忽略次要因素</div>
+<div class="tip-hint mt-7 mx-auto max-w-4xl">质点是一种<span class="text-accent font-semibold">理想化的物理模型</span>——突出问题的主要因素，忽略次要因素。</div>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
-class: title-ask
+title: 思考与讨论：香蕉球
 ---
 
-# 思考与讨论：香蕉球
+<div class="page-grow page-around">
 
 <div class="flex items-start gap-4 mt-4">
   <mdi-soccer class="text-4xl text-accent-2 shrink-0" />
@@ -249,15 +253,16 @@ class: title-ask
 
 <div class="mt-7">
   <div class="ask ask-row ask-lead">
-    <mdi-head-question-outline class="text-xl" />
     <span>研究什么样的问题可以把足球看作质点？</span>
   </div>
   <v-click>
-    <div class="mt-3 text-base">只关心足球从<span class="text-accent-2">哪里飞到了哪里</span>、不研究旋转时——它的形状就不重要了，可以看作质点</div>
+    <div class="mt-3 text-base">只关心足球从<span class="text-accent-2">哪里飞到了哪里</span>、不研究旋转时——它的形状就不重要了，可以看作质点。</div>
   </v-click>
 </div>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -290,10 +295,10 @@ layout: base-flex
 </div>
 ---
 layout: base-flex
-class: title-ask
+title: 参考系：为什么看法不一样？
 ---
 
-# 参考系：为什么看法不一样？
+<div class="page-grow page-around">
 
 <div class="flex items-center gap-4 mt-4">
   <mdi-train-car class="text-4xl text-accent-2 shrink-0" />
@@ -310,7 +315,7 @@ class: title-ask
 
 <v-click>
 
-<div class="ask ask-row ask-lead mt-8 justify-center">
+<div class="ask ask-row ask-lead mt-8">
   <mdi-head-question-outline class="text-2xl" />
   <span>为什么人们的看法会不一样？</span>
 </div>
@@ -322,11 +327,15 @@ class: title-ask
 <p class="mt-5 text-lg">因为描述位置随时间的变化，总是<span class="text-accent font-semibold">相对于其他物体</span>而言的。</p>
 
 </v-click>
+
+</div>
 ---
 layout: base-flex
 ---
 
 # 运动的相对性与参考系
+
+<div class="page-grow page-around">
 
 <div class="grid grid-cols-2 gap-8 mt-6">
 
@@ -363,6 +372,8 @@ layout: base-flex
 </DefinitionBox>
 
 </div>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -371,7 +382,7 @@ layout: base-flex
 
 <div class="page-grow">
 
-<div class="ask ask-row ask-lead justify-center">
+<div class="ask ask-row ask-lead">
   <mdi-head-question-outline class="text-2xl" />
   <span>选做参考的物体，有什么讲究？</span>
 </div>
@@ -411,7 +422,11 @@ layout: base-flex
 
 # 参考系演示：同一辆列车，两种看法
 
+<div class="page-grow">
+
 <ReferenceFrameDemo />
+
+</div>
 ---
 layout: base-flex
 ---
@@ -429,7 +444,7 @@ layout: base-flex
 
 <BoatCupDemo compact />
 
-<div class="grid grid-cols-2 gap-10 mt-1 text-sm leading-tight">
+<div class="grid grid-cols-2 gap-8 text-sm leading-tight">
 
 <div>
   <div class="flex items-center gap-2 mb-1"><mdi-earth class="text-accent-2 text-lg" /><span class="font-semibold text-base">以地面为参考系</span><span class="text-xs opacity-55">要设船速 <Latex tex="v" />、水速 <Latex tex="u" /></span></div>
@@ -447,7 +462,7 @@ layout: base-flex
 
 </div>
 
-<div class="key mt-1" v-click="1">两条路都得到 <Latex tex="T_0" /> —— 但水系不用设任何一个速度</div>
+<div class="tip-hint" style="--hint-pad-y:.45rem" v-click="1">两种做法都得到 <Latex tex="T_0" /> —— 但水系不用设任何一个速度。</div>
 ---
 layout: base-flex
 class: title-ask

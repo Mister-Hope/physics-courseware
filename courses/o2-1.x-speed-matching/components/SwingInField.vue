@@ -15,7 +15,9 @@ const { showAnalysis = false } = defineProps<{
 
 /** 画布（viewBox 用户单位） */
 const W = 660;
-const H = 420;
+/** 画布高：要装得下 O 点下方那支 F洛 箭头（箭头尖 y = O.y + forceLength = 441）和它的标注，
+    否则 viewBox 会把箭头与「F洛1」一起裁掉（旧值 420 就裁掉了这两样）。 */
+const H = 460;
 /** 天花板：一条水平线 + 上侧斜线阴影 */
 const ceilingFrom = { x: 90, y: 52 };
 const ceilingTo = { x: 570, y: 52 };
