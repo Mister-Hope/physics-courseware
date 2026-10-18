@@ -1,7 +1,9 @@
 <script setup lang="ts">
 /**
- * 电流表内接法（相对电源内接）电路图： 电流表串在电源干路上——紧靠电源、画在开关上方（测的就是干路电流）；电压表并联在滑动变阻器两端； 开关接在电源负极一侧。滑动变阻器＝电阻线圈（两端都接入）＋
- * 侧面滑片引出的支路。 元件符号一律用共享 <Circuit*> 组件，导线手画（1.6）。 step ≥ 1 标出"电流表串在干路上"；step ≥ 2 标出"电压表并联在变阻器两端"。
+ * 电流表内接法（相对电源内接）电路图： 电流表串在电源干路上——紧靠电源、画在开关上方（测的就是干路电流）；电压表并联在滑动变阻器两端； 开关接在电源负极一侧。
+ * 滑动变阻器用共享 `<CircuitRheostat>`（长方形线圈 + 滑片箭头）：滑片接线端在长边正外侧 `sliderLength`=16 处，
+ * 竖直放置时 `x = 线圈中心 400 + 短边/2 8 + 16 = 424`、`y = 116 + slider×48`（`:slider="0.25"` ⇒ 128），
+ * 页面把那根滑片导线画到这个点为止（端点对齐）。 元件符号一律用共享 <Circuit*> 组件，导线手画（1.6）。 step ≥ 1 标出"电流表串在干路上"；step ≥ 2 标出"电压表并联在变阻器两端"。
  */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>
@@ -20,7 +22,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
         <path d="M 80 148 V 220" />
         <path d="M 250 60 V 124" />
         <path d="M 250 156 V 220" />
-        <path d="M 450 140 V 108 H 400" />
+        <path d="M 424 128 V 108 H 400" />
       </g>
       <circle cx="250" cy="60" r="3" fill="var(--c-text)" />
       <circle cx="250" cy="220" r="3" fill="var(--c-text)" />
@@ -29,14 +31,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
       <CircuitSwitch :x="120" :y="220" :open="false" label="S" />
       <CircuitMeter :x="130" :y="60" kind="a" />
       <CircuitMeter :x="250" :y="140" kind="v" />
-      <CircuitResistor :x="400" :y="140" orientation="vertical" label="R" />
-      <CourseArrow
-        :from="{ x: 450, y: 140 }"
-        :to="{ x: 410, y: 140 }"
-        stroke="var(--c-text)"
-        :stroke-width="1.6"
-        :head-size="9"
-      />
+      <CircuitRheostat :x="400" :y="140" orientation="vertical" label="R" :slider="0.25" />
       <text
         x="226"
         y="146"

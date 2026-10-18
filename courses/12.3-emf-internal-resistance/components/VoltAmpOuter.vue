@@ -1,8 +1,10 @@
 <script setup lang="ts">
 /**
  * 电流表外接法（相对电源外接）电路图： 开关接在电源负极一侧（断开开关时电压表示数归零）；电压表并联在外电路两端（测路端电压）；
- * 电流表只串在外电路（变阻器）这一支路上。滑动变阻器＝电阻线圈（两端都接入）＋ 侧面滑片引出的支路。 元件符号一律用共享 <CircuitBattery> / <CircuitMeter> /
- * <CircuitResistor> / <CircuitSwitch>，导线手画（1.6）。 step ≥ 1 用虚线框圈出"外电路"。
+ * 电流表只串在外电路（变阻器）这一支路上。 滑动变阻器用共享 `<CircuitRheostat>`（长方形线圈 + 滑片箭头）：滑片接线端在长边正外侧
+ * `sliderLength`=16 处，竖直放置时 `x = 线圈中心 400 + 短边/2 8 + 16 = 424`、`y = 116 + slider×48`（`:slider="0.25"` ⇒ 128），
+ * 页面把那根滑片导线画到这个点为止（端点对齐）。 元件符号一律用共享 <CircuitBattery> / <CircuitMeter> /
+ * <CircuitRheostat> / <CircuitSwitch>，导线手画（1.6）。 step ≥ 1 用虚线框圈出"外电路"。
  */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>
@@ -22,8 +24,8 @@ const { step = 0 } = defineProps<{ step?: number }>();
         <path d="M 80 148 V 220" />
         <path d="M 200 60 V 124" />
         <path d="M 200 156 V 220" />
-        <!-- 滑片的引出支路：从滑片向上接到线圈上端 -->
-        <path d="M 450 140 V 108 H 400" />
+        <!-- 滑片的引出支路：从滑片接线端向上接到线圈上端 -->
+        <path d="M 424 128 V 108 H 400" />
       </g>
       <!-- T 形接线点 -->
       <circle cx="200" cy="60" r="3" fill="var(--c-text)" />
@@ -34,15 +36,7 @@ const { step = 0 } = defineProps<{ step?: number }>();
       <CircuitSwitch :x="120" :y="220" :open="false" label="S" />
       <CircuitMeter :x="200" :y="140" kind="v" />
       <CircuitMeter :x="310" :y="60" kind="a" />
-      <CircuitResistor :x="400" :y="140" orientation="vertical" label="R" />
-      <!-- 滑片：箭头指向线圈侧面 -->
-      <CourseArrow
-        :from="{ x: 450, y: 140 }"
-        :to="{ x: 410, y: 140 }"
-        stroke="var(--c-text)"
-        :stroke-width="1.6"
-        :head-size="9"
-      />
+      <CircuitRheostat :x="400" :y="140" orientation="vertical" label="R" :slider="0.25" />
       <!-- 标注：电压 U、电流方向 -->
       <text
         x="176"
