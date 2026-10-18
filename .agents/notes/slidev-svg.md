@@ -139,9 +139,15 @@ SVG 里的"圆角框 + 居中文字"（图注、结论条、风向标…）如�
 
 ```html
 <rect x="0" y="0" width="104" height="20" rx="4" … />
-<text x="52" y="14" text-anchor="middle" font-size="11"
-      textLength="96" lengthAdjust="spacingAndGlyphs">旗向右 (与风同向)</text>
+<text
+  x="52"
+  y="14"
+  text-anchor="middle"
+  font-size="11"
+  textLength="96"
+  lengthAdjust="spacingAndGlyphs"
+  >旗向右 (与风同向)</text
+>
 ```
 
 `textLength` = 框宽 − 8（左右各留 4 的呼吸），跨 `<tspan>` 也管用（下标那类混排一样收得住）。
-

@@ -2,10 +2,7 @@
 /**
  * 第 3 页示意图：沿任意路径下滑时重力做的功（微元法）。
  *
- * step 0：整条曲线路径 A → B（常显）
- * step 1：把路径分成许多小段，每小段近似看作一段倾斜的直线
- * step 2：高亮其中一小段，标出它与重力方向的夹角 θ_i、沿这一小段的位移 l_i、这一小段的高度差 Δh_i
- * step 3：标出各小段的高度差 Δh₁、Δh₂ …
+ * Step 0：整条曲线路径 A → B（常显） step 1：把路径分成许多小段，每小段近似看作一段倾斜的直线 step 2：高亮其中一小段，标出它与重力方向的夹角 θ_i、沿这一小段的位移 l_i、这一小段的高度差 Δh_i step 3：标出各小段的高度差 Δh₁、Δh₂ …
  *
  * 只标符号，不标数值。viewBox 580×250，页面里按 380px 宽渲染（≈164px 高）。
  */
@@ -56,10 +53,12 @@ const ticks = Array.from({ length: SEG }, (_, i) => {
     <line x1="44" y1="45" x2="560" y2="45" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="6 5" />
     <line x1="44" y1="180" x2="560" y2="180" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="6 5" />
     <text x="556" y="38" font-size="21" fill="var(--c-text-dim)" text-anchor="end" class="cpm-lbl">
-      <tspan font-family="KaTeX_Math" font-style="italic">h</tspan><tspan font-family="KaTeX_Main" font-size="14" dy="5">1</tspan>
+      <tspan font-family="KaTeX_Math" font-style="italic">h</tspan>
+      <tspan font-family="KaTeX_Main" font-size="14" dy="5">1</tspan>
     </text>
     <text x="556" y="173" font-size="21" fill="var(--c-text-dim)" text-anchor="end" class="cpm-lbl">
-      <tspan font-family="KaTeX_Math" font-style="italic">h</tspan><tspan font-family="KaTeX_Main" font-size="14" dy="5">2</tspan>
+      <tspan font-family="KaTeX_Math" font-style="italic">h</tspan>
+      <tspan font-family="KaTeX_Main" font-size="14" dy="5">2</tspan>
     </text>
 
     <path v-if="step < 1" :d="curveD" fill="none" stroke="var(--c-velocity)" stroke-width="3" stroke-linecap="round" />
@@ -72,16 +71,20 @@ const ticks = Array.from({ length: SEG }, (_, i) => {
       <line :x1="segA.x" :y1="segA.y" :x2="segB.x" :y2="segB.y" stroke="var(--c-accent)" stroke-width="4.6" stroke-linecap="round" />
       <line :x1="segA.x" :y1="segA.y" :x2="segA.x" :y2="segA.y + 55" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="5 5" />
       <text :x="segA.x + 24" :y="segA.y + 46" font-size="20" fill="var(--c-accent)" class="cpm-lbl">
-        <tspan font-family="KaTeX_Math" font-style="italic">θ</tspan><tspan font-family="KaTeX_Main" font-size="13" dy="4">i</tspan>
+        <tspan font-family="KaTeX_Math" font-style="italic">θ</tspan>
+        <tspan font-family="KaTeX_Main" font-size="13" dy="4">i</tspan>
       </text>
       <text :x="segMid.x + 2" :y="segMid.y - 14" font-size="20" fill="var(--c-velocity)" text-anchor="middle" class="cpm-lbl">
-        <tspan font-family="KaTeX_Math" font-style="italic">l</tspan><tspan font-family="KaTeX_Main" font-size="13" dy="4">i</tspan>
+        <tspan font-family="KaTeX_Math" font-style="italic">l</tspan>
+        <tspan font-family="KaTeX_Main" font-size="13" dy="4">i</tspan>
       </text>
       <line :x1="dhX" :y1="segA.y" :x2="dhX" :y2="segB.y" stroke="var(--c-accent)" stroke-width="2.2" />
       <line :x1="dhX - 8" :y1="segA.y" :x2="dhX + 8" :y2="segA.y" stroke="var(--c-accent)" stroke-width="2.2" />
       <line :x1="dhX - 8" :y1="segB.y" :x2="dhX + 8" :y2="segB.y" stroke="var(--c-accent)" stroke-width="2.2" />
       <text :x="dhX + 11" :y="segMid.y + 6" font-size="20" fill="var(--c-accent)" class="cpm-lbl">
-        <tspan font-family="KaTeX_Main">Δ</tspan><tspan font-family="KaTeX_Math" font-style="italic">h</tspan><tspan font-family="KaTeX_Main" font-size="13" dy="4">i</tspan>
+        <tspan font-family="KaTeX_Main">Δ</tspan>
+        <tspan font-family="KaTeX_Math" font-style="italic">h</tspan>
+        <tspan font-family="KaTeX_Main" font-size="13" dy="4">i</tspan>
       </text>
     </g>
 

@@ -12,6 +12,15 @@ const { step = 0 } = defineProps<{
 
 <template>
   <svg viewBox="0 0 820 240" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="五组作用力与反作用力做功情形的示意图">
+    <defs>
+      <!-- 条形磁铁的外形：圆角只在两端，中间是一条直缝（用 clipPath 保证中间不出现凹口） -->
+      <clipPath id="ipw-magnet">
+        <rect x="338" y="54" width="60" height="30" rx="6" />
+        <rect x="412" y="54" width="60" height="30" rx="6" />
+        <rect x="612" y="52" width="60" height="30" rx="6" />
+        <rect x="686" y="52" width="60" height="30" rx="6" />
+      </clipPath>
+    </defs>
     <!-- ==================== 甲：一对静摩擦力（叠放一起加速） ==================== -->
     <g v-if="step >= 1">
       <text x="22" y="22" font-size="18" fill="var(--c-accent)">甲</text>
@@ -25,24 +34,46 @@ const { step = 0 } = defineProps<{
     <!-- ==================== 乙：两磁铁 N 极相斥、松手 ==================== -->
     <g v-if="step >= 2">
       <text x="292" y="22" font-size="18" fill="var(--c-accent)">乙</text>
-      <rect x="350" y="54" width="46" height="30" rx="5" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.2" />
-      <rect x="416" y="54" width="46" height="30" rx="5" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.2" />
-      <text x="390" y="75" text-anchor="middle" font-family="KaTeX_Main" font-size="18" fill="var(--c-accent-2)">N</text>
-      <text x="424" y="75" text-anchor="middle" font-family="KaTeX_Main" font-size="18" fill="var(--c-accent-2)">N</text>
-      <CourseArrow :from="{ x: 373, y: 69 }" :to="{ x: 319, y: 69 }" stroke="var(--c-ok)" :stroke-width="3.2" />
-      <CourseArrow :from="{ x: 439, y: 69 }" :to="{ x: 493, y: 69 }" stroke="var(--c-ok)" :stroke-width="3.2" />
+      <!-- 条形磁铁（60×30）：红＝N、蓝＝S，中间是直缝、圆角只在两端；极名用白字 -->
+      <g clip-path="url(#ipw-magnet)">
+        <rect x="338" y="54" width="30" height="30" fill="#1565c0" />
+        <rect x="368" y="54" width="30" height="30" fill="#c62828" />
+        <rect x="412" y="54" width="30" height="30" fill="#c62828" />
+        <rect x="442" y="54" width="30" height="30" fill="#1565c0" />
+      </g>
+      <rect x="338" y="54" width="60" height="30" rx="6" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" />
+      <rect x="412" y="54" width="60" height="30" rx="6" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" />
+      <line x1="368" y1="54" x2="368" y2="84" stroke="var(--c-text-dim)" stroke-width="1.2" opacity="0.5" />
+      <line x1="442" y1="54" x2="442" y2="84" stroke="var(--c-text-dim)" stroke-width="1.2" opacity="0.5" />
+      <text x="353" y="75" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">S</text>
+      <text x="383" y="75" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">N</text>
+      <text x="427" y="75" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">N</text>
+      <text x="457" y="75" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">S</text>
+      <CourseArrow :from="{ x: 368, y: 69 }" :to="{ x: 314, y: 69 }" stroke="var(--c-ok)" :stroke-width="3.2" />
+      <CourseArrow :from="{ x: 442, y: 69 }" :to="{ x: 496, y: 69 }" stroke="var(--c-ok)" :stroke-width="3.2" />
     </g>
     <!-- ==================== 丙：按住一块磁铁 ==================== -->
     <g v-if="step >= 2">
       <text x="562" y="22" font-size="18" fill="var(--c-accent)">丙</text>
-      <rect x="620" y="52" width="46" height="30" rx="5" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.2" />
-      <rect x="686" y="52" width="46" height="30" rx="5" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.2" />
-      <text x="660" y="73" text-anchor="middle" font-family="KaTeX_Main" font-size="18" fill="var(--c-accent-2)">N</text>
-      <text x="694" y="73" text-anchor="middle" font-family="KaTeX_Main" font-size="18" fill="var(--c-accent-2)">N</text>
+      <!-- 左边的磁铁被按住（N 极朝右）、右边磁铁的 N 极朝左 ⇒ 互相排斥 -->
+      <g clip-path="url(#ipw-magnet)">
+        <rect x="612" y="52" width="30" height="30" fill="#1565c0" />
+        <rect x="642" y="52" width="30" height="30" fill="#c62828" />
+        <rect x="686" y="52" width="30" height="30" fill="#c62828" />
+        <rect x="716" y="52" width="30" height="30" fill="#1565c0" />
+      </g>
+      <rect x="612" y="52" width="60" height="30" rx="6" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" />
+      <rect x="686" y="52" width="60" height="30" rx="6" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" />
+      <line x1="642" y1="52" x2="642" y2="82" stroke="var(--c-text-dim)" stroke-width="1.2" opacity="0.5" />
+      <line x1="716" y1="52" x2="716" y2="82" stroke="var(--c-text-dim)" stroke-width="1.2" opacity="0.5" />
+      <text x="627" y="73" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">S</text>
+      <text x="657" y="73" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">N</text>
+      <text x="701" y="73" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">N</text>
+      <text x="731" y="73" text-anchor="middle" font-family="KaTeX_Main" font-size="15" font-weight="700" fill="#fff">S</text>
       <line x1="643" y1="14" x2="643" y2="38" stroke="var(--c-text-dim)" stroke-width="3" />
       <line x1="628" y1="38" x2="658" y2="38" stroke="var(--c-text-dim)" stroke-width="3.6" />
-      <CourseArrow :from="{ x: 643, y: 67 }" :to="{ x: 589, y: 67 }" stroke="var(--c-text-dim)" :stroke-width="3" />
-      <CourseArrow :from="{ x: 709, y: 67 }" :to="{ x: 763, y: 67 }" stroke="var(--c-ok)" :stroke-width="3.2" />
+      <CourseArrow :from="{ x: 642, y: 67 }" :to="{ x: 588, y: 67 }" stroke="var(--c-text-dim)" :stroke-width="3" />
+      <CourseArrow :from="{ x: 716, y: 67 }" :to="{ x: 770, y: 67 }" stroke="var(--c-ok)" :stroke-width="3.2" />
     </g>
     <!-- ==================== 丁：两物块被反向拉开（滑动摩擦力都做负功） ==================== -->
     <g v-if="step >= 3">

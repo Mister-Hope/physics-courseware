@@ -1,8 +1,6 @@
 <script setup lang="ts">
 /**
- * 辨析图（740×250，三栏）：甲 加速跑——地面摩擦力作用在脚与地面的接触点，接触点在力的方向上没有位移 ⇒ 不做功；
- * 乙 蹲起——地面支持力同样作用在脚底接触点 ⇒ 不做功；
- * 丙 缓慢拉动行李箱绕椭圆形操场一圈——力的作用点（行李箱）上，拉力与每一小段位移都成锐角（图中的 Δs）⇒ 正功。
+ * 辨析图（740×250，三栏）：甲 加速跑——地面摩擦力作用在脚与地面的接触点，接触点在力的方向上没有位移 ⇒ 不做功； 乙 蹲起——地面支持力同样作用在脚底接触点 ⇒ 不做功； 丙 缓慢拉动行李箱绕椭圆形操场一圈——力的作用点（行李箱）上，拉力与每一小段位移都成锐角（图中的 Δs）⇒ 正功。
  * 干净版（showAnalysis = false）只有鞋/人/行李箱与轨迹；分析类标注点击后才出。
  */
 const { showAnalysis = false } = defineProps<{
@@ -25,7 +23,15 @@ const { showAnalysis = false } = defineProps<{
         <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
         <tspan font-family="KaTeX_Main" font-size="13" dy="5">f</tspan>
       </text>
-      <CourseArrow :from="{ x: 176, y: 142 }" :to="{ x: 226, y: 142 }" stroke="var(--c-velocity)" :stroke-width="2.4" stroke-dasharray="7 5" label="v" :label-dy="-10" />
+      <CourseArrow
+        :from="{ x: 176, y: 142 }"
+        :to="{ x: 226, y: 142 }"
+        stroke="var(--c-velocity)"
+        :stroke-width="2.4"
+        stroke-dasharray="7 5"
+        label="v"
+        :label-dy="-10"
+      />
     </g>
     <!-- ============ 乙 蹲起 ============ -->
     <text x="262" y="24" font-size="18" fill="var(--c-accent)">乙</text>

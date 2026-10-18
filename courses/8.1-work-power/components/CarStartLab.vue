@@ -39,9 +39,7 @@ const vCurve = computed<{ x: number; y: number }[]>(() => {
       v = accel.value * t;
     } else {
       const target = Math.round((t - t1) / DT);
-      for (; integrated < target; integrated += 1) 
-        v += ((P_RATED / v - F_FRICTION) / M) * DT;
-      
+      for (; integrated < target; integrated += 1) v += ((P_RATED / v - F_FRICTION) / M) * DT;
     }
     points.push({ x: t, y: Number(v.toFixed(3)) });
   }
@@ -128,7 +126,9 @@ const aText = computed(() => cur.value.a.toFixed(2));
     />
     <div class="csl-panel">
       <div class="csl-head">
-        <span><Latex tex="P = 60\ \text{kW}" />　<Latex tex="F_{\text{阻}} = 1800\ \text{N}" /></span>
+        <span
+          ><Latex tex="P = 60\ \text{kW}" />　<Latex tex="F_{\text{阻}} = 1800\ \text{N}"
+        /></span>
         <span class="csl-phase" :class="cur.phase === 1 ? 'csl-p1' : 'csl-p2'">
           {{ cur.phase === 1 ? "阶段一：恒定加速度" : "阶段二：恒定功率" }}
         </span>

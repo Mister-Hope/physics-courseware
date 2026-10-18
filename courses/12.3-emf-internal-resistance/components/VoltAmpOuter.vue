@@ -1,10 +1,10 @@
 <script setup lang="ts">
 /**
- * 电流表外接法（相对电源外接）电路图： 开关接在电源负极一侧（断开开关时电压表示数归零）；电压表并联在外电路两端（测路端电压）；
- * 电流表只串在外电路（变阻器）这一支路上。 滑动变阻器用共享 `<CircuitRheostat>`（长方形线圈 + 滑片箭头）：滑片接线端在长边正外侧
- * `sliderLength`=16 处，竖直放置时 `x = 线圈中心 400 + 短边/2 8 + 16 = 424`、`y = 116 + slider×48`（`:slider="0.25"` ⇒ 128），
- * 页面把那根滑片导线画到这个点为止（端点对齐）。 元件符号一律用共享 <CircuitBattery> / <CircuitMeter> /
- * <CircuitRheostat> / <CircuitSwitch>，导线手画（1.6）。 step ≥ 1 用虚线框圈出"外电路"。
+ * 电流表外接法（相对电源外接）电路图： 开关接在电源负极一侧（断开开关时电压表示数归零）；电压表并联在外电路两端（测路端电压）； 电流表只串在外电路（变阻器）这一支路上。 滑动变阻器用共享
+ * `<CircuitRheostat>`（长方形线圈 + 滑片箭头）：滑片接线端在长边正外侧 `sliderLength`=16 处，竖直放置时 `x = 线圈中心 400 + 短边/2 8 +
+ * 16 = 424`、`y = 116 + slider×48`（`:slider="0.25"` ⇒ 128）， 页面把那根滑片导线画到这个点为止（端点对齐）。 元件符号一律用共享
+ * <CircuitBattery> / <CircuitMeter> / <CircuitRheostat> / <CircuitSwitch>，导线手画（1.6）。 step ≥ 1
+ * 用虚线框圈出"外电路"。
  */
 const { step = 0 } = defineProps<{ step?: number }>();
 </script>

@@ -3,8 +3,8 @@ import path from "node:path";
 import { defineConfig } from "@playwright/test";
 
 import { playwrightRunDir } from "./e2e/artifacts";
-import { VIEWPORT } from "./e2e/slidev-driver";
 import { listCourses } from "./e2e/courses";
+import { VIEWPORT } from "./e2e/slidev-driver";
 
 const courses = listCourses();
 /** Playwright 自己的中间产物（每次运行会被清空）——按课件/端口分开，多个进程同时跑不互相删 */

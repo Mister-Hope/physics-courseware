@@ -14,9 +14,7 @@ const spring = (x0: number, x1: number, y: number, amp = 12) => {
   const step = (xe - xs) / (coils * 2);
   let d = `M ${x0} ${y} L ${xs} ${y}`;
 
-  for (let i = 1; i <= coils * 2; i++) {
-    d += ` L ${(xs + i * step).toFixed(1)} ${(i % 2 ? y - amp : y + amp).toFixed(1)}`;
-  }
+  for (let i = 1; i <= coils * 2; i++) d += ` L ${(xs + i * step).toFixed(1)} ${(i % 2 ? y - amp : y + amp).toFixed(1)}`;
 
   return `${d} L ${x1} ${y}`;
 };

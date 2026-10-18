@@ -22,21 +22,21 @@ withDefaults(defineProps<{ showForces?: boolean }>(), { showForces: false });
     <text x="140" y="252" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="16">θ</text>
     <!-- 四个力（点击后才显示） -->
     <g v-if="showForces">
-    <CourseArrow :from="{ x: 115, y: 190 }" :to="{ x: 115, y: 245 }" :head-size="10" stroke="var(--c-force)" stroke-width="3" />
-    <text x="122" y="240" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic" font-size="15">G</text>
-    <CourseArrow :from="{ x: 60, y: 120 }" :to="{ x: 105, y: 120 }" :head-size="10" stroke="var(--c-physics)" stroke-width="3" />
-    <text x="84" y="112" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic" font-size="15">F</text>
-    <text x="93" y="115" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic" font-size="10">N</text>
-    <CourseArrow :from="{ x: 60, y: 120 }" :to="{ x: 60, y: 76 }" :head-size="10" stroke="var(--c-velocity)" stroke-width="3" />
-    <text x="30" y="90" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="15">f</text>
-    <CourseArrow :from="{ x: 170, y: 260 }" :to="{ x: 170, y: 205 }" :head-size="10" stroke="var(--c-accent)" stroke-width="3" />
-    <text x="178" y="204" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="15">N</text>
-    <!-- 下端必然向右滑开 -->
-    <CourseArrow :from="{ x: 186, y: 244 }" :to="{ x: 244, y: 244 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.2" stroke-dasharray="6 4" />
-    <text x="196" y="236" fill="var(--c-force)" font-size="13">向右滑开</text>
-    <!-- 水平方向只有 F_N -->
-    <line x1="60" y1="150" x2="300" y2="150" stroke="var(--c-force)" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.55" />
-    <text x="196" y="166" fill="var(--c-force)" font-size="13">水平方向只有 F_N</text>
+      <CourseArrow :from="{ x: 115, y: 190 }" :to="{ x: 115, y: 245 }" :head-size="10" stroke="var(--c-force)" stroke-width="3" />
+      <text x="122" y="240" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic" font-size="15">G</text>
+      <CourseArrow :from="{ x: 60, y: 120 }" :to="{ x: 105, y: 120 }" :head-size="10" stroke="var(--c-physics)" stroke-width="3" />
+      <text x="84" y="112" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic" font-size="15">F</text>
+      <text x="93" y="115" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic" font-size="10">N</text>
+      <CourseArrow :from="{ x: 60, y: 120 }" :to="{ x: 60, y: 76 }" :head-size="10" stroke="var(--c-velocity)" stroke-width="3" />
+      <text x="30" y="90" fill="var(--c-velocity)" font-family="KaTeX_Math" font-style="italic" font-size="15">f</text>
+      <CourseArrow :from="{ x: 170, y: 260 }" :to="{ x: 170, y: 205 }" :head-size="10" stroke="var(--c-accent)" stroke-width="3" />
+      <text x="178" y="204" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="15">N</text>
+      <!-- 下端必然向右滑开 -->
+      <CourseArrow :from="{ x: 186, y: 244 }" :to="{ x: 244, y: 244 }" :head-size="9" stroke="var(--c-force)" stroke-width="2.2" stroke-dasharray="6 4" />
+      <text x="196" y="236" fill="var(--c-force)" font-size="13">向右滑开</text>
+      <!-- 水平方向只有 F_N -->
+      <line x1="60" y1="150" x2="300" y2="150" stroke="var(--c-force)" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.55" />
+      <text x="196" y="166" fill="var(--c-force)" font-size="13">水平方向只有 F_N</text>
     </g>
   </svg>
 </template>

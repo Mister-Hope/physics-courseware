@@ -414,7 +414,7 @@ title: 课堂小结
 </div>
 </div>
 
-<div class="tip-hint" v-click="1">功是标量，正负只说能量流向；计算功的位移一般以<b>地面参考系</b>衡量。</div>
+<div class="important-hint" v-click="1" style="--hint-pad-y: 0.4rem"><b>功是能量变化的量度</b>——力做了多少功，就有多少能量发生转移或转化。功是标量，正负只说能量流向；计算功的位移一般以<b>地面参考系</b>衡量。</div>
 </div>
 
 ---
@@ -423,8 +423,10 @@ title: "功率"
 lesson: "第二课时"
 chapter-no: "8.1"
 chapter: "第八章 机械能守恒定律"
-subtitle: "功率的定义 · 机车启动专题"
+subtitle: "功率的定义 · 机车启动"
 ---
+
+<CoverDecoration2Svg />
 
 ---
 layout: base-flex

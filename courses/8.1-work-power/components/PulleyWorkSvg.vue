@@ -2,13 +2,11 @@
 import { computed } from "vue";
 
 /**
- * 例题图（860×280，横向拉长压高度）：绳的一端固定在**运动方向前方的墙**上（这一段绳**靠下**，走 y=248），
- * 绕过**挂在物体右侧外面**的滑轮——物体右侧伸出一截**短连杆**接住滑轮轴，滑轮**不压在物体里**；
- * 另一端用手以 F 拉着（这一段绳**靠上**）。
- * - slanted = false：两段绳都水平，物体前进 L 时绳头前进 2L ⇒ W = 2FL
- * - slanted = true：手这段绳与水平成 α 角。两段绳拉力的夹角就是 α，合力 F合 = 2Fcos(α/2)、
- *   方向与水平成 α/2 ⇒ W = 2FLcos²(α/2) = FL(1 + cos α)；绳头位移＝L 与 L 的平行四边形对角线 2Lcos(α/2)。
- * 分步：页面传 `:step="$clicks"`。力 F 与角 α 是题干量（常显），位移 / 合力 / 平行四边形点击后才出。
+ * 例题图（860×280，横向拉长压高度）：绳的一端固定在**运动方向前方的墙**上（这一段绳**靠下**，走 y=248）， 绕过**挂在物体右侧外面**的滑轮——物体右侧伸出一截**短连杆**接住滑轮轴，滑轮**不压在物体里**； 另一端用手以 F 拉着（这一段绳**靠上**）。
+ *
+ * - Slanted = false：两段绳都水平，物体前进 L 时绳头前进 2L ⇒ W = 2FL
+ * - Slanted = true：手这段绳与水平成 α 角。两段绳拉力的夹角就是 α，合力 F合 = 2Fcos(α/2)、 方向与水平成 α/2 ⇒ W = 2FLcos²(α/2) = FL(1 + cos α)；绳头位移＝L 与 L 的平行四边形对角线 2Lcos(α/2)。 分步：页面传
+ *   `:step="$clicks"`。力 F 与角 α 是题干量（常显），位移 / 合力 / 平行四边形点击后才出。
  */
 const { slanted = false, step = 0 } = defineProps<{
   slanted?: boolean;
@@ -77,7 +75,16 @@ const diagLabel = computed(() => ({ x: (H0.x + dDiag.value.x) / 2, y: (H0.y + dD
     <SurfaceHatch :from="{ x: 16, y: 280 }" :to="{ x: 800, y: 280 }" side="below" :thickness="12" :gap="22" />
     <SurfaceHatch :from="{ x: 800, y: 14 }" :to="{ x: 800, y: 280 }" side="right" :thickness="12" :gap="20" />
     <!-- 物体 -->
-    <rect :x="OBJECT.x1" :y="OBJECT.y1" :width="OBJECT.x2 - OBJECT.x1" :height="OBJECT.y2 - OBJECT.y1" rx="10" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.4" />
+    <rect
+      :x="OBJECT.x1"
+      :y="OBJECT.y1"
+      :width="OBJECT.x2 - OBJECT.x1"
+      :height="OBJECT.y2 - OBJECT.y1"
+      rx="10"
+      fill="var(--c-surface-solid)"
+      stroke="var(--c-text-dim)"
+      stroke-width="2.4"
+    />
     <!-- 物体右侧伸出的一截短连杆，把滑轮吊在物体右侧外面 -->
     <line :x1="LINK.from" :y1="P.y" :x2="LINK.to" :y2="P.y" stroke="var(--c-text-dim)" stroke-width="5" stroke-linecap="round" />
     <circle :cx="P.x" :cy="P.y" :r="P.r" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="2.4" />
@@ -117,12 +124,7 @@ const diagLabel = computed(() => ({ x: (H0.x + dDiag.value.x) / 2, y: (H0.y + dD
     <!-- 方法一：两段绳的拉力 + 力的平行四边形 + 合力 -->
     <g v-if="slanted && step >= 2">
       <CourseArrow :from="{ x: 600, y: 248 }" :to="{ x: 675, y: 248 }" stroke="var(--c-accent)" :stroke-width="2.6" />
-      <CourseArrow
-        :from="rope2Mid"
-        :to="{ x: rope2Mid.x + 72 * uOut.x, y: rope2Mid.y + 72 * uOut.y }"
-        stroke="var(--c-accent)"
-        :stroke-width="2.6"
-      />
+      <CourseArrow :from="rope2Mid" :to="{ x: rope2Mid.x + 72 * uOut.x, y: rope2Mid.y + 72 * uOut.y }" stroke="var(--c-accent)" :stroke-width="2.6" />
       <line :x1="sideTip.x" :y1="sideTip.y" :x2="cornerTip.x" :y2="cornerTip.y" stroke="var(--c-physics)" stroke-width="1.8" stroke-dasharray="6 5" />
       <line :x1="ropeTip.x" :y1="ropeTip.y" :x2="cornerTip.x" :y2="cornerTip.y" stroke="var(--c-physics)" stroke-width="1.8" stroke-dasharray="6 5" />
       <CourseArrow :from="P" :to="cornerTip" stroke="var(--c-physics)" :stroke-width="3.4" />

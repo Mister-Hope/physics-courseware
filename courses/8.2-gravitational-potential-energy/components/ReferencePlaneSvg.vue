@@ -1,10 +1,8 @@
 <script setup lang="ts">
 /**
- * 第 10 页示意图（教材图 8.2-5 口径）：以二楼地面为参考平面——二楼房间的 A 在上方（E_p 为正），
- * 一楼房间的 B 在下方（E_p 为负）。
+ * 第 10 页示意图（教材图 8.2-5 口径）：以二楼地面为参考平面——二楼房间的 A 在上方（E_p 为正）， 一楼房间的 B 在下方（E_p 为负）。
  *
- * showSigns：点击后在 A、B 旁出现 + / − 记号。
- * viewBox 580×260，页面里按 400px 宽渲染（≈179px 高）。
+ * ShowSigns：点击后在 A、B 旁出现 + / − 记号。 viewBox 580×260，页面里按 400px 宽渲染（≈179px 高）。
  */
 const { showSigns = false } = defineProps<{
   /** 点击后出现：A 旁的 + 与 B 旁的 − */
@@ -13,7 +11,14 @@ const { showSigns = false } = defineProps<{
 </script>
 
 <template>
-  <svg viewBox="0 0 580 260" width="100%" style="max-width: 340px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="以二楼地面为参考平面时楼上物体为正、楼下物体为负">
+  <svg
+    viewBox="0 0 580 260"
+    width="100%"
+    style="max-width: 340px"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="以二楼地面为参考平面时楼上物体为正、楼下物体为负"
+  >
     <SurfaceHatch :from="{ x: 100, y: 230 }" :to="{ x: 480, y: 230 }" side="below" :thickness="12" :gap="20" />
     <line x1="120" y1="40" x2="120" y2="230" stroke="var(--c-text-dim)" stroke-width="2.4" />
     <line x1="460" y1="40" x2="460" y2="230" stroke="var(--c-text-dim)" stroke-width="2.4" />

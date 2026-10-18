@@ -44,11 +44,11 @@ SVG 内部与 KaTeX 内部节点（固定画布内部换内容属正当，但 `<
 
 写 `dist/` 与 e2e 缓存的命令分三类，**各有各的目录，先后跑不会互相删文件**（`e2e/artifacts.ts` 按 `E2E_OPERATION` 派生）：
 
-| 命令 | 产物目录（单课件） | 产物目录（多课件） |
-| --- | --- | --- |
-| `pnpm test:e2e`（版面检查） | `courses/<课件>/.temp/layout-overflow/` | `.e2e/layout/<范围>/` |
-| `pnpm shots`（截图） | `courses/<课件>/.temp/shots/` | `e2e/reports/shots/` |
-| `pnpm compare:shots` / 单页排查 | `courses/<课件>/.temp/compare/` | — |
+| 命令                            | 产物目录（单课件）                      | 产物目录（多课件）    |
+| ------------------------------- | --------------------------------------- | --------------------- |
+| `pnpm test:e2e`（版面检查）     | `courses/<课件>/.temp/layout-overflow/` | `.e2e/layout/<范围>/` |
+| `pnpm shots`（截图）            | `courses/<课件>/.temp/shots/`           | `e2e/reports/shots/`  |
+| `pnpm compare:shots` / 单页排查 | `courses/<课件>/.temp/compare/`         | —                     |
 
 - Playwright 自己的 `test-results/` / `html-report/` 落在 **`.e2e/<操作>/<范围>/`**（截图与版面检查各一份，互不覆盖）。
 - **视口是 1920×1080**（演示屏幕常见分辨率）：Slidev 逻辑画布恒为 980×552，视口只决定缩放倍率（1920 宽 ≈ ×1.96），e2e 会按实测 scale 换算回逻辑像素 ⇒ 留白 / 位移 / 顶出的阈值口径不随视口改变。
