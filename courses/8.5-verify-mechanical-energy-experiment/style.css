@@ -1,0 +1,25 @@
+/* ═══════════════════════════════════════════════
+   实验：验证机械能守恒定律 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课内容密度偏高（16 页要装实验思路＋测量＋数据处理＋误差），
+   按共享 addon 的说明收紧这两个堆叠间距（它们直接决定一页能装多少内容）。 */
+:root {
+  --page-gap: 0.8rem;
+  --stack-gap: 0.7rem;
+}
+
+/* 第一版审查用：插画与交互均未实现，先以虚线框 + 一行文字说明占位。
+   图/交互做出来之后，本类连同页面里的占位块一起删掉。
+   密度按每页高度预算收紧：整宽一行 ≈37px、半栏两行 ≈57px。 */
+.fig-ph {
+  padding: 0.45rem 0.7rem;
+  border: 1px dashed var(--c-border-glow);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
