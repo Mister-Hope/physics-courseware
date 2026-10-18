@@ -42,5 +42,5 @@ export const coursePages: Record<string, number> = {
   "o2-1.2-lorentz-force": 14,
   "o2-1.3-charged-particle-motion": 18,
   "o2-1.4-mass-spectrometer-cyclotron": 28,
-  "o2-1.x-speed-matching": 24
+  "o2-1.x-speed-matching": 24,
 };

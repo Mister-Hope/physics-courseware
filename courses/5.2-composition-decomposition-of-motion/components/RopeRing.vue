@@ -69,11 +69,12 @@ const bShare = computed(() => ({
 const aPerp = computed(() => ({ from: aTip.value, to: aShare.value.to }));
 const bPerp = computed(() => ({ from: bTip.value, to: bShare.value.to }));
 
-/**
- * 垂足处的直角符号：以垂足为顶点，沿"绳方向"与"垂线方向"各取一小段，
- * 画一个边长 12 的小方角，标明这条虚线确实垂直于绳。
- */
-const rightAngleMark = (foot: { x: number; y: number }, along: { x: number; y: number }, perp: { x: number; y: number }): string => {
+/** 垂足处的直角符号：以垂足为顶点，沿"绳方向"与"垂线方向"各取一小段， 画一个边长 12 的小方角，标明这条虚线确实垂直于绳。 */
+const rightAngleMark = (
+  foot: { x: number; y: number },
+  along: { x: number; y: number },
+  perp: { x: number; y: number },
+): string => {
   const size = 12;
   const p1 = { x: foot.x + size * along.x, y: foot.y + size * along.y };
   const p2 = { x: foot.x + size * perp.x, y: foot.y + size * perp.y };
@@ -313,9 +314,6 @@ const arcEnd = computed(() => ({
   flex-direction: column;
   gap: 0.3rem;
 }
-
-
-
 
 .sim-readout {
   color: var(--c-text);

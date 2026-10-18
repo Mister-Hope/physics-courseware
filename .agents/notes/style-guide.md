@@ -84,20 +84,11 @@
 **规则底色**：**① 色值抄成 token 字面值 / ⑤ `:root` 越权覆盖是 🔴**（audit 报 `error`，客观一致性）；
 **② 半透明色相、③ 字号、④ 非 token 圆角是 🟡**（audit 报 `warn`，"通常是坏味道"，执行者按页面判断）。
 
-1. **色值 100% 走 `var(--…)`**（🔴）：`style.css` 与组件 `<style>` 里出现 `#hex` / `rgb(` 即待修
-   （`grep -nE '#[0-9a-f]{3,8}|rgb\(' courses/<slug>/style.css | grep -v 'var(--'`）。
-   没有现成 token 就用 `color-mix(in srgb, var(--token) N%, transparent)`，或**补一个 token**，不许写死。
-2. **SVG 表现属性里的色值也走 `var(--c-*)`**：`fill="var(--c-velocity)"` / `stroke="var(--c-accent)"` 是**合法写法**——
-   SVG 2 §6.6 规定表现属性的值**按 CSS 值解析**（不是声明），CSS Variables §3 规定 `var()` 可替换任何 CSS 值中的任意部分，
-   两条规范合起来就是这个结论（Chromium 实测 `getComputedStyle().fill === "rgb(226, 168, 70)"` 同样证实）。
-   ⇒ 新增的 `<svg>` 里 `fill=` / `stroke=` / `stop-color=` 走 token（🔴 客观一致性；抄成字面值 audit 报 `error`），**不再新增字面值**。
-   （`fill` / `stroke` / `opacity` 会被 attributify 当工具类抓走——坑与正本修复见 [`svg-attributify-trap.md`](svg-attributify-trap.md)，本指南不重复。）
-3. **字号（🟡 经验值）**：正文 1rem；强调用 `.text-*`；小字注释 `.mini-note`（0.85rem）；可读性下限约 **0.65rem**。
-   `0.92rem` / `0.95rem` / `0.88rem` 这类私调值 audit 只报 `warn`（"通常是坏味道"），**执行者按页面判断**，别为了清零去改版式。
-   阶梯在 0.65–1.1rem 之间只有 `.mini-note` 一档，**组件 `<style scoped>` 内部**的固定版式微字号允许保留（不算问题）。
+1. **色值 100% 走 `var(--…)`**（🔴）：`style.css` 与组件 `<style>` 里出现 `#hex` / `rgb(` 即待修（`grep -nE '#[0-9a-f]{3,8}|rgb\(' courses/<slug>/style.css | grep -v 'var(--'`）；没有现成 token 就用 `color-mix(in srgb, var(--token) N%, transparent)`，或**补一个 token**，不许写死。
+2. **SVG 表现属性里的色值也走 `var(--c-*)`**：`fill="var(--c-velocity)"` / `stroke="var(--c-accent)"` 是**合法写法** ⇒ 新增的 `<svg>` 里 `fill=` / `stroke=` / `stop-color=` 走 token（🔴 客观一致性；抄成字面值 audit 报 `error`），**不再新增字面值**。（`fill` / `stroke` / `opacity` 会被 attributify 当工具类抓走——坑与正本修复见 [`svg-attributify-trap.md`](svg-attributify-trap.md)。）
+3. **字号（🟡 经验值）**：正文 1rem；强调用 `.text-*`；小字注释 `.mini-note`（0.85rem）；可读性下限约 **0.65rem**。`0.92rem` / `0.95rem` / `0.88rem` 这类私调值 audit 只报 `warn`（"通常是坏味道"），**执行者按页面判断**，别为了清零去改版式；阶梯在 0.65–1.1rem 之间只有 `.mini-note` 一档，**组件 `<style scoped>` 内部**的固定版式微字号允许保留（不算问题）。
 4. **圆角走 `var(--radius-*)`**（🟡 `warn` 级）：只有胶囊（`999px`）与正圆（`50%`）允许字面值。
-5. **间距只许覆盖 `--page-gap` / `--stack-gap` / 气泡密度那 5 个变量**（🔴，`layout.css` / `atoms.css` 留的唯一出口）——
-   完整白名单见 §8 与 `scripts/style-audit.ts` 的 `ALLOWED_ROOT_OVERRIDES`。
+5. **间距只许覆盖 `--page-gap` / `--stack-gap` / 气泡密度那 5 个变量**（🔴，`layout.css` / `atoms.css` 留的唯一出口）——完整白名单见 §8 与 `scripts/style-audit.ts` 的 `ALLOWED_ROOT_OVERRIDES`。
 
 **已知缺口**（谁先用谁在 `common.css` 补，别再各自写死）：金色/蓝色半透明 → `--c-accent-soft` / `--c-accent-2-soft`；
 "正确"语义双轨 `#34d399` ↔ `#4ade80` → 统一走 `--c-ok`；面板深底两套 `rgb(15 20 37/…)`、`rgb(15 23 42/…)` → 用 `--c-surface`。

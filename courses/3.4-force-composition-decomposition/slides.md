@@ -44,7 +44,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">几个力共同作用的效果，如果跟一个力单独作用的效果相同，就可以用这一个力替代那几个力——这就是<b>等效替代</b>。</div>
+<div class="tip-hint" v-click="2">几个力共同作用的效果，如果跟一个力单独作用的效果相同，就可以用这一个力替代那几个力——这就是<b>等效替代</b>。</div>
 </div>
 
 ---
@@ -56,12 +56,23 @@ clicks: 2
 <div class="page-grow">
 <div class="ask">提水桶的 <Latex tex="F" /> 与 <Latex tex="F_1" />、<Latex tex="F_2" /> 之间是什么关系？</div>
 
-<div class="card" v-click="1">
-<div><b>合力</b>（resultant force）：一个力单独作用的效果，跟某几个力共同作用的效果相同，这个力就叫作那几个力的合力。</div>
-<div><b>分力</b>（component force）：几个力共同作用的效果，跟某个力单独作用的效果相同，这几个力就叫作那个力的分力。</div>
+<div class="def-row" v-click="1">
+
+<DefinitionBox term="合力" tone="gold">
+
+<div><span class="def-term">合力</span>（resultant force）：一个力单独作用的效果，跟某几个力共同作用的效果相同，这个力就叫作那几个力的合力。</div>
+
+</DefinitionBox>
+
+<DefinitionBox term="分力" tone="blue">
+
+<div><span class="def-term">分力</span>（component force）：几个力共同作用的效果，跟某个力单独作用的效果相同，这几个力就叫作那个力的分力。</div>
+
+</DefinitionBox>
+
 </div>
 
-<div class="key" v-click="2">等效替代：<Latex tex="F" /> 单独作用 <b>＝</b> <Latex tex="F_1" />、<Latex tex="F_2" /> 共同作用。合力与分力不是物体同时受到的力。</div>
+<div class="tip-hint" v-click="2">等效替代：<Latex tex="F" /> 单独作用 <b>＝</b> <Latex tex="F_1" />、<Latex tex="F_2" /> 共同作用。合力与分力不是物体同时受到的力。</div>
 </div>
 
 ---
@@ -69,7 +80,7 @@ clicks: 3
 ---
 
 <div class="page-grow">
-<div class="ask">把几个力"合起来"、把一个力"分下去"，分别叫什么？</div>
+<div class="ask">把几个力合起来、把一个力分下去，分别叫什么？</div>
 
 <div class="half-grid" v-click="1">
 <div class="stack">
@@ -82,22 +93,26 @@ clicks: 3
 </div>
 </div>
 
-<div class="card" v-click="2"><b>共点力</b>：几个力都作用在物体的同一点，或者它们的作用线相交于一点。</div>
+<DefinitionBox v-click="2" term="共点力" tone="gold">
 
-<div class="key" v-click="3">合成与分解都建立在"等效替代"上；它们遵从什么法则？用实验来探究。</div>
+<div><span class="def-term">共点力</span>：几个力都作用在物体的同一点，或者它们的作用线相交于一点。</div>
+
+</DefinitionBox>
+
+<div class="tip-hint" v-click="3">合成与分解都建立在等效替代上。</div>
 </div>
 
 ---
 clicks: 5
 ---
 
-<div class="page-grow page-grow-tight">
+<div class="page-grow" style="--page-gap:.2rem;--stack-gap:.2rem;--hint-pad-y:.45rem">
 <div class="ask">两次实验，为什么必须把圆环拉到同一个位置 <Latex tex="O" />？</div>
 
 <div class="split-wide" style="--cols: minmax(0, 0.9fr) minmax(0, 1fr)">
 <PullEquivalence :start-at="3" />
 <div class="stack">
-<div class="key" v-click="1">位置相同 ⟹ 橡皮条伸长相同、对结点的拉力相同；结点都静止 ⟹ 绳的拉力"合起来"与它平衡 ⟹ 两个力共同作用的效果 = 一个力单独作用的效果（<b>等效替代</b>）。</div>
+<div class="tip-hint" v-click="1">位置相同 ⟹ 橡皮条伸长相同、对结点的拉力相同；结点都静止 ⟹ 绳的拉力合起来与它平衡 ⟹ 两个力共同作用的效果 = 一个力单独作用的效果（<b>等效替代</b>）。</div>
 
 <div class="stack-dense" v-click="2">
 <div class="mini-title"><mdi-flask-outline class="text-xl" /> 实验怎么做</div>
@@ -118,13 +133,13 @@ clicks: 2
 
 <div class="stack" v-click="1">
 <div class="mini-title"><span class="bad-line inline-flex"><mdi-close-circle-outline class="text-3xl" /></span> 三只测力计：稳不住</div>
-<div>三只测力计要同时把结点拉到同一点、还要都保持静止，可人只有两只手，很难同时稳住三只；只要有一只晃一下，"共点、静止"就不成立，读数跟着变。</div>
+<div>三只测力计要同时把结点拉到同一点、还要都保持静止，可人只有两只手，很难同时稳住三只；只要有一只晃一下，共点、静止就不成立，读数跟着变。</div>
 
 <div class="mini-title"><span class="ok-line inline-flex"><mdi-check-circle-outline class="text-3xl" /></span> 橡皮条 + 两只测力计：稳</div>
 <div>橡皮条一端固定在木板上，结点只需两只手各拉一只测力计；两次实验分别达到同一位置，稳定、可重复。</div>
 </div>
 
-<div class="key" v-click="2">装置先要稳，读数才可信。</div>
+<div class="tip-hint" v-click="2">装置先要稳，读数才可信。</div>
 </div>
 
 ---
@@ -133,7 +148,7 @@ clicks: 4
 
 # 实验注意事项
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.2rem;--hint-pad-y:.5rem">
 <div class="ask">哪些操作一旦做错，实验就得不到正确结论？</div>
 
 <div class="stack-dense" v-click="1">
@@ -151,7 +166,7 @@ clicks: 4
 <div class="mini-note">以 <Latex tex="60^\circ" />–<Latex tex="120^\circ" /> 为宜，过大或过小都会影响验证结果。</div>
 </div>
 
-<div class="key" v-click="4">这三条都关系到"等效"是否成立——实验结论完全建立在等效控制上。</div>
+<div class="tip-hint" v-click="4">这三条都关系到等效是否成立——实验结论完全建立在等效控制上。</div>
 </div>
 
 ---
@@ -163,7 +178,7 @@ clicks: 3
 <div class="page-grow">
 <div class="stack" v-click="1">
 <div class="mini-title"><mdi-crosshairs class="text-xl" /> 为什么必须调零</div>
-<div>测力计的"零"是弹簧自己定的：<b>弹簧和挂钩有自重</b>——竖直提起时它沿弹簧方向把弹簧拉长一点，水平放置时又不沿弹簧方向，<b>不调零，指针不可能在两种方向下同时指零</b>。换方向就要重新调零，读数时视线正对刻度。</div>
+<div>测力计的零点是弹簧自己定的：<b>弹簧和挂钩有自重</b>——竖直提起时它沿弹簧方向把弹簧拉长一点，水平放置时又不沿弹簧方向，<b>不调零，指针不可能在两种方向下同时指零</b>。换方向就要重新调零，读数时视线正对刻度。</div>
 </div>
 
 <div class="stack" v-click="2">
@@ -171,7 +186,7 @@ clicks: 3
 <div>两只测力计对拉，或者挂同一个重物，看示数是否相同——示数不一样的两只，实验里不能配对使用。</div>
 </div>
 
-<div class="key" v-click="3">调零管"起点"，校验管"两只测力计是不是同一把尺子"。</div>
+<div class="tip-hint" v-click="3">调零决定读数的起点；校验保证两只测力计的示数一致。</div>
 </div>
 
 ---
@@ -190,7 +205,7 @@ clicks: 4
 
 <div class="stack" v-click="1">
 <div class="mini-title">② 测力计外壳与内部弹簧摩擦<span class="inline-flex items-center gap-1.5 ml-1 text-lg bad-line" v-click="3"><mdi-close-circle-outline class="icon-md" /> 有影响</span></div>
-<div class="mini-note" v-click="3">摩擦"吃掉"一部分拉力，弹簧伸长偏小、读数偏小，两个力的比值就失真了。</div>
+<div class="mini-note" v-click="3">摩擦会消耗一部分拉力，弹簧伸长偏小、读数偏小，两个力的比值就失真了。</div>
 </div>
 
 <div class="stack" v-click="1">
@@ -205,14 +220,14 @@ clicks: 2
 
 # 夹角的大小对实验的影响
 
-<div class="page-grow page-grow-tight">
+<div class="page-grow" style="--page-gap:.2rem;--hint-pad-y:.5rem">
 <div class="ask">两个力的夹角为什么不能太小，也不能太大？</div>
 
 <div v-click="1">
 <AngleErrorDemo />
 </div>
 
-<div class="key" v-click="2">夹角太小，平行四边形与"直接相加"的差别被读数误差淹没；夹角太大，合力很小、同样的误差被放大——所以以 <Latex tex="60^\circ" />–<Latex tex="120^\circ" /> 为宜。</div>
+<div class="tip-hint" v-click="2">夹角太小，平行四边形与直接相加的差别很小，会被读数误差掩盖；夹角太大，合力很小，同样的误差被放大——所以以 <Latex tex="60^\circ" />–<Latex tex="120^\circ" /> 为宜。</div>
 </div>
 
 ---
@@ -250,7 +265,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">把力首尾相接：合力从第一个力的起点指向最后一个力的终点；两个力时，它与平行四边形定则的结果完全一致。</div>
+<div class="tip-hint" v-click="2">把力首尾相接：合力从第一个力的起点指向最后一个力的终点；两个力时，它与平行四边形定则的结果完全一致。</div>
 </div>
 
 ---
@@ -264,17 +279,16 @@ clicks: 2
 <TriangleRuleRotate />
 </div>
 
-<div class="key" v-click="2">把第二个力接在第一个力的末端、绕着它转动：两个力<b>同向</b>时合力最大，等于 <Latex tex="F_1 + F_2" />；<b>反向</b>时合力最小，等于 <Latex tex="|F_1 - F_2|" />。夹角越大，合力越小。</div>
+<div class="tip-hint" v-click="2">把第二个力接在第一个力的末端、绕着它转动：两个力<b>同向</b>时合力最大，等于 <Latex tex="F_1 + F_2" />；<b>反向</b>时合力最小，等于 <Latex tex="|F_1 - F_2|" />。夹角越大，合力越小。</div>
 </div>
 
 ---
 clicks: 3
+title: 例题：用三角形法则求合力
 ---
 
-# 例题：用三角形法则求合力
-
 <div class="page-grow" style="--page-gap:.8rem">
-<div>某物体受到一个大小为 <Latex tex="24\ \text{N}" />、方向水平向右的力，还受到另一个大小为 <Latex tex="7\ \text{N}" />、方向竖直向上的力。求这两个力的合力的大小和方向。</div>
+<div><b class="ex-no">例题</b>　某物体受到一个大小为 <Latex tex="24\ \text{N}" />、方向水平向右的力，还受到另一个大小为 <Latex tex="7\ \text{N}" />、方向竖直向上的力。求这两个力的合力的大小和方向。</div>
 
 <div class="split-wide" style="--cols: minmax(0, 0.95fr) minmax(0, 1fr)">
 <div v-click="1">
@@ -288,7 +302,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">直角三角形用勾股定理：<Latex tex="F = \sqrt{24^2 + 7^2}\ \text{N} = 25\ \text{N}" />；方向用正切值表示：<Latex tex="\tan\alpha = \dfrac{7}{24}" />（<Latex tex="\alpha" /> 是合力与 <Latex tex="24\ \text{N}" /> 的力之间的夹角）。</div>
+<div class="tip-hint" v-click="3">直角三角形用勾股定理：<Latex tex="F = \sqrt{24^2 + 7^2}\ \text{N} = 25\ \text{N}" />；方向用正切值表示：<Latex tex="\tan\alpha = \dfrac{7}{24}" />（<Latex tex="\alpha" /> 是合力与 <Latex tex="24\ \text{N}" /> 的力之间的夹角）。</div>
 </div>
 
 ---
@@ -313,7 +327,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">位移的合成也遵从平行四边形定则——从 <Latex tex="A" /> 到 <Latex tex="B" /> 再到 <Latex tex="C" />，合位移 <Latex tex="AC" /> 正是那个平行四边形的对角线。</div>
+<div class="info-hint" v-click="2">位移的合成也遵从平行四边形定则——从 <Latex tex="A" /> 到 <Latex tex="B" /> 再到 <Latex tex="C" />，合位移 <Latex tex="AC" /> 正是那个平行四边形的对角线。</div>
 </div>
 
 ---
@@ -335,7 +349,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">合力、分力既可以是抽象的力，也可以是真实的力——看它有没有落到物体实际受到的那个力上。</div>
+<div class="tip-hint" v-click="2">合力、分力既可以是抽象的力，也可以是真实的力——看它有没有落到物体实际受到的那个力上。</div>
 </div>
 
 ---
@@ -356,7 +370,7 @@ clicks: 3
 <ChartLabel v-click="2" :x-percent="12" :y-percent="88" :parts="[{ tex: 'F_2^{\\prime}' }]" anchor="bottom-left" :dy="6" color="var(--c-accent-2)"/>
 </div>
 
-<div class="key" v-click="3">没有限制时，同一条对角线可以作出无数个平行四边形——<Latex tex="F" /> 可以分解成无数对大小、方向不同的分力，具体怎么分由要研究的问题决定。</div>
+<div class="tip-hint" v-click="3">没有限制时，同一条对角线可以作出无数个平行四边形——<Latex tex="F" /> 可以分解成无数对大小、方向不同的分力，具体怎么分由要研究的问题决定。</div>
 </div>
 
 ---
@@ -374,7 +388,7 @@ clicks: 2
 </div>
 
 <div class="stack">
-<div class="key" v-click="2">两对互相垂直的方向：<b>水平—竖直</b>、<b>沿斜面—垂直斜面</b>，一共 8 个方向。重力就要沿"沿斜面向下"和"垂直斜面向下"分解。</div>
+<div class="tip-hint" v-click="2">两对互相垂直的方向：<b>水平—竖直</b>、<b>沿斜面—垂直斜面</b>，一共 8 个方向。重力就要分解到沿斜面向下与垂直斜面向下这两个方向上。</div>
 
 <div class="stack-dense" v-click="2">
 <div><span class="inc-tag inc-tag-blue mini-note">水平—竖直</span>水平向右、水平向左、竖直向上、竖直向下</div>
@@ -397,7 +411,7 @@ clicks: 2
 <InclineDecomposition />
 </div>
 
-<div class="key" v-click="2">沿斜面向下的 <Latex tex="G_\parallel = G\sin\theta" /> 使物体下滑，垂直斜面的 <Latex tex="G_\perp = G\cos\theta" /> 压紧斜面——分力仍然作用在物体上。</div>
+<div class="tip-hint" v-click="2">沿斜面向下的 <Latex tex="G_\parallel = G\sin\theta" /> 使物体下滑，垂直斜面的 <Latex tex="G_\perp = G\cos\theta" /> 压紧斜面——分力仍然作用在物体上。</div>
 </div>
 
 ---
@@ -406,18 +420,18 @@ clicks: 2
 
 # 分力作用在谁身上
 
-<div class="page-grow">
-<div class="ask"><Latex tex="G_\perp" /> 的效果是"压紧斜面"，那它是不是"物体压斜面的力"？</div>
+<div class="page-grow" style="--page-gap:.2rem">
+<div class="ask"><Latex tex="G_\perp" /> 的效果是压紧斜面，那它是不是物体压斜面的力？</div>
 
 <div class="stack" v-click="1">
 <div class="mini-title"><span class="ok-line inline-flex"><mdi-check-circle-outline class="text-3xl" /></span> 对：<Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 都作用在物块上</div>
 <div><Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 是重力分解出的分力，受力物体还是物块。</div>
 
-<div class="mini-title"><span class="bad-line inline-flex"><mdi-close-circle-outline class="text-3xl" /></span> 错：把 <Latex tex="G_\perp" /> 说成"物体压斜面的力"</div>
-<div>"物体压斜面的力"作用在<b>斜面</b>上，施力物体才是物块，它是斜面对物块支持力的反作用力——受力、施力对象都换了，和重力的分力不是同一个力。</div>
+<div class="mini-title"><span class="bad-line inline-flex"><mdi-close-circle-outline class="text-3xl" /></span> 错：把 <Latex tex="G_\perp" /> 说成物体压斜面的力</div>
+<div>物体压斜面的力作用在<b>斜面</b>上，施力物体才是物块，它是斜面对物块支持力的反作用力——受力、施力对象都换了，和重力的分力不是同一个力。</div>
 </div>
 
-<div class="key" v-click="2">分解只是同一个力换一种说法：受力物体始终是原来那个物块，分力不能被"搬"到别的物体上。</div>
+<div class="tip-hint" v-click="2">分解只是同一个力换一种说法：受力物体始终是原来那个物块，分力不能移到别的物体上。</div>
 </div>
 
 ---
@@ -426,14 +440,14 @@ clicks: 2
 
 # 正交分解法
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.2rem">
 <div class="ask">力不在坐标轴上时，怎么求它沿两个方向的作用？</div>
 
 <div v-click="1">
 <OrthogonalForce />
 </div>
 
-<div class="key" v-click="2">把力分解到互相垂直的两条坐标轴上：<Latex tex="F_x = F\cos\alpha" />、<Latex tex="F_y = F\sin\alpha" />；建系时让尽量多的力落在坐标轴上。</div>
+<div class="tip-hint" v-click="2">把力分解到互相垂直的两条坐标轴上：<Latex tex="F_x = F\cos\alpha" />、<Latex tex="F_y = F\sin\alpha" />；建系时让尽量多的力落在坐标轴上。</div>
 </div>
 
 ---
@@ -455,7 +469,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">把平方展开：<Latex tex="F^2 = F_1^2 + 2F_1F_2\cos\theta + F_2^2(\cos^2\theta + \sin^2\theta)" />，就得到 <Latex tex="F = \sqrt{F_1^2 + F_2^2 + 2F_1F_2\cos\theta}" />。</div>
+<div class="tip-hint" v-click="2">把平方展开：<Latex tex="F^2 = F_1^2 + 2F_1F_2\cos\theta + F_2^2(\cos^2\theta + \sin^2\theta)" />，就得到 <Latex tex="F = \sqrt{F_1^2 + F_2^2 + 2F_1F_2\cos\theta}" />。</div>
 </div>
 
 ---
@@ -464,12 +478,16 @@ clicks: 6
 
 # 力的分解有几种可能
 
-<div class="page-grow" style="--page-gap:.3rem">
+<div class="page-grow" style="--page-gap:.15rem;--hint-pad-y:.4rem">
 <div class="ask">已知条件不同，同一个合力 <Latex tex="F" /> 的分解结果还唯一吗？</div>
+
+<div style="max-width: 35rem; margin: 0 auto">
 
 <DecompositionCases />
 
-<div class="key" v-click="6">已知条件越少，解越多——不是每一种分解都能唯一确定。</div>
+</div>
+
+<div class="tip-hint" v-click="6">已知条件越少，解越多——不是每一种分解都能唯一确定。</div>
 </div>
 
 ---
@@ -478,21 +496,20 @@ clicks: 2
 
 # 已知一个分力的方向和另一个分力的大小
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.2rem;--hint-pad-y:.45rem">
 <div class="ask">已知 <Latex tex="F_1" /> 的方向和 <Latex tex="F_2" /> 的大小，一定能作出平行四边形吗？</div>
 
-<div v-click="1">
+<div v-click="1" style="max-width: 36rem; margin: 0 auto">
 <DecompositionCircle />
 </div>
 
-<div class="key" v-click="2"><Latex tex="F_2" /> 有最小值：<Latex tex="F_2 = F\sin\theta" />，此时它垂直于 <Latex tex="F_1" /> 的已知方向。</div>
+<div class="tip-hint" v-click="2"><Latex tex="F_2" /> 有最小值：<Latex tex="F_2 = F\sin\theta" />，此时它垂直于 <Latex tex="F_1" /> 的已知方向。</div>
 </div>
 
 ---
 clicks: 3
+title: 练习与应用
 ---
-
-# 练习与应用
 
 <div class="page-grow">
 <div>两个力 <Latex tex="F_1" />、<Latex tex="F_2" /> 之间的夹角为 <Latex tex="\theta" />，合力为 <Latex tex="F" />。判断以下说法是否正确，并简述理由。</div>
@@ -516,8 +533,8 @@ clicks: 3
 </div>
 
 ---
-
-# 课堂小结
+title: 课堂小结
+---
 
 <div class="page-grow">
 <div class="stack">

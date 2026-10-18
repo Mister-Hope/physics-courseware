@@ -103,34 +103,34 @@ const panels = [0, 1, 2, 3].map((i) => {
   const vAtipAtB = along(B, tangent(thetaA), V);
 
   const arrows: ArrowSpec[] = [
-    { from: A, to: vAtip, stroke: "#60a5fa", width: 3 },
-    { from: B, to: vBtip, stroke: "#60a5fa", width: 3 },
+    { from: A, to: vAtip, stroke: "var(--c-velocity)", width: 3 },
+    { from: B, to: vBtip, stroke: "var(--c-velocity)", width: 3 },
   ];
-  if (i === 1) arrows.push({ from: B, to: vAtipAtB, stroke: "#94a3b8", width: 2.4, dash: "7 5", head: 9 });
-  if (i >= 2) arrows.push({ from: vAtipAtB, to: vBtip, stroke: "#e2a846", width: 3.2, head: small ? 10 : 12 });
+  if (i === 1) arrows.push({ from: B, to: vAtipAtB, stroke: "var(--c-text-dim)", width: 2.4, dash: "7 5", head: 9 });
+  if (i >= 2) arrows.push({ from: vAtipAtB, to: vBtip, stroke: "var(--c-accent)", width: 3.2, head: small ? 10 : 12 });
 
   const labels: LabelSpec[] = [
-    { text: TAGS[i], x: 14, y: 30, anchor: "start", size: 27, fill: "#94a3b8", math: false },
-    { text: "O", x: CX - 9, y: CY + 19, anchor: "end", size: 23, fill: "#94a3b8", math: true },
+    { text: TAGS[i], x: 14, y: 30, anchor: "start", size: 27, fill: "var(--c-text-dim)", math: false },
+    { text: "O", x: CX - 9, y: CY + 19, anchor: "end", size: 23, fill: "var(--c-text-dim)", math: true },
   ];
   if (small) {
     // 丁图里 A、B 挤在圆的最右端，两个标注统一右对齐、排到圆的左侧
     labels.push(
-      { text: "A", x: 145, y: 106, anchor: "end", size: 23, fill: "#f1f5f9", math: true },
-      { text: "B", x: 145, y: 153, anchor: "end", size: 23, fill: "#f1f5f9", math: true },
-      { text: "Δv", x: 150, y: 214, anchor: "end", size: 24, fill: "#e2a846", math: true },
+      { text: "A", x: 145, y: 106, anchor: "end", size: 23, fill: "var(--c-text)", math: true },
+      { text: "B", x: 145, y: 153, anchor: "end", size: 23, fill: "var(--c-text)", math: true },
+      { text: "Δv", x: 150, y: 214, anchor: "end", size: 24, fill: "var(--c-accent)", math: true },
     );
   } else {
     const aAt = along(A, outward(thetaA), 14);
     labels.push(
-      { text: "A", x: aAt.x, y: aAt.y, anchor: "middle", size: 23, fill: "#f1f5f9", math: true },
-      { text: "B", x: 80, y: 81, anchor: "start", size: 23, fill: "#f1f5f9", math: true },
-      { text: "v", sub: "A", x: vAtip.x - 13, y: vAtip.y + 2, anchor: "end", size: 25, fill: "#60a5fa", math: true },
-      { text: "v", sub: "B", x: vBtip.x + 10, y: vBtip.y + 6, anchor: "start", size: 25, fill: "#60a5fa", math: true },
+      { text: "A", x: aAt.x, y: aAt.y, anchor: "middle", size: 23, fill: "var(--c-text)", math: true },
+      { text: "B", x: 80, y: 81, anchor: "start", size: 23, fill: "var(--c-text)", math: true },
+      { text: "v", sub: "A", x: vAtip.x - 13, y: vAtip.y + 2, anchor: "end", size: 25, fill: "var(--c-velocity)", math: true },
+      { text: "v", sub: "B", x: vBtip.x + 10, y: vBtip.y + 6, anchor: "start", size: 25, fill: "var(--c-velocity)", math: true },
     );
-    if (i === 1) labels.push({ text: "v", sub: "A", x: vAtipAtB.x + 8, y: vAtipAtB.y + 10, anchor: "start", size: 22, fill: "#94a3b8", math: true });
+    if (i === 1) labels.push({ text: "v", sub: "A", x: vAtipAtB.x + 8, y: vAtipAtB.y + 10, anchor: "start", size: 22, fill: "var(--c-text-dim)", math: true });
 
-    if (i === 2) labels.push({ text: "Δv", x: 124, y: 21, anchor: "middle", size: 24, fill: "#e2a846", math: true });
+    if (i === 2) labels.push({ text: "Δv", x: 124, y: 21, anchor: "middle", size: 24, fill: "var(--c-accent)", math: true });
   }
 
   return { x: i * PANEL, A, B, arrows, labels, caption: CAPTIONS[i] };

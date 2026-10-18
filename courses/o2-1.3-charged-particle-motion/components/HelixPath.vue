@@ -370,22 +370,21 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
           :key="opt"
           type="button"
           class="px-2.5 py-0.5 rounded-full border transition-colors"
-          :class="
-            thetaDeg === opt ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
-          "
+          :class="thetaDeg === opt ? 'text-amber-300' : 'text-dim'"
+          :style="{ borderColor: thetaDeg === opt ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
           @click="thetaDeg = opt"
         >
           {{ opt }}°
         </button>
       </span>
-      <span class="text-slate-300">
+      <span style="color: var(--c-neutral-300)">
         <Latex tex="v_\parallel" /> =
         <span class="font-semibold text-amber-300">{{ (vPar / 1e6).toFixed(2) }}</span
         >、<Latex tex="v_\perp" /> =
         <span class="font-semibold text-teal-300">{{ (vPerp / 1e6).toFixed(2) }}</span
         >（<Latex tex="\times 10^6\ \text{m/s}" />）
       </span>
-      <span class="text-slate-400">
+      <span class="text-dim">
         <Latex tex="r" /> = {{ rMM.toFixed(2) }} <Latex tex="\text{mm}" />，<Latex tex="T" /> =
         {{ (T * 1e9).toFixed(1) }} <Latex tex="\text{ns}" />，<Latex tex="d" /> =
         {{ pitchMM.toFixed(1) }} <Latex tex="\text{mm}" />

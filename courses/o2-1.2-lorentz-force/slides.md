@@ -151,11 +151,11 @@ clicks: 1
 
 <div>
 
-<div class="card">
+<DefinitionBox term="洛伦兹力">
 
-<strong>洛伦兹力</strong>：磁场对运动电荷的作用力。
+<div>磁场对运动电荷的作用力。</div>
 
-</div>
+</DefinitionBox>
 
 <div class="mt-4 text-lg leading-relaxed">
 
@@ -310,9 +310,8 @@ clicks: 3
 
 ---
 clicks: 3
+title: 电子的洛伦兹力有多大？
 ---
-
-# 电子的洛伦兹力有多大？
 
 <!-- 例题：教材 1.2 练习 1，分步代入计算；紧跟推导，现场用 v ⊥ B 带一遍 F = qvB -->
 <div class="ask text-xl">
@@ -329,7 +328,7 @@ clicks: 3
 <Latex tex="F = 1.6\times10^{-19} \times 3.0\times10^6 \times 0.10\ \text{N}" />
 </div>
 
-<div class="key mt-5 text-xl" v-click="3">
+<div class="tip-hint" v-click="3">
 <Latex tex="F = 4.8\times10^{-14}\ \text{N}" />
 </div>
 
@@ -352,7 +351,7 @@ clicks: 1
 分解 <Latex tex="B" />：只有垂直于 <Latex tex="v" /> 的分量 <Latex tex="B_{\perp} = B\sin\theta" /> 产生力
 </div>
 
-<div class="key mt-5">
+<div class="tip-hint">
 
 <Latex tex="F = qvB\sin\theta" />（<Latex tex="\theta" /> 为 <Latex tex="v" /> 与 <Latex tex="B" /> 的夹角）
 
@@ -387,7 +386,7 @@ clicks: 1
 
 <div><mdi-compass-outline class="text-xl inline-block align-middle mr-1" />② 因为 <Latex tex="F_{\text{洛}} \perp v" />，只改变速度的<strong>方向</strong>，不改变速度的<strong>大小</strong></div>
 
-<div class="key">③ 因为 <Latex tex="F_{\text{洛}} \perp v" />，洛伦兹力<strong>不做功</strong>，不改变电荷的动能</div>
+<div class="tip-hint">③ 因为 <Latex tex="F_{\text{洛}} \perp v" />，洛伦兹力<strong>不做功</strong>，不改变电荷的动能</div>
 
 </div>
 
@@ -414,8 +413,8 @@ clicks: 3
 
 </div>
 ---
-
-# 课堂小结：
+title: 课堂小结
+---
 
 <!-- 1.2 本课时的落点：推理链（条件→理论推导→实验验证→结论）+ 方向/大小/特点 -->
 <div class="page-grow">
@@ -446,7 +445,7 @@ clicks: 3
 <span>阴极射线管实验证实</span>
 </div>
 
-<div class="key mt-3 text-lg">
+<div class="tip-hint">
 ⑤ <strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现
 </div>
 

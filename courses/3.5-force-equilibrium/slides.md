@@ -47,7 +47,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">甲：三个力的作用线交于一点 <Latex tex="O" /> —— 共点力；乙：三个力互相平行、作用线不相交 —— 非共点力，但同样能平衡。</div>
+<div class="tip-hint" v-click="2">甲：三个力的作用线交于一点 <Latex tex="O" /> —— 共点力；乙：三个力互相平行、作用线不相交 —— 非共点力，但同样能平衡。</div>
 </div>
 
 ---
@@ -56,9 +56,11 @@ clicks: 2
 ---
 
 <div class="page-grow">
-<div class="card">
-几个力都作用在物体的同一点，或者它们的作用线相交于一点，这几个力叫作<b class="text-accent" style="white-space: nowrap">共点力</b>。
-</div>
+<DefinitionBox term="共点力" tone="gold">
+
+<div>几个力都作用在物体的同一点，或者它们的作用线相交于一点，这几个力叫作<span class="def-term">共点力</span>。</div>
+
+</DefinitionBox>
 
 <div class="half-grid">
 <div style="max-width: 13rem">
@@ -70,7 +72,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">物体受三个力平衡时，三个力不一定是共点力。三个互相平行的力也可以使物体平衡。</div>
+<div class="tip-hint" v-click="2">物体受三个力平衡时，三个力不一定是共点力。三个互相平行的力也可以使物体平衡。</div>
 </div>
 
 ---
@@ -92,7 +94,7 @@ clicks: 1
 </div>
 </div>
 
-<div class="key" v-click="1">所以 <Latex tex="F_3" /> 的作用线必过 <Latex tex="O" />：三个力的作用线交于一点 —— 这就是三力汇交原理。</div>
+<div class="tip-hint" v-click="1">所以 <Latex tex="F_3" /> 的作用线必过 <Latex tex="O" />：三个力的作用线交于一点 —— 这就是三力汇交原理。</div>
 </div>
 
 ---
@@ -101,7 +103,7 @@ clicks: 3
 ---
 
 <div class="page-grow">
-<div class="ask">什么样的物体，可以说它"处于平衡状态"？</div>
+<div class="ask">什么样的物体，可以说它处于平衡状态？</div>
 
 <div class="intro-quad" v-click="1">
 <div class="intro-quad-item">
@@ -122,7 +124,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="2">物体保持<b class="text-accent">静止</b>或<b class="text-accent">匀速直线运动</b>状态，就说它处于平衡状态 —— 速度矢量不变。</div>
+<div class="tip-hint" v-click="2">物体保持<b class="text-accent">静止</b>或<b class="text-accent">匀速直线运动</b>状态，就说它处于平衡状态 —— 速度矢量不变。</div>
 </div>
 
 ---
@@ -143,7 +145,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">共点力平衡的条件：<Latex tex="\sum \vec{F} = \boldsymbol{0}" /> —— 几个力首尾相接恰好闭合。</div>
+<div class="tip-hint" v-click="3">共点力平衡的条件：<Latex tex="\sum \vec{F} = \boldsymbol{0}" /> —— 几个力首尾相接恰好闭合。</div>
 </div>
 
 ---
@@ -164,7 +166,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">正交分解把"矢量平衡"变成了两组<b class="text-accent">代数方程</b>。</div>
+<div class="tip-hint" v-click="3">正交分解把矢量平衡变成了两组<b class="text-accent">代数方程</b>。</div>
 </div>
 
 ---
@@ -180,7 +182,7 @@ clicks: 4
 <div class="step-item" v-click="3"><span class="step-no">4</span><div>列方程、求解。</div></div>
 </div>
 
-<div class="key" v-click="4">正交分解的原则：① 少分力；② 避免分解未知力。</div>
+<div class="tip-hint" v-click="4">正交分解的原则：① 少分力；② 避免分解未知力。</div>
 </div>
 
 ---
@@ -204,7 +206,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">怎么选？回到原则：<b class="text-accent">少分力、避免分解未知力</b>。</div>
+<div class="tip-hint" v-click="3">怎么选？回到原则：<b class="text-accent">少分力、避免分解未知力</b>。</div>
 </div>
 
 ---
@@ -224,7 +226,7 @@ clicks: 4
 </div>
 </div>
 
-<div class="key" v-click="4">由直角三角形：<Latex tex="F_1 = G/\cos\theta" />，<Latex tex="F_2 = G\tan\theta" />。</div>
+<div class="tip-hint" v-click="4">由直角三角形：<Latex tex="F_1 = G/\cos\theta" />，<Latex tex="F_2 = G\tan\theta" />。</div>
 </div>
 
 ---
@@ -236,7 +238,7 @@ clicks: 4
 <div class="ask">同一个平衡问题，换成正交分解，怎么做？</div>
 
 <div class="half-grid">
-<div class="figure">
+<div class="figure" v-click="1">
 <OrthoDecompose
   :angle="120"
   tex="F_1"
@@ -253,7 +255,7 @@ clicks: 4
 </div>
 </div>
 
-<div class="key" v-click="4">解得 <Latex tex="F_1 = G/\cos\theta" />、<Latex tex="F_2 = G\tan\theta" /> —— 与几何法结果一致。</div>
+<div class="tip-hint" v-click="4">解得 <Latex tex="F_1 = G/\cos\theta" />、<Latex tex="F_2 = G\tan\theta" /> —— 与几何法结果一致。</div>
 </div>
 
 ---
@@ -275,7 +277,7 @@ clicks: 5
 </div>
 </div>
 
-<div class="key" v-click="5">所以 <Latex tex="\tan\theta = \mu" />，即 <Latex tex="h = \mu b = 0.4 \times 6\ \text{m} = 2.4\ \text{m}" />。</div>
+<div class="tip-hint" v-click="5">所以 <Latex tex="\tan\theta = \mu" />，即 <Latex tex="h = \mu b = 0.4 \times 6\ \text{m} = 2.4\ \text{m}" />。</div>
 </div>
 
 ---
@@ -284,11 +286,11 @@ clicks: 2
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">前面处理的力，方向都是不变的。如果某个力的方向在缓慢变化，平衡条件还成立吗？</div>
+<div class="ask ask-lead">如果某个力的方向在缓慢变化，平衡条件还成立吗？</div>
 
 <div v-click="1">成立 —— 缓慢移动的每一时刻都是平衡态，<Latex tex="\sum \vec{F} = 0" /> 每一步都成立。</div>
 
-<div class="key key-lead" v-click="2">于是每一时刻的三个力都能首尾相接成闭合三角形 —— 动态平衡要看的，就是这个三角形<b class="text-accent">怎么变</b>。</div>
+<div class="tip-hint" v-click="2">于是每一时刻的三个力都能首尾相接成闭合三角形 —— 动态平衡要看的，就是这个三角形<b class="text-accent">怎么变</b>。</div>
 </div>
 
 ---
@@ -303,7 +305,7 @@ clicks: 3
 <div class="step-item" v-click="2"><span class="step-no">3</span><div><b>相似三角形</b>：力的三角形与几何三角形相似，对应边成比例：<Latex tex="\dfrac{F_1}{L_1} = \dfrac{F_2}{L_2} = \dfrac{F_3}{L_3}" /> —— 纯几何，最简。</div></div>
 </div>
 
-<div class="key" v-click="3">先判断"哪个力不变、哪个力方向不变"，再选方法 —— 选错方法会算得很苦。</div>
+<div class="tip-hint" v-click="3">先判断哪个力不变、哪个力方向不变，再选方法。</div>
 </div>
 
 ---
@@ -316,7 +318,7 @@ clicks: 3
 
 <WedgeBallTriangle />
 
-<div class="key" v-click="3">三力作用线都过球心 ⇒ 直角三角形：<Latex tex="F_{N1} = G\tan\theta" />、<Latex tex="F_{N2} = G/\cos\theta" />。<Latex tex="\theta" /> 减小，两个弹力都减小（<Latex tex="\theta \to 0" /> 时 <Latex tex="F_{N1} \to 0" />、<Latex tex="F_{N2} \to G" />）。</div>
+<div class="tip-hint" v-click="3">三力作用线都过球心 ⇒ 直角三角形：<Latex tex="F_{N1} = G\tan\theta" />、<Latex tex="F_{N2} = G/\cos\theta" />。<Latex tex="\theta" /> 减小，两个弹力都减小（<Latex tex="\theta \to 0" /> 时 <Latex tex="F_{N1} \to 0" />、<Latex tex="F_{N2} \to G" />）。</div>
 </div>
 
 ---
@@ -329,7 +331,7 @@ clicks: 2
 
 <MinForceSwing />
 
-<div class="key" v-click="2">几何法：<Latex tex="G" /> 和拉力 <Latex tex="F_T" /> 的方向都确定，力的三角形第三个顶点只能沿一条定直线移动，而 <Latex tex="F" /> 就是这个定点到该直线的连线 —— <b>垂线段最短</b>，所以 <Latex tex="F" /> 垂直于悬线时最小：<Latex tex="F_{\min} = G\sin\theta" />。</div>
+<div class="tip-hint" v-click="2">几何法：<Latex tex="G" /> 和拉力 <Latex tex="F_T" /> 的方向都确定，力的三角形第三个顶点只能沿一条定直线移动，而 <Latex tex="F" /> 就是这个定点到该直线的连线 —— <b>垂线段最短</b>，所以 <Latex tex="F" /> 垂直于悬线时最小：<Latex tex="F_{\min} = G\sin\theta" />。</div>
 </div>
 
 ---
@@ -340,7 +342,7 @@ clicks: 1
 <div class="page-grow">
 <MinForceDecompose />
 
-<div class="key" v-click="1">绳的拉力大小不定、又不需要求它 ⇒ 沿<b>垂直于悬线</b>的方向分解：这个方向上拉力没有分量，于是 <Latex tex="F\sin\varphi = G\sin\theta" />，即 <Latex tex="F = G\sin\theta/\sin\varphi" />；要让 <Latex tex="F" /> 最小，就要让 <Latex tex="\sin\varphi" /> 最大 ⇒ <Latex tex="\varphi = 90^\circ" />，此时 <Latex tex="F" /> 垂直于悬线、<Latex tex="F_{\min} = G\sin\theta" />。</div>
+<div class="tip-hint" v-click="1">绳的拉力大小不定、又不需要求它 ⇒ 沿<b>垂直于悬线</b>的方向分解：这个方向上拉力没有分量，于是 <Latex tex="F\sin\varphi = G\sin\theta" />，即 <Latex tex="F = G\sin\theta/\sin\varphi" />；要让 <Latex tex="F" /> 最小，就要让 <Latex tex="\sin\varphi" /> 最大 ⇒ <Latex tex="\varphi = 90^\circ" />，此时 <Latex tex="F" /> 垂直于悬线、<Latex tex="F_{\min} = G\sin\theta" />。</div>
 </div>
 
 ---
@@ -354,7 +356,7 @@ clicks: 3
 <div class="p18-split">
 <AuxiliaryCircle />
 
-<div class="key" v-click="2">转动这一对绳：两绳拉力<b>一个增大、另一个减小</b>（不会先增后减）；夹角大于 <Latex tex="90^\circ" /> 时，某根绳转到水平（在三角形里成为<b class="text-accent">直径</b>）那一刻它最大。</div>
+<div class="tip-hint" v-click="2">转动这一对绳：两绳拉力<b>一个增大、另一个减小</b>（不会先增后减）；夹角大于 <Latex tex="90^\circ" /> 时，某根绳转到水平（在三角形里成为<b class="text-accent">直径</b>）那一刻它最大。</div>
 </div>
 </div>
 
@@ -376,7 +378,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">几何三角形的三条边都是<b class="text-accent">已知的几何量</b>，比值一确定，力的变化趋势就出来了。</div>
+<div class="tip-hint" v-click="3">几何三角形的三条边都是<b class="text-accent">已知的几何量</b>，比值一确定，力的变化趋势就出来了。</div>
 </div>
 
 ---
@@ -389,7 +391,7 @@ clicks: 2
 
 <HemisphereBallSvg />
 
-<div class="key" v-click="2">
+<div class="tip-hint" v-click="2">
 <div><Latex tex="\triangle_{\text{力}} \sim \triangle_{OPQ}" />：<Latex tex="\dfrac{F_N}{G} = \dfrac{OP}{OQ}" />、<Latex tex="\dfrac{F_T}{G} = \dfrac{PQ}{OQ}" /></div>
 <div><Latex tex="OP" />、<Latex tex="OQ" /> 不变 ⇒ <Latex tex="F_N" /> 不变；球升高时 <Latex tex="PQ" /> 变小 ⇒ <Latex tex="F_T" /> 变小</div>
 </div>
@@ -405,7 +407,7 @@ clicks: 2
 
 <HingedRodSvg />
 
-<div class="key" v-click="2">
+<div class="tip-hint" v-click="2">
 <div><Latex tex="\triangle_{\text{力}} \sim \triangle_{AOB}" />：<Latex tex="\dfrac{F_N}{G} = \dfrac{AB}{AO}" />、<Latex tex="\dfrac{F_T}{G} = \dfrac{BO}{AO}" /></div>
 <div><Latex tex="AB" />、<Latex tex="AO" /> 不变 ⇒ <Latex tex="F_N" /> 不变；杆被拉起时 <Latex tex="BO" /> 变短 ⇒ <Latex tex="F_T" /> 减小</div>
 </div>
@@ -429,7 +431,7 @@ clicks: 4
 </div>
 </div>
 
-<div class="key" v-click="4">取悬挂点为原点：<Latex tex="x_B = l\sin\beta - l\sin\alpha > 0" /> —— <Latex tex="B" /> 在悬挂点的<b class="text-accent">右侧</b>。</div>
+<div class="tip-hint" v-click="4">取悬挂点为原点：<Latex tex="x_B = l\sin\beta - l\sin\alpha > 0" /> —— <Latex tex="B" /> 在悬挂点的<b class="text-accent">右侧</b>。</div>
 </div>
 
 ---
@@ -437,7 +439,7 @@ layout: base-flex
 clicks: 3
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.2rem">
 <div class="ask">轻绳两端固定在两个高处支点上，中间挂一个轻质动滑轮，下面吊着重物。① 两侧绳与竖直方向的夹角有什么关系？② 把右侧悬挂点从 <Latex tex="A" /> 沿竖直墙移到 <Latex tex="B" />、再沿水平墙移到 <Latex tex="C" />，绳上拉力怎么变？</div>
 
 <div class="split-wide p23-split">
@@ -451,7 +453,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">拉力只由水平跨距和绳长决定：<Latex tex="T = \dfrac{Mg}{2\cos\alpha}" />，<Latex tex="\sin\alpha = \dfrac{x_B - x_A}{L}" />。</div>
+<div class="tip-hint" v-click="3">拉力只由水平跨距和绳长决定：<Latex tex="T = \dfrac{Mg}{2\cos\alpha}" />，<Latex tex="\sin\alpha = \dfrac{x_B - x_A}{L}" />。</div>
 </div>
 
 ---
@@ -459,12 +461,12 @@ layout: base-flex
 clicks: 3
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.2rem;--hint-pad-y:.45rem">
 <div class="ask">粗糙竖直墙面上贴着质量 <Latex tex="m" /> 的滑块，在右下角施加指向左上方的推力 <Latex tex="F" />（与竖直方向成 <Latex tex="\theta" />）。<Latex tex="F" /> 多大才能让它保持平衡？</div>
 
 <WallPushRange />
 
-<div class="key" v-click="2">平衡条件 <Latex tex="|G - F\cos\theta| \le \mu F\sin\theta" /> ⇒ <Latex tex="G/(\cos\theta + \mu\sin\theta) \le F \le G/(\cos\theta - \mu\sin\theta)" />。</div>
+<div class="tip-hint" v-click="2">平衡条件 <Latex tex="|G - F\cos\theta| \le \mu F\sin\theta" /> ⇒ <Latex tex="G/(\cos\theta + \mu\sin\theta) \le F \le G/(\cos\theta - \mu\sin\theta)" /></div>
 </div>
 
 ---
@@ -486,7 +488,7 @@ clicks: 4
 </div>
 </div>
 
-<div class="key" v-click="4"><Latex tex="\theta" /> 减小（梯子下滑）⇒ <Latex tex="\tan\theta" /> 减小 ⇒ 墙的支持力与地面摩擦力<b class="text-accent">都变大</b>。</div>
+<div class="tip-hint" v-click="4"><Latex tex="\theta" /> 减小（梯子下滑）⇒ <Latex tex="\tan\theta" /> 减小 ⇒ 墙的支持力与地面摩擦力<b class="text-accent">都变大</b>。</div>
 </div>
 
 ---
@@ -499,7 +501,7 @@ clicks: 2
 
 <div class="half-grid">
 <div style="max-width: 15rem">
-<LadderRoughWallSvg />
+<LadderRoughWallSvg :show-forces="$clicks >= 1" />
 </div>
 <div class="stack">
 <div v-click="1">受力：重力 <Latex tex="G" />（过中点）、墙的弹力 <Latex tex="F_{\text{N}}" />（水平、指向远离墙面）、墙的摩擦力 <Latex tex="f" />（竖直向上）、地面支持力 <Latex tex="N" />（竖直向上）—— 地面光滑 ⇒ 没有摩擦力。</div>
@@ -507,7 +509,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">所以梯脚必须放在粗糙地面上；地面越光滑越容易打滑。</div>
+<div class="tip-hint" v-click="2">所以梯脚必须放在粗糙地面上；地面越光滑越容易打滑。</div>
 </div>
 
 ---
@@ -521,8 +523,14 @@ clicks: 4
 <DomeClimbSvg />
 
 <div class="p27-verdict">
-<div class="key key-ok" v-click="4"><mdi-check-circle-outline class="ico-good text-lg" />支持力与摩擦力本来就垂直 ⇒ 只能正交分解：<Latex tex="G_2 = G\cos\theta" /> 垂直穹顶、<Latex tex="G_1 = G\sin\theta" /> 沿穹顶向下（<Latex tex="\theta" /> 是半径与竖直方向的夹角）⇒ <Latex tex="F_N = G\cos\theta" />、<Latex tex="F_f = G\sin\theta" />。往上爬 <Latex tex="\theta" /> 变小 ⇒ <b><Latex tex="F_N" /> 变大、<Latex tex="F_f" /> 变小</b>。</div>
-<div class="key key-danger" v-click="4"><mdi-close-circle-outline class="ico-bad text-lg" />套"相似三角形" ⇒ <Latex tex="F_N" /> 不变、<Latex tex="F_f" /> 减小。这里没有定弦定角，三角形形状一直在变，不能用相似。</div>
+<div class="stack">
+<div class="mini-title"><mdi-check-circle-outline class="text-xl ok-line" />正确做法</div>
+<div class="tip-hint" v-click="4">支持力与摩擦力本来就垂直 ⇒ 只能正交分解：<Latex tex="G_2 = G\cos\theta" /> 垂直穹顶、<Latex tex="G_1 = G\sin\theta" /> 沿穹顶向下（<Latex tex="\theta" /> 是半径与竖直方向的夹角）⇒ <Latex tex="F_N = G\cos\theta" />、<Latex tex="F_f = G\sin\theta" />。往上爬 <Latex tex="\theta" /> 变小 ⇒ <b><Latex tex="F_N" /> 变大、<Latex tex="F_f" /> 变小</b>。</div>
+</div>
+<div class="stack">
+<div class="mini-title"><mdi-close-circle-outline class="text-xl bad-line" />错误做法</div>
+<div class="danger-hint" v-click="4">套用相似三角形 ⇒ <Latex tex="F_N" /> 不变、<Latex tex="F_f" /> 减小。这里没有定弦定角，三角形形状一直在变，不能用相似。</div>
+</div>
 </div>
 </div>
 
@@ -542,7 +550,7 @@ clicks: 4
 </div>
 </div>
 
-<div class="key" v-click="3"><Latex tex="F = G\tan\theta = 40 \times 0.75 = 30\ \text{N}" />。</div>
+<div class="tip-hint" v-click="3"><Latex tex="F = G\tan\theta = 40 \times 0.75 = 30\ \text{N}" />。</div>
 </div>
 
 ---
@@ -564,15 +572,14 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">绳最短约 <Latex tex="0.58\ \text{m}" />（此时绳与竖直方向的夹角恰为 <Latex tex="60^\circ" />，拉力刚好达到 <Latex tex="10\ \text{N}" />）。</div>
+<div class="tip-hint" v-click="3">绳最短约 <Latex tex="0.58\ \text{m}" />（此时绳与竖直方向的夹角恰为 <Latex tex="60^\circ" />，拉力刚好达到 <Latex tex="10\ \text{N}" />）。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 2
+title: 课堂小结
 ---
-
-# 课堂小结
 
 <div class="page-grow">
 <table class="data-table method-table">
@@ -583,7 +590,7 @@ clicks: 2
 <tr v-click="1"><td>动态矢量三角形</td><td>一力恒定、一力方向不变、第三个力方向变</td><td>看边长随方向的变化</td></tr>
 <tr v-click="1"><td>辅助圆</td><td>两个力的夹角不变</td><td>圆周角不变，弦长 ≤ 直径 <Latex tex="2R = \dfrac{G}{\sin\theta}" /></td></tr>
 <tr v-click="1"><td>相似三角形</td><td>力的三角形与几何三角形相似</td><td><Latex tex="\dfrac{F_1}{L_1} = \dfrac{F_2}{L_2} = \dfrac{F_3}{L_3}" /></td></tr>
-<tr v-click="1"><td>临界与极值</td><td>出现"最大 / 最小 / 刚好"</td><td>找临界条件（如 <Latex tex="F_f = \mu F_{\text{N}}" />）列不等式</td></tr>
+<tr v-click="1"><td>临界与极值</td><td>出现最大、最小、刚好这类字眼</td><td>找临界条件（如 <Latex tex="F_f = \mu F_{\text{N}}" />）列不等式</td></tr>
 </tbody>
 </table>
 </div>
@@ -594,12 +601,12 @@ clicks: 2
 ---
 
 <div class="page-grow">
-<div class="ask">想一想：物体在五个共点力作用下保持平衡。如果撤去力 <Latex tex="F_1" />，而保持其余四个力不变，这四个力的合力是多大？方向如何？</div>
+<div class="ask">物体在五个共点力作用下保持平衡。如果撤去力 <Latex tex="F_1" />，而保持其余四个力不变，这四个力的合力是多大？方向如何？</div>
 
-<div class="key" v-click="1">与 <Latex tex="F_1" /> <b class="text-accent">等大反向</b> —— 原来五个力的合力为零，撤去 <Latex tex="F_1" /> 后，其余四个力必须补上 <Latex tex="F_1" /> 才能继续平衡。</div>
+<div class="tip-hint" v-click="1">与 <Latex tex="F_1" /> <b class="text-accent">等大反向</b> —— 原来五个力的合力为零，撤去 <Latex tex="F_1" /> 后，其余四个力必须补上 <Latex tex="F_1" /> 才能继续平衡。</div>
 
 <div class="ask" v-click="2">两人用同样大小的力共提一桶水，手臂间的夹角大些省力，还是小些省力？</div>
 
-<div class="key key-blue" v-click="2"><Latex tex="2T\cos\dfrac{\theta}{2} = G" /> ⇒ <Latex tex="T = \dfrac{G}{2\cos(\theta/2)}" />：夹角越小越省力。</div>
+<div class="info-hint" v-click="2"><Latex tex="2T\cos\dfrac{\theta}{2} = G" /> ⇒ <Latex tex="T = \dfrac{G}{2\cos(\theta/2)}" />：夹角越小越省力。</div>
 </div>
 

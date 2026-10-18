@@ -37,7 +37,7 @@ clicks: 3
 
 <div v-click="2">河水中的船就是这样叠加的：<Latex tex="v_{\text{船岸}} = v_{\text{船水}} + v_{\text{水岸}}" />。</div>
 
-<div class="key" v-click="3">可是对光来说，事实并非如此——这个叠加不成立。</div>
+<div class="tip-hint" v-click="3">可是对光来说，事实并非如此——这个叠加不成立。</div>
 </div>
 
 ---
@@ -53,17 +53,22 @@ clicks: 3
 <div v-click="1">1887 年的<b>迈克耳孙—莫雷实验</b>以及其他一些实验都表明：在不同的参考系中，光的传播速度都是一样的。</div>
 
 <div class="half-grid" v-click="2">
-<div class="card">
-<div class="mini-title"><mdi-swap-horizontal />假设一</div>
-在不同的<b>惯性参考系</b>中，物理规律的形式都是相同的。
-</div>
-<div class="card">
-<div class="mini-title"><mdi-lightning-bolt />假设二</div>
-真空中的光速在不同的惯性参考系中大小都是相同的。
-</div>
+
+<DefinitionBox term="假设一" tone="blue">
+
+<div>在不同的<b>惯性参考系</b>中，物理规律的形式都是相同的。</div>
+
+</DefinitionBox>
+
+<DefinitionBox term="假设二" tone="gold">
+
+<div>真空中的光速在不同的惯性参考系中大小都是相同的。</div>
+
+</DefinitionBox>
+
 </div>
 
-<div class="key" v-click="3">光速 <Latex tex="c" /> 与光源、观察者的运动都无关，所以它不能和别的速度相加。</div>
+<div class="tip-hint" v-click="3">光速 <Latex tex="c" /> 与光源、观察者的运动都无关，所以它不能和别的速度相加。</div>
 </div>
 
 ---
@@ -71,7 +76,7 @@ layout: base-flex
 clicks: 3
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.4rem">
 <div class="ask">车厢中央的光源闪一下光——车上的观察者和地面上的观察者，看到光到达前、后壁的先后一样吗？</div>
 
 <TrainFlashDemo />
@@ -80,7 +85,7 @@ clicks: 3
 
 <div v-click="2">地面：光对地的速率也相同，但车厢在光传播的时间里向前走了一段 ⇒ <b class="text-accent">先到后壁、后到前壁</b>。</div>
 
-<div class="key" v-click="3">"同时"不是绝对的：在一个参考系中同时发生的两个事件，在另一个参考系中可能不同时。</div>
+<div class="tip-hint" style="--hint-pad-y:.45rem" v-click="3">在一个参考系中同时发生的两个事件，在另一个参考系中可能不同时。</div>
 </div>
 
 ---
@@ -102,7 +107,7 @@ clicks: 3
 <TimeDilationLab />
 </div>
 
-<div class="key" v-click="2">因为 <Latex tex="1-(v/c)^2 < 1" />，所以总有 <Latex tex="\Delta t > \Delta\tau" />——运动的钟走得慢，这就是<b class="text-accent">时间延缓</b>。</div>
+<div class="tip-hint" v-click="2">因为 <Latex tex="1-(v/c)^2 < 1" />，所以总有 <Latex tex="\Delta t > \Delta\tau" />——运动的钟走得慢，这就是<b class="text-accent">时间延缓</b>。</div>
 
 <div v-click="3"><Latex tex="v" /> 越接近 <Latex tex="c" />，延缓越显著；日常速度下几乎察觉不到。</div>
 </div>
@@ -126,7 +131,7 @@ clicks: 3
 <LengthContractionLab />
 </div>
 
-<div class="key" v-click="2">因为 <Latex tex="\sqrt{1-(v/c)^2} < 1" />，所以总有 <Latex tex="l < l_0" />——这就是<b class="text-accent">长度收缩</b>；收缩只发生在沿运动方向的那个长度上。</div>
+<div class="tip-hint" v-click="2">因为 <Latex tex="\sqrt{1-(v/c)^2} < 1" />，所以总有 <Latex tex="l < l_0" />——这就是<b class="text-accent">长度收缩</b>；收缩只发生在沿运动方向的那个长度上。</div>
 
 <div v-click="3">时间进程和空间长度都跟物体的运动状态有关——这样的时空观叫作<b class="text-accent-2">相对论时空观</b>。</div>
 </div>
@@ -143,7 +148,7 @@ clicks: 2
 
 <SquareContractionDemo :show-result="$clicks >= 1" />
 
-<div class="key" v-click="2">只有<b>沿运动方向</b>的长度收缩为 <Latex tex="\sqrt{1-(v/c)^2}" /> 倍，垂直于运动方向的长度不变——所以斜向运动时，正方形只沿斜向被压扁、变成菱形，<b class="text-accent">而不是整体缩小</b>。</div>
+<div class="tip-hint" v-click="2">只有<b>沿运动方向</b>的长度收缩为 <Latex tex="\sqrt{1-(v/c)^2}" /> 倍，垂直于运动方向的长度不变——所以斜向运动时，正方形只沿斜向被压扁、变成菱形，<b class="text-accent">而不是整体缩小</b>。</div>
 </div>
 
 ---
@@ -160,7 +165,7 @@ clicks: 2
 
 <div v-click="1">选 <Latex tex="\mu" /> 子为参考系：它的平均寿命仍是 <Latex tex="2.2\ \mu\text{s}" />。</div>
 
-<div class="key" v-click="2">选地面为参考系：算得它的寿命约 <Latex tex="15.6\ \mu\text{s}" />、平均飞约 <Latex tex="4.6\ \text{km}" /> ⇒ 到达地面的 <Latex tex="\mu" /> 子数远多于经典预言——这是相对论时空观最早的证据。</div>
+<div class="tip-hint" v-click="2">选地面为参考系：算得它的寿命约 <Latex tex="15.6\ \mu\text{s}" />、平均飞约 <Latex tex="4.6\ \text{km}" /> ⇒ 到达地面的 <Latex tex="\mu" /> 子数远多于经典预言——这是相对论时空观最早的证据。</div>
 </div>
 
 ---
@@ -193,7 +198,7 @@ clicks: 2
 
 <div class="mini-note" v-click="1">"如果一定要举出某个人、某一天作为近代科学诞生的标志，我选牛顿《自然哲学的数学原理》在 1687 年出版的那一天。"——杨振宁</div>
 
-<div class="key" v-click="2">在如此广阔的领域里与实际相符合，显示了牛顿运动定律的正确性和牛顿力学的魅力。</div>
+<div class="tip-hint" v-click="2">在这些广阔的领域里，牛顿运动定律都与实际相符合。</div>
 </div>
 
 ---
@@ -217,7 +222,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">牛顿力学没有被否定，而是作为<b>一定条件下的特殊情形</b>被包含在新理论之中：当 <Latex tex="v \ll c" /> 时，相对论与牛顿力学的结论没有区别；当普朗克常量 <Latex tex="h" /> 可以忽略不计时，量子力学与牛顿力学的结论没有区别。</div>
+<div class="tip-hint" v-click="2">牛顿力学没有被否定，而是作为<b>一定条件下的特殊情形</b>被包含在新理论之中：当 <Latex tex="v \ll c" /> 时，相对论与牛顿力学的结论没有区别；当普朗克常量 <Latex tex="h" /> 可以忽略不计时，量子力学与牛顿力学的结论没有区别。</div>
 </div>
 
 ---

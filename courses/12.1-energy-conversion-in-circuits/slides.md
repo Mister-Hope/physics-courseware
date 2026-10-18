@@ -35,25 +35,25 @@ layout: base-flex
 
 <div v-click="1" class="grid grid-cols-4 gap-3">
 
-<div class="card text-center">
+<div class="text-center">
   <mdi-kettle class="text-accent text-4xl" />
   <div class="font-semibold text-lg mt-2">电热水壶</div>
   <div class="text-sm opacity-70 mt-1">电能 → 内能</div>
 </div>
 
-<div class="card text-center">
+<div class="text-center">
   <mdi-fan class="text-accent-2 text-4xl" />
   <div class="font-semibold text-lg mt-2">电风扇</div>
   <div class="text-sm opacity-70 mt-1">电能 → 机械能</div>
 </div>
 
-<div class="card text-center">
+<div class="text-center">
   <mdi-cellphone-charging class="text-accent text-4xl" />
   <div class="font-semibold text-lg mt-2">给手机充电</div>
   <div class="text-sm opacity-70 mt-1">电能 → 化学能</div>
 </div>
 
-<div class="card text-center">
+<div class="text-center">
   <mdi-lightbulb-on-outline class="text-accent-2 text-4xl" />
   <div class="font-semibold text-lg mt-2">电灯</div>
   <div class="text-sm opacity-70 mt-1">电能 → 内能 + 光能</div>
@@ -61,7 +61,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="2" class="key key-lead">
+<div v-click="2" class="tip-hint">
   电能转化为其他形式的能，都是通过<strong>电流做功</strong>来实现的。
 </div>
 
@@ -93,8 +93,8 @@ layout: base-flex
 
 </div>
 
-<div v-click="3" class="key">
-  电功 <Latex tex="W = UIt" />、电功率 <Latex tex="P = UI" /> 都是初中已学的结论——这节课要把它们<strong>从能量的角度</strong>重新讲清楚。
+<div v-click="3" class="info-hint">
+  电功 <Latex tex="W = UIt" />、电功率 <Latex tex="P = UI" /> 都是初中已学的结论。
 </div>
 
 </div>
@@ -127,7 +127,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="5" class="key">
+<div v-click="5" class="tip-hint">
   电流做功的实质：导体中的恒定电场对自由电荷的<strong>静电力</strong>在做功；<Latex tex="P = UI" /> 的推导没有限制电路性质，对一切电路成立。
 </div>
 
@@ -161,7 +161,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="4" class="key">
+<div v-click="4" class="tip-hint">
   串联电路中，电阻越大分得的功率越多：功率与电阻<strong>成正比</strong>。
 </div>
 
@@ -195,7 +195,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="4" class="key">
+<div v-click="4" class="tip-hint">
   并联电路中，电阻越大分得的功率越少：功率与电阻<strong>成反比</strong>。
 </div>
 
@@ -221,7 +221,7 @@ layout: base-flex
   <div class="text-xl"><Latex tex="P = P_1 + P_2 = \dfrac{U^2}{R_1} + \dfrac{U^2}{R_2}" /></div>
 </div>
 
-<div v-click="3" class="key key-lead">
+<div v-click="3" class="tip-hint">
   无论串联还是并联，电路的总功率都等于各用电器功率之和——这正是<strong>能量守恒</strong>的体现。
 </div>
 
@@ -243,7 +243,7 @@ layout: base-flex
 
 <div v-click="3">热功率（发热的快慢）：<Latex tex="P_{\text{热}} = \dfrac{Q}{t} = I^2R" /></div>
 
-<div v-click="4" class="key">
+<div v-click="4" class="tip-hint">
   电流通过导体产生的热量跟电流的二次方成正比，跟导体的电阻、通电时间成正比。
 </div>
 
@@ -255,11 +255,11 @@ layout: base-flex
 
 # 纯电阻电路 与 非纯电阻电路
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.35rem;--hint-pad-y:.5rem">
 
 <div class="ask">所有用电器都满足 <Latex tex="W = Q" /> 吗？</div>
 
-<div class="stack-tight">
+<div class="stack-tight" style="gap:.3rem">
 
 <div class="cmp-row cmp-head">
   <div>比较项目</div>
@@ -299,7 +299,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="3" class="key">
+<div v-click="3" class="tip-hint">
   判断依据：电能是否<strong>全部</strong>转化为内能——只有全部转化为内能时，<Latex tex="U = IR" /> 与 <Latex tex="\dfrac{U^2}{R}" /> 才成立。
 </div>
 
@@ -307,9 +307,8 @@ layout: base-flex
 
 ---
 layout: base-flex
+title: 电动机：电能去哪了？
 ---
-
-# 电动机：电能去哪了？
 
 <div class="page-grow page-grow-tight">
 
@@ -317,7 +316,7 @@ layout: base-flex
 
 <div v-click="1"><MotorPower /></div>
 
-<div v-click="2" class="key">
+<div v-click="2" class="tip-hint">
   输入功率 <Latex tex="P_{\text{入}} = UI" />，热损耗 <Latex tex="P_{\text{热}} = I^2R" />，输出功率 <Latex tex="P_{\text{出}} = P_{\text{入}} - P_{\text{热}} = UI - I^2R" />。
 </div>
 
@@ -355,7 +354,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="5" class="key">
+<div v-click="5" class="tip-hint">
   这台电动机发热的功率为 <Latex tex="150\ \text{W}" />，对外做功的功率为 <Latex tex="950\ \text{W}" />。
 </div>
 
@@ -393,7 +392,7 @@ layout: base-flex
 
 </div>
 
-<div v-click="5" class="key">
+<div v-click="5" class="tip-hint">
   线圈电阻 <Latex tex="0.5\ \Omega" />；转动时输入 <Latex tex="2.0\ \text{W}" />、发热 <Latex tex="0.5\ \text{W}" />、输出 <Latex tex="1.5\ \text{W}" />，效率 <Latex tex="75\%" />。
 </div>
 
@@ -415,7 +414,7 @@ layout: base-flex
 
 <div v-click="2"><PowerBank /></div>
 
-<div v-click="3" class="key">
+<div v-click="3" class="warn-hint">
   毫安时（<Latex tex="\text{mAh}" />）是电荷量、不是能量；<strong>电容量 <Latex tex="\times" /> 电动势 = 储存的能量</strong>（<Latex tex="\text{Wh}" />）。
 </div>
 
@@ -423,9 +422,8 @@ layout: base-flex
 
 ---
 layout: base-flex
+title: 课堂小结
 ---
-
-# 课堂小结
 
 <div class="page-grow">
 
@@ -439,7 +437,7 @@ layout: base-flex
 
 <div class="summary-line" v-click="5"><span class="text-accent font-bold">电池的能量</span>：<Latex tex="W = EQ" />；充电宝「<Latex tex="\text{mAh}" /> <Latex tex="\times" /> <Latex tex="\text{V}" />」得到 <Latex tex="\text{Wh}" /></div>
 
-<div v-click="6" class="key key-lead">
+<div v-click="6" class="tip-hint">
   一条主线：电能与其他形式的能之间的转化，处处服从<strong>能量守恒</strong>。
 </div>
 
@@ -447,9 +445,8 @@ layout: base-flex
 
 ---
 layout: base-flex
+title: 课后作业
 ---
-
-# 课后作业
 
 <div class="page-grow">
 

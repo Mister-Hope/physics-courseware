@@ -1,3 +1,9 @@
+<script setup lang="ts">
+// `showForces`：题目图第一眼只画绳与悬挂装置，各截面的拉力与标注点击后才出
+// （页面写 `:show-forces="$clicks >= 1"`）。
+const { showForces = false } = defineProps<{ showForces?: boolean }>();
+</script>
+
 <template>
   <!-- 第 30 页「例题：粗绳悬挂在天花板上」：绳分成三段（颜色深浅表示），越靠上的截面要承担的下面绳重越多，拉力箭头越长 -->
   <svg class="fig" viewBox="0 0 440 330" xmlns="http://www.w3.org/2000/svg">
@@ -11,29 +17,32 @@
     <line x1="189" y1="159" x2="211" y2="159" stroke="var(--c-neutral-500)" stroke-width="2" />
     <line x1="189" y1="233" x2="211" y2="233" stroke="var(--c-neutral-500)" stroke-width="2" />
 
-    <CourseArrow :from="{ x: 250, y: 255 }" :to="{ x: 250, y: 233 }" stroke="var(--c-accent)" stroke-width="3.4" />
-    <CourseArrow :from="{ x: 250, y: 203 }" :to="{ x: 250, y: 159 }" stroke="var(--c-accent)" stroke-width="3.4" />
-    <CourseArrow :from="{ x: 250, y: 152 }" :to="{ x: 250, y: 86 }" stroke="var(--c-accent)" stroke-width="3.4" />
-    <line x1="207" y1="233" x2="243" y2="233" stroke="var(--c-accent)" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75" />
-    <line x1="207" y1="159" x2="243" y2="159" stroke="var(--c-accent)" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75" />
-
-    <text x="264" y="250" text-anchor="start" font-size="18" fill="var(--c-accent)">
-      <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
-      <tspan font-family="KaTeX_Main" font-size="12" dy="4">1</tspan>
-    </text>
-    <text x="264" y="186" text-anchor="start" font-size="18" fill="var(--c-accent)">
-      <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
-      <tspan font-family="KaTeX_Main" font-size="12" dy="4">2</tspan>
-    </text>
-    <text x="264" y="124" text-anchor="start" font-size="18" fill="var(--c-accent)">
-      <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
-      <tspan font-family="KaTeX_Main" font-size="12" dy="4">3</tspan>
-    </text>
-
     <text x="200" y="326" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">自由端</text>
-    <text x="214" y="300" text-anchor="start" font-size="17" fill="var(--c-text-dim)">
-      <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
-      = 0
-    </text>
+
+    <g v-if="showForces">
+      <CourseArrow :from="{ x: 250, y: 255 }" :to="{ x: 250, y: 233 }" stroke="var(--c-accent)" stroke-width="3.4" />
+      <CourseArrow :from="{ x: 250, y: 203 }" :to="{ x: 250, y: 159 }" stroke="var(--c-accent)" stroke-width="3.4" />
+      <CourseArrow :from="{ x: 250, y: 152 }" :to="{ x: 250, y: 86 }" stroke="var(--c-accent)" stroke-width="3.4" />
+      <line x1="207" y1="233" x2="243" y2="233" stroke="var(--c-accent)" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75" />
+      <line x1="207" y1="159" x2="243" y2="159" stroke="var(--c-accent)" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75" />
+
+      <text x="264" y="250" text-anchor="start" font-size="18" fill="var(--c-accent)">
+        <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
+        <tspan font-family="KaTeX_Main" font-size="12" dy="4">1</tspan>
+      </text>
+      <text x="264" y="186" text-anchor="start" font-size="18" fill="var(--c-accent)">
+        <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
+        <tspan font-family="KaTeX_Main" font-size="12" dy="4">2</tspan>
+      </text>
+      <text x="264" y="124" text-anchor="start" font-size="18" fill="var(--c-accent)">
+        <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
+        <tspan font-family="KaTeX_Main" font-size="12" dy="4">3</tspan>
+      </text>
+
+      <text x="214" y="300" text-anchor="start" font-size="17" fill="var(--c-text-dim)">
+        <tspan font-family="KaTeX_Math" font-style="italic">T</tspan>
+        = 0
+      </text>
+    </g>
   </svg>
 </template>

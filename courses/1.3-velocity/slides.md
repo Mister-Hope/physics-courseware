@@ -286,6 +286,9 @@ clicks: 3
 
 <div class="page-grow">
 
+<!-- 图 397px + 结论气泡 105px 合计比 .page-grow（447px）高 72px：气泡横跨整页时首行顶到标题、末行超出画布 14.7px。
+     图不能再缩（读数两列 chip 的 nowrap 文字把图栏宽度锁在 ≥387px ⇒ 图高 ≥397px），所以把结论气泡放进右栏、
+     并删掉与上一行重复的从句「割线斜率仍算平均速度」（该行第 2 次点击已给出）。 -->
 <div class="half-grid">
 
 <div class="fig-host" v-click="1">
@@ -295,11 +298,10 @@ clicks: 3
 <div class="stack">
 <div class="ask">过 A、B 两点的这条直线（割线），它的斜率代表什么？</div>
 <div v-click="2">割线斜率 <Latex tex="= \frac{\Delta x}{\Delta t} =" /> <span class="text-accent">平均速度</span>。</div>
+<div class="tip-hint" style="--hint-pad-y:.5rem" v-click="3">把 B 点拖向 A 点：割线斜率越来越接近 A 点的<span class="text-accent-2">瞬时速度</span>；无限靠近时割线成为<span class="text-accent-2">切线</span>——<span class="text-accent-2">切线斜率 = 该点的瞬时速度</span>。</div>
 </div>
 
 </div>
-
-<div class="tip-hint" style="--hint-pad-y:.6rem" v-click="3">把 B 点拖向 A 点：割线斜率仍算平均速度，但越来越接近 A 点的<span class="text-accent-2">瞬时速度</span>；无限靠近时割线成为<span class="text-accent-2">切线</span>——<span class="text-accent-2">切线斜率 = 该点的瞬时速度</span>。</div>
 
 </div>
 

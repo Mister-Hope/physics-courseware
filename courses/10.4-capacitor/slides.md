@@ -76,21 +76,16 @@ layout: base-flex
 
 ---
 layout: base-flex
+class: title-ask
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 电容器：储存电荷的容器</div>
+# 哪些东西可以看成电容器？
 
-<v-clicks>
+<DefinitionBox term="电容器">
 
-<div class="card card-highlight mb-2">
-  <div class="text-2xl font-semibold">
-    定义：<span class="text-accent">相互靠近</span>且<span class="text-accent">彼此绝缘</span>的两个导体，构成电容器
-  </div>
-</div>
+<div><span class="text-accent">相互靠近</span>且<span class="text-accent">彼此绝缘</span>的两个导体，构成<span class="def-term">电容器</span></div>
 
-## 哪些东西可以看成电容器？
-
-</v-clicks>
+</DefinitionBox>
 
 <div class="grid grid-cols-2 gap-4 mt-3">
 
@@ -192,7 +187,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key mt-4">
+<div class="tip-hint">
   充电不是创造电荷，放电不是消灭电荷——过程中电荷通常在两极板间<span class="text-accent-2">转移</span>
 </div>
 
@@ -219,7 +214,7 @@ layout: base-flex
 
 <div class="text-sm">把导线、电阻等其他元件接在正极和负极两端，只要<span class="text-accent-2">不构成闭合回路</span>，相互靠近的两极板间吸引力仍会“留住”电荷。</div>
 
-<div class="key">
+<div class="tip-hint">
   <span class="text-accent font-semibold">相互靠近</span> + <span class="text-accent-2 font-semibold">彼此绝缘</span> → 储存电荷的必要条件
 </div>
 
@@ -242,7 +237,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key mt-3">
+<div class="tip-hint">
 
 当一个极板带电量为 $+Q$ 时，另一个极板必然带电 $-Q$
 
@@ -296,7 +291,7 @@ layout: base-flex
 
 <v-click>
 
-<div class="key mt-4 font-semibold text-lg">
+<div class="tip-hint">
   电容器，在储存<span class="text-accent">电荷</span>的同时，还存储了<span class="text-accent">能量</span>
 </div>
 
@@ -373,7 +368,7 @@ layout: base-flex
 <div class="half-grid mt-2">
 
 <div>
-  <div class="ask"><mdi-help-circle-outline class="text-xl" />质量是什么的"本领"？</div>
+  <div class="ask"><mdi-help-circle-outline class="text-xl" />质量是什么的本领？</div>
   <div v-click class="text-sm opacity-80 mt-2">
 
 改变物体运动状态<span class="text-accent">难易</span>的本领
@@ -386,7 +381,7 @@ $m = \dfrac{F}{a}$
 </div>
 
 <div class="divider-l">
-  <div class="ask"><mdi-help-circle-outline class="text-xl" />电阻是什么的"本领"？</div>
+  <div class="ask"><mdi-help-circle-outline class="text-xl" />电阻是什么的本领？</div>
   <div v-click class="text-sm opacity-80 mt-2">
 
 阻碍电流通过<span class="text-accent">难易</span>的本领
@@ -408,7 +403,7 @@ $R = \dfrac{U}{I}$
 
 <v-click>
 
-<div class="key key-lead mt-3"><mdi-flash-outline class="text-accent text-2xl align-middle" /><span class="text-accent">储存电荷</span>的能力</div>
+<div class="tip-hint"><span class="text-accent">储存电荷</span>的能力</div>
 
 </v-click>
 
@@ -458,9 +453,8 @@ layout: base-flex
 
 ---
 layout: base-flex
+title: 实验结论
 ---
-
-# 实验结论
 
 <div class="page-grow">
 
@@ -569,9 +563,8 @@ layout: base-flex
 
 ---
 layout: base-flex
+title: 课堂练习
 ---
-
-# 课堂练习
 
 <div class="text-xl font-semibold mt-4">
 
@@ -633,7 +626,6 @@ preload: false
 
 </div>
 
-
 ---
 layout: base-flex
 ---
@@ -646,7 +638,7 @@ layout: base-flex
 
 # 平行板电容器的电容
 
-<div class="card card-highlight">
+<div>
 
 平行板电容器的电容由<span class="text-accent">结构参数</span>决定：
 
@@ -703,9 +695,8 @@ $\varepsilon_r$ <mdi-arrow-up-bold class="text-accent inline-block text-base" st
 ---
 layout: center
 class: text-center
+title: 课堂小结
 ---
-
-# 课堂小结
 
 <div class="grid grid-cols-2 gap-4 mt-1 text-left leading-snug">
 
@@ -753,9 +744,8 @@ $$C = \frac{\varepsilon_r S}{4\pi k d}$$
 </div>
 ---
 layout: base-flex
+title: 课后作业
 ---
-
-# 课后作业
 
 <div class="grid grid-cols-2 gap-4 mt-2 text-[0.65rem]">
 

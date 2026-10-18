@@ -2,13 +2,10 @@
 /**
  * 练习页示意图：水平面上两辆小车 A、B，用一根细绳跨过天花板上的定滑轮相连。
  *
- * A 车沿水平面向**左**（远离滑轮）以 v₀ 运动，把绳从滑轮这一侧拉走；
- * 绳只能拉、不能推，所以 B 车被绳拉着朝**滑轮方向**（也向左）运动。
- * 绳不可伸长 ⇒ A 端放长的速度与 B 端收短的速度相等，即两端沿绳方向的分量相等：
- * v_A cos θ_A = v_B cos θ_B。
+ * A 车沿水平面向**左**（远离滑轮）以 v₀ 运动，把绳从滑轮这一侧拉走； 绳只能拉、不能推，所以 B 车被绳拉着朝**滑轮方向**（也向左）运动。 绳不可伸长 ⇒ A 端放长的速度与 B
+ * 端收短的速度相等，即两端沿绳方向的分量相等： v_A cos θ_A = v_B cos θ_B。
  *
- * 这是课末的一道练习，两段绳取定值画个示意即可，不做交互。
- * 画法沿用本课约定：分量从物体本身出发，垂线由速度箭头尖端画到分量末端。
+ * 这是课末的一道练习，两段绳取定值画个示意即可，不做交互。 画法沿用本课约定：分量从物体本身出发，垂线由速度箭头尖端画到分量末端。
  */
 const { showArrows = false } = defineProps<{
   /** 点击后才出速度与沿绳分量（题干页先给干净图） */
@@ -69,16 +66,67 @@ const ARC_B = `M ${ATTACH_B.x - ARC_R} ${ATTACH_Y} A ${ARC_R} ${ARC_R} 0 0 1 ${A
       aria-label="两辆小车用细绳跨过天花板上的定滑轮相连"
     >
       <!-- 天花板与桌面 -->
-      <rect x="0" :y="CEIL_Y - 24" width="660" height="24" fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)" />
-      <SurfaceHatch :from="{ x: 30, y: CEIL_Y - 24 }" :to="{ x: 630, y: CEIL_Y - 24 }" side="above" :thickness="14" />
-      <line x1="20" :y1="TABLE_Y" x2="640" :y2="TABLE_Y" stroke="var(--c-neutral-300)" stroke-width="2.4" />
-      <SurfaceHatch :from="{ x: 20, y: TABLE_Y }" :to="{ x: 640, y: TABLE_Y }" side="below" :thickness="14" />
+      <rect
+        x="0"
+        :y="CEIL_Y - 24"
+        width="660"
+        height="24"
+        fill="color-mix(in srgb, var(--c-text-dim) 16%, transparent)"
+      />
+      <SurfaceHatch
+        :from="{ x: 30, y: CEIL_Y - 24 }"
+        :to="{ x: 630, y: CEIL_Y - 24 }"
+        side="above"
+        :thickness="14"
+      />
+      <line
+        x1="20"
+        :y1="TABLE_Y"
+        x2="640"
+        :y2="TABLE_Y"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.4"
+      />
+      <SurfaceHatch
+        :from="{ x: 20, y: TABLE_Y }"
+        :to="{ x: 640, y: TABLE_Y }"
+        side="below"
+        :thickness="14"
+      />
       <!-- 天花板上的定滑轮 -->
-      <line :x1="PULLEY_X" :y1="CEIL_Y" :x2="PULLEY_X" :y2="PULLEY_Y - 16" stroke="var(--c-neutral-300)" stroke-width="3" />
+      <line
+        :x1="PULLEY_X"
+        :y1="CEIL_Y"
+        :x2="PULLEY_X"
+        :y2="PULLEY_Y - 16"
+        stroke="var(--c-neutral-300)"
+        stroke-width="3"
+      />
       <!-- 绳：A 端 → 滑轮 → B 端 -->
-      <line :x1="ATTACH_A.x" :y1="ATTACH_A.y" :x2="PULLEY_X" :y2="PULLEY_Y" stroke="var(--c-neutral-300)" stroke-width="2.6" />
-      <line :x1="PULLEY_X" :y1="PULLEY_Y" :x2="ATTACH_B.x" :y2="ATTACH_B.y" stroke="var(--c-neutral-300)" stroke-width="2.6" />
-      <circle :cx="PULLEY_X" :cy="PULLEY_Y" r="16" fill="var(--c-surface-solid)" stroke="var(--c-neutral-300)" stroke-width="2.6" />
+      <line
+        :x1="ATTACH_A.x"
+        :y1="ATTACH_A.y"
+        :x2="PULLEY_X"
+        :y2="PULLEY_Y"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.6"
+      />
+      <line
+        :x1="PULLEY_X"
+        :y1="PULLEY_Y"
+        :x2="ATTACH_B.x"
+        :y2="ATTACH_B.y"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.6"
+      />
+      <circle
+        :cx="PULLEY_X"
+        :cy="PULLEY_Y"
+        r="16"
+        fill="var(--c-surface-solid)"
+        stroke="var(--c-neutral-300)"
+        stroke-width="2.6"
+      />
       <!-- 两辆小车 -->
       <g v-for="(cart, i) in [CART_A, CART_B]" :key="i">
         <rect
@@ -91,32 +139,170 @@ const ARC_B = `M ${ATTACH_B.x - ARC_R} ${ATTACH_Y} A ${ARC_R} ${ARC_R} 0 0 1 ${A
           stroke="var(--c-velocity-light)"
           stroke-width="2.2"
         />
-        <circle :cx="cart.x - 17" :cy="cart.y - 7" r="7" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.2" />
-        <circle :cx="cart.x + 17" :cy="cart.y - 7" r="7" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.2" />
+        <circle
+          :cx="cart.x - 17"
+          :cy="cart.y - 7"
+          r="7"
+          fill="none"
+          stroke="var(--c-neutral-300)"
+          stroke-width="2.2"
+        />
+        <circle
+          :cx="cart.x + 17"
+          :cy="cart.y - 7"
+          r="7"
+          fill="none"
+          stroke="var(--c-neutral-300)"
+          stroke-width="2.2"
+        />
       </g>
-      <text :x="CART_A.x - 46" :y="TABLE_Y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text)">A</text>
-      <text :x="CART_B.x + 38" :y="TABLE_Y + 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text)">B</text>
+      <text
+        :x="CART_A.x - 46"
+        :y="TABLE_Y + 6"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="20"
+        fill="var(--c-text)"
+      >
+        A
+      </text>
+      <text
+        :x="CART_B.x + 38"
+        :y="TABLE_Y + 6"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="20"
+        fill="var(--c-text)"
+      >
+        B
+      </text>
       <!-- 绳与水平方向的夹角 -->
-      <line :x1="ATTACH_A.x" :y1="ATTACH_Y" :x2="ATTACH_A.x + 100" :y2="ATTACH_Y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
-      <line :x1="ATTACH_B.x" :y1="ATTACH_Y" :x2="ATTACH_B.x - 100" :y2="ATTACH_Y" stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)" stroke-width="1.6" stroke-dasharray="7 6" />
+      <line
+        :x1="ATTACH_A.x"
+        :y1="ATTACH_Y"
+        :x2="ATTACH_A.x + 100"
+        :y2="ATTACH_Y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="7 6"
+      />
+      <line
+        :x1="ATTACH_B.x"
+        :y1="ATTACH_Y"
+        :x2="ATTACH_B.x - 100"
+        :y2="ATTACH_Y"
+        stroke="color-mix(in srgb, var(--c-text-dim) 60%, transparent)"
+        stroke-width="1.6"
+        stroke-dasharray="7 6"
+      />
       <path :d="ARC_A" fill="none" stroke="var(--c-neutral-300)" stroke-width="1.8" />
       <path :d="ARC_B" fill="none" stroke="var(--c-neutral-300)" stroke-width="1.8" />
-      <text :x="ATTACH_A.x + 64" :y="ATTACH_Y - 12" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-neutral-300)">θ</text>
-      <text :x="ATTACH_A.x + 73" :y="ATTACH_Y - 4" font-family="KaTeX_Math" font-style="italic" font-size="13" fill="var(--c-neutral-300)">A</text>
-      <text :x="ATTACH_B.x - 82" :y="ATTACH_Y - 12" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-neutral-300)">θ</text>
-      <text :x="ATTACH_B.x - 73" :y="ATTACH_Y - 4" font-family="KaTeX_Math" font-style="italic" font-size="13" fill="var(--c-neutral-300)">B</text>
+      <text
+        :x="ATTACH_A.x + 64"
+        :y="ATTACH_Y - 12"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="18"
+        fill="var(--c-neutral-300)"
+      >
+        θ
+      </text>
+      <text
+        :x="ATTACH_A.x + 73"
+        :y="ATTACH_Y - 4"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="13"
+        fill="var(--c-neutral-300)"
+      >
+        A
+      </text>
+      <text
+        :x="ATTACH_B.x - 82"
+        :y="ATTACH_Y - 12"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="18"
+        fill="var(--c-neutral-300)"
+      >
+        θ
+      </text>
+      <text
+        :x="ATTACH_B.x - 73"
+        :y="ATTACH_Y - 4"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="13"
+        fill="var(--c-neutral-300)"
+      >
+        B
+      </text>
       <!-- 速度与沿绳分量（点击后出） -->
       <g v-if="showArrows">
         <CourseArrow :from="ATTACH_A" :to="VEL_A_TIP" stroke="var(--c-force)" :stroke-width="3.4" />
         <CourseArrow :from="ATTACH_A" :to="SHARE_A" stroke="var(--c-accent)" :stroke-width="3.2" />
-        <line :x1="SHARE_A.x" :y1="SHARE_A.y" :x2="VEL_A_TIP.x" :y2="VEL_A_TIP.y" stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)" stroke-width="1.8" stroke-dasharray="7 6" />
+        <line
+          :x1="SHARE_A.x"
+          :y1="SHARE_A.y"
+          :x2="VEL_A_TIP.x"
+          :y2="VEL_A_TIP.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
+          stroke-width="1.8"
+          stroke-dasharray="7 6"
+        />
         <CourseArrow :from="ATTACH_B" :to="VEL_B_TIP" stroke="var(--c-force)" :stroke-width="3.4" />
         <CourseArrow :from="ATTACH_B" :to="SHARE_B" stroke="var(--c-accent)" :stroke-width="3.2" />
-        <line :x1="SHARE_B.x" :y1="SHARE_B.y" :x2="VEL_B_TIP.x" :y2="VEL_B_TIP.y" stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)" stroke-width="1.8" stroke-dasharray="7 6" />
-        <text :x="VEL_A_TIP.x + 2" :y="ATTACH_Y - 10" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">v</text>
-        <text :x="VEL_A_TIP.x + 12" :y="ATTACH_Y - 5" font-family="KaTeX_Math" font-style="italic" font-size="12" fill="var(--c-force)">0</text>
-        <text :x="VEL_B_TIP.x + 2" :y="ATTACH_Y - 10" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-force)">v</text>
-        <text :x="VEL_B_TIP.x + 12" :y="ATTACH_Y - 5" font-family="KaTeX_Math" font-style="italic" font-size="12" fill="var(--c-force)">B</text>
+        <line
+          :x1="SHARE_B.x"
+          :y1="SHARE_B.y"
+          :x2="VEL_B_TIP.x"
+          :y2="VEL_B_TIP.y"
+          stroke="color-mix(in srgb, var(--c-text-dim) 80%, transparent)"
+          stroke-width="1.8"
+          stroke-dasharray="7 6"
+        />
+        <text
+          :x="VEL_A_TIP.x + 2"
+          :y="ATTACH_Y - 10"
+          text-anchor="middle"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="19"
+          fill="var(--c-force)"
+        >
+          v
+        </text>
+        <text
+          :x="VEL_A_TIP.x + 12"
+          :y="ATTACH_Y - 5"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="12"
+          fill="var(--c-force)"
+        >
+          0
+        </text>
+        <text
+          :x="VEL_B_TIP.x + 2"
+          :y="ATTACH_Y - 10"
+          text-anchor="middle"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="19"
+          fill="var(--c-force)"
+        >
+          v
+        </text>
+        <text
+          :x="VEL_B_TIP.x + 12"
+          :y="ATTACH_Y - 5"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="12"
+          fill="var(--c-force)"
+        >
+          B
+        </text>
       </g>
     </svg>
   </div>

@@ -133,7 +133,7 @@ clicks: 3
 实测：天文观测给出 <Latex tex="r = 3.8 \times 10^8\ \text{m}" />、<Latex tex="T = 27.3\ \text{d} \approx 2.36 \times 10^6\ \text{s}" />，由向心加速度公式算得：
 <Latex tex="a_{\text{月}} = \frac{4\pi^2 r}{T^2} \approx 2.7 \times 10^{-3}\ \text{m/s}^2" display />
 </div>
-<div v-click="3" class="key">两个数完全一致 —— 地面物体和月球所受的引力确实是同一种力，我们的猜测被证实了。</div>
+<div v-click="3" class="tip-hint">两个数完全一致 —— 地面物体和月球所受的引力确实是同一种力，我们的猜测被证实了。</div>
 </div>
 
 ---
@@ -146,14 +146,17 @@ clicks: 2
 <div class="page-grow">
 <div class="ask">这条规律能推广到任意两个物体吗？</div>
 <div class="half-grid">
-<div v-click="1" class="card">自然界中任何两个物体都相互吸引，引力的方向在它们的连线上，引力的大小与物体的质量 <Latex tex="m_1" /> 和 <Latex tex="m_2" /> 的乘积成正比、与它们之间距离 <Latex tex="r" /> 的二次方成反比。</div>
+<DefinitionBox v-click="1" term="万有引力定律" tone="gold">
+
+<div>自然界中任何两个物体都相互吸引，引力的方向在它们的连线上，引力的大小与物体的质量 <Latex tex="m_1" /> 和 <Latex tex="m_2" /> 的乘积成正比、与它们之间距离 <Latex tex="r" /> 的二次方成反比。</div>
+
+</DefinitionBox>
 <div v-click="1" class="stack">
 <div class="figure"><TwoBodyForceSvg /></div>
 <Latex tex="F = G\frac{m_1 m_2}{r^2}" display />
-<div class="mini-note">质量用 <Latex tex="\text{kg}" />、距离用 <Latex tex="\text{m}" />、力用 <Latex tex="\text{N}" />。</div>
 </div>
 </div>
-<div v-click="2"><mdi-notebook-outline class="icon-md text-accent" /> <b>记笔记</b>：两个质量分布均匀的球体之间的万有引力，可以看成两球心处的两个质点之间的引力，<Latex tex="r" /> 取两球心间的距离（数学上已严格证明，直接用）。</div>
+<div v-click="2" class="info-hint">两个质量分布均匀的球体之间的万有引力，可以看成两球心处的两个质点之间的引力，<Latex tex="r" /> 取两球心间的距离。</div>
 </div>
 
 ---
@@ -166,11 +169,11 @@ clicks: 3
 <div class="page-grow">
 <div class="half-grid">
 <div class="figure"><CavendishBalanceSvg :step="$clicks" /></div>
-<div class="stack">
+<div class="stack" style="--stack-gap:.3rem">
 <div class="ask">牛顿 1687 年就发表了万有引力定律，为什么他仍然算不出引力的大小？</div>
 <div v-click="1">因为式中的比例系数 <Latex tex="G" /> 一直不知道 —— 一般物体之间的引力非常小，极难测量。</div>
 <div v-click="2">1798 年，卡文迪什用扭秤测出铅球之间的引力。核心是<b>光路放大法</b>：平面镜转过 <Latex tex="\theta" />，反射光线转过 <Latex tex="2\theta" />，光点在远处刻度尺上明显移动。</div>
-<div v-click="3" class="key">由此推算出 <Latex tex="G = 6.67 \times 10^{-11}\ \text{N}\cdot\text{m}^2/\text{kg}^2" /> —— 这就是卡文迪什测出的引力常量。</div>
+<div v-click="3" class="tip-hint" style="--hint-pad-y:.45rem">由此推算出 <Latex tex="G = 6.67 \times 10^{-11}\ \text{N}\cdot\text{m}^2/\text{kg}^2" /> —— 这就是卡文迪什测出的引力常量。</div>
 </div>
 </div>
 </div>
@@ -183,7 +186,7 @@ clicks: 1
 <div class="page-grow">
 <div class="ask ask-lead">一个篮球的质量为 <Latex tex="0.6\ \text{kg}" />，操场上相距 <Latex tex="0.5\ \text{m}" /> 的两个篮球之间的万有引力有多大？</div>
 <DailyGravityCompare />
-<div v-click="1" class="key">两球之间的万有引力只有篮球重力的 <Latex tex="10^{-11}" /> 量级 —— 身边物体的质量太小，引力根本察觉不到；天体的质量巨大，万有引力才成为支配它们运动的力。</div>
+<div v-click="1" class="tip-hint">两球之间的万有引力只有篮球重力的 <Latex tex="10^{-11}" /> 量级 —— 身边物体的质量太小，引力根本察觉不到；天体的质量巨大，万有引力才成为支配它们运动的力。</div>
 </div>
 
 ---
@@ -199,7 +202,7 @@ clicks: 2
 <div class="stack">
 <div class="ask">在赤道上，我们测得的重力就是万有引力吗？</div>
 <div v-click="1">赤道上的物体随地球自转，需要指向地心的向心力，它由万有引力的一部分提供：<Latex tex="F_{\text{引}} = mg + F_{\text{向}}" />。</div>
-<div v-click="2" class="key">重力只是万有引力的一个分力，所以赤道上测得的重力略小于万有引力（向心力只占约 0.3%，图中已放大）。</div>
+<div v-click="2" class="tip-hint">重力只是万有引力的一个分力，所以赤道上测得的重力略小于万有引力（向心力只占约 0.3%，图中已放大）。</div>
 </div>
 </div>
 </div>
@@ -217,7 +220,7 @@ clicks: 2
 <div class="stack">
 <div class="ask">在一般纬度上，重力的方向还和万有引力一致吗？</div>
 <div v-click="1">物体随地球自转的向心力指向地轴、垂直于地轴；重力是万有引力减去向心力后的结果 —— 三者满足矢量关系 <Latex tex="F_{\text{引}} = mg + F_{\text{向}}" />。</div>
-<div v-click="2" class="key">所以一般纬度上重力的方向并不指向地心（只有赤道与两极例外），大小也略小于万有引力。</div>
+<div v-click="2" class="tip-hint">所以一般纬度上重力的方向并不指向地心（只有赤道与两极例外），大小也略小于万有引力。</div>
 </div>
 </div>
 </div>

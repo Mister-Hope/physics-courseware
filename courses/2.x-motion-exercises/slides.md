@@ -85,7 +85,10 @@ clicks: 0
 title: '调甲的加速度，数交点'
 ---
 
-<div class="page-grow">
+<!-- CoordAxes 的曲线组带 SVG clip-path（曲线被裁在坐标区里），但它外层 svg 是 overflow:visible，
+     且曲线采样值超出纵轴范围 ⇒ 路径包围盒比图形本身高、向上探出画布 10.1px（屏幕上并没有画出来，见报告截图）。
+     给页面容器一个显式裁剪，让「可见区域」与浏览器真正绘制出来的范围一致。 -->
+<div class="page-grow" style="overflow: hidden">
 <MeetCountModel />
 </div>
 

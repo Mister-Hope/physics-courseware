@@ -59,7 +59,7 @@ clicks: 1
 
 <div class="text-xl leading-relaxed"><Latex tex="F = qvB\sin\theta" />，这里 <Latex tex="\theta = 0" /> ⟹ <Latex tex="F_{\text{洛}} = 0" /></div>
 
-<div class="key mt-4 text-xl">不受洛伦兹力 ⟹ 运动状态不改变 ⟹ <strong>匀速直线运动</strong></div>
+<div class="tip-hint mt-4">不受洛伦兹力 ⟹ 运动状态不改变 ⟹ <strong>匀速直线运动</strong></div>
 
 </div>
 
@@ -79,7 +79,7 @@ clicks: 1
 
 <CircularOrbit :force="$clicks >= 1" :radius="$clicks >= 1" :hint="false" :readout="false" />
 
-<div class="key text-xl" v-click="1">
+<div class="tip-hint" v-click="1">
 磁感应强度 <Latex tex="B" /> 越大 → 半径越小、转得越快；改变速率 <Latex tex="v" /> → 圆的大小变了，但转的快慢不变
 </div>
 
@@ -97,21 +97,21 @@ clicks: 2
 
 <div>
 
-<table class="w-full overflow-hidden rounded-xl border border-slate-700/60 text-lg">
+<table class="w-full overflow-hidden rounded-xl border text-lg" style="border-color: color-mix(in srgb, var(--c-neutral-700) 60%, transparent)">
 <thead>
-<tr class="bg-slate-800/60">
+<tr style="background-color: color-mix(in srgb, var(--c-surface-solid) 60%, transparent)">
 <th class="px-4 py-2 text-left font-semibold">物理量</th>
 <th class="px-4 py-2 font-semibold">大小</th>
 <th class="px-4 py-2 font-semibold">方向</th>
 </tr>
 </thead>
 <tbody>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td class="px-4 py-2"><Latex tex="v" /></td>
 <td class="px-4 py-2 text-center">不变</td>
 <td class="px-4 py-2 text-center text-accent">改变</td>
 </tr>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td class="px-4 py-2"><Latex tex="F_{\text{洛}}" /></td>
 <td class="px-4 py-2 text-center">不变</td>
 <td class="px-4 py-2 text-center text-accent">改变</td>
@@ -119,7 +119,7 @@ clicks: 2
 </tbody>
 </table>
 
-<div class="mt-4 text-base leading-relaxed text-slate-400">
+<div class="mt-4 text-base leading-relaxed text-dim">
 依据：<Latex tex="F_{\text{洛}} \perp v" /> ⟹ 只改方向、不改大小；<Latex tex="v" /> 大小不变 ⟹ <Latex tex="F_{\text{洛}} = qvB" /> 大小也不变。
 </div>
 
@@ -135,7 +135,7 @@ clicks: 2
 ② <Latex tex="F_{\text{洛}}" /> 始终垂直于 <Latex tex="v" /> ⟹ <Latex tex="v" /> 的方向均匀改变
 </div>
 
-<div class="key text-xl" v-click="2">
+<div class="tip-hint" v-click="2">
 ③ 加速度大小不变、速度方向均匀改变 ⟹ <strong>匀速圆周运动</strong>
 </div>
 
@@ -161,7 +161,7 @@ clicks: 2
 
 <div>② 只要射入时 <Latex tex="v \perp B" />，速度就始终留在这个平面内</div>
 
-<div class="key">所以：带电粒子在<strong>垂直于磁感线</strong>的平面内做匀速圆周运动，这个平面由入射点与 <Latex tex="B" /> 唯一确定</div>
+<div class="tip-hint">所以：带电粒子在<strong>垂直于磁感线</strong>的平面内做匀速圆周运动，这个平面由入射点与 <Latex tex="B" /> 唯一确定</div>
 
 </div>
 
@@ -202,7 +202,7 @@ clicks: 2
 <CircularOrbit emphasis="T" :hint="false" readout-only="T" />
 
 <div class="text-xl text-center" v-click="2">
-<Latex tex="T" /> 与轨道半径、运动速度<strong class="text-red-400">无关</strong> (非常有潜力的特性)
+<Latex tex="T" /> 与轨道半径、运动速度<strong class="text-danger">无关</strong>
 </div>
 
 </div>
@@ -256,7 +256,7 @@ clicks: 2
 # 比荷
 
 <!-- 比荷：由 r、T 反解；它是粒子自身的固有属性，也是 1.4 质谱仪的原理伏笔 -->
-<div class="ask text-xl">这三个式子里，哪一个量最能代表"粒子本身"？</div>
+<div class="ask text-xl">这三个式子里，哪一个量最能代表粒子本身？</div>
 
 <div class="page-grow">
 
@@ -268,7 +268,7 @@ clicks: 2
 
 <div>电荷量 <Latex tex="q" /> 越大 → 洛伦兹力越大；由 <Latex tex="F = ma" /> 得 <Latex tex="a = \dfrac{q}{m}vB" />，加速度正比于电荷量、反比于质量</div>
 
-<div class="key">
+<div class="tip-hint">
 <div class="opacity-80">把 <Latex tex="r = \dfrac{mv}{qB}" />、<Latex tex="T = \dfrac{2\pi m}{qB}" /> 反过来解：</div>
 <div class="mt-1"><Latex tex="\dfrac{q}{m} = \dfrac{v}{Br}" />，<Latex tex="\dfrac{q}{m} = \dfrac{2\pi}{BT}" /></div>
 </div>
@@ -279,23 +279,23 @@ clicks: 2
 
 <div>
 
-<table class="charge-ratio-table w-full overflow-hidden rounded-xl border border-slate-700/60">
+<table class="charge-ratio-table w-full overflow-hidden rounded-xl border" style="border-color: color-mix(in srgb, var(--c-neutral-700) 60%, transparent)">
 <thead>
-<tr class="bg-slate-800/60">
+<tr style="background-color: color-mix(in srgb, var(--c-surface-solid) 60%, transparent)">
 <th class="text-left font-semibold">粒子</th>
 <th class="text-left font-semibold">比荷</th>
 </tr>
 </thead>
 <tbody>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td>电子</td>
 <td><Latex tex="1.76\times10^{11}\ \text{C/kg}" /></td>
 </tr>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td>质子</td>
 <td><Latex tex="9.58\times10^{7}\ \text{C/kg}" /></td>
 </tr>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td><Latex tex="\alpha" /> 粒子</td>
 <td><Latex tex="4.79\times10^{7}\ \text{C/kg}" /></td>
 </tr>
@@ -316,7 +316,7 @@ clicks: 2
 # 解这类题的思路：作三角形
 
 <!-- 方法页：① 找圆心 ② 画轨迹 ③ 求半径 ④ 定圆心角 -->
-<div class="ask text-xl">题目几乎都是"已知几何、求半径"——从哪儿下手？</div>
+<div class="ask text-xl">题目几乎都是已知几何、求半径这一类——从哪儿下手？</div>
 
 <div class="page-grow">
 
@@ -358,7 +358,7 @@ clicks: 4
 
 <div v-click="3">② 作三角形：<Latex tex="\cos\theta = \dfrac{L/2}{r}" /> ⟹ <Latex tex="r = \dfrac{L}{2\cos\theta}" /></div>
 
-<div class="key" v-click="4"><Latex tex="B = \dfrac{mv_0}{qr} = \dfrac{2mv_0\cos\theta}{qL}" /></div>
+<div class="tip-hint" v-click="4"><Latex tex="B = \dfrac{mv_0}{qr} = \dfrac{2mv_0\cos\theta}{qL}" /></div>
 
 </div>
 
@@ -386,7 +386,7 @@ clicks: 4
 
 <div v-click="3">② 圆心在 <Latex tex="y" /> 轴上：<Latex tex="b^2 + y_0^2 = r^2" />，且 <Latex tex="r = a - y_0" /> ⟹ <Latex tex="r = \dfrac{a^2 + b^2}{2a}" /></div>
 
-<div class="key" v-click="4"><Latex tex="\dfrac{q}{m} = \dfrac{v_0}{Br} = \dfrac{2av_0}{B\,(a^2 + b^2)}" />，粒子带负电</div>
+<div class="tip-hint" v-click="4"><Latex tex="\dfrac{q}{m} = \dfrac{v_0}{Br} = \dfrac{2av_0}{B\,(a^2 + b^2)}" />，粒子带负电</div>
 
 </div>
 
@@ -414,7 +414,7 @@ clicks: 3
 
 <div v-click="2">② <Latex tex="OA = OM = R" />、<Latex tex="CA = CM = r" /> ⟹ 四边形 <Latex tex="OACM" /> 关于 <Latex tex="OC" /> 对称 ⟹ <Latex tex="\angle OMC = \angle OAC = 90^\circ" />，即 <Latex tex="OM \perp CM" /></div>
 
-<div class="key" v-click="3">③ 出射速度 <Latex tex="v' \perp CM" /> ⟹ <Latex tex="v'" /> 沿 <Latex tex="OM" /> 方向 ⟹ <strong>反向延长线必过圆心 <Latex tex="O" /></strong></div>
+<div class="tip-hint" v-click="3">③ 出射速度 <Latex tex="v' \perp CM" /> ⟹ <Latex tex="v'" /> 沿 <Latex tex="OM" /> 方向 ⟹ <strong>反向延长线必过圆心 <Latex tex="O" /></strong></div>
 
 </div>
 
@@ -432,17 +432,17 @@ clicks: 3
 
 <div class="ask text-lg mb-1">接例 3：磁场区域外也是匀强磁场——方向与圆内相反（<strong>大小可以不同</strong>）。粒子射出后沿着怎样的轨迹走？它还会再次沿半径方向射回圆心吗？</div>
 
-<div class="page-grow">
+<div class="page-grow" style="--hint-pad-y:.5rem">
 
 <div class="grid grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] items-center gap-8">
 
-<div class="stack text-lg leading-relaxed">
+<div class="stack text-lg leading-relaxed" style="--stack-gap:.5rem">
 
 <div v-click="1">① 粒子在 <Latex tex="M" /> 点射出时，速度沿半径向外</div>
 
-<div v-click="2">② 出射速度 <Latex tex="v'" /> 垂直于圆内的半径 <Latex tex="CM" />、又沿 <Latex tex="OM" /> ⟹ 圆外轨迹的圆心 <Latex tex="C'" /> 也落在「过 <Latex tex="M" />、垂直于 <Latex tex="OM" />」的直线上——<strong>与圆外磁场多大无关</strong></div>
+<div v-click="2">② 出射速度 <Latex tex="v'" /> 垂直于圆内的半径 <Latex tex="CM" />、又沿 <Latex tex="OM" /> ⟹ 圆外轨迹的圆心 <Latex tex="C'" /> 也落在过 <Latex tex="M" />、垂直于 <Latex tex="OM" /> 的直线上——<strong>与圆外磁场多大无关</strong></div>
 
-<div class="key" v-click="3">③ 把 <Latex tex="M" /> 关于直线 <Latex tex="OC'" /> 镜像得 <Latex tex="N" />：<Latex tex="O" /> 在镜像轴上 ⟹ <Latex tex="ON = OM = R" />（<Latex tex="N" /> 在边界上）、<Latex tex="\angle ONC' = \angle OMC' = 90^\circ" /> ⟹ 速度沿 <Latex tex="ON" />、<strong>指着圆心 <Latex tex="O" /></strong></div>
+<div class="tip-hint" v-click="3">③ 把 <Latex tex="M" /> 关于直线 <Latex tex="OC'" /> 镜像得 <Latex tex="N" />：<Latex tex="O" /> 在镜像轴上 ⟹ <Latex tex="ON = OM = R" />（<Latex tex="N" /> 在边界上）、<Latex tex="\angle ONC' = \angle OMC' = 90^\circ" /> ⟹ 速度沿 <Latex tex="ON" />、<strong>指着圆心 <Latex tex="O" /></strong></div>
 
 </div>
 
@@ -456,7 +456,7 @@ clicks: 3
 clicks: 2
 ---
 
-# 例 5：粒子能一直"待"在磁场里吗？
+# 例 5：粒子能一直在磁场里吗？
 
 <div class="ask text-lg mb-1">圆形匀强磁场区域，半径 <Latex tex="R" />、磁感应强度 <Latex tex="B" />。在边界上的 <Latex tex="P" /> 点以速率 <Latex tex="v_0" /> 向区域内发射粒子（方向可以任选）。问：比荷满足什么条件时，粒子无法保持在磁场中运动？</div>
 
@@ -466,9 +466,9 @@ clicks: 2
 
 <div class="stack text-lg leading-relaxed">
 
-<div v-click="1">① 要一直留在磁场里，轨迹圆必须整个位于磁场区域内。沿与半径垂直的方向（切线方向）射入时最"省地方"：轨迹圆与边界在 <Latex tex="P" /> 点内切。此时只要 <Latex tex="r \le R" />，粒子就能一圈圈转下去</div>
+<div v-click="1">① 要一直留在磁场里，轨迹圆必须整个位于磁场区域内。沿与半径垂直的方向（切线方向）射入时，轨迹圆占用的区域最小：轨迹圆与边界在 <Latex tex="P" /> 点内切。此时只要 <Latex tex="r \le R" />，粒子就能一直留在磁场里做圆周运动</div>
 
-<div class="key" v-click="2">② 一旦 <Latex tex="r > R" />，轨迹圆就无论如何都装不进去（它必须过边界上的 <Latex tex="P" /> 点），粒子一定会穿出磁场 ⟹ <Latex tex="\dfrac{q}{m} < \dfrac{v_0}{BR}" /></div>
+<div class="tip-hint" v-click="2">② 一旦 <Latex tex="r > R" />，轨迹圆就无论如何都装不进去（它必须过边界上的 <Latex tex="P" /> 点），粒子一定会穿出磁场 ⟹ <Latex tex="\dfrac{q}{m} < \dfrac{v_0}{BR}" /></div>
 
 </div>
 
@@ -522,7 +522,7 @@ clicks: 2
 
 <div v-click="1">① 把 <Latex tex="\theta_{\max} = 2\arcsin\dfrac{R}{r}" /> 代回 <Latex tex="t = \dfrac{\theta}{2\pi}T" />，并代入 <Latex tex="T = \dfrac{2\pi m}{qB}" /> 与 <Latex tex="r = \dfrac{mv_0}{qB}" /></div>
 
-<div class="key" v-click="2">② <Latex tex="t_{\max} = \dfrac{m}{qB}\,\theta_{\max} = \dfrac{2m}{qB}\arcsin\dfrac{qBR}{mv_0}" />——<strong>它同时与比荷、入射速率有关</strong>，不再是单纯的 <Latex tex="\dfrac{\pi m}{qB}" /></div>
+<div class="tip-hint" v-click="2">② <Latex tex="t_{\max} = \dfrac{m}{qB}\,\theta_{\max} = \dfrac{2m}{qB}\arcsin\dfrac{qBR}{mv_0}" />——<strong>它同时与比荷、入射速率有关</strong>，不再是单纯的 <Latex tex="\dfrac{\pi m}{qB}" /></div>
 
 <div v-click="2">③ 两个极限：<Latex tex="r = R" />（轨迹圆恰好与边界内切）时 <Latex tex="t_{\max} = \dfrac{\pi m}{qB} = \dfrac{T}{2}" />；<Latex tex="r \to \infty" />（轨迹几乎成直线）时 <Latex tex="t_{\max} \to \dfrac{2R}{v_0}" /></div>
 
@@ -535,31 +535,31 @@ clicks: 2
 </div>
 
 ---
-
-# 课堂小结：
+title: 课堂小结
+---
 
 <div class="page-grow">
 
-<table class="w-full overflow-hidden rounded-xl border border-slate-700/60 text-lg">
+<table class="w-full overflow-hidden rounded-xl border text-lg" style="border-color: color-mix(in srgb, var(--c-neutral-700) 60%, transparent)">
 <thead>
-<tr class="bg-slate-800/60">
+<tr style="background-color: color-mix(in srgb, var(--c-surface-solid) 60%, transparent)">
 <th class="px-4 py-2 text-left font-semibold">情形</th>
 <th class="px-4 py-2 font-semibold">洛伦兹力</th>
 <th class="px-4 py-2 font-semibold">运动</th>
 </tr>
 </thead>
 <tbody>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td class="px-4 py-2"><Latex tex="v \parallel B" /></td>
 <td class="px-4 py-2 text-center"><Latex tex="F_{\text{洛}} = 0" /></td>
 <td class="px-4 py-2">匀速直线运动</td>
 </tr>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td class="px-4 py-2"><Latex tex="v \perp B" /></td>
 <td class="px-4 py-2 text-center"><Latex tex="F_{\text{洛}} = qvB" />（提供向心力）</td>
 <td class="px-4 py-2">匀速圆周运动</td>
 </tr>
-<tr class="border-t border-slate-700/50">
+<tr class="border-t" style="border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent)">
 <td class="px-4 py-2"><Latex tex="v" /> 与 <Latex tex="B" /> 成 <Latex tex="\theta" /></td>
 <td class="px-4 py-2 text-center"><Latex tex="F_{\text{洛}} = qvB\sin\theta = qBv_\perp" /></td>
 <td class="px-4 py-2">螺旋线，螺距 <Latex tex="d = v_\parallel T" /></td>

@@ -290,14 +290,13 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
     <!-- 控制与读数 -->
     <div class="flex min-h-0 w-[17rem] shrink-0 flex-col justify-center gap-2">
       <div>
-        <div class="mb-1 text-sm text-slate-400">磁场方向</div>
+        <div class="mb-1 text-sm text-dim">磁场方向</div>
         <div class="flex gap-2">
           <button
             type="button"
             class="px-2.5 py-0.5 rounded-full text-sm border transition-colors"
-            :class="
-              bDir === 'out' ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
-            "
+            :class="bDir === 'out' ? 'text-amber-300' : 'text-dim'"
+            :style="{ borderColor: bDir === 'out' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
             @click="bDir = 'out'"
           >
             <Latex tex="\odot" /> 向外
@@ -305,9 +304,8 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
           <button
             type="button"
             class="px-2.5 py-0.5 rounded-full text-sm border transition-colors"
-            :class="
-              bDir === 'in' ? 'border-amber-400 text-amber-300' : 'border-slate-600 text-slate-400'
-            "
+            :class="bDir === 'in' ? 'text-amber-300' : 'text-dim'"
+            :style="{ borderColor: bDir === 'in' ? 'var(--c-accent-light)' : 'var(--c-neutral-600)' }"
             @click="bDir = 'in'"
           >
             <Latex tex="\otimes" /> 向里
@@ -317,7 +315,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
 
       <div>
         <div class="mb-1 flex items-baseline justify-between gap-2">
-          <span class="whitespace-nowrap text-sm text-slate-400">速率 <Latex tex="v" /></span>
+          <span class="whitespace-nowrap text-sm text-dim">速率 <Latex tex="v" /></span>
           <span class="whitespace-nowrap text-sm font-semibold text-sky-300">
             {{ vDisplay }} <Latex tex="\times 10^6\ \text{m/s}" />
           </span>
@@ -336,7 +334,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
 
       <div>
         <div class="mb-1 flex items-baseline justify-between gap-2">
-          <span class="whitespace-nowrap text-sm text-slate-400">
+          <span class="whitespace-nowrap text-sm text-dim">
             磁感应强度 <Latex tex="B" />
           </span>
           <span class="whitespace-nowrap text-sm font-semibold text-amber-300">
@@ -356,20 +354,20 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
       </div>
 
       <!-- r / T 读数：readout=false 的页面整块不渲染（连数字带公式一起没有）；readoutOnly 决定只留哪一项 -->
-      <div v-if="readout" class="rounded-xl border border-slate-700/60 bg-slate-900/40 px-3 py-1.5">
+      <div v-if="readout" class="rounded-xl border px-3 py-1.5" style="border-color: color-mix(in srgb, var(--c-neutral-700) 60%, transparent); background-color: color-mix(in srgb, var(--c-neutral-900) 40%, transparent)">
         <div v-if="readoutOnly !== 'T'" class="text-lg">
           <Latex tex="r" /> =
-          <span class="font-semibold" :class="emphasis === 'r' ? 'text-accent' : 'text-slate-200'">
+          <span class="font-semibold" :class="emphasis === 'r' ? 'text-accent' : 'text-[var(--c-neutral-200)]'">
             {{ rMM.toFixed(2) }} <Latex tex="\text{mm}" />
           </span>
         </div>
         <div v-if="readoutOnly !== 'r'" class="text-lg" :class="readoutOnly === 'T' ? '' : 'mt-1'">
           <Latex tex="T" /> =
-          <span class="font-semibold" :class="emphasis === 'T' ? 'text-accent' : 'text-slate-200'">
+          <span class="font-semibold" :class="emphasis === 'T' ? 'text-accent' : 'text-[var(--c-neutral-200)]'">
             {{ tNS.toFixed(1) }} <Latex tex="\text{ns}" />
           </span>
         </div>
-        <div v-if="hint" class="mt-0.5 text-xs leading-relaxed text-slate-400">
+        <div v-if="hint" class="mt-0.5 text-xs leading-relaxed text-dim">
           <template v-if="emphasis === 'T'">
             <Latex tex="T = \dfrac{2\pi m}{qB}" />：只跟 <Latex tex="m" />、<Latex
               tex="q"

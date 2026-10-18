@@ -60,7 +60,7 @@ clicks: 2
 <div class="figure-cell"><StringBallTableSvg :step="$clicks" /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">剪断后小球不再受绳的拉力，沿<b>切线方向</b>做直线运动 —— 一直是绳的拉力迫使它转弯。</div>
-<div class="key" v-click="2">使小球做圆周运动的力，总指向<b>圆心</b>。</div>
+<div class="tip-hint" v-click="2">使小球做圆周运动的力，总指向<b>圆心</b>。</div>
 </div>
 </div>
 </div>
@@ -70,8 +70,13 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="def-tag"><mdi-book-open-page-variant-outline /> 定义</div>
-<div class="card def-card text-3xl">大量实例表明：做匀速圆周运动的物体所受的合力<b>总指向圆心</b>。这个指向圆心的力叫作<b>向心力</b>（centripetal force）。</div>
+
+<DefinitionBox term="向心力" tone="gold">
+
+<div>大量实例表明：做匀速圆周运动的物体所受的合力<b>总指向圆心</b>。这个指向圆心的力叫作<span class="def-term">向心力</span>（centripetal force）。</div>
+
+</DefinitionBox>
+
 </div>
 
 ---
@@ -86,7 +91,7 @@ clicks: 2
 <div class="figure-cell"><EffectOnlyDirectionSvg /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">向心力<b>始终垂直</b>于速度方向，沿速度方向的分量为 0。</div>
-<div class="key" v-click="2">它<b>只改变速度的方向，不改变速度的大小</b>。</div>
+<div class="tip-hint" v-click="2">它<b>只改变速度的方向，不改变速度的大小</b>。</div>
 </div>
 </div>
 </div>
@@ -105,7 +110,7 @@ clicks: 3
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">不是。它<b>不是某种性质的力</b>，而是按力的<b>作用效果</b>命名的。</div>
 <div v-click="2">所以向心力必须由别的力（或几个力的合力）来<b>充当</b>：绳的拉力、引力、静摩擦力，都可以是向心力。</div>
-<div class="key" v-click="3">任何力或几个力的合力，只要它指向圆心、使物体能做圆周运动，它就是向心力。</div>
+<div class="tip-hint" v-click="3">任何力或几个力的合力，只要它指向圆心、使物体能做圆周运动，它就是向心力。</div>
 </div>
 </div>
 </div>
@@ -122,7 +127,7 @@ clicks: 2
 <div class="figure-cell"><CentripetalDirectionSvg /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">向心力<b>指向圆心</b>、与速度<b>垂直</b>；<br />物体在不同位置，方向随之改变。</div>
-<div class="key" v-click="2">向心力<b>一定是个变力</b>。</div>
+<div class="tip-hint" v-click="2">向心力<b>一定是个变力</b>。</div>
 </div>
 </div>
 </div>
@@ -135,7 +140,7 @@ clicks: 2
 <div class="page-grow">
 <div class="ask ask-lead">是“做圆周运动所以有力”，还是“有力所以做圆周运动”？</div>
 <div v-click="1">物体做圆周运动，速度方向时刻在改变 ⇒ 它一定有加速度，所受的合力一定与速度不共线。</div>
-<div class="key" v-click="2">正是这个方向时刻改变、始终与速度垂直的合力，迫使物体不断改变运动方向 —— 物体才做圆周运动。</div>
+<div class="tip-hint" v-click="2">正是这个方向时刻改变、始终与速度垂直的合力，迫使物体不断改变运动方向 —— 物体才做圆周运动。</div>
 </div>
 
 ---
@@ -208,9 +213,10 @@ clicks: 2
 ---
 layout: base-flex
 clicks: 2
+title: 例题：圆盘上小物体的向心力
 ---
 
-# 例题
+# 圆盘上小物体的向心力
 
 <div class="page-grow">
 <div>一个圆盘在水平面内匀速转动，角速度 <Latex tex="\omega = 4\ \text{rad/s}" />。盘面上距圆盘中心 <Latex tex="r = 0.10\ \text{m}" /> 处有一个质量 <Latex tex="m = 0.10\ \text{kg}" /> 的小物体，随圆盘一起做匀速圆周运动。求小物体所受向心力的大小。</div>
@@ -234,7 +240,7 @@ clicks: 3
 <div class="ask">甲：静摩擦力指向圆心，它就是向心力。乙：静摩擦力的方向与相对运动趋势相反，不可能与运动方向垂直，所以不能提供向心力。</div>
 <div v-click="1">小物体相对圆盘静止，但它的运动方向时刻在变 —— 必须有一个指向圆心的合力。</div>
 <div v-click="2">若接触面突然变光滑，小物体将沿切线飞出、离圆心越来越远；可见它相对圆盘有<b>沿半径向外</b>滑动的趋势，静摩擦力正沿半径指向圆心。</div>
-<div class="key" v-click="3">判断谁提供向心力，只看<b>作用效果</b>：能把物体拉向圆心的力，就是向心力。</div>
+<div class="tip-hint" v-click="3">判断谁提供向心力，只看<b>作用效果</b>：能把物体拉向圆心的力，就是向心力。</div>
 </div>
 
 ---
@@ -292,7 +298,7 @@ clicks: 2
 <div class="figure-cell"><SpinBallDecomposeSvg :step="$clicks" /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">跟圆周<b>相切</b>的分力 <Latex tex="F_t" />：与速度同向时使速度<b>越来越大</b></div>
-<div class="key" v-click="2">指向圆心的分力 <Latex tex="F_n" />：改变速度的<b>方向</b>，提供向心力</div>
+<div class="tip-hint" v-click="2">指向圆心的分力 <Latex tex="F_n" />：改变速度的<b>方向</b>，提供向心力</div>
 </div>
 </div>
 </div>
@@ -309,7 +315,7 @@ clicks: 2
 <div class="figure-cell"><SpinBallAngleSvg :step="$clicks" /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1"><Latex tex="\theta < 90^\circ" />：<Latex tex="F_t" /> 与 <Latex tex="v" /> 同向 → 速率变大，做<b>加速的圆周运动</b></div>
-<div class="key" v-click="2"><Latex tex="\theta > 90^\circ" />：<Latex tex="F_t" /> 与 <Latex tex="v" /> 反向 → 速率变小，做<b>减速的圆周运动</b></div>
+<div class="tip-hint" v-click="2"><Latex tex="\theta > 90^\circ" />：<Latex tex="F_t" /> 与 <Latex tex="v" /> 反向 → 速率变小，做<b>减速的圆周运动</b></div>
 </div>
 </div>
 </div>
@@ -317,9 +323,10 @@ clicks: 2
 ---
 layout: base-flex
 clicks: 3
+title: 例题：汽车转弯时的合力方向
 ---
 
-# 例题
+# 汽车转弯时的合力方向
 
 <div class="page-grow">
 <div>一辆汽车在水平公路上转弯，沿曲线由 M 向 N 行驶，速度逐渐减小。图中已经画出一种可能的合力方向 <Latex tex="F" />（它与 <Latex tex="v" /> 垂直）—— 这个方向对吗？</div>
@@ -328,7 +335,7 @@ clicks: 3
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">速度逐渐减小 → 合力沿速度方向的分量必须与 <Latex tex="v" /> <b>反向</b>。</div>
 <div v-click="2">图中方向与 <Latex tex="v" /> 垂直，沿 <Latex tex="v" /> 方向的分量为零 —— 那样速率将保持不变，与题设矛盾。</div>
-<div class="key" v-click="3">所以合力应指向曲线内侧的<b>偏后方</b>，与 <Latex tex="v" /> 的夹角大于 <Latex tex="90^\circ" />。</div>
+<div class="tip-hint" v-click="3">所以合力应指向曲线内侧的<b>偏后方</b>，与 <Latex tex="v" /> 的夹角大于 <Latex tex="90^\circ" />。</div>
 </div>
 </div>
 </div>
@@ -344,7 +351,7 @@ clicks: 2
 <div>轨迹既不是直线、也不是圆周的曲线运动，叫作<b>一般曲线运动</b>，例如平抛、斜抛。</div>
 <div class="figure-cell"><GeneralCurveSegmentsSvg :step="$clicks" /></div>
 <div v-click="1">把曲线分割成许多很短的小段，每一小段都可以看作<b>圆周运动的一部分</b>。</div>
-<div class="key" v-click="2">这样就可以用圆周运动的方法，分析质点在曲线上任一位置的运动。</div>
+<div class="tip-hint" v-click="2">这样就可以用圆周运动的方法，分析质点在曲线上任一位置的运动。</div>
 </div>
 
 ---
@@ -359,7 +366,7 @@ clicks: 2
 <div class="figure-cell"><CurvatureRadiusSvg :step="$clicks" /></div>
 <div class="stack divider-l" :class="{ 'divider-off': $clicks < 1 }">
 <div v-click="1">每一小段圆弧的半径，叫作曲线在该处的<b>曲率半径</b>，用 <Latex tex="\rho" /> 表示；它的倒数 <Latex tex="k = 1/\rho" /> 叫作曲率，表示曲线弯曲的程度。</div>
-<div class="key" v-click="2">把 <Latex tex="F_n = m\frac{v^2}{r}" /> 中的 <Latex tex="r" /> 换成曲率半径 <Latex tex="\rho" />，就能求一般曲线运动中某处的向心力。</div>
+<div class="tip-hint" v-click="2">把 <Latex tex="F_n = m\frac{v^2}{r}" /> 中的 <Latex tex="r" /> 换成曲率半径 <Latex tex="\rho" />，就能求一般曲线运动中某处的向心力。</div>
 </div>
 </div>
 </div>

@@ -25,21 +25,23 @@ chapter: 第四章 运动和力的关系
 <CoverDecorationSvg />
 
 ---
-clicks: 6
+clicks: 5
 ---
-
-<h1 v-click="3">牛顿第二定律</h1>
 
 <div class="page-grow">
 <div class="ask ask-lead" v-click="1">上节课的实验得到 <Latex tex="a \propto F" />、<Latex tex="a \propto \frac{1}{m}" />。怎么把它们合成一条定量关系？</div>
 
 <div class="eq-lead text-xl leading-loose" v-click="2"><Latex tex="a \propto \frac{F}{m} \quad \Longrightarrow \quad F \propto ma" /></div>
 
-<div class="card" v-click="4">物体加速度的大小跟它受到的<b>作用力成正比</b>，跟它的<b>质量成反比</b>，加速度的方向跟作用力的方向<b>相同</b>。</div>
+<DefinitionBox v-click="3" term="牛顿第二定律" tone="gold">
 
-<div class="ask" v-click="5">式中的 <Latex tex="F" /> 指的是某一个力，还是物体受到的合力？</div>
+<div>物体加速度的大小跟它受到的<b>作用力成正比</b>，跟它的<b>质量成反比</b>，加速度的方向跟作用力的方向<b>相同</b>。</div>
 
-<div class="key" v-click="6">牛顿第二定律里的 <Latex tex="F" /> 指物体所受的<b>合力</b>：合力决定加速度，加速度的方向始终与合力方向相同。</div>
+</DefinitionBox>
+
+<div class="ask" v-click="4">式中的 <Latex tex="F" /> 指的是某一个力，还是物体受到的合力？</div>
+
+<div class="tip-hint" v-click="5">牛顿第二定律里的 <Latex tex="F" /> 指物体所受的<b>合力</b>：合力决定加速度，加速度的方向始终与合力方向相同。</div>
 </div>
 
 ---
@@ -58,7 +60,7 @@ clicks: 3
 <div>这时把「使 <Latex tex="1\ \text{kg}" /> 的物体产生 <Latex tex="1\ \text{m/s}^2" /> 加速度的力」定为力的单位，记作 <Latex tex="1\ \text{N}" />：<Latex tex="1\ \text{N} = 1\ \text{kg}\cdot\text{m}\cdot\text{s}^{-2}" />。</div>
 </div>
 
-<div class="key" v-click="3">力的单位这样定下来之后，比例系数 <Latex tex="k = 1" />，牛顿第二定律就写成 <Latex tex="F = ma" />。</div>
+<div class="tip-hint" v-click="3">力的单位这样定下来之后，比例系数 <Latex tex="k = 1" />，牛顿第二定律就写成 <Latex tex="F = ma" />。</div>
 </div>
 
 ---
@@ -84,11 +86,11 @@ clicks: 3
 <div class="stack divider-l">
 <div>哪个方向有合力，那个方向就有加速度；</div>
 <div>哪个方向合力为零，那个方向的加速度就为零。</div>
-<div class="mini-note">高中绝大多数问题只在平面内运动，两个方向就够了。</div>
+<div class="mini-note">多数问题只在平面内运动，两个方向就够了。</div>
 </div>
 </div>
 
-<div class="key" v-click="3">先把物体受到的力正交分解，再在每个方向上分别列 <Latex tex="F = ma" /> —— 这是用牛顿第二定律解题的通用方法。</div>
+<div class="tip-hint" v-click="3">先把物体受到的力正交分解，再在每个方向上分别列 <Latex tex="F = ma" /> —— 这是用牛顿第二定律解题的通用方法。</div>
 </div>
 
 ---
@@ -104,7 +106,7 @@ clicks: 3
 <div class="ask">物块受到一支斜向右下方的合力 <Latex tex="F" />，它的加速度朝哪个方向？两个方向上各自会怎样？</div>
 <div v-click="1">加速度与合力<b>共线同向</b>；把 <Latex tex="F" /> 分解到水平、竖直两个方向，就得到两个方向的分加速度。</div>
 <div v-click="2">沿水平方向 <Latex tex="F_1 = m a_1" />；沿竖直方向 <Latex tex="F_2 = m a_2" />。</div>
-<div class="key" v-click="3">分力与分加速度一一对应：在哪个方向上分解力，就在哪个方向上得到加速度。</div>
+<div class="tip-hint" v-click="3">分力与分加速度一一对应：在哪个方向上分解力，就在哪个方向上得到加速度。</div>
 </div>
 </div>
 </div>
@@ -122,7 +124,7 @@ clicks: 3
 <div class="ask">小球只受重力、由静止下落，它的加速度是多大？</div>
 <div v-click="1">受力分析：小球只受重力 <Latex tex="G = mg" />，方向竖直向下，所以合力 <Latex tex="F_{\text{合}} = mg" />。</div>
 <div v-click="2">由 <Latex tex="F = ma" /> 得 <Latex tex="mg = ma" />，所以 <Latex tex="a = g" />。</div>
-<div class="key" v-click="3">自由落体的加速度恒为 <Latex tex="g" />，与小球质量无关。</div>
+<div class="tip-hint" v-click="3">自由落体的加速度恒为 <Latex tex="g" />，与小球质量无关。</div>
 </div>
 </div>
 </div>
@@ -142,7 +144,7 @@ clicks: 5
 <div v-click="2">由 <Latex tex="F = ma" />：竖直方向加速度为零 <Latex tex="\Rightarrow" /> 合力为零 <Latex tex="\Rightarrow" /> <Latex tex="F_N = G = mg" />。</div>
 <div v-click="3">水平方向只有滑动摩擦力，大小 <Latex tex="F_f = \mu F_N = \mu mg" />，方向与 <Latex tex="v" /> 相反。</div>
 <div v-click="4">对这个方向列 <Latex tex="F = ma" />：<Latex tex="\mu mg = ma \Rightarrow a = \mu g" />。</div>
-<div class="key" v-click="5"><Latex tex="a" /> 只由 <Latex tex="\mu" /> 和 <Latex tex="g" /> 决定，与质量无关。</div>
+<div class="tip-hint" v-click="5"><Latex tex="a" /> 只由 <Latex tex="\mu" /> 和 <Latex tex="g" /> 决定，与质量无关。</div>
 </div>
 </div>
 </div>
@@ -162,7 +164,7 @@ clicks: 5
 <div v-click="2">垂直斜面方向合力为零，而重力在该方向的分力是 <Latex tex="mg\cos\theta" />，所以 <Latex tex="F_N = mg\cos\theta" />。</div>
 <div v-click="3">沿斜面方向：让它下滑的只有重力的分力 <Latex tex="mg\sin\theta" />。</div>
 <div v-click="4">由 <Latex tex="F = ma" /> 得 <Latex tex="mg\sin\theta = ma \Rightarrow a = g\sin\theta" />。</div>
-<div class="key" v-click="5">下滑加速度只由倾角 <Latex tex="\theta" /> 决定：<Latex tex="\theta" /> 越大，下滑越快。</div>
+<div class="tip-hint" v-click="5">下滑加速度只由倾角 <Latex tex="\theta" /> 决定：<Latex tex="\theta" /> 越大，下滑越快。</div>
 </div>
 </div>
 </div>
@@ -181,7 +183,7 @@ clicks: 4
 <div v-click="1">两物块由绳相连，沿斜面的加速度相同。</div>
 <div v-click="2">整体：(<Latex tex="m_1 + m_2)g\sin\theta = (m_1 + m_2)a" />，得 <Latex tex="a = g\sin\theta" />。</div>
 <div v-click="3">隔离 <Latex tex="m_2" />：<Latex tex="m_2 g\sin\theta - F_T = m_2 a" />，代入 <Latex tex="a" /> 得 <Latex tex="F_T = 0" />。</div>
-<div class="key" v-click="4">没有外力时，两个物块各自的加速度都正好是 <Latex tex="g\sin\theta" /> —— 绳根本不需要出力。</div>
+<div class="tip-hint" v-click="4">没有外力时，两个物块各自的加速度都正好是 <Latex tex="g\sin\theta" /> —— 绳根本不需要出力。</div>
 </div>
 </div>
 </div>
@@ -200,7 +202,7 @@ clicks: 4
 <div v-click="1">两物块仍由绳相连，沿斜面的加速度相同。</div>
 <div v-click="2">整体：<Latex tex="F + (m_1 + m_2)g\sin\theta = (m_1 + m_2)a" />。</div>
 <div v-click="3">隔离 <Latex tex="m_2" />：<Latex tex="m_2 g\sin\theta + F_T = m_2 a" />，联立解得 <Latex tex="F_T = \frac{m_2}{m_1 + m_2}F" />。</div>
-<div class="key" v-click="4">拉力只由 <Latex tex="F" /> 和两物块的质量分配决定，与倾角 <Latex tex="\theta" />、<Latex tex="g" /> 都无关。</div>
+<div class="tip-hint" v-click="4">拉力只由 <Latex tex="F" /> 和两物块的质量分配决定，与倾角 <Latex tex="\theta" />、<Latex tex="g" /> 都无关。</div>
 </div>
 </div>
 </div>
@@ -255,7 +257,7 @@ clicks: 5
 <div v-click="2">正交分解 —— 垂直斜面方向：<Latex tex="F_N = mg\cos\theta" />。</div>
 <div v-click="3">沿斜面方向：<Latex tex="mg\sin\theta + F_f = ma" />。</div>
 <div v-click="4">代入 <Latex tex="F_f = \mu mg\cos\theta" />，得 <Latex tex="a = g\sin\theta + \mu g\cos\theta" />，方向沿斜面向下。</div>
-<div class="key" v-click="5">两次只差摩擦力的方向：合成 <Latex tex="a = g\sin\theta \pm \mu g\cos\theta" />，上滑取「<Latex tex="+" />」、下滑取「<Latex tex="-" />」，由<b>滑动方向</b>决定。</div>
+<div class="tip-hint" v-click="5">两次只差摩擦力的方向：合成 <Latex tex="a = g\sin\theta \pm \mu g\cos\theta" />，上滑取「<Latex tex="+" />」、下滑取「<Latex tex="-" />」，由<b>滑动方向</b>决定。</div>
 </div>
 </div>
 </div>
@@ -287,7 +289,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">力与加速度<b>同时产生、同时变化、同时消失</b>，中间没有滞后。</div>
+<div class="tip-hint" v-click="3">力与加速度<b>同时产生、同时变化、同时消失</b>，中间没有滞后。</div>
 </div>
 
 ---
@@ -367,7 +369,7 @@ clicks: 5
 
 <div v-click="4">小段分得越细，每一段里"<Latex tex="a" /> 不变"的假设就越接近真实。<b>取极限</b>：这些小矩形之和 <Latex tex="\sum a\Delta x" /> 就是 <Latex tex="a\text{-}x" /> 图线与横轴围成的面积。</div>
 
-<div class="key" v-click="5">所以 <Latex tex="a\text{-}x" /> 图线的面积＝速度平方变化量的一半，它既不是时间、也不是位移。</div>
+<div class="tip-hint" v-click="5">所以 <Latex tex="a\text{-}x" /> 图线的面积＝速度平方变化量的一半，它既不是时间、也不是位移。</div>
 </div>
 
 ---
@@ -380,13 +382,13 @@ clicks: 3
 <div class="half-grid">
 <div class="fig-cell fig-cell-plot" v-click="1"><SpringBallAxGraph :show-areas="true" /></div>
 <div class="stack divider-l">
-<div class="ask">小球从释放点由静止下落，到最低点速度又减为零。全程 <Latex tex="\int a\,\mathrm{d}x" /> 等于多少？</div>
-<div v-click="2"><Latex tex="v_{\text{初}} = 0" />、<Latex tex="v_{\text{末}} = 0" />，所以 <Latex tex="\int a\,\mathrm{d}x = 0" />。</div>
+<div class="ask">小球从释放点由静止下落，到最低点速度又减为零。全程 <Latex tex="\sum a\Delta x" /> 等于多少？</div>
+<div v-click="2"><Latex tex="v_{\text{初}} = 0" />、<Latex tex="v_{\text{末}} = 0" />，所以 <Latex tex="\sum a\Delta x = 0" />。</div>
 <div v-click="3">横轴上方围出的正面积 <Latex tex="S_1" /> 与横轴下方围出的负面积 <Latex tex="S_2" /> 大小相等：<Latex tex="S_1 = S_2" />。</div>
 </div>
 </div>
 
-<div class="key" v-click="3">加速度—位移图上的两块面积严格相等，这就是「动能变化为零」在图上读出来的样子。</div>
+<div class="tip-hint" v-click="3">加速度—位移图上正、负两块面积严格相等：全程 <Latex tex="\Delta(v^2)" /> 为零（初、末速度都为零）。</div>
 </div>
 
 ---
@@ -409,7 +411,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">解题先分清：哪些力会突变、哪些不会，再对每个物体单独列剪断瞬间的 <Latex tex="F = ma" />。</div>
+<div class="tip-hint" v-click="3">解题先分清：哪些力会突变、哪些不会，再对每个物体单独列剪断瞬间的 <Latex tex="F = ma" />。</div>
 </div>
 
 ---
@@ -425,7 +427,7 @@ clicks: 3
 <div class="ask">天花板挂绳系球 A（<Latex tex="m" />），A 下方用绳系球 B（<Latex tex="2m" />）。剪断上端绳的瞬间，A、B 的加速度各是多大？</div>
 <div v-click="1">剪断后 A、B 一起下落，绳无法再绷紧，绳的拉力突变为 <Latex tex="F_T = 0" />。</div>
 <div v-click="2">A：<Latex tex="a_A = g" />；　B：<Latex tex="a_B = g" />。</div>
-<div class="key" v-click="3">绳上的拉力可以突变：瞬间消失，A、B 一起自由落体。</div>
+<div class="tip-hint" v-click="3">绳上的拉力可以突变：瞬间消失，A、B 一起自由落体。</div>
 </div>
 </div>
 </div>
@@ -436,14 +438,14 @@ clicks: 3
 
 # 模型二：上绳下弹簧
 
-<div class="page-grow">
+<div class="page-grow" style="--stack-gap:.45rem;--hint-pad-y:.5rem">
 <div class="half-grid fig-text-wide">
-<div class="fig-cell"><CutRopeSpringSvg /></div>
-<div class="stack divider-l">
+<div class="fig-cell" style="max-width: 320px"><CutRopeSpringSvg /></div>
+<div class="stack divider-l leading-snug">
 <div class="ask">天花板挂绳系球 A（<Latex tex="m" />），A 下方用轻弹簧系球 B（<Latex tex="2m" />）。剪断上端绳的瞬间，A、B 的加速度各是多大？</div>
 <div v-click="1">弹簧形变不突变 —— 剪断瞬间弹力仍是 <Latex tex="2mg" />：向上拉 B，向下拉 A。</div>
 <div v-click="2">A：<Latex tex="mg + 2mg = 3mg = m a_A" />，得 <Latex tex="a_A = 3g" />（向下）；<br />B：<Latex tex="2mg - 2mg = 0" />，得 <Latex tex="a_B = 0" />。</div>
-<div class="key" v-click="3">弹簧弹力不突变，A 被弹簧拉得更快、B 反而瞬间平衡 —— 两个球的加速度完全不同。</div>
+<div class="tip-hint" v-click="3">弹簧弹力不突变，A 被弹簧拉得更快、B 反而瞬间平衡 —— 两个球的加速度完全不同。</div>
 </div>
 </div>
 </div>
@@ -461,7 +463,7 @@ clicks: 3
 <div class="ask">小球被一根与竖直方向成 <Latex tex="\theta" /> 角的轻绳吊住，左侧再用水平轻绳拉住。剪断水平绳的瞬间，球的加速度多大？</div>
 <div v-click="1">剪断瞬间球的速度为零，只能沿圆弧切向运动 —— 因此沿绳方向的加速度为零。</div>
 <div v-click="2">沿绳：<Latex tex="F_T - mg\cos\theta = 0" />；<br />垂直于绳：<Latex tex="mg\sin\theta = ma" />。</div>
-<div class="key" v-click="3">得 <Latex tex="a = g\sin\theta" />，方向垂直于绳、斜向下。</div>
+<div class="tip-hint" v-click="3">得 <Latex tex="a = g\sin\theta" />，方向垂直于绳、斜向下。</div>
 </div>
 </div>
 </div>
@@ -479,7 +481,7 @@ clicks: 3
 <div class="ask">把斜绳换成轻弹簧，同样剪断水平绳的瞬间，球的加速度多大？</div>
 <div v-click="1">弹簧形变不突变，弹力保持原值 <Latex tex="F_T = \frac{mg}{\cos\theta}" />（方向仍沿弹簧）。</div>
 <div v-click="2">正交分解：<br />竖直：<Latex tex="F_T\cos\theta - mg = 0" />；<br />水平：<Latex tex="F_T\sin\theta = ma" />。</div>
-<div class="key" v-click="3">得 <Latex tex="a = g\tan\theta" />，方向水平。</div>
+<div class="tip-hint" v-click="3">得 <Latex tex="a = g\tan\theta" />，方向水平。</div>
 </div>
 </div>
 </div>
@@ -504,11 +506,11 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">只有<b>二力杆</b>的弹力一定沿杆；一端固定的<b>多力杆</b>，弹力方向由受力情况决定。杆不可伸长：沿杆方向，两端的 <Latex tex="x" />、<Latex tex="v" />、<Latex tex="a" /> 都相同。</div>
+<div class="tip-hint" v-click="2">只有<b>二力杆</b>的弹力一定沿杆；一端固定的<b>多力杆</b>，弹力方向由受力情况决定。杆不可伸长：沿杆方向，两端的 <Latex tex="x" />、<Latex tex="v" />、<Latex tex="a" /> 都相同。</div>
 </div>
 
 ---
-clicks: 3
+clicks: 2
 ---
 
 # 绳的约束
@@ -522,9 +524,7 @@ clicks: 3
 <div>若前端的速度小于后端（绳会被"追上"、松弛下去），绳就使不上力：<Latex tex="F_T = 0" />。</div>
 </div>
 
-<div class="key" v-click="2">判断绳是否绷紧，就看两端沿绳方向是否需要绳来「拉住」—— 需要就绷紧，不需要就松弛。</div>
-
-<div class="summary-line" v-click="3">弹簧、绳、杆的突变规律不同，正是下一类问题的解题入口。</div>
+<div class="tip-hint" v-click="2">判断绳是否绷紧，就看两端沿绳方向是否需要绳来「拉住」—— 需要就绷紧，不需要就松弛。</div>
 </div>
 
 ---
@@ -540,7 +540,7 @@ clicks: 3
 <div class="ask">光滑斜面上放着一个圆球，左侧被竖直挡板挡住。撤去挡板的瞬间，球的加速度多大？</div>
 <div v-click="1">撤去前：球静止，合力为零。</div>
 <div v-click="2">撤去后：挡板的支持力消失，球沿斜面下滑，合力为 <Latex tex="mg\sin\theta" />。</div>
-<div class="key" v-click="3">得 <Latex tex="a = g\sin\theta" />，方向沿斜面向下。</div>
+<div class="tip-hint" v-click="3">得 <Latex tex="a = g\sin\theta" />，方向沿斜面向下。</div>
 </div>
 </div>
 </div>
@@ -558,7 +558,7 @@ clicks: 3
 <div class="ask">小球被一根与竖直方向成 <Latex tex="\theta" /> 角的轻绳吊住，左侧还受水平拉力 <Latex tex="F_T" /> 保持静止。剪断这根斜绳的瞬间，球的加速度多大？</div>
 <div v-click="1">静止时水平方向平衡：<Latex tex="F_T = mg\tan\theta" />。</div>
 <div v-click="2">剪断瞬间绳的拉力消失，只剩重力 <Latex tex="mg" /> 与水平拉力 <Latex tex="F_T" />：<br /><Latex tex="F_{\text{合}} = \sqrt{(mg)^2 + (mg\tan\theta)^2} = \frac{mg}{\cos\theta}" />。</div>
-<div class="key" v-click="3">得 <Latex tex="a = \frac{g}{\cos\theta}" />，方向与竖直方向成 <Latex tex="\theta" /> 角斜向右下。</div>
+<div class="tip-hint" v-click="3">得 <Latex tex="a = \frac{g}{\cos\theta}" />，方向与竖直方向成 <Latex tex="\theta" /> 角斜向右下。</div>
 </div>
 </div>
 </div>
@@ -576,5 +576,5 @@ clicks: 3
 <div class="summary-line"><mdi-chart-timeline-variant class="text-lg text-accent-2 inline-block align-middle mr-1" /><b>图像</b>——<Latex tex="a\text{-}x" /> 图的面积给出 <Latex tex="\frac{\Delta(v^2)}{2}" />，正负面积相等即速度回到原值。</div>
 </div>
 
-<div class="key">无论题目怎么变，落脚点只有一句：先找合力，再由 <Latex tex="F = ma" /> 求加速度。</div>
+<div class="tip-hint">无论题目怎么变，落脚点只有一句：先找合力，再由 <Latex tex="F = ma" /> 求加速度。</div>
 </div>

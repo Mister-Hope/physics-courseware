@@ -29,11 +29,12 @@ layout: base-flex
 clicks: 1
 ---
 
-# 曲线运动的定义
+# 曲线运动
 
 <div class="page-grow">
-<div class="tag-icon self-center"><mdi-book-open-page-variant-outline /> 定义</div>
-<div class="card text-2xl leading-normal text-center">轨迹是<b>曲线</b>的运动，叫作<b>曲线运动</b>。</div>
+<DefinitionBox term="曲线运动">
+<div>轨迹是<b>曲线</b>的运动。</div>
+</DefinitionBox>
 <div class="stack" v-click="1">
 <div>直线运动（匀速、匀变速）的轨迹是直线。</div>
 <div>抛出去的篮球、绕太阳公转的地球，轨迹都是曲线。</div>
@@ -77,9 +78,8 @@ clicks: 1
 ---
 layout: base-flex
 clicks: 3
+title: 两种轨迹的区别
 ---
-
-# 区别在哪儿
 
 <div class="page-grow">
 <div class="ask">同样只受重力，为什么轨迹不同？</div>
@@ -103,7 +103,7 @@ clicks: 3
 <div v-click="1"><mdi-vector-line class="text-xl" /> 加速度与速度<b>共线</b> → 只改变速度的<b>大小</b>，轨迹是直线</div>
 <div v-click="2"><mdi-vector-polyline class="text-xl" /> 加速度与速度<b>不共线</b> → 速度的<b>方向</b>改变，轨迹是曲线</div>
 </div>
-<div class="key" v-click="3">于是可以推测：做曲线运动的条件，与<b>合力方向跟速度方向的关系</b>有关。</div>
+<div class="tip-hint" v-click="3">于是可以推测：做曲线运动的条件，与<b>合力方向跟速度方向的关系</b>有关。</div>
 </div>
 
 ---
@@ -116,7 +116,7 @@ clicks: 1
 <div class="page-grow">
 <div class="ask">物体在什么条件下做曲线运动？</div>
 <div class="sim-wrap"><SteelBallMagnetDemo /></div>
-<div class="key" v-click="1">磁铁在正前方：力与速度共线，轨迹仍是直线；在侧旁或斜后方：力与速度不共线，轨迹变弯。</div>
+<div class="tip-hint" v-click="1">磁铁在正前方：力与速度共线，轨迹仍是直线；在侧旁或斜后方：力与速度不共线，轨迹变弯。</div>
 </div>
 
 ---
@@ -129,7 +129,7 @@ clicks: 1
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div class="key">当物体所受<b>合力的方向</b>与它的<b>速度方向</b>不在同一条直线上时，物体做曲线运动。</div>
+<div class="tip-hint">当物体所受<b>合力的方向</b>与它的<b>速度方向</b>不在同一条直线上时，物体做曲线运动。</div>
 <div v-click="1">做曲线运动的物体，轨迹总是向<b>合力所指的一侧</b>弯曲 —— 轨迹夹在速度方向与合力方向之间。</div>
 </div>
 <div><PathBendSvg /></div>
@@ -139,9 +139,8 @@ clicks: 1
 ---
 layout: base-flex
 clicks: 2
+title: 曲线运动条件的推导
 ---
-
-# 为什么一定是这样
 
 <div class="page-grow">
 <div>牛顿第二定律：<b>加速度的方向总与合力的方向相同</b>。</div>
@@ -178,7 +177,7 @@ clicks: 3
 <div v-click="2"><mdi-trending-neutral class="text-xl" /> <Latex tex="\alpha = 90^\circ" />：<Latex tex="a" /> 沿速度方向的分量为零 → 速率不变，但方向时刻改变</div>
 <div v-click="3"><mdi-trending-down class="text-xl" /> <Latex tex="90^\circ < \alpha < 180^\circ" />：<Latex tex="a" /> 沿速度方向的分量与 <Latex tex="v" /> 反向 → 速率变小</div>
 </div>
-<div class="mini-note" v-click="3">三种情形下垂直速度方向的分量都在，所以轨迹都是曲线；<Latex tex="\alpha" /> 是合力方向与速度方向之间的夹角。</div>
+<div class="tip-hint" v-click="3">三种情形下垂直速度方向的分量都在，所以轨迹都是曲线；<Latex tex="\alpha" /> 是合力方向与速度方向之间的夹角。</div>
 </div>
 
 ---
@@ -212,8 +211,7 @@ clicks: 1
 # 曲线运动的速度方向
 
 <div class="page-grow">
-<div class="tag-icon self-center"><mdi-lightbulb-on-outline /> 结论</div>
-<div class="key text-2xl leading-normal">质点在某一点的速度方向，沿曲线在这一点的<b>切线方向</b>。</div>
+<div class="tip-hint text-2xl leading-normal">质点在某一点的速度方向，沿曲线在这一点的<b>切线方向</b>。</div>
 <div v-click="1">所以做曲线运动的物体，速度方向<b>时刻在改变</b>。</div>
 </div>
 
@@ -229,7 +227,7 @@ clicks: 2
 <div><GrindingWheelSvg /></div>
 <div class="stack divider-l">
 <div class="ask" v-click="1">火星不是沿着砂轮边缘绕出去，而是沿切线直着飞出去 —— 为什么？</div>
-<div class="key" v-click="2">火星离开砂轮的那一刻，沿离开点的切线方向做直线运动。</div>
+<div class="tip-hint" v-click="2">火星离开砂轮的那一刻，沿离开点的切线方向做直线运动。</div>
 </div>
 </div>
 </div>
@@ -244,7 +242,7 @@ clicks: 2
 <div class="page-grow">
 <CurvedTrackExitSvg />
 <div v-click="1">印迹的方向，就是曲线在出口处的切线方向。</div>
-<div class="key" v-click="2">出口位置不同，钢球飞出的方向就不同 —— 曲线运动的速度方向确实时刻在改变。</div>
+<div class="tip-hint" v-click="2">出口位置不同，钢球飞出的方向就不同 —— 曲线运动的速度方向确实时刻在改变。</div>
 </div>
 
 ---

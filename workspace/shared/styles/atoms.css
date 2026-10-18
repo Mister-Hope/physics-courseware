@@ -43,10 +43,10 @@
 
   /* 气泡密度 —— **可调变量**：各课在自己的 `:root` 里覆盖，或单页在容器上写行内变量
      （`style="--def-pad-y:.85rem;--hint-pad-y:.6rem"`）。内容多的页调小（别溢出）、内容少的页调大（别空一片）。 */
-  --hint-pad-y: 0.8rem;
+  --hint-pad-y: 0.58rem;
   --hint-pad-x: 1.15rem;
   --hint-icon-size: 1.05rem;
-  --def-pad-y: 1.1rem;
+  --def-pad-y: 0.85rem;
   --def-pad-x: 1.35rem;
 
   /* 图标正本（16×16 SVG，只给 CSS mask 用；同一图标只写一次、颜色一律由 background-color 给） */
@@ -232,8 +232,7 @@
 .important-hint {
   position: relative;
 
-  padding: var(--hint-pad-y) var(--hint-pad-x) var(--hint-pad-y)
-    calc(var(--hint-pad-x) + 1.8rem);
+  padding: var(--hint-pad-y) var(--hint-pad-x) var(--hint-pad-y) calc(var(--hint-pad-x) + 1.8rem);
   border: 1px solid var(--hint-border);
   border-radius: var(--radius-lg);
 

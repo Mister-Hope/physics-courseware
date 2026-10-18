@@ -40,22 +40,3 @@
 .ef-rope-wide {
   --cols: minmax(0, 0.88fr) minmax(0, 1.12fr);
 }
-
-/* 第 32 页：轻杆模型的浮动提示（右上角空白处，最后一次点击单独出现） */
-.ef-rod-hint {
-  position: absolute;
-  top: 3.2rem;
-  right: 2.2rem;
-
-  max-width: 16rem;
-  padding: 0.55rem 0.95rem;
-  border: 1px solid color-mix(in srgb, var(--c-accent-2) 45%, transparent);
-  border-radius: var(--radius-md);
-
-  background: color-mix(in srgb, var(--c-accent-2) 14%, transparent);
-  color: var(--c-accent-2);
-
-  line-height: 1.6;
-
-  backdrop-filter: blur(8px);
-}

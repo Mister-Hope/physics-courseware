@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useId } from "vue";
 
 /**
- * 航天器绕地球做匀速圆周运动 —— 6.4 生活中的圆周运动 干净版：地球（局部弧线 + 大气层光晕 + 云带）、飞船（舱体 / 舷窗 / 舱内航天员）与切向速度 v。 `showForces` 打开后再补上：沿半径指向地心的引力 mg（长）、背离地心的座舱支持力 F_N（短）， 以及由地心 O 指向飞船的半径 R
+ * 航天器绕地球做匀速圆周运动 —— 6.4 生活中的圆周运动：地球（共享天体图元 CelestialEarth）、
+ * 飞船（舱体 / 舷窗 / 舱内航天员）与切向速度 v。 `showForces` 打开后再补上：沿半径指向地心的
+ * 引力 mg（长）、背离地心的座舱支持力 F_N（短），以及由地心 O 指向飞船的半径 R
  * 虚线（O 点同时标出）。 分步用 visibility 占位（只隐藏、不删除），点击时已画出的内容不会位移。
  */
 const { showForces = false } = defineProps<{
@@ -10,25 +11,14 @@ const { showForces = false } = defineProps<{
   showForces?: boolean;
 }>();
 
-const uid = useId();
-const earthFillId = `craft-earth-${uid}`;
-const earthClipId = `craft-earth-clip-${uid}`;
-
 /* ── 画布：与下面 <svg> 的 viewBox 一致 ──
-   地球圆与轨道虚线圆都**故意画到画布外**（只露出中部一段弧）。
-   但"画到画布外、靠 SVG 视口裁掉"的写法有个副作用：被裁掉的那半虽然在屏幕上看不见，
-   元素的**矩形**仍然伸到画布下方 —— 版面余量检查按元素矩形算，会把这一页判成"溢出画布"。
-   所以这里按画布边界把它们裁成"看得见的那一段"路径：填充用闭合弓形，描边/虚线用同一段弧。 */
+   地球球心与轨道圆心都取在画布下方，只露出上缘一段弧；
+   SVG 视口按 overflow:hidden 裁掉画布外的部分（SVG 内部元素不参与版面越界检查）。 */
 const VB = { w: 400, h: 320 };
 
-/* ── 地球：填充 + 大气层光晕（可见部分 = 圆与画布下沿围出的弓形） ── */
+/* ── 地球：共享天体图元（球心在画布下方，视口里只露出上缘弧） ── */
 const O = { x: 200, y: 310 };
 const R_EARTH = 166;
-/** 地球圆与画布下沿的两个交点 */
-const earthChordDx = Math.sqrt(R_EARTH ** 2 - (VB.h - O.y) ** 2);
-const EARTH_ARC = `M ${(O.x - earthChordDx).toFixed(2)} ${VB.h} A ${R_EARTH} ${R_EARTH} 0 1 1 ${(O.x + earthChordDx).toFixed(2)} ${VB.h}`;
-/** 地球可见的弓形（沿画布下沿闭合） */
-const EARTH_CAP = `${EARTH_ARC} Z`;
 
 /* ── 轨道虚线圆与飞船：飞船恰在轨道最高点，此处半径方向正好竖直（可见部分 = 画布内那一段上弧） ── */
 const R_ORBIT = 240;
@@ -64,41 +54,15 @@ const stars = [
 <template>
   <div>
     <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="航天器绕地球做匀速圆周运动，航天员受力分析">
-      <defs>
-        <!-- 地球球体：受光面偏左上，边缘渐暗出球感（颜色一律无空格，避免 UnoCSS attributify 误解析） -->
-        <radialGradient :id="earthFillId" cx="0.38" cy="0.2" r="0.92">
-          <stop offset="0" stop-color="color-mix(in srgb, var(--c-velocity) 46%, transparent)" />
-          <stop offset="0.45" stop-color="color-mix(in srgb, var(--c-accent-2) 32%, transparent)" />
-          <stop offset="1" stop-color="rgba(29,78,216,0.2)" />
-        </radialGradient>
-        <clipPath :id="earthClipId">
-          <path :d="EARTH_CAP" />
-        </clipPath>
-      </defs>
       <!-- 背景星点 -->
       <g fill="var(--c-neutral-200)">
         <circle v-for="s in stars" :key="`${s.x}-${s.y}`" :cx="s.x" :cy="s.y" :r="s.r" :opacity="s.o" />
       </g>
-      <!-- 地球：球体 + 云带（裁在球内） + 大气层光晕 + 行星边缘
-           （全部按画布裁成可见的那一段 —— 见脚本里 EARTH_ARC / EARTH_CAP 的说明） -->
-      <path :d="EARTH_CAP" :fill="`url(#${earthFillId})`" />
-      <g :clip-path="`url(#${earthClipId})`" fill="color-mix(in srgb, var(--c-neutral-200) 8.5%, transparent)">
-        <ellipse cx="150" cy="212" rx="64" ry="13" />
-        <ellipse cx="264" cy="256" rx="72" ry="15" />
-        <ellipse cx="196" cy="182" rx="42" ry="9" />
-      </g>
-      <path :d="EARTH_ARC" fill="none" stroke="color-mix(in srgb, var(--c-velocity) 14%, transparent)" stroke-width="14" />
-      <path :d="EARTH_ARC" fill="none" stroke="color-mix(in srgb, var(--c-velocity-light) 60%, transparent)" stroke-width="4" />
-      <path :d="EARTH_ARC" fill="none" stroke="var(--c-velocity)" stroke-width="2" opacity="0.85" />
+      <!-- 地球：共享天体图元（球心在画布下方，视口里只露出上缘一段弧） -->
+      <CelestialEarth :x="O.x" :y="O.y" :r="R_EARTH" />
       <text x="114" y="232" font-size="20" fill="#bfdbfe">地球</text>
       <!-- 飞船的圆形轨道（虚线弧，飞船在其最高点；只画画布内那一段） -->
-      <path
-        :d="ORBIT_ARC"
-        fill="none"
-        stroke="color-mix(in srgb, var(--c-text-dim) 34%, transparent)"
-        stroke-width="1.8"
-        stroke-dasharray="7 8"
-      />
+      <path :d="ORBIT_ARC" fill="none" stroke="color-mix(in srgb, var(--c-text-dim) 34%, transparent)" stroke-width="1.8" stroke-dasharray="7 8" />
       <!-- 半径 R 与地心 O：点击后出现；画在飞船之下，上半段被舱体自然遮住 -->
       <g :class="{ 'orbit-hidden': !showForces }">
         <line

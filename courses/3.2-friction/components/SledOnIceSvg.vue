@@ -1,3 +1,9 @@
+<script setup lang="ts">
+// `showForces`：题目图第一眼只有雪橇与冰道，牵引力与摩擦力箭头点击后才出
+// （页面写 `:show-forces="$clicks >= 1"`）。
+const { showForces = false } = defineProps<{ showForces?: boolean }>();
+</script>
+
 <template>
   <!-- 雪橇在水平冰道上匀速前进：拉力与滑动摩擦力平衡 -->
   <svg viewBox="0 0 340 230" class="fig-svg fig-md" xmlns="http://www.w3.org/2000/svg">
@@ -72,16 +78,18 @@
       <circle cx="237" cy="152" r="3.2" fill="var(--c-bg-soft)" stroke="var(--c-accent)" stroke-width="2" />
     </g>
 
-    <!-- ==================== 4. 匀速平衡二力（严格等长：均为 86px） ==================== -->
-    <!-- 向右的水平牵引拉力 F（86px：240 → 326） -->
-    <CourseArrow :from="{ x: 240, y: 152 }" :to="{ x: 326, y: 152 }" stroke="var(--c-accent)" stroke-width="3.4" />
-    <text x="286" y="138" text-anchor="middle" font-size="16" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic">F</text>
+    <g v-if="showForces">
+      <!-- ==================== 4. 匀速平衡二力（严格等长：均为 86px） ==================== -->
+      <!-- 向右的水平牵引拉力 F（86px：240 → 326） -->
+      <CourseArrow :from="{ x: 240, y: 152 }" :to="{ x: 326, y: 152 }" stroke="var(--c-accent)" stroke-width="3.4" />
+      <text x="286" y="138" text-anchor="middle" font-size="16" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic">F</text>
 
-    <!-- 向左的滑动摩擦力 F_f（86px：154 → 68，沿冰道接触面） -->
-    <CourseArrow :from="{ x: 154, y: 178 }" :to="{ x: 68, y: 178 }" stroke="var(--c-danger)" stroke-width="3.4" />
-    <text x="50" y="168" text-anchor="middle" font-size="16" fill="var(--c-danger)">
-      <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
-      <tspan dy="4" font-size="11">f</tspan>
-    </text>
+      <!-- 向左的滑动摩擦力 F_f（86px：154 → 68，沿冰道接触面） -->
+      <CourseArrow :from="{ x: 154, y: 178 }" :to="{ x: 68, y: 178 }" stroke="var(--c-danger)" stroke-width="3.4" />
+      <text x="50" y="168" text-anchor="middle" font-size="16" fill="var(--c-danger)">
+        <tspan font-family="KaTeX_Math" font-style="italic">F</tspan>
+        <tspan dy="4" font-size="11">f</tspan>
+      </text>
+    </g>
   </svg>
 </template>

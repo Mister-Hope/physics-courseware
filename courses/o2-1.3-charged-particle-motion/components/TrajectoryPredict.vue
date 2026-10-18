@@ -5,7 +5,7 @@
   物理：电子束在磁场中只受洛伦兹力，而 F_洛 恒垂直于 v ⇒ 速率不变、方向均匀改变 ⇒ 匀速圆周运动。
         "抛物线"是学生最常有的错误直觉（拿重力场的平抛套过来），所以特意摆出来对比。
   待细化方向：可让学生先举手投票再点开。
-  判定颜色：错误项一律走红（text-red-400 即设计系统的危险色 #f87171），正确项走青（text-teal-300）；
+  判定颜色：错误项一律走危险色（--c-danger），正确项走物理青（--c-physics）；
             解释小字保持暗灰（那是讲解，不整段飘红）。点击前后只换颜色、不增删元素，避免位移。
 -->
 <script setup>
@@ -28,13 +28,17 @@ const options = [
     <div
       v-for="(opt, i) in options"
       :key="opt.key"
-      class="overflow-hidden rounded-2xl border bg-slate-900/30"
-      :class="
+      class="overflow-hidden rounded-2xl border"
+      style="background-color: color-mix(in srgb, var(--c-neutral-900) 30%, transparent)"
+      :style="
         !revealed()
-          ? 'border-slate-700/60'
+          ? { borderColor: 'color-mix(in srgb, var(--c-neutral-700) 60%, transparent)' }
           : i === 2
-            ? 'border-teal-400/80 bg-teal-400/5'
-            : 'border-red-400/60'
+            ? {
+                borderColor: 'color-mix(in srgb, var(--c-physics) 80%, transparent)',
+                backgroundColor: 'color-mix(in srgb, var(--c-physics) 5%, transparent)',
+              }
+            : { borderColor: 'color-mix(in srgb, var(--c-danger) 60%, transparent)' }
       "
     >
       <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" class="w-full">
@@ -91,14 +95,14 @@ const options = [
       <div class="flex items-center justify-between px-4 py-2">
         <span
           class="text-lg font-semibold"
-          :class="!revealed() ? '' : i === 2 ? 'text-teal-300' : 'text-red-400'"
+          :class="!revealed() ? '' : i === 2 ? 'text-teal-300' : 'text-danger'"
         >
           {{ "ABC"[i] }} · {{ opt.label }}
         </span>
         <span
           class="text-lg font-bold"
           :class="[
-            !revealed() ? 'text-slate-500' : i === 2 ? 'text-teal-300' : 'text-red-400',
+            !revealed() ? 'text-[var(--c-neutral-500)]' : i === 2 ? 'text-teal-300' : 'text-danger',
             revealed() ? '' : 'invisible',
           ]"
         >
@@ -107,7 +111,7 @@ const options = [
       </div>
 
       <div
-        class="min-h-[3.2rem] px-4 pb-3 text-sm leading-relaxed text-slate-400"
+        class="min-h-[3.2rem] px-4 pb-3 text-sm leading-relaxed text-dim"
         :class="revealed() ? '' : 'invisible'"
       >
         <template v-if="opt.key === 'circle'">

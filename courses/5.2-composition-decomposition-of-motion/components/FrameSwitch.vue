@@ -433,9 +433,6 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
   min-width: 0;
 }
 
-
-
-
 .sim-readout {
   color: var(--c-text);
   font-size: 0.95rem;

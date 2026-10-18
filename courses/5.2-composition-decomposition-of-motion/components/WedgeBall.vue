@@ -286,9 +286,6 @@ const arcRadius = 70;
   gap: 0.3rem;
 }
 
-
-
-
 .sim-readout {
   color: var(--c-text);
   font-size: 0.95rem;

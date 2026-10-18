@@ -44,7 +44,7 @@ clicks: 2
 
 <div class="mini-note" v-click="1" style="text-align: center">1959 年后，<Latex tex="1\ \text{in} \equiv 2.54\ \text{cm}" /> 是严格精确的定义值。</div>
 
-<div class="ask" v-click="2">英寸到英尺记 12，英尺到码记 3，码到英里记 5280 —— 三套互不相干的进率，用起来是什么感受？</div>
+<div class="ask" v-click="2">英寸到英尺记 12，英尺到码记 3，码到英里记 5280 —— 三套互不相干的进率，会带来哪些麻烦？</div>
 </div>
 
 ---
@@ -60,7 +60,7 @@ clicks: 2
 <div><Latex tex="a = \frac{\Delta v}{\Delta t}" /> &nbsp;&nbsp;→&nbsp;&nbsp; <Latex tex="1\ \text{m/s}^{2} = 1\ \text{m}\cdot\text{s}^{-2}" /></div>
 </div>
 
-<div class="key" v-click="2">物理关系式在确定物理量之间关系的同时，也确定了它们的<b>单位之间的关系</b>。</div>
+<div class="tip-hint" v-click="2">物理关系式在确定物理量之间关系的同时，也确定了它们的<b>单位之间的关系</b>。</div>
 </div>
 
 ---
@@ -71,7 +71,11 @@ clicks: 3
 # 基本量与基本单位
 
 <div class="page-grow">
-<div class="card">只要选定几个物理量的单位，其他物理量的单位就能由物理关系式推导出来。这些被选定的物理量叫作<b>基本量</b>，它们的单位叫作<b>基本单位</b>。</div>
+<DefinitionBox term="基本量" tone="gold">
+
+<div>只要选定几个物理量的单位，其他物理量的单位就能由物理关系式推导出来。这些被选定的物理量叫作<span class="def-term">基本量</span>，它们的单位叫作<span class="def-term">基本单位</span>。</div>
+
+</DefinitionBox>
 
 <div class="ask">为什么选定的偏偏是长度、质量、时间？</div>
 
@@ -98,7 +102,11 @@ layout: base-flex
 # 导出量与单位制
 
 <div class="page-grow">
-<div class="card">由基本量根据物理关系推导出来的其他物理量，叫作<b>导出量</b>；推导出来的单位，叫作<b>导出单位</b>。</div>
+<DefinitionBox term="导出量" tone="blue">
+
+<div>由基本量根据物理关系推导出来的其他物理量，叫作<span class="def-term">导出量</span>；推导出来的单位，叫作<span class="def-term">导出单位</span>。</div>
+
+</DefinitionBox>
 
 <div class="unit-flow">
 <div class="unit-flow-row">
@@ -139,7 +147,7 @@ clicks: 1
 </tbody>
 </table>
 
-<div class="key" v-click="1">各用各的单位制就没法交流 —— 1960 年第 11 届国际计量大会制订了国际通用的<b>国际单位制</b>（SI）：力学只用到长度、质量、时间三个基本量。</div>
+<div class="tip-hint" v-click="1">各用各的单位制就没法交流 —— 1960 年第 11 届国际计量大会制订了国际通用的<b>国际单位制</b>（SI）：力学只用到长度、质量、时间三个基本量。</div>
 </div>
 
 ---
@@ -163,7 +171,7 @@ clicks: 1
 </div>
 </div>
 
-<div class="key" v-click="1">调查结论只有一行：<b>一处单位换算错误</b>（<Latex tex="1\ \text{lbf} \approx 4.45\ \text{N}" />）。如果两边都用国际单位制，这场事故根本不会发生。</div>
+<div class="tip-hint" v-click="1">调查结论只有一行：<b>一处单位换算错误</b>（<Latex tex="1\ \text{lbf} \approx 4.45\ \text{N}" />）。如果两边都用国际单位制，这场事故根本不会发生。</div>
 </div>
 
 ---
@@ -189,7 +197,7 @@ clicks: 4
 <div class="history-stage-body">米定义为光在真空中 <Latex tex="\frac{1}{299\,792\,458}\ \text{s}" /> 内经过的路程；2019 年起，千克由普朗克常量定义。</div>
 </div>
 
-<div class="key" v-click="4">七个基本单位现在全部建立在不变的物理常数上，标准不会因为"原件"本身的变化而改变。</div>
+<div class="tip-hint" v-click="4">七个基本单位现在全部建立在不变的物理常数上，标准不会因为原件本身的变化而改变。</div>
 </div>
 
 ---
@@ -230,7 +238,7 @@ clicks: 6
 <div v-click="5"><Latex tex="1\ \text{W} = 1\ \text{J/s} = 1\ \text{kg}\cdot\text{m}^{2}\cdot\text{s}^{-3}" /></div>
 </div>
 
-<div class="key" v-click="6"><Latex tex="1\ \text{N/kg} = 1\ \text{kg}\cdot\text{m}\cdot\text{s}^{-2}/\text{kg} = 1\ \text{m/s}^{2}" /> —— 初中学过的两个单位，本来就是同一个。</div>
+<div class="tip-hint" v-click="6"><Latex tex="1\ \text{N/kg} = 1\ \text{kg}\cdot\text{m}\cdot\text{s}^{-2}/\text{kg} = 1\ \text{m/s}^{2}" /> —— 初中学过的两个单位，本来就是同一个。</div>
 </div>
 
 ---
@@ -255,7 +263,7 @@ clicks: 3
 <div v-click="2"><Latex tex="1\ \Omega = 1\ \text{kg}\cdot\text{m}^{2}\cdot\text{s}^{-3}\cdot\text{A}^{-2}" /></div>
 </div>
 
-<div class="key" v-click="3">方法完全一样：把物理关系式里的量换成它的单位，做乘除。</div>
+<div class="tip-hint" v-click="3">方法完全一样：把物理关系式里的量换成它的单位，做乘除。</div>
 </div>
 
 ---
@@ -285,12 +293,11 @@ layout: base-flex
 ---
 layout: base-flex
 clicks: 3
+title: '计算时注意单位'
 ---
 
-# 计算时注意单位
-
 <div class="page-grow">
-<div class="ask">光滑水平桌面上，质量 <Latex tex="700\ \text{g}" /> 的物体在 <Latex tex="1.4\ \text{N}" /> 恒力作用下由静止运动，求 <Latex tex="5\ \text{s}" /> 末的速度和位移。</div>
+<div class="ask"><b class="ex-no">例题</b>　光滑水平桌面上，质量 <Latex tex="700\ \text{g}" /> 的物体在 <Latex tex="1.4\ \text{N}" /> 恒力作用下由静止运动，求 <Latex tex="5\ \text{s}" /> 末的速度和位移。</div>
 
 <div class="stack p12-calc" style="align-items: center" v-click="1">
 <div><Latex tex="m = 700\ \text{g} = 0.7\ \text{kg}" /></div>
@@ -301,7 +308,7 @@ clicks: 3
 
 <div class="summary-line" v-click="2">统一到国际单位制后，计算中不必逐项写单位，只在结果后面写单位。</div>
 
-<div class="key" v-click="3">牛顿第二定律严格写是 <Latex tex="F = kma" />，<Latex tex="k" /> 由单位的选择决定；只有都用国际单位制，才有 <Latex tex="k = 1" />，公式才写成 <Latex tex="F = ma" />。</div>
+<div class="tip-hint" v-click="3">牛顿第二定律严格写是 <Latex tex="F = kma" />，<Latex tex="k" /> 由单位的选择决定；只有都用国际单位制，才有 <Latex tex="k = 1" />，公式才写成 <Latex tex="F = ma" />。</div>
 </div>
 
 ---
@@ -319,7 +326,7 @@ clicks: 2
 <div>右边：<Latex tex="\text{m}^{3} \times \text{m} \to \text{m}^{4}" /></div>
 </div>
 
-<div class="key key-danger" v-click="2"><span class="bad-line font-semibold">两边单位不同，这个公式一定错</span>—— 正确的应该是 <Latex tex="V = \frac{1}{3}\pi R^{2}h" />。</div>
+<div class="danger-hint" v-click="2"><span class="bad-line font-semibold">两边单位不同，这个公式一定错</span>—— 正确的应该是 <Latex tex="V = \frac{1}{3}\pi R^{2}h" />。</div>
 </div>
 
 ---
@@ -337,7 +344,7 @@ clicks: 2
 <div>左边单位：<Latex tex="\text{m}" /></div>
 </div>
 
-<div class="key key-danger bad-line font-semibold" v-click="2">单位不一致 —— 这个结果不可能正确。</div>
+<div class="danger-hint" v-click="2"><span class="bad-line font-semibold">单位不一致</span> —— 这个结果不可能正确。</div>
 </div>
 
 ---
@@ -368,7 +375,7 @@ clicks: 3
 </div>
 </div>
 
-<div class="key" v-click="3">单位对了，公式不一定对；单位不对，公式一定错。</div>
+<div class="tip-hint" v-click="3">单位对了，公式不一定对；单位不对，公式一定错。</div>
 </div>
 
 ---
@@ -393,7 +400,7 @@ layout: base-flex
 </div>
 </div>
 
-<div class="key">先定下基本单位，其余单位都能由物理关系式推出来 —— 这就是单位制的全部逻辑。</div>
+<div class="tip-hint">先定下基本单位，其余单位都能由物理关系式推出来。</div>
 </div>
 
 ---
@@ -410,5 +417,5 @@ layout: base-flex
 <div class="summary-line"><mdi-check-decagram class="text-lg inline-block align-middle mr-1" /><b>用单位检查结果</b>——两边都还原成基本单位，不一致就一定错；一致也未必对，但能先排除错的。</div>
 </div>
 
-<div class="key">把已知量统一到国际单位制，数值和单位才不会各说各话 —— 1999 年那 1.25 亿美元，就是少做了这一步。</div>
+<div class="tip-hint">计算前把已知量统一到国际单位制，结果才不会在单位上出错。</div>
 </div>

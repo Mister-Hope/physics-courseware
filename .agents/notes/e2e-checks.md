@@ -11,20 +11,19 @@ E2E_PAGES="14,15-17" E2E_COURSE=<slug> …                                   # �
 E2E_BASE_PORT=30701 …                                                      # 只有"同一个课件"被两个进程同时跑时才需要（端口按课件固定分配，不同课件不冲突）
 ```
 
-`pnpm test:e2e` 走 `scripts/e2e.ts` 的**限流调度器**：最多同时跑 `E2E_CONCURRENCY` 个课件（默认 4），跑完一个立刻补下一个。
-**本地和 CI 都走它**：Playwright 的 `webServer` 会把**所有**课件的 dev server 一次性起起来（单个实测 ≈550MB，41 门会把 16GB 机器撑爆，
-CI 上表现为跑到一半 `SIGTERM` / exit 143），而调度器只按窗口起停、再带 `E2E_NO_WEBSERVER=1` 调 Playwright。
+`pnpm test:e2e` 走 `scripts/e2e.ts` 的**限流调度器**：最多同时跑 `E2E_CONCURRENCY` 个课件（默认 4），跑完一个立刻补。
+Playwright 的 `webServer` 会把**所有**课件的 dev server 一次性起起来（单个实测 ≈550MB，41 门会把 16GB 机器撑爆，
 课件列表自动发现，**新增课件不用登记**。
 
 自动为每个课件起 Slidev 服务，在 **1280×720（16:9）** 视口下逐页检查（画布 = 980×552 逻辑像素）。
 产出（**按课件分家，多个 AI 进程同时跑不同课件不会互相覆盖/删除**，规则见 `e2e/artifacts.ts`）：
 
-| 运行方式                                    | 报告落在                                                                                                     |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| 单课件（`E2E_COURSE=<slug>`）               | `courses/<slug>/.temp/layout-overflow/`：`layout-overflow.md` + `.json` + `screenshots/`（红框标出问题元素） |
-| `pnpm test:e2e`（限流调度器，逐课件跑）     | 同上：每个课件一个独立的 Playwright 进程，报告跟着课件落在各自的 `courses/<slug>/.temp/`                     |
+| 运行方式                                                         | 报告落在                                                                                                     |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 单课件（`E2E_COURSE=<slug>`）                                    | `courses/<slug>/.temp/layout-overflow/`：`layout-overflow.md` + `.json` + `screenshots/`（红框标出问题元素） |
+| `pnpm test:e2e`（限流调度器，逐课件跑）                          | 同上：每个课件一个独立的 Playwright 进程，报告跟着课件落在各自的 `courses/<slug>/.temp/`                     |
 | 手动 `pnpm exec playwright test`（会把所有 server 一次性起起来） | `e2e/reports/layout-overflow/`（只在内存够的机器上用；`pnpm shots` 等单课件命令不受影响）                    |
-| `pnpm shots <slug> …`                       | `courses/<slug>/.temp/shots/p<页号>-c<点击数>.png`（控制台打印绝对路径）                                     |
+| `pnpm shots <slug> …`                                            | `courses/<slug>/.temp/shots/p<页号>-c<点击数>.png`（控制台打印绝对路径）                                     |
 
 - 这些目录都已 gitignore，不用清理；**注意版面检查开跑会清空自己的报告目录**（所以它和 `shots/` 分开、单课件时也只清自己课件下的）；
 - 同一个课件被两个进程同时跑时，用 `E2E_ARTIFACT_DIR=<别的路径>` 岔开产物。
@@ -43,8 +42,12 @@ SVG 内部与 KaTeX 内部节点（固定画布内部换内容属正当，但 `<
 
 ## 其它坑（都踩过）
 
-- **"整页渲染失败"要单独识别**：Slidev 加载失败只渲染一个错误占位页（页面上只有 1 个元素），不识别就会当成"没溢出"。报错页会以 `⛔ 第 N 页渲染失败` 单列并让测试失败
-- **组件没解析到会伪装成图标报错**：`<Latex />` 这类组件若不存在，Slidev 会把 `Latex` 当图标名拆成 `~icons/la/tex`，报 `Icon la/tex not found` → 该页 500 + 整页渲染失败（曾一次挂掉 12 页）
+- **SVG `clip-path` 造成的"假越界"**：曲线点超出坐标轴范围时，`CoordAxes` 用 SVG `clip-path` 把它裁在坐标区内（屏幕上看不见），但外层 `<svg>` 是 `overflow: visible` ⇒ **路径包围盒**会探出画布，`visibleRect` 只按 CSS `overflow` 求交、**不识别 SVG clip-path**，于是报成 canvas 越界。判据：报告里元素路径是 `svg…> g:nth-of-type(N)` / `path`（不是文本块），且页面 `block-fit` 本来就是 0 ⇒ 是测量盲区，不是版面坏了。
+  修法：给该页容器加 `overflow: hidden` 让测量范围=实际绘制范围（视觉零变化）；**别为此改共享组件尺寸**。
+- **卡 90s 后 `waitForFunction` 超时 ≠ 课件坏了**：先 `lsof -iTCP:<该课件的端口> -sTCP:LISTEN`。端口被别的进程占着（最常见：**你或教师自己开着的 dev server 正好占了这个课件的端口**）时 Playwright 的 `webServer` 起不来，而报错是"等待页面"超时、**不会**提端口冲突 ⇒ 用 `E2E_BASE_PORT=<别的基址>` 整体挪开。
+- **同一台机器上不要同时跑多个 `e2e` 实例**：调度器自己的并发（默认 4）已经吃满内存，强行叠加可能导致超时，表现为**随机课件遇到 `waitForFunction` 超时假失败**。确实要并行，用不同的 `E2E_BASE_PORT` **且**把 `E2E_CONCURRENCY` 调小。
+- **加载失败时，Slidev 渲染的是"带错误提示的占位页"**（页面上仅 `An error occurred on this slide` / `slide failed to load` 提示）。
+  `layout-overflow` 可检测并给出 `⛔ 第 N 页渲染失败` 错误。
 - **不要复用已开着的 dev server**（配置里 `reuseExistingServer: false`）：Slidev 启动时解析 addon 组件，复用旧进程会拿到过期组件表，改了文件却测到旧状态
 - **View Transitions**：Slidev v52 换页时整页会先平移再归位（实测可达数百像素），测完要等几何连续多帧稳定（`e2e/slidev-driver.ts` 的 `settle()`），否则把"正在入场"当溢出误报
 - **`oxlint --fix` 会写坏测试文件**（vitest 插件会把 Playwright 的 `test`/`expect` 当 vitest 全局并自动插 import），所以 `e2e/` 已在 `oxlint.config.ts` 的 `ignore` 里（风格仍由 oxfmt 管）

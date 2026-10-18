@@ -6,29 +6,15 @@
 
 ## 1. 三个组件共同的约定（必读，写错都在这几条）
 
-1. **两种单位口径**
-   - **数据坐标**：`x` / `y` / `points` / `xRange` / `yRange` / `range` / 刻度值 / `callouts[].value` —— 写物理量数值，组件内部换算到屏幕；
-   - **屏幕 px 口径**：`width`（线宽）/ `dot`（圆点半径）/ `dx` / `dy` / `size`（字号）—— 写"屏幕上多大"，组件按实测容器宽反算 viewBox 单位。**别在这几个字段里写数据坐标。**
-2. **字号自动适配容器**：组件用 `ResizeObserver` 量容器渲染宽度，按"屏幕上目标字号"反算 viewBox 字号——
-   🟡 组件默认的目标字号是 **轴量与单位 21px、刻度数字 15px、图内标注 17px、线宽 3px**（这是**默认值、不是规范**，
-   要整体缩放传 `fontScale`，默认 1）。公式：`viewBox 字号 = 目标 px × (viewBox 宽 ÷ 容器渲染宽)`。
-   → **用组件时换栏位不用重算字号**（半栏、整宽都自动合适）；SSR / 首帧拿不到宽度时按 **884px** 标定（挂载后立刻按实测值修正）。
-   （手写的静态 SVG 没有这层自适应，才要自己按缩放比重算，见 [`slidev-svg.md`](./slidev-svg.md) §1.5。）
+1. **两种单位口径**：**数据坐标** —— `x` / `y` / `points` / `xRange` / `yRange` / `range` / 刻度值 / `callouts[].value`，写物理量数值、组件内部换算到屏幕；**屏幕 px 口径** —— `width`（线宽）/ `dot`（圆点半径）/ `dx` / `dy` / `size`（字号），写"屏幕上多大"、组件按实测容器宽反算 viewBox 单位。**别在这几个字段里写数据坐标。**
+2. **字号自动适配容器**：组件用 `ResizeObserver` 量容器渲染宽度，按"屏幕上目标字号"反算 viewBox 字号（`viewBox 字号 = 目标 px × (viewBox 宽 ÷ 容器渲染宽)`）；🟡 默认的目标字号是 **轴量与单位 21px、刻度数字 15px、图内标注 17px、线宽 3px**（**默认值、不是规范**，要整体缩放传 `fontScale`，默认 1），SSR / 首帧拿不到宽度时按 **884px** 标定、挂载后立刻按实测值修正 ⇒ **用组件时换栏位不用重算字号**（半栏、整宽都自动合适）。手写的静态 SVG 没有这层自适应，才要自己按缩放比重算，见 [`slidev-svg.md`](./slidev-svg.md) §1.5。
 3. **`view` 只决定比例与坐标系**：`view: { width, height }`（默认：SimpleAxis 640×340、CoordAxes 640×380、NumberAxis 640×140）。字号已经自适应，所以**不需要为了换栏位去改 viewBox 宽**。
-4. **高度预算（防溢出画布）**：渲染高 ≈ `容器宽 × view.height ÷ view.width`。画布逻辑尺寸 980×552，一页通常只有 ~460px 给图：
-   - 整宽（≈884px）→ `height/width ≤ 0.5`（例：640×320 → 442px）；
-   - 半栏（≈412px）→ `height/width ≤ 1.1`（640×380 → 245px）。
-     图偏扁＝浪费后排可见面积；**内容少时优先加大字号/把图放整宽，而不是把 view 高度调大**。
-5. **数学字体的两条口径**（写错必被教师挑）：
-   - **轴量与刻度**（画在 SVG 里的）：量用 `KaTeX_Math` 斜体、单位用 `KaTeX_Main`——组件内部已写好，你只要把物理量放 `math`（如 `math: "v"`）、单位放 `unit`（如 `unit: "m/s"`）、下标放 `sub`、上标放 `sup`；中文/点名（A/B）/刻度数字用 `text`。
-   - **图内点标注**（`CoordAxes.labels`、`ChartLabel`）：走 **HTML + 真 KaTeX**，直接写 LaTeX 源码（`tex: "v_0"`、`tex: "\\frac{1}{2}at^2"`），分式/上下标/中文混排都行——见 §1.11。
-   - ⛔ **两边都禁止 Unicode 符号**：`v₀`、`θ`、`½`、`m/s²`、`m·s⁻¹` 一个都不许写；`m/s²` 写成 `unit: "m/s", sup: "2"` 或 `tex: '\\text{m/s}^2'`。
-6. **排版细节（组件内部已处理，不用你调）**：
-   - 单位与前面的文字之间自动留一小段间隙（不会再出现「剪掉m」贴死）；
-   - 纵轴量与单位标签会自动避开顶端刻度数字（必要时整条上移），不用手改 `dy`。
-7. **颜色**：默认已经用设计系统变量（`--c-accent` / `--c-accent-2` / `--c-physics` / `--c-danger` / `--c-text` / `--c-text-dim` / `--c-border` / `--c-bg-soft`）；想换色直接传 CSS 颜色或变量字符串。
-8. **分步只有 `CoordAxes` 有**：传 `:step="$clicks"` + 元素 `showAt`；内部用 `visibility: hidden` 占位，元素不删不插、几何不动。`SimpleAxis` / `NumberAxis` 刻意没有分步（要给它们分步就用 `CoordAxes`，或整图包 `v-click`）。
-9. **组件自适应栏宽、不溢出**：外层 `width: 100%`、`svg { width: 100%; height: auto }`。放在栅格里给父项 `min-width: 0`。
+4. **高度预算（防溢出画布）**：渲染高 ≈ `容器宽 × view.height ÷ view.width`。画布逻辑尺寸 980×552，一页通常只有 ~460px 给图——整宽（≈884px）→ `height/width ≤ 0.5`（例：640×320 → 442px）；半栏（≈412px）→ `height/width ≤ 1.1`（640×380 → 245px）。图偏扁＝浪费后排可见面积；**内容少时优先加大字号/把图放整宽，而不是把 view 高度调大**。
+5. **数学字体的两条口径**（写错必被教师挑）：**轴量与刻度**（画在 SVG 里的）把物理量放 `math`（如 `math: "v"`）、单位放 `unit`（如 `unit: "m/s"`）、下标放 `sub`、上标放 `sup`——组件内部已按 `KaTeX_Math` 斜体 + `KaTeX_Main` 写好；中文/点名（A/B）/刻度数字用 `text`。**图内点标注**（`CoordAxes.labels`、`ChartLabel`）走 **HTML + 真 KaTeX**，直接写 LaTeX 源码（`tex: "v_0"`、`tex: "\\frac{1}{2}at^2"`），分式/上下标/中文混排都行——见 §1.11。⛔ **两边都禁止 Unicode 符号**：`v₀`、`θ`、`½`、`m/s²`、`m·s⁻¹` 一个都不许写；`m/s²` 写成 `unit: "m/s", sup: "2"` 或 `tex: '\\text{m/s}^2'`。
+6. **排版细节（组件内部已处理，不用你调）**：单位与前面的文字之间自动留一小段间隙（不会再出现「剪掉m」贴死）；纵轴量与单位标签会自动避开顶端刻度数字（必要时整条上移），不用手改 `dy`。
+7. **颜色**：默认已经用设计系统变量（`--c-accent` / `--c-accent-2` / `--c-physics` / `--c-danger` / `--c-text` / `--c-text-dim` / `--c-border` / `--c-bg-soft`）；想换色直接传 CSS 颜色或变量字符串（同 §2 表）。
+8. **分步只有 `CoordAxes` 有**：传 `:step="$clicks"` + 元素 `showAt`；内部用 `visibility: hidden` 占位，元素不删不插、几何不动（同 §2 表）。`SimpleAxis` / `NumberAxis` 刻意没有分步（要给它们分步就用 `CoordAxes`，或整图包 `v-click`）。
+9. **组件自适应栏宽、不溢出**：外层 `width: 100%`、`svg { width: 100%; height: auto }`。放在栅格里给父项 `min-width: 0`（同 §2 表）。
 10. **`slides.md` 的 HTML 块里可以直接写内联数组/对象字面量 props（已实测 ✅，Lead 浏览器验证通过）**——不必为了传数据再包一层业务组件：
 
     ```html

@@ -108,7 +108,7 @@ layout: base-flex
 layout: base-flex
 ---
 
-# 实验要点（二）：配重与试运行
+# 配重与试运行
 
 <div class="page-grow">
 <div class="exp-banner"><mdi-play-circle-outline /> 现在请各组动手</div>
@@ -274,7 +274,7 @@ layout: base-flex
 <div class="half-grid half-grid-top">
 <div class="stack">
 <div v-click="2" class="fit-reason">先用<b>十字线</b>画出每一个数据点。</div>
-<div v-click="3" class="fit-reason">看这些点：它们大致排在<b>一条直线</b>上——<Latex tex="v" /> 随 <Latex tex="t" /> 均匀增大。</div>
+<div v-click="3" class="fit-reason">这些点大致排在<b>一条直线</b>上——<Latex tex="v" /> 随 <Latex tex="t" /> 均匀增大。</div>
 <div v-click="4" class="fit-reason">既然近似是一条直线，就应该用<b>直线拟合</b>，而不是把点连成折线。</div>
 <div v-click="5" class="tip-hint" style="--hint-pad-y:.6rem">直线拟合的要求：让<b>更多的点落在直线上</b>；同时使<b>直线两侧的点数一样</b>。</div>
 </div>

@@ -28,13 +28,6 @@
   max-width: 460px;
 }
 
-/* ── 否定性提示框（第 7 页方案一「读数读不准」）——共享 .tag-icon 的中性蓝改成警示红 ── */
-.tag-icon-danger {
-  border-color: color-mix(in srgb, var(--c-danger) 30%, transparent);
-  background: var(--c-danger-soft);
-  color: var(--c-danger);
-}
-
 /* ── 材料动摩擦因数表（教材表 3.2 + 一行工程手册实测值）── */
 .mf-table-host {
   display: flex;

@@ -61,7 +61,7 @@ clicks: 1
 <div class="page-grow">
 <div class="ask ask-lead">示数变小，是人变轻了吗？示数变大，是人变重了吗？</div>
 
-<div class="key key-lead" v-click="1">人还是那个人，受到的引力也没有变 —— 变的只能是秤读到的那个力。</div>
+<div class="tip-hint" v-click="1">人还是那个人，受到的引力也没有变 —— 变的只能是秤读到的那个力。</div>
 </div>
 
 ---
@@ -83,7 +83,7 @@ clicks: 1
 </div>
 </div>
 
-<div class="key" v-click="1">前提是<b>静止</b>：只有静止时，示数才等于重力。</div>
+<div class="tip-hint" v-click="1">前提是<b>静止</b>：只有静止时，示数才等于重力。</div>
 </div>
 
 ---
@@ -96,7 +96,7 @@ clicks: 4
 <div class="page-grow">
 <div class="half-grid">
 <div class="host">
-<PersonWeightSvg :show-forces="true" :reading="600" />
+<PersonWeightSvg :show-forces="$clicks >= 1" :reading="600" />
 </div>
 <div class="stack">
 <div class="ask">秤读到的这个数，是人的重力吗？</div>
@@ -106,7 +106,7 @@ clicks: 4
 </div>
 </div>
 
-<div class="key key-lead" v-click="4">超重、失重说的是<b>视重相对于重力的变化</b>；重力 <Latex tex="mg" /> 本身始终不变。</div>
+<div class="tip-hint" v-click="4">超重、失重说的是<b>视重相对于重力的变化</b>；重力 <Latex tex="mg" /> 本身始终不变。</div>
 </div>
 
 ---
@@ -154,7 +154,7 @@ clicks: 3
 <div class="ask">加速下降时，加速度朝哪？牛顿第二定律怎么写？</div>
 <div v-click="1">取向下为正：<Latex tex="mg - F_N = ma" /></div>
 <div v-click="2"><Latex tex="F_N = m(g-a) \lt mg" /></div>
-<div v-click="3" class="key">视重小于重力 —— 这就是<b>失重</b>。</div>
+<div v-click="3" class="tip-hint">视重小于重力 —— 这就是<b>失重</b>。</div>
 </div>
 </div>
 </div>
@@ -182,7 +182,7 @@ clicks: 3
 <div class="ask">减速下降时，加速度朝哪？牛顿第二定律怎么写？</div>
 <div v-click="1">取向下为正：<Latex tex="mg - F_N = -ma" /></div>
 <div v-click="2"><Latex tex="F_N = m(g+a) \gt mg" /></div>
-<div v-click="3" class="key">视重大于重力 —— 这就是<b>超重</b>。</div>
+<div v-click="3" class="tip-hint">视重大于重力 —— 这就是<b>超重</b>。</div>
 </div>
 </div>
 </div>
@@ -202,7 +202,7 @@ clicks: 2
 <div class="stack">
 <div class="ask">静止时，支持力和重力是什么关系？</div>
 <div v-click="1"><Latex tex="F_N = mg" /></div>
-<div v-click="2" class="key">二力平衡，视重回到重力大小，示数不再变化。</div>
+<div v-click="2" class="tip-hint">二力平衡，视重回到重力大小，示数不再变化。</div>
 </div>
 </div>
 </div>
@@ -234,18 +234,15 @@ clicks: 3
 </div>
 </div>
 
-<div class="key key-lead" v-click="3">视重变大还是变小，只由<b>加速度方向</b>决定，与速度方向无关。</div>
+<div class="tip-hint" v-click="3">视重变大还是变小，只由<b>加速度方向</b>决定，与速度方向无关。</div>
 </div>
 
 ---
 layout: base-flex
+title: '电梯里的体重计'
 ---
 
-# 电梯里的体重计
-
 <div class="page-grow">
-<div class="mini-note text-center">点一个运动状态，看看示数和箭头怎么变。</div>
-
 <ElevatorWeightSim />
 </div>
 
@@ -276,7 +273,7 @@ clicks: 3
 
 <div v-click="2">重力 <Latex tex="mg" /> 仍然存在，只是全部用来产生加速度了。</div>
 
-<div class="key key-lead" v-click="3">人对秤完全没有作用力 —— 这是<b>完全失重</b>状态。</div>
+<div class="tip-hint" v-click="3">人对秤完全没有作用力 —— 这是<b>完全失重</b>状态。</div>
 </div>
 
 ---
@@ -294,35 +291,33 @@ clicks: 3
 
 <div v-click="2">航天器绕地球运行时，舱内物体同样在完全失重：液滴呈球形，气泡不再上浮。</div>
 
-<div class="key" v-click="3">水对瓶壁没有压力，瓶对水也没有支持力 —— 水不再从孔中流出。</div>
+<div class="tip-hint" v-click="3">水对瓶壁没有压力，瓶对水也没有支持力 —— 水不再从孔中流出。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
+title: '超重的代价'
 ---
 
-# 超重的代价
-
 <div class="page-grow">
-<div>火箭发射阶段，加速度可达 <Latex tex="3.5g" />。平时重 <Latex tex="10\ \text{N}" /> 的体内脏器，在这个阶段需要的支持力有多大？</div>
+<div><b class="ex-no">例题</b>　火箭发射阶段，加速度可达 <Latex tex="3.5g" />。平时重 <Latex tex="10\ \text{N}" /> 的体内脏器，在这个阶段需要的支持力有多大？</div>
 
 <div v-click="1">加速度方向向上，取向上为正：<Latex tex="F_N - mg = ma" /></div>
 <div v-click="2"><Latex tex="F_N = mg + ma = mg + 3.5mg = 4.5mg = 4.5 \times 10\ \text{N} = 45\ \text{N}" /></div>
-<div v-click="3" class="key">超重时，一切压在支持物上的东西都要多承受几倍的力。</div>
+<div v-click="3" class="tip-hint">超重时，一切压在支持物上的东西都要多承受几倍的力。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 1
+title: '例题：电梯加速上升'
 ---
-
-# 例题：电梯加速上升
 
 <div class="page-grow">
 <div class="half-grid">
 <div class="stack">
-<div>质量 <Latex tex="60\ \text{kg}" /> 的人站在电梯内的水平地板上，电梯以 <Latex tex="0.25\ \text{m/s}^2" /> 的加速度匀加速上升。求人对电梯地板的压力。（<Latex tex="g" /> 取 <Latex tex="9.8\ \text{m/s}^2" />）</div>
+<div><b class="ex-no">例题</b>　质量 <Latex tex="60\ \text{kg}" /> 的人站在电梯内的水平地板上，电梯以 <Latex tex="0.25\ \text{m/s}^2" /> 的加速度匀加速上升。求人对电梯地板的压力。（<Latex tex="g" /> 取 <Latex tex="9.8\ \text{m/s}^2" />）</div>
 </div>
 <div class="host">
 <PersonWeightSvg
@@ -346,37 +341,35 @@ clicks: 3
 <div v-click="1">取竖直向上为正方向，由牛顿第二定律：<Latex tex="F_N - mg = ma" /></div>
 <div v-click="2"><Latex tex="F_N = m(g+a) = 60 \times (9.8+0.25)\ \text{N} = 603\ \text{N}" /></div>
 <div v-click="2">由牛顿第三定律，人对地板的压力 <Latex tex="F_N' = 603\ \text{N}" />，方向竖直向下。</div>
-<div v-click="3" class="key">向上加速（或向下减速）时，<Latex tex="F_N \gt mg" />，出现超重。</div>
+<div v-click="3" class="tip-hint">向上加速（或向下减速）时，<Latex tex="F_N \gt mg" />，出现超重。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 2
+title: '例题：示数变大了'
 ---
 
-# 例题：示数变大了
-
 <div class="page-grow">
-<div>某人站在电梯里的体重计上，发现示数是其体重的 <Latex tex="1.2" /> 倍。电梯可能在做什么运动？</div>
+<div><b class="ex-no">例题</b>　某人站在电梯里的体重计上，发现示数是其体重的 <Latex tex="1.2" /> 倍。电梯可能在做什么运动？</div>
 
 <div v-click="1">示数大于体重，即 <Latex tex="F_N \gt mg" />，所以加速度方向<b>向上</b>，<Latex tex="a = 0.2g" />。</div>
-<div v-click="2" class="key">可能是<b>向上加速</b>，也可能是<b>向下减速</b> —— 运动方向无法唯一确定。</div>
+<div v-click="2" class="tip-hint">可能是<b>向上加速</b>，也可能是<b>向下减速</b> —— 运动方向无法唯一确定。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 4
+title: '蹦极中的超重与失重'
 ---
 
-# 蹦极中的超重与失重
-
 <div class="page-grow">
-<div>运动员从高处跳下，弹性绳被拉直前做自由落体运动；弹性绳被拉直后，下降速度先增大、再减小，直到减为 0。下降过程中，运动员在哪些阶段分别处于超重、失重状态？</div>
+<div><b class="ex-no">例题</b>　运动员从高处跳下，弹性绳被拉直前做自由落体运动；弹性绳被拉直后，下降速度先增大、再减小，直到减为 0。下降过程中，运动员在哪些阶段分别处于超重、失重状态？</div>
 
 <div v-click="1">绳被拉直前：<Latex tex="a = g" /> 向下 —— <b>完全失重</b>。</div>
 <div v-click="2">绳被拉直后速度仍增大：弹力小于重力，<Latex tex="a" /> 向下 —— <b>失重</b>。</div>
 <div v-click="3">速度减小时：弹力大于重力，<Latex tex="a" /> 向上，<Latex tex="F_N \gt mg" />。</div>
-<div v-click="4" class="key">全程速度都向下，却既有失重又有超重 —— 判断只看加速度方向。</div>
+<div v-click="4" class="tip-hint">全程速度都向下，却既有失重又有超重 —— 判断只看加速度方向。</div>
 </div>
 
 ---
@@ -391,6 +384,6 @@ layout: base-flex
 <div class="summary-line"><mdi-arrow-up-bold-outline class="text-lg inline-block align-middle mr-1" /><b>超重</b>：<Latex tex="F_N \gt mg" />，加速度方向向上（向上加速、向下减速）。</div>
 <div class="summary-line"><mdi-arrow-down-bold-outline class="text-lg inline-block align-middle mr-1" /><b>失重</b>：<Latex tex="F_N \lt mg" />，加速度方向向下（向下加速、向上减速）。</div>
 <div class="summary-line"><mdi-scale-off class="text-lg inline-block align-middle mr-1" /><b>完全失重</b>：<Latex tex="a = g" /> 向下，视重为 0。</div>
-<div class="key">重力 <Latex tex="mg" /> 始终不变；超重和失重都是<b>视重相对于重力的变化</b>。</div>
+<div class="tip-hint">重力 <Latex tex="mg" /> 始终不变；超重和失重都是<b>视重相对于重力的变化</b>。</div>
 </div>
 </div>

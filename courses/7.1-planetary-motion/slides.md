@@ -41,7 +41,7 @@ clicks: 2
 <div class="figure"><TianYuanDiFangSvg /></div>
 </div>
 
-<div class="key" v-click="2">于是古人相信：天体的运动必然是最完美、最和谐的<strong>匀速圆周运动</strong>。</div>
+<div class="tip-hint" v-click="2">于是古人相信：天体的运动必然是最完美、最和谐的<strong>匀速圆周运动</strong>。</div>
 </div>
 
 ---
@@ -79,7 +79,7 @@ clicks: 2
 <div class="page-grow">
 <div class="figure" v-click="1"><HistoryTimelineSvg /></div>
 
-<div class="key key-lead" v-click="2">开普勒在<strong class="text-accent">第谷的观测数据</strong>的基础上<strong class="text-accent">归纳总结</strong>出了行星运动的三条定律——不是“发现”，也不是“发明”。</div>
+<div class="tip-hint" v-click="2">开普勒在<strong class="text-accent">第谷的观测数据</strong>的基础上<strong class="text-accent">归纳总结</strong>出了行星运动的三条定律——不是“发现”，也不是“发明”。</div>
 
 <div class="mini-note" v-click="2">第谷（丹麦）对火星等行星做了 20 余年的精密观测；开普勒（德国）是他的助手，又用 20 年研究这些观测记录。</div>
 </div>
@@ -94,10 +94,13 @@ clicks: 1
 
 <div class="split-wide pm-split-text" v-click="1">
 <div class="stack">
-<div class="card">
-<div class="mini-title"><mdi-vector-ellipse />开普勒第一定律</div>
-<div class="text-xl">所有行星绕太阳运动的轨道都是<strong class="text-accent">椭圆</strong>，太阳处在椭圆的<strong class="text-accent">一个焦点</strong>上。</div>
-</div>
+
+<DefinitionBox term="开普勒第一定律" tone="gold">
+
+<div>所有行星绕太阳运动的轨道都是<strong class="text-accent">椭圆</strong>，太阳处在椭圆的<strong class="text-accent">一个焦点</strong>上。</div>
+
+</DefinitionBox>
+
 <div>行星绕太阳运行的轨道严格来说不是圆，而是椭圆。</div>
 <div>太阳不在椭圆的<strong>中心</strong>，而在<strong>其中一个焦点</strong>上。</div>
 <div>行星与太阳间的距离<strong>不断变化</strong>。</div>
@@ -119,7 +122,6 @@ clicks: 2
 <div class="ask">把一张画着圆的纸沿一个方向均匀压扁，圆就变成了椭圆。椭圆到底“扁”在哪里？</div>
 <div v-click="1">沿一个方向均匀压扁：长轴方向的长度<strong>不变</strong>，短轴方向被压短（<Latex tex="b < a" />）。</div>
 <div v-click="1">椭圆上任意一点到<strong>两个焦点</strong>的距离之和等于定长（等于长轴长 <Latex tex="2a" />）——用细绳和铅笔能画出椭圆，靠的就是这个性质。</div>
-<div class="mini-note" v-click="2">这个性质的证明在数学课上给出，这里我们直接用。</div>
 </div>
 <div class="figure" v-click="1"><CircleToEllipseDemo /></div>
 </div>
@@ -137,7 +139,7 @@ clicks: 2
 <div class="stack">
 <div v-click="1">长轴 <Latex tex="2a" />、短轴 <Latex tex="2b" />；它们的一半叫<strong>半长轴 <Latex tex="a" /></strong>与<strong>半短轴 <Latex tex="b" /></strong>（习惯上就用 <Latex tex="a" />、<Latex tex="b" /> 表示）。</div>
 <div v-click="1">两个焦点关于中心对称；焦点到中心的距离叫<strong>半焦距 <Latex tex="c" /></strong>，两个焦点之间的距离是<strong>焦距 <Latex tex="2c" /></strong>。</div>
-<div class="key" v-click="2"><Latex tex="c^2 + b^2 = a^2" />（直接给出，数学课后会证明）</div>
+<div class="info-hint" v-click="2"><Latex tex="c^2 + b^2 = a^2" /></div>
 <div class="mini-note" v-click="2">近日点到太阳的距离是 <Latex tex="a - c" />，远日点到太阳的距离是 <Latex tex="a + c" />。</div>
 </div>
 <div class="figure" v-click="1"><EllipseGeometrySvg /></div>
@@ -173,10 +175,13 @@ clicks: 2
 
 <div class="split-wide pm-split" v-click="1">
 <div class="stack">
-<div class="card">
-<div class="mini-title"><mdi-chart-timeline-variant />开普勒第二定律</div>
-<div class="text-xl">对任意一个行星来说，它与太阳的连线在<strong class="text-accent">相等的时间内扫过的面积相等</strong>。</div>
-</div>
+
+<DefinitionBox term="开普勒第二定律" tone="gold">
+
+<div>对任意一个行星来说，它与太阳的连线在<strong class="text-accent">相等的时间内扫过的面积相等</strong>。</div>
+
+</DefinitionBox>
+
 <div v-click="2">由此可知：行星在<strong>近日点</strong>的速度最大，在<strong>远日点</strong>的速度最小；图上的每一块扇形都对应相等的时间，面积自然相等。</div>
 </div>
 <div class="figure"><KeplerSecondLawDemo /></div>
@@ -195,7 +200,7 @@ clicks: 3
 <div class="stack">
 <div>在极短的时间 <Latex tex="\Delta t" /> 内，行星与太阳的连线扫过的面积可看成三角形：<Latex tex="\Delta A \approx \frac{1}{2}\, r\, v_\perp \Delta t" />（<Latex tex="v_\perp" /> 是速度垂直于连线的分量）。</div>
 <div v-click="2">开普勒第二定律说 <Latex tex="\Delta A / \Delta t" /> 不变，所以 <Latex tex="r\, v_\perp" /> 不变；近日点、远日点处的速度都与连线垂直（<Latex tex="v_\perp = v" />），于是：</div>
-<div class="key key-lead" v-click="3"><Latex tex="R_1V_1 = R_2V_2" /></div>
+<div class="tip-hint" v-click="3"><Latex tex="R_1V_1 = R_2V_2" /></div>
 <div class="mini-note" v-click="3">月球绕地球的轨道也是椭圆：近地点、远地点同样满足这个关系——离得近时跑得快。</div>
 </div>
 <div class="figure"><PerihelionSpeedSvg /></div>
@@ -211,10 +216,11 @@ clicks: 3
 <div class="split-wide pm-split">
 <div class="stack">
 <div class="ask">离太阳越远的行星，公转周期越长。半长轴 <Latex tex="a" /> 与公转周期 <Latex tex="T" /> 之间有没有定量关系？</div>
-<div class="card" v-click="2">
-<div class="mini-title"><mdi-equal />开普勒第三定律</div>
-<div class="text-xl">所有行星轨道的半长轴的<strong class="text-accent">三次方</strong>跟它的公转周期的<strong class="text-accent">二次方</strong>的比都相等：<Latex tex="\dfrac{a^3}{T^2} = k" />。</div>
-</div>
+<DefinitionBox v-click="2" term="开普勒第三定律" tone="gold">
+
+<div>所有行星轨道的半长轴的<strong class="text-accent">三次方</strong>跟它的公转周期的<strong class="text-accent">二次方</strong>的比都相等：<Latex tex="\dfrac{a^3}{T^2} = k" />。</div>
+
+</DefinitionBox>
 <div class="mini-note" v-click="3">比值 <Latex tex="k" /> 对所有行星都相同；换用别的单位只会改变 <Latex tex="k" /> 的数值，不会改变“都相同”。</div>
 </div>
 <div class="figure" v-click="1"><KeplerThirdLawTable /></div>
@@ -228,10 +234,10 @@ clicks: 2
 
 # 轨道与圆
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.5rem">
 <div class="ask">行星的轨道严格来说是椭圆。它离圆到底有多远？</div>
 <div class="figure" v-click="1"><OrbitNearCircleSvg /></div>
-<div class="key" v-click="2">行星的轨道与圆十分接近——中学阶段的研究中，我们按圆轨道处理。</div>
+<div class="tip-hint" v-click="2">行星的轨道与圆十分接近——中学阶段的研究中，我们按圆轨道处理。</div>
 </div>
 
 ---
@@ -248,7 +254,7 @@ clicks: 2
 <div class="step-item"><span class="step-no">2</span><div>对某一行星来说，它绕太阳做圆周运动的角速度（或线速度）大小不变，即行星做<strong>匀速圆周运动</strong>。</div></div>
 <div class="step-item"><span class="step-no">3</span><div>所有行星轨道半径 <Latex tex="r" /> 的三次方跟它的公转周期 <Latex tex="T" /> 的二次方的比值都相等。</div></div>
 </div>
-<div class="key key-lead" v-click="2"><Latex tex="\dfrac{r^3}{T^2} = k" /></div>
+<div class="tip-hint" v-click="2"><Latex tex="\dfrac{r^3}{T^2} = k" /></div>
 </div>
 
 ---
@@ -265,7 +271,7 @@ clicks: 4
 <div class="summary-line" v-click="3"><b class="text-accent">开普勒第三定律</b>　所有行星轨道的半长轴的三次方跟它的公转周期的二次方的比都相等：<Latex tex="\dfrac{a^3}{T^2} = k" />。</div>
 <div class="summary-line" v-click="4">中学阶段把轨道当作<strong>圆</strong>处理：太阳在圆心、行星做匀速圆周运动，<Latex tex="\dfrac{r^3}{T^2} = k" />。</div>
 </div>
-<div class="key" v-click="4">三条定律都是开普勒在<strong>第谷的观测数据</strong>上<strong>归纳总结</strong>出来的。</div>
+<div class="tip-hint" v-click="4">三条定律都是开普勒在<strong>第谷的观测数据</strong>上<strong>归纳总结</strong>出来的。</div>
 </div>
 
 ---

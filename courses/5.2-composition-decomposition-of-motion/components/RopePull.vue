@@ -196,7 +196,13 @@ const alongLabel = computed(() => ({
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
-        <path :d="rightAngleMark()" fill="none" stroke="currentColor" stroke-width="1.8" opacity="0.85" />
+        <path
+          :d="rightAngleMark()"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          opacity="0.85"
+        />
         <text
           :x="shipLabel.x"
           :y="shipLabel.y"
@@ -257,9 +263,6 @@ const alongLabel = computed(() => ({
   flex-direction: column;
   gap: 0.3rem;
 }
-
-
-
 
 .sim-readout {
   color: var(--c-text);

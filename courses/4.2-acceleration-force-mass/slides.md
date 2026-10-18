@@ -29,7 +29,7 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask text-5xl leading-normal">上一节课的最后，我们只得到一个<b>猜想</b>：<Latex tex="a \propto \dfrac{F}{M}" />。<br>怎样用实验<b>验证</b>它是否成立？</div>
+<div class="ask text-5xl leading-normal"><Latex tex="a \propto \dfrac{F}{M}" /> 上一节课还只是<b>猜想</b>。<br>怎样用实验<b>验证</b>它是否成立？</div>
 </div>
 
 ---
@@ -59,9 +59,8 @@ clicks: 3
 ---
 layout: base-flex
 clicks: 4
+title: '绳的拉力等于槽码的重力吗？'
 ---
-
-# 绳的拉力等于槽码的重力吗？
 
 <div class="page-grow">
 <div class="ask ask-lead">绳子对小车施加的拉力，真等于槽码的重力吗？</div>
@@ -72,7 +71,7 @@ clicks: 4
 
 <div v-click="3">代回小车：<Latex tex="F_T = Ma = \frac{Mmg}{M + m} = \frac{mg}{1 + \frac{m}{M}}" />。</div>
 
-<div v-click="4" class="key">可见 <Latex tex="F_T" /> 总比 <Latex tex="mg" /> 小一点。只有当槽码质量 <Latex tex="m" /> 远小于小车质量 <Latex tex="M" />（即 <Latex tex="m \ll M" />）时，<Latex tex="\frac{m}{M} \to 0" />，才有 <Latex tex="F_T \approx mg" />。</div>
+<div v-click="4" class="tip-hint">可见 <Latex tex="F_T" /> 总比 <Latex tex="mg" /> 小一点。只有当槽码质量 <Latex tex="m" /> 远小于小车质量 <Latex tex="M" />（即 <Latex tex="m \ll M" />）时，<Latex tex="\frac{m}{M} \to 0" />，才有 <Latex tex="F_T \approx mg" />。</div>
 </div>
 
 ---
@@ -88,11 +87,11 @@ clicks: 3
 <div class="ask"><Latex tex="m \ll M" /> 只是前提之一。木板放平，小车还要受摩擦阻力 —— 这时的 <Latex tex="F" /> 还是合力吗？</div>
 <div v-click="1" class="step-item"><span class="step-no">1</span><span>把<b>打点计时器那一端垫高</b>，用重力沿斜面的分力抵消阻力。</span></div>
 <div v-click="2" class="step-item"><span class="step-no">2</span><span>判断标准：<b>不挂槽码</b>、<b>带上纸带</b>，轻推小车，纸带打点均匀（小车匀速）。</span></div>
-<div v-click="3" class="key">改变小车上钩码的质量后，<b>不需要重新平衡</b>。</div>
+<div v-click="3" class="tip-hint">改变小车上钩码的质量后，<b>不需要重新平衡</b>。</div>
 </div>
 <div class="divider-l stack">
 <ExperimentSetupSvg :tilted="$clicks >= 1" />
-<div class="fig-cap">点击「垫高」：木板抬起，底下加垫高块</div>
+<div class="fig-cap">木板抬起，底下加垫高块</div>
 </div>
 </div>
 </div>
@@ -103,10 +102,10 @@ layout: base-flex
 
 # 测量与操作
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.4rem;--hint-pad-y:.5rem">
 <div class="stack">
 <div class="mini-title"><mdi-ruler /> 加速度怎么测</div>
-<div>用打点计时器和纸带，方法与第二章的实验相同；纸带先带回去，下一课时再算 <Latex tex="a" />。</div>
+<div>用打点计时器和纸带，方法与第二章的实验相同。</div>
 </div>
 
 <div class="stack">
@@ -116,7 +115,7 @@ layout: base-flex
 <div class="step-item"><span class="step-no">3</span><span>小车到达滑轮前及时断开电源，防止撞上滑轮。</span></div>
 </div>
 
-<div class="key">顺序记牢：<b>先接通电源，后释放小车</b>。</div>
+<div class="important-hint"><b>先接通电源，后释放小车</b>。</div>
 </div>
 
 ---
@@ -168,7 +167,7 @@ layout: base-flex
 ---
 
 <div class="page-grow">
-<div class="ask text-5xl leading-normal">纸带已经在手上了：怎么把它变成 <Latex tex="a" />？<br>又怎么从 <Latex tex="a" /> 看出它与 <Latex tex="F" />、<Latex tex="M" /> 的关系？</div>
+<div class="ask text-5xl leading-normal">怎样从纸带求出 <Latex tex="a" />？<br>又怎样由 <Latex tex="a" /> 看出它与 <Latex tex="F" />、<Latex tex="M" /> 的关系？</div>
 </div>
 
 ---
@@ -189,15 +188,14 @@ clicks: 3
 
 <div v-click="2">把数据<b>前后两半分组相减</b>：<Latex tex="a = \frac{(x_4 + x_5 + x_6) - (x_1 + x_2 + x_3)}{(3T)^2}" /></div>
 
-<div v-click="3" class="key">6 段数据全部用上，误差被摊平。</div>
+<div v-click="3" class="tip-hint">6 段数据全部用上，误差被摊平。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
+title: '量出的是奇数段怎么办'
 ---
-
-# 量出的是奇数段怎么办
 
 <div class="page-grow">
 <div class="ask">段数是奇数，前后分不成两半，怎么办？</div>
@@ -210,14 +208,13 @@ clicks: 3
 
 <div v-click="2">剩下 6 段，就变回上一页的情形：<Latex tex="a = \frac{(x_5 + x_6 + x_7) - (x_2 + x_3 + x_4)}{(3T)^2}" /></div>
 
-<div v-click="3" class="key">另有一条路：先作出 <Latex tex="v" />-<Latex tex="t" /> 图像，再由图像的<b>斜率</b>求加速度。</div>
+<div v-click="3" class="tip-hint">另有一条路：先作出 <Latex tex="v" />-<Latex tex="t" /> 图像，再由图像的<b>斜率</b>求加速度。</div>
 </div>
 
 ---
 layout: base-flex
+title: '填表'
 ---
-
-# 填表
 
 <div class="page-grow">
 <div class="half-grid">
@@ -248,7 +245,6 @@ layout: base-flex
 </div>
 </div>
 
-<div class="mini-note">纸带上的编号对上了，两个质量也对上了 —— 现在可以把算出的 <Latex tex="a" /> 填进表里。</div>
 </div>
 
 ---
@@ -302,7 +298,7 @@ labels:
 
 </div>
 
-<div v-click="1" class="key">各点落在一条<b>过原点的直线</b>附近 —— 质量一定时，<Latex tex="a \propto F" />。</div>
+<div v-click="1" class="tip-hint">各点落在一条<b>过原点的直线</b>附近 —— 质量一定时，<Latex tex="a \propto F" />。</div>
 </div>
 
 ---
@@ -359,7 +355,7 @@ labels:
 
 </div>
 
-<div class="key">图线是一条<b>弯曲的曲线</b>：可能是 <Latex tex="a \propto \frac{1}{M}" />，也可能是 <Latex tex="a \propto \frac{1}{M^2}" /> —— 双曲线很难分辨。</div>
+<div class="tip-hint">图线是一条<b>弯曲的曲线</b>：可能是 <Latex tex="a \propto \frac{1}{M}" />，也可能是 <Latex tex="a \propto \frac{1}{M^2}" /> —— 双曲线很难分辨。</div>
 </div>
 
 ---
@@ -417,7 +413,7 @@ labels:
 
 </div>
 
-<div v-click="1" class="key">过原点的直线 —— 拉力一定时 <Latex tex="a \propto \frac{1}{M}" />。合起来：<Latex tex="a \propto \frac{F}{M}" />。</div>
+<div v-click="1" class="tip-hint">过原点的直线 —— 拉力一定时 <Latex tex="a \propto \frac{1}{M}" />。合起来：<Latex tex="a \propto \frac{F}{M}" />。</div>
 </div>
 
 ---
@@ -457,7 +453,7 @@ clicks: 3
 
 <div v-click="2"><Latex tex="t" /> 相同，所以 <Latex tex="x \propto a" />，即 <Latex tex="\frac{x_1}{x_2} = \frac{a_1}{a_2}" /></div>
 
-<div v-click="3" class="key">测出位移之比，就得到了加速度之比 —— 连 <Latex tex="a" /> 都不必算。</div>
+<div v-click="3" class="tip-hint">测出位移之比，就得到了加速度之比 —— 连 <Latex tex="a" /> 都不必算。</div>
 </div>
 
 ---
@@ -513,7 +509,7 @@ curves:
 </div>
 </div>
 
-<div class="key">两条图线都<b>不过原点</b>：在<b>横轴</b>上有正截距，向左延长还与 <Latex tex="a" /> 轴<b>负半轴</b>相交。</div>
+<div class="warn-hint">两条图线都<b>不过原点</b>：在<b>横轴</b>上有正截距，向左延长还与 <Latex tex="a" /> 轴<b>负半轴</b>相交。</div>
 </div>
 
 ---
@@ -569,7 +565,7 @@ curves:
 </div>
 </div>
 
-<div class="key">两条图线都不过原点：在<b>纵轴 <Latex tex="a" /> </b>上有正截距 —— 没有拉力，小车也有加速度。</div>
+<div class="warn-hint">两条图线都不过原点：在<b>纵轴 <Latex tex="a" /> </b>上有正截距 —— 没有拉力，小车也有加速度。</div>
 </div>
 
 ---
@@ -662,9 +658,9 @@ clicks: 2
 
 <div v-click="1"><Latex tex="a = \frac{m}{M + m}g = \frac{1}{\frac{M}{m} + 1}g" />，绳的拉力 <Latex tex="F_T = Ma = \frac{Mm}{M + m}g < mg" />。</div>
 
-<div v-click="2" class="key">槽码不再远小于小车时，<Latex tex="\frac{M}{m} \to 0" />，于是 <Latex tex="a \to g" /> —— 这就是那条水平渐近线。</div>
+<div v-click="2" class="tip-hint">槽码不再远小于小车时，<Latex tex="\frac{M}{m} \to 0" />，于是 <Latex tex="a \to g" /> —— 这就是那条水平渐近线。</div>
 
-<div v-click="2" class="mini-note">所以实验必须挑「小车重、槽码轻」的组合：<Latex tex="m \ll M" /> 不是可有可无的条件。</div>
+<div class="info-hint" v-click="2">所以实验必须挑「小车重、槽码轻」的组合：<Latex tex="m \ll M" /> 不是可有可无的条件。</div>
 </div>
 
 ---
@@ -687,7 +683,7 @@ layout: base-flex
 </div>
 </div>
 
-<div class="key">压缩空气从导轨上的小孔喷出，在滑块与导轨之间形成一层<b>气膜</b>，摩擦力几乎为零 —— <b>不必垫高木板平衡摩擦力</b>，也不用担心倾角调不准。</div>
+<div class="tip-hint">压缩空气从导轨上的小孔喷出，在滑块与导轨之间形成一层<b>气膜</b>，摩擦力几乎为零 —— <b>不必垫高木板平衡摩擦力</b>，也不用担心倾角调不准。</div>
 </div>
 
 ---
@@ -737,5 +733,5 @@ layout: base-flex
 </div>
 </div>
 
-<div class="key">合起来：<Latex tex="a \propto \frac{F}{M}" /> —— 下一节把它写成等式，就是牛顿第二定律。</div>
+<div class="tip-hint">合起来：<Latex tex="a \propto \frac{F}{M}" />。</div>
 </div>

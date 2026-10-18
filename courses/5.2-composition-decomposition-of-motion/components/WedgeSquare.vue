@@ -4,10 +4,8 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 /**
  * 关联速度/加速度 · 正方形压斜面：正方形一侧贴竖直墙，另一侧压在倾角 θ 的斜面上。
  *
- * 约束是"正方形的右下角始终压在斜面上"，所以几何关系对**任意一段位移**都成立：
- * 正方形下落 Δy、斜面体右移 Δx，则 Δy = Δx·tanθ，即 Δx = Δy·cotθ。
- * 位移有这个关系 ⇒ 速度、加速度也有同样的关系（a = A·cotθ）。
- * 画面里斜面体缓慢右移、正方形同步下落，右侧小三角形就是这条几何关系。
+ * 约束是"正方形的右下角始终压在斜面上"，所以几何关系对**任意一段位移**都成立： 正方形下落 Δy、斜面体右移 Δx，则 Δy = Δx·tanθ，即 Δx = Δy·cotθ。
+ * 位移有这个关系 ⇒ 速度、加速度也有同样的关系（a = A·cotθ）。 画面里斜面体缓慢右移、正方形同步下落，右侧小三角形就是这条几何关系。
  */
 const {
   showArrows = true,
@@ -47,7 +45,7 @@ let raf = 0;
 let started = 0;
 const loop = (now: number): void => {
   if (!started) started = now;
-  const phase = (((now - started) / 1000) / 5) % 1;
+  const phase = ((now - started) / 1000 / 5) % 1;
   offset.value = 35 + 25 * Math.cos(2 * Math.PI * phase);
   raf = requestAnimationFrame(loop);
 };
@@ -69,7 +67,10 @@ const blockTop = computed(() => blockBottom.value - SIDE);
 /** 接触点（正方形右下角）与法线方向（指向左上） */
 const contact = computed(() => ({ x: WALL_X + SIDE, y: blockBottom.value }));
 const normal = computed(() => ({ x: -sinT.value, y: -cosT.value }));
-const blockCenter = computed(() => ({ x: WALL_X + SIDE / 2, y: (blockTop.value + blockBottom.value) / 2 }));
+const blockCenter = computed(() => ({
+  x: WALL_X + SIDE / 2,
+  y: (blockTop.value + blockBottom.value) / 2,
+}));
 const wedgeMid = computed(() => ({ x: (corner.value.x + top.value.x) / 2, y: GROUND_Y - 12 }));
 const blockTip = computed(() => ({ x: blockCenter.value.x, y: blockCenter.value.y + 62 }));
 const wedgeTip = computed(() => ({ x: wedgeMid.value.x + 78, y: wedgeMid.value.y }));
@@ -78,7 +79,10 @@ const wedgeTip = computed(() => ({ x: wedgeMid.value.x + 78, y: wedgeMid.value.y
 const tri = { x0: 400, y0: 300, dx: 120 };
 const triP0 = computed(() => ({ x: tri.x0, y: tri.y0 }));
 const triP1 = computed(() => ({ x: tri.x0 + tri.dx, y: tri.y0 }));
-const triP2 = computed(() => ({ x: tri.x0 + tri.dx, y: tri.y0 - tri.dx * (sinT.value / cosT.value) }));
+const triP2 = computed(() => ({
+  x: tri.x0 + tri.dx,
+  y: tri.y0 - tri.dx * (sinT.value / cosT.value),
+}));
 /** 直角符号 */
 const triRight = computed(
   () =>
@@ -95,8 +99,18 @@ const triRight = computed(
       aria-label="正方形一侧靠墙，另一侧压在斜面上"
     >
       <!-- 墙与地面 -->
-      <SurfaceHatch :from="{ x: WALL_X, y: 40 }" :to="{ x: WALL_X, y: GROUND_Y }" side="left" :thickness="14" />
-      <SurfaceHatch :from="{ x: WALL_X, y: GROUND_Y }" :to="{ x: 360, y: GROUND_Y }" side="below" :thickness="14" />
+      <SurfaceHatch
+        :from="{ x: WALL_X, y: 40 }"
+        :to="{ x: WALL_X, y: GROUND_Y }"
+        side="left"
+        :thickness="14"
+      />
+      <SurfaceHatch
+        :from="{ x: WALL_X, y: GROUND_Y }"
+        :to="{ x: 360, y: GROUND_Y }"
+        side="below"
+        :thickness="14"
+      />
       <!-- 斜面体 -->
       <polygon
         :points="`${corner.x},${corner.y} ${top.x},${top.y} ${top.x},${GROUND_Y}`"
@@ -151,8 +165,18 @@ const triRight = computed(
           stroke-width="1.8"
           stroke-dasharray="8 6"
         />
-        <CourseArrow :from="blockCenter" :to="blockTip" stroke="var(--c-force)" :stroke-width="3.4" />
-        <CourseArrow :from="wedgeMid" :to="wedgeTip" stroke="var(--c-velocity)" :stroke-width="3.4" />
+        <CourseArrow
+          :from="blockCenter"
+          :to="blockTip"
+          stroke="var(--c-force)"
+          :stroke-width="3.4"
+        />
+        <CourseArrow
+          :from="wedgeMid"
+          :to="wedgeTip"
+          stroke="var(--c-velocity)"
+          :stroke-width="3.4"
+        />
         <text
           :x="blockTip.x - 24"
           :y="blockTip.y + 4"
@@ -231,13 +255,7 @@ const triRight = computed(
       </g>
     </svg>
     <div v-if="showPanel" class="sim-panel">
-      <CourseSlider
-        v-model="theta"
-        :min="25"
-        :max="60"
-        label="斜面倾角"
-        label-width="7.5rem"
-      />
+      <CourseSlider v-model="theta" :min="25" :max="60" label="斜面倾角" label-width="7.5rem" />
     </div>
   </div>
 </template>

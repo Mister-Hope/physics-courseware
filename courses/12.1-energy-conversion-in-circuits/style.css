@@ -30,7 +30,8 @@
   gap: 0 0.85rem;
   align-items: start;
 
-  line-height: 1.4;
+  /* 1.4 → 1.28：第 9 页比较表 6 行、是全课最满的一页（结论改气泡后多出约 27px 竖向） */
+  line-height: 1.28;
 }
 
 .cmp-row > div {

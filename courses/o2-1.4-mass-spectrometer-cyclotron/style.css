@@ -10,6 +10,14 @@
   --stack-gap: 0.55rem;
 }
 
+/* 例题页（p6/p13/p19/p22/p29）：解析栏内容比栏高多 2–17px（结论改气泡后更高）。
+   `--page-gap` 会被布局的 .ex-stem / .ex-analysis 继承 ⇒ 只收这几页的块间距；
+   这些页 frontmatter 写 `class: tight-gap`。 */
+.slidev-layout.exercise-split.tight-gap {
+  --page-gap: 0.3rem;
+  --hint-pad-y: 0.5rem;
+}
+
 /* 原理页版式（第 3 页为模板）：左文字、右装置图，两栏一律顶对齐 ——
    共享 .split-wide 默认垂直居中，图会浮在中上方，教师要求"图放右上角" */
 .split-top {

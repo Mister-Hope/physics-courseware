@@ -61,23 +61,22 @@ presets: [
 > 这就是它最坑的地方：DevTools 里元素的 computed 值看起来「很小 / 很怪」，
 > 但你盯着 `opacity="0.9"` 这个属性看一辈子也看不出问题，得去看**样式面板里那条 `[opacity~="0.9"]`**。
 
-### 4. 🔴 同源的另一半：SVG 属性里的颜色**不能带空格**（本节是正本）
+### 4. ✅ 同源的另一半：SVG 属性里的颜色（含空格）—— 已在源头修好（本节是正本）
 
 `rgb(148 163 184 / 16%)` → `[stroke~="163"]{stroke-width:163px}` 是**同一个坑的另一种触发方式**：
 颜色值里的空格让它被拆成 `163`、`184`、`16%` 等 token，撞上了 `stroke-width` 这类工具类名。
 
-**规则（源码里就这么写）**：
+**现状**：`workspace/shared/uno.config.ts` 的 `blocklist` 已把 `[attr~="数字"]` 这类鬼规则**从源头丢弃**
+（`NUMERIC_ATTRS` 里含 `fill` / `stroke` / `stop-color` / `flood-color`）⇒ **带不带空格都行**，两种写法都不会再中招。
 
-- ✅ `stroke="rgba(148,163,184,0.16)"` / `fill="rgba(226,168,70,0.25)"`——**SVG 属性里的颜色一律写成无空格形式**（逗号或直接 hex）；
-- ❌ `stroke="rgb(148 163 184 / 16%)"`——空格会被 attributify 拆成数字工具类；
-- 例外：`<style>` / CSS 声明里的 `rgb(a b c / d)` 是合法现代 CSS，**不要改**（那里不经过 attributify 提取）。
+- ✅ `stroke="rgb(148 163 184 / 16%)"` / `stroke="rgba(148,163,184,0.16)"` / `stroke="var(--c-velocity)"` 都可以写；
+- ⛔ **别改回** `presetAttributify({ignoreAttributes})`；
+- 🔴 **新增会落到 DOM 的数值属性 / prop 要补进 `NUMERIC_ATTRS`**——否则同一个坑会换个名字回来；
+- `<style>` / CSS 声明里的 `rgb(a b c / d)` 本来就是合法现代 CSS，不要动。
 
-**两者根因同一，但表现与触发条件不同**：
-
-- 数值型（`opacity` / `font-size` / `stroke-width`）**dev 与 build 都会中招**（本次已实测，见「五」）；
-- 颜色型（含空格的 `rgb(...)`）按既有记录**只在 `pnpm build` 产物里**中招，
-  dev server / `pnpm shots` 看不出来。**「dev 看着没问题」不能作为验收通过的依据。**
-  （机制尚未逐条复现确认，先按经验事实对待：**改完必须跑一次 `pnpm build` 再 grep 编译产物**。）
+**为什么还要防**：数值型（`opacity` / `font-size` / `stroke-width`）**dev 与 build 都会中招**（见「五」）；
+颜色型当初只在 `pnpm build` 产物里暴露，dev server / `pnpm shots` 看不出来 ⇒ **「dev 看着没问题」不能当验收依据**，
+改完 `pnpm build` 后 grep 产物确认没有 `[xxx~="数字"]` 鬼规则（命令见「六」）。
 
 > 这条的其它地方（`AGENTS.md` 坑表、SVG 相关笔记等）提到时，**一句指向本节**即可，不必各写一套措辞。
 
@@ -243,18 +242,17 @@ console.log("可疑鬼规则条数：", out.filter((r) => r.suspicious).length);
 ### 🔴 验收（两条 grep 都要过；改完 `pnpm build` 是必须的一步）
 
 ```bash
-# 1) 源码层：不该新增内联 style 兜底；也不该出现带空格的颜色属性
+# 1) 源码层：不该新增内联 style 兜底
 grep -rn 'style="opacity:' courses/*/components/*.vue workspace/shared/components/*.vue
 # 验收标准：**不新增** `style="opacity: …"` 这类兜底写法；
 # 正本修复后不再需要，新写的图别照抄它。检查重点是「没有新增」，不是「必须归零」。
 
-grep -rnE '(stroke|fill)="rgba?\([0-9]+ [0-9]+' courses/*/components/*.vue workspace/shared/components/*.vue
-# 期望：无输出（带空格的颜色一律要改掉）
+# （颜色带不带空格都可以，源码层不再需要 grep 颜色写法）
 
-# 2) 编译产物层：这才是唯一能抓住「颜色含空格」变体的地方
+# 2) 编译产物层：唯一能抓住鬼规则的地方（颜色含空格那个变体也走这条）
 pnpm build
 grep -rnoE '\[(opacity|font-size|stroke-width|fill|stroke)~="[0-9]+"\]' dist/ | head
-# 期望：无输出（或只剩 [stroke~="#…"] 这类合法项）
+# 期望：无输出
 ```
 
 只跑源码 grep 不算验完：**颜色含空格这一半在 dev server 里根本看不出来，必须 `pnpm build` 后 grep `dist/`**。

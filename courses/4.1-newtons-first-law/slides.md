@@ -63,7 +63,7 @@ clicks: 2
 <div>沿水平面滚动，球最后停了下来。</div>
 </div>
 </div>
-<div class="key" v-click="2">把人们引入歧途的是<b>阻力</b>（摩擦、空气阻力）—— <b>力不是维持物体运动的原因</b>。</div>
+<div class="tip-hint" v-click="2"><b>阻力</b>（摩擦、空气阻力）使球越滚越慢——<b>力不是维持物体运动的原因</b>。</div>
 </div>
 
 ---
@@ -76,7 +76,7 @@ clicks: 4
 <div class="page-grow">
 <div class="ask">如果阻力可以完全消除，小球的运动会是怎样的？</div>
 <div><IdealInclineSvg /></div>
-<div class="key" v-click="4">在没有阻力的理想情况下，小球应该会一直运动下去。</div>
+<div class="tip-hint" v-click="4">在没有阻力的理想情况下，小球应该会一直运动下去。</div>
 </div>
 
 ---
@@ -89,7 +89,7 @@ clicks: 2
 <div class="page-grow">
 <div>阻力不可能完全消除，第二个斜面也不可能无限长 —— 这个实验做不出来。</div>
 <div class="ask" v-click="1">做不出来的实验，凭什么下结论？</div>
-<div class="key" v-click="2">它去掉的正是真实实验中无法消除的阻力，抓住事物的本质：<b>力不是维持物体运动的原因</b>。</div>
+<div class="tip-hint" v-click="2">它去掉了真实实验中无法消除的阻力：<b>力不是维持物体运动的原因</b>。</div>
 </div>
 
 ---
@@ -100,10 +100,15 @@ clicks: 3
 # 牛顿第一定律
 
 <div class="page-grow">
-<div class="card">一切物体总保持<b>匀速直线运动状态</b>或<b>静止状态</b>，除非作用在它上面的力迫使它改变这种状态。</div>
-<div class="key" v-click="1">力<b>不是</b>维持物体运动状态的原因，而是<b>改变</b>物体运动状态的原因。</div>
-<div class="mini-note" v-click="2">不受力作用的物体并不存在 —— 定律描述的是一种理想状态，不能用实验直接验证。</div>
-<div class="mini-note" v-click="3">在伽利略和笛卡儿研究的基础上，牛顿提出了这条定律；它也叫<b>惯性定律</b>。</div>
+<DefinitionBox term="牛顿第一定律" tone="gold">
+
+<div>一切物体总保持<b>匀速直线运动状态</b>或<b>静止状态</b>，除非作用在它上面的力迫使它改变这种状态。</div>
+
+</DefinitionBox>
+
+<div class="tip-hint" v-click="1">力<b>不是</b>维持物体运动状态的原因，而是<b>改变</b>物体运动状态的原因。</div>
+<div class="info-hint" v-click="2">不受力作用的物体并不存在 —— 定律描述的是一种理想状态，不能用实验直接验证。</div>
+<div class="info-hint" v-click="3">在伽利略和笛卡儿研究的基础上，牛顿提出了这条定律；它也叫<b>惯性定律</b>。</div>
 </div>
 
 ---
@@ -132,11 +137,11 @@ layout: base-flex
 clicks: 2
 ---
 
-# 生活中的现象 —— 出门撞大运
+# 生活中的现象：碰撞中的惯性
 
 <div class="page-grow">
 <div v-click="1"><TruckHitSvg /></div>
-<div class="key" v-click="2">质量小的"我"被撞后约以<b>两倍于卡车</b>的速度飞出；质量大的卡车速度几乎不变 —— <b>质量越大，运动状态越难改变</b>。</div>
+<div class="tip-hint" v-click="2">质量小的"我"被撞后约以<b>两倍于卡车</b>的速度飞出；质量大的卡车速度几乎不变 —— <b>质量越大，运动状态越难改变</b>。</div>
 </div>
 
 ---
@@ -148,15 +153,14 @@ clicks: 2
 
 <div class="page-grow">
 <div v-click="1"><BusInertiaSvg /></div>
-<div class="key" v-click="2">车体的运动状态改变了，人还保持原来的运动状态 —— 启动时人向后倾，刹车时人向前倾。</div>
+<div class="tip-hint" v-click="2">车体的运动状态改变了，人还保持原来的运动状态 —— 启动时人向后倾，刹车时人向前倾。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 5
+title: '这些说法对吗'
 ---
-
-# 这些说法对吗
 
 <div class="page-grow">
 <div class="judge-row">
@@ -175,7 +179,7 @@ clicks: 5
 <span>使速度相同的沙袋在相同时间内停下来，对大沙袋用力更大 —— 质量大的物体惯性大。</span>
 <span class="judge-verdict judge-yes" v-click="4"><mdi-check-circle-outline class="text-xl inline-block align-middle mr-1" />质量是惯性大小的量度</span>
 </div>
-<div class="key" v-click="5">惯性大小只由<b>质量</b>决定，与速度大小、速度方向、是否受力都无关。</div>
+<div class="important-hint" v-click="5">惯性大小只由<b>质量</b>决定，与速度大小、速度方向、是否受力都无关。</div>
 </div>
 
 ---
@@ -196,9 +200,7 @@ clicks: 8
 <div class="state-row state-row-brace" v-click="3">
 <span class="state-tag mini-note">惯性</span>
 <div class="state-brace-group">
-<svg class="state-brace" viewBox="0 0 12 40" preserveAspectRatio="none" aria-hidden="true">
-<path d="M 10 2 C 4 2 8 18 1 20 C 8 22 4 38 10 38" fill="none" stroke="currentColor" stroke-width="2.2" vector-effect="non-scaling-stroke" stroke-linecap="round" />
-</svg>
+<StateBraceSvg />
 <div class="stack state-sub mini-note">
 <div>保持运动状态不变的性质</div>
 <div>质量越大，惯性越大</div>
@@ -214,7 +216,7 @@ clicks: 8
 <div class="state-row" v-click="6"><span class="state-tag mini-note">同 <Latex tex="a" /> 比</span><span><Latex tex="F" /> 与 <Latex tex="m" /> 正相关</span></div>
 <div class="state-row" v-click="7"><span class="state-tag mini-note">同 <Latex tex="m" /> 比</span><span><Latex tex="a" /> 与合力 <Latex tex="F" /> 正相关</span></div>
 </div>
-<div class="key" v-click="8">取最简化的关系，可猜想：<Latex tex="m \propto \dfrac{F}{a}" />（即 <Latex tex="a \propto \dfrac{F}{m}" />）</div>
+<div class="tip-hint" v-click="8">取最简化的关系，可猜想：<Latex tex="m \propto \dfrac{F}{a}" />（即 <Latex tex="a \propto \dfrac{F}{m}" />）</div>
 </div>
 
 ---
@@ -238,5 +240,5 @@ layout: base-flex
 <div>物体保持原来运动状态不变的固有性质，一切物体都有惯性；<b>质量越大，惯性越大</b>。</div>
 </div>
 </div>
-<div class="key"><Latex tex="m \propto \dfrac{F}{a}" /> 还只是猜想 —— 下一节用实验探究加速度与力、质量的关系。</div>
+<div class="tip-hint"><Latex tex="m \propto \dfrac{F}{a}" /> 还只是由最简化的关系得到的猜想。</div>
 </div>

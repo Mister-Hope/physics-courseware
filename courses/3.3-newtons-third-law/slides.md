@@ -35,7 +35,7 @@ layout: base-flex
 </div>
 <div class="stack">
 <div class="ask ask-lead">大人跟小孩掰手腕，很容易就把小孩的手压在桌面上。他们施加给对方的力，大小相等吗？</div>
-<div class="trait" v-click="1">换个熟悉的场景：用手压桌面，手有什么感觉？</div>
+<div class="trait" v-click="1">用手压桌面，手有什么感觉？</div>
 </div>
 </div>
 </div>
@@ -61,19 +61,22 @@ clicks: 4
 <div class="fig-cap"><mdi-earth class="text-lg text-accent-2 inline-block align-middle mr-1" />地球吸引物体，物体也吸引地球</div>
 </div>
 </div>
-<div class="key" v-click="4">两个物体之间的作用总是相互的：一个物体对另一个物体施加了力，后一个物体一定同时对它施加力——施力物体同时也是受力物体。</div>
+<div class="tip-hint" v-click="4">两个物体之间的作用总是相互的：一个物体对另一个物体施加了力，后一个物体一定同时对它施加力——施力物体同时也是受力物体。</div>
 </div>
 
 ---
 clicks: 2
+title: 作用力与反作用力
 ---
-
-# 作用力与反作用力
 
 <div class="page-grow">
 <div class="ask">这一对相互的力，怎么称呼？它们之间有什么关系？</div>
 <div class="half-grid">
-<div class="card" v-click="1">物体间相互作用的这一对力，叫作<span class="text-accent">作用力</span>和<span class="text-accent">反作用力</span>。它们互相依赖、同时存在——可以把其中任何一个叫作作用力，另一个叫作反作用力。</div>
+<DefinitionBox v-click="1" term="作用力与反作用力" tone="gold">
+
+<div>物体间相互作用的这一对力，叫作<span class="def-term">作用力</span>和<span class="def-term">反作用力</span>。它们互相依赖、同时存在——可以把其中任何一个叫作作用力，另一个叫作反作用力。</div>
+
+</DefinitionBox>
 <div class="stack" v-click="2">
 <div class="mini-title"><mdi-lightbulb-on-outline class="text-xl" />作用力与反作用力的性质</div>
 <ul class="trait-list">
@@ -110,7 +113,7 @@ clicks: 1
 <div class="page-grow">
 <div class="ask">手拉的力时刻在变，两个力还总是相等吗？</div>
 <SensorPullDemo />
-<div class="key" v-click="1">两条图线始终关于 <Latex tex="t" /> 轴对称：任何时刻大小相等、方向相反、同时变化。</div>
+<div class="tip-hint" v-click="1">两条图线始终关于 <Latex tex="t" /> 轴对称：任何时刻大小相等、方向相反、同时变化。</div>
 </div>
 
 ---
@@ -121,8 +124,8 @@ clicks: 2
 
 <div class="page-grow">
 <div class="ask">弹簧测力计测的是弹力。摩擦力、不接触的力呢？</div>
-<div class="card" v-click="1">两个物体之间的作用力和反作用力总是<span class="text-accent">大小相等</span>，<span class="text-accent">方向相反</span>，作用在<span class="text-accent">同一条直线</span>上。</div>
-<div class="key key-lead" v-click="2"><Latex tex="F' = -F" />　负号表示方向相反——任何两个相互作用的物体之间都成立。</div>
+<div class="tip-hint" v-click="1">两个物体之间的作用力和反作用力总是<span class="text-accent">大小相等</span>，<span class="text-accent">方向相反</span>，作用在<span class="text-accent">同一条直线</span>上。</div>
+<div class="info-hint" v-click="2"><Latex tex="F' = -F" />　负号表示方向相反——任何两个相互作用的物体之间都成立。</div>
 </div>
 
 ---
@@ -138,7 +141,7 @@ clicks: 4
 <div class="trait" v-click="2"><mdi-run-fast class="text-xl text-accent-2 inline-block align-middle mr-1" />与运动状态无关：静止、匀速、加速运动中，两个力都同时等大反向。</div>
 <div class="trait" v-click="3"><mdi-shape-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />与力的性质无关：弹力、摩擦力、引力、磁力都一样。</div>
 </div>
-<div class="key" v-click="4">定律里的<span class="text-accent">"总是"</span>，对任何两个相互作用的物体都成立。</div>
+<div class="tip-hint" v-click="4">定律对任何两个相互作用的物体都成立。</div>
 </div>
 
 ---
@@ -154,7 +157,7 @@ clicks: 3
 <div class="stack">
 <div class="trait" v-click="1">秤的示数来自<span class="text-accent">物体对秤面的压力</span>。</div>
 <div class="trait" v-click="2">压力与秤面对物体的支持力是一对作用力与反作用力，所以两者大小相等。</div>
-<div class="key" v-click="3">物体静止，支持力与重力二力平衡，于是示数等于重力；但<span class="text-accent">压力不是重力</span>——性质不同（弹力 / 重力），受力物体也不同（秤面 / 物体）。</div>
+<div class="warn-hint" v-click="3">物体静止，支持力与重力二力平衡，于是示数等于重力；但<span class="text-accent">压力不是重力</span>——性质不同（弹力 / 重力），受力物体也不同（秤面 / 物体）。</div>
 </div>
 </div>
 </div>
@@ -181,8 +184,8 @@ clicks: 4
 </div>
 
 ---
-
-# 判断：这是哪一对力？
+title: 判断：这是哪一对力？
+---
 
 <div class="page-grow">
 <PairVsBalanceQuiz />
@@ -198,14 +201,13 @@ clicks: 3
 <div class="ask">面对一个情景，从哪里下手？先找哪个力？</div>
 <div class="trait" v-click="1">先明确对象：分析的是<span class="text-accent">哪个物体</span>受到的力。</div>
 <div class="order-line" v-click="2"><span class="order-step text-lg"><mdi-numeric-1-circle class="text-lg inline-block align-middle mr-1" />重力</span><span class="order-arrow text-xl">→</span><span class="order-step text-lg"><mdi-numeric-2-circle class="text-lg inline-block align-middle mr-1" />弹力</span><span class="order-arrow text-xl">→</span><span class="order-step text-lg"><mdi-numeric-3-circle class="text-lg inline-block align-middle mr-1" />摩擦力</span><span class="order-arrow text-xl">→</span><span class="order-step text-lg"><mdi-numeric-4-circle class="text-lg inline-block align-middle mr-1" />其他力</span></div>
-<div class="key" v-click="3">按顺序走一遍，不多画一个，也不漏画一个。</div>
+<div class="tip-hint" v-click="3">按顺序走一遍，不多画一个，也不漏画一个。</div>
 </div>
 
 ---
 clicks: 3
+title: 例：静止在粗糙斜面上的木块
 ---
-
-# 例：静止在粗糙斜面上的木块
 
 <div class="page-grow">
 <div class="half-grid">
@@ -213,7 +215,7 @@ clicks: 3
 <InclinedBlockForcesSvg />
 </div>
 <div class="stack">
-<div class="ask">木块受到哪几个力？</div>
+<div class="ask"><b class="ex-no">例</b>　木块受到哪几个力？</div>
 <div class="trait" v-click="1"><mdi-arrow-down-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />重力 <Latex tex="G" />：竖直向下。</div>
 <div class="trait" v-click="2"><mdi-arrow-up-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />弹力 <Latex tex="F_{\text{N}}" />：垂直于斜面向上的支持力。</div>
 <div class="trait" v-click="3"><mdi-arrow-top-right-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />静摩擦力 <Latex tex="F_f" />：假设没有摩擦，木块会向下滑动，所以木块相对斜面有向下滑动的趋势，摩擦力沿斜面向上。</div>
@@ -234,7 +236,7 @@ clicks: 2
 <div class="trait"><mdi-arrow-collapse-down class="text-xl text-accent-2 inline-block align-middle mr-1" />支持力 <Latex tex="F_{\text{N}}" /> ↔ 木块对斜面的压力</div>
 <div class="trait"><mdi-arrow-top-right-bold-outline class="text-xl text-accent-2 inline-block align-middle mr-1" />静摩擦力 <Latex tex="F_f" /> ↔ 木块对斜面的静摩擦力</div>
 </div>
-<div class="key" v-click="2">六个力里我们只画木块受到的三个——<span class="text-accent">分析哪个物体，就只画哪个物体受到的力</span>，不要把它的反作用力也画上去。</div>
+<div class="warn-hint" v-click="2">六个力里我们只画木块受到的三个——<span class="text-accent">分析哪个物体，就只画哪个物体受到的力</span>，不要把它的反作用力也画上去。</div>
 </div>
 
 ---
@@ -255,12 +257,12 @@ clicks: 2
 <div class="fig-host" v-click="1">
 <TwoBlocksInteractionSvg />
 </div>
-<div class="key key-lead" v-click="2">一对平衡力作用在<span class="text-accent">同一个物体</span>上，效果互相抵消；作用力与反作用力分别作用在<span class="text-accent">两个物体</span>上，各自改变各自物体的运动状态，<span class="text-accent">不能抵消</span>，也就谈不上"平衡"。</div>
+<div class="tip-hint" v-click="2">一对平衡力作用在<span class="text-accent">同一个物体</span>上，效果互相抵消；作用力与反作用力分别作用在<span class="text-accent">两个物体</span>上，各自改变各自物体的运动状态，<span class="text-accent">不能抵消</span>，也就谈不上平衡。</div>
 </div>
 
 ---
-
-# 课堂小结
+title: 课堂小结
+---
 
 <div class="page-grow">
 <div class="half-grid">

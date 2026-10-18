@@ -99,7 +99,7 @@ clicks: 2
 
 <div v-click="1"><Latex tex="a_n = \dfrac{v^2}{r}" /> 只由 <Latex tex="v" />、<Latex tex="r" /> 决定，两次完全相同 —— <b>D 对</b>。</div>
 
-<div v-click="2" class="key">答案 <b>AD</b>。洛伦兹力<b>不做功 ⟹ 速率不变</b>；但它的方向总在变。</div>
+<div v-click="2" class="tip-hint">答案 <b>AD</b>。洛伦兹力<b>不做功 ⟹ 速率不变</b>；但它的方向总在变。</div>
 
 </div>
 
@@ -158,7 +158,7 @@ clicks: 2
 
 <div v-click="1">电荷守恒 <Latex tex="q_a + q_b + q_c = 0" />：<Latex tex="a" />、<Latex tex="b" /> 都带正电 ⟹ <Latex tex="c" /> 必然带负电 —— <b>C 对</b>。</div>
 
-<div v-click="2" class="key">答案 <b>BC</b>。半径 <Latex tex="R = \dfrac{p}{qB}" /> 相等只说明 <Latex tex="\dfrac{p}{q}" /> 相同，电荷量可以不同 —— <b>D 错</b>。</div>
+<div v-click="2" class="tip-hint">答案 <b>BC</b>。半径 <Latex tex="R = \dfrac{p}{qB}" /> 相等只说明 <Latex tex="\dfrac{p}{q}" /> 相同，电荷量可以不同 —— <b>D 错</b>。</div>
 
 </div>
 
@@ -207,9 +207,9 @@ layout: base-flex
 clicks: 2
 ---
 
-<div class="split-wide qp-solve">
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1.4fr) minmax(0, 1fr);--hint-pad-y:.5rem">
 
-<div class="stack stack-tight">
+<div class="stack stack-tight" style="gap:.3rem">
 
 <div><b>例 3</b> 绳断之后，只剩洛伦兹力</div>
 
@@ -217,7 +217,7 @@ clicks: 2
 
 <div v-click="1">洛伦兹力提供向心力 <Latex tex="qvB = \dfrac{mv^2}{r'}" /> ⟹ <Latex tex="r' = \dfrac{mv}{qB}" />。绳断前是绳子的拉力提供向心力，<Latex tex="v" /> 与 <Latex tex="L" /> 之间没有固定关系 ⟹ <Latex tex="r'" /> 与 <Latex tex="L" /> 无必然联系 —— <b>D 对</b>。</div>
 
-<div v-click="2" class="key">答案 <b>D</b>。周期 <Latex tex="T = \dfrac{2\pi m}{qB}" /> 只由 <Latex tex="m" />、<Latex tex="q" />、<Latex tex="B" /> 决定 —— <b>C 错</b>。</div>
+<div v-click="2" class="tip-hint">答案 <b>D</b>。周期 <Latex tex="T = \dfrac{2\pi m}{qB}" /> 只由 <Latex tex="m" />、<Latex tex="q" />、<Latex tex="B" /> 决定 —— <b>C 错</b>。</div>
 
 </div>
 
@@ -274,9 +274,9 @@ clicks: 2
 
 <div>赤道处地磁场水平向北：洛伦兹力始终垂直于速度、<b>不做功</b> ⟹ 落地时的速率与不带电时相同 —— <b>A 对、B 错</b>。</div>
 
-<div v-click="1">抛出瞬间速度向东 ⟹ 洛伦兹力竖直向上；此后它的方向随速度一起转、<b>始终垂直于速度</b>。正电荷被"托"住，空中时间变长，落地点偏东，在 <Latex tex="a" /> 的东侧 —— <b>D 错</b>。</div>
+<div v-click="1">抛出瞬间速度向东 ⟹ 洛伦兹力竖直向上；此后它的方向随速度一起转、<b>始终垂直于速度</b>。正电荷所受的洛伦兹力有竖直向上的分量，空中时间变长，落地点偏东，在 <Latex tex="a" /> 的东侧 —— <b>D 错</b>。</div>
 
-<div v-click="2" class="key">答案 <b>A</b>。负电荷受力方向相反，落地点在 <Latex tex="a" /> 的西侧 —— <b>C 错</b>。</div>
+<div v-click="2" class="tip-hint">答案 <b>A</b>。负电荷受力方向相反，落地点在 <Latex tex="a" /> 的西侧 —— <b>C 错</b>。</div>
 
 </div>
 
@@ -325,9 +325,9 @@ layout: base-flex
 clicks: 2
 ---
 
-<div class="split-wide qp-solve">
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1.45fr) minmax(0, 1fr);--hint-pad-y:.5rem">
 
-<div class="stack stack-tight">
+<div class="stack stack-tight" style="gap:.3rem">
 
 <div><b>例 5</b> 管中小球的受力与运动</div>
 
@@ -335,7 +335,7 @@ clicks: 2
 
 <div v-click="1">竖直方向恒力 <Latex tex="qvB - mg" /> 保持不变 ⟹ 竖直方向<b>匀加速</b>；水平方向匀速 ⟹ 合运动是抛物线 —— <b>B 错、D 对</b>。</div>
 
-<div v-click="2" class="key">答案 <b>D</b>。洛伦兹力的总功仍为零，只是竖直分量做正功、水平分量做等量负功：机械能的增加来自<b>维持管匀速的外力做功</b> —— <b>A、C 都错</b>。</div>
+<div v-click="2" class="tip-hint">答案 <b>D</b>。洛伦兹力的总功仍为零，只是竖直分量做正功、水平分量做等量负功：机械能的增加来自<b>维持管匀速的外力做功</b> —— <b>A、C 都错</b>。</div>
 
 </div>
 
@@ -361,7 +361,7 @@ clicks: 2
 
 静止释放时只有重力、竖直下落；一旦有了速度，洛伦兹力就把轨迹向右侧拉弯；速度方向一变，洛伦兹力的方向又跟着变。
 
-<div class="key">速度决定力、力又反过来改变速度，方程<b>自相耦合</b>，高中手段解不动。</div>
+<div class="tip-hint">速度决定力、力又反过来改变速度，方程<b>自相耦合</b>，高中手段解不动。</div>
 
 </div>
 
@@ -371,7 +371,7 @@ clicks: 2
 clicks: 3
 ---
 
-# 把速度记成两笔账
+# 把速度分解成匀速直线分量与匀速圆周分量
 
 <div class="page-grow">
 
@@ -383,9 +383,9 @@ clicks: 3
 clicks: 2
 ---
 
-# 让重力全程消失
+# 用一个恒定分速度抵消重力
 
-<div class="qp-page">
+<div class="qp-page" style="--page-gap:.5rem;--hint-pad-y:.5rem">
 
 <div>只要取 <Latex tex="f_{\text{平}} = mg" />，也就是 <Latex tex="qv_{\text{平}}B = mg" />：</div>
 
@@ -399,7 +399,7 @@ clicks: 2
 
 </div>
 
-<div v-click="2" class="key">重力被 <Latex tex="f_{\text{平}}" /> 一分一秒地抵消掉，剩下的合力 <Latex tex="f_{\text{圆}}" /> 永远垂直于 <Latex tex="v_{\text{圆}}" />、大小恒定 ⟹ 这一部分必定是<b>匀速圆周运动</b>。</div>
+<div v-click="2" class="tip-hint">重力被 <Latex tex="f_{\text{平}}" /> 一分一秒地抵消掉，剩下的合力 <Latex tex="f_{\text{圆}}" /> 永远垂直于 <Latex tex="v_{\text{圆}}" />、大小恒定 ⟹ 这一部分必定是<b>匀速圆周运动</b>。</div>
 
 </div>
 
@@ -411,7 +411,7 @@ clicks: 2
 
 <div class="qp-page">
 
-<div>释放瞬间真实速度为 <Latex tex="0" />，而 <Latex tex="v_{\text{实}} = v_{\text{平}} + v_{\text{圆}0}" />：借了一个向右的 <Latex tex="v_{\text{平}}" />，就必须还一个<b>等大、水平向左</b>的 <Latex tex="v_{\text{圆}0}" />。</div>
+<div>释放瞬间真实速度为 <Latex tex="0" />，而 <Latex tex="v_{\text{实}} = v_{\text{平}} + v_{\text{圆}0}" />：取一个向右的 <Latex tex="v_{\text{平}}" />，就必须同时取一个<b>等大、水平向左</b>的 <Latex tex="v_{\text{圆}0}" />。</div>
 
 <div v-click="1" class="half-grid">
 
@@ -421,7 +421,7 @@ clicks: 2
 
 <Latex tex="v_{\text{平}} = \dfrac{mg}{qB}" display />
 
-方向水平向右，决定整体的"漂移"。
+方向水平向右，决定整体的漂移。
 
 </div>
 
@@ -455,7 +455,7 @@ clicks: 3
 
 <div v-click="1">一边以 <Latex tex="v_{\text{平}}" /> 匀速向右漂移，一边绕圆心以 <Latex tex="v_{\text{圆}}" /> 匀速转圈 —— 两者叠加才是真实速度。</div>
 
-<div v-click="3" class="key">尖点处两分速度反向 ⟹ <Latex tex="v = 0" />、合力只剩 <Latex tex="mg" />；最低点同向 ⟹ <Latex tex="v_{\max} = 2v_{\text{平}}" />。</div>
+<div v-click="3" class="tip-hint">尖点处两分速度反向 ⟹ <Latex tex="v = 0" />、合力只剩 <Latex tex="mg" />；最低点同向 ⟹ <Latex tex="v_{\max} = 2v_{\text{平}}" />。</div>
 
 </div>
 
@@ -493,7 +493,7 @@ clicks: 2
 
 <div v-click="1">用动能定理复核一遍：<Latex tex="\Delta E_k = \dfrac{1}{2}m v_{\max}^2 = \dfrac{1}{2}m (2v_{\text{平}})^2 = 2mv_{\text{平}}^2" />；重力做功 <Latex tex="W_G = mgh_{\max} = mg\cdot 2R = 2mv_{\text{平}}^2" />，两者自洽。</div>
 
-<div v-click="2" class="key">全过程只需 <Latex tex="v_{\text{平}} = \dfrac{mg}{qB}" /> 一个量，深度、最大速度、周期全都由它和 <Latex tex="R" /> 直接读出，不必解方程。</div>
+<div v-click="2" class="tip-hint">全过程只需 <Latex tex="v_{\text{平}} = \dfrac{mg}{qB}" /> 一个量，深度、最大速度、周期全都由它和 <Latex tex="R" /> 直接读出，不必解方程。</div>
 
 </div>
 
@@ -503,7 +503,7 @@ clicks: 1
 
 # 什么时候能用，什么时候不能用
 
-<div class="qp-page">
+<div class="qp-page" style="--page-gap:.5rem;--hint-pad-y:.5rem">
 
 <div class="stack">
 
@@ -519,11 +519,11 @@ clicks: 1
 
 <div>常见模型里 <Latex tex="q" /> 不变 —— 重力 <Latex tex="mg" /> 配匀强磁场 <Latex tex="B" /> 是最典型的一例。</div>
 
-<div class="mini-note">（磁场一旦不再匀强，这个比值就随位置改变，"恒定"这一条也就不成立了。）</div>
+<div class="mini-note">磁场不再匀强时，这个比值随位置改变，无法保持恒定。</div>
 
 </div>
 
-<div v-click="1" class="key">两分速率各自不变，但夹角在变 ⟹ <b>总动能 ≠ 两分动能之和</b>（差交叉项 <Latex tex="m\,v_{\text{平}}\cdot v_{\text{圆}}" />）。</div>
+<div v-click="1" class="warn-hint">两分速率各自不变，但夹角在变 ⟹ <b>总动能 ≠ 两分动能之和</b>（差交叉项 <Latex tex="m\,v_{\text{平}}\cdot v_{\text{圆}}" />）。</div>
 
 </div>
 
@@ -537,7 +537,7 @@ clicks: 1
 
 <div><mdi-numeric-2-circle class="text-xl text-accent inline-block align-middle mr-1" />抵消掉之后，把剩下的那一部分单独拿出来看它自己怎么演化（这里就是匀速圆周）。</div>
 
-<div class="key">处理这类问题的出发点：<b>先把恒力"消掉"，再看剩下的运动</b>。</div>
+<div class="tip-hint">处理这类问题的出发点：<b>先把恒力"消掉"，再看剩下的运动</b>。</div>
 
 </div>
 
@@ -587,7 +587,7 @@ layout: base-flex
 clicks: 3
 ---
 
-# 一条轨迹里的四边形
+# $r = R$ 时：出射点的位置
 
 <div class="qp-page">
 
@@ -599,7 +599,7 @@ clicks: 3
 
 <div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">取 <Latex tex="r = R" />：四边 <Latex tex="OA = AC = CP = PO = R" /> ⟹ <Latex tex="OACP" /> 是<b>菱形</b>。</div>
 
-<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="key">菱形 ⟹ <Latex tex="\overrightarrow{OP} = \overrightarrow{AC}" />：无论从哪儿入射，<Latex tex="P" /> 都落在 <Latex tex="O" /> 正下方 <Latex tex="R" /> 处的最低点。</div>
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">菱形 ⟹ <Latex tex="\overrightarrow{OP} = \overrightarrow{AC}" />：无论从哪儿入射，<Latex tex="P" /> 都落在 <Latex tex="O" /> 正下方 <Latex tex="R" /> 处的最低点。</div>
 
 </div>
 

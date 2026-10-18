@@ -423,7 +423,9 @@ const fLabelPos = computed<Point>(() => ({
 }
 
 .wp-fig {
-  flex: 0 0 18.5rem;
+  /* 图幅收到 14.5rem：本页 题干 + 图 + 结论气泡 竖向超界，图按比例收窄后 360→283px，
+     图内标注仍按最后一排看得清给足（渲染 ≈ 0.91 倍用户单位） */
+  flex: 0 0 14.5rem;
   min-width: 0;
 }
 

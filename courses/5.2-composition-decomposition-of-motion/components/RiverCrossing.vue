@@ -414,9 +414,6 @@ const resultTip = computed(() => tip(boat.value, result.value));
   min-width: 0;
 }
 
-
-
-
 .sim-readout {
   color: var(--c-text);
   font-size: 0.86rem;

@@ -5,7 +5,7 @@
 > **props 全在这份笔记与下面的专篇里，不用去读 `.vue` 源码**（源码注释只是实现说明）。
 > 三个大组件各有专篇，本篇只给指路：坐标轴三件套 → [`coordinate-axes.md`](./coordinate-axes.md)；弹簧测力计 → [`spring-scale.md`](./spring-scale.md)；手部 → [`grip-hand.md`](./grip-hand.md)。
 
-> 本文件 **§8** 是"图元一律用共享组件 / SVG 属性颜色无空格 / 截图验收归 Lead"三条的**正本**，其它笔记只留一句指向这里。
+> 本文件 **§8** 是"图元一律用共享组件 / SVG 属性颜色（带不带空格都行）/ 截图验收归 Lead"三条的**正本**，其它笔记只留一句指向这里。
 
 ## 1. 总表（选组件用）
 
@@ -222,21 +222,11 @@
 ## 8. 所有组件共同的规则
 
 1. **全局注册**：直接写标签，不 import；共享代码改动（`workspace/shared/`）会影响**全部课件**，改前评估影响面。
-2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、
-   `CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、
-   `CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，
-   写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。
-   `Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
-   🔴 **这些组件覆盖的图元一律别手画**（教师点名统一，手画＝各课画法不一致）：表身 / 刻度 / 挂钩（`SpringScale`）、
-   手掌 / 手指（`GripHand`）、电源 / 电阻 / 开关 / 电表 / 灯泡（`Circuit*`）、磁场叉点阵（`FieldDots` / `FieldMark`）、
-   太阳 / 地球 / 月球 / 星球（`Celestial*`）、坐标轴（`SimpleAxis` / `NumberAxis` / `CoordAxes`，见 [coordinate-axes.md](./coordinate-axes.md)）。
-   （`Circuit*` / `Field*` 的 props 与用法见 [electronic-symbols.md](./electronic-symbols.md)。）
+2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、`CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。`Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
+   🔴 **这些组件覆盖的图元一律别手画**（教师点名统一，手画＝各课画法不一致）：表身 / 刻度 / 挂钩（`SpringScale`）、手掌 / 手指（`GripHand`）、电源 / 电阻 / 开关 / 电表 / 灯泡（`Circuit*`）、磁场叉点阵（`FieldDots` / `FieldMark`）、太阳 / 地球 / 月球 / 星球（`Celestial*`）、坐标轴（`SimpleAxis` / `NumberAxis` / `CoordAxes`，见 [coordinate-axes.md](./coordinate-axes.md)）。`Circuit*` / `Field*` 的 props 与用法见 [electronic-symbols.md](./electronic-symbols.md)。
 3. **`v-click` 写在组件里照样生效**（Slidev 的 `v-click` 是全局指令，跨组件仍绑当前页）；也可以由页面传 `:step="$clicks"`。
-4. 🔴 **颜色的属性值不要带空格（正本）**：SVG 属性里写 `rgba(148,163,184,0.16)`，**不要写** `rgb(148 163 184 / 16%)`——
-   UnoCSS attributify 会把 `163` / `184` 当成工具类，编译产物里生成 `[stroke~="163"]{stroke-width:163px}`，描边被撑成几百 px、
-   图形严重变形（看着像"中央一个黑块"）。**dev server（`pnpm shots` / E2E）里看不出来，只有 `pnpm build` 产物中招**，
-   所以验收看源码 grep 与编译产物，不看截图。`<style>` / CSS 声明里的 `rgb(a b c / d)` 是合法现代 CSS，不要动。
-   机制与诊断脚本见 [svg-attributify-trap.md](./svg-attributify-trap.md)；**各专篇只留一句指向这里**。
+4. 🔴 **SVG 属性的颜色（正本）**：带空格的 `rgb(148 163 184 / 16%)` 原先会被 attributify 把分量当工具类、撑坏图形（**只有 `pnpm build` 产物中招，dev server 与截图看不出来**），**现已在 `workspace/shared/uno.config.ts` 用 `blocklist` 从源头屏蔽 ⇒ 带不带空格都行**；⛔ 别改回 `presetAttributify({ignoreAttributes})`，新增会落到 DOM 的数值属性 / prop 要补进 `NUMERIC_ATTRS`；
+   `<style>` / CSS 里的 `rgb(a b c / d)` 不要动——机制与诊断脚本见 [svg-attributify-trap.md](./svg-attributify-trap.md)，**各专篇只留一句指向这里**。
 5. **props 一多就用 ` ```comp ` 代码块**（围栏前必须留空行），写法见 [`coordinate-axes-comp-block.md`](./coordinate-axes-comp-block.md)。
 6. 分步显示用 `visible` / `v-if` 时记住：**真删真插会把已可见元素顶跑**，优先用组件提供的 `visible` 这类"只隐藏不删除"的开关。
 7. **验证分工**：执行者**不必**自己截图验收——视觉 / 截图验收由 **Lead** 做（各专篇里"改完必须截图确认"一律按这条理解）。执行者按需自查即可（`pnpm slide` 读页源码、`pnpm exec oxlint workspace/shared` 之类）；不必为一次小改跑一整轮截图。

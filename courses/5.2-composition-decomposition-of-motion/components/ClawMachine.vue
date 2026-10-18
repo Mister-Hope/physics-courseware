@@ -222,9 +222,19 @@ const yMotorText = computed(() =>
       <circle cx="206" cy="140" r="20" fill="var(--c-force)" opacity="0.7" />
       <circle cx="268" cy="118" r="17" fill="var(--c-velocity)" opacity="0.7" />
       <circle cx="336" cy="150" r="18" fill="var(--c-accent)" opacity="0.7" />
-      <circle cx="240" cy="300" r="19" fill="color-mix(in srgb, var(--c-physics) 70%, transparent)" />
+      <circle
+        cx="240"
+        cy="300"
+        r="19"
+        fill="color-mix(in srgb, var(--c-physics) 70%, transparent)"
+      />
       <circle cx="430" cy="330" r="20" fill="var(--c-ok)" opacity="0.7" />
-      <circle cx="520" cy="212" r="17" fill="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)" />
+      <circle
+        cx="520"
+        cy="212"
+        r="17"
+        fill="color-mix(in srgb, var(--c-neutral-300) 55%, transparent)"
+      />
       <!-- 目标：爪要落到的那个娃娃 -->
       <circle
         cx="612"

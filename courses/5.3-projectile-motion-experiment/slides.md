@@ -35,11 +35,10 @@ clicks: 2
 <div class="half-grid">
 <div class="pm-figure"><ProjectileModelSvg :step="$clicks" /></div>
 <div class="stack divider-l">
-<div class="card" v-click="1">
-<div class="mini-title">平抛运动</div>
-<div>忽略空气阻力，物体只受重力、以一定的速度抛出，这样的运动叫作<b>抛体运动</b>；初速度沿水平方向的抛体运动，就是<b>平抛运动</b>。</div>
-</div>
-<div class="key" v-click="2">把它分解成水平、竖直两个方向的分运动 —— 这是研究曲线运动的基本办法。</div>
+<DefinitionBox v-click="1" term="平抛运动">
+<div>忽略空气阻力，物体只受重力、以一定的速度抛出，这样的运动叫作<span class="def-term">抛体运动</span>；初速度沿水平方向的抛体运动，就是<span class="def-term">平抛运动</span>。</div>
+</DefinitionBox>
+<div class="tip-hint" v-click="2">把它分解成水平、竖直两个方向的分运动 —— 这是研究曲线运动的基本办法。</div>
 </div>
 </div>
 </div>
@@ -69,7 +68,7 @@ clicks: 2
 </div>
 </div>
 
-<div class="key" v-click="2">以抛出点为原点，<Latex tex="x" /> 轴水平、<Latex tex="y" /> 轴竖直向下：两个方向的运动各自独立、互不影响。</div>
+<div class="tip-hint" v-click="2">以抛出点为原点，<Latex tex="x" /> 轴水平、<Latex tex="y" /> 轴竖直向下：两个方向的运动各自独立、互不影响。</div>
 </div>
 
 ---
@@ -104,7 +103,7 @@ clicks: 3
 <div class="ask">照片上这些点，能看出两个方向各是什么运动？</div>
 <div v-click="1">水平方向：相邻两点的<b>横坐标变化相同</b>（<Latex tex="\Delta x" /> 相等）⇒ 水平方向做<b>匀速直线运动</b>。</div>
 <div v-click="2">竖直方向：相邻两段的位移之差<b>恒定</b>：<Latex tex="\Delta y_2 - \Delta y_1 = gT^2" /> ⇒ 竖直方向做<b>匀加速</b>运动（自由落体）。</div>
-<div class="mini-note" v-click="3">这就是 2.3 里 <Latex tex="\Delta x = aT^2" /> 那个结论 —— 换成竖直方向再用一次。</div>
+<div class="mini-note" v-click="3">竖直方向把匀变速直线运动的 <Latex tex="\Delta x = aT^2" /> 再用一次。</div>
 </div>
 </div>
 </div>
@@ -123,7 +122,7 @@ clicks: 3
 <div class="ask">照片上取 A、B、C 三点，坐标为 A(0, 0)、B(30, 20)、C(60, 50)，单位 cm，<b>频闪周期并不知道</b>。怎样求平抛的初速度？</div>
 <div v-click="1">竖直方向相邻位移之差恒定：<Latex tex="\Delta y_{BC} - \Delta y_{AB} = 0.30 - 0.20 = 0.10\ \text{m} = gT^2" />，先由它解出 <Latex tex="T = \sqrt{\dfrac{0.10}{10}}\ \text{s} = 0.1\ \text{s}" />。</div>
 <div v-click="2">水平方向匀速，A、B、C 的横坐标依次相差 <Latex tex="\Delta x = 0.30\ \text{m}" />，于是 <Latex tex="v_0 = \dfrac{\Delta x}{T} = 3\ \text{m/s}" />。</div>
-<div class="key" v-click="3">照片里没有时钟 —— 时间只能从竖直方向的 <Latex tex="\Delta y = gT^2" /> 里来。</div>
+<div class="tip-hint" v-click="3">照片里没有时钟 —— 时间只能从竖直方向的 <Latex tex="\Delta y = gT^2" /> 里来。</div>
 </div>
 </div>
 </div>
@@ -138,12 +137,12 @@ clicks: 4
 <div class="page-grow">
 <div class="split-wide pm-split">
 <div class="pm-figure"><ExamPointsSvg /></div>
-<div class="stack divider-l pm-solution">
+<div class="stack divider-l pm-solution" style="--stack-gap:.28rem">
 <div class="ask">还是这张频闪照片：求抛出点在 A 点的<b>上方多高</b>、<b>左侧多远</b>。</div>
 <div v-click="1">竖直方向是自由落体，B 是 A→C 的中间时刻：<Latex tex="v_{By} = \dfrac{y_C - y_A}{2T} = \dfrac{0.50}{0.2}\ \text{m/s} = 2.5\ \text{m/s}" />。</div>
 <div v-click="2">由 <Latex tex="v_{By} = g t_B" /> 得 <Latex tex="t_B = 0.25\ \text{s}" /> —— 从抛出点到 B 用了 0.25 s。</div>
 <div v-click="3">抛出点到 B：竖直 <Latex tex="\frac{1}{2} g t_B^2 = 0.3125\ \text{m}" />，水平 <Latex tex="v_0 t_B = 0.75\ \text{m}" />。</div>
-<div class="key" v-click="4">再减掉 A→B 这一段（竖直 0.20 m、水平 0.30 m）：抛出点在 A 上方 <Latex tex="11.25\ \text{cm}" />、左侧 <Latex tex="45\ \text{cm}" />。</div>
+<div class="tip-hint" style="--hint-pad-y:.45rem" v-click="4">再减掉 A→B 这一段（竖直 0.20 m、水平 0.30 m）：抛出点在 A 上方 <Latex tex="11.25\ \text{cm}" />、左侧 <Latex tex="45\ \text{cm}" />。</div>
 </div>
 </div>
 </div>
@@ -180,8 +179,7 @@ clicks: 2
 <div class="stack divider-l">
 <div class="ask">A 球水平抛出、B 球同时自由落下：谁先落地？</div>
 <div v-click="1">无论抛出速度多大、高度多高，两球总是<b>同时落地</b> —— 竖直方向的运动完全相同。</div>
-<div class="key" v-click="2">平抛运动在竖直方向的分运动，就是<b>自由落体运动</b>。</div>
-<div class="mini-note">点击图片可以重放</div>
+<div class="tip-hint" v-click="2">平抛运动在竖直方向的分运动，就是<b>自由落体运动</b>。</div>
 </div>
 </div>
 </div>
@@ -199,7 +197,7 @@ clicks: 2
 <div class="stack divider-l">
 <div class="ask">挡板放在哪些高度，才能让相邻两次记录的时间间隔相等？</div>
 <div v-click="1">由 <Latex tex="y = \frac{1}{2} g t^2" /> 可知 <Latex tex="y" /> 与 <Latex tex="t^2" /> 成正比：下落 <b>1 份、4 份、9 份、16 份</b>，对应的时刻正是 <Latex tex="T" />、<Latex tex="2T" />、<Latex tex="3T" />、<Latex tex="4T" />。</div>
-<div class="key" v-click="2">人为造出相等的时间间隔之后，接下来只要量<b>水平方向的间隔</b>。</div>
+<div class="tip-hint" v-click="2">人为造出相等的时间间隔之后，只要再量<b>水平方向的间隔</b>即可。</div>
 </div>
 </div>
 </div>
@@ -239,7 +237,7 @@ clicks: 2
 <div class="ask">水平方向的间隔量出来之后，怎么下结论？</div>
 <div v-click="1">四段水平间隔 <b>基本相同</b> ⇒ 水平方向做<b>匀速直线运动</b>。</div>
 <div v-click="2">由 <Latex tex="T = \sqrt{2y_1 / g}" /> 得到每次的时间间隔，于是 <Latex tex="v_0 = \dfrac{\Delta x}{T}" />。</div>
-<div class="key" v-click="2">结论：平抛运动 = 水平方向的匀速直线运动 + 竖直方向的自由落体运动。</div>
+<div class="tip-hint" v-click="2">结论：平抛运动 = 水平方向的匀速直线运动 + 竖直方向的自由落体运动。</div>
 </div>
 </div>
 </div>
@@ -257,7 +255,7 @@ clicks: 2
 <div class="stack divider-l">
 <div class="ask">白纸上的这些印迹，从哪条线开始量？</div>
 <div v-click="1">小球有半径：印迹对应的是<b>球心</b>的高度。把原点画在斜槽末端的高度，整条曲线就整体低了一个 <Latex tex="r" />。</div>
-<div class="key" v-click="2">原点要画在<b>斜槽末端上方一个小球半径 <Latex tex="r" /></b> 处 —— 那里才是抛出点。</div>
+<div class="tip-hint" v-click="2">原点要画在<b>斜槽末端上方一个小球半径 <Latex tex="r" /></b> 处 —— 那里才是抛出点。</div>
 </div>
 </div>
 </div>
