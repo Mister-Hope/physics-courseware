@@ -19,14 +19,3 @@
 .pm-split-text {
   --cols: minmax(0, 1.3fr) minmax(0, 1fr);
 }
-
-/* ── 选择题选项：两列排布，选项字母用强调色（题干与选项常显，解析点击后才出）── */
-.pm-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.3rem 1.6rem;
-}
-
-.pm-options b {
-  color: var(--c-accent);
-}

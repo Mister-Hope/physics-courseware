@@ -1,18 +1,24 @@
 <!--
-  题目页布局：题干整宽在最上 + 一侧窄示意图 + 剩余空间给解析。
+  题目页布局：题干整宽在最上 + 一侧窄示意图 + 剩余空间给解析，题与解之间带明确分界。
   给"一道题占一页、题干与题目图常显、解析点击分步出"的页面用（headmatter 写 layout: exercise-split）。
   #fig 为空时自动退化成整宽解析；具名 slot 的写法见 .agents/notes/exercise-layouts.md（⚠️ 不能写 <template #stem>）。
+
+  题—解分界（规范 B）：解析栏开头固定一个「解析」标签 + 分界线——
+  有图时是图栏与解析栏之间的竖线，无图时是标签右侧延伸的横线；标签文案可按页覆盖：
+    analysisLabel: 答案    → 换成「答案」
+    analysisLabel: false   → 整页不显示分界锚点（页面自己写分界时才这么用）
 -->
 <template>
   <div class="slidev-layout exercise-split">
     <div class="ex-stem">
       <slot name="stem" />
     </div>
-    <div class="ex-body">
+    <div class="ex-body" :class="{ 'ex-body--fig': hasFig }">
       <div v-if="hasFig" class="ex-fig">
         <slot name="fig" />
       </div>
       <div class="ex-analysis page-grow">
+        <div v-if="analysisLabel" class="qa-mark">{{ analysisLabel }}</div>
         <slot />
       </div>
     </div>
@@ -22,6 +28,14 @@
 <script setup lang="ts">
 import type { VNode } from "vue";
 import { Comment, Fragment, Text, computed, useSlots } from "vue";
+
+/** Slidev 把该页 frontmatter 直接当 props 传给布局（`frontmatterToProps`），这里只用分界标签这两个 */
+const props = defineProps<{
+  /** 分界标签文案，默认「解析」（如改「答案」） */
+  analysisLabel?: string;
+  /** 写 `true` 关掉分界锚点（标签 + 分界线），页面自己写分界时才用 */
+  hideQaMark?: boolean;
+}>();
 
 const slots = useSlots();
 
@@ -46,6 +60,18 @@ const hasRealContent = (nodes: VNode[] | undefined): boolean => {
 
 /** 题目图存在才渲染图栏；否则解析栏自动吃掉整行 */
 const hasFig = computed(() => hasRealContent(slots.fig?.()));
+
+/** 解析栏有内容才挂分界锚点（空解析栏上不该出现一个"解析"） */
+const hasAnalysis = computed(() => hasRealContent(slots.default?.()));
+
+/** 分界标签文案：默认「解析」，可按页覆盖（`analysisLabel: 答案`），`hideQaMark: true` 整个关掉 */
+const analysisLabel = computed(() => {
+  if (!hasAnalysis.value || props.hideQaMark) return "";
+
+  const configured = props.analysisLabel;
+
+  return typeof configured === "string" && configured.trim() !== "" ? configured.trim() : "解析";
+});
 </script>
 
 <style>
@@ -96,5 +122,15 @@ const hasFig = computed(() => hasRealContent(slots.fig?.()));
 .ex-analysis {
   min-width: 0;
   overflow-wrap: anywhere;
+}
+
+/* 有图：题—解分界改用两栏之间的整栏高竖线（图=题，右栏=解），标签右侧不再拉横线 */
+.ex-body--fig .ex-analysis {
+  padding-left: 1.75rem;
+  border-left: 1px solid var(--c-border);
+}
+
+.ex-body--fig .qa-mark::after {
+  content: none;
 }
 </style>

@@ -15,6 +15,38 @@
 
   /* 收敛各课写死的 rgb(59 130 246 / 14%~55%) */
   --c-accent-2-soft: rgb(59 130 246 / 14%);
+
+  /* 提示气泡（规范 F）的语义色 · 正本 —— 取值与图标取自教师提供的 GitHub Alert 调色板
+     （mdit-plugins/packages/plugin-alert/alert.css）：图标是同一批 16×16 的 SVG path，
+     但改成 CSS mask + background-color，颜色只在这里定义一次（改色不用再动图标）。 */
+  --c-hint-info: #2f81f7;
+
+  /* tip 的绿统一到系统里已有的 `--c-ok`（对/正确标签同色）：全库只留一支绿，`.ok` 存量视觉不变 */
+  --c-hint-tip: var(--c-ok);
+  --c-hint-important: #a371f7;
+  --c-hint-warn: #d29922;
+  --c-hint-danger: #f85149;
+  --c-hint-info-soft: rgb(47 129 247 / 14%);
+  --c-hint-tip-soft: var(--c-ok-soft);
+  --c-hint-important-soft: rgb(163 113 247 / 14%);
+  --c-hint-warn-soft: rgb(210 153 34 / 14%);
+  --c-hint-danger-soft: rgb(248 81 73 / 14%);
+  --c-hint-info-border: rgb(47 129 247 / 30%);
+  --c-hint-tip-border: rgb(52 211 153 / 30%);
+  --c-hint-important-border: rgb(163 113 247 / 30%);
+  --c-hint-warn-border: rgb(210 153 34 / 30%);
+  --c-hint-danger-border: rgb(248 81 73 / 30%);
+
+  /* 定义气泡（规范 D）的描边：金 / 蓝，与软底同源 */
+  --c-accent-border: rgb(226 168 70 / 26%);
+  --c-accent-2-border: rgb(59 130 246 / 26%);
+
+  /* 图标正本（16×16 SVG，只给 CSS mask 用；同一图标只写一次、颜色一律由 background-color 给） */
+  --icon-info: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z'/%3E%3C/svg%3E");
+  --icon-tip: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z'/%3E%3C/svg%3E");
+  --icon-important: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z'/%3E%3C/svg%3E");
+  --icon-warn: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z'/%3E%3C/svg%3E");
+  --icon-danger: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23000' d='M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z'/%3E%3C/svg%3E");
 }
 
 /* ── 对/错语义色：提升自 6 门课自建的对错标签（3.3 的 .pb-badge.ok、3.4 的 .verdict-bad、4.1 的 .wrong-claim 等）── */
@@ -128,4 +160,161 @@
 /* 图窄文宽变体：与 .split-wide 同挂，收窄图栏、加宽文字栏 */
 .fig-narrow {
   --cols: minmax(0, 0.85fr) minmax(0, 1.8fr);
+}
+
+/* ── 题目编号：题号写在题干开头（"练习一""例 1"），代替"例题：xxx"这类整页大标题（规范 A：练习页不写页面标题）── */
+.ex-no {
+  margin-right: 0.45rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* ── 选项组：两列选项网格（提升自 7.1 自造的 .pm-options；选项字母金色）── */
+.ex-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.6rem;
+  margin-top: 0.6rem;
+}
+
+.ex-options > * {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ex-options b {
+  color: var(--c-accent);
+}
+
+/* ── 题—解分界锚点：解析/答案区的第一行（"解析 ════"）──
+   题目页必须一眼看出"题在哪、解在哪"：无图页（题干在上、解析在下）用它拉一条横线；
+   有图的两栏页由 exercise-split 布局改用两栏之间的竖线（该布局 .ex-body--fig 规则）。
+   ⚠️ 只做分界、不做装饰：一页最多一处，且只在解析区的开头。 */
+.qa-mark {
+  display: flex;
+  flex: none;
+  gap: 0.75rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+/* 标签右侧延伸的细线：把"分界"从文字一直连到栏边 */
+.qa-mark::after {
+  content: "";
+  flex: 1 1 auto;
+  border-top: 1px solid var(--c-border);
+}
+
+/* ── 提示气泡（规范 F）：info / tip / important / warn / danger 五种语义，同形不同色 ──
+   用法：`<div class="tip-hint">提示内容</div>` —— **图标由 ::before 统一给，页面里不用写图标标签**。
+   正文按**普通文本流**排（图标绝对定位在左侧），所以正文里可以自由放 `<span>`、`<Latex>`、
+   甚至多个 `<div>` 段落，都不会被拆成一列一列（⚠️ 别改成 flex：行内 span 会变成独立 flex 项）。
+   颜色与图标取自教师提供的 GitHub Alert 调色板（色值正本见本文件 :root 的 `--c-hint-*`，
+   图标正本 `--icon-*`）；图标走 CSS mask + background-color，换色只改 token、不用动图标。
+   ⛔ `.key`（金色左竖线）是存量写法，**新页面一律用这五个**；改到旧页时顺手替换（谁改谁收敛）。 */
+.tip-hint,
+.warn-hint,
+.danger-hint,
+.info-hint,
+.important-hint {
+  /* 图标与内边距提成局部变量：::before 的垂直位置按它们和行高推导，改字号/内边距不会错位 */
+  --hint-icon-size: 1.05rem;
+  --hint-pad-y: 0.8rem;
+  position: relative;
+
+  padding: var(--hint-pad-y) 1.15rem var(--hint-pad-y) 2.95rem;
+  border: 1px solid var(--hint-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--hint-surface);
+
+  font-size: 1.02rem;
+  line-height: 1.7;
+
+  backdrop-filter: blur(16px);
+}
+
+/* 头部图标：绝对定位在左侧，**垂直对准正文首行**（首行中心 = 上内边距 + (行高 − 图标高)/2；
+   em 在伪元素里按继承来的 1.02rem 解析，1.7 必须与上面的 line-height 保持一致）。
+   形状取 `--hint-icon`、颜色取 `--hint-tone`。 */
+.tip-hint::before,
+.warn-hint::before,
+.danger-hint::before,
+.info-hint::before,
+.important-hint::before {
+  content: "";
+
+  position: absolute;
+  top: calc(var(--hint-pad-y) + (1.7em - var(--hint-icon-size)) / 2);
+  left: 1.1rem;
+
+  width: var(--hint-icon-size);
+  height: var(--hint-icon-size);
+
+  background-color: var(--hint-tone);
+
+  mask: var(--hint-icon) center / contain no-repeat;
+}
+
+/* 提示 / 结论落点：绿 · 灯泡 */
+.tip-hint {
+  --hint-tone: var(--c-hint-tip);
+  --hint-border: var(--c-hint-tip-border);
+  --hint-surface: var(--c-hint-tip-soft);
+  --hint-icon: var(--icon-tip);
+}
+
+/* 注意 / 易错：金 · 三角警示 */
+.warn-hint {
+  --hint-tone: var(--c-hint-warn);
+  --hint-border: var(--c-hint-warn-border);
+  --hint-surface: var(--c-hint-warn-soft);
+  --hint-icon: var(--icon-warn);
+}
+
+/* 错误 / 禁止：红 · 八角警示 */
+.danger-hint {
+  --hint-tone: var(--c-hint-danger);
+  --hint-border: var(--c-hint-danger-border);
+  --hint-surface: var(--c-hint-danger-soft);
+  --hint-icon: var(--icon-danger);
+}
+
+/* 补充说明 / 答案：蓝 · 信息 */
+.info-hint {
+  --hint-tone: var(--c-hint-info);
+  --hint-border: var(--c-hint-info-border);
+  --hint-surface: var(--c-hint-info-soft);
+  --hint-icon: var(--icon-info);
+}
+
+/* 重点 / 必记：紫 · 对话气泡（全库唯一的紫，只服务于这一种语义） */
+.important-hint {
+  --hint-tone: var(--c-hint-important);
+  --hint-border: var(--c-hint-important-border);
+  --hint-surface: var(--c-hint-important-soft);
+  --hint-icon: var(--icon-important);
+}
+
+/* ── 定义气泡（规范 D）的正文与并排容器；气泡本体见 workspace/shared/components/DefinitionBox.vue ── */
+
+/* 定义正文里的术语：与所在气泡同色（气泡没设 --def-tone 时退回强调金）；
+   nowrap 让术语整体换行，不被拆成"叫作机 / 械运动"两截 */
+.def-term {
+  color: var(--def-tone, var(--c-accent));
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 并排的定义气泡：两列等高 */
+.def-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: stretch;
 }

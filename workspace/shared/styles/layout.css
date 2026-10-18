@@ -18,10 +18,63 @@
   padding: 1.6rem 2.2rem 1.1rem !important;
 }
 
+/* ── 页面标题（规范 G）：两档样式，别一刀切改小 ──
+   仍然用 markdown 的 `#` —— 它同时是 Slidev 的页面标题正本（TOC / overview / PDF 书签都读它），
+   所以"两种标题"靠样式分档，而不是另做一套标题组件（两套来源必然打架）。
+
+   ① 主题型（**默认档**）：标题只是这一页的名字（"质点的定义"）→ 安静：1.25rem / 600 + 左侧暖金小条；
+   ② 驱动问题型：标题就是这一页的主问题、下面整页在答它（"什么时候能把它看成"点"？"）→ 放大：1.75rem / 700，
+      且不加装饰（问句本身够重）。
+      标记方式：该页 frontmatter 写 `class: title-ask`——Slidev 把非保留的 frontmatter 键当 props 传给布局
+      （`FRONTMATTER_FIELDS` 不含 `class`），所以这个 class 会落在 `.slidev-layout` 根元素上。
+
+   两条实现纪律：
+   ① ⛔ 不要给 h1 加 display:flex：标题里常有 `<Latex>`/`<span>`，会各自变成 flex 项、被排成一列；
+   ② 必须显式写 line-height：标题默认继承来的行高约 1.67em（33px 字 → 55px 行高），
+      既白撑高标题块、又让小条没有基准可推导（第一版就因此偏高 7px）。 */
 .slidev-layout.base-flex h1 {
+  --title-line-height: 1.25;
+  --title-bar-height: 1em;
+  position: relative;
+
   flex: 0 0 auto;
+
   margin-bottom: 0.5rem !important;
+  padding-left: 0.85rem;
+
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  line-height: var(--title-line-height);
+  letter-spacing: 0;
+}
+
+/* 安静档的小装饰：高度与位置都由上面两个变量推出来 —— 永远落在首行行盒的垂直中线上 */
+.slidev-layout.base-flex h1::before {
+  content: "";
+
+  position: absolute;
+  top: calc((var(--title-line-height) * 1em - var(--title-bar-height)) / 2);
+  left: 0;
+
+  width: 0.2rem;
+  height: var(--title-bar-height);
+  border-radius: 2rem;
+
+  background: var(--c-accent);
+}
+
+/* 驱动问题型：放大 + 去掉装饰（frontmatter `class: title-ask`） */
+.slidev-layout.base-flex.title-ask h1 {
+  padding-left: 0;
+
+  font-weight: 700 !important;
   font-size: 1.75rem !important;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.slidev-layout.base-flex.title-ask h1::before {
+  content: none;
 }
 
 /* ── 页面主体：撑满剩余高度（内容少时居中，内容多时向上向下都长满）── */
@@ -38,6 +91,20 @@
 /* 密排变体：内容多的页用 */
 .page-grow-tight {
   gap: 0.5rem;
+}
+
+/* ── 稀疏页疏排：块数 ≥2、内容占高明显不足时用 ──
+   与 .page-grow 同挂（`class="page-grow page-around"`），把几块内容均匀铺开；
+   ⛔ 内容只有一块时别用（space-* 对单个子项等于居中，救不了"空一半"的页——那种页要放大字号/图）。
+   ⛔ 也不要改共享 .page-grow 本身：它还被 exercise-split 的解析栏复用，
+   默认疏排会让每次点击都重排所有已可见元素，点击位移检查大面积告警。 */
+.page-around {
+  justify-content: space-around;
+}
+
+/* 更"顶天立地"的变体：首块贴顶、末块贴底（内容稍多、只想拉开间距时用） */
+.page-between {
+  justify-content: space-between;
 }
 
 /* ── 纵向堆叠（栅格列 / 卡片内部的常规容器）── */

@@ -28,20 +28,22 @@ chapter: 第一章 运动的描述
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 时间 位移 · 引入</div>
+<div class="page-grow page-around">
 
-<div class="ask ask-row text-xl leading-normal mt-4 justify-center">
+<div class="ask ask-row text-xl leading-normal">
   <mdi-head-question-outline class="text-2xl" />
   <span>要描述物体位置随时间的变化，我们需要哪些概念？</span>
 </div>
 
 <v-clicks>
 
-<div class="mt-7 text-lg"><mdi-map-marker class="text-accent-2 inline-block align-middle mr-2" />需要确定<span class="text-accent">位置</span>——用什么描述？</div>
+<div class="text-lg"><mdi-map-marker class="text-accent-2 inline-block align-middle mr-2" />需要确定<span class="text-accent">位置</span>——用什么描述？</div>
 
-<div class="mt-4 text-lg"><mdi-clock-time-eight-outline class="text-accent inline-block align-middle mr-2" />需要明确<span class="text-accent-2">时间</span>——"时间"到底是什么？</div>
+<div class="text-lg"><mdi-clock-time-eight-outline class="text-accent inline-block align-middle mr-2" />需要明确<span class="text-accent-2">时间</span>——"时间"到底是什么？</div>
 
 </v-clicks>
+
+</div>
 ---
 layout: base-flex
 ---
@@ -61,9 +63,21 @@ layout: base-flex
 
 <v-clicks>
 
-<div class="mt-5 text-base"><mdi-clock-outline class="text-xl text-accent-2 inline-block align-middle mr-2" /><span class="text-accent-2 font-semibold">时刻</span>："7 时 40 分""8 时 20 分"——上课开始和结束的<span class="text-accent-2">瞬间</span></div>
+<div class="def-row mt-5">
 
-<div class="mt-4 text-base"><mdi-timer-sand class="text-xl text-accent inline-block align-middle mr-2" /><span class="text-accent font-semibold">时间间隔</span>：两个时刻之间的 <Latex tex="40 \text{ min}" />——一段<span class="text-accent">持续</span>的时间</div>
+<DefinitionBox term="时刻" tone="blue">
+
+<div>"7 时 40 分""8 时 20 分"指的就是一个个<span class="def-term">时刻</span>——只标出一个瞬间，没有长短。</div>
+
+</DefinitionBox>
+
+<DefinitionBox term="时间间隔" tone="gold">
+
+<div>两个时刻之间的 <Latex tex="40 \text{ min}" />——一段有长短的<span class="def-term">时间间隔</span>。</div>
+
+</DefinitionBox>
+
+</div>
 
 <div class="mt-4 text-base">平时说的"时间"，有时指<span class="text-accent-2">时刻</span>，有时指<span class="text-accent">时间间隔</span>，要依上下文判断</div>
 
@@ -136,9 +150,11 @@ layout: base-flex
 
 <v-click>
 
-<div class="card card-highlight mt-4">
-  <div class="text-base">在参考系上建立<span class="text-accent">坐标系</span>（coordinate system）：规定<span class="text-accent-2">原点</span>、<span class="text-accent-2">正方向</span>和<span class="text-accent-2">单位长度</span></div>
-</div>
+<DefinitionBox term="坐标系" tone="gold">
+
+<div>在参考系上建立<span class="def-term">坐标系</span>（coordinate system）：规定<b>原点</b>、<b>正方向</b>和<b>单位长度</b>。</div>
+
+</DefinitionBox>
 
 </v-click>
 
@@ -179,9 +195,8 @@ layout: base-flex
 </div>
 ---
 layout: base-flex
+title: 位置的变化：选哪条路？
 ---
-
-# 位置的变化：选哪条路？
 
 <div class="ask ask-row mt-3">
   <mdi-head-question-outline class="text-xl" />
@@ -211,19 +226,15 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 位移的定义</div>
+# 位移的定义
 
 <v-click>
 
-<div class="card card-highlight">
-  <div class="text-xl font-semibold">由<span class="text-accent">初位置</span>指向<span class="text-accent">末位置</span>的<span class="text-accent-2">有向线段</span>，能准确地描述位置的变化</div>
-</div>
+<DefinitionBox term="位移" tone="blue">
 
-</v-click>
+<div>由<b>初位置</b>指向<b>末位置</b>的<b>有向线段</b>，能准确地描述位置的变化；物理学中用 <span class="def-term">位移</span>（displacement）描述物体位置的变化，用 <Latex tex="l" /> 表示。</div>
 
-<v-click>
-
-<div class="mt-5 text-lg font-semibold">物理学中用<span class="text-accent-2">位移</span>（displacement）描述物体位置的变化，用 <Latex tex="l" /> 表示</div>
+</DefinitionBox>
 
 </v-click>
 
@@ -259,6 +270,7 @@ layout: base-flex
 <DisplacementLine />
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 思考与讨论
@@ -327,9 +339,7 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="tag-icon mb-6"><mdi-lightbulb-on-outline /> 引课</div>
-
-<div class="text-lg">已经学会了两件事：用<span class="text-accent-2">坐标</span>记录位置，用<span class="text-accent">位移</span>描述位置的变化。</div>
+<div class="text-lg text-center">我们已经知晓：用<span class="text-accent-2">坐标</span>记录位置，用<span class="text-accent">位移</span>描述位置的变化。</div>
 
 <div class="ask ask-row text-3xl leading-normal mt-6 justify-center">
   <mdi-head-question-outline class="text-3xl" />
@@ -392,6 +402,7 @@ view: { width: 320, height: 240 }
 </div>
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # $x$-$t$ 图像能读出什么？
@@ -439,11 +450,9 @@ labels:
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 引课</div>
-
 <div class="text-lg">图像上的每一个点，都来自<span class="text-accent">真实测出来的数据</span>——先有测量，才有图像。</div>
 
-<div class="ask ask-row text-2xl leading-normal mt-5 justify-center">
+<div class="ask ask-row text-2xl leading-normal mt-5">
   <mdi-head-question-outline class="text-3xl" />
   <span>高中实验室里，怎样记录物体的位置随时间的变化？</span>
 </div>
@@ -642,24 +651,17 @@ layout: base-flex
 
 </div>
 ---
-layout: base-flex
+layout: exercise-split
+clicks: 2
+title: 练习一 位移与路程
 ---
 
-# 课后练习
+<template v-slot:stem>
 
-<div class="ask ask-row mt-5">
-  <mdi-head-question-outline class="text-xl" />
-  <span>1. 物体沿 <Latex tex="x" /> 轴从 <Latex tex="x_1 = 3 \text{ m}" /> 运动到 <Latex tex="x_2 = -2 \text{ m}" />，它的位移是多少？路程能小于它吗？</span>
-</div>
+<div><b class="ex-no">练习一</b>　物体沿 <Latex tex="x" /> 轴从 <Latex tex="x_1 = 3 \text{ m}" /> 运动到 <Latex tex="x_2 = -2 \text{ m}" />，它的位移是多少？路程能小于它吗？</div>
 
-<v-click>
+</template>
 
-<div class="mt-5 text-base"><Latex tex="\Delta x = -2 - 3 = -5 \text{ m}" />：位移大小 <span class="text-accent font-semibold"><Latex tex="5 \text{ m}" /></span>，方向沿 <span class="text-accent-2"><Latex tex="x" /> 轴负方向</span></div>
+<div v-click="1"><Latex tex="\Delta x = -2 - 3 = -5 \text{ m}" />：位移大小 <span class="text-accent font-semibold"><Latex tex="5 \text{ m}" /></span>，方向沿 <span class="text-accent-2"><Latex tex="x" /> 轴负方向</span></div>
 
-</v-click>
-
-<v-click>
-
-<div class="key mt-5">路程是轨迹长度，只可能<span class="text-accent">大于或等于</span>位移大小，不可能比位移小</div>
-
-</v-click>
+<div v-click="2">路程是轨迹长度，只可能<span class="text-accent">大于或等于</span>位移大小，不可能比位移小</div>

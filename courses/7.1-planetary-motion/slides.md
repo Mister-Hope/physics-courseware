@@ -271,13 +271,14 @@ clicks: 4
 ---
 layout: exercise-split
 clicks: 2
+title: 练习一 火星绕日椭圆轨道
 ---
 
 <template v-slot:stem>
 
-<div><b class="text-accent">练习一</b>　如图所示为火星绕太阳运动的椭圆轨道，<Latex tex="M" />、<Latex tex="N" />、<Latex tex="P" /> 是火星依次经过的三个位置，<Latex tex="F_1" />、<Latex tex="F_2" /> 为椭圆的两个焦点。火星由 <Latex tex="M" /> 到 <Latex tex="N" /> 和由 <Latex tex="N" /> 到 <Latex tex="P" /> 的过程中，通过的路程相等，火星与太阳中心的连线扫过的面积分别为 <Latex tex="S_1" /> 和 <Latex tex="S_2" />。已知由 <Latex tex="M \to N \to P" /> 过程中，火星速率逐渐减小。下列判断正确的是（　　）</div>
+<div><b class="ex-no">练习一</b>　如图所示为火星绕太阳运动的椭圆轨道，<Latex tex="M" />、<Latex tex="N" />、<Latex tex="P" /> 是火星依次经过的三个位置，<Latex tex="F_1" />、<Latex tex="F_2" /> 为椭圆的两个焦点。火星由 <Latex tex="M" /> 到 <Latex tex="N" /> 和由 <Latex tex="N" /> 到 <Latex tex="P" /> 的过程中，通过的路程相等，火星与太阳中心的连线扫过的面积分别为 <Latex tex="S_1" /> 和 <Latex tex="S_2" />。已知由 <Latex tex="M \to N \to P" /> 过程中，火星速率逐渐减小。下列判断正确的是（　　）</div>
 
-<div class="pm-options">
+<div class="ex-options">
 <div><b>A.</b> 太阳位于焦点 <Latex tex="F_2" /> 处</div>
 <div><b>B.</b> <Latex tex="S_1 < S_2" /></div>
 <div><b>C.</b> <Latex tex="S_1 = S_2" /></div>
@@ -299,13 +300,14 @@ clicks: 2
 ---
 layout: exercise-split
 clicks: 2
+title: 练习二 二十四节气与地球公转
 ---
 
 <template v-slot:stem>
 
-<div><b class="text-accent">练习二</b>　二十四节气代表着地球在公转轨道上的二十四个不同位置。如图所示，地球沿椭圆轨道绕太阳运动的四个位置分别对应我国的四个节气，以下说法正确的是（　　）</div>
+<div><b class="ex-no">练习二</b>　二十四节气代表着地球在公转轨道上的二十四个不同位置。如图所示，地球沿椭圆轨道绕太阳运动的四个位置分别对应我国的四个节气，以下说法正确的是（　　）</div>
 
-<div class="pm-options">
+<div class="ex-options">
 <div><b>A.</b> 地球绕太阳做匀速率椭圆轨道运动</div>
 <div><b>B.</b> 地球从冬至到春分的时间小于公转周期的四分之一</div>
 <div><b>C.</b> 地球绕太阳运行方向（正对纸面）是顺时针</div>
@@ -327,13 +329,14 @@ clicks: 2
 ---
 layout: exercise-split
 clicks: 2
+title: 练习三 两颗类地行星的距离之比
 ---
 
 <template v-slot:stem>
 
-<div><b class="text-accent">练习三</b>　2023 年，天文学家利用凌日系外行星巡天卫星（TESS）的数据找到了恒星 TOI700 系统的第二颗类地行星 TOI700e，其表面可能存有液态水，公转周期为 <Latex tex="28" /> 天；该系统第一颗被发现的类地行星 TOI700d 的公转周期为 <Latex tex="37" /> 天。若两颗行星的轨道均视为圆形，由以上数据可知，TOI700e 与 TOI700d 到其恒星的距离之比约为（　　）</div>
+<div><b class="ex-no">练习三</b>　2023 年，天文学家利用凌日系外行星巡天卫星（TESS）的数据找到了恒星 TOI700 系统的第二颗类地行星 TOI700e，其表面可能存有液态水，公转周期为 <Latex tex="28" /> 天；该系统第一颗被发现的类地行星 TOI700d 的公转周期为 <Latex tex="37" /> 天。若两颗行星的轨道均视为圆形，由以上数据可知，TOI700e 与 TOI700d 到其恒星的距离之比约为（　　）</div>
 
-<div class="pm-options">
+<div class="ex-options">
 <div><b>A.</b> <Latex tex="0.3" /></div>
 <div><b>B.</b> <Latex tex="0.5" /></div>
 <div><b>C.</b> <Latex tex="0.8" /></div>
@@ -349,13 +352,14 @@ clicks: 2
 ---
 layout: exercise-split
 clicks: 3
+title: 练习四 月球探测器的两种轨道
 ---
 
 <template v-slot:stem>
 
-<div><b class="text-accent">练习四</b>　月球的半径为 <Latex tex="R" />，甲、乙两种探测器分别绕月球做匀速圆周运动与椭圆运动，两种轨道相切于椭圆轨道的近月点 <Latex tex="A" />。圆轨道距月球表面的高度为 <Latex tex="\dfrac{R}{2}" />，椭圆轨道的远月点 <Latex tex="B" /> 与近月点 <Latex tex="A" /> 之间的距离为 <Latex tex="6R" />。若甲的运动周期为 <Latex tex="T" />，则乙的运动周期为（　　）</div>
+<div><b class="ex-no">练习四</b>　月球的半径为 <Latex tex="R" />，甲、乙两种探测器分别绕月球做匀速圆周运动与椭圆运动，两种轨道相切于椭圆轨道的近月点 <Latex tex="A" />。圆轨道距月球表面的高度为 <Latex tex="\dfrac{R}{2}" />，椭圆轨道的远月点 <Latex tex="B" /> 与近月点 <Latex tex="A" /> 之间的距离为 <Latex tex="6R" />。若甲的运动周期为 <Latex tex="T" />，则乙的运动周期为（　　）</div>
 
-<div class="pm-options">
+<div class="ex-options">
 <div><b>A.</b> <Latex tex="3\sqrt{2}T" /></div>
 <div><b>B.</b> <Latex tex="3T" /></div>
 <div><b>C.</b> <Latex tex="2\sqrt{2}T" /></div>
@@ -379,13 +383,14 @@ clicks: 3
 ---
 layout: exercise-split
 clicks: 2
+title: 练习五 地心说与日心说
 ---
 
 <template v-slot:stem>
 
-<div><b class="text-accent">练习五</b>　探索宇宙的奥秘一直是人类孜孜不倦的追求。下列关于宇宙及星体运动的说法正确的是（　　）</div>
+<div><b class="ex-no">练习五</b>　探索宇宙的奥秘一直是人类孜孜不倦的追求。下列关于宇宙及星体运动的说法正确的是（　　）</div>
 
-<div class="pm-options">
+<div class="ex-options">
 <div><b>A.</b> 地球是宇宙的中心，太阳、月亮及其他行星都绕地球运动</div>
 <div><b>B.</b> 太阳是静止不动的，地球和其他行星都绕太阳运动</div>
 <div><b>C.</b> 地球是绕太阳运动的一颗行星</div>

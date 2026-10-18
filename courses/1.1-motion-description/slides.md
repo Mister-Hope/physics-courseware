@@ -26,9 +26,10 @@ chapter: 第一章 运动的描述
 
 ---
 layout: base-flex
+class: title-ask
 ---
 
-## 我们如何描述物体的运动？
+# 我们如何描述物体的运动？
 
 <div class="grid grid-cols-3 gap-4 mt-6">
 
@@ -72,62 +73,61 @@ layout: base-flex
 </v-click>
 ---
 layout: base-flex
+clicks: 2
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 机械运动 · 力学</div>
+<div class="page-grow page-around">
 
-<div class="page-grow">
-
-<div class="ask ask-row ask-lead justify-center">
+<div class="ask ask-row ask-lead">
   <mdi-head-question-outline class="text-2xl" />
   <span>汽车行驶、雄鹰翱翔、足球滚动……这些运动有什么共同点？</span>
 </div>
 
-<v-click>
+<div v-click="1" class="def-row">
 
-<div class="card card-highlight">
-  <div class="text-xl font-semibold">物体的<span class="text-accent">空间位置随时间变化</span>，是自然界中最简单、最基本的运动形态，叫作<span class="text-accent-2">机械运动</span>（mechanical motion）</div>
-  <div class="mt-4 text-lg">物理学中，研究物体做机械运动规律的分支叫作<span class="text-accent">力学</span>（mechanics）</div>
+<DefinitionBox term="机械运动" tone="gold">
+
+<div>物体的空间位置随时间变化，是自然界中最简单、最基本的运动形态，叫作<span class="def-term">机械运动</span>（mechanical motion）。</div>
+
+</DefinitionBox>
+
+<DefinitionBox term="力学" tone="blue">
+
+<div>物理学中，研究物体做机械运动规律的分支叫作<span class="def-term">力学</span>（mechanics）。</div>
+
+</DefinitionBox>
+
 </div>
 
-</v-click>
-
-<v-click>
-
-<div class="key mx-auto max-w-4xl">研究机械运动的过程中，物理学还创立了<span class="text-accent">科学研究的基本方法</span>——理想化模型就是其中的一种</div>
-
-</v-click>
+<div v-click="2" class="tip-hint">研究机械运动的过程中，物理学还创立了<span class="text-accent">科学研究的基本方法</span>——理想化模型就是其中的一种。</div>
 
 </div>
 ---
 layout: base-flex
+clicks: 1
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 运动的常见形态</div>
+# 运动的常见形态
 
 <div class="page-grow page-grow-tight">
 
-<div class="ask ask-row ask-lead justify-center">
+<div class="ask ask-row ask-lead">
   <mdi-head-question-outline class="text-2xl" />
   <span>同样是“位置随时间变化”，运动的方式一样吗？</span>
 </div>
 
 <MotionFormsDemo />
 
-<v-click>
-
-<div class="key mx-auto max-w-5xl"><span class="text-accent font-semibold">平动</span>各点完全相同；<span class="text-accent-2 font-semibold">转动、振动</span>各点并不相同——准确描述的困难就源于此</div>
-
-</v-click>
+<div v-click="1" class="tip-hint"><span class="text-accent font-semibold">平动</span>各点完全相同；<span class="text-accent-2 font-semibold">转动、振动</span>各点并不相同——准确描述的困难就源于此。</div>
 
 </div>
 ---
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 质点 · 物体和质点</div>
+# 雄鹰与足球的"麻烦"
 
-## 雄鹰与足球的"麻烦"
+<div class="page-grow">
 
 <div class="grid grid-cols-2 gap-8 mt-6">
 
@@ -149,13 +149,10 @@ layout: base-flex
 
 </div>
 
-<v-click>
-
-<div class="key mt-8 mx-auto max-w-4xl">我们有时关注<span class="text-accent">物体各部分的运动</span>，有时只关注<span class="text-accent-2">物体整体的运动</span>——如何描述，要看我们关注的问题是什么</div>
-
-</v-click>
+</div>
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 什么时候能把它看成"点"？
@@ -191,17 +188,13 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 质点的定义</div>
+# 质点的定义
 
-<v-click>
+<DefinitionBox v-click="1" term="质点" tone="blue">
 
-<div class="card card-highlight">
-  <div class="text-2xl font-semibold">
-    定义：<span class="text-accent">忽略物体的大小和形状</span>，把它简化为一个<span class="text-accent">具有质量</span>的点，这样的点叫作<span class="text-accent-2">质点</span>（mass point）
-  </div>
-</div>
+<div>忽略物体的大小和形状，把它简化为一个具有质量的点，这样的点叫作<span class="def-term">质点</span>（mass point）。</div>
 
-</v-click>
+</DefinitionBox>
 
 <div class="grid grid-cols-2 gap-8 mt-6">
 
@@ -228,6 +221,7 @@ layout: base-flex
 </v-click>
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 思考与讨论：香蕉球
@@ -268,14 +262,12 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-head-question-outline /> 你能不能判断？</div>
-
 <ParticleJudge />
 ---
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 小结</div>
+# 质点与理想化模型
 
 <div class="grid grid-cols-2 gap-8 mt-6">
 
@@ -298,6 +290,7 @@ layout: base-flex
 </div>
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 参考系：为什么看法不一样？
@@ -333,7 +326,7 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="tag-icon mb-4"><mdi-lightbulb-on-outline /> 运动的相对性与参考系</div>
+# 运动的相对性与参考系
 
 <div class="grid grid-cols-2 gap-8 mt-6">
 
@@ -355,19 +348,26 @@ layout: base-flex
 
 </div>
 
-<v-click>
+<div v-click="1" class="def-row">
 
-<div class="card card-highlight mt-4">
-  <div class="text-lg font-semibold">研究运动时<b>选做不动</b>的物体 → <span class="text-accent">参照物</span></div>
-  <div class="mt-2 text-lg font-semibold">相对于参照物<b>静止</b>的物体系 → <span class="text-accent-2">参考系</span>（reference frame）</div>
+<DefinitionBox term="参照物" tone="gold">
+
+<div>研究物体的运动时，选做<b>不动</b>的那个物体，叫作<span class="def-term">参照物</span>。</div>
+
+</DefinitionBox>
+
+<DefinitionBox term="参考系" tone="blue">
+
+<div>相对于参照物<b>静止</b>的物体系，叫作<span class="def-term">参考系</span>（reference frame）。</div>
+
+</DefinitionBox>
+
 </div>
-
-</v-click>
 ---
 layout: base-flex
 ---
 
-<div class="tag-icon mb-3"><mdi-lightbulb-on-outline /> 参考系的四个特点</div>
+# 参考系的四个特点
 
 <div class="page-grow">
 
@@ -409,7 +409,7 @@ layout: base-flex
 layout: base-flex
 ---
 
-<div class="tag-icon mb-3"><mdi-train-car /> 参考系演示：同一辆列车，两种看法</div>
+# 参考系演示：同一辆列车，两种看法
 
 <ReferenceFrameDemo />
 ---
@@ -450,11 +450,14 @@ layout: base-flex
 <div class="key mt-1" v-click="1">两条路都得到 <Latex tex="T_0" /> —— 但水系不用设任何一个速度</div>
 ---
 layout: base-flex
+class: title-ask
 ---
 
 # 参考系怎么选？
 
-<div class="grid grid-cols-3 gap-4 mt-6">
+<div class="page-grow page-around">
+
+<div class="grid grid-cols-3 gap-4">
 
 <v-clicks>
 
@@ -480,11 +483,9 @@ layout: base-flex
 
 </div>
 
-<v-click>
+<div v-click="1" class="tip-hint">凡是提到运动，都应该弄清楚是<span class="text-accent font-semibold">相对于哪个参考系</span>而言的。</div>
 
-<div class="key mt-8 mx-auto max-w-4xl">凡是提到运动，都应该弄清楚是<span class="text-accent font-semibold">相对于哪个参考系</span>而言的</div>
-
-</v-click>
+</div>
 ---
 layout: base-flex
 ---
@@ -515,63 +516,54 @@ layout: base-flex
 
 </div>
 ---
-layout: base-flex
+layout: exercise-split
+clicks: 2
+title: 练习一 能不能把物体看成质点
 ---
 
-# 课后练习
+<template v-slot:stem>
 
-<div class="ask ask-row ask-lead mt-5">
-  <mdi-head-question-outline class="text-xl" />
-  <span>1. 下列情况中，可以把物体看成质点的是（&nbsp;&nbsp;&nbsp;&nbsp;）</span>
+<div><b class="ex-no">练习一</b>　下列情况中，可以把物体看成质点的是（　　）</div>
+
+<div class="ex-options">
+<div><b>A.</b> 研究地球自转时，把地球看成质点</div>
+<div><b>B.</b> 研究"香蕉球"的旋转时，把足球看成质点</div>
+<div><b>C.</b> 研究列车从沈阳到北京的整体运动时，把列车看成质点</div>
+<div><b>D.</b> 研究列车通过一座桥的时间时，把列车看成质点</div>
 </div>
 
-<div class="mt-5 text-base leading-relaxed">
-  <div>A. 研究地球自转时，把地球看成质点</div>
-  <div class="mt-2">B. 研究"香蕉球"的旋转时，把足球看成质点</div>
-  <div class="mt-2">C. 研究列车从沈阳到北京的整体运动时，把列车看成质点</div>
-  <div class="mt-2">D. 研究列车通过一座桥的时间时，把列车看成质点</div>
-</div>
+</template>
 
-<v-click>
+<div v-click="1">能不能看成质点，看研究的问题是否只关心<b>整体</b>：地球自转、足球旋转、列车过桥都要看物体的形状或转动，都不能看成质点。</div>
 
-<div class="key key-blue mt-6">答案：<span class="text-accent font-semibold">C</span>——研究整体的远距离运动时，物体的形状可忽略</div>
-
-</v-click>
+<div v-click="2">列车跑长途只看整体位置，形状可以忽略——选 <b class="text-accent">C</b>。</div>
 ---
-layout: base-flex
+layout: exercise-split
 clicks: 3
+title: 练习二 两条船上的旗帜
 ---
 
-# 课后练习
+<template v-slot:stem>
 
-<div class="page-grow page-grow-tight">
+<div><b class="ex-no">练习二</b>　由于风，河岸上的旗帜向右飘；河面上两条船上的旗，一条向右、一条向左飘。两条船的运动状态是（　　）</div>
 
-<div class="ask ask-row ask-lead">
-  <mdi-head-question-outline class="text-xl" />
-  <span>2. 由于风，河岸上的旗帜向右飘；河面上两条船上的旗，一条向右、一条向左飘。两条船的运动状态是（　　）</span>
+<div class="ex-options">
+<div><b>A.</b> A 船肯定是向左运动的</div>
+<div><b>B.</b> A 船肯定是静止的</div>
+<div><b>C.</b> B 船肯定是向右运动的</div>
+<div><b>D.</b> B 船可能是静止的</div>
 </div>
 
-<div class="half-grid">
+</template>
 
-<div class="stack-tight">
-  <div class="text-sm leading-relaxed">
-    <div>A. A 船肯定是向左运动的</div>
-    <div>B. A 船肯定是静止的</div>
-    <div>C. B 船肯定是向右运动的</div>
-    <div>D. B 船可能是静止的</div>
-  </div>
+<template v-slot:fig>
 
-  <div v-click="1" class="text-sm leading-relaxed">A 船旗与风向<span class="text-accent-2 font-semibold">同向</span>——A 船可能静止、可能向左、也可能向右但比风慢，A、B 都<span class="text-danger">不能“肯定”</span></div>
+<FlagBoatsSvg :step="$clicks" />
 
-  <div v-click="2" class="text-sm leading-relaxed">B 船旗与风向<span class="text-danger font-semibold">反向</span>——B 船相对空气向左运动，说明它向右比风还快，<span class="text-accent font-semibold">肯定向右运动</span></div>
+</template>
 
-  <div v-click="3" class="key key-blue">答案：<span class="text-accent font-semibold">C</span>——旗向反映船相对空气的运动</div>
-</div>
+<div v-click="1">A 船旗与风向<b class="text-accent-2">同向</b>——A 船可能静止、也可能向左或向右但比风慢。</div>
 
-<div class="figure">
-  <FlagBoatsSvg :step="$clicks" />
-</div>
+<div v-click="2">B 船旗与风向<b class="text-danger">反向</b>——B 船向右比风还快，一定向右运动。</div>
 
-</div>
-
-</div>
+<div v-click="3">旗反映的是船相对<b>空气</b>的运动——选 <b class="text-accent">C</b>。</div>

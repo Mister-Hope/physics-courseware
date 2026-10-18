@@ -7,7 +7,9 @@ const { step = 2 } = defineProps<{
 </script>
 
 <template>
-  <svg viewBox="0 0 560 380" class="fb-svg" role="img" aria-label="旗帜题：河岸与两条船上的旗帜">
+  <!-- ⚠️ width/height 必须有：本图要被 exercise-split 的 #fig 栏用（该栏宽 = max-content），
+       只有 viewBox 的 svg 没有确定宽度，#fig 会塌成 0 宽、整张图消失（见 notes/exercise-layouts.md §1） -->
+  <svg viewBox="0 0 560 380" width="360" height="244" class="fb-svg" role="img" aria-label="旗帜题：河岸与两条船上的旗帜">
     <defs>
       <!-- 天空与水面自然深色渐变 -->
       <linearGradient id="fbs-sky" x1="0" y1="0" x2="0" y2="1">

@@ -61,7 +61,7 @@ clicks: 1
 
 # 把复杂运动拆成简单运动
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="half-grid">
 <div class="stack">
 <div class="mini-title"><mdi-vector-square class="text-xl" /> 平面运动</div>
@@ -574,7 +574,7 @@ clicks: 1
 
 # 关联速度的三步法
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="stack">
 <div>① 找<b>合速度</b>：物体实际沿哪个方向运动（一般就是它真实的运动方向）。</div>
 <div>② 沿<b>约束方向</b>分解：绳方向、杆方向，或接触面的法线方向。</div>
@@ -734,7 +734,7 @@ clicks: 1
 
 # 小结：关联速度
 
-<div class="page-grow">
+<div class="page-grow page-around">
 <div class="stack">
 <div>① 先找<b>约束</b>：绳、杆，还是接触面。</div>
 <div>② 把两端的<b>实际速度</b>沿约束方向分解。</div>
