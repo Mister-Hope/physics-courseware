@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════════════
+   机械能守恒定律 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* 本课是"文字先行"的审查稿：一页要装 4–5 步逐击文本，密度比默认紧一档。
+   只动间距 token（AGENTS 允许的密度微调口径），不动字号阶梯。 */
+:root {
+  --page-gap: 0.5rem;
+  --stack-gap: 0.45rem;
+  --hint-pad-y: 0.45rem;
+  --hint-pad-x: 1rem;
+}
+
+/* 第一版审查用：插画与交互均未实现，先以虚线框 + 文字说明占位。
+   占位只写"要画什么"，限 1–2 行；图/交互做出来之后本类与页面里的占位块一起删掉。 */
+.fig-ph {
+  display: flex;
+  align-items: center;
+
+  min-height: 2.9rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px dashed var(--c-border-glow);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
