@@ -1,0 +1,16 @@
+/* ═══════════════════════════════════════════════
+   重力势能 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/，由共享 addon（../workspace/shared）自动注入，
+   此处仅放本课特有样式
+
+   前缀按概念分组（style-guide §6）：ep- 本课唯一的一处页面栅格
+   色值一律 var(--c-*)，圆角走 var(--radius-*)；密度差异只用 :root 变量表达
+   ═══════════════════════════════════════════════ */
+
+/* ── 第 13 页例题：左图右表两栏（本题答案是填表，表格属题面必须常显；exercise-split 的图栏装不下图 + 表）── */
+.ep-table-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.5fr);
+  gap: 1.4rem;
+  align-items: start;
+}
