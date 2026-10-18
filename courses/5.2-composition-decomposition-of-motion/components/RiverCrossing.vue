@@ -21,10 +21,10 @@ const {
 }>();
 
 const VIEW_W = 760;
-const VIEW_H = 410;
+const VIEW_H = 340;
 /** 两岸与河面的像素位置 */
-const BANK_TOP = 96;
-const BANK_BOTTOM = 336;
+const BANK_TOP = 80;
+const BANK_BOTTOM = 290;
 const RIVER_H = BANK_BOTTOM - BANK_TOP;
 const START_X = 120;
 /** 箭头比例：每 1 m/s 画多长 */
@@ -141,9 +141,9 @@ const resultTip = computed(() => tip(boat.value, result.value));
       />
       <rect
         x="0"
-        y="336"
+        y="290"
         width="760"
-        height="74"
+        height="46"
         fill="color-mix(in srgb, var(--c-text-dim) 14%, transparent)"
       />
       <line
@@ -164,7 +164,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
       />
       <text
         x="24"
-        y="60"
+        y="50"
         font-family="KaTeX_Main"
         font-size="17"
         fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
@@ -173,7 +173,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
       </text>
       <text
         x="24"
-        y="386"
+        y="326"
         font-family="KaTeX_Main"
         font-size="17"
         fill="color-mix(in srgb, var(--c-neutral-300) 85%, transparent)"
@@ -183,7 +183,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
       <!-- 水流 -->
       <g opacity="0.4">
         <path
-          v-for="(y, i) in [150, 224, 298]"
+          v-for="(y, i) in [120, 185, 250]"
           :key="i"
           :d="flowXs.map((x) => `M ${x} ${y} l 16 0 M ${x + 10} ${y - 5} l 8 5 l -8 5`).join(' ')"
           fill="none"
@@ -251,7 +251,7 @@ const resultTip = computed(() => tip(boat.value, result.value));
       <line
         v-if="drift > 0.01"
         :x1="START_X"
-        :y1="366"
+        :y1="312"
         :x2="landing.x"
         :y2="366"
         stroke="color-mix(in srgb, var(--c-velocity) 80%, transparent)"
@@ -330,18 +330,41 @@ const resultTip = computed(() => tip(boat.value, result.value));
       </g>
     </svg>
     <div v-if="showPanel" class="sim-panel">
-      <label
-        >船在静水中的速度 <span class="sim-val">{{ vBoat.toFixed(1) }} m/s</span
-        ><input v-model.number="vBoat" type="range" min="1" max="3" step="0.1"
-      /></label>
-      <label
-        >水流速度 <span class="sim-val">{{ vWater.toFixed(1) }} m/s</span
-        ><input v-model.number="vWater" type="range" min="0" max="2" step="0.1"
-      /></label>
-      <label
-        >河宽 <span class="sim-val">{{ width }} m</span
-        ><input v-model.number="width" type="range" min="30" max="60" step="5"
-      /></label>
+      <CourseSlider
+        v-model="vBoat"
+        :min="1"
+        :max="3"
+        :step="0.1"
+        label="船在静水中的速度"
+        label-width="6rem"
+        layout="tight"
+      >
+        <template #value>{{ vBoat.toFixed(1) }}<Latex tex="\text{ m/s}" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="vWater"
+        :min="0"
+        :max="2"
+        :step="0.1"
+        label="水流速度"
+        label-width="6rem"
+        layout="tight"
+        accent="blue"
+      >
+        <template #value>{{ vWater.toFixed(1) }}<Latex tex="\text{ m/s}" /></template>
+      </CourseSlider>
+      <CourseSlider
+        v-model="width"
+        :min="30"
+        :max="60"
+        :step="5"
+        label="河宽"
+        label-width="6rem"
+        layout="tight"
+        accent="teal"
+      >
+        <template #value>{{ width }}<Latex tex="\text{ m}" /></template>
+      </CourseSlider>
     </div>
     <div class="sim-readout">
       <span v-if="mode === 'time'"
@@ -381,28 +404,18 @@ const resultTip = computed(() => tip(boat.value, result.value));
 .sim-panel {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.4rem;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.78rem;
+  gap: 0.3rem 1.4rem;
 }
 
-.sim-panel label {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+/* 每个滑块只占半行（共享组件的 .cs-row 是块级、默认独占一行），面板高度才收得住 */
+.sim-panel > * {
+  flex: 1 1 18rem;
+
+  min-width: 0;
 }
 
-.sim-panel input {
-  width: 6.5rem;
-}
 
-.sim-val {
-  min-width: 3.4rem;
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-}
+
 
 .sim-readout {
   color: var(--c-text);

@@ -69,6 +69,22 @@ const shipLabel = computed(() => ({
   x: (bow.value.x - 16 + shipTip.value.x) / 2,
   y: bow.value.y + 32,
 }));
+/** 单位化 */
+const unit = (v: { x: number; y: number }): { x: number; y: number } => {
+  const len = Math.hypot(v.x, v.y) || 1;
+  return { x: v.x / len, y: v.y / len };
+};
+/** 垂足（alongTip）处的直角符号：沿绳方向与沿垂线方向各取一小段 */
+const rightAngleMark = (): string => {
+  const foot = alongTip.value;
+  const along = unit({ x: bow.value.x - foot.x, y: bow.value.y - foot.y });
+  const perp = unit({ x: shipTip.value.x - foot.x, y: shipTip.value.y - foot.y });
+  const size = 12;
+  const p1 = { x: foot.x + size * along.x, y: foot.y + size * along.y };
+  const p2 = { x: foot.x + size * perp.x, y: foot.y + size * perp.y };
+  const p3 = { x: p1.x + size * perp.x, y: p1.y + size * perp.y };
+  return `M ${p1.x} ${p1.y} L ${p3.x} ${p3.y} L ${p2.x} ${p2.y}`;
+};
 const alongLabel = computed(() => ({
   x: alongTip.value.x + 24 * Math.sin(rad(theta.value)),
   y: alongTip.value.y - 24 * Math.cos(rad(theta.value)),
@@ -180,6 +196,7 @@ const alongLabel = computed(() => ({
           stroke-width="1.8"
           stroke-dasharray="7 6"
         />
+        <path :d="rightAngleMark()" fill="none" stroke="currentColor" stroke-width="1.8" opacity="0.85" />
         <text
           :x="shipLabel.x"
           :y="shipLabel.y"
@@ -207,13 +224,16 @@ const alongLabel = computed(() => ({
       </g>
     </svg>
     <div v-if="showPanel" class="sim-panel">
-      <label
-        >绳与水平方向的夹角 <span class="sim-val">{{ theta }}°</span
-        ><input v-model.number="theta" type="range" min="30" max="55" step="1"
-      /></label>
+      <CourseSlider
+        v-model="theta"
+        :min="30"
+        :max="55"
+        label="绳与水平方向的夹角"
+        label-width="11rem"
+      />
     </div>
     <div v-if="readout" class="sim-readout">
-      v<sub>船</sub> = v<sub>0</sub>/cos θ = <b>{{ vShip.toFixed(2) }} m/s</b>
+      <Latex :tex="`v_{\\text{船}} = v_0/\\cos\\theta = ${vShip.toFixed(2)}\\ \\text{m/s}`" />
     </div>
   </div>
 </template>
@@ -234,26 +254,12 @@ const alongLabel = computed(() => ({
 
 .sim-panel {
   display: flex;
-  justify-content: center;
-  color: var(--c-text-dim);
-  font-size: 0.8rem;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.sim-panel label {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
 
-.sim-panel input {
-  width: 8rem;
-}
 
-.sim-val {
-  min-width: 2.6rem;
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-}
 
 .sim-readout {
   color: var(--c-text);

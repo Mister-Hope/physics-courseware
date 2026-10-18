@@ -13,7 +13,7 @@ const { showVectors = true, showPanel = true } = defineProps<{
 }>();
 
 const VIEW_W = 760;
-const VIEW_H = 240;
+const VIEW_H = 228;
 const PANEL_W = 336;
 const LEFT_X = 20;
 const RIGHT_X = 404;
@@ -381,14 +381,23 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
       </g>
     </svg>
     <div v-if="showPanel" class="sim-panel">
-      <label
-        >人对带的速度 <span class="sim-val">{{ vWalk.toFixed(1) }} m/s</span
-        ><input v-model.number="vWalk" type="range" min="0.4" max="2" step="0.1"
-      /></label>
-      <label
-        >带对地的速度 <span class="sim-val">{{ vBelt.toFixed(1) }} m/s</span
-        ><input v-model.number="vBelt" type="range" min="0" max="2" step="0.1"
-      /></label>
+      <CourseSlider
+        v-model="vWalk"
+        :min="0.4"
+        :max="2"
+        :step="0.1"
+        label="人对带的速度"
+        label-width="8rem"
+      />
+      <CourseSlider
+        v-model="vBelt"
+        :min="0"
+        :max="2"
+        :step="0.1"
+        label="带对地的速度"
+        label-width="8rem"
+        accent="blue"
+      />
     </div>
     <div class="sim-readout">
       人对地的速度 = v<sub>人对带</sub> + v<sub>带对地</sub> = {{ vWalk.toFixed(1) }} +
@@ -414,28 +423,18 @@ const rightGroundShift = computed(() => -((phase.value * vBelt.value * SPEED_PX)
 .sim-panel {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.6rem;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.8rem;
+  gap: 0.3rem 1.4rem;
 }
 
-.sim-panel label {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+/* 每个滑块只占半行（共享组件的 .cs-row 是块级、默认独占一行），面板高度才收得住 */
+.sim-panel > * {
+  flex: 1 1 18rem;
+
+  min-width: 0;
 }
 
-.sim-panel input {
-  width: 6.5rem;
-}
 
-.sim-val {
-  min-width: 3.2rem;
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-}
+
 
 .sim-readout {
   color: var(--c-text);

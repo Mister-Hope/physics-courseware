@@ -76,7 +76,7 @@ clicks: 1
 
 <div>分别求出每个方向上的 <Latex tex="a" />、<Latex tex="v" />、<Latex tex="x" />，这个运动就描述清楚了。</div>
 
-<div class="key" v-click="1">替代法：用几个分运动"替代"原来的运动——分运动 <Latex tex="\rightleftharpoons" /> 合运动（分解 / 合成）。</div>
+<div class="key" v-click="1">把每个方向的运动分别算出来，再合起来，就是物体真实的运动。</div>
 </div>
 
 ---
@@ -144,7 +144,7 @@ clicks: 2
 <div><Latex tex="x = v_x t" display /></div>
 <div><Latex tex="y = v_y t" display /></div>
 <div v-click="1">消去 <Latex tex="t" />：<Latex tex="y = \frac{v_y}{v_x}x" /></div>
-<div class="key" v-click="2">轨迹是一条过原点的直线——斜线运动，是两个匀速直线运动"合"出来的。</div>
+<div class="key" v-click="2">轨迹是过原点的直线：两个匀速直线运动合起来，合运动也是匀速直线运动。</div>
 </div>
 
 <div class="figure"><TrajectoryPlot /></div>
@@ -221,9 +221,7 @@ layout: base-flex
 clicks: 2
 ---
 
-# 分运动都简单，合运动未必简单
-
-<div class="page-grow">
+<div class="page-grow text-xl">
 <div class="split-wide">
 <div class="stack">
 <div>1 号电机匀加速：<Latex tex="x = \frac{1}{2}at^2" /></div>
@@ -313,8 +311,8 @@ clicks: 2
 <div class="split-wide">
 <div class="stack">
 <div><Latex tex="v_{A\text{对}C} = v_{A\text{对}B} + v_{B\text{对}C}" display /></div>
-<div>把"对"读出来：<Latex tex="v_{A\text{对}B}" /> 就是<b>在 B 的参考系里看 A 的速度</b>。</div>
-<div v-click="1">在 C 系里看 B 的运动，叠加在 B 系里看 A 的运动，就是 C 系里看 A 的运动。</div>
+<div>下标读作"在谁的参考系里看"：<Latex tex="v_{A\text{对}B}" /> 是在 B 的参考系里看 A 的速度。</div>
+<div v-click="1">先看 B 相对 C 怎么动，再看 A 相对 B 怎么动，叠加起来就是 A 相对 C 的运动。</div>
 <div class="key" v-click="2">这是<b>普遍规律</b>，不是渡河专用；三个速度都是矢量，按平行四边形定则相加。</div>
 </div>
 
@@ -334,7 +332,7 @@ clicks: 1
 <div class="stack">
 <div>船对水的速度、水对岸的速度，合成起来就是<b>船对岸的速度</b>：</div>
 <div><Latex tex="v_{\text{船对岸}} = v_{\text{船对水}} + v_{\text{水对岸}}" display /></div>
-<div v-click="1">船上的人看到水几乎"静止"，岸上的人看到船一边前进一边被水带偏——两个视角都对，只是参考系不同。</div>
+<div v-click="1">以船为参考系，水以 <Latex tex="v_{\text{水对岸}}" /> 向后流；以岸为参考系，船一边前进一边被水带向下游。两个视角都是对的。</div>
 </div>
 
 <div class="figure"><VectorComposeSvg a-sub="水对岸" b-sub="船对水" r-sub="船对岸" :angle="34" /></div>
@@ -408,7 +406,7 @@ clicks: 2
 <div class="ask">想垂直到达正对岸，船头应该朝哪？</div>
 <div v-click="1">让合速度垂直河岸：船头偏向上游，与上游河岸成 <Latex tex="\theta" />，且 <Latex tex="\cos\theta = \frac{v_{\text{水}}}{v_{\text{船}}}" />。</div>
 <div v-click="1"><Latex tex="t = \frac{d}{\sqrt{v_{\text{船}}^2 - v_{\text{水}}^2}}" display /></div>
-<div class="key" v-click="2">前提是 <Latex tex="v_{\text{船}} > v_{\text{水}}" />——船比水快，才可能"走正"。</div>
+<div class="key" v-click="2">只有 <Latex tex="v_{\text{船}} > v_{\text{水}}" /> 时，船头才能斜到让合速度垂直河岸。</div>
 </div>
 </div>
 </div>
@@ -509,7 +507,7 @@ clicks: 1
 # 关联速度
 
 <div class="page-grow">
-<div class="ask">绳、杆、接触面——两个物体的速度是怎么互相"牵制"的？</div>
+<div class="ask">绳、杆、接触面——两个物体的速度之间存在什么关系？</div>
 
 <div class="three-col">
 <div class="scene">
@@ -531,7 +529,7 @@ clicks: 1
 </div>
 </div>
 
-<div class="key" v-click="1">先找"约束方向"——速度在这个方向上的分量，两端必须一样。</div>
+<div class="key" v-click="1">口诀：沿绳、沿杆、垂直于接触面——位移、速度、加速度时刻相等。</div>
 </div>
 
 ---
@@ -583,7 +581,7 @@ clicks: 1
 <div>③ 列式：两端沿约束方向的分量相等。</div>
 </div>
 
-<div class="key" v-click="1">"沿约束方向的分量相等"——绳、杆、接触面，都是这一句话。</div>
+<div class="key" v-click="1">三类约束的列式依据相同：两端沿约束方向的分量相等。</div>
 </div>
 
 ---
@@ -597,27 +595,8 @@ clicks: 3
 <div class="split-wide">
 <div class="stack">
 <div>人在高于水面的岸边用绳把船拉向岸边，绳与水平方向的夹角为 <Latex tex="\theta" />，人收绳的速度为 <Latex tex="v_0" />。求船靠岸的速度 <Latex tex="v_{\text{船}}" />。</div>
-<div v-click="2">船速沿绳方向的分量等于收绳速度：<Latex tex="v_{\text{船}}\cos\theta = v_0" />。</div>
-<div class="key" v-click="3"><Latex tex="v_{\text{船}} = \frac{v_0}{\cos\theta}" />，船比绳快。</div>
-</div>
-
-<div class="figure"><RopePull :show-decomp="$clicks >= 1" :show-panel="false" /></div>
-</div>
-</div>
-
----
-layout: base-flex
-clicks: 2
----
-
-# θ 变小时，船会怎样？
-
-<div class="page-grow">
-<div class="split-wide">
-<div class="stack">
-<div>船越靠岸，绳与水平方向的夹角 <Latex tex="\theta" /> 越大，<Latex tex="\cos\theta" /> 越小。</div>
-<div v-click="1">由 <Latex tex="v_{\text{船}} = \frac{v_0}{\cos\theta}" />：<b>同样的收绳速度，越靠岸船冲得越快</b>。</div>
-<div class="key" v-click="2">所以拉船靠岸要收得慢；<Latex tex="\theta \to 90^\circ" /> 时 <Latex tex="v_{\text{船}}" /> 会趋于很大——模型在提醒我们"别硬拽"。</div>
+<div v-click="2">沿绳方向的分量相等：<Latex tex="v_{\text{船}}\cos\theta = v_0" />，得 <Latex tex="v_{\text{船}} = \frac{v_0}{\cos\theta}" />，船比绳快。</div>
+<div v-click="3">船越靠岸，<Latex tex="\theta" /> 越大、<Latex tex="\cos\theta" /> 越小，同样的收绳速度下船速越大，所以靠岸时要放慢收绳。</div>
 </div>
 
 <div class="figure"><RopePull /></div>
@@ -635,30 +614,11 @@ clicks: 3
 <div class="split-wide">
 <div class="stack">
 <div>两根互相垂直的杆上各套一个环 A、B，用一根不可伸长的绳相连。A 沿竖直杆以速度 <Latex tex="v_A" /> 下滑，当绳与竖直杆的夹角为 <Latex tex="\theta" /> 时，求 B 的速度 <Latex tex="v_B" />。</div>
-<div v-click="2">两端沿绳方向的分量相等：<Latex tex="v_A\cos\theta = v_B\sin\theta" />。</div>
-<div class="key" v-click="3"><Latex tex="v_B = v_A\cot\theta" />。</div>
+<div v-click="2">沿绳方向的分量相等：<Latex tex="v_A\cos\theta = v_B\sin\theta" />，得 <Latex tex="v_B = v_A\cot\theta" />。</div>
+<div class="key" v-click="3">绳越接近竖直，<Latex tex="\cot\theta" /> 越大，B 被拉得越快；绳越接近水平，B 越慢。</div>
 </div>
 
 <div class="figure"><RopeRing :show-decomp="$clicks >= 1" :show-panel="false" /></div>
-</div>
-</div>
-
----
-layout: base-flex
-clicks: 2
----
-
-# B 什么时候快，什么时候慢？
-
-<div class="page-grow">
-<div class="split-wide">
-<div class="stack">
-<div v-click="1">绳越接近竖直（<Latex tex="\theta \to 0" />）：<Latex tex="\cot\theta" /> 很大，B 被拽得飞快。</div>
-<div v-click="1">绳越接近水平（<Latex tex="\theta \to 90^\circ" />）：<Latex tex="\cot\theta \to 0" />，B 几乎不动。</div>
-<div class="key" v-click="2">式子不用背：把<b>两端的速度都沿绳分解</b>，写"分量相等"，答案自己就出来了。</div>
-</div>
-
-<div class="figure"><RopeRing :show-panel="false" /></div>
 </div>
 </div>
 
@@ -673,30 +633,11 @@ clicks: 3
 <div class="split-wide">
 <div class="stack">
 <div>光滑墙角处，斜劈放在光滑水平地面上，球夹在竖直墙与斜劈斜面之间。球沿墙以速度 <Latex tex="v_0" /> 下落，斜面与水平方向的夹角为 <Latex tex="\theta" />，求斜劈向右滑动的速度 <Latex tex="v_{\text{劈}}" />。</div>
-<div v-click="2">接触面既不嵌进去也不分开：<b>沿法线方向的分量相等</b>，<Latex tex="v_0\cos\theta = v_{\text{劈}}\sin\theta" />。</div>
-<div class="key" v-click="3"><Latex tex="v_{\text{劈}} = v_0\cot\theta" />。</div>
+<div v-click="2">接触面不嵌入也不分离，所以沿法线方向的分量相等：<Latex tex="v_0\cos\theta = v_{\text{劈}}\sin\theta" />。</div>
+<div class="key" v-click="3"><Latex tex="v_{\text{劈}} = v_0\cot\theta" />：斜面越平，斜劈被推得越快。</div>
 </div>
 
 <div class="figure"><WedgeBall :show-decomp="$clicks >= 1" :show-panel="false" /></div>
-</div>
-</div>
-
----
-layout: base-flex
-clicks: 2
----
-
-# 斜面越平，斜劈跑得越快
-
-<div class="page-grow">
-<div class="split-wide">
-<div class="stack">
-<div v-click="1"><Latex tex="\theta" /> 小（斜面接近水平）：<Latex tex="\cot\theta" /> 大——球稍微落一点，斜劈就被推出去很远。</div>
-<div v-click="1"><Latex tex="\theta \to 90^\circ" />（斜面接近竖直）：<Latex tex="\cot\theta \to 0" />，斜劈几乎不动。</div>
-<div class="key" v-click="2">三种约束，找的都是同一样东西：<b>沿"不能变化"的那个方向的分量</b>。</div>
-</div>
-
-<div class="figure"><WedgeBall :show-panel="false" /></div>
 </div>
 </div>
 
@@ -728,7 +669,7 @@ clicks: 1
 </div>
 </div>
 
-<div class="key" v-click="1">分量必须相等，是因为这个约束在那一瞬间"不允许变化"。</div>
+<div class="key" v-click="1">三个模型，一句口诀：沿绳、沿杆、垂直于接触面——位移、速度、加速度时刻相等。</div>
 </div>
 
 ---
@@ -749,7 +690,43 @@ clicks: 3
 <div class="figure"><RodWall :show-decomp="$clicks >= 1" :show-panel="false" /></div>
 </div>
 </div>
+---
+layout: base-flex
+clicks: 2
+---
 
+# 位移的关系，决定速度与加速度的关系
+
+<div class="page-grow">
+<div class="split-wide">
+<div class="stack">
+<div>正方形贴墙下落 <Latex tex="\Delta y" />，斜面体必须右移 <Latex tex="\Delta x" />，才能让它俩始终贴着：<Latex tex="\Delta y = \Delta x\tan\theta" />。这个关系对<b>任意一段位移</b>都成立。</div>
+<div v-click="1">两边同除以 <Latex tex="\Delta t" />，就得到速度的关系 <Latex tex="v = v_{\text{斜}}\tan\theta" />。</div>
+<div class="key" v-click="2">关系在每一时刻都成立，所以加速度也满足同一关系：<Latex tex="a = A\cot\theta" />。</div>
+</div>
+
+<div class="figure"><WedgeSquare label-block="v" label-wedge="v斜" /></div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 例题：正方形以加速度 $A$ 下落
+
+<div class="page-grow">
+<div class="split-wide">
+<div class="stack">
+<div>正方形木块一侧贴竖直墙，另一侧压在倾角为 <Latex tex="\theta" /> 的斜面上。木块以加速度 <Latex tex="A" /> 竖直下落，求斜面体向右的加速度 <Latex tex="a" />。</div>
+<div v-click="2">接触面不嵌入也不分离，所以沿法线方向的分量相等：<Latex tex="A\cos\theta = a\sin\theta" />。</div>
+<div class="key" v-click="3"><Latex tex="a = A\cot\theta" />。</div>
+</div>
+
+<div class="figure"><WedgeSquare :show-triangle="false" /></div>
+</div>
+</div>
 ---
 layout: base-flex
 clicks: 1
@@ -762,8 +739,26 @@ clicks: 1
 <div>① 先找<b>约束</b>：绳、杆，还是接触面。</div>
 <div>② 把两端的<b>实际速度</b>沿约束方向分解。</div>
 <div>③ 写"分量相等"，解出待求速度。</div>
-<div>④ 常见坑：把合速度当成沿绳速度；不分解就硬套公式。</div>
 </div>
 
-<div class="key" v-click="1">三个模型，一句话：沿"不能变化"的方向，两端分量相等。</div>
+<div class="key" v-click="1">口诀：沿绳、沿杆、垂直于接触面——位移、速度、加速度时刻相等。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+---
+
+# 练习：两辆小车与天花板定滑轮
+
+<div class="page-grow">
+<div class="split-wide">
+<div class="stack">
+<div>水平面上有两辆小车 A、B，用一根细绳跨过天花板上的定滑轮相连。A 车以速度 <Latex tex="v_0" /> 沿水平面向<b>左</b>运动（远离滑轮），把 B 车拉着走。此时两段绳与水平方向的夹角分别为 <Latex tex="\theta_A" />、<Latex tex="\theta_B" />，求 B 车的速度。</div>
+<div v-click="1">两端沿绳方向的分量相等：<Latex tex="v_A\cos\theta_A = v_B\cos\theta_B" />。</div>
+<div class="key" v-click="2"><Latex tex="v_B = v_0\frac{\cos\theta_A}{\cos\theta_B}" />。</div>
+</div>
+
+<div class="figure"><TwoCartsPulley :show-arrows="$clicks >= 1" /></div>
+</div>
 </div>

@@ -68,6 +68,40 @@ const bShare = computed(() => ({
 /** 两条垂线：速度箭头尖端 → 分量的末端 */
 const aPerp = computed(() => ({ from: aTip.value, to: aShare.value.to }));
 const bPerp = computed(() => ({ from: bTip.value, to: bShare.value.to }));
+
+/**
+ * 垂足处的直角符号：以垂足为顶点，沿"绳方向"与"垂线方向"各取一小段，
+ * 画一个边长 12 的小方角，标明这条虚线确实垂直于绳。
+ */
+const rightAngleMark = (foot: { x: number; y: number }, along: { x: number; y: number }, perp: { x: number; y: number }): string => {
+  const size = 12;
+  const p1 = { x: foot.x + size * along.x, y: foot.y + size * along.y };
+  const p2 = { x: foot.x + size * perp.x, y: foot.y + size * perp.y };
+  const p3 = { x: p1.x + size * perp.x, y: p1.y + size * perp.y };
+  return `M ${p1.x} ${p1.y} L ${p3.x} ${p3.y} L ${p2.x} ${p2.y}`;
+};
+/** 垂足处两个方向的单位矢量：沿绳（指向分量末端）与沿垂线（指向速度尖端） */
+const unitTo = (
+  from: { x: number; y: number },
+  to: { x: number; y: number },
+): { x: number; y: number } => {
+  const len = Math.hypot(to.x - from.x, to.y - from.y) || 1;
+  return { x: (to.x - from.x) / len, y: (to.y - from.y) / len };
+};
+const aMark = computed(() =>
+  rightAngleMark(
+    aShare.value.to,
+    unitTo(aShare.value.from, aShare.value.to),
+    unitTo(aShare.value.to, aPerp.value.from),
+  ),
+);
+const bMark = computed(() =>
+  rightAngleMark(
+    bShare.value.to,
+    unitTo(bShare.value.from, bShare.value.to),
+    unitTo(bShare.value.to, bPerp.value.from),
+  ),
+);
 /** 说明文字放在绳中点右侧（避开绳与杆） */
 const noteLabel = computed(() => ({
   x: (ringA.value.x + ringB.value.x) / 2 + 26 * cosT.value,
@@ -246,13 +280,16 @@ const arcEnd = computed(() => ({
       </g>
     </svg>
     <div v-if="showPanel" class="sim-panel">
-      <label
-        >绳与竖直杆的夹角 <span class="sim-val">{{ theta }}°</span
-        ><input v-model.number="theta" type="range" min="20" max="70" step="1"
-      /></label>
+      <CourseSlider
+        v-model="theta"
+        :min="20"
+        :max="70"
+        label="绳与竖直杆的夹角"
+        label-width="11rem"
+      />
     </div>
     <div v-if="readout" class="sim-readout">
-      v<sub>B</sub> = v<sub>A</sub>·cot θ = <b>{{ vB.toFixed(2) }} v<sub>A</sub></b>
+      <Latex :tex="`v_B = v_A\\cot\\theta = ${vB.toFixed(2)}\\,v_A`" />
     </div>
   </div>
 </template>
@@ -273,26 +310,12 @@ const arcEnd = computed(() => ({
 
 .sim-panel {
   display: flex;
-  justify-content: center;
-  color: var(--c-text-dim);
-  font-size: 0.8rem;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.sim-panel label {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
 
-.sim-panel input {
-  width: 8rem;
-}
 
-.sim-val {
-  min-width: 2.6rem;
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-}
 
 .sim-readout {
   color: var(--c-text);

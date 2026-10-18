@@ -252,13 +252,16 @@ const arcRadius = 70;
       </g>
     </svg>
     <div v-if="showPanel" class="sim-panel">
-      <label
-        >斜面与水平方向的夹角 <span class="sim-val">{{ theta }}°</span
-        ><input v-model.number="theta" type="range" min="20" max="70" step="1"
-      /></label>
+      <CourseSlider
+        v-model="theta"
+        :min="20"
+        :max="70"
+        label="斜面与水平方向的夹角"
+        label-width="12rem"
+      />
     </div>
     <div v-if="readout" class="sim-readout">
-      v<sub>劈</sub> = v<sub>0</sub>·cot θ = <b>{{ vWedge.toFixed(2) }} v<sub>0</sub></b>
+      <Latex :tex="`v_{\\text{劈}} = v_0\\cot\\theta = ${vWedge.toFixed(2)}\\,v_0`" />
     </div>
   </div>
 </template>
@@ -279,26 +282,12 @@ const arcRadius = 70;
 
 .sim-panel {
   display: flex;
-  justify-content: center;
-  color: var(--c-text-dim);
-  font-size: 0.8rem;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.sim-panel label {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
 
-.sim-panel input {
-  width: 8rem;
-}
 
-.sim-val {
-  min-width: 2.6rem;
-  color: var(--c-accent);
-  font-variant-numeric: tabular-nums;
-}
 
 .sim-readout {
   color: var(--c-text);
