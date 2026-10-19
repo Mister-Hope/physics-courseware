@@ -700,6 +700,7 @@ clicks: 1
 
 ---
 clicks: 3
+zoom: 0.8
 ---
 
 <div class="split-wide qp-solve" style="--cols: minmax(0, 1fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
