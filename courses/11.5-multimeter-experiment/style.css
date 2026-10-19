@@ -3,3 +3,11 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 接线示意图的容器：把图宽收住，图高才不会把正文顶出画布
+   （.mv-fig / .mc-fig 里的 svg 是 width:100%、height:auto，宽度一收高度就跟着收） */
+.wire-fig {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}

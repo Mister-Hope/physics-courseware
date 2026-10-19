@@ -3,3 +3,8 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 课堂小结：6 条内容要一行放得下 —— 整页内容 zoom 到 0.9（避免每条末尾两三个字换行） */
+.summary-compact {
+  zoom: 0.9;
+}

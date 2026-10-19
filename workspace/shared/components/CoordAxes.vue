@@ -346,11 +346,34 @@ const layout = computed(() => {
       ? sizes.tickLength + sizes.tick * 1.35 + sizes.axis * 1.2 + sizes.gap * 1.1
       : sizes.tickLength + sizes.tick * 1.7 + sizes.gap * 0.6
     : sizes.gap * 0.8;
+
+  // ⚠️ 容器被挤得极窄时，这些 pad（屏幕 px 口径 × `unitScale`）会放大到**超过画布本身**：
+  // 绘图区翻负 ⇒ 轴翻转、`<clipPath>` 拿到负宽高（SVG 非法值，控制台刷错，曲线还会被整块裁没）。
+  // 这里按比例把 pad 回缩，保证绘图区至少占画布的 MIN_PLOT_RATIO —— 正常宽度下这个分支**不触发**，
+  // 几何与改前逐位一致（2026-10 第十一章踩到：720×250 的图挤到 186px 时裁剪高度是 −127.7）。
+  const MIN_PLOT_RATIO = 0.28;
+  let pads = { left: padLeft, right: padRight, top: padTop, bottom: padBottom };
+  const padSumY = pads.top + pads.bottom;
+
+  if (padSumY > height * (1 - MIN_PLOT_RATIO)) {
+    const factor = (height * (1 - MIN_PLOT_RATIO)) / padSumY;
+
+    pads = { ...pads, top: pads.top * factor, bottom: pads.bottom * factor };
+  }
+
+  const padSumX = pads.left + pads.right;
+
+  if (padSumX > width * (1 - MIN_PLOT_RATIO)) {
+    const factor = (width * (1 - MIN_PLOT_RATIO)) / padSumX;
+
+    pads = { ...pads, left: pads.left * factor, right: pads.right * factor };
+  }
+
   const plot = {
-    left: round2(padLeft),
-    right: round2(width - padRight),
-    top: round2(padTop),
-    bottom: round2(height - padBottom),
+    left: round2(pads.left),
+    right: round2(width - pads.right),
+    top: round2(pads.top),
+    bottom: round2(height - pads.bottom),
   };
   const screenX = (x: number): number =>
     plot.left + ((x - area.xMin) / spanX) * (plot.right - plot.left);
@@ -661,6 +684,24 @@ const originMark = computed(() => {
 
 const clipId = `coord-axes-clip-${useId()}`;
 
+/**
+ * 曲线/填充的裁剪区域。
+ *
+ * ⚠️ 容器被挤得过窄时 `layout.plot` 会**翻负**：上下边距是**屏幕 px 口径**的常数，再按 `unitScale = view 宽 ÷ 实测容器宽` 换算回
+ * viewBox 单位 —— 图越窄，边距在 viewBox 里越大， 一旦 `实测宽 < (padTop + padBottom) × view宽 ÷ view高`，`bottom - top`
+ * 就是负数。
+ *
+ * 负宽高在 SVG 里是**非法值**：控制台刷 `A negative value is not valid`，而且裁剪路径变空 ⇒ 曲线会被整块裁没。所以这里钳到
+ * 0，并在退化时**整段不用裁剪** —— 宁可曲线溢出画框，也不能整块消失。
+ */
+const clipBox = computed(() => {
+  const { plot } = layout.value;
+  const width = Math.max(0, plot.right - plot.left);
+  const height = Math.max(0, plot.bottom - plot.top);
+
+  return { x: plot.left, y: plot.top, width, height, usable: width > 0 && height > 0 };
+});
+
 const ariaLabel = computed(() => {
   const xName = xAxis.quantity ? `${xAxis.quantity} ${xAxis.unit ?? ""}`.trim() : "横轴";
   const yName = yAxis.quantity ? `${yAxis.quantity} ${yAxis.unit ?? ""}`.trim() : "纵轴";
@@ -678,14 +719,9 @@ const ariaLabel = computed(() => {
       role="img"
       :aria-label="ariaLabel"
     >
-      <defs>
+      <defs v-if="clipBox.usable">
         <clipPath :id="clipId">
-          <rect
-            :x="layout.plot.left"
-            :y="layout.plot.top"
-            :width="layout.plot.right - layout.plot.left"
-            :height="layout.plot.bottom - layout.plot.top"
-          />
+          <rect :x="clipBox.x" :y="clipBox.y" :width="clipBox.width" :height="clipBox.height" />
         </clipPath>
       </defs>
       <g v-if="gridSegments.length > 0" stroke="var(--c-border)" stroke-width="1">
@@ -764,7 +800,7 @@ const ariaLabel = computed(() => {
           O
         </text>
       </g>
-      <g :clip-path="`url(#${clipId})`">
+      <g :clip-path="clipBox.usable ? `url(#${clipId})` : undefined">
         <polygon
           v-for="area in layerItems.areas"
           :key="area.key"

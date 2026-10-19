@@ -3,3 +3,27 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 例题页的图位：例题还会替换，先用带虚线框的文字占位（教师要求） */
+.fig-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 7rem;
+  padding: 0.9rem;
+
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-align: center;
+
+  background: rgb(148 163 184 / 6%);
+  border: 1px dashed var(--c-border);
+  border-radius: var(--radius-md);
+}
+
+/* 第 3、4 页：图 + 结论两块内容本来就满页，块间距再收一档，免得把提问顶到大标题上 */
+.page-grow-tight .stack {
+  gap: 0.4rem;
+}

@@ -1,14 +1,16 @@
 <script setup lang="ts">
 /**
- * 第 7 页：串、并联等效电阻交互实验。拖动 R₁、R₂（1–20 Ω）， 串联 R = R₁ + R₂、并联 R = R₁R₂/(R₁+R₂) 全部按真实公式实时计算，
- * 结论句里的数值也随滑块变化。
+ * 串、并联等效电阻实验台：拖动 R₁、R₂（1–20 Ω），串联 R = R₁ + R₂、并联 R = R₁R₂/(R₁+R₂) 全部按真实公式实时计算。
+ * 读数区是固定列 grid（标签 / 公式 / 数值三列，数值列定宽右对齐），拖动时不会把旁边的元素顶跑。
  */
 import { computed, ref } from "vue";
 
 const r1 = ref(6);
 const r2 = ref(12);
 
+/** 串联等效电阻 R = R₁ + R₂ */
 const rSeries = computed(() => r1.value + r2.value);
+/** 并联等效电阻 R = R₁R₂/(R₁+R₂) */
 const rParallel = computed(() => (r1.value * r2.value) / (r1.value + r2.value));
 const minR = computed(() => Math.min(r1.value, r2.value));
 const maxR = computed(() => Math.max(r1.value, r2.value));
@@ -43,15 +45,17 @@ const maxR = computed(() => Math.max(r1.value, r2.value));
     <div class="sp-out">
       <div class="sp-row">
         <span class="sp-k">串联</span>
-        <Latex :tex="`R = R_1 + R_2 = ${rSeries.toFixed(1)}\\ \\Omega`" />
+        <Latex tex="R = R_1 + R_2" />
+        <Latex :tex="`= ${rSeries.toFixed(1)}\\ \\Omega`" />
       </div>
       <div class="sp-row">
         <span class="sp-k">并联</span>
-        <Latex :tex="`R = \\dfrac{R_1 R_2}{R_1 + R_2} = ${rParallel.toFixed(2)}\\ \\Omega`" />
+        <Latex tex="R = \dfrac{R_1 R_2}{R_1 + R_2}" />
+        <Latex :tex="`= ${rParallel.toFixed(2)}\\ \\Omega`" />
       </div>
       <div class="sp-note">
-        串联总电阻比两电阻中较大的 <Latex :tex="`${maxR}\\ \\Omega`" /> 还大；
-        并联总电阻比两电阻中较小的 <Latex :tex="`${minR}\\ \\Omega`" /> 还小。
+        串联总电阻大于其中较大的 <Latex :tex="`${maxR}\\ \\Omega`" />；并联总电阻小于其中较小的
+        <Latex :tex="`${minR}\\ \\Omega`" />。
       </div>
     </div>
   </div>
@@ -77,14 +81,19 @@ const maxR = computed(() => Math.max(r1.value, r2.value));
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
 }
+/* 固定列：标签 / 公式 / 数值（数值列定宽右对齐），拖动滑块时读数不会顶跑别的元素 */
 .sp-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr) 7rem;
   align-items: center;
   gap: 0.7rem;
   font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+.sp-row > :last-child {
+  text-align: right;
 }
 .sp-k {
-  flex: 0 0 3.2rem;
   font-size: 0.85rem;
   color: var(--c-text-dim);
   text-align: center;

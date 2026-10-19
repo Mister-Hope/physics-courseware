@@ -2,69 +2,113 @@
 import { computed, ref } from "vue";
 
 /**
- * 第 3 页交互：U-I 图像。滑块改电阻 R 得到不同倾斜程度的直线，滑块改工作点电流 I， 图上标出该点并实时读出电压 U 与比值 U/I —— 由真实公式 U = IR 计算，比值恒等于
- * R。
+ * 第 4 页交互：同一个导体的 U–I 图线。 两条直线是两个导体本身（A：R = 5 ohm，B：R = 10 ohm，固定不变）； 滑块只改工作点电流 I，U 由真实关系 U = RI 算出
+ * —— 比值 U/I 恒等于 A 的电阻，与 I、U 取多少无关。
  */
-const r = ref(10);
-const i = ref(0.3);
+const current = ref(0.3);
 
-const uMax = 12.5;
-const iMax = 0.6;
+const rA = 5;
+const rB = 10;
 
-const u = computed(() => r.value * i.value);
-const ratio = computed(() => u.value / i.value);
+const u = computed(() => rA * current.value);
+const ratio = computed(() => u.value / current.value);
 
-const line = computed(() => [
-  { x: 0, y: 0 },
-  { x: iMax, y: Math.min(r.value * iMax, uMax) },
-]);
-const point = computed(() => ({ x: i.value, y: u.value, math: "P", color: "var(--c-accent)" }));
+const curves = [
+  {
+    points: [
+      { x: 0, y: 0 },
+      { x: 0.5, y: rA * 0.5 },
+    ],
+    color: "var(--c-accent-2)",
+    width: 3.5,
+  },
+  {
+    points: [
+      { x: 0, y: 0 },
+      { x: 0.5, y: rB * 0.5 },
+    ],
+    color: "var(--c-accent)",
+    width: 3.5,
+  },
+];
+
+const point = computed(() => ({
+  x: current.value,
+  y: u.value,
+  math: "P",
+  color: "var(--c-physics)",
+  labelAt: "top-right" as const,
+}));
 </script>
 
 <template>
   <div class="res-ui">
     <div class="res-ui-chart">
       <SimpleAxis
-        :x-max="iMax"
-        :y-max="uMax"
+        :x-max="0.56"
+        :y-max="5.6"
         :x-axis="{ quantity: 'I', unit: 'A' }"
         :y-axis="{ quantity: 'U', unit: 'V' }"
-        :curves="[{ points: line, color: 'var(--c-accent-2)' }]"
+        :curves="curves"
         :point="point"
-        :guides="{ color: 'var(--c-accent)' }"
-        :ticks="{ x: [0.2, 0.4, 0.6], y: [4, 8, 12] }"
-        :view="{ width: 560, height: 250 }"
-      />
+        :guides="{ color: 'var(--c-physics)' }"
+        :ticks="{ x: [0.1, 0.2, 0.3, 0.4, 0.5], y: [1, 2, 3, 4, 5] }"
+        :view="{ width: 480, height: 500 }"
+      >
+        <template #overlay="{ x, y }">
+          <g font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-text-dim)">
+            <line
+              :x1="x(0.26)"
+              :y1="y(0.42)"
+              :x2="x(0.33)"
+              :y2="y(0.42)"
+              stroke="var(--c-accent-2)"
+              stroke-width="2.6"
+              stroke-linecap="round"
+            />
+            <text :x="x(0.345)" :y="y(0.42) + 5">A</text>
+            <line
+              :x1="x(0.4)"
+              :y1="y(0.42)"
+              :x2="x(0.47)"
+              :y2="y(0.42)"
+              stroke="var(--c-accent)"
+              stroke-width="2.6"
+              stroke-linecap="round"
+            />
+            <text :x="x(0.485)" :y="y(0.42) + 5">B</text>
+          </g>
+        </template>
+      </SimpleAxis>
     </div>
     <div class="res-ui-panel">
       <CourseSlider
-        v-model="r"
-        :min="2"
-        :max="20"
-        :step="0.5"
-        label="电阻"
-        label-tex="R"
-        accent="gold"
-        label-width="3.4rem"
-      >
-        <template #value>{{ r.toFixed(1) }}<Latex tex="\ \Omega" /></template>
-      </CourseSlider>
-      <CourseSlider
-        v-model="i"
-        :min="0.05"
-        :max="0.6"
-        :step="0.01"
+        v-model="current"
+        :min="0.1"
+        :max="0.5"
+        :step="0.02"
         label="电流"
         label-tex="I"
         accent="blue"
         label-width="3.4rem"
       >
-        <template #value>{{ i.toFixed(2) }}<Latex tex="\ \text{A}" /></template>
+        <template #value>{{ current.toFixed(2) }}<Latex tex="\ \text{A}" /></template>
       </CourseSlider>
-      <div class="res-ui-readout">
-        <div><Latex :tex="`U = ${u.toFixed(1)}\\ \\text{V}`" /></div>
-        <div><Latex :tex="`\\dfrac{U}{I} = ${ratio.toFixed(1)}\\ \\Omega`" /></div>
+      <div class="res-readout">
+        <div class="res-cell">
+          <span class="res-k"><Latex tex="I" /></span>
+          <span class="res-v">{{ current.toFixed(2) }}<Latex tex="\ \text{A}" /></span>
+        </div>
+        <div class="res-cell">
+          <span class="res-k"><Latex tex="U" /></span>
+          <span class="res-v">{{ u.toFixed(2) }}<Latex tex="\ \text{V}" /></span>
+        </div>
+        <div class="res-cell">
+          <span class="res-k"><Latex tex="U/I" /></span>
+          <span class="res-v">{{ ratio.toFixed(1) }}<Latex tex="\ \Omega" /></span>
+        </div>
       </div>
+      <slot />
     </div>
   </div>
 </template>
@@ -72,8 +116,10 @@ const point = computed(() => ({ x: i.value, y: u.value, math: "P", color: "var(-
 <style scoped>
 .res-ui {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.4rem;
   align-items: center;
+  height: 100%;
+  min-width: 0;
 }
 
 .res-ui-chart {
@@ -82,15 +128,30 @@ const point = computed(() => ({ x: i.value, y: u.value, math: "P", color: "var(-
 }
 
 .res-ui-panel {
-  width: 15.5rem;
+  width: 21rem;
   display: grid;
-  gap: 0.5rem;
+  gap: 0.7rem;
+  align-content: center;
 }
 
-.res-ui-readout {
+.res-readout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.res-cell {
   display: flex;
-  gap: 1.6rem;
-  justify-content: center;
-  font-size: 1.2rem;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.res-k {
+  color: var(--c-text-dim);
+}
+
+.res-v {
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
 }
 </style>

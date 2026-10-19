@@ -1,25 +1,123 @@
+<!--
+  第 1 页封面装饰（第一课时·功 精修美化版）
+  Slidev 封面右下角装饰图：力与位移成角时做功的示意图（严防 x 与 α 重合）
+-->
 <script setup lang="ts">
-/** 第 1 页封面装饰（第一课时·功）：物块受斜向拉力 F、沿水平方向发生一段位移 x， 夹角 α 的弧画在"力的作用点＝物块几何中心"上——弧的两条边分别与位移方向、F 方向共线。 只表现"功"这一个意象（秒表 / W·t⁻¹ 之类功率内容属第二课时，不再出现在封面）。 */
-const O = { x: 62, y: 106 }; // 物块几何中心：力与位移都从这里起笔
-const ANG = (34 * Math.PI) / 180; // F 与位移方向的夹角
-const F_LEN = 86;
+const Y_GROUND = 128;
+
+// 物块：几何中心 O(62, 106)，宽 52，高 44
+const O = { x: 62, y: 106 };
+const BLOCK_W = 52;
+const BLOCK_H = 44;
+const BLOCK_RX = 8;
+const BLOCK_X = O.x - BLOCK_W / 2; // 36
+const BLOCK_Y = O.y - BLOCK_H / 2; // 84
+
+// 水平位移 x：起点 O(62, 106)，长度 92 px，终点 (154, 106)
 const X_LEN = 92;
-const R = 44; // 夹角弧半径
-const fTip = { x: O.x + F_LEN * Math.cos(ANG), y: O.y - F_LEN * Math.sin(ANG) };
 const xTip = { x: O.x + X_LEN, y: O.y };
-const arcFrom = { x: O.x + R, y: O.y };
-const arcTo = { x: O.x + R * Math.cos(ANG), y: O.y - R * Math.sin(ANG) };
+
+// 斜向拉力 F：倾角 34°，长度 86 px
+const ANG = (34 * Math.PI) / 180;
+const F_LEN = 86;
+const fTip = {
+  x: O.x + F_LEN * Math.cos(ANG), // ~133.3
+  y: O.y - F_LEN * Math.sin(ANG), // ~57.9
+};
+
+// 夹角 α 弧线（半径 40 px）
+const R = 40;
+const arcFrom = { x: O.x + R, y: O.y }; // (102, 106)
+const arcTo = {
+  x: O.x + R * Math.cos(ANG), // ~95.2
+  y: O.y - R * Math.sin(ANG), // ~83.6
+};
 const arcPath = `M ${arcFrom.x.toFixed(1)} ${arcFrom.y.toFixed(1)} A ${R} ${R} 0 0 0 ${arcTo.x.toFixed(1)} ${arcTo.y.toFixed(1)}`;
-const alphaAt = { x: O.x + (R + 15) * Math.cos(ANG / 2), y: O.y - (R + 15) * Math.sin(ANG / 2) };
+
+// 夹角 α 标注：靠近弧线平分角（17°），距离 O 点 27 px，位于弧线内侧，完全不干扰位移 x
+const alphaAt = {
+  x: O.x + (R - 14) * Math.cos(ANG / 2), // ~86.8
+  y: O.y - (R - 14) * Math.sin(ANG / 2) + 2, // ~98.4
+};
+
+// 文字光晕
+const HALO = {
+  stroke: "var(--c-bg, #0f1425)",
+  "stroke-width": 3.4,
+  "paint-order": "stroke",
+} as const;
 </script>
 
 <template>
-  <svg viewBox="0 0 230 150" width="205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="力与位移成角时做功的示意图">
-    <SurfaceHatch :from="{ x: 20, y: 128 }" :to="{ x: 196, y: 128 }" side="below" :thickness="10" :gap="17" />
-    <rect x="36" y="84" width="52" height="44" rx="9" fill="var(--c-surface-solid)" stroke="currentColor" stroke-width="2" opacity="0.85" />
-    <CourseArrow :from="O" :to="xTip" stroke="var(--c-velocity)" :stroke-width="2.6" stroke-dasharray="8 6" label="x" :label-dy="-11" />
-    <CourseArrow :from="O" :to="fTip" stroke="var(--c-accent)" :stroke-width="3.2" label="F" :label-dx="9" :label-dy="-12" />
-    <path :d="arcPath" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.55" />
-    <text :x="alphaAt.x" :y="alphaAt.y" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="currentColor" opacity="0.75">α</text>
+  <svg viewBox="0 0 230 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="力与位移成角时做功的示意图" class="select-none overflow-visible">
+    <defs>
+      <!-- 物块渐变 -->
+      <linearGradient id="work-block-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="var(--c-surface-solid, #1e293b)" stop-opacity="0.95" />
+        <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
+      </linearGradient>
+    </defs>
+
+    <!-- 1. 地面剖面线 -->
+    <SurfaceHatch
+      :from="{ x: 20, y: Y_GROUND }"
+      :to="{ x: 206, y: Y_GROUND }"
+      side="below"
+      :thickness="10"
+      :gap="17"
+      color="rgba(148, 163, 184, 0.45)"
+      :line-width="2.2"
+      :hatch-width="1.2"
+    />
+
+    <!-- 2. 滑块 -->
+    <g>
+      <!-- 阴影 -->
+      <rect :x="BLOCK_X + 2" :y="Y_GROUND - 2" :width="BLOCK_W - 4" :height="3" rx="1.5" fill="rgba(0, 0, 0, 0.4)" />
+      <!-- 主滑块 -->
+      <rect
+        :x="BLOCK_X"
+        :y="BLOCK_Y"
+        :width="BLOCK_W"
+        :height="BLOCK_H"
+        :rx="BLOCK_RX"
+        fill="url(#work-block-grad)"
+        stroke="rgba(148, 163, 184, 0.75)"
+        stroke-width="2"
+      />
+      <!-- 顶边微高光 -->
+      <line
+        :x1="BLOCK_X + 6"
+        :y1="BLOCK_Y + 1.2"
+        :x2="BLOCK_X + BLOCK_W - 6"
+        :y2="BLOCK_Y + 1.2"
+        stroke="rgba(255, 255, 255, 0.3)"
+        stroke-width="1"
+        stroke-linecap="round"
+      />
+      <!-- 几何中心受力锚点 -->
+      <circle :cx="O.x" :cy="O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent, #e2a846)" stroke-width="1.4" />
+      <circle :cx="O.x" :cy="O.y" r="1.2" fill="var(--c-accent, #e2a846)" />
+    </g>
+
+    <!-- 3. 水平位移 x 矢量（位移文字靠近箭头前端，彻底杜绝与夹角 α 重叠） -->
+    <CourseArrow
+      :from="O"
+      :to="xTip"
+      stroke="var(--c-velocity, #38bdf8)"
+      :stroke-width="2.6"
+      stroke-dasharray="8 6"
+      label="x"
+      :label-dx="30"
+      :label-dy="-11"
+      :head-size="8.5"
+    />
+
+    <!-- 4. 夹角 α 弧线与标注（紧凑放置在 O 点弧线内侧，与 x 标号错开 50px 以上） -->
+    <path :d="arcPath" fill="none" stroke="var(--c-accent, #e2a846)" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
+    <text :x="alphaAt.x" :y="alphaAt.y" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent, #e2a846)" :style="HALO">α</text>
+
+    <!-- 5. 斜向拉力 F 矢量 -->
+    <CourseArrow :from="O" :to="fTip" stroke="var(--c-accent, #e2a846)" :stroke-width="3.2" label="F" :label-dx="9" :label-dy="-12" :head-size="10" />
   </svg>
 </template>

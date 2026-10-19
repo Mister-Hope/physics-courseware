@@ -34,6 +34,14 @@ if (courseDirs.length === 0) {
       continue;
     }
 
+    // 只有写了 slides.md 的目录才算课件（口径与 `scripts/course-lookup.ts` 一致）：
+    // 欠费/未动工的骨架目录有 package.json 却没有 slides.md，直接 `slidev build` 会中断整轮构建
+    // （2026-10 第十一章收尾时 13.1-magnetic-field-lines 就卡在这里）。
+    if (!existsSync(path.join(coursePath, "slides.md"))) {
+      console.log(`⏭️  跳过 ${name}：还没有 slides.md`);
+      continue;
+    }
+
     console.log(`\n📦 构建课件: ${name} ...`);
     execSync("pnpm build", { cwd: coursePath, stdio: "inherit" });
 

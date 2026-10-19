@@ -3,3 +3,81 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 数据表（第 7 页实验数据）与对照表（第 9 页两个式子） */
+.cw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.05rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cw-table th,
+.cw-table td {
+  padding: 0.14rem 0.7rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: center;
+  line-height: 1.35;
+}
+
+.cw-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+.cw-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cw-table--left th,
+.cw-table--left td {
+  text-align: left;
+}
+
+/* 第 18 页伏安特性曲线图例 */
+/* 图例：整句作为一个整体换行（`flex: 0 0 auto`），⛔ 不要让它被压窄 —— 否则会在词中间折断 */
+.cv-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 2rem;
+  color: var(--c-text-dim);
+  font-size: 1rem;
+}
+
+.cv-legend span {
+  flex: 0 0 auto;
+}
+
+/* ⚠️ 别用 inline-flex：条目里的 <Latex> 会各自变成 flex 项、文字被拆成碎片 */
+.cv-legend span {
+  display: inline-block;
+}
+
+.cv-swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 0.22rem;
+  margin-right: 0.5rem;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
+/* 第 8 页：三条实验结论（内容少的结论页，整体放大） */
+.conclusion-line {
+  font-size: 1.22rem;
+  line-height: 1.7;
+}
+
+/* 气泡 / 定义框里的行内公式会把行盒撑高（KaTeX 默认 1.21em）：
+   压回 1em 并收紧行高，否则一句话要占三行的竖向空间（AGENTS「坑速查」记过） */
+.def-box .katex,
+.tip-hint .katex,
+.info-hint .katex,
+.warn-hint .katex,
+.important-hint .katex,
+.danger-hint .katex {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1;
+}

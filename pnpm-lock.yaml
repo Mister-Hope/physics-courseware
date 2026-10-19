@@ -500,6 +500,12 @@ importers:
       '@slidev/theme-default':
         specifier: 'catalog:'
         version: 0.25.0
+      '@types/three':
+        specifier: 'catalog:'
+        version: 0.186.0
+      three:
+        specifier: 'catalog:'
+        version: 0.186.1
       vue:
         specifier: 'catalog:'
         version: 3.5.44(typescript@6.0.3)

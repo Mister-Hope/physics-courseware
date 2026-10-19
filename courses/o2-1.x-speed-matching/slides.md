@@ -615,3 +615,114 @@ clicks: 3
 
 </div>
 
+---
+layout: base-flex
+zoom: 0.9
+---
+
+<div class="qp-page" style="font-size: .84em">
+
+<div>
+
+**例 7** 如图，水平地面上有一辆小车，车上固定一根竖直光滑绝缘细管，管长 <Latex tex="L=\dfrac{2v_0^2}{9g}" />。管底有一个质量为 <Latex tex="m" />、电荷量为 <Latex tex="+q" /> 的绝缘小球 <Latex tex="A" />（直径略小于细管）。管口所在水平面 <Latex tex="MN" /> 的<b>下方</b>有垂直纸面向里的匀强磁场。小车始终以速度 <Latex tex="v_0" /> 向右匀速运动；以小球刚经过磁场的竖直边界为计时起点，以此时刻管口处为坐标原点 <Latex tex="O" /> 建立 <Latex tex="xOy" /> 坐标系（<Latex tex="y" /> 轴与磁场边界重合）。小球刚离开管口时竖直向上的分速度 <Latex tex="v_y=\dfrac{2}{3}v_0" />。求：
+
+</div>
+
+<div class="half-grid items-center">
+
+<div class="stack stack-tight">
+
+<div>(1) 匀强磁场的磁感应强度大小和绝缘管对小球做的总功；</div>
+
+<div>(2) 小球经过 <Latex tex="x" /> 轴时的坐标；</div>
+
+<div>(3) 若第一象限存在与第四象限大小和方向都相同的匀强磁场，同时绝缘管内均匀紧密排满了大量相对绝缘管静止、与小球 <Latex tex="A" /> 完全相同的绝缘小球（不考虑小球之间的相互静电力），求能达到纵坐标 <Latex tex="y=\dfrac{9v_0^2}{16g}" /> 的小球个数与总小球个数的比值。</div>
+
+</div>
+
+<div class="divider-l qp-fig">
+
+<CartTubeField />
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 0.95fr) minmax(0, 1.25fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
+
+<div><b>例 7（1）</b>　管内的匀加速：求 <Latex tex="B" /> 与管做的功</div>
+
+<div v-click="1">竖直方向受力恒定 ⟹ 球在管内<b>匀加速</b>上升：<Latex tex="qv_0B-mg=ma" />。由 <Latex tex="v_y^2=2aL" /> 得 <Latex tex="a=g" />，于是 <Latex tex="qv_0B=2mg" />，<Latex tex="B=\dfrac{2mg}{qv_0}" />。</div>
+
+<div v-click="2">洛伦兹力不做功，用<b>动能定理</b>：<Latex tex="W-mgL=\dfrac{1}{2}mv_y^2" />，得 <Latex tex="W=mgL+\dfrac{1}{2}mv_y^2=\dfrac{4}{9}mv_0^2" /> —— 这正是管壁弹力随管前进做的功 <Latex tex="qv_0B\,L" />。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-corner">
+
+<CartTubeField :step="$clicks" />
+
+</div>
+
+</div>
+
+---
+clicks: 1
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 0.95fr) minmax(0, 1.25fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
+
+<div><b>例 7（2）</b>　小球经过 <Latex tex="x" /> 轴时的坐标</div>
+
+<div>在管内：<Latex tex="t_1=\dfrac{v_y}{g}=\dfrac{2v_0}{3g}" />，出管口时 <Latex tex="x_1=v_0t_1=\dfrac{2v_0^2}{3g}" /> —— 这是第一次经过 <Latex tex="x" /> 轴。</div>
+
+<div v-click="1">管口以上<b>没有磁场</b>，只受重力：球以 <Latex tex="(v_0,\ \tfrac{2}{3}v_0)" /> 斜抛，空中时间 <Latex tex="t_2=\dfrac{2v_y}{g}=\dfrac{4v_0}{3g}" />，再次经过 <Latex tex="x" /> 轴时 <Latex tex="x=x_1+v_0t_2=\dfrac{2v_0^2}{g}" />，坐标为 <Latex tex="\left(\dfrac{2v_0^2}{g},\ 0\right)" />。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-corner">
+
+<CartTubeField :step="$clicks + 2" />
+
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.5rem;font-size:.88em">
+
+<div><b>例 7（3）</b>　管内排满小球：够得着那个高度的是哪一段？</div>
+
+<div v-click="1">管内每个球的受力都与 <Latex tex="A" /> 相同（<Latex tex="qv_0B=2mg" /> 向上、<Latex tex="mg" /> 向下）⟹ 每个球都以 <Latex tex="a=g" /> 上升、彼此不挤压。离管口深度 <Latex tex="h" /> 的球出管口时 <Latex tex="v_y^2=2gh" />。</div>
+
+<div v-click="2">出管口后用<b>配速法</b>：分出一个水平分速度 <Latex tex="\dfrac{v_0}{2}" />，它的洛伦兹力 <Latex tex="q\dfrac{v_0}{2}B=mg" /> 恰好抵消重力；剩下的分量做匀速圆周，半径 <Latex tex="\rho=\dfrac{u v_0}{2g}" />，圆心恒在 <Latex tex="y=\dfrac{v_0^2}{4g}" />。最高点就是圆顶：<Latex tex="y_{\max}=\dfrac{v_0^2}{4g}+\rho" />。</div>
+
+<div v-click="3">够到 <Latex tex="y=\dfrac{9v_0^2}{16g}" /> 需要 <Latex tex="\rho\geqslant\dfrac{5v_0^2}{16g}" /> ⟹ <Latex tex="v_y\geqslant\dfrac{3v_0}{8}" /> ⟹ <Latex tex="h\geqslant\dfrac{9v_0^2}{128g}=\dfrac{81}{256}L" />：只有下面这段的球够得着，比值 <Latex tex="\dfrac{L-h_{\min}}{L}=\dfrac{175}{256}" />。</div>
+
+<div class="tip-hint">另一条路（同样不用微积分）：把洛伦兹力的水平冲量按<b>微元累加</b> —— 每小段时间内 <Latex tex="\Delta p_x=-qB\,\Delta y" />，累加得 <Latex tex="v_x=v_0-\dfrac{2g}{v_0}y" />，再配合动能定理，得到的最高点公式与配速法完全一致。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-corner">
+
+<TubeBallsReach :step="$clicks" />
+
+</div>
+
+</div>
+

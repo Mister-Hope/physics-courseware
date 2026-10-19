@@ -13,6 +13,8 @@
     "@slidev/cli": "catalog:",
     "@slidev/client": "catalog:",
     "@slidev/theme-default": "catalog:",
+    "@types/three": "catalog:",
+    "three": "catalog:",
     "vue": "catalog:"
   }
 }

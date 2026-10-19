@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.temp/
 *.local
 .DS_Store
 .slidev/
@@ -25,5 +26,4 @@ e2e/reports/
 
 # 各课件自己的临时产物（`pnpm shots` 的截图、单课件版 e2e 报告）：
 # 放在课件目录下，多个 AI 进程同时开发不同课件时互不打架（规则见 e2e/artifacts.ts）
-courses/*/.temp/
 courses/*/test-results/

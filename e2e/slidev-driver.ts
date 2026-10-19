@@ -306,29 +306,37 @@ export async function settle(page: Page): Promise<void> {
     }
   });
 
-  // 兜底：所有已渲染页面的几何连续 3 次采样（约 360ms）完全一致才算稳定
-  await page.waitForFunction(
-    () => {
-      const signature = [...document.querySelectorAll("#slideshow .slidev-page")]
-        .filter((element) => getComputedStyle(element).display !== "none")
-        .map((element) => {
-          const rect = element.getBoundingClientRect();
+  // 兜底：所有已渲染页面的几何连续 3 次采样（约 360ms）完全一致才算稳定。
+  // ⚠️ 超时**不能**硬失败：换页的 View Transitions 期间 `.slidev-page` 带 transform，而
+  // `getBoundingClientRect` 会把 transform 算进去 —— 机器忙、rAF 被饿住时那 0.5s 的过渡可能拖过超时，
+  // 于是"采样永远凑不满 3 次"，一个与版面无关的 `TimeoutError` 就把整份门禁判红（2026-10 第十一章踩到）。
+  // 稳定性本就不在硬失败清单里（渲染失败 / 越出 980×552 / SVG 16px 契约才是），所以与上面两段一致：吞掉超时。
+  await page
+    .waitForFunction(
+      () => {
+        const signature = [...document.querySelectorAll("#slideshow .slidev-page")]
+          .filter((element) => getComputedStyle(element).display !== "none")
+          .map((element) => {
+            const rect = element.getBoundingClientRect();
 
-          return `${element.getAttribute("data-slidev-no")}:${Math.round(rect.left)},${Math.round(rect.top)},${Math.round(rect.width)},${Math.round(rect.height)}`;
-        })
-        .join("|");
-      const holder = window as Window & { __e2eStableState?: { signature: string; same: number } };
-      const state = holder.__e2eStableState ?? { signature: "", same: 0 };
+            return `${element.getAttribute("data-slidev-no")}:${Math.round(rect.left)},${Math.round(rect.top)},${Math.round(rect.width)},${Math.round(rect.height)}`;
+          })
+          .join("|");
+        const holder = window as Window & {
+          __e2eStableState?: { signature: string; same: number };
+        };
+        const state = holder.__e2eStableState ?? { signature: "", same: 0 };
 
-      state.same = signature === state.signature ? state.same + 1 : 0;
-      state.signature = signature;
-      holder.__e2eStableState = state;
+        state.same = signature === state.signature ? state.same + 1 : 0;
+        state.signature = signature;
+        holder.__e2eStableState = state;
 
-      return state.same >= 3;
-    },
-    undefined,
-    { timeout: 15_000, polling: 120 },
-  );
+        return state.same >= 3;
+      },
+      undefined,
+      { timeout: 30_000, polling: 120 },
+    )
+    .catch(() => undefined);
 }
 
 /** 量一页（或全局层）的溢出情况 */

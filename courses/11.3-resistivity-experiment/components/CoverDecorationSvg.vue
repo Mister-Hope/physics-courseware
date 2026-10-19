@@ -1,5 +1,5 @@
 <script setup lang="ts">
-/** 封面装饰图：伏安法测金属丝电阻率的电路示意（电池 + 开关 + 金属丝 + 并联电压表 + 串联电流表） */
+/** 封面装饰图：伏安法测金属丝电阻率的电路示意 （电源 + 开关 + 滑动变阻器位置上的金属丝 + 并联电压表 + 串联电流表）。 元件一律用共享 <Circuit*> 组件；导线手画（止于元件两端，不穿过元件）。 */
 const { width = 300 } = defineProps<{ width?: number }>();
 </script>
 
@@ -8,16 +8,16 @@ const { width = 300 } = defineProps<{ width?: number }>();
     <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.75">
       <path d="M 32 44 V 62" />
       <path d="M 32 78 V 122 H 99" />
-      <path d="M 147 122 H 196 V 44 H 157" />
-      <path d="M 189 44 H 144" />
       <path d="M 104 44 H 32" />
+      <path d="M 144 44 H 157" />
+      <path d="M 189 44 H 196 V 122 H 147" />
       <path d="M 76 122 V 85 H 107" />
       <path d="M 139 85 H 170 V 122" />
     </g>
     <circle cx="76" cy="122" r="3" fill="currentColor" opacity="0.75" />
     <circle cx="170" cy="122" r="3" fill="currentColor" opacity="0.75" />
     <CircuitBattery :x="32" :y="70" orientation="vertical" polarity />
-    <CircuitSwitch :x="124" :y="44" :open="false" />
+    <CircuitSwitch :x="124" :y="44" :open="true" />
     <CircuitResistor :x="123" :y="122" />
     <CircuitMeter :x="123" :y="85" kind="v" />
     <CircuitMeter :x="173" :y="44" kind="a" />

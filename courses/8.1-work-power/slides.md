@@ -21,7 +21,6 @@ defaults:
 chapter-no: "8.1"
 chapter: "第八章 机械能守恒定律"
 lesson: "第一课时"
-subtitle: "功的表达式 · 正负功 · 地面参考系"
 ---
 
 <CoverDecorationSvg />

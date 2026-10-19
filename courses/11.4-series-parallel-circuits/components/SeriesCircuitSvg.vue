@@ -1,44 +1,80 @@
 <script setup lang="ts">
-/** 第 3–4 页：串联电路图（教材图 11.4-1 的结构）：电源、开关不画，两个电阻 R₁、R₂ 首尾相接， 电路上标 0、1、2、3 四个点（0–1 之间是 R₁，1–2 之间是导线，2 经右侧回到 3）。 step ≥1 画出电流方向箭头 I。 */
-const { step = 0 } = defineProps<{ step?: number }>();
+/**
+ * 第 3 页（串、并联电路中的电流）/ 第 4 页（串、并联电路中的电压）：串联电路图（教材图 11.4-1 的结构）。
+ * 电源与两个电阻 R₁、R₂ 首尾相接，电路上标 0、1、2、3 四个点（0–1 跨 R₁，1–2 跨 R₂，2–3 走剩下的回路，3–0 跨电源）。
+ * mode = "current"：step ≥ 1 时画各处电流方向箭头（每一处都标 I，示意"处处相等"）；
+ * mode = "voltage"：step ≥ 1 时标出各点电势 φ₀…φ₃（教材用 φ 表示各点电势）。
+ */
+const { mode = "current", step = 0 } = defineProps<{
+  /** "current" 画电流箭头；"voltage" 标各点电势 */
+  mode?: "current" | "voltage";
+  /** 分步：0 = 只有干净电路图，≥1 才出标注 */
+  step?: number;
+}>();
 </script>
 
 <template>
   <div class="figure">
-    <svg viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 620 270" width="620" height="270" xmlns="http://www.w3.org/2000/svg">
       <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
-        <path d="M 70 70 V 127" />
-        <path d="M 70 143 V 200" />
-        <path d="M 70 70 H 176" />
-        <path d="M 224 70 H 346" />
-        <path d="M 394 70 H 490" />
-        <path d="M 490 70 V 200" />
-        <path d="M 490 200 H 70" />
+        <path d="M 70 90 V 147" />
+        <path d="M 70 163 V 220" />
+        <path d="M 70 90 H 216" />
+        <path d="M 264 90 H 396" />
+        <path d="M 444 90 H 550" />
+        <path d="M 550 90 V 220" />
+        <path d="M 550 220 H 70" />
       </g>
-      <CircuitBattery :x="70" :y="135" orientation="vertical" polarity />
-      <CircuitResistor :x="200" :y="70" />
-      <CircuitResistor :x="370" :y="70" />
-      <text x="200" y="50" text-anchor="middle" font-size="17" fill="var(--c-text)">
+      <CircuitBattery :x="70" :y="155" orientation="vertical" polarity />
+      <CircuitResistor :x="240" :y="90" />
+      <CircuitResistor :x="420" :y="90" />
+      <text x="240" y="72" text-anchor="middle" font-size="20" fill="var(--c-text)">
         <tspan font-family="KaTeX_Math" font-style="italic">R</tspan>
-        <tspan font-family="KaTeX_Main" font-size="13" dy="4">1</tspan>
+        <tspan font-family="KaTeX_Main" font-size="15" dy="5">1</tspan>
       </text>
-      <text x="370" y="50" text-anchor="middle" font-size="17" fill="var(--c-text)">
+      <text x="420" y="72" text-anchor="middle" font-size="20" fill="var(--c-text)">
         <tspan font-family="KaTeX_Math" font-style="italic">R</tspan>
-        <tspan font-family="KaTeX_Main" font-size="13" dy="4">2</tspan>
+        <tspan font-family="KaTeX_Main" font-size="15" dy="5">2</tspan>
       </text>
-      <g font-family="KaTeX_Main" font-size="16" fill="var(--c-text-dim)" text-anchor="middle">
-        <circle cx="120" cy="70" r="3.5" fill="var(--c-text-dim)" />
-        <text x="120" y="96">0</text>
-        <circle cx="285" cy="70" r="3.5" fill="var(--c-text-dim)" />
-        <text x="285" y="96">1</text>
-        <circle cx="445" cy="70" r="3.5" fill="var(--c-text-dim)" />
-        <text x="445" y="96">2</text>
-        <circle cx="280" cy="200" r="3.5" fill="var(--c-text-dim)" />
-        <text x="280" y="186">3</text>
+      <g font-family="KaTeX_Main" font-size="18" fill="var(--c-text-dim)" text-anchor="middle">
+        <circle cx="140" cy="90" r="3.5" fill="var(--c-text-dim)" />
+        <text x="140" y="116">0</text>
+        <circle cx="330" cy="90" r="3.5" fill="var(--c-text-dim)" />
+        <text x="330" y="116">1</text>
+        <circle cx="500" cy="90" r="3.5" fill="var(--c-text-dim)" />
+        <text x="500" y="116">2</text>
+        <circle cx="300" cy="220" r="3.5" fill="var(--c-text-dim)" />
+        <text x="300" y="246">3</text>
       </g>
-      <g v-if="step >= 1">
-        <CourseArrow :from="{ x: 455, y: 200 }" :to="{ x: 395, y: 200 }" stroke="var(--c-accent)" :stroke-width="2.4" />
-        <text x="425" y="186" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-accent)">I</text>
+      <g v-if="mode === 'current' && step >= 1">
+        <CourseArrow :from="{ x: 158, y: 90 }" :to="{ x: 200, y: 90 }" stroke="var(--c-accent)" :stroke-width="2.6" />
+        <CourseArrow :from="{ x: 286, y: 90 }" :to="{ x: 322, y: 90 }" stroke="var(--c-accent)" :stroke-width="2.6" />
+        <CourseArrow :from="{ x: 458, y: 90 }" :to="{ x: 494, y: 90 }" stroke="var(--c-accent)" :stroke-width="2.6" />
+        <CourseArrow :from="{ x: 490, y: 220 }" :to="{ x: 400, y: 220 }" stroke="var(--c-accent)" :stroke-width="2.6" />
+        <g font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-accent)" text-anchor="middle">
+          <text x="178" y="78">I</text>
+          <text x="304" y="78">I</text>
+          <text x="476" y="78">I</text>
+          <text x="445" y="246">I</text>
+        </g>
+      </g>
+      <g v-if="mode === 'voltage' && step >= 1" font-size="20" fill="var(--c-accent)" text-anchor="middle">
+        <text x="140" y="66">
+          <tspan font-family="KaTeX_Math" font-style="italic">φ</tspan>
+          <tspan font-family="KaTeX_Main" font-size="15" dy="5">0</tspan>
+        </text>
+        <text x="330" y="66">
+          <tspan font-family="KaTeX_Math" font-style="italic">φ</tspan>
+          <tspan font-family="KaTeX_Main" font-size="15" dy="5">1</tspan>
+        </text>
+        <text x="500" y="66">
+          <tspan font-family="KaTeX_Math" font-style="italic">φ</tspan>
+          <tspan font-family="KaTeX_Main" font-size="15" dy="5">2</tspan>
+        </text>
+        <text x="300" y="196">
+          <tspan font-family="KaTeX_Math" font-style="italic">φ</tspan>
+          <tspan font-family="KaTeX_Main" font-size="15" dy="5">3</tspan>
+        </text>
       </g>
     </svg>
   </div>

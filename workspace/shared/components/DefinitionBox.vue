@@ -105,4 +105,13 @@ withDefaults(
   font-size: 1rem;
   line-height: 1.7;
 }
+
+/* 正文最后一段不必再留整段段距：正文写成 markdown 时（最常见）整块就是一个 `<p>`，
+   而 p 带着自己的段距（Slidev 幻灯片根字号 22px ⇒ 1rem = 22px，实测段距就是 22px）——
+   不压掉会拖出「内边距 17.6px + 段距 22px ≈ 40px」的底部空隙，气泡看着底下发空。
+   收一半（0.5rem = 11px）即够分隔；`> p:last-child` 只在最后一项确实是段落时生效，
+   正文以 `<div>` / hint 气泡收尾（如并排定义、带提示的定义）时不受影响。 */
+.def-body > p:last-child {
+  margin-bottom: 0.5rem;
+}
 </style>

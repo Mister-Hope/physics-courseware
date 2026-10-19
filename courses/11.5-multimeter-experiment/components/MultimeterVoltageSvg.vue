@@ -1,45 +1,64 @@
 <script setup lang="ts">
-// 第 4 页：用电压挡测小灯泡电压——多用电表并联接入，红表笔接高电势一侧
+/**
+ * 「测量小灯泡的电压」页配图（第 6 页）：用直流电压挡测小灯泡两端的电压——多用电表**并联**在小灯泡两端，红表笔接电势高的一端。
+ *
+ * 基础回路与 `MultimeterCurrentSvg.vue` 完全相同（左竖线 x=80、右竖线 x=480、上横线 y=70、下横线 y=280）， 两张图方便学生对照"并联测电压 / 串联测电流"。电源正极朝上（竖直放置的电池默认长板＝正极在上，无需 flip）。
+ *
+ * - `showMeter`：出现并联在小灯泡两端的电压表支路（灯泡上端 T 形接点 → 电表 → 灯泡下端 T 形接点）；
+ * - `showProbes`：支路两段导线改色（接高电势那半段红、接低电势那半段灰）并加表笔标注。
+ */
+const { showMeter = false, showProbes = false } = defineProps<{
+  /** 第 1 步：出现并联在小灯泡两端的电压表支路 */
+  showMeter?: boolean;
+  /** 第 2 步：标出红 / 黑表笔各接在哪一端（接高电势的那半段导线改红） */
+  showProbes?: boolean;
+}>();
 </script>
+
 <template>
-  <svg viewBox="0 0 640 300" w-full h-full>
-    <text x="320" y="16" text-anchor="middle" font-size="12" fill="var(--c-text-faint)">多用电表拨到直流电压挡，与小灯泡并联</text>
-    <g stroke="var(--c-line-strong)" stroke-width="1.6" fill="none">
-      <path d="M 100 48 H 230" />
-      <path d="M 270 48 H 570 V 170 H 520" />
-      <path d="M 480 170 H 100 V 72" />
-      <path d="M 100 286 H 500 V 190" />
-    </g>
-    <g>
-      <circle cx="230" cy="48" r="2.6" fill="var(--c-line-strong)" />
-      <circle cx="270" cy="48" r="2.6" fill="var(--c-line-strong)" />
-      <line x1="232" y1="47" x2="263" y2="33" stroke="var(--c-text)" stroke-width="2.4" />
-      <text x="250" y="72" text-anchor="middle" font-size="11" fill="var(--c-text-faint)">S</text>
-    </g>
-    <g stroke="var(--c-text)" stroke-width="2.4" fill="none">
-      <line x1="86" y1="48" x2="114" y2="48" />
-      <line x1="92" y1="58" x2="108" y2="58" stroke-width="5" />
-      <line x1="86" y1="68" x2="114" y2="68" />
-      <line x1="92" y1="78" x2="108" y2="78" stroke-width="5" />
-    </g>
-    <text x="130" y="66" font-size="11" fill="var(--c-text-faint)">电源</text>
-    <g stroke="var(--c-gold)" stroke-width="2" fill="none">
-      <line x1="480" y1="150" x2="520" y2="190" />
-      <line x1="480" y1="190" x2="520" y2="150" />
-    </g>
-    <circle cx="500" cy="170" r="22" fill="rgba(226,168,70,0.12)" stroke="var(--c-gold)" stroke-width="1.8" />
-    <text x="546" y="174" font-size="12" fill="var(--c-gold)">小灯泡</text>
-    <g stroke="var(--c-line-strong)" stroke-width="1.6" fill="none">
-      <path d="M 300 132 V 48" />
-      <path d="M 300 208 V 286" />
-    </g>
-    <circle cx="300" cy="48" r="3" fill="var(--c-pos)" />
-    <circle cx="300" cy="286" r="3" fill="var(--c-neg)" />
-    <circle cx="300" cy="170" r="36" fill="#101a2e" stroke="var(--c-pos)" stroke-width="1.8" />
-    <text x="300" y="177" text-anchor="middle" font-size="18" fill="var(--c-pos)" font-weight="600">V</text>
-    <text x="228" y="176" font-size="11" fill="var(--c-text-faint)">多用电表</text>
-    <text x="228" y="190" font-size="11" fill="var(--c-text-faint)">直流电压挡</text>
-    <text x="312" y="42" font-size="11" fill="var(--c-pos)">红表笔（+）接高电势一侧</text>
-    <text x="312" y="300" font-size="11" fill="var(--c-neg)">黑表笔（−）接低电势一侧</text>
-  </svg>
+  <div class="mv-fig">
+    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg">
+      <text x="350" y="28" text-anchor="middle" font-size="14" fill="var(--c-text-dim)">多用电表（直流电压挡）并联在小灯泡两端</text>
+      <g v-if="showMeter || showProbes">
+        <rect x="445" y="44" width="215" height="256" rx="16" fill="rgba(226,168,70,0.05)" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="6 5" />
+        <text x="548" y="36" text-anchor="middle" font-size="12" font-family="KaTeX_Main" fill="var(--c-accent)">并联</text>
+      </g>
+      <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+        <path d="M 80 70 V 167" />
+        <path d="M 80 183 V 280" />
+        <path d="M 80 70 H 180" />
+        <path d="M 220 70 H 480" />
+        <path d="M 480 70 V 163" />
+        <path d="M 480 187 V 280" />
+        <path d="M 480 280 H 80" />
+      </g>
+      <g v-if="showMeter || showProbes" fill="none" stroke-width="1.6" stroke-linecap="round">
+        <path d="M 480 70 H 620 V 159" :stroke="showProbes ? '#f87171' : 'var(--c-text)'" />
+        <path d="M 620 191 V 280 H 480" :stroke="showProbes ? '#94a3b8' : 'var(--c-text)'" />
+      </g>
+      <CircuitBattery :x="80" :y="175" orientation="vertical" polarity emf="E" />
+      <CircuitSwitch :x="200" :y="70" label="S" :open="false" />
+      <CircuitBulb :x="480" :y="175" orientation="vertical" label="L" :r="12" />
+      <CircuitMeter v-if="showMeter || showProbes" kind="v" :x="620" :y="175" />
+      <circle v-if="showMeter || showProbes" cx="480" cy="70" r="3" fill="var(--c-text)" />
+      <circle v-if="showMeter || showProbes" cx="480" cy="280" r="3" fill="var(--c-text)" />
+      <g v-if="showProbes">
+        <text x="550" y="60" text-anchor="middle" font-size="12" font-family="KaTeX_Main" fill="#f87171">红表笔（+）接高电势</text>
+        <text x="550" y="266" text-anchor="middle" font-size="12" font-family="KaTeX_Main" fill="#94a3b8">黑表笔（−）接低电势</text>
+      </g>
+    </svg>
+  </div>
 </template>
+
+<style scoped>
+.mv-fig {
+  width: 100%;
+  min-width: 0;
+}
+
+.mv-fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+</style>
