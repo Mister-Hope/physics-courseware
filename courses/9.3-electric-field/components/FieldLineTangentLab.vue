@@ -1,14 +1,25 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
 
 // 第 12 页：电场线是有方向的曲线，曲线上每一点的切线方向就是该点的电场强度方向。
-// 图中曲线是**真实场线**：沿 E 方向逐步推进得到（E = E1 + E2，Ei = kQi/ri²，此处只关心方向，
-// 取 Q1 = +1、Q2 = −1）。为稳定起见采用兜底链：
-//   ① 场线在组件挂载时一次算好、之后冻结（固定 polylines，不逐次积分）；
-//   ② P 沿 polyline 按弧长参数 s 移动（不吸附、不抖）；
-//   ③ 切线方向取相邻两点差分（不调用叠加公式）。
+//
+// 形态说明（2026-10 按 `.agents/notes/interactive-necessity.md` 自查后降级）：
+//   原来是"滑块让 P 沿场线连续滑动"——自查三问：① 本页只要定性（不显示数值）；
+//   ② "切线方向 = 场强方向"是**定义性**结论、在任何位置都成立，不存在"调参数才看得到"的变化规律；
+//   ③ 教材图 9.3-6 本身就是"静态曲线 + P 点切线"。故去掉滑块，改为**两个预设位置**：
+//   靠正电荷处（切线陡）→ 曲线拱顶（切线平）。
+//   ⚠️ 降级 ≠ 静态化（复核员提醒）：点击进入下一位置时，P 沿**真实场线按弧长逐帧插值滑动**，
+//   切线方向每帧重算 ⇒ 观感是"P 在动、切线在转"，而不是"换了两张图"。
+//   （不用 CSS transition：SVG 的 x/y 是表现属性、不是可过渡的 CSS 属性；且线性插值会让 P 离开曲线。）
+//
+// 物理不变：曲线仍是**真实场线**，由 E = E1 + E2（Ei = kQi/ri²，只取方向 Q1 = +1、Q2 = −1）
+// 用中点法沿 dl ∥ E 逐步推进得到；切线方向取相邻两点差分（等价于该点的合成场强方向）。
 // 本页是定性页：屏幕上不出任何数值、不出 dl、不出积分号。
-defineProps<{ showArrows?: boolean; showTangent?: boolean; showDensity?: boolean }>();
+const { showArrows, showTangent, showDensity } = defineProps<{
+  showArrows?: boolean;
+  showTangent?: boolean;
+  showDensity?: boolean;
+}>();
 
 interface Pt {
   x: number;
@@ -69,7 +80,7 @@ function toPath(points: Pt[]) {
   return points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
 }
 
-// ① 固定 polylines：正电荷出发 8 条、负电荷反向追踪 5 条、加密用 12 条
+// 固定 polylines：正电荷出发 8 条、负电荷反向追踪 5 条、加密用 8 条（挂载时一次算好、之后冻结）
 const ANGLES = [0, 45, 90, 135, 180, 225, 270, 315];
 const DENSE_ANGLES = [22, 67, 112, 157, 202, 247, 292, 337];
 const BACK_ANGLES = [120, 150, 180, 210, 240];
@@ -99,17 +110,20 @@ function midArrow(points: Pt[]) {
 }
 const BASE_ARROWS = BASE_CURVES.filter((c) => c.length > 6).map(midArrow);
 
-// ② + ③ 主线 = 从正电荷 45° 出发那条（弯曲明显，切线方向变化清楚）
+// P 走的那条：从正电荷 45° 出发的弯曲线（靠电荷处切线陡、拱顶处切线平）
 const MAIN = BASE_CURVES[1];
 const CUM: number[] = [0];
-for (let i = 1; i < MAIN.length; i += 1) {
+for (let i = 1; i < MAIN.length; i += 1)
   CUM.push(CUM[i - 1] + Math.hypot(MAIN[i].x - MAIN[i - 1].x, MAIN[i].y - MAIN[i - 1].y));
-}
+
 const TOTAL = CUM[CUM.length - 1] || 1;
 
-const s = ref(0.55);
-const picked = computed(() => {
-  const target = s.value * TOTAL;
+const RATIO_NEAR = 0.16; // 靠正电荷：切线陡、场线密
+const RATIO_ARCH = 0.62; // 曲线拱顶：切线平、场线疏
+
+/** 按弧长比例取点，并给出该点切线方向（相邻两点差分 = 该点合成场强方向） */
+function pickedAt(ratio: number) {
+  const target = ratio * TOTAL;
   let i = 1;
   while (i < CUM.length - 1 && CUM[i] < target) i += 1;
   const span = Math.max(1e-6, CUM[i] - CUM[i - 1]);
@@ -121,23 +135,43 @@ const picked = computed(() => {
   const dx = next.x - prev.x;
   const dy = next.y - prev.y;
   const len = Math.hypot(dx, dy) || 1;
+  const point = { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+  const dir = { x: dx / len, y: dy / len };
   return {
-    point: { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t },
-    dir: { x: dx / len, y: dy / len },
+    point,
+    tanStart: { x: point.x - dir.x * 60, y: point.y - dir.y * 60 },
+    tanEnd: { x: point.x + dir.x * 60, y: point.y + dir.y * 60 },
+    eEnd: { x: point.x + dir.x * 42, y: point.y + dir.y * 42 },
   };
-});
-const tanStart = computed(() => {
-  const { point, dir } = picked.value;
-  return { x: point.x - dir.x * 64, y: point.y - dir.y * 64 };
-});
-const tanEnd = computed(() => {
-  const { point, dir } = picked.value;
-  return { x: point.x + dir.x * 64, y: point.y + dir.y * 64 };
-});
-const eArrowEnd = computed(() => {
-  const { point, dir } = picked.value;
-  return { x: point.x + dir.x * 44, y: point.y + dir.y * 44 };
-});
+}
+
+// 沿弧长的逐帧滑动：从"靠正电荷"滑到"拱顶"（切线随位置连续转），不是换图
+const ratio = ref(RATIO_NEAR);
+const picked = computed(() => pickedAt(ratio.value));
+
+let rafId = 0;
+function slideTo(target: number): void {
+  const start = ratio.value;
+  const t0 = performance.now();
+  const DURATION = 760;
+  cancelAnimationFrame(rafId);
+  const frame = (now: number) => {
+    const p = Math.min(1, (now - t0) / DURATION);
+    // ease-in-out：起止平缓、中间快，看起来像"顺着场线滑过去"
+    const e = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
+    ratio.value = start + (target - start) * e;
+    if (p < 1) rafId = requestAnimationFrame(frame);
+  };
+  rafId = requestAnimationFrame(frame);
+}
+
+// 第 3 击（疏密对照）时滑到拱顶：位置变、切线方向随之变，同时场线加密
+watch(
+  () => showDensity,
+  (value) => slideTo(value ? RATIO_ARCH : RATIO_NEAR),
+);
+
+onBeforeUnmount(() => cancelAnimationFrame(rafId));
 </script>
 
 <template>
@@ -173,20 +207,20 @@ const eArrowEnd = computed(() => {
       </g>
       <g :style="{ visibility: showTangent ? 'visible' : 'hidden' }">
         <line
-          :x1="tanStart.x"
-          :y1="tanStart.y"
-          :x2="tanEnd.x"
-          :y2="tanEnd.y"
-          stroke="var(--c-text-mute)"
-          stroke-opacity="0.6"
+          :x1="picked.tanStart.x"
+          :y1="picked.tanStart.y"
+          :x2="picked.tanEnd.x"
+          :y2="picked.tanEnd.y"
+          stroke="var(--c-border)"
+          stroke-opacity="0.9"
           stroke-width="1.5"
           stroke-dasharray="6 5"
         />
-        <circle :cx="picked.point.x" :cy="picked.point.y" r="6" fill="var(--c-gold)" />
-        <CourseArrow :from="picked.point" :to="eArrowEnd" stroke="var(--c-force)" :stroke-width="3.2" />
+        <circle :cx="picked.point.x" :cy="picked.point.y" r="6" fill="var(--c-accent)" />
+        <CourseArrow :from="picked.point" :to="picked.eEnd" stroke="var(--c-force)" :stroke-width="3.2" />
         <text
-          :x="eArrowEnd.x + 10"
-          :y="eArrowEnd.y + 4"
+          :x="picked.eEnd.x + 9"
+          :y="picked.eEnd.y + 4"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="16"
@@ -195,12 +229,12 @@ const eArrowEnd = computed(() => {
           E
         </text>
         <text
-          :x="picked.point.x - 4"
-          :y="picked.point.y - 14"
+          :x="picked.point.x - 5"
+          :y="picked.point.y - 15"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="15"
-          fill="var(--c-gold)"
+          fill="var(--c-accent)"
         >
           P
         </text>
@@ -210,18 +244,15 @@ const eArrowEnd = computed(() => {
       <circle :cx="Q2.x" :cy="Q2.y" r="15" fill="var(--c-velocity)" fill-opacity="0.9" />
       <text :x="Q2.x" :y="Q2.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="15" fill="#fff">−</text>
     </svg>
-    <CourseSlider v-model="s" :min="0" :max="1" :step="0.005" layout="bare" aria-label="P 点在场线上的位置" />
   </div>
 </template>
 
 <style scoped>
 .flt {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  width: 100%;
 }
 .flt-fig {
   width: 100%;
-  height: 150px;
+  height: 172px;
 }
 </style>

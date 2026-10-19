@@ -93,23 +93,21 @@ title: 电荷量
 </div>
 
 ---
-clicks: 3
+clicks: 2
 title: 检验物体是否带电
 ---
 
 <div class="page-grow">
 
-<div class="ask">不接触物体，怎样判断它是否带电、带的是哪种电荷？</div>
+<div class="ask">怎样判断一个物体是否带电、带的是哪种电荷？</div>
 
 <div class="half-grid">
 <div class="figure"><ElectroscopeLab /></div>
 <div class="divider-l stack">
 
-<div v-click="1">玻璃瓶内有两片金属箔，用金属丝挂在一根导体棒的下端，棒的上端穿过绝缘的瓶塞从瓶口伸出。<b>当带电体靠近导体棒的上端时，金属箔片就会张开</b>。</div>
+<div v-click="1">玻璃瓶内有两片金属箔，用金属丝挂在一根金属杆的下端，杆的上端穿过绝缘的瓶塞从瓶口伸出。<b>把带电体接触金属球</b>，电荷就转移到金属箔上，两片金属箔带<b>同种电荷</b>相互排斥而张开。</div>
 
-<div v-click="2">用验电器可以检验物体是否带电，以及所带电荷的<b>种类和相对数量</b>；把金属箔换成指针、并用金属制作外壳，这样的验电器又叫作<b class="text-accent-2">静电计</b>。</div>
-
-<div v-click="3" class="info-hint"><b class="text-accent">验电羽</b>是一束金属箔条，带电后因同种电荷相互排斥而张开。</div>
+<div v-click="2">移开带电体，箔片<b class="text-accent">仍然张开</b>——验电器已带上电：可检验物体是否带电，以及电荷的<b class="text-accent">种类</b>和<b class="text-accent">相对数量</b>。箔片换成指针、外壳用金属，叫<b class="text-accent-2">静电计</b>；一束金属箔条叫<b class="text-accent">验电羽</b>。</div>
 
 </div>
 </div>
@@ -190,31 +188,29 @@ title: 摩擦起电的原因
 </div>
 
 ---
-clicks: 3
+clicks: 4
 title: 接触带电与平分电荷
 ---
-
-# 接触带电与平分电荷
-
 <div class="page-grow">
 
-<div class="ask">两个小球接触后再分开，电荷怎么分？</div>
+<div class="ask">两个完全相同的金属球接触后再分开，电荷怎么分？</div>
 
 <div class="half-grid">
 <div class="figure"><ContactChargingLab /></div>
 <div class="divider-l stack">
 
-<div v-click="1">让带电体与导体接触，电荷就会转移到它上面，这就是<b class="text-accent-2">接触带电</b>。</div>
+<div v-click="1"><b>接触带电</b>：让带电体与导体接触，电荷就转移到它上面。题一：<Latex tex="A" /> 带 <Latex tex="+Q" />、<Latex tex="B" /> 不带电——两球<b>接触</b>，<Latex tex="B" /> 上的一部分电子转移到 <Latex tex="A" />。</div>
 
-<div v-click="2">两个<b>完全相同的金属球</b>接触后分开，所带电荷量相等：一个带 <Latex tex="+Q" />、另一个不带电，各带 <Latex tex="+\dfrac{Q}{2}" />。</div>
+<div v-click="2">分开后两球带<b>等量</b>电荷：各带 <Latex tex="+\dfrac{Q}{2}" />。两个<b>完全相同</b>的金属球接触后，电荷平分。</div>
 
-<div v-click="3">一个带 <Latex tex="+Q" />、另一个带 <Latex tex="-3Q" />，接触后分开，各带 <Latex tex="-Q" />。</div>
+<div v-click="3">题二：<Latex tex="A" /> 带 <Latex tex="+Q" />、<Latex tex="B" /> 带 <Latex tex="-3Q" />，让两球<b>接触</b>。</div>
+
+<div v-click="4">分开后各带 <Latex tex="-Q" />：总电荷 <Latex tex="+Q + (-3Q) = -2Q" />，平分后每个球 <Latex tex="-Q" />。</div>
 
 </div>
 </div>
 
 </div>
-
 ---
 clicks: 3
 title: 导体与绝缘体
@@ -228,11 +224,11 @@ title: 导体与绝缘体
 
 <div class="half-grid">
 <div class="figure"><MetalStructureSvg mode="conductor" :show-electron-flow="$clicks >= 2" :show-insulator="$clicks >= 3" /></div>
-<div class="divider-l stack">
+<div class="divider-l stack stack-tight">
 
-<div v-click="1">金属中原子的外层电子往往会脱离原子核的束缚而在金属中自由运动，这种电子叫作<b class="text-accent">自由电子</b>（free electron）。</div>
+<div v-click="1">金属中原子的外层电子往往会脱离原子核的束缚而自由运动，叫作<b class="text-accent">自由电子</b>（free electron）；它们不停做<b>无规则的热运动</b>，速率比定向移动大得多。</div>
 
-<div v-click="2">失去自由电子的原子便成为带正电的<b>离子</b>，它们在金属内部排列起来，每个正离子都在自己的平衡位置附近振动而不移动，只有自由电子穿梭其中，这就使金属成为导体。</div>
+<div v-click="2">失去自由电子的原子便成为带正电的<b>离子</b>，它们在金属内部排列起来，只在各自的平衡位置附近振动；自由电子则在其中穿梭，这就使金属成为导体。</div>
 
 <div v-click="3">绝缘体中几乎不存在能自由移动的电荷——导体与绝缘体的本质区别，就是<b>是否存在大量自由电荷</b>。</div>
 
@@ -242,36 +238,40 @@ title: 导体与绝缘体
 </div>
 
 ---
-clicks: 4
+clicks: 7
 title: 观察静电感应现象
 ---
-
 <div class="page-grow">
 
 <div class="ask">摩擦可以使物体带电，那么，还有其他方法可以使物体带电吗？</div>
 
-<div class="split-wide" style="--stack-gap:.6rem">
+<div class="split-wide" style="--stack-gap:.4rem">
 <div class="stack">
 
 <div>取一对用绝缘柱支持的导体 <Latex tex="A" /> 和 <Latex tex="B" />，使它们彼此接触。起初它们不带电，贴在下部的两片金属箔是闭合的。</div>
 
-<div v-click="1">手握绝缘棒，把带正电荷的带电体 <Latex tex="C" /> 移近导体 <Latex tex="A" />——金属箔有什么变化？<b class="text-accent">箔片张开</b></div>
+<div v-click="1">① 把带正电的 <Latex tex="C" /> 移近 <Latex tex="A" />——金属箔有什么变化？</div>
 
-<div v-click="2">这时手持绝缘柱把导体 <Latex tex="A" /> 和 <Latex tex="B" /> 分开，然后移开 <Latex tex="C" />——金属箔又有什么变化？<b class="text-accent">箔片仍张开，两块导体各自带电</b></div>
+<div v-click="2" class="tip-hint">箔片张开。</div>
 
-<div v-click="3">再让导体 <Latex tex="A" /> 和 <Latex tex="B" /> 接触——又会看到什么现象？<b class="text-accent">电荷中和，箔片闭合</b></div>
+<div v-click="3">② 把 <Latex tex="A" />、<Latex tex="B" /> 分开，再移开 <Latex tex="C" />——金属箔又有什么变化？</div>
+
+<div v-click="4" class="tip-hint">箔片仍张开，两块导体各自带上了电荷。</div>
+
+<div v-click="5">③ 再让 <Latex tex="A" />、<Latex tex="B" /> 接触——又会看到什么现象？</div>
+
+<div v-click="6" class="tip-hint">电荷中和，箔片闭合。</div>
 
 </div>
 <div class="stack">
 <div class="figure"><InductionLab /></div>
 
-<div v-click="4" class="tip-hint">利用金属的微观结构模型，解释看到的现象。</div>
+<div v-click="7" class="info-hint">④ 利用金属的微观结构模型，解释看到的现象。</div>
 
 </div>
 </div>
 
 </div>
-
 ---
 clicks: 2
 title: 静电感应与感应起电
@@ -317,7 +317,7 @@ title: 为什么带电体能吸引轻小物体
 
 <div v-click="1">带电体靠近轻小物体时，轻小物体因静电感应带电，受到静电力；当<b class="text-accent">静电力大于重力</b>时，它就被吸起来。</div>
 
-<div v-click="2"><b class="text-accent">金属屑</b>被吸起后与带电体接触，因接触带电带上同种电荷，随即被排斥；<b class="text-accent-2">纸屑</b>几乎不导电，感应出的电荷难以重新分布，于是被吸住不放。</div>
+<div v-click="2"><b class="text-accent">金属屑</b>被吸起后与带电体接触，因接触带电带上同种电荷，随即被排斥、<b>掉回桌面</b>；<b class="text-accent-2">纸屑</b>几乎不导电，感应出的电荷难以重新分布，于是被吸住不放。</div>
 
 </div>
 </div>

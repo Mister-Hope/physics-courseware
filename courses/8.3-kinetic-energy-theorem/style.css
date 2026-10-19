@@ -3,3 +3,69 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* ── 推导结果 W = ½mv₂² − ½mv₁² 的分项标注 ──
+   每个项是一个纵向 stack：公式在上，箭头与说明在正下方（天然对齐本项）。
+   标注元素常驻占位（visibility 由 $clicks 控制），点击出现时不会把已有元素顶跑。 */
+.ke-row {
+  display: flex;
+  gap: 0.12rem;
+  align-items: baseline;
+  justify-content: center;
+
+  font-size: 1.55rem;
+}
+
+.ke-part,
+.ke-term {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ke-mark {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-items: center;
+
+  margin-top: 0.15rem;
+
+  color: var(--c-accent);
+}
+
+.ke-label {
+  color: var(--c-accent);
+
+  font-size: 0.72rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* 向上的小箭头：一条竖线 + 顶部三角形（纯 CSS，避免在 slides.md 里手写 SVG） */
+.ke-arrow {
+  position: relative;
+
+  display: block;
+
+  width: 2px;
+  height: 22px;
+
+  background: currentColor;
+}
+
+.ke-arrow::before {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+
+  width: 0;
+  height: 0;
+
+  border-right: 6px solid transparent;
+  border-bottom: 9px solid currentColor;
+  border-left: 6px solid transparent;
+
+  content: "";
+  transform: translateX(-50%);
+}

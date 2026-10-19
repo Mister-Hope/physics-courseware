@@ -161,10 +161,9 @@ function buildFieldLines(colors: { field: number; plus: number; minus: number })
   // 场线：所有曲线合并成一份 LineSegments（一次绘制，帧率稳）
   const positions: number[] = [];
   for (const points of LINES) {
-    for (let i = 1; i < points.length; i += 1) {
-      positions.push(points[i - 1].x, points[i - 1].y, points[i - 1].z);
-      positions.push(points[i].x, points[i].y, points[i].z);
-    }
+    for (let i = 1; i < points.length; i += 1) 
+      positions.push(points[i - 1].x, points[i - 1].y, points[i - 1].z, points[i].x, points[i].y, points[i].z);
+    
   }
   const geometry = new BufferGeometry();
   geometry.setAttribute("position", new Float32BufferAttribute(positions, 3));

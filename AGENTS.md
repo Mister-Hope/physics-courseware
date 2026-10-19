@@ -37,6 +37,7 @@
 | 公式与图表                                                     | [`.agents/notes/katex-fonts-icons.md`](.agents/notes/katex-fonts-icons.md)                                                                                                 |
 | 端到端检查                                                     | [`.agents/notes/e2e-checks.md`](.agents/notes/e2e-checks.md)                                                                                                               |
 | 安装/更新/恢复 AI 技能                                         | [`.agents/notes/skills.md`](.agents/notes/skills.md)                                                                                                                       |
+| **要给一个知识点做滑块 / 拖动类交互（先判断这个交互有没有必要）** | [`.agents/notes/interactive-necessity.md`](.agents/notes/interactive-necessity.md) ⭐ **动手前先回答"这个交互有没有必要"** |
 
 ---
 
@@ -205,6 +206,9 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 - 组件放 `components/`（自动注册）；本课样式写 `style.css`；**共享代码（`workspace/shared/`）改动要评估所有课件的影响**
 - **交互组件必须用真实学科公式计算**（`computed` 里算，数值随参数真实变化）
+- **动手做交互之前，先按 [`notes/interactive-necessity.md`](.agents/notes/interactive-necessity.md) 判断"这个交互有没有必要"**：
+  只有当"参数变化、结果随之变化"**本身是教学对象**时才上滑块；结论是"一个动作 / 过程"、或只对**离散**情形成立 → 用**点击分步的动画**；
+  只要看形态变化（张合、方向、疏密）→ 用**示意图 + 定性**，别硬塞数值
 
 ---
 
@@ -235,7 +239,13 @@ pnpm slide 1.x-vectors 15 --raw        # 不带行号（整段复制）
 
 pnpm shots 1.x-vectors 15 18-20        # 截图（未点击状态），控制台打印绝对路径
 pnpm shots 1.x-vectors 4 --clicks=each # 每一步点击各截一张
+pnpm shots 1.x-vectors 4 --clicks=each --after=400 # 点击后再等 400ms 才截（抓 rAF / transition 的**中间帧**，文件名带 -t400）
 ```
+
+> `--after` 是给"动画到底在不在演"留证据用的：默认抓的是每击之后的**稳定帧**，两个稳定帧都"看起来对"、
+> 中间也可能是一步跳过去的；补一张中间帧就能区分"逐帧过渡"与"瞬变"。
+> 用时长按动画本身取：**0.3–0.5s 的 CSS transition 用 `--after=150`/`200`**（400 已经到位，会被误读成"没有过渡"）；
+> **1.5s 级的 rAF 才用 `--after=400`/`800`**。
 
 典型迭代循环：`--grep` 定位 → 读那一页 → 改 → `shots` 看效果 → `E2E_COURSE=<课> … layout-overflow` 复验。
 （`slidev` 技能里没有"按页读源码"这类工具，用这两个。）
@@ -307,3 +317,5 @@ pnpm shots 1.x-vectors 4 --clicks=each # 每一步点击各截一张
 | **点击时已有元素被顶跑（位移）** | 根因几乎总是**块宽/块高随内容变化**：flex 行里新增一项会把前面的读数挤走（第九章程实测 83.4px）、数值位数变多会把单位推走（7.7px）、分式换等值式会改行高（24.7px）。`tabular-nums` 只管**单字符等宽**、管不了整串变长。三种根因修法：① 读数改**固定列 grid**、后续列从第 0 步就预留；② 会变的行用**常驻占位**（`visibility: hidden`）+ `min-height`；③ 数值所在盒**定宽**（`min-width` 或 grid 定列）。⛔ 别用 `v-if` 真删真插。e2e 的"位移"默认只报告，但它违反"点击只新增、不顶跑" | `notes/slidev-interactions.md` |
 | **"图区高度" ≠ "组件高度"** | `图 \| 右栏读数` 这种 flex 行的行高由**更高的一侧**决定：只压图区的高度没用（第九章程 P10 就这么顶出去 13px、P11 那张图还被 `w-full h-full` 撑到约 500px 一次牵连 182 个元素）。压高度必须同时看两侧：右栏删重复读数行、收行距（`.stack-tight`），画布比例也要与可用空间匹配（否则被 letterbox 成"小图居中"） | 本文件"三·版面尽量占满" |
 | **正文越界：压住标题＝必须修** | e2e 的"正文越界（相对 `.page-grow`）"默认只报告，判据是：**压住大标题（字叠字）＝🔴 必须修**；只是紧贴/被上下内边距吸收、可见矩形仍在 980×552 内＝不追（为亚像素反复改只会让版面更紧、后排更差）。典型成因：KaTeX 默认 `font-size:1.21em` 会撑高 `.ask` 行盒（第九章程 P12 因此上溢 34px）→ `.ask .katex{font-size:1em}` + `display:inline-block;line-height:1` | `notes/e2e-checks.md` |
+| **批量替换 CSS token 后变成 `var(rgb(…))`** | 文本级替换把 `--c-line` 换成裸值 `rgb(148 163 184 / 30%)` 时，`var(--c-line)` 会变成 **`var(rgb(148 163 184 / 30%))`**——同样是 invalid at computed-value time，**症状与"token 未定义"一模一样**（fill 变黑、stroke 消失），而 `grep --c-line` 此可 0 命中、根本查不出来。修法：替换时匹配**整个 `var(--x)` 表达式**；改完再 `grep -F "var(rgb("` 兜一遍（应 0 命中） | `workspace/shared/styles/common.css` |
+| **`defineProps` 没解构，script 里拿不到 props** | `defineProps<{…}>()` 不写成 `const { a, b } = defineProps<{…}>()` 时，**模板里能用、script 里用不了** —— `watch(() => props.xxx)`、计算属性引用 prop 都会**静默失效、不报错**（第九章程 `FieldLineTangentLab` 的密度联动就这么死过一次）。写 `watch` 前先确认 props 已解构；改完 `grep -n "defineProps"` 逐个看有没有 `= ` | `notes/slidev-interactions.md` |

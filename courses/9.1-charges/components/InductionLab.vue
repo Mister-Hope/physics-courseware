@@ -10,7 +10,15 @@ import { computed } from "vue";
  * 每一步只"新增"可回收的标记；C 的移开用 transform 移出画面，不用 v-if 删元素。
  */
 const { $clicks } = useSlideContext();
-const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
+/**
+ * 页面 clicks: 7 —— 问题①(1) 现象①(2) 问题②(3) 现象②(4) 问题③(5) 现象③(6) 第 4 问(7)。
+ * 图只跟着"现象"那一击变，所以步进取"已经演到第几个现象"。
+ */
+const step = computed(() => {
+  const c = $clicks.value;
+
+  return c >= 6 ? 3 : c >= 4 ? 2 : c >= 2 ? 1 : 0;
+});
 
 const open = computed(() => step.value >= 1 && step.value <= 2);
 const separated = computed(() => step.value >= 2);
@@ -19,7 +27,7 @@ const cShift = computed(() => (step.value === 1 ? 0 : -130));
 </script>
 
 <template>
-  <svg viewBox="0 0 560 290" width="100%" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 560 276" width="100%" xmlns="http://www.w3.org/2000/svg">
     <SurfaceHatch :from="{ x: 60, y: 240 }" :to="{ x: 500, y: 240 }" side="below" />
 
     <!-- 绝缘柱 -->

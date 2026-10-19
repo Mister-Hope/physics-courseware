@@ -1,62 +1,64 @@
 <script setup lang="ts">
-defineProps<{ step?: number }>();
+/**
+ * 第 11 / 12 页（守恒条件的判断）：教材练习 1 的四个情境，一次只画两个。
+ * `pair="ab"` 画 A 跳伞匀速下落、B 抛出的标枪；`pair="cd"` 画 C 沿光滑斜面匀速上升、D 压缩弹簧的小球。
+ * 只画情境、不画受力分析——判断留给学生，做功分析由页面文字逐条给出。
+ */
+withDefaults(defineProps<{ pair?: "ab" | "cd" }>(), { pair: "ab" });
 </script>
 
 <template>
-  <!-- 机械能守恒条件判断：四幅小场景，点击逐个揭示是否守恒（step>=1..4） -->
-  <svg width="840" height="400" viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="10" y="10" width="400" height="180" rx="14" stroke="var(--c-line)" stroke-width="1.5" />
-    <circle cx="90" cy="60" r="13" fill="var(--c-warn)" fill-opacity="0.3" stroke="var(--c-warn)" stroke-width="3.5" />
-    <CourseArrow :x1="90" y1="80" x2="90" y2="140" color="var(--c-info)" :width="3" />
-    <text x="104" y="116" font-size="13" fill="var(--c-info)" font-family="KaTeX_Math" font-style="italic">v</text>
-    <text x="150" y="62" font-size="14" fill="var(--c-ink)" font-family="system-ui">自由落体的小球</text>
-    <text v-if="step >= 1" x="150" y="90" font-size="13.5" fill="var(--c-ok)" font-family="system-ui">✓ 只有重力做功 · 守恒</text>
-    <rect x="430" y="10" width="400" height="180" rx="14" stroke="var(--c-line)" stroke-width="1.5" />
-    <line x1="470" y1="160" x2="600" y2="60" stroke="var(--c-line-strong)" stroke-width="3.5" stroke-linecap="round" />
-    <SurfaceHatch x1="470" y1="160" x2="600" y2="60" />
-    <rect
-      x="524"
-      y="88"
-      width="24"
-      height="20"
-      rx="4"
-      fill="var(--c-warn)"
-      fill-opacity="0.3"
-      stroke="var(--c-warn)"
-      stroke-width="3"
-      transform="rotate(-37.6 536 98)"
-    />
-    <text x="640" y="62" font-size="14" fill="var(--c-ink)" font-family="system-ui">沿光滑斜面下滑的物块</text>
-    <text v-if="step >= 2" x="640" y="90" font-size="13.5" fill="var(--c-ok)" font-family="system-ui">✓ 只有重力做功 · 守恒</text>
-    <rect x="10" y="210" width="400" height="180" rx="14" stroke="var(--c-line)" stroke-width="1.5" />
-    <line x1="50" y1="360" x2="180" y2="260" stroke="var(--c-line-strong)" stroke-width="3.5" stroke-linecap="round" />
-    <SurfaceHatch x1="50" y1="360" x2="180" y2="260" />
-    <rect
-      x="104"
-      y="288"
-      width="24"
-      height="20"
-      rx="4"
-      fill="var(--c-warn)"
-      fill-opacity="0.3"
-      stroke="var(--c-warn)"
-      stroke-width="3"
-      transform="rotate(-37.6 116 298)"
-    />
-    <g stroke="var(--c-danger)" stroke-width="2.4" opacity="0.85">
-      <line x1="118" y1="284" x2="128" y2="274" />
-      <line x1="126" y1="292" x2="136" y2="282" />
-      <line x1="134" y1="300" x2="144" y2="290" />
-    </g>
-    <text x="220" y="262" font-size="14" fill="var(--c-ink)" font-family="system-ui">沿粗糙斜面下滑的物块</text>
-    <text v-if="step >= 3" x="220" y="290" font-size="13.5" fill="var(--c-danger)" font-family="system-ui">✗ 摩擦生热 · 不守恒</text>
-    <rect x="430" y="210" width="400" height="180" rx="14" stroke="var(--c-line)" stroke-width="1.5" />
-    <rect x="586" y="290" width="40" height="30" rx="5" fill="var(--c-warn)" fill-opacity="0.3" stroke="var(--c-warn)" stroke-width="3" />
-    <line x1="606" y1="290" x2="606" y2="248" stroke="var(--c-line-strong)" stroke-width="2.5" />
-    <CourseArrow :x1="606" y1="244" x2="606" y2="226" color="var(--c-info)" :width="3" />
-    <text x="616" y="238" font-size="13" fill="var(--c-info)" font-family="KaTeX_Math" font-style="italic">F</text>
-    <text x="630" y="244" font-size="10" fill="var(--c-info)" font-family="KaTeX_Math" font-style="italic">T</text>
-    <text x="646" y="300" font-size="14" fill="var(--c-ink)" font-family="system-ui">被吊起的货物（匀速）</text>
-    <text v-if="step >= 4" x="646" y="328" font-size="13.5" fill="var(--c-danger)" font-family="system-ui">✗ 拉力做正功 · 不守恒</text>
+  <svg class="fig-cond-cards" viewBox="0 0 820 230" xmlns="http://www.w3.org/2000/svg">
+    <rect x="20" y="20" width="380" height="190" rx="16" fill="none" stroke="var(--c-border)" stroke-width="1.6" />
+    <rect x="420" y="20" width="380" height="190" rx="16" fill="none" stroke="var(--c-border)" stroke-width="1.6" />
+    <template v-if="pair === 'ab'">
+      <text x="52" y="52" font-size="16" fill="var(--c-text-dim)" font-family="system-ui">A 跳伞运动员匀速下落</text>
+      <path d="M 120 118 Q 180 74 240 118" fill="var(--c-accent-2)" fill-opacity="0.16" stroke="var(--c-accent-2)" stroke-width="2.6" />
+      <line x1="124" y1="116" x2="148" y2="158" stroke="var(--c-neutral-300)" stroke-width="1.8" />
+      <line x1="236" y1="116" x2="212" y2="158" stroke="var(--c-neutral-300)" stroke-width="1.8" />
+      <circle cx="180" cy="166" r="12" fill="var(--c-accent)" fill-opacity="0.3" stroke="var(--c-accent)" stroke-width="2.6" />
+      <CourseArrow :from="{ x: 204, y: 166 }" :to="{ x: 204, y: 206 }" stroke="var(--c-accent-2)" :stroke-width="2.4" />
+      <text x="214" y="196" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
+      <text x="452" y="52" font-size="16" fill="var(--c-text-dim)" font-family="system-ui">B 抛出的标枪在空中运动</text>
+      <path d="M 500 172 Q 600 96 700 132" fill="none" stroke="var(--c-neutral-500)" stroke-width="1.6" stroke-dasharray="7 6" opacity="0.7" />
+      <line x1="512" y1="146" x2="640" y2="110" stroke="var(--c-neutral-300)" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 640 110 l 22 -4 l -14 16 z" fill="var(--c-neutral-300)" />
+      <CourseArrow :from="{ x: 528, y: 142 }" :to="{ x: 580, y: 128 }" stroke="var(--c-accent-2)" :stroke-width="2.2" />
+      <text x="548" y="166" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
+    </template>
+    <template v-else>
+      <text x="52" y="52" font-size="16" fill="var(--c-text-dim)" font-family="system-ui">C 金属块沿光滑斜面匀速上升</text>
+      <line x1="70" y1="182" x2="330" y2="104" stroke="var(--c-neutral-300)" stroke-width="3.4" stroke-linecap="round" />
+      <SurfaceHatch :from="{ x: 70, y: 182 }" :to="{ x: 330, y: 104 }" side="below" :thickness="12" :gap="20" />
+      <g transform="rotate(-23 200 132)">
+        <rect x="178" y="120" width="44" height="24" rx="4" fill="var(--c-accent)" fill-opacity="0.25" stroke="var(--c-accent)" stroke-width="2.6" />
+      </g>
+      <line x1="200" y1="126" x2="292" y2="88" stroke="var(--c-neutral-500)" stroke-width="2" />
+      <CourseArrow :from="{ x: 224, y: 118 }" :to="{ x: 274, y: 98 }" stroke="var(--c-accent-2)" :stroke-width="2.2" />
+      <text x="236" y="142" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
+      <text x="452" y="52" font-size="16" fill="var(--c-text-dim)" font-family="system-ui">D 压缩弹簧后又被弹回的小球</text>
+      <line x1="452" y1="182" x2="768" y2="182" stroke="var(--c-neutral-300)" stroke-width="3" stroke-linecap="round" />
+      <SurfaceHatch :from="{ x: 452, y: 182 }" :to="{ x: 768, y: 182 }" side="below" :thickness="12" :gap="20" />
+      <rect x="748" y="112" width="16" height="70" rx="3" fill="var(--c-neutral-500)" fill-opacity="0.6" />
+      <path
+        d="M 748 147 l -9 -7 l -18 14 l -18 -14 l -18 14 l -18 -14 l -18 14 l -9 -7"
+        fill="none"
+        stroke="var(--c-ok)"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <circle cx="600" cy="147" r="13" fill="var(--c-accent)" fill-opacity="0.3" stroke="var(--c-accent)" stroke-width="2.6" />
+      <CourseArrow :from="{ x: 496, y: 147 }" :to="{ x: 556, y: 147 }" stroke="var(--c-accent-2)" :stroke-width="2.4" />
+      <text x="516" y="132" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
+    </template>
   </svg>
 </template>
+
+<style scoped>
+.fig-cond-cards {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+</style>

@@ -4,13 +4,21 @@ import { computed, ref } from "vue";
 // 第 7 页：电场中同一点，试探电荷的电荷量 q 变化时，F 与 F/q 怎么变。
 // 真实公式：E = kQ/r²，F = Eq = kQq/r²，F/q = kQ/r²（与 q 无关，只与 Q、r 有关）。
 // showRatio（第 1 击）：显示 F/q 读数行（用 visibility 占位，不顶跑上面的读数）。
+//
+// 形态说明（2026-10 按 `.agents/notes/interactive-necessity.md` 自查后调整）：
+//   q 用**连续滑块**——"F 随 q 线性变、而 F/q 不变"正是本页要建立的关系（指南 §2 A+B）；
+//   r 改为**两档离散按钮**（同一点 / 另一点）——本页对 r 的诉求只是教材行 239–241 的"离散对照"
+//   （不同位置比值一般不同），连续调 r 的主场是第 10 页的点电荷场强 E = kQ/r²。
 defineProps<{ showRatio?: boolean }>();
 
 const K = 9e9;
 const Q = 1e-6; // 场源电荷的电荷量，单位 C
 
 const q = ref(1e-8); // 试探电荷的电荷量，单位 C
-const r = ref(0.2); // P 点到场源电荷的距离，单位 m
+const R_NEAR = 0.2; // 同一点：P 到场源电荷的距离，单位 m
+const R_FAR = 0.34; // 另一点
+const atNearPoint = ref(true);
+const r = computed(() => (atNearPoint.value ? R_NEAR : R_FAR));
 
 const E = computed(() => (K * Q) / (r.value * r.value));
 const F = computed(() => E.value * q.value);
@@ -47,7 +55,7 @@ const ratioTex = computed(() => {
         :y1="QY"
         :x2="px"
         :y2="QY"
-        stroke="var(--c-text-mute)"
+        stroke="var(--c-neutral-500)"
         stroke-opacity="0.45"
         stroke-width="1.6"
         stroke-dasharray="4 6"
@@ -59,15 +67,15 @@ const ratioTex = computed(() => {
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="14"
-        fill="var(--c-text-mute)"
+        fill="var(--c-neutral-500)"
       >
         r
       </text>
       <circle :cx="QX" :cy="QY" r="18" fill="var(--c-danger)" fill-opacity="0.9" />
       <text :x="QX" :y="QY" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#fff">+</text>
       <text :x="QX" :y="QY + 46" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-danger)">Q</text>
-      <circle :cx="px" :cy="QY" r="9" fill="var(--c-gold)" fill-opacity="0.9" />
-      <text :x="px" :y="QY + 32" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-gold)">q</text>
+      <circle :cx="px" :cy="QY" r="9" fill="var(--c-accent)" fill-opacity="0.9" />
+      <text :x="px" :y="QY + 32" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">q</text>
       <CourseArrow :from="{ x: px, y: QY }" :to="{ x: px + arrowLen, y: QY }" stroke="var(--c-force)" :stroke-width="3" />
       <text
         :x="px + arrowLen / 2"
@@ -83,7 +91,9 @@ const ratioTex = computed(() => {
     </svg>
     <div class="pfl-panel">
       <CourseSlider v-model="q" :min="0.5e-8" :max="3e-8" :step="0.1e-8" label-tex="q" label-width="2.4rem" accent="gold" />
-      <CourseSlider v-model="r" :min="0.1" :max="0.4" :step="0.01" label-tex="r" label-width="2.4rem" accent="blue" />
+      <button class="pfl-toggle" type="button" @click="atNearPoint = !atNearPoint">
+        {{ atNearPoint ? "同一点" : "另一点" }}
+      </button>
       <div class="pfl-read"><Latex :tex="fTex" /></div>
       <div class="pfl-read pfl-ratio" :class="{ 'pfl-hidden': !showRatio }"><Latex :tex="ratioTex" /></div>
     </div>
@@ -109,11 +119,20 @@ const ratioTex = computed(() => {
   justify-content: center;
   gap: 0.35rem;
 }
+.pfl-toggle {
+  align-self: flex-start;
+  padding: 0.2rem 0.9rem;
+  border: 1px solid rgb(148 163 184 / 30%);
+  border-radius: 999px;
+  background: var(--c-surface);
+  color: var(--c-text);
+  cursor: pointer;
+}
 .pfl-read {
   font-size: 0.88rem;
 }
 .pfl-ratio {
-  color: var(--c-gold);
+  color: var(--c-accent);
 }
 .pfl-hidden {
   visibility: hidden;

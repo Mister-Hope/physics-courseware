@@ -293,6 +293,24 @@ title: 练习二 说法 3、4
 
 ---
 layout: base-flex
+clicks: 4
+title: 提塑料袋：手做的功与重心
+---
+
+<div class="page-grow">
+<div class="ask">装了水的塑料袋放在桌面上。从侧边往上提、捏住底部的角往上拉——两种提法里，手对袋子做的是正功还是负功？</div>
+
+<div v-click="1"><div class="summary-line">手往上提，手抓的那一处跟着上移：两种提法里，手对袋子的力都向上、那一处的位移也向上，夹角小于 <Latex tex="90^\circ" />——手对袋子都做正功。</div></div>
+
+<div v-click="2"><div class="summary-line">两种提法都使袋子的重心升高，重力势能增大。</div></div>
+
+<div v-click="3"><div class="summary-line">袋子静止时的姿态，就是它重力势能最低的状态。</div></div>
+
+<div class="tip-hint" v-click="4">做功的正负只看力与位移的夹角，不看手抓在哪里；重心升高（<Latex tex="E_p = mgh" /> 中的 <Latex tex="h" /> 变大），重力势能就增大。</div>
+</div>
+
+---
+layout: base-flex
 clicks: 2
 title: 弹性势能
 ---

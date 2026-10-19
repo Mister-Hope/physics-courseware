@@ -22,18 +22,12 @@ chapter-no: "8.4"
 chapter: "第八章 机械能守恒定律"
 subtitle: "机械能 · 守恒条件 · 能量的耗散"
 ---
-
-<div class="fig-ph" style="max-width: 560px; margin: 0 auto;">
-
-【图占位】封面装饰：单摆三个位置 + 动能/势能两条能量条。
-
-</div>
+<CoverDecorationSvg />
 
 ---
 title: 追寻守恒量
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
 
 <div class="ask">
@@ -42,21 +36,15 @@ clicks: 3
 
 </div>
 
-<div class="fig-ph" v-click="1">
+<div>
 
-【图占位】伽利略斜面：A 面释放，B 面陡、缓两条轨迹，过出发点画水平虚线。
-
-</div>
-
-<div class="text-center" v-click="2">
-
-斜面 B 陡些或缓些，小球总回到<b>出发点的高度</b>。
+<IdealInclineSvg />
 
 </div>
 
 <div class="text-center" v-click="3">
 
-速度、高度都在变，可<b>有某个量始终不变</b>。
+斜面 B 陡些或缓些，小球总回到<b>出发点的高度</b>——速度、高度都在变，可<b>有某个量始终不变</b>。
 
 </div>
 
@@ -66,7 +54,6 @@ clicks: 3
 title: 两种描述
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
 
 <div class="ask">
@@ -99,62 +86,42 @@ clicks: 3
 title: 动能与重力势能的相互转化
 clicks: 4
 ---
-
 <div class="page-grow flex flex-col">
-
 <div class="ask">
-
 减少的重力势能到哪里去了？
-
 </div>
 
-<div class="fig-ph" v-click="1">
-
-【交互占位】自由落体能量演示：拖动改变高度与质量，显示势能、动能与两者之和。
-
+<div v-click="1">
+<FallEnergySvg />
 </div>
 
 <div v-click="2">
-
 重力做正功：重力势能减少、动能增加——重力势能<b>转化成了动能</b>。
-
 </div>
 
 <div v-click="3">
-
 沿光滑斜面上升时相反：重力做负功，动能<b>转化成了重力势能</b>。
-
 </div>
 
 <div class="tip-hint" v-click="4">
-
 两者可以相互转化。
-
 </div>
-
 </div>
 
 ---
 title: 弹性势能与动能 · 机械能
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
-
-<div class="fig-ph" v-click="1">
-
-【图占位】弹簧把物体弹出；运动员从跳板上弹起。
-
+<div v-click="1" style="max-width: 85%; margin: 0 auto;">
+<ElasticEnergySvg />
 </div>
 
 <div v-click="2">
-
 弹力做正功：弹性势能减少、动能增加——弹性势能<b>转化成了动能</b>。
-
 </div>
 
 <div v-click="3">
-
 <DefinitionBox term="机械能">
 
 重力势能、弹性势能与动能都是机械运动中的能量形式，统称为机械能。
@@ -162,133 +129,91 @@ clicks: 3
 <Latex tex="E = E_k + E_p" display />
 
 </DefinitionBox>
-
 </div>
-
 </div>
 
 ---
 title: 两种下落
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
-
 <div class="ask">
-
 真空中的下落，和空气中有阻力的下落，有什么不同？
-
 </div>
 
-<div class="fig-ph">
-
-【图占位】两个小球从 h1 落到 h2：左侧真空只画重力，右侧画出重力与阻力。
-
+<div style="max-width: 95%; margin: 0 auto;">
+<FallCompareSvg />
 </div>
 
 <div v-click="1">
-
 重力做的功 <Latex tex="W_G = mgh_1 - mgh_2" /> 与重力势能的变化<b>都相等</b>——只由高度差决定。
-
 </div>
 
 <div v-click="2">
-
 动能的变化<b>不相等</b>：空气中阻力做负功，只有<b>一部分</b>势能转化为动能。
-
 </div>
 
 <div class="tip-hint" v-click="3">
-
 真空中重力势能全部转化为动能；有阻力时只有一部分。
-
 </div>
-
 </div>
 
 ---
 title: 现实中的机械能损失
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
-
 <div class="ask">
-
 在现实中，机械能守恒吗？
-
 </div>
 
 <div v-click="1">
-
 只要物体在地面上运动，空气阻力、摩擦力就不可避免。它们做负功，机械能被<b>耗散</b>。
-
 </div>
 
-<div class="fig-ph" v-click="2">
-
-【图占位】滑雪者沿斜面下滑：重力、支持力、阻力；对比阻力可忽略/较大两种。
-
+<div v-click="2" style="max-width: 85%; margin: 0 auto;">
+<InclineForceSvg />
 </div>
 
 <div v-click="3">
-
 阻力可忽略 → 只有重力做功；阻力较大 → 机械能不守恒。
-
 </div>
 
 <div class="warn-hint" v-click="3">
-
 只有天体之间那种近似真空的情形，机械能才严格守恒。
-
 </div>
-
 </div>
 
 ---
 title: 只有重力做功时的定量关系
 clicks: 4
 ---
-
 <div class="page-grow flex flex-col">
-
-<div class="fig-ph">
-
-【图占位】光滑曲面：A 点标 h1、v1，B 点标 h2、v2，并画出重力与支持力。
-
+<div style="max-width: 85%; margin: 0 auto;">
+<SmoothTrackSvg :show-forces="$clicks >= 1" />
 </div>
 
 <div v-click="1">
-
 支持力方向与运动方向垂直、不做功，所以<b>只有重力做功</b>。
-
 </div>
 
 <div v-click="2">
-
 动能定理：<Latex tex="W = \dfrac{1}{2}mv_2^2 - \dfrac{1}{2}mv_1^2" />
-
 </div>
 
 <div v-click="3">
-
 重力做的功等于重力势能的减少：<Latex tex="W = mgh_1 - mgh_2" />
-
 </div>
 
 <div v-click="4">
-
 移项得 <Latex tex="\dfrac{1}{2}mv_2^2 + mgh_2 = \dfrac{1}{2}mv_1^2 + mgh_1" />
-
 </div>
-
 </div>
 
 ---
 title: 讨论：上升过程
 clicks: 2
 ---
-
 <div class="page-grow flex flex-col">
 
 <div class="ask">
@@ -297,9 +222,9 @@ clicks: 2
 
 </div>
 
-<div class="fig-ph" v-click="1">
+<div v-click="1">
 
-【图占位】同一曲面改为 B 到 A：速度沿曲面向上，重力方向不变。
+<SmoothTrackSvg direction="up" :show-forces="$clicks >= 1" />
 
 </div>
 
@@ -315,7 +240,6 @@ clicks: 2
 title: 机械能守恒定律
 clicks: 4
 ---
-
 <div class="page-grow flex flex-col">
 
 <div v-click="1">
@@ -362,7 +286,6 @@ clicks: 4
 title: 守恒条件的判断
 clicks: 2
 ---
-
 <div class="page-grow flex flex-col">
 
 <div class="ask">
@@ -371,11 +294,7 @@ clicks: 2
 
 </div>
 
-<div class="fig-ph">
-
-【图占位】A 跳伞运动员匀速下落；B 抛出的标枪。
-
-</div>
+<ConditionCardsSvg pair="ab" />
 
 <div v-click="1">
 
@@ -395,7 +314,6 @@ B：不计空气阻力，只受重力，只有重力做功。
 title: 守恒条件的判断
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
 
 <div class="ask">
@@ -404,11 +322,7 @@ clicks: 3
 
 </div>
 
-<div class="fig-ph">
-
-【图占位】C 沿光滑斜面匀速上升的金属块；D 光滑水平面上压缩弹簧的小球。
-
-</div>
+<ConditionCardsSvg pair="cd" />
 
 <div v-click="1">
 
@@ -435,7 +349,6 @@ title: 例题 单摆
 clicks: 3
 layout: exercise-split
 ---
-
 <template v-slot:stem>
 
 摆长为 <Latex tex="l" />、最大偏角为 <Latex tex="\theta" />。阻力可以忽略，求小球运动到最低点时的速度大小。
@@ -475,7 +388,6 @@ title: 练习 光滑曲面
 clicks: 2
 layout: exercise-split
 ---
-
 <template v-slot:stem>
 
 小球从光滑曲面上的 A（<Latex tex="h_1" />、<Latex tex="v_1" />）滑到 B（<Latex tex="h_2" />、<Latex tex="v_2" />），重力做的功为 <Latex tex="W" />。（1）用动能定理列式；（2）变形以反映机械能守恒。
@@ -509,7 +421,6 @@ title: 练习 斜向上抛出的石块
 clicks: 2
 layout: exercise-split
 ---
-
 <template v-slot:stem>
 
 <Latex tex="m = 0.5\ \text{kg}" /> 的石块从 <Latex tex="h = 10\ \text{m}" /> 高处以 <Latex tex="30^\circ" /> 角斜向上抛出，<Latex tex="v_0 = 5\ \text{m/s}" />，不计空气阻力。（1）落地速度多大？（2）与哪些量有关？ A 质量 B 初速度 C 仰角 D 抛出高度
@@ -543,7 +454,6 @@ title: 练习 弹簧弹起的小球
 clicks: 3
 layout: exercise-split
 ---
-
 <template v-slot:stem>
 
 小球压在弹簧上至 A，松手后经 B（原长）升至最高点 C，阻力可忽略。<Latex tex="m = 0.2\ \text{kg}" />、<Latex tex="h_{AB} = 0.1\ \text{m}" />、<Latex tex="h_{BC} = 0.2\ \text{m}" />、<Latex tex="g = 10\ \text{m/s}^2" />。求能量转化、A 处弹性势能、C 处动能。
@@ -579,27 +489,38 @@ A 处 <Latex tex="E_p = mg(h_{AB} + h_{BC}) = 0.6\ \text{J}" />，C 处 <Latex t
 </div>
 
 ---
-title: 两个易错点
-clicks: 3
+title: 与动能定理的辨析
+clicks: 4
 ---
+<div class="page-grow flex flex-col">
 
-<div class="page-grow flex flex-col justify-center">
+<div class="ask">
 
-<div class="warn-hint" v-click="1">
-
-守恒不等于各量都不变：变的是势能与动能，不变的是它们的<b>总和</b>。
-
-</div>
-
-<div class="warn-hint" v-click="2">
-
-守恒看的是<b>做功</b>，不是受力个数。
+动能定理和机械能守恒定律，分别管什么？
 
 </div>
 
-<div class="important-hint" v-click="3">
+<div v-click="1">
 
-列式前问两句：哪个系统？除重力（弹力）外还有谁做了功？
+<b>动能定理</b>：合力做的功等于动能的变化 <Latex tex="W = E_{k2} - E_{k1}" />，对任何过程都成立。
+
+</div>
+
+<div v-click="2">
+
+除重力（系统内弹力）外<b>其他力</b>做的功，等于<b>机械能</b>的变化 <Latex tex="W' = E_2 - E_1" />。
+
+</div>
+
+<div v-click="3">
+
+其他力不做功时机械能就不变——这正是守恒条件。
+
+</div>
+
+<div class="tip-hint" v-click="4">
+
+弹簧的弹性势能不算在物体身上：以<b>物体</b>为研究对象，弹簧弹力是外力，它做功会改变物体的机械能；把弹簧一起算进<b>系统</b>，弹力成为内力，系统的机械能才可能守恒。
 
 </div>
 
@@ -609,53 +530,22 @@ clicks: 3
 title: 小结
 clicks: 3
 ---
-
 <div class="page-grow flex flex-col">
-
-<div class="fig-ph">
-
-【图占位】动能与势能的双向转化示意，箭头上标「重力或弹力做功」。
-
+<div style="max-width: 75%; margin: 0 auto;">
+<EnergyFlowSvg />
 </div>
 
 <div class="grid" style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem;" v-click="1">
-
-<div>
-
-<b>一个条件</b>
-
-只有重力（或系统内弹力）做功。
-
-</div>
-
-<div>
-
-<b>一个等式</b>
-
-<Latex tex="E_{k2} + E_{p2} = E_{k1} + E_{p1}" />
-
-</div>
-
-<div>
-
-<b>一种视角</b>
-
-只看初状态和末状态。
-
-</div>
-
+<div><b>一个条件</b>：只有重力（或系统内弹力）做功。</div>
+<div><b>一个等式</b>：<Latex tex="E_{k2} + E_{p2} = E_{k1} + E_{p1}" /></div>
+<div><b>一种视角</b>：只看初状态和末状态。</div>
 </div>
 
 <div v-click="2">
-
 不必考虑两个状态之间过程的细节——这比直接用牛顿定律方便。
-
 </div>
 
 <div class="important-hint" v-click="3">
-
 下一节用打点计时器和气垫导轨，亲手验证机械能守恒定律。
-
 </div>
-
 </div>

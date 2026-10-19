@@ -1,8 +1,8 @@
 <template>
   <!-- 第 2 页：静电转盘上的人，头发因带上同种电荷相互排斥而散开 -->
   <svg viewBox="0 0 380 360" class="w-full h-full">
-    <circle cx="190" cy="334" r="38" fill="var(--c-panel)" stroke="var(--c-line)" />
-    <rect x="150" y="292" width="80" height="12" rx="6" fill="var(--c-line)" />
+    <circle cx="190" cy="334" r="38" fill="var(--c-surface)" stroke="rgb(148 163 184 / 30%)" />
+    <rect x="150" y="292" width="80" height="12" rx="6" fill="rgb(148 163 184 / 30%)" />
     <path d="M 190 106 C 138 66 96 84 78 128" stroke="var(--c-danger)" stroke-width="2.6" fill="none" stroke-linecap="round" />
     <path d="M 190 106 C 146 52 100 54 74 88" stroke="var(--c-danger)" stroke-width="2.6" fill="none" stroke-linecap="round" />
     <path d="M 190 106 C 154 42 116 34 96 52" stroke="var(--c-danger)" stroke-width="2.6" fill="none" stroke-linecap="round" />

@@ -44,7 +44,7 @@ const e2Tex = computed(() => {
   const s = sci(E2.value);
   return `E(2r) = ${s.m}\\times 10^{${s.e}}\\ \\text{N/C}`;
 });
-const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
+const ratioTex = computed(() => String.raw`\dfrac{E(r)}{E(2r)} = 4`);
 </script>
 
 <template>
@@ -55,13 +55,13 @@ const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
         :y1="OY"
         :x2="OX + d2"
         :y2="OY"
-        stroke="var(--c-text-mute)"
+        stroke="var(--c-neutral-500)"
         stroke-opacity="0.4"
         stroke-width="1.6"
         stroke-dasharray="4 6"
       />
       <g v-if="showSphere">
-        <circle :cx="OX" :cy="OY" :r="d1" fill="none" stroke="var(--c-line)" stroke-dasharray="4 6" />
+        <circle :cx="OX" :cy="OY" :r="d1" fill="none" stroke="var(--c-border)" stroke-dasharray="4 6" />
         <CourseArrow
           v-for="(d, i) in SPHERE_DIRS"
           :key="`s${i}`"
@@ -74,7 +74,7 @@ const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
       <circle :cx="OX" :cy="OY" r="18" fill="var(--c-danger)" fill-opacity="0.9" />
       <text :x="OX" :y="OY" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#fff">+</text>
       <text :x="OX" :y="OY + 46" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-danger)">Q</text>
-      <circle :cx="OX + d1" :cy="OY" r="5" fill="var(--c-gold)" />
+      <circle :cx="OX + d1" :cy="OY" r="5" fill="var(--c-accent)" />
       <CourseArrow
         :from="{ x: OX + d1, y: OY }"
         :to="{ x: OX + d1 + dir * len1, y: OY }"
@@ -92,7 +92,7 @@ const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
       >
         E
       </text>
-      <circle :cx="OX + d2" :cy="OY" r="5" fill="var(--c-gold)" />
+      <circle :cx="OX + d2" :cy="OY" r="5" fill="var(--c-accent)" />
       <CourseArrow
         :from="{ x: OX + d2, y: OY }"
         :to="{ x: OX + d2 + dir * len2, y: OY }"
@@ -117,7 +117,7 @@ const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="14"
-        fill="var(--c-text-mute)"
+        fill="var(--c-neutral-500)"
       >
         r
       </text>
@@ -128,7 +128,7 @@ const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
         font-family="KaTeX_Math"
         font-style="italic"
         font-size="14"
-        fill="var(--c-text-mute)"
+        fill="var(--c-neutral-500)"
       >
         2r
       </text>
@@ -162,22 +162,22 @@ const ratioTex = computed(() => '\\dfrac{E(r)}{E(2r)} = 4');
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.35rem;
+  gap: 0.24rem;
 }
 .pcl-toggle {
   align-self: flex-start;
-  padding: 0.2rem 0.9rem;
-  border: 1px solid var(--c-line);
+  padding: 0.16rem 0.85rem;
+  border: 1px solid rgb(148 163 184 / 30%);
   border-radius: 999px;
-  background: var(--c-panel);
+  background: var(--c-surface);
   color: var(--c-text);
   cursor: pointer;
 }
 .pcl-read {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 .pcl-ratio {
-  color: var(--c-gold);
+  color: var(--c-accent);
 }
 .pcl-hidden {
   visibility: hidden;

@@ -30,10 +30,11 @@ const slugs = listCourses().map((course) => course.slug);
 
 const printUsage = (): void => {
   console.log(`用法：
-  pnpm shots <课件> [页号...] [--clicks=0|all|each|<数字>]
+  pnpm shots <课件> [页号...] [--clicks=0|all|each|<数字>] [--after=<毫秒>]
 
   <页号> 支持 15、15-17、15 18-20 三种写法；不写页号 = 全部页
   --clicks 默认 0（只看未点击状态）；all = 0 + 全部展开；each = 每一步都截
+  --after  点击后再等 N 毫秒才截（给 rAF / transition 动画留中间帧；文件名带 -t<毫秒>）
 
 课件：${slugs.join(", ")}`);
 };
@@ -60,12 +61,13 @@ const main = (): void => {
   const course = matches[0].slug;
 
   const clicks = args.find((arg) => arg.startsWith("--clicks="))?.slice("--clicks=".length) ?? "0";
+  const after = args.find((arg) => arg.startsWith("--after="))?.slice("--after=".length) ?? "";
   const pages = args.slice(1).filter((arg) => !arg.startsWith("-"));
   // 与截图 spec 用同一套规则算目录（这里显式把课件传进去，不依赖父进程的 E2E_COURSE）
   const shotsDirectory = shotsDir([course]);
 
   console.log(
-    `📸 截图：${course} ${pages.length > 0 ? `第 ${pages.join("、")} 页` : "全部页"}（clicks=${clicks}）`,
+    `📸 截图：${course} ${pages.length > 0 ? `第 ${pages.join("、")} 页` : "全部页"}（clicks=${clicks}${after ? `，after=${after}ms` : ""}）`,
   );
 
   execFileSync("pnpm", ["exec", "playwright", "test", "e2e/shots.spec.ts", "--reporter=line"], {
@@ -75,6 +77,7 @@ const main = (): void => {
       E2E_COURSE: course,
       E2E_SHOT_PAGES: pages.join(","),
       E2E_SHOT_CLICKS: clicks,
+      E2E_SHOT_AFTER: after,
     },
     stdio: "inherit",
   });

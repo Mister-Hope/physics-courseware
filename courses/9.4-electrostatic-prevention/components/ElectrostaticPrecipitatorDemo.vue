@@ -1,10 +1,9 @@
 <script setup lang="ts">
-// 第 14 页：静电除尘 —— 线状电离器 B（负极）与板状收集器 A（正极）；粉尘受 F = qE 向 A 运动
-import { computed, ref } from "vue";
+// 第 14 页：静电除尘 —— 点击分步（无电压滑块）：通电 → B 附近电离 → 电子使粉尘带负电 → 粉尘受 F = qE 吸附到正极 A
+import { computed } from "vue";
 
 const props = defineProps<{ step: number }>();
 
-const U = ref(60); // kV
 const powered = computed(() => props.step >= 1);
 const charged = computed(() => props.step >= 2);
 const collected = computed(() => props.step >= 3);
@@ -12,7 +11,7 @@ const collected = computed(() => props.step >= 3);
 
 <template>
   <div class="stack">
-    <svg viewBox="0 0 460 260" class="w-full" xmlns="http://www.w3.org/2000/svg" style="height: 260px">
+    <svg viewBox="0 0 460 260" class="w-full" xmlns="http://www.w3.org/2000/svg" style="height: 235px">
       <!-- 电极 -->
       <rect x="374" y="40" width="18" height="176" rx="4" fill="var(--c-danger)" fill-opacity="0.8" />
       <line x1="66" y1="46" x2="66" y2="210" stroke="var(--c-accent-2)" stroke-width="4" stroke-linecap="round" />
@@ -38,27 +37,31 @@ const collected = computed(() => props.step >= 3);
         <text x="220" y="24" text-anchor="middle" font-family="KaTeX_Main" font-size="12" fill="var(--c-text-mute)">断电：烟雾弥漫</text>
       </template>
       <template v-else>
-        <g v-for="i in 6" :key="`p${i}`">
-          <circle :r="4" :fill="charged ? 'var(--c-accent-2)' : 'var(--c-text-mute)'">
-            <animateMotion dur="2.2s" :begin="`${(i - 1) * 0.35}s`" repeatCount="indefinite" path="M 90 70 L 360 70" />
-          </circle>
-        </g>
-        <template v-if="charged">
-          <text x="150" y="96" font-family="KaTeX_Main" font-size="12" fill="var(--c-accent-2)">电子使粉尘带负电</text>
+        <template v-if="!collected">
+          <g v-for="i in 6" :key="`p${i}`">
+            <circle :r="4" :fill="charged ? 'var(--c-accent-2)' : 'var(--c-text-mute)'">
+              <animateMotion dur="2.2s" :begin="`${(i - 1) * 0.35}s`" repeatCount="indefinite" path="M 90 70 L 360 70" />
+            </circle>
+          </g>
         </template>
-        <template v-if="collected">
-          <circle v-for="i in 6" :key="`c${i}`" cx="362" :cy="72 + (i - 1) * 20" r="4.4" fill="var(--c-accent-2)" />
+        <template v-else>
+          <g v-for="i in 6" :key="`q${i}`">
+            <circle r="4" fill="var(--c-accent-2)">
+              <animateMotion dur="1.4s" :begin="`${(i - 1) * 0.18}s`" repeatCount="1" fill="freeze" path="M 90 70 L 362 70" />
+            </circle>
+          </g>
+          <g v-for="i in 4" :key="`f${i}`">
+            <circle r="3.6" fill="var(--c-accent-2)" fill-opacity="0.85">
+              <animateMotion dur="1.6s" :begin="`${1.1 + (i - 1) * 0.3}s`" repeatCount="indefinite" path="M 364 150 L 386 214" />
+            </circle>
+          </g>
           <text x="300" y="216" text-anchor="middle" font-family="KaTeX_Main" font-size="12" fill="var(--c-accent-2)">粉尘吸附到正极 A，落入漏斗</text>
         </template>
+        <text v-if="charged && !collected" x="150" y="96" font-family="KaTeX_Main" font-size="12" fill="var(--c-accent-2)">电子使粉尘带负电</text>
       </template>
     </svg>
-    <div class="flex items-center gap-5">
-      <CourseSlider v-model="U" :min="20" :max="100" :step="1" label="电压" label-tex="U" class="flex-1" label-width="4.6rem">
-        <template #value>{{ U }} <Latex tex="\text{kV}" /></template>
-      </CourseSlider>
-      <div class="text-[0.95rem] whitespace-nowrap">
-        <Latex tex="F=qE" />　<Latex tex="a=\dfrac{F}{m}" />
-      </div>
+    <div class="text-[0.95rem]">
+      <Latex tex="F=qE" />　<Latex tex="a=\dfrac{F}{m}" />
     </div>
   </div>
 </template>

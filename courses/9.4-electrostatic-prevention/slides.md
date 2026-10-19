@@ -94,7 +94,7 @@ title: "自由电子什么时候停下来"
 
 <DefinitionBox term="静电平衡">处于静电平衡状态的导体，其内部的电场强度处处为 <Latex tex="0" />。</DefinitionBox>
 
-<div class="tip-hint">此时导体内的自由电子不再发生定向移动。</div>
+<div class="tip-hint">外电场换成更强的一档，平衡时仍然是 <Latex tex="E'=E_0" />、<Latex tex="E_{\text{内}}=0" />；自由电子不再发生定向移动。</div>
 
 </div>
 

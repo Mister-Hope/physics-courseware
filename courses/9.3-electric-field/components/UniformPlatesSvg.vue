@@ -14,8 +14,8 @@ const MINUS_X = [110, 150, 190, 230, 270, 310, 350];
 
 <template>
   <svg viewBox="0 0 460 300" class="w-full h-full">
-    <rect :x="PLATE_X1" :y="TOP_Y" :width="PLATE_X2 - PLATE_X1" :height="PLATE_H" rx="3" fill="var(--c-panel)" stroke="var(--c-line)" />
-    <rect :x="PLATE_X1" :y="BOTTOM_Y" :width="PLATE_X2 - PLATE_X1" :height="PLATE_H" rx="3" fill="var(--c-panel)" stroke="var(--c-line)" />
+    <rect :x="PLATE_X1" :y="TOP_Y" :width="PLATE_X2 - PLATE_X1" :height="PLATE_H" rx="3" fill="var(--c-surface)" stroke="rgb(148 163 184 / 30%)" />
+    <rect :x="PLATE_X1" :y="BOTTOM_Y" :width="PLATE_X2 - PLATE_X1" :height="PLATE_H" rx="3" fill="var(--c-surface)" stroke="rgb(148 163 184 / 30%)" />
     <text
       v-for="x in PLUS_X"
       :key="`p${x}`"
@@ -44,9 +44,9 @@ const MINUS_X = [110, 150, 190, 230, 270, 310, 350];
       stroke="var(--c-field)"
       :stroke-width="2"
     />
-    <line x1="76" :y1="TOP_Y + PLATE_H" x2="76" :y2="BOTTOM_Y" stroke="var(--c-text-mute)" stroke-width="1.4" />
-    <line x1="70" :y1="TOP_Y + PLATE_H" x2="82" :y2="TOP_Y + PLATE_H" stroke="var(--c-text-mute)" stroke-width="1.4" />
-    <line x1="70" :y1="BOTTOM_Y" x2="82" :y2="BOTTOM_Y" stroke="var(--c-text-mute)" stroke-width="1.4" />
-    <text x="62" :y="(TOP_Y + BOTTOM_Y) / 2 + 5" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-text-mute)">d</text>
+    <line x1="76" :y1="TOP_Y + PLATE_H" x2="76" :y2="BOTTOM_Y" stroke="var(--c-neutral-500)" stroke-width="1.4" />
+    <line x1="70" :y1="TOP_Y + PLATE_H" x2="82" :y2="TOP_Y + PLATE_H" stroke="var(--c-neutral-500)" stroke-width="1.4" />
+    <line x1="70" :y1="BOTTOM_Y" x2="82" :y2="BOTTOM_Y" stroke="var(--c-neutral-500)" stroke-width="1.4" />
+    <text x="62" :y="(TOP_Y + BOTTOM_Y) / 2 + 5" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-neutral-500)">d</text>
   </svg>
 </template>

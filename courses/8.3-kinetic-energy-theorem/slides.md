@@ -25,33 +25,6 @@ subtitle: "研究动能与力做功的关系"
 
 <CoverDecorationSvg />
 
----
-layout: base-flex
-clicks: 2
-title: 引课
----
-
-<div class="page-grow page-around">
-<div class="ask ask-lead">炮弹在炮筒内推力的作用下速度越来越大、动能增加——这一过程中推力对炮弹做了功。你还能举出哪些例子，说明动能和力做的功有关？</div>
-
-<div class="ask" v-click="1">这些例子对<b>定量</b>研究动能有什么启发？</div>
-
-<div class="tip-hint" v-click="2">物体动能的变化和力对物体做的功密切相关——研究动能，离不开对力做功的分析，这与上一节研究重力势能的思路一致。</div>
-</div>
-
----
-layout: base-flex
-clicks: 1
-title: 动能跟什么有关
----
-
-<div class="page-grow page-around">
-<div class="ask ask-lead">质量相同的两个小球，一个以 <Latex tex="v" /> 运动，另一个以 <Latex tex="2v" /> 运动——它们的动能相差多少倍？</div>
-
-<div class="figure">〔示意站位：两个小球，速度箭头分别为 <Latex tex="v" /> 与 <Latex tex="2v" />〕</div>
-
-<div class="tip-hint" v-click="1">先猜一个数，记在心里——这节课就把它算出来。</div>
-</div>
 
 ---
 layout: base-flex
@@ -64,7 +37,7 @@ title: 动能的表达式（情境）
 <div class="page-grow">
 <div>质量为 <Latex tex="m" /> 的物体在光滑水平面上运动，在与运动方向相同的恒力 <Latex tex="F" /> 的作用下发生一段位移 <Latex tex="l" />，速度由 <Latex tex="v_1" /> 增加到 <Latex tex="v_2" />。这一过程中恒力 <Latex tex="F" /> 做的功是多少？</div>
 
-<div class="figure" v-click="1">〔示意站位：光滑水平面上的物块，标注 <Latex tex="m" />、<Latex tex="F" />、<Latex tex="l" />、<Latex tex="v_1" />、<Latex tex="v_2" />〕</div>
+<div class="figure" v-click="1"><ForceWorkSvg /></div>
 
 <div v-click="2">
 <Latex tex="W = Fl" display />
@@ -73,7 +46,7 @@ title: 动能的表达式（情境）
 
 ---
 layout: base-flex
-clicks: 3
+clicks: 4
 title: 动能的表达式（推导）
 ---
 
@@ -97,59 +70,65 @@ title: 动能的表达式（推导）
 
 <div v-click="3">
 <div>把 <Latex tex="F" />、<Latex tex="l" /> 的表达式代入 <Latex tex="W = Fl" /> 中：</div>
-<Latex tex="W = \frac{1}{2}mv_2^2 - \frac{1}{2}mv_1^2" display />
+<div class="ke-row">
+<span class="ke-part"><Latex tex="W =" /></span>
+<span class="ke-term">
+<span><Latex tex="\frac{1}{2}mv_2^2" /></span>
+<span class="ke-mark" :style="{ visibility: $clicks >= 4 ? 'visible' : 'hidden' }">
+<span class="ke-arrow"></span>
+<span class="ke-label">只与末态有关</span>
+</span>
+</span>
+<span class="ke-part"><Latex tex="\;-\;" /></span>
+<span class="ke-term">
+<span><Latex tex="\frac{1}{2}mv_1^2" /></span>
+<span class="ke-mark" :style="{ visibility: $clicks >= 4 ? 'visible' : 'hidden' }">
+<span class="ke-arrow"></span>
+<span class="ke-label">只与初态有关</span>
+</span>
+</span>
 </div>
 </div>
-
----
-layout: base-flex
-clicks: 2
-title: 动能（定义）
----
-
-# 动能的表达式
-
-<div class="page-grow">
-<div>等式右边只出现 <Latex tex="m" /> 和 <Latex tex="v" />——<Latex tex="\frac{1}{2}mv^2" /> 是不是一个具有确定意义的物理量？</div>
-
-<div class="ask" v-click="1">这个量在过程<b>终了</b>与过程<b>开始</b>时的差，正好等于力对物体做的功。</div>
-
-<DefinitionBox v-click="2" term="动能" tone="gold">
-
-<div>在物理学中就用 <Latex tex="\frac{1}{2}mv^2" /> 这个量表示物体的<span class="def-term">动能</span>（kinetic energy），用符号 <Latex tex="E_k" /> 表示。质量为 <Latex tex="m" /> 的物体，以速度 <Latex tex="v" /> 运动时的动能是：</div>
-
-<Latex tex="E_k = \frac{1}{2}mv^2" display />
-
-</DefinitionBox>
-</div>
-
----
-layout: base-flex
-clicks: 2
-title: 动能的单位与标量性
----
-
-# 动能的表达式
-
-<div class="page-grow">
-<div class="ask">动能跟 <Latex tex="v" /> 成正比，还是跟 <Latex tex="v^2" /> 成正比？</div>
-
-<div v-click="1">
-<div>动能是<b>标量</b>，它的单位与功的单位相同，在国际单位制中都是焦耳：</div>
-<Latex tex="1\ \text{kg}\cdot(\text{m/s})^2 = 1\ \text{N}\cdot\text{m} = 1\ \text{J}" display />
-</div>
-
-<div class="tip-hint" v-click="2">汽车的动能：速度从 <Latex tex="30\ \text{km/h}" /> 增大到 <Latex tex="60\ \text{km/h}" />，速度变为 2 倍，动能变为 <b>4 倍</b>。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
-title: 思考与讨论：墨子号的动能
+title: 动能（定义）
 ---
 
+# 动能
+
 <div class="page-grow">
-<div class="ask">我国首颗量子科学实验卫星“墨子号”的质量 <Latex tex="m = 631\ \text{kg}" />，某时刻它的速度大小 <Latex tex="v = 7.6\ \text{km/s}" />，此时它的动能是多少？</div>
+<div class="ask">一个量只与末态有关、一个量只与初态有关——它们对应初、末状态的什么？</div>
+
+<div v-click="1">它们像是初、末状态各自具有的一种能量，而且都与速度有关。物理学中就用 <Latex tex="\frac{1}{2}mv^2" /> 这个量表示物体的<span class="def-term">动能</span>（kinetic energy），用符号 <Latex tex="E_k" /> 表示。</div>
+
+<DefinitionBox v-click="2" term="动能" tone="gold">
+
+<div>质量为 <Latex tex="m" /> 的物体，以速度 <Latex tex="v" /> 运动时的动能是：</div>
+
+<Latex tex="E_k = \frac{1}{2}mv^2" display />
+
+</DefinitionBox>
+
+<div class="tip-hint" v-click="3">动能是<b>标量</b>，单位与功的单位相同，在国际单位制中都是焦耳：<Latex tex="1\ \text{kg}\cdot(\text{m/s})^2 = 1\ \text{N}\cdot\text{m} = 1\ \text{J}" />。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+title: 动能（速度平方与墨子号）
+---
+
+# 动能
+
+<div class="page-grow">
+<div>动能与速度的<b>二次方</b>成正比——速度变为 2 倍，动能变为 <b>4 倍</b>：</div>
+
+<Latex tex="\frac{E_k'}{E_k} = \left(\frac{v'}{v}\right)^2" display />
+
+<div class="ask">“墨子号”的质量 <Latex tex="m = 631\ \text{kg}" />，某时刻它的速度大小 <Latex tex="v = 7.6\ \text{km/s}" />，此时它的动能是多少？</div>
 
 <div v-click="1">
 <div>先把速度换算成国际单位：<Latex tex="v = 7.6\ \text{km/s} = 7.6\times10^3\ \text{m/s}" /></div>
@@ -158,8 +137,6 @@ title: 思考与讨论：墨子号的动能
 <div v-click="2">
 <Latex tex="E_k = \frac{1}{2}mv^2 = \frac{1}{2}\times631\times(7.6\times10^3)^2\ \text{J} \approx 1.8\times10^{10}\ \text{J}" display />
 </div>
-
-<div class="tip-hint" v-click="3">速度翻倍，动能变为 4 倍——这就是 <Latex tex="E_k \propto v^2" />。</div>
 </div>
 
 ---
@@ -229,7 +206,7 @@ title: 动能定理的适用范围
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 1
 title: 用动能定理解题
 ---
 
@@ -256,8 +233,112 @@ title: 用动能定理解题
 </div>
 
 <div class="tip-hint" v-click="1">动能定理<b>不涉及加速度和时间</b>，只看过程始末两个状态，用它处理问题常常比较方便。</div>
+</div>
 
-<div v-click="2">〔例题站位：本节教材例题——喷气式飞机滑跑，求平均牵引力〕</div>
+---
+layout: base-flex
+clicks: 2
+title: 动能与参考系
+---
+
+# 动能与参考系
+
+<div class="page-grow page-around">
+<div class="ask ask-lead">同一个物体，换一个参考系，它的动能一样吗？</div>
+
+<div v-click="1">动能由速度决定，而速度是相对参考系而言的——同一物体在不同参考系中速度不同，动能也不同。</div>
+
+<div v-click="2">功也一样：功里的位移也是相对参考系的。同一段过程中，同一个力做的功会随参考系改变。</div>
+
+<div class="tip-hint" v-click="2">把功和动能放在一起用的时候，两者必须取<b>同一个参考系</b>。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+title: 车厢里打乒乓球（1）两个参考系
+---
+
+<div class="page-grow">
+<div class="ask ask-lead">匀速行驶的车厢里，两人打乒乓球：一个顺着、一个逆着——哪个更费力？</div>
+
+<div class="figure"><TrainPingPongSvg :step="$clicks" /></div>
+
+<div v-click="1">设车厢以 <Latex tex="30\ \text{m/s}" /> 匀速前进，球相对车厢的速度为 <Latex tex="3\ \text{m/s}" />。</div>
+
+<div v-click="2">以车厢为参考系：球来回都是 <Latex tex="3\ \text{m/s}" />，动能几乎不变——两人难度相同。</div>
+
+<div v-click="3">以地面为参考系：球速都是 <Latex tex="33\ \text{m/s}" /> 与 <Latex tex="27\ \text{m/s}" />，且都沿车厢前进方向；一次击球的动能变化 <Latex tex="\frac{1}{2}m(33^2-27^2) = \frac{1}{2}m\cdot 360 = 180m" />——一人做正功、一人做负功，<b>数值都很大</b>。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+title: 车厢里打乒乓球（2）这些功是哪来的
+---
+
+<div class="page-grow">
+<div class="ask">只挥了一下拍，哪来这么大的功？</div>
+
+<div class="figure"><PushForcesSvg /></div>
+
+<div v-click="1">击球时人对球施力 <Latex tex="F" />，球对人施反作用力 <Latex tex="F'" />；人的脚被车厢地板顶住，地板对人也施力 <Latex tex="F_{\text{地}}" />。</div>
+
+<div v-click="2">这些力的作用点都<b>随车厢一起前进</b>——地面参考系里，它们的位移是"击球时间内车厢前进的路程"，所以做的功很大。</div>
+
+<div class="tip-hint" v-click="3">给球的那份大能量来自<b>车厢（发动机）</b>，不是人的肌肉：人只做"相对车厢"的那一小部分功。</div>
+</div>
+
+---
+layout: base-flex
+title: 例题 机车启动
+---
+
+<div class="page-grow">
+<div>一辆汽车的质量 <Latex tex="m = 2.0\times10^{3}\ \text{kg}" />，所受阻力恒定。汽车从静止开始先做匀加速直线运动，达到额定功率后保持额定功率行驶，其 <Latex tex="v\text{-}t" /> 图像如图。<Latex tex="t_1 = 10\ \text{s}" /> 时速度 <Latex tex="v_1 = 8\ \text{m/s}" />；<Latex tex="t_2 = 18\ \text{s}" /> 时速度 <Latex tex="v_2 = 10\ \text{m/s}" />，此后汽车做匀速运动。求：（1）汽车所受阻力的大小；（2）发动机的额定功率；（3）汽车在这 <Latex tex="18\ \text{s}" /> 内行驶的路程。</div>
+
+<div class="figure"><LocomotiveVt :view-height="240" /></div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+title: 解析 机车启动（1）阻力与额定功率
+---
+
+<div class="page-grow">
+<div class="figure"><LocomotiveVt :annotate="$clicks >= 1" :view-height="150" /></div>
+
+<div v-click="1">0–10 s 图线是过原点的直线 → 匀加速：<Latex tex="a = \dfrac{v_1}{t_1} = \dfrac{8}{10}\ \text{m/s}^2 = 0.8\ \text{m/s}^2" /></div>
+
+<div v-click="2">10 s 时功率刚达到额定 <Latex tex="P_{\text{额}} = F_1 v_1" />；18 s 后做匀速，牵引力与阻力平衡 <Latex tex="f = \dfrac{P_{\text{额}}}{v_2}" />。</div>
+
+<div v-click="3">
+<div>10 s 时列牛顿第二定律 <Latex tex="F_1 - f = ma" />：</div>
+<Latex tex="\frac{P_{\text{额}}}{8} - \frac{P_{\text{额}}}{10} = 2.0\times10^{3}\times 0.8 \;\Rightarrow\; P_{\text{额}} = 6.4\times10^{4}\ \text{W},\quad f = 6.4\times10^{3}\ \text{N}" display />
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+title: 解析 机车启动（2）总路程
+---
+
+<div class="page-grow">
+<div class="figure"><LocomotiveVt :annotate="$clicks >= 1" :view-height="150" /></div>
+
+<div v-click="1">0–10 s 牵引力恒定 <Latex tex="F_1 = f + ma = 8.0\times10^{3}\ \text{N}" />，这段路程 <Latex tex="s_1 = \dfrac{v_1}{2}t_1 = 40\ \text{m}" /></div>
+
+<div v-click="2">
+<div>10–18 s 牵引力是<b>变力</b>（<Latex tex="F = P_{\text{额}}/v" />），不能用 <Latex tex="W = Fl" />：</div>
+<Latex tex="W_2 = P_{\text{额}}t_2 = 6.4\times10^{4}\times 8\ \text{J} = 5.12\times10^{5}\ \text{J}" display />
+</div>
+
+<div v-click="3">
+<div>全程动能定理（<Latex tex="W_1 = F_1 s_1 = 3.2\times10^{5}\ \text{J}" />）：</div>
+<Latex tex="W_1 + W_2 - fs = \frac{1}{2}mv_2^2 \;\Rightarrow\; s \approx 114\ \text{m}" display />
+</div>
 </div>
 
 ---

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-// 第 4 页：静电平衡 —— 第 1 击触发"感应电荷 0→100%"过程动画；只保留外电场 E0 滑块
+// 第 4 页：静电平衡 —— 点击分步（无滑块）：第 1 击弱外电场下 E′ 从 0 长到 E₀；第 2 击换成更强的一档，E内 仍回到 0
 import { computed, onMounted, ref, watch } from "vue";
 
 const props = defineProps<{ step: number }>();
 
-const E0 = ref(60);
+const E0 = computed(() => (props.step >= 2 ? 100 : 60));
 const eta = ref(0);
 let raf = 0;
 
@@ -28,18 +28,20 @@ function run() {
 watch(
   () => props.step,
   (s) => {
-    if (s >= 2) eta.value = 1;
-    else if (s >= 1) run();
+    if (s >= 1) run();
   },
 );
 onMounted(() => {
-  if (props.step >= 2) eta.value = 1;
-  else if (props.step >= 1) run();
+  if (props.step >= 1) run();
 });
 
 const Eprime = computed(() => eta.value * E0.value);
 const EIn = computed(() => E0.value - Eprime.value);
 const nCharge = computed(() => Math.max(1, Math.round(1 + eta.value * (E0.value / 18))));
+const strong = computed(() => E0.value >= 100);
+const e0Txt = computed(() => String(Math.round(E0.value)).padStart(3, " "));
+const epTxt = computed(() => String(Math.round(Eprime.value)).padStart(3, " "));
+const einTxt = computed(() => String(Math.round(EIn.value)).padStart(3, " "));
 const ys = [64, 98, 132, 166, 200];
 const chargeY = [86, 120, 154, 188];
 </script>
@@ -53,8 +55,8 @@ const chargeY = [86, 120, 154, 188];
         :from="{ x: 20, y }"
         :to="{ x: 144, y }"
         stroke="var(--c-field)"
-        stroke-width="1.6"
-        :opacity="0.75"
+        :stroke-width="strong ? 2.4 : 1.6"
+        :opacity="strong ? 0.95 : 0.7"
       />
       <CourseArrow
         v-for="y in ys"
@@ -62,8 +64,8 @@ const chargeY = [86, 120, 154, 188];
         :from="{ x: 282, y }"
         :to="{ x: 400, y }"
         stroke="var(--c-field)"
-        stroke-width="1.6"
-        :opacity="0.75"
+        :stroke-width="strong ? 2.4 : 1.6"
+        :opacity="strong ? 0.95 : 0.7"
       />
       <rect x="150" y="54" width="124" height="140" rx="8" fill="var(--c-line)" fill-opacity="0.55" stroke="var(--c-text-mute)" stroke-opacity="0.5" stroke-width="2" />
       <template v-if="step >= 1">
@@ -101,6 +103,16 @@ const chargeY = [86, 120, 154, 188];
           stroke-width="3"
           label="E′"
         />
+        <circle
+          v-for="(y, i) in [78, 106, 138, 166]"
+          :key="`el${i}`"
+          :cx="248 - eta * 84"
+          :cy="y"
+          r="5"
+          fill="var(--c-danger)"
+          fill-opacity="0.8"
+        />
+        <text x="212" y="222" text-anchor="middle" font-family="KaTeX_Main" font-size="11" fill="var(--c-text-mute)">自由电子</text>
         <text
           v-if="step >= 2"
           x="212"
@@ -117,30 +129,28 @@ const chargeY = [86, 120, 154, 188];
       </template>
       <text x="212" y="30" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-field)">E<tspan baseline-shift="sub" font-size="10">0</tspan></text>
     </svg>
-    <div class="stack">
-      <CourseSlider v-model="E0" :min="20" :max="100" :step="1" label="外电场" label-tex="E_0" label-width="5.2rem">
-        <template #value>{{ E0 }} <Latex tex="\text{N/C}" /></template>
-      </CourseSlider>
-      <div
-        class="text-[0.95rem]"
-        style="
-          align-self: stretch;
-          width: 100%;
-          text-align: left;
-          display: grid;
-          grid-template-columns: auto minmax(3.6ch, max-content) auto auto minmax(3.6ch, max-content) auto;
-          column-gap: 0.35rem;
-          align-items: baseline;
-        "
-        :style="{ visibility: step >= 1 ? 'visible' : 'hidden' }"
-      >
-        <Latex tex="E'=" />
-        <span class="tabular-nums" style="white-space: pre">{{ String(Math.round(Eprime)).padStart(3, " ") }}</span>
-        <Latex tex="\text{N/C}" />
-        <Latex tex="E_{\text{内}}=" />
-        <span class="tabular-nums" style="white-space: pre">{{ String(Math.round(EIn)).padStart(3, " ") }}</span>
-        <Latex tex="\text{N/C}" />
-      </div>
+    <div
+      class="text-[0.95rem]"
+      style="
+        align-self: stretch;
+        width: 100%;
+        text-align: left;
+        display: grid;
+        grid-template-columns: auto minmax(3.6ch, max-content) auto auto minmax(3.6ch, max-content) auto auto minmax(3.6ch, max-content) auto;
+        column-gap: 0.35rem;
+        align-items: baseline;
+      "
+      :style="{ visibility: step >= 1 ? 'visible' : 'hidden' }"
+    >
+      <Latex tex="E_0=" />
+      <span class="tabular-nums" style="white-space: pre">{{ e0Txt }}</span>
+      <Latex tex="\text{N/C}" />
+      <Latex tex="E'=" />
+      <span class="tabular-nums" style="white-space: pre">{{ epTxt }}</span>
+      <Latex tex="\text{N/C}" />
+      <Latex tex="E_{\text{内}}=" />
+      <span class="tabular-nums" style="white-space: pre">{{ einTxt }}</span>
+      <Latex tex="\text{N/C}" />
     </div>
   </div>
 </template>

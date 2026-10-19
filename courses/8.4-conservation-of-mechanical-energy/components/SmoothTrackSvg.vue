@@ -1,42 +1,86 @@
+<script setup lang="ts">
+/**
+ * 第 8 / 9 页（只有重力做功时的定量关系 + 上升过程）：光滑曲面上 A、B 两点的速度与受力。
+ * `direction="up"` 时速度箭头反向（物体由 B 上升到 A）；`showForces` 为真才画重力与支持力。
+ */
+withDefaults(defineProps<{ direction?: "down" | "up"; showForces?: boolean }>(), {
+  direction: "down",
+  showForces: false,
+});
+</script>
+
 <template>
-  <!-- 光滑曲面下滑的机械能守恒推导：A 点 mgh = ½mv² 到 B 点 -->
-  <svg width="660" height="330" viewBox="0 0 660 330" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M70 40 C70 220 150 264 300 264 L610 264" stroke="var(--c-line-strong)" stroke-width="4" stroke-linecap="round" fill="none" />
-    <SurfaceHatch x1="70" y1="264" x2="610" y2="264" />
-    <circle cx="112" cy="98" r="16" fill="var(--c-warn)" fill-opacity="0.3" stroke="var(--c-warn)" stroke-width="4" />
-    <circle cx="450" cy="248" r="16" fill="var(--c-warn)" fill-opacity="0.3" stroke="var(--c-warn)" stroke-width="4" />
-    <CourseArrow :x1="470" y1="248" x2="530" y2="248" color="var(--c-info)" :width="3.5" />
-    <text x="504" y="234" font-size="15" fill="var(--c-info)" font-family="KaTeX_Math" font-style="italic">v</text>
-    <text x="96" y="76" font-size="14" fill="var(--c-ink-faint)" font-family="KaTeX_Main">A</text>
-    <text x="440" y="226" font-size="14" fill="var(--c-ink-faint)" font-family="KaTeX_Main">B</text>
-    <line x1="70" y1="98" x2="112" y2="98" stroke="var(--c-line-strong)" stroke-width="2" stroke-dasharray="6 6" opacity="0.6" />
-    <line x1="70" y1="98" x2="70" y2="264" stroke="var(--c-line-strong)" stroke-width="2" stroke-dasharray="6 6" opacity="0.6" />
-    <text x="52" y="186" font-size="14" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">h</text>
-    <text x="100" y="128" font-size="12.5" fill="var(--c-ok)" font-family="KaTeX_Main" text-anchor="middle">
-      <tspan font-style="italic">E</tspan>
-      <tspan font-size="9" dy="3">p</tspan>
-      <tspan dy="-3">=</tspan>
-      <tspan font-style="italic">mgh</tspan>
+  <!-- 光滑曲面：A（h1、v1）在陡的一段，B（h2、v2）在下方平缓的一段；地面在曲面下方 -->
+  <svg class="fig-smooth-track" viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg">
+    <line x1="60" y1="262" x2="780" y2="262" stroke="var(--c-neutral-300)" stroke-width="3" stroke-linecap="round" />
+    <SurfaceHatch :from="{ x: 60, y: 262 }" :to="{ x: 780, y: 262 }" side="below" :thickness="14" :gap="24" />
+    <path
+      d="M 100 40 C 100 170 200 210 340 210 L 760 210"
+      fill="none"
+      stroke="var(--c-neutral-300)"
+      stroke-width="4.5"
+      stroke-linecap="round"
+    />
+    <line x1="52" y1="89" x2="200" y2="89" stroke="var(--c-ok)" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.5" />
+    <line x1="52" y1="197" x2="620" y2="197" stroke="var(--c-ok)" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.5" />
+    <line x1="52" y1="89" x2="52" y2="262" stroke="var(--c-ok)" stroke-width="1.5" stroke-dasharray="7 6" opacity="0.5" />
+    <text x="30" y="180" font-size="16" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
+      h<tspan font-size="11" dy="3">1</tspan>
     </text>
-    <text x="100" y="148" font-size="12.5" fill="var(--c-ink-faint)" font-family="KaTeX_Main" text-anchor="middle">
-      <tspan font-style="italic">E</tspan>
-      <tspan font-size="9" dy="3">k</tspan>
-      <tspan dy="-3">= 0</tspan>
+    <text x="30" y="242" font-size="16" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
+      h<tspan font-size="11" dy="3">2</tspan>
     </text>
-    <text x="470" y="290" font-size="12.5" fill="var(--c-ok)" font-family="KaTeX_Main" text-anchor="middle">
-      <tspan font-style="italic">E</tspan>
-      <tspan font-size="9" dy="3">p</tspan>
-      <tspan dy="-3">= 0</tspan>
+    <circle cx="119" cy="89" r="14" fill="var(--c-accent-2)" fill-opacity="0.22" stroke="var(--c-accent-2)" stroke-width="3" />
+    <circle cx="470" cy="197" r="14" fill="var(--c-accent-2)" fill-opacity="0.22" stroke="var(--c-accent-2)" stroke-width="3" />
+    <text x="78" y="62" font-size="16" fill="var(--c-text-dim)" font-family="system-ui">A</text>
+    <text x="438" y="170" font-size="16" fill="var(--c-text-dim)" font-family="system-ui">B</text>
+    <CourseArrow
+      v-if="direction === 'down'"
+      :from="{ x: 145, y: 82 }"
+      :to="{ x: 161, y: 140 }"
+      stroke="var(--c-accent-2)"
+      :stroke-width="2.4"
+    />
+    <CourseArrow
+      v-if="direction === 'up'"
+      :from="{ x: 161, y: 140 }"
+      :to="{ x: 145, y: 82 }"
+      stroke="var(--c-accent-2)"
+      :stroke-width="2.4"
+    />
+    <text x="168" y="120" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">
+      v<tspan font-size="10" dy="3">1</tspan>
     </text>
-    <text x="470" y="308" font-size="12.5" fill="var(--c-info)" font-family="KaTeX_Main" text-anchor="middle">
-      <tspan font-style="italic">E</tspan>
-      <tspan font-size="9" dy="3">k</tspan>
-      <tspan dy="-3">=</tspan>
-      <tspan font-style="italic">mv</tspan>
-      <tspan font-size="9" dy="3">2</tspan>
-      <tspan dy="-3">/2</tspan>
+    <CourseArrow
+      :from="{ x: direction === 'down' ? 500 : 562, y: 197 }"
+      :to="{ x: direction === 'down' ? 562 : 500, y: 197 }"
+      stroke="var(--c-accent-2)"
+      :stroke-width="2.4"
+    />
+    <text x="518" y="180" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">
+      v<tspan font-size="10" dy="3">2</tspan>
     </text>
-    <path d="M180 60 Q330 30 480 60" stroke="var(--c-warn)" stroke-width="2.5" stroke-dasharray="8 8" fill="none" opacity="0.7" />
-    <text x="330" y="42" font-size="13" fill="var(--c-warn)" font-family="KaTeX_Main" text-anchor="middle">只有重力做功</text>
+    <g v-if="showForces">
+      <CourseArrow :from="{ x: 119, y: 89 }" :to="{ x: 119, y: 141 }" stroke="var(--c-danger)" :stroke-width="2.8" />
+      <text x="128" y="128" font-size="15" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic">G</text>
+      <CourseArrow :from="{ x: 119, y: 89 }" :to="{ x: 163, y: 77 }" stroke="var(--c-physics)" :stroke-width="2.8" />
+      <text x="168" y="72" font-size="15" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic">
+        F<tspan font-size="10" dy="3">N</tspan>
+      </text>
+      <CourseArrow :from="{ x: 470, y: 197 }" :to="{ x: 470, y: 249 }" stroke="var(--c-danger)" :stroke-width="2.8" />
+      <text x="479" y="236" font-size="15" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic">G</text>
+      <CourseArrow :from="{ x: 470, y: 197 }" :to="{ x: 470, y: 151 }" stroke="var(--c-physics)" :stroke-width="2.8" />
+      <text x="479" y="160" font-size="15" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic">
+        F<tspan font-size="10" dy="3">N</tspan>
+      </text>
+    </g>
   </svg>
 </template>
+
+<style scoped>
+.fig-smooth-track {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+</style>

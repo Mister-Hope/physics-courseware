@@ -1,14 +1,14 @@
 <script setup lang="ts">
-// 第 6 页：尖端放电 —— 尖端近似球面的演示模型 E尖 = U/r（只显示读数与状态，不显示公式）
+// 第 6 页：尖端放电 —— 只保留曲率半径 r 一个主导滑块（U 固定 10 kV）；E尖 = U/r 只用于内部判断，屏幕只给读数与状态
 import { computed, ref } from "vue";
 
 const props = defineProps<{ step: number }>();
 
-const r = ref(1.0); // mm
-const U = ref(20); // kV
+const U = 10; // kV，固定档
+const r = ref(1); // mm
 const Eb = 3e6; // V/m
 
-const etip = computed(() => (U.value / r.value) * 1e6);
+const etip = computed(() => (U / r.value) * 1e6);
 const discharging = computed(() => etip.value >= Eb);
 const etipTex = computed(() => {
   const e = Math.floor(Math.log10(etip.value));
@@ -26,7 +26,7 @@ const molecules = [
 
 <template>
   <div class="stack">
-    <svg viewBox="0 0 420 250" class="w-full" xmlns="http://www.w3.org/2000/svg" style="height: 195px">
+    <svg viewBox="0 0 420 250" class="w-full" xmlns="http://www.w3.org/2000/svg" style="height: 200px">
       <path d="M 178 210 L 236 210 L 222 92 L 196 92 Z" fill="var(--c-line)" fill-opacity="0.65" stroke="var(--c-text-mute)" stroke-opacity="0.5" stroke-width="2" />
       <line x1="205" y1="92" x2="205" y2="30" stroke="var(--c-text-mute)" stroke-width="4" stroke-linecap="round" />
       <text x="205" y="234" text-anchor="middle" font-family="KaTeX_Main" font-size="13" fill="var(--c-text-mute)">尖端导体（带正电）</text>
@@ -51,19 +51,14 @@ const molecules = [
         <text x="120" y="60" font-family="KaTeX_Main" font-size="12" fill="var(--c-danger)">异种电荷奔向尖端中和</text>
       </template>
     </svg>
-    <div class="flex items-center gap-5">
-      <CourseSlider v-model="r" :min="0.5" :max="5" :step="0.1" label="曲率半径" label-tex="r" class="flex-1" label-width="6.4rem">
-        <template #value>{{ r.toFixed(1) }} <Latex tex="\text{mm}" /></template>
-      </CourseSlider>
-      <CourseSlider v-model="U" :min="5" :max="50" :step="1" label="电压" label-tex="U" class="flex-1" label-width="4.6rem">
-        <template #value>{{ U }} <Latex tex="\text{kV}" /></template>
-      </CourseSlider>
-    </div>
+    <CourseSlider v-model="r" :min="0.5" :max="5" :step="0.1" label="曲率半径" label-tex="r" label-width="6.4rem">
+      <template #value>{{ r.toFixed(1) }} <Latex tex="\text{mm}" /></template>
+    </CourseSlider>
     <div
       class="text-[0.95rem] whitespace-nowrap tabular-nums"
-      :style="{ visibility: props.step >= 1 ? 'visible' : 'hidden', minWidth: '16rem' }"
+      :style="{ visibility: props.step >= 1 ? 'visible' : 'hidden' }"
     >
-      <Latex tex="E_{\text{尖}}=" /><Latex :tex="etipTex" />　
+      <Latex tex="U=10\ \text{kV}" />　<Latex tex="E_{\text{尖}}=" /><Latex :tex="etipTex" />　
       <span :class="discharging ? 'text-accent' : 'text-dim'">{{ discharging ? "放电中" : "未电离" }}</span>
     </div>
   </div>

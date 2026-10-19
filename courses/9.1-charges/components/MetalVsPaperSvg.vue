@@ -3,63 +3,66 @@ import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
 
 /**
- * 第 13 页「带电体为什么能吸引轻小物体」：左格金属屑、右格纸屑。
- * 页面 clicks: 2 —— ① 出"被吸起"的受力箭头 ② 出两组不同的结果（金属屑弹开 / 纸屑被吸住）。
+ * 第 13 页「带电体为什么能吸引轻小物体」：把金属箔屑与纸屑放在桌面上，
+ * 带电棒**从上方靠近** → 碎屑被吸上去；金属屑接触带电后带上同种电荷，**被排斥、掉回桌面**，
+ * 纸屑几乎不导电、感应起的电荷难以重新分布，**被吸住不掉**。
+ * 页面 clicks: 2 —— ① 棒下降靠近、碎屑飞上去 ② 金属屑掉回、纸屑仍被吸住。
  */
 const { $clicks } = useSlideContext();
 const step = computed(() => Math.max(0, Math.min($clicks.value, 2)));
+
+/** 桌面上的碎屑（金属屑在左、纸屑在右） */
+const metalBits = [170, 215, 260];
+const paperBits = [390, 435, 480];
+/** 碎屑飞上去的位移（与棒下降后的下表面贴合） */
+const UP = -106;
+const metalShift = computed(() => (step.value === 1 ? UP : 0));
+const paperShift = computed(() => (step.value >= 1 ? UP : 0));
+const rodShift = computed(() => (step.value >= 1 ? 150 : 0));
 </script>
 
 <template>
-  <svg viewBox="0 0 620 300" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <!-- 左格：金属屑 -->
-    <rect x="16" y="20" width="288" height="256" rx="14" fill="var(--c-surface)" fill-opacity="0.28" stroke="var(--c-border)" stroke-width="1.4" />
-    <circle cx="66" cy="168" r="24" fill="var(--c-danger)" fill-opacity="0.88" />
-    <text x="66" y="168" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="24" fill="#0c1122">+</text>
-    <text x="66" y="216" text-anchor="middle" font-size="16" fill="var(--c-danger)">带电体</text>
+  <svg viewBox="0 0 620 400" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <SurfaceHatch :from="{ x: 30, y: 330 }" :to="{ x: 590, y: 330 }" side="below" />
 
-    <g fill="var(--c-accent)" fill-opacity="0.75" stroke="var(--c-accent)" stroke-width="1.4">
-      <rect x="168" y="62" width="26" height="14" rx="4" />
-      <rect x="214" y="52" width="22" height="14" rx="4" />
-      <rect x="246" y="72" width="26" height="14" rx="4" />
+    <!-- 带电棒：从上方下降靠近 -->
+    <g style="transition: transform 0.7s ease" :transform="`translate(0 ${rodShift})`">
+      <rect x="110" y="40" width="400" height="26" rx="13" fill="var(--c-accent)" fill-opacity="0.5" stroke="var(--c-accent)" stroke-width="2" />
+      <text v-for="(x, i) in [160, 240, 320, 400, 470]" :key="'r' + i" :x="x" y="54" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="20" fill="var(--c-danger)">+</text>
     </g>
-    <text x="220" y="118" text-anchor="middle" font-size="16" fill="var(--c-accent)">金属屑</text>
+    <text x="60" y="54" text-anchor="middle" font-size="18" fill="var(--c-accent)">带电体</text>
 
-    <!-- 金属屑：只在第 1 击显示"被吸起"，第 2 击它已经被排斥，吸引力箭头必须撤掉 -->
+    <!-- 金属屑：第 1 击被吸上，第 2 击接触后带同种电荷、被排斥掉回桌面 -->
+    <g style="transition: transform 0.7s ease" :transform="`translate(0 ${metalShift})`">
+      <g v-for="(x, i) in metalBits" :key="'m' + i">
+        <rect :x="x" y="316" width="26" height="14" rx="4" fill="var(--c-accent)" fill-opacity="0.8" stroke="var(--c-accent)" stroke-width="1.4" />
+      </g>
+      <g v-if="step >= 2">
+        <text v-for="(x, i) in metalBits" :key="'mp' + i" :x="x + 13" y="308" text-anchor="middle" font-family="KaTeX_Main" font-size="18" fill="var(--c-danger)">+</text>
+      </g>
+    </g>
+
+    <!-- 纸屑：被吸住不掉 -->
+    <g style="transition: transform 0.7s ease" :transform="`translate(0 ${paperShift})`">
+      <g v-for="(x, i) in paperBits" :key="'p' + i">
+        <rect :x="x" y="316" width="24" height="15" rx="3" fill="var(--c-text-dim)" fill-opacity="0.65" stroke="var(--c-text-dim)" stroke-width="1.4" />
+      </g>
+    </g>
+
+    <!-- 第 1 击：被吸起的箭头 -->
     <g v-if="step === 1">
-      <CourseArrow :from="{ x: 180, y: 156 }" :to="{ x: 180, y: 92 }" stroke="var(--c-accent-2)" stroke-width="3" />
-      <CourseArrow :from="{ x: 224, y: 148 }" :to="{ x: 224, y: 82 }" stroke="var(--c-accent-2)" stroke-width="3" />
-      <CourseArrow :from="{ x: 260, y: 160 }" :to="{ x: 260, y: 100 }" stroke="var(--c-accent-2)" stroke-width="3" />
+      <CourseArrow v-for="(x, i) in metalBits" :key="'ma' + i" :from="{ x: x + 13, y: 296 }" :to="{ x: x + 13, y: 236 }" stroke="var(--c-accent-2)" stroke-width="3" />
+      <CourseArrow v-for="(x, i) in paperBits" :key="'pa' + i" :from="{ x: x + 12, y: 296 }" :to="{ x: x + 12, y: 236 }" stroke="var(--c-accent-2)" stroke-width="3" />
     </g>
+
+    <!-- 第 2 击：金属屑被排斥下落；纸屑仍被吸住 -->
     <g v-if="step >= 2">
-      <text x="180" y="58" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-danger)">+</text>
-      <text x="224" y="46" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-danger)">+</text>
-      <text x="260" y="68" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-danger)">+</text>
-      <CourseArrow :from="{ x: 200, y: 76 }" :to="{ x: 164, y: 32 }" stroke="var(--c-danger)" stroke-width="3" />
-      <CourseArrow :from="{ x: 248, y: 66 }" :to="{ x: 284, y: 28 }" stroke="var(--c-danger)" stroke-width="3" />
-      <text x="150" y="252" text-anchor="middle" font-size="16" fill="var(--c-danger)">接触后带同种电荷 → 被排斥</text>
+      <CourseArrow v-for="(x, i) in metalBits" :key="'mr' + i" :from="{ x: x + 13, y: 286 }" :to="{ x: x + 13, y: 316 }" stroke="var(--c-danger)" stroke-width="3" />
+      <text x="215" y="30" text-anchor="middle" font-size="18" fill="var(--c-danger)">接触后带同种电荷 → 被排斥</text>
+      <text x="450" y="30" text-anchor="middle" font-size="18" fill="var(--c-accent-2)">几乎不导电 → 被吸住</text>
     </g>
 
-    <!-- 右格：纸屑 -->
-    <rect x="316" y="20" width="288" height="256" rx="14" fill="var(--c-surface)" fill-opacity="0.28" stroke="var(--c-border)" stroke-width="1.4" />
-    <circle cx="366" cy="168" r="24" fill="var(--c-danger)" fill-opacity="0.88" />
-    <text x="366" y="168" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="24" fill="#0c1122">+</text>
-    <text x="366" y="216" text-anchor="middle" font-size="16" fill="var(--c-danger)">带电体</text>
-
-    <g fill="var(--c-text-dim)" fill-opacity="0.6" stroke="var(--c-text-dim)" stroke-width="1.4">
-      <rect x="470" y="62" width="24" height="16" rx="3" />
-      <rect x="514" y="52" width="20" height="16" rx="3" />
-      <rect x="546" y="72" width="24" height="16" rx="3" />
-    </g>
-    <text x="522" y="118" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">纸屑</text>
-
-    <g v-if="step >= 1">
-      <CourseArrow :from="{ x: 480, y: 156 }" :to="{ x: 480, y: 92 }" stroke="var(--c-accent-2)" stroke-width="3" />
-      <CourseArrow :from="{ x: 524, y: 148 }" :to="{ x: 524, y: 82 }" stroke="var(--c-accent-2)" stroke-width="3" />
-      <CourseArrow :from="{ x: 558, y: 160 }" :to="{ x: 558, y: 100 }" stroke="var(--c-accent-2)" stroke-width="3" />
-    </g>
-    <g v-if="step >= 2">
-      <text x="452" y="252" text-anchor="middle" font-size="16" fill="var(--c-accent-2)">几乎不导电 → 被吸住</text>
-    </g>
+    <text x="215" y="376" text-anchor="middle" font-size="18" fill="var(--c-accent)">金属屑</text>
+    <text x="435" y="376" text-anchor="middle" font-size="18" fill="var(--c-text-dim)">纸屑</text>
   </svg>
 </template>

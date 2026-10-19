@@ -20,7 +20,7 @@ const {
 }>();
 
 /** 教材取 k = 9.0 × 10⁹ N·m²/C² */
-const K = 9.0e9;
+const K = 9e9;
 
 const q1 = ref(2);
 const q2 = ref(2);

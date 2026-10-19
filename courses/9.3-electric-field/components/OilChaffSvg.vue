@@ -9,7 +9,7 @@ const CY = 120;
 const CHAFF = [
   { r: 34, a: 0.35 },
   { r: 34, a: 1.1 },
-  { r: 34, a: 2.0 },
+  { r: 34, a: 2 },
   { r: 34, a: 2.9 },
   { r: 34, a: 3.8 },
   { r: 34, a: 4.7 },
@@ -18,7 +18,7 @@ const CHAFF = [
   { r: 56, a: 0.75 },
   { r: 56, a: 1.45 },
   { r: 56, a: 2.2 },
-  { r: 56, a: 3.0 },
+  { r: 56, a: 3 },
   { r: 56, a: 3.7 },
   { r: 56, a: 4.4 },
   { r: 56, a: 5.1 },
@@ -41,8 +41,8 @@ const CHAFF_PIECES = CHAFF.map(({ r, a }) => {
 
 <template>
   <svg viewBox="0 0 320 240" class="w-full h-full">
-    <circle :cx="CX" :cy="CY" r="96" fill="var(--c-panel)" stroke="var(--c-line)" stroke-width="2" />
-    <line :x1="CX" :y1="CY - 8" :x2="CX" y2="4" stroke="var(--c-line)" stroke-width="6" stroke-linecap="round" />
+    <circle :cx="CX" :cy="CY" r="96" fill="var(--c-surface)" stroke="rgb(148 163 184 / 30%)" stroke-width="2" />
+    <line :x1="CX" :y1="CY - 8" :x2="CX" y2="4" stroke="rgb(148 163 184 / 30%)" stroke-width="6" stroke-linecap="round" />
     <ellipse
       v-for="(piece, i) in CHAFF_PIECES"
       :key="i"
@@ -51,7 +51,7 @@ const CHAFF_PIECES = CHAFF.map(({ r, a }) => {
       rx="7"
       ry="2.2"
       :transform="`rotate(${piece.deg} ${piece.x} ${piece.y})`"
-      fill="var(--c-gold)"
+      fill="var(--c-accent)"
       fill-opacity="0.8"
     />
     <circle :cx="CX" :cy="CY" r="9" fill="var(--c-danger)" fill-opacity="0.9" />

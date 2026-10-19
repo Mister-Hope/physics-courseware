@@ -430,10 +430,40 @@ subtitle: "功率的定义 · 机车启动"
 
 ---
 layout: base-flex
-clicks: 1
+clicks: 5
+title: 钉钉子
 ---
 
-# 功率
+<div class="page-grow page-grow-tight">
+<div class="ask">把一枚钉子钉进木板，钉子受到的阻力与钉入的深度成正比。假设<b>每次锤击做的功相同</b>，每次敲击使钉子前进的距离之比是多少？</div>
+
+<div class="figure"><NailHammerLab :step="$clicks" /></div>
+
+<div class="tip-hint" v-click="5">一锤比一锤进得少——为什么？下一页用 <Latex tex="F\text{-}x" /> 图的面积算给你看。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+title: 钉钉子
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide">
+<div class="figure"><NailWorkGraph :step="$clicks" /></div>
+<div class="stack">
+<div class="summary-line" v-click="1">阻力 <Latex tex="F = kx" />，每一锤做的功是 <Latex tex="F\text{-}x" /> 图上的<b>梯形面积</b>；每锤做功相同 ⇒ 各块面积相等 ⇒ 第 <Latex tex="n" /> 锤后深度 <Latex tex="x_n = \sqrt{n}\,x_1" />。</div>
+
+<div class="tip-hint" v-click="2">所以每次前进的距离之比：<Latex tex="1 : (\sqrt{2}-1) : (\sqrt{3}-\sqrt{2}) : \dots : (\sqrt{N}-\sqrt{N-1})" />——越往后越钉不动。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 功率
+---
 
 <div class="page-grow">
 <div class="ask">做同样多的功，有的用时长、有的用时短——做功的快慢怎样定量表示？</div>
@@ -445,7 +475,7 @@ clicks: 1
 
 <Latex tex="P = \frac{W}{t}" display />
 
-<div>功率的单位是<b>瓦特</b>（watt），符号为 <Latex tex="\text{W}" />：<Latex tex="1\ \text{W} = 1\ \text{J/s}" />。技术上常用<b>千瓦</b>：<Latex tex="1\ \text{kW} = 1000\ \text{W}" />。</div>
+<div>功率的单位是<b>瓦特</b>（watt），简称<b>瓦</b>，符号为 <Latex tex="\text{W}" />：<Latex tex="1\ \text{W} = 1\ \text{J/s}" />。技术上常用<b>千瓦</b>：<Latex tex="1\ \text{kW} = 1000\ \text{W}" />。</div>
 
 </DefinitionBox>
 </div>
@@ -454,21 +484,36 @@ clicks: 1
 ---
 layout: base-flex
 clicks: 3
+title: 功率与速度的关系
 ---
 
-# 功率与速度的关系
-
 <div class="page-grow page-grow-tight">
-<div class="ask">功率用 <Latex tex="W" /> 和 <Latex tex="t" /> 表示，而这段时间内的 <Latex tex="\frac{l}{t}" /> 正是速度——沿位移方向的力 <Latex tex="F" /> 做功的功率可以写成什么？</div>
+<div class="ask">功率用 <Latex tex="W" /> 和 <Latex tex="t" /> 表示，而这段时间内的 <Latex tex="\frac{x}{t}" /> 正是速度——功率可以写成什么？</div>
 
 <div v-click="1">
-<div class="summary-line">力与位移同向时 <Latex tex="W = Fl" />，而 <Latex tex="\frac{l}{t} = v" /> 是这段时间内的平均速度：</div>
-<Latex tex="P = \frac{W}{t} = \frac{Fl}{t} = Fv" display />
+<div class="summary-line">力与位移成 <Latex tex="\alpha" /> 角时 <Latex tex="W = Fx\cos\alpha" />，而 <Latex tex="\frac{x}{t} = v" /> 是这段时间内的平均速度：</div>
+<Latex tex="P = \frac{W}{t} = \frac{Fx\cos\alpha}{t} = Fv\cos\alpha" display />
 </div>
 
-<div class="tip-hint" v-click="2">一个沿着物体位移方向的力对物体做功的功率，等于这个力与物体速度的乘积。</div>
+<div class="tip-hint" v-click="2">力与位移成 <Latex tex="\alpha" /> 角时，功率等于力、速度、夹角余弦三者的乘积；<Latex tex="F" /> 沿位移方向（<Latex tex="\alpha = 0" />）时就是 <Latex tex="P = Fv" />。</div>
 
-<div class="info-hint" v-click="3"><Latex tex="v" /> 是恒力作用下的平均速度时，<Latex tex="P = Fv" /> 给出的是<b>平均功率</b>；时间间隔非常小、<Latex tex="v" /> 看作瞬时速度时，它也反映瞬时功率。</div>
+<div class="info-hint" v-click="3"><Latex tex="v" /> 是恒力作用下的平均速度时，<Latex tex="P = Fv\cos\alpha" /> 给出的是<b>平均功率</b>；时间间隔非常小、<Latex tex="v" /> 看作瞬时速度时，它也反映瞬时功率。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+title: 平均功率与瞬时功率
+---
+
+<div class="page-grow page-grow-tight">
+<div class="ask">同一个力，什么时候算出来的是平均功率、什么时候是瞬时功率？</div>
+
+<div class="summary-line" v-click="1"><b>平均功率</b>：<Latex tex="P = \frac{W}{t}" />，对应一段时间；恒力时也等于 <Latex tex="F \bar{v} \cos\alpha" />（力乘平均速度）。</div>
+
+<div class="summary-line" v-click="2"><b>瞬时功率</b>：<Latex tex="P = Fv\cos\alpha" /> 中的 <Latex tex="v" /> 取瞬时速度，对应某一时刻。</div>
+
+<div class="tip-hint" v-click="2">力与速度垂直（<Latex tex="\alpha = \frac{\pi}{2}" />）时 <Latex tex="P = 0" />——这个力不做功。功率也是<b>标量</b>，有正负：正负只说能量流向，比大小时比绝对值。</div>
 </div>
 
 ---
@@ -514,27 +559,154 @@ title: 例题 额定功率下汽车的速度与实际功率
 ---
 layout: base-flex
 clicks: 2
-title: 额定功率下，汽车怎样提速
+title: 真实车辆为什么有最高速度
 ---
 
 <div class="page-grow page-grow-tight">
-<div class="ask">恒定加速度启动时功率随速度增大；功率涨到额定值后，还能保持恒定加速度吗？</div>
+<div class="ask">真实的车，除了地面摩擦还有风阻——为什么每辆车都有最高速度？</div>
 
-<div v-click="1">
-<CarStartLab />
+<div class="figure"><RealCarResistanceGraph /></div>
+
+<div class="tip-hint" v-click="2">速度越大<b>风阻</b>越大，而牵引力 <Latex tex="F = \frac{P}{v}" /> 越小；两者相等时车不再加速，这就是最高速度。</div>
 </div>
 
-<div class="tip-hint" v-click="2"><Latex tex="F" /> 减到 <Latex tex="F_{\text{阻}}" /> 时 <Latex tex="a = 0" />，速度最大 <Latex tex="v_{\max} = \frac{P}{F_{\text{阻}}}" />。</div>
+---
+layout: base-flex
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="ask">汽车以<b>额定功率</b>启动，阻力恒为 <Latex tex="f_0" />。<Latex tex="P\text{-}t" />、<Latex tex="F\text{-}v" />、<Latex tex="F\text{-}\frac{1}{v}" />、<Latex tex="a\text{-}t" />、<Latex tex="v\text{-}t" />、<Latex tex="a\text{-}\frac{1}{v}" /> 六幅图像各是什么样？</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: minmax(0, 1.62fr) minmax(0, 1fr)">
+<div class="figure"><CarStartGraphs kind="P-t" /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1"><b>功率从一开始就保持额定值</b>：启动即以额定功率工作，功率不随时间变化——一条水平线。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: minmax(0, 1.62fr) minmax(0, 1fr)">
+<div class="figure"><CarStartGraphs kind="F-v" /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1"><b>牵引力随速度增大而减小</b>：由 <Latex tex="P = Fv" /> 得 <Latex tex="F = \frac{P}{v}" />，是双曲线；速度增大到 <Latex tex="v_{\max}" /> 时牵引力降到等于阻力 <Latex tex="f_0" />。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: minmax(0, 1.62fr) minmax(0, 1fr)">
+<div class="figure"><CarStartGraphs kind="F-inv-v" /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1"><b>牵引力与速度的倒数成正比</b>：<Latex tex="F = P \cdot \frac{1}{v}" />——过原点的<b>直线</b>，斜率就是额定功率。这个关系与阻力无关。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: minmax(0, 1.62fr) minmax(0, 1fr)">
+<div class="figure"><CarStartGraphs kind="a-t" /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1"><b>加速度越来越小</b>：速度增大 ⇒ 牵引力减小 ⇒ <Latex tex="a = \frac{F - f_0}{m}" /> 减小；牵引力降到 <Latex tex="f_0" /> 时加速度为零。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: minmax(0, 1.62fr) minmax(0, 1fr)">
+<div class="figure"><CarStartGraphs kind="v-t" /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1"><b>速度增加得越来越慢</b>：斜率就是加速度，逐渐变小；曲线渐近于 <Latex tex="v_{\max} = \frac{P}{f_0}" />。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: 恒定功率启动
+---
+
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: minmax(0, 1.62fr) minmax(0, 1fr)">
+<div class="figure"><CarStartGraphs kind="a-inv-v" /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1"><b>加速度与速度的倒数成线性关系</b>：<Latex tex="a = \frac{P}{m}\cdot\frac{1}{v} - \frac{f_0}{m}" />——<b>直线</b>；反向延长与纵轴交于负截距 <Latex tex="-\frac{f_0}{m}" />，横截距处 <Latex tex="a = 0" />。</div>
+</div>
+</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 2
-title: 练习一 三种情形下力做的功
+title: 恒定加速度启动
 ---
 
 <div class="page-grow page-grow-tight">
-<div><b class="ex-no">练习一</b>　物体在力 <Latex tex="F" /> 的作用下水平发生一段位移 <Latex tex="x" />，三种情形下 <Latex tex="F = 10\ \text{N}" />、<Latex tex="x = 2\ \text{m}" />，夹角 <Latex tex="\alpha" /> 如图。分别计算力 <Latex tex="F" /> 对物体做的功。</div>
+<div class="ask">还是阻力恒为 <Latex tex="f_0" />。这次以<b>恒定加速度</b> <Latex tex="a" /> 启动，匀加速阶段能达到的最大速度是多少？</div>
+
+<div class="summary-line" v-click="1">匀加速时牵引力恒定：<Latex tex="F = f_0 + ma" />；功率 <Latex tex="P = Fv" /> 随速度增大，涨到额定值 <Latex tex="P_0" /> 时速度达到 <Latex tex="v_1 = \frac{P_0}{f_0 + ma}" />。</div>
+
+<div class="tip-hint" v-click="2"><Latex tex="v_1 = \frac{P_0}{f_0 + ma} < \frac{P_0}{f_0} = v_{\max}" />——匀加速能达到的最大速度，<b>小于</b>恒定功率启动的最大速度。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+title: 匀加速之后怎样继续加速
+---
+
+<div class="page-grow page-grow-tight">
+<div class="ask">恒定加速度不能维持之后，如果就保持最大功率，<Latex tex="v\text{-}t" /> 与 <Latex tex="F\text{-}\frac{1}{v}" /> 图像各是什么样？</div>
+
+<div class="figure"><PhaseGraphs /></div>
+
+<div class="summary-line" v-click="1"><Latex tex="v\text{-}t" />：先是一段<b>直线</b>（匀加速），到 <Latex tex="v_1" /> 后转为斜率渐小的曲线，渐近于 <Latex tex="v_{\max}" />。</div>
+
+<div class="tip-hint" v-click="2"><Latex tex="F\text{-}\frac{1}{v}" />：先是一段<b>水平线</b>（牵引力恒定 <Latex tex="f_0 + ma" />），到 <Latex tex="\frac{1}{v_1}" /> 之后转为过原点的<b>直线</b>（<Latex tex="F = P_0 \cdot \frac{1}{v}" />）。</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+title: 练习 三种情形下力做的功
+---
+
+<div class="page-grow page-grow-tight">
+<div><b class="ex-no">练习</b>　物体在力 <Latex tex="F" /> 的作用下水平发生一段位移 <Latex tex="x" />，三种情形下 <Latex tex="F = 10\ \text{N}" />、<Latex tex="x = 2\ \text{m}" />，夹角 <Latex tex="\alpha" /> 如图。分别计算力 <Latex tex="F" /> 对物体做的功。</div>
 
 <div class="figure"><WorkCasesExerciseSvg /></div>
 
@@ -546,15 +718,15 @@ title: 练习一 三种情形下力做的功
 ---
 layout: base-flex
 clicks: 3
-title: 练习二 起重机提升重物做的功
+title: 练习 起重机提升重物
 ---
 
 <div class="page-grow">
-<div><b class="ex-no">练习二</b>　用起重机把质量为 <Latex tex="2.0\times 10^3\ \text{kg}" /> 的物体匀速地提高了 <Latex tex="5\ \text{m}" />。钢绳的拉力做了多少功？重力做了多少功？这些力做的总功是多少？（<Latex tex="g" /> 取 <Latex tex="10\ \text{m/s}^2" />）</div>
+<div><b class="ex-no">练习</b>　用起重机把质量为 <Latex tex="2.0\times 10^3\ \text{kg}" /> 的物体匀速地提高了 <Latex tex="5\ \text{m}" />。钢绳的拉力做了多少功？重力做了多少功？这些力做的总功是多少？（<Latex tex="g" /> 取 <Latex tex="10\ \text{m/s}^2" />）</div>
 
 <div v-click="1"><div class="summary-line">匀速上升：拉力与重力平衡，<Latex tex="F_{\text{拉}} = mg = 2.0\times 10^4\ \text{N}" />，方向与位移同向。</div></div>
 
-<div v-click="2"><Latex tex="W_{\text{拉}} = F_{\text{拉}} l = 1.0\times 10^5\ \text{J}" />，<Latex tex="W_G = -mgl = -1.0\times 10^5\ \text{J}" /></div>
+<div v-click="2"><Latex tex="W_{\text{拉}} = F_{\text{拉}} x = 1.0\times 10^5\ \text{J}" />，<Latex tex="W_G = -mgx = -1.0\times 10^5\ \text{J}" /></div>
 
 <div class="tip-hint" v-click="3">总功 <Latex tex="W = W_{\text{拉}} + W_G = 0" />——匀速提升时，拉力做的功全部用来克服重力。</div>
 </div>
@@ -562,15 +734,15 @@ title: 练习二 起重机提升重物做的功
 ---
 layout: base-flex
 clicks: 2
-title: 练习三 P = Fv 的推导错在哪
+title: 练习 P = Fv 的推导错在哪
 ---
 
 <div class="page-grow">
-<div><b class="ex-no">练习三</b>　有一个力 <Latex tex="F" />，它在不断增大。某人以此为条件，应用 <Latex tex="P = Fv" /> 进行了如下推导：根据 <Latex tex="P = Fv" />，<Latex tex="F" /> 增大则 <Latex tex="P" /> 增大；又根据 <Latex tex="v = \frac{P}{F}" />，<Latex tex="P" /> 增大则 <Latex tex="v" /> 增大；再根据 <Latex tex="F = \frac{P}{v}" />，<Latex tex="v" /> 增大则 <Latex tex="F" /> 减小。此人推导的结果与已知条件相矛盾。错在哪里？</div>
+<div><b class="ex-no">练习</b>　有一个力 <Latex tex="F" />，它在不断增大。某人以此为条件，应用 <Latex tex="P = Fv" /> 进行了如下推导：根据 <Latex tex="P = Fv" />，<Latex tex="F" /> 增大则 <Latex tex="P" /> 增大；又根据 <Latex tex="v = \frac{P}{F}" />，<Latex tex="P" /> 增大则 <Latex tex="v" /> 增大；再根据 <Latex tex="F = \frac{P}{v}" />，<Latex tex="v" /> 增大则 <Latex tex="F" /> 减小。此人推导的结果与已知条件相矛盾。错在哪里？</div>
 
 <div class="warn-hint" v-click="1">逐条检查：每一步推导里，另外两个量是不是都被当成了不变的量？</div>
 
-<div class="tip-hint" v-click="2">比例关系只在"另一个量保持不变"时才成立。推导中一会儿让 <Latex tex="P" /> 随 <Latex tex="F" /> 一起增大，一会儿又把 <Latex tex="P" /> 当成定值去讨论 <Latex tex="v" /> 和 <Latex tex="F" /> 的变化——<Latex tex="P" /> 不能既变又不变，才推出自相矛盾的结论。</div>
+<div class="tip-hint" v-click="2">比例关系只在"另一个量保持不变"时才成立。推导中一会儿让 <Latex tex="P" /> 随 <Latex tex="F" /> 一起增大，一会儿又把 <Latex tex="P" /> 当成定值去讨论 <Latex tex="v" /> 和 <Latex tex="F" /> 的变化——<Latex tex="P" /> 不能既变又不变。</div>
 </div>
 
 ---
@@ -582,29 +754,30 @@ title: 课堂小结
 <div class="page-grow page-grow-tight">
 <div class="half-grid">
 <div class="stack stack-tight">
-<div class="mini-title"><mdi-book-open-variant />功</div>
-<Latex tex="W = Fx\cos\alpha" display />
-<div class="mini-note">标量，单位 <Latex tex="\text{J}" /></div>
+<div class="mini-title"><mdi-clock-outline />功率</div>
+<Latex tex="P = \frac{W}{t}" display />
+<div class="mini-note">做功的快慢；标量，单位 <Latex tex="\text{W}" /></div>
 </div>
 <div class="stack stack-tight divider-l">
-<div class="mini-title"><mdi-swap-horizontal />正功和负功</div>
-<Latex tex="\cos\alpha \gtrless 0 \;\Longrightarrow\; W \gtrless 0" display />
-<div class="mini-note">总功＝代数和</div>
+<div class="mini-title"><mdi-speedometer />功率与速度</div>
+<Latex tex="P = Fv\cos\alpha" display />
+<div class="mini-note">瞬时功率取瞬时速度；<Latex tex="\alpha = \frac{\pi}{2}" /> 时 <Latex tex="P = 0" /></div>
 </div>
 </div>
 
 <div class="half-grid">
 <div class="stack stack-tight">
-<div class="mini-title"><mdi-clock-outline />功率</div>
-<Latex tex="P = \frac{W}{t}" display />
-<div class="mini-note">单位 <Latex tex="\text{W}" /></div>
+<div class="mini-title"><mdi-arrow-expand-horizontal />恒定功率启动</div>
+<Latex tex="F = \frac{P}{v}" display />
+<div class="mini-note"><Latex tex="F\text{-}\frac{1}{v}" /> 是过原点的直线；<Latex tex="v_{\max} = \frac{P}{f_0}" /></div>
 </div>
 <div class="stack stack-tight divider-l">
-<div class="mini-title"><mdi-car-side />功率与速度</div>
-<Latex tex="P = Fv" display />
-<div class="mini-note">功率一定时 <Latex tex="F" /> 与 <Latex tex="v" /> 反比</div>
+<div class="mini-title"><mdi-car-side />恒定加速度启动</div>
+<Latex tex="F = f_0 + ma" display />
+<div class="mini-note">匀加速的最大速度 <Latex tex="v_1 = \frac{P_0}{f_0 + ma} < v_{\max}" /></div>
 </div>
 </div>
 
-<div class="tip-hint" v-click="1">夹角决定功的正负；功率一定时 <Latex tex="F" /> 与 <Latex tex="v" /> 成反比。</div>
+<div class="tip-hint" v-click="1">功率一定时牵引力与速度成反比；真实车辆的最高速度由牵引力与阻力相等决定。</div>
 </div>
+

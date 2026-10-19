@@ -99,13 +99,13 @@ const eTex = computed(() => fieldTex("E", eMag.value));
       @pointerup="onPointerUp"
       @pointerleave="onPointerUp"
     >
-      <line :x1="Q1P.x" :y1="Q1P.y" :x2="Q2P.x" :y2="Q2P.y" stroke="var(--c-text-mute)" stroke-opacity="0.3" stroke-width="1.4" stroke-dasharray="4 6" />
-      <line :x1="Q1P.x" :y1="Q1P.y" :x2="P.x" :y2="P.y" stroke="var(--c-text-mute)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="5 5" />
-      <line :x1="Q2P.x" :y1="Q2P.y" :x2="P.x" :y2="P.y" stroke="var(--c-text-mute)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="5 5" />
-      <text :x="(Q1P.x + P.x) / 2 - 10" :y="(Q1P.y + P.y) / 2" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-text-mute)">r</text>
-      <text :x="(Q1P.x + P.x) / 2 - 4" :y="(Q1P.y + P.y) / 2 + 14" font-family="KaTeX_Main" font-size="11" fill="var(--c-text-mute)">1</text>
-      <text :x="(Q2P.x + P.x) / 2 + 6" :y="(Q2P.y + P.y) / 2" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-text-mute)">r</text>
-      <text :x="(Q2P.x + P.x) / 2 + 12" :y="(Q2P.y + P.y) / 2 + 14" font-family="KaTeX_Main" font-size="11" fill="var(--c-text-mute)">2</text>
+      <line :x1="Q1P.x" :y1="Q1P.y" :x2="Q2P.x" :y2="Q2P.y" stroke="var(--c-neutral-500)" stroke-opacity="0.3" stroke-width="1.4" stroke-dasharray="4 6" />
+      <line :x1="Q1P.x" :y1="Q1P.y" :x2="P.x" :y2="P.y" stroke="var(--c-neutral-500)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="5 5" />
+      <line :x1="Q2P.x" :y1="Q2P.y" :x2="P.x" :y2="P.y" stroke="var(--c-neutral-500)" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="5 5" />
+      <text :x="(Q1P.x + P.x) / 2 - 10" :y="(Q1P.y + P.y) / 2" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-neutral-500)">r</text>
+      <text :x="(Q1P.x + P.x) / 2 - 4" :y="(Q1P.y + P.y) / 2 + 14" font-family="KaTeX_Main" font-size="11" fill="var(--c-neutral-500)">1</text>
+      <text :x="(Q2P.x + P.x) / 2 + 6" :y="(Q2P.y + P.y) / 2" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-neutral-500)">r</text>
+      <text :x="(Q2P.x + P.x) / 2 + 12" :y="(Q2P.y + P.y) / 2 + 14" font-family="KaTeX_Main" font-size="11" fill="var(--c-neutral-500)">2</text>
       <g :style="{ visibility: showE1 ? 'visible' : 'hidden' }">
         <CourseArrow :from="P" :to="e1End" stroke="var(--c-danger)" :stroke-width="3" />
         <text :x="e1End.x - 6" :y="e1End.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-danger)">E</text>
@@ -117,8 +117,8 @@ const eTex = computed(() => fieldTex("E", eMag.value));
         <text :x="e2End.x + 6" :y="e2End.y - 8" font-family="KaTeX_Main" font-size="11" fill="var(--c-velocity)">2</text>
       </g>
       <g :style="{ visibility: showResultant ? 'visible' : 'hidden' }">
-        <line :x1="e1End.x" :y1="e1End.y" :x2="eEnd.x" :y2="eEnd.y" stroke="var(--c-text-mute)" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="5 5" />
-        <line :x1="e2End.x" :y1="e2End.y" :x2="eEnd.x" :y2="eEnd.y" stroke="var(--c-text-mute)" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="5 5" />
+        <line :x1="e1End.x" :y1="e1End.y" :x2="eEnd.x" :y2="eEnd.y" stroke="var(--c-neutral-500)" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="5 5" />
+        <line :x1="e2End.x" :y1="e2End.y" :x2="eEnd.x" :y2="eEnd.y" stroke="var(--c-neutral-500)" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="5 5" />
         <CourseArrow :from="P" :to="eEnd" stroke="var(--c-force)" :stroke-width="3.8" />
         <text :x="eEnd.x + 8" :y="eEnd.y + 4" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-force)">E</text>
       </g>
@@ -139,7 +139,7 @@ const eTex = computed(() => fieldTex("E", eMag.value));
         @pointerdown="onPointerDown"
       />
       <circle :cx="P.x" :cy="P.y" r="9" fill="rgba(148, 163, 184, 0.18)" />
-      <text :x="P.x + 16" :y="P.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-gold)">P</text>
+      <text :x="P.x + 16" :y="P.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-accent)">P</text>
     </svg>
     <div class="spl-panel">
       <div class="spl-read spl-e1" :class="{ 'spl-hidden': !showE1 }"><Latex :tex="e1Tex" /></div>
