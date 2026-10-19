@@ -174,7 +174,7 @@ const onInput = (event: Event): void => {
 
   cursor: pointer;
 
-  accent-color: var(--cs-accent, var(--c-accent));
+  accent-color: var(--c-accent);
 }
 
 .cs-input:disabled {

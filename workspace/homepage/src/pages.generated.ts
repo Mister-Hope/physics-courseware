@@ -13,7 +13,7 @@ export const coursePages: Record<string, number> = {
   "10.5-charged-particle-in-field": 2,
   "11.1-source-and-current": 17,
   "11.2-conductor-resistance": 25,
-  "11.3-resistivity-experiment": 22,
+  "11.3-resistivity-experiment": 23,
   "11.4-series-parallel-circuits": 18,
   "11.5-multimeter-experiment": 17,
   "12.1-energy-conversion-in-circuits": 15,
@@ -62,7 +62,7 @@ export const coursePages: Record<string, number> = {
   "9.3-electric-field": 19,
   "9.4-electrostatic-prevention": 19,
   "o2-1.2-lorentz-force": 15,
-  "o2-1.3-charged-particle-motion": 19,
+  "o2-1.3-charged-particle-motion": 30,
   "o2-1.4-mass-spectrometer-cyclotron": 29,
-  "o2-1.x-speed-matching": 24
+  "o2-1.x-speed-matching": 18
 };

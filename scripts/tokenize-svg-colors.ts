@@ -125,7 +125,7 @@ const collectFiles = (): string[] => {
 /**
  * 把一个属性值翻译成 token 写法；不认识就返回 null（= 不修改）
  *
- * @param value SVG 表现属性的字面值（如 `#60a5fa`、`rgba(96,165,250,0.5)`、`var(--c-velocity, #60a5fa)`）
+ * @param value SVG 表现属性的字面值（如 `#60a5fa`、`rgba(96,165,250,0.5)`、`var(--c-velocity)`）
  * @returns 等价的 token 写法；不认识时返回 null
  */
 const translate = (value: string): string | null => {

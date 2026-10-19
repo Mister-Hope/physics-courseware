@@ -21,6 +21,7 @@ defaults:
 chapter-no: "8.1"
 chapter: "第八章 机械能守恒定律"
 lesson: "第一课时"
+subtitle: 功
 ---
 
 <CoverDecorationSvg />
@@ -235,7 +236,7 @@ title: 例题 各力对雪橇做的总功
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 3
 title: 这三个例子里，力做功了吗
 ---
 
@@ -243,10 +244,10 @@ title: 这三个例子里，力做功了吗
 <div class="ask">甲 加速跑、乙 蹲下后站起来、丙 绕椭圆形操场缓慢拉动行李箱一圈——这些力做功了吗？</div>
 
 <div class="split-wide">
-<div class="figure"><NoWorkCasesSvg :show-analysis="$clicks >= 1" /></div>
+<div class="figure"><NoWorkCasesSvg :step="$clicks" /></div>
 <div class="stack">
-<div class="summary-line" v-click="1">甲、乙：<b>不做功</b>——力的作用点（脚与地面的接触点）在力的方向上没有位移。</div>
-<div class="tip-hint" v-click="2">丙：<b>正功</b>——一圈分成很多小段，每小段里 <Latex tex="F" /> 与 <Latex tex="\Delta s" /> 的夹角都小于 <Latex tex="90^\circ" />。</div>
+<div class="summary-line" v-click="2">甲、乙：<b>不做功</b>——力的作用点（脚与地面的接触点）在力的方向上没有位移。</div>
+<div class="tip-hint" v-click="3">丙：<b>正功</b>——一圈分成很多小段，每小段里 <Latex tex="F" /> 与 <Latex tex="\Delta s" /> 的夹角都小于 <Latex tex="90^\circ" />。</div>
 </div>
 </div>
 </div>
@@ -418,7 +419,7 @@ title: 课堂小结
 
 ---
 layout: course-cover
-title: "功率"
+title: "功与功率"
 lesson: "第二课时"
 chapter-no: "8.1"
 chapter: "第八章 机械能守恒定律"

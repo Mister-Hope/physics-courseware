@@ -40,7 +40,14 @@ let model: Micrometer3DModel | null = null;
 let intersectionObserver: IntersectionObserver | null = null;
 let starting = false;
 
-/** 显式探测 WebGL 能力（不要只靠 try/catch：拿不到上下文时有些浏览器不抛错） */
+/**
+ * 显式探测 WebGL 能力（不要只靠 try/catch：拿不到上下文时有些浏览器不抛错）。
+ *
+ * 实测（本仓 `pnpm shots` / e2e 所用 headless Chromium）： `WebGL 2.0 (OpenGL ES 3.0 Chromium) | ANGLE
+ * (Google, Vulkan 1.3.0 (SwiftShader Device, SwiftShader driver))`
+ * ——即**门禁跑的是真三维分支**，不是降级分支；降级分支（探针返回 false）已单独截图验证过。 换到拿不到上下文的环境（无硬件加速 / 关闭 WebGL /
+ * 远程投屏）会自动改走二维刻度图， 那种情况下门禁只证明"页面不溢出、无未捕获异常"，不能证明三维渲染正常。
+ */
 const hasWebGl = (): boolean => {
   try {
     const canvas = document.createElement("canvas");

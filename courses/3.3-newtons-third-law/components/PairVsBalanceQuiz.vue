@@ -123,7 +123,7 @@ const navigate = (step: number): void => {
 }
 
 .pb-count {
-  color: var(--c-text-dim, #94a3b8);
+  color: var(--c-text-dim);
   font-size: 0.8rem;
   letter-spacing: 0.08em;
 }

@@ -62,7 +62,7 @@ const isDecomposed = () => props.showDecomp || (props.step ?? 0) >= 1;
 
 // 文字光晕
 const HALO = {
-  stroke: "var(--c-bg, #0f1425)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.6,
   "paint-order": "stroke",
 } as const;
@@ -118,12 +118,12 @@ const HALO = {
     </g>
 
     <!-- 3. 水平位移 x 矢量 (用户要求：实线箭头) -->
-    <CourseArrow :from="C" :to="xTip" stroke="var(--c-velocity, #38bdf8)" :stroke-width="2.8" label="x" :label-dx="12" :label-dy="-12" :head-size="9" />
+    <CourseArrow :from="C" :to="xTip" stroke="var(--c-velocity)" :stroke-width="2.8" label="x" :label-dx="12" :label-dy="-12" :head-size="9" />
 
     <!-- 4. 夹角 α 扇形微光与弧线 -->
     <path :d="`M ${C.x} ${C.y} L ${arcFrom.x} ${arcFrom.y} A ${arcR} ${arcR} 0 0 0 ${arcTo.x} ${arcTo.y} Z`" fill="url(#decomp-alpha-glow)" />
     <path :d="arcPath" fill="none" stroke="var(--c-accent)" stroke-width="1.8" stroke-linecap="round" />
-    <text x="288" y="168" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)" :style="HALO">α</text>
+    <text x="310" y="198" font-family="KaTeX_Math" font-style="italic" font-size="21" fill="var(--c-accent)" :style="HALO">α</text>
 
     <!-- 5. 力的平行四边形分解 (点击展示 / showDecomp) -->
     <g v-if="isDecomposed()">

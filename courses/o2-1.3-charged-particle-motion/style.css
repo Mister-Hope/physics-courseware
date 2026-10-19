@@ -26,3 +26,122 @@ table.charge-ratio-table th,
 table.charge-ratio-table td {
   padding: 0.45rem 0.8rem !important;
 }
+
+/* ═══ 交互面板（.ui-*）：随磁汇聚演示页从《配速法》课迁入 ═══
+   滑块本体用共享 <CourseSlider>，这里只留读数行 + 状态标签的版式。 */
+.ui-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  width: 100%;
+  max-width: 920px;
+  margin: 0.5rem auto 0;
+  padding: 0.25rem 0.5rem;
+}
+
+/* 读数行：左侧读数、右侧状态标签（字号走 .text-*，写在模板上） */
+.ui-read {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  padding-top: 0.2rem;
+
+  color: var(--c-text-dim);
+}
+
+.ui-item strong {
+  color: var(--c-accent);
+  font-family: "JetBrains Mono", monospace;
+}
+
+.ui-tag {
+  margin-left: auto;
+  padding: 0.2rem 1rem;
+  border: 1.5px solid var(--c-accent);
+  border-radius: 999px;
+
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+
+  font-weight: 600;
+}
+
+/* 状态标签的两个语义档：汇聚成立 / 出射点分散 */
+.ui-tag-ok {
+  border-color: var(--c-ok);
+  background: var(--c-ok-soft);
+  color: var(--c-ok);
+}
+
+.ui-tag-off {
+  border-color: var(--c-neutral-600);
+  background: transparent;
+  color: var(--c-text-dim);
+}
+
+/* 单行版控制条（FocusConvergeDemo：滑块与读数并排，省下一行高度留给图） */
+.ui-bar-row {
+  flex-direction: row;
+  gap: 1.6rem;
+  align-items: center;
+
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-bar-row .ui-read {
+  flex: 0 0 auto;
+  padding-top: 0;
+}
+
+/* ═══ 题目页 / 解析页版式（.qp-* + .fig-svg）：随「例 1–例 4」整题页从《配速法》课迁入 ═══
+   这几个类是那一课的课内版式（题干整幅置顶 + 右侧图位；解析页左结论、右大图），
+   迁页时一并带过来，避免两课同名类各写一份。 */
+.fig-svg {
+  display: block;
+
+  width: 100%;
+  max-width: var(--fig-max, 100%);
+  height: auto;
+  margin: 0 auto;
+}
+
+.qp-page {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--page-gap);
+
+  min-height: 0;
+}
+
+.qp-fig {
+  --fig-max: 540px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.qp-fig svg {
+  max-height: 460px;
+}
+
+.qp-fig-corner {
+  align-self: end;
+}
+
+.qp-fig-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.qp-solve {
+  --cols: minmax(0, 1fr) minmax(0, 1.3fr);
+  flex: 1 1 auto;
+  align-items: center;
+  min-height: 0;
+}

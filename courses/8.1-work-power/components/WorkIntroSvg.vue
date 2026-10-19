@@ -22,7 +22,7 @@
 <script setup lang="ts">
 // 文字光晕
 const HALO = {
-  stroke: "var(--c-bg, #0f1425)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.6,
   "paint-order": "stroke",
 } as const;
@@ -77,25 +77,25 @@ const sledAlphaPos = {
     <defs>
       <!-- 重物金属箱渐变 -->
       <linearGradient id="crane-box-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="var(--c-surface-solid, #1e293b)" stop-opacity="0.95" />
+        <stop offset="0%" stop-color="var(--c-surface-solid)" stop-opacity="0.95" />
         <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95" />
       </linearGradient>
 
       <!-- 雪橇木质车厢渐变 -->
       <linearGradient id="sled-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="var(--c-surface-solid, #1e293b)" stop-opacity="0.9" />
+        <stop offset="0%" stop-color="var(--c-surface-solid)" stop-opacity="0.9" />
         <stop offset="100%" stop-color="#0b1329" stop-opacity="0.9" />
       </linearGradient>
 
       <!-- 骏马优雅微光剪影渐变 -->
       <linearGradient id="horse-body-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="var(--c-text-dim, #94a3b8)" stop-opacity="0.14" />
-        <stop offset="100%" stop-color="var(--c-text-dim, #94a3b8)" stop-opacity="0.25" />
+        <stop offset="0%" stop-color="var(--c-text-dim)" stop-opacity="0.14" />
+        <stop offset="100%" stop-color="var(--c-text-dim)" stop-opacity="0.25" />
       </linearGradient>
     </defs>
 
     <!-- 中间虚线隔离轴 -->
-    <line x1="350" y1="18" x2="350" y2="216" stroke="var(--c-text-dim, #64748b)" stroke-width="1.2" stroke-dasharray="4 6" opacity="0.45" />
+    <line x1="350" y1="18" x2="350" y2="216" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-dasharray="4 6" opacity="0.45" />
 
     <!-- ════════════════════ 左侧：起重机竖直提升 ════════════════════ -->
     <!-- 地面 -->
@@ -113,20 +113,20 @@ const sledAlphaPos = {
     <!-- 起重机顶部吊臂横梁 (工字钢结构) -->
     <g>
       <!-- 横梁主槽钢 -->
-      <rect x="96" y="36" width="128" height="12" rx="2" fill="#1e293b" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2" />
+      <rect x="96" y="36" width="128" height="12" rx="2" fill="#1e293b" stroke="var(--c-text-dim)" stroke-width="2" />
       <!-- 滑轮行车小车 -->
-      <rect x="146" y="48" width="28" height="8" rx="2" fill="#334155" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.4" />
-      <circle cx="153" cy="56" r="3.5" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.2" />
-      <circle cx="167" cy="56" r="3.5" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.2" />
+      <rect x="146" y="48" width="28" height="8" rx="2" fill="#334155" stroke="var(--c-text-dim)" stroke-width="1.4" />
+      <circle cx="153" cy="56" r="3.5" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1.2" />
+      <circle cx="167" cy="56" r="3.5" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1.2" />
 
       <!-- 悬吊钢丝绳 -->
-      <line x1="160" y1="56" x2="160" y2="134" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.2" />
+      <line x1="160" y1="56" x2="160" y2="134" stroke="var(--c-text-dim)" stroke-width="2.2" />
 
       <!-- 吊钩 -->
       <path
         d="M 158 134 L 162 134 L 162 140 Q 166 142 163 147 Q 158 150 155 145"
         fill="none"
-        stroke="var(--c-accent, #e2a846)"
+        stroke="var(--c-accent)"
         stroke-width="2.4"
         stroke-linecap="round"
       />
@@ -137,33 +137,24 @@ const sledAlphaPos = {
       <!-- 阴影 -->
       <rect x="128" y="198" width="64" height="3" rx="1.5" fill="rgba(0,0,0,0.4)" />
       <!-- 货物主体 -->
-      <rect x="125" y="148" width="70" height="52" rx="6" fill="url(#crane-box-grad)" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.4" />
+      <rect x="125" y="148" width="70" height="52" rx="6" fill="url(#crane-box-grad)" stroke="var(--c-text-dim)" stroke-width="2.4" />
       <!-- 吊环 -->
-      <circle cx="160" cy="148" r="4.5" fill="none" stroke="var(--c-accent, #e2a846)" stroke-width="2" />
+      <circle cx="160" cy="148" r="4.5" fill="none" stroke="var(--c-accent)" stroke-width="2" />
 
       <!-- 加强筋边框饰条 -->
       <line x1="131" y1="149" x2="189" y2="149" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
       <line x1="125" y1="174" x2="195" y2="174" stroke="rgba(148,163,184,0.3)" stroke-width="1.2" stroke-dasharray="3 3" />
 
       <!-- 质量标注 m -->
-      <text x="138" y="194" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text, #f8fafc)" :style="HALO">m</text>
+      <text x="138" y="194" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text)" :style="HALO">m</text>
 
       <!-- 重心受力点 -->
-      <circle cx="160" cy="174" r="3" fill="#0f172a" stroke="var(--c-accent, #e2a846)" stroke-width="1.4" />
-      <circle cx="160" cy="174" r="1.2" fill="var(--c-accent, #e2a846)" />
+      <circle cx="160" cy="174" r="3" fill="#0f172a" stroke="var(--c-accent)" stroke-width="1.4" />
+      <circle cx="160" cy="174" r="1.2" fill="var(--c-accent)" />
     </g>
 
     <!-- 竖直拉力 F 矢量 (从重物中心向上) -->
-    <CourseArrow
-      :from="CRANE_O"
-      :to="craneFTip"
-      stroke="var(--c-accent, #e2a846)"
-      :stroke-width="3.4"
-      label="F"
-      :label-dx="14"
-      :label-dy="-4"
-      :head-size="10"
-    />
+    <CourseArrow :from="CRANE_O" :to="craneFTip" stroke="var(--c-accent)" :stroke-width="3.4" label="F" :label-dx="14" :label-dy="-4" :head-size="10" />
 
     <!-- 竖直位移 x 矢量 (在右旁侧标注) -->
     <g>
@@ -173,7 +164,7 @@ const sledAlphaPos = {
       <CourseArrow
         :from="craneXFrom"
         :to="craneXTo"
-        stroke="var(--c-velocity, #38bdf8)"
+        stroke="var(--c-velocity)"
         :stroke-width="2.8"
         stroke-dasharray="8 6"
         label="x"
@@ -184,7 +175,7 @@ const sledAlphaPos = {
     </g>
 
     <!-- 左侧底部结论 -->
-    <text x="175" y="234" text-anchor="middle" font-size="15" font-weight="bold" fill="var(--c-text-dim, #cbd5e1)">力与位移同向</text>
+    <text x="175" y="234" text-anchor="middle" font-size="15" font-weight="bold" fill="var(--c-text-dim)">力与位移同向</text>
 
     <!-- ════════════════════ 右侧：马拉雪橇 ════════════════════ -->
     <!-- 地面 -->
@@ -202,29 +193,23 @@ const sledAlphaPos = {
     <!-- 1. 雪橇主体 (Sled) -->
     <g>
       <!-- 雪橇滑雪板 (底面平直，前部圆弧翻卷) -->
-      <path
-        d="M 395 200 L 468 200 Q 484 200 487 182 Q 488 174 482 173"
-        fill="none"
-        stroke="var(--c-text-dim, #94a3b8)"
-        stroke-width="2.6"
-        stroke-linecap="round"
-      />
+      <path d="M 395 200 L 468 200 Q 484 200 487 182 Q 488 174 482 173" fill="none" stroke="var(--c-text-dim)" stroke-width="2.6" stroke-linecap="round" />
       <!-- 滑板前部加固横梁 -->
-      <line x1="466" y1="184" x2="484" y2="183" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.6" />
+      <line x1="466" y1="184" x2="484" y2="183" stroke="var(--c-text-dim)" stroke-width="1.6" />
 
       <!-- 垂直支撑木桩 -->
-      <line x1="412" y1="200" x2="412" y2="186" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.2" />
-      <line x1="436" y1="200" x2="436" y2="186" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.2" />
-      <line x1="460" y1="200" x2="460" y2="186" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.2" />
+      <line x1="412" y1="200" x2="412" y2="186" stroke="var(--c-text-dim)" stroke-width="2.2" />
+      <line x1="436" y1="200" x2="436" y2="186" stroke="var(--c-text-dim)" stroke-width="2.2" />
+      <line x1="460" y1="200" x2="460" y2="186" stroke="var(--c-text-dim)" stroke-width="2.2" />
 
       <!-- 雪橇货斗底座 -->
-      <rect x="405" y="172" width="68" height="14" rx="3" fill="url(#sled-body-grad)" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.2" />
+      <rect x="405" y="172" width="68" height="14" rx="3" fill="url(#sled-body-grad)" stroke="var(--c-text-dim)" stroke-width="2.2" />
       <!-- 雪橇后靠背 -->
-      <path d="M 405 174 L 401 160" fill="none" stroke="var(--c-text-dim, #94a3b8)" stroke-width="2.4" stroke-linecap="round" />
+      <path d="M 405 174 L 401 160" fill="none" stroke="var(--c-text-dim)" stroke-width="2.4" stroke-linecap="round" />
 
       <!-- 几何中心作用点 -->
-      <circle :cx="SLED_O.x" :cy="SLED_O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent, #e2a846)" stroke-width="1.4" />
-      <circle :cx="SLED_O.x" :cy="SLED_O.y" r="1.2" fill="var(--c-accent, #e2a846)" />
+      <circle :cx="SLED_O.x" :cy="SLED_O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent)" stroke-width="1.4" />
+      <circle :cx="SLED_O.x" :cy="SLED_O.y" r="1.2" fill="var(--c-accent)" />
     </g>
 
     <!-- 2. 真实矫健生动的牵引骏马 (完整四肢腿部骨骼结构、马身、马头与挽具) -->
@@ -246,13 +231,13 @@ const sledAlphaPos = {
           Z
         "
         fill="rgba(148, 163, 184, 0.16)"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="1.8"
         stroke-linejoin="round"
         stroke-linecap="round"
       />
       <!-- 左后蹄角质加深 -->
-      <polygon points="527,200 537,200 536,195 529,196" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1" />
+      <polygon points="527,200 537,200 536,195 529,196" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1" />
 
       <!-- 2.2 内侧远端前腿（左前腿：前臂、腕关节/膝关节、前管骨、球节与前蹄） -->
       <path
@@ -272,13 +257,13 @@ const sledAlphaPos = {
           Z
         "
         fill="rgba(148, 163, 184, 0.16)"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="1.8"
         stroke-linejoin="round"
         stroke-linecap="round"
       />
       <!-- 左前蹄角质加深 -->
-      <polygon points="611,200 620,200 619,195 613,196" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1" />
+      <polygon points="611,200 620,200 619,195 613,196" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1" />
 
       <!-- 2.3 外侧主体：马头、警觉双耳、弓起颈项、鬐甲背脊、强健后臀、近端后腿与近端前腿完整轮廓 -->
       <path
@@ -328,26 +313,26 @@ const sledAlphaPos = {
           Z
         "
         fill="url(#horse-body-grad)"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="2.2"
         stroke-linejoin="round"
         stroke-linecap="round"
       />
 
       <!-- 右后蹄角质 -->
-      <polygon points="547,200 558,200 556,195 548,197" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.2" />
+      <polygon points="547,200 558,200 556,195 548,197" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <!-- 右前蹄角质 -->
-      <polygon points="622,200 634,200 632,195 623,197" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.2" />
+      <polygon points="622,200 634,200 632,195 623,197" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1.2" />
 
       <!-- 2.4 飘逸潇洒马尾 -->
       <path
         d="M 532 118 C 520 124, 512 138, 510 156 C 508 172, 514 184, 520 188 C 518 178, 520 162, 524 148 C 527 136, 531 126, 532 118 Z"
         fill="rgba(148, 163, 184, 0.22)"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="1.8"
         stroke-linejoin="round"
       />
-      <path d="M 524 130 C 516 142, 516 160, 522 176" fill="none" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.4" stroke-linecap="round" />
+      <path d="M 524 130 C 516 142, 516 160, 522 176" fill="none" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linecap="round" />
 
       <!-- 2.5 颈背鬃毛与额毛 -->
       <path
@@ -357,17 +342,17 @@ const sledAlphaPos = {
           M 618 94 Q 610 102 604 108
         "
         fill="none"
-        stroke="var(--c-text-dim, #94a3b8)"
+        stroke="var(--c-text-dim)"
         stroke-width="2"
         stroke-linecap="round"
       />
-      <path d="M 642 62 Q 646 68 648 74" fill="none" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.8" stroke-linecap="round" />
+      <path d="M 642 62 Q 646 68 648 74" fill="none" stroke="var(--c-text-dim)" stroke-width="1.8" stroke-linecap="round" />
 
       <!-- 2.6 头部五官（眼睛、鼻孔、嘴唇缝） -->
-      <ellipse cx="650" cy="74" rx="2.4" ry="1.6" fill="#0f172a" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.2" />
+      <ellipse cx="650" cy="74" rx="2.4" ry="1.6" fill="#0f172a" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <circle cx="650.8" cy="73.6" r="0.6" fill="#f8fafc" />
-      <path d="M 664 84 Q 667 84 666 87" fill="none" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.3" stroke-linecap="round" />
-      <path d="M 664 90 L 668 89" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.2" stroke-linecap="round" />
+      <path d="M 664 84 Q 667 84 666 87" fill="none" stroke="var(--c-text-dim)" stroke-width="1.3" stroke-linecap="round" />
+      <path d="M 664 90 L 668 89" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-linecap="round" />
 
       <!-- 2.7 肌肉立体感解剖线（肩胛骨肌肉轮廓与膝关节结构） -->
       <path d="M 602 108 C 612 116, 618 126, 616 142" fill="none" stroke="rgba(148, 163, 184, 0.4)" stroke-width="1.2" stroke-linecap="round" />
@@ -375,46 +360,29 @@ const sledAlphaPos = {
 
       <!-- 2.8 马身专业牵引挽具（Breastplate Harness 挽具带与金属挽环） -->
       <!-- 环绕马肩的强力胸带 -->
-      <path d="M 626 122 C 618 128, 610 134, 602 136" fill="none" stroke="var(--c-accent, #e2a846)" stroke-width="2.6" stroke-linecap="round" />
+      <path d="M 626 122 C 618 128, 610 134, 602 136" fill="none" stroke="var(--c-accent)" stroke-width="2.6" stroke-linecap="round" />
       <!-- 颈部悬吊支带 -->
-      <line x1="602" y1="136" x2="604" y2="108" stroke="var(--c-accent, #e2a846)" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
+      <line x1="602" y1="136" x2="604" y2="108" stroke="var(--c-accent)" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
       <!-- 马背鞍带 -->
-      <line x1="584" y1="110" x2="586" y2="145" stroke="var(--c-text-dim, #94a3b8)" stroke-width="1.4" opacity="0.5" />
+      <line x1="584" y1="110" x2="586" y2="145" stroke="var(--c-text-dim)" stroke-width="1.4" opacity="0.5" />
       <!-- 金属挽扣环 -->
-      <circle cx="602" cy="136" r="3.2" fill="#0f172a" stroke="var(--c-accent, #e2a846)" stroke-width="1.8" />
+      <circle cx="602" cy="136" r="3.2" fill="#0f172a" stroke="var(--c-accent)" stroke-width="1.8" />
     </g>
 
     <!-- 3. 牵引绳索（从雪橇中心引向马身挽扣环） -->
     <line :x1="SLED_O.x" :y1="SLED_O.y" x2="602" y2="136" stroke="rgba(148, 163, 184, 0.55)" stroke-width="1.8" stroke-dasharray="4 3" />
 
     <!-- 4. 水平位移 x 矢量 (实线箭头，标注置于右上方，与 α 横向错开，绝不重叠) -->
-    <CourseArrow
-      :from="SLED_O"
-      :to="sledXTip"
-      stroke="var(--c-velocity, #38bdf8)"
-      :stroke-width="2.8"
-      label="x"
-      :label-dx="32"
-      :label-dy="-10"
-      :head-size="8.5"
-    />
+    <CourseArrow :from="SLED_O" :to="sledXTip" stroke="var(--c-velocity)" :stroke-width="2.8" label="x" :label-dx="32" :label-dy="-10" :head-size="8.5" />
 
     <!-- 5. 夹角 α 弧线与标注 (紧贴雪橇中心弧线内侧，与 x 文字横向错开 65px 以上) -->
-    <path :d="sledArcPath" fill="none" stroke="var(--c-accent, #e2a846)" stroke-width="1.6" stroke-linecap="round" />
-    <text :x="sledAlphaPos.x" :y="sledAlphaPos.y" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent, #e2a846)" :style="HALO">
-      α
-    </text>
+    <path :d="sledArcPath" fill="none" stroke="var(--c-accent)" stroke-width="1.6" stroke-linecap="round" />
+    <text :x="sledAlphaPos.x" :y="sledAlphaPos.y" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent)" :style="HALO">α</text>
 
     <!-- 6. 斜向拉力 F 矢量 (起笔于雪橇几何中心) -->
-    <CourseArrow :from="SLED_O" :to="sledFTip" stroke="var(--c-accent, #e2a846)" :stroke-width="3.4" label="F" :label-dx="10" :label-dy="-12" :head-size="10" />
+    <CourseArrow :from="SLED_O" :to="sledFTip" stroke="var(--c-accent)" :stroke-width="3.4" label="F" :label-dx="10" :label-dy="-12" :head-size="10" />
 
     <!-- 右侧底部结论 -->
-    <text x="525" y="234" text-anchor="middle" font-size="15" font-weight="bold" fill="var(--c-text-dim, #cbd5e1)">力与位移成一定角度</text>
+    <text x="525" y="234" text-anchor="middle" font-size="15" font-weight="bold" fill="var(--c-text-dim)">力与位移成一定角度</text>
   </svg>
 </template>
-
-<style scoped>
-svg {
-  display: block;
-}
-</style>

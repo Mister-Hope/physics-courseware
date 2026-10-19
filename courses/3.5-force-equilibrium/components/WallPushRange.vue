@@ -458,14 +458,14 @@ const fLabelPos = computed<Point>(() => ({
 }
 
 .wp-state-ok {
-  color: var(--c-accent, #e2a846);
+  color: var(--c-accent);
 }
 
 .wp-state-down {
-  color: var(--c-danger, #f87171);
+  color: var(--c-danger);
 }
 
 .wp-state-up {
-  color: var(--c-accent-2, #2dd4bf);
+  color: var(--c-accent-2);
 }
 </style>

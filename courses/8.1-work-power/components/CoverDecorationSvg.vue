@@ -42,18 +42,25 @@ const alphaAt = {
 
 // 文字光晕
 const HALO = {
-  stroke: "var(--c-bg, #0f1425)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.4,
   "paint-order": "stroke",
 } as const;
 </script>
 
 <template>
-  <svg viewBox="0 0 230 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="力与位移成角时做功的示意图" class="select-none overflow-visible">
+  <svg
+    viewBox="0 0 230 150"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    width="320"
+    aria-label="力与位移成角时做功的示意图"
+    class="select-none overflow-visible"
+  >
     <defs>
       <!-- 物块渐变 -->
       <linearGradient id="work-block-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="var(--c-surface-solid, #1e293b)" stop-opacity="0.95" />
+        <stop offset="0%" stop-color="var(--c-surface-solid)" stop-opacity="0.95" />
         <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
       </linearGradient>
     </defs>
@@ -96,15 +103,15 @@ const HALO = {
         stroke-linecap="round"
       />
       <!-- 几何中心受力锚点 -->
-      <circle :cx="O.x" :cy="O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent, #e2a846)" stroke-width="1.4" />
-      <circle :cx="O.x" :cy="O.y" r="1.2" fill="var(--c-accent, #e2a846)" />
+      <circle :cx="O.x" :cy="O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent)" stroke-width="1.4" />
+      <circle :cx="O.x" :cy="O.y" r="1.2" fill="var(--c-accent)" />
     </g>
 
     <!-- 3. 水平位移 x 矢量（位移文字靠近箭头前端，彻底杜绝与夹角 α 重叠） -->
     <CourseArrow
       :from="O"
       :to="xTip"
-      stroke="var(--c-velocity, #38bdf8)"
+      stroke="var(--c-velocity)"
       :stroke-width="2.6"
       stroke-dasharray="8 6"
       label="x"
@@ -114,10 +121,10 @@ const HALO = {
     />
 
     <!-- 4. 夹角 α 弧线与标注（紧凑放置在 O 点弧线内侧，与 x 标号错开 50px 以上） -->
-    <path :d="arcPath" fill="none" stroke="var(--c-accent, #e2a846)" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
-    <text :x="alphaAt.x" :y="alphaAt.y" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent, #e2a846)" :style="HALO">α</text>
+    <path :d="arcPath" fill="none" stroke="var(--c-accent)" stroke-width="1.6" stroke-linecap="round" opacity="0.85" />
+    <text :x="alphaAt.x" :y="alphaAt.y" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent)" :style="HALO">α</text>
 
     <!-- 5. 斜向拉力 F 矢量 -->
-    <CourseArrow :from="O" :to="fTip" stroke="var(--c-accent, #e2a846)" :stroke-width="3.2" label="F" :label-dx="9" :label-dy="-12" :head-size="10" />
+    <CourseArrow :from="O" :to="fTip" stroke="var(--c-accent)" :stroke-width="3.2" label="F" :label-dx="9" :label-dy="-12" :head-size="10" />
   </svg>
 </template>

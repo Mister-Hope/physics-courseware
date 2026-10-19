@@ -131,7 +131,8 @@ const toggle = (key: Device["key"]): void => {
             :head-size="7"
           />
         </svg>
-        <!-- 电磁流量计：圆管剖面 + 向里磁场阵列 + 左右电极 M、N 与管内流向 -->
+        <!-- 电磁流量计：一段圆管（立体画法：近端圆面 + 管身，圆是液体截面）+ 向里磁场阵列
+             + 上、下管壁电极 M、N 与管内流向 -->
         <svg
           v-else-if="device.key === 'flow'"
           viewBox="0 0 120 90"
@@ -139,71 +140,88 @@ const toggle = (key: Device["key"]): void => {
           class="dg-svg"
           aria-hidden="true"
         >
-          <circle
-            cx="60"
-            cy="45"
-            r="30"
+          <path
+            d="M 38 25 H 100 A 9 22 0 0 1 100 69 H 38 A 9 22 0 0 1 38 25 Z"
+            fill="color-mix(in srgb, var(--c-physics) 8%, transparent)"
+            stroke="var(--c-text-dim)"
+            stroke-width="2.2"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M 38 25 A 9 22 0 0 1 38 69"
             fill="none"
             stroke="var(--c-text-dim)"
-            stroke-width="2.4"
+            stroke-width="1.4"
+            opacity="0.45"
           />
           <FieldDots
-            :x="48"
-            :y="33"
-            :cols="2"
+            :x="56"
+            :y="36"
+            :cols="4"
             :rows="2"
-            :spacing="24"
-            :size="3.4"
+            :spacing="13"
+            :size="3.2"
             :line-width="1.3"
             :opacity="0.85"
           />
           <line
-            x1="30"
-            y1="38"
-            x2="30"
-            y2="52"
+            x1="62"
+            y1="25"
+            x2="82"
+            y2="25"
             stroke="var(--c-accent)"
             stroke-width="3"
             stroke-linecap="round"
           />
           <line
-            x1="90"
-            y1="38"
-            x2="90"
-            y2="52"
+            x1="62"
+            y1="69"
+            x2="82"
+            y2="69"
             stroke="var(--c-accent)"
             stroke-width="3"
             stroke-linecap="round"
           />
           <text
-            x="20"
-            y="49"
+            x="72"
+            y="17"
             text-anchor="middle"
             font-family="KaTeX_Math"
             font-style="italic"
-            font-size="13"
+            font-size="12"
             fill="var(--c-accent)"
           >
             M
           </text>
           <text
-            x="100"
-            y="49"
+            x="72"
+            y="84"
             text-anchor="middle"
             font-family="KaTeX_Math"
             font-style="italic"
-            font-size="13"
+            font-size="12"
             fill="var(--c-accent)"
           >
             N
           </text>
           <CourseArrow
-            :from="{ x: 40, y: 45 }"
-            :to="{ x: 80, y: 45 }"
+            :from="{ x: 2, y: 47 }"
+            :to="{ x: 26, y: 47 }"
             stroke="var(--c-velocity)"
             :stroke-width="1.8"
-            :head-size="7"
+            :head-size="6"
           />
+          <text
+            x="12"
+            y="37"
+            text-anchor="middle"
+            font-family="KaTeX_Math"
+            font-style="italic"
+            font-size="12"
+            fill="var(--c-velocity)"
+          >
+            v
+          </text>
         </svg>
         <!-- 霍尔元件：长方体薄片（透视）+ 沿长度方向的电流箭头 + 单个 ⊗ 记号 -->
         <svg

@@ -147,7 +147,7 @@ clicks: 3
 
 <div v-click="2">② 直径 <Latex tex="d = 2r \propto \sqrt{m}" />，所以 <Latex tex="\dfrac{m_A}{m_B} = \left(\dfrac{d_A}{d_B}\right)^2 = 1.08^2 \approx 1.17" /></div>
 
-<div class="tip-hint" v-click="3"><Latex tex="m_A : m_B \approx 1.17 : 1" /></div>
+<div v-click="3"><Latex tex="m_A : m_B \approx 1.17 : 1" /></div>
 
 ---
 clicks: 4
@@ -311,13 +311,13 @@ clicks: 3
 
 </template>
 
-<div class="stack stack-tight" style="gap:.2rem;--hint-pad-y:.5rem">
+<div class="stack stack-tight" style="gap:.2rem">
 
 <div v-click="1">① 粒子离开时轨道半径达到最大，即 D 形盒半径 <Latex tex="r" />：<Latex tex="qvB = \dfrac{mv^2}{r}" />，得 <Latex tex="v = \dfrac{qBr}{m}" /></div>
 
 <div v-click="2">② <Latex tex="E_k = \dfrac{1}{2}mv^2 = \dfrac{q^2B^2r^2}{2m}" /></div>
 
-<div class="tip-hint" v-click="3">动能与加速电压无关，只由 <Latex tex="q" />、<Latex tex="m" />、<Latex tex="B" /> 和盒半径 <Latex tex="r" /> 决定</div>
+<div v-click="3">动能与加速电压无关，只由 <Latex tex="q" />、<Latex tex="m" />、<Latex tex="B" /> 和盒半径 <Latex tex="r" /> 决定</div>
 
 </div>
 
@@ -481,7 +481,7 @@ clicks: 3
 
 <div v-click="2">② 洛伦兹力把正、负离子推向不同的板，板上堆积等量异号电荷</div>
 
-<div class="tip-hint" v-click="3">③ 稳定时 <Latex tex="qvB = qE = q\dfrac{U}{d}" /> ⟹ <Latex tex="U = Bvd" />，与离子数量无关</div>
+<div v-click="3">③ 稳定时 <Latex tex="qvB = qE = q\dfrac{U}{d}" /> ⟹ <Latex tex="U = Bvd" />，与离子数量无关</div>
 
 </div>
 
@@ -533,7 +533,7 @@ clicks: 2
 
 <div v-click="1">① 稳定时 <Latex tex="qvB = q\dfrac{U}{d}" /> ⟹ <Latex tex="\varepsilon = U = Bvd = 0.5 \times 1000 \times 0.2\ \text{V} = 100\ \text{V}" /></div>
 
-<div class="tip-hint" v-click="2">② 由左手定则，正离子受到的洛伦兹力向上 ⟹ <Latex tex="A" /> 板堆积正电荷，是电源的正极</div>
+<div v-click="2">② 由左手定则，正离子受到的洛伦兹力向上 ⟹ <Latex tex="A" /> 板堆积正电荷，是电源的正极</div>
 
 ---
 clicks: 3
@@ -553,7 +553,7 @@ clicks: 3
 
 <div v-click="2">② 洛伦兹力使正、负离子偏向两侧管壁，两壁之间出现电势差</div>
 
-<div class="tip-hint" v-click="3">③ 稳定时 <Latex tex="qvB = q\dfrac{U}{D}" /> ⟹ <Latex tex="v = \dfrac{U}{BD}" />，流量 <Latex tex="Q = \dfrac{\pi DU}{4B}" /></div>
+<div v-click="3">③ 稳定时 <Latex tex="qvB = q\dfrac{U}{D}" /> ⟹ <Latex tex="v = \dfrac{U}{BD}" />，流量 <Latex tex="Q = \dfrac{\pi DU}{4B}" /></div>
 
 </div>
 
@@ -603,7 +603,7 @@ clicks: 2
 
 <div v-click="1">① <Latex tex="v = \dfrac{U}{BD} = \dfrac{2.0 \times 10^{-3}}{0.5 \times 0.2}\ \text{m/s} = 0.02\ \text{m/s}" /></div>
 
-<div class="tip-hint" v-click="2">② <Latex tex="Q = \dfrac{\pi D^2}{4}v = 6.28 \times 10^{-4}\ \text{m}^3/\text{s}" /></div>
+<div v-click="2">② <Latex tex="Q = \dfrac{\pi D^2}{4}v = 6.28 \times 10^{-4}\ \text{m}^3/\text{s}" /></div>
 
 ---
 clicks: 4
@@ -699,11 +699,11 @@ C. <Latex tex="U" /> 与元件的厚度 <Latex tex="d" /> 无关　　D. 只把�
 
 </template>
 
-<div class="stack-tight" style="gap:.3rem;--hint-pad-y:.5rem">
+<div class="stack-tight" style="gap:.3rem">
 
 <div v-click="1">① 由 <Latex tex="U = \dfrac{IB}{nqd}" />：<Latex tex="U \propto I" />、<Latex tex="U \propto B" />、<Latex tex="U \propto \dfrac{1}{d}" /> ⟹ A 正确，B、C 错误</div>
 
-<div class="warn-hint" v-click="2">② D 错误：电流反向 ⟹ 载流子偏转方向反向 ⟹ 两侧面电势高低也随之反向</div>
+<div v-click="2">② D 错误：电流反向 ⟹ 载流子偏转方向反向 ⟹ 两侧面电势高低也随之反向</div>
 
 </div>
 

@@ -34,7 +34,7 @@ const Y_FLIGHT_RET = 48; // 回程航线高度（折返平行上层）
 const Y_DISP = 68; // 位移标注高度（夹在两条航线之间）
 
 const HALO = {
-  stroke: "var(--c-bg, #0f1425)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.6,
   "paint-order": "stroke",
 } as const;

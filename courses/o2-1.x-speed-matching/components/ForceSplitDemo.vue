@@ -187,7 +187,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
         :size="5"
         :line-width="1.6"
         :opacity="0.18"
-        color="var(--c-accent, #e2a846)"
+        color="var(--c-accent)"
         dir="in"
       />
 

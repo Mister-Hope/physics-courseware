@@ -274,11 +274,11 @@ const applyPreset = (v: number): void => {
   border: 1px solid var(--c-border);
 }
 .ml-note.lv-ok {
-  color: var(--c-ok, #34d399);
+  color: var(--c-ok);
   border-color: rgb(52 211 153 / 30%);
 }
 .ml-note.lv-warn {
-  color: var(--c-hint-warn, #d29922);
+  color: var(--c-hint-warn);
   border-color: rgb(210 153 34 / 30%);
 }
 .ml-note.lv-info {

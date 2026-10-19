@@ -4,13 +4,16 @@ import { computed, ref } from "vue";
 /**
  * 第 8 页：库仑定律实验室（滑块交互）
  *
- * 调 q₁、q₂、r 三个滑块，实时按库仑定律算 F 并画出两个点电荷之间沿连线方向的作用力：
- * 同种电荷向外（斥力）、异种电荷向内（引力）。
+ * 调 q₁、q₂、r 三个滑块，实时按库仑定律算 F 并画出两个点电荷之间沿连线方向的作用力： 同种电荷向外（斥力）、异种电荷向内（引力）。
  *
- * 读数公式：F = k·q₁q₂/r²，k = 9.0×10⁹ N·m²/C²（教材 9-text.md 行 132）。
- * 箭头长度只表示相对大小（按 F 的对数映射），不按真实比例——此说明只在代码里，不上屏。
+ * 读数公式：F = k·q₁q₂/r²，k = 9.0×10⁹ N·m²/C²（教材 9-text.md 行 132）。 箭头长度只表示相对大小（按 F
+ * 的对数映射），不按真实比例——此说明只在代码里，不上屏。
  */
-const { showForce = false, showReadout = false, showCompare = false } = defineProps<{
+const {
+  showForce = false,
+  showReadout = false,
+  showCompare = false,
+} = defineProps<{
   showForce?: boolean;
   showReadout?: boolean;
   showCompare?: boolean;
@@ -43,7 +46,9 @@ const texSci = (value: number): string => {
 };
 
 const fTex = computed(() => `F = ${texSci(F.value)}\\ \\text{N}`);
-const halfTex = computed(() => `F\\left(${rCm.value / 2}\\ \\text{cm}\\right) = ${texSci(halfF.value)}\\ \\text{N}`);
+const halfTex = computed(
+  () => `F\\left(${rCm.value / 2}\\ \\text{cm}\\right) = ${texSci(halfF.value)}\\ \\text{N}`,
+);
 const q1Tex = computed(() => `${q1.value.toFixed(1)}\\ \\mu\\text{C}`);
 const q2Tex = computed(() => `${q2.value.toFixed(1)}\\ \\mu\\text{C}`);
 const rTex = computed(() => `${rCm.value}\\ \\text{cm}`);
@@ -137,9 +142,24 @@ const arrows = computed(() => {
           />
         </g>
       </svg>
-      <ChartLabel v-bind="pct(X1, 99)" :parts="[{ tex: 'q_1' }]" :size="18" color="var(--c-accent)" />
-      <ChartLabel v-bind="pct(X2, 99)" :parts="[{ tex: 'q_2' }]" :size="18" color="var(--c-accent)" />
-      <ChartLabel v-bind="pct((X1 + X2) / 2, 245)" :parts="[{ tex: 'r' }]" :size="18" color="var(--c-text-dim)" />
+      <ChartLabel
+        v-bind="pct(X1, 99)"
+        :parts="[{ tex: 'q_1' }]"
+        :size="18"
+        color="var(--c-accent)"
+      />
+      <ChartLabel
+        v-bind="pct(X2, 99)"
+        :parts="[{ tex: 'q_2' }]"
+        :size="18"
+        color="var(--c-accent)"
+      />
+      <ChartLabel
+        v-bind="pct((X1 + X2) / 2, 245)"
+        :parts="[{ tex: 'r' }]"
+        :size="18"
+        color="var(--c-text-dim)"
+      />
     </div>
     <div class="cfl-panel">
       <CourseSlider
@@ -238,7 +258,7 @@ const arrows = computed(() => {
   flex: 1;
   padding: 0.3rem 0.5rem;
   border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm, 0.5rem);
+  border-radius: var(--radius-sm);
   background: var(--c-surface);
   color: var(--c-text-dim);
   font-size: 0.85rem;

@@ -83,15 +83,30 @@ const END = { x: toX(THETA_MAX), y: LINE_Y };
 
 /** θ 从 0 匀速涨到 2π（滚一整圈） */
 const animTheta = ref(0);
+/** 点图暂停：教师自己按的暂停开关，与页面 v-click 节奏无关（再点继续） */
+const clickPaused = ref(false);
 const CYCLE = 3200; // 3.2s 周期，转速适中沉稳
 let raf = 0;
 let t0 = 0;
+/** 累计已播放的毫秒数（暂停时不再累加，继续后从原处接着转，不会跳帧） */
+let elapsed = 0;
+let lastFrameTs = 0;
 
 const tick = (now: number): void => {
-  if (t0 === 0) t0 = now;
-  if (!paused && manualTheta < 0) animTheta.value = (((now - t0) % CYCLE) / CYCLE) * THETA_MAX;
+  if (lastFrameTs === 0) lastFrameTs = now;
+  const dt = now - lastFrameTs;
+  lastFrameTs = now;
+  if (!paused && !clickPaused.value && manualTheta < 0) {
+    elapsed += dt;
+    animTheta.value = ((elapsed % CYCLE) / CYCLE) * THETA_MAX;
+  }
 
   raf = requestAnimationFrame(tick);
+};
+
+/** 点一下图 = 暂停/继续 */
+const togglePause = (): void => {
+  clickPaused.value = !clickPaused.value;
 };
 
 onMounted(() => {
@@ -231,7 +246,7 @@ const rotLabel = computed(() =>
 );
 
 const HALO = {
-  stroke: "var(--c-bg, #0f172a)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.4,
   "paint-order": "stroke",
 } as const;
@@ -244,7 +259,8 @@ const HALO = {
       :width="width"
       class="fig-svg select-none overflow-visible block"
       role="img"
-      aria-label="两个分运动合成：摆线运动"
+      aria-label="两个分运动合成：摆线运动（点击画面可暂停/继续）"
+      @click="togglePause"
     >
       <!-- 匀强磁场：垂直纸面向里的裸 × 铺满全幅（背景层） -->
       <FieldDots

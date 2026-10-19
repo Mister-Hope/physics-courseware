@@ -147,7 +147,7 @@ const regime = computed(() => {
 });
 
 const HALO = {
-  stroke: "var(--c-bg, #0f172a)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.6,
   "paint-order": "stroke",
 } as const;
@@ -185,7 +185,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
           :size="6"
           :line-width="2"
           :opacity="0.22"
-          color="var(--c-accent, #e2a846)"
+          color="var(--c-accent)"
           dir="in"
         />
 

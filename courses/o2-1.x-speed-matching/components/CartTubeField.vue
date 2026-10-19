@@ -21,6 +21,11 @@
      是本题真实关系 vy²/2g = L）。横向被压缩（仿射缩放不改变抛物线形状），横向比例关系仍是真的。
      轴/管/地面是**示意图的组成元素**（不是数据坐标图，按 coordinate-axes 笔记 §1 最后一行的口径手写），
      箭头一律共享 <CourseArrow>、磁场阵列一律共享 <FieldDots>、地面一律共享 <SurfaceHatch>。
+  ── 图内标注 ──
+     ⛔ SVG 的 <text> 里排不了下标：写成 `v<tspan dy="3">0</tspan>` 会被 oxfmt 折成两行，
+     两个文本节点之间的换行在 SVG 里渲染成一个**空格**（"v 0" 裂开，实拍确认）。所以带下标的量
+     （v0 / vy / qv0B / qvyB / F_N / mg）一律交给共享 <ChartLabel>（HTML 覆盖层 + 真 KaTeX），
+     只有无下标的点名（M、N、O、A、x、y、B）才用 SVG <text>。
 -->
 <script setup lang="ts">
 const { step = 0 } = defineProps<{
@@ -31,16 +36,16 @@ const { step = 0 } = defineProps<{
 /* ═══════════ 版面常量（viewBox 用户单位，按 16px 体系） ═══════════ */
 const VB_W = 560;
 const VB_H = 360;
-/** y 轴 = 磁场竖直边界（细管正中压在它上面） */
+/** Y 轴 = 磁场竖直边界（细管正中压在它上面） */
 const AXIS_X = 150;
-/** x 轴 = M N = 管口所在水平面 */
+/** X 轴 = M N = 管口所在水平面 */
 const MN_Y = 130;
 const GROUND_Y = 268;
 /** 管长 L 在图上的纵向长度 */
 const L_PX = 95;
 /** 管内半径（管壁相对中心的偏移） */
 const TUBE_HALF = 7;
-const BALL_R = 7;
+const BALL_R = 6;
 /** 球心初始位置：管底 */
 const BALL = { x: AXIS_X, y: MN_Y + L_PX };
 /** 管口：横向走 3L（= 2v0²/(3g)） */
@@ -68,12 +73,39 @@ const samplePath = (n: number, f: (t: number) => { x: number; y: number }): stri
 /** 管内地面系轨迹：x = v0t（3L ⇒ 120）、y = −L + ½gt²（τ = t/t₁） */
 const TUBE_PATH = samplePath(28, (u) => ({ x: AXIS_X + 120 * u, y: BALL.y - L_PX * u * u }));
 /** 管口后斜抛：Δx = 6L ⇒ 240，顶点高度 = L */
-const FLIGHT_PATH = samplePath(28, (s) => ({ x: MOUTH.x + 240 * s, y: MN_Y - 4 * L_PX * s * (1 - s) }));
+const FLIGHT_PATH = samplePath(28, (s) => ({
+  x: MOUTH.x + 240 * s,
+  y: MN_Y - 4 * L_PX * s * (1 - s),
+}));
 
 /** ChartLabel 按容器百分比定位（容器与 svg 同宽同高） */
 const pct = (v: number, total: number): number => (v / total) * 100;
-const MOUTH_LABEL = { x: pct(252, VB_W), y: pct(110, VB_H) };
-const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
+
+/** 图内的量与力标注（带下标 ⟹ 一律走 ChartLabel 的真 KaTeX） */
+interface FigLabel {
+  tex: string;
+  /** 标注点（viewBox 用户单位） */
+  x: number;
+  y: number;
+  /** 文字在点的哪一侧：center 压点 / left 正左 / right 正右 */
+  anchor: "center" | "left" | "right";
+  color: string;
+  /** Step ≥ from 才出现 */
+  from: number;
+}
+const LABELS: FigLabel[] = [
+  { tex: "v_0", x: 76, y: 232, anchor: "center", color: "var(--c-velocity)", from: 0 },
+  { tex: "v_0", x: 183, y: 200, anchor: "center", color: "var(--c-velocity)", from: 1 },
+  { tex: "v_y", x: 162, y: 182, anchor: "right", color: "var(--c-velocity)", from: 1 },
+  { tex: "qv_0B", x: 142, y: 184, anchor: "left", color: "var(--c-force)", from: 1 },
+  { tex: "mg", x: 138, y: 236, anchor: "left", color: "var(--c-force)", from: 1 },
+  { tex: "qv_yB", x: 106, y: 214, anchor: "left", color: "var(--c-force)", from: 2 },
+  { tex: "F_N", x: 196, y: 232, anchor: "right", color: "var(--c-force)", from: 2 },
+];
+
+/** 两次经过 x 轴的坐标（分式只能靠 ChartLabel 排） */
+const MOUTH_LABEL = { x: pct(214, VB_W), y: pct(104, VB_H) };
+const LAND_LABEL = { x: pct(484, VB_W), y: pct(160, VB_H) };
 </script>
 
 <template>
@@ -95,10 +127,10 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
       />
 
       <!-- ② 磁场：第四象限（y 轴右侧、MN 下方）的裸 × 阵列（垂直纸面向里） -->
-      <FieldDots :x="165" :y="146" :cols="12" :rows="4" :spacing="32" :size="7" :line-width="2.2" />
+      <FieldDots :x="176" :y="148" :cols="10" :rows="4" :spacing="32" :size="7" :line-width="2.2" />
       <text
-        :x="528"
-        :y="172"
+        :x="540"
+        :y="258"
         fill="var(--c-accent)"
         :font-family="MATH_FONT"
         font-style="italic"
@@ -174,20 +206,6 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
         stroke="var(--c-velocity)"
         :stroke-width="3"
       />
-      <text
-        :x="78"
-        :y="234"
-        fill="var(--c-velocity)"
-        :font-family="MATH_FONT"
-        font-style="italic"
-        font-size="16"
-        text-anchor="middle"
-        stroke="var(--c-bg)"
-        stroke-width="3.4"
-        paint-order="stroke"
-      >
-        v<tspan :font-family="MAIN_FONT" font-style="normal" font-size="11" dy="3">0</tspan>
-      </text>
 
       <!-- ⑥ 细管（下端封闭、上端开口，管口落在 MN 上）与管底小球 A -->
       <g fill="none" stroke="var(--c-text)" stroke-width="2.4" stroke-linecap="round">
@@ -197,8 +215,8 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
       </g>
       <circle :cx="BALL.x" :cy="BALL.y" :r="BALL_R" fill="var(--c-text)" />
       <text
-        :x="AXIS_X - TUBE_HALF - 5"
-        :y="BALL.y + 5"
+        :x="AXIS_X - TUBE_HALF - 6"
+        :y="BALL.y - 6"
         fill="var(--c-text)"
         :font-family="MAIN_FONT"
         font-size="15"
@@ -221,33 +239,6 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
           stroke="var(--c-velocity)"
           :stroke-width="2.4"
         />
-        <text
-          :x="184"
-          :y="206"
-          fill="var(--c-velocity)"
-          :font-family="MATH_FONT"
-          font-style="italic"
-          font-size="15"
-          text-anchor="middle"
-          stroke="var(--c-bg)"
-          stroke-width="3.2"
-          paint-order="stroke"
-        >
-          v<tspan :font-family="MAIN_FONT" font-style="normal" font-size="10" dy="3">0</tspan>
-        </text>
-        <text
-          :x="174"
-          :y="188"
-          fill="var(--c-velocity)"
-          :font-family="MATH_FONT"
-          font-style="italic"
-          font-size="15"
-          stroke="var(--c-bg)"
-          stroke-width="3.2"
-          paint-order="stroke"
-        >
-          v<tspan :font-family="MAIN_FONT" font-style="normal" font-size="10" dy="3">y</tspan>
-        </text>
         <CourseArrow
           :from="{ x: BALL.x, y: BALL.y }"
           :to="{ x: BALL.x, y: 176 }"
@@ -256,43 +247,10 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
         />
         <CourseArrow
           :from="{ x: BALL.x, y: BALL.y }"
-          :to="{ x: BALL.x, y: 244 }"
+          :to="{ x: BALL.x, y: 238 }"
           stroke="var(--c-force)"
           :stroke-width="3"
         />
-        <text
-          :x="BALL.x - 8"
-          :y="182"
-          fill="var(--c-force)"
-          :font-family="MATH_FONT"
-          font-style="italic"
-          font-size="15"
-          text-anchor="end"
-          stroke="var(--c-bg)"
-          stroke-width="3.2"
-          paint-order="stroke"
-        >
-          qv<tspan :font-family="MAIN_FONT" font-style="normal" font-size="10" dy="3">0</tspan><tspan
-            :font-family="MATH_FONT"
-            font-style="italic"
-            font-size="15"
-            dy="-3"
-          >B</tspan>
-        </text>
-        <text
-          :x="BALL.x - 8"
-          :y="240"
-          fill="var(--c-force)"
-          :font-family="MATH_FONT"
-          font-style="italic"
-          font-size="15"
-          text-anchor="end"
-          stroke="var(--c-bg)"
-          stroke-width="3.2"
-          paint-order="stroke"
-        >
-          mg
-        </text>
       </g>
 
       <!-- ⑧ step ≥2：水平方向的一对力 —— 洛伦兹力 qvyB（左）与管壁弹力 F_N（右）平衡 -->
@@ -309,41 +267,9 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
           stroke="var(--c-force)"
           :stroke-width="3"
         />
-        <text
-          :x="108"
-          :y="214"
-          fill="var(--c-force)"
-          :font-family="MATH_FONT"
-          font-style="italic"
-          font-size="15"
-          text-anchor="end"
-          stroke="var(--c-bg)"
-          stroke-width="3.2"
-          paint-order="stroke"
-        >
-          qv<tspan :font-family="MAIN_FONT" font-style="normal" font-size="10" dy="3">y</tspan><tspan
-            :font-family="MATH_FONT"
-            font-style="italic"
-            font-size="15"
-            dy="-3"
-          >B</tspan>
-        </text>
-        <text
-          :x="194"
-          :y="214"
-          fill="var(--c-force)"
-          :font-family="MATH_FONT"
-          font-style="italic"
-          font-size="15"
-          stroke="var(--c-bg)"
-          stroke-width="3.2"
-          paint-order="stroke"
-        >
-          F<tspan :font-family="MAIN_FONT" font-style="normal" font-size="10" dy="3">N</tspan>
-        </text>
       </g>
 
-      <!-- ⑨ 点名与坐标标注（常显） -->
+      <!-- ⑨ 点名与坐标标注（常显，无下标 ⟹ 用 SVG text） -->
       <text
         :x="44"
         :y="118"
@@ -365,8 +291,8 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
         N
       </text>
       <text
-        :x="530"
-        :y="116"
+        :x="534"
+        :y="112"
         fill="var(--c-text)"
         :font-family="MATH_FONT"
         font-style="italic"
@@ -395,10 +321,21 @@ const LAND_LABEL = { x: pct(498, VB_W), y: pct(158, VB_H) };
       >
         O
       </text>
-
     </svg>
 
-    <!-- ⑩ step ≥3：两次经过 x 轴的坐标（ChartLabel 是 HTML 覆盖层，必须写在 svg 外、容器里） -->
+    <!-- ⑩ 图内标注（HTML 覆盖层，真 KaTeX）：量与力 + 两次经过 x 轴的坐标 -->
+    <ChartLabel
+      v-for="l in LABELS"
+      :key="`${l.tex}-${l.from}`"
+      :visible="step >= l.from"
+      :x-percent="pct(l.x, VB_W)"
+      :y-percent="pct(l.y, VB_H)"
+      :parts="[{ tex: l.tex }]"
+      :anchor="l.anchor"
+      :size="16"
+      :color="l.color"
+      halo
+    />
     <ChartLabel
       v-if="step >= 3"
       :x-percent="MOUTH_LABEL.x"

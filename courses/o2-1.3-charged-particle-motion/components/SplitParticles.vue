@@ -112,7 +112,7 @@ const forceBTo = inward(forceBFrom, circleB, 122);
         :size="12"
         :line-width="3.1"
         :opacity="0.9"
-        color="var(--c-accent, #e2a846)"
+        color="var(--c-accent)"
         dir="in"
       />
 

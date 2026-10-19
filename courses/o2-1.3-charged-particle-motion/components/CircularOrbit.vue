@@ -401,7 +401,6 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
 <style scoped>
 /* 深色底上的滑杆：原生外观几乎看不见，这里自己画轨道与滑块（颜色 / 进度由 --co-accent、--co-pct 传入） */
 .co-range {
-  --co-accent: #e2a846;
   --co-pct: 0%;
 
   width: 100%;
@@ -410,8 +409,8 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
 
   background: linear-gradient(
     to right,
-    var(--co-accent) 0%,
-    var(--co-accent) var(--co-pct),
+    var(--c-accent) 0%,
+    var(--c-accent) var(--co-pct),
     rgb(148 163 184 / 28%) var(--co-pct),
     rgb(148 163 184 / 28%) 100%
   );
@@ -433,7 +432,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   box-sizing: border-box;
   width: 18px;
   height: 18px;
-  border: 3px solid var(--co-accent, #e2a846);
+  border: 3px solid var(--c-accent);
   border-radius: 50%;
 
   background: #f8fafc;
@@ -446,7 +445,7 @@ const pctOf = (notch) => ((notch - NOTCH_MIN) / (NOTCH_MAX - NOTCH_MIN)) * 100;
   box-sizing: border-box;
   width: 18px;
   height: 18px;
-  border: 3px solid var(--co-accent, #e2a846);
+  border: 3px solid var(--c-accent);
   border-radius: 50%;
 
   background: #f8fafc;

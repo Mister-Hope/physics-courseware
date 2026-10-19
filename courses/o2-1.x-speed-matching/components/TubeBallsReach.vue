@@ -25,7 +25,8 @@
      step 2：管外配速法 = 圆心线 + 三个圆（圆顶高度对比）+ 半径 ρ + 出管速度分解（v_d = v0/2 与 u）
              + 圆心/圆顶/出管点标记 + 管外栏标题与图例前两行；
      step 3：极值判据 = 目标高度线 y = 9v0²/(16g)、临界圆顶（恰好相切）与图例"临界"行，
-             以及左栏 81/256 分段（分界虚线 + 两段尺寸双箭头 + "圆顶够不着 81/256"与"能到达 175/256"）。
+             以及左栏 81/256 分段（分界虚线 + 两段尺寸双箭头 + "圆顶够不着 81/256"，下段球染成速度蓝）；
+     step 4：最终比值"能到达 175/256"——压到第 4 步才出，免得第二次点击的正文还没讲到答案就先把 175/256 摆上屏。
   ── 画法约定 ──
      磁场叉点阵一律用共享 <FieldDots>（裸 ×，不手画）；箭头一律 <CourseArrow>（自带 marker、尖端落在终点）；
      本组件不画完整坐标轴（整题带坐标系的题目图由 CartTubeField 负责），只画 MN、y 轴边界、O 点与 y 方向箭头；
@@ -36,16 +37,17 @@
 -->
 <script setup lang="ts">
 const { step = 0 } = defineProps<{
-  /** 分步：0 干净题目图 / 1 管内出管速度 / 2 管外配速法与圆 / 3 阈值线、临界圆与 81/256 分段 */
+  /** 分步：0 干净题目图 / 1 管内出管速度 / 2 管外配速法与圆 / 3 阈值线与 81/256 分段 / 4 最终比值 */
   step?: number;
 }>();
 
 /* ═══════════ 版面（viewBox 用户单位，y 轴向下） ═══════════ */
 const VB_W = 600;
-const VB_H = 360;
+/** 最低的元素是管底 332（右栏内容更靠上）⟹ 344 高的画布刚好收住，不留大片空底 */
+const VB_H = 344;
 /** 管口所在水平面 MN */
 const MN_Y = 162;
-/** y 轴 = 磁场竖直边界：第一、四象限（x > 0）都是垂直纸面向里的匀强磁场 */
+/** Y 轴 = 磁场竖直边界：第一、四象限（x > 0）都是垂直纸面向里的匀强磁场 */
 const AXIS_X = 296;
 /** 右栏比例尺：1 个 v0²/g 折成 200px */
 const PX = 200;
@@ -64,9 +66,12 @@ const dxc = (vy: number): number => (PX / 2) * vy;
 /** 出管点：球上升的这段时间里管口已右移 v0·t = 2Δx */
 const exitX = (vy: number): number => AXIS_X + 2 * dxc(vy);
 /** 圆心（恒在 y = v0²/(4g) 这条线上） */
-const centerOf = (vy: number) => ({ x: AXIS_X + dxc(vy), y: YC_Y });
+const centerOf = (vy: number): { x: number; y: number } => ({ x: AXIS_X + dxc(vy), y: YC_Y });
 /** 圆顶 = 最高点（= v0²/(4g) + ρ） */
-const topOf = (vy: number) => ({ x: AXIS_X + dxc(vy), y: YC_Y - rho(vy) });
+const topOf = (vy: number): { x: number; y: number } => ({
+  x: AXIS_X + dxc(vy),
+  y: YC_Y - rho(vy),
+});
 /** 最深的球 A：h = L = 2v0²/(9g) ⟹ v_y = √(2gL) = 2v0/3（就是第 (1) 问里那个球） */
 const VY_A = 2 / 3;
 /** 临界球：圆顶恰好落在目标线上 ⟹ ρ = 5v0²/(16g) ⟹ u = 5v0/8 ⟹ v_y = 3v0/8（h = 9v0²/(128g)） */
@@ -82,8 +87,9 @@ const CIRCLES = [
 
 /* 出管速度分解（画在最深的球 A 的出管点上——它最靠右，右侧留白最干净）：
    v = v_d + u：v_d = v0/2 水平向右（它的洛伦兹力竖直向上、恰好抵消 mg），u 是剩下的匀速圆周分量，
-   方向正是该圆在出管点的切线方向；第三条斜边就是合速度 v（= 出管速度 (v0, v_y)）。 */
-const V0_PX = 76;
+   方向正是该圆在出管点的切线方向；第三条斜边就是合速度 v（= 出管速度 (v0, v_y)）。
+   三角形整体压得比较短（V0_PX）：再长就把 u 的箭头伸进右侧"圆心所在高度"那两行字里了。 */
+const V0_PX = 62;
 const DECO = {
   from: { x: exitX(VY_A), y: MN_Y },
   vdTip: { x: exitX(VY_A) + V0_PX / 2, y: MN_Y },
@@ -97,7 +103,7 @@ const TUBE_HALF = 10;
 const TUBE_WALL = 3.6;
 const TUBE_BOTTOM = 332;
 const BALL_R = 8.5;
-/** h_min/L =（9v0²/(128g)）/（2v0²/(9g)）= 81/256：靠管口这一段的长度占比 */
+/** H_min/L =（9v0²/(128g)）/（2v0²/(9g)）= 81/256：靠管口这一段的长度占比 */
 const SPLIT_RATIO = 81 / 256;
 const SPLIT_Y = MN_Y + (TUBE_BOTTOM - MN_Y) * SPLIT_RATIO;
 /** 管内均匀紧密排布：靠管口 3 个（圆顶够不着）+ 下方 6 个（能到达）；分界正好落在两个球的间隙里 */
@@ -109,10 +115,10 @@ const spread = (y0: number, y1: number, n: number): number[] => {
 };
 const ballsTop = spread(MN_Y, SPLIT_Y, BALLS_TOP);
 const ballsBottom = spread(SPLIT_Y, TUBE_BOTTOM, BALLS_BOTTOM);
-/** 球的填色：分段讲清楚之前一律中性灰，step ≥ 3 才把"能到达"的那一段染成速度蓝 */
+/** 球的填色：分段讲清楚之前一律中性灰，step ≥ 3 才把"能到达"的那一段染成速度蓝、并压暗"到不了"的那一段 */
 const ballFill = (isTop: boolean): string =>
   step >= 3 && !isTop ? "var(--c-velocity)" : "var(--c-text-dim)";
-const ballOpacity = (isTop: boolean): number => (step >= 3 && !isTop ? 0.4 : 0.5);
+const ballOpacity = (isTop: boolean): number => (step >= 3 ? (isTop ? 0.4 : 0.52) : 0.5);
 
 /* 左栏尺寸线：管长 L 在 x = 52，两段的尺寸线在 x = 84；三条尺寸界线从 46 拉到 100 */
 const DIM_L_X = 52;
@@ -154,13 +160,13 @@ const DASH = "9 8";
       <!-- ① 磁场：第一、四象限（x > 0）都是垂直纸面向里的匀强磁场，裸 × 铺满，画在最底层 -->
       <FieldDots
         :x="310"
-        :y="26"
-        :cols="6"
+        :y="18"
+        :cols="7"
         :rows="7"
-        :spacing="50"
-        :size="8"
-        :line-width="2.4"
-        :opacity="0.34"
+        :spacing="44"
+        :size="7"
+        :line-width="2.2"
+        :opacity="0.24"
         dir="in"
       />
       <!-- ② 参考线：y 轴（磁场竖直边界 + y 方向小箭头）、MN 水平面、原点 O -->
@@ -328,25 +334,27 @@ const DASH = "9 8";
             管内：出管速度
             <tspan :font-family="MATH" font-style="italic">v</tspan>
             <tspan :font-size="F_SUB" dy="4" :font-family="MATH" font-style="italic">y</tspan>
-            <tspan dy="-4" :font-family="MAIN"> = √(2gh)</tspan>
+            <tspan dy="-4" :font-family="MAIN">&#160;=&#160;√(2</tspan>
+            <tspan :font-family="MATH" font-style="italic">gh</tspan>
+            <tspan :font-family="MAIN">)</tspan>
           </text>
           <text x="18" y="60" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
             每个球
             <tspan :font-family="MATH" font-style="italic">a</tspan>
-            <tspan :font-family="MAIN"> = </tspan>
+            <tspan :font-family="MAIN">&#160;=&#160;</tspan>
             <tspan :font-family="MATH" font-style="italic">g</tspan>
             <tspan :font-family="MAIN">，越深出管口越快</tspan>
           </text>
           <text x="18" y="84" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
             管长
             <tspan :font-family="MATH" font-style="italic">L</tspan>
-            <tspan :font-family="MAIN"> = 2</tspan>
+            <tspan :font-family="MAIN">&#160;=&#160;2</tspan>
             <tspan :font-family="MATH" font-style="italic">v</tspan>
-            <tspan :font-size="F_STACK" dy="4" :font-family="MATH" font-style="italic">0</tspan>
-            <tspan :font-size="F_STACK" dy="-8" dx="-5.5" :font-family="MATH" font-style="italic">
-              2
-            </tspan>
-            <tspan dy="4" dx="-5.5" :font-family="MAIN">/(9g)</tspan>
+            <tspan :font-size="F_STACK" dy="4" :font-family="MAIN">0</tspan>
+            <tspan :font-size="F_STACK" dy="-8" dx="-5.5" :font-family="MAIN">2</tspan>
+            <tspan dy="4" dx="-5.5" :font-family="MAIN">/(9</tspan>
+            <tspan :font-family="MATH" font-style="italic">g</tspan>
+            <tspan :font-family="MAIN">)</tspan>
           </text>
           <text
             :x="TUBE_CX + 9"
@@ -436,8 +444,9 @@ const DASH = "9 8";
         <!-- 管外栏标题与几个直接标注 -->
         <g :style="HALO">
           <text
-            x="320"
+            x="448"
             y="300"
+            text-anchor="middle"
             :font-size="F_TITLE"
             fill="var(--c-text)"
             :font-family="MAIN"
@@ -445,7 +454,7 @@ const DASH = "9 8";
             管外：圆顶越高，能到的高度越高
           </text>
           <text
-            :x="DECO.from.x + 19"
+            :x="(DECO.from.x + DECO.vdTip.x) / 2"
             y="180"
             text-anchor="middle"
             :font-size="F_SMALL"
@@ -454,12 +463,12 @@ const DASH = "9 8";
             font-style="italic"
           >
             v
-            <tspan :font-size="F_SUB" dy="4">0</tspan>
+            <tspan :font-size="F_SUB" dy="4" :font-family="MAIN">0</tspan>
             <tspan dy="-4" :font-family="MAIN">/2</tspan>
           </text>
           <text
-            x="512"
-            y="132"
+            x="497"
+            y="143"
             text-anchor="middle"
             :font-size="F_SMALL"
             fill="var(--c-velocity)"
@@ -479,18 +488,18 @@ const DASH = "9 8";
           >
             ρ
           </text>
-          <text x="456" y="72" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
+          <text x="456" y="90" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
             圆心所在高度
           </text>
-          <text x="456" y="90" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
+          <text x="456" y="108" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
             <tspan :font-family="MATH" font-style="italic">y</tspan>
-            <tspan :font-family="MAIN"> = </tspan>
+            <tspan :font-family="MAIN">&#160;=&#160;</tspan>
             <tspan :font-family="MATH" font-style="italic">v</tspan>
-            <tspan :font-size="F_STACK" dy="4" :font-family="MATH" font-style="italic">0</tspan>
-            <tspan :font-size="F_STACK" dy="-8" dx="-5.5" :font-family="MATH" font-style="italic">
-              2
-            </tspan>
-            <tspan dy="4" dx="-5.5" :font-family="MAIN">/(4g)</tspan>
+            <tspan :font-size="F_STACK" dy="4" :font-family="MAIN">0</tspan>
+            <tspan :font-size="F_STACK" dy="-8" dx="-5.5" :font-family="MAIN">2</tspan>
+            <tspan dy="4" dx="-5.5" :font-family="MAIN">/(4</tspan>
+            <tspan :font-family="MATH" font-style="italic">g</tspan>
+            <tspan :font-family="MAIN">)</tspan>
           </text>
         </g>
         <!-- 图例：三个圆的颜色 → 三种结局（"临界"那一行在 step 3 随目标线一起出现） -->
@@ -503,7 +512,14 @@ const DASH = "9 8";
           stroke-width="3.4"
           stroke-linecap="round"
         />
-        <text x="484" y="211" :font-size="F_SMALL" fill="var(--c-velocity)" :font-family="MAIN">
+        <text
+          x="484"
+          y="211"
+          :font-size="F_SMALL"
+          fill="var(--c-velocity)"
+          :font-family="MAIN"
+          :style="HALO_S"
+        >
           h 大：能到达
         </text>
         <line
@@ -515,7 +531,14 @@ const DASH = "9 8";
           stroke-width="2.6"
           stroke-linecap="round"
         />
-        <text x="484" y="251" :font-size="F_SMALL" fill="var(--c-text-dim)" :font-family="MAIN">
+        <text
+          x="484"
+          y="251"
+          :font-size="F_SMALL"
+          fill="var(--c-text-dim)"
+          :font-family="MAIN"
+          :style="HALO_S"
+        >
           h 小：到不了
         </text>
       </g>
@@ -540,7 +563,14 @@ const DASH = "9 8";
           stroke-width="3.4"
           stroke-linecap="round"
         />
-        <text x="484" y="231" :font-size="F_SMALL" fill="var(--c-accent)" :font-family="MAIN">
+        <text
+          x="484"
+          y="231"
+          :font-size="F_SMALL"
+          fill="var(--c-accent)"
+          :font-family="MAIN"
+          :style="HALO_S"
+        >
           临界：刚好到达
         </text>
         <g :style="HALO">
@@ -549,13 +579,13 @@ const DASH = "9 8";
           </text>
           <text x="456" y="54" :font-size="F_SMALL" fill="var(--c-accent)" :font-family="MAIN">
             <tspan :font-family="MATH" font-style="italic">y</tspan>
-            <tspan :font-family="MAIN"> = 9</tspan>
+            <tspan :font-family="MAIN">&#160;=&#160;9</tspan>
             <tspan :font-family="MATH" font-style="italic">v</tspan>
-            <tspan :font-size="F_STACK" dy="4" :font-family="MATH" font-style="italic">0</tspan>
-            <tspan :font-size="F_STACK" dy="-8" dx="-5.5" :font-family="MATH" font-style="italic">
-              2
-            </tspan>
-            <tspan dy="4" dx="-5.5" :font-family="MAIN">/(16g)</tspan>
+            <tspan :font-size="F_STACK" dy="4" :font-family="MAIN">0</tspan>
+            <tspan :font-size="F_STACK" dy="-8" dx="-5.5" :font-family="MAIN">2</tspan>
+            <tspan dy="4" dx="-5.5" :font-family="MAIN">/(16</tspan>
+            <tspan :font-family="MATH" font-style="italic">g</tspan>
+            <tspan :font-family="MAIN">)</tspan>
           </text>
         </g>
         <!-- 左栏：分界虚线（h_min = 9v0²/(128g)）、两段的尺寸双箭头、两段的结论 -->
@@ -603,17 +633,20 @@ const DASH = "9 8";
           <text x="142" y="208" :font-size="F_SMALL" fill="var(--c-accent)" :font-family="MAIN">
             81/256
           </text>
-          <text x="142" y="268" :font-size="F_LABEL" fill="var(--c-text)" :font-family="MAIN">
-            能到达
-          </text>
-          <text x="142" y="290" :font-size="F_SMALL" fill="var(--c-velocity)" :font-family="MAIN">
-            175/256
-          </text>
           <text x="230" y="209" :font-size="F_SMALL" fill="var(--c-accent)" :font-family="MATH">
             h
             <tspan :font-size="F_STACK" dy="4" :font-family="MAIN">min</tspan>
           </text>
         </g>
+      </g>
+      <!-- ⑦ step ≥ 4：最终比值（P30 第 2 次点击才出；P29 到不了这一步，不会提前把答案摆出来） -->
+      <g v-if="step >= 4" :style="HALO_S">
+        <text x="142" y="268" :font-size="F_LABEL" fill="var(--c-text)" :font-family="MAIN">
+          能到达
+        </text>
+        <text x="142" y="290" :font-size="F_SMALL" fill="var(--c-velocity)" :font-family="MAIN">
+          175/256
+        </text>
       </g>
     </svg>
   </div>

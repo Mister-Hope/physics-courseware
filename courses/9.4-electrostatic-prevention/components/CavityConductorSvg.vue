@@ -31,18 +31,46 @@ defineProps<{ step: number }>();
       stroke-opacity="0.5"
       stroke-width="2"
     />
-    <rect x="170" y="86" width="120" height="88" rx="10" fill="var(--c-bg-soft, #0f1425)" stroke="var(--c-text-mute)" stroke-opacity="0.55" stroke-width="2" />
-    <text x="230" y="132" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-text)">C</text>
+    <rect x="170" y="86" width="120" height="88" rx="10" fill="var(--c-bg-soft)" stroke="var(--c-text-mute)" stroke-opacity="0.55" stroke-width="2" />
+    <text x="230" y="132" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-text)">
+      C
+    </text>
     <text x="382" y="70" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-text)">W</text>
     <template v-if="step >= 1">
-      <text v-for="y in [70, 104, 138, 172, 204]" :key="`mm${y}`" x="100" :y="y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="var(--c-danger)">−</text>
-      <text v-for="y in [70, 104, 138, 172, 204]" :key="`pp${y}`" x="360" :y="y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="var(--c-accent-2)">+</text>
+      <text
+        v-for="y in [70, 104, 138, 172, 204]"
+        :key="`mm${y}`"
+        x="100"
+        :y="y"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="KaTeX_Main"
+        font-size="16"
+        fill="var(--c-danger)"
+      >
+        −
+      </text>
+      <text
+        v-for="y in [70, 104, 138, 172, 204]"
+        :key="`pp${y}`"
+        x="360"
+        :y="y"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="KaTeX_Main"
+        font-size="16"
+        fill="var(--c-accent-2)"
+      >
+        +
+      </text>
     </template>
     <template v-if="step >= 2">
       <text x="230" y="216" text-anchor="middle" font-family="KaTeX_Main" font-size="12" fill="var(--c-accent)">内表面没有电荷；壳壁内 E = 0</text>
     </template>
     <template v-if="step >= 3">
-      <text x="230" y="132" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-accent)">E = 0</text>
+      <text x="230" y="132" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-accent)">
+        E = 0
+      </text>
       <text x="230" y="60" text-anchor="middle" font-family="KaTeX_Main" font-size="12" fill="var(--c-text-mute)">外部电场线进不去</text>
     </template>
   </svg>

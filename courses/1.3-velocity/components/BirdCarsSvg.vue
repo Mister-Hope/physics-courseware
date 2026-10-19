@@ -152,7 +152,7 @@ const currentBird = computed(() => {
 
 // 文字轮廓光圈样式
 const HALO = {
-  stroke: "var(--c-bg, #0f1425)",
+  stroke: "var(--c-bg)",
   "stroke-width": 3.6,
   "paint-order": "stroke",
 } as const;

@@ -14,10 +14,6 @@
        - 纯图形设计，零多余文字干扰，与第一课时封面装饰成套呼应。
 -->
 <script setup lang="ts">
-const { width = 205 } = defineProps<{
-  width?: number | string;
-}>();
-
 // 几何基础参数 (viewBox: 230 × 150，与第一课时严密统一)
 const W = 230;
 const H = 150;
@@ -44,7 +40,7 @@ const vTip = { x: V_FROM.x + V_LEN, y: V_FROM.y }; // (162, 68)
 <template>
   <svg
     :viewBox="`0 0 ${W} ${H}`"
-    :width="width"
+    width="320"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     aria-label="第二课时·功率：物体以速度 v 前进、牵引力沿运动方向，功率 P = Fv"
@@ -53,7 +49,7 @@ const vTip = { x: V_FROM.x + V_LEN, y: V_FROM.y }; // (162, 68)
     <defs>
       <!-- 物块主体渐变 -->
       <linearGradient id="power-block-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="var(--c-surface-solid, #1e293b)" stop-opacity="0.95" />
+        <stop offset="0%" stop-color="var(--c-surface-solid)" stop-opacity="0.95" />
         <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9" />
       </linearGradient>
 
@@ -120,24 +116,15 @@ const vTip = { x: V_FROM.x + V_LEN, y: V_FROM.y }; // (162, 68)
         stroke-linecap="round"
       />
       <!-- 中心受力锚点 (小圆孔) -->
-      <circle :cx="O.x" :cy="O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent, #e2a846)" stroke-width="1.4" />
-      <circle :cx="O.x" :cy="O.y" r="1.2" fill="var(--c-accent, #e2a846)" />
+      <circle :cx="O.x" :cy="O.y" r="3.2" fill="#0f172a" stroke="var(--c-accent)" stroke-width="1.4" />
+      <circle :cx="O.x" :cy="O.y" r="1.2" fill="var(--c-accent)" />
     </g>
 
     <!-- ════════ 4. 速度矢量 v (在物块旁侧水平向前) ════════ -->
-    <CourseArrow
-      :from="V_FROM"
-      :to="vTip"
-      stroke="var(--c-velocity, #38bdf8)"
-      :stroke-width="2.5"
-      stroke-dasharray="7 5"
-      label="v"
-      :label-dy="-11"
-      :head-size="8.5"
-    />
+    <CourseArrow :from="V_FROM" :to="vTip" stroke="var(--c-velocity)" :stroke-width="2.5" stroke-dasharray="7 5" label="v" :label-dy="-11" :head-size="8.5" />
 
     <!-- ════════ 5. 牵引力矢量 F (从几何中心出发沿运动方向) ════════ -->
-    <CourseArrow :from="O" :to="fTip" stroke="var(--c-accent, #e2a846)" :stroke-width="3.2" label="F" :label-dy="-12" :head-size="10" />
+    <CourseArrow :from="O" :to="fTip" stroke="var(--c-accent)" :stroke-width="3.2" label="F" :label-dy="-12" :head-size="10" />
 
     <!-- ════════ 6. 核心学术公式：P = F v ════════ -->
     <g transform="translate(172, 36)">
@@ -145,10 +132,10 @@ const vTip = { x: V_FROM.x + V_LEN, y: V_FROM.y }; // (162, 68)
       <rect x="-38" y="-18" width="76" height="26" rx="6" fill="url(#badge-grad)" stroke="rgba(148, 163, 184, 0.3)" stroke-width="1.1" />
       <!-- 公式文字（色彩语义1:1绑定：P能量金，F拉力金，v速度蓝） -->
       <text x="0" y="1" text-anchor="middle" dominant-baseline="middle" font-size="17">
-        <tspan font-family="KaTeX_Math" font-style="italic" font-weight="bold" fill="var(--c-accent, #e2a846)">P</tspan>
+        <tspan font-family="KaTeX_Math" font-style="italic" font-weight="bold" fill="var(--c-accent)">P</tspan>
         <tspan font-family="KaTeX_Main" fill="#94a3b8" dx="2">=</tspan>
-        <tspan font-family="KaTeX_Math" font-style="italic" font-weight="bold" fill="var(--c-accent, #e2a846)" dx="2">F</tspan>
-        <tspan font-family="KaTeX_Math" font-style="italic" font-weight="bold" fill="var(--c-velocity, #38bdf8)" dx="1">v</tspan>
+        <tspan font-family="KaTeX_Math" font-style="italic" font-weight="bold" fill="var(--c-accent)" dx="2">F</tspan>
+        <tspan font-family="KaTeX_Math" font-style="italic" font-weight="bold" fill="var(--c-velocity)" dx="1">v</tspan>
       </text>
     </g>
   </svg>
