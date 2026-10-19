@@ -100,52 +100,67 @@ const band = computed(() => bandOf(f.value));
   flex-direction: column;
   gap: 0.75rem;
 }
+
 .wcalc-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   justify-content: center;
 }
+
 .wcalc-chip {
   display: inline-flex;
-  align-items: center;
   gap: 0.45rem;
+  align-items: center;
+
   padding: 0.32rem 0.85rem;
-  border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--c-accent) 45%, transparent);
+  border-radius: 999px;
+
   background: color-mix(in srgb, var(--c-accent) 10%, transparent);
   color: var(--c-text);
+
   font-size: 0.92rem;
+
   cursor: pointer;
+
   transition: background 0.15s ease;
 }
+
 .wcalc-chip:hover {
   background: color-mix(in srgb, var(--c-accent) 26%, transparent);
 }
+
 .wcalc-out {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: 0.9rem;
   align-items: stretch;
 }
+
 .wcalc-cell {
   min-width: 0;
-  text-align: center;
   padding: 0.7rem 0.6rem;
-  border-radius: var(--radius-lg);
-  background: color-mix(in srgb, var(--c-surface) 70%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: color-mix(in srgb, var(--c-surface) 70%, transparent);
+
+  text-align: center;
 }
+
 .wcalc-k {
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
+
 .wcalc-v {
   margin-top: 0.35rem;
   font-size: 1.55rem;
 }
+
 .wcalc-band {
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
 }
 </style>

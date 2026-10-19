@@ -145,7 +145,6 @@ const dots = computed(() => ({
   display: flex;
   flex-direction: column;
   gap: 0.08rem;
-
   min-width: 0;
 }
 
@@ -188,7 +187,7 @@ const dots = computed(() => ({
 .mu-dot.is-alive {
   border-color: var(--c-accent);
   background: var(--c-accent);
-  box-shadow: 0 0 4px rgba(226, 168, 70, 0.55);
+  box-shadow: 0 0 4px rgb(226 168 70 / 55%);
 }
 
 .mu-stat {
@@ -211,7 +210,6 @@ const dots = computed(() => ({
   display: flex;
   gap: 0.9rem;
   align-items: center;
-
   min-width: 0;
 }
 
@@ -226,6 +224,7 @@ const dots = computed(() => ({
   align-items: baseline;
 
   color: var(--c-accent);
+
   white-space: nowrap;
 }
 

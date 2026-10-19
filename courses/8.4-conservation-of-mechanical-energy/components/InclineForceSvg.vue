@@ -14,11 +14,13 @@
     <text x="434" y="186" font-size="16" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic">G</text>
     <CourseArrow :from="{ x: 423, y: 151 }" :to="{ x: 411, y: 101 }" stroke="var(--c-accent-2)" :stroke-width="3" />
     <text x="392" y="106" font-size="16" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">
-      F<tspan font-size="11" dy="3">N</tspan>
+      F
+      <tspan font-size="11" dy="3">N</tspan>
     </text>
     <CourseArrow :from="{ x: 423, y: 151 }" :to="{ x: 376, y: 162 }" stroke="var(--c-physics)" :stroke-width="3" />
     <text x="338" y="150" font-size="16" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic">
-      F<tspan font-size="11" dy="3">f</tspan>
+      F
+      <tspan font-size="11" dy="3">f</tspan>
     </text>
   </svg>
 </template>

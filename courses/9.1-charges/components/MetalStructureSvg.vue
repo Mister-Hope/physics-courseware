@@ -1,10 +1,9 @@
 <script setup lang="ts">
 /**
  * 金属的微观结构（教材行 31）：正离子在平衡位置附近振动、自由电子穿梭其间，所以金属是导体。
- * - mode="conductor"（第 10 页）：自由电子画成**无规则热运动**（循环 CSS 动画，速率远大于定向移动）；
- *   showElectronFlow 另出"定向移动"箭头，showInsulator 出绝缘体对照。
- * - mode="induction"（第 12 页）：中性点阵 + showInducedCharges 时自由电子聚到近端，
- *   两端净电荷**个数相等**（左 4 个 −、右 4 个 +），一眼能看出电荷守恒。
+ *
+ * - Mode="conductor"（第 10 页）：自由电子画成**无规则热运动**（循环 CSS 动画，速率远大于定向移动）； showElectronFlow 另出"定向移动"箭头，showInsulator 出绝缘体对照。
+ * - Mode="induction"（第 12 页）：中性点阵 + showInducedCharges 时自由电子聚到近端， 两端净电荷**个数相等**（左 4 个 −、右 4 个 +），一眼能看出电荷守恒。
  */
 withDefaults(
   defineProps<{
@@ -144,8 +143,12 @@ const plusMarks = [372, 388, 404, 420];
     <!-- 净电荷：左边 4 个 −、右边 4 个 +（个数相等 ⇒ 电荷守恒） -->
     <g v-if="showInducedCharges">
       <CourseArrow :from="{ x: 320, y: 156 }" :to="{ x: 286, y: 156 }" stroke="var(--c-velocity)" stroke-width="2.6" />
-      <text v-for="(x, i) in minusMarks" :key="'m' + i" :x="x" y="112" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-velocity)">−</text>
-      <text v-for="(x, i) in plusMarks" :key="'p' + i" :x="x" y="206" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-danger)">+</text>
+      <text v-for="(x, i) in minusMarks" :key="'m' + i" :x="x" y="112" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-velocity)">
+        −
+      </text>
+      <text v-for="(x, i) in plusMarks" :key="'p' + i" :x="x" y="206" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-danger)">
+        +
+      </text>
     </g>
   </svg>
 </template>
@@ -153,8 +156,8 @@ const plusMarks = [372, 388, 404, 420];
 <style scoped>
 /* 自由电子的无规则热运动：四个不同相位/路径的抖动，看起来是随机乱飞 */
 .ms-e {
-  animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 .ms-e-0 {
@@ -182,12 +185,15 @@ const plusMarks = [372, 388, 404, 420];
   100% {
     transform: translate(0, 0);
   }
+
   20% {
     transform: translate(8px, -7px);
   }
+
   45% {
     transform: translate(-6px, 6px);
   }
+
   70% {
     transform: translate(5px, 7px);
   }
@@ -198,12 +204,15 @@ const plusMarks = [372, 388, 404, 420];
   100% {
     transform: translate(0, 0);
   }
+
   25% {
     transform: translate(-8px, -5px);
   }
+
   55% {
     transform: translate(7px, 6px);
   }
+
   80% {
     transform: translate(-4px, 8px);
   }
@@ -214,12 +223,15 @@ const plusMarks = [372, 388, 404, 420];
   100% {
     transform: translate(0, 0);
   }
+
   30% {
     transform: translate(9px, 5px);
   }
+
   60% {
     transform: translate(-7px, -7px);
   }
+
   85% {
     transform: translate(3px, -8px);
   }
@@ -230,12 +242,15 @@ const plusMarks = [372, 388, 404, 420];
   100% {
     transform: translate(0, 0);
   }
+
   35% {
     transform: translate(-9px, 7px);
   }
+
   65% {
     transform: translate(6px, -8px);
   }
+
   90% {
     transform: translate(-5px, -5px);
   }

@@ -410,7 +410,6 @@ const resultTip = computed(() => tip(boat.value, result.value));
 /* 每个滑块只占半行（共享组件的 .cs-row 是块级、默认独占一行），面板高度才收得住 */
 .sim-panel > * {
   flex: 1 1 18rem;
-
   min-width: 0;
 }
 

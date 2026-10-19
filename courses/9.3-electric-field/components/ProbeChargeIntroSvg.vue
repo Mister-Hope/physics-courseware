@@ -17,14 +17,7 @@ const LINES = Array.from({ length: 6 }, (_, i) => {
   <svg viewBox="0 0 420 280" class="w-full h-full">
     <circle :cx="Q.x" :cy="Q.y" :r="R" fill="none" stroke="var(--c-border)" stroke-dasharray="4 6" />
     <line :x1="Q.x" :y1="Q.y" :x2="Q.x + R" :y2="Q.y" stroke="var(--c-neutral-500)" stroke-opacity="0.5" stroke-width="1.6" />
-    <CourseArrow
-      v-for="(line, i) in LINES"
-      :key="i"
-      :from="line.from"
-      :to="line.to"
-      stroke="var(--c-field)"
-      :stroke-width="1.8"
-    />
+    <CourseArrow v-for="(line, i) in LINES" :key="i" :from="line.from" :to="line.to" stroke="var(--c-field)" :stroke-width="1.8" />
     <circle :cx="Q.x" :cy="Q.y" r="16" fill="var(--c-danger)" fill-opacity="0.9" />
     <text :x="Q.x" :y="Q.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="#fff">+</text>
     <text :x="Q.x" :y="Q.y + 44" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-danger)">Q</text>

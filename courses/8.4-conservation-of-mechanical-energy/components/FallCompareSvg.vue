@@ -22,15 +22,18 @@
     <text x="624" y="132" font-size="15" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic">G</text>
     <CourseArrow :from="{ x: 612, y: 78 }" :to="{ x: 612, y: 34 }" stroke="var(--c-physics)" :stroke-width="3" />
     <text x="622" y="52" font-size="15" fill="var(--c-physics)" font-family="KaTeX_Math" font-style="italic">
-      F<tspan font-size="10" dy="3">f</tspan>
+      F
+      <tspan font-size="10" dy="3">f</tspan>
     </text>
     <line x1="70" y1="226" x2="368" y2="226" stroke="var(--c-neutral-300)" stroke-width="3" stroke-linecap="round" />
     <line x1="474" y1="226" x2="772" y2="226" stroke="var(--c-neutral-300)" stroke-width="3" stroke-linecap="round" />
     <text x="52" y="58" font-size="15" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
-      h<tspan font-size="10" dy="3">1</tspan>
+      h
+      <tspan font-size="10" dy="3">1</tspan>
     </text>
     <text x="52" y="190" font-size="15" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
-      h<tspan font-size="10" dy="3">2</tspan>
+      h
+      <tspan font-size="10" dy="3">2</tspan>
     </text>
   </svg>
 </template>

@@ -542,15 +542,13 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 4, "paint-order": "stroke"
 
 .mg-slider-name {
   font-weight: 700;
-
   font-size: 0.95rem;
 }
 
 .mg-slider-value {
   font-weight: 800;
-  white-space: nowrap;
-
   font-size: 0.82rem;
+  white-space: nowrap;
 }
 
 .mg-range {
@@ -572,6 +570,7 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 4, "paint-order": "stroke"
 
 .mg-readout-main {
   color: var(--c-accent);
+
   font-weight: 800;
   font-size: 1.22rem;
   line-height: 1.1;

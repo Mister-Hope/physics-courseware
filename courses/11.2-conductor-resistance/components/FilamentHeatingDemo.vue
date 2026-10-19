@@ -116,9 +116,9 @@ const flameH = computed(() => 14 + 20 * ((temperature.value - TEMP_COLD) / 800))
 }
 
 .fd-panel {
-  width: 16rem;
   display: grid;
   gap: 0.8rem;
+  width: 16rem;
 }
 
 .fd-readout {

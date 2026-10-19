@@ -22,7 +22,14 @@ defineProps<{ step: number }>();
     </template>
     <!-- (b) 超高压作业服 -->
     <circle cx="430" cy="66" r="18" fill="var(--c-line)" stroke="var(--c-text-mute)" stroke-opacity="0.6" stroke-width="2" />
-    <path d="M 404 90 L 456 90 L 466 176 L 394 176 Z" fill="var(--c-line)" fill-opacity="0.55" stroke="var(--c-text-mute)" stroke-opacity="0.5" stroke-width="2" />
+    <path
+      d="M 404 90 L 456 90 L 466 176 L 394 176 Z"
+      fill="var(--c-line)"
+      fill-opacity="0.55"
+      stroke="var(--c-text-mute)"
+      stroke-opacity="0.5"
+      stroke-width="2"
+    />
     <line x1="416" y1="176" x2="410" y2="222" stroke="var(--c-text-mute)" stroke-width="6" stroke-linecap="round" />
     <line x1="444" y1="176" x2="450" y2="222" stroke="var(--c-text-mute)" stroke-width="6" stroke-linecap="round" />
     <template v-if="step >= 2">

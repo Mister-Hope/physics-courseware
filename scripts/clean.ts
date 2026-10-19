@@ -9,8 +9,8 @@ import path from "node:path";
  * pnpm run clean --dry-run → 只列出会删什么（含体积），不动文件
  * ```
  *
- * ⚠️ 必须带 `run`：`clean` 是 pnpm 12 的内置命令，`pnpm clean --dry-run` 会被 pnpm 自己的参数解析器拒掉
- * （`error: unexpected argument '--dry-run' found`），加 `run` 才会把参数转给本脚本。
+ * ⚠️ 必须带 `run`：`clean` 是 pnpm 12 的内置命令，`pnpm clean --dry-run` 会被 pnpm 自己的参数解析器拒掉 （`error:
+ * unexpected argument '--dry-run' found`），加 `run` 才会把参数转给本脚本。
  *
  * **只删这些**（都在 `.gitignore` 里，删掉后重新 `pnpm build` / `pnpm test:e2e` 就会再生成）：
  *

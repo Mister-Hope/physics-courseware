@@ -305,16 +305,21 @@ const JOINTS = {
   flex: 1;
   flex-direction: column;
   gap: 0.35rem;
+
   min-width: 0;
+
   font-size: 1rem;
 }
 
 .bwl-mode {
   align-self: flex-start;
+
   padding: 0.1rem 0.7rem;
   border-radius: 999px;
+
   background: var(--c-accent-soft);
   color: var(--c-accent);
+
   font-size: 0.9rem;
 }
 

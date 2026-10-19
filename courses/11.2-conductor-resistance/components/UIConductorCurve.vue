@@ -100,8 +100,10 @@ const curves = computed(() => [
 
 .uc-table {
   flex: 0 0 auto;
+
   width: auto;
   border-collapse: collapse;
+
   font-size: 1.02rem;
   font-variant-numeric: tabular-nums;
 }

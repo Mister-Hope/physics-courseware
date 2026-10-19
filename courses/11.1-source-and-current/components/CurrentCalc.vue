@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-/**
- * 第 8 页交互：拖动"电流 I"与"通电时间 t"，按真实公式 q = It、N = q/e 实时计算
- * 通过导体横截面的电荷量与电子数（e = 1.6×10⁻¹⁹ C）。
- */
+/** 第 8 页交互：拖动"电流 I"与"通电时间 t"，按真实公式 q = It、N = q/e 实时计算 通过导体横截面的电荷量与电子数（e = 1.6×10⁻¹⁹ C）。 */
 /** 对数滑块指数：I = 10^exp A，覆盖 1 μA ～ 10 A */
 const iExp = ref(Math.log10(50e-6));
 const tS = ref(3.2);
@@ -51,10 +48,15 @@ const applyPreset = (preset: { i: number; t: number }): void => {
   tS.value = preset.t;
 };
 
-const presetLabel = (preset: { i: number; t: number }): { num: string; unitTex: string; t: string } => {
+const presetLabel = (preset: {
+  i: number;
+  t: number;
+}): { num: string; unitTex: string; t: string } => {
   const a = preset.i;
-  if (a < 1e-3) return { num: (a * 1e6).toPrecision(3), unitTex: "\\mu\\text{A}", t: preset.t.toFixed(1) };
-  if (a < 1) return { num: (a * 1e3).toPrecision(3), unitTex: "\\text{mA}", t: preset.t.toFixed(1) };
+  if (a < 1e-3)
+    return { num: (a * 1e6).toPrecision(3), unitTex: "\\mu\\text{A}", t: preset.t.toFixed(1) };
+  if (a < 1)
+    return { num: (a * 1e3).toPrecision(3), unitTex: "\\text{mA}", t: preset.t.toFixed(1) };
   return { num: a.toPrecision(3), unitTex: "\\text{A}", t: preset.t.toFixed(1) };
 };
 </script>
@@ -62,16 +64,40 @@ const presetLabel = (preset: { i: number; t: number }): { num: string; unitTex: 
 <template>
   <div class="cur-calc">
     <div class="cur-sliders">
-      <CourseSlider v-model="iExp" :min="-6" :max="1" :step="0.05" label="电流" label-tex="I" accent="gold">
+      <CourseSlider
+        v-model="iExp"
+        :min="-6"
+        :max="1"
+        :step="0.05"
+        label="电流"
+        label-tex="I"
+        accent="gold"
+      >
         <template #value>{{ iRead.num }}<Latex :tex="`\\ ${iRead.unitTex}`" /></template>
       </CourseSlider>
-      <CourseSlider v-model="tS" :min="0" :max="60" :step="0.1" label="通电时间" label-tex="t" accent="blue">
+      <CourseSlider
+        v-model="tS"
+        :min="0"
+        :max="60"
+        :step="0.1"
+        label="通电时间"
+        label-tex="t"
+        accent="blue"
+      >
         <template #value>{{ tS.toFixed(1) }}<Latex tex="\ \text{s}" /></template>
       </CourseSlider>
     </div>
     <div class="cur-presets">
-      <button v-for="preset in presets" :key="preset.t + preset.i" type="button" class="cur-preset" @click="applyPreset(preset)">
-        {{ presetLabel(preset).num }}<Latex :tex="`\\ ${presetLabel(preset).unitTex}`" />、{{ preset.t.toFixed(1) }}<Latex tex="\ \text{s}" />
+      <button
+        v-for="preset in presets"
+        :key="preset.t + preset.i"
+        type="button"
+        class="cur-preset"
+        @click="applyPreset(preset)"
+      >
+        {{ presetLabel(preset).num }}<Latex :tex="`\\ ${presetLabel(preset).unitTex}`" />、{{
+          preset.t.toFixed(1)
+        }}<Latex tex="\ \text{s}" />
       </button>
     </div>
     <div class="cur-result">
@@ -85,10 +111,13 @@ const presetLabel = (preset: { i: number; t: number }): { num: string; unitTex: 
 .cur-calc {
   display: grid;
   gap: 0.9rem;
+
   padding: 1rem 1.35rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
+
   backdrop-filter: blur(16px);
 }
 
@@ -107,18 +136,22 @@ const presetLabel = (preset: { i: number; t: number }): { num: string; unitTex: 
   padding: 0.2rem 0.85rem;
   border: 1px solid var(--c-border);
   border-radius: 999px;
+
   background: transparent;
   color: var(--c-text-dim);
+
   font-size: 0.95rem;
+
   cursor: pointer;
+
   transition:
     color 0.2s,
     border-color 0.2s;
 }
 
 .cur-preset:hover {
-  color: var(--c-accent);
   border-color: var(--c-accent);
+  color: var(--c-accent);
 }
 
 .cur-result {

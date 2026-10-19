@@ -46,7 +46,7 @@ defineProps<{ step: number }>();
         dominant-baseline="central"
         font-family="KaTeX_Main"
         font-size="16"
-        fill="var(--c-danger)"
+        fill="var(--c-velocity)"
       >
         −
       </text>
@@ -59,7 +59,7 @@ defineProps<{ step: number }>();
         dominant-baseline="central"
         font-family="KaTeX_Main"
         font-size="16"
-        fill="var(--c-accent-2)"
+        fill="var(--c-danger)"
       >
         +
       </text>

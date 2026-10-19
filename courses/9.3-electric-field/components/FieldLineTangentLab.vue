@@ -77,7 +77,9 @@ function trace(start: Pt, angleDeg: number, direction: 1 | -1): Pt[] {
 }
 
 function toPath(points: Pt[]) {
-  return points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
+  return points
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+    .join(" ");
 }
 
 // 固定 polylines：正电荷出发 8 条、负电荷反向追踪 5 条、加密用 8 条（挂载时一次算好、之后冻结）
@@ -217,7 +219,12 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId));
           stroke-dasharray="6 5"
         />
         <circle :cx="picked.point.x" :cy="picked.point.y" r="6" fill="var(--c-accent)" />
-        <CourseArrow :from="picked.point" :to="picked.eEnd" stroke="var(--c-force)" :stroke-width="3.2" />
+        <CourseArrow
+          :from="picked.point"
+          :to="picked.eEnd"
+          stroke="var(--c-force)"
+          :stroke-width="3.2"
+        />
         <text
           :x="picked.eEnd.x + 9"
           :y="picked.eEnd.y + 4"
@@ -240,9 +247,29 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId));
         </text>
       </g>
       <circle :cx="Q1.x" :cy="Q1.y" r="15" fill="var(--c-danger)" fill-opacity="0.9" />
-      <text :x="Q1.x" :y="Q1.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="15" fill="#fff">+</text>
+      <text
+        :x="Q1.x"
+        :y="Q1.y"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="KaTeX_Main"
+        font-size="15"
+        fill="#fff"
+      >
+        +
+      </text>
       <circle :cx="Q2.x" :cy="Q2.y" r="15" fill="var(--c-velocity)" fill-opacity="0.9" />
-      <text :x="Q2.x" :y="Q2.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="15" fill="#fff">−</text>
+      <text
+        :x="Q2.x"
+        :y="Q2.y"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="KaTeX_Main"
+        font-size="15"
+        fill="#fff"
+      >
+        −
+      </text>
     </svg>
   </div>
 </template>
@@ -251,6 +278,7 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId));
 .flt {
   width: 100%;
 }
+
 .flt-fig {
   width: 100%;
   height: 172px;

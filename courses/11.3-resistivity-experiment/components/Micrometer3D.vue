@@ -191,8 +191,9 @@ onBeforeUnmount(() => {
 .mm3d {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-  align-items: center;
   gap: 1.2rem;
+  align-items: center;
+
   min-width: 0;
 }
 
@@ -200,11 +201,14 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  overflow: hidden;
+
   min-width: 0;
   aspect-ratio: 2 / 1;
-  overflow: hidden;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: radial-gradient(circle at 50% 40%, rgb(30 41 59 / 55%), rgb(9 13 26 / 90%));
 }
 
@@ -234,9 +238,12 @@ onBeforeUnmount(() => {
   padding: 0.25rem 0.7rem;
   border: 1px solid var(--c-border);
   border-radius: 0.6rem;
-  color: var(--c-text-dim);
+
   background: var(--c-surface);
+  color: var(--c-text-dim);
+
   font-size: 0.85rem;
+
   cursor: pointer;
 }
 
@@ -249,7 +256,9 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   color: var(--c-text-dim);
+
   font-size: 0.9rem;
   font-variant-numeric: tabular-nums;
 }

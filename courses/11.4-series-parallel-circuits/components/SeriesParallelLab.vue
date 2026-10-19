@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /**
- * 串、并联等效电阻实验台：拖动 R₁、R₂（1–20 Ω），串联 R = R₁ + R₂、并联 R = R₁R₂/(R₁+R₂) 全部按真实公式实时计算。
- * 读数区是固定列 grid（标签 / 公式 / 数值三列，数值列定宽右对齐），拖动时不会把旁边的元素顶跑。
+ * 串、并联等效电阻实验台：拖动 R₁、R₂（1–20 Ω），串联 R = R₁ + R₂、并联 R = R₁R₂/(R₁+R₂) 全部按真实公式实时计算。 读数区是固定列 grid（标签 / 公式
+ * / 数值三列，数值列定宽右对齐），拖动时不会把旁边的元素顶跑。
  */
 import { computed, ref } from "vue";
 
@@ -67,42 +67,53 @@ const maxR = computed(() => Math.max(r1.value, r2.value));
   flex-direction: column;
   gap: 0.7rem;
 }
+
 .sp-ctrl {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .sp-out {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   padding: 0.7rem 0.9rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
+  background: var(--c-surface);
 }
+
 /* 固定列：标签 / 公式 / 数值（数值列定宽右对齐），拖动滑块时读数不会顶跑别的元素 */
 .sp-row {
   display: grid;
   grid-template-columns: 3.4rem minmax(0, 1fr) 7rem;
-  align-items: center;
   gap: 0.7rem;
+  align-items: center;
+
   font-size: 1.05rem;
   font-variant-numeric: tabular-nums;
 }
+
 .sp-row > :last-child {
   text-align: right;
 }
+
 .sp-k {
-  font-size: 0.85rem;
-  color: var(--c-text-dim);
-  text-align: center;
   padding: 0.15rem 0;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-sm);
-}
-.sp-note {
-  font-size: 0.9rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.sp-note {
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
 }
 </style>

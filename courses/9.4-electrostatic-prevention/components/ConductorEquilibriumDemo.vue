@@ -48,7 +48,12 @@ const chargeY = [86, 120, 154, 188];
 
 <template>
   <div class="stack">
-    <svg viewBox="0 0 420 240" class="w-full" xmlns="http://www.w3.org/2000/svg" style="height: 185px">
+    <svg
+      viewBox="0 0 420 240"
+      class="w-full"
+      xmlns="http://www.w3.org/2000/svg"
+      style="height: 185px"
+    >
       <CourseArrow
         v-for="y in ys"
         :key="`fl${y}`"
@@ -67,7 +72,18 @@ const chargeY = [86, 120, 154, 188];
         :stroke-width="strong ? 2.4 : 1.6"
         :opacity="strong ? 0.95 : 0.7"
       />
-      <rect x="150" y="54" width="124" height="140" rx="8" fill="var(--c-line)" fill-opacity="0.55" stroke="var(--c-text-mute)" stroke-opacity="0.5" stroke-width="2" />
+      <rect
+        x="150"
+        y="54"
+        width="124"
+        height="140"
+        rx="8"
+        fill="var(--c-line)"
+        fill-opacity="0.55"
+        stroke="var(--c-text-mute)"
+        stroke-opacity="0.5"
+        stroke-width="2"
+      />
       <template v-if="step >= 1">
         <text
           v-for="(y, i) in chargeY.slice(0, nCharge)"
@@ -78,7 +94,7 @@ const chargeY = [86, 120, 154, 188];
           dominant-baseline="central"
           font-family="KaTeX_Main"
           font-size="17"
-          fill="var(--c-danger)"
+          fill="var(--c-velocity)"
         >
           −
         </text>
@@ -91,7 +107,7 @@ const chargeY = [86, 120, 154, 188];
           dominant-baseline="central"
           font-family="KaTeX_Main"
           font-size="17"
-          fill="var(--c-accent-2)"
+          fill="var(--c-danger)"
         >
           +
         </text>
@@ -109,48 +125,87 @@ const chargeY = [86, 120, 154, 188];
           :cx="248 - eta * 84"
           :cy="y"
           r="5"
-          fill="var(--c-danger)"
+          fill="var(--c-velocity)"
           fill-opacity="0.8"
         />
-        <text x="212" y="222" text-anchor="middle" font-family="KaTeX_Main" font-size="11" fill="var(--c-text-mute)">自由电子</text>
         <text
-          v-if="step >= 2"
           x="212"
-          y="124"
+          y="222"
+          text-anchor="middle"
+          font-family="KaTeX_Main"
+          font-size="11"
+          fill="var(--c-text-mute)"
+        >
+          自由电子
+        </text>
+        <text
+          v-if="step >= 2 && eta >= 1"
+          x="212"
+          y="158"
           text-anchor="middle"
           dominant-baseline="central"
           font-family="KaTeX_Math"
           font-style="italic"
           font-size="15"
+          paint-order="stroke"
+          stroke="#0f1425"
+          stroke-width="4"
+          stroke-linejoin="round"
           fill="var(--c-accent)"
         >
-          E<tspan baseline-shift="sub" font-size="10">内</tspan> = 0
+          E
+          <tspan baseline-shift="sub" font-size="10">内</tspan>
+          = 0
         </text>
       </template>
-      <text x="212" y="30" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-field)">E<tspan baseline-shift="sub" font-size="10">0</tspan></text>
+      <text
+        x="212"
+        y="30"
+        text-anchor="middle"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="15"
+        fill="var(--c-field)"
+      >
+        E
+        <tspan baseline-shift="sub" font-size="10">0</tspan>
+      </text>
     </svg>
     <div
       class="text-[0.95rem]"
-      style="
-        align-self: stretch;
-        width: 100%;
-        text-align: left;
-        display: grid;
-        grid-template-columns: auto minmax(3.6ch, max-content) auto auto minmax(3.6ch, max-content) auto auto minmax(3.6ch, max-content) auto;
-        column-gap: 0.35rem;
-        align-items: baseline;
-      "
+      style="align-self: stretch; width: 100%; text-align: left"
       :style="{ visibility: step >= 1 ? 'visible' : 'hidden' }"
     >
-      <Latex tex="E_0=" />
-      <span class="tabular-nums" style="white-space: pre">{{ e0Txt }}</span>
-      <Latex tex="\text{N/C}" />
-      <Latex tex="E'=" />
-      <span class="tabular-nums" style="white-space: pre">{{ epTxt }}</span>
-      <Latex tex="\text{N/C}" />
-      <Latex tex="E_{\text{内}}=" />
-      <span class="tabular-nums" style="white-space: pre">{{ einTxt }}</span>
-      <Latex tex="\text{N/C}" />
+      <div
+        style="
+          display: grid;
+          grid-template-columns: auto minmax(3.6ch, max-content) auto auto;
+          column-gap: 0.35rem;
+          align-items: baseline;
+        "
+      >
+        <Latex tex="E_0=" />
+        <span class="tabular-nums" style="white-space: pre">{{ e0Txt }}</span>
+        <Latex tex="\text{N/C}" />
+        <span>（{{ strong ? "强" : "弱" }}）</span>
+      </div>
+      <div
+        style="
+          display: grid;
+          grid-template-columns:
+            auto minmax(3.6ch, max-content) auto auto minmax(3.6ch, max-content)
+            auto;
+          align-items: baseline;
+          column-gap: 0.35rem;
+        "
+      >
+        <Latex tex="E'=" />
+        <span class="tabular-nums" style="white-space: pre">{{ epTxt }}</span>
+        <Latex tex="\text{N/C}" />
+        <Latex tex="E_{\text{内}}=" />
+        <span class="tabular-nums" style="white-space: pre">{{ einTxt }}</span>
+        <Latex tex="\text{N/C}" />
+      </div>
     </div>
   </div>
 </template>

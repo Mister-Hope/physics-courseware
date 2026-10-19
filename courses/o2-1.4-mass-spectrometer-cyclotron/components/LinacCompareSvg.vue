@@ -54,7 +54,6 @@ const GAPS = PLATE_X.slice(0, -1).map((x, index) => {
 <style scoped>
 .lc-svg {
   display: block;
-
   width: 100%;
   height: auto;
 }

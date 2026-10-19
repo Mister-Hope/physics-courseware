@@ -2,11 +2,13 @@
 /**
  * 第 10 页：静电力的叠加（9-text.md 行 164、166）
  *
- * 点电荷 q 同时受到两个同种点电荷 q₁、q₂ 的斥力 F₁、F₂（两力等长、夹角 60°），
- * 按平行四边形定则合成得到合力 F = 2F₁cos30°（与例题 2 的几何完全同构）。
- * 三个力都从 q 的几何中心出发；线段长度按矢量合成的真实比例（对角线长度 = 合力大小）。
+ * 点电荷 q 同时受到两个同种点电荷 q₁、q₂ 的斥力 F₁、F₂（两力等长、夹角 60°）， 按平行四边形定则合成得到合力 F = 2F₁cos30°（与例题 2 的几何完全同构）。 三个力都从 q 的几何中心出发；线段长度按矢量合成的真实比例（对角线长度 = 合力大小）。
  */
-const { showForces = false, showParallelogram = false, showResultant = false } = defineProps<{
+const {
+  showForces = false,
+  showParallelogram = false,
+  showResultant = false,
+} = defineProps<{
   showForces?: boolean;
   showParallelogram?: boolean;
   showResultant?: boolean;
@@ -39,41 +41,11 @@ const pct = (x: number, y: number) => ({
   <div class="fa-host">
     <svg viewBox="0 0 520 320" width="100%" xmlns="http://www.w3.org/2000/svg">
       <circle :cx="Q1.x" :cy="Q1.y" r="15" fill="var(--c-danger)" fill-opacity="0.85" />
-      <text
-        :x="Q1.x"
-        :y="Q1.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="17"
-        fill="#0c1122"
-      >
-        +
-      </text>
+      <text :x="Q1.x" :y="Q1.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="17" fill="#0c1122">+</text>
       <circle :cx="Q2.x" :cy="Q2.y" r="15" fill="var(--c-danger)" fill-opacity="0.85" />
-      <text
-        :x="Q2.x"
-        :y="Q2.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="17"
-        fill="#0c1122"
-      >
-        +
-      </text>
+      <text :x="Q2.x" :y="Q2.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="17" fill="#0c1122">+</text>
       <circle :cx="Q.x" :cy="Q.y" r="15" fill="var(--c-danger)" fill-opacity="0.85" />
-      <text
-        :x="Q.x"
-        :y="Q.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="17"
-        fill="#0c1122"
-      >
-        +
-      </text>
+      <text :x="Q.x" :y="Q.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="17" fill="#0c1122">+</text>
       <g v-if="showForces">
         <CourseArrow :from="Q" :to="f1Tip" stroke="var(--c-force)" stroke-width="3" />
         <CourseArrow :from="Q" :to="f2Tip" stroke="var(--c-force)" stroke-width="3" />
@@ -90,16 +62,7 @@ const pct = (x: number, y: number) => ({
     <ChartLabel v-bind="pct(Q1.x, Q1.y)" :parts="[{ tex: 'q_1' }]" anchor="right" :dx="-18" :size="18" color="var(--c-accent)" />
     <ChartLabel v-bind="pct(Q2.x, Q2.y)" :parts="[{ tex: 'q_2' }]" anchor="left" :dx="18" :size="18" color="var(--c-accent)" />
     <ChartLabel v-bind="pct(Q.x, Q.y)" :parts="[{ tex: 'q' }]" anchor="right" :dx="-18" :size="18" color="var(--c-accent)" />
-    <ChartLabel
-      v-bind="pct(f1Tip.x, f1Tip.y)"
-      :parts="[{ tex: 'F_1' }]"
-      :visible="showForces"
-      anchor="left"
-      :dx="12"
-      :size="18"
-      color="var(--c-force)"
-      halo
-    />
+    <ChartLabel v-bind="pct(f1Tip.x, f1Tip.y)" :parts="[{ tex: 'F_1' }]" :visible="showForces" anchor="left" :dx="12" :size="18" color="var(--c-force)" halo />
     <ChartLabel
       v-bind="pct(f2Tip.x, f2Tip.y)"
       :parts="[{ tex: 'F_2' }]"
@@ -110,23 +73,8 @@ const pct = (x: number, y: number) => ({
       color="var(--c-force)"
       halo
     />
-    <ChartLabel
-      v-bind="pct(fTip.x, fTip.y)"
-      :parts="[{ tex: 'F' }]"
-      :visible="showResultant"
-      :dy="-16"
-      :size="18"
-      color="var(--c-accent)"
-      halo
-    />
-    <ChartLabel
-      v-bind="pct(296, 112)"
-      :parts="[{ tex: '30^\\circ' }]"
-      :visible="showResultant"
-      :size="16"
-      color="var(--c-accent)"
-      halo
-    />
+    <ChartLabel v-bind="pct(fTip.x, fTip.y)" :parts="[{ tex: 'F' }]" :visible="showResultant" :dy="-16" :size="18" color="var(--c-accent)" halo />
+    <ChartLabel v-bind="pct(296, 112)" :parts="[{ tex: '30^\\circ' }]" :visible="showResultant" :size="16" color="var(--c-accent)" halo />
   </div>
 </template>
 

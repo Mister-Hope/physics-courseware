@@ -244,7 +244,7 @@ const aria = computed(
 }
 
 .pe-note {
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
 </style>

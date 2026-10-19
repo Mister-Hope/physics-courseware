@@ -203,7 +203,7 @@ title: "点火器与验电器"
 
 <template v-slot:fig>
 
-<div class="warn-hint" style="font-size: 0.9rem; line-height: 1.5">例题配图待补（本题大概率会换）：点火器钉尖电极 / 验电器金属球</div>
+<ExerciseIgniterElectroscopeSvg :tip-analysis="$clicks >= 1" :ball-analysis="$clicks >= 2" />
 
 </template>
 
@@ -253,9 +253,9 @@ title: "金属网也能屏蔽吗"
 
 <div class="ask">带电球靠近验电器，箔片会张开吗？</div>
 
-<div class="info-hint" style="font-size: 0.95rem; line-height: 1.55" v-click="1">静电感应使箔片带同种电荷而张开。</div>
+<div class="info-hint" style="font-size: 0.95rem; line-height: 1.55" v-click="1">无屏蔽时：静电感应使箔片带同种电荷而张开。</div>
 
-<div class="tip-hint" style="font-size: 0.95rem; line-height: 1.55" v-click="2">金属网罩住后，网内场强为 <Latex tex="0" />，箔片不张开。</div>
+<div class="tip-hint" style="font-size: 0.95rem; line-height: 1.55" v-click="2">罩上金属网后：网内场强为 <Latex tex="0" />，箔片闭合。</div>
 
 <div style="font-size: 0.95rem; line-height: 1.55" v-click="3">
 
@@ -488,7 +488,7 @@ title: "塑料瓶里的烟雾为什么消失"
 
 <template v-slot:fig>
 
-<div class="warn-hint" style="font-size: 0.9rem; line-height: 1.5">例题配图待补（本题大概率会换）：塑料瓶 + 铁锯条 + 易拉罐金属片 + 静电起电机</div>
+<ExerciseSmokeBottleSvg :field-analysis="$clicks >= 1" :dust-path="$clicks >= 2" />
 
 </template>
 

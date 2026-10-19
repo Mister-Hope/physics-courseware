@@ -53,18 +53,23 @@ const resistivityTex = computed(
 <style scoped>
 .dp-row {
   display: flex;
-  align-items: baseline;
   gap: 0.5rem;
+  align-items: baseline;
+
   min-width: 0;
+
   overflow-wrap: anywhere;
 }
+
 .dp-tag {
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .dp-text {
   min-width: 0;
 }
+
 .dp-hidden {
   visibility: hidden;
 }

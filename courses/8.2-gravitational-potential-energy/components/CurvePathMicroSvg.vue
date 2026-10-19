@@ -16,11 +16,11 @@ const A = { x: 70, y: 45 };
 const B = { x: 490, y: 180 };
 
 /** 路径参数：x 匀速、y 按二次增长（从 A 平滑俯冲到 B） */
-const at = (t: number) => ({ x: A.x + (B.x - A.x) * t, y: A.y + (B.y - A.y) * t * t });
+const at = (t: number): { x: number; y: number } => ({ x: A.x + (B.x - A.x) * t, y: A.y + (B.y - A.y) * t * t });
 
 const pts = Array.from({ length: SEG + 1 }, (_, i) => at(i / SEG));
 const polyD = pts.map((p, i) => `${i ? "L" : "M"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
-const curveD = (() => {
+const curveD = ((): string => {
   let d = `M ${A.x} ${A.y}`;
 
   for (let i = 1; i <= 40; i++) {

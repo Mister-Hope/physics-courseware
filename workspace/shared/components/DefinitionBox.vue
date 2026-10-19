@@ -43,6 +43,7 @@ withDefaults(
   position: relative;
 
   margin-top: 0.9rem;
+
   /* 内边距走变量：内容多的页调小（`--def-pad-y`），内容少的页调大；各课 `:root` 或单页元素上都能覆盖 */
   padding: var(--def-pad-y, 1.1rem) var(--def-pad-x, 1.35rem);
   border: 1px solid var(--def-border);

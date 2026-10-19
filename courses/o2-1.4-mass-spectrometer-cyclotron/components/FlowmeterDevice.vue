@@ -413,7 +413,6 @@ const MAIN = "KaTeX_Main";
 
 .fm-svg {
   display: block;
-
   width: 100%;
   height: auto;
 }
@@ -459,9 +458,8 @@ const MAIN = "KaTeX_Main";
 
 .fm-slider-val {
   font-weight: 800;
-  white-space: nowrap;
-
   font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .fm-range {

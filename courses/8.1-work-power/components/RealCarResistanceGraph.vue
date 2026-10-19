@@ -2,11 +2,9 @@
 import { computed } from "vue";
 
 /**
- * 第二课时「真实车辆为什么有最高速度」——纯定性页（不标刻度数值、不写风阻次数）：
- *   牵引力 F = P/v 随速度增大而减小（额定功率下的双曲线）；
- *   阻力随速度增大而增大：地面摩擦与传动阻力大体不变（v = 0 处就有正截距），风阻随速度明显增大，
- *   所以阻力曲线越来越陡。
- * 两条线的交点处牵引力正好等于阻力 ⇒ 车不再加速，这就是真实车辆有最高速度的原因。
+ * 第二课时「真实车辆为什么有最高速度」——纯定性页（不标刻度数值、不写风阻次数）： 牵引力 F = P/v 随速度增大而减小（额定功率下的双曲线）；
+ * 阻力随速度增大而增大：地面摩擦与传动阻力大体不变（v = 0 处就有正截距），风阻随速度明显增大， 所以阻力曲线越来越陡。 两条线的交点处牵引力正好等于阻力 ⇒
+ * 车不再加速，这就是真实车辆有最高速度的原因。
  */
 const F0 = 1; // 与速度无关的那部分阻力（归一化）
 const P = 3.2; // 额定功率（归一化）
@@ -16,7 +14,7 @@ const V_TOP = 2.4; // 画到多大速度
 const V_MIN = P / 5.1; // 牵引力曲线的起点（保证起点在纵轴范围内）
 
 /** 两线交点：P/v = F0 + K·v^N（数值解，仅用于画图） */
-const V_MAX = (() => {
+const V_MAX = ((): number => {
   let lo = 0.2;
   let hi = V_TOP;
   for (let i = 0; i < 80; i += 1) {
@@ -28,7 +26,7 @@ const V_MAX = (() => {
 })();
 const F_MAX = P / V_MAX;
 
-const sample = (fn: (v: number) => number, from: number) =>
+const sample = (fn: (v: number) => number, from: number): { x: number; y: number }[] =>
   Array.from({ length: 100 }, (_, i) => {
     const v = from + (V_TOP - from) * (i / 99);
     return { x: Number(v.toFixed(4)), y: Number(fn(v).toFixed(4)) };
@@ -69,7 +67,15 @@ const labels = computed(() => [
     color: "var(--c-accent)",
     halo: true,
   },
-  { x: 2.12, y: F0 + K * 2.12 ** N + 0.32, text: "阻力", anchor: "right" as const, size: 17, color: "var(--c-danger)", halo: true },
+  {
+    x: 2.12,
+    y: F0 + K * 2.12 ** N + 0.32,
+    text: "阻力",
+    anchor: "right" as const,
+    size: 17,
+    color: "var(--c-danger)",
+    halo: true,
+  },
   { x: V_MAX, y: F_MAX, dot: 5.5, color: "var(--c-ok)" },
   {
     x: V_MAX + 0.04,
@@ -80,7 +86,15 @@ const labels = computed(() => [
     color: "var(--c-ok)",
     halo: true,
   },
-  { x: V_MAX, y: 0, tex: "v_{\\max}", anchor: "top-left" as const, size: 18, color: "var(--c-ok)", halo: true },
+  {
+    x: V_MAX,
+    y: 0,
+    tex: "v_{\\max}",
+    anchor: "top-left" as const,
+    size: 18,
+    color: "var(--c-ok)",
+    halo: true,
+  },
 ]);
 </script>
 

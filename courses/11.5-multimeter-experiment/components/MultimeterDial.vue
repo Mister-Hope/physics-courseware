@@ -454,6 +454,7 @@ const acOpacity = computed(() => (activeScale.value === "ac" ? 1 : 0.7));
   width: 100%;
   min-width: 0;
 }
+
 .mt-dial-svg {
   display: block;
   width: 100%;

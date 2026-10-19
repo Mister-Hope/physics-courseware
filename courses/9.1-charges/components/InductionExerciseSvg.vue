@@ -1,9 +1,7 @@
 <script setup lang="ts">
 /**
- * 第 19 页 练习与应用 2 的题目图（教材行 41 / 图 9.1-3）：带正电的带电体 C 移近彼此接触的导体 A、B，
- * 两片金属箔张开。题目图常显、且保持干净；分析标注（两端电荷、电子转移方向）由 showAnalysis 控制。
- * ⚠️ 进 exercise-split 的 #fig 栏，根 svg 必须带与 viewBox 同比例的固有 width/height（410×183 ≈ 560×250，
- *    受 #fig 的 42% 上限约束）；图内字号按"最后一排看得清"给，故相对 viewBox 取得较大。
+ * 第 19 页 练习与应用 2 的题目图（教材行 41 / 图 9.1-3）：带正电的带电体 C 移近彼此接触的导体 A、B， 两片金属箔张开。题目图常显、且保持干净；分析标注（两端电荷、电子转移方向）由 showAnalysis 控制。 ⚠️ 进 exercise-split 的 #fig 栏，根 svg
+ * 必须带与 viewBox 同比例的固有 width/height（410×183 ≈ 560×250， 受 #fig 的 42% 上限约束）；图内字号按"最后一排看得清"给，故相对 viewBox 取得较大。
  */
 withDefaults(defineProps<{ showAnalysis?: boolean }>(), { showAnalysis: false });
 </script>

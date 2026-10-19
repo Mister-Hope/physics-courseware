@@ -429,7 +429,7 @@ title: 练习：干燥季节摸金属门把手
 
 <template v-slot:stem>
 
-<div><b class="ex-no">练习一</b>　在天气干燥的季节，脱掉外衣后再去摸金属门把手时，常常会被电一下。这是为什么？</div>
+<div><b class="ex-no">练习一</b>　在天气干燥的季节，脱掉外衣后去摸金属门把手，常会被电一下。为什么？</div>
 
 </template>
 

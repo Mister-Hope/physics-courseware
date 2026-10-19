@@ -309,7 +309,6 @@ onUnmounted(stop);
   display: flex;
   gap: 1.2rem;
   align-items: center;
-
   width: 100%;
 }
 

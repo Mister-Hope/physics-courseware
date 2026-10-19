@@ -29,38 +29,24 @@ const F_ON_A = { from: { x: A.x, y: A.y }, to: { x: 206, y: 162.6 } };
 <template>
   <svg viewBox="0 0 420 300" class="w-full h-full">
     <g v-if="showFieldA">
-      <CourseArrow
-        v-for="(arrow, i) in FIELD_A"
-        :key="`fa${i}`"
-        :from="arrow.from"
-        :to="arrow.to"
-        stroke="var(--c-field)"
-        :stroke-width="1.8"
-      />
+      <CourseArrow v-for="(arrow, i) in FIELD_A" :key="`fa${i}`" :from="arrow.from" :to="arrow.to" stroke="var(--c-field)" :stroke-width="1.8" />
       <circle :cx="A.x" :cy="A.y" r="30" fill="none" stroke="var(--c-field)" stroke-opacity="0.25" stroke-dasharray="3 8" />
     </g>
     <g v-if="showFieldB">
-      <CourseArrow
-        v-for="(arrow, i) in FIELD_B"
-        :key="`fb${i}`"
-        :from="arrow.from"
-        :to="arrow.to"
-        stroke="var(--c-field)"
-        :stroke-width="1.8"
-      />
+      <CourseArrow v-for="(arrow, i) in FIELD_B" :key="`fb${i}`" :from="arrow.from" :to="arrow.to" stroke="var(--c-field)" :stroke-width="1.8" />
       <circle :cx="B.x" :cy="B.y" r="30" fill="none" stroke="var(--c-field)" stroke-opacity="0.25" stroke-dasharray="3 8" />
     </g>
     <CourseArrow :from="F_ON_B.from" :to="F_ON_B.to" stroke="var(--c-force)" :stroke-width="3" />
-    <text :x="F_ON_B.to.x - 8" :y="F_ON_B.to.y - 12" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-force)">F</text>
-    <text :x="F_ON_B.to.x + 4" :y="F_ON_B.to.y - 8" font-family="KaTeX_Main" font-size="11" fill="var(--c-force)">B</text>
+    <text :x="244" :y="144" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-force)">F</text>
+    <text :x="256" :y="148" font-family="KaTeX_Main" font-size="11" fill="var(--c-force)">B</text>
     <CourseArrow :from="F_ON_A.from" :to="F_ON_A.to" stroke="var(--c-force)" :stroke-width="3" />
-    <text :x="F_ON_A.to.x + 6" :y="F_ON_A.to.y - 14" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-force)">F</text>
-    <text :x="F_ON_A.to.x + 18" :y="F_ON_A.to.y - 10" font-family="KaTeX_Main" font-size="11" fill="var(--c-force)">A</text>
+    <text :x="160" :y="146" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-force)">F</text>
+    <text :x="172" :y="150" font-family="KaTeX_Main" font-size="11" fill="var(--c-force)">A</text>
     <circle :cx="A.x" :cy="A.y" r="22" fill="var(--c-danger)" fill-opacity="0.9" />
     <text :x="A.x" :y="A.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="22" fill="#fff">+</text>
-    <text :x="A.x" :y="A.y + 50" text-anchor="middle" font-family="KaTeX_Main" font-size="15" fill="var(--c-sky-soft)">A</text>
+    <text :x="A.x" :y="A.y + 50" text-anchor="middle" font-family="KaTeX_Main" font-size="15" fill="var(--c-sky)">A</text>
     <circle :cx="B.x" :cy="B.y" r="22" fill="var(--c-velocity)" fill-opacity="0.9" />
     <text :x="B.x" :y="B.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="22" fill="#fff">−</text>
-    <text :x="B.x" :y="B.y + 50" text-anchor="middle" font-family="KaTeX_Main" font-size="15" fill="var(--c-sky-soft)">B</text>
+    <text :x="B.x" :y="B.y + 50" text-anchor="middle" font-family="KaTeX_Main" font-size="15" fill="var(--c-sky)">B</text>
   </svg>
 </template>

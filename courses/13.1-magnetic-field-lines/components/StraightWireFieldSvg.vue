@@ -88,23 +88,29 @@ const dir = computed(() => (up.value ? -1 : 1)); // 椭圆右端箭头的 y 方�
 .mf-wire-field {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.4rem;
+  align-items: center;
 }
+
 .mf-wire-ctrl {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
 }
+
 .mf-btn {
   padding: 0.18rem 0.85rem;
-  border-radius: 999px;
   border: 1px solid var(--c-border);
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+
+  background: rgb(255 255 255 / 5%);
   color: var(--c-text-dim);
+
   font-size: 0.82rem;
+
   cursor: pointer;
 }
+
 .mf-btn.on {
   border-color: var(--c-accent-border);
   background: var(--c-accent-soft);

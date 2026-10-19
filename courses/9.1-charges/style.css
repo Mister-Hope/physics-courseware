@@ -13,9 +13,9 @@
 
 /* 与文字并排时用的窄图：保持横向比例、不占满栏宽（P12 的微观图、P16 的电子对示意图） */
 .svg-sm {
+  width: 100%;
   max-width: 300px;
   margin: 0 auto;
-  width: 100%;
 }
 
 /* 提问行里的内联公式：KaTeX 默认 font-size:1.21em 会把 .ask 的行盒撑高

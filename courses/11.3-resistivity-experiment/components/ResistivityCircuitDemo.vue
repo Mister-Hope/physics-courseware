@@ -45,23 +45,29 @@ const overRange = computed(() => current.value > WIRE.ammeterRange);
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem 1rem;
 }
+
 .rd-cell {
   display: flex;
+  gap: 0.5rem;
   align-items: baseline;
   justify-content: center;
-  gap: 0.5rem;
+
   min-width: 0;
   padding: 0.35rem 0.7rem;
   border: 1px solid var(--c-border);
   border-radius: 0.75rem;
+
   background: var(--c-surface);
+
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
 .rd-status {
   min-height: 1.4rem;
   font-size: 0.85rem;
 }
+
 .rd-warn {
   color: var(--c-danger);
 }

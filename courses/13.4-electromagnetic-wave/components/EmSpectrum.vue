@@ -165,89 +165,112 @@ const cur = computed(() => bands.find((b) => b.key === sel.value) ?? bands[0]);
   flex-direction: column;
   gap: 0.7rem;
 }
+
 .spec-seg {
-  cursor: pointer;
   opacity: 0.55;
+  cursor: pointer;
   transition: opacity 0.15s ease;
 }
+
 .spec-seg:hover {
   opacity: 0.85;
 }
+
 .spec-seg.active {
   opacity: 1;
 }
+
 .seg-rect {
+  transition: stroke 0.15s ease;
   stroke: transparent;
   stroke-width: 3;
-  transition: stroke 0.15s ease;
 }
+
 .spec-seg.active .seg-rect {
   stroke: var(--c-accent);
 }
+
 .fill-radio {
   fill: color-mix(in srgb, var(--c-accent-2) 55%, var(--c-surface));
 }
+
 .fill-micro {
   fill: color-mix(in srgb, var(--c-physics) 65%, var(--c-surface));
 }
+
 .fill-ir {
   fill: color-mix(in srgb, var(--c-danger) 70%, var(--c-accent));
 }
+
 .fill-vis {
-  fill: url(#emw-vis-grad);
+  fill: url("#emw-vis-grad");
 }
+
 .fill-uv {
   fill: color-mix(in srgb, var(--c-accent-2) 60%, var(--c-danger));
 }
+
 .fill-xray {
   fill: color-mix(in srgb, var(--c-physics) 35%, var(--c-surface));
 }
+
 .fill-gamma {
   fill: color-mix(in srgb, var(--c-accent-2) 80%, var(--c-danger));
 }
+
 .vis-a {
   stop-color: var(--c-danger);
 }
+
 .vis-b {
   stop-color: var(--c-accent);
 }
+
 .vis-c {
   stop-color: var(--c-physics);
 }
+
 .vis-d {
   stop-color: var(--c-accent-2);
 }
+
 .spec-panel {
   display: flex;
-  align-items: baseline;
   gap: 1.2rem;
+  align-items: baseline;
+
   min-height: 3.1rem;
   padding: 0.6rem 0.9rem;
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--c-surface) 70%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: color-mix(in srgb, var(--c-surface) 70%, transparent);
 }
+
 .spec-title {
-  font-size: 1.2rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.2rem;
   white-space: nowrap;
 }
+
 .spec-grid {
   display: flex;
-  gap: 1.1rem;
   flex: 1;
+  gap: 1.1rem;
   min-width: 0;
 }
+
 .spec-k {
   display: inline-block;
   margin-right: 0.5rem;
+  color: var(--c-text-dim);
   font-size: 0.8rem;
-  color: var(--c-text-dim);
 }
+
 .spec-uses {
-  font-size: 0.95rem;
-  color: var(--c-text-dim);
   min-width: 0;
+  color: var(--c-text-dim);
+  font-size: 0.95rem;
 }
 </style>

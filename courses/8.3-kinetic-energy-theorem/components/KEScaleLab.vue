@@ -27,7 +27,7 @@ const mFactor = ref(1);
 const vFactor = ref(2);
 const active = ref("A");
 
-const applyCase = (item: Case) => {
+const applyCase = (item: Case): void => {
   mFactor.value = item.m;
   vFactor.value = item.v;
   active.value = item.key;
@@ -119,6 +119,7 @@ const barWidth = computed(() => Math.min(100, (factor.value / 8) * 100));
   font-size: 0.95rem;
 
   cursor: pointer;
+
   transition: all 0.2s ease;
 }
 
@@ -142,23 +143,20 @@ const barWidth = computed(() => Math.min(100, (factor.value / 8) * 100));
 
 .kesl-big {
   color: var(--c-accent);
-  font-size: 1.6rem;
   font-weight: 700;
+  font-size: 1.6rem;
 }
 
 .kesl-bar {
   overflow: hidden;
-
   height: 0.55rem;
   border-radius: 999px;
-
   background: var(--c-border);
 }
 
 .kesl-fill {
   height: 100%;
   border-radius: 999px;
-
   background: var(--c-accent);
   transition: width 0.25s ease;
 }

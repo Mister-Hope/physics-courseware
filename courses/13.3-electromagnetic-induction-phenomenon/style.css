@@ -7,37 +7,42 @@
 /* ── 交互组件（ei- = electromagnetic induction）通用外壳 ── */
 .ei-panel {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.55rem;
+
   min-height: 0;
-  flex: 1;
 }
 
 .ei-svg {
   display: block;
-  width: 100%;
   flex: 1;
+  width: 100%;
   min-height: 0;
 }
 
 /* 控制条：按钮 + 状态标签一行 */
 .ei-bar {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
   align-items: center;
   justify-content: center;
-  gap: 0.9rem;
-  flex-wrap: wrap;
 }
 
 .ei-btn {
   padding: 0.3rem 1.05rem;
   border: 1px solid var(--c-border);
   border-radius: 999px;
+
   background: var(--c-surface);
   color: var(--c-text);
+
   font-size: 0.95rem;
   line-height: 1.5;
+
   cursor: pointer;
+
   transition:
     border-color 0.18s,
     background 0.18s,
@@ -62,17 +67,18 @@
 /* 读数行：Φ / S / ΔΦ 等实时数值 */
 .ei-read {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
   align-items: center;
   justify-content: center;
-  gap: 1.6rem;
-  flex-wrap: wrap;
+
   font-size: 1.02rem;
 }
 
 .ei-read .ei-item {
   display: flex;
-  align-items: baseline;
   gap: 0.35rem;
+  align-items: baseline;
   color: var(--c-text-dim);
 }
 
@@ -83,8 +89,8 @@
 
 /* 感应电流：导线上流动的虚线（方向 = 电流方向） */
 .ei-flow {
-  stroke-dasharray: 12 9;
   animation: ei-dash 0.55s linear infinite;
+  stroke-dasharray: 12 9;
 }
 
 .ei-flow-rev {
@@ -99,8 +105,8 @@
 
 /* 铁环中环绕的磁场 */
 .ei-ring-flow {
-  stroke-dasharray: 18 14;
   animation: ei-dash-ring 1.4s linear infinite;
+  stroke-dasharray: 18 14;
 }
 
 @keyframes ei-dash-ring {

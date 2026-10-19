@@ -262,8 +262,8 @@ const hitFront = computed(() => time.value >= T_FRONT - 1e-9);
 
   color: var(--c-text-dim);
 
-  font-size: 0.85rem;
   font-weight: 700;
+  font-size: 0.85rem;
   text-align: center;
 }
 
@@ -274,11 +274,10 @@ const hitFront = computed(() => time.value >= T_FRONT - 1e-9);
 }
 
 .tf-btn {
-  align-self: center;
-
   display: flex;
   gap: 0.3rem;
   align-items: center;
+  align-self: center;
 
   padding: 0.1rem 0.7rem;
   border: 1px solid var(--c-border);

@@ -22,14 +22,14 @@ defineProps<{ step: number }>();
       stroke="var(--c-text-mute)"
       stroke-opacity="0.5"
     />
-    <text x="80" y="78" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">−</text>
-    <text x="108" y="86" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">−</text>
-    <text x="132" y="76" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">−</text>
+    <text x="80" y="78" font-family="KaTeX_Main" font-size="15" fill="var(--c-velocity)">−</text>
+    <text x="108" y="86" font-family="KaTeX_Main" font-size="15" fill="var(--c-velocity)">−</text>
+    <text x="132" y="76" font-family="KaTeX_Main" font-size="15" fill="var(--c-velocity)">−</text>
     <template v-if="step >= 1">
-      <text x="188" y="66" font-family="KaTeX_Main" font-size="15" fill="var(--c-accent-2)">+</text>
-      <text x="172" y="86" font-family="KaTeX_Main" font-size="15" fill="var(--c-accent-2)">+</text>
-      <CourseArrow :from="{ x: 180, y: 62 }" :to="{ x: 180, y: 26 }" stroke="var(--c-accent-2)" stroke-width="2" />
-      <CourseArrow :from="{ x: 168, y: 66 }" :to="{ x: 148, y: 30 }" stroke="var(--c-accent-2)" stroke-width="2" />
+      <text x="188" y="66" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">+</text>
+      <text x="172" y="86" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">+</text>
+      <CourseArrow :from="{ x: 180, y: 62 }" :to="{ x: 180, y: 26 }" stroke="var(--c-danger)" stroke-width="2" />
+      <CourseArrow :from="{ x: 168, y: 66 }" :to="{ x: 148, y: 30 }" stroke="var(--c-danger)" stroke-width="2" />
       <text x="96" y="132" font-family="KaTeX_Main" font-size="12" fill="var(--c-accent)">尖端放电</text>
     </template>
     <!-- 高压设备 / 高压线 -->

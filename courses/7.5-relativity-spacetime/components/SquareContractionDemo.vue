@@ -195,8 +195,8 @@ const ARROWS = [
 
   color: var(--c-text-dim);
 
-  font-size: 0.85rem;
   font-weight: 700;
+  font-size: 0.85rem;
   white-space: nowrap;
 }
 

@@ -163,17 +163,19 @@ const bStatus = computed(() => {
   gap: 0.5rem;
   min-height: 0;
 }
+
 .ei-svg {
   display: block;
-  width: 100%;
   flex: 1;
+  width: 100%;
   min-height: 0;
 }
+
 .ei-bar {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
 }
 </style>

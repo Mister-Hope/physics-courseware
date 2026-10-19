@@ -339,7 +339,6 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
 /* 图随可用空间缩放（preserveAspectRatio 默认 meet，永不溢出、也不顶跑下方文字） */
 .fig-focus-proof .fig-svg {
   flex: 1 1 auto;
-
   width: 100%;
   max-width: none;
   min-height: 0;

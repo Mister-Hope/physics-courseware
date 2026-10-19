@@ -182,18 +182,22 @@ const pick = (d) => {
 <style scoped>
 .mf-btn {
   padding: 0.25rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
   border: 1px solid var(--c-border);
+  border-radius: 999px;
+
   color: var(--c-text-dim);
+
+  font-size: 0.85rem;
+
   transition:
     color 0.2s,
     border-color 0.2s,
     background-color 0.2s;
 }
+
 .mf-btn-on {
-  color: var(--c-accent);
   border-color: var(--c-accent-border);
   background-color: var(--c-accent-soft);
+  color: var(--c-accent);
 }
 </style>

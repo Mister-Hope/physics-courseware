@@ -143,6 +143,7 @@ const fTip = computed(() => ({ x: 239 + fLen.value, y: 166 }));
   gap: 1.4rem;
   align-items: center;
   justify-content: center;
+
   width: 100%;
 }
 
@@ -157,7 +158,9 @@ const fTip = computed(() => ({ x: 239 + fLen.value, y: 166 }));
   flex: 1;
   flex-direction: column;
   gap: 0.6rem;
+
   min-width: 0;
+
   font-size: 0.95rem;
 }
 

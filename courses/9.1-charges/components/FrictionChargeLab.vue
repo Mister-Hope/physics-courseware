@@ -3,11 +3,9 @@ import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
 
 /**
- * 第 8 页「摩擦起电的原因」——**不用滑块**，用点击分步演过程：
- * 两个原来电中性的物体（各 4 个正离子、4 个自由电子）互相摩擦，
- * 束缚较弱的 **2 个电子**从物体 1 转移到物体 2（飞过去的位移动画）：
- * 物体 1 多出 2 个正离子（+2e）、物体 2 多出 2 个电子（−2e），代数和为 0。
- * 页面 clicks: 3 —— ① 文字（束缚较弱）② 摩擦 + 电子转移 + 读数 ③ 结论 + 代数和。
+ * 第 8 页「摩擦起电的原因」——**不用滑块**，用点击分步演过程： 两个原来电中性的物体（各 4 个正离子、4 个自由电子）互相摩擦， 束缚较弱的 **2 个电子**从物体 1 转移到物体
+ * 2（飞过去的位移动画）： 物体 1 多出 2 个正离子（+2e）、物体 2 多出 2 个电子（−2e），代数和为 0。 页面 clicks: 3 —— ① 文字（束缚较弱）② 摩擦 + 电子转移 +
+ * 读数 ③ 结论 + 代数和。
  */
 const { $clicks } = useSlideContext();
 const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
@@ -55,28 +53,92 @@ const showReadout = computed(() => step.value >= 2);
   <div class="flab">
     <svg viewBox="0 0 620 250" width="100%" xmlns="http://www.w3.org/2000/svg">
       <!-- 物体 1 -->
-      <rect x="40" y="60" width="180" height="110" rx="12" fill="var(--c-surface)" fill-opacity="0.5" stroke="var(--c-text)" stroke-width="2" />
-      <text x="130" y="200" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">物体 1</text>
+      <rect
+        x="40"
+        y="60"
+        width="180"
+        height="110"
+        rx="12"
+        fill="var(--c-surface)"
+        fill-opacity="0.5"
+        stroke="var(--c-text)"
+        stroke-width="2"
+      />
+      <text x="130" y="200" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
+        物体 1
+      </text>
       <g v-for="(p, i) in ions1" :key="'i1' + i">
         <circle :cx="p.x" :cy="p.y" r="13" fill="var(--c-danger)" fill-opacity="0.85" />
-        <text :x="p.x" :y="p.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="#0c1122">+</text>
+        <text
+          :x="p.x"
+          :y="p.y"
+          text-anchor="middle"
+          dominant-baseline="central"
+          font-family="KaTeX_Main"
+          font-size="16"
+          fill="#0c1122"
+        >
+          +
+        </text>
       </g>
       <g v-for="(p, i) in stayElectrons" :key="'e1' + i">
         <circle :cx="p.x" :cy="p.y" r="11" fill="var(--c-velocity)" />
-        <text :x="p.x" :y="p.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="13" fill="#0c1122">−</text>
+        <text
+          :x="p.x"
+          :y="p.y"
+          text-anchor="middle"
+          dominant-baseline="central"
+          font-family="KaTeX_Main"
+          font-size="13"
+          fill="#0c1122"
+        >
+          −
+        </text>
       </g>
 
       <!-- 物体 2：摩擦时向左靠拢一点 -->
       <g style="transition: transform 0.4s ease" :transform="transferred ? 'translate(-40 0)' : ''">
-        <rect x="350" y="60" width="180" height="110" rx="12" fill="var(--c-surface)" fill-opacity="0.5" stroke="var(--c-text)" stroke-width="2" />
-        <text x="440" y="200" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">物体 2</text>
+        <rect
+          x="350"
+          y="60"
+          width="180"
+          height="110"
+          rx="12"
+          fill="var(--c-surface)"
+          fill-opacity="0.5"
+          stroke="var(--c-text)"
+          stroke-width="2"
+        />
+        <text x="440" y="200" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
+          物体 2
+        </text>
         <g v-for="(p, i) in ions2" :key="'i2' + i">
           <circle :cx="p.x" :cy="p.y" r="13" fill="var(--c-danger)" fill-opacity="0.85" />
-          <text :x="p.x" :y="p.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="#0c1122">+</text>
+          <text
+            :x="p.x"
+            :y="p.y"
+            text-anchor="middle"
+            dominant-baseline="central"
+            font-family="KaTeX_Main"
+            font-size="16"
+            fill="#0c1122"
+          >
+            +
+          </text>
         </g>
         <g v-for="(p, i) in ownElectrons" :key="'e2' + i">
           <circle :cx="p.x" :cy="p.y" r="11" fill="var(--c-velocity)" />
-          <text :x="p.x" :y="p.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="13" fill="#0c1122">−</text>
+          <text
+            :x="p.x"
+            :y="p.y"
+            text-anchor="middle"
+            dominant-baseline="central"
+            font-family="KaTeX_Main"
+            font-size="13"
+            fill="#0c1122"
+          >
+            −
+          </text>
         </g>
       </g>
 
@@ -88,18 +150,79 @@ const showReadout = computed(() => step.value >= 2);
         :transform="transferred ? `translate(${f.to.x - f.from.x} ${f.to.y - f.from.y})` : ''"
       >
         <circle :cx="f.from.x" :cy="f.from.y" r="11" fill="var(--c-velocity)" />
-        <text :x="f.from.x" :y="f.from.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="13" fill="#0c1122">−</text>
+        <text
+          :x="f.from.x"
+          :y="f.from.y"
+          text-anchor="middle"
+          dominant-baseline="central"
+          font-family="KaTeX_Main"
+          font-size="13"
+          fill="#0c1122"
+        >
+          −
+        </text>
       </g>
 
       <!-- 转移方向 -->
       <g v-if="transferred">
-        <CourseArrow :from="{ x: 232, y: 112 }" :to="{ x: 300, y: 112 }" stroke="var(--c-velocity)" stroke-width="3.2" />
-        <text x="266" y="94" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-velocity)">e</text>
+        <CourseArrow
+          :from="{ x: 232, y: 112 }"
+          :to="{ x: 300, y: 112 }"
+          stroke="var(--c-velocity)"
+          stroke-width="3.2"
+        />
+        <text
+          x="266"
+          y="94"
+          text-anchor="middle"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="17"
+          fill="var(--c-velocity)"
+        >
+          e
+        </text>
         <!-- 净电荷标记：物体 1 多出 2 个正离子，物体 2 多出 2 个电子 -->
-        <text x="246" y="76" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-danger)">+</text>
-        <text x="246" y="172" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-danger)">+</text>
-        <text x="552" y="76" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-velocity)">−</text>
-        <text x="552" y="172" text-anchor="middle" font-family="KaTeX_Main" font-size="22" fill="var(--c-velocity)">−</text>
+        <text
+          x="246"
+          y="76"
+          text-anchor="middle"
+          font-family="KaTeX_Main"
+          font-size="22"
+          fill="var(--c-danger)"
+        >
+          +
+        </text>
+        <text
+          x="246"
+          y="172"
+          text-anchor="middle"
+          font-family="KaTeX_Main"
+          font-size="22"
+          fill="var(--c-danger)"
+        >
+          +
+        </text>
+        <text
+          x="552"
+          y="76"
+          text-anchor="middle"
+          font-family="KaTeX_Main"
+          font-size="22"
+          fill="var(--c-velocity)"
+        >
+          −
+        </text>
+        <text
+          x="552"
+          y="172"
+          text-anchor="middle"
+          font-family="KaTeX_Main"
+          font-size="22"
+          fill="var(--c-velocity)"
+        >
+          −
+        </text>
       </g>
     </svg>
 
@@ -123,8 +246,8 @@ const showReadout = computed(() => step.value >= 2);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.3rem;
-  justify-items: center;
-  align-items: center;
+  place-items: center center;
+
   font-size: 1.1rem;
   font-variant-numeric: tabular-nums;
 }

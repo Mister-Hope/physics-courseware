@@ -13,13 +13,16 @@ const { label = "题目图占位" } = defineProps<{ label?: string }>();
 <style scoped>
 .figure-placeholder {
   display: flex;
+  gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+
   min-height: 6rem;
   border: 1px dashed var(--c-neutral-600);
   border-radius: 0.9rem;
+
   color: var(--c-text-dim);
+
   font-size: 1rem;
 }
 </style>

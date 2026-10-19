@@ -37,6 +37,10 @@ function sci(value: number, digits = 2) {
   const m = value / 10 ** e;
   return { m: m.toFixed(digits), e };
 }
+// 滑块自带的读数会按 toFixed 显示（q ~ 1e-8 时被压成 0.0），故用 #value 槽自己给科学计数法。
+// 指数固定为 10⁻⁸（本页 q 只取 0.5–3.0 ×10⁻⁸）：否则跨过 1.0 时指数会从 10⁻⁹ 跳到 10⁻⁸，
+// 读数宽度跟着变、拖动时滑块宽度会抖。
+const qTex = computed(() => `${(q.value / 1e-8).toFixed(1)}\\times 10^{-8}\\ \\text{C}`);
 const fTex = computed(() => {
   const s = sci(F.value);
   return `F = ${s.m}\\times 10^{${s.e}}\\ \\text{N}`;
@@ -72,11 +76,46 @@ const ratioTex = computed(() => {
         r
       </text>
       <circle :cx="QX" :cy="QY" r="18" fill="var(--c-danger)" fill-opacity="0.9" />
-      <text :x="QX" :y="QY" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#fff">+</text>
-      <text :x="QX" :y="QY + 46" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-danger)">Q</text>
+      <text
+        :x="QX"
+        :y="QY"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="KaTeX_Main"
+        font-size="18"
+        fill="#fff"
+      >
+        +
+      </text>
+      <text
+        :x="QX"
+        :y="QY + 46"
+        text-anchor="middle"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="14"
+        fill="var(--c-danger)"
+      >
+        Q
+      </text>
       <circle :cx="px" :cy="QY" r="9" fill="var(--c-accent)" fill-opacity="0.9" />
-      <text :x="px" :y="QY + 32" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">q</text>
-      <CourseArrow :from="{ x: px, y: QY }" :to="{ x: px + arrowLen, y: QY }" stroke="var(--c-force)" :stroke-width="3" />
+      <text
+        :x="px"
+        :y="QY + 32"
+        text-anchor="middle"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="14"
+        fill="var(--c-accent)"
+      >
+        q
+      </text>
+      <CourseArrow
+        :from="{ x: px, y: QY }"
+        :to="{ x: px + arrowLen, y: QY }"
+        stroke="var(--c-force)"
+        :stroke-width="3"
+      />
       <text
         :x="px + arrowLen / 2"
         :y="QY - 16"
@@ -90,12 +129,26 @@ const ratioTex = computed(() => {
       </text>
     </svg>
     <div class="pfl-panel">
-      <CourseSlider v-model="q" :min="0.5e-8" :max="3e-8" :step="0.1e-8" label-tex="q" label-width="2.4rem" accent="gold" />
+      <CourseSlider
+        v-model="q"
+        :min="0.5e-8"
+        :max="3e-8"
+        :step="0.1e-8"
+        label-tex="q"
+        label-width="2.4rem"
+        accent="gold"
+      >
+        <template #value
+          ><span class="pfl-q"><Latex :tex="qTex" /></span
+        ></template>
+      </CourseSlider>
       <button class="pfl-toggle" type="button" @click="atNearPoint = !atNearPoint">
         {{ atNearPoint ? "同一点" : "另一点" }}
       </button>
       <div class="pfl-read"><Latex :tex="fTex" /></div>
-      <div class="pfl-read pfl-ratio" :class="{ 'pfl-hidden': !showRatio }"><Latex :tex="ratioTex" /></div>
+      <div class="pfl-read pfl-ratio" :class="{ 'pfl-hidden': !showRatio }">
+        <Latex :tex="ratioTex" />
+      </div>
     </div>
   </div>
 </template>
@@ -106,34 +159,49 @@ const ratioTex = computed(() => {
   gap: 1.25rem;
   align-items: stretch;
 }
+
 .pfl-fig {
   flex: 1 1 0;
   min-width: 0;
   height: 152px;
 }
+
 .pfl-panel {
-  width: 13rem;
-  flex: 0 0 auto;
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
-  justify-content: center;
   gap: 0.35rem;
+  justify-content: center;
+
+  width: 13rem;
 }
+
 .pfl-toggle {
   align-self: flex-start;
+
   padding: 0.2rem 0.9rem;
   border: 1px solid rgb(148 163 184 / 30%);
   border-radius: 999px;
+
   background: var(--c-surface);
   color: var(--c-text);
+
   cursor: pointer;
 }
+
 .pfl-read {
   font-size: 0.88rem;
 }
+
+/* 科学计数法读数比默认 text-xl 窄一档，给滑块留出可拖动宽度（右栏只有 13rem） */
+.pfl-q {
+  font-size: 0.85rem;
+}
+
 .pfl-ratio {
   color: var(--c-accent);
 }
+
 .pfl-hidden {
   visibility: hidden;
 }

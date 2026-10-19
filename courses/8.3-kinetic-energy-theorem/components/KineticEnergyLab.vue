@@ -12,7 +12,7 @@ const m = ref(631);
 /** 速度按 km/s 给（与教材题面一致） */
 const v = ref(7.6);
 
-const setMozzi = () => {
+const setMozzi = (): void => {
   m.value = 631;
   v.value = 7.6;
 };
@@ -130,7 +130,6 @@ const eqTex = computed(
 
 .kel-unit {
   margin-left: 0.3em;
-
   color: var(--c-text-dim);
   font-size: 0.75rem;
 }
@@ -158,17 +157,14 @@ const eqTex = computed(
 
 .kel-bar {
   overflow: hidden;
-
   height: 0.5rem;
   border-radius: 999px;
-
   background: var(--c-border);
 }
 
 .kel-fill {
   height: 100%;
   border-radius: 999px;
-
   background: var(--c-accent);
   transition: width 0.25s ease;
 }

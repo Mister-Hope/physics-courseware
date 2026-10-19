@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * 第 10 页配图：I = neSv 的推导图 —— 截面左侧长 vt 的一段柱体内共有 nSvt 个自由电子，
- * 它们在时间 t 内全部通过横截面，所以 q = neSvt。step ≥ 2 才画出柱体与 nSvt 的标注（推导中间步骤点击后才出）。
- */
+/** 第 10 页配图：I = neSv 的推导图 —— 截面左侧长 vt 的一段柱体内共有 nSvt 个自由电子， 它们在时间 t 内全部通过横截面，所以 q = neSvt。step ≥ 2 才画出柱体与 nSvt 的标注（推导中间步骤点击后才出）。 */
 const { step = 1 } = defineProps<{ step?: number }>();
 </script>
 
@@ -29,9 +26,7 @@ const { step = 1 } = defineProps<{ step?: number }>();
         <line x1="186" y1="196" x2="336" y2="196" stroke="var(--c-text-dim)" stroke-width="1.2" />
         <line x1="186" y1="190" x2="186" y2="202" stroke="var(--c-text-dim)" stroke-width="1.2" />
         <line x1="336" y1="190" x2="336" y2="202" stroke="var(--c-text-dim)" stroke-width="1.2" />
-        <text x="261" y="222" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent)">
-          vt
-        </text>
+        <text x="261" y="222" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent)">vt</text>
       </g>
       <!-- 电子（画在箭头之上） -->
       <g>

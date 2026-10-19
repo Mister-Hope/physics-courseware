@@ -871,9 +871,10 @@ const U_HEADS = [
   background: var(--c-surface);
   color: var(--c-text-dim);
 
-  font-size: 0.8rem;
   font-weight: 700;
+  font-size: 0.8rem;
   white-space: nowrap;
+
   cursor: pointer;
 }
 
@@ -893,7 +894,6 @@ const U_HEADS = [
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
-
   min-width: 0;
 }
 
@@ -910,9 +910,8 @@ const U_HEADS = [
 
 .he-slider-val {
   color: var(--c-text);
-
-  font-size: 0.85rem;
   font-weight: 800;
+  font-size: 0.85rem;
   white-space: nowrap;
 }
 
@@ -920,11 +919,13 @@ const U_HEADS = [
   width: 100%;
   min-width: 0;
   height: 1rem;
+
   /* UA 给 range 留了 margin，会在窄栏里顶出 2px（实测） */
   margin: 0;
 
-  accent-color: var(--c-accent);
   cursor: pointer;
+
+  accent-color: var(--c-accent);
 }
 
 .he-readouts {

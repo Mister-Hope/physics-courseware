@@ -248,7 +248,6 @@ const orbitR = computed(() => ORBIT_UNIT * ratio.value);
 .dl-slider {
   flex: 1 1 auto;
   min-width: 0;
-
   accent-color: var(--c-accent);
 }
 

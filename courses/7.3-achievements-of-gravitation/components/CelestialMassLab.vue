@@ -301,7 +301,6 @@ const massTex = computed(() => sciTex(mass.value, 3, "kg"));
 .cm-out {
   padding-top: 0.3rem;
   border-top: 1px solid var(--c-border);
-
   font-size: 1.05rem;
 }
 

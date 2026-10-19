@@ -349,14 +349,13 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.8, "paint-order": "strok
 .mf-stage {
   display: block;
   flex: 1 1 auto;
-
   min-height: 0;
 }
 
 .fig-focus-demo .fig-svg {
   width: 100%;
-  height: 100%;
   max-width: none;
+  height: 100%;
 }
 
 /* 沿路径流动的粒子流：同一 dash 周期、同一时长 ⟹ 各条速率严格相同 */
@@ -377,8 +376,8 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.8, "paint-order": "strok
 
 /* 汇聚点亮环：周期性向外扩散 */
 .mf-pulse {
-  transform-box: fill-box;
   transform-origin: center;
+  transform-box: fill-box;
   animation: mf-pulse 1.6s ease-out infinite;
 }
 

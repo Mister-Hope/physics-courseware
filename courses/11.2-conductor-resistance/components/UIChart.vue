@@ -118,8 +118,9 @@ const point = computed(() => ({
   display: flex;
   gap: 1.4rem;
   align-items: center;
-  height: 100%;
+
   min-width: 0;
+  height: 100%;
 }
 
 .res-ui-chart {
@@ -128,10 +129,10 @@ const point = computed(() => ({
 }
 
 .res-ui-panel {
-  width: 21rem;
   display: grid;
   gap: 0.7rem;
   align-content: center;
+  width: 21rem;
 }
 
 .res-readout {
@@ -142,8 +143,8 @@ const point = computed(() => ({
 
 .res-cell {
   display: flex;
-  align-items: baseline;
   gap: 0.45rem;
+  align-items: baseline;
 }
 
 .res-k {

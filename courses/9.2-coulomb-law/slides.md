@@ -224,6 +224,12 @@ title: 例题 2：等边三角形上的三个点电荷
 
 </template>
 
+<template v-slot:fig>
+
+<EquilateralChargeForceSvg :show-forces="$clicks >= 1" :show-parallelogram="$clicks >= 2" :show-resultant="$clicks >= 3" />
+
+</template>
+
 <div v-click="1"><Latex tex="q_3" /> 受到 <Latex tex="q_1" />、<Latex tex="q_2" /> 的两个斥力 <Latex tex="F_1" />、<Latex tex="F_2" />，两个力的夹角是 <Latex tex="60^\circ" />（每个力与垂直平分线成 <Latex tex="30^\circ" />）。<Latex tex="q_1 = q_2 = q_3 = q" />，每两个点电荷之间的距离 <Latex tex="r" /> 都相同。</div>
 
 <div v-click="2"><Latex tex="F_1 = F_2 = k\dfrac{q^2}{r^2} = 0.144\ \text{N}" display /></div>
@@ -242,6 +248,14 @@ title: 练习：悬挂的两球求电荷量
 
 </template>
 
+<template v-slot:fig>
+
+<CoulombPendulumSvg :show-forces="$clicks >= 1" :show-geometry="$clicks >= 2" />
+
+</template>
+
+<div class="stack-tight">
+
 <div v-click="1">对其中一个小球受力分析：重力 <Latex tex="mg" />（竖直向下）、细线拉力 <Latex tex="F_T" />（沿细线指向悬点）、库仑力 <Latex tex="F" />（水平向外，两球带同种电荷）。</div>
 
 <div v-click="2">悬点到球心的竖直距离 <Latex tex="h = \sqrt{(13\ \text{cm})^2 - (5\ \text{cm})^2} = 12\ \text{cm}" />，由三力平衡得 <Latex tex="\tan\theta = \dfrac{F}{mg} = \dfrac{5}{12}" />。</div>
@@ -249,6 +263,8 @@ title: 练习：悬挂的两球求电荷量
 <div v-click="3">由 <Latex tex="F = mg\tan\theta" /> 得 <Latex tex="F = mg \cdot \dfrac{5}{12} = 2.5 \times 10^{-3}\ \text{N}" />。</div>
 
 <div v-click="4">再由 <Latex tex="F = k\dfrac{q^2}{d^2}" /> 得 <Latex tex="q = \sqrt{\dfrac{Fd^2}{k}} \approx 5.3 \times 10^{-8}\ \text{C}" />。</div>
+
+</div>
 
 ---
 layout: exercise-split

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * 电压表改装电路（教材图 11.4-5）：表头与分压电阻 R 串联，虚线框 = 改装后的电压表。
- * showShare = true 时标出"分到多少电压"：表头分到 U_g，串联电阻分到 U_R，两端一共 U = U_g + U_R。
- */
+/** 电压表改装电路（教材图 11.4-5）：表头与分压电阻 R 串联，虚线框 = 改装后的电压表。 showShare = true 时标出"分到多少电压"：表头分到 U_g，串联电阻分到 U_R，两端一共 U = U_g + U_R。 */
 const { showShare = false } = defineProps<{
   /** 是否标出各段分到的电压（点击后才出） */
   showShare?: boolean;

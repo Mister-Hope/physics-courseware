@@ -471,7 +471,6 @@ const onSpeedInput = (event: Event): void => {
   display: flex;
   gap: 1.1rem;
   align-items: center;
-
   width: 100%;
 }
 
@@ -563,6 +562,7 @@ const onSpeedInput = (event: Event): void => {
 
   background: transparent;
   color: var(--c-text-dim);
+
   font: inherit;
 
   cursor: pointer;

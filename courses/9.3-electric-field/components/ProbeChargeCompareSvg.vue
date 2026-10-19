@@ -14,7 +14,9 @@ const L2 = 96;
 <template>
   <svg viewBox="0 0 420 280" class="w-full h-full">
     <line :x1="Q.x" :y1="Q.y" :x2="P.x" :y2="P.y" stroke="var(--c-neutral-500)" stroke-opacity="0.45" stroke-width="1.6" stroke-dasharray="4 6" />
-    <text :x="(Q.x + P.x) / 2 - 6" :y="Q.y - 12" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-neutral-500)">r</text>
+    <text :x="(Q.x + P.x) / 2 - 6" :y="Q.y - 12" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-neutral-500)">
+      r
+    </text>
     <circle :cx="Q.x" :cy="Q.y" r="16" fill="var(--c-danger)" fill-opacity="0.9" />
     <text :x="Q.x" :y="Q.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="#fff">+</text>
     <text :x="Q.x" :y="Q.y + 44" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-danger)">Q</text>

@@ -2,9 +2,7 @@
 /**
  * 第 5 页：库仑扭秤（9-text.md 行 115–116）
  *
- * 细银丝的下端悬挂一根绝缘棒：一端是小球 A、另一端通过物体 B 使棒平衡（悬丝自然状态）。
- * 带电的金属小球 C 与 A 带同种电荷；C 靠近 A 时，A 因斥力远离（图上用虚线"被推开的位置"+ 力箭头 F 表示）。
- * 扭转悬丝（扭转顶部旋钮）使 A 回到初始位置并静止，**扭转的角度可以比较力的大小**。
+ * 细银丝的下端悬挂一根绝缘棒：一端是小球 A、另一端通过物体 B 使棒平衡（悬丝自然状态）。 带电的金属小球 C 与 A 带同种电荷；C 靠近 A 时，A 因斥力远离（图上用虚线"被推开的位置"+ 力箭头 F 表示）。 扭转悬丝（扭转顶部旋钮）使 A 回到初始位置并静止，**扭转的角度可以比较力的大小**。
  *
  * 装置不画数值：教材没给 r、F 的数值 ⇒ 屏幕上只有符号（A、B、C、F、θ）。
  */
@@ -49,88 +47,22 @@ const pct = (x: number, y: number) => ({
       <line :x1="A.x" :y1="A.y" :x2="B.x" :y2="B.y" stroke="var(--c-text)" stroke-width="3.4" stroke-linecap="round" />
       <!-- 小球 A -->
       <circle :cx="A.x" :cy="A.y" r="16" fill="var(--c-danger)" fill-opacity="0.9" />
-      <text
-        :x="A.x"
-        :y="A.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="18"
-        fill="#0c1122"
-      >
-        +
-      </text>
-      <text
-        :x="A.x"
-        :y="202"
-        text-anchor="middle"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="17"
-        fill="var(--c-text)"
-      >
-        A
-      </text>
+      <text :x="A.x" :y="A.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#0c1122">+</text>
+      <text :x="A.x" :y="202" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-text)">A</text>
       <!-- 配重 B -->
       <circle :cx="B.x" :cy="B.y" r="13" fill="var(--c-neutral-600)" />
-      <text
-        :x="B.x - 3"
-        :y="B.y + 34"
-        text-anchor="middle"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="17"
-        fill="var(--c-text-dim)"
-      >
-        B
-      </text>
+      <text :x="B.x - 3" :y="B.y + 34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-text-dim)">B</text>
       <!-- 带电体 C -->
       <circle :cx="C.x" :cy="C.y" r="16" fill="var(--c-danger)" fill-opacity="0.9" />
-      <text
-        :x="C.x"
-        :y="C.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="18"
-        fill="#0c1122"
-      >
-        +
-      </text>
-      <text
-        :x="C.x"
-        :y="202"
-        text-anchor="middle"
-        font-family="KaTeX_Math"
-        font-style="italic"
-        font-size="17"
-        fill="var(--c-text)"
-      >
-        C
-      </text>
+      <text :x="C.x" :y="C.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#0c1122">+</text>
+      <text :x="C.x" :y="202" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-text)">C</text>
       <g v-if="showForce">
         <circle cx="208" cy="166" r="16" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-dasharray="6 5" />
         <CourseArrow :from="{ x: A.x, y: A.y }" :to="{ x: 188, y: 166 }" stroke="var(--c-force)" stroke-width="3.2" label="F" :label-dy="22" />
       </g>
       <g v-if="showTwistAngle">
-        <line
-          :x1="HEAD.x"
-          :y1="HEAD.y"
-          :x2="pointerRef.x"
-          :y2="pointerRef.y"
-          stroke="var(--c-text-dim)"
-          stroke-width="1.4"
-          stroke-dasharray="5 5"
-        />
-        <line
-          :x1="HEAD.x"
-          :y1="HEAD.y"
-          :x2="pointerTurned.x"
-          :y2="pointerTurned.y"
-          stroke="var(--c-accent)"
-          stroke-width="2.4"
-          stroke-linecap="round"
-        />
+        <line :x1="HEAD.x" :y1="HEAD.y" :x2="pointerRef.x" :y2="pointerRef.y" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="5 5" />
+        <line :x1="HEAD.x" :y1="HEAD.y" :x2="pointerTurned.x" :y2="pointerTurned.y" stroke="var(--c-accent)" stroke-width="2.4" stroke-linecap="round" />
         <path
           :d="`M ${pointerRef.x} ${pointerRef.y} A 42 42 0 0 1 ${pointerTurned.x.toFixed(1)} ${pointerTurned.y.toFixed(1)}`"
           fill="none"
@@ -139,13 +71,7 @@ const pct = (x: number, y: number) => ({
         />
       </g>
     </svg>
-    <ChartLabel
-      v-bind="pct(376, 62)"
-      :parts="[{ tex: '\\theta' }]"
-      :visible="showTwistAngle"
-      :size="18"
-      color="var(--c-accent)"
-    />
+    <ChartLabel v-bind="pct(376, 62)" :parts="[{ tex: '\\theta' }]" :visible="showTwistAngle" :size="18" color="var(--c-accent)" />
   </div>
 </template>
 

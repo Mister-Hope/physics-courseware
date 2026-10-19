@@ -5,24 +5,8 @@ const ys = [64, 100, 136, 172, 208];
 
 <template>
   <svg viewBox="0 0 520 270" width="380" xmlns="http://www.w3.org/2000/svg">
-    <CourseArrow
-      v-for="y in ys"
-      :key="`l${y}`"
-      :from="{ x: 26, y }"
-      :to="{ x: 176, y }"
-      stroke="var(--c-field)"
-      stroke-width="1.6"
-      :opacity="0.7"
-    />
-    <CourseArrow
-      v-for="y in ys"
-      :key="`r${y}`"
-      :from="{ x: 344, y }"
-      :to="{ x: 494, y }"
-      stroke="var(--c-field)"
-      stroke-width="1.6"
-      :opacity="0.7"
-    />
+    <CourseArrow v-for="y in ys" :key="`l${y}`" :from="{ x: 26, y }" :to="{ x: 176, y }" stroke="var(--c-field)" stroke-width="1.6" :opacity="0.7" />
+    <CourseArrow v-for="y in ys" :key="`r${y}`" :from="{ x: 344, y }" :to="{ x: 494, y }" stroke="var(--c-field)" stroke-width="1.6" :opacity="0.7" />
     <rect
       x="196"
       y="42"
@@ -44,7 +28,7 @@ const ys = [64, 100, 136, 172, 208];
       dominant-baseline="central"
       font-family="KaTeX_Main"
       font-size="20"
-      fill="var(--c-danger)"
+      fill="var(--c-velocity)"
       opacity="0.9"
     >
       −
@@ -58,7 +42,7 @@ const ys = [64, 100, 136, 172, 208];
       dominant-baseline="central"
       font-family="KaTeX_Main"
       font-size="20"
-      fill="var(--c-accent-2)"
+      fill="var(--c-danger)"
       opacity="0.9"
     >
       +

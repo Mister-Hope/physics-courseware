@@ -401,6 +401,7 @@ const MAIN = "KaTeX_Main, 'Times New Roman', serif";
   justify-content: center;
 
   width: 100%;
+
   /* 固定逻辑像素：⛔ 不要写 vh/vw——幻灯片画布恒为 980×552，视口单位会随浏览器窗口变，
      1280 窗口下 36vh=259px 放得下，1920 窗口下 36vh=389px 就把整页顶出 17px（e2e 换 1920 后抓到） */
   min-height: 260px;

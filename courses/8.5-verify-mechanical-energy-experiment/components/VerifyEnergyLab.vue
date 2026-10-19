@@ -47,18 +47,18 @@ const gap = computed(() => ((ep.value - ek.value) / ep.value) * 100);
         <CourseSlider v-model="m" :min="0.1" :max="2.0" :step="0.05" />
       </div>
       <div style="height: 1px; background: var(--c-line)"></div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span
           ><Latex
             :tex="`v_B = \\dfrac{h_C - h_A}{2T} = \\dfrac{${(xC - xA).toFixed(2)}\\ \\text{cm}}{0.04\\ \\text{s}}`"
         /></span>
         <b style="color: var(--c-info)"><Latex :tex="`${vB.toFixed(2)}\\ \\text{m/s}`" /></b>
       </div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span><Latex :tex="`\\Delta E_k = \\tfrac{1}{2}mv_B^2`" /></span>
         <b style="color: var(--c-info)"><Latex :tex="`${ek.toFixed(3)}\\ \\text{J}`" /></b>
       </div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span><Latex :tex="`\\Delta E_p = mgh_B`" /></span>
         <b style="color: var(--c-ok)"><Latex :tex="`${ep.toFixed(3)}\\ \\text{J}`" /></b>
       </div>

@@ -13,9 +13,9 @@ defineProps<{ step: number }>();
       stroke="var(--c-text-mute)"
       stroke-opacity="0.5"
     />
-    <text x="96" y="84" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">−</text>
-    <text x="128" y="92" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">−</text>
-    <text x="158" y="80" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">−</text>
+    <text x="96" y="84" font-family="KaTeX_Main" font-size="15" fill="var(--c-velocity)">−</text>
+    <text x="128" y="92" font-family="KaTeX_Main" font-size="15" fill="var(--c-velocity)">−</text>
+    <text x="158" y="80" font-family="KaTeX_Main" font-size="15" fill="var(--c-velocity)">−</text>
     <!-- 天柱峰 -->
     <path
       d="M 40 262 L 190 96 L 250 176 L 330 262 Z"
@@ -29,8 +29,8 @@ defineProps<{ step: number }>();
     <rect x="152" y="118" width="76" height="44" rx="4" fill="var(--c-accent)" fill-opacity="0.75" stroke="var(--c-accent)" stroke-width="2" />
     <path d="M 142 118 L 238 118 L 190 94 Z" fill="var(--c-accent)" fill-opacity="0.9" />
     <template v-if="step >= 1">
-      <text x="166" y="74" font-family="KaTeX_Main" font-size="15" fill="var(--c-accent-2)">+</text>
-      <text x="196" y="78" font-family="KaTeX_Main" font-size="15" fill="var(--c-accent-2)">+</text>
+      <text x="166" y="74" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">+</text>
+      <text x="196" y="78" font-family="KaTeX_Main" font-size="15" fill="var(--c-danger)">+</text>
       <path
         d="M 168 84 L 184 118 L 174 122 L 196 158 L 186 160 L 208 194"
         fill="none"

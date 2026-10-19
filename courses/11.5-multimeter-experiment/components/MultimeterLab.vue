@@ -169,125 +169,157 @@ const applyPreset = (v: number): void => {
   display: flex;
   gap: 0.8rem;
   align-items: flex-start;
+
   width: 100%;
   min-width: 0;
 }
+
 .ml-dial {
   flex: 0 0 46%;
   min-width: 0;
 }
+
 .ml-side {
-  flex: 1 1 0;
-  min-width: 0;
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
   gap: 0.3rem;
+
+  min-width: 0;
 }
+
 .ml-gears {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
 }
+
 .ml-gear {
   padding: 0.16rem 0.5rem;
-  border-radius: 0.45rem;
   border: 1px solid var(--c-border);
+  border-radius: 0.45rem;
+
   background: var(--c-surface);
   color: var(--c-text-dim);
+
   font-size: 0.82rem;
   line-height: 1.5;
+
   cursor: pointer;
 }
+
 .ml-gear.on {
   border-color: var(--c-accent);
   background: var(--c-accent-glow);
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .ml-presets {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.3rem;
+  align-items: center;
 }
+
 .ml-presets-label {
-  font-size: 0.82rem;
   color: var(--c-text-dim);
+  font-size: 0.82rem;
 }
+
 /* 占位容器：读数区与提示语叠在同一个格子里，两块高度取大者 ⇒
    点第 1 步只换内容、不改变高度，上面的问题与表盘都不会被顶跑 */
 .ml-panel {
   display: grid;
 }
+
 .ml-panel > * {
   grid-area: 1 / 1;
 }
+
 .is-hidden {
   visibility: hidden;
 }
+
 .ml-read {
   display: grid;
   gap: 0.18rem;
+
   padding: 0.45rem 0.6rem;
-  border-radius: 0.75rem;
   border: 1px solid var(--c-border);
+  border-radius: 0.75rem;
+
   background: var(--c-panel);
 }
+
 .ml-read-head {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
   align-items: baseline;
 }
+
 .ml-read-gear {
-  font-size: 1rem;
-  font-weight: 700;
   color: var(--c-text);
-}
-.ml-read-scale {
-  font-size: 0.76rem;
-  color: var(--c-text-dim);
-}
-.ml-read-value {
-  font-size: 1.5rem;
   font-weight: 700;
+  font-size: 1rem;
+}
+
+.ml-read-scale {
+  color: var(--c-text-dim);
+  font-size: 0.76rem;
+}
+
+.ml-read-value {
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.5rem;
   line-height: 1.1;
 }
+
 .ml-read-unit {
   margin-left: 0.2rem;
   font-size: 1rem;
 }
+
 .ml-step {
-  font-size: 0.82rem;
   color: var(--c-text-dim);
+  font-size: 0.82rem;
 }
+
 .ml-true {
-  font-size: 0.76rem;
   color: var(--c-text-mute);
+  font-size: 0.76rem;
 }
+
 .ml-note {
+  padding: 0.35rem 0.55rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.6rem;
+
   font-size: 0.78rem;
   line-height: 1.45;
-  padding: 0.35rem 0.55rem;
-  border-radius: 0.6rem;
-  border: 1px solid var(--c-border);
 }
+
 .ml-note.lv-ok {
-  color: var(--c-ok);
   border-color: rgb(52 211 153 / 30%);
+  color: var(--c-ok);
 }
+
 .ml-note.lv-warn {
-  color: var(--c-hint-warn);
   border-color: rgb(210 153 34 / 30%);
+  color: var(--c-hint-warn);
 }
+
 .ml-note.lv-info {
   color: var(--c-text-dim);
 }
+
 .ml-ask-note {
-  font-size: 0.85rem;
   color: var(--c-accent);
+  font-size: 0.85rem;
 }
+
 .ml-over {
   color: var(--c-danger);
   font-weight: 700;

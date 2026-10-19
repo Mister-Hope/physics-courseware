@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
- * 电表改装计算台：给定表头内阻 Rg、满偏电流 Ig 与目标量程，切换"改装成电压表（串联分压电阻）/ 改装成电流表（并联分流电阻）"，
- * 电阻值按教材公式实时计算：Ug = IgRg；R = U/Ig − Rg；R = IgRg/(I − Ig)；改装后内阻 R_V = Rg + R、R_A = RgR/(Rg+R)。
- * 读数区是固定列的 grid（公式一列、数值一列），拖动滑块时数值位数变化也不会把旁边的元素顶跑。
+ * 电表改装计算台：给定表头内阻 Rg、满偏电流 Ig 与目标量程，切换"改装成电压表（串联分压电阻）/ 改装成电流表（并联分流电阻）"， 电阻值按教材公式实时计算：Ug = IgRg；R =
+ * U/Ig − Rg；R = IgRg/(I − Ig)；改装后内阻 R_V = Rg + R、R_A = RgR/(Rg+R)。 读数区是固定列的
+ * grid（公式一列、数值一列），拖动滑块时数值位数变化也不会把旁边的元素顶跑。
  */
 import { computed, ref } from "vue";
 
@@ -121,10 +121,13 @@ const aOk = computed(() => rangeI.value > ig.value * 1e-3);
             <Latex :tex="`= ${fmt(rVoltmeter)}\\ \\Omega`" />
           </div>
           <div v-if="vOk" class="mc-note">
-            两端加到 <Latex :tex="`${rangeU}\\ \\text{V}`" /> 时表头恰好满偏——电压表是一个"电压可读的大电阻"。
+            两端加到
+            <Latex :tex="`${rangeU}\\ \\text{V}`" />
+            时表头恰好满偏——电压表是一个"电压可读的大电阻"。
           </div>
           <div v-else class="mc-warn">
-            量程 <Latex :tex="`${rangeU}\\ \\text{V}`" /> 还不到满偏电压 <Latex tex="U_g" />，量程要往大选。
+            量程 <Latex :tex="`${rangeU}\\ \\text{V}`" /> 还不到满偏电压
+            <Latex tex="U_g" />，量程要往大选。
           </div>
         </template>
         <template v-else>
@@ -137,9 +140,11 @@ const aOk = computed(() => rangeI.value > ig.value * 1e-3);
             <Latex :tex="`= ${fmt(rAmmeter)}\\ \\Omega`" />
           </div>
           <div v-if="aOk" class="mc-note">
-            干路电流为 <Latex :tex="`${rangeI.toFixed(1)}\\ \\text{A}`" /> 时表头恰好满偏——电流表是一个"电流可读的小电阻"。
+            干路电流为
+            <Latex :tex="`${rangeI.toFixed(1)}\\ \\text{A}`" />
+            时表头恰好满偏——电流表是一个"电流可读的小电阻"。
           </div>
-          <div v-else class="mc-warn"> 量程电流还不到满偏电流，量程要往大选。 </div>
+          <div v-else class="mc-warn">量程电流还不到满偏电流，量程要往大选。</div>
         </template>
       </div>
     </div>
@@ -152,63 +157,80 @@ const aOk = computed(() => rangeI.value > ig.value * 1e-3);
   flex-direction: column;
   gap: 0.7rem;
 }
+
 .mc-switch {
   display: flex;
   gap: 0.6rem;
 }
+
 .mc-btn {
   flex: 1;
+
   padding: 0.45rem 0;
-  font-size: 1rem;
-  color: var(--c-text-dim);
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-sm);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-size: 1rem;
+
   cursor: pointer;
 }
+
 .mc-btn.on {
-  color: var(--c-bg);
-  background: var(--c-accent);
   border-color: var(--c-accent);
+  background: var(--c-accent);
+  color: var(--c-bg);
 }
+
 .mc-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   gap: 1rem;
   align-items: start;
 }
+
 .mc-ctrl {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
+
 .mc-out {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
+
   padding: 0.75rem 0.9rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
+  background: var(--c-surface);
 }
+
 /* 固定列：公式一列、读数一列（右对齐定宽），数值位数变化不会顶跑旁边的元素 */
 .mc-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 8.5rem;
-  align-items: center;
   gap: 0.6rem;
+  align-items: center;
+
   font-size: 1.02rem;
   font-variant-numeric: tabular-nums;
 }
+
 .mc-row > :last-child {
   text-align: right;
 }
+
 .mc-note {
-  font-size: 0.88rem;
   color: var(--c-text-dim);
-}
-.mc-warn {
   font-size: 0.88rem;
+}
+
+.mc-warn {
   color: var(--c-danger);
+  font-size: 0.88rem;
 }
 </style>

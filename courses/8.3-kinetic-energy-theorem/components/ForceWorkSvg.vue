@@ -2,10 +2,10 @@
 /**
  * 第 2 页「动能的表达式（情境）」示意图：图 8.3-1。
  *
- * 光滑水平面上，物块在与运动方向相同的恒力 F 作用下发生一段位移 l，速度由 v₁ 增加到 v₂。
- * 几何约束（旧稿踩过的坑）：
+ * 光滑水平面上，物块在与运动方向相同的恒力 F 作用下发生一段位移 l，速度由 v₁ 增加到 v₂。 几何约束（旧稿踩过的坑）：
+ *
  * - F 从物块**几何中心**出发；
- * - l 的尺寸线两端对准物块初、末位置的**几何中心**（不是虚线框边缘），否则图示自相矛盾。
+ * - L 的尺寸线两端对准物块初、末位置的**几何中心**（不是虚线框边缘），否则图示自相矛盾。
  */
 
 const BLOCK_W = 64;
@@ -33,15 +33,7 @@ const endCenter = { x: END.x + BLOCK_W / 2, y: END.y + BLOCK_H / 2 };
     aria-label="光滑水平面上物块在恒力作用下发生一段位移，速度由 v1 增到 v2"
   >
     <!-- 水平面 -->
-    <SurfaceHatch
-      :from="{ x: 20, y: GROUND }"
-      :to="{ x: 700, y: GROUND }"
-      side="below"
-      :thickness="13"
-      :gap="20"
-      color="var(--c-text-dim)"
-      :line-width="2.2"
-    />
+    <SurfaceHatch :from="{ x: 20, y: GROUND }" :to="{ x: 700, y: GROUND }" side="below" :thickness="13" :gap="20" color="var(--c-text-dim)" :line-width="2.2" />
     <text x="698" y="163" font-size="16" fill="var(--c-text-dim)" text-anchor="end">光滑水平面</text>
 
     <!-- 末位置虚影（只表示"运动到了这里"） -->
@@ -59,27 +51,8 @@ const endCenter = { x: END.x + BLOCK_W / 2, y: END.y + BLOCK_H / 2 };
     />
 
     <!-- 物块（初位置） -->
-    <rect
-      :x="START.x"
-      :y="START.y"
-      :width="BLOCK_W"
-      :height="BLOCK_H"
-      rx="6"
-      fill="var(--c-surface-solid)"
-      stroke="var(--c-accent)"
-      stroke-width="2.2"
-    />
-    <text
-      :x="startCenter.x"
-      :y="GROUND - 6"
-      font-family="KaTeX_Math"
-      font-style="italic"
-      font-size="20"
-      fill="var(--c-text)"
-      text-anchor="middle"
-    >
-      m
-    </text>
+    <rect :x="START.x" :y="START.y" :width="BLOCK_W" :height="BLOCK_H" rx="6" fill="var(--c-surface-solid)" stroke="var(--c-accent)" stroke-width="2.2" />
+    <text :x="startCenter.x" :y="GROUND - 6" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-text)" text-anchor="middle">m</text>
 
     <!-- 恒力 F：从物块几何中心出发 -->
     <CourseArrow
@@ -88,16 +61,7 @@ const endCenter = { x: END.x + BLOCK_W / 2, y: END.y + BLOCK_H / 2 };
       stroke="var(--c-force)"
       :stroke-width="3.4"
     />
-    <text
-      :x="startCenter.x + 164"
-      :y="startCenter.y + 8"
-      font-family="KaTeX_Math"
-      font-style="italic"
-      font-size="23"
-      fill="var(--c-force)"
-    >
-      F
-    </text>
+    <text :x="startCenter.x + 164" :y="startCenter.y + 8" font-family="KaTeX_Math" font-style="italic" font-size="23" fill="var(--c-force)">F</text>
 
     <!-- 速度：画在物块上方旁侧；v₂ 箭头比 v₁ 长，体现速度增大 -->
     <CourseArrow :from="{ x: 78, y: 100 }" :to="{ x: 148, y: 100 }" stroke="var(--c-velocity)" :stroke-width="2.6" />

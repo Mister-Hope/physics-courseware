@@ -229,13 +229,14 @@ const TICKS = Array.from({ length: 12 }, (_, index) => index * 30);
 
   color: var(--c-text-dim);
 
-  font-size: 0.82rem;
   font-weight: 700;
+  font-size: 0.82rem;
   line-height: 1.3;
 }
 
 .td-face {
   display: block;
+
   width: 100%;
   max-width: 4.9rem;
   height: auto;
@@ -255,7 +256,6 @@ const TICKS = Array.from({ length: 12 }, (_, index) => index * 30);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-
   min-width: 0;
 }
 
@@ -299,7 +299,7 @@ const TICKS = Array.from({ length: 12 }, (_, index) => index * 30);
 }
 
 .td-row.is-active {
-  background: rgba(226, 168, 70, 0.12);
+  background: rgb(226 168 70 / 12%);
   color: var(--c-text);
 }
 </style>

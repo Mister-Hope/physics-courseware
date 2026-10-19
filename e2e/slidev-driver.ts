@@ -216,7 +216,12 @@ export async function gotoSlide(page: Page, no: number, clicks: number): Promise
  * `gotoSlide` 只能表达"未点击 / 全部展开"两种状态（它的等待条件是 `nav.clicks === clicksTotal`）， 中间步必须直接调
  * `nav.go`，否则会一直等"全部展开"而超时。这里照抄实测可用的写法。
  */
-export async function gotoSlideStep(page: Page, no: number, clicks: number): Promise<void> {
+export async function gotoSlideStep(
+  page: Page,
+  no: number,
+  clicks: number,
+  options: { settle?: boolean } = {},
+): Promise<void> {
   await page.evaluate(([target, count]) => window.__slidev__?.nav?.go(target, count), [
     no,
     clicks,
@@ -233,6 +238,10 @@ export async function gotoSlideStep(page: Page, no: number, clicks: number): Pro
     [no, clicks] as [number, number],
     { timeout: 20_000 },
   );
+
+  // 抓"动画中间帧"时必须跳过 settle：settle 会等有限动画跑完，之后的等待只能截到终态
+  // （真踩过：`--after=200` 与稳定帧 sha256 完全相同，因为 600ms+settle 早就把 0.4s 的过渡跑完了）
+  if (options.settle === false) return;
 
   // v-click 动画 0.5s；之后再做几何稳定等待，避免量到入场中途
   await page.waitForTimeout(600);

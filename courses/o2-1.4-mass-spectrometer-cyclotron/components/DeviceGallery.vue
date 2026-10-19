@@ -293,6 +293,7 @@ const toggle = (key: Device["key"]): void => {
 
   width: 100%;
   min-width: 0;
+
   /* 卡片按内容取高（不撑满页面）：页面用 .spread 的 space-around 分布，
      让上下文字与卡片组均匀散开，而不是被卡片吃掉全部空白（教师反馈） */
   height: auto;
@@ -314,6 +315,7 @@ const toggle = (key: Device["key"]): void => {
 
   background: var(--c-surface);
   color: var(--c-text);
+
   font: inherit;
 
   cursor: pointer;
@@ -348,10 +350,9 @@ const toggle = (key: Device["key"]): void => {
 
 .dg-svg {
   display: block;
-
   width: 100%;
-  max-height: 150px;
   height: auto;
+  max-height: 150px;
 }
 
 /* 原理区：盖在缩略图上的浮层，未激活时只隐藏、不占位——点击绝不改变卡片高度 */
@@ -363,22 +364,23 @@ const toggle = (key: Device["key"]): void => {
   align-items: center;
   justify-content: center;
 
+  overflow: hidden;
+
   padding: 0.3rem 0.4rem;
   border: 1px solid var(--c-border-glow);
   border-radius: var(--radius-md);
 
   background: var(--c-surface-solid);
 
-  visibility: hidden;
-  overflow: hidden;
   opacity: 0;
+  visibility: hidden;
 
   transition: opacity 0.2s ease;
 }
 
 .dg-tip-on {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
 }
 
 .dg-say {

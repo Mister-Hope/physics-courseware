@@ -261,13 +261,11 @@ const endDrag = () => {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-
   min-width: 0;
 }
 
 .fc-stage {
   position: relative;
-
   min-width: 0;
 }
 
@@ -275,7 +273,6 @@ const endDrag = () => {
   display: block;
   width: 100%;
   height: auto;
-
   touch-action: none;
 }
 

@@ -6,7 +6,7 @@
  */
 
 /** 弹簧折线：从 (x0, y) 到 (x1, y)，圈距固定、圈数随长度变化 */
-const spring = (x0: number, x1: number, y: number, amp = 12) => {
+const spring = (x0: number, x1: number, y: number, amp = 12): string => {
   const lead = 12;
   const xs = x0 + lead;
   const xe = x1 - lead;

@@ -2,11 +2,10 @@
 import { computed, ref } from "vue";
 
 /**
- * 第 11 页交互：拖动"电流 I"与"横截面积 S"，按真实公式 v = I/(neS) 实时计算
- * 自由电子定向移动的平均速率，并用 t = L/v 算出电子通过 1 m 导线需要的时间。
+ * 第 11 页交互：拖动"电流 I"与"横截面积 S"，按真实公式 v = I/(neS) 实时计算 自由电子定向移动的平均速率，并用 t = L/v 算出电子通过 1 m 导线需要的时间。
  *
- * 滑块范围按"真实导线不会烧断"取：I 0.1–2 A、S 0.5–4 mm²（最极端组合 2 A / 0.5 mm²
- * 的电流密度为 4 A/mm²，仍在铜导线的安全载流量内），避免出现"0.1 mm² 通 10 A"这类不现实状态。
+ * 滑块范围按"真实导线不会烧断"取：I 0.1–2 A、S 0.5–4 mm²（最极端组合 2 A / 0.5 mm² 的电流密度为 4 A/mm²，仍在铜导线的安全载流量内），避免出现"0.1
+ * mm² 通 10 A"这类不现实状态。
  */
 const iA = ref(1);
 const sMm2 = ref(1);
@@ -15,8 +14,8 @@ const sMm2 = ref(1);
 const E_CHARGE = 1.6e-19;
 
 /**
- * 铜的自由电子数密度（m⁻³）：取铜的密度 8.96 g/cm³、摩尔质量 63.55 g/mol，
- * 按每个铜原子贡献 1 个自由电子估算：n = ρN_A/M ≈ 8.5×10²⁸ m⁻³（教材未给此值）。
+ * 铜的自由电子数密度（m⁻³）：取铜的密度 8.96 g/cm³、摩尔质量 63.55 g/mol， 按每个铜原子贡献 1 个自由电子估算：n = ρN_A/M ≈ 8.5×10²⁸
+ * m⁻³（教材未给此值）。
  */
 const N_CU = 8.5e28;
 
@@ -26,7 +25,7 @@ const sM2 = computed(() => sMm2.value * 1e-6);
 /** 定向移动的平均速率 v = I/(neS) */
 const vDrift = computed(() => iA.value / (N_CU * E_CHARGE * sM2.value));
 
-/** neS（分母，单位 C/m） */
+/** NeS（分母，单位 C/m） */
 const neS = computed(() => N_CU * E_CHARGE * sM2.value);
 
 /** 电子通过 1 m 导线需要的时间 t = L/v（s） */
@@ -58,14 +57,32 @@ const tTex = computed(() => {
 <template>
   <div class="drift-calc">
     <div class="drift-sliders">
-      <CourseSlider v-model="iA" :min="0.1" :max="2" :step="0.1" label="电流" label-tex="I" accent="gold">
+      <CourseSlider
+        v-model="iA"
+        :min="0.1"
+        :max="2"
+        :step="0.1"
+        label="电流"
+        label-tex="I"
+        accent="gold"
+      >
         <template #value>{{ iA.toFixed(1) }}<Latex tex="\ \text{A}" /></template>
       </CourseSlider>
-      <CourseSlider v-model="sMm2" :min="0.5" :max="4" :step="0.1" label="横截面积" label-tex="S" accent="blue">
+      <CourseSlider
+        v-model="sMm2"
+        :min="0.5"
+        :max="4"
+        :step="0.1"
+        label="横截面积"
+        label-tex="S"
+        accent="blue"
+      >
         <template #value>{{ sMm2.toFixed(1) }}<Latex tex="\ \text{mm}^2" /></template>
       </CourseSlider>
     </div>
-    <div class="drift-const"><Latex tex="n \approx 8.5 \times 10^{28}\ \text{m}^{-3}" />（按铜估算）</div>
+    <div class="drift-const">
+      <Latex tex="n \approx 8.5 \times 10^{28}\ \text{m}^{-3}" />（按铜估算）
+    </div>
     <div class="drift-result">
       <div class="drift-formula"><Latex :tex="vTex" /></div>
       <div class="drift-foot"><Latex :tex="tTex" />（<Latex tex="L = 1\ \text{m}" />）</div>
@@ -77,10 +94,13 @@ const tTex = computed(() => {
 .drift-calc {
   display: grid;
   gap: 0.55rem;
+
   padding: 0.7rem 1.35rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
+
   backdrop-filter: blur(16px);
 }
 

@@ -306,6 +306,7 @@ const labels = computed(() => [
   display: flex;
   flex: 1 1 42%;
   flex-direction: column;
+
   /* 0.4rem：滑杆换成共享 `CourseSlider` 后行变高（原生输入 1.2rem），这里跟着微收一档，避免整栏顶出 .page-grow */
   gap: 0.4rem;
 

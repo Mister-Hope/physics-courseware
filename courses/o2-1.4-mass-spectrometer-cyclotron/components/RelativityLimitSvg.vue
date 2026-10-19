@@ -90,7 +90,6 @@ const PANELS: Panel[] = [
 <style scoped>
 .rl-svg {
   display: block;
-
   width: 100%;
   height: auto;
 }

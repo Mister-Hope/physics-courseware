@@ -11,18 +11,12 @@
     3. 纯图形物理推导，原生宽高比自适应，无多余外框干扰。
 -->
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    /** 点击后出现：分力 F₁、F₂、平行四边形长方形虚线边与直角标记 */
-    showDecomp?: boolean;
-    /** 兼容 Slidev step: step >= 1 展开分解 */
-    step?: number;
-  }>(),
-  {
-    showDecomp: false,
-    step: 0,
-  },
-);
+const { showDecomp = false, step = 0 } = defineProps<{
+  /** 点击后出现：分力 F₁、F₂、平行四边形长方形虚线边与直角标记 */
+  showDecomp?: boolean;
+  /** 兼容 Slidev step: step >= 1 展开分解 */
+  step?: number;
+}>();
 
 /** 力的作用点＝物块几何中心 C；F 与水平（位移方向）成 40° */
 const C = { x: 228, y: 223 };
@@ -58,7 +52,7 @@ const s = 14;
 const rightAnglePath = `M ${C.x + s} ${C.y} L ${C.x + s} ${C.y - s} L ${C.x} ${C.y - s}`;
 
 // 是否显示分解
-const isDecomposed = () => props.showDecomp || (props.step ?? 0) >= 1;
+const isDecomposed = (): boolean => showDecomp || step >= 1;
 
 // 文字光晕
 const HALO = {

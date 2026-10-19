@@ -152,31 +152,39 @@ const plateU = computed(() => Math.round(eField.value * (440 / PPM)));
   align-items: center;
   min-width: 0;
 }
+
 .eqlab svg {
   flex: none;
 }
+
 .eqpanel {
-  flex: 1;
-  min-width: 0;
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 0.7rem;
+
+  min-width: 0;
 }
+
 .eqrow {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   gap: 0.6rem;
-  font-size: 0.72rem;
+  align-items: baseline;
+  justify-content: space-between;
+
   color: var(--c-text-dim);
+
+  font-size: 0.72rem;
 }
+
 .eqv {
   color: var(--c-text);
   font-size: 0.8rem;
   white-space: nowrap;
 }
+
 .eqnote {
-  font-size: 0.66rem;
   color: var(--c-text-dim);
+  font-size: 0.66rem;
 }
 </style>

@@ -30,10 +30,14 @@ const CHARGES = [
       font-family="KaTeX_Main"
       font-size="17"
       fill="var(--c-danger)"
-    >+</text>
+    >
+      +
+    </text>
     <text :x="O.x" :y="O.y + RSPHERE + 34" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-danger)">Q</text>
     <line :x1="O.x" :y1="O.y" :x2="P.x" :y2="P.y" stroke="var(--c-neutral-500)" stroke-opacity="0.45" stroke-width="1.6" stroke-dasharray="5 6" />
-    <text :x="(O.x + P.x) / 2" :y="O.y - 12" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-neutral-500)">r</text>
+    <text :x="(O.x + P.x) / 2" :y="O.y - 12" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-neutral-500)">
+      r
+    </text>
     <circle :cx="P.x" :cy="P.y" r="6" fill="var(--c-accent)" />
     <text :x="P.x" :y="P.y + 28" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="15" fill="var(--c-accent)">P</text>
     <CourseArrow :from="P" :to="{ x: P.x + 82, y: P.y }" stroke="var(--c-force)" :stroke-width="3" />

@@ -580,11 +580,13 @@ const ringWidth = (on: boolean): number => (on ? 3.5 : 0);
   width: 100%;
   min-width: 0;
 }
+
 .mt-gear-svg {
   display: block;
   width: 100%;
   height: auto;
 }
+
 .mt-pill {
   cursor: pointer;
 }

@@ -126,9 +126,9 @@ const vLen = computed(() => 12 + v.value * 10);
       <div
         style="
           display: flex;
+          align-items: baseline;
           justify-content: space-between;
           font-size: 1.08rem;
-          align-items: baseline;
         "
       >
         <span><Latex tex="E_k + E_p" /></span>

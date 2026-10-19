@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * 电流表改装电路（教材图 11.4-6）：表头与分流电阻 R 并联，虚线框 = 改装后的电流表。
- * showShare = true 时标出"分到多少电流"：表头通过 I_g，并联电阻分走 I_R，干路一共 I = I_g + I_R。
- */
+/** 电流表改装电路（教材图 11.4-6）：表头与分流电阻 R 并联，虚线框 = 改装后的电流表。 showShare = true 时标出"分到多少电流"：表头通过 I_g，并联电阻分走 I_R，干路一共 I = I_g + I_R。 */
 const { showShare = false } = defineProps<{
   /** 是否标出各支路分到的电流（点击后才出） */
   showShare?: boolean;

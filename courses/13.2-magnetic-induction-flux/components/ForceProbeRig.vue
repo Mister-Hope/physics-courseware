@@ -213,6 +213,7 @@ const ratioTex = computed(
   gap: 1.4rem;
   align-items: center;
   justify-content: center;
+
   min-width: 0;
 }
 
@@ -254,8 +255,10 @@ const ratioTex = computed(
 .fpr-ratio {
   padding: 0.35rem 0.8rem;
   border-radius: var(--radius-sm);
+
   background: var(--c-accent-soft);
   color: var(--c-text);
+
   font-weight: 600;
 }
 </style>

@@ -171,10 +171,11 @@ const runCourse = async (course: CourseTarget): Promise<CourseResult> => {
     baseURL: `http://localhost:${port}/${course.slug}/`,
   };
 
-  if (port !== course.port)
-    {console.log(
+  if (port !== course.port) {
+    console.log(
       `↪ [${course.slug}] 端口 ${course.port} 被占用（${describePortOwner(course.port)}），改用 ${port}`,
-    );}
+    );
+  }
 
   const serverLog: string[] = [];
   const server = startServer(target, (line) => {

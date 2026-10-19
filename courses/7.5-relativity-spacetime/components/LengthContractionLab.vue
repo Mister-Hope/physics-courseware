@@ -91,22 +91,19 @@ const ratio = computed(() => 1 / gamma.value);
 
 .lc-bar {
   position: relative;
-
   box-sizing: border-box;
-
   height: 0.85rem;
   border-radius: 999px;
 }
 
 .lc-bar-fixed {
-  background: linear-gradient(90deg, rgba(148, 163, 184, 0.35), rgba(148, 163, 184, 0.6));
-  border: 1px solid rgba(148, 163, 184, 0.7);
+  border: 1px solid rgb(148 163 184 / 70%);
+  background: linear-gradient(90deg, rgb(148 163 184 / 35%), rgb(148 163 184 / 60%));
 }
 
 .lc-bar-moving {
-  background: linear-gradient(90deg, rgba(226, 168, 70, 0.35), rgba(226, 168, 70, 0.75));
   border: 1px solid var(--c-accent);
-
+  background: linear-gradient(90deg, rgb(226 168 70 / 35%), rgb(226 168 70 / 75%));
   transition: width 0.12s linear;
 }
 
@@ -117,7 +114,8 @@ const ratio = computed(() => 1 / gamma.value);
   width: 2px;
   height: 1.28rem;
 
-  background: currentColor;
+  background: currentcolor;
+
   opacity: 0.55;
 }
 
@@ -133,7 +131,6 @@ const ratio = computed(() => 1 / gamma.value);
   display: flex;
   gap: 0.9rem;
   align-items: center;
-
   min-width: 0;
 }
 
@@ -148,6 +145,7 @@ const ratio = computed(() => 1 / gamma.value);
   align-items: baseline;
 
   color: var(--c-accent);
+
   white-space: nowrap;
 }
 

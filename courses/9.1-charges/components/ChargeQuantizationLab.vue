@@ -2,9 +2,8 @@
 import { computed, ref } from "vue";
 
 /**
- * 第 15 页「电荷量是 e 的整数倍」：滑块只有 4 个档位（n = 1–4，step=1），按真实公式 Q = ne 算电荷量，
- * 并显示 n = Q/e 恰为整数——电荷量只能一份一份地变化（教材行 71）。
- * 旧稿是反的（调连续的 Q 再除以 e），这里改成调整数 n。
+ * 第 15 页「电荷量是 e 的整数倍」：滑块只有 4 个档位（n = 1–4，step=1），按真实公式 Q = ne 算电荷量， 并显示 n = Q/e
+ * 恰为整数——电荷量只能一份一份地变化（教材行 71）。 旧稿是反的（调连续的 Q 再除以 e），这里改成调整数 n。
  */
 const e = 1.6e-19;
 const n = ref(2);
@@ -24,7 +23,16 @@ const nTex = computed(() => `n = \\dfrac{Q}{e} = ${n.value} \\quad（整数）`)
 
 <template>
   <div class="qlab">
-    <CourseSlider v-model="n" :min="1" :max="4" :step="1" label="元电荷的个数" label-tex="n" accent="blue" aria-label="元电荷的个数 n" />
+    <CourseSlider
+      v-model="n"
+      :min="1"
+      :max="4"
+      :step="1"
+      label="元电荷的个数"
+      label-tex="n"
+      accent="blue"
+      aria-label="元电荷的个数 n"
+    />
     <div class="qlab-out">
       <Latex :tex="qTex" display />
       <Latex :tex="nTex" />
@@ -37,10 +45,13 @@ const nTex = computed(() => `n = \\dfrac{Q}{e} = ${n.value} \\quad（整数）`)
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   padding: 0.6rem 1.1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
+
   backdrop-filter: blur(12px);
 }
 
@@ -48,9 +59,11 @@ const nTex = computed(() => `n = \\dfrac{Q}{e} = ${n.value} \\quad（整数）`)
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   padding: 0.45rem 0.3rem 0.15rem;
   border-top: 1px solid color-mix(in srgb, var(--c-border) 70%, transparent);
-  text-align: center;
+
   font-size: 1.12rem;
+  text-align: center;
 }
 </style>

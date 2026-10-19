@@ -24,8 +24,8 @@ import {
  * - E2E_SHOT_AFTER 点击后**再等 N 毫秒**才截（给 rAF / `transition` 动画留出中间帧；留空 = 立即截）
  * - E2E_ARTIFACT_DIR 显式指定产物目录（默认规则见 e2e/artifacts.ts）
  *
- * 产出：`courses/<课件>/.temp/shots/p<页号>-c<点击数>[-t<毫秒>].png`（一次跑多个课件时退回 `e2e/reports/shots/`），
- * 并在控制台打印 `SHOT <绝对路径>`。
+ * 产出：`courses/<课件>/.temp/shots/p<页号>-c<点击数>[-t<毫秒>].png`（一次跑多个课件时退回 `e2e/reports/shots/`）， 并在控制台打印
+ * `SHOT <绝对路径>`。
  */
 const slug = (process.env.E2E_COURSE ?? "").split(",")[0]!.trim();
 const course = listCourses().find((item) => item.slug === slug) ?? listCourses()[0]!;
@@ -80,11 +80,16 @@ test(`截图「${course.slug}」`, async ({ page }) => {
     for (const clicks of steps) {
       if (clicks > total) continue;
 
-      await gotoSlideStep(page, no, clicks);
-
-      // 动画中间帧：`.temp/shots` 默认抓"每击之后的稳定帧"，那看不出 rAF / transition 是"真在演"
-      // 还是"一步跳过去"。需要时用 `--after=<ms>` 再等一会儿，文件名带 `-t<ms>` 区分。
-      if (afterMs > 0) await page.waitForTimeout(afterMs);
+      if (afterMs > 0 && clicks > 0) {
+        // 中间帧模式：先在**上一击的稳定态**落定，再"重放"这一击并**不等 settle**，才能截到过渡中途
+        // （直接 gotoSlideStep(clicks) 会先等 600ms + settle，0.4s 级的过渡早已跑完）
+        await gotoSlideStep(page, no, clicks - 1);
+        await gotoSlideStep(page, no, clicks, { settle: false });
+        await page.waitForTimeout(afterMs);
+      } else {
+        await gotoSlideStep(page, no, clicks);
+        if (afterMs > 0) await page.waitForTimeout(afterMs);
+      }
 
       // 加载失败时 Slidev 渲染的是"带错误提示的占位页"；不拦就会把空白图当成"这页就是这么空"存下来
       // （真踩过一次：一边有子代理在改这个课件、一边截图，抢跑渲染出空页，白白困惑半小时）

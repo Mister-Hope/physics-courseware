@@ -16,8 +16,8 @@
 .cw-table td {
   padding: 0.14rem 0.7rem;
   border-bottom: 1px solid var(--c-border);
-  text-align: center;
   line-height: 1.35;
+  text-align: center;
 }
 
 .cw-table th {
@@ -25,42 +25,43 @@
   font-weight: 600;
 }
 
-.cw-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
 .cw-table--left th,
 .cw-table--left td {
   text-align: left;
 }
 
+.cw-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 /* 第 18 页伏安特性曲线图例 */
+
 /* 图例：整句作为一个整体换行（`flex: 0 0 auto`），⛔ 不要让它被压窄 —— 否则会在词中间折断 */
 .cv-legend {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.3rem 2rem;
-  color: var(--c-text-dim);
-  font-size: 1rem;
-}
+  align-items: center;
 
-.cv-legend span {
-  flex: 0 0 auto;
+  color: var(--c-text-dim);
+
+  font-size: 1rem;
 }
 
 /* ⚠️ 别用 inline-flex：条目里的 <Latex> 会各自变成 flex 项、文字被拆成碎片 */
 .cv-legend span {
   display: inline-block;
+  flex: 0 0 auto;
 }
 
 .cv-swatch {
   display: inline-block;
+  vertical-align: middle;
+
   width: 1.5rem;
   height: 0.22rem;
   margin-right: 0.5rem;
   border-radius: 999px;
-  vertical-align: middle;
 }
 
 /* 第 8 页：三条实验结论（内容少的结论页，整体放大） */

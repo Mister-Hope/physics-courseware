@@ -2,18 +2,13 @@
 import { computed } from "vue";
 
 /**
- * 第二课时「恒定功率启动」的六幅图像（`kind` 选一种）。
- * 模型假设：**阻力严格恒定**（题给条件 F_阻 = f₀），这是机车启动题的标准设定；
+ * 第二课时「恒定功率启动」的六幅图像（`kind` 选一种）。 模型假设：**阻力严格恒定**（题给条件 F_阻 = f₀），这是机车启动题的标准设定；
  * 真实车辆的风阻另有一页定性辨析，两套模型不混用。
  *
- * 归一化取值（只决定形状，刻度数字一律不标）：P = 1、f₀ = 0.25、m = 0.1（⇒ 初加速度 a₀ = 7.5），
- * v_max = P/f₀ = 4。
- *   P–t    ：一启动就保持额定功率 ⇒ 水平线
- *   F–v    ：F = P/v ⇒ 双曲线，v → v_max 时 F → f₀
- *   F–(1/v)：F = P·(1/v) ⇒ 过原点的直线（与阻力大小无关，任何模型都成立）
- *   a–t    ：a = (P/v − f₀)/m，v 增大 ⇒ a 减小；t → ∞ 时 a → 0
- *   v–t    ：斜率渐小、渐近于 v_max
- *   a–(1/v)：a = (P/m)·(1/v) − f₀/m ⇒ 直线，横截距 1/v = f₀/P
+ * 归一化取值（只决定形状，刻度数字一律不标）：P = 1、f₀ = 0.25、m = 0.1（⇒ 初加速度 a₀ = 7.5）， v_max = P/f₀ = 4。 P–t ：一启动就保持额定功率
+ * ⇒ 水平线 F–v ：F = P/v ⇒ 双曲线，v → v_max 时 F → f₀ F–(1/v)：F = P·(1/v) ⇒ 过原点的直线（与阻力大小无关，任何模型都成立） a–t ：a
+ * = (P/v − f₀)/m，v 增大 ⇒ a 减小；t → ∞ 时 a → 0 v–t ：斜率渐小、渐近于 v_max a–(1/v)：a = (P/m)·(1/v) − f₀/m ⇒
+ * 直线，横截距 1/v = f₀/P
  */
 const { kind = "v-t" } = defineProps<{
   /** 要画哪一种图像 */
@@ -26,8 +21,8 @@ const M = 0.1;
 const V_MAX = P / F0; // 4
 const A0 = (P / 0.05 - F0) / M; // v 很小时的加速度上界（只用于给纵轴留量）
 
-/** v(t)：dv/dt = (P/v − f₀)/m，从 v₀ = 0.05 起逐小步积分 */
-const vCurve = (() => {
+/** V(t)：dv/dt = (P/v − f₀)/m，从 v₀ = 0.05 起逐小步积分 */
+const vCurve = ((): { x: number; y: number }[] => {
   const DT = 0.004;
   const out: { x: number; y: number }[] = [];
   let v = 0.05;
@@ -49,9 +44,26 @@ const config = computed(() => {
         xAxis: { quantity: "t" },
         yAxis: { quantity: "P" },
         curves: [
-          { points: [{ x: 0, y: P }, { x: 10, y: P }], stroke: "var(--c-accent)", width: 3.2 },
+          {
+            points: [
+              { x: 0, y: P },
+              { x: 10, y: P },
+            ],
+            stroke: "var(--c-accent)",
+            width: 3.2,
+          },
         ],
-        labels: [{ x: 6.4, y: P + 0.22, tex: "P = P_{\\text{额}}", anchor: "bottom-left" as const, size: 18, color: "var(--c-accent)", halo: true }],
+        labels: [
+          {
+            x: 6.4,
+            y: P + 0.22,
+            tex: "P = P_{\\text{额}}",
+            anchor: "bottom-left" as const,
+            size: 18,
+            color: "var(--c-accent)",
+            halo: true,
+          },
+        ],
       };
     }
     case "F-v": {
@@ -66,19 +78,51 @@ const config = computed(() => {
         yAxis: { quantity: "F" },
         curves: [
           { points: pts, stroke: "var(--c-accent)", width: 3.2 },
-          { points: [{ x: 0, y: F0 }, { x: 4.8, y: F0 }], stroke: "var(--c-danger)", width: 2, dashed: "7 5" },
+          {
+            points: [
+              { x: 0, y: F0 },
+              { x: 4.8, y: F0 },
+            ],
+            stroke: "var(--c-danger)",
+            width: 2,
+            dashed: "7 5",
+          },
         ],
         labels: [
-          { x: 0.5, y: P / 0.5 + 0.3, tex: "F = \\frac{P}{v}", anchor: "left" as const, size: 18, color: "var(--c-accent)", halo: true },
-          { x: 3.3, y: F0 - 0.26, tex: "f_0", anchor: "bottom-left" as const, size: 18, color: "var(--c-danger)", halo: true },
+          {
+            x: 0.5,
+            y: P / 0.5 + 0.3,
+            tex: "F = \\frac{P}{v}",
+            anchor: "left" as const,
+            size: 18,
+            color: "var(--c-accent)",
+            halo: true,
+          },
+          {
+            x: 3.3,
+            y: F0 - 0.26,
+            tex: "f_0",
+            anchor: "bottom-left" as const,
+            size: 18,
+            color: "var(--c-danger)",
+            halo: true,
+          },
           { x: V_MAX, y: F0, dot: 5, color: "var(--c-ok)" },
-          { x: V_MAX, y: F0 + 0.36, tex: "v_{\\max}", anchor: "bottom-right" as const, size: 17, color: "var(--c-ok)", halo: true },
+          {
+            x: V_MAX,
+            y: F0 + 0.36,
+            tex: "v_{\\max}",
+            anchor: "bottom-right" as const,
+            size: 17,
+            color: "var(--c-ok)",
+            halo: true,
+          },
         ],
       };
     }
     case "F-inv-v": {
       const pts = Array.from({ length: 60 }, (_, i) => {
-        const iv = (0.21 + (1 / 0.34 - 0.21) * (i / 59));
+        const iv = 0.21 + (1 / 0.34 - 0.21) * (i / 59);
         return { x: Number(iv.toFixed(4)), y: Number((P * iv).toFixed(4)) };
       });
       return {
@@ -88,18 +132,42 @@ const config = computed(() => {
         yAxis: { quantity: "F" },
         curves: [
           { points: pts, stroke: "var(--c-accent)", width: 3.2 },
-          { points: [{ x: 0, y: F0 }, { x: 3.2, y: F0 }], stroke: "var(--c-danger)", width: 2, dashed: "7 5" },
+          {
+            points: [
+              { x: 0, y: F0 },
+              { x: 3.2, y: F0 },
+            ],
+            stroke: "var(--c-danger)",
+            width: 2,
+            dashed: "7 5",
+          },
         ],
         labels: [
-          { x: 1.7, y: P * 1.7 + 0.34, tex: "F = P\\cdot\\frac{1}{v}", anchor: "left" as const, size: 18, color: "var(--c-accent)", halo: true },
-          { x: 2.2, y: F0 - 0.26, tex: "f_0", anchor: "bottom-left" as const, size: 18, color: "var(--c-danger)", halo: true },
+          {
+            x: 1.7,
+            y: P * 1.7 + 0.34,
+            tex: "F = P\\cdot\\frac{1}{v}",
+            anchor: "left" as const,
+            size: 18,
+            color: "var(--c-accent)",
+            halo: true,
+          },
+          {
+            x: 2.2,
+            y: F0 - 0.26,
+            tex: "f_0",
+            anchor: "bottom-left" as const,
+            size: 18,
+            color: "var(--c-danger)",
+            halo: true,
+          },
         ],
       };
     }
     case "a-t": {
       const pts = vCurve
         .filter((_, i) => i % 3 === 0)
-        .map((p) => ({ x: p.x, y: Number((((P / p.y - F0) / M)).toFixed(3)) }))
+        .map((p) => ({ x: p.x, y: Number(((P / p.y - F0) / M).toFixed(3)) }))
         .filter((p) => p.y <= 8.6);
       return {
         xRange: [0, 10.4] as [number, number],
@@ -108,7 +176,15 @@ const config = computed(() => {
         yAxis: { quantity: "a" },
         curves: [{ points: pts, stroke: "var(--c-accent)", width: 3.2 }],
         labels: [
-          { x: 6.2, y: 1.5, tex: "a \\to 0", anchor: "bottom-left" as const, size: 18, color: "var(--c-accent)", halo: true },
+          {
+            x: 6.2,
+            y: 1.5,
+            tex: "a \\to 0",
+            anchor: "bottom-left" as const,
+            size: 18,
+            color: "var(--c-accent)",
+            halo: true,
+          },
         ],
       };
     }
@@ -120,17 +196,36 @@ const config = computed(() => {
         yAxis: { quantity: "v" },
         curves: [
           { points: vCurve, stroke: "var(--c-accent)", width: 3.2 },
-          { points: [{ x: 0, y: V_MAX }, { x: 10.4, y: V_MAX }], stroke: "var(--c-ok)", width: 2, dashed: "7 5" },
+          {
+            points: [
+              { x: 0, y: V_MAX },
+              { x: 10.4, y: V_MAX },
+            ],
+            stroke: "var(--c-ok)",
+            width: 2,
+            dashed: "7 5",
+          },
         ],
         labels: [
-          { x: 7.2, y: V_MAX - 0.34, tex: "v_{\\max} = \\frac{P}{f_0}", anchor: "bottom-right" as const, size: 17, color: "var(--c-ok)", halo: true },
+          {
+            x: 7.2,
+            y: V_MAX - 0.34,
+            tex: "v_{\\max} = \\frac{P}{f_0}",
+            anchor: "bottom-right" as const,
+            size: 17,
+            color: "var(--c-ok)",
+            halo: true,
+          },
         ],
       };
     }
     default: {
       const pts = vCurve
         .filter((_, i) => i % 3 === 0)
-        .map((p) => ({ x: Number((1 / p.y).toFixed(3)), y: Number((((P / p.y - F0) / M)).toFixed(3)) }))
+        .map((p) => ({
+          x: Number((1 / p.y).toFixed(3)),
+          y: Number(((P / p.y - F0) / M).toFixed(3)),
+        }))
         .filter((p) => p.y <= 8 && p.x <= 1.04)
         .sort((a, b) => a.x - b.x);
       const negIntercept = -F0 / M; // 负截距 −f₀/m
@@ -153,9 +248,35 @@ const config = computed(() => {
           },
         ],
         labels: [
-          { x: 0.42, y: 7.6, tex: "a = \\frac{P}{m}\\cdot\\frac{1}{v} - \\frac{f_0}{m}", anchor: "left" as const, size: 17, color: "var(--c-accent)", halo: true },
-          { x: F0 / P, y: 0, tex: "\\frac{f_0}{P}", anchor: "top-right" as const, size: 16, color: "var(--c-ok)", halo: true, dot: 4.5 },
-          { x: 0, y: Number(negIntercept.toFixed(3)), tex: "-\\frac{f_0}{m}", anchor: "right" as const, size: 16, color: "var(--c-danger)", halo: true, dot: 4.5 },
+          {
+            x: 0.42,
+            y: 7.6,
+            tex: "a = \\frac{P}{m}\\cdot\\frac{1}{v} - \\frac{f_0}{m}",
+            anchor: "left" as const,
+            size: 17,
+            color: "var(--c-accent)",
+            halo: true,
+          },
+          {
+            x: F0 / P,
+            y: 0,
+            tex: "\\frac{f_0}{P}",
+            anchor: "top-right" as const,
+            size: 16,
+            color: "var(--c-ok)",
+            halo: true,
+            dot: 4.5,
+          },
+          {
+            x: 0,
+            y: Number(negIntercept.toFixed(3)),
+            tex: "-\\frac{f_0}{m}",
+            anchor: "right" as const,
+            size: 16,
+            color: "var(--c-danger)",
+            halo: true,
+            dot: 4.5,
+          },
         ],
       };
     }

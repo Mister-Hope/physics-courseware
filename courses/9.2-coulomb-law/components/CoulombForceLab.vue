@@ -222,6 +222,7 @@ const arrows = computed(() => {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 1.6rem;
   align-items: center;
+
   max-height: 330px;
 }
 
@@ -256,12 +257,16 @@ const arrows = computed(() => {
 
 .cfl-toggle button {
   flex: 1;
+
   padding: 0.3rem 0.5rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-sm);
+
   background: var(--c-surface);
   color: var(--c-text-dim);
+
   font-size: 0.85rem;
+
   cursor: pointer;
 }
 
@@ -273,8 +278,8 @@ const arrows = computed(() => {
 
 .cfl-readout,
 .cfl-compare {
-  text-align: center;
   line-height: 1.5;
+  text-align: center;
 }
 
 .cfl-readout {

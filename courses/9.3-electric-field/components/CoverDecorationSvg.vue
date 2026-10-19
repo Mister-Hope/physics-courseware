@@ -25,14 +25,7 @@ const ARROWS = Array.from({ length: 8 }, (_, i) => {
     <circle cx="490" cy="276" r="92" fill="none" stroke="var(--c-field)" stroke-opacity="0.22" stroke-dasharray="3 9" />
     <circle cx="490" cy="276" r="152" fill="none" stroke="var(--c-field)" stroke-opacity="0.16" stroke-dasharray="3 9" />
     <circle cx="490" cy="276" r="214" fill="none" stroke="var(--c-field)" stroke-opacity="0.1" stroke-dasharray="3 9" />
-    <CourseArrow
-      v-for="(arrow, i) in ARROWS"
-      :key="i"
-      :from="arrow.from"
-      :to="arrow.to"
-      stroke="var(--c-field)"
-      :stroke-width="2.4"
-    />
+    <CourseArrow v-for="(arrow, i) in ARROWS" :key="i" :from="arrow.from" :to="arrow.to" stroke="var(--c-field)" :stroke-width="2.4" />
     <circle cx="490" cy="276" r="26" fill="var(--c-danger)" fill-opacity="0.92" />
     <text x="490" y="276" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="30" fill="#fff">+</text>
   </svg>

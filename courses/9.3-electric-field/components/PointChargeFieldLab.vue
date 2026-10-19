@@ -61,7 +61,14 @@ const ratioTex = computed(() => String.raw`\dfrac{E(r)}{E(2r)} = 4`);
         stroke-dasharray="4 6"
       />
       <g v-if="showSphere">
-        <circle :cx="OX" :cy="OY" :r="d1" fill="none" stroke="var(--c-border)" stroke-dasharray="4 6" />
+        <circle
+          :cx="OX"
+          :cy="OY"
+          :r="d1"
+          fill="none"
+          stroke="var(--c-border)"
+          stroke-dasharray="4 6"
+        />
         <CourseArrow
           v-for="(d, i) in SPHERE_DIRS"
           :key="`s${i}`"
@@ -72,8 +79,28 @@ const ratioTex = computed(() => String.raw`\dfrac{E(r)}{E(2r)} = 4`);
         />
       </g>
       <circle :cx="OX" :cy="OY" r="18" fill="var(--c-danger)" fill-opacity="0.9" />
-      <text :x="OX" :y="OY" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#fff">+</text>
-      <text :x="OX" :y="OY + 46" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-danger)">Q</text>
+      <text
+        :x="OX"
+        :y="OY"
+        text-anchor="middle"
+        dominant-baseline="central"
+        font-family="KaTeX_Main"
+        font-size="18"
+        fill="#fff"
+      >
+        +
+      </text>
+      <text
+        :x="OX"
+        :y="OY + 46"
+        text-anchor="middle"
+        font-family="KaTeX_Math"
+        font-style="italic"
+        font-size="14"
+        fill="var(--c-danger)"
+      >
+        Q
+      </text>
       <circle :cx="OX + d1" :cy="OY" r="5" fill="var(--c-accent)" />
       <CourseArrow
         :from="{ x: OX + d1, y: OY }"
@@ -134,13 +161,23 @@ const ratioTex = computed(() => String.raw`\dfrac{E(r)}{E(2r)} = 4`);
       </text>
     </svg>
     <div class="pcl-panel">
-      <CourseSlider v-model="r" :min="0.05" :max="0.3" :step="0.01" label-tex="r" label-width="2.4rem" accent="blue" />
+      <CourseSlider
+        v-model="r"
+        :min="0.05"
+        :max="0.3"
+        :step="0.01"
+        label-tex="r"
+        label-width="2.4rem"
+        accent="blue"
+      />
       <button class="pcl-toggle" type="button" @click="positive = !positive">
         <Latex :tex="positive ? 'Q > 0' : 'Q < 0'" />
       </button>
       <div class="pcl-read"><Latex :tex="eTex" /></div>
       <div class="pcl-read" :class="{ 'pcl-hidden': !showRatio }"><Latex :tex="e2Tex" /></div>
-      <div class="pcl-read pcl-ratio" :class="{ 'pcl-hidden': !showRatio }"><Latex :tex="ratioTex" /></div>
+      <div class="pcl-read pcl-ratio" :class="{ 'pcl-hidden': !showRatio }">
+        <Latex :tex="ratioTex" />
+      </div>
     </div>
   </div>
 </template>
@@ -151,34 +188,44 @@ const ratioTex = computed(() => String.raw`\dfrac{E(r)}{E(2r)} = 4`);
   gap: 1.25rem;
   align-items: stretch;
 }
+
 .pcl-fig {
   flex: 1 1 0;
   min-width: 0;
   height: 150px;
 }
+
 .pcl-panel {
-  width: 13rem;
-  flex: 0 0 auto;
   display: flex;
+  flex: 0 0 auto;
   flex-direction: column;
-  justify-content: center;
   gap: 0.24rem;
+  justify-content: center;
+
+  width: 13rem;
 }
+
 .pcl-toggle {
   align-self: flex-start;
+
   padding: 0.16rem 0.85rem;
   border: 1px solid rgb(148 163 184 / 30%);
   border-radius: 999px;
+
   background: var(--c-surface);
   color: var(--c-text);
+
   cursor: pointer;
 }
+
 .pcl-read {
   font-size: 0.92rem;
 }
+
 .pcl-ratio {
   color: var(--c-accent);
 }
+
 .pcl-hidden {
   visibility: hidden;
 }

@@ -455,6 +455,7 @@ const onB = (e: Event): void => {
 
 .msl-svg {
   display: block;
+
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -475,17 +476,17 @@ const onB = (e: Event): void => {
 .msl-halo {
   paint-order: stroke;
   stroke: var(--c-bg);
-  stroke-width: 4px;
   stroke-linejoin: round;
+  stroke-width: 4px;
 }
 
 .msl-math {
-  font-family: KaTeX_Math, "Times New Roman", serif;
   font-style: italic;
+  font-family: "KaTeX_Math", "Times New Roman", serif;
 }
 
 .msl-main {
-  font-family: KaTeX_Main, "Times New Roman", serif;
+  font-family: "KaTeX_Main", "Times New Roman", serif;
 }
 
 /* ── 控件 ── */
@@ -513,10 +514,11 @@ const onB = (e: Event): void => {
   background: var(--c-surface);
   color: var(--c-text-dim);
 
-  font-family: inherit;
   font-size: 0.85rem;
+  font-family: inherit;
   line-height: 1.4;
   white-space: nowrap;
+
   cursor: pointer;
 }
 
@@ -546,8 +548,8 @@ const onB = (e: Event): void => {
 }
 
 .msl-slider-name {
-  font-size: 1rem;
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .msl-slider-val {
@@ -587,15 +589,14 @@ const onB = (e: Event): void => {
 .msl-tag {
   flex: 0 1 auto;
   min-width: 0;
-
   color: var(--c-text-dim);
   font-size: 0.78rem;
 }
 
 .msl-tex {
   flex: 0 0 auto;
-  white-space: nowrap;
   font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 /* ── 半径比高亮行 ── */

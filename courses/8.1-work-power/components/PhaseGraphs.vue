@@ -2,10 +2,9 @@
 import { computed } from "vue";
 
 /**
- * 第二课时「恒定加速度启动 → 恒定功率」的两幅图像（左右并排）：
- *   v–t    ：先是一段直线（匀加速），到 v₁ 之后转为斜率渐小的曲线，渐近于 v_max
- *   F–1/v  ：先是一段水平线（牵引力恒定 f₀+ma），到 1/v₁ 之后转为过原点的直线（F = P₀·1/v）
- * 模型：阻力严格恒定 f₀ = 1800 N（题设），m = 1500 kg，P₀ = 60 kW，a = 1.5 m/s²。
+ * 第二课时「恒定加速度启动 → 恒定功率」的两幅图像（左右并排）： v–t ：先是一段直线（匀加速），到 v₁ 之后转为斜率渐小的曲线，渐近于 v_max F–1/v ：先是一段水平线（牵引力恒定
+ * f₀+ma），到 1/v₁ 之后转为过原点的直线（F = P₀·1/v） 模型：阻力严格恒定 f₀ = 1800 N（题设），m = 1500 kg，P₀ = 60 kW，a = 1.5
+ * m/s²。
  */
 const F0 = 1800;
 const M = 1500;
@@ -55,8 +54,25 @@ const vtCurves = computed(() => [
 ]);
 
 const vtLabels = computed(() => [
-  { x: V1 ? T1 : 0, y: V1, tex: "v_1", anchor: "bottom-left" as const, size: 17, color: "var(--c-accent)", halo: true, dot: 4.5 },
-  { x: 44, y: V_MAX - 2.6, tex: "v_{\\max}", anchor: "bottom-right" as const, size: 17, color: "var(--c-ok)", halo: true },
+  {
+    x: V1 ? T1 : 0,
+    y: V1,
+    tex: "v_1",
+    anchor: "bottom-left" as const,
+    size: 17,
+    color: "var(--c-accent)",
+    halo: true,
+    dot: 4.5,
+  },
+  {
+    x: 44,
+    y: V_MAX - 2.6,
+    tex: "v_{\\max}",
+    anchor: "bottom-right" as const,
+    size: 17,
+    color: "var(--c-ok)",
+    halo: true,
+  },
 ]);
 
 const fvCurves = computed(() => [
@@ -79,7 +95,15 @@ const fvCurves = computed(() => [
 ]);
 
 const fvLabels = computed(() => [
-  { x: 0.2, y: F1 + 260, tex: "F = f_0 + ma", anchor: "bottom-left" as const, size: 16, color: "var(--c-accent)", halo: true },
+  {
+    x: 0.2,
+    y: F1 + 260,
+    tex: "F = f_0 + ma",
+    anchor: "bottom-left" as const,
+    size: 16,
+    color: "var(--c-accent)",
+    halo: true,
+  },
   {
     x: Number((1 / V1).toFixed(4)),
     y: F1,
@@ -90,7 +114,16 @@ const fvLabels = computed(() => [
     halo: true,
     dot: 4,
   },
-  { x: Number((F0 / P0).toFixed(4)), y: F0 - 200, tex: "\\frac{f_0}{P_0}", anchor: "top-left" as const, size: 15, color: "var(--c-ok)", halo: true, dot: 4 },
+  {
+    x: Number((F0 / P0).toFixed(4)),
+    y: F0 - 200,
+    tex: "\\frac{f_0}{P_0}",
+    anchor: "top-left" as const,
+    size: 15,
+    color: "var(--c-ok)",
+    halo: true,
+    dot: 4,
+  },
 ]);
 </script>
 

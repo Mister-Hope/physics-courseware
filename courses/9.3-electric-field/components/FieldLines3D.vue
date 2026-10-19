@@ -7,7 +7,6 @@
   —— 交互：拖动旋转（不抢滚轮 / 翻页），未拖动时缓慢自转；不做等势面（§10.2 内容）。
 -->
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import {
   AmbientLight,
   BufferGeometry,
@@ -28,6 +27,7 @@ import {
   Vector3,
   WebGLRenderer,
 } from "three";
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 
 const { autoRotate = true, showArrows = false } = defineProps<{
   /** 是否缓慢自转（拖动时暂停） */
@@ -135,7 +135,10 @@ const getElementScale = (el: HTMLElement): number => {
 const syncRendererScale = (force = false): void => {
   const el = mountEl.value;
   if (!el || !renderer) return;
-  const ratio = Math.max(1, Math.min(window.devicePixelRatio * getElementScale(el), MAX_PIXEL_RATIO));
+  const ratio = Math.max(
+    1,
+    Math.min(window.devicePixelRatio * getElementScale(el), MAX_PIXEL_RATIO),
+  );
   const changed = Math.abs(ratio - appliedPixelRatio) >= 0.01;
   if (changed) {
     appliedPixelRatio = ratio;
@@ -161,18 +164,34 @@ function buildFieldLines(colors: { field: number; plus: number; minus: number })
   // 场线：所有曲线合并成一份 LineSegments（一次绘制，帧率稳）
   const positions: number[] = [];
   for (const points of LINES) {
-    for (let i = 1; i < points.length; i += 1) 
-      positions.push(points[i - 1].x, points[i - 1].y, points[i - 1].z, points[i].x, points[i].y, points[i].z);
-    
+    for (let i = 1; i < points.length; i += 1) {
+      positions.push(
+        points[i - 1].x,
+        points[i - 1].y,
+        points[i - 1].z,
+        points[i].x,
+        points[i].y,
+        points[i].z,
+      );
+    }
   }
   const geometry = new BufferGeometry();
   geometry.setAttribute("position", new Float32BufferAttribute(positions, 3));
-  group.add(new LineSegments(geometry, new LineBasicMaterial({ color: colors.field, transparent: true, opacity: 0.75 })));
+  group.add(
+    new LineSegments(
+      geometry,
+      new LineBasicMaterial({ color: colors.field, transparent: true, opacity: 0.75 }),
+    ),
+  );
 
   // 方向箭头：每隔一条场线放两个小圆锥，锥尖指向该点的场强方向
   arrowGroup = new Group();
   const coneGeometry = new ConeGeometry(0.05, 0.15, 8);
-  const coneMaterial = new MeshStandardMaterial({ color: colors.field, emissive: colors.field, emissiveIntensity: 0.45 });
+  const coneMaterial = new MeshStandardMaterial({
+    color: colors.field,
+    emissive: colors.field,
+    emissiveIntensity: 0.45,
+  });
   const up = new Vector3(0, 1, 0);
   const dir = new Vector3();
 
@@ -202,7 +221,12 @@ function buildCharges(colors: { plus: number; minus: number }): Group {
     const color = charge.q > 0 ? colors.plus : colors.minus;
     const mesh = new Mesh(
       geometry,
-      new MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.35, roughness: 0.35 }),
+      new MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 0.35,
+        roughness: 0.35,
+      }),
     );
     mesh.position.copy(charge.pos);
     group.add(mesh);
@@ -221,7 +245,9 @@ function buildCharges(colors: { plus: number; minus: number }): Group {
       ctx.fillText(index === 0 ? "+Q" : "−Q", canvas.width / 2, canvas.height / 2);
     }
     const texture = new CanvasTexture(canvas);
-    const sprite = new Sprite(new SpriteMaterial({ map: texture, transparent: true, depthWrite: false }));
+    const sprite = new Sprite(
+      new SpriteMaterial({ map: texture, transparent: true, depthWrite: false }),
+    );
     sprite.scale.set(0.9, 0.45, 1);
     sprite.position.set(charge.pos.x, charge.pos.y - 0.62, charge.pos.z);
     group.add(sprite);
@@ -236,7 +262,12 @@ function initScene(): void {
 
   try {
     scene = new Scene();
-    camera = new PerspectiveCamera(40, (el.clientWidth || 880) / (el.clientHeight || 320), 0.1, 100);
+    camera = new PerspectiveCamera(
+      40,
+      (el.clientWidth || 880) / (el.clientHeight || 320),
+      0.1,
+      100,
+    );
     updateCamera();
 
     renderer = new WebGLRenderer({ antialias: true, alpha: true });
@@ -366,9 +397,11 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .fl3d {
+  overflow: hidden;
+
   width: 100%;
   height: 312px;
-  overflow: hidden;
+
   cursor: grab;
   touch-action: none;
 }

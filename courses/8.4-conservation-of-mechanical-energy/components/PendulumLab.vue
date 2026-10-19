@@ -128,24 +128,24 @@ const bob = computed(() => {
         <CourseSlider v-model="theta" :min="10" :max="80" :step="1" />
       </div>
       <div style="height: 1px; background: var(--c-line)"></div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span><Latex :tex="`h = l(1-\cos\theta) = ${lTex}(1-\cos${thetaTex}^\circ)`" /></span>
         <b><Latex :tex="`${h.toFixed(3)}\ \text{m}`" /></b>
       </div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span><Latex tex="E_p = mgh" /></span>
         <b style="color: var(--c-ok)"><Latex :tex="`${ep.toFixed(2)}\ \text{J}\cdot m`" /></b>
       </div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span><Latex :tex="`v = \sqrt{2gl(1-\cos\theta)}`" /></span>
         <b style="color: var(--c-info)"><Latex :tex="`${v.toFixed(2)}\ \text{m/s}`" /></b>
       </div>
-      <div style="font-size: 0.95rem; display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between; font-size: 0.95rem">
         <span><Latex tex="E_k = \tfrac{1}{2}mv^2" /></span>
         <b style="color: var(--c-info)"><Latex :tex="`${ek.toFixed(2)}\ \text{J}\cdot m`" /></b>
       </div>
       <div style="height: 1px; background: var(--c-line)"></div>
-      <div style="font-size: 0.9rem; color: var(--c-ink-faint)">
+      <div style="color: var(--c-ink-faint); font-size: 0.9rem">
         释放高度越高，最低点速度越大；<Latex tex="E_k" /> 与 <Latex tex="E_p" /> 之和始终不变
       </div>
     </div>

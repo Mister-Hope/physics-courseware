@@ -179,23 +179,29 @@ const curlD = computed(() =>
 .mf-ampere-1 {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.35rem;
+  align-items: center;
 }
+
 .mf-ampere-ctrl {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
 }
+
 .mf-btn {
   padding: 0.18rem 0.85rem;
-  border-radius: 999px;
   border: 1px solid var(--c-border);
-  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+
+  background: rgb(255 255 255 / 5%);
   color: var(--c-text-dim);
+
   font-size: 0.82rem;
+
   cursor: pointer;
 }
+
 .mf-btn.on {
   border-color: var(--c-accent-border);
   background: var(--c-accent-soft);

@@ -402,16 +402,16 @@ const leadB = computed(() => `M 104 ${hitSmall.value.toFixed(2)} H ${TICK_X}`);
 .msf-halo {
   paint-order: stroke;
   stroke: var(--c-bg);
-  stroke-width: 4px;
   stroke-linejoin: round;
+  stroke-width: 4px;
 }
 
 .msf-math {
-  font-family: KaTeX_Math, "Times New Roman", serif;
   font-style: italic;
+  font-family: "KaTeX_Math", "Times New Roman", serif;
 }
 
 .msf-main {
-  font-family: KaTeX_Main, "Times New Roman", serif;
+  font-family: "KaTeX_Main", "Times New Roman", serif;
 }
 </style>

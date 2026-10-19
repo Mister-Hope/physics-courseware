@@ -417,13 +417,15 @@ const HALO = {
 
 <style scoped>
 .two-cars-wrap {
-  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
+
 .two-cars-svg {
   display: block;
+
   width: 100%;
   max-width: 580px;
   height: auto;

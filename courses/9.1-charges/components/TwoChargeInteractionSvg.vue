@@ -2,10 +2,7 @@
 import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
 
-/**
- * 第 3 页「两种电荷」：玻璃棒与丝绸、橡胶棒与毛皮摩擦后各带什么电（初中结论），
- * 以及同种电荷相斥、异种电荷相吸。页面 clicks: 3 —— ① 出电性标记 ③ 出相互作用箭头。
- */
+/** 第 3 页「两种电荷」：玻璃棒与丝绸、橡胶棒与毛皮摩擦后各带什么电（初中结论）， 以及同种电荷相斥、异种电荷相吸。页面 clicks: 3 —— ① 出电性标记 ③ 出相互作用箭头。 */
 const { $clicks } = useSlideContext();
 const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
 </script>

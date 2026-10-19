@@ -172,7 +172,6 @@ const radiusMid = computed(() => ({
   display: flex;
   gap: 1.1rem;
   align-items: center;
-
   width: 100%;
 }
 

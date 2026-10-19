@@ -36,6 +36,7 @@
 
   background: var(--c-surface);
   color: var(--c-text-dim);
+
   font-size: 0.82rem;
   line-height: 1.4;
 }

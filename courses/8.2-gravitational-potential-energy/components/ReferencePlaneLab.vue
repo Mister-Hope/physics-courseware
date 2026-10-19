@@ -30,9 +30,9 @@ const wG = computed(() => M * G * (H_A - H_B));
 const dEp = computed(() => epB.value - epA.value);
 
 /** 高度 → 图上的 y 坐标 */
-const y = (h: number) => BOTTOM - ((h - H_MIN) / (H_MAX - H_MIN)) * (BOTTOM - TOP);
+const y = (h: number): number => BOTTOM - ((h - H_MIN) / (H_MAX - H_MIN)) * (BOTTOM - TOP);
 
-const jTex = (lhs: string, value: number) => `${lhs} = ${value.toFixed(1)}\\ \\text{J}`;
+const jTex = (lhs: string, value: number): string => `${lhs} = ${value.toFixed(1)}\\ \\text{J}`;
 const epATex = computed(() => jTex("E_{pA}", epA.value));
 const epBTex = computed(() => jTex("E_{pB}", epB.value));
 const wGTex = computed(() => jTex("W_G", wG.value));

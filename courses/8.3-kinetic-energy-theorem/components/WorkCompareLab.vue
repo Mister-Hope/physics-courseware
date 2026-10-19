@@ -117,7 +117,6 @@ const w2Tex = computed(() => sciTex(work2.value));
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-
   min-width: 0;
 }
 
@@ -135,17 +134,14 @@ const w2Tex = computed(() => sciTex(work2.value));
 
 .wcl-bar {
   overflow: hidden;
-
   height: 0.6rem;
   border-radius: 999px;
-
   background: var(--c-border);
 }
 
 .wcl-fill {
   height: 100%;
   border-radius: 999px;
-
   background: var(--c-accent);
   transition: width 0.25s ease;
 }
@@ -162,6 +158,7 @@ const w2Tex = computed(() => sciTex(work2.value));
   justify-content: center;
 
   color: var(--c-text);
+
   font-size: 1.05rem;
 }
 

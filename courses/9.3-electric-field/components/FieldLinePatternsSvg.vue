@@ -40,42 +40,14 @@ const DIP_ARROWS = [
 
 <template>
   <svg viewBox="0 0 900 300" class="w-full h-full">
-    <CourseArrow
-      v-for="(line, i) in OUT_LINES"
-      :key="`o${i}`"
-      :from="line.from"
-      :to="line.to"
-      stroke="var(--c-field)"
-      :stroke-width="2"
-    />
+    <CourseArrow v-for="(line, i) in OUT_LINES" :key="`o${i}`" :from="line.from" :to="line.to" stroke="var(--c-field)" :stroke-width="2" />
     <circle :cx="PLUS.x" :cy="PLUS.y" r="16" fill="var(--c-danger)" fill-opacity="0.9" />
     <text :x="PLUS.x" :y="PLUS.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="#fff">+</text>
-    <CourseArrow
-      v-for="(line, i) in IN_LINES"
-      :key="`i${i}`"
-      :from="line.from"
-      :to="line.to"
-      stroke="var(--c-field)"
-      :stroke-width="2"
-    />
+    <CourseArrow v-for="(line, i) in IN_LINES" :key="`i${i}`" :from="line.from" :to="line.to" stroke="var(--c-field)" :stroke-width="2" />
     <circle :cx="MINUS.x" :cy="MINUS.y" r="16" fill="var(--c-velocity)" fill-opacity="0.9" />
     <text :x="MINUS.x" :y="MINUS.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="16" fill="#fff">−</text>
-    <path
-      v-for="(d, i) in DIP_CURVES"
-      :key="`d${i}`"
-      :d="d"
-      fill="none"
-      stroke="var(--c-field)"
-      stroke-width="2"
-    />
-    <CourseArrow
-      v-for="(arrow, i) in DIP_ARROWS"
-      :key="`da${i}`"
-      :from="arrow.from"
-      :to="arrow.to"
-      stroke="var(--c-field)"
-      :stroke-width="2.4"
-    />
+    <path v-for="(d, i) in DIP_CURVES" :key="`d${i}`" :d="d" fill="none" stroke="var(--c-field)" stroke-width="2" />
+    <CourseArrow v-for="(arrow, i) in DIP_ARROWS" :key="`da${i}`" :from="arrow.from" :to="arrow.to" stroke="var(--c-field)" :stroke-width="2.4" />
     <circle :cx="DIP_PLUS.x" :cy="DIP_PLUS.y" r="14" fill="var(--c-danger)" fill-opacity="0.9" />
     <text :x="DIP_PLUS.x" :y="DIP_PLUS.y" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="15" fill="#fff">+</text>
     <circle :cx="DIP_MINUS.x" :cy="DIP_MINUS.y" r="14" fill="var(--c-velocity)" fill-opacity="0.9" />

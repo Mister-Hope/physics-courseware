@@ -170,16 +170,15 @@ const onInput = (event: Event): void => {
   height: 2rem;
   margin: 0;
 
-  color-scheme: dark;
-
   cursor: pointer;
 
   accent-color: var(--c-accent);
+
+  color-scheme: dark;
 }
 
 .cs-input:disabled {
   opacity: 0.45;
-
   cursor: not-allowed;
 }
 
@@ -190,13 +189,13 @@ const onInput = (event: Event): void => {
 
   width: auto;
   min-width: 5rem;
-  white-space: nowrap;
 
   color: var(--c-text);
 
   font-weight: 600;
   font-family: "JetBrains Mono", monospace;
   text-align: right;
+  white-space: nowrap;
 }
 
 /* ── 紧凑档（`layout="tight"`）：面板单元格本来就窄（2×2 网格、半栏小卡片）时用 ──
@@ -209,7 +208,6 @@ const onInput = (event: Event): void => {
 .cs-row-tight .cs-label,
 .cs-row-tight .cs-value {
   font-size: 1rem !important;
-
   line-height: 1.2;
 }
 

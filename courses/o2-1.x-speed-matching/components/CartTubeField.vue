@@ -364,7 +364,6 @@ const LAND_LABEL = { x: pct(484, VB_W), y: pct(160, VB_H) };
   --fig-max: 540px;
 
   position: relative;
-
   width: 100%;
   max-width: var(--fig-max);
   margin: 0 auto;

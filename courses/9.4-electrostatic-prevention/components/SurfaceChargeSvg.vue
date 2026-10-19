@@ -45,7 +45,7 @@ const tipCharges = [
         dominant-baseline="central"
         font-family="KaTeX_Main"
         font-size="16"
-        fill="var(--c-accent-2)"
+        fill="var(--c-danger)"
       >
         +
       </text>

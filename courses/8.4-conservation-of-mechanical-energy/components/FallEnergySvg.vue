@@ -12,24 +12,29 @@
     <CourseArrow :from="{ x: 182, y: 92 }" :to="{ x: 182, y: 146 }" stroke="var(--c-accent-2)" :stroke-width="2.6" stroke-dasharray="8 6" />
     <text x="194" y="124" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
     <text x="90" y="128" font-size="15" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
-      h<tspan font-size="10" dy="3">1</tspan>
+      h
+      <tspan font-size="10" dy="3">1</tspan>
     </text>
     <text x="90" y="206" font-size="15" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
-      h<tspan font-size="10" dy="3">2</tspan>
+      h
+      <tspan font-size="10" dy="3">2</tspan>
     </text>
     <line x1="404" y1="58" x2="792" y2="58" stroke="var(--c-accent)" stroke-width="1.8" stroke-dasharray="8 6" opacity="0.55" />
     <text x="694" y="46" font-size="15" fill="var(--c-accent)" font-family="system-ui">总机械能</text>
     <rect x="424" y="58" width="120" height="156" fill="var(--c-ok)" fill-opacity="0.18" stroke="var(--c-ok)" stroke-width="2.4" />
     <text x="452" y="144" font-size="18" fill="var(--c-ok)" font-family="KaTeX_Main">
-      E<tspan font-size="12" dy="4">p</tspan>
+      E
+      <tspan font-size="12" dy="4">p</tspan>
     </text>
     <rect x="624" y="152" width="120" height="62" fill="var(--c-ok)" fill-opacity="0.18" stroke="var(--c-ok)" stroke-width="2.4" />
     <text x="650" y="190" font-size="18" fill="var(--c-ok)" font-family="KaTeX_Main">
-      E<tspan font-size="12" dy="4">p</tspan>
+      E
+      <tspan font-size="12" dy="4">p</tspan>
     </text>
     <rect x="624" y="58" width="120" height="94" fill="var(--c-accent-2)" fill-opacity="0.18" stroke="var(--c-accent-2)" stroke-width="2.4" />
     <text x="650" y="112" font-size="18" fill="var(--c-accent-2)" font-family="KaTeX_Main">
-      E<tspan font-size="12" dy="4">k</tspan>
+      E
+      <tspan font-size="12" dy="4">k</tspan>
     </text>
     <text x="190" y="242" font-size="15" fill="var(--c-text-dim)" font-family="system-ui" text-anchor="middle">下落过程</text>
     <text x="584" y="242" font-size="15" fill="var(--c-text-dim)" font-family="system-ui" text-anchor="middle">两个位置的能量条</text>

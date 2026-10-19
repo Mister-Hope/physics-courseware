@@ -146,6 +146,7 @@ const alphaAt = computed(() => {
   gap: 1.4rem;
   align-items: center;
   justify-content: center;
+
   width: 100%;
 }
 
@@ -160,7 +161,9 @@ const alphaAt = computed(() => {
   flex: 1;
   flex-direction: column;
   gap: 0.55rem;
+
   min-width: 0;
+
   font-size: 0.95rem;
 }
 

@@ -17,7 +17,8 @@
     <circle cx="208" cy="146" r="14" fill="var(--c-accent-2)" fill-opacity="0.22" stroke="var(--c-accent-2)" stroke-width="3" />
     <CourseArrow :from="{ x: 208, y: 146 }" :to="{ x: 208, y: 112 }" stroke="var(--c-ok)" :stroke-width="3" />
     <text x="220" y="126" font-size="15" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
-      F<tspan font-size="10" dy="3" font-family="system-ui" font-style="normal">弹</tspan>
+      F
+      <tspan font-size="10" dy="3" font-family="system-ui" font-style="normal">弹</tspan>
     </text>
     <CourseArrow :from="{ x: 240, y: 138 }" :to="{ x: 240, y: 78 }" stroke="var(--c-accent-2)" :stroke-width="2.4" />
     <text x="252" y="102" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
@@ -28,7 +29,8 @@
     <circle cx="662" cy="162" r="14" fill="var(--c-accent-2)" fill-opacity="0.22" stroke="var(--c-accent-2)" stroke-width="3" />
     <CourseArrow :from="{ x: 662, y: 162 }" :to="{ x: 662, y: 128 }" stroke="var(--c-ok)" :stroke-width="3" />
     <text x="674" y="142" font-size="15" fill="var(--c-ok)" font-family="KaTeX_Math" font-style="italic">
-      F<tspan font-size="10" dy="3" font-family="system-ui" font-style="normal">弹</tspan>
+      F
+      <tspan font-size="10" dy="3" font-family="system-ui" font-style="normal">弹</tspan>
     </text>
     <CourseArrow :from="{ x: 694, y: 154 }" :to="{ x: 694, y: 94 }" stroke="var(--c-accent-2)" :stroke-width="2.4" />
     <text x="706" y="118" font-size="15" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic">v</text>
