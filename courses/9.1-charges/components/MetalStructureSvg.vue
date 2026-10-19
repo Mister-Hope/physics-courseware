@@ -5,15 +5,17 @@
  * - Mode="conductor"（第 10 页）：自由电子画成**无规则热运动**（循环 CSS 动画，速率远大于定向移动）； showElectronFlow 另出"定向移动"箭头，showInsulator 出绝缘体对照。
  * - Mode="induction"（第 12 页）：中性点阵 + showInducedCharges 时自由电子聚到近端， 两端净电荷**个数相等**（左 4 个 −、右 4 个 +），一眼能看出电荷守恒。
  */
-withDefaults(
-  defineProps<{
-    mode?: "conductor" | "induction";
-    showElectronFlow?: boolean;
-    showInsulator?: boolean;
-    showInducedCharges?: boolean;
-  }>(),
-  { mode: "conductor", showElectronFlow: false, showInsulator: false, showInducedCharges: false },
-);
+const {
+  mode = "conductor",
+  showElectronFlow = false,
+  showInsulator = false,
+  showInducedCharges = false,
+} = defineProps<{
+  mode?: "conductor" | "induction";
+  showElectronFlow?: boolean;
+  showInsulator?: boolean;
+  showInducedCharges?: boolean;
+}>();
 
 /** 导体态：8 个正离子、8 个自由电子（金属整体对外不显电性） */
 const ions = [

@@ -21,6 +21,12 @@ export default defineHopeConfig(
     plugins: ["vue"],
     rules: { "vue/max-props": ["warn", { maxProps: 12 }] },
   },
+  // `CoordAxes` 是共享坐标图的**唯一实现**：坐标轴 / 刻度 / 曲线 / 标注 / 区域填充 / 分步全在一处，
+  // 拆开会让 ` ```comp ` 代码块的 props 契约碎成一摊（页面侧体验更差），因此允许它超过 500 行。
+  {
+    files: ["workspace/shared/components/CoordAxes.vue"],
+    rules: { "max-lines": "off" },
+  },
   // 共享 addon 的布局同样是**设计系统原语**（封面要接章名 / 编号 / 课时 / 副标题 / 授课信息，外加 Slidev 附带的完整
   // frontmatter），字段天然比业务组件多；与上面两类组件同理放宽 max-props，仍然设上限。
   {

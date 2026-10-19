@@ -1,12 +1,9 @@
 <script setup lang="ts">
 // 第 3 页：匀强电场中的矩形导体 ABCD —— 感应电荷与内部 E'
-withDefaults(
-  defineProps<{
-    showCharges?: boolean;
-    showInducedField?: boolean;
-  }>(),
-  { showCharges: false, showInducedField: false },
-);
+const { showCharges = false, showInducedField = false } = defineProps<{
+  showCharges?: boolean;
+  showInducedField?: boolean;
+}>();
 
 const ys = [56, 92, 128, 164, 200];
 const minusY = [86, 118, 150, 182];

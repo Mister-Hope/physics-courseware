@@ -23,7 +23,7 @@ const O = { x: 210, y: 44 };
 const LEFT = { x: O.x - 100, y: O.y + 240 };
 const RIGHT = { x: O.x + 100, y: O.y + 240 };
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: ((y - VB_Y0) / VB_H) * 100,
 });

@@ -31,11 +31,11 @@ const SPHERE_DIRS = Array.from({ length: 8 }, (_, i) => {
   return { x: Math.cos(a), y: Math.sin(a) };
 });
 
-function sci(value: number, digits = 2) {
+const sci = (value: number, digits = 2): { m: string; e: number } => {
   const e = Math.floor(Math.log10(value));
   const m = value / 10 ** e;
   return { m: m.toFixed(digits), e };
-}
+};
 const eTex = computed(() => {
   const s = sci(E.value);
   return `E = ${s.m}\\times 10^{${s.e}}\\ \\text{N/C}`;

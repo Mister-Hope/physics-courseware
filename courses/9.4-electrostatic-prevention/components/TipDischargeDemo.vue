@@ -2,7 +2,7 @@
 // 第 6 页：尖端放电 —— 只保留曲率半径 r 一个主导滑块（U 固定 10 kV）；E尖 = U/r 只用于内部判断，屏幕只给读数与状态
 import { computed, ref } from "vue";
 
-const props = defineProps<{ step: number }>();
+const { step } = defineProps<{ step: number }>();
 
 const U = 10; // kV，固定档
 const r = ref(1); // mm
@@ -15,7 +15,7 @@ const etipTex = computed(() => {
   const m = etip.value / 10 ** e;
   return `${m.toFixed(1)}\\times10^{${e}}\\ \\text{V/m}`;
 });
-const shown = computed(() => props.step >= 1 && discharging.value);
+const shown = computed(() => step >= 1 && discharging.value);
 const molecules = [
   { x: 258, y: 92 },
   { x: 300, y: 120 },
@@ -94,7 +94,7 @@ const molecules = [
           </text>
         </template>
       </template>
-      <template v-if="shown && props.step >= 2">
+      <template v-if="shown && step >= 2">
         <template v-for="i in 3" :key="`a${i}`">
           <circle
             :cx="300 + i * 16"
@@ -129,7 +129,7 @@ const molecules = [
           </text>
         </template>
       </template>
-      <template v-if="shown && props.step >= 3">
+      <template v-if="shown && step >= 3">
         <CourseArrow
           :from="{ x: 262, y: 96 }"
           :to="{ x: 208, y: 44 }"
@@ -166,7 +166,7 @@ const molecules = [
     </CourseSlider>
     <div
       class="text-[0.95rem] whitespace-nowrap tabular-nums"
-      :style="{ visibility: props.step >= 1 ? 'visible' : 'hidden' }"
+      :style="{ visibility: step >= 1 ? 'visible' : 'hidden' }"
     >
       <Latex tex="U=10\ \text{kV}" />　<Latex tex="E_{\text{尖}}=" /><Latex :tex="etipTex" />　
       <span :class="discharging ? 'text-accent' : 'text-dim'">{{

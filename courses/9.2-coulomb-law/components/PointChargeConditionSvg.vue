@@ -12,7 +12,7 @@ const { showMarks = true, showVerdict = true } = defineProps<{
 const VB_W = 560;
 const VB_H = 212;
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });

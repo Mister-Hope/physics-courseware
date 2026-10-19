@@ -3,7 +3,7 @@
  * 第 20 页 练习与应用 3 的题目图（教材图 9.1-5）：带正电的导体球 C 靠近不带电的导体， 沿虚线 1 分成 A、B，沿虚线 2 分成 A′、B′。题目图常显、且保持干净； 正负标注由 showChargeSigns 控制（点击后才出）。 ⚠️ 进 exercise-split 的 #fig 栏，根
  * svg 必须带与 viewBox 同比例的固有 width/height（410×220 ≈ 560×300， 受 #fig 的 42% 上限约束）；图内字号按"最后一排看得清"给，故相对 viewBox 取得较大。
  */
-withDefaults(defineProps<{ showChargeSigns?: boolean }>(), { showChargeSigns: false });
+const { showChargeSigns = false } = defineProps<{ showChargeSigns?: boolean }>();
 </script>
 
 <template>

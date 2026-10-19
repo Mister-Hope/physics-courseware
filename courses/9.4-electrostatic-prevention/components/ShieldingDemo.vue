@@ -2,16 +2,14 @@
 // 第 10 页：静电屏蔽 —— 点击分步三态（无屏蔽 / 金属网 / 封闭金属壳）；箔片"张开 → 闭合"用 rAF 形态动画；无滑块、无数值读数
 import { computed, ref, watch } from "vue";
 
-const props = defineProps<{ mode: number }>();
+const { mode } = defineProps<{ mode: number }>();
 
 const open = ref(15); // 当前箔片张角（度）
 let raf = 0;
 
-function target() {
-  return props.mode === 0 ? 15 : 0;
-}
+const target = (): number => (mode === 0 ? 15 : 0);
 
-function animate() {
+const animate = (): void => {
   if (typeof requestAnimationFrame === "undefined") {
     open.value = target();
     return;
@@ -21,16 +19,16 @@ function animate() {
   const to = target();
   const start = performance.now();
   const dur = 420;
-  const tick = (t: number) => {
+  const tick = (t: number): void => {
     const p = Math.min(1, (t - start) / dur);
     open.value = from + (to - from) * p;
     if (p < 1) raf = requestAnimationFrame(tick);
   };
   raf = requestAnimationFrame(tick);
-}
+};
 
 watch(
-  () => props.mode,
+  () => mode,
   () => animate(),
 );
 
@@ -123,7 +121,7 @@ const leaf = computed(() => {
     >
       验电器
     </text>
-    <template v-if="props.mode >= 1">
+    <template v-if="mode >= 1">
       <rect
         x="286"
         y="44"
@@ -133,9 +131,9 @@ const leaf = computed(() => {
         fill="none"
         stroke="var(--c-accent-2)"
         stroke-width="2.4"
-        :stroke-dasharray="props.mode === 1 ? '8 6' : '0'"
+        :stroke-dasharray="mode === 1 ? '8 6' : '0'"
       />
-      <template v-if="props.mode === 1">
+      <template v-if="mode === 1">
         <line
           v-for="x in [306, 326, 346, 366]"
           :key="`v${x}`"

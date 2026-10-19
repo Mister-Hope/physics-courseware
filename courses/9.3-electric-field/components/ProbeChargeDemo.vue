@@ -10,11 +10,11 @@ const E = computed(() => (K * Q) / (R * R));
 const F = computed(() => E.value * q.value);
 const ratio = computed(() => F.value / q.value);
 
-function sci(v: number, digits = 1) {
+const sci = (v: number, digits = 1): { m: string; e: number } => {
   const e = Math.floor(Math.log10(v));
   const m = v / 10 ** e;
   return { m: m.toFixed(digits), e };
-}
+};
 const qSci = computed(() => sci(q.value));
 const fSci = computed(() => sci(F.value));
 const eSci = computed(() => sci(E.value));

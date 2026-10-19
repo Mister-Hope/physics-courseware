@@ -2,13 +2,13 @@
 // 第 4 页：静电平衡 —— 点击分步（无滑块）：第 1 击弱外电场下 E′ 从 0 长到 E₀；第 2 击换成更强的一档，E内 仍回到 0
 import { computed, onMounted, ref, watch } from "vue";
 
-const props = defineProps<{ step: number }>();
+const { step } = defineProps<{ step: number }>();
 
-const E0 = computed(() => (props.step >= 2 ? 100 : 60));
+const E0 = computed(() => (step >= 2 ? 100 : 60));
 const eta = ref(0);
 let raf = 0;
 
-function run() {
+const run = (): void => {
   if (typeof requestAnimationFrame === "undefined") {
     eta.value = 1;
     return;
@@ -16,23 +16,23 @@ function run() {
   if (raf) cancelAnimationFrame(raf);
   const start = performance.now();
   const dur = 1500;
-  const tick = (t: number) => {
+  const tick = (t: number): void => {
     const p = Math.min(1, (t - start) / dur);
     eta.value = p;
     if (p < 1) raf = requestAnimationFrame(tick);
   };
   eta.value = 0;
   raf = requestAnimationFrame(tick);
-}
+};
 
 watch(
-  () => props.step,
+  () => step,
   (s) => {
     if (s >= 1) run();
   },
 );
 onMounted(() => {
-  if (props.step >= 1) run();
+  if (step >= 1) run();
 });
 
 const Eprime = computed(() => eta.value * E0.value);

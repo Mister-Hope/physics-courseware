@@ -1,8 +1,19 @@
 <script setup lang="ts">
 const ANGLES = [0, 45, 90, 135, 180, 225, 270, 315];
 
-function makeRays(positive: boolean) {
-  return ANGLES.map((deg) => {
+interface Ray {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  tx: number;
+  ty: number;
+  cx: number;
+  cy: number;
+}
+
+const makeRays = (positive: boolean): Ray[] =>
+  ANGLES.map((deg) => {
     const a = (deg * Math.PI) / 180;
     const cos = Math.cos(a);
     const sin = Math.sin(a);
@@ -20,7 +31,6 @@ function makeRays(positive: boolean) {
       cy: 70 + (far + 13) * sin,
     };
   });
-}
 
 const plusRays = makeRays(true);
 const minusRays = makeRays(false);

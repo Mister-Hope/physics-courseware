@@ -6,19 +6,23 @@ const MINUS = { x: 450, y: 140 };
 const DIP_PLUS = { x: 690, y: 140 };
 const DIP_MINUS = { x: 810, y: 140 };
 
-function radial(cx: number, cy: number, count: number, rIn: number, rOut: number) {
-  return Array.from({ length: count }, (_, i) => {
-    const a = (i * Math.PI * 2) / count;
-    return {
-      from: { x: cx + Math.cos(a) * rIn, y: cy + Math.sin(a) * rIn },
-      to: { x: cx + Math.cos(a) * rOut, y: cy + Math.sin(a) * rOut },
-    };
-  });
+interface Arrow {
+  from: { x: number; y: number };
+  to: { x: number; y: number };
 }
 
+const radial = (center: { x: number; y: number }, count: number, rIn: number, rOut: number): Arrow[] =>
+  Array.from({ length: count }, (_, i) => {
+    const a = (i * Math.PI * 2) / count;
+    return {
+      from: { x: center.x + Math.cos(a) * rIn, y: center.y + Math.sin(a) * rIn },
+      to: { x: center.x + Math.cos(a) * rOut, y: center.y + Math.sin(a) * rOut },
+    };
+  });
+
 // 正电荷：场线沿半径向外；负电荷：场线沿半径向内
-const OUT_LINES = radial(PLUS.x, PLUS.y, 8, 22, 90);
-const IN_LINES = radial(MINUS.x, MINUS.y, 8, 90, 22);
+const OUT_LINES = radial(PLUS, 8, 22, 90);
+const IN_LINES = radial(MINUS, 8, 90, 22);
 
 // 等量异种电荷之间的场线（曲线，方向由 + 指向 −）
 const DIP_CURVES = [

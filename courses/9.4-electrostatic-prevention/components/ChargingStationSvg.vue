@@ -1,13 +1,14 @@
 <script setup lang="ts">
 // 第 2 / 17 页：加油站场景 + 静电释放器（可选接地线、电荷转移、放火花的对照小画面）
-withDefaults(
-  defineProps<{
-    showGrounding?: boolean;
-    showChargeFlow?: boolean;
-    showSpark?: boolean;
-  }>(),
-  { showGrounding: false, showChargeFlow: false, showSpark: false },
-);
+const {
+  showGrounding = false,
+  showChargeFlow = false,
+  showSpark = false,
+} = defineProps<{
+  showGrounding?: boolean;
+  showChargeFlow?: boolean;
+  showSpark?: boolean;
+}>();
 
 const charges = [
   { x: 150, y: 196 },

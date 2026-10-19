@@ -26,11 +26,16 @@ interface Pt {
   y: number;
 }
 
+interface Arrow {
+  from: Pt;
+  to: Pt;
+}
+
 const Q1 = { x: 360, y: 85 };
 const Q2 = { x: 540, y: 85 };
 
 /** 合成场强方向（只取方向，电荷量取 ±1） */
-function fieldDir(x: number, y: number): Pt {
+const fieldDir = (x: number, y: number): Pt => {
   const dx1 = x - Q1.x;
   const dy1 = y - Q1.y;
   const r1 = Math.max(6, Math.hypot(dx1, dy1));
@@ -44,10 +49,10 @@ function fieldDir(x: number, y: number): Pt {
     x: (e1 * dx1) / r1 - (e2 * dx2) / r2,
     y: (e1 * dy1) / r1 - (e2 * dy2) / r2,
   };
-}
+};
 
 /** 从某点出发沿场线推进；direction = 1 顺场强方向、-1 逆场强方向 */
-function trace(start: Pt, angleDeg: number, direction: 1 | -1): Pt[] {
+const trace = (start: Pt, angleDeg: number, direction: 1 | -1): Pt[] => {
   const a = (angleDeg * Math.PI) / 180;
   let x = start.x + Math.cos(a) * 13;
   let y = start.y + Math.sin(a) * 13;
@@ -74,13 +79,10 @@ function trace(start: Pt, angleDeg: number, direction: 1 | -1): Pt[] {
     }
   }
   return points;
-}
+};
 
-function toPath(points: Pt[]) {
-  return points
-    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
-    .join(" ");
-}
+const toPath = (points: Pt[]): string =>
+  points.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(" ");
 
 // 固定 polylines：正电荷出发 8 条、负电荷反向追踪 5 条、加密用 8 条（挂载时一次算好、之后冻结）
 const ANGLES = [0, 45, 90, 135, 180, 225, 270, 315];
@@ -93,11 +95,11 @@ const BASE_CURVES = [
 ];
 const DENSE_CURVES = DENSE_ANGLES.map((a) => trace(Q1, a, 1));
 
-const BASE_PATHS = BASE_CURVES.map(toPath);
-const DENSE_PATHS = DENSE_CURVES.map(toPath);
+const BASE_PATHS = BASE_CURVES.map((curve) => toPath(curve));
+const DENSE_PATHS = DENSE_CURVES.map((curve) => toPath(curve));
 
 /** 曲线上画方向箭头的位置（约在曲线 55% 处）与方向（相邻两点差分） */
-function midArrow(points: Pt[]) {
+const midArrow = (points: Pt[]): Arrow => {
   const idx = Math.max(1, Math.min(points.length - 2, Math.round(points.length * 0.55)));
   const a = points[idx - 1];
   const b = points[idx + 1] ?? points[idx];
@@ -109,11 +111,11 @@ function midArrow(points: Pt[]) {
     from: { x: start.x - (dx / len) * 13, y: start.y - (dy / len) * 13 },
     to: { x: start.x + (dx / len) * 13, y: start.y + (dy / len) * 13 },
   };
-}
-const BASE_ARROWS = BASE_CURVES.filter((c) => c.length > 6).map(midArrow);
+};
+const BASE_ARROWS = BASE_CURVES.filter((c) => c.length > 6).map((curve) => midArrow(curve));
 
 // P 走的那条：从正电荷 45° 出发的弯曲线（靠电荷处切线陡、拱顶处切线平）
-const MAIN = BASE_CURVES[1];
+const [, MAIN] = BASE_CURVES;
 const CUM: number[] = [0];
 for (let i = 1; i < MAIN.length; i += 1)
   CUM.push(CUM[i - 1] + Math.hypot(MAIN[i].x - MAIN[i - 1].x, MAIN[i].y - MAIN[i - 1].y));
@@ -124,7 +126,7 @@ const RATIO_NEAR = 0.16; // 靠正电荷：切线陡、场线密
 const RATIO_ARCH = 0.62; // 曲线拱顶：切线平、场线疏
 
 /** 按弧长比例取点，并给出该点切线方向（相邻两点差分 = 该点合成场强方向） */
-function pickedAt(ratio: number) {
+const pickedAt = (ratio: number): { point: Pt; tanStart: Pt; tanEnd: Pt; eEnd: Pt } => {
   const target = ratio * TOTAL;
   let i = 1;
   while (i < CUM.length - 1 && CUM[i] < target) i += 1;
@@ -145,19 +147,19 @@ function pickedAt(ratio: number) {
     tanEnd: { x: point.x + dir.x * 60, y: point.y + dir.y * 60 },
     eEnd: { x: point.x + dir.x * 42, y: point.y + dir.y * 42 },
   };
-}
+};
 
 // 沿弧长的逐帧滑动：从"靠正电荷"滑到"拱顶"（切线随位置连续转），不是换图
 const ratio = ref(RATIO_NEAR);
 const picked = computed(() => pickedAt(ratio.value));
 
 let rafId = 0;
-function slideTo(target: number): void {
+const slideTo = (target: number): void => {
   const start = ratio.value;
   const t0 = performance.now();
   const DURATION = 760;
   cancelAnimationFrame(rafId);
-  const frame = (now: number) => {
+  const frame = (now: number): void => {
     const p = Math.min(1, (now - t0) / DURATION);
     // ease-in-out：起止平缓、中间快，看起来像"顺着场线滑过去"
     const e = p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2;
@@ -165,7 +167,7 @@ function slideTo(target: number): void {
     if (p < 1) rafId = requestAnimationFrame(frame);
   };
   rafId = requestAnimationFrame(frame);
-}
+};
 
 // 第 3 击（疏密对照）时滑到拱顶：位置变、切线方向随之变，同时场线加密
 watch(

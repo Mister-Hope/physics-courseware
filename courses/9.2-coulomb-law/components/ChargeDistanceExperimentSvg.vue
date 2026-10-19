@@ -18,7 +18,7 @@ const L = 99;
 const CX = 190;
 const CY = 148;
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });
@@ -41,10 +41,11 @@ const balls = spots.map((spot) => {
 });
 
 /** 距离标注（r₁、r₂、r₃）放在「球—C」连线的中点稍下方 */
-const distMarks = balls.map((ball, index) => ({
-  ...pct((CX + ball.bx) / 2, (CY + ball.by) / 2 + 20),
-  tex: `r_${index + 1}`,
-}));
+const distMarks = balls.map((ball, index) => {
+  const mark = pct((CX + ball.bx) / 2, (CY + ball.by) / 2 + 20);
+
+  return { xPercent: mark.xPercent, yPercent: mark.yPercent, tex: `r_${index + 1}` };
+});
 </script>
 
 <template>

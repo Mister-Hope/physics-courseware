@@ -32,11 +32,11 @@ const QX = 80;
 const QY = 84;
 const px = computed(() => QX + 110 + ((r.value - 0.1) / 0.3) * 250);
 
-function sci(value: number, digits = 2) {
+const sci = (value: number, digits = 2): { m: string; e: number } => {
   const e = Math.floor(Math.log10(value));
   const m = value / 10 ** e;
   return { m: m.toFixed(digits), e };
-}
+};
 // 滑块自带的读数会按 toFixed 显示（q ~ 1e-8 时被压成 0.0），故用 #value 槽自己给科学计数法。
 // 指数固定为 10⁻⁸（本页 q 只取 0.5–3.0 ×10⁻⁸）：否则跨过 1.0 时指数会从 10⁻⁹ 跳到 10⁻⁸，
 // 读数宽度跟着变、拖动时滑块宽度会抖。

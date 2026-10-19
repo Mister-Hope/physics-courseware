@@ -50,7 +50,7 @@ const tmpA = new Vector3();
 const tmpB = new Vector3();
 
 /** 合成场强方向（只关心方向，电荷量取 ±1；与电荷重合处做最小距离保护） */
-function fieldAt(p: Vector3, out: Vector3): Vector3 {
+const fieldAt = (p: Vector3, out: Vector3): Vector3 => {
   out.set(0, 0, 0);
   for (const charge of CHARGES) {
     tmpA.subVectors(p, charge.pos);
@@ -58,10 +58,10 @@ function fieldAt(p: Vector3, out: Vector3): Vector3 {
     out.addScaledVector(tmpA, charge.q / (r * r * r));
   }
   return out;
-}
+};
 
 /** 从正电荷出发、沿场线推进（中点法），直到落到负电荷或飞出边界 */
-function traceLine(dir: Vector3): Vector3[] {
+const traceLine = (dir: Vector3): Vector3[] => {
   const points: Vector3[] = [];
   const p = CHARGES[0].pos.clone().addScaledVector(dir, 0.3);
   const k1 = new Vector3();
@@ -80,10 +80,10 @@ function traceLine(dir: Vector3): Vector3[] {
     }
   }
   return points;
-}
+};
 
 /** 均匀分布在球面上的种子方向（斐波那契球） */
-function sphereSeeds(count: number): Vector3[] {
+const sphereSeeds = (count: number): Vector3[] => {
   const seeds: Vector3[] = [];
   const golden = Math.PI * (3 - Math.sqrt(5));
   for (let i = 0; i < count; i += 1) {
@@ -93,17 +93,17 @@ function sphereSeeds(count: number): Vector3[] {
     seeds.push(new Vector3(Math.cos(theta) * r, y, Math.sin(theta) * r).normalize());
   }
   return seeds;
-}
+};
 const SEEDS = sphereSeeds(72);
-const LINES = SEEDS.map(traceLine);
+const LINES = SEEDS.map((dir) => traceLine(dir));
 
 // ── 主题色（与课件设计系统一致；取不到时用回退色）──────────
-function cssColor(name: string, fallback: string): number {
-  if (typeof window === "undefined") return Number.parseInt(fallback.slice(1), 16);
+const cssColor = (name: string, fallback: string): number => {
+  if (!("window" in globalThis)) return Number.parseInt(fallback.slice(1), 16);
   const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   const hex = value.startsWith("#") ? value : fallback;
   return Number.parseInt(hex.slice(1), 16);
-}
+};
 
 // ── three.js 场景 ──────────────────────────────────────────
 let renderer: WebGLRenderer | null = null;
@@ -137,7 +137,7 @@ const syncRendererScale = (force = false): void => {
   if (!el || !renderer) return;
   const ratio = Math.max(
     1,
-    Math.min(window.devicePixelRatio * getElementScale(el), MAX_PIXEL_RATIO),
+    Math.min(globalThis.devicePixelRatio * getElementScale(el), MAX_PIXEL_RATIO),
   );
   const changed = Math.abs(ratio - appliedPixelRatio) >= 0.01;
   if (changed) {
@@ -158,7 +158,7 @@ const updateCamera = (): void => {
   camera.lookAt(0, 0, 0);
 };
 
-function buildFieldLines(colors: { field: number; plus: number; minus: number }): Group {
+const buildFieldLines = (colors: { field: number; plus: number; minus: number }): Group => {
   const group = new Group();
 
   // 场线：所有曲线合并成一份 LineSegments（一次绘制，帧率稳）
@@ -211,9 +211,9 @@ function buildFieldLines(colors: { field: number; plus: number; minus: number })
   group.add(arrowGroup);
 
   return group;
-}
+};
 
-function buildCharges(colors: { plus: number; minus: number }): Group {
+const buildCharges = (colors: { plus: number; minus: number }): Group => {
   const group = new Group();
   const geometry = new SphereGeometry(0.3, 32, 32);
 
@@ -254,9 +254,22 @@ function buildCharges(colors: { plus: number; minus: number }): Group {
   }
 
   return group;
-}
+};
 
-function initScene(): void {
+const animate = (): void => {
+  animId = requestAnimationFrame(animate);
+  if (!visible || !renderer || !scene || !camera) return;
+
+  const now = performance.now();
+  const delta = Math.min(0.05, (now - lastTime) / 1000 || 0);
+  lastTime = now;
+
+  if (autoRotate && !dragging.value) azimuth += delta * 0.16;
+  updateCamera();
+  renderer.render(scene, camera);
+};
+
+const initScene = (): void => {
   const el = mountEl.value;
   if (!el) return;
 
@@ -297,20 +310,7 @@ function initScene(): void {
     // WebGL 不可用（极少数环境）：静默降级，不占用版面、不报错
     renderer = null;
   }
-}
-
-function animate(): void {
-  animId = requestAnimationFrame(animate);
-  if (!visible || !renderer || !scene || !camera) return;
-
-  const now = performance.now();
-  const delta = Math.min(0.05, (now - lastTime) / 1000 || 0);
-  lastTime = now;
-
-  if (autoRotate && !dragging.value) azimuth += delta * 0.16;
-  updateCamera();
-  renderer.render(scene, camera);
-}
+};
 
 const handleResize = (): void => {
   const el = mountEl.value;
@@ -320,23 +320,23 @@ const handleResize = (): void => {
   syncRendererScale(true);
 };
 
-function onPointerDown(event: PointerEvent): void {
+const onPointerDown = (event: PointerEvent): void => {
   dragging.value = true;
   lastX = event.clientX;
   lastY = event.clientY;
   (event.target as Element).setPointerCapture?.(event.pointerId);
-}
-function onPointerMove(event: PointerEvent): void {
+};
+const onPointerMove = (event: PointerEvent): void => {
   if (!dragging.value) return;
   azimuth -= (event.clientX - lastX) * 0.008;
   elevation = Math.min(1.15, Math.max(-1.15, elevation + (event.clientY - lastY) * 0.006));
   lastX = event.clientX;
   lastY = event.clientY;
-}
-function onPointerUp(event: PointerEvent): void {
+};
+const onPointerUp = (event: PointerEvent): void => {
   dragging.value = false;
   (event.target as Element).releasePointerCapture?.(event.pointerId);
-}
+};
 
 watch(
   () => showArrows,

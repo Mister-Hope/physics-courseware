@@ -8,18 +8,22 @@ defineProps<{ showFieldA?: boolean; showFieldB?: boolean }>();
 const A = { x: 130, y: 165 };
 const B = { x: 290, y: 160 };
 
-function radial(cx: number, cy: number, count: number, rIn: number, rOut: number) {
-  return Array.from({ length: count }, (_, i) => {
-    const a = (i * Math.PI * 2) / count;
-    return {
-      from: { x: cx + Math.cos(a) * rIn, y: cy + Math.sin(a) * rIn },
-      to: { x: cx + Math.cos(a) * rOut, y: cy + Math.sin(a) * rOut },
-    };
-  });
+interface Arrow {
+  from: { x: number; y: number };
+  to: { x: number; y: number };
 }
 
-const FIELD_A = radial(A.x, A.y, 6, 30, 108);
-const FIELD_B = radial(B.x, B.y, 6, 108, 30);
+const radial = (center: { x: number; y: number }, count: number, rIn: number, rOut: number): Arrow[] =>
+  Array.from({ length: count }, (_, i) => {
+    const a = (i * Math.PI * 2) / count;
+    return {
+      from: { x: center.x + Math.cos(a) * rIn, y: center.y + Math.sin(a) * rIn },
+      to: { x: center.x + Math.cos(a) * rOut, y: center.y + Math.sin(a) * rOut },
+    };
+  });
+
+const FIELD_A = radial(A, 6, 30, 108);
+const FIELD_B = radial(B, 6, 108, 30);
 
 // 相互作用力：沿 A、B 连线，方向相反、大小相等，都从带电体的几何中心出发
 const F_ON_B = { from: { x: B.x, y: B.y }, to: { x: 214, y: 162.4 } };

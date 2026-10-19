@@ -4,9 +4,7 @@
 defineProps<{ showE?: boolean; showF?: boolean }>();
 
 const LINES = [90, 120, 150, 180, 210];
-function linePath(yLeft: number, yRight: number) {
-  return `M 55 ${yLeft} C 175 ${yLeft} 335 ${yRight} 455 ${yRight}`;
-}
+const linePath = (yLeft: number, yRight: number): string => `M 55 ${yLeft} C 175 ${yLeft} 335 ${yRight} 455 ${yRight}`;
 const paths = LINES.map((y) => linePath(150 + (y - 150) * 0.55, 150 + (y - 150) * 1.7));
 </script>
 

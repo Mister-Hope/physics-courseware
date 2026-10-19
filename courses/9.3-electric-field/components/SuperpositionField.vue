@@ -22,11 +22,11 @@ const e1Len = computed(() => e1.value * SCALE);
 const e2Len = computed(() => e2.value * SCALE);
 const eLen = computed(() => eMag.value * SCALE);
 
-function sci(v: number, digits = 1) {
+const sci = (v: number, digits = 1): { m: string; e: number } => {
   const e = Math.floor(Math.log10(v));
   const m = v / 10 ** e;
   return { m: m.toFixed(digits), e };
-}
+};
 const eSci = computed(() => sci(eMag.value));
 const e1Sci = computed(() => sci(e1.value));
 const e2Sci = computed(() => sci(Math.abs(e2.value)));

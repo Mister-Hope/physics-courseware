@@ -35,7 +35,7 @@ const f2Tip = { x: Q3.x - L * SIN30, y: Q3.y - L * COS30 };
 /** 合力按平行四边形定则取真实长度：2L·cos30° */
 const fTip = { x: Q3.x, y: Q3.y - 2 * L * COS30 };
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });

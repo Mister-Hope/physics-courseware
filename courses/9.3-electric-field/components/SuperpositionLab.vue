@@ -46,7 +46,7 @@ const ey = computed(() => e1.value * u1.value.y + e2.value * u2.value.y);
 const eMag = computed(() => Math.hypot(ex.value, ey.value));
 
 /** 箭头长度既受"画布边界"约束也受上限约束：长度可以压，方向一点不能改（改了矢量关系就假了） */
-function fitLen(ux: number, uy: number, want: number): number {
+const fitLen = (ux: number, uy: number, want: number): number => {
   const M = 10; // 画布内边距（视图单位）
   let len = want;
   if (ux > 1e-6) len = Math.min(len, (700 - M - P.value.x) / ux);
@@ -54,7 +54,7 @@ function fitLen(ux: number, uy: number, want: number): number {
   if (uy > 1e-6) len = Math.min(len, (150 - M - P.value.y) / uy);
   else if (uy < -1e-6) len = Math.min(len, (M - P.value.y) / uy);
   return Math.max(6, len);
-}
+};
 
 const len1 = computed(() => fitLen(u1.value.x, u1.value.y, Math.min(118, e1.value * SCALE)));
 const len2 = computed(() => fitLen(u2.value.x, u2.value.y, Math.min(118, e2.value * SCALE)));
@@ -83,7 +83,7 @@ const eEnd = computed(() => {
 const svgRef = ref<SVGSVGElement | null>(null);
 const dragging = ref(false);
 
-function updateFromEvent(event: PointerEvent) {
+const updateFromEvent = (event: PointerEvent): void => {
   const svg = svgRef.value;
   if (!svg) return;
   const rect = svg.getBoundingClientRect();
@@ -93,32 +93,32 @@ function updateFromEvent(event: PointerEvent) {
     x: Math.min(676, Math.max(24, x)),
     y: Math.min(130, Math.max(18, y)),
   };
-}
+};
 
-function onPointerDown(event: PointerEvent) {
+const onPointerDown = (event: PointerEvent): void => {
   dragging.value = true;
   (event.target as Element).setPointerCapture?.(event.pointerId);
   updateFromEvent(event);
-}
+};
 
-function onPointerMove(event: PointerEvent) {
+const onPointerMove = (event: PointerEvent): void => {
   if (dragging.value) updateFromEvent(event);
-}
+};
 
-function onPointerUp(event: PointerEvent) {
+const onPointerUp = (event: PointerEvent): void => {
   dragging.value = false;
   (event.target as Element).releasePointerCapture?.(event.pointerId);
-}
+};
 
-function sci(value: number, digits = 2) {
+const sci = (value: number, digits = 2): { m: string; e: number } => {
   const e = Math.floor(Math.log10(value));
   const m = value / 10 ** e;
   return { m: m.toFixed(digits), e };
-}
-function fieldTex(name: string, value: number) {
+};
+const fieldTex = (name: string, value: number): string => {
   const s = sci(value);
   return `${name} = ${s.m}\\times 10^{${s.e}}\\ \\text{N/C}`;
-}
+};
 const e1Tex = computed(() => fieldTex("E_1", e1.value));
 const e2Tex = computed(() => fieldTex("E_2", e2.value));
 const eTex = computed(() => fieldTex("E", eMag.value));

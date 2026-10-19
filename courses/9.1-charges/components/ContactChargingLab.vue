@@ -27,7 +27,7 @@ const a1Tex = computed(() => (r1Split.value ? "Q/2" : "+Q"));
 const b1Tex = computed(() => (r1Split.value ? "Q/2" : "0"));
 const a2Tex = computed(() => (r2Split.value ? "-Q" : "+Q"));
 const b2Tex = computed(() => (r2Split.value ? "-Q" : "-3Q"));
-const colorOf = (t: string) =>
+const colorOf = (t: string): string =>
   t.startsWith("+") || t === "Q/2"
     ? "var(--c-danger)"
     : t === "0"

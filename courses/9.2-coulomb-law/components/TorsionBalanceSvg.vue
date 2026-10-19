@@ -27,7 +27,7 @@ const C = { x: 62, y: 166 };
 const pointerRef = { x: HEAD.x + 42, y: HEAD.y };
 const pointerTurned = { x: HEAD.x + 42 * Math.cos((20 * Math.PI) / 180), y: HEAD.y + 42 * Math.sin((20 * Math.PI) / 180) };
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });

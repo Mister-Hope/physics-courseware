@@ -52,7 +52,7 @@ const aMarkOpacity = (index: number): number => (index < 2 || step.value === 0 ?
 /** B：槽位 0、1 接触后淡入（0 → 2）；2、3 一直不用 */
 const bMarkOpacity = (index: number): number => (index < 2 && step.value >= 1 ? 1 : 0);
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });

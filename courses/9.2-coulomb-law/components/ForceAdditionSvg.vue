@@ -31,7 +31,7 @@ const f1Tip = { x: Q.x + L * SIN30, y: Q.y - L * COS30 };
 const f2Tip = { x: Q.x - L * SIN30, y: Q.y - L * COS30 };
 const fTip = { x: Q.x, y: Q.y - 2 * L * COS30 };
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });

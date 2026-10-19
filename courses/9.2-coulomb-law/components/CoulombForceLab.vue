@@ -61,7 +61,7 @@ const outLen = computed(() => Math.min(70, Math.max(18, 20 + 62 * (F.value / 90)
 /** 异种电荷的箭头指向对方 ⇒ 球面间隙小时要收短，两条箭头不能交叉 */
 const inLen = computed(() => Math.max(10, Math.min(outLen.value, gapPx.value / 2 - 4)));
 
-const pct = (x: number, y: number) => ({
+const pct = (x: number, y: number): { xPercent: number; yPercent: number } => ({
   xPercent: (x / VB_W) * 100,
   yPercent: (y / VB_H) * 100,
 });

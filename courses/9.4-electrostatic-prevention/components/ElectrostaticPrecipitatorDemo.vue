@@ -2,11 +2,11 @@
 // 第 14 页：静电除尘 —— 点击分步（无电压滑块）：通电 → B 附近电离 → 电子使粉尘带负电 → 粉尘受 F = qE 吸附到正极 A
 import { computed } from "vue";
 
-const props = defineProps<{ step: number }>();
+const { step } = defineProps<{ step: number }>();
 
-const powered = computed(() => props.step >= 1);
-const charged = computed(() => props.step >= 2);
-const collected = computed(() => props.step >= 3);
+const powered = computed(() => step >= 1);
+const charged = computed(() => step >= 2);
+const collected = computed(() => step >= 3);
 </script>
 
 <template>
