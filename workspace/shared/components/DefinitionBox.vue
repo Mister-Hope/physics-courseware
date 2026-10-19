@@ -26,15 +26,12 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    /** 浮动标题文字（定义的名字） */
-    term: string;
-    /** 主题色：gold = 强调金（默认），blue = 辅助蓝 */
-    tone?: "gold" | "blue";
-  }>(),
-  { tone: "gold" },
-);
+const { term, tone = "gold" } = defineProps<{
+  /** 浮动标题文字（定义的名字） */
+  term: string;
+  /** 主题色：gold = 强调金（默认），blue = 辅助蓝 */
+  tone?: "gold" | "blue";
+}>();
 </script>
 
 <style>

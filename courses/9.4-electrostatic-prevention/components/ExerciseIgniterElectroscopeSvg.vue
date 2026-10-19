@@ -6,13 +6,16 @@ defineProps<{ tipAnalysis?: boolean; ballAnalysis?: boolean }>();
 <template>
   <svg viewBox="0 0 420 280" class="w-full" xmlns="http://www.w3.org/2000/svg" style="height: 270px">
     <text x="112" y="26" text-anchor="middle" font-family="KaTeX_Main" font-size="13" fill="var(--c-text-mute)">点火器</text>
-    <rect x="32" y="86" width="44" height="28" rx="5" fill="var(--c-line)" stroke="var(--c-text-mute)" stroke-opacity="0.5" />
-    <path d="M 76 100 L 100 100" stroke="var(--c-text)" stroke-width="2.4" />
-    <path d="M 100 100 L 92 96 L 92 104 Z" fill="var(--c-text)" />
-    <rect x="164" y="86" width="44" height="28" rx="5" fill="var(--c-line)" stroke="var(--c-text-mute)" stroke-opacity="0.5" />
-    <path d="M 164 100 L 140 100" stroke="var(--c-text)" stroke-width="2.4" />
-    <path d="M 140 100 L 148 96 L 148 104 Z" fill="var(--c-text)" />
-    <path d="M 101 100 L 107 92 L 112 108 L 118 94 L 124 100 L 131 95 L 139 100" fill="none" stroke="var(--c-field)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <polygon points="32,86 74,86 100,100 74,114 32,114" fill="var(--c-line)" stroke="var(--c-text-mute)" stroke-opacity="0.5" />
+    <polygon points="208,86 166,86 140,100 166,114 208,114" fill="var(--c-line)" stroke="var(--c-text-mute)" stroke-opacity="0.5" />
+    <path
+      d="M 101 100 L 107 92 L 112 108 L 118 94 L 124 100 L 131 95 L 139 100"
+      fill="none"
+      stroke="var(--c-field)"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
     <text x="120" y="78" text-anchor="middle" font-family="KaTeX_Main" font-size="11" fill="var(--c-field)">电火花</text>
     <template v-if="tipAnalysis">
       <circle cx="100" cy="100" r="14" fill="none" stroke="var(--c-field)" stroke-width="1.6" stroke-dasharray="4 3" />

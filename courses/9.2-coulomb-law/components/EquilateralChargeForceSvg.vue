@@ -2,14 +2,16 @@
 /**
  * 第 11 页（例题 2）：等边三角形三个顶点上的点电荷，$q_3$ 所受静电力的合成。
  *
- * **常显（干净题目图，无箭头）**：等边三角形 + 三个带正电的小球 + 边长 $a = 50\ \text{cm}$。
- * `showForces` → $q_3$ 受到的两个斥力 $F_1$、$F_2$（从 $q_3$ 的**几何中心**出发、沿两条边向外，等长、夹角 $60^\circ$）；
- * `showParallelogram` → 平行四边形辅助虚线；
- * `showResultant` → 合力 $F$（沿 $q_1$、$q_2$ 连线的垂直平分线向外）+ 半角 $30^\circ$ 标注。
+ * **常显（干净题目图，无箭头）**：等边三角形 + 三个带正电的小球 + 边长 $a = 50\ \text{cm}$。 `showForces` → $q_3$ 受到的两个斥力 $F_1$、$F_2$（从 $q_3$ 的**几何中心**出发、沿两条边向外，等长、夹角 $60^\circ$）；
+ * `showParallelogram` → 平行四边形辅助虚线； `showResultant` → 合力 $F$（沿 $q_1$、$q_2$ 连线的垂直平分线向外）+ 半角 $30^\circ$ 标注。
  *
  * 尺寸：`#fig` 按 `width: max-content` 排版，⛔ 根 `<svg>` 必须给固有 `width`/`height`，否则图栏塌成 0。
  */
-const { showForces = false, showParallelogram = false, showResultant = false } = defineProps<{
+const {
+  showForces = false,
+  showParallelogram = false,
+  showResultant = false,
+} = defineProps<{
   showForces?: boolean;
   showParallelogram?: boolean;
   showResultant?: boolean;
@@ -49,41 +51,8 @@ const pct = (x: number, y: number) => ({
       <line :x1="Q1.x" y1="398" :x2="Q1.x" y2="414" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <line :x1="Q2.x" y1="398" :x2="Q2.x" y2="414" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <circle :cx="Q1.x" :cy="Q1.y" :r="R" fill="var(--c-danger)" fill-opacity="0.85" />
-      <text
-        :x="Q1.x"
-        :y="Q1.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="18"
-        fill="#0c1122"
-      >
-        +
-      </text>
       <circle :cx="Q2.x" :cy="Q2.y" :r="R" fill="var(--c-danger)" fill-opacity="0.85" />
-      <text
-        :x="Q2.x"
-        :y="Q2.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="18"
-        fill="#0c1122"
-      >
-        +
-      </text>
       <circle :cx="Q3.x" :cy="Q3.y" :r="R" fill="var(--c-danger)" fill-opacity="0.85" />
-      <text
-        :x="Q3.x"
-        :y="Q3.y + 1"
-        text-anchor="middle"
-        dominant-baseline="central"
-        font-family="KaTeX_Main"
-        font-size="18"
-        fill="#0c1122"
-      >
-        +
-      </text>
       <g v-if="showForces">
         <CourseArrow :from="Q3" :to="f1Tip" stroke="var(--c-force)" stroke-width="3" />
         <CourseArrow :from="Q3" :to="f2Tip" stroke="var(--c-force)" stroke-width="3" />
@@ -96,26 +65,17 @@ const pct = (x: number, y: number) => ({
         <CourseArrow :from="Q3" :to="fTip" stroke="var(--c-accent)" stroke-width="3.6" />
         <path d="M 240 138 A 34 34 0 0 1 257 142.6" fill="none" stroke="var(--c-accent)" stroke-width="1.6" />
       </g>
+      <!-- 电荷记号必须最后画：三支箭头都从 $q_3$ 的几何中心出发，合力更是一根竖直箭杆，
+           若先画 "+" 会被吃掉竖笔、看起来像 "−"（正电被读成负电）。几何与尺寸一概不动。 -->
+      <text :x="Q1.x" :y="Q1.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#0c1122">+</text>
+      <text :x="Q2.x" :y="Q2.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#0c1122">+</text>
+      <text :x="Q3.x" :y="Q3.y + 1" text-anchor="middle" dominant-baseline="central" font-family="KaTeX_Main" font-size="18" fill="#0c1122">+</text>
     </svg>
     <ChartLabel v-bind="pct(Q1.x, 352)" :parts="[{ tex: 'q_1' }]" :size="17" color="var(--c-accent)" halo />
     <ChartLabel v-bind="pct(Q2.x, 352)" :parts="[{ tex: 'q_2' }]" :size="17" color="var(--c-accent)" halo />
     <ChartLabel v-bind="pct(Q3.x, 134)" :parts="[{ tex: 'q_3' }]" :size="17" color="var(--c-accent)" halo />
-    <ChartLabel
-      v-bind="pct((Q1.x + Q2.x) / 2, 430)"
-      :parts="[{ tex: 'a = 50\\ \\text{cm}' }]"
-      :size="17"
-      color="var(--c-text-dim)"
-    />
-    <ChartLabel
-      v-bind="pct(f1Tip.x, f1Tip.y)"
-      :parts="[{ tex: 'F_1' }]"
-      :visible="showForces"
-      anchor="left"
-      :dx="12"
-      :size="18"
-      color="var(--c-force)"
-      halo
-    />
+    <ChartLabel v-bind="pct((Q1.x + Q2.x) / 2, 430)" :parts="[{ tex: 'a = 50\\ \\text{cm}' }]" :size="17" color="var(--c-text-dim)" />
+    <ChartLabel v-bind="pct(f1Tip.x, f1Tip.y)" :parts="[{ tex: 'F_1' }]" :visible="showForces" anchor="left" :dx="12" :size="18" color="var(--c-force)" halo />
     <ChartLabel
       v-bind="pct(f2Tip.x, f2Tip.y)"
       :parts="[{ tex: 'F_2' }]"
@@ -126,24 +86,8 @@ const pct = (x: number, y: number) => ({
       color="var(--c-force)"
       halo
     />
-    <ChartLabel
-      v-bind="pct(fTip.x, fTip.y)"
-      :parts="[{ tex: 'F' }]"
-      :visible="showResultant"
-      :dx="18"
-      :dy="-8"
-      :size="18"
-      color="var(--c-accent)"
-      halo
-    />
-    <ChartLabel
-      v-bind="pct(256, 110)"
-      :parts="[{ tex: '30^\\circ' }]"
-      :visible="showResultant"
-      :size="15"
-      color="var(--c-accent)"
-      halo
-    />
+    <ChartLabel v-bind="pct(fTip.x, fTip.y)" :parts="[{ tex: 'F' }]" :visible="showResultant" :dx="18" :dy="-8" :size="18" color="var(--c-accent)" halo />
+    <ChartLabel v-bind="pct(256, 110)" :parts="[{ tex: '30^\\circ' }]" :visible="showResultant" :size="15" color="var(--c-accent)" halo />
   </div>
 </template>
 
@@ -151,7 +95,6 @@ const pct = (x: number, y: number) => ({
 /* `exercise-split` 的 `#fig` 是 width: max-content ⇒ 必须给固有尺寸，否则整张图静默消失 */
 .ecf-host {
   position: relative;
-
   width: 300px;
   height: 281px;
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** 受力标注是否显示：题目图常显，受力分析点击后才出（`:show-forces="$clicks >= 1"`） */
-withDefaults(defineProps<{ showForces?: boolean }>(), { showForces: false });
+const { showForces = false } = defineProps<{ showForces?: boolean }>();
 </script>
 
 <template>

@@ -30,7 +30,7 @@ import type { VNode } from "vue";
 import { Comment, Fragment, Text, computed, useSlots } from "vue";
 
 /** Slidev 把该页 frontmatter 直接当 props 传给布局（`frontmatterToProps`），这里只用分界标签这两个 */
-const props = defineProps<{
+const { analysisLabel: labelProp = "", hideQaMark } = defineProps<{
   /** 分界标签文案，默认「解析」（如改「答案」） */
   analysisLabel?: string;
   /** 写 `true` 关掉分界锚点（标签 + 分界线），页面自己写分界时才用 */
@@ -66,9 +66,9 @@ const hasAnalysis = computed(() => hasRealContent(slots.default?.()));
 
 /** 分界标签文案：默认「解析」，可按页覆盖（`analysisLabel: 答案`），`hideQaMark: true` 整个关掉 */
 const analysisLabel = computed(() => {
-  if (!hasAnalysis.value || props.hideQaMark) return "";
+  if (!hasAnalysis.value || hideQaMark) return "";
 
-  const configured = props.analysisLabel;
+  const configured = labelProp;
 
   return typeof configured === "string" && configured.trim() !== "" ? configured.trim() : "解析";
 });

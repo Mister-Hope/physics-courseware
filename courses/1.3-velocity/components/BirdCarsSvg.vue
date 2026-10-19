@@ -68,7 +68,7 @@ const replay = (): void => {
 watch(
   () => step ?? 0,
   (newStep, oldStep) => {
-    if (newStep >= 1 && (oldStep === undefined || oldStep === 0)) {
+    if (newStep >= 1 && !oldStep) {
       // 从初态切到解题步：触发一次动画，播放完毕后停在末态
       replay();
     } else if (newStep >= 1) {

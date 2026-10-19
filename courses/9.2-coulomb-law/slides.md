@@ -109,7 +109,7 @@ title: 库仑的实验
 <div class="divider-l stack">
 <div v-click="1">细银丝的下端悬挂一根绝缘棒，一端是小球 <Latex tex="A" />、另一端通过物体 <Latex tex="B" /> 使棒平衡。带电的小球 <Latex tex="C" /> 与 <Latex tex="A" /> 带同种电荷，<Latex tex="C" /> 靠近 <Latex tex="A" /> 时，<Latex tex="A" /> 因斥力远离。</div>
 <div v-click="2">扭转悬丝，使 <Latex tex="A" /> 回到初始位置并静止——扭转的角度可以比较力的大小。</div>
-<div v-click="3" class="important-hint">改变 <Latex tex="A" /> 与 <Latex tex="C" /> 之间的距离 <Latex tex="r" />，记录每次悬丝扭转的角度，得到 <Latex tex="F \propto \dfrac{1}{r^2}" />。</div>
+<div v-click="3" class="important-hint">改变 <Latex tex="A" /> 与 <Latex tex="C" /> 之间的距离 <Latex tex="r" />，记录每次悬丝扭转的角度，得到 <Latex tex="F \propto \frac{1}{r^2}" />。</div>
 </div>
 </div>
 
@@ -129,7 +129,7 @@ title: 库仑的实验
 <div class="figure"><ChargeSharingSvg /></div>
 <div class="divider-l stack">
 <div v-click="1">两个完全相同的金属小球，一个带电、一个不带电，互相接触后，它们对相隔同样距离的第三个带电小球的作用力相等——可以断定这两个小球接触后所带的电荷量相等。</div>
-<div v-click="2">多次重复，可以把带电小球的电荷量 <Latex tex="q" /> 分为 <Latex tex="\dfrac{q}{2},\ \dfrac{q}{4},\ \dfrac{q}{8},\ \dots" />。</div>
+<div v-click="2">多次重复，可以把带电小球的电荷量 <Latex tex="q" /> 分为 <Latex tex="\frac{q}{2},\ \frac{q}{4},\ \frac{q}{8},\ \dots" />。</div>
 <div v-click="3" class="important-hint">电荷之间的作用力与电荷量的乘积成正比：<Latex tex="F \propto q_1 q_2" /></div>
 </div>
 </div>
@@ -188,7 +188,7 @@ title: 例题 1：静电力与万有引力
 
 <div v-click="2"><Latex tex="F_{\text{库}} = k\dfrac{q_1 q_2}{r^2} = 9.0 \times 10^9 \times \dfrac{(1.6 \times 10^{-19})^2}{(5.3 \times 10^{-11})^2}\ \text{N} = 8.2 \times 10^{-8}\ \text{N}" display /></div>
 
-<div v-click="3"><Latex tex="F_{\text{引}} = G\dfrac{m_1 m_2}{r^2} = 3.6 \times 10^{-47}\ \text{N}" />，<Latex tex="\dfrac{F_{\text{库}}}{F_{\text{引}}} = 2.3 \times 10^{39}" />——研究微观带电粒子的相互作用时，可以把万有引力忽略。</div>
+<div v-click="3"><Latex tex="F_{\text{引}} = G\frac{m_1 m_2}{r^2} = 3.6 \times 10^{-47}\ \text{N}" />，<Latex tex="\frac{F_{\text{库}}}{F_{\text{引}}} = 2.3 \times 10^{39}" />——研究微观带电粒子的相互作用时，可以把万有引力忽略。</div>
 
 ---
 layout: base-flex
@@ -258,11 +258,11 @@ title: 练习：悬挂的两球求电荷量
 
 <div v-click="1">对其中一个小球受力分析：重力 <Latex tex="mg" />（竖直向下）、细线拉力 <Latex tex="F_T" />（沿细线指向悬点）、库仑力 <Latex tex="F" />（水平向外，两球带同种电荷）。</div>
 
-<div v-click="2">悬点到球心的竖直距离 <Latex tex="h = \sqrt{(13\ \text{cm})^2 - (5\ \text{cm})^2} = 12\ \text{cm}" />，由三力平衡得 <Latex tex="\tan\theta = \dfrac{F}{mg} = \dfrac{5}{12}" />。</div>
+<div v-click="2">悬点到球心的竖直距离 <Latex tex="h = \sqrt{(13\ \text{cm})^2 - (5\ \text{cm})^2} = 12\ \text{cm}" />，由三力平衡得 <Latex tex="\tan\theta = \frac{F}{mg} = \frac{5}{12}" />。</div>
 
-<div v-click="3">由 <Latex tex="F = mg\tan\theta" /> 得 <Latex tex="F = mg \cdot \dfrac{5}{12} = 2.5 \times 10^{-3}\ \text{N}" />。</div>
+<div v-click="3">由 <Latex tex="F = mg\tan\theta" /> 得 <Latex tex="F = mg \cdot \frac{5}{12} = 2.5 \times 10^{-3}\ \text{N}" />。</div>
 
-<div v-click="4">再由 <Latex tex="F = k\dfrac{q^2}{d^2}" /> 得 <Latex tex="q = \sqrt{\dfrac{Fd^2}{k}} \approx 5.3 \times 10^{-8}\ \text{C}" />。</div>
+<div v-click="4">再由 <Latex tex="F = k\frac{q^2}{d^2}" /> 得 <Latex tex="q = \sqrt{\frac{Fd^2}{k}} \approx 5.3 \times 10^{-8}\ \text{C}" />。</div>
 
 </div>
 
@@ -274,13 +274,13 @@ title: 练习：球心相距 3r 的两球
 
 <template v-slot:stem>
 
-<div><b class="ex-no">练习二</b>　半径为 <Latex tex="r" /> 的两个金属球，其球心相距 <Latex tex="3r" />，现使两球带上等量的同种电荷 <Latex tex="Q" />，两球之间的静电力 <Latex tex="F = k\dfrac{Q^2}{9r^2}" /> 吗？说明道理。</div>
+<div><b class="ex-no">练习二</b>　半径为 <Latex tex="r" /> 的两个金属球，其球心相距 <Latex tex="3r" />，现使两球带上等量的同种电荷 <Latex tex="Q" />，两球之间的静电力 <Latex tex="F = k\frac{Q^2}{9r^2}" /> 吗？说明道理。</div>
 
 </template>
 
 <div v-click="1">两球表面之间的距离只有 <Latex tex="r" />，与球的半径 <Latex tex="r" /> 属于同一量级，不满足"带电体之间的距离比它们自身的大小大得多"——两球不能看作点电荷。</div>
 
-<div v-click="2">不能直接用 <Latex tex="F = k\dfrac{Q^2}{9r^2}" /> 计算。作用力还与两球的形状、大小以及电荷分布状况有关：两球带同种电荷互相排斥，电荷分布在远离对方的一侧，等效电荷间距大于 <Latex tex="3r" />，实际静电力小于 <Latex tex="k\dfrac{Q^2}{9r^2}" />。</div>
+<div v-click="2">不能直接用 <Latex tex="F = k\frac{Q^2}{9r^2}" /> 计算。作用力还与两球的形状、大小以及电荷分布状况有关：两球带同种电荷互相排斥，电荷分布在远离对方的一侧，等效电荷间距大于 <Latex tex="3r" />，实际静电力小于 <Latex tex="k\frac{Q^2}{9r^2}" />。</div>
 
 <div v-click="3">只有满足点电荷的条件，才能用库仑定律计算两个带电体之间的静电力。</div>
 
@@ -296,11 +296,11 @@ title: 练习：正方形四个顶点上的点电荷
 
 </template>
 
-<div v-click="1">相邻两个电荷对它的力 <Latex tex="F_1 = F_2 = k\dfrac{q^2}{a^2}" />（两个力互相垂直）；对角电荷对它的力 <Latex tex="F_3 = k\dfrac{q^2}{(\sqrt{2}a)^2} = \dfrac{kq^2}{2a^2}" />（沿对角线向外）。</div>
+<div v-click="1">相邻两个电荷对它的力 <Latex tex="F_1 = F_2 = k\frac{q^2}{a^2}" />（两个力互相垂直）；对角电荷对它的力 <Latex tex="F_3 = k\frac{q^2}{(\sqrt{2}a)^2} = \frac{kq^2}{2a^2}" />（沿对角线向外）。</div>
 
-<div v-click="2"><Latex tex="F_1" />、<Latex tex="F_2" /> 的合力为 <Latex tex="\sqrt{2}\,k\dfrac{q^2}{a^2}" />，方向沿对角线向外，与 <Latex tex="F_3" /> 同向。</div>
+<div v-click="2"><Latex tex="F_1" />、<Latex tex="F_2" /> 的合力为 <Latex tex="\sqrt{2}\,k\frac{q^2}{a^2}" />，方向沿对角线向外，与 <Latex tex="F_3" /> 同向。</div>
 
-<div v-click="3"><Latex tex="F = \sqrt{2}\,k\dfrac{q^2}{a^2} + \dfrac{kq^2}{2a^2} = \dfrac{(2\sqrt{2}+1)kq^2}{2a^2}" />，方向沿对角线向外。</div>
+<div v-click="3"><Latex tex="F = \sqrt{2}\,k\frac{q^2}{a^2} + \frac{kq^2}{2a^2} = \frac{(2\sqrt{2}+1)kq^2}{2a^2}" />，方向沿对角线向外。</div>
 
 ---
 layout: base-flex
@@ -312,7 +312,7 @@ title: 课堂小结
 
 <div class="ask">这节课我们得到了哪几条结论？</div>
 
-<div v-click="1" class="tip-hint">库仑定律：真空中两个静止点电荷之间的作用力 <Latex tex="F = k\dfrac{q_1 q_2}{r^2}" />，方向在它们的连线上；同种电荷互相排斥，异种电荷互相吸引。</div>
+<div v-click="1" class="tip-hint">库仑定律：真空中两个静止点电荷之间的作用力 <Latex tex="F = k\frac{q_1 q_2}{r^2}" />，方向在它们的连线上；同种电荷互相排斥，异种电荷互相吸引。</div>
 
 <div v-click="2" class="tip-hint">点电荷：带电体之间的距离比它们自身的大小大得多时，可以看作点电荷（理想化的物理模型）。</div>
 

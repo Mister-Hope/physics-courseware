@@ -180,8 +180,8 @@ const chargeY = [86, 120, 154, 188];
         style="
           display: grid;
           grid-template-columns: auto minmax(3.6ch, max-content) auto auto;
-          column-gap: 0.35rem;
           align-items: baseline;
+          column-gap: 0.35rem;
         "
       >
         <Latex tex="E_0=" />
