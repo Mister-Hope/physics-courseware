@@ -5,7 +5,33 @@ import { coursePages } from "./pages.generated";
 
 /* ---------- 状态 ---------- */
 
-let activeSlug = ""; // '' = 全部
+/**
+ * 分册路径：`/bx1/`、`/xx2/` …（`/` 为「全部」）。
+ *
+ * Tab 用 `history.pushState` 改地址，直接访问该路径即激活对应分册；浏览器前进 / 后退走 popstate。
+ */
+const bookSlugs = new Set(textbooks.map((group) => group.slug));
+
+/**
+ * 从地址栏第一段解析当前分册。
+ *
+ * @returns 分册 slug；不是分册路径时返回 ''（全部）
+ */
+const readSlugFromLocation = (): string => {
+  const first = location.pathname.split("/")[1] ?? "";
+
+  return bookSlugs.has(first) ? first : "";
+};
+
+let activeSlug = readSlugFromLocation();
+
+/**
+ * 分册对应的地址。
+ *
+ * @param slug 分册 slug；空字符串表示「全部」
+ * @returns 全部是 `/`，其余是 `/<分册 slug>/`
+ */
+const bookHref = (slug: string): string => (slug === "" ? "/" : `/${slug}/`);
 
 /** 主页「我要上课」把自定义 logo 按姓名存到 localStorage，课件端用同一 key 取（见共享 addon utils/lesson-params.ts） */
 const LOGO_LOCAL_PREFIX = "courseware.logo:";
@@ -51,24 +77,62 @@ const renderTabs = (): void => {
   const tabsEl = document.querySelector("#tabs");
   if (!tabsEl) return;
 
-  const allTab = `<button class="tab${activeSlug === "" ? " active" : ""}" data-slug="">全部</button>`;
+  const allTab = `<a class="tab${activeSlug === "" ? " active" : ""}" href="/" data-slug="">全部</a>`;
   const bookTabs = textbooks
     .map(
       (group) =>
-        `<button class="tab${activeSlug === group.slug ? " active" : ""}" data-slug="${group.slug}">${group.shortName}</button>`,
+        `<a class="tab${activeSlug === group.slug ? " active" : ""}" href="${bookHref(group.slug)}" data-slug="${group.slug}">${group.shortName}</a>`,
     )
     .join("");
 
   tabsEl.innerHTML = allTab + bookTabs;
+};
 
-  tabsEl.querySelectorAll<HTMLButtonElement>(".tab").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      activeSlug = btn.dataset.slug ?? "";
-      renderTabs();
-      renderContent();
-    });
+/** 页签对应的分册标题（浏览器标题栏随分册变化，收藏 / 分享时能看出是哪本书） */
+const updatePageTitle = (): void => {
+  const group = textbooks.find((item) => item.slug === activeSlug);
+
+  document.title = group ? `${group.shortName} · 高中物理人教版课件` : "高中物理人教版课件";
+};
+
+/**
+ * 切换分册：同步标题、页签与课程卡片（地址栏由调用方改）。
+ *
+ * @param slug 分册 slug；空字符串表示「全部」
+ */
+const setActiveSlug = (slug: string): void => {
+  activeSlug = slug;
+  updatePageTitle();
+  renderTabs();
+  renderContent();
+};
+
+/** 页签点击：改地址栏（可收藏 / 分享 / 新标签页打开）并切换内容 */
+const bindTabs = (): void => {
+  const tabsEl = document.querySelector<HTMLElement>("#tabs");
+  if (!tabsEl) return;
+
+  tabsEl.addEventListener("click", (event) => {
+    // 保留 Ctrl / ⌘ / Shift / 中键的浏览器原生行为（新标签页打开该分册）
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0)
+      return;
+
+    const tab = (event.target as Element | null)?.closest<HTMLAnchorElement>(".tab");
+    if (!tab) return;
+
+    event.preventDefault();
+
+    const slug = tab.dataset.slug ?? "";
+    if (slug === activeSlug) return;
+
+    history.pushState({ slug }, "", bookHref(slug));
+    setActiveSlug(slug);
   });
 };
+
+globalThis.addEventListener("popstate", () => {
+  setActiveSlug(readSlugFromLocation());
+});
 
 /* ---------- 「我要上课」弹窗 ---------- */
 
@@ -353,6 +417,6 @@ const yearEl = document.querySelector("#footer-year");
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
 renderCourseSelect();
-renderTabs();
-renderContent();
+bindTabs();
+setActiveSlug(activeSlug);
 updateLink();

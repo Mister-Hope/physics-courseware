@@ -92,6 +92,8 @@ body {
 }
 
 .tab {
+  display: inline-block;
+
   padding: 0.45rem 1.1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
@@ -102,6 +104,8 @@ body {
   font-weight: 500;
   font-size: 0.85rem;
   font-family: inherit;
+  line-height: normal;
+  text-decoration: none;
 
   backdrop-filter: blur(12px);
   cursor: pointer;

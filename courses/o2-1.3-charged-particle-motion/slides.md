@@ -1033,3 +1033,71 @@ clicks: 3
 <div :style="{ opacity: $clicks >= 3 ? 1 : 0 }"><b>给定 <Latex tex="v" /> 和比荷 <Latex tex="q/m" />，场强还必须配对</b>：<Latex tex="B_1 = \dfrac{2mv}{qd_1}" />、<Latex tex="B_2 = \dfrac{2mv}{qd_2}" />（<Latex tex="\dfrac{B_2}{B_1} = \dfrac{d_1}{d_2}" />）——只把叶形画出来不够。</div>
 
 </div>
+
+---
+layout: center
+class: text-center
+title: 带电粒子在磁场中运动的临界问题与多解问题
+---
+
+<div class="text-3xl font-bold leading-tight">带电粒子在磁场中运动的临界问题与多解问题</div>
+
+<div class="mt-5 text-lg opacity-70">例 1　平行板间不打板的速度条件　·　例 2　挡板上下表面被打到的坐标</div>
+
+---
+---
+
+<div class="ask text-lg"><b>例 1</b>　一对水平放置的平行金属板，板长 <Latex tex="L" />、间距 <Latex tex="d" />，板间有垂直纸面向外、磁感应强度为 <Latex tex="B" /> 的匀强磁场。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="+q" /> 的粒子从板的左上角沿板方向水平射入，不计重力。求粒子速度 <Latex tex="v" /> 满足什么条件时，粒子不会打在板上？</div>
+
+<div class="page-grow">
+<PlatesCritical />
+</div>
+
+---
+clicks: 3
+---
+
+# 例 1：两种临界情况
+
+<div class="page-grow">
+<PlatesCritical :step="$clicks" />
+</div>
+
+<div class="stack stack-tight" style="gap:.2rem;font-size:.78em">
+
+<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">① 速度小：临界是轨迹与下板左端相切，<Latex tex="2r=d" /> ⟹ <Latex tex="v<\frac{qBd}{2m}" />。</div>
+
+<div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">② 速度大：临界是轨迹恰好经过下板右端，<Latex tex="L^2+(r-d)^2=r^2" /> ⟹ <Latex tex="v>\frac{qB(L^2+d^2)}{2md}" />。</div>
+
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">所以 <Latex tex="v<\frac{qBd}{2m}" /> 或 <Latex tex="v>\frac{qB(L^2+d^2)}{2md}" />——中间的速度一定打在下板上。</div>
+
+</div>
+
+---
+---
+
+<div class="ask text-base"><b>例 2</b>　在 <Latex tex="xOy" /> 平面内，第一、二象限有垂直纸面向里、大小为 <Latex tex="B" /> 的匀强磁场；第二象限内有一块平行于 <Latex tex="x" /> 轴、与 <Latex tex="x" /> 轴相距 <Latex tex="d" /> 的足够长挡板，右端在 <Latex tex="y" /> 轴上。原点 <Latex tex="O" /> 处的粒子源向第一、四象限各方向均匀发射质量 <Latex tex="m" />、电荷量 <Latex tex="+q" /> 的粒子，速度均为 <Latex tex="v = \dfrac{qBd}{m}" />。求挡板上、下表面被粒子打到的坐标范围。</div>
+
+<div class="page-grow">
+<BaffleCritical />
+</div>
+
+---
+clicks: 3
+---
+
+# 例 2：上表面和下表面
+
+<div class="page-grow">
+<BaffleCritical :step="$clicks" />
+</div>
+
+<div class="stack stack-tight" style="gap:.2rem;font-size:.78em">
+
+<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">① <Latex tex="r=\frac{mv}{qB}=d" />：<Latex tex="\theta=60^\circ" /> 时，轨迹第一次与 <Latex tex="y=d" /> 的交点恰在 <Latex tex="y" /> 轴上，这是两支的分界。</div>
+
+<div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">② <Latex tex="\theta>60^\circ" />：第一次交点已在第二象限 ⟹ 打在<b>下表面</b>，<Latex tex="x\in[-d,\,0]" />。</div>
+
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">③ <Latex tex="\theta<60^\circ" />：先越过 <Latex tex="y=d" />、再从上方落下 ⟹ <b>上表面</b>，<Latex tex="x\in[-\sqrt{3}d,\,-d]" />；第四象限的粒子打不到。</div>
+
+</div>
