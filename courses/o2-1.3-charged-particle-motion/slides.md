@@ -310,37 +310,6 @@ clicks: 2
 
 </div>
 
-
----
-
-# 解这类题的思路：作三角形
-
-<!-- 方法页：① 找圆心 ② 画轨迹 ③ 求半径 ④ 定圆心角 -->
-<div class="ask text-xl">题目几乎都是已知几何、求半径这一类——从哪儿下手？</div>
-
-<div class="page-grow">
-
-<div class="half-grid items-center">
-
-<div class="stack text-lg leading-relaxed">
-
-<div>① <strong>找圆心</strong>：圆心在过入射点、垂直于 <Latex tex="v" /> 的直线上</div>
-
-<div>② <strong>画轨迹</strong>：把圆弧画出来</div>
-
-<div>③ <strong>求半径</strong>：弦、半径、圆心角放进三角形（勾股 + 三角函数）</div>
-
-<div>④ <strong>定圆心角</strong>：<Latex tex="t = \dfrac{\alpha}{2\pi}T" />（<Latex tex="\alpha" /> 为圆心角）</div>
-
-</div>
-
-<TriangleMethod />
-
-</div>
-
-</div>
-
-
 ---
 layout: base-flex
 ---
@@ -545,105 +514,31 @@ clicks: 2
 </div>
 
 ---
-layout: base-flex
----
 
-<div class="qp-page">
+# 带电粒子做不完整的圆周运动：作三角形
 
-<div>
+<!-- 方法页：① 找圆心 ② 画轨迹 ③ 求半径 ④ 定圆心角 -->
+<div class="ask text-xl">大量题目中粒子无法做完整的圆周运动，如何解题？</div>
 
-**例 4**（2023·山东青岛二中期末）在赤道处，将一小球向东水平抛出，落地点为 <Latex tex="a" />。给小球带上电荷后，仍以原来的速度抛出，考虑地磁场的影响，下列说法正确的是（　　）
-
-</div>
+<div class="page-grow">
 
 <div class="half-grid items-center">
 
-<div>
+<div class="stack text-lg leading-relaxed">
 
-- A. 无论小球带何种电荷，小球落地时的速率都不变
-- B. 若小球带正电荷，它在空中的运动过程中机械能增加
-- C. 若小球带负电荷，则落地点在 <Latex tex="a" /> 点的东侧
-- D. 若小球带正电荷，则落地点在 <Latex tex="a" /> 点的西侧
+<div>① <strong>找圆心</strong>：圆心在过入射点、垂直于 <Latex tex="v" /> 的直线上</div>
 
-</div>
+<div>② <strong>画轨迹</strong>：把圆弧画出来</div>
 
-<div class="divider-l qp-fig">
+<div>③ <strong>求半径</strong>：弦、半径、圆心角放进三角形（勾股 + 三角函数）</div>
 
-<EquatorThrow />
+<div>④ <strong>定圆心角</strong>：<Latex tex="t = \dfrac{\alpha}{2\pi}T" />（<Latex tex="\alpha" /> 为圆心角）</div>
 
 </div>
 
-</div>
+<TriangleMethod />
 
 </div>
-
----
-clicks: 2
----
-
-<div class="split-wide qp-solve">
-
-<div class="stack stack-tight">
-
-<div><b>例 4</b> 带电之后，落点往哪偏</div>
-
-<div>赤道处地磁场水平向北：洛伦兹力始终垂直于速度、<b>不做功</b> ⟹ 落地时的速率与不带电时相同 —— <b>A 对、B 错</b>。</div>
-
-<div v-click="1">抛出瞬间速度向东 ⟹ 洛伦兹力竖直向上；此后它的方向随速度一起转、<b>始终垂直于速度</b>。正电荷所受的洛伦兹力有竖直向上的分量，空中时间变长，落地点偏东，在 <Latex tex="a" /> 的东侧 —— <b>D 错</b>。</div>
-
-<div v-click="2" class="tip-hint">答案 <b>A</b>。负电荷受力方向相反，落地点在 <Latex tex="a" /> 的西侧 —— <b>C 错</b>。</div>
-
-</div>
-
-<div class="qp-fig qp-fig-corner">
-
-<EquatorThrow show-analysis />
-
-</div>
-
-</div>
-
----
-layout: base-flex
----
-
-<div class="qp-page">
-
-<div class="ask text-xl">一束<b>平行</b>带电粒子（同种、同速）水平射入一个<b>圆形匀强磁场区域</b>，出射后会散开，还是可能交于同一点？</div>
-
-<FocusQuestion />
-
-</div>
-
----
-clicks: 3
----
-
-# $r = R$ 时：出射点的位置
-
-<div class="qp-page" style="--page-gap:.4rem;--hint-pad-y:.35rem">
-
-<FocusProof :step="$clicks" />
-
-<div class="stack stack-tight" style="gap:.35rem;font-size:.94em">
-
-<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">轨迹圆心 <Latex tex="C" /> 在 <Latex tex="A" /> 正下方：<Latex tex="AC = r" />；<Latex tex="P" /> 同时在两个圆上。</div>
-
-<div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">取 <Latex tex="r = R" />：四边 <Latex tex="OA = AC = CP = PO = R" /> ⟹ <Latex tex="OACP" /> 是<b>菱形</b>。</div>
-
-<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">菱形 ⟹ <Latex tex="\overrightarrow{OP} = \overrightarrow{AC}" />：无论从哪儿入射，<Latex tex="P" /> 都落在 <Latex tex="O" /> 正下方 <Latex tex="R" /> 处的最低点。</div>
-
-</div>
-
-</div>
-
----
-
-<div class="qp-page">
-
-<div class="ask">回旋半径 <Latex tex="r" /> 与磁场半径 <Latex tex="R" /> 满足什么关系时，所有出射粒子才交于同一点？</div>
-
-<FocusConvergeDemo />
 
 </div>
 
@@ -651,7 +546,7 @@ clicks: 3
 clicks: 4
 ---
 
-# 例 5：求磁感应强度
+# 例 4：求磁感应强度
 
 <div class="ask text-lg mb-1">带负电的粒子（比荷 <Latex tex="\dfrac{q}{m}" />）从原点 <Latex tex="O" /> 沿 <Latex tex="x" /> 轴正半轴以 <Latex tex="v_0" /> 射入，磁场垂直纸面向里；经过第四象限的点 <Latex tex="P" />：<Latex tex="OP = L" />，<Latex tex="OP" /> 与 <Latex tex="y" /> 轴夹角 <Latex tex="\theta" />。求磁感应强度 <Latex tex="B" />。</div>
 
@@ -679,7 +574,7 @@ clicks: 4
 clicks: 4
 ---
 
-# 例 6：求比荷
+# 例 5：求比荷
 
 <div class="ask text-lg mb-1">第一象限内有垂直纸面向里、大小为 <Latex tex="B" /> 的匀强磁场；粒子从 <Latex tex="(0, a)" /> 沿 <Latex tex="x" /> 轴正半轴以 <Latex tex="v_0" /> 射出，经过 <Latex tex="x" /> 轴正半轴上的 <Latex tex="(b, 0)" />。求粒子的比荷 <Latex tex="\dfrac{q}{m}" />，并判断粒子带什么电。</div>
 
@@ -707,7 +602,7 @@ clicks: 4
 clicks: 3
 ---
 
-# 例 7：沿半径射入，会沿什么方向射出？
+# 例 6：沿半径射入，会沿什么方向射出？
 
 <div class="ask text-lg mb-1">圆形匀强磁场区域，半径 <Latex tex="R" />、磁感应强度 <Latex tex="B" /> 垂直纸面向里。粒子从边界上的 <Latex tex="A" /> 点沿半径方向（指向圆心 <Latex tex="O" />）射入。证明：出射方向的反向延长线一定过圆心 <Latex tex="O" />。</div>
 
@@ -735,7 +630,7 @@ clicks: 3
 clicks: 3
 ---
 
-# 例 8：圆外换成方向相反的磁场
+# 例 7：圆外换成方向相反的磁场
 
 <div class="ask text-lg mb-1">接例 7：磁场区域外也是匀强磁场——方向与圆内相反（<strong>大小可以不同</strong>）。粒子射出后沿着怎样的轨迹走？它还会再次沿半径方向射回圆心吗？</div>
 
@@ -763,7 +658,7 @@ clicks: 3
 clicks: 2
 ---
 
-# 例 9：粒子能一直在磁场里吗？
+# 例 8：粒子能一直在磁场里吗？
 
 <div class="ask text-lg mb-1">圆形匀强磁场区域，半径 <Latex tex="R" />、磁感应强度 <Latex tex="B" />。在边界上的 <Latex tex="P" /> 点以速率 <Latex tex="v_0" /> 向区域内发射粒子（方向可以任选）。问：比荷满足什么条件时，粒子无法保持在磁场中运动？</div>
 
@@ -877,6 +772,119 @@ title: 课堂小结
 <div class="grid grid-cols-2 gap-8">
 <div class="text-center text-2xl"><Latex tex="r = \dfrac{mv}{qB}" /></div>
 <div class="text-center text-2xl"><Latex tex="T = \dfrac{2\pi m}{qB}" /></div>
+</div>
+
+</div>
+
+---
+title: "带电粒子在匀强磁场中的运动"
+layout: course-cover
+chapter-no: "1.3"
+chapter: "第一章 安培力与洛伦兹力"
+---
+
+<CoverDecor />
+
+---
+layout: base-flex
+---
+
+<div class="qp-page">
+
+<div>
+
+**例 1**（2023·山东青岛二中期末）在赤道处，将一小球向东水平抛出，落地点为 <Latex tex="a" />。给小球带上电荷后，仍以原来的速度抛出，考虑地磁场的影响，下列说法正确的是（　　）
+
+</div>
+
+<div class="half-grid items-center">
+
+<div>
+
+- A. 无论小球带何种电荷，小球落地时的速率都不变
+- B. 若小球带正电荷，它在空中的运动过程中机械能增加
+- C. 若小球带负电荷，则落地点在 <Latex tex="a" /> 点的东侧
+- D. 若小球带正电荷，则落地点在 <Latex tex="a" /> 点的西侧
+
+</div>
+
+<div class="divider-l qp-fig">
+
+<EquatorThrow />
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+<div class="split-wide qp-solve">
+
+<div class="stack stack-tight">
+
+<div><b>例 1</b> 带电之后，落点往哪偏</div>
+
+<div>赤道处地磁场水平向北：洛伦兹力始终垂直于速度、<b>不做功</b> ⟹ 落地时的速率与不带电时相同 —— <b>A 对、B 错</b>。</div>
+
+<div v-click="1">抛出瞬间速度向东 ⟹ 洛伦兹力竖直向上；此后它的方向随速度一起转、<b>始终垂直于速度</b>。正电荷所受的洛伦兹力有竖直向上的分量，空中时间变长，落地点偏东，在 <Latex tex="a" /> 的东侧 —— <b>D 错</b>。</div>
+
+<div v-click="2" class="tip-hint">答案 <b>A</b>。负电荷受力方向相反，落地点在 <Latex tex="a" /> 的西侧 —— <b>C 错</b>。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-corner">
+
+<EquatorThrow show-analysis />
+
+</div>
+
+</div>
+
+
+---
+layout: base-flex
+---
+
+<div class="qp-page">
+
+<div class="ask text-xl"><b>例 2</b> 一束<b>平行</b>带电粒子（同种、同速）水平射入一个<b>圆形匀强磁场区域</b>，出射后会散开，还是可能交于同一点？</div>
+
+<FocusQuestion />
+
+</div>
+
+---
+
+<div class="qp-page">
+
+<div class="ask">回旋半径 <Latex tex="r" /> 与磁场半径 <Latex tex="R" /> 满足什么关系时，所有出射粒子才交于同一点？</div>
+
+<FocusConvergeDemo />
+
+</div>
+
+---
+clicks: 3
+---
+
+# 磁汇聚 $r = R$
+
+<div class="qp-page" style="--page-gap:.4rem;--hint-pad-y:.35rem">
+
+<FocusProof :step="$clicks" />
+
+<div class="stack stack-tight" style="gap:.35rem;font-size:.94em">
+
+<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">轨迹圆心 <Latex tex="C" /> 在 <Latex tex="A" /> 正下方：<Latex tex="AC = r" />；<Latex tex="P" /> 同时在两个圆上。</div>
+
+<div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">取 <Latex tex="r = R" />：四边 <Latex tex="OA = AC = CP = PO = R" /> ⟹ <Latex tex="OACP" /> 是<b>菱形</b>。</div>
+
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">菱形 ⟹ <Latex tex="\overrightarrow{OP} = \overrightarrow{AC}" />：无论从哪儿入射，<Latex tex="P" /> 都落在 <Latex tex="O" /> 正下方 <Latex tex="R" /> 处的最低点。</div>
+
 </div>
 
 </div>

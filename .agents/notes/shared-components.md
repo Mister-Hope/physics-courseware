@@ -219,6 +219,16 @@
 > 只把 `<input type="range">` 换成 `<CourseSlider layout="bare" />` —— 轨道与滑块统一了，课程自己的排版一行都不用改；
 > 🟡 也**不要**用课内 `:deep(.cs-*)` 去改共享组件的列宽/行高：窄面板请用 `layout="tight"` + `labelWidth`。
 
+**触屏上拖滑块不会翻页（组件已内置，课件侧不用写任何东西）**：Slidev 的左右滑动翻页手势
+（`useSwipeControls` → `usePointerSwipe`）监听在 `#page-root` 的**冒泡**阶段，滑块一拖就是几十像素水平位移，
+松手会被判成"左/右滑"直接翻页。组件已在 `pointerdown` 上 `stopPropagation` 把这段手势截住；
+滑块照常能拖（原生控件不靠 JS 监听）、在别处滑动照常翻页。
+
+⛔ **反过来：自己画的拖拽组件不受保护**——SVG 拖拽手柄、原生 `<input type="range">` 的 `pointerdown`
+会冒泡到 `#page-root`，触屏上拖完一松手就翻页。这类组件要在自己的 `pointerdown` 里
+`event.stopPropagation()`（**不要** `preventDefault`，会把原生拖动一起废掉）；
+参考 `courses/o2-1.2-lorentz-force/components/BeamDeflect3D.vue` 的写法。
+
 ## 8. 所有组件共同的规则
 
 > ⛔ **改完共享组件必须先"真实渲染一次"再交出去**（自身的纪律，真踩过）：`oxlint` / 类型检查**抓不到**运行期的

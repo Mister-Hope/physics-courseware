@@ -29,6 +29,13 @@
   **课程保留自己的版式时**（读数在滑块上方一行、说明文字在滑块上方、外面还套了带边框的盒子……）：
   只把 `<input type="range">` 换成它并加 `layout="bare"` —— 轨道与滑块统一了，课程自己的排版一行都不用改；
   也不要用课内 `:deep(.cs-*)` 去改共享组件。
+
+  ## 触屏（组件已经处理，课件不用管）
+
+  触屏上拖滑块时，`pointerdown` 会冒泡到 Slidev 的 `#page-root`，被那里的左右滑动翻页手势
+  （`useSwipeControls` → `usePointerSwipe`）当成翻页的起手式 —— 一松手就翻到下一页。
+  组件内部已在 `pointerdown` 上 `stopPropagation` 把滑块的手势截住（见 `onPointerDown`），
+  滑块照常能拖（原生控件不靠 JS 监听）、**在别处滑动翻页也不受影响**。
 -->
 <script setup lang="ts">
 import { computed } from "vue";
@@ -99,6 +106,21 @@ const display = computed(() => {
 const onInput = (event: Event): void => {
   emit("update:modelValue", Number((event.target as HTMLInputElement).value));
 };
+
+/**
+ * 触屏拖滑块时，拦住 Slidev 的左右滑动翻页手势
+ *
+ * Slidev 的触屏翻页（`useSwipeControls` → `usePointerSwipe`）监听在 `#page-root` 的**冒泡**阶段： 只要 `pointerdown`
+ * 冒泡到它那里，它就开始记起点，松手时按水平位移判定翻页。 而拖滑块本身就是几十像素的水平位移 ⇒ 触屏上"拖完滑块一松手就跳到下一页"（必现）。
+ *
+ * 在滑块上把 `pointerdown` 截住，手势压根不会开始。 ⚠️ `stopPropagation` **不影响**原生拖动：原生控件的拖动由浏览器内部手势处理， 不靠 JS
+ * 监听，所以滑块拖动、键盘、无障碍行为都照旧（只有 JS 监听收不到，而它们本来也不该收）。
+ *
+ * @param event 原生指针事件
+ */
+const onPointerDown = (event: PointerEvent): void => {
+  event.stopPropagation();
+};
 </script>
 
 <template>
@@ -124,6 +146,7 @@ const onInput = (event: Event): void => {
       :value="modelValue"
       :disabled="disabled"
       :aria-label="ariaLabel || label || labelTex || '滑块'"
+      @pointerdown="onPointerDown"
       @input="onInput"
     />
 
