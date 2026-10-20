@@ -450,3 +450,109 @@ clicks: 2
 
 </div>
 
+
+---
+layout: base-flex
+---
+
+<div class="qp-page">
+
+<div class="split-wide" style="--cols: minmax(0, 1fr) minmax(0, 1.18fr);align-items:center;flex:1 1 auto;min-height:0">
+
+<div class="stack stack-tight" style="gap:.75rem;font-size:.95em">
+
+<div><b>例 7</b>　如图，平面直角坐标系 <Latex tex="xOy" /> 中，第 I 象限内存在沿 <Latex tex="y" /> 轴负方向的匀强电场，场强大小为 <Latex tex="E" />；第 II、III、IV 象限内均存在垂直纸面向外的匀强磁场，磁感应强度大小为 <Latex tex="B" />。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="+q" /> 的粒子（不计重力）从 <Latex tex="y" /> 轴正半轴上的 <Latex tex="P(0, b)" /> 点以水平向右的初速度 <Latex tex="v_0" /> 射入第一象限，经 <Latex tex="x" /> 轴上的 <Latex tex="Q(a, 0)" /> 点进入第四象限。</div>
+
+<div>(1) 求电场强度 <Latex tex="E" /> 的大小；</div>
+
+<div>(2) 粒子在磁场中运动，最后回到 <Latex tex="y" /> 轴正半轴时，速度方向与 <Latex tex="y" /> 轴正半轴的夹角小于 <Latex tex="90^\circ" />，求磁感应强度 <Latex tex="B" /> 的取值范围。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<QuadrantFieldDeflect />
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 0.95fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
+
+<div><b>例 7（1）</b>　第一象限内是类平抛</div>
+
+<div v-click="1">水平方向匀速：<Latex tex="v_0 t_1 = a" />，得 <Latex tex="t_1 = \dfrac{a}{v_0}" />；竖直方向初速度为零、受力恒为 <Latex tex="qE" />，于是 <Latex tex="b = \dfrac{1}{2}\cdot\dfrac{qE}{m}\,t_1^2" />。</div>
+
+<div v-click="2">代入 <Latex tex="t_1" /> 解得 <Latex tex="E = \dfrac{2mb v_0^2}{q a^2}" />。</div>
+
+<div v-click="2" class="tip-hint" style="font-size:.9em">类平抛就是“水平跑完 <Latex tex="a" />、竖直落下 <Latex tex="b" />”：水平匀速定时间，竖直匀加速定场强。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<QuadrantFieldDeflect :step="1" />
+
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 0.95fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
+
+<div><b>例 7（2）</b>　到 <Latex tex="Q" /> 点的速度与圆周半径</div>
+
+<div v-click="1">过 <Latex tex="Q" /> 时：<Latex tex="v_x = v_0" />，<Latex tex="v_y = \dfrac{qE}{m}t_1 = \dfrac{2b v_0}{a}" />，故 <Latex tex="v = \dfrac{v_0}{a}\sqrt{a^2+4b^2}" />，<Latex tex="\sin\theta = \dfrac{2b}{\sqrt{a^2+4b^2}}" />。</div>
+
+<div v-click="2">正电荷、<Latex tex="B" /> 垂直纸面向外 ⟹ 洛伦兹力指向速度右侧 ⟹ <b>顺时针</b>圆周运动，<Latex tex="R = \dfrac{mv}{qB}" />，圆心 <Latex tex="C(a - R\sin\theta,\ -R\cos\theta)" />。</div>
+
+<div v-click="3">要能绕到第 II、III 象限再回到 <Latex tex="y" /> 轴，圆与 <Latex tex="x" /> 轴的另一个交点必须落在 <Latex tex="x" /> 轴负半轴：<Latex tex="x_2 = a - 2R\sin\theta < 0" /> ⟹ <Latex tex="R > \dfrac{a}{2\sin\theta}" />，即 <Latex tex="B < \dfrac{4mb v_0}{q a^2}" />。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<QuadrantFieldDeflect :step="$clicks === 0 ? 1 : 2" />
+
+</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 0.95fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.6rem;font-size:.92em">
+
+<div><b>例 7（2）</b>　回到 <Latex tex="y" /> 轴时的速度方向</div>
+
+<div v-click="1">回到 <Latex tex="+y" /> 轴处，速度是顺时针轨迹的切线：<b>水平分量向右</b>。要与 <Latex tex="+y" /> 轴夹角小于 <Latex tex="90^\circ" />，竖直分量必须<b>向上</b>，即圆心横坐标 <Latex tex="x_C = a - R\sin\theta > 0" />。</div>
+
+<div v-click="2">于是 <Latex tex="R < \dfrac{a}{\sin\theta}" />，即 <Latex tex="B > \dfrac{2mb v_0}{q a^2}" />。</div>
+
+<div v-click="3" class="tip-hint" style="font-size:.9em">综合两条：<Latex tex="\dfrac{2mb v_0}{q a^2} < B < \dfrac{4mb v_0}{q a^2}" />，即 <Latex tex="\dfrac{E}{v_0} < B < \dfrac{2E}{v_0}" />。两端都取不到：一个回到原点，一个夹角恰为 <Latex tex="90^\circ" />。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<QuadrantFieldDeflect :step="$clicks === 0 ? 2 : 3" />
+
+</div>
+
+</div>

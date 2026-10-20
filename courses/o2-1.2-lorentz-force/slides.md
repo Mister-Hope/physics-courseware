@@ -423,33 +423,33 @@ title: 课堂小结
 
 <div class="flex items-center gap-4 py-1 text-lg">
 <span class="w-16 shrink-0 text-right mini-note">条件</span>
-<span class="font-bold flow-mark"><mdi-arrow-right-bold class="text-xl inline-block align-middle mr-1" />①</span>
+<span class="font-bold flow-mark w-7 shrink-0 text-center"><mdi-arrow-right-bold class="text-xl inline-block align-middle" /></span>
 <span>电流是电荷的定向移动</span>
 </div>
 
 <div class="flex items-center gap-4 py-1 text-lg">
 <span class="w-16 shrink-0 text-right mini-note">条件</span>
-<span class="font-bold flow-mark"><mdi-magnet class="text-xl inline-block align-middle mr-1" />②</span>
+<span class="font-bold flow-mark w-7 shrink-0 text-center"><mdi-magnet class="text-xl inline-block align-middle" /></span>
 <span>磁场对电流有力的作用</span>
 </div>
 
 <div class="flex items-center gap-4 py-1 text-lg">
 <span class="w-16 shrink-0 text-right mini-note">理论推导</span>
-<span class="font-bold flow-mark flow-mark-guess"><mdi-lightbulb-on-outline class="text-xl inline-block align-middle mr-1" />③</span>
+<span class="font-bold flow-mark flow-mark-guess w-7 shrink-0 text-center"><mdi-lightbulb-on-outline class="text-xl inline-block align-middle" /></span>
 <span>磁场对运动电荷有力的作用</span>
 </div>
 
 <div class="flex items-center gap-4 py-1 text-lg">
 <span class="w-16 shrink-0 text-right mini-note">实验验证</span>
-<span class="font-bold flow-mark"><mdi-flask-outline class="text-xl inline-block align-middle mr-1" />④ ✓</span>
+<span class="font-bold flow-mark w-7 shrink-0 text-center"><mdi-flask-outline class="text-xl inline-block align-middle" /></span>
 <span>阴极射线管实验证实</span>
 </div>
 
-<div class="tip-hint">
-⑤ <strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现
+<div class="tip-hint" style="font-size:1.1rem">
+<strong>洛伦兹力</strong>：<Latex tex="F_{\text{洛}}" /> 是 <Latex tex="F_{\text{安}}" /> 的微观本质，<Latex tex="F_{\text{安}}" /> 是 <Latex tex="F_{\text{洛}}" /> 的宏观表现
 </div>
 
-<div class="mt-3 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-xl">
+<div class="mt-3 flex flex-wrap items-center justify-center gap-x-10 gap-y-2 text-lg">
 <span>方向：<strong>左手定则</strong>（<Latex tex="F_{\text{洛}} \perp v" />、<Latex tex="F_{\text{洛}} \perp B" />）</span>
 <span>大小：<Latex tex="F_{\text{洛}} = qvB\sin\theta" /></span>
 </div>

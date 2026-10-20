@@ -6,7 +6,7 @@ highlighter: shiki
 transition: fade
 mdc: true
 layout: course-cover
-colorScheme: dark
+colorSchema: dark
 clickAnimation: card
 addons:
   - ../workspace/shared
@@ -845,6 +845,56 @@ clicks: 2
 </div>
 
 
+
+---
+title: 例题：先加速，再进圆形磁场
+---
+
+<!-- 题干页：干净题干 + 干净题目图常显；轨迹、半径等分析标注点击后才出（下一页解析） -->
+<div class="page-grow" style="justify-content:flex-start;padding-top:.6rem;--page-gap:.35rem">
+
+<div style="font-size:.78rem;line-height:1.5">
+如图所示，在真空环境中，存在一个加速电压为 <Latex tex="U" />、板间距为 <Latex tex="d" /> 的匀强加速电场，其右侧存在一个半径为 <Latex tex="R" /> 的圆形匀强磁场区域（磁场方向垂直于纸面）。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" /> 的带正电粒子从静止开始经电场加速后，水平向右射入圆形磁场。已知入射点到磁场中心水平线的垂直距离为 <Latex tex="h = 0.6R" />。粒子在磁场中发生偏转，最终竖直向下射出圆形磁场区域（不计粒子重力）。
+</div>
+
+<div style="font-size:.78rem;line-height:1.5">
+（1）粒子进入磁场时的速度 <Latex tex="v" /> 是多大？
+（2）粒子在磁场中做圆周运动的轨道半径 <Latex tex="r" /> 是多少？
+（3）粒子从电场中静止开始释放，到离开磁场时，总共经历的时间 <Latex tex="t" /> 是多少？
+</div>
+
+<div class="flex items-center justify-center" style="height:300px; flex-shrink:0">
+<AccelCircularField />
+</div>
+
+</div>
+
+---
+title: 例题解析：加速 + 圆形磁场
+clicks: 4
+---
+
+<!-- 解析页：分步点击；第 2 次点击时图上的轨迹圆弧 / 轨迹圆心 O′ / 半径 r / R 才出现 -->
+<div class="page-grow grid grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] items-center gap-5">
+
+<div class="stack" style="--stack-gap:.3rem;font-size:.85rem;line-height:1.45">
+
+<div><b>① 电场加速</b>：<Latex tex="qU = \dfrac{1}{2}mv^2" /> ⟹ <Latex tex="v = \sqrt{\dfrac{2qU}{m}}" /></div>
+
+<div v-click="2"><b>② 定轨迹圆心</b>：入射速度水平向右 ⟹ 轨迹圆心 <Latex tex="O'" /> 在 <Latex tex="A" /> 正下方；出射速度竖直向下 ⟹ <Latex tex="B" /> 在 <Latex tex="O'" /> 正右方。以 <Latex tex="O" /> 为原点、向右为 <Latex tex="x" /> 轴正方向、向上为 <Latex tex="y" /> 轴正方向：<Latex tex="A(-0.8R,\ 0.6R)" />，<Latex tex="O'(-0.8R,\ 0.6R-r)" />，<Latex tex="B(-0.8R+r,\ 0.6R-r)" /></div>
+
+<div v-click="3"><b>② 求半径</b>：<Latex tex="B" /> 在磁场边界上，<Latex tex="(-0.8R+r)^2 + (0.6R-r)^2 = R^2" /> ⟹ <Latex tex="2r^2 - 2.8Rr = 0" /> ⟹ <Latex tex="r = 1.4R" /></div>
+
+<div v-click="4"><b>③ 求总时间</b>：电场中 <Latex tex="t_1 = \dfrac{d}{v/2} = \dfrac{2d}{v}" />；磁场中速度偏转 <Latex tex="90^\circ" />，轨迹为四分之一圆，<Latex tex="t_2 = \dfrac{\pi r}{2v} = \dfrac{0.7\pi R}{v}" />。故 <Latex tex="t = t_1 + t_2 = \dfrac{2d + 0.7\pi R}{v} = (2d + 0.7\pi R)\sqrt{\dfrac{m}{2qU}}" /></div>
+
+</div>
+
+<div class="flex items-center justify-center" style="height:320px; min-height:0">
+<AccelCircularField :show-analysis="$clicks >= 2" />
+</div>
+
+</div>
+
 ---
 layout: base-flex
 ---
@@ -886,5 +936,34 @@ clicks: 3
 <div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">菱形 ⟹ <Latex tex="\overrightarrow{OP} = \overrightarrow{AC}" />：无论从哪儿入射，<Latex tex="P" /> 都落在 <Latex tex="O" /> 正下方 <Latex tex="R" /> 处的最低点。</div>
 
 </div>
+
+</div>
+
+---
+---
+
+<div class="ask text-lg">薄膜材料制备中的<b>磁控束</b>：一束宽度为 <Latex tex="d_1" /> 的平行带电粒子束（同种、同速），要变成宽度 <Latex tex="d_2" />、方向不变的平行束。磁场区域该设计成什么形状？</div>
+
+<div class="page-grow">
+<BeamWidthQuestion />
+</div>
+
+---
+clicks: 3
+---
+
+# 四片叶形磁区
+
+<div class="page-grow">
+<BeamWidthShaper :step="$clicks" />
+</div>
+
+<div class="stack stack-tight" style="gap:.2rem;font-size:.8em">
+
+<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">宽 <Latex tex="d_1" /> 的平行束在左面两片大叶里全部会聚到 <Latex tex="O" />：叶形弧的半径 = <Latex tex="d_1/2" />，正好是该区的回旋半径。</div>
+
+<div :style="{ opacity: $clicks >= 2 ? 1 : 0 }" class="tip-hint">右面两片小叶把散开的粒子重新变成平行束，宽度变为 <Latex tex="d_2" />；<Latex tex="B_2" /> 越大、<Latex tex="d_2" /> 越小。</div>
+
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }"><b>给定 <Latex tex="v" /> 和比荷 <Latex tex="q/m" />，场强还必须配对</b>：<Latex tex="B_1 = \dfrac{2mv}{qd_1}" />、<Latex tex="B_2 = \dfrac{2mv}{qd_2}" />（<Latex tex="\dfrac{B_2}{B_1} = \dfrac{d_1}{d_2}" />）——只把叶形画出来不够。</div>
 
 </div>
