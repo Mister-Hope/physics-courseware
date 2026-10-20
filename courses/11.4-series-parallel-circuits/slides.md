@@ -330,7 +330,7 @@ title: 复杂电路的简化
 <div style="width: 250px; flex: none"><SimplifySketchSvg variant="node" /></div>
 </div>
 <div v-click="3" style="display: flex; align-items: center; gap: 0.9rem">
-<div style="flex: 1; min-width: 0"><b>③ 理想电压表可看成断路，理想电流表可看成短路。</b></div>
+<div style="flex: 1; min-width: 0"><b>③ 理想电流表可看成短路，理想电压表可看成断路。</b></div>
 <div style="width: 250px; flex: none"><SimplifySketchSvg variant="meter" /></div>
 </div>
 <div v-click="4" style="display: flex; align-items: center; gap: 0.9rem">

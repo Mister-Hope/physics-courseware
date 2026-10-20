@@ -25,9 +25,9 @@ const FAINT = "rgba(148, 163, 184, 0.5)";
 
       <template v-if="variant === 'node'">
         <path d="M 6 52 H 148" />
-        <path d="M 52 52 V 26 M 104 52 V 26" />
+        <path d="M 52 52 V 80 M 104 52 V 80" />
         <path d="M 176 52 H 262 M 262 52 H 334" />
-        <path d="M 262 52 V 26 M 262 26 H 234 M 262 26 H 290" />
+        <path d="M 262 52 V 80 M 262 80 H 234 M 262 80 H 290" />
         <text x="160" y="58" font-size="18" fill="var(--c-text-dim)">⇒</text>
       </template>
 
@@ -39,7 +39,7 @@ const FAINT = "rgba(148, 163, 184, 0.5)";
         <path d="M 30 84 V 60 H 50 M 94 60 H 130 V 84" />
         <text x="160" y="90" font-size="18" fill="var(--c-text-dim)">⇒</text>
         <path d="M 176 84 H 236 M 268 84 H 334" />
-        <path :stroke="FAINT" stroke-dasharray="5 4" d="M 236 84 V 60 H 252 M 258 60 H 268 V 84" />
+        <path :stroke="FAINT" stroke-dasharray="4 4" d="M 236 84 V 68 M 268 84 V 68" />
       </template>
 
       <template v-if="variant === 'cap'">
@@ -78,9 +78,9 @@ const FAINT = "rgba(148, 163, 184, 0.5)";
       <circle v-if="variant === 'node'" cx="262" cy="52" r="3.6" />
     </g>
     <g :fill="ACCENT" font-family="KaTeX_Main" font-size="13" text-anchor="middle">
-      <text v-if="variant === 'node'" x="52" y="42">①</text>
-      <text v-if="variant === 'node'" x="104" y="42">①</text>
-      <text v-if="variant === 'node'" x="262" y="42">①</text>
+      <text v-if="variant === 'node'" x="52" y="44">①</text>
+      <text v-if="variant === 'node'" x="104" y="44">①</text>
+      <text v-if="variant === 'node'" x="262" y="44">①</text>
     </g>
   </svg>
 </template>
