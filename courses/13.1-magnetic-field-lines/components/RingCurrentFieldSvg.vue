@@ -1,8 +1,6 @@
 <script setup lang="ts">
 /**
- * 环形电流的磁场（13.1 P13）
- * 水平放置的环形电流（透视图）；step 1 磁感线、step 2 环上电流方向箭头、step 3 轴线上磁场方向。
- * 按钮切换电流方向（@click）：环上箭头、磁感线方向、轴线磁场（⊙ ↔ 向上/向下）全部反向。
+ * 环形电流的磁场（13.1 P13） 水平放置的环形电流（透视图）；step 1 磁感线、step 2 环上电流方向箭头、step 3 轴线上磁场方向。 按钮切换电流方向（@click）：环上箭头、磁感线方向、轴线磁场（⊙ ↔ 向上/向下）全部反向。
  * 物理：右手四指沿电流环绕方向，拇指指向轴线上磁场的方向；轴线磁场方向即环内磁场方向。
  */
 import { computed, ref } from "vue";
@@ -39,49 +37,22 @@ const loops = [
         <path v-for="(d, i) in loops" :key="i" :d="d" />
       </g>
       <g v-if="step >= 1" fill="var(--c-field)">
-        <path
-          :d="bUp ? 'M 276 210 L 280 190 L 284 210 Z' : 'M 276 270 L 280 290 L 284 270 Z'"
-        />
+        <path :d="bUp ? 'M 276 210 L 280 190 L 284 210 Z' : 'M 276 270 L 280 290 L 284 270 Z'" />
       </g>
 
       <!-- 环（透视图） -->
       <ellipse :cx="CX" :cy="CY" :rx="RX" :ry="RY" fill="none" stroke="var(--c-text)" stroke-width="4" />
       <!-- 环上电流方向箭头 -->
       <g v-if="step >= 2">
-        <CourseArrow
-          :from="{ x: CX - 40, y: CY + RY + 6 }"
-          :to="{ x: CX + 20 + 50 * nearDir, y: CY + RY + 6 }"
-          stroke="var(--c-force)"
-          :stroke-width="2.8"
-        />
-        <CourseArrow
-          :from="{ x: CX + 40, y: CY - RY - 6 }"
-          :to="{ x: CX - 20 - 50 * nearDir, y: CY - RY - 6 }"
-          stroke="var(--c-force)"
-          :stroke-width="2.8"
-        />
+        <CourseArrow :from="{ x: CX - 40, y: CY + RY + 6 }" :to="{ x: CX + 20 + 50 * nearDir, y: CY + RY + 6 }" stroke="var(--c-force)" :stroke-width="2.8" />
+        <CourseArrow :from="{ x: CX + 40, y: CY - RY - 6 }" :to="{ x: CX - 20 - 50 * nearDir, y: CY - RY - 6 }" stroke="var(--c-force)" :stroke-width="2.8" />
         <text :x="CX + 96" :y="CY + RY + 14" font-size="16" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic">I</text>
       </g>
 
       <!-- 轴线与轴线磁场方向 -->
       <g v-if="step >= 3">
-        <line
-          :x1="CX"
-          :y1="CY + 96"
-          :x2="CX"
-          :y2="CY - 130"
-          stroke="var(--c-text-dim)"
-          stroke-width="1.6"
-          stroke-dasharray="8 6"
-        />
-        <CourseArrow
-          :from="{ x: CX, y: CY - 40 }"
-          :to="{ x: CX, y: CY - 146 }"
-          stroke="var(--c-field)"
-          :stroke-width="3.4"
-          label="B"
-          :label-dx="16"
-        />
+        <line :x1="CX" :y1="CY + 96" :x2="CX" :y2="CY - 130" stroke="var(--c-text-dim)" stroke-width="1.6" stroke-dasharray="8 6" />
+        <CourseArrow :from="{ x: CX, y: CY - 40 }" :to="{ x: CX, y: CY - 146 }" stroke="var(--c-field)" :stroke-width="3.4" label="B" :label-dx="16" />
       </g>
     </svg>
 
@@ -107,9 +78,9 @@ const loops = [
 
 .mf-ctrl {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: center;
 }
 </style>

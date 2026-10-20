@@ -441,7 +441,6 @@ const labels = computed<FigLabel[]>(() => {
   --fig-max: 520px;
 
   position: relative;
-
   width: 100%;
   max-width: var(--fig-max);
   margin: 0 auto;

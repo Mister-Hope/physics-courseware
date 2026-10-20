@@ -1,10 +1,7 @@
 <script setup lang="ts">
 /**
- * 奥斯特实验（13.1 P3）
- * 导线沿南北方向架在小磁针上方；按钮控制开关与电流方向（@click，不占翻页点击）。
- * 磁针偏转角用真实关系 tanθ = B导 / B地，B导 = μ0 I / (2πr)，I = 4 A、r = 5 cm、B地 = 3×10⁻⁵ T。
- * 电流向北（屏幕向上）→ 磁针处磁场向西 → N 极向西偏；反向则反向。
- * 屏幕上一律不给读数，只给偏转方向与画面。
+ * 奥斯特实验（13.1 P3） 导线沿南北方向架在小磁针上方；按钮控制开关与电流方向（@click，不占翻页点击）。 磁针偏转角用真实关系 tanθ = B导 / B地，B导 = μ0 I /
+ * (2πr)，I = 4 A、r = 5 cm、B地 = 3×10⁻⁵ T。 电流向北（屏幕向上）→ 磁针处磁场向西 → N 极向西偏；反向则反向。 屏幕上一律不给读数，只给偏转方向与画面。
  */
 import { computed, ref } from "vue";
 
@@ -25,7 +22,7 @@ const rot = computed(() => {
 /** 磁针处磁场方向：电流向北 → 向西（屏幕左） */
 const bToWest = computed(() => dir.value > 0);
 
-const pick = (d: 0 | 1 | -1) => {
+const pick = (d: 0 | 1 | -1): void => {
   dir.value = d;
 };
 
@@ -36,8 +33,12 @@ const dial = { x: 200, y: 215, r: 62 };
   <div class="mf-oersted">
     <div class="mf-ctrl">
       <button type="button" class="mf-btn" :class="{ on: dir === 0 }" @click="pick(0)">断开</button>
-      <button type="button" class="mf-btn" :class="{ on: dir > 0 }" @click="pick(1)">电流向北</button>
-      <button type="button" class="mf-btn" :class="{ on: dir < 0 }" @click="pick(-1)">电流向南</button>
+      <button type="button" class="mf-btn" :class="{ on: dir > 0 }" @click="pick(1)">
+        电流向北
+      </button>
+      <button type="button" class="mf-btn" :class="{ on: dir < 0 }" @click="pick(-1)">
+        电流向南
+      </button>
     </div>
 
     <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" class="mf-fig-fill">
@@ -53,23 +54,82 @@ const dial = { x: 200, y: 215, r: 62 };
       <CircuitBattery :x="350" :y="44" orientation="horizontal" polarity :flip="dir > 0" />
 
       <!-- 小磁针刻度盘（从上往下看） -->
-      <circle :cx="dial.x" :cy="dial.y" :r="dial.r" fill="none" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.65" />
+      <circle
+        :cx="dial.x"
+        :cy="dial.y"
+        :r="dial.r"
+        fill="none"
+        stroke="var(--c-text-dim)"
+        stroke-width="2"
+        opacity="0.65"
+      />
       <g stroke="var(--c-text-dim)" stroke-width="1.6" opacity="0.6">
         <path :d="`M ${dial.x} ${dial.y - dial.r} V ${dial.y - dial.r + 12}`" />
         <path :d="`M ${dial.x} ${dial.y + dial.r} V ${dial.y + dial.r - 12}`" />
         <path :d="`M ${dial.x - dial.r} ${dial.y} H ${dial.x - dial.r + 12}`" />
         <path :d="`M ${dial.x + dial.r} ${dial.y} H ${dial.x + dial.r - 12}`" />
       </g>
-      <text :x="dial.x" :y="dial.y - dial.r - 10" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">北</text>
-      <text :x="dial.x" :y="dial.y + dial.r + 20" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">南</text>
-      <text :x="dial.x - dial.r - 12" :y="dial.y + 5" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">西</text>
-      <text :x="dial.x + dial.r + 12" :y="dial.y + 5" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">东</text>
+      <text
+        :x="dial.x"
+        :y="dial.y - dial.r - 10"
+        text-anchor="middle"
+        font-size="13"
+        fill="var(--c-text-dim)"
+        font-family="KaTeX_Main"
+      >
+        北
+      </text>
+      <text
+        :x="dial.x"
+        :y="dial.y + dial.r + 20"
+        text-anchor="middle"
+        font-size="13"
+        fill="var(--c-text-dim)"
+        font-family="KaTeX_Main"
+      >
+        南
+      </text>
+      <text
+        :x="dial.x - dial.r - 12"
+        :y="dial.y + 5"
+        text-anchor="middle"
+        font-size="13"
+        fill="var(--c-text-dim)"
+        font-family="KaTeX_Main"
+      >
+        西
+      </text>
+      <text
+        :x="dial.x + dial.r + 12"
+        :y="dial.y + 5"
+        text-anchor="middle"
+        font-size="13"
+        fill="var(--c-text-dim)"
+        font-family="KaTeX_Main"
+      >
+        东
+      </text>
 
       <!-- 磁针：N 红、S 蓝 -->
       <g :transform="`rotate(${rot} ${dial.x} ${dial.y})`">
-        <path :d="`M ${dial.x} ${dial.y - 48} L ${dial.x + 9} ${dial.y} L ${dial.x} ${dial.y + 10} L ${dial.x - 9} ${dial.y} Z`" fill="var(--c-danger)" />
-        <path :d="`M ${dial.x - 9} ${dial.y} L ${dial.x + 9} ${dial.y} L ${dial.x} ${dial.y + 46} Z`" fill="var(--c-velocity)" />
-        <text :x="dial.x" :y="dial.y - 22" text-anchor="middle" font-size="13" fill="var(--c-text)" font-family="KaTeX_Main">N</text>
+        <path
+          :d="`M ${dial.x} ${dial.y - 48} L ${dial.x + 9} ${dial.y} L ${dial.x} ${dial.y + 10} L ${dial.x - 9} ${dial.y} Z`"
+          fill="var(--c-danger)"
+        />
+        <path
+          :d="`M ${dial.x - 9} ${dial.y} L ${dial.x + 9} ${dial.y} L ${dial.x} ${dial.y + 46} Z`"
+          fill="var(--c-velocity)"
+        />
+        <text
+          :x="dial.x"
+          :y="dial.y - 22"
+          text-anchor="middle"
+          font-size="13"
+          fill="var(--c-text)"
+          font-family="KaTeX_Main"
+        >
+          N
+        </text>
       </g>
 
       <!-- 导线（沿南北方向、架在磁针上方） -->
@@ -98,7 +158,9 @@ const dial = { x: 200, y: 215, r: 62 };
         fill="var(--c-force)"
         font-family="KaTeX_Math"
         font-style="italic"
-      >I</text>
+      >
+        I
+      </text>
 
       <!-- 磁针处的磁场方向 -->
       <CourseArrow
@@ -122,6 +184,7 @@ const dial = { x: 200, y: 215, r: 62 };
   flex-direction: column;
   gap: 0.35rem;
   align-items: center;
+
   min-height: 0;
 }
 
@@ -134,7 +197,7 @@ const dial = { x: 200, y: 215, r: 62 };
 .mf-fig-fill {
   display: block;
   flex: 1;
-  min-height: 0;
   width: 100%;
+  min-height: 0;
 }
 </style>

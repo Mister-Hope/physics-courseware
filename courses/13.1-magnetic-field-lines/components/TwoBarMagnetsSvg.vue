@@ -1,12 +1,12 @@
 <script setup lang="ts">
 /**
- * 两条形磁铁靠近时的磁感线（13.1 P10）
- * 左格「同名磁极相对（N–N）」、右格「异名磁极相对（N–S）」，都是整空间的图；
- * 每个磁体内部另画淡虚线的 S→N 段（常显），让每条回路在图上自证闭合、不在极面「停住」。
- * step 1：左格外部线；2：右格外部线；3：右格把「穿过两磁铁之间」与「外侧绕回」两类线分色。
+ * 两条形磁铁靠近时的磁感线（13.1 P10） 左格「同名磁极相对（N–N）」、右格「异名磁极相对（N–S）」，都是整空间的图； 每个磁体内部另画淡虚线的 S→N 段（常显），让每条回路在图上自证闭合、不在极面「停住」。 step
+ * 1：左格外部线；2：右格外部线；3：右格把「穿过两磁铁之间」与「外侧绕回」两类线分色。
  */
 import { computed } from "vue";
-import { type Line, type Pole, arrowsAlong, inBox, squashLine, traceLine } from "./magField";
+
+import { arrowsAlong, inBox, squashLine, traceLine } from "./magField";
+import type { Line, Pole } from "./magField";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
 const step = computed(() => Math.max(0, stepProp));
@@ -38,17 +38,23 @@ const polesOf = (m: MagnetSpec): Pole[] =>
         { x: m.cx - A, y: CY, s: 1 },
         { x: m.cx + A, y: CY, s: -1 },
       ];
-const boxOf = (m: MagnetSpec) => ({ x: m.cx - A, y: CY - BW, w: A * 2, h: BW * 2 });
+const boxOf = (m: MagnetSpec): { x: number; y: number; w: number; h: number } => ({
+  x: m.cx - A,
+  y: CY - BW,
+  w: A * 2,
+  h: BW * 2,
+});
 const K = 0.45;
 const box1 = { x: 28, y: -120, w: 444, h: 420 };
 const box2 = { x: 508, y: -120, w: 424, h: 420 };
 
 const buildLines = (ms: MagnetSpec[], bounds: typeof box1): Line[] => {
-  const poles = ms.flatMap(polesOf);
-  const boxes = ms.map(boxOf);
+  const poles = ms.flatMap((m) => polesOf(m));
+  const boxes = ms.map((m) => boxOf(m));
   const out: Line[] = [];
   for (const m of ms) {
-    const nPole = polesOf(m).find((p) => p.s === 1)!;
+    const nPole = polesOf(m).find((p) => p.s === 1);
+    if (!nPole) continue;
     const face = nPole.x > m.cx ? 1 : -1;
     for (const d of [-30, -15, 0, 15, 30]) {
       const sx = nPole.x + 10 * face;
@@ -70,13 +76,10 @@ const gap = { left: 686, right: 744 };
 const classified = computed(() =>
   unlikeLines.value.map((line) => ({
     line,
-    throughGap: line.points.some(
-      ([x, y]) => x > gap.left && x < gap.right && Math.abs(y - CY) < 58,
-    ),
+    throughGap: line.points.some(([x, y]) => x > gap.left && x < gap.right && Math.abs(y - CY) < 58),
   })),
 );
-const colorOf = (throughGap: boolean): string =>
-  step.value >= 3 && !throughGap ? "var(--c-physics)" : "var(--c-field)";
+const colorOf = (throughGap: boolean): string => (step.value >= 3 && !throughGap ? "var(--c-physics)" : "var(--c-field)");
 
 const innerSegs = computed(() =>
   magnets.flatMap((m) => {
@@ -93,7 +96,7 @@ const innerSegs = computed(() =>
   }),
 );
 
-const half = (m: MagnetSpec, side: "left" | "right") => {
+const half = (m: MagnetSpec, side: "left" | "right"): { fill: string; label: string; labelX: number; x: number } => {
   const isN = m.nSide === "right" ? side === "right" : side === "left";
   return {
     fill: isN ? "var(--c-danger)" : "var(--c-velocity)",
@@ -117,25 +120,11 @@ const half = (m: MagnetSpec, side: "left" | "right") => {
 
     <!-- 磁体 -->
     <g v-for="(m, i) in magnets" :key="`m${i}`">
-      <template v-for="side in (['left', 'right'] as const)" :key="side">
-        <rect
-          :x="half(m, side).x"
-          :y="CY - BW"
-          :width="A"
-          :height="BW * 2"
-          :rx="5"
-          :fill="half(m, side).fill"
-          opacity="0.9"
-        />
-        <text
-          :x="half(m, side).labelX"
-          :y="CY + 5"
-          text-anchor="middle"
-          font-size="13"
-          font-weight="700"
-          fill="var(--c-bg)"
-          font-family="KaTeX_Main"
-        >{{ half(m, side).label }}</text>
+      <template v-for="side in ['left', 'right'] as const" :key="side">
+        <rect :x="half(m, side).x" :y="CY - BW" :width="A" :height="BW * 2" :rx="5" :fill="half(m, side).fill" opacity="0.9" />
+        <text :x="half(m, side).labelX" :y="CY + 5" text-anchor="middle" font-size="13" font-weight="700" fill="var(--c-bg)" font-family="KaTeX_Main">
+          {{ half(m, side).label }}
+        </text>
       </template>
     </g>
 

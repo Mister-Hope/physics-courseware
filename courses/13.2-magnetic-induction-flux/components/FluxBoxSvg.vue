@@ -69,25 +69,25 @@
 
 <script setup lang="ts">
 /** 顶点（viewBox 用户单位）：前表面 MNCD，后表面（后上方）E、F，隐藏的两角 Q、P */
-const N = { x: 150, y: 184 }
-const M = { x: 150, y: 280 }
-const C = { x: 210, y: 184 }
-const D = { x: 210, y: 280 }
-const E = { x: 183.8, y: 196.3 }
-const F = { x: 243.8, y: 196.3 }
-const P = { x: 243.8, y: 292.3 }
-const Q = { x: 183.8, y: 292.3 }
+const N = { x: 150, y: 184 };
+const M = { x: 150, y: 280 };
+const C = { x: 210, y: 184 };
+const D = { x: 210, y: 280 };
+const E = { x: 183.8, y: 196.3 };
+const F = { x: 243.8, y: 196.3 };
+const P = { x: 243.8, y: 292.3 };
+const Q = { x: 183.8, y: 292.3 };
 
-const { step = 0 } = defineProps<{ /** 1 = 高亮 MNCD；2 = 高亮 NEFC；3 = 高亮 MEFD 并给出投影虚线 */ step?: number }>()
+const { step = 0 } = defineProps<{ /** 1 = 高亮 MNCD；2 = 高亮 NEFC；3 = 高亮 MEFD 并给出投影虚线 */ step?: number }>();
 
 /** 磁感线的起始纵坐标（沿进深方向 4 条） */
-const FIELD_Y = [96, 146, 196, 246]
+const FIELD_Y = [96, 146, 196, 246];
 
 /**
  * 顶点序列 → polygon points
  *
  * @param verts 顶点数组
- * @returns points 字符串
+ * @returns Points 字符串
  */
-const pts = (verts: { x: number; y: number }[]): string => verts.map((v) => `${v.x},${v.y}`).join(' ')
+const pts = (verts: { x: number; y: number }[]): string => verts.map((v) => `${v.x},${v.y}`).join(" ");
 </script>

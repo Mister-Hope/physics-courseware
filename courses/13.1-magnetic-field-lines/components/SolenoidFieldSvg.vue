@@ -1,12 +1,9 @@
 <script setup lang="ts">
-/**
- * 通电螺线管的磁场（13.1 P15）
- * 螺线管（多匝线圈）＋磁感线：内部平行密集、外部像条形磁体；
- * step 1 外部线 + 电流方向、step 2 内部线 + N/S 极、step 3 管口外「疏」、step 4（页面文字）内部更强。
- * 按钮切换电流方向（@click）：N/S 极互换、内部箭头与外部线方向反向。
- */
+/** 通电螺线管的磁场（13.1 P15） 螺线管（多匝线圈）＋磁感线：内部平行密集、外部像条形磁体； step 1 外部线 + 电流方向、step 2 内部线 + N/S 极、step 3 管口外「疏」、step 4（页面文字）内部更强。 按钮切换电流方向（@click）：N/S 极互换、内部箭头与外部线方向反向。 */
 import { computed, ref } from "vue";
-import { type Pole, arrowsAlong, traceLine } from "./magField";
+
+import { arrowsAlong, traceLine } from "./magField";
+import type { Pole } from "./magField";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
 const step = computed(() => Math.max(0, stepProp));
@@ -62,15 +59,7 @@ const coilTurns = [1, 2, 3, 4, 5, 6, 7];
 
       <!-- 电流方向 -->
       <g v-if="step >= 1">
-        <line
-          :x1="178"
-          :y1="CY - 58"
-          :x2="reverse ? 150 : 310"
-          :y2="CY - 58"
-          stroke="var(--c-force)"
-          stroke-width="2.6"
-          stroke-linecap="round"
-        />
+        <line :x1="178" :y1="CY - 58" :x2="reverse ? 150 : 310" :y2="CY - 58" stroke="var(--c-force)" stroke-width="2.6" stroke-linecap="round" />
         <path
           :d="reverse ? `M 162 ${CY - 65} L 146 ${CY - 58} L 162 ${CY - 51} Z` : `M 294 ${CY - 65} L 310 ${CY - 58} L 294 ${CY - 51} Z`"
           fill="var(--c-force)"
@@ -81,14 +70,7 @@ const coilTurns = [1, 2, 3, 4, 5, 6, 7];
       <!-- 内部磁感线（平行密集，指向 N 极） -->
       <g v-if="step >= 2">
         <g stroke="var(--c-field)" stroke-width="1.9" opacity="0.95">
-          <line
-            v-for="(y, i) in innerYs"
-            :key="i"
-            :x1="reverse ? 452 : 128"
-            :y1="CY + y"
-            :x2="reverse ? 128 : 452"
-            :y2="CY + y"
-          />
+          <line v-for="(y, i) in innerYs" :key="i" :x1="reverse ? 452 : 128" :y1="CY + y" :x2="reverse ? 128 : 452" :y2="CY + y" />
         </g>
         <g fill="var(--c-field)">
           <path

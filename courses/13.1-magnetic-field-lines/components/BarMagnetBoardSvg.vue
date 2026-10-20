@@ -1,10 +1,7 @@
 <script setup lang="ts">
-/**
- * 铁屑在磁场中的排列（13.1 P6）
- * 玻璃板 + 条形磁体（左 S 蓝、右 N 红）；step 1 撒上铁屑（杂乱）、step 2 轻敲后沿各点磁场方向排列。
- * 铁屑取向 = 该点磁场方向，方向由 magField 的两磁极模型给出（与 P5 小磁针、P7 磁感线同一套）。
- */
+/** 铁屑在磁场中的排列（13.1 P6） 玻璃板 + 条形磁体（左 S 蓝、右 N 红）；step 1 撒上铁屑（杂乱）、step 2 轻敲后沿各点磁场方向排列。 铁屑取向 = 该点磁场方向，方向由 magField 的两磁极模型给出（与 P5 小磁针、P7 磁感线同一套）。 */
 import { computed } from "vue";
+
 import { barPoles, fieldAngle, inBox } from "./magField";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
@@ -19,6 +16,7 @@ const BW = 30;
 const poles = barPoles(CX, CY, A);
 const magnetBox = { x: CX - A, y: CY - BW, w: A * 2, h: BW * 2 };
 
+/* oxlint-disable eslint/no-bitwise, unicorn/prefer-math-trunc, eslint/operator-assignment -- mulberry32 是 32 位整型 PRNG，位运算不能改写 */
 const mulberry32 = (seed: number): (() => number) => {
   let a = seed;
   return () => {
@@ -29,6 +27,7 @@ const mulberry32 = (seed: number): (() => number) => {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 };
+/* oxlint-enable eslint/no-bitwise, unicorn/prefer-math-trunc, eslint/operator-assignment */
 
 interface Grain {
   x: number;
@@ -81,16 +80,7 @@ const grains = computed(() =>
   <svg :viewBox="`0 0 ${W} ${H}`" width="100%" xmlns="http://www.w3.org/2000/svg" class="mf-fig">
     <rect x="16" y="16" width="748" height="268" rx="12" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.3" />
     <g v-if="step >= 1" stroke-linecap="round" stroke-width="1.6">
-      <line
-        v-for="(g, i) in grains"
-        :key="i"
-        :x1="g.x1"
-        :y1="g.y1"
-        :x2="g.x2"
-        :y2="g.y2"
-        :stroke="g.color"
-        :opacity="g.op"
-      />
+      <line v-for="(g, i) in grains" :key="i" :x1="g.x1" :y1="g.y1" :x2="g.x2" :y2="g.y2" :stroke="g.color" :opacity="g.op" />
     </g>
     <rect :x="CX - A" :y="CY - BW" :width="A" :height="BW * 2" rx="7" fill="var(--c-velocity)" opacity="0.95" />
     <rect :x="CX" :y="CY - BW" :width="A" :height="BW * 2" rx="7" fill="var(--c-danger)" opacity="0.95" />

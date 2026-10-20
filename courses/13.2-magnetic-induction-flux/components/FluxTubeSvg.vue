@@ -22,9 +22,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
-const { step = 0 } = defineProps<{ /** 0 = S₂ 还小（只被 2 条线穿过）；1 = S₂ 已放大（4 条线全穿过） */ step?: number }>()
+const { step = 0 } = defineProps<{ /** 0 = S₂ 还小（只被 2 条线穿过）；1 = S₂ 已放大（4 条线全穿过） */ step?: number }>();
 
 /** 4 条发散磁感线：左端密（间距 16）、右端疏（间距 44） */
 const ROWS = [
@@ -32,44 +32,43 @@ const ROWS = [
   { y0: 154, y1: 140 },
   { y0: 170, y1: 184 },
   { y0: 186, y1: 228 },
-]
-const X0 = 60
-const X1 = 470
-const YC = 162
-const N = 20
+];
+const X0 = 60;
+const X1 = 470;
+const YC = 162;
+const N = 20;
 
 const LINES = ROWS.map(({ y0, y1 }) => {
-  const pts = [] as { x: number; y: number }[]
+  const pts = [] as { x: number; y: number }[];
   for (let i = 0; i <= N; i += 1) {
-    const t = i / N
+    const t = i / N;
     // 二次贝塞尔：中间略向 YC 收，读起来像"同一束"
-    const y = (1 - t) * (1 - t) * y0 + 2 * t * (1 - t) * ((y0 + y1) / 2 - (y0 - YC) * 0.12) + t * t * y1
-    pts.push({ x: X0 + (X1 - X0) * t, y })
+    const y = (1 - t) * (1 - t) * y0 + 2 * t * (1 - t) * ((y0 + y1) / 2 - (y0 - YC) * 0.12) + t * t * y1;
+    pts.push({ x: X0 + (X1 - X0) * t, y });
   }
-  const d = pts.map((q, i) => `${i === 0 ? 'M' : 'L'} ${q.x.toFixed(1)} ${q.y.toFixed(1)}`).join(' ')
-  return { d, tailFrom: pts[N - 1], tailTo: pts[N] }
-})
+  const d = pts.map((q, i) => `${i === 0 ? "M" : "L"} ${q.x.toFixed(1)} ${q.y.toFixed(1)}`).join(" ");
+  return { d, tailFrom: pts[N - 1], tailTo: pts[N] };
+});
 
-const THICK = { x: 7, y: 7 }
+const THICK = { x: 7, y: 7 };
 /** S₁：密处的小面（高度 74，4 条线全穿过） */
-const S1 = { x: 120, y1: 126, y2: 200 }
+const S1 = { x: 120, y1: 126, y2: 200 };
 /** S₂：小（高度 68，只被中间 2 条穿过）↔ 大（高度 134，4 条全穿过） */
-const S2_SMALL = { x: 400, y1: 128, y2: 196 }
-const S2_BIG = { x: 400, y1: 96, y2: 230 }
-const s2 = computed(() => (step >= 1 ? S2_BIG : S2_SMALL))
+const S2_SMALL = { x: 400, y1: 128, y2: 196 };
+const S2_BIG = { x: 400, y1: 96, y2: 230 };
+const s2 = computed(() => (step >= 1 ? S2_BIG : S2_SMALL));
 
 const sheet = (s: { x: number; y1: number; y2: number }): string =>
-  `${s.x},${s.y1} ${s.x + THICK.x},${s.y1 + THICK.y} ${s.x + THICK.x},${s.y2 + THICK.y} ${s.x},${s.y2}`
+  `${s.x},${s.y1} ${s.x + THICK.x},${s.y1 + THICK.y} ${s.x + THICK.x},${s.y2 + THICK.y} ${s.x},${s.y2}`;
 const pct = (s: { x: number; y1: number; y2: number }): { x: number; y: number } => ({
   x: (s.x / 520) * 100,
   y: ((s.y1 + s.y2) / 2 / 320) * 100,
-})
+});
 </script>
 
 <style scoped>
 .ftb {
   position: relative;
-
   width: 100%;
   min-width: 0;
 }

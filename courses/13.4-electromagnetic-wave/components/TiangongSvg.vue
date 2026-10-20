@@ -24,16 +24,7 @@ defineProps<{ step?: number }>();
       <tspan font-family="KaTeX_Math" font-style="italic">r</tspan>
       <tspan font-family="KaTeX_Main">= 6 740 km</tspan>
     </text>
-    <text
-      x="104"
-      y="248"
-      font-size="19"
-      fill="var(--c-text)"
-      stroke="var(--c-bg)"
-      stroke-width="4"
-      paint-order="stroke"
-      stroke-linejoin="round"
-    >
+    <text x="104" y="248" font-size="19" fill="var(--c-text)" stroke="var(--c-bg)" stroke-width="4" paint-order="stroke" stroke-linejoin="round">
       <tspan font-family="KaTeX_Math" font-style="italic">R</tspan>
       <tspan font-family="KaTeX_Main">= 6 400 km</tspan>
     </text>
@@ -60,31 +51,13 @@ defineProps<{ step?: number }>();
       <line x1="332" y1="93" x2="338" y2="84" stroke="var(--c-text-dim)" stroke-width="1.6" />
       <path d="M 335 82 A 6 6 0 0 1 344 80" fill="none" stroke="var(--c-accent)" stroke-width="1.8" stroke-linecap="round" />
       <line x1="340" y1="95" x2="376" y2="108" stroke="var(--c-text-dim)" stroke-width="1.3" />
-      <text
-        x="380"
-        y="112"
-        font-size="18"
-        fill="var(--c-text-dim)"
-        stroke="var(--c-bg)"
-        stroke-width="4"
-        paint-order="stroke"
-        stroke-linejoin="round"
-      >
+      <text x="380" y="112" font-size="18" fill="var(--c-text-dim)" stroke="var(--c-bg)" stroke-width="4" paint-order="stroke" stroke-linejoin="round">
         地面接收站
       </text>
     </g>
     <g v-if="(step ?? 0) >= 1">
       <line x1="353" y1="72" x2="332" y2="93" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round" />
-      <text
-        x="372"
-        y="86"
-        font-size="20"
-        fill="var(--c-accent)"
-        stroke="var(--c-bg)"
-        stroke-width="4"
-        paint-order="stroke"
-        stroke-linejoin="round"
-      >
+      <text x="372" y="86" font-size="20" fill="var(--c-accent)" stroke="var(--c-bg)" stroke-width="4" paint-order="stroke" stroke-linejoin="round">
         <tspan font-family="KaTeX_Math" font-style="italic">s</tspan>
       </text>
     </g>

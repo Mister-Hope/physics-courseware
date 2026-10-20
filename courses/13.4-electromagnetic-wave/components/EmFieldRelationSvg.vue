@@ -11,21 +11,7 @@
       变化的电场
       <tspan font-family="KaTeX_Math" font-style="italic">E</tspan>
     </text>
-    <CourseArrow
-      :from="{ x: 352, y: 88 }"
-      :to="{ x: 508, y: 88 }"
-      stroke="var(--c-accent)"
-      stroke-width="2.6"
-      label="产生"
-      :label-dy="-12"
-    />
-    <CourseArrow
-      :from="{ x: 508, y: 114 }"
-      :to="{ x: 352, y: 114 }"
-      stroke="var(--c-accent-2)"
-      stroke-width="2.6"
-      label="产生"
-      :label-dy="20"
-    />
+    <CourseArrow :from="{ x: 352, y: 88 }" :to="{ x: 508, y: 88 }" stroke="var(--c-accent)" stroke-width="2.6" label="产生" :label-dy="-12" />
+    <CourseArrow :from="{ x: 508, y: 114 }" :to="{ x: 352, y: 114 }" stroke="var(--c-accent-2)" stroke-width="2.6" label="产生" :label-dy="20" />
   </svg>
 </template>

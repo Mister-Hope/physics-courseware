@@ -23,6 +23,10 @@ const TARGET_PX = {
 const round2 = (value: number): number => Math.round(value * 100) / 100;
 const tidy = (value: number): number => Number(value.toFixed(6));
 
+// 九宫格方位 → 水平方向向量：left / right 各自取 ±1，center 与 top / bottom 取 0
+const horizontalDir = (value: string): number =>
+  value.includes("left") ? -1 : value.includes("right") ? 1 : 0;
+
 const STEP_CANDIDATES = [
   0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000,
 ];
@@ -493,8 +497,6 @@ const pointItem = computed(() => {
   const side = point.labelAt ?? "top-right";
   // 九宫格方位 → 方向向量：left / right / top / bottom / center 各自单独成立，
   // 角方位（top-left 这类）等价于两个方向各取一半。旧的四角行为与改造前逐像素一致。
-  const horizontalDir = (value: string): number =>
-    value.includes("left") ? -1 : value.includes("right") ? 1 : 0;
   const dirX = horizontalDir(side);
   const dirY = side.startsWith("top") ? -1 : side.startsWith("bottom") ? 1 : 0;
   const font = point.text || point.math ? sizes.label : 0;
@@ -557,8 +559,7 @@ const curveItems = computed(() =>
         style: {
           fill: "none",
           // `color` 是正本、`stroke` 是兼容旧课件的别名（两个都写时以 `color` 为准）
-          stroke:
-            curve.color ?? curve.stroke ?? CURVE_PALETTE[index % CURVE_PALETTE.length],
+          stroke: curve.color ?? curve.stroke ?? CURVE_PALETTE[index % CURVE_PALETTE.length],
           strokeWidth: lineWidthOf(curve.width, sizes.curve),
           strokeDasharray: dashOf(curve.dashed, sizes.dash),
           strokeLinecap: "round",

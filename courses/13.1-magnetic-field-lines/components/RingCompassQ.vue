@@ -1,9 +1,7 @@
 <script setup lang="ts">
 /**
- * 练习 2 题目图（13.1 P19，对应教材 13.1 练习与应用第 5 题）
- * 干净的题目图：纸面内的圆形导线环 + 逆时针电流箭头 + 环心小磁针（不给结论）。
- * showField（点击 1）：环心标出轴线磁场方向（垂直纸面向外，⊙）；
- * showAnswer（点击 2）：小磁针 N 极指向纸外（红色 ⊙ 标 N）。
+ * 练习 2 题目图（13.1 P19，对应教材 13.1 练习与应用第 5 题） 干净的题目图：纸面内的圆形导线环 + 逆时针电流箭头 + 环心小磁针（不给结论）。 showField（点击
+ * 1）：环心标出轴线磁场方向（垂直纸面向外，⊙）； showAnswer（点击 2）：小磁针 N 极指向纸外（红色 ⊙ 标 N）。
  */
 import { computed } from "vue";
 
@@ -47,10 +45,28 @@ const arrows = computed(() =>
       stroke="var(--c-force)"
       :stroke-width="2.8"
     />
-    <text :x="CX + R + 14" :y="CY - 8" font-size="16" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic">I</text>
+    <text
+      :x="CX + R + 14"
+      :y="CY - 8"
+      font-size="16"
+      fill="var(--c-force)"
+      font-family="KaTeX_Math"
+      font-style="italic"
+    >
+      I
+    </text>
 
     <!-- 环心小磁针（题目只给位置，不给结论） -->
-    <circle :cx="CX" :cy="CY" r="30" fill="none" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-dasharray="5 5" opacity="0.6" />
+    <circle
+      :cx="CX"
+      :cy="CY"
+      r="30"
+      fill="none"
+      stroke="var(--c-text-dim)"
+      stroke-width="1.2"
+      stroke-dasharray="5 5"
+      opacity="0.6"
+    />
 
     <!-- 点击 1：轴线磁场垂直纸面向外 -->
     <g v-if="showField">
@@ -61,7 +77,15 @@ const arrows = computed(() =>
     <g v-if="showAnswer">
       <circle :cx="CX" :cy="CY" r="13" fill="none" stroke="var(--c-danger)" stroke-width="2.6" />
       <circle :cx="CX" :cy="CY" r="4.5" fill="var(--c-danger)" />
-      <text :x="CX + 22" :y="CY - 14" font-size="15" fill="var(--c-danger)" font-family="KaTeX_Main">N</text>
+      <text
+        :x="CX + 22"
+        :y="CY - 14"
+        font-size="15"
+        fill="var(--c-danger)"
+        font-family="KaTeX_Main"
+      >
+        N
+      </text>
     </g>
   </svg>
 </template>

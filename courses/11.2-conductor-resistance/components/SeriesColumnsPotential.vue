@@ -147,7 +147,6 @@ const labels = [
 .scp {
   display: grid;
   gap: 0.15rem;
-
   width: 360px;
   min-width: 0;
 }
@@ -158,9 +157,7 @@ const labels = [
 
 .scp-item figcaption {
   margin-top: 0.1rem;
-
   color: var(--c-text-dim);
-
   font-size: 0.85rem;
   text-align: center;
 }

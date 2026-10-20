@@ -1,9 +1,5 @@
 <script setup lang="ts">
-/**
- * 不接触也有力的作用（13.1 P4）
- * 三格：磁体与磁体、蹄形磁体与通电导线、通电导线与通电导线；
- * show-field（点击 1）时在两者之间出现「磁场」与波纹——说明三种相互作用都通过磁场发生。
- */
+/** 不接触也有力的作用（13.1 P4） 三格：磁体与磁体、蹄形磁体与通电导线、通电导线与通电导线； show-field（点击 1）时在两者之间出现「磁场」与波纹——说明三种相互作用都通过磁场发生。 */
 const { showField = false } = defineProps<{ showField?: boolean }>();
 
 const W = 960;
@@ -25,16 +21,8 @@ const Y = 106;
     <line x1="150" :y1="Y" x2="210" :y2="Y" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="6 5" />
 
     <!-- 第二格：蹄形磁体与通电导线 -->
-    <path
-      d="M 366 146 V 92 Q 366 76 382 76 H 470 V 92 H 412 Q 404 92 404 100 V 146 Z"
-      fill="var(--c-danger)"
-      opacity="0.9"
-    />
-    <path
-      d="M 500 146 V 92 Q 500 76 516 76 H 556 V 92 H 524 Q 516 92 516 100 V 146 Z"
-      fill="var(--c-velocity)"
-      opacity="0.9"
-    />
+    <path d="M 366 146 V 92 Q 366 76 382 76 H 470 V 92 H 412 Q 404 92 404 100 V 146 Z" fill="var(--c-danger)" opacity="0.9" />
+    <path d="M 500 146 V 92 Q 500 76 516 76 H 556 V 92 H 524 Q 516 92 516 100 V 146 Z" fill="var(--c-velocity)" opacity="0.9" />
     <text x="382" y="130" font-size="13" font-weight="700" fill="var(--c-bg)" font-family="KaTeX_Main">N</text>
     <text x="508" y="130" font-size="13" font-weight="700" fill="var(--c-bg)" font-family="KaTeX_Main">S</text>
     <circle cx="452" :cy="Y" r="12" fill="var(--c-surface)" stroke="var(--c-text)" stroke-width="1.8" />

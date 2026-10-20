@@ -1,12 +1,9 @@
 <script setup lang="ts">
-/**
- * 磁场为什么能叠加（13.1 P12）
- * 左格：异名磁极（N–S）之间取点 P；右格：同名磁极（N–N）之间取点 P。
- * 每格画出左、右磁体在 P 点各自产生的 B₁、B₂ 与合矢量 B。
- * 矢量由 magField 的四磁极模型算出（与 P11 同一套），箭头用 CourseArrow，颜色见页面图例。
- */
+/** 磁场为什么能叠加（13.1 P12） 左格：异名磁极（N–S）之间取点 P；右格：同名磁极（N–N）之间取点 P。 每格画出左、右磁体在 P 点各自产生的 B₁、B₂ 与合矢量 B。 矢量由 magField 的四磁极模型算出（与 P11 同一套），箭头用 CourseArrow，颜色见页面图例。 */
 import { computed } from "vue";
-import { type Pole, fieldAt, inBox, squashLine, traceLine } from "./magField";
+
+import { fieldAt, inBox, squashLine, traceLine } from "./magField";
+import type { Pole } from "./magField";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
 const step = computed(() => Math.max(0, stepProp));
@@ -42,11 +39,16 @@ const polesOf = (m: MagnetSpec): Pole[] =>
         { x: m.cx - A, y: CY, s: 1 },
         { x: m.cx + A, y: CY, s: -1 },
       ];
-const boxOf = (m: MagnetSpec) => ({ x: m.cx - A, y: CY - BW, w: A * 2, h: BW * 2 });
+const boxOf = (m: MagnetSpec): { x: number; y: number; w: number; h: number } => ({
+  x: m.cx - A,
+  y: CY - BW,
+  w: A * 2,
+  h: BW * 2,
+});
 const boxL = { x: 28, y: -120, w: 444, h: 420 };
 const boxR = { x: 508, y: -120, w: 424, h: 420 };
 
-const half = (m: MagnetSpec, side: "left" | "right") => {
+const half = (m: MagnetSpec, side: "left" | "right"): { fill: string; label: string; labelX: number; x: number } => {
   const isN = m.nSide === "right" ? side === "right" : side === "left";
   return {
     fill: isN ? "var(--c-danger)" : "var(--c-velocity)",
@@ -58,7 +60,13 @@ const half = (m: MagnetSpec, side: "left" | "right") => {
 
 const UNIT = 46;
 
-const vectors = (ms: [MagnetSpec, MagnetSpec], p: { x: number; y: number }) => {
+const vectors = (
+  ms: [MagnetSpec, MagnetSpec],
+  p: { x: number; y: number },
+): {
+  b1: { from: { x: number; y: number }; to: { x: number; y: number } };
+  b2: { from: { x: number; y: number }; to: { x: number; y: number } };
+} => {
   const b1 = fieldAt(p.x, p.y, polesOf(ms[0]));
   const b2 = fieldAt(p.x, p.y, polesOf(ms[1]));
   const m1 = Math.hypot(b1[0], b1[1]);
@@ -78,12 +86,13 @@ const P_R = { x: 710, y: CY };
 const vUnlike = vectors(unlike, P_L);
 const vLike = vectors(like, P_R);
 
-const bgLines = (ms: [MagnetSpec, MagnetSpec], bounds: typeof boxL) => {
-  const poles = ms.flatMap(polesOf);
-  const boxes = ms.map(boxOf);
+const bgLines = (ms: [MagnetSpec, MagnetSpec], bounds: typeof boxL): string[] => {
+  const poles = ms.flatMap((m) => polesOf(m));
+  const boxes = ms.map((m) => boxOf(m));
   const out: string[] = [];
   for (const m of ms) {
-    const nPole = polesOf(m).find((p) => p.s === 1)!;
+    const nPole = polesOf(m).find((p) => p.s === 1);
+    if (!nPole) continue;
     const face = nPole.x > m.cx ? 1 : -1;
     for (const d of [-20, 0, 20]) {
       const sx = nPole.x + 10 * face;
@@ -112,25 +121,11 @@ const bgR = bgLines(like, boxR);
 
     <!-- 磁体 -->
     <g v-for="(m, i) in [...unlike, ...like]" :key="`m${i}`">
-      <template v-for="side in (['left', 'right'] as const)" :key="side">
-        <rect
-          :x="half(m, side).x"
-          :y="CY - BW"
-          :width="A"
-          :height="BW * 2"
-          :rx="4"
-          :fill="half(m, side).fill"
-          opacity="0.9"
-        />
-        <text
-          :x="half(m, side).labelX"
-          :y="CY + 5"
-          text-anchor="middle"
-          font-size="12"
-          font-weight="700"
-          fill="var(--c-bg)"
-          font-family="KaTeX_Main"
-        >{{ half(m, side).label }}</text>
+      <template v-for="side in ['left', 'right'] as const" :key="side">
+        <rect :x="half(m, side).x" :y="CY - BW" :width="A" :height="BW * 2" :rx="4" :fill="half(m, side).fill" opacity="0.9" />
+        <text :x="half(m, side).labelX" :y="CY + 5" text-anchor="middle" font-size="12" font-weight="700" fill="var(--c-bg)" font-family="KaTeX_Main">
+          {{ half(m, side).label }}
+        </text>
       </template>
     </g>
 

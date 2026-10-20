@@ -1,12 +1,9 @@
 <script setup lang="ts">
-/**
- * 磁感线的特点（13.1 P8）
- * 左格：条形磁体外部磁感线（常显）→ 点击 1 补出磁体内部由 S 到 N 的虚线，内外接成闭合回路；
- * 右格：点击 2 出现「两条磁感线如果相交」的反例示意（交叉点打叉），用来否定相交。
- * 内部虚线只承担「闭合示意」，不参与疏密、不标数值。
- */
+/** 磁感线的特点（13.1 P8） 左格：条形磁体外部磁感线（常显）→ 点击 1 补出磁体内部由 S 到 N 的虚线，内外接成闭合回路； 右格：点击 2 出现「两条磁感线如果相交」的反例示意（交叉点打叉），用来否定相交。 内部虚线只承担「闭合示意」，不参与疏密、不标数值。 */
 import { computed } from "vue";
-import { type Line, arrowsAlong, barPoles, squashLine, traceLine } from "./magField";
+
+import { arrowsAlong, barPoles, squashLine, traceLine } from "./magField";
+import type { Line } from "./magField";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
 const step = computed(() => Math.max(0, stepProp));
@@ -39,10 +36,7 @@ const innerLines = [-8, 0, 8].map((dy) => ({
 }));
 
 const cross = { x: 720, y: 160 };
-const crossPaths = [
-  "M 610 205 C 655 190 686 176 710 166",
-  "M 610 118 C 655 133 686 147 710 157",
-];
+const crossPaths = ["M 610 205 C 655 190 686 176 710 166", "M 610 118 C 655 133 686 147 710 157"];
 </script>
 
 <template>

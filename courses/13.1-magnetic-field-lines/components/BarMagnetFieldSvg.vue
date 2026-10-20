@@ -1,12 +1,12 @@
 <script setup lang="ts">
 /**
- * 条形磁体的磁感线（13.1 P5 / P7）
- * variant="needles"：磁体 + 三个待放小磁针的位置标记，逐击让磁针转到该点磁场方向；
- * variant="lines"  ：磁体外部的磁感线（N→S，带箭头），可加某点切线与两极「密」/ 中间「疏」标注。
- * 场方向全部由 magField 的两磁极模型算出，P6 铁屑、P8 闭合回路共用同一套方向。
+ * 条形磁体的磁感线（13.1 P5 / P7） variant="needles"：磁体 + 三个待放小磁针的位置标记，逐击让磁针转到该点磁场方向； variant="lines" ：磁体外部的磁感线（N→S，带箭头），可加某点切线与两极「密」/ 中间「疏」标注。 场方向全部由 magField
+ * 的两磁极模型算出，P6 铁屑、P8 闭合回路共用同一套方向。
  */
 import { computed } from "vue";
-import { type Line, arrowsAlong, barPoles, squashLine, squashedAngle, traceLine } from "./magField";
+
+import { arrowsAlong, barPoles, squashLine, squashedAngle, traceLine } from "./magField";
+import type { Line } from "./magField";
 
 const {
   variant = "lines",
@@ -41,9 +41,7 @@ const lines = computed<Line[]>(() => {
   return out;
 });
 
-const lineArrows = computed(() =>
-  lines.value.map((line) => arrowsAlong(line, [0.46], 7.5)),
-);
+const lineArrows = computed(() => lines.value.map((line) => arrowsAlong(line, [0.46], 7.5)));
 
 /** P7 第 2 击：在某条线上取一点 P，按该点的场方向画切线 */
 const tangent = computed(() => {
@@ -51,7 +49,7 @@ const tangent = computed(() => {
   if (!line) return null;
   const i = Math.max(2, Math.floor(line.points.length * 0.3));
   const [x, y] = line.points[i];
-  const ang = squashedAngle(x, y, poles, CY, K);
+  const ang = squashedAngle(x, y, poles, { cy: CY, k: K });
   const L = 54;
   return {
     x,
@@ -70,12 +68,9 @@ const needleSpots = computed(() => [
   { x: CX - A - 150, y: CY, show: step.value >= 3 },
 ]);
 
-const needleAngle = (x: number, y: number): number =>
-  (squashedAngle(x, y, poles, CY, K) * 180) / Math.PI;
+const needleAngle = (x: number, y: number): number => (squashedAngle(x, y, poles, { cy: CY, k: K }) * 180) / Math.PI;
 
-const needles = computed(() =>
-  needleSpots.value.map((s) => ({ ...s, deg: needleAngle(s.x, s.y) })),
-);
+const needles = computed(() => needleSpots.value.map((s) => ({ x: s.x, y: s.y, show: s.show, deg: needleAngle(s.x, s.y) })));
 </script>
 
 <template>

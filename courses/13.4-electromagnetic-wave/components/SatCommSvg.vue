@@ -7,16 +7,7 @@
       <path d="M 192 152 L 204 140" />
     </g>
     <path d="M 196 132 A 9 9 0 0 1 212 130" fill="none" stroke="var(--c-accent)" stroke-width="2.2" stroke-linecap="round" />
-    <text
-      x="212"
-      y="174"
-      font-size="21"
-      fill="var(--c-text-dim)"
-      stroke="var(--c-bg)"
-      stroke-width="4"
-      paint-order="stroke"
-      stroke-linejoin="round"
-    >
+    <text x="212" y="174" font-size="21" fill="var(--c-text-dim)" stroke="var(--c-bg)" stroke-width="4" paint-order="stroke" stroke-linejoin="round">
       地面站
     </text>
     <g>

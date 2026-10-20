@@ -42,39 +42,37 @@
 
 <script setup lang="ts">
 /** 左簇（间距 26）与右簇（间距 46） */
-const LEFT = [96, 122, 148, 174, 200, 226]
-const RIGHT = [320, 366, 412, 458]
+const LEFT = [96, 122, 148, 174, 200, 226];
+const RIGHT = [320, 366, 412, 458];
 /** 两个同样大小的面：薄片沿 x 的宽度都是 88（表示"取同样面积"） */
-const S1 = { x1: 108, x2: 196, y: 152 }
-const S2 = { x1: 330, x2: 418, y: 152 }
+const S1 = { x1: 108, x2: 196, y: 152 };
+const S2 = { x1: 330, x2: 418, y: 152 };
 /** 薄片"向纸内斜出去"的偏移，用来提示这是垂直于纸面的面 */
-const SKEW = { x: 9, y: 9 }
+const SKEW = { x: 9, y: 9 };
 
-const { step = 1 } = defineProps<{ /** 1 = 只有磁感线；2 = 出现 S₁ 并点亮穿过的条数；3 = 出现 S₂ */ step?: number }>()
+const { step = 1 } = defineProps<{ /** 1 = 只有磁感线；2 = 出现 S₁ 并点亮穿过的条数；3 = 出现 S₂ */ step?: number }>();
 
 interface Sheet {
-  x1: number
-  x2: number
-  y: number
+  x1: number;
+  x2: number;
+  y: number;
 }
 
-const inSheet = (x: number, s: Sheet): boolean => x >= s.x1 && x <= s.x2
+const inSheet = (x: number, s: Sheet): boolean => x >= s.x1 && x <= s.x2;
 /** 面已经出现、且这条线穿过它 → 高亮 */
-const lit = (x: number, s: Sheet, minStep: number): boolean => step >= minStep && inSheet(x, s)
+const lit = (x: number, s: Sheet, minStep: number): boolean => step >= minStep && inSheet(x, s);
 /** 面已经出现、但这条线不穿过 → 压淡 */
-const dim = (x: number, s: Sheet, minStep: number): boolean => step >= minStep && !inSheet(x, s)
-const sheet = (s: Sheet): string =>
-  `${s.x1},${s.y} ${s.x2},${s.y} ${s.x2 + SKEW.x},${s.y + SKEW.y} ${s.x1 + SKEW.x},${s.y + SKEW.y}`
+const dim = (x: number, s: Sheet, minStep: number): boolean => step >= minStep && !inSheet(x, s);
+const sheet = (s: Sheet): string => `${s.x1},${s.y} ${s.x2},${s.y} ${s.x2 + SKEW.x},${s.y + SKEW.y} ${s.x1 + SKEW.x},${s.y + SKEW.y}`;
 const pct = (s: Sheet): { x: number; y: number } => ({
   x: ((s.x1 + s.x2) / 2 / 500) * 100,
   y: ((s.y - 16) / 320) * 100,
-})
+});
 </script>
 
 <style scoped>
 .fdf {
   position: relative;
-
   width: 100%;
   min-width: 0;
 }

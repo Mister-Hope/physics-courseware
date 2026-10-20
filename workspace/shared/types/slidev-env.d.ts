@@ -3,12 +3,11 @@
  *
  * 为什么本仓库需要它：Slidev 53 的 `@slidev/client` **只发布源码**（package.json 的 exports 直接指向
  * `./index.ts`、`./context.ts` …），课件组件 `import { useSlideContext } from "@slidev/client"` 时，
- * 客户端源码会被一并拉进 `vue-tsc` 的程序里做类型检查。那份源码依赖下面这些全局量，
- * 不声明就会报一片 TS2304（`Cannot find name '__DEV__'` 之类），`pnpm check` 永远红。
+ * 客户端源码会被一并拉进 `vue-tsc` 的程序里做类型检查。那份源码依赖下面这些全局量， 不声明就会报一片 TS2304（`Cannot find name '__DEV__'`
+ * 之类），`pnpm check` 永远红。
  *
- * 这里**只补上游缺的那几份声明**，类型本身仍来自 `@slidev/client` 自己的源码，不另抄一份。
- * 取值口径见 `@slidev/cli` 的 `define`：`__DEV__` = 非 build、`__SLIDEV_HAS_SERVER__` = 非 build，
- * `__SLIDEV_FEATURE_*` = frontmatter 里对应的功能开关。
+ * 这里**只补上游缺的那几份声明**，类型本身仍来自 `@slidev/client` 自己的源码，不另抄一份。 取值口径见 `@slidev/cli` 的 `define`：`__DEV__`
+ * = 非 build、`__SLIDEV_HAS_SERVER__` = 非 build， `__SLIDEV_FEATURE_*` = frontmatter 里对应的功能开关。
  *
  * ⚠️ 上游新增 `__SLIDEV_*` / `__*_FEATURE_*` 常量时在这里补一条（漏了会报 TS2304，不会静默）。
  */

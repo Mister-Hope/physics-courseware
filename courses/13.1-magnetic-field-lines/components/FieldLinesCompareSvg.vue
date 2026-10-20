@@ -1,11 +1,9 @@
 <script setup lang="ts">
-/**
- * 电场线与磁感线的对比（13.1 P9）
- * 左格：正点电荷的电场线（从正电荷出发、不闭合）；
- * 右格：条形磁体的磁感线（闭合、从 N 出发回到 S）。
- */
+/** 电场线与磁感线的对比（13.1 P9） 左格：正点电荷的电场线（从正电荷出发、不闭合）； 右格：条形磁体的磁感线（闭合、从 N 出发回到 S）。 */
 import { computed } from "vue";
-import { type Line, arrowsAlong, barPoles, squashLine, traceLine } from "./magField";
+
+import { arrowsAlong, barPoles, squashLine, traceLine } from "./magField";
+import type { Line } from "./magField";
 
 const W = 960;
 const H = 300;
@@ -19,7 +17,7 @@ const K = 0.45;
 const bounds = { x: 530, y: -120, w: 410, h: 400 };
 
 const rays = computed(() =>
-  new Array(8).fill(0).map((_, i) => {
+  Array.from({ length: 8 }, (_, i) => {
     const ang = (i * Math.PI) / 4;
     const x2 = CX + 118 * Math.cos(ang);
     const y2 = CY + 118 * Math.sin(ang);

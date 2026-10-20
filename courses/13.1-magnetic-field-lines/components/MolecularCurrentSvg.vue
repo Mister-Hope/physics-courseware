@@ -1,11 +1,9 @@
 <script setup lang="ts">
-/**
- * 安培分子电流假说（13.1 P18）
- * 上排：左「通电螺线管的磁场」与右「条形磁体的磁场」并置（相似）；
- * 点击 1：下方出现「分子电流 → 每个微粒就是一枚小磁体」的放大示意。
- */
+/** 安培分子电流假说（13.1 P18） 上排：左「通电螺线管的磁场」与右「条形磁体的磁场」并置（相似）； 点击 1：下方出现「分子电流 → 每个微粒就是一枚小磁体」的放大示意。 */
 import { computed } from "vue";
-import { type Line, arrowsAlong, barPoles, squashLine, traceLine } from "./magField";
+
+import { arrowsAlong, barPoles, squashLine, traceLine } from "./magField";
+import type { Line } from "./magField";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
 const step = computed(() => Math.max(0, stepProp));
@@ -13,7 +11,13 @@ const step = computed(() => Math.max(0, stepProp));
 const W = 960;
 const H = 320;
 
-const makeField = (cx: number, cy: number, bounds: { x: number; y: number; w: number; h: number }) => {
+const K = 0.4;
+
+const makeField = (
+  cx: number,
+  cy: number,
+  bounds: { x: number; y: number; w: number; h: number },
+): { lines: Line[]; arrows: { x: number; y: number; d: string }[] } => {
   const poles = barPoles(cx, cy, 46);
   const lines: Line[] = [];
   for (const d of [-38, -20, 0, 20, 38]) {
@@ -23,7 +27,6 @@ const makeField = (cx: number, cy: number, bounds: { x: number; y: number; w: nu
   return { lines, arrows: lines.map((l) => arrowsAlong(l, [0.5], 6)) };
 };
 
-const K = 0.4;
 const solenoidField = makeField(250, 118, { x: 70, y: -120, w: 370, h: 380 });
 const barField = makeField(710, 118, { x: 530, y: -120, w: 370, h: 380 });
 </script>

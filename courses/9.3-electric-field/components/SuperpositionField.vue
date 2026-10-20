@@ -12,9 +12,7 @@ const r1 = computed(() => Math.hypot(h.value, d / 2));
 const r2 = computed(() => Math.hypot(h.value, d / 2));
 const e1 = computed(() => (K * Q1) / (r1.value * r1.value));
 const e2 = computed(() => (K * Q2) / (r2.value * r2.value));
-const ex = computed(
-  () => e1.value * (d / 2 / r1.value) + e2.value * (d / 2 / r2.value),
-);
+const ex = computed(() => e1.value * (d / 2 / r1.value) + e2.value * (d / 2 / r2.value));
 const ey = computed(() => e1.value * (-h.value / r1.value) + e2.value * (h.value / r2.value));
 const eMag = computed(() => Math.hypot(ex.value, ey.value));
 

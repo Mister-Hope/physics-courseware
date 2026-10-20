@@ -60,11 +60,26 @@ const band = computed(() => bandOf(f.value));
 
 <template>
   <div class="wcalc">
-    <CourseSlider v-model="logF" :min="7" :max="16" :step="0.01" label="频率" label-tex="f" accent="gold" label-width="6.4rem">
+    <CourseSlider
+      v-model="logF"
+      :min="7"
+      :max="16"
+      :step="0.01"
+      label="频率"
+      label-tex="f"
+      accent="gold"
+      label-width="6.4rem"
+    >
       <template #value><Latex :tex="fTex" /></template>
     </CourseSlider>
     <div class="wcalc-chips">
-      <button v-for="p in presets" :key="p.name" class="wcalc-chip" type="button" @click="logF = Math.log10(p.f)">
+      <button
+        v-for="p in presets"
+        :key="p.name"
+        class="wcalc-chip"
+        type="button"
+        @click="logF = Math.log10(p.f)"
+      >
         {{ p.name }} <Latex :tex="p.tex + '\\ \\text{Hz}'" />
       </button>
     </div>

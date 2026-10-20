@@ -1,9 +1,5 @@
 <script setup lang="ts">
-/**
- * 磁化与去磁（13.1 P19）
- * 铁棒内部的分子电流（取向）：0 杂乱（不显磁性）、2 取向大致相同（两端显磁极）、3 又杂乱（去磁）。
- * 取向用固定种子的角度，避免每次渲染乱跳。
- */
+/** 磁化与去磁（13.1 P19） 铁棒内部的分子电流（取向）：0 杂乱（不显磁性）、2 取向大致相同（两端显磁极）、3 又杂乱（去磁）。 取向用固定种子的角度，避免每次渲染乱跳。 */
 import { computed } from "vue";
 
 const { step: stepProp = 0 } = defineProps<{ step?: number }>();
@@ -16,6 +12,7 @@ const CY = 142;
 const BAR_W = 520;
 const BAR_H = 76;
 
+/* oxlint-disable eslint/no-bitwise, unicorn/prefer-math-trunc, eslint/operator-assignment -- mulberry32 是 32 位整型 PRNG，位运算不能改写 */
 const mulberry32 = (seed: number): (() => number) => {
   let a = seed;
   return () => {
@@ -26,6 +23,7 @@ const mulberry32 = (seed: number): (() => number) => {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 };
+/* oxlint-enable eslint/no-bitwise, unicorn/prefer-math-trunc, eslint/operator-assignment */
 
 interface Molecule {
   x: number;
@@ -58,16 +56,7 @@ const angleOf = (m: Molecule): number => {
 
 <template>
   <svg :viewBox="`0 0 ${W} ${H}`" width="100%" xmlns="http://www.w3.org/2000/svg" class="mf-fig">
-    <rect
-      :x="CX - BAR_W / 2"
-      :y="CY - BAR_H / 2"
-      :width="BAR_W"
-      :height="BAR_H"
-      rx="10"
-      fill="var(--c-surface)"
-      stroke="var(--c-border)"
-      stroke-width="2"
-    />
+    <rect :x="CX - BAR_W / 2" :y="CY - BAR_H / 2" :width="BAR_W" :height="BAR_H" rx="10" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="2" />
     <g v-if="step === 2">
       <rect :x="CX - BAR_W / 2 - 30" :y="CY - 17" width="30" height="34" rx="5" fill="var(--c-velocity)" opacity="0.9" />
       <rect :x="CX + BAR_W / 2" :y="CY - 17" width="30" height="34" rx="5" fill="var(--c-danger)" opacity="0.9" />
@@ -78,11 +67,7 @@ const angleOf = (m: Molecule): number => {
     <g v-for="(m, i) in MOLECULES" :key="i">
       <g :transform="`rotate(${angleOf(m)} ${m.x} ${m.y})`">
         <ellipse :cx="m.x" :cy="m.y" rx="9" ry="4.5" fill="none" stroke="var(--c-field)" stroke-width="1.4" opacity="0.9" />
-        <path
-          :d="`M ${m.x + 6} ${m.y - 3} L ${m.x + 11} ${m.y} L ${m.x + 6} ${m.y + 3} Z`"
-          fill="var(--c-field)"
-          opacity="0.9"
-        />
+        <path :d="`M ${m.x + 6} ${m.y - 3} L ${m.x + 11} ${m.y} L ${m.x + 6} ${m.y + 3} Z`" fill="var(--c-field)" opacity="0.9" />
       </g>
     </g>
 

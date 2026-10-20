@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * 例题（有两个量程的电压表）：a 为公共端；a–b 量程 0~3 V（表头与 R₁ 串联），a–c 量程 0~15 V（再串 R₂）。
- * 根 svg 带固有尺寸，供 exercise-split 的 #fig 使用。
- */
+/** 例题（有两个量程的电压表）：a 为公共端；a–b 量程 0~~3 V（表头与 R₁ 串联），a–c 量程 0~~15 V（再串 R₂）。 根 svg 带固有尺寸，供 exercise-split 的 #fig 使用。 */
 </script>
 
 <template>

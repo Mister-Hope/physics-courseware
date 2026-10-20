@@ -89,14 +89,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.15rem 1.2rem;
-
   margin-top: 0.35rem;
 }
 
 /* 坐标轴约定提示：紧凑一行，不用气泡（页面竖向空间紧） */
 .axis-note {
   color: var(--c-text);
-
   font-size: 0.96rem;
   line-height: 1.6;
 }

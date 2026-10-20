@@ -1,8 +1,5 @@
 <script setup lang="ts">
-/**
- * 封面装饰（13.1）：条形磁体（左 S 蓝、右 N 红）+ 闭合磁感线（外部 N→S、内部 S→N 虚线）+ 小磁针。
- * 磁感线由 magField 的两磁极模型生成；小磁针转角取该点磁场方向，方向与正文图一致。
- */
+/** 封面装饰（13.1）：条形磁体（左 S 蓝、右 N 红）+ 闭合磁感线（外部 N→S、内部 S→N 虚线）+ 小磁针。 磁感线由 magField 的两磁极模型生成；小磁针转角取该点磁场方向，方向与正文图一致。 */
 import { barPoles, fieldAngle, seedsAround, traceLine } from "./magField";
 
 const CX = 130;
@@ -13,8 +10,8 @@ const poles = barPoles(CX, CY, A);
 const bounds = { x: 6, y: 6, w: 248, h: 178 };
 const lines: { d: string }[] = [];
 for (const ang of [-90, -60, -30, 0, 30, 60, 90]) {
-  const [sx, sy] = seedsAround({ x: CX + A, y: CY, s: 1 }, 26, [ang])[0];
-  const line = traceLine([sx, sy], poles, bounds, { stopRadius: 10, maxSteps: 700 });
+  const [seed] = seedsAround({ x: CX + A, y: CY, s: 1 }, 26, [ang]);
+  const line = traceLine(seed, poles, bounds, { stopRadius: 10, maxSteps: 700 });
   if (line) lines.push({ d: line.d });
 }
 

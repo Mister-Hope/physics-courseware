@@ -43,7 +43,12 @@ const segX = (i: number): number => 20 + i * 140;
         <tspan font-family="KaTeX_Math" font-style="italic">f</tspan>
         增大
       </text>
-      <CourseArrow :from="{ x: 20, y: 16 }" :to="{ x: 860, y: 16 }" stroke="var(--c-accent)" stroke-width="1.5" />
+      <CourseArrow
+        :from="{ x: 20, y: 16 }"
+        :to="{ x: 860, y: 16 }"
+        stroke="var(--c-accent)"
+        stroke-width="1.5"
+      />
       <g
         v-for="(b, i) in bands"
         :key="b.key"
@@ -71,7 +76,12 @@ const segX = (i: number): number => 20 + i * 140;
         <tspan font-family="KaTeX_Math" font-style="italic">λ</tspan>
         减小
       </text>
-      <CourseArrow :from="{ x: 20, y: 114 }" :to="{ x: 860, y: 114 }" stroke="var(--c-physics)" stroke-width="1.5" />
+      <CourseArrow
+        :from="{ x: 20, y: 114 }"
+        :to="{ x: 860, y: 114 }"
+        stroke="var(--c-physics)"
+        stroke-width="1.5"
+      />
     </svg>
   </div>
 </template>
@@ -91,9 +101,9 @@ const segX = (i: number): number => 20 + i * 140;
 }
 
 .seg-rect {
+  transition: stroke 0.18s ease;
   stroke: transparent;
   stroke-width: 3;
-  transition: stroke 0.18s ease;
 }
 
 .spec-seg.active .seg-rect {

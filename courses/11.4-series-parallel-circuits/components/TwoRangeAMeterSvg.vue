@@ -1,8 +1,7 @@
 <script setup lang="ts">
 /**
- * 例题（有两个量程的电流表，0~0.6 A 与 0~3 A）：表头接在 A、C 之间；R₁ 接 A–B，R₂ 接 B–C。
- * 用 A、C 时表头被 R₁+R₂ 分流（0.6 A 量程）；用 A、B 时表头与 R₂ 串联后被 R₁ 分流（3 A 量程）。
- * 根 svg 带固有尺寸，供 exercise-split 的 #fig 使用。
+ * 例题（有两个量程的电流表，0~~0.6 A 与 0~~3 A）：表头接在 A、C 之间；R₁ 接 A–B，R₂ 接 B–C。 用 A、C 时表头被 R₁+R₂ 分流（0.6 A 量程）；用 A、B 时表头与 R₂ 串联后被 R₁ 分流（3 A 量程）。 根 svg 带固有尺寸，供 exercise-split 的
+ * #fig 使用。
  */
 </script>
 

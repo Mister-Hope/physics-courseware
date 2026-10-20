@@ -50,7 +50,6 @@
 <style scoped>
 .fsi {
   position: relative;
-
   width: 100%;
   min-width: 0;
 }
