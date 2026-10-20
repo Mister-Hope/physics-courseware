@@ -1,15 +1,15 @@
 <!--
-  选必二 1.3 · 临界与多解 · 例 2 配图
+  选必二 1.3 · 临界与多解 · 例 2 配图（正方形构图：挡板与“被打到的范围”是主体，坐标轴只画到够用）
   ── 题干 ──
      xOy 平面：第一、二象限有垂直纸面向里的匀强磁场 B；第二象限内有一块平行于 x 轴、
-     与 x 轴相距 d 的足够长挡板（右端在 y 轴上）。原点处粒子源向第一、四象限各方向均匀发射
+     与 x 轴相距 d 的足够长挡板（右端在 y 轴上）。原点处粒子源向第一、二象限各方向均匀发射
      带正电粒子，v = qBd/m ⟹ 回旋半径 r = d。求挡板上、下表面被粒子打到的坐标范围。
   ── 关键几何（r = d，全部用 d 作单位）──
      第一象限射出的粒子轨迹圆过 O：
        θ = 60° 时，轨迹第一次与 y = d 的交点正好在 y 轴上（x = 0），是“打上表面 / 打下表面”的临界；
        θ > 60°：第一次交点已在第二象限 ⟹ 打在挡板下表面，x ∈ [−d, 0]（θ = 90° 在 (−d, d) 处相切）；
        θ < 60°：先在第一象限越过 y = d，再从上方落到挡板 ⟹ 打在上表面，x ∈ [−√3d, −d]（θ = 0° 落在 (−d, d)）。
-     第四象限射出的粒子不进入磁场，沿直线运动，打不到挡板。
+     第二象限射出的粒子轨迹最高点低于 y = d，打不到挡板。
   ── 分步 ──
      step 0：题干图（磁场、挡板、粒子源与发射方向）；
      step ≥1：θ = 60° 的临界轨迹；step ≥2：下表面被打范围；step ≥3：上表面被打范围。
@@ -20,14 +20,13 @@ const { step = 0 } = defineProps<{
   step?: number;
 }>();
 
-/** 画布：1000 × 440 */
-const W = 1000;
-const H = 440;
+/** 画布（只框住有内容的那块，留 20 左右边距；接近正方形） */
+const VB = { x: 280, y: 272, w: 424, h: 332 };
 
 /** 原点 O 与 d（用户单位） */
-const OX = 480;
-const OY = 300;
-const D = 92;
+const OX = 520;
+const OY = 520;
+const D = 100;
 
 interface Pt {
   x: number;
@@ -55,19 +54,19 @@ const arc = (c: Pt, a0: number, a1: number, steps = 60): string =>
   );
 
 /** 磁场点阵（第一、二象限，裸 × = 向里） */
-const DOT_SP = 34;
-const DOT_COLS = 25;
+const DOT_X = 312;
+const DOT_Y = 316;
+const DOT_SP = 30;
+const DOT_COLS = 12;
 const DOT_ROWS = 7;
-const DOT_X = 82;
-const DOT_Y = 78;
 
 /** 挡板：平行 x 轴、位于 y = d、从 y 轴向左足够长 */
-const PLATE_X0 = OX - 336;
+const PLATE_X0 = 300;
 const PLATE_X1 = OX;
 const PLATE_Y = OY - D;
 
-/** 发射方向（第一象限、第四象限各取两条） */
-const EMIT = [30, 60, -30, -60];
+/** 发射方向（第一、二象限各取两条） */
+const EMIT = [30, 60, 120, 150];
 
 /** θ = 60° 的临界轨迹：第一次交点在 y 轴上 */
 const CRITICAL_ARC = arc(
@@ -94,10 +93,10 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
 <template>
   <div class="fig-baffle">
     <svg
-      :viewBox="`0 0 ${W} ${H}`"
+      :viewBox="`${VB.x} ${VB.y} ${VB.w} ${VB.h}`"
       class="fig-svg"
       role="img"
-      aria-label="第一、二象限有垂直纸面向里的匀强磁场，第二象限有一块距 x 轴 d 的挡板；原点粒子源向第一、四象限发射，回旋半径等于 d"
+      aria-label="第一、二象限有垂直纸面向里的匀强磁场，第二象限有一块距 x 轴 d 的挡板；原点粒子源发射的粒子回旋半径等于 d，挡板上、下表面各有一段被打到"
     >
       <!-- 第一、二象限的磁场：垂直纸面向里（裸 ×） -->
       <FieldDots
@@ -106,23 +105,23 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
         :cols="DOT_COLS"
         :rows="DOT_ROWS"
         :spacing="DOT_SP"
-        :size="4.4"
+        :size="4.2"
         :line-width="1.3"
         dir="in"
         :opacity="0.3"
       />
 
-      <!-- 坐标轴 -->
+      <!-- 坐标轴：只画到内容够用 -->
       <CourseArrow
-        :from="{ x: 64, y: OY }"
-        :to="{ x: 944, y: OY }"
+        :from="{ x: 300, y: OY }"
+        :to="{ x: 666, y: OY }"
         stroke="var(--c-text-dim)"
         :stroke-width="1.6"
         :head-size="10"
       />
       <CourseArrow
-        :from="{ x: OX, y: OY + 92 }"
-        :to="{ x: OX, y: 66 }"
+        :from="{ x: OX, y: OY + 70 }"
+        :to="{ x: OX, y: 300 }"
         stroke="var(--c-text-dim)"
         :stroke-width="1.6"
         :head-size="10"
@@ -131,14 +130,14 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
       <!-- 挡板 -->
       <rect
         :x="PLATE_X0"
-        :y="PLATE_Y - 6"
+        :y="PLATE_Y - 5"
         :width="PLATE_X1 - PLATE_X0"
-        :height="12"
+        :height="10"
         rx="3"
         fill="color-mix(in srgb, var(--c-text) 62%, transparent)"
       />
       <text
-        :x="PLATE_X0 + 14"
+        :x="PLATE_X0 + 10"
         :y="PLATE_Y - 16"
         font-size="19"
         fill="var(--c-text-dim)"
@@ -164,12 +163,12 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
           :x2="LOWER_BAND.x2"
           :y2="LOWER_BAND.y"
           stroke="var(--c-ok)"
-          stroke-width="7"
+          stroke-width="8"
           stroke-linecap="round"
         />
         <text
           :x="(LOWER_BAND.x1 + LOWER_BAND.x2) / 2"
-          :y="PLATE_Y + 34"
+          :y="PLATE_Y + 36"
           font-size="19"
           text-anchor="middle"
           fill="var(--c-ok)"
@@ -196,12 +195,12 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
           :x2="UPPER_BAND.x2"
           :y2="UPPER_BAND.y"
           stroke="var(--c-accent-2)"
-          stroke-width="7"
+          stroke-width="8"
           stroke-linecap="round"
         />
         <text
           :x="(UPPER_BAND.x1 + UPPER_BAND.x2) / 2"
-          :y="PLATE_Y - 28"
+          :y="PLATE_Y - 26"
           font-size="19"
           text-anchor="middle"
           fill="var(--c-accent-2)"
@@ -218,8 +217,8 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
         :key="a"
         :from="{ x: OX, y: OY }"
         :to="{
-          x: OX + 86 * Math.cos((a * Math.PI) / 180),
-          y: OY - 86 * Math.sin((a * Math.PI) / 180),
+          x: OX + 62 * Math.cos((a * Math.PI) / 180),
+          y: OY - 62 * Math.sin((a * Math.PI) / 180),
         }"
         stroke="var(--c-force)"
         :stroke-width="2.2"
@@ -229,14 +228,14 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
 
       <!-- 板间距 d -->
       <CourseArrow
-        :from="{ x: PLATE_X0 + 24, y: OY }"
-        :to="{ x: PLATE_X0 + 24, y: PLATE_Y }"
+        :from="{ x: PLATE_X0 + 30, y: OY }"
+        :to="{ x: PLATE_X0 + 30, y: PLATE_Y }"
         stroke="var(--c-text-dim)"
         :stroke-width="1.4"
         :head-size="9"
       />
       <text
-        :x="PLATE_X0 + 8"
+        :x="PLATE_X0 + 14"
         :y="PLATE_Y + D / 2 + 9"
         font-size="24"
         text-anchor="end"
@@ -260,11 +259,11 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
       <circle v-if="step >= 1" :cx="OX" :cy="PLATE_Y" r="5" fill="var(--c-accent)" />
 
       <!-- 磁场方向说明 -->
-      <text :x="72" :y="64" font-size="19" fill="var(--c-text-dim)" :style="HALO">B 向里</text>
+      <text :x="306" :y="304" font-size="19" fill="var(--c-text-dim)" :style="HALO">B 向里</text>
 
       <!-- 坐标轴与原点标注 -->
       <text
-        :x="952"
+        :x="674"
         :y="OY + 9"
         font-size="24"
         fill="var(--c-text-dim)"
@@ -276,7 +275,7 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
       </text>
       <text
         :x="OX + 14"
-        :y="70"
+        :y="304"
         font-size="24"
         fill="var(--c-text-dim)"
         :font-family="MATH"
@@ -301,8 +300,8 @@ const HALO = { stroke: "var(--c-bg)", "stroke-width": 3.6, "paint-order": "strok
       <!-- θ = 60° 临界标注 -->
       <text
         v-if="step >= 1"
-        :x="OX - 0.76 * D"
-        :y="OY - 1.3 * D"
+        :x="OX - 0.7 * D"
+        :y="OY - 1.4 * D"
         font-size="20"
         fill="var(--c-force)"
         :style="HALO"

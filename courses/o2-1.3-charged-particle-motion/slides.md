@@ -1076,10 +1076,18 @@ clicks: 3
 ---
 ---
 
-<div class="ask text-base"><b>例 2</b>　在 <Latex tex="xOy" /> 平面内，第一、二象限有垂直纸面向里、大小为 <Latex tex="B" /> 的匀强磁场；第二象限内有一块平行于 <Latex tex="x" /> 轴、与 <Latex tex="x" /> 轴相距 <Latex tex="d" /> 的足够长挡板，右端在 <Latex tex="y" /> 轴上。原点 <Latex tex="O" /> 处的粒子源向第一、四象限各方向均匀发射质量 <Latex tex="m" />、电荷量 <Latex tex="+q" /> 的粒子，速度均为 <Latex tex="v = \dfrac{qBd}{m}" />。求挡板上、下表面被粒子打到的坐标范围。</div>
-
 <div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] items-center gap-7" style="flex:1 1 auto;min-height:0;grid-template-rows:minmax(0,1fr)">
+
+<div class="flex h-full min-h-0 flex-col" style="min-width:0">
 <BaffleCritical />
+</div>
+
+<div class="ask" style="font-size:.86em"><b>例 2</b>　在 <Latex tex="xOy" /> 平面内，第一、二象限有垂直纸面向里、大小为 <Latex tex="B" /> 的匀强磁场；第二象限内有一块平行于 <Latex tex="x" /> 轴、与 <Latex tex="x" /> 轴相距 <Latex tex="d" /> 的足够长挡板，右端在 <Latex tex="y" /> 轴上。原点 <Latex tex="O" /> 处的粒子源向第一、二象限各方向均匀发射质量 <Latex tex="m" />、电荷量 <Latex tex="+q" /> 的粒子，速度均为 <Latex tex="v = \dfrac{qBd}{m}" />。求挡板上、下表面被粒子打到的坐标范围。</div>
+
+</div>
+
 </div>
 
 ---
@@ -1089,15 +1097,25 @@ clicks: 3
 # 例 2：上表面和下表面
 
 <div class="page-grow">
+
+<div class="grid grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)] items-center gap-7" style="flex:1 1 auto;min-height:0;grid-template-rows:minmax(0,1fr)">
+
+<div class="flex h-full min-h-0 flex-col" style="min-width:0">
 <BaffleCritical :step="$clicks" />
 </div>
 
-<div class="stack stack-tight" style="gap:.2rem;font-size:.78em">
+<div class="stack stack-tight" style="gap:.55rem;font-size:.84em">
 
-<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">① <Latex tex="r=\frac{mv}{qB}=d" />：<Latex tex="\theta=60^\circ" /> 时，轨迹第一次与 <Latex tex="y=d" /> 的交点恰在 <Latex tex="y" /> 轴上，这是两支的分界。</div>
+<div :style="{ opacity: $clicks >= 1 ? 1 : 0 }">① <Latex tex="r=\frac{mv}{qB}=d" />：<Latex tex="\theta=60^\circ" /> 时，轨迹第一次与 <Latex tex="y=d" /> 的交点恰在 <Latex tex="y" /> 轴上，是分界。</div>
 
 <div :style="{ opacity: $clicks >= 2 ? 1 : 0 }">② <Latex tex="\theta>60^\circ" />：第一次交点已在第二象限 ⟹ 打在<b>下表面</b>，<Latex tex="x\in[-d,\,0]" />。</div>
 
-<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }" class="tip-hint">③ <Latex tex="\theta<60^\circ" />：先越过 <Latex tex="y=d" />、再从上方落下 ⟹ <b>上表面</b>，<Latex tex="x\in[-\sqrt{3}d,\,-d]" />；第四象限的粒子打不到。</div>
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }">③ <Latex tex="\theta<60^\circ" />：先越过 <Latex tex="y=d" /> 再从上方落下 ⟹ <b>上表面</b>，<Latex tex="x\in[-\sqrt{3}d,\,-d]" />。</div>
+
+<div :style="{ opacity: $clicks >= 3 ? 1 : 0 }">向第二象限射出的粒子最高点低于 <Latex tex="y=d" />，打不到挡板。</div>
+
+</div>
+
+</div>
 
 </div>
