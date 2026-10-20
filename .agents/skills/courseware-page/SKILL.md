@@ -24,7 +24,6 @@ description: 在本仓高中物理课件里新增或改写一页 slides.md 的�
 4. **选原子**（都在共享 addon 里，**本课 `style.css` 不要复制**）：提问 `.ask`；结论/提示 hint 气泡（`tip-hint` / `info-hint` / `warn-hint` / `danger-hint`）；
    定义 `<DefinitionBox>`；双栏 `.half-grid` + `.divider-l`；题目页题干 `.ask`、选项普通行、答案 `tip-hint`，**整题不用卡片**。
    写法与密度正本：[style-guide.md](../../notes/style-guide.md)、[courseware-style-pass.md](../../notes/courseware-style-pass.md)（§1 标题 / §5 气泡 / §8 练习页）。
-   ⛔ `.key`（左竖线）与 `.card` 都**不再新增**。
 5. **自检**（跑，不靠感觉）：
 
 ```bash

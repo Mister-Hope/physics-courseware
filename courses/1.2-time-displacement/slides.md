@@ -444,9 +444,9 @@ y-axis: { quantity: 'x' }
 view: { width: 640, height: 500 }
 ticks: { x: [1, 2, 3, 4], y: [1, 2, 3, 4, 5], labels: false }
 curves: 
-  - { points: [{ x: 0, y: 1 }, { x: 2.5, y: 4 }, { x: 4, y: 4 }], stroke: 'var(--c-accent)', width: 4.5 }
-  - { points: [{ x: 0, y: 5.5 }, { x: 4, y: 1 }], stroke: 'var(--c-accent-2)', width: 4.5 }
-  - { points: [{ x: 1.94, y: 0 }, { x: 1.94, y: 3.24 }], stroke: 'var(--c-accent-2)', width: 1.8, dashed: '7 5' }
+  - { points: [{ x: 0, y: 1 }, { x: 2.5, y: 4 }, { x: 4, y: 4 }], color: 'var(--c-accent)', width: 4.5 }
+  - { points: [{ x: 0, y: 5.5 }, { x: 4, y: 1 }], color: 'var(--c-accent-2)', width: 4.5 }
+  - { points: [{ x: 1.94, y: 0 }, { x: 1.94, y: 3.24 }], color: 'var(--c-accent-2)', width: 1.8, dashed: '7 5' }
 labels: 
   - { x: 0, y: 1, dot: 7, dotColor: 'var(--c-accent)', parts: [{ text: '截距 = 初始位置' }], anchor: 'right', dy: 18, color: 'var(--c-accent)', halo: true }
   - { x: 1.94, y: 3.24, dot: 8, dotColor: 'var(--c-accent-2)', parts: [{ text: '相遇' }], anchor: 'right', dy: 18, color: 'var(--c-accent-2)', halo: true }
@@ -589,7 +589,7 @@ view: { width: 640, height: 220 }
 font-scale: 0.8
 ticks: { x: [], y: [], labels: false }
 curves: 
-  - { points: [{ x: 0, y: 0 }, { x: 0.02, y: 1.4 }, { x: 0.04, y: 3 }, { x: 0.06, y: 4.8 }, { x: 0.08, y: 6.8 }], stroke: 'var(--c-accent)', width: 2.5 }
+  - { points: [{ x: 0, y: 0 }, { x: 0.02, y: 1.4 }, { x: 0.04, y: 3 }, { x: 0.06, y: 4.8 }, { x: 0.08, y: 6.8 }], color: 'var(--c-accent)', width: 2.5 }
 labels: 
   - { x: 0, y: 0, dot: 5, dotColor: 'var(--c-accent)' }
   - { x: 0.02, y: 1.4, dot: 5, dotColor: 'var(--c-accent)' }

@@ -6,9 +6,9 @@ import { useSlideContext } from "@slidev/client";
  */
 import { ref, computed } from "vue";
 
-const props = withDefaults(defineProps<{ step?: number }>(), { step: 0 });
+const { step: stepProp = 0 } = defineProps<{ step?: number }>();
 const { $clicks } = useSlideContext();
-const step = computed(() => Math.max(props.step ?? 0, Number($clicks.value ?? 0)));
+const step = computed(() => Math.max(stepProp, Number($clicks.value ?? 0)));
 
 const W = 470;
 const H = 380;

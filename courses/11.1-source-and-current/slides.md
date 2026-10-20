@@ -26,15 +26,17 @@ subtitle: "电源 · 恒定电流 · 电流的微观解释"
 <CoverDecorationSvg />
 
 ---
-layout: base-flex
+layout: focus-question
 title: 引课
 ---
 
-<div class="page-grow">
+<template v-slot:icon>
 
-<div class="ask ask-lead text-5xl leading-normal">电闪雷鸣时，强大的电流只能存在于一瞬间；手电筒中的小灯泡却能持续发光。这是为什么？</div>
+<mdi-lightning-bolt />
 
-</div>
+</template>
+
+电闪雷鸣时，强大的电流只能存在于一瞬间；<br />手电筒中的小灯泡却能持续发光。这是为什么？
 
 ---
 layout: base-flex
@@ -90,8 +92,8 @@ clicks: 3
 <div v-click="3">
 <DefinitionBox term="电源">
 
-<div>能把电子从 A 搬运到 B 的装置 <Latex tex="P" /> 就是电源（power source），A 和 B 是电源的两个电极。</div>
-<div>电源的作用：移送电荷，维持电源正、负极间有一定的电势差。</div>
+<div>能把电子从 A 搬运到 B 的装置 <Latex tex="P" /> 就是电源（power source）。</div>
+<div>A 和 B 是电源的两个电极；电源的作用是移送电荷，维持两极间一定的电势差。</div>
 
 </DefinitionBox>
 </div>
@@ -208,6 +210,24 @@ clicks: 2
 </div>
 
 ---
+layout: exercise-split
+hideQaMark: true
+clicks: 3
+---
+
+<template v-slot:stem>
+
+一条导线中的电流为 $50\ \mu\text{A}$，在 $3.2\ \text{s}$ 内通过这条导线某一横截面的电荷量是多少库仑？有多少个电子通过该横截面？
+
+</template>
+
+<div v-click="1">由 <Latex tex="I = \dfrac{q}{t}" /> 得 <Latex tex="q = It = 50 \times 10^{-6} \times 3.2\ \text{C} = 1.6 \times 10^{-4}\ \text{C}" />。</div>
+
+<div v-click="2">电子电荷量 <Latex tex="e = 1.6 \times 10^{-19}\ \text{C}" />，通过横截面的电子数 <Latex tex="N = \dfrac{q}{e} = \dfrac{1.6 \times 10^{-4}}{1.6 \times 10^{-19}} = 1.0 \times 10^{15}" />。</div>
+
+<div v-click="3" class="tip-hint">通过横截面的电荷量为 <Latex tex="1.6 \times 10^{-4}\ \text{C}" />，约有 <Latex tex="1.0 \times 10^{15}" /> 个电子。</div>
+
+---
 layout: base-flex
 title: 电流的微观解释
 clicks: 3
@@ -232,6 +252,36 @@ clicks: 3
 </div>
 
 </div>
+
+---
+layout: exercise-split
+title: 例题 电解液中的电流
+hideQaMark: true
+clicks: 2
+---
+
+<template v-slot:stem>
+
+<div><b class="ex-no">例题</b>　电解槽内有一价的电解溶液，时间 <Latex tex="t" /> 内通过溶液内横截面 <Latex tex="S" /> 的正离子数是 <Latex tex="n_1" />、负离子数是 <Latex tex="n_2" />，元电荷为 <Latex tex="e" />。以下说法正确的是（　　）</div>
+
+<div class="ex-options" style="grid-template-columns:1fr">
+<div><b>A.</b> 正离子形成的电流方向从 A 到 B，负离子形成的电流方向从 B 到 A</div>
+<div><b>B.</b> 正、负离子沿相反方向运动，电流相互抵消</div>
+<div><b>C.</b> 电流方向从 A 到 B，<Latex tex="I = \frac{n_1 e}{t}" /></div>
+<div><b>D.</b> 电流方向从 A 到 B，<Latex tex="I = \frac{(n_1 + n_2)e}{t}" /></div>
+</div>
+
+</template>
+
+<template v-slot:fig>
+
+<ElectrolysisCellSvg />
+
+</template>
+
+<div v-click="1">负离子由 B 向 A 移动，等效为正电荷由 A 向 B 移动——两种离子形成的电流同向，不会抵消。</div>
+
+<div v-click="2">通过横截面的电荷量 <Latex tex="q = (n_1 + n_2)e" />，所以 <Latex tex="I = \frac{q}{t} = \frac{(n_1 + n_2)e}{t}" />——选 <b class="text-accent">D</b>。</div>
 
 ---
 layout: base-flex
@@ -289,7 +339,7 @@ clicks: 3
 
 <div class="ask">定向移动的平均速率只有 <Latex tex="10^{-4}\ \text{m/s}" /> 量级，为什么一闭合开关，灯立刻就亮？</div>
 
-<div class="three-col">
+<div class="three-col rate-cols">
 
 <div v-click="1" class="stack">
 
@@ -328,22 +378,23 @@ clicks: 3
 </div>
 
 ---
-layout: exercise-split
-hideQaMark: true
+layout: base-flex
 clicks: 3
 ---
 
-<template v-slot:stem>
+# 电池的容量
 
-一条导线中的电流为 $50\ \mu\text{A}$，在 $3.2\ \text{s}$ 内通过这条导线某一横截面的电荷量是多少库仑？有多少个电子通过该横截面？
+<div class="page-grow">
 
-</template>
+<div class="ask">手机电池上标的 <Latex tex="4\ 000\ \text{mA} \cdot \text{h}" /> 表示什么？</div>
 
-<div v-click="1">由 <Latex tex="I = \dfrac{q}{t}" /> 得 <Latex tex="q = It = 50 \times 10^{-6} \times 3.2\ \text{C} = 1.6 \times 10^{-4}\ \text{C}" />。</div>
+<div v-click="1">定义：电池放电时能输出的<strong>总电荷量</strong>，叫作电池的容量。</div>
 
-<div v-click="2">电子电荷量 <Latex tex="e = 1.6 \times 10^{-19}\ \text{C}" />，通过横截面的电子数 <Latex tex="N = \dfrac{q}{e} = \dfrac{1.6 \times 10^{-4}}{1.6 \times 10^{-19}} = 1.0 \times 10^{15}" />。</div>
+<div v-click="2">容量等于电流与放电时间的乘积（<Latex tex="q = It" />）。单位是安时（<Latex tex="\text{A} \cdot \text{h}" />）或毫安时（<Latex tex="\text{mA} \cdot \text{h}" />）：<Latex tex="1\ \text{A} \cdot \text{h} = 1\ \text{A} \times 3\ 600\ \text{s} = 3\ 600\ \text{C}" />，<Latex tex="1\ \text{mA} \cdot \text{h} = 3.6\ \text{C}" />。</div>
 
-<div v-click="3" class="tip-hint">通过横截面的电荷量为 <Latex tex="1.6 \times 10^{-4}\ \text{C}" />，约有 <Latex tex="1.0 \times 10^{15}" /> 个电子。</div>
+<div v-click="3" class="tip-hint"><Latex tex="4\ 000\ \text{mA} \cdot \text{h} = 4\ \text{A} \cdot \text{h} = 1.44 \times 10^{4}\ \text{C}" />——电池的容量就是电池能放出多少电荷。</div>
+
+</div>
 
 ---
 layout: exercise-split
@@ -362,6 +413,55 @@ clicks: 3
 <div v-click="2">播放视频：<Latex tex="I_2 = \dfrac{q}{t_2} = \dfrac{4\ 000\ \text{mA} \cdot \text{h}}{17\ \text{h}} \approx 235\ \text{mA}" />。</div>
 
 <div v-click="3" class="tip-hint">待机电流约为 <Latex tex="7.6\ \text{mA}" />，播放视频的电流约是待机电流的 <Latex tex="31" /> 倍。</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 等效电流的计算方法
+
+<div class="page-grow">
+
+<div class="ask">电荷不是沿导线流动，而是随物体整体运动通过某个截面——这也算电流吗？怎么算？</div>
+
+<div v-click="1">算。只要电荷发生定向移动，就可以看作产生了电流，这种电流叫作<strong>等效电流</strong>：它可以是电荷随物体<strong>平动</strong>通过某一截面，也可以是电荷<strong>转动</strong>着通过某一截面。</div>
+
+<div v-click="2">算法：在电荷定向移动的方向上取<strong>一个截面</strong>，看时间 <Latex tex="t" /> 内通过这个截面的电荷量 <Latex tex="q" />，由 <Latex tex="I = \dfrac{q}{t}" /> 算出。</div>
+
+<div v-click="3" class="tip-hint">若电荷做圆周运动，时间取<strong>一个周期</strong> <Latex tex="T" />：一个周期内通过截面的电荷量就是电荷总量 <Latex tex="Q" />，所以 <Latex tex="I = \dfrac{Q}{T}" />。</div>
+
+</div>
+
+---
+layout: exercise-split
+title: 示例 2 转动的带电圆环
+hideQaMark: true
+clicks: 2
+---
+
+<template v-slot:stem>
+
+<div><b class="ex-no">示例 2</b>　半径 <Latex tex="R" /> 的橡胶圆环均匀带正电、总电荷量为 <Latex tex="Q" />，绕垂直圆环平面、通过圆心的轴以角速度 <Latex tex="\omega" /> 匀速转动。关于圆环转动产生的等效电流，正确的是（多选）（　　）</div>
+
+<div class="ex-options">
+<div><b>A.</b> <Latex tex="\omega" /> 不变、<Latex tex="Q" /> 变 2 倍，<Latex tex="I" /> 变 2 倍</div>
+<div><b>B.</b> <Latex tex="Q" /> 不变、<Latex tex="\omega" /> 变 2 倍，<Latex tex="I" /> 变 2 倍</div>
+<div><b>C.</b> <Latex tex="\omega" />、<Latex tex="Q" /> 不变，拉伸使 <Latex tex="R" /> 增大，<Latex tex="I" /> 变大</div>
+<div><b>D.</b> <Latex tex="\omega" />、<Latex tex="Q" /> 不变，压缩使 <Latex tex="R" /> 减小，<Latex tex="I" /> 变小</div>
+</div>
+
+</template>
+
+<template v-slot:fig>
+
+<RotatingRingSvg />
+
+</template>
+
+<div v-click="1">圆环转一圈用时 <Latex tex="T = 2\pi/\omega" />，一个周期内通过横截面的电荷量就是 <Latex tex="Q" />，所以 <Latex tex="I = Q/T = Q\omega/(2\pi)" />。</div>
+
+<div v-click="2" class="tip-hint"><Latex tex="I" /> 只由 <Latex tex="Q" />、<Latex tex="\omega" /> 决定，与半径 <Latex tex="R" /> 无关：<Latex tex="Q" /> 或 <Latex tex="\omega" /> 变 2 倍，<Latex tex="I" /> 变 2 倍；<Latex tex="R" /> 改变而 <Latex tex="Q" />、<Latex tex="\omega" /> 不变时，<Latex tex="I" /> 不变——选 <b class="text-accent">A、B</b>。</div>
 
 ---
 layout: base-flex
@@ -417,36 +517,5 @@ clicks: 6
 <div class="summary-line" v-click="5"><span class="text-accent font-bold">微观表达式</span>：<Latex tex="I = neSv" />，其中 <Latex tex="n" /> 是自由电子数密度、<Latex tex="S" /> 是横截面积、<Latex tex="v" /> 是定向移动的平均速率</div>
 
 <div class="summary-line" v-click="6"><span class="text-accent font-bold">场的建立</span>：闭合开关的瞬间，电路中各处以光速建立电场，自由电子几乎同时开始定向移动</div>
-
-</div>
-
----
-layout: base-flex
-title: 课后作业
----
-
-# 课后作业
-
-<div class="page-grow">
-
-<div class="stack">
-
-<div class="mini-title"><mdi-book-open-variant class="text-3xl" /> 必做：教材 11.1 练习与应用</div>
-
-<div><strong>第 1 题</strong>：电流 <Latex tex="50\ \mu\text{A}" />，<Latex tex="3.2\ \text{s}" /> 内通过横截面的电荷量与电子数。</div>
-
-<div><strong>第 2 题</strong>：干电池在 <Latex tex="10\ \text{s}" /> 内通过横截面的电荷量为 <Latex tex="3\ \text{C}" />，求电流。</div>
-
-<div><strong>第 3 题</strong>：由电池容量 <Latex tex="4\ 000\ \text{mA} \cdot \text{h}" /> 估算待机电流与播放视频电流的倍数。</div>
-
-</div>
-
-<div class="stack">
-
-<div class="mini-title"><mdi-lightbulb-on class="text-3xl" /> 选做：复习与提高 B 组第 1 题</div>
-
-<div>一根均匀带电的长直橡胶棒沿轴线方向以速度 <Latex tex="v" /> 做匀速直线运动，棒横截面积为 <Latex tex="S" />，单位长度所带的电荷量为 <Latex tex="-q" />。求棒的运动形成的等效电流的大小和方向。</div>
-
-</div>
 
 </div>

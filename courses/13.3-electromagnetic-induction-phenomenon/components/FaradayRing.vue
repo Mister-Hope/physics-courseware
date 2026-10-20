@@ -33,26 +33,25 @@ const line = (p: { x: number; y: number }, q: { x: number; y: number }): string 
 const poly = (ps: { x: number; y: number }[]): string =>
   ps.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
 
-const leadTopA = outerA[3];
-const leadBotA = outerA[0];
-const leadTopB = outerB[0];
-const leadBotB = outerB[3];
+/** 引线从首尾两匝的外壁端点接出去（角度按从小到大排，首项 = 最低点、末项 = 最高点） */
+const { 0: leadBotA, 3: leadTopA } = outerA;
+const { 0: leadTopB, 3: leadBotB } = outerB;
 
 const powered = ref(false);
 /** +1 = 接通瞬间，−1 = 断开瞬间，0 = 无瞬时电流 */
 const pulse = ref(0);
-let timer = 0;
+let timer: ReturnType<typeof globalThis.setTimeout> | undefined;
 
 const toggle = (): void => {
   powered.value = !powered.value;
   pulse.value = powered.value ? 1 : -1;
-  window.clearTimeout(timer);
-  timer = window.setTimeout(() => {
+  globalThis.clearTimeout(timer);
+  timer = globalThis.setTimeout(() => {
     pulse.value = 0;
   }, 1000);
 };
 
-onBeforeUnmount(() => window.clearTimeout(timer));
+onBeforeUnmount(() => globalThis.clearTimeout(timer));
 
 const aStatus = computed(() => (powered.value ? "线圈 A：有电流" : "线圈 A：无电流"));
 const bStatus = computed(() => {

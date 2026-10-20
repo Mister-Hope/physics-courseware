@@ -8,11 +8,13 @@ const Q2 = -1e-8;
 const d = 300;
 const SCALE = 0.0625; // svg 单位 / (N/C)
 
-const r1 = computed(() => Math.hypot(h.value, 150));
-const r2 = computed(() => Math.hypot(h.value, 150));
+const r1 = computed(() => Math.hypot(h.value, d / 2));
+const r2 = computed(() => Math.hypot(h.value, d / 2));
 const e1 = computed(() => (K * Q1) / (r1.value * r1.value));
 const e2 = computed(() => (K * Q2) / (r2.value * r2.value));
-const ex = computed(() => e1.value * (150 / r1.value) + e2.value * (150 / r2.value));
+const ex = computed(
+  () => e1.value * (d / 2 / r1.value) + e2.value * (d / 2 / r2.value),
+);
 const ey = computed(() => e1.value * (-h.value / r1.value) + e2.value * (h.value / r2.value));
 const eMag = computed(() => Math.hypot(ex.value, ey.value));
 

@@ -90,7 +90,7 @@ const fade = (on: boolean): { visibility: "visible" | "hidden" } => ({
   visibility: on ? "visible" : "hidden",
 });
 
-/** N 型：载流子为自由电子（带负电、运动方向与电流相反）；P 型：载流子为空穴（带正电、与电流同向） */
+/** 载流子带负电（运动方向与电流相反）或带正电（与电流同向） */
 const isN = computed(() => carrier.value === "n");
 const carrierSign = computed(() => (isN.value ? "−" : "+"));
 const carrierColor = computed(() => (isN.value ? "var(--c-velocity)" : "var(--c-danger)"));
@@ -102,9 +102,9 @@ const bottomColor = computed(() => (isN.value ? "var(--c-danger)" : "var(--c-vel
 const topPotential = computed(() => (isN.value ? "电势低" : "电势高"));
 const bottomPotential = computed(() => (isN.value ? "电势高" : "电势低"));
 
-/** 两句物理标注：贴着两条带电带，随 N / P 型同步改写（内容，不是操作提示） */
-const topNote = computed(() => (isN.value ? "载流子堆积" : "空穴堆积"));
-const bottomNote = computed(() => (isN.value ? "载流子剥离→留下正离子" : "空穴剥离→留下负离子"));
+/** 两句物理标注：贴着两条带电带，随载流子正负同步改写（内容，不是操作提示） */
+const topNote = "载流子堆积";
+const bottomNote = computed(() => (isN.value ? "载流子剥离→留下正离子" : "载流子剥离→留下负离子"));
 
 /** 元件在画布中的几何（viewBox 用户单位）：前面 c × a，厚度 d 沿 (+60, −48) 方向（斜二测） */
 const PLATE_X0 = 165;
@@ -347,7 +347,7 @@ const U_HEADS = [
         viewBox="0 36 720 430"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label="霍尔元件：电流沿长度方向通过半导体薄片，磁场垂直纸面向里；载流子从下表面被剥离、弯向上表面堆积，下表面留下不可动离子，两表面间形成横向电场并不断增强，直到电场力与洛伦兹力平衡"
+        aria-label="霍尔元件：电流沿长度方向通过薄片，磁场垂直纸面向里；载流子从下表面被剥离、弯向上表面堆积，下表面留下不可动离子，两表面间形成横向电场并不断增强，直到电场力与洛伦兹力平衡"
       >
         <defs>
           <!-- 载流子只许待在薄片里：前面 ∪ 顶面（上侧面） -->
@@ -762,7 +762,7 @@ const U_HEADS = [
     <div v-if="isLab" class="he-panel">
       <div class="he-types">
         <button type="button" class="he-type" :class="{ 'he-type-on': isN }" @click="carrier = 'n'">
-          电子（N 型）
+          带负电载流子
         </button>
         <button
           type="button"
@@ -770,7 +770,7 @@ const U_HEADS = [
           :class="{ 'he-type-on': !isN }"
           @click="carrier = 'p'"
         >
-          空穴（P 型）
+          带正电载流子
         </button>
       </div>
 

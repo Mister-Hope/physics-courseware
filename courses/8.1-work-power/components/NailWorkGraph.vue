@@ -41,21 +41,6 @@ const areas = computed(() =>
   }),
 );
 
-/** 深度位置的竖向虚线（点击后才出） */
-const guides = computed(() =>
-  XS.map((x) => ({
-    points: [
-      { x, y: 0 },
-      { x, y: x },
-    ],
-    stroke: "var(--c-text-dim)",
-    width: 1.4,
-    dashed: "5 4",
-    opacity: 0.7,
-    showAt: 2,
-  })),
-);
-
 const curve = [{ formula: (x: number): number => x, stroke: "var(--c-physics)", width: 3.2 }];
 
 const labels = computed(() => [

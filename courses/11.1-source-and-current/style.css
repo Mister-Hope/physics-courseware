@@ -8,3 +8,9 @@
 .summary-compact {
   zoom: 0.9;
 }
+
+/* 三种速率：三栏标题收一档，避免"电场建立与传播的速率"末字折行（不同系统中文字体宽度略有差异） */
+.rate-cols .mini-title {
+  font-size: 1.16rem;
+  white-space: nowrap;
+}

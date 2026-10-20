@@ -1,6 +1,6 @@
 <!-- 第 1 页封面装饰：一列向右传播的电磁波——红色电场波、蓝色磁场波相互垂直（正交）地振动，左端是振源天线（纯图形，不放文字） -->
 <script setup lang="ts">
-const wavePath = (amp: number, phase: number, n = 120) => {
+const wavePath = (amp: number, phase: number, n = 120): string => {
   const pts: string[] = [];
   for (let i = 0; i <= n; i++) {
     const x = 34 + (222 * i) / n;

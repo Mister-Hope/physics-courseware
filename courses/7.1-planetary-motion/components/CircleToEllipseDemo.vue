@@ -12,8 +12,8 @@ const flat = ref(0.4);
 /** 半短轴 b = a(1 − 压扁程度)、半焦距 c = √(a² − b²)、离心率 e = c/a */
 const semiMinor = computed(() => A * (1 - flat.value));
 const cFocal = computed(() => Math.sqrt(Math.max(0, A * A - semiMinor.value ** 2)));
-const eccentricity = computed(() => (A === 0 ? 0 : cFocal.value / A));
-const ratio = computed(() => (A === 0 ? 1 : semiMinor.value / A));
+const eccentricity = computed(() => cFocal.value / A);
+const ratio = computed(() => semiMinor.value / A);
 const C = { x: 250, y: 145 };
 /** 两个焦点（压扁后才出现） */
 const F1 = computed(() => ({ x: C.x - cFocal.value, y: C.y }));

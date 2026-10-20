@@ -126,7 +126,7 @@ const lenScale = 52 / ((K * Q) / (0.26 * 0.26));
         {{ eSci.m }}<Latex tex="\times 10^{" />{{ eSci.e }}<Latex tex="\ \text{N/C}" />
       </div>
       <div class="text-[15px]">
-        <Latex tex="E(2r) = " />{{ e2rSci.m }}<Latex tex="\times 10^{" />{{ e2r.e
+        <Latex tex="E(2r) = " />{{ e2rSci.m }}<Latex tex="\times 10^{" />{{ e2rSci.e
         }}<Latex tex="\ \text{N/C}" />
       </div>
       <div class="text-[16px] text-[var(--c-gold)]">

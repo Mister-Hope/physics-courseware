@@ -161,27 +161,12 @@
   font-weight: 700;
   font-size: 1.08rem;
   line-height: 1.5;
-}
 
-.ask > svg {
-  vertical-align: -0.15em;
-  margin-right: 0.4rem;
-  color: var(--c-accent);
-}
-
-.key {
-  padding-left: 1rem;
-  border-left: 3px solid var(--c-accent);
-  font-size: 1.02rem;
-  line-height: 1.7;
-}
-
-.key-blue {
-  border-left-color: var(--c-accent-2);
-}
-
-.key-danger {
-  border-left-color: var(--c-danger);
+  > svg {
+    vertical-align: -0.15em;
+    margin-right: 0.4rem;
+    color: var(--c-accent);
+  }
 }
 
 /* 内容少的页：结论/提问整体放大 */

@@ -3,7 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, useId } from "vue";
 
 import ChartLabel from "./ChartLabel.vue";
 import { axisMathParts, labelParts, needsUnitGap, normalizeUnit } from "./label-text";
-import type { ChartLabelPart } from "./label-text";
+import type { ChartLabelAnchor, ChartLabelPart } from "./label-text";
 
 const NOMINAL_RENDER_WIDTH = 884; // SSR / 首帧拿不到容器宽度时的标定宽度（整页正文栏约 884px）
 
@@ -83,7 +83,12 @@ interface Curve {
   formula?: (x: number) => number;
   /** 采样段数，默认 96 */
   samples?: number;
-  /** 线色，默认 `var(--c-accent)` */
+  /** 线色（**正本字段**，与 `SimpleAxis` 统一）；默认 `var(--c-accent)` */
+  color?: string;
+  /**
+   * @deprecated 线色的**旧名**，仅为兼容存量课件保留；新写的一律用 `color`。
+   * （以前这里是正本、`SimpleAxis` 那边叫 `color`，写混了不报错、只是颜色被静默忽略。）
+   */
   stroke?: string;
   /** 线宽（屏幕 px 口径），默认 3 */
   width?: number;
@@ -110,15 +115,8 @@ interface Area {
   showAt?: number;
 }
 
-/** 文字相对标注点的方位 */
-type LabelAnchor =
-  | "center"
-  | "left"
-  | "right"
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right";
+/** 文字相对标注点的方位（与 `ChartLabel` 共用一套九宫格：中心 + 8 个方向） */
+type LabelAnchor = ChartLabelAnchor;
 
 interface PointLabel {
   /** 标注点（数据坐标） */
@@ -521,7 +519,8 @@ const layerItems = computed(() => ({
       ),
       style: {
         fill: "none",
-        stroke: curve.stroke ?? "var(--c-accent)",
+        // `color` 是正本、`stroke` 是兼容旧课件的别名（两个都写时以 `color` 为准）
+        stroke: curve.color ?? curve.stroke ?? "var(--c-accent)",
         strokeWidth: sizeToUser(curve.width, layout.value.sizes.curve),
         strokeDasharray: dashOf(curve.dashed),
         strokeLinecap: "round",

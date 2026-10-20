@@ -140,9 +140,7 @@ const angleTex = computed(() => `\\alpha \\approx ${result.value.angle.toFixed(0
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.7fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.7fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg
         :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`"

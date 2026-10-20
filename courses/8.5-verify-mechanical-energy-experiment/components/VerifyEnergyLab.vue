@@ -12,7 +12,6 @@ const vB = computed(() => (xC.value - xA.value) / 100 / (2 * T));
 const hB = computed(() => xB.value / 100);
 const ek = computed(() => 0.5 * m.value * vB.value ** 2);
 const ep = computed(() => m.value * G * hB.value);
-const gap = computed(() => ((ep.value - ek.value) / ep.value) * 100);
 </script>
 
 <template>

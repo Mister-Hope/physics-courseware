@@ -14,11 +14,11 @@ const presets = [
 const logF = ref(Math.log10(2.45e9));
 const f = computed(() => 10 ** logF.value);
 
-function sci3(x: number) {
+const sci3 = (x: number): { ms: string; e: number } => {
   const e = Math.floor(Math.log10(x));
   const m = Number((x / 10 ** e).toPrecision(3));
   return { ms: String(m), e };
-}
+};
 
 const fTex = computed(() => {
   const { ms, e } = sci3(f.value);
@@ -44,7 +44,7 @@ const lamTex = computed(() => {
   return "";
 });
 
-function bandOf(freq: number) {
+const bandOf = (freq: number): string => {
   if (freq < 3e9) return "无线电波";
   if (freq < 3e11) return "微波";
   if (freq < 4e14) return "红外线";
@@ -52,7 +52,7 @@ function bandOf(freq: number) {
   if (freq < 3e16) return "紫外线";
   if (freq < 3e19) return "X 射线";
   return "γ 射线";
-}
+};
 const band = computed(() => bandOf(f.value));
 </script>
 

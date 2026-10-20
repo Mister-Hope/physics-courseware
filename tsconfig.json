@@ -1,4 +1,13 @@
 {
   "extends": "@mr-hope/tsconfig/web.json",
+  "compilerOptions": {
+    // Slidev 的 @slidev/client 只发布源码，import 它会把客户端源码一起拉进本程序做类型检查；
+    // 其中 state/syncState.ts 的 init() 自己有个没用到的形参（上游代码问题），在
+    // noUnusedParameters 下会报 TS6133。为上游这一处关掉整条规则：
+    // - 未使用的**局部量**仍由 noUnusedLocals 拦（.vue 里的死代码就靠它）；
+    // - 未使用的**形参**在 .ts 里 oxlint 的 no-unused-vars 照样报（error 级）。
+    // 若哪天想让这条规则重新生效，可以给 @slidev/client 打一个"把该形参改名成 _state"的 pnpm patch。
+    "noUnusedParameters": false
+  },
   "include": ["**/*.ts", "**/*.vue"]
 }

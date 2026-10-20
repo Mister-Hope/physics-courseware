@@ -7,11 +7,13 @@
 /** 一个标注片段：`tex` 走 KaTeX（物理量、单位、公式），`text` 走系统字体（中文、点名） */
 export type ChartLabelPart = { tex: string } | { text: string };
 
-/** 文字相对标注点的方位 */
+/** 文字相对标注点的方位（九宫格：中心 + 8 个方向；正上 / 正下也支持） */
 export type ChartLabelAnchor =
   | "center"
   | "left"
   | "right"
+  | "top"
+  | "bottom"
   | "top-left"
   | "top-right"
   | "bottom-left"

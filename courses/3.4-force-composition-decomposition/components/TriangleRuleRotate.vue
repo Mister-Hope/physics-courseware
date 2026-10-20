@@ -88,9 +88,7 @@ const pct = (value: number, total: number): number => (value / total) * 100;
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.3fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.3fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <path

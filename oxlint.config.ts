@@ -62,6 +62,19 @@ export default defineHopeConfig(
     files: ["**/*.vue"],
     rules: { "import/unambiguous": "off" },
   },
+  // `*.d.ts` 是**声明文件**：写的是别人的名字、没有运行时语句，下面三条面向运行时代码的规则在这里只会帮倒忙：
+  // - `no-underscore-dangle`：`__DEV__` / `__SLIDEV_*`（Vite `define` 注入）改不了名字；
+  // - `one-var`：每个全局量各写一条 `declare const` 才配得上各自的文档注释，合并成一条反而读不懂；
+  // - `import/no-unassigned-import`：`import "@slidev/client/shim-vue.d.ts"` 这种**只为引入全局增强**的
+  //   副作用 import 是声明文件的标准写法（见 `workspace/shared/types/slidev-client.d.ts`）。
+  {
+    files: ["**/*.d.ts"],
+    rules: {
+      "no-underscore-dangle": "off",
+      "one-var": "off",
+      "import/no-unassigned-import": "off",
+    },
+  },
   // 3D three.js components could be huge
   {
     files: ["**/*3D.vue"],

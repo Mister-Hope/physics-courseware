@@ -11,10 +11,10 @@ export const coursePages: Record<string, number> = {
   "10.3-potential-and-field": 13,
   "10.4-capacitor": 23,
   "10.5-charged-particle-in-field": 2,
-  "11.1-source-and-current": 17,
-  "11.2-conductor-resistance": 25,
+  "11.1-source-and-current": 21,
+  "11.2-conductor-resistance": 23,
   "11.3-resistivity-experiment": 23,
-  "11.4-series-parallel-circuits": 18,
+  "11.4-series-parallel-circuits": 19,
   "11.5-multimeter-experiment": 17,
   "12.1-energy-conversion-in-circuits": 15,
   "12.2-closed-circuit-ohm-law": 2,
@@ -61,8 +61,8 @@ export const coursePages: Record<string, number> = {
   "9.2-coulomb-law": 15,
   "9.3-electric-field": 19,
   "9.4-electrostatic-prevention": 19,
-  "o2-1.2-lorentz-force": 17,
-  "o2-1.3-charged-particle-motion": 32,
-  "o2-1.4-mass-spectrometer-cyclotron": 29,
-  "o2-1.x-speed-matching": 22
+  "o2-1.2-lorentz-force": 15,
+  "o2-1.3-charged-particle-motion": 42,
+  "o2-1.4-mass-spectrometer-cyclotron": 31,
+  "o2-1.x-speed-matching": 20
 };

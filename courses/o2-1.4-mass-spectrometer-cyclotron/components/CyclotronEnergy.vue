@@ -1,9 +1,9 @@
 <!--
-  第 10 页全页交互：最大动能由什么决定
+  第 13 页全页交互：最大速度和最大动能由什么决定
   —— 左：D 形盒俯视 + 粒子螺旋到最外圈（半径 = 盒半径 R），圆心到盒边缘标 R（双箭头）
   —— 右：B / R / U 三个滑块 + 三个读数
   真实计算（computed）：
-      E_k,max = q²B²R²/(2m)、n = E_k,max/(qU)、t = n·T/2 = nπm/(qB)
+      E_k,max = q²B²R²/(2m)、n = E_k,max/(qU)、t = (n−1)·T/2 = (n−1)πm/(qB)
   教学点（靠公式里有没有 U 自己就能看出来，数字跟着动）：
       E_k,max 只由 B、R 决定 —— 拖 U 时 E_k,max **不变**，只有 n 与 t 变；
       拖 B 或 R 时 E_k,max 跟着变（B、R 越大、动能越大，与 U 无关）。
@@ -25,8 +25,8 @@ const u = ref(5);
 const ekMax = computed(() => (Q_P * Q_P * b.value * b.value * r.value * r.value) / (2 * M_P));
 /** 加速次数 n = E_k,max/(qU) */
 const nAcc = computed(() => Math.max(1, Math.round(ekMax.value / (Q_P * u.value * 1e3))));
-/** 加速总时间 t = n·T/2 = nπm/(qB)（s） */
-const totalT = computed(() => (nAcc.value * Math.PI * M_P) / (Q_P * b.value));
+/** 加速 n 次共走过 n−1 个半周期：t = (n−1)·T/2 = (n−1)πm/(qB)（s） */
+const totalT = computed(() => (Math.max(0, nAcc.value - 1) * Math.PI * M_P) / (Q_P * b.value));
 
 /** 拖 B / R → 动的是 E_k,max；拖 U → 动的是 n 与 t（读数框亮一下，把这条线索点出来） */
 const pulse = ref<"ek" | "nt" | "">("");
@@ -149,7 +149,7 @@ const ekTex = computed(
 );
 const nTex = computed(() => `n = \\frac{E_{k\\max}}{qU} = ${nAcc.value}`);
 const tTex = computed(
-  () => `t = \\frac{n\\pi m}{qB} = ${(totalT.value * 1e6).toFixed(1)}\\ \\mu\\text{s}`,
+  () => `t = \\frac{(n-1)\\pi m}{qB} = ${(totalT.value * 1e6).toFixed(1)}\\ \\mu\\text{s}`,
 );
 
 /**

@@ -13,7 +13,7 @@ const curves = [
       { x: 0, y: 0 },
       { x: 3.2, y: 2.4 },
     ],
-    stroke: "var(--c-accent)",
+    color: "var(--c-accent)",
     width: 3.4,
   },
 ];

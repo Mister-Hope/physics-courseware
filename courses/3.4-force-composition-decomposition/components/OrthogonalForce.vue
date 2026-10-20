@@ -65,9 +65,7 @@ const fyTex = computed(() => `F_y = F\\sin\\alpha = ${fmt(forceY.value)}\\ \\tex
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.3fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.3fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <line

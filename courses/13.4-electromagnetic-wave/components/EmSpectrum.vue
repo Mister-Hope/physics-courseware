@@ -78,7 +78,7 @@ const bands: Band[] = [
   },
 ];
 
-const segX = (i: number) => 15 + i * 105;
+const segX = (i: number): number => 15 + i * 105;
 const sel = ref("vis");
 const cur = computed(() => bands.find((b) => b.key === sel.value) ?? bands[0]);
 </script>

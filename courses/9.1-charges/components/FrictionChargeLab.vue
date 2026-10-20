@@ -10,8 +10,8 @@ import { computed } from "vue";
 const { $clicks } = useSlideContext();
 const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
 
-const BASE = 4; // 每个物体各有 4 个正离子、4 个电子（电中性）
-const N = 2; // 这次转移 2 个电子（图上数得清）
+// 每个物体各有 4 个正离子、4 个电子（电中性）；这次转移 2 个电子（图上数得清）
+const N = 2;
 
 const ions1 = [
   { x: 76, y: 88 },

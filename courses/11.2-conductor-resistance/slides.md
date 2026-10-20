@@ -20,12 +20,46 @@ defaults:
   transition: fade
 chapter-no: "11.2"
 chapter: "第十一章 电路及其应用"
-lesson: "第一课时"
-subtitle: "电阻的定义与电阻定律"
+subtitle: "电阻的定义、电阻定律与伏安特性曲线"
 ---
 
 <!-- 封面装饰：一段导体与它的长度 l、横截面积 S（对应 R = ρl/S） -->
 <CoverDecorationSvg />
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 复习：电阻
+
+<div class="page-grow">
+
+<div class="ask">初中学过电阻：它的物理意义是什么？定义式怎么写？单位是什么？</div>
+
+<div v-click="1">物理意义：电阻反映导体对电流的阻碍作用。</div>
+
+<div v-click="2">定义式：<Latex tex="R = \dfrac{U}{I}" />，其中 <Latex tex="U" /> 是导体两端的电压、<Latex tex="I" /> 是通过导体的电流。</div>
+
+<div v-click="3">单位：欧姆，符号 <Latex tex="\Omega" />；<Latex tex="1\ \text{k}\Omega = 10^{3}\ \Omega" />，<Latex tex="1\ \text{M}\Omega = 10^{6}\ \Omega" />。</div>
+
+</div>
+
+---
+layout: base-flex
+title: 复习：电阻
+clicks: 2
+---
+
+<div class="page-grow">
+
+<div class="ask">同一段导体，加在它两端的电压变大时，它的电阻会变大吗？</div>
+
+<div v-click="1">电压变大时，通过它的电流也按同样的比例变大——<Latex tex="\dfrac{U}{I}" /> 这个比值不变，电阻也就没有变。</div>
+
+<div v-click="2" class="warn-hint">电阻是用比值定义的物理量：比值由导体本身决定，与它两端的电压、通过的电流无关。不能说 <Latex tex="R" /> 与 <Latex tex="U" /> 成正比、与 <Latex tex="I" /> 成反比。</div>
+
+</div>
 
 ---
 layout: base-flex
@@ -116,7 +150,7 @@ clicks: 2
 
 <div>
 
-<div class="mini-title"><mdi-ruler />长度</div>
+<div class="mini-title"><mdi-ruler class="icon-md" />长度</div>
 
 <div class="mini-note mt-1">导线越长，电阻越大</div>
 
@@ -124,7 +158,7 @@ clicks: 2
 
 <div>
 
-<div class="mini-title"><mdi-arrow-expand-horizontal />横截面积</div>
+<div class="mini-title"><mdi-arrow-expand-horizontal class="icon-md" />横截面积</div>
 
 <div class="mini-note mt-1">导线越粗，电阻越小</div>
 
@@ -132,7 +166,7 @@ clicks: 2
 
 <div>
 
-<div class="mini-title"><mdi-atom />材料</div>
+<div class="mini-title"><mdi-atom class="icon-md" />材料</div>
 
 <div class="mini-note mt-1">同样粗细长短，不同材料电阻不同</div>
 
@@ -263,13 +297,13 @@ clicks: 2
 
 <thead>
 
-<tr><th>式子</th><th>它回答的问题</th><th>电阻由谁决定</th></tr>
+<tr><th>式子</th><th>它回答的问题</th><th style="width: 32%">电阻由谁决定</th></tr>
 
 </thead>
 
 <tbody>
 
-<tr><td><Latex tex="R = \dfrac{U}{I}" /></td><td>怎样由电压和电流量出一段导体的电阻</td><td rowspan="2">导体本身：材料、长度、横截面积</td></tr>
+<tr><td><Latex tex="R = \dfrac{U}{I}" /></td><td>怎样由电压和电流<br />量出一段导体的电阻</td><td rowspan="2">导体本身：<br />材料、长度、横截面积</td></tr>
 
 <tr><td><Latex tex="R = \rho \dfrac{l}{S}" /></td><td>导体的电阻由哪些因素决定</td></tr>
 
@@ -296,7 +330,7 @@ title: "材料的导电性能"
 
 <div>
 
-<div class="mini-title"><mdi-flash-outline />导体</div>
+<div class="mini-title"><mdi-flash-outline class="icon-md" />导体</div>
 
 <div class="mini-note mt-1">金属中自由电子很多，电阻率 <Latex tex="\rho" /> 很小，如铜、铝、银。</div>
 
@@ -304,7 +338,7 @@ title: "材料的导电性能"
 
 <div>
 
-<div class="mini-title"><mdi-close-circle-outline />绝缘体</div>
+<div class="mini-title"><mdi-close-circle-outline class="icon-md" />绝缘体</div>
 
 <div class="mini-note mt-1">几乎不存在能自由移动的电荷，电阻率极大，如橡胶、玻璃、胶木。</div>
 
@@ -312,7 +346,7 @@ title: "材料的导电性能"
 
 <div>
 
-<div class="mini-title"><mdi-lightbulb-on-outline />半导体</div>
+<div class="mini-title"><mdi-lightbulb-on-outline class="icon-md" />半导体</div>
 
 <div class="mini-note mt-1">导电性能会随温度、光照明显改变（如复印机里的光导体），其 <Latex tex="I" />-<Latex tex="U" /> 图线不是直线。</div>
 
@@ -323,40 +357,12 @@ title: "材料的导电性能"
 </div>
 
 ---
-layout: base-flex
-title: "课堂小结"
-clicks: 4
----
-
-# 课堂小结
-
-<div class="page-grow">
-
-<div class="summary-line" v-click="1"><span class="text-accent font-bold">电阻</span>：导体两端的电压与通过它的电流之比 <Latex tex="R = \dfrac{U}{I}" />，它反映导体对电流的阻碍作用，只由导体本身决定。</div>
-
-<div class="summary-line" v-click="2"><span class="text-accent font-bold">U-I 图像</span>：同一个导体的 <Latex tex="U" />-<Latex tex="I" /> 图线是一条过原点的直线，直线的斜率表示导体的电阻。</div>
-
-<div class="summary-line" v-click="3"><span class="text-accent font-bold">电阻定律</span>：<Latex tex="R = \rho \dfrac{l}{S}" />（同种材料：<Latex tex="R \propto l" />、<Latex tex="R \propto \dfrac{1}{S}" />）。</div>
-
-<div class="summary-line" v-click="4"><span class="text-accent font-bold">电阻率</span>：<Latex tex="\rho" /> 由材料决定，单位是 <Latex tex="\Omega \cdot \text{m}" />，反映材料的导电性能。</div>
-
-</div>
-
----
-layout: course-cover
-lesson: "第二课时"
-subtitle: "电阻率与温度、伏安特性曲线"
----
-
-<CoverDecorationSvg />
-
----
 layout: focus-question
 title: "烧红的灯丝电阻会变吗"
 clicks: 1
 ---
 
-<!-- 第二课时引课：先问后答 —— 灯丝加热后电阻怎么变 -->
+<!-- 引课 2：先问后答 —— 灯丝加热后电阻怎么变（承接电阻率与温度） -->
 
 <template v-slot:icon>
 
@@ -437,10 +443,11 @@ clicks: 1
 </div>
 
 </div>
+
 ---
 layout: base-flex
 title: "伏安特性曲线"
-clicks: 2
+clicks: 1
 ---
 
 # 伏安特性曲线
@@ -449,17 +456,20 @@ clicks: 2
 
 <div class="half-grid">
 
-<div>
+<div class="stack">
 
 <DefinitionBox term="伏安特性曲线" tone="gold">
 
-用横坐标表示电压 <Latex tex="U" />、纵坐标表示电流 <Latex tex="I" />，这样画出的 <Latex tex="I" />-<Latex tex="U" /> 图像。
+用<strong>横坐标表示电压 <Latex tex="U" />、纵坐标表示电流 <Latex tex="I" /></strong> 画出的 <Latex tex="I" />-<Latex tex="U" /> 图像。
 
 </DefinitionBox>
 
-<div class="mini-note mt-2">金属导体在温度没有显著变化时电阻几乎不变，伏安特性曲线是一条过原点的直线。</div>
+<div class="axis-note">
+<div><strong>伏安特性曲线</strong>：横轴 <Latex tex="U" />、纵轴 <Latex tex="I" /></div>
+<div><strong><Latex tex="U" />-<Latex tex="I" /> 图像</strong>：横轴 <Latex tex="I" />、纵轴 <Latex tex="U" /></div>
+</div>
 
-<div v-click="1" class="tip-hint">具有这种伏安特性曲线的电学元件叫作<strong>线性元件</strong>。</div>
+<div v-click="1" class="tip-hint">金属导体温度没有明显变化时，图线是一条<strong>过原点的直线</strong>；具有这种伏安特性曲线的电学元件叫作<strong>线性元件</strong>。</div>
 
 </div>
 
@@ -472,17 +482,14 @@ clicks: 2
 :y-axis="{ quantity: 'I', unit: 'A' }"
 :curves="[{ points: [{ x: 0, y: 0 }, { x: 5.6, y: 4.2 }], color: 'var(--c-accent-2)', width: 3.5 }]"
 :ticks="{ labels: false }"
-:view="{ width: 520, height: 260 }"
+:view="{ width: 480, height: 400 }"
 />
 
 </div>
 
 </div>
 
-<div v-click="2" class="warn-hint"><Latex tex="U" />-<Latex tex="I" /> 图线的斜率是 <Latex tex="R" />，<Latex tex="I" />-<Latex tex="U" /> 图线的斜率是 <Latex tex="1/R" />——看图先看纵轴是哪个量。</div>
-
 </div>
-
 ---
 layout: base-flex
 title: "非线性元件"
@@ -502,14 +509,14 @@ clicks: 2
 :y-max="6"
 :x-axis="{ quantity: 'U', unit: 'V' }"
 :y-axis="{ quantity: 'I', unit: 'A' }"
-:curves="[{ formula: (u) => 0.75 * u, color: 'var(--c-accent-2)', width: 3.5 }, { formula: (u) => (0.75 * u) / (1 + 0.14 * u), color: 'var(--c-accent)', width: 3.5 }]"
+:curves="[{ formula: (u) => 0.75 * u, color: 'var(--c-accent-2)', width: 3.5 }, { formula: (u) => (1.25 * u) / (1 + 0.3 * u), color: 'var(--c-accent)', width: 3.5 }]"
 :ticks="{ labels: false }"
 :view="{ width: 480, height: 330 }"
 />
 
 </div>
 
-<div>
+<div class="stack" style="align-self: stretch; justify-content: center">
 
 <div class="summary-line" v-click="1">对气态导体（如日光灯管、霓虹灯管中的气体）和半导体元件，欧姆定律并不适用：电流与电压不成正比。<strong>这类电学元件叫作非线性元件。</strong></div>
 
@@ -521,106 +528,90 @@ clicks: 2
 
 <div class="cv-legend">
 
-<span><i class="cv-swatch" style="background:var(--c-accent-2)" />线性元件：<Latex tex="R" /> 不变（<Latex tex="I" /> 与 <Latex tex="U" /> 成正比）</span>
+<span><i class="cv-swatch" style="background:var(--c-accent-2)" />线性元件：<Latex tex="R" /> 不变</span>
 
-<span><i class="cv-swatch" style="background:var(--c-accent)" />小灯泡：温度升高 <Latex tex="R" /> 变大，<Latex tex="I" /> 比正比关系小</span>
+<span><i class="cv-swatch" style="background:var(--c-accent)" />小灯泡：温度升高 <Latex tex="R" /> 变大，<Latex tex="I" /> 先陡后缓</span>
+
+</div>
 
 </div>
 
+---
+layout: exercise-split
+title: "例题：小灯泡的 I-U 图线"
+clicks: 2
+---
+
+<template v-slot:stem>
+
+小灯泡通电后，其电流 <Latex tex="I" /> 随所加电压 <Latex tex="U" /> 变化的图线如图所示。<Latex tex="P" /> 为图线上一点，<Latex tex="PN" /> 为过 <Latex tex="P" /> 点的切线，<Latex tex="PQ" />、<Latex tex="PM" /> 分别为 <Latex tex="U" /> 轴、<Latex tex="I" /> 轴的垂线。下列说法中正确的是（　）（多选）
+
+<div class="opts">
+<div><strong>A.</strong> 电压增大时，电阻减小</div>
+<div><strong>B.</strong> 电压增大时，电阻增大</div>
+<div><strong>C.</strong> 对应 <Latex tex="P" /> 点，<Latex tex="R = \tfrac{U_1}{I_2}" /></div>
+<div><strong>D.</strong> 对应 <Latex tex="P" /> 点，<Latex tex="R = \tfrac{U_1}{I_2 - I_1}" /></div>
 </div>
----
-layout: exercise-split
-title: "练习与应用 1"
-clicks: 2
----
-
-<template v-slot:stem>
-
-某同学对四个电阻各进行了一次测量，把每个电阻两端的电压和通过它的电流在平面直角坐标系中描点，得到了图 11.2-6 中 A、B、C、D 四个点。请比较这四个电阻的大小。
 
 </template>
 
 <template v-slot:fig>
 
-<FigurePlaceholder label="图 11.2-6 占位：换题后重画" />
+<BulbTangentFigure />
 
 </template>
 
-<div v-click="1" class="summary-line">这是 <Latex tex="U" />-<Latex tex="I" /> 图像，由 <Latex tex="R = U/I" /> 可知：把每个点与原点 <Latex tex="O" /> 相连，连线的斜率就是那个电阻的阻值。</div>
+<div v-click="1" class="summary-line">曲线越往右越平：<Latex tex="U/I" /> 变大、电阻增大 → <strong>B 正确</strong></div>
 
-<div v-click="2" class="tip-hint">只需比较四条连线谁更陡：<strong>越陡，电阻越大</strong>；同样电流下电压越高的点，电阻越大。</div>
-
+<div v-click="2" class="warn-hint"><Latex tex="P" /> 点电阻 <Latex tex="R = \tfrac{U_1}{I_2}" />（<strong>C 正确</strong>）；<Latex tex="\tfrac{\Delta U}{\Delta I}" /> 不是电阻（<strong>D 错误</strong>）</div>
 ---
 layout: exercise-split
-title: "练习与应用 5"
+title: "练习：串联导体柱的横截面积之比"
 clicks: 2
 ---
 
 <template v-slot:stem>
 
-某同学想探究导电溶液的电阻随长度、横截面积的变化规律。他拿了一根细橡胶管，里面灌满了盐水，两端用粗铜丝塞住管口，形成一段封闭的盐水柱。他量得盐水柱的长度是 <Latex tex="30\ \text{cm}" />，并测出盐水柱的电阻等于 <Latex tex="R" />。现握住橡胶管的两端把它拉长，使盐水柱的长度变为 <Latex tex="40\ \text{cm}" />。如果溶液的电阻随长度、横截面积的变化规律与金属导体相同，此时盐水柱的电阻应该等于多少？
+如图甲，两根材料相同的均匀导体柱 <Latex tex="m" />、<Latex tex="n" />（<Latex tex="m" /> 长 <Latex tex="l" />、<Latex tex="n" /> 长 <Latex tex="2l" />）串联在电路中，沿 <Latex tex="x" /> 轴方向的电势变化如图乙。取 <Latex tex="x = 3l" /> 处电势为零，则导体柱 <Latex tex="m" />、<Latex tex="n" /> 的横截面积之比为（　）
+
+<div class="opts opts--4">
+<div><strong>A.</strong> <Latex tex="\tfrac{1}{3}" /></div>
+<div><strong>B.</strong> <Latex tex="\tfrac{1}{2}" /></div>
+<div><strong>C.</strong> <Latex tex="\tfrac{1}{4}" /></div>
+<div><strong>D.</strong> <Latex tex="\tfrac{2}{5}" /></div>
+</div>
 
 </template>
 
 <template v-slot:fig>
 
-<FigurePlaceholder label="盐水柱示意图占位：换题后重画" />
+<SeriesColumnsPotential />
 
 </template>
 
-<div v-click="1" class="summary-line">体积不变：<Latex tex="S'l' = Sl" />；<Latex tex="l' = 4l/3" /> 时 <Latex tex="S' = 3S/4" />。</div>
+<div v-click="1" class="summary-line">串联、<Latex tex="I" /> 相同 ⇒ <Latex tex="U \propto R" />；图乙 <Latex tex="U_m = 6\ \text{V}" />、<Latex tex="U_n = 4\ \text{V}" /> ⇒ <Latex tex="R_m : R_n = 3 : 2" />。</div>
 
-<div v-click="2" class="summary-line">代入 <Latex tex="R = \rho l/S" />：<Latex tex="R' = \rho l'/S' = 16R/9 \approx 1.78R" />。</div>
+<div v-click="2" class="tip-hint"><Latex tex="S \propto \tfrac{l}{R}" /> ⇒ <Latex tex="S_m : S_n = \tfrac{l}{3} : \tfrac{2l}{2} = 1 : 3" /> ⇒ 选 <strong>A</strong>。</div>
 
 ---
-layout: exercise-split
-title: "练习与应用 6"
-clicks: 2
-hideQaMark: true
+layout: base-flex
+title: "课堂小结"
+clicks: 4
 ---
 
-<template v-slot:stem>
+# 课堂小结
 
-如图 11.2-7，一块均匀的长方体样品，长为 <Latex tex="a" />，宽为 <Latex tex="b" />，厚为 <Latex tex="c" />。电流沿 AB 方向时测得样品的电阻为 <Latex tex="R" />，则样品的电阻率是多少？电流沿 CD 方向时样品的电阻是多少？
+<div class="page-grow">
 
-</template>
+<div class="summary-line" v-click="1"><span class="text-accent font-bold">电阻</span>：导体两端的电压与通过它的电流之比 <Latex tex="R = \dfrac{U}{I}" />，它反映导体对电流的阻碍作用，只由导体本身决定。</div>
 
-<template v-slot:fig>
+<div class="summary-line" v-click="2"><span class="text-accent font-bold">U-I 图像</span>：同一个导体的 <Latex tex="U" />-<Latex tex="I" /> 图线是一条过原点的直线，直线的斜率表示导体的电阻。</div>
 
-<FigurePlaceholder label="图 11.2-7 占位：换题后重画" />
+<div class="summary-line" v-click="3"><span class="text-accent font-bold">电阻定律</span>：<Latex tex="R = \rho \dfrac{l}{S}" />（同种材料：<Latex tex="R \propto l" />、<Latex tex="R \propto \dfrac{1}{S}" />）。</div>
 
-</template>
+<div class="summary-line" v-click="4"><span class="text-accent font-bold">电阻率</span>：<Latex tex="\rho" /> 由材料决定，单位是 <Latex tex="\Omega \cdot \text{m}" />，反映材料的导电性能。</div>
 
-<div v-click="1" class="summary-line">沿 AB 方向：长度是 <Latex tex="a" />，横截面积是 <Latex tex="bc" />。由 <Latex tex="R = \rho \dfrac{a}{bc}" /> 得 <Latex tex="\rho = \dfrac{Rbc}{a}" />。</div>
-
-<div v-click="2" class="tip-hint">沿 CD 方向：长度变成 <Latex tex="b" />，横截面积变成 <Latex tex="ac" />，代入 <Latex tex="\rho" /> 得 <Latex tex="R_{CD} = Rb^{2}/a^{2}" />。</div>
-
----
-layout: exercise-split
-title: "练习与应用 7"
-clicks: 2
-hideQaMark: true
----
-
-<template v-slot:stem>
-
-人体含水量约为 70%，水中有钠离子、钾离子等离子存在，因此容易导电，脂肪则不容易导电。某脂肪测量仪，其原理就是根据人体电阻的大小来判断人体脂肪所占比例。
-
-（1）肥胖的人与消瘦的人电阻不同的主要原因是什么？
-
-（2）激烈运动之后、沐浴之后测量数据会不准确，这可能是什么原因？
-
-</template>
-
-<template v-slot:fig>
-
-<FigurePlaceholder label="图 11.2-8 占位：换题后重画" />
-
-</template>
-
-<div v-click="1" class="summary-line">（1）脂肪几乎不导电：肥胖者脂肪比例高、含水量低，电阻更大。</div>
-
-<div v-click="2" class="summary-line">（2）运动、沐浴后体表有汗液，汗液含离子使导电能力变强，测得的电阻偏小。</div>
+</div>
 
 ---
 layout: base-flex
@@ -639,24 +630,5 @@ clicks: 4
 <div class="summary-line" v-click="3"><span class="text-accent font-bold">非线性元件</span>：气态导体、半导体元件的 <Latex tex="I" /> 与 <Latex tex="U" /> 不成正比；欧姆定律对金属导体和电解质溶液适用。</div>
 
 <div class="summary-line" v-click="4"><span class="text-accent font-bold">两个式子</span>：<Latex tex="R = \dfrac{U}{I}" /> 是定义式，<Latex tex="R = \rho \dfrac{l}{S}" /> 是决定式——电阻由导体本身决定。</div>
-
-</div>
-
----
-layout: base-flex
-title: "课后作业"
----
-
-# 课后作业
-
-<div class="page-grow">
-
-<div class="mini-title"><mdi-book-open-variant class="text-3xl" />教材 11.2 练习与应用</div>
-
-<div><strong>第 2 题</strong>：由导线的横截面积估计一段实验室导线的长度，算出它的电阻，说明可以不考虑导线电阻的理由。</div>
-
-<div><strong>第 3 题</strong>：为空调供电的铜导线用去一半，求这段导线上损失的电压（<Latex tex="\rho = 1.7 \times 10^{-8}\ \Omega \cdot \text{m}" />）。</div>
-
-<div><strong>第 4 题</strong>：鸟两爪间的距离与输电线的横截面积已知，求鸟两爪之间的电压。</div>
 
 </div>

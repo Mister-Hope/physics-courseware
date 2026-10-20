@@ -44,6 +44,10 @@ const lambdaTex = computed(
   () => `\\lambda = \\dfrac{c}{\\nu} = ${lambdaNm.value.toFixed(1)}\\ \\text{nm}`,
 );
 
+/** 单通道 0–1 → 8 位色值（0.8 次幂让暗部亮一些，接近屏幕观感） */
+const channelToByte = (value: number): number =>
+  Math.round(255 * Math.max(0, Math.min(1, value)) ** 0.8);
+
 /** 波长（nm）→ 颜色：可见光波长与颜色的对应（布鲁顿近似）；红外/紫外不可见，给中性灰 */
 const wavelengthToHex = (nm: number): string => {
   if (nm < 380 || nm > 780) return "#8b93a5";
@@ -68,8 +72,7 @@ const wavelengthToHex = (nm: number): string => {
   } else {
     r = 1;
   }
-  const channel = (value: number) => Math.round(255 * Math.max(0, Math.min(1, value)) ** 0.8);
-  return `#${[channel(r), channel(g), channel(b)]
+  return `#${[channelToByte(r), channelToByte(g), channelToByte(b)]
     .map((value) => value.toString(16).padStart(2, "0"))
     .join("")}`;
 };

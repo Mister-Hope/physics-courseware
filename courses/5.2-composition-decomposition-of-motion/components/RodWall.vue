@@ -60,39 +60,6 @@ const bShare = computed(() => ({
 const aPerp = computed(() => ({ from: aTip.value, to: aShare.value.to }));
 const bPerp = computed(() => ({ from: bTip.value, to: bShare.value.to }));
 
-/** 垂足处的直角符号：沿杆与沿垂线各取一小段，画一个 12 单位的小方角 */
-const rightAngleMark = (
-  foot: { x: number; y: number },
-  along: { x: number; y: number },
-  perp: { x: number; y: number },
-): string => {
-  const size = 12;
-  const p1 = { x: foot.x + size * along.x, y: foot.y + size * along.y };
-  const p2 = { x: foot.x + size * perp.x, y: foot.y + size * perp.y };
-  const p3 = { x: p1.x + size * perp.x, y: p1.y + size * perp.y };
-  return `M ${p1.x} ${p1.y} L ${p3.x} ${p3.y} L ${p2.x} ${p2.y}`;
-};
-const unitTo = (
-  from: { x: number; y: number },
-  to: { x: number; y: number },
-): { x: number; y: number } => {
-  const len = Math.hypot(to.x - from.x, to.y - from.y) || 1;
-  return { x: (to.x - from.x) / len, y: (to.y - from.y) / len };
-};
-const aMark = computed(() =>
-  rightAngleMark(
-    aShare.value.to,
-    unitTo(aShare.value.from, aShare.value.to),
-    unitTo(aShare.value.to, aPerp.value.from),
-  ),
-);
-const bMark = computed(() =>
-  rightAngleMark(
-    bShare.value.to,
-    unitTo(bShare.value.from, bShare.value.to),
-    unitTo(bShare.value.to, bPerp.value.from),
-  ),
-);
 /** 说明文字放在杆中点右上方（避开杆与地面） */
 const noteLabel = computed(() => ({
   x: (topEnd.value.x + bottomEnd.value.x) / 2 + 22 * sinT.value,

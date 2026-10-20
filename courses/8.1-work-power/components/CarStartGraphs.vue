@@ -19,7 +19,6 @@ const P = 1;
 const F0 = 0.25;
 const M = 0.1;
 const V_MAX = P / F0; // 4
-const A0 = (P / 0.05 - F0) / M; // v 很小时的加速度上界（只用于给纵轴留量）
 
 /** V(t)：dv/dt = (P/v − f₀)/m，从 v₀ = 0.05 起逐小步积分 */
 const vCurve = ((): { x: number; y: number }[] => {
@@ -49,7 +48,7 @@ const config = computed(() => {
               { x: 0, y: P },
               { x: 10, y: P },
             ],
-            stroke: "var(--c-accent)",
+            color: "var(--c-accent)",
             width: 3.2,
           },
         ],
@@ -77,13 +76,13 @@ const config = computed(() => {
         xAxis: { quantity: "v" },
         yAxis: { quantity: "F" },
         curves: [
-          { points: pts, stroke: "var(--c-accent)", width: 3.2 },
+          { points: pts, color: "var(--c-accent)", width: 3.2 },
           {
             points: [
               { x: 0, y: F0 },
               { x: 4.8, y: F0 },
             ],
-            stroke: "var(--c-danger)",
+            color: "var(--c-danger)",
             width: 2,
             dashed: "7 5",
           },
@@ -131,13 +130,13 @@ const config = computed(() => {
         xAxis: { quantity: "1/v" },
         yAxis: { quantity: "F" },
         curves: [
-          { points: pts, stroke: "var(--c-accent)", width: 3.2 },
+          { points: pts, color: "var(--c-accent)", width: 3.2 },
           {
             points: [
               { x: 0, y: F0 },
               { x: 3.2, y: F0 },
             ],
-            stroke: "var(--c-danger)",
+            color: "var(--c-danger)",
             width: 2,
             dashed: "7 5",
           },
@@ -174,7 +173,7 @@ const config = computed(() => {
         yRange: [0, 8.6] as [number, number],
         xAxis: { quantity: "t" },
         yAxis: { quantity: "a" },
-        curves: [{ points: pts, stroke: "var(--c-accent)", width: 3.2 }],
+        curves: [{ points: pts, color: "var(--c-accent)", width: 3.2 }],
         labels: [
           {
             x: 6.2,
@@ -195,13 +194,13 @@ const config = computed(() => {
         xAxis: { quantity: "t" },
         yAxis: { quantity: "v" },
         curves: [
-          { points: vCurve, stroke: "var(--c-accent)", width: 3.2 },
+          { points: vCurve, color: "var(--c-accent)", width: 3.2 },
           {
             points: [
               { x: 0, y: V_MAX },
               { x: 10.4, y: V_MAX },
             ],
-            stroke: "var(--c-ok)",
+            color: "var(--c-ok)",
             width: 2,
             dashed: "7 5",
           },
@@ -235,13 +234,13 @@ const config = computed(() => {
         xAxis: { quantity: "1/v" },
         yAxis: { quantity: "a" },
         curves: [
-          { points: pts, stroke: "var(--c-accent)", width: 3.2 },
+          { points: pts, color: "var(--c-accent)", width: 3.2 },
           {
             points: [
               { x: 0, y: Number(negIntercept.toFixed(3)) },
               { x: F0 / P, y: 0 },
             ],
-            stroke: "var(--c-accent)",
+            color: "var(--c-accent)",
             width: 2.2,
             dashed: "7 5",
             opacity: 0.8,

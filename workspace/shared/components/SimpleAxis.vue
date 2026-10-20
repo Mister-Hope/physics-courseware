@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, useId } from "vue";
 
 import { needsUnitGap, normalizeUnit } from "./label-text";
+import type { ChartLabelAnchor } from "./label-text";
 
 // SSR / 首帧拿不到容器宽度时的标定宽度（整页正文栏约 884px）
 const NOMINAL_RENDER_WIDTH = 884;
@@ -59,16 +60,21 @@ interface SimpleCurve {
   formula?: (x: number) => number;
   /** 采样段数，默认 96 */
   samples?: number;
-  /** 线色；不写按调色板顺序取 */
+  /** 线色（**正本字段**，与 `CoordAxes` 统一）；不写按调色板顺序取 */
   color?: string;
+  /**
+   * @deprecated 线色的**旧名**（SVG 口径），仅为兼容存量课件保留；新写的一律用 `color`。
+   * 两个坐标组件以前一个叫 `color`、一个叫 `stroke`，写混了不报错、只是颜色被静默忽略。
+   */
+  stroke?: string;
   /** `true` 用默认虚线，也可以直接写 `"8 5"` */
   dashed?: boolean | string;
   /** 线宽（屏幕 px 口径），默认 3 */
   width?: number;
 }
 
-/** 标号相对该点的方位 */
-type LabelSide = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+/** 标号相对该点的方位（与 `ChartLabel` / `CoordAxes` 共用一套九宫格：中心 + 8 个方向） */
+type LabelSide = ChartLabelAnchor;
 
 interface SimplePoint {
   x: number;
@@ -485,8 +491,12 @@ const pointItem = computed(() => {
   if (!point || !pointAt.value) return null;
   const { sizes } = layout.value;
   const side = point.labelAt ?? "top-right";
-  const isTop = side.startsWith("top");
-  const isLeft = side.endsWith("left");
+  // 九宫格方位 → 方向向量：left / right / top / bottom / center 各自单独成立，
+  // 角方位（top-left 这类）等价于两个方向各取一半。旧的四角行为与改造前逐像素一致。
+  const horizontalDir = (value: string): number =>
+    value.includes("left") ? -1 : value.includes("right") ? 1 : 0;
+  const dirX = horizontalDir(side);
+  const dirY = side.startsWith("top") ? -1 : side.startsWith("bottom") ? 1 : 0;
   const font = point.text || point.math ? sizes.label : 0;
   const inset = round2(font * 0.5);
 
@@ -500,10 +510,10 @@ const pointItem = computed(() => {
           ? 0
           : round2(sizes.curve * 1.7),
     dotColor: point.color ?? "var(--c-accent)",
-    labelX: round2(pointAt.value.x + (isLeft ? -inset : inset) + (point.dx ? svgPx(point.dx) : 0)),
-    labelY: round2(pointAt.value.y + (isTop ? -inset : inset) + (point.dy ? svgPx(point.dy) : 0)),
-    anchor: isLeft ? "end" : "start",
-    baseline: isTop ? "auto" : "hanging",
+    labelX: round2(pointAt.value.x + dirX * inset + (point.dx ? svgPx(point.dx) : 0)),
+    labelY: round2(pointAt.value.y + dirY * inset + (point.dy ? svgPx(point.dy) : 0)),
+    anchor: dirX < 0 ? "end" : dirX > 0 ? "start" : "middle",
+    baseline: dirY < 0 ? "auto" : dirY > 0 ? "hanging" : "middle",
     font,
     subFont: round2(font * 0.72),
     unitFont: round2(font * 0.68),
@@ -546,7 +556,9 @@ const curveItems = computed(() =>
         d,
         style: {
           fill: "none",
-          stroke: curve.color ?? CURVE_PALETTE[index % CURVE_PALETTE.length],
+          // `color` 是正本、`stroke` 是兼容旧课件的别名（两个都写时以 `color` 为准）
+          stroke:
+            curve.color ?? curve.stroke ?? CURVE_PALETTE[index % CURVE_PALETTE.length],
           strokeWidth: lineWidthOf(curve.width, sizes.curve),
           strokeDasharray: dashOf(curve.dashed, sizes.dash),
           strokeLinecap: "round",

@@ -271,7 +271,7 @@ ticks:
 view: { width: 420, height: 300 }
 curves:
   - points: [{ x: 0, y: 0 }, { x: 5.2, y: 4.55 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 labels:
   - x: 1
@@ -324,7 +324,7 @@ ticks:
 view: { width: 420, height: 300 }
 curves:
   - points: [{ x: 1, y: 4.7 }, { x: 1.5, y: 3.13 }, { x: 2, y: 2.35 }, { x: 3, y: 1.57 }, { x: 4, y: 1.18 }, { x: 5, y: 0.94 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 labels:
   - x: 1
@@ -382,7 +382,7 @@ ticks:
 view: { width: 420, height: 300 }
 curves:
   - points: [{ x: 0, y: 0 }, { x: 1.15, y: 5.1 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 labels:
   - x: 1
@@ -481,7 +481,7 @@ ticks:
 view: { width: 340, height: 185 }
 curves:
   - points: [{ x: -0.5, y: -1.65 }, { x: 6, y: 4.0 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 ```
 
@@ -502,7 +502,7 @@ ticks:
 view: { width: 340, height: 185 }
 curves:
   - points: [{ x: -0.05, y: -1.22 }, { x: 1.15, y: 4.2 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 ```
 
@@ -537,7 +537,7 @@ ticks:
 view: { width: 340, height: 185 }
 curves:
   - points: [{ x: 0, y: 1.2 }, { x: 6, y: 4.8 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 ```
 
@@ -558,7 +558,7 @@ ticks:
 view: { width: 340, height: 185 }
 curves:
   - points: [{ x: 0, y: 1.2 }, { x: 1.15, y: 4.8 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 ```
 
@@ -594,10 +594,10 @@ view: { width: 340, height: 185 }
 curves:
   - formula: F => 4 * F / (1.6 + F)
     samples: 80
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 0, y: 4 }, { x: 6.3, y: 4 }]
-    stroke: var(--c-text-dim)
+    color: var(--c-text-dim)
     width: 1.5
     dashed: true
 labels:
@@ -625,10 +625,10 @@ view: { width: 340, height: 185 }
 curves:
   - formula: u => 4 * u / (0.31 + u)
     samples: 80
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 0, y: 4 }, { x: 1.25, y: 4 }]
-    stroke: var(--c-text-dim)
+    color: var(--c-text-dim)
     width: 1.5
     dashed: true
 labels:

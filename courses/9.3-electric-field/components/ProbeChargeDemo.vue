@@ -95,7 +95,7 @@ const eSci = computed(() => sci(E.value));
       <line
         x1="178"
         y1="120"
-        :x2="178 + (F.value / 4e-7) * 60"
+        :x2="178 + (F / 4e-7) * 60"
         y2="120"
         stroke="var(--c-force)"
         stroke-width="3.4"
@@ -134,7 +134,7 @@ const eSci = computed(() => sci(E.value));
         }}<Latex tex="\ \text{N}" />
       </div>
       <div class="text-[15px] text-[var(--c-gold)]">
-        <Latex tex="\dfrac{F}{q} = " />{{ (ratio.value / 1e5).toFixed(2)
+        <Latex tex="\dfrac{F}{q} = " />{{ (ratio / 1e5).toFixed(2)
         }}<Latex tex="\times 10^5\ \text{N/C}" />
       </div>
       <div class="text-[13px] text-[var(--c-text-mute)] leading-relaxed">

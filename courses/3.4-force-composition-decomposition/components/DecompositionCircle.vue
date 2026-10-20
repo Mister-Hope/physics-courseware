@@ -119,9 +119,7 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 3fr) minmax(0, 2fr)">
+  <div class="split-wide" style="--cols: minmax(0, 3fr) minmax(0, 2fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
         <line

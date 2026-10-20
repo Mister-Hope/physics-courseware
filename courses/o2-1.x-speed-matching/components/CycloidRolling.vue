@@ -87,7 +87,6 @@ const animTheta = ref(0);
 const clickPaused = ref(false);
 const CYCLE = 3200; // 3.2s 周期，转速适中沉稳
 let raf = 0;
-let t0 = 0;
 /** 累计已播放的毫秒数（暂停时不再累加，继续后从原处接着转，不会跳帧） */
 let elapsed = 0;
 let lastFrameTs = 0;

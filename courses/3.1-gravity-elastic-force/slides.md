@@ -387,7 +387,7 @@ labels:
   - { x: 5.8, y: 1.5, dot: 6, dotColor: var(--c-danger) }
 curves:
   - points: [{ x: 0, y: 0 }, { x: 6.2, y: 1.6 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3.4
 view: { width: 480, height: 300 }
 ```

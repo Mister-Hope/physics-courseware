@@ -2,7 +2,7 @@
 <script setup lang="ts">
 defineProps<{ step?: number }>();
 
-const arc = (x1: number, x2: number, y: number, amp: number) => {
+const arc = (x1: number, x2: number, y: number, amp: number): string => {
   const pts: string[] = [];
   const n = 40;
   for (let i = 0; i <= n; i++) {

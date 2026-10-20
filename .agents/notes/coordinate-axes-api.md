@@ -39,17 +39,17 @@
 
 **`SimplePoint`**
 
-| 字段           | 类型                                                           | 默认              | 说明                                                                                |
-| -------------- | -------------------------------------------------------------- | ----------------- | ----------------------------------------------------------------------------------- |
-| `x` / `y`      | `number`                                                       | 必填              | 点的数据坐标（超出 0~max 会被夹到边上）                                             |
-| `text`         | `string`                                                       | —                 | 标号文字（系统字体）：点名、中文                                                    |
-| `math` / `sub` | `string`                                                       | —                 | 物理量符号（`KaTeX_Math` 斜体）与下标（不用 Unicode，写法见 conventions §1.5）      |
-| `unit` / `sup` | `string`                                                       | —                 | 单位（`KaTeX_Main`，与前面文字之间自动留小间隙）与单位上标（不用 Unicode，同 §1.5） |
-| `labelAt`      | `"top-left" \| "top-right" \| "bottom-left" \| "bottom-right"` | `"top-right"`     | **标号画在点的哪个方位**（自动留一点间距，不压住圆点）                              |
-| `dx` / `dy`    | `number`                                                       | `0`               | 方位之外再偏移（屏幕 px 口径）                                                      |
-| `color`        | `string`                                                       | `var(--c-accent)` | 标号与圆点颜色                                                                      |
-| `dot`          | `boolean \| number`                                            | `true`            | 画圆点；也可给具体半径（屏幕 px 口径）；`false` 不画                                |
-| `halo`         | `boolean`                                                      | `true`            | 标号加深色描边光晕（压在曲线上也读得清）                                            |
+| 字段           | 类型                                | 默认              | 说明                                                                                        |
+| -------------- | ----------------------------------- | ----------------- | ------------------------------------------------------------------------------------------- |
+| `x` / `y`      | `number`                            | 必填              | 点的数据坐标（超出 0~max 会被夹到边上）                                                     |
+| `text`         | `string`                            | —                 | 标号文字（系统字体）：点名、中文                                                            |
+| `math` / `sub` | `string`                            | —                 | 物理量符号（`KaTeX_Math` 斜体）与下标（不用 Unicode，写法见 conventions §1.5）              |
+| `unit` / `sup` | `string`                            | —                 | 单位（`KaTeX_Main`，与前面文字之间自动留小间隙）与单位上标（不用 Unicode，同 §1.5）         |
+| `labelAt`      | `ChartLabelAnchor`（九宫格 9 个值） | `"top-right"`     | **标号画在点的哪个方位**（`center` / 左 / 右 / 上 / 下 / 四角；自动留一点间距，不压住圆点） |
+| `dx` / `dy`    | `number`                            | `0`               | 方位之外再偏移（屏幕 px 口径）                                                              |
+| `color`        | `string`                            | `var(--c-accent)` | 标号与圆点颜色                                                                              |
+| `dot`          | `boolean \| number`                 | `true`            | 画圆点；也可给具体半径（屏幕 px 口径）；`false` 不画                                        |
+| `halo`         | `boolean`                           | `true`            | 标号加深色描边光晕（压在曲线上也读得清）                                                    |
 
 ### 最小示例（自由落体 $h$–$t$ 演示）
 
@@ -100,7 +100,7 @@
 | `fontScale` | `number`                                                     | `1`            | 倍率                                                                                                                                                             |
 | `step`      | `number`                                                     | `+∞`           | 传 `$clicks`，配元素 `showAt` 分步（`visibility` 占位）                                                                                                          |
 
-**`Curve`**：`points?` / `formula?`（在 `xRange` 内采样）/ `samples?`(96) / `stroke?`(`var(--c-accent)`) / `width?`(3，屏幕 px) / `dashed?` / `opacity?` / `showAt?`
+**`Curve`**：`points?` / `formula?`（在 `xRange` 内采样）/ `samples?`(96) / **`color?`**(`var(--c-accent)`) / `width?`(3，屏幕 px) / `dashed?` / `opacity?` / `showAt?`
 
 **`Area`**：`points`（必填，顶点序错会自交）/ `fill?`(`var(--c-accent)`) / `fillOpacity?`(0.22) / `stroke?`（不传不描边）/ `width?`(1.8，屏幕 px) / `dashed?` / `opacity?` / `showAt?`
 
@@ -165,7 +165,7 @@
         { x: 6, y: 11 },
         { x: 0, y: 2 },
       ],
-      stroke: 'var(--c-accent)',
+      color: 'var(--c-accent)',
     },
   ]"
   :curves="[
@@ -197,7 +197,7 @@
         { x: -2, y: 2 },
         { x: 2.5, y: 1.5 },
       ],
-      stroke: 'var(--c-physics)',
+      color: 'var(--c-physics)',
       dashed: true,
     },
   ]"
@@ -214,7 +214,7 @@
   :y-range="[-4, 8]"
   :x-axis="{ quantity: 't', unit: 's', side: 'above' }"
   :y-axis="{ quantity: 'v', unit: 'm/s' }"
-  :curves="[{ formula: (t) => 8 - 2 * t, stroke: 'var(--c-danger)' }]"
+  :curves="[{ formula: (t) => 8 - 2 * t, color: 'var(--c-danger)' }]"
   :view="{ width: 600, height: 300 }"
 />
 ```

@@ -106,9 +106,7 @@ const pressTex = computed(() => `G_\\perp = G\\cos\\theta = ${fmt(pressForce.val
 </script>
 
 <template>
-  <div class="split-wide" style="
-
---cols: minmax(0, 1.35fr) minmax(0, 1fr)">
+  <div class="split-wide" style="--cols: minmax(0, 1.35fr) minmax(0, 1fr)">
     <div class="figure relative min-w-0">
       <svg :viewBox="`${VIEW.minX} ${VIEW.minY} ${VIEW.width} ${VIEW.height}`">
         <!-- 地面用共享接触面组件：斜线只画在表面下方 -->

@@ -54,8 +54,8 @@ const VB_H = 300;
 const PLATE_X0 = 172;
 const PLATE_X1 = 556;
 /** 上（+）/ 下（−）极板纵坐标 */
-const PLATE_TOP_Y = 92;
-const PLATE_BOTTOM_Y = 214;
+const PLATE_TOP_Y = 60;
+const PLATE_BOTTOM_Y = 246;
 const PLATE_W = 7;
 /** 板间中线：粒子从左端中线射入 */
 const AXIS_Y = 153;
@@ -63,19 +63,19 @@ const AXIS_Y = 153;
 const PX = 176;
 /** 板间电场箭头（竖直向下）的横坐标与纵向跨度 */
 const E_ARROW_XS = [280, 350, 420, 490];
-const E_ARROW_Y0 = 103;
-const E_ARROW_Y1 = 203;
+const E_ARROW_Y0 = 70;
+const E_ARROW_Y1 = 236;
 /** 磁场阵列：第一个记号的中心 + 行列数（间距 20 ⟹ 铺满 x 184…544、y 103…203） */
 const DOTS_X = 184;
-const DOTS_Y = 103;
+const DOTS_Y = 70;
 const DOTS_COLS = 19;
-const DOTS_ROWS = 6;
+const DOTS_ROWS = 9;
 const DOTS_SPACING = 20;
 /** 射入速度箭头（画在粒子上，指向右） */
 const V_ARROW_LEN = 56;
 /** 力的箭头长度基准：取 v = 2000 m/s 时的洛伦兹力，对应最长箭头 */
 const F_REF = CHARGE * V_MAX * B_FIELD;
-const F_ARROW_MAX = 40;
+const F_ARROW_MAX = 84;
 /** 出口处最大横向偏移（v ≠ E/B 时，用户单位）：板间半间距约 58，留足余量不出极板 */
 const BEND_MAX = 44;
 /** 轨迹采样点数 */
@@ -85,7 +85,7 @@ const TRAIL_SAMPLES = 48;
 /** 极板极性、E / B / v 标注的字号（图内字号会随缩放缩水，给足） */
 const LABEL_FONT = 32;
 /** 受力标注的字号 */
-const FORCE_FONT = 26;
+const FORCE_FONT = 30;
 
 /* ── 状态 ── */
 /** 粒子速率（m/s） */
@@ -233,7 +233,7 @@ const onSpeedInput = (event: Event): void => {
         />
         <text
           x="196"
-          y="79"
+          y="47"
           text-anchor="middle"
           :font-size="LABEL_FONT"
           font-family="KaTeX_Main"
@@ -246,7 +246,7 @@ const onSpeedInput = (event: Event): void => {
         </text>
         <text
           x="196"
-          y="245"
+          y="277"
           text-anchor="middle"
           :font-size="LABEL_FONT"
           font-family="KaTeX_Main"
@@ -312,13 +312,13 @@ const onSpeedInput = (event: Event): void => {
             :from="{ x: PX, y: AXIS_Y }"
             :to="eTip"
             stroke="var(--c-force)"
-            :stroke-width="4.5"
+            :stroke-width="5.5"
           />
           <CourseArrow
             :from="{ x: PX, y: AXIS_Y }"
             :to="bTip"
             stroke="var(--c-force)"
-            :stroke-width="4.5"
+            :stroke-width="5.5"
           />
           <text
             :x="eLabel.x"

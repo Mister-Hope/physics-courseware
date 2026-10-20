@@ -3,16 +3,13 @@ import { useSlideContext } from "@slidev/client";
 /** 第 6 页「演示：观察磁体周围的磁场」——玻璃板上撒铁屑后的分布： 未撒（空白板）→ 撒上铁屑 → 轻敲（沿磁场排列）→ 叠加磁感线 → 某点切线方向。 铁屑取向按有限长条形磁铁的两磁极模型解析式计算，磁感线按 RK4 数值积分从 N 极逐点连到 S 极。 */
 import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    /** 分步：1 撒铁屑、2 轻敲排列、3 叠加磁感线、4 标某点切线 */
-    step?: number;
-  }>(),
-  { step: 0 },
-);
+const { step: stepProp = 0 } = defineProps<{
+  /** 分步：1 撒铁屑、2 轻敲排列、3 叠加磁感线、4 标某点切线 */
+  step?: number;
+}>();
 
 const { $clicks } = useSlideContext();
-const step = computed(() => Math.max(props.step ?? 0, Number($clicks.value ?? 0)));
+const step = computed(() => Math.max(stepProp, Number($clicks.value ?? 0)));
 
 const W = 780;
 const H = 340;
@@ -23,7 +20,7 @@ const A = 120;
 const BW = 34;
 // 有限长条形磁铁：两端等效为 ±两个磁极（点偶极只是远场近似，它的磁感线在本画布内闭合不回 S 极）
 // B = (r − r_N)/|r − r_N|³ − (r − r_S)/|r − r_S|³（系数只决定场强标度、不影响方向）
-function barField(x: number, y: number) {
+const barField = (x: number, y: number): readonly [number, number] => {
   const dxN = x - (CX + A);
   const dyN = y - CY;
   const dxS = x - (CX - A);
@@ -33,15 +30,17 @@ function barField(x: number, y: number) {
   const rS3 = Math.max(Math.hypot(dxS, dyS) ** 3, 1e-3);
 
   return [dxN / rN3 - dxS / rS3, dyN / rN3 - dyS / rS3] as const;
-}
+};
 
-function fieldAngle(x: number, y: number) {
+const fieldAngle = (x: number, y: number): number => {
   const [bx, by] = barField(x, y);
   return Math.atan2(by, bx);
-}
+};
 
 // ── 铁屑颗粒（模块级预生成一次，抖动固定）────────────────────
-function mulberry32(seed: number) {
+/* eslint-disable no-bitwise, prefer-math-trunc, operator-assignment --
+   mulberry32 是「32 位整数位运算」伪随机数发生器：位运算是它的定义，换成算术会改变分布与序列 */
+const mulberry32 = (seed: number): (() => number) => {
   let a = seed;
   return () => {
     a |= 0;
@@ -50,7 +49,8 @@ function mulberry32(seed: number) {
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
-}
+};
+/* eslint-enable no-bitwise, prefer-math-trunc, operator-assignment */
 
 interface Grain {
   x: number;
@@ -84,8 +84,16 @@ const GRAINS: Grain[] = (() => {
 })();
 
 // ── 磁感线（从 N 极出发沿磁场积分到 S 极）────────────────────
-function buildLines() {
-  const lines: { d: string; pts: [number, number][] }[] = [];
+interface FieldLine {
+  d: string;
+  pts: [number, number][];
+}
+
+/* eslint-disable max-statements, complexity --
+   RK4 逐点积分是一条线性数值流水线（每步都要带上一步的 4 个斜率与游标），拆成子函数只会把
+   十几个状态变量到处传，反而更难核对物理过程 */
+const buildLines = (): FieldLine[] => {
+  const lines: FieldLine[] = [];
   const seeds: [number, number][] = [];
   for (let i = 1; i <= 4; i++) {
     const s = i * 13;
@@ -102,7 +110,7 @@ function buildLines() {
     for (let i = 0; i < 900; i++) {
       const [bx, by] = barField(x, y);
       const mag = Math.hypot(bx, by);
-      if (!isFinite(mag) || mag < 1e-9) break;
+      if (!Number.isFinite(mag) || mag < 1e-9) break;
       const ux = (bx / mag) * dir;
       const uy = (by / mag) * dir;
       const h = 3;
@@ -126,7 +134,7 @@ function buildLines() {
       // 终点判定：回到磁铁另一极附近
       const nearOther = (dir === 1 && Math.abs(y - CY) < BW + 14 && x < CX + 20) || (dir === -1 && Math.abs(y - CY) < BW + 14 && x > CX - 20);
       if (nearOther && i > 60) {
-        stuck++;
+        stuck += 1;
         if (stuck > 4) break;
       }
     }
@@ -143,7 +151,7 @@ const showLines = computed(() => step.value >= 3);
 // 第 4 步：取最长那条线做切线示意，取其上一点
 const tangent = computed(() => {
   if (step.value < 4) return null;
-  const longest = [...lines].sort((a, b) => b.pts.length - a.pts.length)[0];
+  const [longest] = [...lines].sort((a, b) => b.pts.length - a.pts.length);
   if (!longest) return null;
   const idx = Math.min(40, longest.pts.length - 2);
   const [x1, y1] = longest.pts[idx];

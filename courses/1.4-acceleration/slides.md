@@ -112,23 +112,23 @@ ticks:
   labels: false
 curves:
   - points: [{ x: 0, y: 0 }, { x: 2.7, y: 100 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 0, y: 0 }, { x: 11.3, y: 100 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 2.6
   - points: [{ x: 0, y: 100 }, { x: 12.2, y: 100 }]
-    stroke: var(--c-text-dim)
+    color: var(--c-text-dim)
     width: 1.4
     dashed: true
     opacity: 0.7
   - points: [{ x: 2.7, y: 0 }, { x: 2.7, y: 100 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 1.4
     dashed: true
     opacity: 0.5
   - points: [{ x: 11.3, y: 0 }, { x: 11.3, y: 100 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 1.4
     dashed: true
     opacity: 0.5
@@ -374,25 +374,25 @@ ticks:
   labels: false
 curves:
   - points: [{ x: 0, y: 0 }, { x: 4, y: 24 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 0, y: 0 }, { x: 10, y: 20 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 2.6
   - points: [{ x: 0, y: 0 }, { x: 2, y: 0 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 1.6
     dashed: true
   - points: [{ x: 2, y: 0 }, { x: 2, y: 12 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 1.6
     dashed: true
   - points: [{ x: 4, y: 0 }, { x: 6, y: 0 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 1.6
     dashed: true
   - points: [{ x: 6, y: 0 }, { x: 6, y: 4 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 1.6
     dashed: true
 labels:
@@ -451,10 +451,10 @@ ticks:
   y: []
 curves:
   - points: [{ x: 0, y: 1.5 }, { x: 3.5, y: 8.5 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 0, y: 7 }, { x: 3.5, y: 0 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 3
 labels:
   - x: 5.2
@@ -545,7 +545,7 @@ ticks:
   y: []
 curves:
   - points: [{ x: 0.35, y: 9 }, { x: 6.9, y: -4.5 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
 labels:
   - x: 4.7
@@ -725,13 +725,13 @@ ticks:
   y: []
 curves:
   - points: [{ x: 0, y: 0.8 }, { x: 5.4, y: 8.6 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 0, y: 8.1 }, { x: 5.4, y: 0.6 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 3
   - points: [{ x: 2.42, y: 4.7 }, { x: 1.55, y: 9.2 }]
-    stroke: var(--c-text-dim)
+    color: var(--c-text-dim)
     width: 1.2
     dashed: '4 4'
 labels:
@@ -797,10 +797,10 @@ areas:
     fillOpacity: 0.12
 curves:
   - points: [{ x: 0, y: 0 }, { x: 3.4, y: 8.9 }]
-    stroke: var(--c-accent)
+    color: var(--c-accent)
     width: 3
   - points: [{ x: 3.4, y: 8.9 }, { x: 6.6, y: 2.9 }]
-    stroke: var(--c-accent-2)
+    color: var(--c-accent-2)
     width: 3
 labels:
   - x: 2.4

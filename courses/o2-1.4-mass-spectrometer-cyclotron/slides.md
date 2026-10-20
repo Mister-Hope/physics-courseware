@@ -6,7 +6,7 @@ highlighter: shiki
 transition: fade
 mdc: true
 layout: course-cover
-colorScheme: dark
+colorSchema: dark
 clickAnimation: card
 addons:
   - ../workspace/shared
@@ -259,17 +259,37 @@ clicks: 2
 clicks: 2
 ---
 
-<!-- 最大动能：推导 + 易错点（本页不配交互，交互放下一页整页） -->
+<!-- 最大速度与最大动能：两者都由 q、m、B、R 决定，与 U 无关（本页不配交互，交互放下一页整页） -->
 
-# 最大动能由什么决定
+# 最大速度和最大动能
 
 <div class="page-grow stack text-xl leading-relaxed">
 
-<div v-click="1">① 盒内最大半径就是 D 形盒半径 <Latex tex="R" />，此时 <Latex tex="v_{\max} = \dfrac{qBR}{m}" /></div>
+<div v-click="1">① 盒内最大半径就是 D 形盒半径 <Latex tex="R" />，最大速度 <Latex tex="v_{\max} = \dfrac{qBR}{m}" />，只由 <Latex tex="q" />、<Latex tex="m" />、<Latex tex="B" />、<Latex tex="R" /> 决定</div>
 
-<div v-click="2">② <Latex tex="E_{k\max} = \dfrac{1}{2}mv_{\max}^2 = \dfrac{q^2B^2R^2}{2m}" /></div>
+<div v-click="2">② 最大动能 <Latex tex="E_{k\max} = \dfrac{1}{2}mv_{\max}^2 = \dfrac{q^2B^2R^2}{2m}" />，同样只由 <Latex tex="q" />、<Latex tex="m" />、<Latex tex="B" />、<Latex tex="R" /> 决定</div>
 
-<div class="tip-hint" v-click="2">动能由 <Latex tex="q" />、<Latex tex="m" />、<Latex tex="B" /> 和盒半径 <Latex tex="R" /> 决定，与加速电压 <Latex tex="U" /> 无关；<Latex tex="U" /> 只决定加速次数和总时间</div>
+<div class="tip-hint" v-click="2">最大速度与最大动能都与加速电压 <Latex tex="U" /> 无关；<Latex tex="U" /> 只决定加速次数、圈数和总时间</div>
+
+</div>
+
+---
+clicks: 3
+---
+
+<!-- 集中推导：加速次数 n、半周期数 n−1、圈数 (n−1)/2、总时间 t（后续小结页再重复一遍） -->
+
+# 加速次数、圈数与总时间
+
+<div class="page-grow stack text-lg leading-relaxed">
+
+<div v-click="1">① 粒子从中心由静止出发，第 1 次加速就在开始时，第 <Latex tex="n" /> 次加速是最后一次；每两次加速之间各走半个圆周，共走过 <Latex tex="n-1" /> 个半周期，即转了 <Latex tex="\dfrac{n-1}{2}" /> 圈</div>
+
+<div v-click="2">② 每次加速动能增加 <Latex tex="qU" />，离开时 <Latex tex="E_{k\max} = nqU" />，所以 <Latex tex="n = \dfrac{E_{k\max}}{qU} = \dfrac{qB^2R^2}{2mU}" />（取整数）</div>
+
+<div v-click="3">③ 总时间 <Latex tex="t = (n-1)\dfrac{T}{2} = \dfrac{(n-1)\pi m}{qB}" />（盒缝中的时间忽略）</div>
+
+<div class="tip-hint" v-click="3">加速电压 <Latex tex="U" /> 越小，加速次数 <Latex tex="n" /> 越多、圈数越多、总时间越长；但最大速度和最大动能都不变</div>
 
 </div>
 
@@ -350,6 +370,32 @@ clicks: 3
 </div>
 
 </div>
+
+</div>
+
+---
+title: "课堂小结：质谱仪与回旋加速器"
+---
+
+<!-- 第一课时小结：把质谱仪与回旋加速器的核心结论再重复一遍（含加速次数、n−1 个半周期与圈数） -->
+
+# 课堂小结：质谱仪与回旋加速器
+
+<div class="page-grow">
+
+<div class="data-table sum-tight">
+
+| 部分                 | 核心结论                                                                                                                                                                            |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 质谱仪               | 电场加速、磁场偏转，$r=\frac{1}{B}\sqrt{\frac{2mU}{q}}$；同一 $U$、$B$ 下 $r\propto\sqrt{m}$，由落点测质量与比荷                                                                     |
+| 回旋加速器           | 盒内只有洛伦兹力，$T=\frac{2\pi m}{qB}$ 与速率、半径无关，电源频率恒定                                                                                                               |
+| 加速次数与圈数       | 第 1 次加速在开始时、第 $n$ 次是最后一次；加速 $n$ 次共走过 $n-1$ 个半周期，即 $\frac{n-1}{2}$ 圈，总时间 $t=(n-1)\frac{T}{2}$                                                      |
+| 最大速度和最大动能   | $v_{\max}=\frac{qBR}{m}$、$E_{k\max}=\frac{q^2B^2R^2}{2m}$，只由 $q$、$m$、$B$、$R$ 决定，与 $U$ 无关                                                                                  |
+| 能量上限             | 相对论效应使周期变长、失去同步，能量上限约 $25\sim30\ \text{MeV}$                                                                                                                    |
+
+</div>
+
+<div class="tip-hint"><Latex tex="U" /> 只改变加速次数、圈数与总时间，不改变最大速度和最大动能</div>
 
 </div>
 
@@ -606,28 +652,24 @@ clicks: 2
 <div v-click="2">② <Latex tex="Q = \dfrac{\pi D^2}{4}v = 6.28 \times 10^{-4}\ \text{m}^3/\text{s}" /></div>
 
 ---
-clicks: 4
+clicks: 3
 ---
 
-<!-- 原理页：霍尔元件的分阶段过程（剥离 → 堆积 → 电场增强 → 平衡） -->
+<!-- 原理页：霍尔元件的分阶段过程（剥离 → 堆积 → 电场增强 → 平衡 → 载流子正负决定电压高低） -->
 
 # 霍尔元件
 
-<div class="page-grow" style="--hint-pad-y:.5rem">
+<div class="page-grow stack" style="--hint-pad-y:.5rem">
 
 <div class="split-wide split-top split-fig-right" style="--cols: minmax(0, 1.35fr) minmax(0, 1fr)">
 
 <div class="stack text-lg leading-relaxed" style="--stack-gap:.5rem">
 
-<div v-click="1">① 载流子在磁场中受洛伦兹力，向一个侧面偏转、从另一侧面被剥离</div>
+<div v-click="1">① 载流子受洛伦兹力向一个侧面偏转并堆积，另一侧面留下等量异号电荷；横向电场不断增强</div>
 
-<div v-click="2">② 被剥离的载流子在对侧堆积，另一侧面剩下正离子、带上相反电性</div>
+<div v-click="2">② 电场足够强时，电场力与洛伦兹力平衡：<Latex tex="qvB = qE = q\dfrac{U}{a}" />，得 <Latex tex="U = aBv" /></div>
 
-<div v-click="3">③ 两侧面上的电荷不断堆积，横向电场也随之不断增强</div>
-
-<div v-click="4">④ 电场足够强时，电场力与洛伦兹力平衡，电压不再增大</div>
-
-<div class="tip-hint" v-click="4">平衡时 <Latex tex="qvB = qE = q\dfrac{U}{a}" /> ⟹ <Latex tex="U = aBv" /></div>
+<div v-click="3">③ 两种载流子的偏转方向相同，但堆积的电荷异号——载流子带负电时堆积侧电势低，带正电时堆积侧电势高</div>
 
 </div>
 
@@ -639,13 +681,15 @@ clicks: 4
 
 </div>
 
+<div class="tip-hint" v-click="3">载流子带正电与带负电时，霍尔电压的极性相反——由电压极性可以判断载流子带正电还是带负电</div>
+
 </div>
 
 ---
 clicks: 3
 ---
 
-<!-- 交互页（无标题、无文字）：剥离堆积 → 电场建立 → 平衡（可切 N/P 型看极性翻转） -->
+<!-- 交互页（无标题、无文字）：剥离堆积 → 电场建立 → 平衡（可切载流子带正电 / 带负电看极性翻转） -->
 
 <div class="page-grow">
 
@@ -669,7 +713,7 @@ clicks: 4
 
 <div v-click="3">③ 代入得 <Latex tex="U = \dfrac{IB}{nqd}" />（<Latex tex="d" /> 为沿磁场方向的厚度）</div>
 
-<div class="tip-hint" v-click="4"><Latex tex="U \propto I" />、<Latex tex="U \propto B" />、<Latex tex="U \propto \dfrac{1}{d}" />，与宽度 <Latex tex="a" /> 无关 —— 霍尔元件能测磁感应强度、也能判断载流子类型的依据</div>
+<div class="tip-hint" v-click="4"><Latex tex="U \propto I" />、<Latex tex="U \propto B" />、<Latex tex="U \propto \dfrac{1}{d}" />，与宽度 <Latex tex="a" /> 无关；由霍尔电压的极性还能判断载流子的正负</div>
 
 </div>
 
@@ -685,7 +729,7 @@ clicks: 2
 
 <div class="mini-title"><mdi-numeric-6-circle class="icon-md" />例 6：霍尔电压</div>
 
-一块厚度为 <Latex tex="d" /> 的半导体霍尔元件，放在与元件表面垂直的匀强磁场 <Latex tex="B" /> 中，元件中通有沿长度方向的电流 <Latex tex="I" />，测得两侧面间的电压为 <Latex tex="U" />。下列说法正确的是（ ）
+一块厚度为 <Latex tex="d" /> 的霍尔元件，放在与元件表面垂直的匀强磁场 <Latex tex="B" /> 中，元件中通有沿长度方向的电流 <Latex tex="I" />，测得两侧面间的电压为 <Latex tex="U" />。下列说法正确的是（ ）
 
 A. 只增大电流 <Latex tex="I" />，<Latex tex="U" /> 增大　　B. 只增大磁感应强度 <Latex tex="B" />，<Latex tex="U" /> 减小
 
@@ -724,7 +768,7 @@ title: "小结：洛伦兹力的两类应用"
 | 速度选择器   | $v = \frac{E}{B}$                                 | 挑选特定速度的粒子   |
 | 磁流体发电机 | $\varepsilon = Bvd$                               | 等离子体发电         |
 | 电磁流量计   | $Q = \frac{\pi DU}{4B}$                           | 测导电液体的流量     |
-| 霍尔元件     | $U = aBv = \frac{IB}{nqd}$                        | 测磁场、判断载流子类型 |
+| 霍尔元件     | $U = aBv = \frac{IB}{nqd}$                        | 测磁场、判断载流子正负 |
 
 </div>
 

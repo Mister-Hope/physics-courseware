@@ -40,12 +40,12 @@
 .cv-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.3rem 2rem;
+  gap: 0.25rem 1.1rem;
   align-items: center;
 
   color: var(--c-text-dim);
 
-  font-size: 1rem;
+  font-size: 0.88rem;
 }
 
 /* ⚠️ 别用 inline-flex：条目里的 <Latex> 会各自变成 flex 项、文字被拆成碎片 */
@@ -73,6 +73,7 @@
 /* 气泡 / 定义框里的行内公式会把行盒撑高（KaTeX 默认 1.21em）：
    压回 1em 并收紧行高，否则一句话要占三行的竖向空间（AGENTS「坑速查」记过） */
 .def-box .katex,
+.summary-line .katex,
 .tip-hint .katex,
 .info-hint .katex,
 .warn-hint .katex,
@@ -81,4 +82,36 @@
   display: inline-block;
   font-size: 1em;
   line-height: 1;
+}
+
+/* 选择题选项：两列排，避免四个选项把题干撑到半页 */
+.opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15rem 1.2rem;
+
+  margin-top: 0.35rem;
+}
+
+/* 坐标轴约定提示：紧凑一行，不用气泡（页面竖向空间紧） */
+.axis-note {
+  color: var(--c-text);
+
+  font-size: 0.96rem;
+  line-height: 1.6;
+}
+
+.axis-note strong {
+  color: var(--c-accent);
+}
+
+/* exercise-split 的解析栏复用 .page-grow（内容少时垂直居中）。
+   内容一旦超过栏高，居中会把上半截顶到题干上 —— 改成顶部对齐，超了只会往下溢，不会压题干。 */
+.slidev-layout.exercise-split .ex-analysis {
+  justify-content: flex-start;
+}
+
+/* 四选一（选项很短）时一行四列 */
+.opts--4 {
+  grid-template-columns: repeat(4, 1fr);
 }

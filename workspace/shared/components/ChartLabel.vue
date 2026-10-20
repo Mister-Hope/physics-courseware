@@ -64,6 +64,8 @@ const ANCHOR_STYLE: Record<ChartLabelAnchor, [number, number, string, string]> =
   center: [0, 0, "-50%", "-50%"],
   left: [-1, 0, "-100%", "-50%"],
   right: [1, 0, "0", "-50%"],
+  top: [0, -1, "-50%", "-0.8em"],
+  bottom: [0, 1, "-50%", "0"],
   "top-left": [-1, -1, "-100%", "-0.8em"],
   "top-right": [1, -1, "0", "-0.8em"],
   "bottom-left": [-1, 1, "-100%", "0"],
@@ -73,7 +75,9 @@ const ANCHOR_STYLE: Record<ChartLabelAnchor, [number, number, string, string]> =
 const round2 = (value: number): number => Math.round(value * 100) / 100;
 
 const style = computed(() => {
-  const [dirX, dirY, shiftX, shiftY] = ANCHOR_STYLE[anchor];
+  // 兜底：传了不认识的方位（例如旧的 `"bottom"` 之类）就回落到 center ——
+  // 以前这里会取到 undefined、解构直接抛错，**整页白屏**且 e2e 只报"没有元素参与测量"。
+  const [dirX, dirY, shiftX, shiftY] = ANCHOR_STYLE[anchor] ?? ANCHOR_STYLE.center;
   // 角标注离点半个字，别贴着圆点
   const inset = dirX === 0 && dirY === 0 ? 0 : size * 0.5;
 

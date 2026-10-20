@@ -160,59 +160,56 @@ n 个电阻并联：<Latex tex="\frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2} + \d
 </div>
 
 ---
-clicks: 1
-title: 等效电阻实验台
+clicks: 4
+title: 等效电阻与分压分流
 ---
 
-<div class="page-grow">
-<div class="ask">两个电阻并联后的总电阻，一定比其中任何一个都小吗？</div>
+<div class="page-grow page-grow-tight">
+<div class="ask">串、并联之后总电阻怎么变？电压和电流又按什么比例分给各个电阻？</div>
 
-<SeriesParallelLab />
+<div v-click="1" class="stack-tight">
+<div>通过相同的电流时，串联电路两端的总电压比其中任何一个电阻两端的电压都大，所以总电阻比其中任何一个都大；两端加上相同的电压时，并联电路的干路电流比任何一条支路的电流都大，所以总电阻比其中任何一个都小。</div>
+<div><b>越串越大，越并越小。</b></div>
+</div>
 
-<div v-click="1" class="tip-hint">串联相当于导体变长、并联相当于横截面积变大，与 <Latex tex="R = \rho \dfrac{l}{S}" /> 一致：串联总电阻增大，并联总电阻减小。</div>
+<div v-click="2">其中任何一个电阻增大（或减小），总电阻也随之增大（或减小）。</div>
+
+<div v-click="3">大电阻与小电阻串联，总电阻接近<b>大电阻</b>；大电阻与小电阻并联，总电阻接近<b>小电阻</b>。</div>
+
+<div v-click="4" class="tip-hint">串联分压与电阻成<b>正比</b>：<Latex tex="U_1 : U_2 = R_1 : R_2" />；并联分流与电阻成<b>反比</b>：<Latex tex="I_1 : I_2 = R_2 : R_1" />。</div>
 </div>
 
 ---
-clicks: 1
-title: 串联分压与并联分流
+clicks: 2
+title: 串并联电路中电流电压的规律
 ---
+
+# 串并联电路中电流电压的规律
 
 <div class="page-grow">
-<div class="ask">串联时电压按什么比例分？并联时电流按什么比例分？</div>
-
-<DividerLab />
-
-<div v-click="1" class="tip-hint">串联分压与电阻成<b>正比</b>：<Latex tex="U_1 : U_2 = R_1 : R_2" />；并联分流与电阻成<b>反比</b>：<Latex tex="I_1 : I_2 = R_2 : R_1" />。</div>
-</div>
-
----
-clicks: 3
-title: 串并联规律小结
----
-
-<div class="page-grow">
-<div class="ask">串、并联电路的电流、电压、电阻，各有一条什么规律？</div>
+<div class="ask">串、并联电路的电流和电压，各有一条什么规律？</div>
 
 <div class="stack summary-line">
 <div v-click="1"><b>电流</b>：串联电路中电流处处相等；并联电路的总电流等于各支路电流之和。</div>
 <div v-click="2"><b>电压</b>：串联电路两端的总电压等于各部分电压之和；并联电路的总电压与各支路电压相等。</div>
-<div v-click="3"><b>电阻</b>：串联 <Latex tex="R = R_1 + R_2" />；并联 <Latex tex="\dfrac{1}{R} = \dfrac{1}{R_1} + \dfrac{1}{R_2}" />。串联分压与电阻成正比，并联分流与电阻成反比。</div>
 </div>
 </div>
 
 ---
-clicks: 1
+clicks: 2
 title: 表头
 ---
 
 <div class="page-grow">
-<div class="ask">表头从电路角度看是什么？电压表和电流表为什么都用它来改装？</div>
+<div class="ask">电压表和电流表，为什么都要用一个小量程的表头来改装？</div>
 
-<div v-click="1">
-<DefinitionBox term="表头" tone="gold">
-<div>常用的电压表和电流表都是由小量程的电流表（表头）改装而成的。从电路的角度看，表头就是一个电阻，同样遵从欧姆定律，它与其他电阻的不同在于：通过表头的电流可以从刻度盘上读出来。</div>
-<div>表头的电阻 <Latex tex="R_g" /> 叫作电流表的内阻；指针偏转到最大刻度时的电流 <Latex tex="I_g" /> 叫作满偏电流；表头通过满偏电流时加在它两端的电压 <Latex tex="U_g" /> 叫作满偏电压，由欧姆定律 <Latex tex="U_g = I_g R_g" />。</div>
-<div>表头的满偏电压 <Latex tex="U_g" /> 和满偏电流 <Latex tex="I_g" /> 一般都比较小。</div>
+<div v-click="1">表头是一个<b>灵敏电流表</b>：它有一个固定的内阻 <Latex tex="R_g" />，指针偏转的角度与流过它的电流成正比——所以从刻度盘上就能直接读出通过表头的电流。</div>
+
+<div v-click="2">
+<DefinitionBox term="表头的两个关键参数" tone="gold">
+<div>满偏电流 <Latex tex="I_g" />：指针指到最大刻度时流过表头的电流；表头内阻 <Latex tex="R_g" />。</div>
+<div>表头满偏时它两端的电压叫满偏电压，由欧姆定律 <Latex tex="U_g = I_g R_g" />。</div>
+<div><Latex tex="I_g" /> 和 <Latex tex="U_g" /> 一般都比较小，所以表头能直接测量的电流、电压都很小。</div>
 </DefinitionBox>
 </div>
 </div>
@@ -225,17 +222,17 @@ title: 电表的改装：电压表
 # 电表的改装：电压表
 
 <div class="page-grow">
-<div class="ask">表头的满偏电压只有零点几伏，怎样用它测出几伏、几十伏的电压？</div>
+<div class="ask">表头只能测 <Latex tex="U_g" /> 这么小的电压，要把它的量程扩大到 <Latex tex="N" /> 倍，怎么办？</div>
 
 <div class="half-grid">
 <div class="stack" style="min-width: 0">
 <VoltmeterModSvg :show-share="$clicks >= 2" />
-<div v-click="1">测量较大的电压时，串联一个电阻 <Latex tex="R" />，让它分担一部分电压。</div>
+<div v-click="1">串联一个电阻 <Latex tex="R" />，让它分担其余那部分电压。</div>
 </div>
 <div class="stack" style="min-width: 0">
-<div v-click="2">表头满偏时，串联电阻分到的是其余那部分电压：</div>
-<Latex v-click="2" tex="U = I_g(R_g + R) \Rightarrow R = \frac{U}{I_g} - R_g" display />
-<div v-click="3">串联的这个电阻叫<b>分压电阻</b>；改装后电压表的内阻 <Latex tex="R_V = R_g + R = \dfrac{U}{I_g}" />——电压表就是一个"电压可读的大电阻"。</div>
+<div v-click="2">量程扩大 <Latex tex="N" /> 倍，就是满偏时总电压 <Latex tex="U = N U_g" />；而 <Latex tex="U = I_g(R_g + R)" />，把 <Latex tex="U_g = I_g R_g" /> 代进去：</div>
+<Latex v-click="2" tex="I_g(R_g + R) = N I_g R_g \Rightarrow R = (N - 1)R_g" display />
+<div v-click="3">这个串联电阻叫<b>分压电阻</b>；改装后电压表的内阻 <Latex tex="R_V = R_g + R = N R_g" />，是表头的 <Latex tex="N" /> 倍——电压表就是一个"电压可读的大电阻"。</div>
 </div>
 </div>
 </div>
@@ -248,107 +245,130 @@ title: 电表的改装：电流表
 # 电表的改装：电流表
 
 <div class="page-grow">
-<div class="ask">表头只能通过毫安级的电流，怎样用它测出几安的电流？</div>
+<div class="ask">表头只能通过 <Latex tex="I_g" /> 这么小的电流，要把它的量程扩大到 <Latex tex="N" /> 倍，怎么办？</div>
 
 <div class="half-grid">
 <div class="stack" style="min-width: 0">
 <AmmeterModSvg :show-share="$clicks >= 2" />
-<div v-click="1">测量较大的电流时，并联一个电阻 <Latex tex="R" />，让大部分电流从它那里分走。</div>
+<div v-click="1">并联一个电阻 <Latex tex="R" />，让它分走其余那部分电流。</div>
 </div>
 <div class="stack" style="min-width: 0">
-<div v-click="2">表头满偏时通过表头的电流是 <Latex tex="I_g" />，并联电阻分走 <Latex tex="I - I_g" />，两者的电压相同：</div>
-<Latex v-click="2" tex="I_g R_g = (I - I_g)R \Rightarrow R = \frac{I_g R_g}{I - I_g}" display />
-<div v-click="3">并联的这个电阻叫<b>分流电阻</b>；改装后电流表的内阻 <Latex tex="R_A = \dfrac{R_g R}{R_g + R}" /> 很小——电流表就是一个"电流可读的小电阻"。</div>
+<div v-click="2">量程扩大 <Latex tex="N" /> 倍，就是满偏时干路电流 <Latex tex="I = N I_g" />；分流电阻里流过 <Latex tex="(N - 1)I_g" />，两者的电压相同：</div>
+<Latex v-click="2" tex="I_g R_g = (N - 1)I_g R \Rightarrow R = \frac{R_g}{N - 1}" display />
+<div v-click="3">这个并联电阻叫<b>分流电阻</b>；改装后电流表的内阻 <Latex tex="R_A = \frac{R_g R}{R_g + R} = \frac{R_g}{N}" />，是表头的 <Latex tex="1/N" />——电流表就是一个"电流可读的小电阻"。</div>
 </div>
 </div>
 </div>
 
 ---
-clicks: 1
-title: 电表改装计算台
+layout: exercise-split
+clicks: 3
+title: 例题　有两个量程的电压表
+hideQaMark: true
 ---
+
+<template v-slot:stem>
+
+<div><b class="ex-no">例题</b>　如图所示是有两个量程的电压表。使用 a、b 两个端点时，量程为 <Latex tex="0 \sim 3\ \text{V}" />；使用 a、c 两个端点时，量程为 <Latex tex="0 \sim 15\ \text{V}" />。已知表头的内阻 <Latex tex="R_g" /> 为 <Latex tex="100\ \Omega" />，满偏电流 <Latex tex="I_g" /> 为 <Latex tex="1\ \text{mA}" />，求电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 的阻值。</div>
+
+</template>
+
+<template v-slot:fig>
+
+<TwoRangeVMeterSvg />
+
+</template>
+
+<div v-click="1">a、b 挡（<Latex tex="3\ \text{V}" />）：表头与 <Latex tex="R_1" /> 串联，<Latex tex="R_1 = \dfrac{3\ \text{V}}{I_g} - R_g = 2900\ \Omega" />。</div>
+
+<div v-click="2">a、c 挡（<Latex tex="15\ \text{V}" />）：再串入 <Latex tex="R_2" />，<Latex tex="R_2 = \dfrac{15\ \text{V}}{I_g} - R_g - R_1 = 1.2 \times 10^{4}\ \Omega" />。</div>
+
+<div v-click="3" class="tip-hint">两种量程共用同一个表头：量程越大，串联进去的电阻越大。</div>
+
+---
+layout: exercise-split
+clicks: 2
+title: 例题　有两个量程的电流表
+hideQaMark: true
+---
+
+<template v-slot:stem>
+
+<div><b class="ex-no">例题</b>　实验室常用的双量程电流表（<Latex tex="0 \sim 0.6\ \text{A}" /> 量程和 <Latex tex="0 \sim 3\ \text{A}" /> 量程）的内部构造如图所示。已知表头的内阻 <Latex tex="R_g" /> 为 <Latex tex="200\ \Omega" />，满偏电流 <Latex tex="I_g" /> 为 <Latex tex="100\ \text{mA}" />，则电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 分别为（　　）</div>
+<div class="stack-tight">
+<div><Latex tex="\text{A．}" /><Latex tex="R_1 = 10\ \Omega" />，<Latex tex="R_2 = 50\ \Omega" />　　<Latex tex="\text{B．}" /><Latex tex="R_1 = 8\ \Omega" />，<Latex tex="R_2 = 32\ \Omega" /></div>
+<div><Latex tex="\text{C．}" /><Latex tex="R_1 = 50\ \Omega" />，<Latex tex="R_2 = 8\ \Omega" />　　<Latex tex="\text{D．}" /><Latex tex="R_1 = 32\ \Omega" />，<Latex tex="R_2 = 10\ \Omega" /></div>
+</div>
+
+</template>
+
+<template v-slot:fig>
+
+<TwoRangeAMeterSvg />
+
+</template>
+
+<div v-click="1">A、C 挡（<Latex tex="0.6\ \text{A}" />）表头被 <Latex tex="R_1 + R_2" /> 分流：<Latex tex="I_g R_g = (0.6 - I_g)(R_1 + R_2)" />，得 <Latex tex="R_1 + R_2 = 40\ \Omega" />；A、B 挡（<Latex tex="3\ \text{A}" />）表头与 <Latex tex="R_2" /> 串联后又被 <Latex tex="R_1" /> 分流：<Latex tex="I_g(R_g + R_2) = (3 - I_g)R_1" />。</div>
+
+<div v-click="2" class="tip-hint">联立解得 <Latex tex="R_1 = 8\ \Omega" />、<Latex tex="R_2 = 32\ \Omega" />，选 <b>B</b>。</div>
+
+---
+clicks: 4
+title: 复杂电路的简化
+---
+
+# 复杂电路的简化
 
 <div class="page-grow page-grow-tight">
-<div class="ask">给定一个表头，要改装成指定量程的电表，分压（分流）电阻该取多大？</div>
-
-<MeterConvertLab />
-
-<div v-click="1" class="tip-hint">表头参数和量程一旦确定，电阻值就被公式唯一确定：量程越大，串联的分压电阻越大、并联的分流电阻越小。</div>
+<div class="ask">遇到"奇形怪状"的电路，怎么把它画成串并联一眼能看出来的等效电路？</div>
+<div v-click="1" style="display: flex; align-items: center; gap: 0.9rem">
+<div style="flex: 1; min-width: 0"><b>① 无电流的支路可以去除。</b>两端由导线直接相连的那条支路，没有电流。</div>
+<div style="width: 250px; flex: none"><SimplifySketchSvg variant="branch" /></div>
+</div>
+<div v-click="2" style="display: flex; align-items: center; gap: 0.9rem">
+<div style="flex: 1; min-width: 0"><b>② 等电势点可以合并。</b>用导线直接连起来的点是同一个点。</div>
+<div style="width: 250px; flex: none"><SimplifySketchSvg variant="node" /></div>
+</div>
+<div v-click="3" style="display: flex; align-items: center; gap: 0.9rem">
+<div style="flex: 1; min-width: 0"><b>③ 理想电压表可看成断路，理想电流表可看成短路。</b></div>
+<div style="width: 250px; flex: none"><SimplifySketchSvg variant="meter" /></div>
+</div>
+<div v-click="4" style="display: flex; align-items: center; gap: 0.9rem">
+<div style="flex: 1; min-width: 0"><b>④ 电容器充电瞬间可视为短路，充电完毕（稳定时）可视为断路。</b></div>
+<div style="width: 250px; flex: none"><SimplifySketchSvg variant="cap" /></div>
+</div>
 </div>
 
 ---
-layout: exercise-split
 clicks: 3
-title: 例题　把表头改装成电流表
+title: 示例　画等效电路（一）
 ---
 
-<template v-slot:stem>
-
-<div><b class="ex-no">例题</b>　一个表头的内阻 <Latex tex="R_g" /> 为 <Latex tex="30\ \Omega" />，满偏电流 <Latex tex="I_g" /> 为 <Latex tex="1\ \text{mA}" />。要把它改装为量程 <Latex tex="0 \sim 0.6\ \text{A}" /> 的电流表，需要并联多大的电阻？改装后电流表的内阻是多少？
-<div class="fig-placeholder" style="min-height: 0; padding: 0.5rem">电流表改装电路图（待替换）</div>
-</div>
-
-</template>
-
-<div>量程 <Latex tex="0 \sim 0.6\ \text{A}" /> 是指通过电流表的电流为 <Latex tex="0.6\ \text{A}" /> 时，表头恰好满偏。</div>
-
-<div v-click="1">通过并联电阻的电流 <Latex tex="I_R = I - I_g = 0.6\ \text{A} - 1 \times 10^{-3}\ \text{A} = 0.599\ \text{A}" />。</div>
-
-<div v-click="2">并联电压相同，由欧姆定律得分流电阻 <Latex tex="R = \dfrac{I_g R_g}{I_R} = \dfrac{1 \times 10^{-3} \times 30}{0.599}\ \Omega \approx 5 \times 10^{-2}\ \Omega" />。</div>
-
-<div v-click="3">改装后电流表的内阻 <Latex tex="R_A = \dfrac{R_g R}{R_g + R} \approx 5 \times 10^{-2}\ \Omega" />。</div>
-
----
-layout: exercise-split
-clicks: 3
-title: 练习　有两个量程的电压表
----
-
-<template v-slot:stem>
-
-<div><b class="ex-no">练习</b>　有两个量程的电压表如图。使用 A、B 两个端点时，量程为 <Latex tex="0 \sim 10\ \text{V}" />；使用 A、C 两个端点时，量程为 <Latex tex="0 \sim 100\ \text{V}" />。已知表头的内阻 <Latex tex="R_g" /> 为 <Latex tex="500\ \Omega" />，满偏电流 <Latex tex="I_g" /> 为 <Latex tex="1\ \text{mA}" />，求电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 的值。
-<div class="fig-placeholder" style="min-height: 0; padding: 0.5rem">双量程电压表电路图（待替换）</div>
-</div>
-
-</template>
-
-<div v-click="1">使用 A、B 时，表头与 <Latex tex="R_1" /> 串联：<Latex tex="R_1 = \dfrac{10\ \text{V}}{I_g} - R_g = 9500\ \Omega" />。</div>
-
-<div v-click="2">使用 A、C 时两者都串联：<Latex tex="R_2 = \dfrac{100\ \text{V}}{I_g} - R_g - R_1 = 9.0 \times 10^{4}\ \Omega" />。</div>
-
-<div v-click="3" class="tip-hint">同一个表头配不同的电阻，量程就不同。</div>
-
----
-layout: exercise-split
-clicks: 3
-title: 练习　有两个量程的电流表
----
-
-<template v-slot:stem>
-
-<div><b class="ex-no">练习</b>　有两个量程的电流表如图。使用 A、B 两个端点时，量程为 <Latex tex="0 \sim 1\ \text{A}" />；使用 A、C 两个端点时，量程为 <Latex tex="0 \sim 0.1\ \text{A}" />。已知表头的内阻 <Latex tex="R_g" /> 为 <Latex tex="200\ \Omega" />，满偏电流 <Latex tex="I_g" /> 为 <Latex tex="2\ \text{mA}" />，求电阻 <Latex tex="R_1" />、<Latex tex="R_2" /> 的值。
-<div class="fig-placeholder" style="min-height: 0; padding: 0.5rem">双量程电流表电路图（待替换）</div>
-</div>
-
-</template>
-
-<div v-click="1">使用 A、B 时，表头与 <Latex tex="R_2" /> 串联后被 <Latex tex="R_1" /> 分流：<Latex tex="I_g(R_g + R_2) = (I_1 - I_g)R_1" />。</div>
-
-<div v-click="2">使用 A、C 时，表头被 <Latex tex="R_1 + R_2" /> 分流：<Latex tex="R_1 + R_2 = \dfrac{I_g R_g}{I_2 - I_g} \approx 4.08\ \Omega" />。</div>
-
-<div v-click="3">由这两式解得 <Latex tex="R_2 \approx 3.67\ \Omega" />、<Latex tex="R_1 \approx 0.41\ \Omega" />。</div>
-
----
-clicks: 3
-title: 电表的改装小结
----
+# 示例：画等效电路
 
 <div class="page-grow">
-<div class="ask">同一个表头，怎样改装成量程不同的电压表和电流表？</div>
+<div class="ask">A、E 之间的这段电路，等效成怎样的串并联关系？</div>
 
-<div class="stack summary-line">
-<div v-click="1"><b>电压表</b>：串联一个分压电阻 <Latex tex="R = \dfrac{U}{I_g} - R_g" />，改装后内阻 <Latex tex="R_V = R_g + R" /> 很大。</div>
-<div v-click="2"><b>电流表</b>：并联一个分流电阻 <Latex tex="R = \dfrac{I_g R_g}{I - I_g}" />，改装后内阻 <Latex tex="R_A = \dfrac{R_g R}{R_g + R}" /> 很小。</div>
-<div v-click="3" class="tip-hint">作业：教材第十一章第 4 节「练习与应用」第 4、5 题。</div>
+<div style="max-width: 580px; margin: 0 auto">
+<EquivMorphSvg variant="v1" :step="$clicks" />
 </div>
+
+<div v-click="3" class="tip-hint"><Latex tex="R_1" /> 与 <Latex tex="R_2" /> 并联后串一个电流表（它测的是 <Latex tex="I_1 + I_2" />），再与 <Latex tex="R_3" /> 并联，最后串 <Latex tex="R_4" />。</div>
+</div>
+
+---
+clicks: 3
+title: 例题　画等效电路（二）
+---
+
+# 例题：画等效电路
+
+<div class="page-grow">
+<div class="ask">画出图示电路的等效电路。</div>
+
+<div style="max-width: 580px; margin: 0 auto">
+<EquivMorphSvg variant="v2" :step="$clicks" />
+</div>
+
+<div v-click="3" class="tip-hint"><Latex tex="R_1" /> 与 <Latex tex="L_1" /> 并联、<Latex tex="R_2" /> 与 <Latex tex="R_3" /> 并联；后一组再与 <Latex tex="R_4" /> 串联，最后整体与 <Latex tex="L_2" /> 并联。</div>
 </div>

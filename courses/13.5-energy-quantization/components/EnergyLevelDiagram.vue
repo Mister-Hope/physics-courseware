@@ -37,7 +37,7 @@ const X1 = 372;
     </text>
     <g stroke="var(--c-text-dim)" stroke-width="2.6" stroke-linecap="round">
       <line
-        v-for="(y, index) in LEVELS"
+        v-for="y in LEVELS"
         :key="y"
         :x1="X0"
         :y1="y"
