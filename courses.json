@@ -316,6 +316,20 @@
           "tags": ["静电平衡", "尖端放电", "静电屏蔽", "静电除尘"]
         },
         {
+          "slug": "10.1-electric-potential-energy",
+          "title": "电势能和电势",
+          "chapter": "§10.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "10.3-potential-and-field",
+          "title": "电势差与电场强度的关系",
+          "chapter": "§10.3",
+          "description": "从静电力做功的两种算法推出匀强电场中 U=Ed，讲两点不在同一条电场线上的处理与等势线间距，再用板间距变化和等高线类比巩固。",
+          "tags": ["电势差", "电场强度", "等势线"]
+        },
+        {
           "slug": "10.4-capacitor",
           "title": "电容器的电容",
           "chapter": "§10.4",
@@ -323,11 +337,60 @@
           "tags": ["电容", "电容器"]
         },
         {
+          "slug": "10.5-charged-particle-in-field",
+          "title": "带电粒子在电场中的运动",
+          "chapter": "§10.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "11.1-source-and-current",
+          "title": "电源和电流",
+          "chapter": "§11.1",
+          "description": "从电源维持电势差讲恒定电场与恒定电流，定义电流 I=q/t 并做计算，再用微观模型解释定向移动速率与电流的关系。",
+          "tags": ["电源", "恒定电流", "电流微观解释"]
+        },
+        {
+          "slug": "11.2-conductor-resistance",
+          "title": "导体的电阻",
+          "chapter": "§11.2",
+          "description": "由 U-I 图像与串联电路比较四段导体，归纳电阻定律 R=ρl/S，辨析两个式子的分工，并用材料导电性能收束。",
+          "tags": ["电阻", "电阻定律", "U-I 图像"]
+        },
+        {
+          "slug": "11.3-resistivity-experiment",
+          "title": "实验：导体电阻率的测量",
+          "chapter": "§11.3",
+          "description": "先练游标卡尺与螺旋测微器的读数，再按 R=ρl/S 设计测量电阻率的电路与步骤，处理直径、长度的测量与误差。",
+          "tags": ["电阻率", "游标卡尺", "螺旋测微器", "实验"]
+        },
+        {
+          "slug": "11.4-series-parallel-circuits",
+          "title": "串联电路和并联电路",
+          "chapter": "§11.4",
+          "description": "系统梳理串并联电路的电流、电压与电阻规律，再用分压分流关系讲电压表、电流表的改装与量程计算。",
+          "tags": ["串联电路", "并联电路", "电表改装"]
+        },
+        {
+          "slug": "11.5-multimeter-experiment",
+          "title": "实验：练习使用多用电表",
+          "chapter": "§11.5",
+          "description": "认识多用电表的选择开关与插孔，练电压挡、电流挡和电阻挡的测量与读数，讲欧姆调零与红进黑出、二极管判断。",
+          "tags": ["多用电表", "欧姆挡", "实验"]
+        },
+        {
           "slug": "12.1-energy-conversion-in-circuits",
           "title": "电路中的能量转化",
           "chapter": "§12.1",
           "description": "复习电功与电功率，推串并联的功率分配与总功率，复习焦耳定律；重点对比纯电阻与非纯电阻电路，用交互演示讲电动机的输入、热损耗与输出功率，再用充电宝讲电池储存的能量。",
           "tags": ["电功", "电功率", "焦耳定律", "电动机", "能量守恒"]
+        },
+        {
+          "slug": "12.2-closed-circuit-ohm-law",
+          "title": "闭合电路的欧姆定律",
+          "chapter": "§12.2",
+          "description": "仍在制作中",
+          "tags": []
         },
         {
           "slug": "12.3-emf-internal-resistance",
