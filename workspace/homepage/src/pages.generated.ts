@@ -63,7 +63,7 @@ export const coursePages: Record<string, number> = {
   "9.3-electric-field": 19,
   "9.4-electrostatic-prevention": 19,
   "o2-1.2-lorentz-force": 15,
-  "o2-1.3-charged-particle-motion": 61,
+  "o2-1.3-charged-particle-motion": 60,
   "o2-1.4-mass-spectrometer-cyclotron": 31,
-  "o2-1.x-speed-matching": 16
+  "o2-1.x-speed-matching": 16,
 };
