@@ -19,3 +19,38 @@
 .mf-split-text {
   --cols: minmax(0, 1.35fr) minmax(0, 1fr);
 }
+
+/* ── 组件内的小按钮（本课多个交互图共用，不要在组件里各写一套）── */
+.mf-btn {
+  padding: 0.16rem 0.72rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: transparent;
+  color: var(--c-text-dim);
+
+  font-size: 0.78rem;
+  line-height: 1.5;
+  cursor: pointer;
+
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background-color 0.2s;
+}
+
+.mf-btn.on {
+  border-color: var(--c-accent);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+}
+
+/* ── 图占满剩余高度：SVG 用 height:100% 真正装进 .page-grow，避免固有高度把页面顶爆 ── */
+.mf-fill-fig {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.mf-fill-fig > svg {
+  height: 100%;
+}

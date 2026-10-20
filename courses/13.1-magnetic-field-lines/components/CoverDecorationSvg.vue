@@ -1,25 +1,50 @@
 <script setup lang="ts">
-/** 封面装饰（13.1 磁场 磁感线）：条形磁体 + 从 N 极出发回到 S 极的磁感线 + 左下一枚指向的小磁针。 只作装饰，尺寸与位置由 course-cover 的插槽决定。 */
+/**
+ * 封面装饰（13.1）：条形磁体（左 S 蓝、右 N 红）+ 闭合磁感线（外部 N→S、内部 S→N 虚线）+ 小磁针。
+ * 磁感线由 magField 的两磁极模型生成；小磁针转角取该点磁场方向，方向与正文图一致。
+ */
+import { barPoles, fieldAngle, seedsAround, traceLine } from "./magField";
+
+const CX = 130;
+const CY = 95;
+const A = 60;
+const BW = 15;
+const poles = barPoles(CX, CY, A);
+const bounds = { x: 6, y: 6, w: 248, h: 178 };
+const lines: { d: string }[] = [];
+for (const ang of [-90, -60, -30, 0, 30, 60, 90]) {
+  const [sx, sy] = seedsAround({ x: CX + A, y: CY, s: 1 }, 26, [ang])[0];
+  const line = traceLine([sx, sy], poles, bounds, { stopRadius: 10, maxSteps: 700 });
+  if (line) lines.push({ d: line.d });
+}
+
+const needleX = 32;
+const needleY = 148;
+const needleDeg = (fieldAngle(needleX, needleY, poles) * 180) / Math.PI;
+
+const inner = [
+  { y: CY - 6, x1: CX - A + 8, x2: CX + A - 8 },
+  { y: CY, x1: CX - A + 8, x2: CX + A - 8 },
+  { y: CY + 6, x1: CX - A + 8, x2: CX + A - 8 },
+];
 </script>
 
 <template>
   <svg viewBox="0 0 260 190" width="250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g fill="none" stroke="var(--c-field)" stroke-width="1.6" stroke-linecap="round" opacity="0.8">
-      <path d="M 196 84 C 240 70 254 32 202 28 C 148 24 104 46 70 86" />
-      <path d="M 196 116 C 240 130 254 168 202 172 C 148 176 104 154 70 114" />
-      <path d="M 198 94 C 228 86 240 56 200 52 C 158 48 126 62 104 86" />
-      <path d="M 198 106 C 228 114 240 144 200 148 C 158 152 126 138 104 114" />
-      <path d="M 240 100 H 256" />
-      <path d="M 4 100 H 54" />
+    <g fill="none" stroke="var(--c-field)" stroke-width="1.6" opacity="0.85">
+      <path v-for="(l, i) in lines" :key="i" :d="l.d" />
     </g>
-    <rect x="60" y="80" width="140" height="40" rx="9" fill="var(--c-velocity)" />
-    <path d="M 130 80 H 191 Q 200 80 200 89 V 111 Q 200 120 191 120 H 130 Z" fill="var(--c-danger)" />
-    <text x="95" y="107" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-text)">S</text>
-    <text x="165" y="107" text-anchor="middle" font-family="KaTeX_Main" font-size="19" fill="var(--c-text)">N</text>
-    <g>
-      <path d="M 30 132 L 36 150 L 30 168 L 24 150 Z" fill="none" stroke="var(--c-border-glow)" stroke-width="1" />
-      <path d="M 30 134 L 35 150 L 25 150 Z" fill="var(--c-danger)" />
-      <path d="M 25 150 L 35 150 L 30 166 Z" fill="var(--c-velocity)" />
+    <rect :x="CX - A" :y="CY - BW" :width="A" :height="BW * 2" rx="6" fill="var(--c-velocity)" opacity="0.95" />
+    <rect :x="CX" :y="CY - BW" :width="A" :height="BW * 2" rx="6" fill="var(--c-danger)" opacity="0.95" />
+    <text :x="CX - A / 2" :y="CY + 6" text-anchor="middle" font-size="17" font-weight="700" fill="var(--c-bg)" font-family="KaTeX_Main">S</text>
+    <text :x="CX + A / 2" :y="CY + 6" text-anchor="middle" font-size="17" font-weight="700" fill="var(--c-bg)" font-family="KaTeX_Main">N</text>
+    <g stroke="var(--c-physics)" stroke-width="1.3" stroke-dasharray="5 4" opacity="0.85">
+      <line v-for="(l, i) in inner" :key="`i${i}`" :x1="l.x1" :y1="l.y" :x2="l.x2" :y2="l.y" />
+    </g>
+    <!-- 小磁针：N 红 S 蓝，指向该点磁场方向 -->
+    <g :transform="`rotate(${needleDeg} ${needleX} ${needleY})`">
+      <path :d="`M ${needleX} ${needleY - 6} L ${needleX + 22} ${needleY} L ${needleX} ${needleY + 6} Z`" fill="var(--c-danger)" />
+      <path :d="`M ${needleX} ${needleY - 6} L ${needleX - 22} ${needleY} L ${needleX} ${needleY + 6} Z`" fill="var(--c-velocity)" />
     </g>
   </svg>
 </template>

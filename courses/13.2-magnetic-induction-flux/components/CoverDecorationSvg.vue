@@ -14,7 +14,7 @@
     />
     <FieldDots :x="46" :y="46" :cols="9" :rows="5" :spacing="19" dir="in" :opacity="0.55" />
     <line :x1="CX" :y1="CY - PROJ" :x2="CX" :y2="CY + PROJ" stroke="var(--c-accent)" stroke-width="1.6" stroke-dasharray="6 5" opacity="0.85" />
-    <text x="164" y="44" font-family="KaTeX_Main" font-size="14" fill="var(--c-accent)">S'</text>
+    <text x="164" y="44" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">S'</text>
     <g stroke="var(--c-physics)" stroke-width="3.2" stroke-linecap="round">
       <line :x1="P1.x" :y1="P1.y" :x2="P2.x" :y2="P2.y" />
       <line :x1="P1.x + OFF.x" :y1="P1.y + OFF.y" :x2="P2.x + OFF.x" :y2="P2.y + OFF.y" />

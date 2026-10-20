@@ -3,3 +3,35 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 第 12 页：各波段特性与应用——三列固定宽度的行，避免关键单元格靠自适应宽度断字 */
+.emw-lead {
+  color: var(--c-text-dim);
+}
+
+.emw-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.emw-row {
+  display: grid;
+  grid-template-columns: 220px 190px minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: baseline;
+}
+
+.emw-row > b {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.emw-row > span:nth-child(2) {
+  color: var(--c-text-dim);
+}
+
+/* 第 15 页：通信页的图需要更宽的栏（否则图内标注缩得太小） */
+.emw-comm {
+  --cols: minmax(0, 1fr) minmax(0, 1.3fr);
+}

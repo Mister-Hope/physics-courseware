@@ -9,7 +9,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.5rem;
 
   min-height: 0;
 }
@@ -25,20 +25,20 @@
 .ei-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.9rem;
+  gap: 0.7rem;
   align-items: center;
   justify-content: center;
 }
 
 .ei-btn {
-  padding: 0.3rem 1.05rem;
+  padding: 0.28rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: 999px;
 
   background: var(--c-surface);
   color: var(--c-text);
 
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   line-height: 1.5;
 
   cursor: pointer;
@@ -49,7 +49,12 @@
     color 0.18s;
 }
 
-.ei-btn:hover {
+.ei-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ei-btn:hover:not(:disabled) {
   border-color: var(--c-border-glow);
 }
 
@@ -61,25 +66,25 @@
 }
 
 .ei-pill {
-  font-size: 0.95rem;
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
 }
 
-/* 读数行：Φ / S / ΔΦ 等实时数值 */
+/* 读数行：面积 / 磁通量 / 电流表状态（定性读数，不出现数值） */
 .ei-read {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.6rem;
-  align-items: center;
+  gap: 0.35rem 1.1rem;
+  align-items: baseline;
   justify-content: center;
 
-  font-size: 1.02rem;
+  font-size: 0.88rem;
+  text-align: center;
 }
 
 .ei-read .ei-item {
-  display: flex;
-  gap: 0.35rem;
-  align-items: baseline;
   color: var(--c-text-dim);
+  white-space: nowrap;
 }
 
 .ei-read .ei-item strong {
@@ -87,23 +92,7 @@
   font-weight: 600;
 }
 
-/* 感应电流：导线上流动的虚线（方向 = 电流方向） */
-.ei-flow {
-  animation: ei-dash 0.55s linear infinite;
-  stroke-dasharray: 12 9;
-}
-
-.ei-flow-rev {
-  animation-direction: reverse;
-}
-
-@keyframes ei-dash {
-  to {
-    stroke-dashoffset: -21;
-  }
-}
-
-/* 铁环中环绕的磁场 */
+/* 铁环中环绕的磁场（线圈 A 有电流时出现） */
 .ei-ring-flow {
   animation: ei-dash-ring 1.4s linear infinite;
   stroke-dasharray: 18 14;
@@ -113,4 +102,9 @@
   to {
     stroke-dashoffset: -32;
   }
+}
+
+/* 交互组件页：图栏加宽一档，组件别缩成一小团 */
+.ei-split {
+  --cols: minmax(0, 1.6fr) minmax(0, 1fr);
 }
