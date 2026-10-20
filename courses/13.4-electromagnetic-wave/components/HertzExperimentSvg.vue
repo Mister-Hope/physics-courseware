@@ -1,38 +1,44 @@
-<!-- 第 7 页：赫兹实验装置——高压发生器 G 给发射天线 A、B 供电，极间放电产生火花；下方平行放置接收天线 C、D，中间接电流表 -->
+<!-- 第 8 页：赫兹捕捉电磁波的装置——发射天线间放电产生火花，接收天线中感应出电流；改变两天线距离观察示数 -->
 <script setup lang="ts">
 defineProps<{ step?: number }>();
 </script>
 
 <template>
-  <svg viewBox="0 0 740 300" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <rect x="40" y="53" width="290" height="14" rx="7" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
-    <rect x="370" y="53" width="290" height="14" rx="7" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
-    <text x="55" y="45" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">A</text>
-    <text x="645" y="45" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">B</text>
+  <svg viewBox="0 0 880 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <text x="360" y="18" text-anchor="middle" font-size="15" fill="var(--c-text-dim)">发射天线</text>
+    <text x="40" y="204" font-size="15" fill="var(--c-text-dim)">接收天线</text>
+    <rect x="40" y="36" width="300" height="10" rx="5" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+    <rect x="380" y="36" width="300" height="10" rx="5" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+    <text x="52" y="30" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">A</text>
+    <text x="668" y="30" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">B</text>
+    <rect x="40" y="162" width="300" height="10" rx="5" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+    <rect x="380" y="162" width="300" height="10" rx="5" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+    <text x="52" y="156" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">C</text>
+    <text x="668" y="156" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">D</text>
     <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
-      <path d="M 115 140 V 110 H 45 V 67" />
-      <path d="M 215 140 V 100 H 640 V 67" />
-      <path d="M 330 250 H 334" />
-      <path d="M 366 250 H 370" />
+      <path d="M 100 100 V 84 H 40 V 46" />
+      <path d="M 190 100 V 88 H 680 V 46" />
+      <path d="M 340 167 H 346" />
+      <path d="M 374 167 H 380" />
     </g>
-    <rect x="90" y="140" width="150" height="55" rx="8" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
-    <text x="165" y="176" text-anchor="middle" font-size="20" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">G</text>
-    <text x="165" y="216" text-anchor="middle" font-size="15" fill="var(--c-text-dim)">高压发生器</text>
-    <rect x="60" y="243" width="270" height="14" rx="7" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
-    <rect x="370" y="243" width="270" height="14" rx="7" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
-    <text x="75" y="235" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">C</text>
-    <text x="625" y="235" font-size="17" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">D</text>
-    <CircuitMeter :x="350" :y="250" kind="a" />
+    <rect x="70" y="100" width="150" height="52" rx="8" fill="var(--c-surface)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+    <text x="145" y="120" text-anchor="middle" font-size="14" fill="var(--c-text-dim)">高压发生器</text>
+    <text x="145" y="144" text-anchor="middle" font-size="19" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">G</text>
+    <CircuitMeter :x="360" :y="167" kind="a" :r="14" />
     <g v-if="(step ?? 0) >= 1">
-      <path d="M 332 60 L 342 51 L 348 66 L 356 52 L 368 60" fill="none" stroke="var(--c-accent)" stroke-width="7" opacity="0.3" stroke-linecap="round" />
-      <path d="M 332 60 L 342 51 L 348 66 L 356 52 L 368 60" fill="none" stroke="var(--c-accent)" stroke-width="2.6" stroke-linecap="round" />
-      <text x="350" y="32" text-anchor="middle" font-size="15" fill="var(--c-accent)">放电火花</text>
+      <path d="M 342 41 L 350 33 L 356 45 L 364 34 L 372 41" fill="none" stroke="var(--c-accent)" stroke-width="6" opacity="0.3" stroke-linecap="round" />
+      <path d="M 342 41 L 350 33 L 356 45 L 364 34 L 372 41" fill="none" stroke="var(--c-accent)" stroke-width="2.6" stroke-linecap="round" />
+      <text x="360" y="72" text-anchor="middle" font-size="15" fill="var(--c-accent)">放电火花</text>
     </g>
     <g v-if="(step ?? 0) >= 2">
-      <line x1="700" y1="60" x2="700" y2="250" stroke="var(--c-physics)" stroke-width="1.6" stroke-dasharray="7 5" />
-      <line x1="692" y1="60" x2="708" y2="60" stroke="var(--c-physics)" stroke-width="1.6" />
-      <line x1="692" y1="250" x2="708" y2="250" stroke="var(--c-physics)" stroke-width="1.6" />
-      <text x="716" y="160" text-anchor="middle" font-size="18" font-family="KaTeX_Math" font-style="italic" fill="var(--c-physics)">d</text>
+      <text x="360" y="205" text-anchor="middle" font-size="14" fill="var(--c-physics)">感应电流，电流表指针偏转</text>
+    </g>
+    <g v-if="(step ?? 0) >= 3">
+      <line x1="720" y1="41" x2="720" y2="167" stroke="var(--c-physics)" stroke-width="1.6" stroke-dasharray="7 5" />
+      <line x1="712" y1="41" x2="728" y2="41" stroke="var(--c-physics)" stroke-width="1.6" />
+      <line x1="712" y1="167" x2="728" y2="167" stroke="var(--c-physics)" stroke-width="1.6" />
+      <text x="738" y="108" font-size="18" font-family="KaTeX_Math" font-style="italic" fill="var(--c-physics)">d</text>
+      <text x="770" y="108" font-size="14" fill="var(--c-physics)">改变距离</text>
     </g>
   </svg>
 </template>

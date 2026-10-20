@@ -1,203 +1,140 @@
-<!--
-  奥斯特实验（交互组件，对应第 3 页）：导线沿南北方向架在小磁针上方，右侧是电源与开关。
-  电流方向与通断由按钮控制（@click，不占翻页点击）；小磁针偏转角由真实公式算：
-    tanθ = B_导 / B_地，B_导 = μ0·I / (2πr)（r = 导线到磁针的竖直距离）
-  电流向北 → 磁针所在处 B 指向西 → N 极向西（左）偏；电流反向则反向偏转。
--->
-<script setup>
-import { useSlideContext } from "@slidev/client";
+<script setup lang="ts">
+/**
+ * 奥斯特实验（13.1 P3）
+ * 导线沿南北方向架在小磁针上方；按钮控制开关与电流方向（@click，不占翻页点击）。
+ * 磁针偏转角用真实关系 tanθ = B导 / B地，B导 = μ0 I / (2πr)，I = 4 A、r = 5 cm、B地 = 3×10⁻⁵ T。
+ * 电流向北（屏幕向上）→ 磁针处磁场向西 → N 极向西偏；反向则反向。
+ * 屏幕上一律不给读数，只给偏转方向与画面。
+ */
 import { computed, ref } from "vue";
 
-const { step = 0 } = defineProps({ step: { type: Number, default: 0 } });
+const { showB = false } = defineProps<{ showB?: boolean }>();
 
-const { $clicks } = useSlideContext();
-const cur = computed(() => $clicks.value);
-
-/** Dir: 0 断开 / 1 电流向北（屏幕向上） / -1 电流向南 */
-const dir = ref(0);
-const I = ref(4);
-
-const MU0_2PI = 2e-7;
+const dir = ref<0 | 1 | -1>(0); // 0 断开；1 电流向北；-1 电流向南
+const I = 4;
 const R = 0.05;
-const BH = 3e-5;
-const Bw = computed(() => (MU0_2PI * I.value) / R);
-/** 偏转角（弧度）：向西为负（屏幕上逆时针），由 tanθ = B_导/B_地 算出 */
-const theta = computed(() =>
-  dir.value === 0 ? 0 : (dir.value > 0 ? -1 : 1) * Math.atan(Bw.value / BH),
-);
-/** 定性说明（不给实时数值） */
-const note = computed(() => {
-  if (dir.value === 0) return "开关断开，磁针只受地磁场作用，指南指北";
-  const west = dir.value > 0;
-  return west
-    ? "电流向北，磁针处的磁场向西 —— N 极向西偏；电流越大，偏转越大"
-    : "电流向南，磁针处的磁场向东 —— N 极向东偏；电流越大，偏转越大";
+const B_EARTH = 3e-5;
+const B_WIRE = (2e-7 * I) / R; // μ0 I / (2πr)
+const THETA = Math.atan(B_WIRE / B_EARTH);
+
+const rot = computed(() => {
+  if (dir.value === 0) return 0;
+  return ((dir.value > 0 ? -1 : 1) * THETA * 180) / Math.PI;
 });
-const rot = computed(() => (theta.value * 180) / Math.PI);
-/** 电流磁场方向（西 = 屏幕左 / 东 = 屏幕右） */
-const bLeft = computed(() => dir.value > 0);
-const pick = (d) => {
+
+/** 磁针处磁场方向：电流向北 → 向西（屏幕左） */
+const bToWest = computed(() => dir.value > 0);
+
+const pick = (d: 0 | 1 | -1) => {
   dir.value = d;
 };
+
+const dial = { x: 200, y: 215, r: 62 };
 </script>
 
 <template>
-  <div class="flex min-h-0 w-full flex-1 flex-col">
-    <div class="mb-1 flex shrink-0 flex-wrap items-center justify-center gap-3">
-      <button type="button" class="mf-btn" :class="{ 'mf-btn-on': dir === 0 }" @click="pick(0)">
-        断开开关
-      </button>
-      <button type="button" class="mf-btn" :class="{ 'mf-btn-on': dir > 0 }" @click="pick(1)">
-        电流向北
-      </button>
-      <button type="button" class="mf-btn" :class="{ 'mf-btn-on': dir < 0 }" @click="pick(-1)">
-        电流向南
-      </button>
-      <CourseSlider
-        v-model="I"
-        :min="0"
-        :max="10"
-        :step="0.5"
-        label="电流"
-        label-tex="I"
-        layout="tight"
-        label-width="5.6rem"
-        accent="gold"
-      />
+  <div class="mf-oersted">
+    <div class="mf-ctrl">
+      <button type="button" class="mf-btn" :class="{ on: dir === 0 }" @click="pick(0)">断开</button>
+      <button type="button" class="mf-btn" :class="{ on: dir > 0 }" @click="pick(1)">电流向北</button>
+      <button type="button" class="mf-btn" :class="{ on: dir < 0 }" @click="pick(-1)">电流向南</button>
     </div>
 
-    <svg viewBox="0 0 420 330" xmlns="http://www.w3.org/2000/svg" class="min-h-0 w-full flex-1">
-      <!-- 电路：左腿穿过小磁针上方，上边是开关与电源 -->
+    <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" class="mf-fig-fill">
+      <!-- 电路：上部开关与电源，右侧、下侧回到导线 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
-        <path d="M 200 40 H 260" />
-        <path d="M 300 40 H 342" />
-        <path d="M 358 40 H 380" />
-        <path d="M 380 40 V 280" />
-        <path d="M 380 280 H 200" />
+        <path d="M 200 44 H 260" />
+        <path d="M 300 44 H 342" />
+        <path d="M 358 44 H 392" />
+        <path d="M 392 44 V 292" />
+        <path d="M 392 292 H 200" />
       </g>
-      <CircuitSwitch :x="280" :y="40" :open="dir === 0" label="S" />
-      <CircuitBattery :x="350" :y="40" orientation="horizontal" polarity :flip="dir > 0" />
+      <CircuitSwitch :x="280" :y="44" :open="dir === 0" label="S" />
+      <CircuitBattery :x="350" :y="44" orientation="horizontal" polarity :flip="dir > 0" />
 
-      <!-- 小磁针（含刻度盘） -->
-      <circle
-        cx="200"
-        cy="215"
-        r="62"
-        fill="none"
-        stroke="var(--c-text-dim)"
-        stroke-width="2"
-        opacity="0.7"
-      />
-      <g stroke="var(--c-text-dim)" stroke-width="1.6" opacity="0.7">
-        <path d="M 200 153 V 165" />
-        <path d="M 200 265 V 277" />
-        <path d="M 138 215 H 150" />
-        <path d="M 250 215 H 262" />
+      <!-- 小磁针刻度盘（从上往下看） -->
+      <circle :cx="dial.x" :cy="dial.y" :r="dial.r" fill="none" stroke="var(--c-text-dim)" stroke-width="2" opacity="0.65" />
+      <g stroke="var(--c-text-dim)" stroke-width="1.6" opacity="0.6">
+        <path :d="`M ${dial.x} ${dial.y - dial.r} V ${dial.y - dial.r + 12}`" />
+        <path :d="`M ${dial.x} ${dial.y + dial.r} V ${dial.y + dial.r - 12}`" />
+        <path :d="`M ${dial.x - dial.r} ${dial.y} H ${dial.x - dial.r + 12}`" />
+        <path :d="`M ${dial.x + dial.r} ${dial.y} H ${dial.x + dial.r - 12}`" />
       </g>
-      <text
-        x="200"
-        y="146"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="14"
-        fill="var(--c-text-dim)"
-      >
-        N
-      </text>
-      <text
-        x="200"
-        y="296"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="14"
-        fill="var(--c-text-dim)"
-      >
-        S
-      </text>
-      <text
-        x="128"
-        y="220"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="14"
-        fill="var(--c-text-dim)"
-      >
-        W
-      </text>
-      <text
-        x="272"
-        y="220"
-        text-anchor="middle"
-        font-family="KaTeX_Main"
-        font-size="14"
-        fill="var(--c-text-dim)"
-      >
-        E
-      </text>
-      <g :transform="`rotate(${rot} 200 215)`">
-        <path d="M 200 168 L 210 215 L 200 228 L 190 215 Z" fill="var(--c-danger)" />
-        <path d="M 190 215 L 210 215 L 200 262 Z" fill="var(--c-velocity)" />
-        <text
-          x="200"
-          y="186"
-          text-anchor="middle"
-          font-family="KaTeX_Main"
-          font-size="13"
-          fill="var(--c-text)"
-        >
-          N
-        </text>
+      <text :x="dial.x" :y="dial.y - dial.r - 10" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">北</text>
+      <text :x="dial.x" :y="dial.y + dial.r + 20" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">南</text>
+      <text :x="dial.x - dial.r - 12" :y="dial.y + 5" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">西</text>
+      <text :x="dial.x + dial.r + 12" :y="dial.y + 5" text-anchor="middle" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">东</text>
+
+      <!-- 磁针：N 红、S 蓝 -->
+      <g :transform="`rotate(${rot} ${dial.x} ${dial.y})`">
+        <path :d="`M ${dial.x} ${dial.y - 48} L ${dial.x + 9} ${dial.y} L ${dial.x} ${dial.y + 10} L ${dial.x - 9} ${dial.y} Z`" fill="var(--c-danger)" />
+        <path :d="`M ${dial.x - 9} ${dial.y} L ${dial.x + 9} ${dial.y} L ${dial.x} ${dial.y + 46} Z`" fill="var(--c-velocity)" />
+        <text :x="dial.x" :y="dial.y - 22" text-anchor="middle" font-size="13" fill="var(--c-text)" font-family="KaTeX_Main">N</text>
       </g>
 
-      <!-- 导线（画在磁针之上，先垫一圈底色让层级清楚） -->
-      <path d="M 200 40 V 280" stroke="var(--c-bg)" stroke-width="9" fill="none" />
-      <path d="M 200 40 V 280" stroke="var(--c-text)" stroke-width="3" fill="none" />
-
-      <!-- 电流方向与电流的磁场方向 -->
-      <CourseArrow
+      <!-- 导线（沿南北方向、架在磁针上方） -->
+      <path d="M 200 44 V 292" stroke="var(--c-bg)" stroke-width="9" fill="none" />
+      <path d="M 200 44 V 292" stroke="var(--c-text)" stroke-width="3" fill="none" />
+      <line
         v-if="dir !== 0"
-        :from="{ x: 200, y: dir > 0 ? 145 : 60 }"
-        :to="{ x: 200, y: dir > 0 ? 60 : 145 }"
-        stroke="var(--c-accent)"
-        stroke-width="3.4"
-        label="I"
+        :x1="200"
+        :y1="dir > 0 ? 150 : 70"
+        :x2="200"
+        :y2="dir > 0 ? 70 : 150"
+        stroke="var(--c-force)"
+        stroke-width="3.2"
+        stroke-linecap="round"
       />
-      <g v-if="dir !== 0 && step >= 1">
-        <CourseArrow
-          :from="bLeft ? { x: 130, y: 215 } : { x: 270, y: 215 }"
-          :to="bLeft ? { x: 60, y: 215 } : { x: 340, y: 215 }"
-          stroke="var(--c-field)"
-          stroke-width="3.2"
-          label="B"
-        />
-      </g>
-    </svg>
+      <path
+        v-if="dir !== 0"
+        :d="dir > 0 ? 'M 193 82 L 200 66 L 207 82 Z' : 'M 193 138 L 200 154 L 207 138 Z'"
+        fill="var(--c-force)"
+      />
+      <text
+        v-if="dir !== 0"
+        x="214"
+        :y="dir > 0 ? 84 : 140"
+        font-size="17"
+        fill="var(--c-force)"
+        font-family="KaTeX_Math"
+        font-style="italic"
+      >I</text>
 
-    <div class="shrink-0 text-center text-sm" style="color: var(--c-text-dim)">
-      {{ note }}
-    </div>
+      <!-- 磁针处的磁场方向 -->
+      <CourseArrow
+        v-if="showB && dir !== 0"
+        :from="bToWest ? { x: 122, y: dial.y } : { x: 278, y: dial.y }"
+        :to="bToWest ? { x: 40, y: dial.y } : { x: 360, y: dial.y }"
+        stroke="var(--c-field)"
+        :stroke-width="3.2"
+        label="B"
+        :label-dx="bToWest ? -14 : 14"
+        :label-dy="-12"
+      />
+    </svg>
   </div>
 </template>
 
 <style scoped>
-.mf-btn {
-  padding: 0.25rem 0.9rem;
-  border: 1px solid var(--c-border);
-  border-radius: 999px;
-
-  color: var(--c-text-dim);
-
-  font-size: 0.85rem;
-
-  transition:
-    color 0.2s,
-    border-color 0.2s,
-    background-color 0.2s;
+.mf-oersted {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+  min-height: 0;
 }
 
-.mf-btn-on {
-  border-color: var(--c-accent-border);
-  background-color: var(--c-accent-soft);
-  color: var(--c-accent);
+.mf-ctrl {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.mf-fig-fill {
+  display: block;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
 }
 </style>

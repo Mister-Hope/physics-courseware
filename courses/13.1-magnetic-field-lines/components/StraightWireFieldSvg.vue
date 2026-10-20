@@ -1,119 +1,124 @@
 <script setup lang="ts">
-/** 第 8 页「直线电流的磁感线」——竖直导线穿过水平面，磁感线是同心圆（透视成椭圆）； 按钮切换电流方向，椭圆上的箭头随右手定则反向。电流方向切换不占翻页点击。 */
-import { ref, computed } from "vue";
+/**
+ * 直线电流的磁感线（13.1 P11）
+ * 竖直导线穿过水平面（透视压扁成椭圆），磁感线是一圈圈同心圆；
+ * step 1 出现同心圆、step 2 高亮「与导线垂直的平面」、step 3 出现环绕箭头；
+ * 按钮切换电流方向（@click，不占翻页点击），箭头全部反向。
+ * 方向约定：电流向上时，从上方看磁感线逆时针；透视图里近侧（下方）箭头向右、远侧（上方）箭头向左。
+ */
+import { computed, ref } from "vue";
 
-const W = 560;
-const H = 340;
-const cx = 280;
-const cy = 236; // 平面中心（导线穿过点）
-const rx = 210;
-const ry = 74; // 透视扁率
+const { step: stepProp = 0 } = defineProps<{ step?: number }>();
+const step = computed(() => Math.max(0, stepProp));
+
+const W = 620;
+const H = 400;
+const CX = 310;
+const CY = 260; // 平面中心
+const RX = 230;
+const RY = 88;
 
 const up = ref(true);
-const dir = computed(() => (up.value ? -1 : 1)); // 椭圆右端箭头的 y 方向：电流向上→右端指向远侧（屏幕上为 -y）
+
+/** 近侧（下方）箭头方向：电流向上 → 向右；电流向下 → 向左 */
+const nearDir = computed(() => (up.value ? 1 : -1));
+
+const plane = computed(
+  () =>
+    `M ${CX - RX} ${CY} L ${CX} ${CY - RY} L ${CX + RX} ${CY} L ${CX} ${CY + RY} Z`,
+);
+
+const ringArrows = (k: number) => {
+  const rx = RX * k;
+  const ry = RY * k;
+  const dir = nearDir.value;
+  return {
+    near: { x1: CX + 8, y1: CY + ry, x2: CX + 8 + 44 * dir, y2: CY + ry },
+    far: { x1: CX - 8, y1: CY - ry, x2: CX - 8 - 44 * dir, y2: CY - ry },
+  };
+};
+void ringArrows;
 </script>
 
 <template>
-  <div class="mf-wire-field">
-    <svg :width="W" :height="H" :viewBox="`0 0 ${W} ${H}`" class="block">
-      <defs>
-        <marker id="mf-wire-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto-start-reverse">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-field)" />
-        </marker>
-        <marker id="mf-wire-i" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--c-force)" />
-        </marker>
-      </defs>
-
-      <!-- 水平面（透视） -->
+  <div class="mf-wirefield">
+    <svg :viewBox="`0 0 ${W} ${H}`" width="100%" xmlns="http://www.w3.org/2000/svg" class="mf-fig">
+      <!-- 与导线垂直的水平面（透视） -->
       <path
-        :d="`M ${cx - 250} ${cy + 8} L ${cx - 40} ${cy - 132} L ${cx + 250} ${cy + 8} L ${cx + 40} ${cy + 148} Z`"
-        fill="rgba(148,163,184,0.07)"
-        stroke="var(--c-border)"
-        stroke-width="1.4"
+        :d="plane"
+        fill="var(--c-surface)"
+        :stroke="step >= 2 ? 'var(--c-accent)' : 'var(--c-border)'"
+        :stroke-width="step >= 2 ? 2 : 1.2"
+        :opacity="step >= 2 ? 0.9 : 0.5"
       />
 
-      <!-- 同心磁感线（透视椭圆） -->
-      <g fill="none" stroke="var(--c-field)" stroke-width="1.9" opacity="0.9">
-        <ellipse v-for="k in [0.34, 0.6, 0.86]" :key="k" :cx="cx" :cy="cy" :rx="rx * k" :ry="ry * k" />
+      <!-- 同心圆磁感线 -->
+      <g v-if="step >= 1" fill="none" stroke="var(--c-field)" stroke-width="1.9" opacity="0.9">
+        <ellipse v-for="k in [0.36, 0.62, 0.88]" :key="k" :cx="CX" :cy="CY" :rx="RX * k" :ry="RY * k" />
       </g>
 
-      <!-- 椭圆两端的磁场方向箭头：右端 / 左端 -->
-      <line
-        :x1="cx + rx * 0.6"
-        :y1="cy + dir * 6"
-        :x2="cx + rx * 0.6 - 6"
-        :y2="cy + dir * 6 + dir * 26"
-        stroke="var(--c-field)"
-        stroke-width="2.6"
-        marker-end="url(#mf-wire-arrow)"
-      />
-      <line
-        :x1="cx - rx * 0.6"
-        :y1="cy - dir * 6"
-        :x2="cx - rx * 0.6 + 6"
-        :y2="cy - dir * 6 - dir * 26"
-        stroke="var(--c-field)"
-        stroke-width="2.6"
-        marker-end="url(#mf-wire-arrow)"
-      />
+      <!-- 环绕箭头（近侧 / 远侧） -->
+      <g v-if="step >= 3">
+        <template v-for="k in [0.36, 0.62, 0.88]" :key="k">
+          <CourseArrow
+            :from="{ x: CX + 8, y: CY + RY * k }"
+            :to="{ x: CX + 8 + 44 * nearDir, y: CY + RY * k }"
+            stroke="var(--c-field)"
+            :stroke-width="2.6"
+          />
+          <CourseArrow
+            :from="{ x: CX - 8, y: CY - RY * k }"
+            :to="{ x: CX - 8 - 44 * nearDir, y: CY - RY * k }"
+            stroke="var(--c-field)"
+            :stroke-width="2.6"
+          />
+        </template>
+      </g>
 
       <!-- 竖直导线 -->
-      <line :x1="cx" :y1="cy - 176" :x2="cx" :y2="cy + 118" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round" />
-      <!-- 电流方向箭头（沿导线） -->
-      <line
-        :x1="cx"
-        :y1="up ? cy + 96 : cy - 154"
-        :x2="cx"
-        :y2="up ? cy - 154 : cy + 96"
-        stroke="var(--c-force)"
-        stroke-width="2.8"
-        marker-end="url(#mf-wire-i)"
-      />
-      <text :x="cx + 14" :y="cy - 130" font-size="19" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic">I</text>
-
-      <!-- 观察者一侧标记（近端） -->
-      <text :x="cx + rx + 12" :y="cy + 6" font-size="13" fill="var(--c-text-dim)" font-family="KaTeX_Main">近侧</text>
+      <line :x1="CX" :y1="CY - 200" :x2="CX" :y2="CY + 120" stroke="var(--c-text)" stroke-width="6" stroke-linecap="round" />
+      <!-- 电流方向箭头 -->
+      <g v-if="step >= 1">
+        <line
+          :x1="CX"
+          :y1="up ? CY + 92 : CY - 172"
+          :x2="CX"
+          :y2="up ? CY - 172 : CY + 92"
+          stroke="var(--c-force)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          :d="up ? `M ${CX - 8} ${CY - 160} L ${CX} ${CY - 178} L ${CX + 8} ${CY - 160} Z` : `M ${CX - 8} ${CY + 80} L ${CX} ${CY + 98} L ${CX + 8} ${CY + 80} Z`"
+          fill="var(--c-force)"
+        />
+        <text :x="CX + 14" :y="CY - 150" font-size="18" fill="var(--c-force)" font-family="KaTeX_Math" font-style="italic">I</text>
+      </g>
     </svg>
 
-    <div class="mf-wire-ctrl">
-      <span class="text-sm" style="color: var(--c-text-dim)"> <Latex tex="I" /> 方向 </span>
-      <button class="mf-btn" :class="{ on: up }" @click="up = true">向上</button>
-      <button class="mf-btn" :class="{ on: !up }" @click="up = false">向下</button>
+    <div class="mf-ctrl">
+      <button type="button" class="mf-btn" :class="{ on: up }" @click="up = true">电流向上</button>
+      <button type="button" class="mf-btn" :class="{ on: !up }" @click="up = false">电流向下</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-.mf-wire-field {
+.mf-wirefield {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.3rem;
   align-items: center;
 }
 
-.mf-wire-ctrl {
+.mf-fig {
+  display: block;
+  width: 100%;
+}
+
+.mf-ctrl {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-}
-
-.mf-btn {
-  padding: 0.18rem 0.85rem;
-  border: 1px solid var(--c-border);
-  border-radius: 999px;
-
-  background: rgb(255 255 255 / 5%);
-  color: var(--c-text-dim);
-
-  font-size: 0.82rem;
-
-  cursor: pointer;
-}
-
-.mf-btn.on {
-  border-color: var(--c-accent-border);
-  background: var(--c-accent-soft);
-  color: var(--c-accent);
 }
 </style>

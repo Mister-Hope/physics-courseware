@@ -2,13 +2,13 @@
 import { computed, ref } from "vue";
 
 /**
- * 第 7 页：频率 → 能量子大小的真实计算。 滑块调电磁波的频率 ν（3.0×10^14 ～ 1.2×10^15 Hz），三条读数都是算出来的： ε = hν（同时给 J 与 eV，1 eV =
- * 1.6×10^-19 J）、λ = c/ν（并按波长给出所属波段与这种光的真实颜色）。 上方光谱条按波长铺真实颜色（紫 → 红 在左 → 右，与 λ 增大的方向一致），游标跟着滑块走。
+ * 第 9 页：频率 → 能量子大小的真实计算。滑块调电磁波的频率 ν（3.0×10^14 ～ 1.2×10^15 Hz）， 读数都是算出来的：ε = hν（单位 J）与 λ =
+ * c/ν（并按波长给出所属波段与这种光的真实颜色）。 上方光谱条按波长铺真实颜色（紫 → 红 从左到右，与 λ 增大的方向一致），游标跟着滑块走。 只给焦耳读数：教材 13.5
+ * 没有出现电子伏（10 章只在一道习题里提过），不抢主读数。 波段标签定宽：拖动滑到不同波段时读数行不会左右跳。
  */
 
 const H = 6.626e-34;
 const C = 2.998e8;
-const EV = 1.6e-19;
 
 /** 光谱条覆盖的波长范围（nm），与滑块的频率范围一一对应 */
 const LAM_LO = 250;
@@ -26,7 +26,6 @@ const BAR_Y1 = 78;
 const nu14 = ref(5);
 const frequency = computed(() => nu14.value * 1e14);
 const energyJ = computed(() => H * frequency.value);
-const energyEv = computed(() => energyJ.value / EV);
 const lambdaNm = computed(() => (C / frequency.value) * 1e9);
 
 /** 科学计数法 → KaTeX 源码，如 3.31\times 10^{-19} */
@@ -36,10 +35,7 @@ const sciTex = (value: number, digits = 2): string => {
   return `${mant.toFixed(digits)}\\times 10^{${exp}}`;
 };
 
-const energyTex = computed(
-  () =>
-    `\\varepsilon = h\\nu = ${sciTex(energyJ.value)}\\ \\text{J} = ${energyEv.value.toFixed(2)}\\ \\text{eV}`,
-);
+const energyTex = computed(() => `\\varepsilon = h\\nu = ${sciTex(energyJ.value)}\\ \\text{J}`);
 const lambdaTex = computed(
   () => `\\lambda = \\dfrac{c}{\\nu} = ${lambdaNm.value.toFixed(1)}\\ \\text{nm}`,
 );
@@ -190,7 +186,6 @@ const aria = computed(
           {{ band.name }}
         </span>
       </div>
-      <div class="pe-note"><Latex tex="1\ \text{eV} = 1.6\times 10^{-19}\ \text{J}" /></div>
     </div>
   </div>
 </template>
@@ -228,7 +223,9 @@ const aria = computed(
   display: inline-flex;
   gap: 0.4rem;
   align-items: center;
+  justify-content: center;
 
+  min-width: 7.4rem;
   padding: 0.12rem 0.65rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-sm);
@@ -244,10 +241,5 @@ const aria = computed(
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 50%;
-}
-
-.pe-note {
-  color: var(--c-text-dim);
-  font-size: 0.85rem;
 }
 </style>

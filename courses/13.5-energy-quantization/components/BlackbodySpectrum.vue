@@ -2,9 +2,10 @@
 import { computed } from "vue";
 
 /**
- * 第 5 页：黑体辐射的谱线族——不同温度下"辐射强度按波长的分布"。 每条曲线都由真实的普朗克公式 B(λ,T) = 2hc²/λ⁵ · 1/(e^(hc/λkT)−1) 逐点采样画出，
- * 峰值位置由采样点取最大值求得（维恩位移的图像表现）；三条曲线共用一个归一化， 所以温度越高整条曲线越高、峰值越靠短波——这正是要学生观察的两条规律。 点击分步：3000 K → 4000 K →
- * 5000 K（每条曲线出现的同时画出它的峰值虚线）。
+ * 第 5 页：黑体辐射的谱线族——不同温度下"辐射强度按波长的分布"。每条曲线都由真实的普朗克公式 B(λ,T) = 2hc²/λ⁵ · 1/(e^(hc/λkT)−1)
+ * 逐点采样画出，峰值位置由采样点取最大值求得（维恩位移的图像表现）； 三条曲线共用一个归一化，所以温度越高整条曲线越高、峰值越靠短波——这正是要学生观察的两条规律。 点击分步：低温 → 较高温 →
+ * 最高温（每条曲线出现的同时画出它的峰值虚线）。 本页是定性页：温度只标符号 T₁<T₂<T₃（不标具体开尔文值），坐标轴不标刻度数字、纵轴只写"辐射强度（相对）"。
+ * 具体温度值只作为内部计算参数（3000/4000/5000 K）。
  */
 
 const H = 6.62607015e-34;
@@ -80,7 +81,7 @@ const bandAreas = BAND_EDGES.slice(0, -1).map((lo, index) => {
 });
 
 /** 温度标注：放在曲线右侧下坡段（三条曲线在这里上下错开，互不打架） */
-const LABEL_LAM = 1150;
+const LABEL_LAM = 1080;
 const labels = sampled.map((points, index) => {
   const at = points.reduce((best, p) =>
     Math.abs(p.x - LABEL_LAM) < Math.abs(best.x - LABEL_LAM) ? p : best,
@@ -88,7 +89,7 @@ const labels = sampled.map((points, index) => {
   return {
     x: at.x,
     y: at.y / normalizer,
-    parts: [{ tex: `T=${TEMPS[index]}\\ \\text{K}` }],
+    parts: [{ tex: `T_${index + 1}` }],
     anchor: "top-right" as const,
     dy: -8,
     size: 18,
