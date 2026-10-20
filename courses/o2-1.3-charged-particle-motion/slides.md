@@ -846,6 +846,69 @@ clicks: 2
 
 
 
+
+---
+layout: base-flex
+---
+
+<div class="qp-page">
+
+<div>
+
+**例 2** 如图，下端封闭、上端开口、内壁光滑的细玻璃管竖直放置，管底有一个带电小球。整个装置以水平速度 <Latex tex="v" /> 垂直进入方向垂直纸面向里的匀强磁场；由于外力的作用，玻璃管在磁场中的速度保持不变，最终小球从上端管口飞出。下列说法正确的是（　　）
+
+</div>
+
+<div class="half-grid items-center">
+
+<div>
+
+- A. 洛伦兹力对小球做正功
+- B. 小球在管中做匀速直线运动
+- C. 小球的机械能守恒
+- D. 小球在竖直方向上做匀加速运动
+
+</div>
+
+<div class="divider-l qp-fig">
+
+<TubeInField />
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1.45fr) minmax(0, 1fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.3rem">
+
+<div><b>例 2</b> 管中小球的受力与运动</div>
+
+<div>速度正交分解：随管水平运动的 <Latex tex="v" /> 产生<b>竖直向上</b>的洛伦兹力 <Latex tex="qvB" />，推着小球上升；小球向上有了 <Latex tex="v_y" />，又产生水平向左的 <Latex tex="qv_yB" />，被管壁的弹力平衡掉。</div>
+
+<div v-click="1">竖直方向恒力 <Latex tex="qvB - mg" /> 保持不变 ⟹ 竖直方向<b>匀加速</b>；水平方向匀速 ⟹ 合运动是抛物线 —— <b>B 错、D 对</b>。</div>
+
+<div v-click="2" class="tip-hint">答案 <b>D</b>。洛伦兹力的总功仍为零，只是竖直分量做正功、水平分量做等量负功：机械能的增加来自<b>维持管匀速的外力做功</b> —— <b>A、C 都错</b>。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-corner">
+
+<TubeInField show-analysis />
+
+</div>
+
+</div>
+
+
+
+
 ---
 title: 例题：先加速，再进圆形磁场
 ---
@@ -854,7 +917,7 @@ title: 例题：先加速，再进圆形磁场
 <div class="page-grow" style="justify-content:flex-start;padding-top:.6rem;--page-gap:.35rem">
 
 <div style="font-size:.78rem;line-height:1.5">
-如图所示，在真空环境中，存在一个加速电压为 <Latex tex="U" />、板间距为 <Latex tex="d" /> 的匀强加速电场，其右侧存在一个半径为 <Latex tex="R" /> 的圆形匀强磁场区域（磁场方向垂直于纸面）。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" /> 的带正电粒子从静止开始经电场加速后，水平向右射入圆形磁场。已知入射点到磁场中心水平线的垂直距离为 <Latex tex="h = 0.6R" />。粒子在磁场中发生偏转，最终竖直向下射出圆形磁场区域（不计粒子重力）。
+<b>例 3</b> 如图所示，在真空环境中，存在一个加速电压为 <Latex tex="U" />、板间距为 <Latex tex="d" /> 的匀强加速电场，其右侧存在一个半径为 <Latex tex="R" /> 的圆形匀强磁场区域（磁场方向垂直于纸面）。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" /> 的带正电粒子从静止开始经电场加速后，水平向右射入圆形磁场。已知入射点到磁场中心水平线的垂直距离为 <Latex tex="h = 0.6R" />。粒子在磁场中发生偏转，最终竖直向下射出圆形磁场区域（不计粒子重力）。
 </div>
 
 <div style="font-size:.78rem;line-height:1.5">
@@ -879,6 +942,8 @@ clicks: 4
 
 <div class="stack" style="--stack-gap:.3rem;font-size:.85rem;line-height:1.45">
 
+<div><b>例 3</b></div>
+
 <div><b>① 电场加速</b>：<Latex tex="qU = \dfrac{1}{2}mv^2" /> ⟹ <Latex tex="v = \sqrt{\dfrac{2qU}{m}}" /></div>
 
 <div v-click="2"><b>② 定轨迹圆心</b>：入射速度水平向右 ⟹ 轨迹圆心 <Latex tex="O'" /> 在 <Latex tex="A" /> 正下方；出射速度竖直向下 ⟹ <Latex tex="B" /> 在 <Latex tex="O'" /> 正右方。以 <Latex tex="O" /> 为原点、向右为 <Latex tex="x" /> 轴正方向、向上为 <Latex tex="y" /> 轴正方向：<Latex tex="A(-0.8R,\ 0.6R)" />，<Latex tex="O'(-0.8R,\ 0.6R-r)" />，<Latex tex="B(-0.8R+r,\ 0.6R-r)" /></div>
@@ -901,7 +966,7 @@ layout: base-flex
 
 <div class="qp-page">
 
-<div class="ask text-xl"><b>例 2</b> 一束<b>平行</b>带电粒子（同种、同速）水平射入一个<b>圆形匀强磁场区域</b>，出射后会散开，还是可能交于同一点？</div>
+<div class="ask text-xl"><b>例 4</b> 一束<b>平行</b>带电粒子（同种、同速）水平射入一个<b>圆形匀强磁场区域</b>，出射后会散开，还是可能交于同一点？</div>
 
 <FocusQuestion />
 
@@ -940,7 +1005,8 @@ clicks: 3
 </div>
 
 ---
----
+
+# 磁控束
 
 <div class="ask text-lg">薄膜材料制备中的<b>磁控束</b>：一束宽度为 <Latex tex="d_1" /> 的平行带电粒子束（同种、同速），要变成宽度 <Latex tex="d_2" />、方向不变的平行束。磁场区域该设计成什么形状？</div>
 
@@ -952,7 +1018,7 @@ clicks: 3
 clicks: 3
 ---
 
-# 四片叶形磁区
+# 磁汇聚的应用——磁控束
 
 <div class="page-grow">
 <BeamWidthShaper :step="$clicks" />

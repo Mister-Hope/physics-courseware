@@ -1,6 +1,6 @@
 ---
 theme: default
-title: "复合场中的配速法与摆线运动"
+title: "复合场与配速法"
 titleTemplate: '%s'
 highlighter: shiki
 transition: fade
@@ -24,66 +24,6 @@ lesson: "习题课"
 ---
 
 <CoverDecor />
-
-
----
-layout: base-flex
----
-
-<div class="qp-page">
-
-<div>
-
-**例 5** 如图，下端封闭、上端开口、内壁光滑的细玻璃管竖直放置，管底有一个带电小球。整个装置以水平速度 <Latex tex="v" /> 垂直进入方向垂直纸面向里的匀强磁场；由于外力的作用，玻璃管在磁场中的速度保持不变，最终小球从上端管口飞出。下列说法正确的是（　　）
-
-</div>
-
-<div class="half-grid items-center">
-
-<div>
-
-- A. 洛伦兹力对小球做正功
-- B. 小球在管中做匀速直线运动
-- C. 小球的机械能守恒
-- D. 小球在竖直方向上做匀加速运动
-
-</div>
-
-<div class="divider-l qp-fig">
-
-<TubeInField />
-
-</div>
-
-</div>
-
-</div>
-
----
-clicks: 2
----
-
-<div class="split-wide qp-solve" style="--cols: minmax(0, 1.45fr) minmax(0, 1fr);--hint-pad-y:.5rem">
-
-<div class="stack stack-tight" style="gap:.3rem">
-
-<div><b>例 5</b> 管中小球的受力与运动</div>
-
-<div>速度正交分解：随管水平运动的 <Latex tex="v" /> 产生<b>竖直向上</b>的洛伦兹力 <Latex tex="qvB" />，推着小球上升；小球向上有了 <Latex tex="v_y" />，又产生水平向左的 <Latex tex="qv_yB" />，被管壁的弹力平衡掉。</div>
-
-<div v-click="1">竖直方向恒力 <Latex tex="qvB - mg" /> 保持不变 ⟹ 竖直方向<b>匀加速</b>；水平方向匀速 ⟹ 合运动是抛物线 —— <b>B 错、D 对</b>。</div>
-
-<div v-click="2" class="tip-hint">答案 <b>D</b>。洛伦兹力的总功仍为零，只是竖直分量做正功、水平分量做等量负功：机械能的增加来自<b>维持管匀速的外力做功</b> —— <b>A、C 都错</b>。</div>
-
-</div>
-
-<div class="qp-fig qp-fig-corner">
-
-<TubeInField show-analysis />
-
-</div>
-
-</div>
 
 ---
 clicks: 2
