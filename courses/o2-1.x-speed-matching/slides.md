@@ -808,7 +808,7 @@ layout: base-flex
 
 <div class="half-grid items-center">
 
-<div class="ex-options">
+<div class="ex-options" style="grid-template-columns:1fr">
 
 <div><b>A.</b> 质子的速度大小为 <Latex tex="\dfrac{2eBL_0}{m}" /></div>
 <div><b>B.</b> 质子的速度大小为 <Latex tex="\dfrac{eBL_0}{2m}" /></div>

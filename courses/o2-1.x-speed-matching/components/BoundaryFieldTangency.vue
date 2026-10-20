@@ -114,9 +114,8 @@ interface Layout {
   /** 两条边界线的上下端 */
   yTop: number;
   yBottom: number;
-  /** 宽度 d 的尺寸线 y、d 标签位置 */
+  /** 宽度 d 的尺寸线 y（"d" 字样在 texts 里） */
   dY: number;
-  dLabel: Pt;
   /** 入射点、v₀ 箭头终点 */
   entry: Pt;
   vTip: Pt;
@@ -143,7 +142,6 @@ const STEM: Layout = {
   yTop: 100,
   yBottom: 356,
   dY: 100,
-  dLabel: { x: 223, y: 88 },
   entry: STEM_ENTRY,
   vTip: { x: 188.7, y: 229.3 },
   dots: [{ x: 240, y: 150, cols: 2, rows: 3, spacing: 62 }],
@@ -235,7 +233,6 @@ const POSITIVE: Layout = {
   yTop: 76,
   yBottom: 430,
   dY: 430,
-  dLabel: { x: (POS_PP + POS_QQ) / 2, y: 448 },
   entry: POS_ENTRY,
   vTip: { x: 420.8, y: 368.6 },
   dots: [
@@ -347,7 +344,6 @@ const NEGATIVE: Layout = {
   yTop: 120,
   yBottom: 388,
   dY: 388,
-  dLabel: { x: (NEG_PP + NEG_QQ) / 2, y: 404 },
   entry: NEG_ENTRY,
   vTip: { x: 181.8, y: 131.2 },
   dots: [

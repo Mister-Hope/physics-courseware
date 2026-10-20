@@ -58,14 +58,9 @@ const pt = (ux: number, uy: number): { x: number; y: number } => ({
   y: CY - uy * R,
 });
 
-/** 屏幕角度圆弧采样成折线（画布坐标，角度 y 向下；a0 → a1 线性扫过） */
-const arcPath = (
-  c: { x: number; y: number },
-  radius: number,
-  a0: number,
-  a1: number,
-  n = 48,
-): string => {
+/** 屏幕角度圆弧采样成折线（画布坐标，角度 y 向下；a0 → a1 线性扫过，每 ~1.5° 一段） */
+const arcPath = (c: { x: number; y: number }, radius: number, a0: number, a1: number): string => {
+  const n = Math.max(8, Math.ceil((Math.abs(a1 - a0) * 180) / Math.PI / 1.5));
   let d = "";
 
   for (let i = 0; i <= n; i += 1) {
@@ -101,7 +96,7 @@ const T = {
   y: S.y + ((O2.y - S.y) / O2_LEN) * (2 * R),
 };
 /** A′：小圆与环内轨迹圆的另一个交点（两圆交点公式；两个交点正是 A 与 A′） */
-const A2 = (() => {
+const A2 = ((): { x: number; y: number } => {
   const d = O2_LEN / R;
   /** 交点弦心距：a = (d² + R² − r²)/(2d) */
   const a = (d * d + 1 - K_R * K_R) / (2 * d);
@@ -118,29 +113,32 @@ const A2 = (() => {
 
 /* ══════════ 轨迹弧与辅助线 ══════════ */
 /** 小圆内轨迹：S → A（圆心 S₁、半径 R；屏幕角 60° → 0°） */
-const ARC_INNER = arcPath(S1, R, Math.PI / 3, 0, 48);
+const ARC_INNER = arcPath(S1, R, Math.PI / 3, 0);
 /** 环形区域轨迹：A → T → A′（圆心 O₂、半径 r；屏幕角 180° → 463.6°） */
-const ARC_ANNULUS = (() => {
+const ARC_ANNULUS = ((): string => {
   const a0 = Math.PI;
   const a1 = Math.atan2(A2.y - O2.y, A2.x - O2.x) + 2 * Math.PI;
 
-  return arcPath(O2, R_IN, a0, a1, 150);
+  return arcPath(O2, R_IN, a0, a1);
 })();
 /** 半径指示线（题给的 R / 2R）：左下 250°、右下 320° 各一条 */
 const RL_R = pt(Math.cos((250 * Math.PI) / 180), Math.sin((250 * Math.PI) / 180));
 const RL_2R = pt(2 * Math.cos((320 * Math.PI) / 180), 2 * Math.sin((320 * Math.PI) / 180));
 const RADII_D = `M${S.x},${S.y} L${RL_R.x.toFixed(1)},${RL_R.y.toFixed(1)} M${S.x},${S.y} L${RL_2R.x.toFixed(1)},${RL_2R.y.toFixed(1)}`;
-/** 环形磁场区域（evenodd：大圆挖掉小圆）—— 给 FieldDots 裁剪用 */
+/**
+ * 环形磁场区域：大圆挖掉小圆 —— 给 FieldDots 裁剪用。 两个圆**反向**画（外圈 sweep 0、内圈 sweep 1）⟹ 内圈绕数为 0，即使浏览器忽略 clip-rule（默认
+ * nonzero 规则）也照样得到真正的环带。
+ */
 const RING_D =
   `M${CX},${CY - 2 * R} A${2 * R},${2 * R} 0 1 0 ${CX},${CY + 2 * R} A${2 * R},${2 * R} 0 1 0 ${CX},${CY - 2 * R} Z ` +
-  `M${CX},${CY - R} A${R},${R} 0 1 0 ${CX},${CY + R} A${R},${R} 0 1 0 ${CX},${CY - R} Z`;
+  `M${CX},${CY - R} A${R},${R} 0 1 1 ${CX},${CY + R} A${R},${R} 0 1 1 ${CX},${CY - R} Z`;
 /** 等边三角形 S S₁ A（解析一） / △O A O₂（解析二） */
 const TRI_INNER_D = `M${S.x},${S.y} L${S1.x},${S1.y} L${A.x},${A.y} Z`;
 const TRI_OUTER_D = `M${S.x},${S.y} L${A.x},${A.y} L${O2.x},${O2.y} Z`;
 /** 角标圆弧：A 处 60°（内）、30°（出射速度与半径外延）、120°（环内三角） */
-const ARC_60 = arcPath(A, 26, (2 * Math.PI) / 3, Math.PI, 20);
-const ARC_30 = arcPath(A, 44, (3 * Math.PI) / 2, (5 * Math.PI) / 3, 16);
-const ARC_120 = arcPath(A, 24, 0, (2 * Math.PI) / 3, 24);
+const ARC_60 = arcPath(A, 26, (2 * Math.PI) / 3, Math.PI);
+const ARC_30 = arcPath(A, 44, (3 * Math.PI) / 2, (5 * Math.PI) / 3);
+const ARC_120 = arcPath(A, 24, 0, (2 * Math.PI) / 3);
 /** 出射速度（画布 +y 向上 ⟹ 屏幕 -y）与其在 A 的尖端；SA 出射方向的外延线尖端 */
 const V_TIP = { x: A.x, y: A.y - 58 };
 const EXT_TIP = { x: A.x + 58 * Math.cos(-Math.PI / 3), y: A.y - 58 * Math.sin(Math.PI / 3) };
@@ -169,7 +167,7 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
           <circle :cx="S.x" :cy="S.y" :r="R" />
         </clipPath>
         <clipPath id="cfc-ring-clip">
-          <path :d="RING_D" clip-rule="evenodd" />
+          <path :d="RING_D" clip-rule="evenodd" fill-rule="evenodd" />
         </clipPath>
       </defs>
 
@@ -197,7 +195,7 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
         :r="2 * R"
         fill="none"
         stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
-        :stroke-width="2.6"
+        :stroke-width="2.8"
       />
       <circle
         :cx="S.x"
@@ -205,7 +203,7 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
         :r="R"
         fill="none"
         stroke="color-mix(in srgb, var(--c-accent) 70%, transparent)"
-        :stroke-width="2.2"
+        :stroke-width="3"
       />
       <path
         :d="RADII_D"
@@ -219,7 +217,7 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
         fill="var(--c-text-dim)"
         :font-family="MATH_FONT"
         font-style="italic"
-        font-size="15"
+        font-size="16"
         text-anchor="middle"
         v-bind="HALO"
       >
@@ -231,7 +229,7 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
         fill="var(--c-text-dim)"
         :font-family="MATH_FONT"
         font-style="italic"
-        font-size="15"
+        font-size="16"
         text-anchor="middle"
         v-bind="HALO"
       >
@@ -257,7 +255,7 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
         fill="var(--c-text)"
         :font-family="MATH_FONT"
         font-style="italic"
-        font-size="15"
+        font-size="16"
         text-anchor="end"
         v-bind="HALO"
       >
@@ -444,11 +442,11 @@ const EMIT_ARROWS = [0, 1, 2, 3].map((k) => {
         </text>
         <path :d="ARC_120" fill="none" stroke="var(--c-text)" :stroke-width="1.5" />
         <text
-          :x="317"
-          :y="164"
+          :x="319"
+          :y="163"
           fill="var(--c-text)"
           :font-family="MAIN_FONT"
-          font-size="14"
+          font-size="13"
           text-anchor="middle"
           v-bind="HALO"
         >

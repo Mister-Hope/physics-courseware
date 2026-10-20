@@ -12,8 +12,8 @@
      part1 ：step ≥1 轨迹为绕 C、半径 2L 的圆弧 O→D（沿 OA 射入时圆心恰是 C，D 在 AC 上、
              |CD| = 2L），并画出半径 CD；step ≥2 补 D 点与 CD、AD 段标注。
      part2 ：step ≥1 临界轨迹 —— 过 O、C 且与 AC 相切于 C 的圆弧（粒子恰好从 C 射出）；
-             step ≥2 圆心 X、OC 中点 M、半径 XC / XO、直角标记 XM⟂OC 与 CX⟂AC、∠C；
-             step ≥3 半径 r、CM = L 与 sin∠C = L/r。
+             step ≥2 圆心 X、OC 中点 M、CM = MO = L、半径 XC / XO、直角标记 XM⟂OC 与 CX⟂AC、∠C；
+             step ≥3 半径 r 与 sin∠C = L/r。
   ── 几何（全部由题给量推出，不手调）──
      part1：r = mv0/(qB) = 2L = CO ⟹ 圆心就是 C；D = C + 2L(cos∠C, sin∠C)，
             ∠C = arctan(AO/CO) = arctan(1/2) ⟹ AC = √5 L、AD = AC − CD = (√5 − 2)L。
@@ -84,13 +84,18 @@ const PHI_O = Math.atan2(2 * L, L);
 const PHI_C = Math.PI - PHI_O;
 
 /** 圆弧采样成折线（圆心 c、半径 r、数学极角 from→to；画布 y 向下） */
-const arcPath = (cx: number, cy: number, r: number, from: number, to: number, n = 48): string => {
+const arcPath = (
+  c: { x: number; y: number },
+  r: number,
+  [from, to]: [number, number],
+  n = 48,
+): string => {
   let d = "";
 
   for (let i = 0; i <= n; i += 1) {
     const phi = from + ((to - from) * i) / n;
-    const x = cx + r * Math.cos(phi);
-    const y = cy - r * Math.sin(phi);
+    const x = c.x + r * Math.cos(phi);
+    const y = c.y - r * Math.sin(phi);
 
     d += `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
   }
@@ -99,11 +104,11 @@ const arcPath = (cx: number, cy: number, r: number, from: number, to: number, n 
 };
 
 /** 第(1)问轨迹：绕 C、半径 2L，从 O 逆时针转到 D */
-const ARC_1 = arcPath(C_PT.x, C_PT.y, R1, 0, ANG_C);
+const ARC_1 = arcPath(C_PT, R1, [0, ANG_C]);
 /** 第(2)问临界轨迹：绕 X、半径 √5L，从 O 转到 C（整段都在三角形内、与 AC 相切于 C） */
-const ARC_2 = arcPath(X_PT.x, X_PT.y, R2, PHI_O, PHI_C);
+const ARC_2 = arcPath(X_PT, R2, [PHI_O, PHI_C]);
 /** ∠C 的角弧（半径 22，从 CO 转到 CA） */
-const ANGLE_C = arcPath(C_PT.x, C_PT.y, 34, 0, ANG_C, 20);
+const ANGLE_C = arcPath(C_PT, 34, [0, ANG_C], 20);
 
 /** 三角形顶点（磁场区域边界） */
 const TRI_POINTS = `${C_PT.x},${C_PT.y} ${A_PT.x},${A_PT.y} ${O_PT.x},${O_PT.y}`;
@@ -127,13 +132,13 @@ const FIELD = {
   opacity: 0.8,
 };
 
-/** 粒子源：O 点射向磁场内（三角形内部）的三条短箭头 */
-const SOURCE_ARROWS = [99, 123, 147].map((deg) => {
+/** 粒子源：O 点射向磁场内的四条短箭头（"各个方向"） 角度上限 146°：再往上（≈150°）正对 O 点旁 (422,176) 那个 ×，箭头会压住它的臂。 */
+const SOURCE_ARROWS = [92, 110, 128, 146].map((deg) => {
   const a = (deg * Math.PI) / 180;
 
   return {
     from: O_PT,
-    to: { x: O_PT.x + 17 * Math.cos(a), y: O_PT.y - 17 * Math.sin(a) },
+    to: { x: O_PT.x + 22 * Math.cos(a), y: O_PT.y - 22 * Math.sin(a) },
   };
 });
 
@@ -152,10 +157,10 @@ const RIGHT_C = [
   `L${(C_PT.x + 11 * U_CX_BACK.x).toFixed(1)},${(C_PT.y + 11 * U_CX_BACK.y).toFixed(1)}`,
 ].join(" ");
 
-/** XM ⟂ OC 的小方角：画在 M 的右下侧（避开基点 M 与底边上的标注） */
+/** XM ⟂ OC 的小方角：画在 M 的左下侧（右下方留给底边中点的 M 标注） */
 const RIGHT_M = [
-  `M${M_PT.x + 9},${M_PT.y}`,
-  `L${M_PT.x + 9},${M_PT.y + 9}`,
+  `M${M_PT.x - 9},${M_PT.y}`,
+  `L${M_PT.x - 9},${M_PT.y + 9}`,
   `L${M_PT.x},${M_PT.y + 9}`,
 ].join(" ");
 
@@ -184,6 +189,7 @@ interface FigLabel {
   size: number;
   color?: string;
   dx?: number;
+  dy?: number;
 }
 
 const labels = computed<FigLabel[]>(() => {
@@ -192,17 +198,20 @@ const labels = computed<FigLabel[]>(() => {
     { key: "C", tex: "C", x: C_PT.x, y: C_PT.y, anchor: "bottom-left", size: 16 },
     { key: "O", tex: "O", x: O_PT.x, y: O_PT.y, anchor: "right", size: 16 },
     { key: "L", tex: "L", x: O_PT.x, y: Y0 - L / 2, anchor: "right", size: 15 },
-    {
+  ];
+
+  // 题目页 / 第(1)问：底边整段 CO = 2L。
+  // part2 不画 2L —— 底边中点已有 M，2L 会被读成 MO = 2L（实际 MO = L）⟹ 改标 CM = MO = L。
+  if (!isPart2.value) {
+    list.push({
       key: "2L",
       tex: "2L",
       x: BASE_MID.x,
       y: BASE_MID.y,
       anchor: "bottom",
       size: 15,
-      // part2 的底边中点下面立着 XM 半径线与直角标记，标注让到右侧
-      dx: isPart2.value ? 34 : 0,
-    },
-  ];
+    });
+  }
 
   if (mode === "part1" && step >= 2) {
     list.push(
@@ -215,7 +224,11 @@ const labels = computed<FigLabel[]>(() => {
   if (isPart2.value && step >= 2) {
     list.push(
       { key: "X", tex: "X", x: X_PT.x, y: X_PT.y, anchor: "left", size: 16, dx: -6 },
-      { key: "M", tex: "M", x: M_PT.x, y: M_PT.y, anchor: "bottom-left", size: 15 },
+      // M 在底边中点上：标注下移让开 XM 的直角标记
+      { key: "M", tex: "M", x: M_PT.x, y: M_PT.y, anchor: "bottom", size: 15, dy: 8 },
+      // M 是 OC 中点 ⟹ CM = MO = L（左栏正文"设 M 为 OC 中点，CM = L"与之对应）
+      { key: "CM", tex: "L", x: (C_PT.x + M_PT.x) / 2, y: Y0, anchor: "bottom", size: 15 },
+      { key: "MO", tex: "L", x: (M_PT.x + O_PT.x) / 2, y: Y0, anchor: "bottom", size: 15 },
       { key: "angC", tex: "\\angle C", x: 148, y: 160, anchor: "center", size: 16 },
     );
   }
@@ -231,7 +244,6 @@ const labels = computed<FigLabel[]>(() => {
         size: 16,
         color: "var(--c-accent)",
       },
-      { key: "CM", tex: "L", x: (C_PT.x + M_PT.x) / 2, y: Y0, anchor: "bottom", size: 15 },
       {
         key: "sinC",
         tex: "\\sin\\angle C = \\dfrac{L}{r}",
@@ -416,6 +428,7 @@ const labels = computed<FigLabel[]>(() => {
       :size="l.size"
       :color="l.color ?? 'var(--c-text)'"
       :dx="l.dx ?? 0"
+      :dy="l.dy ?? 0"
       halo
     />
   </div>

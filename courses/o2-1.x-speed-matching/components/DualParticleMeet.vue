@@ -44,36 +44,50 @@ const { mode = "stem", step = 0 } = defineProps<{
   step?: number;
 }>();
 
+/** 画布上的点（viewBox 用户单位） */
+interface Pt {
+  x: number;
+  y: number;
+}
+
+/** 一条箭头的两端 */
+interface ArrowEnds {
+  from: Pt;
+  to: Pt;
+}
+
 /* ═══════════ 版面常量（viewBox 用户单位，按 16px 体系） ═══════════ */
-/** 画幅 + 原点 + L₀ 的像素长：三页右栏宽度不同，各给一套 */
-const VIEW = computed(() => {
-  if (mode === "alpha") {
-    return { w: 500, h: 470, ox: 296, oy: 235, s: 148 };
-  }
-  if (mode === "proton") {
-    return { w: 480, h: 420, ox: 240, oy: 205, s: 176 };
-  }
-  return { w: 540, h: 360, ox: 270, oy: 190, s: 150 };
-});
+/** 画幅 w/h + 原点 (ox, oy) + L₀ 的像素长 s：三页右栏宽度不同，各给一套 */
+const VIEW = computed(() =>
+  mode === "alpha"
+    ? { w: 500, h: 470, ox: 296, oy: 235, s: 148 }
+    : mode === "proton"
+      ? { w: 480, h: 420, ox: 240, oy: 205, s: 176 }
+      : { w: 540, h: 360, ox: 270, oy: 190, s: 150 },
+);
 
 /** 坐标轴两端（负半轴比正半轴略短，箭头尖端落在端点） */
-const AXIS = computed(() => {
-  if (mode === "alpha") return { x0: 34, x1: 470, y0: 452, y1: 24 };
-  if (mode === "proton") return { x0: 30, x1: 452, y0: 404, y1: 24 };
-  return { x0: 36, x1: 508, y0: 338, y1: 28 };
-});
+const AXIS = computed(() =>
+  mode === "alpha"
+    ? { x0: 34, x1: 470, y0: 452, y1: 24 }
+    : mode === "proton"
+      ? { x0: 30, x1: 452, y0: 404, y1: 24 }
+      : { x0: 36, x1: 508, y0: 338, y1: 28 },
+);
 
 /** · 点阵：铺满整幅画布的匀强磁场（间距 30、记号半长 5） */
-const DOTS = computed(() => {
-  if (mode === "alpha") return { x: 44, y: 46, cols: 15, rows: 13 };
-  if (mode === "proton") return { x: 44, y: 46, cols: 14, rows: 12 };
-  return { x: 46, y: 52, cols: 16, rows: 10 };
-});
+const DOTS = computed(() =>
+  mode === "alpha"
+    ? { x: 44, y: 46, cols: 15, rows: 13 }
+    : mode === "proton"
+      ? { x: 44, y: 46, cols: 14, rows: 12 }
+      : { x: 46, y: 52, cols: 16, rows: 10 },
+);
 
 /** 字体：量用 KaTeX_Math（斜体）、单位/点名用 KaTeX_Main（正体） */
 const MATH_FONT = "KaTeX_Math, 'Times New Roman', serif";
 
-/** α 小弧（C₁ 下侧、圆心角 π/2）与蓝；α 大弧（C₂ 上侧、圆心角 3π/2）与青 */
+/** α 小弧（C₁ 下侧、圆心角 π/2）配蓝；α 大弧（C₂ 上侧、圆心角 3π/2）配青 */
 const SMALL_COLOR = "var(--c-velocity)";
 const LARGE_COLOR = "var(--c-physics)";
 
@@ -81,23 +95,36 @@ const LARGE_COLOR = "var(--c-physics)";
 const R_ALPHA = 1 / Math.SQRT2;
 
 /* ═══════════ 坐标换算与几何工具 ═══════════ */
-const O = computed(() => ({ x: VIEW.value.ox, y: VIEW.value.oy }));
-const W = computed(() => VIEW.value.w);
-const H = computed(() => VIEW.value.h);
+const O = computed<Pt>(() => ({ x: VIEW.value.ox, y: VIEW.value.oy }));
+const W = computed<number>(() => VIEW.value.w);
+const H = computed<number>(() => VIEW.value.h);
 
 /** 数学坐标（y 向上，单位 L₀）→ SVG 坐标（y 向下） */
-const P = (mx: number, my: number) => ({
+const toSvg = (mx: number, my: number): Pt => ({
   x: O.value.x + mx * VIEW.value.s,
   y: O.value.y - my * VIEW.value.s,
 });
 
-/** 顺时针圆弧（数学坐标下 φ 从 phi0 递减到 phi1）采样成折线 */
-const arcPath = (cx: number, cy: number, r: number, phi0: number, phi1: number, n = 64): string => {
+interface ArcOptions {
+  /** 圆心（数学坐标，单位 L₀） */
+  cx: number;
+  cy: number;
+  /** 半径（单位 L₀） */
+  r: number;
+  /** 起 / 止极角（数学坐标，顺时针走 ⟹ phi1 < phi0） */
+  phi0: number;
+  phi1: number;
+  /** 采样段数 */
+  n?: number;
+}
+
+/** 顺时针圆弧采样成折线（比手写 A 命令直观，不用纠结 sweep-flag 的朝向） */
+const arcPath = ({ cx, cy, r, phi0, phi1, n = 64 }: ArcOptions): string => {
   const points: string[] = [];
 
   for (let i = 0; i <= n; i += 1) {
     const phi = phi0 + ((phi1 - phi0) * i) / n;
-    const p = P(cx + r * Math.cos(phi), cy + r * Math.sin(phi));
+    const p = toSvg(cx + r * Math.cos(phi), cy + r * Math.sin(phi));
 
     points.push(`${i === 0 ? "M" : "L"}${p.x.toFixed(1)},${p.y.toFixed(1)}`);
   }
@@ -105,12 +132,20 @@ const arcPath = (cx: number, cy: number, r: number, phi0: number, phi1: number, 
   return points.join(" ");
 };
 
+interface TangentOptions extends ArcOptions {
+  /** 箭头半长（px） */
+  half?: number;
+  /** 整体沿外法向外移（px）：0 = 压在轨迹上，>0 = 浮在轨迹外侧 */
+  offset?: number;
+}
+
 /**
- * 轨迹上的运动方向箭头：在极角 φ 处沿顺时针切向画一小段直箭头，并整体外移 offset。 数学切向 = (sinφ, −cosφ)，翻到 SVG 后 = (sinφ, cosφ)；外法向从
- * (cosφ, sinφ) 翻成 (cosφ, −sinφ)。
+ * 轨迹上的运动方向箭头：在极角 φ 处沿顺时针切向画一小段直箭头，并整体外移 offset。
+ *
+ * 数学切向 = (sinφ, −cosφ)，翻到 SVG 后 = (sinφ, cosφ)； 外法向从 (cosφ, sinφ) 翻成 (cosφ, −sinφ)。
  */
-const tangentArrow = (cx: number, cy: number, r: number, phi: number, half = 17, offset = 8) => {
-  const p = P(cx + r * Math.cos(phi), cy + r * Math.sin(phi));
+const tangentArrow = ({ cx, cy, r, phi, half = 17, offset = 8 }: TangentOptions): ArrowEnds => {
+  const p = toSvg(cx + r * Math.cos(phi), cy + r * Math.sin(phi));
   const dir = { x: Math.sin(phi), y: Math.cos(phi) };
   const out = { x: Math.cos(phi), y: -Math.sin(phi) };
   const base = { x: p.x + out.x * offset, y: p.y + out.y * offset };
@@ -123,53 +158,82 @@ const tangentArrow = (cx: number, cy: number, r: number, phi: number, half = 17,
 
 /* ═══════════ 题给元素（三页常显） ═══════════ */
 /** α 粒子入射点 (−L₀, 0) 与质子入射点 (L₀, 0) */
-const ALPHA_ENTRY = computed(() => P(-1, 0));
-const PROTON_ENTRY = computed(() => P(1, 0));
+const ALPHA_ENTRY = computed<Pt>(() => toSvg(-1, 0));
+const PROTON_ENTRY = computed<Pt>(() => toSvg(1, 0));
 /** 质子沿 −y 射入的速度箭头（画在题图的入场点旁） */
-const PROTON_VEL_TIP = computed(() => ({ x: PROTON_ENTRY.value.x, y: PROTON_ENTRY.value.y + 52 }));
+const PROTON_VEL_TIP = computed<Pt>(() => ({
+  x: PROTON_ENTRY.value.x,
+  y: PROTON_ENTRY.value.y + 52,
+}));
 
 /* ═══════════ 质子（第 33 页） ═══════════ */
 /** 圆心 C = (L₀/2, 0)、半径 r_p = L₀/2：圆过 (L₀,0) 与原点 */
-const PROTON_C = computed(() => P(0.5, 0));
-const PROTON_R = computed(() => VIEW.value.s / 2);
+const PROTON_C = computed<Pt>(() => toSvg(0.5, 0));
+const PROTON_R = computed<number>(() => VIEW.value.s / 2);
 /** 从 (L₀,0) 顺时针转过半圈到原点（φ 从 0 减到 −π） */
-const PROTON_TRAVEL = computed(() => arcPath(0.5, 0, 0.5, 0, -Math.PI));
-/** 轨迹最低点的顺时针方向箭头（最低点处运动方向朝 −x） */
-const PROTON_TANGENT = computed(() => tangentArrow(0.5, 0, 0.5, -Math.PI / 2, 19, 0));
+const PROTON_TRAVEL = computed<string>(() =>
+  arcPath({ cx: 0.5, cy: 0, r: 0.5, phi0: 0, phi1: -Math.PI }),
+);
+/** 轨迹最低点的顺时针方向箭头：压在弧上，方向朝 −x */
+const PROTON_TANGENT = computed<ArrowEnds>(() =>
+  tangentArrow({ cx: 0.5, cy: 0, r: 0.5, phi: -Math.PI / 2, half: 19, offset: 0 }),
+);
 /** 直径 O→(L₀,0)：两段半径都落在这条线上，r_p 标注在它上方 */
-const PROTON_DIAMETER = computed(() => ({ from: P(0, 0), to: P(1, 0) }));
+const PROTON_DIAMETER = computed<ArrowEnds>(() => ({ from: toSvg(0, 0), to: toSvg(1, 0) }));
 
 /* ═══════════ α 粒子（第 34、35 页） ═══════════ */
 /** 两个镜像圆心：C₁ = (−L₀/2, −L₀/2)（小弧）、C₂ = (−L₀/2, L₀/2)（大弧） */
-const C1 = computed(() => P(-0.5, -0.5));
-const C2 = computed(() => P(-0.5, 0.5));
-/** 从 (−L₀,0) 顺时针走到原点的两段弧 */
-const SMALL_ARC = computed(() => arcPath(-0.5, -0.5, R_ALPHA, (3 * Math.PI) / 4, Math.PI / 4));
-const LARGE_ARC = computed(() => arcPath(-0.5, 0.5, R_ALPHA, (5 * Math.PI) / 4, -Math.PI / 4));
-/** 两段弧的圆心角弧线标记（半径 30px，先不标数字） */
-const ANGLE_SMALL = computed(() =>
-  arcPath(-0.5, -0.5, 26 / VIEW.value.s, (3 * Math.PI) / 4, Math.PI / 4, 16),
+const C1 = computed<Pt>(() => toSvg(-0.5, -0.5));
+const C2 = computed<Pt>(() => toSvg(-0.5, 0.5));
+/** 从 (−L₀,0) 顺时针走到原点的两段弧（小弧扫 90°、大弧扫 270°） */
+const SMALL_ARC = computed<string>(() =>
+  arcPath({ cx: -0.5, cy: -0.5, r: R_ALPHA, phi0: (3 * Math.PI) / 4, phi1: Math.PI / 4 }),
 );
-const ANGLE_LARGE = computed(() =>
-  arcPath(-0.5, 0.5, 26 / VIEW.value.s, (5 * Math.PI) / 4, -Math.PI / 4, 72),
+const LARGE_ARC = computed<string>(() =>
+  arcPath({ cx: -0.5, cy: 0.5, r: R_ALPHA, phi0: (5 * Math.PI) / 4, phi1: -Math.PI / 4 }),
 );
-/** 两段弧顶点的顺时针方向箭头 */
-const SMALL_TANGENT = computed(() => tangentArrow(-0.5, -0.5, R_ALPHA, Math.PI / 2, 17, 8));
-const LARGE_TANGENT = computed(() => tangentArrow(-0.5, 0.5, R_ALPHA, Math.PI / 2, 17, 7));
+/** 两段弧的圆心角弧线标记（半径 26px，先不标数字） */
+const ANGLE_SMALL = computed<string>(() =>
+  arcPath({
+    cx: -0.5,
+    cy: -0.5,
+    r: 26 / VIEW.value.s,
+    phi0: (3 * Math.PI) / 4,
+    phi1: Math.PI / 4,
+    n: 16,
+  }),
+);
+const ANGLE_LARGE = computed<string>(() =>
+  arcPath({
+    cx: -0.5,
+    cy: 0.5,
+    r: 26 / VIEW.value.s,
+    phi0: (5 * Math.PI) / 4,
+    phi1: -Math.PI / 4,
+    n: 72,
+  }),
+);
+/** 两段弧顶点的顺时针方向箭头（浮在弧外侧） */
+const SMALL_TANGENT = computed<ArrowEnds>(() =>
+  tangentArrow({ cx: -0.5, cy: -0.5, r: R_ALPHA, phi: Math.PI / 2, offset: 8 }),
+);
+const LARGE_TANGENT = computed<ArrowEnds>(() =>
+  tangentArrow({ cx: -0.5, cy: 0.5, r: R_ALPHA, phi: Math.PI / 2, offset: 7 }),
+);
 /** 圆心到弦（(−L₀,0)→O）两端的四条半径线 */
-const RADII = computed(() => [
+const RADII = computed<({ key: string } & ArrowEnds)[]>(() => [
   { key: "c1-a", from: C1.value, to: ALPHA_ENTRY.value },
   { key: "c1-o", from: C1.value, to: O.value },
   { key: "c2-a", from: C2.value, to: ALPHA_ENTRY.value },
   { key: "c2-o", from: C2.value, to: O.value },
 ]);
 /** 弦 (−L₀,0)→O 就是 x 轴上的一段，用 accent 加粗高亮它 */
-const CHORD = computed(() => ({ from: ALPHA_ENTRY.value, to: O.value }));
+const CHORD = computed<ArrowEnds>(() => ({ from: ALPHA_ENTRY.value, to: O.value }));
 
 /** 从 (−L₀,0) 出发、数学方向角 deg 的入射速度箭头（长度 46px；y 翻转后 dy 取负） */
-const entryVelocity = (deg: number) => {
+const entryVelocity = (deg: number): ArrowEnds => {
   const angle = (deg * Math.PI) / 180;
-  const start = P(-1, 0);
+  const start = toSvg(-1, 0);
 
   return {
     from: start,
@@ -177,81 +241,135 @@ const entryVelocity = (deg: number) => {
   };
 };
 /** 小弧（C₁）：入射向右上 45°；大弧（C₂）：入射向左上 135° */
-const VEL_SMALL = computed(() => entryVelocity(45));
-const VEL_LARGE = computed(() => entryVelocity(135));
+const VEL_SMALL = computed<ArrowEnds>(() => entryVelocity(45));
+const VEL_LARGE = computed<ArrowEnds>(() => entryVelocity(135));
 
 /* ═══════════ 图内标注（ChartLabel 按容器百分比定位，字号屏幕 px 口径） ═══════════ */
 const pctX = (x: number): number => (x / W.value) * 100;
 const pctY = (y: number): number => (y / H.value) * 100;
 
-interface FigLabel {
+interface LabelSpec {
   key: string;
+  /** KaTeX 源码（带下标 / 分式的量一律走 ChartLabel，SVG <text> 排不了） */
   tex: string;
-  /** 标注中心（viewBox 用户单位） */
+  /** 文字中心（viewBox 用户单位）——位置避开轨迹与辅助线，见各条的注释 */
   x: number;
   y: number;
-  color: string;
-  size: number;
-  /** Step ≥ from 才出现 */
-  from: number;
+  /** Step ≥ from 才出现，默认 0 */
+  from?: number;
+  color?: string;
+  size?: number;
 }
 
-/** 标注点都是"文字中心"，位置按各自画幅的空白区选定（见各条注释） */
-const LABELS = computed<FigLabel[]>(() => {
-  const labels: FigLabel[] = [];
-  const mark = (
-    key: string,
-    tex: string,
-    x: number,
-    y: number,
-    from = 0,
-    color = "var(--c-text)",
-    size = 15,
-  ) => labels.push({ key, tex, x, y, from, color, size });
+type FigLabel = Required<LabelSpec>;
 
-  if (mode === "alpha") {
-    /* ── 干净图上的点名（常显）── */
-    mark("O", "O", O.value.x, O.value.y + 24, 0, "var(--c-text)", 15);
-    mark("minus-l0", "-L_0", 114, 224, 0, "var(--c-text)", 15);
-    mark("alpha", "\\alpha", 150, 259, 0, "var(--c-text)", 16);
-    mark("l0", "L_0", 429, 257, 0, "var(--c-text)", 15);
-    mark("vp", "v_p", 473, 267, 0, "var(--c-velocity)", 16);
-    /* ── step ≥1：两条可能的入射方向 ── */
-    mark("v-small", "v_\\alpha", 169, 191, 1, SMALL_COLOR, 15);
-    mark("v-large", "v_\\alpha", 104, 193, 1, LARGE_COLOR, 15);
-    /* ── step ≥2：两个圆心、半径符号、弦长 ── */
-    mark("C1", "C_1", 191, 318, 2, "var(--c-text)", 16);
-    mark("C2", "C_2", 184, 150, 2, "var(--c-text)", 16);
-    mark("r-alpha", "r_\\alpha", 159, 185, 2, "var(--c-text-dim)", 15);
-    mark("chord", "L_0", 222, 250, 2, "var(--c-accent)", 15);
-    /* ── step ≥3：圆心角数字 ── */
-    mark("theta-small", "\\theta=\\dfrac{\\pi}{2}", 288, 294, 3, "var(--c-accent)", 15);
-    mark("theta-large", "\\theta=\\dfrac{3\\pi}{2}", 222, 110, 3, "var(--c-accent)", 15);
-    /* ── step ≥4：两条路径各自的用时 ── */
-    mark("t-small", "t=\\dfrac{\\pi m}{eB}", 150, 437, 4, SMALL_COLOR, 16);
-    mark("t-large", "t=\\dfrac{3\\pi m}{eB}", 360, 437, 4, LARGE_COLOR, 16);
-  } else if (mode === "proton") {
-    /* ── 干净图上的点名（常显）── */
-    mark("O", "O", O.value.x, O.value.y + 24, 0, "var(--c-text)", 15);
-    mark("minus-l0", "-L_0", 64, 227, 0, "var(--c-text)", 15);
-    mark("alpha", "\\alpha", 64, 183, 0, "var(--c-text)", 16);
-    mark("l0", "L_0", 401, 227, 0, "var(--c-text)", 15);
-    mark("vp", "v_p", 445, 237, 0, "var(--c-velocity)", 16);
-    /* ── step ≥1：圆心 C；step ≥2：半径 r_p 与半圈用时 ── */
-    mark("C", "C", 348, 225, 1, "var(--c-text)", 16);
-    mark("rp", "r_p=L_0/2", 288, 190, 2, "var(--c-accent)", 15);
-    mark("tp", "t=\\dfrac{\\pi m}{eB}", 328, 341, 2, "var(--c-accent)", 16);
-  } else {
-    /* ── 干净题干图（第 32 页）的点名：−L₀ / L₀ 标在两点正下方，α 标在入射点上方 ── */
-    mark("O", "O", O.value.x, O.value.y + 24, 0, "var(--c-text)", 15);
-    mark("minus-l0", "-L_0", 120, 212, 0, "var(--c-text)", 15);
-    mark("l0", "L_0", 405, 212, 0, "var(--c-text)", 15);
-    mark("alpha", "\\alpha", 120, 168, 0, "var(--c-text)", 16);
-    mark("vp", "v_p", 446, 222, 0, "var(--c-velocity)", 16);
-  }
+/**
+ * 三套标注（坐标按各页画幅手排；标注点 = 文字中心）。
+ *
+ * - Stem / proton 的干净图：−L₀、L₀ 标在入射点下方，α 标在 α 入射点上方，v_p 标在速度箭头右侧。
+ * - Proton：C 标在圆心的右下方、r_p 标在直径上方（避开圆周）、半圈用时标在圆的底部外侧。
+ * - Alpha：C₁/C₂ 标在圆心外侧（避开圆心角弧线）、r_α 在 C₂→O 半径右侧、弦长 L₀ 在弦下方。
+ * - Alpha：θ 标在角弧旁，两条路径的用时放在画幅底部（颜色与两段弧一一对应）。
+ */
+const FIG_LABELS: Record<"stem" | "proton" | "alpha", LabelSpec[]> = {
+  alpha: [
+    /* 干净图上的点名（常显） */
+    { key: "O", tex: String.raw`O`, x: 296, y: 259 },
+    { key: "minus-l0", tex: String.raw`-L_0`, x: 114, y: 224 },
+    { key: "alpha", tex: String.raw`\alpha`, x: 150, y: 259, size: 16 },
+    { key: "l0", tex: String.raw`L_0`, x: 429, y: 257 },
+    { key: "vp", tex: String.raw`v_p`, x: 473, y: 267, color: "var(--c-velocity)", size: 16 },
+    /* step ≥1：两条可能的入射方向 */
+    { key: "v-small", tex: String.raw`v_\alpha`, x: 169, y: 191, from: 1, color: SMALL_COLOR },
+    { key: "v-large", tex: String.raw`v_\alpha`, x: 104, y: 193, from: 1, color: LARGE_COLOR },
+    /* step ≥2：两个圆心、半径符号、弦长 */
+    { key: "c1", tex: String.raw`C_1`, x: 191, y: 318, from: 2, size: 16 },
+    { key: "c2", tex: String.raw`C_2`, x: 184, y: 150, from: 2, size: 16 },
+    {
+      key: "r-alpha",
+      tex: String.raw`r_\alpha`,
+      x: 270,
+      y: 187,
+      from: 2,
+      color: "var(--c-text-dim)",
+    },
+    { key: "chord", tex: String.raw`L_0`, x: 222, y: 250, from: 2, color: "var(--c-accent)" },
+    /* step ≥3：圆心角数字 */
+    {
+      key: "theta-small",
+      tex: String.raw`\theta=\pi/2`,
+      x: 268,
+      y: 300,
+      from: 3,
+      color: "var(--c-accent)",
+    },
+    {
+      key: "theta-large",
+      tex: String.raw`\theta=3\pi/2`,
+      x: 222,
+      y: 118,
+      from: 3,
+      color: "var(--c-accent)",
+    },
+    /* step ≥4：两条路径各自的用时 */
+    {
+      key: "t-small",
+      tex: String.raw`t=\dfrac{\pi m}{eB}`,
+      x: 150,
+      y: 437,
+      from: 4,
+      color: SMALL_COLOR,
+      size: 16,
+    },
+    {
+      key: "t-large",
+      tex: String.raw`t=\dfrac{3\pi m}{eB}`,
+      x: 360,
+      y: 437,
+      from: 4,
+      color: LARGE_COLOR,
+      size: 16,
+    },
+  ],
+  proton: [
+    { key: "O", tex: String.raw`O`, x: 240, y: 229 },
+    { key: "minus-l0", tex: String.raw`-L_0`, x: 64, y: 227 },
+    { key: "alpha", tex: String.raw`\alpha`, x: 64, y: 183, size: 16 },
+    { key: "l0", tex: String.raw`L_0`, x: 401, y: 227 },
+    { key: "vp", tex: String.raw`v_p`, x: 445, y: 237, color: "var(--c-velocity)", size: 16 },
+    { key: "c", tex: String.raw`C`, x: 348, y: 225, from: 1, size: 16 },
+    { key: "rp", tex: String.raw`r_p=L_0/2`, x: 292, y: 182, from: 2, color: "var(--c-accent)" },
+    {
+      key: "tp",
+      tex: String.raw`t=\dfrac{\pi m}{eB}`,
+      x: 328,
+      y: 341,
+      from: 2,
+      color: "var(--c-accent)",
+      size: 16,
+    },
+  ],
+  stem: [
+    { key: "O", tex: String.raw`O`, x: 270, y: 214 },
+    { key: "minus-l0", tex: String.raw`-L_0`, x: 120, y: 212 },
+    { key: "l0", tex: String.raw`L_0`, x: 405, y: 212 },
+    { key: "alpha", tex: String.raw`\alpha`, x: 120, y: 168, size: 16 },
+    { key: "vp", tex: String.raw`v_p`, x: 446, y: 222, color: "var(--c-velocity)", size: 16 },
+  ],
+};
 
-  return labels;
-});
+/** 补上默认的字号 / 颜色 / 起始步 */
+const LABELS = computed<FigLabel[]>(() =>
+  FIG_LABELS[mode].map((label) => ({
+    key: label.key,
+    tex: label.tex,
+    x: label.x,
+    y: label.y,
+    from: label.from ?? 0,
+    color: label.color ?? "var(--c-text)",
+    size: label.size ?? 15,
+  })),
+);
 </script>
 
 <template>
@@ -336,7 +454,7 @@ const LABELS = computed<FigLabel[]>(() => {
         />
       </g>
 
-      <!-- ④ 质子（step ≥2）：直径上的两段半径（过 O 与 (L₀,0)）、原点经过点高亮 -->
+      <!-- ④ 质子（step ≥2）：直径上的两段半径（过 O 与 (L₀,0)） -->
       <g v-if="mode === 'proton' && step >= 2">
         <line
           :x1="PROTON_DIAMETER.from.x"
@@ -348,8 +466,6 @@ const LABELS = computed<FigLabel[]>(() => {
           stroke-linecap="round"
           opacity="0.55"
         />
-        <circle :cx="O.x" :cy="O.y" r="11" fill="none" stroke="var(--c-accent)" stroke-width="2" />
-        <circle :cx="O.x" :cy="O.y" r="5" fill="var(--c-accent)" />
       </g>
 
       <!-- ⑤ α（第 34 页 step ≥1）：两条镜像圆周（虚线淡）+ 两段实际走过的弧（实线）+ 两个入射方向 + 方向箭头 -->
@@ -465,9 +581,15 @@ const LABELS = computed<FigLabel[]>(() => {
         :stroke-width="3"
       />
       <circle :cx="O.x" :cy="O.y" r="3.4" fill="var(--c-text)" />
+
+      <!-- ⑧ 质子（step ≥2）：原点经过点高亮 —— 画在原点白点之上，accent 圆点 + 高亮环 -->
+      <g v-if="mode === 'proton' && step >= 2">
+        <circle :cx="O.x" :cy="O.y" r="11" fill="none" stroke="var(--c-accent)" stroke-width="2" />
+        <circle :cx="O.x" :cy="O.y" r="5" fill="var(--c-accent)" />
+      </g>
     </svg>
 
-    <!-- ⑧ 图内标注：真 KaTeX 覆盖层（带下标 / 分式的量必须走这里） -->
+    <!-- ⑨ 图内标注：真 KaTeX 覆盖层（带下标 / 分式的量必须走这里） -->
     <ChartLabel
       v-for="label in LABELS"
       :key="label.key"
