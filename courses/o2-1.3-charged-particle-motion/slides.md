@@ -1133,7 +1133,7 @@ layout: base-flex
 
 <div class="stack stack-tight" style="gap:.75rem;font-size:.95em">
 
-<div><b>例 7</b>　如图，平面直角坐标系 <Latex tex="xOy" /> 中，第 I 象限内存在沿 <Latex tex="y" /> 轴负方向的匀强电场，场强大小为 <Latex tex="E" />；第 II、III、IV 象限内均存在垂直纸面向外的匀强磁场，磁感应强度大小为 <Latex tex="B" />。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="+q" /> 的粒子（不计重力）从 <Latex tex="y" /> 轴正半轴上的 <Latex tex="P(0, b)" /> 点以水平向右的初速度 <Latex tex="v_0" /> 射入第一象限，经 <Latex tex="x" /> 轴上的 <Latex tex="Q(a, 0)" /> 点进入第四象限。</div>
+<div><b>例 3</b>　如图，平面直角坐标系 <Latex tex="xOy" /> 中，第 I 象限内存在沿 <Latex tex="y" /> 轴负方向的匀强电场，场强大小为 <Latex tex="E" />；第 II、III、IV 象限内均存在垂直纸面向外的匀强磁场，磁感应强度大小为 <Latex tex="B" />。一质量为 <Latex tex="m" />、电荷量为 <Latex tex="+q" /> 的粒子（不计重力）从 <Latex tex="y" /> 轴正半轴上的 <Latex tex="P(0, b)" /> 点以水平向右的初速度 <Latex tex="v_0" /> 射入第一象限，经 <Latex tex="x" /> 轴上的 <Latex tex="Q(a, 0)" /> 点进入第四象限。</div>
 
 <div>(1) 求电场强度 <Latex tex="E" /> 的大小；</div>
 
@@ -1159,7 +1159,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
 
-<div><b>例 7（1）</b>　第一象限内是类平抛</div>
+<div><b>例 3（1）</b>　第一象限内是类平抛</div>
 
 <div v-click="1">水平方向匀速：<Latex tex="v_0 t_1 = a" />，得 <Latex tex="t_1 = \dfrac{a}{v_0}" />；竖直方向初速度为零、受力恒为 <Latex tex="qE" />，于是 <Latex tex="b = \dfrac{1}{2}\cdot\dfrac{qE}{m}\,t_1^2" />。</div>
 
@@ -1185,7 +1185,7 @@ clicks: 3
 
 <div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
 
-<div><b>例 7（2）</b>　到 <Latex tex="Q" /> 点的速度与圆周半径</div>
+<div><b>例 3（2）</b>　到 <Latex tex="Q" /> 点的速度与圆周半径</div>
 
 <div v-click="1">过 <Latex tex="Q" /> 时：<Latex tex="v_x = v_0" />，<Latex tex="v_y = \dfrac{qE}{m}t_1 = \dfrac{2b v_0}{a}" />，故 <Latex tex="v = \dfrac{v_0}{a}\sqrt{a^2+4b^2}" />，<Latex tex="\sin\theta = \dfrac{2b}{\sqrt{a^2+4b^2}}" />。</div>
 
@@ -1211,7 +1211,7 @@ clicks: 3
 
 <div class="stack stack-tight" style="gap:.6rem;font-size:.92em">
 
-<div><b>例 7（2）</b>　回到 <Latex tex="y" /> 轴时的速度方向</div>
+<div><b>例 3（2）</b>　回到 <Latex tex="y" /> 轴时的速度方向</div>
 
 <div v-click="1">回到 <Latex tex="+y" /> 轴处，速度是顺时针轨迹的切线：<b>水平分量向右</b>。要与 <Latex tex="+y" /> 轴夹角小于 <Latex tex="90^\circ" />，竖直分量必须<b>向上</b>，即圆心横坐标 <Latex tex="x_C = a - R\sin\theta > 0" />。</div>
 
@@ -1239,7 +1239,7 @@ layout: base-flex
 
 <div class="stack stack-tight" style="gap:1.1rem;font-size:.95em">
 
-<div><b class="ex-no">例 8</b>（多选）如图所示，左、右边界分别为 <Latex tex="PP'" />、<Latex tex="QQ'" /> 的匀强磁场的宽度为 <Latex tex="d" />，磁感应强度大小为 <Latex tex="B" />，方向垂直于纸面向里。一个质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" /> 的粒子从 <Latex tex="PP'" /> 边界上的某处沿图示方向以速度 <Latex tex="v_0" /> 垂直于磁场方向射入磁场。欲使粒子不能从边界 <Latex tex="QQ'" /> 射出，粒子入射速度 <Latex tex="v_0" /> 的最大值可能是（　　）</div>
+<div><b class="ex-no">例 4</b>（多选）如图所示，左、右边界分别为 <Latex tex="PP'" />、<Latex tex="QQ'" /> 的匀强磁场的宽度为 <Latex tex="d" />，磁感应强度大小为 <Latex tex="B" />，方向垂直于纸面向里。一个质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" /> 的粒子从 <Latex tex="PP'" /> 边界上的某处沿图示方向以速度 <Latex tex="v_0" /> 垂直于磁场方向射入磁场。欲使粒子不能从边界 <Latex tex="QQ'" /> 射出，粒子入射速度 <Latex tex="v_0" /> 的最大值可能是（　　）</div>
 
 <div class="ex-options">
 
@@ -1270,7 +1270,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.6rem;font-size:.92em">
 
-<div><b>例 8（一）</b>　若粒子带正电：圆心在 <Latex tex="PP'" /> 左侧</div>
+<div><b>例 4（一）</b>　若粒子带正电：圆心在 <Latex tex="PP'" /> 左侧</div>
 
 <div v-click="1">速度斜向右上，洛伦兹力指向左上方，轨迹向左上方弯曲；<Latex tex="v_0" /> 越大、半径越大，轨迹向右伸得越远。轨迹恰与 <Latex tex="QQ'" /> 相切时，<Latex tex="v_0" /> 最大。</div>
 
@@ -1294,7 +1294,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.6rem;font-size:.92em">
 
-<div><b>例 8（二）</b>　若粒子带负电：圆心在 <Latex tex="PP'" /> 右侧</div>
+<div><b>例 4（二）</b>　若粒子带负电：圆心在 <Latex tex="PP'" /> 右侧</div>
 
 <div v-click="1">洛伦兹力指向右下方，轨迹向右下方弯曲，圆心 <Latex tex="O'" /> 落在磁场内。同样是轨迹右端与 <Latex tex="QQ'" /> 相切时 <Latex tex="v_0" /> 最大。</div>
 
@@ -1320,7 +1320,7 @@ layout: base-flex
 
 <div class="stack stack-tight" style="gap:1.1rem;font-size:.92em">
 
-<div><b class="ex-no">例 9</b>　如图所示，在 <Latex tex="xOy" /> 平面的第 I、IV 象限内有一圆心为 <Latex tex="O" />、半径为 <Latex tex="R" /> 的半圆形匀强磁场（边界无磁场），线状粒子源从 <Latex tex="y" /> 轴左侧平行于 <Latex tex="x" /> 轴正方向不断射出质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" />、速度大小为 <Latex tex="v_0" /> 的带正电的粒子。磁场的磁感应强度大小为 <Latex tex="\dfrac{mv_0}{2qR}" />、方向垂直于平面 <Latex tex="xOy" /> 向里。不考虑粒子间的相互作用，不计粒子受到的重力。所有从不同位置进入磁场的粒子中，在磁场中运动的时间最长为（　　）</div>
+<div><b class="ex-no">例 5</b>　如图所示，在 <Latex tex="xOy" /> 平面的第 I、IV 象限内有一圆心为 <Latex tex="O" />、半径为 <Latex tex="R" /> 的半圆形匀强磁场（边界无磁场），线状粒子源从 <Latex tex="y" /> 轴左侧平行于 <Latex tex="x" /> 轴正方向不断射出质量为 <Latex tex="m" />、电荷量为 <Latex tex="q" />、速度大小为 <Latex tex="v_0" /> 的带正电的粒子。磁场的磁感应强度大小为 <Latex tex="\dfrac{mv_0}{2qR}" />、方向垂直于平面 <Latex tex="xOy" /> 向里。不考虑粒子间的相互作用，不计粒子受到的重力。所有从不同位置进入磁场的粒子中，在磁场中运动的时间最长为（　　）</div>
 
 <div class="ex-options">
 
@@ -1351,7 +1351,7 @@ clicks: 3
 
 <div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
 
-<div><b>例 9</b>　圆心角越大，运动时间越长</div>
+<div><b>例 5</b>　圆心角越大，运动时间越长</div>
 
 <div v-click="1">由 <Latex tex="qv_0B = m\dfrac{v_0^2}{r}" /> 和 <Latex tex="B = \dfrac{mv_0}{2qR}" /> 得 <Latex tex="r = 2R" />。周期 <Latex tex="T = \dfrac{2\pi r}{v_0}" /> 与速度无关，运动时间只由轨迹对应的圆心角 <Latex tex="\alpha" /> 决定：<Latex tex="t = \dfrac{\alpha}{2\pi}T" />。</div>
 
@@ -1379,7 +1379,7 @@ layout: base-flex
 
 <div class="stack stack-tight" style="gap:1.1rem;font-size:.95em">
 
-<div><b class="ex-no">例 10</b>　如图所示，以直角三角形 <Latex tex="AOC" /> 为边界的匀强磁场区域中，磁感应强度为 <Latex tex="B" />，<Latex tex="CO = 2L" />，<Latex tex="AO = L" />。在 <Latex tex="O" /> 点放置一个粒子源，同时向磁场内各个方向均匀发射某种带正电的粒子（不计重力和粒子间的相互作用），粒子的比荷为 <Latex tex="\dfrac{q}{m}" />，发射速度大小都为 <Latex tex="v_0" />。</div>
+<div><b class="ex-no">例 6</b>　如图所示，以直角三角形 <Latex tex="AOC" /> 为边界的匀强磁场区域中，磁感应强度为 <Latex tex="B" />，<Latex tex="CO = 2L" />，<Latex tex="AO = L" />。在 <Latex tex="O" /> 点放置一个粒子源，同时向磁场内各个方向均匀发射某种带正电的粒子（不计重力和粒子间的相互作用），粒子的比荷为 <Latex tex="\dfrac{q}{m}" />，发射速度大小都为 <Latex tex="v_0" />。</div>
 
 <div>(1) 若 <Latex tex="v_0 = \dfrac{2qBL}{m}" />，沿 <Latex tex="OA" /> 方向射入的带电粒子经磁场偏转后从 <Latex tex="D" /> 点射出 <Latex tex="AC" /> 边界，求 <Latex tex="AD" /> 的长度；</div>
 
@@ -1405,7 +1405,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.6rem;font-size:.92em">
 
-<div><b>例 10（1）</b>　沿 <Latex tex="OA" /> 射入：圆心恰是 <Latex tex="C" /></div>
+<div><b>例 6（1）</b>　沿 <Latex tex="OA" /> 射入：圆心恰是 <Latex tex="C" /></div>
 
 <div v-click="1"><Latex tex="v_0 = \dfrac{2qBL}{m}" /> 时，<Latex tex="r = \dfrac{mv_0}{qB} = 2L" />。沿 <Latex tex="OA" /> 射入时洛伦兹力指向 <Latex tex="CO" /> 方向，圆心在 <Latex tex="CO" /> 上；而 <Latex tex="CO = 2L = r" />，所以 <Latex tex="C" /> 就是轨迹圆心。</div>
 
@@ -1429,7 +1429,7 @@ clicks: 3
 
 <div class="stack stack-tight" style="gap:.5rem;font-size:.92em">
 
-<div><b>例 10（2）</b>　要经过 <Latex tex="C" />：轨迹与 <Latex tex="AC" /> 相切于 <Latex tex="C" /></div>
+<div><b>例 6（2）</b>　要经过 <Latex tex="C" />：轨迹与 <Latex tex="AC" /> 相切于 <Latex tex="C" /></div>
 
 <div v-click="1">轨迹要同时过 <Latex tex="O" />、<Latex tex="C" />，又不能先穿出 <Latex tex="AC" />。临界情形：轨迹与 <Latex tex="AC" /> 相切于 <Latex tex="C" />，粒子恰好从 <Latex tex="C" /> 射出。</div>
 
@@ -1457,7 +1457,7 @@ layout: base-flex
 
 <div class="stack stack-tight" style="gap:1.1rem;font-size:.92em">
 
-<div><b class="ex-no">例 11</b>　如图所示，在水平面内存在半径为 <Latex tex="2R" /> 和半径为 <Latex tex="R" /> 的两个同心圆，半径为 <Latex tex="R" /> 的小圆和半径为 <Latex tex="2R" /> 的大圆之间形成一环形区域。小圆和环形区域内分别存在垂直于水平面、方向相反的匀强磁场，小圆内匀强磁场的磁感应强度大小为 <Latex tex="B" />。位于圆心处的粒子源 <Latex tex="S" /> 沿水平面向各个方向发射速率为 <Latex tex="\dfrac{qBR}{m}" /> 的带正电的粒子，粒子的电荷量为 <Latex tex="q" />、质量为 <Latex tex="m" />。为了将所有粒子束缚在半径为 <Latex tex="2R" /> 的圆内，环形区域的磁感应强度大小至少为（　　）</div>
+<div><b class="ex-no">例 7</b>　如图所示，在水平面内存在半径为 <Latex tex="2R" /> 和半径为 <Latex tex="R" /> 的两个同心圆，半径为 <Latex tex="R" /> 的小圆和半径为 <Latex tex="2R" /> 的大圆之间形成一环形区域。小圆和环形区域内分别存在垂直于水平面、方向相反的匀强磁场，小圆内匀强磁场的磁感应强度大小为 <Latex tex="B" />。位于圆心处的粒子源 <Latex tex="S" /> 沿水平面向各个方向发射速率为 <Latex tex="\dfrac{qBR}{m}" /> 的带正电的粒子，粒子的电荷量为 <Latex tex="q" />、质量为 <Latex tex="m" />。为了将所有粒子束缚在半径为 <Latex tex="2R" /> 的圆内，环形区域的磁感应强度大小至少为（　　）</div>
 
 <div class="ex-options">
 
@@ -1488,7 +1488,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.6rem;font-size:.92em">
 
-<div><b>例 11（一）</b>　小圆内：出射方向与半径成 <Latex tex="30^\circ" /></div>
+<div><b>例 7（一）</b>　小圆内：出射方向与半径成 <Latex tex="30^\circ" /></div>
 
 <div v-click="1">小圆内轨迹半径 <Latex tex="r_0 = \dfrac{mv}{qB} = R" />。轨迹圆过 <Latex tex="S" />，与边界圆交于出射点 <Latex tex="A" />。</div>
 
@@ -1512,7 +1512,7 @@ clicks: 3
 
 <div class="stack stack-tight" style="gap:.5rem;font-size:.92em">
 
-<div><b>例 11（二）</b>　环形区域内：轨迹圆恰与大圆相切</div>
+<div><b>例 7（二）</b>　环形区域内：轨迹圆恰与大圆相切</div>
 
 <div v-click="1">环形区域内磁场反向，轨迹反向弯曲、向外凸出。所有粒子进入环形区域时都与半径成 <Latex tex="30^\circ" />，各条轨迹只是彼此旋转的复制，所以"轨迹圆与大圆相切"就是最强的约束。</div>
 
@@ -1536,7 +1536,7 @@ layout: base-flex
 
 <div class="qp-page">
 
-<div><b class="ex-no">例 12</b>（多选）如图所示，匀强磁场的磁感应强度大小为 <Latex tex="B" />，方向垂直于 <Latex tex="xOy" /> 平面向外。某时刻一个质子从点 <Latex tex="(L_0, 0)" /> 处沿 <Latex tex="y" /> 轴负方向进入磁场；一个 <Latex tex="\alpha" /> 粒子同时从点 <Latex tex="(-L_0, 0)" /> 进入磁场，速度方向在 <Latex tex="xOy" /> 平面内。设质子的质量为 <Latex tex="m" />、电荷量为 <Latex tex="e" />，不计质子和 <Latex tex="\alpha" /> 粒子的重力以及它们之间的相互作用。若 <Latex tex="\alpha" /> 粒子第一次到达原点时恰能与质子相遇，已知质子和 <Latex tex="\alpha" /> 粒子都带正电，且 <Latex tex="\alpha" /> 粒子的质量是质子质量的 4 倍、<Latex tex="\alpha" /> 粒子带的电荷量是质子的 2 倍，则（　　）</div>
+<div><b class="ex-no">例 8</b>（多选）如图所示，匀强磁场的磁感应强度大小为 <Latex tex="B" />，方向垂直于 <Latex tex="xOy" /> 平面向外。某时刻一个质子从点 <Latex tex="(L_0, 0)" /> 处沿 <Latex tex="y" /> 轴负方向进入磁场；一个 <Latex tex="\alpha" /> 粒子同时从点 <Latex tex="(-L_0, 0)" /> 进入磁场，速度方向在 <Latex tex="xOy" /> 平面内。设质子的质量为 <Latex tex="m" />、电荷量为 <Latex tex="e" />，不计质子和 <Latex tex="\alpha" /> 粒子的重力以及它们之间的相互作用。若 <Latex tex="\alpha" /> 粒子第一次到达原点时恰能与质子相遇，已知质子和 <Latex tex="\alpha" /> 粒子都带正电，且 <Latex tex="\alpha" /> 粒子的质量是质子质量的 4 倍、<Latex tex="\alpha" /> 粒子带的电荷量是质子的 2 倍，则（　　）</div>
 
 <div class="half-grid items-center">
 
@@ -1567,7 +1567,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
 
-<div><b>例 12（一）</b>　质子过原点：半径只能是 <Latex tex="L_0/2" /></div>
+<div><b>例 8（一）</b>　质子过原点：半径只能是 <Latex tex="L_0/2" /></div>
 
 <div v-click="1">质子带正电、<Latex tex="B" /> 垂直纸面向外 ⟹ 沿<b>顺时针</b>做圆周运动，圆心在 <Latex tex="(L_0 - r_p,\ 0)" />。要与 <Latex tex="\alpha" /> 粒子在原点相遇，原点必须在质子轨迹上：<Latex tex="|L_0 - r_p| = r_p" />，得 <Latex tex="r_p = \dfrac{L_0}{2}" />。</div>
 
@@ -1591,7 +1591,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
 
-<div><b>例 12（二）</b>　<Latex tex="\alpha" /> 粒子：两条镜像路径</div>
+<div><b>例 8（二）</b>　<Latex tex="\alpha" /> 粒子：两条镜像路径</div>
 
 <div v-click="1"><Latex tex="\alpha" /> 粒子带正电、<Latex tex="B" /> 向外 ⟹ 也顺时针转；从 <Latex tex="(-L_0, 0)" /> 出发又经过原点的圆有两个（圆心在弦 <Latex tex="(-L_0,0)O" /> 的中垂线两侧），对应「先向右上」和「先向左上」两种入射方向。</div>
 
@@ -1615,7 +1615,7 @@ clicks: 2
 
 <div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
 
-<div><b>例 12（三）</b>　用「同时到达」定出 <Latex tex="\theta" /> 与 <Latex tex="r_\alpha" /></div>
+<div><b>例 8（三）</b>　用「同时到达」定出 <Latex tex="\theta" /> 与 <Latex tex="r_\alpha" /></div>
 
 <div v-click="1"><Latex tex="\alpha" /> 粒子的周期 <Latex tex="T_\alpha = \dfrac{2\pi\cdot 4m}{2eB} = \dfrac{4\pi m}{eB}" />，运动时间 <Latex tex="t_\alpha = \dfrac{\theta}{2\pi}T_\alpha = \dfrac{2\theta m}{eB}" />。相遇要求 <Latex tex="t_\alpha = t_p" />，即 <Latex tex="2\theta = (2n+1)\pi" />；又 <Latex tex="0 < \theta < 2\pi" />，故 <Latex tex="\theta = \dfrac{\pi}{2}" /> 或 <Latex tex="\dfrac{3\pi}{2}" />。</div>
 
