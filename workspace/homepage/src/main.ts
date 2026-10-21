@@ -2,6 +2,8 @@ import "./style.css";
 import { textbooks } from "./courses.config";
 import type { CourseMeta } from "./courses.config";
 import { coursePages } from "./pages.generated";
+import { escapeHtml, highlight, searchCourses } from "./search";
+import type { SearchHit } from "./search";
 
 /* ---------- 状态 ---------- */
 
@@ -25,6 +27,9 @@ const readSlugFromLocation = (): string => {
 
 let activeSlug = readSlugFromLocation();
 
+/** 搜索关键词（已 trim）；空串表示未搜索、按分册浏览 */
+let searchQuery = "";
+
 /**
  * 分册对应的地址。
  *
@@ -39,27 +44,96 @@ const LOGO_MAX_BYTES = 1.5 * 1024 * 1024;
 
 /* ---------- 渲染 ---------- */
 
-const renderTag = (tag: string): string => `<span class="tag">${tag}</span>`;
+/**
+ * 渲染一张课件卡片。
+ *
+ * @param course 课件元数据
+ * @param hit 搜索命中结果：给了就高亮标题 / 标签，并在卡片上标出分册（搜索结果来自全部分册）
+ * @returns 卡片 HTML
+ */
+const renderCourseCard = (course: CourseMeta, hit?: SearchHit): string => {
+  const title = hit ? highlight(course.title, hit.titleRanges) : escapeHtml(course.title);
+  const tags = course.tags
+    .map((tag) => {
+      const ranges = hit?.tagRanges.get(tag);
 
-const renderCourseCard = (course: CourseMeta): string =>
-  `<a class="course-card" href="/${course.slug}/" target="_blank">
-      <div class="card-chapter">${course.chapter}</div>
-      <h3 class="card-title">${course.title}</h3>
-      <p class="card-desc">${course.description}</p>
+      return `<span class="tag${ranges ? " tag-match" : ""}">${
+        ranges ? highlight(tag, ranges) : escapeHtml(tag)
+      }</span>`;
+    })
+    .join("");
+  const book = hit ? `<span class="card-book">${escapeHtml(hit.group.shortName)}</span>` : "";
+
+  return `<a class="course-card" href="/${course.slug}/" target="_blank">
+      <div class="card-chapter">${escapeHtml(course.chapter)}</div>
+      <h3 class="card-title">${title}</h3>
+      <p class="card-desc">${escapeHtml(course.description)}</p>
       <div class="card-footer">
+        ${book}
         <div class="card-tags">
-          ${course.tags.map(renderTag).join("")}
+          ${tags}
         </div>
       </div>
     </a>`;
+};
+
+/**
+ * 搜索无结果时的空态。
+ *
+ * @returns 带一键清除按钮的空态 HTML（避免用户被困在搜索态）
+ */
+const renderSearchEmpty = (): string =>
+  `<div class="group-empty search-empty">
+      <p>没有找到与「<span class="search-empty-q">${escapeHtml(searchQuery)}</span>」匹配的课件</p>
+      <p class="search-empty-hint">试试更短的关键词，或直接用标签，如「电容」「v-t 图像」「习题课」。</p>
+      <button class="search-empty-clear" type="button">清除搜索</button>
+    </div>`;
 
 /* ---------- 内容 ---------- */
+
+/** 列表统计行：普通视图显示当前分册数量，搜索态显示命中数与来源分册数 */
+const renderMeta = (): void => {
+  const meta = document.querySelector<HTMLElement>("#result-meta");
+  if (!meta) return;
+
+  if (searchQuery) {
+    const hits = searchCourses(searchQuery, textbooks)?.hits ?? [];
+    const bookCount = new Set(hits.map((hit) => hit.group.slug)).size;
+
+    // 无结果由列表里的空态说明，统计行让位（免得同一句话说两遍）
+    meta.hidden = hits.length === 0;
+    meta.textContent =
+      hits.length > 0 ? `找到 ${hits.length} 门课件 · 来自 ${bookCount} 个分册` : "";
+    return;
+  }
+
+  meta.hidden = false;
+
+  const group = textbooks.find((item) => item.slug === activeSlug);
+  const total = activeSlug
+    ? (group?.courses.length ?? 0)
+    : textbooks.reduce((sum, item) => sum + item.courses.length, 0);
+
+  meta.textContent = group ? `${group.name} · 共 ${total} 门课件` : `共 ${total} 门课件`;
+};
 
 const renderContent = (): void => {
   const grid = document.querySelector("#course-grid");
   if (!grid) return;
 
   grid.classList.add("is-flat");
+
+  // 搜索态：全部分册一起搜，结果按相关度排序（卡片上带分册角标）
+  if (searchQuery) {
+    const hits = searchCourses(searchQuery, textbooks)?.hits ?? [];
+
+    grid.innerHTML =
+      hits.length === 0
+        ? renderSearchEmpty()
+        : hits.map((hit) => renderCourseCard(hit.course, hit)).join("");
+    renderMeta();
+    return;
+  }
 
   const allCourses = activeSlug
     ? textbooks.filter((g) => g.slug === activeSlug).flatMap((g) => g.courses)
@@ -69,6 +143,7 @@ const renderContent = (): void => {
     allCourses.length === 0
       ? '<div class="group-empty">暂无课件</div>'
       : allCourses.map((course) => renderCourseCard(course)).join("");
+  renderMeta();
 };
 
 /* ---------- Tab ────────── */
@@ -88,8 +163,13 @@ const renderTabs = (): void => {
   tabsEl.innerHTML = allTab + bookTabs;
 };
 
-/** 页签对应的分册标题（浏览器标题栏随分册变化，收藏 / 分享时能看出是哪本书） */
+/** 浏览器标题栏随分册 / 搜索变化，收藏 / 分享时能看出当前状态 */
 const updatePageTitle = (): void => {
+  if (searchQuery) {
+    document.title = `搜索「${searchQuery}」 · 高中物理人教版课件`;
+    return;
+  }
+
   const group = textbooks.find((item) => item.slug === activeSlug);
 
   document.title = group ? `${group.shortName} · 高中物理人教版课件` : "高中物理人教版课件";
@@ -129,10 +209,6 @@ const bindTabs = (): void => {
     setActiveSlug(slug);
   });
 };
-
-globalThis.addEventListener("popstate", () => {
-  setActiveSlug(readSlugFromLocation());
-});
 
 /* ---------- 「我要上课」弹窗 ---------- */
 
@@ -411,6 +487,125 @@ teach.copy.addEventListener("click", () => {
     });
 });
 
+/* ---------- 搜索 ---------- */
+
+const search = {
+  input: query("#course-search") as HTMLInputElement,
+  clear: query("#search-clear") as HTMLButtonElement,
+  box: query(".search-box") as HTMLDivElement,
+  tabs: query("#tabs"),
+};
+
+/** 中文输入法组合输入中：此时不重绘，等组合结束再搜 */
+let isComposing = false;
+
+/**
+ * 从地址栏读取搜索词（`?q=…`）。
+ *
+ * @returns 搜索词；没有时返回空串
+ */
+const readQueryFromLocation = (): string =>
+  (new URLSearchParams(location.search).get("q") ?? "").trim();
+
+/**
+ * 把搜索词同步进地址栏（replaceState：不新增历史记录，刷新 / 分享能恢复）。
+ *
+ * @param value 搜索词；空串表示从地址栏移除 `?q=`
+ */
+const syncQueryToLocation = (value: string): void => {
+  const url = new URL(location.href);
+
+  if (value) url.searchParams.set("q", value);
+  else url.searchParams.delete("q");
+
+  history.replaceState(history.state, "", `${url.pathname}${url.search}${url.hash}`);
+};
+
+/**
+ * 应用搜索词并重绘：空词回到分册视图。
+ *
+ * @param raw 输入框原文
+ * @param options 选项
+ * @param options.fromInput 来自输入框：不回写 value（避免打断光标 / 输入法）
+ * @param options.syncUrl 是否把关键词同步进地址栏
+ */
+const applySearch = (
+  raw: string,
+  options: { fromInput?: boolean; syncUrl?: boolean } = {},
+): void => {
+  const value = raw.trim();
+  const isSearching = value !== "";
+
+  searchQuery = value;
+  if (!options.fromInput) search.input.value = value;
+  search.clear.hidden = !isSearching;
+  search.box.classList.toggle("has-value", isSearching);
+  // 搜索是全局的（跨分册），搜索态让分册页签让位，避免「当前分册」与全局结果打架
+  search.tabs.hidden = isSearching;
+
+  updatePageTitle();
+  renderContent();
+
+  if (options.syncUrl !== false) syncQueryToLocation(value);
+};
+
+/** 清空搜索，回到当前分册视图 */
+const clearSearch = (): void => {
+  search.input.value = "";
+  applySearch("");
+  search.input.focus();
+};
+
+const bindSearch = (): void => {
+  search.input.addEventListener("compositionstart", () => {
+    isComposing = true;
+  });
+  search.input.addEventListener("compositionend", () => {
+    isComposing = false;
+    applySearch(search.input.value, { fromInput: true });
+  });
+  search.input.addEventListener("input", (event) => {
+    // 中文输入法拼写阶段不要打断，等组合结束（或拼音已上屏的 input）再搜
+    if (isComposing || event.isComposing) return;
+
+    applySearch(search.input.value, { fromInput: true });
+  });
+  search.input.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && search.input.value) {
+      event.preventDefault();
+      clearSearch();
+    }
+  });
+
+  search.clear.addEventListener("click", clearSearch);
+  // 空态是动态渲染的，用事件委托接「清除搜索」
+  document.querySelector("#course-grid")?.addEventListener("click", (event) => {
+    if ((event.target as Element | null)?.closest(".search-empty-clear")) {
+      event.preventDefault();
+      clearSearch();
+    }
+  });
+
+  // 全局快捷键：`/` 聚焦搜索框（正在输入或弹窗打开时不抢键）
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey) return;
+
+    const target = event.target as Element | null;
+    if (target?.closest("input, textarea, select, [contenteditable='true']")) return;
+    if (teach.backdrop.hidden === false) return;
+
+    event.preventDefault();
+    search.input.focus();
+    search.input.select();
+  });
+};
+
+// 浏览器前进 / 后退：分册与搜索词都从地址栏重新解析
+globalThis.addEventListener("popstate", () => {
+  setActiveSlug(readSlugFromLocation());
+  applySearch(readQueryFromLocation(), { syncUrl: false });
+});
+
 /* ---------- 启动 ---------- */
 
 const yearEl = document.querySelector("#footer-year");
@@ -418,5 +613,7 @@ if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
 renderCourseSelect();
 bindTabs();
+bindSearch();
 setActiveSlug(activeSlug);
+applySearch(readQueryFromLocation(), { syncUrl: false });
 updateLink();

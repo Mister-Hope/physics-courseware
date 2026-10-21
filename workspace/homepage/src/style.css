@@ -81,6 +81,219 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+/* ── 授权说明条（上半部分常显，详情看 /license/） ── */
+.license-band {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+
+  margin-bottom: 1.25rem;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid rgb(226 168 70 / 16%);
+  border-radius: var(--radius-lg);
+
+  background: linear-gradient(
+    120deg,
+    rgb(226 168 70 / 8%) 0%,
+    rgb(30 41 59 / 45%) 45%,
+    rgb(59 130 246 / 8%) 100%
+  );
+
+  backdrop-filter: blur(12px);
+}
+
+.license-band-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--c-accent);
+}
+
+.license-band-text {
+  flex: 1;
+  color: var(--c-text-dim);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.license-band-text b {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.license-band-more {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 0.3rem;
+  align-items: center;
+
+  color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    gap 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.license-band-more:hover {
+  gap: 0.5rem;
+  opacity: 0.85;
+}
+
+/* ── 搜索 ── */
+.search {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 1.25rem;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(560px, 100%);
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.65rem 3.1rem 0.65rem 2.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: var(--c-surface);
+  color: var(--c-text);
+  outline: none;
+
+  font-size: 0.9rem;
+  font-family: inherit;
+  line-height: normal;
+
+  backdrop-filter: blur(12px);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--c-text-dim);
+  opacity: 0.75;
+}
+
+.search-input:focus {
+  border-color: rgb(226 168 70 / 45%);
+  background: var(--c-surface-hover);
+  box-shadow:
+    0 0 0 3px rgb(226 168 70 / 12%),
+    0 8px 28px rgb(0 0 0 / 18%);
+}
+
+/* 用自绘的清除按钮，去掉浏览器原生 search 叉 */
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-decoration {
+  appearance: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.95rem;
+
+  display: flex;
+
+  color: var(--c-text-dim);
+
+  pointer-events: none;
+}
+
+.search-kbd {
+  position: absolute;
+  right: 0.85rem;
+
+  display: inline-grid;
+  place-items: center;
+
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.35rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.45rem;
+
+  background: rgb(2 6 23 / 45%);
+  color: var(--c-text-dim);
+
+  font-size: 0.7rem;
+  font-family: inherit;
+  line-height: 1;
+
+  pointer-events: none;
+
+  transition: opacity 0.15s ease;
+}
+
+.search-box:focus-within .search-kbd,
+.search-box.has-value .search-kbd {
+  opacity: 0;
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.55rem;
+
+  display: inline-grid;
+  place-items: center;
+
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+
+  background: rgb(148 163 184 / 12%);
+  color: var(--c-text-dim);
+
+  font-size: 1.05rem;
+  font-family: inherit;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.search-clear:hover {
+  background: rgb(148 163 184 / 22%);
+  color: var(--c-text);
+}
+
+/* display: grid 会覆盖 [hidden] 的 UA 样式，必须显式补回 */
+.search-clear[hidden] {
+  display: none;
+}
+
+/* 搜索是全局的（跨分册），搜索态隐藏分册页签，避免「当前分册」与全局结果打架 */
+.tabs[hidden] {
+  display: none;
+}
+
+/* ── 列表统计 ── */
+.list-meta {
+  padding: 0 0 0.75rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+
+  opacity: 0.8;
+}
+
 /* ── Tabs ── */
 .tabs {
   display: flex;
@@ -88,7 +301,7 @@ body {
   gap: 0.5rem;
   justify-content: center;
 
-  padding: 0 0 2rem;
+  padding: 0 0 1.25rem;
 }
 
 .tab {
@@ -210,8 +423,11 @@ body {
 
 .card-tags {
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
   gap: 0.4rem;
+
+  min-width: 0;
 }
 
 .tag {
@@ -226,6 +442,43 @@ body {
   font-weight: 500;
   font-size: 0.7rem;
   letter-spacing: 0.02em;
+}
+
+/* 搜索结果卡片：分册角标 + 命中高亮（标题 / 标签里的 <mark>） */
+.card-book {
+  flex-shrink: 0;
+
+  padding: 0.15rem 0.55rem;
+  border: 1px solid rgb(226 168 70 / 28%);
+  border-radius: 999px;
+
+  background: rgb(226 168 70 / 10%);
+  color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
+
+.card-title mark {
+  padding: 0 0.06em;
+  border-radius: 0.2rem;
+
+  background: rgb(226 168 70 / 24%);
+  color: var(--c-accent);
+  box-decoration-break: clone;
+}
+
+.tag-match {
+  background: rgb(226 168 70 / 14%);
+  color: var(--c-accent);
+}
+
+.tag mark {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-weight: 700;
 }
 
 /* ── Empty State ── */
@@ -245,6 +498,51 @@ body {
   opacity: 0.7;
 }
 
+/* 搜索无结果：说明 + 引导 + 一键清除 */
+.search-empty {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+
+  opacity: 1;
+}
+
+.search-empty-q {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.search-empty-hint {
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+.search-empty-clear {
+  margin-top: 0.35rem;
+  padding: 0.45rem 1.2rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: 999px;
+
+  background: rgb(226 168 70 / 10%);
+  color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 0.82rem;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.search-empty-clear:hover {
+  border-color: rgb(226 168 70 / 40%);
+  background: rgb(226 168 70 / 18%);
+}
+
 /* ── Footer ── */
 .footer {
   display: flex;
@@ -262,6 +560,49 @@ body {
 
 .footer-copy {
   opacity: 0.6;
+}
+
+/* 角标：CC 协议徽标 + GitHub 图标 */
+.footer-badges {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-badge {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.75rem;
+  text-decoration: none;
+
+  opacity: 0.72;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.footer-badge:hover {
+  color: var(--c-accent);
+  opacity: 1;
+}
+
+.footer-badge-cc {
+  display: inline-grid;
+  place-items: center;
+
+  width: 1.55rem;
+  height: 1.55rem;
+  border: 1px solid currentcolor;
+  border-radius: 999px;
+
+  font-weight: 700;
+  font-size: 0.55rem;
+  letter-spacing: 0.02em;
 }
 
 .footer-link {
@@ -670,7 +1011,57 @@ body {
     font-size: 1.8rem;
   }
 
-  .group-courses {
+  .license-band {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .license-band-text {
+    flex-basis: calc(100% - 2.5rem);
+    font-size: 0.76rem;
+  }
+
+  .license-band-more {
+    margin-left: 2.25rem;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-input {
+    font-size: 0.85rem;
+  }
+
+  /* 手机上没有物理键盘，「/」快捷键提示只会挤占输入框 */
+  .search-kbd {
+    display: none;
+  }
+
+  .footer-badges {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* 栅格最小列宽 340px，窄屏必须降成单列，否则 360px 及以下手机横向溢出 */
+  .course-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* 超窄屏（≈320px）：收紧搜索框左右内边距，避免 placeholder 被裁 */
+@media (width <= 420px) {
+  .search-input {
+    padding-right: 2.35rem;
+    padding-left: 2.1rem;
+    font-size: 0.8rem;
+  }
+
+  .search-icon {
+    left: 0.75rem;
+  }
+
+  .search-clear {
+    right: 0.35rem;
   }
 }

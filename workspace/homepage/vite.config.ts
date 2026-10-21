@@ -90,6 +90,8 @@ export default defineConfig({
       input: {
         index: fileURLToPath(new URL("index.html", import.meta.url)),
         notFound: fileURLToPath(new URL("404.html", import.meta.url)),
+        // 授权协议详情页（/license/，主页的协议说明条与 footer 角标都链到这里）
+        license: fileURLToPath(new URL("license/index.html", import.meta.url)),
       },
     },
   },

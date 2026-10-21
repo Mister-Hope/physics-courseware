@@ -372,3 +372,49 @@ title: 例题　画等效电路（二）
 
 <div v-click="3" class="tip-hint"><Latex tex="R_1" /> 与 <Latex tex="L_1" /> 并联、<Latex tex="R_2" /> 与 <Latex tex="R_3" /> 并联；后一组再与 <Latex tex="R_4" /> 串联，最后整体与 <Latex tex="L_2" /> 并联。</div>
 </div>
+
+---
+clicks: 4
+title: 课堂小结
+---
+
+# 课堂小结
+
+<div class="page-grow page-grow-tight">
+<div v-click="1">
+<div><b>1. 串、并联电路的规律</b></div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.3rem 1rem">
+<div><b>电流</b></div>
+<div><b>电压</b></div>
+<div><b>电阻</b></div>
+<div>串联：处处相等</div>
+<div>串联：<Latex tex="U = U_1 + U_2" /></div>
+<div>串联：<Latex tex="R = R_1 + R_2" /></div>
+<div>并联：<Latex tex="I = I_1 + I_2" /></div>
+<div>并联：<Latex tex="U = U_1 = U_2" /></div>
+<div>并联：<Latex tex="1/R = 1/R_1 + 1/R_2" /></div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem">
+<div v-click="2" style="min-width: 0">
+<div><b>2. 表头</b></div>
+<div>指针偏角与电流成正比</div>
+<div><Latex tex="I_g" />、<Latex tex="R_g" /> 都小，<Latex tex="U_g = I_g R_g" /></div>
+</div>
+<div v-click="3" style="min-width: 0">
+<div><b>3. 电表的改装（<Latex tex="N" /> 倍）</b></div>
+<div>电压表：串 <Latex tex="(N - 1)R_g" /></div>
+<div>内阻 <Latex tex="R_V = N R_g" /></div>
+<div>电流表：并 <Latex tex="R_g/(N - 1)" /></div>
+<div>内阻 <Latex tex="R_A = R_g/N" /></div>
+</div>
+<div v-click="4" style="min-width: 0">
+<div><b>4. 复杂电路的化简</b></div>
+<div>① 无电流支路去掉</div>
+<div>② 等电势点合并</div>
+<div>③ 理想电表</div>
+<div>④ 电容器</div>
+</div>
+</div>
+</div>
