@@ -201,6 +201,7 @@ body {
 .search-icon {
   position: absolute;
   left: 0.95rem;
+  z-index: 1;
 
   display: flex;
 
@@ -212,6 +213,7 @@ body {
 .search-kbd {
   position: absolute;
   right: 0.85rem;
+  z-index: 1;
 
   display: inline-grid;
   place-items: center;
@@ -242,6 +244,7 @@ body {
 .search-clear {
   position: absolute;
   right: 0.55rem;
+  z-index: 1;
 
   display: inline-grid;
   place-items: center;

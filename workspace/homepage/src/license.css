@@ -171,6 +171,7 @@
   display: flex;
   gap: 0.85rem;
   align-items: center;
+  margin-bottom: 1.6rem;
 }
 
 .license-section-no {
@@ -200,7 +201,7 @@
 
 .license-section-lede {
   max-width: 46rem;
-  margin: 0.9rem 0 1.6rem;
+  margin: 0 0 1.6rem;
 
   color: var(--c-text-dim);
 
