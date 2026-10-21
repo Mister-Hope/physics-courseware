@@ -200,16 +200,17 @@ const HALO = {
 </template>
 
 <style scoped>
-@keyframes pulseFlow {
+@keyframes pulse-flow {
   0% {
     stroke-dashoffset: 0;
   }
+
   100% {
     stroke-dashoffset: -40;
   }
 }
 
 .animate-pulse-slow {
-  animation: pulseFlow 4s linear infinite;
+  animation: pulse-flow 4s linear infinite;
 }
 </style>

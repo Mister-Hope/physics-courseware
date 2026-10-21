@@ -319,8 +319,15 @@
           "slug": "10.1-electric-potential-energy",
           "title": "电势能和电势",
           "chapter": "§10.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由静电力做功与路径无关建立电势能，用比值法定义电势并讲其相对性与正负，再落到沿电场线电势降低、等势面与教材习题。",
+          "tags": ["电势能", "电势", "等势面", "静电力做功"]
+        },
+        {
+          "slug": "10.2-potential-difference",
+          "title": "电势差",
+          "chapter": "§10.2",
+          "description": "从「高度差比高度更重要」引出电势差 U_AB=φ_A−φ_B，推出 W_AB=qU_AB，再用教材例题、等势面与负电荷问题巩固。",
+          "tags": ["电势差", "电压", "静电力做功", "等势面"]
         },
         {
           "slug": "10.3-potential-and-field",
@@ -340,8 +347,8 @@
           "slug": "10.5-charged-particle-in-field",
           "title": "带电粒子在电场中的运动",
           "chapter": "§10.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "先讲加速（qU=½mv²）再到偏转（类平抛），推侧移与偏转角公式，最后讲示波管原理并用教材例题和习题巩固。",
+          "tags": ["带电粒子", "加速", "偏转", "示波管"]
         },
         {
           "slug": "11.1-source-and-current",
@@ -389,8 +396,8 @@
           "slug": "12.2-closed-circuit-ohm-law",
           "title": "闭合电路的欧姆定律",
           "chapter": "§12.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由并联灯变暗引出电动势与内阻，用能量守恒推出 I=E/(R+r)，讲路端电压、U-I 图像、断路短路并配教材练习。",
+          "tags": ["电动势", "内阻", "闭合电路欧姆定律", "路端电压"]
         },
         {
           "slug": "12.3-emf-internal-resistance",

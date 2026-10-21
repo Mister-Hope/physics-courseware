@@ -3,3 +3,18 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 例题/练习页：题干长、解析多，块间距收紧一档（只覆盖允许调整的间距变量） */
+.exercise-split.tight-gap {
+  --page-gap: 0.4rem;
+}
+
+/* 题干段落：主题给 <p> 的上下 margin 是 1em，一道题的题干两三段就会把解析栏挤薄 */
+.exercise-split .ex-stem p {
+  margin: 0.5rem 0;
+}
+
+/* 第 13 页：示波管结构图要占更大一栏（文字栏只放四行说明） */
+.fig-wide {
+  --cols: minmax(0, 1fr) minmax(0, 1.22fr);
+}

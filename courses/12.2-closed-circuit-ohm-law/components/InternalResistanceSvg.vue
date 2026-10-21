@@ -1,29 +1,22 @@
-<!-- 第 6 页：电源的内阻——把电源看成"电动势 E 与内阻 r 串联"；showInner/showOuter 点击后标出内、外电压 -->
+<!-- 第 6 页：电源的内阻——把电源看成"电动势 E 与内阻 r 串联"，虚线框内是内电路 -->
 <template>
-  <svg viewBox="0 0 720 300" width="100%" xmlns="http://www.w3.org/2000/svg">
-    <rect x="30" y="50" width="180" height="210" rx="16" fill="none" stroke="var(--c-physics)" stroke-width="1.6" stroke-dasharray="7 7" opacity="0.9" />
-    <text x="120" y="40" text-anchor="middle" font-size="17" fill="var(--c-physics)">电源</text>
-    <path d="M660 90 H112" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <path d="M660 90 V240" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <path d="M660 240 H120" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <CircuitBattery :x="120" :y="118" orientation="vertical" polarity emf="E" />
-    <path d="M120 90 V110" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <path d="M120 126 V146" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <CircuitResistor :x="120" :y="170" orientation="vertical" label="r" />
-    <path d="M120 194 V240" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <CircuitResistor :x="390" :y="90" label="R" />
-    <path d="M112 90 H366" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <path d="M414 90 H660" stroke="var(--c-wire)" stroke-width="1.6" fill="none" stroke-linecap="round" />
-    <CourseArrow :from="{ x: 480, y: 98 }" :to="{ x: 560, y: 98 }" stroke="var(--c-accent)" stroke-width="2.4" label="I" />
-    <CourseArrow :from="{ x: 300, y: 232 }" :to="{ x: 220, y: 232 }" stroke="var(--c-accent)" stroke-width="2.4" />
-    <g v-if="showOuter">
-      <ChartLabel :x-percent="54" :y-percent="8" :parts="[{ tex: 'U_{\\text{外}} = IR' }]" size="19" color="var(--c-accent)" />
+  <svg viewBox="0 0 640 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+      <path d="M120 80 H356" />
+      <path d="M404 80 H600" />
+      <path d="M600 80 V230" />
+      <path d="M600 230 H120" />
+      <path d="M120 80 V102" />
+      <path d="M120 118 V136" />
+      <path d="M120 184 V230" />
     </g>
-    <g v-if="showInner">
-      <ChartLabel :x-percent="26" :y-percent="94" :parts="[{ text: 'U' }, { text: '内', sub: true }, { text: ' = Ir' }]" size="19" />
-    </g>
+    <rect x="44" y="60" width="152" height="160" rx="14" fill="none" stroke="var(--c-physics)" stroke-width="1.6" stroke-dasharray="7 7" opacity="0.9" />
+    <text x="120" y="48" text-anchor="middle" font-size="18" fill="var(--c-physics)">电源</text>
+    <CircuitBattery :x="120" :y="110" orientation="vertical" polarity emf="E" />
+    <CircuitResistor :x="120" :y="160" orientation="vertical" label="r" />
+    <CircuitResistor :x="380" :y="80" label="R" />
+    <CourseArrow :from="{ x: 470, y: 88 }" :to="{ x: 550, y: 88 }" stroke="var(--c-accent)" :stroke-width="2.4" label="I" />
+    <CourseArrow :from="{ x: 120, y: 216 }" :to="{ x: 120, y: 196 }" stroke="var(--c-accent)" :stroke-width="2.4" />
+    <CourseArrow :from="{ x: 360, y: 238 }" :to="{ x: 290, y: 238 }" stroke="var(--c-accent)" :stroke-width="2.4" />
   </svg>
 </template>
-<script setup lang="ts">
-defineProps<{ showOuter?: boolean; showInner?: boolean }>();
-</script>

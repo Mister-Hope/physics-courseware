@@ -156,9 +156,16 @@ onUnmounted(() => {
 
       <!-- ═══ 水龙头 🚰 ═══ -->
       <!-- 水平管身 -->
-      <rect x="60" y="74" width="53" height="13" rx="4" fill="#2d3c54" />
-      <rect x="61" y="75" width="51" height="11" rx="3.5" fill="#3b4f6b" />
-      <rect x="62" y="76" width="49" height="3.5" rx="1.5" fill="rgba(255,255,255,0.1)" />
+      <rect x="60" y="74" width="53" height="13" rx="4" fill="var(--c-neutral-700)" />
+      <rect x="61" y="75" width="51" height="11" rx="3.5" fill="var(--c-neutral-600)" />
+      <rect
+        x="62"
+        y="76"
+        width="49"
+        height="3.5"
+        rx="1.5"
+        fill="color-mix(in srgb, var(--c-text) 10%, transparent)"
+      />
 
       <!-- 阀门（紧凑） -->
       <rect x="76" y="70" width="11" height="5" rx="1.5" fill="var(--c-neutral-700)" />
@@ -170,7 +177,7 @@ onUnmounted(() => {
         height="4"
         rx="1.5"
         fill="var(--c-accent)"
-        stroke="#b8860b"
+        stroke="color-mix(in srgb, var(--c-accent-glow) 65%, var(--c-bg))"
         stroke-width="0.6"
       />
       <circle
@@ -178,7 +185,7 @@ onUnmounted(() => {
         cy="61"
         r="3"
         fill="var(--c-accent-glow)"
-        stroke="#b8860b"
+        stroke="color-mix(in srgb, var(--c-accent-glow) 65%, var(--c-bg))"
         stroke-width="0.6"
       />
 
@@ -187,14 +194,14 @@ onUnmounted(() => {
       <path
         d="M 103 80 L 114 80 Q 120 80 120 86 L 120 91"
         fill="none"
-        stroke="#3b4f6b"
+        stroke="var(--c-neutral-600)"
         stroke-width="11"
         stroke-linecap="round"
       />
       <path
         d="M 104 80 L 113 80 Q 118 80 118 85 L 118 89"
         fill="none"
-        stroke="rgba(255,255,255,0.08)"
+        stroke="color-mix(in srgb, var(--c-text) 8%, transparent)"
         stroke-width="3"
         stroke-linecap="round"
       />
@@ -250,43 +257,46 @@ onUnmounted(() => {
         </circle>
       </g>
 
-      <!-- h：桶底 → 水面 -->
-      <line
-        x1="330"
-        y1="223"
-        x2="345"
-        y2="223"
-        stroke="var(--c-neutral-500)"
-        stroke-width="1"
-        stroke-dasharray="3,3"
-      />
-      <line
-        x1="330"
-        :y1="223 - level * 131"
-        x2="345"
-        :y2="223 - level * 131"
-        stroke="var(--c-neutral-500)"
-        stroke-width="1"
-        stroke-dasharray="3,3"
-      />
-      <line
-        x1="338"
-        y1="223"
-        x2="338"
-        :y2="223 - level * 131"
-        stroke="var(--c-accent)"
-        stroke-width="2"
-      />
-      <!-- h 顶端箭头（指向上） -->
-      <polygon
-        :points="`334,${223 - level * 131 + 8} 338,${223 - level * 131 - 1} 342,${223 - level * 131 + 8}`"
-        fill="var(--c-accent)"
-      />
-      <!-- h 底端箭头（指向下） -->
-      <polygon :points="`334,${223 - 8} 338,${223 + 1} 342,${223 - 8}`" fill="var(--c-accent)" />
-      <text x="353" :y="223 - level * 65" font-size="14" font-weight="800" fill="var(--c-accent)">
-        h
-      </text>
+      <!-- h：桶底 → 水面。
+           水量很小时 h≈0，双向箭头会被压成两枚叠在一起的三角（「沙漏」）⇒ 水位不足 13% 时不画这组测量。 -->
+      <g v-if="level > 0.13">
+        <line
+          x1="330"
+          y1="223"
+          x2="345"
+          y2="223"
+          stroke="var(--c-neutral-500)"
+          stroke-width="1"
+          stroke-dasharray="3,3"
+        />
+        <line
+          x1="330"
+          :y1="223 - level * 131"
+          x2="345"
+          :y2="223 - level * 131"
+          stroke="var(--c-neutral-500)"
+          stroke-width="1"
+          stroke-dasharray="3,3"
+        />
+        <line
+          x1="338"
+          y1="223"
+          x2="338"
+          :y2="223 - level * 131"
+          stroke="var(--c-accent)"
+          stroke-width="2"
+        />
+        <!-- h 顶端箭头（指向上） -->
+        <polygon
+          :points="`334,${223 - level * 131 + 8} 338,${223 - level * 131 - 1} 342,${223 - level * 131 + 8}`"
+          fill="var(--c-accent)"
+        />
+        <!-- h 底端箭头（指向下） -->
+        <polygon :points="`334,${223 - 8} 338,${223 + 1} 342,${223 - 8}`" fill="var(--c-accent)" />
+        <text x="353" :y="223 - level * 65" font-size="14" font-weight="800" fill="var(--c-accent)">
+          h
+        </text>
+      </g>
 
       <!-- ═══════ 右侧：电容器 ═══════ -->
       <text
@@ -349,7 +359,8 @@ onUnmounted(() => {
         −
       </text>
 
-      <!-- U：从两极板中间向上下对称展开 -->
+      <!-- U：从两极板中间向上下对称展开。
+           充电量很小时 U≈0，双向箭头会压成「沙漏」⇒ 电压不足 30% 时不画箭头（极板位置虚线仍保留）。 -->
       <line
         x1="550"
         y1="98"
@@ -368,44 +379,28 @@ onUnmounted(() => {
         stroke-width="1"
         stroke-dasharray="3,3"
       />
-      <line
-        x1="565"
-        :y1="126.5 - level * 28.5"
-        :x2="565"
-        :y2="126.5 + level * 28.5"
-        stroke="var(--c-accent-glow)"
-        stroke-width="2.5"
-      />
-      <!-- U 上端箭头（指向上） -->
-      <polygon
-        :points="`561,${126.5 - level * 28.5 + 7} 565,${126.5 - level * 28.5 - 1} 569,${126.5 - level * 28.5 + 7}`"
-        fill="var(--c-accent-glow)"
-      />
-      <!-- U 下端箭头（指向下） -->
-      <polygon
-        :points="`561,${126.5 + level * 28.5 - 7} 565,${126.5 + level * 28.5 + 1} 569,${126.5 + level * 28.5 - 7}`"
-        fill="var(--c-accent-glow)"
-      />
-      <text x="590" y="130" font-size="15" font-weight="800" fill="var(--c-accent-glow)">U</text>
+      <g v-if="level > 0.3">
+        <line
+          x1="565"
+          :y1="126.5 - level * 28.5"
+          :x2="565"
+          :y2="126.5 + level * 28.5"
+          stroke="var(--c-accent-glow)"
+          stroke-width="2.5"
+        />
+        <!-- U 上端箭头（指向上） -->
+        <polygon
+          :points="`561,${126.5 - level * 28.5 + 7} 565,${126.5 - level * 28.5 - 1} 569,${126.5 - level * 28.5 + 7}`"
+          fill="var(--c-accent-glow)"
+        />
+        <!-- U 下端箭头（指向下） -->
+        <polygon
+          :points="`561,${126.5 + level * 28.5 - 7} 565,${126.5 + level * 28.5 + 1} 569,${126.5 + level * 28.5 - 7}`"
+          fill="var(--c-accent-glow)"
+        />
+        <text x="590" y="130" font-size="15" font-weight="800" fill="var(--c-accent-glow)">U</text>
+      </g>
     </svg>
-
-    <!-- 极性图例 -->
-    <div class="flex items-center justify-center gap-6 mt-2">
-      <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80"
-        ><span
-          class="inline-block w-3.5 h-3.5 rounded-sm"
-          style="background: var(--c-danger)"
-        ></span>
-        正电（红）</span
-      >
-      <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80"
-        ><span
-          class="inline-block w-3.5 h-3.5 rounded-sm"
-          style="background: var(--c-velocity)"
-        ></span>
-        负电（蓝）</span
-      >
-    </div>
   </div>
 </template>
 

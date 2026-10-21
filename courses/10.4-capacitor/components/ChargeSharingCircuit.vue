@@ -316,7 +316,11 @@ onUnmounted(() => {
             cy="99"
             r="11"
             fill="var(--c-surface-solid)"
-            :stroke="s1Pos === '2' ? '#a78bfa' : '#475569'"
+            :stroke="
+              s1Pos === '2'
+                ? 'color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger))'
+                : '#475569'
+            "
             stroke-width="2.5"
           />
           <text
@@ -324,7 +328,7 @@ onUnmounted(() => {
             y="105"
             font-size="15"
             font-weight="950"
-            fill="#a78bfa"
+            fill="color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger))"
             text-anchor="middle"
           >
             2
@@ -624,22 +628,7 @@ onUnmounted(() => {
       </div>
 
       <!-- 极性图例 -->
-      <div class="flex items-center justify-center gap-3 mb-2">
-        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80"
-          ><span
-            class="inline-block w-3.5 h-3.5 rounded-sm"
-            style="background: var(--c-danger)"
-          ></span>
-          正电（红）</span
-        >
-        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80"
-          ><span
-            class="inline-block w-3.5 h-3.5 rounded-sm"
-            style="background: var(--c-velocity)"
-          ></span>
-          负电（蓝）</span
-        >
-      </div>
+      <PolarityLegend class="mb-2" />
     </div>
 
     <!-- 底部状态栏 -->
@@ -647,7 +636,7 @@ onUnmounted(() => {
       <div class="flex items-center gap-1.5">
         <span class="circ-status-key">S₁</span>
         <span
-          :class="s1Pos === '1' ? 'text-rose-400' : s1Pos === '2' ? 'text-purple-400' : 'text-dim'"
+          :class="s1Pos === '1' ? 'text-danger' : s1Pos === '2' ? 'text-share' : 'text-dim'"
           class="circ-status-val"
           >{{ s1StatusText }}</span
         >
@@ -761,6 +750,12 @@ svg text {
   font-size: 0.75rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+/* 「连接另一电容器」的紫色：设计系统没有紫色 token，按 §3 用蓝 + 红 token 混出同色相，
+   与 S₁ 触点 2 的描边同值；比写死 #c084fc / #a78bfa 更能跟着共享 token 走。 */
+.text-share {
+  color: color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger));
 }
 
 .circ-reset-btn {

@@ -68,20 +68,23 @@ const upperPlateY = computed(() => midY - plateGap.value / 2);
 const lowerPlateY = computed(() => midY + plateGap.value / 2);
 
 // Dielectric colors and text descriptions
+// 颜色一律走共享 token；陶瓷没有现成紫色 token，用「蓝 + 红」按 §3 混出同色相（与「陶瓷」按钮选中态一致）。
+const CERAMIC_COLOR = "color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger))";
+
 const dielectricStyle = computed(() => {
   if (epsilonR.value === 3) {
     return {
-      fill: "#3b82f6",
+      fill: "var(--c-accent-2)",
       opacity: 0.15,
-      stroke: "#3b82f6",
+      stroke: "var(--c-accent-2)",
       strokeOpacity: 0.3,
       label: "玻璃",
     };
   } else if (epsilonR.value === 6) {
     return {
-      fill: "#8b5cf6",
+      fill: CERAMIC_COLOR,
       opacity: 0.22,
-      stroke: "#8b5cf6",
+      stroke: CERAMIC_COLOR,
       strokeOpacity: 0.4,
       label: "陶瓷",
     };
@@ -130,7 +133,7 @@ const visibleLowerCharges = computed(() =>
 <template>
   <div class="w-full mx-auto">
     <div
-      class="cap-frame bg-slate-950 border p-3 rounded-2xl shadow-2xl flex flex-col gap-6 select-none relative overflow-hidden"
+      class="cap-frame border p-3 rounded-2xl shadow-2xl flex flex-col gap-6 select-none relative overflow-hidden"
     >
       <!-- Premium Tech Ambient Lights —— 光晕铺满整框：
            原来是两块 -bottom-40 / -top-40 的圆形色块、靠框的 overflow-hidden 裁掉溢出部分，
@@ -147,17 +150,17 @@ const visibleLowerCharges = computed(() =>
         >
           <!-- HUD 读数面板 -->
           <div
-            class="absolute top-3 right-3 bg-slate-950/85 border border-surface rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 shadow-xl backdrop-blur z-20 font-sans"
+            class="cap-hud absolute top-3 right-3 border border-surface rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 shadow-xl backdrop-blur z-20 font-sans"
           >
             <div class="flex items-baseline gap-1">
               <span class="text-sm cap-accent-light font-extrabold">C</span>
-              <span class="font-mono text-sm font-black text-amber-300">{{ C.toFixed(2) }}</span>
+              <span class="font-mono text-sm font-black cap-accent-light">{{ C.toFixed(2) }}</span>
               <span class="text-sm text-faint font-semibold">pF</span>
             </div>
             <div class="w-px h-4 cap-hud-divider"></div>
             <div class="flex items-baseline gap-1">
-              <span class="text-sm text-rose-400 font-extrabold">Q</span>
-              <span class="font-mono text-sm font-black text-rose-300">{{ Q.toFixed(1) }}</span>
+              <span class="text-sm text-danger font-extrabold">Q</span>
+              <span class="font-mono text-sm font-black cap-value-danger">{{ Q.toFixed(1) }}</span>
               <span class="text-sm text-faint font-semibold">pC</span>
             </div>
           </div>
@@ -393,31 +396,16 @@ const visibleLowerCharges = computed(() =>
       </div>
 
       <!-- 极性图例 -->
-      <div class="flex items-center justify-center gap-6 mb-3">
-        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80 text-tone-300"
-          ><span
-            class="inline-block w-3.5 h-3.5 rounded-sm"
-            style="background: var(--c-danger)"
-          ></span>
-          正电（红）</span
-        >
-        <span class="inline-flex items-center gap-2 text-sm font-medium opacity-80 text-tone-300"
-          ><span
-            class="inline-block w-3.5 h-3.5 rounded-sm"
-            style="background: var(--c-velocity)"
-          ></span>
-          负电（蓝）</span
-        >
-      </div>
+      <PolarityLegend class="mb-3" />
 
       <!-- Controls Slider Panels Frame -->
-      <div class="bg-indigo-950/10 border cap-controls rounded-xl p-2 relative">
+      <div class="border cap-controls rounded-xl p-2 relative">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
           <!-- Parameter S: Area -->
           <div class="flex flex-col gap-0.5 w-full">
             <div class="flex justify-between items-baseline gap-1">
               <span class="text-xs text-tone-300 font-extrabold">正对面积 S</span>
-              <span class="text-rose-400 text-sm font-extrabold shrink-0">{{ S }} cm²</span>
+              <span class="text-danger text-sm font-extrabold shrink-0">{{ S }} cm²</span>
             </div>
             <input
               type="range"
@@ -425,7 +413,7 @@ const visibleLowerCharges = computed(() =>
               max="500"
               step="50"
               v-model.number="S"
-              class="w-full cap-range-amber h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
+              class="w-full cap-range-amber cap-range-track h-1.5 rounded-lg cursor-pointer transition-all"
             />
           </div>
 
@@ -443,7 +431,7 @@ const visibleLowerCharges = computed(() =>
               max="8.0"
               step="0.5"
               v-model.number="d"
-              class="w-full cap-range-blue h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
+              class="w-full cap-range-blue cap-range-track h-1.5 rounded-lg cursor-pointer transition-all"
             />
           </div>
 
@@ -461,7 +449,7 @@ const visibleLowerCharges = computed(() =>
               max="50.0"
               step="5.0"
               v-model.number="U"
-              class="w-full cap-range-amber h-1.5 bg-slate-950 rounded-lg cursor-pointer transition-all"
+              class="w-full cap-range-amber cap-range-track h-1.5 rounded-lg cursor-pointer transition-all"
             />
           </div>
 
@@ -472,7 +460,7 @@ const visibleLowerCharges = computed(() =>
                 @click="epsilonR = 1"
                 :class="
                   epsilonR === 1
-                    ? 'border cap-btn-on-amber text-amber-300 font-black'
+                    ? 'border cap-btn-on-amber cap-accent-light font-black'
                     : 'border cap-btn-off font-semibold'
                 "
                 class="py-1.5 px-0.5 rounded-lg transition-all duration-200 text-center text-[10px] leading-tight"
@@ -496,7 +484,7 @@ const visibleLowerCharges = computed(() =>
                 @click="epsilonR = 6"
                 :class="
                   epsilonR === 6
-                    ? 'border border-purple-500 bg-purple-500/15 text-purple-300 font-black'
+                    ? 'border cap-btn-on-violet font-black'
                     : 'border cap-btn-off font-semibold'
                 "
                 class="py-1.5 px-0.5 rounded-lg transition-all duration-200 text-center text-[10px] leading-tight"
@@ -529,7 +517,8 @@ svg text {
 }
 
 .plate-text-bold {
-  fill: var(--c-text-dim) !important;
+  /* 介质名称（玻璃 / 陶瓷）压在浅色介质块上：用正文色而不是 dim，保证投影上也看得清 */
+  fill: var(--c-text) !important;
 }
 
 .plate-text-sign {
@@ -541,6 +530,7 @@ svg text {
    没有现成工具类或需要保持透明度，故在本组件内提升为语义类，不再写死调色板取值。 */
 .cap-frame {
   border-color: var(--c-neutral-900);
+  background: var(--c-neutral-900);
   color: var(--c-text);
 }
 
@@ -550,6 +540,14 @@ svg text {
 
 .cap-controls {
   border-color: var(--c-neutral-900);
+
+  /* 原 bg-indigo-950/10：用主蓝的低透明底，跟 token 走 */
+  background: color-mix(in srgb, var(--c-accent-2-glow) 8%, transparent);
+}
+
+.cap-hud {
+  /* 原 bg-slate-950/85 */
+  background: color-mix(in srgb, var(--c-neutral-900) 85%, transparent);
 }
 
 .cap-hud-divider {
@@ -558,6 +556,28 @@ svg text {
 
 .cap-accent-light {
   color: var(--c-accent-light);
+}
+
+/* Q 读数：原 rose-300 的浅粉红，用「红 token + 正文色」混出同观感 */
+.cap-value-danger {
+  color: color-mix(in srgb, var(--c-danger) 70%, var(--c-text));
+}
+
+/* 滑杆轨道：原 bg-slate-950 */
+.cap-range-track {
+  background: var(--c-neutral-900);
+}
+
+/* 陶瓷（第三种介质）选中态：原 purple-500/bg-purple-500/15/text-purple-300，
+   改为「蓝 + 红」token 混色，保持同色相 */
+.cap-btn-on-violet {
+  border-color: color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger));
+  background: color-mix(
+    in srgb,
+    color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger)) 18%,
+    transparent
+  );
+  color: color-mix(in srgb, var(--c-accent-2) 55%, var(--c-danger));
 }
 
 /* 环境光晕：左上蓝、右下暖金两块柔光（原 blue / amber 5% 透明版；不越出框外） */

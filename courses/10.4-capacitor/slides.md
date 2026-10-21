@@ -19,7 +19,7 @@ defaults:
   layout: base-flex
   transition: fade
 chapter-no: "10.4"
-chapter: 第十章 静电场
+chapter: 第十章 静电场中的能量
 ---
 
 <CoverDecorationSvg />
@@ -121,24 +121,28 @@ layout: base-flex
 
 # 常见电容器
 
-<div class="grid grid-cols-3 gap-3 mt-4">
+<div class="page-grow">
+
+<div class="grid grid-cols-3 gap-3">
 
 <div class="text-center">
-  <img src="/images/陶瓷.png" alt="陶瓷电容器" class="placeholder-img" />
+  <img src="/images/陶瓷.png" alt="陶瓷电容器" class="placeholder-img cap-photo" />
   <div class="font-semibold text-lg mt-2">陶瓷电容器</div>
   <div class="mini-note mt-1">固定电容 · 电路板常用</div>
 </div>
 
 <div class="text-center">
-  <img src="/images/电解.png" alt="电解电容器" class="placeholder-img" />
+  <img src="/images/电解.png" alt="电解电容器" class="placeholder-img cap-photo" />
   <div class="font-semibold text-lg mt-2">电解电容器</div>
   <div class="mini-note mt-1">固定电容 · 大容量 · 有极性</div>
 </div>
 
 <div class="text-center">
-  <img src="/images/可变.png" alt="可变电容器" class="placeholder-img" />
+  <img src="/images/可变.png" alt="可变电容器" class="placeholder-img cap-photo" />
   <div class="font-semibold text-lg mt-2">可变电容器</div>
   <div class="mini-note mt-1">旋转调节 · 改变正对面积</div>
+</div>
+
 </div>
 
 </div>
@@ -306,21 +310,21 @@ layout: base-flex
 
 <div class="flex flex-col gap-4">
 
-<div v-click.left class="chat-msg chat-left">
+<div class="chat-msg chat-left">
   电容器上标的电压是什么？
   <img src="/images/陶瓷.png" alt="陶瓷电容器" class="w-20 rounded-lg" />
 
 </div>
 
-<div v-click.right class="chat-msg chat-right">
+<div v-click="1" class="chat-msg chat-right">
   <span class="chat-em">额定工作电压</span>—— 电容器正常工作的最大电压
 </div>
 
-<div v-click.left class="chat-msg chat-left mt-3">
+<div v-click="2" class="chat-msg chat-left mt-3">
   从闪电中，我们能得到什么启示？
 </div>
 
-<div v-click.right class="chat-msg chat-right">
+<div v-click="3" class="chat-msg chat-right">
   云层与大地 → 天然电容器<br/>
   电势差过大 → 空气<span class="text-danger font-semibold">击穿</span> → 闪电放电
 </div>
@@ -333,14 +337,14 @@ layout: base-flex
 
 # 工作电压与击穿电压
 
-<v-clicks>
-
 <div class="font-bold text-xl mt-2">1. 额定工作电压</div>
 
 <div class="text-lg mt-1">
 
 电容器上标注的电压——电容器<span class="text-accent font-semibold">长期、可靠工作</span>的最大电压。
 </div>
+
+<v-clicks>
 
 <div>
 <div class="my-3 border-t cap-hairline"></div>
@@ -458,13 +462,19 @@ title: 实验结论
 
 <div class="page-grow">
 
+<div class="ask ask-lead">
+
+<mdi-head-question-outline class="text-3xl" /> <span>从充放电实验中，你能发现 $Q$ 与 $U$ 的什么规律？</span>
+
+</div>
+
 <div class="half-grid mt-4">
 
 <v-clicks>
 
 <div class="text-center">
   <div class="text-xl font-semibold opacity-70">同一个电容器</div>
-  <div class="mt-2 text-accent font-bold">
+  <div class="mt-2 text-2xl font-bold text-accent">
 
 $Q / U$ 是定值
 
@@ -473,7 +483,7 @@ $Q / U$ 是定值
 
 <div class="divider-l text-center">
   <div class="text-xl font-semibold opacity-70">不同电容器</div>
-  <div class="mt-2 text-accent-2 font-bold">
+  <div class="mt-2 text-2xl font-bold text-accent-2">
     这个比值通常不相同
   </div>
 </div>
@@ -516,8 +526,6 @@ layout: base-flex
 
 # 电容
 
-<v-clicks>
-
 <div class="font-bold text-xl mt-2">1. 定义</div>
 
 <div class="text-lg mt-1">
@@ -525,6 +533,8 @@ layout: base-flex
 电容器所带电荷量 $Q$ 与两极板间电势差 $U$ 的比值，反映电容器储存电荷的本领。
 
 </div>
+
+<v-clicks>
 
 <div>
 
@@ -538,7 +548,7 @@ layout: base-flex
 
 <div class="my-2 border-t cap-hairline"></div>
 
-<span class="font-bold text-xl">3、单位：</span> 法拉，简称 **法**，符号 $F$，&ensp;$1\,\text{F} = 1\,\text{C/V}$
+<span class="font-bold text-xl">3. 单位：</span> 法拉，简称 **法**，符号 $F$，&ensp;$1\,\text{F} = 1\,\text{C/V}$
 
 </div>
 

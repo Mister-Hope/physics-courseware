@@ -204,7 +204,7 @@ onUnmounted(() => {
       <!-- SVG Drawing -->
       <div
         id="capacitor-circuit-svg-container"
-        class="w-full relative bg-slate-950/40 rounded-xl p-2 overflow-hidden"
+        class="circ-svg-bg w-full relative rounded-xl p-2 overflow-hidden"
       >
         <svg viewBox="0 0 720 220" class="block w-full h-auto">
           <!-- LEFT VERTICAL WIRE SECTION WITH EMBEDDED VERTICAL BATTERY -->
@@ -327,7 +327,7 @@ onUnmounted(() => {
               :fill="switchPos === 'charge' ? '#ef4444' : '#1e293b'"
               :stroke="switchPos === 'charge' ? '#f87171' : '#475569'"
               stroke-width="1.5"
-              class="group-hover:fill-red-950 circ-dot-charge transition-all duration-200"
+              class="circ-dot-charge transition-all duration-200"
             />
             <circle cx="220" cy="20" r="2.5" fill="#fff" />
             <text
@@ -380,7 +380,7 @@ onUnmounted(() => {
               :fill="switchPos === 'discharge' ? '#3b82f6' : '#1e293b'"
               :stroke="switchPos === 'discharge' ? '#60a5fa' : '#475569'"
               stroke-width="1.5"
-              class="group-hover:fill-blue-950 circ-dot-discharge transition-all duration-200"
+              class="circ-dot-discharge transition-all duration-200"
             />
             <circle cx="220" cy="90" r="2.5" fill="#fff" />
             <text
@@ -724,7 +724,7 @@ onUnmounted(() => {
               width="260"
               height="160"
               rx="4"
-              fill="#020617"
+              fill="var(--c-bg)"
               stroke="var(--c-neutral-700)"
               stroke-width="1.2"
             />
@@ -758,26 +758,14 @@ onUnmounted(() => {
               stroke-dasharray="1,2"
             />
 
-            <!-- Axis Labels -->
+            <!-- Axis Labels（I-t 图中电流有正负：只留一个 I 轴标签，避免出现两个 "I" 的歧义） -->
             <text
               x="428"
               y="40"
               font-size="11"
               font-family="Georgia, 'Times New Roman', serif"
               font-style="italic"
-              fill="#ef4444"
-              font-weight="bold"
-              text-anchor="end"
-            >
-              I
-            </text>
-            <text
-              x="428"
-              y="170"
-              font-size="11"
-              font-family="Georgia, 'Times New Roman', serif"
-              font-style="italic"
-              fill="var(--c-accent-2)"
+              fill="var(--c-text-dim)"
               font-weight="bold"
               text-anchor="end"
             >
@@ -812,7 +800,7 @@ onUnmounted(() => {
             <!-- Dynamic trace path -->
             <path
               :d="graphPath"
-              stroke="#10b981"
+              stroke="var(--c-ok)"
               stroke-width="2"
               fill="none"
               stroke-linecap="round"
@@ -831,22 +819,7 @@ onUnmounted(() => {
         </svg>
 
         <!-- 极性图例（SVG下方，不被图表遮挡） -->
-        <div class="flex items-center justify-center gap-6 mt-3 mb-1">
-          <span class="inline-flex items-center gap-2 text-sm font-medium opacity-85"
-            ><span
-              class="inline-block w-3.5 h-3.5 rounded-sm"
-              style="background: var(--c-danger)"
-            ></span>
-            正电（红）</span
-          >
-          <span class="inline-flex items-center gap-2 text-sm font-medium opacity-85"
-            ><span
-              class="inline-block w-3.5 h-3.5 rounded-sm"
-              style="background: var(--c-velocity)"
-            ></span>
-            负电（蓝）</span
-          >
-        </div>
+        <PolarityLegend class="mt-3 mb-1" />
       </div>
     </div>
   </div>
@@ -862,8 +835,14 @@ onUnmounted(() => {
   color: var(--c-text);
 }
 
+/* 原 `bg-slate-950/40`：比外壳更深一层的图板底 */
+.circ-svg-bg {
+  background: color-mix(in srgb, var(--c-bg) 55%, transparent);
+}
+
 /* 接线柱 hover 高亮（原 `group-hover:` 版的 stroke/fill 调色板类） */
 .group:hover .circ-dot-charge {
+  fill: color-mix(in srgb, var(--c-danger) 22%, var(--c-neutral-900));
   stroke: var(--c-danger);
 }
 
@@ -881,6 +860,7 @@ onUnmounted(() => {
 }
 
 .group:hover .circ-dot-discharge {
+  fill: color-mix(in srgb, var(--c-velocity) 22%, var(--c-neutral-900));
   stroke: var(--c-velocity);
 }
 

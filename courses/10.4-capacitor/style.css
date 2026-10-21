@@ -17,3 +17,9 @@
   border-color: color-mix(in srgb, var(--c-neutral-700) 50%, transparent);
   background: color-mix(in srgb, var(--c-neutral-900) 30%, transparent);
 }
+
+/* 「常见电容器」页：三张实物图比共享占位图（160px）更高——该页有纵向余量，
+   放大后可少裁掉实物、也把纵向空白收掉；与 .placeholder-img 同元素，特异性更高。 */
+.placeholder-img.cap-photo {
+  height: 11rem;
+}
