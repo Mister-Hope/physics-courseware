@@ -13,7 +13,7 @@
     "@slidev/cli": "catalog:",
     "@slidev/client": "catalog:",
     "@slidev/theme-default": "catalog:",
-    "katex": "^0.18.10",
+    "katex": "^0.19.0",
     "vue": "catalog:"
   }
 }
