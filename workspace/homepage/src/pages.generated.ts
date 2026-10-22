@@ -70,5 +70,5 @@ export const coursePages: Record<string, number> = {
   "o2-2.1-lenz-law": 14,
   "o2-2.2-faraday-law": 12,
   "o2-2.3-eddy-current": 21,
-  "o2-2.4-mutual-and-self-induction": 14
+  "o2-2.4-mutual-and-self-induction": 14,
 };
