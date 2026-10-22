@@ -54,7 +54,6 @@
   background: var(--c-surface);
   color: var(--c-text);
 
-  font-size: 0.9rem;
   line-height: 1.5;
 
   cursor: pointer;
@@ -83,7 +82,6 @@
 
 .demo-pill {
   color: var(--c-text-dim);
-  font-size: 0.9rem;
 }
 
 /* ── 第 5 页：应用三栏（图 + 一行说明） ── */
@@ -136,9 +134,10 @@
   height: 200px;
 }
 
-/* ── 第 14 页：小结表放大一档（后排能看清，也把页面填满） ── */
-.summary-table {
-  font-size: 1.1rem;
+/* ── 第 14 页：小结表（字号走共享 .text-lg 阶梯，这里只调行内边距） ── */
+.summary-table th,
+.summary-table td {
+  padding: 0.6rem 1rem;
 }
 
 /* ── 第 11 页：核心公式放大一档，避免整页只有一行小式子 ──
@@ -151,9 +150,4 @@
 
 .formula-lg .katex {
   font-size: 1em !important;
-}
-
-.summary-table th,
-.summary-table td {
-  padding: 0.6rem 1rem;
 }

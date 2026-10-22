@@ -46,7 +46,7 @@ title: 引课（隔空点灯）
 
 <template v-slot:answer>
 
-灯的能量，是左边线圈的磁场"隔空"送过去的。
+灯的能量，是左边线圈的磁场送过去的。
 
 </template>
 
@@ -72,7 +72,7 @@ title: 互感
 ---
 
 <div class="page-grow">
-<div class="ask">A 中的电流变化，为什么能在 B 中"点"出电？</div>
+<div class="ask">A 中的电流变化，为什么会让 B 中也有电流？</div>
 <div class="split-wide">
 <div><MutualLinkSvg /></div>
 <div class="stack">
@@ -104,11 +104,11 @@ title: 互感的应用
 <div class="mini-note">把电送到没有导线的地方。</div>
 </div>
 </div>
-<div v-click="1" class="tip-hint">这些装置传的都是"变化"的电——所以变压器用交流，不用直流。</div>
+<div v-click="1" class="tip-hint">这些装置都要靠不断变化的电流工作——所以变压器用交流，不用直流。</div>
 </div>
 
 ---
-title: 互感也会"串门"
+title: 互感带来的干扰
 ---
 
 <div class="page-grow">
@@ -117,7 +117,7 @@ title: 互感也会"串门"
 <div class="stack">
 <div class="ask">两条靠得很近的导线，为什么可能互相干扰？</div>
 <div v-click="1">一根导线中变化的电流，会在另一根里激起感应电动势。</div>
-<div v-click="2">收音机旁的电源线、电路板上并排的走线，都可能这样"串"进噪声。</div>
+<div v-click="2">收音机旁的电源线、电路板上并排的走线，都可能这样引进噪声。</div>
 <div v-click="3" class="tip-hint">对策：拉开距离、互相垂直、加屏蔽层、用双绞线。</div>
 </div>
 </div>
@@ -145,7 +145,7 @@ title: 自感电动势的方向
 <div class="page-grow">
 <div class="ask">线圈中的电流增大或减小时，自感电动势分别朝哪边？</div>
 <SelfEmfDirectionSvg :step="$clicks" />
-<div v-click="3" class="tip-hint">增反减同：电流增大时反向阻碍，电流减小时同向"挽留"。</div>
+<div v-click="3" class="tip-hint">增反减同：电流增大时反向阻碍，电流减小时同向阻碍。</div>
 </div>
 
 ---
@@ -158,7 +158,7 @@ title: 通电自感
 <div class="stack">
 <div class="ask">闭合开关，两只相同的灯谁先亮？</div>
 <div v-click="1">A₂ 立即亮；A₁ 慢慢变亮，最后两灯一样亮。</div>
-<div v-click="2">L 中电流增大 → 自感电动势阻碍增大 → A₁ 的电流被"拖住"。</div>
+<div v-click="2">L 中电流增大 → 自感电动势阻碍增大 → A₁ 的电流只能慢慢变大。</div>
 <div v-click="3" class="tip-hint">L 越大（有铁芯、匝数多），A₁ 亮得越慢。</div>
 </div>
 </div>
@@ -185,7 +185,7 @@ title: 自感电动势的大小
 ---
 
 <div class="page-grow">
-<div class="ask">电流变化得越快、线圈的"惯性"越大，自感电动势就越大——写成式子？</div>
+<div class="ask">自感电动势跟哪些因素有关？怎么写成一个式子？</div>
 <div class="text-center formula-lg"><Latex tex="E = L\dfrac{\Delta I}{\Delta t}" display /></div>
 <div v-click="1"><b>L</b> 叫自感系数（电感），由线圈的大小、形状、匝数、有无铁芯决定。</div>
 <div v-click="2"><b>单位</b>：亨利（<Latex tex="\text{H}" />），<Latex tex="1\ \text{H} = 1\ \text{V}\cdot\text{s/A}" />；常用 <Latex tex="\text{mH}" />、<Latex tex="\mu\text{H}" />。</div>
@@ -201,7 +201,7 @@ title: 磁场的能量
 <div class="ask">开关早已断开，灯还能亮一会儿——能量从哪来？</div>
 <div v-click="1">电流在周围建立磁场，能量就储存在磁场里。</div>
 <EnergyFlowSvg :step="$clicks" />
-<div v-click="2" class="tip-hint">L 越大，储存的磁场能量越多，断电时"还"得越久、越亮。</div>
+<div v-click="2" class="tip-hint">L 越大，储存的磁场能量越多，断电后灯亮得越久、也可能越亮。</div>
 </div>
 </div>
 
@@ -227,7 +227,7 @@ title: 小结
 <div class="page-grow">
 <div class="stack">
 <div class="ask">互感与自感，差在哪一步？</div>
-<table class="data-table summary-table">
+<table class="data-table summary-table text-lg">
 <thead>
 <tr><th>比较</th><th>互感</th><th>自感</th></tr>
 </thead>
