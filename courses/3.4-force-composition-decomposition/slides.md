@@ -29,18 +29,18 @@ clicks: 2
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">一个静止的物体同时受到 5 个力作用，你能判断它将向哪个方向运动吗？</div>
+<div class="ask">两个不共线的力共同作用在一个物体上，它们最终的作用效果是什么样的？</div>
 
 <div class="sum-row" v-click="1">
 <div class="figure relative min-w-0">
-<ForceComponentsSvg />
-<ChartLabel :x-percent="44" :y-percent="57" :parts="[{ tex: 'F_1' }]" anchor="left" :dx="-6" color="var(--c-accent)"/>
-<ChartLabel :x-percent="56" :y-percent="57" :parts="[{ tex: 'F_2' }]" anchor="right" :dx="6" color="var(--c-accent-2)"/>
+<BucketCarrySvg variant="kids" />
+<ChartLabel :x-percent="40" :y-percent="43" :parts="[{ tex: 'F_1' }]" anchor="left" :dx="-8" color="var(--c-accent)"/>
+<ChartLabel :x-percent="60" :y-percent="43" :parts="[{ tex: 'F_2' }]" anchor="right" :dx="8" color="var(--c-accent-2)"/>
 </div>
 <div class="sum-equal text-4xl">=</div>
 <div class="figure relative min-w-0">
-<ForceResultantSvg />
-<ChartLabel :x-percent="50" :y-percent="44" :parts="[{ tex: 'F' }]" anchor="left" :dx="12" color="var(--c-physics)"/>
+<BucketCarrySvg variant="adult" />
+<ChartLabel :x-percent="50" :y-percent="39" :parts="[{ tex: 'F' }]" anchor="left" :dx="-10" color="var(--c-physics)"/>
 </div>
 </div>
 
@@ -334,15 +334,15 @@ clicks: 2
 clicks: 2
 ---
 
-<div class="page-grow">
+<div class="page-grow" style="--page-gap:.3rem">
 <div class="ask ask-lead">合力和分力一定都是抽象出来的力吗？</div>
 
 <div class="split-wide" style="--cols: minmax(0, 0.85fr) minmax(0, 1.15fr)" v-click="1">
 <div><InclineContactForce /></div>
 
 <div class="stack">
-<div class="mini-title"><mdi-vector-link class="text-xl" /> 真实的合力</div>
-<div>斜面对物体的作用力，按性质分成支持力 <Latex tex="F_N" /> 与摩擦力 <Latex tex="F_f" />，按效果合成就是斜向的 <Latex tex="F" />。</div>
+<div class="mini-title"><mdi-vector-link class="text-xl" /> 真实的合力和分力</div>
+<div>斜面对物体的作用力，按性质分成支持力 <Latex tex="F_N" /> 与摩擦力 <Latex tex="F_f" />，按效果合成就是 <Latex tex="F" />。<Latex tex="F" /> 是合力，<Latex tex="F_N" />、<Latex tex="F_f" /> 是它的分力——它们都是真实的。</div>
 
 <div class="mini-title"><mdi-call-split class="text-xl" /> 抽象的分力</div>
 <div>把重力 <Latex tex="G" /> 沿斜面、垂直斜面分解出的 <Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 却是抽象的：物体并没有受到它们。</div>
@@ -388,7 +388,7 @@ clicks: 2
 </div>
 
 <div class="stack">
-<div class="tip-hint" v-click="2">两对互相垂直的方向：<b>水平—竖直</b>、<b>沿斜面—垂直斜面</b>，一共 8 个方向。重力就要分解到沿斜面向下与垂直斜面向下这两个方向上。</div>
+<div class="tip-hint" v-click="2">两对互相垂直的方向：<b>水平—竖直</b>、<b>沿斜面—垂直斜面</b>，一共 8 个方向。</div>
 
 <div class="stack-dense" v-click="2">
 <div><span class="inc-tag inc-tag-blue mini-note">水平—竖直</span>水平向右、水平向左、竖直向上、竖直向下</div>
@@ -415,15 +415,15 @@ clicks: 2
 </div>
 
 ---
-clicks: 2
+clicks: 3
 ---
 
 # 分力作用在谁身上
 
 <div class="page-grow" style="--page-gap:.2rem">
-<div class="ask"><Latex tex="G_\perp" /> 的效果是压紧斜面，那它是不是物体压斜面的力？</div>
+<div class="ask"><Latex tex="G_\perp" /> 的效果是压紧斜面，那它是不是物体压斜面的力？<span class="bad-line" v-click="1" style="font-weight:700; margin-left:.4em">不是</span></div>
 
-<div class="stack" v-click="1">
+<div class="stack" v-click="2">
 <div class="mini-title"><span class="ok-line inline-flex"><mdi-check-circle-outline class="text-3xl" /></span> 对：<Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 都作用在物块上</div>
 <div><Latex tex="G_\parallel" />、<Latex tex="G_\perp" /> 是重力分解出的分力，受力物体还是物块。</div>
 
@@ -431,7 +431,7 @@ clicks: 2
 <div>物体压斜面的力作用在<b>斜面</b>上，施力物体才是物块，它是斜面对物块支持力的反作用力——受力、施力对象都换了，和重力的分力不是同一个力。</div>
 </div>
 
-<div class="tip-hint" v-click="2">分解只是同一个力换一种说法：受力物体始终是原来那个物块，分力不能移到别的物体上。</div>
+<div class="tip-hint" v-click="3">分解只是同一个力换一种说法：受力物体始终是原来那个物块，分力不能移到别的物体上。</div>
 </div>
 
 ---
@@ -535,6 +535,8 @@ title: 练习与应用
 ---
 title: 课堂小结
 ---
+
+# 课堂小结
 
 <div class="page-grow">
 <div class="stack">

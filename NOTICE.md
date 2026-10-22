@@ -8,7 +8,7 @@ Copyright (C) 2026 张伯望（Zhang Bowang），东北育才学校
 项目地址：<https://github.com/Mister-Hope/physics-courseware>
 SPDX 标识符：`CC-BY-NC-SA-4.0`
 
-## 三项核心要求（即「非商用的 GPL」式授权）
+## 三项核心要求
 
 1. **署名与协议留存** —— 复制、发行、公开传播本作品或其演绎作品时，必须保留作者署名
    「张伯望（东北育才学校）」、本协议声明与项目地址，并注明是否作过修改。

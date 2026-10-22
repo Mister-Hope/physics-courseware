@@ -1,23 +1,32 @@
 <script setup lang="ts">
 /**
- * 斜面对物体的作用力：斜面上物块受到的支持力 F_N（垂直斜面向上）与摩擦力 F_f（沿斜面向上） 都是真实的力，它们的合力 F 正是"斜面对物体的作用力"——一个真实的斜向力。
+ * 第 16 页：斜面上物块的"真实合力、分力"与"抽象分力"。
  *
- * 以 F_N、F_f 为邻边作平行四边形，F 就是它的对角线。斜面倾角 30°，几何全部由三角函数算出。
+ * 物块静止在倾角 30° 的斜面上，受三个真实的力：重力 G（竖直向下）、支持力 F_N（垂直斜面向上）、 静摩擦力 F_f（沿斜面向上）。F_N 与 F_f 的合力 F
+ * 就是"斜面对物体的作用力"——与 G 等大反向。
+ *
+ * 同时把 G 沿斜面、垂直斜面分解出 G∥、G⊥：它们是抽象的分力（物体并没有受到它们），所以画成虚线。 静止时 G∥ = F_f、G⊥ =
+ * F_N，两对力等大反向——但那是"大小相等"，不是同一个力。
+ *
+ * 所有力都从物块的几何中心出发；长度由真实三角函数算出（30° 斜面上 F_N = G cosθ、F_f = G sinθ）。
  */
 /** 视图框（用户单位） */
-const VIEW = { width: 400, height: 230 };
+const VIEW = { width: 420, height: 290 };
 /** 斜面底端、倾角、斜面长度（用户单位） */
-const SLOPE_BASE = { x: 40, y: 210 };
+const SLOPE_BASE = { x: 30, y: 265 };
 const ANGLE = (30 * Math.PI) / 180;
-const SLOPE_LEN = 330;
-/** 物块半边长、中心距斜面底端多远、两个箭头多长 */
+const SLOPE_LEN = 350;
+/** 物块半边长、中心距斜面底端多远 */
 const BLOCK_HALF = 22;
-const BLOCK_AT = 150;
-const FORCE_LEN = 48;
+const BLOCK_AT = 160;
+/** 重力 G 的箭头长度（用户单位）；其余力按三角函数算出 */
+const G_LEN = 60;
 
+const COS = Math.cos(ANGLE);
+const SIN = Math.sin(ANGLE);
 /** 沿斜面向上、背离斜面的外法线：两个方向的单位向量（屏幕坐标） */
-const along = { x: Math.cos(ANGLE), y: -Math.sin(ANGLE) };
-const normal = { x: -Math.sin(ANGLE), y: -Math.cos(ANGLE) };
+const along = { x: COS, y: -SIN };
+const normal = { x: -SIN, y: -COS };
 
 const slopeTop = {
   x: SLOPE_BASE.x + SLOPE_LEN * along.x,
@@ -48,10 +57,27 @@ const blockPoints = [
   },
 ];
 
-/** 三个力的箭头尖端：F 是 F_N 与 F_f 的矢量和 */
-const tipN = { x: center.x + FORCE_LEN * normal.x, y: center.y + FORCE_LEN * normal.y };
-const tipFriction = { x: center.x + FORCE_LEN * along.x, y: center.y + FORCE_LEN * along.y };
-const tipResultant = { x: tipN.x + FORCE_LEN * along.x, y: tipN.y + FORCE_LEN * along.y };
+/** 真实力：支持力、摩擦力、它们的合力（合力 = 斜面对物体的作用力） */
+const tipN = {
+  x: center.x + G_LEN * COS * normal.x,
+  y: center.y + G_LEN * COS * normal.y,
+};
+const tipFriction = {
+  x: center.x + G_LEN * SIN * along.x,
+  y: center.y + G_LEN * SIN * along.y,
+};
+const tipResultant = { x: center.x, y: center.y - G_LEN };
+
+/** 抽象分力：重力沿斜面、垂直斜面的两个分力 */
+const tipGravity = { x: center.x, y: center.y + G_LEN };
+const tipGravityParallel = {
+  x: center.x - G_LEN * SIN * along.x,
+  y: center.y - G_LEN * SIN * along.y,
+};
+const tipGravityPerp = {
+  x: center.x - G_LEN * COS * normal.x,
+  y: center.y - G_LEN * COS * normal.y,
+};
 
 const pctX = (value: number): number => (value / VIEW.width) * 100;
 const pctY = (value: number): number => (value / VIEW.height) * 100;
@@ -62,8 +88,8 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
     <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`">
       <!-- 地面与斜面 -->
       <SurfaceHatch
-        :from="{ x: SLOPE_BASE.x - 20, y: SLOPE_BASE.y }"
-        :to="{ x: 392, y: SLOPE_BASE.y }"
+        :from="{ x: 20, y: SLOPE_BASE.y }"
+        :to="{ x: 400, y: SLOPE_BASE.y }"
         side="below"
         :thickness="14"
         :gap="30"
@@ -98,7 +124,7 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
         stroke="var(--c-text)"
         stroke-width="2.2"
       />
-      <!-- 以 F_N、F_f 为邻边的平行四边形：斜向的 F 是它的对角线 -->
+      <!-- 两个平行四边形：F_N、F_f 合成 F；G∥、G⊥ 合成 G -->
       <line
         :x1="tipN.x"
         :y1="tipN.y"
@@ -119,6 +145,27 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
         stroke-dasharray="6 5"
         opacity="0.7"
       />
+      <line
+        :x1="tipGravityParallel.x"
+        :y1="tipGravityParallel.y"
+        :x2="tipGravity.x"
+        :y2="tipGravity.y"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+        stroke-dasharray="6 5"
+        opacity="0.5"
+      />
+      <line
+        :x1="tipGravityPerp.x"
+        :y1="tipGravityPerp.y"
+        :x2="tipGravity.x"
+        :y2="tipGravity.y"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+        stroke-dasharray="6 5"
+        opacity="0.5"
+      />
+      <!-- 真实力：F_N、F_f、F -->
       <CourseArrow
         :from="center"
         :to="tipN"
@@ -140,6 +187,30 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
         stroke-width="3.8"
         pointer-events="none"
       />
+      <!-- 重力（真实）与它的两个分力（抽象，虚线） -->
+      <CourseArrow
+        :from="center"
+        :to="tipGravity"
+        stroke="var(--c-text)"
+        stroke-width="3.6"
+        pointer-events="none"
+      />
+      <CourseArrow
+        :from="center"
+        :to="tipGravityParallel"
+        stroke="var(--c-text-dim)"
+        stroke-width="2.6"
+        stroke-dasharray="7 5"
+        pointer-events="none"
+      />
+      <CourseArrow
+        :from="center"
+        :to="tipGravityPerp"
+        stroke="var(--c-text-dim)"
+        stroke-width="2.6"
+        stroke-dasharray="7 5"
+        pointer-events="none"
+      />
       <circle :cx="center.x" :cy="center.y" r="3.6" fill="var(--c-text)" />
     </svg>
     <ChartLabel
@@ -148,7 +219,7 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
       :parts="[{ tex: 'F_N' }]"
       anchor="top-left"
       :dx="-6"
-      :dy="-6"
+      :dy="-8"
       color="var(--c-accent-2)"
       halo
     />
@@ -157,8 +228,8 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
       :y-percent="pctY(tipFriction.y)"
       :parts="[{ tex: 'F_f' }]"
       anchor="top-right"
-      :dx="4"
-      :dy="-8"
+      :dx="6"
+      :dy="-10"
       color="var(--c-accent)"
       halo
     />
@@ -166,9 +237,39 @@ const pctY = (value: number): number => (value / VIEW.height) * 100;
       :x-percent="pctX(tipResultant.x)"
       :y-percent="pctY(tipResultant.y)"
       :parts="[{ tex: 'F' }]"
-      anchor="left"
-      :dx="-12"
+      anchor="top-left"
+      :dx="-6"
+      :dy="-10"
       color="var(--c-physics)"
+      halo
+    />
+    <ChartLabel
+      :x-percent="pctX(tipGravity.x)"
+      :y-percent="pctY(tipGravity.y)"
+      :parts="[{ tex: 'G' }]"
+      anchor="left"
+      :dx="-10"
+      color="var(--c-text)"
+      halo
+    />
+    <ChartLabel
+      :x-percent="pctX(tipGravityParallel.x)"
+      :y-percent="pctY(tipGravityParallel.y)"
+      :parts="[{ tex: 'G_\\parallel' }]"
+      anchor="bottom-left"
+      :dx="-6"
+      :dy="8"
+      color="var(--c-text-dim)"
+      halo
+    />
+    <ChartLabel
+      :x-percent="pctX(tipGravityPerp.x)"
+      :y-percent="pctY(tipGravityPerp.y)"
+      :parts="[{ tex: 'G_\\perp' }]"
+      anchor="bottom-right"
+      :dx="6"
+      :dy="8"
+      color="var(--c-text-dim)"
       halo
     />
   </div>

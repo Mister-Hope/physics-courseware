@@ -13,6 +13,9 @@ import { computed, ref } from "vue";
  * - F₂ ≥ F → 1 个解
  *
  * 交点用解析法真实求解（t = F cosθ ± √(F₂² − F²sin²θ)，只取 t > 0 的正向解），不靠目测。
+ *
+ * **相切吸附**：F₂ 的滑块步长 0.05 时很难正好落在 F sinθ 上，而"相切"正是要给学生看清的那一帧。 所以拖到离临界值 SNAP_RADIUS
+ * 以内就自动吸到相切（读数、判定、图上只剩一个交点）， 继续拖开超过这个距离才解除吸附。
  */
 const VIEW = { width: 716, height: 412 };
 /** 每牛顿多少用户单位 */
@@ -21,6 +24,11 @@ const origin = { x: 266, y: 406 };
 const F_MAG = 8;
 const T = { x: origin.x, y: origin.y - F_MAG * SCALE };
 const RAY_LEN = 410;
+
+/** 吸附半径（N）：离相切临界值这么近就自动吸住 */
+const SNAP_RADIUS = 0.3;
+/** 判定"正好相切"的容差（N） */
+const TANGENT_EPS = 1e-6;
 
 const theta = ref(40);
 const force2 = ref(6.5);
@@ -31,18 +39,34 @@ const critical = computed(() => F_MAG * Math.sin(rad.value));
 /** 已知方向的单位向量（与 F 成 θ 角，偏向右侧） */
 const direction = computed(() => ({ x: Math.sin(rad.value), y: -Math.cos(rad.value) }));
 
-/** 射线上满足条件的解：t = F cosθ ± √(F₂² − F²sin²θ)，只保留 t > 0 */
+/** 是否正好落在相切临界值上（吸附后就是 true） */
+const isTangent = computed(() => Math.abs(force2.value - critical.value) <= TANGENT_EPS);
+
+/** 射线上满足条件的解：t = F cosθ ± √(F₂² − F²sin²θ)，只保留 t > 0；相切时只有一个解 */
 const farDistances = computed<number[]>(() => {
+  if (isTangent.value) return [F_MAG * Math.cos(rad.value)];
+
   const disc = force2.value ** 2 - critical.value ** 2;
 
-  if (disc < -1e-9) return [];
+  if (disc < 0) return [];
 
-  const d = Math.sqrt(Math.max(disc, 0));
+  const d = Math.sqrt(disc);
   const near = F_MAG * Math.cos(rad.value) - d;
   const far = F_MAG * Math.cos(rad.value) + d;
 
   return near > 1e-6 ? [near, far] : [far];
 });
+
+/**
+ * F₂ 滑块输入：靠近相切临界值时自动吸附
+ *
+ * 拖到临界值附近 → 值直接取临界值（相切、1 个解）；继续拖开、离临界值超过 SNAP_RADIUS 后恢复跟手。
+ *
+ * @param value 滑块给出的原始值
+ */
+const onForce2Input = (value: number): void => {
+  force2.value = Math.abs(value - critical.value) <= SNAP_RADIUS ? critical.value : value;
+};
 
 const points = computed(() =>
   farDistances.value.map((t) => ({
@@ -86,27 +110,28 @@ const footMark = computed(() => {
 const pct = (value: number, total: number): number => (value / total) * 100;
 
 const verdict = computed(() => {
-  const count = points.value.length;
-
-  if (count === 0) return { text: "无解", color: "var(--c-danger)" };
+  if (isTangent.value) return { text: "1 个解（相切）", color: "var(--c-accent)" };
+  if (force2.value < critical.value) return { text: "无解", color: "var(--c-danger)" };
   if (force2.value >= F_MAG) return { text: "1 个解", color: "var(--c-accent)" };
 
-  return count === 2
-    ? { text: "2 个解", color: "var(--c-physics)" }
-    : { text: "1 个解（相切）", color: "var(--c-accent)" };
+  return { text: "2 个解", color: "var(--c-physics)" };
 });
 
 const caseRows = computed(() => [
-  { tex: `F_2 < F\\sin\\theta`, text: "无解", active: force2.value < critical.value - 1e-9 },
+  {
+    tex: `F_2 < F\\sin\\theta`,
+    text: "无解",
+    active: !isTangent.value && force2.value < critical.value,
+  },
   {
     tex: `F_2 = F\\sin\\theta`,
     text: "1 个解",
-    active: Math.abs(force2.value - critical.value) <= 1e-9,
+    active: isTangent.value,
   },
   {
     tex: `F\\sin\\theta < F_2 < F`,
     text: "2 个解",
-    active: force2.value > critical.value + 1e-9 && force2.value < F_MAG,
+    active: !isTangent.value && force2.value > critical.value && force2.value < F_MAG,
   },
   { tex: `F_2 \\ge F`, text: "1 个解", active: force2.value >= F_MAG },
 ]);
@@ -263,13 +288,14 @@ const criticalTex = computed(() => `F\\sin\\theta = ${fmt(critical.value)}\\ \\t
         <template #value><Latex :tex="thetaTex" /></template>
       </CourseSlider>
       <CourseSlider
-        v-model="force2"
+        :model-value="force2"
         :min="0.5"
         :max="8"
-        :step="0.5"
+        :step="0.05"
         label-tex="F_2"
         label-width="2.5rem"
         aria-label="已知大小的那个分力"
+        @update:model-value="onForce2Input"
       >
         <template #value><Latex :tex="f2Tex" /></template>
       </CourseSlider>

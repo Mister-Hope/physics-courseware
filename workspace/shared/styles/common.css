@@ -353,7 +353,9 @@ code {
   bottom: 0.5rem;
   left: 50%;
 
-  color: var(--c-text-dim);
+  display: flex;
+  gap: 0.4em;
+  align-items: center;
 
   font-size: 14px;
   font-family:
@@ -361,9 +363,46 @@ code {
   letter-spacing: 0.08em;
   white-space: nowrap;
 
-  opacity: 0.45;
-
   transform: translateX(-50%);
+}
+
+/* 署名文字压得很淡；GitHub 图标单独提亮，作为唯一的可点入口 */
+.cover-origin-text {
+  color: var(--c-text-dim);
+  opacity: 0.45;
+}
+
+.cover-github {
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  text-decoration: none;
+
+  opacity: 0.55;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* Slidev 主题给 `.slidev-layout a` 加了虚线底边（0,1,1）；图标下面不要这条虚线，提特异性清掉 */
+.cover-origin .cover-github {
+  border: 0;
+}
+
+.cover-github:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+/* 特异性要比 Slidev 主题的 `.slidev-layout a:hover`（0,2,1）高，否则 hover 会被主题改成青色 */
+.cover-origin .cover-github:hover,
+.cover-origin .cover-github:focus-visible {
+  color: var(--c-accent);
+  opacity: 1;
 }
 
 /* ── 占位图片 ── */
