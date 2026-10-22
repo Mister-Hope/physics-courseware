@@ -168,8 +168,8 @@ catalogs:
       specifier: 1.2.3
       version: 1.2.3
     '@iconify/vue':
-      specifier: 5.0.3
-      version: 5.0.3
+      specifier: 5.0.4
+      version: 5.0.4
     '@slidev/cli':
       specifier: 53.0.0
       version: 53.0.0
@@ -253,7 +253,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -277,7 +277,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -301,7 +301,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -322,7 +322,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -343,7 +343,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -364,7 +364,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -385,7 +385,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -406,7 +406,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -427,7 +427,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -448,7 +448,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -469,7 +469,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -490,7 +490,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -511,7 +511,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -538,7 +538,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -559,7 +559,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -580,7 +580,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -601,7 +601,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -622,7 +622,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -643,7 +643,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -664,7 +664,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -685,7 +685,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -706,7 +706,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -727,7 +727,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -748,7 +748,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -769,7 +769,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -790,7 +790,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -811,7 +811,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -832,7 +832,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -853,7 +853,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -874,7 +874,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -895,7 +895,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -916,7 +916,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -937,7 +937,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -958,7 +958,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -979,7 +979,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1000,7 +1000,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1021,7 +1021,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1042,7 +1042,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1063,7 +1063,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1084,7 +1084,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1105,7 +1105,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1126,7 +1126,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1147,7 +1147,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1168,7 +1168,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1189,7 +1189,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1210,7 +1210,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1231,7 +1231,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1252,7 +1252,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1273,7 +1273,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1294,7 +1294,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1315,7 +1315,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1336,7 +1336,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1357,7 +1357,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1378,7 +1378,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1399,7 +1399,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1420,7 +1420,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1441,7 +1441,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1462,7 +1462,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1483,7 +1483,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1504,7 +1504,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1531,7 +1531,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1552,7 +1552,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1579,7 +1579,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1600,7 +1600,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1621,7 +1621,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1642,7 +1642,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1663,7 +1663,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1684,7 +1684,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -1705,7 +1705,7 @@ importers:
         version: 1.2.3
       '@iconify/vue':
         specifier: 'catalog:'
-        version: 5.0.3(vue@3.5.44(typescript@6.0.3))
+        version: 5.0.4(vue@3.5.44(typescript@6.0.3))
       '@slidev/cli':
         specifier: 'catalog:'
         version: 53.0.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.154.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(srvx@1.0.6)(vite@8.3.4(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.44)(cac@7.1.0)(crossws@0.4.15(srvx@1.0.6))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.64.1)(postcss@8.5.30)(rolldown@1.2.14)(srvx@1.0.6)(supports-color@10.2.2)
@@ -2027,8 +2027,8 @@ packages:
   '@iconify/utils@3.1.7':
     resolution: {integrity: sha512-JZHlwdID+dy+lTgbYC8NEC4zeugqeYsc6jewvzb4c58kHauJn+X7rNwQjxz5p2qSjqaEeQoLkCIQ9v/H4PK0/w==}
 
-  '@iconify/vue@5.0.3':
-    resolution: {integrity: sha512-e9x6QZe2/HyeHUog0jzZJSZts7m/YntPYp/p4OqtZEXpHznxWnQpcX30YpuaUH43h69l3YeR1FCJ8V1t3qd7qA==}
+  '@iconify/vue@5.0.4':
+    resolution: {integrity: sha512-9yP5PjOv5G9vStHfyPtQ69Ay1CSNAC3AZTRDJ4LX3UMX7nEH0GO8OKhc3qhcrXp1KS2GnlLufGbFCwD+U4Fi5A==}
     peerDependencies:
       vue: '>=3.0.0'
 
@@ -5925,7 +5925,7 @@ snapshots:
       '@iconify/types': 2.0.0
       import-meta-resolve: 4.2.0
 
-  '@iconify/vue@5.0.3(vue@3.5.44(typescript@6.0.3))':
+  '@iconify/vue@5.0.4(vue@3.5.44(typescript@6.0.3))':
     dependencies:
       '@iconify/types': 2.0.0
       vue: 3.5.44(typescript@6.0.3)
