@@ -1,0 +1,159 @@
+/* ═══════════════════════════════════════════════
+   互感和自感 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式。
+
+   命名前缀（本课只用 2 个）：
+     demo-  课堂演示组件的「画布 + 控制条」（第 3、9、10 页共用）
+     app-   应用图的三栏排布（第 5 页）
+   字号一律走共享阶梯，色值 / 圆角一律走 var(--c-*) / var(--radius-*)。
+   ═══════════════════════════════════════════════ */
+
+/* ── 演示组件：SVG 占满剩余高度，控制条贴底 ── */
+.demo-panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  min-height: 0;
+}
+
+.demo-svg {
+  display: block;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
+/* 磁感线缓慢流动：表示磁场在变化 */
+.field-flow {
+  animation: field-dash 1.8s linear infinite;
+}
+
+@keyframes field-dash {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+/* ── 演示控制条：按钮 + 状态 ── */
+.demo-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-btn {
+  padding: 0.24rem 0.95rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: var(--c-surface);
+  color: var(--c-text);
+
+  font-size: 0.9rem;
+  line-height: 1.5;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s,
+    background 0.18s,
+    color 0.18s;
+}
+
+.demo-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.demo-btn:hover:not(:disabled) {
+  border-color: var(--c-border-glow);
+}
+
+.demo-btn.on {
+  border-color: var(--c-border-glow);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.demo-pill {
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+}
+
+/* ── 第 5 页：应用三栏（图 + 一行说明） ── */
+.app-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+/* 三张图的画框等高，图按比例缩放居中——名字与说明才会横向对齐 */
+.app-figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 190px;
+}
+
+.app-figure > svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* 三项整体在页面上垂直居中，不留一大片空底 */
+.app-row {
+  flex: 1;
+  align-content: center;
+  min-height: 0;
+}
+
+.app-item .app-name {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+/* ── 第 13 页：通栏图按固定高度缩放，避免 3:1 的图撑满整页 ── */
+.fig-wide {
+  display: flex;
+  justify-content: center;
+}
+
+.fig-wide > svg {
+  width: auto;
+  max-width: 100%;
+  height: 200px;
+}
+
+/* ── 第 14 页：小结表放大一档（后排能看清，也把页面填满） ── */
+.summary-table {
+  font-size: 1.1rem;
+}
+
+/* ── 第 11 页：核心公式放大一档，避免整页只有一行小式子 ──
+   共享样式把 .katex 钉成 1em !important、.katex-display 钉成 1.15rem !important，
+   所以放大必须落在 .katex-display 上（并带 !important 才压得过共享层）。 */
+.formula-lg .katex-display {
+  margin: 0.8rem 0 !important;
+  font-size: 2.1rem !important;
+}
+
+.formula-lg .katex {
+  font-size: 1em !important;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 0.6rem 1rem;
+}

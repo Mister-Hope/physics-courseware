@@ -67,4 +67,8 @@ export const coursePages: Record<string, number> = {
   "o2-1.3-charged-particle-motion": 60,
   "o2-1.4-mass-spectrometer-cyclotron": 31,
   "o2-1.x-speed-matching": 16,
+  "o2-2.1-lenz-law": 14,
+  "o2-2.2-faraday-law": 12,
+  "o2-2.3-eddy-current": 21,
+  "o2-2.4-mutual-and-self-induction": 14
 };

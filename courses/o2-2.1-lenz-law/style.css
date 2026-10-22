@@ -1,0 +1,137 @@
+/* ═══════════════════════════════════════════════
+   楞次定律 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+/* ── 第 5 页：四格实验记录（2×2；图按高度统一缩放，图内字号才稳定） ── */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.4rem;
+  align-content: center;
+}
+
+.case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.case-cap {
+  color: var(--c-text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.case svg {
+  width: auto;
+  height: 156px;
+}
+
+/* ── 第 6 页：单幅放大图 ── */
+.fig-lg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fig-lg svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+/* ── 第 7 页 / 第 13 页：比较表 ── */
+.lt-table {
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+
+.lt-table th,
+.lt-table td {
+  padding-right: 0.85rem;
+  padding-left: 0.85rem;
+}
+
+/* ── 第 10 页：铝环双图 ── */
+.ring-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.ring-row > div {
+  min-width: 0;
+  text-align: center;
+}
+
+.ring-row svg {
+  width: 100%;
+  height: 158px;
+}
+
+/* ── 第 11 页：判定步骤 ── */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.step-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.step-no {
+  display: grid;
+  flex: none;
+  place-items: center;
+
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 第 14 页：小结链 ── */
+.sum-chain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.sum-step {
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.sum-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-text-dim);
+}
