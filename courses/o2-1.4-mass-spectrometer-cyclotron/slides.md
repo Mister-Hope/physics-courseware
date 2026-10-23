@@ -599,7 +599,11 @@ clicks: 3
 
 <div v-click="2">② 洛伦兹力使正、负离子偏向两侧管壁，两壁之间出现电势差</div>
 
-<div v-click="3">③ 稳定时 <Latex tex="qvB = q\dfrac{U}{D}" /> ⟹ <Latex tex="v = \dfrac{U}{BD}" />，流量 <Latex tex="Q = \dfrac{\pi DU}{4B}" /></div>
+<div v-click="3">③ 稳定时 <Latex tex="qvB = qE = q\dfrac{U}{D}" /><br> ⟹ <Latex tex="v = \dfrac{U}{BD}" />
+
+流量 <Latex tex="Q = Sv =\dfrac{\pi DU}{4B}" />
+
+</div>
 
 </div>
 

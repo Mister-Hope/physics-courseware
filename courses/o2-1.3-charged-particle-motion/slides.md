@@ -1630,3 +1630,77 @@ clicks: 2
 </div>
 
 </div>
+
+---
+
+<div class="qp-page">
+
+<div class="split-wide" style="--cols: minmax(0, 0.98fr) minmax(0, 1.02fr);align-items:center;flex:1 1 auto;min-height:0">
+
+<div class="stack stack-tight" style="gap:1rem;font-size:.94em">
+
+<div><b class="ex-no">例 9</b>　如图所示，空间存在垂直纸面向外、磁感应强度大小为 <Latex tex="B" /> 的匀强磁场。粒子源 <Latex tex="O" /> 可沿纸面向各个方向以相同的速率发射质量为 <Latex tex="m" />、带电荷量为 <Latex tex="q" /> 的正粒子。一薄光屏与纸面的交线为 <Latex tex="PQ" />，<Latex tex="OQ=L" />，<Latex tex="PQ=2L" />，<Latex tex="OQ\perp PQ" />。要使 <Latex tex="PQ" /> 左、右两侧所有点均能被粒子打中，求粒子的速率 <Latex tex="v" /> 的范围。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<ScreenBothSides />
+
+</div>
+
+</div>
+
+</div>
+
+---
+clicks: 2
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.55rem;font-size:.92em">
+
+<div><b>例 9（一）</b>　左侧（朝向 <Latex tex="O" /> 的一面）</div>
+
+<div v-click="1">速率不变，各方向射出的轨迹都是半径 <Latex tex="R" />、过 <Latex tex="O" /> 的圆。这些圆合起来，正好是<b>以 <Latex tex="O" /> 为圆心、半径 <Latex tex="2R" /> 的圆</b>——只要整条 <Latex tex="PQ" /> 都落在这个圆里，这一面上就没有一点打不到。</div>
+
+<div v-click="2">屏上离 <Latex tex="O" /> 最远的是 <Latex tex="P" />：<Latex tex="OP=\sqrt{L^2+(2L)^2}=\sqrt{5}L" />。左侧全部被打中，就要求 <Latex tex="2R\ge OP" />，即 <Latex tex="v\ge\frac{\sqrt{5}qBL}{2m}" />（条件 ①）。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<ScreenBothSides mode="left" :step="$clicks" />
+
+</div>
+
+</div>
+
+---
+clicks: 4
+---
+
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1fr) minmax(0, 1.2fr);--hint-pad-y:.5rem">
+
+<div class="stack stack-tight" style="gap:.45rem;font-size:.9em">
+
+<div><b>例 9（二）</b>　右侧（背面）：必须绕过 <Latex tex="P" /> 端</div>
+
+<div v-click="1">背面被屏挡住，粒子只能从 <Latex tex="P" />、<Latex tex="Q" /> 的外侧绕过去再打回来。每个点都要能打到，最难的仍是离 <Latex tex="O" /> 最远的 <Latex tex="P" />：极限是轨迹<b>与屏相切于 <Latex tex="P" /></b>，圆心 <Latex tex="C" /> 在过 <Latex tex="P" /> 的屏垂线上，<Latex tex="CP=CO=R" />。</div>
+
+<div v-click="2"><Latex tex="C" /> 与 <Latex tex="P" /> 等高，所以水平距离为 <Latex tex="R-L" />、竖直距离为 <Latex tex="2L" />：<Latex tex="(R-L)^2+(2L)^2=R^2" />。</div>
+
+<div v-click="3">解得 <Latex tex="R=\frac{5L}{2}" />，即 <Latex tex="v\ge\frac{5qBL}{2m}" />（条件 ②）。</div>
+
+<div v-click="4" class="tip-hint">①、② 要同时满足，取更强的：<Latex tex="v\ge\frac{5qBL}{2m}" />。速度越大两侧都越容易打中，没有上限。</div>
+
+</div>
+
+<div class="qp-fig qp-fig-center">
+
+<ScreenBothSides mode="right" :step="$clicks" />
+
+</div>
+
+</div>
