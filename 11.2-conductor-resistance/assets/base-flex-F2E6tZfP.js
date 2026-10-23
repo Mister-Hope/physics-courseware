@@ -1,0 +1,1 @@
+import{B as e,U as t,x as n}from"./modules/shiki-BoppU2c3.js";import{tt as r}from"./index-DhOXPgRl.js";var i={class:`slidev-layout base-flex`},a={__name:`base-flex`,setup(a){let{$slidev:o,$nav:s,$clicksContext:c,$clicks:l,$page:u,$renderContext:d,$frontmatter:f}=r();return(r,a)=>(e(),n(`div`,i,[t(r.$slots,`default`)]))}};export{a as t};
