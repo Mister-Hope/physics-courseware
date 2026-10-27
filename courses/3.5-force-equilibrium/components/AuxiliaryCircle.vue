@@ -26,8 +26,8 @@ const THETA_MAX = 120;
 /** 转动到两端时，其中一根绳刚好竖直（再转那根绳就松了）——留 1.5° 避免图形退化 */
 const MARGIN = 1.5;
 
-/** 左侧受力图（双手提水桶）几何：紧凑且留足双手旋转空间 */
-const VIEW = { width: 260, height: 220 };
+/** 左侧受力图（双手提水桶）几何：画布裁到 `viewBox="25 5 210 210"`，图看得更大，双手旋转到两端也不出画 */
+const VIEW_BOX = { x: 25, y: 5, size: 210 };
 const knot: Point = { x: 130, y: 120 }; // 绳结（水桶弧形提梁顶端）
 const ROPE = 70;
 
@@ -134,6 +134,13 @@ const circle = computed(() => {
   return { x: ux, y: uy, r: Math.hypot(ux - a.x, uy - a.y) };
 });
 
+/** 辅助圆自动居中：整幅图水平平移，让圆始终落在画布中间（G 不再固定在中央——圆偏向一侧时不会溢出画布） */
+const triShiftX = computed<number>(() => {
+  const c = circle.value;
+
+  return c ? Math.round((TRI.width / 2 - c.x) * 100) / 100 : 0;
+});
+
 /**
  * 计算三角形某条有向边 (from → to) 的外法线方向中点偏移坐标： 通过与三角形重心 centroid 点积校验，严格保证字母永远落在三角形外侧！
  *
@@ -217,12 +224,15 @@ const drag = (event: PointerEvent): void => {
 
   if (!svg) return;
 
-  const rect = svg.getBoundingClientRect();
+  // 用 CTM 反变换，viewBox 原点偏移与留白（preserveAspectRatio 的 letterbox）都算进去
+  const ctm = svg.getScreenCTM();
 
-  if (rect.width === 0 || rect.height === 0) return;
+  if (!ctm) return;
 
-  const userX = ((event.clientX - rect.left) / rect.width) * VIEW.width;
-  const userY = ((event.clientY - rect.top) / rect.height) * VIEW.height;
+  const pointer = svg.createSVGPoint();
+  pointer.x = event.clientX;
+  pointer.y = event.clientY;
+  const { x: userX, y: userY } = pointer.matrixTransform(ctm.inverse());
   const deg = (Math.atan2(userX - knot.x, knot.y - userY) * 180) / Math.PI;
   const nextTilt = draggingSide.value === "left" ? theta.value / 2 + deg : deg - theta.value / 2;
 
@@ -251,7 +261,10 @@ const endDrag = (): void => {
     <div class="ac-stage">
       <!-- 左图：双手各拉一根绳提水桶 -->
       <div class="ac-fig">
-        <svg :viewBox="`0 0 ${VIEW.width} ${VIEW.height}`" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          :viewBox="`${VIEW_BOX.x} ${VIEW_BOX.y} ${VIEW_BOX.size} ${VIEW_BOX.size}`"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <!-- 两根绷紧的轻绳（夹角 θ 固定，随整体方向旋转） -->
           <line
             :x1="knot.x"
@@ -404,111 +417,114 @@ const endDrag = (): void => {
       <!-- 右图：立式辅助圆与力矢量三角形（圆放大居中，G、F₁、F₂ 自适应置于三角形外侧） -->
       <div class="ac-tri" :class="{ 'fig-hold': step < 1 }">
         <svg :viewBox="`0 0 ${TRI.width} ${TRI.height}`" xmlns="http://www.w3.org/2000/svg">
-          <!-- 大号辅助圆 -->
-          <circle
-            v-if="circle"
-            :cx="circle.x"
-            :cy="circle.y"
-            :r="circle.r"
-            fill="color-mix(in srgb, var(--c-text-dim) 3%, transparent)"
-            stroke="var(--c-neutral-500)"
-            stroke-width="1.5"
-            stroke-dasharray="6 5"
-            opacity="0.88"
-          />
+          <!-- 整幅图跟着辅助圆水平自动居中（G 不再钉在中央） -->
+          <g :transform="`translate(${triShiftX} 0)`">
+            <!-- 大号辅助圆 -->
+            <circle
+              v-if="circle"
+              :cx="circle.x"
+              :cy="circle.y"
+              :r="circle.r"
+              fill="color-mix(in srgb, var(--c-text-dim) 3%, transparent)"
+              stroke="var(--c-neutral-500)"
+              stroke-width="1.5"
+              stroke-dasharray="6 5"
+              opacity="0.88"
+            />
 
-          <!-- 圆周角 ψ 弧线与自适应角平分线标签 -->
-          <path :d="psiArc" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
-          <text
-            :x="psiLabel.x"
-            :y="psiLabel.y"
-            fill="var(--c-text-dim)"
-            font-family="KaTeX_Math"
-            font-style="italic"
-            font-size="15"
-            text-anchor="middle"
-            dominant-baseline="central"
-          >
-            ψ
-          </text>
+            <!-- 圆周角 ψ 弧线与自适应角平分线标签 -->
+            <path :d="psiArc" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
+            <text
+              :x="psiLabel.x"
+              :y="psiLabel.y"
+              fill="var(--c-text-dim)"
+              font-family="KaTeX_Math"
+              font-style="italic"
+              font-size="15"
+              text-anchor="middle"
+              dominant-baseline="central"
+            >
+              ψ
+            </text>
 
-          <!-- 重力 G（定弦 AB，竖直向下） -->
-          <CourseArrow
-            :from="tri.vertexA"
-            :to="tri.vertexB"
-            :head-size="11"
-            stroke="var(--c-force)"
-            stroke-width="3.4"
-          />
+            <!-- 重力 G（定弦 AB，竖直向下） -->
+            <CourseArrow
+              :from="tri.vertexA"
+              :to="tri.vertexB"
+              :head-size="11"
+              stroke="var(--c-force)"
+              stroke-width="3.4"
+            />
 
-          <!-- 左绳拉力 F₁（B → C） -->
-          <CourseArrow
-            :from="tri.vertexB"
-            :to="tri.vertexC"
-            :head-size="11"
-            :stroke="f1Max ? '#facc15' : '#2dd4bf'"
-            stroke-width="3.4"
-          />
+            <!-- 左绳拉力 F₁（B → C） -->
+            <CourseArrow
+              :from="tri.vertexB"
+              :to="tri.vertexC"
+              :head-size="11"
+              :stroke="f1Max ? '#facc15' : '#2dd4bf'"
+              stroke-width="3.4"
+            />
 
-          <!-- 右绳拉力 F₂（C → A） -->
-          <CourseArrow
-            :from="tri.vertexC"
-            :to="tri.vertexA"
-            :head-size="11"
-            :stroke="f2Max ? '#facc15' : '#e2a846'"
-            stroke-width="3.4"
-          />
+            <!-- 右绳拉力 F₂（C → A） -->
+            <CourseArrow
+              :from="tri.vertexC"
+              :to="tri.vertexA"
+              :head-size="11"
+              :stroke="f2Max ? '#facc15' : '#e2a846'"
+              stroke-width="3.4"
+            />
 
-          <!-- 三个力的自适应外侧标注（严格通过外法线计算置于三角形外侧） -->
-          <text
-            :x="forceLabels.g.x"
-            :y="forceLabels.g.y"
-            fill="var(--c-force)"
-            font-family="KaTeX_Math"
-            font-style="italic"
-            font-size="18"
-            text-anchor="middle"
-            dominant-baseline="central"
-            stroke="var(--c-bg-soft)"
-            stroke-width="3"
-            paint-order="stroke"
-          >
-            G
-          </text>
+            <!-- 三个力的自适应外侧标注（严格通过外法线计算置于三角形外侧） -->
+            <text
+              :x="forceLabels.g.x"
+              :y="forceLabels.g.y"
+              fill="var(--c-force)"
+              font-family="KaTeX_Math"
+              font-style="italic"
+              font-size="18"
+              text-anchor="middle"
+              dominant-baseline="central"
+              stroke="var(--c-bg-soft)"
+              stroke-width="3"
+              paint-order="stroke"
+            >
+              G
+            </text>
 
-          <text
-            :x="forceLabels.f1.x"
-            :y="forceLabels.f1.y"
-            :fill="f1Max ? '#facc15' : '#2dd4bf'"
-            font-family="KaTeX_Math"
-            font-style="italic"
-            font-size="18"
-            text-anchor="middle"
-            dominant-baseline="central"
-            stroke="var(--c-bg-soft)"
-            stroke-width="3"
-            paint-order="stroke"
-          >
-            F
-            <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="4">1</tspan>
-          </text>
+            <text
+              :x="forceLabels.f1.x"
+              :y="forceLabels.f1.y"
+              :fill="f1Max ? '#facc15' : '#2dd4bf'"
+              font-family="KaTeX_Math"
+              font-style="italic"
+              font-size="18"
+              text-anchor="middle"
+              dominant-baseline="central"
+              stroke="var(--c-bg-soft)"
+              stroke-width="3"
+              paint-order="stroke"
+            >
+              F
+              <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="4">1</tspan>
+            </text>
 
-          <text
-            :x="forceLabels.f2.x"
-            :y="forceLabels.f2.y"
-            :fill="f2Max ? '#facc15' : '#e2a846'"
-            font-family="KaTeX_Math"
-            font-style="italic"
-            font-size="18"
-            text-anchor="middle"
-            dominant-baseline="central"
-            stroke="var(--c-bg-soft)"
-            stroke-width="3"
-            paint-order="stroke"
-          >
-            F
-            <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="4">2</tspan>
-          </text>
+            <text
+              :x="forceLabels.f2.x"
+              :y="forceLabels.f2.y"
+              :fill="f2Max ? '#facc15' : '#e2a846'"
+              font-family="KaTeX_Math"
+              font-style="italic"
+              font-size="18"
+              text-anchor="middle"
+              dominant-baseline="central"
+              stroke="var(--c-bg-soft)"
+              stroke-width="3"
+              paint-order="stroke"
+            >
+              F
+              <tspan font-family="KaTeX_Main" font-style="normal" font-size="12" dy="4">2</tspan>
+            </text>
+          </g>
 
           <text
             v-if="f1Max || f2Max"
@@ -519,7 +535,13 @@ const endDrag = (): void => {
             font-size="13"
             text-anchor="middle"
           >
-            此时成为直径，拉力最大
+            <tspan font-family="KaTeX_Math" font-style="italic" font-size="16">F</tspan>
+            <tspan font-family="KaTeX_Main" font-style="normal" font-size="10" dy="3">
+              {{ f1Max ? 1 : 2 }}
+            </tspan>
+            <tspan font-family="KaTeX_Main" font-style="normal" font-size="13" dy="-3">
+              此时成为直径，数值最大
+            </tspan>
           </text>
         </svg>
       </div>

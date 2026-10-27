@@ -1,4 +1,4 @@
-# 共享组件总览：27 个全局组件（干什么 + props 正本）
+# 共享组件总览：28 个全局组件（干什么 + props 正本）
 
 > 什么时候读：**页面上要用任何共享组件时**——先看这一篇 §1 的总表选组件，再看对应小节拿 props。
 > 这些组件由共享 addon（`workspace/shared/`）**全局注册**：直接写标签，**不用 import、不要重画**；
@@ -28,7 +28,8 @@
 | `CircuitSwitch`   | 电路：开关（断开 / 闭合；闭合时刀闸与导线重合）                | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `CircuitBulb`     | 电路：灯泡                                                     | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `CircuitMeter`    | 电路：电表（电压表 / 电流表）                                  | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `PointerAmmeter`  | 电路：带指针的电流表表盘（实验装置示意图用，指针可偏转）       | **只能在 `<svg>` 里**                           | [`electronic-symbols.md`](./electronic-symbols.md)          |
+| `Galvanometer`    | 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）   | **只能在 `<svg>` 里**                           | [`electronic-symbols.md`](./electronic-symbols.md) §3.6.1   |
+| `BarMagnet`       | 条形磁体（S 蓝 / N 红，横放 / 竖放，由 `nSide` 决定）          | **只能在 `<svg>` 里**                           | 本篇 §10                                                    |
 | `FieldDots`       | 磁场**平铺阵列**：裸 `×` / 裸 `·` 铺满区域（不带圈）           | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `FieldMark`       | 磁场**单个带圈**记号 ⊙/⊗：图例 / 方向标注（不同图并用阵列）    | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `Latex`           | HTML 里的 KaTeX 公式（Markdown 段落里的 `$…$` 仍照用）         | markdown / HTML 层                              | 本篇 §3                                                     |
@@ -239,7 +240,7 @@
 > **改文件用脚本替换时，每处替换都要断言命中**（静默跳过一次替换＝留下半改状态）。
 
 1. **全局注册**：直接写标签，不 import；共享代码改动（`workspace/shared/`）会影响**全部课件**，改前评估影响面。
-2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、`CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`PointerAmmeter`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。`Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
+2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、`CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`Galvanometer`、`BarMagnet`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。`Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
    🔴 **这些组件覆盖的图元一律别手画**（教师点名统一，手画＝各课画法不一致）：表身 / 刻度 / 挂钩（`SpringScale`）、手掌 / 手指（`GripHand`）、电源 / 电阻 / 开关 / 电表 / 灯泡（`Circuit*`）、磁场叉点阵（`FieldDots` / `FieldMark`）、太阳 / 地球 / 月球 / 星球（`Celestial*`）、坐标轴（`SimpleAxis` / `NumberAxis` / `CoordAxes`，见 [coordinate-axes.md](./coordinate-axes.md)）。`Circuit*` / `Field*` 的 props 与用法见 [electronic-symbols.md](./electronic-symbols.md)。
 3. **`v-click` 写在组件里照样生效**（Slidev 的 `v-click` 是全局指令，跨组件仍绑当前页）；也可以由页面传 `:step="$clicks"`。
 4. 🔴 **SVG 属性的颜色（正本）**：带空格的 `rgb(148 163 184 / 16%)` 原先会被 attributify 把分量当工具类、撑坏图形（**只有 `pnpm build` 产物中招，dev server 与截图看不出来**），**现已在 `workspace/shared/uno.config.ts` 用 `blocklist` 从源头屏蔽 ⇒ 带不带空格都行**；⛔ 别改回 `presetAttributify({ignoreAttributes})`，新增会落到 DOM 的数值属性 / prop 要补进 `NUMERIC_ATTRS`；
@@ -300,3 +301,32 @@
 
 - 天体只是"图元"，**轨道 / 连线 / 力 / 速度箭头照旧用 `CourseArrow`、`<path>` 自己画**；
 - 需要"行星跑到轨道上某处"时，把轨道参数算出来再喂给 `x` / `y` 即可（例如椭圆轨道用 `x = a·cosE - c`、`y = b·sinE`）。
+
+## 10. 条形磁体：`BarMagnet`
+
+**S 蓝 / N 红、整块磁体只有最外端两个角是圆角**（S/N 分界处是直角）——各课封面、对照图里的磁体一律用它，
+⛔ 不要再手画"S/N 两个矩形"（教师点名统一：各课磁体要长一个样）。**只能在 `<svg>` 里写**（根节点是 `<g>`）。
+
+| prop         | 类型                                        | 默认              | 说明                                                             |
+| ------------ | ------------------------------------------- | ----------------- | ---------------------------------------------------------------- |
+| `x` / `y`    | `number`                                    | `0` / `0`         | 磁体**几何中心**（viewBox 用户单位）                             |
+| `length`     | `number`                                    | `96`              | 沿磁轴（N–S 方向）的长度                                        |
+| `width`      | `number`                                    | `30`              | 垂直磁轴的宽度                                                   |
+| `nSide`      | `"right" \| "left" \| "top" \| "bottom"`   | `"right"`         | N 极朝向：`right`/`left` 横放、`top`/`bottom` 竖放               |
+| `nColor`     | `string`                                    | `var(--c-danger)` | N 极颜色（正电红）                                               |
+| `sColor`     | `string`                                    | `var(--c-velocity)` | S 极颜色（负电蓝）                                             |
+| `showLabels` | `boolean`                                   | `true`            | 是否画 N / S 字母（磁体太小、纯示意时可关）                      |
+| `labelSize`  | `number`                                    | `0`               | 字母字号；`0` = 自动（`width × 0.62`）                           |
+| `labelColor` | `string`                                    | `var(--c-bg-soft)` | 字母颜色（深底，压在彩色磁体上）                                |
+| `corner`     | `number`                                    | `3`               | 最外端圆角半径                                                   |
+
+```html
+<!-- 横放：S 在左、N 在右（13.3 封面 / P3 对照图） -->
+<BarMagnet :x="74" :y="250" :length="92" :width="28" n-side="right" />
+<!-- 竖放：S 在上、N 在下 -->
+<BarMagnet :x="120" :y="34" :length="52" :width="26" n-side="bottom" />
+```
+
+- 磁体只画"磁体本身"：**磁感线、小磁针、线圈、引线都由页面自己画**（磁感线用 `CourseArrow` 或各课现有场模型）。
+- 磁体方向由 `nSide` 决定，**不要再用 `transform` 旋转**（旋转会把 S/N 字母一起转倒）。
+- **蹄形磁体不在组件内**：装置图（切割磁感线、法拉第圆盘）里的蹄形磁体是装置专用画法，仍按各课现有画法画。

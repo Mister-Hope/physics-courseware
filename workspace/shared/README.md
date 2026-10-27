@@ -6,8 +6,8 @@
 - `CourseBottomBar` 组件 — 底栏装饰线（无页码）
 - `Latex` 组件 — 在 Vue 组件内渲染 KaTeX 公式（`<Latex tex="x_1" />`，`display` prop 切块级）
 - `CourseSlider` 组件 — **全库统一的滑块**（原生 `input[type=range]` + `accent-color`，标签 + 滑块 + 读数一行；各课不要再自己写 `::-webkit-slider-thumb` 那套）
-- 学科图形组件（同样自动注册、课件里不用 import）：`SpringScale` 弹簧测力计、`CourseArrow` 矢量箭头、`SurfaceHatch` 接触面、`Ruler` 刻度尺、`CoordAxes` / `NumberAxis` / `SimpleAxis` 坐标轴、`ChartLabel` 图注
-  - **13 个全局组件的用途与 props 全表**：[`.agents/notes/shared-components.md`](../../.agents/notes/shared-components.md)
+- 学科图形组件（同样自动注册、课件里不用 import）：`SpringScale` 弹簧测力计、`CourseArrow` 矢量箭头、`SurfaceHatch` 接触面、`Ruler` 刻度尺、`CoordAxes` / `NumberAxis` / `SimpleAxis` 坐标轴、`ChartLabel` 图注、`BarMagnet` 条形磁体、`Galvanometer` 灵敏电流计
+  - **28 个全局组件的用途与 props 全表**：[`.agents/notes/shared-components.md`](../../.agents/notes/shared-components.md)
   - 三个大组件各有专篇：[坐标轴](../../.agents/notes/coordinate-axes.md)、[弹簧测力计](../../.agents/notes/spring-scale.md)、[手部 `GripHand`](../../.agents/notes/grip-hand.md)
 - `base-flex` 布局（`layouts/base-flex.vue`）— 通用页面外壳：flex 列 + 收紧内边距；撑满整页的正文（`.page-grow`）依赖它
 - `course-cover` 布局（`layouts/course-cover.vue`）— 封面专用：`chapter-no` / `chapter` / `lesson` / `subtitle` / `classroom` / `teacher`（默认张伯望），课题名取本页 `title`，装饰 SVG 走默认插槽；底部固定一行 14px 的「原创：东北育才学校 张伯望」（各课件不要再手写封面 HTML）。**「授课教师」行可用 URL 覆盖**：`?teacher=<姓名>`（主页「我要上课」生成；Slidev 翻页原样保留 query，整节课有效）

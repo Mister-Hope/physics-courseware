@@ -1,8 +1,8 @@
 <!--
   P9 交互：探究感应电流产生的条件（图 13.3-3）。
-  线圈 A 套在线圈 B 里：A 接电源 + 开关 + 滑动变阻器，B 两端接电流表（沿轴向看，A 在内、B 在外）。
+  线圈 A 套在线圈 B 里：A 接电源 + 开关 + 滑动变阻器，B 两端接灵敏电流计（沿轴向看，A 在内、B 在外）。
   操作：闭合开关 / 断开开关 / 迅速移动滑片 → A 中电流变化 → 磁场强弱变化 → 穿过 B 的磁通量变化
-  ⇒ 电流表指针只在变化过程中偏转，稳定后回零。
+  ⇒ 灵敏电流计指针只在变化过程中偏转，稳定后回零。
   组件只给「线圈 A 的电流状态 + 指针现象」，不显示「B 中有没有感应电流」的文字结论（由页面表格逐击给出）。
   内部按闭合电路欧姆定律 I = E/(R+r) 计算电流，指针偏角 ∝ |dI/dt|；屏幕不出现公式与数值。
 -->
@@ -140,14 +140,14 @@ const status = computed(() => {
       <CircuitBattery :x="40" :y="90" orientation="vertical" polarity emf="E" />
       <CircuitSwitch :x="40" :y="170" orientation="vertical" label="S" :open="!closed" />
       <CircuitRheostat :x="140" :y="250" :slider="pos" />
-      <!-- 线圈 B 的引线与电流表 -->
+      <!-- 线圈 B 的引线与灵敏电流计（导线止于表盘左右接线柱 408 / 452）-->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
-        <path d="M 316 88 H 430" />
-        <path d="M 316 132 H 430" />
+        <path d="M 316 88 H 390 V 110 H 408" />
+        <path d="M 316 132 H 360 V 150 H 470 V 110 H 452" />
       </g>
-      <PointerAmmeter :x="430" :y="110" :r="22" :angle="angle" />
-      <text x="430" y="166" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
-        电流表
+      <Galvanometer :x="430" :y="110" :r="22" :angle="angle" />
+      <text x="430" y="178" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        灵敏电流计
       </text>
       <!-- 图例 -->
       <g stroke-width="2.6">

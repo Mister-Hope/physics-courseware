@@ -70,13 +70,19 @@ const tangentTo = (point: Point, wantTop: boolean): Point => {
 const entry = computed<Point>(() => tangentTo(pointB.value, false));
 const exit = computed<Point>(() => tangentTo(HAND, true));
 
+/** 绳在左图里的实际方向：B → 滑轮上的切点（不是 B → 圆心 O，两者差一个切点偏角），力的箭头必须压在绳线上 */
+const ropeDir = computed<Point>(() => {
+  const dx = entry.value.x - pointB.value.x;
+  const dy = entry.value.y - pointB.value.y;
+  const len = Math.hypot(dx, dy) || 1;
+
+  return { x: dx / len, y: dy / len };
+});
+
 /** 左图结点 B 处三个力的箭头终点（均从 B 出发：G 竖直向下，F_N 沿杆向外支持，F_T 沿绳指向滑轮） */
 const tips = computed(() => {
   const dirRod: Point = { x: Math.cos(rad(rodDeg.value)), y: Math.sin(rad(rodDeg.value)) };
-  const dirRope: Point = {
-    x: (pointO.x - pointB.value.x) / BO.value,
-    y: (pointO.y - pointB.value.y) / BO.value,
-  };
+  const dirRope = ropeDir.value;
 
   return {
     g: { x: pointB.value.x, y: pointB.value.y + G_PX },
@@ -94,10 +100,7 @@ const tips = computed(() => {
 /** 左图结点 B 处三个力的标注坐标（自适应跟随箭头终端外侧，互不遮挡） */
 const leftLabels = computed(() => {
   const dirRod: Point = { x: Math.cos(rad(rodDeg.value)), y: Math.sin(rad(rodDeg.value)) };
-  const dirRope: Point = {
-    x: (pointO.x - pointB.value.x) / BO.value,
-    y: (pointO.y - pointB.value.y) / BO.value,
-  };
+  const dirRope = ropeDir.value;
 
   return {
     g: { x: tips.value.g.x + 14, y: tips.value.g.y - 6 },
@@ -337,7 +340,7 @@ const endDrag = (): void => {
             <tspan font-family="KaTeX_Math" font-size="12" dy="4">N</tspan>
           </text>
 
-          <!-- 轻绳拉力 F_T（沿 BO 指向左上滑轮） -->
+          <!-- 轻绳拉力 F_T（沿绳指向左上滑轮切点） -->
           <CourseArrow :from="pointB" :to="tips.t" :head-size="12" stroke="var(--c-accent)" stroke-width="3.5" />
           <text
             :x="leftLabels.t.x"

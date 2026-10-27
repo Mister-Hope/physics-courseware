@@ -11,11 +11,11 @@ const PHI = 60; // 演示用的一个非最小方向
 
 const rad = (deg: number): number => (deg * Math.PI) / 180;
 
-const VIEW = { x: 40, y: 46, width: 512, height: 190 };
+const VIEW = { x: 40, y: 46, width: 512, height: 202 };
 const PIVOT = { x: 300, y: 64 };
 const ROPE_LEN = 110;
 const BALL_R = 18;
-const G_PX = 62;
+const G_PX = 80;
 const ARC_R = 46;
 
 const TRI = { width: 300, height: 200 };
@@ -47,7 +47,7 @@ const tip = (dir: { x: number; y: number }, len: number): { x: number; y: number
   y: ball.y + dir.y * len,
 });
 
-const forceDir = { x: Math.cos(rad(PHI)), y: Math.sin(rad(PHI)) };
+const forceDir = { x: Math.cos(rad(PHI)), y: -Math.sin(rad(PHI)) };
 
 const gTip = tip({ x: 0, y: 1 }, gLen);
 const tTip = tip(ropeDir, tLen);
@@ -59,6 +59,11 @@ const lineB = tip(perpDir, 62);
 
 /** 悬线方向与垂直方向之间的直角标记（说明这条虚线垂直于悬线） */
 const rightAngle = `M ${ball.x + ropeDir.x * 13} ${ball.y + ropeDir.y * 13} L ${ball.x + ropeDir.x * 13 + perpDir.x * 13} ${ball.y + ropeDir.y * 13 + perpDir.y * 13} L ${ball.x + perpDir.x * 13} ${ball.y + perpDir.y * 13}`;
+
+/** φ 圆弧（球心处，从悬线方向转到 F 的方向）与角平分线上的标注：φ 就是 F 与悬线的夹角 */
+const PHI_ARC_R = 34;
+const phiArc = `M ${ball.x + ropeDir.x * PHI_ARC_R} ${ball.y + ropeDir.y * PHI_ARC_R} A ${PHI_ARC_R} ${PHI_ARC_R} 0 0 1 ${ball.x + forceDir.x * PHI_ARC_R} ${ball.y + forceDir.y * PHI_ARC_R}`;
+const phiLabel = { x: ball.x, y: ball.y - PHI_ARC_R - 14 };
 
 /** θ 圆弧（悬点处，从竖直虚线转到悬线） */
 const thetaArc = `M ${PIVOT.x} ${PIVOT.y + ARC_R} A ${ARC_R} ${ARC_R} 0 0 1 ${PIVOT.x + ARC_R * sinTh} ${PIVOT.y + ARC_R * cosTh}`;
@@ -260,13 +265,26 @@ const vertexC = {
             ⊥
           </text>
           <text
-            :x="lineB.x - 8"
-            :y="lineB.y - 12"
+            :x="lineB.x + 6"
+            :y="lineB.y - 6"
             fill="var(--c-text-dim)"
             font-family="KaTeX_Main"
             font-size="13"
           >
             垂直于悬线
+          </text>
+          <!-- φ：F 与悬线的夹角（公式 F sinφ = G sinθ 里的那个角） -->
+          <path :d="phiArc" fill="none" stroke="var(--c-text-dim)" stroke-width="1.6" />
+          <text
+            :x="phiLabel.x"
+            :y="phiLabel.y"
+            fill="var(--c-text-dim)"
+            font-family="KaTeX_Math"
+            font-style="italic"
+            font-size="19"
+            text-anchor="middle"
+          >
+            φ
           </text>
         </g>
       </svg>

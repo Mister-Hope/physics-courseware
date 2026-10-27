@@ -72,11 +72,11 @@ clicks: 3
 ---
 
 <div class="page-grow">
-<div class="ask">把两个线圈绕在同一个铁环上：A 接电源，B 接电流表。给 A 通电或断电，B 中有电流吗？</div>
+<div class="ask">把两个线圈绕在同一个铁环上：A 接电源，B 接灵敏电流计。给 A 通电或断电，B 中有电流吗？</div>
 <div class="split-wide ei-split">
 <div><FaradayRingDemo /></div>
 <div class="stack">
-<div v-click="1"><b>接通瞬间</b>：电流表指针偏转——B 中出现了感应电流。</div>
+<div v-click="1"><b>接通瞬间</b>：灵敏电流计指针偏转——B 中出现了感应电流。</div>
 <div v-click="2"><b>保持接通</b>：指针回到零——B 中没有电流。</div>
 <div v-click="3"><b>断开瞬间</b>：指针反向偏转——B 中又有感应电流。</div>
 </div>
@@ -144,7 +144,7 @@ zoom: 0.92
 # 实验：探究感应电流产生的条件
 
 <div class="page-grow">
-<div class="ask">线圈 A 接电源，线圈 B 接电流表，A 套在 B 里。四种情况下，B 中有电流吗？</div>
+<div class="ask">线圈 A 接电源，线圈 B 接灵敏电流计，A 套在 B 里。四种情况下，B 中有电流吗？</div>
 <div class="half-grid">
 <div><CoilInductionDemo /></div>
 <div>
@@ -160,22 +160,6 @@ zoom: 0.92
 </tbody>
 </table>
 <div v-click="5" class="tip-hint">有电流的三种情形，共同点是：穿过线圈 B 的磁通量发生了变化。</div>
-</div>
-</div>
-</div>
-
----
-title: 磁通量是怎样变化的
----
-
-<div class="page-grow">
-<div class="ask">线圈 A 中的电流变化，为什么会让穿过线圈 B 的磁通量变化？</div>
-<div class="split-wide ei-split">
-<div><CoilFluxSvg /></div>
-<div class="stack">
-<div v-click="1">A 中电流变化 → A 产生的磁场强弱变化。</div>
-<div v-click="2">两个线圈套在一起，B 内的磁场也随之变化 → 穿过 B 的磁通量变化。</div>
-<div v-click="3" class="tip-hint">四种情形中有电流的，都是穿过线圈 B 的磁通量发生了变化。</div>
 </div>
 </div>
 </div>
@@ -225,7 +209,7 @@ clicks: 2
 # 法拉第圆盘发电机
 
 <div class="page-grow">
-<div class="ask">铜盘的轴和边缘分别接电流表，摇动手柄让铜盘在磁极之间旋转。指针会怎样？</div>
+<div class="ask">铜盘的轴和边缘分别接灵敏电流计，摇动手柄让铜盘在磁极之间旋转。指针会怎样？</div>
 <div class="split-wide ei-split">
 <div><FaradayDiskDemo /></div>
 <div class="stack">

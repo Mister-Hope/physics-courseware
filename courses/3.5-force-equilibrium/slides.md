@@ -242,9 +242,10 @@ clicks: 4
 <OrthoDecompose
   :angle="120"
   tex="F_1"
+  color="var(--c-physics)"
   :extras="[
     { angle: 0, tex: 'F_2', len: 2, color: 'var(--c-accent)' },
-    { angle: -90, tex: 'F_3', len: 3.46, color: 'var(--c-danger)' },
+    { angle: -90, tex: 'G', len: 3.46, color: 'var(--c-force)' },
   ]"
 />
 </div>
@@ -295,17 +296,18 @@ clicks: 2
 
 ---
 layout: base-flex
-clicks: 3
+clicks: 4
 ---
 
 <div class="page-grow">
-<div class="step-list">
-<div class="step-item"><span class="step-no">1</span><div><b>动态矢量三角形</b>：一个力大小方向不变、一个力方向不变，第三个力方向变化 —— 画出闭合三角形，看边长随方向怎么变。<span class="mini-note">两个力的夹角不变时，第三个顶点始终落在同一段圆弧上（辅助圆）。</span></div></div>
-<div class="step-item" v-click="1"><span class="step-no">2</span><div><b>正弦定理（函数法）</b>：边长不好直接看时，把力写成角度的函数：<Latex tex="\dfrac{F_1}{\sin A} = \dfrac{F_2}{\sin B} = \dfrac{F_3}{\sin C}" />。</div></div>
-<div class="step-item" v-click="2"><span class="step-no">3</span><div><b>相似三角形</b>：力的三角形与几何三角形相似，对应边成比例：<Latex tex="\dfrac{F_1}{L_1} = \dfrac{F_2}{L_2} = \dfrac{F_3}{L_3}" /> —— 纯几何，最简。</div></div>
+<div class="step-list" style="--stack-gap: 1rem">
+<div class="step-item"><span class="step-no">1</span><div><b>动态矢量三角形</b>：一个力大小方向不变、一个力方向不变，第三个力方向变化 —— 画出闭合三角形，看边长随方向怎么变。</div></div>
+<div class="step-item" v-click="1"><span class="step-no">2</span><div><b>辅助圆</b>：两个力的夹角不变时，第三个顶点始终落在同一段圆弧上 —— 用圆的性质（直径最长）判断某个力的最大值。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">3</span><div><b>正弦定理（函数法）</b>：边长不好直接看时，把力写成角度的函数：<Latex tex="\dfrac{F_1}{\sin A} = \dfrac{F_2}{\sin B} = \dfrac{F_3}{\sin C}" /></div></div>
+<div class="step-item" v-click="3"><span class="step-no">4</span><div><b>相似三角形</b>：力的三角形与几何三角形相似，对应边成比例：<Latex tex="\dfrac{F_1}{L_1} = \dfrac{F_2}{L_2} = \dfrac{F_3}{L_3}" /> —— 纯几何，最简。</div></div>
 </div>
 
-<div class="tip-hint" v-click="3">先判断哪个力不变、哪个力方向不变，再选方法。</div>
+<div class="tip-hint" v-click="4">先判断哪个力不变、哪个力方向不变（或哪两个力的夹角不变），再选方法。</div>
 </div>
 
 ---
@@ -448,12 +450,12 @@ clicks: 3
 </div>
 <div class="stack">
 <div v-click="1">同一根绳跨过光滑轻质滑轮 ⇒ 两侧张力相等 <Latex tex="T_1 = T_2 = T" />；水平方向 <Latex tex="T\sin\alpha = T\sin\beta" /> ⇒ <b><Latex tex="\alpha = \beta" /></b>。</div>
-<div v-click="2">竖直方向 <Latex tex="2T\cos\alpha = Mg" /> ⇒ <Latex tex="T = Mg/(2\cos\alpha)" />，且 <Latex tex="\sin\alpha = (x_B - x_A)/L" />（绳长 <Latex tex="L" /> 不变）。</div>
-<div v-click="3"><Latex tex="A \to B" />（沿竖直墙上下移）：水平跨距不变 ⇒ <Latex tex="\alpha" /> 不变 ⇒ <b>拉力不变</b>；<Latex tex="B \to C" />（沿水平墙外移）：跨距变大 ⇒ <Latex tex="\alpha" /> 变大 ⇒ <b>拉力变大</b>。</div>
+<div v-click="2">竖直方向 <Latex tex="2T\cos\alpha = Mg" /> ⇒ <Latex tex="T = Mg/(2\cos\alpha)" />；由绳长不变可得 <Latex tex="\sin\alpha = \dfrac{\text{两悬挂点的水平距离}}{\text{绳长}}" />。</div>
+<div v-click="3"><Latex tex="A \to B" />（沿竖直墙上下移）：两悬挂点的水平距离不变 ⇒ <Latex tex="\alpha" /> 不变 ⇒ <b>拉力不变</b>；<Latex tex="B \to C" />（沿水平墙外移）：水平距离变大 ⇒ <Latex tex="\alpha" /> 变大 ⇒ <b>拉力变大</b>。</div>
 </div>
 </div>
 
-<div class="tip-hint" v-click="3">拉力只由水平跨距和绳长决定：<Latex tex="T = \dfrac{Mg}{2\cos\alpha}" />，<Latex tex="\sin\alpha = \dfrac{x_B - x_A}{L}" />。</div>
+<div class="tip-hint" v-click="3">拉力只由两悬挂点的水平距离和绳长决定（两者之比就是 <Latex tex="\sin\alpha" />）：<Latex tex="T = \dfrac{Mg}{2\cos\alpha}" />。</div>
 </div>
 
 ---
@@ -523,13 +525,13 @@ clicks: 4
 <DomeClimbSvg />
 
 <div class="p27-verdict">
-<div class="stack">
-<div class="mini-title"><mdi-check-circle-outline class="text-xl ok-line" />正确做法</div>
-<div class="tip-hint" v-click="4">支持力与摩擦力本来就垂直 ⇒ 只能正交分解：<Latex tex="G_2 = G\cos\theta" /> 垂直穹顶、<Latex tex="G_1 = G\sin\theta" /> 沿穹顶向下（<Latex tex="\theta" /> 是半径与竖直方向的夹角）⇒ <Latex tex="F_N = G\cos\theta" />、<Latex tex="F_f = G\sin\theta" />。往上爬 <Latex tex="\theta" /> 变小 ⇒ <b><Latex tex="F_N" /> 变大、<Latex tex="F_f" /> 变小</b>。</div>
+<div class="p27-item">
+<div class="p27-head ok-line"><mdi-check-circle-outline />正确做法</div>
+<div class="tip-hint p27-hint" v-click="4">支持力与摩擦力本来就垂直 ⇒ 只能正交分解：<Latex tex="G_2 = G\cos\theta" />、<Latex tex="G_1 = G\sin\theta" /> ⇒ <Latex tex="F_N = G\cos\theta" />、<Latex tex="F_f = G\sin\theta" />；往上爬 <Latex tex="\theta" /> 变小 ⇒ <b><Latex tex="F_N" /> 变大、<Latex tex="F_f" /> 变小</b>。</div>
 </div>
-<div class="stack">
-<div class="mini-title"><mdi-close-circle-outline class="text-xl bad-line" />错误做法</div>
-<div class="danger-hint" v-click="4">套用相似三角形 ⇒ <Latex tex="F_N" /> 不变、<Latex tex="F_f" /> 减小。这里没有定弦定角，三角形形状一直在变，不能用相似。</div>
+<div class="p27-item">
+<div class="p27-head bad-line"><mdi-close-circle-outline />错误做法</div>
+<div class="danger-hint p27-hint" v-click="4">套用相似三角形 ⇒ <Latex tex="F_N" /> 不变、<Latex tex="F_f" /> 减小。这里没有定弦定角，三角形形状一直在变，不能用相似。</div>
 </div>
 </div>
 </div>

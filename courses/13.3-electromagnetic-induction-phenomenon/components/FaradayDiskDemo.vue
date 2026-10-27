@@ -3,7 +3,7 @@
   紫铜圆盘水平安装，竖直铜轴穿过盘心；蹄形磁体的两极（N 上 / S 下）从盘的上、下两侧夹住圆盘，
   磁场沿转轴方向竖直穿过盘面（B ⊥ 盘面）→ 盘上沿半径方向的导体随盘转动时切割磁感线 → 回路中产生感应电流。
   轴电刷压在轴上（盘面之上、磁体之外），边缘电刷压在盘的右缘；两根引线一根从表盘上方、一根从表盘下方
-  绕到右侧电流表，各自准确止于表盘圆周，互不交叉。
+  绕到右侧灵敏电流计，各自止于表盘左右接线柱，互不交叉。
   点「摇动手柄」铜盘持续转动、指针随转速偏转；再点「停止」铜盘停转、指针回零。
   只作定性演示（快/慢、偏/不偏），不出现数值与刻度读数。
 -->
@@ -19,7 +19,7 @@ const ARM = 38; // 摇柄臂长
 const ARM_RY = (ARM * RY) / RX; // 柄臂在盘面（水平面）内转动，投影压缩与盘面一致
 const AXIS_BRUSH_Y = 105; // 轴电刷高度（在盘面投影之上，避开磁体）
 const EDGE_BRUSH_Y = CY; // 边缘电刷压盘的右缘
-const AMM = { x: 489, y: 196, r: 27 }; // 电流表（引线端点必须落在圆周上）
+const AMM = { x: 489, y: 196, r: 27 }; // 灵敏电流计（引线端点 = 表盘左右接线柱）
 const MAX_OMEGA = 5; // rad/s
 const NEEDLE_MAX = 30;
 
@@ -101,12 +101,10 @@ const FIELD_X = [122, 150, 178, 206];
 /** 极臂几何中心（N/S 字母放这里） */
 const ARM_CX = N_ARM.x + N_ARM.w / 2;
 
-/** 轴电刷引线：从轴电刷水平向右引出，从表盘正上方接入（止于圆周） */
-const axisLead = `M ${CX + 18} ${AXIS_BRUSH_Y} H ${AMM.x} V ${AMM.y - AMM.r}`;
-/** 边缘电刷引线：从盘缘电刷向右、再向下绕行，从表盘正下方接入（止于圆周；与轴引线分开绕） */
-const EDGE_LEAD_X = CX + RX + 50;
-const EDGE_LEAD_Y = 250;
-const edgeLead = `M ${CX + RX + 16} ${EDGE_BRUSH_Y} H ${EDGE_LEAD_X} V ${EDGE_LEAD_Y} H ${AMM.x} V ${AMM.y + AMM.r}`;
+/** 轴电刷引线：从轴电刷水平向右引出，绕过表盘右侧、从右接线柱接入 */
+const axisLead = `M ${CX + 18} ${AXIS_BRUSH_Y} H ${AMM.x + AMM.r + 12} V ${AMM.y} H ${AMM.x + AMM.r}`;
+/** 边缘电刷引线：从盘缘电刷向右，从左接线柱接入（与轴引线分开走，互不交叉） */
+const edgeLead = `M ${CX + RX + 16} ${EDGE_BRUSH_Y} H ${AMM.x - AMM.r - 8} V ${AMM.y} H ${AMM.x - AMM.r}`;
 </script>
 
 <template>
@@ -257,14 +255,14 @@ const edgeLead = `M ${CX + RX + 16} ${EDGE_BRUSH_Y} H ${EDGE_LEAD_X} V ${EDGE_LE
         <path :d="axisLead" />
         <path :d="edgeLead" />
       </g>
-      <PointerAmmeter :x="AMM.x" :y="AMM.y" :r="AMM.r" :angle="needle" />
+      <Galvanometer :x="AMM.x" :y="AMM.y" :r="AMM.r" :angle="needle" />
       <!-- 标注（避开导线与磁体）-->
       <text :x="CX" y="282" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">铜盘</text>
       <text x="226" y="112" text-anchor="end" font-size="17" fill="var(--c-text-dim)">轴</text>
       <text x="288" y="46" font-size="17" fill="var(--c-text-dim)">手柄</text>
       <text x="382" y="166" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">边缘</text>
       <text :x="AMM.x" y="276" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
-        电流表
+        灵敏电流计
       </text>
     </svg>
     <div class="ei-bar">
