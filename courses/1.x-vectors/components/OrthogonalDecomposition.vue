@@ -156,7 +156,7 @@ const labels = computed(() => {
     {
       x: 1,
       y: 0,
-      tex: "\\vec{i}",
+      tex: String.raw`\vec{i}`,
       anchor: "bottom-left" as const,
       color: "var(--c-text-dim)",
       size: 15,
@@ -164,7 +164,7 @@ const labels = computed(() => {
     {
       x: 0,
       y: 1,
-      tex: "\\vec{j}",
+      tex: String.raw`\vec{j}`,
       anchor: "bottom-left" as const,
       color: "var(--c-text-dim)",
       size: 15,

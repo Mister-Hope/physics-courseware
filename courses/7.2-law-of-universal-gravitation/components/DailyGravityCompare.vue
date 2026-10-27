@@ -52,7 +52,7 @@ const sliders = computed(() => [
     min: 0.1,
     max: 5,
     step: 0.1,
-    unitTex: "\\text{kg}",
+    unitTex: String.raw`\text{kg}`,
     color: "var(--c-accent)",
   },
   {
@@ -62,7 +62,7 @@ const sliders = computed(() => [
     min: 0.1,
     max: 2,
     step: 0.1,
-    unitTex: "\\text{m}",
+    unitTex: String.raw`\text{m}`,
     color: "var(--c-accent-2)",
   },
 ]);

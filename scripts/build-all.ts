@@ -94,7 +94,7 @@ if (fonts.size > 0) {
 
   for (const cssFile of cssFiles) {
     const source = readFileSync(cssFile, "utf8");
-    const next = source.replace(fontRef, "url(/shared/katex/$<file>)");
+    const next = source.replaceAll(fontRef, "url(/shared/katex/$<file>)");
 
     if (next !== source) {
       writeFileSync(cssFile, next);

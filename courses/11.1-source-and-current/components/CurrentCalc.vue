@@ -14,9 +14,9 @@ const iA = computed(() => 10 ** iExp.value);
 /** 电流读数：自动换成 μA / mA / A */
 const iRead = computed(() => {
   const a = iA.value;
-  if (a < 1e-3) return { num: (a * 1e6).toPrecision(3), unitTex: "\\mu\\text{A}" };
-  if (a < 1) return { num: (a * 1e3).toPrecision(3), unitTex: "\\text{mA}" };
-  return { num: a.toPrecision(3), unitTex: "\\text{A}" };
+  if (a < 1e-3) return { num: (a * 1e6).toPrecision(3), unitTex: String.raw`\mu\text{A}` };
+  if (a < 1) return { num: (a * 1e3).toPrecision(3), unitTex: String.raw`\text{mA}` };
+  return { num: a.toPrecision(3), unitTex: String.raw`\text{A}` };
 });
 
 /** 时间 t 内通过横截面的电荷量 q = It */
@@ -54,10 +54,18 @@ const presetLabel = (preset: {
 }): { num: string; unitTex: string; t: string } => {
   const a = preset.i;
   if (a < 1e-3)
-    return { num: (a * 1e6).toPrecision(3), unitTex: "\\mu\\text{A}", t: preset.t.toFixed(1) };
+    return {
+      num: (a * 1e6).toPrecision(3),
+      unitTex: String.raw`\mu\text{A}`,
+      t: preset.t.toFixed(1),
+    };
   if (a < 1)
-    return { num: (a * 1e3).toPrecision(3), unitTex: "\\text{mA}", t: preset.t.toFixed(1) };
-  return { num: a.toPrecision(3), unitTex: "\\text{A}", t: preset.t.toFixed(1) };
+    return {
+      num: (a * 1e3).toPrecision(3),
+      unitTex: String.raw`\text{mA}`,
+      t: preset.t.toFixed(1),
+    };
+  return { num: a.toPrecision(3), unitTex: String.raw`\text{A}`, t: preset.t.toFixed(1) };
 };
 </script>
 

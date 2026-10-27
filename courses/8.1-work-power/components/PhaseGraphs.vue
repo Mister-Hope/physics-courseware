@@ -67,7 +67,7 @@ const vtLabels = computed(() => [
   {
     x: 44,
     y: V_MAX - 2.6,
-    tex: "v_{\\max}",
+    tex: String.raw`v_{\max}`,
     anchor: "bottom-right" as const,
     size: 17,
     color: "var(--c-ok)",
@@ -107,7 +107,7 @@ const fvLabels = computed(() => [
   {
     x: Number((1 / V1).toFixed(4)),
     y: F1,
-    tex: "\\frac{1}{v_1}",
+    tex: String.raw`\frac{1}{v_1}`,
     anchor: "bottom-left" as const,
     size: 15,
     color: "var(--c-text-dim)",
@@ -117,7 +117,7 @@ const fvLabels = computed(() => [
   {
     x: Number((F0 / P0).toFixed(4)),
     y: F0 - 200,
-    tex: "\\frac{f_0}{P_0}",
+    tex: String.raw`\frac{f_0}{P_0}`,
     anchor: "top-left" as const,
     size: 15,
     color: "var(--c-ok)",

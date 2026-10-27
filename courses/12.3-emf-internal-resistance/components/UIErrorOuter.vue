@@ -46,7 +46,7 @@ const labels = computed(() => [
   {
     x: 0,
     y: E_MEAS,
-    tex: "E_{\\text{测}}",
+    tex: String.raw`E_{\text{测}}`,
     anchor: "top-right" as const,
     size: 19,
     halo: true,
@@ -69,7 +69,7 @@ const labels = computed(() => [
   {
     x: I_SHORT,
     y: 0,
-    tex: "I_{\\text{短}}",
+    tex: String.raw`I_{\text{短}}`,
     anchor: "top-left" as const,
     size: 19,
     halo: true,

@@ -56,7 +56,7 @@ const config = computed(() => {
           {
             x: 6.4,
             y: P + 0.22,
-            tex: "P = P_{\\text{额}}",
+            tex: String.raw`P = P_{\text{额}}`,
             anchor: "bottom-left" as const,
             size: 18,
             color: "var(--c-accent)",
@@ -91,7 +91,7 @@ const config = computed(() => {
           {
             x: 0.5,
             y: P / 0.5 + 0.3,
-            tex: "F = \\frac{P}{v}",
+            tex: String.raw`F = \frac{P}{v}`,
             anchor: "left" as const,
             size: 18,
             color: "var(--c-accent)",
@@ -110,7 +110,7 @@ const config = computed(() => {
           {
             x: V_MAX,
             y: F0 + 0.36,
-            tex: "v_{\\max}",
+            tex: String.raw`v_{\max}`,
             anchor: "bottom-right" as const,
             size: 17,
             color: "var(--c-ok)",
@@ -145,7 +145,7 @@ const config = computed(() => {
           {
             x: 1.7,
             y: P * 1.7 + 0.34,
-            tex: "F = P\\cdot\\frac{1}{v}",
+            tex: String.raw`F = P\cdot\frac{1}{v}`,
             anchor: "left" as const,
             size: 18,
             color: "var(--c-accent)",
@@ -178,7 +178,7 @@ const config = computed(() => {
           {
             x: 6.2,
             y: 1.5,
-            tex: "a \\to 0",
+            tex: String.raw`a \to 0`,
             anchor: "bottom-left" as const,
             size: 18,
             color: "var(--c-accent)",
@@ -209,7 +209,7 @@ const config = computed(() => {
           {
             x: 7.2,
             y: V_MAX - 0.34,
-            tex: "v_{\\max} = \\frac{P}{f_0}",
+            tex: String.raw`v_{\max} = \frac{P}{f_0}`,
             anchor: "bottom-right" as const,
             size: 17,
             color: "var(--c-ok)",
@@ -250,7 +250,7 @@ const config = computed(() => {
           {
             x: 0.42,
             y: 7.6,
-            tex: "a = \\frac{P}{m}\\cdot\\frac{1}{v} - \\frac{f_0}{m}",
+            tex: String.raw`a = \frac{P}{m}\cdot\frac{1}{v} - \frac{f_0}{m}`,
             anchor: "left" as const,
             size: 17,
             color: "var(--c-accent)",
@@ -259,7 +259,7 @@ const config = computed(() => {
           {
             x: F0 / P,
             y: 0,
-            tex: "\\frac{f_0}{P}",
+            tex: String.raw`\frac{f_0}{P}`,
             anchor: "top-right" as const,
             size: 16,
             color: "var(--c-ok)",
@@ -269,7 +269,7 @@ const config = computed(() => {
           {
             x: 0,
             y: Number(negIntercept.toFixed(3)),
-            tex: "-\\frac{f_0}{m}",
+            tex: String.raw`-\frac{f_0}{m}`,
             anchor: "right" as const,
             size: 16,
             color: "var(--c-danger)",

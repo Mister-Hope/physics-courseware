@@ -30,7 +30,7 @@ const labels = computed(() => [
   {
     x: 0.36,
     y: 0.94,
-    tex: "R = \\dfrac{U}{I}",
+    tex: String.raw`R = \dfrac{U}{I}`,
     anchor: "top-right",
     size: 18,
     halo: true,

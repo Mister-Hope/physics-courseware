@@ -54,7 +54,7 @@ const labels = computed(() => [
   {
     x: 7.4,
     y: 4.5,
-    tex: "\\overrightarrow{BA} = \\vec{a} - \\vec{b}",
+    tex: String.raw`\overrightarrow{BA} = \vec{a} - \vec{b}`,
     anchor: "left" as const,
     color: "var(--c-physics)",
     size: 17,

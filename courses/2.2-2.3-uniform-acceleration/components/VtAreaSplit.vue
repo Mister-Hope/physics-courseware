@@ -112,7 +112,7 @@ const rows = computed(() => {
       },
       {
         name: "减去大三角形",
-        nameTex: "\\frac{1}{2}at^2",
+        nameTex: String.raw`\frac{1}{2}at^2`,
         valueTex: signedMeterTex(0.5 * config.a * config.T * config.T),
         tone: "neg",
         showAt: 2,
@@ -120,7 +120,7 @@ const rows = computed(() => {
       { name: "总位移", nameTex: "x", valueTex: meterTex(exact.value), tone: "exact", showAt: 3 },
       {
         name: "用平均速度核对",
-        nameTex: "x = \\bar{v}t",
+        nameTex: String.raw`x = \bar{v}t`,
         valueTex: meterTex(exact.value),
         tone: "exact",
         showAt: 3,
@@ -141,7 +141,7 @@ const rows = computed(() => {
     },
     {
       name: config.kind === "decel" ? "缺掉的三角形" : "三角形",
-      nameTex: "\\frac{1}{2}at^2",
+      nameTex: String.raw`\frac{1}{2}at^2`,
       valueTex: signedMeterTex(triArea),
       tone: config.kind === "decel" ? "neg" : "tri",
       showAt: 2,

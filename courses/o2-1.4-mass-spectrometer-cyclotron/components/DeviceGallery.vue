@@ -18,14 +18,29 @@ interface Device {
 }
 
 const devices: Device[] = [
-  { key: "speed", name: "速度选择器", lead: "电场力与洛伦兹力平衡，", tex: "v = \\frac{E}{B}" },
-  { key: "mhd", name: "磁流体发电机", lead: "正、负离子被推向两板，", tex: "\\varepsilon = Bvd" },
-  { key: "flow", name: "电磁流量计", lead: "两电极电压反映流速，", tex: "Q = \\frac{\\pi DU}{4B}" },
+  {
+    key: "speed",
+    name: "速度选择器",
+    lead: "电场力与洛伦兹力平衡，",
+    tex: String.raw`v = \frac{E}{B}`,
+  },
+  {
+    key: "mhd",
+    name: "磁流体发电机",
+    lead: "正、负离子被推向两板，",
+    tex: String.raw`\varepsilon = Bvd`,
+  },
+  {
+    key: "flow",
+    name: "电磁流量计",
+    lead: "两电极电压反映流速，",
+    tex: String.raw`Q = \frac{\pi DU}{4B}`,
+  },
   {
     key: "hall",
     name: "霍尔元件",
     lead: "由电压可测载流子浓度，",
-    tex: "U = aBv = \\frac{IB}{nqd}",
+    tex: String.raw`U = aBv = \frac{IB}{nqd}`,
   },
 ];
 

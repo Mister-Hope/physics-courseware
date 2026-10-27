@@ -71,18 +71,24 @@ const labels = computed(() => [
     x: 10,
     y: 8,
     dot: 5,
-    ...(annotate ? { tex: "P_{\\text{额}}", anchor: "top-left" as const, size: 16 } : {}),
+    ...(annotate ? { tex: String.raw`P_{\text{额}}`, anchor: "top-left" as const, size: 16 } : {}),
   },
   {
     x: 18,
     y: 10,
     dot: 5,
-    ...(annotate ? { tex: "v_{\\max}", anchor: "top-left" as const, size: 16 } : {}),
+    ...(annotate ? { tex: String.raw`v_{\max}`, anchor: "top-left" as const, size: 16 } : {}),
   },
   ...(annotate
     ? [
-        { x: 4.4, y: 5.8, tex: "\\text{匀加速}", size: 16, color: "var(--c-text-dim)" },
-        { x: 13.2, y: 11.1, tex: "\\text{恒定功率}", size: 16, color: "var(--c-text-dim)" },
+        { x: 4.4, y: 5.8, tex: String.raw`\text{匀加速}`, size: 16, color: "var(--c-text-dim)" },
+        {
+          x: 13.2,
+          y: 11.1,
+          tex: String.raw`\text{恒定功率}`,
+          size: 16,
+          color: "var(--c-text-dim)",
+        },
       ]
     : []),
 ]);

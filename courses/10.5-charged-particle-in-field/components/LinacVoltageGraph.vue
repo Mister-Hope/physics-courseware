@@ -37,7 +37,7 @@ const curves = [...gridLines, { points: squareWave, color: "var(--c-accent)", wi
 const labels = [
   { x: 0.12, y: 1.02, tex: "+u", anchor: "bottom-left", color: "var(--c-accent)", size: 18 },
   { x: 0.12, y: -1.02, tex: "-u", anchor: "top-left", color: "var(--c-accent)", size: 18 },
-  { x: 1, y: -1.26, tex: "\\dfrac{T}{2}", anchor: "center", size: 17 },
+  { x: 1, y: -1.26, tex: String.raw`\dfrac{T}{2}`, anchor: "center", size: 17 },
   { x: 2, y: -1.26, tex: "T", anchor: "center", size: 17 },
 ];
 </script>

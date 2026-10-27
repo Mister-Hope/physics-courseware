@@ -64,7 +64,7 @@ const labels = computed(() => [
   {
     x: (pointA.t + pointB.t) / 2,
     y: pointA.v,
-    tex: "\\Delta t = 0.50\\ \\text{s}",
+    tex: String.raw`\Delta t = 0.50\ \text{s}`,
     anchor: "center" as const,
     dy: 18,
     size: 15,
@@ -73,7 +73,7 @@ const labels = computed(() => [
   {
     x: pointB.t,
     y: (pointA.v + pointB.v) / 2,
-    tex: "\\Delta v = 0.40\\ \\text{m/s}",
+    tex: String.raw`\Delta v = 0.40\ \text{m/s}`,
     anchor: "left" as const,
     dx: -3,
     size: 15,

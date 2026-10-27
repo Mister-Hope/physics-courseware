@@ -61,7 +61,7 @@ const labels = computed(() => [
   {
     x: V_MIN + 0.12,
     y: P / (V_MIN + 0.12) - 0.34,
-    tex: "F = \\frac{P}{v}",
+    tex: String.raw`F = \frac{P}{v}`,
     anchor: "left" as const,
     size: 18,
     color: "var(--c-accent)",
@@ -80,7 +80,7 @@ const labels = computed(() => [
   {
     x: V_MAX + 0.04,
     y: F_MAX + 0.34,
-    tex: "F = F_{\\text{阻}}",
+    tex: String.raw`F = F_{\text{阻}}`,
     anchor: "top-right" as const,
     size: 17,
     color: "var(--c-ok)",
@@ -89,7 +89,7 @@ const labels = computed(() => [
   {
     x: V_MAX,
     y: 0,
-    tex: "v_{\\max}",
+    tex: String.raw`v_{\max}`,
     anchor: "top-left" as const,
     size: 18,
     color: "var(--c-ok)",

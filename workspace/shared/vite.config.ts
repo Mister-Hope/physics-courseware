@@ -198,7 +198,7 @@ export default defineConfig({
               typeof item.source === "string"
                 ? item.source
                 : Buffer.from(item.source).toString("utf8");
-            const next = source.replace(NON_WOFF2_SRC, "");
+            const next = source.replaceAll(NON_WOFF2_SRC, "");
 
             if (next !== source) item.source = next;
           } else if (item.type === "asset" && KATEX_LEGACY_FONT.test(fileName)) {

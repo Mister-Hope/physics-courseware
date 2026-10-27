@@ -28,7 +28,7 @@
 | `CircuitSwitch`   | 电路：开关（断开 / 闭合；闭合时刀闸与导线重合）                | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `CircuitBulb`     | 电路：灯泡                                                     | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `CircuitMeter`    | 电路：电表（电压表 / 电流表）                                  | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `Galvanometer`    | 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）   | **只能在 `<svg>` 里**                           | [`electronic-symbols.md`](./electronic-symbols.md) §3.6.1   |
+| `Galvanometer`    | 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）  | **只能在 `<svg>` 里**                           | [`electronic-symbols.md`](./electronic-symbols.md) §3.6.1   |
 | `BarMagnet`       | 条形磁体（S 蓝 / N 红，横放 / 竖放，由 `nSide` 决定）          | **只能在 `<svg>` 里**                           | 本篇 §10                                                    |
 | `FieldDots`       | 磁场**平铺阵列**：裸 `×` / 裸 `·` 铺满区域（不带圈）           | **只能在 `<svg>` 里**                           | 同上                                                        |
 | `FieldMark`       | 磁场**单个带圈**记号 ⊙/⊗：图例 / 方向标注（不同图并用阵列）    | **只能在 `<svg>` 里**                           | 同上                                                        |
@@ -307,18 +307,18 @@
 **S 蓝 / N 红、整块磁体只有最外端两个角是圆角**（S/N 分界处是直角）——各课封面、对照图里的磁体一律用它，
 ⛔ 不要再手画"S/N 两个矩形"（教师点名统一：各课磁体要长一个样）。**只能在 `<svg>` 里写**（根节点是 `<g>`）。
 
-| prop         | 类型                                        | 默认              | 说明                                                             |
-| ------------ | ------------------------------------------- | ----------------- | ---------------------------------------------------------------- |
-| `x` / `y`    | `number`                                    | `0` / `0`         | 磁体**几何中心**（viewBox 用户单位）                             |
-| `length`     | `number`                                    | `96`              | 沿磁轴（N–S 方向）的长度                                        |
-| `width`      | `number`                                    | `30`              | 垂直磁轴的宽度                                                   |
-| `nSide`      | `"right" \| "left" \| "top" \| "bottom"`   | `"right"`         | N 极朝向：`right`/`left` 横放、`top`/`bottom` 竖放               |
-| `nColor`     | `string`                                    | `var(--c-danger)` | N 极颜色（正电红）                                               |
-| `sColor`     | `string`                                    | `var(--c-velocity)` | S 极颜色（负电蓝）                                             |
-| `showLabels` | `boolean`                                   | `true`            | 是否画 N / S 字母（磁体太小、纯示意时可关）                      |
-| `labelSize`  | `number`                                    | `0`               | 字母字号；`0` = 自动（`width × 0.62`）                           |
-| `labelColor` | `string`                                    | `var(--c-bg-soft)` | 字母颜色（深底，压在彩色磁体上）                                |
-| `corner`     | `number`                                    | `3`               | 最外端圆角半径                                                   |
+| prop         | 类型                                     | 默认                | 说明                                               |
+| ------------ | ---------------------------------------- | ------------------- | -------------------------------------------------- |
+| `x` / `y`    | `number`                                 | `0` / `0`           | 磁体**几何中心**（viewBox 用户单位）               |
+| `length`     | `number`                                 | `96`                | 沿磁轴（N–S 方向）的长度                           |
+| `width`      | `number`                                 | `30`                | 垂直磁轴的宽度                                     |
+| `nSide`      | `"right" \| "left" \| "top" \| "bottom"` | `"right"`           | N 极朝向：`right`/`left` 横放、`top`/`bottom` 竖放 |
+| `nColor`     | `string`                                 | `var(--c-danger)`   | N 极颜色（正电红）                                 |
+| `sColor`     | `string`                                 | `var(--c-velocity)` | S 极颜色（负电蓝）                                 |
+| `showLabels` | `boolean`                                | `true`              | 是否画 N / S 字母（磁体太小、纯示意时可关）        |
+| `labelSize`  | `number`                                 | `0`                 | 字母字号；`0` = 自动（`width × 0.62`）             |
+| `labelColor` | `string`                                 | `var(--c-bg-soft)`  | 字母颜色（深底，压在彩色磁体上）                   |
+| `corner`     | `number`                                 | `3`                 | 最外端圆角半径                                     |
 
 ```html
 <!-- 横放：S 在左、N 在右（13.3 封面 / P3 对照图） -->

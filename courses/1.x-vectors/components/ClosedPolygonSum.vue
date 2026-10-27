@@ -217,7 +217,7 @@ const labels = computed(() => {
     items.push({
       x: (pointAt(0).x + endPoint.value.x) / 2,
       y: (pointAt(0).y + endPoint.value.y) / 2,
-      tex: "\\text{合矢量}",
+      tex: String.raw`\text{合矢量}`,
       anchor: "top-right" as const,
       color: "var(--c-danger)",
       size: 15,

@@ -81,7 +81,7 @@ const labels = computed(() => [
   {
     x: (pointA.value.time + pointB.value.time) / 2,
     y: Y_MIN,
-    tex: "\\Delta t",
+    tex: String.raw`\Delta t`,
     anchor: "center" as const,
     dy: 42,
     color: "var(--c-text)",
@@ -91,7 +91,7 @@ const labels = computed(() => [
   {
     x: pointB.value.time,
     y: (pointA.value.pos + pointB.value.pos) / 2,
-    tex: "\\Delta x",
+    tex: String.raw`\Delta x`,
     anchor: "right" as const,
     color: "var(--c-text)",
     halo: true,

@@ -20,9 +20,9 @@ const STRIP_H = 76;
 
 const SPEC_LINES = [
   /** N = 3 → n = 2，能量差小 → 波长长 → 靠右 */
-  { tex: "h\\nu = E_3 - E_2", color: "#fb923c", showAt: 1, gap: GAP.threeTwo },
+  { tex: String.raw`h\nu = E_3 - E_2`, color: "#fb923c", showAt: 1, gap: GAP.threeTwo },
   /** N = 2 → n = 1，能量差大 → 波长短 → 靠左 */
-  { tex: "h\\nu = E_2 - E_1", color: "#a78bfa", showAt: 2, gap: GAP.twoOne },
+  { tex: String.raw`h\nu = E_2 - E_1`, color: "#a78bfa", showAt: 2, gap: GAP.twoOne },
 ];
 
 const invSum = SPEC_LINES.reduce((sum, line) => sum + 1 / line.gap, 0);

@@ -4,13 +4,13 @@ packages:
 
 catalog:
   "@iconify-json/mdi": 1.2.3
-  "@iconify/vue": 5.0.3
+  "@iconify/vue": 5.0.4
   "@slidev/cli": 53.0.0
   "@slidev/client": 53.0.0
   "@slidev/theme-default": 0.25.0
   "@types/three": 0.186.0
   three: 0.186.1
-  vite: 8.3.4
+  vite: 8.3.5
   vue: 3.5.44
 
 overrides:

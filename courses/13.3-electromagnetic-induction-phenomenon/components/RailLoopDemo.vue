@@ -132,7 +132,14 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         stroke-linecap="round"
       />
       <!-- 灵敏电流计：串在竖直导线上，导线止于上下两个接线柱（terminals="vertical"） -->
-      <Galvanometer :x="LEFT_X" :y="180" :r="20" terminals="vertical" :angle="angle" fill="var(--c-bg-soft)" />
+      <Galvanometer
+        :x="LEFT_X"
+        :y="180"
+        :r="20"
+        terminals="vertical"
+        :angle="angle"
+        fill="var(--c-bg-soft)"
+      />
       <text
         :x="LEFT_X"
         y="228"

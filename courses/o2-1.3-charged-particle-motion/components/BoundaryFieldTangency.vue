@@ -244,7 +244,7 @@ const POSITIVE: Layout = {
     { tex: "O", at: POS_O, anchor: "left", color: C.dim, size: 16, from: 1 },
     { tex: "R_1", at: { x: 345, y: 238 }, anchor: "center", color: C.accent, size: 15, from: 2 },
     {
-      tex: "R_1\\sin45^\\circ",
+      tex: String.raw`R_1\sin45^\circ`,
       at: { x: 315, y: 268 },
       anchor: "center",
       color: C.accent,
@@ -355,7 +355,7 @@ const NEGATIVE: Layout = {
     { tex: "O'", at: NEG_O, anchor: "bottom-right", color: C.dim, size: 16, from: 1 },
     { tex: "R_2", at: { x: 168, y: 205 }, anchor: "center", color: C.accent, size: 15, from: 2 },
     {
-      tex: "R_2\\cos45^\\circ",
+      tex: String.raw`R_2\cos45^\circ`,
       at: { x: 193, y: 272 },
       anchor: "center",
       color: C.accent,

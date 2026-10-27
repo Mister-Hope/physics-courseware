@@ -2,11 +2,11 @@
 import { computed } from "vue";
 
 /**
- * 条形磁体（S 蓝 / N 红）——**只能在 `<svg>` 里用**（根节点是 `<g>`，写成 HTML 元素页面上什么都不显示，
- * 也不能用 ` ```comp ` 代码块）。**不要再各图手画"S/N 两个矩形"**（教师点名统一，各课磁体要长一个样）。
+ * 条形磁体（S 蓝 / N 红）——**只能在 `<svg>` 里用**（根节点是 `<g>`，写成 HTML 元素页面上什么都不显示， 也不能用 ` ```comp `
+ * 代码块）。**不要再各图手画"S/N 两个矩形"**（教师点名统一，各课磁体要长一个样）。
  *
- * 画法：整块磁体只有**最外端两个角是圆角**、S/N 分界处是直角；两半各填 S 蓝 / N 红，字母正体 `KaTeX_Main` 居中。
- * 传 `x` / `y`（磁体几何中心）与 `length`（沿磁轴）/ `width`（垂直磁轴），`nSide` 决定 N 极朝哪边（同时决定横放还是竖放）。
+ * 画法：整块磁体只有**最外端两个角是圆角**、S/N 分界处是直角；两半各填 S 蓝 / N 红，字母正体 `KaTeX_Main` 居中。 传 `x` / `y`（磁体几何中心）与
+ * `length`（沿磁轴）/ `width`（垂直磁轴），`nSide` 决定 N 极朝哪边（同时决定横放还是竖放）。
  *
  * ```html
  * <!-- 横放：S 在左、N 在右（封面、P3 对照图） -->
@@ -54,9 +54,7 @@ const {
 
 /** N 极朝向 → 磁轴相对 +x 的旋转角（局部坐标：u 沿磁轴指向 N、v 垂直磁轴） */
 const DEG = Math.PI / 180;
-const rotateDeg = computed(
-  () => ({ right: 0, bottom: 90, left: 180, top: 270 })[nSide] ?? 0,
-);
+const rotateDeg = computed(() => ({ right: 0, bottom: 90, left: 180, top: 270 })[nSide] ?? 0);
 const cos = computed(() => Math.cos(rotateDeg.value * DEG));
 const sin = computed(() => Math.sin(rotateDeg.value * DEG));
 // 局部坐标 (u, v) → SVG 坐标
