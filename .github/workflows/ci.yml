@@ -22,9 +22,7 @@ jobs:
         uses: pnpm/setup@v3
         with:
           runtime: node@24
-
-      - name: Install dependencies
-        run: pnpm ci
+          require-lockfile: true
 
       - name: Lint
         run: pnpm run lint
@@ -40,9 +38,7 @@ jobs:
         uses: pnpm/setup@v3
         with:
           runtime: node@24
-
-      - name: Install dependencies
-        run: pnpm ci
+          require-lockfile: true
 
       - name: Build all
         run: pnpm run build
@@ -64,9 +60,7 @@ jobs:
         uses: pnpm/setup@v3
         with:
           runtime: node@24
-
-      - name: Install dependencies
-        run: pnpm ci
+          require-lockfile: true
 
       - name: Install Chinese fonts
         run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
