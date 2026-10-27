@@ -53,18 +53,20 @@ const presetLabel = (preset: {
   t: number;
 }): { num: string; unitTex: string; t: string } => {
   const a = preset.i;
-  if (a < 1e-3)
+  if (a < 1e-3) {
     return {
       num: (a * 1e6).toPrecision(3),
       unitTex: String.raw`\mu\text{A}`,
       t: preset.t.toFixed(1),
     };
-  if (a < 1)
+  }
+  if (a < 1) {
     return {
       num: (a * 1e3).toPrecision(3),
       unitTex: String.raw`\text{mA}`,
       t: preset.t.toFixed(1),
     };
+  }
   return { num: a.toPrecision(3), unitTex: String.raw`\text{A}`, t: preset.t.toFixed(1) };
 };
 </script>
