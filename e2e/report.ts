@@ -78,6 +78,20 @@ export interface CourseResult {
   blockFitSteps: BlockFitStepResult[];
 }
 
+/**
+ * 本次检查范围（由 `scripts/e2e.ts` 通过环境变量传给每个 Playwright 子进程）。
+ *
+ * CI 只跑"受影响的课件"后，报告必须能自证"这次只检查了 N 门"，否则单独看报告会把"部分绿"误读成"全绿"。
+ */
+export interface ReportScope {
+  /** 本次实际检查的课件数 */
+  selected: number;
+  /** 仓库里的课件总数 */
+  total: number;
+  /** 选课基线（commit SHA），未指定时为空 */
+  baseline?: string;
+}
+
 export interface ReportMeta {
   generatedAt: string;
   viewport: { width: number; height: number };
@@ -88,6 +102,25 @@ export interface ReportMeta {
   stabilityTolerance: number;
   /** 正文越界判定阈值（逻辑像素，`E2E_BLOCK_TOLERANCE` 可调，默认 1） */
   blockTolerance: number;
+  /** 本次检查范围；全量直接跑（没走选课脚本）时为空 */
+  scope?: ReportScope;
+}
+
+/**
+ * 从环境变量读检查范围（`E2E_SCOPE_SELECTED` / `E2E_SCOPE_TOTAL` / `E2E_SCOPE_BASELINE`）。
+ *
+ * 三个变量只由 `scripts/e2e.ts` 注入；直接 `playwright test` 时读不到，返回 `undefined`（报告不显示范围行）。
+ */
+export function reportScopeFromEnv(): ReportScope | undefined {
+  const selected = Number(process.env.E2E_SCOPE_SELECTED ?? "");
+  const total = Number(process.env.E2E_SCOPE_TOTAL ?? "");
+
+  if (!Number.isInteger(selected) || !Number.isInteger(total) || selected <= 0 || total <= 0)
+    return undefined;
+
+  const baseline = process.env.E2E_SCOPE_BASELINE?.trim();
+
+  return baseline ? { selected, total, baseline } : { selected, total };
 }
 
 /** 留白阈值兜底值（与 `slidev-driver.ts` 的默认值一致，避免报告函数依赖环境变量） */
@@ -749,17 +782,29 @@ export function buildMarkdownReport(results: CourseResult[], meta: ReportMeta): 
   const total = countViolations(results);
   const renderErrors = collectRenderErrors(results);
   const hotspots = collectWhitespaceHotspots(results, meta.whitespaceTolerance);
+  const scope = meta.scope;
+  const partial = scope != null && scope.selected < scope.total;
+  const baseline = scope?.baseline ? `，选课基线 \`${scope.baseline.slice(0, 12)}\`` : "";
+  const scopeLabel = partial
+    ? `本次检查 ${scope.selected} 门课件 / 共 ${scope.total} 门（未覆盖的 ${scope.total - scope.selected} 门本次不检查${baseline}）`
+    : scope != null
+      ? `全量（${scope.total} 门${baseline}）`
+      : "全量（未走选课脚本）";
+  const passMessage = partial
+    ? `✅ 本次检查的 ${scope.selected} 门课件页面均在画面内（其余 ${scope.total - scope.selected} 门本次未检查）`
+    : "✅ 所有页面均在画面内";
   const lines: string[] = [
     "# 幻灯片布局溢出报告（16:9）",
     "",
     `- 生成时间：${meta.generatedAt}`,
+    `- 检查范围：${scopeLabel}`,
     `- 检查视口：${meta.viewport.width}×${meta.viewport.height}（16:9）`,
     "- 幻灯片画布：980×552（Slidev 逻辑尺寸，元素坐标已换算成逻辑像素）",
     `- 判定容差：${meta.tolerance}px（小于该值视为亚像素误差）`,
     `- 留白阈值：${meta.whitespaceTolerance}px（只看顶部 / 底部两条边缘空白带，只判「${EXPANDED_STATE_LABEL}」；\`E2E_WHITESPACE_TOLERANCE\` 可调）`,
     `- 位移阈值：${meta.stabilityTolerance}px（点击时已可见元素的位置差；\`E2E_STABILITY_TOLERANCE\` 可调）`,
     `- 正文越界阈值：${meta.blockTolerance}px（正文越出 \`.page-grow\` 可用区域；\`E2E_BLOCK_TOLERANCE\` 可调）`,
-    `- 结论：${renderErrors.length > 0 ? `⛔ ${renderErrors.length} 个页面渲染失败` : total === 0 ? "✅ 所有页面均在画面内" : `❌ 共 ${total} 个元素越出画面`}`,
+    `- 结论：${renderErrors.length > 0 ? `⛔ ${renderErrors.length} 个页面渲染失败` : total === 0 ? passMessage : `❌ 共 ${total} 个元素越出画面`}`,
     "",
     "| 课件 | 页数 | 检查状态数 | 渲染失败页数 | 溢出状态数 | 溢出元素数 | 留白偏大页数 | 位移步数 | 正文越界步数 |",
     "| --- | --- | --- | --- | --- | --- | --- | --- | --- |",

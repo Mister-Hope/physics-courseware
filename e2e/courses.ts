@@ -81,30 +81,57 @@ const compareByChapter = (left: string, right: string): number => {
 
   return left.localeCompare(right);
 };
-export function listCourses(): CourseTarget[] {
-  const filter = process.env.E2E_COURSE?.split(",")
+/** `E2E_COURSE` 里指定的课件 slug（未设置 / 空串时为空数组） */
+export function requestedCourseSlugs(): string[] {
+  return (process.env.E2E_COURSE ?? "")
+    .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
+}
 
+/**
+ * 把「全量排序后的课件序号 + slug」变成可启动的目标。
+ *
+ * 端口按**全量序号**分配（不是本次运行序号）：只跑子集时端口不变，多个进程各跑各的课件也不会抢端口。
+ */
+function toCourseTarget({ index, slug }: { index: number; slug: string }): CourseTarget {
+  const directory = join(COURSES_DIR, slug);
+  const packageName = readPackageName(directory);
+
+  if (!packageName) throw new Error(`课件 ${slug} 缺少 package.json，无法启动 E2E 服务`);
+
+  // `E2E_COURSE_PORT`：调度器（`scripts/e2e.ts`）起 server 前会先做端口自动避让（见 `e2e/ports.ts`），
+  // 挑好的端口用这个变量告诉 Playwright 这边，保证两边算出的 baseURL 一致。
+  const chosen = Number(process.env.E2E_COURSE_PORT ?? "");
+  const port = Number.isInteger(chosen) && chosen > 0 ? chosen : FIRST_PORT + index;
+
+  // 用 localhost（而不是 127.0.0.1）：slidev/vite 默认只绑到 localhost 解析出的地址，
+  // 在 macOS 上通常只有 IPv6 的 ::1，写 127.0.0.1 会连不上。
+  return { slug, packageName, directory, port, baseURL: `http://localhost:${port}/${slug}/` };
+}
+
+/**
+ * 全部课件（**不受 `E2E_COURSE` 过滤**），按章节号排序。
+ *
+ * 选课脚本与「本次检查了多少门 / 共多少门」的口径都用它；启动测试用 `listCourses()`。
+ */
+export function listAllCourses(): CourseTarget[] {
   return readdirSync(COURSES_DIR, { withFileTypes: true })
     .filter((entry) => entry.isDirectory() && !entry.name.startsWith("."))
     .map((entry) => entry.name)
     .sort(compareByChapter)
-    .map((slug, index) => ({ index, slug }))
-    .filter(({ slug }) => (filter?.length ? filter.includes(slug) : true))
-    .map(({ index, slug }) => {
-      const directory = join(COURSES_DIR, slug);
-      const packageName = readPackageName(directory);
+    .map((slug, index) => toCourseTarget({ index, slug }));
+}
 
-      if (!packageName) throw new Error(`课件 ${slug} 缺少 package.json，无法启动 E2E 服务`);
+/**
+ * 本次要跑的课件（受 `E2E_COURSE` 过滤）。
+ *
+ * 可用 `E2E_COURSE=1.3-velocity,1.x-vectors` 只跑指定课件（写目录名）。 `E2E_COURSE` 未设置 = 全量；设置了解析后为空 / 含不存在的
+ * slug 时由 `scripts/e2e.ts` 报错， 不会静默跑 0 门（那会让 CI 假绿）。
+ */
+export function listCourses(): CourseTarget[] {
+  const filter = requestedCourseSlugs();
+  const courses = listAllCourses();
 
-      // `E2E_COURSE_PORT`：调度器（`scripts/e2e.ts`）起 server 前会先做端口自动避让（见 `e2e/ports.ts`），
-      // 挑好的端口用这个变量告诉 Playwright 这边，保证两边算出的 baseURL 一致。
-      const chosen = Number(process.env.E2E_COURSE_PORT ?? "");
-      const port = Number.isInteger(chosen) && chosen > 0 ? chosen : FIRST_PORT + index;
-
-      // 用 localhost（而不是 127.0.0.1）：slidev/vite 默认只绑到 localhost 解析出的地址，
-      // 在 macOS 上通常只有 IPv6 的 ::1，写 127.0.0.1 会连不上。
-      return { slug, packageName, directory, port, baseURL: `http://localhost:${port}/${slug}/` };
-    });
+  return filter.length > 0 ? courses.filter((course) => filter.includes(course.slug)) : courses;
 }

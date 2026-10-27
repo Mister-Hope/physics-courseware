@@ -225,6 +225,7 @@ pnpm style:audit    # 样式审计：仅建议（warn 不是 error），默认 e
 pnpm slide          # 🔎 查/读某一页源码（省 token）
 pnpm shots          # 📸 批量截页图（自查视觉）
 pnpm test:e2e       # 端到端检查（四张表；CI 里唯一的版面门禁）
+pnpm test:e2e:affected --since origin/main  # 只跑受影响的课件（本地增量；CI 自动执行，见 notes/e2e-checks.md）
 pnpm build      # 构建入口网站 + 全部课件 → dist/
 pnpm lint           # oxlint --fix + oxfmt（slides.md 不参与格式化）
 pnpm clean          # 清 dist/ 与端到端缓存（--dry-run 先看清单）

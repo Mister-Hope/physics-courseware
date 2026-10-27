@@ -18,6 +18,7 @@ import {
   renderFailureMessage,
   renderStabilityFailureMessage,
   renderWhitespaceFailureMessage,
+  reportScopeFromEnv,
   type BlockFitStepResult,
   type CheckResult,
   type CourseResult,
@@ -102,6 +103,8 @@ const META: ReportMeta = {
   whitespaceTolerance: WHITESPACE_TOLERANCE,
   stabilityTolerance: STABILITY_TOLERANCE,
   blockTolerance: BLOCK_TOLERANCE,
+  // 只跑部分课件时（CI 选课）把"本次 N 门 / 共 M 门"写进报告，避免部分绿被误读成全绿
+  scope: reportScopeFromEnv(),
 };
 
 /**

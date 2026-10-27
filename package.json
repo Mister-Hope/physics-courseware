@@ -24,6 +24,7 @@
     "slide": "unrun scripts/slide.ts",
     "style:audit": "unrun scripts/style-audit.ts",
     "test:e2e": "unrun scripts/e2e.ts",
+    "test:e2e:affected": "unrun scripts/e2e-affected.ts",
     "test:e2e:install": "playwright install chromium",
     "tokenize:svg-colors": "unrun scripts/tokenize-svg-colors.ts"
   },

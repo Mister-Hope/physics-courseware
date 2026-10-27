@@ -7,9 +7,28 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      full:
+        description: 忽略选课逻辑，全量检查所有课件
+        required: false
+        default: false
+        type: boolean
+      since:
+        description: 指定选课基线（commit / ref，留空则按事件自动判定）
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
+  # 查询「上次成功的 CI」作为 main 的选课基线
+  actions: read
+
+# 同一分支的新 run 会取消旧的 run（只对 PR 生效；main 必须跑完，否则基线不推进）
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   lint:
@@ -43,15 +62,57 @@ jobs:
       - name: Build all
         run: pnpm run build
 
-  e2e:
+  # 选课：PR 取 merge-base，main 取上次成功的 CI，其余情况全量（规则见 scripts/e2e-affected.ts）
+  plan:
+    name: Plan affected courseware
     runs-on: ubuntu-latest
     needs: lint
-    timeout-minutes: 45
+    outputs:
+      mode: ${{ steps.plan.outputs.mode }}
+      matrix: ${{ steps.plan.outputs.matrix }}
+      baseline: ${{ steps.plan.outputs.baseline }}
+      total: ${{ steps.plan.outputs.total }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          # 选课要 git diff：浅克隆拿不到基线历史
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@24
+          require-lockfile: true
+
+      - name: Plan affected courseware
+        id: plan
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          E2E_FULL: ${{ inputs.full }}
+          E2E_SINCE: ${{ inputs.since }}
+        run: pnpm exec unrun scripts/e2e-affected.ts --github
+
+  e2e:
+    name: E2E（shard ${{ matrix.shard }}）
+    runs-on: ubuntu-latest
+    needs: plan
+    # mode=none 表示改动与幻灯片版面无关，直接跳过（plan job 的 summary 里有理由）
+    if: needs.plan.outputs.mode != 'none'
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     env:
       E2E_CONCURRENCY: 4
       # CI 上没有 macOS 的中文字体，行高会差几像素；这里放宽判定阈值，
       # 本机默认是 2px（见 e2e/slidev-driver.ts）
       E2E_OVERFLOW_TOLERANCE: 6
+      # 本分片要检查的课件；报告里会记下"本次 N 门 / 共 M 门"
+      E2E_COURSE: ${{ matrix.courses }}
+      E2E_SCOPE_SELECTED: ${{ matrix.count }}
+      E2E_SCOPE_TOTAL: ${{ needs.plan.outputs.total }}
+      E2E_SCOPE_BASELINE: ${{ needs.plan.outputs.baseline }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -75,7 +136,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: layout-overflow-report
+          name: layout-overflow-report-${{ matrix.shard }}
           # 单课件直接跑时报告落在课件自己的 .temp 下（见 e2e/artifacts.ts），多课件/全量在 e2e/reports/
           path: |
             e2e/reports/
