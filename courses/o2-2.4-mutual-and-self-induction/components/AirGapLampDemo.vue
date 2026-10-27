@@ -98,36 +98,43 @@ const glow = computed(() => clamp(emf.value * 1.15, 0, 1));
         <ellipse cx="306" cy="130" rx="132" ry="46" />
         <ellipse cx="306" cy="130" rx="140" ry="64" />
       </g>
-
-      <!-- 线圈 A：4 匝 -->
-      <g fill="none" stroke="var(--c-accent)" stroke-width="2.8">
-        <ellipse cx="170" cy="130" rx="8" ry="30" />
-        <ellipse cx="184" cy="130" rx="8" ry="30" />
-        <ellipse cx="198" cy="130" rx="8" ry="30" />
-        <ellipse cx="212" cy="130" rx="8" ry="30" />
-      </g>
-
-      <!-- 线圈 B：4 匝 -->
-      <g fill="none" stroke="var(--c-accent-2)" stroke-width="2.8">
-        <ellipse cx="400" cy="130" rx="8" ry="30" />
-        <ellipse cx="414" cy="130" rx="8" ry="30" />
-        <ellipse cx="428" cy="130" rx="8" ry="30" />
-        <ellipse cx="442" cy="130" rx="8" ry="30" />
-      </g>
-
+      <!-- 线圈 A：横放连续螺旋线 4 匝；从右端看顺时针，接线端在管口下侧 (170,160) / (212,160) -->
+      <Solenoid
+        :x="191"
+        :y="130"
+        :length="42"
+        :radius="30"
+        :turns="4"
+        direction="cw"
+        :phase="180"
+        :line-width="2.8"
+        :back-opacity="0.32"
+      />
+      <!-- 线圈 B：与 A 同轴、同绕向；接线端 (400,160) / (442,160) -->
+      <Solenoid
+        :x="421"
+        :y="130"
+        :length="42"
+        :radius="30"
+        :turns="4"
+        direction="cw"
+        :phase="180"
+        :line-width="2.8"
+        :back-opacity="0.32"
+        color="var(--c-accent-2)"
+      />
       <!-- A 的电路 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
-        <path d="M 170 130 H 150 V 250 H 155" />
+        <path d="M 170 160 H 150 V 250 H 155" />
         <path d="M 195 250 H 227" />
-        <path d="M 243 250 H 262 V 130 H 212" />
+        <path d="M 243 250 H 262 V 160 H 212" />
       </g>
       <CircuitSwitch :x="175" :y="250" label="S" :open="!powered" />
       <CircuitBattery :x="235" :y="250" polarity emf="E" />
-
       <!-- B 的电路 + 灯泡 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
-        <path d="M 400 130 H 380 V 250 H 414" />
-        <path d="M 446 250 H 466 V 130 H 442" />
+        <path d="M 400 160 H 380 V 250 H 414" />
+        <path d="M 446 250 H 466 V 160 H 442" />
       </g>
       <circle
         :cx="430"
@@ -137,7 +144,6 @@ const glow = computed(() => clamp(emf.value * 1.15, 0, 1));
         :opacity="0.42 * glow"
       />
       <CircuitBulb :x="430" :y="250" :r="16" />
-
       <!-- 图中的文字 -->
       <text x="191" y="84" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
         线圈 A

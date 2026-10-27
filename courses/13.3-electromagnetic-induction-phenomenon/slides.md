@@ -165,6 +165,19 @@ zoom: 0.92
 </div>
 
 ---
+title: 灵敏电流计怎么读方向
+clicks: 1
+---
+
+# 灵敏电流计的指针往哪边偏
+
+<div class="page-grow">
+<div class="ask">同一个灵敏电流计，为什么有时向左偏、有时向右偏？</div>
+<GalvanometerDirectionSvg />
+<div v-click="1" class="tip-hint">电流从哪一侧接线柱流入，指针就向哪一侧偏：从左流入 → 指针向左偏；从右流入 → 指针向右偏。</div>
+</div>
+
+---
 title: 产生感应电流的条件
 ---
 

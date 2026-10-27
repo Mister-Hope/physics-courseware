@@ -11,7 +11,6 @@
       I
       <tspan baseline-shift="sub" font-size="11">1</tspan>
     </text>
-
     <!-- 穿过去的磁场（串扰） -->
     <g fill="none" stroke="var(--c-danger)" stroke-width="1.7" stroke-dasharray="8 7" class="field-flow" opacity="0.75">
       <path d="M 120 87 C 110 108, 110 124, 120 145" />
@@ -19,7 +18,6 @@
       <path d="M 280 87 C 270 108, 270 124, 280 145" />
     </g>
     <text x="338" y="120" text-anchor="middle" font-size="14" fill="var(--c-danger)">串扰</text>
-
     <!-- 下面的闭合回路：灯被"点"亮 -->
     <circle cx="200" cy="187" r="26" fill="var(--c-accent)" opacity="0.14" />
     <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
@@ -27,7 +25,6 @@
     </g>
     <CircuitBulb :x="200" :y="187" :r="15" color="var(--c-accent)" fill="var(--c-bg)" :line-width="2.4" />
     <CourseArrow :from="{ x: 320, y: 168 }" :to="{ x: 250, y: 168 }" stroke="var(--c-accent)" :stroke-width="2.6" />
-
     <text x="200" y="222" text-anchor="middle" font-size="13" fill="var(--c-text-dim)">另一条闭合回路</text>
   </svg>
 </template>

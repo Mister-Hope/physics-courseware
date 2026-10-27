@@ -15,17 +15,13 @@ defineProps<{
     <!-- 三个环节 -->
     <rect x="20" y="46" width="140" height="68" rx="14" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.4" />
     <text x="90" y="86" text-anchor="middle" font-size="17" fill="var(--c-text)">电源</text>
-
     <rect x="235" y="46" width="150" height="68" rx="14" fill="var(--c-accent-soft)" stroke="var(--c-accent)" stroke-width="1.4" />
     <text x="310" y="86" text-anchor="middle" font-size="17" fill="var(--c-accent)">线圈的磁场</text>
-
     <rect x="460" y="46" width="140" height="68" rx="14" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.4" />
     <text x="530" y="86" text-anchor="middle" font-size="17" fill="var(--c-text)">灯泡</text>
-
     <!-- 通电：电源 → 磁场 -->
     <CourseArrow :from="{ x: 170, y: 72 }" :to="{ x: 230, y: 72 }" stroke="var(--c-accent)" :stroke-width="3" />
     <text x="200" y="62" text-anchor="middle" font-size="13" fill="var(--c-accent)">通电</text>
-
     <!-- 断电：磁场 → 灯泡 -->
     <g v-if="(step ?? 0) >= 1">
       <CourseArrow :from="{ x: 390, y: 88 }" :to="{ x: 455, y: 88 }" stroke="var(--c-accent-2)" :stroke-width="3" />

@@ -1,5 +1,6 @@
 <!--
   P6 配图：n 匝线圈串联 —— 穿过每匝的磁通量相同，整个线圈的电动势是单匝的 n 倍。
+  线圈用共享 Solenoid（轴水平、一条连续螺旋线；4 匝整数 ⇒ 两端都在上端 (77,40) / (149,40)）。
 -->
 <template>
   <svg viewBox="0 0 240 170" xmlns="http://www.w3.org/2000/svg" class="w-full">
@@ -8,13 +9,8 @@
     <CourseArrow :from="{ x: 190, y: 80 }" :to="{ x: 216, y: 80 }" stroke="var(--c-text-dim)" :stroke-width="1.4" />
     <text x="202" y="70" text-anchor="middle" font-family="KaTeX_Math, serif" font-style="italic" font-size="15" fill="var(--c-text-dim)">Φ</text>
 
-    <!-- 线圈：四匝 -->
-    <g fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round">
-      <ellipse cx="86" cy="80" rx="8" ry="40" opacity="0.55" />
-      <ellipse cx="104" cy="80" rx="8" ry="40" opacity="0.72" />
-      <ellipse cx="122" cy="80" rx="8" ry="40" opacity="0.88" />
-      <ellipse cx="140" cy="80" rx="8" ry="40" />
-    </g>
+    <!-- 线圈：4 匝（共享 Solenoid，连续螺旋线） -->
+    <Solenoid :x="113" :y="80" :length="72" :radius="40" :turns="4" direction="cw" :phase="0" :line-width="3" :back-opacity="0.35" />
 
     <text x="113" y="140" text-anchor="middle" font-size="14" fill="var(--c-text-dim)">
       <tspan font-family="KaTeX_Math, serif" font-style="italic" font-size="17" fill="var(--c-accent)">n</tspan>

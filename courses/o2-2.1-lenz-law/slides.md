@@ -58,7 +58,7 @@ clicks: 2
 
 <div class="page-grow">
 <div class="ask">同样在改变磁通量，感应电流的方向却不同。要找出规律，应该改变什么、控制什么？</div>
-<div v-click="1">两个变量：磁极（N / S）、磁通量在增大还是减小（插入 / 抽出）。线圈、磁体、电流表都不变。</div>
+<div v-click="1">两个变量：磁极（N / S）、磁通量在增大还是减小（插入 / 抽出）。线圈、磁体、灵敏电流计都不变。</div>
 <div v-click="2" class="split-wide" style="--cols: minmax(0, 1.15fr) minmax(0, 0.85fr)">
 <div class="stack">
 <div>两种磁极 × 两种变化，共四种情况。</div>
@@ -79,7 +79,7 @@ clicks: 2
 </div>
 
 ---
-title: 回放（磁体运动时的电流表）
+title: 回放（磁体运动时的灵敏电流计）
 clicks: 2
 ---
 

@@ -25,13 +25,8 @@
       <!-- 条形磁体（S 蓝 / N 红，共享 BarMagnet） -->
       <BarMagnet :x="74" :y="250" :length="92" :width="28" n-side="right" />
       <CourseArrow :from="{ x: 130, y: 250 }" :to="{ x: 170, y: 250 }" stroke="var(--c-accent)" :stroke-width="2.2" />
-      <!-- 螺线管 -->
-      <g fill="none" stroke="var(--c-accent)" stroke-width="2.2">
-        <ellipse cx="190" cy="250" rx="10" ry="30" />
-        <ellipse cx="214" cy="250" rx="10" ry="30" />
-        <ellipse cx="238" cy="250" rx="10" ry="30" />
-        <ellipse cx="262" cy="250" rx="10" ry="30" />
-      </g>
+      <!-- 螺线管（共享 Solenoid：连续螺旋线；4.5 匝 ⇒ 左端在上、右端在下，引线从这两处接出） -->
+      <Solenoid :x="226" :y="250" :length="72" :radius="30" :turns="4.5" direction="ccw" :line-width="2.2" :back-opacity="0.4" back-dash />
       <!-- 引线与灵敏电流计：两段引线分别止于表盘左右接线柱（圆心 330,233、r=24 ⇒ 306 / 354）-->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
         <path d="M 190 220 V 200 H 280 V 233 H 306" />

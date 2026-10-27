@@ -108,3 +108,25 @@
 .ei-split {
   --cols: minmax(0, 1.6fr) minmax(0, 1fr);
 }
+
+/* P2 引课思考页（layout: focus-question）：问题字号收一档、提示不灰、提示与解析之间收紧 */
+.slidev-layout.focus-question .fq-question {
+  font-size: 1.62rem !important;
+  line-height: 1.4;
+}
+
+.slidev-layout.focus-question .fq-hint,
+.slidev-layout.focus-question .fq-answer {
+  color: var(--c-text);
+  margin: 0;
+}
+
+/* 插槽里的文字会被 markdown 包成 <p>，这里去掉段落外边距，别把提示和解析撑开 */
+.slidev-layout.focus-question .fq-hint p,
+.slidev-layout.focus-question .fq-answer p {
+  margin: 0;
+}
+
+.slidev-layout.focus-question .fq-center {
+  gap: 0.8rem;
+}

@@ -2,6 +2,7 @@
   第 10 页：吊起的铝环与靠近 / 移开磁体。
   `mode="approach"` 磁体从右侧靠近（运动箭头向左），铝环受斥力向左；
   `mode="away"` 磁体向右移开，铝环受引力向右。
+  条形磁体用共享 BarMagnet（左端 N 面向铝环）。
   图按 16px 体系绘制（viewBox 280×200）。
 -->
 <script setup lang="ts">
@@ -25,10 +26,7 @@ const magnetX = computed<number>(() => (mode === "approach" ? 150 : 200));
     <ellipse cx="108" cy="104" rx="26" ry="50" fill="none" stroke="var(--c-neutral-300)" stroke-width="3.6" />
 
     <!-- 条形磁体：左端 N 面向铝环 -->
-    <rect :x="magnetX" y="92" width="35" height="24" rx="2" fill="var(--c-danger)" />
-    <rect :x="magnetX + 35" y="92" width="35" height="24" rx="2" fill="var(--c-velocity)" />
-    <text :x="magnetX + 17.5" y="109" text-anchor="middle" font-family="KaTeX_Main" font-size="13" fill="var(--c-bg)">N</text>
-    <text :x="magnetX + 52.5" y="109" text-anchor="middle" font-family="KaTeX_Main" font-size="13" fill="var(--c-bg)">S</text>
+    <BarMagnet :x="magnetX + 35" :y="104" :length="70" :width="24" n-side="left" />
 
     <!-- 磁体的运动方向 -->
     <CourseArrow

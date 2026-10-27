@@ -24,7 +24,7 @@
 | 什么时候用                                                        | 读哪篇                                                                                                                                                                     |
 | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **图元莫名其妙「看不见 / 变形 / 字号爆炸」（SVG 属性被吃掉）**    | [`.agents/notes/svg-attributify-trap.md`](.agents/notes/svg-attributify-trap.md) ⭐⭐ **先查这个再查别的：`opacity` 被压成 0.9%、`stroke-width` 被撑大都是它；含诊断脚本** |
-| **要用任何共享组件（查它是干嘛的、props 怎么填）**                | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **28 个全局组件总表 + 简单组件的 props 正本**                                                |
+| **要用任何共享组件（查它是干嘛的、props 怎么填）**                | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **29 个全局组件总表 + 简单组件的 props 正本**                                                |
 | 要画 SVG（矢量箭头、SVG 字号体系、非坐标示意图）                  | [`.agents/notes/slidev-svg.md`](.agents/notes/slidev-svg.md)                                                                                                               |
 | **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）       | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                                                                     |
 | **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）            | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                                                                   |
@@ -154,7 +154,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 ### 共享组件（`workspace/shared/components/`，全局注册：**直接用、不用 import、不要重画**）
 
-28 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
+29 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
 [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)。
 
 **坐标图（⛔ 禁止手写坐标轴 SVG）· 写在 markdown 顶层**
@@ -172,6 +172,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 - `Ruler` — 刻度尺（精确毫米刻度 / 示意图模式），可内嵌也可独立用 · [总览 §6](.agents/notes/shared-components.md)
 - `BarMagnet` — 条形磁体（S 蓝 / N 红，横放 / 竖放由 `nSide` 决定），⛔ 禁止手画 S/N 两块矩形 · [总览 §10](.agents/notes/shared-components.md)
 - `Galvanometer` — 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）· [电路符号笔记 §3.6.1](.agents/notes/electronic-symbols.md)
+- `Solenoid` — 直螺线管（**连续螺旋线**，不是一叠椭圆；`direction` 设从右端看顺时针 / 逆时针）· [总览 §11](.agents/notes/shared-components.md)
 
 **天体图元（⛔ 禁止手画太阳 / 地球 / 月球 / 星球）· 只能在 `<svg>` 里写**
 

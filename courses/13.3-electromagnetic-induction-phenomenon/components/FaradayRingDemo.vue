@@ -25,16 +25,11 @@ const pt = (r: number, deg: number): { x: number; y: number } => {
   };
 };
 
-/** 线圈 A（左侧 4 匝）与线圈 B（右侧 4 匝）：每匝画成穿过环带的径向线段 */
-const SEG_A = [150, 170, 190, 210].map((d) => ({ a: pt(RI, d), b: pt(RO, d) }));
-const SEG_B = [-30, -10, 10, 30].map((d) => ({ a: pt(RI, d), b: pt(RO, d) }));
-const OUTER_A = [150, 170, 190, 210].map((d) => pt(RO, d));
-const OUTER_B = [-30, -10, 10, 30].map((d) => pt(RO, d));
+/** 铁环带宽的一半（管截面半径）：环带画在 RING_R ∓ TUBE_R，绕组也绕在这个管面上 */
+const TUBE_R = 13;
 
 const line = (p: { x: number; y: number }, q: { x: number; y: number }): string =>
   `M ${p.x} ${p.y} L ${q.x} ${q.y}`;
-const poly = (ps: { x: number; y: number }[]): string =>
-  ps.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
 
 const leadTopA = pt(RO, 210);
 const leadTopB = pt(RO, -30);
@@ -136,13 +131,30 @@ const statusText = computed(() => (hasCurrent.value ? "线圈 A 有电流" : "�
       <text :x="C.x" :y="C.y + 6" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
         铁环
       </text>
-      <!-- 两个线圈的绕组 -->
-      <g stroke="var(--c-accent)" stroke-width="3.4" stroke-linecap="round">
-        <path v-for="(s, i) in SEG_A" :key="'sa' + i" :d="line(s.a, s.b)" />
-        <path :d="poly(OUTER_A)" fill="none" />
-        <path v-for="(s, i) in SEG_B" :key="'sb' + i" :d="line(s.a, s.b)" />
-        <path :d="poly(OUTER_B)" fill="none" />
-      </g>
+      <!-- 两个线圈的绕组：连续绕在铁环上（共享课内组件 RingCoil）——
+           A 绕环的左侧（150°…210°）、B 绕右侧（−30°…30°），正面实线、绕到环后面的部分虚淡 -->
+      <RingCoil
+        :x="C.x"
+        :y="C.y"
+        :ring-radius="RING_R"
+        :tube-radius="TUBE_R"
+        :wrap-center="180"
+        :wrap-span="60"
+        :turns="4"
+        direction="cw"
+        :line-width="3.4"
+      />
+      <RingCoil
+        :x="C.x"
+        :y="C.y"
+        :ring-radius="RING_R"
+        :tube-radius="TUBE_R"
+        :wrap-center="0"
+        :wrap-span="60"
+        :turns="4"
+        direction="ccw"
+        :line-width="3.4"
+      />
       <!-- 线圈 A 的电路：引线 → 开关 → 电源 → 回到线圈 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
         <path :d="line(leadTopA, { x: 170, y: leadTopA.y })" />

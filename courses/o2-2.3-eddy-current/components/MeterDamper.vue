@@ -1,7 +1,8 @@
 <!--
-  电磁阻尼的应用：磁电式仪表的铝框（第 17 页）
+  电磁阻尼的应用：磁电式仪表（灵敏电流计）的铝框（第 16 页）
   两个完全相同的表：左表两接线柱未连接，右表用导线短接。
   晃动表壳后指针自由摆动 —— 左表要摆很久，右表很快停在平衡位置。
+  表盘用共享 Galvanometer（G、零点居中、正角向右偏），导线止于表盘左右接线柱；
   指针角度按阻尼振动 θ = θ₀·e^(−bt)·cos(2πft) 实时计算，左右取不同的 b。
 -->
 <script setup lang="ts">
@@ -48,9 +49,6 @@ onUnmounted(stop);
 /** 阻尼振动角位移（度）；未释放时指针竖直 */
 const angle = (b: number): number =>
   step >= 1 ? 40 * Math.exp(-b * t.value) * Math.cos(2 * Math.PI * 1.4 * t.value) : 0;
-
-const rad = (deg: number): number => (deg * Math.PI) / 180;
-const TICKS = [-60, -40, -20, 0, 20, 40, 60];
 </script>
 
 <template>
@@ -77,60 +75,27 @@ const TICKS = [-60, -40, -20, 0, 20, 40, 60];
       >
         {{ m.label }}
       </text>
-      <circle
-        :cx="m.cx"
-        cy="150"
-        r="112"
-        fill="rgb(30 41 59 / 45%)"
-        stroke="#64748b"
-        stroke-width="2.4"
-      />
-      <path
-        :d="`M ${m.cx - 96} 106 A 112 112 0 0 1 ${m.cx + 96} 106`"
-        fill="none"
-        stroke="#475569"
-        stroke-width="1.6"
-      />
-      <line
-        v-for="a in TICKS"
-        :key="a"
-        :x1="m.cx + 94 * Math.sin(rad(a))"
-        :y1="150 - 94 * Math.cos(rad(a))"
-        :x2="m.cx + 104 * Math.sin(rad(a))"
-        :y2="150 - 104 * Math.cos(rad(a))"
-        stroke="#475569"
-        stroke-width="1.6"
-      />
-      <circle :cx="m.cx" cy="150" r="4" fill="#94a3b8" />
+      <!-- 铝框：线圈绕在铝框上、指针固定在铝框上（虚线方框套在表盘里） -->
       <rect
-        :x="m.cx - 54"
-        y="106"
-        width="108"
-        height="88"
+        :x="m.cx - 52"
+        y="108"
+        width="104"
+        height="84"
         rx="3"
         fill="none"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="1.6"
         stroke-dasharray="6 5"
       />
-      <text :x="m.cx" y="216" text-anchor="middle" font-size="14" fill="#64748b">铝框</text>
-      <g :transform="`rotate(${angle(m.b)} ${m.cx} 150)`">
-        <line
-          :x1="m.cx"
-          y1="150"
-          :x2="m.cx"
-          y2="40"
-          stroke="#cbd5e1"
-          stroke-width="3.4"
-          stroke-linecap="round"
-        />
-        <circle :cx="m.cx" cy="40" r="3" fill="#cbd5e1" />
-      </g>
-      <circle :cx="m.cx - 20" cy="286" r="5" fill="none" stroke="#94a3b8" stroke-width="2" />
-      <circle :cx="m.cx + 20" cy="286" r="5" fill="none" stroke="#94a3b8" stroke-width="2" />
+      <!-- 表盘：共享灵敏电流计（G、零点居中、指针正角向右偏） -->
+      <Galvanometer :x="m.cx" :y="150" :r="96" :angle="angle(m.b)" />
+      <text :x="m.cx - 40" y="212" text-anchor="middle" font-size="14" fill="var(--c-text-mute)">
+        铝框
+      </text>
+      <!-- 右表：导线把两个接线柱短接（左右接线柱 = 表盘 9 点 / 3 点） -->
       <path
         v-if="i === 1"
-        :d="`M ${m.cx - 20} 286 Q ${m.cx} 314 ${m.cx + 20} 286`"
+        d="M 428 150 H 412 Q 406 150 406 156 V 282 Q 406 288 412 288 H 636 Q 642 288 642 282 V 156 Q 642 150 636 150 H 620"
         fill="none"
         stroke="var(--c-accent)"
         stroke-width="2.4"
