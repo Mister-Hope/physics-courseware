@@ -243,15 +243,15 @@ title: 电磁感应现象的应用
 
 <div class="page-grow">
 <div class="three-col">
-<div class="text-center">
+<div>
 <div class="mini-title"><mdi-flash />发电机</div>
 <div>根据电磁感应制造的最早的发电机，后来成长为电厂里巨大的发电机，开辟了人类社会的电气化时代。</div>
 </div>
-<div class="text-center">
+<div>
 <div class="mini-title"><mdi-transmission-tower />变压器</div>
-<div>根据电磁感应制造，用于输电。</div>
+<div>根据电磁感应制造，<br />用于输电。</div>
 </div>
-<div class="text-center">
+<div>
 <div class="mini-title"><mdi-stove />电磁炉</div>
 <div>根据电磁感应制造。</div>
 </div>

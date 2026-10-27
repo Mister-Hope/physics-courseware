@@ -145,18 +145,7 @@ const status = computed(() => {
         <path d="M 316 88 H 430" />
         <path d="M 316 132 H 430" />
       </g>
-      <CircuitMeter :x="430" :y="110" kind="a" :r="22" />
-      <line
-        :x1="430"
-        y1="110"
-        :x2="430"
-        y2="92"
-        :transform="`rotate(${angle} 430 110)`"
-        stroke="var(--c-danger)"
-        stroke-width="2.6"
-        stroke-linecap="round"
-      />
-      <circle cx="430" cy="110" r="2.6" fill="var(--c-text)" />
+      <PointerAmmeter :x="430" :y="110" :r="22" :angle="angle" />
       <text x="430" y="166" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
         电流表
       </text>

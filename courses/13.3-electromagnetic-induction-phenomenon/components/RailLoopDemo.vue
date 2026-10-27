@@ -132,18 +132,7 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         stroke-linecap="round"
       />
       <!-- 电流表 -->
-      <CircuitMeter :x="LEFT_X" :y="180" kind="a" :r="20" />
-      <line
-        :x1="LEFT_X"
-        y1="180"
-        :x2="LEFT_X"
-        y2="162"
-        :transform="`rotate(${angle} ${LEFT_X} 180)`"
-        stroke="var(--c-danger)"
-        stroke-width="2.6"
-        stroke-linecap="round"
-      />
-      <circle :cx="LEFT_X" cy="180" r="2.6" fill="var(--c-text)" />
+      <PointerAmmeter :x="LEFT_X" :y="180" :r="20" :angle="angle" />
       <text :x="LEFT_X" y="228" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
         电流表
       </text>

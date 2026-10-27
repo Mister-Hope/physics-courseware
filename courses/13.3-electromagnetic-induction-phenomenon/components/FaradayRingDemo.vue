@@ -158,18 +158,7 @@ const statusText = computed(() => (hasCurrent.value ? "线圈 A 有电流" : "�
         <path d="M 430 112 V 128" />
         <path d="M 430 172 V 188 H 356" />
       </g>
-      <CircuitMeter :x="430" :y="150" kind="a" :r="22" />
-      <line
-        :x1="430"
-        y1="150"
-        :x2="430"
-        y2="132"
-        :transform="`rotate(${angle} 430 150)`"
-        stroke="var(--c-danger)"
-        stroke-width="2.6"
-        stroke-linecap="round"
-      />
-      <circle cx="430" cy="150" r="2.6" fill="var(--c-text)" />
+      <PointerAmmeter :x="430" :y="150" :r="22" :angle="angle" />
       <!-- 元件标签 -->
       <text x="150" y="232" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
         线圈 A
