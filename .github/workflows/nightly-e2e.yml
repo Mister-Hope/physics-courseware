@@ -1,0 +1,52 @@
+name: Nightly E2E
+
+# 全量兜底：选课逻辑再稳，也总会有"很久没被选中"的课件。
+# 每天 03:00（Asia/Shanghai）= 19:00 UTC，跑一遍全部课件。
+on:
+  schedule:
+    - cron: "0 19 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly-e2e
+  cancel-in-progress: true
+
+jobs:
+  e2e-full:
+    name: E2E full
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      E2E_CONCURRENCY: 4
+      E2E_OVERFLOW_TOLERANCE: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v3
+        with:
+          runtime: node@24
+          require-lockfile: true
+
+      - name: Install Chinese fonts
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+
+      - name: Install Playwright browser
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: E2E layout check
+        run: pnpm run test:e2e
+
+      - name: Upload layout report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: nightly-layout-overflow-report
+          path: |
+            e2e/reports/
+            courses/*/.temp/layout-overflow/
+          if-no-files-found: ignore
