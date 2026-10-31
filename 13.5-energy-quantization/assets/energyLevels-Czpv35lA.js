@@ -1,0 +1,1 @@
+var e=[246,178,138,114],t={twoOne:e[0]-e[1],threeTwo:e[1]-e[2]};export{e as n,t};
