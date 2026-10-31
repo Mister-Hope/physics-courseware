@@ -147,7 +147,10 @@ export const ALLOWED_ROOT_OVERRIDES = new Set([
 
 /** 共享选择器：本课 style.css 不得重写（style-guide §8）。标签给人看，正则给机器用 */
 export const PROTECTED_SELECTORS: [label: string, pattern: RegExp][] = [
-  [".slidev-layout（页面外壳）", /^\.slidev-layout\b/mu],
+  [
+    ".slidev-layout（页面外壳）",
+    /^\.slidev-layout(?:\.(?:base-flex|exercise-split|focus-question|course-cover))?\s*[,{]/mu,
+  ],
   ["h1（页面大标题）", /^h1\s*\{/mu],
   ["table / th / td（共享表格）", /^(?<tag>table|th|td)\s*\{/mu],
   [".mini-title（小节标题）", /^\.mini-title\s*[,{]/mu],
