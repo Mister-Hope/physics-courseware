@@ -7,11 +7,11 @@
 // 2) 必填字段齐全、类型正确（分册 4 项 / 课件 5 项，出现未知键也算错）；
 // 3) 课件 slug 全局唯一、分册 slug 不重复、slug 形状合法；
 // 4) 每门课的 slug 在 courses/ 下确实存在同名目录；
-// 5) 登记的 title 与 slides.md headmatter 的 title 一致（存量有个别差异，先只警告）；
+// 5) 登记的 title 与 slides.md headmatter 的 title 一致（硬校验：两处是同一课题名的正本，脱节会导致首页卡片与顶栏不一致）；
 // 6) courses/ 下含 slides.md 却未登记的目录（只警告，提醒补登记）；
 // 7) 平行工具 resources/init-slidev-courseware/spec.md 仍带着核心设计系统契约（只警告）。
 //
-// 失败时逐条打印可读错误（带 JSON 路径）并以非 0 退出；描述超长、title 不一致等只警告，不算失败。
+// 失败时逐条打印可读错误（带 JSON 路径）并以非 0 退出；描述超长等只警告，不算失败。
 
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
@@ -127,7 +127,7 @@ const checkSlidesTitle = (courseDir: string, registeredTitle: string, where: str
 
   if (!slidesTitle || slidesTitle === registeredTitle) return;
 
-  warnings.push(
+  errors.push(
     `${where}.title 是 ${JSON.stringify(registeredTitle)}，但 slides.md headmatter 的 title 是 ${JSON.stringify(slidesTitle)}（首页卡片读注册表、封面与顶栏读 slides.md，请对齐）`,
   );
 };
