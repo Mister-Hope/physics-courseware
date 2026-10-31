@@ -1,4 +1,5 @@
-// 一键创建新课件骨架：生成 slides.md / README.md / 顶底栏 / 思路模板，并登记进首页配置（课件清单的唯一来源）。
+// 一键创建新课件骨架：生成 slides.md / README.md / 思路模板，并登记进首页配置（课件清单的唯一来源）。
+// 顶栏 / 底栏由共享 addon（workspace/shared/global-*.vue）全局挂载，不再往单课目录里生成薄壳。
 //
 // 用法：pnpm create:course --name force-equilibrium --chapter-name "共点力的平衡" --chapter "3.5" --textbook bx1
 // 详见 `pnpm create:course --help`。
@@ -15,8 +16,6 @@ import path from "node:path";
 import { parseArgs } from "node:util";
 
 import {
-  renderGlobalBottom,
-  renderGlobalTop,
   renderIdeaDoc,
   renderPackageJson,
   renderReadme,
@@ -310,8 +309,6 @@ const planFiles = (options: CourseOptions, textbook?: TextbookGroup): PlannedFil
   return [
     { path: "package.json", content: renderPackageJson(context) },
     { path: "slides.md", content: renderSlides(context) },
-    { path: "global-top.vue", content: renderGlobalTop(context) },
-    { path: "global-bottom.vue", content: renderGlobalBottom() },
     { path: "style.css", content: renderStyle(context) },
     { path: "README.md", content: renderReadme(context) },
     { path: path.join("content", "思路.md"), content: renderIdeaDoc(context) },

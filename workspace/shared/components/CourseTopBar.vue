@@ -2,7 +2,7 @@
   <div class="global-top">
     <Transition name="top-text" mode="out-in">
       <span class="global-top-title" :key="isCover ? 'chapter' : 'section'">
-        {{ isCover ? chapter : section }}
+        {{ isCover ? displayChapter : displaySection }}
       </span>
     </Transition>
     <img
@@ -15,27 +15,39 @@
 </template>
 
 <script setup lang="ts">
-import { useNav } from "@slidev/client";
+import { configs, useNav } from "@slidev/client";
 import { computed } from "vue";
 
 import logoUrl from "../assets/logo.png";
 import { getSavedLogo, lessonParams } from "../utils/lesson-params";
 
 const {
-  chapter,
-  section,
+  chapter = "",
+  section = "",
   logoAlt = "东北育才学校",
 } = defineProps<{
-  /** 封面（第 1 页）显示的章节名，如「第十章 静电场」 */
-  chapter: string;
-  /** 内页显示的课题名，如「电容器的电容」 */
-  section: string;
+  /** 封面（第 1 页）显示的章节名，如「第十章 静电场」；不传则取 headmatter 的 `chapter` */
+  chapter?: string;
+  /** 内页显示的课题名，如「电容器的电容」；不传则取 headmatter 的 `title` */
+  section?: string;
   /** 顶栏 logo 的 alt 文本 */
   logoAlt?: string;
 }>();
 
 const nav = useNav();
 const isCover = computed(() => nav.currentPage.value === 1);
+
+/**
+ * Headmatter（`slides.md` 第一页的 frontmatter）里的 `title` 与自定义字段 `chapter`。
+ *
+ * 顶栏挂在 `global-top` 全局层（每个单页 `SlideContext` 的外层），**不能**用 `useSlideContext()` 取
+ * `$slidev.configs`；`@slidev/client` 的 `configs` 就是同一份全局配置，在任何层都能直接读。
+ */
+const slidevConfigs = configs as typeof configs & { chapter?: string };
+
+/** 章节名 / 课题名：显式 prop 优先，缺省回到 headmatter（存量课件传了 prop 时行为完全不变） */
+const displayChapter = computed(() => chapter || slidevConfigs.chapter || "");
+const displaySection = computed(() => section || slidevConfigs.title || "");
 
 interface LogoState {
   /** Default = 东北育才；custom = 本机保存过的自定义图（dataURL）；hidden = 不显示 */

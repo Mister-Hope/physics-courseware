@@ -32,30 +32,23 @@ addons:
 
 > ⚠️ addon 相对路径的基准是 `courses/`（课件目录的**父目录**，Slidev 的 userRoot 解析行为），所以从 `courses/<slug>/` 引用要写 `../workspace/shared`，而不是 `../../workspace/shared`。
 
-然后课件的 `global-top.vue` 只需：
+顶底栏由 addon 根目录的 `global-top.vue` / `global-bottom.vue` **自动全局挂载**，单课目录下无需再建同名文件；`CourseTopBar` 会自动读 `slides.md` headmatter 的 `chapter` / `title`：
 
 ```vue
+<!-- 仅某门课确需特殊定制时才在 courses/<slug>/ 下放一个同名文件 -->
 <template>
   <CourseTopBar chapter="第十章 静电场" section="电容器的电容" />
 </template>
 ```
 
-课件的 `global-bottom.vue` 只需：
-
-```vue
-<template>
-  <CourseBottomBar />
-</template>
-```
-
-`CourseTopBar` 接收两个必填 props：
+`CourseTopBar` 的 `chapter` / `section` 都可省略（缺省读 headmatter）：
 
 | prop      | 说明                        | 示例          |
 | --------- | --------------------------- | ------------- |
 | `chapter` | 封面（第 1 页）显示的章节名 | 第十章 静电场 |
 | `section` | 内页显示的课题名            | 电容器的电容  |
 
-可选 prop：`logoAlt`（默认 `东北育才学校`）。
+可选 prop：`logoAlt`（默认 `东北育才学校`）。`CourseBottomBar` 无 props。
 
 ### URL 授课参数（主页「我要上课」生成，见 `utils/lesson-params.ts`）
 

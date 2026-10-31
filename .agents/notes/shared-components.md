@@ -9,61 +9,63 @@
 
 ## 1. 总表（选组件用）
 
-| 组件              | 干什么                                                                    | 写在哪                                          | props                                                       |
-| ----------------- | ------------------------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| `SimpleAxis`      | 讲台演示图：只第一象限 + 一两条曲线 + 标一个点                            | markdown 顶层（自己带 `<svg>`）                 | 见坐标轴专篇                                                |
-| `NumberAxis`      | 一维数轴（时间轴 / 位置轴 / 纸带打点）                                    | 同上                                            | 见坐标轴专篇                                                |
-| `CoordAxes`       | 完整坐标图：多曲线 / 多标注 / 网格 / 区域填充 / 分步                      | 同上                                            | 见坐标轴专篇                                                |
-| `SpringScale`     | 弹簧测力计（悬挂测力、两台对拉、装置示数）                                | **只能在 `<svg>` 里**                           | [`spring-scale.md`](./spring-scale.md)                      |
-| `GripHand`        | 侧视图里"手捏住拉环 / 吊环 / 细绳往外拉"                                  | **只能在 `<svg>` 里**                           | [`grip-hand.md`](./grip-hand.md)                            |
-| `CourseArrow`     | 矢量箭头（自带三角形 marker + 自动回退线段，尖端必落在终点上）            | **只能在 `<svg>` 里**                           | 本篇 §4                                                     |
-| `SurfaceHatch`    | 接触面：地面 / 桌面 / 墙面 / 斜面 / 天花板 + 单侧斜线阴影                 | **只能在 `<svg>` 里**                           | 本篇 §5                                                     |
-| `Ruler`           | 刻度尺（精确毫米刻度，或只画个尺子形状的示意图）                          | 任意：可嵌在别的 `<svg>` 里，也可单独当 HTML 用 | 本篇 §6                                                     |
-| `CelestialSun`    | 天体：太阳（光球 + 日冕光晕 + 8 束光芒）                                  | **只能在 `<svg>` 里**                           | 本篇 §9                                                     |
-| `CelestialEarth`  | 天体：地球（海洋 + 大陆 + 云系 + 晨昏线 + 大气层辉光）                    | **只能在 `<svg>` 里**                           | 本篇 §9                                                     |
-| `CelestialMoon`   | 天体：月球（灰色球体 + 环形山 + 暗面）                                    | **只能在 `<svg>` 里**                           | 本篇 §9                                                     |
-| `CelestialPlanet` | 天体：一般星球（5 套配色 + 可选气态条纹 / 行星环）                        | **只能在 `<svg>` 里**                           | 本篇 §9                                                     |
-| `CircuitBattery`  | 电路：电池（可选 `flip` 换正负极，极性画在 `v>0` 一侧）                   | **只能在 `<svg>` 里**                           | [`electronic-symbols.md`](./electronic-symbols.md)          |
-| `CircuitResistor` | 电路：电阻（长宽比 3:1、`rx=2`）                                          | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `CircuitSwitch`   | 电路：开关（断开 / 闭合；闭合时刀闸与导线重合）                           | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `CircuitBulb`     | 电路：灯泡                                                                | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `CircuitMeter`    | 电路：电表（电压表 / 电流表）                                             | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `Galvanometer`    | 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）             | **只能在 `<svg>` 里**                           | [`electronic-symbols.md`](./electronic-symbols.md) §3.6.1   |
-| `BarMagnet`       | 条形磁体（S 蓝 / N 红，横放 / 竖放，由 `nSide` 决定）                     | **只能在 `<svg>` 里**                           | 本篇 §10                                                    |
-| `Solenoid`        | 螺线管（**连续螺旋线**，不是一叠椭圆；可设从右端看顺时针/逆时针两种绕向） | **只能在 `<svg>` 里**                           | 本篇 §11                                                    |
-| `FieldDots`       | 磁场**平铺阵列**：裸 `×` / 裸 `·` 铺满区域（不带圈）                      | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `FieldMark`       | 磁场**单个带圈**记号 ⊙/⊗：图例 / 方向标注（不同图并用阵列）               | **只能在 `<svg>` 里**                           | 同上                                                        |
-| `Latex`           | HTML 里的 KaTeX 公式（Markdown 段落里的 `$…$` 仍照用）                    | markdown / HTML 层                              | 本篇 §3                                                     |
-| `ChartLabel`      | 图内标注（画在 SVG 上层的 HTML，**能渲染真 KaTeX 与分式**）               | HTML 层，盖在 SVG 上                            | 本篇 §3                                                     |
-| `CourseSlider`    | 滑块（原生渲染 + `accent-color`；标签 + 滑块 + 读数一行）                 | markdown / HTML 层                              | 本篇 §7                                                     |
-| `DefinitionBox`   | 定义气泡（`term` 定义名 + 正文；浮动标题 + 玻璃底）                       | markdown / HTML 层                              | [`courseware-style-pass.md`](./courseware-style-pass.md) §4 |
-| `CourseTopBar`    | 顶栏：封面显示章节名、内页显示课题名，右侧校徽                            | 课件的 `global-top.vue` 薄壳                    | 本篇 §2                                                     |
-| `CourseBottomBar` | 底栏两侧渐隐装饰线（**不显示页码**）                                      | 课件的 `global-bottom.vue` 薄壳                 | 本篇 §2                                                     |
+| 组件              | 干什么                                                                          | 写在哪                                                  | props                                                       |
+| ----------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------- |
+| `SimpleAxis`      | 讲台演示图：只第一象限 + 一两条曲线 + 标一个点                                  | markdown 顶层（自己带 `<svg>`）                         | 见坐标轴专篇                                                |
+| `NumberAxis`      | 一维数轴（时间轴 / 位置轴 / 纸带打点）                                          | 同上                                                    | 见坐标轴专篇                                                |
+| `CoordAxes`       | 完整坐标图：多曲线 / 多标注 / 网格 / 区域填充 / 分步                            | 同上                                                    | 见坐标轴专篇                                                |
+| `SpringScale`     | 弹簧测力计（悬挂测力、两台对拉、装置示数）                                      | **只能在 `<svg>` 里**                                   | [`spring-scale.md`](./spring-scale.md)                      |
+| `GripHand`        | 侧视图里"手捏住拉环 / 吊环 / 细绳往外拉"                                        | **只能在 `<svg>` 里**                                   | [`grip-hand.md`](./grip-hand.md)                            |
+| `CourseArrow`     | 矢量箭头（自带三角形 marker + 自动回退线段，尖端必落在终点上）                  | **只能在 `<svg>` 里**                                   | 本篇 §4                                                     |
+| `SurfaceHatch`    | 接触面：地面 / 桌面 / 墙面 / 斜面 / 天花板 + 单侧斜线阴影                       | **只能在 `<svg>` 里**                                   | 本篇 §5                                                     |
+| `Ruler`           | 刻度尺（精确毫米刻度，或只画个尺子形状的示意图）                                | 任意：可嵌在别的 `<svg>` 里，也可单独当 HTML 用         | 本篇 §6                                                     |
+| `CelestialSun`    | 天体：太阳（光球 + 日冕光晕 + 8 束光芒）                                        | **只能在 `<svg>` 里**                                   | 本篇 §9                                                     |
+| `CelestialEarth`  | 天体：地球（海洋 + 大陆 + 云系 + 晨昏线 + 大气层辉光）                          | **只能在 `<svg>` 里**                                   | 本篇 §9                                                     |
+| `CelestialMoon`   | 天体：月球（灰色球体 + 环形山 + 暗面）                                          | **只能在 `<svg>` 里**                                   | 本篇 §9                                                     |
+| `CelestialPlanet` | 天体：一般星球（5 套配色 + 可选气态条纹 / 行星环）                              | **只能在 `<svg>` 里**                                   | 本篇 §9                                                     |
+| `CircuitBattery`  | 电路：电池（可选 `flip` 换正负极，极性画在 `v>0` 一侧）                         | **只能在 `<svg>` 里**                                   | [`electronic-symbols.md`](./electronic-symbols.md)          |
+| `CircuitResistor` | 电路：电阻（长宽比 3:1、`rx=2`）                                                | **只能在 `<svg>` 里**                                   | 同上                                                        |
+| `CircuitSwitch`   | 电路：开关（断开 / 闭合；闭合时刀闸与导线重合）                                 | **只能在 `<svg>` 里**                                   | 同上                                                        |
+| `CircuitBulb`     | 电路：灯泡                                                                      | **只能在 `<svg>` 里**                                   | 同上                                                        |
+| `CircuitMeter`    | 电路：电表（电压表 / 电流表）                                                   | **只能在 `<svg>` 里**                                   | 同上                                                        |
+| `Galvanometer`    | 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）                   | **只能在 `<svg>` 里**                                   | [`electronic-symbols.md`](./electronic-symbols.md) §3.6.1   |
+| `BarMagnet`       | 条形磁体（S 蓝 / N 红，横放 / 竖放，由 `nSide` 决定）                           | **只能在 `<svg>` 里**                                   | 本篇 §10                                                    |
+| `Solenoid`        | 螺线管（**连续螺旋线**，不是一叠椭圆；可设从右端看顺时针/逆时针两种绕向）       | **只能在 `<svg>` 里**                                   | 本篇 §11                                                    |
+| `FieldDots`       | 磁场**平铺阵列**：裸 `×` / 裸 `·` 铺满区域（不带圈）                            | **只能在 `<svg>` 里**                                   | 同上                                                        |
+| `FieldMark`       | 磁场**单个带圈**记号 ⊙/⊗：图例 / 方向标注（不同图并用阵列）                     | **只能在 `<svg>` 里**                                   | 同上                                                        |
+| `Latex`           | HTML 里的 KaTeX 公式（Markdown 段落里的 `$…$` 仍照用）                          | markdown / HTML 层                                      | 本篇 §3                                                     |
+| `ChartLabel`      | 图内标注（画在 SVG 上层的 HTML，**能渲染真 KaTeX 与分式**）                     | HTML 层，盖在 SVG 上                                    | 本篇 §3                                                     |
+| `CourseSlider`    | 滑块（原生渲染 + `accent-color`；标签 + 滑块 + 读数一行）                       | markdown / HTML 层                                      | 本篇 §7                                                     |
+| `DefinitionBox`   | 定义气泡（`term` 定义名 + 正文；浮动标题 + 玻璃底）                             | markdown / HTML 层                                      | [`courseware-style-pass.md`](./courseware-style-pass.md) §4 |
+| `CourseTopBar`    | 顶栏：封面显示章节名、内页显示课题名，右侧校徽（参数可省略，自动读 headmatter） | 共享 addon `global-top.vue` 已默认挂载，单课无需自建    | 本篇 §2                                                     |
+| `CourseBottomBar` | 底栏两侧渐隐装饰线（**不显示页码**）                                            | 共享 addon `global-bottom.vue` 已默认挂载，单课无需自建 | 本篇 §2                                                     |
 
 ## 2. 页面外壳：`CourseTopBar` / `CourseBottomBar`
 
-课件里**只需在现成的两个薄壳里传参**，不要自己写顶底栏（`GlobalTop` / `GlobalBottom` 是 Slidev 保留名，重名会栈溢出）：
+顶底栏**不要自己写**（`GlobalTop` / `GlobalBottom` 是 Slidev 保留名，重名会栈溢出）。`workspace/shared/` 根目录已提供默认的 `global-top.vue` / `global-bottom.vue`，由共享 addon **全局默认挂载**：
+
+- **单课目录下不需要再建 `global-*.vue`**（新课生成脚本也不再生成）；
+- `CourseTopBar` 自动读 `slides.md` headmatter 的 `chapter` 与 `title`，`CourseBottomBar` 零参数；
+- 只有某门课**确需特殊定制**顶底栏时，才在 `courses/<slug>/` 下放一个同名 `global-*.vue` 覆盖。
 
 ```vue
-<!-- courses/<slug>/global-top.vue -->
+<!-- 仅特殊定制时用：courses/<slug>/global-top.vue -->
 <template>
   <CourseTopBar chapter="第十章 静电场" section="电容器的电容" />
 </template>
 ```
 
-```vue
-<!-- courses/<slug>/global-bottom.vue -->
-<template>
-  <CourseBottomBar />
-</template>
-```
+`CourseTopBar` 的 `chapter` / `section` **都可省略**：缺省时自动读 `slides.md` headmatter —— `chapter` 取自定义字段 `chapter`（如「第十章 静电场」），`section` 取 `title`（课题名）。改标题只改 headmatter（以及登记表 `courses.json`），不用再同步顶栏。需要显式写法时 `<CourseTopBar chapter="…" section="…" />` 继续有效，显式 prop 优先。
 
-| 组件              | prop      | 必填 | 默认           | 说明                                             |
-| ----------------- | --------- | ---- | -------------- | ------------------------------------------------ |
-| `CourseTopBar`    | `chapter` | ✅   | —              | 封面（第 1 页）显示的章节名，如「第十章 静电场」 |
-|                   | `section` | ✅   | —              | 内页显示的课题名，如「电容器的电容」             |
-|                   | `logoAlt` |      | `东北育才学校` | 顶栏 logo 的 alt 文本                            |
-| `CourseBottomBar` | —         | —    | —              | 无 props；只有装饰线                             |
+> 读的是 `@slidev/client` 导出的全局 `configs`（= headmatter 解析结果）。顶栏挂在 `global-top` 全局层，位于每个单页 `SlideContext` 的**外层**，那里**不能**用 `useSlideContext()` 取 `$slidev.configs`。
+> 共享默认层与课件自己的 `global-top.vue` / `global-bottom.vue` 会被 Slidev **同时**渲染，所以默认层挂载后发现同一父节点下已有课件自己的顶底栏就不渲染（`v-if` 置假），不会叠出两条。
+
+| 组件              | prop      | 必填 | 默认                    | 说明                                             |
+| ----------------- | --------- | ---- | ----------------------- | ------------------------------------------------ |
+| `CourseTopBar`    | `chapter` |      | headmatter 的 `chapter` | 封面（第 1 页）显示的章节名，如「第十章 静电场」 |
+|                   | `section` |      | headmatter 的 `title`   | 内页显示的课题名，如「电容器的电容」             |
+|                   | `logoAlt` |      | `东北育才学校`          | 顶栏 logo 的 alt 文本                            |
+| `CourseBottomBar` | —         | —    | —                       | 无 props；只有装饰线                             |
 
 **URL 授课参数**（主页「我要上课」生成；Slidev 翻页原样保留 query，整节课有效；解析见 `workspace/shared/utils/lesson-params.ts`）：
 

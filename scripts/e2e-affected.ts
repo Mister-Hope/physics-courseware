@@ -5,6 +5,7 @@ import path from "node:path";
 import type { AffectedPlan } from "../e2e/affected";
 import { selectAffectedCourses } from "../e2e/affected";
 import { listAllCourses } from "../e2e/courses";
+import { countSlidePages } from "./shared/parse-slides";
 
 // `pnpm e2e:affected` —— 算出"这次改动需要跑哪些课件"，并给 CI 产出 `E2E_COURSE` / matrix。
 //
@@ -348,11 +349,7 @@ const pageCount = (slug: string): number => {
   let count = 1;
 
   try {
-    const separators = readFileSync(path.join(COURSES_DIR, slug, "slides.md"), "utf8")
-      .split("\n")
-      .filter((line) => line.trim() === "---").length;
-
-    count = Math.max(1, separators - 1);
+    count = countSlidePages(readFileSync(path.join(COURSES_DIR, slug, "slides.md"), "utf8"));
   } catch {
     // 读不到就按 1 页算，只影响均衡、不影响正确性
   }

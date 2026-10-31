@@ -45,13 +45,14 @@ const KATEX_LEGACY_FONT = /KaTeX_.+\.(?:woff|ttf)$/u;
 const VIRTUAL_ID = "virtual:courseware-katex-html";
 const RESOLVED_ID = `\0${VIRTUAL_ID}`;
 
-const TAG_RE = /<Latex\b(?<attrs>[^>]*?)\/?>/gu;
-const ATTR_TEX_RE = /\btex="(?<tex>[^"]*)"/u;
-const OBJ_TEX_RE = /\btex:\s*"(?<tex>(?:[^"\\]|\\.)*)"/gu;
+// 属性里可能含 `>`（如 `tex="v_1 > v_2"`），所以引号内的内容单独成一组，不能一律用 `[^>]`
+const TAG_RE = /<Latex\b(?<attrs>(?:"[^"]*"|'[^']*'|[^'">])*?)\/?>/gu;
+const ATTR_TEX_RE = /\btex=(?:"(?<dtex>[^"]*)"|'(?<stex>[^']*)')/u;
+const OBJ_TEX_RE = /\btex:\s*(?:"(?<dtex>(?:[^"\\]|\\.)*)"|'(?<stex>(?:[^'\\]|\\.)*)')/gu;
 const SKIP_DIRS = new Set(["node_modules", "dist", ".git", ".temp", ".e2e"]);
 
 /**
- * 还原**对象字面量**里抓到的双引号字符串。
+ * 还原**对象字面量**里抓到的字符串（单引号、双引号字面量都支持）。
  *
  * 源码写 `tex: "\\vec{s}"` 时，正则抓到的是 `\\vec{s}`（两个反斜杠的原样文本），而运行时 `Latex` 拿到的值是 `\vec{s}`。不还原会同时踩两个坑：
  *
@@ -60,10 +61,26 @@ const SKIP_DIRS = new Set(["node_modules", "dist", ".git", ".temp", ".e2e"]);
  *
  * 注意：`<Latex tex="…">` 属性走的是模板字符串，**不需要**（也不能）做这层还原——HTML 属性不认 JS 转义。
  *
- * @param value 正则抓到的双引号字符串字面量内容（不含两侧引号）
+ * @param value 正则抓到的字符串字面量内容（不含两侧引号）
+ * @param quote 字面量用的是单引号还是双引号（默认双引号）
  * @returns 还原后的实际字符串
  */
-const decodeStringLiteral = (value: string): string => {
+const decodeStringLiteral = (value: string, quote: '"' | "'" = '"'): string => {
+  if (quote === "'") {
+    // 单引号字面量：先把 `\'` 还原成 `'`（JSON 不认这个转义），
+    // 再把裸 `"` 转成 JSON 可接受的 `\"`，其余 `\\`、`\n` 等仍交给 JSON.parse
+    const normalized = value
+      .replaceAll(String.raw`\'`, "'")
+      .replaceAll(String.raw`\"`, '"')
+      .replaceAll('"', String.raw`\"`);
+
+    try {
+      return JSON.parse(`"${normalized}"`) as string;
+    } catch {
+      return value.replaceAll(String.raw`\'`, "'");
+    }
+  }
+
   try {
     return JSON.parse(`"${value}"`) as string;
   } catch {
@@ -118,6 +135,44 @@ const render = (
   return result;
 };
 
+/**
+ * 扫描一份源码，把能静态求值的公式分别收进 `inline` / `display`。
+ *
+ * 认的写法：`<Latex tex="…">` / `<Latex tex='…'>`（含 `display`）、对象字面量 `{ tex: "…" }` / `{ tex: '…' }`；
+ * 动态绑定（`:tex="…"`）不在这里处理，交给运行时。
+ *
+ * @param source 一份 `.vue` / `.md` 源码
+ * @param inline 行内公式集合（原地写入、天然去重）
+ * @param display 独立公式集合（原地写入、天然去重）
+ */
+const collectFormulas = (source: string, inline: Set<string>, display: Set<string>): void => {
+  for (const match of source.matchAll(TAG_RE)) {
+    const attrs = match.groups?.attrs ?? "";
+
+    if (attrs.includes(":tex=")) continue;
+
+    const attrTex = ATTR_TEX_RE.exec(attrs)?.groups;
+    const tex = attrTex?.dtex ?? attrTex?.stex;
+
+    if (tex == null) continue;
+
+    const value = decodeEntities(tex);
+
+    if (/(?:^|\s)display(?:\s|=|$)/u.test(attrs)) display.add(value);
+    else inline.add(value);
+  }
+
+  for (const match of source.matchAll(OBJ_TEX_RE)) {
+    const { groups } = match;
+    const tex = groups?.dtex ?? groups?.stex;
+
+    if (tex == null) continue;
+
+    // `dtex` 有值说明是双引号字面量；否则按单引号还原转义
+    inline.add(decodeEntities(decodeStringLiteral(tex, groups?.dtex == null ? "'" : '"')));
+  }
+};
+
 const katexPrerenderPlugin = (sharedRoot: string): Plugin => {
   let courseRoot = sharedRoot;
 
@@ -149,26 +204,7 @@ const katexPrerenderPlugin = (sharedRoot: string): Plugin => {
           continue;
         }
 
-        for (const match of source.matchAll(TAG_RE)) {
-          const attrs = match.groups?.attrs ?? "";
-
-          if (attrs.includes(":tex=")) continue;
-
-          const tex = ATTR_TEX_RE.exec(attrs)?.groups?.tex;
-
-          if (tex == null) continue;
-
-          const value = decodeEntities(tex);
-
-          if (/(?:^|\s)display(?:\s|=|$)/u.test(attrs)) display.add(value);
-          else inline.add(value);
-        }
-
-        for (const match of source.matchAll(OBJ_TEX_RE)) {
-          const tex = match.groups?.tex;
-
-          if (tex != null) inline.add(decodeEntities(decodeStringLiteral(tex)));
-        }
+        collectFormulas(source, inline, display);
       }
 
       const { renderToString } = await import("katex");

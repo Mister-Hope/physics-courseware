@@ -20,6 +20,12 @@
   margin-right: 0;
 }
 
+/* ── 第 15 页「x-t 图像能读出什么？」：CI 的 Linux 字体（Noto Sans CJK）行高比 macOS 略高，
+   全部展开时底部气泡会顶出画布 → 只给这页收一点标题下间距（其余间距在页面里用 mt-2 / 更小的气泡内边距收） ── */
+.slidev-layout.base-flex.page-tight h1 {
+  margin-bottom: 0.25rem !important;
+}
+
 /* ── 图（导航示意 / 纸带 / 坐标图）统一外框：同一套边框、圆角、深底 ── */
 .fig-frame {
   display: block;

@@ -2,6 +2,8 @@ import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { listCourses, resolveCourseId } from "./course-lookup";
+import type { SlidePage } from "./shared/parse-slides";
+import { parseSlides, stripInline } from "./shared/parse-slides";
 
 /**
  * `pnpm slide` —— 快速定位/读取课件某一页（给 AI agent 省 token 的小工具）
@@ -21,132 +23,6 @@ import { listCourses, resolveCourseId } from "./course-lookup";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const COURSES_DIR = path.join(ROOT, "courses");
-
-interface SlidePage {
-  /** 1 起的页码（与 Slidev 一致） */
-  pageNo: number;
-  /** 第一个 `#` 标题（去掉 markdown 行内标记） */
-  title: string;
-  /** Frontmatter 里的 clicks，没有就取 v-click 里最大的序号，再没有就是 0 */
-  clicks: number;
-  /** 起始行号（1 起，含） */
-  start: number;
-  /** 结束行号（1 起，含） */
-  end: number;
-  lines: string[];
-}
-
-/** `slides.md` 被 `---` 切出来的一块（frontmatter 块 / 页体块） */
-interface Chunk {
-  lines: string[];
-  /** 该块第一行在文件里的行号（1 起） */
-  start: number;
-}
-
-const stripInline = (text: string): string =>
-  text
-    .replaceAll(/<[^>]+>/gu, "")
-    .replaceAll(/[`*_$]/gu, "")
-    .trim();
-
-/**
- * 判断一个 chunk 是不是（纯）YAML frontmatter
- *
- * @param chunk 待判断的若干行
- * @returns 这些行是否全部是 YAML frontmatter 语法
- */
-const looksLikeFrontmatter = (chunk: string[]): boolean => {
-  const meaningful = chunk.filter((line) => line.trim() !== "");
-
-  if (meaningful.length === 0) return false;
-
-  return meaningful.every(
-    (line) =>
-      /^[A-Za-z_][\w-]*:/u.test(line) || // key: value
-      /^\s+\S/u.test(line) || // 续行
-      /^\s*#/u.test(line) || // YAML 注释
-      /^\s*-\s/u.test(line), // 列表项
-  );
-};
-
-const countClicks = (chunk: string[]): number => {
-  const front = /^clicks:\s*(?<clicks>\d+)/mu.exec(chunk.join("\n"));
-  const frontClicks = front?.groups?.clicks;
-
-  if (frontClicks) return Number(frontClicks);
-
-  let max = 0;
-
-  for (const line of chunk) {
-    for (const match of line.matchAll(/v-click="(?<click>\d+)"/gu))
-      max = Math.max(max, Number(match.groups?.click));
-  }
-
-  return max;
-};
-
-/**
- * 把 slides.md 切成"页"，并记住每页的行号范围
- *
- * @param markdown Slides.md 全文
- * @returns 按页序排列的页列表
- */
-const parseSlides = (markdown: string): SlidePage[] => {
-  const lines = markdown.split(/\r?\n/u);
-  const chunks: Chunk[] = [];
-  let current: string[] = [];
-  let currentStart = 1;
-
-  const push = (): void => {
-    chunks.push({ lines: current, start: currentStart });
-  };
-
-  for (const [index, line] of lines.entries()) {
-    if (line.trim() === "---") {
-      push();
-      current = [];
-      currentStart = index + 2;
-      continue;
-    }
-
-    current.push(line);
-  }
-
-  push();
-
-  const pages: SlidePage[] = [];
-  let index = 0;
-
-  // 文件以 `---` 开头时，第一块是空的
-  if (chunks[0].lines.every((line) => line.trim() === "")) index = 1;
-
-  while (index < chunks.length) {
-    const chunk = chunks[index];
-    const isFront = looksLikeFrontmatter(chunk.lines);
-    const hasNext = index + 1 < chunks.length;
-    const used: Chunk[] = isFront && hasNext ? [chunk, chunks[index + 1]] : [chunk];
-    const [first] = used;
-    const body = used[used.length - 1];
-
-    index += used.length;
-
-    if (body.lines.every((line) => line.trim() === "")) continue;
-
-    const heading = body.lines.find((line) => /^#{1,2}\s+\S/u.test(line));
-    const title = heading ? stripInline(heading.replace(/^#{1,2}\s+/u, "")) : "(无标题)";
-
-    pages.push({
-      pageNo: pages.length + 1,
-      title,
-      clicks: countClicks(used.flatMap((item) => item.lines)),
-      start: first.start,
-      end: body.start + body.lines.length - 1,
-      lines: used.flatMap((item) => item.lines),
-    });
-  }
-
-  return pages;
-};
 
 const readSlides = (slug: string): { file: string; pages: SlidePage[] } | null => {
   const file = path.join(COURSES_DIR, slug, "slides.md");

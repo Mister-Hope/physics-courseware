@@ -235,7 +235,7 @@ title: 电场的叠加
 
 # 电场的叠加
 
-<div class="page-grow stack-tight">
+<div class="page-grow stack-tight" style="--hint-pad-y: .45rem">
 
 <SuperpositionLab :show-e1="$clicks >= 1" :show-e2="$clicks >= 2" :show-resultant="$clicks >= 3" />
 
@@ -243,7 +243,7 @@ title: 电场的叠加
 
 <div v-click="4">
 
-<div class="half-grid">
+<div class="half-grid" style="grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 1.2rem">
 
 <ChargedSphereSvg />
 

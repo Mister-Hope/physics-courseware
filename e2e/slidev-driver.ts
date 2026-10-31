@@ -188,6 +188,14 @@ export async function readDeckSlides(page: Page): Promise<SlideRef[]> {
  * 跳到第 no 页并展开到指定点击数，然后等页面完全稳定。
  *
  * `clicks` 传一个很大的数即可展开全部逐条呈现（Slidev 会自动夹到该页的总点击数）。
+ *
+ * ⚠️ 等待回调里那个「每 200ms 重发一次 `nav.go`」不能省： Slidev 的 `nav.go(no, clicks)` 内部会 `clamp(clicks,
+ * clicksStart, meta.__clicksContext.total ?? CLICKS_MAX)`。 首次跳转到某页、页面组件还在异步挂载时
+ * `__clicksContext.total` 可能还是 0，于是 `go(target, 999)` 被夹成 `clicks = 0`；几十毫秒后组件挂载完、`clicksTotal` 变成
+ * 3，可 `clicks` 永远停在 0， 死等「clicks === clicksTotal」就一路等到 20s/30s 超时（CI 上
+ * `1.3-velocity`、`o2-1.2-lorentz-force` 都踩过）。 重发一次时 `clicksTotal` 已经就位，夹取就不会再出错。
+ *
+ * 注意：这段判定是**在浏览器里跑**的（`waitForFunction` 只序列化回调本身），所以不能抽成外层函数复用。
  */
 export async function gotoSlide(page: Page, no: number, clicks: number): Promise<void> {
   await page.evaluate(([target, count]) => window.__slidev__?.nav?.go(target, count), [
@@ -199,9 +207,21 @@ export async function gotoSlide(page: Page, no: number, clicks: number): Promise
     ([target, count]) => {
       const nav = window.__slidev__?.nav;
 
-      if (!nav || nav.currentPage !== target) return false;
+      if (!nav) return false;
 
-      return count === 0 ? nav.clicks === 0 : nav.clicks === nav.clicksTotal;
+      const expected = count === 0 ? 0 : nav.clicksTotal;
+
+      if (nav.currentPage === target && nav.clicks === expected) return true;
+
+      const win = window as Window & { __navGoAt?: number };
+      const now = performance.now();
+
+      if (!win.__navGoAt || now - win.__navGoAt > 200) {
+        win.__navGoAt = now;
+        void nav.go(target, count);
+      }
+
+      return false;
     },
     [no, clicks] as [number, number],
     { timeout: 30_000 },
@@ -231,9 +251,23 @@ export async function gotoSlideStep(
     ([target, count]) => {
       const nav = window.__slidev__?.nav;
 
-      if (!nav || nav.currentPage !== target) return false;
+      if (!nav) return false;
 
-      return nav.clicks === count;
+      // 同 `gotoSlide`：`nav.go` 的 clicks 会被夹到此刻已知的 `clicksTotal`，
+      // 组件还没挂载完时 `count` 会被夹成 0 → 必须节流重发一次，等 `clicksTotal` 就位
+      const expected = nav.clicksTotal > 0 ? Math.min(count, nav.clicksTotal) : count;
+
+      if (nav.currentPage === target && nav.clicks === expected) return true;
+
+      const win = window as Window & { __navGoAt?: number };
+      const now = performance.now();
+
+      if (!win.__navGoAt || now - win.__navGoAt > 200) {
+        win.__navGoAt = now;
+        void nav.go(target, expected);
+      }
+
+      return false;
     },
     [no, clicks] as [number, number],
     { timeout: 20_000 },

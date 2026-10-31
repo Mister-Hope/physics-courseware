@@ -109,6 +109,15 @@
   justify-content: flex-start;
 }
 
+/* 第 20 页（例题：小灯泡的 I-U 图线）：题干 + 图 + 两行解析已经贴着画布底，
+   CI 的 Linux 字体行高再高几像素就会把最后那个气泡顶出画面 → 只给这页收一点纵向间距。
+   （`--page-gap` 同时管「题干 ↔ 图/解析」和解析栏内部的块间距，这里不碰 `--hint-pad-*`，
+   免得气泡图标与文字错位） */
+.slidev-layout.exercise-split.tight-gap {
+  --page-gap: 0.5rem;
+  --stack-gap: 0.5rem;
+}
+
 /* 四选一（选项很短）时一行四列 */
 .opts--4 {
   grid-template-columns: repeat(4, 1fr);

@@ -1,7 +1,8 @@
 import "./style.css";
+import { coursePages } from "virtual:course-pages";
+
 import { textbooks } from "./courses.config";
 import type { CourseMeta } from "./courses.config";
-import { coursePages } from "./pages.generated";
 import { escapeHtml, highlight, searchCourses } from "./search";
 import type { SearchHit } from "./search";
 
