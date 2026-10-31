@@ -109,17 +109,18 @@ clicks: 2
 # 相邻等势线的间距
 
 <div class="page-grow">
-<div class="stack">
+<div class="stack stack-tight">
 <div class="ask">相邻两条等势线的电势差 <Latex tex="\Delta U" /> 相同，为什么电场强度越大的地方等势线越密？</div>
 <EquipotentialLab />
 <div v-click="1">由 <Latex tex="E = \dfrac{\Delta U}{d}" /> 得 <Latex tex="d = \dfrac{\Delta U}{E}" />：<Latex tex="\Delta U" /> 相同时，<Latex tex="E" /> 越大，间距 <Latex tex="d" /> 越小。</div>
-<div class="tip-hint" v-click="2">电场线密的地方电场强度大，相邻等势线的间距就小——所以电场线密的地方等势线也密。</div>
+<div class="tip-hint" v-click="2">电场线越密的地方电场强度越大，等势线也就越密。</div>
 </div>
 </div>
 
 ---
 layout: exercise-split
-clicks: 3
+clicks: 2
+class: tight-gap
 title: 例题　静电力与到达另一板的速度
 ---
 
@@ -137,11 +138,9 @@ title: 例题　静电力与到达另一板的速度
 
 </template>
 
-<div v-click="1">（1）两板间是匀强电场，<Latex tex="E = \dfrac{U}{d}"/>，<Latex tex="F = Eq = \dfrac{Uq}{d} = \dfrac{200 \times 8\times 10^{-15}}{0.04}\ \text{N} = 4\times 10^{-11}\ \text{N}" /></div>
+<div v-click="1">（1）两板间是匀强电场，<Latex tex="E = \dfrac{U}{d}"/>，<Latex tex="F = Eq = \dfrac{Uq}{d} = \dfrac{200 \times 8\times 10^{-15}}{0.04}\ \text{N} = 4\times 10^{-11}\ \text{N}" />，远大于重力 <Latex tex="2\times 10^{-14}\ \text{N}" />，重力忽略不计。</div>
 
-<div v-click="2">静电力 <Latex tex="4\times 10^{-11}\ \text{N}" /> 远大于重力 <Latex tex="2\times 10^{-14}\ \text{N}" />，重力忽略不计。</div>
-
-<div v-click="3">（2）由 <Latex tex="a = \dfrac{F}{m}" /> 与 <Latex tex="v^2 = 2ad" /> 得 <Latex tex="v = \sqrt{\dfrac{2Fd}{m}} = \sqrt{\dfrac{2\times 4\times 10^{-11}\times 0.04}{2\times 10^{-15}}}\ \text{m/s} = 40\ \text{m/s}" /></div>
+<div v-click="2">（2）由 <Latex tex="a = \dfrac{F}{m}" /> 与 <Latex tex="v^2 = 2ad" /> 得 <Latex tex="v = \sqrt{\dfrac{2Fd}{m}} = \sqrt{\dfrac{2\times 4\times 10^{-11}\times 0.04}{2\times 10^{-15}}}\ \text{m/s} = 40\ \text{m/s}" /></div>
 
 ---
 layout: base-flex

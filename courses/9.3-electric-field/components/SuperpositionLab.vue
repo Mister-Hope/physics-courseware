@@ -385,7 +385,7 @@ const eTex = computed(() => fieldTex("E", eMag.value));
 .spl-fig {
   flex: 1 1 0;
   min-width: 0;
-  height: 144px;
+  height: 128px;
   touch-action: none;
 }
 
