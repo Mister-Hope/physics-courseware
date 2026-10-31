@@ -1,9 +1,9 @@
 <!--
-  共享 addon 的默认顶栏层：课件自己的目录里**没有** `global-top.vue` 时由它渲染（参数全部从 slides.md
+  共享 addon 的默认顶栏层：所有课件都由它渲染（没有单课自己的 `global-top.vue` 时；参数全部从 slides.md
   headmatter 的 `chapter` / `title` 自动读取，见 components/CourseTopBar.vue）。
 
   Slidev 会把 addon 根目录的 global-top.vue 与课件自己的 global-top.vue **一起**渲染，所以这里挂载后检查
-  同一父节点下是否还有别的顶栏：有就让位（存量课件保留各自的写法与文案，不会出现两条顶栏叠在一起）。
+  同一父节点下是否还有别的顶栏：有就让位（单课确有特殊需求时自己放一个即可覆盖，不会叠出两条顶栏）。
 -->
 <template>
   <div v-if="visible" ref="layer" class="shared-global-top">

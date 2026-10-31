@@ -100,19 +100,6 @@ layout: base-flex
 -->
 `;
 
-// 顶栏不再重复写章节名 / 课题名：留一个零参数的薄壳，内容由 CourseTopBar 从 slides.md headmatter
-// 的 chapter / title 自动读取（改标题只改 headmatter 与 courses.json 两处）。
-// 共享 addon 已提供同名的默认层（workspace/shared/global-top.vue），课件里保留这个壳只是显式声明。
-export const renderGlobalTop = (): string => `<template>
-  <CourseTopBar />
-</template>
-`;
-
-export const renderGlobalBottom = (): string => `<template>
-  <CourseBottomBar />
-</template>
-`;
-
 export const renderStyle = (
   context: CourseTemplateContext,
 ): string => `/* ═══════════════════════════════════════════════
