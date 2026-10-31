@@ -24,10 +24,6 @@ export interface CourseTemplateContext {
 const TEACHER = "张伯望";
 const SCHOOL = "东北育才学校";
 
-// 标题里可能有引号 / 冒号 / 尖括号，分别按 YAML、HTML 属性、HTML 文本转义，避免生成坏文件
-const escapeAttribute = (value: string): string =>
-  value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
-
 // 骨架里不写死任何物理内容：只给结构、注释和待办，避免 AI 顺着占位内容编造。
 export const renderPackageJson = (context: CourseTemplateContext): string =>
   `${JSON.stringify(
@@ -104,8 +100,11 @@ layout: base-flex
 -->
 `;
 
-export const renderGlobalTop = (context: CourseTemplateContext): string => `<template>
-  <CourseTopBar chapter="${escapeAttribute(context.chapterLabel)}" section="${escapeAttribute(context.chapterName)}" />
+// 顶栏不再重复写章节名 / 课题名：留一个零参数的薄壳，内容由 CourseTopBar 从 slides.md headmatter
+// 的 chapter / title 自动读取（改标题只改 headmatter 与 courses.json 两处）。
+// 共享 addon 已提供同名的默认层（workspace/shared/global-top.vue），课件里保留这个壳只是显式声明。
+export const renderGlobalTop = (): string => `<template>
+  <CourseTopBar />
 </template>
 `;
 

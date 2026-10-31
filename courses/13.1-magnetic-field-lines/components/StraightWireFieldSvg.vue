@@ -21,22 +21,6 @@ const up = ref(true);
 const nearDir = computed(() => (up.value ? 1 : -1));
 
 const plane = computed(() => `M ${CX - RX} ${CY} L ${CX} ${CY - RY} L ${CX + RX} ${CY} L ${CX} ${CY + RY} Z`);
-
-const ringArrows = (
-  k: number,
-): {
-  near: { x1: number; y1: number; x2: number; y2: number };
-  far: { x1: number; y1: number; x2: number; y2: number };
-} => {
-  const rx = RX * k;
-  const ry = RY * k;
-  const dir = nearDir.value;
-  return {
-    near: { x1: CX + 8, y1: CY + ry, x2: CX + 8 + 44 * dir, y2: CY + ry },
-    far: { x1: CX - 8, y1: CY - ry, x2: CX - 8 - 44 * dir, y2: CY - ry },
-  };
-};
-void ringArrows;
 </script>
 
 <template>

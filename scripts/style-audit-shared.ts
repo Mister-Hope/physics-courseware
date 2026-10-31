@@ -130,14 +130,17 @@ export const UTILITY_PREFIXES = new Set([
   "visually",
 ]);
 
-/** 只有这些变量允许在本课 `:root` 里覆盖（layout.css / atoms.css 声明的唯一出口） */
+/**
+ * 只有这些变量允许在本课 `:root` 里覆盖（layout.css / atoms.css 声明的唯一出口）。
+ *
+ * ⛔ **`--hint-pad-y` / `--hint-pad-x` / `--hint-icon-size` 不在此列**：提示气泡的图标是 `::before` 绝对定位， `top` 由
+ * `calc(var(--hint-pad-y) + …)` 算出——在 `:root` 全局改这两个内边距，文字跟着内边距走、图标按另一套基准算， 两者会立刻错位（8.4 的 P3/P4
+ * 踩过）。要压某一页的气泡，只在该页容器上写行内 `style="--hint-pad-y: …"`， 不要拿 `:root` 当全局旋钮（AGENTS.md「八」有同一条）。
+ */
 export const ALLOWED_ROOT_OVERRIDES = new Set([
   "--page-gap",
   "--stack-gap",
-  /* 气泡密度：内容多的页调小、内容少的页调大，按页按课自己定 */
-  "--hint-pad-y",
-  "--hint-pad-x",
-  "--hint-icon-size",
+  /* 定义气泡的内边距：不参与图标定位，按页按课自己定没问题 */
   "--def-pad-y",
   "--def-pad-x",
 ]);

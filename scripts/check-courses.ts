@@ -6,11 +6,14 @@
 // 1) JSON 能解析；根结构、`$schema` 指向、键集都符合约定；
 // 2) 必填字段齐全、类型正确（分册 4 项 / 课件 5 项，出现未知键也算错）；
 // 3) 课件 slug 全局唯一、分册 slug 不重复、slug 形状合法；
-// 4) 每门课的 slug 在 courses/ 下确实存在同名目录。
+// 4) 每门课的 slug 在 courses/ 下确实存在同名目录；
+// 5) 登记的 title 与 slides.md headmatter 的 title 一致（存量有个别差异，先只警告）；
+// 6) courses/ 下含 slides.md 却未登记的目录（只警告，提醒补登记）；
+// 7) 平行工具 resources/init-slidev-courseware/spec.md 仍带着核心设计系统契约（只警告）。
 //
-// 失败时逐条打印可读错误（带 JSON 路径）并以非 0 退出；描述超长只警告，不算失败。
+// 失败时逐条打印可读错误（带 JSON 路径）并以非 0 退出；描述超长、title 不一致等只警告，不算失败。
 
-import { existsSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 
 // 仓库根目录（本文件在 scripts/ 下）
@@ -18,6 +21,8 @@ const ROOT_DIR = path.resolve(import.meta.dirname, "..");
 const REGISTRY_PATH = path.join(ROOT_DIR, "courses.json");
 const SCHEMA_PATH = path.join(ROOT_DIR, "courses.schema.json");
 const COURSES_DIR = path.join(ROOT_DIR, "courses");
+// 平行工具（给零代码教师生成独立 Slidev 项目）内联了设计系统模板，靠人工同步，容易落后
+const PARALLEL_SPEC_PATH = path.join(ROOT_DIR, "resources/init-slidev-courseware/spec.md");
 
 const REGISTRY_NAME = "courses.json";
 // 注册表首行的 `$schema`：编辑器据此自动补全 / 校验
@@ -31,6 +36,8 @@ const TEXTBOOK_SLUGS = ["bx1", "bx2", "bx3", "xx1", "xx2", "xx3"];
 const SLUG_PATTERN = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/u;
 // 描述的建议长度：现有少量历史条目更长，故只警告不报错
 const MAX_DESCRIPTION_LENGTH = 80;
+// 平行工具 spec.md 必须保留的核心契约：SVG 子树自成 16px 体系、且不波及 KaTeX 自己的 SVG
+const PARALLEL_SPEC_SNIPPETS = ["svg:not(.katex svg)"];
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -87,6 +94,75 @@ const recordSlug = (
   else errors.push(`${where}.slug "${slug}" 与 ${previous}.slug 重复（${label}）`);
 };
 
+// 去掉 YAML 标量的首尾引号：`"电容器的电容"` / `'电容器的电容'` → 电容器的电容（课件 title 不会出现更复杂的转义写法）
+const stripYamlQuotes = (value: string): string => {
+  const first = value.at(0);
+  const last = value.at(-1);
+  const quoted = value.length >= 2 && (first === '"' || first === "'") && last === first;
+
+  return quoted ? value.slice(1, -1) : value;
+};
+
+// 读 slides.md 顶部 YAML headmatter 里的 `title`；没有 headmatter / 没有 title 时返回空串
+const readSlidesTitle = (slidesPath: string): string => {
+  const markdown = readFileSync(slidesPath, "utf8");
+  const frontmatter =
+    /^---\r?\n(?<body>[\s\S]*?)\r?\n---(?:\r?\n|$)/u.exec(markdown)?.groups?.body ?? "";
+  const rawTitle = /^title:[ \t]*(?<value>.*)$/mu.exec(frontmatter)?.groups?.value?.trim() ?? "";
+
+  return rawTitle ? stripYamlQuotes(rawTitle) : "";
+};
+
+// 登记的 title 与课件内的 title 是否一致：顶栏 / 封面读的是 slides.md，首页卡片读的是注册表，两边必须同源
+const checkSlidesTitle = (courseDir: string, registeredTitle: string, where: string): void => {
+  let slidesTitle: string;
+
+  try {
+    slidesTitle = readSlidesTitle(path.join(courseDir, "slides.md"));
+  } catch {
+    warnings.push(`${where} 的 slides.md 读不出来，跳过 title 一致性检查`);
+
+    return;
+  }
+
+  if (!slidesTitle || slidesTitle === registeredTitle) return;
+
+  warnings.push(
+    `${where}.title 是 ${JSON.stringify(registeredTitle)}，但 slides.md headmatter 的 title 是 ${JSON.stringify(slidesTitle)}（首页卡片读注册表、封面与顶栏读 slides.md，请对齐）`,
+  );
+};
+
+// courses/ 下含 slides.md 却没登记进注册表的目录：首页与 E2E 都发现不了这门课，提醒补登记
+const checkUnregisteredDirs = (registeredSlugs: Set<string>): void => {
+  if (!existsSync(COURSES_DIR)) return;
+
+  for (const entry of readdirSync(COURSES_DIR, { withFileTypes: true })) {
+    const { name } = entry;
+
+    if (!entry.isDirectory() || name.startsWith(".") || registeredSlugs.has(name)) continue;
+    if (!existsSync(path.join(COURSES_DIR, name, "slides.md"))) continue;
+
+    warnings.push(
+      `courses/${name} 有 slides.md 但未登记进 ${REGISTRY_NAME}（首页与 E2E 都看不到这门课，请补登记）`,
+    );
+  }
+};
+
+// 平行工具 spec.md 是否还带着主仓的核心契约（文件不存在时跳过，只警告）
+const checkParallelSpec = (): void => {
+  if (!existsSync(PARALLEL_SPEC_PATH)) return;
+
+  const spec = readFileSync(PARALLEL_SPEC_PATH, "utf8");
+
+  for (const snippet of PARALLEL_SPEC_SNIPPETS) {
+    if (spec.includes(snippet)) continue;
+
+    warnings.push(
+      `resources/init-slidev-courseware/spec.md 缺少核心契约 ${JSON.stringify(snippet)}（主仓设计系统已更新，请同步该文档）`,
+    );
+  }
+};
+
 // 校验一门课的登记项
 const checkCourse = (course: unknown, where: string, seenSlugs: Map<string, string>): void => {
   if (!isRecord(course)) {
@@ -97,9 +173,12 @@ const checkCourse = (course: unknown, where: string, seenSlugs: Map<string, stri
 
   checkKeys(course, COURSE_KEYS, where);
 
-  const { slug, description, tags } = course;
+  const { slug, title, description, tags } = course;
+  let registeredTitle: string | undefined;
 
-  checkString(course.title, `${where}.title`);
+  // 校验 + 顺带拿到可用的 title（下面的 slides.md 一致性检查要用）
+  if (checkString(title, `${where}.title`)) registeredTitle = title;
+
   checkString(course.chapter, `${where}.chapter`);
 
   if (checkString(description, `${where}.description`)) {
@@ -141,6 +220,8 @@ const checkCourse = (course: unknown, where: string, seenSlugs: Map<string, stri
       errors.push(
         `${where}.slug "${slug}" 在 courses/ 下找不到同名目录（${path.relative(ROOT_DIR, courseDir)}）`,
       );
+    } else if (registeredTitle != null) {
+      checkSlidesTitle(courseDir, registeredTitle, where);
     }
   }
 };
@@ -204,6 +285,8 @@ const report = (textbooks: unknown): void => {
 
       courseCount += checkTextbook(textbook, where, seenTextbookSlugs, seenCourseSlugs);
     });
+
+    checkUnregisteredDirs(new Set(seenCourseSlugs.keys()));
   } else {
     errors.push(`${REGISTRY_NAME}.textbooks 必须是数组，实际是 ${describe(textbooks)}`);
   }
@@ -262,6 +345,7 @@ const main = (): void => {
     );
   }
 
+  checkParallelSpec();
   report(textbooks);
 };
 

@@ -310,7 +310,7 @@ const planFiles = (options: CourseOptions, textbook?: TextbookGroup): PlannedFil
   return [
     { path: "package.json", content: renderPackageJson(context) },
     { path: "slides.md", content: renderSlides(context) },
-    { path: "global-top.vue", content: renderGlobalTop(context) },
+    { path: "global-top.vue", content: renderGlobalTop() },
     { path: "global-bottom.vue", content: renderGlobalBottom() },
     { path: "style.css", content: renderStyle(context) },
     { path: "README.md", content: renderReadme(context) },

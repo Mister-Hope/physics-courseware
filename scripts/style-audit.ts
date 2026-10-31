@@ -1,18 +1,21 @@
 /**
  * 课件风格体检 —— 配套 `.agents/notes/style-guide.md` 的可执行验收。
  *
- * 用法： pnpm style:audit # 全部课件，只打印有发现的 pnpm style:audit 10.4-capacitor # 指定课件（可多个）
+ * 用法： pnpm style:audit # 全部课件，只打印有发现的 pnpm style:audit 10.4-capacitor # 指定课件（可多个） pnpm style:audit
+ * --strict-errors # 有 error 级发现时 exit 1（默认 exit 0，不阻塞）
  *
  * 查什么（对应 style-guide 的哪一节）： ① 卡片数量 §4 一份课件 ≤15，超出多半是该用 .key / .divider-l 的地方用了卡片 ② 图标数量 §5 0 个 =
  * 并列条目大概率缺扫读锚点 ③ 硬编码视觉参数 §3 色值 / font-size / border-radius 必须走 token ④ 裸类名 §6 用了某个类却没在同一课 style.css
  * 里定义 ⑤ 越权覆盖 §8 重写共享选择器、覆盖了 --page-gap/--stack-gap 以外的变量
  *
- * 结果是**建议性**的（默认 exit 0）：存量课件按"谁改谁收敛"，不拿来卡 CI。 词表与正则等共享基础件在 ./style-audit-shared.ts。
+ * 结果默认是**建议性**的（exit 0）：存量课件按"谁改谁收敛"，不拿来卡 CI； 需要卡住时加 `--strict-errors`（有 error 级发现即 exit 1）。
+ * 词表与正则等共享基础件在 ./style-audit-shared.ts。
  */
 
 import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 
+import { parseSlides } from "./shared/parse-slides";
 import {
   ALLOWED_ROOT_OVERRIDES,
   BORDER_RADIUS,
@@ -481,28 +484,31 @@ const checkBorderMisuse = (sources: string): Finding[] => {
  * ⚠️ 只传 `slides.md` 本体：`courseSources()` 是把 slides.md 与组件源码拼起来的， 拼起来后 `---`
  * 分页会失效、把不同页甚至不同文件当成一页（自测时就咬过一次 1.x-vectors）。
  *
+ * 分页交给 `scripts/shared/parse-slides.ts`（全仓唯一实现：区分 frontmatter 块与正文块、跳过代码块围栏内的 `---`）， 这里只看每页的
+ * `bodyLines`，行号用 `bodyStart + offset` 还原成 `slides.md` 里的真实行号。
+ *
  * @param slidesMd `courses/<slug>/slides.md` 正文
  * @returns 同页 `.key` 多于一处 的发现
  */
 const checkKeyOveruse = (slidesMd: string): Finding[] => {
-  // 相邻命中必然同页；`---` 分隔线之间算一页，末尾那一段也算一页
-  const pages: number[][] = [[]];
+  const findings: Finding[] = [];
 
-  slidesMd.split("\n").forEach((line, index) => {
-    if (/^---\s*$/u.test(line)) pages.push([]);
-    else if (/class="[^"]*\bkey(?:-\w+)?\b[^"]*"/u.test(line)) pages.at(-1)?.push(index + 1);
-  });
+  for (const page of parseSlides(slidesMd)) {
+    const hitLines = page.bodyLines.flatMap((line, offset) =>
+      /class="[^"]*\bkey(?:-\w+)?\b[^"]*"/u.test(line) ? [page.bodyStart + offset] : [],
+    );
 
-  // 分级：2 处只是"可能"，交给执行者判断；≥3 处几乎必然是"把每一步解析都套了竖线"
-  const findings: Finding[] = pages
-    .filter((hits) => hits.length >= 2)
-    .map((hits) => ({
-      level: hits.length >= 3 ? "error" : "warn",
+    if (hitLines.length < 2) continue;
+
+    // 分级：2 处只是"可能"，交给执行者判断；≥3 处几乎必然是"把每一步解析都套了竖线"
+    findings.push({
+      level: hitLines.length >= 3 ? "error" : "warn",
       message:
-        hits.length >= 3
-          ? `同一页有 ${hits.length} 处 .key（行 ${hits.join("、")}）—— 极可能把每一步解析 / 推导都套成了竖线，请逐条复判：只留落点那一条，其余改普通段落（§4）`
-          : `同一页有 2 处 .key（行 ${hits.join("、")}）—— 若第二处确实是旁注 / 易错警示，可以保留；否则只留这一页的落点，其余改普通段落（§4）`,
-    }));
+        hitLines.length >= 3
+          ? `第 ${page.pageNo} 页有 ${hitLines.length} 处 .key（行 ${hitLines.join("、")}）—— 极可能把每一步解析 / 推导都套成了竖线，请逐条复判：只留落点那一条，其余改普通段落（§4）`
+          : `第 ${page.pageNo} 页有 2 处 .key（行 ${hitLines.join("、")}）—— 若第二处确实是旁注 / 易错警示，可以保留；否则只留这一页的落点，其余改普通段落（§4）`,
+    });
+  }
 
   // 只列前 6 页，但**必须把总数说出来**——否则执行者会以为"只有这几处"
   // （真踩过：1.3 实际 16 页，执行者只看到 6 条）
@@ -672,7 +678,9 @@ const auditCourse = (
   };
 };
 
-const targets = process.argv.slice(2);
+/** `--strict-errors`：有 error 级发现时 exit 1（默认只报告、exit 0） */
+const strictErrors = process.argv.includes("--strict-errors");
+const targets = process.argv.slice(2).filter((arg) => !arg.startsWith("--"));
 const slugs =
   targets.length > 0
     ? targets
@@ -714,3 +722,5 @@ console.log(
   `\n── ${slugs.length} 门课，${flagged} 门有**错误**级发现（警告级由执行者判断，不阻塞）。` +
     `口径见 .agents/notes/style-guide.md；存量课件"谁改谁收敛"。`,
 );
+
+if (strictErrors && flagged > 0) process.exitCode = 1;

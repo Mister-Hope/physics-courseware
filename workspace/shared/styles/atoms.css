@@ -41,8 +41,11 @@
   --c-accent-border: rgb(226 168 70 / 26%);
   --c-accent-2-border: rgb(59 130 246 / 26%);
 
-  /* 气泡密度 —— **可调变量**：各课在自己的 `:root` 里覆盖，或单页在容器上写行内变量
-     （`style="--def-pad-y:.85rem;--hint-pad-y:.6rem"`）。内容多的页调小（别溢出）、内容少的页调大（别空一片）。 */
+  /* 气泡密度 —— **可调变量**。内容多的页调小（别溢出）、内容少的页调大（别空一片）。
+     `--def-pad-y` / `--def-pad-x`（定义气泡）可以在本课 `:root` 里覆盖，也可以在单页容器上写行内变量；
+     ⛔ `--hint-pad-y` / `--hint-pad-x`（提示气泡）**切勿在 `:root` 全局覆盖**：图标是 `::before` 绝对定位、
+     `top` 由 `calc(var(--hint-pad-y) + …)` 算出，改内边距会让文字与图标错位（8.4 的 P3/P4 踩过）。
+     确有需要的单页，只在该页容器上写行内 `style="--hint-pad-y:.6rem"`。 */
   --hint-pad-y: 0.58rem;
   --hint-pad-x: 1.15rem;
   --hint-icon-size: 1.05rem;

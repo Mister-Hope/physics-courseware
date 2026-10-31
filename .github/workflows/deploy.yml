@@ -1,9 +1,14 @@
 name: Deploy
 
 on:
-  push:
+  # 等 CI 在 main 上成功后再生效（CI 失败就不部署，避免把红构建推到线上）
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,9 +16,12 @@ permissions:
 jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - name: Setup pnpm
         uses: pnpm/setup@v3
