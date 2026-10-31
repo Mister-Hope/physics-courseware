@@ -17,7 +17,7 @@ const makeField = (
   cx: number,
   cy: number,
   bounds: { x: number; y: number; w: number; h: number },
-): { lines: Line[]; arrows: { x: number; y: number; d: string }[] } => {
+): { lines: Line[]; arrows: { x: number; y: number; d: string }[][] } => {
   const poles = barPoles(cx, cy, 46);
   const lines: Line[] = [];
   for (const d of [-38, -20, 0, 20, 38]) {

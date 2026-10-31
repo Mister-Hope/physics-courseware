@@ -206,7 +206,7 @@ const LABELS: FigLabel[] = [
   },
   {
     key: "alpha",
-    tex: "\\alpha",
+    tex: String.raw`\alpha`,
     x: 238,
     y: 104,
     anchor: "center",
@@ -216,7 +216,7 @@ const LABELS: FigLabel[] = [
   },
   {
     key: "sin-alpha",
-    tex: "\\sin\\alpha=\\dfrac{x_E}{r}",
+    tex: String.raw`\sin\alpha=\dfrac{x_E}{r}`,
     x: 296,
     y: 50,
     anchor: "right",
@@ -226,7 +226,7 @@ const LABELS: FigLabel[] = [
   },
   {
     key: "alpha-max",
-    tex: "\\alpha_{\\max}=\\dfrac{\\pi}{6}",
+    tex: String.raw`\alpha_{\max}=\dfrac{\pi}{6}`,
     x: 296,
     y: 116,
     anchor: "right",
@@ -236,7 +236,7 @@ const LABELS: FigLabel[] = [
   },
   {
     key: "t",
-    tex: "t=\\dfrac{T}{12}",
+    tex: String.raw`t=\dfrac{T}{12}`,
     x: 384,
     y: 372,
     anchor: "right",

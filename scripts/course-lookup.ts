@@ -56,7 +56,8 @@ export interface CourseGroup {
   courses: CourseInfo[];
 }
 
-const readPackageName = (slug: string): string | undefined => {
+// 读课件目录里的包名（`pnpm --filter` 用）；缺 package.json 或解析失败时返回 undefined
+export const readPackageName = (slug: string): string | undefined => {
   const manifestPath = path.join(COURSES_DIR, slug, "package.json");
   let packageName: string | undefined;
 
@@ -97,7 +98,7 @@ export const listCourseDirs = (): string[] =>
     .map((entry) => entry.name);
 
 // 目录名里的章节前缀（如 2.2-2.3-uniform-acceleration → 2.2-2.3）
-const chapterPrefix = (slug: string): string =>
+export const chapterPrefix = (slug: string): string =>
   /^(?:o\d+-)?(?<chapter>\d+(?:\.[\dx]+)*(?:-\d+(?:\.[\dx]+)*)*)/u.exec(slug)?.groups?.chapter ??
   "";
 
@@ -110,12 +111,21 @@ export const normalizeChapter = (chapter: string): string =>
     .replaceAll(/\s+/gu, "");
 
 // 章节号排序键：按数值逐段比较（10.4 不能排在 2.1 前面）；`x` 段排在同章数字段之后
-const chapterRank = (slug: string): number[] =>
+export const chapterRank = (slug: string): number[] =>
   chapterPrefix(slug)
     .split(/[.-]/u)
     .map((part) => (part === "x" ? Number.MAX_SAFE_INTEGER : Number(part)));
 
-const compareByChapter = (left: string, right: string): number => {
+/**
+ * 按章节号比较两个课件目录名：逐段比数值（10.4 排在 2.1 之后），数值段全等时退回字典序， 保证同一批目录名排出来的顺序**完全确定**（不依赖 `readdirSync` 的返回顺序）。
+ *
+ * `e2e/courses.ts` 的端口分配依赖这个顺序（序号稳定 = 并行跑时不会抢端口）。
+ *
+ * @param left 课件目录名（如 2.2-2.3-uniform-acceleration）
+ * @param right 课件目录名
+ * @returns 负数 / 0 / 正数，可直接传给 `Array.prototype.sort`
+ */
+export const compareByChapter = (left: string, right: string): number => {
   const leftRank = chapterRank(left);
   const rightRank = chapterRank(right);
 
@@ -126,7 +136,7 @@ const compareByChapter = (left: string, right: string): number => {
     if (leftValue !== rightValue) return leftValue - rightValue;
   }
 
-  return 0;
+  return left.localeCompare(right);
 };
 
 // 按 courses.json 的分册与登记顺序列出课件（跳过目录不存在的登记项）
@@ -151,7 +161,7 @@ export const listUnregistered = (): CourseInfo[] => {
 
   return listCourseDirs()
     .filter((slug) => !registered.has(slug))
-    .sort((left, right) => compareByChapter(left, right) || left.localeCompare(right))
+    .sort(compareByChapter)
     .map((slug) => toInfo(slug));
 };
 

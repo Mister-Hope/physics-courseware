@@ -5,22 +5,25 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import type { Plugin } from "vite";
 
-import { generateCoursePages } from "../../scripts/course-pages.ts";
+import { collectCoursePages } from "../../scripts/course-pages.ts";
+
+const VIRTUAL_PAGES_ID = "virtual:course-pages";
+const RESOLVED_PAGES_ID = `\0${VIRTUAL_PAGES_ID}`;
 
 /**
- * Dev / build 启动时自动刷新每课页数（写 src/pages.generated.ts，「我要上课」弹窗要用）。
+ * 虚拟模块 `virtual:course-pages`：dev / build 时按需统计每课页数并注入（不落盘）。
  *
  * @returns Vite 插件实例
  */
 const coursePagesPlugin = (): Plugin => ({
   name: "course-pages",
-  buildStart: () => {
-    generateCoursePages();
+  resolveId(id): string | null {
+    return id === VIRTUAL_PAGES_ID ? RESOLVED_PAGES_ID : null;
   },
-  configureServer(server) {
-    server.httpServer?.once("listening", () => {
-      generateCoursePages();
-    });
+  load(id): string | null {
+    if (id !== RESOLVED_PAGES_ID) return null;
+    const pages = collectCoursePages();
+    return `export const coursePages = ${JSON.stringify(pages)};`;
   },
 });
 

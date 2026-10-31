@@ -824,7 +824,7 @@ layout: base-flex
 clicks: 2
 ---
 
-<div class="split-wide qp-solve">
+<div class="split-wide qp-solve" style="--cols: minmax(0, 1.05fr) minmax(0, 0.95fr); --hint-pad-y: 0.5rem">
 
 <div class="stack stack-tight">
 

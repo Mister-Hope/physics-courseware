@@ -336,8 +336,9 @@ li {
 
 /* ===== SVG 绘制基准：一律按 16px 体系（关键！） =====
    正文基准是 22px（后排可读），但写 SVG 的人（尤其 AI）默认按 16px 思考，
-   所以 SVG 子树要自成 16px 体系：根字号固定 16，font-size 属性按书写值生效。 */
-svg {
+   所以 SVG 子树要自成 16px 体系：根字号固定 16，font-size 属性按书写值生效。
+   ⛔ 必须排除 KaTeX 内部的 svg，避免多行分段函数的括号延长条缩水断裂。 */
+svg:not(.katex svg) {
   font-size: 16px;
 }
 /* UnoCSS 的 attributify 会把 font-size="11" 误当工具类，生成

@@ -1,5 +1,5 @@
 <!--
-  电磁炉剖面（第 2 页引课常显、第 9 页回扣复用）
+  电磁炉剖面（第 2 页引课常显、第 8 页回扣复用）
   step 0：干净装置（锅 + 陶瓷面板 + 线圈）
   step 1：线圈中通入交变电流
   step 2：交变电流产生交变磁场，穿过锅底
@@ -35,10 +35,16 @@ const { step = 0 } = defineProps<{
         <stop offset="100%" stop-color="rgb(15 20 37 / 92%)" />
       </radialGradient>
     </defs>
-    <g fill="none" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <g
+      fill="none"
+      stroke="var(--c-text-dim)"
+      stroke-width="7"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <path d="M 140 40 L 170 200 L 430 200 L 460 40" />
     </g>
-    <g fill="none" stroke="#94a3b8" stroke-width="4" stroke-linecap="round">
+    <g fill="none" stroke="var(--c-text-dim)" stroke-width="4" stroke-linecap="round">
       <path d="M 146 46 q -24 6 -26 22" />
       <path d="M 454 46 q 24 6 26 22" />
     </g>
@@ -50,20 +56,15 @@ const { step = 0 } = defineProps<{
       height="12"
       rx="5"
       fill="rgb(148 163 184 / 22%)"
-      stroke="#64748b"
+      stroke="var(--c-neutral-500)"
       stroke-width="1.6"
     />
     <ellipse cx="300" cy="196" rx="140" ry="24" fill="url(#ic-pan-heat)" opacity="0.6" />
-    <text x="96" y="238" font-size="15" fill="#94a3b8">陶瓷面板</text>
+    <text x="96" y="238" font-size="15" fill="var(--c-text-dim)">陶瓷面板</text>
     <g v-if="step >= 1">
-      <g fill="none" stroke="var(--c-accent-2)" stroke-width="3" stroke-linecap="round">
-        <ellipse cx="280" cy="224" rx="100" ry="7" />
-        <ellipse cx="280" cy="228" rx="100" ry="7" />
-        <ellipse cx="280" cy="232" rx="100" ry="7" />
-        <ellipse cx="280" cy="236" rx="100" ry="7" />
-        <ellipse cx="280" cy="240" rx="100" ry="7" />
-      </g>
-      <text x="280" y="268" text-anchor="middle" font-size="15" fill="var(--c-accent-2)">
+      <!-- 面板下的盘形线圈：连续螺旋线（课内组件 FlatSpiralCoil，不是一叠同心椭圆） -->
+      <FlatSpiralCoil :x="280" :y="238" :radius="92" :turns="3.5" :squash="0.28" :line-width="3" />
+      <text x="280" y="284" text-anchor="middle" font-size="15" fill="var(--c-accent-2)">
         线圈（通交变电流）
       </text>
     </g>
@@ -94,7 +95,7 @@ const { step = 0 } = defineProps<{
       v-if="step >= 3"
       d="M 422 196 L 512 150"
       fill="none"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="1.2"
       stroke-dasharray="4 4"
     />
@@ -102,7 +103,7 @@ const { step = 0 } = defineProps<{
       v-if="step >= 3"
       d="M 410 206 L 512 176"
       fill="none"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="1.2"
       stroke-dasharray="4 4"
     />
@@ -115,8 +116,8 @@ const { step = 0 } = defineProps<{
         stroke="rgb(148 163 184 / 45%)"
         stroke-width="1.6"
       />
-      <circle cx="596" cy="110" r="78" fill="none" stroke="#94a3b8" stroke-width="3" />
-      <g fill="none" stroke="#e2a846" stroke-width="3" stroke-linecap="round">
+      <circle cx="596" cy="110" r="78" fill="none" stroke="var(--c-text-dim)" stroke-width="3" />
+      <g fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round">
         <circle cx="596" cy="110" r="56" stroke-dasharray="9 7" />
         <circle cx="596" cy="110" r="36" stroke-dasharray="9 7" />
         <circle cx="596" cy="110" r="16" stroke-dasharray="7 6" />
@@ -124,28 +125,30 @@ const { step = 0 } = defineProps<{
       <CourseArrow
         :from="{ x: 620, y: 20 }"
         :to="{ x: 572, y: 20 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
       />
       <CourseArrow
         :from="{ x: 572, y: 200 }"
         :to="{ x: 620, y: 200 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
       />
       <CourseArrow
         :from="{ x: 686, y: 132 }"
         :to="{ x: 686, y: 88 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
       />
       <CourseArrow
         :from="{ x: 506, y: 88 }"
         :to="{ x: 506, y: 132 }"
-        stroke="#e2a846"
+        stroke="var(--c-accent)"
         stroke-width="3"
       />
-      <text x="596" y="232" text-anchor="middle" font-size="15" fill="#e2a846">锅底中的涡流</text>
+      <text x="596" y="232" text-anchor="middle" font-size="15" fill="var(--c-accent)">
+        锅底中的涡流
+      </text>
     </g>
     <g
       fill="none"

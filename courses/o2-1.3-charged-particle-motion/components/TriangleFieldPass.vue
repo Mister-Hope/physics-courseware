@@ -229,7 +229,7 @@ const labels = computed<FigLabel[]>(() => {
       // M 是 OC 中点 ⟹ CM = MO = L（左栏正文"设 M 为 OC 中点，CM = L"与之对应）
       { key: "CM", tex: "L", x: (C_PT.x + M_PT.x) / 2, y: Y0, anchor: "bottom", size: 15 },
       { key: "MO", tex: "L", x: (M_PT.x + O_PT.x) / 2, y: Y0, anchor: "bottom", size: 15 },
-      { key: "angC", tex: "\\angle C", x: 148, y: 160, anchor: "center", size: 16 },
+      { key: "angC", tex: String.raw`\angle C`, x: 148, y: 160, anchor: "center", size: 16 },
     );
   }
 
@@ -246,7 +246,7 @@ const labels = computed<FigLabel[]>(() => {
       },
       {
         key: "sinC",
-        tex: "\\sin\\angle C = \\dfrac{L}{r}",
+        tex: String.raw`\sin\angle C = \dfrac{L}{r}`,
         x: 85,
         y: 345,
         anchor: "center",

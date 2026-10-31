@@ -415,14 +415,14 @@ view: { width: 320, height: 240 }
 </div>
 ---
 layout: base-flex
-class: title-ask
+class: title-ask page-tight
 ---
 
 # $x$-$t$ 图像能读出什么？
 
-<div class="grid grid-cols-2 gap-8 mt-4 items-center">
+<div class="grid grid-cols-2 gap-8 mt-2 items-center">
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-3">
 
 <div v-click="2" class="text-base leading-relaxed">① <span class="text-accent font-semibold">截距</span>：图线与纵轴的交点，就是 <Latex tex="t = 0" /> 时刻的位置——即<span class="text-accent">初始位置（初始位移）</span></div>
 
@@ -457,7 +457,7 @@ labels:
 
 </div>
 
-<div v-click="6" class="warn-hint" style="--hint-pad-y:.55rem"><Latex tex="x\text{-}t" /> 图像只记录位置随时间的变化，<span class="text-accent">不是物体运动的轨迹</span>——甲、乙都沿 <Latex tex="x" /> 轴运动。</div>
+<div v-click="6" class="warn-hint" style="--hint-pad-y:.4rem"><Latex tex="x\text{-}t" /> 图像只记录位置随时间的变化，<span class="text-accent">不是物体运动的轨迹</span>——甲、乙都沿 <Latex tex="x" /> 轴运动。</div>
 
 ---
 layout: base-flex

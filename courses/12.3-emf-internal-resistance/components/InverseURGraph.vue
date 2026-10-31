@@ -33,7 +33,7 @@ const labels = computed(() => [
   {
     x: 0,
     y: 0.5,
-    tex: "a = \\dfrac{1}{E}",
+    tex: String.raw`a = \dfrac{1}{E}`,
     anchor: "top-left" as const,
     size: 18,
     halo: true,
@@ -43,7 +43,7 @@ const labels = computed(() => [
   {
     x: 2,
     y: 1.5,
-    tex: "k = \\dfrac{r}{E}",
+    tex: String.raw`k = \dfrac{r}{E}`,
     anchor: "bottom-left" as const,
     size: 18,
     halo: true,
@@ -53,7 +53,7 @@ const labels = computed(() => [
   {
     x: -1,
     y: 0,
-    tex: "-\\dfrac{1}{r}",
+    tex: String.raw`-\dfrac{1}{r}`,
     anchor: "top-left" as const,
     size: 18,
     halo: true,

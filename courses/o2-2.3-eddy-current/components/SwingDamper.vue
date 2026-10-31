@@ -74,12 +74,12 @@ const angle = (b: number): number =>
         y1="46"
         :x2="p.x + 34"
         y2="46"
-        stroke="#64748b"
+        stroke="var(--c-neutral-500)"
         stroke-width="4"
         stroke-linecap="round"
       />
       <g :transform="`rotate(${angle(p.b)} ${p.x} 46)`">
-        <line :x1="p.x" y1="46" :x2="p.x" y2="206" stroke="#94a3b8" stroke-width="2.4" />
+        <line :x1="p.x" y1="46" :x2="p.x" y2="206" stroke="var(--c-text-dim)" stroke-width="2.4" />
         <rect
           :x="p.x - 22"
           y="206"
@@ -87,48 +87,31 @@ const angle = (b: number): number =>
           height="30"
           rx="4"
           fill="rgb(148 163 184 / 30%)"
-          stroke="#cbd5e1"
+          stroke="var(--c-neutral-300)"
           stroke-width="2"
         />
       </g>
     </g>
-    <rect
-      x="368"
-      y="180"
-      width="30"
-      height="72"
-      rx="3"
-      fill="#f87171"
-      stroke="#fca5a5"
-      stroke-width="1.2"
-    />
-    <rect
-      x="602"
-      y="180"
-      width="30"
-      height="72"
-      rx="3"
-      fill="#60a5fa"
-      stroke="#93c5fd"
-      stroke-width="1.2"
-    />
+    <!-- 两个磁极（蹄形磁体的极靴）：配色与字母同共享 BarMagnet（N 红 / S 蓝、KaTeX_Main 正体、深底色字母） -->
+    <rect x="368" y="180" width="30" height="72" rx="3" fill="var(--c-danger)" />
+    <rect x="602" y="180" width="30" height="72" rx="3" fill="var(--c-velocity)" />
     <text
       x="383"
-      y="224"
+      y="223"
       text-anchor="middle"
-      font-size="18"
-      font-family="KaTeX_Main, serif"
-      fill="#0f172a"
+      font-size="19"
+      font-family="KaTeX_Main"
+      fill="var(--c-bg-soft)"
     >
       N
     </text>
     <text
       x="617"
-      y="224"
+      y="223"
       text-anchor="middle"
-      font-size="18"
-      font-family="KaTeX_Main, serif"
-      fill="#0f172a"
+      font-size="19"
+      font-family="KaTeX_Main"
+      fill="var(--c-bg-soft)"
     >
       S
     </text>

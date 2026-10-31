@@ -24,7 +24,7 @@
 | 什么时候用                                                        | 读哪篇                                                                                                                                                                     |
 | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **图元莫名其妙「看不见 / 变形 / 字号爆炸」（SVG 属性被吃掉）**    | [`.agents/notes/svg-attributify-trap.md`](.agents/notes/svg-attributify-trap.md) ⭐⭐ **先查这个再查别的：`opacity` 被压成 0.9%、`stroke-width` 被撑大都是它；含诊断脚本** |
-| **要用任何共享组件（查它是干嘛的、props 怎么填）**                | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **27 个全局组件总表 + 简单组件的 props 正本**                                                |
+| **要用任何共享组件（查它是干嘛的、props 怎么填）**                | [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md) ⭐ **29 个全局组件总表 + 简单组件的 props 正本**                                                |
 | 要画 SVG（矢量箭头、SVG 字号体系、非坐标示意图）                  | [`.agents/notes/slidev-svg.md`](.agents/notes/slidev-svg.md)                                                                                                               |
 | **要画坐标图**（v-t / x-t / h-t、时间轴、位置轴、纸带打点）       | [`.agents/notes/coordinate-axes.md`](.agents/notes/coordinate-axes.md) ⭐ **必读：禁止手写坐标轴 SVG**                                                                     |
 | **要画弹簧测力计**（悬挂测力、两台对拉、实验装置示数）            | [`.agents/notes/spring-scale.md`](.agents/notes/spring-scale.md) ⭐ **必读：禁止手画表身 / 刻度 / 挂钩**                                                                   |
@@ -53,7 +53,9 @@ resources/textbooks/           ← 人教版教材 Markdown（必修 1–13 章�
   init-slidev-courseware/      ← 给"不懂代码的老教师"的独立课件生成工具（平行工具，不读本仓库资源）
 courses/<slug>/                ← 一课一目录、一节课（40 分钟）
   slides.md                    ← 主课件；headmatter 里 addons: [../workspace/shared]
-  global-top.vue / global-bottom.vue  ← 顶栏 / 底栏薄壳
+  global-top.vue / global-bottom.vue  ← ⛔ 默认不用建：共享 addon 的 `workspace/shared/global-*.vue` 已全局挂载
+                                        （`CourseTopBar` / `CourseBottomBar` 自动读 headmatter 的 `chapter` / `title`）；
+                                        单课确需特殊顶底栏时才自己放一个同名文件覆盖
   style.css                    ← 仅本课特有样式（addon 样式之后加载，可覆盖）
   README.md                    ← 课件说明：页目表 / 组件表（⛔ 定稿后再生成，见"二"第 8 步）
   components/ · images/        ← 按需存在（用到才建；不建不报错，也别放 .gitkeep）
@@ -83,7 +85,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
      --chapter "<章节号>" --chapter-label "<章节名>" --textbook <分册，如 bx3>
    pnpm install        # 新课件是 workspace 包，必须先装依赖
    ```
-   生成 `slides.md` / `README.md` / `global-*.vue` / `style.css` / `content/思路.md` / `components/` / `images/`；`--name` 只给英文名，**目录名自动 = 章节前缀 + 英文名**（前缀由 `--textbook` + `--chapter` 推导，如必修 `3.5-force-equilibrium`、跨节 `2.2-2.3-uniform-acceleration`、非教材小节 `1.x-vectors`、选必 `o1-1.3-refraction`），并自动登记**根目录 `courses.json`**（详见 `pnpm create:course --help`）。
+   生成 `slides.md` / `README.md` / `style.css` / `content/思路.md` / `components/` / `images/`（顶底栏由共享 addon 默认挂载，单课目录不再生成 `global-*.vue`）；`--name` 只给英文名，**目录名自动 = 章节前缀 + 英文名**（前缀由 `--textbook` + `--chapter` 推导，如必修 `3.5-force-equilibrium`、跨节 `2.2-2.3-uniform-acceleration`、非教材小节 `1.x-vectors`、选必 `o1-1.3-refraction`），并自动登记**根目录 `courses.json`**（详见 `pnpm create:course --help`）。
 5. **编写 `slides.md`**：遵守设计系统（"三"）与对应笔记；交互处做成 Vue 组件、用真实学科公式计算。
 6. **把初版课件交给教师预览，然后停下来等意见**：`pnpm dev`（交互选择）或 `pnpm dev <课件标识>`，或部署链接，并说清"第几版、哪些地方是刻意这样设计的"。**交付后必须停下等反馈**，不要自己脑补"差不多了"继续做。
 7. **按意见改课件**：迭代期**只动 `slides.md`**（含组件/样式）。
@@ -154,7 +156,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 
 ### 共享组件（`workspace/shared/components/`，全局注册：**直接用、不用 import、不要重画**）
 
-27 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
+29 个组件的用途与 props 都写在笔记里（**不用读 `.vue` 源码**）；选组件与查 props 的正门是
 [`.agents/notes/shared-components.md`](.agents/notes/shared-components.md)。
 
 **坐标图（⛔ 禁止手写坐标轴 SVG）· 写在 markdown 顶层**
@@ -170,6 +172,9 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 - `SpringScale` — 弹簧测力计，⛔ 禁止手画表身 / 刻度 / 挂钩 · [笔记](.agents/notes/spring-scale.md)
 - `GripHand` — "手捏住拉环 / 吊环 / 细绳往外拉"，⛔ 禁止手画手掌 / 手指 · [笔记](.agents/notes/grip-hand.md)
 - `Ruler` — 刻度尺（精确毫米刻度 / 示意图模式），可内嵌也可独立用 · [总览 §6](.agents/notes/shared-components.md)
+- `BarMagnet` — 条形磁体（S 蓝 / N 红，横放 / 竖放由 `nSide` 决定），⛔ 禁止手画 S/N 两块矩形 · [总览 §10](.agents/notes/shared-components.md)
+- `Galvanometer` — 灵敏电流计表盘（G、零点居中、指针可左右偏；接线柱在左右两侧）· [电路符号笔记 §3.6.1](.agents/notes/electronic-symbols.md)
+- `Solenoid` — 直螺线管（**连续螺旋线**，不是一叠椭圆；`direction` 设从右端看顺时针 / 逆时针）· [总览 §11](.agents/notes/shared-components.md)
 
 **天体图元（⛔ 禁止手画太阳 / 地球 / 月球 / 星球）· 只能在 `<svg>` 里写**
 
@@ -184,7 +189,7 @@ e2e/                           ← 端到端检查（见笔记 e2e-checks）
 - `ChartLabel` — 图内标注，盖在 SVG 上，能渲染真 KaTeX 与分式 · [总览 §3](.agents/notes/shared-components.md)
 - `CourseSlider` — 全库统一的滑块（原生渲染 + `accent-color`）；建议各课统一用它、别自己写 `::-webkit-slider-thumb` / `::-moz-range-*`（`pnpm style:audit` 会以 warn 提醒，属建议、不阻塞） · [总览 §7](.agents/notes/shared-components.md)
 
-**页面外壳（只写进 `global-*.vue` 薄壳）**
+**页面外壳（由共享 addon 的 `workspace/shared/global-*.vue` 全局默认挂载，单课目录无需自建）**
 
 - `CourseTopBar` — 顶栏：封面章节名 ↔ 内页课题名 + 校徽 · [总览 §2](.agents/notes/shared-components.md)
 - `CourseBottomBar` — 底栏两侧渐隐装饰线（无页码）· 同上（无 props）
@@ -225,6 +230,7 @@ pnpm style:audit    # 样式审计：仅建议（warn 不是 error），默认 e
 pnpm slide          # 🔎 查/读某一页源码（省 token）
 pnpm shots          # 📸 批量截页图（自查视觉）
 pnpm test:e2e       # 端到端检查（四张表；CI 里唯一的版面门禁）
+pnpm test:e2e:affected --since origin/main  # 只跑受影响的课件（本地增量；CI 自动执行，见 notes/e2e-checks.md）
 pnpm build      # 构建入口网站 + 全部课件 → dist/
 pnpm lint           # oxlint --fix + oxfmt（slides.md 不参与格式化）
 pnpm clean          # 清 dist/ 与端到端缓存（--dry-run 先看清单）

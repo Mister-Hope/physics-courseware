@@ -61,7 +61,7 @@
 
 **专用组件（⛔ 禁止手画）**
 
-- 电路 / 磁场符号 → `<CircuitBattery>` `<CircuitResistor>` `<CircuitSwitch>` `<CircuitBulb>` `<CircuitMeter>` `<FieldDots>` `<FieldMark>`，见 [`electronic-symbols.md`](electronic-symbols.md)
+- 电路 / 磁场符号 → `<CircuitBattery>` `<CircuitResistor>` `<CircuitSwitch>` `<CircuitBulb>` `<CircuitMeter>` `<Galvanometer>` `<FieldDots>` `<FieldMark>` `<BarMagnet>` `<Solenoid>`，见 [`electronic-symbols.md`](electronic-symbols.md)、[`shared-components.md` §10](shared-components.md)
 - 滑块 → `<CourseSlider>`（原生渲染 + `accent-color`），🟡 建议统一用它、别自己写 `::-webkit-slider-thumb` / `::-moz-range-*` —— 各课手画的结果是滑块头 13/14/18/24px 配 4～10px 的轨道，比例与配色都对不上；`pnpm style:audit` 有一条 `warn` 级提醒点名手写滑块（属建议、不阻塞），见 [`shared-components.md` §7](shared-components.md)
 - 封面 → `layout: course-cover` + `cover-*`，⛔ 不手写封面 HTML
 

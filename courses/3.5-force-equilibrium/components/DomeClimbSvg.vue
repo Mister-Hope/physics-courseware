@@ -224,11 +224,14 @@ const dragging = ref(false);
 const drag = (event: PointerEvent): void => {
   const svg = (event.currentTarget as SVGElement).ownerSVGElement;
   if (!svg) return;
-  const rect = svg.getBoundingClientRect();
-  if (rect.width === 0 || rect.height === 0) return;
+  const ctm = svg.getScreenCTM();
+  if (!ctm) return;
 
-  const userX = ((event.clientX - rect.left) / rect.width) * 320;
-  const userY = ((event.clientY - rect.top) / rect.height) * 300;
+  // 用 CTM 反变换：SVG 填满栏位后按 aspect 留白（letterbox），按比例硬算会拖偏
+  const pointer = svg.createSVGPoint();
+  pointer.x = event.clientX;
+  pointer.y = event.clientY;
+  const { x: userX, y: userY } = pointer.matrixTransform(ctm.inverse());
   const deg = (Math.atan2(userX - origin.x, origin.y - userY) * 180) / Math.PI;
 
   phi.value = clamp(Math.round(deg), PHI_MIN, PHI_MAX);
@@ -610,7 +613,8 @@ const endDrag = (): void => {
 <style scoped>
 .dc-wrap {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   gap: 1rem;
   align-items: stretch;
 
@@ -629,7 +633,7 @@ const endDrag = (): void => {
 
 .dc-fig svg {
   width: 100%;
-  height: auto;
+  height: 100%;
   max-height: 100%;
 }
 </style>

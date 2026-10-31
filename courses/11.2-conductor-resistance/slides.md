@@ -538,6 +538,7 @@ clicks: 2
 
 ---
 layout: exercise-split
+class: tight-gap
 title: "例题：小灯泡的 I-U 图线"
 clicks: 2
 ---

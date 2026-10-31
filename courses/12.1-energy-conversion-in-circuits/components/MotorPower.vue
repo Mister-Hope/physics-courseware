@@ -31,7 +31,7 @@ const sliders = computed(() => [
     min: 50,
     max: 300,
     step: 10,
-    unitTex: "\\text{V}",
+    unitTex: String.raw`\text{V}`,
     color: "var(--c-accent)",
   },
   {
@@ -41,7 +41,7 @@ const sliders = computed(() => [
     min: 0.5,
     max: 12,
     step: 0.5,
-    unitTex: "\\text{A}",
+    unitTex: String.raw`\text{A}`,
     color: "var(--c-accent-2)",
   },
   {
@@ -51,7 +51,7 @@ const sliders = computed(() => [
     min: 1,
     max: 20,
     step: 1,
-    unitTex: "\\Omega",
+    unitTex: String.raw`\Omega`,
     color: "var(--c-danger)",
   },
 ]);

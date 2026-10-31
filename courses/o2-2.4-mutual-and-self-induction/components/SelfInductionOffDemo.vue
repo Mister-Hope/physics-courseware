@@ -98,12 +98,11 @@ const stateText = computed(() => {
         fill="var(--c-neutral-700)"
         opacity="0.5"
       />
-
       <!-- 导线 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
         <path d="M 170 70 H 470" />
-        <path d="M 170 70 V 100" />
-        <path d="M 170 152 V 300" />
+        <path d="M 170 70 V 99.2" />
+        <path d="M 170 152.8 V 300" />
         <path d="M 470 70 V 174" />
         <path d="M 470 206 V 300" />
         <path d="M 320 70 V 130" />
@@ -111,22 +110,22 @@ const stateText = computed(() => {
         <path d="M 320 238 V 300" />
         <path d="M 170 300 H 470" />
       </g>
-
       <!-- 节点圆点 -->
       <circle cx="320" cy="70" r="3.4" fill="var(--c-text)" />
       <circle cx="320" cy="300" r="3.4" fill="var(--c-text)" />
-
-      <!-- 线圈 L -->
-      <g fill="none" stroke="var(--c-accent)" stroke-width="2.8">
-        <ellipse cx="170" cy="108" rx="26" ry="6.5" />
-        <ellipse cx="170" cy="120" rx="26" ry="6.5" />
-        <ellipse cx="170" cy="132" rx="26" ry="6.5" />
-        <ellipse cx="170" cy="144" rx="26" ry="6.5" />
-        <path d="M 196 108 V 120" />
-        <path d="M 144 120 V 132" />
-        <path d="M 196 132 V 144" />
-      </g>
-
+      <!-- 线圈 L：套在铁芯上的竖放连续螺旋线 3.5 匝，接线端落在上、下轮廓 (170,99.2) / (170,152.8) -->
+      <Solenoid
+        :x="170"
+        :y="126"
+        :length="36"
+        :radius="26"
+        :turns="3.5"
+        direction="ccw"
+        orientation="vertical"
+        :phase="270"
+        :line-width="2.8"
+        :back-opacity="0.32"
+      />
       <!-- 灯泡 -->
       <circle
         :cx="470"
@@ -136,7 +135,6 @@ const stateText = computed(() => {
         :opacity="0.45 * brightness"
       />
       <CircuitBulb :x="470" :y="190" :r="16" />
-
       <!-- 灯泡支路中的电流方向：闭合时向下，断开后向上；无电流时不画 -->
       <g v-if="brightness > 0.05">
         <CourseArrow
@@ -164,10 +162,8 @@ const stateText = computed(() => {
           I
         </text>
       </g>
-
       <CircuitSwitch :x="320" :y="150" orientation="vertical" label="S" :open="!closed" />
       <CircuitBattery :x="320" :y="230" orientation="vertical" polarity emf="E" />
-
       <!-- 标签 -->
       <text
         x="134"

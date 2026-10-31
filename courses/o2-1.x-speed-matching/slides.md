@@ -1,6 +1,6 @@
 ---
 theme: default
-title: "复合场与配速法"
+title: "复合场中的配速法与摆线运动"
 titleTemplate: '%s'
 highlighter: shiki
 transition: fade

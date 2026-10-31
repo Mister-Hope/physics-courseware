@@ -5,10 +5,10 @@ import { computed, ref } from "vue";
 const C = 3e8;
 
 const presets = [
-  { name: "微波炉", f: 2.45e9, tex: "2.45\\times10^{9}" },
-  { name: "调频广播", f: 1e8, tex: "1\\times10^{8}" },
-  { name: "红光", f: 5e14, tex: "5\\times10^{14}" },
-  { name: "紫外线", f: 1e15, tex: "1\\times10^{15}" },
+  { name: "微波炉", f: 2.45e9, tex: String.raw`2.45\times10^{9}` },
+  { name: "调频广播", f: 1e8, tex: String.raw`1\times10^{8}` },
+  { name: "红光", f: 5e14, tex: String.raw`5\times10^{14}` },
+  { name: "紫外线", f: 1e15, tex: String.raw`1\times10^{15}` },
 ];
 
 const logF = ref(Math.log10(2.45e9));

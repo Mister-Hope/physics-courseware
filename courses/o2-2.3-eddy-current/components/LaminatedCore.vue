@@ -1,5 +1,5 @@
 <!--
-  涡流的危害与减小（第 11 页）：同一交变磁通穿过整块铁芯与硅钢片叠片。
+  涡流的危害与减小（第 10 页）：同一交变磁通穿过整块铁芯与硅钢片叠片。
   左：涡流沿整块铁芯绕大回路，电阻小、电流大、发热多；
   右：片间绝缘，涡流被限制在每一薄片内，回路短、电阻大、电流小。
 -->
@@ -34,7 +34,7 @@
       height="204"
       rx="6"
       fill="url(#lc-core)"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="2"
     />
     <rect
@@ -44,7 +44,7 @@
       height="164"
       rx="26"
       fill="none"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="4.5"
       stroke-dasharray="16 11"
       class="lc-flow"
@@ -52,16 +52,16 @@
     <CourseArrow
       :from="{ x: 168, y: 66 }"
       :to="{ x: 214, y: 66 }"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="3"
     />
     <CourseArrow
       :from="{ x: 214, y: 226 }"
       :to="{ x: 168, y: 226 }"
-      stroke="#e2a846"
+      stroke="var(--c-accent)"
       stroke-width="3"
     />
-    <text x="191" y="282" text-anchor="middle" font-size="15" fill="#e2a846">
+    <text x="191" y="282" text-anchor="middle" font-size="15" fill="var(--c-accent)">
       涡流回路大，发热多
     </text>
     <g>
@@ -72,7 +72,7 @@
         height="204"
         rx="2"
         fill="url(#lc-sheet)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
       />
       <rect
@@ -82,7 +82,7 @@
         height="204"
         rx="2"
         fill="url(#lc-sheet)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
       />
       <rect
@@ -92,7 +92,7 @@
         height="204"
         rx="2"
         fill="url(#lc-sheet)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
       />
       <rect
@@ -102,7 +102,7 @@
         height="204"
         rx="2"
         fill="url(#lc-sheet)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
       />
       <rect
@@ -112,7 +112,7 @@
         height="204"
         rx="2"
         fill="url(#lc-sheet)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
       />
       <rect
@@ -122,11 +122,11 @@
         height="204"
         rx="2"
         fill="url(#lc-sheet)"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="1.4"
       />
     </g>
-    <g fill="none" stroke="#e2a846" stroke-width="2" stroke-dasharray="5 5">
+    <g fill="none" stroke="var(--c-accent)" stroke-width="2" stroke-dasharray="5 5">
       <ellipse cx="439" cy="146" rx="6" ry="62" class="lc-flow" />
       <ellipse cx="467" cy="146" rx="6" ry="62" class="lc-flow" />
       <ellipse cx="495" cy="146" rx="6" ry="62" class="lc-flow" />
@@ -134,17 +134,22 @@
       <ellipse cx="551" cy="146" rx="6" ry="62" class="lc-flow" />
       <ellipse cx="579" cy="146" rx="6" ry="62" class="lc-flow" />
     </g>
-    <text x="510" y="282" text-anchor="middle" font-size="15" fill="#94a3b8">
+    <text x="510" y="282" text-anchor="middle" font-size="15" fill="var(--c-text-dim)">
       涡流被切断，发热少
     </text>
-    <g fill="none" stroke="var(--c-accent-2)" stroke-width="2" stroke-linecap="round">
-      <path d="M 380 112 L 380 88" />
-      <path d="M 380 180 L 380 204" />
-    </g>
-    <g fill="var(--c-accent-2)">
-      <path d="M 380 82 l -6 12 l 12 0 z" />
-      <path d="M 380 210 l -6 -12 l 12 0 z" />
-    </g>
+    <!-- 穿过铁芯的交变磁通：上下两个方向（箭头用共享 CourseArrow，不手画箭头） -->
+    <CourseArrow
+      :from="{ x: 380, y: 116 }"
+      :to="{ x: 380, y: 82 }"
+      stroke="var(--c-accent-2)"
+      stroke-width="2.2"
+    />
+    <CourseArrow
+      :from="{ x: 380, y: 188 }"
+      :to="{ x: 380, y: 210 }"
+      stroke="var(--c-accent-2)"
+      stroke-width="2.2"
+    />
     <text
       x="380"
       y="152"

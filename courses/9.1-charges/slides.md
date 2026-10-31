@@ -241,11 +241,11 @@ title: 导体与绝缘体
 clicks: 7
 title: 观察静电感应现象
 ---
-<div class="page-grow">
+<div class="page-grow page-grow-tight">
 
 <div class="ask">摩擦可以使物体带电，那么，还有其他方法可以使物体带电吗？</div>
 
-<div class="split-wide" style="--stack-gap:.4rem">
+<div class="split-wide" style="--cols: minmax(0, 1.55fr) minmax(0, 1fr); --stack-gap: .25rem; --hint-pad-y: .45rem">
 <div class="stack">
 
 <div>取一对用绝缘柱支持的导体 <Latex tex="A" /> 和 <Latex tex="B" />，使它们彼此接触。起初它们不带电，贴在下部的两片金属箔是闭合的。</div>
@@ -276,21 +276,21 @@ title: 观察静电感应现象
 clicks: 2
 title: 静电感应与感应起电
 ---
-<div class="page-grow">
+<div class="page-grow page-grow-tight" style="--def-pad-y: .7rem; --hint-pad-y: .45rem">
 
 <div class="ask"><Latex tex="C" /> 靠近时，金属里的自由电子到底发生了什么？</div>
 
 <div v-click="1">
-<DefinitionBox term="静电感应" tone="gold">
+<DefinitionBox term="静电感应" tone="gold" style="margin-top: .55rem">
 <div>当一个带电体靠近导体时，由于电荷间相互吸引或排斥，导体中的自由电荷便会趋向或远离带电体，使导体靠近带电体的一端带<span class="def-term">异种电荷</span>，远离带电体的一端带<span class="def-term">同种电荷</span>。这种现象叫作<span class="def-term">静电感应</span>（electrostatic induction）。</div>
 </DefinitionBox>
 </div>
 
-<div v-click="2" class="half-grid">
+<div v-click="2" class="half-grid" style="grid-template-columns: minmax(0, 320px) minmax(0, 1fr)">
 <div class="figure"><div class="svg-sm"><MetalStructureSvg mode="induction" :show-induced-charges="$clicks >= 2" /></div></div>
-<div class="divider-l stack">
+<div class="divider-l stack stack-tight">
 
-<DefinitionBox term="感应起电" tone="blue">
+<DefinitionBox term="感应起电" tone="blue" style="margin-top: .55rem">
 <div>利用静电感应使金属导体带电的过程叫作<span class="def-term">感应起电</span>。</div>
 </DefinitionBox>
 

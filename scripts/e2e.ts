@@ -24,7 +24,7 @@ import type { ChildProcess } from "node:child_process";
 import { existsSync } from "node:fs";
 import path from "node:path";
 
-import { listCourses } from "../e2e/courses";
+import { listAllCourses, listCourses, requestedCourseSlugs } from "../e2e/courses";
 import type { CourseTarget } from "../e2e/courses";
 import { describePortOwner, findFreePort, isHttpOk } from "../e2e/ports";
 
@@ -130,6 +130,9 @@ const stopServer = (child: ChildProcess): void => {
   }
 };
 
+/** 本次检查范围（写进报告，避免"只跑了 N 门"被误读成"全绿"）；由下面的选课结果填充 */
+const selectionScope = { selected: 0, total: 0 };
+
 // 用 Playwright 跑一个课件的门禁 spec，返回退出码
 const runPlaywright = (course: CourseTarget): Promise<number> =>
   new Promise((resolve) => {
@@ -142,6 +145,9 @@ const runPlaywright = (course: CourseTarget): Promise<number> =>
         E2E_NO_WEBSERVER: "1",
         // 端口已经自动避让过（见 runCourse），告诉 spec 侧用同一个端口算 baseURL
         E2E_COURSE_PORT: String(course.port),
+        // 报告口径：本次检查了多少门 / 全库多少门（见 `e2e/report.ts` 的 `reportScopeFromEnv`）
+        E2E_SCOPE_SELECTED: String(selectionScope.selected),
+        E2E_SCOPE_TOTAL: String(selectionScope.total),
       },
       stdio: ["ignore", "pipe", "pipe"],
     });
@@ -257,13 +263,57 @@ const printSummary = (results: CourseResult[]): void => {
   );
 };
 
-const courses = listCourses();
+const main = async (): Promise<void> => {
+  const allCourses = listAllCourses();
+  const requested = requestedCourseSlugs();
+  const knownSlugs = new Set(allCourses.map((course) => course.slug));
+  const unknown = requested.filter((slug) => !knownSlugs.has(slug));
 
-if (courses.length === 0) {
-  console.log("⚠️  没有匹配的课件（检查 E2E_COURSE）");
-} else {
+  // 「选课逻辑传出不存在的 slug」= 上游判定坏了：必须红，不能静默跑 0 门
+  if (unknown.length > 0) {
+    console.error(`✗ E2E_COURSE 里包含不存在的课件：${unknown.join("、")}`);
+    console.error(
+      `  courses/ 下共 ${allCourses.length} 门课件；课件重命名后请同步更新选课逻辑或调用方。`,
+    );
+    process.exitCode = 1;
+
+    return;
+  }
+
+  // `E2E_COURSE` 显式设置却解析为空：以前会被当成"全量"（危险），现在直接报错
+  if ("E2E_COURSE" in process.env && requested.length === 0) {
+    console.error(
+      "✗ E2E_COURSE 已设置但解析为空：这通常说明上游选课逻辑出错，本轮将不会检查任何课件。",
+    );
+    console.error("  想全量检查请删除 E2E_COURSE；确实没有需要检查的课件时请让上游直接跳过 e2e。");
+    process.exitCode = 2;
+
+    return;
+  }
+
+  const courses = listCourses();
+
+  if (courses.length === 0) {
+    console.error("✗ 没有可检查的课件（courses/ 为空？）");
+    process.exitCode = 1;
+
+    return;
+  }
+
+  selectionScope.selected = courses.length;
+  selectionScope.total = allCourses.length;
+
+  const selectionReason = process.env.E2E_SELECTION_REASON?.trim();
+
+  if (selectionReason) console.log(`选课理由：${selectionReason}`);
+
   console.log(
-    `E2E：${courses.length} 个课件，并发上限 ${CONCURRENCY}（每个课件跑 ${SPEC_FILES.length} 个门禁 spec）`,
+    `E2E：本次检查 ${courses.length}/${allCourses.length} 门课件，并发上限 ${CONCURRENCY}（每个课件跑 ${SPEC_FILES.length} 个门禁 spec）`,
+  );
+  console.log(
+    courses.length < allCourses.length
+      ? `  （未覆盖的 ${allCourses.length - courses.length} 门课件本次不检查；基线见 E2E_SCOPE_BASELINE）`
+      : "  （全量）",
   );
 
   process.on("SIGINT", () => {
@@ -276,4 +326,6 @@ if (courses.length === 0) {
 
   printSummary(results);
   process.exitCode = results.every((result) => result.passed) ? 0 : 1;
-}
+};
+
+await main();

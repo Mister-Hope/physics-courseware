@@ -116,7 +116,7 @@ const labels = computed(() => {
     out.push({
       x: tMeet.value,
       y: hMeet.value,
-      tex: "\\text{相遇}",
+      tex: String.raw`\text{相遇}`,
       dot: 5,
       anchor: "top-right",
       halo: true,

@@ -1,6 +1,6 @@
 <!--
-  P8 交互：U 形导轨 + 金属棒 AB + 电流表，匀强磁场垂直纸面向里（FieldDots）。
-  点「向右 / 向左滑动」：AB 沿导轨滑动 → 回路面积 S 变化 → 磁通量 Φ = BS 变化 → 电流表指针偏转；
+  P8 交互：U 形导轨 + 金属棒 AB + 灵敏电流计，匀强磁场垂直纸面向里（FieldDots）。
+  点「向右 / 向左滑动」：AB 沿导轨滑动 → 回路面积 S 变化 → 磁通量 Φ = BS 变化 → 灵敏电流计指针偏转；
   停止后指针回零。物理量只作定性读数（变大 / 变小 / 不变），不出现数值与刻度。
 -->
 <script setup lang="ts">
@@ -112,8 +112,8 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         fill="var(--c-accent)"
         opacity="0.1"
       />
-      <!-- 匀强磁场：垂直纸面向里 -->
-      <FieldDots :x="140" :y="110" :cols="10" :rows="4" :spacing="44" dir="in" />
+      <!-- 匀强磁场：垂直纸面向里，铺满整个画面（导轨内外都有，体现"磁场遍布整个空间"） -->
+      <FieldDots :x="30" :y="30" :cols="14" :rows="8" :spacing="42" dir="in" />
       <!-- 导轨与固定端（左侧）-->
       <g fill="none" stroke="var(--c-text)" stroke-width="2" stroke-linecap="round">
         <path :d="`M ${LEFT_X} ${RAIL_TOP} H ${RIGHT_X}`" />
@@ -131,10 +131,26 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         stroke-width="6"
         stroke-linecap="round"
       />
-      <!-- 电流表 -->
-      <PointerAmmeter :x="LEFT_X" :y="180" :r="20" :angle="angle" />
-      <text :x="LEFT_X" y="228" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">
-        电流表
+      <!-- 灵敏电流计：串在竖直导线上，导线止于上下两个接线柱（terminals="vertical"） -->
+      <Galvanometer
+        :x="LEFT_X"
+        :y="180"
+        :r="20"
+        terminals="vertical"
+        :angle="angle"
+        fill="var(--c-bg-soft)"
+      />
+      <text
+        :x="LEFT_X"
+        y="228"
+        text-anchor="middle"
+        font-size="16"
+        fill="var(--c-text-dim)"
+        stroke="var(--c-bg)"
+        stroke-width="3"
+        paint-order="stroke"
+      >
+        灵敏电流计
       </text>
       <!-- 回路顶点 A B C D -->
       <text
@@ -145,6 +161,9 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         font-style="italic"
         font-size="19"
         fill="var(--c-text)"
+        stroke="var(--c-bg)"
+        stroke-width="4"
+        paint-order="stroke"
       >
         A
       </text>
@@ -155,6 +174,9 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         font-style="italic"
         font-size="19"
         fill="var(--c-text)"
+        stroke="var(--c-bg)"
+        stroke-width="4"
+        paint-order="stroke"
       >
         B
       </text>
@@ -166,6 +188,9 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         font-style="italic"
         font-size="19"
         fill="var(--c-text-dim)"
+        stroke="var(--c-bg)"
+        stroke-width="4"
+        paint-order="stroke"
       >
         D
       </text>
@@ -177,6 +202,9 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         font-style="italic"
         font-size="19"
         fill="var(--c-text-dim)"
+        stroke="var(--c-bg)"
+        stroke-width="4"
+        paint-order="stroke"
       >
         C
       </text>
@@ -197,7 +225,7 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
         >磁通量 <Latex tex="\Phi = BS" />：<strong>{{ changing }}</strong></span
       >
       <span class="ei-item"
-        >电流表：<strong>{{ meterText }}</strong></span
+        >灵敏电流计：<strong>{{ meterText }}</strong></span
       >
     </div>
     <div class="ei-bar">

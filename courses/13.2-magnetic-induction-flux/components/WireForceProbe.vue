@@ -181,11 +181,6 @@ const MG = MASS * G;
 const LS = 120;
 const PIVOT = { x: 200, y: 96 };
 const FIELD_X = [158, 240, 302];
-/** 接线柱 1/2/3/4 的横坐标（2—3 跨一块磁体，1—4 跨三块） */
-const T1 = 60;
-const T2 = 136;
-const T3 = 192;
-const T4 = 268;
 
 const I = ref(3);
 const L = ref(0.25);
@@ -214,8 +209,6 @@ const showF = computed(() => mode === "lab" && step >= 1);
 const insetShown = computed(() => mode === "lab" || step >= 2);
 /** T = 0 ↔ 接 2、3（l 最小）；t = 1 ↔ 接 1、4（l 最大） */
 const t = computed(() => (L.value - 0.1) / 0.3);
-const segL = computed(() => T2 + (T1 - T2) * t.value);
-const segR = computed(() => T3 + (T4 - T3) * t.value);
 
 const iTex = computed(() => `I = ${I.value.toFixed(1)}\\ \\text{A}`);
 const lTex = computed(() => `l = ${L.value.toFixed(2)}\\ \\text{m}`);

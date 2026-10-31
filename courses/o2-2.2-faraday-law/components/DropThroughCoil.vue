@@ -191,24 +191,25 @@ onBeforeUnmount(() => {
             h
           </text>
 
-          <!-- 线圈：三匝 -->
-          <g fill="none" stroke="var(--c-accent)" stroke-linecap="round">
-            <ellipse cx="150" :cy="COIL_Y - 18" rx="54" ry="10" stroke-width="9" opacity="0.12" />
-            <ellipse cx="150" :cy="COIL_Y" rx="54" ry="10" stroke-width="9" opacity="0.12" />
-            <ellipse cx="150" :cy="COIL_Y + 18" rx="54" ry="10" stroke-width="9" opacity="0.12" />
-            <ellipse cx="150" :cy="COIL_Y - 18" rx="54" ry="10" stroke-width="3" />
-            <ellipse cx="150" :cy="COIL_Y" rx="54" ry="10" stroke-width="3" />
-            <ellipse cx="150" :cy="COIL_Y + 18" rx="54" ry="10" stroke-width="3" />
-          </g>
-
-          <!-- 线圈接电压传感器 -->
-          <path
-            d="M 204 286 H 224"
-            fill="none"
-            stroke="var(--c-text)"
-            stroke-width="1.6"
-            stroke-linecap="round"
+          <!-- 线圈：3 匝，轴竖直（共享 Solenoid，连续螺旋线）；两端落在右侧 (204, COIL_Y ∓ 21) -->
+          <Solenoid
+            :x="150"
+            :y="COIL_Y"
+            :length="42"
+            :radius="54"
+            :turns="3"
+            orientation="vertical"
+            direction="cw"
+            :phase="0"
+            :line-width="3"
+            :back-opacity="0.35"
           />
+
+          <!-- 线圈两端接电压传感器（两根引线，分别从上下端子接进盒子左侧） -->
+          <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+            <path :d="`M 204 ${COIL_Y - 21} H 212 V 278 H 224`" />
+            <path :d="`M 204 ${COIL_Y + 21} H 212 V 294 H 224`" />
+          </g>
           <rect
             x="224"
             y="270"
@@ -223,38 +224,15 @@ onBeforeUnmount(() => {
             电压传感器
           </text>
 
-          <!-- 磁体（上 S 下 N） -->
-          <g>
-            <rect
-              x="134"
-              :y="magnetY - 19"
-              width="32"
-              height="19"
-              rx="2"
-              fill="var(--c-velocity)"
-            />
-            <rect x="134" :y="magnetY" width="32" height="19" rx="2" fill="var(--c-danger)" />
-            <text
-              x="150"
-              :y="magnetY - 6"
-              text-anchor="middle"
-              font-family="KaTeX_Main, serif"
-              font-size="10"
-              fill="var(--c-bg-soft)"
-            >
-              S
-            </text>
-            <text
-              x="150"
-              :y="magnetY + 14"
-              text-anchor="middle"
-              font-family="KaTeX_Main, serif"
-              font-size="10"
-              fill="var(--c-bg-soft)"
-            >
-              N
-            </text>
-          </g>
+          <!-- 磁体（S 上、N 下；共享 BarMagnet） -->
+          <BarMagnet
+            :x="150"
+            :y="magnetY"
+            :length="38"
+            :width="32"
+            n-side="bottom"
+            :label-size="12"
+          />
 
           <!-- 下落方向 -->
           <CourseArrow

@@ -293,7 +293,19 @@ const ARROW = /^\s*(?:\([\w\s,$]*\)|[\w$]+)\s*=>/u;
 
 const toJs = (value: BlockValue): string => {
   if (typeof value === "string") {
-    if (ARROW.test(value)) return `(${value})`;
+    if (ARROW.test(value)) {
+      // 编译期先验一次语法：只构造 Function 检查能否解析，不调用执行；
+      // 写错的箭头函数要在这里报出来，别拖到整页模板编译才炸、定位还找不到代码块
+      try {
+        // 这里只在构建期借用 Function 构造器校验语法，不执行、也不进入运行时代码
+        // oxlint-disable-next-line no-new-func, typescript/no-implied-eval
+        void new Function(`return (${value})`);
+      } catch {
+        throw new Error(`[comp] 箭头函数表达式语法错误: ${value}`);
+      }
+
+      return `(${value})`;
+    }
 
     return `'${escapeJs(value)}'`;
   }
@@ -335,10 +347,15 @@ export const parseCompBlock = (info: string, code: string): BlockSpec | null => 
   };
 };
 
+// HTML 属性转义：`toJs` 的结果里可能有 `"`（箭头函数内部、字符串值），直接拼进
+// `v-bind="…"` 会把外层双引号提前闭合，必须转义
+const escapeHtmlAttr = (text: string): string =>
+  text.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+
 // 组件规格 → 单行 HTML（Slidev 会把它当 Vue 模板编译）
 export const renderCompBlock = (spec: BlockSpec): string => {
   const tag = Object.keys(spec.props).length
-    ? `<${spec.component} v-bind="${toJs(spec.props)}" />`
+    ? `<${spec.component} v-bind="${escapeHtmlAttr(toJs(spec.props))}" />`
     : `<${spec.component} />`;
   const wrapperClass = spec.wrapperClass ?? "";
   const click = spec.click ?? -1;

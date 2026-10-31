@@ -27,6 +27,27 @@ const rad = computed<number>(() => (angle * Math.PI) / 180);
 const forceX = computed<number>(() => F_LEN * Math.cos(rad.value));
 const forceY = computed<number>(() => F_LEN * Math.sin(rad.value));
 
+/** 标注方位（与 `ChartLabel` 的九宫格同一套口径） */
+type LabelAnchor =
+  | "center"
+  | "left"
+  | "right"
+  | "top"
+  | "bottom"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+/** 额外力的标注方位：水平力标在箭头上方、竖直力标在箭头右侧，斜向力按象限走 */
+const extraAnchor = (x: number, y: number): LabelAnchor => {
+  if (Math.abs(y) < 1e-6) return "top";
+  if (Math.abs(x) < 1e-6) return "right";
+  if (y > 0) return x > 0 ? "top-right" : "top-left";
+
+  return x > 0 ? "bottom-right" : "bottom-left";
+};
+
 const extraItems = computed(() =>
   extras.map((item) => ({
     angle: item.angle,
@@ -35,6 +56,19 @@ const extraItems = computed(() =>
     color: item.color,
     x: item.len * Math.cos((item.angle * Math.PI) / 180),
     y: item.len * Math.sin((item.angle * Math.PI) / 180),
+  })),
+);
+
+/** 额外力的字母（`F_2`、`G` 等）：不参与分解，但同样要有标注，否则图上只有光秃秃的箭头 */
+const extraLabels = computed(() =>
+  extraItems.value.map((item) => ({
+    x: item.x / 2,
+    y: item.y / 2,
+    tex: item.tex,
+    color: item.color ?? "var(--c-accent-2)",
+    size: 19,
+    anchor: extraAnchor(item.x, item.y),
+    halo: true,
   })),
 );
 
@@ -86,6 +120,7 @@ const labels = computed(() => [
   { x: forceX.value, y: forceY.value, tex, color, size: 19, anchor: tipAnchor.value, halo: true },
   { x: forceX.value, y: 0, tex: "F_x", color, size: 16, anchor: fxAnchor.value, halo: true },
   { x: 0, y: forceY.value, tex: "F_y", color, size: 16, anchor: fyAnchor.value, halo: true },
+  ...extraLabels.value,
 ]);
 </script>
 

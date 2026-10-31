@@ -110,12 +110,11 @@ const stateText = computed(() => {
         fill="var(--c-neutral-700)"
         opacity="0.5"
       />
-
       <!-- 导线：左右两条支路并联，中间一条接电源与开关 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
         <path d="M 170 80 H 560" />
-        <path d="M 170 80 V 102" />
-        <path d="M 170 150 V 226" />
+        <path d="M 170 80 V 99.2" />
+        <path d="M 170 152.8 V 226" />
         <path d="M 170 258 V 330" />
         <path d="M 560 80 V 116" />
         <path d="M 560 164 V 226" />
@@ -125,35 +124,32 @@ const stateText = computed(() => {
         <path d="M 365 172 V 232" />
         <path d="M 365 250 V 330" />
       </g>
-
       <!-- 节点圆点 -->
       <circle cx="365" cy="80" r="3.4" fill="var(--c-text)" />
       <circle cx="365" cy="330" r="3.4" fill="var(--c-text)" />
-
-      <!-- 线圈 L -->
-      <g fill="none" stroke="var(--c-accent)" stroke-width="2.8">
-        <ellipse cx="170" cy="108" rx="26" ry="6.5" />
-        <ellipse cx="170" cy="120" rx="26" ry="6.5" />
-        <ellipse cx="170" cy="132" rx="26" ry="6.5" />
-        <ellipse cx="170" cy="144" rx="26" ry="6.5" />
-        <path d="M 196 108 V 120" />
-        <path d="M 144 120 V 132" />
-        <path d="M 196 132 V 144" />
-      </g>
-
+      <!-- 线圈 L：套在铁芯上的竖放连续螺旋线 3.5 匝，接线端落在上、下轮廓 (170,99.2) / (170,152.8) -->
+      <Solenoid
+        :x="170"
+        :y="126"
+        :length="36"
+        :radius="26"
+        :turns="3.5"
+        direction="ccw"
+        orientation="vertical"
+        :phase="270"
+        :line-width="2.8"
+        :back-opacity="0.32"
+      />
       <!-- A₁ -->
       <circle :cx="170" :cy="242" :r="26 + 12 * iL" fill="var(--c-accent)" :opacity="0.38 * iL" />
       <CircuitBulb :x="170" :y="242" :r="16" />
-
       <!-- R 与 A₂ -->
       <CircuitResistor :x="560" :y="140" orientation="vertical" label="R" />
       <circle :cx="560" :cy="242" :r="26 + 12 * iR" fill="var(--c-accent)" :opacity="0.38 * iR" />
       <CircuitBulb :x="560" :y="242" :r="16" />
-
       <!-- 中间支路：开关 + 电源 -->
       <CircuitSwitch :x="365" :y="152" orientation="vertical" label="S" :open="!closed" />
       <CircuitBattery :x="365" :y="241" orientation="vertical" polarity emf="E" />
-
       <!-- 标签 -->
       <text
         x="134"

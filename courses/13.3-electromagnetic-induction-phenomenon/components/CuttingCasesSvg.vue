@@ -4,7 +4,7 @@
   只有 AB **垂直于纸面前后**运动时，v 才有垂直于纸面的分量、v×B 才沿 AB，才产生电动势（丙）。
   丙图用 3D 透视画"垂直纸面向里"的两条导轨（屏幕斜向右上 ~38°）：导轨画成暗灰细轨条，**不闭合回路**；
   AB 横跨在导轨上前后滑动（实线 = 现在的位置，同色淡虚线 = 另一位置），运动方向用一个沿导轨指向纸内的
-  v 箭头标出。引线只从 AB 的两端引出接电流表——回路里只有 棒 + 引线 + 电流表，没有别的"导体边框"。
+  v 箭头标出。引线只从 AB 的两端引出接灵敏电流计——回路里只有 棒 + 引线 + 灵敏电流计，没有别的"导体边框"。
   第一眼只有干净的装置图与运动方向；指针状态与"有/无感应电流"标注按 :step 逐击出现（固定 SVG 内 v-if，不顶跑版式）。
 -->
 <script setup lang="ts">
@@ -21,7 +21,7 @@ const PANELS = [
 ];
 const FIELD_X = [55, 90, 125, 160];
 
-/** 丙图几何：两条**机械导轨**沿"垂直纸面向里"的进深方向（屏幕斜向右上 38°）铺开， 它们不构成回路（没有前边、也没有远端横梁）；AB 横跨在导轨上前后滑动。 引线只从实线棒 AB 的两端引出（与甲/乙 一致），绕开磁体下到电流表——回路里只有 棒 + 引线 + 电流表。 */
+/** 丙图几何：两条**机械导轨**沿"垂直纸面向里"的进深方向（屏幕斜向右上 38°）铺开， 它们不构成回路（没有前边、也没有远端横梁）；AB 横跨在导轨上前后滑动。 引线只从实线棒 AB 的两端引出（与甲/乙 一致），绕开磁体下到灵敏电流计——回路里只有 棒 + 引线 + 灵敏电流计。 */
 interface Pt {
   x: number;
   y: number;
@@ -34,7 +34,7 @@ const CUT_NORM: Pt = { x: -CUT_DIR.y, y: CUT_DIR.x };
 const onRail = (p: Pt, s: number): Pt => ({ x: p.x + CUT_DIR.x * s, y: p.y + CUT_DIR.y * s });
 const shift = (p: Pt, k: number): Pt => ({ x: p.x + CUT_NORM.x * k, y: p.y + CUT_NORM.y * k });
 
-/** 电流表表盘：引线终点 = 表盘圆周上的两个接线柱（x ± r） */
+/** 灵敏电流计表盘：引线终点 = 表盘左右两个接线柱（x ± r） */
 const METER = { x: 232, y: 252, r: 24 };
 /** 两条导轨的近端（两轨相距 120 = AB 长），导轨从这里朝纸面里延伸 */
 const RAIL_A0: Pt = { x: 34, y: 184 };
@@ -75,7 +75,7 @@ const CUT = {
   /** 运动方向：沿导轨指向纸内，画在两棒之间（不压棒） */
   arrowFrom: onRail(RAIL_MID, 28),
   arrowTo: onRail(RAIL_MID, 70),
-  /** 引线：从实线棒 AB 的两端绕开 S 极，弧线接电流表两接线柱 */
+  /** 引线：从实线棒 AB 的两端绕开 S 极，弧线接灵敏电流计两接线柱 */
   leadLeft: `M ${ROD_NEAR_A.x} ${ROD_NEAR_A.y} C 36 174, 16 186, 16 206 V 240 C 16 248, 22 ${METER.y}, 30 ${METER.y} H ${METER.x - METER.r}`,
   leadRight: `M ${ROD_NEAR_B.x} ${ROD_NEAR_B.y} C 176 178, 182 186, 192 194 C 214 208, 240 222, 254 236 C 260 242, 262 248, 262 ${METER.y} L ${METER.x + METER.r} ${METER.y}`,
 };
@@ -179,7 +179,7 @@ const CUT = {
           >
             v
           </text>
-          <!-- 引线：从 AB 两端绕开 S 极、弧线接电流表（回路里没有别的导体） -->
+          <!-- 引线：从 AB 两端绕开 S 极、弧线接灵敏电流计（回路里没有别的导体） -->
           <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
             <path :d="CUT.leadLeft" :transform="`translate(${p.x} 0)`" />
             <path :d="CUT.leadRight" :transform="`translate(${p.x} 0)`" />
@@ -195,8 +195,8 @@ const CUT = {
             <path :d="`M ${p.x + 175} 136 H ${p.x + 278} V 252 H ${p.x + 256}`" />
           </g>
         </template>
-        <!-- 带指针的电流表（导线止于表盘圆周，r=24）-->
-        <PointerAmmeter :x="p.x + METER.x" :y="METER.y" :r="METER.r" :angle="p.motion === 'cut' && step >= 3 ? 36 : 0" />
+        <!-- 灵敏电流计（导线止于表盘左右接线柱，r=24）-->
+        <Galvanometer :x="p.x + METER.x" :y="METER.y" :r="METER.r" :angle="p.motion === 'cut' && step >= 3 ? 36 : 0" />
         <!-- 运动方向：静止 / 沿磁感线（上下）-->
         <text v-if="p.motion === 'still'" :x="p.x + 110" y="176" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">静止</text>
         <template v-if="p.motion === 'alongB'">

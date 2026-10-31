@@ -61,7 +61,7 @@ const rectLabels = computed(() => [
   {
     x: SPAN / 2,
     y: SPEED / 2,
-    parts: [{ text: "面积 = " }, { tex: "v \\cdot t" }],
+    parts: [{ text: "面积 = " }, { tex: String.raw`v \cdot t` }],
     anchor: "center" as const,
     halo: true,
   },

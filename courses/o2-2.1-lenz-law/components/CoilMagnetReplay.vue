@@ -1,12 +1,14 @@
 <!--
-  第 4 页回放：磁体插入 / 抽出线圈，电流表指针跟着偏转。
+  第 4 页回放：磁体插入 / 抽出线圈，灵敏电流计指针跟着偏转。
 
   四种情况各有一个按钮，点一次重放一遍：
   - 指针偏角与磁体速度成正比（∝ |ΔΦ/Δt|），磁体一停，指针立刻回零——这正是要让学生看见的；
-  - 线圈旁的电流箭头只在磁体运动过程中出现，方向为俯视形状下的电流方向
-    （近侧向右 = 俯视逆时针）。
-  - 指针偏向按图上的绕向约定：甲、丁（俯视逆时针）向右偏，乙、丙（俯视顺时针）向左偏。
-
+  - 线圈用共享 Solenoid（竖放、连续螺旋线，从下端看逆时针），电流方向画在前方导线上：
+    甲、丁（俯视逆时针，B_i 向上）→ 前方电流向右；乙、丙（俯视顺时针，B_i 向下）→ 向左。
+  - 接线与指针（灵敏电流计约定：电流从哪一侧接线柱流入，指针就向同一侧偏）：
+    线圈上端（右侧）的引线接表盘右接线柱、下端（左侧）的引线接左接线柱；
+    甲、丁的电流从上端流出 → 从右接线柱流入 → 指针右偏；
+    乙、丙的电流从下端流出 → 从左接线柱流入 → 指针左偏（与第 2 页的实验现象一致）。
   磁体位移与速度都由真实运动学给出：位置走 smoothstep、速度取它对时间的导数，
   所以指针只在中间最快、两端为零。
 -->
@@ -19,17 +21,15 @@ interface CaseDef {
   /** 朝向线圈的磁极 */
   pole: "N" | "S";
   motion: "in" | "out";
-  /** 俯视看电流是否为逆时针 */
+  /** 俯视看电流是否为逆时针（= B_i 向上） */
   ccw: boolean;
-  /** 指针偏向：+1 右、-1 左 */
-  needle: 1 | -1;
 }
 
 const CASES: Record<CaseKey, CaseDef> = {
-  jia: { pole: "N", motion: "in", ccw: true, needle: 1 },
-  yi: { pole: "S", motion: "in", ccw: false, needle: -1 },
-  bing: { pole: "N", motion: "out", ccw: false, needle: -1 },
-  ding: { pole: "S", motion: "out", ccw: true, needle: 1 },
+  jia: { pole: "N", motion: "in", ccw: true },
+  yi: { pole: "S", motion: "in", ccw: false },
+  bing: { pole: "N", motion: "out", ccw: false },
+  ding: { pole: "S", motion: "out", ccw: true },
 };
 
 const CASE_LIST: { key: CaseKey; label: string }[] = [
@@ -39,13 +39,31 @@ const CASE_LIST: { key: CaseKey; label: string }[] = [
   { key: "ding", label: "丁　S 极抽出" },
 ];
 
-/** 磁体长度与行程：顶端从线圈上方 45 到线圈中心 56 */
-const MAGNET_TOP_HIGH = -45;
-const MAGNET_TOP_LOW = 56;
+/** 线圈（竖放，圆心 252,128）：上端接线端偏右、下端偏左 */
+const COIL = { x: 252, y: 128, length: 100, radius: 64 };
+/** 线圈两端 = Solenoid 的接线端：上端 (316,78)、下端 (188,178) */
+const LEAD_TOP = { x: 316, y: 78 };
+const LEAD_BOTTOM = { x: 188, y: 178 };
+/** 灵敏电流计：导线止于左右接线柱 (222,252) / (282,252) */
+const METER = { x: 252, y: 252, r: 30 };
+/** 右侧引线的竖直段 x（绕开线圈右缘） */
+const RIGHT_LEAD_X = 372;
+
+/** 磁体（竖放，宽 32、长 120）：圆心从上方（-3）到线圈中心（128） */
+const MAGNET_WIDTH = 32;
+const MAGNET_LENGTH = 120;
+const MAGNET_CENTER_HIGH = -3;
+const MAGNET_CENTER_LOW = COIL.y;
 const DURATION = 1500;
 
+/** 前方导线上的两段电流箭头（俯视逆时针时从左向右） */
+const FLOW_ARROWS = [
+  { a: { x: 230.1, y: 130.5 }, b: { x: 273.9, y: 128 } },
+  { a: { x: 230.1, y: 174.9 }, b: { x: 273.9, y: 172.4 } },
+];
+
 const active = ref<CaseKey>("jia");
-/** 0 = 起 position，1 = 终点 */
+/** 0 = 起点，1 = 终点 */
 const progress = ref(1);
 /** 归一化速度：smoothstep 的导数 6t(1-t)，峰值 1.5 */
 const speed = ref(0);
@@ -80,99 +98,66 @@ onBeforeUnmount(() => {
 });
 
 const current = computed<CaseDef>(() => CASES[active.value]);
-const upperPole = computed<"N" | "S">(() => (current.value.pole === "N" ? "S" : "N"));
-const poleColor = (p: "N" | "S"): string => (p === "N" ? "var(--c-danger)" : "var(--c-velocity)");
+const nSide = computed<"top" | "bottom">(() => (current.value.pole === "N" ? "bottom" : "top"));
 
-const magnetTop = computed<number>(() => {
-  const from = current.value.motion === "in" ? MAGNET_TOP_HIGH : MAGNET_TOP_LOW;
-  const to = current.value.motion === "in" ? MAGNET_TOP_LOW : MAGNET_TOP_HIGH;
+const magnetCenter = computed<number>(() => {
+  const from = current.value.motion === "in" ? MAGNET_CENTER_HIGH : MAGNET_CENTER_LOW;
+  const to = current.value.motion === "in" ? MAGNET_CENTER_LOW : MAGNET_CENTER_HIGH;
 
   return from + (to - from) * progress.value;
 });
 
-const needleAngle = computed<number>(() => current.value.needle * 26 * Math.min(1, speed.value));
+/** 俯视逆时针时电流从右接线柱流入 → 指针向右偏（正角） */
+const needleAngle = computed<number>(
+  () => (current.value.ccw ? 1 : -1) * 26 * Math.min(1, speed.value),
+);
 
 /** 电流箭头的透明度：与速度同步淡入淡出 */
 const flowOpacity = computed<number>(() => Math.min(1, speed.value * 3));
-
-const RINGS = [
-  { rx: 96, ry: 40 },
-  { rx: 80, ry: 33 },
-  { rx: 64, ry: 26 },
-];
 </script>
 
 <template>
   <div class="rp">
     <svg viewBox="0 0 560 290" xmlns="http://www.w3.org/2000/svg" class="rp-svg">
-      <!-- 条形磁体 -->
-      <g>
-        <rect x="267" :y="magnetTop" width="26" height="58" rx="3" :fill="poleColor(upperPole)" />
-        <rect
-          x="267"
-          :y="magnetTop + 58"
-          width="26"
-          height="58"
-          rx="3"
-          :fill="poleColor(current.pole)"
-        />
-        <text
-          x="280"
-          :y="magnetTop + 20"
-          text-anchor="middle"
-          font-family="KaTeX_Main"
-          font-size="13"
-          fill="var(--c-bg)"
-        >
-          {{ upperPole }}
-        </text>
-        <text
-          x="280"
-          :y="magnetTop + 78"
-          text-anchor="middle"
-          font-family="KaTeX_Main"
-          font-size="13"
-          fill="var(--c-bg)"
-        >
-          {{ current.pole }}
-        </text>
-      </g>
-
-      <!-- 线圈 -->
-      <g fill="none" stroke="var(--c-neutral-300)" stroke-width="2">
-        <ellipse v-for="r in RINGS" :key="r.rx" cx="280" cy="120" :rx="r.rx" :ry="r.ry" />
-      </g>
-
-      <!-- 引线与电流表 -->
-      <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
-        <path d="M 240 156 V 252 H 250" />
-        <path d="M 320 156 V 252 H 310" />
-      </g>
-      <CircuitMeter :x="280" :y="252" kind="a" :r="30" />
-      <line
-        x1="280"
-        y1="252"
-        x2="280"
-        y2="226"
-        stroke="var(--c-danger)"
-        stroke-width="2.4"
-        stroke-linecap="round"
-        :transform="`rotate(${needleAngle} 280 252)`"
+      <!-- 条形磁体（先画，线圈的匝盖在上面） -->
+      <BarMagnet
+        :x="COIL.x"
+        :y="magnetCenter"
+        :length="MAGNET_LENGTH"
+        :width="MAGNET_WIDTH"
+        :n-side="nSide"
       />
-      <circle cx="280" cy="252" r="2.4" fill="var(--c-text)" />
 
-      <!-- 感应电流：只在线圈两侧切向出现，运动结束即消失 -->
+      <!-- 线圈（共享 Solenoid：竖放、连续螺旋线，从下端看逆时针） -->
+      <Solenoid
+        :x="COIL.x"
+        :y="COIL.y"
+        :length="COIL.length"
+        :radius="COIL.radius"
+        :turns="4.5"
+        direction="ccw"
+        orientation="vertical"
+        color="var(--c-neutral-300)"
+        :line-width="2.4"
+        :back-opacity="0.3"
+      />
+
+      <!-- 引线与灵敏电流计 -->
+      <g fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round">
+        <path
+          :d="`M ${LEAD_TOP.x} ${LEAD_TOP.y} H ${RIGHT_LEAD_X} V ${METER.y} H ${METER.x + METER.r}`"
+        />
+        <path :d="`M ${LEAD_BOTTOM.x} ${LEAD_BOTTOM.y} V ${METER.y} H ${METER.x - METER.r}`" />
+      </g>
+      <Galvanometer :x="METER.x" :y="METER.y" :r="METER.r" :angle="needleAngle" />
+
+      <!-- 感应电流：画在前方导线上，只在磁体运动过程中出现 -->
       <g :opacity="flowOpacity">
         <CourseArrow
-          :from="{ x: 172, y: current.ccw ? 100 : 142 }"
-          :to="{ x: 172, y: current.ccw ? 142 : 100 }"
-          stroke="var(--c-physics)"
-          :stroke-width="2.6"
-          :head-size="9"
-        />
-        <CourseArrow
-          :from="{ x: 388, y: current.ccw ? 142 : 100 }"
-          :to="{ x: 388, y: current.ccw ? 100 : 142 }"
+          v-for="(arrow, index) in FLOW_ARROWS"
+          :key="index"
+          :from="current.ccw ? arrow.a : arrow.b"
+          :to="current.ccw ? arrow.b : arrow.a"
           stroke="var(--c-physics)"
           :stroke-width="2.6"
           :head-size="9"

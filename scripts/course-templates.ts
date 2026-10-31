@@ -24,10 +24,6 @@ export interface CourseTemplateContext {
 const TEACHER = "张伯望";
 const SCHOOL = "东北育才学校";
 
-// 标题里可能有引号 / 冒号 / 尖括号，分别按 YAML、HTML 属性、HTML 文本转义，避免生成坏文件
-const escapeAttribute = (value: string): string =>
-  value.replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
-
 // 骨架里不写死任何物理内容：只给结构、注释和待办，避免 AI 顺着占位内容编造。
 export const renderPackageJson = (context: CourseTemplateContext): string =>
   `${JSON.stringify(
@@ -102,16 +98,6 @@ layout: base-flex
   公式写在 Markdown 段落里可用 $...$；HTML 块（card 内的 div）里必须改用 <Latex tex="..." />。
   图标用 <mdi-xxx />，不要用 emoji。
 -->
-`;
-
-export const renderGlobalTop = (context: CourseTemplateContext): string => `<template>
-  <CourseTopBar chapter="${escapeAttribute(context.chapterLabel)}" section="${escapeAttribute(context.chapterName)}" />
-</template>
-`;
-
-export const renderGlobalBottom = (): string => `<template>
-  <CourseBottomBar />
-</template>
 `;
 
 export const renderStyle = (

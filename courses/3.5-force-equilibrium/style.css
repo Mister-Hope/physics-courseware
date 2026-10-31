@@ -87,9 +87,30 @@
   --cols: minmax(0, 15rem) minmax(0, 1fr);
 }
 
-/* ── 第 27 页：上面两幅受力图，下面并排"对 / 错"两段结论 ── */
+/* ── 第 27 页：上图下结论，两栏 2fr / 1fr 与图的两栏严格对齐（gap 必须与组件内 .dc-wrap 一致）── */
 .p27-verdict {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.4rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.p27-item {
+  min-width: 0;
+}
+
+/* 小标题：图标 16px 基准字号即可，别用 .text-xl（会把行高也顶起来） */
+.p27-head {
+  display: flex;
+  gap: 0.28rem;
+  align-items: center;
+
+  margin-bottom: 0.25rem;
+
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* 结论气泡整体压小（图标按 em 走，字号缩小后仍与首行对齐） */
+.p27-hint {
+  font-size: 0.66rem;
 }

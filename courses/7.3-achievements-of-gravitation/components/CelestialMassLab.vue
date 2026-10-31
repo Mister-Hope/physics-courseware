@@ -45,7 +45,7 @@ const PRESETS: Preset[] = [
     r: 1.496e11,
     t: 3.156e7,
     reference: 1.99e30,
-    referenceTex: "1.99\\times10^{30}",
+    referenceTex: String.raw`1.99\times10^{30}`,
   },
   {
     button: "火星绕太阳",
@@ -56,7 +56,7 @@ const PRESETS: Preset[] = [
     r: 2.279e11,
     t: 5.935e7,
     reference: 1.99e30,
-    referenceTex: "1.99\\times10^{30}",
+    referenceTex: String.raw`1.99\times10^{30}`,
   },
   {
     button: "月球绕地球",
@@ -67,7 +67,7 @@ const PRESETS: Preset[] = [
     r: 3.844e8,
     t: 2.361e6,
     reference: 5.98e24,
-    referenceTex: "5.98\\times10^{24}",
+    referenceTex: String.raw`5.98\times10^{24}`,
   },
   {
     button: "木卫绕木星",
@@ -78,7 +78,7 @@ const PRESETS: Preset[] = [
     r: 4.217e8,
     t: 1.529e5,
     reference: 1.9e27,
-    referenceTex: "1.90\\times10^{27}",
+    referenceTex: String.raw`1.90\times10^{27}`,
   },
 ];
 

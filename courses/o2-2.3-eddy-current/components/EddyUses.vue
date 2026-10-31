@@ -1,5 +1,5 @@
 <!--
-  涡流的利用（第 10 页）：左为真空冶炼炉，右为探雷器。
+  涡流的利用（第 9 页）：左为真空冶炼炉，右为探雷器。
   两处都是"让涡流在需要的地方发热 / 让涡流的磁场反过来影响线圈中的电流"。
 -->
 <template>
@@ -31,17 +31,22 @@
       height="180"
       rx="8"
       fill="url(#eu-pot)"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="2"
     />
     <rect x="74" y="146" width="132" height="78" fill="url(#eu-melt)" />
     <path d="M 74 146 q 33 -7 66 0 q 33 7 66 0" fill="none" stroke="#fdba74" stroke-width="2" />
-    <g fill="none" stroke="var(--c-accent)" stroke-width="3" stroke-linecap="round">
-      <path d="M 66 92 q 74 -13 148 0" />
-      <path d="M 66 124 q 74 -13 148 0" />
-      <path d="M 66 156 q 74 -13 148 0" />
-      <path d="M 66 188 q 74 -13 148 0" />
-    </g>
+    <!-- 炉外的线圈：连续螺旋线绕在炉体上（共享 Solenoid，竖向；半径 = 炉体半宽） -->
+    <Solenoid
+      :x="140"
+      :y="142"
+      :length="112"
+      :radius="74"
+      :turns="4"
+      orientation="vertical"
+      :line-width="2.6"
+      :back-opacity="0.28"
+    />
     <g fill="none" stroke="#fde68a" stroke-width="2.2" stroke-dasharray="7 6" class="eu-flow">
       <ellipse cx="140" cy="186" rx="42" ry="13" />
       <ellipse cx="140" cy="186" rx="20" ry="6" />
@@ -53,9 +58,9 @@
       金属中产生涡流，熔化
     </text>
     <text x="574" y="34" text-anchor="middle" font-size="16" fill="var(--c-text-dim)">探雷器</text>
-    <line x1="400" y1="228" x2="740" y2="228" stroke="#64748b" stroke-width="2" />
-    <line x1="470" y1="64" x2="560" y2="150" stroke="#94a3b8" stroke-width="2" />
-    <circle cx="470" cy="60" r="8" fill="#64748b" />
+    <line x1="400" y1="228" x2="740" y2="228" stroke="var(--c-neutral-500)" stroke-width="2" />
+    <line x1="470" y1="64" x2="560" y2="150" stroke="var(--c-text-dim)" stroke-width="2" />
+    <circle cx="470" cy="60" r="8" fill="var(--c-neutral-500)" />
     <ellipse
       cx="574"
       cy="158"
@@ -72,7 +77,7 @@
       height="20"
       rx="3"
       fill="rgb(148 163 184 / 45%)"
-      stroke="#94a3b8"
+      stroke="var(--c-text-dim)"
       stroke-width="1.4"
     />
     <g fill="none" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 5" class="eu-flow">

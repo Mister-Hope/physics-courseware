@@ -132,7 +132,14 @@ const arcPath = ({ cx, cy, r, phi0, phi1, n = 64 }: ArcOptions): string => {
   return points.join(" ");
 };
 
-interface TangentOptions extends ArcOptions {
+interface TangentOptions {
+  /** 圆心（数学坐标，单位 L₀） */
+  cx: number;
+  cy: number;
+  /** 半径（单位 L₀） */
+  r: number;
+  /** 切点极角（数学坐标，单位 rad） */
+  phi: number;
   /** 箭头半长（px） */
   half?: number;
   /** 整体沿外法向外移（px）：0 = 压在轨迹上，>0 = 浮在轨迹外侧 */

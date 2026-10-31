@@ -3,3 +3,17 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 第 7 页（例题：静电力与到达另一板的速度）：题干 4 行 + 解析两条长公式，
+   按默认块间距排下来解析栏比栏高多出约 130px（CI 字体行高更高时更多）。
+   `--page-gap` 同时被布局的 .ex-stem / .ex-analysis 继承 ⇒ 只收这一页的块间距；
+   该页 frontmatter 写 `class: tight-gap`（Slidev 把非保留键当 class 挂到 .slidev-layout 上）。
+   收完间距后解析栏那两条式子（\dfrac 链）仍比栏高多 7px，字号再收半档后留出约 37px 余量。
+   不用 `.mini-note`：那是 0.85rem 的小字注释档，解析正文不能降到小字。 */
+.slidev-layout.exercise-split.tight-gap {
+  --page-gap: 0.4rem;
+}
+
+.slidev-layout.exercise-split.tight-gap .ex-analysis {
+  font-size: 0.95rem;
+}

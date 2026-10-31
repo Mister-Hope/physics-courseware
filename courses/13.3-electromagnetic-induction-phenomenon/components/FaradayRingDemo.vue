@@ -1,8 +1,8 @@
 <!--
   P4 交互：1831 年法拉第的铁环实验（图 13.3-1）。
-  线圈 A（左，接电源 + 开关）· 线圈 B（右，接电流表）绕在同一个铁环上。
+  线圈 A（左，接电源 + 开关）· 线圈 B（右，接灵敏电流计）绕在同一个铁环上。
   点「接通电源 / 断开电源」：A 中电流从无到有（或从有到无）→ 铁环中磁场变化 → 穿过 B 的磁通量变化
-  ⇒ 只在通断瞬间电流表指针偏转，稳定后回零。
+  ⇒ 只在通断瞬间灵敏电流计指针偏转，稳定后回零。
   组件只显示「线圈 A 的电流状态 + 指针现象」，不显示「B 中有没有电流」的文字结论（结论由页面点击给出）。
   屏幕不出现任何公式（感应电动势属选必二）；指针偏角只用真实模型 ∝ |ΔΦ/Δt| ∝ |ΔI_A/Δt| 驱动。
 -->
@@ -25,19 +25,13 @@ const pt = (r: number, deg: number): { x: number; y: number } => {
   };
 };
 
-/** 线圈 A（左侧 4 匝）与线圈 B（右侧 4 匝）：每匝画成穿过环带的径向线段 */
-const SEG_A = [150, 170, 190, 210].map((d) => ({ a: pt(RI, d), b: pt(RO, d) }));
-const SEG_B = [-30, -10, 10, 30].map((d) => ({ a: pt(RI, d), b: pt(RO, d) }));
-const OUTER_A = [150, 170, 190, 210].map((d) => pt(RO, d));
-const OUTER_B = [-30, -10, 10, 30].map((d) => pt(RO, d));
+/** 铁环带宽的一半（管截面半径）：环带画在 RING_R ∓ TUBE_R，绕组也绕在这个管面上 */
+const TUBE_R = 13;
 
 const line = (p: { x: number; y: number }, q: { x: number; y: number }): string =>
   `M ${p.x} ${p.y} L ${q.x} ${q.y}`;
-const poly = (ps: { x: number; y: number }[]): string =>
-  ps.map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`).join(" ");
 
 const leadTopA = pt(RO, 210);
-const leadBottomA = pt(RO, 150);
 const leadTopB = pt(RO, -30);
 const leadBottomB = pt(RO, 30);
 
@@ -137,13 +131,30 @@ const statusText = computed(() => (hasCurrent.value ? "线圈 A 有电流" : "�
       <text :x="C.x" :y="C.y + 6" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
         铁环
       </text>
-      <!-- 两个线圈的绕组 -->
-      <g stroke="var(--c-accent)" stroke-width="3.4" stroke-linecap="round">
-        <path v-for="(s, i) in SEG_A" :key="'sa' + i" :d="line(s.a, s.b)" />
-        <path :d="poly(OUTER_A)" fill="none" />
-        <path v-for="(s, i) in SEG_B" :key="'sb' + i" :d="line(s.a, s.b)" />
-        <path :d="poly(OUTER_B)" fill="none" />
-      </g>
+      <!-- 两个线圈的绕组：连续绕在铁环上（共享课内组件 RingCoil）——
+           A 绕环的左侧（150°…210°）、B 绕右侧（−30°…30°），正面实线、绕到环后面的部分虚淡 -->
+      <RingCoil
+        :x="C.x"
+        :y="C.y"
+        :ring-radius="RING_R"
+        :tube-radius="TUBE_R"
+        :wrap-center="180"
+        :wrap-span="60"
+        :turns="4"
+        direction="cw"
+        :line-width="3.4"
+      />
+      <RingCoil
+        :x="C.x"
+        :y="C.y"
+        :ring-radius="RING_R"
+        :tube-radius="TUBE_R"
+        :wrap-center="0"
+        :wrap-span="60"
+        :turns="4"
+        direction="ccw"
+        :line-width="3.4"
+      />
       <!-- 线圈 A 的电路：引线 → 开关 → 电源 → 回到线圈 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
         <path :d="line(leadTopA, { x: 170, y: leadTopA.y })" />
@@ -152,13 +163,13 @@ const statusText = computed(() => (hasCurrent.value ? "线圈 A 有电流" : "�
       </g>
       <CircuitBattery :x="110" :y="150" orientation="vertical" polarity emf="E" />
       <CircuitSwitch :x="150" :y="112" label="S" :open="!powered" />
-      <!-- 线圈 B 的电路：引线 → 电流表 -->
+      <!-- 线圈 B 的电路：引线 → 灵敏电流计（导线止于表盘左右接线柱 408 / 452） -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
-        <path :d="line(leadTopB, { x: 430, y: leadTopB.y })" />
-        <path d="M 430 112 V 128" />
-        <path d="M 430 172 V 188 H 356" />
+        <path :d="line(leadTopB, { x: 390, y: leadTopB.y })" />
+        <path d="M 390 112 V 150 H 408" />
+        <path :d="`M 452 150 H 470 V ${leadBottomB.y} H ${leadBottomB.x}`" />
       </g>
-      <PointerAmmeter :x="430" :y="150" :r="22" :angle="angle" />
+      <Galvanometer :x="430" :y="150" :r="22" :angle="angle" />
       <!-- 元件标签 -->
       <text x="150" y="232" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
         线圈 A
@@ -166,8 +177,8 @@ const statusText = computed(() => (hasCurrent.value ? "线圈 A 有电流" : "�
       <text x="356" y="232" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
         线圈 B
       </text>
-      <text x="430" y="232" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
-        电流表
+      <text x="430" y="252" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        灵敏电流计
       </text>
     </svg>
     <div class="ei-bar">

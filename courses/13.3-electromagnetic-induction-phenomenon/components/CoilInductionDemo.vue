@@ -1,8 +1,8 @@
 <!--
   P9 交互：探究感应电流产生的条件（图 13.3-3）。
-  线圈 A 套在线圈 B 里：A 接电源 + 开关 + 滑动变阻器，B 两端接电流表（沿轴向看，A 在内、B 在外）。
+  线圈 A 套在线圈 B 里：A 接电源 + 开关 + 滑动变阻器，B 两端接灵敏电流计（沿轴向看，A 在内、B 在外）。
   操作：闭合开关 / 断开开关 / 迅速移动滑片 → A 中电流变化 → 磁场强弱变化 → 穿过 B 的磁通量变化
-  ⇒ 电流表指针只在变化过程中偏转，稳定后回零。
+  ⇒ 灵敏电流计指针只在变化过程中偏转，稳定后回零。
   组件只给「线圈 A 的电流状态 + 指针现象」，不显示「B 中有没有感应电流」的文字结论（由页面表格逐击给出）。
   内部按闭合电路欧姆定律 I = E/(R+r) 计算电流，指针偏角 ∝ |dI/dt|；屏幕不出现公式与数值。
 -->
@@ -95,6 +95,13 @@ const setClosed = (on: boolean): void => {
   ensureLoop();
 };
 
+/** 滑动变阻器（限流接法：线圈一端 + 滑片）：滑片接线端随 pos 移动，引线从这里接回线圈 A */
+const RHEO = { x: 140, y: 250, length: 48, stub: 16 };
+const sliderTerminal = computed(() => ({
+  x: RHEO.x - RHEO.length / 2 + pos.value * RHEO.length,
+  y: RHEO.y - RHEO.length / 6 / 2 - RHEO.stub,
+}));
+
 const moveSlider = (): void => {
   if (!closed.value || sliding.value) return;
   slideStartPos = pos.value;
@@ -119,35 +126,54 @@ const status = computed(() => {
 <template>
   <div class="ei-panel">
     <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" class="ei-svg">
-      <!-- 线圈 B（外，沿轴向看：3 匝同心椭圆）-->
-      <g fill="none" stroke="var(--c-neutral-300)" stroke-width="2.2" opacity="0.9">
-        <ellipse cx="240" cy="110" rx="82" ry="54" />
-        <ellipse cx="240" cy="110" rx="68" ry="45" />
-        <ellipse cx="240" cy="110" rx="54" ry="36" />
-      </g>
-      <!-- 线圈 A（内，2 匝）-->
-      <g fill="none" stroke="var(--c-accent-2)" stroke-width="2.8">
-        <ellipse cx="240" cy="110" rx="40" ry="27" />
-        <ellipse cx="240" cy="110" rx="28" ry="19" />
-      </g>
+      <!-- 线圈 A（内，蓝）：半径小的一圈立体螺旋线，与 B 共轴嵌套（先画内圈，外圈盖在上面更像"套在里面"）。
+           phase 0 ⇒ 左端在上 (227,77)、右端在下 (343,133) -->
+      <Solenoid
+        :x="285"
+        :y="105"
+        :length="116"
+        :radius="28"
+        :turns="3.5"
+        direction="ccw"
+        :phase="0"
+        color="var(--c-accent-2)"
+        :line-width="3.1"
+        :back-opacity="0.42"
+      />
+      <!-- 线圈 B（外，中性灰）：半径大的一圈立体螺旋线，把 A 套在里面。
+           phase 0 ⇒ 左端在上 (209,51)、右端在下 (361,159) -->
+      <Solenoid
+        :x="285"
+        :y="105"
+        :length="152"
+        :radius="54"
+        :turns="4.5"
+        direction="ccw"
+        :phase="0"
+        color="var(--c-neutral-300)"
+        :line-width="2"
+        :back-opacity="0.18"
+      />
       <!-- 线圈 A 的引线与电路：电源、开关、滑动变阻器 -->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
-        <path d="M 207 95 H 120 V 40 H 40 V 82" />
+        <path d="M 227 77 H 170 V 40 H 40 V 82" />
         <path d="M 40 98 V 150" />
         <path d="M 40 190 V 250 H 116" />
-        <path d="M 164 250 H 200 V 125 H 207" />
+        <path
+          :d="`M 343 133 H 351 Q 355 133 355 137 V 210 H ${sliderTerminal.x} V ${sliderTerminal.y}`"
+        />
       </g>
       <CircuitBattery :x="40" :y="90" orientation="vertical" polarity emf="E" />
       <CircuitSwitch :x="40" :y="170" orientation="vertical" label="S" :open="!closed" />
       <CircuitRheostat :x="140" :y="250" :slider="pos" />
-      <!-- 线圈 B 的引线与电流表 -->
+      <!-- 线圈 B 的引线与灵敏电流计（导线止于表盘左右接线柱 408 / 452）-->
       <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
-        <path d="M 316 88 H 430" />
-        <path d="M 316 132 H 430" />
+        <path d="M 361 159 H 385 V 110 H 408" />
+        <path d="M 209 51 H 190 V 35 H 470 V 110 H 452" />
       </g>
-      <PointerAmmeter :x="430" :y="110" :r="22" :angle="angle" />
-      <text x="430" y="166" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
-        电流表
+      <Galvanometer :x="430" :y="110" :r="22" :angle="angle" />
+      <text x="430" y="178" text-anchor="middle" font-size="17" fill="var(--c-text-dim)">
+        灵敏电流计
       </text>
       <!-- 图例 -->
       <g stroke-width="2.6">

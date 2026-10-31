@@ -6,8 +6,8 @@
 - `CourseBottomBar` 组件 — 底栏装饰线（无页码）
 - `Latex` 组件 — 在 Vue 组件内渲染 KaTeX 公式（`<Latex tex="x_1" />`，`display` prop 切块级）
 - `CourseSlider` 组件 — **全库统一的滑块**（原生 `input[type=range]` + `accent-color`，标签 + 滑块 + 读数一行；各课不要再自己写 `::-webkit-slider-thumb` 那套）
-- 学科图形组件（同样自动注册、课件里不用 import）：`SpringScale` 弹簧测力计、`CourseArrow` 矢量箭头、`SurfaceHatch` 接触面、`Ruler` 刻度尺、`CoordAxes` / `NumberAxis` / `SimpleAxis` 坐标轴、`ChartLabel` 图注
-  - **13 个全局组件的用途与 props 全表**：[`.agents/notes/shared-components.md`](../../.agents/notes/shared-components.md)
+- 学科图形组件（同样自动注册、课件里不用 import）：`SpringScale` 弹簧测力计、`CourseArrow` 矢量箭头、`SurfaceHatch` 接触面、`Ruler` 刻度尺、`CoordAxes` / `NumberAxis` / `SimpleAxis` 坐标轴、`ChartLabel` 图注、`BarMagnet` 条形磁体、`Solenoid` 螺线管、`Galvanometer` 灵敏电流计
+  - **29 个全局组件的用途与 props 全表**：[`.agents/notes/shared-components.md`](../../.agents/notes/shared-components.md)
   - 三个大组件各有专篇：[坐标轴](../../.agents/notes/coordinate-axes.md)、[弹簧测力计](../../.agents/notes/spring-scale.md)、[手部 `GripHand`](../../.agents/notes/grip-hand.md)
 - `base-flex` 布局（`layouts/base-flex.vue`）— 通用页面外壳：flex 列 + 收紧内边距；撑满整页的正文（`.page-grow`）依赖它
 - `course-cover` 布局（`layouts/course-cover.vue`）— 封面专用：`chapter-no` / `chapter` / `lesson` / `subtitle` / `classroom` / `teacher`（默认张伯望），课题名取本页 `title`，装饰 SVG 走默认插槽；底部固定一行 14px 的「原创：东北育才学校 张伯望」（各课件不要再手写封面 HTML）。**「授课教师」行可用 URL 覆盖**：`?teacher=<姓名>`（主页「我要上课」生成；Slidev 翻页原样保留 query，整节课有效）
@@ -32,30 +32,23 @@ addons:
 
 > ⚠️ addon 相对路径的基准是 `courses/`（课件目录的**父目录**，Slidev 的 userRoot 解析行为），所以从 `courses/<slug>/` 引用要写 `../workspace/shared`，而不是 `../../workspace/shared`。
 
-然后课件的 `global-top.vue` 只需：
+顶底栏由 addon 根目录的 `global-top.vue` / `global-bottom.vue` **自动全局挂载**，单课目录下无需再建同名文件；`CourseTopBar` 会自动读 `slides.md` headmatter 的 `chapter` / `title`：
 
 ```vue
+<!-- 仅某门课确需特殊定制时才在 courses/<slug>/ 下放一个同名文件 -->
 <template>
   <CourseTopBar chapter="第十章 静电场" section="电容器的电容" />
 </template>
 ```
 
-课件的 `global-bottom.vue` 只需：
-
-```vue
-<template>
-  <CourseBottomBar />
-</template>
-```
-
-`CourseTopBar` 接收两个必填 props：
+`CourseTopBar` 的 `chapter` / `section` 都可省略（缺省读 headmatter）：
 
 | prop      | 说明                        | 示例          |
 | --------- | --------------------------- | ------------- |
 | `chapter` | 封面（第 1 页）显示的章节名 | 第十章 静电场 |
 | `section` | 内页显示的课题名            | 电容器的电容  |
 
-可选 prop：`logoAlt`（默认 `东北育才学校`）。
+可选 prop：`logoAlt`（默认 `东北育才学校`）。`CourseBottomBar` 无 props。
 
 ### URL 授课参数（主页「我要上课」生成，见 `utils/lesson-params.ts`）
 

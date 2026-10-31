@@ -1,5 +1,5 @@
 <!--
-  电磁驱动（第 18、19 页）：蹄形磁体绕竖直支点转动，两磁极间的铝框跟着转。
+  电磁驱动（第 17、18 页）：蹄形磁体绕竖直支点转动，两磁极间的铝框跟着转。
   俯视图。step 每加一，磁体转过 90°，铝框只转过约 70°——铝框总是落后于磁场，
   正因为它与磁场之间有相对运动，才会有感应电流、才会受到推动它的安培力。
 -->
@@ -30,37 +30,20 @@ const frameAngle = computed(() => magnetAngle.value * 0.62);
       <path
         d="M 84 150 L 84 100 L 536 100 L 536 150"
         fill="none"
-        stroke="#94a3b8"
+        stroke="var(--c-text-dim)"
         stroke-width="26"
         stroke-linejoin="round"
       />
-      <rect
-        x="60"
-        y="150"
-        width="48"
-        height="84"
-        rx="4"
-        fill="#f87171"
-        stroke="#fca5a5"
-        stroke-width="1.4"
-      />
-      <rect
-        x="512"
-        y="150"
-        width="48"
-        height="84"
-        rx="4"
-        fill="#60a5fa"
-        stroke="#93c5fd"
-        stroke-width="1.4"
-      />
+      <!-- 两个极靴：配色与字母同共享 BarMagnet（N 红 / S 蓝、KaTeX_Main 正体、深底色字母） -->
+      <rect x="60" y="150" width="48" height="84" rx="3" fill="var(--c-danger)" />
+      <rect x="512" y="150" width="48" height="84" rx="3" fill="var(--c-velocity)" />
       <text
         x="84"
         y="202"
         text-anchor="middle"
-        font-size="24"
-        font-family="KaTeX_Main, serif"
-        fill="#0f172a"
+        font-size="28"
+        font-family="KaTeX_Main"
+        fill="var(--c-bg-soft)"
       >
         N
       </text>
@@ -68,22 +51,28 @@ const frameAngle = computed(() => magnetAngle.value * 0.62);
         x="536"
         y="202"
         text-anchor="middle"
-        font-size="24"
-        font-family="KaTeX_Main, serif"
-        fill="#0f172a"
+        font-size="28"
+        font-family="KaTeX_Main"
+        fill="var(--c-bg-soft)"
       >
         S
       </text>
+      <!-- 磁极间的磁场：从 N 指向 S -->
       <line
         x1="108"
         y1="192"
-        x2="512"
+        x2="468"
         y2="192"
         stroke="var(--c-accent)"
         stroke-width="1.8"
         stroke-dasharray="7 6"
       />
-      <path d="M 502 192 l -14 -6 l 0 12 z" fill="var(--c-accent)" />
+      <CourseArrow
+        :from="{ x: 466, y: 192 }"
+        :to="{ x: 506, y: 192 }"
+        stroke="var(--c-accent)"
+        stroke-width="2.4"
+      />
     </g>
     <g :transform="`rotate(${frameAngle} 310 190)`" class="fd-frame">
       <rect
@@ -93,11 +82,11 @@ const frameAngle = computed(() => magnetAngle.value * 0.62);
         height="100"
         rx="3"
         fill="none"
-        stroke="#cbd5e1"
+        stroke="var(--c-neutral-300)"
         stroke-width="4"
       />
     </g>
-    <circle cx="310" cy="190" r="4" fill="#64748b" />
+    <circle cx="310" cy="190" r="4" fill="var(--c-neutral-500)" />
   </svg>
 </template>
 
