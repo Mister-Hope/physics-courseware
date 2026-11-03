@@ -2,15 +2,19 @@
 import { computed } from "vue";
 
 /**
- * 人站在体重计上的受力/运动示意（§4.6 全课通用）
+ * 人站在体重计上的受力 / 运动示意（全库通用组件）
  *
  * - 受力（重力 mg 向下、支持力 F_N 向上）**都从人的几何中心 (160, 248) 出发**，长度随 fnRatio 变化；
  * - 速度 v / 加速度 a 用略小一号的箭头画在人**旁侧**（左侧），避免与力箭头叠在一起；
  * - `enclosure="elevator"` 时加画具象化电梯轿厢、顶部减振索头与三根钢丝曳引缆绳；
- * - `reading` 有值时在秤的显示屏上写出示数（视重），踏板随视重产生微米级真实下压/回弹反馈。
+ * - `reading` 有值时在秤的显示屏上写出示数；不传时显示表盘，指针随 `needleRatio` 左右偏转；
+ * - 踏板随视重比 fnRatio 产生细微压陷 / 回弹。
+ *
+ * 头部与头发的配色刻意与深色背景、轿厢拉开明度差，缩小尺寸（如动画里的小人）时仍能看清。
  */
 const {
   fnRatio = 1,
+  needleRatio = 1,
   forceLen = 85,
   accelDir = "none",
   speedDir = "none",
@@ -19,8 +23,10 @@ const {
   enclosure = "none",
   reading = null,
 } = defineProps<{
-  /** 视重 / 重力：决定支持力箭头长度（1 = 等重，<1 失重，>1 超重） */
+  /** 视重 / 重力：决定支持力箭头长度与踏板压陷（1 = 等重，<1 失重，>1 超重） */
   fnRatio?: number;
+  /** 表盘指针偏转比（视重 / 重力）：1 = 指中间，>1 偏右，<1 偏左 */
+  needleRatio?: number;
   /** 重力箭头长度基准（viewBox 用户单位） */
   forceLen?: number;
   /** 加速度方向；none 表示 a = 0 */
@@ -33,14 +39,19 @@ const {
   showMotion?: boolean;
   /** 画不画电梯轿厢 */
   enclosure?: "none" | "elevator";
-  /** 秤的示数（N）；不传则不显示 */
+  /** 秤的示数（N）；不传则显示表盘 */
   reading?: number | null;
 }>();
+
+/** 表盘刻度偏转角（度） */
+const DIAL_TICKS = [-34, 0, 34];
+/** 指针偏转角：视重比 1 → 竖直向上；±0.2 → ±24° */
+const needleAngle = computed(() => Math.max(-42, Math.min(42, (needleRatio - 1) * 120)));
 
 /** 人的几何中心（重心）：重力与支持力都从这里起笔 */
 const CO = { x: 160, y: 248 };
 
-const viewBox = computed(() => (enclosure === "elevator" ? "0 0 320 400" : "60 118 200 282"));
+const viewBox = computed(() => (enclosure === "elevator" ? "0 0 320 400" : "60 145 200 240"));
 
 const mgEnd = computed(() => ({ x: CO.x, y: CO.y + forceLen }));
 const fnEnd = computed(() => ({ x: CO.x, y: CO.y - forceLen * fnRatio }));
@@ -192,14 +203,36 @@ const accelArrow = computed(() => motion(accelDir, 74));
         :stroke="reading !== null ? screenAccent : 'rgba(148,163,184,0.45)'"
         stroke-width="1.3"
       />
-      <!-- 示数文字（有 reading 时显示视重数值，无 reading 时显示刻度表盘示意） -->
+      <!-- 示数文字（有 reading 时显示视重数值，无 reading 时显示刻度表盘 + 会摆动的指针） -->
       <text v-if="reading !== null" x="160" y="361" text-anchor="middle" font-family="KaTeX_Main" font-size="14.5" font-weight="600" :fill="screenAccent">
         {{ reading }} N
       </text>
-      <g v-else stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-linecap="round">
-        <path d="M 138 362 A 22 22 0 0 1 182 362" fill="none" />
-        <line x1="160" y1="362" x2="160" y2="349" stroke="var(--c-accent)" stroke-width="1.5" />
-        <circle cx="160" cy="362" r="2" fill="var(--c-accent)" />
+      <g v-else>
+        <path d="M 138 362 A 22 22 0 0 1 182 362" fill="none" stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-linecap="round" />
+        <line
+          v-for="tick in DIAL_TICKS"
+          :key="tick"
+          :transform="`rotate(${tick} 160 362)`"
+          x1="160"
+          y1="342"
+          x2="160"
+          y2="345.5"
+          stroke="var(--c-neutral-500)"
+          stroke-width="1"
+          stroke-linecap="round"
+        />
+        <line
+          class="pw-needle"
+          :transform="`rotate(${needleAngle} 160 362)`"
+          x1="160"
+          y1="362"
+          x2="160"
+          y2="343"
+          stroke="var(--c-accent)"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+        <circle cx="160" cy="362" r="2.2" fill="var(--c-accent)" />
       </g>
     </g>
 
@@ -249,10 +282,13 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <!-- 脖颈与头部 -->
       <rect x="155" y="185" width="10" height="10" rx="3" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1.3" />
       <circle cx="160" cy="171" r="15.5" fill="var(--c-neutral-700)" stroke="var(--c-text-dim)" stroke-width="1.6" />
-      <!-- 利落短发轮廓 -->
+      <!-- 利落短发轮廓：比背景 / 轿厢亮一档并加描边，小人缩到几十像素时也不糊进背景 -->
       <path
         d="M 145 168 C 145 156 153 153 161 153 C 170 153 176 158 175.5 168 C 171 163 164 162 156 163 C 150 163.5 147 166 145 168 Z"
-        fill="var(--c-surface-solid)"
+        fill="var(--c-neutral-500)"
+        stroke="color-mix(in srgb, var(--c-neutral-200) 72%, transparent)"
+        stroke-width="1.3"
+        stroke-linejoin="round"
       />
     </g>
 
@@ -297,11 +333,29 @@ const accelArrow = computed(() => motion(accelDir, 74));
         mg
       </text>
 
-      <!-- 支持力 F_N（竖直向上，长度随视重比 fnRatio 动态伸缩） -->
-      <CourseArrow :from="CO" :to="fnEnd" stroke="var(--c-accent)" :stroke-width="3.5" />
+      <!-- 支持力 F_N（竖直向上，长度随视重比 fnRatio 动态伸缩）；完全失重 F_N = 0 时不画箭头，只标出零值 -->
+      <template v-if="fnRatio > 0.002">
+        <CourseArrow :from="CO" :to="fnEnd" stroke="var(--c-accent)" :stroke-width="3.5" />
+        <text
+          :x="CO.x + 14"
+          :y="fnEnd.y + 10"
+          text-anchor="start"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="16"
+          fill="var(--c-accent)"
+          stroke="var(--c-bg-soft)"
+          stroke-width="3.2"
+          paint-order="stroke"
+        >
+          <tspan>F</tspan>
+          <tspan dy="4" font-size="11" font-family="KaTeX_Main" font-style="normal">N</tspan>
+        </text>
+      </template>
       <text
+        v-else
         :x="CO.x + 14"
-        :y="fnEnd.y + 10"
+        :y="CO.y - 20"
         text-anchor="start"
         font-family="KaTeX_Math"
         font-style="italic"
@@ -313,6 +367,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
       >
         <tspan>F</tspan>
         <tspan dy="4" font-size="11" font-family="KaTeX_Main" font-style="normal">N</tspan>
+        <tspan dx="3">= 0</tspan>
       </text>
 
       <!-- 重心共点圆心标记（压在两力箭头根部之上） -->

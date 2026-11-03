@@ -3,15 +3,16 @@ import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
 
 /**
- * 力传感器记录的示数 F 随时间 t 的变化（§4.6 第 3、13 页）
+ * 力传感器记录的示数 F 随时间 t 的变化（§4.6 第 3 页）
  *
  * - `mode="squat"`：下蹲——先加速下降（视重变小）→ 后减速下降（视重变大）→ 静止；
  * - `mode="rise"`：由蹲姿站起——先加速上升（视重变大）→ 后减速上升（视重变小）→ 静止；
- * - 跟随翻页分步：1 出曲线 → 2 出分段、mg 参考线与着色波瓣 → 3 出极值点与"失重 / 超重"判读。
+ * - `mode="both"`：先下蹲、再站起，一条曲线看完四个阶段（0~4.8 s）。
+ * - 跟随翻页分步：1 出曲线 → 2 出分段、mg 参考线与着色波瓣 → 3 出极值点与“视重 < mg / > mg”判读。
  *
  * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；分段线、面积着色、文字判读放在 `#overlay` 插槽里。
  */
-const { mode = "squat" } = defineProps<{ mode?: "squat" | "rise" }>();
+const { mode = "squat" } = defineProps<{ mode?: "squat" | "rise" | "both" }>();
 
 const { $clicks } = useSlideContext();
 
@@ -19,19 +20,30 @@ const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
 
 /** M = 60 kg、g = 10 m/s² 时的重力，作为参考线 */
 const MG = 600;
+/** 曲线起伏幅值（N）：波峰 720 N、波谷 480 N */
+const AMP = 120;
 
-const X_MAX = 3.4;
+const X_MAX = computed(() => (mode === "both" ? 4.8 : 3.4));
 const VIEW_W = 660;
 const VIEW_H = 400;
 
 /**
- * 下蹲：先失重（曲线下凹）再超重（曲线上凸）；站起相反
+ * 示数随时间的变化：静止 → 加速（视重变小）→ 减速（视重变大）→ ……
  *
  * @param t 时刻（s）
  * @returns 该时刻力传感器的示数（N）
  */
 const curveAt = (t: number): number => {
-  const first = mode === "squat" ? -120 : 120;
+  if (mode === "both") {
+    if (t < 0.4 || (t >= 2 && t < 2.6) || t >= 4.2) return MG;
+    if (t < 1.2) return MG - AMP * Math.sin((Math.PI * (t - 0.4)) / 0.8);
+    if (t < 2) return MG + AMP * Math.sin((Math.PI * (t - 1.2)) / 0.8);
+    if (t < 3.4) return MG + AMP * Math.sin((Math.PI * (t - 2.6)) / 0.8);
+
+    return MG - AMP * Math.sin((Math.PI * (t - 3.4)) / 0.8);
+  }
+
+  const first = mode === "squat" ? -AMP : AMP;
   const second = -first;
 
   if (t < 0.4 || t >= 2) return MG;
@@ -71,13 +83,13 @@ const curves = computed(() => {
   const list = [];
 
   if (step.value >= 1)
-    list.push({ formula: curveAt, samples: 160, stroke: "var(--c-accent-2)", width: 3.5 });
+    list.push({ formula: curveAt, samples: 200, stroke: "var(--c-accent-2)", width: 3.5 });
 
   if (step.value >= 2) {
     list.push({
       points: [
         { x: 0, y: MG },
-        { x: X_MAX, y: MG },
+        { x: X_MAX.value, y: MG },
       ],
       stroke: "#f87171",
       width: 2,
@@ -94,14 +106,66 @@ interface Phase {
   readonly label: string;
   /** 极值点对应的力传感器读数（N） */
   readonly peakY?: number;
-  /** 判读标注画在曲线极值的外侧：below 指画在下凹处下方 */
+  /** 判读标注：写“加速度方向 · 超重/失重” */
   readonly tag?: string;
+  /** 判读标注画在曲线极值的外侧：below 指画在下凹处下方 */
   readonly tagSide?: "below" | "above";
   readonly tagColor?: string;
   readonly fillColor?: string;
 }
 
+/** 分段时刻（虚线分隔各运动阶段） */
+const separators = computed(() => (mode === "both" ? [0.4, 1.2, 2, 2.6, 3.4, 4.2] : [0.4, 1.2, 2]));
+
 const phases = computed<readonly Phase[]>(() => {
+  if (mode === "both") {
+    return [
+      { mid: 0.2, tRange: [0, 0.4], label: "静止" },
+      {
+        mid: 0.8,
+        tRange: [0.4, 1.2],
+        label: "加速下降",
+        peakY: MG - AMP,
+        tag: "失重",
+        tagSide: "below",
+        tagColor: "#60a5fa",
+        fillColor: "rgba(96, 165, 250, 0.16)",
+      },
+      {
+        mid: 1.6,
+        tRange: [1.2, 2],
+        label: "减速下降",
+        peakY: MG + AMP,
+        tag: "超重",
+        tagSide: "above",
+        tagColor: "#f87171",
+        fillColor: "rgba(248, 113, 113, 0.16)",
+      },
+      { mid: 2.3, tRange: [2, 2.6], label: "静止" },
+      {
+        mid: 3,
+        tRange: [2.6, 3.4],
+        label: "加速上升",
+        peakY: MG + AMP,
+        tag: "超重",
+        tagSide: "above",
+        tagColor: "#f87171",
+        fillColor: "rgba(248, 113, 113, 0.16)",
+      },
+      {
+        mid: 3.8,
+        tRange: [3.4, 4.2],
+        label: "减速上升",
+        peakY: MG - AMP,
+        tag: "失重",
+        tagSide: "below",
+        tagColor: "#60a5fa",
+        fillColor: "rgba(96, 165, 250, 0.16)",
+      },
+      { mid: 4.5, tRange: [4.2, X_MAX.value], label: "静止" },
+    ];
+  }
+
   const first = mode === "squat" ? "加速下降" : "加速上升";
 
   return mode === "squat"
@@ -127,7 +191,7 @@ const phases = computed<readonly Phase[]>(() => {
           tagColor: "#f87171",
           fillColor: "rgba(248, 113, 113, 0.16)",
         },
-        { mid: 2.7, tRange: [2, X_MAX], label: "静止" },
+        { mid: 2.7, tRange: [2, X_MAX.value], label: "静止" },
       ]
     : [
         { mid: 0.2, tRange: [0, 0.4], label: "静止" },
@@ -151,7 +215,7 @@ const phases = computed<readonly Phase[]>(() => {
           tagColor: "#60a5fa",
           fillColor: "rgba(96, 165, 250, 0.16)",
         },
-        { mid: 2.7, tRange: [2, X_MAX], label: "静止" },
+        { mid: 2.7, tRange: [2, X_MAX.value], label: "静止" },
       ];
 });
 </script>
@@ -179,9 +243,9 @@ const phases = computed<readonly Phase[]>(() => {
             />
           </template>
 
-          <!-- 三个时刻分界竖直虚线 -->
+          <!-- 各运动阶段的分界竖直虚线 -->
           <line
-            v-for="t0 in [0.4, 1.2, 2]"
+            v-for="t0 in separators"
             :key="`sep-${t0}`"
             :x1="x(t0)"
             :y1="plot.top"
@@ -192,7 +256,7 @@ const phases = computed<readonly Phase[]>(() => {
             stroke-dasharray="7 6"
           />
 
-          <!-- 底部各运动阶段文字标注（含 0~0.4s 初始静止段） -->
+          <!-- 底部各运动阶段文字标注（含静止段） -->
           <text
             v-for="phase in phases"
             :key="`name-${phase.mid}`"
@@ -222,7 +286,7 @@ const phases = computed<readonly Phase[]>(() => {
           </text>
         </g>
 
-        <!-- Step 3：波峰/波谷极值点、偏离指示虚线与“a 方向 · 超重/失重”判读标签 -->
+        <!-- Step 3：波峰/波谷极值点、偏离指示虚线与判读标签 -->
         <g v-if="step >= 3">
           <template v-for="phase in phases" :key="`tag-${phase.mid}`">
             <g v-if="phase.tag && phase.peakY !== undefined">
@@ -246,7 +310,7 @@ const phases = computed<readonly Phase[]>(() => {
                 stroke="var(--c-bg-soft)"
                 :stroke-width="1.8 * px2user"
               />
-              <!-- 紧贴波峰上方 / 波谷下方的判读标签 -->
+              <!-- 判读：a 方向 · 超重/失重 -->
               <text
                 :x="x(phase.mid)"
                 :y="phase.tagSide === 'above' ? y(768) : y(408)"
@@ -275,7 +339,7 @@ const phases = computed<readonly Phase[]>(() => {
 .sq-graph-wrap {
   width: 100%;
   min-width: 0;
-  max-width: 620px;
+  max-width: 660px;
   margin: 0 auto;
 }
 </style>

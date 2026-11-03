@@ -1,4 +1,4 @@
-# 共享组件总览：29 个全局组件（干什么 + props 正本）
+# 共享组件总览：30 个全局组件（干什么 + props 正本）
 
 > 什么时候读：**页面上要用任何共享组件时**——先看这一篇 §1 的总表选组件，再看对应小节拿 props。
 > 这些组件由共享 addon（`workspace/shared/`）**全局注册**：直接写标签，**不用 import、不要重画**；
@@ -15,6 +15,7 @@
 | `NumberAxis`      | 一维数轴（时间轴 / 位置轴 / 纸带打点）                                          | 同上                                                    | 见坐标轴专篇                                                |
 | `CoordAxes`       | 完整坐标图：多曲线 / 多标注 / 网格 / 区域填充 / 分步                            | 同上                                                    | 见坐标轴专篇                                                |
 | `SpringScale`     | 弹簧测力计（悬挂测力、两台对拉、装置示数）                                      | **只能在 `<svg>` 里**                                   | [`spring-scale.md`](./spring-scale.md)                      |
+| `PersonWeightSvg` | 人站在体重计上：受力箭头 / 速度加速度 / 电梯轿厢 / 秤示数或会摆动的表盘指针      | **只能在 `<svg>` 里**                                   | 组件源码顶部注释（fnRatio / needleRatio / showForces / showMotion / enclosure / reading） |
 | `GripHand`        | 侧视图里"手捏住拉环 / 吊环 / 细绳往外拉"                                        | **只能在 `<svg>` 里**                                   | [`grip-hand.md`](./grip-hand.md)                            |
 | `CourseArrow`     | 矢量箭头（自带三角形 marker + 自动回退线段，尖端必落在终点上）                  | **只能在 `<svg>` 里**                                   | 本篇 §4                                                     |
 | `SurfaceHatch`    | 接触面：地面 / 桌面 / 墙面 / 斜面 / 天花板 + 单侧斜线阴影                       | **只能在 `<svg>` 里**                                   | 本篇 §5                                                     |
@@ -243,7 +244,7 @@
 > **改文件用脚本替换时，每处替换都要断言命中**（静默跳过一次替换＝留下半改状态）。
 
 1. **全局注册**：直接写标签，不 import；共享代码改动（`workspace/shared/`）会影响**全部课件**，改前评估影响面。
-2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、`CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`Galvanometer`、`BarMagnet`、`Solenoid`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。`Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
+2. 🔴 **`只能在 <svg> 里` 的组件（正本）**：`CourseArrow`、`SurfaceHatch`、`SpringScale`、`PersonWeightSvg`、`GripHand`、`CelestialSun`、`CelestialEarth`、`CelestialMoon`、`CelestialPlanet`、`CircuitBattery`、`CircuitResistor`、`CircuitSwitch`、`CircuitBulb`、`CircuitMeter`、`Galvanometer`、`BarMagnet`、`Solenoid`、`FieldDots`、`FieldMark`——它们画出来的根节点是 `<g>`，写成 HTML 元素页面上什么都不显示；也不能放进 ` ```comp ` 代码块（围栏只能出现在 markdown 顶层，进不了 `<svg>`）。`Ruler` 例外（自带 `<svg>`，嵌进别的 `<svg>` 或当 HTML 用都行）。**各专篇只留一句指向这里。**
    🔴 **这些组件覆盖的图元一律别手画**（教师点名统一，手画＝各课画法不一致）：表身 / 刻度 / 挂钩（`SpringScale`）、手掌 / 手指（`GripHand`）、电源 / 电阻 / 开关 / 电表 / 灯泡（`Circuit*`）、磁场叉点阵（`FieldDots` / `FieldMark`）、太阳 / 地球 / 月球 / 星球（`Celestial*`）、坐标轴（`SimpleAxis` / `NumberAxis` / `CoordAxes`，见 [coordinate-axes.md](./coordinate-axes.md)）。`Circuit*` / `Field*` 的 props 与用法见 [electronic-symbols.md](./electronic-symbols.md)。
 3. **`v-click` 写在组件里照样生效**（Slidev 的 `v-click` 是全局指令，跨组件仍绑当前页）；也可以由页面传 `:step="$clicks"`。
 4. 🔴 **SVG 属性的颜色（正本）**：带空格的 `rgb(148 163 184 / 16%)` 原先会被 attributify 把分量当工具类、撑坏图形（**只有 `pnpm build` 产物中招，dev server 与截图看不出来**），**现已在 `workspace/shared/uno.config.ts` 用 `blocklist` 从源头屏蔽 ⇒ 带不带空格都行**；⛔ 别改回 `presetAttributify({ignoreAttributes})`，新增会落到 DOM 的数值属性 / prop 要补进 `NUMERIC_ATTRS`；

@@ -1,148 +1,286 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { useSlideContext } from "@slidev/client";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
 
 /**
- * 电梯里称体重（§4.6 第 12 页，核心交互）
+ * 电梯里的体重计（§4.6 第 5 页）
  *
- * 六个运动状态点着看：视重 F_N = m(g + a)（a 以竖直向上为正）实时重算， 人身上的支持力箭头长度随 F_N/mg 变化，秤的示数、视重对比条与"超重 / 失重"标签同步更新。
+ * 轿厢固定在画面中央，用**两侧楼板上下滚动**表现相对运动：楼板向下滚 = 电梯在上升。 一次完整过程由**翻页单击**驱动：第 1 击播上升过程，第 2 击播下降过程；画面里只给 "电梯怎么动 +
+ * 秤的示数"，加速 / 匀速 / 减速三个阶段由学生自己从楼板运动的快慢看出来。
+ *
+ * 示数按真实运动学连续变化：加速度取平滑的正弦包络，a(t) 连续 ⇒ 加速段示数从 600 N 连续地 升到 720 N 再回到 600 N，减速段对称地从 600 N 降到 480 N 再回到
+ * 600 N，不会跳变。
  */
-/** 人的质量（kg）与重力加速度（m/s²） */
 const MASS = 60;
 const GRAVITY = 10;
-const WEIGHT = MASS * GRAVITY;
+const BASE_READING = MASS * GRAVITY;
+/** 加速度包络峰值（m/s²） */
+const A_PEAK = 2;
+/** 三段时长（s） */
+const T_ACCEL = 1.1;
+const T_CONST = 1;
+const T_DECEL = 1.1;
+const TOTAL = T_ACCEL + T_CONST + T_DECEL;
+/** 速度峰值与各段位移（由 a(t) = A·sin(πt/T) 积分得到） */
+const V_PEAK = (2 * A_PEAK * T_ACCEL) / Math.PI;
+const S_ACCEL = (A_PEAK * T_ACCEL ** 2) / Math.PI;
+const S_CONST = V_PEAK * T_CONST;
+const S_TOTAL = 2 * S_ACCEL + S_CONST;
+/** 楼板间距（px，按"一层楼"给）与一次过程里楼板相对滚动的总距离 */
+const FLOOR_SPACING = 175;
+const SCROLL = 2 * FLOOR_SPACING;
+/** 楼板图案覆盖范围（首尾各多一块，保证循环接缝无缝） */
+const FLOOR_INDEXES = [-1, 0, 1, 2];
 
-interface Scene {
-  readonly id: string;
-  readonly label: string;
-  /** 竖直向上的加速度分量（m/s²）；向下为负 */
-  readonly aUp: number;
-  /** 速度方向：1 向上，-1 向下 */
-  readonly vDir: 1 | -1;
-}
+/** 翻页步数：0 = 静止；1 = 上升过程；2 = 下降过程 */
+const { $clicks } = useSlideContext();
+const step = computed(() => Math.max(0, Math.min($clicks.value, 2)));
 
-const SCENES: readonly Scene[] = [
-  { id: "up-accel", label: "加速上升", aUp: 2, vDir: 1 },
-  { id: "up-const", label: "匀速上升", aUp: 0, vDir: 1 },
-  { id: "up-decel", label: "减速上升", aUp: -2, vDir: 1 },
-  { id: "down-accel", label: "加速下降", aUp: -2, vDir: -1 },
-  { id: "down-const", label: "匀速下降", aUp: 0, vDir: -1 },
-  { id: "down-decel", label: "减速下降", aUp: 2, vDir: -1 },
-];
+const reading = ref(BASE_READING);
+/** 楼板累计下移距离（px）：正值表示楼板向下滚、电梯在上升 */
+const floorOffset = ref(0);
+const playing = ref<"up" | "down" | null>(null);
+/** 已亮出的阶段数（0~3）：上升、下降各自跟随动画逐段亮出 */
+const upShown = ref(0);
+const downShown = ref(0);
+/** 当前阶段（0 加速 / 1 匀速 / 2 减速 / -1 无） */
+const activePhase = ref(-1);
 
-const activeId = ref<string>("up-accel");
-const scene = computed<Scene>(() => SCENES.find((item) => item.id === activeId.value) ?? SCENES[0]);
+let raf = 0;
+let startedAt = 0;
 
-/** 视重（＝秤对人的支持力，也＝人对秤的压力） */
-const normalForce = computed(() => MASS * (GRAVITY + scene.value.aUp));
-const ratio = computed(() => normalForce.value / WEIGHT);
+/**
+ * 平滑加速度包络（取竖直向上为正，上升过程用）
+ *
+ * @param t 过程开始后的时刻（s）
+ * @returns 该时刻的加速度分量（m/s²）
+ */
+const accelAt = (t: number): number => {
+  if (t < T_ACCEL) return A_PEAK * Math.sin((Math.PI * t) / T_ACCEL);
+  if (t < T_ACCEL + T_CONST) return 0;
 
-const verdictKey = computed<"over" | "under" | "even">(() => {
-  if (ratio.value > 1.0001) return "over";
-  if (ratio.value < 0.9999) return "under";
+  const tail = t - T_ACCEL - T_CONST;
 
-  return "even";
-});
+  return -A_PEAK * Math.sin((Math.PI * tail) / T_DECEL);
+};
 
-const verdict = computed(
-  () => ({ over: "超重", under: "失重", even: "视重等于重力" })[verdictKey.value],
+/**
+ * 已走位移（m）
+ *
+ * @param t 过程开始后的时刻（s）
+ * @returns 累计位移（m）
+ */
+const displacementAt = (t: number): number => {
+  if (t < T_ACCEL) {
+    return (
+      (A_PEAK * T_ACCEL * (t - (T_ACCEL / Math.PI) * Math.sin((Math.PI * t) / T_ACCEL))) / Math.PI
+    );
+  }
+
+  if (t < T_ACCEL + T_CONST) return S_ACCEL + V_PEAK * (t - T_ACCEL);
+
+  const tail = t - T_ACCEL - T_CONST;
+
+  return (
+    S_ACCEL +
+    S_CONST +
+    V_PEAK * tail -
+    (A_PEAK * T_DECEL * (tail - (T_DECEL / Math.PI) * Math.sin((Math.PI * tail) / T_DECEL))) /
+      Math.PI
+  );
+};
+
+const stopAnimation = (): void => {
+  cancelAnimationFrame(raf);
+  raf = 0;
+  playing.value = null;
+  activePhase.value = -1;
+};
+
+const reset = (): void => {
+  stopAnimation();
+  reading.value = BASE_READING;
+  floorOffset.value = 0;
+  upShown.value = 0;
+  downShown.value = 0;
+  activePhase.value = -1;
+};
+
+const tick = (): void => {
+  const direction = playing.value;
+
+  if (!direction) return;
+
+  const t = (performance.now() - startedAt) / 1000;
+
+  if (t >= TOTAL) {
+    reading.value = BASE_READING;
+    floorOffset.value = direction === "up" ? SCROLL : 0;
+    if (direction === "up") upShown.value = 3;
+    else downShown.value = 3;
+    stopAnimation();
+    return;
+  }
+
+  const phase = t < T_ACCEL ? 0 : t < T_ACCEL + T_CONST ? 1 : 2;
+  activePhase.value = phase;
+  if (direction === "up") upShown.value = Math.max(upShown.value, phase + 1);
+  else downShown.value = Math.max(downShown.value, phase + 1);
+
+  const accel = direction === "up" ? accelAt(t) : -accelAt(t);
+  reading.value = Math.round(MASS * (GRAVITY + accel));
+  const progress = displacementAt(t) / S_TOTAL;
+  floorOffset.value = direction === "up" ? progress * SCROLL : SCROLL - progress * SCROLL;
+  raf = requestAnimationFrame(tick);
+};
+
+/**
+ * 播放一次完整过程
+ *
+ * @param direction 上升 / 下降
+ */
+const startProcess = (direction: "up" | "down"): void => {
+  stopAnimation();
+  playing.value = direction;
+  startedAt = performance.now();
+  raf = requestAnimationFrame(tick);
+};
+
+/** 楼板图案的循环位移（对间距取模，接缝无缝） */
+const floorShift = computed(
+  () => ((floorOffset.value % FLOOR_SPACING) + FLOOR_SPACING) % FLOOR_SPACING,
 );
 
-const accelDir = computed<"down" | "up" | "none">(() => {
-  if (scene.value.aUp > 0) return "up";
-  if (scene.value.aUp < 0) return "down";
+watch(
+  step,
+  (value, previous) => {
+    if (value === 0) {
+      reset();
+      return;
+    }
 
-  return "none";
-});
+    if (value === 1) {
+      reset();
+      if (previous > value) {
+        // 往回翻页：直接停在"上升完成"的静态结果上，不重播动画
+        floorOffset.value = SCROLL;
+        upShown.value = 3;
+        return;
+      }
+      startProcess("up");
+      return;
+    }
 
-const speedDir = computed<"down" | "up">(() => (scene.value.vDir > 0 ? "up" : "down"));
+    // value === 2：先把上升过程补完，再播下降过程
+    if (floorOffset.value !== SCROLL) {
+      stopAnimation();
+      floorOffset.value = SCROLL;
+      reading.value = BASE_READING;
+    }
+    startProcess("down");
+  },
+  { immediate: true },
+);
 
-const accelText = computed<string>(() => {
-  if (scene.value.aUp > 0) return "向上 ↑";
-  if (scene.value.aUp < 0) return "向下 ↓";
-
-  return "0";
-});
-
-const formulaTex = computed(() => {
-  const a = scene.value.aUp;
-
-  if (a === 0)
-    return `F_N = m g = ${MASS}\\times ${GRAVITY}\\ \\text{N} = ${normalForce.value}\\ \\text{N}`;
-
-  const sign = a > 0 ? "+" : "-";
-
-  return `F_N = m(g ${sign} a) = ${MASS}\\times(${GRAVITY} ${sign} ${Math.abs(a)})\\ \\text{N} = ${normalForce.value}\\ \\text{N}`;
-});
+onBeforeUnmount(stopAnimation);
 </script>
 
 <template>
   <div class="ew">
-    <div class="ew-main">
-      <div class="ew-figure">
-        <PersonWeightSvg
-          enclosure="elevator"
-          :fn-ratio="ratio"
-          :accel-dir="accelDir"
-          :speed-dir="speedDir"
-          :show-forces="true"
-          :show-motion="true"
-          :reading="normalForce"
-        />
+    <div class="ew-stage">
+      <!-- 楼板：随电梯运动上下滚动（轿厢固定，楼板向下滚 = 电梯上升） -->
+      <div class="ew-wall ew-wall-l">
+        <div class="ew-floors" :style="{ transform: `translateY(${floorShift}px)` }">
+          <div
+            v-for="index in FLOOR_INDEXES"
+            :key="`l-${index}`"
+            class="ew-slab ew-slab-l"
+            :style="{ top: `${index * FLOOR_SPACING}px` }"
+          />
+        </div>
+      </div>
+      <div class="ew-wall ew-wall-r">
+        <div class="ew-floors" :style="{ transform: `translateY(${floorShift}px)` }">
+          <div
+            v-for="index in FLOOR_INDEXES"
+            :key="`r-${index}`"
+            class="ew-slab ew-slab-r"
+            :style="{ top: `${index * FLOOR_SPACING}px` }"
+          />
+        </div>
       </div>
 
-      <div class="ew-panel">
-        <!-- 视重与重力对比卡片 -->
-        <div class="ew-metrics">
-          <div class="ew-line">
-            <span class="ew-label">视重 <Latex tex="F_N" /></span>
-            <b :class="`ew-val-${verdictKey}`">{{ normalForce }} N</b>
-          </div>
-
-          <!-- 视重 vs 重力 动态比例条（直观看到 F_N 相对 mg=600N 的增减） -->
-          <div class="ew-bar-track">
-            <div
-              class="ew-bar-fill"
-              :class="`ew-bar-${verdictKey}`"
-              :style="{ width: `${(normalForce / 900) * 100}%` }"
-            />
-            <div class="ew-bar-mg" title="真实重力 mg = 600 N" />
-          </div>
-
-          <div class="ew-line ew-line-dim">
-            <span class="ew-label">重力 <Latex tex="mg" /></span>
-            <b>{{ WEIGHT }} N</b>
-          </div>
-        </div>
-
-        <!-- 状态判读与运动参量标签 -->
-        <div class="ew-tags">
-          <div class="ew-verdict" :class="`ew-verdict-${verdictKey}`">{{ verdict }}</div>
-          <span class="ew-chip ew-chip-v">
-            速度 <i>v</i> {{ speedDir === "up" ? "向上 ↑" : "向下 ↓" }}
-          </span>
-          <span class="ew-chip" :class="`ew-chip-a-${accelDir}`">
-            加速度 <i>a</i> {{ accelText }}
-          </span>
-        </div>
-
-        <!-- 动力学计算公式 -->
-        <div class="ew-formula">
-          <Latex :tex="formulaTex" />
+      <!-- 轿厢：固定居中；尺寸按"一层楼"的比例画 -->
+      <div class="ew-cabin">
+        <div class="ew-light" />
+        <div class="ew-person">
+          <PersonWeightSvg
+            :fn-ratio="reading / BASE_READING"
+            :needle-ratio="reading / BASE_READING"
+            :show-forces="false"
+          />
         </div>
       </div>
     </div>
 
-    <div class="ew-buttons">
-      <button
-        v-for="item in SCENES"
-        :key="item.id"
-        type="button"
-        :class="{ 'ew-on': item.id === activeId }"
-        @click="activeId = item.id"
-      >
-        <span>{{ item.vDir > 0 ? "↑" : "↓" }}</span>
-        <span>{{ item.label }}</span>
-      </button>
+    <div class="ew-panel">
+      <div class="ew-read-label">秤的示数</div>
+      <div class="ew-read-value">{{ reading }}<span class="ew-unit">N</span></div>
+
+      <div class="ew-stages">
+        <div class="ew-stage-row" :class="{ 'ew-hidden': step < 1 }">
+          <span
+            class="ew-phase"
+            :class="{
+              'ew-hidden': upShown < 1,
+              'ew-active': playing === 'up' && activePhase === 0,
+            }"
+            >加速上升</span
+          >
+          <span
+            class="ew-phase"
+            :class="{
+              'ew-hidden': upShown < 2,
+              'ew-active': playing === 'up' && activePhase === 1,
+            }"
+            >匀速上升</span
+          >
+          <span
+            class="ew-phase"
+            :class="{
+              'ew-hidden': upShown < 3,
+              'ew-active': playing === 'up' && activePhase === 2,
+            }"
+            >减速上升</span
+          >
+        </div>
+        <div class="ew-stage-row" :class="{ 'ew-hidden': step < 2 }">
+          <span
+            class="ew-phase"
+            :class="{
+              'ew-hidden': downShown < 1,
+              'ew-active': playing === 'down' && activePhase === 0,
+            }"
+            >加速下降</span
+          >
+          <span
+            class="ew-phase"
+            :class="{
+              'ew-hidden': downShown < 2,
+              'ew-active': playing === 'down' && activePhase === 1,
+            }"
+            >匀速下降</span
+          >
+          <span
+            class="ew-phase"
+            :class="{
+              'ew-hidden': downShown < 3,
+              'ew-active': playing === 'down' && activePhase === 2,
+            }"
+            >减速下降</span
+          >
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -150,264 +288,188 @@ const formulaTex = computed(() => {
 <style scoped>
 .ew {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  gap: 1.2rem;
 
   width: 100%;
   min-width: 0;
-  max-width: 640px;
+  height: 425px;
 }
 
-.ew-main {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 0;
-}
-
-.ew-figure {
-  flex: 0 1 auto;
-  width: 196px;
-  min-width: 0;
-}
-
-.ew-panel {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
-  gap: 0.62rem;
-
-  min-width: 0;
-  max-width: 390px;
-}
-
-.ew-metrics {
-  display: flex;
-  flex-direction: column;
-  gap: 0.42rem;
-
-  padding: 0.65rem 0.85rem;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-md);
-
-  background: var(--c-surface);
-}
-
-.ew-line {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-
-  color: var(--c-text);
-
-  font-size: 1.05rem;
-}
-
-.ew-label {
-  color: var(--c-neutral-300);
-}
-
-.ew-math {
-  font-style: italic;
-  font-family: "KaTeX_Math", "Times New Roman", serif;
-}
-
-.ew-math sub {
-  font-style: normal;
-  font-size: 0.75em;
-  font-family: "KaTeX_Main", sans-serif;
-}
-
-.ew-line b {
-  font-size: 1.42rem;
-  font-variant-numeric: tabular-nums;
-  transition: color 0.2s ease;
-}
-
-.ew-val-over {
-  color: var(--c-danger);
-}
-
-.ew-val-under {
-  color: var(--c-velocity);
-}
-
-.ew-val-even {
-  color: var(--c-accent);
-}
-
-.ew-line-dim b {
-  color: var(--c-text-dim);
-  font-size: 1.08rem;
-}
-
-.ew-bar-track {
+/* ── 电梯井：两侧楼板上下滚动 ── */
+.ew-stage {
   position: relative;
+
+  flex: 1 1 auto;
 
   overflow: hidden;
 
-  height: 8px;
-  border: 1px solid var(--c-border);
-  border-radius: 999px;
-
-  background: color-mix(in srgb, var(--c-surface-solid) 90%, transparent);
-}
-
-.ew-bar-fill {
-  height: 100%;
-  border-radius: 999px;
-  transition:
-    width 0.25s ease,
-    background-color 0.25s ease;
-}
-
-.ew-bar-over {
-  background: linear-gradient(90deg, var(--c-accent) 0%, var(--c-danger) 100%);
-}
-
-.ew-bar-under {
-  background: linear-gradient(90deg, var(--c-physics-light) 0%, var(--c-velocity) 100%);
-}
-
-.ew-bar-even {
-  background: var(--c-accent);
-}
-
-.ew-bar-mg {
-  position: absolute;
-  top: -1px;
-  bottom: -1px;
-  left: 66.67%;
-
-  width: 2px;
-
-  background: var(--c-neutral-50);
-  box-shadow: 0 0 4px color-mix(in srgb, var(--c-bg-soft) 90%, transparent);
-}
-
-.ew-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  align-items: center;
-}
-
-.ew-verdict {
-  padding: 0.16rem 0.82rem;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
-
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.ew-verdict-over {
-  border-color: color-mix(in srgb, var(--c-danger) 55%, transparent);
-  background: var(--c-danger-soft);
-  color: var(--c-danger);
-}
-
-.ew-verdict-under {
-  border-color: color-mix(in srgb, var(--c-velocity) 55%, transparent);
-  background: color-mix(in srgb, var(--c-velocity) 12%, transparent);
-  color: var(--c-velocity);
-}
-
-.ew-verdict-even {
-  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
-  background: var(--c-accent-soft);
-  color: var(--c-accent);
-}
-
-.ew-chip {
-  padding: 0.16rem 0.55rem;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
-
-  background: var(--c-surface);
-  color: var(--c-neutral-300);
-
-  font-size: 0.82rem;
-}
-
-.ew-chip i {
-  font-family: "KaTeX_Math", serif;
-}
-
-.ew-chip-v {
-  border-color: color-mix(in srgb, var(--c-velocity) 35%, transparent);
-  color: var(--c-velocity-light);
-}
-
-.ew-chip-a-up,
-.ew-chip-a-down {
-  border-color: color-mix(in srgb, var(--c-physics) 40%, transparent);
-  color: var(--c-physics);
-}
-
-.ew-chip-a-none {
-  color: var(--c-text-dim);
-}
-
-.ew-formula {
-  padding: 0.45rem 0.75rem;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
-
-  background: var(--c-surface);
-  color: var(--c-neutral-200);
-
-  font-size: 0.95rem;
-}
-
-.ew-formula-preview i {
-  font-family: "KaTeX_Math", serif;
-}
-
-.ew-formula-preview b {
-  color: var(--c-accent);
-}
-
-.ew-buttons {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 0.48rem;
-  width: 100%;
-}
-
-.ew-buttons button {
-  display: inline-flex;
-  gap: 0.22rem;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0.42rem 0.25rem;
+  min-width: 0;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
+  background: linear-gradient(180deg, #0a1020 0%, #101a2e 100%);
+}
+
+.ew-wall {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+
+  width: 62px;
+
+  background: color-mix(in srgb, var(--c-surface-solid) 55%, transparent);
+}
+
+.ew-wall-l {
+  left: 0;
+  border-right: 1px solid var(--c-border);
+}
+
+.ew-wall-r {
+  right: 0;
+  border-left: 1px solid var(--c-border);
+}
+
+.ew-floors {
+  position: absolute;
+  inset: 0;
+}
+
+.ew-slab {
+  position: absolute;
+
+  height: 12px;
+  border-radius: 2px;
+
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--c-neutral-300) 66%, transparent) 0%,
+    color-mix(in srgb, var(--c-neutral-500) 55%, transparent) 100%
+  );
+  box-shadow: 0 1px 0 rgb(0 0 0 / 45%);
+}
+
+.ew-slab-l {
+  right: -42px;
+  left: 0;
+}
+
+.ew-slab-r {
+  right: 0;
+  left: -42px;
+}
+
+/* ── 轿厢（固定居中） ── */
+.ew-cabin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  width: 170px;
+  height: 136px;
+  padding: 0 10px 5px;
+  border: 1.5px solid color-mix(in srgb, var(--c-neutral-300) 52%, transparent);
+  border-radius: 8px 8px 3px 3px;
+
+  background: color-mix(in srgb, var(--c-surface-solid) 82%, transparent);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 35%);
+
+  transform: translate(-50%, -50%);
+}
+
+.ew-light {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+
+  width: 58px;
+  height: 3px;
+  border-radius: 2px;
+
+  background: color-mix(in srgb, var(--c-accent) 55%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--c-accent) 45%, transparent);
+
+  transform: translateX(-50%);
+}
+
+.ew-person {
+  width: 104px;
+}
+
+/* ── 右栏：秤的示数 ── */
+.ew-panel {
+  display: flex;
+  flex: 0 0 292px;
+  flex-direction: column;
+  gap: 0.55rem;
+  justify-content: center;
+
+  min-width: 0;
+  padding: 0.2rem 0.3rem;
+}
+
+.ew-read-label {
+  color: var(--c-neutral-300);
+  font-size: 1.02rem;
+}
+
+.ew-read-value {
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 3.6rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+}
+
+.ew-unit {
+  margin-left: 0.28rem;
+  color: var(--c-text-dim);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+/* 上升 / 下降各三个阶段：随动画逐段亮出 */
+.ew-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  min-height: 4.6rem;
+  margin-top: 0.35rem;
+}
+
+.ew-stage-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.ew-phase {
+  padding: 0.12rem 0.52rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
 
   background: var(--c-surface);
   color: var(--c-text);
 
-  font-size: 0.9rem;
-  font-family: inherit;
+  font-size: 0.82rem;
   white-space: nowrap;
-
-  cursor: pointer;
-
-  transition: all 0.16s ease;
 }
 
-.ew-buttons button:hover {
-  border-color: var(--c-border-glow);
-  color: var(--c-accent);
-}
-
-.ew-on {
+.ew-active {
   border-color: var(--c-border-glow) !important;
   background: var(--c-accent-soft) !important;
   color: var(--c-accent) !important;
   font-weight: 700;
+}
+
+.ew-hidden {
+  visibility: hidden;
 }
 </style>
