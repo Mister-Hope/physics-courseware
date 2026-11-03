@@ -20,7 +20,6 @@ defaults:
   transition: fade
 chapter-no: "2.3"
 chapter: "第二章 电磁感应"
-lesson: "第一课时"
 subtitle: "整块导体中的感应电流"
 ---
 
@@ -179,16 +178,18 @@ clicks: 2
 
 ---
 title: 涡流的利用
-clicks: 1
+clicks: 2
 ---
 
 <div class="page-grow">
 
-<div class="ask">同一种涡流，有些地方要靠它发热、靠它起作用。看两处例子。</div>
+<div class="ask">同一种涡流，哪些地方要靠它起作用？</div>
 
-<div class="fig-cap-lg"><EddyUses /></div>
+<div class="fig-cap"><EddyUses /></div>
 
-<div class="text-lg" v-click="1">真空冶炼炉在真空中熔化金属，避免杂质进入；探雷器和安检门靠涡流的磁场反过来影响线圈中的电流。</div>
+<div class="text-lg" v-click="1"><strong class="text-accent">涡流的热效应</strong>：真空冶炼炉在真空中熔化金属，避免杂质进入。</div>
+
+<div class="text-lg" v-click="2"><strong class="text-accent">涡流的磁效应</strong>：探雷器、安检门靠涡流的磁场影响线圈电流，从而报警。</div>
 
 </div>
 
@@ -210,40 +211,73 @@ clicks: 2
 </div>
 
 ---
-title: 第一课时小结
+title: 知识梳理：涡流
 ---
 
-# 第一课时小结
+# 知识梳理：涡流
 
 <div class="page-grow">
 
-<div class="stack text-lg">
+<div class="step-list" style="gap:1.5rem">
 
-<div><strong>变化的磁场</strong> → 感生电场 → 导体中的感应电流</div>
+<div class="step-item">
+<div class="step-no">1</div>
+<div class="summary-line"><strong class="text-accent">涡流</strong>：由于电磁感应，在大块金属中形成的像水的旋涡的感应电流叫作涡电流，简称涡流。</div>
+</div>
 
-<div>整块导体中的感应电流 → <strong>涡流</strong> → 热效应</div>
+<div class="step-item">
+<div class="step-no">2</div>
+<div class="summary-line"><strong class="text-accent">涡流的特点</strong>：大块金属沿涡流路径的电阻一般很小，不大的感应电动势就能在它内部形成强大的涡电流，释放出大量的焦耳热。</div>
+</div>
 
-<div>涡流可以<strong>利用</strong>（冶炼、电磁炉、探雷器），也可以<strong>减小</strong>（硅钢、叠片）</div>
-
+<div class="step-item">
+<div class="step-no">3</div>
+<div class="summary-line"><strong class="text-accent">涡流中的能量转化</strong>：其他形式的能转化成电能，并最终在金属块中转化为内能。</div>
 </div>
 
 </div>
 
----
-layout: course-cover
-title: "涡流、电磁阻尼和电磁驱动"
-lesson: "第二课时"
-subtitle: "电磁阻尼与电磁驱动"
----
-
-<CoverDecor />
+</div>
 
 ---
-title: 引课：谁在给它刹车
+title: 知识梳理：涡流的应用与防止
+---
+
+# 知识梳理：涡流的应用与防止
+
+<div class="page-grow">
+
+<div class="step-list">
+
+<div class="step-item">
+<div class="step-no">4</div>
+<div class="stack-tight">
+<div class="summary-line"><strong class="text-accent">涡流现象的应用</strong></div>
+<div class="summary-line">（1）涡流的<strong class="text-accent">热效应</strong>：如高频感应炉、电磁炉等。</div>
+<div class="summary-line">（2）涡流的<strong class="text-accent">磁效应</strong>：如探雷器、安检门等。</div>
+</div>
+</div>
+
+<div class="step-item">
+<div class="step-no">5</div>
+<div class="stack-tight">
+<div class="summary-line"><strong class="text-accent">涡流现象的防止</strong></div>
+<div class="summary-line">电动机、变压器等设备中，应防止铁芯涡流过大——浪费能量、损坏电器。</div>
+<div class="summary-line">（1）途径一：增大铁芯材料的电阻率。</div>
+<div class="summary-line">（2）途径二：用相互绝缘的薄硅钢片叠合成的铁芯代替整块硅钢铁芯。</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+---
+title: 谁在给它刹车
 clicks: 1
 ---
 
-<div class="ask text-xl">两个完全相同的金属摆。右边的摆锤在两磁极之间摆动，为什么它很快就停了？</div>
+<div class="ask text-xl">两个完全相同的金属摆。右边的摆锤在两磁极间摆动，为什么很快停下？</div>
 
 <div class="page-grow">
 
@@ -438,6 +472,69 @@ clicks: 1
 </div>
 
 <div class="tip-hint" v-click="1">两种情况下，安培力都在阻碍导体与磁场之间的<strong>相对运动</strong>。</div>
+
+</div>
+
+---
+title: 知识梳理：电磁阻尼与电磁驱动
+---
+
+# 知识梳理：电磁阻尼与电磁驱动
+
+<div class="page-grow">
+
+<div class="step-list">
+
+<div class="step-item">
+<div class="step-no">1</div>
+<div class="stack-tight">
+<div class="summary-line"><strong class="text-accent">电磁阻尼</strong></div>
+<div class="summary-line">（1）概念：当闭合电路中的一部分导体在磁场中做切割磁感线的运动时，导体中会产生感应电流，感应电流使导体受到安培力，安培力总是阻碍导体的运动，这种现象叫作电磁阻尼。</div>
+<div class="summary-line">（2）应用：电动列车普遍使用的电磁制动技术；磁电式电表中利用电磁阻尼使指针迅速停止到某位置，便于读数。</div>
+</div>
+</div>
+
+<div class="step-item">
+<div class="step-no">2</div>
+<div class="stack-tight">
+<div class="summary-line"><strong class="text-accent">电磁驱动</strong></div>
+<div class="summary-line">（1）概念：感应电流受到安培力使物体运动的现象。</div>
+<div class="summary-line">（2）应用：感应电动机等。</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+---
+title: 电磁阻尼和电磁驱动的比较
+---
+
+# 电磁阻尼和电磁驱动的比较
+
+<div class="page-grow">
+
+<div class="cmp-table">
+<div class="cmp-head">比较项</div>
+<div class="cmp-head">电磁阻尼</div>
+<div class="cmp-head">电磁驱动</div>
+
+<div class="cmp-key">成因</div>
+<div>由导体在磁场中运动形成</div>
+<div>由磁场运动形成</div>
+
+<div class="cmp-key">效果</div>
+<div>安培力的方向与导体运动方向相反，为阻力</div>
+<div>安培力的方向与导体运动方向相同，为动力</div>
+
+<div class="cmp-key">能量转化</div>
+<div>导体克服安培力做功，其他形式的能转化为电能，最终转化为内能</div>
+<div>磁场能转化为电能，通过安培力做功，电能转化为导体的机械能</div>
+
+<div class="cmp-key">相同点</div>
+<div class="cmp-span">两者都是电磁感应现象，安培力都阻碍导体与磁场的相对运动</div>
+</div>
 
 </div>
 

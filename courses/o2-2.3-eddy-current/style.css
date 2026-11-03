@@ -66,3 +66,36 @@
 .cover-title {
   font-size: 2.5rem !important;
 }
+
+/* ── 知识梳理页：电磁阻尼 / 电磁驱动的比较表（三列；末行内容跨两列） ── */
+.cmp-table {
+  display: grid;
+  grid-template-columns: minmax(0, 0.52fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 1.2rem;
+
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.cmp-table > div {
+  min-width: 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--c-border);
+  overflow-wrap: anywhere;
+}
+
+.cmp-table > .cmp-head {
+  border-bottom-color: var(--c-border-glow);
+  color: var(--c-accent);
+  font-weight: 800;
+}
+
+.cmp-table > .cmp-key {
+  color: var(--c-text-dim);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cmp-table > .cmp-span {
+  grid-column: span 2;
+}
