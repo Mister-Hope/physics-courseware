@@ -318,6 +318,31 @@ title: '蹦极中的超重与失重'
 </div>
 
 ---
+layout: exercise-split
+clicks: 3
+hideQaMark: true
+title: '剪断细绳后，秤的示数怎么变？'
+---
+
+<template v-slot:stem>
+
+<b class="ex-no">习题</b>　烧杯放在秤上，杯中装水，一个木球用细绳拴在杯底、浸没在水中。剪断细绳，木球上浮。在木球上浮的过程中，秤的示数怎样变化？
+
+</template>
+
+<template v-slot:fig>
+
+<BeakerBallSvg :show-analysis="$clicks >= 2" />
+
+</template>
+
+<div v-click="1">只看木球：它向上加速，似乎该超重、示数变大 —— 这样判断就错了。</div>
+
+<div v-click="2">但木球上浮的同时，同体积的水被挤着向下流 —— 水的密度比木球大，向下加速的那部分质量更大。</div>
+
+<div v-click="3" class="tip-hint">系统的重心向下加速 ⇒ 整体失重 ⇒ 示数变小；木球浮出、水静止后，示数回到原值。</div>
+
+---
 layout: base-flex
 ---
 
