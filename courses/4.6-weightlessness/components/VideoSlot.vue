@@ -1,20 +1,23 @@
 <script setup lang="ts">
+import demoVideo from "../videos/demo.mp4?url";
+
 /**
- * 第 4 页：电梯实测视频位
+ * 第 3 页：电梯实测视频位
  *
- * 老师拍好视频后传入 src（如 `images/elevator.mp4`）即可播放；不传 src 时显示占位框， 版面与真实视频完全一致，课件可以先定稿、视频后补。
+ * 本课拍好的视频放在 `courses/4.6-weightlessness/videos/demo.mp4`，这里用 `?url` 引入 —— 构建时会随产物一起输出、路径自动带上
+ * `--base`，不用手动拼目录。 传 `src` 可以换成别的视频；不传时用本课的 demo。
  */
-const { src = "", title = "电梯里的示数变化" } = defineProps<{
-  /** 视频地址；留空则显示占位框 */
+const { src = demoVideo, title = "电梯里的示数变化" } = defineProps<{
+  /** 视频地址；缺省用本课的 demo.mp4 */
   src?: string;
-  /** 占位框里的视频标题 */
+  /** 占位框（没有视频时）里的标题 */
   title?: string;
 }>();
 </script>
 
 <template>
   <div class="video-slot">
-    <video v-if="src" :src="src" controls playsinline />
+    <video v-if="src" :src="`${src}#t=0.1`" controls playsinline preload="metadata" />
     <div v-else class="video-slot-empty">
       <mdi-play-circle-outline class="video-slot-icon" />
       <span class="video-slot-title">{{ title }}</span>
@@ -26,9 +29,11 @@ const { src = "", title = "电梯里的示数变化" } = defineProps<{
 .video-slot {
   overflow: hidden;
 
-  width: 100%;
-  max-width: 740px;
-  aspect-ratio: 16 / 9;
+  /* 实拍视频是 768×576（4:3），槽位按 4:3 给，高度受页面可用高度约束 */
+  width: auto;
+  height: 424px;
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
   margin: 0 auto;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);

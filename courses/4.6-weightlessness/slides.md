@@ -56,7 +56,6 @@ title: '电梯实测'
 <div class="ask ask-lead">电梯启动、匀速运行、制动时，秤的示数怎样变化？</div>
 
 <div class="host">
-<!-- 老师拍好的电梯实测视频放进 images/ 后，把下面一行改成 <VideoSlot src="images/elevator.mp4" /> 即可播放 -->
 <VideoSlot />
 </div>
 </div>
@@ -254,14 +253,22 @@ title: '超重的代价'
 
 ---
 layout: base-flex
-clicks: 1
+clicks: 4
 title: '例题：电梯加速上升'
 ---
 
 <div class="page-grow">
-<div class="half-grid">
+<div><b class="ex-no">例题</b>　质量 <Latex tex="60\ \text{kg}" /> 的人站在电梯内的水平地板上，电梯以 <Latex tex="0.25\ \text{m/s}^2" /> 的加速度匀加速上升。求人对电梯地板的压力。（<Latex tex="g" /> 取 <Latex tex="9.8\ \text{m/s}^2" />）</div>
+
+<div class="ex-grid">
 <div class="stack">
-<div><b class="ex-no">例题</b>　质量 <Latex tex="60\ \text{kg}" /> 的人站在电梯内的水平地板上，电梯以 <Latex tex="0.25\ \text{m/s}^2" /> 的加速度匀加速上升。求人对电梯地板的压力。<br />（<Latex tex="g" /> 取 <Latex tex="9.8\ \text{m/s}^2" />）</div>
+<div v-click="1">
+<div>解：取竖直向上为正方向，由牛顿第二定律：</div>
+<div class="ex-eq"><Latex tex="F_N - mg = ma" /></div>
+</div>
+<div v-click="2"><Latex tex="F_N = m(g+a) = 60 \times (9.8+0.25)\ \text{N} = 603\ \text{N}" /></div>
+<div v-click="3">由牛顿第三定律，人对地板的压力 <Latex tex="F_N' = 603\ \text{N}" />，方向竖直向下。</div>
+<div v-click="4" class="tip-hint">向上加速（或向下减速）时，<Latex tex="F_N \gt mg" />，出现超重。</div>
 </div>
 <div class="host">
 <PersonWeightSvg
@@ -274,19 +281,6 @@ title: '例题：电梯加速上升'
 />
 </div>
 </div>
-</div>
-
----
-layout: base-flex
-clicks: 3
-title: '例题：电梯加速上升（解）'
----
-
-<div class="page-grow">
-<div>解：取竖直向上为正方向，由牛顿第二定律：<Latex tex="F_N - mg = ma" /></div>
-<div v-click="1"><Latex tex="F_N = m(g+a) = 60 \times (9.8+0.25)\ \text{N} = 603\ \text{N}" /></div>
-<div v-click="2">由牛顿第三定律，人对地板的压力 <Latex tex="F_N' = 603\ \text{N}" />，方向竖直向下。</div>
-<div v-click="3" class="tip-hint">向上加速（或向下减速）时，<Latex tex="F_N \gt mg" />，出现超重。</div>
 </div>
 
 ---
@@ -350,10 +344,10 @@ layout: base-flex
 
 <div class="page-grow">
 <div class="stack">
-<div class="summary-line"><mdi-scale-balance class="text-lg inline-block align-middle mr-1" /><b>视重</b>：物体对秤的压力或拉力；静止或匀速直线运动时等于重力。</div>
-<div class="summary-line"><mdi-arrow-up-bold-outline class="text-lg inline-block align-middle mr-1" /><b>超重</b>：<Latex tex="F_N \gt mg" />，加速度方向向上（向上加速、向下减速）。</div>
-<div class="summary-line"><mdi-arrow-down-bold-outline class="text-lg inline-block align-middle mr-1" /><b>失重</b>：<Latex tex="F_N \lt mg" />，加速度方向向下（向下加速、向上减速）。</div>
-<div class="summary-line"><mdi-scale-off class="text-lg inline-block align-middle mr-1" /><b>完全失重</b>：<Latex tex="a = g" /> 向下，视重为 0。</div>
+<div class="summary-line"><b>视重</b>：物体对秤的压力或拉力；静止或匀速直线运动时等于重力。</div>
+<div class="summary-line"><b>超重</b>：<Latex tex="F_N \gt mg" />，加速度方向向上（向上加速、向下减速）。</div>
+<div class="summary-line"><b>失重</b>：<Latex tex="F_N \lt mg" />，加速度方向向下（向下加速、向上减速）。</div>
+<div class="summary-line"><b>完全失重</b>：<Latex tex="a = g" /> 向下，视重为 0。</div>
 <div class="tip-hint">重力 <Latex tex="mg" /> 始终不变；超重和失重都是<b>视重相对于重力的变化</b>。</div>
 </div>
 </div>

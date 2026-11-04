@@ -59,3 +59,18 @@
   color: var(--c-text);
   line-height: 1.5;
 }
+
+/* 例题页：题干整宽在上，下面左侧解法、右侧受力图 */
+.ex-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 1.4rem;
+  align-items: center;
+  min-height: 0;
+}
+
+/* 例题里的方程单独占一行（避免一个公式被拆到两行） */
+.ex-eq {
+  padding-left: 1.1rem;
+  margin-top: 0.1rem;
+}
