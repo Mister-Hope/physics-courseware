@@ -4,27 +4,24 @@ import { computed, onBeforeUnmount, ref } from "vue";
 /**
  * 电梯里的体重计（§4.6 第 5、6 页）
  *
- * 左侧：轿厢固定、两侧楼板上下滚动（楼板向下滚 = 电梯在上升），下方是秤的示数； 右侧：两个过程按钮（上升过程 / 下降过程）+ 页面通过默认插槽放进来的正文 （第 5
+ * 左侧：轿厢固定、两侧楼板上下滚动（楼板向下滚 = 电梯在上升），下方是秤的示数；右侧：两个过程按钮（上升过程 / 下降过程）+ 页面通过默认插槽放进来的正文（第 5
  * 页放"上升/下降各三个阶段"的花括号树，第 6 页放"示数与重力"的对应表）。
  *
- * 三个阶段之类的文字一律写在 slides.md 里，不集成进组件。 示数按真实运动学连续变化：加速度取平滑的正弦包络，a(t) 连续 ⇒ 加速段示数从 600 N 连续升到 720 N 再回到
- * 600 N，减速段对称地从 600 N 降到 480 N 再回到 600 N，不会跳变； 每段时长放慢到约 2 s，学生来得及看清示数的连续变化。
+ * 三个阶段之类的文字一律写在 slides.md 里，不集成进组件。示数按各段加速度实时算出：每段开始时用约 0.25 s 快速到达该段的稳定值（加速上升 720 N、匀速 600 N、减速上升
+ * 480 N），随后保持不变，结束时再快速回到 600 N —— "很快到某个数值、又很快回原数值"，学生一眼能对应到表格里的 "示数大于 / 等于 / 小于重力"。
  */
 const MASS = 60;
 const GRAVITY = 10;
 const BASE_READING = MASS * GRAVITY;
-/** 加速度包络峰值（m/s²） */
+/** 加速度峰值（m/s²） */
 const A_PEAK = 2;
-/** 三段时长（s）：放慢，让学生看清示数的连续变化 */
+/** 三段时长（s）：楼板滚得慢一点，学生来得及看清"加速—匀速—减速" */
 const T_ACCEL = 2;
 const T_CONST = 1.8;
 const T_DECEL = 2;
 const TOTAL = T_ACCEL + T_CONST + T_DECEL;
-/** 速度峰值与各段位移（由 a(t) = A·sin(πt/T) 积分得到） */
-const V_PEAK = (2 * A_PEAK * T_ACCEL) / Math.PI;
-const S_ACCEL = (A_PEAK * T_ACCEL ** 2) / Math.PI;
-const S_CONST = V_PEAK * T_CONST;
-const S_TOTAL = 2 * S_ACCEL + S_CONST;
+/** 加速度从 0 升到峰值（或回到 0）的时间（s）：示数要"很快"到位，不能慢悠悠地爬 */
+const RAMP = 0.25;
 /** 楼板间距（px，按"一层楼"给）与一次过程里楼板相对滚动的总距离 */
 const FLOOR_SPACING = 165;
 const SCROLL = 3 * FLOOR_SPACING;
@@ -40,19 +37,52 @@ let raf = 0;
 let startedAt = 0;
 
 /**
- * 平滑加速度包络（取竖直向上为正，上升过程用）
+ * 单段加速度包络：两端各用 RAMP 秒平滑过渡到峰值，中间保持峰值
+ *
+ * @param t 本段内时刻（s）
+ * @param duration 本段时长（s）
+ * @returns 0～1 的加速度比例
+ */
+const plateau = (t: number, duration: number): number => {
+  if (t <= 0 || t >= duration) return 0;
+  if (t < RAMP) return (1 - Math.cos((Math.PI * t) / RAMP)) / 2;
+  if (t > duration - RAMP) return (1 - Math.cos((Math.PI * (duration - t)) / RAMP)) / 2;
+
+  return 1;
+};
+
+/**
+ * 上升过程的加速度（取竖直向上为正）：加速段 +A、匀速段 0、减速段 −A；下降过程取相反数
  *
  * @param t 过程开始后的时刻（s）
  * @returns 该时刻的加速度分量（m/s²）
  */
 const accelAt = (t: number): number => {
-  if (t < T_ACCEL) return A_PEAK * Math.sin((Math.PI * t) / T_ACCEL);
+  if (t < 0 || t >= TOTAL) return 0;
+  if (t < T_ACCEL) return A_PEAK * plateau(t, T_ACCEL);
   if (t < T_ACCEL + T_CONST) return 0;
 
-  const tail = t - T_ACCEL - T_CONST;
-
-  return -A_PEAK * Math.sin((Math.PI * tail) / T_DECEL);
+  return -A_PEAK * plateau(t - T_ACCEL - T_CONST, T_DECEL);
 };
+
+/** 位移采样间隔（s） */
+const SAMPLE_DT = 0.002;
+
+/** 每个采样时刻的累计位移（m）：一次预积分后查表，楼板滚动不会随帧率越滚越偏 */
+const displacementTable = ((): number[] => {
+  const table = [0];
+  let velocity = 0;
+
+  for (let index = 1; index * SAMPLE_DT <= TOTAL; index += 1) {
+    velocity += accelAt((index - 0.5) * SAMPLE_DT) * SAMPLE_DT;
+    table.push((table[index - 1] ?? 0) + velocity * SAMPLE_DT);
+  }
+
+  return table;
+})();
+
+/** 一次过程的总位移（m） */
+const S_TOTAL = displacementTable[displacementTable.length - 1] ?? 0;
 
 /**
  * 已走位移（m）
@@ -61,23 +91,9 @@ const accelAt = (t: number): number => {
  * @returns 累计位移（m）
  */
 const displacementAt = (t: number): number => {
-  if (t < T_ACCEL) {
-    return (
-      (A_PEAK * T_ACCEL * (t - (T_ACCEL / Math.PI) * Math.sin((Math.PI * t) / T_ACCEL))) / Math.PI
-    );
-  }
+  const index = Math.min(Math.floor(t / SAMPLE_DT), displacementTable.length - 1);
 
-  if (t < T_ACCEL + T_CONST) return S_ACCEL + V_PEAK * (t - T_ACCEL);
-
-  const tail = t - T_ACCEL - T_CONST;
-
-  return (
-    S_ACCEL +
-    S_CONST +
-    V_PEAK * tail -
-    (A_PEAK * T_DECEL * (tail - (T_DECEL / Math.PI) * Math.sin((Math.PI * tail) / T_DECEL))) /
-      Math.PI
-  );
+  return displacementTable[index] ?? 0;
 };
 
 const stopAnimation = (): void => {
