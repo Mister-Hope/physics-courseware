@@ -22,6 +22,7 @@ const {
   showMotion = false,
   enclosure = "none",
   reading = null,
+  ground = true,
 } = defineProps<{
   /** 视重 / 重力：决定支持力箭头长度与踏板压陷（1 = 等重，<1 失重，>1 超重） */
   fnRatio?: number;
@@ -41,6 +42,8 @@ const {
   enclosure?: "none" | "elevator";
   /** 秤的示数（N）；不传则显示表盘 */
   reading?: number | null;
+  /** 是否画秤下的地面接触面；在电梯里（轿厢地板上）要关掉 */
+  ground?: boolean;
 }>();
 
 /** 表盘刻度偏转角（度） */
@@ -166,8 +169,17 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <rect x="288" y="318" width="6" height="22" rx="1.5" fill="var(--c-neutral-600)" stroke="var(--c-text-dim)" stroke-width="1" />
     </g>
 
-    <!-- ==================== 2. 地板接触面（复用 SurfaceHatch 组件） ==================== -->
-    <SurfaceHatch :from="{ x: 32, y: 372 }" :to="{ x: 288, y: 372 }" side="below" color="#64748b" :line-width="2" :thickness="9" :gap="16" />
+    <!-- ==================== 2. 地板接触面（房间里的秤才有；电梯轿厢里不画） ==================== -->
+    <SurfaceHatch
+      v-if="ground && enclosure !== 'elevator'"
+      :from="{ x: 32, y: 372 }"
+      :to="{ x: 288, y: 372 }"
+      side="below"
+      color="#64748b"
+      :line-width="2"
+      :thickness="9"
+      :gap="16"
+    />
 
     <!-- ==================== 3. 精密体重秤（踏板随视重动态微压/回弹） ==================== -->
     <g>
