@@ -19,3 +19,43 @@
   min-width: 0;
   min-height: 0;
 }
+
+/* ── 第 5 页：过程树（"上升过程 { 加速上升… " 的文字写在 slides.md 里）──
+   右侧是一整块宽约 550px 的空白：上升、下降两块保持原来的字号与间距，
+   只在水平方向上用 space-around 左右分开，把这块空白铺开。── */
+.proc-tree {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.proc {
+  display: flex;
+  gap: 0.9rem;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.proc-name {
+  align-self: center;
+  color: var(--c-accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.proc-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.proc-items > div {
+  color: var(--c-text);
+  line-height: 1.5;
+}

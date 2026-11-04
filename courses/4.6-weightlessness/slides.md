@@ -89,7 +89,28 @@ title: '电梯的运动'
 <div class="page-grow">
 <div class="ask">电梯上升、下降的完整过程中，速度怎样变化？</div>
 
-<ElevatorWeightSim />
+<ElevatorWeightSim>
+<div class="proc-tree">
+<div class="proc" v-click>
+<div class="proc-name">上升过程</div>
+<CurlyBraceSvg />
+<div class="proc-items">
+<div>加速上升</div>
+<div>匀速上升</div>
+<div>减速上升</div>
+</div>
+</div>
+<div class="proc" v-click>
+<div class="proc-name">下降过程</div>
+<CurlyBraceSvg />
+<div class="proc-items">
+<div>加速下降</div>
+<div>匀速下降</div>
+<div>减速下降</div>
+</div>
+</div>
+</div>
+</ElevatorWeightSim>
 </div>
 
 ---
@@ -99,9 +120,11 @@ title: '示数与重力'
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">电梯不同运动状态下，秤的示数与重力是什么关系？</div>
+<div class="ask">电梯不同运动状态下，秤的示数与重力是什么关系？</div>
 
+<ElevatorWeightSim>
 <ElevatorStateTable mode="reading" />
+</ElevatorWeightSim>
 </div>
 
 ---
@@ -113,7 +136,7 @@ title: '加速度的方向'
 <div class="page-grow">
 <div class="ask ask-lead">这些状态的加速度方向分别是什么？超重、失重的共同点在哪里？</div>
 
-<ElevatorStateTable mode="acceleration" />
+<ElevatorStateTable mode="compare" />
 
 <div class="tip-hint" v-click="2">超重：加速度向上；失重：加速度向下 —— 与电梯向上还是向下运动无关。</div>
 </div>

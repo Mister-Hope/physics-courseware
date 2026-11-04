@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import { useSlideContext } from "@slidev/client";
-import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 
 /**
- * 电梯里的体重计（§4.6 第 5 页）
+ * 电梯里的体重计（§4.6 第 5、6 页）
  *
- * 轿厢固定在画面中央，用**两侧楼板上下滚动**表现相对运动：楼板向下滚 = 电梯在上升。 一次完整过程由**翻页单击**驱动：第 1 击播上升过程，第 2 击播下降过程；画面里只给 "电梯怎么动 +
- * 秤的示数"，加速 / 匀速 / 减速三个阶段由学生自己从楼板运动的快慢看出来。
+ * 左侧：轿厢固定、两侧楼板上下滚动（楼板向下滚 = 电梯在上升），下方是秤的示数； 右侧：两个过程按钮（上升过程 / 下降过程）+ 页面通过默认插槽放进来的正文 （第 5
+ * 页放"上升/下降各三个阶段"的花括号树，第 6 页放"示数与重力"的对应表）。
  *
- * 示数按真实运动学连续变化：加速度取平滑的正弦包络，a(t) 连续 ⇒ 加速段示数从 600 N 连续地 升到 720 N 再回到 600 N，减速段对称地从 600 N 降到 480 N 再回到
- * 600 N，不会跳变。
+ * 三个阶段之类的文字一律写在 slides.md 里，不集成进组件。 示数按真实运动学连续变化：加速度取平滑的正弦包络，a(t) 连续 ⇒ 加速段示数从 600 N 连续升到 720 N 再回到
+ * 600 N，减速段对称地从 600 N 降到 480 N 再回到 600 N，不会跳变； 每段时长放慢到约 2 s，学生来得及看清示数的连续变化。
  */
 const MASS = 60;
 const GRAVITY = 10;
 const BASE_READING = MASS * GRAVITY;
 /** 加速度包络峰值（m/s²） */
 const A_PEAK = 2;
-/** 三段时长（s） */
-const T_ACCEL = 1.1;
-const T_CONST = 1;
-const T_DECEL = 1.1;
+/** 三段时长（s）：放慢，让学生看清示数的连续变化 */
+const T_ACCEL = 2;
+const T_CONST = 1.8;
+const T_DECEL = 2;
 const TOTAL = T_ACCEL + T_CONST + T_DECEL;
 /** 速度峰值与各段位移（由 a(t) = A·sin(πt/T) 积分得到） */
 const V_PEAK = (2 * A_PEAK * T_ACCEL) / Math.PI;
@@ -27,24 +26,15 @@ const S_ACCEL = (A_PEAK * T_ACCEL ** 2) / Math.PI;
 const S_CONST = V_PEAK * T_CONST;
 const S_TOTAL = 2 * S_ACCEL + S_CONST;
 /** 楼板间距（px，按"一层楼"给）与一次过程里楼板相对滚动的总距离 */
-const FLOOR_SPACING = 175;
-const SCROLL = 2 * FLOOR_SPACING;
+const FLOOR_SPACING = 165;
+const SCROLL = 3 * FLOOR_SPACING;
 /** 楼板图案覆盖范围（首尾各多一块，保证循环接缝无缝） */
 const FLOOR_INDEXES = [-1, 0, 1, 2];
-
-/** 翻页步数：0 = 静止；1 = 上升过程；2 = 下降过程 */
-const { $clicks } = useSlideContext();
-const step = computed(() => Math.max(0, Math.min($clicks.value, 2)));
 
 const reading = ref(BASE_READING);
 /** 楼板累计下移距离（px）：正值表示楼板向下滚、电梯在上升 */
 const floorOffset = ref(0);
 const playing = ref<"up" | "down" | null>(null);
-/** 已亮出的阶段数（0~3）：上升、下降各自跟随动画逐段亮出 */
-const upShown = ref(0);
-const downShown = ref(0);
-/** 当前阶段（0 加速 / 1 匀速 / 2 减速 / -1 无） */
-const activePhase = ref(-1);
 
 let raf = 0;
 let startedAt = 0;
@@ -94,16 +84,6 @@ const stopAnimation = (): void => {
   cancelAnimationFrame(raf);
   raf = 0;
   playing.value = null;
-  activePhase.value = -1;
-};
-
-const reset = (): void => {
-  stopAnimation();
-  reading.value = BASE_READING;
-  floorOffset.value = 0;
-  upShown.value = 0;
-  downShown.value = 0;
-  activePhase.value = -1;
 };
 
 const tick = (): void => {
@@ -116,16 +96,9 @@ const tick = (): void => {
   if (t >= TOTAL) {
     reading.value = BASE_READING;
     floorOffset.value = direction === "up" ? SCROLL : 0;
-    if (direction === "up") upShown.value = 3;
-    else downShown.value = 3;
     stopAnimation();
     return;
   }
-
-  const phase = t < T_ACCEL ? 0 : t < T_ACCEL + T_CONST ? 1 : 2;
-  activePhase.value = phase;
-  if (direction === "up") upShown.value = Math.max(upShown.value, phase + 1);
-  else downShown.value = Math.max(downShown.value, phase + 1);
 
   const accel = direction === "up" ? accelAt(t) : -accelAt(t);
   reading.value = Math.round(MASS * (GRAVITY + accel));
@@ -141,6 +114,8 @@ const tick = (): void => {
  */
 const startProcess = (direction: "up" | "down"): void => {
   stopAnimation();
+  floorOffset.value = direction === "up" ? 0 : SCROLL;
+  reading.value = BASE_READING;
   playing.value = direction;
   startedAt = performance.now();
   raf = requestAnimationFrame(tick);
@@ -151,135 +126,70 @@ const floorShift = computed(
   () => ((floorOffset.value % FLOOR_SPACING) + FLOOR_SPACING) % FLOOR_SPACING,
 );
 
-watch(
-  step,
-  (value, previous) => {
-    if (value === 0) {
-      reset();
-      return;
-    }
-
-    if (value === 1) {
-      reset();
-      if (previous > value) {
-        // 往回翻页：直接停在"上升完成"的静态结果上，不重播动画
-        floorOffset.value = SCROLL;
-        upShown.value = 3;
-        return;
-      }
-      startProcess("up");
-      return;
-    }
-
-    // value === 2：先把上升过程补完，再播下降过程
-    if (floorOffset.value !== SCROLL) {
-      stopAnimation();
-      floorOffset.value = SCROLL;
-      reading.value = BASE_READING;
-    }
-    startProcess("down");
-  },
-  { immediate: true },
-);
-
 onBeforeUnmount(stopAnimation);
 </script>
 
 <template>
   <div class="ew">
-    <div class="ew-stage">
-      <!-- 楼板：随电梯运动上下滚动（轿厢固定，楼板向下滚 = 电梯上升） -->
-      <div class="ew-wall ew-wall-l">
-        <div class="ew-floors" :style="{ transform: `translateY(${floorShift}px)` }">
-          <div
-            v-for="index in FLOOR_INDEXES"
-            :key="`l-${index}`"
-            class="ew-slab ew-slab-l"
-            :style="{ top: `${index * FLOOR_SPACING}px` }"
-          />
+    <div class="ew-left">
+      <div class="ew-stage">
+        <!-- 楼板：随电梯运动上下滚动（轿厢固定，楼板向下滚 = 电梯上升） -->
+        <div class="ew-wall ew-wall-l">
+          <div class="ew-floors" :style="{ transform: `translateY(${floorShift}px)` }">
+            <div
+              v-for="index in FLOOR_INDEXES"
+              :key="`l-${index}`"
+              class="ew-slab ew-slab-l"
+              :style="{ top: `${index * FLOOR_SPACING}px` }"
+            />
+          </div>
         </div>
-      </div>
-      <div class="ew-wall ew-wall-r">
-        <div class="ew-floors" :style="{ transform: `translateY(${floorShift}px)` }">
-          <div
-            v-for="index in FLOOR_INDEXES"
-            :key="`r-${index}`"
-            class="ew-slab ew-slab-r"
-            :style="{ top: `${index * FLOOR_SPACING}px` }"
-          />
+        <div class="ew-wall ew-wall-r">
+          <div class="ew-floors" :style="{ transform: `translateY(${floorShift}px)` }">
+            <div
+              v-for="index in FLOOR_INDEXES"
+              :key="`r-${index}`"
+              class="ew-slab ew-slab-r"
+              :style="{ top: `${index * FLOOR_SPACING}px` }"
+            />
+          </div>
+        </div>
+
+        <!-- 轿厢（固定居中，近似正方形） -->
+        <div class="ew-cabin">
+          <div class="ew-light" />
+          <div class="ew-person">
+            <PersonWeightSvg
+              :fn-ratio="reading / BASE_READING"
+              :needle-ratio="reading / BASE_READING"
+              :show-forces="false"
+            />
+          </div>
         </div>
       </div>
 
-      <!-- 轿厢：固定居中；尺寸按"一层楼"的比例画 -->
-      <div class="ew-cabin">
-        <div class="ew-light" />
-        <div class="ew-person">
-          <PersonWeightSvg
-            :fn-ratio="reading / BASE_READING"
-            :needle-ratio="reading / BASE_READING"
-            :show-forces="false"
-          />
-        </div>
+      <div class="ew-reading">
+        <span class="ew-reading-label">秤的示数</span>
+        <span class="ew-reading-value">{{ reading }}<span class="ew-unit">N</span></span>
       </div>
     </div>
 
-    <div class="ew-panel">
-      <div class="ew-read-label">秤的示数</div>
-      <div class="ew-read-value">{{ reading }}<span class="ew-unit">N</span></div>
+    <div class="ew-right">
+      <div class="ew-buttons">
+        <button type="button" :class="{ 'ew-on': playing === 'up' }" @click="startProcess('up')">
+          <mdi-arrow-up-bold class="ew-icon" />上升过程
+        </button>
+        <button
+          type="button"
+          :class="{ 'ew-on': playing === 'down' }"
+          @click="startProcess('down')"
+        >
+          <mdi-arrow-down-bold class="ew-icon" />下降过程
+        </button>
+      </div>
 
-      <div class="ew-stages">
-        <div class="ew-stage-row" :class="{ 'ew-hidden': step < 1 }">
-          <span
-            class="ew-phase"
-            :class="{
-              'ew-hidden': upShown < 1,
-              'ew-active': playing === 'up' && activePhase === 0,
-            }"
-            >加速上升</span
-          >
-          <span
-            class="ew-phase"
-            :class="{
-              'ew-hidden': upShown < 2,
-              'ew-active': playing === 'up' && activePhase === 1,
-            }"
-            >匀速上升</span
-          >
-          <span
-            class="ew-phase"
-            :class="{
-              'ew-hidden': upShown < 3,
-              'ew-active': playing === 'up' && activePhase === 2,
-            }"
-            >减速上升</span
-          >
-        </div>
-        <div class="ew-stage-row" :class="{ 'ew-hidden': step < 2 }">
-          <span
-            class="ew-phase"
-            :class="{
-              'ew-hidden': downShown < 1,
-              'ew-active': playing === 'down' && activePhase === 0,
-            }"
-            >加速下降</span
-          >
-          <span
-            class="ew-phase"
-            :class="{
-              'ew-hidden': downShown < 2,
-              'ew-active': playing === 'down' && activePhase === 1,
-            }"
-            >匀速下降</span
-          >
-          <span
-            class="ew-phase"
-            :class="{
-              'ew-hidden': downShown < 3,
-              'ew-active': playing === 'down' && activePhase === 2,
-            }"
-            >减速下降</span
-          >
-        </div>
+      <div class="ew-content">
+        <slot />
       </div>
     </div>
   </div>
@@ -288,14 +198,23 @@ onBeforeUnmount(stopAnimation);
 <style scoped>
 .ew {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.5rem;
 
   width: 100%;
   min-width: 0;
-  height: 425px;
+  height: 424px;
 }
 
-/* ── 电梯井：两侧楼板上下滚动 ── */
+/* ── 左 1/3：电梯井 + 示数 ── */
+.ew-left {
+  display: flex;
+  flex: 0 0 292px;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  min-width: 0;
+}
+
 .ew-stage {
   position: relative;
 
@@ -315,7 +234,7 @@ onBeforeUnmount(stopAnimation);
   top: 0;
   bottom: 0;
 
-  width: 62px;
+  width: 44px;
 
   background: color-mix(in srgb, var(--c-surface-solid) 55%, transparent);
 }
@@ -350,16 +269,16 @@ onBeforeUnmount(stopAnimation);
 }
 
 .ew-slab-l {
-  right: -42px;
+  right: -30px;
   left: 0;
 }
 
 .ew-slab-r {
   right: 0;
-  left: -42px;
+  left: -30px;
 }
 
-/* ── 轿厢（固定居中） ── */
+/* ── 轿厢（固定居中、近似正方形） ── */
 .ew-cabin {
   position: absolute;
   top: 50%;
@@ -369,9 +288,9 @@ onBeforeUnmount(stopAnimation);
   align-items: flex-end;
   justify-content: center;
 
-  width: 170px;
-  height: 136px;
-  padding: 0 10px 5px;
+  width: 132px;
+  height: 132px;
+  padding: 0 8px 6px;
   border: 1.5px solid color-mix(in srgb, var(--c-neutral-300) 52%, transparent);
   border-radius: 8px 8px 3px 3px;
 
@@ -386,7 +305,7 @@ onBeforeUnmount(stopAnimation);
   top: 6px;
   left: 50%;
 
-  width: 58px;
+  width: 48px;
   height: 3px;
   border-radius: 2px;
 
@@ -400,76 +319,101 @@ onBeforeUnmount(stopAnimation);
   width: 104px;
 }
 
-/* ── 右栏：秤的示数 ── */
-.ew-panel {
+.ew-reading {
   display: flex;
-  flex: 0 0 292px;
-  flex-direction: column;
-  gap: 0.55rem;
-  justify-content: center;
+  align-items: baseline;
+  justify-content: space-between;
 
   min-width: 0;
-  padding: 0.2rem 0.3rem;
+  padding: 0 0.15rem;
 }
 
-.ew-read-label {
+.ew-reading-label {
   color: var(--c-neutral-300);
-  font-size: 1.02rem;
+  font-size: 0.95rem;
 }
 
-.ew-read-value {
+.ew-reading-value {
   color: var(--c-accent);
 
   font-weight: 700;
-  font-size: 3.6rem;
+  font-size: 2.5rem;
   font-variant-numeric: tabular-nums;
-  line-height: 1.05;
+  line-height: 1;
 }
 
 .ew-unit {
-  margin-left: 0.28rem;
+  margin-left: 0.2rem;
   color: var(--c-text-dim);
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
-/* 上升 / 下降各三个阶段：随动画逐段亮出 */
-.ew-stages {
+/* ── 右侧：过程按钮 + 正文 ── */
+.ew-right {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
 
-  min-height: 4.6rem;
-  margin-top: 0.35rem;
-}
-
-.ew-stage-row {
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
   min-width: 0;
 }
 
-.ew-phase {
-  padding: 0.12rem 0.52rem;
+.ew-buttons {
+  display: flex;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+button {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem 1.1rem;
   border: 1px solid var(--c-border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
 
   background: var(--c-surface);
   color: var(--c-text);
 
-  font-size: 0.82rem;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.98rem;
   white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.16s ease,
+    color 0.16s ease,
+    background-color 0.16s ease;
 }
 
-.ew-active {
+button:hover {
+  border-color: var(--c-border-glow);
+  color: var(--c-accent);
+}
+
+.ew-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.ew-on {
   border-color: var(--c-border-glow) !important;
   background: var(--c-accent-soft) !important;
   color: var(--c-accent) !important;
-  font-weight: 700;
 }
 
-.ew-hidden {
-  visibility: hidden;
+.ew-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 0;
 }
 </style>
