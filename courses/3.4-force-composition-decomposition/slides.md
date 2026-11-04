@@ -110,11 +110,11 @@ clicks: 5
 <div class="ask">两次实验，为什么必须把圆环拉到同一个位置 <Latex tex="O" />？</div>
 
 <div class="split-wide" style="--cols: minmax(0, 0.9fr) minmax(0, 1fr)">
-<PullEquivalence :start-at="3" />
+<PullEquivalence :start-at="1" />
 <div class="stack">
-<div class="tip-hint" v-click="1">位置相同 ⟹ 橡皮条伸长相同、对结点的拉力相同；结点都静止 ⟹ 绳的拉力合起来与它平衡 ⟹ 两个力共同作用的效果 = 一个力单独作用的效果（<b>等效替代</b>）。</div>
+<div class="tip-hint" v-click="4">位置相同 ⟹ 橡皮条伸长相同、对结点的拉力相同；结点都静止 ⟹ 绳的拉力合起来与它平衡 ⟹ 两个力共同作用的效果 = 一个力单独作用的效果（<b>等效替代</b>）。</div>
 
-<div class="stack-dense" v-click="2">
+<div class="stack-dense" v-click="5">
 <div class="mini-title"><mdi-flask-outline class="text-xl" /> 实验怎么做</div>
 <div>① 两个测力计把结点拉到 <Latex tex="O" />，描出 <Latex tex="F_1" />、<Latex tex="F_2" /> 两个力</div>
 <div>② 一个测力计还是拉到 <Latex tex="O" />，描出这唯一的一个力 <Latex tex="F" /></div>
