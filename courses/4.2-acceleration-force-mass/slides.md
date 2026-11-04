@@ -67,7 +67,7 @@ title: '绳的拉力等于槽码的重力吗？'
 
 <div v-click="1">对小车：<Latex tex="F_T = Ma" />；对槽码：<Latex tex="mg - F_T = ma" />。</div>
 
-<div v-click="2">两式联立消去 <Latex tex="a" />：<Latex tex="mg = (M + m)a" />，得 <Latex tex="a = \frac{mg}{M + m}" />。</div>
+<div v-click="2">两式联立消去绳子拉力 <Latex tex="F_T" />：<Latex tex="mg = (M + m)a" />，得 <Latex tex="a = \frac{mg}{M + m}" />。</div>
 
 <div v-click="3">代回小车：<Latex tex="F_T = Ma = \frac{Mmg}{M + m} = \frac{mg}{1 + \frac{m}{M}}" />。</div>
 
@@ -480,7 +480,11 @@ ticks:
   labels: false
 view: { width: 340, height: 185 }
 curves:
-  - points: [{ x: -0.5, y: -1.65 }, { x: 6, y: 4.0 }]
+  - points: [{ x: -0.5, y: -1.65 }, { x: 1.4, y: 0 }]
+    color: var(--c-accent)
+    width: 3
+    dashed: true
+  - points: [{ x: 1.4, y: 0 }, { x: 6, y: 4.0 }]
     color: var(--c-accent)
     width: 3
 ```
@@ -501,7 +505,11 @@ ticks:
   labels: false
 view: { width: 340, height: 185 }
 curves:
-  - points: [{ x: -0.05, y: -1.22 }, { x: 1.15, y: 4.2 }]
+  - points: [{ x: -0.05, y: -1.22 }, { x: 0.22, y: 0 }]
+    color: var(--c-accent)
+    width: 3
+    dashed: true
+  - points: [{ x: 0.22, y: 0 }, { x: 1.15, y: 4.2 }]
     color: var(--c-accent)
     width: 3
 ```
@@ -649,7 +657,7 @@ layout: base-flex
 clicks: 2
 ---
 
-# 为什么会有 g 这条渐近线
+# 小车加速度为什么会有上限 $g$？
 
 <div class="page-grow">
 <div class="ask">槽码很重时，小车的加速度最大能到多少？</div>
@@ -658,9 +666,9 @@ clicks: 2
 
 <div v-click="1"><Latex tex="a = \frac{m}{M + m}g = \frac{1}{\frac{M}{m} + 1}g" />，绳的拉力 <Latex tex="F_T = Ma = \frac{Mm}{M + m}g < mg" />。</div>
 
-<div v-click="2" class="tip-hint">槽码不再远小于小车时，<Latex tex="\frac{M}{m} \to 0" />，于是 <Latex tex="a \to g" /> —— 这就是那条水平渐近线。</div>
+<div v-click="2" class="tip-hint">槽码越重，<Latex tex="\frac{M}{m} \to 0" />，于是 <Latex tex="a \to g" />：加速度图像以 <Latex tex="a = g" /> 为水平渐近线，小车的加速度不可能超过 <Latex tex="g" />。</div>
 
-<div class="info-hint" v-click="2">所以实验必须挑「小车重、槽码轻」的组合：<Latex tex="m \ll M" /> 不是可有可无的条件。</div>
+<div class="info-hint" v-click="2">所以 <Latex tex="m \ll M" /> 是实验的必要条件：实验必须挑「小车重、槽码轻」的组合。</div>
 </div>
 
 ---
