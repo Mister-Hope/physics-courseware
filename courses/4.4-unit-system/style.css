@@ -69,9 +69,21 @@
   --stack-gap: 0.3rem;
 }
 
-/* ── 第 15 页：三列判定行对齐（某列公式折行也不歪）── */
-.judge-col > :last-child {
-  margin-top: auto;
+/* ── 第 15 页：三行判定（式子 | 单位运算 | 判断），三列逐列点出答案 ── */
+.judge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem 1.3rem;
+  place-items: center center;
+}
+
+.judge-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-items: center;
+
+  line-height: 1.45;
 }
 
 /* ── 第 10、11 页：单位推导行（公式右对齐、紧贴箭头）── */

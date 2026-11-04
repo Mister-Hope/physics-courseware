@@ -349,7 +349,7 @@ clicks: 2
 
 ---
 layout: base-flex
-clicks: 3
+clicks: 4
 ---
 
 # 国际单位制的应用
@@ -357,25 +357,28 @@ clicks: 3
 <div class="page-grow">
 <div class="ask">只看单位，判断下面三个式子能否成立：</div>
 
-<div class="three-col">
-<div class="stack judge-col" v-click="1">
+<div class="judge-grid">
 <div><Latex tex="a = \frac{v^{2}}{x}" /></div>
-<div class="mini-note"><Latex tex="\text{m}^{2}\cdot\text{s}^{-2} \div \text{m} \to \text{m}\cdot\text{s}^{-2}" /></div>
-<div class="ok-line font-semibold"><mdi-check-circle-outline class="text-lg inline-block align-middle mr-1" />与加速度的单位一致</div>
-</div>
-<div class="stack judge-col" v-click="2">
 <div><Latex tex="F = \frac{mv}{t}" /></div>
-<div class="mini-note"><Latex tex="\text{kg}\cdot\text{m}\cdot\text{s}^{-1} \div \text{s} \to \text{kg}\cdot\text{m}\cdot\text{s}^{-2}" /></div>
-<div class="ok-line font-semibold"><mdi-check-circle-outline class="text-lg inline-block align-middle mr-1" />就是 <Latex tex="\text{N}" /></div>
+<div><Latex tex="x = \frac{F t}{m}" /></div>
+<div class="judge-calc text-lg" v-click="1">
+<div><Latex tex="\text{m}^{2}\cdot\text{s}^{-2} \div \text{m}" /></div>
+<div><Latex tex="= \text{m}\cdot\text{s}^{-2}" /></div>
 </div>
-<div class="stack judge-col" v-click="3">
-<div><Latex tex="W = Fv" /></div>
-<div class="mini-note"><Latex tex="\text{kg}\cdot\text{m}\cdot\text{s}^{-2} \times \text{m}\cdot\text{s}^{-1} \to \text{kg}\cdot\text{m}^{2}\cdot\text{s}^{-3}" /></div>
-<div class="bad-line font-semibold"><mdi-close-circle-outline class="text-lg inline-block align-middle mr-1" />量纲是功率，不是功</div>
+<div class="judge-calc text-lg" v-click="2">
+<div><Latex tex="\text{kg}\cdot\text{m}\cdot\text{s}^{-1} \div \text{s}" /></div>
+<div><Latex tex="= \text{kg}\cdot\text{m}\cdot\text{s}^{-2}" /></div>
 </div>
+<div class="judge-calc text-lg" v-click="3">
+<div><Latex tex="\text{N}\cdot\text{s} \div \text{kg}" /></div>
+<div><Latex tex="= \text{m}\cdot\text{s}^{-1}" /></div>
+</div>
+<div v-click="1"><span class="ok-line font-semibold"><mdi-check-circle-outline class="icon-md inline-block align-middle mr-1" />与加速度的单位一致</span></div>
+<div v-click="2"><span class="ok-line font-semibold"><mdi-check-circle-outline class="icon-md inline-block align-middle mr-1" />就是 <Latex tex="\text{N}" /></span></div>
+<div v-click="3"><span class="bad-line font-semibold"><mdi-close-circle-outline class="icon-md inline-block align-middle mr-1" />单位是速度，不是位移</span></div>
 </div>
 
-<div class="tip-hint" v-click="3">单位对了，公式不一定对；单位不对，公式一定错。</div>
+<div class="tip-hint" v-click="4">单位对了，公式不一定对；单位不对，公式一定错。</div>
 </div>
 
 ---
