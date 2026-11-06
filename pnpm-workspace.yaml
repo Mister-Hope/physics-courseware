@@ -5,8 +5,8 @@ packages:
 catalog:
   "@iconify-json/mdi": 1.2.3
   "@iconify/vue": 5.0.5
-  "@slidev/cli": 53.0.0
-  "@slidev/client": 53.0.0
+  "@slidev/cli": 53.1.0
+  "@slidev/client": 53.1.0
   "@slidev/theme-default": 0.25.0
   "@types/three": 0.187.0
   three: 0.187.0
