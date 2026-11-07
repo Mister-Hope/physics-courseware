@@ -1,218 +1,176 @@
 <script setup lang="ts">
-import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
+import { useSlideContext } from "@slidev/client";
 
 /**
- * 电梯六个运动状态与"示数 / 加速度方向"的对应表（§4.6 第 6、7 页）
+ * 电梯六种运动状态表（第 9、10 页）
  *
- * Reading：运动状态 | 示数与重力 | 现象 —— 第 6 页，第 1 击出示数、第 2 击出现象。 compare：运动状态 | 加速度方向 | 示数与重力 | 现象 —— 第 7
- * 页，把第 6 页那张表整张搬过来， 再在"运动状态"后面补一列"加速度方向"；第 1 击出加速度方向、第 2 击给它着色。 上升、下降两组上下排列，让学生沿着"状态 → 示数 →
- * 加速度"逐层对照。
+ * - mode="reading"（第 9 页）：先给出「示数与重力相比」这一列（大于/等于/小于）；
+ *   然后**从上到下 6 次点击**逐个出现「现象」（超重/失重/—）；
+ *   再**6 次点击**逐个出现左侧的「运动状态」（加速上升 … 减速下降）。
+ * - mode="accel"（第 10 页）：运动状态、示数、现象常显；加速度方向**从上到下 6 次点击**逐个出现，
+ *   匀速行的加速度写 0。结论（与运动方向无关）由页面自己加。
+ *
+ * 每一步只新增内容、不顶跑已可见内容：未出现的格子用 visibility:hidden 占位（不用 v-if）。
  */
-const { mode = "reading" } = defineProps<{
-  /** Reading：示数与重力（第 6 页）；compare：示数 + 加速度方向（第 7 页） */
-  mode?: "reading" | "compare";
-}>();
+const props = withDefaults(defineProps<{ mode?: "reading" | "accel" }>(), { mode: "reading" });
 
 const { $clicks } = useSlideContext();
-const step = computed(() => $clicks.value);
-
-const isCompare = computed(() => mode === "compare");
-/** 示数列：第 6 页第 1 击出；第 7 页沿用上一页的结论、常显 */
-const showReading = computed(() => isCompare.value || step.value >= 1);
-/** 现象列：第 6 页第 2 击出；第 7 页常显 */
-const showTag = computed(() => isCompare.value || step.value >= 2);
-/** 加速度方向列：第 7 页第 1 击才出，第 2 击着色（把"加速度向上 = 超重"点出来） */
-const showAccel = computed(() => isCompare.value && step.value >= 1);
-const colorAccel = computed(() => isCompare.value && step.value >= 2);
+const step = computed(() => Math.max(0, $clicks.value ?? 0));
+const isAccel = computed(() => props.mode === "accel");
 
 interface Row {
-  readonly state: string;
-  /** 示数与重力的关系 */
-  readonly reading: string;
-  /** 加速度方向 */
-  readonly accel: string;
-  /** 该状态对应的色调（超重红 / 失重蓝 / 匀速中性），示数与加速度方向共用 */
-  readonly tone: "over" | "under" | "even";
-  readonly tag: "over" | "under" | "none";
+  state: string;
+  relation: string;
+  tag: "超重" | "失重" | null;
+  arrow: "↑" | "↓" | "0";
+  group: "up" | "down";
 }
 
-const UP: readonly Row[] = [
-  { state: "加速上升", reading: "大于", accel: "向上", tone: "over", tag: "over" },
-  { state: "匀速上升", reading: "等于", accel: "0", tone: "even", tag: "none" },
-  { state: "减速上升", reading: "小于", accel: "向下", tone: "under", tag: "under" },
+const ROWS: Row[] = [
+  { state: "加速上升", relation: "大于", tag: "超重", arrow: "↑", group: "up" },
+  { state: "匀速上升", relation: "等于", tag: null, arrow: "0", group: "up" },
+  { state: "减速上升", relation: "小于", tag: "失重", arrow: "↓", group: "up" },
+  { state: "加速下降", relation: "小于", tag: "失重", arrow: "↓", group: "down" },
+  { state: "匀速下降", relation: "等于", tag: null, arrow: "0", group: "down" },
+  { state: "减速下降", relation: "大于", tag: "超重", arrow: "↑", group: "down" },
 ];
 
-const DOWN: readonly Row[] = [
-  { state: "加速下降", reading: "小于", accel: "向下", tone: "under", tag: "under" },
-  { state: "匀速下降", reading: "等于", accel: "0", tone: "even", tag: "none" },
-  { state: "减速下降", reading: "大于", accel: "向上", tone: "over", tag: "over" },
-];
+/** 现象列：读表页从上到下逐个出现（第 1–6 击）；加速度页常显 */
+function showTag(index: number): boolean {
+  if (isAccel.value) return true;
+  return step.value >= index + 1;
+}
 
-const groups = [
-  { name: "上升", rows: UP },
-  { name: "下降", rows: DOWN },
-] as const;
+/** 运动状态列：读表页在现象列出完之后，再从上到下逐个出现（第 7–12 击） */
+function showState(index: number): boolean {
+  if (isAccel.value) return true;
+  return step.value >= ROWS.length + index + 1;
+}
 
-const tagText = (tag: Row["tag"]): string =>
-  tag === "over" ? "超重" : tag === "under" ? "失重" : "—";
+/** 加速度方向：加速度页从上到下逐个出现 */
+function showArrow(index: number): boolean {
+  return isAccel.value && step.value >= index + 1;
+}
+
+function relationClass(row: Row): string {
+  if (row.relation === "大于") return "is-bigger";
+  if (row.relation === "小于") return "is-smaller";
+  return "is-even";
+}
 </script>
 
 <template>
-  <div class="est" :class="{ 'est-compare': isCompare }">
-    <div class="est-head">
-      <span>运动状态</span>
-      <span v-if="isCompare">加速度方向</span>
-      <span>示数与重力</span>
-      <span>现象</span>
+  <div class="est" :class="{ 'est-accel': isAccel }">
+    <div class="est-row est-head">
+      <div>运动状态</div>
+      <div>示数与重力相比</div>
+      <div>现象</div>
+      <div v-if="isAccel">加速度方向</div>
     </div>
 
-    <section v-for="group in groups" :key="group.name" class="est-group">
-      <div class="est-group-name">{{ group.name }}</div>
-      <div class="est-list">
-        <div v-for="row in group.rows" :key="row.state" class="est-row">
-          <span class="est-state">{{ row.state }}</span>
-          <span
-            v-if="isCompare"
-            class="est-value"
-            :class="[{ 'est-hidden': !showAccel }, colorAccel ? `est-tone-${row.tone}` : '']"
-            >{{ row.accel }}</span
-          >
-          <span class="est-value" :class="{ 'est-hidden': !showReading }">{{ row.reading }}</span>
-          <span class="est-tag" :class="[`est-tag-${row.tag}`, { 'est-hidden': !showTag }]">{{
-            tagText(row.tag)
-          }}</span>
-        </div>
+    <div v-for="(row, i) in ROWS" :key="row.state" class="est-row" :class="`est-${row.group}`">
+      <div class="est-cell est-state" :class="{ 'est-hidden': !showState(i) }">{{ row.state }}</div>
+      <div class="est-cell est-rel" :class="relationClass(row)">{{ row.relation }}</div>
+      <div class="est-cell est-tag" :class="[row.tag ? `is-${row.tag}` : 'is-none', { 'est-hidden': !showTag(i) }]">
+        {{ row.tag ?? "—" }}
       </div>
-    </section>
+      <div v-if="isAccel" class="est-cell est-arrow" :class="{ 'est-hidden': !showArrow(i) }">
+        <span class="est-arrow-glyph">{{ row.arrow }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .est {
-  display: flex;
-  flex-direction: column;
-  gap: 0.22rem;
+  display: grid;
+  gap: 0.18rem;
 
   width: 100%;
-  min-width: 0;
-  max-width: 720px;
-  margin: 0 auto;
+  max-width: 100%;
+  font-size: 0.88rem;
 }
 
-/* 第 7 页："运动状态 | 加速度方向 | 示数与重力 | 现象" 四列，比第 6 页多一列，放宽一点 */
-.est-compare {
-  max-width: 840px;
-}
-
-.est-head,
 .est-row {
   display: grid;
-  grid-template-columns: 1.3fr 1fr 0.85fr;
-  gap: 0.6rem;
+  grid-template-columns: 1.2fr 1.15fr 0.8fr;
+  gap: 0.4rem;
   align-items: center;
+
+  padding: 0.11rem 0.8rem;
+
+  background: rgb(30 41 59 / 38%);
+  border: 1px solid var(--c-border);
+  border-radius: 0.7rem;
+}
+
+.est-accel .est-row {
+  grid-template-columns: 1.06fr 1.02fr 0.68fr 0.76fr;
 }
 
 .est-head {
-  padding: 0 0.85rem;
-  color: var(--c-text-dim);
-  font-size: 0.78rem;
-  line-height: 1.4;
-}
-
-.est-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.16rem;
-}
-
-.est-group-name {
-  padding-left: 0.85rem;
-  border-left: 3px solid var(--c-accent);
-
-  color: var(--c-accent);
-
+  font-size: 0.74rem;
+  white-space: nowrap;
   font-weight: 700;
-  font-size: 0.86rem;
-  line-height: 1.35;
+  color: var(--c-text-dim);
+
+  background: transparent;
+  border-color: transparent;
 }
 
-.est-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.18rem;
-
-  padding-left: 0.85rem;
-  border-left: 1px solid var(--c-border);
-}
-
-.est-row {
-  padding: 0.08rem 0.85rem;
-  border-radius: var(--radius-sm);
-
-  background: color-mix(in srgb, var(--c-surface-solid) 45%, transparent);
-
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-/* 第 7 页的四列表：多一列"加速度方向" */
-.est-compare .est-head,
-.est-compare .est-row {
-  grid-template-columns: 1.15fr 1fr 1fr 0.85fr;
+.est-cell {
+  min-width: 0;
 }
 
 .est-state {
+  font-weight: 700;
   color: var(--c-text);
-  font-weight: 500;
 }
 
-.est-value {
-  color: var(--c-neutral-200);
-  font-weight: 500;
+.est-rel {
+  font-weight: 700;
+}
+
+.est-rel.is-bigger {
+  color: var(--c-danger);
+}
+
+.est-rel.is-smaller {
+  color: var(--c-velocity);
+}
+
+.est-rel.is-even {
+  color: var(--c-text-dim);
 }
 
 .est-tag {
-  justify-self: start;
-
-  padding: 0.02rem 0.56rem;
-  border: 1px solid var(--c-border);
-  border-radius: 999px;
-
+  font-size: 0.82rem;
   font-weight: 700;
-  font-size: 0.85rem;
-  white-space: nowrap;
+  text-align: center;
 }
 
-.est-tag-over {
-  border-color: color-mix(in srgb, var(--c-danger) 55%, transparent);
-  background: var(--c-danger-soft);
+.est-tag.is-超重 {
   color: var(--c-danger);
 }
 
-.est-tag-under {
-  border-color: color-mix(in srgb, var(--c-velocity) 55%, transparent);
-  background: color-mix(in srgb, var(--c-velocity) 12%, transparent);
+.est-tag.is-失重 {
   color: var(--c-velocity);
 }
 
-.est-tag-none {
-  border-color: transparent;
-  color: var(--c-text-mute);
+.est-tag.is-none {
+  color: var(--c-neutral-600);
 }
 
-.est-tone-over {
-  color: var(--c-danger);
+.est-arrow {
+  text-align: center;
+}
+
+.est-arrow-glyph {
+  font-size: 1.15rem;
   font-weight: 700;
-}
-
-.est-tone-under {
-  color: var(--c-velocity);
-  font-weight: 700;
-}
-
-.est-tone-even {
-  color: var(--c-text-dim);
+  line-height: 1;
+  color: var(--c-accent);
 }
 
 .est-hidden {

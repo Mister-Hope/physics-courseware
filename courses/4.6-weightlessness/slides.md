@@ -26,25 +26,42 @@ chapter: 第四章 运动和力的关系
 
 ---
 layout: base-flex
-clicks: 2
-title: '秤的读数'
+clicks: 3
+title: '如何测重力'
 ---
 
-<div class="page-grow">
-<div class="ask ask-lead">重力无法直接测量。为什么挂在测力计下的物体，示数就反映了它的重力？</div>
+<div class="page-grow measure-page">
+<div class="ask ask-lead">如何测重力？</div>
+<div class="measure-grid">
+<div class="host" v-click="1">
+<SpringScaleHangingSvg :show-forces="$clicks >= 2" />
+</div>
+<div class="host" v-click="1">
+<PersonWeightSvg :show-forces="$clicks >= 2" :show-pressure="$clicks >= 2" :force-len="62" :reading="600" />
+</div>
+<div class="measure-eq" v-click="2"><Latex tex="F_T = mg" /></div>
+<div class="measure-eq" v-click="2">
+<div class="stack stack-tight">
+<div><Latex tex="F_N = mg" /></div>
+<div><Latex tex="F_N' = F_N" /></div>
+</div>
+</div>
+</div>
+<div class="tip-hint" v-click="3">静止时二力平衡：拉力 <Latex tex="F_T = mg" />、支持力 <Latex tex="F_N = mg" />、压力 <Latex tex="F_N' = F_N" />。秤读到的这个力叫作<b>视重</b> —— 只有静止或做匀速直线运动时，视重才等于重力。</div>
+</div>
 
-<div class="half-grid">
-<div class="host">
-<SpringScaleHangingSvg :show-forces="$clicks >= 1" />
-</div>
-<div class="stack divider-l" style="align-items: center">
-<div style="width: 200px">
-<PersonWeightSvg :show-forces="$clicks >= 1" :force-len="62" :reading="600" />
-</div>
-</div>
-</div>
+---
+layout: base-flex
+clicks: 3
+title: '两个问题'
+---
 
-<div class="tip-hint" v-click="2">静止时二力平衡：拉力 <Latex tex="F_T = mg" />，支持力 <Latex tex="F_N = mg" />，压力 <Latex tex="F_N' = F_N" />。秤读到的这个力叫作<b>视重</b>——只有静止或做匀速直线运动时，视重才等于重力。</div>
+<div class="qa-center">
+<mdi-head-question-outline class="icon-2xl qa-icon" />
+<div class="qa-q">我们测出的这个力，什么条件下才等于重力？</div>
+<div class="qa-a" v-click="1">加速度为零 —— 物体静止或做匀速直线运动时，视重才等于重力。</div>
+<div class="qa-q" v-click="2">如果这个条件不满足，可能出现哪些情况？</div>
+<div class="qa-a" v-click="3">视重就不等于重力：<b>大于</b>重力叫超重，<b>小于</b>重力叫失重。</div>
 </div>
 
 ---
@@ -54,7 +71,6 @@ title: '电梯实测'
 
 <div class="page-grow">
 <div class="ask ask-lead">电梯启动、匀速运行、制动时，秤的示数怎样变化？</div>
-
 <div class="host">
 <VideoSlot />
 </div>
@@ -62,12 +78,24 @@ title: '电梯实测'
 
 ---
 layout: base-flex
-clicks: 1
-title: '超重和失重'
+title: '电梯实测（模拟）'
 ---
 
 <div class="page-grow">
-<div class="def-row">
+<ElevatorScaleSim standalone />
+</div>
+
+---
+layout: base-flex
+clicks: 2
+title: '超重和失重'
+---
+
+# 超重和失重
+
+<div class="page-grow">
+<div class="ft-layout">
+<div class="stack">
 <DefinitionBox term="超重" tone="gold">
 <div>物体对支持物的压力（或对悬挂物的拉力，即<span class="def-term">视重</span>）<b>大于</b>物体所受重力的现象，叫作<span class="def-term">超重</span>现象。</div>
 </DefinitionBox>
@@ -75,22 +103,28 @@ title: '超重和失重'
 <div>物体对支持物的压力（或对悬挂物的拉力，即<span class="def-term">视重</span>）<b>小于</b>物体所受重力的现象，叫作<span class="def-term">失重</span>现象。</div>
 </DefinitionBox>
 </div>
-
-<div class="tip-hint" v-click="1">重力 <Latex tex="mg" /> 始终不变，变的只是视重。</div>
+<div class="ft-right">
+<div class="host">
+<ElevatorFtGraph />
+</div>
+<div class="tip-hint">超重和失重，变的只是视重 —— 重力 <Latex tex="mg" /> 始终不变。</div>
+</div>
+</div>
 </div>
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 3
 title: '电梯的运动'
 ---
 
 <div class="page-grow">
 <div class="ask">电梯上升、下降的完整过程中，速度怎样变化？</div>
-
-<ElevatorWeightSim>
+<ElevatorScaleSim hide-panel>
+<div class="vt-col">
+<div class="vt-host" v-click="1"><ElevatorVtGraph /></div>
 <div class="proc-tree">
-<div class="proc" v-click>
+<div class="proc" v-click="2">
 <div class="proc-name">上升过程</div>
 <CurlyBraceSvg />
 <div class="proc-items">
@@ -99,7 +133,7 @@ title: '电梯的运动'
 <div>减速上升</div>
 </div>
 </div>
-<div class="proc" v-click>
+<div class="proc" v-click="3">
 <div class="proc-name">下降过程</div>
 <CurlyBraceSvg />
 <div class="proc-items">
@@ -109,45 +143,45 @@ title: '电梯的运动'
 </div>
 </div>
 </div>
-</ElevatorWeightSim>
+</div>
+</ElevatorScaleSim>
 </div>
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 12
 title: '示数与重力'
 ---
 
 <div class="page-grow">
-<div class="ask">电梯不同运动状态下，秤的示数与重力是什么关系？</div>
-
-<ElevatorWeightSim>
+<div class="ask">电梯在不同运动状态下，秤的示数与重力相比是大是小？</div>
+<ElevatorScaleSim hide-panel>
 <ElevatorStateTable mode="reading" />
-</ElevatorWeightSim>
+</ElevatorScaleSim>
 </div>
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 7
 title: '加速度的方向'
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">这些状态的加速度方向分别是什么？超重、失重的共同点在哪里？</div>
-
-<ElevatorStateTable mode="compare" />
-
-<div class="tip-hint" v-click="2">超重：加速度向上；失重：加速度向下 —— 与电梯向上还是向下运动无关。</div>
+<div class="ask">这些状态下，加速度的方向分别是什么？超重、失重的共同点在哪里？</div>
+<ElevatorScaleSim hide-panel>
+<ElevatorStateTable mode="accel" />
+</ElevatorScaleSim>
+<div class="tip-hint" v-click="7">只看加速度方向，与运动方向无关。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
-title: '为什么超重、失重'
+title: '为什么与加速度有关'
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">为什么加速度向上就超重，向下就失重？</div>
+<div class="ask ask-lead">为什么超重和失重，只跟竖直方向的加速度有关？</div>
 
 <div v-click="1">竖直方向上有加速度，合力就不为零：<Latex tex="F_{\text{合}} = ma \ne 0" />，支持力不再与重力平衡。</div>
 
@@ -170,18 +204,17 @@ title: '为什么超重、失重'
 </div>
 </div>
 
-<div class="tip-hint" v-click="3">电梯里向上加速、向下减速都超重——只看加速度方向，与速度方向无关。</div>
+<div class="tip-hint" v-click="3">只要加速度向上就超重、向下就失重 —— 与电梯向上还是向下运动无关。</div>
 </div>
 
 ---
 layout: base-flex
-clicks: 3
+clicks: 4
 title: '人蹲下、站起'
 ---
 
 <div class="page-grow">
 <div class="ask ask-lead">人站在体重计上，先下蹲、再站起。哪些阶段超重，哪些阶段失重？</div>
-
 <div class="host">
 <SquatRiseFtGraph mode="both" />
 </div>
@@ -194,11 +227,11 @@ title: '完全失重'
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">张老师站在电梯里，电梯以加速度 <Latex tex="g" /> 向下加速下落。<br />他的脚对电梯地板还有压力吗？</div>
-
+<div class="ask ask-lead">张老师站在电梯里，电梯以加速度 <Latex tex="g" /> 向下加速下落。<br />此时秤的读数是多少？</div>
 <div class="half-grid">
 <div class="host">
 <PersonWeightSvg
+  style="--pw-max: 300px"
   enclosure="elevator"
   :show-forces="$clicks >= 1"
   :show-motion="true"
@@ -210,7 +243,7 @@ title: '完全失重'
 </div>
 <div class="stack">
 <div v-click="1">取向下为正：<Latex tex="mg - F_N = ma = mg" /></div>
-<div v-click="2"><Latex tex="F_N = 0" />，脚对电梯地板的压力 <Latex tex="F_N' = 0" />。</div>
+<div v-click="2"><Latex tex="F_N = 0" />，秤的读数为 <Latex tex="0" />，脚对电梯地板的压力 <Latex tex="F_N' = 0" />。</div>
 <div v-click="3" class="tip-hint">加速度向下且 <Latex tex="a = g" /> 时，视重为 <Latex tex="0" /> —— 这叫作<b>完全失重</b>。</div>
 </div>
 </div>
@@ -224,28 +257,25 @@ title: '水的实验'
 
 <div class="page-grow">
 <div class="ask ask-lead">瓶侧壁扎个小孔，水会从孔中喷出。若让瓶子自由下落，水还会流出来吗？</div>
-
 <div class="half-grid">
 <div class="host">
-<WaterBottleSvg :falling="false" label="静止" />
+<WaterBottleSvg style="--wb-max: 235px" :falling="false" label="静止" />
 </div>
 <div class="host" v-click="1">
-<WaterBottleSvg :falling="true" label="自由下落" />
+<WaterBottleSvg style="--wb-max: 235px" :falling="true" label="自由下落" />
 </div>
 </div>
-
-<div class="tip-hint" v-click="2">瓶和水一起以 <Latex tex="a = g" /> 向下加速，都处于完全失重：水不再挤压瓶壁，也就不会从小孔流出。航天器舱内液滴呈球形、气泡不上浮，也是同样的原因。</div>
+<div class="tip-hint" v-click="2">瓶和水都完全失重，水不再挤压瓶壁，故不会流出。</div>
 </div>
 
 ---
 layout: base-flex
 clicks: 3
-title: '超重的代价'
+title: '例题 1：超重的代价'
 ---
 
 <div class="page-grow">
-<div><b class="ex-no">例题</b>　火箭发射阶段，加速度可达 <Latex tex="3.5g" />。平时重 <Latex tex="10\ \text{N}" /> 的体内脏器，在这个阶段需要的支持力有多大？</div>
-
+<div><b class="ex-no">例题 1</b>　火箭发射阶段，加速度可达 <Latex tex="3.5g" />。平时重 <Latex tex="10\ \text{N}" /> 的体内脏器，在这个阶段需要的支持力有多大？</div>
 <div v-click="1">加速度方向向上，取向上为正：<Latex tex="F_N - mg = ma" /></div>
 <div v-click="2"><Latex tex="F_N = mg + ma = mg + 3.5mg = 4.5mg = 4.5 \times 10\ \text{N} = 45\ \text{N}" /></div>
 <div v-click="3" class="tip-hint">超重时，一切压在支持物上的东西都要多承受几倍的力。</div>
@@ -254,57 +284,11 @@ title: '超重的代价'
 ---
 layout: base-flex
 clicks: 4
-title: '例题：电梯加速上升'
+title: '例题 2：蹦极'
 ---
 
 <div class="page-grow">
-<div><b class="ex-no">例题</b>　质量 <Latex tex="60\ \text{kg}" /> 的人站在电梯内的水平地板上，电梯以 <Latex tex="0.25\ \text{m/s}^2" /> 的加速度匀加速上升。求人对电梯地板的压力。（<Latex tex="g" /> 取 <Latex tex="9.8\ \text{m/s}^2" />）</div>
-
-<div class="ex-grid">
-<div class="stack">
-<div v-click="1">
-<div>解：取竖直向上为正方向，由牛顿第二定律：</div>
-<div class="ex-eq"><Latex tex="F_N - mg = ma" /></div>
-</div>
-<div v-click="2"><Latex tex="F_N = m(g+a) = 60 \times (9.8+0.25)\ \text{N} = 603\ \text{N}" /></div>
-<div v-click="3">由牛顿第三定律，人对地板的压力 <Latex tex="F_N' = 603\ \text{N}" />，方向竖直向下。</div>
-<div v-click="4" class="tip-hint">向上加速（或向下减速）时，<Latex tex="F_N \gt mg" />，出现超重。</div>
-</div>
-<div class="host">
-<PersonWeightSvg
-  enclosure="elevator"
-  :show-forces="$clicks >= 1"
-  :show-motion="true"
-  speed-dir="up"
-  accel-dir="up"
-  :fn-ratio="1.15"
-/>
-</div>
-</div>
-</div>
-
----
-layout: base-flex
-clicks: 2
-title: '例题：示数变大了'
----
-
-<div class="page-grow">
-<div><b class="ex-no">例题</b>　某人站在电梯里的体重计上，发现示数是其体重的 <Latex tex="1.2" /> 倍。电梯可能在做什么运动？</div>
-
-<div v-click="1">示数大于体重，即 <Latex tex="F_N \gt mg" />，所以加速度方向<b>向上</b>，<Latex tex="a = 0.2g" />。</div>
-<div v-click="2" class="tip-hint">可能是<b>向上加速</b>，也可能是<b>向下减速</b> —— 运动方向无法唯一确定。</div>
-</div>
-
----
-layout: base-flex
-clicks: 4
-title: '蹦极中的超重与失重'
----
-
-<div class="page-grow">
-<div><b class="ex-no">例题</b>　运动员从高处跳下，弹性绳被拉直前做自由落体运动；弹性绳被拉直后，下降速度先增大、再减小，直到减为 0。下降过程中，运动员在哪些阶段分别处于超重、失重状态？</div>
-
+<div><b class="ex-no">例题 2</b>　运动员从高处跳下，弹性绳被拉直前做自由落体运动；弹性绳被拉直后，下降速度先增大、再减小，直到减为 0。下降过程中，运动员在哪些阶段分别处于超重、失重状态？</div>
 <div v-click="1">绳被拉直前：<Latex tex="a = g" /> 向下 —— <b>完全失重</b>。</div>
 <div v-click="2">绳被拉直后速度仍增大：弹力小于重力，<Latex tex="a" /> 向下 —— <b>失重</b>。</div>
 <div v-click="3">速度减小时：绳的拉力 <Latex tex="F_T \gt mg" />（视重大于重力），<Latex tex="a" /> 向上 —— <b>超重</b>。</div>
@@ -313,28 +297,30 @@ title: '蹦极中的超重与失重'
 
 ---
 layout: exercise-split
-clicks: 3
+clicks: 5
 hideQaMark: true
-title: '剪断细绳后，秤的示数怎么变？'
+title: '例题 3：木球上浮时，秤的示数怎么变？'
 ---
 
 <template v-slot:stem>
 
-<b class="ex-no">习题</b>　烧杯放在秤上，杯中装水，一个木球用细绳拴在杯底、浸没在水中。剪断细绳，木球上浮。在木球上浮的过程中，秤的示数怎样变化？
+<b class="ex-no">例题 3</b>　烧杯放在秤上，杯中装水，一个木球用细绳拴在杯底、浸没在水中。剪断细绳，木球上浮。在木球上浮的过程中，秤的示数怎样变化？
 
 </template>
 
 <template v-slot:fig>
 
-<BeakerBallSvg :show-analysis="$clicks >= 2" />
+<BeakerBallRise />
 
 </template>
 
-<div v-click="1">只看木球：它向上加速，似乎该超重、示数变大 —— 这样判断就错了。</div>
+<div v-click="1" :class="{ 'is-wrong': $clicks >= 2 }">只看木球：它向上加速，似乎该超重、示数变大。<span class="cross-mark" :class="{ 'cross-hidden': $clicks < 2 }">✕</span></div>
 
-<div v-click="2">但木球上浮的同时，同体积的水被挤着向下流 —— 水的密度比木球大，向下加速的那部分质量更大。</div>
+<div v-click="3">木球上浮时，上方的水在加速向下流。水的密度更大，故系统的重心在加速下降。</div>
 
-<div v-click="3" class="tip-hint">系统的重心向下加速 ⇒ 整体失重 ⇒ 示数变小；木球浮出、水静止后，示数回到原值。</div>
+<div v-click="4" class="tip-hint">当烧杯高度足够高时，由于阻力随速度的增大而增大，小球在经过足够时间后会保持匀速运动，不再产生超重、失重现象。</div>
+
+<div v-click="5">所以，秤的示数突然变小，并逐渐向原数值增大。</div>
 
 ---
 layout: base-flex
@@ -345,9 +331,20 @@ layout: base-flex
 <div class="page-grow">
 <div class="stack">
 <div class="summary-line"><b>视重</b>：物体对秤的压力或拉力；静止或匀速直线运动时等于重力。</div>
-<div class="summary-line"><b>超重</b>：<Latex tex="F_N \gt mg" />，加速度方向向上（向上加速、向下减速）。</div>
-<div class="summary-line"><b>失重</b>：<Latex tex="F_N \lt mg" />，加速度方向向下（向下加速、向上减速）。</div>
+<div class="summary-line"><b>超重</b>：<Latex tex="F_N \gt mg" />，加速度方向向上。</div>
+<div class="summary-line"><b>失重</b>：<Latex tex="F_N \lt mg" />，加速度方向向下。</div>
 <div class="summary-line"><b>完全失重</b>：<Latex tex="a = g" /> 向下，视重为 0。</div>
 <div class="tip-hint">重力 <Latex tex="mg" /> 始终不变；超重和失重都是<b>视重相对于重力的变化</b>。</div>
 </div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+title: '思考题'
+---
+
+<div class="page-grow" style="justify-content: center">
+<div class="ask ask-lead">如果物体的加速度大于 <Latex tex="g" />，会出现什么现象？</div>
+<div class="tip-hint" v-click="1">支持力不可能为负 —— 人会离开地板，被顶棚压住。</div>
 </div>

@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useId } from "vue";
+
+/** SVG 里 id/url(#id) 必须按实例唯一：Slidev 会同时挂载相邻页，重名 id 会让填充整体失效 */
+const uid = useId();
 
 /**
  * 人站在体重计上的受力 / 运动示意（全库通用组件）
@@ -19,6 +22,7 @@ const {
   accelDir = "none",
   speedDir = "none",
   showForces = false,
+  showPressure = false,
   showMotion = false,
   enclosure = "none",
   reading = null,
@@ -36,6 +40,8 @@ const {
   speedDir?: "down" | "up" | "none";
   /** 是否显示受力箭头 */
   showForces?: boolean;
+  /** 是否画出人对秤的压力 F_N'（作用在秤台上，竖直向下） */
+  showPressure?: boolean;
   /** 是否显示速度 / 加速度箭头 */
   showMotion?: boolean;
   /** 画不画电梯轿厢 */
@@ -87,29 +93,29 @@ const accelArrow = computed(() => motion(accelDir, 74));
 </script>
 
 <template>
-  <svg :viewBox="viewBox" width="100%" style="max-width: 240px" xmlns="http://www.w3.org/2000/svg">
+  <svg :viewBox="viewBox" width="100%" style="max-width: var(--pw-max, 240px)" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <!-- 电梯轿厢背景渐变 -->
-      <linearGradient id="pwCabinBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient :id="uid + '-pwCabinBg'" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stop-color="color-mix(in srgb, var(--c-surface-solid) 52%, transparent)" />
         <stop offset="100%" stop-color="color-mix(in srgb, var(--c-neutral-900) 72%, transparent)" />
       </linearGradient>
       <!-- 人物夹克与裤装深石板蓝渐变（高对比衬托重心处力箭头） -->
-      <linearGradient id="pwCoatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient :id="uid + '-pwCoatGrad'" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="var(--c-neutral-700)" />
         <stop offset="100%" stop-color="var(--c-surface-solid)" />
       </linearGradient>
-      <linearGradient id="pwPantsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient :id="uid + '-pwPantsGrad'" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stop-color="var(--c-surface-solid)" />
         <stop offset="100%" stop-color="var(--c-neutral-900)" />
       </linearGradient>
       <!-- 体重计金属踏板与机身渐变 -->
-      <linearGradient id="pwScalePadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient :id="uid + '-pwScalePadGrad'" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" />
         <stop offset="50%" stop-color="color-mix(in srgb, var(--c-neutral-200) 52%, transparent)" />
         <stop offset="100%" stop-color="color-mix(in srgb, var(--c-text-dim) 38%, transparent)" />
       </linearGradient>
-      <linearGradient id="pwScaleBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient :id="uid + '-pwScaleBodyGrad'" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stop-color="var(--c-neutral-700)" />
         <stop offset="100%" stop-color="var(--c-neutral-900)" />
       </linearGradient>
@@ -141,7 +147,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
         width="256"
         height="334"
         rx="6"
-        fill="url(#pwCabinBg)"
+        :fill="'url(#' + uid + '-pwCabinBg)'"
         stroke="color-mix(in srgb, var(--c-text-dim) 68%, transparent)"
         stroke-width="2.2"
       />
@@ -188,7 +194,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <rect :x="188" :y="334 + padShift" width="8" :height="10 - padShift" fill="var(--c-neutral-500)" />
 
       <!-- 防滑称重踏板（随视重微幅上下位移） -->
-      <rect x="98" :y="327 + padShift" width="124" height="10" rx="3.5" fill="url(#pwScalePadGrad)" stroke="var(--c-text-dim)" stroke-width="1.4" />
+      <rect x="98" :y="327 + padShift" width="124" height="10" rx="3.5" :fill="'url(#' + uid + '-pwScalePadGrad)'" stroke="var(--c-text-dim)" stroke-width="1.4" />
       <line
         x1="106"
         :y1="329.5 + padShift"
@@ -202,7 +208,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <!-- 体重计梯形金属底座与防滑脚垫 -->
       <rect x="114" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
       <rect x="192" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
-      <path d="M 108 370 L 114 341 L 206 341 L 212 370 Z" fill="url(#pwScaleBodyGrad)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
+      <path d="M 108 370 L 114 341 L 206 341 L 212 370 Z" :fill="'url(#' + uid + '-pwScaleBodyGrad)'" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
 
       <!-- 体重计显示屏窗口 -->
       <rect
@@ -255,20 +261,20 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <path d="M 166 327 L 168 319 L 185 319 L 188 327 Z" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
 
       <!-- 双腿长裤 -->
-      <path d="M 138 264 L 155 264 L 152 320 L 137 320 Z" fill="url(#pwPantsGrad)" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
-      <path d="M 165 264 L 182 264 L 183 320 L 168 320 Z" fill="url(#pwPantsGrad)" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
+      <path d="M 138 264 L 155 264 L 152 320 L 137 320 Z" :fill="'url(#' + uid + '-pwPantsGrad)'" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
+      <path d="M 165 264 L 182 264 L 183 320 L 168 320 Z" :fill="'url(#' + uid + '-pwPantsGrad)'" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
 
       <!-- 自然下垂的左右手臂与手掌 -->
       <path
         d="M 136 202 C 126 208 124 232 127 256 C 128 261 134 261 135 256 L 138 216 Z"
-        fill="url(#pwCoatGrad)"
+        :fill="'url(#' + uid + '-pwCoatGrad)'"
         stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-linejoin="round"
       />
       <path
         d="M 184 202 C 194 208 196 232 193 256 C 192 261 186 261 185 256 L 182 216 Z"
-        fill="url(#pwCoatGrad)"
+        :fill="'url(#' + uid + '-pwCoatGrad)'"
         stroke="var(--c-text-dim)"
         stroke-width="1.4"
         stroke-linejoin="round"
@@ -277,7 +283,7 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <!-- 上身躯干外衣（重心 CO=(160,248) 恰好位于躯干中轴心） -->
       <path
         d="M 136 200 C 136 195 145 193 160 193 C 175 193 184 195 184 200 L 183 266 L 137 266 Z"
-        fill="url(#pwCoatGrad)"
+        :fill="'url(#' + uid + '-pwCoatGrad)'"
         stroke="var(--c-text-dim)"
         stroke-width="1.6"
         stroke-linejoin="round"
@@ -381,6 +387,27 @@ const accelArrow = computed(() => motion(accelDir, 74));
         <tspan dy="4" font-size="11" font-family="KaTeX_Main" font-style="normal">N</tspan>
         <tspan dx="3">= 0</tspan>
       </text>
+
+      <!-- 人对秤的压力 F_N'：作用在秤台上，竖直向下（只画在秤的左端，避开显示屏） -->
+      <template v-if="showPressure">
+        <CourseArrow :from="{ x: 110, y: 292 }" :to="{ x: 110, y: 327 + padShift }" stroke="var(--c-accent-2)" :stroke-width="3.2" />
+        <text
+          x="104"
+          :y="312"
+          text-anchor="end"
+          font-family="KaTeX_Math"
+          font-style="italic"
+          font-size="16"
+          fill="var(--c-accent-2)"
+          stroke="var(--c-bg-soft)"
+          stroke-width="3.2"
+          paint-order="stroke"
+        >
+          <tspan>F</tspan>
+          <tspan dy="4" font-size="11" font-family="KaTeX_Main" font-style="normal">N</tspan>
+          <tspan dy="-4" font-family="KaTeX_Main" font-style="normal">′</tspan>
+        </text>
+      </template>
 
       <!-- 重心共点圆心标记（压在两力箭头根部之上） -->
       <circle :cx="CO.x" :cy="CO.y" r="3.8" fill="var(--c-neutral-50)" stroke="var(--c-neutral-900)" stroke-width="1.6" />

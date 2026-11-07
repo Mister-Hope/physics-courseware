@@ -11,7 +11,9 @@ import { computed } from "vue";
  * - 下蹲：先卸力（示数掉到 mg 以下），蹲到最低点时急停（示数突然顶上去再回落）；
  * - 站起：先蹬地（示数猛地跳到最大），随后加速上升、再减速上升（示数掉到 mg 以下）再回落。
  * - `mode="squat"`：只下蹲；`mode="rise"`：只站起；`mode="both"`：先下蹲、再站起（0~4.8 s）。
- * - 跟随翻页分步：1 出曲线 → 2 出分段、mg 参考线与着色波瓣 → 3 出极值点与"a 方向 · 超重/失重"判读。
+ * - 跟随翻页分步（共 4 次点击，只新增、不删已有元素）：
+ *   0 实测曲线 → 1 mg 水平参考虚线 → 2 六条分段竖直虚线
+ *   → 3 波瓣着色与失重/超重判读 → 4 底部阶段名与加速度方向。
  *
  * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；分段线、面积着色、文字判读放在 `#overlay` 插槽里。
  */
@@ -19,7 +21,8 @@ const { mode = "squat" } = defineProps<{ mode?: "squat" | "rise" | "both" }>();
 
 const { $clicks } = useSlideContext();
 
-const step = computed(() => Math.max(0, Math.min($clicks.value, 3)));
+/** 页面共 4 次点击（0~4），多按不越界 */
+const step = computed(() => Math.max(0, Math.min($clicks.value, 4)));
 
 /** M = 60 kg、g = 10 m/s² 时的重力，作为参考线 */
 const MG = 600;
@@ -267,50 +270,45 @@ const buildLobePath = (
   return pts.join(" ");
 };
 
-const curves = computed(() => {
-  const list = [];
-
-  if (step.value >= 1) {
-    list.push({
-      formula: curveAt,
-      samples: mode === "both" ? 320 : 240,
-      stroke: "var(--c-accent-2)",
-      width: 3.5,
-    });
-  }
-
-  if (step.value >= 2) {
-    list.push({
-      points: [
-        { x: 0, y: MG },
-        { x: X_MAX.value, y: MG },
-      ],
-      stroke: "#f87171",
-      width: 2,
-      dashed: true,
-    });
-  }
-
-  return list;
-});
+/** 实测曲线常显；mg 参考虚线用 `showAt` 占位（隐藏时不删元素、不引起布局跳动） */
+const curves = computed(() => [
+  {
+    formula: curveAt,
+    samples: mode === "both" ? 320 : 240,
+    color: "var(--c-accent-2)",
+    width: 3.5,
+  },
+  {
+    points: [
+      { x: 0, y: MG },
+      { x: X_MAX.value, y: MG },
+    ],
+    color: "var(--c-force)",
+    width: 2,
+    dashed: true,
+    showAt: 1,
+  },
+]);
 
 interface Phase {
   readonly mid: number;
   readonly tRange: readonly [number, number];
   readonly label: string;
-  /** 极值点：时刻与示数（N） */
+  /** 极值点：时刻与示数（N），用于高亮圆点与偏离虚线 */
   readonly peakT?: number;
   readonly peakY?: number;
-  /** 判读标注：写"a 方向 · 超重/失重"，位置单独给（避免压住曲线） */
-  readonly tag?: string;
-  readonly tagSide?: "above" | "below";
-  readonly tagT?: number;
-  readonly tagY?: number;
-  readonly tagColor?: string;
+  /** 波瓣判读：失重 / 超重（画在极值外侧，避开曲线与引线） */
+  readonly flag?: string;
+  readonly flagY?: number;
+  /** 判读文字的横向微调（用户单位）：极值贴着分隔虚线时把字挪开 */
+  readonly flagDx?: number;
+  /** 该段的加速度方向；静止段不画 */
+  readonly accel?: "up" | "down";
+  readonly color?: string;
   readonly fillColor?: string;
 }
 
-/** 分段时刻（虚线分隔各运动阶段） */
+/** 分段时刻（虚线分隔各运动阶段）：把 5 段运动与两端静止分开 */
 const separators = computed(() => (mode === "both" ? [0.4, 1.2, 2, 2.6, 3.4, 4.2] : [0.4, 1.2, 2]));
 
 const DOWN_FILL = "rgba(96, 165, 250, 0.16)";
@@ -328,12 +326,11 @@ const phases = computed<readonly Phase[]>(() => {
         label: "加速下降",
         peakT: 0.82,
         peakY: 481,
-        tag: "失重",
-        tagSide: "below",
-        tagT: 0.74,
-        tagY: 412,
-        tagColor: DOWN_COLOR,
+        flag: "失重",
+        flagY: 415,
+        color: DOWN_COLOR,
         fillColor: DOWN_FILL,
+        accel: "down",
       },
       {
         mid: 1.6,
@@ -341,12 +338,11 @@ const phases = computed<readonly Phase[]>(() => {
         label: "减速下降",
         peakT: 1.63,
         peakY: 783,
-        tag: "超重",
-        tagSide: "above",
-        tagT: 1.42,
-        tagY: 845,
-        tagColor: UP_COLOR,
+        flag: "超重",
+        flagY: 840,
+        color: UP_COLOR,
         fillColor: UP_FILL,
+        accel: "up",
       },
       { mid: 2.3, tRange: [2, 2.6], label: "静止" },
       {
@@ -355,12 +351,12 @@ const phases = computed<readonly Phase[]>(() => {
         label: "加速上升",
         peakT: 2.68,
         peakY: 802,
-        tag: "超重",
-        tagSide: "above",
-        tagT: 3.02,
-        tagY: 862,
-        tagColor: UP_COLOR,
+        flag: "超重",
+        flagY: 850,
+        flagDx: 26,
+        color: UP_COLOR,
         fillColor: UP_FILL,
+        accel: "up",
       },
       {
         mid: 3.8,
@@ -368,12 +364,11 @@ const phases = computed<readonly Phase[]>(() => {
         label: "减速上升",
         peakT: 3.85,
         peakY: 518,
-        tag: "失重",
-        tagSide: "below",
-        tagT: 3.8,
-        tagY: 405,
-        tagColor: DOWN_COLOR,
+        flag: "失重",
+        flagY: 452,
+        color: DOWN_COLOR,
         fillColor: DOWN_FILL,
+        accel: "down",
       },
       { mid: 4.5, tRange: [4.2, X_MAX.value], label: "静止" },
     ];
@@ -388,12 +383,11 @@ const phases = computed<readonly Phase[]>(() => {
         label: "加速下降",
         peakT: 0.82,
         peakY: 481,
-        tag: "失重",
-        tagSide: "below",
-        tagT: 0.74,
-        tagY: 412,
-        tagColor: DOWN_COLOR,
+        flag: "失重",
+        flagY: 415,
+        color: DOWN_COLOR,
         fillColor: DOWN_FILL,
+        accel: "down",
       },
       {
         mid: 1.6,
@@ -401,12 +395,11 @@ const phases = computed<readonly Phase[]>(() => {
         label: "减速下降",
         peakT: 1.63,
         peakY: 783,
-        tag: "超重",
-        tagSide: "above",
-        tagT: 1.42,
-        tagY: 845,
-        tagColor: UP_COLOR,
+        flag: "超重",
+        flagY: 840,
+        color: UP_COLOR,
         fillColor: UP_FILL,
+        accel: "up",
       },
       { mid: 2.7, tRange: [2, X_MAX.value], label: "静止" },
     ];
@@ -420,12 +413,12 @@ const phases = computed<readonly Phase[]>(() => {
       label: "加速上升",
       peakT: 0.47,
       peakY: 802,
-      tag: "超重",
-      tagSide: "above",
-      tagT: 0.75,
-      tagY: 862,
-      tagColor: UP_COLOR,
+      flag: "超重",
+      flagY: 850,
+      flagDx: 26,
+      color: UP_COLOR,
       fillColor: UP_FILL,
+      accel: "up",
     },
     {
       mid: 1.6,
@@ -433,16 +426,80 @@ const phases = computed<readonly Phase[]>(() => {
       label: "减速上升",
       peakT: 1.55,
       peakY: 512,
-      tag: "失重",
-      tagSide: "below",
-      tagT: 1.55,
-      tagY: 405,
-      tagColor: DOWN_COLOR,
+      flag: "失重",
+      flagY: 446,
+      color: DOWN_COLOR,
       fillColor: DOWN_FILL,
+      accel: "down",
     },
     { mid: 2.7, tRange: [2, X_MAX.value], label: "静止" },
   ];
 });
+
+/** 只有运动段才有"曲线与 mg 之间"的波瓣，静止段不生成路径 */
+const lobes = computed(() => phases.value.filter((phase) => phase.fillColor !== undefined));
+
+/** 底部阶段文字的字号（用户单位 ≈ 屏幕 px） */
+const STAGE_FONT = 16;
+/** 跟在阶段文字右侧的 `a` 字号 */
+const ACCEL_FONT = 15;
+/** `a` 字的宽度 */
+const ACCEL_ADVANCE = 10;
+/** 阶段文字与 `a` 的间距 */
+const ACCEL_GAP = 6;
+/** `a` 与箭头的间距 */
+const ACCEL_ARROW_GAP = 2;
+/** 箭头三角形的半宽 */
+const ARROW_HALF = 3.5;
+/** `a` + 箭头整块占的宽度 */
+const ACCEL_WIDTH = ACCEL_ADVANCE + ACCEL_ARROW_GAP + ARROW_HALF * 2;
+
+interface StageItem {
+  readonly key: string;
+  readonly label: string;
+  /** 阶段文字的锚点（middle） */
+  readonly textX: number;
+  /** `a` 的起点（start） */
+  readonly accelX: number;
+  /** 箭头的竖直中心线 */
+  readonly arrowX: number;
+  readonly y: number;
+  readonly accel?: "up" | "down";
+  readonly color?: string;
+}
+
+/**
+ * 底部阶段文字 + 加速度方向的排版：有 `a` 时把"文字 + a + 箭头"整组居中放进该段
+ * （否则 4 字阶段名会把 `a` 挤出分隔线）
+ *
+ * @param x 时刻 → 屏幕横坐标
+ * @param plot 绘图区四边（用户单位）
+ * @param px2user 1 屏幕 px 等于多少用户单位
+ * @returns 每段一项的定位数据
+ */
+const stageItems = (
+  x: (value: number) => number,
+  plot: { top: number; bottom: number; left: number; right: number },
+  px2user: number,
+): StageItem[] =>
+  phases.value.map((phase) => {
+    const font = STAGE_FONT * px2user;
+    const half = (phase.label.length * font) / 2;
+    const gap = phase.accel ? ACCEL_GAP * px2user : 0;
+    const accelWidth = phase.accel ? ACCEL_WIDTH * px2user : 0;
+    const left = x(phase.mid) - (half * 2 + gap + accelWidth) / 2;
+
+    return {
+      key: `stage-${phase.mid}`,
+      label: phase.label,
+      textX: left + half,
+      accelX: left + half * 2 + gap,
+      arrowX: left + half * 2 + gap + (ACCEL_ADVANCE + ACCEL_ARROW_GAP) * px2user,
+      y: plot.bottom - 10 * px2user,
+      accel: phase.accel,
+      color: phase.color,
+    };
+  });
 </script>
 
 <template>
@@ -455,20 +512,20 @@ const phases = computed<readonly Phase[]>(() => {
       :ticks="{ labels: false }"
       :view="{ width: VIEW_W, height: VIEW_H }"
       :curves="curves"
+      :step="step"
     >
       <template #overlay="{ x, y, plot, px2user }">
-        <!-- Step 2：分段虚线、超重/失重半透明面积着色、底部阶段名与 mg 基准线标注 -->
+        <!-- Step 3：曲线与 mg 之间围成的失重（蓝）/超重（红）面积波瓣（画在分隔线之下） -->
+        <g v-if="step >= 3">
+          <path
+            v-for="phase in lobes"
+            :key="`lobe-${phase.mid}`"
+            :d="buildLobePath(phase.tRange[0], phase.tRange[1], x, y)"
+            :fill="phase.fillColor"
+          />
+        </g>
+        <!-- Step 2：各运动阶段的分界竖直虚线 -->
         <g v-if="step >= 2">
-          <!-- F(t) 与 mg 之间围成的失重（蓝）/超重（红）面积波瓣 -->
-          <template v-for="phase in phases" :key="`lobe-${phase.mid}`">
-            <path
-              v-if="phase.fillColor"
-              :d="buildLobePath(phase.tRange[0], phase.tRange[1], x, y)"
-              :fill="phase.fillColor"
-            />
-          </template>
-
-          <!-- 各运动阶段的分界竖直虚线 -->
           <line
             v-for="t0 in separators"
             :key="`sep-${t0}`"
@@ -480,25 +537,12 @@ const phases = computed<readonly Phase[]>(() => {
             :stroke-width="1.4 * px2user"
             stroke-dasharray="7 6"
           />
-
-          <!-- 底部各运动阶段文字标注（含静止段） -->
-          <text
-            v-for="phase in phases"
-            :key="`name-${phase.mid}`"
-            :x="x(phase.mid)"
-            :y="plot.bottom - 12 * px2user"
-            text-anchor="middle"
-            :font-size="16 * px2user"
-            font-weight="500"
-            fill="var(--c-neutral-300)"
-          >
-            {{ phase.label }}
-          </text>
-
-          <!-- Y 轴侧 mg 水平基准线标签 -->
+        </g>
+        <!-- Step 1：mg 水平参考虚线的标注 -->
+        <g v-if="step >= 1">
           <text
             :x="x(0.06)"
-            :y="y(MG) - 8 * px2user"
+            :y="y(MG) - 11 * px2user"
             font-family="KaTeX_Math"
             font-style="italic"
             :font-size="17 * px2user"
@@ -510,48 +554,91 @@ const phases = computed<readonly Phase[]>(() => {
             mg
           </text>
         </g>
-
-        <!-- Step 3：波峰/波谷极值点、偏离指示虚线与判读标签 -->
+        <!-- Step 3：极值点圆点、偏离虚线，以及失重 / 超重判读 -->
         <g v-if="step >= 3">
-          <template v-for="phase in phases" :key="`tag-${phase.mid}`">
-            <g v-if="phase.tag && phase.peakY !== undefined && phase.peakT !== undefined">
-              <!-- 从 mg 基准线指向波峰/波谷的合力偏离虚线 -->
+          <template v-for="phase in phases" :key="`mark-${phase.mid}`">
+            <g v-if="phase.peakT !== undefined && phase.peakY !== undefined && phase.color">
               <line
                 :x1="x(phase.peakT)"
                 :y1="y(MG)"
                 :x2="x(phase.peakT)"
                 :y2="y(phase.peakY)"
-                :stroke="phase.tagColor"
+                :stroke="phase.color"
                 :stroke-width="1.6 * px2user"
                 stroke-dasharray="3 3"
                 opacity="0.8"
               />
-              <!-- 曲线极值点高亮圆点 -->
               <circle
                 :cx="x(phase.peakT)"
                 :cy="y(phase.peakY)"
                 :r="4.6 * px2user"
-                :fill="phase.tagColor"
+                :fill="phase.color"
                 stroke="var(--c-bg-soft)"
                 :stroke-width="1.8 * px2user"
               />
-              <!-- 判读：a 方向 · 超重/失重 -->
               <text
-                :x="x(phase.tagT ?? phase.mid)"
-                :y="y(phase.tagY ?? MG)"
+                v-if="phase.flag && phase.flagY !== undefined"
+                :x="x(phase.peakT) + (phase.flagDx ?? 0) * px2user"
+                :y="y(phase.flagY)"
                 text-anchor="middle"
-                :font-size="16.5 * px2user"
+                :font-size="16 * px2user"
                 font-weight="600"
-                :fill="phase.tagColor"
+                :fill="phase.color"
                 stroke="var(--c-bg-soft)"
                 :stroke-width="3.2 * px2user"
                 paint-order="stroke"
               >
-                <tspan font-family="KaTeX_Math" font-style="italic">a</tspan>
-                <tspan dx="4">{{ phase.tagSide === "above" ? "向上 ↑" : "向下 ↓" }}</tspan>
-                <tspan dx="4">·</tspan>
-                <tspan dx="4">{{ phase.tag }}</tspan>
+                {{ phase.flag }}
               </text>
+            </g>
+          </template>
+        </g>
+        <!-- Step 4：底部阶段名 + 该段的加速度方向（只写 a 与箭头） -->
+        <g v-if="step >= 4">
+          <template v-for="item in stageItems(x, plot, px2user)" :key="item.key">
+            <text
+              :x="item.textX"
+              :y="item.y"
+              text-anchor="middle"
+              :font-size="STAGE_FONT * px2user"
+              font-weight="500"
+              fill="var(--c-neutral-300)"
+            >
+              {{ item.label }}
+            </text>
+            <g v-if="item.accel">
+              <text
+                :x="item.accelX"
+                :y="item.y"
+                font-family="KaTeX_Math"
+                font-style="italic"
+                :font-size="ACCEL_FONT * px2user"
+                :fill="item.color"
+                stroke="var(--c-bg-soft)"
+                :stroke-width="2.6 * px2user"
+                paint-order="stroke"
+              >
+                a
+              </text>
+              <g
+                :stroke="item.color"
+                :fill="item.color"
+                :stroke-width="1.6 * px2user"
+                stroke-linecap="round"
+              >
+                <line
+                  :x1="item.arrowX"
+                  :y1="item.accel === 'up' ? item.y - 1 * px2user : item.y - 12 * px2user"
+                  :x2="item.arrowX"
+                  :y2="item.accel === 'up' ? item.y - 8 * px2user : item.y - 5 * px2user"
+                />
+                <path
+                  :d="item.accel === 'up'
+                    ? `M ${item.arrowX - ARROW_HALF * px2user} ${item.y - 7 * px2user} L ${item.arrowX} ${item.y - 12.5 * px2user} L ${item.arrowX + ARROW_HALF * px2user} ${item.y - 7 * px2user} Z`
+                    : `M ${item.arrowX - ARROW_HALF * px2user} ${item.y - 6 * px2user} L ${item.arrowX} ${item.y - 1.5 * px2user} L ${item.arrowX + ARROW_HALF * px2user} ${item.y - 6 * px2user} Z`"
+                  stroke="none"
+                />
+              </g>
             </g>
           </template>
         </g>

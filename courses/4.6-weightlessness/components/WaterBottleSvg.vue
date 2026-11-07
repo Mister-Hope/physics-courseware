@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useId } from "vue";
+
+/** SVG 里 id/url(#id) 必须按实例唯一：Slidev 会同时挂载相邻页，重名 id 会让填充整体失效 */
+const uid = useId();
 /**
  * 侧壁扎孔的塑料瓶（§4.6 完全失重页）
  *
@@ -11,23 +15,23 @@ const { falling = false, label = "" } = defineProps<{
 </script>
 
 <template>
-  <svg viewBox="0 0 220 300" width="100%" style="max-width: 200px" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 220 300" width="100%" style="max-width: var(--wb-max, 200px)" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <!-- 透明 PET 塑料瓶身立体光泽渐变 -->
-      <linearGradient id="lbBottleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient :id="uid + '-lbBottleGrad'" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="color-mix(in srgb, var(--c-neutral-200) 22%, transparent)" />
         <stop offset="22%" stop-color="color-mix(in srgb, var(--c-neutral-50) 8%, transparent)" />
         <stop offset="78%" stop-color="color-mix(in srgb, var(--c-text-dim) 6%, transparent)" />
         <stop offset="100%" stop-color="color-mix(in srgb, var(--c-text-dim) 24%, transparent)" />
       </linearGradient>
       <!-- 瓶内水体深浅渐变 -->
-      <linearGradient id="lbWaterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient :id="uid + '-lbWaterGrad'" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stop-color="color-mix(in srgb, var(--c-physics-light) 42%, transparent)" />
         <stop offset="55%" stop-color="color-mix(in srgb, var(--c-accent-2) 48%, transparent)" />
         <stop offset="100%" stop-color="rgba(29,78,216,0.58)" />
       </linearGradient>
       <!-- 蓝色防滑瓶盖渐变 -->
-      <linearGradient id="lbCapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient :id="uid + '-lbCapGrad'" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="var(--c-accent-2-glow)" />
         <stop offset="45%" stop-color="var(--c-velocity)" />
         <stop offset="100%" stop-color="#1d4ed8" />
@@ -43,13 +47,13 @@ const { falling = false, label = "" } = defineProps<{
 
     <!-- ==================== 2. 瓶内水体与液面弯月面 ==================== -->
     <!-- 水体填充（贴合瓶身内壁 x: 70..150, y: 118..254） -->
-    <path d="M 70 118 H 150 V 242 A 12 12 0 0 1 138 254 H 82 A 12 12 0 0 1 70 242 Z" fill="url(#lbWaterGrad)" />
+    <path d="M 70 118 H 150 V 242 A 12 12 0 0 1 138 254 H 82 A 12 12 0 0 1 70 242 Z" :fill="'url(#' + uid + '-lbWaterGrad)'" />
     <!-- 液面椭圆透视波纹与弯月面高光 -->
     <ellipse cx="110" cy="118" rx="40" ry="3.4" fill="rgba(125,211,252,0.32)" stroke="#7dd3fc" stroke-width="1.6" />
 
     <!-- ==================== 3. 流线型矿泉水塑料瓶身、加强筋与螺纹瓶盖 ==================== -->
     <!-- 瓶盖与防盗锁环 -->
-    <rect x="91" y="14" width="38" height="15" rx="3.5" fill="url(#lbCapGrad)" stroke="var(--c-velocity-light)" stroke-width="1.3" />
+    <rect x="91" y="14" width="38" height="15" rx="3.5" :fill="'url(#' + uid + '-lbCapGrad)'" stroke="var(--c-velocity-light)" stroke-width="1.3" />
     <!-- 瓶盖防滑竖纹 -->
     <g stroke="rgba(255,255,255,0.38)" stroke-width="1.1" stroke-linecap="round">
       <line x1="97" y1="16.5" x2="97" y2="26.5" />
@@ -73,7 +77,7 @@ const { falling = false, label = "" } = defineProps<{
     <!-- 流线型渐扩瓶肩与圆柱瓶身外轮廓 -->
     <path
       d="M 92 33.5 C 92 44 68 50 68 66 L 68 242 A 13 13 0 0 0 81 255 L 102 255 Q 110 251 118 255 L 139 255 A 13 13 0 0 0 152 242 L 152 66 C 152 50 128 44 128 33.5 Z"
-      fill="url(#lbBottleGrad)"
+      :fill="'url(#' + uid + '-lbBottleGrad)'"
       stroke="color-mix(in srgb, var(--c-neutral-300) 72%, transparent)"
       stroke-width="1.8"
       stroke-linejoin="round"

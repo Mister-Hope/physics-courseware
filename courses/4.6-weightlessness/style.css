@@ -74,3 +74,267 @@
   padding-left: 1.1rem;
   margin-top: 0.1rem;
 }
+
+/* ═══════════════════════════════════════════════
+   公开课版新增（4.6-weightlessness-openclass）
+   ═══════════════════════════════════════════════ */
+
+/* ── 第 2 页：个人介绍 ── */
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  gap: 1.8rem;
+  align-items: center;
+  height: 100%;
+}
+
+.intro-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 0;
+}
+
+.intro-photo img {
+  width: 100%;
+  max-height: 372px;
+
+  object-fit: cover;
+  border: 1px solid var(--c-border);
+  border-radius: 1.4rem;
+  box-shadow: 0 18px 44px rgb(0 0 0 / 48%);
+}
+
+.intro-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+
+  min-width: 0;
+}
+
+.intro-head {
+  display: flex;
+  gap: 0.95rem;
+  align-items: center;
+}
+
+.intro-logo {
+  width: 64px;
+  height: auto;
+
+  filter: brightness(1.45) saturate(1.05) drop-shadow(0 4px 18px rgb(74 222 128 / 28%));
+}
+
+.intro-name {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--c-text);
+  letter-spacing: 0.04em;
+}
+
+.intro-role {
+  font-size: 1.06rem;
+  color: var(--c-neutral-300);
+}
+
+.intro-role b {
+  color: var(--c-accent-light);
+}
+
+.intro-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.intro-facts > span {
+  padding: 0.12rem 0.72rem;
+
+  font-size: 0.82rem;
+  color: var(--c-accent);
+
+  border: 1px solid rgb(226 168 70 / 45%);
+  border-radius: 999px;
+}
+
+.intro-line {
+  margin-top: 0.15rem;
+  font-size: 1.06rem;
+  color: var(--c-text);
+}
+
+.intro-goal {
+  font-size: 1rem;
+  color: var(--c-neutral-300);
+}
+
+.intro-goal::before {
+  content: "▹ ";
+  color: var(--c-accent);
+}
+
+/* ── 第 3 页：如何测重力（两图 + 两式）── */
+.measure-grid {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem 1.6rem;
+  align-items: end;
+  justify-items: center;
+
+  min-height: 0;
+}
+
+.measure-eq {
+  justify-self: center;
+  font-size: 1.1rem;
+}
+
+/* ── 第 7 页：示数–时间图 + 超重失重定义 ── */
+.ft-layout {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 1.5rem;
+  align-items: center;
+
+  min-height: 0;
+}
+
+/* ── 第 17 页：错误判断整段变红 + 大错号 ── */
+.is-wrong {
+  color: var(--c-danger);
+  transition: color 0.25s ease;
+}
+
+.cross-mark {
+  display: inline-block;
+
+  margin-left: 0.5rem;
+
+  font-size: 1.7rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--c-danger);
+  vertical-align: -0.18em;
+}
+
+.cross-hidden {
+  visibility: hidden;
+}
+
+/* 第 7 页：定义气泡收紧、右侧图占满 */
+.ft-layout {
+  grid-template-columns: 1fr 1.06fr;
+  gap: 1.2rem;
+}
+
+.ft-layout .def-box {
+  --def-pad-y: 0.7rem;
+  --def-pad-x: 1.05rem;
+
+  font-size: 0.95rem;
+}
+
+/* 第 17 页（例题 3，exercise-split）：解析栏文字较多，收紧行距与间距避免上顶 */
+.ex-analysis {
+  gap: 0.62rem;
+
+  font-size: 0.97rem;
+}
+
+.ex-analysis .tip-hint {
+  font-size: 0.9rem;
+}
+
+/* 第 7 页：右侧图 + 提示（提示不进左栏，避免左栏过高顶出画布） */
+.ft-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 0;
+  min-width: 0;
+}
+
+.ft-right .host {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.ft-right .tip-hint {
+  font-size: 0.88rem;
+}
+
+/* 第 4 / 11 页：整页居中——上面一个大问号，下面是问题（只有一个问题的那页字号更大） */
+.qa-center {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  min-height: 0;
+  text-align: center;
+}
+
+.qa-center .qa-icon {
+  color: var(--c-accent);
+  opacity: 0.92;
+}
+
+.qa-center .qa-q {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.qa-center .qa-q--lg {
+  font-size: 1.95rem;
+}
+
+/* 第 8 页：v–t 图 + 过程树（上下排） */
+.vt-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+}
+
+.vt-host {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+}
+
+.vt-col .proc-tree {
+  flex: 0 0 auto;
+}
+
+/* 「两个问题」页的答案行（公开课版没有，自读版保留） */
+.qa-center .qa-a {
+  font-size: 1.12rem;
+  line-height: 1.55;
+  color: var(--c-text);
+}
+
+.qa-center .qa-a b {
+  color: var(--c-accent);
+}
+
+/* 自读版第 2 页：比公开课版多一行讲解文字，两幅图略微收小，避免顶出正文区 */
+.measure-page .host svg {
+  height: 205px !important;
+  width: auto !important;
+  max-width: 100%;
+}
+
+.measure-page .tip-hint {
+  font-size: 0.95rem;
+}

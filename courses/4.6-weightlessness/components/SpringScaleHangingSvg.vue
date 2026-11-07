@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useId } from "vue";
+
+/** SVG 里 id/url(#id) 必须按实例唯一：Slidev 会同时挂载相邻页，重名 id 会让填充整体失效 */
+const uid = useId();
 /**
  * 第 2 页：弹簧测力计竖直悬挂钩码（静止）
  *
@@ -35,12 +39,12 @@ const POINTER_Y = CASE.y + 0.8 * CASE_W + 0.7 * CASE_W + (FORCE_N / MAX_FORCE) *
   <svg viewBox="0 0 190 360" style="width: auto; max-width: 100%; height: 285px" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <!-- 钩码金属圆柱的体积感渐变 -->
-      <linearGradient id="ssWeightGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient :id="uid + '-ssWeightGrad'" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="var(--c-neutral-600)" />
         <stop offset="40%" stop-color="var(--c-neutral-200)" />
         <stop offset="100%" stop-color="var(--c-neutral-500)" />
       </linearGradient>
-      <linearGradient id="ssWeightTopGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <linearGradient :id="uid + '-ssWeightTopGrad'" x1="0%" y1="0%" x2="0%" y2="100%">
         <stop offset="0%" stop-color="var(--c-neutral-200)" />
         <stop offset="100%" stop-color="var(--c-neutral-500)" />
       </linearGradient>
@@ -59,9 +63,9 @@ const POINTER_Y = CASE.y + 0.8 * CASE_W + 0.7 * CASE_W + (FORCE_N / MAX_FORCE) *
       <!-- 挂环与码身之间的短颈 -->
       <line :x1="AXIS_X" :y1="HOOK_END_Y + 13" :x2="AXIS_X" :y2="HOOK_END_Y + 17" stroke="var(--c-neutral-300)" stroke-width="2" />
       <!-- 码身：金属圆柱 -->
-      <rect :x="AXIS_X - 17" :y="HOOK_END_Y + 17" width="34" height="29" rx="4" fill="url(#ssWeightGrad)" stroke="var(--c-text-dim)" stroke-width="1.6" />
+      <rect :x="AXIS_X - 17" :y="HOOK_END_Y + 17" width="34" height="29" rx="4" :fill="'url(#' + uid + '-ssWeightGrad)'" stroke="var(--c-text-dim)" stroke-width="1.6" />
       <!-- 码身顶面 -->
-      <ellipse :cx="AXIS_X" :cy="HOOK_END_Y + 21" rx="15" ry="4" fill="url(#ssWeightTopGrad)" stroke="var(--c-text-dim)" stroke-width="1.2" />
+      <ellipse :cx="AXIS_X" :cy="HOOK_END_Y + 21" rx="15" ry="4" :fill="'url(#' + uid + '-ssWeightTopGrad)'" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <!-- 码身中部的槽口 -->
       <line :x1="AXIS_X - 17" :y1="HOOK_END_Y + 31" :x2="AXIS_X + 17" :y2="HOOK_END_Y + 31" stroke="var(--c-neutral-900)" stroke-width="1.6" opacity="0.7" />
     </g>
