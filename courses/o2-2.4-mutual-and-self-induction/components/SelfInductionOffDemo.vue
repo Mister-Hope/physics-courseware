@@ -62,10 +62,11 @@ const setClosed = (on: boolean): void => {
   rampL.to = on ? 1 : 0;
   rampL.tau = on ? 260 : 720;
 
+  // 闭合瞬间：L 阻碍电流增大，全压先加在灯上（灯先亮），随后 L 把灯短路、灯变暗
   rampB.t0 = now;
-  rampB.from = Math.abs(iB.value);
+  rampB.from = on ? 1 : Math.abs(iB.value);
   rampB.to = on ? 0.62 : 0;
-  rampB.tau = 100;
+  rampB.tau = on ? 260 : 100;
 
   // 断开瞬间：L 的电流立刻改为经灯泡继续流动（方向相反）
   if (!on) iB.value = -iL.value;

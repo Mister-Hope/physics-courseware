@@ -26,29 +26,13 @@ subtitle: 变化的电流，隔空传能
 <CoverDecorationSvg />
 
 ---
-layout: focus-question
-title: 引课（隔空点灯）
+title: 实验装置
 ---
 
-<template v-slot:icon>
-
-<mdi-lightbulb-on-outline />
-
-</template>
-
-<div>两个线圈之间没有导线。<br />合上开关，右边的灯会亮吗？</div>
-
-<template v-slot:hint>
-
-灯闪了一下，随即熄灭；断开开关时，它又闪了一下。
-
-</template>
-
-<template v-slot:answer>
-
-灯的能量，是左边线圈的磁场送过去的。
-
-</template>
+<div class="page-grow">
+<div class="ask text-center">两个线圈套在一起，两个回路之间没有导线相连。</div>
+<AirGapLampDemo :controls="false" />
+</div>
 
 ---
 title: 隔空点灯
@@ -76,7 +60,7 @@ title: 互感
 <div class="split-wide">
 <div><MutualLinkSvg /></div>
 <div class="stack">
-<div v-click="1"><DefinitionBox term="互感"><div>当一个线圈中的<span class="def-term">电流变化</span>时，它产生的变化磁场会在<span class="def-term">另一个线圈</span>中引起感应电动势。这种现象叫作互感，这个电动势叫作<span class="def-term">互感电动势</span>。</div></DefinitionBox></div>
+<div v-click="1"><DefinitionBox term="互感"><div>当一个线圈中的<span class="def-term">电流变化</span>时，它的变化磁场会在<span class="def-term">另一个线圈</span>中激起感应电动势，这就是互感。</div><div>这个电动势叫作<span class="def-term">互感电动势</span>。</div></DefinitionBox></div>
 <div v-click="2" class="tip-hint">电流稳定 → 磁场稳定 → 穿过 B 的磁通量不变，就没有互感电动势。</div>
 </div>
 </div>
@@ -122,6 +106,30 @@ title: 互感带来的干扰
 </div>
 </div>
 </div>
+
+---
+layout: exercise-split
+title: 互感（练习）
+---
+
+<template v-slot:stem>
+
+<div><b class="ex-no">练习一</b>　某餐厅的送餐机器人停在充电板上，不插线就能给电池充电。关于这个过程，下列说法正确的是（　　）</div>
+
+<div class="ex-options">
+<div><b>A.</b> 利用了电磁感应原理</div>
+<div><b>B.</b> 送电线圈中通入的是恒定电流</div>
+<div><b>C.</b> 送电线圈在周围产生变化的磁场</div>
+<div><b>D.</b> 受电线圈中的磁通量保持不变</div>
+</div>
+
+</template>
+
+<div v-click="1">选 <b class="text-accent">A、C</b>。送电线圈中的电流必须不断变化，才能在受电线圈中激起感应电动势。</div>
+
+<div v-click="2">B、D 错：恒定电流产生恒定磁场，受电线圈中的磁通量不变，不会有感应电动势。</div>
+
+<div v-click="3" class="tip-hint">无线充电的送电、受电线圈，就是一对相互靠近、互相感应的线圈。</div>
 
 ---
 title: 自感
@@ -181,6 +189,29 @@ title: 断电自感
 </div>
 
 ---
+layout: exercise-split
+title: 自感（练习）
+---
+
+<template v-slot:stem>
+
+<div><b class="ex-no">练习二</b>　如图，<Latex tex="L" /> 是自感系数很大的线圈，其自身的直流电阻几乎为 <Latex tex="0" />。<Latex tex="A" />、<Latex tex="B" /> 是两个相同的小灯泡。闭合开关 <Latex tex="S" /> 后，<Latex tex="A" />、<Latex tex="B" /> 两灯的亮度怎样变化？断开 <Latex tex="S" /> 后呢？</div>
+
+</template>
+
+<template v-slot:fig>
+
+<SelfInductionExerciseSvg />
+
+</template>
+
+<div v-click="1"><b>闭合 <Latex tex="S" /> 瞬间</b>：<Latex tex="L" /> 中电流不能突变，电流从 <Latex tex="B" /> 支路通过，<Latex tex="A" />、<Latex tex="B" /> 同时变亮。</div>
+
+<div v-click="2">随后 <Latex tex="L" /> 中电流逐渐增大，把 <Latex tex="B" /> 短路：<Latex tex="B" /> 逐渐变暗直至熄灭，<Latex tex="A" /> 变得更亮。</div>
+
+<div v-click="3"><b>断开 <Latex tex="S" /> 瞬间</b>：<Latex tex="A" /> 立即熄灭；<Latex tex="L" /> 中的电流经 <Latex tex="B" /> 形成回路，<Latex tex="B" /> 闪亮一下后逐渐熄灭。</div>
+
+---
 title: 自感电动势的大小
 ---
 
@@ -206,16 +237,34 @@ title: 磁场的能量
 </div>
 
 ---
-title: 自感的用与防
+title: 自感的利用与防治
 ---
 
+# 自感的利用与防治
+
 <div class="page-grow">
-<div class="stack">
-<div class="ask">自感能点亮灯管，也能在断电时打火——怎么用、怎么防？</div>
-<div class="fig-wide"><InductorApplicationsSvg /></div>
-<div class="half-grid">
-<div v-click="1"><b class="text-accent">用：日光灯镇流器</b><br />启动时产生很高的自感电动势，帮助点亮灯管。</div>
-<div v-click="2" class="divider-l"><b class="text-accent">防：断开大电感</b><br />电流骤减 → 自感电动势很大 → 触点间打出电火花；要用安全开关。</div>
+<div class="use-grid">
+<div class="mini-title">利用</div>
+<div class="mini-title">防治</div>
+<div class="use-item">
+<div class="use-figure"><BallastCircuitSvg /></div>
+<div class="use-name">日光灯镇流器</div>
+<div class="mini-note">断电瞬间产生很高的自感电动势，把灯管点亮。</div>
+</div>
+<div class="use-item">
+<div class="use-figure"><SafetySwitchSvg /></div>
+<div class="use-name">安全开关</div>
+<div class="mini-note">变压器、电动机断电时触点会打火，要用特制安全开关。</div>
+</div>
+<div class="use-item">
+<div class="use-figure"><ChokeCoilSvg /></div>
+<div class="use-name">扼流圈</div>
+<div class="mini-note">通直流、阻交流，用来滤掉电流中的交流成分。</div>
+</div>
+<div class="use-item">
+<div class="use-figure"><BifilarWindingSvg /></div>
+<div class="use-name">双线绕法</div>
+<div class="mini-note">两根导线电流反向、磁场抵消，自感大大减小。</div>
 </div>
 </div>
 </div>
@@ -235,7 +284,7 @@ title: 小结
 <tr><td>磁场由谁产生</td><td>另一个线圈</td><td>线圈自身</td></tr>
 <tr><td>感应电动势出现在</td><td>另一个线圈</td><td>线圈自身</td></tr>
 <tr><td>电动势的方向</td><td>阻碍磁通量的变化</td><td>阻碍自身电流的变化</td></tr>
-<tr><td>典型应用</td><td>变压器、无线充电</td><td>日光灯镇流器</td></tr>
+<tr><td>典型应用</td><td>变压器、无线充电</td><td>日光灯镇流器、扼流圈</td></tr>
 </tbody>
 </table>
 <div v-click="1" class="tip-hint">共同点：磁通量变化才有感应电动势；自感还会"阻碍电流的变化"。</div>

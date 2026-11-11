@@ -102,7 +102,7 @@
   justify-content: center;
 
   width: 100%;
-  height: 190px;
+  height: 250px;
 }
 
 .app-figure > svg {
@@ -150,4 +150,73 @@
 
 .formula-lg .katex {
   font-size: 1em !important;
+}
+
+/* ── 互感耦合：用「柔和光区」表示两个线圈之间变化的磁场 ──
+   不再用带旋转动画的虚线椭圆：虚线弧的形态很容易被读成磁感线，
+   而磁感线是闭合曲线、形状并不是椭圆。光区只表达"这一片有不均匀变化的磁场、
+   能量从这里送过去"，不画线形。呼吸动画只在电流变化时挂上。 */
+.coupling-glow {
+  animation: coupling-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes coupling-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ── 第 15 页：自感的利用与防治（两列，每列两个例子：图 + 名称 + 一句话） ── */
+.use-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 1.4rem;
+  row-gap: 0.2rem;
+  align-items: start;
+}
+
+.use-grid > .mini-title {
+  margin-bottom: 0.1rem;
+}
+
+.use-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-items: center;
+
+  text-align: center;
+}
+
+.use-figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 84px;
+}
+
+.use-figure > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.use-name {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+/* 第 15 页：四格说明统一预留两行，避免一列折行把下一格压低 */
+.use-item {
+  justify-content: flex-start;
+}
+
+.use-item .mini-note {
+  min-height: 3.2em;
 }
