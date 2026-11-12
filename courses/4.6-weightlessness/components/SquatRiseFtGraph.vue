@@ -2,255 +2,243 @@
 import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
 
+import { SQUAT_CURVE, SQUAT_CURVE_STEP } from "../composables/squatCurve";
+
 /**
- * 力传感器记录的示数 F 随时间 t 的变化（§4.6 第 9 页）
+ * 体重计示数 F 随时间 t 的变化（§4.6 第 9 页）
  *
- * 真实的下蹲、站起不是理想的正余弦，而是一个"卸力—加速—急停/蹬地"的过程：
+ * 曲线不是拟合出来的：人教社《物理 必修 第一册》P110 图 4.6-5「下蹲、站起两个过程」
+ * 在 PDF 里是一条矢量路径，转成 SVG 后展开成 1028 个点，再按图上网格标定坐标换算成
+ * (t, F)，见 `composables/squatCurve.ts`。所以曲线保留了真实测量的特征（蹲下去时示数
+ * 先掉下去、蹬地时冲高并带一个肩部），但静止段的余振被拉平（电子秤不会有）。
  *
- * - 静止时示数本来就是平的；只有起蹲前、蹲住不动、站定后那一小段，重心晃会让示数微微跳动；
- * - 下蹲：先卸力（示数掉到 mg 以下），蹲到最低点时急停（示数突然顶上去再回落）；
- * - 站起：先蹬地（示数猛地跳到最大），随后加速上升、再减速上升（示数掉到 mg 以下）再回落。
- * - `mode="squat"`：只下蹲；`mode="rise"`：只站起；`mode="both"`：先下蹲、再站起（0~4.8 s）。
- * - 跟随翻页分步（共 4 次点击，只新增、不删已有元素）：
- *   0 实测曲线 → 1 mg 水平参考虚线 → 2 六条分段竖直虚线
+ * 分段（加速 / 减速的边界、极值点）全部由**数据本身**算出来：
+ * 加速度 a = 0 ⟺ 示数 F 穿过 mg，所以「加速段」与「减速段」的分界就是曲线过 mg 的时刻；
+ * 虚线、圆点、判读文字都挂在这些真实时刻上，不会和峰值错位。
+ *
+ * - `mode="squat"`：只下蹲；`mode="rise"`：只站起；`mode="both"`：先下蹲、再站起。
+ * - 跟随翻页分步（4 次点击，只新增、不删已有元素）：
+ *   0 实测曲线 → 1 mg 水平参考虚线 → 2 分段竖直虚线
  *   → 3 波瓣着色与失重/超重判读 → 4 底部阶段名与加速度方向。
- *
- * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；分段线、面积着色、文字判读放在 `#overlay` 插槽里。
  */
-const { mode = "squat" } = defineProps<{ mode?: "squat" | "rise" | "both" }>();
+const { mode = "squat", stepOffset = 0 } = defineProps<{
+  mode?: "squat" | "rise" | "both";
+  /** 页面在前几次点击里显示别的内容时，用它在外面统一扣掉 */
+  stepOffset?: number;
+}>();
 
 const { $clicks } = useSlideContext();
 
 /** 页面共 4 次点击（0~4），多按不越界 */
-const step = computed(() => Math.max(0, Math.min($clicks.value, 4)));
+const step = computed(() => Math.max(0, Math.min($clicks.value - stepOffset, 4)));
 
-/** M = 60 kg、g = 10 m/s² 时的重力，作为参考线 */
+/** M = 60 kg、g = 10 m/s² 时的重力，作为参考线（教材图是 500 N，本课统一按 600 N 等比放大） */
 const MG = 600;
 
-const X_MAX = computed(() => (mode === "both" ? 4.8 : 3.4));
+const X_MAX = computed(() => (mode === "both" ? 8 : mode === "squat" ? 3.4 : 2.4));
 const VIEW_W = 660;
 const VIEW_H = 400;
 
-/** 示数曲线的一帧：[时刻, 示数]（N） */
-interface Keyframe {
-  readonly t: number;
-  readonly f: number;
-}
+/** 某一时刻示数相对 mg 的比值（对采样数据做线性插值） */
+const ratioAt = (t: number): number => {
+  const pos = Math.min(Math.max(t / SQUAT_CURVE_STEP, 0), SQUAT_CURVE.length - 1);
+  const i = Math.floor(pos);
+  const next = Math.min(i + 1, SQUAT_CURVE.length - 1);
+  const a = SQUAT_CURVE[i] ?? 1;
+  const b = SQUAT_CURVE[next] ?? a;
 
-/** 冲击尖峰（急停、蹬地）：窄脉冲，对应真实数据里突然跳变的那一两帧 */
-interface Spike {
-  readonly t: number;
-  readonly amp: number;
-  readonly halfWidth: number;
-}
-
-/** 关键帧：段内用 smoothstep 过渡，两端平缓、中段更快 */
-const KEYFRAMES: Record<"squat" | "rise" | "both", readonly Keyframe[]> = {
-  both: [
-    { t: 0, f: MG },
-    { t: 0.3, f: MG },
-    { t: 0.4, f: MG },
-    { t: 0.47, f: 505 },
-    { t: 0.62, f: 484 },
-    { t: 0.82, f: 481 },
-    { t: 1.02, f: 506 },
-    { t: 1.13, f: 553 },
-    { t: 1.2, f: MG },
-    { t: 1.3, f: 668 },
-    { t: 1.45, f: 708 },
-    { t: 1.57, f: 728 },
-    { t: 1.63, f: 731 },
-    { t: 1.7, f: 690 },
-    { t: 1.78, f: 634 },
-    { t: 1.86, f: 609 },
-    { t: 1.95, f: MG },
-    { t: 2.2, f: MG },
-    { t: 2.55, f: MG },
-    { t: 2.6, f: MG },
-    { t: 2.68, f: 742 },
-    { t: 2.8, f: 714 },
-    { t: 2.95, f: 699 },
-    { t: 3.1, f: 694 },
-    { t: 3.28, f: 701 },
-    { t: 3.4, f: 688 },
-    { t: 3.48, f: 635 },
-    { t: 3.58, f: 573 },
-    { t: 3.7, f: 537 },
-    { t: 3.85, f: 518 },
-    { t: 4, f: 523 },
-    { t: 4.1, f: 562 },
-    { t: 4.2, f: MG },
-    { t: 4.28, f: 612 },
-    { t: 4.38, f: 601 },
-    { t: 4.45, f: MG },
-    { t: 4.8, f: MG },
-  ],
-  squat: [
-    { t: 0, f: MG },
-    { t: 0.3, f: MG },
-    { t: 0.4, f: MG },
-    { t: 0.47, f: 505 },
-    { t: 0.62, f: 484 },
-    { t: 0.82, f: 481 },
-    { t: 1.02, f: 506 },
-    { t: 1.13, f: 553 },
-    { t: 1.2, f: MG },
-    { t: 1.3, f: 668 },
-    { t: 1.45, f: 708 },
-    { t: 1.57, f: 728 },
-    { t: 1.63, f: 731 },
-    { t: 1.7, f: 690 },
-    { t: 1.78, f: 634 },
-    { t: 1.86, f: 609 },
-    { t: 1.95, f: MG },
-    { t: 2.2, f: MG },
-    { t: 3.4, f: MG },
-  ],
-  rise: [
-    { t: 0, f: MG },
-    { t: 0.3, f: MG },
-    { t: 0.4, f: MG },
-    { t: 0.47, f: 742 },
-    { t: 0.58, f: 714 },
-    { t: 0.7, f: 699 },
-    { t: 0.9, f: 694 },
-    { t: 1.1, f: 701 },
-    { t: 1.2, f: MG },
-    { t: 1.3, f: 545 },
-    { t: 1.42, f: 520 },
-    { t: 1.55, f: 512 },
-    { t: 1.7, f: 540 },
-    { t: 1.85, f: 575 },
-    { t: 1.95, f: MG },
-    { t: 2.1, f: 612 },
-    { t: 2.25, f: 601 },
-    { t: 2.4, f: MG },
-    { t: 3.4, f: MG },
-  ],
+  return a + (b - a) * (pos - i);
 };
 
-/** 冲击尖峰：蹲到底的急停、站起时的蹬地、下蹲起步时的卸力 */
-const SPIKES: Record<"squat" | "rise" | "both", readonly Spike[]> = {
-  both: [
-    { t: 0.47, amp: -22, halfWidth: 0.045 },
-    { t: 1.63, amp: 52, halfWidth: 0.05 },
-    { t: 2.68, amp: 60, halfWidth: 0.055 },
-  ],
-  squat: [
-    { t: 0.47, amp: -22, halfWidth: 0.045 },
-    { t: 1.63, amp: 52, halfWidth: 0.05 },
-  ],
-  rise: [
-    { t: 0.47, amp: 60, halfWidth: 0.055 },
-    { t: 1.95, amp: 22, halfWidth: 0.045 },
-  ],
+/** 某一时刻秤的示数（N） */
+const modelAt = (t: number): number => MG * ratioAt(t);
+
+/** 扫描步长（找动作区间、极值、过零点都用它） */
+const SCAN = 0.01;
+/** 判定「动作中」的阈值：偏离 mg 超过 2% */
+const MOVE_EPS = 0.02;
+/** 两段动作之间允许的短暂回零间隙（s） */
+const MERGE_GAP = 0.14;
+/** 动作段最短时长（s），太短的是噪声 */
+const MIN_SPAN = 0.4;
+
+/** 动作区间：|F − mg| > 2% 的连续时间段，全部由数据识别（不写死时刻） */
+const ranges = computed<readonly (readonly [number, number])[]>(() => {
+  const total = X_MAX.value;
+  const flags: boolean[] = [];
+
+  for (let t = 0; t <= total + 1e-9; t += SCAN) {
+    flags.push(Math.abs(ratioAt(t) - 1) > MOVE_EPS);
+  }
+
+  const spans: [number, number][] = [];
+  let start = -1;
+  let quiet = 0;
+
+  flags.forEach((active, index) => {
+    const t = index * SCAN;
+
+    if (active) {
+      if (start < 0) start = t;
+      quiet = 0;
+      return;
+    }
+
+    if (start >= 0) {
+      quiet += SCAN;
+      if (quiet > MERGE_GAP) {
+        spans.push([start, t - quiet]);
+        start = -1;
+        quiet = 0;
+      }
+    }
+  });
+  if (start >= 0) spans.push([start, flags.length * SCAN - quiet]);
+
+  return spans.filter(([a, b]) => b - a >= MIN_SPAN);
+});
+
+/** 在 [a, b] 内找曲线穿过 F = mg 的时刻（线性插值，升序） */
+const crossingsOf = (a: number, b: number): number[] => {
+  const list: number[] = [];
+  let previous = ratioAt(a) - 1;
+
+  for (let t = a + SCAN / 2; t <= b; t += SCAN / 2) {
+    const current = ratioAt(t) - 1;
+    if (previous === 0 || previous * current < 0) {
+      const k = Math.abs(previous) / (Math.abs(previous) + Math.abs(current) || 1);
+      list.push(t - SCAN / 2 + k * (SCAN / 2));
+    }
+    previous = current;
+  }
+
+  return list;
 };
 
-/**
- * 在关键帧之间做 smoothstep 插值
- *
- * @param t 时刻（s）
- * @param keys 关键帧序列
- * @returns 该时刻的示数（N）
- */
-const keyframeAt = (t: number, keys: readonly Keyframe[]): number => {
-  const [first] = keys;
-  const last = keys.at(-1);
+/** 在 [a, b] 内偏离 mg 最远的采样点 */
+const extremeIn = (a: number, b: number): { t: number; f: number } => {
+  let bestT = a;
+  let bestF = modelAt(a);
 
-  if (!first || !last || t <= first.t) return first?.f ?? MG;
-  if (t >= last.t) return last.f;
-
-  for (let i = 1; i < keys.length; i++) {
-    const prev = keys[i - 1];
-    const next = keys[i];
-
-    if (t <= next.t && prev && next) {
-      const u = (t - prev.t) / (next.t - prev.t);
-      return prev.f + (next.f - prev.f) * (u * u * (3 - 2 * u));
+  for (let t = a; t <= b + 1e-9; t += SCAN / 2) {
+    const f = modelAt(t);
+    if (Math.abs(f - MG) > Math.abs(bestF - MG)) {
+      bestT = t;
+      bestF = f;
     }
   }
 
-  return last.f;
+  return { t: bestT, f: Math.round(bestF) };
 };
 
-/**
- * 窄脉冲：`|t - t0| < halfWidth` 时叠加一个抛物线尖峰
- *
- * @param t 时刻（s）
- * @param spike 尖峰参数
- * @returns 该时刻叠加的示数（N）
- */
-const spikeAt = (t: number, spike: Spike): number => {
-  const u = (t - spike.t) / spike.halfWidth;
+interface Phase {
+  readonly mid: number;
+  readonly tRange: readonly [number, number];
+  readonly label: string;
+  /** 极值点：时刻与示数（N），用于圆点、偏离虚线与判读文字 */
+  readonly peakT?: number;
+  readonly peakY?: number;
+  readonly flag?: string;
+  readonly flagY?: number;
+  readonly flagDx?: number;
+  readonly accel?: "up" | "down";
+  /** 同一对阶段名向两侧让开的偏移（屏幕 px）：-1 左移、1 右移、0 不动 */
+  readonly pairSide?: -1 | 0 | 1;
+  readonly color?: string;
+  readonly fillColor?: string;
+}
 
-  return Math.abs(u) >= 1 ? 0 : spike.amp * (1 - u * u);
-};
+const DOWN_FILL = "rgba(96, 165, 250, 0.16)";
+const UP_FILL = "rgba(248, 113, 113, 0.16)";
+const DOWN_COLOR = "#60a5fa";
+const UP_COLOR = "#f87171";
 
-/** 不带噪声的理想模型：用于面积着色与极值判读 */
-const modelAt = (t: number): number => {
-  let f = keyframeAt(t, KEYFRAMES[mode]);
+const phases = computed<readonly Phase[]>(() => {
+  const total = X_MAX.value;
+  const list: Phase[] = [];
 
-  for (const spike of SPIKES[mode]) f += spikeAt(t, spike);
+  const pushRest = (from: number, to: number): void => {
+    if (to - from > 0.05) {
+      list.push({
+        mid: (from + to) / 2,
+        tRange: [from, to],
+        label: to - from >= 0.8 ? "静止" : "",
+      });
+    }
+  };
 
-  return f;
-};
+  ranges.value.forEach(([a, b], index) => {
+    if (index === 0) {
+      pushRest(0, a);
+    } else {
+      pushRest(ranges.value[index - 1]?.[1] ?? 0, a);
+    }
 
-/**
- * 确定性伪随机：同一时刻永远得到同一个值，重渲染不会让曲线自己抖
- *
- * @param n 采样序号
- * @returns [0, 1) 的伪随机数
- */
-const hashAt = (n: number): number => {
-  const v = Math.sin(n * 12.9898 + 78.233) * 43758.5453;
+    // 第一段是下蹲（下降过程），第二段是站起（上升过程）
+    const descending = mode === "rise" ? false : index === 0;
+    const dir = descending ? "下降" : "上升";
 
-  return v - Math.floor(v);
-};
+    // 加速段与减速段的分界 = 曲线穿过 mg 的时刻（离段中点最近的那个）
+    const crossings = crossingsOf(a, b);
+    const middle = crossings.length
+      ? crossings.reduce((best, c) =>
+          Math.abs(c - (a + b) / 2) < Math.abs(best - (a + b) / 2) ? c : best,
+        )
+      : (a + b) / 2;
 
-/**
- * 噪声包络：人静立时示数是平的，只有"起蹲前 / 蹲住不动 / 站定后"那一小段才有真实的重心晃动
- *
- * @param t 时刻（s）
- * @returns 0~1 的噪声强度
- */
-const noiseEnvelope = (t: number): number => {
-  const rampIn = Math.min(1, Math.max(0, (t - 0.22) / 0.11));
-  const outStart = mode === "both" ? 4.16 : 2.3;
-  const outEnd = mode === "both" ? 4.36 : 2.5;
-  const rampOut = 1 - Math.min(1, Math.max(0, (t - outStart) / (outEnd - outStart)));
+    ([
+      [a, middle, -1],
+      [middle, b, 1],
+    ] as const).forEach(([t0, t1, side]) => {
+      const { t: peakT, f: peakY } = extremeIn(t0, t1);
+      const isUnder = peakY < MG;
 
-  return Math.min(rampIn, rampOut);
-};
+      list.push({
+        mid: (t0 + t1) / 2,
+        tRange: [t0, t1],
+        // 下降时"加速"对应失重；上升时"加速"对应超重
+        label: `${isUnder === descending ? "加速" : "减速"}${dir}`,
+        peakT,
+        peakY,
+        flag: isUnder ? "失重" : "超重",
+        flagY: isUnder ? peakY - 54 : peakY + 46,
+        flagDx: isUnder && !descending ? 26 : undefined,
+        color: isUnder ? DOWN_COLOR : UP_COLOR,
+        fillColor: isUnder ? DOWN_FILL : UP_FILL,
+        accel: isUnder ? "down" : "up",
+        pairSide: side,
+      });
+    });
+  });
 
-/** 真实传感器采样的抖动：约 26 次/s，静止时 ±8 N 左右 */
-const noiseAt = (t: number): number => {
-  const rate = 26;
-  const u = t * rate;
-  const index = Math.floor(u);
-  const frac = u - index;
-  const a = hashAt(index) * 2 - 1;
-  const b = hashAt(index + 1) * 2 - 1;
-  const w = frac * frac * (3 - 2 * frac);
+  const last = ranges.value[ranges.value.length - 1];
+  pushRest(last ? last[1] : 0, total);
 
-  return (a * (1 - w) + b * w) * 8 * noiseEnvelope(t);
-};
+  return list;
+});
 
-/**
- * 某一时刻力传感器的示数（N）= 理想模型 + 采样噪声
- *
- * @param t 时刻（s）
- * @returns 该时刻的示数（N）
- */
-const curveAt = (t: number): number => modelAt(t) + noiseAt(t);
+/** 分段虚线：每段动作的起点、加速/减速分界、终点 */
+const separators = computed(() => {
+  const times = new Set<number>();
+
+  for (const phase of phases.value) {
+    if (phase.fillColor) {
+      times.add(Number(phase.tRange[0].toFixed(3)));
+      times.add(Number(phase.tRange[1].toFixed(3)));
+    }
+  }
+
+  return [...times].sort((p, q) => p - q);
+});
+
+/** 只有运动段才有"曲线与 mg 之间"的波瓣 */
+const lobes = computed(() => phases.value.filter((phase) => phase.fillColor !== undefined));
+
+/** 直接画实测数据（采样点足够密，折线看不出拐角） */
+const curveAt = (t: number): number => modelAt(t);
 
 /**
  * 生成区间 [tStart, tEnd] 上曲线 F(t) 与水平线 F = MG 围成的闭合填充路径
- *
- * @param tStart 区间起点时刻（s）
- * @param tEnd 区间终点时刻（s）
- * @param mapX 时刻 → 屏幕横坐标
- * @param mapY 示数 → 屏幕纵坐标
- * @returns SVG `d` 属性字符串
  */
 const buildLobePath = (
   tStart: number,
@@ -274,7 +262,7 @@ const buildLobePath = (
 const curves = computed(() => [
   {
     formula: curveAt,
-    samples: mode === "both" ? 320 : 240,
+    samples: mode === "both" ? 400 : 300,
     color: "var(--c-accent-2)",
     width: 3.5,
   },
@@ -290,214 +278,62 @@ const curves = computed(() => [
   },
 ]);
 
-interface Phase {
-  readonly mid: number;
-  readonly tRange: readonly [number, number];
-  readonly label: string;
-  /** 极值点：时刻与示数（N），用于高亮圆点与偏离虚线 */
-  readonly peakT?: number;
-  readonly peakY?: number;
-  /** 波瓣判读：失重 / 超重（画在极值外侧，避开曲线与引线） */
-  readonly flag?: string;
-  readonly flagY?: number;
-  /** 判读文字的横向微调（用户单位）：极值贴着分隔虚线时把字挪开 */
-  readonly flagDx?: number;
-  /** 该段的加速度方向；静止段不画 */
-  readonly accel?: "up" | "down";
-  readonly color?: string;
-  readonly fillColor?: string;
-}
-
-/** 分段时刻（虚线分隔各运动阶段）：把 5 段运动与两端静止分开 */
-const separators = computed(() => (mode === "both" ? [0.4, 1.2, 2, 2.6, 3.4, 4.2] : [0.4, 1.2, 2]));
-
-const DOWN_FILL = "rgba(96, 165, 250, 0.16)";
-const UP_FILL = "rgba(248, 113, 113, 0.16)";
-const DOWN_COLOR = "#60a5fa";
-const UP_COLOR = "#f87171";
-
-const phases = computed<readonly Phase[]>(() => {
-  if (mode === "both") {
-    return [
-      { mid: 0.2, tRange: [0, 0.4], label: "静止" },
-      {
-        mid: 0.8,
-        tRange: [0.4, 1.2],
-        label: "加速下降",
-        peakT: 0.82,
-        peakY: 481,
-        flag: "失重",
-        flagY: 415,
-        color: DOWN_COLOR,
-        fillColor: DOWN_FILL,
-        accel: "down",
-      },
-      {
-        mid: 1.6,
-        tRange: [1.2, 2],
-        label: "减速下降",
-        peakT: 1.63,
-        peakY: 783,
-        flag: "超重",
-        flagY: 840,
-        color: UP_COLOR,
-        fillColor: UP_FILL,
-        accel: "up",
-      },
-      { mid: 2.3, tRange: [2, 2.6], label: "静止" },
-      {
-        mid: 3,
-        tRange: [2.6, 3.4],
-        label: "加速上升",
-        peakT: 2.68,
-        peakY: 802,
-        flag: "超重",
-        flagY: 850,
-        flagDx: 26,
-        color: UP_COLOR,
-        fillColor: UP_FILL,
-        accel: "up",
-      },
-      {
-        mid: 3.8,
-        tRange: [3.4, 4.2],
-        label: "减速上升",
-        peakT: 3.85,
-        peakY: 518,
-        flag: "失重",
-        flagY: 452,
-        color: DOWN_COLOR,
-        fillColor: DOWN_FILL,
-        accel: "down",
-      },
-      { mid: 4.5, tRange: [4.2, X_MAX.value], label: "静止" },
-    ];
-  }
-
-  if (mode === "squat") {
-    return [
-      { mid: 0.2, tRange: [0, 0.4], label: "静止" },
-      {
-        mid: 0.8,
-        tRange: [0.4, 1.2],
-        label: "加速下降",
-        peakT: 0.82,
-        peakY: 481,
-        flag: "失重",
-        flagY: 415,
-        color: DOWN_COLOR,
-        fillColor: DOWN_FILL,
-        accel: "down",
-      },
-      {
-        mid: 1.6,
-        tRange: [1.2, 2],
-        label: "减速下降",
-        peakT: 1.63,
-        peakY: 783,
-        flag: "超重",
-        flagY: 840,
-        color: UP_COLOR,
-        fillColor: UP_FILL,
-        accel: "up",
-      },
-      { mid: 2.7, tRange: [2, X_MAX.value], label: "静止" },
-    ];
-  }
-
-  return [
-    { mid: 0.2, tRange: [0, 0.4], label: "静止" },
-    {
-      mid: 0.8,
-      tRange: [0.4, 1.2],
-      label: "加速上升",
-      peakT: 0.47,
-      peakY: 802,
-      flag: "超重",
-      flagY: 850,
-      flagDx: 26,
-      color: UP_COLOR,
-      fillColor: UP_FILL,
-      accel: "up",
-    },
-    {
-      mid: 1.6,
-      tRange: [1.2, 2],
-      label: "减速上升",
-      peakT: 1.55,
-      peakY: 512,
-      flag: "失重",
-      flagY: 446,
-      color: DOWN_COLOR,
-      fillColor: DOWN_FILL,
-      accel: "down",
-    },
-    { mid: 2.7, tRange: [2, X_MAX.value], label: "静止" },
-  ];
-});
-
-/** 只有运动段才有"曲线与 mg 之间"的波瓣，静止段不生成路径 */
-const lobes = computed(() => phases.value.filter((phase) => phase.fillColor !== undefined));
-
-/** 底部阶段文字的字号（用户单位 ≈ 屏幕 px） */
-const STAGE_FONT = 16;
-/** 跟在阶段文字右侧的 `a` 字号 */
-const ACCEL_FONT = 15;
-/** `a` 字的宽度 */
-const ACCEL_ADVANCE = 10;
-/** 阶段文字与 `a` 的间距 */
-const ACCEL_GAP = 6;
-/** `a` 与箭头的间距 */
-const ACCEL_ARROW_GAP = 2;
-/** 箭头三角形的半宽 */
-const ARROW_HALF = 3.5;
-/** `a` + 箭头整块占的宽度 */
-const ACCEL_WIDTH = ACCEL_ADVANCE + ACCEL_ARROW_GAP + ARROW_HALF * 2;
+/** 底部阶段名字号（用户单位 ≈ 屏幕 px） */
+const STAGE_FONT = 19;
+/** 阶段名之上 "a" 的字号 */
+const ACCEL_FONT = 23;
+/** "a" 与箭头之间的横向间隔 */
+const ACCEL_DX = 15;
+/** 阶段名基线到 "a"/箭头基线的高度 */
+const ACCEL_LIFT = 30;
+/** 箭头总高与头部高度（用户单位） */
+const ARROW_LEN = 22;
+const ARROW_HEAD = 8;
+const ARROW_HALF = 5.5;
 
 interface StageItem {
   readonly key: string;
-  readonly label: string;
-  /** 阶段文字的锚点（middle） */
-  readonly textX: number;
-  /** `a` 的起点（start） */
-  readonly accelX: number;
-  /** 箭头的竖直中心线 */
-  readonly arrowX: number;
-  readonly y: number;
+  readonly lines: readonly string[];
+  readonly centerX: number;
+  readonly bottomY: number;
   readonly accel?: "up" | "down";
   readonly color?: string;
+  /** "a" 文字的落点 */
+  readonly letterX?: number;
+  readonly letterY?: number;
+  /** 箭头：轴线起止 + 头部三角形 */
+  readonly arrowX?: number;
+  readonly arrowTailY?: number;
+  readonly arrowTipY?: number;
+  readonly arrowHeadY?: number;
 }
 
-/**
- * 底部阶段文字 + 加速度方向的排版：有 `a` 时把"文字 + a + 箭头"整组居中放进该段
- * （否则 4 字阶段名会把 `a` 挤出分隔线）
- *
- * @param x 时刻 → 屏幕横坐标
- * @param plot 绘图区四边（用户单位）
- * @param px2user 1 屏幕 px 等于多少用户单位
- * @returns 每段一项的定位数据
- */
 const stageItems = (
   x: (value: number) => number,
   plot: { top: number; bottom: number; left: number; right: number },
   px2user: number,
 ): StageItem[] =>
   phases.value.map((phase) => {
-    const font = STAGE_FONT * px2user;
-    const half = (phase.label.length * font) / 2;
-    const gap = phase.accel ? ACCEL_GAP * px2user : 0;
-    const accelWidth = phase.accel ? ACCEL_WIDTH * px2user : 0;
-    const left = x(phase.mid) - (half * 2 + gap + accelWidth) / 2;
+    const bottomY = plot.bottom - 11 * px2user;
+    const baseY = bottomY - ACCEL_LIFT * px2user;
+    const arrowX = x(phase.mid) + ACCEL_DX * px2user;
+    const up = phase.accel === "up";
+    const tipY = up ? baseY - ARROW_LEN * px2user : baseY;
+    const tailY = up ? baseY : baseY - ARROW_LEN * px2user;
 
     return {
       key: `stage-${phase.mid}`,
-      label: phase.label,
-      textX: left + half,
-      accelX: left + half * 2 + gap,
-      arrowX: left + half * 2 + gap + (ACCEL_ADVANCE + ACCEL_ARROW_GAP) * px2user,
-      y: plot.bottom - 10 * px2user,
+      lines: [phase.label],
+      centerX: x(phase.mid) + (phase.pairSide ?? 0) * 9 * px2user,
+      bottomY,
       accel: phase.accel,
       color: phase.color,
+      letterX: x(phase.mid) - ACCEL_DX * 0.55 * px2user,
+      letterY: up ? baseY + 4 * px2user : baseY - 6 * px2user,
+      arrowX,
+      arrowTailY: tailY,
+      arrowTipY: tipY,
+      arrowHeadY: up ? tipY + ARROW_HEAD * px2user : tipY - ARROW_HEAD * px2user,
     };
   });
 </script>
@@ -593,52 +429,48 @@ const stageItems = (
             </g>
           </template>
         </g>
-        <!-- Step 4：底部阶段名 + 该段的加速度方向（只写 a 与箭头） -->
+        <!-- Step 4：底部阶段名 + 该段的加速度方向（"a" 与上下箭头放在文字上方） -->
         <g v-if="step >= 4">
           <template v-for="item in stageItems(x, plot, px2user)" :key="item.key">
             <text
-              :x="item.textX"
-              :y="item.y"
+              :x="item.centerX"
+              :y="item.bottomY"
               text-anchor="middle"
               :font-size="STAGE_FONT * px2user"
               font-weight="500"
               fill="var(--c-neutral-300)"
             >
-              {{ item.label }}
+              {{ item.lines[0] }}
             </text>
-            <g v-if="item.accel">
+            <g v-if="item.accel && item.arrowX !== undefined">
               <text
-                :x="item.accelX"
-                :y="item.y"
+                :x="item.letterX"
+                :y="item.letterY"
+                text-anchor="middle"
                 font-family="KaTeX_Math"
                 font-style="italic"
                 :font-size="ACCEL_FONT * px2user"
                 :fill="item.color"
                 stroke="var(--c-bg-soft)"
-                :stroke-width="2.6 * px2user"
+                :stroke-width="2.8 * px2user"
                 paint-order="stroke"
               >
                 a
               </text>
-              <g
+              <line
+                :x1="item.arrowX"
+                :y1="item.arrowTailY"
+                :x2="item.arrowX"
+                :y2="item.arrowHeadY"
                 :stroke="item.color"
-                :fill="item.color"
-                :stroke-width="1.6 * px2user"
+                :stroke-width="2.4 * px2user"
                 stroke-linecap="round"
-              >
-                <line
-                  :x1="item.arrowX"
-                  :y1="item.accel === 'up' ? item.y - 1 * px2user : item.y - 12 * px2user"
-                  :x2="item.arrowX"
-                  :y2="item.accel === 'up' ? item.y - 8 * px2user : item.y - 5 * px2user"
-                />
-                <path
-                  :d="item.accel === 'up'
-                    ? `M ${item.arrowX - ARROW_HALF * px2user} ${item.y - 7 * px2user} L ${item.arrowX} ${item.y - 12.5 * px2user} L ${item.arrowX + ARROW_HALF * px2user} ${item.y - 7 * px2user} Z`
-                    : `M ${item.arrowX - ARROW_HALF * px2user} ${item.y - 6 * px2user} L ${item.arrowX} ${item.y - 1.5 * px2user} L ${item.arrowX + ARROW_HALF * px2user} ${item.y - 6 * px2user} Z`"
-                  stroke="none"
-                />
-              </g>
+              />
+              <path
+                :d="`M ${item.arrowX - ARROW_HALF * px2user} ${item.arrowHeadY} L ${item.arrowX} ${item.arrowTipY} L ${item.arrowX + ARROW_HALF * px2user} ${item.arrowHeadY} Z`"
+                :fill="item.color"
+                stroke="none"
+              />
             </g>
           </template>
         </g>

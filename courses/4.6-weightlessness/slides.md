@@ -219,6 +219,14 @@ title: '人蹲下、站起'
 <SquatRiseFtGraph mode="both" />
 </div>
 </div>
+---
+
+<div class="page-grow">
+<div class="ask ask-lead">人站在体重计上，先下蹲、再站起。哪些阶段超重，哪些阶段失重？</div>
+<div class="host">
+<SquatRiseFtGraph mode="both" />
+</div>
+</div>
 
 ---
 layout: base-flex
@@ -253,6 +261,20 @@ title: '完全失重'
 layout: base-flex
 clicks: 2
 title: '水的实验'
+---
+
+<div class="page-grow">
+<div class="ask ask-lead">瓶侧壁扎个小孔，水会从孔中喷出。若让瓶子自由下落，水还会流出来吗？</div>
+<div class="half-grid">
+<div class="host">
+<WaterBottleSvg style="--wb-max: 235px" :falling="false" label="静止" />
+</div>
+<div class="host" v-click="1">
+<WaterBottleSvg style="--wb-max: 235px" :falling="true" label="自由下落" />
+</div>
+</div>
+<div class="tip-hint" v-click="2">瓶和水都完全失重，水不再挤压瓶壁，故不会流出。</div>
+</div>
 ---
 
 <div class="page-grow">

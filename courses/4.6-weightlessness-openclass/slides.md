@@ -110,7 +110,7 @@ title: '电梯实测（模拟）'
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 4
 title: '超重和失重'
 ---
 
@@ -118,7 +118,7 @@ title: '超重和失重'
 
 <div class="page-grow">
 <div class="ft-layout">
-<div class="stack">
+<div class="stack" v-click="3">
 <DefinitionBox term="超重" tone="gold">
 <div>物体对支持物的压力（或对悬挂物的拉力，即<span class="def-term">视重</span>）<b>大于</b>物体所受重力的现象，叫作<span class="def-term">超重</span>现象。</div>
 </DefinitionBox>
@@ -130,7 +130,7 @@ title: '超重和失重'
 <div class="host">
 <ElevatorFtGraph />
 </div>
-<div class="tip-hint">超重和失重，变的只是视重 —— 重力 <Latex tex="mg" /> 始终不变。</div>
+<div class="tip-hint" v-click="4">超重和失重，变的只是视重 —— 重力 <Latex tex="mg" /> 始终不变。</div>
 </div>
 </div>
 </div>
@@ -209,14 +209,15 @@ title: '为什么与加速度有关'
 
 ---
 layout: base-flex
-clicks: 4
+clicks: 5
 title: '人蹲下、站起'
 ---
 
 <div class="page-grow">
 <div class="ask ask-lead">人站在体重计上，先下蹲、再站起。哪些阶段超重，哪些阶段失重？</div>
-<div class="host">
-<SquatRiseFtGraph mode="both" />
+<div class="squat-layout">
+<div class="squat-photo"><img src="/images/textbook-squat.png" alt="教材中人在体重计上下蹲的照片" /></div>
+<div class="host squat-graph" v-click="1"><SquatRiseFtGraph mode="both" :step-offset="1" /></div>
 </div>
 </div>
 
@@ -251,21 +252,29 @@ title: '完全失重'
 
 ---
 layout: base-flex
-clicks: 2
+clicks: 4
 title: '水的实验'
 ---
 
 <div class="page-grow">
 <div class="ask ask-lead">瓶侧壁扎个小孔，水会从孔中喷出。若让瓶子自由下落，水还会流出来吗？</div>
-<div class="half-grid">
+<div class="water-layout">
+<div class="water-left">
+<div class="water-bottles">
 <div class="host">
-<WaterBottleSvg style="--wb-max: 235px" :falling="false" label="静止" />
+<WaterBottleSvg style="--wb-max: 200px" :falling="false" label="静止" />
 </div>
 <div class="host" v-click="1">
-<WaterBottleSvg style="--wb-max: 235px" :falling="true" label="自由下落" />
+<WaterBottleSvg style="--wb-max: 200px" :falling="true" label="自由下落" />
 </div>
 </div>
 <div class="tip-hint" v-click="2">瓶和水都完全失重，水不再挤压瓶壁，故不会流出。</div>
+</div>
+<div class="water-note" v-click="3">
+<img src="/images/textbook-water-sphere.png" alt="航天员在天宫一号中展示水球" />
+<div class="info-hint">太空轨道上的航天器及其内部物体处于完全失重状态。完全失重时，物体将漂浮在空中，液滴呈球形。</div>
+</div>
+</div>
 </div>
 
 ---

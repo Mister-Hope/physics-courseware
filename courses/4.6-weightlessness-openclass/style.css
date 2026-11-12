@@ -316,3 +316,66 @@
 .vt-col .proc-tree {
   flex: 0 0 auto;
 }
+
+/* 第 12 页：教材里的下蹲称重照片 + F–t 图 */
+.squat-layout {
+  display: grid;
+  grid-template-columns: 158px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: center;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.squat-photo img {
+  width: 100%;
+  max-width: 158px;
+  display: block;
+}
+.squat-graph {
+  min-width: 0;
+}
+
+/* 第 14 页：两只瓶子 + 天宫水球照片与配文 */
+.water-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
+  gap: 1.4rem;
+  align-items: center;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.water-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  min-width: 0;
+  min-height: 0;
+}
+.water-bottles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  align-items: end;
+  min-width: 0;
+}
+.water-left .tip-hint {
+  max-width: 26rem;
+}
+.water-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+  min-height: 0;
+}
+.water-note img {
+  width: 100%;
+  max-width: 190px;
+  border-radius: 1rem;
+  display: block;
+}
+.water-note .info-hint {
+  font-size: 0.82rem;
+}
