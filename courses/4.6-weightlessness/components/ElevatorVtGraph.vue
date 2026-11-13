@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
 import {
   DOWN_START,
   PHASE_ACCEL,
@@ -22,7 +23,7 @@ const Y_LIMIT = 1.3;
 const DT = 0.02;
 
 /** 单程速度（0 → v_max → 0）：对平滑加速度积分，起停自然带圆角，不是硬折线 */
-const upSamples = (() => {
+const upSamples = ((): { t: number; v: number }[] => {
   const samples: { t: number; v: number }[] = [{ t: 0, v: 0 }];
   let v = 0;
   for (let t = DT; t <= TRIP + 1e-9; t += DT) {
@@ -95,7 +96,8 @@ const VIEW = { width: 470, height: 260 };
             font-family="KaTeX_Main, system-ui, sans-serif"
             :font-size="15 * px2user"
             :fill="'var(--c-text-dim)'"
-          >{{ label.text }}</text>
+            >{{ label.text }}</text
+          >
           <text
             v-for="label in DOWN_LABELS"
             :key="`vt-down-${label.text}`"
@@ -105,7 +107,8 @@ const VIEW = { width: 470, height: 260 };
             font-family="KaTeX_Main, system-ui, sans-serif"
             :font-size="15 * px2user"
             :fill="'var(--c-text-dim)'"
-          >{{ label.text }}</text>
+            >{{ label.text }}</text
+          >
         </g>
       </template>
     </CoordAxes>
@@ -114,12 +117,13 @@ const VIEW = { width: 470, height: 260 };
 
 <style scoped>
 .vt-graph {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
 }
 </style>

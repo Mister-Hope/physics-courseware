@@ -28,19 +28,24 @@ const project = (cx: number, cy: number, u: number, v: number): Pt => ({
   y: cy - KY * v,
 });
 
+/** 一块薄板的平面中心 */
+interface Board {
+  cx: number;
+  cy: number;
+}
+
 /** 板面上一块矩形的四个角（屏幕上是顺时针：远左 → 远右 → 近右 → 近左）；可在平面内偏移，再整体下沉 drop */
 const plateCorners = (
-  cx: number,
-  cy: number,
+  board: Board,
   halfW: number,
   halfD: number,
   { u = 0, v = 0, drop = 0 }: { u?: number; v?: number; drop?: number } = {},
 ): Pt[] =>
   [
-    project(cx, cy, u - halfW, v + halfD),
-    project(cx, cy, u + halfW, v + halfD),
-    project(cx, cy, u + halfW, v - halfD),
-    project(cx, cy, u - halfW, v - halfD),
+    project(board.cx, board.cy, u - halfW, v + halfD),
+    project(board.cx, board.cy, u + halfW, v + halfD),
+    project(board.cx, board.cy, u + halfW, v - halfD),
+    project(board.cx, board.cy, u - halfW, v - halfD),
   ].map((point) => ({ x: point.x, y: point.y + drop }));
 
 const round1 = (value: number): number => Math.round(value * 10) / 10;
@@ -69,25 +74,25 @@ const roundedPath = (pts: Pt[], radius: number): string => {
 const phone = { cx: 140, cy: 74, halfW: 54, halfD: 27, thickness: 7 };
 const pad = { cx: 140, cy: 146, halfW: 66, halfD: 40, thickness: 9 };
 
-const phonePath = roundedPath(plateCorners(phone.cx, phone.cy, phone.halfW, phone.halfD), 10);
+const phonePath = roundedPath(plateCorners(phone, phone.halfW, phone.halfD), 10);
 const phoneBasePath = roundedPath(
-  plateCorners(phone.cx, phone.cy, phone.halfW, phone.halfD, { drop: phone.thickness }),
+  plateCorners(phone, phone.halfW, phone.halfD, { drop: phone.thickness }),
   10,
 );
-const padPath = roundedPath(plateCorners(pad.cx, pad.cy, pad.halfW, pad.halfD), 9);
+const padPath = roundedPath(plateCorners(pad, pad.halfW, pad.halfD), 9);
 const padBasePath = roundedPath(
-  plateCorners(pad.cx, pad.cy, pad.halfW, pad.halfD, { drop: pad.thickness }),
+  plateCorners(pad, pad.halfW, pad.halfD, { drop: pad.thickness }),
   9,
 );
 
 /** 手机正面：屏幕（细边框，一眼是玻璃屏不是整块面板）、远端刘海缺口、近端 home 条 */
-const screenPath = roundedPath(plateCorners(phone.cx, phone.cy, 50, 23), 5);
-const notchPath = roundedPath(plateCorners(phone.cx, phone.cy, 14, 1.6, { v: 21.4 }), 1.4);
-const speakerPath = roundedPath(plateCorners(phone.cx, phone.cy, 6, 0.45, { v: 20.6 }), 0.45);
-const homeBarPath = roundedPath(plateCorners(phone.cx, phone.cy, 8, 0.9, { v: -20.8 }), 0.9);
+const screenPath = roundedPath(plateCorners(phone, 50, 23), 5);
+const notchPath = roundedPath(plateCorners(phone, 14, 1.6, { v: 21.4 }), 1.4);
+const speakerPath = roundedPath(plateCorners(phone, 6, 0.45, { v: 20.6 }), 0.45);
+const homeBarPath = roundedPath(plateCorners(phone, 8, 0.9, { v: -20.8 }), 0.9);
 
 /** 右侧可见侧壁上的两个按键（电源键 / 音量键）：沿"远右 → 近右"下沉半个板厚画两小段亮线，板才像手机不像卡片 */
-const phoneSideButtons = (() => {
+const phoneSideButtons = ((): { from: Pt; to: Pt }[] => {
   const farRight = project(phone.cx, phone.cy, phone.halfW, phone.halfD);
   const nearRight = project(phone.cx, phone.cy, phone.halfW, -phone.halfD);
   const dx = nearRight.x - farRight.x;

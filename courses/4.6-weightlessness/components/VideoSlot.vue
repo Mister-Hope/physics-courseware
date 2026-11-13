@@ -31,8 +31,8 @@ const { src = demoVideo, title = "电梯里的示数变化" } = defineProps<{
 
   /* 实拍视频是 768×576（4:3），槽位按 4:3 给，高度受页面可用高度约束 */
   width: auto;
-  height: 424px;
   max-width: 100%;
+  height: 424px;
   aspect-ratio: 4 / 3;
   margin: 0 auto;
   border: 1px solid var(--c-border);

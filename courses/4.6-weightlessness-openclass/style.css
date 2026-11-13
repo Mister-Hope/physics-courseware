@@ -66,13 +66,14 @@
   grid-template-columns: minmax(0, 1fr) 250px;
   gap: 1.4rem;
   align-items: center;
+
   min-height: 0;
 }
 
 /* 例题里的方程单独占一行（避免一个公式被拆到两行） */
 .ex-eq {
-  padding-left: 1.1rem;
   margin-top: 0.1rem;
+  padding-left: 1.1rem;
 }
 
 /* ═══════════════════════════════════════════════
@@ -85,6 +86,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
   gap: 1.8rem;
   align-items: center;
+
   height: 100%;
 }
 
@@ -98,12 +100,13 @@
 }
 
 .intro-photo img {
+  object-fit: cover;
+
   width: 100%;
   max-height: 372px;
-
-  object-fit: cover;
   border: 1px solid var(--c-border);
   border-radius: 1.4rem;
+
   box-shadow: 0 18px 44px rgb(0 0 0 / 48%);
 }
 
@@ -111,7 +114,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.62rem;
-
   min-width: 0;
 }
 
@@ -124,21 +126,21 @@
 .intro-logo {
   width: 64px;
   height: auto;
-
   filter: brightness(1.45) saturate(1.05) drop-shadow(0 4px 18px rgb(74 222 128 / 28%));
 }
 
 .intro-name {
-  font-size: 2.6rem;
-  font-weight: 800;
-  line-height: 1.1;
   color: var(--c-text);
+
+  font-weight: 800;
+  font-size: 2.6rem;
+  line-height: 1.1;
   letter-spacing: 0.04em;
 }
 
 .intro-role {
-  font-size: 1.06rem;
   color: var(--c-neutral-300);
+  font-size: 1.06rem;
 }
 
 .intro-role b {
@@ -153,23 +155,23 @@
 
 .intro-facts > span {
   padding: 0.12rem 0.72rem;
-
-  font-size: 0.82rem;
-  color: var(--c-accent);
-
   border: 1px solid rgb(226 168 70 / 45%);
   border-radius: 999px;
+
+  color: var(--c-accent);
+
+  font-size: 0.82rem;
 }
 
 .intro-line {
   margin-top: 0.15rem;
-  font-size: 1.06rem;
   color: var(--c-text);
+  font-size: 1.06rem;
 }
 
 .intro-goal {
-  font-size: 1rem;
   color: var(--c-neutral-300);
+  font-size: 1rem;
 }
 
 .intro-goal::before {
@@ -183,8 +185,7 @@
   flex: 1 1 auto;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.4rem 1.6rem;
-  align-items: end;
-  justify-items: center;
+  place-items: end center;
 
   min-height: 0;
 }
@@ -194,12 +195,12 @@
   font-size: 1.1rem;
 }
 
-/* ── 第 7 页：示数–时间图 + 超重失重定义 ── */
+/* ── 第 7 页：示数–时间图 + 超重失重定义（右侧图占满）── */
 .ft-layout {
   display: grid;
   flex: 1 1 auto;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1.06fr;
+  gap: 1.2rem;
   align-items: center;
 
   min-height: 0;
@@ -213,26 +214,22 @@
 
 .cross-mark {
   display: inline-block;
+  vertical-align: -0.18em;
 
   margin-left: 0.5rem;
 
-  font-size: 1.7rem;
-  font-weight: 800;
-  line-height: 1;
   color: var(--c-danger);
-  vertical-align: -0.18em;
+
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1;
 }
 
 .cross-hidden {
   visibility: hidden;
 }
 
-/* 第 7 页：定义气泡收紧、右侧图占满 */
-.ft-layout {
-  grid-template-columns: 1fr 1.06fr;
-  gap: 1.2rem;
-}
-
+/* 第 7 页：定义气泡收紧 */
 .ft-layout .def-box {
   --def-pad-y: 0.7rem;
   --def-pad-x: 1.05rem;
@@ -243,7 +240,6 @@
 /* 第 17 页（例题 3，exercise-split）：解析栏文字较多，收紧行距与间距避免上顶 */
 .ex-analysis {
   gap: 0.62rem;
-
   font-size: 0.97rem;
 }
 
@@ -256,8 +252,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  min-height: 0;
+
   min-width: 0;
+  min-height: 0;
 }
 
 .ft-right .host {
@@ -274,10 +271,12 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+  gap: 1.2rem;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
+
   min-height: 0;
+
   text-align: center;
 }
 
@@ -287,8 +286,8 @@
 }
 
 .qa-center .qa-q {
-  font-size: 1.5rem;
   font-weight: 700;
+  font-size: 1.5rem;
   line-height: 1.45;
 }
 
@@ -301,16 +300,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  min-height: 0;
+
   min-width: 0;
   height: 100%;
+  min-height: 0;
 }
 
 .vt-host {
-  flex: 1 1 auto;
-  min-height: 0;
-  min-width: 0;
   display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
 }
 
 .vt-col .proc-tree {
@@ -320,17 +320,20 @@
 /* 第 12 页：教材里的下蹲称重照片 + F–t 图 */
 .squat-layout {
   display: grid;
+  flex: 1 1 auto;
   grid-template-columns: 158px minmax(0, 1fr);
   gap: 1.1rem;
   align-items: center;
-  flex: 1 1 auto;
+
   min-height: 0;
 }
+
 .squat-photo img {
+  display: block;
   width: 100%;
   max-width: 158px;
-  display: block;
 }
+
 .squat-graph {
   min-width: 0;
 }
@@ -338,44 +341,54 @@
 /* 第 14 页：两只瓶子 + 天宫水球照片与配文 */
 .water-layout {
   display: grid;
+  flex: 1 1 auto;
   grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
   gap: 1.4rem;
   align-items: center;
-  flex: 1 1 auto;
+
   min-height: 0;
 }
+
 .water-left {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   align-items: center;
+
   min-width: 0;
   min-height: 0;
 }
+
 .water-bottles {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.6rem;
   align-items: end;
+
   min-width: 0;
 }
+
 .water-left .tip-hint {
   max-width: 26rem;
 }
+
 .water-note {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.55rem;
+  align-items: center;
+
   min-width: 0;
   min-height: 0;
 }
+
 .water-note img {
+  display: block;
   width: 100%;
   max-width: 190px;
   border-radius: 1rem;
-  display: block;
 }
+
 .water-note .info-hint {
   font-size: 0.82rem;
 }

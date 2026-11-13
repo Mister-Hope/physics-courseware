@@ -7,19 +7,14 @@ import { SQUAT_CURVE, SQUAT_CURVE_STEP } from "../composables/squatCurve";
 /**
  * 体重计示数 F 随时间 t 的变化（§4.6 第 9 页）
  *
- * 曲线不是拟合出来的：人教社《物理 必修 第一册》P110 图 4.6-5「下蹲、站起两个过程」
- * 在 PDF 里是一条矢量路径，转成 SVG 后展开成 1028 个点，再按图上网格标定坐标换算成
- * (t, F)，见 `composables/squatCurve.ts`。所以曲线保留了真实测量的特征（蹲下去时示数
- * 先掉下去、蹬地时冲高并带一个肩部），但静止段的余振被拉平（电子秤不会有）。
+ * 曲线不是拟合出来的：人教社《物理 必修 第一册》P110 图 4.6-5「下蹲、站起两个过程」 在 PDF 里是一条矢量路径，转成 SVG 后展开成 1028 个点，再按图上网格标定坐标换算成
+ * (t, F)，见 `composables/squatCurve.ts`。所以曲线保留了真实测量的特征（蹲下去时示数 先掉下去、蹬地时冲高并带一个肩部），但静止段的余振被拉平（电子秤不会有）。
  *
- * 分段（加速 / 减速的边界、极值点）全部由**数据本身**算出来：
- * 加速度 a = 0 ⟺ 示数 F 穿过 mg，所以「加速段」与「减速段」的分界就是曲线过 mg 的时刻；
+ * 分段（加速 / 减速的边界、极值点）全部由**数据本身**算出来： 加速度 a = 0 ⟺ 示数 F 穿过 mg，所以「加速段」与「减速段」的分界就是曲线过 mg 的时刻；
  * 虚线、圆点、判读文字都挂在这些真实时刻上，不会和峰值错位。
  *
  * - `mode="squat"`：只下蹲；`mode="rise"`：只站起；`mode="both"`：先下蹲、再站起。
- * - 跟随翻页分步（4 次点击，只新增、不删已有元素）：
- *   0 实测曲线 → 1 mg 水平参考虚线 → 2 分段竖直虚线
- *   → 3 波瓣着色与失重/超重判读 → 4 底部阶段名与加速度方向。
+ * - 跟随翻页分步（4 次点击，只新增、不删已有元素）： 0 实测曲线 → 1 mg 水平参考虚线 → 2 分段竖直虚线 → 3 波瓣着色与失重/超重判读 → 4 底部阶段名与加速度方向。
  */
 const { mode = "squat", stepOffset = 0 } = defineProps<{
   mode?: "squat" | "rise" | "both";
@@ -67,9 +62,7 @@ const ranges = computed<readonly (readonly [number, number])[]>(() => {
   const total = X_MAX.value;
   const flags: boolean[] = [];
 
-  for (let t = 0; t <= total + 1e-9; t += SCAN) {
-    flags.push(Math.abs(ratioAt(t) - 1) > MOVE_EPS);
-  }
+  for (let t = 0; t <= total + 1e-9; t += SCAN) flags.push(Math.abs(ratioAt(t) - 1) > MOVE_EPS);
 
   const spans: [number, number][] = [];
   let start = -1;
@@ -168,11 +161,8 @@ const phases = computed<readonly Phase[]>(() => {
   };
 
   ranges.value.forEach(([a, b], index) => {
-    if (index === 0) {
-      pushRest(0, a);
-    } else {
-      pushRest(ranges.value[index - 1]?.[1] ?? 0, a);
-    }
+    if (index === 0) pushRest(0, a);
+    else pushRest(ranges.value[index - 1]?.[1] ?? 0, a);
 
     // 第一段是下蹲（下降过程），第二段是站起（上升过程）
     const descending = mode === "rise" ? false : index === 0;
@@ -186,10 +176,12 @@ const phases = computed<readonly Phase[]>(() => {
         )
       : (a + b) / 2;
 
-    ([
-      [a, middle, -1],
-      [middle, b, 1],
-    ] as const).forEach(([t0, t1, side]) => {
+    (
+      [
+        [a, middle, -1],
+        [middle, b, 1],
+      ] as const
+    ).forEach(([t0, t1, side]) => {
       const { t: peakT, f: peakY } = extremeIn(t0, t1);
       const isUnder = peakY < MG;
 
@@ -202,7 +194,7 @@ const phases = computed<readonly Phase[]>(() => {
         peakY,
         flag: isUnder ? "失重" : "超重",
         flagY: isUnder ? peakY - 54 : peakY + 46,
-        flagDx: isUnder && !descending ? 26 : undefined,
+        ...(isUnder && !descending ? { flagDx: 26 } : {}),
         color: isUnder ? DOWN_COLOR : UP_COLOR,
         fillColor: isUnder ? DOWN_FILL : UP_FILL,
         accel: isUnder ? "down" : "up",
@@ -232,14 +224,12 @@ const separators = computed(() => {
 });
 
 /** 只有运动段才有"曲线与 mg 之间"的波瓣 */
-const lobes = computed(() => phases.value.filter((phase) => phase.fillColor !== undefined));
+const lobes = computed(() => phases.value.filter((phase) => Boolean(phase.fillColor)));
 
 /** 直接画实测数据（采样点足够密，折线看不出拐角） */
 const curveAt = (t: number): number => modelAt(t);
 
-/**
- * 生成区间 [tStart, tEnd] 上曲线 F(t) 与水平线 F = MG 围成的闭合填充路径
- */
+/** 生成区间 [tStart, tEnd] 上曲线 F(t) 与水平线 F = MG 围成的闭合填充路径 */
 const buildLobePath = (
   tStart: number,
   tEnd: number,

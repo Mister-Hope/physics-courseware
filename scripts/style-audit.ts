@@ -477,6 +477,22 @@ const checkBorderMisuse = (sources: string): Finding[] => {
 };
 
 /**
+ * 行内是否真的用了 `.key` 原子（`.key` 本身或 `.key-xxx` 变体）。
+ *
+ * ⚠️ 不能直接写 `/\\bkey\\b/`：`class="cmp-key"` 里的 "key" 前是 `-`（非单词字符）， 照样命中词边界，于是普通类名会被误判成"竖线滥用"（o2-2.3
+ * 的 `.cmp-key` 表格行标签就这么被误报过）。 必须按 class 属性拆成类名 token 再精确比对。
+ *
+ * @param line Slides.md 的一行正文
+ * @returns 该行是否出现 `.key` 类
+ */
+const usesKeyClass = (line: string): boolean =>
+  [...line.matchAll(/class="(?<classes>[^"]*)"/gu)].some((match) =>
+    (match.groups?.classes ?? "")
+      .split(/\s+/u)
+      .some((token) => token === "key" || token.startsWith("key-")),
+  );
+
+/**
  * ⑥ 竖线滥用：`.key` 的左侧竖线只给"这一页的落点"用，**一页最多一处**（§4）。
  *
  * 实测最常见的滥用：把**每一步解析/推导**都套成 `.key`（1.3 第 18 页曾一页 6 处）， 满屏金/蓝竖线，既没信息量又把落点淹掉。推导步骤应当是普通段落。
@@ -495,7 +511,7 @@ const checkKeyOveruse = (slidesMd: string): Finding[] => {
 
   for (const page of parseSlides(slidesMd)) {
     const hitLines = page.bodyLines.flatMap((line, offset) =>
-      /class="[^"]*\bkey(?:-\w+)?\b[^"]*"/u.test(line) ? [page.bodyStart + offset] : [],
+      usesKeyClass(line) ? [page.bodyStart + offset] : [],
     );
 
     if (hitLines.length < 2) continue;
@@ -520,7 +536,7 @@ const checkKeyOveruse = (slidesMd: string): Finding[] => {
       level: findings.some((item) => item.level === "error") ? "error" : "warn",
       message:
         `…另有 ${findings.length - 6} 页存在同类问题（本课合计 ${findings.length} 页）。` +
-        `请用 \`grep -n 'class="[^"]*\\bkey' courses/<slug>/slides.md\` 逐页排查，不要只改上面列出的几页`,
+        `请用 \`grep -nE 'class="[^"]*(^|[[:space:]])key(-[a-z-]+)?([[:space:]]|")' courses/<slug>/slides.md\` 逐页排查（注意 \`.cmp-key\` 这类普通类名不算），不要只改上面列出的几页`,
     },
   ];
 };

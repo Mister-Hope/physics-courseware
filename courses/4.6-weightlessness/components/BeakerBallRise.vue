@@ -8,13 +8,13 @@ const uid = useId();
  * 例题 3：木球上浮过程中的秤（第 17 页）
  *
  * 点一下图播放一次动画（再点重播）：
+ *
  * - 细绳断开，木球先加速上浮、随后匀速上浮，最后停在水面下；
  * - 球正上方的黄色箭头表示球向上运动；
  * - 球两侧的蓝色弯箭头表示水从上往下流——反复出现、自上而下依次闪现；
  * - 秤面读数从 250 先掉到 232，球匀速上浮后回到 250（系统重心先向下加速、后匀速）。
  *
- * 画法：烧杯和电子秤都按「正视 + 略俯视」的一点透视画——只看得见正面和顶面，
- * 顶面是从前边缘向后退缩的梯形（近大远小），底面用椭圆表示，左右侧面一律不画。
+ * 画法：烧杯和电子秤都按「正视 + 略俯视」的一点透视画——只看得见正面和顶面， 顶面是从前边缘向后退缩的梯形（近大远小），底面用椭圆表示，左右侧面一律不画。
  */
 const DURATION = 3.4;
 const READING_START = 250;
@@ -33,9 +33,7 @@ const ARROW_ON = 0.58;
 const ARROW_ROWS = [152, 214];
 
 /** 拼出 `url(#id)`：id 按实例唯一，避免相邻页重名导致填充失效 */
-function svgRef(name: string): string {
-  return `url(#${uid}-${name})`;
-}
+const svgRef = (name: string): string => `url(#${uid}-${name})`;
 
 const elapsed = ref(0);
 const started = ref(false);
@@ -45,10 +43,10 @@ let last = 0;
 const progress = computed(() => Math.max(0, Math.min(1, elapsed.value / DURATION)));
 
 /** 先匀加速、后匀速：位移关于时间的归一化曲线 */
-function eased(u: number): number {
+const eased = (u: number): number => {
   const dist = u <= ACCEL_PART ? (u * u) / (2 * ACCEL_PART) : ACCEL_PART / 2 + (u - ACCEL_PART);
   return Math.min(1, dist / (1 - ACCEL_PART / 2));
-}
+};
 
 const ballY = computed(() => BALL_START_Y + (BALL_END_Y - BALL_START_Y) * eased(progress.value));
 
@@ -61,25 +59,27 @@ const dropStrength = computed(() => {
   return Math.max(0, rise - fall);
 });
 
-const reading = computed(() => Math.round(READING_START - (READING_START - READING_MIN) * dropStrength.value));
+const reading = computed(() =>
+  Math.round(READING_START - (READING_START - READING_MIN) * dropStrength.value),
+);
 
 /** 蓝色水流箭头的出现强度：自上而下依次闪现，到动画末尾整体淡出 */
-function arrowOpacity(rowIndex: number): number {
+const arrowOpacity = (rowIndex: number): number => {
   if (!started.value || elapsed.value <= 0) return 0;
-  const tailFade = elapsed.value > DURATION - 0.3 ? Math.max(0, (DURATION - elapsed.value) / 0.3) : 1;
+  const tailFade =
+    elapsed.value > DURATION - 0.3 ? Math.max(0, (DURATION - elapsed.value) / 0.3) : 1;
   const local = (((elapsed.value / ARROW_PERIOD - rowIndex * 0.18) % 1) + 1) % 1;
   if (local > ARROW_ON) return 0;
   const fade = Math.min(1, local / 0.1, (ARROW_ON - local) / 0.1);
   return Math.max(0, fade) * tailFade;
-}
+};
 
 /** 蓝箭头的竖直位置（固定行，压在水面与杯底之间） */
-function arrowRowY(rowIndex: number): number {
-  return Math.min(BEAKER_BOTTOM - 34, Math.max(WATER_TOP + 26, ARROW_ROWS[rowIndex]));
-}
+const arrowRowY = (rowIndex: number): number =>
+  Math.min(BEAKER_BOTTOM - 34, Math.max(WATER_TOP + 26, ARROW_ROWS[rowIndex]));
 
 /** 水流箭头：曲线柄 + 沿「末端切线方向」的细长箭头，箭底贴着柄端（不留缝） */
-function flowArrow(side: -1 | 1, y: number): { shaft: string; head: string } {
+const flowArrow = (side: -1 | 1, y: number): { shaft: string; head: string } => {
   const x0 = BALL_X + side * 30;
   const y0 = y - 26;
   const c1x = BALL_X + side * 40;
@@ -105,9 +105,15 @@ function flowArrow(side: -1 | 1, y: number): { shaft: string; head: string } {
     shaft: `M ${x0} ${y0} C ${c1x} ${c1y} ${c2x} ${c2y} ${x1} ${y1}`,
     head: `${(x1 + ux * L).toFixed(1)},${(y1 + uy * L).toFixed(1)} ${(x1 + nx * W).toFixed(1)},${(y1 + ny * W).toFixed(1)} ${(x1 - nx * W).toFixed(1)},${(y1 - ny * W).toFixed(1)}`,
   };
-}
+};
 
-function tick(now: number): void {
+const stop = (): void => {
+  if (raf) cancelAnimationFrame(raf);
+  raf = 0;
+  last = 0;
+};
+
+const tick = (now: number): void => {
   raf = requestAnimationFrame(tick);
   const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
   last = now;
@@ -117,20 +123,14 @@ function tick(now: number): void {
     elapsed.value = DURATION;
     stop();
   }
-}
+};
 
-function stop(): void {
-  if (raf) cancelAnimationFrame(raf);
-  raf = 0;
-  last = 0;
-}
-
-function play(): void {
+const play = (): void => {
   stop();
   elapsed.value = 0;
   started.value = true;
   raf = requestAnimationFrame(tick);
-}
+};
 
 onBeforeUnmount(stop);
 </script>
@@ -182,7 +182,12 @@ onBeforeUnmount(stop);
 
     <!-- ===== 电子秤（正视 + 略俯视：只画正面与顶面，盘面与表身顶面是平行面） ===== -->
     <!-- 表身顶面（同倾角、同进深，比盘面略窄） -->
-    <polygon points="82,283 218,283 210,271 90,271" fill="#4a515e" stroke="#8a929f" stroke-width="0.8" />
+    <polygon
+      points="82,283 218,283 210,271 90,271"
+      fill="#4a515e"
+      stroke="#8a929f"
+      stroke-width="0.8"
+    />
     <!-- 表身：顶边直角，下两角磨圆 -->
     <path
       d="M 82 283 H 218 V 311 A 14 14 0 0 1 204 325 H 96 A 14 14 0 0 1 82 311 Z"
@@ -191,13 +196,49 @@ onBeforeUnmount(stop);
       stroke-width="1.3"
     />
     <!-- 藏在盘面前沿后面的两小截弹簧 -->
-    <path d="M 116 271 l 10 2.2 l -10 2.2 l 10 2.2 l -10 2.2" fill="none" stroke="#9aa3b2" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M 178 271 l 10 2.2 l -10 2.2 l 10 2.2 l -10 2.2" fill="none" stroke="#9aa3b2" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+    <path
+      d="M 116 271 l 10 2.2 l -10 2.2 l 10 2.2 l -10 2.2"
+      fill="none"
+      stroke="#9aa3b2"
+      stroke-width="1.3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M 178 271 l 10 2.2 l -10 2.2 l 10 2.2 l -10 2.2"
+      fill="none"
+      stroke="#9aa3b2"
+      stroke-width="1.3"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
     <!-- 盘面：前沿厚度 + 顶面（与表身顶面平行） -->
-    <rect x="78" y="273" width="144" height="5" fill="#343a45" stroke="#8a929f" stroke-width="0.8" />
-    <polygon points="78,273 222,273 214,261 86,261" :fill="'url(#' + uid + '-bbrPlate)'" stroke="rgb(148 163 184 / 45%)" stroke-width="1.1" />
+    <rect
+      x="78"
+      y="273"
+      width="144"
+      height="5"
+      fill="#343a45"
+      stroke="#8a929f"
+      stroke-width="0.8"
+    />
+    <polygon
+      points="78,273 222,273 214,261 86,261"
+      :fill="'url(#' + uid + '-bbrPlate)'"
+      stroke="rgb(148 163 184 / 45%)"
+      stroke-width="1.1"
+    />
     <!-- 读数窗 -->
-    <rect x="108" y="288" width="84" height="23" rx="4" fill="#04070c" stroke="#22304a" stroke-width="1.4" />
+    <rect
+      x="108"
+      y="288"
+      width="84"
+      height="23"
+      rx="4"
+      fill="#04070c"
+      stroke="#22304a"
+      stroke-width="1.4"
+    />
     <!-- 七段数码管读数（火柴棍数字） -->
     <ScaleReadout
       :value="String(reading)"
@@ -209,14 +250,41 @@ onBeforeUnmount(stop);
       unit="g"
     />
     <!-- 两只脚 -->
-    <rect x="104" y="325" width="20" height="8" rx="4" fill="#080d16" stroke="rgb(148 163 184 / 16%)" />
-    <rect x="172" y="325" width="20" height="8" rx="4" fill="#080d16" stroke="rgb(148 163 184 / 16%)" />
+    <rect
+      x="104"
+      y="325"
+      width="20"
+      height="8"
+      rx="4"
+      fill="#080d16"
+      stroke="rgb(148 163 184 / 16%)"
+    />
+    <rect
+      x="172"
+      y="325"
+      width="20"
+      height="8"
+      rx="4"
+      fill="#080d16"
+      stroke="rgb(148 163 184 / 16%)"
+    />
 
     <!-- ===== 烧杯：水体 + 杯底椭圆 ===== -->
     <g :clip-path="'url(#' + uid + '-bbrInner)'">
-      <path d="M 96 110 V 265 A 54 8 0 0 1 204 265 V 110 A 54 7.5 0 0 1 96 110 Z" :fill="svgRef('bbrWater')" />
+      <path
+        d="M 96 110 V 265 A 54 8 0 0 1 204 265 V 110 A 54 7.5 0 0 1 96 110 Z"
+        :fill="svgRef('bbrWater')"
+      />
       <ellipse cx="150" cy="110" rx="54" ry="7.5" fill="rgb(147 197 253 / 38%)" />
-      <ellipse cx="150" cy="110" rx="54" ry="7.5" fill="none" stroke="rgb(191 219 254 / 55%)" stroke-width="1.4" />
+      <ellipse
+        cx="150"
+        cy="110"
+        rx="54"
+        ry="7.5"
+        fill="none"
+        stroke="rgb(191 219 254 / 55%)"
+        stroke-width="1.4"
+      />
     </g>
 
     <!-- 木球 -->
@@ -254,7 +322,14 @@ onBeforeUnmount(stop);
       opacity="0.8"
     />
 
-    <circle v-if="!started" cx="150" :cy="BEAKER_BOTTOM - 2" r="2.6" fill="var(--c-neutral-300)" opacity="0.9" />
+    <circle
+      v-if="!started"
+      cx="150"
+      :cy="BEAKER_BOTTOM - 2"
+      r="2.6"
+      fill="var(--c-neutral-300)"
+      opacity="0.9"
+    />
 
     <!-- 木球向上运动（黄色箭头） -->
     <g v-if="started">
@@ -311,7 +386,15 @@ onBeforeUnmount(stop);
       stroke-linecap="round"
     />
     <!-- 杯底椭圆：外缘就是杯体的底弧，同一圆心、同一 ry，不会多出一条悬空的环 -->
-    <ellipse cx="150" cy="265" rx="54" ry="8" fill="rgb(203 213 225 / 7%)" stroke="rgb(203 213 225 / 40%)" stroke-width="2" />
+    <ellipse
+      cx="150"
+      cy="265"
+      rx="54"
+      ry="8"
+      fill="rgb(203 213 225 / 7%)"
+      stroke="rgb(203 213 225 / 40%)"
+      stroke-width="2"
+    />
     <!-- 杯口椭圆 + 右侧倾倒嘴（烧杯嘴） -->
     <!-- 杯口 + 烧杯嘴：一笔画成（从嘴尖绕过整个杯口再回来），接缝必然严丝合缝 -->
     <path
@@ -322,16 +405,48 @@ onBeforeUnmount(stop);
       stroke-linejoin="round"
     />
     <!-- 杯壁刻度（暗示这是烧杯） -->
-    <line x1="99" y1="150" x2="112" y2="150" stroke="rgb(226 232 240 / 40%)" stroke-width="1.6" stroke-linecap="round" />
-    <line x1="99" y1="182" x2="112" y2="182" stroke="rgb(226 232 240 / 40%)" stroke-width="1.6" stroke-linecap="round" />
-    <line x1="99" y1="214" x2="112" y2="214" stroke="rgb(226 232 240 / 40%)" stroke-width="1.6" stroke-linecap="round" />
-    <line x1="104" y1="104" x2="104" y2="256" stroke="rgb(255 255 255 / 22%)" stroke-width="3" stroke-linecap="round" />
+    <line
+      x1="99"
+      y1="150"
+      x2="112"
+      y2="150"
+      stroke="rgb(226 232 240 / 40%)"
+      stroke-width="1.6"
+      stroke-linecap="round"
+    />
+    <line
+      x1="99"
+      y1="182"
+      x2="112"
+      y2="182"
+      stroke="rgb(226 232 240 / 40%)"
+      stroke-width="1.6"
+      stroke-linecap="round"
+    />
+    <line
+      x1="99"
+      y1="214"
+      x2="112"
+      y2="214"
+      stroke="rgb(226 232 240 / 40%)"
+      stroke-width="1.6"
+      stroke-linecap="round"
+    />
+    <line
+      x1="104"
+      y1="104"
+      x2="104"
+      y2="256"
+      stroke="rgb(255 255 255 / 22%)"
+      stroke-width="3"
+      stroke-linecap="round"
+    />
   </svg>
 </template>
 
 <style scoped>
 .bbr-svg {
-  cursor: pointer;
   overflow: visible;
+  cursor: pointer;
 }
 </style>

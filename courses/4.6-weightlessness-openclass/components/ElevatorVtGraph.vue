@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+
 import {
   DOWN_START,
   PHASE_ACCEL,
@@ -21,10 +22,9 @@ const Y_LIMIT = 1.3;
 const DT = 0.02;
 
 /**
- * v–t 图上「变加速」段的长度（占单个阶段的比例）
+ * V–t 图上「变加速」段的长度（占单个阶段的比例）
  *
- * 加速度是渐变的（突变会让人猛一沉），积分出来的 v 在起停处就是一段圆弧。
- * 这里把圆弧画得比 F–t 更长一点（0.45 而非 0.25），让「加速度在变」这件事在投影上看得见。
+ * 加速度是渐变的（突变会让人猛一沉），积分出来的 v 在起停处就是一段圆弧。 这里把圆弧画得比 F–t 更长一点（0.45 而非 0.25），让「加速度在变」这件事在投影上看得见。
  */
 const VT_RAMP = 0.45;
 
@@ -45,7 +45,7 @@ const vtAccelAt = (t: number): number => {
 };
 
 /** 单程速度（0 → v_max → 0）：对平滑加速度积分，起停自然带圆角，不是硬折线 */
-const upSamples = (() => {
+const upSamples = ((): { t: number; v: number }[] => {
   const samples: { t: number; v: number }[] = [{ t: 0, v: 0 }];
   let v = 0;
   for (let t = DT; t <= TRIP + 1e-9; t += DT) {
@@ -72,9 +72,7 @@ const FLAT = 0.98;
 const flatStart = upSamples.find((sample) => sample.v >= FLAT)?.t ?? PHASE_ACCEL;
 let flatEnd = flatStart;
 
-for (const sample of upSamples) {
-  if (sample.v >= FLAT) flatEnd = sample.t;
-}
+for (const sample of upSamples) if (sample.v >= FLAT) flatEnd = sample.t;
 
 /** 三段交界（虚线位置）：加速段结束、减速段开始 */
 const UP_EDGES = [flatStart, flatEnd];
@@ -127,7 +125,8 @@ const VIEW = { width: 470, height: 260 };
             font-family="KaTeX_Main, system-ui, sans-serif"
             :font-size="15 * px2user"
             :fill="'var(--c-text-dim)'"
-          >{{ label.text }}</text>
+            >{{ label.text }}</text
+          >
           <text
             :x="x(REST_T)"
             :y="y(0.26)"
@@ -135,7 +134,8 @@ const VIEW = { width: 470, height: 260 };
             font-family="KaTeX_Main, system-ui, sans-serif"
             :font-size="13 * px2user"
             fill="var(--c-text-dim)"
-          >静止</text>
+            >静止</text
+          >
           <text
             v-for="label in DOWN_LABELS"
             :key="`vt-down-${label.text}`"
@@ -145,7 +145,8 @@ const VIEW = { width: 470, height: 260 };
             font-family="KaTeX_Main, system-ui, sans-serif"
             :font-size="15 * px2user"
             :fill="'var(--c-text-dim)'"
-          >{{ label.text }}</text>
+            >{{ label.text }}</text
+          >
         </g>
       </template>
     </CoordAxes>
@@ -154,12 +155,13 @@ const VIEW = { width: 470, height: 260 };
 
 <style scoped>
 .vt-graph {
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
 }
 </style>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useSlideContext } from "@slidev/client";
 import { computed } from "vue";
+
 import {
   DOWN_START,
   PHASE_ACCEL,
@@ -19,11 +20,10 @@ import {
 /**
  * 电梯"上升一趟 + 下降一趟"过程中的示数–时间图（§4.6 第 7 页右侧）
  *
- * 数据与电梯模拟共用 `composables/elevatorReading.ts`（视频原读数，kg 口径）：
- * 静止 11.36 → 上升加速 12.58 → 匀速 11.36 → 上升减速 10.08 → 静止 → 下降加速 10.20 → 匀速 → 下降减速 12.54 → 静止。
+ * 数据与电梯模拟共用 `composables/elevatorReading.ts`（视频原读数，kg 口径）： 静止 11.36 → 上升加速 12.58 → 匀速 11.36 → 上升减速
+ * 10.08 → 静止 → 下降加速 10.20 → 匀速 → 下降减速 12.54 → 静止。
  *
- * 跟随翻页分步：静止参考线常显 → 1 出上升曲线（高于参考线红、低于蓝）→ 2 出下降曲线。
- * 曲线比参考线高 = 示数大于重力（超重），低 = 示数小于重力（失重）；文字定义在页面左侧给出。
+ * 跟随翻页分步：静止参考线常显 → 1 出上升曲线（高于参考线红、低于蓝）→ 2 出下降曲线。 曲线比参考线高 = 示数大于重力（超重），低 = 示数小于重力（失重）；文字定义在页面左侧给出。
  *
  * 坐标轴、刻度、轴量标签交给共享 `CoordAxes`；色块、极值标注放在 `#overlay` 插槽里。
  */
@@ -41,7 +41,7 @@ const UNDER_FILL = "rgb(96 165 250 / 22%)";
 const OVER_COLOR = "#f87171";
 const UNDER_COLOR = "#60a5fa";
 
-function sample(from: number, to: number, count: number): { x: number; y: number }[] {
+const sample = (from: number, to: number, count: number): { x: number; y: number }[] => {
   const points: { x: number; y: number }[] = [];
 
   for (let i = 0; i <= count; i++) {
@@ -50,7 +50,7 @@ function sample(from: number, to: number, count: number): { x: number; y: number
   }
 
   return points;
-}
+};
 
 const UP_POINTS = sample(0, TRIP, 220);
 const DOWN_POINTS = sample(DOWN_START, TOTAL, 220);
@@ -67,17 +67,11 @@ interface CurveSpec {
 }
 
 const curves = computed(() => {
-  const list: CurveSpec[] = [
-    { points: BASE_LINE, color: OVER_COLOR, width: 2, dashed: true },
-  ];
+  const list: CurveSpec[] = [{ points: BASE_LINE, color: OVER_COLOR, width: 2, dashed: true }];
 
-  if (step.value >= 1) {
-    list.push({ points: UP_POINTS, color: "var(--c-accent)", width: 3.4 });
-  }
+  if (step.value >= 1) list.push({ points: UP_POINTS, color: "var(--c-accent)", width: 3.4 });
 
-  if (step.value >= 2) {
-    list.push({ points: DOWN_POINTS, color: "var(--c-accent)", width: 3.4 });
-  }
+  if (step.value >= 2) list.push({ points: DOWN_POINTS, color: "var(--c-accent)", width: 3.4 });
 
   return list;
 });
@@ -100,7 +94,12 @@ const DOWN_REGIONS: Region[] = [
 ];
 
 /** 曲线与静止参考线之间围出的色块 */
-function buildFill(from: number, to: number, mapX: (v: number) => number, mapY: (v: number) => number): string {
+const buildFill = (
+  from: number,
+  to: number,
+  mapX: (v: number) => number,
+  mapY: (v: number) => number,
+): string => {
   const SEGMENT_COUNT = 56;
   const pts: string[] = [`M ${mapX(from).toFixed(2)} ${mapY(READING_BASE).toFixed(2)}`];
 
@@ -111,7 +110,7 @@ function buildFill(from: number, to: number, mapX: (v: number) => number, mapY: 
 
   pts.push(`L ${mapX(to).toFixed(2)} ${mapY(READING_BASE).toFixed(2)} Z`);
   return pts.join(" ");
-}
+};
 
 interface Extreme {
   t: number;

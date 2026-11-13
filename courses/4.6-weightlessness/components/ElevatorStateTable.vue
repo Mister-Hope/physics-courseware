@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { useSlideContext } from "@slidev/client";
+import { computed } from "vue";
 
 /**
  * 电梯六种运动状态表（第 9、10 页）
  *
- * - mode="reading"（第 9 页）：先给出「示数与重力相比」这一列（大于/等于/小于）；
- *   然后**从上到下 6 次点击**逐个出现「现象」（超重/失重/—）；
- *   再**6 次点击**逐个出现左侧的「运动状态」（加速上升 … 减速下降）。
- * - mode="accel"（第 10 页）：运动状态、示数、现象常显；加速度方向**从上到下 6 次点击**逐个出现，
- *   匀速行的加速度写 0。结论（与运动方向无关）由页面自己加。
+ * - Mode="reading"（第 9 页）：先给出「示数与重力相比」这一列（大于/等于/小于）； 然后**从上到下 6 次点击**逐个出现「现象」（超重/失重/—）； 再**6
+ *   次点击**逐个出现左侧的「运动状态」（加速上升 … 减速下降）。
+ * - Mode="accel"（第 10 页）：运动状态、示数、现象常显；加速度方向**从上到下 6 次点击**逐个出现， 匀速行的加速度写 0。结论（与运动方向无关）由页面自己加。
  *
  * 每一步只新增内容、不顶跑已可见内容：未出现的格子用 visibility:hidden 占位（不用 v-if）。
  */
-const props = withDefaults(defineProps<{ mode?: "reading" | "accel" }>(), { mode: "reading" });
+const { mode = "reading" } = defineProps<{ mode?: "reading" | "accel" }>();
 
 const { $clicks } = useSlideContext();
 const step = computed(() => Math.max(0, $clicks.value ?? 0));
-const isAccel = computed(() => props.mode === "accel");
+const isAccel = computed(() => mode === "accel");
 
 interface Row {
   state: string;
@@ -37,27 +35,32 @@ const ROWS: Row[] = [
 ];
 
 /** 现象列：读表页从上到下逐个出现（第 1–6 击）；加速度页常显 */
-function showTag(index: number): boolean {
+const showTag = (index: number): boolean => {
   if (isAccel.value) return true;
   return step.value >= index + 1;
-}
+};
 
 /** 运动状态列：读表页在现象列出完之后，再从上到下逐个出现（第 7–12 击） */
-function showState(index: number): boolean {
+const showState = (index: number): boolean => {
   if (isAccel.value) return true;
   return step.value >= ROWS.length + index + 1;
-}
+};
 
 /** 加速度方向：加速度页从上到下逐个出现 */
-function showArrow(index: number): boolean {
-  return isAccel.value && step.value >= index + 1;
-}
+const showArrow = (index: number): boolean => isAccel.value && step.value >= index + 1;
 
-function relationClass(row: Row): string {
+const relationClass = (row: Row): string => {
   if (row.relation === "大于") return "is-bigger";
   if (row.relation === "小于") return "is-smaller";
   return "is-even";
-}
+};
+
+/** 现象列的颜色：CSS 类名用 kebab-case，中文标签只用于显示 */
+const tagClass = (tag: Row["tag"]): string => {
+  if (tag === "超重") return "is-overweight";
+  if (tag === "失重") return "is-weightless";
+  return "is-none";
+};
 </script>
 
 <template>
@@ -72,7 +75,7 @@ function relationClass(row: Row): string {
     <div v-for="(row, i) in ROWS" :key="row.state" class="est-row" :class="`est-${row.group}`">
       <div class="est-cell est-state" :class="{ 'est-hidden': !showState(i) }">{{ row.state }}</div>
       <div class="est-cell est-rel" :class="relationClass(row)">{{ row.relation }}</div>
-      <div class="est-cell est-tag" :class="[row.tag ? `is-${row.tag}` : 'is-none', { 'est-hidden': !showTag(i) }]">
+      <div class="est-cell est-tag" :class="[tagClass(row.tag), { 'est-hidden': !showTag(i) }]">
         {{ row.tag ?? "—" }}
       </div>
       <div v-if="isAccel" class="est-cell est-arrow" :class="{ 'est-hidden': !showArrow(i) }">
@@ -89,6 +92,7 @@ function relationClass(row: Row): string {
 
   width: 100%;
   max-width: 100%;
+
   font-size: 0.88rem;
 }
 
@@ -99,10 +103,10 @@ function relationClass(row: Row): string {
   align-items: center;
 
   padding: 0.11rem 0.8rem;
-
-  background: rgb(30 41 59 / 38%);
   border: 1px solid var(--c-border);
   border-radius: 0.7rem;
+
+  background: rgb(30 41 59 / 38%);
 }
 
 .est-accel .est-row {
@@ -110,13 +114,14 @@ function relationClass(row: Row): string {
 }
 
 .est-head {
-  font-size: 0.74rem;
-  white-space: nowrap;
-  font-weight: 700;
-  color: var(--c-text-dim);
+  border-color: transparent;
 
   background: transparent;
-  border-color: transparent;
+  color: var(--c-text-dim);
+
+  font-weight: 700;
+  font-size: 0.74rem;
+  white-space: nowrap;
 }
 
 .est-cell {
@@ -124,8 +129,8 @@ function relationClass(row: Row): string {
 }
 
 .est-state {
-  font-weight: 700;
   color: var(--c-text);
+  font-weight: 700;
 }
 
 .est-rel {
@@ -145,16 +150,16 @@ function relationClass(row: Row): string {
 }
 
 .est-tag {
-  font-size: 0.82rem;
   font-weight: 700;
+  font-size: 0.82rem;
   text-align: center;
 }
 
-.est-tag.is-超重 {
+.est-tag.is-overweight {
   color: var(--c-danger);
 }
 
-.est-tag.is-失重 {
+.est-tag.is-weightless {
   color: var(--c-velocity);
 }
 
@@ -167,10 +172,10 @@ function relationClass(row: Row): string {
 }
 
 .est-arrow-glyph {
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
 }
 
 .est-hidden {
