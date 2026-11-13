@@ -113,7 +113,9 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     env:
-      E2E_CONCURRENCY: 4
+      # 每门课件一个 Slidev dev server + 一个 Chromium：4 门并发会把 4 vCPU 的 runner 挤满，
+      # 导航/编译慢 3 倍（2026-11 就因此出过 `gotoSlideStep` 假超时），降到 3 门换稳定性。
+      E2E_CONCURRENCY: 3
       # CI 上没有 macOS 的中文字体，行高会差几像素；这里放宽判定阈值，
       # 本机默认是 2px（见 e2e/slidev-driver.ts）
       E2E_OVERFLOW_TOLERANCE: 6

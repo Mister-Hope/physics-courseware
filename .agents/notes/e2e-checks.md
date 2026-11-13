@@ -9,6 +9,7 @@ E2E_CONCURRENCY=2 pnpm test:e2e                                           # 换�
 E2E_STRICT_STABILITY=1 E2E_STRICT_BLOCK_FIT=1 E2E_STRICT_WHITESPACE=1 …    # 严格模式：把"警告"变成失败
 E2E_PAGES="14,15-17" E2E_COURSE=<slug> …                                   # 只检查指定页（支持 3 或 14,15-17）
 E2E_BASE_PORT=30701 …                                                      # 只有"同一个课件"被两个进程同时跑时才需要（端口按课件固定分配，不同课件不冲突）
+E2E_NAV_TIMEOUT=120000 …                                                   # 跳页等待上限（默认 60s）；CI 慢机器上偶发"页面到位了但判定超时"时放宽
 ```
 
 `pnpm test:e2e` 走 `scripts/e2e.ts` 的**限流调度器**：最多同时跑 `E2E_CONCURRENCY` 个课件（默认 4），跑完一个立刻补。
@@ -86,6 +87,7 @@ SVG 内部与 KaTeX 内部节点（固定画布内部换内容属正当，但 `<
 - **加载失败时 Slidev 渲染的是"带错误提示的占位页"**（`An error occurred on this slide` / `slide failed to load`）；`layout-overflow` 会识别并报 `⛔ 第 N 页渲染失败`（测试失败）。
 - **不要复用已开着的 dev server**（配置里 `reuseExistingServer: false`）：Slidev 启动时解析 addon 组件，复用旧进程会拿到过期组件表，改了文件却测到旧状态
 - **View Transitions**：Slidev v52 换页时整页会先平移再归位（实测可达数百像素），测完要等几何连续多帧稳定（`e2e/slidev-driver.ts` 的 `settle()`），否则把"正在入场"当溢出误报
+- **`gotoSlideStep` 的 20s 超时在 CI 上不够（2026-11 nightly 假失败）**：`o2-1.2-lorentz-force` 有 three.js 演示，CI 上 4 门并发时 Vite 要现编译那坨依赖、软件渲染还要初始化 WebGL，机器比本地慢 3 倍左右，导航 20s 内没到位就被判红（本地单跑必过，所以别当"课件坏了"）。现在 `E2E_NAV_TIMEOUT` 默认 **60s**，并且 `waitForFunction` 从默认的 rAF 轮询改成 **100ms 定时器轮询**（主线程被 3D 占住时 rAF 会被饿住，判定回调迟迟不跑）；超时错误里会带「第几页 / 第几步 / 最后的 nav 状态 / URL」，下次从 CI 日志就能直接看出是"没到位"还是"clicks 被夹"
 - **`oxlint --fix` 会写坏测试文件**（vitest 插件会把 Playwright 的 `test`/`expect` 当 vitest 全局并自动插 import），所以 `e2e/` 已在 `oxlint.config.ts` 的 `ignore` 里（风格仍由 oxfmt 管）
 - 新增课件目录自动纳入，无需登记；首次运行先 `pnpm test:e2e:install` 装 Chromium
 - 代价：每个"页×步"约 1.3s（`nav.go` + 600ms + `settle`）——本地迭代用 `E2E_COURSE=<slug>` 只跑一个

@@ -123,6 +123,86 @@ export interface SlideRef {
  */
 const BOOT_TIMEOUT_MS = Number(process.env.E2E_BOOT_TIMEOUT ?? "150000") || 150_000;
 
+/**
+ * 导航等待上限（毫秒）。
+ *
+ * 默认 20s/30s 在 CI 上不够用：4 门课件并发时，Slidev 的 Vite 首次 transform（`o2-1.2-lorentz-force`
+ * 的 three.js 演示组件就有几百行依赖要现编译）+ 软件渲染下 WebGL 初始化会把主线程占住，慢到 3 倍以上，
+ * 于是"页面其实会到位"却被判成超时（2026-11 nightly 就挂在 `gotoSlideStep` 的 20s 上）。
+ * 放宽到 60s，并可用 `E2E_NAV_TIMEOUT` 覆盖。
+ */
+const configuredNavTimeout = (process.env.E2E_NAV_TIMEOUT ?? "").trim();
+export const NAV_TIMEOUT_MS =
+  configuredNavTimeout !== "" && Number.isFinite(Number(configuredNavTimeout))
+    ? Number(configuredNavTimeout)
+    : 60_000;
+
+/**
+ * 导航判定的轮询间隔（毫秒）。
+ *
+ * `waitForFunction` 默认按 rAF 轮询：主线程被 3D 演示 / 长动画占满时回调会被饿住， 明明 `nav` 已经到位，
+ * 判定却迟迟不跑 ⇒ 白等满整个 timeout。改成定时器轮询，判定一定按固定节奏执行。
+ */
+const NAV_POLLING_MS = 100;
+
+/** 读一次导航状态（超时错误里带上，CI 上才能分清"没到位"与"clicks 被夹住"） */
+async function readNavState(page: Page): Promise<string> {
+  try {
+    const state = await page.evaluate(() => {
+      const nav = window.__slidev__?.nav;
+
+      return nav
+        ? {
+            page: nav.currentPage,
+            clicks: nav.clicks,
+            total: nav.total,
+            clicksTotal: nav.clicksTotal,
+          }
+        : null;
+    });
+
+    return state === null ? "nav 不存在" : JSON.stringify(state);
+  } catch {
+    return "读取失败（页面可能已卡死）";
+  }
+}
+
+/** 执行一次"跳页 + 等待到位"，超时抛出带页码/步数/最后导航状态的错误，方便直接从 CI 日志定位 */
+async function runNavigation(
+  page: Page,
+  no: number,
+  clicks: number,
+  label: string,
+  wait: () => Promise<unknown>,
+): Promise<void> {
+  const startedAt = Date.now();
+
+  try {
+    await wait();
+  } catch (error) {
+    // 页面可能已经卡死：读状态本身也要有上限，否则错误处理会一直挂着
+    const state = await Promise.race([
+      readNavState(page),
+      new Promise<string>((resolve) => {
+        setTimeout(() => resolve("读取超时（页面无响应）"), 5_000);
+      }),
+    ]);
+
+    throw new Error(
+      `导航到第 ${no} 页失败（${label}，目标点击数 ${clicks}）：${NAV_TIMEOUT_MS / 1000}s 内未到位。` +
+        `最后导航状态：${state}；当前 URL：${page.url()}。` +
+        `若属 CI 机器慢，可用 E2E_NAV_TIMEOUT=<毫秒> 放宽。原始错误：${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+
+  // CI 慢机上的"临界成功"要能从日志里看出来（否则下次变慢还是摸不着头脑）
+  const elapsed = Date.now() - startedAt;
+
+  if (elapsed > 5_000) {
+    console.log(`⏳ 第 ${no} 页（${label}）导航耗时 ${(elapsed / 1000).toFixed(1)}s，机器偏慢`);
+  }
+}
+
 /** 打开课件首页，等 Slidev 应用就绪；启动失败会重试一次（并报出端口占用者，便于区分"启动慢"与"真坏了"） */
 export async function openDeck(page: Page, baseURL: string): Promise<void> {
   await page.setViewportSize(VIEWPORT);
@@ -203,28 +283,34 @@ export async function gotoSlide(page: Page, no: number, clicks: number): Promise
     clicks,
   ] as [number, number]);
 
-  await page.waitForFunction(
-    ([target, count]) => {
-      const nav = window.__slidev__?.nav;
+  await runNavigation(page, no, clicks, "全部展开", () =>
+    page.waitForFunction(
+      ([target, count]) => {
+        const nav = window.__slidev__?.nav;
 
-      if (!nav) return false;
+        if (!nav) return false;
 
-      const expected = count === 0 ? 0 : nav.clicksTotal;
+        const expected = count === 0 ? 0 : nav.clicksTotal;
 
-      if (nav.currentPage === target && nav.clicks === expected) return true;
+        if (nav.currentPage === target && nav.clicks === expected) return true;
 
-      const win = window as Window & { __navGoAt?: number };
-      const now = performance.now();
+        const win = window as Window & { __navGoAt?: number };
+        const now = performance.now();
 
-      if (!win.__navGoAt || now - win.__navGoAt > 200) {
-        win.__navGoAt = now;
-        void nav.go(target, count);
-      }
+        if (!win.__navGoAt || now - win.__navGoAt > 200) {
+          win.__navGoAt = now;
+          try {
+            void nav.go(target, count);
+          } catch {
+            // 换页过渡期间偶尔会拒绝一次导航：等下一次重发即可
+          }
+        }
 
-      return false;
-    },
-    [no, clicks] as [number, number],
-    { timeout: 30_000 },
+        return false;
+      },
+      [no, clicks] as [number, number],
+      { timeout: NAV_TIMEOUT_MS, polling: NAV_POLLING_MS },
+    ),
   );
 
   await settle(page);
@@ -247,30 +333,36 @@ export async function gotoSlideStep(
     clicks,
   ] as [number, number]);
 
-  await page.waitForFunction(
-    ([target, count]) => {
-      const nav = window.__slidev__?.nav;
+  await runNavigation(page, no, clicks, `点击第 ${clicks} 步`, () =>
+    page.waitForFunction(
+      ([target, count]) => {
+        const nav = window.__slidev__?.nav;
 
-      if (!nav) return false;
+        if (!nav) return false;
 
-      // 同 `gotoSlide`：`nav.go` 的 clicks 会被夹到此刻已知的 `clicksTotal`，
-      // 组件还没挂载完时 `count` 会被夹成 0 → 必须节流重发一次，等 `clicksTotal` 就位
-      const expected = nav.clicksTotal > 0 ? Math.min(count, nav.clicksTotal) : count;
+        // 同 `gotoSlide`：`nav.go` 的 clicks 会被夹到此刻已知的 `clicksTotal`，
+        // 组件还没挂载完时 `count` 会被夹成 0 → 必须节流重发一次，等 `clicksTotal` 就位
+        const expected = nav.clicksTotal > 0 ? Math.min(count, nav.clicksTotal) : count;
 
-      if (nav.currentPage === target && nav.clicks === expected) return true;
+        if (nav.currentPage === target && nav.clicks === expected) return true;
 
-      const win = window as Window & { __navGoAt?: number };
-      const now = performance.now();
+        const win = window as Window & { __navGoAt?: number };
+        const now = performance.now();
 
-      if (!win.__navGoAt || now - win.__navGoAt > 200) {
-        win.__navGoAt = now;
-        void nav.go(target, expected);
-      }
+        if (!win.__navGoAt || now - win.__navGoAt > 200) {
+          win.__navGoAt = now;
+          try {
+            void nav.go(target, expected);
+          } catch {
+            // 换页过渡期间偶尔会拒绝一次导航：等下一次重发即可
+          }
+        }
 
-      return false;
-    },
-    [no, clicks] as [number, number],
-    { timeout: 20_000 },
+        return false;
+      },
+      [no, clicks] as [number, number],
+      { timeout: NAV_TIMEOUT_MS, polling: NAV_POLLING_MS },
+    ),
   );
 
   // 抓"动画中间帧"时必须跳过 settle：settle 会等有限动画跑完，之后的等待只能截到终态

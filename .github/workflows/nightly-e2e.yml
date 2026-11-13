@@ -18,9 +18,11 @@ jobs:
   e2e-full:
     name: E2E full
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
     env:
-      E2E_CONCURRENCY: 4
+      # 每门课件一个 Slidev dev server + 一个 Chromium：4 门并发会把 4 vCPU 的 runner 挤满，
+      # 导航/编译慢 3 倍（2026-11 就因此出过 `gotoSlideStep` 假超时），降到 3 门换稳定性。
+      E2E_CONCURRENCY: 3
       E2E_OVERFLOW_TOLERANCE: 6
     steps:
       - name: Checkout
