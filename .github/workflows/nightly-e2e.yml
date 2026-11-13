@@ -24,6 +24,9 @@ jobs:
       # 导航/编译慢 3 倍（2026-11 就因此出过 `gotoSlideStep` 假超时），降到 3 门换稳定性。
       E2E_CONCURRENCY: 3
       E2E_OVERFLOW_TOLERANCE: 6
+      # 跳页等待上限：CI 的 4 vCPU + 软件渲染下，three.js 课（o2-1.2-lorentz-force）
+      # 首次进 3D 页能把主线程占住一分多钟，60s 不够（2026-11 实测）。放宽到 120s。
+      E2E_NAV_TIMEOUT: 120000
     steps:
       - name: Checkout
         uses: actions/checkout@v7

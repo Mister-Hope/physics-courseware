@@ -87,6 +87,7 @@ SVG 内部与 KaTeX 内部节点（固定画布内部换内容属正当，但 `<
 - **加载失败时 Slidev 渲染的是"带错误提示的占位页"**（`An error occurred on this slide` / `slide failed to load`）；`layout-overflow` 会识别并报 `⛔ 第 N 页渲染失败`（测试失败）。
 - **不要复用已开着的 dev server**（配置里 `reuseExistingServer: false`）：Slidev 启动时解析 addon 组件，复用旧进程会拿到过期组件表，改了文件却测到旧状态
 - **View Transitions**：Slidev v52 换页时整页会先平移再归位（实测可达数百像素），测完要等几何连续多帧稳定（`e2e/slidev-driver.ts` 的 `settle()`），否则把"正在入场"当溢出误报
+- **CI 上 three.js / 重渲染页会把主线程卡住，`waitForFunction` 的判定回调压根不跑**：`o2-1.2-lorentz-force` 第 5 页是 three.js 演示，CI 的 4 vCPU + 软件渲染首次进入要一分多钟，页面其实**已经到位**、只是浏览器里的轮询一次都没执行，于是"没观测到"被当成"没到位"（CI run 43379296753 的 shard 1 就是这么红的）。现在超时后会**再读一次 nav 状态**，已经等于目标就按成功处理（日志里会打 `⚠️ … 状态已等于目标`）；另外 CI/nightly 的 `E2E_NAV_TIMEOUT` 设为 120s。
 - **`gotoSlideStep` 的 20s 超时在 CI 上不够（2026-11 nightly 假失败）**：`o2-1.2-lorentz-force` 有 three.js 演示，CI 上 4 门并发时 Vite 要现编译那坨依赖、软件渲染还要初始化 WebGL，机器比本地慢 3 倍左右，导航 20s 内没到位就被判红（本地单跑必过，所以别当"课件坏了"）。现在 `E2E_NAV_TIMEOUT` 默认 **60s**，并且 `waitForFunction` 从默认的 rAF 轮询改成 **100ms 定时器轮询**（主线程被 3D 占住时 rAF 会被饿住，判定回调迟迟不跑）；超时错误里会带「第几页 / 第几步 / 最后的 nav 状态 / URL」，下次从 CI 日志就能直接看出是"没到位"还是"clicks 被夹"
 - **`oxlint --fix` 会写坏测试文件**（vitest 插件会把 Playwright 的 `test`/`expect` 当 vitest 全局并自动插 import），所以 `e2e/` 已在 `oxlint.config.ts` 的 `ignore` 里（风格仍由 oxfmt 管）
 - 新增课件目录自动纳入，无需登记；首次运行先 `pnpm test:e2e:install` 装 Chromium
