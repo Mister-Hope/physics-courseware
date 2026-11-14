@@ -1,0 +1,43 @@
+import{t as e}from"./DefinitionBox-CAcS0nPP.js";import{t}from"./Latex-CWRL67AU.js";import{t as n}from"./CourseArrow-BhoQ915b.js";import{B as r,C as i,E as a,G as o,O as s,S as c,St as l,b as u,bt as d,nt as f,tt as p,v as m,w as h,x as g,y as _}from"/shared/assets/shiki-D4P5jSBK.js";import{et as v,gt as y,tt as b}from"./index-CqSGOi8p.js";import{t as x}from"./base-flex-BVImAtzY.js";var S={class:`current-definition-figure select-none`},C={viewBox:`0 0 460 136`,xmlns:`http://www.w3.org/2000/svg`,role:`img`,"aria-label":`一段导体与它的横截面：时间 t 内通过横截面的电荷量 q`,class:`select-none overflow-visible`,style:{display:`block`,margin:`0 auto`}},w=[`d`],T=[`y1`,`y2`],E=[`y1`,`y2`],D=[`d`],O=[`d`],k=[`d`],A=[`d`],j=[`d`],M=[`d`],N=[`d`],P=34,F=92,I=8.5,L=95,R=365,z=250,B=170,V=y(a({__name:`CrossSectionSvg`,setup(e){let{$slidev:t,$nav:i,$clicksContext:a,$clicks:o,$page:s,$renderContext:l,$frontmatter:d}=b(),f={stroke:`var(--c-bg)`,"stroke-width":3.4,"paint-order":`stroke`};return(e,t)=>{let i=n;return r(),g(`div`,S,[(r(),g(`svg`,C,[t[1]||=c(`<defs data-v-6939b946><!-- 导线主体圆柱金属玻璃态渐变 --><linearGradient id="cd-wire-grad" x1="0%" y1="0%" x2="0%" y2="100%" data-v-6939b946><stop offset="0%" stop-color="rgba(30, 41, 59, 0.45)" data-v-6939b946></stop><stop offset="25%" stop-color="rgba(51, 65, 85, 0.22)" data-v-6939b946></stop><stop offset="50%" stop-color="rgba(96, 165, 250, 0.08)" data-v-6939b946></stop><stop offset="75%" stop-color="rgba(51, 65, 85, 0.22)" data-v-6939b946></stop><stop offset="100%" stop-color="rgba(30, 41, 59, 0.45)" data-v-6939b946></stop></linearGradient><!-- 左端面椭圆立体明暗 --><linearGradient id="cd-cap-left" x1="0%" y1="0%" x2="100%" y2="0%" data-v-6939b946><stop offset="0%" stop-color="rgba(30, 41, 59, 0.85)" data-v-6939b946></stop><stop offset="100%" stop-color="rgba(51, 65, 85, 0.4)" data-v-6939b946></stop></linearGradient><!-- 右端面椭圆截面 --><linearGradient id="cd-cap-right" x1="0%" y1="0%" x2="100%" y2="0%" data-v-6939b946><stop offset="0%" stop-color="rgba(51, 65, 85, 0.5)" data-v-6939b946></stop><stop offset="100%" stop-color="rgba(96, 165, 250, 0.18)" data-v-6939b946></stop></linearGradient><!-- 电荷柱体金色发光渐变 (时间 t 内流经横截面的电荷) --><linearGradient id="cd-charge-grad" x1="0%" y1="0%" x2="100%" y2="0%" data-v-6939b946><stop offset="0%" stop-color="rgba(226, 168, 70, 0.08)" data-v-6939b946></stop><stop offset="40%" stop-color="rgba(226, 168, 70, 0.22)" data-v-6939b946></stop><stop offset="100%" stop-color="rgba(226, 168, 70, 0.32)" data-v-6939b946></stop></linearGradient><!-- 横截面 S 截面椭圆填充渐变 --><radialGradient id="cd-section-grad" cx="50%" cy="50%" r="50%" data-v-6939b946><stop offset="0%" stop-color="rgba(245, 158, 11, 0.45)" data-v-6939b946></stop><stop offset="70%" stop-color="rgba(226, 168, 70, 0.26)" data-v-6939b946></stop><stop offset="100%" stop-color="rgba(226, 168, 70, 0.12)" data-v-6939b946></stop></radialGradient></defs>`,1),u(` ════════════════════════════════════════════════
+           1. 导线外层圆柱体（立体透视轮廓：左端无灰线 · 右端前实后虚）
+      ════════════════════════════════════════════════ `),m(`g`,null,[u(` 导线管身主体填充 (两端与椭圆平滑衔接，绝不产生左端垂直剖分灰线) `),m(`path`,{d:`
+            M ${L} ${P}
+            L ${R} ${P}
+            A ${I} 29 0 0 1 ${R} ${F}
+            L ${L} ${F}
+            A ${I} 29 0 0 1 ${L} ${P}
+            Z
+          `,fill:`url(#cd-wire-grad)`},null,8,w),u(` 上下母线轮廓实线 `),m(`line`,{x1:L,y1:P,x2:R,y2:P,stroke:`var(--c-text)`,"stroke-width":`1.6`,"stroke-opacity":`0.9`}),m(`line`,{x1:L,y1:F,x2:R,y2:F,stroke:`var(--c-text)`,"stroke-width":`1.6`,"stroke-opacity":`0.9`}),u(` 导线上方/下方高光轮廓线 `),m(`line`,{x1:L,y1:35,x2:R,y2:35,stroke:`rgba(255, 255, 255, 0.2)`,"stroke-width":`1`},null,8,T),m(`line`,{x1:L,y1:91,x2:R,y2:91,stroke:`rgba(15, 23, 42, 0.7)`,"stroke-width":`1`},null,8,E),u(` 左端截面椭圆（外侧观察面，整洁完整立体椭圆，中间绝无任何纵向灰线） `),m(`ellipse`,{cx:L,cy:63,rx:I,ry:29,fill:`url(#cd-cap-left)`,stroke:`var(--c-text)`,"stroke-width":`1.6`,"stroke-opacity":`0.95`}),u(` 右端截面椭圆底色填充 `),m(`ellipse`,{cx:R,cy:63,rx:I,ry:29,fill:`url(#cd-cap-right)`,stroke:`none`}),u(` 右端截面椭圆轮廓：左半部分为虚线（透视穿透内壁） `),m(`path`,{d:`
+            M ${R} ${P}
+            A ${I} 29 0 0 0 ${R} ${F}
+          `,fill:`none`,stroke:`var(--c-text)`,"stroke-width":`1.6`,"stroke-dasharray":`4 3`,"stroke-opacity":`0.65`},null,8,D),u(` 右端截面椭圆轮廓：右半部分为实线（外轮廓边线） `),m(`path`,{d:`
+            M ${R} ${P}
+            A ${I} 29 0 0 1 ${R} ${F}
+          `,fill:`none`,stroke:`var(--c-text)`,"stroke-width":`1.6`,"stroke-opacity":`0.95`},null,8,O)]),u(` ════════════════════════════════════════════════
+           2. 时间 t 内通过横截面的那段柱体电荷量 q
+      ════════════════════════════════════════════════ `),m(`g`,null,[u(` 电荷柱体立体筒身 (从 X_COL_START 到 X_SEC，纯净淡金色微光，不加微观电子与文字堆叠) `),m(`path`,{d:`
+            M ${B} ${P}
+            L ${z} ${P}
+            A ${I} 29 0 0 1 ${z} ${F}
+            L ${B} ${F}
+            A ${I} 29 0 0 0 ${B} ${P}
+            Z
+          `,fill:`url(#cd-charge-grad)`},null,8,k),u(` 柱体后截面椭圆（虚线，表示电荷分段后壁透视） `),m(`path`,{d:`
+            M ${B} ${P}
+            A ${I} 29 0 0 0 ${B} ${F}
+          `,fill:`none`,stroke:`var(--c-accent)`,"stroke-width":`1.6`,"stroke-dasharray":`4 3`,"stroke-opacity":`0.55`},null,8,A),m(`path`,{d:`
+            M ${B} ${P}
+            A ${I} 29 0 0 1 ${B} ${F}
+          `,fill:`none`,stroke:`var(--c-accent)`,"stroke-width":`1.6`,"stroke-dasharray":`4 3`,"stroke-opacity":`0.8`},null,8,j)]),u(` ════════════════════════════════════════════════
+           3. 核心受关注物：横截面（立体剖切椭圆，前实后虚）
+      ════════════════════════════════════════════════ `),m(`g`,null,[u(` 横截面椭圆剖切面实体填充 `),m(`ellipse`,{cx:z,cy:63,rx:I,ry:29,fill:`url(#cd-section-grad)`}),u(` 横截面轮廓：后半圆弧（内壁虚线透视） `),m(`path`,{d:`
+            M ${z} ${P}
+            A ${I} 29 0 0 0 ${z} ${F}
+          `,fill:`none`,stroke:`var(--c-accent)`,"stroke-width":`2`,"stroke-dasharray":`5 3.5`},null,8,M),u(` 横截面轮廓：前半圆弧（外壁实线强对比） `),m(`path`,{d:`
+            M ${z} ${P}
+            A ${I} 29 0 0 1 ${z} ${F}
+          `,fill:`none`,stroke:`var(--c-accent)`,"stroke-width":`2.2`},null,8,N),u(` 横截面指示文字（位于截面上方） `),m(`line`,{x1:z,y1:P,x2:z,y2:`24`,stroke:`var(--c-accent)`,"stroke-width":`1.4`,"stroke-dasharray":`3 2`,opacity:`0.85`}),m(`circle`,{cx:z,cy:P,r:`2.2`,fill:`var(--c-accent)`}),m(`text`,{x:z,y:`18`,"text-anchor":`middle`,"font-size":`14`,"font-weight":`600`,fill:`var(--c-accent)`,style:f},`横截面`)]),u(` ════════════════════════════════════════════════
+           4. 穿越横截面的电荷量 q 箭头（全图唯一标注小 q，绝无重复）
+      ════════════════════════════════════════════════ `),m(`g`,null,[h(i,{from:{x:140,y:63},to:{x:320,y:63},stroke:`var(--c-accent)`,"stroke-width":2.8,label:`q`,"label-dx":-26,"label-dy":-14,"head-size":8.5},null,8,[`from`,`to`])]),u(` ════════════════════════════════════════════════
+           5. 底部学术说明：时间 t 内通过横截面的电荷量 q
+      ════════════════════════════════════════════════ `),m(`g`,null,[m(`text`,{x:`230`,y:`122`,"text-anchor":`middle`,"font-size":`16`,style:f},[...t[0]||=[m(`tspan`,{fill:`var(--c-text-dim)`},`时间`,-1),m(`tspan`,{"font-family":`KaTeX_Math, serif`,"font-style":`italic`,fill:`var(--c-text)`},`t`,-1),m(`tspan`,{fill:`var(--c-text-dim)`},`内通过横截面的电荷量`,-1),m(`tspan`,{"font-family":`KaTeX_Math, serif`,"font-style":`italic`,fill:`var(--c-accent)`},`q`,-1)]])])]))])}}}),[[`__scopeId`,`data-v-6939b946`]]),H={class:`page-grow`},U={class:`half-grid`},W={class:`stack`},G={class:`text-center text-2xl leading-normal`},K={__name:`slides.md__slidev_7`,setup(n){let{$slidev:a,$nav:c,$clicksContext:u,$clicks:y,$page:S,$renderContext:C,$frontmatter:w}=b();return u.setup(),(n,a)=>{let c=V,u=t,y=e,b=o(`click`);return r(),_(x,l(s(d(v)(d(w),6))),{default:p(()=>[a[12]||=m(`h1`,null,`电流`,-1),m(`div`,H,[a[11]||=m(`div`,{class:`ask`},`电流的强弱程度用什么表示？`,-1),m(`div`,U,[f((r(),g(`div`,null,[h(c)])),[[b,1]]),m(`div`,W,[f((r(),g(`div`,null,[...a[0]||=[i(`单位时间内通过导体横截面的电荷量越多，电流就越大。`,-1)]])),[[b,1]])])]),f((r(),g(`div`,null,[h(y,{term:`电流`},{default:p(()=>[m(`div`,null,[a[1]||=i(`用 `,-1),h(u,{tex:`I`}),a[2]||=i(` 表示电流、`,-1),h(u,{tex:`q`}),a[3]||=i(` 表示在时间 `,-1),h(u,{tex:`t`}),a[4]||=i(` 内通过导体横截面的电荷量，则`,-1)]),m(`div`,G,[h(u,{tex:`I = \\dfrac{q}{t}`})]),m(`div`,null,[a[5]||=i(`单位是安培（ampere），符号 `,-1),h(u,{tex:`\\text{A}`}),a[6]||=i(`：`,-1),h(u,{tex:`1\\ \\text{C} = 1\\ \\text{A} \\cdot \\text{s}`}),a[7]||=i(`，`,-1),h(u,{tex:`1\\ \\text{mA} = 10^{-3}\\ \\text{A}`}),a[8]||=i(`，`,-1),h(u,{tex:`1\\ \\mu\\text{A} = 10^{-6}\\ \\text{A}`}),a[9]||=i(`。`,-1)]),a[10]||=m(`div`,null,`习惯上规定正电荷定向移动的方向为电流的方向。`,-1)]),_:1})])),[[b,2]])])]),_:1},16)}}};export{K as default};
