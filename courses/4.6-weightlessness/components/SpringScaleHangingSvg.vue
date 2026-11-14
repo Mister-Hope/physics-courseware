@@ -63,7 +63,16 @@ const POINTER_Y = CASE.y + 0.8 * CASE_W + 0.7 * CASE_W + (FORCE_N / MAX_FORCE) *
       <!-- 挂环与码身之间的短颈 -->
       <line :x1="AXIS_X" :y1="HOOK_END_Y + 13" :x2="AXIS_X" :y2="HOOK_END_Y + 17" stroke="var(--c-neutral-300)" stroke-width="2" />
       <!-- 码身：金属圆柱 -->
-      <rect :x="AXIS_X - 17" :y="HOOK_END_Y + 17" width="34" height="29" rx="4" :fill="'url(#' + uid + '-ssWeightGrad)'" stroke="var(--c-text-dim)" stroke-width="1.6" />
+      <rect
+        :x="AXIS_X - 17"
+        :y="HOOK_END_Y + 17"
+        width="34"
+        height="29"
+        rx="4"
+        :fill="'url(#' + uid + '-ssWeightGrad)'"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.6"
+      />
       <!-- 码身顶面 -->
       <ellipse :cx="AXIS_X" :cy="HOOK_END_Y + 21" rx="15" ry="4" :fill="'url(#' + uid + '-ssWeightTopGrad)'" stroke="var(--c-text-dim)" stroke-width="1.2" />
       <!-- 码身中部的槽口 -->

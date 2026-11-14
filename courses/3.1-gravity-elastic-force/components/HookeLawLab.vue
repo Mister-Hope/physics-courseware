@@ -121,8 +121,8 @@ const plotLabels = computed(() => [
   <div class="ef-hooke">
     <div class="ef-hooke-left">
       <div class="ef-hooke-count">
-        钩码个数 <Latex tex="n" /> = <b class="ef-hooke-num">{{ count }}</b
-        >（每个 <Latex tex="50\ \text{g}" />）
+        钩码个数 <Latex tex="n" /> = <b class="ef-hooke-num">{{ count }}</b>（每个
+        <Latex tex="50\ \text{g}" />）
       </div>
       <input
         v-model.number="count"

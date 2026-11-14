@@ -38,7 +38,7 @@ const AXIS_Y = 115; // 测力计轴线高度
 const CASE_Y = AXIS_Y - 10; // 外壳宽 20 → 上沿 = 轴线 − 10
 
 const scale = ref<{ extension: number; ringEnd: { x: number } } | null>(null);
-/** mirror 时外壳位置 = 挂钩端 + extension（别按"x 就是左边缘"算） */
+/** Mirror 时外壳位置 = 挂钩端 + extension（别按"x 就是左边缘"算） */
 const scaleX = computed(() => HOOK_X + (scale.value?.extension ?? 0));
 /** 吊环最右缘——手捏在这里 */
 const ringEndX = computed(() => scale.value?.ringEnd.x ?? 0);

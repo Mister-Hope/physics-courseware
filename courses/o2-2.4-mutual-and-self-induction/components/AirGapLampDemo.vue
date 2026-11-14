@@ -101,8 +101,22 @@ const glow = computed(() => clamp(emf.value * 1.15, 0, 1));
 
       <!-- 穿过两线圈的磁场：柔和填充光区（不是磁感线形状）+ 沿轴方向箭头 -->
       <g :opacity="0.9 * fieldOpacity">
-        <ellipse cx="300" cy="145" rx="42" ry="76" fill="url(#airgap-glow-grad)" class="coupling-glow" />
-        <ellipse cx="300" cy="196" rx="58" ry="64" fill="url(#airgap-glow-grad)" class="coupling-glow" />
+        <ellipse
+          cx="300"
+          cy="145"
+          rx="42"
+          ry="76"
+          fill="url(#airgap-glow-grad)"
+          class="coupling-glow"
+        />
+        <ellipse
+          cx="300"
+          cy="196"
+          rx="58"
+          ry="64"
+          fill="url(#airgap-glow-grad)"
+          class="coupling-glow"
+        />
       </g>
       <CourseArrow
         v-if="fieldOpacity > 0.02"
@@ -168,9 +182,7 @@ const glow = computed(() => clamp(emf.value * 1.15, 0, 1));
         <path d="M 206 94 H 266" fill="none" />
         <path d="M 350 196 H 382" fill="none" />
       </g>
-      <text x="196" y="99" text-anchor="end" font-size="15" fill="var(--c-text-dim)">
-        线圈 A
-      </text>
+      <text x="196" y="99" text-anchor="end" font-size="15" fill="var(--c-text-dim)">线圈 A</text>
       <text x="420" y="201" text-anchor="middle" font-size="15" fill="var(--c-text-dim)">
         线圈 B
       </text>

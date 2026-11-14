@@ -20,17 +20,7 @@
       <ellipse cx="140" cy="66" rx="62" ry="34" fill="url(#wp-glow)" />
     </g>
     <!-- 送电端线圈：4 匝、半径 40，从右端看顺时针；两端引线在下侧 (49,106) / (99,106) -->
-    <Solenoid
-      :x="74"
-      :y="66"
-      :length="50"
-      :radius="40"
-      :turns="4"
-      direction="cw"
-      :phase="180"
-      :line-width="2.6"
-      :back-opacity="0.32"
-    />
+    <Solenoid :x="74" :y="66" :length="50" :radius="40" :turns="4" direction="cw" :phase="180" :line-width="2.6" :back-opacity="0.32" />
     <!-- 受电端线圈：与送电端同轴、同绕向；两端引线在下侧 (181,106) / (231,106) -->
     <Solenoid
       :x="206"
@@ -59,34 +49,10 @@
       <circle cx="231" cy="141.6" r="4.2" />
     </g>
     <!-- 双向箭头：两个接线头之间（CourseArrow 只画单头，两根对向拼成双头） -->
-    <CourseArrow
-      :from="{ x: 74, y: 141.6 }"
-      :to="{ x: 92, y: 141.6 }"
-      stroke="var(--c-text-dim)"
-      :stroke-width="1.8"
-      :head-size="7"
-    />
-    <CourseArrow
-      :from="{ x: 74, y: 141.6 }"
-      :to="{ x: 56, y: 141.6 }"
-      stroke="var(--c-text-dim)"
-      :stroke-width="1.8"
-      :head-size="7"
-    />
-    <CourseArrow
-      :from="{ x: 206, y: 141.6 }"
-      :to="{ x: 224, y: 141.6 }"
-      stroke="var(--c-text-dim)"
-      :stroke-width="1.8"
-      :head-size="7"
-    />
-    <CourseArrow
-      :from="{ x: 206, y: 141.6 }"
-      :to="{ x: 188, y: 141.6 }"
-      stroke="var(--c-text-dim)"
-      :stroke-width="1.8"
-      :head-size="7"
-    />
+    <CourseArrow :from="{ x: 74, y: 141.6 }" :to="{ x: 92, y: 141.6 }" stroke="var(--c-text-dim)" :stroke-width="1.8" :head-size="7" />
+    <CourseArrow :from="{ x: 74, y: 141.6 }" :to="{ x: 56, y: 141.6 }" stroke="var(--c-text-dim)" :stroke-width="1.8" :head-size="7" />
+    <CourseArrow :from="{ x: 206, y: 141.6 }" :to="{ x: 224, y: 141.6 }" stroke="var(--c-text-dim)" :stroke-width="1.8" :head-size="7" />
+    <CourseArrow :from="{ x: 206, y: 141.6 }" :to="{ x: 188, y: 141.6 }" stroke="var(--c-text-dim)" :stroke-width="1.8" :head-size="7" />
     <!-- 端电压：U 用 KaTeX_Math 斜体（量），下标 in / out 用 KaTeX_Main 正体 -->
     <text x="74" y="167" text-anchor="middle" font-size="16" fill="var(--c-accent)">
       <tspan font-family="KaTeX_Math" font-style="italic">U</tspan>

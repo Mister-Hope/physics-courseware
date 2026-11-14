@@ -70,8 +70,7 @@ const deviationText = computed(
       </div>
       <div class="em-cmp">
         公认值 <Latex tex="5.98\times10^{24}\ \text{kg}" />，相差
-        <b class="em-num">{{ deviationText }}</b
-        >%
+        <b class="em-num">{{ deviationText }}</b>%
       </div>
     </div>
     <div class="em-fig">

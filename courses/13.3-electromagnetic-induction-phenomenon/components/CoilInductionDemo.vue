@@ -184,9 +184,7 @@ const status = computed(() => {
       <text x="182" y="270" font-size="17" fill="var(--c-text-dim)">线圈 B</text>
     </svg>
     <div class="ei-read">
-      <span class="ei-item"
-        >仪表状态：<strong>{{ status }}</strong></span
-      >
+      <span class="ei-item">仪表状态：<strong>{{ status }}</strong></span>
     </div>
     <div class="ei-bar">
       <button

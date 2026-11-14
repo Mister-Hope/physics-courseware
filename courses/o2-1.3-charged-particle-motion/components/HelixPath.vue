@@ -381,10 +381,12 @@ const scene = computed(() => buildScene(rMM.value, pitchMM.value, showPitch));
       </span>
       <span style="color: var(--c-neutral-300)">
         <Latex tex="v_\parallel" /> =
-        <span class="font-semibold text-amber-300">{{ (vPar / 1e6).toFixed(2) }}</span
-        >、<Latex tex="v_\perp" /> =
-        <span class="font-semibold text-teal-300">{{ (vPerp / 1e6).toFixed(2) }}</span
-        >（<Latex tex="\times 10^6\ \text{m/s}" />）
+        <span class="font-semibold text-amber-300">{{ (vPar / 1e6).toFixed(2) }}</span>、<Latex
+          tex="v_\perp"
+        />
+        = <span class="font-semibold text-teal-300">{{ (vPerp / 1e6).toFixed(2) }}</span>（<Latex
+          tex="\times 10^6\ \text{m/s}"
+        />）
       </span>
       <span class="text-dim">
         <Latex tex="r" /> = {{ rMM.toFixed(2) }} <Latex tex="\text{mm}" />，<Latex tex="T" /> =

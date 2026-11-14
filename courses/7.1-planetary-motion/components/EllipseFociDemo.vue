@@ -205,9 +205,7 @@ const aria = computed(
       <div class="ef-row">
         <span class="ef-label">离心率 <Latex tex="e = \dfrac{c}{a}" /></span>
         <input v-model.number="ecc" class="ef-range" type="range" min="0" max="0.95" step="0.05" />
-        <span class="ef-readout"
-          ><b class="ef-value">{{ ecc.toFixed(2) }}</b></span
-        >
+        <span class="ef-readout"><b class="ef-value">{{ ecc.toFixed(2) }}</b></span>
       </div>
       <div class="ef-row ef-row-note">
         <span>绳长不变 ⇒ <Latex tex="2a" /> 不变；<Latex tex="c^2 + b^2 = a^2" /></span>

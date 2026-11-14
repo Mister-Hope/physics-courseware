@@ -186,8 +186,7 @@ const massTex = computed(() => sciTex(mass.value, 3, "kg"));
       </div>
       <div class="cm-cmp">
         {{ current.center }}的公认质量 <Latex :tex="current.referenceTex" />，相差
-        <b class="cm-num">{{ deviationText }}</b
-        >%
+        <b class="cm-num">{{ deviationText }}</b>%
       </div>
     </div>
     <div class="cm-fig">

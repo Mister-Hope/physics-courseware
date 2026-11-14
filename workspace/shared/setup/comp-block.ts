@@ -335,7 +335,7 @@ export const parseCompBlock = (info: string, code: string): BlockSpec | null => 
   const [value] = parseBlock(lines, 0, first.indent);
 
   if (typeof value !== "object" || Array.isArray(value))
-    throw new Error(`[comp ${component}] 代码块顶层必须是"键: 值"的映射`);
+    throw new TypeError(`[comp ${component}] 代码块顶层必须是"键: 值"的映射`);
 
   const { click, class: wrapperClass, ...props } = value as Record<string, BlockValue>;
 

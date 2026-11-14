@@ -194,7 +194,16 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <rect :x="188" :y="334 + padShift" width="8" :height="10 - padShift" fill="var(--c-neutral-500)" />
 
       <!-- 防滑称重踏板（随视重微幅上下位移） -->
-      <rect x="98" :y="327 + padShift" width="124" height="10" rx="3.5" :fill="'url(#' + uid + '-pwScalePadGrad)'" stroke="var(--c-text-dim)" stroke-width="1.4" />
+      <rect
+        x="98"
+        :y="327 + padShift"
+        width="124"
+        height="10"
+        rx="3.5"
+        :fill="'url(#' + uid + '-pwScalePadGrad)'"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+      />
       <line
         x1="106"
         :y1="329.5 + padShift"
@@ -208,7 +217,13 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <!-- 体重计梯形金属底座与防滑脚垫 -->
       <rect x="114" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
       <rect x="192" y="369" width="14" height="3" rx="1" fill="var(--c-neutral-600)" />
-      <path d="M 108 370 L 114 341 L 206 341 L 212 370 Z" :fill="'url(#' + uid + '-pwScaleBodyGrad)'" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
+      <path
+        d="M 108 370 L 114 341 L 206 341 L 212 370 Z"
+        :fill="'url(#' + uid + '-pwScaleBodyGrad)'"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.4"
+        stroke-linejoin="round"
+      />
 
       <!-- 体重计显示屏窗口 -->
       <rect
@@ -261,8 +276,20 @@ const accelArrow = computed(() => motion(accelDir, 74));
       <path d="M 166 327 L 168 319 L 185 319 L 188 327 Z" fill="var(--c-surface-solid)" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-linejoin="round" />
 
       <!-- 双腿长裤 -->
-      <path d="M 138 264 L 155 264 L 152 320 L 137 320 Z" :fill="'url(#' + uid + '-pwPantsGrad)'" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
-      <path d="M 165 264 L 182 264 L 183 320 L 168 320 Z" :fill="'url(#' + uid + '-pwPantsGrad)'" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-linejoin="round" />
+      <path
+        d="M 138 264 L 155 264 L 152 320 L 137 320 Z"
+        :fill="'url(#' + uid + '-pwPantsGrad)'"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M 165 264 L 182 264 L 183 320 L 168 320 Z"
+        :fill="'url(#' + uid + '-pwPantsGrad)'"
+        stroke="var(--c-text-dim)"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+      />
 
       <!-- 自然下垂的左右手臂与手掌 -->
       <path

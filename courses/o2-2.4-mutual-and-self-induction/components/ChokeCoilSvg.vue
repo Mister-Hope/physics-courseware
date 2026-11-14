@@ -9,29 +9,14 @@
     <!-- 铁芯（先画，线圈盖在上面） -->
     <rect x="205" y="37" width="94" height="10" rx="2" fill="var(--c-neutral-700)" opacity="0.55" />
     <!-- 扼流圈线圈：横放连续螺旋线 4 匝，套在铁芯上；接线端都在下缘 (207,58) / (297,58) -->
-    <Solenoid
-      :x="252"
-      :y="42"
-      :length="90"
-      :radius="16"
-      :turns="4"
-      direction="cw"
-      :phase="180"
-      :line-width="2.8"
-      :back-opacity="0.3"
-    />
+    <Solenoid :x="252" :y="42" :length="90" :radius="16" :turns="4" direction="cw" :phase="180" :line-width="2.8" :back-opacity="0.3" />
     <!-- 导线：线圈串在中间 -->
     <g fill="none" stroke="var(--c-text)" stroke-width="2" stroke-linecap="round">
       <path d="M 24 58 H 207" />
       <path d="M 297 58 H 396" />
     </g>
     <!-- 直流：直线箭头穿过线圈、一直通到右边 -->
-    <CourseArrow
-      :from="{ x: 76, y: 16 }"
-      :to="{ x: 396, y: 16 }"
-      stroke="var(--c-velocity)"
-      :stroke-width="2.6"
-    />
+    <CourseArrow :from="{ x: 76, y: 16 }" :to="{ x: 396, y: 16 }" stroke="var(--c-velocity)" :stroke-width="2.6" />
     <text x="26" y="22" font-size="16" fill="var(--c-velocity)">直流</text>
     <!-- 交流：波浪箭头到线圈前被挡住 -->
     <path
@@ -43,11 +28,6 @@
     />
     <text x="26" y="76" font-size="16" fill="var(--c-velocity)">交流</text>
     <!-- 红叉：交流被挡住 -->
-    <path
-      d="M 199 63 L 211 75 M 211 63 L 199 75"
-      stroke="var(--c-danger)"
-      stroke-width="3"
-      stroke-linecap="round"
-    />
+    <path d="M 199 63 L 211 75 M 211 63 L 199 75" stroke="var(--c-danger)" stroke-width="3" stroke-linecap="round" />
   </svg>
 </template>

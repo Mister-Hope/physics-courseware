@@ -218,15 +218,9 @@ const meterText = computed(() => (moving.value ? "偏转" : "不偏转"));
       />
     </svg>
     <div class="ei-read">
-      <span class="ei-item"
-        >回路面积 <Latex tex="S" />：<strong>{{ changing }}</strong></span
-      >
-      <span class="ei-item"
-        >磁通量 <Latex tex="\Phi = BS" />：<strong>{{ changing }}</strong></span
-      >
-      <span class="ei-item"
-        >灵敏电流计：<strong>{{ meterText }}</strong></span
-      >
+      <span class="ei-item">回路面积 <Latex tex="S" />：<strong>{{ changing }}</strong></span>
+      <span class="ei-item">磁通量 <Latex tex="\Phi = BS" />：<strong>{{ changing }}</strong></span>
+      <span class="ei-item">灵敏电流计：<strong>{{ meterText }}</strong></span>
     </div>
     <div class="ei-bar">
       <button type="button" class="ei-btn" :disabled="!canLeft" @click="slide(-1)">向左滑动</button>

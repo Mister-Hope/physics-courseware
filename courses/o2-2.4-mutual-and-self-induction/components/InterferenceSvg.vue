@@ -17,16 +17,7 @@
       <tspan baseline-shift="sub" font-size="11">1</tspan>
     </text>
     <!-- 变化磁场向下面回路的作用区域（柔和光带 + 短箭头，不画磁感线形状） -->
-    <rect
-      x="56"
-      y="92"
-      width="288"
-      height="46"
-      rx="20"
-      fill="var(--c-danger)"
-      opacity="0.16"
-      filter="url(#interference-soft)"
-    />
+    <rect x="56" y="92" width="288" height="46" rx="20" fill="var(--c-danger)" opacity="0.16" filter="url(#interference-soft)" />
     <g opacity="0.9">
       <CourseArrow :from="{ x: 150, y: 94 }" :to="{ x: 150, y: 138 }" stroke="var(--c-danger)" stroke-width="1.8" stroke-dasharray="7 6" />
       <CourseArrow :from="{ x: 200, y: 94 }" :to="{ x: 200, y: 138 }" stroke="var(--c-danger)" stroke-width="1.8" stroke-dasharray="7 6" />

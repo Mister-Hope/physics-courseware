@@ -55,16 +55,14 @@ const barStyle = computed(() => {
       aria-label="试探电荷的电荷量"
     >
       <template #value>
-        <span class="pp-number">{{ qText }}</span
-        ><Latex tex="\text{ nC}" />
+        <span class="pp-number">{{ qText }}</span><Latex tex="\text{ nC}" />
       </template>
     </CourseSlider>
     <div class="pp-grid">
       <div class="pp-cell">
         <div class="pp-cell-head">电势能 <Latex tex="E_p" /></div>
         <div class="pp-cell-value">
-          <span class="pp-number">{{ epText }}</span
-          ><Latex tex="\text{ nJ}" />
+          <span class="pp-number">{{ epText }}</span><Latex tex="\text{ nJ}" />
         </div>
         <div class="pp-bar" aria-hidden="true">
           <span class="pp-bar-zero"></span>

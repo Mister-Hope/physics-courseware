@@ -503,12 +503,7 @@ const visibleLowerCharges = computed(() =>
 /* Locking system display typography */
 svg text {
   font-weight: bold;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    sans-serif !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif !important;
   line-height: normal !important;
   letter-spacing: normal !important;
 

@@ -9,13 +9,7 @@
   exercise-split 的 #fig 必须带固有 width/height，否则图栏塌成 0 宽、整张图消失。
 -->
 <template>
-  <svg
-    viewBox="28 0 284 258"
-    width="340"
-    height="309"
-    role="img"
-    aria-label="自感电路：电池、开关 S；自感线圈 L 与灯泡 B 并联后，再与灯泡 A 串联"
-  >
+  <svg viewBox="28 0 284 258" width="340" height="309" role="img" aria-label="自感电路：电池、开关 S；自感线圈 L 与灯泡 B 并联后，再与灯泡 A 串联">
     <!-- 导线：横平竖直，止于每个元件两端 -->
     <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
       <!-- L 支路（上）：左节点 → 上 → 线圈左接线端；线圈右接线端 → 右 → 右节点 -->
@@ -36,37 +30,9 @@
     <circle cx="66" cy="112" r="3.2" fill="var(--c-text)" />
     <circle cx="226" cy="112" r="3.2" fill="var(--c-text)" />
     <!-- 自感线圈 L：横放连续螺旋线 4 匝，接线端在下沿；上方短横线为铁芯符号 -->
-    <Solenoid
-      :x="146"
-      :y="56"
-      :length="80"
-      :radius="17"
-      :turns="4"
-      direction="cw"
-      :phase="180"
-      :line-width="2.8"
-      :back-opacity="0.32"
-    />
-    <line
-      x1="120"
-      y1="34"
-      x2="172"
-      y2="34"
-      stroke="var(--c-accent)"
-      stroke-width="2.4"
-      stroke-linecap="round"
-    />
-    <text
-      x="146"
-      y="22"
-      text-anchor="middle"
-      font-family="KaTeX_Math"
-      font-style="italic"
-      font-size="16"
-      fill="var(--c-text)"
-    >
-      L
-    </text>
+    <Solenoid :x="146" :y="56" :length="80" :radius="17" :turns="4" direction="cw" :phase="180" :line-width="2.8" :back-opacity="0.32" />
+    <line x1="120" y1="34" x2="172" y2="34" stroke="var(--c-accent)" stroke-width="2.4" stroke-linecap="round" />
+    <text x="146" y="22" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-text)">L</text>
     <!-- 灯泡 B（与 L 并联）与灯泡 A（与并联部分串联） -->
     <CircuitBulb :x="146" :y="168" label="B" />
     <CircuitBulb :x="264" :y="112" label="A" />

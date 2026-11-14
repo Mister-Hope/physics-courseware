@@ -418,12 +418,7 @@ onUnmounted(() => {
 
 svg text {
   font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif !important;
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   pointer-events: none !important;
   user-select: none !important;
 }

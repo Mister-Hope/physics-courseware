@@ -9,18 +9,7 @@
     <!-- 铁芯（先画，线圈盖在上面） -->
     <rect x="355" y="35" width="10" height="42" rx="2" fill="var(--c-neutral-700)" opacity="0.55" />
     <!-- 大电感线圈：竖放连续螺旋线 3 匝；接线端在左缘 (346,36) / (346,76) -->
-    <Solenoid
-      :x="360"
-      :y="56"
-      :length="40"
-      :radius="14"
-      :turns="3"
-      orientation="vertical"
-      direction="cw"
-      :phase="180"
-      :line-width="2.8"
-      :back-opacity="0.3"
-    />
+    <Solenoid :x="360" :y="56" :length="40" :radius="14" :turns="3" orientation="vertical" direction="cw" :phase="180" :line-width="2.8" :back-opacity="0.3" />
     <!-- 导线：线圈与开关串成一个回路 -->
     <g fill="none" stroke="var(--c-text)" stroke-width="2" stroke-linecap="round">
       <path d="M 64 36 H 188" />

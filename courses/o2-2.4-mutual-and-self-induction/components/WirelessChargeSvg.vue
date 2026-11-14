@@ -35,12 +35,7 @@ interface Board {
 }
 
 /** 板面上一块矩形的四个角（屏幕上是顺时针：远左 → 远右 → 近右 → 近左）；可在平面内偏移，再整体下沉 drop */
-const plateCorners = (
-  board: Board,
-  halfW: number,
-  halfD: number,
-  { u = 0, v = 0, drop = 0 }: { u?: number; v?: number; drop?: number } = {},
-): Pt[] =>
+const plateCorners = (board: Board, halfW: number, halfD: number, { u = 0, v = 0, drop = 0 }: { u?: number; v?: number; drop?: number } = {}): Pt[] =>
   [
     project(board.cx, board.cy, u - halfW, v + halfD),
     project(board.cx, board.cy, u + halfW, v + halfD),
@@ -75,15 +70,9 @@ const phone = { cx: 140, cy: 74, halfW: 54, halfD: 27, thickness: 7 };
 const pad = { cx: 140, cy: 146, halfW: 66, halfD: 40, thickness: 9 };
 
 const phonePath = roundedPath(plateCorners(phone, phone.halfW, phone.halfD), 10);
-const phoneBasePath = roundedPath(
-  plateCorners(phone, phone.halfW, phone.halfD, { drop: phone.thickness }),
-  10,
-);
+const phoneBasePath = roundedPath(plateCorners(phone, phone.halfW, phone.halfD, { drop: phone.thickness }), 10);
 const padPath = roundedPath(plateCorners(pad, pad.halfW, pad.halfD), 9);
-const padBasePath = roundedPath(
-  plateCorners(pad, pad.halfW, pad.halfD, { drop: pad.thickness }),
-  9,
-);
+const padBasePath = roundedPath(plateCorners(pad, pad.halfW, pad.halfD, { drop: pad.thickness }), 9);
 
 /** 手机正面：屏幕（细边框，一眼是玻璃屏不是整块面板）、远端刘海缺口、近端 home 条 */
 const screenPath = roundedPath(plateCorners(phone, 50, 23), 5);
@@ -142,83 +131,28 @@ const coilShear = (cy: number): string => {
     </g>
     <!-- 充电板：先画下沉一整块厚度（深色，露出的下沿就是侧壁），再盖顶面 -->
     <path :d="padBasePath" fill="var(--c-bg-soft)" stroke="none" />
-    <path
-      :d="padPath"
-      fill="var(--c-surface-solid)"
-      stroke="var(--c-neutral-500)"
-      stroke-width="1.2"
-      stroke-linejoin="round"
-    />
+    <path :d="padPath" fill="var(--c-surface-solid)" stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-linejoin="round" />
     <!-- 充电板内的线圈（亮金色＝这一侧的线圈，画满整个板面） -->
     <g :transform="coilShear(pad.cy)">
-      <FlatCoil
-        :x="pad.cx"
-        :y="pad.cy"
-        :inner-radius="11"
-        :outer-radius="34"
-        :turns="3"
-        :squash="KY"
-        :line-width="1.9"
-        color="var(--c-accent)"
-      />
+      <FlatCoil :x="pad.cx" :y="pad.cy" :inner-radius="11" :outer-radius="34" :turns="3" :squash="KY" :line-width="1.9" color="var(--c-accent)" />
     </g>
     <!-- 能量从板送到手机（两个向上小箭头，层级在光区之上、手机之下） -->
-    <CourseArrow
-      :from="{ x: 124, y: 122 }"
-      :to="{ x: 124, y: 96 }"
-      stroke="var(--c-accent)"
-      :stroke-width="1.8"
-      :head-size="7"
-    />
-    <CourseArrow
-      :from="{ x: 156, y: 122 }"
-      :to="{ x: 156, y: 96 }"
-      stroke="var(--c-accent)"
-      :stroke-width="1.8"
-      :head-size="7"
-    />
+    <CourseArrow :from="{ x: 124, y: 122 }" :to="{ x: 124, y: 96 }" stroke="var(--c-accent)" :stroke-width="1.8" :head-size="7" />
+    <CourseArrow :from="{ x: 156, y: 122 }" :to="{ x: 156, y: 96 }" stroke="var(--c-accent)" :stroke-width="1.8" :head-size="7" />
     <!-- 手机：先画下沉的深色侧面，再盖顶面 -->
     <path :d="phoneBasePath" fill="var(--c-bg-soft)" stroke="none" />
-    <path
-      :d="phonePath"
-      fill="var(--c-surface-solid)"
-      stroke="var(--c-neutral-500)"
-      stroke-width="1.2"
-      stroke-linejoin="round"
-    />
-    <path
-      :d="screenPath"
-      fill="url(#wc-screen)"
-      stroke="var(--c-neutral-600)"
-      stroke-width="1.1"
-      stroke-linejoin="round"
-    />
+    <path :d="phonePath" fill="var(--c-surface-solid)" stroke="var(--c-neutral-500)" stroke-width="1.2" stroke-linejoin="round" />
+    <path :d="screenPath" fill="url(#wc-screen)" stroke="var(--c-neutral-600)" stroke-width="1.1" stroke-linejoin="round" />
     <!-- 手机内的线圈（蓝色、压暗：藏在机身里，与充电板线圈同一根竖直轴上正对） -->
     <g :transform="coilShear(phone.cy)" opacity="0.78">
-      <FlatCoil
-        :x="phone.cx"
-        :y="phone.cy"
-        :inner-radius="6"
-        :outer-radius="17"
-        :turns="3"
-        :squash="KY"
-        :line-width="1.5"
-        color="var(--c-accent-2)"
-      />
+      <FlatCoil :x="phone.cx" :y="phone.cy" :inner-radius="6" :outer-radius="17" :turns="3" :squash="KY" :line-width="1.5" color="var(--c-accent-2)" />
     </g>
     <!-- 玻璃反光：盖在线圈之上，线圈才像是"藏在玻璃下面"的机身内部，而不是画在屏上的图形 -->
     <path :d="screenPath" fill="url(#wc-sheen)" stroke="none" />
     <path :d="notchPath" fill="var(--c-bg)" stroke="none" />
     <path :d="speakerPath" fill="var(--c-text-dim)" stroke="none" />
     <g stroke="var(--c-neutral-500)" stroke-width="1.8" stroke-linecap="round">
-      <line
-        v-for="(button, index) in phoneSideButtons"
-        :key="`button-${index}`"
-        :x1="button.from.x"
-        :y1="button.from.y"
-        :x2="button.to.x"
-        :y2="button.to.y"
-      />
+      <line v-for="(button, index) in phoneSideButtons" :key="`button-${index}`" :x1="button.from.x" :y1="button.from.y" :x2="button.to.x" :y2="button.to.y" />
     </g>
     <path :d="homeBarPath" fill="var(--c-neutral-500)" stroke="none" opacity="0.75" />
     <text :x="phone.cx" y="30" text-anchor="middle" font-size="14" fill="var(--c-text-dim)">手机</text>

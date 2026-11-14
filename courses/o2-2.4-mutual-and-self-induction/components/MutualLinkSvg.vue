@@ -21,27 +21,10 @@
       <ellipse cx="300" cy="145" rx="42" ry="76" fill="url(#mutual-link-glow-grad)" />
       <ellipse cx="300" cy="196" rx="58" ry="64" fill="url(#mutual-link-glow-grad)" />
     </g>
-    <CourseArrow
-      :from="{ x: 300, y: 206 }"
-      :to="{ x: 300, y: 104 }"
-      stroke="var(--c-accent)"
-      stroke-width="2.2"
-      opacity="0.8"
-    />
+    <CourseArrow :from="{ x: 300, y: 206 }" :to="{ x: 300, y: 104 }" stroke="var(--c-accent)" stroke-width="2.2" opacity="0.8" />
 
     <!-- 线圈 A（小、套在里面）：竖放 4 匝；接线端在右侧 (326,86) 上、(326,204) 下 -->
-    <Solenoid
-      :x="300"
-      :y="145"
-      :length="118"
-      :radius="26"
-      :turns="4"
-      direction="cw"
-      orientation="vertical"
-      :phase="0"
-      :line-width="2.8"
-      :back-opacity="0.3"
-    />
+    <Solenoid :x="300" :y="145" :length="118" :radius="26" :turns="4" direction="cw" orientation="vertical" :phase="0" :line-width="2.8" :back-opacity="0.3" />
     <!-- A 的回路：上端引出向上、向左兜一圈；下端从 B 的孔里穿下去再接回 -->
     <g fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round">
       <path d="M 326 86 V 58 H 92 V 132" />

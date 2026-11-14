@@ -128,9 +128,7 @@ const alphaAt = computed(() => {
       >
         <template #value>{{ angle }}<Latex tex="^{\circ}" /></template>
       </CourseSlider>
-      <div class="wal-eq">
-        <Latex tex="\cos\alpha" /> = <b class="wal-num">{{ cosText }}</b>
-      </div>
+      <div class="wal-eq"><Latex tex="\cos\alpha" /> = <b class="wal-num">{{ cosText }}</b></div>
       <div class="wal-out">
         <Latex tex="W = Fl\cos\alpha" /> = <b class="wal-num">{{ wText }}</b>
         <Latex tex="\text{J}" />
