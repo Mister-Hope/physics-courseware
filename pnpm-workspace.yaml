@@ -5,13 +5,13 @@ packages:
 catalog:
   "@iconify-json/mdi": 1.2.3
   "@iconify/vue": 5.0.5
-  "@slidev/cli": 53.0.0
-  "@slidev/client": 53.0.0
+  "@slidev/cli": 53.1.0
+  "@slidev/client": 53.1.0
   "@slidev/theme-default": 0.25.0
   "@types/three": 0.187.0
   three: 0.187.0
-  vite: 8.3.5
-  vue: 3.5.44
+  vite: 8.3.8
+  vue: 3.5.45
 
 overrides:
   markdown-it: ^14.3.2
@@ -38,12 +38,11 @@ minimumReleaseAgeExclude:
   - "oxc-config-hope"
   - "oxfmt"
   - "oxlint"
+  - stylelint-config-hope@13.0.0
 minimumReleaseAgeExcludePrune: true
 trustPolicy: no-downgrade
 trustPolicyExcludePrune: true
 trustPolicyIgnoreAfter: 720
-patchedDependencies:
-  "@shikijs/vitepress-twoslash@4.5.0": patches/@shikijs__vitepress-twoslash@4.5.0.patch
 skills:
   dirs:
     - .agents/skills

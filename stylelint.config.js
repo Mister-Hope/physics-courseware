@@ -26,7 +26,14 @@ export default defineHopeConfig({
   overrides: [
     {
       files: ["**/*.vue"],
-      rules: { "custom-property-empty-line-before": null },
+      rules: {
+        "custom-property-empty-line-before": null,
+        // stylelint 18（经 stylelint-config-standard 41）新增：它要求声明必须落在规则块里，
+        // 而 postcss-html 把行内 `style="…"` 的声明挂在 **root** 上 ⇒ 全仓 473 个行内样式全被判"位置非法"。
+        // 行内样式在本仓是刻意用法（`--cols` 这类 CSS 变量只能从属性传），所以在 `.vue` 关掉；
+        // `.css` 里它仍生效——那里它查的是真问题（声明写在嵌套规则之后）。
+        "no-invalid-position-declaration": null,
+      },
     },
   ],
   vue: true,
