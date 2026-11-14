@@ -486,85 +486,45 @@ export function renderBlockFitFailureMessage(results: CourseResult[], tolerance:
   return lines.join("\n");
 }
 
-/** 打印到终端的进度摘要（每个课件一行） */
+// `--warnings-only` 的进程间通道：`scripts/e2e.ts` 解析命令行后写进环境变量，
+// 每个 Playwright 子进程（worker 里的 spec）据此收敛输出。
+export const WARNINGS_ONLY_ENV = "E2E_WARNINGS_ONLY";
+
+/** 当前进程是否处在「只输出警告和错误」模式（`--warnings-only` / `E2E_WARNINGS_ONLY=1`） */
+export function isWarningsOnly(): boolean {
+  return /^(?:1|true|yes|on)$/iu.test((process.env[WARNINGS_ONLY_ENV] ?? "").trim());
+}
+
+/** `renderConsoleSummary` 的选项 */
+export interface ConsoleSummaryOptions {
+  // 只输出警告和错误：没有问题的课件返回空字符串，正常态也不再打印 ✅ 行与「留白明细」。
+  // 默认读 `E2E_WARNINGS_ONLY`（见 `isWarningsOnly`），由 `--warnings-only` 传递。
+  warningsOnly?: boolean;
+}
+
+// 打印到终端的进度摘要（每个课件一段）。
+//
+// 默认是「体检报告」：四类检查各一行结论 + 「留白明细」全量对照。
+// `warningsOnly` 下去掉所有 ✅ 行与明细，只留 ⚠️ 警告 / ❌ 溢出 / ⛔ 渲染失败及其定位信息。
 export function renderConsoleSummary(
   result: CourseResult,
   whitespaceTolerance = DEFAULT_WHITESPACE_TOLERANCE,
   stabilityTolerance = DEFAULT_STABILITY_TOLERANCE,
   blockTolerance = DEFAULT_BLOCK_TOLERANCE,
+  options: ConsoleSummaryOptions = {},
 ): string {
+  const warningsOnly = options.warningsOnly ?? isWarningsOnly();
   const failing = result.checks.filter((check) => check.violations.length > 0);
   const broken = result.checks.filter((check) => check.renderError);
+  const brokenSlides = new Set(broken.map((check) => check.slide));
   const hotspots = collectWhitespaceHotspots([result], whitespaceTolerance);
-  const lines = [
-    `📐 ${result.slug}：共 ${result.totalSlides} 页，检查 ${result.checks.length} 个状态，${failing.length ? `❌ ${failing.length} 个状态溢出` : "✅ 无溢出"}${broken.length ? ` ｜ ⛔ ${new Set(broken.map((check) => check.slide)).size} 页渲染失败` : ""}`,
-  ];
+  const globalViolations = result.globals.filter((layer) => layer.violations.length > 0);
 
-  for (const slide of new Set(broken.map((check) => check.slide))) {
-    lines.push(`   ⛔ 第 ${slide} 页渲染失败（Slidev 错误占位页，内容根本没渲染出来）`);
-  }
-
-  for (const check of failing) {
-    lines.push(`   第 ${check.slide} 页「${check.title || "无标题"}」· ${check.state}`);
-
-    for (const [index, violation] of slideViolationLines(check).outermost.entries()) {
-      lines.push(`     ${formatViolationLine(violation, index)}`);
-    }
-  }
-
-  for (const layer of result.globals) {
-    if (layer.violations.length)
-      lines.push(`   ⚠️ ${layer.title} 溢出：${layer.violations.length} 个元素`);
-  }
-
-  // ── 上下留白（与溢出相反方向的体检：只判「全部展开」，看内容有没有挤在某一端）──
-  lines.push(
-    hotspots.length
-      ? `   🧭 留白（阈值 ${whitespaceTolerance}px · 只判「${EXPANDED_STATE_LABEL}」）：⚠️ ${hotspots.length} 页留白偏大`
-      : `   🧭 留白（阈值 ${whitespaceTolerance}px · 只判「${EXPANDED_STATE_LABEL}」）：✅ 无留白过大页面`,
-  );
-
-  for (const { check, reason } of hotspots) {
-    lines.push(
-      `     第 ${check.slide} 页「${check.title || "无标题"}」：${formatWhitespace(check.whitespace)}（${formatWhitespaceReason(reason)}）`,
-    );
-  }
-
-  // 全量明细（初始态 / 全部展开对照），重排版面时直接看这里；初始态只记录、不告警
-  lines.push("     留白明细（格式：上 顶部留白 / 下 底部留白）：");
-
-  for (const item of groupWhitespaceBySlide(result)) {
-    const states = item.states
-      .map((check) => `${check.state} ${formatWhitespace(check.whitespace)}`)
-      .join(" · ");
-
-    lines.push(`     第 ${item.slide} 页「${item.title || "无标题"}」：${states}`);
-  }
-
-  // ── 点击稳定性（相邻两步之间"已可见元素是否被顶跑"）──
+  // ── 先算齐各类问题：`warningsOnly` 下"一个问题都没有"就整段不打印 ──
   const stabilitySteps = collectStabilityViolations(result.stability);
   const stabilitySlides = collectStabilitySlides(result.stability);
   const ignoredCount = result.stability.reduce((sum, step) => sum + step.ignoredCount, 0);
   const stepCount = result.stability.length;
-
-  lines.push(
-    stabilitySteps.length
-      ? `   🖱️ 点击位移（阈值 ${stabilityTolerance}px）：⚠️ ${stabilitySlides.length} 页共 ${stabilitySteps.length} 步存在位移${ignoredCount ? `（另有 ${ignoredCount} 条命中白名单已忽略）` : ""}`
-      : `   🖱️ 点击位移（阈值 ${stabilityTolerance}px）：✅ 无已可见元素被顶跑（检查 ${stepCount} 个步进）${ignoredCount ? `，白名单忽略 ${ignoredCount} 条` : ""}`,
-  );
-
-  for (const step of stabilitySteps) {
-    lines.push(
-      `     第 ${step.slide} 页「${step.title || "无标题"}」· 第 ${step.from} → ${step.to} 步：最大位移 ${step.maxShift}px（${step.shifts.filter((shift) => !shift.ignored).length} 个元素）`,
-    );
-
-    for (const shift of step.shifts.filter((item) => !item.ignored).slice(0, 5))
-      lines.push(
-        `       · ${shift.path}${shift.text ? ` ｜ ${shift.text}` : ""} → ${formatStabilityShift(shift)}`,
-      );
-  }
-
-  // ── 正文越界（正文比 `.page-grow` 高 → 首行叠到标题上、末行被裁）──
   const blockSteps = collectBlockFitSteps(result);
   const blockSlides = collectBlockFitSlides(result);
   const blockIgnoredCount = result.blockFitSteps.reduce(
@@ -577,27 +537,118 @@ export function renderConsoleSummary(
   );
   /** 真正量到了 `.page-grow` 的「页 × 步」数（其余是没有正文容器的页面，已跳过） */
   const blockScannedCount = result.blockFitSteps.filter((step) => step.blockFit.present).length;
+  const hasIssues =
+    failing.length > 0 ||
+    brokenSlides.size > 0 ||
+    globalViolations.length > 0 ||
+    hotspots.length > 0 ||
+    stabilitySteps.length > 0 ||
+    blockSteps.length > 0;
 
-  lines.push(
-    blockSteps.length
-      ? `   📐 正文越界（阈值 ${blockTolerance}px）：⚠️ ${blockSlides.length} 页共 ${blockSteps.length} 步、${blockCounted} 个元素顶出 / 超出 \`.page-grow\` 可用区域${blockIgnoredCount ? `（另有 ${blockIgnoredCount} 个命中白名单已忽略）` : ""}`
-      : blockScannedCount === 0
-        ? `   📐 正文越界（阈值 ${blockTolerance}px）：— 该课件没有使用 \`.page-grow\`，${result.blockFitSteps.length} 个「页 × 步」全部跳过`
-        : `   📐 正文越界（阈值 ${blockTolerance}px）：✅ 正文都在 \`.page-grow\` 可用区域内（检查 ${blockScannedCount} 个「页 × 步」${blockIgnoredCount ? `，白名单忽略 ${blockIgnoredCount} 个元素` : ""}）`,
-  );
+  if (warningsOnly && !hasIssues) return "";
 
-  for (const step of blockSteps) {
+  const lines = [
+    warningsOnly
+      ? `📐 ${result.slug}：共 ${result.totalSlides} 页${failing.length ? `，❌ ${failing.length} 个状态溢出` : ""}${brokenSlides.size ? ` ｜ ⛔ ${brokenSlides.size} 页渲染失败` : ""}`
+      : `📐 ${result.slug}：共 ${result.totalSlides} 页，检查 ${result.checks.length} 个状态，${failing.length ? `❌ ${failing.length} 个状态溢出` : "✅ 无溢出"}${brokenSlides.size ? ` ｜ ⛔ ${brokenSlides.size} 页渲染失败` : ""}`,
+  ];
+
+  for (const slide of brokenSlides) {
+    lines.push(`   ⛔ 第 ${slide} 页渲染失败（Slidev 错误占位页，内容根本没渲染出来）`);
+  }
+
+  for (const check of failing) {
+    lines.push(`   第 ${check.slide} 页「${check.title || "无标题"}」· ${check.state}`);
+
+    for (const [index, violation] of slideViolationLines(check).outermost.entries()) {
+      lines.push(`     ${formatViolationLine(violation, index)}`);
+    }
+  }
+
+  for (const layer of globalViolations) {
+    lines.push(`   ⚠️ ${layer.title} 溢出：${layer.violations.length} 个元素`);
+  }
+
+  // ── 上下留白（与溢出相反方向的体检：只判「全部展开」，看内容有没有挤在某一端）──
+  const whitespaceHeader = `   🧭 留白（阈值 ${whitespaceTolerance}px · 只判「${EXPANDED_STATE_LABEL}」）：`;
+
+  if (hotspots.length > 0) {
+    lines.push(`${whitespaceHeader}⚠️ ${hotspots.length} 页留白偏大`);
+
+    for (const { check, reason } of hotspots) {
+      lines.push(
+        `     第 ${check.slide} 页「${check.title || "无标题"}」：${formatWhitespace(check.whitespace)}（${formatWhitespaceReason(reason)}）`,
+      );
+    }
+  } else if (!warningsOnly) {
+    lines.push(`${whitespaceHeader}✅ 无留白过大页面`);
+  }
+
+  // 全量明细（初始态 / 全部展开对照），重排版面时直接看这里；初始态只记录、不告警。
+  // `--warnings-only` 下不打：它是体检数据，不是警告，全库跑一遍足有上千行。
+  if (!warningsOnly) {
+    lines.push("     留白明细（格式：上 顶部留白 / 下 底部留白）：");
+
+    for (const item of groupWhitespaceBySlide(result)) {
+      const states = item.states
+        .map((check) => `${check.state} ${formatWhitespace(check.whitespace)}`)
+        .join(" · ");
+
+      lines.push(`     第 ${item.slide} 页「${item.title || "无标题"}」：${states}`);
+    }
+  }
+
+  // ── 点击稳定性（相邻两步之间"已可见元素是否被顶跑"）──
+  const stabilityHeader = `   🖱️ 点击位移（阈值 ${stabilityTolerance}px）：`;
+
+  if (stabilitySteps.length > 0) {
     lines.push(
-      `     第 ${step.slide} 页「${step.title || "无标题"}」· 第 ${step.step} 步：顶出 ${step.blockFit.overflowTop}px / 超出 ${step.blockFit.overflowBottom}px`,
+      `${stabilityHeader}⚠️ ${stabilitySlides.length} 页共 ${stabilitySteps.length} 步存在位移${ignoredCount ? `（另有 ${ignoredCount} 条命中白名单已忽略）` : ""}`,
     );
 
-    // 只列「根因」元素（改它一处就能连带解决被牵连的子元素），与溢出汇总的口径一致
-    for (const violation of step.blockFit.elements
-      .filter((item) => !item.ignored && item.outermost)
-      .slice(0, 5))
+    for (const step of stabilitySteps) {
       lines.push(
-        `       · ${violation.path}${violation.text ? ` ｜ ${violation.text}` : ""} → ${formatBlockFitOverflow(violation)}`,
+        `     第 ${step.slide} 页「${step.title || "无标题"}」· 第 ${step.from} → ${step.to} 步：最大位移 ${step.maxShift}px（${step.shifts.filter((shift) => !shift.ignored).length} 个元素）`,
       );
+
+      for (const shift of step.shifts.filter((item) => !item.ignored).slice(0, 5))
+        lines.push(
+          `       · ${shift.path}${shift.text ? ` ｜ ${shift.text}` : ""} → ${formatStabilityShift(shift)}`,
+        );
+    }
+  } else if (!warningsOnly) {
+    lines.push(
+      `${stabilityHeader}✅ 无已可见元素被顶跑（检查 ${stepCount} 个步进）${ignoredCount ? `，白名单忽略 ${ignoredCount} 条` : ""}`,
+    );
+  }
+
+  // ── 正文越界（正文比 `.page-grow` 高 → 首行叠到标题上、末行被裁）──
+  const blockHeader = `   📐 正文越界（阈值 ${blockTolerance}px）：`;
+
+  if (blockSteps.length > 0) {
+    lines.push(
+      `${blockHeader}⚠️ ${blockSlides.length} 页共 ${blockSteps.length} 步、${blockCounted} 个元素顶出 / 超出 \`.page-grow\` 可用区域${blockIgnoredCount ? `（另有 ${blockIgnoredCount} 个命中白名单已忽略）` : ""}`,
+    );
+
+    for (const step of blockSteps) {
+      lines.push(
+        `     第 ${step.slide} 页「${step.title || "无标题"}」· 第 ${step.step} 步：顶出 ${step.blockFit.overflowTop}px / 超出 ${step.blockFit.overflowBottom}px`,
+      );
+
+      // 只列「根因」元素（改它一处就能连带解决被牵连的子元素），与溢出汇总的口径一致
+      for (const violation of step.blockFit.elements
+        .filter((item) => !item.ignored && item.outermost)
+        .slice(0, 5))
+        lines.push(
+          `       · ${violation.path}${violation.text ? ` ｜ ${violation.text}` : ""} → ${formatBlockFitOverflow(violation)}`,
+        );
+    }
+  } else if (!warningsOnly) {
+    lines.push(
+      blockScannedCount === 0
+        ? `${blockHeader}— 该课件没有使用 \`.page-grow\`，${result.blockFitSteps.length} 个「页 × 步」全部跳过`
+        : `${blockHeader}✅ 正文都在 \`.page-grow\` 可用区域内（检查 ${blockScannedCount} 个「页 × 步」${blockIgnoredCount ? `，白名单忽略 ${blockIgnoredCount} 个元素` : ""}）`,
+    );
   }
 
   return lines.join("\n");

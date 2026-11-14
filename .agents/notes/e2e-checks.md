@@ -16,6 +16,21 @@ E2E_NAV_TIMEOUT=120000 …                                                   # �
 Playwright 的 `webServer` 会把**所有**课件的 dev server 一次性起起来（单个实测 ≈550MB，69 门会把 16GB 机器撑爆），
 所以调度器自己按并发上限逐个起/停 server，课件列表自动发现，**新增课件不用登记**。
 
+### 只看警告与错误（`--warnings-only`）
+
+默认输出是「体检报告」：每门课件四行 ✅ 结论 + 一屏「留白明细」，全量 70 门约 2000 行，真正的 ⚠️ 会被淹掉。加这个开关就只留问题：
+
+```bash
+pnpm test:e2e --warnings-only                    # 只输出警告与错误（无问题的课件一个字都不打印）
+E2E_WARNINGS_ONLY=1 pnpm test:e2e                # 同义；CI / 脚本里用环境变量更顺手
+E2E_COURSE=1.x-vectors pnpm test:e2e --warnings-only
+```
+
+- 无问题的课件整段不打印（没有「▶ 已就绪」、没有 ✅、没有留白明细、也没有 Playwright 的 `Running 2 tests` / `2 passed` 进度行）；
+- 有问题的课件照旧完整打印 ⚠️ / ❌ / ⛔ 与定位信息，末尾一行给总体结论；
+- **范围头部仍保留**（「本次检查 N/M 门课件」）——只跑一部分时不能看起来像全绿；
+- 失败用例的报错由 `e2e/quiet-reporter.ts` 打印。自定义 reporter 必须自己转发 `onStdOut` / `onStdErr`：Playwright 只通过 reporter 输出 `console.log`，不转发的话 spec 里的警告会被整个吞掉（踩过）。
+
 ### 只跑受影响的课件（CI 默认行为）
 
 CI 的 e2e job 不再无条件全量：`scripts/e2e-affected.ts` 先按 diff 选出本次要跑的课件，再按页数均衡分成 1–6 片并行跑。

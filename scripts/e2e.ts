@@ -14,6 +14,8 @@
 // pnpm test:e2e                                    # 全部课件，并发 4
 // E2E_CONCURRENCY=2 pnpm test:e2e                  # 换并发上限（本机内存小就调小）
 // E2E_COURSE=5.1-curvilinear-motion pnpm test:e2e  # 只跑指定课件（逗号分隔，多个）
+// pnpm test:e2e --warnings-only                    # 只输出警告与错误（无问题的课件一个字都不打印）
+// E2E_WARNINGS_ONLY=1 pnpm test:e2e                # 同上；CI / 脚本里用环境变量更方便
 // ```
 //
 // 只跑两道门禁 spec（`design-tokens` / `layout-overflow`）。`shots`（截图助手，用 `pnpm shots`）与
@@ -44,6 +46,16 @@ const SERVER_LOG_LINES = 20;
 /** 并发上限（超过课件数时按课件数算） */
 const CONCURRENCY = Math.max(1, Number(process.env.E2E_CONCURRENCY ?? "4") || 4);
 
+// 只输出警告与错误（`--warnings-only`，或 CI 里更好写的 `E2E_WARNINGS_ONLY=1`）。
+// 全量 70 门课件的默认输出约 2000 行——留白明细、"✅ 无溢出"、Playwright 的进度行把真正的 ⚠️ 都埋了；
+// 开启后无问题的课件一行都不打印，只留失败/警告 + 最后一行总结。
+// 环境变量会传给子进程（spec 侧口径见 `e2e/report.ts` 的 `isWarningsOnly`）。
+const WARNINGS_ONLY =
+  process.argv.includes("--warnings-only") ||
+  /^(?:1|true|yes|on)$/iu.test((process.env.E2E_WARNINGS_ONLY ?? "").trim());
+
+if (WARNINGS_ONLY) process.env.E2E_WARNINGS_ONLY = "1";
+
 /** 一个课件的执行结果 */
 interface CourseResult {
   /** 课件目录名 */
@@ -57,8 +69,24 @@ interface CourseResult {
 /** 所有活着的子进程（收到 Ctrl-C 时统一收尸） */
 const liveChildren = new Set<ChildProcess>();
 
+// Playwright 自己的进度行（`Running N tests`、`[1/2] …`、dot 的点、`2 passed`）：
+// 静音模式下它们不是警告也不是错误，逐课件刷只会把真正的 ⚠️ 顶出屏幕。
+// 只匹配固定格式：Playwright 改版后最坏是多打印几行，不会吞掉报告内容。
+const PLAYWRIGHT_PROGRESS_PATTERNS = [
+  /^Running \d+ tests? using \d+ workers?/u,
+  /^\[\d+\/\d+\] /u,
+  /^[·.]+F?$/u,
+  /^\d+ (?:passed|failed|flaky|skipped|did not run)\b/u,
+];
+
+const isPlaywrightProgress = (line: string): boolean =>
+  PLAYWRIGHT_PROGRESS_PATTERNS.some((pattern) => pattern.test(line.trim()));
+
 const logLine = (slug: string, line: string): void => {
-  if (line.trim().length > 0) console.log(`[${slug}] ${line}`);
+  if (line.trim().length === 0) return;
+  if (WARNINGS_ONLY && isPlaywrightProgress(line)) return;
+
+  console.log(`[${slug}] ${line}`);
 };
 
 // 子进程输出逐行加前缀转发（并行时日志不串）
@@ -199,13 +227,16 @@ const runCourse = async (course: CourseTarget): Promise<CourseResult> => {
       return { slug: target.slug, passed: false, seconds: (Date.now() - startedAt) / 1000 };
     }
 
-    console.log(`▶ [${target.slug}] ${target.baseURL} 已就绪`);
+    // 静音模式：没有问题的课件整段不打印（就绪 + 通过都不是警告）；失败分支照常回显
+    if (!WARNINGS_ONLY) console.log(`▶ [${target.slug}] ${target.baseURL} 已就绪`);
     const code = await runPlaywright(target);
     const seconds = (Date.now() - startedAt) / 1000;
 
-    console.log(
-      `${code === 0 ? "✓" : "✗"} [${target.slug}] ${code === 0 ? "通过" : `失败（exit ${code}）`}，${seconds.toFixed(1)}s`,
-    );
+    if (code === 0) {
+      if (!WARNINGS_ONLY) console.log(`✓ [${target.slug}] 通过，${seconds.toFixed(1)}s`);
+    } else {
+      console.log(`✗ [${target.slug}] 失败（exit ${code}），${seconds.toFixed(1)}s`);
+    }
 
     return { slug: target.slug, passed: code === 0, seconds };
   } finally {
@@ -250,6 +281,17 @@ const runPool = async (courses: CourseTarget[], concurrency: number): Promise<Co
 // 打印汇总表
 const printSummary = (results: CourseResult[]): void => {
   const failed = results.filter((result) => !result.passed);
+
+  // 静音模式：**只列失败**——通过的课件在上面本来就不打印，这里再排一张全量表等于把输出重新灌满
+  if (WARNINGS_ONLY) {
+    console.log(
+      failed.length === 0
+        ? `\n✓ 全部 ${results.length} 个课件通过`
+        : `\n✗ ${failed.length} 个课件失败：${failed.map((item) => item.slug).join("、")}`,
+    );
+
+    return;
+  }
 
   console.log(`\n──────── E2E 汇总（并发 ${CONCURRENCY}）────────`);
 
@@ -307,14 +349,23 @@ const main = async (): Promise<void> => {
 
   if (selectionReason) console.log(`选课理由：${selectionReason}`);
 
-  console.log(
-    `E2E：本次检查 ${courses.length}/${allCourses.length} 门课件，并发上限 ${CONCURRENCY}（每个课件跑 ${SPEC_FILES.length} 个门禁 spec）`,
-  );
-  console.log(
-    courses.length < allCourses.length
-      ? `  （未覆盖的 ${allCourses.length - courses.length} 门课件本次不检查；基线见 E2E_SCOPE_BASELINE）`
-      : "  （全量）",
-  );
+  // 范围头部在静音模式下也保留：部分检查**不能**看起来像全绿（压缩成一行，避免占满屏幕）
+  if (WARNINGS_ONLY) {
+    console.log(
+      courses.length < allCourses.length
+        ? `E2E：本次检查 ${courses.length}/${allCourses.length} 门课件（未覆盖的 ${allCourses.length - courses.length} 门本次不检查，见 E2E_SCOPE_BASELINE）`
+        : `E2E：全量 ${courses.length} 门课件（每个 ${SPEC_FILES.length} 个门禁 spec，并发 ${CONCURRENCY}）`,
+    );
+  } else {
+    console.log(
+      `E2E：本次检查 ${courses.length}/${allCourses.length} 门课件，并发上限 ${CONCURRENCY}（每个课件跑 ${SPEC_FILES.length} 个门禁 spec）`,
+    );
+    console.log(
+      courses.length < allCourses.length
+        ? `  （未覆盖的 ${allCourses.length - courses.length} 门课件本次不检查；基线见 E2E_SCOPE_BASELINE）`
+        : "  （全量）",
+    );
+  }
 
   process.on("SIGINT", () => {
     console.log("\n收到 Ctrl-C，正在收掉 dev server…");

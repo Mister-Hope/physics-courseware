@@ -229,7 +229,7 @@ pnpm check:courses  # 校验根目录 courses.json（字段 / slug 唯一 / 目�
 pnpm style:audit    # 样式审计：仅建议（warn 不是 error），默认 exit 0，**不进 CI**
 pnpm slide          # 🔎 查/读某一页源码（省 token）
 pnpm shots          # 📸 批量截页图（自查视觉）
-pnpm test:e2e       # 端到端检查（四张表；CI 里唯一的版面门禁）
+pnpm test:e2e       # 端到端检查（四张表；CI 里唯一的版面门禁）；加 --warnings-only 只输出警告与错误
 pnpm test:e2e:affected --since origin/main  # 只跑受影响的课件（本地增量；CI 自动执行，见 notes/e2e-checks.md）
 pnpm build      # 构建入口网站 + 全部课件 → dist/
 pnpm lint           # oxlint --fix + oxfmt（slides.md 不参与格式化）

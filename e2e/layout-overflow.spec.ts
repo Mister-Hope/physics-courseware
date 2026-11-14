@@ -326,9 +326,15 @@ for (const course of listCourses()) {
         contentType: "application/json",
       });
 
-      console.log(
-        renderConsoleSummary(result, WHITESPACE_TOLERANCE, STABILITY_TOLERANCE, BLOCK_TOLERANCE),
+      // `--warnings-only` 下没有问题的课件返回空串：不打印空行，终端只剩警告与错误
+      const consoleSummary = renderConsoleSummary(
+        result,
+        WHITESPACE_TOLERANCE,
+        STABILITY_TOLERANCE,
+        BLOCK_TOLERANCE,
       );
+
+      if (consoleSummary) console.log(consoleSummary);
 
       const violationCount =
         checks.reduce((sum, check) => sum + check.violations.length, 0) +
@@ -357,10 +363,9 @@ for (const course of listCourses()) {
       if (stabilityOffenders.length > 0) {
         const summary = `${course.slug}：${shiftedSlides.length} 页（第 ${shiftedSlides.join("、")} 页）共 ${stabilityOffenders.length} 步存在点击位移，最大 ${maxStabilityShift(stability)}px`;
 
-        // 报告里标出来（Playwright 的 HTML / list 报告都能看到），终端也提示一句
+        // 报告里标出来（Playwright 的 HTML / list 报告都能看到）；
+        // 终端提示由 renderConsoleSummary 统一打印（带元素定位），这里不再重复一行
         testInfo.annotations.push({ type: "点击位移", description: summary });
-
-        if (!STRICT_STABILITY) console.warn(`   ⚠️ 点击时已可见元素被顶跑（仅警告）—— ${summary}`);
       }
 
       if (STRICT_STABILITY)
@@ -380,11 +385,9 @@ for (const course of listCourses()) {
       if (blockOffenders.length > 0) {
         const summary = `${course.slug}：${blockSlides.length} 页（第 ${blockSlides.join("、")} 页）共 ${blockOffenders.length} 步正文越出 .page-grow 可用区域（共检查 ${result.blockFitSteps.length} 个「页 × 步」${blockIgnoredCount ? `，另有 ${blockIgnoredCount} 个元素命中白名单已忽略` : ""}）`;
 
-        // 报告里标出来（Playwright 的 HTML / list 报告都能看到），终端也提示一句
+        // 报告里标出来（Playwright 的 HTML / list 报告都能看到）；
+        // 终端提示由 renderConsoleSummary 统一打印（带元素定位），这里不再重复一行
         testInfo.annotations.push({ type: "正文越界", description: summary });
-
-        if (!STRICT_BLOCK_FIT)
-          console.warn(`   ⚠️ 正文越出 .page-grow 可用区域（仅警告）—— ${summary}`);
       }
 
       if (STRICT_BLOCK_FIT)

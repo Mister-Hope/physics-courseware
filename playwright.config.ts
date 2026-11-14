@@ -4,6 +4,7 @@ import { defineConfig } from "@playwright/test";
 
 import { playwrightRunDir } from "./e2e/artifacts";
 import { listCourses } from "./e2e/courses";
+import { isWarningsOnly } from "./e2e/report";
 import { VIEWPORT } from "./e2e/slidev-driver";
 
 const courses = listCourses();
@@ -28,7 +29,8 @@ export default defineConfig({
   timeout: 20 * 60_000,
   outputDir: path.join(RUN_DIR, "test-results"),
   reporter: [
-    ["list"],
+    // `--warnings-only`：通过的用例不再逐条刷进度，只保留失败报错（见 `e2e/quiet-reporter.ts`）
+    isWarningsOnly() ? ["./e2e/quiet-reporter.ts"] : ["list"],
     ["html", { outputFolder: path.join(RUN_DIR, "html-report"), open: "never" }],
   ],
   use: {

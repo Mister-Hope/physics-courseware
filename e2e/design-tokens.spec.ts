@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 import { listCourses } from "./courses";
+import { isWarningsOnly } from "./report";
 import { openDeck } from "./slidev-driver";
 
 /**
@@ -97,8 +98,10 @@ for (const course of listCourses()) {
       "SVG 字号契约被破坏：见 workspace/shared/styles/common.css 的「SVG 一律按 16px 基准绘制」段落",
     ).toEqual([]);
 
-    console.log(
-      `🎯 ${course.slug}：html ${measured.html}｜SVG 基准 ${measured.svgBase}｜属性/内联样式全部按书写值生效`,
-    );
+    // `--warnings-only` 下这行"一切正常"的体检结论属噪音，不打印
+    if (!isWarningsOnly())
+      console.log(
+        `🎯 ${course.slug}：html ${measured.html}｜SVG 基准 ${measured.svgBase}｜属性/内联样式全部按书写值生效`,
+      );
   });
 }
