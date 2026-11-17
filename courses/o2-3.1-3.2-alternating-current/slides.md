@@ -133,12 +133,12 @@ clicks: 4
 
 <div class="step-item" v-click="1">
 <div class="step-no">1</div>
-<div><Latex tex="t=0" /> 时线圈处于中性面，<Latex tex="\theta=\omega t" />。<br><Latex tex="\theta" /> 为线圈平面与中性面的夹角。设 <Latex tex="AB=l" />、<Latex tex="AD=d" />，<br>则 <Latex tex="v=\frac{\omega d}{2}" />，分速度 <Latex tex="v_\perp=v\sin\theta" />。</div>
+<div><Latex tex="t=0" /> 时线圈处于中性面，<Latex tex="\theta=\omega t" />。<br><Latex tex="\theta" /> 为线圈从中性面转过的角度。设 <Latex tex="AB=l" />、<Latex tex="AD=d" />，轴过 <Latex tex="AD" /> 中点，<br>则 <Latex tex="AB" />、<Latex tex="CD" /> 的速度 <Latex tex="v=\frac{\omega d}{2}" />，分速度 <Latex tex="v_\perp=v\sin\theta" />。</div>
 </div>
 
 <div class="step-item" v-click="2">
 <div class="step-no">2</div>
-<div>两条边串联：<Latex tex="e=2Blv\sin\theta=2Bl\cdot\frac{\omega d}{2}\sin\theta=\omega BS\sin\omega t" />。</div>
+<div>两条边串联：<Latex tex="e=2Blv\sin\theta=2Bl\cdot\frac{\omega d}{2}\sin\theta=\omega Bld\sin\theta=\omega BS\sin\omega t" />（<Latex tex="S=ld" />）。</div>
 </div>
 
 <div class="step-item" v-click="3">

@@ -86,7 +86,9 @@
       >
         CD
       </text>
-      <text x="80" y="174" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-size="12" text-anchor="middle">θ = {{ panel.angle }}</text>
+      <text x="80" y="174" fill="var(--c-text-dim)" font-family="KaTeX_Main" font-size="12" text-anchor="middle">
+        <tspan font-family="KaTeX_Math" font-style="italic">θ</tspan><tspan> = {{ panel.angle }}</tspan>
+      </text>
       <text x="80" y="196" fill="var(--c-text)" font-size="16" text-anchor="middle">{{ panel.no }}</text>
       <g :visibility="step >= 1 ? 'visible' : 'hidden'">
         <text x="80" y="220" fill="var(--c-accent)" font-family="KaTeX_Main" font-size="14" text-anchor="middle">

@@ -1,54 +1,51 @@
 <!--
-  第 4 页：交流发电机结构。N、S 极之间的矩形线圈绕水平轴转动，
+  第 4 页：交流发电机结构。N、S 极上下放置，矩形线圈绕水平轴转动，
   线圈两端接滑环 K、L，电刷 E、F 经外电路负载 R 闭合。
   只画结构，不画受力与速度（那些留给第 5 页的四位置图）。
 -->
 <template>
-  <svg viewBox="0 0 680 272" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="交流发电机结构：线圈在磁场中转动，经滑环、电刷与外电路负载 R 连接">
+  <svg
+    viewBox="0 0 680 272"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="交流发电机结构：磁极上下放置，线圈绕水平轴转动，经滑环、电刷与外电路负载 R 连接"
+  >
     <rect
-      x="34"
-      y="58"
-      width="58"
-      height="184"
-      rx="7"
+      x="80"
+      y="6"
+      width="520"
+      height="32"
+      rx="6"
       fill="var(--c-danger)"
       fill-opacity="0.12"
       stroke="var(--c-danger)"
       stroke-opacity="0.45"
       stroke-width="1.4"
     />
-    <text x="63" y="154" fill="var(--c-danger)" font-size="25" font-weight="700" text-anchor="middle">N</text>
+    <text x="340" y="29" fill="var(--c-danger)" font-size="22" font-weight="700" text-anchor="middle">N</text>
     <rect
-      x="588"
-      y="58"
-      width="58"
-      height="184"
-      rx="7"
+      x="80"
+      y="226"
+      width="520"
+      height="30"
+      rx="6"
       fill="var(--c-accent-2)"
       fill-opacity="0.12"
       stroke="var(--c-accent-2)"
       stroke-opacity="0.45"
       stroke-width="1.4"
     />
-    <text x="617" y="154" fill="var(--c-accent-2)" font-size="25" font-weight="700" text-anchor="middle">S</text>
+    <text x="340" y="249" fill="var(--c-accent-2)" font-size="22" font-weight="700" text-anchor="middle">S</text>
     <CourseArrow
-      v-for="y in [110, 202]"
-      :key="`field-l-${y}`"
-      :from="{ x: 102, y }"
-      :to="{ x: 232, y }"
+      v-for="x in [110, 590]"
+      :key="`field-${x}`"
+      :from="{ x, y: 46 }"
+      :to="{ x, y: 220 }"
       stroke="var(--c-text-dim)"
       stroke-width="1.6"
       stroke-dasharray="6 5"
     />
-    <CourseArrow
-      v-for="y in [110, 202]"
-      :key="`field-r-${y}`"
-      :from="{ x: 408, y }"
-      :to="{ x: 578, y }"
-      stroke="var(--c-text-dim)"
-      stroke-width="1.6"
-      stroke-dasharray="6 5"
-    />
+    <text x="122" y="62" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">B</text>
     <line x1="190" y1="156" x2="470" y2="156" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.5" />
     <text x="202" y="147" fill="var(--c-text-dim)" font-size="11">转轴</text>
     <polygon
@@ -82,6 +79,6 @@
     <rect x="546" y="150" width="12" height="40" rx="2" fill="var(--c-bg)" stroke="var(--c-accent)" stroke-width="1.4" />
     <text x="566" y="175" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="14">R</text>
     <polyline points="552,190 552,240 520,240 520,207 506,207" fill="none" stroke="var(--c-accent)" stroke-width="1.4" opacity="0.85" />
-    <text x="320" y="260" fill="var(--c-text-dim)" font-size="12" text-anchor="middle">K、L：滑环　　E、F：电刷　　R：外电路负载</text>
+    <text x="320" y="268" fill="var(--c-text-dim)" font-size="11" text-anchor="middle">K、L：滑环　　E、F：电刷　　R：外电路负载</text>
   </svg>
 </template>
