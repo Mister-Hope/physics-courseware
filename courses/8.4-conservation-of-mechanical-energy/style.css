@@ -17,26 +17,8 @@
    段落的 1em 上下外边距（22px×2）在一页 4–5 块上就是 ~200px，正是这几页被顶出画布的根因。
    这里把字号/行高钉回 common.css 给 `p` 的口径（1rem / 1.55），
    否则裸 div 会继承主题的 1.1rem，造成同一课件页与页之间字号不一致。
-   `:not([class])` 只命中正文块，不动 `.ask` / 气泡 / `.fig-ph` 这些自带 class 的原子。 */
+   `:not([class])` 只命中正文块，不动 `.ask` / 气泡这些自带 class 的原子。 */
 .page-grow > div:not([class]) {
   font-size: 1rem;
   line-height: 1.55;
-}
-
-/* 第一版审查用：插画与交互均未实现，先以虚线框 + 文字说明占位。
-   占位只写"要画什么"，限 1–2 行；图/交互做出来之后本类与页面里的占位块一起删掉。 */
-.fig-ph {
-  display: flex;
-  align-items: center;
-
-  min-height: 2.9rem;
-  padding: 0.4rem 0.8rem;
-  border: 1px dashed var(--c-border-glow);
-  border-radius: var(--radius-lg);
-
-  background: var(--c-surface);
-  color: var(--c-text-dim);
-
-  font-size: 0.82rem;
-  line-height: 1.4;
 }

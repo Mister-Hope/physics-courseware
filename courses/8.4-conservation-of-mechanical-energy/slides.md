@@ -357,11 +357,7 @@ layout: exercise-split
 
 <template v-slot:fig>
 
-<div class="fig-ph" style="width: 260px;">
-
-【图占位】单摆：悬点、细线、小球在最高点、偏角、摆长。
-
-</div>
+<PendulumExampleSvg />
 
 </template>
 
@@ -396,11 +392,7 @@ layout: exercise-split
 
 <template v-slot:fig>
 
-<div class="fig-ph" style="width: 260px;">
-
-【图占位】光滑曲面：A 标 h1、v1，B 标 h2、v2。
-
-</div>
+<SmoothTrackExampleSvg />
 
 </template>
 
@@ -429,11 +421,7 @@ layout: exercise-split
 
 <template v-slot:fig>
 
-<div class="fig-ph" style="width: 260px;">
-
-【图占位】斜抛石块：抛出点、初速度方向与仰角、抛出高度、落地点。
-
-</div>
+<ProjectileThrowSvg />
 
 </template>
 
@@ -462,11 +450,7 @@ layout: exercise-split
 
 <template v-slot:fig>
 
-<div class="fig-ph" style="width: 130px;">
-
-【图占位】竖直弹簧弹起小球：A 压缩、B 原长、C 最高点。
-
-</div>
+<SpringBallThreePointsSvg />
 
 </template>
 

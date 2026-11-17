@@ -23,11 +23,7 @@ chapter: "第八章 机械能守恒定律"
 subtitle: "实验思路 · 纸带测量 · 数据与误差"
 ---
 
-<div class="fig-ph" style="max-width: 620px; margin: 0 auto;">
-
-【图占位】封面装饰：一条下落纸带（点距渐增）与两个能量标注。
-
-</div>
+<CoverDecorationSvg />
 
 ---
 title: 定律凭什么可信
@@ -249,11 +245,7 @@ clicks: 3
 
 <div class="page-grow page-grow-tight flex flex-col">
 
-<div class="fig-ph">
-
-【图占位】纸带：O、A、B、C、D 与到 O 的 <Latex tex="h_A" />、<Latex tex="h_B" />、<Latex tex="h_C" /> 尺寸线。
-
-</div>
+<TapeFromStartSvg />
 
 <div class="ask">
 
@@ -288,11 +280,7 @@ clicks: 3
 
 <div class="page-grow page-grow-tight flex flex-col">
 
-<div class="fig-ph">
-
-【图占位】纸带：A、B、C 三点、A 到 C 的距离 <Latex tex="h_C - h_A" /> 与历时 <Latex tex="2T" />。
-
-</div>
+<TapePointsSvg />
 
 <div class="ask">
 
@@ -458,11 +446,7 @@ clicks: 3
 
 <div class="page-grow page-grow-tight flex flex-col">
 
-<div class="fig-ph">
-
-【图占位】倾斜气垫导轨：滑块、遮光条、光电门。
-
-</div>
+<AirTrackSvg />
 
 <div class="ask">
 
