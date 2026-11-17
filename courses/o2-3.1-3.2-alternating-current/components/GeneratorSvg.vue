@@ -48,14 +48,9 @@
     <text x="122" y="62" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">B</text>
     <line x1="190" y1="156" x2="470" y2="156" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.5" />
     <text x="202" y="147" fill="var(--c-text-dim)" font-size="11">转轴</text>
-    <polygon
-      points="248,100 392,88 392,212 248,224"
-      fill="var(--c-accent)"
-      fill-opacity="0.07"
-      stroke="var(--c-accent)"
-      stroke-width="4"
-      stroke-linejoin="round"
-    />
+    <polygon points="248,100 392,88 392,212 248,224" fill="var(--c-accent)" fill-opacity="0.07" stroke="none" />
+    <polyline points="248,100 392,88" fill="none" stroke="var(--c-accent)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+    <polyline points="392,212 248,224 248,100" fill="none" stroke="var(--c-accent)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
     <text x="320" y="76" fill="var(--c-text-dim)" font-size="12" text-anchor="middle">矩形线圈</text>
     <text x="238" y="96" fill="var(--c-text)" font-family="KaTeX_Math" font-style="italic" font-size="16" text-anchor="end">A</text>
     <text x="402" y="84" fill="var(--c-text)" font-family="KaTeX_Math" font-style="italic" font-size="16">B</text>
@@ -78,7 +73,7 @@
     <polyline points="486,105 552,105 552,150" fill="none" stroke="var(--c-accent)" stroke-width="1.4" opacity="0.85" />
     <rect x="546" y="150" width="12" height="40" rx="2" fill="var(--c-bg)" stroke="var(--c-accent)" stroke-width="1.4" />
     <text x="566" y="175" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="14">R</text>
-    <polyline points="552,190 552,240 520,240 520,207 506,207" fill="none" stroke="var(--c-accent)" stroke-width="1.4" opacity="0.85" />
+    <polyline points="552,190 552,207 506,207" fill="none" stroke="var(--c-accent)" stroke-width="1.4" opacity="0.85" />
     <text x="320" y="268" fill="var(--c-text-dim)" font-size="11" text-anchor="middle">K、L：滑环　　E、F：电刷　　R：外电路负载</text>
   </svg>
 </template>

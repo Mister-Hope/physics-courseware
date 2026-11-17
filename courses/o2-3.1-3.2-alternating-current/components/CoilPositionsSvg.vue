@@ -7,8 +7,8 @@
   <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="线圈转动的四个位置：中性面、与磁感线平行面、中性面、与磁感线平行面">
     <text x="350" y="12" fill="var(--c-text-dim)" font-size="12" text-anchor="middle">沿转轴方向看，线圈投影成一条线段（逆时针转动）</text>
     <g v-for="(panel, index) in panels" :key="panel.no" :transform="`translate(${10 + index * 170}, 0)`">
-      <CourseArrow :from="{ x: 16, y: 30 }" :to="{ x: 144, y: 30 }" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="6 5" />
-      <text v-if="index === 0" x="80" y="17" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="13" text-anchor="middle">B</text>
+      <CourseArrow :from="{ x: 80, y: 22 }" :to="{ x: 80, y: 44 }" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="6 5" />
+      <text v-if="index === 0" x="91" y="35" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="13">B</text>
       <line v-if="panel.coil === 'v'" x1="80" y1="50" x2="80" y2="160" stroke="var(--c-accent)" stroke-width="4.5" stroke-linecap="round" />
       <line v-else x1="25" y1="105" x2="135" y2="105" stroke="var(--c-accent)" stroke-width="4.5" stroke-linecap="round" />
       <circle v-if="panel.coil === 'v'" cx="80" cy="50" r="4" fill="var(--c-accent)" />
@@ -114,9 +114,9 @@ interface Panel {
 }
 
 const panels: Panel[] = [
-  { no: "甲", coil: "v", ab: "top", angle: "0°", e: " = 0", face: "中性面" },
-  { no: "乙", coil: "h", ab: "left", angle: "90°", e: " 最大", face: "与磁感线平行" },
-  { no: "丙", coil: "v", ab: "bottom", angle: "180°", e: " = 0", face: "中性面" },
-  { no: "丁", coil: "h", ab: "right", angle: "270°", e: " 最大（反向）", face: "与磁感线平行" },
+  { no: "甲", coil: "h", ab: "right", angle: "0°", e: " = 0", face: "中性面" },
+  { no: "乙", coil: "v", ab: "top", angle: "90°", e: " 最大", face: "与磁感线平行" },
+  { no: "丙", coil: "h", ab: "left", angle: "180°", e: " = 0", face: "中性面" },
+  { no: "丁", coil: "v", ab: "bottom", angle: "270°", e: " 最大（反向）", face: "与磁感线平行" },
 ];
 </script>
