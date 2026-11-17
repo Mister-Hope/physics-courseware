@@ -5,6 +5,7 @@
 -->
 <template>
   <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <text x="350" y="12" fill="var(--c-text-dim)" font-size="12" text-anchor="middle">沿转轴方向看，线圈投影成一条线段</text>
     <g v-for="(panel, index) in panels" :key="panel.no" :transform="`translate(${10 + index * 170}, 0)`">
       <CourseArrow :from="{ x: 16, y: 30 }" :to="{ x: 144, y: 30 }" stroke="var(--c-text-dim)" stroke-width="1.5" stroke-dasharray="6 5" />
       <text v-if="index === 0" x="80" y="17" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="13" text-anchor="middle">B</text>

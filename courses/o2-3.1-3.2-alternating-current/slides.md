@@ -167,11 +167,11 @@ clicks: 1
 <div class="stack">
 
 <DefinitionBox term="周期" tone="gold">
-<div>交变电流完成一次<span class="def-term">周期性变化</span>所需的时间，单位 <Latex tex="\text{s}" />。</div>
+<div>交变电流完成一次<span class="def-term">周期性变化</span>所需的时间，<br>单位 <Latex tex="\text{s}" />。</div>
 </DefinitionBox>
 
 <DefinitionBox term="频率" tone="blue">
-<div>交变电流在 <Latex tex="1\ \text{s}" /> 内完成周期性变化的<span class="def-term">次数</span>，单位 <Latex tex="\text{Hz}" />。</div>
+<div>交变电流在 <Latex tex="1\ \text{s}" /> 内完成周期性变化的<span class="def-term">次数</span>，<br>单位 <Latex tex="\text{Hz}" />。</div>
 </DefinitionBox>
 
 </div>
@@ -180,9 +180,9 @@ clicks: 1
 
 <div><Latex tex="f=\frac{1}{T}" />，<Latex tex="\omega=2\pi f=\frac{2\pi}{T}" />。</div>
 
-<div class="ask">我国电网 <Latex tex="f=50\ \text{Hz}" />，<Latex tex="T" /> 是多少？<Latex tex="1\ \text{s}" /> 内电流方向变化几次？</div>
+<div class="ask">我国电网 <Latex tex="f=50\ \text{Hz}" />，<br><Latex tex="T" /> 是多少？<br><Latex tex="1\ \text{s}" /> 内方向变化几次？</div>
 
-<div class="tip-hint" v-click="1"><Latex tex="T=0.02\ \text{s}" />；每个周期方向变化 <Latex tex="2" /> 次，<Latex tex="1\ \text{s}" /> 内变化 <Latex tex="100" /> 次。</div>
+<div class="tip-hint" v-click="1"><Latex tex="T=0.02\ \text{s}" />；<br>每周期方向变化 <Latex tex="2" /> 次，<br><Latex tex="1\ \text{s}" /> 内变化 <Latex tex="100" /> 次。</div>
 
 </div>
 
@@ -209,7 +209,7 @@ clicks: 2
 </DefinitionBox>
 
 <DefinitionBox term="有效值" tone="gold">
-<div>让交变电流与直流分别通过相同电阻，在一个周期内产生<span class="def-term">相同热量</span>，该直流的数值就是交变电流的有效值。</div>
+<div>让交变电流与恒定电流分别通过相同电阻，在一个周期内产生<span class="def-term">相同热量</span>，该恒定电流的数值就是有效值。</div>
 </DefinitionBox>
 
 </div>
@@ -238,9 +238,9 @@ clicks: 3
 
 <div class="ask">我国电网 <Latex tex="220\ \text{V}" /> 是峰值还是有效值？</div>
 
-<div class="info-hint" v-click="1"><Latex tex="f=50\ \text{Hz}" />，<Latex tex="T=0.02\ \text{s}" />，<Latex tex="\omega=100\pi\ \text{rad/s}" />。</div>
+<div class="info-hint" v-click="1"><Latex tex="f=50\ \text{Hz}" />，<Latex tex="T=0.02\ \text{s}" />。<br><Latex tex="\omega=100\pi\ \text{rad/s}" />。</div>
 
-<div class="tip-hint" v-click="2"><Latex tex="220\ \text{V}" /> 是有效值，峰值 <Latex tex="220\sqrt{2}\approx311\ \text{V}" />；电表读数、额定值都是有效值。</div>
+<div class="tip-hint" v-click="2"><Latex tex="220\ \text{V}" /> 是有效值，<br>峰值 <Latex tex="220\sqrt{2}\approx311\ \text{V}" />；<br>电表读数、额定值都是有效值。</div>
 
 </div>
 
@@ -248,9 +248,9 @@ clicks: 3
 
 <div class="mini-title">电容器耐压</div>
 
-<div class="ask">耐压 <Latex tex="10\ \text{V}" /> 的电容器，能接 <Latex tex="9\ \text{V}" /> 的正弦交流吗？</div>
+<div class="ask">耐压 <Latex tex="10\ \text{V}" /> 的电容器，<br>能接 <Latex tex="9\ \text{V}" /> 的正弦交流吗？</div>
 
-<div class="warn-hint" v-click="3">不能。<Latex tex="9\ \text{V}" /> 是有效值，峰值 <Latex tex="9\sqrt{2}\approx12.7\ \text{V}" />，超过耐压值。</div>
+<div class="warn-hint" v-click="3">不能。<Latex tex="9\ \text{V}" /> 是有效值，<br>峰值 <Latex tex="9\sqrt{2}\approx12.7\ \text{V}" />，<br>超过耐压值。</div>
 
 </div>
 
@@ -303,7 +303,7 @@ title: 小结
 
 <div>线圈在匀强磁场中匀速转动，磁通量周期性变化。</div>
 
-<div>中性面：<Latex tex="\Phi" /> 最大、<Latex tex="e=0" />；每经过一次，电流方向改变一次。</div>
+<div>中性面：<Latex tex="\Phi" /> 最大、<Latex tex="e=0" />；每经过中性面一次，电流方向改变一次。</div>
 
 <div><Latex tex="e=E_m\sin\omega t" />，<Latex tex="E_m=N\omega BS" />。</div>
 
