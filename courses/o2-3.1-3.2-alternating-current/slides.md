@@ -18,7 +18,7 @@ fonts:
 defaults:
   layout: base-flex
   transition: fade
-chapter-no: "3.1·3.2"
+chapter-no: "3.1 · 3.2"
 chapter: "第三章 交变电流"
 subtitle: "3.1 交变电流 · 3.2 交变电流的描述"
 ---
@@ -37,7 +37,7 @@ clicks: 1
 
 <WaveCompare />
 
-<div class="tip-hint" v-click="1">甲平直、方向不变，是电池的直流；乙的大小和方向都按正弦规律周期变化，是交变电流。</div>
+<div class="tip-hint" v-click="1">甲平直、方向不变，是电池的直流；乙的大小和方向都按正弦规律周期变化，<br>是交变电流。</div>
 
 </div>
 
@@ -65,7 +65,7 @@ clicks: 2
 
 </div>
 
-<div class="tip-hint" v-click="2">判断是不是交变电流，看方向是否变化，不看大小是否变化。</div>
+<div class="tip-hint" v-click="2">不是。判断是不是交变电流，看方向是否变化；方向不变就是直流。</div>
 
 </div>
 
@@ -133,7 +133,7 @@ clicks: 4
 
 <div class="step-item" v-click="1">
 <div class="step-no">1</div>
-<div><Latex tex="t=0" /> 时线圈处于中性面，<Latex tex="\theta=\omega t" />。设 <Latex tex="AB=l" />、<Latex tex="AD=d" />，则 <Latex tex="v=\frac{\omega d}{2}" />。<br>分速度 <Latex tex="v_\perp=v\sin\theta" />。</div>
+<div><Latex tex="t=0" /> 时线圈处于中性面，<Latex tex="\theta=\omega t" />。<br><Latex tex="\theta" /> 为线圈平面与中性面的夹角。设 <Latex tex="AB=l" />、<Latex tex="AD=d" />，<br>则 <Latex tex="v=\frac{\omega d}{2}" />，分速度 <Latex tex="v_\perp=v\sin\theta" />。</div>
 </div>
 
 <div class="step-item" v-click="2">
@@ -209,7 +209,7 @@ clicks: 2
 </DefinitionBox>
 
 <DefinitionBox term="有效值" tone="gold">
-<div>让交变电流与恒定电流分别通过相同电阻，在一个周期内产生<span class="def-term">相同热量</span>，该恒定电流的数值就是有效值。</div>
+<div>让交变电流与恒定电流分别通过相同电阻，在一个周期内产生<span class="def-term">相同热量</span>，该恒定电流的数值就是交变电流的有效值。</div>
 </DefinitionBox>
 
 </div>
@@ -218,7 +218,7 @@ clicks: 2
 
 <div class="important-hint">正弦式：<Latex tex="I=\frac{I_m}{\sqrt{2}}" />，<Latex tex="U=\frac{U_m}{\sqrt{2}}" />。</div>
 
-<div class="warn-hint">只适用于正弦式交变电流。</div>
+<div class="warn-hint">非正弦式不能直接套用。</div>
 
 </div>
 
@@ -227,20 +227,18 @@ clicks: 2
 ---
 layout: base-flex
 title: 有效值与电容器
-clicks: 3
+clicks: 2
 ---
 
 <div class="page-grow">
 
-<div class="half-grid">
+<div class="half-grid" style="align-items: start">
 
 <div class="stack">
 
 <div class="ask">我国电网 <Latex tex="220\ \text{V}" /> 是峰值还是有效值？</div>
 
-<div class="info-hint" v-click="1"><Latex tex="f=50\ \text{Hz}" />，<Latex tex="T=0.02\ \text{s}" />。<br><Latex tex="\omega=100\pi\ \text{rad/s}" />。</div>
-
-<div class="tip-hint" v-click="2"><Latex tex="220\ \text{V}" /> 是有效值，<br>峰值 <Latex tex="220\sqrt{2}\approx311\ \text{V}" />；<br>电表读数、额定值都是有效值。</div>
+<div class="tip-hint" v-click="1"><Latex tex="220\ \text{V}" /> 是有效值，<br>峰值 <Latex tex="220\sqrt{2}\approx311\ \text{V}" />；<br>电表读数、额定值都是有效值。</div>
 
 </div>
 
@@ -250,7 +248,7 @@ clicks: 3
 
 <div class="ask">耐压 <Latex tex="10\ \text{V}" /> 的电容器，<br>能接 <Latex tex="9\ \text{V}" /> 的正弦交流吗？</div>
 
-<div class="warn-hint" v-click="3">不能。<Latex tex="9\ \text{V}" /> 是有效值，<br>峰值 <Latex tex="9\sqrt{2}\approx12.7\ \text{V}" />，<br>超过耐压值。</div>
+<div class="warn-hint" v-click="2">不能。<Latex tex="9\ \text{V}" /> 是有效值，<br>峰值 <Latex tex="9\sqrt{2}\approx12.7\ \text{V}" />，<br>超过耐压值。</div>
 
 </div>
 
@@ -291,8 +289,6 @@ layout: base-flex
 title: 小结
 ---
 
-# 小结
-
 <div class="page-grow">
 
 <div class="half-grid">
@@ -301,9 +297,9 @@ title: 小结
 
 <div class="mini-title">产生与变化</div>
 
-<div>线圈在匀强磁场中匀速转动，磁通量周期性变化。</div>
+<div>线圈在匀强磁场中匀速转动，<br>磁通量周期性变化。</div>
 
-<div>中性面：<Latex tex="\Phi" /> 最大、<Latex tex="e=0" />；每经过中性面一次，电流方向改变一次。</div>
+<div>中性面：<Latex tex="\Phi" /> 最大、<Latex tex="e=0" />；<br>每经过中性面一次，<br>电流方向改变一次。</div>
 
 <div><Latex tex="e=E_m\sin\omega t" />，<Latex tex="E_m=N\omega BS" />。</div>
 
@@ -317,7 +313,7 @@ title: 小结
 
 <div>正弦式：<Latex tex="I=\frac{I_m}{\sqrt{2}}" />，<Latex tex="U=\frac{U_m}{\sqrt{2}}" />。</div>
 
-<div><Latex tex="220\ \text{V}" /> 是有效值，峰值约 <Latex tex="311\ \text{V}" />；耐压看峰值。</div>
+<div><Latex tex="220\ \text{V}" /> 是有效值，峰值约 <Latex tex="311\ \text{V}" />；<br>耐压看峰值。</div>
 
 </div>
 

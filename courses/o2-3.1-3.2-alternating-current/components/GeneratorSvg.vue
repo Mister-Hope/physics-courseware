@@ -1,10 +1,10 @@
 <!--
   第 4 页：交流发电机结构。N、S 极之间的矩形线圈绕水平轴转动，
-  线圈两端接滑环 K、L，电刷 E、F 把电流引向外电路。
+  线圈两端接滑环 K、L，电刷 E、F 经外电路负载 R 闭合。
   只画结构，不画受力与速度（那些留给第 5 页的四位置图）。
 -->
 <template>
-  <svg viewBox="0 0 680 272" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <svg viewBox="0 0 680 272" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="交流发电机结构：线圈在磁场中转动，经滑环、电刷与外电路负载 R 连接">
     <rect
       x="34"
       y="58"
@@ -78,6 +78,10 @@
     <circle cx="506" cy="207" r="2.6" fill="none" stroke="var(--c-text-dim)" stroke-width="1.3" />
     <text x="468" y="122" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14" text-anchor="end">E</text>
     <text x="524" y="202" fill="var(--c-text-dim)" font-family="KaTeX_Math" font-style="italic" font-size="14">F</text>
-    <text x="320" y="260" fill="var(--c-text-dim)" font-size="12" text-anchor="middle">K、L：滑环　　E、F：电刷</text>
+    <polyline points="486,105 552,105 552,150" fill="none" stroke="var(--c-accent)" stroke-width="1.4" opacity="0.85" />
+    <rect x="546" y="150" width="12" height="40" rx="2" fill="var(--c-bg)" stroke="var(--c-accent)" stroke-width="1.4" />
+    <text x="566" y="175" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="14">R</text>
+    <polyline points="552,190 552,240 520,240 520,207 506,207" fill="none" stroke="var(--c-accent)" stroke-width="1.4" opacity="0.85" />
+    <text x="320" y="260" fill="var(--c-text-dim)" font-size="12" text-anchor="middle">K、L：滑环　　E、F：电刷　　R：外电路负载</text>
   </svg>
 </template>
