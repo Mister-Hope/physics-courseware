@@ -11,7 +11,7 @@
       :ticks="ticks"
       :curves="fluxCurves"
       :labels="fluxLabels"
-      :view="{ width: 860, height: 150 }"
+      :view="{ width: 860, height: 300 }"
     />
     <CoordAxes
       :x-range="[0, X_MAX]"
@@ -21,7 +21,7 @@
       :ticks="bottomTicks"
       :curves="emfCurves"
       :labels="emfLabels"
-      :view="{ width: 860, height: 170 }"
+      :view="{ width: 860, height: 320 }"
     />
   </div>
 </template>
@@ -42,30 +42,29 @@ const bottomTicks = {
   origin: true,
 };
 
-const guideFlux = {
+const makeGuide = (
+  x: number,
+): {
+  points: { x: number; y: number }[];
+  color: string;
+  width: number;
+  dashed: boolean;
+  opacity: number;
+} => ({
   points: [
-    { x: PI / 2, y: -1.5 },
-    { x: PI / 2, y: 1.5 },
+    { x, y: -1.5 },
+    { x, y: 1.5 },
   ],
   color: "var(--c-text-dim)",
   width: 1.2,
   dashed: true,
   opacity: 0.5,
-};
+});
 
-const guideEmf = {
-  points: [
-    { x: PI / 2, y: -1.5 },
-    { x: PI / 2, y: 1.5 },
-  ],
-  color: "var(--c-text-dim)",
-  width: 1.2,
-  dashed: true,
-  opacity: 0.5,
-};
+const guides = [makeGuide(PI / 2), makeGuide(PI), makeGuide((3 * PI) / 2)];
 
 const fluxCurves = [
-  guideFlux,
+  ...guides,
   {
     formula: (x: number): number => Math.cos(x),
     color: "var(--c-accent)",
@@ -74,7 +73,7 @@ const fluxCurves = [
 ];
 
 const emfCurves = [
-  guideEmf,
+  ...guides,
   {
     formula: (x: number): number => Math.sin(x),
     color: "var(--c-accent-2)",
@@ -163,7 +162,7 @@ const emfLabels = [
     y: 0,
     tex: "2T",
     anchor: "bottom" as const,
-    dx: -10,
+    dx: -45,
     dy: 22,
     size: 15,
     color: "var(--c-text-dim)",

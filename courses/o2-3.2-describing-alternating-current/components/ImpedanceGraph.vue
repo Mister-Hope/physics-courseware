@@ -12,7 +12,7 @@
       :ticks="{ x: [], y: [], labels: false, origin: false }"
       :curves="curves"
       :labels="labels"
-      :view="{ width: 700, height: 280 }"
+      :view="{ width: 700, height: 380 }"
     />
   </div>
 </template>

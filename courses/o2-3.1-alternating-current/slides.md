@@ -74,7 +74,7 @@ clicks: 2
 <div class="ask">恒定电流与直流是什么关系？</div>
 <div class="stack" v-click="1">
 <DefinitionBox term="恒定电流" tone="gold"><div>大小和方向都<span class="def-term">不随时间变化</span>的电流。</div></DefinitionBox>
-<div class="figure" style="width: 72%; margin-inline: auto"><CurrentSetsSvg /></div>
+<div class="figure" style="width: 68%; margin-inline: auto"><CurrentSetsSvg /></div>
 </div>
 <div class="tip-hint" v-click="2">直流只要求方向不变；恒定电流还要求大小不变。所以恒定电流一定是直流，直流不一定是恒定电流。</div>
 
@@ -252,23 +252,11 @@ clicks: 1
 
 <div class="page-grow page-grow-tight">
 <div class="ask ask-lead"><Latex tex="e" /> 和 <Latex tex="\Phi" /> 的图像有什么关系？谁超前？</div>
-<div class="figure" style="width: 92%; margin-inline: auto"><FluxEmfGraph /></div>
-<div class="tip-hint" v-click="1"><Latex tex="\Phi" /> 最大时 <Latex tex="e=0" />，<Latex tex="\Phi" /> 为零时 <Latex tex="e" /> 最大，两者相差 <Latex tex="90^\circ" />。图中 <Latex tex="\Phi" /> 超前 <Latex tex="e" /> <Latex tex="90^\circ" />；若把电流正方向反过来，<Latex tex="e" /> 图上下翻转，看起来 <Latex tex="e" /> 超前，但相位差仍是 <Latex tex="90^\circ" />。</div>
+<div class="split-wide" style="--cols: 2fr 1fr; align-items: center">
+<div class="figure"><FluxEmfGraph /></div>
+<div class="stack">
+<div class="tip-hint" v-click="1" style="font-size: 0.84rem"><Latex tex="\Phi" /> 最大时 <Latex tex="e=0" />，<br><Latex tex="\Phi" /> 为零时 <Latex tex="e" /> 最大；<br>两者相差 <Latex tex="90^\circ" />。<br><br>图中 <Latex tex="\Phi" /> 超前 <Latex tex="e" /> <Latex tex="90^\circ" />。<br>若把正方向反过来，<br><Latex tex="e" /> 图上下翻转，<br>看起来 <Latex tex="e" /> 超前，<br>但相位差仍是 <Latex tex="90^\circ" />。</div>
 </div>
-
----
-layout: base-flex
-title: "任意形状的电流方向"
-clicks: 3
----
-
-<div class="page-grow page-grow-tight">
-<div class="ask">圆形线圈转动时，各段的速度方向不同，电流方向怎样判断？</div>
-<div class="figure" style="width: 70%; margin-inline: auto"><ArbitraryCoilSvg /></div>
-<div class="step-list">
-<div class="step-item" v-click="1"><span class="step-no">1</span><div>把线圈分成许多小段，每一小段都当作一段直导线。</div></div>
-<div class="step-item" v-click="2"><span class="step-no">2</span><div>各段分别用右手定则判断电动势方向，再沿回路相加；速度与 <Latex tex="B" /> 平行的段不切割磁感线。</div></div>
-<div class="step-item" v-click="3"><span class="step-no">3</span><div>总效果仍由磁通量的变化决定：任意形状的线圈，都可以用楞次定律判断电流方向。</div></div>
 </div>
 </div>
 
@@ -290,8 +278,9 @@ clicks: 3
 
 ---
 layout: base-flex
-title: "小结"
 ---
+
+# 小结
 
 <div class="half-grid">
 <div class="stack">
