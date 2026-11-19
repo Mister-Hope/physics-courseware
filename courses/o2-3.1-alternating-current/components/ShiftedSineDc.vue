@@ -5,14 +5,14 @@
 <template>
   <div class="figure">
     <CoordAxes
-      :x-range="[0, 6.8]"
+      :x-range="[0, 12.6]"
       :y-range="[-1.3, 3.4]"
       :x-axis="{ quantity: 't' }"
       :y-axis="{ quantity: 'i' }"
       :ticks="{ x: [], y: [], labels: false, origin: true }"
       :curves="curves"
       :labels="labels"
-      :view="{ width: 820, height: 300 }"
+      :view="{ width: 900, height: 300 }"
     />
   </div>
 </template>
@@ -35,7 +35,7 @@ const curves = [
 
 const labels = [
   {
-    x: 6.5,
+    x: 12.4,
     y: 3.05,
     text: "平移后：方向始终为正",
     anchor: "left" as const,
@@ -44,7 +44,7 @@ const labels = [
     halo: true,
   },
   {
-    x: 6.5,
+    x: 12.4,
     y: -0.95,
     text: "原波形：有负半周，方向改变",
     anchor: "left" as const,
