@@ -1,11 +1,11 @@
 <!--
-  第 3 页：从正弦式交流的 u-t 图上读出周期 T 和峰值 U_m。
+  第 4 页：从正弦式交流的 u-t 图上读出周期 T 和峰值 U_m；画两个周期。
   只标这两个量；有效值后面再用热效应计算。
 -->
 <template>
   <div class="figure">
     <CoordAxes
-      :x-range="[0, 6.6]"
+      :x-range="[0, 13.2]"
       :y-range="[-1.35, 1.35]"
       :x-axis="{ quantity: 't' }"
       :y-axis="{ quantity: 'u' }"
@@ -54,6 +54,24 @@ const labels = [
     x: 2 * PI,
     y: 0,
     tex: "T",
+    anchor: "top" as const,
+    dy: 14,
+    size: 14,
+    halo: true,
+  },
+  {
+    x: 3 * PI,
+    y: 0,
+    tex: String.raw`\frac{3T}{2}`,
+    anchor: "top" as const,
+    dy: 14,
+    size: 13,
+    halo: true,
+  },
+  {
+    x: 4 * PI,
+    y: 0,
+    tex: "2T",
     anchor: "top" as const,
     dy: 14,
     size: 14,
