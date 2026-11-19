@@ -38,7 +38,7 @@ clicks: 2
 <DefinitionBox term="频率" tone="blue"><div>交变电流在 <Latex tex="1\ \text{s}" /> 内完成周期性变化的次数，用 <Latex tex="f" /> 表示，单位是 <Latex tex="\text{Hz}" />。</div></DefinitionBox>
 </div>
 <div class="summary-line" v-click="2"><Latex tex="f=\frac{1}{T}" />，<Latex tex="\omega=2\pi f=\frac{2\pi}{T}" />。</div>
-<div class="figure" style="width: 66%; margin-inline: auto"><PeriodGraph :cycles="1" /></div>
+<div class="figure" style="width: 66%; margin-inline: auto"><PeriodGraph :cycles="2" /></div>
 </div>
 
 ---
@@ -82,7 +82,7 @@ clicks: 1
 <div class="figure"><AcSizeGraph /></div>
 <div class="stack">
 <div class="mini-title">平均值？</div>
-<div>一个周期内正、负半周的面积相等，平均电流为 <Latex tex="0" />，不能表示大小。</div>
+<div>对这条正弦交流，正、负半周的面积相等，平均电流为 <Latex tex="0" />，不能表示大小。</div>
 <div class="mini-title">峰值？</div>
 <div>峰值只出现在一瞬间，不能表示持续的发热效果。</div>
 </div>
@@ -117,7 +117,7 @@ clicks: 4
 <div class="page-grow page-around">
 <div class="ask">为什么不用平均值或峰值来定义？</div>
 <div class="step-list">
-<div class="step-item" v-click="1"><span class="step-no">1</span><div>交流在一个周期内的平均电流为 <Latex tex="0" />，平均值不能表示电流的大小。</div></div>
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>电流的平均值可能为 <Latex tex="0" />（如正弦交流），也可能不为 <Latex tex="0" />（如方波）；<br>但平均值不能表示电流的发热效果。</div></div>
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>电流通过电阻时，发热与电流方向无关，一个周期内的总热量可以累加、可以测量。</div></div>
 <div class="step-item" v-click="3"><span class="step-no">3</span><div>用产生相同热量的恒定电流来等效，这个恒定电流的值就是有效值。</div></div>
 </div>
@@ -165,19 +165,33 @@ clicks: 3
 
 ---
 layout: base-flex
-clicks: 4
+clicks: 2
 ---
 
 # 正弦式交流的有效值（二）
 
 <div class="page-grow page-grow-tight">
-<div class="ask">还可以构造两个电流，把“平均值”变成“总和”。</div>
-<div class="figure" style="width: 48%; margin-inline: auto"><SinePairGraph /></div>
-<div class="step-list" style="font-size: 0.9rem">
+<div class="ask">怎样构造两个电流，把“平均值”变成“总和”？</div>
+<div class="figure" style="width: 56%; margin-inline: auto"><SinePairGraph /></div>
+<div class="step-list">
 <div class="step-item" v-click="1"><span class="step-no">1</span><div>设 <Latex tex="i_1=I_m\sin\omega t" />、<Latex tex="i_2=I_m\cos\omega t" />，两者相位差 <Latex tex="\frac{T}{4}" />。</div></div>
-<div class="step-item" v-click="2"><span class="step-no">2</span><div><Latex tex="i_1^2+i_2^2=I_m^2" />，所以 <Latex tex="P_1+P_2=(i_1^2+i_2^2)R=I_m^2R" />。</div></div>
-<div class="step-item" v-click="3"><span class="step-no">3</span><div>设两个电流的有效值分别为 <Latex tex="I_1" />、<Latex tex="I_2" />；按定义 <Latex tex="P_1=I_1^2R" />、<Latex tex="P_2=I_2^2R" />。两电流波形相同，只是相差 <Latex tex="\frac{T}{4}" />，所以 <Latex tex="I_1=I_2=I" />。</div></div>
-<div class="step-item" v-click="4"><span class="step-no">4</span><div><Latex tex="2I^2R=I_m^2R" />，所以 <Latex tex="I=\frac{I_m}{\sqrt 2}" />；同理 <Latex tex="U=\frac{U_m}{\sqrt 2}" />。这两个关系只适用于正弦式交流。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div><Latex tex="i_1" />、<Latex tex="i_2" /> 分别通过两个相同的 <Latex tex="R" />。<br><Latex tex="p_1=i_1^2R" />、<Latex tex="p_2=i_2^2R" />；由 <Latex tex="i_1^2+i_2^2=I_m^2" />，得 <Latex tex="p_1+p_2=I_m^2R" />（不随时间变）。</div></div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 3
+---
+
+# 由平均功率求有效值
+
+<div class="page-grow page-around">
+<div class="ask">平均功率怎样回到有效值？</div>
+<div class="step-list">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>因为 <Latex tex="p_1+p_2" /> 始终等于 <Latex tex="I_m^2R" />，<br>所以平均功率之和 <Latex tex="\bar P_1+\bar P_2=I_m^2R" />。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>按定义 <Latex tex="\bar P_1=I_1^2R" />、<Latex tex="\bar P_2=I_2^2R" />，<br>故 <Latex tex="I_1^2+I_2^2=I_m^2" />。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>两电流波形相同、只差 <Latex tex="\frac{T}{4}" />，所以 <Latex tex="I_1=I_2=I" />；<br><Latex tex="2I^2=I_m^2" />，得 <Latex tex="I=\frac{I_m}{\sqrt 2}" />。同理 <Latex tex="U=\frac{U_m}{\sqrt 2}" />，只适用于正弦式。</div></div>
 </div>
 </div>
 
@@ -233,7 +247,7 @@ clicks: 3
 <div class="step-list">
 <div class="step-item" v-click="1"><span class="step-no">1</span><div>电流变化时，电感产生自感电动势，阻碍电流变化。</div></div>
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>频率越高，电流变化越快，阻碍越强，所以“通低频、阻高频”。</div></div>
-<div class="step-item" v-click="3"><span class="step-no">3</span><div>直流电流不变化，感抗为零，所以“通直流”。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>直流电流不变化，电感不产生自感电动势，所以“通直流”。</div></div>
 </div>
 </div>
 </div>

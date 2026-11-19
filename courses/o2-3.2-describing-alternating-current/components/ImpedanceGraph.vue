@@ -6,7 +6,7 @@
   <div class="figure">
     <CoordAxes
       :x-range="[0, 6.4]"
-      :y-range="[0, 6.2]"
+      :y-range="[0, 8]"
       :x-axis="{ quantity: 'f' }"
       :y-axis="{ quantity: 'I' }"
       :ticks="{ x: [], y: [], labels: false, origin: false }"
@@ -47,7 +47,7 @@ const labels = [
   },
   {
     x: 6.1,
-    y: 5.25,
+    y: 6.9,
     text: "电容",
     anchor: "right" as const,
     size: 15,
