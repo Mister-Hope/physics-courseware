@@ -48,7 +48,7 @@ clicks: 2
 <DefinitionBox term="交变电流" tone="gold"><div>大小和方向都随时间做<span class="def-term">周期性变化</span>的电流。</div></DefinitionBox>
 <DefinitionBox term="直流" tone="blue"><div>方向不随时间变化，大小可以变化。</div></DefinitionBox>
 </div>
-<div class="tip-hint" v-click="2">判断是不是交变电流，看<span class="def-term">方向</span>是否变化；方向不变就是直流。</div>
+<div class="tip-hint" v-click="2">判断是不是交变电流，看<span class="def-term">方向</span>是否做周期性变化；方向不变就是直流。</div>
 
 ---
 layout: base-flex
@@ -151,7 +151,7 @@ clicks: 4
 
 <div class="ask">设 <Latex tex="AB=L_1" />、<Latex tex="AD=L_2" />，匝数 <Latex tex="N" />，角速度 <Latex tex="\omega" />，磁感应强度 <Latex tex="B" />。电动势多大？</div>
 <div class="step-list">
-<div class="step-item" v-click="1"><span class="step-no">1</span><div>从中性面开始计时，<Latex tex="\theta=\omega t" />。设轴过 AD 中点，AB、CD 的速度 <Latex tex="v=\frac{\omega L_2}{2}" />，垂直 B 的分量 <Latex tex="v_\perp=v\sin\theta" />。</div></div>
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>从中性面开始计时，<Latex tex="\theta=\omega t" />。设轴与 AB 平行，过 AD、BC 的中点，AB、CD 的速度 <Latex tex="v=\frac{\omega L_2}{2}" />，垂直 B 的分量 <Latex tex="v_\perp=v\sin\theta" />。</div></div>
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>每条边 <Latex tex="E_1=BL_1v\sin\theta" />；两条边串联：<Latex tex="e=2BL_1\cdot\frac{\omega L_2}{2}\sin\theta=\omega BL_1L_2\sin\theta" />。</div></div>
 <div class="step-item" v-click="3"><span class="step-no">3</span><div>面积 <Latex tex="S=L_1L_2" />，所以 <Latex tex="e=\omega BS\sin\omega t" />；N 匝时 <Latex tex="e=N\omega BS\sin\omega t" />。</div></div>
 </div>
@@ -164,7 +164,7 @@ clicks: 2
 
 # 电动势、电流与电压
 
-<div class="ask">发电机有内阻时，路端电压还是电动势吗？</div>
+<div class="ask">发电机有内阻、外电路为纯电阻 <Latex tex="R" /> 时，路端电压还是电动势吗？</div>
 <div class="half-grid">
 <div class="stack" v-click="1">
 <div class="mini-title">电动势</div>
@@ -179,7 +179,7 @@ clicks: 2
 <div class="summary-line"><Latex tex="u=U_m\sin\omega t" /></div>
 <div class="summary-line"><Latex tex="U_m=I_mR" /></div>
 <div class="mini-note">若内阻 r=0，则 <Latex tex="U_m=E_m" />。</div>
-<div class="tip-hint" v-click="2">有内阻时，路端电压峰值 <Latex tex="U_m=I_mR" />，比电动势峰值小。</div>
+<div class="tip-hint" v-click="2">外电路为纯电阻时，路端电压峰值 <Latex tex="U_m=I_mR" />，比电动势峰值小。</div>
 </div>
 </div>
 
@@ -192,7 +192,7 @@ clicks: 1
 <div class="page-grow page-grow-tight">
 <div class="ask ask-lead">峰值与线圈形状、转轴位置有关吗？</div>
 <div class="figure"><ShapeIndependenceSvg /></div>
-<div class="tip-hint" v-click="1">无关。只要轴与 <Latex tex="B" /> 垂直，<Latex tex="E_m=N\omega BS" /> 只由 <Latex tex="N" />、<Latex tex="B" />、<Latex tex="S" />、<Latex tex="\omega" /> 决定，形状和轴的位置都不影响。</div>
+<div class="tip-hint" v-click="1">无关。只要轴在<span class="def-term">线圈平面内</span>且与 <Latex tex="B" /> 垂直，<Latex tex="E_m=N\omega BS" /> 只由 <Latex tex="N" />、<Latex tex="B" />、<Latex tex="S" />、<Latex tex="\omega" /> 决定，形状和轴的位置都不影响。</div>
 </div>
 
 ---
@@ -204,7 +204,7 @@ clicks: 1
 <div class="page-grow page-grow-tight">
 <div class="ask ask-lead"><Latex tex="e" /> 和 <Latex tex="\Phi" /> 的图像有什么关系？谁超前？</div>
 <div class="figure" style="width: 92%; margin-inline: auto"><FluxEmfGraph /></div>
-<div class="tip-hint" v-click="1"><Latex tex="\Phi" /> 最大时 <Latex tex="e=0" />，<Latex tex="\Phi" /> 为零时 <Latex tex="e" /> 最大，两者相差 <Latex tex="90^\circ" />。谁超前取决于电流正方向的规定。</div>
+<div class="tip-hint" v-click="1"><Latex tex="\Phi" /> 最大时 <Latex tex="e=0" />，<Latex tex="\Phi" /> 为零时 <Latex tex="e" /> 最大，两者相差 <Latex tex="90^\circ" />。图中 <Latex tex="\Phi" /> 超前 <Latex tex="e" /> <Latex tex="90^\circ" />；若把电流正方向反过来，<Latex tex="e" /> 图上下翻转，看起来 <Latex tex="e" /> 超前，但相位差仍是 <Latex tex="90^\circ" />。</div>
 </div>
 
 ---
@@ -216,7 +216,7 @@ clicks: 1
 <div class="page-grow page-grow-tight">
 <div class="ask ask-lead">以 AB 边为例，线圈转到任意位置，电流方向怎么判？</div>
 <div class="figure"><RightHandRuleSvg /></div>
-<div class="tip-hint" v-click="1">右手定则：拇指指向 <Latex tex="v" />，磁感线穿入掌心，四指指向感应电流 <Latex tex="I" />。AB、CD 两边分别判断，再沿回路合成。</div>
+<div class="tip-hint" v-click="1">沿 <Latex tex="B" /> 的方向看（局部视图）：拇指指向 <Latex tex="v" />，磁感线穿入掌心，四指指向感应电流 <Latex tex="I" />。AB、CD 两边分别判断，再沿回路合成。</div>
 </div>
 
 ---
@@ -251,7 +251,7 @@ layout: base-flex
 <div class="divider-l stack">
 <div class="mini-title">方向与峰值</div>
 <div class="summary-line">右手定则：拇指 <Latex tex="v" />，磁感线穿掌心，四指 <Latex tex="I" />。</div>
-<div class="summary-line">峰值只由 <Latex tex="N" />、<Latex tex="B" />、<Latex tex="S" />、<Latex tex="\omega" /> 决定（轴与 <Latex tex="B" /> 垂直）。</div>
-<div class="summary-line">有内阻时，路端电压峰值 <Latex tex="U_m=I_mR" />。</div>
+<div class="summary-line">峰值只由 <Latex tex="N" />、<Latex tex="B" />、<Latex tex="S" />、<Latex tex="\omega" /> 决定（轴在线圈平面内且与 <Latex tex="B" /> 垂直）。</div>
+<div class="summary-line">外电路为纯电阻时，路端电压峰值 <Latex tex="U_m=I_mR" />。</div>
 </div>
 </div>
