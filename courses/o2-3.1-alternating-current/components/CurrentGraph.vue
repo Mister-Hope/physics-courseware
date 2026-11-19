@@ -5,7 +5,7 @@
 <template>
   <div class="figure">
     <CoordAxes
-      :x-range="[0, 6.6]"
+      :x-range="[0, 13]"
       :y-range="[-1.45, 1.45]"
       :x-axis="{ quantity: 't' }"
       :y-axis="{ quantity: 'i' }"
@@ -19,6 +19,16 @@
 
 <script setup lang="ts">
 const curves = [
+  {
+    points: [
+      { x: Math.PI * 2, y: -1.45 },
+      { x: Math.PI * 2, y: 1.45 },
+    ],
+    color: "var(--c-text-dim)",
+    width: 1.2,
+    dashed: true,
+    opacity: 0.45,
+  },
   {
     formula: (x: number): number => Math.sin(x),
     color: "var(--c-accent)",
@@ -54,6 +64,14 @@ const labels = [
     y: 0,
     dot: true,
     dotColor: "var(--c-text-dim)",
+  },
+  {
+    x: 6.45,
+    y: 1.25,
+    text: "转完一圈",
+    anchor: "left" as const,
+    size: 13,
+    color: "var(--c-text-dim)",
   },
 ];
 </script>

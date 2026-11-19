@@ -94,14 +94,36 @@ clicks: 2
 
 ---
 layout: base-flex
-title: "发电机"
-clicks: 1
+title: "发电机的构造"
+clicks: 3
 ---
 
 <div class="page-grow page-grow-tight">
-<div class="ask ask-lead">线圈在磁场中转动，为什么能产生电流？</div>
-<div class="figure" style="width: 88%; margin-inline: auto"><Generator3D /></div>
-<div class="tip-hint" v-click="1">穿过线圈的磁通量不断变化，产生感应电动势；回路闭合，就有感应电流。</div>
+<div class="ask ask-lead">发电机由哪些部分组成？</div>
+<div class="figure" style="width: 56%; margin-inline: auto"><Generator3D :animated="false" :angle="34" /></div>
+<div class="step-list">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>N、S 两个磁极之间形成匀强磁场。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>线圈放在磁场中，可以绕轴转动；AB、CD 两边切割磁感线。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>滑环 K、L 随线圈一起转，电刷 E、F 把电流引到外电路。</div></div>
+</div>
+</div>
+
+---
+layout: base-flex
+title: "发电机怎样产生电流"
+clicks: 3
+---
+
+<div class="page-grow page-around">
+<div class="ask ask-lead">线圈转动时，为什么外电路中有电流？</div>
+<div class="split-wide">
+<div class="figure"><Generator3D :animated="true" :show-labels="false" :show-current="true" /></div>
+<div class="step-list">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>线圈转动，穿过它的磁通量不断变化。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>AB、CD 两边切割磁感线，产生感应电动势。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>滑环、电刷和外电路把回路闭合，就有感应电流。</div></div>
+</div>
+</div>
 </div>
 
 ---
@@ -111,7 +133,7 @@ clicks: 1
 ---
 
 <div class="page-grow page-grow-tight">
-<div class="ask ask-lead">线圈转一圈，电流方向变几次？</div>
+<div class="ask ask-lead">线圈连续转动时，电流方向怎样变化？</div>
 <CurrentGraph />
 <div class="tip-hint" v-click="1">每经过中性面一次，电流方向改变一次；转一圈经过中性面两次，方向改变两次。中性面前后磁通量的增减相反，电动势反号，电流随之反向。</div>
 </div>
@@ -125,7 +147,7 @@ clicks: 2
 <div class="page-grow page-grow-tight">
 <div class="ask ask-lead">线圈转到哪些位置，电流最大？哪些位置电流为零？</div>
 <div class="figure" style="width: 96%; margin-inline: auto"><CoilPositionsSvg :step="$clicks" /></div>
-<div class="tip-hint" v-click="2">线圈平面与磁感线平行时 e 最大；与磁感线垂直（中性面）时 e=0。电阻恒定时，i 与 e 同步。</div>
+<div class="tip-hint" v-click="2">线圈平面与磁感线平行时 <Latex tex="e" /> 最大；与磁感线垂直（中性面）时 <Latex tex="e=0" />。电阻恒定时，电流与电动势同步。</div>
 </div>
 
 ---
@@ -149,13 +171,18 @@ clicks: 4
 
 # 正弦式电动势
 
+<div class="page-grow page-around">
 <div class="ask">设 <Latex tex="AB=L_1" />、<Latex tex="AD=L_2" />，匝数 <Latex tex="N" />，角速度 <Latex tex="\omega" />，磁感应强度 <Latex tex="B" />。电动势多大？</div>
-<div class="step-list">
-<div class="step-item" v-click="1"><span class="step-no">1</span><div>从中性面开始计时，<Latex tex="\theta=\omega t" />。设轴与 AB 平行，过 AD、BC 的中点，AB、CD 的速度 <Latex tex="v=\frac{\omega L_2}{2}" />，垂直 B 的分量 <Latex tex="v_\perp=v\sin\theta" />。</div></div>
-<div class="step-item" v-click="2"><span class="step-no">2</span><div>每条边 <Latex tex="E_1=BL_1v\sin\theta" />；两条边串联：<Latex tex="e=2BL_1\cdot\frac{\omega L_2}{2}\sin\theta=\omega BL_1L_2\sin\theta" />。</div></div>
-<div class="step-item" v-click="3"><span class="step-no">3</span><div>面积 <Latex tex="S=L_1L_2" />，所以 <Latex tex="e=\omega BS\sin\omega t" />；N 匝时 <Latex tex="e=N\omega BS\sin\omega t" />。</div></div>
+<div class="split-wide" style="--cols: 1.6fr 1fr">
+<div class="step-list" style="font-size: 0.92rem">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>从中性面计时，<Latex tex="\theta=\omega t" />。<br>轴与 AB 平行、过 AD、BC 中点；<br>AB、CD 速度 <Latex tex="v=\frac{\omega L_2}{2}" />，垂直分量 <Latex tex="v_\perp=v\sin\theta" />。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>每条边 <Latex tex="E_1=BL_1v\sin\theta" />；两边串联：<br><Latex tex="e=2BL_1\cdot\left(\frac{\omega L_2}{2}\right)\sin\theta" /><br><Latex tex="=\omega BL_1L_2\sin\theta" />。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>面积 <Latex tex="S=L_1L_2" />，所以 <Latex tex="e=\omega BS\sin\omega t" />；<br>N 匝时 <Latex tex="e=N\omega BS\sin\omega t" />。</div></div>
+</div>
+<div class="figure" style="max-width: 300px; margin-inline: auto"><VelocityDecompSvg /></div>
 </div>
 <div class="tip-hint" v-click="4">峰值 <Latex tex="E_m=N\omega BS" />，瞬时值 <Latex tex="e=E_m\sin\omega t" />。</div>
+</div>
 
 ---
 layout: base-flex
@@ -170,7 +197,7 @@ clicks: 2
 <div class="mini-title">电动势</div>
 <div class="summary-line"><Latex tex="e=E_m\sin\omega t" /></div>
 <div class="summary-line"><Latex tex="E_m=N\omega BS" /></div>
-<div class="mini-title">电流（总电阻 R+r）</div>
+<div class="mini-title">电流（总电阻 <Latex tex="R+r" />）</div>
 <div class="summary-line"><Latex tex="i=I_m\sin\omega t" /></div>
 <div class="summary-line"><Latex tex="I_m=\frac{E_m}{R+r}" /></div>
 </div>
@@ -178,21 +205,41 @@ clicks: 2
 <div class="mini-title">路端电压</div>
 <div class="summary-line"><Latex tex="u=U_m\sin\omega t" /></div>
 <div class="summary-line"><Latex tex="U_m=I_mR" /></div>
-<div class="mini-note">若内阻 r=0，则 <Latex tex="U_m=E_m" />。</div>
+<div class="mini-note">若内阻 <Latex tex="r=0" />，则 <Latex tex="U_m=E_m" />。</div>
 <div class="tip-hint" v-click="2">外电路为纯电阻时，路端电压峰值 <Latex tex="U_m=I_mR" />，比电动势峰值小。</div>
 </div>
 </div>
 
 ---
 layout: base-flex
-title: "形状与转轴"
-clicks: 1
+title: "沿磁场方向看投影"
+clicks: 3
 ---
 
 <div class="page-grow page-grow-tight">
-<div class="ask ask-lead">峰值与线圈形状、转轴位置有关吗？</div>
-<div class="figure"><ShapeIndependenceSvg /></div>
-<div class="tip-hint" v-click="1">无关。只要轴在<span class="def-term">线圈平面内</span>且与 <Latex tex="B" /> 垂直，<Latex tex="E_m=N\omega BS" /> 只由 <Latex tex="N" />、<Latex tex="B" />、<Latex tex="S" />、<Latex tex="\omega" /> 决定，形状和轴的位置都不影响。</div>
+<div class="ask">为什么线圈的形状、转轴位置不影响峰值？</div>
+<div class="figure" style="width: 80%; margin-inline: auto"><ProjectionProofSvg :step="$clicks" /></div>
+<div class="step-list">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>沿磁场方向看，把线圈分成许多与转轴平行的细条，每条宽度 <Latex tex="\Delta x" />。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>线圈转过 <Latex tex="\theta" />，每条细条的投影高度都变为原来的 <Latex tex="\cos\theta" />，投影面积也乘 <Latex tex="\cos\theta" />。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>所有细条相加：<Latex tex="S_\perp=S\cos\theta" />。形状只改变细条高度的分布；轴平移只改变起点，不改变每条细条的高度。</div></div>
+</div>
+</div>
+
+---
+layout: base-flex
+title: "从投影面积到电动势"
+clicks: 3
+---
+
+<div class="page-grow page-around">
+<div class="ask">投影面积知道了，磁通量和感应电动势怎样算？</div>
+<div class="step-list">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>穿过线圈的磁通量 <Latex tex="\Phi=BS_\perp=BS\cos\theta" />。设 <Latex tex="\theta=\omega t" />，则 <Latex tex="\Phi=BS\cos\omega t" />。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>磁通量变化率的最大值是 <Latex tex="BS\omega" />；所以 <Latex tex="e=BS\omega\sin\omega t" />，<Latex tex="N" /> 匝时 <Latex tex="e=NBS\omega\sin\omega t" />。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>峰值 <Latex tex="E_m=NBS\omega" /> 中只出现 <Latex tex="S" />；线圈是什么形状、轴放在哪里，都没有出现在结果里。前提是轴在线圈平面内且与 <Latex tex="B" /> 垂直。</div></div>
+</div>
+<div class="tip-hint">这就是“形状、轴位置无关”的证明：不是直接下结论，而是先证明投影面积只与 <Latex tex="S" /> 和 <Latex tex="\theta" /> 有关。</div>
 </div>
 
 ---
@@ -209,14 +256,18 @@ clicks: 1
 
 ---
 layout: base-flex
-title: "电流方向"
-clicks: 1
+title: "任意形状的电流方向"
+clicks: 3
 ---
 
 <div class="page-grow page-grow-tight">
-<div class="ask ask-lead">以 AB 边为例，线圈转到任意位置，电流方向怎么判？</div>
-<div class="figure"><RightHandRuleSvg /></div>
-<div class="tip-hint" v-click="1">沿 <Latex tex="B" /> 的方向看（局部视图）：拇指指向 <Latex tex="v" />，磁感线穿入掌心，四指指向感应电流 <Latex tex="I" />。AB、CD 两边分别判断，再沿回路合成。</div>
+<div class="ask">圆形线圈转动时，各处都在切割磁感线，电流方向怎样判断？</div>
+<div class="figure" style="width: 70%; margin-inline: auto"><ArbitraryCoilSvg /></div>
+<div class="step-list">
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>把线圈分成许多小段，每一小段都当作一段直导线。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>各段分别用右手定则判断电动势方向，再沿回路相加。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>总效果仍由磁通量的变化决定：任意形状的线圈，都可以用楞次定律判断电流方向。</div></div>
+</div>
 </div>
 
 ---
@@ -226,20 +277,19 @@ clicks: 3
 ---
 
 <template v-slot:stem>
-<div class="ask">发电机产生的电动势 <Latex tex="e=400\sin(314t)\ \text{V}" />，总电阻 <Latex tex="R=2\ \text{k}\Omega" />。写出电流的瞬时值表达式，并求电流峰值。</div>
+<div class="ask">发电机产生的电动势 <Latex tex="e=400\sin(100\pi t)\ \text{V}" />，总电阻 <Latex tex="R=2\ \text{k}\Omega" />。写出电流的瞬时值表达式，并求电流峰值。</div>
 </template>
 
 <div class="step-list">
-<div class="step-item" v-click="1"><span class="step-no">1</span><div>由表达式读出 <Latex tex="E_m=400\ \text{V}" />，<Latex tex="\omega=314\ \text{rad/s}" />。</div></div>
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>由表达式读出 <Latex tex="E_m=400\ \text{V}" />，<Latex tex="\omega=100\pi\ \text{rad/s}" />。</div></div>
 <div class="step-item" v-click="2"><span class="step-no">2</span><div><Latex tex="I_m=\frac{E_m}{R}=\frac{400}{2000}=0.2\ \text{A}" />。</div></div>
-<div class="step-item" v-click="3"><span class="step-no">3</span><div>电流瞬时值 <Latex tex="i=0.2\sin(314t)\ \text{A}" />。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>电流瞬时值 <Latex tex="i=0.2\sin(100\pi t)\ \text{A}" />。</div></div>
 </div>
 
 ---
 layout: base-flex
+title: "小结"
 ---
-
-# 小结
 
 <div class="half-grid">
 <div class="stack">
@@ -249,8 +299,7 @@ layout: base-flex
 <div class="summary-line"><Latex tex="e=E_m\sin\omega t" />，<Latex tex="E_m=N\omega BS" />。</div>
 </div>
 <div class="divider-l stack">
-<div class="mini-title">方向与峰值</div>
-<div class="summary-line">右手定则：拇指 <Latex tex="v" />，磁感线穿掌心，四指 <Latex tex="I" />。</div>
+<div class="mini-title">峰值与电压</div>
 <div class="summary-line">峰值只由 <Latex tex="N" />、<Latex tex="B" />、<Latex tex="S" />、<Latex tex="\omega" /> 决定（轴在线圈平面内且与 <Latex tex="B" /> 垂直）。</div>
 <div class="summary-line">外电路为纯电阻时，路端电压峰值 <Latex tex="U_m=I_mR" />。</div>
 </div>

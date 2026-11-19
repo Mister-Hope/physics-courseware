@@ -5,7 +5,7 @@
 <template>
   <div class="figure">
     <CoordAxes
-      :x-range="[0, 6.8]"
+      :x-range="[0, 13.2]"
       :y-range="[-1.5, 1.5]"
       :x-axis="{ quantity: 't' }"
       :y-axis="{ quantity: 'u' }"
@@ -22,7 +22,7 @@ const curves = [
   {
     points: [
       { x: 0, y: 0.55 },
-      { x: 6.6, y: 0.55 },
+      { x: 13, y: 0.55 },
     ],
     color: "var(--c-accent-2)",
     width: 3,
@@ -36,7 +36,7 @@ const curves = [
 
 const labels = [
   {
-    x: 6,
+    x: 12.2,
     y: 0.55,
     text: "甲",
     anchor: "top" as const,

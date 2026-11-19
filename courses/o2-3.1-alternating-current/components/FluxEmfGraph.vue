@@ -5,7 +5,7 @@
 <template>
   <div class="flux-emf">
     <CoordAxes
-      :x-range="[0, 6.2832]"
+      :x-range="[0, X_MAX]"
       :y-range="[-1.5, 1.5]"
       :y-axis="{ quantity: 'Φ' }"
       :ticks="ticks"
@@ -14,7 +14,7 @@
       :view="{ width: 860, height: 150 }"
     />
     <CoordAxes
-      :x-range="[0, 6.2832]"
+      :x-range="[0, X_MAX]"
       :y-range="[-1.5, 1.5]"
       :x-axis="{ quantity: 't' }"
       :y-axis="{ quantity: 'e' }"
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 const { PI } = Math;
+const X_MAX = 4 * PI;
 
 const ticks = {
   x: [0, PI / 2, PI, (3 * PI) / 2, 2 * PI],
@@ -153,6 +154,16 @@ const emfLabels = [
     tex: "T",
     anchor: "bottom" as const,
     dx: -6,
+    dy: 22,
+    size: 15,
+    color: "var(--c-text-dim)",
+  },
+  {
+    x: 4 * PI,
+    y: 0,
+    tex: "2T",
+    anchor: "bottom" as const,
+    dx: -10,
     dy: 22,
     size: 15,
     color: "var(--c-text-dim)",

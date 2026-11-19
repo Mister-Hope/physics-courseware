@@ -5,7 +5,7 @@
 <template>
   <div class="figure">
     <CoordAxes
-      :x-range="[-0.35, 6.55]"
+      :x-range="[-0.35, 12.9]"
       :y-range="[-1.4, 1.4]"
       :x-axis="{ quantity: 't' }"
       :y-axis="{ quantity: 'Φ' }"
