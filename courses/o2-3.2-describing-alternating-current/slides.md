@@ -77,10 +77,10 @@ clicks: 2
 
 <div class="ask">为什么用热效应来定义有效值？</div>
 <div class="def-row" v-click="1">
-<DefinitionBox term="有效值" tone="gold"><div>让交变电流与恒定电流分别通过<span class="def-term">相同电阻</span>，在一个周期内产生<span class="def-term">相同热量</span>，该恒定电流的数值就是交变电流的有效值。</div></DefinitionBox>
+<DefinitionBox term="有效值" tone="gold"><div>让交变电流与恒定电流分别通过<span class="def-term">相同电阻</span>，在一个周期内产生<span class="def-term">相同热量</span>，该恒定电流的数值就是交变电流的有效值；同理定义电压的有效值。</div></DefinitionBox>
 </div>
 <div class="summary-line"><Latex tex="I^2RT=Q" />，其中 <Latex tex="Q" /> 是交流在一个周期内产生的热量。</div>
-<div class="tip-hint" v-click="2">电流做功发热与方向无关，所以可以用恒定电流“等效”交流，而不必看瞬时值。</div>
+<div class="tip-hint" v-click="2">电流做功发热与方向无关，所以可以用恒定电流“等效”交流，不必逐时刻比较瞬时值；热量仍由各时刻 <Latex tex="i^2R" /> 累积。</div>
 
 ---
 layout: base-flex
@@ -92,7 +92,7 @@ clicks: 4
 <div class="ask">正弦式交流的有效值和峰值是什么关系？</div>
 <div class="step-list">
 <div class="step-item" v-click="1"><span class="step-no">1</span><div>设 <Latex tex="i=I_m\sin\omega t" />，发热功率 <Latex tex="P=I_m^2R\sin^2\omega t" />。</div></div>
-<div class="step-item" v-click="2"><span class="step-no">2</span><div><Latex tex="\sin^2\omega t" /> 与 <Latex tex="\cos^2\omega t" /> 之和恒为 1，二者在一个周期内的平均值相同，所以 <Latex tex="\sin^2\omega t" /> 的平均值是 <Latex tex="\frac{1}{2}" />。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div><Latex tex="\sin^2\omega t" /> 与 <Latex tex="\cos^2\omega t" /> 之和恒为 1，<Latex tex="\cos^2\omega t" /> 是 <Latex tex="\sin^2\omega t" /> 平移 <Latex tex="\frac{T}{4}" />，二者在一个周期内的平均值相同，所以 <Latex tex="\sin^2\omega t" /> 的平均值是 <Latex tex="\frac{1}{2}" />。</div></div>
 <div class="step-item" v-click="3"><span class="step-no">3</span><div>平均功率 <Latex tex="\bar P=\frac{I_m^2R}{2}" />；令 <Latex tex="I^2R=\bar P" />，得 <Latex tex="I=\frac{I_m}{\sqrt 2}" />；同理 <Latex tex="U=\frac{U_m}{\sqrt 2}" />。</div></div>
 </div>
 <div class="tip-hint" v-click="4">这两个关系只适用于正弦式交流；非正弦式必须回到热效应定义去算。</div>
