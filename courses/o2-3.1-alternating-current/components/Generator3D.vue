@@ -152,7 +152,7 @@
     </text>
 
     <polygon :points="planePoints" fill="none" />
-    <polygon
+    <polyline
       :points="innerPlanePoints"
       fill="none"
       stroke="var(--c-accent)"
