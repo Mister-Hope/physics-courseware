@@ -8,14 +8,15 @@
     <CourseArrow :from="{ x: 118, y: 70 }" :to="{ x: 268, y: 190 }" stroke="var(--c-accent-2)" stroke-width="3" label="v" :label-dx="8" :label-dy="14" />
     <line x1="118" y1="70" x2="268" y2="70" stroke="var(--c-accent-2)" stroke-width="1.8" stroke-dasharray="6 5" opacity="0.8" />
     <line x1="268" y1="190" x2="268" y2="70" stroke="var(--c-text-dim)" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.7" />
-    <path d="M 118 132 A 62 62 0 0 1 154 122" fill="none" stroke="var(--c-accent)" stroke-width="2" />
+    <path d="M 118 132 A 62 62 0 0 1 166 109" fill="none" stroke="var(--c-accent)" stroke-width="2" />
     <text x="142" y="152" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="15">θ</text>
     <text x="198" y="58" fill="var(--c-accent-2)" font-family="KaTeX_Math" font-style="italic" font-size="14">
       <tspan>v</tspan><tspan font-size="10" dy="4">⊥</tspan>
     </text>
     <text x="284" y="196" fill="var(--c-text-dim)" font-family="KaTeX_Main" font-size="13">
       <tspan font-family="KaTeX_Math" font-style="italic">v</tspan><tspan font-family="KaTeX_Math" font-style="italic" font-size="10" dy="4">⊥</tspan
-      ><tspan dy="-4"> = </tspan><tspan>v sin</tspan><tspan font-family="KaTeX_Math" font-style="italic">θ</tspan>
+      ><tspan dy="-4"> = </tspan><tspan font-family="KaTeX_Math" font-style="italic">v</tspan><tspan> sin</tspan
+      ><tspan font-family="KaTeX_Math" font-style="italic">θ</tspan>
     </text>
   </svg>
 </template>

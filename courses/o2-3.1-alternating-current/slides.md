@@ -43,12 +43,14 @@ clicks: 2
 
 # 交流与直流
 
+<div class="page-grow page-around">
 <div class="ask">大小变化、方向不变的电流，是交变电流吗？</div>
 <div class="def-row" v-click="1">
 <DefinitionBox term="交变电流" tone="gold"><div>大小和方向都随时间做<span class="def-term">周期性变化</span>的电流。</div></DefinitionBox>
 <DefinitionBox term="直流" tone="blue"><div>方向不随时间变化，大小可以变化。</div></DefinitionBox>
 </div>
 <div class="tip-hint" v-click="2">判断是不是交变电流，看<span class="def-term">方向</span>是否做周期性变化；方向不变就是直流。</div>
+</div>
 
 ---
 layout: base-flex
@@ -72,7 +74,7 @@ clicks: 2
 <div class="ask">恒定电流与直流是什么关系？</div>
 <div class="stack" v-click="1">
 <DefinitionBox term="恒定电流" tone="gold"><div>大小和方向都<span class="def-term">不随时间变化</span>的电流。</div></DefinitionBox>
-<div class="figure" style="width: 78%; margin-inline: auto"><CurrentSetsSvg /></div>
+<div class="figure" style="width: 72%; margin-inline: auto"><CurrentSetsSvg /></div>
 </div>
 <div class="tip-hint" v-click="2">直流只要求方向不变；恒定电流还要求大小不变。所以恒定电流一定是直流，直流不一定是恒定电流。</div>
 
@@ -117,7 +119,7 @@ clicks: 3
 <div class="page-grow page-around">
 <div class="ask ask-lead">线圈转动时，为什么外电路中有电流？</div>
 <div class="split-wide">
-<div class="figure"><Generator3D :animated="true" :show-labels="false" :show-current="true" /></div>
+<div class="figure"><Generator3D :animated="true" :show-labels="true" :show-current="true" /></div>
 <div class="step-list">
 <div class="step-item" v-click="1"><span class="step-no">1</span><div>线圈转动，穿过它的磁通量不断变化。</div></div>
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>AB、CD 两边切割磁感线，产生感应电动势。</div></div>
@@ -220,9 +222,9 @@ clicks: 3
 <div class="ask">为什么线圈的形状、转轴位置不影响峰值？</div>
 <div class="figure" style="width: 80%; margin-inline: auto"><ProjectionProofSvg :step="$clicks" /></div>
 <div class="step-list">
-<div class="step-item" v-click="1"><span class="step-no">1</span><div>沿磁场方向看，把线圈分成许多与转轴平行的细条，每条宽度 <Latex tex="\Delta x" />。</div></div>
+<div class="step-item" v-click="1"><span class="step-no">1</span><div>沿磁场方向看，把线圈分成许多与转轴垂直的细条，每条宽度 <Latex tex="\Delta x" />。</div></div>
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>线圈转过 <Latex tex="\theta" />，每条细条的投影高度都变为原来的 <Latex tex="\cos\theta" />，投影面积也乘 <Latex tex="\cos\theta" />。</div></div>
-<div class="step-item" v-click="3"><span class="step-no">3</span><div>所有细条相加：<Latex tex="S_\perp=S\cos\theta" />。形状只改变细条高度的分布；轴平移只改变起点，不改变每条细条的高度。</div></div>
+<div class="step-item" v-click="3"><span class="step-no">3</span><div>所有细条相加：<Latex tex="S_\perp=S\cos\theta" />。无论线圈是什么形状、轴平移到哪里，每条细条都乘同一个 <Latex tex="\cos\theta" />，所以峰值不变。</div></div>
 </div>
 </div>
 
@@ -261,11 +263,11 @@ clicks: 3
 ---
 
 <div class="page-grow page-grow-tight">
-<div class="ask">圆形线圈转动时，各处都在切割磁感线，电流方向怎样判断？</div>
+<div class="ask">圆形线圈转动时，各段的速度方向不同，电流方向怎样判断？</div>
 <div class="figure" style="width: 70%; margin-inline: auto"><ArbitraryCoilSvg /></div>
 <div class="step-list">
 <div class="step-item" v-click="1"><span class="step-no">1</span><div>把线圈分成许多小段，每一小段都当作一段直导线。</div></div>
-<div class="step-item" v-click="2"><span class="step-no">2</span><div>各段分别用右手定则判断电动势方向，再沿回路相加。</div></div>
+<div class="step-item" v-click="2"><span class="step-no">2</span><div>各段分别用右手定则判断电动势方向，再沿回路相加；速度与 <Latex tex="B" /> 平行的段不切割磁感线。</div></div>
 <div class="step-item" v-click="3"><span class="step-no">3</span><div>总效果仍由磁通量的变化决定：任意形状的线圈，都可以用楞次定律判断电流方向。</div></div>
 </div>
 </div>
@@ -297,6 +299,7 @@ title: "小结"
 <div class="summary-line">线圈在匀强磁场中匀速转动，磁通量周期性变化。</div>
 <div class="summary-line">中性面：磁通量最大、电动势为零；每经过中性面一次，电流方向改变。</div>
 <div class="summary-line"><Latex tex="e=E_m\sin\omega t" />，<Latex tex="E_m=N\omega BS" />。</div>
+<div class="summary-line"><Latex tex="i=I_m\sin\omega t" />，<Latex tex="I_m=\frac{E_m}{R+r}" />。</div>
 </div>
 <div class="divider-l stack">
 <div class="mini-title">峰值与电压</div>

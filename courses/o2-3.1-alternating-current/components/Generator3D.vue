@@ -76,8 +76,7 @@
       stroke-dasharray="7 5"
       opacity="0.75"
     />
-    <text x="272" y="203" fill="var(--c-text-dim)" font-family="KaTeX_Main" font-size="13">O</text>
-    <text x="764" y="203" fill="var(--c-text-dim)" font-family="KaTeX_Main" font-size="13">O′</text>
+    <text x="272" y="203" fill="var(--c-text-dim)" font-family="KaTeX_Main" font-size="16">O</text>
 
     <polyline
       :points="coilPath1"
@@ -135,21 +134,21 @@
       opacity="0.7"
     />
     <text
-      x="700"
-      y="166"
+      x="692"
+      y="158"
       fill="var(--c-accent)"
       font-family="KaTeX_Main"
-      font-size="14"
+      font-size="20"
       text-anchor="middle"
     >
       K
     </text>
     <text
-      x="735"
-      y="166"
+      x="743"
+      y="158"
       fill="var(--c-accent)"
       font-family="KaTeX_Main"
-      font-size="14"
+      font-size="20"
       text-anchor="middle"
     >
       L
@@ -176,16 +175,16 @@
       stroke-width="1.3"
     />
     <text
-      x="682"
+      x="670"
       y="266"
       fill="var(--c-text)"
       font-family="KaTeX_Main"
-      font-size="14"
+      font-size="18"
       text-anchor="end"
     >
       E
     </text>
-    <text x="748" y="186" fill="var(--c-text)" font-family="KaTeX_Main" font-size="14">F</text>
+    <text x="760" y="176" fill="var(--c-text)" font-family="KaTeX_Main" font-size="18">F</text>
 
     <polyline
       points="700,252 760,252 760,300 790,300"
@@ -211,7 +210,7 @@
       stroke="var(--c-accent)"
       stroke-width="1.4"
     />
-    <text x="816" y="327" fill="var(--c-text)" font-family="KaTeX_Main" font-size="14">R</text>
+    <text x="816" y="327" fill="var(--c-text)" font-family="KaTeX_Main" font-size="18">R</text>
 
     <g v-if="showLabels">
       <text
@@ -220,7 +219,7 @@
         fill="var(--c-text)"
         font-family="KaTeX_Math"
         font-style="italic"
-        font-size="17"
+        font-size="21"
         text-anchor="end"
       >
         A
@@ -231,7 +230,7 @@
         fill="var(--c-text)"
         font-family="KaTeX_Math"
         font-style="italic"
-        font-size="17"
+        font-size="21"
       >
         B
       </text>
@@ -241,7 +240,7 @@
         fill="var(--c-text)"
         font-family="KaTeX_Math"
         font-style="italic"
-        font-size="17"
+        font-size="21"
       >
         C
       </text>
@@ -251,7 +250,7 @@
         fill="var(--c-text)"
         font-family="KaTeX_Math"
         font-style="italic"
-        font-size="17"
+        font-size="21"
         text-anchor="end"
       >
         D
@@ -314,7 +313,7 @@ const coilPath2 = computed(
     `${coil.value.c.x},${coil.value.c.y} ${coil.value.d.x},${coil.value.d.y} ${coil.value.a.x},${coil.value.a.y}`,
 );
 
-const currentOpacity = computed(() => Math.min(0.95, Math.abs(Math.sin(angle.value)) * 1.5));
+const currentOpacity = computed(() => Math.min(0.95, Math.abs(Math.cos(angle.value)) * 1.5));
 const currentArrow = computed(() => {
   const sign = Math.cos(angle.value) >= 0 ? 1 : -1;
   return {

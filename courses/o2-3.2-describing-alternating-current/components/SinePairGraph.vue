@@ -55,9 +55,10 @@ const labels = [
   },
   {
     x: PI / 2,
-    y: -1.2,
+    y: 0,
     tex: String.raw`\frac{T}{4}`,
     anchor: "top" as const,
+    dy: 16,
     size: 14,
     halo: true,
   },
