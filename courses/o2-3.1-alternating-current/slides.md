@@ -74,7 +74,7 @@ clicks: 2
 <div class="ask">恒定电流与直流是什么关系？</div>
 <div class="stack" v-click="1">
 <DefinitionBox term="恒定电流" tone="gold"><div>大小和方向都<span class="def-term">不随时间变化</span>的电流。</div></DefinitionBox>
-<div class="figure" style="width: 68%; margin-inline: auto"><CurrentSetsSvg /></div>
+<div class="figure" style="width: 64%; margin-inline: auto"><CurrentSetsSvg /></div>
 </div>
 <div class="tip-hint" v-click="2">直流只要求方向不变；恒定电流还要求大小不变。所以恒定电流一定是直流，直流不一定是恒定电流。</div>
 
@@ -160,11 +160,15 @@ clicks: 2
 # 中性面
 
 <div class="ask">中性面在哪里？</div>
-<div class="stack" v-click="1">
-<DefinitionBox term="中性面" tone="gold"><div>线圈平面与磁感线<span class="def-term">垂直</span>的位置。此时磁通量最大，感应电动势为零。</div></DefinitionBox>
-<div class="figure" style="width: 96%; margin-inline: auto"><FluxTangentGraph /></div>
-</div>
+<div class="page-grow page-grow-tight">
+<div class="split-wide" style="--cols: 1.15fr 1fr; align-items: center">
+<div class="figure" style="width: 100%"><FluxTangentGraph /></div>
+<div class="stack">
+<div v-click="1"><DefinitionBox term="中性面" tone="gold"><div>线圈平面与磁感线<span class="def-term">垂直</span>的位置。此时磁通量最大，感应电动势为零。</div></DefinitionBox></div>
 <div class="tip-hint" v-click="2">磁通量最大时，图线的切线水平，变化率为零，所以感应电动势为零，电流也为零。</div>
+</div>
+</div>
+</div>
 
 ---
 layout: base-flex
@@ -181,7 +185,7 @@ clicks: 4
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>每条边 <Latex tex="E_1=BL_1v\sin\theta" />；两边串联：<br><Latex tex="e=2BL_1\cdot\left(\frac{\omega L_2}{2}\right)\sin\theta" /><br><Latex tex="=\omega BL_1L_2\sin\theta" />。</div></div>
 <div class="step-item" v-click="3"><span class="step-no">3</span><div>面积 <Latex tex="S=L_1L_2" />，所以 <Latex tex="e=\omega BS\sin\omega t" />；<br>N 匝时 <Latex tex="e=N\omega BS\sin\omega t" />。</div></div>
 </div>
-<div class="figure" style="max-width: 300px; margin-inline: auto"><VelocityDecompSvg /></div>
+<div class="figure" style="max-width: 340px; margin-inline: auto"><CoilVelocitySvg /></div>
 </div>
 <div class="tip-hint" v-click="4">峰值 <Latex tex="E_m=N\omega BS" />，瞬时值 <Latex tex="e=E_m\sin\omega t" />。</div>
 </div>
@@ -231,7 +235,7 @@ clicks: 3
 ---
 layout: base-flex
 title: "从投影面积到电动势"
-clicks: 3
+clicks: 4
 ---
 
 <div class="page-grow page-around">
@@ -241,13 +245,13 @@ clicks: 3
 <div class="step-item" v-click="2"><span class="step-no">2</span><div>磁通量变化率的最大值是 <Latex tex="BS\omega" />；所以 <Latex tex="e=BS\omega\sin\omega t" />，<Latex tex="N" /> 匝时 <Latex tex="e=NBS\omega\sin\omega t" />。</div></div>
 <div class="step-item" v-click="3"><span class="step-no">3</span><div>峰值 <Latex tex="E_m=NBS\omega" /> 中只出现 <Latex tex="S" />；线圈是什么形状、轴放在哪里，都没有出现在结果里。前提是轴在线圈平面内且与 <Latex tex="B" /> 垂直。</div></div>
 </div>
-<div class="tip-hint">这就是“形状、轴位置无关”的证明：不是直接下结论，而是先证明投影面积只与 <Latex tex="S" /> 和 <Latex tex="\theta" /> 有关。</div>
+<div class="tip-hint" v-click="4">这就是“形状、轴位置无关”的证明：不是直接下结论，而是先证明投影面积只与 <Latex tex="S" /> 和 <Latex tex="\theta" /> 有关。</div>
 </div>
 
 ---
 layout: base-flex
 title: "图像与相位"
-clicks: 1
+clicks: 2
 ---
 
 <div class="page-grow page-grow-tight">
@@ -255,7 +259,8 @@ clicks: 1
 <div class="split-wide" style="--cols: 2fr 1fr; align-items: center">
 <div class="figure"><FluxEmfGraph /></div>
 <div class="stack">
-<div class="tip-hint" v-click="1" style="font-size: 0.84rem"><Latex tex="\Phi" /> 最大时 <Latex tex="e=0" />，<br><Latex tex="\Phi" /> 为零时 <Latex tex="e" /> 最大；<br>两者相差 <Latex tex="90^\circ" />。<br><br>图中 <Latex tex="\Phi" /> 超前 <Latex tex="e" /> <Latex tex="90^\circ" />。<br>若把正方向反过来，<br><Latex tex="e" /> 图上下翻转，<br>看起来 <Latex tex="e" /> 超前，<br>但相位差仍是 <Latex tex="90^\circ" />。</div>
+<div class="tip-hint" v-click="1" style="font-size: 0.84rem"><Latex tex="\Phi" /> 最大时 <Latex tex="e=0" />；<br><Latex tex="\Phi" /> 为零时 <Latex tex="e" /> 最大。<br>两者在时间上相差 <Latex tex="\frac{T}{4}" />，<br>即 1/4 个周期。</div>
+<div class="tip-hint" v-click="2" style="font-size: 0.84rem">图中 <Latex tex="\Phi" /> 比 <Latex tex="e" /> 早 <Latex tex="\frac{T}{4}" />。<br>若把正方向反过来，<br><Latex tex="e" /> 图上下翻转，<br>看起来 <Latex tex="e" /> 超前；<br>所以超前还是落后没有固定结论。</div>
 </div>
 </div>
 </div>
