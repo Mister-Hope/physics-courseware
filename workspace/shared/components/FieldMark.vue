@@ -53,6 +53,13 @@ const {
 
 /** × 的半跨距 = r × 0.67、⊙ 的圆点半径 = r × 0.25（对齐既有画法） */
 const half = computed(() => r * 0.67);
+
+/**
+ * 字母基线：`y + r + 16` 是 16px 字的经验值（与圆之间留约 4px 空隙）。字号**比 16px 大**时字形会顶到圆圈上—— 踩过：P28 用
+ * `:label-size="24"`，B 的上沿进了圆圈 1.9px、两笔画糊成一团。所以字号每大 1px、基线再往下让 0.72px（KaTeX_Math 的大写高约 0.70em）。字号 ≤
+ * 16px 时不补偿（不能把字往圆里推）：既有用法（`13.1` 的 `:r="13"`、`DeviceGallery` 的 13px）像素级不变。
+ */
+const labelY = computed(() => y + r + 16 + Math.max(0, labelSize - 16) * 0.72 + labelDy);
 </script>
 
 <template>
@@ -80,7 +87,7 @@ const half = computed(() => r * 0.67);
     <text
       v-if="label !== ''"
       :x="x"
-      :y="y + r + 16 + labelDy"
+      :y="labelY"
       text-anchor="middle"
       font-family="KaTeX_Math"
       font-style="italic"
