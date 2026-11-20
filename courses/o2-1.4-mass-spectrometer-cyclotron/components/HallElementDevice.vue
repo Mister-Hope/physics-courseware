@@ -2,30 +2,36 @@
 import { computed, ref } from "vue";
 
 /**
- * 霍尔元件（P26 原理图 / P27 交互演示 / P28 例 6 题目图）
+ * 霍尔元件（P28 原理图 / P29 交互演示 / P31 例 6 题目图）
  *
- * 三维薄片：前面＝长 c（电流方向）× 宽 a（两个带电侧面间距），厚 d 沿磁场方向（垂直纸面向里）。
+ * 三维薄片：前面＝长 c（电流方向）× 宽 a（两个带电侧面间距），厚 d 沿磁场方向（垂直纸面向里）。 两块带电的侧面＝上表面（顶面，可见）与下表面（被前面遮住，只留贴底的一条），两者相距 a。
  *
- * 画法（两轮迭代的落点）：
+ * 视觉主线（第 6 版，按教师意见：各落各位 + 恒流不断档 + 电场必须均匀）——**载流子一颗颗飞上来，然后匀速直穿**：
  *
- * 1. 载流子**从被剥离的那一面起笔**：3 条轨迹的起点落在下表面带电层（剥离色带上沿）上、紧贴着那一层，出发时约 45°
- *    向上飞出（电子向左上、空穴向右上），再被洛伦兹力压弯、末段与上表面平行地贴进堆积带；整组轨迹仍用 `<clipPath>` 裁到薄片轮廓（前面 ∪
- *    顶面），任何线条都不会穿出元件表面；小球用 CSS `offset-path` 沿**同一条三次 贝塞尔曲线**移动，永不脱轨。
- * 2. 两侧面电性：上侧面是可见的顶面 —— 整面淡色"堆积"带 + 一排密集的载流子（实心球）；下侧面被前面遮住 —— 贴着下边的 淡色"剥离"带 + 一排**不可动离子**（空心圈 +
- *    异号），语义是"载流子被剥离走了、这一面因此带上相反电性"。两句物理标注 （`载流子堆积` / `载流子剥离→留下正离子`）随 N / P
- *    型同步改写：光画一面带电，学生只会以为"另一面凭空带正电"。
- * 3. 电场 → 平衡：`step ≥ 2` 在两条带电面之间画出横向电场箭头（方向由带正电的面指向带负电的面），`step ≥ 3` 把它们画到 最醒目；`step ≥ 3`
- *    再在一颗载流子的几何中心画等大反向的 `qE` 与 `qvB`，旁边给一句结论 ——"电场力与洛伦兹力平衡 ⟹
- *    载流子不再偏转、电压不再增大"。这就是"电压为什么不再增大"的那句话。切换载流子类型时两侧电性、电场方向、两句标注 整体翻转。
+ * 1. 载流子在薄片**内部的体相里**沿中线（y = 250）穿行：从一端的端面进来、另一端的端面出去。动效是一条**一次性播放的时间线** （点一下元件本身、翻一步、换类型、拖滑块都从头重播）： ①
+ *    一开始两侧**一点电都没有**（堆积侧空着、另一侧也看不见任何电荷）； ② 前 6
+ *    颗被洛伦兹力压弯、各自**直接贴到堆积层属于自己的那一格**上落定（不是都飞到同一个点再"闪现"成圆盘）—— 每落下 1 颗，另一侧正下方**同时 "感应"出 1
+ *    个固定离子**，两侧一个一个同步填满； ③ 第 7 颗起不再偏转，沿中线匀速直穿整片（循环）—— **不等前 6 颗落定**：入口处始终是等时间间隔进来的，才看得出是恒定电流。 ⛔
+ *    不要画成"从下表面起飞、斜穿整片落到上表面"：那读起来是把电荷从一侧搬到另一侧；堆积侧的电荷是**体相里的载流子被偏转过来**的。 实现：CSS `offset-path` +
+ *    `animation-delay`（时间轴常量在 `<script>` 的 `ENTER_*` / `BEND_DUR` / `PASS_*`）；点元件时 `replay` 自增 ⟹
+ *    `animKey` 变 ⟹ 带 key 的元素重挂 ⟹ 动画从第 0 秒重新播。
+ * 2. 两侧电性：上表面（可见顶面）＝**堆积侧**——整面淡色电荷层 + 一排载流子（6 颗圆盘，载流子流送上来的）；
+ *    另一侧（下表面，被前面遮住，只留贴底一条电荷边）＝一排**固定离子**（小方框＝钉在晶格上的位置，不会移动），与堆积侧的载流子**一一对应、数量相等**。 机制：载流子被洛伦兹力推到对面
+ *    ⟹ 这一侧少了等量载流子 ⟹ 原先被它们中和掉的**电离施主**（N 型，正电中心）／**电离受主**（P 型，负电中心） 露了出来，于是这一侧显等量异号电。 ⛔
+ *    不要写成"载流子被剥离、被搬走"：整块薄片仍旧到处是载流子、仍旧通着电流， 只是极小一部分（约 10⁻¹¹
+ *    量级）在两表面之间重新分布；两侧电荷**等量**是必然的（体内电场必须终止在两个面电荷上，σ = εE）。
+ * 3. 电场 → 平衡：`step ≥ 2` 在两带电面之间画横向电场箭头（由带正电的面指向带负电的面），`step ≥ 3` 画到最醒目；`step ≥ 3`
+ *    再在薄片中央一颗载流子的几何中心画等大反向的 `qE` 与 `qvB`，旁边给一句结论 ——"电场力与洛伦兹力平衡 ⟹
+ *    载流子不再偏转、电压不再增大"。切换载流子类型时两侧电性、电场方向、轨迹、标注整体镜像翻转。
  *
  * 物理：v = I/(nqS)、S = a·d、U = aBv = IB/(nqd)；取 a = 2.0e-3 m、d = 5.0e-4 m、n = 1e22 m^-3、q = 1.6e-19
  * C，默认 I = 1.6 mA、B = 0.5 T ⟹ v = 1.00 m/s、U = 1.00 mV。
  *
- * 版式：**左图右面板**（`mode="figure"` 时不渲染面板；`mode="figure" show-carriers` ＝ P26 原理页的静态过程图，只画
+ * 版式：**左图右面板**（`mode="figure"` 时不渲染面板；`mode="figure" show-carriers` ＝ P28 原理页的静态过程图，只画
  * 载流子过程、不渲染面板与读数），面板定宽 320px：类型两个胶囊按钮同排、两条滑块并排（名 + 读数一行、滑杆一行）、U 与 v 两块读数并排。分步显隐一律只切 `visibility`
  * 占位（元素始终留在 DOM 里，真删真插会把已可见元素顶跑）。
  *
- * 高度：viewBox 未改（0 36 720 430）⟹ 700px 容器下图栏 217.8px、三个 step 完全一致；第 3 步全部画在 SVG 内部，不占 额外高度（上限 272px）。
+ * 高度：viewBox（0 36 720 430）未改 ⟹ 700px 容器下图栏 217.8px、三个 step 完全一致；第 3 步全部画在 SVG 内部，不占额外高度（上限 272px）。
  */
 const {
   mode = "lab",
@@ -34,9 +40,9 @@ const {
 } = defineProps<{
   /** `"lab"` 原理演示（含控件）；`"figure"` 干净题目图（只有薄片 / 尺寸 / 电流 / 磁场） */
   mode?: "figure" | "lab";
-  /** 翻页步：≥1 载流子被剥离 + 两侧面堆积/剥离电荷 + 两句标注；≥2 两侧面电势高低与横向电场；≥3 电场力与洛伦兹力平衡 */
+  /** 翻页步：≥1 一颗载流子偏转到堆积侧 + 两侧面异号电荷 + 两句标注；≥2 两侧面电势高低与横向电场；≥3 电场力与洛伦兹力平衡 */
   step?: number;
-  /** `"figure"` 时是否画出载流子过程（P26 原理页用；默认 `false` ＝ 干净的题目图） */
+  /** `"figure"` 时是否画出载流子过程（P28 原理页用；默认 `false` ＝ 干净的题目图） */
   showCarriers?: boolean;
 }>();
 
@@ -66,9 +72,9 @@ const iTex = computed(() => `${currentMa.value.toFixed(1)}\\ \\text{mA}`);
 
 const isLab = computed(() => mode === "lab");
 const stepNow = computed(() => Math.max(0, Math.min(step, 3)));
-/** `figure` + `show-carriers`：P26 原理页的静态过程图（相当于 step ≥ 2 的画面，但没有面板与读数） */
+/** `figure` + `show-carriers`：P28 原理页的静态过程图（相当于 step ≥ 2 的画面，但没有面板与读数） */
 const figureCarriers = computed(() => mode === "figure" && showCarriers);
-/** 载流子偏转与两侧面堆积 / 剥离电荷 + 两句物理标注 */
+/** 载流子偏转、堆积侧的电荷层，以及另一侧的等量异号电荷 + 两句物理标注 */
 const showCharges = computed(() => figureCarriers.value || (isLab.value && stepNow.value >= 1));
 /** 两条带电面之间的横向电场：step ≥ 2 建立（figure 原理图取 step 2 的画面） */
 const showField = computed(() => figureCarriers.value || (isLab.value && stepNow.value >= 2));
@@ -78,8 +84,6 @@ const fieldStrong = computed(() => isLab.value && stepNow.value >= 3);
 const showBalance = computed(() => isLab.value && stepNow.value >= 3);
 /** 两侧面电势高低与 U 读数（figure 原理图取 step ≥ 2 的静态画面） */
 const showResult = computed(() => figureCarriers.value || (isLab.value && stepNow.value >= 2));
-/** 轨迹组：lab 全程都在（step 0 是还没偏转的水平直线）；figure 只有 show-carriers 才画 */
-const showFlow = computed(() => isLab.value || figureCarriers.value);
 /** Figure 布局整体右移 42 抵消右侧留白（没有面板）；但画了载流子过程时右侧还有 U 尺寸线与两侧电势标注， 若不还原位移、最后一个字会越过 720 视框右边界被裁掉。 */
 const figShift = computed(() =>
   isLab.value || figureCarriers.value ? "translate(0 0)" : "translate(42 0)",
@@ -101,19 +105,16 @@ const bottomSign = computed(() => (isN.value ? "+" : "−"));
 const bottomColor = computed(() => (isN.value ? "var(--c-danger)" : "var(--c-velocity)"));
 const topPotential = computed(() => (isN.value ? "电势低" : "电势高"));
 const bottomPotential = computed(() => (isN.value ? "电势高" : "电势低"));
-
 /** 两句物理标注：贴着两条带电带，随载流子正负同步改写（内容，不是操作提示） */
 const topNote = "载流子堆积";
-const bottomNote = computed(() => (isN.value ? "载流子剥离→留下正离子" : "载流子剥离→留下负离子"));
+const bottomNote = "另一侧等量异号电荷";
 
 /** 元件在画布中的几何（viewBox 用户单位）：前面 c × a，厚度 d 沿 (+60, −48) 方向（斜二测） */
 const PLATE_X0 = 165;
 const PLATE_X1 = 495;
 const PLATE_Y0 = 150;
 const PLATE_Y1 = 350;
-/** 前面水平中线（轨迹左右镜像的对称轴） */
-const PLATE_CX = (PLATE_X0 + PLATE_X1) / 2;
-/** 顶面（＝上侧面，可见）与右侧面的轮廓 */
+/** 顶面（＝上表面，可见，堆积侧）与右侧面的轮廓 */
 const TOP_FACE = "M 165 150 L 225 102 H 555 L 495 150 Z";
 const RIGHT_FACE = "M 495 150 L 555 102 V 302 L 495 350 Z";
 
@@ -131,90 +132,70 @@ const arrowHead = (tip: Point, dir: Point, len = 13, half = 5.5): string => {
 };
 
 /**
- * ── 载流子轨迹 ── 起点在**被剥离的下表面**：落在剥离色带上沿上方 2 个单位（紧贴带电层、又不压住离子圈），出发时约 45° 向上飞出，末段与上表面平行地贴进堆积带 ——
- * 三次贝塞尔（起点切线抬起、终点切线水平）。
+ * ── 载流子流：一条一次性播放的时间线 ── 载流子在薄片**内部的体相里**沿电流方向穿行（走中线 y=250，离上下两个带电面等距），从一端的端面进来、另一端的端面出去。
+ * 点一下元件（或翻到下一步）就从头放一遍，故事按顺序走完：
+ *
+ * ① **一开始两侧一点电荷都没有**：堆积侧空着，另一侧也空着（那些固定离子还都被载流子中和着，看不见）。 ② **一颗一颗飞上来**：前 6
+ * 颗走到体相中央被洛伦兹力压弯，末段几乎竖直地贴上表面（堆积侧）； 落下 1 颗 ⟹ 堆积层多 1 颗载流子、它的正下方同时"感应"出 1 个固定离子（显异号电）…… 6 颗走完，两侧同步填满。
+ * ③ **从第 7 颗起匀速直穿**：偏转的 6 颗一落定、电荷层建立，后面的载流子就不再偏转，沿中线匀速穿过整片（循环）。 ⚠️ 进场节奏从头到尾**恒定** `ENTER_GAP`（0.55
+ * s 一颗）：第 7 颗不等 6 颗落定就进场（它进场时第 6 颗还在飞）， 否则入口会断档一阵、再"集体出发"，看起来就不像恒定电流。
+ *
+ * ⛔ 起点必须落在体相里（中线），不能贴在另一侧的表面上：那读起来就是"把电荷从一侧搬到另一侧"。
  */
-/** 起点纵坐标：下表面剥离带上沿（326）上方 2 个单位 */
-const FLOW_START_Y = 324;
-/** 终点纵坐标：上表面（顶面）内部，落进堆积带 */
-const FLOW_LAND_Y = 144;
-/** 3 条轨迹的起点横坐标（P 型＝载流子向右走；N 型关于薄片中线镜像 ⟹ 电子向左上方飞出） */
-const FLOW_START_X = [195, 285, 375];
-/** 3 条轨迹在上表面的落点横坐标 */
-const FLOW_LAND_X = [330, 415, 475];
-/** 起点控制点：沿流向走 FLOW_CTRL_RUN、同时抬起 FLOW_CTRL_RISE ⟹ 出发时约 45° */
-const FLOW_CTRL_RUN = 0.42;
-const FLOW_CTRL_RISE = 0.32;
-/** 终点控制点：与终点同高 ⟹ 贴上表面时方向与该面平行 */
-const FLOW_LAND_RUN = 0.45;
-/** Step 0（还没偏转）的直线轨迹：3 条水平线走在薄片中部 */
-const DRIFT_ENTRY_X = 185;
-const DRIFT_EXIT_X = 475;
-const DRIFT_YS = [296, 254, 212];
-/** 每颗小球沿轨迹走一遍的周期（秒）——**必须与样式表里 `he-flow-travel` 的时长一致** */
-const FLOW_PERIOD = 2.4;
-const FLOW_BALLS_PER_PATH = 3;
-/** 流向小三角所在的贝塞尔参数（起飞段上） */
-const FLOW_HEAD_T = 0.16;
+/** 堆积层（上表面）上电荷所在的纵坐标 */
+const PILE_Y = 126;
+/** 堆积层 6 个位置：两端各离顶面斜边约 50 */
+const PILE_SLOTS = [242, 288, 334, 380, 426, 472];
+/** 载流子穿行的纵坐标：薄片中线（受力分析也画在这一带，所以载流子流必须画在那些箭头下面） */
+const FLOW_Y = 250;
+/** 入口 / 出口离端面的距离（端面＝电流进出的那条边） */
+const FLOW_INSET = 10;
+/** 入口横坐标：N 型电子向左漂（从右端进），P 型空穴向右漂（从左端进） */
+const flowStartX = computed(() => (isN.value ? PLATE_X1 - FLOW_INSET : PLATE_X0 + FLOW_INSET));
+/** 出口横坐标：与入口相对的那一端 */
+const flowEndX = computed(() => (isN.value ? PLATE_X0 + FLOW_INSET : PLATE_X1 - FLOW_INSET));
+/** Figure 静态帧（P28）拿堆积排的哪一格当代表轨迹（中间那格） */
+const BEND_FIGURE_SLOT = 2;
+/**
+ * 6 颗被压上来的载流子**各落各位**：不再都飞到同一个点、再"闪现"成一个圆盘。次序是**先入口侧、后远端**—— 越早进入的载流子，体内电场还越弱（`qE` 小 ⟹ 合力大）⟹
+ * 偏得越陡、越早贴到面上，所以从入口那一端往远端依次填满。 ⚠️ 入口在右还是在左取决于载流子种类：N 型电子向左漂、从右端进（`flowStartX = 485`）⟹ 先填最右那一格；P 型空穴
+ * 向右漂、从左端进 ⟹ 顺序整个镜像过来（否则最陡的那颗会落到远端、最平的那颗落到入口侧）。
+ */
+const bendSlotOrder = computed(() => (isN.value ? [5, 4, 3, 2, 1, 0] : [0, 1, 2, 3, 4, 5]));
 
-/** 流向：+1 ＝ 向右（空穴，与电流同向）；−1 ＝ 向左（电子，与电流反向） */
-const flowDir = computed(() => (isN.value ? -1 : 1));
-
-interface FlowPath {
-  key: string;
-  d: string;
-  /** 起点 / 两个控制点 / 终点：三次贝塞尔（直线段取三等分共线控制点，退化成"匀速直线"） */
+interface CubicPath {
+  /** 起点 / 两个控制点 / 终点：三次贝塞尔 */
   p0: Point;
   c1: Point;
   c2: Point;
   p1: Point;
 }
 
-/** 偏转前为水平直线（step 0），step ≥ 1 换成"从下表面起飞 → 贴到上表面"的三次贝塞尔 */
-const flowPaths = computed<FlowPath[]>(() => {
-  const dir = flowDir.value;
-  const driftFrom = dir > 0 ? DRIFT_ENTRY_X : DRIFT_EXIT_X;
-  const driftTo = dir > 0 ? DRIFT_EXIT_X : DRIFT_ENTRY_X;
+const cubicD = (p: CubicPath): string =>
+  `M ${p.p0.x} ${p.p0.y} C ${p.c1.x} ${p.c1.y} ${p.c2.x} ${p.c2.y} ${p.p1.x} ${p.p1.y}`;
 
-  return FLOW_START_X.map((startX, index) => {
-    const key = `he-flow-${index}`;
+/**
+ * 偏转轨迹：水平匀速 + 竖直匀加速 ⟹ 抛物线，y ∝ (Δx)²（起点切线水平、终点切线沿运动方向陡升）。 抛物线的两条切线交在两端的中点，等价的二次贝塞尔转成三次即可（起始斜率
+ * 0、末段不再画成斜穿）。`endX` ＝ 这一颗最终贴在堆积层的哪一格 ⟹ 6 颗各有各的轨迹，末端切线越来越陡。
+ */
+const bendCurveTo = (endX: number): CubicPath => {
+  const p0: Point = { x: flowStartX.value, y: FLOW_Y };
+  const p1: Point = { x: endX, y: PILE_Y };
+  const qx = (p0.x + p1.x) / 2;
 
-    if (!showCharges.value) {
-      const from: Point = { x: driftFrom, y: DRIFT_YS[index] };
-      const to: Point = { x: driftTo, y: DRIFT_YS[index] };
-      const third = (to.x - from.x) / 3;
+  return {
+    p0,
+    c1: { x: p0.x + ((qx - p0.x) * 2) / 3, y: p0.y },
+    c2: { x: p1.x + ((qx - p1.x) * 2) / 3, y: p1.y + ((p0.y - p1.y) * 2) / 3 },
+    p1,
+  };
+};
+const bendD = computed(() => cubicD(bendCurveTo(PILE_SLOTS[BEND_FIGURE_SLOT])));
+/** 平衡后的路线：一条水平直线，从入口直穿到出口 */
+const passD = computed(() => `M ${flowStartX.value} ${FLOW_Y} H ${flowEndX.value}`);
 
-      return {
-        key,
-        d: `M ${from.x} ${from.y} L ${to.x} ${to.y}`,
-        p0: from,
-        c1: { x: from.x + third, y: from.y },
-        c2: { x: from.x + 2 * third, y: from.y },
-        p1: to,
-      };
-    }
-
-    const sx = dir > 0 ? startX : 2 * PLATE_CX - startX;
-    const lx = dir > 0 ? FLOW_LAND_X[index] : 2 * PLATE_CX - FLOW_LAND_X[index];
-    const run = Math.abs(lx - sx);
-    const rise = FLOW_START_Y - FLOW_LAND_Y;
-    const p0: Point = { x: sx, y: FLOW_START_Y };
-    const c1: Point = {
-      x: sx + dir * run * FLOW_CTRL_RUN,
-      y: FLOW_START_Y - rise * FLOW_CTRL_RISE,
-    };
-    const c2: Point = { x: lx - dir * run * FLOW_LAND_RUN, y: FLOW_LAND_Y };
-    const p1: Point = { x: lx, y: FLOW_LAND_Y };
-    const d =
-      `M ${sx.toFixed(1)} ${p0.y} C ${c1.x.toFixed(1)} ${c1.y.toFixed(1)} ` +
-      `${c2.x.toFixed(1)} ${c2.y.toFixed(1)} ${p1.x.toFixed(1)} ${p1.y}`;
-
-    return { key, d, p0, c1, c2, p1 };
-  });
-});
-
-/** 三次贝塞尔上参数 t 处的点（小球静止兜底姿势 + 流向三角都取它） */
-const cubicAt = (p: FlowPath, t: number): Point => {
+/** 三次贝塞尔上参数 t 处的点（figure 静态帧里把几颗载流子摆在轨迹上） */
+const cubicAt = (p: CubicPath, t: number): Point => {
   const u = 1 - t;
 
   return {
@@ -223,65 +204,100 @@ const cubicAt = (p: FlowPath, t: number): Point => {
   };
 };
 
-/** 流向小三角：画在轨迹的起飞段上、沿该点切线取向，静止帧里也看得出电子是"逆着电流走" */
-const flowHeads = computed(() =>
-  flowPaths.value.map((p, index) => {
-    const tip = cubicAt(p, FLOW_HEAD_T);
-    const back = cubicAt(p, FLOW_HEAD_T - 0.06);
-    const dx = tip.x - back.x;
-    const dy = tip.y - back.y;
-    const len = Math.hypot(dx, dy) || 1;
+/** Figure 静态帧（P28 原理页）：轨迹上摆 4 颗，摆成"正在被压弯"的一刻 */
+const FIG_DOT_TS = [0.16, 0.36, 0.56, 0.76];
+const figDots = computed(() =>
+  FIG_DOT_TS.map((t, index) => {
+    const point = cubicAt(bendCurveTo(PILE_SLOTS[BEND_FIGURE_SLOT]), t);
 
-    return { key: `he-head-${index}`, points: arrowHead(tip, { x: dx / len, y: dy / len }, 13, 6) };
+    return { key: `he-dot-${index}`, x: point.x, y: point.y };
   }),
 );
 
-interface FlowBall {
-  key: string;
-  /** 与轨迹同一条曲线：offset-path 让小球永不脱轨 */
-  path: string;
-  /** 负延时把同一条轨迹上的 3 颗球错开成"一串" */
-  delay: string;
-  /** 兜底静止位置（轨迹的三等分点）：不支持 offset-path 的浏览器里小球仍然落在轨迹上 */
-  fx: number;
-  fy: number;
-}
+/**
+ * ── 时间轴（秒）：恒流就该是**等时间间隔** ── 每 `ENTER_GAP` 秒有一颗载流子从端面进入，从第 1 颗起一直不断： · 前 6
+ * 颗被压到上表面、各落各位（一次性动画），落定那一刻同位置的圆盘淡进来 —— 不跳、不闪； · 第 7 颗起不再偏转、沿中线匀速直穿，并且**不等前 6 颗落定**（第 7 颗进入时第 6
+ * 颗还在飞）⟹ 入口处永远是 `k × ENTER_GAP` 的间距，看着才是恒定电流； · 直穿这一股用 `PASS_COUNT` 颗循环，每颗走完整片的时间正好是 `PASS_COUNT ×
+ * ENTER_GAP` ⟹ 首尾相接，循环处没有接缝。
+ */
+const ENTER_FIRST = 0.3;
+const ENTER_GAP = 0.55;
+/** 一颗从入口被压到上表面所花的时间：6 颗都用 1.7 s 走完（竖直方向都上升 124，速度一样；陡的那颗只是水平跨距短、总路程短） */
+const BEND_DUR = 1.7;
+const PASS_COUNT = 4;
+const PASS_DUR = PASS_COUNT * ENTER_GAP;
+/**
+ * 第 1 颗落定的时刻（＝堆积侧、另一侧第一颗电荷出现的时刻）：提前 0.14 s，也就是这颗载流子走到 92% 的时候。 圆盘用 0.34 s 淡入，所以载流子在 98%→100%
+ * 淡出时圆盘已经有一半可见 ⟹ 交接处不会瞬间变暗；两者的中心严格重合，看不出"跳"。
+ */
 
-const flowBalls = computed<FlowBall[]>(() =>
-  flowPaths.value.flatMap((p, index) =>
-    Array.from({ length: FLOW_BALLS_PER_PATH }, (_, k) => {
-      const t = k / FLOW_BALLS_PER_PATH;
-      const at = cubicAt(p, t);
+const FIRST_CHARGE_AT = ENTER_FIRST + BEND_DUR - 0.14;
 
-      return {
-        key: `he-ball-${index}-${k}`,
-        path: p.d,
-        delay: `${-(k * FLOW_PERIOD) / FLOW_BALLS_PER_PATH}s`,
-        fx: at.x,
-        fy: at.y,
-      };
-    }),
-  ),
+/** 一次播放里的全部载流子：前 6 颗各走各的偏转轨迹（一次性），之后是循环直穿的 4 颗（紧接着第 6 颗进入的时刻出场） */
+const flowDots = computed(() => {
+  const firstPass = ENTER_FIRST + PILE_SLOTS.length * ENTER_GAP;
+
+  return [
+    ...bendSlotOrder.value.map((slot, index) => ({
+      key: `he-bend-${index}`,
+      path: cubicD(bendCurveTo(PILE_SLOTS[slot])),
+      delay: `${(ENTER_FIRST + index * ENTER_GAP).toFixed(2)}s`,
+      kind: "bend",
+    })),
+    ...Array.from({ length: PASS_COUNT }, (_, index) => ({
+      key: `he-pass-${index}`,
+      path: passD.value,
+      delay: `${(firstPass + index * ENTER_GAP).toFixed(2)}s`,
+      kind: "pass",
+    })),
+  ];
+});
+/** 第 index 个堆积位上的载流子（以及它正下方那颗固定离子）出现的时刻；figure 是静止的原理图，一律立刻出现 */
+const chargeDelay = computed(() => {
+  const delays: string[] = PILE_SLOTS.map(() => "0s");
+  if (!isLab.value) return delays;
+  bendSlotOrder.value.forEach((slot, order) => {
+    delays[slot] = `${(FIRST_CHARGE_AT + order * ENTER_GAP).toFixed(2)}s`;
+  });
+
+  return delays;
+});
+/** 电荷层开始建立的时刻：薄片两面的着色也等到这一刻才淡进来（一开始两侧一点电都没有） */
+const firstChargeDelay = computed(() => (isLab.value ? `${FIRST_CHARGE_AT.toFixed(2)}s` : "0s"));
+
+/** 点元件本身（或翻步、换类型、调电流/磁场）就从头重播：key 一变，带 key 的元素重挂 ⟹ CSS 动画重新开始 */
+const replay = ref(0);
+const animKey = computed(() =>
+  isLab.value
+    ? `${replay.value}-${stepNow.value}-${carrier.value}-${currentMa.value.toFixed(1)}-${bField.value.toFixed(2)}`
+    : "figure",
 );
+const replayAnimation = (): void => {
+  replay.value += 1;
+};
 
-/** ── 两侧面的电荷 ── 上侧面＝可见顶面：一排密集的载流子（实心球）； 下侧面被前面遮住：贴着下边的淡色带 + 一排不可动离子（空心圈，区别于会跑动的载流子）。 */
-const TOP_ROW_X = [224, 281, 338, 395, 452, 509];
-const TOP_ROW_Y = 128;
-const BOTTOM_ROW_X = [197, 254, 311, 368, 425, 482];
-const BOTTOM_ROW_Y = 337;
-/** 下侧面"剥离"色带的顶边（一直铺到下边） */
-const BOTTOM_BAND_Y = 326;
+/**
+ * ── 两侧面的电荷 ── 上表面（可见顶面）：一排载流子（实心圆盘＝可动的载流子，由载流子流一颗颗送上来的）。
+ * 下表面（被前面遮住）：一排**固定离子**（方框＝钉在晶格上的位置，不会移动）——载流子被洛伦兹力推到对面以后， 这一侧少了等量的载流子，本来被中和的施主/受主离子就露了出来，于是显等量异号电。
+ * ⛔ 不要写"载流子被剥离"：被推走的只是极小一部分载流子，另一侧也从来不是"空掉"，而是留下了离子。
+ */
+const BOTTOM_MARK_X = PILE_SLOTS;
+/** 另一侧固定离子的高度：贴在下边之上，与电流箭头留出空隙 */
+const BOTTOM_MARK_Y = 334;
+/** 另一侧电荷边的高度：薄薄一条贴在下边上（这一面被前面遮住，只看得到一条边） */
+const BOTTOM_EDGE_Y = 345;
 /** 图内标注字号（viewBox 720 宽在 700px 容器里缩到约一半 ⟹ 字号要给足，还不带单位） */
 const NOTE_FONT = 28;
-/** 上表面堆积带标注 / 下表面剥离带标注的锚点（都贴在带电带外侧的空白处，不压住电荷） */
+/** 上表面堆积带标注 / 另一侧电荷标注的锚点（都贴在带电带外侧的空白处，不压住电荷） */
 const TOP_NOTE_AT: Point = { x: 300, y: 82 };
 const BOTTOM_NOTE_AT: Point = { x: 330, y: 366 };
 
 /**
- * ── 横向电场（step ≥ 2，step ≥ 3 最醒目）── 两条带电面之间、薄片内部；方向恒由带正电的面指向带负电的面： N 型下表面为正 ⟹ 电场向上；P 型上表面为正 ⟹ 电场向下。4
- * 条的横坐标刻意让开薄片中央那条"受力走廊"。
+ * ── 横向电场（step ≥ 2，step ≥ 3 最醒目）── 两条带电面之间、薄片内部；方向恒由带正电的面指向带负电的面： N 型下表面为正 ⟹ 电场向上；P 型上表面为正 ⟹ 电场向下。
+ * **匀强电场 ⟹ 箭头必须等间距**（6 条、间距 46，左右各离薄片内沿 50，关于中线 330 严格对称）：中间两格之间那道 46 的缝留给 qvB / qE
+ * 的受力分析，两条力箭头就画在这道缝里 —— 不许为了给受力分析腾地方而把某两条箭头挤到一起（那就不是匀强电场了）。
  */
-const E_ARROW_XS = [216, 274, 388, 446];
+const E_ARROW_XS = [215, 261, 307, 353, 399, 445];
 const E_ARROW_TOP_Y = 166;
 const E_ARROW_BOTTOM_Y = 330;
 /** 平衡（step ≥ 3）时电场箭头画到最醒目：更粗、更亮 */
@@ -297,17 +313,18 @@ const eField = computed(() =>
 
 /**
  * ── 平衡（step ≥ 3）── 取一颗载流子：几何中心落在薄片中心，正好压在中间那条轨迹上（两种类型都经过这里）。两个力都从这个
- * 中心起笔、等大反向：洛伦兹力指向堆积面（向上），电场力指向剥离面（向下）。
+ * 中心起笔、等大反向：洛伦兹力指向堆积面（向上），电场力指向另一侧（向下）。
  */
 const FORCE_CENTER: Point = { x: 330, y: 250 };
-const FORCE_LEN = 58;
+/** 力箭头的长度：两侧电场箭头间距只有 46、`qvB`/`qE` 的标注还要塞进这道缝，58 会顶到下面的电流箭头 */
+const FORCE_LEN = 44;
 const B_FORCE_TIP: Point = { x: FORCE_CENTER.x, y: FORCE_CENTER.y - FORCE_LEN };
 const E_FORCE_TIP: Point = { x: FORCE_CENTER.x, y: FORCE_CENTER.y + FORCE_LEN };
-const FORCE_FONT = 24;
-/** 两个力的标注（画在箭头旁侧，锚点左对齐 ⟹ 不压箭头） */
-const B_FORCE_LABEL: Point = { x: FORCE_CENTER.x + 12, y: B_FORCE_TIP.y + 10 };
-const E_FORCE_LABEL: Point = { x: FORCE_CENTER.x + 12, y: E_FORCE_TIP.y - 4 };
-/** 平衡结论：一句话，画在薄片下方、剥离带标注的再下一行（都在 C_DIM_Y = 415 之上） */
+const FORCE_FONT = 16;
+/** 两个力的标注：居中压在箭头正上 / 正下（两侧只隔 46，放不下侧标；居中 + 深色描边才不会和电场箭头糊在一起） */
+const B_FORCE_LABEL: Point = { x: FORCE_CENTER.x, y: B_FORCE_TIP.y - 10 };
+const E_FORCE_LABEL: Point = { x: FORCE_CENTER.x, y: E_FORCE_TIP.y + 13 };
+/** 平衡结论：一句话，画在薄片下方、另一侧标注的再下一行（都在 C_DIM_Y = 415 之上） */
 const BALANCE_NOTE = "电场力与洛伦兹力平衡 ⟹ 载流子不再偏转、电压不再增大";
 const BALANCE_AT: Point = { x: 330, y: 395 };
 const BALANCE_FONT = 21;
@@ -347,20 +364,10 @@ const U_HEADS = [
         viewBox="0 36 720 430"
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label="霍尔元件：电流沿长度方向通过薄片，磁场垂直纸面向里；载流子从下表面被剥离、弯向上表面堆积，下表面留下不可动离子，两表面间形成横向电场并不断增强，直到电场力与洛伦兹力平衡"
+        :style="{ '--he-arrive': `${BEND_DUR}s`, '--he-pass': `${PASS_DUR}s` }"
+        @click="replayAnimation"
+        aria-label="霍尔元件：电流沿长度方向通过薄片，磁场垂直纸面向里；薄片内部的载流子沿电流方向穿行，未平衡时被洛伦兹力压弯、一颗颗贴到上表面堆积，平衡后不再偏转、直接匀速穿过；另一侧同样多的固定离子因此露出，显出等量异号电荷，两表面间形成横向电场并不断增强，直到电场力与洛伦兹力平衡"
       >
-        <defs>
-          <!-- 载流子只许待在薄片里：前面 ∪ 顶面（上侧面） -->
-          <clipPath id="he-plate-clip">
-            <rect
-              :x="PLATE_X0"
-              :y="PLATE_Y0"
-              :width="PLATE_X1 - PLATE_X0"
-              :height="PLATE_Y1 - PLATE_Y0"
-            />
-            <path :d="TOP_FACE" />
-          </clipPath>
-        </defs>
         <!-- 题目图模式：内容整体右移，抵消右侧留白 -->
         <g :transform="figShift">
           <!-- 薄片：前面（长 c × 宽 a） -->
@@ -387,26 +394,25 @@ const U_HEADS = [
             stroke="var(--c-neutral-300)"
             stroke-width="2.4"
           />
-          <!-- step ≥ 1：上侧面堆积色带（整张可见顶面）＋ 下侧面剥离色带（贴下边：那一面被载流子抛弃了） -->
+          <!-- step ≥ 1：上侧面（堆积侧）整面带电；另一侧被前面遮住，只在下边上留一条薄薄的电荷边（那层是固定离子，不是载流子） -->
           <g :style="fade(showCharges)">
-            <path :d="TOP_FACE" :fill="topColor" opacity="0.3" />
-            <rect
-              :x="PLATE_X0"
-              :y="BOTTOM_BAND_Y"
-              :width="PLATE_X1 - PLATE_X0"
-              :height="PLATE_Y1 - BOTTOM_BAND_Y"
-              :fill="bottomColor"
-              opacity="0.26"
-            />
-            <line
-              :x1="PLATE_X0"
-              :y1="PLATE_Y1 - 3"
-              :x2="PLATE_X1"
-              :y2="PLATE_Y1 - 3"
-              :stroke="bottomColor"
-              stroke-width="3"
-              opacity="0.55"
-            />
+            <g
+              :key="`he-tint-${animKey}`"
+              class="he-charge-in"
+              :style="{ animationDelay: firstChargeDelay }"
+            >
+              <path :d="TOP_FACE" :fill="topColor" opacity="0.3" />
+              <line
+                :x1="PLATE_X0 + 4"
+                :y1="BOTTOM_EDGE_Y"
+                :x2="PLATE_X1 - 4"
+                :y2="BOTTOM_EDGE_Y"
+                :stroke="bottomColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                opacity="0.6"
+              />
+            </g>
           </g>
           <!-- 轮廓重描：色带不盖住薄片的边 -->
           <rect
@@ -419,81 +425,105 @@ const U_HEADS = [
             stroke-width="2.4"
           />
           <path :d="TOP_FACE" fill="none" stroke="var(--c-neutral-300)" stroke-width="2.4" />
+          <!--
+            step ≥ 1：载流子流 —— 从一端的端面进来、在薄片体相里沿中线穿行。点一下元件就从头放一遍：
+            前 6 颗被洛伦兹力压弯、末段贴上表面（堆积侧）落定，6 颗走完以后剩下的匀速直穿整片。
+            画在电场箭头**下面**：箭头是背景场，别被载流子打断。
+          -->
+          <g :style="fade(showCharges)">
+            <!-- figure（P28 原理页）：静态帧 —— 轨迹 + 4 颗"正在偏转"的载流子 -->
+            <template v-if="!isLab">
+              <path
+                :d="bendD"
+                fill="none"
+                :stroke="carrierColor"
+                stroke-width="2.2"
+                stroke-opacity="0.4"
+                stroke-linecap="round"
+              />
+              <g v-for="dot in figDots" :key="dot.key" :transform="`translate(${dot.x} ${dot.y})`">
+                <circle r="9.5" :fill="carrierColor" stroke="var(--c-bg)" stroke-width="1.6" />
+                <text
+                  y="0"
+                  font-size="13"
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                  fill="var(--c-bg)"
+                  font-family="KaTeX_Main"
+                >
+                  {{ carrierSign }}
+                </text>
+              </g>
+            </template>
+            <!-- lab（P29 交互页）：一条时间线 —— 点元件、翻步、换类型、调 I/B 都从头重播 -->
+            <template v-else>
+              <g
+                v-for="dot in flowDots"
+                :key="`${dot.key}-${animKey}`"
+                class="he-flow"
+                :class="dot.kind === 'bend' ? 'he-flow-bend' : 'he-flow-pass'"
+                :style="{ offsetPath: `path('${dot.path}')`, animationDelay: dot.delay }"
+              >
+                <circle r="9.5" :fill="carrierColor" stroke="var(--c-bg)" stroke-width="1.6" />
+                <text
+                  y="0"
+                  font-size="13"
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                  fill="var(--c-bg)"
+                  font-family="KaTeX_Main"
+                >
+                  {{ carrierSign }}
+                </text>
+              </g>
+            </template>
+          </g>
           <!-- step ≥ 2：薄片内部的横向电场（由带正电的面指向带负电的面）；step ≥ 3 平衡时最醒目 -->
           <g :style="fade(showField)">
-            <CourseArrow
-              v-for="arrow in eField"
-              :key="arrow.key"
-              :from="arrow.from"
-              :to="arrow.to"
-              stroke="var(--c-physics)"
-              :stroke-width="E_ARROW_WIDTH"
-              :opacity="E_ARROW_OPACITY"
-            />
-            <text
-              x="198"
-              y="200"
-              font-size="24"
-              text-anchor="middle"
-              dominant-baseline="central"
-              fill="var(--c-physics)"
-              font-family="KaTeX_Math"
-              font-style="italic"
-              stroke="var(--c-bg)"
-              stroke-width="4"
-              paint-order="stroke"
-            >
-              E
-            </text>
-          </g>
-          <!-- 载流子：电子向左（与电流反向）／空穴向右，都从下表面起飞、弯向上表面；整组裁到薄片轮廓内 -->
-          <g :style="fade(showFlow)" clip-path="url(#he-plate-clip)">
-            <path
-              v-for="p in flowPaths"
-              :key="p.key"
-              :d="p.d"
-              fill="none"
-              :stroke="carrierColor"
-              stroke-width="2"
-              stroke-opacity="0.45"
-              stroke-linecap="round"
-            />
-            <polygon v-for="h in flowHeads" :key="h.key" :points="h.points" :fill="carrierColor" />
             <g
-              v-for="b in flowBalls"
-              :key="b.key"
-              class="he-flow-ball"
-              :style="{
-                offsetPath: `path('${b.path}')`,
-                animationDelay: b.delay,
-                '--he-fx': `${b.fx}px`,
-                '--he-fy': `${b.fy}px`,
-              }"
+              :key="`he-field-${animKey}`"
+              class="he-charge-in"
+              :style="{ animationDelay: firstChargeDelay }"
             >
-              <circle r="9" :fill="carrierColor" />
+              <CourseArrow
+                v-for="arrow in eField"
+                :key="arrow.key"
+                :from="arrow.from"
+                :to="arrow.to"
+                stroke="var(--c-physics)"
+                :stroke-width="E_ARROW_WIDTH"
+                :opacity="E_ARROW_OPACITY"
+              />
               <text
-                y="0"
-                font-size="16"
+                x="198"
+                y="200"
+                font-size="24"
                 text-anchor="middle"
                 dominant-baseline="central"
-                fill="var(--c-bg)"
-                font-family="KaTeX_Main"
+                fill="var(--c-physics)"
+                font-family="KaTeX_Math"
+                font-style="italic"
+                stroke="var(--c-bg)"
+                stroke-width="4"
+                paint-order="stroke"
               >
-                {{ carrierSign }}
+                E
               </text>
             </g>
           </g>
-          <!-- step ≥ 1：上侧面（贴住载流子的一面）一排密集的载流子 -->
+          <!-- step ≥ 1：上表面（堆积侧）的电荷层 —— 一排堆上去的载流子（载流子流送上来的一颗颗） -->
           <g :style="fade(showCharges)">
             <g
-              v-for="(x, index) in TOP_ROW_X"
-              :key="`he-top-${index}`"
-              :transform="`translate(${x} ${TOP_ROW_Y})`"
+              v-for="(x, index) in PILE_SLOTS"
+              :key="`he-top-${index}-${animKey}`"
+              class="he-charge-in"
+              :style="{ animationDelay: chargeDelay[index] }"
+              :transform="`translate(${x} ${PILE_Y})`"
             >
-              <circle r="8" :fill="topColor" />
+              <circle r="9" :fill="topColor" />
               <text
                 y="0"
-                font-size="14"
+                font-size="13"
                 text-anchor="middle"
                 dominant-baseline="central"
                 fill="var(--c-bg)"
@@ -502,16 +532,34 @@ const U_HEADS = [
                 {{ topSign }}
               </text>
             </g>
-            <!-- step ≥ 1：下侧面（载流子被剥离走的一面）一排不可动离子：空心圈表示"不动" -->
+            <!--
+              step ≥ 1：另一侧的电荷 —— 不是载流子，而是载流子被推到对面以后**没被中和的固定离子**：
+              N 型是电离的施主（正电中心），P 型是电离的受主（负电中心）。
+              方框＝钉在晶格上的位置、不会移动（粒子的圆盘＝可以动的载流子）；
+              x 与堆积层一一对应（一颗载流子挪上去，正下方露出一个离子），所以两侧数量天然相等。
+            -->
             <g
-              v-for="(x, index) in BOTTOM_ROW_X"
-              :key="`he-ion-${index}`"
-              :transform="`translate(${x} ${BOTTOM_ROW_Y})`"
+              v-for="(x, index) in BOTTOM_MARK_X"
+              :key="`he-bface-${index}-${animKey}`"
+              class="he-charge-in"
+              :style="{ animationDelay: chargeDelay[index] }"
+              :transform="`translate(${x} ${BOTTOM_MARK_Y})`"
             >
-              <circle r="8.5" fill="none" :stroke="bottomColor" stroke-width="1.8" />
+              <rect
+                x="-8"
+                y="-8"
+                width="16"
+                height="16"
+                rx="2.5"
+                :fill="bottomColor"
+                fill-opacity="0.16"
+                :stroke="bottomColor"
+                stroke-width="1.2"
+                stroke-opacity="0.7"
+              />
               <text
                 y="0"
-                font-size="14"
+                font-size="11.5"
                 text-anchor="middle"
                 dominant-baseline="central"
                 :fill="bottomColor"
@@ -521,113 +569,125 @@ const U_HEADS = [
               </text>
             </g>
           </g>
-          <!-- step ≥ 1：两句物理标注 —— 说清"这一面为什么是这个电性"（载流子被剥离 ⇒ 留下异号离子） -->
+          <!-- step ≥ 1：两句物理标注 —— 一句说堆积侧，一句说另一侧显的是等量异号电荷；跟第一颗电荷一起淡进来 -->
           <g :style="fade(showCharges)">
-            <text
-              :x="TOP_NOTE_AT.x"
-              :y="TOP_NOTE_AT.y"
-              :font-size="NOTE_FONT"
-              text-anchor="middle"
-              dominant-baseline="central"
-              :fill="topColor"
-              stroke="var(--c-bg)"
-              stroke-width="6"
-              paint-order="stroke"
-              font-weight="700"
+            <g
+              :key="`he-note-${animKey}`"
+              class="he-charge-in"
+              :style="{ animationDelay: firstChargeDelay }"
             >
-              {{ topNote }}
-            </text>
-            <text
-              :x="BOTTOM_NOTE_AT.x"
-              :y="BOTTOM_NOTE_AT.y"
-              :font-size="NOTE_FONT"
-              text-anchor="middle"
-              dominant-baseline="central"
-              :fill="bottomColor"
-              stroke="var(--c-bg)"
-              stroke-width="6"
-              paint-order="stroke"
-              font-weight="700"
-            >
-              {{ bottomNote }}
-            </text>
+              <text
+                :x="TOP_NOTE_AT.x"
+                :y="TOP_NOTE_AT.y"
+                :font-size="NOTE_FONT"
+                text-anchor="middle"
+                dominant-baseline="central"
+                :fill="topColor"
+                stroke="var(--c-bg)"
+                stroke-width="6"
+                paint-order="stroke"
+                font-weight="700"
+              >
+                {{ topNote }}
+              </text>
+              <text
+                :x="BOTTOM_NOTE_AT.x"
+                :y="BOTTOM_NOTE_AT.y"
+                :font-size="NOTE_FONT"
+                text-anchor="middle"
+                dominant-baseline="central"
+                :fill="bottomColor"
+                stroke="var(--c-bg)"
+                stroke-width="6"
+                paint-order="stroke"
+                font-weight="700"
+              >
+                {{ bottomNote }}
+              </text>
+            </g>
           </g>
           <!-- step ≥ 3：平衡 —— 一颗载流子上 qE 与 qvB 等大反向 ⟹ 不再偏转、电压不再增大 -->
           <g :style="fade(showBalance)">
-            <circle
-              :cx="FORCE_CENTER.x"
-              :cy="FORCE_CENTER.y"
-              r="9"
-              :fill="carrierColor"
-              stroke="var(--c-bg)"
-              stroke-width="1.6"
-            />
-            <text
-              :x="FORCE_CENTER.x"
-              :y="FORCE_CENTER.y"
-              font-size="16"
-              text-anchor="middle"
-              dominant-baseline="central"
-              fill="var(--c-bg)"
-              font-family="KaTeX_Main"
+            <g
+              :key="`he-force-${animKey}`"
+              class="he-charge-in"
+              :style="{ animationDelay: firstChargeDelay }"
             >
-              {{ carrierSign }}
-            </text>
-            <CourseArrow
-              :from="FORCE_CENTER"
-              :to="B_FORCE_TIP"
-              stroke="var(--c-force)"
-              :stroke-width="4"
-            />
-            <CourseArrow
-              :from="FORCE_CENTER"
-              :to="E_FORCE_TIP"
-              stroke="var(--c-force)"
-              :stroke-width="4"
-            />
-            <text
-              :x="B_FORCE_LABEL.x"
-              :y="B_FORCE_LABEL.y"
-              :font-size="FORCE_FONT"
-              text-anchor="start"
-              fill="var(--c-force)"
-              font-family="KaTeX_Math"
-              font-style="italic"
-              stroke="var(--c-bg)"
-              stroke-width="5"
-              paint-order="stroke"
-            >
-              qvB
-            </text>
-            <text
-              :x="E_FORCE_LABEL.x"
-              :y="E_FORCE_LABEL.y"
-              :font-size="FORCE_FONT"
-              text-anchor="start"
-              fill="var(--c-force)"
-              font-family="KaTeX_Math"
-              font-style="italic"
-              stroke="var(--c-bg)"
-              stroke-width="5"
-              paint-order="stroke"
-            >
-              qE
-            </text>
-            <text
-              :x="BALANCE_AT.x"
-              :y="BALANCE_AT.y"
-              :font-size="BALANCE_FONT"
-              text-anchor="middle"
-              dominant-baseline="central"
-              fill="var(--c-text)"
-              stroke="var(--c-bg)"
-              stroke-width="6"
-              paint-order="stroke"
-            >
-              {{ BALANCE_NOTE }}
-            </text>
+              <circle
+                :cx="FORCE_CENTER.x"
+                :cy="FORCE_CENTER.y"
+                r="9"
+                :fill="carrierColor"
+                stroke="var(--c-bg)"
+                stroke-width="1.6"
+              />
+              <text
+                :x="FORCE_CENTER.x"
+                :y="FORCE_CENTER.y"
+                font-size="16"
+                text-anchor="middle"
+                dominant-baseline="central"
+                fill="var(--c-bg)"
+                font-family="KaTeX_Main"
+              >
+                {{ carrierSign }}
+              </text>
+              <CourseArrow
+                :from="FORCE_CENTER"
+                :to="B_FORCE_TIP"
+                stroke="var(--c-force)"
+                :stroke-width="4"
+              />
+              <CourseArrow
+                :from="FORCE_CENTER"
+                :to="E_FORCE_TIP"
+                stroke="var(--c-force)"
+                :stroke-width="4"
+              />
+              <text
+                :x="B_FORCE_LABEL.x"
+                :y="B_FORCE_LABEL.y"
+                :font-size="FORCE_FONT"
+                text-anchor="middle"
+                fill="var(--c-force)"
+                font-family="KaTeX_Math"
+                font-style="italic"
+                stroke="var(--c-bg)"
+                stroke-width="5"
+                paint-order="stroke"
+              >
+                qvB
+              </text>
+              <text
+                :x="E_FORCE_LABEL.x"
+                :y="E_FORCE_LABEL.y"
+                :font-size="FORCE_FONT"
+                text-anchor="middle"
+                fill="var(--c-force)"
+                font-family="KaTeX_Math"
+                font-style="italic"
+                stroke="var(--c-bg)"
+                stroke-width="5"
+                paint-order="stroke"
+              >
+                qE
+              </text>
+              <text
+                :x="BALANCE_AT.x"
+                :y="BALANCE_AT.y"
+                :font-size="BALANCE_FONT"
+                text-anchor="middle"
+                dominant-baseline="central"
+                fill="var(--c-text)"
+                stroke="var(--c-bg)"
+                stroke-width="6"
+                paint-order="stroke"
+              >
+                {{ BALANCE_NOTE }}
+              </text>
+            </g>
           </g>
-          <!-- 电流方向（沿长度方向通过元件） -->
+          <!-- 电流方向（沿长度方向通过元件）；标注放在箭头靠近头部处：中央那条"受力走廊"整条留给 qvB / qE -->
           <CourseArrow
             :from="{ x: 205, y: 316 }"
             :to="{ x: 455, y: 316 }"
@@ -635,10 +695,11 @@ const U_HEADS = [
             :stroke-width="4"
           />
           <text
-            x="330"
-            y="296"
+            x="470"
+            y="316"
             font-size="26"
             text-anchor="middle"
+            dominant-baseline="central"
             fill="var(--c-accent)"
             font-family="KaTeX_Math"
             font-style="italic"
@@ -841,9 +902,12 @@ const U_HEADS = [
 
 /* 保险：容器比 700px 宽时，页面 .fig-h-lg 的 300px 上限会把组件顶到 300px（> 290px 预算），
    这里给 lab（带面板）单独压到 272px；700px 容器下图栏只有 217.8px，这条永远不生效。
-   `mode="figure"`（P26 原理图 / P28 题目图）不受影响，仍按页面上限 300px 渲染。 */
+   `mode="figure"`（P28 原理图 / P31 题目图）不受影响，仍按页面上限 300px 渲染。 */
 .he-wrap-lab .he-svg {
   max-height: 272px;
+
+  /* 点一下元件就从头重播一遍（教师上课会反复点），给个可点的光标 */
+  cursor: pointer;
 }
 
 /* 面板：固定窄栏（不参与纵向撑高 —— 组件总高由图栏决定），内部每一行都紧凑不折行 */
@@ -966,50 +1030,87 @@ const U_HEADS = [
   visibility: hidden;
 }
 
-/* 载流子小球：沿**与轨迹完全相同**的贝塞尔曲线移动（offset-path 不会脱轨），
-   两头淡入淡出 ⟹ 小球从下表面的剥离带里浮现、贴到上表面后融进堆积里。
-   时长必须与脚本里的 FLOW_PERIOD（2.4s）一致，负延时把同一条轨迹上的球错开成一串。 */
-.he-flow-ball {
-  animation:
-    he-flow-travel 2.4s linear infinite,
-    he-flow-fade 2.4s linear infinite;
+/* 载流子流：沿 offset-path 走（偏转阶段走抛物线、平衡之后走直线）。为什么用 offset-path：
+   轨迹是曲线，靠 transform 逐帧算会脱轨。时间轴见 <script> 里的 ENTER_* / BEND_DUR / PASS_*。 */
+.he-flow {
+  opacity: 0;
+  offset-distance: 0%;
   offset-rotate: 0deg;
 }
 
-/* 兜底（与共享 addon 里 SVG font-size 的 attr() 兜底同一套路）：老浏览器不支持 CSS 运动路径时，
-   小球不走曲线但静止在轨迹的三等分点上，不会挤到画布原点。 */
+/* 前 6 颗：一次性 —— 从入口一路压弯、贴上表面（堆积侧），落到堆积层就淡出（并进那一排） */
+.he-flow-bend {
+  animation: he-flow-bend var(--he-arrive, 1.7s) cubic-bezier(0.4, 0, 0.6, 1) 1 both;
+}
+
+/* 剩下 4 颗：电荷层一建立就匀速直穿、循环 —— 但**不等**前 6 颗落定，第 7 颗该进场时就进场
+   （延迟在 <script> 里算，间距与前面完全一样 ⟹ 看着才是恒定电流） */
+.he-flow-pass {
+  animation: he-flow-pass var(--he-pass, 2.2s) linear infinite both;
+}
+
+/* 电荷层：一颗载流子落定 ⟹ 堆积侧多一颗、另一侧同时"感应"出一颗固定离子。
+   一开始两侧一点电都没有，所以整组从 opacity 0 起、按各自的延迟一个个淡进来。 */
+.he-charge-in {
+  animation: he-charge-in 0.34s ease-out 1 both;
+}
+
+/* 兜底：老浏览器不支持 CSS 运动路径时就别画了（静止的载流子会全堆在入口），
+   画面只剩堆积层与两侧电荷，语义仍然成立。 */
 @supports not (offset-path: path("M 0 0 L 1 1")) {
-  .he-flow-ball {
-    transform: translate(var(--he-fx), var(--he-fy));
-    animation: none;
+  .he-flow {
+    display: none;
   }
 }
 
-@keyframes he-flow-travel {
-  from {
+/* 两端淡入淡出：载流子从端面"进入"薄片、到达堆积层"并入"那一排，都不该突兀地蹦出来/消失 */
+@keyframes he-flow-bend {
+  0% {
+    opacity: 0;
     offset-distance: 0%;
   }
 
-  to {
-    offset-distance: 100%;
-  }
-}
-
-@keyframes he-flow-fade {
-  0% {
-    opacity: 0;
-  }
-
-  8% {
+  9% {
     opacity: 1;
   }
 
-  88% {
+  98% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
+    offset-distance: 100%;
+  }
+}
+
+@keyframes he-flow-pass {
+  0% {
+    opacity: 0;
+    offset-distance: 0%;
+  }
+
+  7% {
+    opacity: 1;
+  }
+
+  93% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    offset-distance: 100%;
+  }
+}
+
+@keyframes he-charge-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 </style>
