@@ -25,10 +25,14 @@ const ARC_START = 176;
 const ARC_END = 262;
 const SAMPLES = 600;
 const arcPoints = Array.from({ length: SAMPLES + 1 }, (_, index) => pointAt(ARC_START + ((ARC_END - ARC_START) * index) / SAMPLES));
-const arcLengths = arcPoints.reduce<number[]>(
-  (acc, point, index) => [...acc, index === 0 ? 0 : acc[index - 1] + Math.hypot(point.x - arcPoints[index - 1].x, point.y - arcPoints[index - 1].y)],
-  [],
-);
+/** 累计弧长（逐段累加，避免在 reduce 里展开数组＝O(n²)） */
+const arcLengths: number[] = [0];
+
+for (let index = 1; index < arcPoints.length; index += 1) {
+  const previous = arcPoints[index - 1];
+  const point = arcPoints[index];
+  arcLengths.push(arcLengths[index - 1] + Math.hypot(point.x - previous.x, point.y - previous.y));
+}
 const totalArc = arcLengths[arcLengths.length - 1];
 /**
  * 弧上按累计弧长比例 f 取点
