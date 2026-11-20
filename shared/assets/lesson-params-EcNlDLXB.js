@@ -1,0 +1,1 @@
+var e=(e=>{let t=new URLSearchParams(e),n={},r=t.get(`teacher`)?.trim();r&&(n.teacher=r);let i=t.get(`logo`)?.trim();return i&&(n.logo=i),n})(typeof location>`u`?``:location.search),t=e=>{let t;try{let n=localStorage.getItem(`courseware.logo:`+e);n?.startsWith(`data:image/`)&&(t=n)}catch{}return t};export{e as n,t};

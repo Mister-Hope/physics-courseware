@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-P2Xu9kJm.js";/* empty css              */var e=document.querySelector(`#license-year`);e&&(e.textContent=String(new Date().getFullYear()));
