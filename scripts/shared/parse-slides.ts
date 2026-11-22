@@ -43,14 +43,47 @@ interface Chunk {
 }
 
 /**
+ * 去掉 HTML 标签（`<tag …>` 整段移除）。
+ *
+ * 为什么不用 `/<[^>]+>/gu` 一次性 `replaceAll`：这个模式要求标签有闭合的 `>`，未闭合的 `<script src=x` 会原样通过，清洗结果并不保证不含
+ * `<`；CodeQL 因此按 `js/incomplete-multi-character-sanitization` 报警。 这里改成单遍扫描：输出只从原文切片拼接、不会被回扫，每个 `<`
+ * 都必然被丢弃 （连同它所在的标签，或单独一个未闭合的尖括号），结果里不可能再出现标签。
+ *
+ * @param text 可能含 HTML 标签的文本
+ * @returns 去掉标签后的文本
+ */
+const stripHtmlTags = (text: string): string => {
+  let result = "";
+  let index = 0;
+
+  while (index < text.length) {
+    const open = text.indexOf("<", index);
+
+    // 后面没有 `<` 了，剩下的都是纯文本
+    if (open === -1) {
+      result += text.slice(index);
+      break;
+    }
+
+    result += text.slice(index, open);
+
+    const close = text.indexOf(">", open + 1);
+
+    // 未闭合的 `<`：不是标签，只丢掉这个尖括号，从它后面继续找
+    index = close === -1 ? open + 1 : close + 1;
+  }
+
+  return result;
+};
+
+/**
  * 去掉 markdown 行内标记，得到可读的纯文本（标题 / 检索摘要用）。
  *
  * @param text 一行 markdown
  * @returns 去掉 HTML 标签与 `*`、`_`、`$`、反引号后的文本
  */
 export const stripInline = (text: string): string =>
-  text
-    .replaceAll(/<[^>]+>/gu, "")
+  stripHtmlTags(text)
     .replaceAll(/[`*_$]/gu, "")
     .trim();
 
