@@ -1,13 +1,13 @@
 <!--
   封面装饰：闭合铁芯 + 左右原副线圈（5 匝 vs 3 匝），展示互感与变压。
-  线圈用共享 Solenoid（连续螺旋线），铁芯内用闭合虚线环表示被铁芯约束的磁通。
+  线圈用共享 Solenoid（连续螺旋线），铁芯内用闭合虚线环表示被铁芯约束的变化的磁场（磁通量）。
 -->
 <template>
   <svg viewBox="0 0 320 200" width="320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <!-- 闭合铁芯：外框 + 厚度投影 -->
     <rect x="96" y="34" width="140" height="128" rx="8" fill="none" stroke="var(--c-neutral-700)" stroke-width="18" opacity="0.55" />
     <rect x="90" y="38" width="140" height="128" rx="8" fill="none" stroke="var(--c-neutral-500)" stroke-width="18" />
-    <!-- 铁芯内闭合磁通虚线回路 -->
+    <!-- 铁芯内闭合磁路虚线回路 -->
     <rect x="90" y="38" width="140" height="128" rx="6" fill="none" stroke="var(--c-accent)" stroke-width="1.8" stroke-dasharray="6 5" opacity="0.85" />
     <!-- 原线圈（左，5 匝） -->
     <Solenoid

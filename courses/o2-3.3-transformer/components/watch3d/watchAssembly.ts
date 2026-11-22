@@ -159,12 +159,12 @@ const createTxCompleteLoopCurve = (
   turns: number,
   zOffset: number,
 ): CatmullRomCurve3 => {
-  // 白线中心线在 x = -1.75 (y = -0.18)、x = -3.5 (y = -0.68)、x = -5.2 (y = -1.15)，半径 0.115；
-  // 两根黄铜芯线上下间隔 ±0.036，严格包裹在白线内部，在 P2 C3 不会穿出白线外，在 P2 C4 白线变半透明后清晰可见电子在两根芯线里往返推入螺旋！
+  // 白线中心线在 x = -1.75 (y = -0.18)、x = -3.5 (y = -0.25)、x = -5.2 (y = -0.32)，半径 0.115；
+  // 两根黄铜芯线上下间隔 ±0.036，严格包裹在白线内部，在 P2 C3 不会穿出白线外，在 P2 C4 白线变半透明后清晰可见电子在两根芯线里往返推入螺旋，且在 P15 全景中沿水平微弧直接连向右侧适配器 USB-C 插头，绝无急剧折角！
   // 1. 进线导线：
   const pts: Vector3[] = [
-    new Vector3(-5.2, -1.114, -0.3),
-    new Vector3(-3.5, -0.644, -0.3),
+    new Vector3(-5.2, -0.284, -0.3),
+    new Vector3(-3.5, -0.214, -0.3),
     new Vector3(-1.75, -0.144, -0.28),
     new Vector3(-1.32, -0.06, zOffset),
   ];
@@ -184,8 +184,8 @@ const createTxCompleteLoopCurve = (
     new Vector3(-0.88, -0.2, zOffset - 0.055),
     new Vector3(-1.32, -0.21, -0.28),
     new Vector3(-1.75, -0.216, -0.31),
-    new Vector3(-3.5, -0.716, -0.31),
-    new Vector3(-5.2, -1.186, -0.31),
+    new Vector3(-3.5, -0.286, -0.31),
+    new Vector3(-5.2, -0.356, -0.31),
   );
 
   return new CatmullRomCurve3(pts, false);
@@ -996,12 +996,12 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
   strainReliefMesh.position.set(-1.55, -0.18, -0.3);
   chargerBaseGroup.add(strainReliefMesh);
 
-  // 线缆从护套末端（x = -1.75）平滑向左下方延伸（保持在 z = -0.30 平面，使侧前与右后方镜头下线缆都自然舒展不折回），直接穿出左侧屏幕画面最外缘
+  // 线缆从护套末端（x = -1.75）平滑向左延伸（保持在 z = -0.30 平面，与内部双芯引出黄铜导线严格同轴），直接穿出左侧屏幕画面最外缘
   const cableCurve = new CatmullRomCurve3([
     new Vector3(-1.75, -0.18, -0.3),
-    new Vector3(-5.2, -1.15, -0.3),
-    new Vector3(-11.8, -2.15, -0.3),
-    new Vector3(-22, -3.1, -0.3),
+    new Vector3(-5.2, -0.32, -0.3),
+    new Vector3(-11.8, -0.58, -0.3),
+    new Vector3(-22, -0.95, -0.3),
   ]);
   const cableGeo = trackGeo(new TubeGeometry(cableCurve, 64, 0.115, 16, false));
   const cableMesh = new Mesh(cableGeo, chargerCableMat);

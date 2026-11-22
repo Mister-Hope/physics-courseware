@@ -1,4 +1,4 @@
-/* oxlint-disable max-lines -- 写实 3D 变压器组件建模（圆角铁芯+3D线框、12:4细绕组、输入端u~与输出端U2、闭合磁通环流、血管式管内微粒子、铜损发热/铁损涡流/漏磁弧线及3D世界坐标锚点投影）集中在单文件 */
+/* oxlint-disable max-lines -- 写实 3D 变压器组件建模（圆角铁芯+3D线框、12:4细绕组、输入端u~与输出端U2、闭合磁场环流、血管式管内微粒子、铜损发热/铁损涡流/漏磁弧线及3D世界坐标锚点投影）集中在单文件 */
 /**
  * 写实 3D 变压器模型（供 P4 结构页、P5 原理页、P10 损耗与理想变压器页、P11 核心推导页共用）
  *
@@ -16,7 +16,7 @@
  *    - 第 2 击（铁损）：镜头近距离拉近铁芯左/上支腿局部，展示变化磁场下的**涡旋电场/涡流闭合环**，铁芯内部泛红光；
  *    - 第 3 击（漏磁）：原线圈一侧靠近电压端有漏磁感线，铁芯每个转角也有磁感线漏出；
  *    - 第 4 击（收拢）：左侧模型**同时呈现三种非理想现象**（铜损红光 + 铁芯涡流泛红 + 转角与原边漏磁）；
- *    - 第 5 击（理想变压器）：去掉一切非理想效应（不红、不涡流、不漏磁），呈现纯净闭合磁通的理想变压器。
+ *    - 第 5 击（理想变压器）：去掉一切非理想效应（不红、不涡流、不漏磁），呈现纯净闭合磁通量的理想变压器。
  */
 import type { BufferGeometry, Material } from "three";
 import {
@@ -545,7 +545,7 @@ const LOSS_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0.92,
     leakFluxAlpha: 0.95,
   },
-  // C5 (step 5 - 理想变压器): 去掉一切非理想效应（不红、不涡流、不漏磁），磁通 100% 闭合约束在铁芯内
+  // C5 (step 5 - 理想变压器): 去掉一切非理想效应（不红、不涡流、不漏磁），磁通量 100% 闭合约束在铁芯内
   {
     rigX: 0.48,
     rigY: 0,
@@ -568,7 +568,10 @@ const LOSS_POSES: TransformerPose[] = [
   },
 ];
 
-// P11(原P12) 核心推导页（6 击：左出画、右出画、公式占 2/3、连续运镜）
+// P11(原P12) 核心推导页（7 击：
+// 1-2 击：变压器右移使副线圈完全移出画面，左侧对称公式卡；
+// 3-4 击：变压器左移使原线圈完全移出画面，右侧与前两次完全镜像对称的副线圈分析与公式卡；
+// 5-7 击：镜头拉远、变压器缩小并左移，右侧列完整 5 条推导公式，与变压器主体完全不重叠！）
 const DERIVATION_POSES: TransformerPose[] = [
   // Step 0: 整体变压器居中
   {
@@ -591,12 +594,12 @@ const DERIVATION_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 1 (C1): 推近左侧；变压器移到画面最右、右半出画；原线圈半透明+微粒子流动+铁芯5条箭头环流
+  // Step 1 (C1): 推近原线圈；变压器整体往右移（rigX = 6.95），右侧副线圈完全移出画面外不可见，左侧输入接线柱与公式区留出充足间距不重叠
   {
-    rigX: 5.45,
-    rigY: -0.08,
-    rigRotY: 0.24,
-    camPos: new Vector3(1.15, 0.8, 10.5),
+    rigX: 6.95,
+    rigY: -0.06,
+    rigRotY: 0.22,
+    camPos: new Vector3(1.15, 0.75, 11.2),
     camLookAt: new Vector3(1.15, -0.05, 0),
     coreOpacity: 0.3,
     wireframeOpacity: 0.82,
@@ -612,13 +615,13 @@ const DERIVATION_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 2 (C2): 左侧推导（公式占左 2/3，变压器占右 1/3 且右半出画）；标出 r₁
+  // Step 2 (C2): 左侧推导原线圈电动势与端电压方程（U₁ = E₁ + I₁r₁）；标出 r₁
   {
-    rigX: 5.6,
-    rigY: -0.08,
-    rigRotY: 0.26,
-    camPos: new Vector3(1.2, 0.75, 10.3),
-    camLookAt: new Vector3(1.2, -0.05, 0),
+    rigX: 6.95,
+    rigY: -0.06,
+    rigRotY: 0.22,
+    camPos: new Vector3(1.15, 0.75, 11.2),
+    camLookAt: new Vector3(1.15, -0.05, 0),
     coreOpacity: 0.3,
     wireframeOpacity: 0.82,
     primaryCoilOpacity: 0.48,
@@ -633,13 +636,34 @@ const DERIVATION_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 3 (C3): 绕竖轴连续转体并飞到画面最左、左半出画（公式占右 2/3，变压器占左 1/3）；副线圈半透明+微粒子+r₂
+  // Step 3 (C3): 与 C1 严格镜像对称！变压器绕竖轴连续转体并飞到画面最左（rigX = -6.95），左侧原线圈完全移出画面不可见；上方分析副线圈因磁通量变化产生感应电动势与交变电流
   {
-    rigX: -5.6,
-    rigY: -0.08,
-    rigRotY: -0.26,
-    camPos: new Vector3(-1.2, 0.75, 10.3),
-    camLookAt: new Vector3(-1.2, -0.05, 0),
+    rigX: -6.95,
+    rigY: -0.06,
+    rigRotY: -0.22,
+    camPos: new Vector3(-1.15, 0.75, 11.2),
+    camLookAt: new Vector3(-1.15, -0.05, 0),
+    coreOpacity: 0.3,
+    wireframeOpacity: 0.82,
+    primaryCoilOpacity: 0.7,
+    secondaryCoilOpacity: 0.48,
+    primaryCurrentAlpha: 0.75,
+    secondaryCurrentAlpha: 1,
+    fluxAlpha: 0.95,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 4 (C4): 与 C2 严格镜像对称！下方列出副线圈两条公式（E₂ = n₂ ΔΦ/Δt，U₂ = E₂ - I₂r₂），标出内阻 r₂
+  {
+    rigX: -6.95,
+    rigY: -0.06,
+    rigRotY: -0.22,
+    camPos: new Vector3(-1.15, 0.75, 11.2),
+    camLookAt: new Vector3(-1.15, -0.05, 0),
     coreOpacity: 0.3,
     wireframeOpacity: 0.82,
     primaryCoilOpacity: 0.7,
@@ -654,15 +678,15 @@ const DERIVATION_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 4 (C4): 两侧磁通路径同时高亮，同一磁通 Φ（5 条箭头环流 + 铁芯半透明线框）
+  // Step 5 (C5): 输出最后五个公式——镜头拉远（Z = 18.8），变压器缩小并置于左侧（rigX = -5.65），与右侧五个公式完全分开、绝不重叠！
   {
-    rigX: -3.65,
+    rigX: -5.65,
     rigY: -0.05,
-    rigRotY: -0.16,
-    camPos: new Vector3(-0.6, 1.1, 14.2),
-    camLookAt: new Vector3(-0.6, 0, 0),
-    coreOpacity: 0.26,
-    wireframeOpacity: 0.88,
+    rigRotY: -0.14,
+    camPos: new Vector3(-0.3, 1.15, 18.8),
+    camLookAt: new Vector3(-0.3, 0, 0),
+    coreOpacity: 0.28,
+    wireframeOpacity: 0.86,
     primaryCoilOpacity: 0.55,
     secondaryCoilOpacity: 0.55,
     primaryCurrentAlpha: 0.9,
@@ -675,15 +699,15 @@ const DERIVATION_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 5 (C5): r₁、r₂ 归零/淡出（理想化 U₁/U₂ = n₁/n₂）
+  // Step 6 (C6): r₁、r₂ 归零/淡出（理想化 U₁/U₂ = n₁/n₂）
   {
-    rigX: -3.65,
+    rigX: -5.65,
     rigY: -0.05,
     rigRotY: -0.14,
-    camPos: new Vector3(-0.6, 1.05, 14),
-    camLookAt: new Vector3(-0.6, 0, 0),
+    camPos: new Vector3(-0.3, 1.15, 18.8),
+    camLookAt: new Vector3(-0.3, 0, 0),
     coreOpacity: 0.32,
-    wireframeOpacity: 0.8,
+    wireframeOpacity: 0.82,
     primaryCoilOpacity: 0.55,
     secondaryCoilOpacity: 0.55,
     primaryCurrentAlpha: 0.95,
@@ -696,15 +720,15 @@ const DERIVATION_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 6 (C6): 功率能量流从原边流向副边（P₁ = P₂ -> I₁/I₂ = n₂/n₁）
+  // Step 7 (C7): 功率能量流从原边流向副边（P₁ = P₂ -> I₁/I₂ = n₂/n₁）
   {
-    rigX: -3.65,
+    rigX: -5.65,
     rigY: -0.05,
     rigRotY: -0.12,
-    camPos: new Vector3(-0.6, 1.05, 14),
-    camLookAt: new Vector3(-0.6, 0, 0),
+    camPos: new Vector3(-0.3, 1.15, 18.8),
+    camLookAt: new Vector3(-0.3, 0, 0),
     coreOpacity: 0.32,
-    wireframeOpacity: 0.8,
+    wireframeOpacity: 0.82,
     primaryCoilOpacity: 0.52,
     secondaryCoilOpacity: 0.52,
     primaryCurrentAlpha: 1,
@@ -901,7 +925,7 @@ export class TransformerCoreModel {
     this.scene.add(backLight);
   }
 
-  // oxlint-disable-next-line max-statements -- 写实变压器整体建模：硅钢叠片圆角铁芯+3D线框、12:4细绕组、输入u~与抽象输出U2、闭合磁通环流、涡旋电场与漏磁感线
+  // oxlint-disable-next-line max-statements -- 写实变压器整体建模：硅钢叠片圆角铁芯+3D线框、12:4细绕组、输入u~与抽象输出U2、闭合磁场环流、涡旋电场与漏磁感线
   private buildTransformerRig(): void {
     this.scene.add(this.rig);
 

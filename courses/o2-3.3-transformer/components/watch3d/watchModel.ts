@@ -438,7 +438,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -1.16,
+    typeCPlugOffsetX: -1.49,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -462,7 +462,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -1.16,
+    typeCPlugOffsetX: -1.49,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -486,7 +486,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -1.16,
+    typeCPlugOffsetX: -1.49,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -510,7 +510,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -1.16,
+    typeCPlugOffsetX: -1.49,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -534,7 +534,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -1.16,
+    typeCPlugOffsetX: -1.49,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -594,7 +594,7 @@ const CALLBACK_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 1.05,
+    typeCPlugOffsetX: 0.64,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-4.2, 2.1, -21.2),
     camLookAt: new Vector3(-8.2, -0.25, -0.55),
@@ -617,7 +617,7 @@ const CALLBACK_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 1.05,
+    typeCPlugOffsetX: 0.64,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-4.2, 2.1, -21.2),
     camLookAt: new Vector3(-8.2, -0.25, -0.55),
@@ -640,7 +640,7 @@ const CALLBACK_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 1.05,
+    typeCPlugOffsetX: 0.64,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-4.2, 2.1, -21.2),
     camLookAt: new Vector3(-8.2, -0.25, -0.55),
@@ -664,7 +664,7 @@ const CALLBACK_POSES: StepPose[] = [
     adapterRotX: Math.PI / 2,
     adapterRotY: Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 1.05,
+    typeCPlugOffsetX: 0.64,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(4.2, 1.75, -10.5),
     camLookAt: new Vector3(-0.65, -0.1, -0.45),
@@ -713,7 +713,7 @@ export class WatchIntroModel {
   private dynamicCableMesh!: Mesh;
   private cableMat!: MeshStandardMaterial;
 
-  // 灯笼磁通笼：3 个同心水平环 + 8 个均匀竖环
+  // 灯笼磁场笼：3 个同心水平环 + 8 个均匀竖环
   private readonly horizontalRings: {
     mesh: Mesh;
     mat: MeshBasicMaterial;
@@ -1461,7 +1461,13 @@ export class WatchIntroModel {
       this.adapterGroup.rotation.set(pose.adapterRotX, pose.adapterRotY, pose.adapterRotZ, "YXZ");
 
       const plugX = -15.45 + pose.typeCPlugOffsetX;
-      this.typeCPlugGroup.position.set(plugX, pose.adapterY, -0.75);
+      // 当 USB-C 插头已插入或靠近电源适配器时，严格沿适配器局部 +X 轴与旋转角度对齐，使金属插头舌片 100% 深入 USB-C 母口暗槽、白色插头肩部严丝合缝贴合适配器端面（看不出任何缝隙或错位）！
+      const cosY = Math.cos(pose.adapterRotY);
+      const sinY = Math.sin(pose.adapterRotY);
+      const deltaX = plugX - pose.adapterX;
+      const isDocked = Math.abs(pose.adapterRotY) > 0.01 && deltaX < 3.5;
+      const plugZ = isDocked ? -0.75 - deltaX * (sinY / Math.max(cosY, 0.1)) : -0.75;
+      this.typeCPlugGroup.position.set(plugX, pose.adapterY, plugZ);
       this.typeCPlugGroup.rotation.set(pose.typeCPlugRotX, pose.adapterRotY, 0, "YXZ");
 
       // 更新连接充电器左端护套与 Type-C 插头尾部的平滑长白线（P15 callback 模式在充电盘半透明剖开时同步变半透明，露出内部双芯引出导线无缝衔接）
@@ -1470,16 +1476,16 @@ export class WatchIntroModel {
       this.cableMat.depthWrite = !pose.coilTranslucent;
 
       const startPt = new Vector3(pose.watchX - 1.75, -0.18, pose.chargerZ - 0.3);
-      const endPt = new Vector3(plugX + 0.68, pose.adapterY, -0.75);
+      const endPt = new Vector3(plugX + 0.66 * cosY, pose.adapterY, plugZ - 0.66 * sinY);
       if (this.mode === "callback") {
-        // P15 callback 模式：前半段严格沿着内部双芯引出黄铜导线轨迹（x = -1.75/-3.5/-5.2, y = -0.18/-0.68/-1.15, z = -0.30 + chargerZ），使两根黄铜芯线与蓝色电子始终包裹在半透明白线内部，随后再平滑转向右侧适配器的 USB-C 插头！
+        // P15 callback 模式：充电线从左侧充电盘护套向右平滑直连到适配器 USB-C 插头，内部双芯引出线（y = -0.18 -> -0.25 -> -0.32）全程自然包裹在半透明白线内部，绝无下折弯角！
         const leadZ = pose.chargerZ - 0.3;
-        const p1 = new Vector3(pose.watchX - 3.5, -0.68, leadZ);
-        const p2 = new Vector3(pose.watchX - 5.2, -1.15, leadZ);
+        const p1 = new Vector3(pose.watchX - 3.5, -0.25, leadZ);
+        const p2 = new Vector3(pose.watchX - 5.2, -0.32, leadZ);
         const p3 = new Vector3(
           startPt.x + (endPt.x - startPt.x) * 0.68,
-          pose.adapterY - 0.45,
-          (leadZ + endPt.z) * 0.5,
+          -0.26,
+          leadZ + (endPt.z - leadZ) * 0.65,
         );
         this.dynamicCableMesh.geometry.dispose();
         this.dynamicCableMesh.geometry = new TubeGeometry(
@@ -1492,12 +1498,12 @@ export class WatchIntroModel {
       } else {
         const midPt1 = new Vector3(
           startPt.x + (endPt.x - startPt.x) * 0.35,
-          -0.58,
+          -0.28,
           (startPt.z + endPt.z) * 0.5,
         );
         const midPt2 = new Vector3(
           startPt.x + (endPt.x - startPt.x) * 0.72,
-          pose.adapterY + 0.08,
+          pose.adapterY - 0.05,
           endPt.z,
         );
         this.dynamicCableMesh.geometry.dispose();
@@ -1522,7 +1528,7 @@ export class WatchIntroModel {
       this.snapPulseMat.opacity = 0;
     }
 
-    // 灯笼磁通笼位置与箭头更新（当 fieldAlpha <= 0.005 时彻底隐藏 lanternGroup，杜绝 C4 出现任何黑色透明残影箭头！）
+    // 灯笼磁场笼位置与箭头更新（当 fieldAlpha <= 0.005 时彻底隐藏 lanternGroup，杜绝 C4 出现任何黑色透明残影箭头！）
     this.lanternGroup.visible = pose.fieldAlpha > 0.005;
     const rxWorldZ = pose.watchZ - 0.35;
     const txWorldZ = pose.chargerZ - 0.13;
@@ -1580,7 +1586,7 @@ export class WatchIntroModel {
     this.rxParticleMesh.visible = pose.rxCurrentAlpha > 0.005;
 
     const swingAmp = 0.165; // 7 匝螺旋下，0.165 对应约 1.15 圈的顺时针/逆时针往返摆幅，肉眼极易看清正反交替流向
-    const txOffset = -swingAmp * cosWave; // 速度 d(txOffset)/dt = +swingAmp * ω * sin(ωt)，与磁通方向 sinWave 完全同相！
+    const txOffset = -swingAmp * cosWave; // 速度 d(txOffset)/dt = +swingAmp * ω * sin(ωt)，与磁通量方向 sinWave 完全同相！
     const rxOffset = -swingAmp * sinWave; // 速度 d(rxOffset)/dt = -swingAmp * ω * cos(ωt) ∝ -dΦ/dt，严格满足法拉第定律与楞次定律！
 
     for (let i = 0; i < this.particleCount; i += 1) {

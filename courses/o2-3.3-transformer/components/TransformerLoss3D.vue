@@ -217,7 +217,7 @@ onBeforeUnmount(() => {
               <Latex tex="\Phi_2<\Phi_1" />
             </div>
             <div class="tl-note">
-              少量磁感线从原边及铁芯转角散出，未穿过副线圈，使副线圈磁通变化率变小、<Latex
+              少量磁感线从原边及铁芯转角散出，未穿过副线圈，使副线圈磁通量变化率变小、<Latex
                 tex="U_2"
               />
               偏低。
@@ -242,7 +242,7 @@ onBeforeUnmount(() => {
         <div class="tl-cond-grid">
           <div class="tl-cond-card">
             <div class="tl-cond-name">无漏磁</div>
-            <div class="tl-cond-desc">磁通全部集中在铁芯内穿过两线圈</div>
+            <div class="tl-cond-desc">磁通量全部集中在铁芯内穿过两线圈</div>
           </div>
           <div class="tl-cond-card">
             <div class="tl-cond-name">无损耗</div>

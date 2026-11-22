@@ -252,7 +252,7 @@ clickAnimation: none
 
 ---
 title: 变压器的电压与电流关系
-clicks: 6
+clicks: 7
 clickAnimation: none
 ---
 

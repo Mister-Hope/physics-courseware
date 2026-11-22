@@ -1,17 +1,19 @@
 <script setup lang="ts">
 /**
- * 第 6 页（P6）：核心 3D 分步推导（6 击）
+ * 第 11 页（P11）：核心 3D 分步推导（7 击，左右镜像对称 + 汇总 5 公式与变压器零重叠 + 教材磁通量术语统一）
  *
- * 硬要求（00-大框架与交接 §1.4 & 06-逐页文字设计稿 §7）：
+ * - 0 击：整体变压器居中，原线圈输入交流电压 U₁，副线圈输出交流电压 U₂
+ * - 第 1、2 击（讲原线圈/输入端）： 变压器整体往右移（rigX = 6.95），右侧副线圈完全移出画面外不可见；左侧输入端接线柱与左侧公式区（width: 53%）完全不重叠。
  *
- * - 0 击：整体变压器居中，原线圈接交流源，副线圈接负载，U₁/U₂/n₁/n₂ 标在图上
- * - C1（step 1）：相机推近左侧；变压器移到画面最右、右半出画；原线圈电流开始来回流动，铁芯中磁感线出现（标 I₁、Φ）
- * - C2（step 2）：左侧推导（变压器在画面最右、右半出画，公式区占左 2/3）；原线圈电阻 r₁ 标出；新增 E₁ = n₁ ΔΦ/Δt、U₁ = E₁ + I₁r₁
- * - C3（step 3）：变压器边绕竖轴转体 180° 边飞到画面最左、左半出画，相机跟到右侧；副线圈出现感应电流（公式区占右 2/3）； 上一阶段 C2 公式以约 80%
- *   透明度留在同一栏上方，新增 E₂ = n₂ ΔΦ/Δt、U₂ = E₂ - I₂r₂
- * - C4（step 4）：两侧磁通路径同时高亮，Φ 相同；新增 E₁/E₂ = n₁/n₂（无漏磁）
- * - C5（step 5）：图上把 r₁、r₂、漏磁、铁损逐项“归零”/淡出（理想化）；新增 r₁ = r₂ = 0 -> U₁/U₂ = n₁/n₂
- * - C6（step 6）：副线圈接负载，功率箭头从原边流向副边；新增 P₁ = P₂ -> I₁/I₂ = n₂/n₁
+ *   - C1：上方分析原线圈交变电流 I₁ 产生变化的磁场（穿过每一匝的磁通量 Φ 变化）
+ *   - C2：下方列出原线圈两条公式 E₁ = n₁ ΔΦ/Δt，U₁ = E₁ + I₁r₁（标出内阻 r₁）
+ * - 第 3、4 击（讲副线圈/输出端，与前两次严格镜像对称）： 变压器整体往左移（rigX = -6.95），左侧原线圈完全移出画面外不可见；右侧输出端与右侧对称公式区（width:
+ *   53%）完全不重叠。
+ *
+ *   - C3：上方分析副线圈因磁通量 Φ 变化产生感应电动势与交变电流 I₂
+ *   - C4：下方列出副线圈两条公式 E₂ = n₂ ΔΦ/Δt，U₂ = E₂ - I₂r₂（明确写出内阻项是减，与原线圈 U₁ = E₁ + I₁r₁ 形成对照）
+ * - 第 5、6、7 击（输出最后五个公式）： 镜头拉远（camPos.z = 18.8），变压器缩小并置于画面左侧（rigX = -5.65），右侧五个公式整体靠右（width:
+ *   53%），公式与变压器主体完全分开、绝不重叠，公式之间留出充足间距！
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
@@ -26,8 +28,9 @@ let model: TransformerCoreModel | null = null;
 let observer: IntersectionObserver | null = null;
 
 const isOverview = computed(() => step === 0);
-const isLeftDerivation = computed(() => step === 1 || step === 2);
-const isRightDerivation = computed(() => step >= 3);
+const isPrimaryFocus = computed(() => step === 1 || step === 2);
+const isSecondaryFocus = computed(() => step === 3 || step === 4);
+const isSummaryChain = computed(() => step >= 5);
 
 const hasWebGl = (): boolean => {
   try {
@@ -123,7 +126,11 @@ onBeforeUnmount(() => {
       >
         <g
           :transform="
-            isLeftDerivation ? 'translate(260, 0)' : isRightDerivation ? 'translate(-260, 0)' : ''
+            isPrimaryFocus
+              ? 'translate(290, 0)'
+              : isSecondaryFocus || isSummaryChain
+                ? 'translate(-290, 0)'
+                : ''
           "
         >
           <path
@@ -185,24 +192,24 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- Step 1 & 2: 左侧推导区（占画面左 2/3，变压器在画面最右、右半出画） -->
-    <div class="cm-formula-zone cm-zone-left" :class="{ 'is-hidden': !isLeftDerivation }">
-      <!-- C1: 电流与磁通出现 -->
+    <!-- Step 1 & 2: 左侧原线圈推导区（width: 53%，变压器在右侧且副线圈完全移出画面外） -->
+    <div class="cm-formula-zone cm-zone-left" :class="{ 'is-hidden': !isPrimaryFocus }">
+      <!-- C1: 上方分析原线圈交变电流与变化的磁场（磁通量变化） -->
       <div class="cm-step-block" :class="[step === 1 ? 'is-active' : 'is-dim']">
-        <div class="cm-step-label">原线圈交变电流与铁芯磁通</div>
+        <div class="cm-step-label">原线圈：交变电流激发变化的磁场（磁通量变化）</div>
         <div class="cm-step-eq">
           <span class="cm-var-pill cm-pill-blue">交变电流 <Latex tex="I_1" /></span>
           <span class="cm-arrow">→</span>
-          <span class="cm-var-pill cm-pill-gold">交变磁通 <Latex tex="\Phi" /></span>
+          <span class="cm-var-pill cm-pill-gold">变化的磁场（磁通量 <Latex tex="\Phi" />）</span>
           <span class="cm-var-pill cm-pill-red" :class="{ 'is-hidden': step < 2 }"
             >内阻 <Latex tex="r_1"
           /></span>
         </div>
       </div>
 
-      <!-- C2: 原线圈电动势与用电端电压方程 -->
+      <!-- C2: 下方列原线圈两条公式 E₁ = n₁ ΔΦ/Δt，U₁ = E₁ + I₁r₁ -->
       <div class="cm-step-block is-active" :class="{ 'is-hidden': step < 2 }">
-        <div class="cm-step-label">原线圈（用电端：克服感应电动势 + 内阻压降）</div>
+        <div class="cm-step-label">原线圈（用电端：电源电压克服感应电动势 + 内阻压降）</div>
         <div class="cm-step-eq cm-eq-large">
           <Latex tex="E_1 = n_1 \dfrac{\Delta\Phi}{\Delta t}" />
           <span class="cm-eq-gap" />
@@ -211,9 +218,37 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- Step 3..6: 右侧推导链（占画面右 2/3，变压器在画面最左、左半出画；竖向推导链，上一阶段 80% 透明度保留，保证可读） -->
-    <div class="cm-formula-zone cm-zone-right" :class="{ 'is-hidden': !isRightDerivation }">
-      <!-- C2 保留在顶部（80% 透明度） -->
+    <!-- Step 3 & 4: 右侧副线圈推导区（与 Step 1 & 2 严格镜像对称！width: 53%，变压器在左侧且原线圈完全移出画面外） -->
+    <div class="cm-formula-zone cm-zone-right-sym" :class="{ 'is-hidden': !isSecondaryFocus }">
+      <!-- C3: 上方分析副线圈因磁通量变化产生感应电动势与交变电流 -->
+      <div class="cm-step-block" :class="[step === 3 ? 'is-active' : 'is-dim']">
+        <div class="cm-step-label">副线圈：磁通量变化产生感应电动势与交变电流</div>
+        <div class="cm-step-eq">
+          <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi" /> 变化</span>
+          <span class="cm-arrow">→</span>
+          <span class="cm-var-pill cm-pill-teal"
+            >感应电动势 <Latex tex="E_2" /> · 交变电流 <Latex tex="I_2"
+          /></span>
+          <span class="cm-var-pill cm-pill-red" :class="{ 'is-hidden': step < 4 }"
+            >内阻 <Latex tex="r_2"
+          /></span>
+        </div>
+      </div>
+
+      <!-- C4: 下方列副线圈两条公式 E₂ = n₂ ΔΦ/Δt，U₂ = E₂ - I₂r₂（明确写出内阻项是减，与原线圈对照） -->
+      <div class="cm-step-block is-active" :class="{ 'is-hidden': step < 4 }">
+        <div class="cm-step-label">副线圈（供电端：感应电动势减去内阻压降）</div>
+        <div class="cm-step-eq cm-eq-large">
+          <Latex tex="E_2 = n_2 \dfrac{\Delta\Phi}{\Delta t}" />
+          <span class="cm-eq-gap" />
+          <Latex tex="U_2 = E_2 - I_2 r_2" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5..7: 右侧完整 5 公式汇总区（镜头拉远、变压器缩小在左侧，公式区整体靠右 width: 53%，与变压器零重叠，公式间距充裕） -->
+    <div class="cm-formula-zone cm-zone-right-chain" :class="{ 'is-hidden': !isSummaryChain }">
+      <!-- 公式 1：原线圈 -->
       <div class="cm-chain-row is-dim">
         <span class="cm-chain-tag">原线圈</span>
         <div class="cm-chain-math">
@@ -223,8 +258,8 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <!-- C3: 副线圈电动势与供电端电压方程 -->
-      <div class="cm-chain-row" :class="[step === 3 ? 'is-active' : 'is-dim']">
+      <!-- 公式 2：副线圈 -->
+      <div class="cm-chain-row is-dim">
         <span class="cm-chain-tag">副线圈</span>
         <div class="cm-chain-math">
           <Latex tex="E_2 = n_2 \dfrac{\Delta\Phi}{\Delta t}" />
@@ -233,22 +268,19 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <!-- C4: 无漏磁（同一磁通 Φ） -> 电动势比等于匝数比 -->
-      <div
-        class="cm-chain-row"
-        :class="[step === 4 ? 'is-active' : 'is-dim', { 'is-hidden': step < 4 }]"
-      >
-        <span class="cm-chain-tag">同一 <Latex tex="\Phi" /></span>
+      <!-- 公式 3 (C5)：无漏磁（同一磁通量 Φ） -> 电动势比等于匝数比 -->
+      <div class="cm-chain-row" :class="[step === 5 ? 'is-active' : 'is-dim']">
+        <span class="cm-chain-tag">磁通量 <Latex tex="\Phi" /></span>
         <div class="cm-chain-math">
           <Latex tex="\dfrac{E_1}{E_2} = \dfrac{n_1}{n_2}" />
           <span class="cm-cond-note">（只需无漏磁）</span>
         </div>
       </div>
 
-      <!-- C5: 理想化 r₁=r₂=0 -> 电压比等于匝数比 -->
+      <!-- 公式 4 (C6)：理想化 r₁=r₂=0 -> 电压比等于匝数比 -->
       <div
         class="cm-chain-row"
-        :class="[step === 5 ? 'is-active' : 'is-dim', { 'is-hidden': step < 5 }]"
+        :class="[step === 6 ? 'is-active' : 'is-dim', { 'is-hidden': step < 6 }]"
       >
         <span class="cm-chain-tag">理想化</span>
         <div class="cm-chain-math">
@@ -256,10 +288,10 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <!-- C6: 能量守恒 P₁=P₂ -> 电流比反过来 -->
+      <!-- 公式 5 (C7)：能量守恒 P₁=P₂ -> 电流比反过来 -->
       <div
         class="cm-chain-row"
-        :class="[step === 6 ? 'is-active' : 'is-dim', { 'is-hidden': step < 6 }]"
+        :class="[step === 7 ? 'is-active' : 'is-dim', { 'is-hidden': step < 7 }]"
       >
         <span class="cm-chain-tag">功率守恒</span>
         <div class="cm-chain-math">
@@ -269,16 +301,17 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 3D 变压器主体旁侧的实时状态角标 -->
-    <div v-if="isLeftDerivation" class="cm-corner-tag cm-corner-right">
-      <span>原线圈：<Latex tex="n_1" />、<Latex tex="I_1" />、<Latex tex="\Phi" /></span>
+    <div v-if="isPrimaryFocus" class="cm-corner-tag cm-corner-right">
+      <span>原线圈：<Latex tex="n_1" />、<Latex tex="I_1" />、磁通量 <Latex tex="\Phi" /></span>
       <span class="cm-r-tag" :class="{ 'is-hidden': step < 2 }">内阻 <Latex tex="r_1" /></span>
     </div>
-    <div v-if="isRightDerivation" class="cm-corner-tag cm-corner-left">
-      <span v-if="step === 3"
-        >副线圈：<Latex tex="n_2" />、<Latex tex="I_2" />、内阻 <Latex tex="r_2"
-      /></span>
-      <span v-else-if="step === 4">闭合磁路：同一磁通 <Latex tex="\Phi" /></span>
-      <span v-else-if="step === 5">理想模型：<Latex tex="r_1=r_2=0" />、无漏磁、无铁损</span>
+    <div v-if="isSecondaryFocus || isSummaryChain" class="cm-corner-tag cm-corner-left">
+      <span v-if="step === 3 || step === 4">
+        副线圈：<Latex tex="n_2" />、<Latex tex="I_2" />、磁通量 <Latex tex="\Phi" />
+        <span v-if="step === 4" class="cm-r-tag"> · 内阻 <Latex tex="r_2" /></span>
+      </span>
+      <span v-else-if="step === 5">闭合磁路：穿过每匝的磁通量 <Latex tex="\Phi" /> 相同</span>
+      <span v-else-if="step === 6">理想模型：<Latex tex="r_1=r_2=0" />、无漏磁、无铁损</span>
       <span v-else>能量传递：<Latex tex="P_1 \rightarrow P_2" /></span>
     </div>
   </div>
@@ -356,7 +389,7 @@ onBeforeUnmount(() => {
   font-size: 1.35rem;
 }
 
-/* 公式主区：左推导占左 2/3，右推导占右 2/3，不做底部公式条 */
+/* 公式主区：左推导（C1-C2）与右对称推导（C3-C4）均为 width: 53%、相同内边距与间距，严格镜像对称！ */
 .cm-formula-zone {
   position: absolute;
   top: 0;
@@ -366,8 +399,8 @@ onBeforeUnmount(() => {
   flex-direction: column;
   justify-content: center;
 
-  width: 65%;
-  padding: 1.2rem 1.8rem;
+  width: 53.5%;
+  padding: 1.1rem 1.4rem;
 
   pointer-events: none;
 
@@ -379,10 +412,17 @@ onBeforeUnmount(() => {
   gap: 1.15rem;
 }
 
-.cm-zone-right {
+.cm-zone-right-sym {
   right: 0;
-  gap: 0.42rem;
-  padding: 0.65rem 1.4rem;
+  gap: 1.15rem;
+}
+
+/* C5-C7 右侧五个汇总公式：整体靠右，公式之间留足 0.65rem 间距，与左侧缩小后的变压器完全不重叠 */
+.cm-zone-right-chain {
+  right: 0;
+  gap: 0.62rem;
+  width: 53.5%;
+  padding: 0.6rem 1.2rem;
 }
 
 .cm-step-block {
@@ -390,10 +430,10 @@ onBeforeUnmount(() => {
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: var(--radius-lg);
 
-  background: linear-gradient(135deg, rgb(20 28 44 / 78%), rgb(10 15 26 / 62%));
+  background: linear-gradient(135deg, rgb(20 28 44 / 82%), rgb(10 15 26 / 68%));
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 8%),
-    0 12px 32px rgb(0 0 0 / 22%);
+    0 12px 32px rgb(0 0 0 / 24%);
 
   backdrop-filter: blur(16px) saturate(120%);
 
@@ -411,31 +451,36 @@ onBeforeUnmount(() => {
 .cm-step-eq {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
+  gap: 0.55rem;
   align-items: center;
 
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.12rem;
 }
 
 .cm-eq-large {
   color: var(--c-accent);
-  font-size: 1.4rem;
+  font-size: 1.36rem;
 }
 
 .cm-eq-gap {
-  width: 1.2rem;
+  width: 1.1rem;
 }
 
 .cm-var-pill {
-  padding: 0.25rem 0.75rem;
+  padding: 0.24rem 0.7rem;
   border-radius: 999px;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .cm-pill-blue {
   background: var(--c-accent-2-soft);
   color: var(--c-accent-2);
+}
+
+.cm-pill-teal {
+  background: color-mix(in srgb, var(--c-physics) 18%, transparent);
+  color: var(--c-physics);
 }
 
 .cm-pill-gold {
@@ -452,21 +497,21 @@ onBeforeUnmount(() => {
   color: var(--c-text-dim);
 }
 
-/* 右侧竖向推导链（C3..C6） */
+/* 右侧竖向推导链（C5..C7） */
 .cm-chain-row {
   display: grid;
-  grid-template-columns: 4.8rem minmax(0, 1fr);
+  grid-template-columns: 5.2rem minmax(0, 1fr);
   gap: 0.65rem;
   align-items: center;
 
-  padding: 0.42rem 0.95rem;
+  padding: 0.48rem 0.95rem;
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: var(--radius-md);
 
-  background: linear-gradient(135deg, rgb(20 28 46 / 78%), rgb(11 16 28 / 62%));
+  background: linear-gradient(135deg, rgb(20 28 46 / 82%), rgb(11 16 28 / 68%));
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 8%),
-    0 10px 24px rgb(0 0 0 / 20%);
+    0 10px 24px rgb(0 0 0 / 22%);
 
   backdrop-filter: blur(14px);
 
@@ -488,16 +533,16 @@ onBeforeUnmount(() => {
   align-items: center;
 
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: 1rem;
 }
 
 .cm-cond-note {
   color: var(--c-text-dim);
   font-weight: 500;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
 }
 
-/* 当前步金色高亮，历史步 80% 透明度保留，保证仍可读 */
+/* 当前步金色高亮，历史步 82% 透明度保留，保证清晰可读 */
 .is-active {
   border-color: var(--c-accent-border);
   color: var(--c-accent);
@@ -510,12 +555,12 @@ onBeforeUnmount(() => {
 
 .is-dim {
   color: var(--c-text);
-  opacity: 0.8;
+  opacity: 0.82;
 }
 
 .cm-corner-tag {
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.85rem;
 
   display: inline-flex;
   gap: 0.65rem;
@@ -526,21 +571,21 @@ onBeforeUnmount(() => {
   border-radius: 999px;
 
   background: var(--c-surface);
-  color: var(--c-text);
+  color: var(--c-text-dim);
 
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
 
   backdrop-filter: blur(12px);
   pointer-events: none;
 }
 
 .cm-corner-right {
-  right: 1.2rem;
+  right: 1.5rem;
 }
 
 .cm-corner-left {
-  left: 1.2rem;
+  left: 1.5rem;
 }
 
 .cm-r-tag {

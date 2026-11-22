@@ -62,7 +62,7 @@ const showEddyAndEnergy = computed(() => step >= 2);
           <CourseArrow :from="{ x: 326, y: 63 }" :to="{ x: 340, y: 63 }" stroke="var(--c-danger)" :stroke-width="1.6" :head-size="6" />
           <text x="286" y="30" text-anchor="middle" font-size="14" fill="var(--c-danger)">涡流 / 铁损（硅钢片叠层减小涡流）</text>
         </g>
-        <!-- 主磁通回路（金色虚线） -->
+        <!-- 主磁路回路（金色虚线） -->
         <rect x="166" y="70" width="240" height="174" rx="10" fill="none" stroke="var(--c-accent)" stroke-width="2.4" stroke-dasharray="8 6" opacity="0.85" />
         <!-- C1：铜损发热红晕 -->
         <g :opacity="showCopperAndLeak ? 1 : 0" class="tl-fade">
