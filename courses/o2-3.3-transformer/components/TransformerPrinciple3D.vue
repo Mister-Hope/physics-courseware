@@ -11,7 +11,7 @@
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-import type { TransformerCoreModel } from "./transformer3d/transformerModel";
+import { TransformerCoreModel } from "./transformer3d/transformerModel";
 
 const { step = 0 } = defineProps<{ step?: number }>();
 
@@ -20,7 +20,6 @@ const mode = ref<"pending" | "3d" | "2d">("pending");
 
 let model: TransformerCoreModel | null = null;
 let observer: IntersectionObserver | null = null;
-let starting = false;
 
 const s1 = computed(() => step >= 1);
 const s2 = computed(() => step >= 2);
@@ -40,18 +39,16 @@ const releaseModel = (): void => {
   model = null;
 };
 
-const startModel = async (): Promise<void> => {
+const startModel = (): void => {
   const container = stageEl.value;
-  if (model || starting || !container || container.clientWidth === 0) return;
+  if (model || !container || container.clientWidth === 0) return;
   if (!hasWebGl()) {
     mode.value = "2d";
     return;
   }
 
-  starting = true;
   try {
-    const { TransformerCoreModel: ModelClass } = await import("./transformer3d/transformerModel");
-    const instance = new ModelClass(container, "principle");
+    const instance = new TransformerCoreModel(container, "principle");
     instance.setStep(step);
     model = instance;
     mode.value = "3d";
@@ -65,8 +62,6 @@ const startModel = async (): Promise<void> => {
     );
   } catch {
     mode.value = "2d";
-  } finally {
-    starting = false;
   }
 };
 
@@ -84,12 +79,14 @@ onMounted(() => {
     return;
   }
 
+  startModel();
+
   observer = new IntersectionObserver(
     (entries) => {
       const entry = entries.at(-1);
       if (!entry) return;
       if (entry.isIntersecting) {
-        void startModel();
+        startModel();
         model?.setActive(true);
         model?.handleResize();
       } else {

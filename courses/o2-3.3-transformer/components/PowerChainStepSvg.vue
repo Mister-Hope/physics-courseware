@@ -15,7 +15,7 @@
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-import type { WatchIntroModel } from "./watch3d/watchModel";
+import { WatchIntroModel } from "./watch3d/watchModel";
 
 const { step = 0 } = defineProps<{ step?: number }>();
 
@@ -26,7 +26,6 @@ const showTransformerPointer = ref(false);
 let model: WatchIntroModel | null = null;
 let observer: IntersectionObserver | null = null;
 let pointerTimer: ReturnType<typeof setTimeout> | null = null;
-let starting = false;
 
 const isC1 = computed(() => step === 1);
 const isC2 = computed(() => step === 2);
@@ -72,18 +71,16 @@ const releaseModel = (): void => {
   model = null;
 };
 
-const startModel = async (): Promise<void> => {
+const startModel = (): void => {
   const container = stageEl.value;
-  if (model || starting || !container || container.clientWidth === 0) return;
+  if (model || !container || container.clientWidth === 0) return;
   if (!hasWebGl()) {
     mode.value = "2d";
     return;
   }
 
-  starting = true;
   try {
-    const { WatchIntroModel: ModelClass } = await import("./watch3d/watchModel");
-    const instance = new ModelClass(container, "chain");
+    const instance = new WatchIntroModel(container, "chain");
     model = instance;
     mode.value = "3d";
     instance.setStep(step);
@@ -98,8 +95,6 @@ const startModel = async (): Promise<void> => {
     );
   } catch {
     mode.value = "2d";
-  } finally {
-    starting = false;
   }
 };
 
@@ -118,12 +113,14 @@ onMounted(() => {
     return;
   }
 
+  startModel();
+
   observer = new IntersectionObserver(
     (entries) => {
       const entry = entries.at(-1);
       if (!entry) return;
       if (entry.isIntersecting) {
-        void startModel();
+        startModel();
         model?.setActive(true);
         model?.handleResize();
       } else {

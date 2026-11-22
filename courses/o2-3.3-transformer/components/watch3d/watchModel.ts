@@ -176,6 +176,7 @@ interface StepPose {
   adapterX: number;
   adapterY: number;
   adapterRotX: number;
+  adapterRotY: number;
   adapterRotZ: number;
   typeCPlugOffsetX: number;
   typeCPlugRotX: number;
@@ -202,6 +203,7 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
@@ -225,6 +227,7 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
@@ -248,13 +251,14 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
     camPos: new Vector3(5.8, 1.5, 9),
     camLookAt: new Vector3(-0.4, -0.05, -0.2),
   },
-  // C3 (step 3): 先绕到右后方 38°，再半透明剖开后盖与充电头，露出黄铜色受电线圈（+深色 PCB/芯片/排线）与送电线圈（+从白线穿入的两根引出导线）
+  // C3 (step 3): 先绕到右后方 38° 并将镜头注视点左移，使整个表身与线圈在画面中向右靠，留出充足的左侧文字空间，彻底避免左侧文字与表冠/表身重叠！
   {
     watchX: 0,
     watchZ: 0.78,
@@ -271,11 +275,12 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
-    camPos: new Vector3(7.5, 1.85, -7.2),
-    camLookAt: new Vector3(-0.15, -0.05, -0.52),
+    camPos: new Vector3(8.1, 1.85, -7.2),
+    camLookAt: new Vector3(0.42, -0.05, -0.15),
   },
   // C4 (step 4): 只显示送电线圈及白线内两根引出导线里的蓝色电子连续正弦往返运动（电子在导线内推动进入线圈）；无灯笼磁场、无受电线圈电流
   {
@@ -294,11 +299,12 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
-    camPos: new Vector3(7.8, 1.95, -6.9),
-    camLookAt: new Vector3(-0.18, -0.05, -0.55),
+    camPos: new Vector3(8.35, 1.95, -6.9),
+    camLookAt: new Vector3(0.45, -0.05, -0.15),
   },
   // C5 (step 5): 出现灯笼磁场；送电线圈电流继续；受电线圈仍无电流
   {
@@ -317,11 +323,12 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
-    camPos: new Vector3(8.1, 2.1, -6.7),
-    camLookAt: new Vector3(-0.2, -0.05, -0.55),
+    camPos: new Vector3(8.6, 2.1, -6.7),
+    camLookAt: new Vector3(0.48, -0.05, -0.14),
   },
   // C6 (step 6): 受电线圈出现感应蓝色电子正弦往返运动；灯笼磁场与送电线圈电流继续；上屏答案
   {
@@ -340,11 +347,12 @@ const INTRO_POSES: StepPose[] = [
     adapterX: -17.1,
     adapterY: -1.35,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 0,
     typeCPlugRotX: 0,
-    camPos: new Vector3(8.1, 2.1, -6.7),
-    camLookAt: new Vector3(-0.2, -0.05, -0.55),
+    camPos: new Vector3(8.6, 2.1, -6.7),
+    camLookAt: new Vector3(0.48, -0.05, -0.14),
   },
 ];
 
@@ -380,6 +388,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterX: -15.65,
     adapterY: -0.45,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 2.35,
     typeCPlugRotX: 0,
@@ -403,6 +412,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterX: -15.65,
     adapterY: -0.45,
     adapterRotX: 0,
+    adapterRotY: 0,
     adapterRotZ: 0,
     typeCPlugOffsetX: 2.25,
     typeCPlugRotX: 0,
@@ -423,11 +433,12 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.85,
+    adapterX: -18.08,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
+    adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -0.75,
+    typeCPlugOffsetX: -1.16,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -446,11 +457,12 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.85,
+    adapterX: -18.08,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
+    adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -0.75,
+    typeCPlugOffsetX: -1.16,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -469,11 +481,12 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.85,
+    adapterX: -18.08,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
+    adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -0.75,
+    typeCPlugOffsetX: -1.16,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -492,11 +505,12 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.85,
+    adapterX: -18.08,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
+    adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -0.75,
+    typeCPlugOffsetX: -1.16,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -515,11 +529,12 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.85,
+    adapterX: -18.08,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
+    adapterRotY: -Math.PI * 0.11,
     adapterRotZ: 0,
-    typeCPlugOffsetX: -0.75,
+    typeCPlugOffsetX: -1.16,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -541,6 +556,7 @@ const CHAIN_POSES: StepPose[] = [
     adapterX: -9.8,
     adapterY: 0.35,
     adapterRotX: 0.34,
+    adapterRotY: 0,
     adapterRotZ: Math.PI / 2,
     typeCPlugOffsetX: 18.5,
     typeCPlugRotX: Math.PI / 2,
@@ -1012,8 +1028,8 @@ export class WatchIntroModel {
       this.wallSocketGroup.add(slot);
     }
 
-    // 插座正面朝右前方（绕 Y 轴转 62°），使观众既能看清五孔面板，又能看清扁适配器平行左端的两片插脚插进插座！
-    this.wallSocketGroup.rotation.y = Math.PI * 0.34;
+    // 插座正面朝右前方（绕 Y 轴转 70°，即法线在 XZ 平面与 -X 轴仅偏 20°），既能让观众看清插座五孔，又能与适配器左端面完全贴合、使两片插脚 100% 插进插座孔内不外露！
+    this.wallSocketGroup.rotation.y = Math.PI * 0.39;
     this.wallSocketGroup.position.set(-19.25, -0.9, -0.85);
   }
 
@@ -1178,6 +1194,10 @@ export class WatchIntroModel {
         this.startPose.adapterRotX,
         this.targetPose.adapterRotX,
       );
+      this.currentPose.adapterRotY = lerpRot(
+        this.startPose.adapterRotY,
+        this.targetPose.adapterRotY,
+      );
       this.currentPose.typeCPlugRotX = lerpRot(
         this.startPose.typeCPlugRotX,
         this.targetPose.typeCPlugRotX,
@@ -1229,6 +1249,7 @@ export class WatchIntroModel {
       this.currentPose.adapterX = lerp(this.startPose.adapterX, this.targetPose.adapterX);
       this.currentPose.adapterY = lerp(this.startPose.adapterY, this.targetPose.adapterY);
       this.currentPose.adapterRotX = lerp(this.startPose.adapterRotX, this.targetPose.adapterRotX);
+      this.currentPose.adapterRotY = lerp(this.startPose.adapterRotY, this.targetPose.adapterRotY);
       this.currentPose.adapterRotZ = lerp(this.startPose.adapterRotZ, this.targetPose.adapterRotZ);
       this.currentPose.typeCPlugOffsetX = lerp(
         this.startPose.typeCPlugOffsetX,
@@ -1299,11 +1320,11 @@ export class WatchIntroModel {
 
       this.wallSocketGroup.position.set(pose.socketX, -0.9, -0.85);
       this.adapterGroup.position.set(pose.adapterX, pose.adapterY, -0.75);
-      this.adapterGroup.rotation.set(pose.adapterRotX, 0, pose.adapterRotZ);
+      this.adapterGroup.rotation.set(pose.adapterRotX, pose.adapterRotY, pose.adapterRotZ, "YXZ");
 
       const plugX = -15.45 + pose.typeCPlugOffsetX;
       this.typeCPlugGroup.position.set(plugX, pose.adapterY, -0.75);
-      this.typeCPlugGroup.rotation.set(pose.typeCPlugRotX, 0, 0);
+      this.typeCPlugGroup.rotation.set(pose.typeCPlugRotX, pose.adapterRotY, 0, "YXZ");
 
       // 更新连接充电器左端护套与 Type-C 插头尾部的平滑长白线（随手表与 Type-C 同步右飞出画）
       const startPt = new Vector3(pose.watchX - 1.75, -0.18, pose.chargerZ - 0.3);

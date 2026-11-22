@@ -16,7 +16,7 @@
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-import type { WatchIntroModel } from "./watch3d/watchModel";
+import { WatchIntroModel } from "./watch3d/watchModel";
 
 const { step = 0 } = defineProps<{ step?: number }>();
 
@@ -25,7 +25,6 @@ const mode = ref<"pending" | "3d" | "2d">("pending");
 
 let model: WatchIntroModel | null = null;
 let observer: IntersectionObserver | null = null;
-let starting = false;
 
 const showC1 = computed(() => step >= 1);
 const showC2 = computed(() => step >= 2);
@@ -46,18 +45,16 @@ const releaseModel = (): void => {
   model = null;
 };
 
-const startModel = async (): Promise<void> => {
+const startModel = (): void => {
   const container = stageEl.value;
-  if (model || starting || !container || container.clientWidth === 0) return;
+  if (model || !container || container.clientWidth === 0) return;
   if (!hasWebGl()) {
     mode.value = "2d";
     return;
   }
 
-  starting = true;
   try {
-    const { WatchIntroModel: ModelClass } = await import("./watch3d/watchModel");
-    const instance = new ModelClass(container, "intro");
+    const instance = new WatchIntroModel(container, "intro");
     model = instance;
     mode.value = "3d";
     instance.setStep(step);
@@ -71,8 +68,6 @@ const startModel = async (): Promise<void> => {
     );
   } catch {
     mode.value = "2d";
-  } finally {
-    starting = false;
   }
 };
 
@@ -90,12 +85,15 @@ onMounted(() => {
     return;
   }
 
+  // 页面挂载后立即同步初始化 3D 场景与纹理，消除翻到第 2 页时的网络请求与首次构建卡顿
+  startModel();
+
   observer = new IntersectionObserver(
     (entries) => {
       const entry = entries.at(-1);
       if (!entry) return;
       if (entry.isIntersecting) {
-        void startModel();
+        startModel();
         model?.setActive(true);
         model?.handleResize();
       } else {
@@ -172,22 +170,22 @@ onBeforeUnmount(() => {
     >
       <!-- 指向表背受电线圈的引线 -->
       <polyline
-        points="426,188 552,135 612,135"
+        points="495,188 575,135 616,135"
         fill="none"
         stroke="var(--c-accent)"
         stroke-width="1.5"
         stroke-dasharray="4 3"
       />
-      <circle cx="426" cy="188" r="3.2" fill="var(--c-accent)" />
+      <circle cx="495" cy="188" r="3.2" fill="var(--c-accent)" />
       <!-- 指向充电头送电线圈的引线 -->
       <polyline
-        points="546,258 586,310 612,310"
+        points="596,258 608,310 616,310"
         fill="none"
         stroke="var(--c-accent-2)"
         stroke-width="1.5"
         stroke-dasharray="4 3"
       />
-      <circle cx="546" cy="258" r="3.2" fill="var(--c-accent-2)" />
+      <circle cx="596" cy="258" r="3.2" fill="var(--c-accent-2)" />
     </svg>
 
     <div class="wi-right-labels" :class="{ 'is-hidden': !showC3 }">
@@ -234,14 +232,14 @@ onBeforeUnmount(() => {
 .wi-left-hud {
   position: absolute;
   top: 52%;
-  left: 0.6rem;
+  left: 0.4rem;
 
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
   align-items: flex-start;
 
-  max-width: 31%;
+  max-width: 27.5%;
 
   pointer-events: none;
 
