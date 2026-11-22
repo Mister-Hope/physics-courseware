@@ -187,14 +187,14 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- C7：拔出分离、充电器旋转到屏幕中央正面显示（插头在下、USB 在上）后，自动浮现指针与《变压器》文字提示 -->
+    <!-- C7：拔出分离、充电器旋转到屏幕中央正面显示（插头在下、USB 在上）后，自动浮现指针与变压器文字提示 -->
     <div class="pc3-c7-reveal" :class="{ 'is-hidden': !(isC7 && showTransformerPointer) }">
       <svg class="pc3-pointer-svg" viewBox="0 0 880 455" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <polyline points="440,210 532,155 595,155" fill="none" stroke="var(--c-accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
         <circle cx="440" cy="210" r="5" fill="var(--c-accent)" />
         <circle cx="440" cy="210" r="10" fill="none" stroke="var(--c-accent)" stroke-width="1.6" opacity="0.65" />
       </svg>
-      <div class="pc3-transformer-label">《变压器》</div>
+      <div class="pc3-transformer-label">变压器</div>
     </div>
   </div>
 </template>
