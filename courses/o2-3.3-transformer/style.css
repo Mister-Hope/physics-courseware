@@ -39,7 +39,7 @@
 
 .p7-param-title {
   color: var(--c-text);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
 }
 
@@ -51,7 +51,7 @@
   padding-left: 1rem;
 
   color: var(--c-text-dim);
-  font-size: 0.72rem;
+  font-size: 0.66rem;
   line-height: 1.4;
 }
 

@@ -395,11 +395,10 @@ clickAnimation: none
 
 ---
 layout: focus-question
-title: 思考与下节预告
+title: 思考
 ---
 
 <div class="p15-stack">
 <div class="p15-main">为什么最终是交流电赢了直流电？</div>
 <div class="p15-sub text-2xl leading-normal">变压器在国家电网中起什么作用？为什么要用超高压输电？</div>
-<div class="p15-preview text-lg leading-normal">下节预告：§ 3.4 电能的输送</div>
 </div>
