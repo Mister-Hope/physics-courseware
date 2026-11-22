@@ -196,11 +196,11 @@ onBeforeUnmount(() => {
     <div class="cm-formula-zone cm-zone-left" :class="{ 'is-hidden': !isPrimaryFocus }">
       <!-- C1: 上方分析原线圈交变电流与变化的磁场（磁通量变化） -->
       <div class="cm-step-block" :class="[step === 1 ? 'is-active' : 'is-dim']">
-        <div class="cm-step-label">原线圈：交变电流激发变化的磁场（磁通量变化）</div>
+        <div class="cm-step-label">原线圈：交变电流激发变化的磁场</div>
         <div class="cm-step-eq">
           <span class="cm-var-pill cm-pill-blue">交变电流 <Latex tex="I_1" /></span>
           <span class="cm-arrow">→</span>
-          <span class="cm-var-pill cm-pill-gold">变化的磁场（磁通量 <Latex tex="\Phi" />）</span>
+          <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi" /> 变化</span>
           <span class="cm-var-pill cm-pill-red" :class="{ 'is-hidden': step < 2 }"
             >内阻 <Latex tex="r_1"
           /></span>
@@ -209,7 +209,7 @@ onBeforeUnmount(() => {
 
       <!-- C2: 下方列原线圈两条公式 E₁ = n₁ ΔΦ/Δt，U₁ = E₁ + I₁r₁ -->
       <div class="cm-step-block is-active" :class="{ 'is-hidden': step < 2 }">
-        <div class="cm-step-label">原线圈（用电端：电源电压克服感应电动势 + 内阻压降）</div>
+        <div class="cm-step-label">原线圈（用电端：克服感应电动势 + 内阻压降）</div>
         <div class="cm-step-eq cm-eq-large">
           <Latex tex="E_1 = n_1 \dfrac{\Delta\Phi}{\Delta t}" />
           <span class="cm-eq-gap" />
@@ -227,7 +227,7 @@ onBeforeUnmount(() => {
           <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi" /> 变化</span>
           <span class="cm-arrow">→</span>
           <span class="cm-var-pill cm-pill-teal"
-            >感应电动势 <Latex tex="E_2" /> · 交变电流 <Latex tex="I_2"
+            >电动势 <Latex tex="E_2" /> · 电流 <Latex tex="I_2"
           /></span>
           <span class="cm-var-pill cm-pill-red" :class="{ 'is-hidden': step < 4 }"
             >内阻 <Latex tex="r_2"
@@ -320,7 +320,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .cm-root {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   height: 455px;
 }
@@ -389,7 +389,7 @@ onBeforeUnmount(() => {
   font-size: 1.35rem;
 }
 
-/* 公式主区：左推导（C1-C2）与右对称推导（C3-C4）均为 width: 53%、相同内边距与间距，严格镜像对称！ */
+/* 公式主区：左推导（C1-C2）与右对称推导（C3-C4）均为 width: 53.5%、相同内边距与间距，严格镜像对称且单行不折行溢出！ */
 .cm-formula-zone {
   position: absolute;
   top: 0;
@@ -400,7 +400,7 @@ onBeforeUnmount(() => {
   justify-content: center;
 
   width: 53.5%;
-  padding: 1.1rem 1.4rem;
+  padding: 0.85rem 1.05rem;
 
   pointer-events: none;
 
@@ -408,25 +408,29 @@ onBeforeUnmount(() => {
 }
 
 .cm-zone-left {
-  left: 0;
-  gap: 1.15rem;
+  left: -2.4rem;
+  gap: 0.9rem;
+  width: 56.5%;
+  padding: 0.85rem 1.2rem 0.85rem 0;
 }
 
 .cm-zone-right-sym {
-  right: 0;
-  gap: 1.15rem;
+  right: -2.4rem;
+  gap: 0.9rem;
+  width: 56.5%;
+  padding: 0.85rem 0 0.85rem 1.2rem;
 }
 
-/* C5-C7 右侧五个汇总公式：整体靠右，公式之间留足 0.65rem 间距，与左侧缩小后的变压器完全不重叠 */
+/* C5-C7 右侧五个汇总公式：直接从屏幕右侧边缘探出来（右侧圆角与右边框在屏幕外，right: -2.4rem），既省空间又让每条公式宽裕单行不换行，且与左侧变压器零重叠！ */
 .cm-zone-right-chain {
-  right: 0;
-  gap: 0.62rem;
-  width: 53.5%;
-  padding: 0.6rem 1.2rem;
+  right: -2.4rem;
+  gap: 0.56rem;
+  width: 58.5%;
+  padding: 0.45rem 0 0.45rem 1.2rem;
 }
 
 .cm-step-block {
-  padding: 0.95rem 1.25rem;
+  padding: 0.72rem 0.98rem;
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: var(--radius-lg);
 
@@ -442,35 +446,50 @@ onBeforeUnmount(() => {
     border-color 0.35s ease;
 }
 
+.cm-zone-left .cm-step-block {
+  padding: 0.82rem 1.15rem 0.82rem 2.6rem;
+  border-left: none;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+
+.cm-zone-right-sym .cm-step-block {
+  padding: 0.82rem 2.6rem 0.82rem 1.15rem;
+  border-right: none;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
 .cm-step-label {
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.38rem;
   color: var(--c-text-dim);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
+  white-space: nowrap;
 }
 
 .cm-step-eq {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
   align-items: center;
 
   font-weight: 700;
-  font-size: 1.12rem;
+  font-size: 1.02rem;
+  white-space: nowrap;
 }
 
 .cm-eq-large {
   color: var(--c-accent);
-  font-size: 1.36rem;
+  font-size: 1.26rem;
 }
 
 .cm-eq-gap {
-  width: 1.1rem;
+  width: 0.95rem;
 }
 
 .cm-var-pill {
-  padding: 0.24rem 0.7rem;
+  padding: 0.22rem 0.62rem;
   border-radius: 999px;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
+  white-space: nowrap;
 }
 
 .cm-pill-blue {
@@ -497,18 +516,19 @@ onBeforeUnmount(() => {
   color: var(--c-text-dim);
 }
 
-/* 右侧竖向推导链（C5..C7） */
+/* 右侧竖向推导链（C5..C7）：左端圆角、右端直接延伸到屏幕外探出，内部单行不折行 */
 .cm-chain-row {
   display: grid;
-  grid-template-columns: 5.2rem minmax(0, 1fr);
+  grid-template-columns: 4.8rem minmax(0, 1fr);
   gap: 0.65rem;
   align-items: center;
 
-  padding: 0.48rem 0.95rem;
+  padding: 0.46rem 2.6rem 0.46rem 1.1rem;
   border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: var(--radius-md);
+  border-right: none;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
 
-  background: linear-gradient(135deg, rgb(20 28 46 / 82%), rgb(11 16 28 / 68%));
+  background: linear-gradient(135deg, rgb(20 28 46 / 84%), rgb(11 16 28 / 72%));
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 8%),
     0 10px 24px rgb(0 0 0 / 22%);
@@ -524,16 +544,18 @@ onBeforeUnmount(() => {
   color: var(--c-text-dim);
   font-weight: 600;
   font-size: 0.82rem;
+  white-space: nowrap;
 }
 
 .cm-chain-math {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  flex-wrap: nowrap;
+  gap: 0.42rem;
   align-items: center;
 
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.98rem;
+  white-space: nowrap;
 }
 
 .cm-cond-note {
