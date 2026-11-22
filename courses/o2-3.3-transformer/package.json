@@ -1,0 +1,20 @@
+{
+  "name": "transformer-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o2-3.3-transformer/",
+    "dev": "slidev --base /o2-3.3-transformer/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "@types/three": "catalog:",
+    "three": "catalog:",
+    "vue": "catalog:"
+  }
+}

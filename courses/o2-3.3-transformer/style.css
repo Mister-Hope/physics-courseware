@@ -1,0 +1,91 @@
+/* ═══════════════════════════════════════════════
+   变压器 — 课程特有样式
+   通用设计系统已提取到 workspace/shared/styles/common.css，
+   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* P7：J2423 实验说明与数据表 */
+.p7-split {
+  --cols: minmax(0, 1.15fr) minmax(0, 1.15fr);
+}
+
+.p7-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+
+  color: var(--c-text);
+}
+
+.p7-table {
+  width: 100%;
+}
+
+/* P10：理想与实测对比框 */
+.p10-box {
+  padding: 0.85rem 1.15rem;
+  border: 1px solid var(--c-accent-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.p10-lead {
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+/* P13：课堂小结（单独一页三句话） */
+.p13-summary {
+  gap: 1.05rem;
+}
+
+.p13-item {
+  align-items: center;
+
+  padding: 0.9rem 1.25rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+}
+
+.p13-text {
+  color: var(--c-text);
+  line-height: 1.65;
+}
+
+/* P15：思考题与 3.4 电能的输送预告 */
+.p15-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.p15-main {
+  color: var(--c-text);
+  font-weight: 700;
+}
+
+.p15-sub {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.p15-preview {
+  margin-top: 0.6rem;
+  padding: 0.35rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-weight: 500;
+}
