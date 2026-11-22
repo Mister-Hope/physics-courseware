@@ -15,6 +15,11 @@ catalog:
 
 virtualStoreType: global
 
+packageExtensions:
+  "@slidev/client":
+    dependencies:
+      "@vue/reactivity": "^3.5.45"
+
 permissions:
   "@slidev/cli":
     skills: true
