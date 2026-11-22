@@ -1,31 +1,69 @@
 <script setup lang="ts">
 /**
- * P16：无线充电为什么效率低（单舞台双 3D 组装 + 侧边引线标注）
+ * P15（原 P16）：无线充电为什么效率低 —— 完全重写为单一 Three.js 场景（13-Gemini4修改清单.md §0 & §1）
  *
- * 左侧：P2 的 intro 场景固定在 C3（后盖打开、双线圈可见），负责手表/充电盘/线圈；
- * 右侧：P3 的 chain 场景固定在 C6（插座+适配器+线+手表），水平镜像后只保留
- *       插座/适配器/线，表与充电盘被左侧压住，形成“手表左—线—墙插右”的一条链。
- * 3 击只控制 7 个标签与底部答案出现，不新增 3D 动画。
+ * 严格按 13 §0 & §1 实现：
+ *
+ * - 彻底摒弃双画布、clip-path、镜像画布等临时拼凑做法，采用**单一 Three.js 3D 场景**（`WatchIntroModel(container, "callback")`）。
+ * - 同一透视、比例、光照下：一个表（在左）、一个充电盘（双线圈剖开+空气磁路灯笼磁场）、一根连通 USB 线、 一个 USB-C
+ *   插头（真插进适配器）、一个电源适配器、一个镜像后直接装在右侧墙面上的国标五孔插座、一面右侧立体墙面。
+ * - 点击节奏：
+ *
+ *   - 0 击 / 第 1 击（step <= 1）：完整单场景模型（手表在左，墙插在右），无标签或按链路依次亮起右侧供电端标签（墙插 → 适配器 → USB 线）。
+ *   - 第 2 击（step = 2）：按链路顺序继续亮起无线耦合端标签（充电盘 → 送电线圈 → 受电线圈 → 手表），7 个节点全部通过 3D 实时投影引线指向对应模型部件。
+ *   - 第 3 击（step >= 3）：链路走完，镜头推近左侧手表与充电盘双线圈空气磁路局部，揭晓底部答案：“空气磁路、漏磁大；链路中还有能量损耗。”
  */
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
 
 import CallbackWirelessSvg from "./CallbackWirelessSvg.vue";
 import { WatchIntroModel } from "./watch3d/watchModel";
+import type { CallbackProjectedAnchors } from "./watch3d/watchModel";
 
 const { step = 0 } = defineProps<{ step?: number }>();
 
-const introEl = ref<HTMLDivElement>();
-const chainEl = ref<HTMLDivElement>();
+const stageEl = ref<HTMLDivElement>();
 const mode = ref<"pending" | "3d" | "2d">("pending");
+const stageSize = reactive({ w: 880, h: 380 });
 
-let introModel: WatchIntroModel | null = null;
-let chainModel: WatchIntroModel | null = null;
+const anchors = reactive<CallbackProjectedAnchors>({
+  socket: { x: 760, y: 185 },
+  adapter: { x: 695, y: 215 },
+  usbCable: { x: 475, y: 210 },
+  pad: { x: 255, y: 245 },
+  txCoil: { x: 248, y: 165 },
+  rxCoil: { x: 188, y: 158 },
+  watch: { x: 132, y: 228 },
+});
+
+let model: WatchIntroModel | null = null;
 let observer: IntersectionObserver | null = null;
 
-const showChain = computed(() => step >= 1);
-const showCoils = computed(() => step >= 2);
-const showWatch = computed(() => step >= 3);
+// step = 0: 完整单场景模型，无标签；
+// step = 1: 出右侧前半链路标签（墙插 → 适配器 → USB 线）；
+// step = 2: 出左侧后半链路标签（充电盘 → 送电线圈 → 受电线圈 → 手表）；
+// step = 3: 镜头推近手表与双线圈空气磁路局部，出底部答案！
+const showRightChainLabels = computed(() => step >= 1 && step <= 2);
+const showLeftCoilLabels = computed(() => step >= 2);
+const isZoomedIn = computed(() => step >= 3);
 const showAnswer = computed(() => step >= 3);
+
+// 将容器像素坐标换算到 880×380 的 SVG 标注坐标系
+const toSvg = (pt: { x: number; y: number }): { x: number; y: number } => {
+  const sx = 880 / Math.max(stageSize.w, 1);
+  const sy = 380 / Math.max(stageSize.h, 1);
+  return {
+    x: Math.round(pt.x * sx),
+    y: Math.round(pt.y * sy),
+  };
+};
+
+const pSocket = computed(() => toSvg(anchors.socket));
+const pAdapter = computed(() => toSvg(anchors.adapter));
+const pCable = computed(() => toSvg(anchors.usbCable));
+const pPad = computed(() => toSvg(anchors.pad));
+const pTx = computed(() => toSvg(anchors.txCoil));
+const pRx = computed(() => toSvg(anchors.rxCoil));
+const pWatch = computed(() => toSvg(anchors.watch));
 
 const hasWebGl = (): boolean => {
   try {
@@ -36,76 +74,90 @@ const hasWebGl = (): boolean => {
   }
 };
 
-const releaseModels = (): void => {
-  introModel?.destroy();
-  chainModel?.destroy();
-  introModel = null;
-  chainModel = null;
+const releaseModel = (): void => {
+  model?.destroy();
+  model = null;
 };
 
-const startModels = (): void => {
-  const intro = introEl.value;
-  const chain = chainEl.value;
-  if (introModel || chainModel || !intro || !chain) return;
-  if (intro.clientWidth === 0 || chain.clientWidth === 0) return;
+const handleAnchors = (next: CallbackProjectedAnchors): void => {
+  const container = stageEl.value;
+  if (container && container.clientWidth > 0 && container.clientHeight > 0) {
+    stageSize.w = container.clientWidth;
+    stageSize.h = container.clientHeight;
+  }
+  anchors.socket = next.socket;
+  anchors.adapter = next.adapter;
+  anchors.usbCable = next.usbCable;
+  anchors.pad = next.pad;
+  anchors.txCoil = next.txCoil;
+  anchors.rxCoil = next.rxCoil;
+  anchors.watch = next.watch;
+};
+
+const startModel = (): void => {
+  const container = stageEl.value;
+  if (model || !container || container.clientWidth === 0) return;
   if (!hasWebGl()) {
     mode.value = "2d";
     return;
   }
 
   try {
-    const introInstance = new WatchIntroModel(intro, "intro");
-    introModel = introInstance;
-    introInstance.setStep(3);
-    introInstance.setActive(true);
-    introInstance.handleResize();
-
-    const chainInstance = new WatchIntroModel(chain, "chain");
-    chainModel = chainInstance;
-    chainInstance.setStep(8);
-    chainInstance.setActive(true);
-    chainInstance.handleResize();
-
+    const instance = new WatchIntroModel(container, "callback", handleAnchors);
+    model = instance;
     mode.value = "3d";
+    instance.setStep(step);
+    container.addEventListener(
+      "webglcontextlost",
+      () => {
+        releaseModel();
+        mode.value = "2d";
+      },
+      { once: true },
+    );
   } catch {
-    releaseModels();
+    releaseModel();
     mode.value = "2d";
   }
 };
 
+watch(
+  () => step,
+  (nextStep) => {
+    model?.setStep(nextStep);
+  },
+);
+
 onMounted(() => {
-  if (!introEl.value || !chainEl.value) return;
+  if (!stageEl.value) return;
   if (!hasWebGl()) {
     mode.value = "2d";
     return;
   }
 
-  startModels();
+  startModel();
 
   observer = new IntersectionObserver(
     (entries) => {
       const entry = entries.at(-1);
       if (!entry) return;
       if (entry.isIntersecting) {
-        startModels();
-        introModel?.setActive(true);
-        chainModel?.setActive(true);
-        introModel?.handleResize();
-        chainModel?.handleResize();
+        startModel();
+        model?.setActive(true);
+        model?.handleResize();
       } else {
-        introModel?.setActive(false);
-        chainModel?.setActive(false);
+        model?.setActive(false);
       }
     },
     { threshold: 0.05 },
   );
-  observer.observe(introEl.value);
+  observer.observe(stageEl.value);
 });
 
 onBeforeUnmount(() => {
   observer?.disconnect();
   observer = null;
-  releaseModels();
+  releaseModel();
 });
 </script>
 
@@ -118,68 +170,125 @@ onBeforeUnmount(() => {
     </div>
 
     <div v-else class="p16-stage">
-      <!-- 右侧墙面：插座装在墙上 -->
-      <div class="p16-wall" />
+      <!-- 单一 Three.js 场景（手表在左，连通白线居中，适配器与装在立体墙面上的国标插座在右） -->
+      <div ref="stageEl" class="p16-canvas" />
 
-      <!-- 左：手表/充电盘/双线圈近景（intro C3） -->
-      <div class="p16-canvas p16-canvas-intro">
-        <div ref="introEl" class="p16-canvas-inner" />
+      <!-- 顶部完整链路进度条（按点击顺序从右往左点亮：墙插 → 适配器 → USB 线 → 充电盘 → 送电线圈 → 受电线圈 → 手表） -->
+      <div class="p16-chain-strip" :class="{ 'is-hidden': step < 1 }">
+        <span class="p16-chip" :class="{ 'is-lit': step >= 1 }">墙插</span>
+        <span class="p16-arr">→</span>
+        <span class="p16-chip" :class="{ 'is-lit': step >= 1 }">适配器</span>
+        <span class="p16-arr">→</span>
+        <span class="p16-chip" :class="{ 'is-lit': step >= 1 }">USB 线</span>
+        <span class="p16-arr">→</span>
+        <span class="p16-chip" :class="{ 'is-lit': step >= 2 }">充电盘</span>
+        <span class="p16-arr">→</span>
+        <span class="p16-chip is-key" :class="{ 'is-lit': step >= 2 }">送电线圈</span>
+        <span class="p16-arr">→</span>
+        <span class="p16-chip is-key" :class="{ 'is-lit': step >= 2 }">受电线圈</span>
+        <span class="p16-arr">→</span>
+        <span class="p16-chip" :class="{ 'is-lit': step >= 2 }">手表</span>
       </div>
 
-      <!-- 右：整条供电链（chain C6，水平镜像：墙插在右） -->
-      <div class="p16-canvas p16-canvas-chain">
-        <div ref="chainEl" class="p16-canvas-inner" />
-      </div>
+      <!-- 3D 世界坐标实时投影引线层（所有圆点严格落在单场景 3D 部件上） -->
+      <svg class="p16-leaders" viewBox="0 0 880 380" preserveAspectRatio="none" aria-hidden="true">
+        <!-- 右侧三节点引线：墙插、适配器、USB 线（C1 & C2 全景显示，C3 推近手表局部后淡出） -->
+        <g :opacity="showRightChainLabels ? 1 : 0" class="p16-fade">
+          <!-- 墙插 -->
+          <polyline :points="`${pSocket.x},${pSocket.y} 785,84 805,84`" />
+          <circle :cx="pSocket.x" :cy="pSocket.y" r="3.6" />
+          <!-- 适配器 -->
+          <polyline :points="`${pAdapter.x},${pAdapter.y} 675,308 698,308`" />
+          <circle :cx="pAdapter.x" :cy="pAdapter.y" r="3.6" />
+          <!-- USB 线 -->
+          <polyline :points="`${pCable.x},${pCable.y} 495,298 518,298`" />
+          <circle :cx="pCable.x" :cy="pCable.y" r="3.6" />
+        </g>
 
-      <!-- 引线层 -->
-      <svg class="p16-leaders" viewBox="0 0 980 400" preserveAspectRatio="none" aria-hidden="true">
-        <g :opacity="showChain ? 1 : 0">
-          <polyline points="900,26 910,120 920,180" />
-          <circle cx="920" cy="180" r="3.5" />
-          <polyline points="860,96 850,150 858,193" />
-          <circle cx="858" cy="193" r="3.5" />
-          <polyline points="560,26 550,130 540,196" />
-          <circle cx="540" cy="196" r="3.5" />
-        </g>
-        <g :opacity="showCoils ? 1 : 0">
-          <polyline points="104,150 140,170 336,184" />
-          <circle cx="336" cy="184" r="3.5" />
-          <polyline points="92,286 300,268 600,270" />
-          <circle cx="600" cy="270" r="3.5" />
-          <polyline points="88,348 300,270 578,200" />
-          <circle cx="578" cy="200" r="3.5" />
-        </g>
-        <g :opacity="showWatch ? 1 : 0">
-          <polyline points="96,238 132,212 300,300" />
-          <circle cx="300" cy="300" r="3.5" />
+        <!-- 左侧四节点引线：充电盘、送电线圈、受电线圈、手表（C2 全景与 C3 局部推近均实时跟随 3D 坐标！） -->
+        <g :opacity="showLeftCoilLabels ? 1 : 0" class="p16-fade">
+          <!-- 送电线圈 -->
+          <polyline
+            :points="
+              isZoomedIn ? `${pTx.x},${pTx.y} 520,108 552,108` : `${pTx.x},${pTx.y} 352,96 376,96`
+            "
+          />
+          <circle :cx="pTx.x" :cy="pTx.y" r="3.8" />
+          <!-- 充电盘 -->
+          <polyline
+            :points="
+              isZoomedIn
+                ? `${pPad.x},${pPad.y} 520,285 552,285`
+                : `${pPad.x},${pPad.y} 312,308 336,308`
+            "
+          />
+          <circle :cx="pPad.x" :cy="pPad.y" r="3.8" />
+          <!-- 受电线圈 -->
+          <polyline
+            :points="
+              isZoomedIn ? `${pRx.x},${pRx.y} 195,96 165,96` : `${pRx.x},${pRx.y} 162,96 140,96`
+            "
+          />
+          <circle :cx="pRx.x" :cy="pRx.y" r="3.8" />
+          <!-- 手表 -->
+          <polyline
+            :points="
+              isZoomedIn
+                ? `${pWatch.x},${pWatch.y} 195,285 165,285`
+                : `${pWatch.x},${pWatch.y} 138,298 116,298`
+            "
+          />
+          <circle :cx="pWatch.x" :cy="pWatch.y" r="3.8" />
         </g>
       </svg>
 
-      <!-- 标签：左侧是表和线圈，右侧是墙插/适配器/线 -->
-      <div v-show="showChain" class="p16-label p16-label-socket">
-        <b>220 V 交流</b><span>墙插</span>
+      <!-- 右侧前半链路标签：墙插 → 适配器 → USB 线 -->
+      <div class="p16-label p16-label-socket" :class="{ 'is-hidden': !showRightChainLabels }">
+        <b>墙插 · 220 V 交流</b>
+        <span>市电输入</span>
       </div>
-      <div v-show="showChain" class="p16-label p16-label-adapter">
-        <b>适配器</b><span>降压 + 整流</span>
+      <div class="p16-label p16-label-adapter" :class="{ 'is-hidden': !showRightChainLabels }">
+        <b>适配器</b>
+        <span>变压器降压 + 整流</span>
       </div>
-      <div v-show="showChain" class="p16-label p16-label-usb">
-        <b>USB 5 V 直流</b><span>适配器输出</span>
+      <div class="p16-label p16-label-usb" :class="{ 'is-hidden': !showRightChainLabels }">
+        <b>USB 线 · 5 V 直流</b>
+        <span>适配器低压输出</span>
       </div>
-      <div v-show="showCoils" class="p16-label p16-label-pad">
-        <b>充电盘</b><span>DC → 高频交流</span>
+
+      <!-- 左侧后半链路标签：充电盘 → 送电线圈 → 受电线圈 → 手表 -->
+      <div
+        class="p16-label p16-label-tx"
+        :class="[{ 'is-hidden': !showLeftCoilLabels }, { 'is-zoomed': isZoomedIn }]"
+      >
+        <b>送电线圈</b>
+        <span>激发高频交变磁场</span>
       </div>
-      <div v-show="showCoils" class="p16-label p16-label-tx">
-        <b>送电线圈</b><span>产生变化磁场</span>
+      <div
+        class="p16-label p16-label-pad"
+        :class="[{ 'is-hidden': !showLeftCoilLabels }, { 'is-zoomed': isZoomedIn }]"
+      >
+        <b>充电盘</b>
+        <span>DC → 高频交流逆变</span>
       </div>
-      <div v-show="showCoils" class="p16-label p16-label-rx">
-        <b>受电线圈</b><span>互感产生电流</span>
+      <div
+        class="p16-label p16-label-rx"
+        :class="[{ 'is-hidden': !showLeftCoilLabels }, { 'is-zoomed': isZoomedIn }]"
+      >
+        <b>受电线圈</b>
+        <span>空气磁路互感取电</span>
       </div>
-      <div v-show="showWatch" class="p16-label p16-label-watch">
-        <b>手表</b><span>整流稳压 → 电池</span>
+      <div
+        class="p16-label p16-label-watch"
+        :class="[{ 'is-hidden': !showLeftCoilLabels }, { 'is-zoomed': isZoomedIn }]"
+      >
+        <b>手表</b>
+        <span>整流稳压 → 电池</span>
       </div>
     </div>
 
-    <div v-show="showAnswer" class="p16-answer">
+    <!-- 最后一击：镜头推近手表双线圈空气磁路局部后揭晓答案 -->
+    <div class="p16-answer" :class="{ 'is-hidden': !showAnswer }">
       空气磁路、漏磁大；链路中还有能量损耗。
     </div>
   </div>
@@ -192,94 +301,102 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
 
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  padding-bottom: 1.9rem;
-
   box-sizing: border-box;
+  width: 100%;
+  height: 455px;
+  min-height: 0;
 }
 
 .p16-question {
   flex: none;
 
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.25rem;
 
   color: var(--c-text);
-  font-weight: 700;
-  font-size: 0.92rem;
 
+  font-weight: 800;
+  font-size: 1.22rem;
+  letter-spacing: 0.02em;
   text-align: center;
-  letter-spacing: 0.01em;
 }
 
 .p16-stage {
   position: relative;
-
   flex: 1;
-  min-height: 0;
-
   overflow: hidden;
+  min-height: 0;
 }
 
-/* 右侧墙面 */
-.p16-wall {
-  position: absolute;
-  top: 8%;
-  right: 0;
-  bottom: 6%;
-  z-index: 0;
-
-  width: 22%;
-
-  background:
-    linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 2.2%) 35%, rgb(255 255 255 / 4%) 100%),
-    repeating-linear-gradient(90deg, rgb(255 255 255 / 2%) 0 1px, transparent 1px 26px);
-  border-left: 1px solid rgb(255 255 255 / 6%);
-
-  pointer-events: none;
-}
-
-/* 左：手表/充电盘近景 */
-.p16-canvas-intro {
-  position: absolute;
-  top: 0;
-  left: 18%;
-  z-index: 2;
-
-  width: 48%;
-  height: 100%;
-}
-
-/* 右：整条链，水平镜像后墙插在右；左端表/充电盘被 intro 压住 */
-.p16-canvas-chain {
-  position: absolute;
-  top: 0;
-  left: 24%;
-  z-index: 1;
-
-  width: 78%;
-  height: 100%;
-
-  transform: scaleX(-1);
-  clip-path: inset(0 0 0 20%);
-}
-
-.p16-canvas-inner {
+.p16-canvas {
   position: absolute;
   inset: 0;
 }
 
-.p16-canvas-inner :deep(canvas) {
+.p16-canvas :deep(canvas) {
   display: block;
   width: 100%;
   height: 100%;
 }
 
+.p16-chain-strip {
+  position: absolute;
+  top: 0.25rem;
+  left: 50%;
+  z-index: 4;
+
+  display: inline-flex;
+  gap: 0.28rem;
+  align-items: center;
+
+  padding: 0.24rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 999px;
+
+  background: rgb(9 13 26 / 82%);
+
+  white-space: nowrap;
+
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+
+  transition: opacity 0.3s ease;
+
+  transform: translateX(-50%);
+}
+
+.p16-chip {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+
+  color: var(--c-text-dim);
+
+  font-weight: 600;
+  font-size: 0.64rem;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.p16-chip.is-lit {
+  background: rgb(255 255 255 / 7%);
+  color: var(--c-text);
+}
+
+.p16-chip.is-key.is-lit {
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+}
+
+.p16-arr {
+  color: var(--c-text-dim);
+  font-size: 0.65rem;
+}
+
 .p16-leaders {
   position: absolute;
   inset: 0;
-  z-index: 4;
+  z-index: 3;
 
   width: 100%;
   height: 100%;
@@ -289,43 +406,51 @@ onBeforeUnmount(() => {
 
 .p16-leaders polyline {
   fill: none;
-  stroke: rgb(226 168 70 / 78%);
-  stroke-width: 1.4;
+  stroke: rgb(226 168 70 / 82%);
   stroke-dasharray: 5 4;
+  stroke-width: 1.5;
 }
 
 .p16-leaders circle {
   fill: var(--c-accent);
 }
 
+.p16-fade {
+  transition: opacity 0.3s ease;
+}
+
 .p16-label {
   position: absolute;
-  z-index: 3;
+  z-index: 4;
 
   display: flex;
   flex-direction: column;
   gap: 0.06rem;
 
-  max-width: 9.5rem;
-  padding: 0.24rem 0.48rem;
+  padding: 0.28rem 0.58rem;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 0.5rem;
 
+  background: linear-gradient(135deg, rgb(15 22 38 / 88%), rgb(9 13 26 / 78%));
   color: var(--c-text);
-  font-size: 0.66rem;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 24%);
+
+  font-size: 0.68rem;
   line-height: 1.28;
 
-  background: rgb(9 13 26 / 82%);
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 0.45rem;
-
-  backdrop-filter: blur(8px);
-
+  backdrop-filter: blur(10px);
   pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    left 0.45s ease,
+    top 0.45s ease;
 }
 
 .p16-label b {
   color: var(--c-accent);
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.74rem;
 }
 
 .p16-label span {
@@ -333,55 +458,86 @@ onBeforeUnmount(() => {
 }
 
 .p16-label-socket {
-  top: 3%;
-  right: 1.5%;
+  top: 16%;
+  right: 1.2%;
 }
 
 .p16-label-adapter {
-  top: 21%;
-  right: 2%;
+  bottom: 11%;
+  left: 79.5%;
 }
 
 .p16-label-usb {
-  top: 3%;
-  left: 52%;
-}
-
-.p16-label-pad {
-  bottom: 18%;
-  left: 22%;
+  bottom: 13%;
+  left: 59%;
 }
 
 .p16-label-tx {
-  bottom: 2%;
-  left: 4%;
+  top: 19%;
+  left: 43%;
+}
+
+.p16-label-tx.is-zoomed {
+  top: 22%;
+  left: 63%;
+}
+
+.p16-label-pad {
+  bottom: 11%;
+  left: 38.5%;
+}
+
+.p16-label-pad.is-zoomed {
+  bottom: 17%;
+  left: 63%;
 }
 
 .p16-label-rx {
-  top: 34%;
-  left: 4%;
+  top: 19%;
+  left: 2.5%;
+}
+
+.p16-label-rx.is-zoomed {
+  top: 19%;
+  left: 4.5%;
 }
 
 .p16-label-watch {
-  bottom: 40%;
-  left: 4%;
+  bottom: 14%;
+  left: 1.5%;
+}
+
+.p16-label-watch.is-zoomed {
+  bottom: 17%;
+  left: 4.5%;
 }
 
 .p16-answer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  flex: none;
+  align-self: center;
 
+  margin-top: 0.2rem;
+  padding: 0.42rem 1.2rem;
+  border: 1px solid var(--c-accent-border);
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, rgb(226 168 70 / 16%), rgb(15 22 38 / 82%));
   color: var(--c-accent);
-  font-weight: 600;
-  font-size: 0.8rem;
 
+  font-weight: 700;
+  font-size: 0.94rem;
   text-align: center;
+
+  transition: opacity 0.35s ease;
 }
 
 .p16-fallback {
   flex: 1;
   min-height: 0;
+}
+
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 </style>

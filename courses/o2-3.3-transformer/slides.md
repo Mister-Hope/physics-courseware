@@ -239,55 +239,15 @@ clicks: 2
 </div>
 </div>
 ---
-title: 实际变压器的能量损耗
-clicks: 3
+title: 实际变压器的能量损耗与理想变压器
+clicks: 5
 clickAnimation: none
 ---
 
-# 实际变压器的能量损耗
+# 实际变压器的能量损耗与理想变压器
 
-<div class="page-grow p10-loss">
-<div class="p10-grid">
-  <div v-click="1" class="p10-card p10-copper">
-    <div class="p10-kicker">铜损</div>
-    <div class="p10-formula"><Latex tex="P_{\text{铜}}=I_1^2r_1+I_2^2r_2" /></div>
-    <div class="p10-note">线圈有电阻，通电发热。原、副线圈都有。</div>
-    <div class="p10-effect">使 <Latex tex="U_2" /> 比理想值低。</div>
-  </div>
-  <div v-click="2" class="p10-card p10-iron">
-    <div class="p10-kicker">铁损</div>
-    <div class="p10-formula"><Latex tex="P_{\text{铁}}=P_{\text{涡流}}+P_{\text{磁滞}}" /></div>
-    <div class="p10-note">交变磁场在铁芯中激起涡流，并反复磁化铁芯。</div>
-    <div class="p10-effect">主要降低效率 <Latex tex="P_2<P_1" />，不直接改变电压比。</div>
-  </div>
-  <div v-click="3" class="p10-card p10-leak">
-    <div class="p10-kicker">漏磁</div>
-    <div class="p10-formula"><Latex tex="\Phi_2<\Phi_1" /></div>
-    <div class="p10-note">少量磁感线散出铁芯，没有同时穿过两线圈。</div>
-    <div class="p10-effect">副线圈磁通变化率变小，<Latex tex="U_2" /> 偏低。</div>
-  </div>
-</div>
-
-</div>
-
----
-title: 理想变压器
-clicks: 2
-clickAnimation: none
----
-
-<div class="page-grow p11-ideal">
-<div class="p11-ask">实际变压器 → 理想变压器，忽略了什么？</div>
-<div v-click="1" class="p11-grid">
-  <div class="p11-card"><div class="p11-card-title">无漏磁</div><div class="p11-card-note">磁通全部穿过副线圈</div></div>
-  <div class="p11-card"><div class="p11-card-title">无损耗</div><div class="p11-card-note">无铜损、无铁损</div></div>
-  <div class="p11-card"><div class="p11-card-title">无内阻</div><div class="p11-card-note">原、副线圈电阻为零</div></div>
-</div>
-<div v-click="2" class="p11-formula-box">
-  <div class="p11-formula"><Latex tex="P_1=P_2" /></div>
-  <div class="p11-formula"><Latex tex="\dfrac{U_1}{U_2}=\dfrac{n_1}{n_2}" /></div>
-  <div class="p11-formula"><Latex tex="\dfrac{I_1}{I_2}=\dfrac{n_2}{n_1}" /></div>
-</div>
+<div class="page-grow">
+<TransformerLoss3D :step="$clicks" />
 </div>
 
 ---

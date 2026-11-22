@@ -180,7 +180,7 @@ onBeforeUnmount(() => {
         <div class="cm-ov-vars"><Latex tex="U_1,\ n_1" /></div>
       </div>
       <div class="cm-ov-badge cm-ov-right">
-        <div class="cm-ov-title">副线圈（接负载）</div>
+        <div class="cm-ov-title">副线圈（输出交流电压）</div>
         <div class="cm-ov-vars"><Latex tex="U_2,\ n_2" /></div>
       </div>
     </div>
@@ -287,9 +287,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .cm-root {
   position: relative;
-
   overflow: hidden;
-
   width: 100%;
   height: 455px;
 }
@@ -326,13 +324,16 @@ onBeforeUnmount(() => {
 }
 
 .cm-ov-badge {
-  padding: 0.8rem 1.2rem;
-  border: 1px solid var(--c-border);
+  padding: 0.85rem 1.35rem;
+  border: 1px solid rgb(255 255 255 / 12%);
   border-radius: var(--radius-lg);
 
-  background: var(--c-surface);
+  background: linear-gradient(135deg, rgb(20 28 46 / 82%), rgb(10 15 28 / 65%));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 10%),
+    0 14px 30px rgb(0 0 0 / 24%);
 
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
 }
 
 .cm-ov-left {
@@ -455,16 +456,19 @@ onBeforeUnmount(() => {
 .cm-chain-row {
   display: grid;
   grid-template-columns: 4.8rem minmax(0, 1fr);
-  gap: 0.6rem;
+  gap: 0.65rem;
   align-items: center;
 
-  padding: 0.34rem 0.85rem;
-  border: 1px solid var(--c-border);
+  padding: 0.42rem 0.95rem;
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: var(--radius-md);
 
-  background: var(--c-surface);
+  background: linear-gradient(135deg, rgb(20 28 46 / 78%), rgb(11 16 28 / 62%));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 8%),
+    0 10px 24px rgb(0 0 0 / 20%);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 
   transition:
     opacity 0.35s ease,

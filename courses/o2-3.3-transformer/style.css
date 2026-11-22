@@ -31,16 +31,16 @@
 .p7-left {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.3rem;
+  align-items: center;
 
   min-width: 0;
 }
 
 .p7-param-title {
   color: var(--c-text);
-  font-size: 0.78rem;
   font-weight: 600;
+  font-size: 0.78rem;
 }
 
 .p7-params {
@@ -51,6 +51,7 @@
   padding-left: 1rem;
 
   color: var(--c-text-dim);
+
   font-size: 0.66rem;
   line-height: 1.4;
 }
@@ -66,8 +67,8 @@
 
 .p7-step-title {
   color: var(--c-text);
-  font-size: 0.9rem;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .p7-steps {
@@ -78,6 +79,7 @@
   padding-left: 1.15rem;
 
   color: var(--c-text-dim);
+
   font-size: 0.72rem;
   line-height: 1.35;
 }
@@ -100,7 +102,6 @@
 
 .p8-input {
   width: 6.2rem;
-
   padding: 0.15rem 0.3rem;
   border: 1px solid var(--c-border);
   border-radius: 0.3rem;
@@ -150,8 +151,8 @@
 
   color: var(--c-text);
 
-  font-size: 1.55rem;
   font-weight: 700;
+  font-size: 1.55rem;
   line-height: 1.5;
 }
 
@@ -180,43 +181,39 @@
 
 .qa-a-lead {
   color: var(--c-accent);
-
-  font-size: 1.35rem;
   font-weight: 700;
+  font-size: 1.35rem;
   line-height: 1.4;
 }
 
 .qa-a-note {
   margin-top: 0.25rem;
-
   color: var(--c-text);
-
   font-size: 1.02rem;
   line-height: 1.65;
 }
 
 .qa-key {
-  margin-top: 0.65rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--c-border);
+  margin-top: 0.85rem;
+  padding: 0.72rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 32%, transparent);
+  border-radius: 0.65rem;
 
+  background: linear-gradient(135deg, rgb(226 168 70 / 12%), rgb(15 22 38 / 55%));
   color: var(--c-text);
 
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   line-height: 1.55;
 }
 
 .qa-key::before {
-  content: "记住：";
-
+  content: "核心机制 · ";
   margin-right: 0.25rem;
-
   color: var(--c-accent);
-
-  font-weight: 700;
+  font-weight: 800;
 }
 
-/* P5/P6：问答页（左侧编号栏 + 右侧内容） */
+/* P5/P6：问答页（教师讲解的精致提示卡，13 §3） */
 .qa-stage {
   display: grid;
   grid-template-columns: 12.5rem minmax(0, 1fr);
@@ -230,8 +227,18 @@
 
 .qa-stage-single {
   grid-template-columns: minmax(0, 1fr);
-  max-width: 54rem;
+  max-width: 50rem;
   margin: 0 auto;
+}
+
+.qa-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  justify-content: center;
+
+  min-width: 0;
+  padding: 0.4rem 0;
 }
 
 .qa-stage-single .qa-panel {
@@ -241,33 +248,30 @@
 .qa-aside {
   display: flex;
   flex-direction: column;
+  gap: 0.55rem;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
 
   padding: 1.4rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
 
   background:
-    radial-gradient(circle at 50% 18%, rgb(226 168 70 / 9%), transparent 68%),
-    var(--c-surface);
-
+    radial-gradient(circle at 50% 18%, rgb(226 168 70 / 9%), transparent 68%), var(--c-surface);
   box-shadow: 0 1.2rem 2.6rem rgb(0 0 0 / 18%);
 }
 
 .qa-aside-num {
   color: var(--c-accent);
 
-  font-size: 4.2rem;
   font-weight: 800;
+  font-size: 4.2rem;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
 .qa-aside-label {
   color: var(--c-text-dim);
-
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -275,7 +279,6 @@
 
 .qa-aside-icon {
   margin-top: 0.15rem;
-
   color: var(--c-accent);
   opacity: 0.75;
 }
@@ -284,39 +287,41 @@
   font-size: 2rem !important;
 }
 
-.qa-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.1rem;
-
-  min-width: 0;
-  padding: 0.2rem 0;
-}
-
 .qa-question {
-  max-width: 40rem;
+  position: relative;
+
+  max-width: 42rem;
+  padding-left: 1.1rem;
+  border-left: 4px solid var(--c-accent);
 
   color: var(--c-text);
 
-  font-size: 2.1rem;
-  font-weight: 700;
-  line-height: 1.35;
+  font-weight: 800;
+  font-size: 2.18rem;
+  line-height: 1.32;
+  letter-spacing: 0.01em;
 }
 
 .qa-answer {
-  padding: 1.05rem 1.35rem;
-  border-left: 3px solid var(--c-accent);
-  border-radius: 0 0.9rem 0.9rem 0;
+  padding: 1.25rem 1.6rem;
+  border: 1px solid rgb(255 255 255 / 11%);
+  border-left: 4px solid var(--c-accent);
+  border-radius: 0.4rem 1.15rem 1.15rem 0.4rem;
 
-  background: var(--c-surface);
-  box-shadow: 0 1rem 2.2rem rgb(0 0 0 / 16%);
+  background:
+    radial-gradient(circle at 8% 15%, rgb(226 168 70 / 10%), transparent 58%),
+    linear-gradient(145deg, rgb(20 29 48 / 84%), rgb(10 15 28 / 68%));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 1.1rem 2.6rem rgb(0 0 0 / 24%);
+
+  backdrop-filter: blur(18px);
 }
 
 .qa-answer-head {
   display: flex;
+  gap: 0.75rem;
   align-items: center;
-  gap: 0.65rem;
 }
 
 .qa-answer-icon {
@@ -324,19 +329,25 @@
   flex: none;
   place-items: center;
 
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 42%, transparent);
+  border-radius: 50%;
+
+  background: rgb(226 168 70 / 14%);
   color: var(--c-accent);
+  box-shadow: 0 0 16px rgb(226 168 70 / 22%);
 }
 
 .qa-answer-icon svg {
-  font-size: 1.6rem !important;
+  font-size: 1.45rem !important;
 }
 
 .qa-answer-lead {
   color: var(--c-text);
-
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 1.4;
+  font-weight: 800;
+  font-size: 1.48rem;
+  line-height: 1.38;
 }
 
 .qa-answer-lead strong {
@@ -344,23 +355,21 @@
 }
 
 .qa-answer-note {
-  margin: 0.35rem 0 0;
-
+  margin: 0.5rem 0 0;
   color: var(--c-text-dim);
-
-  font-size: 1rem;
+  font-size: 1.04rem;
   line-height: 1.65;
 }
 
-/* P6：Q → A → Q 对话串 */
+/* P6：Q → A → Q 对话串（精致玻璃气泡 + 渐变徽标） */
 .qa-dialogue {
-  gap: 0.5rem;
+  gap: 0.48rem;
 }
 
 .qa-dialogue-row {
   display: grid;
-  grid-template-columns: 2.4rem minmax(0, 1fr);
-  gap: 0.85rem;
+  grid-template-columns: 2.85rem minmax(0, 1fr);
+  gap: 1rem;
   align-items: center;
 }
 
@@ -368,53 +377,68 @@
   display: grid;
   place-items: center;
 
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.85rem;
+  height: 2.85rem;
+  border: 1px solid color-mix(in srgb, var(--c-accent) 45%, transparent);
+  border-radius: 50%;
 
+  background: radial-gradient(circle at 35% 30%, rgb(226 168 70 / 26%), rgb(226 168 70 / 8%));
   color: var(--c-accent);
+  box-shadow: 0 0 18px rgb(226 168 70 / 18%);
 }
 
 .qa-dialogue-icon svg {
-  font-size: 2.1rem !important;
+  font-size: 1.75rem !important;
 }
 
 .qa-dialogue-icon-a {
-  color: var(--c-text-dim);
+  border-color: color-mix(in srgb, var(--c-physics) 45%, transparent);
+  background: radial-gradient(circle at 35% 30%, rgb(45 212 191 / 24%), rgb(45 212 191 / 8%));
+  color: var(--c-physics);
+  box-shadow: 0 0 18px rgb(45 212 191 / 16%);
 }
 
 .qa-bubble {
-  padding: 0.78rem 1.1rem;
-  border: 1px solid var(--c-border);
-  border-radius: 1rem;
+  padding: 0.88rem 1.3rem;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 1.1rem;
 
-  background: var(--c-surface);
+  background: linear-gradient(135deg, rgb(22 31 52 / 82%), rgb(12 18 32 / 66%));
   color: var(--c-text);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 9%),
+    0 10px 26px rgb(0 0 0 / 20%);
 
-  font-size: 1.32rem;
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: 700;
+  font-size: 1.34rem;
+  line-height: 1.42;
+
+  backdrop-filter: blur(16px);
 }
 
 .qa-connector {
   width: 2px;
-  height: 0.8rem;
-  margin-left: 1.2rem;
+  height: 0.85rem;
+  margin-left: 1.4rem;
   border-radius: 2px;
 
-  background: linear-gradient(var(--c-accent), transparent);
-  opacity: 0.45;
+  background: linear-gradient(180deg, var(--c-accent), rgb(45 212 191 / 35%));
+
+  opacity: 0.65;
 }
 
 .qa-answer-dialogue {
-  padding: 0.8rem 1.1rem;
+  padding: 0.92rem 1.3rem;
+  border-left-color: var(--c-physics);
 }
 
 .qa-answer-dialogue .qa-answer-lead {
-  font-size: 1.2rem;
+  font-size: 1.26rem;
 }
 
 .qa-answer-dialogue .qa-answer-note {
-  font-size: 0.95rem;
+  margin-top: 0.32rem;
+  font-size: 0.96rem;
 }
 
 /* P10：理想与实测对比框 */
@@ -481,34 +505,31 @@
 }
 
 /* P9 比值表与结论 */
-.p9-table-wrap { margin-top: .35rem; }
-.p9-table { width: 100%; }
-.p9-table th, .p9-table td { padding: .42rem .28rem; }
-.p9-conclusion { margin-top: .7rem; }
-.p9-conclusion-lead { font-size: .92rem; line-height: 1.5; }
-.p9-question { margin-top: .5rem; font-size: 1.35rem; color: var(--c-accent); font-weight: 600; }
+.p9-table-wrap {
+  margin-top: 0.35rem;
+}
 
-/* P11 理想变压器 */
-.p11-ideal { display: flex; flex-direction: column; gap: 1.05rem; justify-content: center; }
-.p11-ask { font-size: 1.4rem; font-weight: 600; }
-.p11-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
-.p11-card { padding: .85rem .95rem; border: 1px solid var(--c-line); border-radius: .9rem; background: rgba(255,255,255,.03); }
-.p11-card-title { font-size: 1.08rem; font-weight: 600; color: var(--c-accent); }
-.p11-card-note { margin-top: .3rem; font-size: .78rem; color: var(--c-text-2); }
-.p11-formula-box { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin-top: .2rem; }
-.p11-formula { display: flex; align-items: center; justify-content: center; padding: .65rem .35rem; border: 1px solid var(--c-line); border-radius: .8rem; font-size: 1.02rem; }
+.p9-table {
+  width: 100%;
+}
 
-/* P10 三块损耗 */
-.p10-loss { display: flex; flex-direction: column; gap: .8rem; }
-.p10-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; }
-.p10-card { display: flex; flex-direction: column; gap: .55rem; padding: .8rem .85rem; border: 1px solid var(--c-border); border-radius: var(--radius-lg); background: var(--c-surface); }
-.p10-copper { border-top: 3px solid #f87171; }
-.p10-iron { border-top: 3px solid #e2a846; }
-.p10-leak { border-top: 3px solid #60a5fa; }
-.p10-kicker { font-size: 1.02rem; font-weight: 700; }
-.p10-copper .p10-kicker { color: #f87171; }
-.p10-iron .p10-kicker { color: #e2a846; }
-.p10-leak .p10-kicker { color: #60a5fa; }
-.p10-formula { min-height: 2.2rem; display: flex; align-items: center; }
-.p10-note { color: var(--c-text-dim); font-size: .78rem; line-height: 1.55; }
-.p10-effect { margin-top: auto; color: var(--c-text); font-size: .82rem; line-height: 1.5; }
+.p9-table th,
+.p9-table td {
+  padding: 0.42rem 0.28rem;
+}
+
+.p9-conclusion {
+  margin-top: 0.7rem;
+}
+
+.p9-conclusion-lead {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.p9-question {
+  margin-top: 0.5rem;
+  color: var(--c-accent);
+  font-weight: 600;
+  font-size: 1.35rem;
+}

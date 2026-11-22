@@ -1,30 +1,69 @@
 <script setup lang="ts">
 /**
- * 第 4 页（P4）：变压器的结构与作用（3 击，M10, M13, M14, §6, §6.5）
+ * 第 4 页（P4）：变压器的结构与作用（3 击，13-Gemini4修改清单.md §2.1 & §2.2）
  *
- * 严格按 07-给Gemini4的执行指令.md §1 M10 & §4 & §6：
+ * 点击顺序（严格落实 13 §2.2）：
  *
- * - 左侧采用真 3D 写实变压器（圆角金属铁芯 + 12:4 细绕组 + 双接线柱 u~ + 写实色环电阻 + 闭合铁芯 5 条纯箭头环流）
- * - 0 击：整体 3D 变压器，展示教材定义（闭合铁芯 + 绕在铁芯上的两个线圈）
- * - C1（step >= 1）：聚焦原线圈（初级线圈）：与交流电源连接，标注 u ~
- * - C2（step >= 2）：聚焦副线圈（次级线圈）：与负载电阻连接
- * - C3（step >= 3）：铁芯变半透明并保留 3D 线框，展示内部闭合磁路箭头环流——“铁芯把磁感线约束在闭合磁路中，磁通量几乎全部穿过两个线圈”
+ * - 第 1 击（step = 1）：完全正视图的变压器；展示两个线圈和铁芯；用引线分别指到左线圈、右线圈、铁芯，出三个文字标注。
+ * - 第 2 击（step = 2）：隐藏刚才的两个线圈通用标注；把模型向右旋转、把左侧放大；闪烁左（原）线圈；显示原线圈文字和引线。 【关键要求】：旋转过程中，原线圈的文字/引线锚点放在 3D 世界坐标里实时投影到屏幕，跟着 3D 模型一起旋转！
+ * - 第 3 击（step = 3）：闪烁右（副）线圈；显示副线圈文字和 3D 世界坐标实时投影引线。
  */
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
 
 import { TransformerCoreModel } from "./transformer3d/transformerModel";
+import type { ProjectedTransformerAnchors } from "./transformer3d/transformerModel";
 
 const { step = 0 } = defineProps<{ step?: number }>();
 
 const stageEl = ref<HTMLDivElement>();
 const mode = ref<"pending" | "3d" | "2d">("pending");
+const stageSize = reactive({ w: 540, h: 365 });
+
+// 3D 世界坐标实时投影到容器像素坐标系的锚点（随模型旋转每一帧同步更新）
+const anchors = reactive<ProjectedTransformerAnchors>({
+  leftCoil: { x: 185, y: 245 },
+  rightCoil: { x: 355, y: 245 },
+  coreTop: { x: 270, y: 82 },
+});
 
 let model: TransformerCoreModel | null = null;
 let observer: IntersectionObserver | null = null;
 
-const s1 = computed(() => step >= 1);
-const s2 = computed(() => step >= 2);
-const s3 = computed(() => step >= 3);
+// C1: 显示正视图的三个基础结构标注（线圈、线圈、铁芯）
+const showC1GenericCoils = computed(() => step === 1);
+const showCoreLabel = computed(() => step >= 1);
+// C2: 隐藏刚才的两个通用线圈标注，向右旋转放大左侧，闪烁左（原）线圈，显示原线圈文字和跟随旋转的 3D 引线
+const showPrimaryLabel = computed(() => step >= 2);
+// C3: 闪烁右（副）线圈，显示副线圈文字和跟随 3D 的引线
+const showSecondaryLabel = computed(() => step >= 3);
+
+// 将容器像素坐标换算到 SVG overlay 的 540×365 视口坐标，使引线与文字跟随 3D 模型旋转
+const leftPt = computed(() => {
+  const sx = 540 / Math.max(stageSize.w, 1);
+  const sy = 365 / Math.max(stageSize.h, 1);
+  return {
+    x: Math.round(anchors.leftCoil.x * sx),
+    y: Math.round(anchors.leftCoil.y * sy),
+  };
+});
+
+const rightPt = computed(() => {
+  const sx = 540 / Math.max(stageSize.w, 1);
+  const sy = 365 / Math.max(stageSize.h, 1);
+  return {
+    x: Math.round(anchors.rightCoil.x * sx),
+    y: Math.round(anchors.rightCoil.y * sy),
+  };
+});
+
+const corePt = computed(() => {
+  const sx = 540 / Math.max(stageSize.w, 1);
+  const sy = 365 / Math.max(stageSize.h, 1);
+  return {
+    x: Math.round(anchors.coreTop.x * sx),
+    y: Math.round(anchors.coreTop.y * sy),
+  };
+});
 
 const hasWebGl = (): boolean => {
   try {
@@ -40,6 +79,20 @@ const releaseModel = (): void => {
   model = null;
 };
 
+const handleAnchorsUpdate = (next: ProjectedTransformerAnchors): void => {
+  const container = stageEl.value;
+  if (container && container.clientWidth > 0 && container.clientHeight > 0) {
+    stageSize.w = container.clientWidth;
+    stageSize.h = container.clientHeight;
+  }
+  anchors.leftCoil.x = next.leftCoil.x;
+  anchors.leftCoil.y = next.leftCoil.y;
+  anchors.rightCoil.x = next.rightCoil.x;
+  anchors.rightCoil.y = next.rightCoil.y;
+  anchors.coreTop.x = next.coreTop.x;
+  anchors.coreTop.y = next.coreTop.y;
+};
+
 const startModel = (): void => {
   const container = stageEl.value;
   if (model || !container || container.clientWidth === 0) return;
@@ -49,7 +102,7 @@ const startModel = (): void => {
   }
 
   try {
-    const instance = new TransformerCoreModel(container, "structure");
+    const instance = new TransformerCoreModel(container, "structure", handleAnchorsUpdate);
     instance.setStep(step);
     model = instance;
     mode.value = "3d";
@@ -108,10 +161,10 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="ts3-wrap">
-    <!-- 左栏：写实 3D 变压器 + 不压器件的引线标注 -->
+    <!-- 左栏：写实 3D 变压器 + 3D 世界坐标实时投影引线标注（随旋转实时跟随） -->
     <div class="ts3-stage-box">
       <div ref="stageEl" class="ts3-stage">
-        <svg v-if="mode === '2d'" viewBox="0 0 540 360" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <svg v-if="mode === '2d'" viewBox="0 0 540 365" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path
             d="M 140 65 H 400 V 295 H 140 Z M 192 115 V 245 H 348 V 115 Z"
             fill="var(--c-surface-solid)"
@@ -146,56 +199,99 @@ onBeforeUnmount(() => {
         </svg>
       </div>
 
-      <!-- 避开导线的引线标注层 -->
-      <svg class="ts3-overlay" viewBox="0 0 540 385" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- 原线圈标注（C1 出现，避开导线，在左下方） -->
-        <g :opacity="s1 ? 1 : 0" class="ts3-fade">
-          <polyline points="178,275 162,332 138,332" fill="none" stroke="var(--c-accent-2)" stroke-width="1.5" stroke-dasharray="4 3" />
-          <circle cx="178" cy="275" r="3" fill="var(--c-accent-2)" />
-          <text x="132" y="337" text-anchor="end" font-size="15" font-weight="700" fill="var(--c-accent-2)">原线圈（初级）</text>
+      <!-- 3D 锚点实时投影引线层：锚点与折线、文字在旋转过程中全程跟随 3D 模型一起移动 -->
+      <svg class="ts3-overlay" viewBox="0 0 540 365" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- 闭合铁芯标注（第 1 击起常显，跟随 3D 铁芯上横轭锚点） -->
+        <g :opacity="showCoreLabel ? 1 : 0" class="ts3-fade">
+          <polyline
+            :points="`${corePt.x},${corePt.y} ${corePt.x + 24},${corePt.y - 42} ${corePt.x + 76},${corePt.y - 42}`"
+            fill="none"
+            stroke="var(--c-accent)"
+            stroke-width="1.6"
+            stroke-dasharray="4 3"
+          />
+          <circle :cx="corePt.x" :cy="corePt.y" r="3.5" fill="var(--c-accent)" />
+          <text :x="corePt.x + 84" :y="corePt.y - 37" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-accent)">闭合铁芯</text>
         </g>
-        <!-- 副线圈标注（C2 出现，避开导线，在右下方） -->
-        <g :opacity="s2 ? 1 : 0" class="ts3-fade">
-          <polyline points="335,275 362,332 415,332" fill="none" stroke="var(--c-physics)" stroke-width="1.5" stroke-dasharray="4 3" />
-          <circle cx="335" cy="275" r="3" fill="var(--c-physics)" />
-          <text x="422" y="336" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-physics)">副线圈（次级）</text>
+
+        <!-- 第 1 击：正视图下指到左线圈、右线圈的通用“线圈”标注（第 2 击隐藏） -->
+        <g :opacity="showC1GenericCoils ? 1 : 0" class="ts3-fade">
+          <polyline
+            :points="`${leftPt.x},${leftPt.y} ${leftPt.x - 24},${leftPt.y + 52} ${leftPt.x - 62},${leftPt.y + 52}`"
+            fill="none"
+            stroke="var(--c-accent-2)"
+            stroke-width="1.6"
+            stroke-dasharray="4 3"
+          />
+          <circle :cx="leftPt.x" :cy="leftPt.y" r="3.5" fill="var(--c-accent-2)" />
+          <text :x="leftPt.x - 70" :y="leftPt.y + 57" text-anchor="end" font-size="15" font-weight="700" fill="var(--c-accent-2)">线圈</text>
+
+          <polyline
+            :points="`${rightPt.x},${rightPt.y} ${rightPt.x + 24},${rightPt.y + 52} ${rightPt.x + 62},${rightPt.y + 52}`"
+            fill="none"
+            stroke="var(--c-physics)"
+            stroke-width="1.6"
+            stroke-dasharray="4 3"
+          />
+          <circle :cx="rightPt.x" :cy="rightPt.y" r="3.5" fill="var(--c-physics)" />
+          <text :x="rightPt.x + 70" :y="rightPt.y + 57" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-physics)">线圈</text>
         </g>
-        <!-- 闭合铁芯标注（C3 出现，在正上方） -->
-        <g :opacity="s3 ? 1 : 0" class="ts3-fade">
-          <polyline points="260,82 285,36 340,36" fill="none" stroke="var(--c-accent)" stroke-width="1.5" stroke-dasharray="4 3" />
-          <circle cx="260" cy="82" r="3" fill="var(--c-accent)" />
-          <text x="348" y="41" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-accent)">闭合铁芯</text>
+
+        <!-- 第 2 击：模型向右旋转并放大左侧时，原线圈的引线与文字跟随 3D 模型同步旋转移动！ -->
+        <g :opacity="showPrimaryLabel ? 1 : 0" class="ts3-fade">
+          <polyline
+            :points="`${leftPt.x},${leftPt.y} ${leftPt.x - 22},${leftPt.y + 52} ${leftPt.x - 54},${leftPt.y + 52}`"
+            fill="none"
+            stroke="var(--c-accent-2)"
+            stroke-width="1.8"
+            stroke-dasharray="4 3"
+          />
+          <circle :cx="leftPt.x" :cy="leftPt.y" r="3.8" fill="var(--c-accent-2)" />
+          <text :x="leftPt.x - 60" :y="leftPt.y + 57" text-anchor="end" font-size="15" font-weight="700" fill="var(--c-accent-2)">原线圈（初级）</text>
+        </g>
+
+        <!-- 第 3 击：闪烁右（副）线圈，显示副线圈文字和 3D 跟随引线 -->
+        <g :opacity="showSecondaryLabel ? 1 : 0" class="ts3-fade">
+          <polyline
+            :points="`${rightPt.x},${rightPt.y} ${rightPt.x + 22},${rightPt.y + 52} ${rightPt.x + 54},${rightPt.y + 52}`"
+            fill="none"
+            stroke="var(--c-physics)"
+            stroke-width="1.8"
+            stroke-dasharray="4 3"
+          />
+          <circle :cx="rightPt.x" :cy="rightPt.y" r="3.8" fill="var(--c-physics)" />
+          <text :x="rightPt.x + 60" :y="rightPt.y + 57" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-physics)">副线圈（次级）</text>
         </g>
       </svg>
     </div>
 
-    <!-- 右栏：教材定义与三要素（教材原话上屏，M10 & M13） -->
+    <!-- 右栏：教材定义与三要素（按第 1、2、3 击节奏同步点亮） -->
     <div class="ts3-info">
       <DefinitionBox term="变压器的构造">
         <div>变压器由<span class="def-term">闭合铁芯</span>和绕在铁芯上的<span class="def-term">两个线圈</span>组成。</div>
       </DefinitionBox>
 
-      <div class="ts3-item ts3-item-blue" :class="{ 'is-hidden': !s1 }">
-        <span class="ts3-dot ts3-dot-blue" />
-        <div>
-          <div class="ts3-item-title">原线圈（初级线圈）</div>
-          <div class="ts3-item-desc">与<b>交流电源</b>（<Latex tex="u" />）相连接的线圈</div>
-        </div>
-      </div>
-
-      <div class="ts3-item ts3-item-teal" :class="{ 'is-hidden': !s2 }">
-        <span class="ts3-dot ts3-dot-teal" />
-        <div>
-          <div class="ts3-item-title">副线圈（次级线圈）</div>
-          <div class="ts3-item-desc">与<b>负载</b>（用电器）相连接的线圈</div>
-        </div>
-      </div>
-
-      <div class="ts3-item ts3-item-gold" :class="{ 'is-hidden': !s3 }">
+      <div class="ts3-item ts3-item-gold" :class="{ 'is-hidden': !showCoreLabel }">
         <span class="ts3-dot ts3-dot-gold" />
         <div>
           <div class="ts3-item-title">闭合铁芯</div>
-          <div class="ts3-item-desc">把磁感线约束在闭合磁路中，使磁通量几乎全部穿过两个线圈。</div>
+          <div class="ts3-item-desc">由涂有绝缘漆的硅钢片叠合而成，用来导磁、构成闭合磁路。</div>
+        </div>
+      </div>
+
+      <div class="ts3-item ts3-item-blue" :class="{ 'is-hidden': !showPrimaryLabel }">
+        <span class="ts3-dot ts3-dot-blue" />
+        <div>
+          <div class="ts3-item-title">原线圈（初级线圈）</div>
+          <div class="ts3-item-desc">与<b>交流电源</b>相连接，输入交流电压 <Latex tex="U_1" />。</div>
+        </div>
+      </div>
+
+      <div class="ts3-item ts3-item-teal" :class="{ 'is-hidden': !showSecondaryLabel }">
+        <span class="ts3-dot ts3-dot-teal" />
+        <div>
+          <div class="ts3-item-title">副线圈（次级线圈）</div>
+          <div class="ts3-item-desc">与<b>负载</b>相连接，输出感应交流电压 <Latex tex="U_2" />。</div>
         </div>
       </div>
     </div>
@@ -215,10 +311,8 @@ onBeforeUnmount(() => {
 
 .ts3-stage-box {
   position: relative;
-
   overflow: hidden;
-
-  height: 365px;
+  height: 325px;
 }
 
 .ts3-stage {
@@ -247,28 +341,34 @@ onBeforeUnmount(() => {
 }
 
 .ts3-fade {
-  transition: opacity 0.35s ease;
+  transition: opacity 0.28s ease;
 }
 
 .ts3-info {
-  --def-pad-y: 0.42rem;
-  --def-pad-x: 0.85rem;
+  --def-pad-y: 0.45rem;
+  --def-pad-x: 0.88rem;
+
   display: flex;
   flex-direction: column;
-  gap: 0.34rem;
+  gap: 0.42rem;
   min-width: 0;
 }
 
 .ts3-item {
   display: flex;
-  gap: 0.55rem;
+  gap: 0.6rem;
   align-items: center;
 
-  padding: 0.34rem 0.75rem;
+  padding: 0.42rem 0.82rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
 
-  background: var(--c-surface);
+  background: linear-gradient(135deg, rgb(20 28 46 / 76%), rgb(11 16 28 / 60%));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 7%),
+    0 8px 20px rgb(0 0 0 / 16%);
+
+  backdrop-filter: blur(12px);
 
   transition: opacity 0.3s ease;
 }
@@ -278,11 +378,11 @@ onBeforeUnmount(() => {
 }
 
 .ts3-item-teal {
-  border-color: color-mix(in srgb, var(--c-physics) 38%, transparent);
+  border-color: color-mix(in srgb, var(--c-physics) 42%, transparent);
 }
 
 .ts3-item-gold {
-  border-color: color-mix(in srgb, var(--c-accent) 42%, transparent);
+  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
 }
 
 .ts3-dot {
@@ -294,14 +394,17 @@ onBeforeUnmount(() => {
 
 .ts3-dot-blue {
   background: var(--c-accent-2);
+  box-shadow: 0 0 8px var(--c-accent-2);
 }
 
 .ts3-dot-teal {
   background: var(--c-physics);
+  box-shadow: 0 0 8px var(--c-physics);
 }
 
 .ts3-dot-gold {
   background: var(--c-accent);
+  box-shadow: 0 0 8px var(--c-accent);
 }
 
 .ts3-item-title {
@@ -312,10 +415,10 @@ onBeforeUnmount(() => {
 }
 
 .ts3-item-desc {
-  margin-top: 0.12rem;
+  margin-top: 0.14rem;
   color: var(--c-text-dim);
   font-size: 0.85rem;
-  line-height: 1.35;
+  line-height: 1.38;
 }
 
 .is-hidden {

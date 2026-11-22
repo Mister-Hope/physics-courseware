@@ -158,7 +158,7 @@ const createWatchSoundEngine = (): WatchSoundEngine => {
   };
 };
 
-export type WatchSceneMode = "intro" | "chain";
+export type WatchSceneMode = "intro" | "chain" | "callback";
 
 interface StepPose {
   watchX: number;
@@ -565,6 +565,112 @@ const CHAIN_POSES: StepPose[] = [
   },
 ];
 
+/**
+ * P15（原 P16）单场景回扣无线充电（13-Gemini4修改清单.md §0 & §1）：
+ *
+ * - 单一 Three.js 场景：一个表、一个充电盘、一根连通线、一个适配器、一个插座、一面右侧墙，同一透视/比例/光照！
+ * - 从右后方视角 (`Z < 0`) 观察：在屏幕投影上，**手表在左（X ≈ 0），墙面与插座在右（X ≈ -17.5）**！
+ * - 插座镜像装在右侧立体墙面上，适配器两插脚插进插座，USB-C 插头真的插进适配器，一根连续白线从适配器连到充电盘护套。
+ * - Step 0..2：全景构图（左手表+半透明双线圈+空气磁路灯笼磁场，右墙面+插座+适配器+连通 USB 线），依次出链路标签。
+ * - Step 3：链路走完，镜头推近左侧手表与充电盘双线圈空气磁路局部，揭晓“空气磁路、漏磁大；链路中还有能量损耗。”
+ */
+const CALLBACK_POSES: StepPose[] = [
+  // Step 0 / 1 / 2: 单场景完整模型全景（手表在画面左，墙插在画面右，双线圈与空气磁路清晰分开可见）
+  {
+    watchX: 0,
+    watchZ: 0.78,
+    chargerZ: -1.68,
+    chargerVisible: true,
+    backCoverOpacity: 0.16,
+    coilTranslucent: true,
+    chargeProgress: 0.65,
+    txCurrentAlpha: 1,
+    fieldAlpha: 0.92,
+    rxCurrentAlpha: 0.9,
+    chainVisible: true,
+    socketX: -17.2,
+    adapterX: -15.95,
+    adapterY: -0.18,
+    adapterRotX: Math.PI / 2,
+    adapterRotY: Math.PI * 0.11,
+    adapterRotZ: 0,
+    typeCPlugOffsetX: 1.05,
+    typeCPlugRotX: Math.PI / 2,
+    camPos: new Vector3(-4.2, 2.1, -21.2),
+    camLookAt: new Vector3(-8.2, -0.25, -0.55),
+  },
+  {
+    watchX: 0,
+    watchZ: 0.78,
+    chargerZ: -1.68,
+    chargerVisible: true,
+    backCoverOpacity: 0.16,
+    coilTranslucent: true,
+    chargeProgress: 0.65,
+    txCurrentAlpha: 1,
+    fieldAlpha: 0.92,
+    rxCurrentAlpha: 0.9,
+    chainVisible: true,
+    socketX: -17.2,
+    adapterX: -15.95,
+    adapterY: -0.18,
+    adapterRotX: Math.PI / 2,
+    adapterRotY: Math.PI * 0.11,
+    adapterRotZ: 0,
+    typeCPlugOffsetX: 1.05,
+    typeCPlugRotX: Math.PI / 2,
+    camPos: new Vector3(-4.2, 2.1, -21.2),
+    camLookAt: new Vector3(-8.2, -0.25, -0.55),
+  },
+  {
+    watchX: 0,
+    watchZ: 0.78,
+    chargerZ: -1.68,
+    chargerVisible: true,
+    backCoverOpacity: 0.16,
+    coilTranslucent: true,
+    chargeProgress: 0.65,
+    txCurrentAlpha: 1,
+    fieldAlpha: 0.92,
+    rxCurrentAlpha: 0.9,
+    chainVisible: true,
+    socketX: -17.2,
+    adapterX: -15.95,
+    adapterY: -0.18,
+    adapterRotX: Math.PI / 2,
+    adapterRotY: Math.PI * 0.11,
+    adapterRotZ: 0,
+    typeCPlugOffsetX: 1.05,
+    typeCPlugRotX: Math.PI / 2,
+    camPos: new Vector3(-4.2, 2.1, -21.2),
+    camLookAt: new Vector3(-8.2, -0.25, -0.55),
+  },
+  // Step 3: 链路走完，镜头推近左侧手表与充电盘双线圈空气磁路局部，同时右侧适配器与墙插仍保持连通在远端
+  {
+    watchX: 0,
+    watchZ: 0.85,
+    chargerZ: -1.88,
+    chargerVisible: true,
+    backCoverOpacity: 0.14,
+    coilTranslucent: true,
+    chargeProgress: 0.65,
+    txCurrentAlpha: 1,
+    fieldAlpha: 1,
+    rxCurrentAlpha: 1,
+    chainVisible: true,
+    socketX: -17.2,
+    adapterX: -15.95,
+    adapterY: -0.18,
+    adapterRotX: Math.PI / 2,
+    adapterRotY: Math.PI * 0.11,
+    adapterRotZ: 0,
+    typeCPlugOffsetX: 1.05,
+    typeCPlugRotX: Math.PI / 2,
+    camPos: new Vector3(4.2, 1.75, -10.5),
+    camLookAt: new Vector3(-0.65, -0.1, -0.45),
+  },
+];
+
 const clonePose = (p: StepPose): StepPose => ({
   ...p,
   camPos: p.camPos.clone(),
@@ -578,6 +684,16 @@ interface LanternVerticalLoop {
   arrows: { mesh: Mesh; baseU: number }[];
 }
 
+export interface CallbackProjectedAnchors {
+  socket: { x: number; y: number };
+  adapter: { x: number; y: number };
+  usbCable: { x: number; y: number };
+  pad: { x: number; y: number };
+  txCoil: { x: number; y: number };
+  rxCoil: { x: number; y: number };
+  watch: { x: number; y: number };
+}
+
 export class WatchIntroModel {
   scene: Scene;
   camera: PerspectiveCamera;
@@ -588,11 +704,12 @@ export class WatchIntroModel {
   private snapPulseRing!: Mesh;
   private snapPulseMat!: MeshBasicMaterial;
 
-  // P3 供电链 3D 资产组（延伸长白线 + USB Type-C 插头 + 苹果风白色圆角电源适配器 + 墙面插座）
+  // P3 / P15 供电链 3D 资产组（延伸长白线 + USB Type-C 插头 + 苹果风白色圆角电源适配器 + 墙面插座 + P15 墙体面）
   private readonly chainGroup = new Group();
   private readonly typeCPlugGroup = new Group();
   private readonly adapterGroup = new Group();
   private readonly wallSocketGroup = new Group();
+  private wallBackdropMesh!: Mesh;
   private dynamicCableMesh!: Mesh;
   private cableMat!: MeshStandardMaterial;
 
@@ -635,12 +752,15 @@ export class WatchIntroModel {
   private pmremGenerator: PMREMGenerator | null = null;
   private readonly dummy = new Object3D();
   private readonly upVec = new Vector3(0, 1, 0);
+  private readonly projVec = new Vector3();
 
   constructor(
     private readonly container: HTMLElement,
     private readonly mode: WatchSceneMode = "intro",
+    private readonly onFrameCallback?: (anchors: CallbackProjectedAnchors) => void,
   ) {
-    this.poses = mode === "chain" ? CHAIN_POSES : INTRO_POSES;
+    this.poses =
+      mode === "chain" ? CHAIN_POSES : mode === "callback" ? CALLBACK_POSES : INTRO_POSES;
 
     this.scene = new Scene();
     // 09 §1.3：不要深蓝色背景，背景完全透明，无缝嵌入 PPT！
@@ -1028,9 +1148,23 @@ export class WatchIntroModel {
       this.wallSocketGroup.add(slot);
     }
 
-    // 插座正面朝右前方（绕 Y 轴转 70°，即法线在 XZ 平面与 -X 轴仅偏 20°），既能让观众看清插座五孔，又能与适配器左端面完全贴合、使两片插脚 100% 插进插座孔内不外露！
-    this.wallSocketGroup.rotation.y = Math.PI * 0.39;
+    // 插座正面朝右前方（P3 绕 Y 轴转 +0.39π；P15 callback 模式从 Z < 0 视角观看时绕 Y 轴转 +0.61π，使插座正面朝右后方镜头、并嵌入墙面）
+    this.wallSocketGroup.rotation.y = this.mode === "callback" ? Math.PI * 0.61 : Math.PI * 0.39;
     this.wallSocketGroup.position.set(-19.25, -0.9, -0.85);
+
+    // 5. P15 墙体立体面板（插座直接嵌入这面墙上，与插座同平面共角度，呈现“一面墙 + 墙插”的完整单场景）
+    const wallMat = new MeshStandardMaterial({
+      color: "#1e293b",
+      metalness: 0.08,
+      roughness: 0.72,
+      transparent: true,
+      opacity: 0.42,
+    });
+    const wallGeo = new BoxGeometry(10.5, 11.5, 0.25);
+    wallGeo.translate(0, 0, -0.28);
+    this.wallBackdropMesh = new Mesh(wallGeo, wallMat);
+    this.wallBackdropMesh.visible = this.mode === "callback";
+    this.wallSocketGroup.add(this.wallBackdropMesh);
   }
 
   // 切换到指定点击步：P2 为 C0..C6 共 6 击，P3 为 C0..C7 共 7 击
@@ -1268,15 +1402,17 @@ export class WatchIntroModel {
       );
     }
 
-    // 是否有需要连续运行的电流/磁场动效（P2 C4–C6，或 P3 C3）
+    // 是否有需要连续运行的电流/磁场动效（P2 C4–C6，或 P3 C3，或 P15 callback 全程）
     const hasContinuousFlow =
       (this.mode === "intro" && this.currentStep >= 4) ||
-      (this.mode === "chain" && this.currentStep === 3);
+      (this.mode === "chain" && this.currentStep === 3) ||
+      this.mode === "callback";
 
     // 09 §5：电子速度控制在 1 圈约 1.5 秒（约 0.65 圈/秒），绝不闪烁、不快到看不清流向
     const elapsedSec = now * 0.001;
     this.applyPose(this.currentPose, tRaw, elapsedSec);
     this.renderer.render(this.scene, this.camera);
+    this.emitCallbackAnchors();
 
     if (tRaw < 1 || hasContinuousFlow) {
       this.rafId = requestAnimationFrame(this.tick);
@@ -1284,6 +1420,7 @@ export class WatchIntroModel {
       this.currentPose = clonePose(this.targetPose);
       this.applyPose(this.currentPose, 1, 0.35);
       this.renderer.render(this.scene, this.camera);
+      this.emitCallbackAnchors();
       this.isAnimating = false;
     }
   };
@@ -1313,9 +1450,10 @@ export class WatchIntroModel {
     if (shortCable) shortCable.visible = !pose.chainVisible;
 
     if (pose.chainVisible) {
-      const showAdapterAndSocket = this.currentStep >= 2;
+      const showAdapterAndSocket = this.mode === "callback" || this.currentStep >= 2;
       this.adapterGroup.visible = showAdapterAndSocket;
       this.wallSocketGroup.visible = showAdapterAndSocket;
+      this.wallBackdropMesh.visible = this.mode === "callback";
       this.typeCPlugGroup.visible = true;
 
       this.wallSocketGroup.position.set(pose.socketX, -0.9, -0.85);
@@ -1326,27 +1464,51 @@ export class WatchIntroModel {
       this.typeCPlugGroup.position.set(plugX, pose.adapterY, -0.75);
       this.typeCPlugGroup.rotation.set(pose.typeCPlugRotX, pose.adapterRotY, 0, "YXZ");
 
-      // 更新连接充电器左端护套与 Type-C 插头尾部的平滑长白线（随手表与 Type-C 同步右飞出画）
+      // 更新连接充电器左端护套与 Type-C 插头尾部的平滑长白线（P15 callback 模式在充电盘半透明剖开时同步变半透明，露出内部双芯引出导线无缝衔接）
+      this.cableMat.transparent = pose.coilTranslucent;
+      this.cableMat.opacity = pose.coilTranslucent ? 0.36 : 1;
+      this.cableMat.depthWrite = !pose.coilTranslucent;
+
       const startPt = new Vector3(pose.watchX - 1.75, -0.18, pose.chargerZ - 0.3);
       const endPt = new Vector3(plugX + 0.68, pose.adapterY, -0.75);
-      const midPt1 = new Vector3(
-        startPt.x + (endPt.x - startPt.x) * 0.35,
-        -0.58,
-        (startPt.z + endPt.z) * 0.5,
-      );
-      const midPt2 = new Vector3(
-        startPt.x + (endPt.x - startPt.x) * 0.72,
-        pose.adapterY + 0.08,
-        endPt.z,
-      );
-      this.dynamicCableMesh.geometry.dispose();
-      this.dynamicCableMesh.geometry = new TubeGeometry(
-        new CatmullRomCurve3([startPt, midPt1, midPt2, endPt]),
-        44,
-        0.115,
-        14,
-        false,
-      );
+      if (this.mode === "callback") {
+        // P15 callback 模式：前半段严格沿着内部双芯引出黄铜导线轨迹（x = -1.75/-3.5/-5.2, y = -0.18/-0.68/-1.15, z = -0.30 + chargerZ），使两根黄铜芯线与蓝色电子始终包裹在半透明白线内部，随后再平滑转向右侧适配器的 USB-C 插头！
+        const leadZ = pose.chargerZ - 0.3;
+        const p1 = new Vector3(pose.watchX - 3.5, -0.68, leadZ);
+        const p2 = new Vector3(pose.watchX - 5.2, -1.15, leadZ);
+        const p3 = new Vector3(
+          startPt.x + (endPt.x - startPt.x) * 0.68,
+          pose.adapterY - 0.45,
+          (leadZ + endPt.z) * 0.5,
+        );
+        this.dynamicCableMesh.geometry.dispose();
+        this.dynamicCableMesh.geometry = new TubeGeometry(
+          new CatmullRomCurve3([startPt, p1, p2, p3, endPt]),
+          56,
+          0.115,
+          14,
+          false,
+        );
+      } else {
+        const midPt1 = new Vector3(
+          startPt.x + (endPt.x - startPt.x) * 0.35,
+          -0.58,
+          (startPt.z + endPt.z) * 0.5,
+        );
+        const midPt2 = new Vector3(
+          startPt.x + (endPt.x - startPt.x) * 0.72,
+          pose.adapterY + 0.08,
+          endPt.z,
+        );
+        this.dynamicCableMesh.geometry.dispose();
+        this.dynamicCableMesh.geometry = new TubeGeometry(
+          new CatmullRomCurve3([startPt, midPt1, midPt2, endPt]),
+          44,
+          0.115,
+          14,
+          false,
+        );
+      }
     }
 
     // C1 磁吸接触瞬间的极淡对准微光环（无箭头）
@@ -1441,9 +1603,39 @@ export class WatchIntroModel {
     this.camera.lookAt(pose.camLookAt);
   }
 
+  getCallbackProjectedAnchors(): CallbackProjectedAnchors {
+    const w = Math.max(this.container.clientWidth, 1);
+    const h = Math.max(this.container.clientHeight, 1);
+    this.camera.updateMatrixWorld(true);
+
+    const projectWorld = (wx: number, wy: number, wz: number): { x: number; y: number } => {
+      this.projVec.set(wx, wy, wz).project(this.camera);
+      return {
+        x: (this.projVec.x * 0.5 + 0.5) * w,
+        y: (-this.projVec.y * 0.5 + 0.5) * h,
+      };
+    };
+
+    const pose = this.currentPose;
+    return {
+      socket: projectWorld(pose.socketX, 0.35, -0.85),
+      adapter: projectWorld(pose.adapterX, pose.adapterY - 0.55, -0.75),
+      usbCable: projectWorld(-9.5, -0.5, -0.88),
+      pad: projectWorld(pose.watchX - 0.95, -1.05, pose.chargerZ),
+      txCoil: projectWorld(pose.watchX - 0.72, 0.72, pose.chargerZ - 0.13),
+      rxCoil: projectWorld(pose.watchX + 0.35, 0.85, pose.watchZ - 0.35),
+      watch: projectWorld(pose.watchX + 1.55, -0.75, pose.watchZ),
+    };
+  }
+
+  private emitCallbackAnchors(): void {
+    if (this.onFrameCallback) this.onFrameCallback(this.getCallbackProjectedAnchors());
+  }
+
   renderOnce(): void {
     if (this.destroyed || !this.active) return;
     this.renderer.render(this.scene, this.camera);
+    this.emitCallbackAnchors();
   }
 
   setActive(active: boolean): void {
@@ -1456,7 +1648,8 @@ export class WatchIntroModel {
       this.syncRendererScale(true);
       const hasContinuousFlow =
         (this.mode === "intro" && this.currentStep >= 4) ||
-        (this.mode === "chain" && this.currentStep === 3);
+        (this.mode === "chain" && this.currentStep === 3) ||
+        this.mode === "callback";
       if (hasContinuousFlow && !this.isAnimating) {
         this.isAnimating = true;
         this.rafId = requestAnimationFrame(this.tick);

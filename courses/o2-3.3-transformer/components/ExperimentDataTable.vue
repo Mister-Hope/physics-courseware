@@ -1,42 +1,38 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 interface ExperimentRow {
-  id: number
-  n1: number
-  n2: number
-  u1: number | null
-  u2: number | null
+  id: number;
+  n1: number;
+  n2: number;
+  u1: number | null;
+  u2: number | null;
 }
 
 const rows = ref<ExperimentRow[]>([
   { id: 1, n1: 1400, n2: 100, u1: 12, u2: null },
   { id: 2, n1: 1400, n2: 400, u1: 12, u2: null },
-])
+]);
 
-function isFiniteNumber(value: unknown): value is number {
-  return typeof value === 'number' && Number.isFinite(value)
-}
+const isFiniteNumber = (value: unknown): value is number =>
+  typeof value === "number" && Number.isFinite(value);
 
-function voltageRatio(row: ExperimentRow): number | null {
-  if (!isFiniteNumber(row.u1) || !isFiniteNumber(row.u2) || row.u2 === 0) return null
-  return row.u1 / row.u2
-}
+const voltageRatio = (row: ExperimentRow): number | null => {
+  if (!isFiniteNumber(row.u1) || !isFiniteNumber(row.u2) || row.u2 === 0) return null;
+  return row.u1 / row.u2;
+};
 
-function turnsRatio(row: ExperimentRow): number {
-  return row.n1 / row.n2
-}
+const turnsRatio = (row: ExperimentRow): number => row.n1 / row.n2;
 
-function relativeError(row: ExperimentRow): number | null {
-  const measured = voltageRatio(row)
-  if (measured === null) return null
-  const expected = turnsRatio(row)
-  return Math.abs((measured - expected) / expected) * 100
-}
+const relativeError = (row: ExperimentRow): number | null => {
+  const measured = voltageRatio(row);
+  if (measured == null) return null;
+  const expected = turnsRatio(row);
+  return Math.abs((measured - expected) / expected) * 100;
+};
 
-function formatNumber(value: number | null, digits = 2): string {
-  return value === null ? 'N/A' : value.toFixed(digits)
-}
+const formatNumber = (value: number | null, digits = 2): string =>
+  value == null ? "N/A" : value.toFixed(digits);
 </script>
 
 <template>
@@ -82,7 +78,7 @@ function formatNumber(value: number | null, digits = 2): string {
         </td>
         <td>{{ formatNumber(turnsRatio(row)) }}</td>
         <td :class="{ 'text-dim': relativeError(row) === null }">
-          {{ relativeError(row) === null ? 'N/A' : `${relativeError(row)?.toFixed(2)}%` }}
+          {{ relativeError(row) === null ? "N/A" : `${relativeError(row)?.toFixed(2)}%` }}
         </td>
       </tr>
     </tbody>
