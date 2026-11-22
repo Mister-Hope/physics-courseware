@@ -158,7 +158,7 @@ const showEddyAndEnergy = computed(() => step >= 2);
           <div>交变磁场在铁芯内激起涡流发热（用硅钢片叠层减小）</div>
           <div class="tl-formulas">
             <Latex tex="P_1 = P_2 + Q_{\text{热}}" />
-            <span class="tl-sep">·</span>
+            <span class="tl-sep">、</span>
             <Latex tex="\eta = \dfrac{P_2}{P_1} \times 100\%" />
           </div>
         </div>

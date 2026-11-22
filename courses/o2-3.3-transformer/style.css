@@ -92,6 +92,12 @@
   width: 100%;
 }
 
+.p8-table th,
+.p8-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
 .p8-input {
   width: 6.2rem;
 

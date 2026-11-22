@@ -71,7 +71,7 @@ clickAnimation: none
 <span class="qa-answer-lead">只能用于交流电</span>
 </div>
 <p class="qa-answer-note">原线圈中的电流必须变化，才能在副线圈中产生感应电动势。</p>
-<div v-click="2" class="qa-key">互感现象是变压器工作的基础。</div>
+<div v-click="2" class="qa-key">变压器利用互感现象工作。</div>
 </div>
 </section>
 </div>
@@ -129,7 +129,7 @@ title: 实验装置与步骤
 <div class="stack stack-tight">
 <div class="p7-step-title">实验步骤</div>
 <ol class="p7-steps">
-<li>按图连接电路：原线圈接 <Latex tex="12\ \text{V}" /> 低压交流电源，副线圈接 100 匝抽头；两只交流电压表（多用电表用交流电压挡 V~，量程先选 20 V）并联在原、副线圈两端。</li>
+<li>按图连接电路：原线圈接 <Latex tex="12\ \text{V}" /> 低压交流电源，副线圈接 100 匝抽头；两只交流电压表（多用电表用交流电压挡 <Latex tex="\text{V}\sim" />，量程先选 <Latex tex="20\ \text{V}" />）并联在原、副线圈两端。</li>
 <li>检查电路连接无误后，闭合开关，读出输入、输出电压，记入表格。</li>
 <li>断开开关，副线圈改接 400 匝抽头；闭合开关，读出输入、输出电压，记入表格。</li>
 <li>断开开关，整理器材；计算 <Latex tex="U_1/U_2" />、<Latex tex="n_1/n_2" /> 及相对误差，比较并得出结论。</li>
@@ -146,7 +146,7 @@ title: 实验数据
 
 <div class="page-grow page-grow-tight">
 <ExperimentDataTable />
-<div class="mini-note">U1、U2 都用交流电压挡（多用电表 V~ 挡）测，读数为有效值。</div>
+<div class="mini-note"><Latex tex="U_1" />、<Latex tex="U_2" /> 都用交流电压挡（多用电表 <Latex tex="\text{V}\sim" /> 挡）测，读数为有效值。</div>
 <div class="mini-note">相对误差 = <Latex tex="\left|\dfrac{U_1/U_2-n_1/n_2}{n_1/n_2}\right|\times 100\%" /></div>
 </div>
 
@@ -304,6 +304,7 @@ clickAnimation: none
 layout: exercise-split
 title: 例 1：手机充电器中的降压变压器
 clicks: 2
+hideQaMark: true
 ---
 
 <template v-slot:stem>
@@ -318,7 +319,7 @@ clicks: 2
 
 </template>
 
-<div v-click="1"><b>（1）由电压与匝数关系求副线圈电压：</b><br /><Latex tex="U_2 = U_1 \dfrac{n_2}{n_1} = 220 \times \dfrac{25}{1100}\ \text{V} = 5\ \text{V}" /></div>
+<div v-click="1"><div class="qa-mark">解析</div><b>（1）由电压与匝数关系求副线圈电压：</b><br /><Latex tex="U_2 = U_1 \dfrac{n_2}{n_1} = 220 \times \dfrac{25}{1100}\ \text{V} = 5\ \text{V}" /></div>
 
 <div v-click="2"><b>（2）由负载求输出电流、功率及原线圈电流：</b><br /><Latex tex="I_2 = \dfrac{U_2}{R} = \dfrac{5}{5}\ \text{A} = 1\ \text{A}" />，<Latex tex="P_2 = U_2 I_2 = 5\ \text{W}" />；理想变压器 <Latex tex="P_1 = P_2" />，故 <Latex tex="I_1 = \dfrac{P_1}{U_1} = \dfrac{5}{220}\ \text{A} \approx 0.023\ \text{A}" />。</div>
 
@@ -326,6 +327,7 @@ clicks: 2
 layout: exercise-split
 title: 例 2：一原两副理想变压器
 clicks: 2
+hideQaMark: true
 ---
 
 <template v-slot:stem>
@@ -340,7 +342,7 @@ clicks: 2
 
 </template>
 
-<div v-click="1"><b>（1）各副线圈按各自的匝数算电压：</b><Latex tex="U_{2a} = 220 \times \tfrac{100}{1100}\ \text{V} = 20\ \text{V}" />，<Latex tex="U_{2b} = 220 \times \tfrac{200}{1100}\ \text{V} = 40\ \text{V}" />，<Latex tex="U_{2a} : U_{2b} = 1 : 2" />。</div>
+<div v-click="1"><div class="qa-mark">解析</div><b>（1）各副线圈按各自的匝数算电压：</b><Latex tex="U_{2a} = 220 \times \tfrac{100}{1100}\ \text{V} = 20\ \text{V}" />，<Latex tex="U_{2b} = 220 \times \tfrac{200}{1100}\ \text{V} = 40\ \text{V}" />，<Latex tex="U_{2a} : U_{2b} = 1 : 2" />。</div>
 
 <div v-click="2"><b>（2）两个副线圈共同承担功率：</b><Latex tex="I_{2a} = \tfrac{20}{10}\ \text{A} = 2\ \text{A}" />（<Latex tex="P_{2a} = 40\ \text{W}" />），<Latex tex="I_{2b} = \tfrac{40}{20}\ \text{A} = 2\ \text{A}" />（<Latex tex="P_{2b} = 80\ \text{W}" />）；由 <Latex tex="P_1 = P_{2a} + P_{2b} = 120\ \text{W}" />，得 <Latex tex="I_1 = \tfrac{P_1}{U_1} = \tfrac{120}{220}\ \text{A} \approx 0.545\ \text{A}" />。<span class="text-accent">（各算各的电压，功率共同承担）</span></div>
 
@@ -357,25 +359,25 @@ clickAnimation: none
 <div class="step-item p13-item" v-click="1">
 <span class="step-no">1</span>
 <div class="p13-text">
-<b>互感是基础</b>：原线圈中变化的电流产生变化的磁通量，铁芯把磁通量约束在闭合磁路中，副线圈中产生感应电动势。
+<b>工作原理是互感</b>：原线圈中变化的电流产生变化的磁通量，铁芯把磁通量约束在闭合磁路中，副线圈中产生感应电动势。
 </div>
 </div>
 <div class="step-item p13-item" v-click="2">
 <span class="step-no">2</span>
 <div class="p13-text">
-<b>电动势比与电压比</b>：<Latex tex="\dfrac{E_1}{E_2} = \dfrac{n_1}{n_2}" /> 只需要<b>无漏磁</b>；<Latex tex="\dfrac{U_1}{U_2} = \dfrac{n_1}{n_2}" /> 才需要<b>理想条件</b>（无内阻、无漏磁、无铁损）。
+<b>电动势比与电压比</b>：<Latex tex="\dfrac{E_1}{E_2} = \dfrac{n_1}{n_2}" /> 只需要<b>无漏磁</b>；<Latex tex="\dfrac{U_1}{U_2} = \dfrac{n_1}{n_2}" /> 还需要原、副线圈<b>无内阻</b>（<Latex tex="r_1=r_2=0" />）。
 </div>
 </div>
 <div class="step-item p13-item" v-click="3">
 <span class="step-no">3</span>
 <div class="p13-text">
-<b>功率与电流</b>：理想单副线圈由 <Latex tex="P_1 = P_2" /> 得 <Latex tex="\dfrac{I_1}{I_2} = \dfrac{n_2}{n_1}" />。
+<b>功率与电流</b>：理想变压器无能量损耗，由 <Latex tex="P_1 = P_2" /> 得 <Latex tex="\dfrac{I_1}{I_2} = \dfrac{n_2}{n_1}" />（单副线圈）。
 </div>
 </div>
 <div class="step-item p13-item" v-click="4">
 <span class="step-no">4</span>
 <div class="p13-text">
-<b>实际变压器必然存在能量损耗</b>：铜损、铁损和漏磁，所以实测 <Latex tex="U_2" /> 偏低。
+<b>实际变压器不是理想模型</b>：铜损、铁损使效率低于 1；原、副线圈的内阻压降与漏磁使实测 <Latex tex="U_2" /> 偏低。
 </div>
 </div>
 </div>
@@ -399,5 +401,5 @@ title: 思考与下节预告
 <div class="p15-stack">
 <div class="p15-main">为什么最终是交流电赢了直流电？</div>
 <div class="p15-sub text-2xl leading-normal">变压器在国家电网中起什么作用？为什么要用超高压输电？</div>
-<div class="p15-preview text-lg leading-normal">下节预告 · § 3.4 电能的输送</div>
+<div class="p15-preview text-lg leading-normal">下节预告：§ 3.4 电能的输送</div>
 </div>

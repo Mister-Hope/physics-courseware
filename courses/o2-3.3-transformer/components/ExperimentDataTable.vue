@@ -45,8 +45,8 @@ function formatNumber(value: number | null, digits = 2): string {
       <tr>
         <th style="width: 9%"><Latex tex="n_1" /></th>
         <th style="width: 9%"><Latex tex="n_2" /></th>
-        <th style="width: 17%"><Latex tex="U_1" />（交流，V）</th>
-        <th style="width: 17%"><Latex tex="U_2" />（交流，V）</th>
+        <th style="width: 17%"><Latex tex="U_1" />（交流，<Latex tex="\text{V}" />）</th>
+        <th style="width: 17%"><Latex tex="U_2" />（交流，<Latex tex="\text{V}" />）</th>
         <th style="width: 14%"><Latex tex="\dfrac{U_1}{U_2}" /></th>
         <th style="width: 14%"><Latex tex="\dfrac{n_1}{n_2}" /></th>
         <th style="width: 20%">相对误差</th>

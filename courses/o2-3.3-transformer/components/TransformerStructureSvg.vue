@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
     <!-- 右栏：教材定义与三要素（教材原话上屏，M10 & M13） -->
     <div class="ts3-info">
       <DefinitionBox term="变压器的构造">
-        <div>变压器是由<span class="def-term">闭合铁芯</span>和绕在铁芯上的<span class="def-term">两个线圈</span>组成的。</div>
+        <div>变压器由<span class="def-term">闭合铁芯</span>和绕在铁芯上的<span class="def-term">两个线圈</span>组成。</div>
       </DefinitionBox>
 
       <div class="ts3-item ts3-item-blue" :class="{ 'is-hidden': !s1 }">
@@ -191,7 +191,13 @@ onBeforeUnmount(() => {
         </div>
       </div>
 
-      <div class="tip-hint" :class="{ 'is-hidden': !s3 }"><b>闭合铁芯</b>：把磁感线约束在闭合磁路中，使磁通量几乎全部穿过两个线圈。</div>
+      <div class="ts3-item ts3-item-gold" :class="{ 'is-hidden': !s3 }">
+        <span class="ts3-dot ts3-dot-gold" />
+        <div>
+          <div class="ts3-item-title">闭合铁芯</div>
+          <div class="ts3-item-desc">把磁感线约束在闭合磁路中，使磁通量几乎全部穿过两个线圈。</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -199,8 +205,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .ts3-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1.58fr) minmax(0, 0.92fr);
-  gap: 1.1rem;
+  grid-template-columns: minmax(0, 1.46fr) minmax(0, 1.04fr);
+  gap: 1rem;
   align-items: center;
 
   width: 100%;
@@ -245,12 +251,11 @@ onBeforeUnmount(() => {
 }
 
 .ts3-info {
-  --def-pad-y: 0.48rem;
-  --def-pad-x: 0.9rem;
-  --hint-pad-y: 0.36rem;
+  --def-pad-y: 0.42rem;
+  --def-pad-x: 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.34rem;
   min-width: 0;
 }
 
@@ -259,7 +264,7 @@ onBeforeUnmount(() => {
   gap: 0.55rem;
   align-items: center;
 
-  padding: 0.36rem 0.8rem;
+  padding: 0.34rem 0.75rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
 
@@ -276,6 +281,10 @@ onBeforeUnmount(() => {
   border-color: color-mix(in srgb, var(--c-physics) 38%, transparent);
 }
 
+.ts3-item-gold {
+  border-color: color-mix(in srgb, var(--c-accent) 42%, transparent);
+}
+
 .ts3-dot {
   flex: none;
   width: 0.6rem;
@@ -289,6 +298,10 @@ onBeforeUnmount(() => {
 
 .ts3-dot-teal {
   background: var(--c-physics);
+}
+
+.ts3-dot-gold {
+  background: var(--c-accent);
 }
 
 .ts3-item-title {

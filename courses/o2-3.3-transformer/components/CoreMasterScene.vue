@@ -7,7 +7,7 @@
  * - 0 击：整体变压器居中，原线圈接交流源，副线圈接负载，U₁/U₂/n₁/n₂ 标在图上
  * - C1（step 1）：相机推近左侧；变压器移到画面最右、右半出画；原线圈电流开始来回流动，铁芯中磁感线出现（标 I₁、Φ）
  * - C2（step 2）：左侧推导（变压器在画面最右、右半出画，公式区占左 2/3）；原线圈电阻 r₁ 标出；新增 E₁ = n₁ ΔΦ/Δt、U₁ = E₁ + I₁r₁
- * - C3（step 3）：变压器边绕竖轴转体 180° 边飞到画面最左、左半出画，相机跟到右侧；副线圈出现感应电流（公式区占右 2/3）； 上一阶段 C2 公式以约 55%
+ * - C3（step 3）：变压器边绕竖轴转体 180° 边飞到画面最左、左半出画，相机跟到右侧；副线圈出现感应电流（公式区占右 2/3）； 上一阶段 C2 公式以约 80%
  *   透明度留在同一栏上方，新增 E₂ = n₂ ΔΦ/Δt、U₂ = E₂ - I₂r₂
  * - C4（step 4）：两侧磁通路径同时高亮，Φ 相同；新增 E₁/E₂ = n₁/n₂（无漏磁）
  * - C5（step 5）：图上把 r₁、r₂、漏磁、铁损逐项“归零”/淡出（理想化）；新增 r₁ = r₂ = 0 -> U₁/U₂ = n₁/n₂
@@ -211,9 +211,9 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- Step 3..6: 右侧推导链（占画面右 2/3，变压器在画面最左、左半出画；竖向推导链，上一阶段 55% 透明度保留） -->
+    <!-- Step 3..6: 右侧推导链（占画面右 2/3，变压器在画面最左、左半出画；竖向推导链，上一阶段 80% 透明度保留，保证可读） -->
     <div class="cm-formula-zone cm-zone-right" :class="{ 'is-hidden': !isRightDerivation }">
-      <!-- C2 保留在顶部（55% 透明度） -->
+      <!-- C2 保留在顶部（80% 透明度） -->
       <div class="cm-chain-row is-dim">
         <span class="cm-chain-tag">原线圈</span>
         <div class="cm-chain-math">
@@ -270,16 +270,16 @@ onBeforeUnmount(() => {
 
     <!-- 3D 变压器主体旁侧的实时状态角标 -->
     <div v-if="isLeftDerivation" class="cm-corner-tag cm-corner-right">
-      <span>原线圈 <Latex tex="n_1" /> · <Latex tex="I_1" /> · <Latex tex="\Phi" /></span>
+      <span>原线圈：<Latex tex="n_1" />、<Latex tex="I_1" />、<Latex tex="\Phi" /></span>
       <span class="cm-r-tag" :class="{ 'is-hidden': step < 2 }">内阻 <Latex tex="r_1" /></span>
     </div>
     <div v-if="isRightDerivation" class="cm-corner-tag cm-corner-left">
       <span v-if="step === 3"
-        >副线圈 <Latex tex="n_2" /> · <Latex tex="I_2" /> · 内阻 <Latex tex="r_2"
+        >副线圈：<Latex tex="n_2" />、<Latex tex="I_2" />、内阻 <Latex tex="r_2"
       /></span>
-      <span v-else-if="step === 4">闭合磁路 · 同一磁通 <Latex tex="\Phi" /></span>
-      <span v-else-if="step === 5">理想模型 · <Latex tex="r_1=r_2=0" />、无漏磁、无铁损</span>
-      <span v-else>能量传递 · <Latex tex="P_1 \rightarrow P_2" /></span>
+      <span v-else-if="step === 4">闭合磁路：同一磁通 <Latex tex="\Phi" /></span>
+      <span v-else-if="step === 5">理想模型：<Latex tex="r_1=r_2=0" />、无漏磁、无铁损</span>
+      <span v-else>能量传递：<Latex tex="P_1 \rightarrow P_2" /></span>
     </div>
   </div>
 </template>
@@ -493,7 +493,7 @@ onBeforeUnmount(() => {
   font-size: 0.85rem;
 }
 
-/* 当前步金色高亮，历史步 55% 透明度保留在同一栏上方 */
+/* 当前步金色高亮，历史步 80% 透明度保留，保证仍可读 */
 .is-active {
   border-color: var(--c-accent-border);
   color: var(--c-accent);
@@ -506,7 +506,7 @@ onBeforeUnmount(() => {
 
 .is-dim {
   color: var(--c-text);
-  opacity: 0.55;
+  opacity: 0.8;
 }
 
 .cm-corner-tag {

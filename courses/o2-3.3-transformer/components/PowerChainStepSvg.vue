@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
     <!-- C1 提示标签：露出白线与 USB Type-C 插头 -->
     <div class="pc3-tag" :class="{ 'is-hidden': !isC1 }">
       <span class="pc3-dot pc3-dot-blue" />
-      <span>充电线末端 · <b>USB Type-C 插头</b></span>
+      <span>充电线末端：<b>USB Type-C 插头</b></span>
     </div>
 
     <!-- C2 提示标签：旋转 90° 插入国标墙面插座 -->
