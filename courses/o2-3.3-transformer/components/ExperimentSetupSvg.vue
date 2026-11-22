@@ -16,7 +16,7 @@
     <!-- 可拆上横轭接缝虚线 -->
     <line x1="164" y1="106" x2="196" y2="106" stroke="var(--c-accent)" stroke-width="1.4" stroke-dasharray="3 3" />
     <line x1="264" y1="106" x2="296" y2="106" stroke="var(--c-accent)" stroke-width="1.4" stroke-dasharray="3 3" />
-    <text x="230" y="64" text-anchor="middle" font-size="14" fill="var(--c-text-dim)">J2423 可拆变压器</text>
+    <text x="230" y="64" text-anchor="middle" font-size="14" fill="var(--c-text-dim)">可拆变压器</text>
     <!-- 原线圈（左，1400 匝） -->
     <Solenoid
       :x="180"
@@ -61,8 +61,8 @@
     <path d="M 27 151 q 4.5 -7 9 0 t 9 0" fill="none" stroke="var(--c-accent)" stroke-width="2" stroke-linecap="round" />
     <CircuitMeter :x="118" :y="151" kind="v" color="var(--c-accent-2)" />
     <text x="36" y="214" text-anchor="middle" font-size="14" fill="var(--c-accent-2)">
-      <tspan font-family="KaTeX_Math" font-style="italic">U</tspan>
-      <tspan dy="3" font-size="11" font-family="KaTeX_Main">1</tspan>
+      <tspan font-family="KaTeX_Math" font-style="italic">u</tspan>
+      <tspan dy="3" font-size="11" font-family="KaTeX_Main">in</tspan>
       <tspan dy="-3" font-family="KaTeX_Main"> = 12 V ~</tspan>
     </text>
     <!-- 副边电路：0 / 100 / 400 抽头 + 电压表 V2 -->
@@ -80,8 +80,8 @@
     <text x="314" y="199" font-size="12" font-family="KaTeX_Main" fill="var(--c-physics)">0</text>
     <CircuitMeter :x="396" :y="151" kind="v" color="var(--c-physics)" />
     <text x="396" y="214" text-anchor="middle" font-size="14" fill="var(--c-physics)">
-      <tspan font-family="KaTeX_Math" font-style="italic">U</tspan>
-      <tspan dy="3" font-size="11" font-family="KaTeX_Main">2</tspan>
+      <tspan font-family="KaTeX_Math" font-style="italic">u</tspan>
+      <tspan dy="3" font-size="11" font-family="KaTeX_Main">out</tspan>
     </text>
     <!-- 底部匝数说明 -->
     <text x="152" y="252" text-anchor="middle" font-size="14" fill="var(--c-accent-2)">原线圈 0–1400 匝</text>

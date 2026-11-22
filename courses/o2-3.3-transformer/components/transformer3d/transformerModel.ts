@@ -18,7 +18,6 @@ import {
   AmbientLight,
   CatmullRomCurve3,
   CanvasTexture,
-  Color,
   ConeGeometry,
   CylinderGeometry,
   DirectionalLight,
@@ -45,6 +44,23 @@ import {
 } from "three";
 
 const clamp = (val: number, min: number, max: number): number => Math.max(min, Math.min(max, val));
+
+// 很淡的接触阴影：径向渐变贴图，只垫在铁芯底部，跟着 rig 一起动
+const createContactShadowTexture = (): CanvasTexture => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    const gradient = ctx.createRadialGradient(128, 128, 8, 128, 128, 126);
+    gradient.addColorStop(0, "rgba(0, 0, 0, 0.62)");
+    gradient.addColorStop(0.5, "rgba(0, 0, 0, 0.3)");
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 256, 256);
+  }
+  return new CanvasTexture(canvas);
+};
 
 const easeInOutCubic = (t: number): number => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
 
@@ -532,7 +548,7 @@ export class TransformerCoreModel {
           : DERIVATION_POSES;
 
     this.scene = new Scene();
-    this.scene.background = new Color("#090d1a");
+    this.scene.background = null;
 
     const width = Math.max(container.clientWidth, 1);
     const height = Math.max(container.clientHeight, 1);
@@ -540,9 +556,10 @@ export class TransformerCoreModel {
 
     this.renderer = new WebGLRenderer({
       antialias: true,
-      alpha: false,
+      alpha: true,
       powerPreference: "high-performance",
     });
+    this.renderer.setClearColor(0x000000, 0);
     this.renderer.toneMapping = ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     container.append(this.renderer.domElement);
@@ -638,6 +655,21 @@ export class TransformerCoreModel {
     });
     const coreMesh = new Mesh(coreGeo, this.coreMaterial);
     this.rig.add(coreMesh);
+
+    // 铁芯底部的接触阴影（不是背景板，跟随 rig 移动/旋转）
+    const contactShadow = new Mesh(
+      new PlaneGeometry(6.6, 4.1).rotateX(-Math.PI / 2),
+      new MeshBasicMaterial({
+        map: createContactShadowTexture(),
+        color: 0x000000,
+        transparent: true,
+        depthWrite: false,
+        opacity: 0.7,
+      }),
+    );
+    contactShadow.position.y = -2.24;
+    contactShadow.renderOrder = -1;
+    this.rig.add(contactShadow);
 
     // 3D 铁芯结构线框（EdgesGeometry）
     const edgesGeo = new EdgesGeometry(coreGeo, 22);

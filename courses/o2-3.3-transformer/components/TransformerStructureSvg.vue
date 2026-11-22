@@ -199,8 +199,8 @@ onBeforeUnmount(() => {
 <style scoped>
 .ts3-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
-  gap: 1.3rem;
+  grid-template-columns: minmax(0, 1.58fr) minmax(0, 0.92fr);
+  gap: 1.1rem;
   align-items: center;
 
   width: 100%;
@@ -213,10 +213,6 @@ onBeforeUnmount(() => {
   overflow: hidden;
 
   height: 365px;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-xl);
-
-  background: var(--c-bg);
 }
 
 .ts3-stage {

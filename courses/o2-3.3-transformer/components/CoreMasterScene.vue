@@ -292,10 +292,6 @@ onBeforeUnmount(() => {
 
   width: 100%;
   height: 455px;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-xl);
-
-  background: var(--c-bg);
 }
 
 .cm-stage {
@@ -380,34 +376,25 @@ onBeforeUnmount(() => {
 .cm-zone-left {
   left: 0;
   gap: 1.15rem;
-  background: linear-gradient(
-    90deg,
-    rgb(9 13 26 / 92%) 0%,
-    rgb(9 13 26 / 75%) 78%,
-    transparent 100%
-  );
 }
 
 .cm-zone-right {
   right: 0;
   gap: 0.42rem;
   padding: 0.65rem 1.4rem;
-  background: linear-gradient(
-    270deg,
-    rgb(9 13 26 / 94%) 0%,
-    rgb(9 13 26 / 78%) 78%,
-    transparent 100%
-  );
 }
 
 .cm-step-block {
   padding: 0.95rem 1.25rem;
-  border: 1px solid var(--c-border);
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: var(--radius-lg);
 
-  background: var(--c-surface);
+  background: linear-gradient(135deg, rgb(20 28 44 / 78%), rgb(10 15 26 / 62%));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 8%),
+    0 12px 32px rgb(0 0 0 / 22%);
 
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px) saturate(120%);
 
   transition:
     opacity 0.35s ease,

@@ -56,111 +56,106 @@ clickAnimation: none
 </div>
 
 ---
-title: 变压器的工作原理
-clicks: 3
+title: 变压器对电流有什么要求？
+clicks: 2
 clickAnimation: none
 ---
 
-# 变压器的工作原理
-
 <div class="page-grow">
-<TransformerPrinciple3D :step="$clicks" />
+<div class="qa-stage qa-stage-single">
+<section class="qa-panel">
+<div class="qa-question">变压器对电流有什么要求？</div>
+<div v-click="1" class="qa-answer">
+<div class="qa-answer-head">
+<span class="qa-answer-icon"><mdi-check-circle-outline /></span>
+<span class="qa-answer-lead">只能用于交流电</span>
+</div>
+<p class="qa-answer-note">原线圈中的电流必须变化，才能在副线圈中产生感应电动势。</p>
+<div v-click="2" class="qa-key">互感现象是变压器工作的基础。</div>
+</div>
+</section>
+</div>
 </div>
 
 ---
-layout: focus-question
-title: 原、副线圈的电压与匝数有什么关系？
+title: 变压器是怎样改变电压的？
+clicks: 2
+clickAnimation: none
 ---
 
-<template v-slot:icon>
-
-<mdi-help-circle-outline />
-
-</template>
-
-变压器原、副线圈两端的电压与线圈匝数之间有什么关系？
-
-<template v-slot:hint>
-
-怎样设计一个实验方案来探究它们之间的关系？
-
-</template>
+<div class="page-grow">
+<div class="qa-stage qa-stage-single">
+<section class="qa-panel qa-dialogue">
+<div class="qa-dialogue-row">
+<span class="qa-dialogue-icon qa-dialogue-icon-q"><mdi-help-circle-outline /></span>
+<div class="qa-bubble">变压器是怎样改变电压的？</div>
+</div>
+<div class="qa-connector"></div>
+<div v-click="1" class="qa-dialogue-row">
+<span class="qa-dialogue-icon qa-dialogue-icon-a"><mdi-check-circle-outline /></span>
+<div class="qa-answer qa-answer-dialogue">
+<div class="qa-answer-head">
+<span class="qa-answer-lead">可能与<strong>原线圈、副线圈的匝数</strong>有关。</span>
+</div>
+<p class="qa-answer-note">先比较不同匝数下的输入、输出电压。</p>
+</div>
+</div>
+<div v-click="2" class="qa-connector"></div>
+<div v-click="2" class="qa-dialogue-row">
+<span class="qa-dialogue-icon qa-dialogue-icon-q"><mdi-help-circle-outline /></span>
+<div class="qa-bubble">怎样设计一个实验方案来探究它们的关系？</div>
+</div>
+</section>
+</div>
+</div>
 
 ---
-title: 实验：探究变压器原、副线圈电压与匝数的关系
+title: 实验装置与步骤
 ---
 
-# 实验：探究原、副线圈电压与匝数的关系
+# 实验装置与步骤
 
 <div class="page-grow page-grow-tight">
 <div class="split-wide p7-split">
+<div class="p7-left">
 <div class="figure"><ExperimentSetupSvg /></div>
+<div class="p7-param-title">J2423 可拆变压器参数</div>
+<ul class="p7-params">
+<li><b>输入：</b><Latex tex="12\ \text{V}" /> 交流（低压交流电源）</li>
+<li><b>原线圈：</b>1400 匝</li>
+<li><b>副线圈：</b>100 或 400 匝</li>
+</ul>
+</div>
 <div class="stack stack-tight">
-<div class="p7-meta">
-<span><b>J2423 可拆变压器</b></span>
-<span>· 原线圈 <Latex tex="0\sim 1400" /> 匝</span>
-<span>· 副线圈 <Latex tex="0\sim 400 / 100" /> 匝</span>
-<span>· <Latex tex="U_1 = 12\ \text{V}" /> 交流</span>
-</div>
-<table class="data-table p7-table">
-<thead>
-<tr>
-<th style="width: 16%"><Latex tex="n_1" /></th>
-<th style="width: 16%"><Latex tex="n_2" /></th>
-<th style="width: 16%"><Latex tex="U_1" /></th>
-<th style="width: 24%">理想 <Latex tex="U_2" /></th>
-<th style="width: 28%">实测 <Latex tex="U_2" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><Latex tex="1400" /></td>
-<td><Latex tex="400" /></td>
-<td><Latex tex="12\ \text{V}" /></td>
-<td><Latex tex="3.43\ \text{V}" /></td>
-<td class="text-dim">（课上填）</td>
-</tr>
-<tr>
-<td><Latex tex="1400" /></td>
-<td><Latex tex="100" /></td>
-<td><Latex tex="12\ \text{V}" /></td>
-<td><Latex tex="0.86\ \text{V}" /></td>
-<td class="text-dim">（课上填）</td>
-</tr>
-</tbody>
-</table>
+<div class="p7-step-title">实验步骤</div>
+<ol class="p7-steps">
+<li>按图连接电路：原线圈接 <Latex tex="12\ \text{V}" /> 低压交流电源，副线圈接 100 匝抽头；两只交流电压表（多用电表用交流电压挡 V~，量程先选 20 V）并联在原、副线圈两端。</li>
+<li>检查电路连接无误后，闭合开关，读出输入、输出电压，记入表格。</li>
+<li>断开开关，副线圈改接 400 匝抽头；闭合开关，读出输入、输出电压，记入表格。</li>
+<li>断开开关，整理器材；计算 <Latex tex="U_1/U_2" />、<Latex tex="n_1/n_2" /> 及相对误差，比较并得出结论。</li>
+</ol>
 </div>
 </div>
-<div class="warn-hint" style="--hint-pad-y: 0.42rem"><Latex tex="\le 12\ \text{V}" /> 交流；先接线、再检查、后通电；表先最大量程；断电改线</div>
 </div>
 
 ---
-title: 变压器的电压与电流关系
-clicks: 6
-clickAnimation: none
+title: 实验数据
 ---
 
-<div class="page-grow">
-<CoreMasterScene :step="$clicks" />
+# 实验数据
+
+<div class="page-grow page-grow-tight">
+<ExperimentDataTable />
+<div class="mini-note">U1、U2 都用交流电压挡（多用电表 V~ 挡）测，读数为有效值。</div>
+<div class="mini-note">相对误差 = <Latex tex="\left|\dfrac{U_1/U_2-n_1/n_2}{n_1/n_2}\right|\times 100\%" /></div>
 </div>
 
 ---
-title: 实际变压器的能量损耗
+title: 从实验数据到电压比
 clicks: 2
 ---
 
-# 实际变压器的能量损耗
-
-<div class="page-grow">
-<TransformerLossSvg :step="$clicks" />
-</div>
-
----
-title: 理想与实测对比
-clicks: 1
----
-
-# 理想模型与实验实测对比
+# 从实验数据到电压比
 
 <div class="page-grow">
 <div class="split-wide">
@@ -227,15 +222,82 @@ clicks: 1
 />
 </div>
 <div class="stack">
-<div class="p10-box">
-<div class="p10-lead text-accent">理想变压器：<Latex tex="\dfrac{U_2}{U_1} = \dfrac{n_2}{n_1}" /></div>
-<div class="mini-note">无铜损（<Latex tex="r_1 = r_2 = 0" />）、无漏磁、无铁损</div>
+<div v-click="1" class="p9-table-wrap">
+<table class="data-table p9-table">
+<thead><tr><th>组</th><th><Latex tex="n_1" /></th><th><Latex tex="n_2" /></th><th><Latex tex="\dfrac{n_1}{n_2}" /></th><th><Latex tex="\dfrac{U_1}{U_2}" /></th></tr></thead>
+<tbody>
+<tr><td>①</td><td>1400</td><td>100</td><td>14.00</td><td>15.6</td></tr>
+<tr><td>②</td><td>1400</td><td>400</td><td>3.50</td><td>3.79</td></tr>
+</tbody>
+</table>
 </div>
-<div v-click="1" class="tip-hint">
-<b>实测点落在理想直线下方一点</b>：线圈电阻分压（铜损）与少量漏磁，使实测 <Latex tex="U_2" /> 略低于理想值。
+<div v-click="2" class="p9-conclusion">
+<div class="p9-conclusion-lead">两组数据的 <Latex tex="\dfrac{U_1}{U_2}" /> 都近似等于 <Latex tex="\dfrac{n_1}{n_2}" /></div>
+<div class="p9-question">为什么？</div>
 </div>
 </div>
 </div>
+</div>
+---
+title: 实际变压器的能量损耗
+clicks: 3
+clickAnimation: none
+---
+
+# 实际变压器的能量损耗
+
+<div class="page-grow p10-loss">
+<div class="p10-grid">
+  <div v-click="1" class="p10-card p10-copper">
+    <div class="p10-kicker">铜损</div>
+    <div class="p10-formula"><Latex tex="P_{\text{铜}}=I_1^2r_1+I_2^2r_2" /></div>
+    <div class="p10-note">线圈有电阻，通电发热。原、副线圈都有。</div>
+    <div class="p10-effect">使 <Latex tex="U_2" /> 比理想值低。</div>
+  </div>
+  <div v-click="2" class="p10-card p10-iron">
+    <div class="p10-kicker">铁损</div>
+    <div class="p10-formula"><Latex tex="P_{\text{铁}}=P_{\text{涡流}}+P_{\text{磁滞}}" /></div>
+    <div class="p10-note">交变磁场在铁芯中激起涡流，并反复磁化铁芯。</div>
+    <div class="p10-effect">主要降低效率 <Latex tex="P_2<P_1" />，不直接改变电压比。</div>
+  </div>
+  <div v-click="3" class="p10-card p10-leak">
+    <div class="p10-kicker">漏磁</div>
+    <div class="p10-formula"><Latex tex="\Phi_2<\Phi_1" /></div>
+    <div class="p10-note">少量磁感线散出铁芯，没有同时穿过两线圈。</div>
+    <div class="p10-effect">副线圈磁通变化率变小，<Latex tex="U_2" /> 偏低。</div>
+  </div>
+</div>
+
+</div>
+
+---
+title: 理想变压器
+clicks: 2
+clickAnimation: none
+---
+
+<div class="page-grow p11-ideal">
+<div class="p11-ask">实际变压器 → 理想变压器，忽略了什么？</div>
+<div v-click="1" class="p11-grid">
+  <div class="p11-card"><div class="p11-card-title">无漏磁</div><div class="p11-card-note">磁通全部穿过副线圈</div></div>
+  <div class="p11-card"><div class="p11-card-title">无损耗</div><div class="p11-card-note">无铜损、无铁损</div></div>
+  <div class="p11-card"><div class="p11-card-title">无内阻</div><div class="p11-card-note">原、副线圈电阻为零</div></div>
+</div>
+<div v-click="2" class="p11-formula-box">
+  <div class="p11-formula"><Latex tex="P_1=P_2" /></div>
+  <div class="p11-formula"><Latex tex="\dfrac{U_1}{U_2}=\dfrac{n_1}{n_2}" /></div>
+  <div class="p11-formula"><Latex tex="\dfrac{I_1}{I_2}=\dfrac{n_2}{n_1}" /></div>
+</div>
+</div>
+
+---
+title: 变压器的电压与电流关系
+clicks: 6
+clickAnimation: none
+---
+
+<div class="page-grow">
+<CoreMasterScene :step="$clicks" />
 </div>
 
 ---
@@ -284,40 +346,49 @@ clicks: 2
 
 ---
 title: 课堂小结
+clicks: 4
+clickAnimation: none
 ---
 
 # 课堂小结
 
 <div class="page-grow">
 <div class="step-list p13-summary">
-<div class="step-item p13-item">
+<div class="step-item p13-item" v-click="1">
 <span class="step-no">1</span>
 <div class="p13-text">
 <b>互感是基础</b>：原线圈中变化的电流产生变化的磁通量，铁芯把磁通量约束在闭合磁路中，副线圈中产生感应电动势。
 </div>
 </div>
-<div class="step-item p13-item">
+<div class="step-item p13-item" v-click="2">
 <span class="step-no">2</span>
 <div class="p13-text">
 <b>电动势比与电压比</b>：<Latex tex="\dfrac{E_1}{E_2} = \dfrac{n_1}{n_2}" /> 只需要<b>无漏磁</b>；<Latex tex="\dfrac{U_1}{U_2} = \dfrac{n_1}{n_2}" /> 才需要<b>理想条件</b>（无内阻、无漏磁、无铁损）。
 </div>
 </div>
-<div class="step-item p13-item">
+<div class="step-item p13-item" v-click="3">
 <span class="step-no">3</span>
 <div class="p13-text">
-<b>功率与实际损耗</b>：理想单副线圈由 <Latex tex="P_1 = P_2" /> 得 <Latex tex="\dfrac{I_1}{I_2} = \dfrac{n_2}{n_1}" />；实际变压器存在铜损、涡流和漏磁，使实测 <Latex tex="U_2" /> 偏低。
+<b>功率与电流</b>：理想单副线圈由 <Latex tex="P_1 = P_2" /> 得 <Latex tex="\dfrac{I_1}{I_2} = \dfrac{n_2}{n_1}" />。
+</div>
+</div>
+<div class="step-item p13-item" v-click="4">
+<span class="step-no">4</span>
+<div class="p13-text">
+<b>实际变压器必然存在能量损耗</b>：铜损、铁损和漏磁，所以实测 <Latex tex="U_2" /> 偏低。
 </div>
 </div>
 </div>
 </div>
 
 ---
-title: 回扣无线充电：Apple Watch 到底如何充上电？
-clicks: 2
+title: 无线充电为什么充电效率较低？
+clicks: 3
+clickAnimation: none
 ---
 
 <div class="page-grow">
-<CallbackWirelessSvg :step="$clicks" />
+<CallbackWireless3D :step="$clicks" />
 </div>
 
 ---
