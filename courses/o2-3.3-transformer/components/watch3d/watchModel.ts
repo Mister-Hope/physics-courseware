@@ -377,16 +377,16 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -16.4,
+    adapterX: -15.65,
     adapterY: -0.45,
     adapterRotX: 0,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 1.55,
+    typeCPlugOffsetX: 2.35,
     typeCPlugRotX: 0,
     camPos: new Vector3(4.8, 1.45, 9.2),
     camLookAt: new Vector3(0.4, -0.05, -0.25),
   },
-  // C1 (step 1): 镜头左移拉远，顺着白线自然露出画面外的 USB Type-C 插头（此时插头尚未旋转，rotX = 0）
+  // C1 (step 1): 镜头左移拉远，顺着白线自然露出画面外的 USB Type-C 插头（此时插头与电源适配器均尚未旋转 rotX = 0，适配器悬在插座右前方 X = -15.65，尚未插进插座）
   {
     watchX: 0,
     watchZ: 0.35,
@@ -400,16 +400,16 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -16.4,
+    adapterX: -15.65,
     adapterY: -0.45,
     adapterRotX: 0,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 1.45,
+    typeCPlugOffsetX: 2.25,
     typeCPlugRotX: 0,
     camPos: new Vector3(-7.4, 1.55, 14.5),
     camLookAt: new Vector3(-8.2, -0.65, -0.55),
   },
-  // C2 (step 2): 充电器与 USB Type-C 插头在插座平面上同步旋转 90° (rotX: 0 -> π/2)，插进墙面国标插座上部的两孔（地线两侧）！
+  // C2 (step 2): 电源适配器与 USB Type-C 插头在插座平面上先同步旋转 90° (rotX: 0 -> π/2)，对准国标插座上部两孔后，再向左推进真正插进插座插孔里（adapterX: -15.65 -> -17.85，两根金属插脚完全没入插孔内，适配器左端紧贴插座面板）！
   {
     watchX: 0,
     watchZ: 0.35,
@@ -423,11 +423,11 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.1,
+    adapterX: -17.85,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 0,
+    typeCPlugOffsetX: -0.75,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -446,11 +446,11 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.1,
+    adapterX: -17.85,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 0,
+    typeCPlugOffsetX: -0.75,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -469,16 +469,16 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.1,
+    adapterX: -17.85,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 0,
+    typeCPlugOffsetX: -0.75,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
   },
-  // C5 (step 5): 显示“白色电源适配器”标题 + 底下问号“？”
+  // C5 (step 5): 显示“电源适配器”标题 + 底下问号“？”
   {
     watchX: 0,
     watchZ: 0.35,
@@ -492,16 +492,16 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.1,
+    adapterX: -17.85,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 0,
+    typeCPlugOffsetX: -0.75,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
   },
-  // C6 (step 6): 显示白色电源适配器底部的文字“220 V ⇒ 5 V”
+  // C6 (step 6): 显示电源适配器底部的文字“220 V ⇒ 5 V”
   {
     watchX: 0,
     watchZ: 0.35,
@@ -515,11 +515,11 @@ const CHAIN_POSES: StepPose[] = [
     rxCurrentAlpha: 0,
     chainVisible: true,
     socketX: -19.25,
-    adapterX: -17.1,
+    adapterX: -17.85,
     adapterY: -0.18,
     adapterRotX: Math.PI / 2,
     adapterRotZ: 0,
-    typeCPlugOffsetX: 0,
+    typeCPlugOffsetX: -0.75,
     typeCPlugRotX: Math.PI / 2,
     camPos: new Vector3(-9.8, 2.25, 23.6),
     camLookAt: new Vector3(-10.1, -0.65, -0.65),
@@ -609,6 +609,7 @@ export class WatchIntroModel {
   private tweenDuration = 850;
   private isC1Compound = false;
   private isC3TurnThenReveal = false;
+  private isChainC2RotateThenPlug = false;
   private isAnimating = false;
   private active = true;
   private destroyed = false;
@@ -950,10 +951,11 @@ export class WatchIntroModel {
     this.adapterGroup.add(portMesh);
 
     // 左端平行对面（-X）伸出的两片国标扁金属插脚（上下平行排列在左端面上，带圆润顶端）
-    const prongGeo = new BoxGeometry(0.95, 0.1, 0.38);
-    for (const py of [-0.46, 0.46]) {
+    // 旋转 90° 后两脚位于局部 Z = ±0.51，恰好对准墙面国标插座 (rotation.y = 0.34π) 上部两孔的世界坐标，向左推进即可直接插进插孔内！
+    const prongGeo = new BoxGeometry(1.18, 0.1, 0.36);
+    for (const py of [-0.51, 0.51]) {
       const prong = new Mesh(prongGeo, metalShellMat);
-      prong.position.set(-1.68, py, 0);
+      prong.position.set(-1.76, py, 0);
       this.adapterGroup.add(prong);
     }
 
@@ -1015,7 +1017,8 @@ export class WatchIntroModel {
     this.wallSocketGroup.position.set(-19.25, -0.9, -0.85);
   }
 
-  // 切换到指定点击步：P2 为 C0..C6 共 6 击，P3 为 C0..C4 共 4 击
+  // 切换到指定点击步：P2 为 C0..C6 共 6 击，P3 为 C0..C7 共 7 击
+  // oxlint-disable-next-line max-statements -- 处理 P2/P3 各步骤的复合动画模式切换
   setStep(step: number, forceReplay = false): void {
     if (this.destroyed) return;
     const clamped = clamp(step, 0, this.poses.length - 1);
@@ -1027,20 +1030,44 @@ export class WatchIntroModel {
     this.targetPose = clonePose(this.poses[clamped]);
     this.tweenStart = performance.now();
 
+    if (this.mode === "intro" && clamped === 0) {
+      // C0：回到最开始正面展示手表时，屏幕必须立即暗下（无充电圆环）
+      this.isC1Compound = false;
+      this.isC3TurnThenReveal = false;
+      this.isChainC2RotateThenPlug = false;
+      this.currentPose = clonePose(this.poses[0]);
+      this.startPose = clonePose(this.poses[0]);
+      this.targetPose = clonePose(this.poses[0]);
+      this.applyPose(this.currentPose, 1, 0);
+      this.renderOnce();
+      return;
+    }
+
     if (this.mode === "intro" && clamped === 1 && isForward) {
-      // C1：镜头先动 -> 充电器在手表左后侧完整亮相 -> 飞入磁吸接触 -> 音效 + 充电环
+      // C1：先确保从息屏态（chargeProgress = 0）开始 -> 镜头先动 -> 充电器飞入磁吸接触 -> 充上去才亮起充电环 + 音效
+      this.currentPose.chargeProgress = 0;
+      this.startPose.chargeProgress = 0;
       this.isC1Compound = true;
       this.isC3TurnThenReveal = false;
+      this.isChainC2RotateThenPlug = false;
       this.tweenDuration = 2350;
       this.snapSoundPlayed = false;
     } else if (this.mode === "intro" && prevStep === 2 && clamped === 3) {
       // 09 §2.1 C3：先绕镜头到右后方 35-45°，再开始半透明动画（先绕镜头、后做透明）
       this.isC1Compound = false;
       this.isC3TurnThenReveal = true;
+      this.isChainC2RotateThenPlug = false;
       this.tweenDuration = 1280;
+    } else if (this.mode === "chain" && clamped === 2 && isForward) {
+      // P3 C2：先同步旋转 90° 对准国标插座上部两孔，再向左推进真正把插头插进插座孔内！
+      this.isC1Compound = false;
+      this.isC3TurnThenReveal = false;
+      this.isChainC2RotateThenPlug = true;
+      this.tweenDuration = 1480;
     } else {
       this.isC1Compound = false;
       this.isC3TurnThenReveal = false;
+      this.isChainC2RotateThenPlug = false;
       this.tweenDuration = this.mode === "chain" ? 1050 : 840;
     }
 
@@ -1133,6 +1160,45 @@ export class WatchIntroModel {
       this.currentPose.txCurrentAlpha = 0;
       this.currentPose.fieldAlpha = 0;
       this.currentPose.rxCurrentAlpha = 0;
+    } else if (this.isChainC2RotateThenPlug) {
+      // P3 C2 分段精细动画：
+      // 1. 0.00 ~ 0.45: 镜头拉至全景，同时电源适配器与 USB Type-C 插头在插座平面前同步旋转 90° (rotX: 0 -> π/2)，并在 Y 轴对准插座上部的两孔 (adapterY: -0.45 -> -0.18)，此时插头悬在插座孔正前方 (adapterX = -15.65)
+      // 2. 0.45 ~ 1.00: 旋转对准完成后，电源适配器向左平移推进 (adapterX: -15.65 -> -17.42)，两片金属插脚真正插进墙面国标插座的两孔里，同时 USB Type-C 插头向左推进插进电源适配器右端面！
+      const camEase = easeInOutCubic(clamp(tRaw / 0.55, 0, 1));
+      this.currentPose.camPos.lerpVectors(this.startPose.camPos, this.targetPose.camPos, camEase);
+      this.currentPose.camLookAt.lerpVectors(
+        this.startPose.camLookAt,
+        this.targetPose.camLookAt,
+        camEase,
+      );
+
+      const rotEase = easeInOutCubic(clamp(tRaw / 0.48, 0, 1));
+      const lerpRot = (a: number, b: number): number => a + (b - a) * rotEase;
+      this.currentPose.adapterRotX = lerpRot(
+        this.startPose.adapterRotX,
+        this.targetPose.adapterRotX,
+      );
+      this.currentPose.typeCPlugRotX = lerpRot(
+        this.startPose.typeCPlugRotX,
+        this.targetPose.typeCPlugRotX,
+      );
+      this.currentPose.adapterY = lerpRot(this.startPose.adapterY, this.targetPose.adapterY);
+
+      const plugEase = easeInOutCubic(clamp((tRaw - 0.44) / 0.56, 0, 1));
+      const lerpPlug = (a: number, b: number): number => a + (b - a) * plugEase;
+      this.currentPose.adapterX = lerpPlug(this.startPose.adapterX, this.targetPose.adapterX);
+      this.currentPose.typeCPlugOffsetX = lerpPlug(
+        this.startPose.typeCPlugOffsetX,
+        this.targetPose.typeCPlugOffsetX,
+      );
+
+      this.currentPose.watchX = this.targetPose.watchX;
+      this.currentPose.watchZ = this.targetPose.watchZ;
+      this.currentPose.chargerZ = this.targetPose.chargerZ;
+      this.currentPose.chargerVisible = true;
+      this.currentPose.chainVisible = true;
+      this.currentPose.socketX = this.targetPose.socketX;
+      this.currentPose.adapterRotZ = 0;
     } else {
       const ease = easeInOutCubic(tRaw);
       const lerp = (a: number, b: number): number => a + (b - a) * ease;

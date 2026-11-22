@@ -418,12 +418,13 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
   // (2) 2.5D 蓝宝石弧面玻璃屏幕本体（永远不透明 opacity: 1, transparent: false，与中框弧线连接无台阶）
   const sapphireScreenMat = trackMat(
     new MeshPhysicalMaterial({
-      color: "#050811",
-      metalness: 0.04,
-      roughness: 0.06,
-      clearcoat: 1,
-      clearcoatRoughness: 0.04,
-      reflectivity: 0.92,
+      color: "#020306",
+      metalness: 0.02,
+      roughness: 0.22,
+      clearcoat: 0.18,
+      clearcoatRoughness: 0.28,
+      reflectivity: 0.25,
+      envMapIntensity: 0.12,
       transparent: false,
       opacity: 1,
     }),
@@ -1010,6 +1011,7 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
   // 3.3 充电头内部结构（黄铜色送电线圈 TX Coil + 中心暗色定位磁铁 + 内部深色电路衬底）
   const chargerInternalGroup = new Group();
   chargerInternalGroup.name = "ChargerInternalCoilGroup";
+  chargerInternalGroup.visible = false;
   chargerRoot.add(chargerInternalGroup);
 
   const pcbDiskGeo = trackGeo(new CylinderGeometry(1.24, 1.24, 0.05, 44));
@@ -1107,7 +1109,8 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
     chargerSilverBodyMat.depthWrite = isOpaque;
     pcbDiskMesh.visible = isOpaque;
 
-    // 充电器整盘不透明（如 P3 全景链路）时隐藏内部送电线圈及引出线，避免与 P3 动态白线产生位置偏差；半透明剖开时（P2 C3-C6）完整显示
+    // 充电器整盘不透明且尚未剖开（如 P2 C1/C2 磁吸充电或 P3 全景链路）时隐藏内部送电线圈及引出黄铜线，避免在 C1 飞入过程中黄铜芯线与白色线缆发生透视穿模；
+    // 只有进入 P2 C3–C6 半透明剖开态时才显示内部送电螺旋线圈与双芯引出导线！
     chargerInternalGroup.visible = !isOpaque;
 
     const splitOffset = (1 - opacity) * 0.12;

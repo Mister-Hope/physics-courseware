@@ -9,8 +9,8 @@
  * - 第 2 击（C2）：充电器与 USB Type-C 插头在插座平面上同步旋转 90°，两片竖直扁插脚插进国标五孔插座上部两孔（地线两侧），Type-C 插进适配器。
  * - 第 3 击（C3）：先展示墙面插座 **220 V 交流**。
  * - 第 4 击（C4）：再点击显示问题 **220 V 能直接给手表充电吗？**
- * - 第 5 击（C5）：再点击显示 **白色电源适配器** 标题，底下是一个问号 **？**
- * - 第 6 击（C6）：再点击显示白色电源适配器底部的文字 **220 V ⇒ 5 V**
+ * - 第 5 击（C5）：再点击显示 **电源适配器** 标题，底下是一个问号 **？**
+ * - 第 6 击（C6）：再点击显示电源适配器底部的文字 **220 V ⇒ 5 V**
  * - 第 7 击（C7）：拔出 USB，整个表连带着充电头、充电线向右飞出画面；插座脱离两个插头向左飞出画面； 充电器旋转到屏幕中央正面显示（**插头在下、USB 在上**），做完动效后自动浮现指针与文字提示 **《变压器》**。
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
@@ -84,9 +84,9 @@ const startModel = async (): Promise<void> => {
   try {
     const { WatchIntroModel: ModelClass } = await import("./watch3d/watchModel");
     const instance = new ModelClass(container, "chain");
-    instance.setStep(step);
     model = instance;
     mode.value = "3d";
+    instance.setStep(step);
     syncC7PointerReveal(step);
     container.addEventListener(
       "webglcontextlost",
@@ -163,13 +163,13 @@ onBeforeUnmount(() => {
 
     <!-- C2 提示标签：旋转 90° 插入国标墙面插座 -->
     <div class="pc3-tag" :class="{ 'is-hidden': !isC2 }">
-      <span>完整供电链路：<b>插座 → 白色电源适配器 → Type-C 供电线 → 磁吸充电器 → 手表</b></span>
+      <span>完整供电链路：<b>插座 → 电源适配器 → Type-C 供电线 → 磁吸充电器 → 手表</b></span>
     </div>
 
     <!-- C4–C6 顶部/中上方核心提问：220 V 能直接给手表充电吗？ -->
     <div class="pc3-top-question" :class="{ 'is-hidden': !showQuestion }"><Latex tex="220\ \text{V}" /> 能直接给手表充电吗？</div>
 
-    <!-- C3–C6 底部对应节点标注：C3 出 220V 交流 -> C5 出 白色电源适配器 + ？ -> C6 变为 220V ⇒ 5V -->
+    <!-- C3–C6 底部对应节点标注：C3 出 220V 交流 -> C5 出 电源适配器 + ？ -> C6 变为 220V ⇒ 5V -->
     <div class="pc3-c3-hud" :class="{ 'is-hidden': !isC3ToC6 }">
       <div class="pc3-node-callout" :class="{ 'is-hidden': !showSocket220 }">
         <div class="pc3-node-name">墙面插座</div>
@@ -177,7 +177,7 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="pc3-node-callout" :class="{ 'is-hidden': !showAdapterTitle }">
-        <div class="pc3-node-name">白色电源适配器</div>
+        <div class="pc3-node-name">电源适配器</div>
         <div class="pc3-adapter-sub">
           <div v-if="showAdapterQuestionMark" class="pc3-qmark text-accent">？</div>
           <div v-else-if="showAdapterTransform" class="pc3-node-val text-accent">

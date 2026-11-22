@@ -58,9 +58,9 @@ const startModel = async (): Promise<void> => {
   try {
     const { WatchIntroModel: ModelClass } = await import("./watch3d/watchModel");
     const instance = new ModelClass(container, "intro");
-    instance.setStep(step);
     model = instance;
     mode.value = "3d";
+    instance.setStep(step);
     container.addEventListener(
       "webglcontextlost",
       () => {
