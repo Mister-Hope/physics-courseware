@@ -293,3 +293,31 @@ clicks: 4
     <div class="em-example-item" v-click="4"><div class="em-example-label">（4）</div><div class="em-example-formulas"><Latex tex="E_p=\frac{1}{2}kx^2=0.025\,\text{J}" /><Latex tex="E_k=E-E_p=0.075\,\text{J}" /><Latex tex="v=\sqrt{\frac{2E_k}{m}}\approx0.87\,\text{m/s}" /></div></div>
   </div>
 </div>
+
+---
+layout: base-flex
+title: 这两个振动是简谐运动吗？
+clicks: 4
+---
+
+<div class="page-grow em-qual-page">
+  <div class="ask">怎样判断这两种振动是不是简谐运动？</div>
+  <div class="em-qual-grid">
+    <div class="em-qual-col">
+      <div class="em-qual-head"><span class="em-qual-no">（1）</span>木筷竖直浮在水中</div>
+      <div class="em-qual-figure"><BuoyantStickSvg :show-forces="$clicks >= 1" /></div>
+      <div class="em-qual-analysis">
+        <div v-click="1">设木筷的横截面积为 <Latex tex="S" />，水的密度为 <Latex tex="\rho" />。上提 <Latex tex="x" /> 后，浮力减小 <Latex tex="\rho gSx" />，合力向下、大小 <Latex tex="\rho gSx" />，与位移方向相反。</div>
+        <div v-click="2">所以 <Latex tex="F=-\rho gSx" />，木筷做简谐运动。</div>
+      </div>
+    </div>
+    <div class="em-qual-col">
+      <div class="em-qual-head"><span class="em-qual-no">（2）</span>小球在光滑圆弧面上</div>
+      <div class="em-qual-figure"><ArcBallSvg :show-forces="$clicks >= 3" /></div>
+      <div class="em-qual-analysis">
+        <div v-click="3">设圆弧半径为 <Latex tex="R" />，小球偏离最低点的弧长为 <span class="em-nowrap"><Latex tex="s" />。</span>切向回复力 <Latex tex="F=mg\sin\theta" />，指向最低点；小角度下 <Latex tex="\sin\theta\approx s/R" />，所以 <Latex tex="F\approx-\frac{mg}{R}s" />。</div>
+        <div v-click="4">回复力与位移成正比、方向相反，小球做简谐运动。</div>
+      </div>
+    </div>
+  </div>
+</div>
