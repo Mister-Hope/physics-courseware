@@ -3,3 +3,71 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 课题名 14 字，用 2.7rem 保证封面一行放下 */
+.cover-title {
+  font-size: 2.7rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* 图幅宽度（示意图在 883px 正文宽内占满，留一点呼吸） */
+.fig-fit {
+  width: 94%;
+  margin-inline: auto;
+}
+
+.fig-mid {
+  width: 84%;
+  margin-inline: auto;
+}
+
+.fig-sm {
+  width: 74%;
+  margin-inline: auto;
+}
+
+/* 居中公式行 */
+.eq-line {
+  text-align: center;
+  font-size: 1.16rem;
+  line-height: 1.65;
+}
+
+/* 结论行：圆点 + 文字，可逐击出现 */
+.flow-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-height: 1.65rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.flow-line strong {
+  color: var(--c-accent-light);
+}
+
+.flow-dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+}
+
+.flow-dot.is-blue {
+  background: var(--c-accent-2);
+}
+
+/* 表格下方说明 */
+.table-note {
+  margin-top: 0.4rem;
+  font-size: 0.86rem;
+  color: var(--c-text-dim);
+}
+
+/* 数据表里“点了才出现”的格子：占位但不显示，避免点击时表格跳动 */
+.is-hidden {
+  visibility: hidden;
+}
