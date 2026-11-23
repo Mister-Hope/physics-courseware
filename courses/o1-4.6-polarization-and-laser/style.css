@@ -1,5 +1,96 @@
-/* ═══════════════════════════════════════════════
-   光的偏振 激光 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 4.6 光的偏振 激光 —— 本课特有样式 */
+
+.pz-cover {
+  width: 430px;
+}
+
+.pz-cover svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pz-intro {
+  justify-content: center;
+  gap: 1.8rem;
+}
+
+.pz-intro .ask-lead {
+  font-size: 1.62rem;
+  line-height: 1.62;
+}
+
+.pz-lead {
+  font-size: 1.16rem;
+  line-height: 1.62;
+}
+
+.pz-fig-slit {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.pz-fig-polar {
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.pz-fig-pair {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.pz-fig-reflect {
+  max-width: 660px;
+  margin-inline: auto;
+}
+
+.pz-apps {
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.pz-feats {
+  justify-content: center;
+  gap: 1.15rem;
+}
+
+.pz-feat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.pz-feat-no {
+  flex: none;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-accent) 22%, transparent);
+  color: var(--c-accent);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.55rem;
+  text-align: center;
+}
+
+.pz-stem {
+  font-size: 1.08rem;
+  line-height: 1.62;
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--c-physics);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--c-physics) 8%, transparent);
+}
+
+.pz-summary {
+  justify-content: center;
+  gap: 1.3rem;
+}
+
+.pz-sum-item {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
