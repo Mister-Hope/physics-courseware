@@ -14,9 +14,33 @@ const force = computed(() => current.value * length.value * field.value);
       <AmperePerpSvg :force-scale="force / 5" />
     </div>
     <div class="amp-controls">
-      <CourseSlider v-model="current" :min="0.5" :max="5" :step="0.1" label="电流" label-tex="I" accent="blue" />
-      <CourseSlider v-model="length" :min="0.1" :max="1" :step="0.05" label="长度" label-tex="l" accent="gold" />
-      <CourseSlider v-model="field" :min="0.1" :max="1" :step="0.05" label="磁感应强度" label-tex="B" accent="teal" />
+      <CourseSlider
+        v-model="current"
+        :min="0.5"
+        :max="5"
+        :step="0.1"
+        label="电流"
+        label-tex="I"
+        accent="blue"
+      />
+      <CourseSlider
+        v-model="length"
+        :min="0.1"
+        :max="1"
+        :step="0.05"
+        label="长度"
+        label-tex="l"
+        accent="gold"
+      />
+      <CourseSlider
+        v-model="field"
+        :min="0.1"
+        :max="1"
+        :step="0.05"
+        label="磁感应强度"
+        label-tex="B"
+        accent="teal"
+      />
       <div class="amp-readout">
         <Latex tex="F" /> <span class="amp-eq">=</span>
         <span class="amp-value">{{ force.toFixed(2) }}</span>

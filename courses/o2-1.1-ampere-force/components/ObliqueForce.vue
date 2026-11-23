@@ -31,8 +31,26 @@ withDefaults(
       stroke-width="6"
       stroke-linecap="round"
     />
-    <text x="48" y="226" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-text)">a</text>
-    <text x="426" y="226" font-family="KaTeX_Math" font-style="italic" font-size="17" fill="var(--c-text)">b</text>
+    <text
+      x="48"
+      y="226"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="17"
+      fill="var(--c-text)"
+    >
+      a
+    </text>
+    <text
+      x="426"
+      y="226"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      font-size="17"
+      fill="var(--c-text)"
+    >
+      b
+    </text>
     <CourseArrow
       :from="{ x: 100, y: 200 }"
       :to="{ x: 176, y: 200 }"
@@ -66,7 +84,9 @@ withDefaults(
       font-style="italic"
       font-size="16"
       fill="var(--c-accent)"
-    >θ</text>
+    >
+      θ
+    </text>
     <g v-show="showF">
       <FieldMark
         :x="240"

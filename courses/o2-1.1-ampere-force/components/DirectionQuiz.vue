@@ -51,7 +51,9 @@ const showC = computed(() => step >= 3);
           font-style="italic"
           font-size="15"
           fill="var(--c-accent)"
-        >B</text>
+        >
+          B
+        </text>
         <line
           x1="50"
           y1="150"
@@ -101,7 +103,9 @@ const showC = computed(() => step >= 3);
           font-style="italic"
           font-size="16"
           fill="var(--c-accent-2)"
-        >I</text>
+        >
+          I
+        </text>
         <CourseArrow
           :from="{ x: 130, y: 110 }"
           :to="{ x: 130, y: 190 }"

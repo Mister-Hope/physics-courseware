@@ -78,7 +78,9 @@ const currentTo = computed(() => ({ x: 240, y: iUp ? 120 : 200 }));
       font-style="italic"
       font-size="16"
       fill="var(--c-accent)"
-    >B</text>
+    >
+      B
+    </text>
     <template v-if="rails">
       <line
         x1="60"

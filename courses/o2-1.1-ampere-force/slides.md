@@ -173,3 +173,125 @@ clicks: 2
 <div class="tip-hint" v-click="1">有效长度：从起点到终点的有向线段，长度等于两端点间的距离。</div>
 <div class="tip-hint" v-click="2"><Latex tex="F = BIl" />，方向由左手定则判断。</div>
 </div>
+
+---
+clicks: 1
+---
+
+# 磁电式电流表
+
+<div class="half-grid items-center page-grow">
+<div><GalvanometerStructure :step="$clicks" /></div>
+<div class="stack-tight">
+<div class="mini-title">电流表里有什么？</div>
+<div v-click="1">
+<div class="mini-title">各部分的作用</div>
+<div class="summary-line"><span class="part-name">磁体</span>提供很强的磁场</div>
+<div class="summary-line"><span class="part-name">极靴与软铁芯</span>使磁场沿半径方向，线圈平面始终与磁场平行</div>
+<div class="summary-line"><span class="part-name">线圈</span>通电后受安培力，两侧受力方向相反</div>
+<div class="summary-line"><span class="part-name">游丝</span>被扭动后产生反抗力矩</div>
+<div class="summary-line"><span class="part-name">指针</span>随线圈一起偏转，示出电流大小</div>
+</div>
+</div>
+</div>
+
+---
+clicks: 4
+---
+
+# 磁电式电流表
+
+<div class="half-grid items-center page-grow">
+<div><GalvanometerLab :step="$clicks" :current="60" /></div>
+<div class="stack-tight">
+<div class="mini-title">线圈为什么会转？</div>
+<div class="tip-hint" v-click="1">辐向磁场：两侧所在处 <Latex tex="B" /> 大小相等。</div>
+<div class="tip-hint" v-click="2">两侧电流方向相反。</div>
+<div class="tip-hint" v-click="3">由左手定则，两侧安培力反向，对转轴产生同方向力矩。</div>
+<div class="tip-hint" v-click="4">游丝反抗力矩与安培力矩平衡时，偏角 <Latex tex="\propto I" />。</div>
+</div>
+</div>
+
+---
+clicks: 1
+---
+
+<div class="stack page-grow">
+<div class="ask ask-lead">电流越大，指针偏转越大吗？</div>
+<GalvanometerDial />
+<div class="tip-hint" v-click="1">安培力矩与电流成正比，游丝的反抗力矩与偏角成正比；平衡时偏角与电流成正比，所以刻度是均匀的。电流反向，偏转方向也反向。</div>
+</div>
+
+---
+clicks: 1
+---
+
+# 磁电式电流表
+
+<div class="stack page-grow">
+<div class="ask">磁电式电流表为什么能测很弱的电流？</div>
+<div class="half-grid" v-click="1">
+<div class="stack-tight">
+<div class="mini-title">优点</div>
+<div class="summary-line">灵敏度高，可测几十微安到几毫安的弱电流</div>
+<div class="summary-line">刻度均匀，读数方便</div>
+</div>
+<div class="stack-tight">
+<div class="mini-title">缺点与扩展</div>
+<div class="summary-line">线圈导线很细，允许通过的电流很小</div>
+<div class="summary-line">要测更大的电流，需要扩大量程（分流）</div>
+</div>
+</div>
+</div>
+
+---
+layout: exercise-split
+clicks: 2
+---
+
+<template v-slot:stem>
+<div class="ask">天平右臂悬挂一个矩形线圈，匝数为 <Latex tex="n" />，水平边长为 <Latex tex="l" />，下部处在匀强磁场中，磁场方向垂直于线圈平面。通入电流 <Latex tex="I" /> 时天平平衡；保持电流大小不变，仅使电流反向，需在左盘加质量为 <Latex tex="m" /> 的砝码才能重新平衡。求磁感应强度 <Latex tex="B" />。（<Latex tex="n = 9" />，<Latex tex="l = 10.0\text{ cm}" />，<Latex tex="I = 0.10\text{ A}" />，<Latex tex="m = 8.78\text{ g}" />，<Latex tex="g" /> 取 <Latex tex="9.8\text{ m/s}^2" />）</div>
+</template>
+
+<template v-slot:fig>
+<CurrentBalanceSvg :step="$clicks" />
+</template>
+
+<div v-click="1" class="stack-tight">
+<div>线圈下边受安培力，大小 <Latex tex="F = nBIl" />。</div>
+<div>电流反向，安培力反向，两次平衡时安培力的差值由砝码平衡：<Latex tex="mg = 2nBIl" />。</div>
+</div>
+<div v-click="2">
+<Latex tex="B = \dfrac{mg}{2nIl} = \dfrac{8.78\times10^{-3}\times9.8}{2\times9\times0.10\times0.10}\text{ T} \approx 0.48\text{ T}" />
+</div>
+
+---
+layout: exercise-split
+clicks: 2
+---
+
+<template v-slot:stem>
+<div class="ask">把柔软的螺旋形弹簧竖直悬挂，下端刚好接触水银面，接入电路。通电后弹簧会怎样？</div>
+</template>
+
+<template v-slot:fig>
+<MercurySpringSvg :step="$clicks" />
+</template>
+
+<div v-click="1" class="stack-tight">
+<div>弹簧相邻两匝中的电流方向相同，同向电流相互吸引，弹簧收缩。</div>
+<div>下端离开水银面，电路断开，电流消失，弹簧又伸长接触水银。</div>
+</div>
+<div v-click="2">如此反复，弹簧上下振动，水银面出现火花。</div>
+
+---
+title: 课堂小结
+---
+
+<div class="page-grow summary-final">
+<div class="summary-row"><span class="summary-key">方向</span><span>左手定则：磁感线穿入掌心，四指指电流，拇指指安培力</span></div>
+<div class="summary-row"><span class="summary-key">大小</span><span><Latex tex="F = IlB\sin\theta" />；<Latex tex="\theta = 90^\circ" /> 时 <Latex tex="F = IlB" />，<Latex tex="\theta = 0" /> 时 <Latex tex="F = 0" /></span></div>
+<div class="summary-row"><span class="summary-key">有效长度</span><span>弯曲导线用两端点间的距离代替</span></div>
+<div class="summary-row"><span class="summary-key">应用</span><span>磁电式电流表：辐向磁场、游丝、偏角与电流成正比、刻度均匀</span></div>
+</div>
+

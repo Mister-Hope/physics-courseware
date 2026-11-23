@@ -38,3 +38,32 @@
   max-width: 100%;
   height: auto;
 }
+
+/* 第 12 页：结构图右侧的部件名 */
+.part-name {
+  color: var(--c-accent);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+/* 第 14 页：工作原理图宽度，避免图过高 */
+.gal-wrap {
+  margin: 0 auto;
+  width: min(100%, 34rem);
+}
+
+/* 第 18 页：课堂小结 */
+.summary-final {
+  justify-content: center;
+  gap: 1.15rem;
+}
+.summary-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+}
+.summary-key {
+  flex: 0 0 5.2rem;
+  color: var(--c-accent);
+  font-weight: 600;
+}

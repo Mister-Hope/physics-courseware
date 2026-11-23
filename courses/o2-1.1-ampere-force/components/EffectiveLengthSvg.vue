@@ -21,14 +21,7 @@ const showForce = computed(() => props.step >= 2);
       stroke-dasharray="6 5"
     />
     <FieldDots :x="64" :y="36" dir="in" :cols="7" :rows="6" :spacing="48" :size="4" :line-width="1.4" opacity="0.6" />
-    <polyline
-      points="100,70 240,312 380,70"
-      fill="none"
-      stroke="var(--c-accent)"
-      stroke-width="7"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+    <polyline points="100,70 240,312 380,70" fill="none" stroke="var(--c-accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
     <CourseArrow :from="{ x: 130, y: 122 }" :to="{ x: 186, y: 219 }" stroke="var(--c-accent-2)" :stroke-width="3" />
     <CourseArrow :from="{ x: 294, y: 219 }" :to="{ x: 350, y: 122 }" stroke="var(--c-accent-2)" :stroke-width="3" />
     <text x="148" y="168" font-family="KaTeX_Math" font-style="italic" font-size="16" fill="var(--c-accent-2)">I</text>
