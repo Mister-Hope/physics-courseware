@@ -248,23 +248,143 @@ title: 安全气囊与碰撞试验
   <div class="p13-grid">
     <div class="p13-data">
       <div class="p13-row"><span>质量</span><Latex tex="m=60\ \text{kg}" /></div>
-      <div class="p13-row"><span>速度</span><Latex tex="v=15\ \text{m/s}" /></div>
-      <div class="p13-row"><span>动量变化</span><Latex tex="\Delta p=900\ \text{kg}\cdot\text{m/s}" /></div>
+      <div class="p13-row"><span>速度</span><Latex tex="v=14\ \text{m/s}" /></div>
+      <div class="p13-row"><span>动量变化</span><Latex tex="\Delta p=840\ \text{kg}\cdot\text{m/s}" /></div>
       <div class="p13-note">撞后停止，动量瞬间变为零。</div>
     </div>
     <div class="p13-bars">
       <div class="p13-bar-row">
         <div class="p13-bar-label">无气囊 · <Latex tex="\Delta t\approx0.05\ \text{s}" /></div>
         <div class="p13-bar"><div class="p13-fill p13-fill-hard" style="width: 100%"></div></div>
-        <div class="p13-bar-value"><Latex tex="1.8\times10^4\ \text{N}" /></div>
+        <div class="p13-bar-value"><Latex tex="1.68\times10^4\ \text{N}" /></div>
       </div>
       <div class="p13-bar-row">
         <div class="p13-bar-label">有气囊 · <Latex tex="\Delta t\approx0.2\ \text{s}" /></div>
         <div class="p13-bar"><div class="p13-fill p13-fill-soft" style="width: 25%"></div></div>
-        <div class="p13-bar-value"><Latex tex="4.5\times10^3\ \text{N}" /></div>
+        <div class="p13-bar-value"><Latex tex="4.2\times10^3\ \text{N}" /></div>
       </div>
     </div>
   </div>
   <div class="mini-note p13-stse">1998 年 6 月 18 日，中国轿车第一次碰撞试验在天津完成；试验速度为 50 km/h。</div>
   <div class="tip-hint" v-click="1">气囊把碰撞时间延长到约 0.2 s，平均力降为约 1/4。</div>
+</div>
+
+---
+layout: exercise-split
+title: 练习：冲量的方向与大小
+analysisLabel: 解析
+---
+
+<template v-slot:stem>
+  <div class="p14-stem">物体静止在水平地面上，受到与水平方向成 <Latex tex="\theta" /> 角的恒力 <Latex tex="F" /> 作用，经过时间 <Latex tex="t" /> 仍静止。<br>以下判断正确的是（　　）</div>
+  <div class="p14-options">
+    <div class="p14-opt"><span class="p14-key">A</span><div><Latex tex="F" /> 的冲量方向水平向右</div></div>
+    <div class="p14-opt"><span class="p14-key">B</span><div><Latex tex="F" /> 的冲量大小为 <Latex tex="Ft\cos\theta" /></div></div>
+    <div class="p14-opt"><span class="p14-key">C</span><div>摩擦力的冲量为 0</div></div>
+    <div class="p14-opt"><span class="p14-key">D</span><div>合力冲量为 0</div></div>
+  </div>
+</template>
+
+<template v-slot:fig>
+  <AngledPullSvg />
+</template>
+
+<div class="p14-analysis">
+  <div class="p14-line" v-click="1"><Latex tex="I_F=Ft" />，方向沿 <Latex tex="F" />（斜向上），<span class="p14-bad">A、B 错</span>。</div>
+  <div class="p14-line" v-click="2">摩擦力 <Latex tex="f=F\cos\theta" />，冲量大小 <Latex tex="F\cos\theta\cdot t" />，方向水平向左，<span class="p14-bad">C 错</span>。</div>
+  <div class="p14-line" v-click="3">物体静止，合力为零，合力冲量为 0，<span class="p14-good">D 对</span>。</div>
+</div>
+
+---
+layout: exercise-split
+title: 练习：铁锤击钉
+analysisLabel: 解析
+---
+
+<template v-slot:stem>
+  质量 <Latex tex="0.5\ \text{kg}" /> 的铁锤以 <Latex tex="4\ \text{m/s}" /> 的速度竖直向下击打铁钉，击后速度变为 0，作用时间 <Latex tex="0.01\ \text{s}" />，<br><Latex tex="g" /> 取 <Latex tex="10\ \text{m/s}^2" />。求：
+  <div class="p15-asks">
+    <div>(1) 不计铁锤重力，铁锤对铁钉的平均作用力；</div>
+    <div>(2) 考虑铁锤重力，铁锤对铁钉的平均作用力；</div>
+    <div>(3) 说明什么情况下可以忽略铁锤重力。</div>
+  </div>
+</template>
+
+<div class="p15-analysis">
+  <div class="p15-line">取向下为正，设铁钉对铁锤的平均作用力为 <Latex tex="\bar{F}" />。</div>
+  <div class="p15-line" v-click="1"><Latex tex="p=2\ \text{kg}\cdot\text{m/s}" />，<Latex tex="p'=0" />；<Latex tex="\bar{F}=\dfrac{-2}{0.01}=-200\ \text{N}" />。负号表示向上，铁锤对铁钉 200 N 向下。</div>
+  <div class="p15-line" v-click="2"><Latex tex="mg+\bar{F}=-200\ \text{N}" />，得 <Latex tex="\bar{F}=-205\ \text{N}" />；大小 205 N，向上，铁锤对铁钉 205 N 向下。</div>
+  <div class="p15-line" v-click="3"><Latex tex="mg=5\ \text{N}\ll205\ \text{N}" />，重力可忽略。</div>
+</div>
+
+---
+layout: exercise-split
+title: 练习：反向力的冲量
+analysisLabel: 解析
+---
+
+<template v-slot:stem>
+  质量 <Latex tex="10\ \text{kg}" /> 的物体以 <Latex tex="10\ \text{m/s}" /> 的速度沿直线运动，受到一个与运动方向相反的力作用 <Latex tex="4\ \text{s}" /> 后，速度变为反向的 <Latex tex="2\ \text{m/s}" />。求这段时间内物体动量的变化量和所受的力。
+</template>
+
+<div class="p16-analysis">
+  <div class="p16-line">取初速度方向为正。</div>
+  <div class="p16-line" v-click="1"><Latex tex="p=mv=10\times10=100\ \text{kg}\cdot\text{m/s}" />，<Latex tex="p'=mv'=10\times(-2)=-20\ \text{kg}\cdot\text{m/s}" />。</div>
+  <div class="p16-line" v-click="2"><Latex tex="\Delta p=p'-p=-20-100=-120\ \text{kg}\cdot\text{m/s}" />。</div>
+  <div class="p16-line" v-click="3"><Latex tex="F=\dfrac{\Delta p}{\Delta t}=\dfrac{-120}{4}=-30\ \text{N}" />，负号表示力与初速度方向相反。</div>
+</div>
+
+---
+layout: exercise-split
+title: 练习：蹦床运动员
+analysisLabel: 解析
+---
+
+<template v-slot:stem>
+  质量 <Latex tex="60\ \text{kg}" /> 的运动员从 <Latex tex="3.2\ \text{m}" /> 高处自由下落，与蹦床接触 <Latex tex="0.8\ \text{s}" /> 后，反弹到 <Latex tex="5.0\ \text{m}" /> 高处。<br><Latex tex="g" /> 取 <Latex tex="10\ \text{m/s}^2" />。求：
+  <div class="p17-asks">
+    <div>(1) 运动员刚接触蹦床和刚离开蹦床时的速度；</div>
+    <div>(2) 蹦床对运动员的平均作用力。</div>
+  </div>
+</template>
+
+<div class="p17-analysis">
+  <div class="p17-line">取竖直向上为正。</div>
+  <div class="p17-line" v-click="1"><Latex tex="v_1=\sqrt{2gh_1}=8\ \text{m/s}" />（向下，取负）；<Latex tex="v_2=\sqrt{2gh_2}=10\ \text{m/s}" />（向上，取正）。</div>
+  <div class="p17-line" v-click="2"><Latex tex="\Delta p=mv_2-mv_1=60\times10-60\times(-8)=1080\ \text{kg}\cdot\text{m/s}" />。</div>
+  <div class="p17-line" v-click="3"><Latex tex="\dfrac{\Delta p}{\Delta t}=1350\ \text{N}" />（向上）；<Latex tex="\bar{F}-mg=1350" />，得 <Latex tex="\bar{F}=1950\ \text{N}" />。</div>
+</div>
+
+---
+layout: exercise-split
+title: 练习：蹦床运动员
+analysisLabel: 解析
+---
+
+<template v-slot:stem>
+  接上题，从运动员开始下落到反弹到最高点，总时间约为 <Latex tex="2.6\ \text{s}" />。求这段时间内重力的冲量和蹦床弹力的冲量，并说明全过程的合冲量。
+</template>
+
+<div class="p18-analysis">
+  <div class="p18-line" v-click="1">下落时间 <Latex tex="t_1=\dfrac{v_1}{g}=0.8\ \text{s}" />，接触时间 <Latex tex="0.8\ \text{s}" />，反弹时间 <Latex tex="t_2=\dfrac{v_2}{g}=1.0\ \text{s}" />。</div>
+  <div class="p18-line" v-click="1">总时间 <Latex tex="0.8+0.8+1.0=2.6\ \text{s}" />。</div>
+  <div class="p18-line" v-click="2">重力冲量 <Latex tex="I_G=mg t=60\times10\times2.6=1.56\times10^3\ \text{N}\cdot\text{s}" />，方向向下。</div>
+  <div class="p18-line" v-click="3">弹力冲量 <Latex tex="1950\times0.8=1.56\times10^3\ \text{N}\cdot\text{s}" />，方向向上。</div>
+  <div class="p18-line" v-click="3">全过程初、末速度均为 0，<Latex tex="\Delta p=0" />，合冲量为 0。</div>
+</div>
+
+---
+layout: base-flex
+title: 课堂小结
+---
+
+# 课堂小结
+
+<div class="page-grow pt19">
+  <div class="step-list p19-list">
+    <div class="step-item p19-item" v-click="1"><span class="step-no">1</span><div>冲量 <Latex tex="I=F\Delta t" /> 是力对时间的累积；单位 <Latex tex="\text{N}\cdot\text{s}" />，方向与 <Latex tex="F" /> 相同。</div></div>
+    <div class="step-item p19-item" v-click="2"><span class="step-no">2</span><div>动量定理 <Latex tex="I=p'-p=\Delta p" />；<Latex tex="F" /> 是合力，一维运算先定正方向。</div></div>
+    <div class="step-item p19-item" v-click="3"><span class="step-no">3</span><div>变力时 <Latex tex="F" /> 取平均力；<Latex tex="F-t" /> 图线与横轴围成的面积等于冲量。</div></div>
+    <div class="step-item p19-item" v-click="4"><span class="step-no">4</span><div>缓冲：<Latex tex="\Delta p" /> 一定时，延长作用时间可以减小作用力。</div></div>
+  </div>
 </div>

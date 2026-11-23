@@ -451,3 +451,110 @@
 .pt13 .tip-hint {
   font-size: 0.86rem;
 }
+
+/* 第 14 页：冲量的方向与大小 */
+.p14-stem {
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.p14-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.3rem 2rem;
+  margin-top: 0.35rem;
+}
+.p14-opt {
+  display: flex;
+  gap: 0.45rem;
+  align-items: baseline;
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+.p14-key {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.p14-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.p14-line {
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+.p14-bad {
+  color: var(--c-danger);
+  font-weight: 600;
+}
+.p14-good {
+  color: var(--c-physics);
+  font-weight: 700;
+}
+
+/* 第 15 页：铁锤击钉 */
+.p15-asks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-top: 0.3rem;
+}
+.p15-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.p15-line {
+  font-size: 0.91rem;
+  line-height: 1.5;
+}
+
+/* 第 16 页：反向力的冲量 */
+.p16-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.p16-line {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* 第 17 页：蹦床运动员（上） */
+.p17-asks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  margin-top: 0.35rem;
+}
+.p17-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.p17-line {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* 第 18 页：蹦床运动员（下） */
+.p18-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.p18-line {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* 第 19 页：课堂小结 */
+.pt19 {
+  gap: 0.5rem;
+}
+.p19-list {
+  gap: 0.55rem;
+}
+.p19-item {
+  font-size: 0.98rem;
+}
