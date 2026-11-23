@@ -43,54 +43,66 @@ const barWidth = computed(() => `${Math.min(100, (force.value / 12600) * 100)}%`
   flex-direction: column;
   gap: 0.55rem;
 }
+
 .bfd-meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
   gap: 0.5rem 1.1rem;
-  font-size: 0.88rem;
+  align-items: baseline;
+
   color: var(--c-text-dim);
+
+  font-size: 0.88rem;
 }
+
 .bfd-meta > span:first-child {
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .bfd-readout {
   display: flex;
+  gap: 1rem;
   align-items: baseline;
   justify-content: space-between;
-  gap: 1rem;
+
   padding: 0.45rem 0.9rem;
-  border-radius: 0.9rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+
+  background: var(--c-surface);
 }
+
 .bfd-label {
-  font-size: 0.92rem;
   color: var(--c-text-dim);
+  font-size: 0.92rem;
 }
+
 .bfd-value {
-  font-size: 1.55rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.55rem;
   font-variant-numeric: tabular-nums;
 }
+
 .bfd-meter {
-  height: 0.55rem;
   overflow: hidden;
+  height: 0.55rem;
   border-radius: 999px;
   background: var(--c-neutral-700);
 }
+
 .bfd-fill {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--c-accent-2), var(--c-accent));
   transition: width 0.18s ease;
 }
+
 .bfd-scale {
   display: flex;
   justify-content: space-between;
-  font-size: 0.72rem;
   color: var(--c-text-mute);
+  font-size: 0.72rem;
 }
 </style>

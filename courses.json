@@ -472,8 +472,8 @@
           "slug": "o1-1.2-impulse-momentum-theorem",
           "title": "动量定理",
           "chapter": "§1.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由冲量 I=FΔt 与牛顿第二定律推出动量定理，理解矢量性与一维正负，用缓冲、安全气囊等实例解释动量变化与作用时间的关系。",
+          "tags": ["冲量", "动量定理", "缓冲", "牛顿第二定律"]
         },
         {
           "slug": "o1-1.3-conservation-of-momentum",

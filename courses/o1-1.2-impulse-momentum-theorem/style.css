@@ -9,69 +9,83 @@
 .pt2 {
   gap: 0.75rem;
 }
+
 .p2-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   gap: 2.4rem;
   align-items: center;
 }
+
 .p2-main {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
+
 .p2-eq {
   line-height: 1;
 }
+
 .p2-eq .katex-display {
   margin: 0;
   font-size: 1.9rem;
 }
+
 .p2-row {
   display: flex;
-  align-items: baseline;
   gap: 0.8rem;
+  align-items: baseline;
   font-size: 1.02rem;
 }
+
 .p2-tag {
   min-width: 3.2rem;
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .p2-side {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
 }
+
 .p2-note {
+  color: var(--c-text-dim);
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--c-text-dim);
 }
+
 .p2-note b {
   color: var(--c-text);
 }
+
 .p2-foot {
   margin-top: 0.2rem;
 }
 
 /* 第 3 页：船靠岸 */
 .pt3 {
-  justify-content: center;
   gap: 0.55rem;
+  justify-content: center;
 }
+
 .p3-ask {
   text-align: center;
 }
+
 .p3-fig {
   display: flex;
   justify-content: center;
 }
+
 .p3-fig svg {
   width: 100%;
   max-width: 560px;
   height: auto;
 }
+
 .p3-hint {
   align-self: center;
 }
@@ -80,28 +94,35 @@
 .pt4 {
   gap: 1.1rem;
 }
+
 .p4-ask {
   max-width: 40rem;
 }
+
 .p4-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.6rem;
 }
+
 .p4-item {
   display: flex;
   gap: 0.8rem;
   align-items: flex-start;
+
+  color: var(--c-text-dim);
+
   font-size: 0.98rem;
   line-height: 1.55;
-  color: var(--c-text-dim);
 }
+
 .p4-item b {
   display: block;
   margin-bottom: 0.2rem;
   color: var(--c-text);
   font-size: 1.05rem;
 }
+
 .p4-icon {
   flex: 0 0 auto;
   margin-top: 0.1rem;
@@ -112,51 +133,63 @@
 .pt5 {
   gap: 0.55rem;
 }
+
 .p5-ask {
   text-align: center;
 }
+
 .p5-grid {
   grid-template-columns: 0.95fr 1.05fr;
   gap: 2rem;
   align-items: center;
 }
+
 .p5-fig {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.35rem;
+  align-items: center;
 }
+
 .p5-fig svg {
   width: 100%;
   max-width: 380px;
   height: auto;
 }
+
 .p5-cap {
-  text-align: center;
   font-size: 0.8rem;
+  text-align: center;
 }
+
 .p5-steps {
   display: flex;
   flex-direction: column;
 }
+
 .p5-step {
   display: grid;
   grid-template-columns: 2rem 1fr;
   align-items: center;
+
   min-height: 3.35rem;
   padding: 0.2rem 0;
   border-bottom: 1px solid var(--c-border);
 }
+
 .p5-step:last-child {
   border-bottom: none;
 }
+
 .p5-no {
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .p5-step .katex {
   font-size: 0.95em;
 }
+
 .p5-step .katex-display {
   margin: 0;
 }
@@ -165,74 +198,90 @@
 .pt6 {
   gap: 0.8rem;
 }
+
 .p6-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 2.2rem;
   align-items: center;
 }
+
 .p6-main {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .p6-eq .katex-display {
   margin: 0;
   font-size: 2.1rem;
 }
+
 .p6-row {
   display: flex;
-  align-items: baseline;
   gap: 0.8rem;
+  align-items: baseline;
   font-size: 1rem;
 }
+
 .p6-tag {
   min-width: 3rem;
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .p6-side {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
 .p6-rel {
   font-size: 1.35rem;
 }
+
 .p6-rel .katex-display {
   margin: 0;
 }
+
 .p6-note {
+  color: var(--c-text-dim);
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--c-text-dim);
 }
 
 /* 第 7 页：动量定理 */
 .pt7 {
   gap: 0.7rem;
 }
+
 .p7-statement {
-  font-size: 1.22rem;
   font-weight: 600;
+  font-size: 1.22rem;
   line-height: 1.6;
 }
+
 .p7-eq .katex-display {
   margin: 0;
   font-size: 2rem;
 }
+
 .p7-notes {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.4rem;
 }
+
 .p7-note {
   padding-top: 0.55rem;
   border-top: 1px solid var(--c-border);
+
+  color: var(--c-text-dim);
+
   font-size: 0.92rem;
   line-height: 1.55;
-  color: var(--c-text-dim);
 }
+
 .p7-tag {
   margin-right: 0.4rem;
   color: var(--c-accent);
@@ -243,44 +292,55 @@
 .pt8 {
   gap: 0.4rem;
 }
+
 .p8-grid {
   grid-template-columns: 1.05fr 0.95fr;
   gap: 1.8rem;
   align-items: center;
 }
+
 .p8-chart svg {
   width: 100%;
   height: auto;
 }
+
 .p8-side {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
+
 .p8-ask {
   margin-bottom: 0.2rem;
   font-size: 1.02rem;
 }
+
 .p8-step {
   display: grid;
   grid-template-columns: 1.7rem 1fr;
   gap: 0.45rem;
   align-items: start;
+
   padding: 0.28rem 0;
   border-bottom: 1px solid var(--c-border);
+
   font-size: 0.9rem;
   line-height: 1.45;
 }
+
 .p8-step:last-of-type {
   border-bottom: none;
 }
+
 .p8-no {
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .p8-step .katex {
   font-size: 0.95em;
 }
+
 .pt8 .tip-hint {
   font-size: 0.86rem;
 }
@@ -289,30 +349,37 @@
 .pt9 {
   gap: 0.35rem;
 }
+
 .p9-ask {
   font-size: 1rem;
 }
+
 .p9-fig {
   display: flex;
   justify-content: center;
 }
+
 .p9-fig svg {
   width: 100%;
   max-width: 520px;
   height: auto;
 }
+
 .p9-calc {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
+
 .p9-line {
   font-size: 0.96rem;
   line-height: 1.45;
 }
+
 .p9-line .katex {
   font-size: 0.98em;
 }
+
 .pt9 .tip-hint {
   font-size: 0.84rem;
 }
@@ -323,10 +390,12 @@
   flex-direction: column;
   gap: 0.4rem;
 }
+
 .p10-line {
   font-size: 0.95rem;
   line-height: 1.55;
 }
+
 .p10-line .katex {
   font-size: 0.98em;
 }
@@ -335,38 +404,48 @@
 .pt11 {
   gap: 0.5rem;
 }
+
 .p11-ask {
   font-size: 1.05rem;
 }
+
 .p11-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.6rem;
 }
+
 .p11-case {
   display: flex;
-  align-items: flex-start;
   gap: 0.8rem;
+  align-items: flex-start;
+
   font-size: 0.98rem;
   line-height: 1.5;
 }
+
 .p11-icon {
   flex: none;
 }
+
 .p11-hard {
   color: var(--c-danger);
 }
+
 .p11-soft {
   color: var(--c-physics);
 }
+
 .p11-eq {
   display: flex;
   justify-content: center;
 }
+
 .p11-eq .katex-display {
   margin: 0;
   font-size: 1.5rem;
 }
+
 .p11-note {
   text-align: center;
 }
@@ -375,6 +454,7 @@
 .pt12 {
   gap: 0.5rem;
 }
+
 .p12-ask {
   font-size: 1.05rem;
 }
@@ -383,71 +463,87 @@
 .pt13 {
   gap: 0.45rem;
 }
+
 .p13-ask {
   font-size: 1.05rem;
 }
+
 .p13-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 2rem;
   align-items: center;
 }
+
 .p13-data {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .p13-row {
   display: flex;
   gap: 0.8rem;
   align-items: baseline;
   font-size: 0.95rem;
 }
+
 .p13-row > span:first-child {
   min-width: 4.4rem;
   color: var(--c-text-mute);
 }
+
 .p13-note {
-  font-size: 0.82rem;
   color: var(--c-text-dim);
+  font-size: 0.82rem;
 }
+
 .p13-bars {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
 }
+
 .p13-bar-row {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
+
 .p13-bar-label {
-  font-size: 0.8rem;
   color: var(--c-text-dim);
+  font-size: 0.8rem;
 }
+
 .p13-bar {
-  height: 0.7rem;
   overflow: hidden;
+  height: 0.7rem;
   border-radius: 999px;
   background: var(--c-neutral-700);
 }
+
 .p13-fill {
   height: 100%;
   border-radius: inherit;
 }
+
 .p13-fill-hard {
   background: var(--c-danger);
 }
+
 .p13-fill-soft {
   background: var(--c-physics);
 }
+
 .p13-bar-value {
   font-size: 0.86rem;
   font-variant-numeric: tabular-nums;
 }
+
 .p13-stse {
   font-size: 0.8rem;
 }
+
 .pt13 .tip-hint {
   font-size: 0.86rem;
 }
@@ -457,36 +553,44 @@
   font-size: 0.98rem;
   line-height: 1.55;
 }
+
 .p14-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.3rem 2rem;
   margin-top: 0.35rem;
 }
+
 .p14-opt {
   display: flex;
   gap: 0.45rem;
   align-items: baseline;
+
   font-size: 0.94rem;
   line-height: 1.45;
 }
+
 .p14-key {
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .p14-analysis {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
+
 .p14-line {
   font-size: 0.94rem;
   line-height: 1.55;
 }
+
 .p14-bad {
   color: var(--c-danger);
   font-weight: 600;
 }
+
 .p14-good {
   color: var(--c-physics);
   font-weight: 700;
@@ -499,11 +603,13 @@
   gap: 0.1rem;
   margin-top: 0.3rem;
 }
+
 .p15-analysis {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
+
 .p15-line {
   font-size: 0.91rem;
   line-height: 1.5;
@@ -515,6 +621,7 @@
   flex-direction: column;
   gap: 0.45rem;
 }
+
 .p16-line {
   font-size: 0.95rem;
   line-height: 1.55;
@@ -527,11 +634,13 @@
   gap: 0.18rem;
   margin-top: 0.35rem;
 }
+
 .p17-analysis {
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
+
 .p17-line {
   font-size: 0.95rem;
   line-height: 1.55;
@@ -543,6 +652,7 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
 .p18-line {
   font-size: 0.95rem;
   line-height: 1.6;
@@ -552,9 +662,11 @@
 .pt19 {
   gap: 0.5rem;
 }
+
 .p19-list {
   gap: 0.55rem;
 }
+
 .p19-item {
   font-size: 0.98rem;
 }
