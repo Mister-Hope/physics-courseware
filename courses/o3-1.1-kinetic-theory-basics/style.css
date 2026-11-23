@@ -24,17 +24,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   padding: 1rem 1.1rem;
   border: 1px solid var(--c-border);
   border-radius: 1.2rem;
+
   background: var(--c-surface);
 }
 
 .p2-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.45rem;
+  align-items: center;
+
   font-size: 1rem;
 }
 
@@ -49,16 +52,18 @@
 
 .p2-ball {
   display: inline-block;
+
   width: 1.15rem;
   height: 1.15rem;
   border-radius: 50%;
+
   background: var(--c-physics);
 }
 
 .p2-note {
+  color: var(--c-text-dim);
   font-size: 0.8rem;
   line-height: 1.4;
-  color: var(--c-text-dim);
 }
 
 .pt2 .tip-hint {
@@ -80,17 +85,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
   padding: 0.9rem 0.7rem;
-  text-align: center;
   border: 1px solid var(--c-border);
   border-radius: 1.1rem;
+
   background: var(--c-surface);
+
+  text-align: center;
 }
 
 .p3-value {
-  font-size: 1.5rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
 .p3-value .katex {
@@ -98,9 +106,9 @@
 }
 
 .p3-label {
+  color: var(--c-text-dim);
   font-size: 0.78rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
 
 .p3-bottom {
@@ -207,11 +215,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   padding: 0.9rem;
-  text-align: center;
   border: 1px solid var(--c-border);
   border-radius: 1.1rem;
+
   background: var(--c-surface);
+
+  text-align: center;
 }
 
 .p8-icon {
@@ -219,23 +230,25 @@
 }
 
 .p8-title {
-  font-size: 1.02rem;
   font-weight: 700;
+  font-size: 1.02rem;
 }
 
 .p8-text {
+  color: var(--c-text-dim);
   font-size: 0.85rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
 
 .p8-def {
   padding: 0.55rem 0.9rem;
-  font-size: 0.98rem;
-  line-height: 1.55;
   border-left: 3px solid var(--c-accent);
   border-radius: 0.7rem;
+
   background: var(--c-surface);
+
+  font-size: 0.98rem;
+  line-height: 1.55;
 }
 
 /* P11 分子力图像 */
@@ -285,11 +298,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+
   padding: 0.9rem 0.7rem;
-  text-align: center;
   border: 1px solid var(--c-border);
   border-radius: 1.1rem;
+
   background: var(--c-surface);
+
+  text-align: center;
 }
 
 .p12-icon {
@@ -297,14 +313,14 @@
 }
 
 .p12-title {
-  font-size: 1.02rem;
   font-weight: 700;
+  font-size: 1.02rem;
 }
 
 .p12-text {
+  color: var(--c-text-dim);
   font-size: 0.82rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
 
 /* P13 统计规律 */
@@ -327,15 +343,15 @@
 
 .p13-title {
   margin-bottom: 0.3rem;
-  font-size: 1.04rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.04rem;
 }
 
 .p13-text {
+  color: var(--c-text-dim);
   font-size: 0.88rem;
   line-height: 1.55;
-  color: var(--c-text-dim);
 }
 
 /* P14–P18 习题解析 */
@@ -365,10 +381,12 @@
 .p17-note,
 .p18-note {
   padding-left: 0.7rem;
+  border-left: 2px solid var(--c-accent);
+
+  color: var(--c-text-dim);
+
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
-  border-left: 2px solid var(--c-accent);
 }
 
 /* P19 小结 */

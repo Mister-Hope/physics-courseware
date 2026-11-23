@@ -780,8 +780,8 @@
           "slug": "o3-1.1-kinetic-theory-basics",
           "title": "分子动理论的基本内容",
           "chapter": "§1.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "从物体由大量分子组成、分子热运动、分子间作用力三方面建立分子动理论，理解阿伏加德罗常数与分子大小的估算。",
+          "tags": ["分子动理论", "热运动", "分子间作用力", "阿伏加德罗常数"]
         },
         {
           "slug": "o3-1.2-oil-film-experiment",
