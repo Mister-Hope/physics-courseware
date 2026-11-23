@@ -29,7 +29,7 @@
     "tokenize:svg-colors": "unrun scripts/tokenize-svg-colors.ts"
   },
   "devDependencies": {
-    "@inquirer/prompts": "^8.8.0",
+    "@inquirer/prompts": "8.8.1",
     "@mr-hope/tsconfig": "0.0.4",
     "@playwright/test": "1.65.1",
     "oxc-config-hope": "0.3.15",
