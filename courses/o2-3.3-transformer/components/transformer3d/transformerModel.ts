@@ -36,10 +36,12 @@ import {
   LineSegments,
   Mesh,
   MeshBasicMaterial,
+  MeshPhysicalMaterial,
   MeshStandardMaterial,
   Object3D,
   PerspectiveCamera,
   PlaneGeometry,
+  PMREMGenerator,
   Quaternion,
   Scene,
   Shape,
@@ -49,6 +51,7 @@ import {
   Vector3,
   WebGLRenderer,
 } from "three";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 const clamp = (val: number, min: number, max: number): number => Math.max(min, Math.min(max, val));
 
@@ -201,7 +204,7 @@ const createAcInputPlateTexture = (): CanvasTexture => {
   return tex;
 };
 
-// 生成正对镜头的抽象输出端 `U₂` 电压标识贴图（取代写实负载电阻，13 §2.1）
+// 生成正对镜头的抽象输出端 `U₂` 电压标识贴图（暖琥珀金铜色调，与原线圈冷蓝形成鲜明冷暖对比）
 const createAcOutputPlateTexture = (): CanvasTexture => {
   const canvas = document.createElement("canvas");
   canvas.width = 256;
@@ -209,7 +212,7 @@ const createAcOutputPlateTexture = (): CanvasTexture => {
   const ctx = canvas.getContext("2d");
   if (ctx) {
     ctx.clearRect(0, 0, 256, 192);
-    ctx.fillStyle = "#2dd4bf";
+    ctx.fillStyle = "#f59e0b";
     ctx.font = "italic bold 64px Georgia, 'Times New Roman', serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
@@ -219,7 +222,7 @@ const createAcOutputPlateTexture = (): CanvasTexture => {
     ctx.fillText("2", 154, 92);
 
     // 上下抽象电压双向虚线/箭头指示
-    ctx.strokeStyle = "rgba(45, 212, 191, 0.72)";
+    ctx.strokeStyle = "rgba(245, 158, 11, 0.78)";
     ctx.lineWidth = 6;
     ctx.lineCap = "round";
     ctx.beginPath();
@@ -482,20 +485,20 @@ const LOSS_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // C2 (step 2 - 铁损): 镜头近距离拉近铁芯左上支腿一小段；展示变化磁场下的涡旋电场/涡流环；铁芯内部泛红光
+  // C2 (step 2 - 铁损): 镜头推近铁芯上横轭一小段（避开线圈，克制干净）；铁芯表面保持亮银钢金属光泽，仅展示内部 3 个垂直于磁通方向的橙红闭合涡流环 + 铁芯内部很淡的红热辉光（不整块变红）
   {
-    rigX: 0.75,
-    rigY: -0.45,
-    rigRotY: 0.34,
-    camPos: new Vector3(-0.95, 1.05, 8.2),
-    camLookAt: new Vector3(-1.05, 0.68, 0),
-    coreOpacity: 0.34,
+    rigX: 0.45,
+    rigY: -0.95,
+    rigRotY: 0.24,
+    camPos: new Vector3(0.25, 1.35, 6.8),
+    camLookAt: new Vector3(0.25, 0.78, 0),
+    coreOpacity: 0.42,
     wireframeOpacity: 0.85,
-    primaryCoilOpacity: 0.35,
-    secondaryCoilOpacity: 0.35,
-    primaryCurrentAlpha: 0.6,
-    secondaryCurrentAlpha: 0.6,
-    fluxAlpha: 0.75,
+    primaryCoilOpacity: 0.22,
+    secondaryCoilOpacity: 0.22,
+    primaryCurrentAlpha: 0,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0.32,
     resistorPinAlpha: 0,
     powerBridgeAlpha: 0,
     copperHeatAlpha: 0,
@@ -759,7 +762,7 @@ interface FluxRingItem {
 interface EddyLoopItem {
   ringMat: MeshBasicMaterial;
   arrowMat: MeshBasicMaterial;
-  arrows: { mesh: Mesh; baseAngle: number; radius: number; y: number }[];
+  arrows: { mesh: Mesh; baseAngle: number; radius: number; x: number }[];
 }
 
 interface LeakArcItem {
@@ -775,12 +778,13 @@ export class TransformerCoreModel {
   renderer: WebGLRenderer;
 
   private readonly rig = new Group();
-  private coreMaterial!: MeshStandardMaterial;
+  private coreMaterial!: MeshPhysicalMaterial;
   private wireframeMaterial!: LineBasicMaterial;
   private primaryCoilMaterial!: MeshStandardMaterial;
   private secondaryCoilMaterial!: MeshStandardMaterial;
   private resistorPinMaterial!: MeshStandardMaterial;
   private powerBridgeMaterial!: MeshBasicMaterial;
+  private pmremGenerator: PMREMGenerator | null = null;
 
   private primaryCurve!: CatmullRomCurve3;
   private secondaryCurve!: CatmullRomCurve3;
@@ -858,8 +862,14 @@ export class TransformerCoreModel {
     });
     this.renderer.setClearColor(0x000000, 0);
     this.renderer.toneMapping = ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.2;
+    this.renderer.toneMappingExposure = 1.24;
     container.append(this.renderer.domElement);
+
+    // 注入 RoomEnvironment 真实高光反射贴图，使硅钢铁芯与黄铜/铜线圈呈现鲜明金属质感（绝不再像深色塑料支架）
+    this.pmremGenerator = new PMREMGenerator(this.renderer);
+    const roomEnv = new RoomEnvironment();
+    this.scene.environment = this.pmremGenerator.fromScene(roomEnv, 0.04).texture;
+    roomEnv.dispose();
 
     this.currentPose = clonePose(this.poses[0]);
     this.startPose = clonePose(this.poses[0]);
@@ -943,14 +953,17 @@ export class TransformerCoreModel {
     });
     coreGeo.translate(0, 0, -0.56);
 
-    this.coreMaterial = new MeshStandardMaterial({
-      color: "#64748b",
+    this.coreMaterial = new MeshPhysicalMaterial({
+      color: "#cbd5e1",
       emissive: "#000000",
       emissiveIntensity: 0,
-      metalness: 0.84,
-      roughness: 0.25,
+      metalness: 0.88,
+      roughness: 0.2,
+      clearcoat: 0.35,
+      clearcoatRoughness: 0.18,
+      envMapIntensity: 1.35,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.94,
     });
     const coreMesh = new Mesh(coreGeo, this.coreMaterial);
     this.rig.add(coreMesh);
@@ -973,22 +986,23 @@ export class TransformerCoreModel {
     // 3D 铁芯结构线框（EdgesGeometry）
     const edgesGeo = new EdgesGeometry(coreGeo, 22);
     this.wireframeMaterial = new LineBasicMaterial({
-      color: "#94a3b8",
+      color: "#e2e8f0",
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.36,
     });
     const coreWireframe = new LineSegments(edgesGeo, this.wireframeMaterial);
     this.rig.add(coreWireframe);
 
-    // 2. 原线圈（左支腿 X = -2.125，12 匝，细线径 tubeRadius = 0.054，蓝色）
+    // 2. 原线圈（左支腿 X = -2.125，12 匝，细线径 tubeRadius = 0.054，饱和电光钴蓝色）
     this.primaryCoilMaterial = new MeshStandardMaterial({
-      color: "#3b82f6",
+      color: "#2563eb",
       emissive: "#1d4ed8",
-      emissiveIntensity: 0.34,
-      metalness: 0.68,
-      roughness: 0.2,
+      emissiveIntensity: 0.28,
+      metalness: 0.78,
+      roughness: 0.18,
+      envMapIntensity: 1.25,
       transparent: true,
-      opacity: 0.92,
+      opacity: 0.94,
     });
     const primaryHelix = createSmoothCoilWithLeads({
       centerX: -2.125,
@@ -1021,9 +1035,9 @@ export class TransformerCoreModel {
       roughness: 0.38,
     });
     const tealRingMat = new MeshStandardMaterial({
-      color: "#14b8a6",
-      metalness: 0.3,
-      roughness: 0.38,
+      color: "#f59e0b",
+      metalness: 0.35,
+      roughness: 0.32,
     });
 
     const buildBindingPost = (x: number, y: number, ringMat: MeshStandardMaterial): Group => {
@@ -1058,15 +1072,16 @@ export class TransformerCoreModel {
     acPlate.position.set(-4.35, 0, 0.15);
     this.rig.add(acPlate);
 
-    // 3. 副线圈（右支腿 X = +2.125，4 匝，细线径 tubeRadius = 0.058，青色）
+    // 3. 副线圈（右支腿 X = +2.125，4 匝，细线径 tubeRadius = 0.058，暖琥珀金铜色，与原线圈冷蓝形成鲜明冷暖对比，彻底告别双冷色）
     this.secondaryCoilMaterial = new MeshStandardMaterial({
-      color: "#2dd4bf",
-      emissive: "#0d9488",
-      emissiveIntensity: 0.34,
-      metalness: 0.68,
-      roughness: 0.2,
+      color: "#f59e0b",
+      emissive: "#d97706",
+      emissiveIntensity: 0.26,
+      metalness: 0.82,
+      roughness: 0.18,
+      envMapIntensity: 1.3,
       transparent: true,
-      opacity: 0.92,
+      opacity: 0.94,
     });
     const secondaryHelix = createSmoothCoilWithLeads({
       centerX: 2.125,
@@ -1163,7 +1178,7 @@ export class TransformerCoreModel {
     this.rig.add(this.primaryParticleMesh);
 
     this.secondaryParticleMat = new MeshBasicMaterial({
-      color: "#ccfbf1",
+      color: "#fef3c7",
       transparent: true,
       opacity: 0,
     });
@@ -1194,51 +1209,51 @@ export class TransformerCoreModel {
     this.rig.add(this.eddyGroup);
     this.eddyGroup.visible = false;
 
-    // 铁芯左支腿内部泛红光热核（体现涡流与磁滞产热）
+    // 铁芯上横轭内部很淡的红色热辉光核（只在铁芯内部，铁芯表面绝不整块发红！）
     this.ironGlowMat = new MeshBasicMaterial({
       color: "#ef4444",
       transparent: true,
       opacity: 0,
       depthWrite: false,
     });
-    const leftLegGlow = new Mesh(new CylinderGeometry(0.42, 0.42, 2.6, 20), this.ironGlowMat);
-    leftLegGlow.position.set(-2.125, 0.4, 0);
     const topYokeGlow = new Mesh(
-      new CylinderGeometry(0.38, 0.38, 2.6, 20).rotateZ(Math.PI / 2),
+      new CylinderGeometry(0.32, 0.32, 2.55, 24).rotateZ(Math.PI / 2),
       this.ironGlowMat,
     );
-    topYokeGlow.position.set(-0.9, 1.62, 0);
-    this.eddyGroup.add(leftLegGlow, topYokeGlow);
+    topYokeGlow.position.set(0, 1.625, 0);
+    this.eddyGroup.add(topYokeGlow);
 
-    // 在铁芯左支腿横截面上（y = 0.25, 0.72, 1.18）布置 3 层水平涡旋电场/涡流同心环（带旋转箭头）
-    const eddyConeGeo = new ConeGeometry(0.055, 0.15, 12);
-    for (const yPos of [0.22, 0.72, 1.18]) {
-      for (const radius of [0.24, 0.42]) {
-        const ringGeo = new TorusGeometry(radius, 0.018, 10, 36).rotateX(Math.PI / 2);
-        const ringMat = new MeshBasicMaterial({
-          color: radius < 0.3 ? "#fbbf24" : "#f87171",
-          transparent: true,
-          opacity: 0,
-          depthWrite: false,
-        });
-        const ringMesh = new Mesh(ringGeo, ringMat);
-        ringMesh.position.set(-2.125, yPos, 0);
-        this.eddyGroup.add(ringMesh);
+    // 在铁芯上横轭内部（y = 1.625，x = -0.82, 0, +0.82）布置 3 个克制干净的闭合涡流环：
+    // 细线（tube = 0.013）、橙红 #f97316 / #ef4444，环平面在 YZ 平面（严格与沿 X 轴的磁通方向垂直），带楞次定律方向箭头
+    const eddyConeGeo = new ConeGeometry(0.044, 0.13, 12);
+    const xPositions = [-0.82, 0, 0.82];
+    for (let i = 0; i < xPositions.length; i += 1) {
+      const xPos = xPositions[i];
+      const radius = 0.33;
+      const ringGeo = new TorusGeometry(radius, 0.013, 12, 40).rotateY(Math.PI / 2);
+      const ringMat = new MeshBasicMaterial({
+        color: i === 1 ? "#ef4444" : "#f97316",
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+      });
+      const ringMesh = new Mesh(ringGeo, ringMat);
+      ringMesh.position.set(xPos, 1.625, 0);
+      this.eddyGroup.add(ringMesh);
 
-        const arrowMat = new MeshBasicMaterial({
-          color: "#fef08a",
-          transparent: true,
-          opacity: 0,
-          depthWrite: false,
-        });
-        const arrows: { mesh: Mesh; baseAngle: number; radius: number; y: number }[] = [];
-        for (const baseAngle of [0, Math.PI]) {
-          const arrowMesh = new Mesh(eddyConeGeo, arrowMat);
-          arrows.push({ mesh: arrowMesh, baseAngle, radius, y: yPos });
-          this.eddyGroup.add(arrowMesh);
-        }
-        this.eddyLoops.push({ ringMat, arrowMat, arrows });
+      const arrowMat = new MeshBasicMaterial({
+        color: "#f97316",
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+      });
+      const arrows: { mesh: Mesh; baseAngle: number; radius: number; x: number }[] = [];
+      for (const baseAngle of [0.25, Math.PI + 0.25]) {
+        const arrowMesh = new Mesh(eddyConeGeo, arrowMat);
+        arrows.push({ mesh: arrowMesh, baseAngle, radius, x: xPos });
+        this.eddyGroup.add(arrowMesh);
       }
+      this.eddyLoops.push({ ringMat, arrowMat, arrows });
     }
   }
 
@@ -1492,9 +1507,9 @@ export class TransformerCoreModel {
     this.coreMaterial.depthWrite = pose.coreOpacity > 0.72;
     this.wireframeMaterial.opacity = pose.wireframeOpacity;
 
-    // 铁损：铁芯泛红微光（铁芯不红时为 0）
-    this.coreMaterial.emissive.set(pose.ironHeatAlpha > 0.01 ? "#dc2626" : "#000000");
-    this.coreMaterial.emissiveIntensity = pose.ironHeatAlpha * 0.52;
+    // 铁芯表面始终保持亮银钢金属本色（绝不整块变红！铁损的红光只存在于铁芯内部的 ironGlowMat）
+    this.coreMaterial.emissive.set("#000000");
+    this.coreMaterial.emissiveIntensity = 0;
 
     this.primaryCoilMaterial.opacity = pose.primaryCoilOpacity;
     this.primaryCoilMaterial.depthWrite = pose.primaryCoilOpacity > 0.75;
@@ -1520,13 +1535,13 @@ export class TransformerCoreModel {
       this.secondaryCoilMaterial.emissive.set("#e11d48");
       this.secondaryCoilMaterial.emissiveIntensity = 0.34 + pose.copperHeatAlpha * 0.68;
     } else {
-      this.primaryCoilMaterial.color.set("#3b82f6");
+      this.primaryCoilMaterial.color.set("#2563eb");
       this.primaryCoilMaterial.emissive.set(primaryFlashBoost > 0.1 ? "#93c5fd" : "#1d4ed8");
-      this.primaryCoilMaterial.emissiveIntensity = 0.34 + primaryFlashBoost;
+      this.primaryCoilMaterial.emissiveIntensity = 0.28 + primaryFlashBoost;
 
-      this.secondaryCoilMaterial.color.set("#2dd4bf");
-      this.secondaryCoilMaterial.emissive.set(secondaryFlashBoost > 0.1 ? "#99f6e4" : "#0d9488");
-      this.secondaryCoilMaterial.emissiveIntensity = 0.34 + secondaryFlashBoost;
+      this.secondaryCoilMaterial.color.set("#f59e0b");
+      this.secondaryCoilMaterial.emissive.set(secondaryFlashBoost > 0.1 ? "#fde68a" : "#d97706");
+      this.secondaryCoilMaterial.emissiveIntensity = 0.26 + secondaryFlashBoost;
     }
 
     this.resistorPinMaterial.opacity = pose.resistorPinAlpha;
@@ -1560,23 +1575,25 @@ export class TransformerCoreModel {
       }
     }
 
-    // P10 铁损：铁芯内部涡旋电场/涡流环与泛红光核
+    // P10 铁损：铁芯上横轭内部 3 个垂直于磁通方向的闭合涡流环 + 铁芯内部很淡的红热辉光
     this.eddyGroup.visible = pose.eddyLoopAlpha > 0.005 || pose.ironHeatAlpha > 0.005;
     if (this.eddyGroup.visible) {
-      this.ironGlowMat.opacity = pose.ironHeatAlpha * 0.38;
-      const eddyAngleOffset = acPhase * 0.85;
+      this.ironGlowMat.opacity = pose.ironHeatAlpha * 0.22;
+      // 楞次定律：涡流方向由 -dΦ/dt 决定（即 -cos(acPhase) 的符号），环平面在 YZ 平面，垂直于上横轭 X 轴磁通方向
+      const lenzSign = Math.cos(acPhase) >= 0 ? -1 : 1;
+      const eddyAngleOffset = acPhase * 0.65;
       for (const loop of this.eddyLoops) {
         loop.ringMat.opacity = pose.eddyLoopAlpha * 0.88;
         loop.arrowMat.opacity = pose.eddyLoopAlpha * 0.96;
         for (const arr of loop.arrows) {
-          const theta = arr.baseAngle + dirSign * eddyAngleOffset;
-          const ax = -2.125 + arr.radius * Math.cos(theta);
+          const theta = arr.baseAngle + lenzSign * eddyAngleOffset;
+          const ay = 1.625 + arr.radius * Math.cos(theta);
           const az = arr.radius * Math.sin(theta);
-          arr.mesh.position.set(ax, arr.y, az);
+          arr.mesh.position.set(arr.x, ay, az);
           const tangent = new Vector3(
-            -Math.sin(theta) * dirSign,
             0,
-            Math.cos(theta) * dirSign,
+            -Math.sin(theta) * lenzSign,
+            Math.cos(theta) * lenzSign,
           ).normalize();
           quat.setFromUnitVectors(this.upVec, tangent);
           arr.mesh.quaternion.copy(quat);
@@ -1659,6 +1676,8 @@ export class TransformerCoreModel {
       }
     });
 
+    this.pmremGenerator?.dispose();
+    this.pmremGenerator = null;
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }

@@ -206,12 +206,12 @@ onBeforeUnmount(() => {
           <polyline
             :points="`${corePt.x},${corePt.y} ${corePt.x + 24},${corePt.y - 42} ${corePt.x + 76},${corePt.y - 42}`"
             fill="none"
-            stroke="var(--c-accent)"
+            stroke="#e2e8f0"
             stroke-width="1.6"
             stroke-dasharray="4 3"
           />
-          <circle :cx="corePt.x" :cy="corePt.y" r="3.5" fill="var(--c-accent)" />
-          <text :x="corePt.x + 84" :y="corePt.y - 37" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-accent)">闭合铁芯</text>
+          <circle :cx="corePt.x" :cy="corePt.y" r="3.5" fill="#e2e8f0" />
+          <text :x="corePt.x + 84" :y="corePt.y - 37" text-anchor="start" font-size="15" font-weight="700" fill="#e2e8f0">闭合铁芯</text>
         </g>
 
         <!-- 第 1 击：正视图下指到左线圈、右线圈的通用“线圈”标注（第 2 击隐藏） -->
@@ -229,12 +229,12 @@ onBeforeUnmount(() => {
           <polyline
             :points="`${rightPt.x},${rightPt.y} ${rightPt.x + 24},${rightPt.y + 52} ${rightPt.x + 62},${rightPt.y + 52}`"
             fill="none"
-            stroke="var(--c-physics)"
+            stroke="var(--c-accent)"
             stroke-width="1.6"
             stroke-dasharray="4 3"
           />
-          <circle :cx="rightPt.x" :cy="rightPt.y" r="3.5" fill="var(--c-physics)" />
-          <text :x="rightPt.x + 70" :y="rightPt.y + 57" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-physics)">线圈</text>
+          <circle :cx="rightPt.x" :cy="rightPt.y" r="3.5" fill="var(--c-accent)" />
+          <text :x="rightPt.x + 70" :y="rightPt.y + 57" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-accent)">线圈</text>
         </g>
 
         <!-- 第 2 击：模型向右旋转并放大左侧时，原线圈的引线与文字跟随 3D 模型同步旋转移动！ -->
@@ -255,12 +255,12 @@ onBeforeUnmount(() => {
           <polyline
             :points="`${rightPt.x},${rightPt.y} ${rightPt.x + 22},${rightPt.y + 52} ${rightPt.x + 54},${rightPt.y + 52}`"
             fill="none"
-            stroke="var(--c-physics)"
+            stroke="var(--c-accent)"
             stroke-width="1.8"
             stroke-dasharray="4 3"
           />
-          <circle :cx="rightPt.x" :cy="rightPt.y" r="3.8" fill="var(--c-physics)" />
-          <text :x="rightPt.x + 60" :y="rightPt.y + 57" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-physics)">副线圈（次级）</text>
+          <circle :cx="rightPt.x" :cy="rightPt.y" r="3.8" fill="var(--c-accent)" />
+          <text :x="rightPt.x + 60" :y="rightPt.y + 57" text-anchor="start" font-size="15" font-weight="700" fill="var(--c-accent)">副线圈（次级）</text>
         </g>
       </svg>
     </div>
@@ -275,7 +275,7 @@ onBeforeUnmount(() => {
         <span class="ts3-dot ts3-dot-gold" />
         <div>
           <div class="ts3-item-title">闭合铁芯</div>
-          <div class="ts3-item-desc">由涂有绝缘漆的硅钢片叠合而成，用来导磁、构成闭合磁路。</div>
+          <div class="ts3-item-desc">用来导磁、构成闭合磁路。</div>
         </div>
       </div>
 
@@ -378,11 +378,11 @@ onBeforeUnmount(() => {
 }
 
 .ts3-item-teal {
-  border-color: color-mix(in srgb, var(--c-physics) 42%, transparent);
+  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
 }
 
 .ts3-item-gold {
-  border-color: color-mix(in srgb, var(--c-accent) 45%, transparent);
+  border-color: rgb(226 232 240 / 35%);
 }
 
 .ts3-dot {
@@ -398,13 +398,13 @@ onBeforeUnmount(() => {
 }
 
 .ts3-dot-teal {
-  background: var(--c-physics);
-  box-shadow: 0 0 8px var(--c-physics);
+  background: var(--c-accent);
+  box-shadow: 0 0 8px var(--c-accent);
 }
 
 .ts3-dot-gold {
-  background: var(--c-accent);
-  box-shadow: 0 0 8px var(--c-accent);
+  background: #cbd5e1;
+  box-shadow: 0 0 8px #cbd5e1;
 }
 
 .ts3-item-title {

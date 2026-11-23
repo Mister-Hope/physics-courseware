@@ -32,15 +32,6 @@ const isCompact = computed(() => step >= 4);
 const showSummary = computed(() => step === 4);
 const showIdeal = computed(() => step >= 5);
 
-const stageBadgeText = computed(() => {
-  if (step === 1) return "铜损：原、副线圈内阻通电发热";
-  if (step === 2) return "铁损：铁芯局部特写 · 涡旋电场（涡流）与磁滞产热";
-  if (step === 3) return "漏磁：原边及铁芯转角磁感线散出";
-  if (step === 4) return "实际变压器：铜损 + 铁损 + 漏磁同时存在";
-  if (step >= 5) return "理想变压器：无漏磁 · 无损耗 · 无内阻";
-  return "实际变压器";
-});
-
 const hasWebGl = (): boolean => {
   try {
     const canvas = document.createElement("canvas");
@@ -166,10 +157,6 @@ onBeforeUnmount(() => {
           />
         </svg>
       </div>
-
-      <div class="tl-stage-badge" :class="{ 'is-ideal': showIdeal }">
-        {{ stageBadgeText }}
-      </div>
     </div>
 
     <!-- 右栏：三张损耗卡（C1~C3 展开带公式，C4~C5 收拢只留 6 个字）+ C4 一句话总结 + C5 理想变压器三条件与三公式 -->
@@ -197,12 +184,9 @@ onBeforeUnmount(() => {
         >
           <div class="tl-kicker">铁损</div>
           <template v-if="!isCompact">
-            <div class="tl-formula">
-              <Latex tex="P_{\text{铁}}=P_{\text{涡流}}+P_{\text{磁滞}}" />
-            </div>
+            <div class="tl-formula">铁芯会发热</div>
             <div class="tl-note">
-              交变磁场在铁芯中激起涡旋电场（涡流）并反复磁化铁芯，产生热量，降低效率
-              <Latex tex="P_2<P_1" />。
+              交变磁场在铁芯中产生涡流，所以铁芯会发热，降低效率 <Latex tex="P_2<P_1" />。
             </div>
           </template>
         </div>
@@ -301,33 +285,6 @@ onBeforeUnmount(() => {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.tl-stage-badge {
-  position: absolute;
-  bottom: 0.45rem;
-  left: 50%;
-
-  padding: 0.26rem 0.85rem;
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 999px;
-
-  background: rgb(9 13 26 / 78%);
-  color: var(--c-text-dim);
-
-  font-weight: 600;
-  font-size: 0.72rem;
-  white-space: nowrap;
-
-  backdrop-filter: blur(10px);
-  pointer-events: none;
-
-  transform: translateX(-50%);
-}
-
-.tl-stage-badge.is-ideal {
-  border-color: var(--c-accent-border);
-  color: var(--c-accent);
 }
 
 .tl-right {
