@@ -45,21 +45,33 @@ const isAfter = computed(() => state === "after");
     <g v-if="isDuring">
       <CourseArrow :from="{ x: 300, y: 200 }" :to="{ x: 368, y: 200 }" stroke="var(--c-danger)" stroke-width="2.6" />
       <CourseArrow :from="{ x: 104, y: 200 }" :to="{ x: 36, y: 200 }" stroke="var(--c-danger)" stroke-width="2.6" />
-      <text x="382" y="195" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">F<tspan dy="4" font-size="12">1</tspan></text>
-      <text x="22" y="195" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">F<tspan dy="4" font-size="12">2</tspan></text>
+      <text x="382" y="195" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">
+        F<tspan dy="4" font-size="12">1</tspan>
+      </text>
+      <text x="22" y="195" fill="var(--c-danger)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">
+        F<tspan dy="4" font-size="12">2</tspan>
+      </text>
     </g>
     <!-- 速度（画在物体上方，长度示意快慢） -->
     <g v-if="!isAfter">
       <CourseArrow :from="{ x: 252, y: 112 }" :to="{ x: 316, y: 112 }" stroke="var(--c-accent)" stroke-width="2.4" />
       <CourseArrow :from="{ x: 58, y: 112 }" :to="{ x: 164, y: 112 }" stroke="var(--c-accent)" stroke-width="2.4" />
-      <text x="284" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">v<tspan dy="4" font-size="12">1</tspan></text>
-      <text x="111" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">v<tspan dy="4" font-size="12">2</tspan></text>
+      <text x="284" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">
+        v<tspan dy="4" font-size="12">1</tspan>
+      </text>
+      <text x="111" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">
+        v<tspan dy="4" font-size="12">2</tspan>
+      </text>
     </g>
     <g v-else>
       <CourseArrow :from="{ x: 252, y: 112 }" :to="{ x: 344, y: 112 }" stroke="var(--c-accent)" stroke-width="2.4" />
       <CourseArrow :from="{ x: 58, y: 112 }" :to="{ x: 132, y: 112 }" stroke="var(--c-accent)" stroke-width="2.4" />
-      <text x="298" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">v<tspan dy="4" font-size="12">1</tspan><tspan dy="-4" font-size="18">′</tspan></text>
-      <text x="95" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">v<tspan dy="4" font-size="12">2</tspan><tspan dy="-4" font-size="18">′</tspan></text>
+      <text x="298" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">
+        v<tspan dy="4" font-size="12">1</tspan><tspan dy="-4" font-size="18">′</tspan>
+      </text>
+      <text x="95" y="102" fill="var(--c-accent)" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">
+        v<tspan dy="4" font-size="12">2</tspan><tspan dy="-4" font-size="18">′</tspan>
+      </text>
     </g>
   </svg>
 </template>
