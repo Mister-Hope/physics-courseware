@@ -1,5 +1,65 @@
-/* ═══════════════════════════════════════════════
-   实验：验证动量守恒定律 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 本课样式：只放共享原子没有的；颜色/间距 token 一律走 var() */
+
+/* 封面：课题名 12 字，3.5rem 会折行 → 压到 2.7rem */
+.cover-title {
+  font-size: 2.7rem !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* 图的三档宽度 */
+.fig-fit {
+  width: 94%;
+  margin-inline: auto;
+}
+
+.fig-mid {
+  width: 84%;
+  margin-inline: auto;
+}
+
+.fig-sm {
+  width: 74%;
+  margin-inline: auto;
+}
+
+/* 居中公式行 */
+.eq-line {
+  text-align: center;
+  font-size: 1.16rem;
+  line-height: 1.65;
+}
+
+/* 分步说明行：每行常驻、只切换可见性，点击时不顶跑 */
+.flow-line {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  min-height: 1.65rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.flow-line strong {
+  font-weight: 700;
+  color: var(--c-accent-light);
+}
+
+.flow-dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.55rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+}
+
+.flow-dot.is-blue {
+  background: var(--c-accent-2);
+}
+
+/* 表下注释 */
+.table-note {
+  margin-top: 0.4rem;
+  font-size: 0.86rem;
+  color: var(--c-text-dim);
+}
