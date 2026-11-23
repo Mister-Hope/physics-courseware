@@ -201,6 +201,8 @@ catalogs:
       specifier: 3.5.45
       version: 3.5.45
 
+packageExtensionsChecksum: sha256-/Em21y2hhuacBYyfD+0C0q6ILOia7Dal8+ScXo6EsEo=
+
 importers:
 
   .:
@@ -6751,6 +6753,7 @@ snapshots:
       '@unocss/extractor-mdc': 66.13.0
       '@unocss/preset-mini': 66.13.0
       '@unocss/reset': 66.13.0
+      '@vue/reactivity': 3.5.45
       '@vueuse/core': 15.0.0(vue@3.5.45(typescript@6.0.3))
       '@vueuse/math': 15.0.0(vue@3.5.45(typescript@6.0.3))
       '@vueuse/motion': 3.0.3(vue@3.5.45(typescript@6.0.3))
@@ -6832,6 +6835,7 @@ snapshots:
       '@unocss/extractor-mdc': 66.13.0
       '@unocss/preset-mini': 66.13.0
       '@unocss/reset': 66.13.0
+      '@vue/reactivity': 3.5.45
       '@vueuse/core': 15.0.0(vue@3.5.45(typescript@6.0.3))
       '@vueuse/math': 15.0.0(vue@3.5.45(typescript@6.0.3))
       '@vueuse/motion': 3.0.3(vue@3.5.45(typescript@6.0.3))
