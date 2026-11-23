@@ -612,8 +612,8 @@
           "slug": "o1-4.5-light-diffraction",
           "title": "光的衍射",
           "chapter": "§4.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识单缝衍射与圆孔衍射图样，理解明显衍射的条件，比较衍射与干涉的图样特征，了解衍射在分辨率中的应用。",
+          "tags": ["光的衍射", "单缝衍射", "圆孔衍射", "分辨率"]
         },
         {
           "slug": "o1-4.6-polarization-and-laser",

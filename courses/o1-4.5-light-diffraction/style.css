@@ -13,40 +13,50 @@
 .pt2 {
   gap: 0.55rem;
 }
+
 .p2-ask {
   font-size: 1.28rem;
   line-height: 1.45;
   text-align: center;
 }
+
 .p2-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
 }
+
 .p2-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.2rem;
+  align-items: center;
+
   padding: 0.7rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-panel);
+
   text-align: center;
 }
+
 .p2-icon {
   color: var(--c-accent);
 }
+
 .p2-title {
-  font-size: 1.05rem;
-  font-weight: 700;
   color: var(--c-text);
+  font-weight: 700;
+  font-size: 1.05rem;
 }
+
 .p2-text {
+  color: var(--c-text-dim);
   font-size: 0.86rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
+
 .pt2 .tip-hint {
   font-size: 0.86rem;
 }
@@ -55,47 +65,58 @@
 .pt3 {
   gap: 0.2rem;
 }
+
 .p3-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2rem;
   align-items: start;
 }
+
 .p3-case {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.2rem;
+  align-items: center;
+
   padding: 0.4rem 0.5rem 0.5rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-panel);
 }
+
 .p3-case svg {
+  display: block;
   width: 100%;
   max-width: 270px;
   height: auto;
-  display: block;
 }
+
 .p3-tag {
-  font-size: 0.9rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 0.9rem;
 }
+
 .p3-note {
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-height: 2rem;
+
+  color: var(--c-text-dim);
+
   font-size: 0.8rem;
   line-height: 1.4;
-  color: var(--c-text-dim);
   text-align: center;
 }
+
 .p3-conclusion {
-  font-size: 1.15rem;
-  font-weight: 700;
   color: var(--c-accent-2);
+  font-weight: 700;
+  font-size: 1.15rem;
   text-align: center;
 }
 
@@ -103,26 +124,33 @@
 .pt4 {
   gap: 0.45rem;
 }
+
 .p4-pattern svg {
+  display: block;
+
   width: 100%;
   max-width: 780px;
   height: auto;
-  display: block;
   margin: 0 auto;
 }
+
 .p4-notes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
+
 .p4-note {
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-height: 2.2rem;
+
+  color: var(--c-text);
+
   font-size: 0.98rem;
   line-height: 1.45;
-  color: var(--c-text);
   text-align: center;
 }
 
@@ -130,40 +158,50 @@
 .pt5 {
   gap: 0.45rem;
 }
+
 .p5-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
 }
+
 .p5-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.2rem;
+  align-items: center;
+
   padding: 0.5rem 0.8rem 0.6rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-panel);
 }
+
 .p5-card svg {
+  display: block;
   width: 100%;
   max-width: 280px;
   height: auto;
-  display: block;
 }
+
 .p5-tag {
-  font-size: 0.95rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 0.95rem;
 }
+
 .p5-note {
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-height: 2.6rem;
+
+  color: var(--c-text-dim);
+
   font-size: 0.82rem;
   line-height: 1.4;
-  color: var(--c-text-dim);
   text-align: center;
 }
 
@@ -171,42 +209,54 @@
 .pt6 {
   gap: 0.45rem;
 }
+
 .pt6 .ask {
   font-size: 1.05rem;
 }
+
 .p6-rows {
   display: flex;
   flex-direction: column;
   gap: 0;
+
   padding: 0.5rem 1.1rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-panel);
 }
+
 .p6-row {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   gap: 1.2rem;
   align-items: center;
+
   padding: 0.55rem 0.2rem;
   border-bottom: 1px solid var(--c-border);
+
   font-size: 0.95rem;
 }
+
 .p6-row:last-child {
   border-bottom: 0;
 }
+
 .p6-size {
-  font-weight: 700;
   color: var(--c-text);
+  font-weight: 700;
 }
+
 .p6-text {
-  line-height: 1.4;
   color: var(--c-text-dim);
+  line-height: 1.4;
 }
+
 .p6-strong .p6-size,
 .p6-strong .p6-text {
   color: var(--c-accent-2);
 }
+
 .pt6 .tip-hint {
   font-size: 0.86rem;
 }
@@ -215,11 +265,13 @@
 .pt7 {
   gap: 0.4rem;
 }
+
 .p7-demo {
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
 }
+
 .p7-demo > * {
   width: 100%;
 }
@@ -228,17 +280,20 @@
 .pt8 {
   gap: 0.5rem;
 }
+
 .p8-pattern svg {
+  display: block;
+
   width: 100%;
   max-width: 780px;
   height: auto;
-  display: block;
   margin: 0 auto;
 }
+
 .p8-note {
+  color: var(--c-text);
   font-size: 1.02rem;
   line-height: 1.5;
-  color: var(--c-text);
   text-align: center;
 }
 
@@ -246,40 +301,50 @@
 .pt9 {
   gap: 0.4rem;
 }
+
 .p9-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2rem;
 }
+
 .p9-case {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.25rem;
+  align-items: center;
+
   padding: 0.55rem 0.6rem 0.65rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-panel);
 }
+
 .p9-case svg {
+  display: block;
   width: 100%;
   max-width: 430px;
   height: auto;
-  display: block;
 }
+
 .p9-label {
-  font-size: 1rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1rem;
 }
+
 .p9-note {
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-height: 2.4rem;
+
+  color: var(--c-text-dim);
+
   font-size: 0.84rem;
   line-height: 1.4;
-  color: var(--c-text-dim);
   text-align: center;
 }
 
@@ -287,23 +352,28 @@
 .pt10 {
   gap: 0.35rem;
 }
+
 .p10-fig svg {
+  display: block;
+
   width: 100%;
   max-width: 560px;
   height: auto;
-  display: block;
   margin: 0 auto;
 }
+
 .p10-notes {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
 }
+
 .p10-note {
+  color: var(--c-text-dim);
   font-size: 0.9rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
+
 .p10-note::before {
   content: "·";
   margin-right: 0.35rem;
@@ -314,32 +384,39 @@
 .pt11 {
   gap: 0.4rem;
 }
+
 .p11-grid {
   grid-template-columns: 0.9fr 1.1fr;
   gap: 1.5rem;
   align-items: center;
 }
+
 .p11-fig svg {
+  display: block;
+
   width: 100%;
   max-width: 360px;
   height: auto;
-  display: block;
   margin: 0 auto;
 }
+
 .p11-side {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.35rem;
+  justify-content: center;
 }
+
 .p11-side .ask {
   font-size: 0.98rem;
 }
+
 .p11-line {
+  color: var(--c-text-dim);
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
 }
+
 .pt11 .tip-hint {
   font-size: 0.82rem;
 }
@@ -348,33 +425,40 @@
 .pt12 {
   gap: 0.5rem;
 }
+
 .p12-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
 }
+
 .p12-card {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   min-height: 9rem;
   padding: 0.9rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-panel);
 }
+
 .p12-icon {
   color: var(--c-accent);
 }
+
 .p12-title {
-  font-size: 1.05rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.05rem;
 }
+
 .p12-text {
+  color: var(--c-text-dim);
   font-size: 0.88rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
 }
 
 /* ── 第 13 页：三角形孔（题目图栏） ───────────── */
@@ -383,20 +467,23 @@
   max-width: 340px;
   margin: 0 auto;
 }
+
 .p13-fig svg {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
+
 .p13-analysis {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .p13-line {
+  color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
 }
 
 /* ── 第 14–17 页：练习解析 ───────────────────── */
@@ -408,28 +495,32 @@
   flex-direction: column;
   gap: 0.4rem;
 }
+
 .p14-line,
 .p15-line,
 .p16-line,
 .p17-line {
+  color: var(--c-text-dim);
   font-size: 0.95rem;
   line-height: 1.55;
-  color: var(--c-text-dim);
 }
 
 /* ── 第 18 页：课堂小结 ──────────────────────── */
 .pt18 {
   gap: 0.4rem;
 }
+
 .p18-list {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
 }
+
 .p18-item {
   font-size: 0.94rem;
   line-height: 1.5;
 }
+
 .p18-item .step-no {
   flex: 0 0 auto;
 }

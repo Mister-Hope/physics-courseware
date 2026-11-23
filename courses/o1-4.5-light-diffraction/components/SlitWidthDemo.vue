@@ -73,9 +73,10 @@ const statusText = computed(() => {
 
 .swd-pattern {
   display: flex;
+  gap: 0.45rem;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
+
   height: 6.8rem;
 }
 
@@ -95,10 +96,12 @@ const statusText = computed(() => {
 
 .swd-meta {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   gap: 0.8rem;
+  align-items: baseline;
+  justify-content: space-between;
+
   color: var(--c-text-dim);
+
   font-size: 0.82rem;
 }
 
