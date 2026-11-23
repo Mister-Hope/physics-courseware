@@ -1,5 +1,48 @@
-/* ═══════════════════════════════════════════════
-   电磁场与电磁波 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 4.2 电磁场与电磁波 —— 本课特有样式 */
+
+/* E / B 的课堂配色：全文与图内一致（电场 = 青绿，磁场 = 金） */
+.em-e {
+  color: var(--c-physics);
+  font-weight: 700;
+}
+
+.em-b {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 引课页的大号问题 */
+.em-hook {
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+/* 第 5 页：麦克斯韦的两条基本观点 */
+.em-laws {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.em-law-row {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+
+  font-size: 1.32rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.em-law-row .em-produce {
+  color: var(--c-text-dim);
+
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* 第 3 页：图占左栏更多宽度 */
+.em-row-fig {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
