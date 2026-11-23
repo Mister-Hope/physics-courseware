@@ -544,6 +544,41 @@
           "chapter": "§3.3",
           "description": "从手表磁吸充电与互感切入，认识闭合铁芯与原、副线圈，借可拆变压器实验测电压比；用三维分步推导两端电压方程、理想电压比与电流比，再分析铜损、涡流、漏磁并回看无线充电。",
           "tags": ["变压器", "互感", "电压与匝数比", "理想变压器", "无线充电"]
+        },
+        {
+          "slug": "o2-3.4-power-transmission",
+          "title": "电能的输送",
+          "chapter": "§3.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o2-4.1-electromagnetic-oscillation",
+          "title": "电磁振荡",
+          "chapter": "§4.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o2-4.2-electromagnetic-field-and-wave",
+          "title": "电磁场与电磁波",
+          "chapter": "§4.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o2-4.3-radio-wave-transmission-reception",
+          "title": "无线电波的发射和接收",
+          "chapter": "§4.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o2-4.4-electromagnetic-spectrum",
+          "title": "电磁波谱",
+          "chapter": "§4.4",
+          "description": "仍在制作中",
+          "tags": []
         }
       ]
     },
