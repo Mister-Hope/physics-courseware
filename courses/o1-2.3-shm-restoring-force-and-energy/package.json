@@ -1,0 +1,18 @@
+{
+  "name": "shm-restoring-force-and-energy-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o1-2.3-shm-restoring-force-and-energy/",
+    "dev": "slidev --base /o1-2.3-shm-restoring-force-and-energy/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
+  }
+}

@@ -1570,6 +1570,489 @@ importers:
         specifier: 'catalog:'
         version: 3.5.46(typescript@6.0.3)
 
+  courses/o1-1.1-momentum:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-1.2-impulse-momentum-theorem:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-1.3-conservation-of-momentum:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-1.4-experiment-momentum-conservation:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-1.5-elastic-and-inelastic-collisions:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-1.6-recoil-and-rocket:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-2.1-simple-harmonic-motion:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-2.2-describing-simple-harmonic-motion:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-2.3-shm-restoring-force-and-energy:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-2.4-simple-pendulum:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-2.5-experiment-pendulum-g:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-2.6-forced-vibration-and-resonance:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-3.1-formation-of-waves:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-3.2-describing-waves:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-3.3-wave-reflection-refraction-diffraction:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-3.4-wave-interference:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-3.5-doppler-effect:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-4.1-refraction-of-light:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-4.2-total-internal-reflection:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-4.3-light-interference:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-4.4-double-slit-experiment:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-4.5-light-diffraction:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o1-4.6-polarization-and-laser:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
   courses/o2-1.1-ampere-force:
     dependencies:
       '@iconify-json/mdi':
@@ -1982,6 +2465,489 @@ importers:
         version: 3.5.45(typescript@6.0.3)
 
   courses/o2-5.3-sensor-auto-control:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-1.1-kinetic-theory-basics:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-1.2-oil-film-experiment:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-1.3-molecular-speed-distribution:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-1.4-molecular-kinetic-and-potential-energy:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-2.1-temperature-and-temperature-scale:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-2.2-isothermal-process-of-gas:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-2.3-isobaric-and-isochoric-processes:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-2.4-solids:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-2.5-liquids:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-3.1-work-heat-and-internal-energy:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-3.2-first-law-of-thermodynamics:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-3.3-law-of-energy-conservation:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-3.4-second-law-of-thermodynamics:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-4.1-planck-blackbody-radiation:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-4.2-photoelectric-effect:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-4.3-nuclear-model-of-atom:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-4.4-hydrogen-spectrum-and-bohr-model:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-4.5-wave-particle-duality-and-quantum-mechanics:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-5.1-composition-of-nucleus:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-5.2-radioactive-decay:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-5.3-nuclear-force-and-binding-energy:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-5.4-nuclear-fission-and-fusion:
+    dependencies:
+      '@iconify-json/mdi':
+        specifier: 'catalog:'
+        version: 1.2.3
+      '@iconify/vue':
+        specifier: 'catalog:'
+        version: 5.0.5(vue@3.5.45(typescript@6.0.3))
+      '@slidev/cli':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@types/markdown-it@14.2.0)(@types/node@22.20.5)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(playwright-chromium@1.65.1)(postcss@8.5.33)(rolldown@1.3.3)(srvx@1.0.8)
+      '@slidev/client':
+        specifier: 'catalog:'
+        version: 53.1.0(@nuxt/kit@3.21.11)(@oxc-project/types@0.159.0)(@vitejs/devtools-kit@0.7.6(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)))(@vue/compiler-sfc@3.5.45)(cac@7.1.0)(crossws@0.4.17(srvx@1.0.8))(lightningcss@1.33.0)(markdown-it@14.3.3)(oxc-parser@0.153.0)(rolldown@1.3.3)(srvx@1.0.8)(vite@8.3.8(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+      '@slidev/theme-default':
+        specifier: 'catalog:'
+        version: 0.25.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.45(typescript@6.0.3)
+
+  courses/o3-5.5-elementary-particles:
     dependencies:
       '@iconify-json/mdi':
         specifier: 'catalog:'

@@ -1,0 +1,18 @@
+{
+  "name": "wave-reflection-refraction-diffraction-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o1-3.3-wave-reflection-refraction-diffraction/",
+    "dev": "slidev --base /o1-3.3-wave-reflection-refraction-diffraction/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
+  }
+}

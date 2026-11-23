@@ -1,0 +1,18 @@
+{
+  "name": "momentum-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o1-1.1-momentum/",
+    "dev": "slidev --base /o1-1.1-momentum/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
+  }
+}

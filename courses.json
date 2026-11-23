@@ -460,7 +460,169 @@
       "name": "选择性必修第一册",
       "shortName": "选必1",
       "slug": "xx1",
-      "courses": []
+      "courses": [
+        {
+          "slug": "o1-1.1-momentum",
+          "title": "动量",
+          "chapter": "§1.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-1.2-impulse-momentum-theorem",
+          "title": "动量定理",
+          "chapter": "§1.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-1.3-conservation-of-momentum",
+          "title": "动量守恒定律",
+          "chapter": "§1.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-1.4-experiment-momentum-conservation",
+          "title": "实验：验证动量守恒定律",
+          "chapter": "§1.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-1.5-elastic-and-inelastic-collisions",
+          "title": "弹性碰撞和非弹性碰撞",
+          "chapter": "§1.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-1.6-recoil-and-rocket",
+          "title": "反冲现象 火箭",
+          "chapter": "§1.6",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-2.1-simple-harmonic-motion",
+          "title": "简谐运动",
+          "chapter": "§2.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-2.2-describing-simple-harmonic-motion",
+          "title": "简谐运动的描述",
+          "chapter": "§2.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-2.3-shm-restoring-force-and-energy",
+          "title": "简谐运动的回复力和能量",
+          "chapter": "§2.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-2.4-simple-pendulum",
+          "title": "单摆",
+          "chapter": "§2.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-2.5-experiment-pendulum-g",
+          "title": "实验：用单摆测量重力加速度",
+          "chapter": "§2.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-2.6-forced-vibration-and-resonance",
+          "title": "受迫振动 共振",
+          "chapter": "§2.6",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-3.1-formation-of-waves",
+          "title": "波的形成",
+          "chapter": "§3.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-3.2-describing-waves",
+          "title": "波的描述",
+          "chapter": "§3.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-3.3-wave-reflection-refraction-diffraction",
+          "title": "波的反射、折射和衍射",
+          "chapter": "§3.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-3.4-wave-interference",
+          "title": "波的干涉",
+          "chapter": "§3.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-3.5-doppler-effect",
+          "title": "多普勒效应",
+          "chapter": "§3.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-4.1-refraction-of-light",
+          "title": "光的折射",
+          "chapter": "§4.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-4.2-total-internal-reflection",
+          "title": "全反射",
+          "chapter": "§4.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-4.3-light-interference",
+          "title": "光的干涉",
+          "chapter": "§4.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-4.4-double-slit-experiment",
+          "title": "实验：用双缝干涉测量光的波长",
+          "chapter": "§4.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-4.5-light-diffraction",
+          "title": "光的衍射",
+          "chapter": "§4.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o1-4.6-polarization-and-laser",
+          "title": "光的偏振 激光",
+          "chapter": "§4.6",
+          "description": "仍在制作中",
+          "tags": []
+        }
+      ]
     },
     {
       "name": "选择性必修第二册",
@@ -613,7 +775,169 @@
       "name": "选择性必修第三册",
       "shortName": "选必3",
       "slug": "xx3",
-      "courses": []
+      "courses": [
+        {
+          "slug": "o3-1.1-kinetic-theory-basics",
+          "title": "分子动理论的基本内容",
+          "chapter": "§1.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-1.2-oil-film-experiment",
+          "title": "实验：用油膜法估测油酸分子的大小",
+          "chapter": "§1.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-1.3-molecular-speed-distribution",
+          "title": "分子运动速率分布规律",
+          "chapter": "§1.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-1.4-molecular-kinetic-and-potential-energy",
+          "title": "分子动能和分子势能",
+          "chapter": "§1.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-2.1-temperature-and-temperature-scale",
+          "title": "温度和温标",
+          "chapter": "§2.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-2.2-isothermal-process-of-gas",
+          "title": "气体的等温变化",
+          "chapter": "§2.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-2.3-isobaric-and-isochoric-processes",
+          "title": "气体的等压变化和等容变化",
+          "chapter": "§2.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-2.4-solids",
+          "title": "固体",
+          "chapter": "§2.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-2.5-liquids",
+          "title": "液体",
+          "chapter": "§2.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-3.1-work-heat-and-internal-energy",
+          "title": "功、热和内能的改变",
+          "chapter": "§3.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-3.2-first-law-of-thermodynamics",
+          "title": "热力学第一定律",
+          "chapter": "§3.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-3.3-law-of-energy-conservation",
+          "title": "能量守恒定律",
+          "chapter": "§3.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-3.4-second-law-of-thermodynamics",
+          "title": "热力学第二定律",
+          "chapter": "§3.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-4.1-planck-blackbody-radiation",
+          "title": "普朗克黑体辐射理论",
+          "chapter": "§4.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-4.2-photoelectric-effect",
+          "title": "光电效应",
+          "chapter": "§4.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-4.3-nuclear-model-of-atom",
+          "title": "原子的核式结构模型",
+          "chapter": "§4.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-4.4-hydrogen-spectrum-and-bohr-model",
+          "title": "氢原子光谱和玻尔的原子模型",
+          "chapter": "§4.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-4.5-wave-particle-duality-and-quantum-mechanics",
+          "title": "粒子的波动性和量子力学的建立",
+          "chapter": "§4.5",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-5.1-composition-of-nucleus",
+          "title": "原子核的组成",
+          "chapter": "§5.1",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-5.2-radioactive-decay",
+          "title": "放射性元素的衰变",
+          "chapter": "§5.2",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-5.3-nuclear-force-and-binding-energy",
+          "title": "核力与结合能",
+          "chapter": "§5.3",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-5.4-nuclear-fission-and-fusion",
+          "title": "核裂变与核聚变",
+          "chapter": "§5.4",
+          "description": "仍在制作中",
+          "tags": []
+        },
+        {
+          "slug": "o3-5.5-elementary-particles",
+          "title": "“基本”粒子",
+          "chapter": "§5.5",
+          "description": "仍在制作中",
+          "tags": []
+        }
+      ]
     }
   ]
 }

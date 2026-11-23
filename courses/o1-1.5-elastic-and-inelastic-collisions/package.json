@@ -1,0 +1,18 @@
+{
+  "name": "elastic-and-inelastic-collisions-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o1-1.5-elastic-and-inelastic-collisions/",
+    "dev": "slidev --base /o1-1.5-elastic-and-inelastic-collisions/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
+  }
+}

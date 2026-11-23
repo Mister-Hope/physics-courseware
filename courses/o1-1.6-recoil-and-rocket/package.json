@@ -1,0 +1,18 @@
+{
+  "name": "recoil-and-rocket-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o1-1.6-recoil-and-rocket/",
+    "dev": "slidev --base /o1-1.6-recoil-and-rocket/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
+  }
+}

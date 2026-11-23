@@ -1,0 +1,18 @@
+{
+  "name": "nuclear-fission-and-fusion-courseware",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "slidev build --base /o3-5.4-nuclear-fission-and-fusion/",
+    "dev": "slidev --base /o3-5.4-nuclear-fission-and-fusion/",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "catalog:",
+    "@iconify/vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/theme-default": "catalog:",
+    "vue": "catalog:"
+  }
+}
