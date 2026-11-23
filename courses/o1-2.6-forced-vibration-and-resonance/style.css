@@ -1,5 +1,121 @@
 /* ═══════════════════════════════════════════════
    受迫振动 共振 — 课程特有样式
    通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   由共享 addon（../workspace/shared）自动注入，此处仅放置本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 引课页 */
+.fw-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.fw-intro-q {
+  max-width: 27em;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+.fw-intro-figure {
+  width: 100%;
+  max-width: 320px;
+}
+.fw-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  width: 100%;
+  max-width: 820px;
+}
+.fw-intro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-align: center;
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.fw-intro-item .icon-lg {
+  color: var(--c-accent);
+}
+
+/* 图与坐标图 */
+.fw-figure {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+}
+.fw-figure-sm {
+  width: 100%;
+  max-width: 380px;
+  margin-inline: auto;
+}
+.fw-figure-wide {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.fw-chart {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 表格 */
+.fw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.fw-table th,
+.fw-table td {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--c-line);
+  text-align: left;
+  vertical-align: top;
+}
+.fw-table th {
+  background: var(--c-surface);
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+/* 公式行 */
+.fw-formula {
+  text-align: center;
+  font-size: 1.35rem;
+  color: var(--c-accent);
+}
+
+/* 交互区 */
+.fw-explorer {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+.fw-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+.fw-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem 0.9rem;
+  font-size: 0.92rem;
+}
+.fw-status {
+  min-height: 1.9rem;
+  display: flex;
+  align-items: center;
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+}

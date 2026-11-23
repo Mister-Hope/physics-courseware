@@ -20,30 +20,115 @@ defaults:
   transition: fade
 chapter-no: "2.6"
 chapter: "第二章 机械振动"
+subtitle: "固有频率 · 受迫振动 · 共振"
 ---
 
-<!-- 封面装饰：占位图形，请按本课主题替换（坐标轴 / 标签规范见 AGENTS.md「四、技术约定与已知坑」） -->
-<svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
-  <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
-  <circle cx="118" cy="32" r="5" fill="#e2a846"/>
-  <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
-</svg>
+<CoverDecorationSvg />
 
 ---
-layout: base-flex
+title: "洗盆里的水花"
 ---
 
-## 待补充：第 1 页内容
-
-<div class="card">
-
-本页是骨架占位。先把 content/思路.md 的授课思路整理成页序，再逐页替换这里的内容。
-
+<div class="page-grow fw-intro">
+  <div class="fw-intro-q">用手掌摩擦盆耳，为什么盆会发出嗡嗡声，水花还会溅起来？</div>
+  <div class="fw-intro-figure"><WashBasinSvg /></div>
+  <div class="fw-intro-grid">
+    <div class="fw-intro-item"><mdi-autorenew class="icon-lg" /><div>振动为什么会停？</div></div>
+    <div class="fw-intro-item"><mdi-hand-back-right class="icon-lg" /><div>怎样让振动持续？</div></div>
+    <div class="fw-intro-item"><mdi-chart-bell-curve class="icon-lg" /><div>为什么某种节奏下水花最大？</div></div>
+  </div>
 </div>
 
-<!--
-  新增页面：在下方用 --- 分隔，每页先抛问题、再 v-click 呈现答案。
-  公式写在 Markdown 段落里可用 $...$；HTML 块（card 内的 div）里必须改用 <Latex tex="..." />。
-  图标用 <mdi-xxx />，不要用 emoji。
--->
+---
+clicks: 1
+clickAnimation: none
+---
+
+# 固有振动与固有频率
+
+<div class="page-grow">
+  <div class="ask">没有外力时，振动的快慢由什么决定？</div>
+  <div class="half-grid">
+    <div class="fw-figure"><SpringOscillatorSvg :show-labels="false" /></div>
+    <div class="stack">
+      <div><b>固有振动</b>：弹簧振子或单摆在没有外力干预时的振动。</div>
+      <div><b>固有频率</b>：固有振动的频率，只由系统自身的性质决定。</div>
+      <div class="mini-note">单摆：<Latex tex="f_0=\frac{1}{2\pi}\sqrt{\frac{g}{L}}" />，摆长越长，<Latex tex="f_0" /> 越小。</div>
+      <div class="mini-note">弹簧振子：<Latex tex="f_0=\frac{1}{2\pi}\sqrt{\frac{k}{m}}" />，质量越大、弹簧越软，<Latex tex="f_0" /> 越小。</div>
+    </div>
+  </div>
+  <div class="tip-hint" v-click="1">固有频率只由系统自身性质决定，与振幅无关。</div>
+</div>
+
+---
+clicks: 1
+clickAnimation: none
+---
+
+# 阻尼振动
+
+<div class="page-grow">
+  <div class="ask">为什么秋千会慢慢停下来？</div>
+  <div class="half-grid">
+    <div class="fw-chart"><DampedVibrationGraph :step="$clicks" /></div>
+    <div class="stack">
+      <div><b>阻尼振动</b>：实际振动受到摩擦、黏滞力等阻力，振幅随时间逐渐减小。</div>
+      <div>振动系统的机械能不断减少。</div>
+    </div>
+  </div>
+  <div class="tip-hint" v-click="1">阻力使机械能转化为内能，振幅越来越小，振动最终会停下来。</div>
+</div>
+
+---
+clicks: 2
+clickAnimation: none
+---
+
+# 振动中的能量损失
+
+<div class="page-grow">
+  <div class="ask">振动系统的能量到哪里去了？</div>
+  <div class="half-grid">
+    <div class="stack">
+      <div class="mini-title">摩擦阻力</div>
+      <div>阻力使机械能转化为内能。单摆在空气中振动，振幅越来越小。</div>
+    </div>
+    <div class="divider-l stack">
+      <div class="mini-title">能量辐射</div>
+      <div>系统引起周围介质振动，能量以波的形式向四周辐射。音叉发声时，一部分能量变成声波。</div>
+    </div>
+  </div>
+  <div class="tip-hint" v-click="1">摩擦生热和能量辐射，都会让振动系统的机械能减少。</div>
+  <div class="summary-line" v-click="2">能量并没有消失，只是转化成了内能或辐射到周围空间。</div>
+</div>
+
+---
+clicks: 1
+clickAnimation: none
+zoom: 0.95
+---
+
+# 受迫振动
+
+<div class="page-grow page-grow-tight">
+  <div class="ask">阻尼振动最终会停下，怎样让振动持续？</div>
+  <div class="fw-figure-wide"><DrivenOscillatorSvg /></div>
+  <div class="half-grid">
+    <div><b>驱动力</b>：作用在振动系统上的周期性外力。</div>
+    <div><b>受迫振动</b>：系统在驱动力作用下的振动。</div>
+  </div>
+  <div class="tip-hint" v-click="1">驱动力做功能补偿阻力消耗的能量，振动就能持续下去。</div>
+</div>
+
+---
+clicks: 1
+clickAnimation: none
+---
+
+# 受迫振动的频率
+
+<div class="page-grow">
+  <div class="ask">稳定后，振动的频率由什么决定？</div>
+  <ForcedFrequency />
+  <div class="tip-hint" v-click="1">稳定后，物体振动的频率等于驱动力的频率，与物体的固有频率无关。</div>
+</div>
