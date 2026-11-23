@@ -20,30 +20,141 @@ defaults:
   transition: fade
 chapter-no: "4.2"
 chapter: "第四章 光"
+subtitle: "从水中气泡到光导纤维：全反射的条件与应用"
 ---
 
-<!-- 封面装饰：占位图形，请按本课主题替换（坐标轴 / 标签规范见 AGENTS.md「四、技术约定与已知坑」） -->
-<svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
-  <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
-  <circle cx="118" cy="32" r="5" fill="#e2a846"/>
-  <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
-</svg>
+<CoverDecorationSvg />
+
+---
+layout: base-flex
+title: 水中的气泡为什么特别明亮？
+clicks: 1
+clickAnimation: none
+---
+
+<div class="page-grow">
+<div class="intro-grid">
+<div class="intro-figure"><BubbleSvg /></div>
+<div class="intro-ask">
+<div class="ask ask-lead">水中的气泡，为什么特别明亮？</div>
+<div class="ask-sub">光从水射向气泡，会在界面处发生什么？</div>
+<div class="tip-hint" v-click="1">一部分光在气泡表面发生全反射，回到水中，气泡看起来就特别明亮。</div>
+</div>
+</div>
+</div>
 
 ---
 layout: base-flex
 ---
 
-## 待补充：第 1 页内容
+# 光疏介质与光密介质
 
-<div class="card">
-
-本页是骨架占位。先把 content/思路.md 的授课思路整理成页序，再逐页替换这里的内容。
-
+<div class="page-grow">
+<div class="medium-grid">
+<div class="medium-figure"><MediumCompareSvg /></div>
+<div class="medium-text">
+<DefinitionBox term="光疏介质与光密介质" tone="gold">
+两种介质相比，折射率较小的叫<span class="nowrap">光疏介质</span>，折射率较大的叫<span class="nowrap">光密介质</span>。
+</DefinitionBox>
+<div class="info-hint">光疏和光密是相对的：水相对空气是光密介质，相对水晶却是光疏介质。</div>
+</div>
+</div>
 </div>
 
-<!--
-  新增页面：在下方用 --- 分隔，每页先抛问题、再 v-click 呈现答案。
-  公式写在 Markdown 段落里可用 $...$；HTML 块（card 内的 div）里必须改用 <Latex tex="..." />。
-  图标用 <mdi-xxx />，不要用 emoji。
--->
+---
+layout: base-flex
+clicks: 2
+---
+
+# 光从光密介质射向光疏介质
+
+<div class="page-grow">
+<div class="ray-grid">
+<div class="ray-figure"><RayIncidenceSvg :angle="40" :n="1.5" /></div>
+<div class="ray-text">
+<div class="ask">光从玻璃射向空气，折射角比入射角大还是小？</div>
+<div class="ray-fact" v-click="1">折射角大于入射角，折射光偏离法线更远。</div>
+<div class="ray-fact" v-click="2">入射角增大时，折射光越来越弱，反射光越来越强。</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+clickAnimation: none
+---
+
+# 全反射现象
+
+<div class="page-grow">
+<div class="critical-wrap">
+<DefinitionBox term="全反射" tone="gold">
+当光从<span class="nowrap">光密介质</span>射向<span class="nowrap">光疏介质</span>时，如果入射角增大到某一角度，使折射角达到 <Latex tex="90^\circ" />，<span class="nowrap">折射光</span>完全消失，只剩下<span class="nowrap">反射光</span>，这种现象叫全反射。
+</DefinitionBox>
+<div class="critical-figure"><RayCriticalSvg :step="$clicks" /></div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 2
+clickAnimation: none
+---
+
+# 临界角
+
+<div class="page-grow">
+<div class="critical-wrap">
+<div class="critical-figure"><CriticalAngleSvg :step="$clicks" /></div>
+<div class="critical-grid">
+<div class="critical-text">
+<div class="body-def">折射角等于 <Latex tex="90^\circ" /> 时的入射角，叫临界角，<span class="nowrap">用 <Latex tex="C" /> 表示</span>。</div>
+<div v-click="1" class="formula"><Latex tex="\sin C = \dfrac{1}{n}" display /></div>
+<div v-click="1" class="info-hint"><Latex tex="n" /> 越大，临界角越小。</div>
+</div>
+<div v-click="2" class="ca-table">
+<div class="ca-row ca-head"><span>介质</span><span>折射率 <Latex tex="n" /></span><span>临界角 <Latex tex="C" /></span></div>
+<div class="ca-row"><span>水</span><span>1.33</span><span><Latex tex="48.8^\circ" /></span></div>
+<div class="ca-row"><span>玻璃</span><span>1.5</span><span><Latex tex="41.8^\circ" /></span></div>
+<div class="ca-row"><span>金刚石</span><span>2.42</span><span><Latex tex="24.4^\circ" /></span></div>
+</div>
+</div>
+</div>
+</div>
+
+---
+layout: base-flex
+clicks: 1
+---
+
+# 发生全反射的条件
+
+<div class="page-grow">
+<div class="cond-grid">
+<div class="cond-card">
+<mdi-swap-vertical class="cond-icon icon-lg" />
+<div class="cond-name">光从光密介质射向光疏介质</div>
+<div class="cond-text">从空气射向水或玻璃，不会发生全反射。</div>
+</div>
+<div class="cond-card">
+<mdi-angle-acute class="cond-icon icon-lg" />
+<div class="cond-name">入射角大于或等于临界角</div>
+<div class="cond-text">即 <Latex tex="\theta_1 \ge C" />，折射光才会消失。</div>
+</div>
+</div>
+<div class="warn-hint" v-click="1">两个条件必须同时满足。</div>
+</div>
+
+---
+layout: base-flex
+title: 增大入射角，会发生什么？
+clicks: 0
+clickAnimation: none
+---
+
+<div class="page-grow">
+<div class="mini-title">改变入射角，观察折射光的变化</div>
+<TotalReflectionDemo />
+<div class="tip-hint">入射角增大到临界角时，折射光消失，发生全反射。</div>
+</div>

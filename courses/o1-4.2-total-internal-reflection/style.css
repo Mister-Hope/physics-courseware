@@ -3,3 +3,476 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.75rem;
+  --stack-gap: 0.65rem;
+}
+
+/* 通用正文与图 */
+.body-def {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--c-text);
+  text-wrap: pretty;
+}
+.formula {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.hint-slot {
+  min-height: 3.4rem;
+}
+:where(.intro-figure, .medium-figure, .ray-figure, .critical-figure, .tir-figure, .prism-figure, .fiber-figure, .ex-figure) > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 引课 */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+}
+.intro-figure {
+  min-width: 0;
+}
+.intro-ask {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.ask-sub {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+  line-height: 1.5;
+}
+
+/* 光疏 / 光密 */
+.medium-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  width: 100%;
+}
+.medium-figure {
+  min-width: 0;
+}
+.medium-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+/* 折射 */
+.ray-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  width: 100%;
+}
+.ray-figure {
+  min-width: 0;
+}
+.ray-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 0;
+}
+.ray-fact {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--c-accent);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* 全反射 */
+.critical-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+.critical-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.3rem;
+  align-items: center;
+  width: 100%;
+}
+.critical-figure {
+  width: 100%;
+  min-width: 0;
+  max-width: 680px;
+  margin-inline: auto;
+}
+.critical-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.ca-table {
+  width: 100%;
+  font-size: 0.86rem;
+}
+.ca-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.3rem;
+  padding: 0.3rem 0.4rem;
+  border-bottom: 1px solid var(--c-line);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.ca-row span:first-child {
+  text-align: left;
+}
+.ca-head {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+/* 全反射条件 */
+.cond-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+.cond-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  text-align: center;
+}
+.cond-icon {
+  color: var(--c-accent);
+}
+.cond-name {
+  font-size: 1.04rem;
+  font-weight: 700;
+}
+.cond-text {
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+  line-height: 1.5;
+}
+
+/* 改变入射角互动 */
+.tir-demo {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 1.1rem;
+  align-items: stretch;
+  width: 100%;
+}
+.tir-figure {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.tir-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.tir-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.tir-medium {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+.tir-label {
+  font-size: 0.78rem;
+  color: var(--c-text-dim);
+}
+.tir-btn {
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  background: var(--c-surface);
+  color: var(--c-text);
+  padding: 0.22rem 0.5rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+.tir-readouts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+.tir-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.35rem 0.45rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+}
+.tir-k {
+  font-size: 0.66rem;
+  color: var(--c-text-dim);
+  white-space: nowrap;
+}
+.tir-v {
+  font-size: 0.94rem;
+  color: var(--c-accent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tir-status {
+  padding: 0.38rem 0.55rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  font-size: 0.84rem;
+  color: var(--c-text-dim);
+  text-align: center;
+}
+.tir-status.is-total {
+  border-color: rgb(226 168 70 / 45%);
+  background: rgb(226 168 70 / 10%);
+  color: var(--c-accent);
+}
+
+/* 全反射棱镜 */
+.prism-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  width: 100%;
+}
+.prism-figure {
+  min-width: 0;
+}
+.prism-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+.prism-fact {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--c-accent);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* 应用卡片 */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  width: 100%;
+}
+.app-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem 0.9rem;
+  border-radius: 1rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  text-align: center;
+}
+.app-icon {
+  color: var(--c-accent);
+}
+.app-name {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+.app-text {
+  font-size: 0.86rem;
+  color: var(--c-text-dim);
+  line-height: 1.5;
+}
+
+/* 光导纤维 */
+.fiber-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  width: 100%;
+}
+.fiber-figure {
+  min-width: 0;
+}
+.fiber-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+.fiber-fact {
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--c-accent);
+  font-size: 0.96rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* 例题 / 练习 */
+.ex-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 1.3rem;
+  align-items: center;
+  width: 100%;
+}
+.ex-figure {
+  min-width: 0;
+}
+.ex-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+.ex-stem {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+.ex-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.ex-step {
+  padding: 0.4rem 0.6rem;
+  border-left: 3px solid var(--c-accent);
+  background: var(--c-surface);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.ex-step-no {
+  margin-right: 0.3rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.ex-answer {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* 小结 */
+.sum-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.sum-node {
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.7rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  font-size: 0.9rem;
+}
+.sum-node-main {
+  border-color: rgb(226 168 70 / 55%);
+  color: var(--c-accent);
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+.sum-arrow {
+  color: var(--c-accent);
+}
+.sum-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+.sum-row {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.sum-key {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 衔接下一节 */
+.next-kicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  color: var(--c-accent);
+  text-align: center;
+}
+.next-title {
+  margin: 0.3rem 0 0.6rem;
+  font-size: 1.55rem;
+  font-weight: 700;
+  text-align: center;
+}
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  width: 100%;
+}
+.next-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.9rem;
+  border-radius: 1rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  text-align: center;
+}
+.next-icon {
+  color: var(--c-accent);
+}
+.next-name {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+.next-text {
+  font-size: 0.82rem;
+  color: var(--c-text-dim);
+}
