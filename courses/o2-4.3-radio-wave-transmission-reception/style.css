@@ -3,3 +3,473 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* ── 第 11 页：调谐选台 ───────────────────────── */
+.rw-tuner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.rw-tuner-chart {
+  min-width: 0;
+}
+
+.rw-tuner-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  min-width: 0;
+}
+
+.rw-tuner-readout {
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+
+  color: var(--c-text-dim);
+  font-size: 0.95rem;
+}
+
+.rw-tuner-readout-label {
+  white-space: nowrap;
+}
+
+.rw-tuner-f {
+  min-width: 5.9rem;
+
+  color: var(--c-accent);
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.rw-slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+}
+
+.rw-c-value {
+  min-width: 5.2rem;
+
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.rw-formula {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+}
+
+.rw-formula-note {
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+.rw-stations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.rw-station {
+  display: grid;
+  grid-template-columns: 2.8rem 5rem minmax(0, 1fr) 2.8rem;
+  gap: 0.45rem;
+  align-items: center;
+
+  min-height: 1.85rem;
+  padding: 0 0.35rem;
+
+  border-radius: 0.5rem;
+}
+
+.rw-station.is-tuned {
+  background: rgb(226 168 70 / 10%);
+}
+
+.rw-station-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.rw-station-freq {
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rw-bar {
+  display: block;
+
+  overflow: hidden;
+
+  height: 0.5rem;
+
+  background: rgb(148 163 184 / 18%);
+  border-radius: 999px;
+}
+
+.rw-bar-fill {
+  display: block;
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  transition: width 0.15s linear;
+}
+
+.rw-badge {
+  visibility: hidden;
+
+  padding: 0.02rem 0.2rem;
+
+  color: var(--c-bg);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+
+  background: var(--c-accent);
+  border-radius: 999px;
+}
+
+.rw-badge.is-on {
+  visibility: visible;
+}
+
+.rw-status {
+  min-height: 2.3rem;
+
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.rw-status.is-tuned {
+  color: var(--c-accent);
+}
+
+/* ── 第 2 页：引课 ───────────────────────────── */
+.rw-intro {
+  justify-content: center;
+  gap: 2.4rem;
+}
+
+.rw-intro-q {
+  max-width: 24em;
+  margin: 0 auto;
+
+  font-size: 1.5rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.rw-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+
+  width: 100%;
+}
+
+.rw-intro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+  text-align: center;
+}
+
+.rw-intro-item .icon-md {
+  color: var(--c-accent);
+}
+
+.rw-intro-text {
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* ── 第 3 页：频率条件 ───────────────────────── */
+.rw-formula-line {
+  margin-top: 0.4rem;
+
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+}
+
+/* ── 第 10 页：调谐电路图 ───────────────────── */
+.rw-figure-720 {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── 第 15 页：波长—频率表 ──────────────────── */
+.rw-table {
+  overflow: hidden;
+
+  width: 100%;
+  max-width: 380px;
+  margin-top: 0.2rem;
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+
+.rw-table-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  padding: 0.35rem 0.9rem;
+
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.rw-table-row + .rw-table-row {
+  border-top: 1px solid var(--c-border);
+}
+
+.rw-table-wide {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.rw-table-wide .rw-table-row {
+  grid-template-columns: 1.1fr 1fr 1fr 1fr;
+}
+
+.rw-table-row > span:first-child {
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+}
+
+.rw-table-head {
+  color: var(--c-text-dim);
+  font-size: 0.8rem;
+}
+
+/* ── 第 17 页：电视广播流程 ─────────────────── */
+.rw-tv-flow {
+  display: flex;
+  gap: 0.35rem;
+  align-items: stretch;
+  justify-content: center;
+
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.rw-tv-node {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+
+  min-width: 0;
+  padding: 0.7rem 0.45rem;
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+
+  text-align: center;
+}
+
+.rw-tv-node .icon-md {
+  color: var(--c-accent);
+}
+
+.rw-tv-node b {
+  font-size: 0.95rem;
+}
+
+.rw-tv-node span {
+  color: var(--c-text-dim);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.rw-tv-wide {
+  flex-grow: 1.3;
+}
+
+.rw-tv-arrow {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+
+  color: var(--c-accent);
+  font-size: 1.05rem;
+}
+
+.rw-tv-sound {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 0.9rem;
+
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+}
+
+.rw-tv-sound .icon-md {
+  color: var(--c-accent);
+}
+
+/* ── 第 18 页：无线电波的应用 ───────────────── */
+.rw-app-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.rw-app-card {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+
+  padding: 0.85rem 1rem;
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.rw-app-card .icon-md {
+  flex: none;
+  margin-top: 0.15rem;
+  color: var(--c-accent);
+}
+
+.rw-app-card b {
+  display: block;
+
+  margin-bottom: 0.2rem;
+
+  font-size: 1rem;
+}
+
+.rw-app-card span {
+  color: var(--c-text-dim);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+/* ── 第 19 页：四个名词的关系 ───────────────── */
+.rw-concept {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+.rw-concept-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem 1.2rem;
+
+  border: 1px solid var(--c-border-glow);
+  border-radius: var(--radius-md);
+  background: rgb(226 168 70 / 10%);
+
+  color: var(--c-accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.rw-concept-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.rw-concept-split {
+  color: var(--c-accent);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.rw-concept-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  min-width: 200px;
+  padding: 0.55rem 0.9rem;
+
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+
+.rw-concept-card b {
+  font-size: 0.95rem;
+}
+
+.rw-concept-card span {
+  color: var(--c-text-dim);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.rw-concept-arrow {
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.rw-concept-demod {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  min-width: 200px;
+  padding: 0.7rem 0.95rem;
+
+  border: 1px solid rgb(45 212 191 / 35%);
+  border-radius: var(--radius-md);
+  background: rgb(45 212 191 / 8%);
+}
+
+.rw-concept-demod b {
+  color: var(--c-physics);
+  font-size: 1rem;
+}
+
+.rw-concept-demod span {
+  color: var(--c-text-dim);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
