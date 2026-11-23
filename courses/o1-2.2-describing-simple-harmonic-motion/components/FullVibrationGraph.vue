@@ -37,7 +37,7 @@ const labels = [
     :y-axis="{ quantity: 'x', unit: 'm' }"
     :curves="[
       {
-        formula: (t: number) => Math.sin(2 * Math.PI * t),
+        formula: (t: number): number => Math.sin(2 * Math.PI * t),
         samples: 240,
         color: 'var(--c-accent)',
         width: 2.6,
