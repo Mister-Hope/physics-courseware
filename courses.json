@@ -465,8 +465,8 @@
           "slug": "o1-1.1-momentum",
           "title": "动量",
           "chapter": "§1.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "从碰撞中寻找不变量引出动量，理解 p=mv 的矢量性、方向与 Δp 的求法，辨析动量与动能，会用一维正负号计算。",
+          "tags": ["动量", "碰撞", "矢量", "动量变化"]
         },
         {
           "slug": "o1-1.2-impulse-momentum-theorem",

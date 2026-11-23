@@ -85,20 +85,24 @@ const showEk = computed(() => mode === "ek");
   font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
 }
+
 .data-table th {
   padding: 0.32rem 0.35rem;
   border-bottom: 1px solid var(--c-border-glow);
   color: var(--c-text-dim);
   font-weight: 500;
 }
+
 .data-table td {
   padding: 0.3rem 0.35rem;
   border-bottom: 1px solid var(--c-border);
   text-align: center;
 }
+
 .data-table tbody tr:last-child td {
   border-bottom: none;
 }
+
 .cell-hidden {
   visibility: hidden;
 }

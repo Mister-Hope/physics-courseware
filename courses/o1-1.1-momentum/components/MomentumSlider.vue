@@ -53,38 +53,49 @@ const energy = computed(() => 0.5 * mass.value * speed.value ** 2);
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 1.6rem;
   align-items: center;
+
   width: 100%;
 }
+
 .momentum-controls {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
 }
+
 .momentum-readouts {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
 }
+
 .readout-row {
   display: flex;
-  align-items: baseline;
   gap: 0.6rem;
+  align-items: baseline;
+
   padding: 0.35rem 0.7rem;
-  border-radius: 0.6rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
+  border-radius: 0.6rem;
+
+  background: var(--c-surface);
 }
+
 .readout-key {
   flex: 0 0 2.2rem;
   color: var(--c-text-dim);
 }
+
 .readout-value {
   flex: 0 0 4.2rem;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-size: 1.15rem;
+
   color: var(--c-accent);
+
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
+
 .readout-unit {
   flex: 0 0 5.4rem;
   color: var(--c-text-dim);
