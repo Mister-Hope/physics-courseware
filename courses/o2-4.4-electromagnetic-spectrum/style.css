@@ -245,3 +245,271 @@
   font-size: 0.78rem;
   line-height: 1.8;
 }
+
+/* ── 第 10 页：产生机理 ── */
+.em-mech-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* ── 第 11 页：波速、波长与频率 ── */
+.em-wave-page {
+  gap: 1.35rem;
+  padding-top: 0.4rem;
+}
+
+.em-wave-eq {
+  display: flex;
+  justify-content: center;
+
+  padding: 0.35rem 0;
+
+  font-size: 1.5rem;
+}
+
+.em-wave-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.em-wave-fact {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.em-wave-key {
+  flex: 0 0 3.2rem;
+
+  color: var(--c-accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.em-mech-page .ask {
+  margin-bottom: 0.2rem;
+}
+
+/* ── 第 12 页：波长与频率的关系 ── */
+.em-calc-page {
+  gap: 1.05rem;
+  padding-top: 0.3rem;
+}
+
+.em-calc-page .ask {
+  margin-bottom: 0.1rem;
+}
+
+/* ── 第 13 页：特性与作用 ── */
+.em-trait-page {
+  gap: 1.1rem;
+  padding-top: 0.3rem;
+}
+
+.em-trait-page .ask {
+  margin-bottom: 0.1rem;
+}
+
+/* ── 第 14 页：可见光只占极窄一段 ── */
+.em-narrow-page {
+  gap: 1.1rem;
+  padding-top: 0.4rem;
+}
+
+.em-narrow-page .ask {
+  margin-bottom: 0.1rem;
+}
+
+/* ── 第 15 页：利用与防护 ── */
+.em-safety-page {
+  gap: 1.2rem;
+  padding-top: 0.3rem;
+}
+
+.em-safety-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.em-safety-table th {
+  padding: 0.5rem 0.8rem;
+
+  border-bottom: 1px solid var(--c-border);
+
+  color: var(--c-text-mute);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: left;
+  letter-spacing: 0.04em;
+}
+
+.em-safety-table td {
+  padding: 0.62rem 0.8rem;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
+
+  vertical-align: top;
+}
+
+.em-safety-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.em-safety-table th:first-child,
+.em-safety-table td:first-child {
+  width: 6.5rem;
+  white-space: nowrap;
+}
+
+.em-safety-band {
+  font-weight: 600;
+}
+
+.em-safety-uv {
+  color: mediumorchid;
+}
+
+.em-safety-x {
+  color: var(--c-accent);
+}
+
+.em-safety-gamma {
+  color: var(--c-danger);
+}
+
+/* ── 第 16 页：寻找地外文明 ── */
+.em-seti-page {
+  gap: 1rem;
+  padding-top: 0.2rem;
+}
+
+.em-seti-list {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.em-seti-list::before {
+  position: absolute;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 6.85rem;
+
+  width: 1px;
+
+  background: var(--c-border);
+
+  content: "";
+}
+
+.em-seti-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1.2rem minmax(0, 1fr);
+  gap: 0.75rem;
+
+  align-items: start;
+}
+
+.em-seti-year {
+  padding-top: 0.18rem;
+
+  color: var(--c-accent);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.em-seti-dot {
+  position: relative;
+  z-index: 1;
+
+  width: 9px;
+  height: 9px;
+  margin-top: 0.38rem;
+
+  border-radius: 50%;
+
+  background: var(--c-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c-accent) 15%, transparent);
+}
+
+.em-seti-text {
+  color: var(--c-text);
+
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.em-seti-text b {
+  color: var(--c-accent);
+
+  font-weight: 600;
+}
+
+/* ── 第 17–18 页：例题 ── */
+.ex-stem {
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.em-ex-known {
+  margin-top: 0.55rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+}
+
+.em-nowrap {
+  white-space: nowrap;
+}
+
+/* ── 第 19 页：课堂练习 ── */
+.em-practice-page {
+  gap: 1rem;
+  padding-top: 0.4rem;
+}
+
+.em-practice-list {
+  margin-top: 1.4rem;
+  gap: 1rem;
+}
+
+.em-practice-text {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.em-practice-text b {
+  color: var(--c-accent);
+
+  font-weight: 600;
+}
+
+/* ── 第 20 页：课堂小结 ── */
+.em-summary-page {
+  padding-top: 0.2rem;
+}
+
+.em-summary-list {
+  gap: 1rem;
+}
+
+.em-summary-text {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
