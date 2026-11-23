@@ -25,13 +25,16 @@
 
 .li-cond-tag {
   flex: none;
+
   min-width: 6.4rem;
   padding: 0.1rem 0.7rem;
   border-radius: 999px;
+
   background: var(--c-surface);
   color: var(--c-accent);
-  font-size: 0.92rem;
+
   font-weight: 700;
+  font-size: 0.92rem;
   text-align: center;
 }
 
@@ -40,9 +43,8 @@
 }
 
 .li-fig-film {
-  max-width: 700px;
-  margin-inline: auto;
   max-width: 560px;
+  margin-inline: auto;
 }
 
 .li-fig-slit {
@@ -61,15 +63,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
   padding: 1rem 1.3rem;
-  border-radius: 1.1rem;
   border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+
   background: var(--c-surface);
 }
 
 .li-rule-title {
-  font-size: 1.1rem;
   font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .li-rule-bright {
@@ -93,14 +97,15 @@
 }
 
 .li-rule-note {
-  font-size: 0.95rem;
   color: var(--c-text-dim);
+  font-size: 0.95rem;
 }
 
 .li-derive {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
   font-size: 1.06rem;
   line-height: 1.55;
 }
@@ -114,11 +119,14 @@
   display: grid;
   grid-template-columns: 6rem 7rem minmax(0, 1fr);
   gap: 0.6rem;
+  align-items: center;
+
   padding: 0.5rem 0.9rem;
   border-radius: 0.7rem;
+
   background: var(--c-surface);
+
   font-size: 1.02rem;
-  align-items: center;
 }
 
 .li-th {
@@ -139,13 +147,14 @@
   grid-template-columns: 2.2rem minmax(0, 1fr) 9rem;
   gap: 0.8rem;
   align-items: center;
+
   width: 100%;
   max-width: 620px;
 }
 
 .li-explorer-label {
-  text-align: right;
   font-size: 1.05rem;
+  text-align: right;
 }
 
 .li-explorer-value {
@@ -154,8 +163,8 @@
 }
 
 .li-explorer-read {
-  font-size: 1.2rem;
   color: var(--c-accent);
+  font-size: 1.2rem;
 }
 
 .li-fig-geom {

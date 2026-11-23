@@ -598,8 +598,8 @@
           "slug": "o1-4.3-light-interference",
           "title": "光的干涉",
           "chapter": "§4.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识双缝干涉现象与条纹间距 Δx=λl/d，理解相干条件与明暗条纹的成因，了解薄膜干涉及其应用。",
+          "tags": ["光的干涉", "双缝干涉", "条纹间距", "薄膜干涉"]
         },
         {
           "slug": "o1-4.4-double-slit-experiment",
