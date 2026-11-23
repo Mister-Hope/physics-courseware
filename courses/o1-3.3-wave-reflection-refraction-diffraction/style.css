@@ -3,3 +3,268 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* 第 2 页：回声与水波 */
+.pt2 {
+  gap: 0.5rem;
+}
+.p2-ask {
+  font-size: 1.35rem;
+  line-height: 1.55;
+}
+.p2-ask > div + div {
+  margin-top: 0.15rem;
+}
+.p2-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+  margin-top: 0.2rem;
+}
+.p2-case {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.8rem 1rem;
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+  border: 1px solid var(--c-border);
+}
+.p2-icon {
+  color: var(--c-accent);
+}
+.p2-case-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.p2-case-text {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--c-text-dim);
+  text-align: center;
+}
+
+/* 第 3 页：波的反射 */
+.pt3 {
+  gap: 0.28rem;
+}
+.p3-fig {
+  display: flex;
+  justify-content: center;
+}
+.p3-fig svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+}
+.p3-laws {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+.p3-law {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+  border: 1px solid var(--c-border);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+.p3-no,
+.p5-no,
+.p7-no,
+.p8-no {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: #0b1020;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+.pt3 .tip-hint {
+  font-size: 0.8rem;
+}
+
+/* 第 4 页：回声与反射应用 */
+.pt4 {
+  gap: 0.5rem;
+}
+.p4-grid {
+  gap: 1.5rem;
+}
+.p4-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.2rem;
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+  border: 1px solid var(--c-border);
+}
+.p4-icon {
+  color: var(--c-accent-2);
+}
+.p4-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.p4-text {
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+  text-align: center;
+}
+.pt4 .tip-hint {
+  font-size: 0.88rem;
+}
+
+/* 第 5 页：波的折射 */
+.pt5 {
+  gap: 0.3rem;
+}
+.p5-fig {
+  display: flex;
+  justify-content: center;
+}
+.p5-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+.p5-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.p5-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.pt5 .info-hint {
+  font-size: 0.8rem;
+}
+
+/* 第 6 页：折射中什么变、什么不变 */
+.pt6 {
+  gap: 0.5rem;
+}
+.p6-cards {
+  margin-top: 0.1rem;
+}
+.p6-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 9.2rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+  border: 1px solid var(--c-border);
+}
+.p6-tag {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.p6-prompt {
+  color: var(--c-text-mute);
+  font-size: 0.78rem;
+}
+.p6-value {
+  min-height: 1.8rem;
+  color: var(--c-accent);
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+.p6-text {
+  min-height: 3.4rem;
+  color: var(--c-text-dim);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+.p6-text .katex {
+  font-size: 1em;
+}
+.pt6 .summary-line {
+  font-size: 0.9rem;
+}
+
+/* 第 7 页：折射的定性规律 */
+.pt7 {
+  gap: 0.2rem;
+}
+.p7-fig {
+  display: flex;
+  justify-content: center;
+}
+.p7-fig svg {
+  width: 100%;
+  max-width: 470px;
+  height: auto;
+}
+.p7-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.p7-rule {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.pt7 .tip-hint {
+  font-size: 0.78rem;
+}
+
+/* 第 8 页：波的衍射 */
+.pt8 {
+  gap: 0.3rem;
+}
+.p8-fig {
+  display: flex;
+  justify-content: center;
+}
+.p8-fig svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+}
+.p8-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.p8-note {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+  border: 1px solid var(--c-border);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+.pt8 .info-hint {
+  font-size: 0.8rem;
+}
