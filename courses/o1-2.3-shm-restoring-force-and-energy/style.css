@@ -159,6 +159,91 @@
   color: var(--c-text-mute);
 }
 
+.em-lab-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.6rem;
+}
+
+.em-state-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.6rem;
+}
+
+.em-xt-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.4rem;
+}
+
+.em-energy-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.6rem;
+}
+
+.em-energy-eq-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.7rem;
+}
+
+.em-eq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.em-eq-card {
+  min-width: 0;
+  padding: 0.6rem 0.8rem;
+  text-align: center;
+  background: var(--c-surface);
+  border-top: 3px solid var(--c-accent-2);
+  border-radius: 0.7rem;
+}
+
+.em-eq-card:nth-child(2) {
+  border-top-color: var(--c-accent);
+}
+
+.em-eq-label {
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--c-text-dim);
+}
+
+.em-eq-derive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--c-text-dim);
+}
+
+.em-eq-derive span {
+  font-size: 0.82rem;
+}
+
+.em-energy-lab-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 0.6rem;
+}
+
 .em-derive-step .katex-display {
   margin: 0.1rem 0;
 }

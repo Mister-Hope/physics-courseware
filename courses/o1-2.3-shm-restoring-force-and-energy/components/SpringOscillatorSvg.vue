@@ -1,4 +1,4 @@
-<!-- 水平弹簧振子示意图：本课 P3/P4/P6 共用；x 为归一化位移（-1~1），showForce 显示回复力箭头 -->
+<!-- 水平弹簧振子示意图：本课 P3/P4/P6 共用；x 为归一化位移（-1~1），force/acceleration 为实时值（N、m/s²） -->
 <script setup lang="ts">
 import { computed } from "vue";
 
@@ -6,14 +6,24 @@ const {
   x = null,
   side = "right",
   showForce = false,
+  showAcceleration = false,
   showX = false,
   showPoints = true,
+  force = null,
+  acceleration = null,
+  forceMax = 1.2,
+  accelerationMax = 2.4,
 } = defineProps<{
   x?: number | null;
   side?: "left" | "right";
   showForce?: boolean;
+  showAcceleration?: boolean;
   showX?: boolean;
   showPoints?: boolean;
+  force?: number | null;
+  acceleration?: number | null;
+  forceMax?: number;
+  accelerationMax?: number;
 }>();
 
 const EQ_X = 250;
@@ -45,6 +55,24 @@ const forceTo = computed((): { x: number; y: number } => ({
   x: ballX.value - sign.value * forceLen.value,
   y: BALL_Y,
 }));
+const realForceLen = computed((): number => {
+  if (force == null) return 0;
+  return 18 + 52 * Math.min(1, Math.abs(force) / forceMax);
+});
+const realAccelLen = computed((): number => {
+  if (acceleration == null) return 0;
+  return 15 + 45 * Math.min(1, Math.abs(acceleration) / accelerationMax);
+});
+const forceArrowTo = computed((): { x: number; y: number } => ({
+  x: ballX.value + Math.sign(force ?? 0) * realForceLen.value,
+  y: 62,
+}));
+const accelArrowTo = computed((): { x: number; y: number } => ({
+  x: ballX.value + Math.sign(acceleration ?? 0) * realAccelLen.value,
+  y: 42,
+}));
+const showRealForce = computed((): boolean => showForce && force != null && Math.abs(force) > 0.005);
+const showRealAccel = computed((): boolean => showAcceleration && acceleration != null && Math.abs(acceleration) > 0.005);
 </script>
 
 <template>
@@ -54,11 +82,54 @@ const forceTo = computed((): { x: number; y: number } => ({
     <rect x="18" y="64" width="12" height="72" rx="2" fill="var(--c-text-mute)" opacity="0.75" />
     <path :d="springPath" fill="none" stroke="var(--c-accent-2)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
     <line :x1="ballX" y1="72" :x2="ballX" y2="128" stroke="var(--c-text-mute)" stroke-width="1" stroke-dasharray="4 4" opacity="0.45" />
-    <CourseArrow v-if="showForce && Math.abs(pos) > 0.02" :from="{ x: ballX, y: BALL_Y }" :to="forceTo" stroke="var(--c-danger)" stroke-width="3" label="F" :label-dx="0" :label-dy="-12" />
+    <CourseArrow
+      v-if="showRealForce"
+      :from="{ x: ballX, y: 62 }"
+      :to="forceArrowTo"
+      stroke="var(--c-danger)"
+      stroke-width="3"
+      label="F"
+      :label-dx="0"
+      :label-dy="-10"
+    />
+    <CourseArrow
+      v-if="showRealAccel"
+      :from="{ x: ballX, y: 42 }"
+      :to="accelArrowTo"
+      stroke="var(--c-sky)"
+      stroke-width="2.6"
+      label="a"
+      :label-dx="0"
+      :label-dy="-8"
+    />
+    <CourseArrow
+      v-if="!showRealForce && showForce && Math.abs(pos) > 0.02"
+      :from="{ x: ballX, y: BALL_Y }"
+      :to="forceTo"
+      stroke="var(--c-danger)"
+      stroke-width="3"
+      label="F"
+      :label-dx="0"
+      :label-dy="-12"
+    />
     <circle :cx="ballX" cy="100" :r="BALL_R" fill="var(--c-accent)" stroke="var(--c-accent-light)" stroke-width="2" />
     <text x="250" y="151" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-text-dim)">O</text>
-    <text v-if="showPoints" :x="ballX" y="151" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">{{ pointLabel }}</text>
-    <CourseArrow v-if="showX && Math.abs(pos) > 0.02" :from="{ x: EQ_X, y: 172 }" :to="{ x: ballX, y: 172 }" stroke="var(--c-physics)" stroke-width="2.4" label="x" :label-dx="0" :label-dy="16" />
+    <text v-if="showPoints" :x="ballX" y="151" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">
+      {{ pointLabel }}
+    </text>
+    <CourseArrow
+      v-if="showX && Math.abs(pos) > 0.02"
+      :from="{ x: EQ_X, y: 172 }"
+      :to="{ x: ballX, y: 172 }"
+      stroke="var(--c-physics)"
+      stroke-width="2.4"
+      label="x"
+      :label-dx="0"
+      :label-dy="16"
+    />
+    <text v-if="force === 0 || acceleration === 0" :x="ballX" y="58" text-anchor="middle" font-family="KaTeX_Main" font-size="12" fill="var(--c-text-mute)">
+      F = 0
+    </text>
   </svg>
 </template>
 

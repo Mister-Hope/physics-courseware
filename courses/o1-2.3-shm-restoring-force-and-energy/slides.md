@@ -128,3 +128,104 @@ clicks: 2
     <div class="tip-hint" v-click="2">加速度与位移大小成正比、方向相反。物体所受合力具有这个特点，就做简谐运动。</div>
   </div>
 </div>
+
+---
+layout: base-flex
+title: 回复力和加速度怎样随位移变化？
+clicks: 1
+---
+
+<div class="page-grow em-lab-page">
+  <div class="ask">回复力和加速度怎样随位移变化？</div>
+  <ForceAccelerationLab />
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="1"><Latex tex="F" /> 与 <Latex tex="x" /> 方向相反，<Latex tex="a" /> 与 <Latex tex="F" /> 同向，二者都指向平衡位置。</div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 各位置的位移、速度、加速度和回复力
+clicks: 1
+---
+
+<div class="page-grow em-state-page">
+  <div class="ask">小球从 <Latex tex="Q" /> 运动到 <Latex tex="P" />，<Latex tex="x" />、<Latex tex="v" />、<Latex tex="a" />、<Latex tex="F" /> 怎样变化？</div>
+  <ShmStateTable />
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="1">在平衡位置 <Latex tex="O" />，<Latex tex="a=0" />、<Latex tex="F=0" />，速度最大。</div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 简谐运动的位移—时间图像
+clicks: 1
+---
+
+<div class="page-grow em-xt-page">
+  <div class="ask">弹簧振子的位移—时间图像是什么形状？</div>
+  <XtGraph />
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="1">图像是正弦曲线；经过一个周期 <Latex tex="T" />，振子回到原来的状态。</div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 动能和弹性势能怎样转化？
+clicks: 1
+---
+
+<div class="page-grow em-energy-page">
+  <div class="ask">振子从 <Latex tex="Q" /> 运动到 <Latex tex="P" />，动能和弹性势能怎样变化？</div>
+  <EnergyStateTable />
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="1">只有弹力做功，机械能守恒；动能和弹性势能相互转化。</div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 能量的定量表示
+clicks: 2
+---
+
+<div class="page-grow em-energy-eq-page">
+  <div class="ask">弹簧振子的能量怎样定量表示？</div>
+  <div class="em-eq-grid">
+    <div class="em-eq-card">
+      <div class="em-eq-label">弹性势能</div>
+      <Latex tex="E_p=\frac{1}{2}kx^2" display />
+    </div>
+    <div class="em-eq-card">
+      <div class="em-eq-label">动能</div>
+      <Latex tex="E_k=\frac{1}{2}mv^2" display />
+    </div>
+    <div class="em-eq-card">
+      <div class="em-eq-label">机械能</div>
+      <Latex tex="E=E_k+E_p" display />
+    </div>
+  </div>
+  <div class="em-eq-derive" v-click="1">
+    <Latex tex="E=\frac{1}{2}kA^2" display />
+    <span>在最大位移处 <Latex tex="v=0" />，<Latex tex="E=E_p" />。</span>
+  </div>
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="2">振幅越大，机械能越大。</div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 动能和弹性势能怎样随位移变化？
+clicks: 1
+---
+
+<div class="page-grow em-energy-lab-page">
+  <div class="ask">振子的动能和弹性势能怎样随位移变化？</div>
+  <EnergyBars />
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="1"><Latex tex="E_p+E_k" /> 保持不变，总量等于 <Latex tex="\frac{1}{2}kA^2" />。</div>
+  </div>
+</div>
