@@ -13,40 +13,49 @@
 .pt2 {
   gap: 0.5rem;
 }
+
 .p2-ask {
   font-size: 1.35rem;
   line-height: 1.55;
 }
+
 .p2-ask > div + div {
   margin-top: 0.15rem;
 }
+
 .p2-cases {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.6rem;
   margin-top: 0.2rem;
 }
+
 .p2-case {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.25rem;
+  align-items: center;
+
   padding: 0.8rem 1rem;
-  border-radius: 1.1rem;
-  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
 }
+
 .p2-icon {
   color: var(--c-accent);
 }
+
 .p2-case-title {
-  font-size: 1rem;
   font-weight: 700;
+  font-size: 1rem;
 }
+
 .p2-case-text {
+  color: var(--c-text-dim);
   font-size: 0.8rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
   text-align: center;
 }
 
@@ -54,47 +63,59 @@
 .pt3 {
   gap: 0.28rem;
 }
+
 .p3-fig {
   display: flex;
   justify-content: center;
 }
+
 .p3-fig svg {
   width: 100%;
   max-width: 460px;
   height: auto;
 }
+
 .p3-laws {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
 }
+
 .p3-law {
   display: flex;
   gap: 0.45rem;
   align-items: flex-start;
+
   padding: 0.4rem 0.55rem;
-  border-radius: 0.7rem;
-  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: 0.7rem;
+
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+
   font-size: 0.84rem;
   line-height: 1.45;
 }
+
 .p3-no,
 .p5-no,
 .p7-no,
 .p8-no {
-  flex: 0 0 auto;
   display: grid;
+  flex: 0 0 auto;
   place-items: center;
+
   width: 1.15rem;
   height: 1.15rem;
   margin-top: 0.1rem;
   border-radius: 50%;
+
   background: var(--c-accent);
   color: #0b1020;
-  font-size: 0.7rem;
+
   font-weight: 800;
+  font-size: 0.7rem;
 }
+
 .pt3 .tip-hint {
   font-size: 0.8rem;
 }
@@ -103,32 +124,40 @@
 .pt4 {
   gap: 0.5rem;
 }
+
 .p4-grid {
   gap: 1.5rem;
 }
+
 .p4-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.3rem;
+  align-items: center;
+
   padding: 1rem 1.1rem;
-  border-radius: 1.2rem;
-  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: 1.2rem;
+
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
 }
+
 .p4-icon {
   color: var(--c-accent-2);
 }
+
 .p4-title {
-  font-size: 1.05rem;
   font-weight: 700;
+  font-size: 1.05rem;
 }
+
 .p4-text {
+  color: var(--c-text-dim);
   font-size: 0.84rem;
   line-height: 1.55;
-  color: var(--c-text-dim);
   text-align: center;
 }
+
 .pt4 .tip-hint {
   font-size: 0.88rem;
 }
@@ -137,28 +166,34 @@
 .pt5 {
   gap: 0.3rem;
 }
+
 .p5-fig {
   display: flex;
   justify-content: center;
 }
+
 .p5-fig svg {
   display: block;
   width: 100%;
   max-width: 520px;
   height: auto;
 }
+
 .p5-notes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
+
 .p5-item {
   display: flex;
   gap: 0.5rem;
   align-items: flex-start;
+
   font-size: 0.9rem;
   line-height: 1.5;
 }
+
 .pt5 .info-hint {
   font-size: 0.8rem;
 }
@@ -167,42 +202,52 @@
 .pt6 {
   gap: 0.5rem;
 }
+
 .p6-cards {
   margin-top: 0.1rem;
 }
+
 .p6-card {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   min-height: 9.2rem;
   padding: 0.8rem 0.9rem;
-  border-radius: 1rem;
-  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: 1rem;
+
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
 }
+
 .p6-tag {
-  font-size: 1.05rem;
   font-weight: 700;
+  font-size: 1.05rem;
 }
+
 .p6-prompt {
   color: var(--c-text-mute);
   font-size: 0.78rem;
 }
+
 .p6-value {
   min-height: 1.8rem;
   color: var(--c-accent);
-  font-size: 1.45rem;
   font-weight: 800;
+  font-size: 1.45rem;
 }
+
 .p6-text {
   min-height: 3.4rem;
   color: var(--c-text-dim);
   font-size: 0.8rem;
   line-height: 1.55;
 }
+
 .p6-text .katex {
   font-size: 1em;
 }
+
 .pt6 .summary-line {
   font-size: 0.9rem;
 }
@@ -211,27 +256,33 @@
 .pt7 {
   gap: 0.2rem;
 }
+
 .p7-fig {
   display: flex;
   justify-content: center;
 }
+
 .p7-fig svg {
   width: 100%;
   max-width: 470px;
   height: auto;
 }
+
 .p7-rules {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
+
 .p7-rule {
   display: flex;
   gap: 0.45rem;
   align-items: flex-start;
+
   font-size: 0.9rem;
   line-height: 1.5;
 }
+
 .pt7 .tip-hint {
   font-size: 0.78rem;
 }
@@ -240,31 +291,39 @@
 .pt8 {
   gap: 0.3rem;
 }
+
 .p8-fig {
   display: flex;
   justify-content: center;
 }
+
 .p8-fig svg {
   width: 100%;
   max-width: 560px;
   height: auto;
 }
+
 .p8-notes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
+
 .p8-note {
   display: flex;
   gap: 0.45rem;
   align-items: flex-start;
+
   padding: 0.35rem 0.55rem;
-  border-radius: 0.7rem;
-  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
   border: 1px solid var(--c-border);
+  border-radius: 0.7rem;
+
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+
   font-size: 0.86rem;
   line-height: 1.5;
 }
+
 .pt8 .info-hint {
   font-size: 0.8rem;
 }
@@ -273,40 +332,50 @@
 .pt9 {
   gap: 0.3rem;
 }
+
 .p9-fig {
   display: flex;
   justify-content: center;
 }
+
 .p9-fig svg {
   width: 100%;
   max-width: 620px;
   height: auto;
 }
+
 .p9-notes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
+
 .p9-item {
   display: flex;
   gap: 0.45rem;
   align-items: flex-start;
+
   font-size: 0.92rem;
   line-height: 1.5;
 }
+
 .p9-no {
-  flex: 0 0 auto;
   display: grid;
+  flex: 0 0 auto;
   place-items: center;
+
   width: 1.15rem;
   height: 1.15rem;
   margin-top: 0.1rem;
   border-radius: 50%;
+
   background: var(--c-accent);
   color: #0b1020;
-  font-size: 0.7rem;
+
   font-weight: 800;
+  font-size: 0.7rem;
 }
+
 .pt9 .tip-hint {
   font-size: 0.82rem;
 }
@@ -315,9 +384,11 @@
 .pt10 {
   gap: 0.45rem;
 }
+
 .pt10 .dd {
   width: 100%;
 }
+
 .pt10 .tip-hint {
   font-size: 0.86rem;
 }
@@ -326,42 +397,53 @@
 .pt11 {
   gap: 0.5rem;
 }
+
 .p11-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.4rem;
 }
+
 .p11-card {
   padding: 0.85rem 1rem;
+  border: 1px solid var(--c-border);
   border-radius: 1rem;
   background: color-mix(in srgb, var(--c-surface) 60%, transparent);
-  border: 1px solid var(--c-border);
 }
+
 .p11-sound {
   border-color: color-mix(in srgb, var(--c-accent-2) 35%, var(--c-border));
 }
+
 .p11-light {
   border-color: color-mix(in srgb, var(--c-accent) 35%, var(--c-border));
 }
+
 .p11-title {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
+
   margin-bottom: 0.35rem;
-  font-size: 1.05rem;
+
   font-weight: 700;
+  font-size: 1.05rem;
 }
+
 .p11-sound .p11-title {
   color: var(--c-accent-2);
 }
+
 .p11-light .p11-title {
   color: var(--c-accent);
 }
+
 .p11-text {
+  color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.65;
-  color: var(--c-text-dim);
 }
+
 .pt11 .tip-hint {
   font-size: 0.86rem;
 }
@@ -370,34 +452,42 @@
 .pt12 {
   gap: 0.55rem;
 }
+
 .p12-table {
+  overflow: hidden;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
-  overflow: hidden;
   background: color-mix(in srgb, var(--c-surface) 55%, transparent);
 }
+
 .p12-row {
   display: grid;
   grid-template-columns: 1.1fr 1.5fr 0.8fr 1.7fr 1.5fr;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
+
   padding: 0.5rem 0.7rem;
   border-top: 1px solid var(--c-border);
+
   font-size: 0.82rem;
   line-height: 1.45;
 }
+
 .p12-row:first-child {
   border-top: 0;
 }
+
 .p12-head {
   background: color-mix(in srgb, var(--c-accent) 12%, transparent);
   color: var(--c-accent);
   font-weight: 700;
 }
+
 .p12-row > span:first-child {
-  font-weight: 700;
   color: var(--c-text);
+  font-weight: 700;
 }
+
 .pt12 .mini-note {
   text-align: center;
 }
@@ -412,6 +502,7 @@
   flex-direction: column;
   gap: 0.38rem;
 }
+
 .p13-line,
 .p14-line,
 .p15-line,
@@ -420,22 +511,28 @@
   font-size: 0.94rem;
   line-height: 1.55;
 }
+
 .p15-line {
   font-size: 0.9rem;
 }
+
 .p15-fig {
   display: block;
   width: 100%;
   max-width: 380px;
   height: auto;
 }
+
 .p18-tag {
   display: inline-block;
+
   margin-right: 0.55rem;
   padding: 0.05rem 0.45rem;
   border-radius: 0.4rem;
+
   background: color-mix(in srgb, var(--c-accent) 16%, transparent);
   color: var(--c-accent);
+
   font-weight: 700;
 }
 
@@ -443,9 +540,11 @@
 .pt17 {
   gap: 0.4rem;
 }
+
 .p17-list {
   gap: 0.55rem;
 }
+
 .p17-list .step-item {
   font-size: 0.95rem;
   line-height: 1.5;

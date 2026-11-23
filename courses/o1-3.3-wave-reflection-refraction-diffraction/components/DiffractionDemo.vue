@@ -61,106 +61,134 @@ const slitWidth = computed(() => Math.min(100, (ratio.value / 5) * 100));
   flex-direction: column;
   gap: 0.4rem;
 }
+
 .dd-head {
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
 }
+
 .dd-read {
   display: flex;
-  align-items: baseline;
   gap: 0.55rem;
+  align-items: baseline;
 }
+
 .dd-k {
-  font-size: 0.82rem;
   color: var(--c-text-mute);
+  font-size: 0.82rem;
 }
+
 .dd-v {
-  font-size: 1.05rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.05rem;
   font-variant-numeric: tabular-nums;
 }
+
 .dd-status {
   padding: 0.12rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.8rem;
+
   font-weight: 700;
+  font-size: 0.8rem;
   white-space: nowrap;
 }
+
 .dd-strong {
-  color: var(--c-physics);
-  background: color-mix(in srgb, var(--c-physics) 16%, transparent);
   border: 1px solid color-mix(in srgb, var(--c-physics) 40%, transparent);
+  background: color-mix(in srgb, var(--c-physics) 16%, transparent);
+  color: var(--c-physics);
 }
+
 .dd-mid {
-  color: var(--c-accent);
-  background: color-mix(in srgb, var(--c-accent) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--c-accent) 36%, transparent);
+  background: color-mix(in srgb, var(--c-accent) 14%, transparent);
+  color: var(--c-accent);
 }
+
 .dd-weak {
-  color: var(--c-danger);
-  background: color-mix(in srgb, var(--c-danger) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--c-danger) 36%, transparent);
+  background: color-mix(in srgb, var(--c-danger) 14%, transparent);
+  color: var(--c-danger);
 }
+
 .dd-bars {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
+
 .dd-row {
   display: grid;
   grid-template-columns: 4.2rem minmax(0, 1fr);
-  align-items: center;
   gap: 0.6rem;
+  align-items: center;
 }
+
 .dd-l {
-  font-size: 0.8rem;
   color: var(--c-text-dim);
+  font-size: 0.8rem;
   text-align: right;
 }
+
 .dd-track {
   position: relative;
-  height: 0.62rem;
-  border-radius: 999px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
+
   overflow: hidden;
+
+  height: 0.62rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  background: var(--c-surface);
 }
+
 .dd-lambda,
 .dd-slit {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
+
   border-radius: 999px;
 }
+
 .dd-lambda {
   width: 20%;
   background: var(--c-accent-2);
   opacity: 0.65;
 }
+
 .dd-slit {
   background: var(--c-accent);
   transition: width 0.18s ease;
 }
+
 .dd-threshold {
   position: absolute;
   top: -2px;
   bottom: -2px;
   left: 20%;
+
   width: 1px;
+
   background: var(--c-text);
+
   opacity: 0.45;
 }
+
 .dd-foot {
   display: flex;
-  align-items: center;
   gap: 0.6rem;
-  font-size: 0.76rem;
+  align-items: center;
+
   color: var(--c-text-mute);
+
+  font-size: 0.76rem;
 }
+
 .dd-mark {
   color: var(--c-accent);
   font-weight: 700;

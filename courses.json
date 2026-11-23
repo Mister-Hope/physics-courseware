@@ -563,8 +563,8 @@
           "slug": "o1-3.3-wave-reflection-refraction-diffraction",
           "title": "波的反射、折射和衍射",
           "chapter": "§3.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识波的反射、折射现象与衍射条件，用惠更斯思想定性解释，会判断明显衍射的条件（障碍物或孔尺寸与波长关系）。",
+          "tags": ["波的反射", "波的折射", "波的衍射", "波长"]
         },
         {
           "slug": "o1-3.4-wave-interference",
