@@ -335,3 +335,100 @@ clicks: 5
     <div class="tip-hint">加速度和回复力总指向平衡位置；速度与加速度同向时加速，反向时减速。</div>
   </div>
 </div>
+
+---
+layout: base-flex
+title: 振幅变为 2 倍，能量变几倍？
+clicks: 4
+---
+
+<div class="page-grow em-amp-page">
+  <div class="ask">振幅变为 2 倍，最大速度、最大加速度、总机械能各变为几倍？</div>
+  <div class="em-amp-list">
+    <div class="em-amp-row">
+      <span class="em-amp-label">最大速度</span>
+      <span class="em-amp-formula"><Latex tex="v_{\max}=\omega A" /></span>
+      <span class="em-amp-arrow" v-click="1">→</span>
+      <span class="em-amp-value" v-click="1">2 倍</span>
+    </div>
+    <div class="em-amp-row">
+      <span class="em-amp-label">最大加速度</span>
+      <span class="em-amp-formula"><Latex tex="a_{\max}=\omega^2 A" /></span>
+      <span class="em-amp-arrow" v-click="2">→</span>
+      <span class="em-amp-value" v-click="2">2 倍</span>
+    </div>
+    <div class="em-amp-row">
+      <span class="em-amp-label">总机械能</span>
+      <span class="em-amp-formula"><Latex tex="E=\frac{1}{2}kA^2" /></span>
+      <span class="em-amp-arrow" v-click="3">→</span>
+      <span class="em-amp-value" v-click="3">4 倍</span>
+    </div>
+  </div>
+  <div class="em-amp-hint" v-click="4">
+    <div class="tip-hint">振幅越大，机械能越大；总机械能与振幅的平方成正比。</div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 四条线索，串起简谐运动
+---
+
+<div class="page-grow em-structure-page">
+  <div class="em-structure-banner">简谐运动</div>
+  <div class="em-structure-grid">
+    <div class="em-structure-card">
+      <div class="em-structure-head">回复力</div>
+      <div class="em-structure-formula"><Latex tex="F=-kx" /></div>
+      <div class="em-structure-note">总指向平衡位置；合力与位移成正比且反向，就是简谐运动。</div>
+    </div>
+    <div class="em-structure-card">
+      <div class="em-structure-head">加速度</div>
+      <div class="em-structure-formula"><Latex tex="a=-\omega^2 x" /></div>
+      <div class="em-structure-note">由牛顿第二定律得到，方向与位移始终相反。</div>
+    </div>
+    <div class="em-structure-card">
+      <div class="em-structure-head">运动</div>
+      <div class="em-structure-formula"><Latex tex="x=A\sin(\omega t+\varphi)" /></div>
+      <div class="em-structure-note">位移随时间按正弦规律变化，<Latex tex="T=\frac{2\pi}{\omega}" />。</div>
+    </div>
+    <div class="em-structure-card">
+      <div class="em-structure-head">能量</div>
+      <div class="em-structure-formula"><Latex tex="E=\frac{1}{2}kA^2" /></div>
+      <div class="em-structure-note">只有弹力做功，<Latex tex="E_k+E_p" /> 守恒；振幅越大，机械能越大。</div>
+    </div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 课堂小结
+clicks: 5
+---
+
+# 课堂小结
+
+<div class="page-grow">
+  <div class="step-list em-summary">
+    <div class="step-item" v-click="1">
+      <span class="step-no">1</span>
+      <div class="em-summary-text">回复力 <Latex tex="F=-kx" />，总指向平衡位置。</div>
+    </div>
+    <div class="step-item" v-click="2">
+      <span class="step-no">2</span>
+      <div class="em-summary-text">由牛顿第二定律得 <Latex tex="a=-\omega^2x" />，加速度与位移始终反向。</div>
+    </div>
+    <div class="step-item" v-click="3">
+      <span class="step-no">3</span>
+      <div class="em-summary-text">平衡位置 <Latex tex="O" />：<Latex tex="a=0" />、<Latex tex="F=0" />，速度最大；端点：速度为零，加速度、回复力最大。</div>
+    </div>
+    <div class="step-item" v-click="4">
+      <span class="step-no">4</span>
+      <div class="em-summary-text">只有弹力做功，机械能守恒；<Latex tex="E=\frac{1}{2}kA^2" />，振幅越大，机械能越大。</div>
+    </div>
+    <div class="step-item" v-click="5">
+      <span class="step-no">5</span>
+      <div class="em-summary-text">判断简谐运动：找出回复力，看它是否与位移成正比、方向相反。</div>
+    </div>
+  </div>
+</div>

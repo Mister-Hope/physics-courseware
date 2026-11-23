@@ -452,3 +452,120 @@
   display: flex;
   align-items: center;
 }
+
+.em-amp-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.em-amp-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 0;
+}
+
+.em-amp-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.5fr 0.25fr 0.8fr;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
+  border: 1px solid var(--c-border);
+  border-radius: 0.7rem;
+}
+
+.em-amp-label {
+  font-size: 1.05rem;
+  color: var(--c-text);
+}
+
+.em-amp-formula {
+  font-size: 1.15rem;
+}
+
+.em-amp-arrow {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--c-text-dim);
+}
+
+.em-amp-value {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--c-accent);
+}
+
+.em-amp-hint {
+  min-height: 3.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.em-structure-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.em-structure-banner {
+  align-self: center;
+  padding: 0.2rem 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--c-accent);
+  letter-spacing: 0.08em;
+  border: 1px solid var(--c-border-glow);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-accent) 8%, transparent);
+}
+
+.em-structure-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.7rem;
+  min-height: 0;
+}
+
+.em-structure-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.7rem 0.9rem;
+  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+}
+
+.em-structure-head {
+  font-size: 1rem;
+  color: var(--c-text-dim);
+}
+
+.em-structure-formula {
+  font-size: 1.3rem;
+}
+
+.em-structure-note {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+}
+
+.em-summary .step-item {
+  align-items: flex-start;
+}
+
+.em-summary-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--c-text);
+}

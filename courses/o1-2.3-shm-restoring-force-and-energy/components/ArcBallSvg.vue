@@ -1,17 +1,17 @@
 <script setup lang="ts">
-const { showForces = false } = defineProps<{ showForces?: boolean }>()
-const CX = 260
-const CY = 50
-const R = 190
-const theta = (20 * Math.PI) / 180
-const arcX = CX + R * Math.sin(theta)
-const arcY = CY + R * Math.cos(theta)
-const ballX = arcX - 14 * Math.sin(theta)
-const ballY = arcY - 14 * Math.cos(theta)
-const normalX = ballX - 0.342 * 48
-const normalY = ballY - 0.94 * 48
-const tangentX = ballX - 0.94 * 24
-const tangentY = ballY + 0.342 * 24
+const { showForces = false } = defineProps<{ showForces?: boolean }>();
+const CX = 260;
+const CY = 50;
+const R = 190;
+const theta = (20 * Math.PI) / 180;
+const arcX = CX + R * Math.sin(theta);
+const arcY = CY + R * Math.cos(theta);
+const ballX = arcX - 14 * Math.sin(theta);
+const ballY = arcY - 14 * Math.cos(theta);
+const normalX = ballX - 0.342 * 48;
+const normalY = ballY - 0.94 * 48;
+const tangentX = ballX - 0.94 * 24;
+const tangentY = ballY + 0.342 * 24;
 </script>
 
 <template>

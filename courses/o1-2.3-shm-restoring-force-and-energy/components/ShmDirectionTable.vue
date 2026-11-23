@@ -8,28 +8,36 @@
       <span>大小变化</span>
     </div>
     <div class="em-dir-row">
-      <span class="em-dir-situation">在 <Latex tex="O" /> 与 <Latex tex="P" /> 之间，远离 <Latex tex="O" /></span>
+      <span class="em-dir-situation"
+        >在 <Latex tex="O" /> 与 <Latex tex="P" /> 之间，远离 <Latex tex="O"
+      /></span>
       <span class="em-dir-cell" v-click="1">向右</span>
       <span class="em-dir-cell" v-click="1">向右</span>
       <span class="em-dir-cell" v-click="1">向左</span>
       <span class="em-dir-cell em-dir-up" v-click="1">增大</span>
     </div>
     <div class="em-dir-row">
-      <span class="em-dir-situation">在 <Latex tex="O" /> 与 <Latex tex="P" /> 之间，靠近 <Latex tex="O" /></span>
+      <span class="em-dir-situation"
+        >在 <Latex tex="O" /> 与 <Latex tex="P" /> 之间，靠近 <Latex tex="O"
+      /></span>
       <span class="em-dir-cell" v-click="2">向右</span>
       <span class="em-dir-cell" v-click="2">向左</span>
       <span class="em-dir-cell" v-click="2">向左</span>
       <span class="em-dir-cell em-dir-down" v-click="2">减小</span>
     </div>
     <div class="em-dir-row">
-      <span class="em-dir-situation">在 <Latex tex="O" /> 与 <Latex tex="Q" /> 之间，远离 <Latex tex="O" /></span>
+      <span class="em-dir-situation"
+        >在 <Latex tex="O" /> 与 <Latex tex="Q" /> 之间，远离 <Latex tex="O"
+      /></span>
       <span class="em-dir-cell" v-click="3">向左</span>
       <span class="em-dir-cell" v-click="3">向左</span>
       <span class="em-dir-cell" v-click="3">向右</span>
       <span class="em-dir-cell em-dir-up" v-click="3">增大</span>
     </div>
     <div class="em-dir-row">
-      <span class="em-dir-situation">在 <Latex tex="O" /> 与 <Latex tex="Q" /> 之间，靠近 <Latex tex="O" /></span>
+      <span class="em-dir-situation"
+        >在 <Latex tex="O" /> 与 <Latex tex="Q" /> 之间，靠近 <Latex tex="O"
+      /></span>
       <span class="em-dir-cell" v-click="4">向左</span>
       <span class="em-dir-cell" v-click="4">向右</span>
       <span class="em-dir-cell" v-click="4">向右</span>

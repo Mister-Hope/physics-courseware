@@ -1,10 +1,16 @@
 <script setup lang="ts">
-const { showForces = false } = defineProps<{ showForces?: boolean }>()
+const { showForces = false } = defineProps<{ showForces?: boolean }>();
 </script>
 
 <template>
   <svg class="em-qual-svg" viewBox="0 0 520 260" role="img" aria-label="木筷竖直浮在水中">
-    <path d="M 150 55 L 150 225 Q 150 245 170 245 L 350 245 Q 370 245 370 225 L 370 55" fill="none" stroke="var(--c-text-dim)" stroke-width="3" stroke-linecap="round" />
+    <path
+      d="M 150 55 L 150 225 Q 150 245 170 245 L 350 245 Q 370 245 370 225 L 370 55"
+      fill="none"
+      stroke="var(--c-text-dim)"
+      stroke-width="3"
+      stroke-linecap="round"
+    />
     <path d="M 158 138 L 158 224 Q 158 237 171 237 L 349 237 Q 362 237 362 224 L 362 138 Z" fill="var(--c-sky)" opacity="0.22" />
     <path d="M 158 138 L 362 138" stroke="var(--c-sky)" stroke-width="2.5" opacity="0.9" />
     <rect x="252" y="30" width="16" height="180" rx="5" fill="var(--c-accent-2)" opacity="0.9" />
