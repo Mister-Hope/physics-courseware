@@ -31,10 +31,21 @@ title: 碰撞中的动量守恒条件
 
 <div class="page-grow">
 <div class="ask-lead">碰撞只持续几毫秒，动量为什么还能守恒？</div>
-<div class="flow-line" v-click="1"><span class="flow-dot"></span><div><strong>时间极短</strong>：重力、摩擦力的冲量 <Latex tex="F\Delta t" /> 小到可以忽略</div></div>
-<div class="flow-line" v-click="2"><span class="flow-dot is-blue"></span><div><strong>内力极大</strong>：碰撞瞬间两物体之间的作用力远大于外力</div></div>
-<div class="flow-line" v-click="3"><span class="flow-dot"></span><div><strong>条件满足</strong>：系统所受外力的矢量和为 0，或远小于内力</div></div>
-<div class="tip-hint" v-click="3">要验证的就是：<Latex tex="m_1 v_1' + m_2 v_2' = m_1 v_1 + m_2 v_2" /> 在误差范围内成立。</div>
+<div class="half-grid">
+<div class="card">
+<div class="mini-title">碰撞时间</div>
+<div class="eq-line"><Latex tex="\Delta t \approx 10^{-3}\ \text{s}" /></div>
+<div class="mini-note">只有几毫秒</div>
+</div>
+<div class="card">
+<div class="mini-title">相互作用力</div>
+<div class="eq-line"><Latex tex="F_{\text{内}} \approx 10^{3}\ \text{N}" /></div>
+<div class="mini-note">远大于重力、摩擦力</div>
+</div>
+</div>
+<div class="flow-line" v-click="1"><span class="flow-dot"></span><div><strong>外力</strong>：重力、摩擦力的冲量只有 <Latex tex="mg\Delta t \approx 5\times 10^{-3}\ \text{N}\cdot\text{s}" /></div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot is-blue"></span><div><strong>内力</strong>：冲量 <Latex tex="F_{\text{内}}\Delta t \approx 1\ \text{N}\cdot\text{s}" />，比外力冲量大两个数量级</div></div>
+<div class="tip-hint" v-click="2">碰撞过程中外力的冲量可以忽略，系统的总动量近似守恒。</div>
 </div>
 
 ---
@@ -170,4 +181,105 @@ clicks: 3
 <div class="flow-line" v-click="1"><span class="flow-dot"></span><div>碰前总动量 <Latex tex="p = 0.0800\ \text{kg}\cdot\text{m/s}" /></div></div>
 <div class="flow-line" v-click="2"><span class="flow-dot is-blue"></span><div>碰后总动量 <Latex tex="p' = 0.0796\ \text{kg}\cdot\text{m/s}" /></div></div>
 <div class="tip-hint" v-click="3">相对误差 <Latex tex="\dfrac{|p' - p|}{p} = 0.5\%" />，在误差范围内相等。</div>
+</div>
+
+---
+title: 差 0.0004 算“相等”吗？
+clicks: 3
+---
+
+<div class="page-grow">
+<div class="ask">两次总动量差了 0.0004，这能算“相等”吗？</div>
+<div class="eq-line"><Latex tex="\dfrac{|p' - p|}{p} \times 100\% = \dfrac{|0.0796 - 0.0800|}{0.0800} \times 100\% = 0.5\%" /></div>
+<div class="flow-line" v-click="1"><span class="flow-dot"></span><div>测量总有误差：仪器精度、计时、落点判断都不可能完美</div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot is-blue"></span><div>相对误差在 5% 以内，就认为碰前、碰后总动量相等</div></div>
+<div class="flow-line" v-click="3"><span class="flow-dot"></span><div>误差明显超标时，先查操作，不能改数据去凑结果</div></div>
+</div>
+
+---
+title: 误差从哪里来
+clicks: 4
+---
+
+<div class="page-grow">
+<div class="ask">哪些操作会让碰前、碰后的总动量对不上？</div>
+<div class="flow-line" v-click="1"><span class="flow-dot"></span><div><strong>导轨没调平</strong>：重力沿导轨的分量一直做冲量，小车自己在加速</div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot is-blue"></span><div><strong>挡光片太宽</strong>：测到的是平均速度，不是碰撞前后的瞬时速度</div></div>
+<div class="flow-line" v-click="3"><span class="flow-dot"></span><div><strong>碰撞不是一维的</strong>：滑块有侧向速度，动量还分散在别的方向</div></div>
+<div class="flow-line" v-click="4"><span class="flow-dot is-blue"></span><div><strong>气垫不足</strong>：摩擦不能忽略，外力的冲量不再为零</div></div>
+</div>
+
+---
+title: 偏差的方向能说明什么？
+clicks: 2
+---
+
+<div class="page-grow">
+<div class="ask">两次实验的条件没对齐，结果会偏向哪边？</div>
+<div class="half-grid">
+<div>
+<div class="mini-title">① 第二次释放位置偏低</div>
+<div v-click="1"><Latex tex="v_1" /> 比应有的小，碰后两个速度都偏小 ⇒ 碰后总动量<strong>偏小</strong>（<Latex tex="p' < p" />）</div>
+</div>
+<div class="divider-l">
+<div class="mini-title">② 第一次槽末端略微上倾</div>
+<div v-click="2">第一次测得的 <Latex tex="v_1" /> 偏小 ⇒ 碰后总动量<strong>偏大</strong>（<Latex tex="p' > p" />）</div>
+</div>
+</div>
+<div class="tip-hint" v-click="2">偏差的方向，就是操作问题的线索。</div>
+</div>
+
+---
+title: 从纸带读出碰前、碰后的速度
+clicks: 3
+---
+
+<div class="page-grow-tight">
+<div class="ask">这条纸带上，碰前、碰后各该取哪一段？</div>
+<div class="figure fig-fit"><TapeStrip :step="$clicks" /></div>
+<div class="flow-line" v-click="1"><span class="flow-dot is-blue"></span><div>碰前：<Latex tex="v = \dfrac{5.00\,\text{cm}}{0.1\,\text{s}} = 0.50\,\text{m/s}" />，<Latex tex="p = 0.40 \times 0.50 = 0.200\ \text{kg}\cdot\text{m/s}" /></div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot"></span><div>碰后：<Latex tex="v' = \dfrac{3.35\,\text{cm}}{0.1\,\text{s}} = 0.335\,\text{m/s}" /></div></div>
+<div class="flow-line" v-click="3"><span class="flow-dot is-blue"></span><div><Latex tex="p' = (0.40 + 0.20) \times 0.335 = 0.201\ \text{kg}\cdot\text{m/s}" />，与 <Latex tex="p" /> 相差 0.5%</div></div>
+</div>
+
+---
+title: 两个方案，各自的取舍
+clicks: 1
+---
+
+<div class="page-grow">
+<div class="ask">同样是验证动量守恒，为什么要准备两套装置？</div>
+<table class="data-table">
+<thead>
+<tr><th>方案</th><th>速度怎么得到</th><th>优点</th><th>局限</th></tr>
+</thead>
+<tbody>
+<tr><td>气垫导轨</td><td>光电门测挡光时间</td><td>摩擦极小，可以反复测</td><td>要调平，导轨占地方</td></tr>
+<tr><td>斜槽末端</td><td>平抛的水平距离</td><td>器材简单，一把米尺就够</td><td>落点分散，要多测几次</td></tr>
+</tbody>
+</table>
+<div class="tip-hint" v-click="1">两个方案都在做同一件事：让外力可以忽略，把速度变成能测的量。</div>
+</div>
+
+---
+title: 实验结论
+clicks: 3
+---
+
+<div class="page-grow">
+<div class="ask-lead">在误差范围内，碰前、碰后的总动量相等。</div>
+<div class="flow-line" v-click="1"><span class="flow-dot"></span><div>碰撞过程中系统的总动量守恒，与两物体质量是否相同无关</div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot is-blue"></span><div>实验“验证”的是：在测量精度内，理论经得起检验</div></div>
+<div class="flow-line" v-click="3"><span class="flow-dot"></span><div>定律的普适性来自大量实验，不靠某一次实验“证明”</div></div>
+</div>
+
+---
+layout: focus-question
+title: 思考
+---
+
+<div class="stack">
+<div class="ask">两车碰撞后粘在一起，纸带上的点距会怎么变？</div>
+<div class="ask">斜槽方案里，为什么可以不测出速度的数值？</div>
+<div class="ask">如果换成温度、压力这些量，这套思路还成立吗？</div>
 </div>
