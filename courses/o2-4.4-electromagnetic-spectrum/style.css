@@ -115,3 +115,133 @@
 .em-spectrum-page {
   gap: 1.2rem;
 }
+
+/* ── 第 5 页：无线电波 ── */
+.em-radio-page {
+  gap: 0.9rem;
+  padding-top: 0.3rem;
+}
+
+.em-radio-page .mini-note {
+  text-align: center;
+}
+
+/* ── 第 6、8 页：应用小项 ── */
+.em-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.em-tile-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 1.4rem;
+}
+
+.em-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  align-items: center;
+
+  min-width: 0;
+  padding: 0.3rem 0.6rem;
+  text-align: center;
+}
+
+.em-tile-icon {
+  color: var(--c-accent);
+}
+
+.em-tile-name {
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.em-tile-desc {
+  color: var(--c-text-dim);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.em-ir-page {
+  gap: 1.2rem;
+  padding-top: 0.5rem;
+}
+
+/* ── 第 7 页：可见光 ── */
+.em-visible-page {
+  gap: 0.7rem;
+  padding-top: 0.3rem;
+}
+
+/* ── 第 8 页：紫外线 ── */
+.em-uv-page {
+  gap: 1.2rem;
+}
+
+.em-uv-page .ask {
+  margin-top: 0.4rem;
+}
+
+/* ── 第 9 页：X 射线和 γ 射线 ── */
+.em-x-page {
+  gap: 1rem;
+}
+
+.em-x-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.em-x-col {
+  min-width: 0;
+  padding: 0 1.4rem;
+}
+
+.em-x-col:first-child {
+  padding-left: 0;
+}
+
+.em-x-col + .em-x-col {
+  border-left: 1px solid var(--c-border);
+}
+
+.em-x-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  margin-bottom: 0.6rem;
+
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.em-x-icon {
+  color: var(--c-accent);
+}
+
+.em-x-row {
+  display: flex;
+  gap: 0.6rem;
+
+  padding: 0.42rem 0;
+
+  border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
+
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.em-x-row:last-child {
+  border-bottom: 0;
+}
+
+.em-x-label {
+  flex: 0 0 2.2rem;
+
+  color: var(--c-text-mute);
+  font-size: 0.78rem;
+  line-height: 1.8;
+}
