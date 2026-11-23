@@ -11,8 +11,8 @@
 }
 
 .pz-intro {
-  justify-content: center;
   gap: 1.8rem;
+  justify-content: center;
 }
 
 .pz-intro .ask-lead {
@@ -46,48 +46,54 @@
 }
 
 .pz-apps {
-  justify-content: center;
   gap: 1.5rem;
+  justify-content: center;
 }
 
 .pz-feats {
-  justify-content: center;
   gap: 1.15rem;
+  justify-content: center;
 }
 
 .pz-feat {
   display: flex;
-  align-items: baseline;
   gap: 0.85rem;
+  align-items: baseline;
+
   font-size: 1.1rem;
   line-height: 1.55;
 }
 
 .pz-feat-no {
   flex: none;
+
   width: 1.55rem;
   height: 1.55rem;
   border-radius: 50%;
+
   background: color-mix(in srgb, var(--c-accent) 22%, transparent);
   color: var(--c-accent);
-  font-size: 0.95rem;
+
   font-weight: 700;
+  font-size: 0.95rem;
   line-height: 1.55rem;
   text-align: center;
 }
 
 .pz-stem {
-  font-size: 1.08rem;
-  line-height: 1.62;
   padding: 0.9rem 1.1rem;
   border-left: 3px solid var(--c-physics);
   border-radius: 0.6rem;
+
   background: color-mix(in srgb, var(--c-physics) 8%, transparent);
+
+  font-size: 1.08rem;
+  line-height: 1.62;
 }
 
 .pz-summary {
-  justify-content: center;
   gap: 1.3rem;
+  justify-content: center;
 }
 
 .pz-sum-item {
