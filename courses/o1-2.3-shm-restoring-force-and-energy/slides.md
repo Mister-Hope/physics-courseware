@@ -229,3 +229,24 @@ clicks: 1
     <div class="tip-hint" v-click="1"><Latex tex="E_p+E_k" /> 保持不变，总量等于 <Latex tex="\frac{1}{2}kA^2" />。</div>
   </div>
 </div>
+
+---
+layout: base-flex
+title: 证明斜面上的小球做简谐运动
+clicks: 4
+---
+
+<div class="page-grow em-incline-page">
+  <div class="em-incline-left">
+    <div class="em-exercise-stem">一根轻弹簧固定在斜面顶端，下端与小球相连。把小球沿斜面向下拉开一段距离后由静止释放。证明小球的运动是简谐运动。</div>
+    <div class="em-proof">
+      <div class="em-proof-step" v-click="1"><span class="em-proof-no">1</span><div>设平衡位置为 <Latex tex="O" />，此时弹簧伸长 <Latex tex="x_0" />。在 <Latex tex="O" /> 点：<Latex tex="mg\sin\theta=kx_0" />。</div></div>
+      <div class="em-proof-step" v-click="2"><span class="em-proof-no">2</span><div><div>从 <Latex tex="O" /> 沿斜面向下移动 <Latex tex="x" />，弹簧伸长 <Latex tex="x_0+x" />。</div><div>合力：<Latex tex="F=mg\sin\theta-k(x_0+x)" />。</div></div></div>
+      <div class="em-proof-step" v-click="3"><span class="em-proof-no">3</span><div>代入 <Latex tex="mg\sin\theta=kx_0" />，得 <Latex tex="F=-kx" />。</div></div>
+      <div class="em-proof-step" v-click="4"><span class="em-proof-no">4</span><div>小球所受合力与位移大小成正比、方向相反，所以小球做简谐运动。</div></div>
+    </div>
+  </div>
+  <div class="em-incline-figure">
+    <InclineSpringSvg :show-forces="$clicks >= 1" :show-displacement="$clicks >= 2" />
+  </div>
+</div>

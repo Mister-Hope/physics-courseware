@@ -247,3 +247,63 @@
 .em-derive-step .katex-display {
   margin: 0.1rem 0;
 }
+
+.em-incline-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.em-incline-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.em-exercise-stem {
+  padding: 0.15rem 0 0.15rem 0.85rem;
+  border-left: 3px solid var(--c-accent);
+  color: var(--c-text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.em-proof {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.em-proof-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.em-proof-no {
+  display: flex;
+  flex: 0 0 1.45rem;
+  align-items: center;
+  justify-content: center;
+  width: 1.45rem;
+  height: 1.45rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: var(--c-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.em-proof-step .katex {
+  font-size: 1em;
+}
+
+.em-incline-figure {
+  width: 100%;
+  min-width: 0;
+}
