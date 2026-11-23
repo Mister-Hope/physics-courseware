@@ -226,3 +226,127 @@ clicks: 1
 <MomentumSlider />
 <div class="tip-hint" v-click="1">速度加倍：<Latex tex="p" /> 加倍，<Latex tex="E_{\mathrm{k}}" /> 变为 4 倍；质量加倍：<Latex tex="p" /> 加倍，<Latex tex="E_{\mathrm{k}}" /> 也加倍。</div>
 </div>
+
+---
+layout: exercise-split
+title: "练习：动量与动能"
+clicks: 3
+---
+
+<template v-slot:stem>
+
+质量为 <Latex tex="2\ \text{kg}" /> 的物体，速度由 <Latex tex="3\ \text{m/s}" /> 增大到 <Latex tex="6\ \text{m/s}" />。它的动量和动能各增大为原来的几倍？
+
+</template>
+
+<div class="stack">
+<div v-click="1"><Latex tex="p_1=mv_1=2\times3=6\ \text{kg·m/s}" />，<Latex tex="p_2=mv_2=2\times6=12\ \text{kg·m/s}" />，增大为 2 倍。</div>
+<div v-click="2"><Latex tex="E_{\mathrm{k}1}=\tfrac12mv_1^2=\tfrac12\times2\times3^2=9\ \text{J}" />，<Latex tex="E_{\mathrm{k}2}=\tfrac12\times2\times6^2=36\ \text{J}" />，增大为 4 倍。</div>
+<div v-click="3">速度变为原来的 2 倍：<Latex tex="p" /> 变为 2 倍，<Latex tex="E_{\mathrm{k}}" /> 变为 4 倍。</div>
+</div>
+
+---
+layout: exercise-split
+title: "练习：动量变化"
+clicks: 4
+---
+
+<template v-slot:stem>
+
+质量为 <Latex tex="2\ \text{kg}" /> 的物体，速度由向东的 <Latex tex="3\ \text{m/s}" /> 变为向西的 <Latex tex="3\ \text{m/s}" />。它的动量和动能是否发生变化？如果发生变化，变化量各是多少？
+
+</template>
+
+<template v-slot:fig>
+
+<VelocityFlipSvg :show-p="$clicks >= 1" />
+
+</template>
+
+<div class="stack-tight">
+<div v-click="1">取向东为正方向。</div>
+<div v-click="1"><Latex tex="p=mv=+6\ \text{kg·m/s}" /></div>
+<div v-click="1"><Latex tex="p'=mv'=-6\ \text{kg·m/s}" /></div>
+<div v-click="2"><Latex tex="\Delta p=p'-p=-12\ \text{kg·m/s}" />，方向向西。</div>
+<div v-click="3"><Latex tex="E_{\mathrm{k}}=\tfrac12mv^2=9\ \text{J}" />，动能不变。</div>
+<div v-click="4">速度方向改变：动量改变，动能不变。</div>
+</div>
+
+---
+layout: exercise-split
+title: "练习：动量与动能的求和"
+clicks: 3
+---
+
+<template v-slot:stem>
+
+A 物体质量 <Latex tex="2\ \text{kg}" />，速度 <Latex tex="3\ \text{m/s}" />，方向向东；B 物体质量 <Latex tex="3\ \text{kg}" />，速度 <Latex tex="4\ \text{m/s}" />，方向向西。它们动量的矢量和是多少？动能之和是多少？
+
+</template>
+
+<template v-slot:fig>
+
+<MomentumSumSvg :show-p="$clicks >= 1" :show-sum="$clicks >= 2" />
+
+</template>
+
+<div class="stack-tight">
+<div v-click="1">取向东为正方向。</div>
+<div v-click="1"><Latex tex="p_A=+6\ \text{kg·m/s}" />，<Latex tex="p_B=-12\ \text{kg·m/s}" />。</div>
+<div v-click="2"><Latex tex="p_A+p_B=-6\ \text{kg·m/s}" />，方向向西。</div>
+<div v-click="3"><Latex tex="E_{\mathrm{k}}=E_{\mathrm{k}A}+E_{\mathrm{k}B}=9\ \text{J}+24\ \text{J}=33\ \text{J}" />。</div>
+</div>
+
+---
+clicks: 1
+---
+
+# 课堂小结
+
+<div class="page-grow page-around">
+<div class="three-col">
+<div class="card">
+<div class="mini-title">动量</div>
+<div class="summary-line"><Latex tex="p=mv" /></div>
+<div>矢量，方向与 <Latex tex="v" /> 相同；一维运动中用正负号表示方向。</div>
+</div>
+<div class="card">
+<div class="mini-title">动量的变化量</div>
+<div class="summary-line"><Latex tex="\Delta p=p'-p" /></div>
+<div>先规定正方向，再代入带符号的 <Latex tex="p" />。</div>
+</div>
+<div class="card">
+<div class="mini-title">动量与动能</div>
+<div class="summary-line"><Latex tex="E_{\mathrm{k}}=\dfrac{p^2}{2m}" /></div>
+<div class="summary-line"><Latex tex="p=\sqrt{2mE_{\mathrm{k}}}" /></div>
+<div>动量变化时，动能不一定变化。</div>
+</div>
+</div>
+<div class="tip-hint" v-click="1"><Latex tex="\Delta p" /> 的方向与 <Latex tex="\Delta v" /> 的方向相同。</div>
+</div>
+
+---
+layout: focus-question
+title: "做一做：接气球"
+clicks: 2
+---
+
+<template v-slot:icon>
+
+<mdi-balloon />
+
+</template>
+
+把充气到直径约 <Latex tex="1\ \text{m}" /> 的大气球，以某一速度水平投向你，请你接住；把气放掉后气球变得很小，再以相同的速度投给你。两次体验有什么不同？为什么？
+
+<template v-slot:hint>
+
+两次投来的速度相同，气球的质量不同。
+
+</template>
+
+<template v-slot:answer>
+
+大气球质量大，速度相同时动量大；接住它时速度同样减到 0，要改变的动量更大。
+
+</template>
