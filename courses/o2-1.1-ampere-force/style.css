@@ -1,5 +1,40 @@
-/* ═══════════════════════════════════════════════
-   磁场对通电导线的作用力 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 本课特有样式（共享原子见 workspace/shared/styles，勿重复定义） */
+
+/* 封面课题名 11 个字，压到 2.7rem 保持一行（参考 o2-1.2 的处理） */
+.cover-title {
+  font-size: 2.7rem !important;
+}
+
+/* 第 3 页：方向实验的切换按钮 */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.toggle-btn {
+  padding: 0.42rem 0.9rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--c-accent) 10%, transparent);
+  color: var(--c-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.toggle-btn:hover {
+  background: color-mix(in srgb, var(--c-accent) 18%, transparent);
+  border-color: var(--c-accent);
+}
+.toggle-btn:active {
+  transform: translateY(1px);
+}
+
+/* 本课 SVG 图统一按容器缩放 */
+.course-fig {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
