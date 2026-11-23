@@ -528,8 +528,8 @@
           "slug": "o1-2.4-simple-pendulum",
           "title": "单摆",
           "chapter": "§2.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "分析单摆的回复力，在摆角很小时证明其做简谐运动，推导周期 T=2π√(l/g) 并讨论摆长、重力加速度的影响。",
+          "tags": ["单摆", "简谐运动", "周期公式", "回复力"]
         },
         {
           "slug": "o1-2.5-experiment-pendulum-g",

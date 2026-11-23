@@ -132,14 +132,14 @@ const stringLength = computed<number>(() => 80 + ((length.value - 0.2) / 1.3) * 
 
 .sp-lab-cap {
   margin-top: 0.25rem;
-  font-size: 0.75rem;
   color: var(--c-text-dim);
+  font-size: 0.75rem;
   text-align: center;
 }
 
 .sp-swing {
-  transform-box: view-box;
   transform-origin: 150px 26px;
+  transform-box: view-box;
   animation: sp-swing 2s ease-in-out infinite;
 }
 
@@ -166,25 +166,29 @@ const stringLength = computed<number>(() => 80 + ((length.value - 0.2) / 1.3) * 
 
 .sp-g {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .sp-g-label {
-  font-size: 0.8rem;
   color: var(--c-text-dim);
+  font-size: 0.8rem;
   white-space: nowrap;
 }
 
 .sp-g-btn {
   padding: 0.18rem 0.65rem;
-  font-family: inherit;
-  font-size: 0.8rem;
-  color: var(--c-text-dim);
-  cursor: pointer;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-sm);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-size: 0.8rem;
+  font-family: inherit;
+
+  cursor: pointer;
+
   transition:
     color 0.15s,
     background 0.15s,
@@ -192,33 +196,37 @@ const stringLength = computed<number>(() => 80 + ((length.value - 0.2) / 1.3) * 
 }
 
 .sp-g-btn.is-active {
-  font-weight: 700;
-  color: var(--c-bg);
-  background: var(--c-accent);
   border-color: var(--c-accent);
+  background: var(--c-accent);
+  color: var(--c-bg);
+  font-weight: 700;
 }
 
 .sp-g-value {
   margin-left: auto;
-  font-size: 0.8rem;
+
   color: var(--c-text-dim);
-  white-space: nowrap;
+
+  font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .sp-readout {
   display: flex;
   gap: 0.7rem;
   align-items: baseline;
+
   padding: 0.35rem 0.8rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
+  background: var(--c-surface);
 }
 
 .sp-readout-label {
-  font-size: 0.78rem;
   color: var(--c-text-dim);
+  font-size: 0.78rem;
 }
 
 .sp-readout-value {
