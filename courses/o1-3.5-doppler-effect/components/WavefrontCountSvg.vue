@@ -35,9 +35,7 @@ interface Row {
 
 const makeLines = (spacing: number): number[] => {
   const xs: number[] = [];
-  for (let x = 152; x <= 612; x += spacing) {
-    xs.push(x);
-  }
+  for (let x = 152; x <= 612; x += spacing) xs.push(x);
   return xs;
 };
 

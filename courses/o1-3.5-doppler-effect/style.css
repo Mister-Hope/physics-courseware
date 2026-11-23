@@ -15,7 +15,7 @@
 }
 
 .dp-fig-crowd {
-  max-width: 840px;
+  max-width: 788px;
 }
 
 .dp-fig-wave {
@@ -23,5 +23,125 @@
 }
 
 .dp-fig-move {
-  max-width: 720px;
+  max-width: 648px;
+}
+
+.dp-fig-ripple {
+  max-width: 508px;
+}
+
+.dp-table {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.dp-tr {
+  display: grid;
+  grid-template-columns: 6.5rem 8.5rem 10rem 12rem;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 0.7rem;
+  background: var(--c-surface);
+  font-size: 1rem;
+}
+
+.dp-th {
+  background: transparent;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.dp-row {
+  align-items: start;
+}
+
+.dp-case {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--c-border);
+  line-height: 1.55;
+}
+
+.dp-case-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.dp-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.dp-fig-explorer {
+  max-width: 540px;
+  align-self: center;
+}
+
+.dp-explorer-row {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr) 8rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.2rem;
+}
+
+.dp-explorer-label {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+}
+
+.dp-explorer-value {
+  text-align: right;
+  font-size: 0.95rem;
+}
+
+.dp-read {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.dp-read-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 0.7rem;
+  background: var(--c-surface);
+  font-size: 1rem;
+}
+
+.dp-read-label {
+  font-size: 0.88rem;
+  color: var(--c-text-dim);
+}
+
+.dp-read-sub {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+}
+
+.dp-fig-spectrum {
+  max-width: 660px;
+}
+
+.dp-options {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 1.05rem;
+  padding-left: 1rem;
+}
+
+.dp-answer {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c-physics);
+  letter-spacing: 0.1em;
 }
