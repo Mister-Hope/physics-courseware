@@ -66,6 +66,10 @@ const { step = 0 } = defineProps<{ step?: number }>();
   width: 100%;
   margin-inline: auto;
 }
+.mdt th,
+.mdt td {
+  padding-block: 0.22rem;
+}
 .mdt td {
   font-variant-numeric: tabular-nums;
 }

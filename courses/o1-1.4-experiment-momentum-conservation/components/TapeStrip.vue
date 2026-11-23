@@ -6,7 +6,16 @@ const { step = 0 } = defineProps<{ step?: number }>();
 
 <template>
   <svg viewBox="0 0 900 200" class="ts-svg" role="img" aria-label="打点计时器纸带">
-    <rect x="56" y="74" width="788" height="46" rx="6" fill="var(--c-surface)" stroke="var(--c-border)" stroke-width="1.4" />
+    <rect
+      x="56"
+      y="74"
+      width="788"
+      height="46"
+      rx="6"
+      fill="var(--c-surface)"
+      stroke="var(--c-border)"
+      stroke-width="1.4"
+    />
     <g fill="var(--c-text)">
       <circle cx="110" cy="97" r="4.6" />
       <circle cx="270" cy="97" r="4.6" />
@@ -14,7 +23,13 @@ const { step = 0 } = defineProps<{ step?: number }>();
       <circle cx="564" cy="97" r="4.6" />
       <circle cx="671" cy="97" r="4.6" />
     </g>
-    <g font-size="14" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text-dim)" text-anchor="middle">
+    <g
+      font-size="14"
+      font-family="KaTeX_Math"
+      font-style="italic"
+      fill="var(--c-text-dim)"
+      text-anchor="middle"
+    >
       <text x="110" y="62">A</text>
       <text x="270" y="62">B</text>
       <text x="430" y="62">C</text>
@@ -31,18 +46,64 @@ const { step = 0 } = defineProps<{ step?: number }>();
       <text x="497" y="150">4.2 cm</text>
       <text x="617" y="150">3.35 cm</text>
     </g>
-    <text x="450" y="184" text-anchor="middle" font-size="13" fill="var(--c-text-dim)">相邻计数点时间间隔 T = 0.1 s（50 Hz，每 5 个间隔取一点）</text>
+    <text
+      x="450"
+      y="184"
+      text-anchor="middle"
+      font-size="13"
+      font-family="KaTeX_Main"
+      fill="var(--c-text-dim)"
+    >
+      相邻计数点时间间隔 <tspan font-family="KaTeX_Math" font-style="italic">T</tspan> = 0.1 s（50
+      Hz，每 5 个间隔取一点）
+    </text>
     <g v-if="step >= 1">
-      <rect x="256" y="64" width="188" height="66" rx="9" fill="none" stroke="var(--c-accent-2)" stroke-width="1.8" stroke-dasharray="6 5" />
-      <text x="350" y="42" text-anchor="middle" font-size="14" fill="var(--c-accent-2)">碰前可用：v = 0.50 m/s</text>
+      <rect
+        x="256"
+        y="64"
+        width="188"
+        height="52"
+        rx="9"
+        fill="none"
+        stroke="var(--c-accent-2)"
+        stroke-width="1.8"
+        stroke-dasharray="6 5"
+      />
+      <text x="350" y="42" text-anchor="middle" font-size="14" fill="var(--c-accent-2)">
+        碰前可用：v = 0.50 m/s
+      </text>
     </g>
     <g v-if="step >= 2">
-      <rect x="550" y="64" width="135" height="66" rx="9" fill="none" stroke="var(--c-accent)" stroke-width="1.8" stroke-dasharray="6 5" />
-      <text x="671" y="42" text-anchor="middle" font-size="14" fill="var(--c-accent)">碰后可用：v = 0.335 m/s</text>
+      <rect
+        x="550"
+        y="64"
+        width="135"
+        height="52"
+        rx="9"
+        fill="none"
+        stroke="var(--c-accent)"
+        stroke-width="1.8"
+        stroke-dasharray="6 5"
+      />
+      <text x="671" y="42" text-anchor="middle" font-size="14" fill="var(--c-accent)">
+        碰后可用：v = 0.335 m/s
+      </text>
     </g>
     <g v-if="step >= 3">
-      <rect x="442" y="64" width="110" height="66" rx="9" fill="none" stroke="var(--c-danger)" stroke-width="1.8" stroke-dasharray="6 5" />
-      <text x="497" y="42" text-anchor="middle" font-size="14" fill="var(--c-danger)">碰撞中，不能用</text>
+      <rect
+        x="442"
+        y="64"
+        width="110"
+        height="52"
+        rx="9"
+        fill="none"
+        stroke="var(--c-danger)"
+        stroke-width="1.8"
+        stroke-dasharray="6 5"
+      />
+      <text x="497" y="42" text-anchor="middle" font-size="14" fill="var(--c-danger)">
+        碰撞中，不能用
+      </text>
     </g>
   </svg>
 </template>

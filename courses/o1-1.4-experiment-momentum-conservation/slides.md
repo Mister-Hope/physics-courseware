@@ -175,7 +175,7 @@ title: 某次实验的数据
 clicks: 3
 ---
 
-<div class="page-grow">
+<div class="page-grow-tight">
 <div class="ask">把这些数代进去，碰前、碰后的总动量相等吗？</div>
 <MomentumDataTable :step="$clicks" />
 <div class="flow-line" v-click="1"><span class="flow-dot"></span><div>碰前总动量 <Latex tex="p = 0.0800\ \text{kg}\cdot\text{m/s}" /></div></div>
@@ -237,8 +237,8 @@ clicks: 3
 <div class="page-grow-tight">
 <div class="ask">这条纸带上，碰前、碰后各该取哪一段？</div>
 <div class="figure fig-fit"><TapeStrip :step="$clicks" /></div>
-<div class="flow-line" v-click="1"><span class="flow-dot is-blue"></span><div>碰前：<Latex tex="v = \dfrac{5.00\,\text{cm}}{0.1\,\text{s}} = 0.50\,\text{m/s}" />，<Latex tex="p = 0.40 \times 0.50 = 0.200\ \text{kg}\cdot\text{m/s}" /></div></div>
-<div class="flow-line" v-click="2"><span class="flow-dot"></span><div>碰后：<Latex tex="v' = \dfrac{3.35\,\text{cm}}{0.1\,\text{s}} = 0.335\,\text{m/s}" /></div></div>
+<div class="flow-line" v-click="1"><span class="flow-dot is-blue"></span><div>碰前：<Latex tex="v = 5.00\ \text{cm} / 0.1\ \text{s} = 0.50\ \text{m/s}" />，<Latex tex="p = 0.40 \times 0.50 = 0.200\ \text{kg}\cdot\text{m/s}" /></div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot"></span><div>碰后：<Latex tex="v' = 3.35\ \text{cm} / 0.1\ \text{s} = 0.335\ \text{m/s}" /></div></div>
 <div class="flow-line" v-click="3"><span class="flow-dot is-blue"></span><div><Latex tex="p' = (0.40 + 0.20) \times 0.335 = 0.201\ \text{kg}\cdot\text{m/s}" />，与 <Latex tex="p" /> 相差 0.5%</div></div>
 </div>
 
@@ -278,8 +278,8 @@ layout: focus-question
 title: 思考
 ---
 
-<div class="stack">
-<div class="ask">两车碰撞后粘在一起，纸带上的点距会怎么变？</div>
-<div class="ask">斜槽方案里，为什么可以不测出速度的数值？</div>
-<div class="ask">如果换成温度、压力这些量，这套思路还成立吗？</div>
+<div class="stack" style="gap: 2.6rem">
+<div class="ask-lead">两车碰撞后粘在一起，纸带上的点距会怎么变？</div>
+<div class="ask-lead">斜槽方案里，为什么可以不测出速度的数值？</div>
+<div class="ask-lead">如果换成温度、压力这些量，这套思路还成立吗？</div>
 </div>
