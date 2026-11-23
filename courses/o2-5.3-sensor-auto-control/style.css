@@ -168,22 +168,24 @@
 
 /* ── 第 12 页：光控开关实验台 ── */
 .lab {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  gap: 1.6rem;
+  gap: 1.15rem;
 }
 
 .lab-board {
-  min-width: 0;
-}
-
-.lab-controls {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  gap: 0.9rem;
+  gap: 0.95rem;
+}
+
+.lab-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-width: 0;
+  gap: 1rem 2rem;
 }
 
 .lab-readout {
@@ -194,7 +196,7 @@
 
 .lab-bar {
   position: relative;
-  height: 0.7rem;
+  height: 0.85rem;
   border-radius: 999px;
   background: var(--c-surface-solid);
   overflow: visible;
@@ -220,6 +222,22 @@
   justify-content: space-between;
   color: var(--c-text-dim);
   font-size: 0.82rem;
+}
+
+.lab-bar-axis {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 1.3rem;
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+}
+
+.lab-axis-threshold {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+  transform: translateX(-50%);
 }
 
 .lab-state {
@@ -263,6 +281,7 @@
 }
 
 .lab-note {
+  grid-column: 1 / -1;
   color: var(--c-text-dim);
   font-size: 0.88rem;
   line-height: 1.5;
@@ -278,6 +297,18 @@
 
 /* 中等宽度图：宽图在 82% 时高度才装得下 */
 .fig-mid {
-  width: 82%;
+  width: 76%;
+  margin-inline: auto;
+}
+
+/* 宽图（900 左右宽的电路图）占满版心 */
+.fig-wide {
+  width: 92%;
+  margin-inline: auto;
+}
+
+/* 小一号图：940×430 这类宽图在 74% 时才装得下整页 */
+.fig-sm {
+  width: 74%;
   margin-inline: auto;
 }

@@ -6,7 +6,7 @@ defineProps<{
   showDiode?: boolean;
 }>();
 
-const coilOn = (step: number) => (step ?? 0) === 0;
+const coilOn = (s: number): boolean => (s ?? 0) === 0;
 </script>
 
 <template>
@@ -34,46 +34,15 @@ const coilOn = (step: number) => (step ?? 0) === 0;
 
     <!-- 三极管 VT -->
     <line x1="490" y1="205" x2="490" y2="265" stroke="var(--c-text)" stroke-width="5" stroke-linecap="round" />
-    <path
-      d="M 490 217 L 560 185 L 640 185"
-      fill="none"
-      stroke="var(--c-text)"
-      stroke-width="1.6"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <path
-      d="M 490 253 L 560 285 L 560 390"
-      fill="none"
-      stroke="var(--c-text)"
-      stroke-width="1.6"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
+    <path d="M 490 217 L 560 185 L 640 185" fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M 490 253 L 560 285 L 560 390" fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
     <polygon points="534.9,272.7 541.3,262.5 550,275" fill="var(--c-text)" />
 
     <!-- 继电器线圈 K -->
-    <path
-      d="M 640 185 L 700 185"
-      fill="none"
-      stroke="var(--c-text)"
-      stroke-width="1.6"
-      stroke-linecap="round"
-    />
+    <path d="M 640 185 L 700 185" fill="none" stroke="var(--c-text)" stroke-width="1.6" stroke-linecap="round" />
     <path d="M 700 185 L 700 168 M 700 112 L 700 60" fill="none" stroke="var(--c-text)" stroke-width="1.6" />
-    <rect
-      x="688"
-      y="112"
-      width="24"
-      height="56"
-      rx="3"
-      fill="var(--c-surface-solid)"
-      stroke="var(--c-text)"
-      stroke-width="1.6"
-    />
-    <text x="700" y="149" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text)">
-      K
-    </text>
+    <rect x="688" y="112" width="24" height="56" rx="3" fill="var(--c-surface-solid)" stroke="var(--c-text)" stroke-width="1.6" />
+    <text x="700" y="149" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="19" fill="var(--c-text)">K</text>
     <text x="676" y="146" text-anchor="end" font-size="14" fill="var(--c-text-dim)">继电器线圈</text>
 
     <!-- 续流二极管 D（反接在 + 与集电极之间） -->
@@ -99,19 +68,8 @@ const coilOn = (step: number) => (step ?? 0) === 0;
     <path d="M 850 60 L 850 92" fill="none" stroke="var(--c-text)" stroke-width="1.6" />
     <CircuitSwitch :x="850" :y="112" orientation="vertical" :open="!coilOn(step)" :span="40" />
     <path d="M 850 132 L 850 209" fill="none" stroke="var(--c-text)" stroke-width="1.6" />
-    <circle
-      cx="850"
-      cy="225"
-      r="16"
-      fill="var(--c-surface-solid)"
-      :stroke="coilOn(step) ? 'var(--c-accent)' : 'var(--c-text)'"
-      stroke-width="1.6"
-    />
-    <path
-      d="M 838 213 L 862 237 M 862 213 L 838 237"
-      :stroke="coilOn(step) ? 'var(--c-accent)' : 'var(--c-text)'"
-      stroke-width="1.4"
-    />
+    <circle cx="850" cy="225" r="16" fill="var(--c-surface-solid)" :stroke="coilOn(step) ? 'var(--c-accent)' : 'var(--c-text)'" stroke-width="1.6" />
+    <path d="M 838 213 L 862 237 M 862 213 L 838 237" :stroke="coilOn(step) ? 'var(--c-accent)' : 'var(--c-text)'" stroke-width="1.4" />
     <circle v-if="coilOn(step)" cx="850" cy="225" r="27" fill="var(--c-accent)" opacity="0.16" />
     <path d="M 850 241 L 850 390" fill="none" stroke="var(--c-text)" stroke-width="1.6" />
     <text x="872" y="230" font-size="14" fill="var(--c-text-dim)">小灯泡</text>
@@ -136,27 +94,11 @@ const coilOn = (step: number) => (step ?? 0) === 0;
     <!-- 自感电动势 / 释放回路 -->
     <g v-if="(step ?? 0) >= 1">
       <text x="700" y="92" text-anchor="middle" font-size="14" fill="var(--c-accent)">自感电动势</text>
-      <CourseArrow
-        :from="{ x: 790, y: 176 }"
-        :to="{ x: 790, y: 132 }"
-        stroke="var(--c-accent)"
-        :head-size="9"
-      />
+      <CourseArrow :from="{ x: 790, y: 176 }" :to="{ x: 790, y: 132 }" stroke="var(--c-accent)" :head-size="9" />
     </g>
     <g v-if="(step ?? 0) >= 2">
-      <path
-        d="M 700 178 L 700 196 L 790 196 L 790 152"
-        fill="none"
-        stroke="var(--c-accent)"
-        stroke-width="2.4"
-        stroke-dasharray="7 6"
-      />
-      <CourseArrow
-        :from="{ x: 784, y: 176 }"
-        :to="{ x: 790, y: 148 }"
-        stroke="var(--c-accent)"
-        :head-size="9"
-      />
+      <path d="M 700 178 L 700 196 L 790 196 L 790 152" fill="none" stroke="var(--c-accent)" stroke-width="2.4" stroke-dasharray="7 6" />
+      <CourseArrow :from="{ x: 784, y: 176 }" :to="{ x: 790, y: 148 }" stroke="var(--c-accent)" :head-size="9" />
       <text x="812" y="196" font-size="14" fill="var(--c-accent)">自感电流</text>
     </g>
   </svg>

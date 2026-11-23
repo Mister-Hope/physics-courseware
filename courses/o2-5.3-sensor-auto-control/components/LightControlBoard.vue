@@ -7,7 +7,12 @@ defineProps<{
 </script>
 
 <template>
-  <svg viewBox="0 0 900 430" class="lc-svg" role="img" aria-label="光控开关电路：光敏电阻、三极管与发光二极管">
+  <svg
+    viewBox="0 0 900 430"
+    class="lc-svg"
+    role="img"
+    aria-label="光控开关电路：光敏电阻、三极管与发光二极管"
+  >
     <!-- 导轨 -->
     <path
       d="M 80 60 L 700 60 M 80 390 L 560 390 M 80 60 L 80 209 M 80 241 L 80 390"
@@ -30,7 +35,15 @@ defineProps<{
     <path d="M 330 235 L 470 235" fill="none" stroke="var(--c-text)" stroke-width="1.6" />
 
     <!-- 三极管 VT -->
-    <line x1="490" y1="205" x2="490" y2="265" stroke="var(--c-text)" stroke-width="5" stroke-linecap="round" />
+    <line
+      x1="490"
+      y1="205"
+      x2="490"
+      y2="265"
+      stroke="var(--c-text)"
+      stroke-width="5"
+      stroke-linecap="round"
+    />
     <path
       d="M 490 217 L 560 185 L 640 185"
       fill="none"
@@ -70,9 +83,7 @@ defineProps<{
     <text x="316" y="227" text-anchor="end" font-size="16" fill="var(--c-text)">
       <tspan font-family="KaTeX_Math" font-style="italic">b</tspan>
     </text>
-    <text x="504" y="300" font-size="16" fill="var(--c-text-dim)">
-      <tspan font-family="KaTeX_Main">VT</tspan>
-    </text>
+
     <text x="666" y="84" text-anchor="end" font-size="15" fill="var(--c-text-dim)">LED</text>
     <text x="720" y="156" font-size="16" fill="var(--c-text)">
       <tspan font-family="KaTeX_Math" font-style="italic">R</tspan>
@@ -82,10 +93,10 @@ defineProps<{
     <!-- 分步框 -->
     <rect
       v-if="(step ?? 0) >= 1"
-      x="300"
-      y="258"
-      width="60"
-      height="80"
+      x="294"
+      y="254"
+      width="92"
+      height="92"
       rx="10"
       fill="none"
       stroke="var(--c-accent)"
@@ -104,20 +115,14 @@ defineProps<{
       stroke-width="1.6"
       stroke-dasharray="7 6"
     />
-    <text
-      v-if="(step ?? 0) >= 1"
-      x="346"
-      y="356"
-      font-size="15"
-      fill="var(--c-accent)"
-    >
+    <text v-if="(step ?? 0) >= 1" x="346" y="356" font-size="15" fill="var(--c-accent)">
       传感器
     </text>
     <text
       v-if="(step ?? 0) >= 2"
-      x="500"
-      y="332"
-      text-anchor="end"
+      x="520"
+      y="330"
+      text-anchor="middle"
       font-size="15"
       fill="var(--c-accent-2)"
     >
@@ -145,6 +150,8 @@ defineProps<{
     >
       执行装置
     </text>
+    <circle cx="330" cy="60" r="3.2" fill="var(--c-text)" />
+    <circle cx="330" cy="390" r="3.2" fill="var(--c-text)" />
   </svg>
 </template>
 

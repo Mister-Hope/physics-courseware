@@ -71,7 +71,7 @@ clickAnimation: none
 
 <div class="page-grow">
 <div class="ask">在这张电路里，谁负责“感知”？谁负责“动作”？</div>
-<div class="figure fig-fit">
+<div class="figure fig-wide">
 <AlarmCircuitSvg :state="'idle'" :highlight="$clicks >= 2 ? 'both' : $clicks >= 1 ? 'sensor' : ''" />
 </div>
 <div class="stack-tight">
@@ -94,7 +94,7 @@ clickAnimation: none
 
 <div class="page-grow">
 <div class="ask">门关着时，为什么指示灯亮、蜂鸣器不响？</div>
-<div class="figure fig-fit">
+<div class="figure fig-wide">
 <AlarmCircuitSvg state="closed" />
 </div>
 <div class="stack-tight">
@@ -121,7 +121,7 @@ clickAnimation: none
 
 <div class="page-grow">
 <div class="ask">门一开，为什么蜂鸣器立刻响、灯反而灭了？</div>
-<div class="figure fig-fit">
+<div class="figure fig-wide">
 <AlarmCircuitSvg state="open" />
 </div>
 <div class="stack-tight">
@@ -166,28 +166,16 @@ clickAnimation: none
 
 ---
 title: 光照强弱，怎样变成一个电学量？
-clicks: 2
+clicks: 1
 clickAnimation: none
 ---
 
 <div class="page-grow">
-<div class="split-wide">
-<div class="figure">
+<div class="ask">照一照、遮一遮，它的阻值会怎么变？</div>
+<div class="figure fig-mid">
 <PhotoresistorSvg />
 </div>
-<div class="stack">
-<div class="ask">照一照、遮一遮，它的阻值会怎么变？</div>
-<div class="state-row">
-<span class="state-tag">有光照</span>
-<div>阻值变小：亮阻小于 <Latex tex="3\ \text{k}\Omega" /></div>
-</div>
-<div class="state-row" v-click="1">
-<span class="state-tag">遮光</span>
-<div>阻值变大：暗阻大于 <Latex tex="1\ \text{M}\Omega" /></div>
-</div>
-<div class="tip-hint" v-click="2">光敏电阻把“光照强弱”变成了“电阻大小”这个电学量。</div>
-</div>
-</div>
+<div class="tip-hint" v-click="1">光敏电阻把“光照强弱”变成了“电阻大小”这个电学量。</div>
 </div>
 
 ---
@@ -197,6 +185,7 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
+<div class="ask"><Latex tex="R_G" /> 一变，<Latex tex="b" /> 点的电压怎么跟着变？</div>
 <div class="split-wide">
 <div class="figure">
 <VoltageDividerSvg />
@@ -223,19 +212,19 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
+<div class="ask">基极上的电压，能控制什么？</div>
 <div class="split-wide">
 <div class="figure">
 <TransistorSvg />
 </div>
 <div class="stack">
-<div class="ask">基极上的电压，能控制什么？</div>
 <div class="state-row">
 <span class="state-tag">电压低</span>
-<div>c、e 之间不通，集电极没有电流，灯灭</div>
+<div>基极几乎没有电流，<Latex tex="c" />、<Latex tex="e" /> 之间不通，灯灭</div>
 </div>
 <div class="state-row" v-click="1">
 <span class="state-tag">电压够高</span>
-<div>c、e 之间导通，集电极有较大电流，灯亮</div>
+<div>基极有很小的电流，<Latex tex="c" />、<Latex tex="e" /> 之间导通，集电极有较大电流，灯亮</div>
 </div>
 <div class="tip-hint" v-click="2">基极很小的电流，控制着集电极较大的电流——三极管在这里当电子开关用。</div>
 </div>
@@ -249,10 +238,10 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
-<div class="figure fig-mid">
+<div class="ask">光敏电阻的信号，要经过哪几级才点亮 LED？</div>
+<div class="figure fig-wide">
 <LightControlBoard :step="$clicks" />
 </div>
-<div class="tip-hint" v-click="3">光敏电阻 → 分压 → 三极管 → LED：传感器、控制电路、执行装置串成了同一条链。</div>
 </div>
 
 ---
@@ -262,6 +251,7 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
+<div class="ask">光照和 <Latex tex="R_1" /> 一起变，灯什么时候亮？</div>
 <LightControlLab />
 </div>
 
@@ -272,12 +262,13 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
-<div class="figure fig-mid">
+<div class="ask">小灯泡为什么不能直接接在三极管上？</div>
+<div class="figure fig-sm">
 <RelayDriverSvg :show-diode="false" :step="0" />
 </div>
 <div class="stack-tight">
 <div class="flow-line" v-click="1"><span class="flow-dot"></span><div>线圈 K 只需要很小的电流，三极管就带得动</div></div>
-<div class="flow-line" v-click="2"><span class="flow-dot"></span><div>触点 K 却能通断大电流——继电器的“小电流控制、大电流通断”</div></div>
+<div class="flow-line" v-click="2"><span class="flow-dot"></span><div>触点却能通断大电流——继电器的“小电流控制、大电流通断”</div></div>
 </div>
 </div>
 
@@ -288,7 +279,8 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
-<div class="figure fig-mid">
+<div class="ask">三极管一关断，线圈里的电流会立刻消失吗？</div>
+<div class="figure fig-sm">
 <RelayDriverSvg show-diode :step="$clicks" />
 </div>
 <div class="stack-tight">
@@ -304,14 +296,15 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
+<h1>两个实验，骨子里是同一件事</h1>
 <table class="data-table">
 <thead><tr><th></th><th>门窗防盗报警</th><th>光控开关</th></tr></thead>
 <tbody>
 <tr><td>被测量</td><td>门与门框的相对位置</td><td>光照强弱</td></tr>
 <tr><td>传感器</td><td>干簧管 SA：通 / 断</td><td>光敏电阻 <Latex tex="R_G" />：阻值变化</td></tr>
-<tr><td>控制电路</td><td>干簧管直接通断线圈</td><td>分压 + 三极管：把电压变化变成通断</td></tr>
+<tr><td>控制电路</td><td>干簧管直接通断继电器线圈</td><td>分压 + 三极管：把电压变化变成通断</td></tr>
 <tr><td>执行装置</td><td>蜂鸣器、LED</td><td>LED、小灯泡（经继电器）</td></tr>
-<tr><td>共同点</td><td class="hl">非电学量 → 电学量 → 通断 → 动作</td><td class="hl">同左</td></tr>
+<tr><td>共同点</td><td class="hl" colspan="2">非电学量 → 电学量 → 通断 → 动作</td></tr>
 </tbody>
 </table>
 <div class="tip-hint" v-click="1">器件可以换，三环链不变。</div>
@@ -324,11 +317,12 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
+<h1>设计一个自动控制装置，分几步？</h1>
 <div class="step-list">
 <div class="step-item"><div class="step-no">1</div><div><strong>选传感器</strong>：把被测量变成电学量——门的位置用干簧管，光照用光敏电阻，温度用双金属片。</div></div>
 <div class="step-item" v-click="1"><div class="step-no">2</div><div><strong>搭控制电路</strong>：把传感器的输出放大、比较，变成“通 / 断”——分压加三极管，或直接驱动继电器线圈。</div></div>
 <div class="step-item" v-click="2"><div class="step-no">3</div><div><strong>接执行装置</strong>：用触点带动蜂鸣器、灯、电动机等负载，注意触点该接常开还是常闭。</div></div>
-<div class="step-item" v-click="3"><div class="step-no">4</div><div><strong>调参数、加保护</strong>：<Latex tex="R_1" /> 决定什么条件下动作，二极管 D 保护三极管。</div></div>
+<div class="step-item" v-click="3"><div class="step-no">4</div><div><strong>调参数、加保护</strong>：<Latex tex="R_1" /> 决定什么条件下动作，二极管 D 释放线圈的自感电流、保护三极管。</div></div>
 </div>
 </div>
 
@@ -352,5 +346,8 @@ layout: focus-question
 title: 思考
 ---
 
-<div class="ask-lead">换一种被测量、换一个执行装置，这套“传感器 → 控制电路 → 执行装置”的思路还成立吗？</div>
+<div class="stack" style="gap: 1.6rem">
+<div class="ask-lead">换一种被测量、换一个执行装置，先感知、再放大的思路还成立吗？</div>
 <div class="ask">报警器接在常闭触点上：传感器坏了、线路断了，它反而会响。这样设计有什么好处？</div>
+<div class="ask">要让路灯天黑才亮、天亮就灭，可调电阻 <Latex tex="R_1" /> 该调大还是调小？</div>
+</div>

@@ -27,28 +27,17 @@
     <path d="M 330 264 L 330 330" fill="none" stroke="var(--c-text)" stroke-width="1.6" />
 
     <!-- b 点接三极管基极 -->
-    <CourseArrow
-      :from="{ x: 330, y: 190 }"
-      :to="{ x: 452, y: 190 }"
-      stroke="var(--c-accent-2)"
-      :head-size="9"
-    />
+    <CourseArrow :from="{ x: 330, y: 190 }" :to="{ x: 452, y: 190 }" stroke="var(--c-accent-2)" :head-size="9" />
 
     <!-- U_b：RG 两端电压 -->
-    <path
-      d="M 296 190 L 304 190 M 296 330 L 304 330 M 300 190 L 300 330"
-      fill="none"
-      stroke="var(--c-accent)"
-      stroke-width="1.2"
-      stroke-dasharray="5 5"
-    />
+    <path d="M 300 190 L 318 190 M 300 330 L 318 330 M 300 190 L 300 330" fill="none" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="5 5" />
 
     <!-- 标注 -->
     <text x="308" y="262" text-anchor="end" font-size="17" fill="var(--c-accent)">
       <tspan font-family="KaTeX_Math" font-style="italic">U</tspan>
       <tspan font-family="KaTeX_Main" font-size="12" baseline-shift="sub">b</tspan>
     </text>
-    <text x="348" y="126" font-size="16" fill="var(--c-text)">
+    <text x="362" y="126" font-size="16" fill="var(--c-text)">
       <tspan font-family="KaTeX_Math" font-style="italic">R</tspan>
       <tspan font-family="KaTeX_Main" font-size="11" baseline-shift="sub">1</tspan>
     </text>

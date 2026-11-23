@@ -46,7 +46,9 @@ const rgTex = computed(() =>
       <div class="lab-state" :class="isOn ? 'is-on' : 'is-off'">
         <mdi-lightbulb-on-outline class="icon-lg" />
         <span>{{ isOn ? "LED 亮" : "LED 不亮" }}</span>
-        <span class="lab-state-sub">{{ isOn ? "三极管导通，集电极有电流" : "三极管截止，集电极没有电流" }}</span>
+        <span class="lab-state-sub">{{
+          isOn ? "三极管导通，集电极有电流" : "三极管截止，集电极没有电流"
+        }}</span>
       </div>
       <div class="lab-readout">
         <div class="lab-bar-label">
@@ -57,9 +59,9 @@ const rgTex = computed(() =>
           <div class="lab-bar-fill" :style="{ width: barWidth }"></div>
           <div class="lab-bar-mark" :style="{ left: thresholdLeft }"></div>
         </div>
-        <div class="lab-bar-label">
+        <div class="lab-bar-axis">
           <span>0</span>
-          <span>导通阈值 2.00 V</span>
+          <span class="lab-axis-threshold" :style="{ left: thresholdLeft }">导通阈值 2.00 V</span>
           <span>6 V</span>
         </div>
         <div class="lab-values">

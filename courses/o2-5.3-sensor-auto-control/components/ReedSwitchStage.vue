@@ -3,12 +3,12 @@ import { computed } from "vue";
 
 // 第 3 页：干簧管（常开型）——磁体远离时断开，靠近时簧片磁化吸合
 // 上半部分是结构示意（玻璃管 + 两片簧片 + 永磁体 M），下半部分是它在电路图中的符号
-const props = defineProps<{
+const { step = 0 } = defineProps<{
   /** 0 = 磁体远离（断开），1 = 磁体靠近（接通） */
   step?: number;
 }>();
 
-const on = computed(() => (props.step ?? 0) >= 1);
+const on = computed(() => step >= 1);
 </script>
 
 <template>
@@ -86,13 +86,7 @@ const on = computed(() => (props.step ?? 0) >= 1);
       </text>
     </g>
     <!-- 靠近时：磁体与干簧管之间的磁场（示意） -->
-    <g
-      v-if="on"
-      stroke="var(--c-accent)"
-      stroke-width="1.2"
-      stroke-dasharray="4 4"
-      opacity="0.7"
-    >
+    <g v-if="on" stroke="var(--c-accent)" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.7">
       <line x1="200" y1="133" x2="200" y2="122" />
       <line x1="220" y1="131" x2="220" y2="121" />
       <line x1="240" y1="133" x2="240" y2="122" />
