@@ -542,8 +542,8 @@
           "slug": "o1-2.6-forced-vibration-and-resonance",
           "title": "受迫振动 共振",
           "chapter": "§2.6",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "区分自由振动、阻尼振动与受迫振动，理解驱动力频率与固有频率的关系，认识共振曲线与共振的利用和防止。",
+          "tags": ["受迫振动", "共振", "固有频率", "阻尼振动"]
         },
         {
           "slug": "o1-3.1-formation-of-waves",

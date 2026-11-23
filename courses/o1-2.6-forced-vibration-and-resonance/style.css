@@ -8,38 +8,47 @@
 .fw-intro {
   display: flex;
   flex-direction: column;
+  gap: 1.2rem;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
 }
+
 .fw-intro-q {
   max-width: 27em;
-  font-size: 1.4rem;
+
   font-weight: 700;
+  font-size: 1.4rem;
   line-height: 1.5;
   text-align: center;
 }
+
 .fw-intro-figure {
   width: 100%;
   max-width: 320px;
 }
+
 .fw-intro-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.4rem;
+
   width: 100%;
   max-width: 820px;
 }
+
 .fw-intro-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.45rem;
-  text-align: center;
+  align-items: center;
+
   color: var(--c-text-dim);
+
   font-size: 0.92rem;
   line-height: 1.5;
+  text-align: center;
 }
+
 .fw-intro-item .icon-lg {
   color: var(--c-accent);
 }
@@ -50,16 +59,19 @@
   max-width: 520px;
   margin-inline: auto;
 }
+
 .fw-figure-sm {
   width: 100%;
   max-width: 380px;
   margin-inline: auto;
 }
+
 .fw-figure-wide {
   width: 100%;
   max-width: 760px;
   margin-inline: auto;
 }
+
 .fw-chart {
   width: 100%;
   min-width: 0;
@@ -71,13 +83,15 @@
   border-collapse: collapse;
   font-size: 0.9rem;
 }
+
 .fw-table th,
 .fw-table td {
+  vertical-align: top;
   padding: 0.4rem 0.55rem;
   border: 1px solid var(--c-line);
   text-align: left;
-  vertical-align: top;
 }
+
 .fw-table th {
   background: var(--c-surface);
   color: var(--c-accent);
@@ -86,9 +100,9 @@
 
 /* 公式行 */
 .fw-formula {
-  text-align: center;
-  font-size: 1.35rem;
   color: var(--c-accent);
+  font-size: 1.35rem;
+  text-align: center;
 }
 
 /* 交互区 */
@@ -97,35 +111,43 @@
   grid-template-columns: 1.45fr 1fr;
   gap: 1.4rem;
   align-items: center;
+
   width: 100%;
   min-width: 0;
 }
+
 .fw-controls {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
   min-width: 0;
 }
+
 .fw-values {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.3rem 0.9rem;
   font-size: 0.92rem;
 }
+
 .fw-status {
-  min-height: 1.9rem;
   display: flex;
   align-items: center;
+
+  min-height: 1.9rem;
+
   color: var(--c-text-dim);
+
   font-size: 0.92rem;
 }
 
 .fw-summary-main {
-  font-size: 2.2rem;
-  font-weight: 700;
-  text-align: center;
   color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 2.2rem;
   letter-spacing: 0.04em;
+  text-align: center;
 }
 
 .fw-summary-grid {
@@ -138,18 +160,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   padding: 0.85rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 }
 
 .fw-summary-card b {
-  font-size: 1rem;
   color: var(--c-text);
+  font-size: 1rem;
 }
 
 .fw-summary-card span {
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
