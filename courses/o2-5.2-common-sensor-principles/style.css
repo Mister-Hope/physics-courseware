@@ -164,3 +164,91 @@
 .cs-formula .katex-display {
   margin: 0;
 }
+
+.p16-table {
+  width: 100%;
+}
+
+.p17-fig {
+  width: 360px;
+}
+
+.p18-ans {
+  position: relative;
+  padding-left: 2.3rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.p18-no {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.cs-chain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: nowrap;
+}
+
+.cs-chain-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 0;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  text-align: center;
+}
+
+.cs-chain-node strong {
+  font-size: 1rem;
+  color: var(--c-text);
+}
+
+.cs-chain-node span {
+  font-size: 0.8rem;
+  color: var(--c-text-dim);
+}
+
+.cs-chain-arrow {
+  color: var(--c-accent);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.p19-devices {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.p19-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--c-text-dim);
+}
+
+.p19-chip .icon-md {
+  color: var(--c-accent);
+  flex: 0 0 auto;
+}
+
+.p19-chip strong {
+  color: var(--c-text);
+}

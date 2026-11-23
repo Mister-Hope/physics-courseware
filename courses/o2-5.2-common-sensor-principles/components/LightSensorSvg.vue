@@ -1,12 +1,6 @@
 <template>
   <!-- 光敏电阻结构：绝缘板 + 硫化镉层 + 两条互不相连的梳状银电极（可叠加载流子） -->
-  <svg
-    viewBox="0 0 460 232"
-    width="100%"
-    xmlns="http://www.w3.org/2000/svg"
-    role="img"
-    aria-label="光敏电阻结构示意图"
-  >
+  <svg viewBox="0 0 460 232" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="光敏电阻结构示意图">
     <g v-if="showLight">
       <g stroke="var(--c-accent)" stroke-width="2" stroke-linecap="round">
         <line x1="150" y1="26" x2="150" y2="136" />
@@ -19,27 +13,8 @@
         <path d="M 304 136 L 310 148 L 316 136 Z" />
       </g>
     </g>
-    <rect
-      x="70"
-      y="150"
-      width="320"
-      height="58"
-      rx="10"
-      fill="var(--c-surface-solid)"
-      stroke="var(--c-neutral-500)"
-      stroke-width="1.6"
-    />
-    <rect
-      x="100"
-      y="150"
-      width="260"
-      height="42"
-      rx="4"
-      fill="var(--c-accent)"
-      fill-opacity="0.16"
-      stroke="var(--c-accent)"
-      stroke-width="1.4"
-    />
+    <rect x="70" y="150" width="320" height="58" rx="10" fill="var(--c-surface-solid)" stroke="var(--c-neutral-500)" stroke-width="1.6" />
+    <rect x="100" y="150" width="260" height="42" rx="4" fill="var(--c-accent)" fill-opacity="0.16" stroke="var(--c-accent)" stroke-width="1.4" />
     <g fill="var(--c-velocity)">
       <circle v-for="(p, i) in visibleCarriers" :key="i" :cx="p[0]" :cy="p[1]" r="2.8" opacity="0.95" />
     </g>
@@ -73,13 +48,7 @@
         <circle cx="66" cy="96" r="10" fill="var(--c-accent)" />
         <circle cx="396" cy="198" r="10" fill="var(--c-accent)" />
       </g>
-      <g
-        fill="var(--c-bg)"
-        font-size="11"
-        font-weight="700"
-        text-anchor="middle"
-        dominant-baseline="central"
-      >
+      <g fill="var(--c-bg)" font-size="11" font-weight="700" text-anchor="middle" dominant-baseline="central">
         <text x="285" y="96">1</text>
         <text x="66" y="96">2</text>
         <text x="396" y="198">3</text>

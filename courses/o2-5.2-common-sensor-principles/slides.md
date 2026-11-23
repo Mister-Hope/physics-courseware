@@ -305,3 +305,180 @@ clickAnimation: none
 </div>
 </div>
 </div>
+
+---
+title: 磁场中的通电导体，两侧为什么会有电压？
+clicks: 3
+clickAnimation: none
+---
+
+# 磁场中的通电导体，两侧为什么会有电压？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><HallEffectSvg :step="$clicks" /></div>
+<div class="stack">
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">载流子随电流定向移动，在磁场中受洛伦兹力，向导体的一侧偏转。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body">一侧积累电荷、另一侧带异种电荷，两侧面之间出现电势差 <Latex tex="U_H" />。</div></div>
+<div class="cs-point" v-click="3"><span class="cs-no">3</span><div class="cs-point-body">这个现象叫作<strong>霍尔效应</strong>，<Latex tex="U_H" /> 叫作霍尔电压。</div></div>
+</div>
+</div>
+</div>
+
+---
+title: 霍尔元件为什么能测磁感应强度？
+clicks: 3
+clickAnimation: none
+---
+
+# 霍尔元件为什么能测磁感应强度？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><HallElementSvg /></div>
+<div class="stack">
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">E、F 间通恒定电流 <Latex tex="I" />，磁场 <Latex tex="B" /> 垂直穿过半导体薄片。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body">M、N 之间出现霍尔电压 <Latex tex="U_H" />。</div></div>
+<div class="cs-point" v-click="3"><span class="cs-no">3</span><div class="cs-point-body"><Latex tex="U_H" /> 与 <Latex tex="B" /> 成正比：由 <Latex tex="U_H" /> 就能读出 <Latex tex="B" /> 的大小和方向。</div></div>
+<div class="tip-hint" v-click="3">半导体薄片的霍尔效应更强</div>
+</div>
+</div>
+</div>
+
+---
+title: 怎样用霍尔元件测量微小位移？
+clicks: 3
+clickAnimation: none
+---
+
+# 怎样用霍尔元件测量微小位移？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><HallDisplacementSvg /></div>
+<div class="stack">
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">两块磁感应强度相同的磁体同极相对，中间位置 <Latex tex="B=0" />。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body">元件沿 <Latex tex="z" /> 轴移动，所在处的 <Latex tex="B" /> 与位移成正比。</div></div>
+<div class="cs-point" v-click="3"><span class="cs-no">3</span><div class="cs-point-body"><Latex tex="U_H" /> 与位移成正比：测出 <Latex tex="U_H" /> 就知道微小位移。</div></div>
+<div class="tip-hint" v-click="3">测转速、测磁场方向，也用到霍尔元件。</div>
+</div>
+</div>
+</div>
+
+---
+title: 课堂练习：它们各把什么量变成什么量？
+clicks: 5
+clickAnimation: none
+---
+
+# 课堂练习：它们各把什么量变成什么量？
+
+<div class="page-grow">
+<div class="mini-note">补全表中各传感器的输入、输出物理量。</div>
+<table class="data-table p16-table">
+<thead>
+<tr><th>传感器</th><th>输入物理量</th><th>输出物理量</th></tr>
+</thead>
+<tbody>
+<tr><td>光敏电阻</td><td><span v-click="1">光照强弱</span></td><td><span v-click="1">电阻</span></td></tr>
+<tr><td>热敏电阻</td><td><span v-click="2">温度</span></td><td><span v-click="2">电阻</span></td></tr>
+<tr><td>金属热电阻</td><td><span v-click="3">温度</span></td><td><span v-click="3">电阻</span></td></tr>
+<tr><td>电阻应变片</td><td><span v-click="4">形变</span></td><td><span v-click="4">电阻</span></td></tr>
+<tr><td>电容式位移传感器</td><td><span v-click="5">位移</span></td><td><span v-click="5">电容</span></td></tr>
+</tbody>
+</table>
+</div>
+
+---
+layout: exercise-split
+title: 练习：电感式微小位移传感器
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+图 5.2-14 是一种电感式微小位移传感器的原理图。1 是待测位移的物体，3 是空心线圈，软铁芯 2 插在线圈中，并随物体左右平移。
+（1）说明这种传感器的工作原理。
+（2）设计一个与线圈 3 相连的电路，使物体的位移能反映为电学量的变化。
+</template>
+
+<template v-slot:fig>
+<div class="p17-fig"><InductorSensorSvg /></div>
+</template>
+
+<div class="stack">
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">物体左右移动，软铁芯插入深度改变，<br />线圈的自感系数 <Latex tex="L" /> 随之改变。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body">把线圈与交流电源、电流表串联：<Latex tex="L" /> 越大，感抗 <Latex tex="X_L=2\pi fL" /> 越大，电流越小。</div></div>
+<div class="cs-point" v-click="3"><span class="cs-no">3</span><div class="cs-point-body">电流表示数随位移变化，<br />就能测出位移。</div></div>
+</div>
+
+---
+layout: exercise-split
+analysisLabel: 答案
+title: 练习：电饭锅的自动断电
+clicks: 4
+clickAnimation: none
+---
+
+<template v-slot:stem>
+电饭锅中的感温铁氧体在常温下具有铁磁性，能被磁体吸引；温度升高到约 <Latex tex="103\ ^{\circ}\mathrm{C}" />（居里点）时，铁磁性消失，不能被磁体吸引。
+（1）开始煮饭时，为什么要按下开关按钮？松手后按钮为什么能保持？
+（2）水沸腾后，只要锅内有水，锅底温度为什么不会升高？
+（3）饭熟后水被吸收，锅底温度怎样变化？电饭锅会自动发生哪些动作？
+（4）用电饭锅烧水，水沸腾后能自动断电吗？
+</template>
+
+<div class="stack stack-tight">
+<div class="p18-ans" v-click="1"><span class="p18-no">（1）</span>按下按钮时磁体吸住铁氧体，电路接通；常温下铁氧体有铁磁性，松手后靠磁力保持。</div>
+<div class="p18-ans" v-click="2"><span class="p18-no">（2）</span>水沸腾时温度保持 <Latex tex="100\ ^{\circ}\mathrm{C}" />，锅底温度低于居里点。</div>
+<div class="p18-ans" v-click="3"><span class="p18-no">（3）</span>水被吸收后锅底温度升到约 <Latex tex="103\ ^{\circ}\mathrm{C}" />，铁氧体失去铁磁性，磁体脱离、触点断开，自动断电。</div>
+<div class="p18-ans" v-click="4"><span class="p18-no">（4）</span>不能。水沸腾时温度保持 <Latex tex="100\ ^{\circ}\mathrm{C}" />，达不到 <Latex tex="103\ ^{\circ}\mathrm{C}" />。</div>
+</div>
+
+---
+title: 这一节：传感器怎样把非电学量变成电信号？
+clickAnimation: none
+---
+
+# 这一节：传感器怎样把非电学量变成电信号？
+
+<div class="page-grow">
+<div class="cs-chain">
+<div class="cs-chain-node"><strong>被测量</strong><span>光照 · 温度 · 形变 · 磁场</span></div>
+<span class="cs-chain-arrow">→</span>
+<div class="cs-chain-node"><strong>敏感元件</strong><span>电阻 · 电容 · 霍尔电压</span></div>
+<span class="cs-chain-arrow">→</span>
+<div class="cs-chain-node"><strong>转换电路</strong><span>电流 · 电压</span></div>
+<span class="cs-chain-arrow">→</span>
+<div class="cs-chain-node"><strong>可用电信号</strong><span>测量 · 控制</span></div>
+</div>
+<div class="p19-devices">
+<div class="p19-chip"><mdi-weather-sunny class="icon-md" /><div><strong>光敏电阻</strong><br />光照 → 电阻</div></div>
+<div class="p19-chip"><mdi-thermometer class="icon-md" /><div><strong>热敏电阻</strong><br />温度 → 电阻</div></div>
+<div class="p19-chip"><mdi-weight class="icon-md" /><div><strong>电阻应变片</strong><br />形变 → 电阻</div></div>
+<div class="p19-chip"><mdi-magnet class="icon-md" /><div><strong>霍尔元件</strong><br />磁场 → 电压</div></div>
+</div>
+<div class="summary-line">四种敏感元件分别把光照、温度、形变、磁场转换成电阻或电压，<br />再由转换电路变成可用的电信号。</div>
+</div>
+
+---
+title: 传感器怎样让设备自动动作？
+clicks: 1
+clickAnimation: none
+---
+
+# 传感器怎样让设备自动动作？
+
+<div class="page-grow">
+<div class="cs-chain">
+<div class="cs-chain-node"><strong>传感器</strong><span>非电学量 → 电学量</span></div>
+<span class="cs-chain-arrow">→</span>
+<div class="cs-chain-node"><strong>控制器</strong><span>比较 · 放大</span></div>
+<span class="cs-chain-arrow">→</span>
+<div class="cs-chain-node"><strong>执行器</strong><span>继电器 · 电动机</span></div>
+<span class="cs-chain-arrow">→</span>
+<div class="cs-chain-node"><strong>被控对象</strong><span>灯 · 加热器</span></div>
+</div>
+<div class="tip-hint" v-click="1">光控路灯：光敏电阻感知天黑，控制电路使继电器闭合，路灯自动点亮。</div>
+<div class="summary-line" v-click="1">自动控制装置 = 传感器 + 控制器 + 执行器</div>
+</div>
