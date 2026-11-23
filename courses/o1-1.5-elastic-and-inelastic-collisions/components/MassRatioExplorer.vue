@@ -12,7 +12,7 @@ const x0 = 170;
 const v1 = computed(() => (1 - k.value) / (1 + k.value));
 const v2 = computed(() => 2 / (1 + k.value));
 
-const fmt = (value: number) => (Math.abs(value) < 0.005 ? "0" : value.toFixed(2));
+const fmt = (value: number): string => (Math.abs(value) < 0.005 ? "0" : value.toFixed(2));
 const kLabel = computed(() => `k = m_2/m_1 = ${k.value.toFixed(1)}`);
 const v1Text = computed(() => `v_1' = ${fmt(v1.value)}\\,v_1`);
 const v2Text = computed(() => `v_2' = ${fmt(v2.value)}\\,v_1`);

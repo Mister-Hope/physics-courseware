@@ -493,8 +493,8 @@
           "slug": "o1-1.5-elastic-and-inelastic-collisions",
           "title": "弹性碰撞和非弹性碰撞",
           "chapter": "§1.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "按碰撞前后动能是否守恒区分弹性、非弹性和完全非弹性碰撞，推导一维弹性碰撞结论，分析碰撞的合理性条件（速度与能量）。",
+          "tags": ["弹性碰撞", "非弹性碰撞", "动量守恒", "动能"]
         },
         {
           "slug": "o1-1.6-recoil-and-rocket",

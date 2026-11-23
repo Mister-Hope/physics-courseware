@@ -2,30 +2,27 @@
 /** 碰前 / 碰后对比示意（第 7、8、11、12 页）：上排碰前、下排碰后， 两球质量用颜色区分（左球金、右球青），速度箭头指向运动方向、长度正比于速度大小。 stuck 为 true 时碰后画成粘在一起的整体。 */
 import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    v1?: number;
-    v2?: number;
-    v1p?: number;
-    v2p?: number;
-    stuck?: boolean;
-    stuckTex?: string;
-    showAfter?: boolean;
-    sub1?: string;
-    sub2?: string;
-  }>(),
-  {
-    v1: 1,
-    v2: 0,
-    v1p: 0,
-    v2p: 1,
-    stuck: false,
-    stuckTex: "2m",
-    showAfter: true,
-    sub1: "1",
-    sub2: "2",
-  },
-);
+const {
+  v1 = 1,
+  v2 = 0,
+  v1p = 0,
+  v2p = 1,
+  stuck = false,
+  stuckTex = "2m",
+  showAfter = true,
+  sub1 = "1",
+  sub2 = "2",
+} = defineProps<{
+  v1?: number;
+  v2?: number;
+  v1p?: number;
+  v2p?: number;
+  stuck?: boolean;
+  stuckTex?: string;
+  showAfter?: boolean;
+  sub1?: string;
+  sub2?: string;
+}>();
 
 const R = 20;
 const Y1 = 62;
@@ -46,12 +43,21 @@ interface ArrowSpec {
   ly: number;
 }
 
-const arrowLen = (v: number) => Math.max(26, Math.min(96, Math.abs(v) * 62));
+const arrowLen = (v: number): number => Math.max(26, Math.min(96, Math.abs(v) * 62));
 
-const makeArrow = (cx: number, y: number, v: number, color: string, label: string, sub: string, gap: number): ArrowSpec | null => {
-  if (!v) {
-    return null;
-  }
+interface ArrowInput {
+  cx: number;
+  y: number;
+  v: number;
+  color: string;
+  label: string;
+  sub: string;
+  gap: number;
+}
+
+const makeArrow = ({ cx, y, v, color, label, sub, gap }: ArrowInput): ArrowSpec | null => {
+  if (!v) return null;
+
   const len = arrowLen(v);
   const x0 = v > 0 ? cx + gap : cx - gap;
   const x1 = v > 0 ? x0 + len : x0 - len;
@@ -69,38 +75,32 @@ const makeArrow = (cx: number, y: number, v: number, color: string, label: strin
 
 const beforeArrows = computed(() => {
   const list: ArrowSpec[] = [];
-  const a1 = makeArrow(X1, Y1, props.v1, "var(--c-accent)", "v", props.sub1, R + 8);
-  const a2 = makeArrow(X2, Y1, props.v2, "var(--c-physics)", "v", props.sub2, R + 8);
-  if (a1) {
-    list.push(a1);
-  }
-  if (a2) {
-    list.push(a2);
-  }
+  const a1 = makeArrow({ cx: X1, y: Y1, v: v1, color: "var(--c-accent)", label: "v", sub: sub1, gap: R + 8 });
+  const a2 = makeArrow({ cx: X2, y: Y1, v: v2, color: "var(--c-physics)", label: "v", sub: sub2, gap: R + 8 });
+  if (a1) list.push(a1);
+
+  if (a2) list.push(a2);
+
   return list;
 });
 
 const afterArrows = computed(() => {
   const list: ArrowSpec[] = [];
-  if (!props.showAfter) {
-    return list;
-  }
-  if (props.stuck) {
+  if (!showAfter) return list;
+
+  if (stuck) {
     const center = X1A + R;
-    const arrow = makeArrow(center, Y2, props.v1p, "var(--c-accent)", "v′", props.sub1, 2 * R + 8);
-    if (arrow) {
-      list.push(arrow);
-    }
+    const arrow = makeArrow(center, Y2, v1p, "var(--c-accent)", "v′", sub1, 2 * R + 8);
+    if (arrow) list.push(arrow);
+
     return list;
   }
-  const a1 = makeArrow(X1A, Y2, props.v1p, "var(--c-accent)", "v′", props.sub1, R + 8);
-  const a2 = makeArrow(X2A, Y2, props.v2p, "var(--c-physics)", "v′", props.sub2, R + 8);
-  if (a1) {
-    list.push(a1);
-  }
-  if (a2) {
-    list.push(a2);
-  }
+  const a1 = makeArrow({ cx: X1A, y: Y2, v: v1p, color: "var(--c-accent)", label: "v′", sub: sub1, gap: R + 8 });
+  const a2 = makeArrow({ cx: X2A, y: Y2, v: v2p, color: "var(--c-physics)", label: "v′", sub: sub2, gap: R + 8 });
+  if (a1) list.push(a1);
+
+  if (a2) list.push(a2);
+
   return list;
 });
 

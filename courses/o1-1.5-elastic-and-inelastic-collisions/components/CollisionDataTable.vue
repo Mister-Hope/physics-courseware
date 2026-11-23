@@ -12,11 +12,20 @@ const data = computed(() =>
   rows.map((row, index) => {
     const before = 0.5 * row.m1 * row.v ** 2;
     const after = 0.5 * (row.m1 + row.m2) * row.vp ** 2;
-    return { ...row, index: index + 1, before, after, loss: before - after };
+    return {
+      m1: row.m1,
+      m2: row.m2,
+      v: row.v,
+      vp: row.vp,
+      index: index + 1,
+      before,
+      after,
+      loss: before - after,
+    };
   }),
 );
 
-const fd = (value: number) => value.toFixed(3);
+const fd = (value: number): string => value.toFixed(3);
 </script>
 
 <template>
