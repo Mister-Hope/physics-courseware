@@ -123,3 +123,53 @@ clicks: 1
 </template>
 
 <div v-click="1">由左手定则，安培力 <Latex tex="F" /> 同时垂直于 <Latex tex="I" /> 和 <Latex tex="B" />，即垂直于纸面向外。</div>
+
+---
+clicks: 1
+---
+
+# 安培力的大小
+
+<div class="half-grid page-grow items-center">
+<div class="stack">
+<div class="ask">导线与磁场垂直时，安培力多大？</div>
+<div class="tip-hint" v-click="1"><Latex tex="F = IlB" />。式中 <Latex tex="F" /> 用 <Latex tex="\text{N}" />、<Latex tex="I" /> 用 <Latex tex="\text{A}" />、<Latex tex="l" /> 用 <Latex tex="\text{m}" />、<Latex tex="B" /> 用 <Latex tex="\text{T}" />。</div>
+</div>
+<AmperePerpSvg />
+</div>
+
+---
+clicks: 1
+---
+
+# 安培力的大小
+
+<div class="stack page-grow">
+<div class="ask">改变 <Latex tex="I" />、<Latex tex="l" />、<Latex tex="B" />，安培力怎样变？</div>
+<AmpereMagnitude />
+<div class="tip-hint" v-click="1"><Latex tex="F" /> 与 <Latex tex="I" />、<Latex tex="l" />、<Latex tex="B" /> 都成正比：<Latex tex="F = IlB" />。</div>
+</div>
+
+---
+clicks: 2
+---
+
+<div class="stack page-grow">
+<div class="ask">导线与磁场不垂直时，安培力多大？</div>
+<AmpereAngleLab :step="$clicks" />
+<div class="tip-hint" v-click="1">把 <Latex tex="B" /> 分解：<Latex tex="B_{\parallel} = B\cos\theta" /> 不产生安培力，<Latex tex="B_{\perp} = B\sin\theta" /> 产生安培力。</div>
+<div class="tip-hint" v-click="2"><Latex tex="F = IlB\sin\theta" />；<Latex tex="\theta = 90^\circ" /> 时 <Latex tex="F = IlB" />，<Latex tex="\theta = 0" /> 时 <Latex tex="F = 0" />。</div>
+</div>
+
+---
+clicks: 2
+---
+
+# 安培力的大小
+
+<div class="stack page-grow">
+<div class="ask">弯成 V 形的导线，安培力多大？</div>
+<EffectiveLengthSvg :step="$clicks" />
+<div class="tip-hint" v-click="1">有效长度：从起点到终点的有向线段，长度等于两端点间的距离。</div>
+<div class="tip-hint" v-click="2"><Latex tex="F = BIl" />，方向由左手定则判断。</div>
+</div>
