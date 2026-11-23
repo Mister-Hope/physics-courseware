@@ -3,3 +3,259 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* ── 第 2 页：章鱼喷水 ── */
+.pt2 {
+  gap: 0.55rem;
+}
+
+.p2-ask {
+  text-align: center;
+}
+
+.p2-fig {
+  display: flex;
+  justify-content: center;
+}
+
+.p2-fig svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+
+/* ── 第 3 页：反冲现象 ── */
+.pt3 {
+  gap: 0.55rem;
+}
+
+.p3-ask {
+  text-align: center;
+}
+
+.p3-grid {
+  gap: 2.4rem;
+}
+
+.p3-case {
+  padding: 1rem 1rem 1.05rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+  text-align: center;
+}
+
+.p3-icon {
+  color: var(--c-accent);
+}
+
+.p3-title {
+  margin-top: 0.3rem;
+  color: var(--c-text);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.p3-text {
+  margin-top: 0.2rem;
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ── 第 4 页：反冲的动量解释 ── */
+.pt4 {
+  gap: 0.4rem;
+}
+
+.p4-grid {
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+}
+
+.p4-fig svg {
+  width: 100%;
+  height: auto;
+}
+
+.p4-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.p4-ask {
+  font-size: 1rem;
+}
+
+.p4-line {
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--c-accent);
+  color: var(--c-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ── 第 5 页：反冲速度 ── */
+.pt5 {
+  gap: 0.45rem;
+}
+
+.p5-ask {
+  text-align: center;
+}
+
+.p5-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.p5-derive {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.p5-line .katex-display {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.p5-example {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p5-ex-title {
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.p5-ex-line {
+  font-size: 1.1rem;
+}
+
+.p5-note {
+  color: var(--c-text-dim);
+  font-size: 0.86rem;
+}
+
+/* ── 第 6 页：反冲速度与质量 ── */
+.pt6 {
+  gap: 0.45rem;
+}
+
+.p6-ask {
+  text-align: center;
+}
+
+/* ── 第 7 页：气球与旋转容器 ── */
+.pt7 {
+  gap: 0.55rem;
+}
+
+.p7-ask {
+  text-align: center;
+}
+
+.p7-grid {
+  gap: 2.4rem;
+}
+
+.p7-case {
+  padding: 1rem 1rem 1.05rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+  text-align: center;
+}
+
+.p7-icon {
+  color: var(--c-accent-2);
+}
+
+.p7-title {
+  margin-top: 0.3rem;
+  color: var(--c-text);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.p7-text {
+  margin-top: 0.2rem;
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ── 第 8 页：反冲的利用与防止 ── */
+.pt8 {
+  gap: 0.45rem;
+}
+
+.p8-ask {
+  text-align: center;
+}
+
+.p8-grid {
+  gap: 2rem;
+}
+
+.p8-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+  color: var(--c-accent);
+  font-size: 1.1rem;
+}
+
+.p8-icon {
+  color: var(--c-physics);
+}
+
+.p8-warn {
+  color: var(--c-danger);
+}
+
+.p8-item {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.p8-item-icon {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  color: var(--c-text-dim);
+  font-size: 1.3rem;
+}
+
+.p8-item b {
+  display: block;
+  color: var(--c-text);
+}
+
+.p8-item span {
+  color: var(--c-text-dim);
+}
+
+.p8-note {
+  margin-top: 0.6rem;
+  color: var(--c-text-mute);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
