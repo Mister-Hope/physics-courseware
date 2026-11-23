@@ -321,3 +321,17 @@ clicks: 4
     </div>
   </div>
 </div>
+
+---
+layout: base-flex
+title: 方向与大小，怎样判断？
+clicks: 5
+---
+
+<div class="page-grow em-dir-page">
+  <div class="ask">小球在 <Latex tex="O" /> 与 <Latex tex="P" />（或 <Latex tex="Q" />）之间运动时，<Latex tex="x" />、<Latex tex="v" />、<Latex tex="a" />、<Latex tex="F" /> 的方向和大小怎样变化？</div>
+  <div class="em-dir-wrap"><ShmDirectionTable /></div>
+  <div class="em-dir-hint" v-click="5">
+    <div class="tip-hint">加速度和回复力总指向平衡位置；速度与加速度同向时加速，反向时减速。</div>
+  </div>
+</div>
