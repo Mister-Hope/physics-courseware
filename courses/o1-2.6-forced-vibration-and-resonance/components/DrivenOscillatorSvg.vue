@@ -54,7 +54,9 @@ const springPath = computed(() => {
     <g v-if="showForce">
       <CourseArrow :from="{ x: 178, y: 132 }" :to="{ x: 158, y: 132 }" stroke="var(--c-accent)" :stroke-width="2" :head-size="6" />
       <CourseArrow :from="{ x: 182, y: 132 }" :to="{ x: 202, y: 132 }" stroke="var(--c-accent)" :stroke-width="2" :head-size="6" />
-      <text x="180" y="118" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">F<tspan font-size="10" dy="3">驱</tspan></text>
+      <text x="180" y="118" text-anchor="middle" font-family="KaTeX_Math" font-style="italic" font-size="14" fill="var(--c-accent)">
+        F<tspan font-size="10" dy="3">驱</tspan>
+      </text>
     </g>
   </svg>
 </template>

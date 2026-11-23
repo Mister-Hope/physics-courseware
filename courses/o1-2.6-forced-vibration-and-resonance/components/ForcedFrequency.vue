@@ -9,14 +9,14 @@ const ZETA = 0.22;
 const amp = computed(
   () =>
     1 /
-    Math.sqrt(
-      (1 - (driveFreq.value / NATURAL_FREQ) ** 2) ** 2 +
-        (2 * ZETA * driveFreq.value / NATURAL_FREQ) ** 2,
+    Math.hypot(
+      1 - (driveFreq.value / NATURAL_FREQ) ** 2,
+      (2 * ZETA * driveFreq.value) / NATURAL_FREQ,
     ),
 );
 
 const curve = computed(() => ({
-  formula: (t: number) => amp.value * Math.sin(2 * Math.PI * driveFreq.value * t),
+  formula: (t: number): number => amp.value * Math.sin(2 * Math.PI * driveFreq.value * t),
   color: "var(--c-accent)",
   width: 2.4,
 }));

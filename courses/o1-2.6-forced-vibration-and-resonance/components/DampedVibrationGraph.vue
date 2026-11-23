@@ -4,26 +4,35 @@ const { step = 0 } = defineProps<{ step?: number }>();
 
 const decay = 0.5;
 const mainCurve = {
-  formula: (t: number) => Math.exp(-decay * t) * Math.cos(2 * Math.PI * t),
+  formula: (t: number): number => Math.exp(-decay * t) * Math.cos(2 * Math.PI * t),
   color: "var(--c-accent)",
   width: 2.4,
 };
 const envelopeUp = {
-  formula: (t: number) => Math.exp(-decay * t),
+  formula: (t: number): number => Math.exp(-decay * t),
   color: "var(--c-text-dim)",
   width: 1.4,
   dashed: true,
   showAt: 1,
 };
 const envelopeDown = {
-  formula: (t: number) => -Math.exp(-decay * t),
+  formula: (t: number): number => -Math.exp(-decay * t),
   color: "var(--c-text-dim)",
   width: 1.4,
   dashed: true,
   showAt: 1,
 };
 const labels = [
-  { x: 2.1, y: 0.92, text: "振幅逐渐减小", anchor: "center" as const, size: 14, color: "var(--c-text-dim)", halo: true, showAt: 1 },
+  {
+    x: 2.1,
+    y: 0.92,
+    text: "振幅逐渐减小",
+    anchor: "center" as const,
+    size: 14,
+    color: "var(--c-text-dim)",
+    halo: true,
+    showAt: 1,
+  },
 ];
 </script>
 

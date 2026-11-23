@@ -21,7 +21,15 @@ const strips = [
     <polygon points="136,177 128,179 132,185" fill="var(--c-accent)" />
     <g v-for="s in strips" :key="s.x">
       <line :x1="s.x" y1="200" :x2="s.x" :y2="200 - s.len" stroke="var(--c-text-dim)" stroke-width="1" stroke-dasharray="3 4" opacity="0.45" />
-      <line :x1="s.x" y1="200" :x2="s.x + (step >= 1 && s.active ? s.amp : 0)" :y2="200 - s.len" :stroke="s.active ? 'var(--c-accent)' : 'var(--c-text-dim)'" :stroke-width="s.active ? 7 : 6" stroke-linecap="round" />
+      <line
+        :x1="s.x"
+        y1="200"
+        :x2="s.x + (step >= 1 && s.active ? s.amp : 0)"
+        :y2="200 - s.len"
+        :stroke="s.active ? 'var(--c-accent)' : 'var(--c-text-dim)'"
+        :stroke-width="s.active ? 7 : 6"
+        stroke-linecap="round"
+      />
     </g>
     <text x="135" y="228" text-anchor="middle" font-size="12" fill="var(--c-text-dim)">机器</text>
     <text x="430" y="228" text-anchor="middle" font-size="12" fill="var(--c-text-dim)">不同长度的钢片</text>

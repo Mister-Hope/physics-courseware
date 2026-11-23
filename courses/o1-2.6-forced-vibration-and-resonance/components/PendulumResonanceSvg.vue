@@ -15,7 +15,12 @@ const pendulums = computed(() => {
     { id: "G", x: 790, len: 170, amp: 30, bob: 9, color: "var(--c-accent)" },
   ];
   return list.map((p) => ({
-    ...p,
+    id: p.id,
+    x: p.x,
+    len: p.len,
+    amp: p.amp,
+    bob: p.bob,
+    color: p.color,
     bx: p.x + (step >= 1 ? p.amp : 0),
     by: 58 + p.len,
   }));

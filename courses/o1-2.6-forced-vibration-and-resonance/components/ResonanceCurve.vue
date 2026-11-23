@@ -8,16 +8,16 @@ const freq = ref(0.7);
 const F0 = 1;
 const ZETA = 0.18;
 
-const ampAt = (f: number, zeta: number) =>
-  1 / Math.sqrt((1 - (f / F0) ** 2) ** 2 + (2 * zeta * f / F0) ** 2);
+const ampAt = (f: number, zeta: number): number =>
+  1 / Math.hypot(1 - (f / F0) ** 2, (2 * zeta * f) / F0);
 
 const mainCurve = computed(() => ({
-  formula: (f: number) => ampAt(f, ZETA) / ampAt(F0, ZETA),
+  formula: (f: number): number => ampAt(f, ZETA) / ampAt(F0, ZETA),
   color: "var(--c-accent)",
   width: 2.6,
 }));
 const lightCurve = computed(() => ({
-  formula: (f: number) => ampAt(f, 0.08) / ampAt(F0, 0.08),
+  formula: (f: number): number => ampAt(f, 0.08) / ampAt(F0, 0.08),
   color: "var(--c-sky)",
   width: 1.8,
   dashed: true,
@@ -44,9 +44,36 @@ const statusColor = computed(() =>
   status.value === "共振" ? "var(--c-accent)" : "var(--c-text-dim)",
 );
 const labels = computed(() => [
-  { x: F0, y: 1.02, tex: "f_0", anchor: "top" as const, size: 13, color: "var(--c-text)", halo: true },
-  { x: freq.value, y: current.value, text: "当前", anchor: "top" as const, size: 11, color: "var(--c-accent)", halo: true, dot: true, dotColor: "var(--c-accent)" },
-  { x: 1.3, y: 0.66, text: "阻尼更小", anchor: "center" as const, size: 11, color: "var(--c-sky)", halo: true, showAt: 1 },
+  {
+    x: F0,
+    y: 1.02,
+    tex: "f_0",
+    anchor: "top" as const,
+    size: 13,
+    color: "var(--c-text)",
+    halo: true,
+  },
+  {
+    x: freq.value,
+    y: current.value,
+    text: "当前",
+    anchor: "top" as const,
+    size: 11,
+    color: "var(--c-accent)",
+    halo: true,
+    dot: true,
+    dotColor: "var(--c-accent)",
+  },
+  {
+    x: 1.3,
+    y: 0.66,
+    text: "阻尼更小",
+    anchor: "center" as const,
+    size: 11,
+    color: "var(--c-sky)",
+    halo: true,
+    showAt: 1,
+  },
 ]);
 </script>
 

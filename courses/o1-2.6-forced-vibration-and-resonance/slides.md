@@ -228,3 +228,94 @@ zoom: 0.9
 <div class="summary-line">调谐质量阻尼器（TMD）由弹簧、阻尼器和质量块组成，安装在主结构上。适当调整后，弹力与驱动力方向相反，抵消一部分驱动力，减小主结构的振动。</div>
 <div class="tip-hint" v-click="1">港珠澳大桥等工程采用了振动控制技术。</div>
 </div>
+
+---
+layout: exercise-split
+title: 例题：汽车颠簸
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+
+汽车车身装在弹簧上，车身与弹簧组成的系统固有周期为 1.5 <Latex tex="\text{s}" />。路面上有相隔约 8 <Latex tex="\text{m}" /> 的凸起。汽车以多大速度行驶时，颠簸最剧烈？
+
+</template>
+
+<div v-click="1">路面凸起对车身的驱动力频率 <Latex tex="f=\frac{v}{s}" />。</div>
+<div v-click="1">共振时 <Latex tex="f=f_0=\frac{1}{T}" />。</div>
+<div v-click="2"><Latex tex="v=\frac{s}{T}=\frac{8}{1.5}\approx 5.33\ \text{m/s}\approx 19.2\ \text{km/h}" /></div>
+<div class="tip-hint" v-click="3">驱动力频率等于固有频率时发生共振，颠簸最剧烈。</div>
+
+---
+layout: exercise-split
+title: 例题：受迫振动的频率
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+
+竖直圆盘匀速转动，通过小圆柱带动 T 形支架上下振动，支架下的弹簧悬挂一个小球，小球浸没在水中。圆盘静止时，小球的阻尼振动频率约为 3 <Latex tex="\text{Hz}" />。圆盘以 4 <Latex tex="\text{s}" /> 的周期匀速转动，稳定后小球的振动频率是多少？
+
+</template>
+
+<div v-click="1">圆盘转动的频率 <Latex tex="f=\frac{1}{T}=\frac{1}{4}=0.25\ \text{Hz}" />。</div>
+<div v-click="2">稳定后，小球做受迫振动，频率等于驱动力的频率。</div>
+<div class="tip-hint" v-click="3">受迫振动稳定后的频率等于驱动力的频率，与固有频率（<Latex tex="3\ \text{Hz}" />）无关。</div>
+
+---
+layout: exercise-split
+title: 思考：三个摆的振动
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+
+如图，张紧的水平绳上挂着 A、B、C 三个摆。B 靠近 A，但悬线长度不同；C 远离 A，但悬线与 A 等长。
+
+</template>
+
+<template v-slot:fig>
+<ThreePendulumsSvg :step="$clicks" />
+</template>
+
+<div v-click="1">(1) 使 A 摆动：C 与 A 同频，振幅较大；B 不同频，振幅较小。</div>
+<div v-click="2">(2) C 摆动后，停住 A、B 再松手：A 与 C 同频，振幅较大；B 较小。</div>
+<div class="tip-hint" v-click="3">共振取决于固有频率是否相同，与摆的距离远近无关。</div>
+
+---
+layout: base-flex
+title: 练习：摆长与共振曲线
+clicks: 3
+clickAnimation: none
+zoom: 0.85
+---
+
+# 练习：摆长与共振曲线
+
+<div class="page-grow page-grow-tight">
+<div class="ask">如图是某单摆的共振曲线。如果增大摆长，共振曲线振幅最大值对应的横坐标怎样变化？</div>
+<div v-click="1"><ResonanceShift :step="$clicks" /></div>
+<div v-click="1">摆长 <Latex tex="L" /> 增大，固有频率 <Latex tex="f_0=\frac{1}{2\pi}\sqrt{\frac{g}{L}}" /> 减小。</div>
+<div v-click="2">共振峰向低频方向（左侧）移动。</div>
+<div class="tip-hint" v-click="3">摆长越长，固有频率越小，共振峰越靠左。</div>
+</div>
+
+---
+title: 小结
+---
+
+<div class="page-grow">
+<div class="fw-summary-main">受迫振动与共振</div>
+<div class="fw-summary-grid">
+<div class="fw-summary-card"><b>固有振动</b><span><Latex tex="f_0" /> 由系统自身决定</span></div>
+<div class="fw-summary-card"><b>阻尼振动</b><span>能量损失，振幅减小</span></div>
+<div class="fw-summary-card"><b>受迫振动</b><span>稳定后 <Latex tex="f=f_{\text{驱}}" /></span></div>
+<div class="fw-summary-card"><b>共振</b><span><Latex tex="f_{\text{驱}}=f_0" />，振幅最大</span></div>
+<div class="fw-summary-card"><b>利用</b><span>转速计、声音中的共振</span></div>
+<div class="fw-summary-card"><b>防止</b><span>桥梁、发动机、TMD</span></div>
+</div>
+<div class="summary-line">受迫振动稳定后，频率等于驱动力的频率；驱动力的频率等于固有频率时发生共振。</div>
+</div>
