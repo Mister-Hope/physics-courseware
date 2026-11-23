@@ -346,7 +346,7 @@ layout: focus-question
 title: 思考
 ---
 
-<div class="stack" style="gap: 1.6rem">
+<div class="stack" style="gap: 2.2rem">
 <div class="ask-lead">换一种被测量、换一个执行装置，先感知、再放大的思路还成立吗？</div>
 <div class="ask">报警器接在常闭触点上：传感器坏了、线路断了，它反而会响。这样设计有什么好处？</div>
 <div class="ask">要让路灯天黑才亮、天亮就灭，可调电阻 <Latex tex="R_1" /> 该调大还是调小？</div>
