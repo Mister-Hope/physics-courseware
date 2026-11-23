@@ -1,5 +1,286 @@
-/* ═══════════════════════════════════════════════
-   动量定理 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 1.2 动量定理：本课页面样式（页面钩子用 ptN，避免与 UnoCSS 的 pN 工具类冲突）。 */
+
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* 第 2 页：动量回顾 */
+.pt2 {
+  gap: 0.75rem;
+}
+.p2-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 2.4rem;
+  align-items: center;
+}
+.p2-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.p2-eq {
+  line-height: 1;
+}
+.p2-eq .katex-display {
+  margin: 0;
+  font-size: 1.9rem;
+}
+.p2-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  font-size: 1.02rem;
+}
+.p2-tag {
+  min-width: 3.2rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.p2-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.p2-note {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+.p2-note b {
+  color: var(--c-text);
+}
+.p2-foot {
+  margin-top: 0.2rem;
+}
+
+/* 第 3 页：船靠岸 */
+.pt3 {
+  justify-content: center;
+  gap: 0.55rem;
+}
+.p3-ask {
+  text-align: center;
+}
+.p3-fig {
+  display: flex;
+  justify-content: center;
+}
+.p3-fig svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+}
+.p3-hint {
+  align-self: center;
+}
+
+/* 第 4 页：碰撞中的力 */
+.pt4 {
+  gap: 1.1rem;
+}
+.p4-ask {
+  max-width: 40rem;
+}
+.p4-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+.p4-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+}
+.p4-item b {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--c-text);
+  font-size: 1.05rem;
+}
+.p4-icon {
+  flex: 0 0 auto;
+  margin-top: 0.1rem;
+  color: var(--c-accent);
+}
+
+/* 第 5 页：从牛顿第二定律到动量定理 */
+.pt5 {
+  gap: 0.55rem;
+}
+.p5-ask {
+  text-align: center;
+}
+.p5-grid {
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 2rem;
+  align-items: center;
+}
+.p5-fig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.p5-fig svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+.p5-cap {
+  text-align: center;
+  font-size: 0.8rem;
+}
+.p5-steps {
+  display: flex;
+  flex-direction: column;
+}
+.p5-step {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  align-items: center;
+  min-height: 3.35rem;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.p5-step:last-child {
+  border-bottom: none;
+}
+.p5-no {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.p5-step .katex {
+  font-size: 0.95em;
+}
+.p5-step .katex-display {
+  margin: 0;
+}
+
+/* 第 6 页：冲量 */
+.pt6 {
+  gap: 0.8rem;
+}
+.p6-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.2rem;
+  align-items: center;
+}
+.p6-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.p6-eq .katex-display {
+  margin: 0;
+  font-size: 2.1rem;
+}
+.p6-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  font-size: 1rem;
+}
+.p6-tag {
+  min-width: 3rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.p6-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.p6-rel {
+  font-size: 1.35rem;
+}
+.p6-rel .katex-display {
+  margin: 0;
+}
+.p6-note {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+
+/* 第 7 页：动量定理 */
+.pt7 {
+  gap: 0.7rem;
+}
+.p7-statement {
+  font-size: 1.22rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.p7-eq .katex-display {
+  margin: 0;
+  font-size: 2rem;
+}
+.p7-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+.p7-note {
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--c-border);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+}
+.p7-tag {
+  margin-right: 0.4rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 第 8 页：变力情况下的冲量 */
+.pt8 {
+  gap: 0.4rem;
+}
+.p8-grid {
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1.8rem;
+  align-items: center;
+}
+.p8-chart svg {
+  width: 100%;
+  height: auto;
+}
+.p8-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.p8-ask {
+  margin-bottom: 0.2rem;
+  font-size: 1.02rem;
+}
+.p8-step {
+  display: grid;
+  grid-template-columns: 1.7rem 1fr;
+  gap: 0.45rem;
+  align-items: start;
+  padding: 0.28rem 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.p8-step:last-of-type {
+  border-bottom: none;
+}
+.p8-no {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.p8-step .katex {
+  font-size: 0.95em;
+}
+.pt8 .tip-hint {
+  font-size: 0.86rem;
+}
