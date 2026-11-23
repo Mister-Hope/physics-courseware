@@ -549,50 +549,50 @@
           "slug": "o2-3.4-power-transmission",
           "title": "电能的输送",
           "chapter": "§3.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由远距离输电的电压损失与功率损失切入，用 I=P/U、P损=I²r 推出高压输电；再认识升压、降压变电站与电网，收于「输送电压越高、损耗越小」。",
+          "tags": ["电能的输送", "远距离输电", "电压损失", "功率损失", "高压输电"]
         },
         {
           "slug": "o2-4.1-electromagnetic-oscillation",
           "title": "电磁振荡",
           "chapter": "§4.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "从充电电容器与自感线圈的放电过程切入，分四阶段追踪电荷与电流的变化；用 q–t、i–t 对照讲电场能与磁场能，导出 T=2π√(LC)，收于阻尼与等幅振荡。",
+          "tags": ["电磁振荡", "LC 振荡电路", "周期与频率", "电场能与磁场能"]
         },
         {
           "slug": "o2-4.2-electromagnetic-field-and-wave",
           "title": "电磁场与电磁波",
           "chapter": "§4.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由变化的磁场生电场、变化的电场生磁场切入，推演电磁波的产生与传播；用 E、B、c 两两垂直的横波图与赫兹实验说明电磁波是横波，真空中速度等于光速。",
+          "tags": ["电磁场", "电磁波", "横波", "赫兹实验", "麦克斯韦电磁理论"]
         },
         {
           "slug": "o2-4.3-radio-wave-transmission-reception",
           "title": "无线电波的发射和接收",
           "chapter": "§4.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "从收音机怎样收到声音切入，讲开放电路发射、调制（调幅与调频）、电谐振选台与检波解调；用 f=1/(2π√(LC)) 真实计算选台，收于发射与接收的完整链路。",
+          "tags": ["无线电波", "调制", "调频与调幅", "电谐振", "检波"]
         },
         {
           "slug": "o2-4.4-electromagnetic-spectrum",
           "title": "电磁波谱",
           "chapter": "§4.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由太阳辐射引出电磁波谱，按波长排列各波段；讲产生机理、特性与应用，用 c=λf 连接波长与频率，收于电磁波的利用与防护。",
+          "tags": ["电磁波谱", "红外线", "紫外线", "X 射线", "电磁波的应用"]
         },
         {
           "slug": "o2-1.1-ampere-force",
           "title": "磁场对通电导线的作用力",
           "chapter": "§1.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "从通电导线在磁场中受力切入，用左手定则判断方向，用 F=IlBsinθ 计算大小并讨论有效长度；再拆开磁电式电流表，看辐向磁场与游丝怎样把电流变成指针偏转。",
+          "tags": ["安培力", "左手定则", "磁电式电流表", "有效长度"]
         },
         {
           "slug": "o2-5.1-sensor-introduction",
           "title": "认识传感器",
           "chapter": "§5.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由祝融号火星车与能「看见」小盒子的传感器引出，类比人的感官；讲传感器的定义、敏感元件与转换元件、转换电路，再按物理、化学、生物分类，收于「非电学量变成电学量」。",
+          "tags": ["传感器", "敏感元件", "转换元件", "传感器的分类"]
         },
         {
           "slug": "o2-5.2-common-sensor-principles",
