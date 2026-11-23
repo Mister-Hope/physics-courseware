@@ -3,3 +3,238 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* ── 图 + 文字的双栏 ── */
+.sp-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.sp-fig {
+  width: 100%;
+  min-width: 0;
+}
+
+.sp-fig svg {
+  display: block;
+  width: 100%;
+  max-height: 380px;
+}
+
+/* ── 条件列表与编号 ── */
+.sp-cond {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sp-cond-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.sp-no {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-accent);
+  background: var(--c-accent-soft);
+  border: 1px solid var(--c-accent);
+  border-radius: 50%;
+  transform: translateY(0.12rem);
+}
+
+/* ── 要点：小标题 + 解释 ── */
+.sp-point {
+  padding-left: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.55;
+  border-left: 2px solid var(--c-border-glow);
+}
+
+.sp-key {
+  margin-right: 0.35rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+/* ── 推导步骤 ── */
+.sp-derive {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sp-derive-row {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ── 控制变量实验的三行 ── */
+.sp-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.2rem;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+}
+
+.sp-row-text {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  min-width: 0;
+  font-size: 1rem;
+}
+
+.sp-row-ans {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-accent);
+  white-space: nowrap;
+}
+
+/* ── P8 数据表 ── */
+.p8-table {
+  width: 100%;
+  font-size: 0.8rem;
+}
+
+.p8-table th,
+.p8-table td {
+  padding: 0.22rem 0.5rem;
+  text-align: center;
+}
+
+.p8-table th:first-child,
+.p8-table td:first-child {
+  text-align: left;
+}
+
+/* ── 公式块 ── */
+.sp-formula-big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0 0.4rem;
+}
+
+.sp-formula-big .katex-display {
+  margin: 0;
+}
+
+.sp-formula-big .katex {
+  font-size: 1.5em;
+}
+
+/* ── 示例数据块 ── */
+.sp-example {
+  margin-top: 0.2rem;
+  padding: 0.45rem 0.8rem 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  background: var(--c-surface);
+  border-left: 2px solid var(--c-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ── P11 摆钟引语 ── */
+.sp-clock-lead {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.2rem 0 0.4rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+/* ── 例题页：解析区从题干下方开始，避免单行题干造成中部大片空白 ── */
+.ex-top .ex-analysis {
+  justify-content: flex-start;
+  gap: 0.9rem;
+}
+
+/* ── P16 双曲线图例 ── */
+.p16-fig {
+  width: 360px;
+}
+
+.p16-a {
+  font-weight: 700;
+  color: var(--c-accent-2);
+}
+
+.p16-b {
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+/* ── P18 计时工具时间线 ── */
+.sp-timeline {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.sp-timeline-item {
+  flex: 1;
+  min-width: 0;
+  padding: 0.85rem 0.5rem;
+  text-align: center;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+}
+
+.sp-timeline-icon {
+  display: block;
+  margin: 0 auto 0.25rem;
+  font-size: 2rem;
+  color: var(--c-accent);
+}
+
+.sp-timeline-name {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+.sp-timeline-desc {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--c-text-dim);
+}
+
+.sp-timeline-arrow {
+  align-self: center;
+  flex: none;
+  color: var(--c-text-dim);
+}
