@@ -584,8 +584,8 @@
           "slug": "o1-4.1-refraction-of-light",
           "title": "光的折射",
           "chapter": "§4.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "通过实验认识光的折射定律，理解折射率 n=c/v 与 sin i/sin r 的关系，会用折射定律解决光路与视深类问题。",
+          "tags": ["光的折射", "折射定律", "折射率", "光路图"]
         },
         {
           "slug": "o1-4.2-total-internal-reflection",

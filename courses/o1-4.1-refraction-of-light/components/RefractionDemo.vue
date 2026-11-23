@@ -68,6 +68,7 @@ const theta2 = computed(() => {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 1.2rem;
   align-items: center;
+
   width: 100%;
 }
 
@@ -98,10 +99,13 @@ const theta2 = computed(() => {
   padding: 0.32rem 0.4rem;
   border: 1px solid var(--c-border);
   border-radius: 0.55rem;
+
   background: var(--c-surface);
   color: var(--c-text-dim);
+
   font: inherit;
   font-size: 0.78rem;
+
   cursor: pointer;
 }
 
@@ -121,9 +125,11 @@ const theta2 = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 0.12rem;
+
   padding: 0.35rem 0.55rem;
   border: 1px solid var(--c-border);
   border-radius: 0.55rem;
+
   background: color-mix(in srgb, var(--c-surface) 55%, transparent);
 }
 
