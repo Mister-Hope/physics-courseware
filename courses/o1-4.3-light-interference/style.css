@@ -1,5 +1,183 @@
-/* ═══════════════════════════════════════════════
-   光的干涉 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 4.3 光的干涉 —— 本课特有样式 */
+
+.li-key {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.li-lead {
+  font-size: 1.16rem;
+  line-height: 1.62;
+}
+
+.li-conds {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.li-cond {
+  display: flex;
+  gap: 0.9rem;
+  align-items: baseline;
+  font-size: 1.12rem;
+}
+
+.li-cond-tag {
+  flex: none;
+  min-width: 6.4rem;
+  padding: 0.1rem 0.7rem;
+  border-radius: 999px;
+  background: var(--c-surface);
+  color: var(--c-accent);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.li-row {
+  align-items: center;
+}
+
+.li-fig-film {
+  max-width: 700px;
+  margin-inline: auto;
+  max-width: 560px;
+}
+
+.li-fig-slit {
+  max-width: 560px;
+}
+
+.li-fig-path {
+  max-width: 620px;
+}
+
+.li-row-wide {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+}
+
+.li-rule {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.3rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+}
+
+.li-rule-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.li-rule-bright {
+  border-left: 4px solid var(--c-accent);
+}
+
+.li-rule-bright .li-rule-title {
+  color: var(--c-accent);
+}
+
+.li-rule-dark {
+  border-left: 4px solid var(--c-velocity);
+}
+
+.li-rule-dark .li-rule-title {
+  color: var(--c-velocity);
+}
+
+.li-rule-formula {
+  font-size: 1.5rem;
+}
+
+.li-rule-note {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+}
+
+.li-derive {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.06rem;
+  line-height: 1.55;
+}
+
+.li-table {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.li-tr {
+  display: grid;
+  grid-template-columns: 6rem 7rem minmax(0, 1fr);
+  gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.7rem;
+  background: var(--c-surface);
+  font-size: 1.02rem;
+  align-items: center;
+}
+
+.li-th {
+  background: transparent;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.li-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.li-explorer-row {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) 9rem;
+  gap: 0.8rem;
+  align-items: center;
+  width: 100%;
+  max-width: 620px;
+}
+
+.li-explorer-label {
+  text-align: right;
+  font-size: 1.05rem;
+}
+
+.li-explorer-value {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.li-explorer-read {
+  font-size: 1.2rem;
+  color: var(--c-accent);
+}
+
+.li-fig-geom {
+  max-width: 560px;
+}
+
+.li-fig-color {
+  max-width: 640px;
+}
+
+.li-fig-explorer {
+  max-width: 520px;
+}
+
+.li-fig-film2 {
+  max-width: 520px;
+}
+
+.li-fig-coat {
+  max-width: 620px;
+}
+
+.li-fig-wedge {
+  max-width: 560px;
+}
