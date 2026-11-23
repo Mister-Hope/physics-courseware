@@ -271,3 +271,25 @@ clicks: 4
     <AbAccelerationSvg :show-o="$clicks >= 3" />
   </div>
 </div>
+
+---
+layout: base-flex
+title: 弹簧振子的能量计算
+clicks: 4
+---
+
+<div class="page-grow em-example-page">
+  <div class="em-exercise-stem">一弹簧振子，弹簧的劲度系数 <Latex tex="k=20\,\text{N/m}" />，振子的质量 <Latex tex="m=0.2\,\text{kg}" />，振幅 <Latex tex="A=0.1\,\text{m}" />。求：</div>
+  <div class="em-example-asks">
+    <div class="em-ask-item"><span class="em-ask-no">（1）</span><Latex tex="\omega" /> 与 <Latex tex="T" /></div>
+    <div class="em-ask-item"><span class="em-ask-no">（2）</span><Latex tex="v_{\max}" /> 与 <Latex tex="a_{\max}" /></div>
+    <div class="em-ask-item"><span class="em-ask-no">（3）</span><Latex tex="E" /></div>
+    <div class="em-ask-item"><span class="em-ask-no">（4）</span><Latex tex="x=0.05\,\text{m}" /> 时的 <Latex tex="E_p" />、<Latex tex="E_k" />、<Latex tex="v" /></div>
+  </div>
+  <div class="em-example-list">
+    <div class="em-example-item" v-click="1"><div class="em-example-label">（1）</div><div class="em-example-formulas"><Latex tex="\omega=\sqrt{\frac{k}{m}}=10\,\text{rad/s}" /><Latex tex="T=\frac{2\pi}{\omega}=0.2\pi\,\text{s}\approx0.63\,\text{s}" /></div></div>
+    <div class="em-example-item" v-click="2"><div class="em-example-label">（2）</div><div class="em-example-formulas"><Latex tex="v_{\max}=\omega A=1.0\,\text{m/s}" /><Latex tex="a_{\max}=\omega^2A=10\,\text{m/s}^2" /></div></div>
+    <div class="em-example-item" v-click="3"><div class="em-example-label">（3）</div><div class="em-example-formulas"><Latex tex="E=\frac{1}{2}kA^2=0.10\,\text{J}" /></div></div>
+    <div class="em-example-item" v-click="4"><div class="em-example-label">（4）</div><div class="em-example-formulas"><Latex tex="E_p=\frac{1}{2}kx^2=0.025\,\text{J}" /><Latex tex="E_k=E-E_p=0.075\,\text{J}" /><Latex tex="v=\sqrt{\frac{2E_k}{m}}\approx0.87\,\text{m/s}" /></div></div>
+  </div>
+</div>
