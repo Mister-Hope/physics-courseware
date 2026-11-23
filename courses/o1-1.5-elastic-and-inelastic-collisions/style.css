@@ -1,5 +1,146 @@
-/* ═══════════════════════════════════════════════
-   弹性碰撞和非弹性碰撞 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* ===== 1.5 弹性碰撞和非弹性碰撞 =====
+   配色语义（全课统一）：m₁ / 左球 = 金（--c-accent），
+   m₂ / 右球 = 青（--c-physics），速度箭头沿用各自物体的颜色。 */
+
+/* 第 3 页：1.1 节碰撞实验数据表 */
+.col-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.col-table th {
+  padding: 0.3rem 0.2rem 0.4rem;
+  font-weight: 700;
+  color: var(--c-text-dim);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.col-table td {
+  padding: 0.42rem 0.2rem;
+  text-align: center;
+}
+
+.col-table tbody tr + tr td {
+  border-top: 1px solid rgb(255 255 255 / 6%);
+}
+
+.col-table .katex {
+  font-size: 1em;
+}
+
+.col-unit {
+  margin-left: 0.15rem;
+  font-size: 0.76rem;
+  color: var(--c-text-mute);
+}
+
+.col-accent {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 第 7 页：图窄一点，算式栏宽一点 */
+.coll-grid-eq {
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+}
+
+/* 第 13 页：质量比互动（图 + 滑块 + 两个读数） */
+.coll-ratio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.coll-ratio-row {
+  display: grid;
+  grid-template-columns: 10.5rem minmax(0, 1fr) 9rem 9rem;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.coll-ratio-k {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+  white-space: nowrap;
+}
+
+.coll-ratio-read {
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 第 14 页：三条合理性检验 */
+.page-grow.coll-top {
+  justify-content: flex-start;
+}
+
+.coll-checks {
+  gap: 1.5rem;
+}
+
+.coll-check {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding-left: 1rem;
+  border-left: 2px solid var(--c-border);
+}
+
+.coll-check-title {
+  flex: 0 0 5.8rem;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.coll-check-body {
+  font-size: 1.16rem;
+  line-height: 1.6;
+}
+
+/* 第 15 页：两种假设的套算 */
+.coll-cases {
+  gap: 1.4rem;
+  font-size: 1.06rem;
+}
+
+.coll-no {
+  color: var(--c-danger);
+  font-weight: 700;
+}
+
+.coll-yes {
+  color: var(--c-physics);
+  font-weight: 700;
+}
+
+.coll-case-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--c-text);
+}
+
+/* 第 18 页：中子减速 */
+.coll-neutron {
+  gap: 1.1rem;
+  font-size: 1.12rem;
+  line-height: 1.6;
+}
+
+/* 第 19 页：小结 */
+.coll-summary {
+  gap: 1.15rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.coll-num {
+  display: inline-block;
+  width: 1.6rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
