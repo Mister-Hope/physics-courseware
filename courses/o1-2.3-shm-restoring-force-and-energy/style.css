@@ -7,8 +7,8 @@
 .em-intro {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.6rem;
+  justify-content: center;
 }
 
 .em-intro-row {
@@ -20,13 +20,15 @@
 .em-intro-item {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+
   padding: 1.1rem 1rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
 }
 
 .em-intro-icon {
@@ -34,8 +36,8 @@
 }
 
 .em-intro-label {
-  font-size: 1.05rem;
   color: var(--c-text-dim);
+  font-size: 1.05rem;
 }
 
 .em-intro-ask {
@@ -66,6 +68,7 @@
   grid-template-columns: 1.1fr 1fr;
   gap: 1.2rem;
   align-items: center;
+
   min-height: 330px;
 }
 
@@ -93,22 +96,23 @@
 .em-osc-cell {
   min-width: 0;
   padding: 0.5rem 0.7rem 0.3rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
 }
 
 .em-osc-cap {
   padding: 0.1rem 0 0.2rem;
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
   text-align: center;
 }
 
 .em-force-result {
   display: flex;
-  align-items: center;
   gap: 1rem;
+  align-items: center;
 }
 
 .em-formula {
@@ -125,15 +129,16 @@
 .em-derive-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.6rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-derive {
   display: flex;
-  align-items: stretch;
   gap: 0.7rem;
+  align-items: stretch;
 }
 
 .em-derive-step {
@@ -141,12 +146,15 @@
   flex: 1;
   flex-direction: column;
   justify-content: center;
+
   min-width: 0;
   padding: 0.45rem 0.8rem;
-  text-align: center;
-  background: var(--c-surface);
   border-top: 3px solid var(--c-accent-2);
   border-radius: 0.6rem;
+
+  background: var(--c-surface);
+
+  text-align: center;
 }
 
 .em-derive-final {
@@ -155,48 +163,53 @@
 
 .em-derive-label {
   margin-bottom: 0.15rem;
-  font-size: 0.72rem;
   color: var(--c-text-mute);
+  font-size: 0.72rem;
 }
 
 .em-lab-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.6rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-state-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.6rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-xt-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.4rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-energy-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.6rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-energy-eq-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.7rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-eq-grid {
@@ -208,10 +221,12 @@
 .em-eq-card {
   min-width: 0;
   padding: 0.6rem 0.8rem;
-  text-align: center;
-  background: var(--c-surface);
   border-top: 3px solid var(--c-accent-2);
   border-radius: 0.7rem;
+
+  background: var(--c-surface);
+
+  text-align: center;
 }
 
 .em-eq-card:nth-child(2) {
@@ -220,15 +235,16 @@
 
 .em-eq-label {
   margin-bottom: 0.2rem;
-  font-size: 0.8rem;
   color: var(--c-text-dim);
+  font-size: 0.8rem;
 }
 
 .em-eq-derive {
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+
   color: var(--c-text-dim);
 }
 
@@ -239,9 +255,10 @@
 .em-energy-lab-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 100%;
   gap: 0.6rem;
+  justify-content: center;
+
+  height: 100%;
 }
 
 .em-derive-step .katex-display {
@@ -251,8 +268,8 @@
 .em-incline-page {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  align-items: center;
   gap: 1.2rem;
+  align-items: center;
 }
 
 .em-incline-left {
@@ -265,7 +282,9 @@
 .em-exercise-stem {
   padding: 0.15rem 0 0.15rem 0.85rem;
   border-left: 3px solid var(--c-accent);
+
   color: var(--c-text);
+
   font-size: 1rem;
   line-height: 1.7;
 }
@@ -278,9 +297,11 @@
 
 .em-proof-step {
   display: flex;
-  align-items: flex-start;
   gap: 0.55rem;
+  align-items: flex-start;
+
   color: var(--c-text-dim);
+
   font-size: 0.92rem;
   line-height: 1.55;
 }
@@ -290,13 +311,16 @@
   flex: 0 0 1.45rem;
   align-items: center;
   justify-content: center;
+
   width: 1.45rem;
   height: 1.45rem;
   border-radius: 50%;
+
   background: var(--c-accent);
   color: var(--c-bg);
-  font-size: 0.75rem;
+
   font-weight: 600;
+  font-size: 0.75rem;
 }
 
 .em-proof-step .katex {
@@ -311,8 +335,8 @@
 .em-ab-page {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-  align-items: center;
   gap: 1.2rem;
+  align-items: center;
 }
 
 .em-ab-figure {
@@ -327,8 +351,9 @@
 .em-example-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.8rem;
+  justify-content: center;
+
   height: 100%;
 }
 
@@ -340,8 +365,9 @@
 .em-example-item {
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 1fr);
-  align-items: start;
   gap: 0.8rem;
+  align-items: start;
+
   padding: 0.55rem 0;
   border-top: 1px solid var(--c-border);
 }
@@ -355,8 +381,9 @@
 .em-example-formulas {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.5rem 1.1rem;
+  align-items: center;
+
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -365,14 +392,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 1.4rem;
-  font-size: 0.95rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.95rem;
 }
 
 .em-ask-item {
   display: flex;
-  align-items: baseline;
   gap: 0.3rem;
+  align-items: baseline;
 }
 
 .em-ask-no {
@@ -388,9 +417,10 @@
 
 .em-qual-grid {
   display: grid;
+  flex: 1;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1.2rem;
-  flex: 1;
+
   min-height: 0;
 }
 
@@ -408,10 +438,12 @@
 
 .em-qual-head {
   display: flex;
-  align-items: baseline;
   gap: 0.4rem;
-  font-size: 1.02rem;
+  align-items: baseline;
+
   color: var(--c-text);
+
+  font-size: 1.02rem;
 }
 
 .em-qual-no {
@@ -425,9 +457,9 @@
 
 .em-qual-analysis {
   min-height: 8.6rem;
+  color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.65;
-  color: var(--c-text-dim);
 }
 
 .em-qual-analysis > div + div {
@@ -441,16 +473,16 @@
 }
 
 .em-dir-wrap {
-  flex: 1;
   display: flex;
+  flex: 1;
   align-items: center;
   min-height: 0;
 }
 
 .em-dir-hint {
-  min-height: 3.2rem;
   display: flex;
   align-items: center;
+  min-height: 3.2rem;
 }
 
 .em-amp-page {
@@ -460,28 +492,31 @@
 }
 
 .em-amp-list {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  justify-content: center;
   gap: 0.7rem;
+  justify-content: center;
+
   min-height: 0;
 }
 
 .em-amp-row {
   display: grid;
   grid-template-columns: 1.2fr 1.5fr 0.25fr 0.8fr;
-  align-items: center;
   gap: 0.6rem;
+  align-items: center;
+
   padding: 0.65rem 1rem;
-  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
   border: 1px solid var(--c-border);
   border-radius: 0.7rem;
+
+  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
 }
 
 .em-amp-label {
-  font-size: 1.05rem;
   color: var(--c-text);
+  font-size: 1.05rem;
 }
 
 .em-amp-formula {
@@ -489,22 +524,22 @@
 }
 
 .em-amp-arrow {
-  text-align: center;
-  font-size: 1.4rem;
   color: var(--c-text-dim);
+  font-size: 1.4rem;
+  text-align: center;
 }
 
 .em-amp-value {
-  text-align: center;
-  font-size: 1.3rem;
-  font-weight: 600;
   color: var(--c-accent);
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
 }
 
 .em-amp-hint {
-  min-height: 3.2rem;
   display: flex;
   align-items: center;
+  min-height: 3.2rem;
 }
 
 .em-structure-page {
@@ -515,39 +550,45 @@
 
 .em-structure-banner {
   align-self: center;
+
   padding: 0.2rem 1.6rem;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--c-accent);
-  letter-spacing: 0.08em;
   border: 1px solid var(--c-border-glow);
   border-radius: 999px;
+
   background: color-mix(in srgb, var(--c-accent) 8%, transparent);
+  color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
 }
 
 .em-structure-grid {
-  flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  flex: 1;
   grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.7rem;
+
   min-height: 0;
 }
 
 .em-structure-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.3rem;
+  justify-content: center;
+
   padding: 0.7rem 0.9rem;
-  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
   border: 1px solid var(--c-border);
   border-radius: 0.8rem;
+
+  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
 }
 
 .em-structure-head {
-  font-size: 1rem;
   color: var(--c-text-dim);
+  font-size: 1rem;
 }
 
 .em-structure-formula {
@@ -555,9 +596,9 @@
 }
 
 .em-structure-note {
+  color: var(--c-text-dim);
   font-size: 0.82rem;
   line-height: 1.55;
-  color: var(--c-text-dim);
 }
 
 .em-summary .step-item {
@@ -565,7 +606,7 @@
 }
 
 .em-summary-text {
+  color: var(--c-text);
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--c-text);
 }

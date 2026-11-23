@@ -64,8 +64,8 @@
 
 .em-dir-head {
   padding: 0 0.5rem;
-  font-size: 0.8rem;
   color: var(--c-text-dim);
+  font-size: 0.8rem;
 }
 
 .em-dir-head span:nth-child(n + 2) {
@@ -74,10 +74,12 @@
 
 .em-dir-row {
   padding: 0.42rem 0.55rem;
-  font-size: 0.9rem;
-  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
   border: 1px solid var(--c-border);
   border-radius: 0.6rem;
+
+  background: color-mix(in srgb, var(--c-surface) 62%, transparent);
+
+  font-size: 0.9rem;
 }
 
 .em-dir-situation {
@@ -85,8 +87,8 @@
 }
 
 .em-dir-cell {
-  text-align: center;
   color: var(--c-text-dim);
+  text-align: center;
 }
 
 .em-dir-up {

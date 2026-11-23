@@ -78,32 +78,34 @@
 
 .em-state-note {
   margin-bottom: 0.35rem;
-  font-size: 0.74rem;
   color: var(--c-text-mute);
+  font-size: 0.74rem;
   text-align: right;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
   table-layout: fixed;
+  font-size: 0.82rem;
 }
 
 th {
   padding: 0.38rem 0.4rem;
-  font-weight: 500;
-  color: var(--c-text-dim);
-  text-align: center;
-  background: var(--c-surface);
   border-bottom: 1px solid var(--c-border);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-weight: 500;
+  text-align: center;
 }
 
 td {
   padding: 0.36rem 0.4rem;
+  border-bottom: 1px solid var(--c-border);
   color: var(--c-text);
   text-align: center;
-  border-bottom: 1px solid var(--c-border);
 }
 
 th:first-child,
@@ -121,7 +123,7 @@ td:first-child {
 }
 
 .trend {
-  font-size: 0.75rem;
   color: var(--c-text-dim);
+  font-size: 0.75rem;
 }
 </style>

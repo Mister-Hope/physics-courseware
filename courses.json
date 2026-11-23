@@ -521,8 +521,8 @@
           "slug": "o1-2.3-shm-restoring-force-and-energy",
           "title": "简谐运动的回复力和能量",
           "chapter": "§2.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由 F=−kx 理解简谐运动的动力学特征，分析振动过程中动能、势能与总能量的转化及守恒（理想情况）。",
+          "tags": ["回复力", "简谐运动", "能量转化", "F=-kx"]
         },
         {
           "slug": "o1-2.4-simple-pendulum",

@@ -85,14 +85,17 @@ const accelText = computed((): string => acceleration.value.toFixed(2));
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+
   margin-bottom: 0.35rem;
-  font-size: 0.86rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.86rem;
 }
 
 .em-lab-unit {
-  font-size: 0.78rem;
   color: var(--c-text-mute);
+  font-size: 0.78rem;
 }
 
 .em-lab-readouts {
@@ -103,13 +106,15 @@ const accelText = computed((): string => acceleration.value.toFixed(2));
 
 .em-lab-cell {
   display: flex;
+  gap: 0.6rem;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.6rem;
+
   padding: 0.28rem 0.6rem;
-  background: var(--c-surface);
   border-left: 3px solid var(--c-accent-2);
   border-radius: 0.5rem;
+
+  background: var(--c-surface);
 }
 
 .em-lab-cell:nth-child(3) {
@@ -117,24 +122,26 @@ const accelText = computed((): string => acceleration.value.toFixed(2));
 }
 
 .em-lab-key {
-  font-size: 0.82rem;
   color: var(--c-text-dim);
+  font-size: 0.82rem;
   white-space: nowrap;
 }
 
 .em-lab-val {
   min-width: 5.4rem;
-  font-size: 0.92rem;
+
   color: var(--c-text);
-  text-align: right;
+
+  font-size: 0.92rem;
   font-variant-numeric: tabular-nums;
+  text-align: right;
   white-space: nowrap;
 }
 
 .em-lab-note {
   margin-top: 0.45rem;
-  font-size: 0.74rem;
   color: var(--c-text-mute);
+  font-size: 0.74rem;
   text-align: right;
 }
 </style>

@@ -78,33 +78,39 @@ const totalText = computed((): string => TOTAL.toFixed(3));
 
 .em-energy-total {
   padding: 0.6rem 0.8rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+  background: var(--c-surface);
 }
 
 .em-energy-total-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+
   margin-bottom: 0.45rem;
-  font-size: 0.84rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.84rem;
 }
 
 .em-energy-total-value {
-  font-size: 0.92rem;
   color: var(--c-accent);
+  font-size: 0.92rem;
   font-variant-numeric: tabular-nums;
 }
 
 .em-energy-bar {
   display: flex;
+
   overflow: hidden;
+
   height: 54px;
-  background: var(--c-bg-soft);
   border: 1px solid var(--c-border);
   border-radius: 0.6rem;
+
+  background: var(--c-bg-soft);
 }
 
 .em-energy-seg {
@@ -123,18 +129,23 @@ const totalText = computed((): string => TOTAL.toFixed(3));
 .em-energy-legend {
   display: flex;
   gap: 1.2rem;
+
   margin-top: 0.35rem;
-  font-size: 0.78rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.78rem;
 }
 
 .em-energy-legend span::before {
+  content: "";
+
   display: inline-block;
+
   width: 8px;
   height: 8px;
   margin-right: 0.35rem;
   border-radius: 2px;
-  content: "";
 }
 
 .em-energy-legend .ep::before {
@@ -149,14 +160,17 @@ const totalText = computed((): string => TOTAL.toFixed(3));
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+
   margin-bottom: 0.3rem;
-  font-size: 0.84rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.84rem;
 }
 
 .em-energy-unit {
-  font-size: 0.76rem;
   color: var(--c-text-mute);
+  font-size: 0.76rem;
 }
 
 .em-energy-readouts {
@@ -167,14 +181,16 @@ const totalText = computed((): string => TOTAL.toFixed(3));
 
 .em-energy-cell {
   display: flex;
+  gap: 0.4rem;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.4rem;
+
   min-width: 0;
   padding: 0.28rem 0.55rem;
-  background: var(--c-surface);
   border-left: 3px solid var(--c-accent-2);
   border-radius: 0.5rem;
+
+  background: var(--c-surface);
 }
 
 .em-energy-cell:nth-child(2) {
@@ -182,22 +198,23 @@ const totalText = computed((): string => TOTAL.toFixed(3));
 }
 
 .em-energy-key {
-  font-size: 0.78rem;
   color: var(--c-text-dim);
+  font-size: 0.78rem;
   white-space: nowrap;
 }
 
 .em-energy-val {
-  font-size: 0.86rem;
   color: var(--c-text);
-  text-align: right;
+
+  font-size: 0.86rem;
   font-variant-numeric: tabular-nums;
+  text-align: right;
   white-space: nowrap;
 }
 
 .em-energy-note {
-  font-size: 0.72rem;
   color: var(--c-text-mute);
+  font-size: 0.72rem;
   text-align: right;
 }
 </style>
