@@ -14,9 +14,10 @@
 .chain {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 2.4rem minmax(0, 1fr) 2.4rem minmax(0, 1fr);
-  align-items: stretch;
-  width: 100%;
   gap: 0.2rem;
+  align-items: stretch;
+
+  width: 100%;
 }
 
 .chain-arrow {
@@ -29,10 +30,12 @@
 .chain-node {
   display: flex;
   flex-direction: column;
+  gap: 0.35rem;
   align-items: center;
+
   min-height: 12.4rem;
   padding: 0.9rem 0.85rem;
-  gap: 0.35rem;
+
   text-align: center;
 }
 
@@ -61,10 +64,12 @@
 }
 
 .chain-name {
-  font-size: 1.3rem;
   font-weight: 700;
+  font-size: 1.3rem;
   line-height: 1.2;
+
   opacity: 0;
+
   transition: opacity 0.25s ease;
 }
 
@@ -83,13 +88,16 @@
 
 .chain-ex {
   display: flex;
+  gap: 0.25rem;
   align-items: center;
   justify-content: center;
+
   min-height: 3.4rem;
+
   color: var(--c-accent-light);
+
   font-size: 0.88rem;
   line-height: 1.4;
-  gap: 0.25rem;
 }
 
 .chain-node.is-filled .chain-q {
@@ -119,12 +127,15 @@
 
 .state-row .state-tag {
   display: block;
+
   margin-bottom: 0.12rem;
+
   color: var(--c-text-dim);
-  font-size: 0.82rem;
+
   font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.82rem;
   line-height: 1.4;
+  letter-spacing: 0.06em;
 }
 
 .state-row.is-near .state-tag {
@@ -139,11 +150,22 @@
 
 .flow-line {
   display: flex;
+  gap: 0.5rem;
   align-items: flex-start;
+
   min-height: 1.6rem;
+
   font-size: 0.98rem;
   line-height: 1.55;
-  gap: 0.5rem;
+}
+
+.flow-dot {
+  flex: none;
+
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.55rem;
+  border-radius: 50%;
 }
 
 .flow-line.is-gold .flow-dot {
@@ -154,14 +176,6 @@
   background: var(--c-accent-2);
 }
 
-.flow-dot {
-  flex: none;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-top: 0.55rem;
-  border-radius: 50%;
-}
-
 .flow-line strong {
   color: var(--c-accent-light);
 }
@@ -170,22 +184,22 @@
 .lab {
   display: flex;
   flex-direction: column;
-  width: 100%;
   gap: 1.15rem;
+  width: 100%;
 }
 
 .lab-board {
   display: flex;
   flex-direction: column;
-  min-width: 0;
   gap: 0.95rem;
+  min-width: 0;
 }
 
 .lab-controls {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  min-width: 0;
   gap: 1rem 2rem;
+  min-width: 0;
 }
 
 .lab-readout {
@@ -196,10 +210,13 @@
 
 .lab-bar {
   position: relative;
+
+  overflow: visible;
+
   height: 0.85rem;
   border-radius: 999px;
+
   background: var(--c-surface-solid);
-  overflow: visible;
 }
 
 .lab-bar-fill {
@@ -213,7 +230,9 @@
   position: absolute;
   top: -0.2rem;
   bottom: -0.2rem;
+
   width: 2px;
+
   background: var(--c-text-dim);
 }
 
@@ -226,10 +245,14 @@
 
 .lab-bar-axis {
   position: relative;
+
   display: flex;
   justify-content: space-between;
+
   height: 1.3rem;
+
   color: var(--c-text-dim);
+
   font-size: 0.82rem;
 }
 
@@ -242,10 +265,11 @@
 
 .lab-state {
   display: flex;
-  align-items: center;
-  font-size: 1rem;
-  font-weight: 700;
   gap: 0.45rem;
+  align-items: center;
+
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .lab-state.is-on {
@@ -259,8 +283,8 @@
 .lab-state-sub {
   margin-left: 0.2rem;
   color: var(--c-text-dim);
-  font-size: 0.78rem;
   font-weight: 400;
+  font-size: 0.78rem;
 }
 
 .lab-num {
@@ -274,9 +298,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   padding-top: 0.25rem;
   border-top: 1px solid var(--c-border);
+
   color: var(--c-text-dim);
+
   font-size: 0.92rem;
 }
 
@@ -290,9 +317,9 @@
 /* 公式行（分压式等） */
 .eq-line {
   display: block;
-  text-align: center;
   font-size: 1.16rem;
   line-height: 1.4;
+  text-align: center;
 }
 
 /* 中等宽度图：宽图在 82% 时高度才装得下 */
