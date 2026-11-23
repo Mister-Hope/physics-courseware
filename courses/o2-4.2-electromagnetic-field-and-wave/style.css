@@ -46,3 +46,149 @@
 .em-row-fig {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
 }
+
+/* 第 9 页：声波 / 电磁波 的介质对比 */
+.em-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  width: 100%;
+}
+
+.em-compare-row {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+
+  font-size: 1.12rem;
+  line-height: 1.6;
+}
+
+.em-compare-tag {
+  flex: none;
+
+  min-width: 5.4rem;
+  padding: 0.12rem 0.7rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.em-sound {
+  color: var(--c-velocity);
+}
+
+.em-wave {
+  color: var(--c-physics);
+}
+
+/* 第 10 页：麦克斯韦原话 */
+.em-quote {
+  padding: 0.15rem 0 0.15rem 1rem;
+  border-left: 3px solid var(--c-accent);
+
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.em-quote-src {
+  display: block;
+
+  margin-top: 0.35rem;
+
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+  text-align: right;
+}
+
+/* 第 11 页：c = λf 的推导 */
+.em-derive {
+  gap: 1.4rem;
+
+  font-size: 1.42rem;
+  line-height: 1.75;
+}
+
+.em-formula {
+  font-size: 2.7rem;
+  color: var(--c-accent);
+  line-height: 1.2;
+}
+
+/* 第 12 页：频率—波长互动（读数定宽，拖动时不抖） */
+.em-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  width: 100%;
+}
+
+.em-explorer-row {
+  display: grid;
+  grid-template-columns: 8.6rem minmax(0, 1fr) 8.6rem;
+  gap: 1.1rem;
+  align-items: center;
+}
+
+.em-explorer-read {
+  font-size: 1.12rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 第 14 页：装置图略收窄，给下面的文字留高度 */
+.em-fig-sm {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+/* 第 17 页：声波 / 电磁波 对比表 */
+.em-table {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.em-table-head,
+.em-table-row {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 0.9rem;
+  align-items: center;
+
+  padding: 0.42rem 0.3rem;
+}
+
+.em-table-head {
+  color: var(--c-text-dim);
+
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.em-table-row {
+  border-top: 1px solid var(--c-border);
+}
+
+.em-table-key {
+  color: var(--c-text-dim);
+  font-weight: 700;
+}
+
+/* 第 19 页：小结 */
+.em-summary {
+  gap: 1.3rem;
+
+  font-size: 1.26rem;
+  line-height: 1.65;
+}

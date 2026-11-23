@@ -8,8 +8,24 @@
     <line x1="18" y1="104" x2="284" y2="104" stroke="var(--c-text-dim)" stroke-width="1.2" stroke-dasharray="7 6" opacity="0.5" />
     <path :d="ePath" fill="none" stroke="var(--c-physics)" stroke-width="2.6" stroke-linecap="round" />
     <path :d="bPath" fill="none" stroke="var(--c-accent)" stroke-width="2.6" stroke-linecap="round" />
-    <CourseArrow v-for="(p, i) in eArrows" :key="`e-${i}`" :from="{ x: p.x, y: 104 }" :to="{ x: p.x, y: p.y }" stroke="var(--c-physics)" :stroke-width="1.4" :head-size="7" />
-    <CourseArrow v-for="(p, i) in bArrows" :key="`b-${i}`" :from="{ x: p.x, y: 104 }" :to="{ x: p.x + p.dx, y: 104 + p.dy }" stroke="var(--c-accent)" :stroke-width="1.4" :head-size="7" />
+    <CourseArrow
+      v-for="(p, i) in eArrows"
+      :key="`e-${i}`"
+      :from="{ x: p.x, y: 104 }"
+      :to="{ x: p.x, y: p.y }"
+      stroke="var(--c-physics)"
+      :stroke-width="1.4"
+      :head-size="7"
+    />
+    <CourseArrow
+      v-for="(p, i) in bArrows"
+      :key="`b-${i}`"
+      :from="{ x: p.x, y: 104 }"
+      :to="{ x: p.x + p.dx, y: 104 + p.dy }"
+      stroke="var(--c-accent)"
+      :stroke-width="1.4"
+      :head-size="7"
+    />
     <text x="44" y="42" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-physics)">E</text>
     <text x="118" y="162" font-family="KaTeX_Math" font-style="italic" font-size="20" fill="var(--c-accent)">B</text>
     <text x="288" y="98" font-family="KaTeX_Math" font-style="italic" font-size="18" fill="var(--c-text-dim)">c</text>
