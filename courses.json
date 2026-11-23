@@ -549,8 +549,8 @@
           "slug": "o1-3.1-formation-of-waves",
           "title": "波的形成",
           "chapter": "§3.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "通过绳波与弹簧演示认识机械波的形成（振源+介质），区分横波与纵波，理解波传递振动形式与能量、质点不随波迁移。",
+          "tags": ["机械波", "横波纵波", "波的形成", "介质"]
         },
         {
           "slug": "o1-3.2-describing-waves",

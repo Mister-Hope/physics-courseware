@@ -9,16 +9,21 @@
   max-width: 46rem;
   padding-left: 1.1rem;
   border-left: 3px solid var(--c-accent);
+
+  color: var(--c-text);
+
   font-size: 1.24rem;
   line-height: 1.75;
-  color: var(--c-text);
 }
 
 .wv-quote-src {
   display: block;
+
   margin-top: 0.4rem;
-  font-size: 0.95rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.95rem;
   text-align: right;
 }
 
@@ -38,26 +43,26 @@
 .wv-table th,
 .wv-table td {
   padding: 0.62rem 1.1rem;
-  text-align: left;
   border-bottom: 1px solid var(--c-border);
+  text-align: left;
 }
 
-.wv-table thead th {
-  font-size: 1.16rem;
+:where(.wv-table thead th) {
+  border-bottom-width: 2px;
   color: var(--c-accent);
   font-weight: 700;
-  border-bottom-width: 2px;
+  font-size: 1.16rem;
 }
 
-.wv-table tbody td:first-child {
+:where(.wv-table tbody td:first-child) {
   color: var(--c-text-dim);
   white-space: nowrap;
 }
 
 /* 正文强调句：比一般正文大一档，用于「一句话结论」型的页面 */
 .wv-lead {
-  font-size: 1.12rem;
   font-weight: 700;
+  font-size: 1.12rem;
   line-height: 1.62;
 }
 
@@ -79,8 +84,8 @@
 .wv-compare-row {
   display: grid;
   grid-template-columns: 9.6rem minmax(0, 1fr);
-  align-items: center;
   gap: 1.1rem;
+  align-items: center;
 }
 
 .wv-compare-cap {
@@ -91,8 +96,8 @@
 
 .wv-compare-name {
   color: var(--c-accent);
-  font-size: 1.16rem;
   font-weight: 700;
+  font-size: 1.16rem;
 }
 
 .wv-compare-note {
