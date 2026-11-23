@@ -2,17 +2,14 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    displacement?: number;
-    showForces?: boolean;
-  }>(),
-  { displacement: 0, showForces: false },
-);
+const { displacement = 0, showForces = false } = defineProps<{
+  displacement?: number;
+  showForces?: boolean;
+}>();
 
 const EQ_Y = 152;
 const TRAVEL = 42;
-const ballY = computed(() => EQ_Y + props.displacement * TRAVEL);
+const ballY = computed(() => EQ_Y + displacement * TRAVEL);
 const springPts = computed(() => {
   const top = 40;
   const bottom = ballY.value - 22;

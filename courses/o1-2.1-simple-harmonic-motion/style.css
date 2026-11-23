@@ -14,14 +14,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1.1rem;
-  font-size: 0.9rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.9rem;
 }
 
 .legend-item {
   display: inline-flex;
-  align-items: center;
   gap: 0.45rem;
+  align-items: center;
 }
 
 .legend-swatch {

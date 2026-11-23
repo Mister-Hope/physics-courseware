@@ -11,26 +11,25 @@ const rows = [
   { label: "+A", x: 1 },
 ];
 
-function springLine(ballX: number, y: number) {
+const springLine = (ballX: number, y: number): string => {
   const start = 32;
   const end = ballX - 14;
   const coils = 7;
   const step = (end - start) / coils;
   const amp = 8;
   const pts: string[] = [`${start},${y}`];
-  for (let i = 0; i < coils; i += 1) {
-    pts.push(`${start + step * (i + 0.5)},${y + (i % 2 === 0 ? -amp : amp)}`);
-  }
+  for (let i = 0; i < coils; i += 1) pts.push(`${start + step * (i + 0.5)},${y + (i % 2 === 0 ? -amp : amp)}`);
   pts.push(`${end},${y}`);
   return pts.join(" ");
-}
+};
 
 const views = computed(() =>
   rows.map((row, index) => {
     const y = 52 + index * 82;
     const ballX = EQ + row.x * OFFSET;
     return {
-      ...row,
+      label: row.label,
+      x: row.x,
       y,
       ballX,
       spring: springLine(ballX, y),

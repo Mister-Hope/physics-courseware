@@ -13,7 +13,7 @@ const amplitude = computed(() => amplitudeCm.value / 100);
 
 const curves = computed(() => [
   {
-    formula: (t: number) => amplitude.value * Math.sin(omega.value * t),
+    formula: (t: number): number => amplitude.value * Math.sin(omega.value * t),
     samples: 500,
     color: "var(--c-accent)",
     width: 2.6,
@@ -100,6 +100,7 @@ const curves = computed(() => [
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
   gap: 1.5rem;
   align-items: center;
+
   width: 100%;
 }
 
@@ -122,25 +123,28 @@ const curves = computed(() => [
 }
 
 .lab-cell {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0.85rem;
   padding: 0.42rem 0.55rem;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 0.85rem;
+
+  background: rgb(255 255 255 / 5%);
+
   text-align: center;
 }
 
 .lab-key {
-  font-size: 0.86rem;
   color: var(--c-text-dim);
+  font-size: 0.86rem;
 }
 
 .lab-val {
   display: flex;
+  gap: 0.1rem;
   align-items: baseline;
   justify-content: center;
-  gap: 0.1rem;
-  font-size: 1.24rem;
+
   font-weight: 700;
+  font-size: 1.24rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.3;
 }

@@ -507,8 +507,8 @@
           "slug": "o1-2.1-simple-harmonic-motion",
           "title": "简谐运动",
           "chapter": "§2.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "从弹簧振子的振动图像认识简谐运动，理解平衡位置、位移—时间图像的正弦特征与回复力的来源，建立简谐运动的图像直观。",
+          "tags": ["简谐运动", "弹簧振子", "振动图像", "回复力"]
         },
         {
           "slug": "o1-2.2-describing-simple-harmonic-motion",
