@@ -158,3 +158,113 @@ title: 变力情况下的冲量
     </div>
   </div>
 </div>
+
+---
+layout: base-flex
+title: 一维运动中的正负
+---
+
+# 一维运动中的正负
+
+<div class="page-grow pt9">
+  <div class="ask p9-ask">钢球撞墙后反向弹回，动量变化怎样表示方向？</div>
+  <div class="p9-fig"><BallBounceSvg /></div>
+  <div class="p9-calc">
+    <div class="p9-line">取向右为正：<Latex tex="p=mv=0.1\times6=0.6\ \text{kg}\cdot\text{m/s}" /></div>
+    <div class="p9-line" v-click="1"><Latex tex="p'=mv'=0.1\times(-6)=-0.6\ \text{kg}\cdot\text{m/s}" /></div>
+    <div class="p9-line" v-click="2"><Latex tex="\Delta p=p'-p=-0.6-0.6=-1.2\ \text{kg}\cdot\text{m/s}" /></div>
+    <div class="tip-hint" v-click="3">负号表示动量变化的方向与正方向相反，即向左。</div>
+  </div>
+</div>
+
+---
+layout: exercise-split
+title: 例题：击球时的平均力
+analysisLabel: 解析
+---
+
+<template v-slot:stem>
+  质量 <Latex tex="0.18\ \text{kg}" /> 的垒球以 <Latex tex="25\ \text{m/s}" /> 的速度飞来，被击后沿相反方向以 <Latex tex="45\ \text{m/s}" /> 飞出，作用时间 <Latex tex="0.002\ \text{s}" />，求平均作用力。
+</template>
+
+<template v-slot:fig>
+  <BaseballHitSvg />
+</template>
+
+<div class="p10-analysis">
+  <div class="p10-line">取飞来方向为正。</div>
+  <div class="p10-line" v-click="1"><Latex tex="p=mv=0.18\times25=4.5\ \text{kg}\cdot\text{m/s}" /></div>
+  <div class="p10-line" v-click="1"><Latex tex="p'=mv'=0.18\times(-45)=-8.1\ \text{kg}\cdot\text{m/s}" /></div>
+  <div class="p10-line" v-click="2"><Latex tex="\Delta p=p'-p=-8.1-4.5=-12.6\ \text{kg}\cdot\text{m/s}" /></div>
+  <div class="p10-line" v-click="3"><Latex tex="F=\dfrac{\Delta p}{\Delta t}=\dfrac{-12.6}{0.002}=-6300\ \text{N}" />，负号表示力与飞来方向相反。</div>
+</div>
+
+---
+layout: base-flex
+title: 缓冲
+---
+
+# 缓冲
+
+<div class="page-grow pt11">
+  <div class="ask p11-ask">玻璃杯落在硬地上会碎，落在地毯上却不容易碎。为什么？</div>
+  <div class="p11-grid">
+    <div class="p11-case">
+      <mdi-alert-outline class="icon-lg p11-icon p11-hard" />
+      <div><b>硬地</b><br>作用时间短，作用力大。</div>
+    </div>
+    <div class="p11-case">
+      <mdi-check-circle-outline class="icon-lg p11-icon p11-soft" />
+      <div><b>地毯</b><br>作用时间长，作用力小。</div>
+    </div>
+  </div>
+  <div class="p11-eq"><Latex tex="F=\dfrac{\Delta p}{\Delta t}" display /></div>
+  <div class="tip-hint" v-click="1">动量变化相同时，延长作用时间可以减小作用力。</div>
+  <div class="mini-note p11-note">柔软包装、跳高垫、船轮胎都是同样的道理。</div>
+</div>
+
+---
+layout: base-flex
+title: 缓冲时间与平均力
+---
+
+# 缓冲时间与平均力
+
+<div class="page-grow pt12">
+  <div class="ask p12-ask">垒球的动量变化相同，只改变作用时间，平均力会怎样变？</div>
+  <BufferForceDemo />
+  <div class="tip-hint" v-click="1">作用时间变为 10 倍，平均力变为 <Latex tex="1/10" />；<Latex tex="\Delta p" /> 不变。</div>
+</div>
+
+---
+layout: base-flex
+title: 安全气囊与碰撞试验
+---
+
+# 安全气囊与碰撞试验
+
+<div class="page-grow pt13">
+  <div class="ask p13-ask">汽车碰撞时，为什么需要安全气囊和安全带？</div>
+  <div class="p13-grid">
+    <div class="p13-data">
+      <div class="p13-row"><span>质量</span><Latex tex="m=60\ \text{kg}" /></div>
+      <div class="p13-row"><span>速度</span><Latex tex="v=15\ \text{m/s}" /></div>
+      <div class="p13-row"><span>动量变化</span><Latex tex="\Delta p=900\ \text{kg}\cdot\text{m/s}" /></div>
+      <div class="p13-note">撞后停止，动量瞬间变为零。</div>
+    </div>
+    <div class="p13-bars">
+      <div class="p13-bar-row">
+        <div class="p13-bar-label">无气囊 · <Latex tex="\Delta t\approx0.05\ \text{s}" /></div>
+        <div class="p13-bar"><div class="p13-fill p13-fill-hard" style="width: 100%"></div></div>
+        <div class="p13-bar-value"><Latex tex="1.8\times10^4\ \text{N}" /></div>
+      </div>
+      <div class="p13-bar-row">
+        <div class="p13-bar-label">有气囊 · <Latex tex="\Delta t\approx0.2\ \text{s}" /></div>
+        <div class="p13-bar"><div class="p13-fill p13-fill-soft" style="width: 25%"></div></div>
+        <div class="p13-bar-value"><Latex tex="4.5\times10^3\ \text{N}" /></div>
+      </div>
+    </div>
+  </div>
+  <div class="mini-note p13-stse">1998 年 6 月 18 日，中国轿车第一次碰撞试验在天津完成；试验速度为 50 km/h。</div>
+  <div class="tip-hint" v-click="1">气囊把碰撞时间延长到约 0.2 s，平均力降为约 1/4。</div>
+</div>

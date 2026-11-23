@@ -284,3 +284,170 @@
 .pt8 .tip-hint {
   font-size: 0.86rem;
 }
+
+/* 第 9 页：一维运动中的正负 */
+.pt9 {
+  gap: 0.35rem;
+}
+.p9-ask {
+  font-size: 1rem;
+}
+.p9-fig {
+  display: flex;
+  justify-content: center;
+}
+.p9-fig svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+.p9-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.p9-line {
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+.p9-line .katex {
+  font-size: 0.98em;
+}
+.pt9 .tip-hint {
+  font-size: 0.84rem;
+}
+
+/* 第 10 页：击球例题（exercise-split 的解析栏） */
+.p10-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.p10-line {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.p10-line .katex {
+  font-size: 0.98em;
+}
+
+/* 第 11 页：缓冲 */
+.pt11 {
+  gap: 0.5rem;
+}
+.p11-ask {
+  font-size: 1.05rem;
+}
+.p11-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+.p11-case {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+.p11-icon {
+  flex: none;
+}
+.p11-hard {
+  color: var(--c-danger);
+}
+.p11-soft {
+  color: var(--c-physics);
+}
+.p11-eq {
+  display: flex;
+  justify-content: center;
+}
+.p11-eq .katex-display {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.p11-note {
+  text-align: center;
+}
+
+/* 第 12 页：缓冲时间与平均力 */
+.pt12 {
+  gap: 0.5rem;
+}
+.p12-ask {
+  font-size: 1.05rem;
+}
+
+/* 第 13 页：安全气囊与碰撞试验 */
+.pt13 {
+  gap: 0.45rem;
+}
+.p13-ask {
+  font-size: 1.05rem;
+}
+.p13-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: center;
+}
+.p13-data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.p13-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: baseline;
+  font-size: 0.95rem;
+}
+.p13-row > span:first-child {
+  min-width: 4.4rem;
+  color: var(--c-text-mute);
+}
+.p13-note {
+  font-size: 0.82rem;
+  color: var(--c-text-dim);
+}
+.p13-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.p13-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.p13-bar-label {
+  font-size: 0.8rem;
+  color: var(--c-text-dim);
+}
+.p13-bar {
+  height: 0.7rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--c-neutral-700);
+}
+.p13-fill {
+  height: 100%;
+  border-radius: inherit;
+}
+.p13-fill-hard {
+  background: var(--c-danger);
+}
+.p13-fill-soft {
+  background: var(--c-physics);
+}
+.p13-bar-value {
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+.p13-stse {
+  font-size: 0.8rem;
+}
+.pt13 .tip-hint {
+  font-size: 0.86rem;
+}
