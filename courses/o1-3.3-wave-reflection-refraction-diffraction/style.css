@@ -268,3 +268,185 @@
 .pt8 .info-hint {
   font-size: 0.8rem;
 }
+
+/* 第 9 页：明显衍射的条件 */
+.pt9 {
+  gap: 0.3rem;
+}
+.p9-fig {
+  display: flex;
+  justify-content: center;
+}
+.p9-fig svg {
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+}
+.p9-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.p9-item {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.p9-no {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.1rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: #0b1020;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+.pt9 .tip-hint {
+  font-size: 0.82rem;
+}
+
+/* 第 10 页：缝宽与波长 */
+.pt10 {
+  gap: 0.45rem;
+}
+.pt10 .dd {
+  width: 100%;
+}
+.pt10 .tip-hint {
+  font-size: 0.86rem;
+}
+
+/* 第 11 页：声波的衍射 */
+.pt11 {
+  gap: 0.5rem;
+}
+.p11-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+.p11-card {
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--c-surface) 60%, transparent);
+  border: 1px solid var(--c-border);
+}
+.p11-sound {
+  border-color: color-mix(in srgb, var(--c-accent-2) 35%, var(--c-border));
+}
+.p11-light {
+  border-color: color-mix(in srgb, var(--c-accent) 35%, var(--c-border));
+}
+.p11-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.p11-sound .p11-title {
+  color: var(--c-accent-2);
+}
+.p11-light .p11-title {
+  color: var(--c-accent);
+}
+.p11-text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--c-text-dim);
+}
+.pt11 .tip-hint {
+  font-size: 0.86rem;
+}
+
+/* 第 12 页：三种现象对比 */
+.pt12 {
+  gap: 0.55rem;
+}
+.p12-table {
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--c-surface) 55%, transparent);
+}
+.p12-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1.5fr 0.8fr 1.7fr 1.5fr;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  border-top: 1px solid var(--c-border);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.p12-row:first-child {
+  border-top: 0;
+}
+.p12-head {
+  background: color-mix(in srgb, var(--c-accent) 12%, transparent);
+  color: var(--c-accent);
+  font-weight: 700;
+}
+.p12-row > span:first-child {
+  font-weight: 700;
+  color: var(--c-text);
+}
+.pt12 .mini-note {
+  text-align: center;
+}
+
+/* 第 13–18 页：练习解析 */
+.p13-analysis,
+.p14-analysis,
+.p15-analysis,
+.p16-analysis,
+.p18-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+.p13-line,
+.p14-line,
+.p15-line,
+.p16-line,
+.p18-line {
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+.p15-line {
+  font-size: 0.9rem;
+}
+.p15-fig {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+.p18-tag {
+  display: inline-block;
+  margin-right: 0.55rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 0.4rem;
+  background: color-mix(in srgb, var(--c-accent) 16%, transparent);
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 第 17 页：课堂小结 */
+.pt17 {
+  gap: 0.4rem;
+}
+.p17-list {
+  gap: 0.55rem;
+}
+.p17-list .step-item {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}

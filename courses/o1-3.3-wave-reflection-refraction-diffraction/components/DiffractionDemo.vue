@@ -41,7 +41,7 @@ const slitWidth = computed(() => Math.min(100, (ratio.value / 5) * 100));
       :min="0.2"
       :max="5"
       :step="0.1"
-      label="缝宽与波长之比"
+      label="比值"
       label-tex="d/\lambda"
       :label-width="9"
       accent="gold"
@@ -49,7 +49,7 @@ const slitWidth = computed(() => Math.min(100, (ratio.value / 5) * 100));
       <template #value>{{ ratioText }}</template>
     </CourseSlider>
     <div class="dd-foot">
-      <span class="dd-mark"><Latex tex="d=\lambda" /></span>
+      <span class="dd-mark">阈值 <Latex tex="d=\lambda" /></span>
       <span>缝宽越小，或波长越大，衍射越明显</span>
     </div>
   </div>
