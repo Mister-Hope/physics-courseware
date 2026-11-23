@@ -1,22 +1,26 @@
 <!-- 第 13–14 页：磁电式电流表工作原理（辐向磁场、线圈受力、指针偏转） -->
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps({
-  step: { type: Number, default: 0 },
-  current: { type: Number, default: 60 },
-  showSlider: { type: Boolean, default: false },
-});
-const emit = defineEmits(["update:current"]);
+const {
+  step = 0,
+  current = 60,
+  showSlider = false,
+} = defineProps<{
+  step?: number;
+  current?: number;
+  showSlider?: boolean;
+}>();
+const emit = defineEmits<{ "update:current": [value: number] }>();
 
-const angle = computed(() => -0.45 * props.current);
-const showField = computed(() => props.step >= 1);
-const showCurrent = computed(() => props.step >= 2);
-const showForce = computed(() => props.step >= 3);
-const showDial = computed(() => (props.showSlider ? true : props.step >= 4));
+const angle = computed(() => -0.45 * current);
+const showField = computed(() => step >= 1);
+const showCurrent = computed(() => step >= 2);
+const showForce = computed(() => step >= 3);
+const showDial = computed(() => (showSlider ? true : step >= 4));
 const currentModel = computed({
-  get: () => props.current,
-  set: (v) => emit("update:current", v),
+  get: () => current,
+  set: (v: number) => emit("update:current", v),
 });
 </script>
 
@@ -182,10 +186,6 @@ const currentModel = computed({
   </div>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style scoped>
 .gal-lab {
   display: flex;
@@ -193,6 +193,7 @@ export default {};
   gap: 0.5rem;
   min-width: 0;
 }
+
 .gal-control {
   max-width: 24rem;
 }

@@ -46,6 +46,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.3rem;
+
   width: 100%;
   min-width: 0;
 }
@@ -63,6 +64,7 @@
   align-items: center;
 
   min-width: 0;
+
   text-align: center;
 }
 
@@ -78,8 +80,8 @@
 
 .em-mech-name {
   color: var(--c-text);
-  font-size: 1.2rem;
   font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .em-mech-line {
@@ -96,8 +98,9 @@
   min-height: 2.8rem;
 
   color: var(--c-physics-light);
-  font-size: 0.86rem;
+
   font-weight: 600;
+  font-size: 0.86rem;
   line-height: 1.4;
   white-space: nowrap;
 }

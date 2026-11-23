@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{
+const { step = 0 } = defineProps<{
   /** 当前点击步数（1–3 逐行出现；音频信号常显） */
   step?: number;
 }>();
@@ -14,7 +14,7 @@ const props = defineProps<{
 const N = 600;
 const twoPi = Math.PI * 2;
 
-const makePoints = (f: (t: number) => number) =>
+const makePoints = (f: (t: number) => number): { x: number; y: number }[] =>
   Array.from({ length: N + 1 }, (_, index) => {
     const t = index / N;
 
@@ -134,6 +134,6 @@ const labels = computed(() => [
     :labels="labels"
     :ticks="{ labels: false, arrows: false, origin: false, x: [], y: [] }"
     :view="{ width: 900, height: 340 }"
-    :step="props.step ?? 0"
+    :step="step"
   />
 </template>

@@ -4,13 +4,10 @@
      F 从 I、B 的交点竖直向上，垂直于整个平面。showF 由页面点击控制。
 -->
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    /** 是否显示安培力 F（点击后） */
-    showF?: boolean;
-  }>(),
-  { showF: false },
-);
+const { showF = false } = defineProps<{
+  /** 是否显示安培力 F（点击后） */
+  showF?: boolean;
+}>();
 </script>
 
 <template>

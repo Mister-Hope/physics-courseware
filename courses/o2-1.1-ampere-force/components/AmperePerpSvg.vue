@@ -2,8 +2,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = withDefaults(defineProps<{ forceScale?: number }>(), { forceScale: 0.6 });
-const forceLength = computed(() => 40 + 110 * Math.min(1, Math.max(0, props.forceScale)));
+const { forceScale = 0.6 } = defineProps<{ forceScale?: number }>();
+const forceLength = computed(() => 40 + 110 * Math.min(1, Math.max(0, forceScale)));
 </script>
 
 <template>

@@ -173,16 +173,21 @@ const showC = computed(() => step >= 3);
   gap: 1.1rem;
   width: 100%;
 }
+
 .quiz-item {
   min-width: 0;
 }
+
 .quiz-label {
-  text-align: center;
+  margin-bottom: 0.1rem;
+
+  color: var(--c-accent);
+
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--c-accent);
-  margin-bottom: 0.1rem;
+  text-align: center;
 }
+
 .quiz-item svg {
   display: block;
   width: 100%;

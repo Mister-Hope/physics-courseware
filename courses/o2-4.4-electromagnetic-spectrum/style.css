@@ -29,6 +29,7 @@
 
   min-width: 0;
   padding: 0.2rem 0.55rem;
+
   text-align: center;
 }
 
@@ -41,14 +42,14 @@
 }
 
 .em-device-name {
-  font-size: 1rem;
   color: var(--c-text);
+  font-size: 1rem;
 }
 
 .em-device-band {
   min-height: 1.45rem;
-  font-size: 0.92rem;
   color: var(--c-physics-light);
+  font-size: 0.92rem;
 }
 
 .em-reserve {
@@ -146,6 +147,7 @@
 
   min-width: 0;
   padding: 0.3rem 0.6rem;
+
   text-align: center;
 }
 
@@ -154,8 +156,8 @@
 }
 
 .em-tile-name {
-  font-size: 1.02rem;
   font-weight: 600;
+  font-size: 1.02rem;
 }
 
 .em-tile-desc {
@@ -214,8 +216,8 @@
 
   margin-bottom: 0.6rem;
 
-  font-size: 1.15rem;
   font-weight: 600;
+  font-size: 1.15rem;
 }
 
 .em-x-icon {
@@ -227,7 +229,6 @@
   gap: 0.6rem;
 
   padding: 0.42rem 0;
-
   border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
 
   font-size: 0.92rem;
@@ -240,7 +241,6 @@
 
 .em-x-label {
   flex: 0 0 2.2rem;
-
   color: var(--c-text-mute);
   font-size: 0.78rem;
   line-height: 1.8;
@@ -250,8 +250,8 @@
 .em-mech-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.4rem;
+  justify-content: center;
 }
 
 /* ── 第 11 页：波速、波长与频率 ── */
@@ -263,9 +263,7 @@
 .em-wave-eq {
   display: flex;
   justify-content: center;
-
   padding: 0.35rem 0;
-
   font-size: 1.5rem;
 }
 
@@ -286,7 +284,6 @@
 
 .em-wave-key {
   flex: 0 0 3.2rem;
-
   color: var(--c-accent);
   font-size: 0.8rem;
   letter-spacing: 0.08em;
@@ -334,34 +331,30 @@
 
 .em-safety-table {
   width: 100%;
-
   border-collapse: collapse;
-
   font-size: 0.96rem;
   line-height: 1.5;
 }
 
 .em-safety-table th {
   padding: 0.5rem 0.8rem;
-
   border-bottom: 1px solid var(--c-border);
 
   color: var(--c-text-mute);
-  font-size: 0.8rem;
+
   font-weight: 500;
-  text-align: left;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
+  text-align: left;
 }
 
 .em-safety-table td {
-  padding: 0.62rem 0.8rem;
-
-  border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
-
   vertical-align: top;
+  padding: 0.62rem 0.8rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
 }
 
-.em-safety-table tr:last-child td {
+:where(.em-safety-table) tr:last-child td {
   border-bottom: 0;
 }
 
@@ -376,7 +369,7 @@
 }
 
 .em-safety-uv {
-  color: mediumorchid;
+  color: #ba55d3;
 }
 
 .em-safety-x {
@@ -395,13 +388,14 @@
 
 .em-seti-list {
   position: relative;
-
   display: flex;
   flex-direction: column;
   gap: 0.95rem;
 }
 
 .em-seti-list::before {
+  content: "";
+
   position: absolute;
   top: 0.4rem;
   bottom: 0.4rem;
@@ -410,15 +404,12 @@
   width: 1px;
 
   background: var(--c-border);
-
-  content: "";
 }
 
 .em-seti-row {
   display: grid;
   grid-template-columns: 5.5rem 1.2rem minmax(0, 1fr);
   gap: 0.75rem;
-
   align-items: start;
 }
 
@@ -426,8 +417,9 @@
   padding-top: 0.18rem;
 
   color: var(--c-accent);
-  font-size: 0.92rem;
+
   font-weight: 600;
+  font-size: 0.92rem;
   text-align: right;
   white-space: nowrap;
 }
@@ -439,7 +431,6 @@
   width: 9px;
   height: 9px;
   margin-top: 0.38rem;
-
   border-radius: 50%;
 
   background: var(--c-accent);
@@ -448,14 +439,12 @@
 
 .em-seti-text {
   color: var(--c-text);
-
   font-size: 0.95rem;
   line-height: 1.55;
 }
 
 .em-seti-text b {
   color: var(--c-accent);
-
   font-weight: 600;
 }
 
@@ -467,9 +456,7 @@
 
 .em-ex-known {
   margin-top: 0.55rem;
-
   color: var(--c-text-dim);
-
   font-size: 0.88rem;
   letter-spacing: 0.02em;
 }
@@ -485,8 +472,8 @@
 }
 
 .em-practice-list {
-  margin-top: 1.4rem;
   gap: 1rem;
+  margin-top: 1.4rem;
 }
 
 .em-practice-text {
@@ -496,7 +483,6 @@
 
 .em-practice-text b {
   color: var(--c-accent);
-
   font-weight: 600;
 }
 

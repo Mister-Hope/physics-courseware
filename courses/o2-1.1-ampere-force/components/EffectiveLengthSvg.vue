@@ -2,9 +2,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = withDefaults(defineProps<{ step?: number }>(), { step: 0 });
-const showEffective = computed(() => props.step >= 1);
-const showForce = computed(() => props.step >= 2);
+const { step = 0 } = defineProps<{ step?: number }>();
+const showEffective = computed(() => step >= 1);
+const showForce = computed(() => step >= 2);
 </script>
 
 <template>

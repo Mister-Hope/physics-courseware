@@ -11,13 +11,48 @@ interface LightColor {
 }
 
 const colors: LightColor[] = [
-  { name: "红", css: "red", wavelength: "760 \\sim 630", frequency: "3.9 \\sim 4.8" },
-  { name: "橙", css: "orange", wavelength: "630 \\sim 600", frequency: "4.8 \\sim 5.0" },
-  { name: "黄", css: "gold", wavelength: "600 \\sim 570", frequency: "5.0 \\sim 5.3" },
-  { name: "绿", css: "limegreen", wavelength: "570 \\sim 500", frequency: "5.3 \\sim 6.0" },
-  { name: "青", css: "cyan", wavelength: "500 \\sim 450", frequency: "6.0 \\sim 6.7" },
-  { name: "蓝", css: "blue", wavelength: "450 \\sim 430", frequency: "6.7 \\sim 7.0" },
-  { name: "紫", css: "violet", wavelength: "430 \\sim 400", frequency: "7.0 \\sim 7.5" },
+  {
+    name: "红",
+    css: "red",
+    wavelength: String.raw`760 \sim 630`,
+    frequency: String.raw`3.9 \sim 4.8`,
+  },
+  {
+    name: "橙",
+    css: "orange",
+    wavelength: String.raw`630 \sim 600`,
+    frequency: String.raw`4.8 \sim 5.0`,
+  },
+  {
+    name: "黄",
+    css: "gold",
+    wavelength: String.raw`600 \sim 570`,
+    frequency: String.raw`5.0 \sim 5.3`,
+  },
+  {
+    name: "绿",
+    css: "limegreen",
+    wavelength: String.raw`570 \sim 500`,
+    frequency: String.raw`5.3 \sim 6.0`,
+  },
+  {
+    name: "青",
+    css: "cyan",
+    wavelength: String.raw`500 \sim 450`,
+    frequency: String.raw`6.0 \sim 6.7`,
+  },
+  {
+    name: "蓝",
+    css: "blue",
+    wavelength: String.raw`450 \sim 430`,
+    frequency: String.raw`6.7 \sim 7.0`,
+  },
+  {
+    name: "紫",
+    css: "violet",
+    wavelength: String.raw`430 \sim 400`,
+    frequency: String.raw`7.0 \sim 7.5`,
+  },
 ];
 </script>
 
@@ -64,18 +99,16 @@ td {
 
 th {
   border-bottom: 1px solid var(--c-border);
-
+  background: color-mix(in srgb, var(--c-surface) 68%, transparent);
   color: var(--c-text-dim);
   font-weight: 600;
-
-  background: color-mix(in srgb, var(--c-surface) 68%, transparent);
 }
 
 td {
   border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
 }
 
-tbody tr:last-child td {
+:where(tbody tr:last-child) td {
   border-bottom: 0;
 }
 
@@ -86,13 +119,12 @@ td:first-child {
 
 .em-dot {
   display: inline-block;
+  vertical-align: 0.02em;
 
   width: 0.6rem;
   height: 0.6rem;
   margin-right: 0.4rem;
   border-radius: 50%;
-
-  vertical-align: 0.02em;
 }
 
 :deep(.katex) {

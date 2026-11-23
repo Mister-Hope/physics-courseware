@@ -19,19 +19,31 @@ const { step = 0 } = defineProps<{
 }>();
 
 const bands: SpectrumBand[] = [
-  { key: "radio", name: "无线电波", range: "", rangeTex: ">0.1\\ \\text{mm}", flex: 30 },
+  { key: "radio", name: "无线电波", range: "", rangeTex: String.raw`>0.1\ \text{mm}`, flex: 30 },
   { key: "infrared", name: "红外线", range: "介于二者之间", flex: 20 },
-  { key: "visible", name: "可见光", range: "", rangeTex: "400 \\sim 760\\ \\text{nm}", flex: 13 },
-  { key: "ultraviolet", name: "紫外线", range: "", rangeTex: "10 \\sim 400\\ \\text{nm}", flex: 12 },
+  {
+    key: "visible",
+    name: "可见光",
+    range: "",
+    rangeTex: String.raw`400 \sim 760\ \text{nm}`,
+    flex: 13,
+  },
+  {
+    key: "ultraviolet",
+    name: "紫外线",
+    range: "",
+    rangeTex: String.raw`10 \sim 400\ \text{nm}`,
+    flex: 12,
+  },
   { key: "xray", name: "X 射线", range: "比紫外线短", flex: 13 },
   { key: "gamma", name: "射线", range: "最短", flex: 12, gammaName: true },
 ];
 
 const boundaries = [
-  { left: 30, tex: "0.1\\ \\text{mm}" },
-  { left: 50, tex: "760\\ \\text{nm}" },
-  { left: 63, tex: "400\\ \\text{nm}" },
-  { left: 75, tex: "10\\ \\text{nm}" },
+  { left: 30, tex: String.raw`0.1\ \text{mm}` },
+  { left: 50, tex: String.raw`760\ \text{nm}` },
+  { left: 63, tex: String.raw`400\ \text{nm}` },
+  { left: 75, tex: String.raw`10\ \text{nm}` },
 ];
 </script>
 
@@ -56,7 +68,12 @@ const boundaries = [
       </div>
     </div>
     <div class="em-ticks" aria-hidden="true">
-      <div v-for="tick in boundaries" :key="tick.left" class="em-tick" :style="{ left: `${tick.left}%` }">
+      <div
+        v-for="tick in boundaries"
+        :key="tick.left"
+        class="em-tick"
+        :style="{ left: `${tick.left}%` }"
+      >
         <span class="em-tick-line"></span>
         <Latex :tex="tick.tex" />
       </div>
@@ -97,14 +114,14 @@ const boundaries = [
 
   min-width: 0;
   padding: 0.4rem 0.3rem;
-
   border-right: 1px solid var(--c-border);
 
   opacity: 0.55;
+  filter: saturate(0.72);
+
   transition:
     opacity 0.35s ease,
     filter 0.35s ease;
-  filter: saturate(0.72);
 }
 
 .em-seg:last-child {
@@ -127,19 +144,19 @@ const boundaries = [
   visibility: hidden;
 }
 
-.em-seg-on .em-seg-name,
-.em-seg-on .em-seg-range {
-  visibility: visible;
-}
-
 .em-seg-name {
-  font-size: 1.12rem;
   font-weight: 600;
+  font-size: 1.12rem;
 }
 
 .em-seg-range {
   color: var(--c-text-dim);
   font-size: 0.78rem;
+}
+
+.em-seg-on .em-seg-name,
+.em-seg-on .em-seg-range {
+  visibility: visible;
 }
 
 .em-seg-radio {
@@ -161,7 +178,7 @@ const boundaries = [
 }
 
 .em-seg-ultraviolet {
-  background: color-mix(in srgb, mediumorchid 60%, transparent);
+  background: color-mix(in srgb, #ba55d3 60%, transparent);
 }
 
 .em-seg-xray {
@@ -174,7 +191,6 @@ const boundaries = [
 
 .em-ticks {
   position: relative;
-
   height: 34px;
   margin-top: 2px;
 }
@@ -187,11 +203,13 @@ const boundaries = [
   flex-direction: column;
   gap: 0.2rem;
   align-items: center;
-  transform: translateX(-50%);
 
   color: var(--c-text-mute);
+
   font-size: 0.7rem;
   white-space: nowrap;
+
+  transform: translateX(-50%);
 }
 
 .em-tick-line {
@@ -207,6 +225,7 @@ const boundaries = [
   margin-top: 0.1rem;
 
   color: var(--c-text-mute);
+
   font-size: 0.72rem;
 }
 </style>

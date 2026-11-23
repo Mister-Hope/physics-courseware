@@ -11,23 +11,30 @@
   flex-wrap: wrap;
   gap: 0.6rem;
 }
+
 .toggle-btn {
   padding: 0.42rem 0.9rem;
   border: 1px solid var(--c-border-glow);
   border-radius: 0.6rem;
+
   background: color-mix(in srgb, var(--c-accent) 10%, transparent);
   color: var(--c-text);
-  font-size: 0.85rem;
+
   font-weight: 600;
+  font-size: 0.85rem;
+
   cursor: pointer;
+
   transition:
     background 0.2s,
     border-color 0.2s;
 }
+
 .toggle-btn:hover {
-  background: color-mix(in srgb, var(--c-accent) 18%, transparent);
   border-color: var(--c-accent);
+  background: color-mix(in srgb, var(--c-accent) 18%, transparent);
 }
+
 .toggle-btn:active {
   transform: translateY(1px);
 }
@@ -41,27 +48,29 @@
 
 /* 第 12 页：结构图右侧的部件名 */
 .part-name {
+  margin-right: 0.5rem;
   color: var(--c-accent);
   font-weight: 600;
-  margin-right: 0.5rem;
 }
 
 /* 第 14 页：工作原理图宽度，避免图过高 */
 .gal-wrap {
-  margin: 0 auto;
   width: min(100%, 34rem);
+  margin: 0 auto;
 }
 
 /* 第 18 页：课堂小结 */
 .summary-final {
-  justify-content: center;
   gap: 1.15rem;
+  justify-content: center;
 }
+
 .summary-row {
   display: flex;
-  align-items: baseline;
   gap: 1.2rem;
+  align-items: baseline;
 }
+
 .summary-key {
   flex: 0 0 5.2rem;
   color: var(--c-accent);

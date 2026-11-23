@@ -56,6 +56,7 @@ const force = computed(() => current.value * length.value * field.value);
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 1.4rem;
   align-items: center;
+
   width: 100%;
 }
 
@@ -72,13 +73,16 @@ const force = computed(() => current.value * length.value * field.value);
 
 .amp-readout {
   display: flex;
-  align-items: baseline;
   gap: 0.35rem;
+  align-items: baseline;
+
   padding: 0.5rem 0.9rem;
-  font-size: 1.05rem;
   border: 1px solid var(--c-border);
   border-radius: 0.9rem;
+
   background: color-mix(in srgb, var(--c-accent) 6%, transparent);
+
+  font-size: 1.05rem;
 }
 
 .amp-eq {
@@ -87,11 +91,14 @@ const force = computed(() => current.value * length.value * field.value);
 
 .amp-value {
   display: inline-block;
+
   min-width: 4.4rem;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-family: "JetBrains Mono", monospace;
+
   color: var(--c-accent);
+
+  font-family: "JetBrains Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 
 .amp-unit {

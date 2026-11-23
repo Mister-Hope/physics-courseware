@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-const C = 3.0e8;
+const C = 3e8;
 const exp = ref(14.7);
 
 const f = computed(() => 10 ** exp.value);
@@ -14,34 +14,30 @@ const lambda = computed(() => C / f.value);
 
 const fExponent = computed(() => Math.floor(Math.log10(f.value)));
 const fMantissa = computed(() => (f.value / 10 ** fExponent.value).toFixed(1));
-const fTex = computed(
-  () => `${fMantissa.value} \\times 10^{${fExponent.value}}\\ \\text{Hz}`,
-);
+const fTex = computed(() => `${fMantissa.value} \\times 10^{${fExponent.value}}\\ \\text{Hz}`);
 
 const units = [
-  { name: "km", tex: "\\text{km}", factor: 1e3, threshold: 1e3 },
-  { name: "m", tex: "\\text{m}", factor: 1, threshold: 0.1 },
-  { name: "mm", tex: "\\text{mm}", factor: 1e-3, threshold: 1e-3 },
-  { name: "μm", tex: "\\mu\\text{m}", factor: 1e-6, threshold: 1e-6 },
-  { name: "nm", tex: "\\text{nm}", factor: 1e-9, threshold: 1e-9 },
-  { name: "pm", tex: "\\text{pm}", factor: 1e-12, threshold: 0 },
+  { name: "km", tex: String.raw`\text{km}`, factor: 1e3, threshold: 1e3 },
+  { name: "m", tex: String.raw`\text{m}`, factor: 1, threshold: 0.1 },
+  { name: "mm", tex: String.raw`\text{mm}`, factor: 1e-3, threshold: 1e-3 },
+  { name: "μm", tex: String.raw`\mu\text{m}`, factor: 1e-6, threshold: 1e-6 },
+  { name: "nm", tex: String.raw`\text{nm}`, factor: 1e-9, threshold: 1e-9 },
+  { name: "pm", tex: String.raw`\text{pm}`, factor: 1e-12, threshold: 0 },
 ];
 
 const lambdaUnit = computed(
   () => units.find((u) => lambda.value >= u.threshold) ?? units[units.length - 1],
 );
 
-function formatValue(value: number) {
+const formatValue = (value: number): string => {
   if (value >= 100) return value.toFixed(0);
   if (value >= 10) return value.toFixed(1);
   if (value >= 1) return value.toFixed(2);
   return value.toFixed(3);
-}
+};
 
 const lambdaNumber = computed(() => lambda.value / lambdaUnit.value.factor);
-const lambdaTex = computed(
-  () => `${formatValue(lambdaNumber.value)}\\ ${lambdaUnit.value.tex}`,
-);
+const lambdaTex = computed(() => `${formatValue(lambdaNumber.value)}\\ ${lambdaUnit.value.tex}`);
 
 const band = computed(() => {
   if (f.value < 3e12) return { key: "radio", name: "无线电波" };
@@ -141,7 +137,6 @@ const bands = [
   min-width: 0;
   min-height: 3.5rem;
   padding: 0.25rem 0.5rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
 
@@ -157,17 +152,15 @@ const bands = [
 .em-calc-value,
 .em-calc-band {
   overflow: hidden;
-
   max-width: 100%;
-
   font-size: 1.02rem;
   white-space: nowrap;
 }
 
 .em-calc-band {
   color: var(--c-physics-light);
-  font-size: 0.95rem;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .em-calc-slider {
@@ -183,6 +176,7 @@ const bands = [
   padding: 0 0.2rem;
 
   color: var(--c-text-mute);
+
   font-size: 0.75rem;
 }
 
@@ -197,13 +191,13 @@ const bands = [
   border-radius: 999px;
 
   color: var(--c-text-mute);
+
   font-size: 0.78rem;
   white-space: nowrap;
 }
 
 .em-calc-band-item.is-active {
-  color: var(--c-text);
-
   background: color-mix(in srgb, var(--c-accent) 20%, transparent);
+  color: var(--c-text);
 }
 </style>

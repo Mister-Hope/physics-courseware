@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{
+const { step = 0 } = defineProps<{
   /** 1 = 包络线，2 = 音频信号；调幅波常显 */
   step?: number;
 }>();
@@ -13,16 +13,16 @@ const props = defineProps<{
 const N = 600;
 const twoPi = Math.PI * 2;
 
-const makePoints = (f: (t: number) => number) =>
+const makePoints = (f: (t: number) => number): { x: number; y: number }[] =>
   Array.from({ length: N + 1 }, (_, index) => {
     const t = index / N;
 
     return { x: t, y: f(t) };
   });
 
-const envelope = (t: number) => 0.34 * (1 + 0.55 * Math.sin(twoPi * 2 * t));
-const am = (t: number) => 2.4 + envelope(t) * Math.sin(twoPi * 20 * t);
-const audio = (t: number) => 0.8 + 0.3 * Math.sin(twoPi * 2 * t);
+const envelope = (t: number): number => 0.34 * (1 + 0.55 * Math.sin(twoPi * 2 * t));
+const am = (t: number): number => 2.4 + envelope(t) * Math.sin(twoPi * 20 * t);
+const audio = (t: number): number => 0.8 + 0.3 * Math.sin(twoPi * 2 * t);
 
 const curves = computed(() => [
   {
@@ -101,6 +101,6 @@ const labels = computed(() => [
     :labels="labels"
     :ticks="{ labels: false, arrows: false, origin: false, x: [], y: [] }"
     :view="{ width: 900, height: 300 }"
-    :step="props.step ?? 0"
+    :step="step"
   />
 </template>

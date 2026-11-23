@@ -28,8 +28,9 @@ const angle = computed(() => -0.45 * current.value);
 .gal-interactive {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.6rem;
+  align-items: center;
+
   width: min(100%, 20rem);
   margin: 0 auto;
 }

@@ -2,14 +2,14 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-const props = withDefaults(defineProps<{ step?: number }>(), { step: 0 });
+const { step = 0 } = defineProps<{ step?: number }>();
 const theta = ref(45);
 const fixedCurrent = 2;
 const fixedLength = 0.4;
 const fixedField = 0.5;
 const rad = computed(() => (theta.value * Math.PI) / 180);
 const force = computed(() => fixedCurrent * fixedLength * fixedField * Math.sin(rad.value));
-const showDecomp = computed(() => props.step >= 1);
+const showDecomp = computed(() => step >= 1);
 const tipX = computed(() => 240 + 130 * Math.cos(rad.value));
 const tipY = computed(() => 210 - 130 * Math.sin(rad.value));
 const parX = computed(() => 240 + 130 * Math.cos(rad.value));
@@ -171,6 +171,7 @@ const arcEndY = computed(() => 210 - 38 * Math.sin(rad.value));
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 1.4rem;
   align-items: center;
+
   width: 100%;
 }
 
@@ -187,13 +188,16 @@ const arcEndY = computed(() => 210 - 38 * Math.sin(rad.value));
 
 .angle-readout {
   display: flex;
-  align-items: baseline;
   gap: 0.35rem;
+  align-items: baseline;
+
   padding: 0.5rem 0.9rem;
-  font-size: 1.05rem;
   border: 1px solid var(--c-border);
   border-radius: 0.9rem;
+
   background: color-mix(in srgb, var(--c-accent) 6%, transparent);
+
+  font-size: 1.05rem;
 }
 
 .angle-eq {
@@ -202,11 +206,14 @@ const arcEndY = computed(() => 210 - 38 * Math.sin(rad.value));
 
 .angle-value {
   display: inline-block;
+
   min-width: 4.4rem;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-family: "JetBrains Mono", monospace;
+
   color: var(--c-accent);
+
+  font-family: "JetBrains Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
 }
 
 .angle-unit {
@@ -214,7 +221,7 @@ const arcEndY = computed(() => 210 - 38 * Math.sin(rad.value));
 }
 
 .angle-fixed {
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
 </style>

@@ -23,7 +23,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-
   min-width: 0;
 }
 
@@ -33,6 +32,7 @@
   align-items: baseline;
 
   color: var(--c-text-dim);
+
   font-size: 0.95rem;
 }
 
@@ -44,24 +44,25 @@
   min-width: 5.9rem;
 
   color: var(--c-accent);
-  font-size: 1.7rem;
+
   font-weight: 700;
+  font-size: 1.7rem;
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
 
 .rw-slider-head {
   display: flex;
-  justify-content: space-between;
   align-items: baseline;
+  justify-content: space-between;
 
   color: var(--c-text-dim);
+
   font-size: 0.9rem;
 }
 
 .rw-c-value {
   min-width: 5.2rem;
-
   color: var(--c-text);
   font-variant-numeric: tabular-nums;
   text-align: right;
@@ -71,13 +72,12 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-
   color: var(--c-text-dim);
 }
 
 .rw-formula-note {
-  white-space: nowrap;
   font-size: 0.78rem;
+  white-space: nowrap;
 }
 
 .rw-stations {
@@ -94,7 +94,6 @@
 
   min-height: 1.85rem;
   padding: 0 0.35rem;
-
   border-radius: 0.5rem;
 }
 
@@ -103,8 +102,8 @@
 }
 
 .rw-station-name {
-  font-size: 0.95rem;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .rw-station-freq {
@@ -120,34 +119,31 @@
   overflow: hidden;
 
   height: 0.5rem;
+  border-radius: 999px;
 
   background: rgb(148 163 184 / 18%);
-  border-radius: 999px;
 }
 
 .rw-bar-fill {
   display: block;
-
   height: 100%;
-
   border-radius: 999px;
-
   transition: width 0.15s linear;
 }
 
 .rw-badge {
-  visibility: hidden;
-
   padding: 0.02rem 0.2rem;
+  border-radius: 999px;
 
+  background: var(--c-accent);
   color: var(--c-bg);
-  font-size: 0.7rem;
+
   font-weight: 700;
+  font-size: 0.7rem;
   line-height: 1.5;
   text-align: center;
 
-  background: var(--c-accent);
-  border-radius: 999px;
+  visibility: hidden;
 }
 
 .rw-badge.is-on {
@@ -156,7 +152,6 @@
 
 .rw-status {
   min-height: 2.3rem;
-
   color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.45;
@@ -168,8 +163,8 @@
 
 /* ── 第 2 页：引课 ───────────────────────────── */
 .rw-intro {
-  justify-content: center;
   gap: 2.4rem;
+  justify-content: center;
 }
 
 .rw-intro-q {
@@ -185,7 +180,6 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.2rem;
-
   width: 100%;
 }
 
@@ -196,6 +190,7 @@
   align-items: center;
 
   color: var(--c-text-dim);
+
   text-align: center;
 }
 
@@ -211,7 +206,6 @@
 /* ── 第 3 页：频率条件 ───────────────────────── */
 .rw-formula-line {
   margin-top: 0.4rem;
-
   color: var(--c-text-dim);
   font-size: 0.9rem;
 }
@@ -230,9 +224,9 @@
   width: 100%;
   max-width: 380px;
   margin-top: 0.2rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 }
 
@@ -259,7 +253,7 @@
   grid-template-columns: 1.1fr 1fr 1fr 1fr;
 }
 
-.rw-table-row > span:first-child {
+:where(.rw-table-row) > span:first-child {
   color: var(--c-text-dim);
   font-size: 0.82rem;
 }
@@ -289,9 +283,9 @@
 
   min-width: 0;
   padding: 0.7rem 0.45rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 
   text-align: center;
@@ -321,6 +315,7 @@
   align-items: center;
 
   color: var(--c-accent);
+
   font-size: 1.05rem;
 }
 
@@ -333,6 +328,7 @@
   margin-top: 0.9rem;
 
   color: var(--c-text-dim);
+
   font-size: 0.92rem;
 }
 
@@ -356,9 +352,9 @@
   align-items: flex-start;
 
   padding: 0.85rem 1rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
@@ -370,9 +366,7 @@
 
 .rw-app-card b {
   display: block;
-
   margin-bottom: 0.2rem;
-
   font-size: 1rem;
 }
 
@@ -399,14 +393,14 @@
   justify-content: center;
 
   padding: 1rem 1.2rem;
-
   border: 1px solid var(--c-border-glow);
   border-radius: var(--radius-md);
-  background: rgb(226 168 70 / 10%);
 
+  background: rgb(226 168 70 / 10%);
   color: var(--c-accent);
-  font-size: 1.1rem;
+
   font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .rw-concept-branches {
@@ -428,9 +422,9 @@
 
   min-width: 200px;
   padding: 0.55rem 0.9rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 }
 
@@ -457,9 +451,9 @@
 
   min-width: 200px;
   padding: 0.7rem 0.95rem;
-
   border: 1px solid rgb(45 212 191 / 35%);
   border-radius: var(--radius-md);
+
   background: rgb(45 212 191 / 8%);
 }
 

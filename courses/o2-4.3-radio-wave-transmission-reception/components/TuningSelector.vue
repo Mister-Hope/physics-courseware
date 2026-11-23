@@ -21,7 +21,7 @@ const stations = [
 ];
 
 /** 频率为 f 的电磁波在调谐电路中激起的相对电流（峰值 1，半宽随 f0 变化） */
-const responseAt = (f: number) => 1 / (1 + ((f - f0.value) / (K * f0.value)) ** 2);
+const responseAt = (f: number): number => 1 / (1 + ((f - f0.value) / (K * f0.value)) ** 2);
 
 const rows = computed(() =>
   stations.map((station) => {
@@ -35,7 +35,7 @@ const tunedStation = computed(() => rows.value.find((row) => row.tuned) ?? null)
 
 const curve = computed(() => [
   {
-    formula: (f: number) => 1 / (1 + ((f - f0.value) / (K * f0.value)) ** 2),
+    formula: (f: number): number => 1 / (1 + ((f - f0.value) / (K * f0.value)) ** 2),
     samples: 600,
     color: "var(--c-accent)",
     width: 2.4,

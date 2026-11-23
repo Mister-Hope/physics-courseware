@@ -4,13 +4,10 @@
   第一眼只给「试卷上本来就有」的导线、I、B、30°；点击后才显示 F。
 -->
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    /** 是否显示安培力 F（点击后） */
-    showF?: boolean;
-  }>(),
-  { showF: false },
-);
+const { showF = false } = defineProps<{
+  /** 是否显示安培力 F（点击后） */
+  showF?: boolean;
+}>();
 </script>
 
 <template>

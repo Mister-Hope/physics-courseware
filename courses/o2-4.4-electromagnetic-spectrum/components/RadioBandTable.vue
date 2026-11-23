@@ -90,18 +90,16 @@ td {
 
 th {
   border-bottom: 1px solid var(--c-border);
-
+  background: color-mix(in srgb, var(--c-surface) 68%, transparent);
   color: var(--c-text-dim);
   font-weight: 600;
-
-  background: color-mix(in srgb, var(--c-surface) 68%, transparent);
 }
 
 td {
   border-bottom: 1px solid color-mix(in srgb, var(--c-border) 55%, transparent);
 }
 
-tbody tr:last-child td {
+:where(tbody tr:last-child) td {
   border-bottom: 0;
 }
 

@@ -7,7 +7,9 @@ import { computed } from "vue";
 
 const twoPi = Math.PI * 2;
 
-const wavePath = (y: number, amp: number, wavelength: number, x0 = 60, x1 = 450) => {
+const wavePath = (y: number, amp: number, wavelength: number): string => {
+  const x0 = 60;
+  const x1 = 450;
   const points: string[] = [];
 
   for (let x = x0; x <= x1; x += 2) {

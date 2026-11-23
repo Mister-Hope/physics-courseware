@@ -33,7 +33,9 @@
       <div class="em-trait-body">
         <div class="em-trait-name">破坏作用</div>
         <div class="em-trait-desc">能量较高，能破坏细胞核中的物质</div>
-        <div class="em-trait-band" v-click="4">紫外线、X 射线、<Latex tex="\gamma" />&nbsp;射线</div>
+        <div class="em-trait-band" v-click="4">
+          紫外线、X 射线、<Latex tex="\gamma" />&nbsp;射线
+        </div>
       </div>
     </div>
   </div>
@@ -56,7 +58,6 @@
 
   min-width: 0;
   padding: 0.65rem 0.9rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
 
@@ -65,9 +66,7 @@
 
 .em-trait-icon {
   flex: 0 0 auto;
-
   margin-top: 0.1rem;
-
   color: var(--c-accent);
 }
 
@@ -75,14 +74,13 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-
   min-width: 0;
 }
 
 .em-trait-name {
   color: var(--c-text);
-  font-size: 1.08rem;
   font-weight: 600;
+  font-size: 1.08rem;
 }
 
 .em-trait-desc {
@@ -98,8 +96,9 @@
   min-height: 1.45rem;
 
   color: var(--c-physics-light);
-  font-size: 0.92rem;
+
   font-weight: 600;
+  font-size: 0.92rem;
   white-space: nowrap;
 }
 </style>

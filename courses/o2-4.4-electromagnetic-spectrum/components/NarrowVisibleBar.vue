@@ -22,7 +22,13 @@
     <div class="em-narrow-zoom">
       <div class="em-narrow-zoom-head">可见光放大</div>
       <div class="em-narrow-zoom-track">
-        <div v-for="c in colors" :key="c.name" class="em-narrow-color" :class="{ 'is-dark': c.dark }" :style="{ background: c.color, flex: c.span }">
+        <div
+          v-for="c in colors"
+          :key="c.name"
+          class="em-narrow-color"
+          :class="{ 'is-dark': c.dark }"
+          :style="{ background: c.color, flex: c.span }"
+        >
           {{ c.name }}
         </div>
       </div>
@@ -62,6 +68,7 @@ const colors = [
   justify-content: space-between;
 
   color: var(--c-text-dim);
+
   font-size: 0.85rem;
 }
 
@@ -81,7 +88,6 @@ const colors = [
   overflow: hidden;
 
   height: 4rem;
-
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
 
@@ -91,8 +97,8 @@ const colors = [
     var(--c-sky),
     var(--c-accent),
     var(--c-danger),
-    mediumorchid,
-    violet
+    #ba55d3,
+    #ee82ee
   );
 }
 
@@ -103,7 +109,6 @@ const colors = [
   left: 66.3%;
 
   width: 1.75%;
-
   border-right: 2px solid var(--c-accent);
   border-left: 2px solid var(--c-accent);
 
@@ -131,13 +136,13 @@ const colors = [
 
 .em-narrow-callout-tag {
   padding: 0.08rem 0.55rem;
-
   border: 1px solid var(--c-accent);
   border-radius: 999px;
 
   color: var(--c-accent);
-  font-size: 0.8rem;
+
   font-weight: 600;
+  font-size: 0.8rem;
   white-space: nowrap;
 }
 
@@ -145,7 +150,6 @@ const colors = [
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-
   margin-top: 2rem;
 }
 
@@ -157,11 +161,8 @@ const colors = [
 
 .em-narrow-zoom-track {
   display: flex;
-
   overflow: hidden;
-
   height: 3.6rem;
-
   border-radius: var(--radius-md);
 }
 
@@ -174,8 +175,9 @@ const colors = [
   min-width: 0;
 
   color: var(--c-text);
-  font-size: 0.82rem;
+
   font-weight: 600;
+  font-size: 0.82rem;
 }
 
 .em-narrow-color.is-dark {
@@ -185,7 +187,6 @@ const colors = [
 .em-narrow-zoom-scale {
   display: flex;
   justify-content: space-between;
-
   color: var(--c-text-mute);
   font-size: 0.78rem;
 }
