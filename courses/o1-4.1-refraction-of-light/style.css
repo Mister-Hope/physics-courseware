@@ -3,3 +3,547 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* 页面级钩子：pt2–pt18（不要用 p2 这类裸类名，UnoCSS 会生成 padding） */
+.pt2,
+.pt3,
+.pt4,
+.pt5,
+.pt6,
+.pt7,
+.pt8,
+.pt9,
+.pt10,
+.pt11,
+.pt12,
+.pt13,
+.pt14,
+.pt15,
+.pt16,
+.pt17,
+.pt18 {
+  min-height: 0;
+}
+
+/* 第 2 页：水中的鱼 */
+.pt2 {
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.p2-ask {
+  font-size: 1.16rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.p2-fig {
+  display: flex;
+  justify-content: center;
+}
+
+.p2-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+}
+
+.pt2 .tip-hint {
+  font-size: 0.86rem;
+}
+
+/* 第 3 页：光的折射现象 */
+.pt3 {
+  gap: 0.3rem;
+}
+
+.p3-grid {
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 1.6rem;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.p3-fig {
+  display: flex;
+  justify-content: center;
+}
+
+.p3-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+.p3-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p3-side .ask {
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.p3-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.p3-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-top: 0.45rem;
+  border-radius: 50%;
+  background: var(--c-accent-2);
+  flex: 0 0 auto;
+}
+
+.pt3 .tip-hint {
+  font-size: 0.86rem;
+}
+
+/* 第 4 页：入射角与折射角 */
+.pt4 {
+  gap: 0.3rem;
+}
+
+.p4-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.p4-fig {
+  min-width: 0;
+}
+
+.p4-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 470px;
+  height: auto;
+}
+
+.p4-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.p4-line {
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+/* 第 5 页：折射定律 */
+.pt5 {
+  gap: 0.55rem;
+  justify-content: center;
+}
+
+.p5-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.p5-text {
+  max-width: 42rem;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.p5-eq {
+  font-size: 1.45rem;
+}
+
+.p5-eq .katex-display {
+  margin: 0;
+}
+
+.p5-note {
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* 第 6 页：折射率 */
+.pt6 {
+  gap: 0.45rem;
+  justify-content: center;
+}
+
+.p6-def {
+  max-width: 44rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.p6-eq {
+  font-size: 1.4rem;
+}
+
+.p6-eq .katex-display {
+  margin: 0;
+}
+
+.p6-row {
+  color: var(--c-text-dim);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+/* 第 7 页：几种介质的折射率 */
+.pt7 {
+  gap: 0.35rem;
+  justify-content: center;
+}
+
+.p7-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.p7-table th {
+  padding: 0.28rem 0.6rem;
+  border-bottom: 1px solid var(--c-border);
+  color: var(--c-accent);
+  font-weight: 700;
+  text-align: left;
+}
+
+.p7-table td {
+  padding: 0.24rem 0.6rem;
+  border-bottom: 1px solid var(--c-border);
+  color: var(--c-text-dim);
+}
+
+.p7-table td:nth-child(2n) {
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.p7-caption {
+  text-align: center;
+}
+
+.pt7 .tip-hint {
+  font-size: 0.85rem;
+}
+
+/* 第 8 页：光路可逆 */
+.pt8 {
+  gap: 0.35rem;
+}
+
+.p8-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.p8-fig {
+  min-width: 0;
+}
+
+.p8-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+}
+
+.p8-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.p8-line {
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+/* 第 9 页：光疏介质与光密介质 */
+.pt9 {
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.p9-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+.p9-card {
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+  background: var(--c-surface);
+}
+
+.p9-dense {
+  border-color: var(--c-accent);
+}
+
+.p9-sub {
+  margin-top: 0.15rem;
+  color: var(--c-text-mute);
+  font-size: 0.86rem;
+}
+
+.p9-example {
+  margin-top: 0.35rem;
+  color: var(--c-text);
+  font-size: 1rem;
+}
+
+.p9-rule {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.pt9 .tip-hint {
+  font-size: 0.87rem;
+}
+
+/* 第 10 页：改变入射角 */
+.pt10 {
+  gap: 0.05rem;
+}
+
+.pt10 .ask {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.pt10 .tip-hint {
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.pt10 .rd-svg svg {
+  width: auto;
+  max-width: 100%;
+  max-height: 220px;
+  margin: 0 auto;
+}
+
+/* 第 11 页：储油桶例题 */
+.p11-fig {
+  width: 100%;
+}
+
+.p11-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.p11-analysis,
+.p13-analysis,
+.p14-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.p11-line,
+.p13-line,
+.p14-line {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* 第 12 页：测量玻璃的折射率 */
+.pt12 {
+  gap: 0.4rem;
+}
+
+.p12-grid {
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.p12-fig {
+  min-width: 0;
+}
+
+.p12-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+.p12-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.p12-step {
+  display: grid;
+  grid-template-columns: 1.8rem 1fr;
+  gap: 0.55rem;
+  align-items: start;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.p12-step-text {
+  min-width: 0;
+}
+
+.p12-step .step-no {
+  margin-top: 0.1rem;
+}
+
+/* 第 13 页：60° 入射玻璃 */
+.p13-fig {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.1rem;
+}
+
+.p13-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 310px;
+  height: auto;
+}
+
+/* 第 14 页：水中的筷子 */
+.p14-analysis {
+  gap: 0.45rem;
+}
+
+/* 第 15 页：折射率与光速 */
+.pt15 {
+  gap: 0.45rem;
+  justify-content: center;
+}
+
+.p15-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.p15-card {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+}
+
+.p15-q {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.p15-ans {
+  margin-top: 0.45rem;
+  color: var(--c-accent);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* 第 16 页：判断正误 */
+.pt16 {
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.p16-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.p16-item {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr 5.4rem;
+  gap: 0.7rem;
+  align-items: baseline;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+  background: var(--c-surface);
+}
+
+.p16-no {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.p16-text {
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.p16-ans {
+  color: var(--c-physics);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* 第 17 页：计算折射角 */
+.pt17 {
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.pt17 .problem {
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.p17-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p17-line {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* 第 18 页：课堂小结 */
+.pt18 {
+  justify-content: center;
+}
+
+.p18-list {
+  gap: 0.7rem;
+}
+
+.p18-item {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}

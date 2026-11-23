@@ -1,0 +1,21 @@
+<!-- 4.1 第 3 页：筷子插入水中的“折断”现象（题目示意图，不含分析标注） -->
+<template>
+  <svg viewBox="0 0 320 280" width="320" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="cup-water" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#60a5fa" stop-opacity="0.30" />
+        <stop offset="1" stop-color="#3b82f6" stop-opacity="0.12" />
+      </linearGradient>
+    </defs>
+    <rect x="82" y="56" width="156" height="190" rx="10" fill="none" stroke="var(--c-neutral-300)" stroke-width="2" opacity="0.75" />
+    <rect x="86" y="142" width="148" height="100" rx="4" fill="url(#cup-water)" />
+    <line x1="86" y1="142" x2="234" y2="142" stroke="var(--c-accent-2)" stroke-width="1.3" opacity="0.65" />
+    <line x1="154" y1="22" x2="184" y2="142" stroke="var(--c-accent)" stroke-width="5" stroke-linecap="round" />
+    <line x1="192" y1="142" x2="208" y2="242" stroke="var(--c-accent)" stroke-width="5" stroke-linecap="round" />
+    <circle cx="188" cy="142" r="3.4" fill="var(--c-accent)" opacity="0.9" />
+    <path d="M 100 160 q 12 -6 24 0 t 24 0" fill="none" stroke="var(--c-accent-2)" stroke-width="1" opacity="0.3" />
+    <path d="M 150 180 q 12 -6 24 0 t 24 0" fill="none" stroke="var(--c-accent-2)" stroke-width="1" opacity="0.25" />
+    <text x="98" y="232" fill="var(--c-text-dim)" font-size="12">水</text>
+    <text x="238" y="48" fill="var(--c-text-dim)" font-size="12" text-anchor="end">玻璃杯</text>
+  </svg>
+</template>
