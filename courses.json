@@ -486,8 +486,8 @@
           "slug": "o1-1.4-experiment-momentum-conservation",
           "title": "实验：验证动量守恒定律",
           "chapter": "§1.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "用气垫导轨等装置验证动量守恒，掌握质量与速度的测量、一维正负号约定、碰撞前后动量之和的比较与误差分析。",
+          "tags": ["实验", "动量守恒", "气垫导轨", "误差分析"]
         },
         {
           "slug": "o1-1.5-elastic-and-inelastic-collisions",

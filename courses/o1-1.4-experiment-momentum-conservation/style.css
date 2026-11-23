@@ -24,9 +24,9 @@
 
 /* 居中公式行 */
 .eq-line {
-  text-align: center;
   font-size: 1.16rem;
   line-height: 1.65;
+  text-align: center;
 }
 
 /* 分步说明行：每行常驻、只切换可见性，点击时不顶跑 */
@@ -34,22 +34,26 @@
   display: flex;
   gap: 0.55rem;
   align-items: flex-start;
+
   min-height: 1.65rem;
+
   font-size: 0.98rem;
   line-height: 1.55;
 }
 
 .flow-line strong {
-  font-weight: 700;
   color: var(--c-accent-light);
+  font-weight: 700;
 }
 
 .flow-dot {
   flex: none;
+
   width: 0.5rem;
   height: 0.5rem;
   margin-top: 0.55rem;
   border-radius: 50%;
+
   background: var(--c-accent);
 }
 
@@ -60,6 +64,6 @@
 /* 表下注释 */
 .table-note {
   margin-top: 0.4rem;
-  font-size: 0.86rem;
   color: var(--c-text-dim);
+  font-size: 0.86rem;
 }
