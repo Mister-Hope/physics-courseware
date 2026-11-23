@@ -3,15 +3,16 @@
 .shm-intro {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1.6rem;
+  align-items: center;
 }
 
 .shm-intro-q {
   max-width: 27em;
   margin: 0;
-  font-size: 1.5rem;
+
   font-weight: 700;
+  font-size: 1.5rem;
   line-height: 1.5;
   text-align: center;
 }
@@ -31,10 +32,13 @@
 .shm-intro-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
+
   min-width: 0;
+
   color: var(--c-text-dim);
+
   font-size: 0.95rem;
   line-height: 1.4;
   text-align: center;
@@ -62,6 +66,28 @@
   font-size: 0.9rem;
 }
 
+.shm-table th,
+.shm-table td {
+  vertical-align: top;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--c-line);
+  text-align: left;
+}
+
+.shm-table th {
+  background: var(--c-surface);
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.shm-table td:first-child {
+  color: var(--c-text);
+}
+
+.shm-table td:not(:first-child) {
+  color: var(--c-text-dim);
+}
+
 .shm-table th:nth-child(1),
 .shm-table td:nth-child(1) {
   width: 16%;
@@ -82,39 +108,18 @@
   width: 16%;
 }
 
-.shm-table th,
-.shm-table td {
-  padding: 0.4rem 0.55rem;
-  border: 1px solid var(--c-line);
-  text-align: left;
-  vertical-align: top;
-}
-
-.shm-table th {
-  background: var(--c-surface);
-  color: var(--c-accent);
-  font-weight: 600;
-}
-
-.shm-table td:first-child {
-  color: var(--c-text);
-}
-
-.shm-table td:not(:first-child) {
-  color: var(--c-text-dim);
-}
-
 .shm-formula {
-  text-align: center;
-  font-size: 1.35rem;
   color: var(--c-accent);
+  font-size: 1.35rem;
+  text-align: center;
 }
 
 .shm-path {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
   color: var(--c-accent);
+
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
   text-align: center;
 }
 
@@ -136,8 +141,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.3rem 0.9rem;
-  font-size: 0.95rem;
+
   color: var(--c-text-dim);
+
+  font-size: 0.95rem;
 }
 
 .shm-phase {
@@ -156,14 +163,14 @@
 
 .shm-phase-status {
   min-height: 1.6rem;
-  font-size: 1.1rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .shm-phase-readout {
-  font-size: 0.95rem;
   color: var(--c-text-dim);
+  font-size: 0.95rem;
 }
 
 .shm-fig {
@@ -203,9 +210,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   padding: 0.7rem 0.9rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 }
 

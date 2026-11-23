@@ -514,8 +514,8 @@
           "slug": "o1-2.2-describing-simple-harmonic-motion",
           "title": "简谐运动的描述",
           "chapter": "§2.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "用振幅、周期、频率、相位描述简谐运动，理解 x=A sin(ωt+φ) 各量的意义，会由图像读参量并比较相位差。",
+          "tags": ["振幅", "周期频率", "相位", "简谐运动"]
         },
         {
           "slug": "o1-2.3-shm-restoring-force-and-energy",
