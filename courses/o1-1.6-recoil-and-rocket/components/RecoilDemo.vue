@@ -70,56 +70,70 @@ const barWidth = computed(() => `${Math.min(100, (recoil.value / 80) * 100)}%`);
   flex-direction: column;
   gap: 0.5rem;
 }
+
 .rd-controls {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2rem;
 }
+
 .rd-readout {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.7rem;
 }
+
 .rd-cell {
   padding: 0.42rem 0.75rem 0.38rem;
   border: 1px solid var(--c-border);
   border-radius: 0.8rem;
   background: var(--c-surface);
 }
+
 .rd-label {
-  font-size: 0.76rem;
   color: var(--c-text-dim);
+  font-size: 0.76rem;
 }
+
 .rd-value {
   margin-top: 0.1rem;
+
   color: var(--c-accent);
-  font-size: 1.28rem;
+
   font-weight: 700;
-  line-height: 1.25;
+  font-size: 1.28rem;
   font-variant-numeric: tabular-nums;
+  line-height: 1.25;
 }
+
 .rd-value span {
-  font-size: 0.78rem;
   color: var(--c-text-dim);
   font-weight: 500;
+  font-size: 0.78rem;
 }
+
 .rd-bar {
+  overflow: hidden;
   height: 0.7rem;
   border-radius: 999px;
   background: var(--c-neutral-700);
-  overflow: hidden;
 }
+
 .rd-fill {
   height: 100%;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
   transition: width 0.2s ease;
 }
+
 .rd-scale {
   display: flex;
   justify-content: space-between;
+
   margin-top: -0.3rem;
+
   color: var(--c-text-mute);
+
   font-size: 0.68rem;
 }
 </style>

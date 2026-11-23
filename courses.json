@@ -500,8 +500,8 @@
           "slug": "o1-1.6-recoil-and-rocket",
           "title": "反冲现象 火箭",
           "chapter": "§1.6",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由反冲现象理解动量守恒在爆炸、火箭发射中的应用，推导反冲速度关系，体会火箭多级与喷气速度对获得速度的影响。",
+          "tags": ["反冲", "火箭", "动量守恒", "喷气速度"]
         },
         {
           "slug": "o1-2.1-simple-harmonic-motion",

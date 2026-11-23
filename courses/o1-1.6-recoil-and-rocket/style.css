@@ -46,7 +46,9 @@
   padding: 1rem 1rem 1.05rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-surface);
+
   text-align: center;
 }
 
@@ -57,8 +59,8 @@
 .p3-title {
   margin-top: 0.3rem;
   color: var(--c-text);
-  font-size: 1.25rem;
   font-weight: 700;
+  font-size: 1.25rem;
 }
 
 .p3-text {
@@ -96,7 +98,9 @@
 .p4-line {
   padding-left: 0.8rem;
   border-left: 2px solid var(--c-accent);
+
   color: var(--c-text);
+
   font-size: 0.95rem;
   line-height: 1.5;
 }
@@ -176,7 +180,9 @@
   padding: 1rem 1rem 1.05rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-surface);
+
   text-align: center;
 }
 
@@ -187,8 +193,8 @@
 .p7-title {
   margin-top: 0.3rem;
   color: var(--c-text);
-  font-size: 1.25rem;
   font-weight: 700;
+  font-size: 1.25rem;
 }
 
 .p7-text {
@@ -213,10 +219,13 @@
 
 .p8-heading {
   display: flex;
-  align-items: center;
   gap: 0.4rem;
+  align-items: center;
+
   margin-bottom: 0.4rem;
+
   color: var(--c-accent);
+
   font-size: 1.1rem;
 }
 
@@ -232,7 +241,9 @@
   display: flex;
   gap: 0.7rem;
   align-items: flex-start;
+
   margin-top: 0.5rem;
+
   font-size: 0.9rem;
   line-height: 1.55;
 }
@@ -303,6 +314,7 @@
   display: flex;
   gap: 0.55rem;
   align-items: flex-start;
+
   font-size: 0.98rem;
   line-height: 1.55;
 }
@@ -335,6 +347,7 @@
   grid-template-columns: 2rem minmax(0, 1fr) 11rem;
   gap: 0.7rem;
   align-items: center;
+
   min-height: 2.6rem;
   padding: 0.35rem 0.2rem;
   border-bottom: 1px solid var(--c-border);
@@ -347,13 +360,16 @@
 .p10-no {
   display: grid;
   place-items: center;
+
   width: 1.55rem;
   height: 1.55rem;
   border-radius: 50%;
+
   background: var(--c-accent);
   color: #1a1207;
-  font-size: 0.8rem;
+
   font-weight: 700;
+  font-size: 0.8rem;
 }
 
 .p10-text {
@@ -389,10 +405,13 @@
   display: flex;
   gap: 0.65rem;
   align-items: flex-start;
+
   padding: 0.35rem 0.65rem;
   border-left: 2px solid var(--c-accent);
   border-radius: 0.5rem;
+
   background: var(--c-surface);
+
   font-size: 0.95rem;
   line-height: 1.5;
 }
@@ -461,7 +480,9 @@
 .p12-way {
   padding: 0.35rem 0.7rem;
   border-left: 2px solid var(--c-physics);
+
   color: var(--c-text);
+
   font-size: 0.96rem;
   line-height: 1.5;
 }
@@ -485,10 +506,13 @@
   display: flex;
   gap: 0.65rem;
   align-items: flex-start;
+
   padding: 0.45rem 0.7rem;
   border: 1px solid var(--c-border);
   border-radius: 0.7rem;
+
   background: var(--c-surface);
+
   font-size: 0.95rem;
   line-height: 1.5;
 }
