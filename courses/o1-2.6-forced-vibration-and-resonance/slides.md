@@ -132,3 +132,99 @@ clickAnimation: none
   <ForcedFrequency />
   <div class="tip-hint" v-click="1">稳定后，物体振动的频率等于驱动力的频率，与物体的固有频率无关。</div>
 </div>
+
+---
+title: 共振
+clicks: 2
+clickAnimation: none
+---
+
+# 共振
+
+<div class="page-grow">
+<div class="ask">为什么有些摆振幅大，有些摆振幅小？</div>
+<PendulumResonanceSvg :step="$clicks" />
+<div class="tip-hint" v-click="2">驱动力频率与固有频率相差越小，受迫振动振幅越大；相等时振幅最大，叫共振。</div>
+</div>
+
+---
+title: 共振曲线
+clicks: 1
+clickAnimation: none
+---
+
+# 共振曲线
+
+<div class="page-grow">
+<div class="ask">驱动力的频率变化时，受迫振动的振幅怎样变化？</div>
+<ResonanceCurve :step="$clicks" />
+<div class="tip-hint" v-click="1">驱动力的频率等于固有频率时，受迫振动的振幅最大，这就是共振。</div>
+</div>
+
+---
+title: 共振的利用：转速计
+clicks: 1
+clickAnimation: none
+---
+
+# 共振的利用：转速计
+
+<div class="page-grow page-grow-tight">
+<div class="ask">怎样利用共振测量机器的转速？</div>
+<div class="fw-figure-wide"><TachometerSvg :step="$clicks" /></div>
+<div class="summary-line">转速计由不同长度的钢片组成。与机器接触时，和机器转速一致的钢片共振最强。读出它的固有频率，就知道机器的转速。</div>
+<div class="tip-hint" v-click="1">共振把机器的转速变成钢片的振幅。</div>
+</div>
+
+---
+title: 声音中的共振
+clicks: 1
+clickAnimation: none
+---
+
+# 声音中的共振
+
+<div class="page-grow page-grow-tight">
+<div class="ask">摩擦盆耳，为什么水花会溅起来？</div>
+<div class="half-grid">
+<div class="fw-figure-sm"><WashBasinSvg :step="$clicks" /></div>
+<div class="stack-tight">
+<div>摩擦的节奏接近盆壁和水体的固有频率。</div>
+<div class="tip-hint" v-click="1">盆壁和水体发生共振，振幅最大，水花就溅起来了。</div>
+</div>
+</div>
+<div class="summary-line">乐器发声、音叉共鸣，也都利用共振。</div>
+</div>
+
+---
+title: 共振的防止
+clicks: 1
+clickAnimation: none
+zoom: 0.94
+---
+
+# 共振的防止
+
+<div class="page-grow page-grow-tight">
+<div class="ask">共振也可能造成危害，怎样避免？</div>
+<div class="fw-figure-wide"><BridgeResonanceSvg :step="$clicks" /></div>
+<div class="summary-line">桥梁、码头、飞机、汽车、轮船发动机的设计、制造和安装，都要考虑防止共振。</div>
+<div class="summary-line">可以改变系统的固有频率，或增加阻尼，使驱动力的频率远离固有频率。</div>
+<div class="tip-hint" v-click="1">1940 年，美国塔科马海峡大桥因风引起扭转共振，通车仅 4 个月就倒塌了。</div>
+</div>
+
+---
+title: 科学漫步：振动控制技术
+clicks: 1
+clickAnimation: none
+zoom: 0.9
+---
+
+# 科学漫步：振动控制技术
+
+<div class="page-grow page-grow-tight">
+<div class="ask">怎样减小桥梁、高楼在风或地震中的振动？</div>
+<div class="fw-figure-wide"><TmdSvg :step="$clicks" /></div>
+<div class="summary-line">调谐质量阻尼器（TMD）由弹簧、阻尼器和质量块组成，安装在主结构上。适当调整后，弹力与驱动力方向相反，抵消一部分驱动力，减小主结构的振动。</div>
+<div class="tip-hint" v-click="1">港珠澳大桥等工程采用了振动控制技术。</div>
+</div>
