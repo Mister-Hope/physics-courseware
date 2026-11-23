@@ -3,3 +3,30 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 图例：虚线色块（机械能等守恒量） */
+.legend-swatch.dash {
+  background: repeating-linear-gradient(90deg, var(--c-text-dim) 0 7px, transparent 7px 12px);
+}
+
+/* 曲线图例（与 4.1 课件同款原子） */
+.curve-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  border-radius: 2px;
+}
