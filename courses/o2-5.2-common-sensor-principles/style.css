@@ -1,5 +1,136 @@
-/* ═══════════════════════════════════════════════
-   常见传感器的工作原理及应用 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* ==========================================================================
+   本课特有样式（通用样式与 token 在 workspace/shared 的 addon 里，不要重复）
+   命名约定：cs- = 本课通用类；p<页号>- = 仅某一页使用的类
+   ========================================================================== */
+
+/* 引课：四张器件卡片 —— 输入量常显，输出量随点击出现（隐藏时仍占位，不顶跑） */
+.cs-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.1rem;
+
+  width: 100%;
+}
+
+.cs-device {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  align-items: center;
+
+  padding: 1.15rem 0.6rem 1rem;
+
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+}
+
+.cs-device-icon {
+  color: var(--c-accent);
+  line-height: 1;
+}
+
+.cs-device-name {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.cs-device-io {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+}
+
+.cs-io-out {
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+/* 左图右注：一栏放示意图，一栏放要点 */
+.cs-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+
+  width: 100%;
+}
+
+.cs-split-fig {
+  width: 100%;
+  min-width: 0;
+}
+
+.cs-point {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+
+.cs-point-body {
+  line-height: 1.6;
+}
+
+.cs-no {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.45rem;
+  height: 1.45rem;
+  margin-top: 0.2rem;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--c-accent);
+
+  background: var(--c-accent-soft);
+  border-radius: 50%;
+}
+
+/* 两种状态并排（无光照 / 有光照、无物品 / 有物品） */
+.cs-two-figs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+
+  width: 100%;
+}
+
+.cs-state {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.cs-state-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-text-dim);
+  letter-spacing: 0.02em;
+}
+
+.cs-fig-narrow {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.cs-state-note {
+  min-height: 3.1rem;
+
+  font-size: 0.95rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* 封面课题名 13 字：压到 2.7rem 保持一行（经验值，见 layout 笔记） */
+.slidev-layout.course-cover .cover-title {
+  font-size: 2.7rem !important;
+}
