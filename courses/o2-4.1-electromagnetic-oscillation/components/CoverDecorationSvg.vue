@@ -4,7 +4,7 @@
 -->
 <script setup lang="ts">
 /** 把函数曲线采样成 SVG 路径：x 从 x0 到 x1，v 为 -1~1 的归一化值 */
-const wavePath = (fn: (t: number) => number, x0: number, x1: number, midY: number, amp: number): string => {
+const wavePath = (fn: (t: number) => number, { x0, x1, midY, amp }: { x0: number; x1: number; midY: number; amp: number }): string => {
   const points: string[] = [];
 
   for (let x = x0; x <= x1; x += 2) {
@@ -16,9 +16,9 @@ const wavePath = (fn: (t: number) => number, x0: number, x1: number, midY: numbe
 };
 
 /** 电荷量 q ∝ cos：从极板电荷最多处起振 */
-const qPath = wavePath((t) => Math.cos(2 * Math.PI * t), 74, 266, 110, 17);
+const qPath = wavePath((t) => Math.cos(2 * Math.PI * t), { x0: 74, x1: 266, midY: 110, amp: 17 });
 /** 电流 i ∝ sin：与 q 相差四分之一个周期 */
-const iPath = wavePath((t) => Math.sin(2 * Math.PI * t), 74, 266, 110, 17);
+const iPath = wavePath((t) => Math.sin(2 * Math.PI * t), { x0: 74, x1: 266, midY: 110, amp: 17 });
 </script>
 
 <template>

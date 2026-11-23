@@ -22,19 +22,20 @@
 
 .p2-route {
   display: flex;
-  align-items: center;
   gap: 0.75rem;
+  align-items: center;
   width: 100%;
 }
 
 .p2-end {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.3rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
 
   font-size: 0.9rem;
-  color: var(--c-text-dim);
   white-space: nowrap;
 }
 
@@ -44,10 +45,12 @@
 
 .p2-wire {
   position: relative;
+
   flex: 1;
 
   height: 0;
   border-top: 2px dashed var(--c-accent);
+
   opacity: 0.65;
 }
 
@@ -56,8 +59,9 @@
   top: -1.6rem;
   left: 50%;
 
-  font-size: 0.76rem;
   color: var(--c-text-mute);
+
+  font-size: 0.76rem;
   white-space: nowrap;
 
   transform: translateX(-50%);
@@ -75,6 +79,7 @@
   align-items: center;
 
   padding: 0.7rem 1rem;
+
   text-align: center;
 }
 
@@ -87,16 +92,16 @@
 }
 
 .p3-word {
-  font-size: 1.65rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.65rem;
   letter-spacing: 0.12em;
 }
 
 .p3-note {
+  color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.6;
-  color: var(--c-text-dim);
 }
 
 /* ── 第 4 页：损耗来源 ── */
@@ -124,14 +129,14 @@
 }
 
 .p4-tag {
-  font-size: 0.78rem;
   color: var(--c-text-mute);
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
 }
 
 .p4-math {
-  font-size: 1.35rem;
   color: var(--c-text);
+  font-size: 1.35rem;
 }
 
 /* ── 第 5 页：两条途径比较 ── */
@@ -149,12 +154,13 @@
   gap: 0.55rem;
 
   padding: 0.9rem 0;
+
   text-align: center;
 }
 
 .p5-head {
-  font-size: 0.9rem;
   color: var(--c-text-dim);
+  font-size: 0.9rem;
 }
 
 .p5-eq {
@@ -182,10 +188,11 @@
 
 .p6-item {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
+  align-items: center;
 
   margin-top: 0.55rem;
+
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -208,7 +215,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-
   font-size: 1.18rem;
 }
 
@@ -228,9 +234,9 @@
 }
 
 .p7-tag {
+  color: var(--c-text-dim);
   font-size: 0.86rem;
   line-height: 1.4;
-  color: var(--c-text-dim);
 }
 
 /* ── 第 8 页：我国的输电电压 ── */
@@ -253,17 +259,16 @@
 }
 
 .p8-kv {
-  font-size: 1.55rem;
-  font-weight: 700;
-  line-height: 1.4;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.55rem;
+  line-height: 1.4;
 }
 
 .p8-cap {
   margin-top: 0.4rem;
-
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
 
 .p8-ask {
@@ -281,9 +286,9 @@
 }
 
 .pt10 > svg {
+  flex: 0 0 auto;
   width: 100%;
   height: auto;
-  flex: 0 0 auto;
 }
 
 /* ── 第 11 页：输电链路中的功率与电压 ── */
@@ -303,9 +308,8 @@
 
 .p11-card {
   padding: 0.55rem 1rem 0.65rem;
-
-  background: rgb(255 255 255 / 3%);
   border-radius: 1.1rem;
+  background: rgb(255 255 255 / 3%);
 }
 
 .p11-card .mini-title {
@@ -329,17 +333,15 @@
 
 .p12-def {
   padding-left: 1rem;
-
+  border-left: 3px solid var(--c-accent);
   font-size: 1.15rem;
   line-height: 1.6;
-
-  border-left: 3px solid var(--c-accent);
 }
 
 .p12-key {
   margin-right: 0.35rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
 }
 
 .p12-grid {
@@ -354,9 +356,9 @@
   align-items: center;
 
   padding: 0.7rem 1rem;
+  border-radius: 1.1rem;
 
   background: rgb(255 255 255 / 3%);
-  border-radius: 1.1rem;
 }
 
 .p12-benefit .icon-lg {
@@ -371,10 +373,9 @@
 
 .p12-benefit span {
   display: block;
-
+  color: var(--c-text-dim);
   font-size: 0.82rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
 
 /* p13 教材练习 3：两种电压的电压损失 */
@@ -390,9 +391,9 @@
 
 .p13-head {
   margin-bottom: 0;
-  font-size: 1.12rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.12rem;
 }
 
 .p13-line {
@@ -423,9 +424,9 @@
 
 .p14-step-title {
   margin-bottom: 0;
-  font-size: 1.05rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .p14-line {
@@ -452,9 +453,9 @@
 
 .p15b-step-title {
   margin-bottom: 0;
-  font-size: 1rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .p15b-line {
@@ -476,9 +477,9 @@
 }
 
 .p15-head {
-  font-size: 1.1rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.1rem;
 }
 
 .p15-line {
@@ -489,9 +490,9 @@
 }
 
 .p15-result {
-  font-size: 1.2rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 .p15-check {
@@ -506,10 +507,9 @@
 
 .p16-wrong {
   padding: 0.8rem 1.1rem;
-
-  background: rgb(255 255 255 / 3%);
   border-left: 3px solid var(--c-danger);
   border-radius: 0 1rem 1rem 0;
+  background: rgb(255 255 255 / 3%);
 }
 
 .p16-label {
@@ -517,9 +517,10 @@
   gap: 0.35rem;
   align-items: center;
 
+  color: var(--c-danger);
+
   font-size: 0.8rem;
   letter-spacing: 0.08em;
-  color: var(--c-danger);
 }
 
 .p16-label .icon-md {
@@ -532,6 +533,7 @@
   align-items: center;
 
   min-height: 3rem;
+
   font-size: 1.12rem;
 }
 
@@ -544,9 +546,9 @@
 }
 
 .p16-claim {
+  color: var(--c-text-dim);
   font-size: 0.95rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
 }
 
 .p16-ask {
@@ -595,6 +597,7 @@
   align-items: flex-start;
 
   margin-top: 0.4rem;
+
   font-size: 0.92rem;
   line-height: 1.45;
 }
@@ -623,25 +626,24 @@
 
 .p18-node {
   padding: 0.42rem 0.7rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+
+  background: rgb(255 255 255 / 4%);
 
   font-size: 0.88rem;
   white-space: nowrap;
-
-  background: rgb(255 255 255 / 4%);
-  border: 1px solid var(--c-border);
-  border-radius: 0.8rem;
 }
 
 .p18-node.is-key {
-  color: var(--c-accent);
-
-  background: rgb(226 168 70 / 8%);
   border-color: rgb(226 168 70 / 45%);
+  background: rgb(226 168 70 / 8%);
+  color: var(--c-accent);
 }
 
 .p18-node.is-line {
-  color: var(--c-physics);
   border-color: rgb(45 212 191 / 40%);
+  color: var(--c-physics);
 }
 
 .p18-arrow {
@@ -680,9 +682,9 @@
 }
 
 .p20-head {
-  font-size: 1.12rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.12rem;
 }
 
 .p20-line {

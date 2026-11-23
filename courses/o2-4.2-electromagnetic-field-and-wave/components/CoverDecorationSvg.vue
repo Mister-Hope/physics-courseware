@@ -43,15 +43,11 @@ const ampB = 34;
 const dirBX = 0.8;
 const dirBY = 0.42;
 
-function phase(x: number) {
-  return ((x - x0) / lambda) * Math.PI * 2;
-}
+const phase = (x: number): number => ((x - x0) / lambda) * Math.PI * 2;
 
-function ePointY(x: number) {
-  return 104 - ampE * Math.sin(phase(x));
-}
+const ePointY = (x: number): number => 104 - ampE * Math.sin(phase(x));
 
-function buildPath(pointOf: (x: number) => { x: number; y: number }) {
+const buildPath = (pointOf: (x: number) => { x: number; y: number }): string => {
   const steps = 120;
   let d = "";
   for (let i = 0; i <= steps; i += 1) {
@@ -59,7 +55,7 @@ function buildPath(pointOf: (x: number) => { x: number; y: number }) {
     d += `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)} `;
   }
   return d.trim();
-}
+};
 
 const ePath = buildPath((x) => ({ x, y: ePointY(x) }));
 const bPath = buildPath((x) => {

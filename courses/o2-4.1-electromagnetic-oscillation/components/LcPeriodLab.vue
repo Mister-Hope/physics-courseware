@@ -22,7 +22,7 @@ const freqMHz = computed(() => freq.value / 1e6);
 
 const curves = computed(() => [
   {
-    formula: (t: number) => Math.cos((2 * Math.PI * t) / periodNs.value),
+    formula: (t: number): number => Math.cos((2 * Math.PI * t) / periodNs.value),
     samples: 400,
     color: "var(--c-accent)",
     width: 2.6,
@@ -87,39 +87,47 @@ const curves = computed(() => [
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: 1.6rem;
   align-items: center;
+
   width: 100%;
 }
+
 .lab-graph {
   width: 100%;
   min-width: 0;
 }
+
 .lab-panel {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
   min-width: 0;
 }
+
 .lab-readout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.8rem;
 }
+
 .lab-cell {
   padding: 0.5rem 0.95rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 1rem;
+  background: rgb(255 255 255 / 5%);
 }
+
 .lab-key {
-  font-size: 0.82rem;
   color: var(--c-text-dim);
+  font-size: 0.82rem;
 }
+
 .lab-val {
   display: flex;
-  align-items: baseline;
   gap: 0.1rem;
-  font-size: 1.42rem;
+  align-items: baseline;
+
   font-weight: 700;
+  font-size: 1.42rem;
   font-variant-numeric: tabular-nums;
   line-height: 1.3;
 }

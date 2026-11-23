@@ -36,7 +36,7 @@ const ampB = 62;
 /** B 的振动平面用 45° 斜投影表示：单位方向 (0.71, 0.71) */
 const dirB = { x: 0.71, y: 0.71 };
 
-const sample = () => {
+const sample = (): number[] => {
   const out: number[] = [];
   for (let x = x0; x <= x1; x += 8) out.push(x);
   return out;
@@ -59,7 +59,7 @@ const bPath = sample()
 /** 波峰 / 波谷所在的 x（一个波长两个极值） */
 const peaks = [130, 270, 410, 550];
 
-const bPoint = (x: number) => {
+const bPoint = (x: number): { x: number; y: number } => {
   const s = Math.sin(((x - x0) / lambda) * 2 * Math.PI);
   return { x: x + ampB * s * dirB.x, y: axisY + ampB * s * dirB.y };
 };

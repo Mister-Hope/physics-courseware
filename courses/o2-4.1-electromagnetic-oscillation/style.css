@@ -15,7 +15,9 @@
   display: flex;
   gap: 1.2rem;
   align-items: center;
+
   color: var(--c-text-dim);
+
   font-size: 0.9rem;
 }
 

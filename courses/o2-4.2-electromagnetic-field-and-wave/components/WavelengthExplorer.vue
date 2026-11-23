@@ -42,7 +42,7 @@ const lambdaText = computed(() => lambda.value.toFixed(1));
 /** 上方波形：固定的 30 m 长度内，波长 λ 决定能放下几个完整波形 */
 const curves = computed(() => [
   {
-    formula: (x: number) => Math.sin((2 * Math.PI * x) / lambda.value),
+    formula: (x: number): number => Math.sin((2 * Math.PI * x) / lambda.value),
     color: "var(--c-physics)",
     width: 3,
   },

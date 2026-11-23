@@ -41,13 +41,21 @@ const { step = 0 } = defineProps<{ step?: number }>();
 /** 某时刻的电场分布：波长 4 个单位，振幅 1 */
 const curves = [
   {
-    formula: (x: number) => Math.sin((Math.PI * x) / 2),
+    formula: (x: number): number => Math.sin((Math.PI * x) / 2),
     color: "var(--c-physics)",
     width: 3,
   },
 ];
 
 const labels = [
-  { x: 3, y: 1.3, tex: "\\lambda", anchor: "center", color: "var(--c-text)", size: 19, showAt: 1 },
+  {
+    x: 3,
+    y: 1.3,
+    tex: String.raw`\lambda`,
+    anchor: "center",
+    color: "var(--c-text)",
+    size: 19,
+    showAt: 1,
+  },
 ];
 </script>

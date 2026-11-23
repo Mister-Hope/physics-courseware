@@ -98,8 +98,8 @@ const userRatio = computed(() => Math.max(0, 100 - lossRatio.value));
 }
 
 .pld-meta {
-  font-size: 0.8rem;
   color: var(--c-text-dim);
+  font-size: 0.8rem;
   text-align: center;
 }
 
@@ -116,11 +116,9 @@ const userRatio = computed(() => Math.max(0, 100 - lossRatio.value));
 
 .pld-cell {
   padding: 0.4rem 0.8rem 0.32rem;
-
-  text-align: center;
-
-  background: rgb(255 255 255 / 4%);
   border-radius: 1rem;
+  background: rgb(255 255 255 / 4%);
+  text-align: center;
 }
 
 .pld-label {
@@ -129,36 +127,38 @@ const userRatio = computed(() => Math.max(0, 100 - lossRatio.value));
   align-items: baseline;
   justify-content: center;
 
-  font-size: 0.78rem;
   color: var(--c-text-dim);
+
+  font-size: 0.78rem;
 }
 
 .pld-value {
   min-height: 1.9rem;
 
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.4;
   color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 1.5rem;
   font-variant-numeric: tabular-nums;
+  line-height: 1.4;
 }
 
 .pld-unit {
   margin-left: 0.15rem;
-
-  font-size: 0.8rem;
-  font-weight: 400;
   color: var(--c-text-dim);
+  font-weight: 400;
+  font-size: 0.8rem;
 }
 
 .pld-bar {
   display: flex;
+
   overflow: hidden;
 
   height: 0.85rem;
+  border-radius: 999px;
 
   background: var(--c-surface);
-  border-radius: 999px;
 }
 
 .pld-bar-user {
@@ -174,9 +174,8 @@ const userRatio = computed(() => Math.max(0, 100 - lossRatio.value));
 .pld-legend {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-  font-size: 0.72rem;
   color: var(--c-text-dim);
+  font-size: 0.72rem;
 }
 
 .pld-legend span:last-child {
@@ -189,7 +188,6 @@ const userRatio = computed(() => Math.max(0, 100 - lossRatio.value));
   width: 0.55rem;
   height: 0.55rem;
   margin-right: 0.35rem;
-
   border-radius: 50%;
 }
 
