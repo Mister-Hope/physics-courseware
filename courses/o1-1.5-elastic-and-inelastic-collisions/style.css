@@ -44,7 +44,7 @@
 
 /* 第 7 页：图窄一点，算式栏宽一点 */
 .coll-grid-eq {
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
 }
 
 /* 第 13 页：质量比互动（图 + 滑块 + 两个读数） */
