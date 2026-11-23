@@ -41,5 +41,5 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ step?: number }>(), { step: 0 });
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>

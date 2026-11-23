@@ -27,5 +27,5 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ shift?: number }>(), { shift: 0 });
+const { shift = 0 } = defineProps<{ shift?: number }>();
 </script>

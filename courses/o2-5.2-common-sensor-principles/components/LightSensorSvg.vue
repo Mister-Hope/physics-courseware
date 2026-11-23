@@ -60,17 +60,18 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    /** 显示的光照箭头（无光照时关掉） */
-    showLight?: boolean;
-    /** 显示 1/2/3 结构标注（P3 用；P4 两侧对比不用） */
-    showBadges?: boolean;
-    /** 显示的载流子个数（0–16） */
-    carriers?: number;
-  }>(),
-  { showLight: true, showBadges: false, carriers: 0 },
-);
+const {
+  showLight = true,
+  showBadges = false,
+  carriers = 0,
+} = defineProps<{
+  /** 显示的光照箭头（无光照时关掉） */
+  showLight?: boolean;
+  /** 显示 1/2/3 结构标注（P3 用；P4 两侧对比不用） */
+  showBadges?: boolean;
+  /** 显示的载流子个数（0–16） */
+  carriers?: number;
+}>();
 
 const points: [number, number][] = [
   [118, 160],
@@ -91,5 +92,5 @@ const points: [number, number][] = [
   [286, 157],
 ];
 
-const visibleCarriers = computed(() => points.slice(0, Math.max(0, Math.min(16, props.carriers))));
+const visibleCarriers = computed(() => points.slice(0, Math.max(0, Math.min(16, carriers))));
 </script>

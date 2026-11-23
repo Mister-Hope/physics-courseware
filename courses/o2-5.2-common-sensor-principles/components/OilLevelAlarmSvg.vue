@@ -43,14 +43,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    /** 液面低（探头露出、灯亮） */
-    low?: boolean;
-  }>(),
-  { low: false },
-);
+const { low = false } = defineProps<{
+  /** 液面低（探头露出、灯亮） */
+  low?: boolean;
+}>();
 
-const surface = computed(() => (props.low ? 214 : 150));
-const lit = computed(() => props.low);
+const surface = computed(() => (low ? 214 : 150));
+const lit = computed(() => low);
 </script>

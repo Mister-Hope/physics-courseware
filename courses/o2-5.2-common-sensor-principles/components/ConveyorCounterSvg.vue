@@ -23,5 +23,5 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ blocked?: boolean }>(), { blocked: false });
+const { blocked = false } = defineProps<{ blocked?: boolean }>();
 </script>

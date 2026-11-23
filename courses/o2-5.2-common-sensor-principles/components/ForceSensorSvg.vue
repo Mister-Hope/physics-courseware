@@ -30,5 +30,5 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ bent?: boolean }>(), { bent: false });
+const { bent = false } = defineProps<{ bent?: boolean }>();
 </script>
