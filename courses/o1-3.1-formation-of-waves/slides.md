@@ -22,28 +22,71 @@ chapter-no: "3.1"
 chapter: "第三章 机械波"
 ---
 
-<!-- 封面装饰：占位图形，请按本课主题替换（坐标轴 / 标签规范见 AGENTS.md「四、技术约定与已知坑」） -->
-<svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
-  <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
-  <circle cx="118" cy="32" r="5" fill="#e2a846"/>
-  <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
-</svg>
+<CoverDecorationSvg />
 
 ---
-layout: base-flex
+title: 彩带上的波浪
+clicks: 1
 ---
 
-## 待补充：第 1 页内容
-
-<div class="card">
-
-本页是骨架占位。先把 content/思路.md 的授课思路整理成页序，再逐页替换这里的内容。
-
+<div class="page-grow">
+<div class="wv-quote">水波离开了它产生的地方，而那里的水并不离开，就像风在田野里掀起的麦浪。我们看到，麦浪滚滚地在田野里奔去，但是麦子却仍旧留在原来的地方。</div>
+<div class="wv-quote-src">——达·芬奇</div>
+<div class="ask-lead">艺术体操的彩带波浪向前传播时，彩带上的每个点也在向前运动吗？</div>
+<div class="info-hint" v-click="1">彩带上的波浪翻卷，是振动在彩带上传播的结果——振动的传播称为波动，简称波。</div>
 </div>
 
-<!--
-  新增页面：在下方用 --- 分隔，每页先抛问题、再 v-click 呈现答案。
-  公式写在 Markdown 段落里可用 $...$；HTML 块（card 内的 div）里必须改用 <Latex tex="..." />。
-  图标用 <mdi-xxx />，不要用 emoji。
--->
+---
+clicks: 2
+---
+
+# 绳波的产生与传播
+
+<div class="page-grow">
+<div class="ask">手握绳的一端向上抖一下，绳上会出现什么？</div>
+<div class="figure" style="max-width: 780px; margin-inline: auto;"><RopeWaveSvg :step="$clicks" /></div>
+<div class="info-hint" v-click="2">红标记只在平衡位置附近上下振动，并没有随波向前移动。</div>
+</div>
+
+---
+clicks: 4
+---
+
+# 波是怎样形成的
+
+<div class="page-grow">
+<div class="ask">绳端的振动，是怎样传到绳的另一端的？</div>
+<div class="figure" style="max-width: 800px; margin-inline: auto;"><WavePointsSvg :step="$clicks" /></div>
+<div class="stack-tight">
+<div v-click="1">绳端带动相邻的质点，相邻质点又带动更远的质点——后面的质点总比前面的质点迟一些开始振动。</div>
+<div class="tip-hint" v-click="4">各质点只在各自的平衡位置附近振动，振动这种形式却沿绳传了出去。</div>
+</div>
+</div>
+
+---
+clicks: 1
+---
+
+# 振动的传播
+
+<div class="page-grow">
+<DefinitionBox term="波（波动）" tone="blue">
+<div>振动的传播称为<span class="def-term">波动</span>，简称<span class="def-term">波</span>（wave）。</div>
+</DefinitionBox>
+<div class="info-hint" v-click="1">一组同学手挽手排成一行，从第一位开始依次下蹲、起立：凹凸相间的波沿着队伍传播，而每个同学的位置并没有移动。</div>
+</div>
+
+---
+clicks: 2
+---
+
+# 横波：波峰与波谷
+
+<div class="page-grow">
+<div class="ask">绳上的质点上下振动，波却向右传播——这两个方向是什么关系？</div>
+<div class="figure"><TransverseWaveSvg /></div>
+<div class="stack-tight">
+<div v-click="1">质点的振动方向与波的传播方向相互垂直，这样的波叫作<span class="wv-key">横波</span>。</div>
+<div v-click="2">横波中，凸起的最高处叫作<span class="wv-key">波峰</span>，凹下的最低处叫作<span class="wv-key">波谷</span>。</div>
+</div>
+</div>

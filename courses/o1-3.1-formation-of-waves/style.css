@@ -3,3 +3,27 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 第 2 页：达·芬奇引语 */
+.wv-quote {
+  max-width: 46rem;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--c-accent);
+  font-size: 1.24rem;
+  line-height: 1.75;
+  color: var(--c-text);
+}
+
+.wv-quote-src {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+  text-align: right;
+}
+
+/* 强调术语 */
+.wv-key {
+  color: var(--c-accent);
+  font-weight: 700;
+}
