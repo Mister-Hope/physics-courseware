@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{ step: number }>();
+const { step } = defineProps<{ step: number }>();
 
 const axisY = 128;
 const markerX = 300;
@@ -34,8 +34,8 @@ const pulseY = (x: number): number => axisY - 32 * Math.exp(-(((x - 210) * (x - 
 const trainY = (x: number): number => (x <= xFront ? axisY - amp * Math.sin(((x - 40) / lambda) * Math.PI * 2) : axisY);
 
 const ropeY = (x: number): number => {
-  if (props.step === 0) return axisY;
-  if (props.step === 1) return pulseY(x);
+  if (step === 0) return axisY;
+  if (step === 1) return pulseY(x);
   return trainY(x);
 };
 

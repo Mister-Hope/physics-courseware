@@ -35,42 +35,45 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    step: number;
-    count?: number;
-    startIndex?: number;
-    lambda?: number;
-    prefix?: string;
-  }>(),
-  { count: 9, startIndex: 0, lambda: 8, prefix: "" },
-);
+const {
+  step,
+  count = 9,
+  startIndex = 0,
+  lambda = 8,
+  prefix = "",
+} = defineProps<{
+  step: number;
+  count?: number;
+  startIndex?: number;
+  lambda?: number;
+  prefix?: string;
+}>();
 
 const frames = [0, 0.25, 0.5, 0.75, 1];
 const frameName = ["0", "T/4", "T/2", "3T/4", "T"];
 
 const axisY = 96;
 const amp = 52;
-const spacing = props.count > 10 ? 42 : 74;
+const spacing = count > 10 ? 42 : 74;
 const x0 = 56;
-const width = x0 + (props.count - 1) * spacing + 56;
+const width = x0 + (count - 1) * spacing + 56;
 
-const t = computed(() => frames[Math.min(props.step, frames.length - 1)]);
-const frameLabel = computed(() => `t = ${frameName[Math.min(props.step, frames.length - 1)]}`);
+const t = computed(() => frames[Math.min(step, frames.length - 1)]);
+const frameLabel = computed(() => `t = ${frameName[Math.min(step, frames.length - 1)]}`);
 
 /** 第 i 个质点相对波源的间隔数（以间距为单位） */
 const yAt = (i: number): number => {
-  const phase = 2 * Math.PI * (t.value - i / props.lambda);
+  const phase = 2 * Math.PI * (t.value - i / lambda);
   return phase < 0 ? axisY : axisY - amp * Math.sin(phase);
 };
 
 const pts = computed(() =>
-  Array.from({ length: props.count }, (_, i) => ({
+  Array.from({ length: count }, (_, i) => ({
     i,
     x: x0 + i * spacing,
     y: yAt(i),
-    started: t.value >= i / props.lambda,
-    label: `${props.prefix}${props.startIndex + i}`,
+    started: t.value >= i / lambda,
+    label: `${prefix}${startIndex + i}`,
   })),
 );
 
@@ -78,7 +81,7 @@ const curve = computed(() =>
   Array.from({ length: Math.round((width - x0 - 30) / 2) + 1 }, (_, k) => {
     const x = x0 + k * 2;
     const s = (x - x0) / spacing;
-    const phase = 2 * Math.PI * (t.value - s / props.lambda);
+    const phase = 2 * Math.PI * (t.value - s / lambda);
     const y = phase < 0 ? axisY : axisY - amp * Math.sin(phase);
     return `${x},${y.toFixed(2)}`;
   }).join(" "),

@@ -27,3 +27,87 @@
   color: var(--c-accent);
   font-weight: 700;
 }
+
+/* 第 9 页：横波与纵波对比表 */
+.wv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.06rem;
+}
+
+.wv-table th,
+.wv-table td {
+  padding: 0.62rem 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.wv-table thead th {
+  font-size: 1.16rem;
+  color: var(--c-accent);
+  font-weight: 700;
+  border-bottom-width: 2px;
+}
+
+.wv-table tbody td:first-child {
+  color: var(--c-text-dim);
+  white-space: nowrap;
+}
+
+/* 正文强调句：比一般正文大一档，用于「一句话结论」型的页面 */
+.wv-lead {
+  font-size: 1.12rem;
+  font-weight: 700;
+  line-height: 1.62;
+}
+
+/* 小结等编号列表的序号 */
+.wv-num {
+  display: inline-block;
+  margin-right: 0.6rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 波形图 vs 振动图像：左边固定宽度的说明栏 + 右边坐标图 */
+.wv-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.wv-compare-row {
+  display: grid;
+  grid-template-columns: 9.6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.wv-compare-cap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.wv-compare-name {
+  color: var(--c-accent);
+  font-size: 1.16rem;
+  font-weight: 700;
+}
+
+.wv-compare-note {
+  color: var(--c-text-dim);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+/* 先占位、点击后再出现答案表：占位保证点击时已有元素不被顶跑 */
+.wv-answer {
+  min-height: 11.5rem;
+}
+
+/* 对比表：行距收紧，四列内容能在画布内放下 */
+.wv-table-compact th,
+.wv-table-compact td {
+  padding: 0.42rem 0.75rem;
+}
