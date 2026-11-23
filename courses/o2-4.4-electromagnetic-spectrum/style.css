@@ -3,3 +3,115 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* ── 第 2 页：生活里的电磁波 ── */
+.em-intro {
+  gap: 2rem;
+}
+
+.em-devices {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+
+  padding: 1.15rem 0.4rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: color-mix(in srgb, var(--c-surface) 72%, transparent);
+}
+
+.em-device {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+
+  min-width: 0;
+  padding: 0.2rem 0.55rem;
+  text-align: center;
+}
+
+.em-device + .em-device {
+  border-left: 1px solid var(--c-border);
+}
+
+.em-device-icon {
+  color: var(--c-accent);
+}
+
+.em-device-name {
+  font-size: 1rem;
+  color: var(--c-text);
+}
+
+.em-device-band {
+  min-height: 1.45rem;
+  font-size: 0.92rem;
+  color: var(--c-physics-light);
+}
+
+.em-reserve {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.em-reserve-hint {
+  min-height: 3.2rem;
+}
+
+.em-reserve-bands {
+  min-height: 2.2rem;
+}
+
+/* ── 第 3 页：太阳只发出可见光吗 ── */
+.em-sun {
+  gap: 1.5rem;
+}
+
+.em-sun-fact {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+
+  padding: 1.15rem 1.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: color-mix(in srgb, var(--c-surface) 72%, transparent);
+}
+
+.em-sun-icon {
+  flex: 0 0 auto;
+  color: var(--c-accent);
+}
+
+.em-sun-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.em-sun-main {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.em-sun-sub {
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.em-sun-bands {
+  color: var(--c-text-dim);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+/* ── 第 4 页：电磁波谱 ── */
+.em-spectrum-page {
+  gap: 1.2rem;
+}
