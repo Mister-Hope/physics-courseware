@@ -3,3 +3,1056 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.85rem;
+  --stack-gap: 0.75rem;
+}
+
+/* 引课页：火星车巡视图 + 三个问题 */
+.intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.intro-figure {
+  min-width: 0;
+}
+
+.intro-qs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+.intro-q {
+  display: grid;
+  grid-template-columns: 1.9rem minmax(0, 1fr);
+  gap: 0.7rem;
+  align-items: start;
+
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.intro-q-no {
+  padding-top: 0.12rem;
+
+  color: var(--c-accent);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* 问题页：小盒子与提问 */
+.puzzle-stem {
+  color: var(--c-text-dim);
+
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+
+  min-height: 0;
+}
+
+.puzzle-figure,
+.puzzle-question {
+  min-width: 0;
+}
+
+/* 干簧管页：结构图 + 分步说明 */
+.reed-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+
+  min-height: 0;
+}
+
+.reed-figure {
+  min-width: 0;
+}
+
+.reed-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  min-width: 0;
+}
+
+.reed-fact {
+  position: relative;
+
+  padding-left: 1.1rem;
+
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.reed-fact::before {
+  content: "";
+
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+
+  background: var(--c-accent);
+}
+
+/* 生活实例页：三张卡片 + 点击揭示传感器 */
+.life-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: stretch;
+
+  min-width: 0;
+}
+
+.life-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+
+  padding: 1.1rem 0.95rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+
+  text-align: center;
+}
+
+.life-icon {
+  color: var(--c-accent);
+}
+
+.life-name {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.life-text {
+  color: var(--c-text-dim);
+
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.life-tag {
+  margin-top: 0.2rem;
+  padding: 0.22rem 0.75rem;
+  border: 1px solid var(--c-accent-border);
+  border-radius: 2rem;
+
+  color: var(--c-accent);
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* 信息链页：人与机器的对应 */
+.chain-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  min-width: 0;
+}
+
+.chain-row {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr) 1.4rem minmax(0, 1fr) 1.4rem minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.chain-label {
+  color: var(--c-text-dim);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.chain-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 4.2rem;
+  padding: 0.8rem 0.4rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+
+  background: var(--c-surface);
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.chain-node-human {
+  border-color: rgb(148 163 184 / 45%);
+}
+
+.chain-node-machine {
+  border-color: var(--c-accent-border);
+}
+
+.chain-arrow {
+  color: var(--c-text-dim);
+
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* 感官对应表 */
+.sense-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  min-width: 0;
+}
+
+.sense-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.7fr 1.5fr;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.sense-row-head {
+  padding: 0 0.9rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.sense-row:not(.sense-row-head) {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+
+  background: var(--c-surface);
+}
+
+.sense-human {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.sense-ico {
+  color: var(--c-text-dim);
+}
+
+.sense-signal {
+  color: var(--c-accent);
+
+  font-size: 0.95rem;
+}
+
+.sense-sensor {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  color: var(--c-accent);
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* 定义页：转换链 */
+.conv-chain {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+}
+
+.conv-box {
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+
+  background: var(--c-surface);
+
+  font-size: 0.95rem;
+}
+
+.conv-box-sensor {
+  border-color: var(--c-accent-border);
+
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.conv-box-out {
+  border-color: var(--c-accent-border);
+}
+
+.conv-arrow {
+  color: var(--c-accent);
+
+  font-size: 1.2rem;
+}
+
+/* 传感器的本领页 */
+.super-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  align-items: stretch;
+
+  min-width: 0;
+}
+
+.super-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+
+  padding: 1.3rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+
+  text-align: center;
+}
+
+.super-icon {
+  color: var(--c-accent);
+}
+
+.super-name {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.super-text {
+  color: var(--c-text-dim);
+
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+/* 定义问题页：整页只放一个问题 */
+.def-ask {
+  max-width: 46rem;
+  margin: 0 auto;
+
+  font-size: 1.45rem;
+  line-height: 1.6;
+}
+
+/* 组成页：敏感元件 + 转换元件 */
+.comp-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) 1.3rem minmax(0, 1.35fr) 1.3rem minmax(
+      0,
+      1.35fr
+    ) 1.3rem minmax(0, 0.9fr);
+  gap: 0.5rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.comp-node {
+  padding: 0.9rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+
+  background: var(--c-surface);
+
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  transition:
+    opacity 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.comp-node-in {
+  color: var(--c-text-dim);
+}
+
+.comp-node-out {
+  opacity: 0.35;
+}
+
+.comp-node-out.is-on {
+  border-color: var(--c-accent-border);
+
+  color: var(--c-accent);
+
+  opacity: 1;
+}
+
+.comp-arrow {
+  color: var(--c-text-dim);
+
+  font-size: 1.2rem;
+  text-align: center;
+  opacity: 0.25;
+  transition:
+    opacity 0.3s ease,
+    color 0.3s ease;
+}
+
+.comp-arrow.is-on {
+  color: var(--c-accent);
+
+  opacity: 1;
+}
+
+.comp-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 11rem;
+  padding: 1rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+
+  background: var(--c-surface);
+
+  text-align: center;
+  opacity: 0.4;
+  transition:
+    opacity 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.comp-box.is-on {
+  border-color: var(--c-accent-border);
+
+  background: var(--c-accent-soft);
+
+  opacity: 1;
+}
+
+.comp-icon {
+  margin-bottom: 0.45rem;
+}
+
+.comp-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.comp-fn {
+  margin-top: 0.35rem;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* 合一的元件页 */
+.merge-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  align-items: stretch;
+
+  min-width: 0;
+}
+
+.merge-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+
+  padding: 1.5rem 1.2rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+
+  text-align: center;
+}
+
+.merge-icon {
+  color: var(--c-accent);
+}
+
+.merge-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.merge-text {
+  color: var(--c-text-dim);
+
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* 转换电路页 */
+.weak-flow {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.weak-box {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.9rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+
+  background: var(--c-surface);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.weak-box-circuit {
+  border-color: var(--c-accent-border);
+
+  color: var(--c-accent);
+}
+
+.weak-box-out {
+  border-color: var(--c-accent-border);
+}
+
+.weak-sub {
+  color: var(--c-text-dim);
+
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+.weak-arrow {
+  color: var(--c-text-dim);
+
+  font-size: 1.2rem;
+}
+
+.use-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+  align-items: stretch;
+
+  min-width: 0;
+}
+
+.use-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+
+  padding: 1.1rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+
+  background: var(--c-surface);
+
+  text-align: center;
+}
+
+.use-icon {
+  color: var(--c-accent);
+}
+
+.use-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.use-text {
+  color: var(--c-text-dim);
+
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+/* 电容式话筒 */
+.mic-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 1.3rem;
+  align-items: center;
+  width: 100%;
+}
+
+.mic-figure {
+  min-width: 0;
+}
+
+.mic-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.mic-step {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: 0.55rem;
+  padding: 0.34rem 0.6rem;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  opacity: 0.45;
+  transition:
+    opacity 0.3s,
+    border-color 0.3s,
+    background 0.3s;
+}
+
+.mic-step.is-on {
+  opacity: 1;
+  border-color: var(--c-accent-border);
+  background: var(--c-accent-soft);
+}
+
+.mic-no {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.mic-step.is-on .mic-no {
+  background: var(--c-accent);
+  color: #0b1020;
+}
+
+.mic-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.mic-text {
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--c-text-dim);
+}
+
+/* 传感器的分类 */
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.class-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 11.5rem;
+  padding: 1rem 1rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+  background: var(--c-surface);
+}
+
+.class-icon {
+  color: var(--c-accent);
+}
+
+.class-phys .class-icon {
+  color: var(--c-velocity);
+}
+
+.class-chem .class-icon {
+  color: var(--c-accent);
+}
+
+.class-bio .class-icon {
+  color: #4ade80;
+}
+
+.class-name {
+  margin-top: 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.class-def {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+}
+
+.class-examples {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--c-line);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--c-text);
+}
+
+.class-label {
+  margin-right: 0.3rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+/* 分类小练习 */
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.quiz-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 9rem;
+  padding: 0.9rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+}
+
+.quiz-icon {
+  color: var(--c-accent);
+}
+
+.quiz-name {
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.quiz-cat {
+  margin-top: 0.25rem;
+  padding: 0.18rem 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.quiz-phys {
+  color: var(--c-velocity);
+}
+
+.quiz-chem {
+  color: var(--c-accent);
+}
+
+.quiz-bio {
+  color: #4ade80;
+}
+
+/* 分类方式与手机 */
+.sensor-modes {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.2rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.side-title {
+  margin-bottom: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.phone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.phone-item {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.32rem 0.65rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.65rem;
+  background: var(--c-surface);
+}
+
+.phone-item-icon {
+  color: var(--c-accent);
+}
+
+.phone-item-name {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.phone-item-qty {
+  font-size: 0.75rem;
+  color: var(--c-text-dim);
+}
+
+.mode-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.mode-block {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+  background: var(--c-surface);
+}
+
+.mode-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.mode-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem;
+  margin-top: 0.4rem;
+}
+
+.mode-tags span {
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  font-size: 0.73rem;
+  color: var(--c-text-dim);
+}
+
+/* 选择传感器小练习 */
+.ex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.ex-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 9.5rem;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+  background: var(--c-surface);
+}
+
+.ex-scene {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.ex-icon {
+  color: var(--c-accent);
+}
+
+.ex-answer {
+  justify-self: end;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--c-accent-border);
+  border-radius: 999px;
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* 安装传感器讨论 */
+.disc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.disc-card {
+  padding: 1rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+  text-align: center;
+}
+
+.disc-icon {
+  color: var(--c-accent);
+}
+
+.disc-name {
+  margin-top: 0.45rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.disc-text {
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+}
+
+/* 小结 */
+.sum-chain {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.sum-node {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.9rem;
+  background: var(--c-surface);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.sum-node-main {
+  border-color: var(--c-accent-border);
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+}
+
+.sum-arrow {
+  font-size: 1.3rem;
+  color: var(--c-text-dim);
+}
+
+.sum-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.sum-row {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: baseline;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+  background: var(--c-surface);
+}
+
+.sum-key {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.sum-row span:last-child {
+  font-size: 0.92rem;
+}
+
+/* 衔接 5.2 */
+.next-kicker {
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--c-accent);
+}
+
+.next-title {
+  margin-top: 0.35rem;
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.6rem;
+}
+
+.next-card {
+  padding: 1rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+  text-align: center;
+}
+
+.next-icon {
+  color: var(--c-accent);
+}
+
+.next-name {
+  margin-top: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
