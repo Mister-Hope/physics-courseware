@@ -14,7 +14,6 @@ fonts:
   sans: Nunito Sans
   mono: Fira Code
   provider: none
-# 页面外壳用共享 addon 的 base-flex 布局（flex 列；正文 .page-grow 靠它撑满）
 defaults:
   layout: base-flex
   transition: fade
@@ -22,28 +21,110 @@ chapter-no: "2.3"
 chapter: "第二章 机械振动"
 ---
 
-<!-- 封面装饰：占位图形，请按本课主题替换（坐标轴 / 标签规范见 AGENTS.md「四、技术约定与已知坑」） -->
-<svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
-  <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
-  <circle cx="118" cy="32" r="5" fill="#e2a846"/>
-  <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
-</svg>
+<CoverDecorationSvg />
 
 ---
 layout: base-flex
+title: 这些运动有什么共同点？
+clicks: 2
 ---
 
-## 待补充：第 1 页内容
-
-<div class="card">
-
-本页是骨架占位。先把 content/思路.md 的授课思路整理成页序，再逐页替换这里的内容。
-
+<div class="page-grow em-intro">
+  <div class="em-intro-row">
+    <div class="em-intro-item">
+      <mdi-seesaw class="icon-xl em-intro-icon" />
+      <div class="em-intro-label">跷跷板</div>
+    </div>
+    <div class="em-intro-item">
+      <mdi-lifebuoy class="icon-xl em-intro-icon" />
+      <div class="em-intro-label">水中的浮标</div>
+    </div>
+    <div class="em-intro-item">
+      <mdi-sine-wave class="icon-xl em-intro-icon" />
+      <div class="em-intro-label">弹簧振子</div>
+    </div>
+  </div>
+  <div class="ask em-intro-ask">这些运动有什么共同点？</div>
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="1">它们都在平衡位置附近往复运动，都受到一个指向平衡位置的力。</div>
+  </div>
+  <div class="em-reserve">
+    <div class="info-hint" v-click="2">这个力叫作回复力。</div>
+  </div>
 </div>
 
-<!--
-  新增页面：在下方用 --- 分隔，每页先抛问题、再 v-click 呈现答案。
-  公式写在 Markdown 段落里可用 $...$；HTML 块（card 内的 div）里必须改用 <Latex tex="..." />。
-  图标用 <mdi-xxx />，不要用 emoji。
--->
+---
+layout: base-flex
+title: 小球为什么总回到平衡位置？
+clicks: 2
+---
+
+<div class="page-grow em-definition">
+  <div class="em-def-grid">
+    <div class="em-def-copy">
+      <div class="ask">小球被拉离平衡位置后，为什么总回到 <Latex tex="O" />？</div>
+      <div class="em-def-slot" v-click="1">
+        <DefinitionBox term="回复力" tone="gold">使物体回到平衡位置的力。</DefinitionBox>
+      </div>
+    </div>
+    <div class="em-def-figure">
+      <SpringOscillatorSvg :show-force="$clicks >= 1" show-x />
+      <div class="em-reserve">
+        <div class="info-hint" v-click="2">回复力是按效果命名的力，不是一种新的性质力。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 弹簧振子的回复力
+clicks: 2
+---
+
+<div class="page-grow em-force-page">
+  <div class="ask">小球在 <Latex tex="P" /> 点或 <Latex tex="Q" /> 点时，回复力指向哪里？</div>
+  <div class="em-two-osc">
+    <div class="em-osc-cell">
+      <SpringOscillatorSvg side="right" :show-force="$clicks >= 1" show-x />
+      <div class="em-osc-cap"><Latex tex="P" /> 点：<Latex tex="F" /> 指向 <Latex tex="O" /></div>
+    </div>
+    <div class="em-osc-cell">
+      <SpringOscillatorSvg side="left" :show-force="$clicks >= 1" show-x />
+      <div class="em-osc-cap"><Latex tex="Q" /> 点：<Latex tex="F" /> 指向 <Latex tex="O" /></div>
+    </div>
+  </div>
+  <div class="em-force-result">
+    <div class="em-formula" v-click="2"><Latex tex="F=-kx" display /></div>
+    <div class="em-reserve em-force-hint">
+      <div class="info-hint" v-click="2">“<Latex tex="-" />”表示 <Latex tex="F" /> 与位移 <Latex tex="x" /> 的方向相反。</div>
+    </div>
+  </div>
+</div>
+
+---
+layout: base-flex
+title: 从受力到加速度
+clicks: 2
+---
+
+<div class="page-grow em-derive-page">
+  <div class="ask">已知 <Latex tex="F=-kx" />，小球的加速度怎样随位移变化？</div>
+  <div class="em-derive" v-click="1">
+    <div class="em-derive-step">
+      <div class="em-derive-label">由牛顿第二定律</div>
+      <Latex tex="a=\frac{F}{m}=-\frac{k}{m}x" display />
+    </div>
+    <div class="em-derive-step">
+      <div class="em-derive-label">令 <Latex tex="\omega=\sqrt{k/m}" /></div>
+      <Latex tex="\omega=\sqrt{\frac{k}{m}}" display />
+    </div>
+    <div class="em-derive-step em-derive-final">
+      <div class="em-derive-label">得</div>
+      <Latex tex="a=-\omega^2x" display />
+    </div>
+  </div>
+  <div class="em-reserve">
+    <div class="tip-hint" v-click="2">加速度与位移大小成正比、方向相反。物体所受合力具有这个特点，就做简谐运动。</div>
+  </div>
+</div>
