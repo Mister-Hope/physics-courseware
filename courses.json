@@ -556,8 +556,8 @@
           "slug": "o1-3.2-describing-waves",
           "title": "波的描述",
           "chapter": "§3.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "用图像描述简谐波，掌握波长、频率（周期）与波速的关系 v=λf，会由波形图判断传播方向与质点振动方向。",
+          "tags": ["波长", "波速", "波形图", "波的图像"]
         },
         {
           "slug": "o1-3.3-wave-reflection-refraction-diffraction",

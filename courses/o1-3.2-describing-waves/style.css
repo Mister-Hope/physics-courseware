@@ -15,6 +15,7 @@
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 1.6rem;
   align-items: center;
+
   min-width: 0;
 }
 
@@ -31,8 +32,9 @@
 .intro-ask {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.85rem;
+  justify-content: center;
+
   min-width: 0;
 }
 
@@ -47,6 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   min-width: 0;
 }
@@ -62,6 +65,7 @@
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 1.4rem;
   align-items: center;
+
   width: 100%;
   min-width: 0;
 }
@@ -70,7 +74,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
   min-width: 0;
+
   font-size: 0.92rem;
   line-height: 1.6;
 }
@@ -87,9 +93,9 @@
 }
 
 .wave-eq {
-  text-align: center;
-  font-size: 1.1rem;
   padding: 0.15rem 0;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 /* 点击后出现的提示：先占住高度，避免整页重排 */
@@ -97,6 +103,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+
   width: 100%;
   min-height: 3.6rem;
 }
@@ -106,6 +113,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.1rem;
+
   width: 100%;
   min-width: 0;
 }
@@ -116,41 +124,12 @@
 
 .wc-cap {
   margin-top: 0.15rem;
+
   color: var(--c-text-dim);
+
   font-size: 0.78rem;
   line-height: 1.4;
   text-align: center;
-}
-
-/* 波形图与振动图像对比表 */
-.compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.78rem;
-  line-height: 1.4;
-}
-
-.compare-table th,
-.compare-table td {
-  padding: 0.26rem 0.55rem;
-  border-bottom: 1px solid var(--c-line);
-  text-align: center;
-}
-
-.compare-table th {
-  color: var(--c-accent);
-  font-weight: 700;
-}
-
-.compare-table th:first-child,
-.compare-table td:first-child {
-  text-align: left;
-  color: var(--c-text-dim);
-  font-weight: 400;
-}
-
-.compare-table tr:last-child td {
-  border-bottom: none;
 }
 
 /* 介质中的声速表 */
@@ -180,9 +159,40 @@
   font-weight: 700;
 }
 
+/* 波形图与振动图像对比表 */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 0.26rem 0.55rem;
+  border-bottom: 1px solid var(--c-line);
+  text-align: center;
+}
+
+.compare-table th {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  color: var(--c-text-dim);
+  font-weight: 400;
+  text-align: left;
+}
+
 .speed-table td:last-child {
-  text-align: right;
   font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.compare-table tr:last-child td {
+  border-bottom: none;
 }
 
 .speed-table tr:last-child td {
@@ -194,6 +204,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+
   width: 100%;
   min-width: 0;
 }
@@ -203,13 +214,14 @@
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: 0.7rem;
   align-items: center;
+
   width: 100%;
 }
 
 .wr-medium {
   display: flex;
-  align-items: center;
   gap: 0.35rem;
+  align-items: center;
   min-width: 0;
 }
 
@@ -223,11 +235,15 @@
   padding: 0.2rem 0.6rem;
   border: 1px solid var(--c-line);
   border-radius: 0.5rem;
+
   background: transparent;
   color: var(--c-text-dim);
+
   font-size: 0.78rem;
   line-height: 1.35;
+
   cursor: pointer;
+
   transition:
     border-color 0.2s,
     color 0.2s,
@@ -253,11 +269,13 @@
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+
+  min-width: 0;
   padding: 0.28rem 0.55rem;
   border: 1px solid var(--c-line);
   border-radius: 0.55rem;
+
   background: var(--c-surface);
-  min-width: 0;
 }
 
 .wr-k {
@@ -266,8 +284,8 @@
 }
 
 .wr-v {
-  font-size: 0.8rem;
   font-weight: 700;
+  font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -283,13 +301,16 @@
 .decide-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.45rem;
+  align-items: center;
+
   min-height: 12rem;
   padding: 1rem 0.85rem;
   border: 1px solid var(--c-border);
   border-radius: 1.1rem;
+
   background: var(--c-surface);
+
   text-align: center;
 }
 
@@ -298,8 +319,8 @@
 }
 
 .decide-name {
-  font-size: 1.02rem;
   font-weight: 700;
+  font-size: 1.02rem;
 }
 
 .decide-text {
@@ -313,7 +334,9 @@
 .wave-step {
   padding: 0.1rem 0 0.1rem 0.75rem;
   border-left: 3px solid var(--c-accent);
+
   color: var(--c-text);
+
   font-size: 0.92rem;
   line-height: 1.6;
 }
@@ -330,6 +353,7 @@
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 1.3rem;
   align-items: center;
+
   width: 100%;
   min-width: 0;
 }
@@ -348,7 +372,9 @@
 .ex-stem {
   padding: 0.35rem 0 0.35rem 0.8rem;
   border-left: 3px solid var(--c-line);
+
   color: var(--c-text);
+
   font-size: 0.9rem;
   line-height: 1.65;
   text-wrap: pretty;
@@ -363,8 +389,9 @@
 
 .ex-step {
   display: flex;
-  align-items: flex-start;
   gap: 0.6rem;
+  align-items: flex-start;
+
   font-size: 0.86rem;
   line-height: 1.6;
 }
@@ -375,24 +402,29 @@
 }
 
 .ex-step-no {
-  flex: none;
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
+
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
+
   background: rgb(226 168 70 / 15%);
   color: var(--c-accent);
-  font-size: 0.78rem;
+
   font-weight: 700;
+  font-size: 0.78rem;
 }
 
 .ex-answer {
   padding: 0.4rem 0.75rem;
   border: 1px solid var(--c-border);
   border-radius: 0.6rem;
+
   background: var(--c-surface);
+
   font-size: 0.86rem;
   line-height: 1.55;
   text-wrap: pretty;
@@ -410,6 +442,7 @@
   gap: 0.9rem;
   align-items: center;
   justify-content: center;
+
   width: 100%;
 }
 
@@ -417,9 +450,11 @@
   padding: 0.9rem 1.1rem;
   border: 1px solid var(--c-border);
   border-radius: 0.9rem;
+
   background: var(--c-surface);
-  font-size: 1.05rem;
+
   font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .sum-node-main {
@@ -446,16 +481,18 @@
   grid-template-columns: 5rem minmax(0, 1fr);
   gap: 0.8rem;
   align-items: baseline;
+
   padding: 0.65rem 0.9rem;
   border: 1px solid var(--c-border);
   border-radius: 0.8rem;
+
   background: var(--c-surface);
 }
 
 .sum-key {
   color: var(--c-accent);
-  font-size: 0.9rem;
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .sum-row span:last-child {
@@ -465,16 +502,17 @@
 /* ── 衔接 3.3 ── */
 .next-kicker {
   color: var(--c-accent);
-  font-size: 1.1rem;
+
   font-weight: 700;
+  font-size: 1.1rem;
   letter-spacing: 0.08em;
   text-align: center;
 }
 
 .next-title {
   margin-top: 0.35rem;
-  font-size: 2rem;
   font-weight: 800;
+  font-size: 2rem;
   text-align: center;
 }
 
@@ -482,6 +520,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+
   width: 100%;
   margin-top: 0.6rem;
 }
@@ -490,7 +529,9 @@
   padding: 1rem 0.8rem;
   border: 1px solid var(--c-border);
   border-radius: 1rem;
+
   background: var(--c-surface);
+
   text-align: center;
 }
 
@@ -500,7 +541,7 @@
 
 .next-name {
   margin-top: 0.5rem;
-  font-size: 0.92rem;
   font-weight: 700;
+  font-size: 0.92rem;
   line-height: 1.4;
 }
