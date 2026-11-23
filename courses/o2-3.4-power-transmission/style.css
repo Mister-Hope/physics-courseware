@@ -3,3 +3,232 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* ── 第 2 页：西部发电、东部用电 ── */
+.p2 {
+  gap: 2.1rem;
+}
+
+.p2-ask {
+  max-width: 46rem;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.p2-route {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.p2-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+  white-space: nowrap;
+}
+
+.p2-end svg {
+  color: var(--c-accent);
+}
+
+.p2-wire {
+  position: relative;
+  flex: 1;
+
+  height: 0;
+  border-top: 2px dashed var(--c-accent);
+  opacity: 0.65;
+}
+
+.p2-wire span {
+  position: absolute;
+  top: -1.6rem;
+  left: 50%;
+
+  font-size: 0.76rem;
+  color: var(--c-text-mute);
+  white-space: nowrap;
+
+  transform: translateX(-50%);
+}
+
+/* ── 第 3 页：三个基本要求 ── */
+.p3-reqs {
+  align-items: start;
+}
+
+.p3-req {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+
+  padding: 0.7rem 1rem;
+  text-align: center;
+}
+
+.p3-req + .p3-req {
+  border-left: 1px solid var(--c-border);
+}
+
+.p3-icon {
+  color: var(--c-accent);
+}
+
+.p3-word {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--c-accent);
+  letter-spacing: 0.12em;
+}
+
+.p3-note {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+
+/* ── 第 4 页：损耗来源 ── */
+.p4 {
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+}
+
+.p4-fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.p4-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.p4-formula {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.p4-tag {
+  font-size: 0.78rem;
+  color: var(--c-text-mute);
+  letter-spacing: 0.06em;
+}
+
+.p4-math {
+  font-size: 1.35rem;
+  color: var(--c-text);
+}
+
+/* ── 第 5 页：两条途径比较 ── */
+.p5 {
+  gap: 1.5rem;
+}
+
+.p5-grid {
+  align-items: stretch;
+}
+
+.p5-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  padding: 0.9rem 0;
+  text-align: center;
+}
+
+.p5-head {
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+}
+
+.p5-eq {
+  font-size: 1.3rem;
+}
+
+/* ── 第 6 页：途径一 ── */
+.p6 {
+  gap: 1.25rem;
+}
+
+.p6-formula {
+  font-size: 1.35rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.p6-formula .katex-display {
+  margin: 0;
+}
+
+.p6 .mini-title {
+  margin-bottom: 0.2rem;
+}
+
+.p6-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-top: 0.55rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.p6-item svg {
+  flex: none;
+  color: var(--c-physics);
+}
+
+.p6 .mini-note {
+  margin-top: 0.8rem;
+}
+
+/* ── 第 7 页：途径二 ── */
+.p7 {
+  gap: 1.3rem;
+}
+
+.p7-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  font-size: 1.18rem;
+}
+
+.p7-row {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+
+  min-height: 3.6rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.p7-row:last-child {
+  border-bottom: none;
+}
+
+.p7-tag {
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: var(--c-text-dim);
+}
