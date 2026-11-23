@@ -3,3 +3,25 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+.dp-lead {
+  font-size: 1.16rem;
+  line-height: 1.65;
+}
+
+.dp-key {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.dp-fig-crowd {
+  max-width: 840px;
+}
+
+.dp-fig-wave {
+  max-width: 820px;
+}
+
+.dp-fig-move {
+  max-width: 720px;
+}

@@ -22,28 +22,74 @@ chapter-no: "3.5"
 chapter: "第三章 机械波"
 ---
 
-<!-- 封面装饰：占位图形，请按本课主题替换（坐标轴 / 标签规范见 AGENTS.md「四、技术约定与已知坑」） -->
-<svg viewBox="0 0 200 140" width="300" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 18 112 C 62 112 74 32 118 32 C 152 32 166 78 186 78" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.7"/>
-  <line x1="18" y1="112" x2="186" y2="112" stroke="currentColor" stroke-width="1.4" stroke-dasharray="5 5" opacity="0.4"/>
-  <circle cx="118" cy="32" r="5" fill="#e2a846"/>
-  <circle cx="186" cy="78" r="5" fill="#60a5fa"/>
-</svg>
+<!-- 封面装饰：波源向右运动，前方波前挤密、后方拉疏 -->
+<CoverDecorationSvg />
 
 ---
-layout: base-flex
+title: 急救车的笛声为什么变了？
+clicks: 2
+clickAnimation: none
 ---
 
-## 待补充：第 1 页内容
-
-<div class="card">
-
-本页是骨架占位。先把 content/思路.md 的授课思路整理成页序，再逐页替换这里的内容。
-
+<div class="page-grow">
+<div class="ask-lead">急救车闪着灯疾驰而过：<br>驶近时笛声尖而高，驶过身边之后，音调一下子变低。</div>
+<div class="ask" v-click="1">同一个声源发出的声音，音调为什么会变？</div>
+<div class="info-hint" v-click="2">音调由声音的频率决定。听到的音调变了，说明<strong>接收到的频率</strong>变了——而声源振动的频率并没有变。</div>
 </div>
 
-<!--
-  新增页面：在下方用 --- 分隔，每页先抛问题、再 v-click 呈现答案。
-  公式写在 Markdown 段落里可用 $...$；HTML 块（card 内的 div）里必须改用 <Latex tex="..." />。
-  图标用 <mdi-xxx />，不要用 emoji。
--->
+---
+title: 多普勒效应
+clicks: 1
+clickAnimation: none
+---
+
+# 多普勒效应
+
+<div class="page-grow">
+<div class="dp-lead">1842 年，奥地利物理学家多普勒带着女儿在铁道旁散步，注意到火车驶近时汽笛声尖、驶过之后变低沉。</div>
+<DefinitionBox term="多普勒效应" tone="gold" v-click="1">
+<div>波源与观察者相互靠近或者相互远离时，观察者接收到的<strong>频率</strong>会发生变化，这种现象叫作多普勒效应。</div>
+</DefinitionBox>
+</div>
+
+---
+title: 模拟实验：数一数“频率”
+clicks: 3
+clickAnimation: none
+---
+
+# 模拟实验：数一数“频率”
+
+<div class="page-grow">
+<div class="ask">一队人沿路行走，每分钟有 30 人从你身边通过。你站着不动、逆着队伍走、顺着队伍走，每分钟与你相遇的人数一样吗？</div>
+<div class="figure dp-fig-crowd"><CrowdWalkSvg :step="$clicks" /></div>
+<div class="tip-hint" v-click="3">逆着队伍走，相遇的人变多，“过人频率”升高；顺着走则变少、频率降低。</div>
+</div>
+
+---
+title: 接收频率为什么会变？
+clicks: 1
+clickAnimation: none
+---
+
+# 接收频率为什么会变？
+
+<div class="page-grow">
+<div class="ask">把声波看成“波峰”一个接一个传来：1 s 内通过观察者的波峰数，就是接收到的频率。</div>
+<div class="figure dp-fig-wave"><WavefrontCountSvg /></div>
+<div class="tip-hint" v-click="1">靠近时 1 s 内通过的波峰变多，频率升高；远离时变少，频率降低。</div>
+</div>
+
+---
+title: 向前运动的波源
+clicks: 1
+clickAnimation: none
+---
+
+# 向前运动的波源
+
+<div class="page-grow">
+<div class="ask">波源向前运动时，波峰在前方、后方一样密吗？</div>
+<div class="figure dp-fig-move"><MovingSourceSvg :step="$clicks" /></div>
+<div class="tip-hint" v-click="1">波源每个周期向前走一段，后发出的波峰离前面的更近：前方波长变短，后方变长。</div>
+</div>
