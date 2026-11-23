@@ -3,3 +3,30 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 操作步骤行：一页里 2–3 条，点击逐条出现 */
+.step-line {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+/* q–t / i–t 曲线图例：颜色与 CoordAxes 里的曲线一致 */
+.curve-legend {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.legend-swatch {
+  width: 1.5rem;
+  height: 3px;
+  border-radius: 2px;
+}
