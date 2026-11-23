@@ -591,8 +591,8 @@
           "slug": "o1-4.2-total-internal-reflection",
           "title": "全反射",
           "chapter": "§4.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解全反射与临界角 sin C=1/n，分析光密到光疏界面的全反射条件，认识全反射棱镜与光导纤维的应用。",
+          "tags": ["全反射", "临界角", "光导纤维", "全反射棱镜"]
         },
         {
           "slug": "o1-4.3-light-interference",
