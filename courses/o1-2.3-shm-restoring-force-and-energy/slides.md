@@ -250,3 +250,24 @@ clicks: 4
     <InclineSpringSvg :show-forces="$clicks >= 1" :show-displacement="$clicks >= 2" />
   </div>
 </div>
+
+---
+layout: base-flex
+title: 平衡位置在哪里？
+clicks: 4
+---
+
+<div class="page-grow em-ab-page">
+  <div class="em-incline-left">
+    <div class="em-exercise-stem">一质点做简谐运动，经过 <Latex tex="A" /> 点时<span class="em-nowrap">加速度大小为</span> <Latex tex="2\,\text{m/s}^2" />，方向指向 <Latex tex="B" />；经过 <Latex tex="B" /> 点时<span class="em-nowrap">加速度大小为</span> <Latex tex="3\,\text{m/s}^2" />，方向指向 <Latex tex="A" />。<Latex tex="A" />、<Latex tex="B" /> <span class="em-nowrap">相距</span> <Latex tex="10\,\text{cm}" />。求平衡位置 <Latex tex="O" /> 的位置。</div>
+    <div class="em-proof">
+      <div class="em-proof-step" v-click="1"><span class="em-proof-no">1</span><div>简谐运动的加速度总指向平衡位置。<Latex tex="A" /> 点加速度指向 <Latex tex="B" />，<Latex tex="B" /> 点加速度指向 <Latex tex="A" />，所以 <Latex tex="O" /> 在 <Latex tex="A" />、<Latex tex="B" /> 之间。</div></div>
+      <div class="em-proof-step" v-click="2"><span class="em-proof-no">2</span><div><div>由 <Latex tex="a=-\omega^2x" /> 知，加速度大小与到 <Latex tex="O" /> 的距离<span class="em-nowrap">成正比</span>。</div><div>所以 <Latex tex="\frac{a_A}{a_B}=\frac{x_A}{x_B}=\frac{2}{3}" />。</div></div></div>
+      <div class="em-proof-step" v-click="3"><span class="em-proof-no">3</span><div>又 <Latex tex="x_A+x_B=AB=10\,\text{cm}" />，解得 <Latex tex="x_A=4\,\text{cm}" />，<Latex tex="x_B=6\,\text{cm}" />。</div></div>
+      <div class="em-proof-step" v-click="4"><span class="em-proof-no">4</span><div>所以 <Latex tex="O" /> 距 <Latex tex="A" /> <Latex tex="4\,\text{cm}" />、距 <Latex tex="B" /> <Latex tex="6\,\text{cm}" />。</div></div>
+    </div>
+  </div>
+  <div class="em-ab-figure">
+    <AbAccelerationSvg :show-o="$clicks >= 3" />
+  </div>
+</div>
