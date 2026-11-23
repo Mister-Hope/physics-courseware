@@ -535,8 +535,8 @@
           "slug": "o1-2.5-experiment-pendulum-g",
           "title": "实验：用单摆测量重力加速度",
           "chapter": "§2.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "用单摆测量当地重力加速度：摆长与周期的测量、多次测量取平均、图像法处理数据（T²-l 图求 g）与误差来源分析。",
+          "tags": ["实验", "单摆", "重力加速度", "图像法"]
         },
         {
           "slug": "o1-2.6-forced-vibration-and-resonance",
