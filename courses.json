@@ -605,8 +605,8 @@
           "slug": "o1-4.4-double-slit-experiment",
           "title": "实验：用双缝干涉测量光的波长",
           "chapter": "§4.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "用双缝干涉测量光的波长：装置调节、条纹间距测量、Δx=λl/d 计算波长与误差分析、不同色光条纹对比。",
+          "tags": ["实验", "双缝干涉", "波长测量", "条纹间距"]
         },
         {
           "slug": "o1-4.5-light-diffraction",

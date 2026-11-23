@@ -49,14 +49,15 @@
   display: flex;
   gap: 0.8rem;
   align-items: baseline;
+
   font-size: 1.06rem;
   line-height: 1.55;
 }
 
 .ds-step-no {
   min-width: 1.6rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
 }
 
 .ds-compare {
@@ -70,13 +71,14 @@
   grid-template-columns: 9.5rem minmax(0, 1fr) 5.5rem;
   gap: 1rem;
   align-items: baseline;
+
   font-size: 1.06rem;
   line-height: 1.5;
 }
 
 .ds-compare-tag {
-  font-weight: 700;
   color: var(--c-physics);
+  font-weight: 700;
 }
 
 .ds-table {
@@ -88,8 +90,10 @@
 .ds-table th {
   padding: 0.5rem 0.7rem;
   border-bottom: 1px solid var(--c-border);
-  font-weight: 700;
+
   color: var(--c-accent);
+
+  font-weight: 700;
   text-align: left;
   white-space: nowrap;
 }
@@ -100,8 +104,8 @@
 }
 
 .ds-table .num {
-  text-align: right;
   font-variant-numeric: tabular-nums;
+  text-align: right;
   white-space: nowrap;
 }
 
@@ -126,18 +130,19 @@
   grid-template-columns: 2rem minmax(0, 1fr) 10rem;
   gap: 1rem;
   align-items: center;
+
   width: 100%;
   max-width: 560px;
 }
 
 .ds-explorer-label {
-  font-size: 1.2rem;
   color: var(--c-accent);
+  font-size: 1.2rem;
 }
 
 .ds-explorer-value {
-  font-size: 1rem;
   color: var(--c-text-dim);
+  font-size: 1rem;
   white-space: nowrap;
 }
 
@@ -156,12 +161,12 @@
 }
 
 .ds-read-label {
-  font-size: 1rem;
   color: var(--c-text-dim);
+  font-size: 1rem;
 }
 
 .ds-read-value {
-  font-size: 1.1rem;
   color: var(--c-accent);
   font-weight: 700;
+  font-size: 1.1rem;
 }
