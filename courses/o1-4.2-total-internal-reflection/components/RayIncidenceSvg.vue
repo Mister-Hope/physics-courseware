@@ -1,62 +1,63 @@
 <!-- 光密介质射向光疏介质：可调入射角的折射图（例题/练习复用） -->
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    angle?: number
-    n?: number
-    showCritical?: boolean
-  }>(),
-  { angle: 40, n: 1.5, showCritical: false },
-)
+const {
+  angle = 40,
+  n = 1.5,
+  showCritical = false,
+} = defineProps<{
+  angle?: number;
+  n?: number;
+  showCritical?: boolean;
+}>();
 
-const rad = (d: number) => (d * Math.PI) / 180
-const deg = (r: number) => (r * 180) / Math.PI
-const L = 150
-const origin = { x: 250, y: 205 }
+const rad = (d: number): number => (d * Math.PI) / 180;
+const deg = (r: number): number => (r * 180) / Math.PI;
+const L = 150;
+const origin = { x: 250, y: 205 };
 
 const theta2 = computed(() => {
-  const s = props.n * Math.sin(rad(props.angle))
-  return s <= 1 ? deg(Math.asin(s)) : null
-})
-const critical = computed(() => deg(Math.asin(1 / props.n)))
+  const s = n * Math.sin(rad(angle));
+  return s <= 1 ? deg(Math.asin(s)) : null;
+});
+const critical = computed(() => deg(Math.asin(1 / n)));
 const incStart = computed(() => ({
-  x: origin.x - L * Math.sin(rad(props.angle)),
-  y: origin.y + L * Math.cos(rad(props.angle)),
-}))
+  x: origin.x - L * Math.sin(rad(angle)),
+  y: origin.y + L * Math.cos(rad(angle)),
+}));
 const refEnd = computed(() => ({
-  x: origin.x + L * Math.sin(rad(props.angle)),
-  y: origin.y + L * Math.cos(rad(props.angle)),
-}))
+  x: origin.x + L * Math.sin(rad(angle)),
+  y: origin.y + L * Math.cos(rad(angle)),
+}));
 const refrEnd = computed(() =>
-  theta2.value === null
+  theta2.value == null
     ? null
     : {
         x: origin.x + L * Math.sin(rad(theta2.value)),
         y: origin.y - L * Math.cos(rad(theta2.value)),
       },
-)
+);
 const critEnd = computed(() => ({
   x: origin.x + L * Math.sin(rad(critical.value)),
   y: origin.y - L * Math.cos(rad(critical.value)),
-}))
+}));
 const label1 = computed(() => {
-  const phi = rad(90 + props.angle / 2)
-  return { x: origin.x + 54 * Math.cos(phi), y: origin.y + 54 * Math.sin(phi) }
-})
+  const phi = rad(90 + angle / 2);
+  return { x: origin.x + 54 * Math.cos(phi), y: origin.y + 54 * Math.sin(phi) };
+});
 const label2 = computed(() => {
-  const phi = rad(-90 + (theta2.value ?? 60) / 2)
-  return { x: origin.x + 54 * Math.cos(phi), y: origin.y + 54 * Math.sin(phi) }
-})
+  const phi = rad(-90 + (theta2.value ?? 60) / 2);
+  return { x: origin.x + 54 * Math.cos(phi), y: origin.y + 54 * Math.sin(phi) };
+});
 const arc1 = computed(() => {
-  const a = rad(props.angle)
-  return `M ${origin.x} ${origin.y + 44} A 44 44 0 0 1 ${origin.x - 44 * Math.sin(a)} ${origin.y + 44 * Math.cos(a)}`
-})
+  const a = rad(angle);
+  return `M ${origin.x} ${origin.y + 44} A 44 44 0 0 1 ${origin.x - 44 * Math.sin(a)} ${origin.y + 44 * Math.cos(a)}`;
+});
 const arc2 = computed(() => {
-  const t = rad(theta2.value ?? 0)
-  return `M ${origin.x} ${origin.y - 44} A 44 44 0 0 1 ${origin.x + 44 * Math.sin(t)} ${origin.y - 44 * Math.cos(t)}`
-})
+  const t = rad(theta2.value ?? 0);
+  return `M ${origin.x} ${origin.y - 44} A 44 44 0 0 1 ${origin.x + 44 * Math.sin(t)} ${origin.y - 44 * Math.cos(t)}`;
+});
 </script>
 
 <template>
@@ -68,16 +69,7 @@ const arc2 = computed(() => {
     <CourseArrow :from="incStart" :to="origin" stroke="#60a5fa" :stroke-width="2.2" :head-size="9" />
     <CourseArrow :from="origin" :to="refEnd" stroke="#93c5fd" :stroke-width="2" :head-size="8" />
     <CourseArrow v-if="refrEnd" :from="origin" :to="refrEnd" stroke="#e2a846" :stroke-width="2.2" :head-size="9" />
-    <line
-      v-if="showCritical"
-      :x1="origin.x"
-      :y1="origin.y"
-      :x2="critEnd.x"
-      :y2="critEnd.y"
-      stroke="#f87171"
-      stroke-width="1.4"
-      stroke-dasharray="6 5"
-    />
+    <line v-if="showCritical" :x1="origin.x" :y1="origin.y" :x2="critEnd.x" :y2="critEnd.y" stroke="#f87171" stroke-width="1.4" stroke-dasharray="6 5" />
     <path :d="arc1" fill="none" stroke="#60a5fa" stroke-width="1.3" opacity=".8" />
     <path :d="arc2" fill="none" stroke="#e2a846" stroke-width="1.3" opacity=".8" />
     <text :x="label1.x" :y="label1.y" fill="#60a5fa" font-family="KaTeX_Math" font-style="italic" font-size="18" text-anchor="middle">

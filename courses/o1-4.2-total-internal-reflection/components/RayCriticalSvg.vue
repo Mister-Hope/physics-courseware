@@ -1,6 +1,6 @@
 <!-- 全反射：入射角小于、等于、大于临界角三种情形 -->
 <script setup lang="ts">
-withDefaults(defineProps<{ step?: number }>(), { step: 0 })
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>

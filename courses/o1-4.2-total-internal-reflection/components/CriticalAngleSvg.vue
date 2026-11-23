@@ -1,6 +1,6 @@
 <!-- 临界角推导：利用光路可逆，光从空气接近 90° 射入介质，折射角就是 C -->
 <script setup lang="ts">
-withDefaults(defineProps<{ step?: number }>(), { step: 0 })
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>
 
 <template>
@@ -21,7 +21,7 @@ withDefaults(defineProps<{ step?: number }>(), { step: 0 })
 
     <!-- 光路可逆 -->
     <g :style="{ visibility: step >= 1 ? 'visible' : 'hidden' }">
-      <text x="295" y="124" fill="#e2a846" font-size="15" text-anchor="middle">光路可逆</text>
+      <text x="300" y="10" fill="#e2a846" font-size="12" text-anchor="middle">光路可逆</text>
       <CourseArrow :from="{ x: 292, y: 138 }" :to="{ x: 316, y: 138 }" stroke="#e2a846" :stroke-width="1.6" :head-size="7" />
     </g>
 

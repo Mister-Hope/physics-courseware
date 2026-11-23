@@ -11,11 +11,15 @@
     <path d="M 140 84 A 44 44 0 0 0 119 111" fill="none" stroke="#60a5fa" stroke-width="1.4" />
     <text x="96" y="96" fill="#60a5fa" font-family="KaTeX_Math" font-style="italic" font-size="18">θ<tspan baseline-shift="sub" font-size="12">1</tspan></text>
     <path d="M 140 172 A 44 44 0 0 0 157 163" fill="none" stroke="#e2a846" stroke-width="1.4" />
-    <text x="156" y="194" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="18">θ<tspan baseline-shift="sub" font-size="12">2</tspan></text>
+    <text x="156" y="194" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="18">
+      θ<tspan baseline-shift="sub" font-size="12">2</tspan>
+    </text>
     <text x="140" y="34" fill="#cbd5e1" font-size="16" text-anchor="middle">光疏 → 光密</text>
     <text x="236" y="72" fill="#94a3b8" font-size="16">空气</text>
     <text x="236" y="220" fill="#93c5fd" font-size="16">水</text>
-    <text x="24" y="252" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="17">n<tspan baseline-shift="sub" font-size="11">1</tspan> &lt; n<tspan baseline-shift="sub" font-size="11">2</tspan></text>
+    <text x="24" y="252" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="17">
+      n<tspan baseline-shift="sub" font-size="11">1</tspan> &lt; n<tspan baseline-shift="sub" font-size="11">2</tspan>
+    </text>
 
     <!-- 右：水 → 空气 -->
     <rect x="292" y="16" width="256" height="112" fill="#0f2a4a" stroke="#1e3a5f" stroke-width="1.2" />
@@ -27,10 +31,14 @@
     <path d="M 420 84 A 44 44 0 0 0 399 111" fill="none" stroke="#60a5fa" stroke-width="1.4" />
     <text x="376" y="96" fill="#60a5fa" font-family="KaTeX_Math" font-style="italic" font-size="18">θ<tspan baseline-shift="sub" font-size="12">1</tspan></text>
     <path d="M 420 172 A 44 44 0 0 0 449 155" fill="none" stroke="#e2a846" stroke-width="1.4" />
-    <text x="444" y="192" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="18">θ<tspan baseline-shift="sub" font-size="12">2</tspan></text>
+    <text x="444" y="192" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="18">
+      θ<tspan baseline-shift="sub" font-size="12">2</tspan>
+    </text>
     <text x="420" y="34" fill="#cbd5e1" font-size="16" text-anchor="middle">光密 → 光疏</text>
     <text x="516" y="72" fill="#93c5fd" font-size="16">水</text>
     <text x="516" y="220" fill="#94a3b8" font-size="16">空气</text>
-    <text x="304" y="252" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="17">n<tspan baseline-shift="sub" font-size="11">1</tspan> &gt; n<tspan baseline-shift="sub" font-size="11">2</tspan></text>
+    <text x="304" y="252" fill="#e2a846" font-family="KaTeX_Math" font-style="italic" font-size="17">
+      n<tspan baseline-shift="sub" font-size="11">1</tspan> &gt; n<tspan baseline-shift="sub" font-size="11">2</tspan>
+    </text>
   </svg>
 </template>
