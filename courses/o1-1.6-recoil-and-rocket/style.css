@@ -259,3 +259,283 @@
   font-size: 0.86rem;
   line-height: 1.5;
 }
+
+/* ── 第 9 页：火箭为什么能在太空飞行 ── */
+.pt9 {
+  gap: 0.4rem;
+}
+
+.p9-ask {
+  text-align: center;
+}
+
+.p9-grid {
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.p9-fig {
+  display: flex;
+  justify-content: center;
+}
+
+.p9-fig svg {
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+}
+
+.p9-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.p9-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.p9-point {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.p9-icon {
+  flex: 0 0 auto;
+  margin-top: 0.12rem;
+  color: var(--c-physics);
+  font-size: 1.25rem;
+}
+
+/* ── 第 10 页：太空中的抛体 ── */
+.pt10 {
+  gap: 0.45rem;
+}
+
+.p10-ask {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.p10-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.p10-q {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 11rem;
+  gap: 0.7rem;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.35rem 0.2rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.p10-q:last-child {
+  border-bottom: none;
+}
+
+.p10-no {
+  display: grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: #1a1207;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.p10-text {
+  font-size: 0.98rem;
+}
+
+.p10-ans {
+  color: var(--c-accent);
+  font-size: 1.02rem;
+  text-align: right;
+}
+
+.p10-ans .katex-display {
+  margin: 0;
+}
+
+/* ── 第 11 页：火箭一次喷气 ── */
+.pt11 {
+  gap: 0.45rem;
+}
+
+.p11-ask {
+  text-align: center;
+}
+
+.p11-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.p11-step {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.35rem 0.65rem;
+  border-left: 2px solid var(--c-accent);
+  border-radius: 0.5rem;
+  background: var(--c-surface);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.p11-no {
+  min-width: 1rem;
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.p11-eq {
+  text-align: center;
+}
+
+.p11-eq .katex-display {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* ── 第 12 页：喷气速度与质量比 ── */
+.pt12 {
+  gap: 0.45rem;
+}
+
+.p12-ask {
+  text-align: center;
+}
+
+.p12-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.p12-card {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+  background: var(--c-surface);
+}
+
+.p12-k {
+  color: var(--c-text-dim);
+  font-size: 0.78rem;
+}
+
+.p12-v {
+  margin-top: 0.15rem;
+  color: var(--c-accent);
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+
+.p12-n {
+  margin-top: 0.1rem;
+  color: var(--c-text-mute);
+  font-size: 0.75rem;
+}
+
+.p12-ways {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.p12-way {
+  padding: 0.35rem 0.7rem;
+  border-left: 2px solid var(--c-physics);
+  color: var(--c-text);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+/* ── 第 13 页：多级火箭 ── */
+.pt13 {
+  gap: 0.5rem;
+}
+
+.p13-ask {
+  text-align: center;
+}
+
+.p13-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p13-step {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--c-border);
+  border-radius: 0.7rem;
+  background: var(--c-surface);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.p13-no {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.p13-note {
+  text-align: center;
+}
+
+/* ── 第 14–17 页：例题与练习解析 ── */
+.p14-analysis,
+.p15-analysis,
+.p16-analysis,
+.p17-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p14-line,
+.p15-line,
+.p16-line,
+.p17-line {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.p14-line .katex,
+.p15-line .katex,
+.p16-line .katex,
+.p17-line .katex {
+  font-size: 0.98em;
+}
+
+/* ── 第 18 页：课堂小结 ── */
+.pt18 {
+  gap: 0.5rem;
+}
+
+.p18-list {
+  width: 100%;
+}
+
+.p18-item {
+  font-size: 0.98rem;
+}

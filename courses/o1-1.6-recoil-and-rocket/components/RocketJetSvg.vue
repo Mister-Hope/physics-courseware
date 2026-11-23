@@ -25,7 +25,7 @@
       <path d="M 202 218 L 212 242" />
       <path d="M 180 226 L 180 252" />
     </g>
-    <CourseArrow :from="{ x: 180, y: 214 }" :to="{ x: 180, y: 276 }" stroke="var(--c-physics)" stroke-width="2.4" label="燃气" label-dx="14" label-dy="4" />
-    <CourseArrow :from="{ x: 252, y: 124 }" :to="{ x: 252, y: 52 }" stroke="var(--c-accent)" stroke-width="2.4" label="火箭" label-dx="14" />
+    <CourseArrow :from="{ x: 180, y: 214 }" :to="{ x: 180, y: 276 }" stroke="var(--c-physics)" stroke-width="2.4" label="燃气" :label-dx="14" :label-dy="4" />
+    <CourseArrow :from="{ x: 252, y: 124 }" :to="{ x: 252, y: 52 }" stroke="var(--c-accent)" stroke-width="2.4" label="火箭" :label-dx="14" />
   </svg>
 </template>
