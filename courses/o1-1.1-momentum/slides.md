@@ -48,7 +48,7 @@ clicks: 2
 <div class="half-grid items-center">
 <div><PendulumDemo heavy :step="$clicks >= 1 ? 1 : 0" /></div>
 <div class="stack-tight">
-<div class="tip-hint" v-click="1">B 摆得比 C 释放时更高：碰撞前后，速度之和并不保持不变。</div>
+<div class="tip-hint" v-click="1">B 摆得比 C 释放时更高：碰撞前后，速度之和并不相等。</div>
 <div class="tip-hint" v-click="2">碰撞前后什么量可能不变？动能之和？质量与速度的乘积之和？</div>
 </div>
 </div>
@@ -110,4 +110,119 @@ clicks: 2
 <div class="tip-hint" v-click="2">动量是矢量，方向与速度方向相同；单位是 <Latex tex="\text{kg·m/s}" />。</div>
 </div>
 </div>
+</div>
+
+---
+clicks: 2
+---
+
+# 动量
+
+<div class="page-grow">
+<div class="ask">一维运动中，怎样用正负号表示动量的方向？</div>
+<div class="half-grid items-center">
+<div><MomentumSignSvg :show-p="$clicks >= 1" :show-sign="$clicks >= 2" /></div>
+<div class="stack-tight">
+<div class="tip-hint" v-click="1">动量的方向与速度方向相同。</div>
+<div class="tip-hint" v-click="2">先规定正方向，再用正负号表示方向。</div>
+</div>
+</div>
+</div>
+
+---
+layout: exercise-split
+title: "例题：钢球撞墙"
+clicks: 3
+---
+
+<template v-slot:stem>
+
+一个质量为 <Latex tex="0.1\ \text{kg}" /> 的钢球，以 <Latex tex="6\ \text{m/s}" /> 的速度水平向右运动，碰到坚硬墙壁后，以 <Latex tex="6\ \text{m/s}" /> 的速度水平向左反弹。求钢球碰撞前后的动量变化量。
+
+</template>
+
+<template v-slot:fig>
+
+<WallReboundSvg :show-p="$clicks >= 1" :show-p-after="$clicks >= 2" />
+
+</template>
+
+<div class="stack-tight">
+<div v-click="1">取水平向右为正方向。</div>
+<div v-click="1"><Latex tex="p=mv=0.6\ \text{kg·m/s}" /></div>
+<div v-click="2">碰后 <Latex tex="v'=-6\ \text{m/s}" />。</div>
+<div v-click="2"><Latex tex="p'=mv'=-0.6\ \text{kg·m/s}" /></div>
+<div v-click="3"><Latex tex="\Delta p=p'-p=-1.2\ \text{kg·m/s}" />。</div>
+<div v-click="3">负号表示 <Latex tex="\Delta p" /> 的方向水平向左。</div>
+</div>
+
+---
+clicks: 2
+---
+
+# 动量的变化量
+
+<div class="page-grow">
+<div class="ask">求动量变化量，一般分几步？</div>
+<div class="half-grid">
+<div class="stack-tight">
+<div class="mini-title" v-click="1">① 规定正方向</div>
+<div class="mini-title" v-click="1">② 用带符号的数值表示 <Latex tex="p" /> 和 <Latex tex="p'" /></div>
+<div class="mini-title" v-click="1">③ 计算 <Latex tex="\Delta p=p'-p" /></div>
+<div class="mini-title" v-click="1">④ 负号表示方向与正方向相反</div>
+</div>
+<div class="stack-tight">
+<div class="tip-hint" v-click="2">同一直线上、方向不变：质量为 <Latex tex="2\ \text{kg}" /> 的物体速度由 <Latex tex="3\ \text{m/s}" /> 增大到 <Latex tex="6\ \text{m/s}" />，<Latex tex="\Delta p=+6\ \text{kg·m/s}" />。</div>
+</div>
+</div>
+</div>
+
+---
+clicks: 1
+---
+
+# 动量与动能
+
+<div class="page-grow">
+<div class="ask">动量 <Latex tex="p=mv" /> 与动能 <Latex tex="E_{\mathrm{k}}=\tfrac12 mv^2" /> 有什么不同？</div>
+<div class="half-grid">
+<div class="card">
+<div class="mini-title">动量 <Latex tex="p=mv" /></div>
+<div class="mini-note">矢量，方向与速度方向相同；单位 <Latex tex="\text{kg·m/s}" />。</div>
+</div>
+<div class="card">
+<div class="mini-title">动能 <Latex tex="E_{\mathrm{k}}=\tfrac12 mv^2" /></div>
+<div class="mini-note">标量，只有大小；单位 <Latex tex="\text{J}" />。</div>
+</div>
+</div>
+<div class="tip-hint" v-click="1">速度方向改变时，动量改变，动能不变；速度大小改变时，两者都改变。</div>
+</div>
+
+---
+clicks: 2
+---
+
+# 动量与动能
+
+<div class="page-grow">
+<div class="ask">已知动量 <Latex tex="p" />，能求动能 <Latex tex="E_{\mathrm{k}}" /> 吗？</div>
+<div class="stack">
+<div v-click="1" class="card">
+<div class="mini-note">由 <Latex tex="p=mv" /> 得 <Latex tex="v=\dfrac{p}{m}" />，代入 <Latex tex="E_{\mathrm{k}}=\tfrac12 mv^2" />：</div>
+<div class="mini-title"><Latex tex="E_{\mathrm{k}}=\dfrac{p^2}{2m}" /></div>
+</div>
+<div v-click="2" class="tip-hint">反过来，<Latex tex="p=\sqrt{2mE_{\mathrm{k}}}" />。质量不同的物体，动量相同时动能不一定相同。</div>
+</div>
+</div>
+
+---
+clicks: 1
+---
+
+# 动量与动能
+
+<div class="page-grow">
+<div class="ask">改变质量或速度，<Latex tex="p" /> 与 <Latex tex="E_{\mathrm{k}}" /> 各怎样变？</div>
+<MomentumSlider />
+<div class="tip-hint" v-click="1">速度加倍：<Latex tex="p" /> 加倍，<Latex tex="E_{\mathrm{k}}" /> 变为 4 倍；质量加倍：<Latex tex="p" /> 加倍，<Latex tex="E_{\mathrm{k}}" /> 也加倍。</div>
 </div>

@@ -1,20 +1,50 @@
 <!-- 第 4–6 页：碰撞实验数据表。mode=raw 原始数据；mv 加 mv 两列；ek 加动能两列。step>=1 显示计算列。 -->
 <script setup>
-import { computed } from 'vue'
+import { computed } from "vue";
 
-const props = defineProps({
-  mode: { type: String, default: 'raw' },
+const { mode = "raw", step = 0 } = defineProps({
+  mode: { type: String, default: "raw" },
   step: { type: Number, default: 0 },
-})
+});
 
 const rows = [
-  { no: 1, m1: 0.519, m2: 0.519, v: 0.628, vp: 0.307, mv1: 0.326, mv2: 0.319, ek1: 0.102, ek2: 0.049 },
-  { no: 2, m1: 0.519, m2: 0.718, v: 0.656, vp: 0.265, mv1: 0.341, mv2: 0.328, ek1: 0.112, ek2: 0.043 },
-  { no: 3, m1: 0.718, m2: 0.519, v: 0.572, vp: 0.321, mv1: 0.411, mv2: 0.397, ek1: 0.118, ek2: 0.064 },
-]
+  {
+    no: 1,
+    m1: 0.519,
+    m2: 0.519,
+    v: 0.628,
+    vp: 0.307,
+    mv1: 0.326,
+    mv2: 0.319,
+    ek1: 0.102,
+    ek2: 0.049,
+  },
+  {
+    no: 2,
+    m1: 0.519,
+    m2: 0.718,
+    v: 0.656,
+    vp: 0.265,
+    mv1: 0.341,
+    mv2: 0.328,
+    ek1: 0.112,
+    ek2: 0.043,
+  },
+  {
+    no: 3,
+    m1: 0.718,
+    m2: 0.519,
+    v: 0.572,
+    vp: 0.321,
+    mv1: 0.411,
+    mv2: 0.397,
+    ek1: 0.118,
+    ek2: 0.064,
+  },
+];
 
-const showMv = computed(() => props.mode === 'mv')
-const showEk = computed(() => props.mode === 'ek')
+const showMv = computed(() => mode === "mv");
+const showEk = computed(() => mode === "ek");
 </script>
 
 <template>
@@ -39,10 +69,10 @@ const showEk = computed(() => props.mode === 'ek')
         <td>{{ row.m2.toFixed(3) }}</td>
         <td>{{ row.v.toFixed(3) }}</td>
         <td>{{ row.vp.toFixed(3) }}</td>
-        <td v-if="showMv" v-show="step >= 1">{{ row.mv1.toFixed(3) }}</td>
-        <td v-if="showMv" v-show="step >= 1">{{ row.mv2.toFixed(3) }}</td>
-        <td v-if="showEk" v-show="step >= 1">{{ row.ek1.toFixed(3) }}</td>
-        <td v-if="showEk" v-show="step >= 1">{{ row.ek2.toFixed(3) }}</td>
+        <td v-if="showMv" :class="{ 'cell-hidden': step < 1 }">{{ row.mv1.toFixed(3) }}</td>
+        <td v-if="showMv" :class="{ 'cell-hidden': step < 1 }">{{ row.mv2.toFixed(3) }}</td>
+        <td v-if="showEk" :class="{ 'cell-hidden': step < 1 }">{{ row.ek1.toFixed(3) }}</td>
+        <td v-if="showEk" :class="{ 'cell-hidden': step < 1 }">{{ row.ek2.toFixed(3) }}</td>
       </tr>
     </tbody>
   </table>
@@ -68,5 +98,8 @@ const showEk = computed(() => props.mode === 'ek')
 }
 .data-table tbody tr:last-child td {
   border-bottom: none;
+}
+.cell-hidden {
+  visibility: hidden;
 }
 </style>
