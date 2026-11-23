@@ -1,5 +1,119 @@
-/* ═══════════════════════════════════════════════
-   简谐运动的描述 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 本课特有样式（共享设计系统在 workspace/shared，这里只放本课需要的排版） */
+
+.shm-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.shm-intro-q {
+  max-width: 27em;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.shm-intro-figure {
+  width: 100%;
+  max-width: 640px;
+}
+
+.shm-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  width: 100%;
+}
+
+.shm-intro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  color: var(--c-text-dim);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.shm-intro-item .icon-lg {
+  color: var(--c-accent);
+}
+
+.shm-figure {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.shm-chart {
+  width: 100%;
+  min-width: 0;
+}
+
+.shm-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.9rem;
+}
+
+.shm-table th:nth-child(1),
+.shm-table td:nth-child(1) {
+  width: 16%;
+}
+
+.shm-table th:nth-child(2),
+.shm-table td:nth-child(2) {
+  width: 38%;
+}
+
+.shm-table th:nth-child(3),
+.shm-table td:nth-child(3) {
+  width: 30%;
+}
+
+.shm-table th:nth-child(4),
+.shm-table td:nth-child(4) {
+  width: 16%;
+}
+
+.shm-table th,
+.shm-table td {
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--c-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.shm-table th {
+  background: var(--c-surface);
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.shm-table td:first-child {
+  color: var(--c-text);
+}
+
+.shm-table td:not(:first-child) {
+  color: var(--c-text-dim);
+}
+
+.shm-formula {
+  text-align: center;
+  font-size: 1.35rem;
+  color: var(--c-accent);
+}
+
+.shm-path {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--c-accent);
+  text-align: center;
+}
