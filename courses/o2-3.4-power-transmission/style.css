@@ -10,7 +10,7 @@
 }
 
 /* ── 第 2 页：西部发电、东部用电 ── */
-.p2 {
+.pt2 {
   gap: 2.1rem;
 }
 
@@ -100,7 +100,7 @@
 }
 
 /* ── 第 4 页：损耗来源 ── */
-.p4 {
+.pt4 {
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
 }
@@ -135,7 +135,7 @@
 }
 
 /* ── 第 5 页：两条途径比较 ── */
-.p5 {
+.pt5 {
   gap: 1.5rem;
 }
 
@@ -162,7 +162,7 @@
 }
 
 /* ── 第 6 页：途径一 ── */
-.p6 {
+.pt6 {
   gap: 1.25rem;
 }
 
@@ -176,7 +176,7 @@
   margin: 0;
 }
 
-.p6 .mini-title {
+.pt6 .mini-title {
   margin-bottom: 0.2rem;
 }
 
@@ -195,12 +195,12 @@
   color: var(--c-physics);
 }
 
-.p6 .mini-note {
+.pt6 .mini-note {
   margin-top: 0.8rem;
 }
 
 /* ── 第 7 页：途径二 ── */
-.p7 {
+.pt7 {
   gap: 1.3rem;
 }
 
@@ -230,5 +230,149 @@
 .p7-tag {
   font-size: 0.86rem;
   line-height: 1.4;
+  color: var(--c-text-dim);
+}
+
+/* ── 第 8 页：我国的输电电压 ── */
+.pt8 {
+  gap: 1.4rem;
+}
+
+.p8-levels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.p8-item {
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+}
+
+.p8-item + .p8-item {
+  border-left: 1px solid var(--c-border);
+}
+
+.p8-kv {
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--c-accent);
+}
+
+.p8-cap {
+  margin-top: 0.4rem;
+
+  font-size: 0.85rem;
+  color: var(--c-text-dim);
+}
+
+.p8-ask {
+  text-align: center;
+}
+
+/* ── 第 9 页：电压与线路损耗 ── */
+.pt9 {
+  gap: 1.1rem;
+}
+
+/* ── 第 10 页：远距离输电的系统 ── */
+.pt10 {
+  gap: 0.8rem;
+}
+
+.pt10 > svg {
+  width: 100%;
+  height: auto;
+  flex: 0 0 auto;
+}
+
+/* ── 第 11 页：输电链路中的功率与电压 ── */
+.pt11 {
+  gap: 0.9rem;
+}
+
+.p11-legend {
+  text-align: center;
+}
+
+.p11-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1.4rem;
+}
+
+.p11-card {
+  padding: 0.55rem 1rem 0.65rem;
+
+  background: rgb(255 255 255 / 3%);
+  border-radius: 1.1rem;
+}
+
+.p11-card .mini-title {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.p11-eq {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.p11-result {
+  border: 1px solid var(--c-border-glow);
+}
+
+/* ── 第 12 页：电网 ── */
+.pt12 {
+  gap: 1.2rem;
+}
+
+.p12-def {
+  padding-left: 1rem;
+
+  font-size: 1.15rem;
+  line-height: 1.6;
+
+  border-left: 3px solid var(--c-accent);
+}
+
+.p12-key {
+  margin-right: 0.35rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p12-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.6rem;
+}
+
+.p12-benefit {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+
+  padding: 0.7rem 1rem;
+
+  background: rgb(255 255 255 / 3%);
+  border-radius: 1.1rem;
+}
+
+.p12-benefit .icon-lg {
+  flex: 0 0 auto;
+  color: var(--c-physics);
+}
+
+.p12-benefit b {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.p12-benefit span {
+  display: block;
+
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: var(--c-text-dim);
 }
