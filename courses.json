@@ -577,8 +577,8 @@
           "slug": "o1-3.5-doppler-effect",
           "title": "多普勒效应",
           "chapter": "§3.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由波源与观察者相对运动理解多普勒效应，分析频率变化原因，了解其在测速、天文红移等领域的应用。",
+          "tags": ["多普勒效应", "频率", "测速", "红移"]
         },
         {
           "slug": "o1-4.1-refraction-of-light",
