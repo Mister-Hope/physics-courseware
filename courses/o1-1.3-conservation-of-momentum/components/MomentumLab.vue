@@ -79,88 +79,109 @@ const p2Percent = computed(() => (p2After.value / pTotal.value) * 100);
 
 <style scoped>
 .lab {
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
+  width: 100%;
 }
+
 .lab-bars {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
 }
+
 .lab-row {
   display: grid;
   grid-template-columns: 5.6rem minmax(0, 1fr);
-  align-items: center;
   gap: 0.7rem;
+  align-items: center;
 }
+
 .lab-note {
   margin-top: -0.3rem;
-  font-size: 0.82rem;
   color: var(--c-text-dim);
+  font-size: 0.82rem;
   text-align: right;
 }
+
 .lab-name {
-  font-size: 1rem;
   color: var(--c-text-dim);
+  font-size: 1rem;
 }
+
 .lab-bar {
   display: flex;
+
+  overflow: hidden;
+
   height: 2.1rem;
   border-radius: 0.6rem;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
+
+  background: rgb(255 255 255 / 6%);
 }
+
 .lab-seg {
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+
   transition: width 0.25s ease;
 }
+
 .seg-a {
-  background: rgba(226, 168, 70, 0.28);
-  border-right: 1px solid rgba(226, 168, 70, 0.6);
+  border-right: 1px solid rgb(226 168 70 / 60%);
+  background: rgb(226 168 70 / 28%);
   color: var(--c-accent);
 }
+
 .seg-b {
-  background: rgba(96, 165, 250, 0.24);
+  background: rgb(96 165 250 / 24%);
   color: var(--c-velocity);
 }
+
 .lab-bar-total {
   height: 1.5rem;
 }
+
 .seg-total {
-  background: rgba(148, 163, 184, 0.18);
+  background: rgb(148 163 184 / 18%);
   color: var(--c-text-dim);
 }
+
 .lab-tag {
   padding: 0 0.5rem;
 }
+
 .lab-readout {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.9rem;
 }
+
 .lab-cell {
   padding: 0.6rem 0.9rem;
+  border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 0.9rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgb(255 255 255 / 5%);
 }
+
 .lab-key {
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
+
 .lab-val {
   display: flex;
-  align-items: baseline;
   gap: 0.15rem;
-  font-size: 1.3rem;
+  align-items: baseline;
+
   font-weight: 700;
+  font-size: 1.3rem;
   font-variant-numeric: tabular-nums;
 }
 </style>
