@@ -376,3 +376,322 @@
   line-height: 1.45;
   color: var(--c-text-dim);
 }
+
+/* p13 教材练习 3：两种电压的电压损失 */
+.p13-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 2.4rem;
+}
+
+.p13-case {
+  min-width: 0;
+}
+
+.p13-head {
+  margin-bottom: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p13-line {
+  display: flex;
+  align-items: center;
+  min-height: 2.2rem;
+  font-size: 1.02rem;
+}
+
+.p13-line.is-extra {
+  color: var(--c-text-dim);
+}
+
+.p13-note {
+  margin-top: 0;
+}
+
+/* p14 教材练习 5：电流 */
+.p14-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.p14-step {
+  min-width: 0;
+}
+
+.p14-step-title {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p14-line {
+  display: flex;
+  align-items: center;
+  min-height: 2.7rem;
+  font-size: 1rem;
+}
+
+.p14-note {
+  margin-top: 0.1rem;
+}
+
+/* p15 教材练习 5：电压 */
+.p15b-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.p15b-step {
+  min-width: 0;
+}
+
+.p15b-step-title {
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p15b-line {
+  display: flex;
+  align-items: center;
+  min-height: 2.15rem;
+  font-size: 0.98rem;
+}
+
+/* p15 教材练习 5：匝数比 */
+.p15-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2.4rem;
+}
+
+.p15-case {
+  min-width: 0;
+}
+
+.p15-head {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p15-line {
+  display: flex;
+  align-items: center;
+  min-height: 3.1rem;
+  font-size: 0.98rem;
+}
+
+.p15-result {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p15-check {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* p16 错解辨析 */
+.pt16 {
+  gap: 0.7rem;
+}
+
+.p16-wrong {
+  padding: 0.8rem 1.1rem;
+
+  background: rgb(255 255 255 / 3%);
+  border-left: 3px solid var(--c-danger);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.p16-label {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--c-danger);
+}
+
+.p16-label .icon-md {
+  font-size: 1.1rem;
+}
+
+.p16-chain {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+
+  min-height: 3rem;
+  font-size: 1.12rem;
+}
+
+.p16-sep {
+  color: var(--c-text-dim);
+}
+
+.p16-arrow {
+  color: var(--c-text-dim);
+}
+
+.p16-claim {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--c-text-dim);
+}
+
+.p16-ask {
+  margin: 0.1rem 0;
+}
+
+.p16-fix {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.p16-line {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.p16-line b {
+  margin-right: 0.2rem;
+  color: var(--c-accent);
+}
+
+.p16-end {
+  margin-top: 0.1rem;
+}
+
+/* p18 直流输电 */
+.pt18 {
+  gap: 0.5rem;
+}
+
+.p18-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.p18-block + .p18-block {
+  padding-left: 2rem;
+  border-left: 1px solid var(--c-border);
+}
+
+.p18-item {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.p18-item .icon-md {
+  flex: 0 0 auto;
+  margin-top: 0.08rem;
+}
+
+.p18-icon-warn {
+  color: var(--c-danger);
+}
+
+.p18-icon-good {
+  color: var(--c-physics);
+}
+
+.p18-chain {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.4rem 0;
+}
+
+.p18-node {
+  padding: 0.42rem 0.7rem;
+
+  font-size: 0.88rem;
+  white-space: nowrap;
+
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid var(--c-border);
+  border-radius: 0.8rem;
+}
+
+.p18-node.is-key {
+  color: var(--c-accent);
+
+  background: rgb(226 168 70 / 8%);
+  border-color: rgb(226 168 70 / 45%);
+}
+
+.p18-node.is-line {
+  color: var(--c-physics);
+  border-color: rgb(45 212 191 / 40%);
+}
+
+.p18-arrow {
+  flex: 0 0 auto;
+  color: var(--c-text-mute);
+}
+
+.p18-note {
+  text-align: center;
+}
+
+/* p19 课堂小结 */
+.p19-list {
+  gap: 0.8rem;
+}
+
+.p19-text {
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.p19-text b {
+  margin-right: 0.2rem;
+  color: var(--c-accent);
+}
+
+/* p20 练习与应用 */
+.p20-cases {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 2.4rem;
+}
+
+.p20-case {
+  min-width: 0;
+}
+
+.p20-head {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p20-line {
+  display: flex;
+  align-items: center;
+  min-height: 2.4rem;
+  font-size: 0.95rem;
+}
+
+.p20-note {
+  margin-top: 0.2rem;
+}
