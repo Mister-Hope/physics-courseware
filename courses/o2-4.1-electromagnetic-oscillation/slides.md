@@ -31,14 +31,13 @@ clickAnimation: none
 ---
 
 <div class="page-grow">
-<div class="ask ask-lead">要向外发射电磁波，电路里需要什么样的电流？</div>
+<div class="half-grid" style="grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center">
+<div class="stack">
+<div class="ask ask-lead">要向外发射电磁波，<br />电路里需要什么样的电流？</div>
 <div v-click="1" class="mini-title">大小和方向都随时间迅速变化的电流</div>
-<div v-click="2" class="half-grid" style="align-items: center">
-<div class="stack-dense">
-<div>电容器不断充电、放电，电路里就有变化的电流。</div>
-<div>把电容器和线圈接成回路，充放电就能自动往复——<span class="key-lead">LC 回路</span>。</div>
+<div v-click="2" class="step-line">电容器不断充电、放电，电路里就有变化的电流。</div>
 </div>
-<div style="max-width: 340px; margin: 0 auto">
+<div style="width: 100%">
 <LcCircuitSvg :quarter="0" :switch-closed="false" />
 </div>
 </div>
@@ -265,5 +264,169 @@ curves:
 <div v-click="3" class="step-line">电场能最大时，<Latex tex="q" /> 最大、<Latex tex="i" /> 为零。</div>
 <div v-click="4" class="step-line">磁场能最大时，<Latex tex="i" /> 最大、<Latex tex="q" /> 为零。</div>
 </div>
+</div>
+</div>
+
+---
+title: 阻尼振荡与等幅振荡
+clicks: 4
+clickAnimation: none
+---
+
+# 阻尼振荡与等幅振荡
+
+<div class="page-grow">
+<div class="half-grid" style="grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center">
+<div style="width: 100%">
+
+```comp CoordAxes
+x-range: [0, 9.2]
+y-range: [-1.15, 1.15]
+x-axis: { quantity: t, side: below }
+y-axis: { quantity: u }
+view: { width: 480, height: 330 }
+ticks: { x: [], y: [], labels: false }
+curves:
+  - formula: t => Math.cos(Math.PI / 2 * t) * Math.exp(-0.22 * t)
+    samples: 400
+    color: var(--c-accent)
+    width: 2.8
+  - formula: t => Math.cos(Math.PI / 2 * t)
+    samples: 240
+    color: var(--c-accent-2)
+    width: 2
+    dashed: true
+```
+</div>
+<div class="stack">
+<div class="curve-legend">
+<span class="legend-item"><span class="legend-swatch" style="background: var(--c-accent)"></span>实际电路</span>
+<span class="legend-item"><span class="legend-swatch" style="background: var(--c-accent-2)"></span>无能量损耗</span>
+</div>
+<div class="ask">实际的 LC 回路能一直振荡吗？</div>
+<div v-click="1" class="step-line">不能，电阻会把能量变成内能。</div>
+<div v-click="2" class="step-line">振荡电路还会辐射电磁波。</div>
+<div v-click="3" class="step-line">振幅逐渐减小——阻尼振荡。</div>
+<div v-click="4" class="step-line">补充能量可得到等幅振荡。</div>
+</div>
+</div>
+</div>
+
+---
+title: 周期与频率
+clicks: 3
+clickAnimation: none
+---
+
+# 周期与频率
+
+<div class="page-grow">
+<div class="half-grid" style="align-items: center">
+<DefinitionBox term="周期 T"><div>完成一次<span class="def-term">周期性变化</span>所需的时间。</div></DefinitionBox>
+<DefinitionBox term="频率 f" tone="blue"><div>单位时间内完成<span class="def-term">周期性变化</span>的次数。</div></DefinitionBox>
+</div>
+<div class="ask" style="text-align: center">周期和频率有什么关系？</div>
+<div v-click="1" style="display: flex; justify-content: center; padding: 0.2rem 0">
+<Latex tex="f = \dfrac{1}{T}" display />
+</div>
+<div v-click="2" class="step-line" style="text-align: center">周期单位是秒（<Latex tex="\text{s}" />），频率单位是赫兹（<Latex tex="\text{Hz}" />）。</div>
+<div v-click="3" class="tip-hint">由电路自身决定的周期和频率，叫固有周期和固有频率。</div>
+</div>
+
+---
+title: 固有周期由什么决定
+clicks: 3
+clickAnimation: none
+---
+
+<div class="page-grow">
+<div class="ask ask-lead">LC 回路的固有周期由什么决定？</div>
+<div class="half-grid" style="align-items: start">
+<div class="stack-tight">
+<div class="mini-title">电容 <Latex tex="C" /> 越大</div>
+<div v-click="1" class="step-line">充电、放电所需的时间越长。</div>
+</div>
+<div class="stack-tight">
+<div class="mini-title">电感 <Latex tex="L" /> 越大</div>
+<div v-click="2" class="step-line">自感作用越强，电流变化越慢。</div>
+</div>
+</div>
+<div v-click="3" class="half-grid" style="align-items: center; justify-items: center">
+<Latex tex="T = 2\pi\sqrt{LC}" display />
+<Latex tex="f = \dfrac{1}{2\pi\sqrt{LC}}" display />
+</div>
+</div>
+
+---
+title: 改变电感或电容
+clicks: 0
+clickAnimation: none
+---
+
+# 改变电感或电容
+
+<div class="page-grow">
+<LcPeriodLab />
+</div>
+
+---
+layout: exercise-split
+title: 例题：LC 电路的频率范围
+clicks: 4
+---
+
+<template v-slot:stem>
+
+线圈的自感系数为 $30\ \mu\text{H}$，可调电容器的电容范围为 $1.2 \sim 270\ \text{pF}$。求振荡电路的频率范围。
+
+</template>
+
+<div v-click="1" class="step-line">由 <Latex tex="f = \dfrac{1}{2\pi\sqrt{LC}}" /> 可知：<Latex tex="C" /> 越小，<Latex tex="f" /> 越大。</div>
+<div v-click="2" class="step-line"><Latex tex="C_1 = 1.2\ \text{pF}" /> 时，<Latex tex="f_1 = \dfrac{1}{2\pi\sqrt{30 \times 10^{-6} \times 1.2 \times 10^{-12}}}\ \text{Hz} = 2.65 \times 10^{7}\ \text{Hz}" /></div>
+<div v-click="3" class="step-line"><Latex tex="C_2 = 270\ \text{pF}" /> 时，<Latex tex="f_2 = \dfrac{1}{2\pi\sqrt{30 \times 10^{-6} \times 270 \times 10^{-12}}}\ \text{Hz} = 1.77 \times 10^{6}\ \text{Hz}" /></div>
+<div v-click="4" class="key-lead" style="text-align: center">频率范围：<Latex tex="1.77 \times 10^{6} \sim 2.65 \times 10^{7}\ \text{Hz}" /></div>
+
+---
+layout: exercise-split
+title: 练习：可调电容器的选台范围
+clicks: 3
+---
+
+<template v-slot:stem>
+
+某收音机中的 LC 电路，由固定线圈和可调电容器组成，能够产生 $535\ \text{kHz}$ 到 $1\ 605\ \text{kHz}$ 的电磁振荡。可调电容器的最大电容和最小电容之比是多少？
+
+</template>
+
+<div v-click="1" class="step-line">由 <Latex tex="f = \dfrac{1}{2\pi\sqrt{LC}}" /> 得 <Latex tex="C = \dfrac{1}{4\pi^{2} L f^{2}}" />：<Latex tex="L" /> 不变时，<Latex tex="C" /> 与 <Latex tex="f^{2}" /> 成反比。</div>
+<div v-click="2" class="step-line"><Latex tex="\dfrac{C_{\text{max}}}{C_{\text{min}}} = \left( \dfrac{f_{\text{max}}}{f_{\text{min}}} \right)^{2} = \left( \dfrac{1.605 \times 10^{6}}{5.35 \times 10^{5}} \right)^{2} = 9" /></div>
+<div v-click="3" class="key-lead" style="text-align: center">最大电容是最小电容的 9 倍。</div>
+
+---
+title: 电磁振荡的规律
+clicks: 0
+---
+
+<div class="page-grow">
+<div class="stack">
+<div class="summary-line"><span class="key-lead">振荡电流</span>　大小和方向都做周期性迅速变化的电流。</div>
+<div class="summary-line"><span class="key-lead">电荷量与电流</span>　<Latex tex="q" />、<Latex tex="u" />、<Latex tex="i" /> 都按正弦规律变化，<Latex tex="q" /> 最大时 <Latex tex="i" /> 为零。</div>
+<div class="summary-line"><span class="key-lead">能量转化</span>　电场能与磁场能相互转化，无能量损耗时两者的总和不变。</div>
+<div class="summary-line"><span class="key-lead">阻尼振荡</span>　实际电路有电阻和电磁波辐射，振幅逐渐减小；补充能量可得等幅振荡。</div>
+<div class="summary-line"><span class="key-lead">固有周期与频率</span>　<Latex tex="T = 2\pi\sqrt{LC}" />，<Latex tex="f = \dfrac{1}{2\pi\sqrt{LC}}" />，由 <Latex tex="L" />、<Latex tex="C" /> 决定。</div>
+</div>
+</div>
+
+---
+title: 电磁振荡与电磁波
+clicks: 2
+clickAnimation: none
+---
+
+<div class="page-grow">
+<div class="stack" style="max-width: 780px; margin: 0 auto; text-align: center; align-items: center">
+<div class="ask ask-lead">电路里的振荡电流，会在周围空间激起怎样的电场和磁场？</div>
+<div v-click="1" class="mini-title">变化的电场和磁场会向外传播——下一节研究电磁波。</div>
+<div v-click="2" class="tip-hint">4.2 电磁场与电磁波</div>
 </div>
 </div>

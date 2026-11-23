@@ -45,9 +45,7 @@ const currentOn = computed(() => Math.abs(current.value) > 0.04);
 const currentOpacity = computed(() => (currentOn.value ? 0.35 + 0.65 * Math.abs(current.value) : 0));
 const currentWidth = computed(() => 1.6 + 2.2 * Math.abs(current.value));
 const currentArrow = computed(() =>
-  current.value >= 0
-    ? { from: { x: 374, y: 214 }, to: { x: 374, y: 154 } }
-    : { from: { x: 374, y: 154 }, to: { x: 374, y: 214 } },
+  current.value >= 0 ? { from: { x: 374, y: 214 }, to: { x: 374, y: 154 } } : { from: { x: 374, y: 154 }, to: { x: 374, y: 214 } },
 );
 
 /** 电场能、磁场能（归一化，两项之和恒为 1） */
