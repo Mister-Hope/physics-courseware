@@ -1,5 +1,387 @@
-/* ═══════════════════════════════════════════════
-   分子动理论的基本内容 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 3.1 分子动理论的基本内容 —— 本课页面样式 */
+:root {
+  --page-gap: 0.9rem;
+  --stack-gap: 0.8rem;
+}
+
+/* P2 分子有多小 */
+.pt2 {
+  gap: 1rem;
+}
+
+.p2-ask {
+  font-size: 1.16rem;
+  text-align: center;
+}
+
+.p2-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.p2-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1.2rem;
+  background: var(--c-surface);
+}
+
+.p2-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1rem;
+}
+
+.p2-icon {
+  color: var(--c-accent);
+}
+
+.p2-arrow {
+  color: var(--c-text-mute);
+  font-size: 1rem;
+}
+
+.p2-ball {
+  display: inline-block;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: var(--c-physics);
+}
+
+.p2-note {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--c-text-dim);
+}
+
+.pt2 .tip-hint {
+  font-size: 0.85rem;
+}
+
+/* P3 大量分子 */
+.pt3 {
+  gap: 0.75rem;
+}
+
+.p3-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.p3-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.9rem 0.7rem;
+  text-align: center;
+  border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+  background: var(--c-surface);
+}
+
+.p3-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p3-value .katex {
+  font-size: 1em;
+}
+
+.p3-label {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--c-text-dim);
+}
+
+.p3-bottom {
+  text-align: center;
+}
+
+/* P4 油膜法 */
+.pt4 {
+  gap: 0.5rem;
+}
+
+.p4-grid {
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+}
+
+.p4-fig svg {
+  width: 100%;
+  height: auto;
+}
+
+.p4-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.p4-step {
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.p4-formula {
+  padding: 0.15rem 0;
+  text-align: center;
+}
+
+.p4-formula .katex-display {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.pt4 .tip-hint {
+  font-size: 0.84rem;
+}
+
+/* P5 扩散 / P6 布朗运动 / P7 布朗运动原因 / P9 空隙 / P10 作用力 */
+.pt5,
+.pt6,
+.pt7,
+.pt9,
+.pt10 {
+  gap: 0.45rem;
+}
+
+.p5-grid,
+.p6-grid,
+.p7-grid,
+.p9-grid,
+.p10-grid {
+  align-items: center;
+}
+
+.p5-fig svg,
+.p6-fig svg,
+.p7-fig svg,
+.p9-fig svg,
+.p10-fig svg {
+  width: 100%;
+  height: auto;
+}
+
+.p5-notes,
+.p6-notes,
+.p7-notes,
+.p9-notes,
+.p10-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.p5-note,
+.p6-note,
+.p7-note,
+.p9-note,
+.p10-note {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* P8 热运动 */
+.pt8 {
+  gap: 0.7rem;
+}
+
+.p8-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.p8-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem;
+  text-align: center;
+  border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+  background: var(--c-surface);
+}
+
+.p8-icon {
+  color: var(--c-accent-2);
+}
+
+.p8-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.p8-text {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--c-text-dim);
+}
+
+.p8-def {
+  padding: 0.55rem 0.9rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  border-left: 3px solid var(--c-accent);
+  border-radius: 0.7rem;
+  background: var(--c-surface);
+}
+
+/* P11 分子力图像 */
+.pt11 {
+  gap: 0.4rem;
+}
+
+.p11-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.p11-chart {
+  min-width: 0;
+}
+
+.p11-chart svg {
+  width: 100%;
+  height: auto;
+}
+
+.p11-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.p11-note {
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+/* P12 分子动理论 */
+.pt12 {
+  gap: 0.75rem;
+}
+
+.p12-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.p12-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem 0.7rem;
+  text-align: center;
+  border: 1px solid var(--c-border);
+  border-radius: 1.1rem;
+  background: var(--c-surface);
+}
+
+.p12-icon {
+  color: var(--c-accent);
+}
+
+.p12-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.p12-text {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--c-text-dim);
+}
+
+/* P13 统计规律 */
+.pt13 {
+  gap: 0.7rem;
+}
+
+.p13-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.p13-card {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: 1rem;
+  background: var(--c-surface);
+}
+
+.p13-title {
+  margin-bottom: 0.3rem;
+  font-size: 1.04rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.p13-text {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--c-text-dim);
+}
+
+/* P14–P18 习题解析 */
+.p14-analysis,
+.p15-analysis,
+.p16-analysis,
+.p17-analysis,
+.p18-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+
+.p14-line,
+.p15-line,
+.p17-line,
+.p18-line {
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.p16-line {
+  font-size: 0.88rem;
+  line-height: 1.48;
+}
+
+.p17-note,
+.p18-note {
+  padding-left: 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--c-text-dim);
+  border-left: 2px solid var(--c-accent);
+}
+
+/* P19 小结 */
+.pt19 {
+  gap: 0.4rem;
+}
+
+.p19-list {
+  gap: 0.55rem;
+}
+
+.p19-item {
+  align-items: flex-start;
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
