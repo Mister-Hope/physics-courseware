@@ -64,12 +64,12 @@
     </g>
     <g v-if="showBadges">
       <g stroke="var(--c-text-dim)" stroke-width="1" stroke-dasharray="3 4" opacity="0.6">
-        <line x1="384" y1="100" x2="332" y2="148" />
+        <line x1="285" y1="106" x2="290" y2="153" />
         <line x1="74" y1="100" x2="118" y2="152" />
         <line x1="388" y1="198" x2="352" y2="208" />
       </g>
       <g>
-        <circle cx="392" cy="96" r="10" fill="var(--c-accent)" />
+        <circle cx="285" cy="96" r="10" fill="var(--c-accent)" />
         <circle cx="66" cy="96" r="10" fill="var(--c-accent)" />
         <circle cx="396" cy="198" r="10" fill="var(--c-accent)" />
       </g>
@@ -80,7 +80,7 @@
         text-anchor="middle"
         dominant-baseline="central"
       >
-        <text x="392" y="96">1</text>
+        <text x="285" y="96">1</text>
         <text x="66" y="96">2</text>
         <text x="396" y="198">3</text>
       </g>

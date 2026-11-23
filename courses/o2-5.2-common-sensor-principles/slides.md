@@ -63,21 +63,19 @@ clicks: 1
 clickAnimation: none
 ---
 
-# 光敏电阻
+# 光敏电阻由什么组成？
 
 <div class="page-grow">
 <div class="cs-split">
 <div class="cs-split-fig"><LightSensorSvg show-badges /></div>
 <div class="stack">
-<div class="ask">它由哪几部分组成？两条电极为什么做成梳状、又互不相连？</div>
-<div class="cs-point"><span class="cs-no">1</span><div class="cs-point-body"><strong>硫化镉</strong>（半导体）涂在绝缘板上，这是对光敏感的材料。</div></div>
+<div class="cs-point"><span class="cs-no">1</span><div class="cs-point-body"><strong>硫化镉</strong>（半导体）涂在绝缘板上，是对光敏感的材料。</div></div>
 <div class="cs-point"><span class="cs-no">2</span><div class="cs-point-body">表面有两条互不相连的<strong>梳状银电极</strong>，电流只能从一条电极穿过硫化镉到另一条。</div></div>
 <div class="cs-point"><span class="cs-no">3</span><div class="cs-point-body">整片器件固定在<strong>绝缘基板</strong>上，两端引出接线。</div></div>
 <div class="tip-hint" v-click="1">光敏电阻把光照的强弱转换成电阻的大小。</div>
 </div>
 </div>
 </div>
-
 ---
 title: 光照为什么能让电阻变小？
 clicks: 3
@@ -194,6 +192,116 @@ clickAnimation: none
 <div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body"><strong>金属热电阻</strong>：电阻率随温度升高而增大，<Latex tex="R" /> 变大。</div></div>
 <div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body"><strong>半导体热敏电阻</strong>：温度升高，导电能力增强，<Latex tex="R" /> 明显变小。</div></div>
 <div class="tip-hint" v-click="3">热敏电阻按温度系数分两类：负温度系数 NTC（本节重点）与正温度系数 PTC。</div>
+</div>
+</div>
+</div>
+
+---
+title: 热敏电阻的阻值随温度怎样变化？
+clicks: 3
+clickAnimation: none
+---
+
+# 热敏电阻的阻值随温度怎样变化？
+
+<div class="page-grow">
+<div class="split-wide">
+<div class="stack">
+<div class="mini-title">某型号 NTC 热敏电阻</div>
+<table class="data-table p8-table">
+<thead>
+<tr><th><Latex tex="T\ /\ ^{\circ}\mathrm{C}" /></th><th><Latex tex="20" /></th><th><Latex tex="40" /></th><th><Latex tex="60" /></th><th><Latex tex="80" /></th></tr>
+</thead>
+<tbody>
+<tr><td><Latex tex="R\ /\ \mathrm{k}\Omega" /></td><td><Latex tex="12.2" /></td><td><Latex tex="5.8" /></td><td><Latex tex="3.0" /></td><td><Latex tex="1.7" /></td></tr>
+</tbody>
+</table>
+<div class="mini-note"><Latex tex="25\ ^{\circ}\mathrm{C}" /> 时约 <Latex tex="10\ \mathrm{k}\Omega" />；示意数据，不同型号有差异。</div>
+</div>
+<div class="stack">
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">温度每升高 <Latex tex="20\ ^{\circ}\mathrm{C}" />，阻值大约减小一半。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body"><strong>铂热电阻 Pt100</strong><br /><Latex tex="0\to 100\ ^{\circ}\mathrm{C}" /> 时，<Latex tex="100\to 138.5\ \Omega" /><br />只增大到约 <Latex tex="1.4" /> 倍。</div></div>
+<div class="tip-hint" v-click="3">半导体热敏电阻对温度变化灵敏得多；金属热电阻化学稳定性好、测温范围大，但灵敏度较低。</div>
+</div>
+</div>
+</div>
+
+---
+title: 液面低到一定程度，灯为什么会亮？
+clicks: 3
+clickAnimation: none
+---
+
+# 液面低到一定程度，灯为什么会亮？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><OilLevelAlarmSvg :low="$clicks >= 2" /></div>
+<div class="stack">
+<div class="mini-note">热敏电阻通电后自身会发热。</div>
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body"><strong>液面高</strong>：油把热量带走，探头温度基本不变，<Latex tex="R" /> 较大，电流小，灯不亮。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body"><strong>液面低</strong>：探头露出，散热变差，温度升高，<Latex tex="R" /> 明显减小，电流增大，灯亮。</div></div>
+<div class="summary-line" v-click="3">热敏电阻把液面高低<br />转换成电流大小</div>
+</div>
+</div>
+</div>
+
+---
+title: 拉伸或压缩，为什么能改变电阻？
+clicks: 3
+clickAnimation: none
+---
+
+# 拉伸或压缩，为什么能改变电阻？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><StrainGaugeSvg :step="$clicks" /></div>
+<div class="stack">
+<div class="cs-formula"><Latex tex="R=\rho\frac{L}{S}" display /></div>
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body"><strong>拉伸</strong>：金属丝变长、变细，<Latex tex="R" /> 变大。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body"><strong>压缩</strong>：金属丝变短、变粗，<Latex tex="R" /> 变小。</div></div>
+<div class="tip-hint" v-click="3">金属丝应变片利用金属电阻应变效应；半导体应变片利用压阻效应，灵敏度更高。</div>
+</div>
+</div>
+</div>
+
+---
+title: 电子秤怎样把重力变成电信号？
+clicks: 3
+clickAnimation: none
+---
+
+# 电子秤怎样把重力变成电信号？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><ForceSensorSvg :bent="$clicks >= 1" /></div>
+<div class="stack">
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">力 <Latex tex="F" /> 使梁弯曲：上表面被拉伸，下表面被压缩。</div></div>
+<div class="cs-point" v-click="2"><span class="cs-no">2</span><div class="cs-point-body">上应变片 <Latex tex="R" /> 变大，下应变片 <Latex tex="R" /> 变小。</div></div>
+<div class="cs-point" v-click="3"><span class="cs-no">3</span><div class="cs-point-body">电流恒定时，上片电压变大、下片电压变小，输出两电压之差 <Latex tex="\Delta U" />。</div></div>
+<div class="tip-hint" v-click="3"><Latex tex="F" /> 越大，<Latex tex="\Delta U" /> 越大；电子秤、测牵引力都用到力传感器。</div>
+</div>
+</div>
+</div>
+
+---
+title: 怎样把位移变成电信号？
+clicks: 3
+clickAnimation: none
+---
+
+# 怎样把位移变成电信号？
+
+<div class="page-grow">
+<div class="cs-split">
+<div class="cs-split-fig"><CapacitiveSensorSvg :shift="$clicks >= 1 ? 60 : 0" /></div>
+<div class="stack">
+<div class="cs-formula"><Latex tex="C=\frac{\varepsilon_r S}{4\pi k d}" display /></div>
+<div class="cs-point" v-click="1"><span class="cs-no">1</span><div class="cs-point-body">物体位移，电介质板在极板间移动，<Latex tex="C" /> 随之改变。</div></div>
+<div class="ask" v-click="2">用什么方法可以检测电容的变化？</div>
+<div class="cs-point" v-click="3"><span class="cs-no">2</span><div class="cs-point-body">用多用电表的电容挡直接测量；或把电容接入交流电路，由电流、电压的变化来检测。</div></div>
 </div>
 </div>
 </div>

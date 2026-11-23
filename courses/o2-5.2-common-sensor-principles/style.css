@@ -134,3 +134,33 @@
 .slidev-layout.course-cover .cover-title {
   font-size: 2.7rem !important;
 }
+
+/* P8：温度—阻值数据表（首列为物理量，其余数值居中） */
+.p8-table {
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+.p8-table th,
+.p8-table td {
+  text-align: center;
+}
+
+.p8-table th:first-child,
+.p8-table td:first-child {
+  text-align: left;
+}
+
+/* 右栏公式：居中、去掉 KaTeX display 的默认外边距 */
+.cs-formula {
+  display: flex;
+  justify-content: center;
+
+  padding: 0.1rem 0 0.3rem;
+
+  font-size: 1rem;
+}
+
+.cs-formula .katex-display {
+  margin: 0;
+}
