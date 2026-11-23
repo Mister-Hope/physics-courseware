@@ -570,8 +570,8 @@
           "slug": "o1-3.4-wave-interference",
           "title": "波的干涉",
           "chapter": "§3.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解波的叠加原理与干涉条件，分析两列相干波加强、减弱的位置规律，认识干涉图样与生活、技术中的应用。",
+          "tags": ["波的干涉", "叠加原理", "相干波", "干涉图样"]
         },
         {
           "slug": "o1-3.5-doppler-effect",
