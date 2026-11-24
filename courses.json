@@ -878,50 +878,50 @@
           "slug": "o3-4.2-photoelectric-effect",
           "title": "光电效应",
           "chapter": "§4.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "通过光电效应实验规律认识光的粒子性，理解爱因斯坦光电效应方程 hν=W₀+E_k 与遏止电压、截止频率的含义。",
+          "tags": ["光电效应", "光子", "逸出功", "遏止电压"]
         },
         {
           "slug": "o3-4.3-nuclear-model-of-atom",
           "title": "原子的核式结构模型",
           "chapter": "§4.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由电子的发现与 α 粒子散射实验认识原子的核式结构模型，理解核电荷与原子尺度的数量级估算。",
+          "tags": ["α粒子散射", "核式结构", "电子", "原子核"]
         },
         {
           "slug": "o3-4.4-hydrogen-spectrum-and-bohr-model",
           "title": "氢原子光谱和玻尔的原子模型",
           "chapter": "§4.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识氢原子光谱的线状特征与巴耳末公式，理解玻尔定态、跃迁假设及能级结构对光谱的解释。",
+          "tags": ["氢原子光谱", "玻尔模型", "能级", "跃迁"]
         },
         {
           "slug": "o3-4.5-wave-particle-duality-and-quantum-mechanics",
           "title": "粒子的波动性和量子力学的建立",
           "chapter": "§4.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识光的波粒二象性、德布罗意物质波与电子衍射实验，了解量子力学建立的背景与基本观念。",
+          "tags": ["波粒二象性", "物质波", "电子衍射", "量子力学"]
         },
         {
           "slug": "o3-5.1-composition-of-nucleus",
           "title": "原子核的组成",
           "chapter": "§5.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由天然放射现象与三种射线的本质认识原子核的组成，掌握质子数、中子数、质量数与核电荷数的关系。",
+          "tags": ["天然放射", "三种射线", "质子", "中子"]
         },
         {
           "slug": "o3-5.2-radioactive-decay",
           "title": "放射性元素的衰变",
           "chapter": "§5.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解 α、β衰变的规律与核反应方程的书写，掌握半衰期的统计意义与放射性同位素的应用和防护。",
+          "tags": ["α衰变", "β衰变", "半衰期", "放射性同位素"]
         },
         {
           "slug": "o3-5.3-nuclear-force-and-binding-energy",
           "title": "核力与结合能",
           "chapter": "§5.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识核力的性质与四种基本相互作用，理解结合能、比结合能与质量亏损，会用质能方程 E=mc² 计算核能。",
+          "tags": ["核力", "结合能", "质量亏损", "质能方程"]
         },
         {
           "slug": "o3-5.4-nuclear-fission-and-fusion",

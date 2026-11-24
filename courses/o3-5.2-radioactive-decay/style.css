@@ -46,8 +46,8 @@
   border-radius: 50%;
 
   background: color-mix(in srgb, var(--c-accent) 12%, var(--c-surface));
-  box-shadow: 0 0 1.1rem color-mix(in srgb, var(--c-accent) 12%, transparent);
   color: var(--c-text);
+  box-shadow: 0 0 1.1rem color-mix(in srgb, var(--c-accent) 12%, transparent);
 }
 
 .decay-ball--parent {
@@ -58,7 +58,6 @@
 .decay-ball--daughter {
   width: 4rem;
   height: 4rem;
-
   border-color: color-mix(in srgb, var(--c-accent-2) 45%, var(--c-border));
 
   background: color-mix(in srgb, var(--c-accent-2) 14%, var(--c-surface));
@@ -68,7 +67,6 @@
 .decay-ball--particle {
   width: 3.2rem;
   height: 3.2rem;
-
   border-color: color-mix(in srgb, var(--c-physics) 45%, var(--c-border));
 
   background: color-mix(in srgb, var(--c-physics) 14%, var(--c-surface));
@@ -138,7 +136,6 @@
   justify-content: center;
 
   padding: 1.1rem 1.5rem;
-
   border: 2px solid var(--c-accent);
   border-radius: var(--radius-lg);
 
