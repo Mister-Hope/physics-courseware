@@ -1,19 +1,23 @@
 <script setup lang="ts">
 /**
- * 第 11 页（P11）：核心 3D 分步推导（7 击，左右镜像对称 + 汇总 5 公式与变压器零重叠 + 教材磁通量术语统一）
+ * 第 10 页（P10）：电压比与电流比的理想推导（7 击，左右镜像对称 + 汇总公式与变压器零重叠）
+ *
+ * 全页只走「理想变压器」：不出现内阻 r₁ / r₂，也不写 U = E ± Ir 这类关系（这些留给后面的实际变压器）。
  *
  * - 0 击：整体变压器居中，原线圈输入交流电压 U₁，副线圈输出交流电压 U₂
- * - 第 1、2 击（讲原线圈/输入端）： 变压器整体往右移（rigX = 6.95），右侧副线圈完全移出画面外不可见；左侧输入端接线柱与左侧公式区（width: 53%）完全不重叠。
+ * - 第 1、2 击（原线圈/输入端）：变压器整体往右移（rigX = 6.95），副线圈移出画面外；左侧公式区与接线柱完全不重叠。
  *
- *   - C1：上方分析原线圈交变电流 I₁ 产生变化的磁场（穿过每一匝的磁通量 Φ 变化）
- *   - C2：下方列出原线圈两条公式 E₁ = n₁ ΔΦ/Δt，U₁ = E₁ + I₁r₁（标出内阻 r₁）
- * - 第 3、4 击（讲副线圈/输出端，与前两次严格镜像对称）： 变压器整体往左移（rigX = -6.95），左侧原线圈完全移出画面外不可见；右侧输出端与右侧对称公式区（width:
- *   53%）完全不重叠。
+ *   - C1：原线圈交变电流 I₁ 产生变化的磁场（穿过每匝的磁通量 Φ 变化）
+ *   - C2：原线圈的感应电动势 E₁ = n₁ ΔΦ/Δt
+ * - 第 3、4 击（副线圈/输出端，与前两次镜像对称）：变压器整体往左移（rigX = -6.95），原线圈移出画面外。
  *
- *   - C3：上方分析副线圈因磁通量 Φ 变化产生感应电动势与交变电流 I₂
- *   - C4：下方列出副线圈两条公式 E₂ = n₂ ΔΦ/Δt，U₂ = E₂ - I₂r₂（明确写出内阻项是减，与原线圈 U₁ = E₁ + I₁r₁ 形成对照）
- * - 第 5、6、7 击（输出最后五个公式）： 镜头拉远（camPos.z = 18.8），变压器缩小并置于画面左侧（rigX = -5.65），右侧五个公式整体靠右（width:
- *   53%），公式与变压器主体完全分开、绝不重叠，公式之间留出充足间距！
+ *   - C3：副线圈因磁通量 Φ 变化产生感应电动势与交变电流 I₂
+ *   - C4：副线圈的感应电动势 E₂ = n₂ ΔΦ/Δt
+ * - 第 5、6、7 击（汇总）：镜头拉远（camPos.z = 18.8），变压器缩小到左侧（rigX = -5.65），公式整体靠右（width: 53%）。
+ *
+ *   - C5：同一磁通量变化（无漏磁）⇒ E₁/E₂ = n₁/n₂
+ *   - C6：理想化（U₁ = E₁、U₂ = E₂）⇒ U₁/U₂ = n₁/n₂
+ *   - C7：P₁ = P₂ ⇒ I₁/I₂ = n₂/n₁
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
@@ -56,7 +60,7 @@ const startModel = (): void => {
 
   try {
     const instance = new TransformerCoreModel(container);
-    instance.setStep(step);
+    instance.setStep(step, true);
     model = instance;
     mode.value = "3d";
     container.addEventListener(
@@ -200,20 +204,15 @@ onBeforeUnmount(() => {
         <div class="cm-step-eq">
           <span class="cm-var-pill cm-pill-blue">交变电流 <Latex tex="I_1" /></span>
           <span class="cm-arrow">→</span>
-          <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi" /> 变化</span>
-          <span class="cm-var-pill cm-pill-red" :class="{ 'is-hidden': step < 2 }"
-            >内阻 <Latex tex="r_1"
-          /></span>
+          <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi_1" /> 变化</span>
         </div>
       </div>
 
-      <!-- C2: 下方列原线圈两条公式 E₁ = n₁ ΔΦ/Δt，U₁ = E₁ + I₁r₁ -->
+      <!-- C2: 下方列原线圈的感应电动势 E₁ = n₁ ΔΦ/Δt -->
       <div class="cm-step-block is-active" :class="{ 'is-hidden': step < 2 }">
-        <div class="cm-step-label">原线圈（用电端：克服感应电动势 + 内阻压降）</div>
+        <div class="cm-step-label">原线圈：每匝的磁通量变化产生感应电动势</div>
         <div class="cm-step-eq cm-eq-large">
-          <Latex tex="E_1 = n_1 \dfrac{\Delta\Phi}{\Delta t}" />
-          <span class="cm-eq-gap" />
-          <Latex tex="U_1 = E_1 + I_1 r_1" />
+          <Latex tex="E_1 = n_1 \dfrac{\Delta\Phi_1}{\Delta t}" />
         </div>
       </div>
     </div>
@@ -224,24 +223,19 @@ onBeforeUnmount(() => {
       <div class="cm-step-block" :class="[step === 3 ? 'is-active' : 'is-dim']">
         <div class="cm-step-label">副线圈：磁通量变化产生感应电动势与交变电流</div>
         <div class="cm-step-eq">
-          <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi" /> 变化</span>
+          <span class="cm-var-pill cm-pill-gold">磁通量 <Latex tex="\Phi_2" /> 变化</span>
           <span class="cm-arrow">→</span>
           <span class="cm-var-pill cm-pill-teal"
-            >电动势 <Latex tex="E_2" /> · 电流 <Latex tex="I_2"
-          /></span>
-          <span class="cm-var-pill cm-pill-red" :class="{ 'is-hidden': step < 4 }"
-            >内阻 <Latex tex="r_2"
+            >电动势 <Latex tex="E_2" />、电流 <Latex tex="I_2"
           /></span>
         </div>
       </div>
 
-      <!-- C4: 下方列副线圈两条公式 E₂ = n₂ ΔΦ/Δt，U₂ = E₂ - I₂r₂（明确写出内阻项是减，与原线圈对照） -->
+      <!-- C4: 下方列副线圈的感应电动势 E₂ = n₂ ΔΦ/Δt -->
       <div class="cm-step-block is-active" :class="{ 'is-hidden': step < 4 }">
-        <div class="cm-step-label">副线圈（供电端：感应电动势减去内阻压降）</div>
+        <div class="cm-step-label">副线圈：它的磁通量变化激起感应电动势</div>
         <div class="cm-step-eq cm-eq-large">
-          <Latex tex="E_2 = n_2 \dfrac{\Delta\Phi}{\Delta t}" />
-          <span class="cm-eq-gap" />
-          <Latex tex="U_2 = E_2 - I_2 r_2" />
+          <Latex tex="E_2 = n_2 \dfrac{\Delta\Phi_2}{\Delta t}" />
         </div>
       </div>
     </div>
@@ -252,9 +246,7 @@ onBeforeUnmount(() => {
       <div class="cm-chain-row is-dim">
         <span class="cm-chain-tag">原线圈</span>
         <div class="cm-chain-math">
-          <Latex tex="E_1 = n_1 \dfrac{\Delta\Phi}{\Delta t}" />
-          <span>，</span>
-          <Latex tex="U_1 = E_1 + I_1 r_1" />
+          <Latex tex="E_1 = n_1 \dfrac{\Delta\Phi_1}{\Delta t}" />
         </div>
       </div>
 
@@ -262,29 +254,26 @@ onBeforeUnmount(() => {
       <div class="cm-chain-row is-dim">
         <span class="cm-chain-tag">副线圈</span>
         <div class="cm-chain-math">
-          <Latex tex="E_2 = n_2 \dfrac{\Delta\Phi}{\Delta t}" />
-          <span>，</span>
-          <Latex tex="U_2 = E_2 - I_2 r_2" />
+          <Latex tex="E_2 = n_2 \dfrac{\Delta\Phi_2}{\Delta t}" />
         </div>
       </div>
 
       <!-- 公式 3 (C5)：无漏磁（同一磁通量 Φ） -> 电动势比等于匝数比 -->
       <div class="cm-chain-row" :class="[step === 5 ? 'is-active' : 'is-dim']">
-        <span class="cm-chain-tag">磁通量 <Latex tex="\Phi" /></span>
+        <span class="cm-chain-tag">无漏磁</span>
         <div class="cm-chain-math">
-          <Latex tex="\dfrac{E_1}{E_2} = \dfrac{n_1}{n_2}" />
-          <span class="cm-cond-note">（只需无漏磁）</span>
+          <Latex tex="\Phi_1 = \Phi_2 \ \Rightarrow\ \dfrac{E_1}{E_2} = \dfrac{n_1}{n_2}" />
         </div>
       </div>
 
-      <!-- 公式 4 (C6)：理想化 r₁=r₂=0 -> 电压比等于匝数比 -->
+      <!-- 公式 4 (C6)：理想化（U₁ = E₁、U₂ = E₂）-> 电压比等于匝数比 -->
       <div
         class="cm-chain-row"
         :class="[step === 6 ? 'is-active' : 'is-dim', { 'is-hidden': step < 6 }]"
       >
         <span class="cm-chain-tag">理想化</span>
         <div class="cm-chain-math">
-          <Latex tex="r_1 = r_2 = 0 \ \Rightarrow\ \dfrac{U_1}{U_2} = \dfrac{n_1}{n_2}" />
+          <Latex tex="U_1 = E_1,\ U_2 = E_2 \ \Rightarrow\ \dfrac{U_1}{U_2} = \dfrac{n_1}{n_2}" />
         </div>
       </div>
 
@@ -302,16 +291,14 @@ onBeforeUnmount(() => {
 
     <!-- 3D 变压器主体旁侧的实时状态角标 -->
     <div v-if="isPrimaryFocus" class="cm-corner-tag cm-corner-right">
-      <span>原线圈：<Latex tex="n_1" />、<Latex tex="I_1" />、磁通量 <Latex tex="\Phi" /></span>
-      <span class="cm-r-tag" :class="{ 'is-hidden': step < 2 }">内阻 <Latex tex="r_1" /></span>
+      <span>原线圈：<Latex tex="n_1" />、<Latex tex="I_1" />、磁通量 <Latex tex="\Phi_1" /></span>
     </div>
     <div v-if="isSecondaryFocus || isSummaryChain" class="cm-corner-tag cm-corner-left">
       <span v-if="step === 3 || step === 4">
-        副线圈：<Latex tex="n_2" />、<Latex tex="I_2" />、磁通量 <Latex tex="\Phi" />
-        <span v-if="step === 4" class="cm-r-tag"> · 内阻 <Latex tex="r_2" /></span>
+        副线圈：<Latex tex="n_2" />、<Latex tex="I_2" />、磁通量 <Latex tex="\Phi_2" />
       </span>
-      <span v-else-if="step === 5">闭合磁路：穿过每匝的磁通量 <Latex tex="\Phi" /> 相同</span>
-      <span v-else-if="step === 6">理想模型：<Latex tex="r_1=r_2=0" />、无漏磁、无铁损</span>
+      <span v-else-if="step === 5">闭合磁路：穿过每匝的磁通量都相同</span>
+      <span v-else-if="step === 6">理想模型：无漏磁、不计线圈电阻</span>
       <span v-else>能量传递：<Latex tex="P_1 \rightarrow P_2" /></span>
     </div>
   </div>
@@ -421,9 +408,9 @@ onBeforeUnmount(() => {
   padding: 0.85rem 0 0.85rem 1.2rem;
 }
 
-/* C5-C7 右侧五个汇总公式：直接从屏幕右侧边缘探出来（右侧圆角与右边框在屏幕外，right: -2.4rem），既省空间又让每条公式宽裕单行不换行，且与左侧变压器零重叠！ */
+/* C5-C7 右侧五个汇总公式：直接从屏幕右侧边缘探出来，既省空间又让每条公式宽裕单行不换行，且与左侧变压器零重叠！ */
 .cm-zone-right-chain {
-  right: -2.4rem;
+  right: -1.95rem;
   gap: 0.56rem;
   width: 58.5%;
   padding: 0.45rem 0 0.45rem 1.2rem;
@@ -505,11 +492,6 @@ onBeforeUnmount(() => {
 .cm-pill-gold {
   background: var(--c-accent-soft);
   color: var(--c-accent);
-}
-
-.cm-pill-red {
-  background: var(--c-danger-soft);
-  color: var(--c-danger);
 }
 
 .cm-arrow {
@@ -608,10 +590,6 @@ onBeforeUnmount(() => {
 
 .cm-corner-left {
   left: 1.5rem;
-}
-
-.cm-r-tag {
-  color: var(--c-danger);
 }
 
 .is-hidden {

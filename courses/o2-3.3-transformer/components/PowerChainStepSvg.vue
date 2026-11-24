@@ -102,7 +102,7 @@ const socketNoteStyle = computed(() => ({
 }));
 const cableNoteStyle = computed(() => ({
   left: `${cableMid.value.x - 16}px`,
-  top: `${cableMid.value.y - 68}px`,
+  top: `${cableMid.value.y - 88}px`,
 }));
 const adapterNoteStyle = computed(() => ({
   left: `${adapterDot.value.x + 58}px`,
@@ -267,8 +267,9 @@ onBeforeUnmount(() => {
       <div class="pc3-note-val text-danger"><Latex tex="220\ \text{V}" /> 交流</div>
     </div>
 
-    <!-- C4 供电线：5 V -->
+    <!-- C4 供电线：USB / 5 V -->
     <div class="pc3-note" :class="{ 'is-hidden': !showCableNote }" :style="cableNoteStyle">
+      <div class="pc3-note-name">USB</div>
       <div class="pc3-note-val text-accent-2"><Latex tex="5\ \text{V}" /></div>
     </div>
 

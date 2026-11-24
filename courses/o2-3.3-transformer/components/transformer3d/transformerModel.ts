@@ -258,7 +258,13 @@ export interface TransformerPose {
   leakFluxAlpha: number;
 }
 
-export type TransformerSceneMode = "structure" | "principle" | "derivation" | "loss";
+export type TransformerSceneMode =
+  | "intro"
+  | "structure"
+  | "principle"
+  | "derivation"
+  | "loss"
+  | "ue";
 
 export interface ProjectedTransformerAnchors {
   leftCoil: { x: number; y: number };
@@ -441,14 +447,87 @@ const PRINCIPLE_POSES: TransformerPose[] = [
   },
 ];
 
-// P10 实际变压器的能量损耗 + 理想变压器合并页（5 击，13 §4）
+// P4 结构与原理合并页（4 击，5 帧：
+// 0/1 击：保持正视图 STRUCTURE_POSES[0]；
+// 2 击（原线圈）：镜头绕着变压器转，停在只露原线圈左半截的机位（副线圈移出右画面外），展现线圈侧面立体厚度；
+// 3 击（闭合铁芯）：镜头下沉并继续绕转，铁芯从画面下缘转进来、只露上半截，上半圈磁环流完整清晰；
+// 4 击（副线圈）：镜头从左侧绕回，只露副线圈右半截，U₂ 与接线端在视野内）
+const INTRO_POSES: TransformerPose[] = [
+  STRUCTURE_POSES[0],
+  STRUCTURE_POSES[0],
+  // Step 2 (原线圈特写)：向右旋转 + 大幅右移（rigX = 3.15），副线圈完全移出画面右外侧，只露左半截原线圈与输入端 U₁~
+  {
+    rigX: 3.15,
+    rigY: -0.05,
+    rigRotY: 0.44,
+    camPos: new Vector3(-0.35, 0.72, 9.2),
+    camLookAt: new Vector3(-0.2, -0.05, 0),
+    coreOpacity: 0.38,
+    wireframeOpacity: 0.72,
+    primaryCoilOpacity: 0.56,
+    secondaryCoilOpacity: 0.65,
+    primaryCurrentAlpha: 1,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0.68,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 3 (闭合铁芯上半截特写)：镜头下沉并继续旋转，铁芯从画面下缘转进来、只露上半截，上半圈磁环流完整清晰
+  {
+    rigX: -0.08,
+    rigY: -1.48,
+    rigRotY: 0.14,
+    camPos: new Vector3(-0.08, -0.45, 9.6),
+    camLookAt: new Vector3(-0.08, 0.18, 0),
+    coreOpacity: 0.28,
+    wireframeOpacity: 0.88,
+    primaryCoilOpacity: 0.52,
+    secondaryCoilOpacity: 0.52,
+    primaryCurrentAlpha: 1,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 1,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 4 (副线圈特写)：镜头从左侧绕回，只露副线圈右半截（原线圈完全移出画面左外侧），U₂ 与接线端在视野内
+  {
+    rigX: -3.15,
+    rigY: -0.05,
+    rigRotY: -0.42,
+    camPos: new Vector3(0.35, 0.72, 9.2),
+    camLookAt: new Vector3(0.2, -0.05, 0),
+    coreOpacity: 0.34,
+    wireframeOpacity: 0.78,
+    primaryCoilOpacity: 0.52,
+    secondaryCoilOpacity: 0.54,
+    primaryCurrentAlpha: 1,
+    secondaryCurrentAlpha: 1,
+    fluxAlpha: 1,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+];
+
+// P9 实际变压器的能量损耗 + 理想变压器合并页（5 击，13 §4）
 const LOSS_POSES: TransformerPose[] = [
-  // Step 0: 初始全景实际变压器
+  // Step 0: 初始全景实际变压器（镜头机位与 C1 完全一致，避免点第 1 击时出现多余的放大/缩回跳动）
   {
     rigX: 0.48,
     rigY: 0,
     rigRotY: 0.2,
-    camPos: new Vector3(0.1, 1.05, 15.2),
+    camPos: new Vector3(0.1, 1.05, 15.1),
     camLookAt: new Vector3(0.1, 0, 0),
     coreOpacity: 0.88,
     wireframeOpacity: 0.3,
@@ -464,21 +543,21 @@ const LOSS_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // C1 (step 1 - 铜损): 原、副线圈发红色微光（体现发热 I²r），铁芯不红
+  // C1 (step 1 - 铜损): 原、副线圈发红色呼吸光芒（体现发热 I²r），铁芯不红，不画引线上的方块电阻
   {
     rigX: 0.48,
     rigY: 0,
-    rigRotY: 0.22,
-    camPos: new Vector3(0.1, 0.95, 14.9),
+    rigRotY: 0.2,
+    camPos: new Vector3(0.1, 1.05, 15.1),
     camLookAt: new Vector3(0.1, 0, 0),
     coreOpacity: 0.9,
     wireframeOpacity: 0.28,
-    primaryCoilOpacity: 0.95,
-    secondaryCoilOpacity: 0.95,
+    primaryCoilOpacity: 0.96,
+    secondaryCoilOpacity: 0.96,
     primaryCurrentAlpha: 0.95,
     secondaryCurrentAlpha: 0.95,
     fluxAlpha: 0.35,
-    resistorPinAlpha: 0.85,
+    resistorPinAlpha: 0,
     powerBridgeAlpha: 0,
     copperHeatAlpha: 1,
     ironHeatAlpha: 0,
@@ -527,7 +606,7 @@ const LOSS_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 1,
   },
-  // C4 (step 4 - 收拢): 左侧模型同时呈现三种现象（铜损线圈发红 + 铁损涡流泛红 + 漏磁感线）
+  // C4 (step 4 - 收拢): 左侧模型同时呈现三种现象（铜损线圈发红呼吸光芒 + 铁损涡流泛红 + 漏磁感线）
   {
     rigX: 0.48,
     rigY: 0,
@@ -536,12 +615,12 @@ const LOSS_POSES: TransformerPose[] = [
     camLookAt: new Vector3(0.1, 0, 0),
     coreOpacity: 0.38,
     wireframeOpacity: 0.84,
-    primaryCoilOpacity: 0.82,
-    secondaryCoilOpacity: 0.82,
+    primaryCoilOpacity: 0.86,
+    secondaryCoilOpacity: 0.86,
     primaryCurrentAlpha: 0.9,
     secondaryCurrentAlpha: 0.8,
     fluxAlpha: 0.85,
-    resistorPinAlpha: 0.7,
+    resistorPinAlpha: 0,
     powerBridgeAlpha: 0,
     copperHeatAlpha: 0.92,
     ironHeatAlpha: 0.88,
@@ -746,6 +825,86 @@ const DERIVATION_POSES: TransformerPose[] = [
   },
 ];
 
+// P11 实际变压器的 U 与 E（3 击，全页静止：无磁环流、无电流粒子、无循环 rAF，只留 3 次平滑切镜：0 整体 -> 1 原线圈侧特写 -> 2 副线圈侧特写 -> 3 拉远复盘）
+const UE_POSES: TransformerPose[] = [
+  // Step 0: 整体变压器居中
+  {
+    ...DERIVATION_POSES[0],
+    camPos: DERIVATION_POSES[0].camPos.clone(),
+    camLookAt: DERIVATION_POSES[0].camLookAt.clone(),
+    coreOpacity: 0.92,
+    wireframeOpacity: 0.28,
+    primaryCoilOpacity: 0.95,
+    secondaryCoilOpacity: 0.95,
+    primaryCurrentAlpha: 0,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 1 (C1): 原线圈特写（主体在右 rigX = 6.95，文字在左）
+  {
+    ...DERIVATION_POSES[1],
+    camPos: DERIVATION_POSES[1].camPos.clone(),
+    camLookAt: DERIVATION_POSES[1].camLookAt.clone(),
+    coreOpacity: 0.92,
+    wireframeOpacity: 0.28,
+    primaryCoilOpacity: 0.96,
+    secondaryCoilOpacity: 0.94,
+    primaryCurrentAlpha: 0,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 2 (C2): 副线圈特写（主体在左 rigX = -6.95，文字在右）
+  {
+    ...DERIVATION_POSES[3],
+    camPos: DERIVATION_POSES[3].camPos.clone(),
+    camLookAt: DERIVATION_POSES[3].camLookAt.clone(),
+    coreOpacity: 0.92,
+    wireframeOpacity: 0.28,
+    primaryCoilOpacity: 0.94,
+    secondaryCoilOpacity: 0.96,
+    primaryCurrentAlpha: 0,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 3 (C3): 拉远复盘（主体在左 rigX = -5.65，右侧竖排三块文字）
+  {
+    ...DERIVATION_POSES[5],
+    camPos: DERIVATION_POSES[5].camPos.clone(),
+    camLookAt: DERIVATION_POSES[5].camLookAt.clone(),
+    coreOpacity: 0.92,
+    wireframeOpacity: 0.28,
+    primaryCoilOpacity: 0.95,
+    secondaryCoilOpacity: 0.95,
+    primaryCurrentAlpha: 0,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+];
+
 const clonePose = (pose: TransformerPose): TransformerPose => ({
   ...pose,
   camPos: pose.camPos.clone(),
@@ -782,7 +941,6 @@ export class TransformerCoreModel {
   private wireframeMaterial!: LineBasicMaterial;
   private primaryCoilMaterial!: MeshStandardMaterial;
   private secondaryCoilMaterial!: MeshStandardMaterial;
-  private resistorPinMaterial!: MeshStandardMaterial;
   private powerBridgeMaterial!: MeshBasicMaterial;
   private pmremGenerator: PMREMGenerator | null = null;
 
@@ -840,13 +998,17 @@ export class TransformerCoreModel {
   ) {
     this.onFrameCallback = onFrame;
     this.poses =
-      mode === "structure"
-        ? STRUCTURE_POSES
-        : mode === "principle"
-          ? PRINCIPLE_POSES
-          : mode === "loss"
-            ? LOSS_POSES
-            : DERIVATION_POSES;
+      mode === "intro"
+        ? INTRO_POSES
+        : mode === "structure"
+          ? STRUCTURE_POSES
+          : mode === "principle"
+            ? PRINCIPLE_POSES
+            : mode === "loss"
+              ? LOSS_POSES
+              : mode === "ue"
+                ? UE_POSES
+                : DERIVATION_POSES;
 
     this.scene = new Scene();
     this.scene.background = null;
@@ -874,6 +1036,7 @@ export class TransformerCoreModel {
     this.currentPose = clonePose(this.poses[0]);
     this.startPose = clonePose(this.poses[0]);
     this.targetPose = clonePose(this.poses[0]);
+    this.tweenStart = performance.now();
 
     this.setupLights();
     this.buildTransformerRig();
@@ -882,10 +1045,22 @@ export class TransformerCoreModel {
     this.applyPose(this.currentPose, Math.PI * 0.42, 0);
     this.renderOnce();
 
+    if (this.shouldLoopFlow()) {
+      this.isAnimating = true;
+      this.rafId = requestAnimationFrame(this.tick);
+    }
+
     this.resizeObserver = new ResizeObserver(() => {
       this.handleResize();
     });
     this.resizeObserver.observe(this.container);
+  }
+
+  private shouldLoopFlow(): boolean {
+    if (this.mode === "loss") return true;
+    if (this.mode === "intro" && this.currentStep >= 2) return true;
+    if (this.mode === "principle" && this.currentStep >= 1) return true;
+    return false;
   }
 
   private getElementScale(): number {
@@ -1111,24 +1286,7 @@ export class TransformerCoreModel {
     outPlate.position.set(4.38, 0, 0.15);
     this.rig.add(outPlate);
 
-    // 4. 线圈等效内阻“电压钉” r₁ / r₂
-    this.resistorPinMaterial = new MeshStandardMaterial({
-      color: "#f87171",
-      emissive: "#ef4444",
-      emissiveIntensity: 0.55,
-      transparent: true,
-      opacity: 0,
-    });
-    const r1Pin = new Mesh(
-      new CylinderGeometry(0.14, 0.14, 0.52, 16).rotateZ(Math.PI / 2),
-      this.resistorPinMaterial,
-    );
-    r1Pin.position.set(-3.4, 0.85, 0);
-    const r2Pin = r1Pin.clone();
-    r2Pin.position.set(3.4, 0.85, 0);
-    this.rig.add(r1Pin, r2Pin);
-
-    // 5. 铁芯内部 5 条不同半径的闭合圆角磁感线环流（线上只放箭头）
+    // 4. 铁芯内部 5 条不同半径的闭合圆角磁感线环流（线上只放箭头）
     const ringConfigs = [
       { hw: 1.72, hh: 1.32, r: 0.24 },
       { hw: 1.92, hh: 1.52, r: 0.28 },
@@ -1262,61 +1420,47 @@ export class TransformerCoreModel {
     this.leakGroup.visible = false;
 
     const leakConeGeo = new ConeGeometry(0.072, 0.2, 12);
-    // 1. 原线圈一侧靠近输入电压端（左侧 x < -2.6）闭合在空气中的漏磁感线回路
-    // 2. 铁芯四个转角（左上、右上、右下、左下）散出铁芯外的漏磁弧线
+    // 真实漏磁：原线圈自己产生的一部分磁通量经绕组之间的空气（以及原线圈外侧空气）自行闭合、根本不经过右侧副线圈（X = +2.125）！
+    // 画成从原线圈一端鼓到铁芯之外、再回到原线圈另一端的 3 条蓝色闭合回路（前后错开，像绕在左支腿与窗口空气外面）：
     const leakPaths: Vector3[][] = [
-      // 原线圈靠近电压端外侧大漏磁环
+      // 回路 1（窗口内侧偏前 z = +0.26）：从左支腿原线圈上端出 -> 经两绕组之间的窗口空气鼓出 -> 回到原线圈下端（不经过右支腿副线圈）
       [
-        new Vector3(-2.35, -0.75, 0),
-        new Vector3(-2.45, 0, 0.15),
-        new Vector3(-2.35, 0.75, 0),
-        new Vector3(-3.35, 1.05, 0.22),
-        new Vector3(-3.82, 0, 0.28),
-        new Vector3(-3.35, -1.05, 0.22),
+        new Vector3(-2.05, -0.92, 0.14),
+        new Vector3(-2.12, 0, 0.16),
+        new Vector3(-2.05, 0.92, 0.14),
+        new Vector3(-1.32, 1.32, 0.26),
+        new Vector3(-0.38, 0.72, 0.34),
+        new Vector3(-0.22, 0, 0.38),
+        new Vector3(-0.38, -0.72, 0.34),
+        new Vector3(-1.32, -1.32, 0.26),
       ],
-      // 原线圈靠近电压端内层漏磁环
+      // 回路 2（窗口内侧偏后 z = -0.26）：与回路 1 前后错开，从原线圈上端经绕组间空气自行闭合回原线圈下端
       [
-        new Vector3(-2.3, -0.55, 0),
-        new Vector3(-2.36, 0, -0.12),
-        new Vector3(-2.3, 0.55, 0),
-        new Vector3(-3.02, 0.78, -0.18),
-        new Vector3(-3.32, 0, -0.22),
-        new Vector3(-3.02, -0.78, -0.18),
+        new Vector3(-2.02, -0.76, -0.14),
+        new Vector3(-2.08, 0, -0.16),
+        new Vector3(-2.02, 0.76, -0.14),
+        new Vector3(-1.42, 1.12, -0.24),
+        new Vector3(-0.78, 0.56, -0.32),
+        new Vector3(-0.64, 0, -0.35),
+        new Vector3(-0.78, -0.56, -0.32),
+        new Vector3(-1.42, -1.12, -0.24),
       ],
-      // 左上铁芯转角散出磁感线
+      // 回路 3（原线圈左外侧空气 z = +0.18）：从原线圈上端鼓到左支腿外侧空气再回到原线圈下端
       [
-        new Vector3(-2.55, 1.25, 0),
-        new Vector3(-3.18, 2.05, 0.12),
-        new Vector3(-2.55, 2.68, 0.15),
-        new Vector3(-1.45, 2.45, 0),
-      ],
-      // 右上铁芯转角散出磁感线
-      [
-        new Vector3(1.45, 2.45, 0),
-        new Vector3(2.55, 2.68, 0.15),
-        new Vector3(3.18, 2.05, 0.12),
-        new Vector3(2.55, 1.25, 0),
-      ],
-      // 右下铁芯转角散出磁感线
-      [
-        new Vector3(2.55, -1.25, 0),
-        new Vector3(3.18, -2.05, 0.12),
-        new Vector3(2.55, -2.68, 0.15),
-        new Vector3(1.45, -2.45, 0),
-      ],
-      // 左下铁芯转角散出磁感线
-      [
-        new Vector3(-1.45, -2.45, 0),
-        new Vector3(-2.55, -2.68, 0.15),
-        new Vector3(-3.18, -2.05, 0.12),
-        new Vector3(-2.55, -1.25, 0),
+        new Vector3(-2.22, -0.88, 0.08),
+        new Vector3(-2.16, 0, 0.1),
+        new Vector3(-2.22, 0.88, 0.08),
+        new Vector3(-2.95, 1.24, 0.18),
+        new Vector3(-3.55, 0.65, 0.24),
+        new Vector3(-3.72, 0, 0.26),
+        new Vector3(-3.55, -0.65, 0.24),
+        new Vector3(-2.95, -1.24, 0.18),
       ],
     ];
 
-    for (let i = 0; i < leakPaths.length; i += 1) {
-      const isClosed = i < 2;
-      const curve = new CatmullRomCurve3(leakPaths[i], isClosed);
-      const lineGeo = new TubeGeometry(curve, 40, 0.022, 8, isClosed);
+    for (const path of leakPaths) {
+      const curve = new CatmullRomCurve3(path, true);
+      const lineGeo = new TubeGeometry(curve, 48, 0.022, 8, true);
       const lineMat = new MeshBasicMaterial({
         color: "#60a5fa",
         transparent: true,
@@ -1364,13 +1508,32 @@ export class TransformerCoreModel {
   }
 
   // 切换到指定点击步
-  // oxlint-disable-next-line complexity -- 处理 P4 线圈闪烁、P11 跨屏转体与交流正负半周演示
-  setStep(step: number): void {
+  // oxlint-disable-next-line complexity, max-statements -- 处理 P4 线圈闪烁、P10 跨屏转体与交流正负半周演示
+  setStep(step: number, immediate = false): void {
     if (this.destroyed) return;
     const clamped = clamp(step, 0, this.poses.length - 1);
+    if (!immediate && clamped === this.currentStep) return;
+
     const isForward = clamped > this.currentStep;
     const prevStep = this.currentStep;
     this.currentStep = clamped;
+
+    if (immediate) {
+      this.currentPose = clonePose(this.poses[clamped]);
+      this.startPose = clonePose(this.poses[clamped]);
+      this.targetPose = clonePose(this.poses[clamped]);
+      this.tweenStart = performance.now();
+      this.tweenDuration = 1;
+      this.flashTarget = "none";
+      this.flowDuration = 0;
+      this.applyPose(this.currentPose, Math.PI * 0.42, 9999);
+      this.renderOnce();
+      if (this.shouldLoopFlow() && !this.isAnimating && this.active) {
+        this.isAnimating = true;
+        this.rafId = requestAnimationFrame(this.tick);
+      }
+      return;
+    }
 
     this.startPose = clonePose(this.currentPose);
     this.targetPose = clonePose(this.poses[clamped]);
@@ -1384,10 +1547,14 @@ export class TransformerCoreModel {
     const now = performance.now();
     this.tweenStart = now;
     this.tweenDuration =
-      this.mode === "derivation" &&
-      ((prevStep === 2 && clamped === 3) || (prevStep === 3 && clamped === 2))
-        ? 960
-        : 780;
+      this.mode === "intro" && clamped >= 2
+        ? 1120
+        : this.mode === "ue"
+          ? 700
+          : this.mode === "derivation" &&
+              ((prevStep === 2 && clamped === 3) || (prevStep === 3 && clamped === 2))
+            ? 960
+            : 780;
 
     // P4 结构页：第 2 击闪烁左（原）线圈，第 3 击闪烁右（副）线圈（13 §2.2）
     if (this.mode === "structure" && isForward && (clamped === 2 || clamped === 3)) {
@@ -1397,7 +1564,7 @@ export class TransformerCoreModel {
       this.flashTarget = "none";
     }
 
-    this.flowDuration = clamped >= 1 && isForward ? 2200 : 0;
+    this.flowDuration = this.mode === "ue" ? 0 : clamped >= 1 && isForward ? 2200 : 0;
 
     if (!this.isAnimating && this.active) {
       this.isAnimating = true;
@@ -1476,8 +1643,10 @@ export class TransformerCoreModel {
 
     const flashDuration = this.flashTarget === "none" ? 0 : 1450;
     const totalDuration = Math.max(this.tweenDuration, this.flowDuration, flashDuration);
-    const phase =
-      this.flowDuration > 0 && elapsed < this.flowDuration
+    const isContinuousFlow = this.shouldLoopFlow();
+    const phase = isContinuousFlow
+      ? now * 0.001 * ((Math.PI * 2) / 2.2)
+      : this.flowDuration > 0 && elapsed < this.flowDuration
         ? (elapsed / this.flowDuration) * Math.PI * 2.42
         : Math.PI * 0.42;
 
@@ -1486,7 +1655,7 @@ export class TransformerCoreModel {
     this.renderer.render(this.scene, this.camera);
     this.emitProjectedAnchors();
 
-    if (elapsed < totalDuration) {
+    if (elapsed < totalDuration || isContinuousFlow) {
       this.rafId = requestAnimationFrame(this.tick);
     } else {
       this.currentPose = clonePose(this.targetPose);
@@ -1525,15 +1694,18 @@ export class TransformerCoreModel {
       else if (this.flashTarget === "secondary") secondaryFlashBoost = pulse * 1.15;
     }
 
-    // 铜损：原、副线圈发红色微光（体现通电发热 I²r）
+    // 铜损：原、副线圈发红色呼吸光芒（体现通电发热 I²r，随连续时间柔和明暗呼吸）
     if (pose.copperHeatAlpha > 0.02) {
+      const heatBreath = 0.5 + 0.5 * Math.sin(acPhase * 1.4);
+      const heatIntensity = (0.35 + 0.85 * heatBreath) * pose.copperHeatAlpha;
+
       this.primaryCoilMaterial.color.set("#f87171");
       this.primaryCoilMaterial.emissive.set("#ef4444");
-      this.primaryCoilMaterial.emissiveIntensity = 0.34 + pose.copperHeatAlpha * 0.68;
+      this.primaryCoilMaterial.emissiveIntensity = 0.25 + heatIntensity;
 
       this.secondaryCoilMaterial.color.set("#fb7185");
       this.secondaryCoilMaterial.emissive.set("#e11d48");
-      this.secondaryCoilMaterial.emissiveIntensity = 0.34 + pose.copperHeatAlpha * 0.68;
+      this.secondaryCoilMaterial.emissiveIntensity = 0.25 + heatIntensity;
     } else {
       this.primaryCoilMaterial.color.set("#2563eb");
       this.primaryCoilMaterial.emissive.set(primaryFlashBoost > 0.1 ? "#93c5fd" : "#1d4ed8");
@@ -1544,7 +1716,6 @@ export class TransformerCoreModel {
       this.secondaryCoilMaterial.emissiveIntensity = 0.26 + secondaryFlashBoost;
     }
 
-    this.resistorPinMaterial.opacity = pose.resistorPinAlpha;
     this.powerBridgeMaterial.opacity = pose.powerBridgeAlpha * 0.38;
 
     const acVal = Math.sin(acPhase);
@@ -1601,13 +1772,14 @@ export class TransformerCoreModel {
       }
     }
 
-    // P10 漏磁：原线圈一侧靠近电压端 + 铁芯四个转角散出的磁感线
+    // P9 漏磁：原线圈产生的部分磁通量经绕组间空气自行闭合，不经过副线圈
     this.leakGroup.visible = pose.leakFluxAlpha > 0.005;
     if (this.leakGroup.visible) {
-      const uMid = 0.5 + 0.14 * Math.sin(acPhase);
+      const visualMag = 0.22 + 0.78 * acMag;
+      const uMid = 0.62 + 0.08 * Math.sin(acPhase);
       for (const arc of this.leakArcs) {
-        arc.lineMat.opacity = pose.leakFluxAlpha * 0.84;
-        arc.arrowMat.opacity = pose.leakFluxAlpha * 0.96;
+        arc.lineMat.opacity = pose.leakFluxAlpha * 0.86 * visualMag;
+        arc.arrowMat.opacity = pose.leakFluxAlpha * 0.96 * visualMag;
         const pos = arc.curve.getPointAt(uMid);
         const tangent = arc.curve.getTangentAt(uMid).multiplyScalar(dirSign).normalize();
         arc.arrowMesh.position.copy(pos);
@@ -1655,7 +1827,12 @@ export class TransformerCoreModel {
       this.isAnimating = false;
     } else if (active) {
       this.syncRendererScale(true);
-      this.renderOnce();
+      if (this.shouldLoopFlow() && !this.isAnimating) {
+        this.isAnimating = true;
+        this.rafId = requestAnimationFrame(this.tick);
+      } else {
+        this.renderOnce();
+      }
     }
   }
 

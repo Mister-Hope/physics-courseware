@@ -46,14 +46,14 @@ clickAnimation: none
 
 ---
 title: 变压器的结构与作用
-clicks: 3
+clicks: 4
 clickAnimation: none
 ---
 
 # 变压器的结构与作用
 
 <div class="page-grow">
-<TransformerStructureSvg :step="$clicks" />
+<TransformerIntro3D :step="$clicks" />
 </div>
 
 ---
@@ -215,12 +215,12 @@ clicks: 2
 </div>
 </div>
 ---
-title: 实际变压器的能量损耗与理想变压器
+title: 理想变压器与变压器中的能量损耗
 clicks: 5
 clickAnimation: none
 ---
 
-# 实际变压器的能量损耗与理想变压器
+# 理想变压器与变压器中的能量损耗
 
 <div class="page-grow">
 <TransformerLoss3D :step="$clicks" />
@@ -234,6 +234,16 @@ clickAnimation: none
 
 <div class="page-grow">
 <CoreMasterScene :step="$clicks" />
+</div>
+
+---
+title: 实际变压器的 U 与 E
+clicks: 3
+clickAnimation: none
+---
+
+<div class="page-grow">
+<TransformerUe3D :step="$clicks" />
 </div>
 
 ---

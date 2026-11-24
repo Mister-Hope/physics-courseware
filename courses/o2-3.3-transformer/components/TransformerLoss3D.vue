@@ -1,17 +1,14 @@
 <script setup lang="ts">
 /**
- * 第 10 页（P10，合并原 P11）：实际变压器的能量损耗与理想变压器（5 击，13-Gemini4修改清单.md §4）
+ * 第 9 页（P9）：理想变压器与变压器中的能量损耗（5 击，纯定性，全页不出现任何公式）
  *
- * 严格按 13 §4 实现：
+ * 左侧同一台 3D 变压器，右侧三张损耗卡 + 理想化三条件：
  *
- * - 左侧同一台 3D 变压器，右侧三张损耗卡 + 理想变压器归纳：
- *
- *   1. 第 1 击（铜损）：原、副线圈发红色微光（体现发热），铁芯不红；卡片公式保留。
- *   2. 第 2 击（铁损）：镜头近距离拉近铁芯的一小段；展示变化磁场下的涡旋电场；铁芯内部泛红光；卡片公式保留。
- *   3. 第 3 击（漏磁）：原线圈一侧靠近电压端有漏磁感线；铁芯每个转角也有磁感线漏出；U₂ 偏低；卡片公式保留。
- *   4. 第 4 击（收拢）：三张卡变小，去掉公式，只留 6 个字：`铜损`、`铁损`、`漏磁`；右侧加一句很短的总结；左侧模型**同时呈现三种现象**。
- *   5. 第 5 击（理想变压器）：把原 P11 的三条件（无漏磁、无损耗、无内阻）和三公式（P₁=P₂、U₁/U₂=n₁/n₂、I₁/I₂=n₂/n₁）都放进这一页；
- *      左侧模型去掉非理想效应（不红、不涡流、不漏磁）。
+ * 1. C1 铜损：原、副线圈发红色微光（发热），铁芯不红。
+ * 2. C2 铁损：镜头拉近铁芯的一小段，展示变化磁场下的涡旋电场，铁芯内部泛红光。
+ * 3. C3 漏磁：原线圈一侧与铁芯转角漏出磁感线，副线圈磁通量变化率变小。
+ * 4. C4 收拢：三张卡收成「铜损 / 铁损 / 漏磁」六个字 + 一句总结，模型同时呈现三种现象。
+ * 5. C5 理想化：只列三个条件（无漏磁 / 无损耗 / 无内阻）；电压比、电流比等公式留到下一页推导。
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
@@ -56,7 +53,7 @@ const startModel = (): void => {
 
   try {
     const instance = new TransformerCoreModel(container, "loss");
-    instance.setStep(step);
+    instance.setStep(step, true);
     model = instance;
     mode.value = "3d";
     container.addEventListener(
@@ -155,6 +152,31 @@ onBeforeUnmount(() => {
             :line-width="2.4"
             color="var(--c-physics)"
           />
+          <!-- 2D 降级图：主磁路（沿铁芯的金色环流） -->
+          <rect
+            x="114"
+            y="84"
+            width="192"
+            height="182"
+            rx="12"
+            fill="none"
+            stroke="var(--c-accent)"
+            stroke-width="2"
+            stroke-dasharray="6 4"
+            opacity="0.72"
+          />
+          <!-- 2D 降级图：漏磁回路（从原线圈一端鼓到绕组间与外侧空气、再回到原线圈另一端的蓝色闭合回路，不经过副线圈） -->
+          <g
+            v-if="showLeak && !showIdeal"
+            fill="none"
+            stroke="var(--c-accent-2)"
+            stroke-width="2"
+            stroke-dasharray="4 3"
+          >
+            <path d="M 118 118 C 192 98, 192 252, 118 232 Z" />
+            <path d="M 118 130 C 166 116, 166 234, 118 220 Z" opacity="0.82" />
+            <path d="M 108 120 C 46 104, 46 246, 108 230 Z" opacity="0.88" />
+          </g>
         </svg>
       </div>
     </div>
@@ -169,9 +191,6 @@ onBeforeUnmount(() => {
         >
           <div class="tl-kicker">铜损</div>
           <template v-if="!isCompact">
-            <div class="tl-formula">
-              <Latex tex="P_{\text{铜}}=I_1^2r_1+I_2^2r_2" />
-            </div>
             <div class="tl-note">
               线圈有电阻，通电发热（原、副线圈都有）；内阻分压使 <Latex tex="U_2" /> 比理想值低。
             </div>
@@ -184,10 +203,7 @@ onBeforeUnmount(() => {
         >
           <div class="tl-kicker">铁损</div>
           <template v-if="!isCompact">
-            <div class="tl-formula">铁芯会发热</div>
-            <div class="tl-note">
-              交变磁场在铁芯中产生涡流，所以铁芯会发热，降低效率 <Latex tex="P_2<P_1" />。
-            </div>
+            <div class="tl-note">交变磁场在铁芯中产生涡流，铁芯发热，效率降低。</div>
           </template>
         </div>
 
@@ -197,11 +213,8 @@ onBeforeUnmount(() => {
         >
           <div class="tl-kicker">漏磁</div>
           <template v-if="!isCompact">
-            <div class="tl-formula">
-              <Latex tex="\Phi_2<\Phi_1" />
-            </div>
             <div class="tl-note">
-              少量磁感线从原边及铁芯转角散出，未穿过副线圈，使副线圈磁通量变化率变小、<Latex
+              原线圈产生的一部分磁通量经空气自行闭合，未穿过副线圈，使副线圈磁通量变化率变小、<Latex
                 tex="U_2"
               />
               偏低。
@@ -212,8 +225,7 @@ onBeforeUnmount(() => {
 
       <!-- C4：收拢后的一句简短总结 -->
       <div v-if="showSummary" class="tl-summary-bar">
-        实际变压器同时存在以上三种损耗，使输出功率 <Latex tex="P_2 < P_1" />、实测输出电压
-        <Latex tex="U_2" /> 略低于理想值。
+        实际变压器同时存在以上三种损耗：输出功率小于输入功率，实测输出电压也略低于理想值。
       </div>
 
       <!-- C5：理想变压器（合并原 P11 的三条件 + 三公式） -->
@@ -234,19 +246,7 @@ onBeforeUnmount(() => {
           </div>
           <div class="tl-cond-card">
             <div class="tl-cond-name">无内阻</div>
-            <div class="tl-cond-desc">原、副线圈电阻视为零（<Latex tex="r_1=r_2=0" />）</div>
-          </div>
-        </div>
-
-        <div class="tl-eq-grid">
-          <div class="tl-eq-box">
-            <Latex tex="P_1 = P_2" />
-          </div>
-          <div class="tl-eq-box">
-            <Latex tex="\dfrac{U_1}{U_2} = \dfrac{n_1}{n_2}" />
-          </div>
-          <div class="tl-eq-box">
-            <Latex tex="\dfrac{I_1}{I_2} = \dfrac{n_2}{n_1}" />
+            <div class="tl-cond-desc">原、副线圈的电阻视为零</div>
           </div>
         </div>
       </div>
@@ -372,12 +372,6 @@ onBeforeUnmount(() => {
   color: var(--c-velocity);
 }
 
-.tl-formula {
-  color: var(--c-text);
-  font-size: 0.86rem;
-  line-height: 1.3;
-}
-
 .tl-note {
   color: var(--c-text-dim);
   font-size: 0.75rem;
@@ -464,28 +458,6 @@ onBeforeUnmount(() => {
   color: var(--c-text-dim);
   font-size: 0.68rem;
   line-height: 1.35;
-}
-
-.tl-eq-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.48rem;
-}
-
-.tl-eq-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 0.42rem 0.35rem;
-  border: 1px solid color-mix(in srgb, var(--c-accent) 32%, transparent);
-  border-radius: 0.55rem;
-
-  background: rgb(226 168 70 / 7%);
-  color: var(--c-text);
-
-  font-weight: 700;
-  font-size: 0.86rem;
 }
 
 .is-hidden {
