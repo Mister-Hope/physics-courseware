@@ -3,3 +3,88 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+.step-line {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.step-line + .step-line {
+  margin-top: 0.34rem;
+}
+
+.four-col {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.four-col .card {
+  padding: 0.85rem 0.95rem;
+}
+
+.four-col .step-line {
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.formula-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.18rem 0.6rem;
+  border-bottom: 1px solid rgb(148 163 184 / 18%);
+  text-align: left;
+}
+
+.data-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.line-judge {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.06rem;
+  line-height: 1.5;
+}
+
+.quote-line {
+  padding: 0.15rem 0 0.15rem 0.95rem;
+  border-left: 3px solid var(--c-accent);
+
+  color: var(--c-text-soft, var(--c-text));
+
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.side-note .step-line {
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.exercise-split .step-line {
+  font-size: 0.94rem;
+  line-height: 1.42;
+}
+
+.exercise-split .step-line + .step-line {
+  margin-top: 0.2rem;
+}
