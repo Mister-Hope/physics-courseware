@@ -850,8 +850,8 @@
           "slug": "o3-3.2-first-law-of-thermodynamics",
           "title": "热力学第一定律",
           "chapter": "§3.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解 ΔU=Q+W 的物理意义与符号规则，会用热力学第一定律分析气体内能变化与能量转化问题。",
+          "tags": ["热力学第一定律", "内能", "热量", "功"]
         },
         {
           "slug": "o3-3.3-law-of-energy-conservation",
