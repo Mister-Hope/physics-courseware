@@ -108,8 +108,8 @@ clicks: 2
 <div class="half-grid p6-grid">
 <div class="p6-fig"><PotentialEnergyChart :step="$clicks" /></div>
 <div class="divider-l p6-notes">
-<div class="p6-note" v-click="1">当 <Latex tex="r=r_0" /> 时，分子势能达到最小值。</div>
-<div class="p6-note" v-click="2">越过 <Latex tex="r_0" /> 继续靠近，分子势能迅速增大。</div>
+<div class="p6-note" v-click="1">当 <Latex tex="r=r_0" /> 时，分子势能最小。</div>
+<div class="p6-note" v-click="2">再靠近，分子势能迅速增大。</div>
 </div>
 </div>
 </div>
@@ -214,15 +214,15 @@ clicks: 0
 <div class="three-col p11-cards">
 <div class="p11-card">
   <div class="p11-title">温度</div>
-  <div class="p11-text">温度变化，分子平均动能变化。</div>
+  <div class="p11-text">温度变化，动能变化。</div>
 </div>
 <div class="p11-card">
   <div class="p11-title">体积</div>
-  <div class="p11-text">体积变化，分子间距离变化，分子势能变化。</div>
+  <div class="p11-text">体积变化，势能变化。</div>
 </div>
 <div class="p11-card">
   <div class="p11-title">物质的量</div>
-  <div class="p11-text">分子数越多，内能通常越大。</div>
+  <div class="p11-text">分子数越多，内能越大。</div>
 </div>
 </div>
 <div class="tip-hint">内能由多个因素共同决定，不能只看温度。</div>
