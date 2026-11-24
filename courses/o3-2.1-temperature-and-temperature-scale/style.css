@@ -144,3 +144,195 @@
   color: var(--c-accent);
   font-size: 1.3rem;
 }
+
+/* 观测温度表 */
+.temp-table {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.temp-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.42rem 1rem;
+  border-top: 1px solid var(--c-border);
+  font-size: 0.95rem;
+}
+
+.temp-row:first-child {
+  border-top: 0;
+}
+
+.temp-head {
+  background: rgb(226 168 70 / 8%);
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.temp-row span:last-child {
+  text-align: right;
+  color: var(--c-text-dim);
+}
+
+.temp-head span:last-child {
+  color: var(--c-accent);
+}
+
+/* 温标三要素 */
+.temp-scale-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.temp-scale-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+
+.temp-scale-no {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: rgb(226 168 70 / 15%);
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.temp-scale-text {
+  font-size: 0.95rem;
+}
+
+/* 两种温标 */
+.temp-scale-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.temp-scale-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.temp-scale-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+.temp-scale-card-body {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+
+.temp-formula {
+  display: flex;
+  justify-content: center;
+  font-size: 1.35rem;
+  color: var(--c-accent);
+}
+
+/* 温度计卡片 */
+.temp-thermo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.temp-thermo-card {
+  display: flex;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.temp-thermo-card svg {
+  flex: none;
+  color: var(--c-accent);
+}
+
+.temp-thermo-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.temp-thermo-card-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}
+
+/* 温度换算 */
+.temp-converter {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.temp-thermo {
+  width: 200px;
+}
+
+.temp-conv-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.temp-value-row {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 0.8rem;
+  align-items: baseline;
+}
+
+.temp-value-label {
+  font-size: 0.9rem;
+  color: var(--c-text-dim);
+}
+
+.temp-value {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.temp-unit {
+  font-size: 0.95rem;
+  color: var(--c-text-dim);
+}
+
+.temp-conv-formula {
+  padding: 0.45rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: var(--radius-md);
+  background: rgb(226 168 70 / 8%);
+  color: var(--c-accent);
+  font-size: 1.2rem;
+  text-align: center;
+}

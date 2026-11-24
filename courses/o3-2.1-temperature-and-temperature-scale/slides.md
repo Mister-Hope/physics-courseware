@@ -138,3 +138,112 @@ clickAnimation: none
 </DefinitionBox>
 <div v-click="1" class="summary-line">温度是热学参量（状态参量之一），用 <Latex tex="T" /> 表示。</div>
 </div>
+
+---
+layout: base-flex
+title: 人们已观测的温度
+---
+
+# 人们已观测的温度
+
+<div class="page-grow">
+<div class="summary-line">温度可以很高，也可以很低。下表是教材中给出的一些温度。</div>
+<div class="temp-table">
+<div class="temp-row temp-head"><span>对象</span><span>温度</span></div>
+<div class="temp-row"><span>实验室获得的最高温度</span><span><Latex tex="10^7 \sim 10^8\ \text{K}" /></span></div>
+<div class="temp-row"><span>太阳中心</span><span><Latex tex="1.6 \times 10^7\ \text{K}" /></span></div>
+<div class="temp-row"><span>乙炔火焰</span><span><Latex tex="3.5 \times 10^3\ \text{K}" /></span></div>
+<div class="temp-row"><span>南极最低气温</span><span><Latex tex="184\ \text{K}" />（<Latex tex="-89.2\ \text{°C}" />）</span></div>
+<div class="temp-row"><span>汞的超导转变温度</span><span><Latex tex="4.2\ \text{K}" /></span></div>
+<div class="temp-row"><span>实验室获得的最低温度</span><span><Latex tex="10^{-9}\ \text{K}" /></span></div>
+</div>
+</div>
+
+---
+layout: base-flex
+title: 温标
+clicks: 1
+clickAnimation: none
+---
+
+# 温标
+
+<div class="page-grow">
+<div class="ask">要定量地表示温度，需要先做什么？</div>
+<div class="temp-scale-list">
+<div class="temp-scale-item"><span class="temp-scale-no">1</span><span class="temp-scale-text">选择测温物质和测温属性，例如水银的热膨胀、气体的压强。</span></div>
+<div class="temp-scale-item"><span class="temp-scale-no">2</span><span class="temp-scale-text">规定温度的零点和分度方法。</span></div>
+<div class="temp-scale-item"><span class="temp-scale-no">3</span><span class="temp-scale-text">用数值表示温度——这就是温标。</span></div>
+</div>
+<div v-click="1" class="tip-hint">摄氏温标：标准大气压下冰的熔点定为 <Latex tex="0\ \text{°C}" />，水的沸点定为 <Latex tex="100\ \text{°C}" />。<br />中间 100 等份，每份 <Latex tex="1\ \text{°C}" />。</div>
+</div>
+
+---
+layout: base-flex
+title: 摄氏温标与热力学温标
+clicks: 1
+clickAnimation: none
+---
+
+# 摄氏温标与热力学温标
+
+<div class="page-grow">
+<div class="ask">摄氏温度和热力学温度之间有什么关系？</div>
+<div class="temp-scale-cards">
+<div class="temp-scale-card"><div class="temp-scale-card-title">摄氏温标</div><div class="temp-scale-card-body">用 <Latex tex="t" /> 表示，单位摄氏度（<Latex tex="\text{°C}" />）；冰的熔点 <Latex tex="0\ \text{°C}" />，水的沸点 <Latex tex="100\ \text{°C}" />。</div></div>
+<div class="temp-scale-card"><div class="temp-scale-card-title">热力学温标</div><div class="temp-scale-card-body">用 <Latex tex="T" /> 表示，单位开尔文（<Latex tex="\text{K}" />）；是国际单位制七个基本物理量之一，<Latex tex="0\ \text{K}" /> 为绝对零度。</div></div>
+</div>
+<div class="temp-formula"><Latex tex="T = t + 273.15\ \text{K}" /></div>
+<div v-click="1" class="tip-hint">表示温度差时，<Latex tex="1\ \text{°C} = 1\ \text{K}" />；两种温标的零点不同。</div>
+</div>
+
+---
+layout: base-flex
+title: 温度换算
+---
+
+# 温度换算
+
+<div class="page-grow">
+<div class="ask">摄氏温度和热力学温度怎样换算？</div>
+<TemperatureConverter />
+<div class="summary-line">表示温度差时，<Latex tex="1\ \text{°C} = 1\ \text{K}" />。</div>
+</div>
+
+---
+layout: base-flex
+title: 温度计的测温物质与测温属性
+clicks: 1
+clickAnimation: none
+---
+
+# 温度计的测温物质与测温属性
+
+<div class="page-grow">
+<div class="ask">温度计为什么能测量温度？</div>
+<div class="temp-thermo-grid">
+<div class="temp-thermo-card"><mdi-thermometer class="icon-lg" /><div><div class="temp-thermo-card-title">水银温度计</div><div class="temp-thermo-card-text">利用水银的热膨胀：温度升高，水银柱变长；水银柱的高度随温度线性变化。</div></div></div>
+<div class="temp-thermo-card"><mdi-gauge class="icon-lg" /><div><div class="temp-thermo-card-title">气体温度计</div><div class="temp-thermo-card-text">利用气体的压强随温度变化：用气体的压强表示温度。</div></div></div>
+</div>
+<div v-click="1" class="tip-hint">温度计都要先标定：把测温属性与已知温度对应起来，才能读出温度。</div>
+</div>
+
+---
+layout: base-flex
+title: 形形色色的温度计
+clicks: 1
+clickAnimation: none
+---
+
+# 形形色色的温度计
+
+<div class="page-grow">
+<div class="ask">除了水银温度计，还有哪些温度计？它们各利用什么测温属性？</div>
+<div class="temp-thermo-grid">
+<div class="temp-thermo-card"><mdi-thermometer-lines class="icon-lg" /><div><div class="temp-thermo-card-title">双金属温度计</div><div class="temp-thermo-card-text">两种金属的线膨胀不同，温度变化时双金属片弯曲。</div></div></div>
+<div class="temp-thermo-card"><mdi-pulse class="icon-lg" /><div><div class="temp-thermo-card-title">热电偶</div><div class="temp-thermo-card-text">不同导体组成回路，温度差产生电动势；可测 <Latex tex="3000\ \text{°C}" /> 至接近绝对零度。</div></div></div>
+<div class="temp-thermo-card"><mdi-gauge class="icon-lg" /><div><div class="temp-thermo-card-title">电阻温度计</div><div class="temp-thermo-card-text">利用金属电阻随温度变化；铂电阻温度计最精确。</div></div></div>
+<div class="temp-thermo-card"><mdi-waveform class="icon-lg" /><div><div class="temp-thermo-card-title">热敏电阻</div><div class="temp-thermo-card-text">半导体电阻随温度变化；稳定性较差，精度较低。</div></div></div>
+</div>
+<div v-click="1" class="tip-hint">不同的温度计利用不同的测温属性，测量范围和精度也不同。</div>
+</div>
