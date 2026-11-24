@@ -342,8 +342,8 @@ clicks: 3
 
 </template>
 
-<div class="step-line" v-click="1">质量数减少 $238 - 222 = 16$。每次 $\alpha$ 衰变质量数减 4，所以 $\alpha$ 衰变 $16 \div 4 = 4$ 次。</div>
-<div class="step-line" v-click="2">4 次 $\alpha$ 衰变使电荷数减少 $4 \times 2 = 8$。设 $\beta$ 衰变 $n$ 次，则 $92 - 8 + n = 86$，得 $n = 2$。所以经过 4 次 $\alpha$ 衰变、2 次 $\beta$ 衰变。</div>
+<div class="step-line" v-click="1">质量数减少 <Latex tex="238 - 222 = 16" />。每次 <Latex tex="\alpha" /> 衰变质量数减 4，所以 <Latex tex="\alpha" /> 衰变 <Latex tex="16 \div 4 = 4" /> 次。</div>
+<div class="step-line" v-click="2">4 次 <Latex tex="\alpha" /> 衰变使电荷数减少 <Latex tex="4 \times 2 = 8" />。设 <Latex tex="\beta" /> 衰变 <Latex tex="n" /> 次，则 <Latex tex="92 - 8 + n = 86" />，得 <Latex tex="n = 2" />。所以经过 4 次 <Latex tex="\alpha" /> 衰变、2 次 <Latex tex="\beta" /> 衰变。</div>
 <div class="step-line" v-click="3">衰变是原子核自发进行的；人工转变需要用其他粒子轰击原子核。</div>
 
 ---
