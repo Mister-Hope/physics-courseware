@@ -1,5 +1,36 @@
 /* ═══════════════════════════════════════════════
    粒子的波动性和量子力学的建立 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
+   通用设计系统在 workspace/shared/styles/，
+   由共享 addon（../workspace/shared）自动注入，此处只放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 封面课题名 14 字：共享 .cover-title 是 3.5rem，压到 2.6rem 保持一行 */
+.cover-title {
+  font-size: 2.6rem !important;
+}
+
+/* 正文行：块间距交给共享 .stack / .page-grow，这里只补行距与相邻行距 */
+.step-line {
+  line-height: 1.5;
+}
+
+.step-line + .step-line {
+  margin-top: 0.3rem;
+}
+
+/* 独立公式行 */
+.formula-center {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.math-nowrap {
+  white-space: nowrap;
+}
+
+.microscope-cols {
+  align-items: start;
+}
