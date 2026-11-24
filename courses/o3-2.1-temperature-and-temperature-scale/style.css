@@ -9,19 +9,22 @@
   display: grid;
   grid-template-columns: 1fr 1.4rem 1fr;
   align-items: stretch;
+
   min-height: 158px;
   padding: 0.55rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
 .temp-half {
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+
   border-radius: var(--radius-md);
 }
 
@@ -36,35 +39,41 @@
 }
 
 .temp-half-name {
-  font-size: 1.15rem;
   font-weight: 700;
+  font-size: 1.15rem;
 }
 
 .temp-half-params {
   display: flex;
   gap: 1.1rem;
-  font-size: 1.05rem;
   color: var(--c-text-dim);
+  font-size: 1.05rem;
 }
 
 .temp-baffle {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+
   padding-top: 0.35rem;
   border-left: 2px dashed var(--c-text-dim);
+
   color: var(--c-text-dim);
+
   font-size: 0.9rem;
 }
 
 .temp-badge {
   align-self: center;
+
   max-width: 100%;
   padding: 0.45rem 1.1rem;
   border: 1px solid var(--c-border-glow);
   border-radius: 999px;
+
   background: rgb(226 168 70 / 10%);
   color: var(--c-accent);
+
   font-size: 0.92rem;
 }
 
@@ -78,11 +87,13 @@
 .temp-param-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.3rem;
+  align-items: center;
+
   padding: 1.1rem 0.8rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
@@ -91,8 +102,8 @@
 }
 
 .temp-param-name {
-  font-size: 1.5rem;
   color: var(--c-accent);
+  font-size: 1.5rem;
 }
 
 .temp-param-label {
@@ -100,8 +111,8 @@
 }
 
 .temp-param-desc {
-  font-size: 0.85rem;
   color: var(--c-text-dim);
+  font-size: 0.85rem;
 }
 
 /* 插图 */
@@ -114,20 +125,22 @@
 /* 热平衡定律三系统 */
 .temp-law {
   display: flex;
+  gap: 0.7rem;
   align-items: center;
   justify-content: center;
-  gap: 0.7rem;
 }
 
 .temp-law-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.25rem;
+  align-items: center;
+
   min-width: 148px;
   padding: 0.9rem 1.1rem;
   border: 1px solid var(--c-border-glow);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
@@ -136,8 +149,8 @@
 }
 
 .temp-law-t {
-  font-size: 1.1rem;
   color: var(--c-accent);
+  font-size: 1.1rem;
 }
 
 .temp-law-arrow {
@@ -149,9 +162,12 @@
 .temp-table {
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
+
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
@@ -160,8 +176,10 @@
   grid-template-columns: 1.5fr 1fr;
   gap: 1rem;
   align-items: center;
+
   padding: 0.42rem 1rem;
   border-top: 1px solid var(--c-border);
+
   font-size: 0.95rem;
 }
 
@@ -175,9 +193,15 @@
   font-weight: 700;
 }
 
-.temp-row span:last-child {
-  text-align: right;
+.temp-summary-card span {
   color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.temp-row span:last-child {
+  color: var(--c-text-dim);
+  text-align: right;
 }
 
 .temp-head span:last-child {
@@ -195,9 +219,11 @@
   display: flex;
   gap: 0.9rem;
   align-items: center;
+
   padding: 0.65rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 }
 
@@ -206,11 +232,14 @@
   flex: none;
   align-items: center;
   justify-content: center;
+
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
+
   background: rgb(226 168 70 / 15%);
   color: var(--c-accent);
+
   font-weight: 700;
 }
 
@@ -229,29 +258,31 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+
   padding: 1rem 1.1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
 .temp-scale-card-title {
-  font-size: 1.05rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.05rem;
 }
 
 .temp-scale-card-body {
+  color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.6;
-  color: var(--c-text-dim);
 }
 
 .temp-formula {
   display: flex;
   justify-content: center;
-  font-size: 1.35rem;
   color: var(--c-accent);
+  font-size: 1.35rem;
 }
 
 /* 温度计卡片 */
@@ -264,9 +295,11 @@
 .temp-thermo-card {
   display: flex;
   gap: 0.9rem;
+
   padding: 0.9rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-lg);
+
   background: var(--c-surface);
 }
 
@@ -276,14 +309,14 @@
 }
 
 .temp-thermo-card-title {
-  font-size: 1rem;
   font-weight: 700;
+  font-size: 1rem;
 }
 
 .temp-thermo-card-text {
+  color: var(--c-text-dim);
   font-size: 0.88rem;
   line-height: 1.6;
-  color: var(--c-text-dim);
 }
 
 /* 温度换算 */
@@ -292,6 +325,7 @@
   grid-template-columns: 200px 1fr;
   gap: 1.4rem;
   align-items: center;
+
   width: 100%;
 }
 
@@ -313,8 +347,8 @@
 }
 
 .temp-value-label {
-  font-size: 0.9rem;
   color: var(--c-text-dim);
+  font-size: 0.9rem;
 }
 
 .temp-value {
@@ -323,16 +357,18 @@
 }
 
 .temp-unit {
-  font-size: 0.95rem;
   color: var(--c-text-dim);
+  font-size: 0.95rem;
 }
 
 .temp-conv-formula {
   padding: 0.45rem;
   border: 1px solid var(--c-border-glow);
   border-radius: var(--radius-md);
+
   background: rgb(226 168 70 / 8%);
   color: var(--c-accent);
+
   font-size: 1.2rem;
   text-align: center;
 }
@@ -340,8 +376,9 @@
 /* 小结 */
 .temp-summary-main {
   color: var(--c-accent);
-  font-size: 2.2rem;
+
   font-weight: 700;
+  font-size: 2.2rem;
   letter-spacing: 0.04em;
   text-align: center;
 }
@@ -356,19 +393,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+
   padding: 0.85rem 1rem;
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
   background: var(--c-surface);
 }
 
 .temp-summary-card b {
-  font-size: 1rem;
   color: var(--c-text);
-}
-
-.temp-summary-card span {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--c-text-dim);
+  font-size: 1rem;
 }

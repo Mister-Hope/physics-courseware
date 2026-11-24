@@ -808,22 +808,22 @@
           "slug": "o3-2.1-temperature-and-temperature-scale",
           "title": "温度和温标",
           "chapter": "§2.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解状态参量、平衡态与热平衡，建立温度的热力学定义，了解摄氏温标与热力学温标的关系 T=t+273.15 K。",
+          "tags": ["状态参量", "热平衡", "温度", "温标"]
         },
         {
           "slug": "o3-2.2-isothermal-process-of-gas",
           "title": "气体的等温变化",
           "chapter": "§2.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "通过实验探究一定质量气体等温变化规律，得出玻意耳定律 pV=C，会用 p-V 图像分析等温过程。",
+          "tags": ["玻意耳定律", "等温变化", "p-V图像", "气体实验"]
         },
         {
           "slug": "o3-2.3-isobaric-and-isochoric-processes",
           "title": "气体的等压变化和等容变化",
           "chapter": "§2.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "探究等压、等容变化规律，得出盖—吕萨克定律与查理定律，理解理想气体与气体实验定律的微观解释。",
+          "tags": ["盖-吕萨克定律", "查理定律", "理想气体", "气体实验定律"]
         },
         {
           "slug": "o3-2.4-solids",
