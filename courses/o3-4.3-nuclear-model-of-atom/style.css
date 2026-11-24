@@ -17,10 +17,9 @@
 /* 图占满所在栏宽，高度封顶，避免一页被图顶穿 */
 .nu-fig svg {
   display: block;
-
   width: 100%;
-  max-height: 330px;
   height: auto;
+  max-height: 330px;
 }
 
 /* ── 正文行：行距比裸 div 略松（题干/解析页通用）── */
