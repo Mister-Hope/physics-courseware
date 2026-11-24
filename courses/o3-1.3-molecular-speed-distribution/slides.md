@@ -29,12 +29,13 @@ clicks: 1
 ---
 
 <div class="page-grow">
-<div class="ask">从顶部投入一个小球，它会落进哪个狭槽？</div>
+<div class="ask">投入一个小球，它会落进哪个狭槽？</div>
 <div class="figure sm-fig-galton"><GaltonBoardSvg :step="$clicks" /></div>
 <div class="tip-hint" v-click="1">投入大量小球，狭槽里的分布不再偶然：中间多，两头少。</div>
 </div>
 
 ---
+
 # 统计规律
 
 <div class="page-grow">
@@ -49,6 +50,7 @@ clicks: 1
 </div>
 
 ---
+
 # 气体分子运动的特点
 
 <div class="page-grow">
@@ -61,10 +63,11 @@ clicks: 1
 </div>
 
 ---
+
 # 氧气分子的速率分布
 
 <div class="page-grow">
-<div class="ask">同样温度下，氧气分子的速率有规律吗？</div>
+<div class="ask">同温下，氧气分子的速率有规律吗？</div>
 <table class="sm-table sm-table-dist">
 <thead>
 <tr><th>速率区间 <Latex tex="(\text{m}\cdot\text{s}^{-1})" /></th><th><Latex tex="0\ \text{℃}" /> 的占比 / <Latex tex="\%" /></th><th><Latex tex="100\ \text{℃}" /> 的占比 / <Latex tex="\%" /></th></tr>
@@ -86,6 +89,7 @@ clicks: 1
 </div>
 
 ---
+
 # 速率分布图像
 
 <div class="page-grow">
@@ -97,7 +101,7 @@ x-range: [0, 1000]
 y-range: [0, 24]
 x-axis: { quantity: v, unit: '(m/s)' }
 y-axis: { quantity: p, unit: '%' }
-view: { width: 880, height: 268 }
+view: { width: 880, height: 224 }
 ticks: { x: [200, 400, 600, 800], y: [] }
 curves:
   - points: [{ x: 50, y: 1.4 }, { x: 150, y: 8.1 }, { x: 250, y: 17.0 }, { x: 350, y: 21.4 }, { x: 450, y: 20.4 }, { x: 550, y: 15.1 }, { x: 650, y: 9.2 }, { x: 750, y: 4.5 }, { x: 850, y: 2.0 }, { x: 950, y: 0.9 }]
@@ -112,6 +116,7 @@ curves:
 </div>
 
 ---
+
 # 温度越高，峰越靠右
 
 <div class="page-grow">
@@ -121,6 +126,7 @@ curves:
 </div>
 
 ---
+
 # 气体压强是怎样产生的
 
 <div class="page-grow">
@@ -130,6 +136,7 @@ curves:
 </div>
 
 ---
+
 # 一次碰撞给器壁多大的力
 
 <div class="page-grow sm-derive">
@@ -140,6 +147,7 @@ curves:
 </div>
 
 ---
+
 # 为什么压强是持续、均匀的
 
 <div class="page-grow">
@@ -152,6 +160,7 @@ curves:
 </div>
 
 ---
+
 # 压强由什么决定
 
 <div class="page-grow">
@@ -204,6 +213,7 @@ clicks: 2
 </div>
 
 ---
+
 # 统计规律的应用
 
 <div class="page-grow">
@@ -217,6 +227,7 @@ clicks: 2
 </div>
 
 ---
+
 # 小结
 
 <div class="page-grow sm-summary">
