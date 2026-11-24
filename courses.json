@@ -857,8 +857,8 @@
           "slug": "o3-3.3-law-of-energy-conservation",
           "title": "能量守恒定律",
           "chapter": "§3.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识能量守恒定律的建立过程与内容，理解永动机不可能制成的原因，体会能量守恒的普遍意义。",
+          "tags": ["能量守恒定律", "永动机", "能量转化"]
         },
         {
           "slug": "o3-3.4-second-law-of-thermodynamics",
