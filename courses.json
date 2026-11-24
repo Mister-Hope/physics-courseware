@@ -843,8 +843,8 @@
           "slug": "o3-3.1-work-heat-and-internal-energy",
           "title": "功、热和内能的改变",
           "chapter": "§3.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "通过焦耳实验认识做功与传热都能改变内能，理解功、热量与内能变化的关系及符号约定。",
+          "tags": ["内能", "做功", "传热", "焦耳实验"]
         },
         {
           "slug": "o3-3.2-first-law-of-thermodynamics",
