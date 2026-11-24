@@ -31,23 +31,14 @@ title: 引课（磁能不能生电）
 ---
 
 <template v-slot:icon>
-
 <mdi-head-question-outline />
-
 </template>
-
 <div>电流能产生磁。<br />反过来，磁能不能产生电？</div>
-
 <template v-slot:hint>
-
 1820 年，奥斯特发现通电导线周围存在磁场——电与磁之间是有联系的。
-
 </template>
-
 <template v-slot:answer>
-
 法拉第由这种联系想到：磁也应该能产生电。1822 年，他在日记中写下"由磁产生电"。
-
 </template>
 
 ---

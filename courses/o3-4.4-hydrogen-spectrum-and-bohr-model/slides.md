@@ -32,23 +32,14 @@ clickAnimation: none
 ---
 
 <template v-slot:icon>
-
 <mdi-fire />
-
 </template>
-
 把食盐放在火中灼烧，会发出黄色的光。为什么只发黄光，而不发其他颜色的光？
-
 <template v-slot:hint>
-
 原子的发光，与原子的内部结构有关。
-
 </template>
-
 <template v-slot:answer>
-
 食盐中的钠原子受热被激发，跃迁时只发出几种特定频率的光，其中黄光最明显。这正是<strong>原子光谱</strong>要研究的问题。
-
 </template>
 
 ---

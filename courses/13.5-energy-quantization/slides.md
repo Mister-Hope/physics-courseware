@@ -101,23 +101,14 @@ clicks: 2
 ---
 
 <template v-slot:icon>
-
 <mdi-help-circle-outline />
-
 </template>
-
 用经典的电磁理论，能解释黑体辐射的实验规律吗？
-
 <template v-slot:hint>
-
 经典理论的思路：物体中的带电微粒不停振动，产生变化的电磁场，从而发出电磁辐射。
-
 </template>
-
 <template v-slot:answer>
-
 按这套经典理论算出的结果，与实验规律严重不符——微观世界的某些规律，在我们宏观世界看来可能非常奇怪。
-
 </template>
 
 ---

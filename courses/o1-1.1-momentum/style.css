@@ -9,3 +9,8 @@
   max-width: 100%;
   height: auto;
 }
+
+/* P17「做一做：接气球」（layout: focus-question）：问题较长，块间距收一档，避免顶出画布 */
+.slidev-layout.focus-question .fq-center {
+  gap: 1rem;
+}

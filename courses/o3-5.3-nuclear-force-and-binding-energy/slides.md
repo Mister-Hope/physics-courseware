@@ -32,23 +32,14 @@ clickAnimation: none
 ---
 
 <template v-slot:icon>
-
 <mdi-atom />
-
 </template>
-
 原子核的直径不到 <Latex tex="10^{-14}\ \text{m}" />，里面却挤着带正电的质子。它们之间的电磁斥力，为什么没能把原子核撕开？
-
 <template v-slot:hint>
-
 如果核里只有电磁斥力，质子早就互相推开了。
-
 </template>
-
 <template v-slot:answer>
-
 核子之间还存在一种更强的<strong>吸引力</strong>——<strong>核力</strong>，它属于<strong>强相互作用</strong>。
-
 </template>
 
 ---

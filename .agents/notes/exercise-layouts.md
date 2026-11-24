@@ -149,6 +149,17 @@ layout: exercise-split
 🟡 不推荐"把大问题挤在上半屏、下面留一大片空"（如 10.4 第 19 页）——
 这样讨论时学生视线无处落；但这是版面判断，不是硬指标，内容真需要靠上排就靠上排。
 
+### 🔴 单行文字前后不留空行
+
+`focus-question` 的每个 slot 通常**只有一行字**。这时 `<template …>` 与文字之间、文字与 `</template>`
+之间**不要留空行**（连整页问题文字的前后也不要留）：空行会终止 HTML 块，文字被 markdown 包成 `<p>`，
+而 `<p>` 自带 1em 上下外边距（本仓 `html{font-size:22px}` ⇒ 上下各 22px），叠在 `.fq-center` 的
+`gap:1.4rem` 之外，问题 / 提示 / 答案之间会明显空出一大截（教师 2026-11 点名过）。
+
+不留空行后整页正文是一个 HTML 块，文字是裸文本节点、没有 `<p>`；**代价是块内 markdown 不再解析**：
+公式写 `<Latex tex="…" />`、加粗写 `<b>…</b>`、换行用 `<br />`（这些本来也是本仓对 HTML 块的约定）。
+`exercise-split` 的 `#stem` 是正常 markdown（多为多行题干），**不受这条约束**。
+
 ### frontmatter 与 slot
 
 ```md
@@ -157,23 +168,14 @@ layout: focus-question
 ---
 
 <template v-slot:icon>
-
 <mdi-lightbulb-on-outline />
-
 </template>
-
 弹簧测力计的示数，一定等于物体的重力吗？
-
 <template v-slot:hint>
-
 提示：先想想测力计倒过来测自己会怎样。
-
 </template>
-
 <template v-slot:answer>
-
 只有物体静止且只受重力和拉力时，示数才等于重力。加速上升时示数大于重力（超重）。
-
 </template>
 ```
 

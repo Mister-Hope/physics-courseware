@@ -32,23 +32,14 @@ clicks: 2
 ---
 
 <template v-slot:icon>
-
 <mdi-atom class="icon-2xl" />
-
 </template>
-
 炼金术士想把普通矿石变成黄金，没有成功。那么，一种元素能变成另一种元素吗？
-
 <template v-slot:hint>
-
 天然放射现象中，原子核会自发地放出某种粒子。
-
 </template>
-
 <template v-slot:answer>
-
-放出 $\alpha$ 粒子或 $\beta$ 粒子后，原子核的电荷数改变，变成另一种原子核——这种变化叫**衰变**。
-
+放出 <Latex tex="\alpha" /> 粒子或 <Latex tex="\beta" /> 粒子后，原子核的电荷数改变，变成另一种原子核——这种变化叫<b>衰变</b>。
 </template>
 
 ---

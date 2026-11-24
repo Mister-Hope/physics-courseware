@@ -97,3 +97,8 @@
 .fig-h-lg svg {
   max-height: 300px;
 }
+
+/* P2 引课问题页（layout: focus-question）：问题恢复大字号后变高，块间距收一档，避免顶出画布 */
+.slidev-layout.focus-question .fq-center {
+  gap: 1rem;
+}

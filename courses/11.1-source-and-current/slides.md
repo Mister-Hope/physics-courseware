@@ -31,11 +31,8 @@ title: 引课
 ---
 
 <template v-slot:icon>
-
 <mdi-lightning-bolt />
-
 </template>
-
 电闪雷鸣时，强大的电流只能存在于一瞬间；<br />手电筒中的小灯泡却能持续发光。这是为什么？
 
 ---

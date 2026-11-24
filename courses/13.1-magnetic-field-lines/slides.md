@@ -27,23 +27,14 @@ layout: focus-question
 ---
 
 <template v-slot:icon>
-
 <mdi-magnet class="icon-2xl" />
-
 </template>
-
 同名磁极相斥、异名磁极相吸——与电荷之间的相互作用具有相同的特征。电和磁有联系吗？
-
 <template v-slot:hint>
-
 凡是使用电的地方，几乎都有磁现象相伴随：电动机、电磁炉、耳机、扬声器。
-
 </template>
-
 <template v-slot:answer>
-
 19 世纪初，库仑、英国物理学家杨和法国物理学家安培都认为电与磁是互不相关的两回事；奥斯特相信两者之间存在某种联系。
-
 </template>
 
 ---

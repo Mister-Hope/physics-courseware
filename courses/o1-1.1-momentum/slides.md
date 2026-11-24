@@ -304,23 +304,14 @@ clicks: 2
 ---
 
 <template v-slot:icon>
-
 <mdi-balloon />
-
 </template>
-
 把充气到直径约 <Latex tex="1\ \text{m}" /> 的大气球，以某一速度水平投向你，请你接住；把气放掉后气球变得很小，再以相同的速度投给你。两次体验有什么不同？为什么？
-
 <template v-slot:hint>
-
 两次投来的速度相同，气球的质量不同。
-
 </template>
-
 <template v-slot:answer>
-
 大气球质量大，速度相同时动量大；接住它时速度同样减到 0，要改变的动量更大。
-
 </template>
 
 ---

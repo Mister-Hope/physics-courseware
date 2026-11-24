@@ -33,23 +33,14 @@ clickAnimation: none
 ---
 
 <template v-slot:icon>
-
 <mdi-atom />
-
 </template>
-
 20 世纪初，人们把质子、中子和电子叫作“基本粒子”。后来的发现，为什么让这个称呼被放弃了？
-
 <template v-slot:hint>
-
 到 20 世纪后半期，人们已经发现了数以百计的新粒子，它们不能看作由质子、中子和电子组成。
-
 </template>
-
 <template v-slot:answer>
-
 质子、中子本身也有复杂的结构。于是人们去掉“基本”二字，把这些粒子统称为<strong>粒子</strong>。
-
 </template>
 
 ---

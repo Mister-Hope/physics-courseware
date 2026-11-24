@@ -31,11 +31,8 @@ title: 引课
 ---
 
 <template v-slot:icon>
-
 <mdi-broadcast />
-
 </template>
-
 广播、电视、移动通信都靠电磁波——<br />电磁波是怎样被发现的？
 
 ---
@@ -75,12 +72,10 @@ clicks: 4
 title: 电磁波
 ---
 
-# 电磁波
-
 <div class="page-grow" style="--page-gap: .8rem">
 <div class="ask">周期性变化的电场在空间激起周期性变化的磁场，这个变化的磁场又激起新的变化的电场——<b>这样下去会怎样？</b></div>
 
-<div v-click="1" class="figure"><EmWaveChain :step="$clicks" /></div>
+<div v-click="1" class="figure figure-fill"><EmWaveChain :step="$clicks" /></div>
 
 <div v-click="4" class="tip-hint">变化的电场和磁场交替产生，由近及远地向周围传播——空间可能存在<b>电磁波</b>。</div>
 </div>
@@ -217,11 +212,12 @@ title: 电磁波的能量
 <div class="page-grow" style="--page-gap: .8rem">
 <div class="ask"><b>微波炉不用火、也不接触食物，为什么能把食物加热？</b></div>
 
-<div v-click="1" class="figure"><MicrowaveOvenSvg :step="$clicks" /></div>
+<div class="mw-row">
+<div v-click="1" class="figure figure-fill"><MicrowaveOvenSvg :step="$clicks" /></div>
+<div v-click="2" class="mw-side">食物中的水分子在微波的作用下<b>热运动加剧，内能增加，温度升高</b>。</div>
+</div>
 
-<div v-click="2">食物中的水分子在微波的作用下<b>热运动加剧，内能增加，温度升高</b>。</div>
-
-<div v-click="3" class="tip-hint">食物增加的能量是微波给它的——<b>电磁波具有能量</b>；光也是一种电磁波，光具有能量。</div>
+<div v-click="3" class="tip-hint mw-tip">食物增加的能量是微波给它的——<b>电磁波具有能量</b>；光也是一种电磁波，光具有能量。</div>
 </div>
 
 ---
@@ -230,23 +226,14 @@ title: 电磁波是一种物质
 ---
 
 <template v-slot:icon>
-
 <mdi-lightbulb-on-outline />
-
 </template>
-
 赫兹实验之前，人们只把电磁场看作描述电磁现象的一种方法。<br />赫兹实验之后，它的意义变了吗？
-
 <template v-slot:hint>
-
 如果电磁场只是一种描述方式，它为什么能在接收天线里激起电流？
-
 </template>
-
 <template v-slot:answer>
-
 赫兹实验证实了电磁波的存在——电磁场不只是描述方式，而是<b>真正的物质存在</b>；电磁波具有能量，<b>电磁波是一种物质</b>。
-
 </template>
 
 ---

@@ -33,17 +33,11 @@ clickAnimation: none
 ---
 
 <template v-slot:icon>
-
 <mdi-sine-wave />
-
 </template>
-
 <template v-slot:hint>
-
 判断方法一：分析回复力是否与位移成正比、方向相反；方法二：看位移—时间图像是否为正弦曲线。
-
 </template>
-
 悬挂的小球被拉开后释放，它的运动是简谐运动吗？
 
 ---

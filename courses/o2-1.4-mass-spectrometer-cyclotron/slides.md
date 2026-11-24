@@ -32,20 +32,14 @@ clicks: 2
 ---
 
 <!-- 教材 §1.4「问题」：怎样把电荷量相同、质量不同的粒子分开（先问后答） -->
-
 <template v-slot:icon>
-
 <mdi-help-circle-outline />
-
 </template>
-
 科学研究和工业生产中，常需要把一束电荷量相同、质量不同的粒子分开。用学过的知识，你能设计一个方案吗？
-
 <template v-slot:hint>
 电场能使带电粒子加速（<Latex tex="qU = \dfrac{1}{2}mv^2" />）；<br>
 磁场能使运动的带电粒子偏转（<Latex tex="qvB = \dfrac{mv^2}{r}" />）。
 </template>
-
 <template v-slot:answer>
 先加速、再偏转。质量不同的粒子落在不同位置。
 </template>

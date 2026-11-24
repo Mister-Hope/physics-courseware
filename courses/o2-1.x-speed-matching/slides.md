@@ -234,17 +234,11 @@ layout: focus-question
 ---
 
 <template v-slot:icon>
-
 <mdi-help-circle-outline class="icon-xl" />
-
 </template>
-
 <div class="text-5xl leading-normal">如果给小球一个初速度，接下来该怎么算？</div>
-
 <template v-slot:hint>
-
 初速度可以是<b>任意方向</b> —— 不只是水平向右或向左，也可能斜向右上、竖直向上……
-
 </template>
 
 ---

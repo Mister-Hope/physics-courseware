@@ -30,23 +30,14 @@ title: 引课（感应电流的方向）
 ---
 
 <template v-slot:icon>
-
 <mdi-compass-outline />
-
 </template>
-
 把 N 极插入线圈，指针向右偏；把 N 极抽出，指针向左偏。同样在改变磁通量，为什么感应电流的方向相反？
-
 <template v-slot:hint>
-
 此前学过：穿过闭合回路的磁通量发生变化，回路中就有感应电流。它只说清了有没有，没说朝哪边。
-
 </template>
-
 <template v-slot:answer>
-
 要给方向找到判据，得先把磁极和磁通量的增减分开来看。
-
 </template>
 
 ---
