@@ -1,5 +1,146 @@
-/* ═══════════════════════════════════════════════
-   温度和温标 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* ===== 2.1 温度和温标 · 本课特有样式（前缀 temp-） ===== */
+
+/* 引课：挡板容器 */
+.temp-intro {
+  gap: 1rem;
+}
+
+.temp-container {
+  display: grid;
+  grid-template-columns: 1fr 1.4rem 1fr;
+  align-items: stretch;
+  min-height: 158px;
+  padding: 0.55rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.temp-half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: var(--radius-md);
+}
+
+.temp-half.hot {
+  border: 1px solid rgb(248 113 113 / 35%);
+  background: rgb(248 113 113 / 12%);
+}
+
+.temp-half.cold {
+  border: 1px solid rgb(96 165 250 / 35%);
+  background: rgb(96 165 250 / 12%);
+}
+
+.temp-half-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.temp-half-params {
+  display: flex;
+  gap: 1.1rem;
+  font-size: 1.05rem;
+  color: var(--c-text-dim);
+}
+
+.temp-baffle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.35rem;
+  border-left: 2px dashed var(--c-text-dim);
+  color: var(--c-text-dim);
+  font-size: 0.9rem;
+}
+
+.temp-badge {
+  align-self: center;
+  max-width: 100%;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: 999px;
+  background: rgb(226 168 70 / 10%);
+  color: var(--c-accent);
+  font-size: 0.92rem;
+}
+
+/* 状态参量三卡片 */
+.temp-param-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.temp-param-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1.1rem 0.8rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.temp-param-card svg {
+  color: var(--c-accent);
+}
+
+.temp-param-name {
+  font-size: 1.5rem;
+  color: var(--c-accent);
+}
+
+.temp-param-label {
+  font-size: 1rem;
+}
+
+.temp-param-desc {
+  font-size: 0.85rem;
+  color: var(--c-text-dim);
+}
+
+/* 插图 */
+.temp-figure {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* 热平衡定律三系统 */
+.temp-law {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.temp-law-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 148px;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.temp-law-name {
+  font-size: 1rem;
+}
+
+.temp-law-t {
+  font-size: 1.1rem;
+  color: var(--c-accent);
+}
+
+.temp-law-arrow {
+  color: var(--c-accent);
+  font-size: 1.3rem;
+}
