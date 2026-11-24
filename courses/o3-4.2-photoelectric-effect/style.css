@@ -3,3 +3,53 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 正文行 */
+.step-line {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.step-line + .step-line {
+  margin-top: 0.34rem;
+}
+
+/* 独立公式行 */
+.formula-center {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 数据表 */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.18rem 0.6rem;
+  border: 1px solid rgb(148 163 184 / 18%);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.data-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+/* 题目页：步骤多时压紧，避免最后一击顶出画布 */
+.exercise-split .step-line {
+  font-size: 0.9rem;
+  line-height: 1.38;
+}
+
+.exercise-split .step-line + .step-line {
+  margin-top: 0.14rem;
+}
