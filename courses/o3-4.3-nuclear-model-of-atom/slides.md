@@ -20,7 +20,7 @@ defaults:
   transition: fade
 chapter-no: "4.3"
 chapter: "第四章 原子结构和波粒二象性"
-subtitle: "α 粒子散射实验 · 原子的核式结构模型"
+subtitle: "从 α 粒子散射实验到核式结构模型"
 ---
 
 <CoverDecorationSvg />
