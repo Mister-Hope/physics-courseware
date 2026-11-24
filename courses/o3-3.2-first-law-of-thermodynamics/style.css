@@ -1,5 +1,132 @@
-/* ═══════════════════════════════════════════════
-   热力学第一定律 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 本课专属样式：全局原子与共享 addon 已提供，这里只补本课版式 */
+.slidev-layout .fl-split {
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.slidev-layout .fl-split > * {
+  min-width: 0;
+}
+
+.slidev-layout .fl-fig svg {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+}
+
+.slidev-layout .fl-point {
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--c-accent);
+}
+
+.slidev-layout .fl-formula-big {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0;
+}
+
+.slidev-layout .fl-formula-big .katex {
+  font-size: 1.55em;
+}
+
+.slidev-layout .fl-formula-big .katex-display {
+  margin: 0;
+}
+
+.slidev-layout .fl-known {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.slidev-layout .fl-known > div {
+  min-width: 0;
+}
+
+.slidev-layout .fl-box {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+
+.slidev-layout .fl-box-title {
+  margin-bottom: 0.3rem;
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+}
+
+.slidev-layout .fl-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.slidev-layout .fl-cards > div {
+  min-width: 0;
+}
+
+.slidev-layout .fl-card {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.slidev-layout .fl-card-title {
+  margin-bottom: 0.4rem;
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.02rem;
+}
+
+.slidev-layout .fl-card p {
+  margin: 0.25rem 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.slidev-layout .fl-table {
+  width: 100%;
+  font-size: 0.82rem;
+}
+
+.slidev-layout .fl-table th,
+.slidev-layout .fl-table td {
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+}
+
+.slidev-layout .fl-table th:first-child,
+.slidev-layout .fl-table td:first-child {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.slidev-layout .fl-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+}
+
+.slidev-layout .fl-two > div {
+  min-width: 0;
+}
+
+.slidev-layout.ex-top .ex-stem {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.slidev-layout.ex-top .ex-analysis {
+  gap: 0.45rem;
+  justify-content: flex-start;
+}
+
+.slidev-layout .fl-explorer {
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+}
