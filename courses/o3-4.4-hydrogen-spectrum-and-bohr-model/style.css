@@ -1,5 +1,141 @@
-/* ═══════════════════════════════════════════════
-   氢原子光谱和玻尔的原子模型 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 4.4 氢原子光谱和玻尔的原子模型 · 本课特有样式 */
+
+/* 课题名 14 字，封面压到一行 */
+.cover-title {
+  font-size: 2.7rem !important;
+}
+
+/* 左侧金线要点：一问一答里的结论行 */
+.hs-point {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--c-accent);
+}
+
+.hs-point strong {
+  color: var(--c-accent);
+}
+
+/* 双栏对照：两栏顶部对齐 */
+.hs-grid-top {
+  align-items: start;
+}
+
+/* 居中大公式 */
+.hs-formula {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0 0.4rem;
+}
+
+.hs-formula .katex-display {
+  margin: 0;
+}
+
+/* 交互组件下方的四项读数 */
+.hs-readout {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.hs-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+
+.hs-cell-v {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 玻尔轨道：三块半径读数 */
+.hs-orbits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.hs-orbit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  align-items: center;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.hs-orbit-r {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 能级能量芯片 */
+.hs-energies {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem 0.8rem;
+}
+
+.hs-energy {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 谱线系对照表：居中、行距略紧 */
+.hs-table {
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+.hs-table th,
+.hs-table td {
+  padding: 0.22rem 0.9rem;
+}
+
+/* 例题页：解析栏顶部对齐、题干略紧 */
+.slidev-layout.ex-top .ex-analysis {
+  gap: 0.7rem;
+  justify-content: flex-start;
+}
+
+.slidev-layout.ex-top .ex-stem {
+  line-height: 1.6;
+}
+
+/* 小结页：五步主线 */
+.hs-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.7rem;
+  align-items: stretch;
+}
+
+.hs-flow-node {
+  padding: 0.8rem 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  text-align: center;
+}
+
+.hs-flow-node b {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--c-accent);
+}
