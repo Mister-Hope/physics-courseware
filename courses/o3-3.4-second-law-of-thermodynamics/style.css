@@ -3,3 +3,344 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+.sl-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.sl-intro-q {
+  max-width: 26em;
+
+  color: var(--c-text);
+
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.sl-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+
+  width: 100%;
+  max-width: 860px;
+}
+
+.sl-intro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: center;
+
+  color: var(--c-text-dim);
+
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.sl-intro-icon {
+  color: var(--c-accent);
+}
+
+.sl-intro-text {
+  max-width: 16em;
+  font-size: 0.9rem;
+}
+
+.sl-direction-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1rem;
+  width: 100%;
+}
+
+.sl-process {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  gap: 0.3rem 0.7rem;
+  align-items: center;
+
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.sl-process-icon {
+  grid-row: 1 / span 2;
+  align-self: start;
+  color: var(--c-accent);
+}
+
+.sl-process b {
+  grid-column: 2;
+  color: var(--c-text);
+  font-size: 1rem;
+}
+
+.sl-process span {
+  grid-column: 2;
+  color: var(--c-text-dim);
+}
+
+.sl-process .sl-reverse {
+  color: var(--c-accent);
+  font-weight: 600;
+}
+
+.sl-figure {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.sl-figure-sm {
+  max-width: 660px;
+}
+
+.sl-figure svg {
+  display: block;
+  width: 100%;
+}
+
+.sl-kind-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.sl-kind-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+  color: var(--c-text-dim);
+
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.sl-kind-card b {
+  color: var(--c-text);
+  font-size: 1.05rem;
+}
+
+.sl-kind-yes {
+  border-color: rgb(45 212 191 / 35%);
+}
+
+.sl-kind-yes b {
+  color: var(--c-physics);
+}
+
+.sl-kind-no {
+  border-color: rgb(248 113 113 / 35%);
+}
+
+.sl-kind-no b {
+  color: var(--c-danger);
+}
+
+.sl-lede {
+  max-width: 46em;
+  margin: 0 auto;
+
+  color: var(--c-text-dim);
+
+  font-size: 1rem;
+  line-height: 1.65;
+  text-align: left;
+}
+
+.sl-lede .katex {
+  font-size: 1em;
+}
+
+.sl-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.sl-proof-labels {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.sl-proof-label {
+  padding: 0.25rem 0.8rem;
+  border: 1px solid var(--c-border-glow);
+  border-radius: var(--radius-sm);
+
+  background: var(--c-sky-soft);
+  color: var(--c-text);
+
+  font-size: 0.9rem;
+}
+
+.sl-proof-arrow {
+  color: var(--c-accent);
+  font-size: 1.1rem;
+}
+
+.sl-proof-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+}
+
+.sl-proof-title {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.sl-proof-step {
+  color: var(--c-text-dim);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.sl-proof-step .katex {
+  font-size: 1em;
+}
+
+.sl-kind-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sl-flow {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.sl-flow-node {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+  color: var(--c-text);
+
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.sl-flow-arrow {
+  color: var(--c-accent);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.sl-judge-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  width: 100%;
+}
+
+.sl-judge-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+}
+
+.sl-judge-card b {
+  color: var(--c-accent);
+  font-size: 1rem;
+}
+
+.sl-judge-text {
+  color: var(--c-text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.sl-judge-answer {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.sl-judge-no {
+  color: var(--c-danger);
+}
+
+.sl-judge-yes {
+  color: var(--c-physics);
+}
+
+.sl-summary-main {
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 2.2rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.sl-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem 1rem;
+  width: 100%;
+}
+
+.sl-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+}
+
+.sl-summary-card b {
+  color: var(--c-text);
+  font-size: 1rem;
+}
+
+.sl-summary-card span {
+  color: var(--c-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
