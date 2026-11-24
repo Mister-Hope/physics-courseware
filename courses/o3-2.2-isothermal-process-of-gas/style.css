@@ -1,5 +1,39 @@
-/* ═══════════════════════════════════════════════
-   气体的等温变化 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 本课特有的少量样式；通用原子在共享 addon 的 layout.css 里 */
+
+.step-line {
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.step-line + .step-line {
+  margin-top: 0.35rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.42rem 0.6rem;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  text-align: center;
+}
+
+.data-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+/* 题目页解析行更紧凑：题干较长时避免解析越出画布 */
+.exercise-split .step-line {
+  font-size: 0.94rem;
+  line-height: 1.42;
+}
+
+.exercise-split .step-line + .step-line {
+  margin-top: 0.18rem;
+}
