@@ -1,5 +1,94 @@
-/* ═══════════════════════════════════════════════
-   原子的核式结构模型 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 4.3 原子的核式结构模型 · 本课特有样式（类名统一 .nu- 前缀） */
+
+/* ── 图 + 文双栏：图略宽，文字列定宽防撑爆 ── */
+.nu-split {
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.nu-split > * {
+  min-width: 0;
+}
+
+/* 图占满所在栏宽，高度封顶，避免一页被图顶穿 */
+.nu-fig svg {
+  display: block;
+
+  width: 100%;
+  max-height: 330px;
+  height: auto;
+}
+
+/* ── 正文行：行距比裸 div 略松（题干/解析页通用）── */
+.nu-point {
+  line-height: 1.68;
+}
+
+/* ── 三种散射结果三栏（第 9 页）── */
+.nu-three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.nu-explain {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  border-top: 2px solid var(--c-border);
+}
+
+.nu-explain-title {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.nu-tag {
+  justify-self: start;
+
+  margin-top: 0.3rem;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+
+  color: var(--c-text-dim);
+}
+
+/* ── 时间线（第 15 页）── */
+.nu-timeline {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.nu-tl-row {
+  display: grid;
+  grid-template-columns: 4.6rem 1fr;
+  gap: 0.8rem;
+  align-items: baseline;
+}
+
+.nu-tl-year {
+  color: var(--c-accent);
+  font-weight: 700;
+  text-align: right;
+}
+
+.nu-tl-text {
+  line-height: 1.6;
+}
+
+/* ── 习题解析行（第 12–14 页）── */
+.nu-line {
+  line-height: 1.6;
+}
+
+.nu-line + .nu-line {
+  margin-top: 0.45rem;
+}
