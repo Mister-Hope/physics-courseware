@@ -1,5 +1,162 @@
-/* ═══════════════════════════════════════════════
-   放射性元素的衰变 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 本课特有样式：正文行、独立公式、衰变示意图、同位素应用格、辐射标志 */
+
+/* 正文行：一页多条时比正文略紧，给图与公式留空间 */
+.step-line {
+  line-height: 1.55;
+}
+
+.step-line + .step-line {
+  margin-top: 0.34rem;
+}
+
+/* 独立公式行 */
+.formula-center {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 分步隐藏：占位不删，避免点击时顶跑 */
+.vp-hidden {
+  visibility: hidden;
+}
+
+/* 衰变示意：母核 → 新核 + α/β 粒子 */
+.decay-figure {
+  display: flex;
+  gap: 0.42rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.decay-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.26rem;
+  align-items: center;
+}
+
+.decay-ball {
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--c-border-glow);
+  border-radius: 50%;
+
+  background: color-mix(in srgb, var(--c-accent) 12%, var(--c-surface));
+  box-shadow: 0 0 1.1rem color-mix(in srgb, var(--c-accent) 12%, transparent);
+  color: var(--c-text);
+}
+
+.decay-ball--parent {
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+.decay-ball--daughter {
+  width: 4rem;
+  height: 4rem;
+
+  border-color: color-mix(in srgb, var(--c-accent-2) 45%, var(--c-border));
+
+  background: color-mix(in srgb, var(--c-accent-2) 14%, var(--c-surface));
+  box-shadow: 0 0 1.1rem color-mix(in srgb, var(--c-accent-2) 14%, transparent);
+}
+
+.decay-ball--particle {
+  width: 3.2rem;
+  height: 3.2rem;
+
+  border-color: color-mix(in srgb, var(--c-physics) 45%, var(--c-border));
+
+  background: color-mix(in srgb, var(--c-physics) 14%, var(--c-surface));
+  box-shadow: 0 0 1rem color-mix(in srgb, var(--c-physics) 14%, transparent);
+}
+
+.decay-arrow {
+  color: var(--c-accent);
+}
+
+.decay-plus {
+  color: var(--c-text-dim);
+}
+
+/* γ 辐射：能级图 + 覆盖在图上的光子标注 */
+.gamma-figure {
+  position: relative;
+}
+
+.gamma-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gamma-label {
+  position: absolute;
+  top: 43%;
+  left: 84%;
+
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+
+  color: var(--c-accent);
+}
+
+/* 放射性同位素应用：2×2 应用格 */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1.5rem;
+}
+
+.app-cell {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.app-cell > svg {
+  flex: none;
+  margin-top: 0.15rem;
+  color: var(--c-accent);
+}
+
+.app-cell b {
+  color: var(--c-text);
+}
+
+/* 辐射警示牌 */
+.rad-warning {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.1rem 1.5rem;
+
+  border: 2px solid var(--c-accent);
+  border-radius: var(--radius-lg);
+
+  background: color-mix(in srgb, var(--c-accent) 9%, transparent);
+  color: var(--c-accent);
+}
+
+/* 习题页：解析行更紧凑，给题干留出空间 */
+.exercise-split .step-line {
+  font-size: 0.9rem;
+  line-height: 1.38;
+}
+
+.exercise-split .step-line + .step-line {
+  margin-top: 0.14rem;
+}
+
+/* 习题页解析区：拆页后行距收紧（page-grow 默认 gap 过大，会把 qa-mark 顶出） */
+.exercise-split .ex-analysis {
+  gap: 0.5rem;
+}
