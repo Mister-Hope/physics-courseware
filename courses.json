@@ -864,15 +864,15 @@
           "slug": "o3-3.4-second-law-of-thermodynamics",
           "title": "热力学第二定律",
           "chapter": "§3.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解热力学第二定律的两种表述（克劳修斯、开尔文），认识宏观过程的方向性、熵与能源有限性。",
+          "tags": ["热力学第二定律", "方向性", "熵", "能源"]
         },
         {
           "slug": "o3-4.1-planck-blackbody-radiation",
           "title": "普朗克黑体辐射理论",
           "chapter": "§4.1",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识黑体与黑体辐射的实验规律，理解普朗克能量子假说 ε=hν 如何解释辐射规律，体会量子观念的诞生。",
+          "tags": ["黑体辐射", "能量子", "普朗克", "量子"]
         },
         {
           "slug": "o3-4.2-photoelectric-effect",
