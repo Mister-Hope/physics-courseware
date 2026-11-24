@@ -409,11 +409,11 @@ clicks: 0
 
 <div class="page-grow">
 <div class="stack">
-<div class="summary-line"><span class="key-lead">振荡电流</span>　大小和方向都做周期性迅速变化的电流。</div>
-<div class="summary-line"><span class="key-lead">电荷量与电流</span>　<Latex tex="q" />、<Latex tex="u" />、<Latex tex="i" /> 都按正弦规律变化，<Latex tex="q" /> 最大时 <Latex tex="i" /> 为零。</div>
-<div class="summary-line"><span class="key-lead">能量转化</span>　电场能与磁场能相互转化，无能量损耗时两者的总和不变。</div>
-<div class="summary-line"><span class="key-lead">阻尼振荡</span>　实际电路有电阻和电磁波辐射，振幅逐渐减小；补充能量可得等幅振荡。</div>
-<div class="summary-line"><span class="key-lead">固有周期与频率</span>　<Latex tex="T = 2\pi\sqrt{LC}" />，<Latex tex="f = \dfrac{1}{2\pi\sqrt{LC}}" />，由 <Latex tex="L" />、<Latex tex="C" /> 决定。</div>
+<div class="summary-line"><strong>振荡电流</strong>　大小和方向都做周期性迅速变化的电流。</div>
+<div class="summary-line"><strong>电荷量与电流</strong>　<Latex tex="q" />、<Latex tex="u" />、<Latex tex="i" /> 都按正弦规律变化，<Latex tex="q" /> 最大时 <Latex tex="i" /> 为零。</div>
+<div class="summary-line"><strong>能量转化</strong>　电场能与磁场能相互转化，无能量损耗时两者的总和不变。</div>
+<div class="summary-line"><strong>阻尼振荡</strong>　实际电路有电阻和电磁波辐射，振幅逐渐减小；补充能量可得等幅振荡。</div>
+<div class="summary-line"><strong>固有周期与频率</strong>　<Latex tex="T = 2\pi\sqrt{LC}" />，<Latex tex="f = \dfrac{1}{2\pi\sqrt{LC}}" />，由 <Latex tex="L" />、<Latex tex="C" /> 决定。</div>
 </div>
 </div>
 

@@ -112,9 +112,9 @@ clickAnimation: none
 </div>
 <div class="stack">
 <div class="ask">把 A、B 看成一个整体，<br />它的动量怎样变化？</div>
-<div v-click="1" class="step-line"><span class="key-lead">系统</span>　相互作用的物体组成的整体。</div>
-<div v-click="2" class="step-line"><span class="key-lead">内力</span>　系统中物体间的作用力，如 <Latex tex="F_1" />、<Latex tex="F_2" />。</div>
-<div v-click="3" class="step-line"><span class="key-lead">外力</span>　系统以外的物体施加的力，如重力。</div>
+<div v-click="1" class="step-line"><strong>系统</strong>　相互作用的物体组成的整体。</div>
+<div v-click="2" class="step-line"><strong>内力</strong>　系统中物体间的作用力，如 <Latex tex="F_1" />、<Latex tex="F_2" />。</div>
+<div v-click="3" class="step-line"><strong>外力</strong>　系统以外的物体施加的力，如重力。</div>
 </div>
 </div>
 </div>
@@ -170,10 +170,10 @@ clickAnimation: none
 
 <div class="page-grow page-around">
 <div class="stack">
-<div class="step-line"><span class="key-lead">不受外力</span>　系统与外界没有相互作用。</div>
-<div v-click="1" class="step-line"><span class="key-lead">合外力为零</span>　所受外力的矢量和为 0，如重力和支持力相互平衡。</div>
-<div v-click="2" class="step-line"><span class="key-lead">近似守恒</span>　碰撞、爆炸中内力远大于外力，外力可以忽略。</div>
-<div v-click="3" class="step-line"><span class="key-lead">分方向守恒</span>　外力在某个方向上的合力为零，该方向动量守恒。</div>
+<div class="step-line"><strong>不受外力</strong>　系统与外界没有相互作用。</div>
+<div v-click="1" class="step-line"><strong>合外力为零</strong>　所受外力的矢量和为 0，如重力和支持力相互平衡。</div>
+<div v-click="2" class="step-line"><strong>近似守恒</strong>　碰撞、爆炸中内力远大于外力，外力可以忽略。</div>
+<div v-click="3" class="step-line"><strong>分方向守恒</strong>　外力在某个方向上的合力为零，该方向动量守恒。</div>
 <div v-click="4" class="warn-hint">动量守恒是矢量式：列方程前先规定正方向，把速度写成带正负号的量。</div>
 </div>
 </div>
@@ -210,10 +210,10 @@ clickAnimation: none
 
 <div class="page-grow page-around">
 <div class="stack">
-<div class="step-line"><span class="key-lead">①</span>　明确研究对象：哪些物体组成一个系统。</div>
-<div v-click="1" class="step-line"><span class="key-lead">②</span>　判断守恒条件：系统所受外力的矢量和是否为零。</div>
-<div v-click="2" class="step-line"><span class="key-lead">③</span>　规定正方向，把各速度写成带正负号的量。</div>
-<div v-click="3" class="step-line"><span class="key-lead">④</span>　列动量守恒方程 <Latex tex="p' = p" />，求解并说明方向。</div>
+<div class="step-line"><strong>①</strong>　明确研究对象：哪些物体组成一个系统。</div>
+<div v-click="1" class="step-line"><strong>②</strong>　判断守恒条件：系统所受外力的矢量和是否为零。</div>
+<div v-click="2" class="step-line"><strong>③</strong>　规定正方向，把各速度写成带正负号的量。</div>
+<div v-click="3" class="step-line"><strong>④</strong>　列动量守恒方程 <Latex tex="p' = p" />，求解并说明方向。</div>
 </div>
 </div>
 
@@ -329,10 +329,10 @@ clickAnimation: none
 
 <div class="page-grow page-around">
 <div class="stack">
-<div class="summary-line"><span class="key-lead">定律</span>　如果一个系统不受外力，或者所受外力的矢量和为 0，这个系统的总动量保持不变。</div>
-<div class="summary-line"><span class="key-lead">表达式</span>　<Latex tex="p' = p" />，矢量式，列式前先规定正方向。</div>
-<div class="summary-line"><span class="key-lead">条件</span>　不受外力；合外力为零；内力远大于外力时近似守恒；某方向合外力为零时该方向守恒。</div>
-<div class="summary-line"><span class="key-lead">推导</span>　对 A、B 分别用动量定理，再由牛顿第三定律得到 <Latex tex="\Delta p_1 = -\Delta p_2" />。</div>
+<div class="summary-line"><strong>定律</strong>　如果一个系统不受外力，或者所受外力的矢量和为 0，这个系统的总动量保持不变。</div>
+<div class="summary-line"><strong>表达式</strong>　<Latex tex="p' = p" />，矢量式，列式前先规定正方向。</div>
+<div class="summary-line"><strong>条件</strong>　不受外力；合外力为零；内力远大于外力时近似守恒；某方向合外力为零时该方向守恒。</div>
+<div class="summary-line"><strong>推导</strong>　对 A、B 分别用动量定理，再由牛顿第三定律得到 <Latex tex="\Delta p_1 = -\Delta p_2" />。</div>
 </div>
 </div>
 

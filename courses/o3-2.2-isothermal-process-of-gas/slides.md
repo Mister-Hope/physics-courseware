@@ -260,11 +260,11 @@ clicks: 2
 
 <div class="page-grow page-around">
 <div class="stack" style="width:100%;max-width:880px;margin:0 auto">
-<div class="summary-line"><span class="key-lead">等温变化</span>　一定质量的气体，温度不变时压强与体积变化的过程。</div>
-<div class="summary-line"><span class="key-lead">实验方法</span>　用注射器封闭一段空气柱，缓慢推拉，测出多组 <Latex tex="V" /> 与 <Latex tex="p" />。</div>
-<div class="summary-line"><span class="key-lead">玻意耳定律</span>　<Latex tex="p \propto \dfrac{1}{V}" />，<Latex tex="pV = C" />，<Latex tex="p_1 V_1 = p_2 V_2" />。</div>
-<div class="summary-line"><span class="key-lead">图像</span>　<Latex tex="p\text{-}V" /> 图是双曲线；<Latex tex="p\text{-}\dfrac{1}{V}" /> 图是过原点的直线。</div>
-<div class="summary-line"><span class="key-lead">适用条件</span>　质量一定、温度不变；<Latex tex="C" /> 随温度、质量、气体种类而变。</div>
+<div class="summary-line"><strong>等温变化</strong>　一定质量的气体，温度不变时压强与体积变化的过程。</div>
+<div class="summary-line"><strong>实验方法</strong>　用注射器封闭一段空气柱，缓慢推拉，测出多组 <Latex tex="V" /> 与 <Latex tex="p" />。</div>
+<div class="summary-line"><strong>玻意耳定律</strong>　<Latex tex="p \propto \dfrac{1}{V}" />，<Latex tex="pV = C" />，<Latex tex="p_1 V_1 = p_2 V_2" />。</div>
+<div class="summary-line"><strong>图像</strong>　<Latex tex="p\text{-}V" /> 图是双曲线；<Latex tex="p\text{-}\dfrac{1}{V}" /> 图是过原点的直线。</div>
+<div class="summary-line"><strong>适用条件</strong>　质量一定、温度不变；<Latex tex="C" /> 随温度、质量、气体种类而变。</div>
 </div>
 </div>
 

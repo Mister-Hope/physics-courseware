@@ -287,10 +287,10 @@ clicks: 3
 <div class="page-grow">
 <div class="mini-title">本节的规律</div>
 <div class="stack">
-<div class="summary-line"><span class="key-lead">表面张力</span>　使液体表面绷紧、表面积趋于最小。</div>
-<div class="summary-line"><span class="key-lead">浸润与不浸润</span>　由附着力与内聚力的强弱决定，液面出现向上或向下的弯曲。</div>
-<div class="summary-line"><span class="key-lead">毛细现象</span>　浸润液体在细管中上升、不浸润液体在细管中下降，管径越小越明显。</div>
-<div class="summary-line"><span class="key-lead">液晶</span>　兼有液体的流动性和晶体分子的规则排列，具有光学各向异性。</div>
+<div class="summary-line"><strong>表面张力</strong>　使液体表面绷紧、表面积趋于最小。</div>
+<div class="summary-line"><strong>浸润与不浸润</strong>　由附着力与内聚力的强弱决定，液面出现向上或向下的弯曲。</div>
+<div class="summary-line"><strong>毛细现象</strong>　浸润液体在细管中上升、不浸润液体在细管中下降，管径越小越明显。</div>
+<div class="summary-line"><strong>液晶</strong>　兼有液体的流动性和晶体分子的规则排列，具有光学各向异性。</div>
 </div>
 </div>
 

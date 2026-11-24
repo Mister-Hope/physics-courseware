@@ -705,7 +705,7 @@
 }
 
 .class-bio .class-icon {
-  color: #4ade80;
+  color: var(--c-ok);
 }
 
 .class-name {
@@ -792,7 +792,7 @@
 }
 
 .quiz-bio {
-  color: #4ade80;
+  color: var(--c-ok);
 }
 
 /* 分类方式与手机 */

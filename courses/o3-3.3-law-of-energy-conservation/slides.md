@@ -323,10 +323,10 @@ title: 本节的规律
 ## 本节的规律
 
 <div class="stack">
-<div class="summary-line"><span class="key-lead">能量守恒定律</span>　能量不会凭空产生，也不会凭空消失，转化或转移中总量保持不变。</div>
-<div class="summary-line"><span class="key-lead">两种方式</span>　转化改变能量的形式，转移改变能量所属的物体。</div>
-<div class="summary-line"><span class="key-lead">第一类永动机</span>　不需要动力或燃料却不断对外做功，违背能量守恒。</div>
-<div class="summary-line"><span class="key-lead">普适性</span>　从力学、热学到电磁、化学、生命与核过程，能量守恒都成立。</div>
+<div class="summary-line"><strong>能量守恒定律</strong>　能量不会凭空产生，也不会凭空消失，转化或转移中总量保持不变。</div>
+<div class="summary-line"><strong>两种方式</strong>　转化改变能量的形式，转移改变能量所属的物体。</div>
+<div class="summary-line"><strong>第一类永动机</strong>　不需要动力或燃料却不断对外做功，违背能量守恒。</div>
+<div class="summary-line"><strong>普适性</strong>　从力学、热学到电磁、化学、生命与核过程，能量守恒都成立。</div>
 <div class="tip-hint">能量守恒定律是自然界最普遍、最重要的基本定律之一。</div>
 </div>
 

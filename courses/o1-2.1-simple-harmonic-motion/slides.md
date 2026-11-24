@@ -455,11 +455,11 @@ title: 本节的规律
 
 <div class="page-grow page-around">
 <div class="stack">
-<div class="summary-line"><span class="key-lead">机械振动</span>　物体在某一位置附近的往复运动。</div>
-<div class="summary-line"><span class="key-lead">弹簧振子</span>　忽略弹簧质量和阻力的理想模型，平衡位置处合力为零。</div>
-<div class="summary-line"><span class="key-lead">简谐运动</span>　<Latex tex="x" />–<Latex tex="t" /> 图像是正弦曲线，它是最基本的振动。</div>
-<div class="summary-line"><span class="key-lead">三个描述量</span>　振幅 <Latex tex="A" />、周期 <Latex tex="T" />、频率 <Latex tex="f = \dfrac{1}{T}" />。</div>
-<div class="summary-line"><span class="key-lead">回复力与能量</span>　<Latex tex="F = -kx" />；动能与弹性势能相互转化。</div>
+<div class="summary-line"><strong>机械振动</strong>　物体在某一位置附近的往复运动。</div>
+<div class="summary-line"><strong>弹簧振子</strong>　忽略弹簧质量和阻力的理想模型，平衡位置处合力为零。</div>
+<div class="summary-line"><strong>简谐运动</strong>　<Latex tex="x" />–<Latex tex="t" /> 图像是正弦曲线，它是最基本的振动。</div>
+<div class="summary-line"><strong>三个描述量</strong>　振幅 <Latex tex="A" />、周期 <Latex tex="T" />、频率 <Latex tex="f = \dfrac{1}{T}" />。</div>
+<div class="summary-line"><strong>回复力与能量</strong>　<Latex tex="F = -kx" />；动能与弹性势能相互转化。</div>
 </div>
 </div>
 
