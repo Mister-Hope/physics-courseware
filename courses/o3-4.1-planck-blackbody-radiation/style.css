@@ -1,5 +1,216 @@
-/* ═══════════════════════════════════════════════
-   普朗克黑体辐射理论 — 课程特有样式
-   通用设计系统已提取到 workspace/shared/styles/common.css，
-   由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
-   ═══════════════════════════════════════════════ */
+/* 4.1 普朗克黑体辐射理论 · 本课特有样式 */
+
+.pk-split {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 2rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.pk-split > * {
+  min-width: 0;
+}
+
+.pk-split.pk-text {
+  grid-template-columns: 0.95fr 1.05fr;
+}
+
+.pk-fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+}
+
+.pk-point {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--c-accent);
+}
+
+.pk-point strong {
+  color: var(--c-accent);
+}
+
+.pk-formula-big {
+  display: flex;
+  justify-content: center;
+  padding: 0.2rem 0 0.4rem;
+}
+
+.pk-formula-big .katex-display {
+  margin: 0;
+}
+
+.pk-formula-big .katex {
+  font-size: 1.5em;
+}
+
+.pk-cards {
+  /* default three columns */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.pk-card {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+
+.pk-card-title {
+  margin-bottom: 0.35rem;
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.pk-card p {
+  margin: 0;
+  color: var(--c-text-dim);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+.pk-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.pk-table th,
+.pk-table td {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: left;
+}
+
+.pk-table th {
+  color: var(--c-text-dim);
+  font-weight: 600;
+}
+
+.pk-table th:last-child,
+.pk-table td:last-child {
+  text-align: center;
+}
+
+.pk-explorer {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 2rem;
+  align-items: center;
+
+  width: 100%;
+  min-width: 0;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.pk-explorer-chart {
+  min-width: 0;
+}
+
+.pk-axis-note {
+  margin-top: 0.2rem;
+  color: var(--c-text-mute);
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.pk-explorer-panel {
+  display: grid;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.pk-readout {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.pk-readout-row {
+  display: grid;
+  grid-template-columns: 5.4rem 1fr;
+  align-items: baseline;
+}
+
+.pk-readout-label {
+  color: var(--c-text-dim);
+  font-size: 0.82rem;
+}
+
+.pk-readout-value {
+  color: var(--c-text);
+  font-weight: 700;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.pk-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.7rem;
+  align-items: stretch;
+}
+
+.pk-flow-node {
+  padding: 0.8rem 0.5rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+.pk-flow-node b {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--c-accent);
+  font-size: 0.8rem;
+}
+
+.pk-timeline {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.pk-timeline-item {
+  display: grid;
+  grid-template-columns: 6.4rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.pk-timeline-year {
+  color: var(--c-accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.pk-timeline-text {
+  color: var(--c-text);
+  font-size: 0.9rem;
+}
+
+.slidev-layout.ex-top .ex-analysis {
+  gap: 0.7rem;
+  justify-content: flex-start;
+}
+
+.slidev-layout.ex-top .ex-stem {
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.pk-cards.pk-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
