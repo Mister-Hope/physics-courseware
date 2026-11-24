@@ -148,9 +148,11 @@ const addNeutron = (): void => {
 
 .iso svg {
   display: block;
+
   width: 58%;
   height: auto;
   margin: 0 auto;
+
   cursor: pointer;
   user-select: none;
 }
@@ -167,8 +169,8 @@ const addNeutron = (): void => {
 .iso-counts {
   display: grid;
   grid-template-columns: 4.6em 1fr;
-  align-items: baseline;
   row-gap: 0.1rem;
+  align-items: baseline;
 }
 
 .iso-id {
