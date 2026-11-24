@@ -927,8 +927,8 @@
           "slug": "o3-5.4-nuclear-fission-and-fusion",
           "title": "核裂变与核聚变",
           "chapter": "§5.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解裂变、聚变释放核能的机理与链式反应条件，了解核反应堆与可控聚变的原理及和平利用。",
+          "tags": ["核裂变", "链式反应", "核聚变", "核反应堆"]
         },
         {
           "slug": "o3-5.5-elementary-particles",
