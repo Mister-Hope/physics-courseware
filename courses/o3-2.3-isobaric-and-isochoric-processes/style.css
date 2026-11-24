@@ -3,3 +3,118 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+.slidev-layout.course-cover .cover-title {
+  font-size: 3rem !important;
+}
+
+.gp-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+
+  min-height: 0;
+}
+
+.gp-split > * {
+  min-width: 0;
+}
+
+.gp-fig {
+  width: 100%;
+}
+
+.gp-fig svg {
+  width: 100%;
+  height: auto;
+}
+
+.gp-point {
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--c-accent);
+  line-height: 1.65;
+}
+
+.gp-point + .gp-point {
+  margin-top: 0.7rem;
+}
+
+.gp-formula-big {
+  display: flex;
+  justify-content: center;
+  padding: 0.1rem 0 0.3rem;
+}
+
+.gp-formula-big .katex-display {
+  margin: 0;
+}
+
+.gp-formula-big .katex {
+  font-size: 1.45em;
+}
+
+.gp-table {
+  width: 100%;
+  font-size: 0.82rem;
+}
+
+.gp-table th,
+.gp-table td {
+  padding: 0.32rem 0.45rem;
+  text-align: center;
+}
+
+.gp-table th:first-child,
+.gp-table td:first-child {
+  text-align: left;
+}
+
+.gp-three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.gp-card {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.gp-card-title {
+  margin-bottom: 0.35rem;
+  color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.gp-lead {
+  font-size: 1.05rem;
+}
+
+.gp-nw {
+  white-space: nowrap;
+}
+
+.gp-step {
+  padding-left: 0.8rem;
+  border-left: 2px solid var(--c-accent);
+  line-height: 1.7;
+}
+
+.ex-top .ex-analysis {
+  gap: 0.75rem;
+  justify-content: flex-start;
+}
+
+.ex-top .ex-stem {
+  font-size: 1rem;
+  line-height: 1.65;
+}
