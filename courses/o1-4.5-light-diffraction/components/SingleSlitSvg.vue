@@ -10,7 +10,7 @@
     <line v-if="variant === 'narrow'" x1="150" y1="110" x2="236" y2="64" stroke="var(--c-accent-2)" stroke-width="1" opacity="0.35" />
     <line v-if="variant === 'narrow'" x1="150" y1="110" x2="236" y2="156" stroke="var(--c-accent-2)" stroke-width="1" opacity="0.35" />
     <rect x="238" y="18" width="7" height="184" fill="var(--c-neutral-700)" opacity="0.9" />
-    <rect x="247" y="110" width="14" :height="beamHalf * 2" :y="110 - beamHalf" fill="var(--c-accent)" opacity="0.85" />
+    <rect x="247" width="14" :height="beamHalf * 2" :y="110 - beamHalf" fill="var(--c-accent)" opacity="0.85" />
     <rect v-if="variant === 'narrow'" x="247" y="38" width="14" height="10" fill="var(--c-accent)" opacity="0.45" />
     <rect v-if="variant === 'narrow'" x="247" y="172" width="14" height="10" fill="var(--c-accent)" opacity="0.45" />
     <text x="138" y="212" fill="var(--c-text-dim)" font-size="11" text-anchor="middle">单缝</text>

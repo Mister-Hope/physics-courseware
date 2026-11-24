@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ step?: number }>();
+const { step = 0 } = defineProps<{ step?: number }>();
 
 /** 导线环：圆心 (540,65)、半径 46，顶部留一个很小的空隙（100° → 440°） */
 const ringPoints = Array.from({ length: 46 }, (_, i) => {

@@ -90,7 +90,7 @@ const afterArrows = computed(() => {
 
   if (stuck) {
     const center = X1A + R;
-    const arrow = makeArrow(center, Y2, v1p, "var(--c-accent)", "v′", sub1, 2 * R + 8);
+    const arrow = makeArrow({ cx: center, y: Y2, v: v1p, color: "var(--c-accent)", label: "v′", sub: sub1, gap: 2 * R + 8 });
     if (arrow) list.push(arrow);
 
     return list;

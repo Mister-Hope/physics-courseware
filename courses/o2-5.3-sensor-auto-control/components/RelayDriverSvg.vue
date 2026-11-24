@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 第 13–14 页：三极管 + 继电器线圈 K + 续流二极管 D 驱动小灯泡
 // step：0 = 三极管导通、线圈通电、灯亮；1 = 三极管关断瞬间（自感电动势）；2 = 自感电流经 D 释放
-defineProps<{
+const { step = 0, showDiode = true } = defineProps<{
   step?: number;
   showDiode?: boolean;
 }>();
