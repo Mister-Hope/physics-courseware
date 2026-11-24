@@ -22,9 +22,7 @@
 .ep-sm-label {
   display: flex;
   align-items: center;
-
   color: var(--c-accent);
-
   font-weight: 700;
 }
 

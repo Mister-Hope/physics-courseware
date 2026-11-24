@@ -934,8 +934,8 @@
           "slug": "o3-5.5-elementary-particles",
           "title": "“基本”粒子",
           "chapter": "§5.5",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "了解“基本”粒子的发现与分类（夸克、轻子），认识规范场与粒子物理标准模型的基本图景。",
+          "tags": ["基本粒子", "夸克", "轻子", "标准模型"]
         }
       ]
     }
