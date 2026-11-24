@@ -108,39 +108,48 @@ const fmt = (value: number, digits: number): string => value.toFixed(digits);
   gap: 0.55rem;
   width: 100%;
 }
+
 .lab-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 190px;
   gap: 1.8rem;
   align-items: center;
 }
+
 .lab-readouts {
   display: grid;
   gap: 0.45rem;
 }
+
 .lab-cell {
   display: flex;
   flex-direction: column;
   gap: 0.05rem;
 }
+
 .lab-value {
   color: var(--c-text);
   font-variant-numeric: tabular-nums;
   line-height: 1.3;
 }
+
 .lab-value-accent {
   color: var(--c-accent);
 }
+
 .lab-screen {
   text-align: center;
 }
+
 .lab-screen svg {
   display: block;
   width: 100%;
 }
+
 .lab-screen .mini-note {
   display: block;
 }
+
 .lab-formula {
   text-align: center;
 }
