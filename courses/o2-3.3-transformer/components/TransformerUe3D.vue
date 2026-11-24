@@ -22,10 +22,20 @@ const mode = ref<"pending" | "3d" | "2d">("pending");
 let model: TransformerCoreModel | null = null;
 let observer: IntersectionObserver | null = null;
 
-// 三块文字互斥：镜头转到另一侧时，上一侧的公式必须收起来，否则变压器会压在上面
-const s1 = computed(() => step === 1);
-const s2 = computed(() => step === 2);
-const s3 = computed(() => step >= 3);
+const isCameraMoving = ref(false);
+let cameraMoveTimer: ReturnType<typeof setTimeout> | null = null;
+
+// 三块文字互斥，且切镜移动过程中（720ms）先隐藏文字，等变压器飞到位后再浮现文字，彻底消除移动过程中变压器与文字重叠！
+const s1 = computed(() => step === 1 && !isCameraMoving.value);
+const s2 = computed(() => step === 2 && !isCameraMoving.value);
+const s3 = computed(() => step >= 3 && !isCameraMoving.value);
+
+const clearCameraTimer = (): void => {
+  if (cameraMoveTimer != null) {
+    clearTimeout(cameraMoveTimer);
+    cameraMoveTimer = null;
+  }
+};
 
 const hasWebGl = (): boolean => {
   try {
@@ -69,7 +79,14 @@ const startModel = (): void => {
 
 watch(
   () => step,
-  (nextStep) => {
+  (nextStep, prevStep) => {
+    clearCameraTimer();
+    if (nextStep !== prevStep) {
+      isCameraMoving.value = true;
+      cameraMoveTimer = setTimeout(() => {
+        isCameraMoving.value = false;
+      }, 720);
+    }
     model?.setStep(nextStep);
   },
 );
@@ -101,6 +118,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  clearCameraTimer();
   observer?.disconnect();
   observer = null;
   releaseModel();
@@ -153,7 +171,10 @@ onBeforeUnmount(() => {
 
     <div class="ask ue3-ask">线圈有电阻，<Latex tex="U = E" /> 还成立吗？</div>
 
-    <div class="ue3-note" :class="s3 ? 'ue3-note-recap-a' : 'ue3-note-left'" v-show="s1 || s3">
+    <div
+      class="ue3-note"
+      :class="[s3 ? 'ue3-note-recap-a' : 'ue3-note-left', { 'is-hidden': !(s1 || s3) }]"
+    >
       <div class="ue3-head ue3-head-blue">原线圈 · 电源侧</div>
       <div class="ue3-eq"><Latex tex="U_1 = E_1 + I_1 r_1" /></div>
       <div class="ue3-key ue3-key-blue">
@@ -161,7 +182,10 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <div class="ue3-note" :class="s3 ? 'ue3-note-recap-b' : 'ue3-note-right'" v-show="s2 || s3">
+    <div
+      class="ue3-note"
+      :class="[s3 ? 'ue3-note-recap-b' : 'ue3-note-right', { 'is-hidden': !(s2 || s3) }]"
+    >
       <div class="ue3-head ue3-head-gold">副线圈 · 输出侧</div>
       <div class="ue3-eq"><Latex tex="U_2 = E_2 - I_2 r_2" /></div>
       <div class="ue3-key ue3-key-gold">
@@ -186,7 +210,6 @@ onBeforeUnmount(() => {
   --ue3-note-width: 39%;
 
   position: relative;
-
   width: 100%;
   height: 455px;
 }
@@ -212,6 +235,7 @@ onBeforeUnmount(() => {
   left: 0;
 
   max-width: var(--ue3-ask-width);
+
   font-size: 1rem;
   line-height: 1.38;
 }
@@ -227,8 +251,9 @@ onBeforeUnmount(() => {
 
   width: var(--ue3-note-width);
   padding: 0.35rem 0 0.35rem 0.95rem;
-
   border-left: 3px solid var(--c-border);
+
+  transition: opacity 0.25s ease;
 
   transform: translateY(-50%);
 }
@@ -250,9 +275,7 @@ onBeforeUnmount(() => {
 .ue3-note-recap-b {
   right: 0.4rem;
   left: auto;
-
   width: 43%;
-
   transform: none;
 }
 
@@ -272,7 +295,6 @@ onBeforeUnmount(() => {
   bottom: auto;
 
   width: 43%;
-
   border-left-color: var(--c-accent);
 
   transform: none;
@@ -300,7 +322,6 @@ onBeforeUnmount(() => {
   display: flex;
   gap: 0.3rem;
   align-items: baseline;
-
   font-size: 0.94rem;
 }
 

@@ -46,7 +46,7 @@ clickAnimation: none
 
 ---
 title: 变压器的结构与作用
-clicks: 4
+clicks: 5
 clickAnimation: none
 ---
 
@@ -54,6 +54,16 @@ clickAnimation: none
 
 <div class="page-grow">
 <TransformerIntro3D :step="$clicks" />
+</div>
+
+---
+title: 从实物到电路符号
+clicks: 2
+clickAnimation: none
+---
+
+<div class="page-grow">
+<TransformerSymbolBridge3D :step="$clicks" />
 </div>
 
 ---
@@ -237,13 +247,33 @@ clickAnimation: none
 </div>
 
 ---
-title: 实际变压器的 U 与 E
+title: 线圈内阻不可忽略时，怎样讨论 U 与 E
 clicks: 3
 clickAnimation: none
 ---
 
 <div class="page-grow">
 <TransformerUe3D :step="$clicks" />
+</div>
+
+---
+title: 铁芯发热会让电压比变小吗？
+clicks: 3
+clickAnimation: none
+---
+
+<div class="page-grow">
+<TransformerIronLoss3D :step="$clicks" />
+</div>
+
+---
+title: 漏磁会让电压比变小吗？
+clicks: 3
+clickAnimation: none
+---
+
+<div class="page-grow">
+<TransformerLeakLoss3D :step="$clicks" />
 </div>
 
 ---

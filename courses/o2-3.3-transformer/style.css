@@ -40,7 +40,7 @@
 .p7-param-title {
   color: var(--c-text);
   font-weight: 600;
-  font-size: 0.78rem;
+  font-size: 0.95rem;
 }
 
 .p7-params {
@@ -52,8 +52,8 @@
 
   color: var(--c-text-dim);
 
-  font-size: 0.66rem;
-  line-height: 1.4;
+  font-size: 0.58rem;
+  line-height: 1.35;
 }
 
 .p7-params li::marker {

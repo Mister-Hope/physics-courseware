@@ -264,7 +264,9 @@ export type TransformerSceneMode =
   | "principle"
   | "derivation"
   | "loss"
-  | "ue";
+  | "ue"
+  | "iron-static"
+  | "leak-static";
 
 export interface ProjectedTransformerAnchors {
   leftCoil: { x: number; y: number };
@@ -447,28 +449,42 @@ const PRINCIPLE_POSES: TransformerPose[] = [
   },
 ];
 
-// P4 结构与原理合并页（4 击，5 帧：
-// 0/1 击：保持正视图 STRUCTURE_POSES[0]；
-// 2 击（原线圈）：镜头绕着变压器转，停在只露原线圈左半截的机位（副线圈移出右画面外），展现线圈侧面立体厚度；
-// 3 击（闭合铁芯）：镜头下沉并继续绕转，铁芯从画面下缘转进来、只露上半截，上半圈磁环流完整清晰；
-// 4 击（副线圈）：镜头从左侧绕回，只露副线圈右半截，U₂ 与接线端在视野内）
+// P4 结构与原理合并页（5 击，6 帧，全屏舞台 + 浮动文字区：
+// 0 击：正视图（变压器靠左，右栏浮出构造定义）；
+// 1 击：正视图保持（定义淡出，原位换成提问）；
+// 2 击（原线圈）：镜头绕着变压器转，停在只露原线圈左半截在画面右侧（rigX = 6.85），左侧浮出原线圈说明；
+// 3 击（闭合铁芯）：镜头下沉并绕到下方（rigY = -1.75），铁芯只露上半截在画面下半区，上方浮出铁芯导磁说明；
+// 4 击（副线圈）：镜头从左侧绕回，只露副线圈右半截在画面左侧（rigX = -6.85），右侧浮出副线圈说明；
+// 5 击（拉远复盘）：拉远、变压器整体缩小在左侧（rigX = -5.65, camPos.z = 18.8），右侧纵向一次全出四块文字）
 const INTRO_POSES: TransformerPose[] = [
-  STRUCTURE_POSES[0],
-  STRUCTURE_POSES[0],
-  // Step 2 (原线圈特写)：向右旋转 + 大幅右移（rigX = 3.15），副线圈完全移出画面右外侧，只露左半截原线圈与输入端 U₁~
+  // Step 0: 正视图（变压器在左侧 rigX = -4.25，与右侧构造定义完全错开零重叠）
   {
-    rigX: 3.15,
-    rigY: -0.05,
-    rigRotY: 0.44,
-    camPos: new Vector3(-0.35, 0.72, 9.2),
-    camLookAt: new Vector3(-0.2, -0.05, 0),
-    coreOpacity: 0.38,
-    wireframeOpacity: 0.72,
-    primaryCoilOpacity: 0.56,
+    ...STRUCTURE_POSES[0],
+    rigX: -4.25,
+    camPos: new Vector3(-0.25, 0.15, 15.8),
+    camLookAt: new Vector3(-0.25, 0, 0),
+  },
+  // Step 1: 正视图保持（右侧切换为提问，与右侧端子零重叠）
+  {
+    ...STRUCTURE_POSES[0],
+    rigX: -4.25,
+    camPos: new Vector3(-0.25, 0.15, 15.8),
+    camLookAt: new Vector3(-0.25, 0, 0),
+  },
+  // Step 2 (原线圈特写)：向右旋转 + 右移到画面右侧（rigX = 6.85），副线圈完全在右画面外，左侧浮出原线圈文字
+  {
+    rigX: 6.85,
+    rigY: -0.06,
+    rigRotY: 0.42,
+    camPos: new Vector3(1.15, 0.72, 11.2),
+    camLookAt: new Vector3(1.15, -0.05, 0),
+    coreOpacity: 0.36,
+    wireframeOpacity: 0.78,
+    primaryCoilOpacity: 0.54,
     secondaryCoilOpacity: 0.65,
     primaryCurrentAlpha: 1,
     secondaryCurrentAlpha: 0,
-    fluxAlpha: 0.68,
+    fluxAlpha: 0.75,
     resistorPinAlpha: 0,
     powerBridgeAlpha: 0,
     copperHeatAlpha: 0,
@@ -476,13 +492,13 @@ const INTRO_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 3 (闭合铁芯上半截特写)：镜头下沉并继续旋转，铁芯从画面下缘转进来、只露上半截，上半圈磁环流完整清晰
+  // Step 3 (闭合铁芯上半截特写)：镜头下沉并绕到下方，铁芯从画面下缘转进来、只露上半截，上半圈磁环流完整清晰，上方浮出铁芯文字
   {
-    rigX: -0.08,
-    rigY: -1.48,
+    rigX: 0,
+    rigY: -1.85,
     rigRotY: 0.14,
-    camPos: new Vector3(-0.08, -0.45, 9.6),
-    camLookAt: new Vector3(-0.08, 0.18, 0),
+    camPos: new Vector3(0, -0.35, 11.2),
+    camLookAt: new Vector3(0, 0.35, 0),
     coreOpacity: 0.28,
     wireframeOpacity: 0.88,
     primaryCoilOpacity: 0.52,
@@ -497,17 +513,38 @@ const INTRO_POSES: TransformerPose[] = [
     eddyLoopAlpha: 0,
     leakFluxAlpha: 0,
   },
-  // Step 4 (副线圈特写)：镜头从左侧绕回，只露副线圈右半截（原线圈完全移出画面左外侧），U₂ 与接线端在视野内
+  // Step 4 (副线圈特写)：镜头从左侧绕回，只露副线圈右半截在画面左侧（rigX = -6.85），U₂ 与接线端在视野内，右侧浮出副线圈文字
   {
-    rigX: -3.15,
-    rigY: -0.05,
-    rigRotY: -0.42,
-    camPos: new Vector3(0.35, 0.72, 9.2),
-    camLookAt: new Vector3(0.2, -0.05, 0),
+    rigX: -6.85,
+    rigY: -0.06,
+    rigRotY: -0.38,
+    camPos: new Vector3(-1.15, 0.72, 11.2),
+    camLookAt: new Vector3(-1.15, -0.05, 0),
     coreOpacity: 0.34,
-    wireframeOpacity: 0.78,
+    wireframeOpacity: 0.8,
     primaryCoilOpacity: 0.52,
     secondaryCoilOpacity: 0.54,
+    primaryCurrentAlpha: 1,
+    secondaryCurrentAlpha: 1,
+    fluxAlpha: 1,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 0,
+  },
+  // Step 5 (拉远复盘)：参照第 10 页 DERIVATION_POSES 最后一组，镜头拉远（Z = 18.8）、变压器整体缩小置于左侧（rigX = -5.65），右侧纵向排四块文字
+  {
+    rigX: -5.65,
+    rigY: -0.05,
+    rigRotY: -0.14,
+    camPos: new Vector3(-0.3, 1.15, 18.8),
+    camLookAt: new Vector3(-0.3, 0, 0),
+    coreOpacity: 0.32,
+    wireframeOpacity: 0.84,
+    primaryCoilOpacity: 0.55,
+    secondaryCoilOpacity: 0.55,
     primaryCurrentAlpha: 1,
     secondaryCurrentAlpha: 1,
     fluxAlpha: 1,
@@ -905,6 +942,54 @@ const UE_POSES: TransformerPose[] = [
   },
 ];
 
+// P12 铁损专项页（镜头对着铁芯上横轭，铁芯内部 3 个闭合涡流环与微红热核持续柔和呼吸流动）
+const IRON_STATIC_POSES: TransformerPose[] = [
+  {
+    rigX: 0.45,
+    rigY: -0.95,
+    rigRotY: 0.24,
+    camPos: new Vector3(0.25, 1.35, 6.8),
+    camLookAt: new Vector3(0.25, 0.78, 0),
+    coreOpacity: 0.42,
+    wireframeOpacity: 0.85,
+    primaryCoilOpacity: 0.24,
+    secondaryCoilOpacity: 0.24,
+    primaryCurrentAlpha: 0,
+    secondaryCurrentAlpha: 0,
+    fluxAlpha: 0.34,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 1,
+    eddyLoopAlpha: 1,
+    leakFluxAlpha: 0,
+  },
+];
+
+// P13 漏磁专项页（镜头对着原线圈一侧到铁芯外，原线圈交变电流与绕到铁芯外的漏磁回路持续呼吸流动）
+const LEAK_STATIC_POSES: TransformerPose[] = [
+  {
+    rigX: 1.55,
+    rigY: -0.05,
+    rigRotY: 0.28,
+    camPos: new Vector3(-0.35, 0.85, 11.4),
+    camLookAt: new Vector3(-0.25, -0.02, 0),
+    coreOpacity: 0.36,
+    wireframeOpacity: 0.82,
+    primaryCoilOpacity: 0.72,
+    secondaryCoilOpacity: 0.58,
+    primaryCurrentAlpha: 0.85,
+    secondaryCurrentAlpha: 0.55,
+    fluxAlpha: 0.52,
+    resistorPinAlpha: 0,
+    powerBridgeAlpha: 0,
+    copperHeatAlpha: 0,
+    ironHeatAlpha: 0,
+    eddyLoopAlpha: 0,
+    leakFluxAlpha: 1,
+  },
+];
+
 const clonePose = (pose: TransformerPose): TransformerPose => ({
   ...pose,
   camPos: pose.camPos.clone(),
@@ -1008,7 +1093,11 @@ export class TransformerCoreModel {
               ? LOSS_POSES
               : mode === "ue"
                 ? UE_POSES
-                : DERIVATION_POSES;
+                : mode === "iron-static"
+                  ? IRON_STATIC_POSES
+                  : mode === "leak-static"
+                    ? LEAK_STATIC_POSES
+                    : DERIVATION_POSES;
 
     this.scene = new Scene();
     this.scene.background = null;
@@ -1057,7 +1146,9 @@ export class TransformerCoreModel {
   }
 
   private shouldLoopFlow(): boolean {
-    if (this.mode === "loss") return true;
+    if (this.mode === "loss" || this.mode === "iron-static" || this.mode === "leak-static")
+      return true;
+
     if (this.mode === "intro" && this.currentStep >= 2) return true;
     if (this.mode === "principle" && this.currentStep >= 1) return true;
     return false;
@@ -1564,7 +1655,12 @@ export class TransformerCoreModel {
       this.flashTarget = "none";
     }
 
-    this.flowDuration = this.mode === "ue" ? 0 : clamped >= 1 && isForward ? 2200 : 0;
+    this.flowDuration =
+      this.mode === "ue" || this.mode === "iron-static" || this.mode === "leak-static"
+        ? 0
+        : clamped >= 1 && isForward
+          ? 2200
+          : 0;
 
     if (!this.isAnimating && this.active) {
       this.isAnimating = true;
@@ -1746,10 +1842,11 @@ export class TransformerCoreModel {
       }
     }
 
-    // P10 铁损：铁芯上横轭内部 3 个垂直于磁通方向的闭合涡流环 + 铁芯内部很淡的红热辉光
+    // P10 铁损：铁芯上横轭内部 3 个垂直于磁通方向的闭合涡流环 + 铁芯内部很淡的红热辉光（随交变电流柔和呼吸）
     this.eddyGroup.visible = pose.eddyLoopAlpha > 0.005 || pose.ironHeatAlpha > 0.005;
     if (this.eddyGroup.visible) {
-      this.ironGlowMat.opacity = pose.ironHeatAlpha * 0.22;
+      const heatPulse = 0.75 + 0.25 * Math.sin(acPhase * 1.4);
+      this.ironGlowMat.opacity = pose.ironHeatAlpha * 0.24 * heatPulse;
       // 楞次定律：涡流方向由 -dΦ/dt 决定（即 -cos(acPhase) 的符号），环平面在 YZ 平面，垂直于上横轭 X 轴磁通方向
       const lenzSign = Math.cos(acPhase) >= 0 ? -1 : 1;
       const eddyAngleOffset = acPhase * 0.65;
