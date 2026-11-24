@@ -3,3 +3,84 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 左图右文：图区可压缩，右栏文字不会被挤爆 */
+.wr-split {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 2.2rem;
+  align-items: center;
+
+  min-width: 0;
+}
+
+.wr-split > * {
+  min-width: 0;
+}
+
+/* 竖长的器具图：文字栏多分一点宽度 */
+.wr-split.wr-text {
+  grid-template-columns: 0.82fr 1.18fr;
+}
+
+.wr-fig {
+  min-width: 0;
+}
+
+.wr-fig svg {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+}
+
+/* 右侧要点：左侧一条金色竖线 */
+.wr-point {
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--c-accent);
+}
+
+/* 大公式 */
+.wr-formula-big {
+  display: flex;
+  justify-content: center;
+  padding: 0.3rem 0 0.5rem;
+}
+
+.wr-formula-big .katex-display {
+  margin: 0;
+}
+
+.wr-formula-big .katex {
+  font-size: 1.5em;
+}
+
+/* 对比表 */
+.wr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.wr-table th,
+.wr-table td {
+  vertical-align: top;
+  padding: 0.35rem 0.7rem;
+  border-bottom: 1px solid var(--c-border);
+  text-align: left;
+}
+
+.wr-table th {
+  color: var(--c-accent);
+  font-weight: 700;
+}
+
+.wr-table td:first-child {
+  color: var(--c-text-dim);
+  white-space: nowrap;
+}
+
+/* 习题页：解析区从题干下方开始，不留大片空白 */
+.ex-top .ex-analysis {
+  gap: 0.9rem;
+  justify-content: flex-start;
+}
