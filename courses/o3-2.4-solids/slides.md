@@ -117,8 +117,8 @@ layout: base-flex
 <div class="half-grid">
 <LatticeSvg class="solid-fig" mode="grains" />
 <div>
-<div><b>单晶体</b>：有规则的几何形状，物理性质各向异性。</div>
-<div><b>多晶体</b>：由许多晶粒组成；整体没有规则外形，各向同性，但有确定的熔点。</div>
+<div><b>单晶体</b>：有规则的几何形状，<br />物理性质各向异性。</div>
+<div><b>多晶体</b>：由许多晶粒组成；<br />整体没有规则外形，各向同性，<br />但有确定的熔点。</div>
 <div class="mini-note">每个晶粒都是单晶体，晶粒取向杂乱。</div>
 </div>
 </div>
