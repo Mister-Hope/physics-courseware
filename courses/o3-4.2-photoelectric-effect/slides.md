@@ -434,10 +434,10 @@ clicks: 4
 
 <div class="page-grow">
 <div class="stack">
-<div class="summary-line"><span class="key-lead">光电效应</span>　光照射金属表面，使电子逸出；逸出的电子叫光电子。</div>
-<div class="summary-line"><span class="key-lead">实验规律</span>　存在截止频率；存在饱和电流；存在遏止电压；几乎是瞬时的。</div>
-<div class="summary-line"><span class="key-lead">光电效应方程</span>　<Latex tex="E_{\text{k}} = h\nu - W_0" />，只有 <Latex tex="h\nu > W_0" /> 时才能逸出。</div>
-<div class="summary-line"><span class="key-lead">遏止电压</span>　<Latex tex="eU_{\text{c}} = E_{\text{k}}" />，<Latex tex="U_{\text{c}} = \dfrac{h}{e}\nu - \dfrac{W_0}{e}" />。</div>
+<div class="summary-line"><strong>光电效应</strong>　光照射金属表面，使电子逸出；逸出的电子叫光电子。</div>
+<div class="summary-line"><strong>实验规律</strong>　存在截止频率；存在饱和电流；存在遏止电压；几乎是瞬时的。</div>
+<div class="summary-line"><strong>光电效应方程</strong>　<Latex tex="E_{\text{k}} = h\nu - W_0" />，只有 <Latex tex="h\nu > W_0" /> 时才能逸出。</div>
+<div class="summary-line"><strong>遏止电压</strong>　<Latex tex="eU_{\text{c}} = E_{\text{k}}" />，<Latex tex="U_{\text{c}} = \dfrac{h}{e}\nu - \dfrac{W_0}{e}" />。</div>
 <div class="tip-hint" v-click="4">下一节：原子的核式结构模型——用粒子去“看”原子内部。</div>
 </div>
 </div>
