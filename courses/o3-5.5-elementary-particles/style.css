@@ -3,3 +3,65 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* ── 标准模型网格（第 13 页）：左列类别名 + 右列粒子 chip ──
+   chip 从第 0 步起就占住整格、只切 visibility，点击时只新增、不顶跑其它元素 */
+.ep-sm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.ep-sm-row {
+  display: grid;
+  grid-template-columns: 7.4rem minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: stretch;
+}
+
+.ep-sm-label {
+  display: flex;
+  align-items: center;
+
+  color: var(--c-accent);
+
+  font-weight: 700;
+}
+
+.ep-sm-items {
+  display: flex;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.ep-sm-chip {
+  display: flex;
+  flex: 1 1 0;
+  gap: 0.15rem;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  padding: 0.16rem 0.35rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+
+  background: var(--c-surface);
+}
+
+/* chip 里的公式回到正文字号：KaTeX 默认 1.21em 会把 μ、τ 撑大、把 chip 行高顶高 */
+.ep-sm-chip .katex {
+  font-size: 100%;
+}
+
+/* ── 表格第一列不折行（练习一的「希格斯玻色子」、小结的「5.2 放射性元素的衰变」会折成两行）── */
+.ep-table-fix th:first-child,
+.ep-table-fix td:first-child {
+  white-space: nowrap;
+}
+
+/* 练习一的三列表：特点列给足宽度，避免「未发现内部结构」被拆成两行 */
+.ep-class-table th:nth-child(2),
+.ep-class-table td:nth-child(2) {
+  width: 14rem;
+}
