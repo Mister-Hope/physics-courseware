@@ -68,10 +68,12 @@
 
 .p4-card {
   padding: 1.15rem 1rem;
-  text-align: center;
   border: 1px solid var(--c-border);
   border-radius: 1.2rem;
+
   background: var(--c-surface);
+
+  text-align: center;
 }
 
 .p4-hot {
@@ -80,14 +82,14 @@
 }
 
 .p4-label {
-  font-size: 1.28rem;
   font-weight: 700;
+  font-size: 1.28rem;
 }
 
 .p4-speed {
   margin-top: 0.4rem;
-  font-size: 0.94rem;
   color: var(--c-text-dim);
+  font-size: 0.94rem;
 }
 
 .p4-line {
@@ -102,11 +104,13 @@
 
 .p5-def {
   padding: 0.8rem 1rem;
-  font-size: 1.04rem;
-  line-height: 1.6;
   border-left: 3px solid var(--c-accent);
   border-radius: 0.8rem;
+
   background: var(--c-surface);
+
+  font-size: 1.04rem;
+  line-height: 1.6;
 }
 
 .p5-line {
@@ -169,23 +173,25 @@
 
 .p8-card {
   padding: 1rem;
-  text-align: center;
   border: 1px solid var(--c-border);
   border-radius: 1.1rem;
+
   background: var(--c-surface);
+
+  text-align: center;
 }
 
 .p8-title {
-  font-size: 1.12rem;
-  font-weight: 700;
   color: var(--c-accent-2);
+  font-weight: 700;
+  font-size: 1.12rem;
 }
 
 .p8-text {
   margin-top: 0.35rem;
+  color: var(--c-text-dim);
   font-size: 0.92rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
 }
 
 .p8-line {
@@ -201,11 +207,13 @@
 
 .p9-def {
   padding: 0.8rem 1rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
   border-left: 3px solid var(--c-accent);
   border-radius: 0.8rem;
+
   background: var(--c-surface);
+
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .p9-rows {
@@ -238,9 +246,9 @@
 }
 
 .p10-title {
-  font-size: 1.18rem;
-  font-weight: 700;
   color: var(--c-accent);
+  font-weight: 700;
+  font-size: 1.18rem;
 }
 
 .p10-mech .p10-title {
@@ -249,9 +257,9 @@
 
 .p10-text {
   margin-top: 0.35rem;
+  color: var(--c-text-dim);
   font-size: 0.9rem;
   line-height: 1.45;
-  color: var(--c-text-dim);
 }
 
 .p10-line {
@@ -270,23 +278,25 @@
 
 .p11-card {
   padding: 1rem;
-  text-align: center;
   border: 1px solid var(--c-border);
   border-radius: 1.1rem;
+
   background: var(--c-surface);
+
+  text-align: center;
 }
 
 .p11-title {
-  font-size: 1.12rem;
-  font-weight: 700;
   color: var(--c-accent-2);
+  font-weight: 700;
+  font-size: 1.12rem;
 }
 
 .p11-text {
   margin-top: 0.4rem;
+  color: var(--c-text-dim);
   font-size: 0.9rem;
   line-height: 1.5;
-  color: var(--c-text-dim);
 }
 
 /* P12–P15、P18 例题/练习解析 */
@@ -319,17 +329,19 @@
   grid-template-columns: minmax(0, 1fr) 11rem;
   gap: 1rem;
   align-items: center;
+
   min-height: 3.7rem;
   padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid var(--c-border);
+
   font-size: 0.96rem;
   line-height: 1.5;
-  border-bottom: 1px solid var(--c-border);
 }
 
 .p16-ans {
+  color: var(--c-accent);
   font-size: 0.84rem;
   line-height: 1.4;
-  color: var(--c-accent);
   text-align: right;
 }
 

@@ -14,12 +14,12 @@
 </template>
 
 <script setup lang="ts">
-const points: string[] = []
+const points: string[] = [];
 for (let index = 0; index <= 120; index += 1) {
-  const x = 40 + (index / 120) * 254
-  const t = (x - 40) / 254
-  const y = 150 - 92 * Math.exp(-(((t - 0.62) / 0.19) ** 2))
-  points.push(`${x.toFixed(1)} ${y.toFixed(1)}`)
+  const x = 40 + (index / 120) * 254;
+  const t = (x - 40) / 254;
+  const y = 150 - 92 * Math.exp(-(((t - 0.62) / 0.19) ** 2));
+  points.push(`${x.toFixed(1)} ${y.toFixed(1)}`);
 }
-const curve = `M ${points.join(' L ')}`
+const curve = `M ${points.join(" L ")}`;
 </script>

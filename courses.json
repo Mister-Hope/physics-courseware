@@ -794,15 +794,15 @@
           "slug": "o3-1.3-molecular-speed-distribution",
           "title": "分子运动速率分布规律",
           "chapter": "§1.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "认识气体分子运动的统计规律与速率分布图像（温度、质量的影响），用分子动理论定性解释气体压强的微观成因。",
+          "tags": ["速率分布", "统计规律", "气体压强", "温度"]
         },
         {
           "slug": "o3-1.4-molecular-kinetic-and-potential-energy",
           "title": "分子动能和分子势能",
           "chapter": "§1.4",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "理解分子热运动平均动能与温度的关系、分子势能随距离的变化，认识内能是分子动能与势能的总和。",
+          "tags": ["分子动能", "分子势能", "内能", "温度"]
         },
         {
           "slug": "o3-2.1-temperature-and-temperature-scale",

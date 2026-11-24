@@ -20,5 +20,5 @@
 </template>
 
 <script setup lang="ts">
-const { step = 0 } = defineProps<{ step?: number }>()
+const { step = 0 } = defineProps<{ step?: number }>();
 </script>
