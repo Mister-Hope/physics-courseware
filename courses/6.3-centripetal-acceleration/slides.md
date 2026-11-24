@@ -107,7 +107,7 @@ title: 练习：判断向心加速度的大小
 <div v-click="1">A. 线速度大小相等，乙的半径小 —— 用 <Latex tex="a_n = \frac{v^2}{r}" />，<b>乙</b>的向心加速度大。</div>
 <div v-click="2">B. 周期相等（角速度相等），甲的半径大 —— 用 <Latex tex="a_n = \omega^2 r" />，<b>甲</b>的向心加速度大。</div>
 <div v-click="3">C. 角速度相等，乙的线速度小 —— 用 <Latex tex="a_n = v\omega" />，<b>甲</b>的向心加速度大。</div>
-<div v-click="4" class="tip-hint">D. 线速度大小相等，相同时间内甲与圆心的连线扫过的角度大 —— 甲的 <Latex tex="\omega" /> 大，由 <Latex tex="a_n = v\omega" /> 知<b>甲</b>的向心加速度大。</div>
+<div v-click="4">D. 线速度大小相等，相同时间内甲与圆心的连线扫过的角度大 —— 甲的 <Latex tex="\omega" /> 大，由 <Latex tex="a_n = v\omega" /> 知<b>甲</b>的向心加速度大。</div>
 </div>
 </div>
 
@@ -157,7 +157,7 @@ title: 练习：皮带传动中各点的向心加速度
 <div class="page-grow">
 <div><mdi-cog-outline class="text-xl text-accent-2 mr-1 align-middle" />一部机器与电动机用皮带连接，机器皮带轮的半径是电动机皮带轮半径的 3 倍，皮带与两轮之间不发生滑动。已知机器皮带轮边缘上一点的向心加速度为 <Latex tex="0.10\ \text{m/s}^2" />。</div>
 <div class="stack stack-dense">
-<div v-click="1">（1）皮带不打滑，两轮边缘线速度大小相等。由 <Latex tex="v = 2\pi n r" /> 得转速与半径成反比：<Latex tex="n_1 : n_2 = R_2 : R_1 = 3 : 1" />。</div>
+<div v-click="1">（1）皮带不打滑，两轮边缘线速度大小相等。由 <Latex tex="v = 2\pi n r" /> 得转速与半径成反比，所以电动机与机器的转速之比为 3 : 1。</div>
 <div v-click="2">（2）A 点在机器皮带轮上、到转轴的距离是轮半径的一半；同一轮上各点角速度相等，由 <Latex tex="a_n = \omega^2 r" /> 得 <Latex tex="a_A = 0.05\ \text{m/s}^2" />。</div>
 <div v-click="3" class="tip-hint">（3）两轮边缘线速度大小相等，由 <Latex tex="a_n = \frac{v^2}{r}" />：电动机皮带轮半径只有机器皮带轮的 <Latex tex="\frac{1}{3}" />，所以它边缘的 <Latex tex="a = 3 \times 0.10 = 0.30\ \text{m/s}^2" />。</div>
 </div>

@@ -67,16 +67,16 @@ clickAnimation: none
 <div class="tq-item">
 <div class="tq-q">变压器对电流有什么要求？</div>
 <div v-click="1" class="tq-a">
-<p class="tq-lead">只能用于<strong>交流电</strong></p>
-<p class="tq-note">原线圈中的电流必须变化，才能在副线圈中产生感应电动势。</p>
+<div class="tq-lead">只能用于<strong>交流电</strong></div>
+<div class="tq-note">原线圈中的电流必须变化，才能在副线圈中产生感应电动势。</div>
 </div>
 <div v-click="2" class="tq-mech"><span class="tq-mech-tag">核心机制</span>变压器利用互感现象工作。</div>
 </div>
 <div class="tq-item">
 <div class="tq-q">变压器是怎样改变电压的？</div>
 <div v-click="3" class="tq-a">
-<p class="tq-lead">可能与<strong>原线圈、副线圈的匝数</strong>有关</p>
-<p class="tq-note">先比较不同匝数下的输入、输出电压。</p>
+<div class="tq-lead">可能与<strong>原线圈、副线圈的匝数</strong>有关</div>
+<div class="tq-note">先比较不同匝数下的输入、输出电压。</div>
 </div>
 </div>
 <div class="tq-item">
