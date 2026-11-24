@@ -3,3 +3,23 @@
    通用设计系统已提取到 workspace/shared/styles/common.css，
    由共享 addon（../workspace/shared）自动注入，此处仅放本课特有样式
    ═══════════════════════════════════════════════ */
+
+/* 居中大公式：E=mc²、ΔE=Δmc² 这类本课的主公式 */
+.nb-formula {
+  display: flex;
+  justify-content: center;
+}
+
+.nb-formula .katex-display {
+  margin: 0;
+}
+
+/* 左侧金线要点：一问一答里的结论行（与共享 .key 同形，按新课标注不留存量类） */
+.nb-point {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--c-accent);
+}
+
+.nb-point strong {
+  color: var(--c-accent);
+}
