@@ -336,3 +336,39 @@
   font-size: 1.2rem;
   text-align: center;
 }
+
+/* 小结 */
+.temp-summary-main {
+  color: var(--c-accent);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.temp-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.temp-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+
+.temp-summary-card b {
+  font-size: 1rem;
+  color: var(--c-text);
+}
+
+.temp-summary-card span {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--c-text-dim);
+}

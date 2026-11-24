@@ -247,3 +247,72 @@ clickAnimation: none
 </div>
 <div v-click="1" class="tip-hint">不同的温度计利用不同的测温属性，测量范围和精度也不同。</div>
 </div>
+
+---
+layout: exercise-split
+title: 例题：气温的换算
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+
+<Latex tex="27\ \text{°C}" /> 是多少开尔文？<Latex tex="2.5\ \text{K}" /> 是多少摄氏度？
+
+</template>
+
+<div v-click="1">由 <Latex tex="T = t + 273.15\ \text{K}" /> 得 <Latex tex="T = 27 + 273.15 = 300.15\ \text{K}" />。</div>
+<div v-click="2">由 <Latex tex="t = T - 273.15" /> 得 <Latex tex="t = 2.5 - 273.15 = -270.65\ \text{°C}" />。</div>
+<div v-click="3" class="tip-hint">热力学温度比摄氏温度大 <Latex tex="273.15\ \text{K}" />；温度差 <Latex tex="1\ \text{°C} = 1\ \text{K}" />。</div>
+
+---
+layout: exercise-split
+title: 例题：正比关系与温标
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+
+物理量 <Latex tex="X" /> 与热力学温度 <Latex tex="T" /> 成正比。写出 <Latex tex="X" /> 与 <Latex tex="T" /> 的关系式；用摄氏温度 <Latex tex="t" /> 表示，关系式又是什么？<br />画出 <Latex tex="X" />-<Latex tex="T" />、<Latex tex="X" />-<Latex tex="t" /> 的草图。
+
+</template>
+
+<div v-click="1">设比例系数为 <Latex tex="k" />，则 <Latex tex="X = kT" />。</div>
+<div v-click="2">由 <Latex tex="T = t + 273.15\ \text{K}" /> 得 <Latex tex="X = k(t + 273.15)" />。</div>
+<div v-click="3"><Latex tex="X" />-<Latex tex="T" /> 图线过原点；<Latex tex="X" />-<Latex tex="t" /> 图线在 <Latex tex="t" /> 轴上的截距为 <Latex tex="-273.15\ \text{°C}" />。</div>
+<div v-click="3" class="tip-hint">截距对应的温度是绝对零度；两种温标的零点不同，但温度差相同。</div>
+
+---
+layout: exercise-split
+title: 例题：热平衡在哪里
+clicks: 3
+clickAnimation: none
+---
+
+<template v-slot:stem>
+
+测金属块的比热容时，把金属块在沸水中加热后，迅速放入水中；水温不再上升时，金属块和水的温度相同。这个过程中，哪里涉及热平衡？
+
+</template>
+
+<div v-click="1">金属块在沸水中加热足够长，金属块与沸水达到热平衡，温度相同。</div>
+<div v-click="2">金属块放入水中，经过一段时间水温不再上升，金属块与水达到热平衡，温度相同。</div>
+<div v-click="3" class="tip-hint">热平衡时温度相同；实验中用这个共同温度计算金属块放出的热量。</div>
+
+---
+layout: base-flex
+title: 小结
+---
+
+<div class="page-grow">
+<div class="temp-summary-main">温度和温标</div>
+<div class="temp-summary-grid">
+<div class="temp-summary-card"><b>平衡态与热平衡</b><span>状态参量不再变化；热平衡时温度相同。</span></div>
+<div class="temp-summary-card"><b>热平衡定律</b><span>与第三个系统热平衡的两个系统，彼此也处于热平衡。</span></div>
+<div class="temp-summary-card"><b>温标</b><span>测温物质和测温属性，加零点和分度；摄氏温标 <Latex tex="0\ \text{°C}" /> / <Latex tex="100\ \text{°C}" />。</span></div>
+<div class="temp-summary-card"><b>热力学温标</b><span><Latex tex="T = t + 273.15\ \text{K}" />；<Latex tex="0\ \text{K}" /> 为绝对零度。</span></div>
+<div class="temp-summary-card"><b>温度计</b><span>水银、气体、双金属、热电偶、电阻、热敏……</span></div>
+</div>
+<div class="summary-line">温度是决定系统是否处于热平衡的物理量；<Latex tex="T = t + 273.15\ \text{K}" />。</div>
+</div>
