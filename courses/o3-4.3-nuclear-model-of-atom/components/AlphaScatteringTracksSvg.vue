@@ -5,6 +5,9 @@
       <marker id="nu-track-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
         <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--c-velocity)" />
       </marker>
+      <marker id="nu-track-head-danger" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--c-danger)" />
+      </marker>
     </defs>
     <g v-if="mode === 'foil'">
       <rect x="178" y="30" width="7" height="260" rx="2.5" fill="var(--c-accent)" fill-opacity="0.8" stroke="var(--c-accent)" stroke-width="1" />
@@ -44,8 +47,8 @@
       <text x="300" y="96" text-anchor="middle" font-size="17" font-family="system-ui, sans-serif" fill="var(--c-text-dim)">原子核</text>
       <text x="318" y="146" font-size="18" font-family="KaTeX_Math" font-style="italic" fill="var(--c-text)">+Ze</text>
       <path d="M 10 52 C 190 54 360 60 542 66" fill="none" stroke="var(--c-velocity)" stroke-width="1.7" marker-end="url(#nu-track-head)" />
-      <text x="386" y="38" font-size="17" font-family="system-ui, sans-serif" fill="var(--c-text)">离核远</text>
-      <text x="386" y="60" font-size="16" font-family="system-ui, sans-serif" fill="var(--c-text-dim)">几乎不偏</text>
+      <text x="386" y="26" font-size="17" font-family="system-ui, sans-serif" fill="var(--c-text)">离核远</text>
+      <text x="386" y="48" font-size="16" font-family="system-ui, sans-serif" fill="var(--c-text-dim)">几乎不偏</text>
       <g class="nu-hide" :class="{ 'nu-show': step >= 2 }">
         <path
           d="M 10 96 C 176 99 252 108 282 138 C 312 168 372 196 540 212"
@@ -59,7 +62,7 @@
           fill="none"
           stroke="var(--c-danger)"
           stroke-width="1.7"
-          marker-end="url(#nu-track-head)"
+          marker-end="url(#nu-track-head-danger)"
         />
         <text x="360" y="246" font-size="17" font-family="system-ui, sans-serif" fill="var(--c-text)">离核近</text>
         <text x="360" y="268" font-size="16" font-family="system-ui, sans-serif" fill="var(--c-text-dim)">大角度偏转</text>
