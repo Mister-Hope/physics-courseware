@@ -96,16 +96,18 @@ const rows: CalcRow[] = [
   grid-template-columns: 1.5rem 5.4rem minmax(0, 1fr);
   gap: 0.7rem;
   align-items: center;
+
   min-height: 2.1rem;
   padding: 0.2rem 0.8rem;
-  background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
+
+  background: var(--c-surface);
 }
 
 .nb-calc-row--last {
-  background: var(--c-accent-soft);
   border-color: var(--c-border-glow);
+  background: var(--c-accent-soft);
 }
 
 .nb-calc-row--hidden {
@@ -116,13 +118,16 @@ const rows: CalcRow[] = [
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 1.5rem;
   height: 1.5rem;
-  color: var(--c-accent);
-  font-size: 0.78rem;
-  font-weight: 700;
-  background: var(--c-accent-soft);
   border-radius: 50%;
+
+  background: var(--c-accent-soft);
+  color: var(--c-accent);
+
+  font-weight: 700;
+  font-size: 0.78rem;
 }
 
 .nb-calc-label {
