@@ -787,8 +787,8 @@
           "slug": "o3-1.2-oil-film-experiment",
           "title": "实验：用油膜法估测油酸分子的大小",
           "chapter": "§1.2",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "用油膜法估测油酸分子大小：单分子油膜假设、油酸酒精溶液配制、面积测量与 d=V/S 计算、误差来源。",
+          "tags": ["实验", "油膜法", "分子大小", "单分子层"]
         },
         {
           "slug": "o3-1.3-molecular-speed-distribution",
