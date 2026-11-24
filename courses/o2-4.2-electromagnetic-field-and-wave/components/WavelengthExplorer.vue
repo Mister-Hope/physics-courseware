@@ -14,7 +14,31 @@
         :curves="curves"
         :ticks="{ x: [10, 20, 30], y: [] }"
         :view="{ width: 860, height: 188 }"
-      />
+      >
+        <template #overlay="{ x, px2user }">
+          <g stroke="var(--c-accent)" stroke-width="1.6">
+            <line :x1="x(0)" :y1="bracketY" :x2="x(lambdaSpan)" :y2="bracketY" />
+            <line :x1="x(0)" :y1="bracketY - 5 * px2user" :x2="x(0)" :y2="bracketY + 5 * px2user" />
+            <line
+              :x1="x(lambdaSpan)"
+              :y1="bracketY - 5 * px2user"
+              :x2="x(lambdaSpan)"
+              :y2="bracketY + 5 * px2user"
+            />
+          </g>
+          <text
+            :x="(x(0) + x(lambdaSpan)) / 2"
+            :y="bracketY - 7 * px2user"
+            text-anchor="middle"
+            font-family="KaTeX_Math"
+            font-style="italic"
+            font-size="15"
+            fill="var(--c-accent)"
+          >
+            λ
+          </text>
+        </template>
+      </CoordAxes>
     </div>
     <div class="em-explorer-row">
       <span class="em-explorer-read"><Latex :tex="`f = ${fMHz}\\ \\text{MHz}`" /></span>
@@ -38,6 +62,12 @@ import { computed, ref } from "vue";
 const fMHz = ref(30);
 const lambda = computed(() => 300 / fMHz.value);
 const lambdaText = computed(() => lambda.value.toFixed(1));
+
+/** 波形里画 λ 尺标时用的横坐标上限：λ 可能等于 30（f = 10 MHz），此时贴着右边界 */
+const lambdaSpan = computed(() => Math.min(lambda.value, 30));
+
+/** λ 尺标贴着绘图区上沿，避免与 x 轴刻度数字打架 */
+const bracketY = 26;
 
 /** 上方波形：固定的 30 m 长度内，波长 λ 决定能放下几个完整波形 */
 const curves = computed(() => [

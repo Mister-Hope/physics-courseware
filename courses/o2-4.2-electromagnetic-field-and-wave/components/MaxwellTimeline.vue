@@ -6,8 +6,8 @@
     :range="[1820, 1900]"
     :ticks="{ labels: false, values: [] }"
     :callouts="callouts"
-    :view="{ width: 900, height: 188 }"
-    :font-scale="1.02"
+    :view="{ width: 900, height: 178 }"
+    :font-scale="1.08"
   />
 </template>
 

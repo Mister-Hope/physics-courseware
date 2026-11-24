@@ -19,15 +19,15 @@
         <CourseArrow
           :from="{ x: x(1), y: y(1.26) }"
           :to="{ x: x(5), y: y(1.26) }"
-          stroke="var(--c-text-dim)"
-          :stroke-width="1.4"
+          stroke="var(--c-accent)"
+          :stroke-width="1.8"
           :head-size="8"
         />
         <CourseArrow
           :from="{ x: x(5), y: y(1.26) }"
           :to="{ x: x(1), y: y(1.26) }"
-          stroke="var(--c-text-dim)"
-          :stroke-width="1.4"
+          stroke="var(--c-accent)"
+          :stroke-width="1.8"
           :head-size="8"
         />
       </g>
@@ -53,8 +53,8 @@ const labels = [
     y: 1.3,
     tex: String.raw`\lambda`,
     anchor: "center",
-    color: "var(--c-text)",
-    size: 19,
+    color: "var(--c-accent)",
+    size: 20,
     showAt: 1,
   },
 ];

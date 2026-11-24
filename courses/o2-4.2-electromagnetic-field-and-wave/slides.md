@@ -41,12 +41,10 @@ title: 变化的磁场产生电场
 clicks: 3
 ---
 
-# 变化的磁场产生电场
-
 <div class="page-grow">
 <div class="ask">闭合电路中的感应电流，是什么力推动自由电荷定向移动的？</div>
 <div class="half-grid em-row-fig">
-<div class="figure"><EmFieldInductionSvg :step="$clicks" /></div>
+<div class="em-fig-fill"><EmFieldInductionSvg :step="$clicks" /></div>
 <div class="stack">
 <div v-click="1">麦克斯韦从场的观点看：<span class="em-b">变化的磁场</span>在空间产生了<span class="em-e">电场</span>，正是这个电场推动自由电荷，形成感应电流。</div>
 <div v-click="2">把这一结论推广到<span class="em-b">不存在闭合电路</span>的情形：即使没有导线，变化磁场周围的电场同样存在。</div>
@@ -60,12 +58,10 @@ title: 变化的电场产生磁场
 clicks: 3
 ---
 
-# 变化的电场产生磁场
-
 <div class="page-grow">
 <div class="ask">电容器充电、放电时，两极板之间没有导线。极板间变化的电场也会产生磁场吗？</div>
 <div class="half-grid">
-<div class="figure"><ChargingCapacitorFieldSvg :step="$clicks" /></div>
+<div class="em-fig-fill"><ChargingCapacitorFieldSvg :step="$clicks" /></div>
 <div class="stack">
 <div v-click="1">麦克斯韦假设：<span class="em-e">变化的电场</span>就像运动的电荷，也会在空间产生<span class="em-b">磁场</span>。</div>
 <div v-click="2">电容器充、放电时，不仅导线中的电流产生磁场，极板间周期性变化的电场也在产生磁场。</div>
@@ -97,11 +93,9 @@ title: 电磁波的形成
 clicks: 3
 ---
 
-# 电磁波的形成
-
 <div class="page-grow">
 <div class="ask">如果在空间某区域有周期性变化的电场，它周围的空间会发生什么？</div>
-<div class="figure"><EmWaveFormationSvg :step="$clicks" /></div>
+<div class="em-fig-fill"><EmWaveFormationSvg :step="$clicks" /></div>
 <div class="tip-hint" v-click="3">变化的电场和磁场相互激发、由近及远地传播，形成电磁波。</div>
 </div>
 
@@ -113,7 +107,7 @@ clicks: 1
 # 电磁波是横波
 
 <div class="page-grow">
-<div class="figure"><EmWaveTransverseSvg /></div>
+<div class="em-fig-fill"><EmWaveTransverseSvg /></div>
 <div class="info-hint" v-click="1">真空中传播时，电场 <Latex tex="E" /> 与磁场 <Latex tex="B" /> 互相垂直，而且二者均与传播方向垂直。</div>
 </div>
 
@@ -122,11 +116,9 @@ title: 某一时刻的波形
 clicks: 1
 ---
 
-# 某一时刻的波形
-
 <div class="page-grow">
 <div class="ask">某一时刻，电场沿传播方向是怎样分布的？</div>
-<div class="figure"><EmWaveSnapshotAxes :step="$clicks" /></div>
+<div class="em-fig-fill"><EmWaveSnapshotAxes :step="$clicks" /></div>
 <div class="info-hint" v-click="1">相邻两个波峰（或相邻两个波谷）之间的距离叫作波长，用 <Latex tex="\lambda" /> 表示。</div>
 </div>
 
@@ -135,13 +127,11 @@ title: 电磁波不需要介质
 clicks: 2
 ---
 
-# 电磁波不需要介质
-
 <div class="page-grow">
 <div class="ask">宇航员舱外对话靠无线电。声音传不了，电磁波为什么能？</div>
 <div class="em-compare" v-click="1">
-<div class="em-compare-row"><span class="em-compare-tag em-sound">声波</span><span>靠介质的振动传递，没有介质就不能传播。</span></div>
-<div class="em-compare-row"><span class="em-compare-tag em-wave">电磁波</span><span>不需要任何介质，在真空中也能传播。</span></div>
+<div class="em-compare-row em-sound"><span class="em-compare-icon"><mdi-waveform /></span><span class="em-compare-tag em-sound">声波</span><span>靠介质的振动传递，没有介质就不能传播。</span></div>
+<div class="em-compare-row em-wave"><span class="em-compare-icon"><mdi-access-point /></span><span class="em-compare-tag em-wave">电磁波</span><span>不需要任何介质，在真空中也能传播。</span></div>
 </div>
 <div class="info-hint" v-click="2">电磁波的传播靠变化的电场和磁场相互感应，不是靠介质把振动传下去。</div>
 </div>
@@ -150,8 +140,6 @@ clicks: 2
 title: 光是电磁波
 clicks: 2
 ---
-
-# 光是电磁波
 
 <div class="page-grow">
 <div class="ask">麦克斯韦算出：电磁波在真空中的速度等于光速 <Latex tex="c" />。这说明了什么？</div>
@@ -178,8 +166,6 @@ title: 算一算：频率与波长
 clicks: 1
 ---
 
-# 算一算：频率与波长
-
 <div class="page-grow">
 <div class="ask">频率越高，波长越短还是越长？</div>
 <WavelengthExplorer />
@@ -191,11 +177,9 @@ title: 赫兹实验
 clicks: 2
 ---
 
-# 赫兹实验
-
 <div class="page-grow">
 <div class="ask">1886 年，赫兹用什么装置把电磁波发射出去？</div>
-<div class="figure"><HertzExperimentSvg :step="$clicks" /></div>
+<div class="em-fig-fill"><HertzExperimentSvg :step="$clicks" /></div>
 <div class="stack-tight">
 <div v-click="1">感应圈使两球之间的电压迅速升高，空气间隙被击穿，跳出火花。</div>
 <div v-click="2">火花放电时，周围空间的电场和磁场迅速变化，电磁波向外传播出去。</div>
@@ -206,8 +190,6 @@ clicks: 2
 title: 赫兹实验
 clicks: 2
 ---
-
-# 赫兹实验
 
 <div class="page-grow">
 <div class="ask">导线环离发射器还有一段距离，它上面的小球为什么也会跳火花？</div>
@@ -220,8 +202,6 @@ clicks: 2
 title: 电磁波携带能量
 clicks: 2
 ---
-
-# 电磁波携带能量
 
 <div class="page-grow">
 <div class="ask">电磁波看不见、摸不着。凭什么说它真实存在？</div>
@@ -237,11 +217,9 @@ title: 麦克斯韦的电磁场理论
 clicks: 2
 ---
 
-# 麦克斯韦的电磁场理论
-
 <div class="page-grow">
 <MaxwellTimeline />
-<div class="em-quote" v-click="1">“你不应该停留在用数学解释我的观点，而应该突破它。”<span class="em-quote-src">——法拉第</span></div>
+<div class="em-quote" v-click="1">“你不应该停留在用数学解释我的观点，而应该突破它。”<span class="em-quote-src em-quote-src--inline">——法拉第</span></div>
 <div class="tip-hint" v-click="2">此后历时十年，麦克斯韦建立电磁场理论，总结出麦克斯韦方程组；它的意义，可与牛顿力学体系媲美。</div>
 </div>
 
@@ -266,8 +244,6 @@ title: 例题：调频广播的波长
 title: 声波与电磁波
 clicks: 2
 ---
-
-# 声波与电磁波
 
 <div class="page-grow">
 <div class="ask">声波和电磁波都能传递信息。它们的相同点和不同点各是什么？</div>
