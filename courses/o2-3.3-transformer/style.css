@@ -113,24 +113,7 @@
   text-align: center;
 }
 
-/* P5/P6：问答流 —— 问题左侧问号徽标，答案卡，两个问题同一套视觉 */
-.qa-flow {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  justify-content: center;
-
-  width: 100%;
-  max-width: 52rem;
-  margin: 0 auto;
-}
-
-.qa-row {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
+/* 解析页：行首小标（题目解析、结论标签等处复用） */
 .qa-mark {
   display: grid;
   flex: none;
@@ -146,299 +129,110 @@
   font-size: 2.4rem !important;
 }
 
-.qa-q {
-  padding-top: 0.1rem;
-
-  color: var(--c-text);
-
-  font-weight: 700;
-  font-size: 1.55rem;
-  line-height: 1.5;
-}
-
-.qa-a-row .qa-mark {
-  border-color: var(--c-border);
-  color: var(--c-text-dim);
-}
-
-.qa-a {
-  flex: 1;
-
-  padding: 0.85rem 1.15rem;
-  border-left: 3px solid var(--c-accent);
-  border-radius: 0 0.75rem 0.75rem 0;
-
-  background: var(--c-surface);
-  color: var(--c-text);
-
-  font-size: 1.12rem;
-  line-height: 1.7;
-}
-
-.qa-a strong {
-  color: var(--c-accent);
-}
-
-.qa-a-lead {
-  color: var(--c-accent);
-  font-weight: 700;
-  font-size: 1.35rem;
-  line-height: 1.4;
-}
-
-.qa-a-note {
-  margin-top: 0.25rem;
-  color: var(--c-text);
-  font-size: 1.02rem;
-  line-height: 1.65;
-}
-
-.qa-key {
-  margin-top: 0.85rem;
-  padding: 0.72rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--c-accent) 32%, transparent);
-  border-radius: 0.65rem;
-
-  background: linear-gradient(135deg, rgb(226 168 70 / 12%), rgb(15 22 38 / 55%));
-  color: var(--c-text);
-
-  font-size: 1.02rem;
-  line-height: 1.55;
-}
-
-.qa-key::before {
-  content: "核心机制 · ";
-  margin-right: 0.25rem;
-  color: var(--c-accent);
-  font-weight: 800;
-}
-
-/* P5/P6：问答页（教师讲解的精致提示卡，13 §3） */
-.qa-stage {
-  display: grid;
-  grid-template-columns: 12.5rem minmax(0, 1fr);
-  gap: 2.2rem;
-  align-items: stretch;
-
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-}
-
-.qa-stage-single {
-  grid-template-columns: minmax(0, 1fr);
-  max-width: 50rem;
-  margin: 0 auto;
-}
-
-.qa-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.35rem;
-  justify-content: center;
-
-  min-width: 0;
-  padding: 0.4rem 0;
-}
-
-.qa-stage-single .qa-panel {
-  width: 100%;
-}
-
-.qa-aside {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  align-items: center;
-  justify-content: center;
-
-  padding: 1.4rem 1rem;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-lg);
-
-  background:
-    radial-gradient(circle at 50% 18%, rgb(226 168 70 / 9%), transparent 68%), var(--c-surface);
-  box-shadow: 0 1.2rem 2.6rem rgb(0 0 0 / 18%);
-}
-
-.qa-aside-num {
-  color: var(--c-accent);
-
-  font-weight: 800;
-  font-size: 4.2rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.qa-aside-label {
-  color: var(--c-text-dim);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.qa-aside-icon {
-  margin-top: 0.15rem;
-  color: var(--c-accent);
-  opacity: 0.75;
-}
-
-.qa-aside-icon svg {
-  font-size: 2rem !important;
-}
-
-.qa-question {
+/* P5：两问一追问 —— 时间线式问答（无卡片、无发光，与全课细线 + 淡玻璃统一） */
+.tq-flow {
   position: relative;
 
-  max-width: 42rem;
-  padding-left: 1.1rem;
-  border-left: 4px solid var(--c-accent);
-
-  color: var(--c-text);
-
-  font-weight: 800;
-  font-size: 2.18rem;
-  line-height: 1.32;
-  letter-spacing: 0.01em;
-}
-
-.qa-answer {
-  padding: 1.25rem 1.6rem;
-  border: 1px solid rgb(255 255 255 / 11%);
-  border-left: 4px solid var(--c-accent);
-  border-radius: 0.4rem 1.15rem 1.15rem 0.4rem;
-
-  background:
-    radial-gradient(circle at 8% 15%, rgb(226 168 70 / 10%), transparent 58%),
-    linear-gradient(145deg, rgb(20 29 48 / 84%), rgb(10 15 28 / 68%));
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 9%),
-    0 1.1rem 2.6rem rgb(0 0 0 / 24%);
-
-  backdrop-filter: blur(18px);
-}
-
-.qa-answer-head {
   display: flex;
-  gap: 0.75rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  width: 100%;
+  padding-left: 2.1rem;
 }
 
-.qa-answer-icon {
-  display: grid;
-  flex: none;
-  place-items: center;
+.tq-flow::before {
+  content: "";
 
-  width: 2.3rem;
-  height: 2.3rem;
-  border: 1px solid color-mix(in srgb, var(--c-accent) 42%, transparent);
-  border-radius: 50%;
+  position: absolute;
+  top: 0.8rem;
+  bottom: 1.2rem;
+  left: 0.43rem;
 
-  background: rgb(226 168 70 / 14%);
-  color: var(--c-accent);
-  box-shadow: 0 0 16px rgb(226 168 70 / 22%);
+  width: 2px;
+  border-radius: 2px;
+
+  background: color-mix(in srgb, var(--c-accent) 34%, transparent);
 }
 
-.qa-answer-icon svg {
-  font-size: 1.45rem !important;
+.tq-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.qa-answer-lead {
+.tq-q {
+  position: relative;
+
   color: var(--c-text);
+
   font-weight: 800;
-  font-size: 1.48rem;
+  font-size: 1.46rem;
   line-height: 1.38;
 }
 
-.qa-answer-lead strong {
-  color: var(--c-accent);
-}
+.tq-q::before {
+  content: "";
 
-.qa-answer-note {
-  margin: 0.5rem 0 0;
-  color: var(--c-text-dim);
-  font-size: 1.04rem;
-  line-height: 1.65;
-}
+  position: absolute;
+  top: 0.52em;
+  left: -1.97rem;
 
-/* P6：Q → A → Q 对话串（精致玻璃气泡 + 渐变徽标） */
-.qa-dialogue {
-  gap: 0.48rem;
-}
-
-.qa-dialogue-row {
-  display: grid;
-  grid-template-columns: 2.85rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: center;
-}
-
-.qa-dialogue-icon {
-  display: grid;
-  place-items: center;
-
-  width: 2.85rem;
-  height: 2.85rem;
-  border: 1px solid color-mix(in srgb, var(--c-accent) 45%, transparent);
+  width: 0.56rem;
+  height: 0.56rem;
   border-radius: 50%;
 
-  background: radial-gradient(circle at 35% 30%, rgb(226 168 70 / 26%), rgb(226 168 70 / 8%));
-  color: var(--c-accent);
-  box-shadow: 0 0 18px rgb(226 168 70 / 18%);
+  background: var(--c-accent);
 }
 
-.qa-dialogue-icon svg {
-  font-size: 1.75rem !important;
+.tq-a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-left: 0.1rem;
 }
 
-.qa-dialogue-icon-a {
-  border-color: color-mix(in srgb, var(--c-physics) 45%, transparent);
-  background: radial-gradient(circle at 35% 30%, rgb(45 212 191 / 24%), rgb(45 212 191 / 8%));
-  color: var(--c-physics);
-  box-shadow: 0 0 18px rgb(45 212 191 / 16%);
-}
+.tq-lead {
+  margin: 0;
 
-.qa-bubble {
-  padding: 0.88rem 1.3rem;
-  border: 1px solid rgb(255 255 255 / 12%);
-  border-radius: 1.1rem;
-
-  background: linear-gradient(135deg, rgb(22 31 52 / 82%), rgb(12 18 32 / 66%));
   color: var(--c-text);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 9%),
-    0 10px 26px rgb(0 0 0 / 20%);
 
-  font-weight: 700;
-  font-size: 1.34rem;
-  line-height: 1.42;
-
-  backdrop-filter: blur(16px);
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.5;
 }
 
-.qa-connector {
-  width: 2px;
-  height: 0.85rem;
-  margin-left: 1.4rem;
-  border-radius: 2px;
-
-  background: linear-gradient(180deg, var(--c-accent), rgb(45 212 191 / 35%));
-
-  opacity: 0.65;
+.tq-lead strong {
+  color: var(--c-accent);
 }
 
-.qa-answer-dialogue {
-  padding: 0.92rem 1.3rem;
-  border-left-color: var(--c-physics);
+.tq-note {
+  margin: 0;
+  color: var(--c-text-dim);
+  font-size: 1rem;
+  line-height: 1.62;
 }
 
-.qa-answer-dialogue .qa-answer-lead {
-  font-size: 1.26rem;
+.tq-mech {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+
+  margin-top: 0.2rem;
+  padding: 0.4rem 0 0.4rem 0.85rem;
+  border-left: 3px solid var(--c-accent);
+
+  color: var(--c-text);
+
+  font-size: 1.04rem;
+  line-height: 1.55;
 }
 
-.qa-answer-dialogue .qa-answer-note {
-  margin-top: 0.32rem;
-  font-size: 0.96rem;
+.tq-mech-tag {
+  flex: none;
+  color: var(--c-accent);
+  font-weight: 800;
 }
 
 /* P10：理想与实测对比框 */

@@ -330,7 +330,7 @@ const INTRO_POSES: StepPose[] = [
     camPos: new Vector3(8.6, 2.1, -6.7),
     camLookAt: new Vector3(0.48, -0.05, -0.14),
   },
-  // C6 (step 6): 受电线圈出现感应蓝色电子正弦往返运动；灯笼磁场与送电线圈电流继续；上屏答案
+  // C6 (step 6): 受电线圈出现感应蓝色电子正弦往返运动；灯笼磁场与送电线圈电流继续
   {
     watchX: 0,
     watchZ: 0.85,
@@ -353,6 +353,54 @@ const INTRO_POSES: StepPose[] = [
     typeCPlugRotX: 0,
     camPos: new Vector3(8.6, 2.1, -6.7),
     camLookAt: new Vector3(0.48, -0.05, -0.14),
+  },
+  // C7 (step 7): 上屏答案，保持双线圈互感背面透视视角
+  {
+    watchX: 0,
+    watchZ: 0.85,
+    chargerZ: -1.94,
+    chargerVisible: true,
+    backCoverOpacity: 0.14,
+    coilTranslucent: true,
+    chargeProgress: 0.65,
+    txCurrentAlpha: 1,
+    fieldAlpha: 1,
+    rxCurrentAlpha: 1,
+    chainVisible: false,
+    socketX: -19.25,
+    adapterX: -17.1,
+    adapterY: -1.35,
+    adapterRotX: 0,
+    adapterRotY: 0,
+    adapterRotZ: 0,
+    typeCPlugOffsetX: 0,
+    typeCPlugRotX: 0,
+    camPos: new Vector3(8.6, 2.1, -6.7),
+    camLookAt: new Vector3(0.48, -0.05, -0.14),
+  },
+  // C8 (step 8): 第 2 页最后一击——平滑切回第 3 页 C0 的手表状态与机位（表背与充电器恢复不透明合并，镜头转回侧前方与 P3 C0 100% 重合，翻到第 3 页时零跳跃无缝衔接！）
+  {
+    watchX: 0,
+    watchZ: 0.35,
+    chargerZ: -0.19,
+    chargerVisible: true,
+    backCoverOpacity: 1,
+    coilTranslucent: false,
+    chargeProgress: 0.65,
+    txCurrentAlpha: 0,
+    fieldAlpha: 0,
+    rxCurrentAlpha: 0,
+    chainVisible: true,
+    socketX: -19.25,
+    adapterX: -15.65,
+    adapterY: -0.45,
+    adapterRotX: 0,
+    adapterRotY: 0,
+    adapterRotZ: 0,
+    typeCPlugOffsetX: 2.35,
+    typeCPlugRotX: 0,
+    camPos: new Vector3(4.8, 1.45, 9.2),
+    camLookAt: new Vector3(0.4, -0.05, -0.25),
   },
 ];
 
@@ -694,6 +742,13 @@ export interface CallbackProjectedAnchors {
   watch: { x: number; y: number };
 }
 
+/** 在 CallbackProjectedAnchors 基础上多一个“两线圈之间的磁场中心”，供 P2 标注指引使用 */
+export interface ProjectedAnchors extends CallbackProjectedAnchors {
+  field: { x: number; y: number };
+  /** 可见白线（充电盘 → 适配器 Type-C 插头）的视觉中点，取实际生成的线缆曲线 t=0.5 */
+  cable: { x: number; y: number };
+}
+
 export class WatchIntroModel {
   scene: Scene;
   camera: PerspectiveCamera;
@@ -711,6 +766,7 @@ export class WatchIntroModel {
   private readonly wallSocketGroup = new Group();
   private wallBackdropMesh!: Mesh;
   private dynamicCableMesh!: Mesh;
+  private cableCurve: CatmullRomCurve3 | null = null;
   private cableMat!: MeshStandardMaterial;
 
   // 灯笼磁场笼：3 个同心水平环 + 8 个均匀竖环
@@ -757,7 +813,7 @@ export class WatchIntroModel {
   constructor(
     private readonly container: HTMLElement,
     private readonly mode: WatchSceneMode = "intro",
-    private readonly onFrameCallback?: (anchors: CallbackProjectedAnchors) => void,
+    private readonly onFrameCallback?: (anchors: ProjectedAnchors) => void,
   ) {
     this.poses =
       mode === "chain" ? CHAIN_POSES : mode === "callback" ? CALLBACK_POSES : INTRO_POSES;
@@ -1402,9 +1458,9 @@ export class WatchIntroModel {
       );
     }
 
-    // 是否有需要连续运行的电流/磁场动效（P2 C4–C6，或 P3 C3，或 P15 callback 全程）
+    // 是否有需要连续运行的电流/磁场动效（P2 C4–C7，或 P3 C3，或 P15 callback 全程）
     const hasContinuousFlow =
-      (this.mode === "intro" && this.currentStep >= 4) ||
+      (this.mode === "intro" && this.currentStep >= 4 && this.currentStep <= 7) ||
       (this.mode === "chain" && this.currentStep === 3) ||
       this.mode === "callback";
 
@@ -1470,10 +1526,10 @@ export class WatchIntroModel {
       this.typeCPlugGroup.position.set(plugX, pose.adapterY, plugZ);
       this.typeCPlugGroup.rotation.set(pose.typeCPlugRotX, pose.adapterRotY, 0, "YXZ");
 
-      // 更新连接充电器左端护套与 Type-C 插头尾部的平滑长白线（P15 callback 模式在充电盘半透明剖开时同步变半透明，露出内部双芯引出导线无缝衔接）
-      this.cableMat.transparent = pose.coilTranslucent;
-      this.cableMat.opacity = pose.coilTranslucent ? 0.36 : 1;
-      this.cableMat.depthWrite = !pose.coilTranslucent;
+      // 更新连接充电器左端护套与 Type-C 插头尾部的平滑长白线（USB 供电线保持不透明实体，内部不出现电子图示）
+      this.cableMat.transparent = false;
+      this.cableMat.opacity = 1;
+      this.cableMat.depthWrite = true;
 
       const startPt = new Vector3(pose.watchX - 1.75, -0.18, pose.chargerZ - 0.3);
       const endPt = new Vector3(plugX + 0.66 * cosY, pose.adapterY, plugZ - 0.66 * sinY);
@@ -1487,14 +1543,10 @@ export class WatchIntroModel {
           -0.26,
           leadZ + (endPt.z - leadZ) * 0.65,
         );
+        const callbackCurve = new CatmullRomCurve3([startPt, p1, p2, p3, endPt]);
+        this.cableCurve = callbackCurve;
         this.dynamicCableMesh.geometry.dispose();
-        this.dynamicCableMesh.geometry = new TubeGeometry(
-          new CatmullRomCurve3([startPt, p1, p2, p3, endPt]),
-          56,
-          0.115,
-          14,
-          false,
-        );
+        this.dynamicCableMesh.geometry = new TubeGeometry(callbackCurve, 56, 0.115, 14, false);
       } else {
         const midPt1 = new Vector3(
           startPt.x + (endPt.x - startPt.x) * 0.35,
@@ -1506,14 +1558,10 @@ export class WatchIntroModel {
           pose.adapterY - 0.05,
           endPt.z,
         );
+        const chainCurve = new CatmullRomCurve3([startPt, midPt1, midPt2, endPt]);
+        this.cableCurve = chainCurve;
         this.dynamicCableMesh.geometry.dispose();
-        this.dynamicCableMesh.geometry = new TubeGeometry(
-          new CatmullRomCurve3([startPt, midPt1, midPt2, endPt]),
-          44,
-          0.115,
-          14,
-          false,
-        );
+        this.dynamicCableMesh.geometry = new TubeGeometry(chainCurve, 44, 0.115, 14, false);
       }
     }
 
@@ -1609,7 +1657,7 @@ export class WatchIntroModel {
     this.camera.lookAt(pose.camLookAt);
   }
 
-  getCallbackProjectedAnchors(): CallbackProjectedAnchors {
+  getProjectedAnchors(): ProjectedAnchors {
     const w = Math.max(this.container.clientWidth, 1);
     const h = Math.max(this.container.clientHeight, 1);
     this.camera.updateMatrixWorld(true);
@@ -1623,6 +1671,7 @@ export class WatchIntroModel {
     };
 
     const pose = this.currentPose;
+    const cablePoint = this.cableCurve?.getPoint(0.5) ?? null;
     return {
       socket: projectWorld(pose.socketX, 0.35, -0.85),
       adapter: projectWorld(pose.adapterX, pose.adapterY - 0.55, -0.75),
@@ -1631,11 +1680,20 @@ export class WatchIntroModel {
       txCoil: projectWorld(pose.watchX - 0.72, 0.72, pose.chargerZ - 0.13),
       rxCoil: projectWorld(pose.watchX + 0.35, 0.85, pose.watchZ - 0.35),
       watch: projectWorld(pose.watchX + 1.55, -0.75, pose.watchZ),
+      cable: cablePoint
+        ? projectWorld(cablePoint.x, cablePoint.y, cablePoint.z)
+        : projectWorld(-9.5, -0.5, -0.88),
+      // 两个线圈之间的磁场中心（P2 C5–C6 的“不断变化的磁场”指引点）
+      field: projectWorld(
+        pose.watchX - 0.19,
+        0.79,
+        (pose.chargerZ - 0.13 + pose.watchZ - 0.35) / 2,
+      ),
     };
   }
 
   private emitCallbackAnchors(): void {
-    if (this.onFrameCallback) this.onFrameCallback(this.getCallbackProjectedAnchors());
+    if (this.onFrameCallback) this.onFrameCallback(this.getProjectedAnchors());
   }
 
   renderOnce(): void {
@@ -1653,7 +1711,7 @@ export class WatchIntroModel {
     } else if (active) {
       this.syncRendererScale(true);
       const hasContinuousFlow =
-        (this.mode === "intro" && this.currentStep >= 4) ||
+        (this.mode === "intro" && this.currentStep >= 4 && this.currentStep <= 7) ||
         (this.mode === "chain" && this.currentStep === 3) ||
         this.mode === "callback";
       if (hasContinuousFlow && !this.isAnimating) {

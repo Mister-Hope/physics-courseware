@@ -206,8 +206,8 @@
           "slug": "6.3-centripetal-acceleration",
           "title": "向心加速度",
           "chapter": "§6.3",
-          "description": "仍在制作中",
-          "tags": []
+          "description": "由天宫二号的匀速圆周运动引入，用 Δv 与相似三角形（不借助向心力）推出 a_n = v²/r = ω²r；再比较同轴与链条传动，以圆锥摆和练习巩固。",
+          "tags": ["向心加速度", "速度变化量", "相似三角形", "同轴与链条传动", "圆锥摆"]
         },
         {
           "slug": "6.4-circular-motion-in-life",

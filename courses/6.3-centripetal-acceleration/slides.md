@@ -27,6 +27,7 @@ chapter: "第六章 圆周运动"
 ---
 layout: base-flex
 clicks: 1
+title: 引入：天宫二号的加速度
 ---
 
 <div class="page-grow">
@@ -97,6 +98,7 @@ title: 思考与讨论：三点加速度的比较
 ---
 layout: base-flex
 clicks: 4
+title: 练习：判断向心加速度的大小
 ---
 
 <div class="page-grow">

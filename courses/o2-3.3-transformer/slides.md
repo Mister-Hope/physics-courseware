@@ -25,8 +25,9 @@ chapter: "第三章 交变电流"
 
 ---
 title: 手表的电能从哪里来？
-clicks: 6
+clicks: 8
 clickAnimation: none
+transition: none | fade
 ---
 
 <div class="page-grow">
@@ -35,7 +36,7 @@ clickAnimation: none
 
 ---
 title: 从手表到插座：供电链路拆解
-clicks: 7
+clicks: 6
 clickAnimation: none
 ---
 
@@ -56,56 +57,31 @@ clickAnimation: none
 </div>
 
 ---
-title: 变压器对电流有什么要求？
-clicks: 2
+title: 变压器对电流的要求，以及怎样改变电压
+clicks: 4
 clickAnimation: none
 ---
 
 <div class="page-grow">
-<div class="qa-stage qa-stage-single">
-<section class="qa-panel">
-<div class="qa-question">变压器对电流有什么要求？</div>
-<div v-click="1" class="qa-answer">
-<div class="qa-answer-head">
-<span class="qa-answer-icon"><mdi-check-circle-outline /></span>
-<span class="qa-answer-lead">只能用于交流电</span>
+<div class="tq-flow">
+<div class="tq-item">
+<div class="tq-q">变压器对电流有什么要求？</div>
+<div v-click="1" class="tq-a">
+<p class="tq-lead">只能用于<strong>交流电</strong></p>
+<p class="tq-note">原线圈中的电流必须变化，才能在副线圈中产生感应电动势。</p>
 </div>
-<p class="qa-answer-note">原线圈中的电流必须变化，才能在副线圈中产生感应电动势。</p>
-<div v-click="2" class="qa-key">变压器利用互感现象工作。</div>
+<div v-click="2" class="tq-mech"><span class="tq-mech-tag">核心机制</span>变压器利用互感现象工作。</div>
 </div>
-</section>
-</div>
-</div>
-
----
-title: 变压器是怎样改变电压的？
-clicks: 2
-clickAnimation: none
----
-
-<div class="page-grow">
-<div class="qa-stage qa-stage-single">
-<section class="qa-panel qa-dialogue">
-<div class="qa-dialogue-row">
-<span class="qa-dialogue-icon qa-dialogue-icon-q"><mdi-help-circle-outline /></span>
-<div class="qa-bubble">变压器是怎样改变电压的？</div>
-</div>
-<div class="qa-connector"></div>
-<div v-click="1" class="qa-dialogue-row">
-<span class="qa-dialogue-icon qa-dialogue-icon-a"><mdi-check-circle-outline /></span>
-<div class="qa-answer qa-answer-dialogue">
-<div class="qa-answer-head">
-<span class="qa-answer-lead">可能与<strong>原线圈、副线圈的匝数</strong>有关。</span>
-</div>
-<p class="qa-answer-note">先比较不同匝数下的输入、输出电压。</p>
+<div class="tq-item">
+<div class="tq-q">变压器是怎样改变电压的？</div>
+<div v-click="3" class="tq-a">
+<p class="tq-lead">可能与<strong>原线圈、副线圈的匝数</strong>有关</p>
+<p class="tq-note">先比较不同匝数下的输入、输出电压。</p>
 </div>
 </div>
-<div v-click="2" class="qa-connector"></div>
-<div v-click="2" class="qa-dialogue-row">
-<span class="qa-dialogue-icon qa-dialogue-icon-q"><mdi-help-circle-outline /></span>
-<div class="qa-bubble">怎样设计一个实验方案来探究它们的关系？</div>
+<div class="tq-item">
+<div v-click="4" class="tq-q">怎样设计一个实验方案来探究它们的关系？</div>
 </div>
-</section>
 </div>
 </div>
 

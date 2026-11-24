@@ -152,24 +152,25 @@ const createPlanarSpiralCurve = (
   return new CatmullRomCurve3(pts, false);
 };
 
-// 生成带“双导线严格在左侧白线内部穿入螺旋并从内端回流”的完整送电线圈连续闭合回路 Curve
+// 生成送电线圈（TX Coil）螺旋 + 中心逆变器圆盘两端引线连续回路 Curve：
+// 1. USB 供电线先通入充电器中央圆盘（逆变器，直流 -> 高频交流），再从逆变器接出两根线：
+//    一根连到螺旋线圈的最外端，一根连到螺旋线圈的内端；
+// 2. 蓝色电子只在这条“逆变器 <-> 螺旋线圈”的高频交流回路中往返振荡，USB 供电线里绝不出现电子图示！
 const createTxCompleteLoopCurve = (
   innerR: number,
   outerR: number,
   turns: number,
   zOffset: number,
 ): CatmullRomCurve3 => {
-  // 白线中心线在 x = -1.75 (y = -0.18)、x = -3.5 (y = -0.25)、x = -5.2 (y = -0.32)，半径 0.115；
-  // 两根黄铜芯线上下间隔 ±0.036，严格包裹在白线内部，在 P2 C3 不会穿出白线外，在 P2 C4 白线变半透明后清晰可见电子在两根芯线里往返推入螺旋，且在 P15 全景中沿水平微弧直接连向右侧适配器 USB-C 插头，绝无急剧折角！
-  // 1. 进线导线：
+  // 1. 逆变器圆盘上侧输出端 -> 跨越各匝后方 (z = zOffset - 0.055) -> 连到螺旋线圈最外端 (-outerR, 0, zOffset)
   const pts: Vector3[] = [
-    new Vector3(-5.2, -0.284, -0.3),
-    new Vector3(-3.5, -0.214, -0.3),
-    new Vector3(-1.75, -0.144, -0.28),
-    new Vector3(-1.32, -0.06, zOffset),
+    new Vector3(-0.22, 0.14, -0.2),
+    new Vector3(-0.56, 0.24, zOffset - 0.055),
+    new Vector3(-0.92, 0.18, zOffset - 0.055),
+    new Vector3(-outerR, 0.05, zOffset - 0.025),
   ];
 
-  // 2. 7 匝阿基米德螺旋：从外圈左端 (angle = π, r = outerR) 向内绕到内圈左端 (angle = π + turns*2π, r = innerR)
+  // 2. 7 匝阿基米德螺旋：从最外端 (angle = π, r = outerR) 向内绕到最内端 (angle = π + turns*2π, r = innerR)
   const totalSegments = Math.round(turns * 48);
   for (let i = 0; i <= totalSegments; i += 1) {
     const u = i / totalSegments;
@@ -178,15 +179,8 @@ const createTxCompleteLoopCurve = (
     pts.push(new Vector3(r * Math.cos(angle), r * Math.sin(angle), zOffset));
   }
 
-  // 3. 回流导线：从螺旋内端 (-innerR, 0) 略下潜到 zOffset - 0.055（越过外侧各匝不穿模），回到白线中心下方 -0.036 处
-  pts.push(
-    new Vector3(-innerR - 0.08, -0.14, zOffset - 0.055),
-    new Vector3(-0.88, -0.2, zOffset - 0.055),
-    new Vector3(-1.32, -0.21, -0.28),
-    new Vector3(-1.75, -0.216, -0.31),
-    new Vector3(-3.5, -0.286, -0.31),
-    new Vector3(-5.2, -0.356, -0.31),
-  );
+  // 3. 螺旋线圈最内端 (-innerR, 0, zOffset) -> 直接连回中央逆变器圆盘下侧输出端
+  pts.push(new Vector3(-innerR + 0.04, -0.09, zOffset - 0.015), new Vector3(-0.22, -0.14, -0.2));
 
   return new CatmullRomCurve3(pts, false);
 };
@@ -1020,14 +1014,25 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
   pcbDiskMesh.position.set(0, 0, -0.32);
   chargerInternalGroup.add(pcbDiskMesh);
 
-  // 中心暗色定位铁氧体薄垫：做成极薄圆盘（厚度仅 0.03，位于 z = -0.22，在线圈平面 z = -0.15 后方），彻底消除充电器面向表那一面中间突出来的黑色圆柱！
+  // 中心逆变器圆盘（Inverter Disk）：做成极薄圆盘（厚度仅 0.03，位于 z = -0.22，在线圈平面 z = -0.15 后方）
   const txMagnetGeo = trackGeo(new CylinderGeometry(0.32, 0.32, 0.03, 28));
   txMagnetGeo.rotateX(Math.PI / 2);
   const txMagnetMesh = new Mesh(txMagnetGeo, magnetCoreMat);
   txMagnetMesh.position.set(0, 0, -0.22);
   chargerInternalGroup.add(txMagnetMesh);
 
-  // 送电线圈（TX Coil：包含从白线穿入充电盘的两根引出导线 + 7 匝黄铜金属光泽螺旋绕组，位于 chargerRoot 局部 z = -0.15）
+  // USB 供电线通向中央逆变器圆盘的直流输入引线（无电子图示，与螺旋线圈后方分层不穿模）
+  const dcFeedCurve = new CatmullRomCurve3([
+    new Vector3(-1.55, -0.18, -0.3),
+    new Vector3(-1.18, -0.15, -0.28),
+    new Vector3(-0.68, -0.07, -0.26),
+    new Vector3(-0.24, 0, -0.22),
+  ]);
+  const dcFeedGeo = trackGeo(new TubeGeometry(dcFeedCurve, 32, 0.042, 12, false));
+  const dcFeedMesh = new Mesh(dcFeedGeo, chargerCableMat);
+  chargerInternalGroup.add(dcFeedMesh);
+
+  // 送电线圈（TX Coil：逆变器圆盘接出两根线分别连到螺旋最外端与最内端 + 7 匝黄铜金属光泽螺旋绕组，位于 chargerRoot 局部 z = -0.15）
   const txCurve = createTxCompleteLoopCurve(0.45, 1.15, 7, -0.15);
   const txCoilGeo = trackGeo(new TubeGeometry(txCurve, 340, 0.033, 12, false));
   const txCoilMesh = new Mesh(txCoilGeo, txCoilMat);
@@ -1124,15 +1129,13 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
     rxCoilMesh.visible = true;
     txCoilMesh.visible = true;
     if (translucent) {
-      // 充电动效出现时变半透明黄铜管，且白线护套与外皮也同步变半透明，清晰露出从白线双导线流入螺旋线圈的蓝色电子！
+      // 充电动效出现时变半透明黄铜管，清晰露出逆变器驱动螺旋线圈内部的蓝色电子；USB 白色供电线保持不透明实体且内部无电子！
       rxCoilMat.opacity = 0.36;
       txCoilMat.opacity = 0.36;
       rxCoilMat.depthWrite = false;
       txCoilMat.depthWrite = false;
       rxCoilMat.emissiveIntensity = 0.32;
       txCoilMat.emissiveIntensity = 0.35;
-      chargerCableMat.opacity = 0.28;
-      chargerCableMat.depthWrite = false;
     } else {
       // 静态展示线圈时呈现饱满的黄铜/金属光泽
       rxCoilMat.opacity = 0.94;
@@ -1141,9 +1144,9 @@ export const createWatchAssembly = (scene?: Scene): WatchModelApi => {
       txCoilMat.depthWrite = true;
       rxCoilMat.emissiveIntensity = 0.22;
       txCoilMat.emissiveIntensity = 0.24;
-      chargerCableMat.opacity = 1;
-      chargerCableMat.depthWrite = true;
     }
+    chargerCableMat.opacity = 1;
+    chargerCableMat.depthWrite = true;
   };
 
   const setCoilVisible = (v: boolean): void => {
