@@ -1,0 +1,1 @@
+import{B as e,U as t,x as n}from"/shared/assets/shiki-Do1kyehT.js";import{tt as r}from"./index-D_13H_lY.js";var i={class:`slidev-layout base-flex`},a={__name:`base-flex`,setup(a){let{$slidev:o,$nav:s,$clicksContext:c,$clicks:l,$page:u,$renderContext:d,$frontmatter:f}=r();return(r,a)=>(e(),n(`div`,i,[t(r.$slots,`default`)]))}};export{a as t};
