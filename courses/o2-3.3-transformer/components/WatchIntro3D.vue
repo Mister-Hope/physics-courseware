@@ -49,6 +49,8 @@ const anchors = reactive<ProjectedAnchors>({
   rxCoil: { x: 495, y: 188 },
   watch: { x: 800, y: 300 },
   field: { x: 507, y: 164 },
+  // 供电线中点：模型投影前先放在画面外，避免首帧圆点闪一下（与 socket / adapter 同理）
+  cable: { x: -200, y: 0 },
 });
 const stageSize = reactive({ w: 883, h: 455 });
 
