@@ -31,7 +31,7 @@ interface Molecule {
   randomAngle: number;
 }
 
-const MOLECULES: Molecule[] = (() => {
+const MOLECULES: Molecule[] = ((): Molecule[] => {
   const rnd = mulberry32(20261022);
   const out: Molecule[] = [];
   for (let iy = 0; iy < 3; iy += 1) {

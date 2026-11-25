@@ -93,7 +93,7 @@ const createWatchSoundEngine = (): WatchSoundEngine => {
   let ctx: AudioContext | null = null;
   return {
     // oxlint-disable-next-line max-statements -- 合成磁吸咔嗒、轻微碰撞与双音提示音
-    playSnapAndChime() {
+    playSnapAndChime(): void {
       try {
         const AudioCtx =
           (globalThis as unknown as { AudioContext?: typeof AudioContext }).AudioContext ??
@@ -149,7 +149,7 @@ const createWatchSoundEngine = (): WatchSoundEngine => {
         // 忽略浏览器未交互前的音频上下文限制
       }
     },
-    dispose() {
+    dispose(): void {
       if (ctx) {
         void ctx.close();
         ctx = null;

@@ -370,10 +370,10 @@ onBeforeUnmount(() => {
 .tsb-note-card {
   display: flex;
   align-items: center;
-  justify-content: center;
 
   /* 宽度自适应内容、整体居中，不撑满整页 */
   align-self: center;
+  justify-content: center;
 
   width: fit-content;
   max-width: 100%;

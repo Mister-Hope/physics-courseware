@@ -1,9 +1,10 @@
 /* oxlint-disable max-lines -- 三维模型 1:1 移植自 physics-modal（676 行原作），保持与原实现可对照；课件侧只增加暂停/销毁/尺寸守卫 */
-import type { BufferGeometry, Material } from "three";
+import type { Material } from "three";
 import {
   ACESFilmicToneMapping,
   AmbientLight,
   BoxGeometry,
+  BufferGeometry,
   Color,
   CylinderGeometry,
   DirectionalLight,
@@ -20,6 +21,7 @@ import {
   Scene,
   Shape,
   SphereGeometry,
+  Texture,
   Vector2,
   Vector3,
   WebGLRenderer,
@@ -689,15 +691,15 @@ export class Micrometer3D {
     const materials = new Set<Material>();
 
     this.scene.traverse((object) => {
-      const mesh = object as Mesh;
-      mesh.geometry?.dispose();
-      const { material } = mesh as { material?: Material | Material[] };
+      if ("geometry" in object && object.geometry instanceof BufferGeometry)
+        object.geometry.dispose();
+      const { material } = object as { material?: Material | Material[] };
       if (!material) return;
       for (const item of Array.isArray(material) ? material : [material]) materials.add(item);
     });
 
     for (const material of materials) {
-      (material as MeshStandardMaterial).map?.dispose();
+      if ("map" in material && material.map instanceof Texture) material.map.dispose();
       material.dispose();
     }
   }

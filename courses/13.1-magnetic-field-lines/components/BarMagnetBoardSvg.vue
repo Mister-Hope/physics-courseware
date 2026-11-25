@@ -38,7 +38,7 @@ interface Grain {
   tone: number;
 }
 
-const GRAINS: Grain[] = (() => {
+const GRAINS: Grain[] = ((): Grain[] => {
   const rnd = mulberry32(20261021);
   const out: Grain[] = [];
   for (let gy = 28; gy < H - 20; gy += 21) {

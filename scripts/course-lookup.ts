@@ -177,13 +177,13 @@ const courseChapter = (course: CourseInfo): string =>
 
 const matchTiers: ((course: CourseInfo, id: string) => boolean)[] = [
   // ① 完整目录名
-  (course, id) => course.slug === id,
+  (course, id): boolean => course.slug === id,
   // ② 英文名（包名去掉 -courseware）
-  (course, id) => course.englishName === id,
+  (course, id): boolean => course.englishName === id,
   // ③ 章节号（1.3 / 2.2·2.3 / 2.x）
-  (course, id) => courseChapter(course) === normalizeChapter(id),
+  (course, id): boolean => courseChapter(course) === normalizeChapter(id),
   // ④ 唯一子串（目录名或中文标题）
-  (course, id) => course.slug.includes(id) || (course.title?.includes(id) ?? false),
+  (course, id): boolean => course.slug.includes(id) || (course.title?.includes(id) ?? false),
 ];
 
 /**

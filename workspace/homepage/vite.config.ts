@@ -54,11 +54,11 @@ const bookRoutesPlugin = (): Plugin => {
 
   return {
     name: "book-routes",
-    configResolved(config) {
+    configResolved(config): void {
       outDir = path.resolve(config.root, config.build.outDir);
       isBuild = config.command === "build";
     },
-    configureServer(server) {
+    configureServer(server): void {
       server.middlewares.use((req, _res, next) => {
         const [pathname = "/", search = ""] = (req.url ?? "/").split("?");
         const [, first = ""] = pathname.split("/");
@@ -69,7 +69,7 @@ const bookRoutesPlugin = (): Plugin => {
         next();
       });
     },
-    closeBundle() {
+    closeBundle(): void {
       if (!isBuild) return;
 
       const indexHtml = path.join(outDir, "index.html");

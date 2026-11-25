@@ -80,7 +80,7 @@ export const accelNormAt = (t: number): number => {
 /* 运动学：把加速度积分两次得到「走了多远」（与旧模型 displacementTable 同一套做法） */
 /* -------------------------------------------------------------------------- */
 
-const displacementTable: number[] = (() => {
+const displacementTable: number[] = ((): number[] => {
   const table: number[] = [0];
   let velocity = 0;
   const steps = Math.ceil(TRIP / SAMPLE_DT);
