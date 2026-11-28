@@ -35,7 +35,7 @@
     "oxc-config-hope": "0.3.15",
     "oxfmt": "0.80.0",
     "oxlint": "1.95.0",
-    "oxlint-tsgolint": "7.0.2008",
+    "oxlint-tsgolint": "7.0.2009",
     "playwright-chromium": "1.65.1",
     "postcss-html": "2.0.1",
     "stylelint": "18.1.0",
